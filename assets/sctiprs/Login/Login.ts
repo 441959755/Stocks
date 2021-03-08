@@ -1,4 +1,4 @@
-
+import GlobalEvent from '../Moudle/GlobalEvent';
 
 const {ccclass, property} = cc._decorator;
 
@@ -13,6 +13,8 @@ export default class NewClass extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
  onLoad () {
+
+   console.log('GlobalEvent=',GlobalEvent);
      // 时间  开盘 收盘 最低 最高
    this.dataArr=[
     ["2017/10/1", [2320.26,2302.6,2287.3,2362.94]],
@@ -81,18 +83,18 @@ export default class NewClass extends cc.Component {
 
 
     start () {
-        let ctx=this.graphics.getComponent(cc.Graphics);
-        console.log(ctx);
-        ctx.lineWidth=5;
-        ctx.moveTo(0,0);
-        ctx.lineTo(300,150);
-        ctx.fillColor= new cc.Color().fromHEX('#0000ff');
-        ctx.stroke();
+        // let ctx=this.graphics.getComponent(cc.Graphics);
+        // console.log(ctx);
+        // ctx.lineWidth=5;
+        // ctx.moveTo(0,0);
+        // ctx.lineTo(300,150);
+        // ctx.fillColor= new cc.Color().fromHEX('#0000ff');
+        // ctx.stroke();
    }
 
 
    onEnable(){
-     
+
    }
 
     // update (dt) {}
