@@ -43,5 +43,6 @@
       "enable": false
     }
   },
-  "migrate-history": []
+  "migrate-history": [],
+  "start-scene": "1558e10d-bc37-42a5-9a07-556ec49d580d"
 }
