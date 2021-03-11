@@ -20,6 +20,7 @@ cc.Class({
         // NetWorkMgr.getInstance().getGuPiaoData((data)=>{
         //     console.log(data);
         // })
+        cc.ext.NetWorkMgr=NetWorkMgr.getInstance();
 
 
         cc.ext.llSDK=LLWSDK.getSDK();
@@ -43,7 +44,8 @@ cc.Class({
             cc.ext.gameData.UID=data.UID;
             cc.ext.gameData.gold=data.mGold;
 
-            cc.ext.gameData.mRelive=data.mRelive;
+         //   cc.ext.gameData.mRelive=data.mRelive;
+            cc.ext.gameData.level=data.mRelive;
             cc.ext.gameData.mRiches=data.mRiches;
 
             self.enterHall();

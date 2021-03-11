@@ -9,4 +9,10 @@ export default {
 
     EXPCHANGE:'EXPCHANGE',//经验
 
+    LOADINGSHOW:'LOADINGSHOW',//加载显示
+
+    LOADINGHIDE:'LOADINGHIDE',//加载动画隐藏
+
+
+
 }

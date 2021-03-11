@@ -92,6 +92,17 @@ export default class NetWorkMgr {
         })
     }
 
+
+   //获取双盲股票信息
+    getSMGuPiaoData(call){
+        let url;
+        let nums=255;
+        url="https://stock.chaogugame.com/fenshipk/wxgetgeguk.php?id=&type=k&num="+nums+"&start=&end="
+        httpUtil.httpUtilGet(url,(data)=>{
+            call&&call(data);
+        })
+    }
+
     // getConfig(callback) {
     //     var url = URL_CONFIG;
     //     url = this.appendCommon(url);

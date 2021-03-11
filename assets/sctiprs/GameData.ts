@@ -91,5 +91,9 @@ export default class GameData {
 
     public mRiches=null;
 
+    public gameDatas=null;
+
+    public  gameSetData=null;
+
 
 }

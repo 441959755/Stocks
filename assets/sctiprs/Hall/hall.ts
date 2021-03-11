@@ -12,9 +12,25 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     shuangmangLayer:cc.Node=null;
 
+
+    @property(cc.Node)
+    loading:cc.Node=null;
+
+
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+
+        GlobalEvent.on(EventCfg.LOADINGSHOW,()=>{
+            this.loading.active=true;
+        },this);
+
+        GlobalEvent.on(EventCfg.LOADINGHIDE,()=>{
+            this.loading.active=false;
+        },this);
+
+
 
 
     }

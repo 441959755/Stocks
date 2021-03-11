@@ -1,4 +1,5 @@
 import GlobalEvent from "../Utils/GlobalEvent";
+import EventCfg from "../Utils/EventCfg";
 
 const {ccclass, property} = cc._decorator;
 
@@ -9,6 +10,9 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Toggle)
     toggle1:cc.Toggle=null;
+
+    @property(cc.Node)
+    setLayer:cc.Node=null;
 
     protected onLoad() {
         this.selectFC=this.toggle1.isChecked;
@@ -31,11 +35,17 @@ export default class NewClass extends cc.Component {
         let name=event.target.name;
         //点击双盲训练
         if(name=='startSMBtn'){
-
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            cc.ext.NetWorkMgr.getSMGuPiaoData((data)=>{
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                cc.ext.gameData.gameDatas=data;
+                console.log(data);
+                cc.director.loadScene('game');
+            })
         }
         //点击训练设置
         else if(name=='setSMBtn'){
-
+            this.setLayer.active=true;
         }
         //点击历史记录
         else if(name=='historySMBtn'){

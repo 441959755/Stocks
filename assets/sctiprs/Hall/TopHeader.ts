@@ -68,10 +68,10 @@ export default class NewClass extends cc.Component {
    }
 
     setUserInfo(){
-        this.userExp.string = cc.ext.gameData.exp;
-        this.userLevel.string = cc.ext.gameData.level;
-        this.gold.string = cc.ext.gameData.gold;
-        this.brick.string = cc.ext.gameData.brick;
+        this.userExp.string = cc.ext.gameData.exp||0+'';
+        this.userLevel.string = cc.ext.gameData.level||0+'';
+        this.gold.string = cc.ext.gameData.gold||0+'';
+        this.brick.string = cc.ext.gameData.brick||0+'';
         this.UserName.string=cc.ext.gameData.name||cc.ext.gameData.userID;
     }
 
