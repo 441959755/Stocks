@@ -88,7 +88,9 @@ export default class NetWorkMgr {
         url="https://stock.chaogugame.com/weixingame/data/stockdata.txt";
 
         httpUtil.httpUtilGet(url,(data)=>{
-            call&&call(data);
+            var jsonObj = new Object();
+            jsonObj = JSON.parse(data);
+            call&&call(jsonObj);
         })
     }
 
@@ -99,7 +101,9 @@ export default class NetWorkMgr {
         let nums=255;
         url="https://stock.chaogugame.com/fenshipk/wxgetgeguk.php?id=&type=k&num="+nums+"&start=&end="
         httpUtil.httpUtilGet(url,(data)=>{
-            call&&call(data);
+            var jsonObj = new Object();
+            jsonObj = JSON.parse(data);
+            call&&call(jsonObj);
         })
     }
 
