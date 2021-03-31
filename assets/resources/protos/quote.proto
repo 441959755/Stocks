@@ -1,0 +1,76 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+option go_package = "../pb;pb";
+
+import "common.proto";
+
+package pb;
+
+
+// 行情style常量
+enum KStyle {
+    KStyle_NULL = 0;
+
+	KStyle_Real = 1;    // 实时（即：分时）
+
+	KStyle_Min  = 2;    // 分时
+	KStyle_15Min= 3;    // 15分
+	KStyle_30Min= 4;    // 30分
+	KStyle_Hour = 5;    // 时K
+
+	KStyle_Day  = 10;    // 日K
+	KStyle_Week = 11;    // 周K
+
+	KStyle_Mon     = 20; // 月K
+	KStyle_Season  = 21; // 季K
+
+	KStyle_Year = 30;    // 年K
+}
+
+// 行情
+message QuoteItem {
+	string code = 1;        // 股票代码
+	uint32 style = 2;       // K线类型
+
+	uint64 timestamp = 3;   // 时间戳
+	double price = 4;       // 当前价
+	uint64 volume = 5;      // 成交量
+	double amount = 6;      // 成交额
+	double open = 7;        // 开盘价
+	double close = 8;       // 收盘价
+	double high = 9;        // 最高价
+	double low = 10;        // 最低价
+}
+message Quotes {
+	repeated QuoteItem items = 1;
+}
+
+// 订阅行情 or 取消订阅行情
+message QuoteSubscribeItem {
+	string code = 1;    // 股票代码
+	bool flag = 2;      // 订阅标记（true：订阅，false：取消）
+}
+message CmdQuoteSubscribe {
+	repeated QuoteSubscribeItem items = 1;
+}
+
+// 查询行情
+message CmdQuoteQuery {
+	string code = 1;    // 股票代码
+	uint32 style = 2;   // K线类型
+	uint64 from = 3;    // 开始时间戳（0表示股票上市开始算）
+	uint64 to = 4;      // 结束时间戳（0表示无结束）
+}

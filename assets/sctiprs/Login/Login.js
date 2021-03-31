@@ -1,8 +1,6 @@
 import GameData from "../GameData";
 import LLWSDK from "../common/sdk/LLWSDK";
 
-import NetWorkMgr from "../common/net/NetWorkMgr";
-
 cc.ext={};
 cc.ext.gameData=new GameData();
 
@@ -14,44 +12,50 @@ cc.Class({
     },
 
     onLoad(){
+
+        cc.macro.ENABLE_MULTI_TOUCH = false;
+
+        this.initData();
        let self=this;
+       // //TODO  接DSK
+        cc.ext.llwSDK=LLWSDK.getSDK()
+        cc.ext.llwSDK.login(()=>{
 
-
-        // NetWorkMgr.getInstance().getGuPiaoData((data)=>{
-        //     console.log(data);
-        // })
-        cc.ext.NetWorkMgr=NetWorkMgr.getInstance();
-
-
-        cc.ext.llSDK=LLWSDK.getSDK();
-        cc.ext.llSDK.init();
-        cc.ext.llSDK.login((data)=>{
-            console.log(data);
-            //PkLeftTimes: "5"
-            // PkLose: "0"
-            // PkWin: "0"
-            // TocalLose: "0"
-            // TocalWin: "0"
-            // UID: "625405"
-            // mGold: "0"
-            // mRelive: "0"
-            // mRiches: "0"
-            cc.ext.gameData.PkLeftTimes=data.PkLeftTimes;
-            cc.ext.gameData.PkLose=data.PkLose;
-            cc.ext.gameData.PkWin=data.PkWin;
-            cc.ext.gameData.TocalLose=data.TocalLose;
-            cc.ext.gameData.TocalWin=data.TocalWin;
-            cc.ext.gameData.UID=data.UID;
-            cc.ext.gameData.gold=data.mGold;
-
-         //   cc.ext.gameData.mRelive=data.mRelive;
-            cc.ext.gameData.level=data.mRelive;
-            cc.ext.gameData.mRiches=data.mRiches;
-
-            self.enterHall();
+            this.enterHall();
         })
 
+
+      //  this.enterHall();
+
     },
+
+
+    initData(){
+        let SMSet=cc.sys.localStorage.getItem('SMSET');
+        if(!SMSet){
+            SMSet={
+                isShowVol:true,
+                isBW:true,
+                isMA1:true,
+                MA1Date:5,
+                isMA2:true,
+                MA2Date:10,
+                isMA3:true,
+                MA3Date:20,
+                isMA4:true,
+                MA4Date:30,
+                isMA5:true,
+                MA5Date:60,
+                isMA6:true,
+                MA6Date:120,
+                isFC:false,
+            }
+            cc.ext.gameData.SMSet=SMSet;
+        }else{
+            cc.ext.gameData.SMSet=JSON.parse(SMSet);
+        }
+    },
+
 
 
     //进入大厅
@@ -60,10 +64,4 @@ cc.Class({
     }
 
 
-
-    // start () {
-    //
-    // },
-
-    // update (dt) {},
 });
