@@ -30,9 +30,6 @@ export default class NewClass extends cc.Component {
 
     otherSelf=null;
 
-    @property(cc.Node)
-    SMHelpLayer:cc.Node=null;
-
    onLoad () {
        //砖石
        GlobalEvent.on(EventCfg.BIRCKCHANGE, () => {
@@ -86,7 +83,6 @@ export default class NewClass extends cc.Component {
                })
            }
        }
-
    }
 
     setUserInfo(){
@@ -112,7 +108,7 @@ export default class NewClass extends cc.Component {
             this.otherSelf.node.active=false;
        }
         else if(name=='sys_help'){
-            this.SMHelpLayer.active=true;
+            GlobalEvent.emit('OPENHELPLAYER','SM');
        }
     }
 
@@ -122,7 +118,6 @@ export default class NewClass extends cc.Component {
          GlobalEvent.off(EventCfg.LEVELCHANGE);
          GlobalEvent.off(EventCfg.EXPCHANGE);
          GlobalEvent.off(EventCfg.SHOWOTHERNODE);
-       // LoadUtils.releaseRes(cc.ext.gameData.headimgurl);
     }
 
 }

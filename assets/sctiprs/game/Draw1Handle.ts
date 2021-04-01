@@ -194,7 +194,6 @@ export default class NewClass extends cc.Component {
                 this.DEAList.push(dea);
                 this.MACDList.push(macd);
 
-
                 this.n_low = Math.min(this.n_low, el.low);
                 this.n_high = Math.max(this.n_high, el.high);
 
@@ -303,9 +302,6 @@ export default class NewClass extends cc.Component {
             this.label2.string = '0.00';
             this.label3.string = (this.maxMACD / 2).toFixed(2) + '';
         } else if (str == 'KDJ') {
-            // this.label1.string=((this.maxJ-this.minJ)/4*1).toFixed(2)+'';
-            // this.label2.string=((this.maxJ-this.minJ)/4*2).toFixed(2)+'';
-            // this.label3.string=((this.maxJ-this.minJ)/4*3).toFixed(2)+'';
             this.label1.string = '10';
             this.label2.string = '50';
             this.label3.string = '90';
@@ -337,7 +333,6 @@ export default class NewClass extends cc.Component {
 
         this.minJ = this.jList[cc.ext.beg_end[0]];
         this.maxJ = this.jList[cc.ext.beg_end[0]];
-
 
         for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
             this.minDIF = Math.min(this.minDIF, this.DIFList[index]);

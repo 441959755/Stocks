@@ -91,7 +91,6 @@ export default class GameData {
     public set SMSet(val) {
         this._SMSet = val;
         cc.sys.localStorage.setItem('SMSET', JSON.stringify(val));
-
         if (val.isBW) {
 
             GameCfg.MAColor[0] = new cc.Color().fromHEX('#ffffff');
@@ -160,6 +159,17 @@ export default class GameData {
         }
 
 
+    }
+
+    private _ZBSet;
+
+    public get ZBSet(){
+        return this._ZBSet;
+    }
+
+    public set ZBSet(val){
+        this._ZBSet=val;
+        cc.sys.localStorage.setItem('ZBSet', JSON.stringify(val));
     }
 
 }

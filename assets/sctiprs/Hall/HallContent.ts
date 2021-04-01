@@ -1,3 +1,5 @@
+import GlobalEvent from "../Utils/GlobalEvent";
+import EventCfg from "../Utils/EventCfg";
 
 const {ccclass, property} = cc._decorator;
 
@@ -14,9 +16,6 @@ export default class NewClass extends cc.Component {
 
     @property([cc.Node])
     xlNodes:cc.Node[]=[];
-
-    @property(cc.Node)
-    shuangmangLayer:cc.Node=null;
 
     protected onLoad() {
         this.xlNodes.forEach(el=>{
@@ -42,7 +41,6 @@ export default class NewClass extends cc.Component {
 
     start () {
         this.initToggle()
-
     }
 
     initToggle(){
@@ -59,7 +57,11 @@ export default class NewClass extends cc.Component {
     onBtnClick(event,data){
         let name=event.target.name;
         if(name=='smBtn'){
-            this.shuangmangLayer.active = true;
+
+            GlobalEvent.emit('OPENSMLAYER');
+        }else if(name='zbBtn'){
+
+            GlobalEvent.emit('OPENZBLAYER');
         }
 
     }

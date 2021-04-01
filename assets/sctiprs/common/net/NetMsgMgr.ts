@@ -20,22 +20,22 @@ export  default class  NetMsgMgr{
             this.closeHeartBeat();
         }
         this.sioMgr=new WebSocketIOMgr();
-        this.sioMgr.setAddr('' ,this);
+        let url='ws://192.168.100.198:888';
+        this.sioMgr.setAddr(url,this);
         this.sioMgr.connect(connectSucc,connectFail);
-
-
     }
 
     startHeartBeat(){
+        console.log('连接成功');
 
     }
 
     closeHeartBeat(){
+        console.log('连接失败');
 
     }
 
     onInitProto(fileName,packageName,callback){
-
         LoadUtils.loadRes(fileName,(protoString)=>{
             let Builder=protoBuf.protoFromString(protoString);
 
@@ -44,7 +44,6 @@ export  default class  NetMsgMgr{
             this._protoBuild[fileName+'/'+packageName]=protoBuild;
             callback&&(callback())
         })
-
     }
 
     onReleaseProto(){

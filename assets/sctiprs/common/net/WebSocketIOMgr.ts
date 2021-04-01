@@ -27,7 +27,7 @@ export default class WebSocketIOMgr{
 
     public connect(connectSucc,connectFail,flag?){
         if(connectSucc){
-           // this.
+           console.log('connect connectSucc');
         }
 
         if(!this._url){
@@ -36,7 +36,7 @@ export default class WebSocketIOMgr{
         }
 
         this._sio=new WebSocket(this._url);
-        this._sio.binaryType='arrayBuffer';
+        this._sio.binaryType = "arraybuffer";
 
         this._sio.onopen=function(event){
             console.log('WebSocket onopen');

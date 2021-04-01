@@ -7,6 +7,8 @@ export default class NewClass extends cc.Component {
    @property(cc.Prefab)
    historyItem:cc.Prefab=null;
 
+   historyType=null;
+
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
