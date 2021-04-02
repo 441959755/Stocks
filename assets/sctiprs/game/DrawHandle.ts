@@ -75,14 +75,10 @@ export default class NewClass extends cc.Component {
     timer = null;
 
     onLoad() {
-
         GlobalEvent.on(EventCfg.SETMALABEL, (labels) => {
             this.MAla = labels;
             this.updataLabel(cc.ext.beg_end[1]);
         }, this);
-
-        //买入卖出
-        // GlobalEvent.on('onBuyOrSell', this.onBuyOrSell.bind(this), this);
 
         //ma boll pcm
         GlobalEvent.on('on_off', (flagData) => {
@@ -115,14 +111,11 @@ export default class NewClass extends cc.Component {
             this.updataLabel(cc.ext.beg_end[1]);
         }, this);
 
-        if (cc.ext.gameData.gameDatas) {
-            this.initData();
-        }
+
 
         let calDisY = 0;
         let calDisX = 0;
         let num = 90;
-
 
         //设置画布大小
         GlobalEvent.on('setDrawing', (falg) => {
@@ -184,21 +177,7 @@ export default class NewClass extends cc.Component {
             //右移   //左移
             if (Math.abs(calDisX) > Math.abs(calDisY)) {
                 calDisY = 0;
-                // if (event.getDelta().x > 0 && calDisX < 0) {
-                //     calDisX = event.getDelta().x;
-                //     if (this.timer) {
-                //         clearTimeout(this.timer);
-                //         this.timer = null;
-                //     }
-                // } else if (event.getDelta().x < 0 && calDisX > 0) {
-                //     calDisX = event.getDelta().x;
-                //     if (this.timer) {
-                //         clearTimeout(this.timer);
-                //         this.timer = null;
-                //     }
-                // } else {
-                //     calDisX += event.getDelta().x;
-                // }
+
                 if (Math.abs(calDisX) >= (cc.ext.hz_width / 2)) {
                     if (!this.timer) {
                         this.timer = setTimeout(() => {
@@ -258,21 +237,6 @@ export default class NewClass extends cc.Component {
             //放大   //缩小
             else if (Math.abs(calDisY) >= Math.abs(calDisX)) {
                 calDisX = 0;
-                // if (event.getDelta().y > 0 && calDisY < 0) {
-                //     calDisY = event.getDelta().y;
-                //     if (this.timer) {
-                //         clearTimeout(this.timer);
-                //         this.timer = null;
-                //     }
-                // } else if (event.getDelta().y < 0 && calDisY > 0) {
-                //     calDisY = event.getDelta().y;
-                //     if (this.timer) {
-                //         clearTimeout(this.timer);
-                //         this.timer = null;
-                //     }
-                // } else {
-                //     calDisY += event.getDelta().y;
-                // }
 
                 if (Math.abs(calDisY) >= 2) {
                     if (!this.timer) {
@@ -350,6 +314,10 @@ export default class NewClass extends cc.Component {
                 }
             }
         }, this);
+
+        if (cc.ext.gameData.gameDatas) {
+            this.initData();
+        }
     }
 
     //跟新label
@@ -394,7 +362,6 @@ export default class NewClass extends cc.Component {
     }
 
     setVOLInfo(index) {
-
         if (cc.ext.gameData.gameDatas[0].data[index]) {
             let value = parseFloat(cc.ext.gameData.gameDatas[0].data[index].value);
             this.drawVol.node.children[0].getComponent(cc.Label).string = 'VOL(5,10): ' + value.toFixed(2);
@@ -402,6 +369,7 @@ export default class NewClass extends cc.Component {
     }
 
     protected onEnable() {
+        this.initDrawBg();
         this.drawVol.node.children[0].color=GameCfg.VOLColor[0];
         this.BOLLLabel.forEach((el,t)=>{
             el.node.color=GameCfg.BOLLColor[t];
@@ -481,6 +449,7 @@ export default class NewClass extends cc.Component {
     }
 
     initData() {
+        cc.ext.beg_end = [];
         this.drawBg.lineWidth = 2;
         this.drawMA.lineWidth = 2;
         this.drawBOLL.lineWidth = 2;
@@ -492,7 +461,6 @@ export default class NewClass extends cc.Component {
             this.drawBordWidth = 1280;
         }
 
-        cc.ext.beg_end = [];
         GameCfg.huizhidatas = cc.ext.gameData.gameDatas[0].data.length - 150;
 
         cc.ext.beg_end[1] = GameCfg.huizhidatas;
@@ -723,7 +691,7 @@ export default class NewClass extends cc.Component {
 
     //成交量绘制
     start() {
-        this.initDrawBg();
+
     }
 
     //画线

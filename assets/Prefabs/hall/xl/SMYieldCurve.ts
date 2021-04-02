@@ -1,5 +1,5 @@
-import ActionUtils from "../Utils/ActionUtils";
-
+//import ActionUtils from "../Utils/ActionUtils";
+import ActionUtils from "../../../sctiprs/Utils/ActionUtils";
 const {ccclass, property} = cc._decorator;
 
 @ccclass

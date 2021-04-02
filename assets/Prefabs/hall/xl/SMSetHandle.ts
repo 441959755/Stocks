@@ -1,6 +1,7 @@
-import GlobalEvent from "../Utils/GlobalEvent";
-import EventCfg from "../Utils/EventCfg";
-import ActionUtils from "../Utils/ActionUtils";
+
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import ActionUtils from "../../../sctiprs/Utils/ActionUtils";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -26,8 +27,6 @@ export default class NewClass extends cc.Component {
 
    @property([cc.Node])
    content:cc.Node[]=[];
-
-
 
    _Lid=0;
 

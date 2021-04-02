@@ -99,7 +99,7 @@ export default class NewClass extends cc.Component {
 
     setBGColor() {
         //黑
-        if (cc.ext.gameData.SMSet.isBW) {
+        if (GameCfg.GameSet.isBW) {
             this.rightBox = this.node.getChildByName('rightBox');
             this.tipsBox = this.node.getChildByName('tipsBox');
             this.node.getChildByName('rightBox1').active = false;

@@ -133,6 +133,9 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on('updataLabel', this.updataLabel.bind(this), this);
 
+    }
+
+    protected start() {
         this.drawMACD && (this.drawMACD.node.active = false)
         this.drawKDJ && (this.drawKDJ.node.active = false)
         this.drawRSI && (this.drawRSI.node.active = false)

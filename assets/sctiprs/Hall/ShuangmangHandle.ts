@@ -1,6 +1,7 @@
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import gameCfg from "../game/GameCfg";
+import GameCfg from "../game/GameCfg";
 
 const {ccclass, property} = cc._decorator;
 
@@ -22,6 +23,7 @@ export default class NewClass extends cc.Component {
         if(name=='startSMBtn'){
             cc.ext.gameData.gameDatas=gameCfg.data;
             gameCfg.GameType=1;
+            GameCfg.GameSet = cc.ext.gameData.SMSet;
             cc.director.loadScene('game');
             // GlobalEvent.emit(EventCfg.LOADINGSHOW);
             // cc.ext.NetWorkMgr.getSMGuPiaoData((data)=>{

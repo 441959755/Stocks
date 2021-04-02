@@ -1,5 +1,7 @@
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
+import gameCfg from "../game/GameCfg";
+import GameCfg from "../game/GameCfg";
 
 const {ccclass, property} = cc._decorator;
 
@@ -132,6 +134,9 @@ export default class NewClass extends cc.Component {
                 cc.ext.gameData.ZBSet.ZLine = str;
             }
         } else if (name == 'startSMBtn') {
+            cc.ext.gameData.gameDatas=gameCfg.data;
+            gameCfg.GameType=2;
+            GameCfg.GameSet=cc.ext.gameData.ZBSet;
             cc.director.loadScene('game');
         }else if(name=='setZBBtn'){
             GlobalEvent.emit('OPENSETLAYER','ZB');

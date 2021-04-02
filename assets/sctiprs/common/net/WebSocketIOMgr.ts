@@ -1,5 +1,6 @@
 
-//let WebSocket=WebSocket||window.WebSocket||window.MozWebSocket;
+// let WebSocket=WebSocket||window.WebSocket||window.MozWebSocket;
+// let io = require('socket.io');
 
 export default class WebSocketIOMgr{
 
@@ -35,7 +36,10 @@ export default class WebSocketIOMgr{
             return;
         }
 
-        this._sio=new WebSocket(this._url);
+        if(!this._sio){
+           this._sio=new WebSocket(this._url);
+           // this._sio=io(this._url);
+        }
         this._sio.binaryType = "arraybuffer";
 
         this._sio.onopen=function(event){
@@ -57,7 +61,7 @@ export default class WebSocketIOMgr{
        this._sio.onclose=function(event){
           console.log("WebSocket instance closed.");
           connectFail&&(connectFail());
-          this.reconnect();
+       //   this.reconnect();
        }
     }
 
