@@ -3,6 +3,7 @@ import EventCfg from "../Utils/EventCfg";
 import DrawUtils from "../Utils/DrawUtils";
 
 import GameCfg from "./GameCfg";
+import Game = cc.Game;
 
 const { ccclass, property } = cc._decorator;
 
@@ -140,6 +141,21 @@ export default class NewClass extends cc.Component {
         this.drawKDJ && (this.drawKDJ.node.active = false)
         this.drawRSI && (this.drawRSI.node.active = false)
 
+        if(GameCfg.GameType==2){
+            if(GameCfg.GameSet.select=='MACD'){
+                this.drawMACD.node.active=true;
+                this.drawVol.node.active=false;
+                this.drawPcm.node.active=false;
+            }else if(GameCfg.GameSet.select=='KDJ'){
+                this.drawKDJ.node.active=true;
+                this.drawVol.node.active=false;
+                this.drawPcm.node.active=false;
+            }else if(GameCfg.GameSet.select=='RSI'){
+                this.drawRSI.node.active=true;
+                this.drawVol.node.active=false;
+                this.drawPcm.node.active=false;
+            }
+        }
         let huizhidatas = cc.ext.gameData.gameDatas[0].data;
 
         let EMA1Data = 12, EMA2Data = 26, DEAData = 9;
@@ -256,6 +272,7 @@ export default class NewClass extends cc.Component {
 
             }
         })
+        this.onDraw();
     }
 
     updataLabel(index) {
@@ -367,7 +384,7 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-        this.onDraw();
+
         this.MACDLabels.forEach((el, index) => {
             if (index == 0) {
                 el.node.color = GameCfg.DIF_LINE_COL;

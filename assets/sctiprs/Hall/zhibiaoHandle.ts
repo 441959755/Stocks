@@ -17,7 +17,53 @@ export default class NewClass extends cc.Component {
     @property(cc.Toggle)
     toggle: cc.Toggle = null;
 
+
+
     setProId = 0;
+
+    _tipsLa=null;
+
+    tips=[
+        ['股价穿越均线','均线交叉','组合训练'],
+        ['MACD金叉','0轴穿越','柱最大值转向','MACD背离','经典用法'],
+        ['布林带中轨','单边突破上轨','上下轨间震荡','金典用法'],
+        ['超买超卖','KDJ金叉','KDJ背离','金典用法'],
+        ['EXPMA金叉','经典用法'],
+        ['RSI金叉','超买超卖','经典用法'],
+        ['量柱和均量线']
+    ]
+
+    @property(cc.EditBox)
+    edit:cc.EditBox=null;
+
+    protected onLoad() {
+        this._tipsLa=this.edit.node.getChildByName('tipslabel');
+        this.edit.node.on('editing-did-ended',(edit)=>{
+            let str=edit.string;
+            if(str==''){
+                return;
+            }else{
+                let datas=cc.ext.stocklist;
+                let flag=false,tt;
+                for(let i=0;i<datas.length;i++){
+                    if(datas[i].indexOf(str)!=-1){
+                        tt=datas[i];
+                        flag=true;
+                        break;
+                    }
+                }
+                if(!flag){
+                    this._tipsLa.color=cc.Color.RED
+                }else{
+                    this._tipsLa.color=new cc.Color().fromHEX('#BBBBBB');
+                    this._tipsLa.active=false;
+                    let arr=tt.split('|');
+                    this.boxs[2].getChildByName('label').getComponent(cc.Label).string = arr[0]+'  '+arr[1];
+                    edit.string='';
+                }
+            }
+        },this);
+    }
 
     onEnable() {
         GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
@@ -29,6 +75,11 @@ export default class NewClass extends cc.Component {
                 la.string = cc.ext.gameData.ZBSet.strategy;
             } else if (index == 2) {
                 la.string = cc.ext.gameData.ZBSet.search;
+                if(cc.ext.gameData.ZBSet.search=='随机选股'){
+                    this._tipsLa.active=true;
+                }else{
+                    this._tipsLa.active=false;
+                }
             } else if (index == 3) {
                 la.string = cc.ext.gameData.ZBSet.year;
             } else if (index == 4) {
@@ -42,6 +93,9 @@ export default class NewClass extends cc.Component {
             }
         })
         this.toggle.isChecked = cc.ext.gameData.ZBSet.showSign;
+
+
+
     }
 
     onBtnBoxSelectClick(event, data) {
@@ -80,6 +134,7 @@ export default class NewClass extends cc.Component {
                 }
             })
         }
+
     }
 
     onToggleBtnClick() {
@@ -114,6 +169,48 @@ export default class NewClass extends cc.Component {
                         this.boxs[5].getChildByName('label').getComponent(cc.Label).string = day + '';
                     }
                 })
+            }else if(this.setProId==0){
+                let downBox=this.downBoxs[1];
+                let content = cc.find('New ScrollView/view/content', downBox);
+
+                let nodes=content.children;
+                let item=nodes[0];
+                let tt=0;
+                if(str=='均线'){
+                    tt=0;
+                }else if(str=='MACD'){
+                    tt=1;
+                }else if(str=='BOLL'){
+                    tt=2
+                }else if(str=='KDJ'){
+                    tt=3;
+                }else if(str=='EXPMA'){
+                    tt=4
+                }else if(str=='RSI'){
+                    tt=5;
+                }else if(str=='成交量'){
+                    tt=6;
+                }
+                this.boxs[1].getChildByName('label').getComponent(cc.Label).string = this.tips[tt][0];
+                this.tips[tt].forEach((el,index)=>{
+                    if(!nodes[index]){
+                        let node=cc.instantiate(item);
+                        content.addChild(node);
+                    }
+                    nodes[index].getComponent(cc.Label).string=el;
+                })
+
+                if(nodes.length>this.tips[tt].length){
+                    for(let i=nodes.length;i<this.tips[tt].length;i++){
+                        nodes[i].destroy();
+                    }
+                }
+            }else if(this.setProId==2){
+                if(str=='随机选股'){
+                    this._tipsLa.active=true;
+                }else{
+                    this._tipsLa.active=false;
+                }
             }
 
             if (this.setProId == 0) {

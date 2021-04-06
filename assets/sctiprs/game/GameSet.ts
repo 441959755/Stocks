@@ -85,7 +85,7 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
-        if (cc.ext.gameData.SMSet.isBW) {
+        if (GameCfg.GameSet.isBW) {
             this.node.color = cc.Color.BLACK;
             //  this.mask.color=cc.Color.BLACK;
             this.masks.forEach(el => {

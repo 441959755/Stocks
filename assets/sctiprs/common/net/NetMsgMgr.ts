@@ -9,6 +9,10 @@ export  default class  NetMsgMgr{
 
     sioMgr=null;
 
+
+
+
+
     constructor() {
         let connectSucc=(flag)=>{
             this.startHeartBeat();

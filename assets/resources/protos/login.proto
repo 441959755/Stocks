@@ -1,0 +1,116 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package pb;
+option go_package = ".;pb";
+
+
+
+import "common.proto";
+
+// 登录类型
+enum LoginType {
+	LoginType_NULL = 0;
+
+	MobilePhoneId = 1;	// 手机号码
+	WeChat        = 2;	// 微信
+	QQ            = 3;	// QQ
+}
+
+// 登录来源
+enum LoginFrom {
+    // 炒股达人
+    Android_000 = 0;   // 安卓0渠道
+    Android_001 = 1;   // 安卓001渠道
+    Android_201 = 201; // 安卓201渠道
+    Android_204 = 204; // 安卓204渠道
+    Android_205 = 205; // 安卓205渠道
+    Android_206 = 206; // 安卓206渠道
+    Android_208 = 208; // 安卓208渠道
+    Android_209 = 209; // 安卓209渠道
+    Android_210 = 210; // 安卓210渠道
+    Android_211 = 211; // 安卓211渠道
+    Android_212 = 212; // 安卓212渠道
+    Android_301 = 301; // 安卓301渠道
+    Android_302 = 302; // 安卓302渠道
+    Android_601 = 601; // 安卓601渠道
+
+    // K线学院
+    Android_1000 = 1000; // 安卓1000渠道
+    Android_1204 = 1204; // 安卓1204渠道
+    Android_1205 = 1205; // 安卓1205渠道
+    Android_1208 = 1208; // 安卓1208渠道
+    Android_1212 = 1212; // 安卓1212渠道
+
+	IosAppleStore = 6666;	// 苹果商店下载的App
+	Ipad          = 6667;   // Ipad
+
+	WebsiteIos    = 7777;   // 企业网站下载的苹果
+	WebsiteAndriod= 7778;   // 企业网站下载的安卓
+
+	WeChatMinProgram = 8888;// 微信小程序
+}
+
+// 注册
+message CmdRegistry {
+	string account = 1; // 玩家账号：手机号、微信登录的Code
+	LoginType type = 2; // 登录类型
+	LoginFrom from = 3; // 登录来源
+	string pwd = 4;     // 玩家密码
+	string sms = 5;     // 手机验证码
+}
+
+// 登录参数
+message CmdLogin {
+	string account = 1; // 玩家账号：手机号、微信登录的Code
+	LoginType type = 2; // 登录类型
+	LoginFrom from = 3; // 登录来源
+	string pwd = 4;     // 玩家密码
+}
+// 登录响应
+message CmdLoginReply {
+	ErrorInfo err = 1;  // 登录结果
+  int32 uid     = 2;  // 玩家ID
+	string token  = 3;  // 登录成功后返回的Token，客户端可以缓存它（当断线重连时或玩家关闭App一段时间后再进入，可以使用token恢复登录，不需要去登录服务器再次登录）
+	string gameAddr = 4;// 服务器做的负载均衡，给客户端分配的游戏服务器IP和端口
+}
+
+// 获取图形码
+message CmdGetCaptcha {
+	bytes captcha = 1; // 图形码（区分机器人还是人类的图灵测试）
+}
+
+// 获取短信验证码
+message CmdGetSms {
+	string account = 1; // 玩家账号：手机号
+	string captcha = 2; // 图形码（区分机器人还是人类的图灵测试）
+}
+
+// 重新设置密码
+message CmdResetPwd {
+	string account = 1; // 玩家账号：手机号、微信登录的Code
+	string pwd = 2;     // 新密码
+	string captcha = 3; // 手机验证码或原密码
+}
+
+
+// Rpc service
+service LoginService {
+  rpc Registry (CmdRegistry) returns (ErrorInfo) {}
+  rpc Login (CmdLogin) returns (CmdLoginReply) {}
+  rpc GetSms (CmdGetSms) returns (ErrorInfo) {}
+  rpc ResetPwd (CmdResetPwd) returns (ErrorInfo) {}
+}

@@ -26,8 +26,11 @@ export default class NewClass extends cc.Component {
 
     timerCall = null;
 
+    inotyBox:cc.Node=null;
+
+    lZoom:cc.Toggle=null;
+
     onLoad() {
-        this.setBGColor();
         GlobalEvent.on('updataLabel', (inde) => {
 
             let datas = cc.ext.gameData.gameDatas[0].data;
@@ -75,7 +78,11 @@ export default class NewClass extends cc.Component {
             this.timerCall = null;
             this.tipsBox.active = true;
             if (point >= cc.winSize.width / 2) {
-                this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2;
+                if(this.lZoom.isChecked){
+                    this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2+this.inotyBox.width;
+                }else{
+                    this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2;
+                }
             } else {
                 if (this.rZoom.isChecked) {
                     this.tipsBox.x = cc.winSize.width / 2 - this.tipsBox.width / 2;
@@ -93,22 +100,46 @@ export default class NewClass extends cc.Component {
                     this.timerCall = null;
                 }, 800);
             }
-
         }, this);
     }
 
+    start(){
+        //训练指标
+        if(GameCfg.GameType==2){
+           // this.node.active=false;
+            let nodes=this.node.children;
+            nodes[0].active=false;
+            nodes[1].active=false;
+            nodes[2].active=false;
+            nodes[3].active=false;
+            this.rZoom.isChecked=true;
+            GlobalEvent.emit('labelPoint', cc.winSize.width + this.rightBox.width / 2 - 150);
+        }
+    }
+
     setBGColor() {
+        this.inotyBox=this.node.children[4];
+        this.lZoom=this.inotyBox.getChildByName('lZoomBtn').getComponent(cc.Toggle);
+        this.lZoom.node.children[0].active=true;
+        this.inotyBox.x=-cc.winSize.width/2-this.inotyBox.width/2;
         //黑
         if (GameCfg.GameSet.isBW) {
             this.rightBox = this.node.getChildByName('rightBox');
             this.tipsBox = this.node.getChildByName('tipsBox');
             this.node.getChildByName('rightBox1').active = false;
+
+            this.inotyBox.getChildByName('bg').active=true;
+            this.inotyBox.getChildByName('label').color=cc.Color.WHITE;
+
         }
         //白
         else {
             this.rightBox = this.node.getChildByName('rightBox1');
             this.tipsBox = this.node.getChildByName('tipsBox1');
             this.node.getChildByName('rightBox').active = false;
+
+            this.inotyBox.getChildByName('bg').active=false;
+            this.inotyBox.getChildByName('label').color=cc.Color.BLACK;
         }
         this.tipsBox.children.forEach(el => {
             this.tipsText.push(el.getComponent(cc.Label));
@@ -125,6 +156,7 @@ export default class NewClass extends cc.Component {
 
 
     onEnable() {
+        this.setBGColor();
         this.setBoxfalg();
         this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
         GlobalEvent.emit('labelPoint', cc.winSize.width - this.rightBox.width / 2 - 150);
@@ -162,8 +194,6 @@ export default class NewClass extends cc.Component {
             if (this.rZoom.isChecked) {
                 this.rZoom.node.children[0].active = false;
                 this.rightBox.x = cc.winSize.width / 2 + this.rightBox.width / 2;
-                console.log(cc.winSize.width);
-                console.log(cc.view.getVisibleSize().width);
                 GlobalEvent.emit('labelPoint', cc.winSize.width + this.rightBox.width / 2 - 150);
             } else {
                 this.rZoom.node.children[0].active = true;
@@ -171,6 +201,16 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit('labelPoint', cc.winSize.width - this.rightBox.width / 2 - 150);
             }
             GlobalEvent.emit('setDrawing', this.rZoom.isChecked);
+        }else if(data=='lZoomBtn'){
+            if(this.lZoom.isChecked){
+                this.lZoom.node.children[0].active=false;
+                this.inotyBox.x=-cc.winSize.width/2+this.inotyBox.width/2;
+
+            }else{
+                this.lZoom.node.children[0].active=true;
+                this.inotyBox.x=-cc.winSize.width/2-this.inotyBox.width/2;
+
+            }
         }
     }
 }

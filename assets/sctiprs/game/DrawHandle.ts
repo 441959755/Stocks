@@ -2,9 +2,10 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import DrawUtils from "../Utils/DrawUtils";
 import GameCfg from "./GameCfg";
+import Game = cc.Game;
 
 
-const { ccclass, property } = cc._decorator;
+const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -110,7 +111,6 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit('onDraw');
             this.updataLabel(cc.ext.beg_end[1]);
         }, this);
-
 
 
         let calDisY = 0;
@@ -247,8 +247,12 @@ export default class NewClass extends cc.Component {
                             let w = (parseInt(Math.ceil(Math.abs(calDisY) / 2) + ''));
                             //  hz_width = calDisY > 0 ? cc.ext.hz_width + w : cc.ext.hz_width - w;
                             num = calDisY > 0 ? preNUm - w : preNUm + w;
-                            if (num <= minCount) { num = minCount }
-                            if (num >= maxCount) { num = maxCount }
+                            if (num <= minCount) {
+                                num = minCount
+                            }
+                            if (num >= maxCount) {
+                                num = maxCount
+                            }
                             hz_width = this.drawBordWidth / num;
                             if (hz_width < mixWidth) {
                                 hz_width = mixWidth;
@@ -336,7 +340,7 @@ export default class NewClass extends cc.Component {
         if (this.MaList[index] != 'null' && this.MaList[index]) {
             this.MAla.forEach((el, t) => {
                 if (this.MaList[index][t]) {
-                 //   el.node.color = GameCfg.MAColor[t];
+                    //   el.node.color = GameCfg.MAColor[t];
                     if (t == 0) {
                         el.string = '日线 MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
                     } else {
@@ -353,7 +357,7 @@ export default class NewClass extends cc.Component {
         let arr = ['BOLL(20) BOLL', 'UB', 'LB'];
         if (this.BollList[index] && this.BollList[index] != 'null') {
             this.BOLLLabel.forEach((el, t) => {
-              //  el.node.color = GameCfg.BOLLColor[t];
+                //  el.node.color = GameCfg.BOLLColor[t];
                 if (this.BollList[index][t]) {
                     el.string = arr[t] + ': ' + this.BollList[index][t].toFixed(2);
                 }
@@ -370,12 +374,12 @@ export default class NewClass extends cc.Component {
 
     protected onEnable() {
         this.initDrawBg();
-        this.drawVol.node.children[0].color=GameCfg.VOLColor[0];
-        this.BOLLLabel.forEach((el,t)=>{
-            el.node.color=GameCfg.BOLLColor[t];
+        this.drawVol.node.children[0].color = GameCfg.VOLColor[0];
+        this.BOLLLabel.forEach((el, t) => {
+            el.node.color = GameCfg.BOLLColor[t];
         })
-        this.MAla.forEach((el,t)=>{
-            el.node.color=GameCfg.MAColor[t];
+        this.MAla.forEach((el, t) => {
+            el.node.color = GameCfg.MAColor[t];
         })
     }
 
@@ -434,7 +438,6 @@ export default class NewClass extends cc.Component {
 
     //Boll
     onDrawBoll(index) {
-
         let drawBox = 340;
         if (index >= 20) {
             let prex = 10 + ((index - 1 - cc.ext.beg_end[0])) * cc.ext.hz_width + cc.ext.hz_width / 2;
@@ -569,6 +572,8 @@ export default class NewClass extends cc.Component {
 
     //曲线MA
     onDrawMA(index) {
+
+
         if (this.MaList[index] == 'null') {
             return;
         }
@@ -691,6 +696,19 @@ export default class NewClass extends cc.Component {
 
     //成交量绘制
     start() {
+        if (GameCfg.GameType == 2) {
+            if (GameCfg.GameSet.select != '均线') {
+                this.drawMA.node.active = false;
+            }
+            if (GameCfg.GameSet.select != 'BOLL') {
+                    this.drawBOLL.node.active=false;
+            }
+
+            setTimeout(()=>{
+                GlobalEvent.emit('setDrawing',true);
+           },500);
+
+        }
 
     }
 

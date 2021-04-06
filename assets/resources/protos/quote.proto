@@ -6,53 +6,80 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 syntax = "proto3";
-option go_package = "../pb;pb";
+
+package pb;
+option go_package = ".;pb";
+
+
+
 
 import "common.proto";
 
-package pb;
 
+// 行情K线类型
+enum KType {
+    KType_NULL = 0;
 
-// 行情style常量
-enum KStyle {
-    KStyle_NULL = 0;
+	// 实时行情
+	Real = 1;	// 实时（包含当前这一分钟的分时行情和买卖5档委托，随行情源每隔n秒同步一次）
 
-	KStyle_Real = 1;    // 实时（即：分时）
+	// 历史行情
+	Min   = 2;	// 分时：1分钟
+	Min15 = 3;	// 15分
+	Min30 = 4;	// 30分
+	Min60 = 5;	// 60分
 
-	KStyle_Min  = 2;    // 分时
-	KStyle_15Min= 3;    // 15分
-	KStyle_30Min= 4;    // 30分
-	KStyle_Hour = 5;    // 时K
+	Day  = 10;  // 日K
+	Day7 = 11;  // 周K
 
-	KStyle_Day  = 10;    // 日K
-	KStyle_Week = 11;    // 周K
+	Mon   = 20; // 月K
+	Mon3  = 21;	// 季K
 
-	KStyle_Mon     = 20; // 月K
-	KStyle_Season  = 21; // 季K
-
-	KStyle_Year = 30;    // 年K
+	Year = 30; 	// 年K
 }
 
-// 行情
-message QuoteItem {
-	string code = 1;        // 股票代码
-	uint32 style = 2;       // K线类型
+// 行情K线波形
+enum KStyle {
+    Random = 0;	// 随机行情
+	Wave = 1;	// 震荡行情
+	Up = 2;		// 单边向上行情
+	Down = 3;	// 单边向下行情
+}
 
-	uint64 timestamp = 3;   // 时间戳
+// 查询行情
+message CmdQuoteQuery {
+	KType ktype = 1;   	// K线类型（目前只有分时和日K）
+	uint32 code = 2;    // 股票代码（0表示忽略和随机）
+	int64 from = 3;    	// 开始时间戳（不能为0，查询日K行情的格式为：YYYYMMDD；查询分时行情的格式为：HHMMSS）
+    int32 total = 4;   	// K线条数（0表示忽略该参数；如果total和to都不为0，则优先使用条数作为查询条件；一次性查询最大条数为2000条）
+	int64 to = 5;      	// 结束时间戳（0表示忽略该参数；格式同from）
+	KStyle kstyle = 6;	// 行情样式（如：单边向下、震荡）
+}
+message QuoteItem {
+	uint32 code = 1;        // 股票代码
+	KType ktype = 2;     	// K线类型
+	int64 timestamp = 3;    // 时间戳
+	
 	double price = 4;       // 当前价
 	uint64 volume = 5;      // 成交量
 	double amount = 6;      // 成交额
-	double open = 7;        // 开盘价
-	double close = 8;       // 收盘价
-	double high = 9;        // 最高价
-	double low = 10;        // 最低价
+	uint64 count = 7;		// 成交笔数
+	double open = 8;        // 开盘价
+	double close = 9;       // 昨收价
+	double high = 10;       // 最高价
+	double low = 11;        // 最低价
+
+	repeated double ask5Price  = 12;// 申买五档价
+	repeated uint64 ask5Volume = 13;// 申买五档量
+	repeated double bid5Price  = 14;// 申卖五档价
+	repeated uint64 bid5Volume = 15;// 申卖五档量
 }
 message Quotes {
 	repeated QuoteItem items = 1;
@@ -67,10 +94,7 @@ message CmdQuoteSubscribe {
 	repeated QuoteSubscribeItem items = 1;
 }
 
-// 查询行情
-message CmdQuoteQuery {
-	string code = 1;    // 股票代码
-	uint32 style = 2;   // K线类型
-	uint64 from = 3;    // 开始时间戳（0表示股票上市开始算）
-	uint64 to = 4;      // 结束时间戳（0表示无结束）
+service QuotesService {
+  rpc QuotesQuery (CmdQuoteQuery) returns (Quotes) {}
+  rpc QuotesSubscribe (CmdQuoteSubscribe) returns (ErrorInfo) {}
 }

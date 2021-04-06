@@ -35,6 +35,7 @@ export default class NewClass extends cc.Component {
 
 
 
+
     protected onDestroy() {
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.HELPSHOW);
@@ -135,7 +136,7 @@ export default class NewClass extends cc.Component {
                     GameCfg.MAs=ma;
                 }
             }else if(GameCfg.GameSet.select=='MACD'){
-                if(GameCfg.GameSet.strategy=='  '){
+                if(GameCfg.GameSet.strategy=='MACD金叉'){
 
                 }else if(GameCfg.GameSet.strategy=='0轴穿越'){
 
@@ -185,6 +186,7 @@ export default class NewClass extends cc.Component {
                     GameCfg.VOLGraph=GameCfg.GameSet.VOL;
                 }
             }
+
         }
     }
 

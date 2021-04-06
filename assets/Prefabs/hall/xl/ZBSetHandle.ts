@@ -20,6 +20,8 @@ export default class NewClass extends cc.Component {
 
     childs=null;
 
+
+
     protected onLoad() {
         GlobalEvent.on('ItemValue', (val) => {
             let lab = this.layers[this._page].children[this._index].getChildByName('label');
@@ -108,8 +110,8 @@ export default class NewClass extends cc.Component {
                     datas.isBW = toggle3.getComponent(cc.Toggle).isChecked;
                 }
             })
-
             cc.ext.gameData.ZBSet = datas;
+            this.node.active=false;
         } else if (name == 'selectBtn') {
             this._index = parseInt(data);
             this.childs=  this.layers[this._page].getChildByName('box').children[this._index];
