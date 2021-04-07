@@ -119,18 +119,15 @@ export default class NewClass extends cc.Component {
 
         //设置画布大小
         GlobalEvent.on('setDrawing', (falg) => {
-
             this.drawBordWidth = falg ? (this.drawBordWidth + 164) : (this.drawBordWidth - 164);
-            num = parseInt(this.drawBordWidth / cc.ext.hz_width + '');
-            cc.ext.beg_end[1] = GameCfg.huizhidatas;
-            cc.ext.beg_end[0] = cc.ext.beg_end[1] - num;
-            if (cc.ext.beg_end[0] <= 0) {
-                cc.ext.beg_end[0] = 0;
-            }
-
-            this.initDrawBg();
-            GlobalEvent.emit('onDraw');
+           this.setDrawing();
         }, this);
+
+        GlobalEvent.on(EventCfg.SET_DRAW_SIZE,(falg)=>{
+            this.drawBordWidth = falg ? (this.drawBordWidth - 206) : (this.drawBordWidth +206);
+            this.setDrawing();
+        },this);
+
 
         //开始
         this.node.on('touchstart', (event) => {
@@ -742,6 +739,17 @@ export default class NewClass extends cc.Component {
     //
     drawClear(ctx) {
         DrawUtils.drawClear(ctx);
+    }
+
+    setDrawing(){
+      let  num = parseInt(this.drawBordWidth / cc.ext.hz_width + '');
+        cc.ext.beg_end[1] = GameCfg.huizhidatas;
+        cc.ext.beg_end[0] = cc.ext.beg_end[1] - num;
+        if (cc.ext.beg_end[0] <= 0) {
+            cc.ext.beg_end[0] = 0;
+        }
+        this.initDrawBg();
+        GlobalEvent.emit('onDraw');
     }
 
 

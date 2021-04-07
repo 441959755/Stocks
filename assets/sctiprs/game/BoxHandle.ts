@@ -209,8 +209,8 @@ export default class NewClass extends cc.Component {
             }else{
                 this.lZoom.node.children[0].active=true;
                 this.inotyBox.x=-cc.winSize.width/2-this.inotyBox.width/2;
-
             }
+            GlobalEvent.emit(EventCfg.SET_DRAW_SIZE,this.lZoom.isChecked);
         }
     }
 }

@@ -16,10 +16,6 @@ export default class WebSocketIOMgr{
 
     _deleagte=null;
 
-    constructor(){
-      //  this.webSocket=WebSocket||window.WebSocket;
-       // console.log(this.webSocket);
-    }
 
     public setAddr(url,de){
         this._url=url;

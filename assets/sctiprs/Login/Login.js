@@ -1,8 +1,9 @@
 import GameData from "../GameData";
 import LLWSDK from "../common/sdk/LLWSDK";
-//import NetMsgMgr from "../common/net/NetMsgMgr";
-import SockectIoMgr from "../common/net/SockectIoMgr";
+import NetMsgMgr from "../common/net/NetMsgMgr";
+
 import LoadUtils from "../Utils/LoadUtils";
+
 
 cc.ext={};
 cc.ext.gameData=new GameData();
@@ -15,6 +16,8 @@ cc.Class({
     },
 
     onLoad(){
+
+
         LoadUtils.loadRes('protos/stocklist',(text)=>{
             cc.ext.stocklist=text.text.split('\n');
            // 股票代码|股票名称|第一个行情日期|最后一个行情日期（0为无最后行情，即股票还在上市中）|流通股数（注：请忽略该行）
@@ -27,11 +30,16 @@ cc.Class({
        // //TODO  接DSK
         cc.ext.llwSDK=LLWSDK.getSDK()
         cc.ext.llwSDK.login(()=>{
-           // cc.ext.NetMsg=new NetMsgMgr();
+           cc.ext.NetMsg=new NetMsgMgr();
+            cc.ext.NetMsg.onInitProto('protos/quote','pb');
             //console.log(io);
-            cc.ext.NetMsg=new SockectIoMgr();
-            cc.ext.NetMsg.connectSocket();
+            //  cc.ext.NetMsg=new SockectIoMgr();
+            //  cc.ext.NetMsg.connectSocket();
+            // Net.connect(()=>{
+            //
+            // })
             this.enterHall();
+
         })
 
 

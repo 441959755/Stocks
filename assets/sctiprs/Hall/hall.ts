@@ -140,7 +140,9 @@ export default class NewClass extends cc.Component {
 
     start() {
         // this.resetSize(this.node);
-
+        setTimeout(()=>{
+            cc.ext.NetMsg.sendTestMsgReq();
+        },1000);
 
     }
 

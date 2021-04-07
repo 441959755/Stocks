@@ -45,6 +45,20 @@ export default class NewClass extends cc.Component {
             })
         }, this)
 
+        GlobalEvent.on(EventCfg.SET_DRAW_SIZE,(falg)=>{
+            if(falg){
+                this.node.width-=206;
+                this.node.x+=206;
+            }else{
+                this.node.width+=206;
+                this.node.x-=206;
+            }
+            // this.masks.forEach(el=>{
+            //     el.width=this.node.width;
+            //
+            // })
+        },this);
+
     }
 
     initMALa() {
@@ -135,6 +149,7 @@ export default class NewClass extends cc.Component {
     onDestroy() {
         GlobalEvent.off('labelPoint');
         GlobalEvent.off('setDrawing');
+        GlobalEvent.off(EventCfg.SET_DRAW_SIZE);
     }
 
 
