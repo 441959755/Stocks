@@ -192,7 +192,7 @@
       "array": [
         0,
         0,
-        404.4338635673329,
+        401.83578735597956,
         0,
         0,
         0,
@@ -4519,7 +4519,7 @@
   {
     "__type__": "cc.Node",
     "_name": "bottom",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 2
     },
@@ -4671,7 +4671,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "main_smbt_gg1",
+    "_name": "btn_gg",
     "_objFlags": 0,
     "_parent": {
       "__id__": 91
@@ -4753,7 +4753,7 @@
       "__uuid__": "7a3b2047-fa1c-4084-9882-849ac6a66622"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -4866,7 +4866,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "main_smbt_hy1",
+    "_name": "btn_hy",
     "_objFlags": 0,
     "_parent": {
       "__id__": 91
@@ -4948,7 +4948,7 @@
       "__uuid__": "a444ae04-ca9d-404f-93d4-066f4c0ac7fa"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -5061,7 +5061,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "main_smbt_rw1",
+    "_name": "btn_rw",
     "_objFlags": 0,
     "_parent": {
       "__id__": 91
@@ -5143,7 +5143,7 @@
       "__uuid__": "5c623a06-b6ff-49b0-939c-66ce611194a1"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -5256,7 +5256,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "main_smbt_fk1",
+    "_name": "btn_fk",
     "_objFlags": 0,
     "_parent": {
       "__id__": 91
@@ -5338,7 +5338,7 @@
       "__uuid__": "2a658be5-b850-4ba8-ab7e-fefe260d30c0"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -5451,7 +5451,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "main_smbt_ph1",
+    "_name": "btn_ph",
     "_objFlags": 0,
     "_parent": {
       "__id__": 91
@@ -5533,7 +5533,7 @@
       "__uuid__": "85a93b6a-b226-490c-b251-00deb90312b7"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -33980,7 +33980,7 @@
   {
     "__type__": "cc.Node",
     "_name": "top",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 2
     },
@@ -36865,6 +36865,9 @@
     },
     "rightNode": {
       "__id__": 912
+    },
+    "progr": {
+      "__id__": 878
     },
     "_id": "30lq5J8m5Jyp8RLPatFbbV"
   },

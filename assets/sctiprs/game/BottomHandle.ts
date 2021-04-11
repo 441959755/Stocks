@@ -3,7 +3,7 @@ import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
 
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
@@ -103,7 +103,7 @@ export default class NewClass extends cc.Component {
             node.active = true;
             node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
             node.children[1].getComponent(cc.Label).string = this.gpData[0].day + '-' + this.gpData[this.gpData.length - 1].day;
-            node.children[2].getComponent(cc.Label).string ='0.00%';
+            node.children[2].getComponent(cc.Label).string = '0.00%';
         }, this);
     }
 
@@ -152,6 +152,15 @@ export default class NewClass extends cc.Component {
         this.mrBtn.node.active = !this.flag;
         this.mcBtn.node.active = this.flag;
 
+        if (GameCfg.GameType == 2) {
+            let info = this.node.getChildByName('info');
+            info.active = true;
+            let nodes = info.children;
+            nodes[2].getComponent(cc.Label).string = '股票信息:' + GameCfg.data[0].name;
+            nodes[1].getComponent(cc.Label).string = '起始时间:' + GameCfg.data[0].data[0].day;
+            let le = GameCfg.data[0].data.length;
+            nodes[0].getComponent(cc.Label).string = '结束时间:' + GameCfg.data[0].data[le - 1].day;
+        }
     }
 
     //回合数
@@ -380,7 +389,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit('roundNUmber');
 
         this.onSetMrCount();
-
     }
 
     onBuyOrSell(state) {

@@ -74,6 +74,8 @@ export default class GameData {
         return this._exp;
     }
 
+    public maxExp = null;
+
     public sex = null;     //性别
 
     public headimgurl = null; //头像地址
@@ -81,6 +83,19 @@ export default class GameData {
 
     public openid = null;
     public sessionKey = null;
+
+    public ShuangMang_Gold = null;
+
+    //SMset
+    private _token;
+
+    public get token() {
+        return this._token;
+    }
+    public set token(val) {
+        this._token = val;
+        cc.sys.localStorage.setItem('token', JSON.stringify(val));
+    }
 
     //SMset
     private _SMSet;
@@ -95,12 +110,12 @@ export default class GameData {
 
     private _ZBSet;
 
-    public get ZBSet(){
+    public get ZBSet() {
         return this._ZBSet;
     }
 
-    public set ZBSet(val){
-        this._ZBSet=val;
+    public set ZBSet(val) {
+        this._ZBSet = val;
         cc.sys.localStorage.setItem('ZBSet', JSON.stringify(val));
     }
 

@@ -1,0 +1,12 @@
+{
+    "levelConf": [
+        {
+            "level": 1,
+            "max_exp": 100
+        },
+        {
+            "level": 2,
+            "max_exp": 300
+        }
+    ]
+}

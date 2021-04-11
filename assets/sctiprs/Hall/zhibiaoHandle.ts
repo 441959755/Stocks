@@ -3,7 +3,7 @@ import EventCfg from "../Utils/EventCfg";
 import gameCfg from "../game/GameCfg";
 import GameCfg from "../game/GameCfg";
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -21,48 +21,48 @@ export default class NewClass extends cc.Component {
 
     setProId = 0;
 
-    _tipsLa=null;
+    _tipsLa = null;
 
-    tips=[
-        ['股价穿越均线','均线交叉','组合训练'],
-        ['MACD金叉','0轴穿越','柱最大值转向','MACD背离','经典用法'],
-        ['布林带中轨','单边突破上轨','上下轨间震荡','金典用法'],
-        ['超买超卖','KDJ金叉','KDJ背离','金典用法'],
-        ['EXPMA金叉','经典用法'],
-        ['RSI金叉','超买超卖','经典用法'],
+    tips = [
+        ['股价穿越均线', '均线交叉', '组合训练'],
+        ['MACD金叉', '0轴穿越', '柱最大值转向', 'MACD背离', '经典用法'],
+        ['布林带中轨', '单边突破上轨', '上下轨间震荡', '金典用法'],
+        ['超买超卖', 'KDJ金叉', 'KDJ背离', '金典用法'],
+        ['EXPMA金叉', '经典用法'],
+        ['RSI金叉', '超买超卖', '经典用法'],
         ['量柱和均量线']
     ]
 
     @property(cc.EditBox)
-    edit:cc.EditBox=null;
+    edit: cc.EditBox = null;
 
     protected onLoad() {
-        this._tipsLa=this.edit.node.getChildByName('tipslabel');
-        this.edit.node.on('editing-did-ended',(edit)=>{
-            let str=edit.string;
-            if(str==''){
+        this._tipsLa = this.edit.node.getChildByName('tipslabel');
+        this.edit.node.on('editing-did-ended', (edit) => {
+            let str = edit.string;
+            if (str == '') {
                 return;
-            }else{
-                let datas=cc.ext.stocklist;
-                let flag=false,tt;
-                for(let i=0;i<datas.length;i++){
-                    if(datas[i].indexOf(str)!=-1){
-                        tt=datas[i];
-                        flag=true;
+            } else {
+                let datas = stocklist;
+                let flag = false, tt;
+                for (let i = 0; i < datas.length; i++) {
+                    if (datas[i].indexOf(str) != -1) {
+                        tt = datas[i];
+                        flag = true;
                         break;
                     }
                 }
-                if(!flag){
-                    this._tipsLa.color=cc.Color.RED
-                }else{
-                    this._tipsLa.color=new cc.Color().fromHEX('#BBBBBB');
-                    this._tipsLa.active=false;
-                    let arr=tt.split('|');
-                    this.boxs[2].getChildByName('label').getComponent(cc.Label).string = arr[0]+'  '+arr[1];
-                    edit.string='';
+                if (!flag) {
+                    this._tipsLa.color = cc.Color.RED
+                } else {
+                    this._tipsLa.color = new cc.Color().fromHEX('#BBBBBB');
+                    this._tipsLa.active = false;
+                    let arr = tt.split('|');
+                    this.boxs[2].getChildByName('label').getComponent(cc.Label).string = arr[0] + '  ' + arr[1];
+                    edit.string = '';
                 }
             }
-        },this);
+        }, this);
     }
 
     onEnable() {
@@ -75,10 +75,10 @@ export default class NewClass extends cc.Component {
                 la.string = cc.ext.gameData.ZBSet.strategy;
             } else if (index == 2) {
                 la.string = cc.ext.gameData.ZBSet.search;
-                if(cc.ext.gameData.ZBSet.search=='随机选股'){
-                    this._tipsLa.active=true;
-                }else{
-                    this._tipsLa.active=false;
+                if (cc.ext.gameData.ZBSet.search == '随机选股') {
+                    this._tipsLa.active = true;
+                } else {
+                    this._tipsLa.active = false;
                 }
             } else if (index == 3) {
                 la.string = cc.ext.gameData.ZBSet.year;
@@ -169,47 +169,47 @@ export default class NewClass extends cc.Component {
                         this.boxs[5].getChildByName('label').getComponent(cc.Label).string = day + '';
                     }
                 })
-            }else if(this.setProId==0){
-                let downBox=this.downBoxs[1];
+            } else if (this.setProId == 0) {
+                let downBox = this.downBoxs[1];
                 let content = cc.find('New ScrollView/view/content', downBox);
 
-                let nodes=content.children;
-                let item=nodes[0];
-                let tt=0;
-                if(str=='均线'){
-                    tt=0;
-                }else if(str=='MACD'){
-                    tt=1;
-                }else if(str=='BOLL'){
-                    tt=2
-                }else if(str=='KDJ'){
-                    tt=3;
-                }else if(str=='EXPMA'){
-                    tt=4
-                }else if(str=='RSI'){
-                    tt=5;
-                }else if(str=='成交量'){
-                    tt=6;
+                let nodes = content.children;
+                let item = nodes[0];
+                let tt = 0;
+                if (str == '均线') {
+                    tt = 0;
+                } else if (str == 'MACD') {
+                    tt = 1;
+                } else if (str == 'BOLL') {
+                    tt = 2
+                } else if (str == 'KDJ') {
+                    tt = 3;
+                } else if (str == 'EXPMA') {
+                    tt = 4
+                } else if (str == 'RSI') {
+                    tt = 5;
+                } else if (str == '成交量') {
+                    tt = 6;
                 }
                 this.boxs[1].getChildByName('label').getComponent(cc.Label).string = this.tips[tt][0];
-                this.tips[tt].forEach((el,index)=>{
-                    if(!nodes[index]){
-                        let node=cc.instantiate(item);
+                this.tips[tt].forEach((el, index) => {
+                    if (!nodes[index]) {
+                        let node = cc.instantiate(item);
                         content.addChild(node);
                     }
-                    nodes[index].getComponent(cc.Label).string=el;
+                    nodes[index].getComponent(cc.Label).string = el;
                 })
 
-                if(nodes.length>this.tips[tt].length){
-                    for(let i=nodes.length;i<this.tips[tt].length;i++){
+                if (nodes.length > this.tips[tt].length) {
+                    for (let i = nodes.length; i < this.tips[tt].length; i++) {
                         nodes[i].destroy();
                     }
                 }
-            }else if(this.setProId==2){
-                if(str=='随机选股'){
-                    this._tipsLa.active=true;
-                }else{
-                    this._tipsLa.active=false;
+            } else if (this.setProId == 2) {
+                if (str == '随机选股') {
+                    this._tipsLa.active = true;
+                } else {
+                    this._tipsLa.active = false;
                 }
             }
 
@@ -231,15 +231,125 @@ export default class NewClass extends cc.Component {
                 cc.ext.gameData.ZBSet.ZLine = str;
             }
         } else if (name == 'startSMBtn') {
-            cc.ext.gameData.gameDatas=gameCfg.data;
-            gameCfg.GameType=2;
-            GameCfg.GameSet=cc.ext.gameData.ZBSet;
-            cc.director.loadScene('game');
-        }else if(name=='setZBBtn'){
-            GlobalEvent.emit('OPENSETLAYER','ZB');
-        }else if(name=='historyZBBtn'){
-            GlobalEvent.emit("OPENHISTORYLAYER",'ZB');
+
+            // cc.ext.gameData.gameDatas=gameCfg.data;
+            gameCfg.GameType = 2;
+            GameCfg.GameSet = cc.ext.gameData.ZBSet;
+            //  cc.director.loadScene('game');
+
+            this.zhibiaoStartGameSet();
+
+
+
+        } else if (name == 'setZBBtn') {
+            GlobalEvent.emit('OPENSETLAYER', 'ZB');
+        } else if (name == 'historyZBBtn') {
+            GlobalEvent.emit("OPENHISTORYLAYER", 'ZB');
         }
+    }
+
+    zhibiaoStartGameSet() {
+        let data = {
+            ktype: 10,
+            kstyle: 0,
+            code: null,
+            from: null,
+            total: parseInt(cc.ext.gameData.ZBSet.KLine),
+            to: 0,
+        }
+        let items
+        if (cc.ext.gameData.ZBSet.search == '随机选股') {
+            let le = parseInt(Math.random() * stocklist.length);
+            items = stocklist[le].split('|');
+            data.code = items[0];
+            if (data.code < 600000) {
+                this.sendMessageToSocket();
+                return;
+            }
+        } else {
+            let dex;
+            let arrStr = cc.ext.gameData.ZBSet.search.split(' ');
+            for (let i = 0; i < stocklist.length; i++) {
+
+                if (stocklist[i].indexOf(arrStr[0]) != -1) {
+                    dex = i;
+                    break;
+                }
+
+                if (stocklist[i].indexOf(arrStr[1]) != -1) {
+                    dex = i;
+                    break;
+                }
+            }
+            if (dex) {
+                items = stocklist[dex].split('|');
+                data.code = items[0];
+            } else {
+                console.log('输入的股票代码不正确');
+                return;
+            }
+        }
+
+        if (cc.ext.gameData.ZBSet.ZLine == '周线') {
+            data.ktype = 11;
+        } else if (cc.ext.gameData.ZBSet.ZLine == '日线') {
+            data.ktype = 10;
+        }
+
+        if (cc.ext.gameData.ZBSet.year != '随机') {
+            //时间
+            let seletTime = cc.ext.gameData.ZBSet.year + '' + cc.ext.gameData.ZBSet.month + '' + cc.ext.gameData.ZBSet.day
+            if (parseInt(seletTime) < parseInt(items[2])) {
+                //时间不对
+                console.log('时间不能早与股票创建时间');
+            }
+
+            else if (parseInt(seletTime) > parseInt(items[3])) {
+                if (parseInt(items[3]) != 0) {
+                    console.log('时间不能大与股票结束时间');
+                    return;
+                }
+            }
+        } else {
+            let start = items[2], end = items[3], sc;
+            if (end == 0) {
+                sc = new Date().getTime();
+            } else {
+                let year = end.slice(0, 4);
+                let month = end.slice(4, 6);
+                let day = end.slice(6);
+
+                let d = new Date(year + '-' + month + '-' + day);
+
+                sc = d.getTime();
+            }
+            let year = start.slice(0, 4);
+            let month = start.slice(4, 6);
+            let day = start.slice(6);
+
+
+            let d = new Date(year + '-' + month + '-' + day);
+            ///console.log(d); 
+            let t = d.getTime();
+
+            let s = Math.random() * (sc - t) + t;
+
+            let f = new Date(s);
+
+            {
+                let ye = f.getFullYear();
+                let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+
+                let da = f.getDate() >= 10 ? f.getDate() : '0' + (f.getDate());
+
+                data.from = ye + '' + mon + '' + da;
+            }
+            GameCfg.data[0].data = [];
+            GameCfg.data[0].name = items[1];
+            GameCfg.data[0].code = items[0];
+            GameCfg.data[0].circulate = items[4];
+        }
+        GlobalEvent.emit('onCmdQuoteQuery', data);
     }
 
 }

@@ -1,0 +1,104 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package pb;
+option go_package = ".;pb";
+
+
+import "common.proto";
+
+
+// 玩家的游戏属性
+enum GamePropertyId {
+	Gold = 0;				// 金币
+	Exp = 1;				// 经验
+	Level = 2;				// 等级
+	ShuangMang_Gold = 3;	// 双盲本月当前金币
+
+	Max = 30;	// 最大属性
+}
+
+// 玩家的游戏数据
+message GameData {
+	int32 uid = 1;
+	string nickname = 2;
+	string icon = 3;
+	repeated int64 properties = 4;
+}
+
+
+// 玩家游戏属性
+message GamePropertyItem {
+	   id = 1;	// 属性ID
+	int64 value = 2;		// 属性值
+}
+message GameProperties {
+	repeated GamePropertyItem items = 1;
+}
+
+
+
+
+
+// 登录游戏服
+message CmdGameLogin {
+	int32 uid    = 1; // 玩家ID
+	string token = 2; // 登录服返回的token
+}
+// 登录游戏服应答
+message CmdGameLoginReply {
+	ErrorInfo result = 1;	// 登录结果
+	GameData data = 2; 		// 玩家的游戏数据
+}
+
+
+// 上传头像
+message CmdUploadIcon {
+	int32 uid    = 1;	// 玩家ID
+	bytes icon = 2;		// 玩家头像数据（不能大于500K，客户端先将原图处理再上传）
+}
+// 上传头像应答(修改成功后，ErrorInfo消息的err字段里面保存头像的URL)
+// 应答消息：ErrorInfo
+
+
+// 更改昵称
+message CmdEditNick {
+	int32 uid    = 1;	// 玩家ID
+	string nick = 2;	// 新昵称
+}
+// 更改昵称应答(修改成功后，ErrorInfo消息的err字段里面保存新的昵称)
+// 应答消息：ErrorInfo
+
+
+// 更改头像
+message CmdEditIcon {
+	int32 uid    = 1;	// 玩家ID
+	string icon = 2;	// 玩家头像URL
+}
+// 更改头像应答(修改成功后，ErrorInfo消息的err字段里面保存头像的URL)
+// 应答消息：ErrorInfo
+
+
+// 游戏属性
+message GameProperty {
+	GamePropertyId id = 1;	// 属性ID
+	int32 oldValue = 2;		// 旧属性值
+	int32 curValue = 3;		// 当前属性值
+}
+// 同步游戏属性
+message SyncGameProperty {
+	repeated GameProperty properties = 1; // 属性数组
+}

@@ -5,7 +5,7 @@ import GameCfg from "./GameCfg";
 import Game = cc.Game;
 
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -112,7 +112,6 @@ export default class NewClass extends cc.Component {
             this.updataLabel(cc.ext.beg_end[1]);
         }, this);
 
-
         let calDisY = 0;
         let calDisX = 0;
         let num = 90;
@@ -120,13 +119,13 @@ export default class NewClass extends cc.Component {
         //设置画布大小
         GlobalEvent.on('setDrawing', (falg) => {
             this.drawBordWidth = falg ? (this.drawBordWidth + 164) : (this.drawBordWidth - 164);
-           this.setDrawing();
+            this.setDrawing();
         }, this);
 
-        GlobalEvent.on(EventCfg.SET_DRAW_SIZE,(falg)=>{
-            this.drawBordWidth = falg ? (this.drawBordWidth - 206) : (this.drawBordWidth +206);
+        GlobalEvent.on(EventCfg.SET_DRAW_SIZE, (falg) => {
+            this.drawBordWidth = falg ? (this.drawBordWidth - 206) : (this.drawBordWidth + 206);
             this.setDrawing();
-        },this);
+        }, this);
 
 
         //开始
@@ -316,7 +315,7 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-        if (cc.ext.gameData.gameDatas) {
+        if (GameCfg.data) {
             this.initData();
         }
     }
@@ -465,7 +464,6 @@ export default class NewClass extends cc.Component {
 
         cc.ext.beg_end[1] = GameCfg.huizhidatas;
         cc.ext.beg_end[0] = cc.ext.beg_end[1] - this.initDrawNumber;
-
         cc.ext.hz_width = this.drawBordWidth / this.initDrawNumber;
 
         //绘制的数据
@@ -500,7 +498,6 @@ export default class NewClass extends cc.Component {
                         //平均的位置
                         let MAY = (sumUp / GameCfg.MAs[i]);
                         this.MaList[index].push(MAY);
-
                     }
                 }
             } else {
@@ -569,15 +566,13 @@ export default class NewClass extends cc.Component {
 
     //曲线MA
     onDrawMA(index) {
-
-
         if (this.MaList[index] == 'null') {
             return;
         }
-
         let drawBox = 340, initY = 0, madata = 0;
         //每段数据绘制
         for (let i = 0; i < GameCfg.MAs.length; i++) {
+
             if (index >= GameCfg.MAs[i]) {
                 //平均的位置
                 let preMAY = (this.MaList[index - 1][i] - this.bottomValue) / this.disValue * drawBox + initY;
@@ -698,12 +693,12 @@ export default class NewClass extends cc.Component {
                 this.drawMA.node.active = false;
             }
             if (GameCfg.GameSet.select != 'BOLL') {
-                    this.drawBOLL.node.active=false;
+                this.drawBOLL.node.active = false;
             }
 
-            setTimeout(()=>{
-                GlobalEvent.emit('setDrawing',true);
-           },500);
+            setTimeout(() => {
+                GlobalEvent.emit('setDrawing', true);
+            }, 500);
 
         }
 
@@ -741,8 +736,8 @@ export default class NewClass extends cc.Component {
         DrawUtils.drawClear(ctx);
     }
 
-    setDrawing(){
-      let  num = parseInt(this.drawBordWidth / cc.ext.hz_width + '');
+    setDrawing() {
+        let num = parseInt(this.drawBordWidth / cc.ext.hz_width + '');
         cc.ext.beg_end[1] = GameCfg.huizhidatas;
         cc.ext.beg_end[0] = cc.ext.beg_end[1] - num;
         if (cc.ext.beg_end[0] <= 0) {
@@ -751,6 +746,5 @@ export default class NewClass extends cc.Component {
         this.initDrawBg();
         GlobalEvent.emit('onDraw');
     }
-
 
 }

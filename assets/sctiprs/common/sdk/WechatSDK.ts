@@ -1,28 +1,28 @@
 import HttpMgr from "../net/HttpMgr";
 import HttpUtils from "../net/HttpUtils";
 
-export default class WechatSDK{
-    static _instance=null;
+export default class WechatSDK {
+    static _instance = null;
 
-    static getInstance(){
-        if(!this._instance){
-            this._instance=new WechatSDK();
+    static getInstance() {
+        if (!this._instance) {
+            this._instance = new WechatSDK();
         }
         return this._instance;
     }
 
     //用户登入
-    login(call){
-        let self=this;
-        if(!wx){return}
-         wx.login({
-            success(res){
-                let code=res.code;
+    login(call) {
+        let self = this;
+        if (!wx) { return }
+        wx.login({
+            success(res) {
+                let code = res.code;
                 wx.getSetting({
-                    success(res){
-                        if(res.authSetting['scope.userInfo']){
-                            self.getUserInfo1(code,null,call);
-                        }else{
+                    success(res) {
+                        if (res.authSetting['scope.userInfo']) {
+                            self.getUserInfo1(code, null, call);
+                        } else {
                             console.log("没有授权下一步是wx.createUserInfoButton")
                             let systemInfo = wx.getSystemInfoSync()
                             let button = wx.createUserInfoButton({
@@ -34,7 +34,7 @@ export default class WechatSDK{
                                     left: systemInfo.screenWidth * 0.5 - 88,
                                     top: systemInfo.screenHeight * 0.7,
                                     width: 146,
-                                     height: 56,
+                                    height: 56,
                                     lineHeight: 40,
                                     color: '#000000',
                                     textAlign: 'center',
@@ -55,38 +55,41 @@ export default class WechatSDK{
     }
 
     //获取用户信息
-    getUserInfo1(code,btn,call){
-        let self=this;
+    getUserInfo1(code, btn, call) {
+        let self = this;
         wx.getUserInfo({
-            success(res){
-                const webUserInfo=res.userInfo;
+            success(res) {
+                const webUserInfo = res.userInfo;
                 console.log(webUserInfo);
-                cc.ext.gameData.userName=webUserInfo.nickName;
-                cc.ext.gameData.sex=webUserInfo.gender;
-                cc.ext.gameData.headimgurl=webUserInfo.avatarUrl;
+                cc.ext.gameData.userName = webUserInfo.nickName;
+                cc.ext.gameData.sex = webUserInfo.gender;
+                cc.ext.gameData.headimgurl = webUserInfo.avatarUrl;
 
-                btn&&(btn.destroy())
-                self.onLoginCodeHttpRequest(code,call);
+                btn && (btn.destroy())
+                self.onLoginCodeHttpRequest(code, call);
             }
         })
     }
 
     //登入CODE请求
-    onLoginCodeHttpRequest(code,call){
-        let url;
-        let data={};
+    onLoginCodeHttpRequest(code, call) {
+        let url = 'http://192.168.100.198:80';
 
-        if(url){
-            HttpUtils.sendRequest(url,data,(res)=>{
+        if (url) {
 
-                call&&(call(res.data.openid));
-
+            let loginInfo = {
+                account: code,
+                type: 2,
+                from: 8888,
+                pwd: ''
+            };
+            console.log(loginInfo);
+            HttpMgr.getInstance().loginWeb(code, loginInfo, call, () => {
+                console.log('onLoginCodeHttpRequest err');
             })
-        }else{
-            call&&(call());
+        } else {
+            call && (call());
         }
-
-
     }
 
 }

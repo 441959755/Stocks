@@ -1,8 +1,6 @@
 import GlobalEvent from "../../Utils/GlobalEvent";
 import LoadUtils from "../../Utils/LoadUtils";
 
-let protoBuf = require('protobuf');
-
 import WebSocketIOMgr from "./WebSocketIOMgr";
 
 export default class NetMsgMgr {
@@ -45,7 +43,7 @@ export default class NetMsgMgr {
     onInitProto(fileName, packageName, callback?) {
 
         LoadUtils.loadRes(fileName, (protoString) => {
-            console.log(protoBuf);
+
             let Builder = protoBuf.protoFromString(protoString);
 
             let protoBuild = Builder.build(packageName);
@@ -82,45 +80,5 @@ export default class NetMsgMgr {
         this.sioMgr.send(data);
 
     }
-
-    sendTestMsgReq(data) {
-
-        let protoBuild = this._protoBuild[this._pb];
-        console.log(protoBuild);
-        if (protoBuild) {
-            let info = new protoBuild.CmdQuoteQuery();
-            console.log(info);
-            info.ktype = 10;
-
-            let le = Math.random() * cc.ext.stocklist.length;
-            let datas = cc.ext.stocklist[le].split('|');
-            let code = data[0];
-
-            let start=data[2], end;
-            if (datas[3] == 0) {
-                let date = new Date();
-                let year = date.getFullYear();
-                let month = date.getMonth() + 1;
-                let mo;
-                mo = month < 10 ? '0' + month : month;
-                let da;
-                let day = date.getDate();
-                da = day < 10 ? '0' + day : day;
-                end = year + '' + mo + '' + da;
-            }else{
-                end=data[3];
-            }
-            let time=Math.random()*start+(end-start);
-            info.code=code;
-            info.from=start;
-            info.total=300;
-            info.to=end;
-            info.kstyle=0;
-            let buffer=info.toArrayBuffer();
-            console.log(buffer);
-             this.sendMessage(buffer);
-        }
-    }
-
 
 }

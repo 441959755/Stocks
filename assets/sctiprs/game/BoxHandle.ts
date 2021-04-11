@@ -2,7 +2,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -26,9 +26,9 @@ export default class NewClass extends cc.Component {
 
     timerCall = null;
 
-    inotyBox:cc.Node=null;
+    inotyBox: cc.Node = null;
 
-    lZoom:cc.Toggle=null;
+    lZoom: cc.Toggle = null;
 
     onLoad() {
         GlobalEvent.on('updataLabel', (inde) => {
@@ -43,7 +43,7 @@ export default class NewClass extends cc.Component {
                 info.push(parseFloat(datas[inde - 1].close).toFixed(2));
                 info.push(parseInt(datas[inde - 1].value));
                 info.push(parseInt(parseInt(datas[inde - 1].price) / 10000 + '') + 'w');
-                info.push(parseFloat(datas[inde - 1].Rate) + '%');
+                info.push(parseFloat(datas[inde - 1].Rate).toFixed(2) + '%');
                 let zd = datas[inde - 1].close - datas[inde - 2].close;
                 info.push(zd.toFixed(2));
                 let zf = zd / datas[inde - 2].close;
@@ -62,11 +62,11 @@ export default class NewClass extends cc.Component {
                         this.tipsText[index].node.color = new cc.Color().fromHEX('#AF84D1');
                     }
                 }
-                if(index>=8&&index<=9){
-                    if(el<0){
-                       this.tipsText[index].node.color= new cc.Color().fromHEX('#76B87E');
-                    }else{
-                        this.tipsText[index].node.color=cc.Color.RED;
+                if (index >= 8 && index <= 9) {
+                    if (el < 0) {
+                        this.tipsText[index].node.color = new cc.Color().fromHEX('#76B87E');
+                    } else {
+                        this.tipsText[index].node.color = cc.Color.RED;
                     }
                 }
                 this.tipsText[index].string = el;
@@ -78,9 +78,9 @@ export default class NewClass extends cc.Component {
             this.timerCall = null;
             this.tipsBox.active = true;
             if (point >= cc.winSize.width / 2) {
-                if(this.lZoom.isChecked){
-                    this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2+this.inotyBox.width;
-                }else{
+                if (this.lZoom.isChecked) {
+                    this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2 + this.inotyBox.width;
+                } else {
                     this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2;
                 }
             } else {
@@ -103,33 +103,38 @@ export default class NewClass extends cc.Component {
         }, this);
     }
 
-    start(){
+    start() {
+        let nodes = this.node.children;
+        if (GameCfg.GameType == 1) {
+            nodes[4].active = false;
+        }
+
         //训练指标
-        if(GameCfg.GameType==2){
-           // this.node.active=false;
-            let nodes=this.node.children;
-            nodes[0].active=false;
-            nodes[1].active=false;
-            nodes[2].active=false;
-            nodes[3].active=false;
-            this.rZoom.isChecked=true;
+        else if (GameCfg.GameType == 2) {
+            // this.node.active=false;
+
+            nodes[0].active = false;
+            nodes[1].active = false;
+            nodes[2].active = false;
+            nodes[3].active = false;
+            this.rZoom.isChecked = true;
             GlobalEvent.emit('labelPoint', cc.winSize.width + this.rightBox.width / 2 - 150);
         }
     }
 
     setBGColor() {
-        this.inotyBox=this.node.children[4];
-        this.lZoom=this.inotyBox.getChildByName('lZoomBtn').getComponent(cc.Toggle);
-        this.lZoom.node.children[0].active=true;
-        this.inotyBox.x=-cc.winSize.width/2-this.inotyBox.width/2;
+        this.inotyBox = this.node.children[4];
+        this.lZoom = this.inotyBox.getChildByName('lZoomBtn').getComponent(cc.Toggle);
+        this.lZoom.node.children[0].active = true;
+        this.inotyBox.x = -cc.winSize.width / 2 - this.inotyBox.width / 2;
         //黑
         if (GameCfg.GameSet.isBW) {
             this.rightBox = this.node.getChildByName('rightBox');
             this.tipsBox = this.node.getChildByName('tipsBox');
             this.node.getChildByName('rightBox1').active = false;
 
-            this.inotyBox.getChildByName('bg').active=true;
-            this.inotyBox.getChildByName('label').color=cc.Color.WHITE;
+            this.inotyBox.getChildByName('bg').active = true;
+            this.inotyBox.getChildByName('label').color = cc.Color.WHITE;
 
         }
         //白
@@ -138,8 +143,8 @@ export default class NewClass extends cc.Component {
             this.tipsBox = this.node.getChildByName('tipsBox1');
             this.node.getChildByName('rightBox').active = false;
 
-            this.inotyBox.getChildByName('bg').active=false;
-            this.inotyBox.getChildByName('label').color=cc.Color.BLACK;
+            this.inotyBox.getChildByName('bg').active = false;
+            this.inotyBox.getChildByName('label').color = cc.Color.BLACK;
         }
         this.tipsBox.children.forEach(el => {
             this.tipsText.push(el.getComponent(cc.Label));
@@ -201,16 +206,16 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit('labelPoint', cc.winSize.width - this.rightBox.width / 2 - 150);
             }
             GlobalEvent.emit('setDrawing', this.rZoom.isChecked);
-        }else if(data=='lZoomBtn'){
-            if(this.lZoom.isChecked){
-                this.lZoom.node.children[0].active=false;
-                this.inotyBox.x=-cc.winSize.width/2+this.inotyBox.width/2;
+        } else if (data == 'lZoomBtn') {
+            if (this.lZoom.isChecked) {
+                this.lZoom.node.children[0].active = false;
+                this.inotyBox.x = -cc.winSize.width / 2 + this.inotyBox.width / 2;
 
-            }else{
-                this.lZoom.node.children[0].active=true;
-                this.inotyBox.x=-cc.winSize.width/2-this.inotyBox.width/2;
+            } else {
+                this.lZoom.node.children[0].active = true;
+                this.inotyBox.x = -cc.winSize.width / 2 - this.inotyBox.width / 2;
             }
-            GlobalEvent.emit(EventCfg.SET_DRAW_SIZE,this.lZoom.isChecked);
+            GlobalEvent.emit(EventCfg.SET_DRAW_SIZE, this.lZoom.isChecked);
         }
     }
 }
