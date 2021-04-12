@@ -84,8 +84,12 @@ export default {
         xhr.setRequestHeader("Content-Type", "application/x-protobuf");
         // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         //xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+        //   if (window.wx) {
+        // xhr.responseType = 'text';
+        // } else {
+        //     xhr.responseType = "arraybuffer";
+        // }
 
-        xhr.responseType = "arraybuffer";
         //console.log(data);
         xhr.send(data);
     }

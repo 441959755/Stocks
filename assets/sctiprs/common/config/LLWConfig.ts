@@ -3,8 +3,8 @@ import PlatDefine from "./PlatDefine";
 const CHANNELID = '';
 const VERSION = 0;
 const GAMEID = 0;
-//const PLATTYPE = PlatDefine.PLAT_WECHAT;
-const PLATTYPE = PlatDefine.PLAT_WEB;
+const PLATTYPE = PlatDefine.PLAT_WECHAT;
+//const PLATTYPE = PlatDefine.PLAT_WEB;
 
 export default class LLWConfig {
     static get CHANNELID() {

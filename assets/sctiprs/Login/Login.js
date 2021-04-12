@@ -48,6 +48,8 @@ cc.Class({
         // //TODO  接DSK
         cc.ext.llwSDK = LLWSDK.getSDK()
         cc.ext.llwSDK.login((decoded) => {
+            console.log(decoded.token + decoded.uid + decoded.gameAddr);
+
             if (decoded) {
                 decoded.token && (cc.ext.gameData.token = decoded.token);
                 decoded.uid && (cc.ext.gameData.userID = decoded.uid);

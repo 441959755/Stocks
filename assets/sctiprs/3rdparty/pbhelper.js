@@ -43,8 +43,8 @@ PBHelper.prototype = {
     //登人返回信息
     onCmdLoginConvertToData(buff) {
 
-        let decoded = CmdLoginReply.decode(new Uint8Array(buff));
-
+        // let decoded = CmdLoginReply.decode(new Uint8Array(buff));
+        let decoded = CmdLoginReply.decode(buff);
         console.log('onCmdLoginConvertToData:' + JSON.stringify(decoded));
 
         if (decoded.err && decoded.err.code == -1) {
@@ -99,12 +99,7 @@ PBHelper.prototype = {
 
     onCmdGameOverConvertToBuff(data) {
         let message = CmdGameOver.create({
-            uid: gameData.userID,
-            g_type: GameCfg.GameType,
-            quotes_code: GameCfg.data[0].code,
-            k_type: GameCfg.data[0].ktype,
-            k_from: GameCfg.datas.items[0].timestamp,
-            k_to: GameCfg.datas.items[GameCfg.datas.items.length - 1].timestamp,
+
 
 
         })
