@@ -67,12 +67,25 @@ export default class NewClass extends cc.Component {
         }, this);
 
         GlobalEvent.on('OPENHISTORYLAYER', (str) => {
-            if (!this.historyLayer) {
-                this.historyLayer = cc.instantiate(this.historyPre)
-                this.node.addChild(this.historyLayer);
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            let openHistoryLayer = function () {
+                if (!this.historyLayer) {
+                    this.historyLayer = cc.instantiate(this.historyPre)
+                    this.node.addChild(this.historyLayer);
+                }
+                this.historyLayer.active = true;
+                this.historyLayer.getComponent('SMHistory').historyType = str;
             }
-            this.historyLayer.active = true;
-            this.historyLayer.getComponent('SMHistory').historyType = str;
+            if (str == 'SM') {
+                //SM的要获取服务器消息
+                this.acquireSMhistoryInfo(() => {
+                    openHistoryLayer && (openHistoryLayer());
+                });
+            } else {
+                //其他在本地缓存取
+                openHistoryLayer && (openHistoryLayer());
+            }
+
         }, this);
 
         GlobalEvent.on('OPENSETLAYER', (str) => {
@@ -137,8 +150,16 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('onCmdQuoteQuery');
     }
 
-    onCmdQuoteQuery(data) {
+    onCmdGameStart(data) {
         GlobalEvent.emit('EventCfg.LOADINGSHOW');
+        if (socket) {
+            socket.send(4003, PB.onCmdGameStartConvertToBuff(data), (info) => {
+                console.log('onCmdGameStart' + info);
+            })
+        }
+    }
+
+    onCmdQuoteQuery(data) {
         if (socket) {
             socket.send(2003, PB.onCmdQuoteQueryConvertToBuff(data), (info) => {
                 console.log(info);
@@ -149,7 +170,6 @@ export default class NewClass extends cc.Component {
                     let mon = date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
                     let da = date.getDate() >= 10 ? date.getDate() : '0' + (date.getDate());
                     let fromDate = ye + '-' + mon + '-' + da;
-
                     let data = {
                         day: fromDate,
                         open: el.open,
@@ -162,12 +182,20 @@ export default class NewClass extends cc.Component {
                     }
                     GameCfg.data[0].data.push(data);
                 });
+                console.log(GameCfg.data);
                 cc.ext.gameData.gameDatas = GameCfg.data;
                 cc.director.loadScene('game');
             })
 
         } else {
             console.log('socket err');
+        }
+
+    }
+
+    acquireSMhistoryInfo() {
+        if (socket) {
+
         }
 
     }

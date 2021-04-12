@@ -2,7 +2,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 
@@ -17,9 +17,10 @@ export default class NewClass extends cc.Component {
     onLoad() {
         //游戏结算
         GlobalEvent.on(EventCfg.GAMEOVEER, (flag) => {
-            setTimeout(()=>{
+
+            setTimeout(() => {
                 this.finalLayer.active = flag;
-            },100)
+            }, 100)
 
         }, this)
 
@@ -41,7 +42,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.HELPSHOW);
     }
 
-    setColor(){
+    setColor() {
         if (GameCfg.GameSet.isBW) {
             GameCfg.MAColor[0] = new cc.Color().fromHEX('#ffffff');
             GameCfg.MAColor[1] = new cc.Color().fromHEX('#ebeb12');
@@ -110,8 +111,8 @@ export default class NewClass extends cc.Component {
 
     }
 
-    initData(){
-        GameCfg.MAs=[];
+    initData() {
+        GameCfg.MAs = [];
         let j = 0;
         if (GameCfg.GameType == 1) {
 
@@ -120,70 +121,70 @@ export default class NewClass extends cc.Component {
                     GameCfg.MAs[j++] = GameCfg.GameSet['MA' + i + 'Date'];
                 }
             }
-        }else if(GameCfg.GameType==2){
-            GameCfg.VOLGraph=[];
+        } else if (GameCfg.GameType == 2) {
+            GameCfg.VOLGraph = [];
 
-            if(GameCfg.GameSet.select=='均线'){
-                if(GameCfg.GameSet.strategy=='股价穿越均线'){
+            if (GameCfg.GameSet.select == '均线') {
+                if (GameCfg.GameSet.strategy == '股价穿越均线') {
                     GameCfg.MAs.push(GameCfg.GameSet.MA[0]);
-                }else if(GameCfg.GameSet.strategy=='均线交叉'){
-                    GameCfg.MAs.push(Math.min(GameCfg.GameSet.MA[1],GameCfg.GameSet.MA[2]));
-                    GameCfg.MAs.push(Math.max(GameCfg.GameSet.MA[1],GameCfg.GameSet.MA[2]));
-                }else if(GameCfg.GameSet.strategy=='组合训练'){
-                    let ma=[];
-                    ma.push(GameCfg.GameSet.MA[0],GameCfg.GameSet.MA[1],GameCfg.GameSet.MA[2])
-                    ma.sort((a,b)=>{return a - b;})
-                    GameCfg.MAs=ma;
+                } else if (GameCfg.GameSet.strategy == '均线交叉') {
+                    GameCfg.MAs.push(Math.min(GameCfg.GameSet.MA[1], GameCfg.GameSet.MA[2]));
+                    GameCfg.MAs.push(Math.max(GameCfg.GameSet.MA[1], GameCfg.GameSet.MA[2]));
+                } else if (GameCfg.GameSet.strategy == '组合训练') {
+                    let ma = [];
+                    ma.push(GameCfg.GameSet.MA[0], GameCfg.GameSet.MA[1], GameCfg.GameSet.MA[2])
+                    ma.sort((a, b) => { return a - b; })
+                    GameCfg.MAs = ma;
                 }
-            }else if(GameCfg.GameSet.select=='MACD'){
-                if(GameCfg.GameSet.strategy=='MACD金叉'){
+            } else if (GameCfg.GameSet.select == 'MACD') {
+                if (GameCfg.GameSet.strategy == 'MACD金叉') {
 
-                }else if(GameCfg.GameSet.strategy=='0轴穿越'){
+                } else if (GameCfg.GameSet.strategy == '0轴穿越') {
 
-                }else if(GameCfg.GameSet.strategy=='柱最大值转向'){
+                } else if (GameCfg.GameSet.strategy == '柱最大值转向') {
 
-                }else if(GameCfg.GameSet.strategy=='MACD背离'){
+                } else if (GameCfg.GameSet.strategy == 'MACD背离') {
 
-                }else if(GameCfg.GameSet.strategy=='经典用法'){
-
-                }
-           }else if(GameCfg.GameSet.select=='BOLL'){
-                if(GameCfg.GameSet.strategy=='布林带中轨'){
-
-                }else if(GameCfg.GameSet.strategy=='单边突破上轨'){
-
-                }else if(GameCfg.GameSet.strategy=='上下轨间震荡'){
-
-                }else if(GameCfg.GameSet.strategy=='金典用法'){
+                } else if (GameCfg.GameSet.strategy == '经典用法') {
 
                 }
-            }else if(GameCfg.GameSet.select=='KDJ'){
-                if(GameCfg.GameSet.strategy=='超买超卖'){
+            } else if (GameCfg.GameSet.select == 'BOLL') {
+                if (GameCfg.GameSet.strategy == '布林带中轨') {
 
-                }else if(GameCfg.GameSet.strategy=='KDJ金叉'){
+                } else if (GameCfg.GameSet.strategy == '单边突破上轨') {
 
-                }else if(GameCfg.GameSet.strategy=='KDJ背离'){
+                } else if (GameCfg.GameSet.strategy == '上下轨间震荡') {
 
-                }else if(GameCfg.GameSet.strategy=='金典用法'){
-
-                }
-            }else if(GameCfg.GameSet.select=='EXPMA'){
-                if(GameCfg.GameSet.strategy=='EXPMA金叉'){
-
-                }else if(GameCfg.GameSet.strategy=='经典用法'){
+                } else if (GameCfg.GameSet.strategy == '金典用法') {
 
                 }
-            }else if(GameCfg.GameSet.select=='RSI'){
-                if(GameCfg.GameSet.strategy=='RSI金叉'){
+            } else if (GameCfg.GameSet.select == 'KDJ') {
+                if (GameCfg.GameSet.strategy == '超买超卖') {
 
-                }else if(GameCfg.GameSet.strategy=='超买超卖'){
+                } else if (GameCfg.GameSet.strategy == 'KDJ金叉') {
 
-                }else if(GameCfg.GameSet.strategy=='经典用法'){
+                } else if (GameCfg.GameSet.strategy == 'KDJ背离') {
+
+                } else if (GameCfg.GameSet.strategy == '金典用法') {
 
                 }
-            }else if(GameCfg.GameSet.select=='成交量'){
-                if(GameCfg.GameSet.strategy=='量柱和均量线'){
-                    GameCfg.VOLGraph=GameCfg.GameSet.VOL;
+            } else if (GameCfg.GameSet.select == 'EXPMA') {
+                if (GameCfg.GameSet.strategy == 'EXPMA金叉') {
+
+                } else if (GameCfg.GameSet.strategy == '经典用法') {
+
+                }
+            } else if (GameCfg.GameSet.select == 'RSI') {
+                if (GameCfg.GameSet.strategy == 'RSI金叉') {
+
+                } else if (GameCfg.GameSet.strategy == '超买超卖') {
+
+                } else if (GameCfg.GameSet.strategy == '经典用法') {
+
+                }
+            } else if (GameCfg.GameSet.select == '成交量') {
+                if (GameCfg.GameSet.strategy == '量柱和均量线') {
+                    GameCfg.VOLGraph = GameCfg.GameSet.VOL;
                 }
             }
 

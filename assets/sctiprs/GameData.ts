@@ -119,4 +119,18 @@ export default class GameData {
         cc.sys.localStorage.setItem('ZBSet', JSON.stringify(val));
     }
 
+    private _properties;
+    //// 金币
+    // 1;				// 经验
+    //  2;				// 等级
+    // 3;	// 双盲本月当前金币
+    public get properties() {
+        return this._properties;
+    }
+
+    public set properties(val) {
+        this._properties = val;
+        cc.sys.localStorage.setItem('properties', JSON.stringify(val));
+    }
+
 }

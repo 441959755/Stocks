@@ -49,8 +49,9 @@ export default {
     sendXHRAB(url, data, handle, err?) {
         let xhr = cc.loader.getXMLHttpRequest();
 
-        xhr.overrideMimeType("text/plain; charset=x-user-defined");
-        xhr.responseType = "arraybuffer";
+        // xhr.overrideMimeType("text/plain; charset=x-user-defined");
+        // xhr.responseType = "arraybuffer";
+
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status >= 200) {
                 handle && handle(xhr.response);
@@ -60,7 +61,6 @@ export default {
                 //  err && err("404 page not found!");
             }
             else if (xhr.readyState === 3) {
-
                 console.log("Request dealing!");
                 // err && err("Request dealing!");
             }
@@ -77,14 +77,15 @@ export default {
                 console.log("Request hasn't been initiated!");
                 //  err && err("Request hasn't been initiated!");
             }
-            handle();
         }
 
         xhr.open('POST', url, true);
         //  xhr.setRequestHeader("Content-Type", "text/plain");
-        //  xhr.setRequestHeader("Content-Type", "application/x-protobuf");
-        // xhr.setRequestHeader('Content-Type', 'application/octet-stream');
-        // xhr.responseType = "arraybuffer";
+        xhr.setRequestHeader("Content-Type", "application/x-protobuf");
+        // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        //xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+
+        xhr.responseType = "arraybuffer";
         //console.log(data);
         xhr.send(data);
     }

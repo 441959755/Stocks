@@ -19,12 +19,11 @@ export default class HttpMgr {
     }
 
 
-    loginWeb(openId, loginInfo, call, err) {
+    loginWeb(openId, data, call, err) {
         let url = 'http://192.168.100.198:80/l';
 
-        let data = PB.onCmdLoginConvertToBuff(loginInfo);
-
         HttpUtils.sendXHRAB(url, data, (buff) => {
+            console.log(buff);
 
             let decoded = PB.onCmdLoginConvertToData(buff);
 
@@ -34,4 +33,6 @@ export default class HttpMgr {
 
         }, err);
     }
+
+
 }

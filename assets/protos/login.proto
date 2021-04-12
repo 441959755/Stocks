@@ -28,6 +28,8 @@ enum LoginType {
 	MobilePhoneId = 1;	// 手机号码
 	WeChat        = 2;	// 微信
 	QQ            = 3;	// QQ
+
+	WebTest       =99;
 }
 
 // 登录来源

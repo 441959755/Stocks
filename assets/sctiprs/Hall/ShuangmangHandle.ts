@@ -2,6 +2,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 
 import GameCfg from "../game/GameCfg";
+import GameData from "../GameData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -35,6 +36,7 @@ export default class NewClass extends cc.Component {
         }
         //点击历史记录
         else if (name == 'historySMBtn') {
+
             GlobalEvent.emit('OPENHISTORYLAYER', 'SM');
         }
         //点击月报
@@ -112,6 +114,8 @@ export default class NewClass extends cc.Component {
         GameCfg.data[0].name = items[1];
         GameCfg.data[0].code = items[0];
         GameCfg.data[0].circulate = items[4];
+        GameCfg.data[0].ktype = data.ktype;
+
         GlobalEvent.emit('onCmdQuoteQuery', data);
 
     }

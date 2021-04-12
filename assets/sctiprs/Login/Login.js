@@ -21,6 +21,8 @@ cc.Class({
         let PBHelper = require('pbhelper');
         let pbhelper = new PBHelper();
         global.PB = pbhelper;
+
+        global.gameData = cc.ext.gameData;
     },
 
     onLoad() {
@@ -46,22 +48,20 @@ cc.Class({
         // //TODO  接DSK
         cc.ext.llwSDK = LLWSDK.getSDK()
         cc.ext.llwSDK.login((decoded) => {
-            //    if (decoded) {
-            //        if (decoded.gameAddr) {
-            let socket = Socket(decoded.gameAddr);
-            global.socket = socket;
-            console.log(socket);
-            //   }
-            decoded.token && (cc.ext.gameData.token = decoded.token);
-            decoded.uid && (cc.ext.gameData.userID = decoded.uid);
-            this.enterHall();
-            // } else {
-
-            //     console.log('login err');
-            // }
+            if (decoded) {
+                decoded.token && (cc.ext.gameData.token = decoded.token);
+                decoded.uid && (cc.ext.gameData.userID = decoded.uid);
+                if (decoded.gameAddr) {
+                    let socket = Socket(decoded.gameAddr);
+                    global.socket = socket;
+                    setTimeout(() => {
+                        self.enterHall();
+                    }, 500)
+                }
+            } else {
+                console.log('login err');
+            }
         })
-
-        //  this.enterHall();
     },
 
     initData() {
@@ -122,18 +122,21 @@ cc.Class({
 
         socket.send(4001, PB.onCmdGameLoginConvertToBuff(), (info) => {
 
+            console.log(JSON.stringify(info));
             if (info && info.data) {
-                cc.ext.gameData.userID = info.data.uid;
-                cc.ext.gameData.userName = info.data.nickname;
+                gameData.userID = info.data.uid;
+                gameData.userName = info.data.nickname;
                 //   cc.ext.gameData.headimgurl = info.data.icon;
-                cc.ext.gameData.gold = info.data.properties[0];
-                cc.ext.gameData.exp = info.data.properties[1];
-                cc.ext.gameData.level = info.data.properties[2];
-                cc.ext.gameData.ShuangMang_Gold = info.data.properties[3];
-                cc.ext.gameData.maxExp = levelInfoCfg[cc.ext.gameData.level].max_exp;
-            }
+                // cc.ext.gameData.gold = info.data.properties[0];
+                // cc.ext.gameData.exp = info.data.properties[1];
+                // (cc.ext.gameData.level = info.da)ta.properties[2];
+                // cc.ext.gameData.ShuangMang_Gold = info.data.properties[3];
 
-            cc.director.loadScene('hall');
+                gameData.properties = info.data.properties;
+
+                cc.ext.gameData.maxExp = levelInfoCfg[gameData.properties[2]].max_exp;
+                cc.director.loadScene('hall');
+            }
         });
 
     },

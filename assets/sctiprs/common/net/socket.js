@@ -35,13 +35,13 @@ Socket.prototype = {
         }
     },
 
-    on(actionCode, cb) {
-        this.notification.on(actionCode.toString(), (event) => {
-            if (cb) {
-                cb(event.detail);
-            }
-        })
-    },
+    // on(actionCode, cb) {
+    //     this.notification.on(actionCode.toString(), (event) => {
+    //         if (cb) {
+    //             cb(event.detail);
+    //         }
+    //     })
+    // },
 
     send(actionCode, proto, callback) {
         if (this.ws.readyState == WebSocket.OPEN) {
@@ -59,11 +59,10 @@ Socket.prototype = {
             proto && (this.ws.send(proto));
         } else {
             console.log("send error. readyState = ", this.ws.readyState);
-            // setTimeout(() => {
-            //     this.send(actionCode, proto, callback);
-            // }, 1000);
-            callback(GameCfg.datas);
-
+            setTimeout(() => {
+                this.send(actionCode, proto, callback);
+            }, 1000);
+            // callback(GameCfg.datas);
         }
     },
 
@@ -75,7 +74,7 @@ Socket.prototype = {
 function Socket(host) {
     this.sequence = 0;
     this.queue = {};
-    if (!host) { host = 'ws://3000' }
+    //  if (!host) { host = 'ws://3000' }
     this.ws = new WebSocket(host);
     this.ws.binaryType = 'arraybuffer';
     this.ws.onmessage = this.message.bind(this);
@@ -86,8 +85,7 @@ function Socket(host) {
         console.log('ws onerror');
     }
     this.ws.onclose = this.onclose.bind(this);
-    this.notification = new cc.EventTarget();
-
+    //  this.notification = new cc.EventTarget();
 }
 
 var socket = null;

@@ -73,23 +73,33 @@ export default class WechatSDK {
 
     //登入CODE请求
     onLoginCodeHttpRequest(code, call) {
-        let url = 'http://192.168.100.198:80';
 
-        if (url) {
+        let loginInfo = {
+            account: code,
+            type: 2,
+            from: 8888,
+            pwd: ''
+        };
 
-            let loginInfo = {
-                account: code,
-                type: 2,
-                from: 8888,
-                pwd: ''
-            };
-            console.log(loginInfo);
-            HttpMgr.getInstance().loginWeb(code, loginInfo, call, () => {
-                console.log('onLoginCodeHttpRequest err');
-            })
-        } else {
-            call && (call());
+        console.log('loginInfo' + loginInfo);
+
+        let data = PB.onCmdLoginConvertToBuff(loginInfo);
+
+        let Uint8ArrayToString = function (fileData) {
+            var dataString = "";
+            for (var i = 0; i < fileData.length; i++) {
+                dataString += String.fromCharCode(fileData[i]);
+            }
+            return dataString
         }
+
+        data = Uint8ArrayToString(data);
+        console.log(data);
+
+        HttpMgr.getInstance().loginWeb(code, data, call, () => {
+            console.log('onLoginCodeHttpRequest err');
+        })
     }
+
 
 }

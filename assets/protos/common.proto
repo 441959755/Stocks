@@ -44,6 +44,8 @@ enum GameType {
 	ChaoGuDaSai = 11;	// 炒股大赛
 	GeGuJingChai = 12;	// 个股竞猜
 	DaPanJingChai = 13;	// 大盘竞猜
+
+	MaxGameType = 30;	// 最大游戏类型编号
 }
 
 // 消息ID
@@ -55,28 +57,39 @@ enum MessageId {
 	Cmd_Make_StockList = 103;	// 生成一个新的股票列表文件
 
 	// 同步
-	Sync_S2C_QuoteItem = 1000;		// 同步实时行情
-	Sync_S2C_GameProperty = 1001;	// 同步玩家游戏属性
+	Sync_S2C_QuoteItem = 1000;	// 同步实时行情
+	Sync_S2C_GameProperty = 1002;// 同步玩家游戏属性
+	Sync_S2C_GameCounter = 1004;// 同步输赢计数器
 
 	// 股票相关
 	Req_QuoteSubscribe = 2001;	// 订阅或取消订阅行情
-	Rep_QuoteSubscribe = 2002;	// 订阅或取消订阅行情响应
+	Rep_QuoteSubscribe = 2002;	// 订阅或取消订阅行情响应(无响应)
 	Req_QuoteQuery = 2003;		// 查询行情
-	Rep_QuoteQuery = 2004;		// 查询行情响应(无响应)
+	Rep_QuoteQuery = 2004;		// 查询行情响应
 	Req_QuoteEdit  = 2005;		// 编辑行情(废弃)
 	Req_StockEdit  = 2007;		// 编辑股票信息(废弃)
 
 	// 玩家信息相关
-	Req_Game_UploadIcon = 3001;		// 上传头像
-	Rep_Game_UploadIcon = 3002;		// 上传头像应答
-	Req_Game_EditNick = 3003;		// 更改昵称
-	Rep_Game_EditNick = 3004;		// 更改昵称应答
-	Req_Game_EditIcon = 3005;		// 更改头像
-	Rep_Game_EditIcon = 3006;		// 更改头像应答
+	Req_Game_UploadIcon = 3001;	// 上传头像
+	Rep_Game_UploadIcon = 3002;	// 上传头像应答
+	Req_Game_EditNick = 3003;	// 更改昵称
+	Rep_Game_EditNick = 3004;	// 更改昵称应答
+	Req_Game_EditIcon = 3005;	// 更改头像
+	Rep_Game_EditIcon = 3006;	// 更改头像应答
 
 	// 游戏相关
-	Req_Game_Login = 4001;		// 游戏服登录
-	Rep_Game_Login = 4002;		// 游戏服登录应答
+	Req_Game_Login = 4001;		// 登录游戏服
+	Rep_Game_Login = 4002;		// 登录游戏服应答
+	Req_Game_Start = 4003;		// 开始游戏
+	Rep_Game_Start = 4004;		// 开始游戏应答
+	Req_Game_Over = 4005;		// 結束游戏
+	Rep_Game_Over = 4006;		// 結束游戏应答
+	Req_Game_GameResult = 4007;	// 查询游戏结果
+	Rep_Game_GameResult = 4008;	// 查询游戏结果应答
+	Req_Game_SmxlReport = 4009;	// 查询双盲训练月报
+	Rep_Game_SmxlReport = 4010;	// 查询双盲训练月报应答
+	Req_Game_SmxlReset = 4011;	// 重置双盲训练
+	Rep_Game_SmxlReset = 4012;	// 重置双盲训练应答
 
 }
 
@@ -92,7 +105,7 @@ enum ErrorCode {
 
 message MessageHead {
 	sfixed32 message_id = 1;	// 消息ID
-	sfixed32 message_len = 2;		// 消息总长度（包括包头和包体）
+	sfixed32 message_len = 2;	// 消息总长度（包括包头和包体）
 }
 
 message ErrorInfo {

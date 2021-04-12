@@ -50,6 +50,7 @@ export default {
             code: "002439",
             data: [],
             circulate: 0,
+            ktype: 0,
         }
     ],
 

@@ -41,7 +41,7 @@ export default class NewClass extends cc.Component {
 
         //金币
         GlobalEvent.on(EventCfg.GOLDCHANGE, () => {
-            this.gold.string = cc.ext.gameData.gold;
+            this.gold.string = gameData.properties[0];
         }, this);
 
         //等级
@@ -92,7 +92,7 @@ export default class NewClass extends cc.Component {
     setUserInfo() {
         this.userExp.string = cc.ext.gameData.exp + '/' + cc.ext.gameData.maxExp;
         this.userLevel.string = 'LV:' + cc.ext.gameData.level || 0 + '';
-        this.gold.string = cc.ext.gameData.gold || 0 + '';
+        this.gold.string = gameData.properties[0] || 0 + '';
         this.brick.string = cc.ext.gameData.brick || 0 + '';
         this.UserName.string = cc.ext.gameData.userName || cc.ext.gameData.userID;
 
