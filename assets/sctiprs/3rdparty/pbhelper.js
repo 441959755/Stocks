@@ -22,6 +22,9 @@ let CmdGameOver = pb.pb.CmdGameOver;
 
 let ErrorInfo = pb.pb.ErrorInfo;
 
+let CmdQueryGameResult = pb.pb.CmdQueryGameResult;
+
+let CmdQueryGameResultReply = pb.pb.CmdQueryGameResultReply;
 function PBHelper() {
 
 }
@@ -75,6 +78,7 @@ PBHelper.prototype = {
         return decoded;
     },
 
+    //游戏开始
     onCmdGameStartConvertToBuff(data) {
         let message = CmdGameStart.create({
             game: data.ktype,
@@ -83,6 +87,7 @@ PBHelper.prototype = {
         return buff;
     },
 
+    //查询行情
     onCmdQuoteQueryConvertToBuff(data) {
         let message = CmdQuoteQuery.create({
             ktype: data.ktype,
@@ -97,12 +102,47 @@ PBHelper.prototype = {
         return buff;
     },
 
+    //游戏结束上传数据
     onCmdGameOverConvertToBuff(data) {
         let message = CmdGameOver.create({
-
-
-
+            result: {
+                uid: data.uid,
+                gType: data.g_type,
+                quotesCode: data.quotesCode,
+                kType: data.k_type,
+                kFrom: data.k_from,
+                kTo: data.k_to,
+                stockProfitRate: data.stock_profit_rate,
+                userProfitRate: data.user_profit_rate,
+                userCapital: data.user_capital,
+                userProfit: data.user_profit,
+                ts: data.ts,
+                rank: data.rank,
+            }
         })
+
+        let buff = CmdGameOver.encode(message).finish();
+        return buff;
+    },
+
+    //查询游戏结果
+    onCmdQueryGameResultConvertToBuff(data) {
+        let message = CmdQueryGameResult.create({
+            gType: data.g_type,
+            from: data.from,
+            to: data.to,
+            pageSize: data.page_size,
+        })
+
+        let buff = CmdQueryGameResult.encode(message).finish();
+        return buff;
+    },
+
+    //查询游戏结果应答
+    onCmdQueryGameResultReplyConvertToData(buff) {
+        let decode = CmdQueryGameResultReply.decode(new Uint8Array(buff));
+        console.log('查询游戏结果应答' + JSON.stringify(decode));
+        return decode;
     },
 
     selectBlackData(id, buff) {
@@ -122,6 +162,9 @@ PBHelper.prototype = {
             console.log('id:' + id + '跟新数据');
         } else if (id == 4004 || id == 4006) {
             data = ErrorInfo.decode(new Uint8Array(buff));
+            return data;
+        } else if (id == 4008) {
+            data = this.onCmdQueryGameResultReplyConvertToData(buff);
             return data;
         }
 

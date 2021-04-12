@@ -193,9 +193,26 @@ export default class NewClass extends cc.Component {
 
     }
 
-    acquireSMhistoryInfo() {
-        if (socket) {
+    acquireSMhistoryInfo(callBack) {
+        let data = new Date();
+        data.setDate(1);
+        data.setHours(0);
+        data.setSeconds(0);
+        data.setMinutes(0);
 
+        if (socket) {
+            let data1 = {
+                g_type: 1,
+                from: data.getTime(),
+                to: new Date().getTime(),
+                page_size: 100,
+            }
+
+            socket.send(4007, PB.onCmdQueryGameResultConvertToBuff(), (info) => {
+
+
+            }
+            );
         }
 
     }
