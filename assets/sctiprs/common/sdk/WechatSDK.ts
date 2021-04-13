@@ -83,23 +83,21 @@ export default class WechatSDK {
 
         console.log('loginInfo' + loginInfo);
 
-        let data = PB.onCmdLoginConvertToBuff(loginInfo);
+        // let data = PB.onCmdLoginConvertToBuff(loginInfo);
 
-        let Uint8ArrayToString = function (fileData) {
-            var dataString = "";
-            for (var i = 0; i < fileData.length; i++) {
-                dataString += String.fromCharCode(fileData[i]);
-            }
-            return dataString
-        }
+        // let Uint8ArrayToString = function (fileData) {
+        //     var dataString = "";
+        //     for (var i = 0; i < fileData.length; i++) {
+        //         dataString += String.fromCharCode(fileData[i]);
+        //     }
+        //     return dataString
+        // }
+        // data = Uint8ArrayToString(data);
 
-        data = Uint8ArrayToString(data);
-        console.log(data);
 
-        HttpMgr.getInstance().loginWeb(code, data, call, () => {
+
+        HttpMgr.getInstance().loginWeb(code, loginInfo, call, () => {
             console.log('onLoginCodeHttpRequest err');
         })
     }
-
-
 }

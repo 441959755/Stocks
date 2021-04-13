@@ -22,19 +22,25 @@ export default class HttpMgr {
     loginWeb(openId, data, call, err) {
         let url = 'http://192.168.100.198:80/l';
 
-        HttpUtils.sendXHRAB(url, data, (buff) => {
-            console.log(buff);
+        let buff1 = PB.onCmdLoginConvertToBuff(data);
 
-            let decoded = buff.split(',');
-            let addr = decoded[4].slice(0, decoded[4].length - 1);
-            let t = addr.indexOf(':')
-            addr = addr.slice(t + 1);
-            let info = {
-                uid: parseInt(decoded[2].split(':')[1]),
-                token: (decoded[3].split(':')[1]).replace(/"/g, ''),
-                gameAddr: addr.replace(/"/g, ''),
-            }
-            console.log(info);
+        buff1 = buff1.buffer.slice(buff1.byteOffset, buff1.byteLength + buff1.byteOffset);
+
+        console.log(buff1);
+
+        HttpUtils.sendXHRAB(url, buff1, (buff) => {
+            // console.log(buff);
+
+            // let decoded = buff.split(',');
+            // let addr = decoded[4].slice(0, decoded[4].length - 1);
+            // let t = addr.indexOf(':')
+            // addr = addr.slice(t + 1);
+            // let info = {
+            //     uid: parseInt(decoded[2].split(':')[1]),
+            //     token: (decoded[3].split(':')[1]).replace(/"/g, ''),
+            //     gameAddr: addr.replace(/"/g, ''),
+            // }
+            // console.log(info);
             //  if (window.wx) {
 
             // let stringToUint8Array = function (str) {
@@ -54,12 +60,11 @@ export default class HttpMgr {
 
             //  decoded = PB.onCmdLoginConvertToData(arr);
             // } else {
-            //     decoded = PB.onCmdLoginConvertToData(buff);
+            let decoded = PB.onCmdLoginConvertToData(buff);
             // }
-
-
+            console.log(decoded);
             if (decoded) {
-                call && (call(info));
+                call && (call(decoded));
             }
 
         }, err);

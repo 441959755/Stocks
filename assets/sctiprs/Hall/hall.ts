@@ -13,6 +13,8 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     zhibiaoLayer: cc.Node = null;
 
+    @property(cc.Node)
+    DXLayer: cc.Node = null;
 
     @property(cc.Node)
     loading: cc.Node = null;
@@ -66,24 +68,34 @@ export default class NewClass extends cc.Component {
             this.zhibiaoLayer.active = true;
         }, this);
 
-        GlobalEvent.on('OPENHISTORYLAYER', (str) => {
+        GlobalEvent.on('OPENDXKAYER', () => {
+            this.DXLayer.active = true;
+        }, this);
+
+        GlobalEvent.on('OPENHISTORYLAYER', (str, data) => {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            let openHistoryLayer = function () {
+            let openHistoryLayer = function (info) {
                 if (!this.historyLayer) {
                     this.historyLayer = cc.instantiate(this.historyPre)
                     this.node.addChild(this.historyLayer);
                 }
                 this.historyLayer.active = true;
                 this.historyLayer.getComponent('SMHistory').historyType = str;
+                this.historyLayer.getComponent('SMHistory').historyInfo = info;
+                this.historyLayer.getComponent('SMHistory').onShow();
             }
             if (str == 'SM') {
-                //SM的要获取服务器消息
-                this.acquireSMhistoryInfo(() => {
-                    openHistoryLayer && (openHistoryLayer());
-                });
+                if (data) {
+                    openHistoryLayer && (openHistoryLayer(data));
+                } else {
+                    //SM的要获取服务器消息
+                    this.acquireSMhistoryInfo(() => {
+                        openHistoryLayer && (openHistoryLayer(null));
+                    });
+                }
             } else {
                 //其他在本地缓存取
-                openHistoryLayer && (openHistoryLayer());
+                openHistoryLayer && (openHistoryLayer(null));
             }
 
         }, this);
@@ -105,6 +117,7 @@ export default class NewClass extends cc.Component {
         }, this);
 
         GlobalEvent.on('OPENMONTHLAYER', (str) => {
+
             if (str == 'SM') {
                 if (!this.SMMonthlyLayer) {
                     this.SMMonthlyLayer = cc.instantiate(this.SMMothlyPre);
@@ -115,13 +128,21 @@ export default class NewClass extends cc.Component {
         }, this);
 
         GlobalEvent.on('OPENYIELDLAYER', (str) => {
-            if (str == "SM") {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            let openYieldLaye = function (info) {
                 if (!this.SMYieldLayer) {
                     this.SMYieldLayer = cc.instantiate(this.SMYieldPre);
                     this.node.addChild(this.SMYieldLayer);
                 }
                 this.SMYieldLayer.active = true;
+                this.SMYieldLayer.getComponent('SMYieldCurve').yieldInfo = info;
+                this.SMYieldLayer.getComponent('SMYieldCurve').onShow();
             }
+
+            this.acquireSMhistoryInfo(() => {
+                openYieldLaye && (openYieldLaye(null));
+            });
+
 
         }, this);
 
@@ -148,6 +169,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('OPENYIELDLAYER');
         GlobalEvent.off('OPENHELPLAYER');
         GlobalEvent.off('onCmdQuoteQuery');
+        GlobalEvent.off('OPENDXKAYER');
     }
 
     onCmdGameStart(data) {
@@ -208,11 +230,11 @@ export default class NewClass extends cc.Component {
                 page_size: 100,
             }
 
-            socket.send(4007, PB.onCmdQueryGameResultConvertToBuff(), (info) => {
+            socket.send(4007, PB.onCmdQueryGameResultConvertToBuff(data1), (info) => {
+                console.log('acquireSMhistoryInfo' + info);
 
-
-            }
-            );
+                callBack && (callBack(info));
+            });
         }
 
     }

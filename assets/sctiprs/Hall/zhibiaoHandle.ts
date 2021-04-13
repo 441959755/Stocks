@@ -134,7 +134,6 @@ export default class NewClass extends cc.Component {
                 }
             })
         }
-
     }
 
     onToggleBtnClick() {

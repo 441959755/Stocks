@@ -119,6 +119,16 @@ export default class GameData {
         cc.sys.localStorage.setItem('ZBSet', JSON.stringify(val));
     }
 
+    private _DXSet;
+
+    public get DXSet() {
+        return this._DXSet;
+    }
+    public set DXSet(val) {
+        this._DXSet = val;
+        cc.sys.localStorage.setItem('DXSET', JSON.stringify(val));
+    }
+
     private _properties;
     //// 金币
     // 1;				// 经验

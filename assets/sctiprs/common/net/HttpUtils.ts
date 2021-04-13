@@ -87,7 +87,7 @@ export default {
         //   if (window.wx) {
         // xhr.responseType = 'text';
         // } else {
-        //     xhr.responseType = "arraybuffer";
+        xhr.responseType = "arraybuffer";
         // }
 
         //console.log(data);

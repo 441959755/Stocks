@@ -46,13 +46,13 @@ export default class NewClass extends cc.Component {
 
         //等级
         GlobalEvent.on(EventCfg.LEVELCHANGE, () => {
-            this.userLevel.string = cc.ext.gameData.level;
+            this.userLevel.string = gameData.properties[2];
         }, this);
 
         //经验
         GlobalEvent.on(EventCfg.EXPCHANGE, () => {
-            this.userExp.string = cc.ext.gameData.exp + '/' + cc.ext.gameData.maxExp;
-            this.progr.progress = cc.ext.gameData.exp / cc.ext.gameData.maxExp;
+            this.userExp.string = gameData.properties[1] + '/' + cc.ext.gameData.maxExp;
+            this.progr.progress = gameData.properties[1] / cc.ext.gameData.maxExp;
         }, this);
 
         GlobalEvent.on(EventCfg.SHOWOTHERNODE, (other) => {
@@ -80,6 +80,7 @@ export default class NewClass extends cc.Component {
                     cc.ext.gameData.headImg = spriteFrame;
                 })
             } else {
+
                 LoadUtils.load({ url: headUrl, type: 'png' }, (texture) => {
                     let spriteFrame = new cc.SpriteFrame(texture);
                     this.userHead.spriteFrame = spriteFrame;
@@ -90,13 +91,13 @@ export default class NewClass extends cc.Component {
     }
 
     setUserInfo() {
-        this.userExp.string = cc.ext.gameData.exp + '/' + cc.ext.gameData.maxExp;
-        this.userLevel.string = 'LV:' + cc.ext.gameData.level || 0 + '';
+        this.userExp.string = gameData.properties[1] + '/' + cc.ext.gameData.maxExp;
+        this.userLevel.string = 'LV:' + gameData.properties[2] || 0 + '';
         this.gold.string = gameData.properties[0] || 0 + '';
         this.brick.string = cc.ext.gameData.brick || 0 + '';
         this.UserName.string = cc.ext.gameData.userName || cc.ext.gameData.userID;
 
-        this.progr.progress = cc.ext.gameData.exp / cc.ext.gameData.maxExp;
+        this.progr.progress = gameData.properties[1] / cc.ext.gameData.maxExp;
 
     }
 

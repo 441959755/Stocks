@@ -31,11 +31,7 @@ export default class WebSDK {
 
         console.log('loginInfo' + loginInfo);
 
-        let data = PB.onCmdLoginConvertToBuff(loginInfo);
-
-        console.log(data);
-
-        HttpMgr.getInstance().loginWeb(uuid, data, call, () => {
+        HttpMgr.getInstance().loginWeb(uuid, loginInfo, call, () => {
             console.log('onLoginCodeHttpRequest err');
             call && call();
         })

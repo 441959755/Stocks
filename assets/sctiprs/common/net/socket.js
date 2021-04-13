@@ -9,7 +9,7 @@ Socket.prototype = {
 
     message(event) {
         let decode = new Uint8Array(event.data);
-        let offect = 10, handleBuf;
+        let offect = 10, handleBuf, badBuf;
         if (decode.length >= offect) {
             handleBuf = decode.slice(0, 10);
             badBuf = decode.slice(10);
@@ -53,10 +53,26 @@ Socket.prototype = {
             this.queue[++actionCode] = callback;
             // message.buff;
             let buff = MessageHead.encode(message).finish();
+
+            // let Uint8ArrayToString = function (fileData) {
+            //     var dataString = "";
+            //     for (var i = 0; i < fileData.length; i++) {
+            //         dataString += String.fromCharCode(fileData[i]);
+            //     }
+            //     return dataString
+            // }
+            // let arrBuffer = new ArrayBuffer(10);
+            // let dataView = new DataView(arrBuffer);
+            // for (let i = 0; i < buff.byteLength; i++) {
+            //     dataView.setInt8(i, buff[i]);
+            // }
             //发送包头
-            buff && (this.ws.send(buff));
+
+            buff && (this.ws.send(buff.buffer.slice(buff.byteOffset, buff.byteLength + buff.byteOffset)));
+
             //发送包体
-            proto && (this.ws.send(proto));
+            proto && (this.ws.send(proto.buffer.slice(proto.byteOffset, proto.byteLength + proto.byteOffset)));
+
         } else {
             console.log("send error. readyState = ", this.ws.readyState);
             setTimeout(() => {
@@ -77,6 +93,7 @@ function Socket(host) {
     //  if (!host) { host = 'ws://3000' }
     this.ws = new WebSocket(host);
     this.ws.binaryType = 'arraybuffer';
+    //this.ws.responseType = "arraybuffer"
     this.ws.onmessage = this.message.bind(this);
     this.ws.onopen = function (event) {
         console.log('connected');

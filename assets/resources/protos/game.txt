@@ -8,5 +8,12 @@
             "level": 2,
             "max_exp": 300
         }
-    ]
+    ],
+
+    "smxl": {
+        "free": 5,
+        "capital_init": 100000,
+        "capital_min": [10000, 10],
+        "capital_max": [1000000000, 100]
+    }
 }

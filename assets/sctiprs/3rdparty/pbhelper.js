@@ -46,8 +46,8 @@ PBHelper.prototype = {
     //登人返回信息
     onCmdLoginConvertToData(buff) {
 
-        // let decoded = CmdLoginReply.decode(new Uint8Array(buff));
-        let decoded = CmdLoginReply.decode(buff);
+        let decoded = CmdLoginReply.decode(new Uint8Array(buff));
+        // let decoded = CmdLoginReply.decode(buff);
         console.log('onCmdLoginConvertToData:' + JSON.stringify(decoded));
 
         if (decoded.err && decoded.err.code == -1) {

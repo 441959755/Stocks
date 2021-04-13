@@ -91,6 +91,7 @@ export default class NewClass extends cc.Component {
         }
 
         socket.send(4005, PB.onCmdGameOverConvertToBuff(datas), (info) => {
+            console.log('GameOverInfo' + info);
 
         })
     }

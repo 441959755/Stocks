@@ -34,7 +34,7 @@ cc.Class({
         })
 
         //
-        LoadUtils.loadRes('protos/conf', (text) => {
+        LoadUtils.loadRes('protos/game', (text) => {
             global.levelInfoCfg = JSON.parse(text.text).levelConf;
         })
 
@@ -91,6 +91,33 @@ cc.Class({
             cc.ext.gameData.SMSet = JSON.parse(SMSet);
         }
 
+        let DXSet = cc.sys.localStorage.getItem('DXSET');
+        if (!DXSet) {
+            DXSet = {
+                k_notice: true,
+                jx_notice: true,
+                StopCheck_notice: true,
+                isShowVol: true,
+                isBW: true,
+                isMA1: true,
+                MA1Date: 5,
+                isMA2: true,
+                MA2Date: 10,
+                isMA3: true,
+                MA3Date: 20,
+                isMA4: true,
+                MA4Date: 30,
+                isMA5: true,
+                MA5Date: 60,
+                isMA6: true,
+                MA6Date: 120,
+                isFC: false,
+            }
+            //   cc.ext.gameData.SMSet = SMSet;
+        } else {
+            //  cc.ext.gameData.SMSet = JSON.parse(SMSet);
+        }
+
         let ZBSet = cc.sys.localStorage.getItem('ZBSet');
         if (!ZBSet) {
             ZBSet = {
@@ -128,7 +155,9 @@ cc.Class({
             if (info && info.data) {
                 gameData.userID = info.data.uid;
                 gameData.userName = info.data.nickname;
-                //   cc.ext.gameData.headimgurl = info.data.icon;
+                // if (!cc.ext.gameData.headimgurl) {
+                //     cc.ext.gameData.headimgurl = info.data.icon;
+                // }
                 // cc.ext.gameData.gold = info.data.properties[0];
                 // cc.ext.gameData.exp = info.data.properties[1];
                 // (cc.ext.gameData.level = info.da)ta.properties[2];
