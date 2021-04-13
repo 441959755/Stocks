@@ -28,6 +28,7 @@ enum GamePropertyId {
 	Exp = 1;				// 经验
 	Level = 2;				// 等级
 	ShuangMang_Gold = 3;	// 双盲本月当前金币
+	Diamond = 4;			// 钻石
 
 
 	Max = 30;	// 最大属性
@@ -44,9 +45,9 @@ message GameCounter {
 
 // 双盲训练状态
 message SmxlState {
-	int64 reset_ts = 1;			// 本月最近一次重置时间戳
+	int64 reset_ts = 1;			// 本月最后一次重置时间戳
 	int32 reset_counter = 2;	// 本月重置次数（跨月自动清零）
-	int64 reset_ts_premonth = 3;// 上月最近一次重置时间戳
+	int64 reset_ts_premonth = 3;// 上月最后一次重置时间戳
 	bool month_report_done = 4;	// 是否已经生成本月的双盲训练月报
 }
 
@@ -146,7 +147,7 @@ message CmdGameOver {
 	GameResult result = 1;	// 游戏结果
 }
 // 结束游戏应答
-// 应答消息：ErrorInfo
+// 应答消息：无消息体
 
 
 // 查询游戏结果
@@ -163,15 +164,26 @@ message CmdQueryGameResultReply {
 
 
 // 查询双盲月报
-// 请求类型：VoidRequest
+// 请求类型：无消息体
 // 查询双盲月报应答
 message CmdGetSmxlReportReply {
-	
+	int64 capital_init = 1;		// 初始资本金
+	int64 capital_final = 2;	// 当前资本金
+	float profit_rate = 3;		// 总体盈利率
+	int32 win_count = 4;		// 赢的次数
+	int32 win_code = 5;			// 赢的股票代码
+	float win_rate = 6;			// 赢的盈利率
+	int32 lose_count = 7;		// 输的次数
+	int32 lose_code = 8;		// 输的股票代码
+	float lose_rate = 9;		// 输的盈利率
+	int32 count = 10;			// 总共游戏次数
+	float rank_captial = 11;	// 资本金击败百分比
+	float rank_rate = 12;		// 盈利率击败百分比
 }
 
 
 // 重置双盲训练初始资本金
-// 请求类型：VoidRequest
+// 请求类型：无消息体
 // 重置双盲训练初始资本金应答
 // 应答类型：ErrorInfo
 

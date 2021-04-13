@@ -84,8 +84,8 @@ enum MessageId {
 	Rep_Game_Start = 4004;		// 开始游戏应答
 	Req_Game_Over = 4005;		// 結束游戏
 	Rep_Game_Over = 4006;		// 結束游戏应答
-	Req_Game_GameResult = 4007;	// 查询游戏结果
-	Rep_Game_GameResult = 4008;	// 查询游戏结果应答
+	Req_Game_QueryGameResult = 4007;	// 查询游戏结果
+	Rep_Game_QueryGameResult = 4008;	// 查询游戏结果应答
 	Req_Game_SmxlReport = 4009;	// 查询双盲训练月报
 	Rep_Game_SmxlReport = 4010;	// 查询双盲训练月报应答
 	Req_Game_SmxlReset = 4011;	// 重置双盲训练
