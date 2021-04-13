@@ -40,10 +40,11 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     monthBg: cc.Node = null;
 
-    xlCount = [];
-    xlcvs = [];
-
+    daysData = null;
     // LIFE-CYCLE CALLBACKS:
+
+    @property([cc.Node])
+    QXNodes: cc.Node[] = [];
 
     onLoad() {
         let w = this.draw.node.width / 31;
@@ -60,9 +61,18 @@ export default class NewClass extends cc.Component {
             this.Horizontal1.y = localPos.y;
             this.vertical1.x = localPos.x;
 
-            if (this.vertical1.x > this.xlCount.length * w) {
-                this.vertical1.x = this.xlCount.length * w;
+            let pos1;
+
+            if (this.vertical1.x > (this.daysData.length - 1) * w) {
+                this.vertical1.x = (this.daysData.length - 1) * w;
+                pos1 = this.daysData.length - 1;
+            } else {
+                pos1 = parseInt(this.vertical1.x / w + '');
+                this.vertical1.x = (pos1) * w;
             }
+
+            //this.daysData[pos1]
+
 
 
 
@@ -102,7 +112,7 @@ export default class NewClass extends cc.Component {
 
         let zongjinge, zonglilv;
 
-        this.xlCount = [], this.xlcvs = [];    //月的训练次数 收益曲线
+        let xlCount = [], xlcvs = [];    //月的训练次数 收益曲线
         let currCount = 0, currCvs = 0;    //这天的训练次数 收益曲线
 
         for (let i = 0; i < datas.length; i++) {
@@ -113,17 +123,38 @@ export default class NewClass extends cc.Component {
 
             let day1 = data1.getDate();
 
-            this.xlCount[day1]++;
+            xlCount[day1]++;
 
-            if (this.xlcvs[day1]) {
-                this.xlcvs[day1] += datas[i].user_profit;
+            if (xlcvs[day1]) {
+                xlcvs[day1] += datas[i].user_profit;
             } else {
-                this.xlcvs[day1] += (datas[i].user_profit + datas[i].user_capital);
+                xlcvs[day1] += (datas[i].user_profit + datas[i].user_capital);
             }
+
+            //时间、次数、初始资金、最终资金、收益
+            for (let t = 0; t < day; t++) {
+                if (day1 == t + 1) {
+                    if (this.daysData[t]) {
+                        this.daysData[t].count++;
+                        this.daysData[t].endMoney += datas[i].user_profit;
+                        this.daysData[t].rate += datas[i].user_profit_rate;
+                    } else {
+                        let info = {
+                            time: year + '.' + month + '.' + day1,
+                            count: 1,
+                            user_capital: datas[i].user_capital,
+                            endMoney: (datas[i].user_profit + datas[i].user_capital),
+                            rate: datas[i].user_profit_rate
+                        };
+                        this.daysData[t] = info;
+                    }
+                }
+            }
+
 
         }
 
-        this.draw_line_month(this.xlCount, this.xlcvs);
+        this.draw_line_month(xlCount, xlcvs);
 
         this.labels[2].string = zongjinge;
         this.labels[3].string = zonglilv;
@@ -182,5 +213,16 @@ export default class NewClass extends cc.Component {
         } else if (name == 'lx_smxl_ysyqxxxsj') {
             GlobalEvent.emit('OPENHISTORYLAYER', 'SM', this.yieldInfo);
         }
+    }
+
+    onToggleClick(event, data) {
+        if (data == 1) {
+            this.QXNodes[0].active = true;
+            this.QXNodes[1].active = false;
+        } else {
+            this.QXNodes[0].active = false;
+            this.QXNodes[1].active = true;
+        }
+
     }
 }
