@@ -1,6 +1,6 @@
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
-import gameCfg from "../game/GameCfg";
+
 import GameCfg from "../game/GameCfg";
 
 const { ccclass, property } = cc._decorator;
@@ -16,8 +16,6 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Toggle)
     toggle: cc.Toggle = null;
-
-
 
     setProId = 0;
 
@@ -232,7 +230,7 @@ export default class NewClass extends cc.Component {
         } else if (name == 'startSMBtn') {
 
             // cc.ext.gameData.gameDatas=gameCfg.data;
-            gameCfg.GameType = 2;
+            GameCfg.GameType = 2;
             GameCfg.GameSet = cc.ext.gameData.ZBSet;
             //  cc.director.loadScene('game');
 
@@ -249,12 +247,12 @@ export default class NewClass extends cc.Component {
 
     zhibiaoStartGameSet() {
         let data = {
-            ktype: 10,
-            kstyle: 0,
-            code: null,
-            from: null,
-            total: parseInt(cc.ext.gameData.ZBSet.KLine),
-            to: 0,
+            ktype: 10,     //4 30分钟  5  60分钟  10  日   11周
+            kstyle: 0,      // 0随机行情   1震荡行情  2单边向上行情 3单边向下行情
+            code: null,       //股票代码（0表示忽略和随机）
+            from: null,       //// 开始时间戳（不能为0，查询日K行情的格式为：YYYYMMDD；查询分时行情的格式为：HHMMSS）
+            total: parseInt(cc.ext.gameData.ZBSet.KLine),  // K线条数
+            to: 0,           //	// 结束时间戳（0表示忽略该参数；格式同from）
         }
         let items
         if (cc.ext.gameData.ZBSet.search == '随机选股') {
@@ -309,6 +307,7 @@ export default class NewClass extends cc.Component {
                     return;
                 }
             }
+            data.from = seletTime;
         } else {
             let start = items[2], end = items[3], sc;
             if (end == 0) {
@@ -343,12 +342,12 @@ export default class NewClass extends cc.Component {
 
                 data.from = ye + '' + mon + '' + da;
             }
-            GameCfg.data[0].data = [];
-            GameCfg.data[0].name = items[1];
-            GameCfg.data[0].code = items[0];
-            GameCfg.data[0].circulate = items[4];
         }
-        GlobalEvent.emit('onCmdQuoteQuery', data);
+        GameCfg.data[0].data = [];
+        GameCfg.data[0].name = items[1];
+        GameCfg.data[0].code = items[0];
+        GameCfg.data[0].circulate = items[4];
+        GlobalEvent.emit('onCmdQuoteQuery', data, 3);
     }
 
 }

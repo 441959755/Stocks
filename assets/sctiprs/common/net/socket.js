@@ -46,9 +46,11 @@ Socket.prototype = {
     send(actionCode, proto, callback) {
         if (this.ws.readyState == WebSocket.OPEN) {
 
+            let le = proto ? proto.length : 0;
+
             let message = MessageHead.create({
                 messageId: actionCode,
-                messageLen: proto.length + 10,
+                messageLen: le + 10,
             })
             this.queue[++actionCode] = callback;
             // message.buff;

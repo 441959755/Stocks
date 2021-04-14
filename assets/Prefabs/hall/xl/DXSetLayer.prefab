@@ -7672,7 +7672,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "753c02Ti6dFaLh1mslh+eji",
+    "_componentId": "5fb053d9yhBqpWNRqAY5deR",
     "handler": "onBtnClick",
     "customEventData": "0"
   },
@@ -8703,7 +8703,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "753c02Ti6dFaLh1mslh+eji",
+    "_componentId": "5fb053d9yhBqpWNRqAY5deR",
     "handler": "onBtnClick",
     "customEventData": "1"
   },
@@ -9734,7 +9734,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "753c02Ti6dFaLh1mslh+eji",
+    "_componentId": "5fb053d9yhBqpWNRqAY5deR",
     "handler": "onBtnClick",
     "customEventData": "2"
   },
@@ -10765,7 +10765,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "753c02Ti6dFaLh1mslh+eji",
+    "_componentId": "5fb053d9yhBqpWNRqAY5deR",
     "handler": "onBtnClick",
     "customEventData": "3"
   },
@@ -11796,7 +11796,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "753c02Ti6dFaLh1mslh+eji",
+    "_componentId": "5fb053d9yhBqpWNRqAY5deR",
     "handler": "onBtnClick",
     "customEventData": "4"
   },
@@ -12827,7 +12827,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "753c02Ti6dFaLh1mslh+eji",
+    "_componentId": "5fb053d9yhBqpWNRqAY5deR",
     "handler": "onBtnClick",
     "customEventData": "5"
   },
@@ -14765,8 +14765,16 @@
       "__id__": 1
     },
     "_enabled": true,
-    "K_toggle": [],
-    "JX_toggle": [],
+    "toggles1": [],
+    "toggles2": [],
+    "toggles3": [],
+    "toggles4": [],
+    "toggles5": [],
+    "labels": [],
+    "toggles": [],
+    "content": [],
+    "scroll": null,
+    "preNode": null,
     "_id": ""
   },
   {

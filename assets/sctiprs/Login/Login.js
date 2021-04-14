@@ -36,6 +36,7 @@ cc.Class({
         //
         LoadUtils.loadRes('protos/game', (text) => {
             global.levelInfoCfg = JSON.parse(text.text).levelConf;
+            global.smxlCfg = JSON.parse(text.text).smxl;
         })
 
         cc.macro.ENABLE_MULTI_TOUCH = false;
@@ -111,11 +112,19 @@ cc.Class({
                 MA5Date: 60,
                 isMA6: true,
                 MA6Date: 120,
+                market: '随机行情',
+                search: '随机股票',
+                year: '随机',
+                month: '--',
+                day: '--',
+                line: 'K线',
+                KLine: '50',
+                ZLine: '日线',
                 isFC: false,
             }
-            //   cc.ext.gameData.SMSet = SMSet;
+            cc.ext.gameData.DXSet = DXSet;
         } else {
-            //  cc.ext.gameData.SMSet = JSON.parse(SMSet);
+            cc.ext.gameData.DXSet = JSON.parse(DXSet);
         }
 
         let ZBSet = cc.sys.localStorage.getItem('ZBSet');
@@ -174,6 +183,6 @@ cc.Class({
 
     onDestroy() {
         LoadUtils.releaseRes('protos/stocklist');
-        LoadUtils.releaseRes('protos/conf');
+        LoadUtils.releaseRes('protos/game');
     }
 });

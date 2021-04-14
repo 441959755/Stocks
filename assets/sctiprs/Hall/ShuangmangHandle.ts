@@ -12,9 +12,18 @@ export default class NewClass extends cc.Component {
     @property(cc.Toggle)
     toggle1: cc.Toggle = null;
 
+    @property(cc.Label)
+    initLa: cc.Label = null;
+
+    @property(cc.Label)
+    curla: cc.Label = null;
+
     protected onEnable() {
         GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
         this.toggle1.isChecked = cc.ext.gameData.SMSet.isFC;
+
+        this.initLa.string = smxlCfg.capital_init;
+        this.curla.string = gameData.properties[3];
     }
 
 
@@ -74,7 +83,7 @@ export default class NewClass extends cc.Component {
         let items = stocklist[le].split('|');
         data.code = items[0];
         if (data.code < 600000) {
-            this.sendMessageToSocket();
+            this.smStartGameSet();
             return;
         }
 

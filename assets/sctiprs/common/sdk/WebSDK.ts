@@ -23,7 +23,7 @@ export default class WebSDK {
         let uuid = LLWUtils.getUUID();
 
         let loginInfo = {
-            account: '021OBl000AFyvL1wE4300Yw4Hk3OBl0N',
+            account: '021OBl000AFyvL1wE4300Yw4111OBl0N',
             type: 99,
             from: 8888,
             pwd: ''

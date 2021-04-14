@@ -25,6 +25,8 @@ let ErrorInfo = pb.pb.ErrorInfo;
 let CmdQueryGameResult = pb.pb.CmdQueryGameResult;
 
 let CmdQueryGameResultReply = pb.pb.CmdQueryGameResultReply;
+
+let CmdGetSmxlReportReply = pb.pb.CmdGetSmxlReportReply;
 function PBHelper() {
 
 }
@@ -81,7 +83,7 @@ PBHelper.prototype = {
     //游戏开始
     onCmdGameStartConvertToBuff(data) {
         let message = CmdGameStart.create({
-            game: data.ktype,
+            game: data.game,
         })
         let buff = CmdGameStart.encode(message).finish();
         return buff;
@@ -107,15 +109,15 @@ PBHelper.prototype = {
         let message = CmdGameOver.create({
             result: {
                 uid: data.uid,
-                gType: data.g_type,
-                quotesCode: data.quotesCode,
-                kType: data.k_type,
-                kFrom: data.k_from,
-                kTo: data.k_to,
-                stockProfitRate: data.stock_profit_rate,
-                userProfitRate: data.user_profit_rate,
-                userCapital: data.user_capital,
-                userProfit: data.user_profit,
+                g_type: data.g_type,
+                quotes_code: data.quotesCode,
+                k_type: data.k_type,
+                k_from: data.k_from,
+                k_to: data.k_to,
+                stock_profit_rate: data.stock_profit_rate,
+                user_profit_rate: data.user_profit_rate,
+                user_capital: data.user_capital,
+                user_profit: data.user_profit,
                 ts: data.ts,
                 rank: data.rank,
             }
@@ -165,6 +167,9 @@ PBHelper.prototype = {
             return data;
         } else if (id == 4008) {
             data = this.onCmdQueryGameResultReplyConvertToData(buff);
+            return data;
+        } else if (id == 4010) {
+            data = CmdGetSmxlReportReply.decode(new Uint8Array(buff));
             return data;
         }
 

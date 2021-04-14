@@ -21,6 +21,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Graphics)
     draw: cc.Graphics = null;
 
+    @property(cc.Graphics)
+    draw1: cc.Graphics = null;
+
     @property(cc.Node)
     dot1: cc.Node = null;
 
@@ -45,6 +48,16 @@ export default class NewClass extends cc.Component {
 
     @property([cc.Node])
     QXNodes: cc.Node[] = [];
+
+    @property(cc.Node)
+    tipsNode: cc.Node = null;
+
+    pos = null;
+
+    @property([cc.Label])
+    dayLabel: cc.Label[] = [];
+
+
 
     onLoad() {
         let w = this.draw.node.width / 31;
@@ -71,12 +84,29 @@ export default class NewClass extends cc.Component {
                 this.vertical1.x = (pos1) * w;
             }
 
-            //this.daysData[pos1]
+            if (this.pos != pos1) {
 
+                //this.daysData[pos1]
+                this.tipsNode.active = true;
+                if (pos1 <= 10 || pos1 >= 25) {
+                    this.tipsNode.x = 1;
+                    this.tipsNode.children[0].x = 1;
+                } else {
+                    this.tipsNode.x = -1;
+                    this.tipsNode.children[0].x = -1;
+                }
 
+                this.tipsNode.setPosition(localPos);
 
+                let las = this.tipsNode.children[0].children;
+                las[0].getComponent(cc.Label).string = '时    间:' + this.daysData[pos1].time;
+                las[1].getComponent(cc.Label).string = '练习次数:' + this.daysData[pos1].count;
+                las[2].getComponent(cc.Label).string = '初始资金:' + this.daysData[pos1].user_capital;
+                las[3].getComponent(cc.Label).string = '最终资金:' + this.daysData[pos1].endMoney;
+                las[4].getComponent(cc.Label).string = '收    益:' + this.daysData[pos1].rate;
+                this.pos = pos1;
 
-
+            }
 
         }, this);
 
@@ -89,6 +119,7 @@ export default class NewClass extends cc.Component {
     protected onEnable() {
         this.Horizontal1.active = false;
         this.vertical1.active = false;
+        this.tipsNode.active = false;
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
         ActionUtils.openLayer(this.node);
@@ -156,6 +187,8 @@ export default class NewClass extends cc.Component {
 
         this.draw_line_month(xlCount, xlcvs);
 
+        this.draw_line_day();
+
         this.labels[2].string = zongjinge;
         this.labels[3].string = zonglilv;
     }
@@ -200,7 +233,62 @@ export default class NewClass extends cc.Component {
 
 
         }
+    }
 
+    draw_line_day() {
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        this.dayLabel[0].string = this.daysData[day].count;
+        this.dayLabel[1].string = this.daysData[day].endMoney - this.daysData[day].user_capital + '';
+        this.timeLabel.string = '统计时段:' + year + '.' + month + '.' + day;
+        let datas = this.yieldInfo.results;
+        if (datas.length <= 0) {
+            return;
+        }
+
+        let curDay = [];
+        for (let i = 0; i < datas.length; i++) {
+            let data1 = new Date(datas[i].ts);
+
+            let day1 = data1.getDate();
+            if (day1 == day) {
+                curDay.push(datas[i]);
+            }
+        }
+
+        curDay.sort((e, t) => {
+            return e.ts - t.ts;
+        })
+
+        let w = this.draw.node.width / 20;
+        //   let h = this.draw.node.height / 5;
+        let dots = [];
+
+        let dot = cc.instantiate(this.dot2);
+        this.QXNodes[1].addChild(dot);
+        let y = (curDay[0].user_capital - 5000) * (100000 / this.QXNodes[1].height);
+        if (y < 0) { y = 0 }
+        dot.setPosition(0, y);
+        dots.push(dot);
+
+        curDay.forEach((el, index) => {
+            let node = cc.instantiate(this.dot2);
+            this.QXNodes[1].addChild(node);
+            let y1 = (el.user_capital + el.user_profit - 5000) * (100000 / this.QXNodes[1].height);
+            if (y1 < 0) {
+                y1 = 0;
+            }
+            let x = (index + 1) * w;
+            node.setPosition(x, y1);
+            dots.push(node);
+
+            this.draw1.lineWidth = 2;
+            this.draw1.strokeColor = new cc.Color().fromHEX('#DB9B2A');
+
+            DrawUtils.drawLine(this.draw1, dots[index].x, dots[index].y, dots[index + 1].x, dots[index + 1].y);
+        })
 
 
     }

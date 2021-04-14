@@ -35,6 +35,11 @@ export default class NewClass extends cc.Component {
     SMSetLayer: cc.Node = null;
 
     @property(cc.Prefab)
+    DXSetPre: cc.Prefab = null;
+
+    DXSetLayer: cc.Node = null;
+
+    @property(cc.Prefab)
     SMYieldPre: cc.Prefab = null;
 
     SMYieldLayer: cc.Node = null
@@ -68,34 +73,24 @@ export default class NewClass extends cc.Component {
             this.zhibiaoLayer.active = true;
         }, this);
 
-        GlobalEvent.on('OPENDXKAYER', () => {
+        GlobalEvent.on('OPENDXLAYER', () => {
             this.DXLayer.active = true;
         }, this);
 
         GlobalEvent.on('OPENHISTORYLAYER', (str, data) => {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            let openHistoryLayer = function (info) {
-                if (!this.historyLayer) {
-                    this.historyLayer = cc.instantiate(this.historyPre)
-                    this.node.addChild(this.historyLayer);
-                }
-                this.historyLayer.active = true;
-                this.historyLayer.getComponent('SMHistory').historyType = str;
-                this.historyLayer.getComponent('SMHistory').historyInfo = info;
-                this.historyLayer.getComponent('SMHistory').onShow();
-            }
             if (str == 'SM') {
                 if (data) {
-                    openHistoryLayer && (openHistoryLayer(data));
+                    this.openHistoryLayer && (this.openHistoryLayer(data));
                 } else {
                     //SM的要获取服务器消息
                     this.acquireSMhistoryInfo(() => {
-                        openHistoryLayer && (openHistoryLayer(null));
+                        this.openHistoryLayer && (this.openHistoryLayer(null));
                     });
                 }
             } else {
                 //其他在本地缓存取
-                openHistoryLayer && (openHistoryLayer(null));
+                this.openHistoryLayer && (this.openHistoryLayer(null));
             }
 
         }, this);
@@ -113,37 +108,41 @@ export default class NewClass extends cc.Component {
                     this.node.addChild(this.SMSetLayer);
                 }
                 this.SMSetLayer.active = true;
+            } else if (str == 'DX') {
+                if (!this.DXSetLayer) {
+                    this.DXSetLayer = cc.instantiate(this.DXSetPre);
+                    this.node.addChild(this.DXSetLayer);
+                }
+                this.DXSetLayer.active = true;
+
             }
         }, this);
 
         GlobalEvent.on('OPENMONTHLAYER', (str) => {
+            //  if (str == 'SM') {
+            if (socket) {
+                socket.send(4009, null, (info) => {
+                    console.log('OPENMONTHLAYER' + JSON.stringify(info));
 
-            if (str == 'SM') {
-                if (!this.SMMonthlyLayer) {
-                    this.SMMonthlyLayer = cc.instantiate(this.SMMothlyPre);
-                    this.node.addChild(this.SMMonthlyLayer);
-                }
-                this.SMMonthlyLayer.active = true;
+                    if (!this.SMMonthlyLayer) {
+                        this.SMMonthlyLayer = cc.instantiate(this.SMMothlyPre);
+                        this.node.addChild(this.SMMonthlyLayer);
+                    }
+                    this.SMMonthlyLayer.active = true;
+
+                    this.SMMonthlyLayer.getComponent('SMMonthly').monthlyInfo = info;
+                    this.SMMonthlyLayer.getComponent('SMMonthly').onShow();
+                })
             }
+
+            //  }
         }, this);
 
         GlobalEvent.on('OPENYIELDLAYER', (str) => {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            let openYieldLaye = function (info) {
-                if (!this.SMYieldLayer) {
-                    this.SMYieldLayer = cc.instantiate(this.SMYieldPre);
-                    this.node.addChild(this.SMYieldLayer);
-                }
-                this.SMYieldLayer.active = true;
-                this.SMYieldLayer.getComponent('SMYieldCurve').yieldInfo = info;
-                this.SMYieldLayer.getComponent('SMYieldCurve').onShow();
-            }
-
             this.acquireSMhistoryInfo(() => {
-                openYieldLaye && (openYieldLaye(null));
+                this.openYieldLaye && (this.openYieldLaye(null));
             });
-
-
         }, this);
 
         GlobalEvent.on('OPENHELPLAYER', (str) => {
@@ -155,6 +154,33 @@ export default class NewClass extends cc.Component {
         }, this);
 
         GlobalEvent.on('onCmdQuoteQuery', this.onCmdQuoteQuery.bind(this), this);
+    }
+
+    openYieldLaye(info) {
+        if (!this.SMYieldLayer) {
+            this.SMYieldLayer = cc.instantiate(this.SMYieldPre);
+            this.node.addChild(this.SMYieldLayer);
+        }
+        this.SMYieldLayer.active = true;
+        this.SMYieldLayer.getComponent('SMYieldCurve').yieldInfo = info;
+        this.SMYieldLayer.getComponent('SMYieldCurve').onShow();
+    }
+
+
+    openHistoryLayer(info) {
+        let str;
+        if (info) {
+            str = 'SM';
+        }
+        if (!this.historyLayer) {
+            //   this.historyLayer = cc.instantiate(this.historyPre)
+            this.historyLayer = cc.instantiate(this.historyPre);
+            this.node.addChild(this.historyLayer);
+        }
+        this.historyLayer.active = true;
+        this.historyLayer.getComponent('SMHistory').historyType = str;
+        this.historyLayer.getComponent('SMHistory').historyInfo = info;
+        this.historyLayer.getComponent('SMHistory').onShow();
     }
 
 
@@ -172,47 +198,48 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('OPENDXKAYER');
     }
 
-    onCmdGameStart(data) {
+    onCmdGameStart(data, info1) {
         GlobalEvent.emit('EventCfg.LOADINGSHOW');
         if (socket) {
+            console.log(JSON.stringify(data));
             socket.send(4003, PB.onCmdGameStartConvertToBuff(data), (info) => {
-                console.log('onCmdGameStart' + info);
+
+                console.log('onCmdGameStart' + JSON.stringify(info));
+                if (socket) {
+                    socket.send(2003, PB.onCmdQuoteQueryConvertToBuff(info1), (info) => {
+                        console.log('onCmdQuoteQuery' + JSON.stringify(info));
+                        info.items.forEach(el => {
+                            let date = new Date(el.timestamp);
+                            let ye = date.getFullYear();
+                            let mon = date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
+                            let da = date.getDate() >= 10 ? date.getDate() : '0' + (date.getDate());
+                            let fromDate = ye + '-' + mon + '-' + da;
+                            let data = {
+                                day: fromDate,
+                                open: el.open,
+                                close: el.price,
+                                high: el.high,
+                                low: el.low,
+                                price: el.amount,
+                                value: el.volume,
+                                Rate: el.volume / GameCfg.data[0].circulate * 100,
+                            }
+                            GameCfg.data[0].data.push(data);
+                        });
+                        console.log(GameCfg.data);
+                        cc.ext.gameData.gameDatas = GameCfg.data;
+                        cc.director.loadScene('game');
+                    })
+
+                } else {
+                    console.log('socket err');
+                }
             })
         }
     }
 
     onCmdQuoteQuery(data) {
-        if (socket) {
-            socket.send(2003, PB.onCmdQuoteQueryConvertToBuff(data), (info) => {
-                console.log(info);
-
-                info.items.forEach(el => {
-                    let date = new Date(el.timestamp);
-                    let ye = date.getFullYear();
-                    let mon = date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
-                    let da = date.getDate() >= 10 ? date.getDate() : '0' + (date.getDate());
-                    let fromDate = ye + '-' + mon + '-' + da;
-                    let data = {
-                        day: fromDate,
-                        open: el.open,
-                        close: el.price,
-                        high: el.high,
-                        low: el.low,
-                        price: el.amount,
-                        value: el.volume,
-                        Rate: el.volume / GameCfg.data[0].circulate * 100,
-                    }
-                    GameCfg.data[0].data.push(data);
-                });
-                console.log(GameCfg.data);
-                cc.ext.gameData.gameDatas = GameCfg.data;
-                cc.director.loadScene('game');
-            })
-
-        } else {
-            console.log('socket err');
-        }
-
+        this.onCmdGameStart({ game: GameCfg.GameType }, data);
     }
 
     acquireSMhistoryInfo(callBack) {
@@ -231,7 +258,7 @@ export default class NewClass extends cc.Component {
             }
 
             socket.send(4007, PB.onCmdQueryGameResultConvertToBuff(data1), (info) => {
-                console.log('acquireSMhistoryInfo' + info);
+                console.log('acquireSMhistoryInfo' + JSON.stringify(info));
 
                 callBack && (callBack(info));
             });

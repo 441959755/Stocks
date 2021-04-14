@@ -45,8 +45,8 @@ message GameCounter {
 
 // 双盲训练状态
 message SmxlState {
-	int64 reset_ts = 1;			// 本月最后一次重置时间戳
-	int32 reset_counter = 2;	// 本月重置次数（跨月自动清零）
+	int64 reset_ts = 1;			// 当前月最后一次重置时间戳
+	int32 reset_counter = 2;	// 当前月重置次数（跨月自动清零）
 	int64 reset_ts_premonth = 3;// 上月最后一次重置时间戳
 	bool month_report_done = 4;	// 是否已经生成本月的双盲训练月报
 }
@@ -84,10 +84,11 @@ message GameResult {
 	int32 k_to = 6;				// 行情结束日期YYYYMMDD或时间HHMMSS
 	double stock_profit_rate = 7;//同期股票涨跌幅
 	double user_profit_rate = 8;// 用户盈利率
-	double user_capital = 9;	// 用户初始资本金
-	double user_profit = 10;	// 用户盈利额
+	int64 user_capital = 9;		// 用户初始资本金
+	int64 user_profit = 10;		// 用户盈利额
 	int64 ts = 11;				// 游戏结果时间戳
 	int32 rank = 12;			// 游戏结果：本场排行（若是单人或双人游戏，排名第2则为输）
+	int64 ref_id = 13;			// 关联ID
 }
 
 
