@@ -109,15 +109,26 @@ PBHelper.prototype = {
         let message = CmdGameOver.create({
             result: {
                 uid: data.uid,
-                g_type: data.g_type,
-                quotes_code: data.quotesCode,
-                k_type: data.k_type,
-                k_from: data.k_from,
-                k_to: data.k_to,
-                stock_profit_rate: data.stock_profit_rate,
-                user_profit_rate: data.user_profit_rate,
-                user_capital: data.user_capital,
-                user_profit: data.user_profit,
+                gType: data.g_type,
+                // g_type: data.g_type,
+                //  quotes_code: data.quotesCode,
+                quotesCode: data.quotesCode,
+                //  k_type: data.k_type,
+
+                kType: data.k_type,
+                //    k_from: data.k_from,
+
+                kFrom: data.k_from,
+                // k_to: data.k_to,
+
+                kTo: data.k_to,
+                // stock_profit_rate: data.stock_profit_rate,
+                userProfitRate: data.user_profit_rate,
+                //  user_profit_rate: data.user_profit_rate,
+                // user_capital: data.user_capital,
+                // user_profit: data.user_profit,
+                userCapital: data.user_capital,
+                userProfit: data.user_profit,
                 ts: data.ts,
                 rank: data.rank,
             }

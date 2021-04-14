@@ -140,8 +140,8 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on('OPENYIELDLAYER', (str) => {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            this.acquireSMhistoryInfo(() => {
-                this.openYieldLaye && (this.openYieldLaye(null));
+            this.acquireSMhistoryInfo((info) => {
+                this.openYieldLaye && (this.openYieldLaye(info));
             });
         }, this);
 

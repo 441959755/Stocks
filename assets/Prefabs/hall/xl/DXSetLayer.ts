@@ -1,5 +1,6 @@
 import GlobalEvent from '../../../sctiprs/Utils/GlobalEvent';
 import EventCfg from '../../../sctiprs/Utils/EventCfg';
+import GameData from '../../../sctiprs/GameData';
 
 const { ccclass, property } = cc._decorator;
 
@@ -64,7 +65,10 @@ export default class NewClass extends cc.Component {
 
         this.toggles[0].isChecked = gameData.DXSet.isMA1;
         this.toggles[1].isChecked = gameData.DXSet.isMA2;
-
+        this.toggles[2].isChecked = gameData.DXSet.isMA3;
+        this.toggles[3].isChecked = gameData.DXSet.isMA4;
+        this.toggles[4].isChecked = gameData.DXSet.isMA5;
+        this.toggles[5].isChecked = gameData.DXSet.isMA6;
 
         GlobalEvent.on('ItemValue', (data) => {
             this.labels[this._Lid].string = data;
@@ -76,7 +80,34 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('ItemValue');
     }
 
-    onToggleClick() {
+    onSaveToggle() {
+        gameData.DXSet.k_notice = this.toggles1[0].isChecked;
+        gameData.DXSet.jx_notice = this.toggles2[0].isChecked;
+        gameData.DXSet.StopCheck_notice = this.toggles3[0].isChecked;
+        gameData.DXSet.isShowVol = this.toggles4[0].isChecked;
+
+        gameData.DXSet.isBW = this.toggles5[0].isChecked;
+
+        gameData.DXSet.MA1Date = this.labels[0].string;
+        gameData.DXSet.MA2Date = this.labels[1].string;
+        gameData.DXSet.MA3Date = this.labels[2].string;
+
+        gameData.DXSet.MA4Date = this.labels[3].string;
+
+        gameData.DXSet.MA5Date = this.labels[4].string;
+        gameData.DXSet.MA6Date = this.labels[5].string;
+
+        gameData.DXSet.isMA1 = this.toggles[0].isChecked;
+        gameData.DXSet.isMA2 = this.toggles[1].isChecked;
+
+        gameData.DXSet.isMA3 = this.toggles[2].isChecked;
+
+        gameData.DXSet.isMA4 = this.toggles[3].isChecked;
+        gameData.DXSet.isMA5 = this.toggles[4].isChecked;
+        gameData.DXSet.isMA6 = this.toggles[5].isChecked;
+
+        gameData.DXSet = gameData.DXSet;
+        console.log(JSON.stringify(gameData.DXSet));
 
     }
 
@@ -132,10 +163,15 @@ export default class NewClass extends cc.Component {
             this.scroll.getComponent(cc.ScrollView).content = this.content[this._Lid];
         } else if (name == 'saveSetBtn') {
 
+            this.onSaveToggle();
+            this.node.active = false;
 
+        } else if (name == 'viewMask') {
+            this.scroll.active = false;
+            this.content.forEach(el => {
+                el.active = false;
+            })
         }
-
-
     }
-    // update (dt) {}
+
 }
