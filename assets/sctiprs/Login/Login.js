@@ -8,7 +8,7 @@ import Socket from "../common/net/socket";
 window.global = window;
 
 cc.ext = {};
-cc.ext.gameData = new GameData();
+cc.ext.gameData = GameData;
 
 cc.Class({
     extends: cc.Component,
@@ -47,8 +47,9 @@ cc.Class({
     start() {
         let self = this;
         // //TODO  接DSK
-        cc.ext.llwSDK = LLWSDK.getSDK()
-        cc.ext.llwSDK.login((decoded) => {
+        let llwSDK = LLWSDK.getSDK()
+        global.llwSDK = llwSDK;
+        llwSDK.login((decoded) => {
             console.log(decoded.token + decoded.uid + decoded.gameAddr);
 
             if (decoded) {

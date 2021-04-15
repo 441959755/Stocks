@@ -27,6 +27,10 @@ let CmdQueryGameResult = pb.pb.CmdQueryGameResult;
 let CmdQueryGameResultReply = pb.pb.CmdQueryGameResultReply;
 
 let CmdGetSmxlReportReply = pb.pb.CmdGetSmxlReportReply;
+
+let CmdEditNick = pb.pb.CmdEditNick;
+
+
 function PBHelper() {
 
 }
@@ -160,6 +164,16 @@ PBHelper.prototype = {
         return decode;
     },
 
+    onCmdEditNickConvertToBuff(data) {
+        let message = CmdEditNick.create({
+            uid: data.uid,
+            nick: data.nick,
+        })
+
+        let buff = CmdEditNick.encode(message).finish();
+        return buff;
+    },
+
     selectBlackData(id, buff) {
         let data;
         console.log('id:' + id + '跟新数据');
@@ -181,7 +195,7 @@ PBHelper.prototype = {
             }
 
             gameData.properties = gameData.properties;
-        } else if (id == 4004 || id == 4006) {
+        } else if (id == 4004 || id == 4006 || id == 3004) {
             data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
         } else if (id == 4008) {

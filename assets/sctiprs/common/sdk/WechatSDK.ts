@@ -100,4 +100,18 @@ export default class WechatSDK {
             console.log('onLoginCodeHttpRequest err');
         })
     }
+
+    chooseImage(call) {
+        wx.chooseImage({
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success(res) {
+                // tempFilePath可以作为img标签的src属性显示图片
+                const file = res.tempFilePaths[0]
+                console.log('tempFilePaths:' + file);
+                call && (call(file))
+            }
+        })
+    }
 }

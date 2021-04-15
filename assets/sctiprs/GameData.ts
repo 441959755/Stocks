@@ -6,139 +6,139 @@ import Game = cc.Game;
 export default class GameData {
 
     //Id
-    private _userID = null;
+    private static _userID = null;
 
-    public get userID() {
+    public static get userID() {
         return this._userID;
     }
 
-    public set userID(val) {
+    public static set userID(val) {
         this._userID = val;
     }
 
     //名字
-    private _userName = null;
+    private static _userName = null;
 
-    public get userName() {
+    public static get userName() {
         return this._userName;
     }
 
-    public set userName(val) {
+    public static set userName(val) {
         this._userName = val;
     }
 
     //砖石
-    private _brick = null;
+    private static _brick = null;
 
-    public set brick(val) {
+    public static set brick(val) {
         this._brick = val;
         GlobalEvent.emit(EventCfg.BIRCKCHANGE);
     }
 
-    public get brick() {
+    public static get brick() {
         return this._brick;
     }
 
     //金币
-    private _gold = null;
+    private static _gold = null;
 
-    public set gold(val) {
+    public static set gold(val) {
         this._gold = val;
         GlobalEvent.emit(EventCfg.GOLDCHANGE);
     }
 
-    public get gold() {
+    public static get gold() {
         return this._gold;
     }
 
     //等级
-    private _level = null;
+    private static _level = null;
 
-    public set level(val) {
+    public static set level(val) {
         this._level = val;
         GlobalEvent.emit(EventCfg.LEVELCHANGE);
     }
 
-    public get level() {
+    public static get level() {
         return this._level;
     }
 
-    private _exp = null;
+    private static _exp = null;
 
-    public set exp(val) {
+    public static set exp(val) {
         this._exp = val;
         GlobalEvent.emit(EventCfg.EXPCHANGE);
     }
 
-    public get exp() {
+    public static get exp() {
         return this._exp;
     }
 
-    public maxExp = null;
+    public static maxExp = null;
 
-    public sex = null;     //性别
+    public static sex = null;     //性别
 
-    public headimgurl = null; //头像地址
-    public headImg = null;
+    public static headimgurl = null; //头像地址
+    public static headImg = null;
 
-    public openid = null;
-    public sessionKey = null;
+    public static openid = null;
+    public static sessionKey = null;
 
-    public ShuangMang_Gold = null;
+    public static ShuangMang_Gold = null;
 
     //SMset
-    private _token;
+    private static _token;
 
-    public get token() {
+    public static get token() {
         return this._token;
     }
-    public set token(val) {
+    public static set token(val) {
         this._token = val;
         cc.sys.localStorage.setItem('token', JSON.stringify(val));
     }
 
     //SMset
-    private _SMSet;
+    private static _SMSet;
 
-    public get SMSet() {
+    public static get SMSet() {
         return this._SMSet;
     }
-    public set SMSet(val) {
+    public static set SMSet(val) {
         this._SMSet = val;
         cc.sys.localStorage.setItem('SMSET', JSON.stringify(val));
     }
 
-    private _ZBSet;
+    private static _ZBSet;
 
-    public get ZBSet() {
+    public static get ZBSet() {
         return this._ZBSet;
     }
 
-    public set ZBSet(val) {
+    public static set ZBSet(val) {
         this._ZBSet = val;
         cc.sys.localStorage.setItem('ZBSet', JSON.stringify(val));
     }
 
-    private _DXSet;
+    private static _DXSet;
 
-    public get DXSet() {
+    public static get DXSet() {
         return this._DXSet;
     }
-    public set DXSet(val) {
+    public static set DXSet(val) {
         this._DXSet = val;
         cc.sys.localStorage.setItem('DXSET', JSON.stringify(val));
     }
 
-    private _properties = [];
+    private static _properties = [];
     //// 金币
     // 1;				// 经验
     //  2;				// 等级
     // 3;	// 双盲本月当前金币
-    public get properties() {
+    public static get properties() {
         return this._properties;
     }
 
-    public set properties(val) {
+    public static set properties(val) {
         this._properties = val;
         cc.sys.localStorage.setItem('properties', JSON.stringify(val));
         //砖石
