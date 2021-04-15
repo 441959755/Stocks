@@ -36,7 +36,7 @@ export default class NewClass extends cc.Component {
     onLoad() {
         //砖石
         GlobalEvent.on(EventCfg.BIRCKCHANGE, () => {
-            this.brick.string = cc.ext.gameData.brick;
+            this.brick.string = gameData.properties[4];
         }, this);
 
         //金币
@@ -94,7 +94,7 @@ export default class NewClass extends cc.Component {
         this.userExp.string = gameData.properties[1] + '/' + cc.ext.gameData.maxExp;
         this.userLevel.string = 'LV:' + gameData.properties[2] || 0 + '';
         this.gold.string = gameData.properties[0] || 0 + '';
-        this.brick.string = cc.ext.gameData.brick || 0 + '';
+        this.brick.string = gameData.properties[4] || 0 + '';
         this.UserName.string = cc.ext.gameData.userName || cc.ext.gameData.userID;
 
         this.progr.progress = gameData.properties[1] / cc.ext.gameData.maxExp;
@@ -117,6 +117,11 @@ export default class NewClass extends cc.Component {
         }
         else if (name == 'sys_help') {
             GlobalEvent.emit('OPENHELPLAYER', 'SM');
+        }
+        //打开个人中心
+        else if (name == 'playerSprite') {
+            GlobalEvent.emit('OPENPLAYERINFO');
+
         }
     }
 

@@ -102,8 +102,8 @@ $root.pb = (function () {
      * @property {number} Rep_Game_Start=4004 Rep_Game_Start value
      * @property {number} Req_Game_Over=4005 Req_Game_Over value
      * @property {number} Rep_Game_Over=4006 Rep_Game_Over value
-     * @property {number} Req_Game_GameResult=4007 Req_Game_GameResult value
-     * @property {number} Rep_Game_GameResult=4008 Rep_Game_GameResult value
+     * @property {number} Req_Game_QueryGameResult=4007 Req_Game_QueryGameResult value
+     * @property {number} Rep_Game_QueryGameResult=4008 Rep_Game_QueryGameResult value
      * @property {number} Req_Game_SmxlReport=4009 Req_Game_SmxlReport value
      * @property {number} Rep_Game_SmxlReport=4010 Rep_Game_SmxlReport value
      * @property {number} Req_Game_SmxlReset=4011 Req_Game_SmxlReset value
@@ -135,8 +135,8 @@ $root.pb = (function () {
         values[valuesById[4004] = "Rep_Game_Start"] = 4004;
         values[valuesById[4005] = "Req_Game_Over"] = 4005;
         values[valuesById[4006] = "Rep_Game_Over"] = 4006;
-        values[valuesById[4007] = "Req_Game_GameResult"] = 4007;
-        values[valuesById[4008] = "Rep_Game_GameResult"] = 4008;
+        values[valuesById[4007] = "Req_Game_QueryGameResult"] = 4007;
+        values[valuesById[4008] = "Rep_Game_QueryGameResult"] = 4008;
         values[valuesById[4009] = "Req_Game_SmxlReport"] = 4009;
         values[valuesById[4010] = "Rep_Game_SmxlReport"] = 4010;
         values[valuesById[4011] = "Req_Game_SmxlReset"] = 4011;
@@ -1152,6 +1152,7 @@ $root.pb = (function () {
      * @property {number} Exp=1 Exp value
      * @property {number} Level=2 Level value
      * @property {number} ShuangMang_Gold=3 ShuangMang_Gold value
+     * @property {number} Diamond=4 Diamond value
      * @property {number} Max=30 Max value
      */
     pb.GamePropertyId = (function () {
@@ -1160,6 +1161,7 @@ $root.pb = (function () {
         values[valuesById[1] = "Exp"] = 1;
         values[valuesById[2] = "Level"] = 2;
         values[valuesById[3] = "ShuangMang_Gold"] = 3;
+        values[valuesById[4] = "Diamond"] = 4;
         values[valuesById[30] = "Max"] = 30;
         return values;
     })();
@@ -2282,6 +2284,7 @@ $root.pb = (function () {
                     case 1:
                     case 2:
                     case 3:
+                    case 4:
                     case 30:
                         break;
                 }
@@ -2322,6 +2325,10 @@ $root.pb = (function () {
                 case "ShuangMang_Gold":
                 case 3:
                     message.id = 3;
+                    break;
+                case "Diamond":
+                case 4:
+                    message.id = 4;
                     break;
                 case "Max":
                 case 30:
@@ -2626,10 +2633,11 @@ $root.pb = (function () {
          * @property {number|null} [kTo] GameResult kTo
          * @property {number|null} [stockProfitRate] GameResult stockProfitRate
          * @property {number|null} [userProfitRate] GameResult userProfitRate
-         * @property {number|null} [userCapital] GameResult userCapital
-         * @property {number|null} [userProfit] GameResult userProfit
+         * @property {number|Long|null} [userCapital] GameResult userCapital
+         * @property {number|Long|null} [userProfit] GameResult userProfit
          * @property {number|Long|null} [ts] GameResult ts
          * @property {number|null} [rank] GameResult rank
+         * @property {number|Long|null} [refId] GameResult refId
          */
 
         /**
@@ -2713,19 +2721,19 @@ $root.pb = (function () {
 
         /**
          * GameResult userCapital.
-         * @member {number} userCapital
+         * @member {number|Long} userCapital
          * @memberof pb.GameResult
          * @instance
          */
-        GameResult.prototype.userCapital = 0;
+        GameResult.prototype.userCapital = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * GameResult userProfit.
-         * @member {number} userProfit
+         * @member {number|Long} userProfit
          * @memberof pb.GameResult
          * @instance
          */
-        GameResult.prototype.userProfit = 0;
+        GameResult.prototype.userProfit = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * GameResult ts.
@@ -2742,6 +2750,14 @@ $root.pb = (function () {
          * @instance
          */
         GameResult.prototype.rank = 0;
+
+        /**
+         * GameResult refId.
+         * @member {number|Long} refId
+         * @memberof pb.GameResult
+         * @instance
+         */
+        GameResult.prototype.refId = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * Creates a new GameResult instance using the specified properties.
@@ -2784,13 +2800,15 @@ $root.pb = (function () {
             if (message.userProfitRate != null && Object.hasOwnProperty.call(message, "userProfitRate"))
                 writer.uint32(/* id 8, wireType 1 =*/65).double(message.userProfitRate);
             if (message.userCapital != null && Object.hasOwnProperty.call(message, "userCapital"))
-                writer.uint32(/* id 9, wireType 1 =*/73).double(message.userCapital);
+                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.userCapital);
             if (message.userProfit != null && Object.hasOwnProperty.call(message, "userProfit"))
-                writer.uint32(/* id 10, wireType 1 =*/81).double(message.userProfit);
+                writer.uint32(/* id 10, wireType 0 =*/80).int64(message.userProfit);
             if (message.ts != null && Object.hasOwnProperty.call(message, "ts"))
                 writer.uint32(/* id 11, wireType 0 =*/88).int64(message.ts);
             if (message.rank != null && Object.hasOwnProperty.call(message, "rank"))
                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.rank);
+            if (message.refId != null && Object.hasOwnProperty.call(message, "refId"))
+                writer.uint32(/* id 13, wireType 0 =*/104).int64(message.refId);
             return writer;
         };
 
@@ -2850,16 +2868,19 @@ $root.pb = (function () {
                         message.userProfitRate = reader.double();
                         break;
                     case 9:
-                        message.userCapital = reader.double();
+                        message.userCapital = reader.int64();
                         break;
                     case 10:
-                        message.userProfit = reader.double();
+                        message.userProfit = reader.int64();
                         break;
                     case 11:
                         message.ts = reader.int64();
                         break;
                     case 12:
                         message.rank = reader.int32();
+                        break;
+                    case 13:
+                        message.refId = reader.int64();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -2953,17 +2974,20 @@ $root.pb = (function () {
                 if (typeof message.userProfitRate !== "number")
                     return "userProfitRate: number expected";
             if (message.userCapital != null && message.hasOwnProperty("userCapital"))
-                if (typeof message.userCapital !== "number")
-                    return "userCapital: number expected";
+                if (!$util.isInteger(message.userCapital) && !(message.userCapital && $util.isInteger(message.userCapital.low) && $util.isInteger(message.userCapital.high)))
+                    return "userCapital: integer|Long expected";
             if (message.userProfit != null && message.hasOwnProperty("userProfit"))
-                if (typeof message.userProfit !== "number")
-                    return "userProfit: number expected";
+                if (!$util.isInteger(message.userProfit) && !(message.userProfit && $util.isInteger(message.userProfit.low) && $util.isInteger(message.userProfit.high)))
+                    return "userProfit: integer|Long expected";
             if (message.ts != null && message.hasOwnProperty("ts"))
                 if (!$util.isInteger(message.ts) && !(message.ts && $util.isInteger(message.ts.low) && $util.isInteger(message.ts.high)))
                     return "ts: integer|Long expected";
             if (message.rank != null && message.hasOwnProperty("rank"))
                 if (!$util.isInteger(message.rank))
                     return "rank: integer expected";
+            if (message.refId != null && message.hasOwnProperty("refId"))
+                if (!$util.isInteger(message.refId) && !(message.refId && $util.isInteger(message.refId.low) && $util.isInteger(message.refId.high)))
+                    return "refId: integer|Long expected";
             return null;
         };
 
@@ -3100,9 +3124,23 @@ $root.pb = (function () {
             if (object.userProfitRate != null)
                 message.userProfitRate = Number(object.userProfitRate);
             if (object.userCapital != null)
-                message.userCapital = Number(object.userCapital);
+                if ($util.Long)
+                    (message.userCapital = $util.Long.fromValue(object.userCapital)).unsigned = false;
+                else if (typeof object.userCapital === "string")
+                    message.userCapital = parseInt(object.userCapital, 10);
+                else if (typeof object.userCapital === "number")
+                    message.userCapital = object.userCapital;
+                else if (typeof object.userCapital === "object")
+                    message.userCapital = new $util.LongBits(object.userCapital.low >>> 0, object.userCapital.high >>> 0).toNumber();
             if (object.userProfit != null)
-                message.userProfit = Number(object.userProfit);
+                if ($util.Long)
+                    (message.userProfit = $util.Long.fromValue(object.userProfit)).unsigned = false;
+                else if (typeof object.userProfit === "string")
+                    message.userProfit = parseInt(object.userProfit, 10);
+                else if (typeof object.userProfit === "number")
+                    message.userProfit = object.userProfit;
+                else if (typeof object.userProfit === "object")
+                    message.userProfit = new $util.LongBits(object.userProfit.low >>> 0, object.userProfit.high >>> 0).toNumber();
             if (object.ts != null)
                 if ($util.Long)
                     (message.ts = $util.Long.fromValue(object.ts)).unsigned = false;
@@ -3114,6 +3152,15 @@ $root.pb = (function () {
                     message.ts = new $util.LongBits(object.ts.low >>> 0, object.ts.high >>> 0).toNumber();
             if (object.rank != null)
                 message.rank = object.rank | 0;
+            if (object.refId != null)
+                if ($util.Long)
+                    (message.refId = $util.Long.fromValue(object.refId)).unsigned = false;
+                else if (typeof object.refId === "string")
+                    message.refId = parseInt(object.refId, 10);
+                else if (typeof object.refId === "number")
+                    message.refId = object.refId;
+                else if (typeof object.refId === "object")
+                    message.refId = new $util.LongBits(object.refId.low >>> 0, object.refId.high >>> 0).toNumber();
             return message;
         };
 
@@ -3139,14 +3186,27 @@ $root.pb = (function () {
                 object.kTo = 0;
                 object.stockProfitRate = 0;
                 object.userProfitRate = 0;
-                object.userCapital = 0;
-                object.userProfit = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.userCapital = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.userCapital = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.userProfit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.userProfit = options.longs === String ? "0" : 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.ts = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.ts = options.longs === String ? "0" : 0;
                 object.rank = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.refId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.refId = options.longs === String ? "0" : 0;
             }
             if (message.uid != null && message.hasOwnProperty("uid"))
                 object.uid = message.uid;
@@ -3165,9 +3225,15 @@ $root.pb = (function () {
             if (message.userProfitRate != null && message.hasOwnProperty("userProfitRate"))
                 object.userProfitRate = options.json && !isFinite(message.userProfitRate) ? String(message.userProfitRate) : message.userProfitRate;
             if (message.userCapital != null && message.hasOwnProperty("userCapital"))
-                object.userCapital = options.json && !isFinite(message.userCapital) ? String(message.userCapital) : message.userCapital;
+                if (typeof message.userCapital === "number")
+                    object.userCapital = options.longs === String ? String(message.userCapital) : message.userCapital;
+                else
+                    object.userCapital = options.longs === String ? $util.Long.prototype.toString.call(message.userCapital) : options.longs === Number ? new $util.LongBits(message.userCapital.low >>> 0, message.userCapital.high >>> 0).toNumber() : message.userCapital;
             if (message.userProfit != null && message.hasOwnProperty("userProfit"))
-                object.userProfit = options.json && !isFinite(message.userProfit) ? String(message.userProfit) : message.userProfit;
+                if (typeof message.userProfit === "number")
+                    object.userProfit = options.longs === String ? String(message.userProfit) : message.userProfit;
+                else
+                    object.userProfit = options.longs === String ? $util.Long.prototype.toString.call(message.userProfit) : options.longs === Number ? new $util.LongBits(message.userProfit.low >>> 0, message.userProfit.high >>> 0).toNumber() : message.userProfit;
             if (message.ts != null && message.hasOwnProperty("ts"))
                 if (typeof message.ts === "number")
                     object.ts = options.longs === String ? String(message.ts) : message.ts;
@@ -3175,6 +3241,11 @@ $root.pb = (function () {
                     object.ts = options.longs === String ? $util.Long.prototype.toString.call(message.ts) : options.longs === Number ? new $util.LongBits(message.ts.low >>> 0, message.ts.high >>> 0).toNumber() : message.ts;
             if (message.rank != null && message.hasOwnProperty("rank"))
                 object.rank = message.rank;
+            if (message.refId != null && message.hasOwnProperty("refId"))
+                if (typeof message.refId === "number")
+                    object.refId = options.longs === String ? String(message.refId) : message.refId;
+                else
+                    object.refId = options.longs === String ? $util.Long.prototype.toString.call(message.refId) : options.longs === Number ? new $util.LongBits(message.refId.low >>> 0, message.refId.high >>> 0).toNumber() : message.refId;
             return object;
         };
 
@@ -5292,6 +5363,18 @@ $root.pb = (function () {
          * Properties of a CmdGetSmxlReportReply.
          * @memberof pb
          * @interface ICmdGetSmxlReportReply
+         * @property {number|Long|null} [capitalInit] CmdGetSmxlReportReply capitalInit
+         * @property {number|Long|null} [capitalFinal] CmdGetSmxlReportReply capitalFinal
+         * @property {number|null} [profitRate] CmdGetSmxlReportReply profitRate
+         * @property {number|null} [winCount] CmdGetSmxlReportReply winCount
+         * @property {number|null} [winCode] CmdGetSmxlReportReply winCode
+         * @property {number|null} [winRate] CmdGetSmxlReportReply winRate
+         * @property {number|null} [loseCount] CmdGetSmxlReportReply loseCount
+         * @property {number|null} [loseCode] CmdGetSmxlReportReply loseCode
+         * @property {number|null} [loseRate] CmdGetSmxlReportReply loseRate
+         * @property {number|null} [count] CmdGetSmxlReportReply count
+         * @property {number|null} [rankCaptial] CmdGetSmxlReportReply rankCaptial
+         * @property {number|null} [rankRate] CmdGetSmxlReportReply rankRate
          */
 
         /**
@@ -5308,6 +5391,102 @@ $root.pb = (function () {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+
+        /**
+         * CmdGetSmxlReportReply capitalInit.
+         * @member {number|Long} capitalInit
+         * @memberof pb.CmdGetSmxlReportReply
+         * @instance
+         */
+        CmdGetSmxlReportReply.prototype.capitalInit = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * CmdGetSmxlReportReply capitalFinal.
+         * @member {number|Long} capitalFinal
+         * @memberof pb.CmdGetSmxlReportReply
+         * @instance
+         */
+        CmdGetSmxlReportReply.prototype.capitalFinal = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * CmdGetSmxlReportReply profitRate.
+         * @member {number} profitRate
+         * @memberof pb.CmdGetSmxlReportReply
+         * @instance
+         */
+        CmdGetSmxlReportReply.prototype.profitRate = 0;
+
+        /**
+         * CmdGetSmxlReportReply winCount.
+         * @member {number} winCount
+         * @memberof pb.CmdGetSmxlReportReply
+         * @instance
+         */
+        CmdGetSmxlReportReply.prototype.winCount = 0;
+
+        /**
+         * CmdGetSmxlReportReply winCode.
+         * @member {number} winCode
+         * @memberof pb.CmdGetSmxlReportReply
+         * @instance
+         */
+        CmdGetSmxlReportReply.prototype.winCode = 0;
+
+        /**
+         * CmdGetSmxlReportReply winRate.
+         * @member {number} winRate
+         * @memberof pb.CmdGetSmxlReportReply
+         * @instance
+         */
+        CmdGetSmxlReportReply.prototype.winRate = 0;
+
+        /**
+         * CmdGetSmxlReportReply loseCount.
+         * @member {number} loseCount
+         * @memberof pb.CmdGetSmxlReportReply
+         * @instance
+         */
+        CmdGetSmxlReportReply.prototype.loseCount = 0;
+
+        /**
+         * CmdGetSmxlReportReply loseCode.
+         * @member {number} loseCode
+         * @memberof pb.CmdGetSmxlReportReply
+         * @instance
+         */
+        CmdGetSmxlReportReply.prototype.loseCode = 0;
+
+        /**
+         * CmdGetSmxlReportReply loseRate.
+         * @member {number} loseRate
+         * @memberof pb.CmdGetSmxlReportReply
+         * @instance
+         */
+        CmdGetSmxlReportReply.prototype.loseRate = 0;
+
+        /**
+         * CmdGetSmxlReportReply count.
+         * @member {number} count
+         * @memberof pb.CmdGetSmxlReportReply
+         * @instance
+         */
+        CmdGetSmxlReportReply.prototype.count = 0;
+
+        /**
+         * CmdGetSmxlReportReply rankCaptial.
+         * @member {number} rankCaptial
+         * @memberof pb.CmdGetSmxlReportReply
+         * @instance
+         */
+        CmdGetSmxlReportReply.prototype.rankCaptial = 0;
+
+        /**
+         * CmdGetSmxlReportReply rankRate.
+         * @member {number} rankRate
+         * @memberof pb.CmdGetSmxlReportReply
+         * @instance
+         */
+        CmdGetSmxlReportReply.prototype.rankRate = 0;
 
         /**
          * Creates a new CmdGetSmxlReportReply instance using the specified properties.
@@ -5333,6 +5512,30 @@ $root.pb = (function () {
         CmdGetSmxlReportReply.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.capitalInit != null && Object.hasOwnProperty.call(message, "capitalInit"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.capitalInit);
+            if (message.capitalFinal != null && Object.hasOwnProperty.call(message, "capitalFinal"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.capitalFinal);
+            if (message.profitRate != null && Object.hasOwnProperty.call(message, "profitRate"))
+                writer.uint32(/* id 3, wireType 5 =*/29).float(message.profitRate);
+            if (message.winCount != null && Object.hasOwnProperty.call(message, "winCount"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.winCount);
+            if (message.winCode != null && Object.hasOwnProperty.call(message, "winCode"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.winCode);
+            if (message.winRate != null && Object.hasOwnProperty.call(message, "winRate"))
+                writer.uint32(/* id 6, wireType 5 =*/53).float(message.winRate);
+            if (message.loseCount != null && Object.hasOwnProperty.call(message, "loseCount"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.loseCount);
+            if (message.loseCode != null && Object.hasOwnProperty.call(message, "loseCode"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.loseCode);
+            if (message.loseRate != null && Object.hasOwnProperty.call(message, "loseRate"))
+                writer.uint32(/* id 9, wireType 5 =*/77).float(message.loseRate);
+            if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.count);
+            if (message.rankCaptial != null && Object.hasOwnProperty.call(message, "rankCaptial"))
+                writer.uint32(/* id 11, wireType 5 =*/93).float(message.rankCaptial);
+            if (message.rankRate != null && Object.hasOwnProperty.call(message, "rankRate"))
+                writer.uint32(/* id 12, wireType 5 =*/101).float(message.rankRate);
             return writer;
         };
 
@@ -5367,6 +5570,42 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
+                    case 1:
+                        message.capitalInit = reader.int64();
+                        break;
+                    case 2:
+                        message.capitalFinal = reader.int64();
+                        break;
+                    case 3:
+                        message.profitRate = reader.float();
+                        break;
+                    case 4:
+                        message.winCount = reader.int32();
+                        break;
+                    case 5:
+                        message.winCode = reader.int32();
+                        break;
+                    case 6:
+                        message.winRate = reader.float();
+                        break;
+                    case 7:
+                        message.loseCount = reader.int32();
+                        break;
+                    case 8:
+                        message.loseCode = reader.int32();
+                        break;
+                    case 9:
+                        message.loseRate = reader.float();
+                        break;
+                    case 10:
+                        message.count = reader.int32();
+                        break;
+                    case 11:
+                        message.rankCaptial = reader.float();
+                        break;
+                    case 12:
+                        message.rankRate = reader.float();
+                        break;
                     default:
                         reader.skipType(tag & 7);
                         break;
@@ -5402,6 +5641,42 @@ $root.pb = (function () {
         CmdGetSmxlReportReply.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.capitalInit != null && message.hasOwnProperty("capitalInit"))
+                if (!$util.isInteger(message.capitalInit) && !(message.capitalInit && $util.isInteger(message.capitalInit.low) && $util.isInteger(message.capitalInit.high)))
+                    return "capitalInit: integer|Long expected";
+            if (message.capitalFinal != null && message.hasOwnProperty("capitalFinal"))
+                if (!$util.isInteger(message.capitalFinal) && !(message.capitalFinal && $util.isInteger(message.capitalFinal.low) && $util.isInteger(message.capitalFinal.high)))
+                    return "capitalFinal: integer|Long expected";
+            if (message.profitRate != null && message.hasOwnProperty("profitRate"))
+                if (typeof message.profitRate !== "number")
+                    return "profitRate: number expected";
+            if (message.winCount != null && message.hasOwnProperty("winCount"))
+                if (!$util.isInteger(message.winCount))
+                    return "winCount: integer expected";
+            if (message.winCode != null && message.hasOwnProperty("winCode"))
+                if (!$util.isInteger(message.winCode))
+                    return "winCode: integer expected";
+            if (message.winRate != null && message.hasOwnProperty("winRate"))
+                if (typeof message.winRate !== "number")
+                    return "winRate: number expected";
+            if (message.loseCount != null && message.hasOwnProperty("loseCount"))
+                if (!$util.isInteger(message.loseCount))
+                    return "loseCount: integer expected";
+            if (message.loseCode != null && message.hasOwnProperty("loseCode"))
+                if (!$util.isInteger(message.loseCode))
+                    return "loseCode: integer expected";
+            if (message.loseRate != null && message.hasOwnProperty("loseRate"))
+                if (typeof message.loseRate !== "number")
+                    return "loseRate: number expected";
+            if (message.count != null && message.hasOwnProperty("count"))
+                if (!$util.isInteger(message.count))
+                    return "count: integer expected";
+            if (message.rankCaptial != null && message.hasOwnProperty("rankCaptial"))
+                if (typeof message.rankCaptial !== "number")
+                    return "rankCaptial: number expected";
+            if (message.rankRate != null && message.hasOwnProperty("rankRate"))
+                if (typeof message.rankRate !== "number")
+                    return "rankRate: number expected";
             return null;
         };
 
@@ -5416,7 +5691,46 @@ $root.pb = (function () {
         CmdGetSmxlReportReply.fromObject = function fromObject(object) {
             if (object instanceof $root.pb.CmdGetSmxlReportReply)
                 return object;
-            return new $root.pb.CmdGetSmxlReportReply();
+            var message = new $root.pb.CmdGetSmxlReportReply();
+            if (object.capitalInit != null)
+                if ($util.Long)
+                    (message.capitalInit = $util.Long.fromValue(object.capitalInit)).unsigned = false;
+                else if (typeof object.capitalInit === "string")
+                    message.capitalInit = parseInt(object.capitalInit, 10);
+                else if (typeof object.capitalInit === "number")
+                    message.capitalInit = object.capitalInit;
+                else if (typeof object.capitalInit === "object")
+                    message.capitalInit = new $util.LongBits(object.capitalInit.low >>> 0, object.capitalInit.high >>> 0).toNumber();
+            if (object.capitalFinal != null)
+                if ($util.Long)
+                    (message.capitalFinal = $util.Long.fromValue(object.capitalFinal)).unsigned = false;
+                else if (typeof object.capitalFinal === "string")
+                    message.capitalFinal = parseInt(object.capitalFinal, 10);
+                else if (typeof object.capitalFinal === "number")
+                    message.capitalFinal = object.capitalFinal;
+                else if (typeof object.capitalFinal === "object")
+                    message.capitalFinal = new $util.LongBits(object.capitalFinal.low >>> 0, object.capitalFinal.high >>> 0).toNumber();
+            if (object.profitRate != null)
+                message.profitRate = Number(object.profitRate);
+            if (object.winCount != null)
+                message.winCount = object.winCount | 0;
+            if (object.winCode != null)
+                message.winCode = object.winCode | 0;
+            if (object.winRate != null)
+                message.winRate = Number(object.winRate);
+            if (object.loseCount != null)
+                message.loseCount = object.loseCount | 0;
+            if (object.loseCode != null)
+                message.loseCode = object.loseCode | 0;
+            if (object.loseRate != null)
+                message.loseRate = Number(object.loseRate);
+            if (object.count != null)
+                message.count = object.count | 0;
+            if (object.rankCaptial != null)
+                message.rankCaptial = Number(object.rankCaptial);
+            if (object.rankRate != null)
+                message.rankRate = Number(object.rankRate);
+            return message;
         };
 
         /**
@@ -5428,8 +5742,63 @@ $root.pb = (function () {
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CmdGetSmxlReportReply.toObject = function toObject() {
-            return {};
+        CmdGetSmxlReportReply.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.capitalInit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.capitalInit = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.capitalFinal = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.capitalFinal = options.longs === String ? "0" : 0;
+                object.profitRate = 0;
+                object.winCount = 0;
+                object.winCode = 0;
+                object.winRate = 0;
+                object.loseCount = 0;
+                object.loseCode = 0;
+                object.loseRate = 0;
+                object.count = 0;
+                object.rankCaptial = 0;
+                object.rankRate = 0;
+            }
+            if (message.capitalInit != null && message.hasOwnProperty("capitalInit"))
+                if (typeof message.capitalInit === "number")
+                    object.capitalInit = options.longs === String ? String(message.capitalInit) : message.capitalInit;
+                else
+                    object.capitalInit = options.longs === String ? $util.Long.prototype.toString.call(message.capitalInit) : options.longs === Number ? new $util.LongBits(message.capitalInit.low >>> 0, message.capitalInit.high >>> 0).toNumber() : message.capitalInit;
+            if (message.capitalFinal != null && message.hasOwnProperty("capitalFinal"))
+                if (typeof message.capitalFinal === "number")
+                    object.capitalFinal = options.longs === String ? String(message.capitalFinal) : message.capitalFinal;
+                else
+                    object.capitalFinal = options.longs === String ? $util.Long.prototype.toString.call(message.capitalFinal) : options.longs === Number ? new $util.LongBits(message.capitalFinal.low >>> 0, message.capitalFinal.high >>> 0).toNumber() : message.capitalFinal;
+            if (message.profitRate != null && message.hasOwnProperty("profitRate"))
+                object.profitRate = options.json && !isFinite(message.profitRate) ? String(message.profitRate) : message.profitRate;
+            if (message.winCount != null && message.hasOwnProperty("winCount"))
+                object.winCount = message.winCount;
+            if (message.winCode != null && message.hasOwnProperty("winCode"))
+                object.winCode = message.winCode;
+            if (message.winRate != null && message.hasOwnProperty("winRate"))
+                object.winRate = options.json && !isFinite(message.winRate) ? String(message.winRate) : message.winRate;
+            if (message.loseCount != null && message.hasOwnProperty("loseCount"))
+                object.loseCount = message.loseCount;
+            if (message.loseCode != null && message.hasOwnProperty("loseCode"))
+                object.loseCode = message.loseCode;
+            if (message.loseRate != null && message.hasOwnProperty("loseRate"))
+                object.loseRate = options.json && !isFinite(message.loseRate) ? String(message.loseRate) : message.loseRate;
+            if (message.count != null && message.hasOwnProperty("count"))
+                object.count = message.count;
+            if (message.rankCaptial != null && message.hasOwnProperty("rankCaptial"))
+                object.rankCaptial = options.json && !isFinite(message.rankCaptial) ? String(message.rankCaptial) : message.rankCaptial;
+            if (message.rankRate != null && message.hasOwnProperty("rankRate"))
+                object.rankRate = options.json && !isFinite(message.rankRate) ? String(message.rankRate) : message.rankRate;
+            return object;
         };
 
         /**

@@ -90,6 +90,8 @@ enum MessageId {
 	Rep_Game_SmxlReport = 4010;	// 查询双盲训练月报应答
 	Req_Game_SmxlReset = 4011;	// 重置双盲训练
 	Rep_Game_SmxlReset = 4012;	// 重置双盲训练应答
+	Req_Game_GetGameOperation = 4013;	// 查询游戏操作步骤
+	Rep_Game_GetGameOperation = 4014;	// 查询游戏操作步骤应答
 
 }
 

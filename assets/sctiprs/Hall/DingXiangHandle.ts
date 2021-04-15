@@ -174,8 +174,7 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit("OPENHISTORYLAYER", 'DX');
         } else if (name == 'startDXBtn') {
             GameCfg.GameType = 2;
-            GameCfg.GameSet = cc.ext.gameData.ZBSet;
-
+            GameCfg.GameSet = cc.ext.gameData.DXSet;
             this.DXStartGameSet();
         }
     }
@@ -255,10 +254,16 @@ export default class NewClass extends cc.Component {
             let seletTime = gameData.DXSet.year + '' + gameData.DXSet.month + '' + gameData.DXSet.day;
             if (parseInt(seletTime) < parseInt(items[2])) {
                 console.log('时间不能早与股票创建时间');
+                if (gameData.DXSet.search == '随机选股') {
+                    this.DXStartGameSet();
+                }
                 return;
             } else if (parseInt(seletTime) > parseInt(items[3])) {
                 if (parseInt(items[3]) != 0) {
                     console.log('时间不能大与股票结束时间');
+                    if (gameData.DXSet.search == '随机选股') {
+                        this.DXStartGameSet();
+                    }
                     return;
                 }
             }

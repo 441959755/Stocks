@@ -25,14 +25,14 @@ Socket.prototype = {
 
         delete this.queue[decoded.messageId];
 
-        try {
-            if (callback) {
-                callback(info);
-            }
-            //   this.notification.emit(pbMessage.actionCode.toString(), pbMessage.data);
-        } catch (e) {
-            cc.log(e);
+        // try {
+        if (callback) {
+            callback(info);
         }
+        //   this.notification.emit(pbMessage.actionCode.toString(), pbMessage.data);
+        // } catch (e) {
+        //     cc.log(e);
+        // }
     },
 
     // on(actionCode, cb) {

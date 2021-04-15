@@ -57,6 +57,8 @@ export default class NewClass extends cc.Component {
 
         let gpData = GameCfg.data[0].data;
 
+        if (!gpData || gpData.length <= 0) { return }
+
         this.headImg.spriteFrame = cc.ext.gameData.headImg;
         this.expLabel.string = gameData.properties[1];
         this.levelLabel.string = gameData.properties[2];
@@ -82,17 +84,21 @@ export default class NewClass extends cc.Component {
             g_type: GameCfg.GameType,
             quotes_code: GameCfg.data[0].code,
             k_type: GameCfg.data[0].ktype,
-            k_from: gpData[0].day.replace(/-/g, ''),
-            k_to: gpData[gpData.length - 1].day.replace(/-/g, ''),
+            k_from: parseInt(gpData[0].day.replace(/-/g, '')),
+            k_to: parseInt(gpData[gpData.length - 1].day.replace(/-/g, '')),
             stock_profit_rate: ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2),
             user_profit_rate: (GameCfg.allRate * 100).toFixed(2),
             user_capital: gameData.properties[3],
             user_profit: (GameCfg.finalfund - gameData.properties[3]),
             ts: new Date().getTime(),
             rank: 0,
+            ref_id: 0,
         }
         if (GameCfg.GameType < 4) {
             datas.rank = datas.user_profit_rate >= datas.stock_profit_rate ? 1 : 2;
+            if (GameCfg.GameType == 1) {
+                datas.ref_id = 0;
+            }
         }
 
         socket.send(4005, PB.onCmdGameOverConvertToBuff(datas), (info) => {

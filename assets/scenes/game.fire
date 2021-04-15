@@ -192,7 +192,7 @@
       "array": [
         0,
         0,
-        220.83647796503186,
+        411.3620667976084,
         0,
         0,
         0,
@@ -13257,7 +13257,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        586.879,
+        585,
         0,
         0,
         0,
@@ -15566,7 +15566,7 @@
     "_target": null,
     "_alignFlags": 32,
     "_left": 0,
-    "_right": -1.879000000000019,
+    "_right": 0,
     "_top": 0,
     "_bottom": 0,
     "_verticalCenter": 0,
@@ -22528,7 +22528,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        123.244,
+        123.24400000000003,
         0,
         0,
         0,

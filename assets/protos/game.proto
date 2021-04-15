@@ -35,6 +35,22 @@ enum GamePropertyId {
 }
 
 
+// 游戏操作Id
+enum GameOperationId {
+	GameOperationId_NULL = 0;	// 空
+
+	Bid = 1;					// 买入
+	Ask = 2;					// 卖出
+	Wait = 3;					// 观望
+	Hold = 4;					// 持有
+	Ask_Force = 5;				// 强制卖出
+	Long = 8;					// 买空
+	Short = 9;					// 卖空
+
+	END = 150;					// 结束
+}
+
+
 // 游戏输赢计数器
 message GameCounter {
 	GameType game = 1;	// 游戏类型ID
@@ -92,6 +108,18 @@ message GameResult {
 }
 
 
+// 游戏操作步骤
+message GameOperationItem {
+	int32 ts = 1;				// 时间：日K线的格式为YYYYMMDD，分时K线的格式为HHMMSS
+	GameOperationId op_id = 2;	// 操作Id
+}
+message GameOperations {
+	int32 code = 1;							// 行情代码：股票或期货
+	KType k_type = 2;						// 行情类型：日K，分时
+	repeated GameOperationItem items = 3;	// 操作集合
+}
+
+
 
 
 
@@ -145,7 +173,8 @@ message CmdGameStart {
 
 // 结束游戏
 message CmdGameOver {
-	GameResult result = 1;	// 游戏结果
+	GameResult result = 1;			// 游戏结果
+	GameOperations operations = 2;	// 游戏操作步骤集合
 }
 // 结束游戏应答
 // 应答消息：无消息体
@@ -160,7 +189,19 @@ message CmdQueryGameResult {
 }
 // 查询游戏结果应答
 message CmdQueryGameResultReply {
-	repeated GameResult results = 1;	// 游戏结果数组
+	repeated GameResult results = 1;// 游戏结果数组
+}
+
+
+// 查询游戏操作步骤
+message CmdGetGameOperations {
+	int32 uid = 1;	// 用户ID
+	int64 ts = 2;	// 游戏结果的时间戳
+}
+// 查询游戏操作步骤应答
+message CmdGetGameOperationsReply {
+	ErrorInfo err = 1;				// 查询结果
+	GameOperations operations = 2;	// 游戏操作步骤集合
 }
 
 

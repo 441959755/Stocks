@@ -105,20 +105,26 @@ export default class NewClass extends cc.Component {
 
     start() {
         let nodes = this.node.children;
+
+        //双盲
         if (GameCfg.GameType == 1) {
             nodes[4].active = false;
         }
 
-        //训练指标
+        //定向
         else if (GameCfg.GameType == 2) {
-            // this.node.active=false;
 
+
+        }
+        //训练指标
+        else if (GameCfg.GameType == 3) {
+            // this.node.active=false;
             nodes[0].active = false;
             nodes[1].active = false;
             nodes[2].active = false;
             nodes[3].active = false;
             this.rZoom.isChecked = true;
-            GlobalEvent.emit('labelPoint', cc.winSize.width + this.rightBox.width / 2 - 150);
+            // GlobalEvent.emit('labelPoint', cc.winSize.width + this.rightBox.width / 2 - 150);
         }
     }
 
@@ -185,13 +191,14 @@ export default class NewClass extends cc.Component {
         }
 
         //是否一直显示
-        if (cc.ext.gameData.SMSet.isShowVol) {
+        if (GameCfg.GameSet.isShowVol) {
             flagData.cpm = true;
         }
         GlobalEvent.emit('on_off', flagData);
     }
 
     onClick(event, data) {
+        //先项
         if (data == 'ma_boll' || data == 'CPM' || data == 'MACD' || data == 'KDJ' || data == 'RSI') {
             this.setBoxfalg();
         } else if (data == 'rZoomBtn') {
@@ -199,11 +206,11 @@ export default class NewClass extends cc.Component {
             if (this.rZoom.isChecked) {
                 this.rZoom.node.children[0].active = false;
                 this.rightBox.x = cc.winSize.width / 2 + this.rightBox.width / 2;
-                GlobalEvent.emit('labelPoint', cc.winSize.width + this.rightBox.width / 2 - 150);
+                //   GlobalEvent.emit('labelPoint', cc.winSize.width + this.rightBox.width / 2 - 150);
             } else {
                 this.rZoom.node.children[0].active = true;
                 this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
-                GlobalEvent.emit('labelPoint', cc.winSize.width - this.rightBox.width / 2 - 150);
+                //   GlobalEvent.emit('labelPoint', cc.winSize.width - this.rightBox.width / 2 - 150);
             }
             GlobalEvent.emit('setDrawing', this.rZoom.isChecked);
         } else if (data == 'lZoomBtn') {

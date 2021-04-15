@@ -405,6 +405,8 @@ export default class NewClass extends cc.Component {
 
         let viweData = cc.ext.gameData.gameDatas[0].data;
 
+        if (!viweData || viweData.length <= 0) { return }
+
         this.bottomValue = viweData[0].low;
         this.bottomVol = viweData[0].value;
         this.topValue = 0;
@@ -461,6 +463,7 @@ export default class NewClass extends cc.Component {
         }
 
         GameCfg.huizhidatas = cc.ext.gameData.gameDatas[0].data.length - 150;
+        if (GameCfg.huizhidatas <= 0) { return }
 
         cc.ext.beg_end[1] = GameCfg.huizhidatas;
         cc.ext.beg_end[0] = cc.ext.beg_end[1] - this.initDrawNumber;
@@ -688,7 +691,7 @@ export default class NewClass extends cc.Component {
 
     //成交量绘制
     start() {
-        if (GameCfg.GameType == 2) {
+        if (GameCfg.GameType == 3) {
             if (GameCfg.GameSet.select != '均线') {
                 this.drawMA.node.active = false;
             }

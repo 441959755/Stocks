@@ -30,34 +30,30 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         //设置刻度label位置
-        GlobalEvent.on('labelPoint', (rx) => {
-            this.laNode.x = rx;
-        }, this);
+        // GlobalEvent.on('labelPoint', (rx) => {
+        //     this.laNode.x = rx;
+        // }, this);
 
         GlobalEvent.on('setDrawing', (falg) => {
             if (falg) {
-                this.node.width = cc.winSize.width - 20;
+                this.node.width = this.node.width + 164;
             } else {
-                this.node.width = cc.winSize.width - 20 - 164;
+                this.node.width = this.node.width - 164;
             }
-            this.masks.forEach(el => {
-                el.width = this.node.width;
-            })
+            // this.masks.forEach(el => {
+            //     el.width = this.node.width;
+            // })
         }, this)
 
-        GlobalEvent.on(EventCfg.SET_DRAW_SIZE,(falg)=>{
-            if(falg){
-                this.node.width-=206;
-                this.node.x+=206;
-            }else{
-                this.node.width+=206;
-                this.node.x-=206;
+        GlobalEvent.on(EventCfg.SET_DRAW_SIZE, (falg) => {
+            if (falg) {
+                this.node.width -= 206;
+                this.node.x += 206;
+            } else {
+                this.node.width += 206;
+                this.node.x -= 206;
             }
-            // this.masks.forEach(el=>{
-            //     el.width=this.node.width;
-            //
-            // })
-        },this);
+        }, this);
 
     }
 
@@ -147,7 +143,7 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
-        GlobalEvent.off('labelPoint');
+        //  GlobalEvent.off('labelPoint');
         GlobalEvent.off('setDrawing');
         GlobalEvent.off(EventCfg.SET_DRAW_SIZE);
     }

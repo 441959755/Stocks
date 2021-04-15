@@ -111,26 +111,28 @@ PBHelper.prototype = {
                 uid: data.uid,
                 gType: data.g_type,
                 // g_type: data.g_type,
-                //  quotes_code: data.quotesCode,
-                quotesCode: data.quotesCode,
-                //  k_type: data.k_type,
+                //   quotes_code: data.quotes_code,
+                quotesCode: data.quotes_code,
+                //   k_type: data.k_type,
 
                 kType: data.k_type,
-                //    k_from: data.k_from,
+                // k_from: data.k_from,
 
                 kFrom: data.k_from,
-                // k_to: data.k_to,
+                //  k_to: data.k_to,
 
                 kTo: data.k_to,
-                // stock_profit_rate: data.stock_profit_rate,
+                //   stock_profit_rate: data.stock_profit_rate,
+                stockProfitRate: data.stock_profit_rate,
                 userProfitRate: data.user_profit_rate,
-                //  user_profit_rate: data.user_profit_rate,
+                // user_profit_rate: data.user_profit_rate,
                 // user_capital: data.user_capital,
                 // user_profit: data.user_profit,
                 userCapital: data.user_capital,
                 userProfit: data.user_profit,
                 ts: data.ts,
                 rank: data.rank,
+                refId: data.ref_id,
             }
         })
 
@@ -160,6 +162,7 @@ PBHelper.prototype = {
 
     selectBlackData(id, buff) {
         let data;
+        console.log('id:' + id + '跟新数据');
         if (id == 4002) {
             data = this.onCmdGameLoginReplyConvertToData(buff);
             return data;
@@ -168,11 +171,16 @@ PBHelper.prototype = {
             return data;
         } else if (id == 1002) {
             let decode = GameProperties.decode(new Uint8Array(buff));
+            // items: Array(1)
+            // 0: GamePropertyItem {id: 3, oldValue: 100000, newValue: 100000}
+            // length: 1
 
-            gameData[decode.id] = decode.new_value;
-            gameData = gameData;
+            for (let i = 0; i < decode.items.length; i++) {
+                gameData.properties[decode.items[i].id] = decode.items[i].newValue;
+                console.log('id:' + decode.items[i].id + '   ' + 'value:' + decode.items[i].newValue);
+            }
 
-            console.log('id:' + id + '跟新数据');
+            gameData.properties = gameData.properties;
         } else if (id == 4004 || id == 4006) {
             data = ErrorInfo.decode(new Uint8Array(buff));
             return data;

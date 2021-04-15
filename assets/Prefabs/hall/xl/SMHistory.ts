@@ -54,25 +54,30 @@ export default class NewClass extends cc.Component {
                 }
                 return name;
             }
-
-            let sumEar;
+            // {"uid":1000042,"gType":"ShuangMang","quotesCode":600000,
+            // "kType":"Day","kFrom":20100101,"kTo":20101010,
+            // "stockProfitRate":19.1200008392334,
+            // "userProfitRate":10.220000267028809,
+            // "userCapital":"100000","userProfit":"800","ts":"1618454133","rank":2}]}
+            let sumEar = 0;
             for (let i = 0; i < datas.length; i++) {
                 let node = cc.instantiate(this.historyItem);
                 let nodes = node.children;
                 this.content.addChild(node);
+                node.setPosition(cc.v2(0, 0));
                 nodes[0].getComponent(cc.Label).string = datas[i].uid;
-                nodes[1].getComponent(cc.Label).string = datas[i].quotes_code;
-                nodes[2].getComponent(cc.Label).string = selectName(datas[i].quotes_code);
-                nodes[3].getComponent(cc.Label).string = datas[i].k_from;			// 行情起始日期YYYYMMDD或时间HHMMSS
-                nodes[4].getComponent(cc.Label).string = datas[i].k_to;
+                nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
+                nodes[2].getComponent(cc.Label).string = selectName(datas[i].quotesCode);
+                nodes[3].getComponent(cc.Label).string = datas[i].kFrom;			// 行情起始日期YYYYMMDD或时间HHMMSS
+                nodes[4].getComponent(cc.Label).string = datas[i].kTo;
 
-                nodes[5].getComponent(cc.Label).string = datas[i].stock_profit_rate;
-                nodes[6].getComponent(cc.Label).string = datas[i].user_profit_rate;
-                nodes[6].getComponent(cc.Label).string = datas[i].user_profit;
-                sumEar += datas[i].user_profit;
+                nodes[5].getComponent(cc.Label).string = datas[i].stockProfitRate.toFixed(2) + '%';
+                nodes[6].getComponent(cc.Label).string = datas[i].userProfitRate.toFixed(2) + '%';
+                nodes[7].getComponent(cc.Label).string = datas[i].userProfit;
+                sumEar += datas[i].userProfit;
             }
 
-            this.label.string = sumEar;
+            this.label.string = sumEar + '';
         }
 
     }

@@ -54,8 +54,8 @@ export namespace pb {
         Rep_Game_Start = 4004,
         Req_Game_Over = 4005,
         Rep_Game_Over = 4006,
-        Req_Game_GameResult = 4007,
-        Rep_Game_GameResult = 4008,
+        Req_Game_QueryGameResult = 4007,
+        Rep_Game_QueryGameResult = 4008,
         Req_Game_SmxlReport = 4009,
         Rep_Game_SmxlReport = 4010,
         Req_Game_SmxlReset = 4011,
@@ -534,6 +534,7 @@ export namespace pb {
         Exp = 1,
         Level = 2,
         ShuangMang_Gold = 3,
+        Diamond = 4,
         Max = 30
     }
 
@@ -1087,16 +1088,19 @@ export namespace pb {
         userProfitRate?: (number|null);
 
         /** GameResult userCapital */
-        userCapital?: (number|null);
+        userCapital?: (number|Long|null);
 
         /** GameResult userProfit */
-        userProfit?: (number|null);
+        userProfit?: (number|Long|null);
 
         /** GameResult ts */
         ts?: (number|Long|null);
 
         /** GameResult rank */
         rank?: (number|null);
+
+        /** GameResult refId */
+        refId?: (number|Long|null);
     }
 
     /** Represents a GameResult. */
@@ -1133,16 +1137,19 @@ export namespace pb {
         public userProfitRate: number;
 
         /** GameResult userCapital. */
-        public userCapital: number;
+        public userCapital: (number|Long);
 
         /** GameResult userProfit. */
-        public userProfit: number;
+        public userProfit: (number|Long);
 
         /** GameResult ts. */
         public ts: (number|Long);
 
         /** GameResult rank. */
         public rank: number;
+
+        /** GameResult refId. */
+        public refId: (number|Long);
 
         /**
          * Creates a new GameResult instance using the specified properties.
@@ -2075,6 +2082,42 @@ export namespace pb {
 
     /** Properties of a CmdGetSmxlReportReply. */
     interface ICmdGetSmxlReportReply {
+
+        /** CmdGetSmxlReportReply capitalInit */
+        capitalInit?: (number|Long|null);
+
+        /** CmdGetSmxlReportReply capitalFinal */
+        capitalFinal?: (number|Long|null);
+
+        /** CmdGetSmxlReportReply profitRate */
+        profitRate?: (number|null);
+
+        /** CmdGetSmxlReportReply winCount */
+        winCount?: (number|null);
+
+        /** CmdGetSmxlReportReply winCode */
+        winCode?: (number|null);
+
+        /** CmdGetSmxlReportReply winRate */
+        winRate?: (number|null);
+
+        /** CmdGetSmxlReportReply loseCount */
+        loseCount?: (number|null);
+
+        /** CmdGetSmxlReportReply loseCode */
+        loseCode?: (number|null);
+
+        /** CmdGetSmxlReportReply loseRate */
+        loseRate?: (number|null);
+
+        /** CmdGetSmxlReportReply count */
+        count?: (number|null);
+
+        /** CmdGetSmxlReportReply rankCaptial */
+        rankCaptial?: (number|null);
+
+        /** CmdGetSmxlReportReply rankRate */
+        rankRate?: (number|null);
     }
 
     /** Represents a CmdGetSmxlReportReply. */
@@ -2085,6 +2128,42 @@ export namespace pb {
          * @param [properties] Properties to set
          */
         constructor(properties?: pb.ICmdGetSmxlReportReply);
+
+        /** CmdGetSmxlReportReply capitalInit. */
+        public capitalInit: (number|Long);
+
+        /** CmdGetSmxlReportReply capitalFinal. */
+        public capitalFinal: (number|Long);
+
+        /** CmdGetSmxlReportReply profitRate. */
+        public profitRate: number;
+
+        /** CmdGetSmxlReportReply winCount. */
+        public winCount: number;
+
+        /** CmdGetSmxlReportReply winCode. */
+        public winCode: number;
+
+        /** CmdGetSmxlReportReply winRate. */
+        public winRate: number;
+
+        /** CmdGetSmxlReportReply loseCount. */
+        public loseCount: number;
+
+        /** CmdGetSmxlReportReply loseCode. */
+        public loseCode: number;
+
+        /** CmdGetSmxlReportReply loseRate. */
+        public loseRate: number;
+
+        /** CmdGetSmxlReportReply count. */
+        public count: number;
+
+        /** CmdGetSmxlReportReply rankCaptial. */
+        public rankCaptial: number;
+
+        /** CmdGetSmxlReportReply rankRate. */
+        public rankRate: number;
 
         /**
          * Creates a new CmdGetSmxlReportReply instance using the specified properties.

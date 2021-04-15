@@ -54,6 +54,11 @@ export default class NewClass extends cc.Component {
 
     helpLayer: cc.Node = null;
 
+    @property(cc.Prefab)
+    playerInfo: cc.Prefab = null;
+
+    playerInfoLayer: cc.Node = null;
+
 
     onLoad() {
 
@@ -81,18 +86,17 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             if (str == 'SM') {
                 if (data) {
-                    this.openHistoryLayer && (this.openHistoryLayer(data));
+                    this.openHistoryLayer && (this.openHistoryLayer(data, str));
                 } else {
                     //SM的要获取服务器消息
-                    this.acquireSMhistoryInfo(() => {
-                        this.openHistoryLayer && (this.openHistoryLayer(null));
+                    this.acquireSMhistoryInfo((info) => {
+                        this.openHistoryLayer && (this.openHistoryLayer(info, str));
                     });
                 }
             } else {
                 //其他在本地缓存取
-                this.openHistoryLayer && (this.openHistoryLayer(null));
+                this.openHistoryLayer && (this.openHistoryLayer(null, str));
             }
-
         }, this);
 
         GlobalEvent.on('OPENSETLAYER', (str) => {
@@ -154,6 +158,15 @@ export default class NewClass extends cc.Component {
         }, this);
 
         GlobalEvent.on('onCmdQuoteQuery', this.onCmdQuoteQuery.bind(this), this);
+
+        //打开个人中心
+        GlobalEvent.on('OPENPLAYERINFO', () => {
+            if (!this.playerInfoLayer) {
+                this.playerInfoLayer = cc.instantiate(this.playerInfo);
+                this.node.addChild(this.playerInfoLayer);
+            }
+            this.playerInfoLayer.active = true;
+        }, this);
     }
 
     openYieldLaye(info) {
@@ -167,18 +180,15 @@ export default class NewClass extends cc.Component {
     }
 
 
-    openHistoryLayer(info) {
-        let str;
-        if (info) {
-            str = 'SM';
-        }
+    openHistoryLayer(info, type?) {
+
         if (!this.historyLayer) {
             //   this.historyLayer = cc.instantiate(this.historyPre)
             this.historyLayer = cc.instantiate(this.historyPre);
             this.node.addChild(this.historyLayer);
         }
         this.historyLayer.active = true;
-        this.historyLayer.getComponent('SMHistory').historyType = str;
+        this.historyLayer.getComponent('SMHistory').historyType = type;
         this.historyLayer.getComponent('SMHistory').historyInfo = info;
         this.historyLayer.getComponent('SMHistory').onShow();
     }
@@ -196,6 +206,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('OPENHELPLAYER');
         GlobalEvent.off('onCmdQuoteQuery');
         GlobalEvent.off('OPENDXKAYER');
+        GlobalEvent.off('OPENPLAYERINFO');
     }
 
     onCmdGameStart(data, info1) {
@@ -209,10 +220,10 @@ export default class NewClass extends cc.Component {
                     socket.send(2003, PB.onCmdQuoteQueryConvertToBuff(info1), (info) => {
                         console.log('onCmdQuoteQuery' + JSON.stringify(info));
                         info.items.forEach(el => {
-                            let date = new Date(el.timestamp);
-                            let ye = date.getFullYear();
-                            let mon = date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
-                            let da = date.getDate() >= 10 ? date.getDate() : '0' + (date.getDate());
+                            //  let date = new Date(el.timestamp);
+                            let ye = (el.timestamp + '').slice(0, 4);
+                            let mon = (el.timestamp + '').slice(4, 6);
+                            let da = (el.timestamp + '').slice(6);
                             let fromDate = ye + '-' + mon + '-' + da;
                             let data = {
                                 day: fromDate,

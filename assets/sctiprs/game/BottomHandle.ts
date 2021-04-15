@@ -135,8 +135,12 @@ export default class NewClass extends cc.Component {
 
     onSetMrCount() {
         this.gpData = GameCfg.data[0].data;
+
         if (this.ziChan > 0 && GameCfg.huizhidatas <= this.gpData.length) {
-            this.keMrCount = (this.ziChan / parseFloat(this.gpData[GameCfg.huizhidatas - 1].open) + '');
+            if (this.gpData[GameCfg.huizhidatas - 1]) {
+                this.keMrCount = (this.ziChan / parseFloat(this.gpData[GameCfg.huizhidatas - 1].open) + '');
+            }
+
         }
     }
 
@@ -152,14 +156,16 @@ export default class NewClass extends cc.Component {
         this.mrBtn.node.active = !this.flag;
         this.mcBtn.node.active = this.flag;
 
-        if (GameCfg.GameType == 2) {
-            let info = this.node.getChildByName('info');
-            info.active = true;
-            let nodes = info.children;
-            nodes[2].getComponent(cc.Label).string = '股票信息:' + GameCfg.data[0].name;
-            nodes[1].getComponent(cc.Label).string = '起始时间:' + GameCfg.data[0].data[0].day;
-            let le = GameCfg.data[0].data.length;
-            nodes[0].getComponent(cc.Label).string = '结束时间:' + GameCfg.data[0].data[le - 1].day;
+        if (GameCfg.GameType == 3) {
+            if (GameCfg.data && GameCfg.data.length > 0) {
+                let info = this.node.getChildByName('info');
+                info.active = true;
+                let nodes = info.children;
+                nodes[2].getComponent(cc.Label).string = '股票信息:' + GameCfg.data[0].name;
+                nodes[1].getComponent(cc.Label).string = '起始时间:' + GameCfg.data[0].data[0].day;
+                let le = GameCfg.data[0].data.length;
+                nodes[0].getComponent(cc.Label).string = '结束时间:' + GameCfg.data[0].data[le - 1].day;
+            }
         }
     }
 

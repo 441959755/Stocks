@@ -129,7 +129,7 @@ export default class GameData {
         cc.sys.localStorage.setItem('DXSET', JSON.stringify(val));
     }
 
-    private _properties;
+    private _properties = [];
     //// 金币
     // 1;				// 经验
     //  2;				// 等级
@@ -141,6 +141,11 @@ export default class GameData {
     public set properties(val) {
         this._properties = val;
         cc.sys.localStorage.setItem('properties', JSON.stringify(val));
+        //砖石
+        GlobalEvent.emit(EventCfg.BIRCKCHANGE);
+        GlobalEvent.emit(EventCfg.GOLDCHANGE);
+        GlobalEvent.emit(EventCfg.LEVELCHANGE);
+        GlobalEvent.emit(EventCfg.EXPCHANGE);
     }
 
 }

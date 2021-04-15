@@ -29,3 +29,6 @@ export default class LLWConfig {
 //pbts -o proto.d.ts proto.js
 
 
+//<input id="file" type="file" class="fileToUpload" style="opacity:0;position:absolute;" onchange="handleFiles(this)"/> 
+
+
