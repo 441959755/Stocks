@@ -297,6 +297,8 @@ export default class NewClass extends cc.Component {
             return e.ts - t.ts;
         })
 
+        if (!curDay || curDay.length <= 0) { return }
+
         let w = this.draw.node.width / 20;
         //   let h = this.draw.node.height / 5;
         let dots = [];

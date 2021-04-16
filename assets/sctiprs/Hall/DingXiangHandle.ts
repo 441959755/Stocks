@@ -202,10 +202,10 @@ export default class NewClass extends cc.Component {
             let le = parseInt(Math.random() * stocklist.length);
             items = stocklist[le].split('|');
             data.code = items[0];
-            if (data.code < 600000) {
-                this.DXStartGameSet();
-                return;
-            }
+            // if (data.code < 600000) {
+            //     this.DXStartGameSet();
+            //     return;
+            // }
         } else {
             let dex;
             let arrStr = gameData.DXSet.search.split(' ');
@@ -226,6 +226,7 @@ export default class NewClass extends cc.Component {
                 data.code = items[0];
             } else {
                 console.log('输入的股票代码不正确');
+                //  this.DXStartGameSet();
                 return;
             }
         }
@@ -254,16 +255,16 @@ export default class NewClass extends cc.Component {
             let seletTime = gameData.DXSet.year + '' + gameData.DXSet.month + '' + gameData.DXSet.day;
             if (parseInt(seletTime) < parseInt(items[2])) {
                 console.log('时间不能早与股票创建时间');
-                if (gameData.DXSet.search == '随机选股') {
-                    this.DXStartGameSet();
-                }
+                // if (gameData.DXSet.search == '随机选股') {
+                this.DXStartGameSet();
+                //  }
                 return;
             } else if (parseInt(seletTime) > parseInt(items[3])) {
                 if (parseInt(items[3]) != 0) {
                     console.log('时间不能大与股票结束时间');
-                    if (gameData.DXSet.search == '随机选股') {
-                        this.DXStartGameSet();
-                    }
+                    //  if (gameData.DXSet.search == '随机选股') {
+                    this.DXStartGameSet();
+                    //  }
                     return;
                 }
             }

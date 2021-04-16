@@ -167,6 +167,10 @@ export default class NewClass extends cc.Component {
                 nodes[0].getComponent(cc.Label).string = '结束时间:' + GameCfg.data[0].data[le - 1].day;
             }
         }
+
+        this.roundNumber = GameCfg.data[0].data.length - GameCfg.huizhidatas;
+
+        this.tipsLabel.string = '回合数：' + this.roundNumber;
     }
 
     //回合数
@@ -404,7 +408,11 @@ export default class NewClass extends cc.Component {
             this.buyData.push(GameCfg.huizhidatas - 2);
             let curClose = parseFloat(data[GameCfg.huizhidatas - 1].close);
 
-            let preClose = parseFloat(data[GameCfg.huizhidatas - 2].open);
+            console.log('curClose:' + curClose);
+
+            let preClose = parseFloat(data[GameCfg.huizhidatas - 2].close);
+
+            console.log('preClose:' + preClose);
 
             let rate = (curClose - preClose) / preClose;
             GlobalEvent.emit('updateRate', [rate]);
@@ -418,14 +426,15 @@ export default class NewClass extends cc.Component {
             }
             GameCfg.eachRate.push(this.rateItem);
             GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.eachRate);
-
         }
+
         //卖出
         else if (state == 'mcBtn') {
-            this.saleData.push(GameCfg.huizhidatas - 1);
+            this.saleData.push(GameCfg.huizhidatas - 2);
             let curClose = parseFloat(data[GameCfg.huizhidatas - 2].close);
-
-            let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].open);
+            console.log('curClose:' + curClose);
+            let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
+            console.log('preClose:' + preClose);
 
             let rate = (curClose - preClose) / preClose;
             GameCfg.allRate = ((GameCfg.allRate + 1) * (rate + 1) - 1);
@@ -435,6 +444,7 @@ export default class NewClass extends cc.Component {
                 GameCfg.profitCount++;
             }
             GlobalEvent.emit('updateRate', [rate, GameCfg.allRate]);
+
             this.isFlag = false;
 
             if (this.keMcCount == 0) {

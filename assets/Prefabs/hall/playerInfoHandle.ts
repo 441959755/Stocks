@@ -40,9 +40,9 @@ export default class NewClass extends cc.Component {
         GameData.userName && (this.nameLa.string = '昵称:    ' + GameData.userName)
 
         GameData.properties[2] && (this.lvLa.string = 'lv: ' + GameData.properties[2])
-
+        let max_exp
         if (levelInfoCfg) {
-            let max_exp = levelInfoCfg[GameData.properties[2]].max_exp;
+            max_exp = levelInfoCfg[GameData.properties[2]].max_exp;
         }
 
 
@@ -73,7 +73,15 @@ export default class NewClass extends cc.Component {
                     nick: v,
                 }
                 socket.send(3003, PB.onCmdEditNickConvertToBuff(data), (info) => {
-                    console.log('onCmdEditNickConvertToBuff:' + info);
+                    console.log('onCmdEditNickConvertToBuff:' + JSON.stringify(info));
+                    if (!info.code) {
+                        this.tckNode.active = false;
+                        GameData.userName = v;
+
+                        GameData.userName && (this.nameLa.string = '昵称:    ' + GameData.userName)
+                    } else {
+                        console.log('名字错误!:' + info.code + info.err);
+                    }
 
                 })
 
@@ -87,6 +95,8 @@ export default class NewClass extends cc.Component {
 
 
             });
+        } else if (name == 'closeBtn') {
+            this.node.active = false;
         }
 
     }

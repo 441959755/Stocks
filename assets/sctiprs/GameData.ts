@@ -25,6 +25,7 @@ export default class GameData {
 
     public static set userName(val) {
         this._userName = val;
+        GlobalEvent.emit(EventCfg.NAMECHANGE);
     }
 
     //砖石

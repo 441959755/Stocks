@@ -1,6 +1,7 @@
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from '../game/GameCfg';
+import LoadUtils from '../Utils/LoadUtils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -169,7 +170,9 @@ export default class NewClass extends cc.Component {
         }, this);
     }
 
+
     openYieldLaye(info) {
+
         if (!this.SMYieldLayer) {
             this.SMYieldLayer = cc.instantiate(this.SMYieldPre);
             this.node.addChild(this.SMYieldLayer);
@@ -177,10 +180,12 @@ export default class NewClass extends cc.Component {
         this.SMYieldLayer.active = true;
         this.SMYieldLayer.getComponent('SMYieldCurve').yieldInfo = info;
         this.SMYieldLayer.getComponent('SMYieldCurve').onShow();
+
     }
 
 
     openHistoryLayer(info, type?) {
+
 
         if (!this.historyLayer) {
             //   this.historyLayer = cc.instantiate(this.historyPre)
@@ -191,6 +196,9 @@ export default class NewClass extends cc.Component {
         this.historyLayer.getComponent('SMHistory').historyType = type;
         this.historyLayer.getComponent('SMHistory').historyInfo = info;
         this.historyLayer.getComponent('SMHistory').onShow();
+        if (this.SMYieldLayer) {
+            this.historyLayer.zIndex = this.SMYieldLayer.zIndex + 1;
+        }
     }
 
 

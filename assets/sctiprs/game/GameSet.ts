@@ -142,6 +142,10 @@ export default class NewClass extends cc.Component {
         this.initMALa();
     }
 
+    // onEnable() {
+
+    // }
+
     onDestroy() {
         //  GlobalEvent.off('labelPoint');
         GlobalEvent.off('setDrawing');

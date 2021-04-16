@@ -3,7 +3,8 @@ import EventCfg from "../Utils/EventCfg";
 import DrawUtils from "../Utils/DrawUtils";
 
 import GameCfg from "./GameCfg";
-import Game = cc.Game;
+
+
 
 const { ccclass, property } = cc._decorator;
 
@@ -115,7 +116,15 @@ export default class NewClass extends cc.Component {
             this.drawPcm.node.active = flagData.cpm;
             this.drawVol.node.active = flagData.cpm;
             if (flagData.macd || flagData.kdj || flagData.rsi) {
-                //  this.Mask.active = true;
+                if (GameCfg.GameType != 3) {
+                    this.Mask.active = true;
+                }
+
+                if (GameCfg.GameSet.isBW) {
+                    this.Mask.color = cc.Color.BLACK;
+                } else {
+                    this.Mask.color = cc.Color.WHITE;
+                }
                 this.drawVol.node.zIndex = 1;
                 this.drawPcm.node.zIndex = 2;
                 this.Mask.zIndex = 3;
@@ -141,19 +150,19 @@ export default class NewClass extends cc.Component {
         this.drawKDJ && (this.drawKDJ.node.active = false)
         this.drawRSI && (this.drawRSI.node.active = false)
 
-        if(GameCfg.GameType==2){
-            if(GameCfg.GameSet.select=='MACD'){
-                this.drawMACD.node.active=true;
-                this.drawVol.node.active=false;
-                this.drawPcm.node.active=false;
-            }else if(GameCfg.GameSet.select=='KDJ'){
-                this.drawKDJ.node.active=true;
-                this.drawVol.node.active=false;
-                this.drawPcm.node.active=false;
-            }else if(GameCfg.GameSet.select=='RSI'){
-                this.drawRSI.node.active=true;
-                this.drawVol.node.active=false;
-                this.drawPcm.node.active=false;
+        if (GameCfg.GameType == 3) {
+            if (GameCfg.GameSet.select == 'MACD') {
+                this.drawMACD.node.active = true;
+                this.drawVol.node.active = false;
+                this.drawPcm.node.active = false;
+            } else if (GameCfg.GameSet.select == 'KDJ') {
+                this.drawKDJ.node.active = true;
+                this.drawVol.node.active = false;
+                this.drawPcm.node.active = false;
+            } else if (GameCfg.GameSet.select == 'RSI') {
+                this.drawRSI.node.active = true;
+                this.drawVol.node.active = false;
+                this.drawPcm.node.active = false;
             }
         }
         let huizhidatas = cc.ext.gameData.gameDatas[0].data;
@@ -416,9 +425,9 @@ export default class NewClass extends cc.Component {
 
         let bgheight = 150;
 
-        let x = 10 + (some * cc.ext.hz_width) + cc.ext.hz_width  / 2;
+        let x = 10 + (some * cc.ext.hz_width) + cc.ext.hz_width / 2;
 
-        let preX = 10 + ((some - 1) * cc.ext.hz_width)  + cc.ext.hz_width/ 2;
+        let preX = 10 + ((some - 1) * cc.ext.hz_width) + cc.ext.hz_width / 2;
 
         let kY = this.Klist[index] / this.maxK * bgheight;
 
@@ -456,7 +465,7 @@ export default class NewClass extends cc.Component {
 
         let bgHeight = 150;
         let RSIX = 10 + (some * cc.ext.hz_width) + cc.ext.hz_width / 2;
-        let preRSIX = 10 + ((some - 1) * cc.ext.hz_width)  + cc.ext.hz_width / 2;
+        let preRSIX = 10 + ((some - 1) * cc.ext.hz_width) + cc.ext.hz_width / 2;
         //RSI6
         if (index > 5) {
             let RSI6Y = this.Rs6[index - 5] / 100 * bgHeight;
@@ -533,7 +542,7 @@ export default class NewClass extends cc.Component {
         } else if (this.DIFList[index - 1] <= 0) {
             predifY = -(this.DIFList[index - 1] / this.minDIF * bgHeight / 2)
         }
-        let difx = 10 + (some * cc.ext.hz_width)  + cc.ext.hz_width / 2;
+        let difx = 10 + (some * cc.ext.hz_width) + cc.ext.hz_width / 2;
         let preX = 10 + ((some - 1) * cc.ext.hz_width) + cc.ext.hz_width / 2;
 
         if (some > 0) {

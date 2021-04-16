@@ -93,8 +93,26 @@ export default class WechatSDK {
         //     return dataString
         // }
         // data = Uint8ArrayToString(data);
+        // let buff1 = PB.onCmdLoginConvertToBuff(loginInfo);
 
+        // buff1 = buff1.buffer.slice(buff1.byteOffset, buff1.byteLength + buff1.byteOffset);
 
+        // wx.request({
+        //     url: 'http://192.168.100.198:80/l', //仅为示例，并非真实的接口地址 
+        //     data: buff1,
+        //     method: 'POST',
+        //     responseType: 'arraybuffer',
+        //     header: {
+        //         'content-type': "application/x-protobuf" // 默认值
+        //     },
+        //     success(res) {
+        //         console.log(res.data)
+        //         let decoded = PB.onCmdLoginConvertToData(res);
+        //         if (decoded) {
+        //             call && (call(decoded));
+        //         }
+        //     }
+        // })
 
         HttpMgr.getInstance().loginWeb(code, loginInfo, call, () => {
             console.log('onLoginCodeHttpRequest err');

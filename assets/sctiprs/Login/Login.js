@@ -27,16 +27,40 @@ cc.Class({
 
     onLoad() {
         this.init();
-
-        LoadUtils.loadRes('protos/stocklist', (text) => {
-            global.stocklist = text.text.split('\n');
-            // 股票代码|股票名称|第一个行情日期|最后一个行情日期（0为无最后行情，即股票还在上市中）|流通股数（注：请忽略该行）
-        })
-
-        //
+        //游戏配置
         LoadUtils.loadRes('protos/game', (text) => {
             global.levelInfoCfg = JSON.parse(text.text).levelConf;
             global.smxlCfg = JSON.parse(text.text).smxl;
+        })
+
+        //股票配置
+        LoadUtils.loadRes('protos/stocklist', (text) => {
+            global.stocklist = text.text.split('\n');
+            // 股票代码|股票名称|第一个行情日期|最后一个行情日期（0为无最后行情，即股票还在上市中）|流通股数（注：请忽略该行）
+            let arr = [];
+            for (let i = 0; i < stocklist.length; i++) {
+                let items = stocklist[i].split('|');
+
+                let code = items[0] + '';
+
+                if (code >= 1000000) {
+                    code = parseInt(code) - 1000000;
+                }
+
+                code = code + '';
+                let head2 = code.slice(0, 2);
+
+                let head3 = code.slice(0, 3);
+
+                if (head2 == '60' || head2 == '00') {
+                    arr.push(stocklist[i]);
+                } else if (head3 == '688' || head3 == '002' || head3 == '300') {
+                    arr.push(stocklist[i]);
+                }
+            }
+            if (arr && arr.length > 0) {
+                stocklist = arr;
+            }
         })
 
         cc.macro.ENABLE_MULTI_TOUCH = false;
@@ -58,9 +82,6 @@ cc.Class({
                 if (decoded.gameAddr) {
                     let socket = Socket(decoded.gameAddr);
                     global.socket = socket;
-                    setTimeout(() => {
-                        self.enterHall();
-                    }, 500)
                 }
             } else {
                 console.log('login err');
@@ -154,32 +175,6 @@ cc.Class({
         } else {
             cc.ext.gameData.ZBSet = JSON.parse(ZBSet);
         }
-    },
-
-    //进入大厅
-    enterHall() {
-
-        socket.send(4001, PB.onCmdGameLoginConvertToBuff(), (info) => {
-
-            console.log(JSON.stringify(info));
-            if (info && info.data) {
-                gameData.userID = info.data.uid;
-                gameData.userName = info.data.nickname;
-                // if (!cc.ext.gameData.headimgurl) {
-                //     cc.ext.gameData.headimgurl = info.data.icon;
-                // }
-                // cc.ext.gameData.gold = info.data.properties[0];
-                // cc.ext.gameData.exp = info.data.properties[1];
-                // (cc.ext.gameData.level = info.da)ta.properties[2];
-                // cc.ext.gameData.ShuangMang_Gold = info.data.properties[3];
-
-                gameData.properties = info.data.properties;
-
-                cc.ext.gameData.maxExp = levelInfoCfg[gameData.properties[2]].max_exp;
-                cc.director.loadScene('hall');
-            }
-        });
-
     },
 
     onDestroy() {

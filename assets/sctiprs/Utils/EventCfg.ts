@@ -10,6 +10,8 @@ export default {
 
     EXPCHANGE: 'EXPCHANGE',//经验
 
+    NAMECHANGE: 'NAMECHANGE',
+
     LOADINGSHOW: 'LOADINGSHOW',//加载显示
 
     LOADINGHIDE: 'LOADINGHIDE',//加载动画隐藏
@@ -30,9 +32,9 @@ export default {
 
     SETMALABEL: 'SETMALABEL',
 
-    GAMEFUPAN:'GAMEFUPAN',
+    GAMEFUPAN: 'GAMEFUPAN',
 
-    SET_DRAW_SIZE:'SET_DRAW_SIZE',
+    SET_DRAW_SIZE: 'SET_DRAW_SIZE',
 
 
     //[{"name":"好利来","code":"002729",

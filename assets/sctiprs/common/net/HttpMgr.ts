@@ -26,7 +26,6 @@ export default class HttpMgr {
 
         buff1 = buff1.buffer.slice(buff1.byteOffset, buff1.byteLength + buff1.byteOffset);
 
-        console.log(buff1);
 
         HttpUtils.sendXHRAB(url, buff1, (buff) => {
             // console.log(buff);

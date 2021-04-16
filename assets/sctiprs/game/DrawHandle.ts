@@ -57,7 +57,7 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     part5: cc.Label = null;  //分线5
 
-    initDrawNumber = 90;
+
 
     drawBordWidth = 1080;
 
@@ -79,6 +79,9 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.SETMALABEL, (labels) => {
             this.MAla = labels;
             this.updataLabel(cc.ext.beg_end[1]);
+            this.MAla.forEach((el, t) => {
+                el.node.color = GameCfg.MAColor[t];
+            })
         }, this);
 
         //ma boll pcm
@@ -374,9 +377,7 @@ export default class NewClass extends cc.Component {
         this.BOLLLabel.forEach((el, t) => {
             el.node.color = GameCfg.BOLLColor[t];
         })
-        this.MAla.forEach((el, t) => {
-            el.node.color = GameCfg.MAColor[t];
-        })
+
     }
 
     onDestroy() {
@@ -387,7 +388,7 @@ export default class NewClass extends cc.Component {
         this.node.off('touchmove');
         GlobalEvent.off('setDrawing');
         GlobalEvent.off('on_off');
-        GlobalEvent.off('labelPoint');
+        //   GlobalEvent.off('labelPoint');
         //  GlobalEvent.off('onBuyOrSell');
         GlobalEvent.off(EventCfg.SETMALABEL)
     }
@@ -463,11 +464,11 @@ export default class NewClass extends cc.Component {
         }
 
         GameCfg.huizhidatas = cc.ext.gameData.gameDatas[0].data.length - 150;
-        if (GameCfg.huizhidatas <= 0) { return }
+        if (GameCfg.huizhidatas <= 0) { GameCfg.huizhidatas = parseInt(cc.ext.gameData.gameDatas[0].data.length / 2 + '') }
 
         cc.ext.beg_end[1] = GameCfg.huizhidatas;
-        cc.ext.beg_end[0] = cc.ext.beg_end[1] - this.initDrawNumber;
-        cc.ext.hz_width = this.drawBordWidth / this.initDrawNumber;
+        cc.ext.beg_end[0] = cc.ext.beg_end[1] - GameCfg.huizhidatas;
+        cc.ext.hz_width = this.drawBordWidth / GameCfg.huizhidatas;
 
         //绘制的数据
         let data = cc.ext.gameData.gameDatas[0].data;

@@ -36,22 +36,22 @@ export default class NewClass extends cc.Component {
             if (data.length >= 2) {
                 if (data[1] > 0) {
                     this.ALlRateLabel.node.color = cc.Color.RED;
-                    data[1] && (this.ALlRateLabel.string = (parseInt(data[1] * 10000 + '') / 100).toFixed(2) + '%');
+                    data[1] && (this.ALlRateLabel.string = (parseInt(data[1] * 10000 + '') / 100) + '%');
                     this.currRateLabel.node.color = cc.Color.WHITE;
                     this.currRateLabel.string = '0.00%';
                 } else {
                     this.ALlRateLabel.node.color = cc.Color.GREEN;
-                    data[1] && (this.ALlRateLabel.string = (parseInt(data[1] * 10000 + '') / 100).toFixed(2) + '%');
+                    data[1] && (this.ALlRateLabel.string = (parseInt(data[1] * 10000 + '') / 100) + '%');
                     this.currRateLabel.node.color = cc.Color.WHITE;
                     this.currRateLabel.string = '0.00%';
                 }
             } else {
                 if (data[0] >= 0) {
                     this.currRateLabel.node.color = cc.Color.RED;
-                    data[0] && (this.currRateLabel.string = (parseInt(data[0] * 10000 + '') / 100).toFixed(2) + '%')
+                    data[0] && (this.currRateLabel.string = (parseInt(data[0] * 10000 + '') / 100) + '%')
                 } else {
                     this.currRateLabel.node.color = cc.Color.GREEN;
-                    data[0] && (this.currRateLabel.string = (parseInt(data[0] * 10000 + '') / 100).toFixed(2) + '%')
+                    data[0] && (this.currRateLabel.string = (parseInt(data[0] * 10000 + '') / 100) + '%')
                 }
             }
         }, this);
@@ -72,12 +72,12 @@ export default class NewClass extends cc.Component {
         if (cc.ext.gameData.userName) {
             this.userName.string = cc.ext.gameData.userName;
         }
-        if (cc.ext.gameData.level) {
-            this.lv.string = 'LV:' + cc.ext.gameData.level || 0 + '';
+        if (gameData.properties[2]) {
+            this.lv.string = 'LV:' + gameData.properties[2] || 0 + '';
         }
 
         //训练指标
-        if (GameCfg.GameType == 2) {
+        if (GameCfg.GameType == 3) {
             let nodes = this.rightNode.children;
             nodes[0].active = false;
         }

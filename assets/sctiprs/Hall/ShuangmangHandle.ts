@@ -82,14 +82,14 @@ export default class NewClass extends cc.Component {
         let le = parseInt(Math.random() * stocklist.length);
         let items = stocklist[le].split('|');
         data.code = items[0];
-        if (data.code < 600000) {
-            this.smStartGameSet();
-            return;
-        }
+        // if (data.code < 600000) {
+        //     this.smStartGameSet();
+        //     return;
+        // }
 
         let start = items[2], end = items[3], sc;
         if (end == 0) {
-            sc = new Date().getTime();
+            sc = new Date().getTime() - 24 * 60 * 60 * 1000 * 300;
         } else {
             let year = end.slice(0, 4);
             let month = end.slice(4, 6);
@@ -97,8 +97,10 @@ export default class NewClass extends cc.Component {
 
             let d = new Date(year + '-' + month + '-' + day);
 
-            sc = d.getTime();
+            sc = d.getTime() - 24 * 60 * 60 * 1000 * 300;
         }
+
+
         let year = start.slice(0, 4);
         let month = start.slice(4, 6);
         let day = start.slice(6);
@@ -106,8 +108,14 @@ export default class NewClass extends cc.Component {
         let d = new Date(year + '-' + month + '-' + day);
         ///console.log(d); 
         let t = d.getTime();
+        if (sc <= 0) {
+            this.smStartGameSet();
+            return;
+        }
 
         let s = Math.random() * (sc - t) + t;
+
+
 
         let f = new Date(s);
 

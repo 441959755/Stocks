@@ -54,6 +54,7 @@ export default class NewClass extends cc.Component {
         this.initToggle();
     }
 
+
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'smBtn') {

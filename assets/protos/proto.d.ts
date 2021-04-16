@@ -59,7 +59,9 @@ export namespace pb {
         Req_Game_SmxlReport = 4009,
         Rep_Game_SmxlReport = 4010,
         Req_Game_SmxlReset = 4011,
-        Rep_Game_SmxlReset = 4012
+        Rep_Game_SmxlReset = 4012,
+        Req_Game_GetGameOperation = 4013,
+        Rep_Game_GetGameOperation = 4014
     }
 
     /** ErrorCode enum. */
@@ -536,6 +538,19 @@ export namespace pb {
         ShuangMang_Gold = 3,
         Diamond = 4,
         Max = 30
+    }
+
+    /** GameOperationId enum. */
+    enum GameOperationId {
+        GameOperationId_NULL = 0,
+        Bid = 1,
+        Ask = 2,
+        Wait = 3,
+        Hold = 4,
+        Ask_Force = 5,
+        Long = 8,
+        Short = 9,
+        END = 150
     }
 
     /** Properties of a GameCounter. */
@@ -1222,6 +1237,204 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a GameOperationItem. */
+    interface IGameOperationItem {
+
+        /** GameOperationItem ts */
+        ts?: (number|null);
+
+        /** GameOperationItem opId */
+        opId?: (pb.GameOperationId|null);
+    }
+
+    /** Represents a GameOperationItem. */
+    class GameOperationItem implements IGameOperationItem {
+
+        /**
+         * Constructs a new GameOperationItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IGameOperationItem);
+
+        /** GameOperationItem ts. */
+        public ts: number;
+
+        /** GameOperationItem opId. */
+        public opId: pb.GameOperationId;
+
+        /**
+         * Creates a new GameOperationItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameOperationItem instance
+         */
+        public static create(properties?: pb.IGameOperationItem): pb.GameOperationItem;
+
+        /**
+         * Encodes the specified GameOperationItem message. Does not implicitly {@link pb.GameOperationItem.verify|verify} messages.
+         * @param message GameOperationItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IGameOperationItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameOperationItem message, length delimited. Does not implicitly {@link pb.GameOperationItem.verify|verify} messages.
+         * @param message GameOperationItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IGameOperationItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameOperationItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameOperationItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.GameOperationItem;
+
+        /**
+         * Decodes a GameOperationItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameOperationItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.GameOperationItem;
+
+        /**
+         * Verifies a GameOperationItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameOperationItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameOperationItem
+         */
+        public static fromObject(object: { [k: string]: any }): pb.GameOperationItem;
+
+        /**
+         * Creates a plain object from a GameOperationItem message. Also converts values to other types if specified.
+         * @param message GameOperationItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.GameOperationItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameOperationItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameOperations. */
+    interface IGameOperations {
+
+        /** GameOperations code */
+        code?: (number|null);
+
+        /** GameOperations kType */
+        kType?: (pb.KType|null);
+
+        /** GameOperations items */
+        items?: (pb.IGameOperationItem[]|null);
+    }
+
+    /** Represents a GameOperations. */
+    class GameOperations implements IGameOperations {
+
+        /**
+         * Constructs a new GameOperations.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IGameOperations);
+
+        /** GameOperations code. */
+        public code: number;
+
+        /** GameOperations kType. */
+        public kType: pb.KType;
+
+        /** GameOperations items. */
+        public items: pb.IGameOperationItem[];
+
+        /**
+         * Creates a new GameOperations instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameOperations instance
+         */
+        public static create(properties?: pb.IGameOperations): pb.GameOperations;
+
+        /**
+         * Encodes the specified GameOperations message. Does not implicitly {@link pb.GameOperations.verify|verify} messages.
+         * @param message GameOperations message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IGameOperations, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameOperations message, length delimited. Does not implicitly {@link pb.GameOperations.verify|verify} messages.
+         * @param message GameOperations message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IGameOperations, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameOperations message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameOperations
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.GameOperations;
+
+        /**
+         * Decodes a GameOperations message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameOperations
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.GameOperations;
+
+        /**
+         * Verifies a GameOperations message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameOperations message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameOperations
+         */
+        public static fromObject(object: { [k: string]: any }): pb.GameOperations;
+
+        /**
+         * Creates a plain object from a GameOperations message. Also converts values to other types if specified.
+         * @param message GameOperations
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.GameOperations, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameOperations to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a CmdGameLogin. */
     interface ICmdGameLogin {
 
@@ -1797,6 +2010,9 @@ export namespace pb {
 
         /** CmdGameOver result */
         result?: (pb.IGameResult|null);
+
+        /** CmdGameOver operations */
+        operations?: (pb.IGameOperations|null);
     }
 
     /** Represents a CmdGameOver. */
@@ -1810,6 +2026,9 @@ export namespace pb {
 
         /** CmdGameOver result. */
         public result?: (pb.IGameResult|null);
+
+        /** CmdGameOver operations. */
+        public operations?: (pb.IGameOperations|null);
 
         /**
          * Creates a new CmdGameOver instance using the specified properties.
@@ -2075,6 +2294,198 @@ export namespace pb {
 
         /**
          * Converts this CmdQueryGameResultReply to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdGetGameOperations. */
+    interface ICmdGetGameOperations {
+
+        /** CmdGetGameOperations uid */
+        uid?: (number|null);
+
+        /** CmdGetGameOperations ts */
+        ts?: (number|Long|null);
+    }
+
+    /** Represents a CmdGetGameOperations. */
+    class CmdGetGameOperations implements ICmdGetGameOperations {
+
+        /**
+         * Constructs a new CmdGetGameOperations.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdGetGameOperations);
+
+        /** CmdGetGameOperations uid. */
+        public uid: number;
+
+        /** CmdGetGameOperations ts. */
+        public ts: (number|Long);
+
+        /**
+         * Creates a new CmdGetGameOperations instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdGetGameOperations instance
+         */
+        public static create(properties?: pb.ICmdGetGameOperations): pb.CmdGetGameOperations;
+
+        /**
+         * Encodes the specified CmdGetGameOperations message. Does not implicitly {@link pb.CmdGetGameOperations.verify|verify} messages.
+         * @param message CmdGetGameOperations message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdGetGameOperations, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdGetGameOperations message, length delimited. Does not implicitly {@link pb.CmdGetGameOperations.verify|verify} messages.
+         * @param message CmdGetGameOperations message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdGetGameOperations, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdGetGameOperations message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdGetGameOperations
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetGameOperations;
+
+        /**
+         * Decodes a CmdGetGameOperations message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdGetGameOperations
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetGameOperations;
+
+        /**
+         * Verifies a CmdGetGameOperations message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdGetGameOperations message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdGetGameOperations
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdGetGameOperations;
+
+        /**
+         * Creates a plain object from a CmdGetGameOperations message. Also converts values to other types if specified.
+         * @param message CmdGetGameOperations
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdGetGameOperations, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdGetGameOperations to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdGetGameOperationsReply. */
+    interface ICmdGetGameOperationsReply {
+
+        /** CmdGetGameOperationsReply err */
+        err?: (pb.IErrorInfo|null);
+
+        /** CmdGetGameOperationsReply operations */
+        operations?: (pb.IGameOperations|null);
+    }
+
+    /** Represents a CmdGetGameOperationsReply. */
+    class CmdGetGameOperationsReply implements ICmdGetGameOperationsReply {
+
+        /**
+         * Constructs a new CmdGetGameOperationsReply.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdGetGameOperationsReply);
+
+        /** CmdGetGameOperationsReply err. */
+        public err?: (pb.IErrorInfo|null);
+
+        /** CmdGetGameOperationsReply operations. */
+        public operations?: (pb.IGameOperations|null);
+
+        /**
+         * Creates a new CmdGetGameOperationsReply instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdGetGameOperationsReply instance
+         */
+        public static create(properties?: pb.ICmdGetGameOperationsReply): pb.CmdGetGameOperationsReply;
+
+        /**
+         * Encodes the specified CmdGetGameOperationsReply message. Does not implicitly {@link pb.CmdGetGameOperationsReply.verify|verify} messages.
+         * @param message CmdGetGameOperationsReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdGetGameOperationsReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdGetGameOperationsReply message, length delimited. Does not implicitly {@link pb.CmdGetGameOperationsReply.verify|verify} messages.
+         * @param message CmdGetGameOperationsReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdGetGameOperationsReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdGetGameOperationsReply message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdGetGameOperationsReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetGameOperationsReply;
+
+        /**
+         * Decodes a CmdGetGameOperationsReply message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdGetGameOperationsReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetGameOperationsReply;
+
+        /**
+         * Verifies a CmdGetGameOperationsReply message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdGetGameOperationsReply message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdGetGameOperationsReply
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdGetGameOperationsReply;
+
+        /**
+         * Creates a plain object from a CmdGetGameOperationsReply message. Also converts values to other types if specified.
+         * @param message CmdGetGameOperationsReply
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdGetGameOperationsReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdGetGameOperationsReply to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

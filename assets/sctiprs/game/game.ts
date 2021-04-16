@@ -121,7 +121,7 @@ export default class NewClass extends cc.Component {
                     GameCfg.MAs[j++] = GameCfg.GameSet['MA' + i + 'Date'];
                 }
             }
-        } else if (GameCfg.GameType == 2) {
+        } else if (GameCfg.GameType == 3) {
             GameCfg.VOLGraph = [];
 
             if (GameCfg.GameSet.select == '均线') {

@@ -2,7 +2,9 @@
   "title": "Stocks",
   "packageName": "org.cocos2d.demo",
   "startScene": "1558e10d-bc37-42a5-9a07-556ec49d580d",
-  "excludeScenes": [],
+  "excludeScenes": [
+    "c93d7fc5-800b-4d44-89dd-079bad3555d3"
+  ],
   "includeSDKBox": false,
   "orientation": {
     "landscapeLeft": true,

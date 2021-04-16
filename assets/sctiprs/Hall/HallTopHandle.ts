@@ -2,6 +2,8 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 
 import LoadUtils from "../Utils/LoadUtils";
+import GameData from "../GameData";
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -58,6 +60,10 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.SHOWOTHERNODE, (other) => {
             this.rightNode.active = true;
             this.otherSelf = other;
+        }, this);
+
+        GlobalEvent.on(EventCfg.NAMECHANGE, () => {
+            this.UserName.string = GameData.userName;
         }, this);
 
         this.rightNode.active = false;
@@ -131,6 +137,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.LEVELCHANGE);
         GlobalEvent.off(EventCfg.EXPCHANGE);
         GlobalEvent.off(EventCfg.SHOWOTHERNODE);
+        GlobalEvent.off(EventCfg.NAMECHANGE);
     }
 
 }

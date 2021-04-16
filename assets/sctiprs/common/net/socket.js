@@ -4,7 +4,32 @@ let MessageHead = pb.pb.MessageHead;
 
 Socket.prototype = {
     connected(event) {
+        let self = this;
+        console.log('connected');
+        self.heartbeat && (clearInterval(self.heartbeat))
+        self.heartbeat = null;
+        socket.send(4001, PB.onCmdGameLoginConvertToBuff(), (info) => {
 
+            console.log(JSON.stringify(info));
+            if (info && info.data) {
+                gameData.userID = info.data.uid;
+                gameData.userName = info.data.nickname;
+                // if (!cc.ext.gameData.headimgurl) {
+                //     cc.ext.gameData.headimgurl = info.data.icon;
+                // }
+                // cc.ext.gameData.gold = info.data.properties[0];
+                // cc.ext.gameData.exp = info.data.properties[1];
+                // (cc.ext.gameData.level = info.da)ta.properties[2];
+                // cc.ext.gameData.ShuangMang_Gold = info.data.properties[3];
+                gameData.properties = info.data.properties;
+                cc.ext.gameData.maxExp = levelInfoCfg[gameData.properties[2]].max_exp;
+
+                if (cc.director.getScene().name == 'Login') {
+                    cc.director.loadScene('hall');
+                }
+            }
+
+        });
     },
 
     message(event) {
@@ -77,15 +102,35 @@ Socket.prototype = {
 
         } else {
             console.log("send error. readyState = ", this.ws.readyState);
-            setTimeout(() => {
-                this.send(actionCode, proto, callback);
-            }, 1000);
+            // setTimeout(() => {
+            //     this.send(actionCode, proto, callback);
+            // }, 1000);
             // callback(GameCfg.datas);
         }
     },
 
     onclose() {
         console.log('连接断开');
+        this.reconnect();
+    },
+
+    reconnect() {
+        let self = this;
+        if (!this.heartbeat) {
+            this.heartbeat = setInterval(() => {
+                self.ws = new WebSocket(self.host);
+                self.ws.binaryType = 'arraybuffer';
+                self.ws.onmessage = self.message.bind(self);
+                self.ws.onopen = self.connected.bind(self);
+                self.ws.onerror = function (event) {
+                    console.log('ws onerror');
+                }
+                self.ws.onclose = self.onclose.bind(self);
+                console.log('reconnect');
+            }, 3000);
+
+        }
+
     }
 }
 
@@ -93,17 +138,18 @@ function Socket(host) {
     this.sequence = 0;
     this.queue = {};
     //  if (!host) { host = 'ws://3000' }
+    this.host = host;
     this.ws = new WebSocket(host);
     this.ws.binaryType = 'arraybuffer';
     //this.ws.responseType = "arraybuffer"
     this.ws.onmessage = this.message.bind(this);
-    this.ws.onopen = function (event) {
-        console.log('connected');
-    }
+    this.ws.onopen = this.connected.bind(this);
     this.ws.onerror = function (event) {
         console.log('ws onerror');
     }
     this.ws.onclose = this.onclose.bind(this);
+
+    this.heartbeat = null;
     //  this.notification = new cc.EventTarget();
 }
 

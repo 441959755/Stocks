@@ -60,8 +60,12 @@ export default class NewClass extends cc.Component {
         if (!gpData || gpData.length <= 0) { return }
 
         this.headImg.spriteFrame = cc.ext.gameData.headImg;
-        this.expLabel.string = gameData.properties[1];
-        this.levelLabel.string = gameData.properties[2];
+        this.levelLabel.string = 'LV:  ' + gameData.properties[2];
+
+        let max_exp = levelInfoCfg[GameData.properties[2]].max_exp;
+
+        this.expLabel.string = gameData.properties[1] + '/' + max_exp;
+
         this.userName.string = cc.ext.gameData.userName;
 
         this.nameLabel.string = GameCfg.data[0].name;
@@ -90,7 +94,7 @@ export default class NewClass extends cc.Component {
             user_profit_rate: (GameCfg.allRate * 100).toFixed(2),
             user_capital: gameData.properties[3],
             user_profit: (GameCfg.finalfund - gameData.properties[3]),
-            ts: new Date().getTime(),
+            ts: new Date().getTime() / 1000,
             rank: 0,
             ref_id: 0,
         }

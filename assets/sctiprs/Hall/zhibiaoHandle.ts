@@ -230,7 +230,7 @@ export default class NewClass extends cc.Component {
         } else if (name == 'startSMBtn') {
 
             // cc.ext.gameData.gameDatas=gameCfg.data;
-            GameCfg.GameType = 2;
+            GameCfg.GameType = 3;
             GameCfg.GameSet = cc.ext.gameData.ZBSet;
             //  cc.director.loadScene('game');
 
@@ -259,10 +259,10 @@ export default class NewClass extends cc.Component {
             let le = parseInt(Math.random() * stocklist.length);
             items = stocklist[le].split('|');
             data.code = items[0];
-            if (data.code < 600000) {
-                this.sendMessageToSocket();
-                return;
-            }
+            // if (data.code < 600000) {
+            //     this.sendMessageToSocket();
+            //     return;
+            // }
         } else {
             let dex;
             let arrStr = cc.ext.gameData.ZBSet.search.split(' ');
