@@ -407,13 +407,7 @@ export default class NewClass extends cc.Component {
         if (state == 'mrBtn') {
             this.buyData.push(GameCfg.huizhidatas - 2);
             let curClose = parseFloat(data[GameCfg.huizhidatas - 1].close);
-
-            console.log('curClose:' + curClose);
-
             let preClose = parseFloat(data[GameCfg.huizhidatas - 2].close);
-
-            console.log('preClose:' + preClose);
-
             let rate = (curClose - preClose) / preClose;
             GlobalEvent.emit('updateRate', [rate]);
             this.isFlag = true;
