@@ -131,11 +131,14 @@ export default class NewClass extends cc.Component {
             GameCfg.lossCount = 0;
             GameCfg.finalfund = 0;
             cc.director.loadScene('game');
+
+            // GameCfg.GAMEFUPAN = false;
         }
         //复盘
         else if (name == 'lx_jsbt_qd') {
             this.node.active = false;
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
+
         }
 
     }

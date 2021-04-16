@@ -127,9 +127,43 @@ export default class WechatSDK {
             success(res) {
                 // tempFilePath可以作为img标签的src属性显示图片
                 const file = res.tempFilePaths[0]
-                console.log('tempFilePaths:' + file);
-                call && (call(file))
+                // console.log('tempFilePaths:' + file);
+                // console.log(res.tempFiles.size)
+                // if (res.tempFiles.size >= 500 * 1024) {
+                //     console.log('图片太大了');
+
+                // }
+                // wx.getImageInfo({
+                //     src: res.tempFilePaths[0],
+                //     success(res) {
+                //         console.log(res.width)
+                //         console.log(res.height)
+                //         call && (call(res))
+                //     }
+                // })
+
             }
         })
     }
+
+    // getLocalImgData() {
+    //     wx.getLocalImgData({
+    //         localId: req.localIds[0].toString(),
+    //         success: function (res) {
+    //             const localData = res.localData;
+    //             let imageBase64 = '';
+    //             if (localData.indexOf('data:image') == 0) {
+    //                 //苹果的直接赋值，默认生成'data:image/jpeg;base64,'的头部拼接
+    //                 imageBase64 = localData;
+    //             } else {
+    //                 //此处是安卓中的唯一得坑！在拼接前需要对localData进行换行符的全局替换
+    //                 //此时一个正常的base64图片路径就完美生成赋值到img的src中了
+    //                 imageBase64 = 'data:image/jpeg;base64,' + localData.replace(/\n/g, '');
+    //             }
+    //         }
+    //     });
+
+    // }
+
+
 }

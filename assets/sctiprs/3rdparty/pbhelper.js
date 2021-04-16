@@ -30,6 +30,8 @@ let CmdGetSmxlReportReply = pb.pb.CmdGetSmxlReportReply;
 
 let CmdEditNick = pb.pb.CmdEditNick;
 
+let CmdUploadIcon = pb.pb.CmdUploadIcon;
+
 
 function PBHelper() {
 
@@ -174,16 +176,25 @@ PBHelper.prototype = {
         return buff;
     },
 
+    onCmdUploadIconConvertToBuff(data) {
+        let message = CmdUploadIcon.create({
+            uid: data.uid,
+            icon: data.icon,
+        })
+        let buff = CmdUploadIcon.encode(message).finish();
+        return buff;
+    },
+
     selectBlackData(id, buff) {
         let data;
         console.log('id:' + id + '跟新数据');
-        if (id == 4002) {
+        if (id == pb.pb.MessageId.Rep_Game_Login) {
             data = this.onCmdGameLoginReplyConvertToData(buff);
             return data;
-        } else if (id == 2004) {
+        } else if (id == pb.pb.MessageId.Rep_QuoteQuery) {
             data = Quotes.decode(new Uint8Array(buff));
             return data;
-        } else if (id == 1002) {
+        } else if (id == pb.pb.MessageId.Sync_S2C_GameProperty) {
             let decode = GameProperties.decode(new Uint8Array(buff));
             // items: Array(1)
             // 0: GamePropertyItem {id: 3, oldValue: 100000, newValue: 100000}
@@ -195,13 +206,16 @@ PBHelper.prototype = {
             }
 
             gameData.properties = gameData.properties;
-        } else if (id == 4004 || id == 4006 || id == 3004) {
+        } else if (id == pb.pb.MessageId.Rep_Game_Start
+            || id == pb.pb.MessageId.Rep_Game_Over
+            || id == pb.pb.MessageId.Rep_Game_EditNick
+            || id == pb.pb.MessageId.Rep_Game_UploadIcon) {
             data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
-        } else if (id == 4008) {
+        } else if (id == pb.pb.MessageId.Rep_Game_QueryGameResult) {
             data = this.onCmdQueryGameResultReplyConvertToData(buff);
             return data;
-        } else if (id == 4010) {
+        } else if (id == pb.pb.MessageId.Rep_Game_SmxlReport) {
             data = CmdGetSmxlReportReply.decode(new Uint8Array(buff));
             return data;
         }

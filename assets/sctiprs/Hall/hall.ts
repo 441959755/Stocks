@@ -220,7 +220,7 @@ export default class NewClass extends cc.Component {
     onCmdGameStart(data, info1) {
         GlobalEvent.emit('EventCfg.LOADINGSHOW');
         if (socket) {
-            console.log(JSON.stringify(data));
+
             socket.send(4003, PB.onCmdGameStartConvertToBuff(data), (info) => {
 
                 console.log('onCmdGameStart' + JSON.stringify(info));
@@ -245,7 +245,7 @@ export default class NewClass extends cc.Component {
                             }
                             GameCfg.data[0].data.push(data);
                         });
-                        console.log(GameCfg.data);
+
                         cc.ext.gameData.gameDatas = GameCfg.data;
                         cc.director.loadScene('game');
                     })
@@ -300,6 +300,7 @@ export default class NewClass extends cc.Component {
         }
         this.fitScreen(cav, designSize);
     }
+
     /**
      * 背景适配
      * @param canvasnode

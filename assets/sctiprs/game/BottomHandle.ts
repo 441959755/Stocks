@@ -167,7 +167,6 @@ export default class NewClass extends cc.Component {
                 nodes[0].getComponent(cc.Label).string = '结束时间:' + GameCfg.data[0].data[le - 1].day;
             }
         }
-
         this.roundNumber = GameCfg.data[0].data.length - GameCfg.huizhidatas;
 
         this.tipsLabel.string = '回合数：' + this.roundNumber;
@@ -248,7 +247,6 @@ export default class NewClass extends cc.Component {
                 this.setRoundNumber('mcBtn');
             }
             this.selectBox.active = false;
-
         }
         //3/4
         else if (name == 'fcBtn1') {

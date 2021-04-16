@@ -45,7 +45,6 @@ export default class NewClass extends cc.Component {
             max_exp = levelInfoCfg[GameData.properties[2]].max_exp;
         }
 
-
         GameData.properties[1] && (this.expLa.string = GameData.properties[1] + '/' + max_exp)
 
     }
@@ -92,13 +91,41 @@ export default class NewClass extends cc.Component {
             this.tckNode.active = true;
         } else if (name == 'playerSprite') {
             llwSDK.chooseImage((img) => {
-
-
+                this.load_picture_async(img);
             });
         } else if (name == 'closeBtn') {
             this.node.active = false;
         }
 
+    }
+
+    load_picture_async(imgurl, temp?) {
+        // return new Promise((resolve, reject) => {
+        //     var self = this;
+        //     cc.loader.load(imgurl, function (err, texture) {
+        let data = {
+            uid: GameData.userID,
+            icon: imgurl,
+        }
+        console.log('imgurl:' + imgurl);
+        socket.send(3001, PB.onCmdUploadIconConvertToBuff(data), (info) => {
+            console.log('onCmdUploadIconConvertToBuff:' + JSON.stringify(info));
+            if (!info.code) {
+                //   this.tckNode.active = false;
+                // GameData.userName = v;
+                // GameData.userName && (this.nameLa.string = '昵称:    ' + GameData.userName)
+                GameData.headImg = new cc.SpriteFrame(imgurl);
+                if (GameData.headImg) {
+                    this.headImg.spriteFrame = GameData.headImg;
+                }
+            } else {
+                console.log('图片有吴!:' + info.code + info.err);
+            }
+
+        })
+
+        //     });
+        // })
     }
 
     testTextLength(v) {

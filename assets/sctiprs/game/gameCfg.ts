@@ -54,6 +54,8 @@ export default {
         }
     ],
 
+    GAMEFUPAN: false, //是否复盘
+
 
     // datas: {
     //     items: [

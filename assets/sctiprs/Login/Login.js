@@ -4,7 +4,7 @@ import LLWSDK from "../common/sdk/LLWSDK";
 import LoadUtils from "../Utils/LoadUtils";
 
 import Socket from "../common/net/socket";
-
+import pb from '../../protos/proto';
 window.global = window;
 
 cc.ext = {};
@@ -21,6 +21,8 @@ cc.Class({
         let PBHelper = require('pbhelper');
         let pbhelper = new PBHelper();
         global.PB = pbhelper;
+
+        console.log(pb.pb.GameType.ShuangMang);
 
         global.gameData = cc.ext.gameData;
     },

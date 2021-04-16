@@ -29,21 +29,21 @@ enum Constant {
 enum GameType {
 	GameType_NULL = 0;
 	
-	ShuangMang = 1;		// 双盲训练
-	DingXiang = 2;		// 定向训练
-	ZhiBiao	 = 3;		// 指标训练
-	TiaoJianDan = 4;	// 条件单训练
-	QiHuo = 5;			// 期货训练
+	ShuangMang = 3;		// 双盲训练
+	DingXiang = 7;		// 定向训练
+	ZhiBiao	 = 17;		// 指标训练
+	TiaoJianDan = 11;	// 条件单训练
+	QiHuo = 6;			// 期货训练
 
-	JJ_PK = 6;			// PK大战
-	JJ_DuoKong = 7;		// 多空大战
-	JJ_ChuangGuan = 8;	// 闯关赛
-	JJ_QiHuo = 9;		// 期货大战
+	JJ_PK = 1;			// PK大战
+	JJ_DuoKong = 2;		// 多空大战
+	JJ_ChuangGuan = 16;	// 闯关赛
+	JJ_QiHuo = 15;		// 期货大战
 
 	MoNiChaoGu = 10;	// 模拟炒股
-	ChaoGuDaSai = 11;	// 炒股大赛
-	GeGuJingChai = 12;	// 个股竞猜
-	DaPanJingChai = 13;	// 大盘竞猜
+	ChaoGuDaSai = 9;	// 炒股大赛
+	GeGuJingChai = 8;	// 个股竞猜
+	DaPanJingChai = 7;	// 大盘竞猜
 
 	MaxGameType = 30;	// 最大游戏类型编号
 }
