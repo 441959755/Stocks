@@ -22,8 +22,6 @@ cc.Class({
         let pbhelper = new PBHelper();
         global.PB = pbhelper;
 
-        console.log(pb.pb.GameType.ShuangMang);
-
         global.gameData = cc.ext.gameData;
     },
 
@@ -45,11 +43,13 @@ cc.Class({
 
                 let code = items[0] + '';
 
-                if (code >= 1000000) {
-                    code = parseInt(code) - 1000000;
+                // if (code >= 1000000) {
+                //     code = parseInt(code) - 1000000;
+                // }
+                if (code.length >= 7) {
+                    code = code.slice(1, 7);
                 }
 
-                code = code + '';
                 let head2 = code.slice(0, 2);
 
                 let head3 = code.slice(0, 3);
@@ -64,9 +64,7 @@ cc.Class({
                 stocklist = arr;
             }
         })
-
         cc.macro.ENABLE_MULTI_TOUCH = false;
-
         this.initData();
     },
 
@@ -156,7 +154,7 @@ cc.Class({
             ZBSet = {
                 select: 'MACD',
                 strategy: 'MACD金叉',
-                search: '1000919 金陵药业',
+                search: '600056 中国医药',
                 year: '2010',
                 month: '08',
                 day: '04',

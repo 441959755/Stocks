@@ -30,7 +30,7 @@ enum GameType {
 	GameType_NULL = 0;
 	
 	ShuangMang = 3;		// 双盲训练
-	DingXiang = 7;		// 定向训练
+	DingXiang = 4;		// 定向训练
 	ZhiBiao	 = 17;		// 指标训练
 	TiaoJianDan = 11;	// 条件单训练
 	QiHuo = 6;			// 期货训练
@@ -42,8 +42,8 @@ enum GameType {
 
 	MoNiChaoGu = 10;	// 模拟炒股
 	ChaoGuDaSai = 9;	// 炒股大赛
-	GeGuJingChai = 8;	// 个股竞猜
-	DaPanJingChai = 7;	// 大盘竞猜
+	GeGuJingChai = 7;	// 个股竞猜
+	DaPanJingChai = 8;	// 大盘竞猜
 
 	MaxGameType = 30;	// 最大游戏类型编号
 }

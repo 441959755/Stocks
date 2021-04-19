@@ -3,6 +3,7 @@ import EventCfg from "../Utils/EventCfg";
 
 import GameCfg from "../game/GameCfg";
 import GameData from "../GameData";
+import { pb } from '../../protos/proto';
 
 const { ccclass, property } = cc._decorator;
 
@@ -20,10 +21,10 @@ export default class NewClass extends cc.Component {
 
     protected onEnable() {
         GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
-        this.toggle1.isChecked = cc.ext.gameData.SMSet.isFC;
+        this.toggle1.isChecked = GameData.SMSet.isFC;
 
         this.initLa.string = smxlCfg.capital_init;
-        this.curla.string = gameData.properties[3];
+        this.curla.string = GameData.properties[3];
     }
 
 
@@ -32,8 +33,8 @@ export default class NewClass extends cc.Component {
         //点击双盲训练
         if (name == 'startSMBtn') {
 
-            GameCfg.GameType = 1;
-            GameCfg.GameSet = cc.ext.gameData.SMSet;
+            GameCfg.GameType = pb.GameType.ShuangMang;
+            GameCfg.GameSet = GameData.SMSet;
 
             this.smStartGameSet();
 
@@ -63,16 +64,16 @@ export default class NewClass extends cc.Component {
         // console.log(event);
         let name = event.node._name;
         if (name == 'toggle1') {
-            let data = cc.ext.gameData.SMSet;
+            let data = GameData.SMSet;
             data.isFC = this.toggle1.isChecked;
-            cc.ext.gameData.SMSet = data;
+            GameData.SMSet = data;
         }
     }
 
     smStartGameSet() {
         let data = {
-            ktype: 10,
-            kstyle: 0,
+            ktype: pb.KType.Day,
+            kstyle: pb.KStyle.Random,
             code: null,
             from: null,
             total: 300,
@@ -114,8 +115,6 @@ export default class NewClass extends cc.Component {
         }
 
         let s = Math.random() * (sc - t) + t;
-
-
 
         let f = new Date(s);
 

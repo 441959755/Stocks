@@ -61,6 +61,9 @@ export default class NewClass extends cc.Component {
     playerInfoLayer: cc.Node = null;
 
 
+    tipsTextNode: cc.Node = null
+
+
     onLoad() {
 
         GlobalEvent.on(EventCfg.LOADINGSHOW, () => {
@@ -70,6 +73,9 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.LOADINGHIDE, () => {
             this.loading.active = false;
         }, this);
+
+        GlobalEvent.on(EventCfg.TIPSTEXTSHOW, this.onTipsTextShow.bind(this), this);
+
 
         GlobalEvent.on('OPENSMLAYER', () => {
             this.shuangmangLayer.active = true;
@@ -170,6 +176,24 @@ export default class NewClass extends cc.Component {
         }, this);
     }
 
+    onTipsTextShow(content) {
+        if (!this.tipsTextNode) {
+            LoadUtils.loadRes('Prefabs/tipsText', (pre) => {
+                this.tipsTextNode = cc.instantiate(pre);
+                this.node.addChild(this.tipsTextNode, 99);
+                this.tipsTextNode.getComponent('TipsTextHandle').textData = content;
+
+                this.tipsTextNode.active = true;
+                this.tipsTextNode.getComponent('TipsTextHandle').onShow();
+            })
+        } else {
+            this.tipsTextNode.active = true;
+            this.tipsTextNode.getComponent('TipsTextHandle').textData = content;
+            this.tipsTextNode.getComponent('TipsTextHandle').onShow();
+        }
+
+    }
+
 
     openYieldLaye(info) {
 
@@ -215,6 +239,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('onCmdQuoteQuery');
         GlobalEvent.off('OPENDXKAYER');
         GlobalEvent.off('OPENPLAYERINFO');
+        LoadUtils.releaseRes('Prefabs/tipsText');
     }
 
     onCmdGameStart(data, info1) {
@@ -246,7 +271,7 @@ export default class NewClass extends cc.Component {
                             GameCfg.data[0].data.push(data);
                         });
 
-                        cc.ext.gameData.gameDatas = GameCfg.data;
+                        //    cc.ext.gameData.gameDatas = GameCfg.data;
                         cc.director.loadScene('game');
                     })
 

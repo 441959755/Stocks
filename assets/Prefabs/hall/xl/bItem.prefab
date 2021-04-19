@@ -42,7 +42,7 @@
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
-      "y": 0.5
+      "y": 1
     },
     "_trs": {
       "__type__": "TypedArray",
@@ -111,7 +111,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "eb389f63-8122-4072-b21a-8302e4e681a6"
     },
     "fileId": "54ule724RPn5PhJJNwt5zG",
     "sync": false

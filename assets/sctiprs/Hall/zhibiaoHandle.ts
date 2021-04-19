@@ -2,6 +2,9 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 
 import GameCfg from "../game/GameCfg";
+import GameData from '../../sctiprs/GameData';
+
+import { pb } from '../../protos/proto';
 
 const { ccclass, property } = cc._decorator;
 
@@ -68,29 +71,29 @@ export default class NewClass extends cc.Component {
         this.boxs.forEach((el, index) => {
             let la = el.getChildByName('label').getComponent(cc.Label);
             if (index == 0) {
-                la.string = cc.ext.gameData.ZBSet.select;
+                la.string = GameData.ZBSet.select;
             } else if (index == 1) {
-                la.string = cc.ext.gameData.ZBSet.strategy;
+                la.string = GameData.ZBSet.strategy;
             } else if (index == 2) {
-                la.string = cc.ext.gameData.ZBSet.search;
-                if (cc.ext.gameData.ZBSet.search == '随机选股') {
+                la.string = GameData.ZBSet.search;
+                if (GameData.ZBSet.search == '随机选股') {
                     this._tipsLa.active = true;
                 } else {
                     this._tipsLa.active = false;
                 }
             } else if (index == 3) {
-                la.string = cc.ext.gameData.ZBSet.year;
+                la.string = GameData.ZBSet.year;
             } else if (index == 4) {
-                la.string = cc.ext.gameData.ZBSet.month;
+                la.string = GameData.ZBSet.month;
             } else if (index == 5) {
-                la.string = cc.ext.gameData.ZBSet.day;
+                la.string = GameData.ZBSet.day;
             } else if (index == 6) {
-                la.string = cc.ext.gameData.ZBSet.KLine;
+                la.string = GameData.ZBSet.KLine;
             } else if (index == 7) {
-                la.string = cc.ext.gameData.ZBSet.ZLine;
+                la.string = GameData.ZBSet.ZLine;
             }
         })
-        this.toggle.isChecked = cc.ext.gameData.ZBSet.showSign;
+        this.toggle.isChecked = GameData.ZBSet.showSign;
 
 
 
@@ -135,11 +138,11 @@ export default class NewClass extends cc.Component {
     }
 
     onToggleBtnClick() {
-        cc.ext.gameData.ZBSet.showSign = this.toggle.isChecked;
+        GameData.ZBSet.showSign = this.toggle.isChecked;
     }
 
     protected onDisable() {
-        cc.ext.gameData.ZBSet = cc.ext.gameData.ZBSet;
+        GameData.ZBSet = GameData.ZBSet;
     }
 
     onBtnClick(event, data) {
@@ -211,27 +214,26 @@ export default class NewClass extends cc.Component {
             }
 
             if (this.setProId == 0) {
-                cc.ext.gameData.ZBSet.select = str;
+                GameData.ZBSet.select = str;
             } else if (this.setProId == 1) {
-                cc.ext.gameData.ZBSet.strategy = str;
+                GameData.ZBSet.strategy = str;
             } else if (this.setProId == 2) {
-                cc.ext.gameData.ZBSet.search = str;
+                GameData.ZBSet.search = str;
             } else if (this.setProId == 3) {
-                cc.ext.gameData.ZBSet.year = str;
+                GameData.ZBSet.year = str;
             } else if (this.setProId == 4) {
-                cc.ext.gameData.ZBSet.month = str;
+                GameData.ZBSet.month = str;
             } else if (this.setProId == 5) {
-                cc.ext.gameData.ZBSet.day = str;
+                GameData.ZBSet.day = str;
             } else if (this.setProId == 6) {
-                cc.ext.gameData.ZBSet.KLine = str;
+                GameData.ZBSet.KLine = str;
             } else if (this.setProId == 7) {
-                cc.ext.gameData.ZBSet.ZLine = str;
+                GameData.ZBSet.ZLine = str;
             }
         } else if (name == 'startSMBtn') {
 
-            // cc.ext.gameData.gameDatas=gameCfg.data;
-            GameCfg.GameType = 3;
-            GameCfg.GameSet = cc.ext.gameData.ZBSet;
+            GameCfg.GameType = pb.GameType.ZhiBiao;
+            GameCfg.GameSet = GameData.ZBSet;
             //  cc.director.loadScene('game');
 
             this.zhibiaoStartGameSet();
@@ -251,11 +253,11 @@ export default class NewClass extends cc.Component {
             kstyle: 0,      // 0随机行情   1震荡行情  2单边向上行情 3单边向下行情
             code: null,       //股票代码（0表示忽略和随机）
             from: null,       //// 开始时间戳（不能为0，查询日K行情的格式为：YYYYMMDD；查询分时行情的格式为：HHMMSS）
-            total: parseInt(cc.ext.gameData.ZBSet.KLine),  // K线条数
+            total: parseInt(GameData.ZBSet.KLine),  // K线条数
             to: 0,           //	// 结束时间戳（0表示忽略该参数；格式同from）
         }
         let items
-        if (cc.ext.gameData.ZBSet.search == '随机选股') {
+        if (GameData.ZBSet.search == '随机选股') {
             let le = parseInt(Math.random() * stocklist.length);
             items = stocklist[le].split('|');
             data.code = items[0];
@@ -265,7 +267,7 @@ export default class NewClass extends cc.Component {
             // }
         } else {
             let dex;
-            let arrStr = cc.ext.gameData.ZBSet.search.split(' ');
+            let arrStr = GameData.ZBSet.search.split(' ');
             for (let i = 0; i < stocklist.length; i++) {
 
                 if (stocklist[i].indexOf(arrStr[0]) != -1) {
@@ -287,15 +289,15 @@ export default class NewClass extends cc.Component {
             }
         }
 
-        if (cc.ext.gameData.ZBSet.ZLine == '周线') {
+        if (GameData.ZBSet.ZLine == '周线') {
             data.ktype = 11;
-        } else if (cc.ext.gameData.ZBSet.ZLine == '日线') {
+        } else if (GameData.ZBSet.ZLine == '日线') {
             data.ktype = 10;
         }
 
-        if (cc.ext.gameData.ZBSet.year != '随机') {
+        if (GameData.ZBSet.year != '随机') {
             //时间
-            let seletTime = cc.ext.gameData.ZBSet.year + '' + cc.ext.gameData.ZBSet.month + '' + cc.ext.gameData.ZBSet.day
+            let seletTime = GameData.ZBSet.year + '' + GameData.ZBSet.month + '' + GameData.ZBSet.day
             if (parseInt(seletTime) < parseInt(items[2])) {
                 //时间不对
                 console.log('时间不能早与股票创建时间');

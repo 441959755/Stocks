@@ -1,36 +1,36 @@
 
-import pb from '../../protos/proto';
+import { pb } from '../../protos/proto';
 import GameCfg from '../game/GameCfg';
 
-let Login = pb.pb.CmdLogin;
+let Login = pb.CmdLogin;
 
-let CmdLoginReply = pb.pb.CmdLoginReply;
+let CmdLoginReply = pb.CmdLoginReply;
 
-let CmdGameLogin = pb.pb.CmdGameLogin;
+let CmdGameLogin = pb.CmdGameLogin;
 
-let CmdGameLoginReply = pb.pb.CmdGameLoginReply;
+let CmdGameLoginReply = pb.CmdGameLoginReply;
 
-let CmdQuoteQuery = pb.pb.CmdQuoteQuery;
+let CmdQuoteQuery = pb.CmdQuoteQuery;
 
-let Quotes = pb.pb.Quotes;
+let Quotes = pb.Quotes;
 
-let GameProperties = pb.pb.GameProperties;
+let GameProperties = pb.GameProperties;
 
-let CmdGameStart = pb.pb.CmdGameStart;
+let CmdGameStart = pb.CmdGameStart;
 
-let CmdGameOver = pb.pb.CmdGameOver;
+let CmdGameOver = pb.CmdGameOver;
 
-let ErrorInfo = pb.pb.ErrorInfo;
+let ErrorInfo = pb.ErrorInfo;
 
-let CmdQueryGameResult = pb.pb.CmdQueryGameResult;
+let CmdQueryGameResult = pb.CmdQueryGameResult;
 
-let CmdQueryGameResultReply = pb.pb.CmdQueryGameResultReply;
+let CmdQueryGameResultReply = pb.CmdQueryGameResultReply;
 
-let CmdGetSmxlReportReply = pb.pb.CmdGetSmxlReportReply;
+let CmdGetSmxlReportReply = pb.CmdGetSmxlReportReply;
 
-let CmdEditNick = pb.pb.CmdEditNick;
+let CmdEditNick = pb.CmdEditNick;
 
-let CmdUploadIcon = pb.pb.CmdUploadIcon;
+let CmdUploadIcon = pb.CmdUploadIcon;
 
 
 function PBHelper() {
@@ -188,13 +188,13 @@ PBHelper.prototype = {
     selectBlackData(id, buff) {
         let data;
         console.log('id:' + id + '跟新数据');
-        if (id == pb.pb.MessageId.Rep_Game_Login) {
+        if (id == pb.MessageId.Rep_Game_Login) {
             data = this.onCmdGameLoginReplyConvertToData(buff);
             return data;
-        } else if (id == pb.pb.MessageId.Rep_QuoteQuery) {
+        } else if (id == pb.MessageId.Rep_QuoteQuery) {
             data = Quotes.decode(new Uint8Array(buff));
             return data;
-        } else if (id == pb.pb.MessageId.Sync_S2C_GameProperty) {
+        } else if (id == pb.MessageId.Sync_S2C_GameProperty) {
             let decode = GameProperties.decode(new Uint8Array(buff));
             // items: Array(1)
             // 0: GamePropertyItem {id: 3, oldValue: 100000, newValue: 100000}
@@ -206,16 +206,16 @@ PBHelper.prototype = {
             }
 
             gameData.properties = gameData.properties;
-        } else if (id == pb.pb.MessageId.Rep_Game_Start
-            || id == pb.pb.MessageId.Rep_Game_Over
-            || id == pb.pb.MessageId.Rep_Game_EditNick
-            || id == pb.pb.MessageId.Rep_Game_UploadIcon) {
+        } else if (id == pb.MessageId.Rep_Game_Start
+            || id == pb.MessageId.Rep_Game_Over
+            || id == pb.MessageId.Rep_Game_EditNick
+            || id == pb.MessageId.Rep_Game_UploadIcon) {
             data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
-        } else if (id == pb.pb.MessageId.Rep_Game_QueryGameResult) {
+        } else if (id == pb.MessageId.Rep_Game_QueryGameResult) {
             data = this.onCmdQueryGameResultReplyConvertToData(buff);
             return data;
-        } else if (id == pb.pb.MessageId.Rep_Game_SmxlReport) {
+        } else if (id == pb.MessageId.Rep_Game_SmxlReport) {
             data = CmdGetSmxlReportReply.decode(new Uint8Array(buff));
             return data;
         }

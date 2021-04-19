@@ -32,9 +32,10 @@ enum KType {
 
 	// 历史行情
 	Min   = 2;	// 分时：1分钟
-	Min15 = 3;	// 15分
-	Min30 = 4;	// 30分
-	Min60 = 5;	// 60分
+	Min5  = 3;	// 分时：5分钟
+	Min15 = 4;	// 15分
+	Min30 = 5;	// 30分
+	Min60 = 6;	// 60分
 
 	Day  = 10;  // 日K
 	Day7 = 11;  // 周K
@@ -53,7 +54,7 @@ enum KStyle {
 	Down = 3;	// 单边向下行情
 }
 
-// 查询行情
+// 查询股票行情
 message CmdQuoteQuery {
 	KType ktype = 1;   	// K线类型（目前只有分时和日K）
 	uint32 code = 2;    // 股票代码（0表示忽略和随机）
@@ -94,7 +95,49 @@ message CmdQuoteSubscribe {
 	repeated QuoteSubscribeItem items = 1;
 }
 
+
+
+// 查询期货行情
+message CmdQuoteQueryFuture {
+	KType ktype = 1;   	// K线类型
+	uint32 code = 2;    // 合约代码（2000000表示忽略和随机）
+	int64 from = 3;    	// 开始时间戳（不能为0，查询日K行情的格式为：YYYYMMDD，查询分时行情的格式为：时间戳，精确到秒）
+    int32 total = 4;   	// K线条数（0表示忽略该参数；如果total和to都不为0，则优先使用条数作为查询条件；一次性查询最大条数为2000条）
+	int64 to = 5;      	// 结束时间戳（0表示忽略该参数；格式同from）
+}
+message QuoteItemFuture {
+	uint32 code = 1;        // 合约代码
+	KType ktype = 2;     	// K线类型
+	int64 timestamp = 3;    // 时间戳
+	
+	double open = 4;        // 开盘价
+	double close = 5;       // 昨收价
+	double high = 6;       	// 最高价
+	double low = 7;        	// 最低价
+
+	uint64 volume = 8;      // 成交量
+	uint64 vol_volume = 9;  // VOL.VOLUME
+	double vol_mavol1 = 10;	// VOL.MAVOL1
+	double vol_mavol2 = 11;	// VOL.MAVOL2
+	uint64 ccl_hold = 12;	// CCL.持仓量
+	double ccl_maccl = 13;	// CCL.MACCL
+}
+message QuotesFuture {
+	repeated QuoteItemFuture items = 1;
+}
+
+
+
+
+
+
+// GRPC
+
 service QuotesService {
   rpc QuotesQuery (CmdQuoteQuery) returns (Quotes) {}
   rpc QuotesSubscribe (CmdQuoteSubscribe) returns (ErrorInfo) {}
+}
+
+service QuotesFutureService {
+  rpc QuotesQuery (CmdQuoteQueryFuture) returns (QuotesFuture) {}
 }

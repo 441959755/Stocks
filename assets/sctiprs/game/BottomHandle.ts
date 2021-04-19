@@ -204,12 +204,16 @@ export default class NewClass extends cc.Component {
                 this.mrBtn.node.active = !this.flag;
                 this.mcBtn.node.active = this.flag;
                 if (name == 'mrBtn') {
+                    GlobalEvent.emit(EventCfg.ONADDMARK, 2);
+
                     this.keMcCount += this.keMrCount;
                     this.keMrCount = 0;
                     this.ziChan = 0;
                     this.cyBtn.node.active = true;
                     this.gwBtn.node.active = false;
                 } else {
+                    GlobalEvent.emit(EventCfg.ONADDMARK, 3);
+
                     this.ziChan += parseFloat(this.keMcCount + '') * this.gpData[GameCfg.huizhidatas - 1].close;
                     this.keMcCount = 0;
                     this.gwBtn.node.active = true;
@@ -226,6 +230,8 @@ export default class NewClass extends cc.Component {
         else if (name == 'fcBtn') {
             //买入
             if (this._type == 1) {
+
+
                 this.keMcCount += this.keMrCount;
                 this.keMrCount = 0;
                 this.ziChan = 0;
@@ -234,9 +240,13 @@ export default class NewClass extends cc.Component {
                 this.mcBtn.interactable = true;
                 this.mcBtn.enableAutoGrayEffect = false;
                 this.setRoundNumber('mrBtn');
+
+
             }
             //卖出
             else {
+
+
                 this.mrBtn.interactable = true;
                 this.mrBtn.enableAutoGrayEffect = false;
                 this.mcBtn.interactable = false;
@@ -245,6 +255,8 @@ export default class NewClass extends cc.Component {
 
                 this.keMcCount = 0;
                 this.setRoundNumber('mcBtn');
+
+
             }
             this.selectBox.active = false;
         }
@@ -401,7 +413,7 @@ export default class NewClass extends cc.Component {
 
     onBuyOrSell(state) {
         //买入
-        let data = cc.ext.gameData.gameDatas[0].data;
+        let data = GameCfg.data[0].data;
         if (state == 'mrBtn') {
             this.buyData.push(GameCfg.huizhidatas - 2);
             let curClose = parseFloat(data[GameCfg.huizhidatas - 1].close);

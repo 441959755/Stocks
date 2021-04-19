@@ -12,19 +12,19 @@ export namespace pb {
     /** GameType enum. */
     enum GameType {
         GameType_NULL = 0,
-        ShuangMang = 1,
-        DingXiang = 2,
-        ZhiBiao = 3,
-        TiaoJianDan = 4,
-        QiHuo = 5,
-        JJ_PK = 6,
-        JJ_DuoKong = 7,
-        JJ_ChuangGuan = 8,
-        JJ_QiHuo = 9,
+        ShuangMang = 3,
+        DingXiang = 4,
+        ZhiBiao = 17,
+        TiaoJianDan = 11,
+        QiHuo = 6,
+        JJ_PK = 1,
+        JJ_DuoKong = 2,
+        JJ_ChuangGuan = 16,
+        JJ_QiHuo = 15,
         MoNiChaoGu = 10,
-        ChaoGuDaSai = 11,
-        GeGuJingChai = 12,
-        DaPanJingChai = 13,
+        ChaoGuDaSai = 9,
+        GeGuJingChai = 7,
+        DaPanJingChai = 8,
         MaxGameType = 30
     }
 
@@ -2652,9 +2652,10 @@ export namespace pb {
         KType_NULL = 0,
         Real = 1,
         Min = 2,
-        Min15 = 3,
-        Min30 = 4,
-        Min60 = 5,
+        Min5 = 3,
+        Min15 = 4,
+        Min30 = 5,
+        Min60 = 6,
         Day = 10,
         Day7 = 11,
         Mon = 20,
@@ -3240,6 +3241,372 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a CmdQuoteQueryFuture. */
+    interface ICmdQuoteQueryFuture {
+
+        /** CmdQuoteQueryFuture ktype */
+        ktype?: (pb.KType|null);
+
+        /** CmdQuoteQueryFuture code */
+        code?: (number|null);
+
+        /** CmdQuoteQueryFuture from */
+        from?: (number|Long|null);
+
+        /** CmdQuoteQueryFuture total */
+        total?: (number|null);
+
+        /** CmdQuoteQueryFuture to */
+        to?: (number|Long|null);
+    }
+
+    /** Represents a CmdQuoteQueryFuture. */
+    class CmdQuoteQueryFuture implements ICmdQuoteQueryFuture {
+
+        /**
+         * Constructs a new CmdQuoteQueryFuture.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdQuoteQueryFuture);
+
+        /** CmdQuoteQueryFuture ktype. */
+        public ktype: pb.KType;
+
+        /** CmdQuoteQueryFuture code. */
+        public code: number;
+
+        /** CmdQuoteQueryFuture from. */
+        public from: (number|Long);
+
+        /** CmdQuoteQueryFuture total. */
+        public total: number;
+
+        /** CmdQuoteQueryFuture to. */
+        public to: (number|Long);
+
+        /**
+         * Creates a new CmdQuoteQueryFuture instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdQuoteQueryFuture instance
+         */
+        public static create(properties?: pb.ICmdQuoteQueryFuture): pb.CmdQuoteQueryFuture;
+
+        /**
+         * Encodes the specified CmdQuoteQueryFuture message. Does not implicitly {@link pb.CmdQuoteQueryFuture.verify|verify} messages.
+         * @param message CmdQuoteQueryFuture message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdQuoteQueryFuture, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdQuoteQueryFuture message, length delimited. Does not implicitly {@link pb.CmdQuoteQueryFuture.verify|verify} messages.
+         * @param message CmdQuoteQueryFuture message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdQuoteQueryFuture, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdQuoteQueryFuture message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdQuoteQueryFuture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQuoteQueryFuture;
+
+        /**
+         * Decodes a CmdQuoteQueryFuture message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdQuoteQueryFuture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQuoteQueryFuture;
+
+        /**
+         * Verifies a CmdQuoteQueryFuture message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdQuoteQueryFuture message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdQuoteQueryFuture
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdQuoteQueryFuture;
+
+        /**
+         * Creates a plain object from a CmdQuoteQueryFuture message. Also converts values to other types if specified.
+         * @param message CmdQuoteQueryFuture
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdQuoteQueryFuture, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdQuoteQueryFuture to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a QuoteItemFuture. */
+    interface IQuoteItemFuture {
+
+        /** QuoteItemFuture code */
+        code?: (number|null);
+
+        /** QuoteItemFuture ktype */
+        ktype?: (pb.KType|null);
+
+        /** QuoteItemFuture timestamp */
+        timestamp?: (number|Long|null);
+
+        /** QuoteItemFuture open */
+        open?: (number|null);
+
+        /** QuoteItemFuture close */
+        close?: (number|null);
+
+        /** QuoteItemFuture high */
+        high?: (number|null);
+
+        /** QuoteItemFuture low */
+        low?: (number|null);
+
+        /** QuoteItemFuture volume */
+        volume?: (number|Long|null);
+
+        /** QuoteItemFuture volVolume */
+        volVolume?: (number|Long|null);
+
+        /** QuoteItemFuture volMavol1 */
+        volMavol1?: (number|null);
+
+        /** QuoteItemFuture volMavol2 */
+        volMavol2?: (number|null);
+
+        /** QuoteItemFuture cclHold */
+        cclHold?: (number|Long|null);
+
+        /** QuoteItemFuture cclMaccl */
+        cclMaccl?: (number|null);
+    }
+
+    /** Represents a QuoteItemFuture. */
+    class QuoteItemFuture implements IQuoteItemFuture {
+
+        /**
+         * Constructs a new QuoteItemFuture.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IQuoteItemFuture);
+
+        /** QuoteItemFuture code. */
+        public code: number;
+
+        /** QuoteItemFuture ktype. */
+        public ktype: pb.KType;
+
+        /** QuoteItemFuture timestamp. */
+        public timestamp: (number|Long);
+
+        /** QuoteItemFuture open. */
+        public open: number;
+
+        /** QuoteItemFuture close. */
+        public close: number;
+
+        /** QuoteItemFuture high. */
+        public high: number;
+
+        /** QuoteItemFuture low. */
+        public low: number;
+
+        /** QuoteItemFuture volume. */
+        public volume: (number|Long);
+
+        /** QuoteItemFuture volVolume. */
+        public volVolume: (number|Long);
+
+        /** QuoteItemFuture volMavol1. */
+        public volMavol1: number;
+
+        /** QuoteItemFuture volMavol2. */
+        public volMavol2: number;
+
+        /** QuoteItemFuture cclHold. */
+        public cclHold: (number|Long);
+
+        /** QuoteItemFuture cclMaccl. */
+        public cclMaccl: number;
+
+        /**
+         * Creates a new QuoteItemFuture instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns QuoteItemFuture instance
+         */
+        public static create(properties?: pb.IQuoteItemFuture): pb.QuoteItemFuture;
+
+        /**
+         * Encodes the specified QuoteItemFuture message. Does not implicitly {@link pb.QuoteItemFuture.verify|verify} messages.
+         * @param message QuoteItemFuture message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IQuoteItemFuture, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified QuoteItemFuture message, length delimited. Does not implicitly {@link pb.QuoteItemFuture.verify|verify} messages.
+         * @param message QuoteItemFuture message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IQuoteItemFuture, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a QuoteItemFuture message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns QuoteItemFuture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.QuoteItemFuture;
+
+        /**
+         * Decodes a QuoteItemFuture message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns QuoteItemFuture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.QuoteItemFuture;
+
+        /**
+         * Verifies a QuoteItemFuture message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a QuoteItemFuture message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns QuoteItemFuture
+         */
+        public static fromObject(object: { [k: string]: any }): pb.QuoteItemFuture;
+
+        /**
+         * Creates a plain object from a QuoteItemFuture message. Also converts values to other types if specified.
+         * @param message QuoteItemFuture
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.QuoteItemFuture, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this QuoteItemFuture to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a QuotesFuture. */
+    interface IQuotesFuture {
+
+        /** QuotesFuture items */
+        items?: (pb.IQuoteItemFuture[]|null);
+    }
+
+    /** Represents a QuotesFuture. */
+    class QuotesFuture implements IQuotesFuture {
+
+        /**
+         * Constructs a new QuotesFuture.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IQuotesFuture);
+
+        /** QuotesFuture items. */
+        public items: pb.IQuoteItemFuture[];
+
+        /**
+         * Creates a new QuotesFuture instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns QuotesFuture instance
+         */
+        public static create(properties?: pb.IQuotesFuture): pb.QuotesFuture;
+
+        /**
+         * Encodes the specified QuotesFuture message. Does not implicitly {@link pb.QuotesFuture.verify|verify} messages.
+         * @param message QuotesFuture message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IQuotesFuture, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified QuotesFuture message, length delimited. Does not implicitly {@link pb.QuotesFuture.verify|verify} messages.
+         * @param message QuotesFuture message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IQuotesFuture, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a QuotesFuture message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns QuotesFuture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.QuotesFuture;
+
+        /**
+         * Decodes a QuotesFuture message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns QuotesFuture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.QuotesFuture;
+
+        /**
+         * Verifies a QuotesFuture message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a QuotesFuture message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns QuotesFuture
+         */
+        public static fromObject(object: { [k: string]: any }): pb.QuotesFuture;
+
+        /**
+         * Creates a plain object from a QuotesFuture message. Also converts values to other types if specified.
+         * @param message QuotesFuture
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.QuotesFuture, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this QuotesFuture to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Represents a QuotesService */
     class QuotesService extends $protobuf.rpc.Service {
 
@@ -3304,6 +3671,51 @@ export namespace pb {
          * @param [response] ErrorInfo
          */
         type QuotesSubscribeCallback = (error: (Error|null), response?: pb.ErrorInfo) => void;
+    }
+
+    /** Represents a QuotesFutureService */
+    class QuotesFutureService extends $protobuf.rpc.Service {
+
+        /**
+         * Constructs a new QuotesFutureService service.
+         * @param rpcImpl RPC implementation
+         * @param [requestDelimited=false] Whether requests are length-delimited
+         * @param [responseDelimited=false] Whether responses are length-delimited
+         */
+        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+        /**
+         * Creates new QuotesFutureService service using the specified rpc implementation.
+         * @param rpcImpl RPC implementation
+         * @param [requestDelimited=false] Whether requests are length-delimited
+         * @param [responseDelimited=false] Whether responses are length-delimited
+         * @returns RPC service. Useful where requests and/or responses are streamed.
+         */
+        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): QuotesFutureService;
+
+        /**
+         * Calls QuotesQuery.
+         * @param request CmdQuoteQueryFuture message or plain object
+         * @param callback Node-style callback called with the error, if any, and QuotesFuture
+         */
+        public quotesQuery(request: pb.ICmdQuoteQueryFuture, callback: pb.QuotesFutureService.QuotesQueryCallback): void;
+
+        /**
+         * Calls QuotesQuery.
+         * @param request CmdQuoteQueryFuture message or plain object
+         * @returns Promise
+         */
+        public quotesQuery(request: pb.ICmdQuoteQueryFuture): Promise<pb.QuotesFuture>;
+    }
+
+    namespace QuotesFutureService {
+
+        /**
+         * Callback as used by {@link pb.QuotesFutureService#quotesQuery}.
+         * @param error Error, if any
+         * @param [response] QuotesFuture
+         */
+        type QuotesQueryCallback = (error: (Error|null), response?: pb.QuotesFuture) => void;
     }
 
     /** LoginType enum. */

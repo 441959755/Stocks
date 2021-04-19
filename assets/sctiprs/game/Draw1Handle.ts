@@ -165,7 +165,7 @@ export default class NewClass extends cc.Component {
                 this.drawPcm.node.active = false;
             }
         }
-        let huizhidatas = cc.ext.gameData.gameDatas[0].data;
+        let huizhidatas = GameCfg.data[0].data;
 
         let EMA1Data = 12, EMA2Data = 26, DEAData = 9;
         let EMA12 = 0, EMA26 = 0;

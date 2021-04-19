@@ -1,6 +1,6 @@
 import GameCfg from '../../game/GameCfg';
-import pb from '../../../protos/proto';
-let MessageHead = pb.pb.MessageHead;
+import { pb } from '../../../protos/proto';
+let MessageHead = pb.MessageHead;
 
 Socket.prototype = {
     connected(event) {

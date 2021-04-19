@@ -3,6 +3,7 @@ import EventCfg from '../Utils/EventCfg';
 
 import GameCfg from '../game/GameCfg';
 import GameData from '../GameData';
+import { pb } from '../../protos/proto';
 
 const { ccclass, property } = cc._decorator;
 
@@ -55,30 +56,30 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-        if (!gameData.DXSet) { return }
+        if (!GameData.DXSet) { return }
         GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
 
         this.boxs.forEach((el, index) => {
             let la = el.getChildByName('label').getComponent(cc.Label);
             if (index == 0) {
-                la.string = gameData.DXSet.market;
+                la.string = GameData.DXSet.market;
             } else if (index == 1) {
-                la.string = gameData.DXSet.search;
+                la.string = GameData.DXSet.search;
             } else if (index == 2) {
-                la.string = gameData.DXSet.year;
+                la.string = GameData.DXSet.year;
             } else if (index == 3) {
-                la.string = gameData.DXSet.month;
+                la.string = GameData.DXSet.month;
             } else if (index == 4) {
-                la.string = gameData.DXSet.day;
+                la.string = GameData.DXSet.day;
             } else if (index == 5) {
-                la.string = gameData.DXSet.line;
+                la.string = GameData.DXSet.line;
             } else if (index == 6) {
-                la.string = gameData.DXSet.KLine;
+                la.string = GameData.DXSet.KLine;
             } else if (index == 7) {
-                la.string = gameData.DXSet.ZLine;
+                la.string = GameData.DXSet.ZLine;
             }
         })
-        this.toggle.isChecked = gameData.DXSet.isFC;
+        this.toggle.isChecked = GameData.DXSet.isFC;
     }
 
     onBoxSelectClick(event, data) {
@@ -151,21 +152,21 @@ export default class NewClass extends cc.Component {
             }
 
             if (this.setProId == 0) {
-                gameData.DXSet.market = str;
+                GameData.DXSet.market = str;
             } else if (this.setProId == 1) {
-                gameData.DXSet.search = str;
+                GameData.DXSet.search = str;
             } else if (this.setProId == 2) {
-                gameData.DXSet.year = str;
+                GameData.DXSet.year = str;
             } else if (this.setProId == 3) {
-                gameData.DXSet.month = str;
+                GameData.DXSet.month = str;
             } else if (this.setProId == 4) {
-                gameData.DXSet.day = str;
+                GameData.DXSet.day = str;
             } else if (this.setProId == 5) {
-                gameData.DXSet.line = str;
+                GameData.DXSet.line = str;
             } else if (this.setProId == 6) {
-                gameData.DXSet.KLine = str;
+                GameData.DXSet.KLine = str;
             } else if (this.setProId == 7) {
-                gameData.DXSet.ZLine = str;
+                GameData.DXSet.ZLine = str;
             }
 
         } else if (name == 'setDXBtnDX') {
@@ -173,19 +174,19 @@ export default class NewClass extends cc.Component {
         } else if (name == 'historyDXBtn') {
             GlobalEvent.emit("OPENHISTORYLAYER", 'DX');
         } else if (name == 'startDXBtn') {
-            GameCfg.GameType = 2;
-            GameCfg.GameSet = cc.ext.gameData.DXSet;
+            GameCfg.GameType = pb.GameType.DingXiang;
+            GameCfg.GameSet = GameData.DXSet;
             this.DXStartGameSet();
         }
     }
 
     onToggleClick() {
-        gameData.DXSet.isFC = this.toggle.isChecked;
+        GameData.DXSet.isFC = this.toggle.isChecked;
     }
 
 
     onDisable() {
-        gameData.DXSet = gameData.DXSet;
+        GameData.DXSet = GameData.DXSet;
     }
 
     DXStartGameSet() {
@@ -194,11 +195,12 @@ export default class NewClass extends cc.Component {
             kstyle: null,
             code: null,
             from: null,
-            total: parseInt(gameData.DXSet.KLine) + 150,
+            total: parseInt(GameData.DXSet.KLine) + 100,
             to: 0,
         }
         let items
-        if (gameData.DXSet.search == '随机选股') {
+        //   console.log(JSON.stringify(stocklist));
+        if (GameData.DXSet.search == '随机选股') {
             let le = parseInt(Math.random() * stocklist.length);
             items = stocklist[le].split('|');
             data.code = items[0];
@@ -207,8 +209,10 @@ export default class NewClass extends cc.Component {
             //     return;
             // }
         } else {
-            let dex;
-            let arrStr = gameData.DXSet.search.split(' ');
+            let dex = -1;
+            let arrStr = GameData.DXSet.search.split(' ');
+            arrStr[0] = arrStr[0].replace(/ /g, '');
+            arrStr[1] = arrStr[1].replace(/ /g, '');
             for (let i = 0; i < stocklist.length; i++) {
 
                 if (stocklist[i].indexOf(arrStr[0]) != -1) {
@@ -221,50 +225,59 @@ export default class NewClass extends cc.Component {
                     break;
                 }
             }
-            if (dex) {
+            if (dex != -1) {
                 items = stocklist[dex].split('|');
                 data.code = items[0];
             } else {
+                // console.log(arrStr[0]);
+                // console.log(arrStr[1]);
                 console.log('输入的股票代码不正确');
-                //  this.DXStartGameSet();
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '输入的股票代码不正确');
                 return;
             }
         }
 
-        if (gameData.DXSet.market == '随机行情') {
-            data.kstyle = 0;
-        } else if (gameData.DXSet.market == '震荡行情') {
-            data.kstyle = 1;
-        } else if (gameData.DXSet.market == '单边向上行情') {
-            data.kstyle = 2;
-        } else if (gameData.DXSet.market == '单边向下行情') {
-            data.kstyle = 3;
+        if (GameData.DXSet.market == '随机行情') {
+            data.kstyle = pb.KStyle.Random;
+        } else if (GameData.DXSet.market == '震荡行情') {
+            data.kstyle = pb.KStyle.Wave;
+        } else if (GameData.DXSet.market == '单边向上行情') {
+            data.kstyle = pb.KStyle.Up;
+        } else if (GameData.DXSet.market == '单边向下行情') {
+            data.kstyle = pb.KStyle.Down;
         }
 
-        if (gameData.DXSet.ZLine == '日线') {
-            data.ktype = 10;
-        } else if (gameData.DXSet.ZLine == '周线') {
-            data.ktype = 11;
-        } else if (gameData.DXSet.ZLine == '30分钟K') {
-            data.ktype = 4;
-        } else if (gameData.DXSet.ZLine == '60分钟K') {
-            data.ktype = 5;
+        if (GameData.DXSet.ZLine == '日线') {
+            data.ktype = pb.KType.Day;
+        } else if (GameData.DXSet.ZLine == '周线') {
+            data.ktype = pb.KType.Day7;
+        } else if (GameData.DXSet.ZLine == '30分钟K') {
+            data.ktype = pb.KType.Min30;
+        } else if (GameData.DXSet.ZLine == '60分钟K') {
+            data.ktype = pb.KType.Min60;
         }
 
-        if (gameData.DXSet.year != '随机') {
-            let seletTime = gameData.DXSet.year + '' + gameData.DXSet.month + '' + gameData.DXSet.day;
+        if (GameData.DXSet.year != '随机') {
+            let seletTime = GameData.DXSet.year + '' + GameData.DXSet.month + '' + GameData.DXSet.day;
             if (parseInt(seletTime) < parseInt(items[2])) {
-                console.log('时间不能早与股票创建时间');
-                // if (gameData.DXSet.search == '随机选股') {
-                this.DXStartGameSet();
-                //  }
+
+                if (gameData.DXSet.search == '随机选股') {
+                    this.DXStartGameSet();
+
+                } else {
+                    console.log('时间不能早与股票创建时间');
+                    EventCfg.emit(EventCfg.TIPSTEXTSHOW, '时间不能早与股票创建时间');
+                }
                 return;
             } else if (parseInt(seletTime) > parseInt(items[3])) {
                 if (parseInt(items[3]) != 0) {
-                    console.log('时间不能大与股票结束时间');
-                    //  if (gameData.DXSet.search == '随机选股') {
-                    this.DXStartGameSet();
-                    //  }
+
+                    if (gameData.DXSet.search == '随机选股') {
+                        this.DXStartGameSet();
+                    } else {
+                        console.log('时间不能大与股票结束时间');
+                        EventCfg.emit(EventCfg.TIPSTEXTSHOW, '时间不能大与股票结束时间');
+                    }
                     return;
                 }
             }
@@ -272,7 +285,7 @@ export default class NewClass extends cc.Component {
         } else {
             let start = items[2], end = items[3], sc;
             if (end == 0) {
-                sc = new Date().getTime();
+                sc = new Date().getTime() - data.total * 24 * 60 * 60 * 1000;
             } else {
                 let year = end.slice(0, 4);
                 let month = end.slice(4, 6);
@@ -280,7 +293,7 @@ export default class NewClass extends cc.Component {
 
                 let d = new Date(year + '-' + month + '-' + day);
 
-                sc = d.getTime();
+                sc = d.getTime() - data.total * 24 * 60 * 60 * 1000;
             }
             let year = start.slice(0, 4);
             let month = start.slice(4, 6);

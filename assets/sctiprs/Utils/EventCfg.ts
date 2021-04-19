@@ -36,6 +36,16 @@ export default {
 
     SET_DRAW_SIZE: 'SET_DRAW_SIZE',
 
+    ONMARKUPDATE: 'ONMARKUPDATE',
+
+    ONADDMARK: 'ONADDMARK',
+
+    ONMARKRANGESHOWORHIDE: 'ONMARKRANGESHOWORHIDE',
+
+    TIPSTEXTSHOW: "TIPSTEXTSHOW",
+
+    TIPSTEXTHIDE: 'TIPSTEXTHIDE',
+
 
     //[{"name":"好利来","code":"002729",
     // "info":{"c":"46.98","h":"47.7","l":"44.86","o":"45.41","a":"4697","v":"21914711","yc":"45.6",

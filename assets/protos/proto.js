@@ -39,37 +39,37 @@ $root.pb = (function () {
      * @name pb.GameType
      * @enum {number}
      * @property {number} GameType_NULL=0 GameType_NULL value
-     * @property {number} ShuangMang=1 ShuangMang value
-     * @property {number} DingXiang=2 DingXiang value
-     * @property {number} ZhiBiao=3 ZhiBiao value
-     * @property {number} TiaoJianDan=4 TiaoJianDan value
-     * @property {number} QiHuo=5 QiHuo value
-     * @property {number} JJ_PK=6 JJ_PK value
-     * @property {number} JJ_DuoKong=7 JJ_DuoKong value
-     * @property {number} JJ_ChuangGuan=8 JJ_ChuangGuan value
-     * @property {number} JJ_QiHuo=9 JJ_QiHuo value
+     * @property {number} ShuangMang=3 ShuangMang value
+     * @property {number} DingXiang=4 DingXiang value
+     * @property {number} ZhiBiao=17 ZhiBiao value
+     * @property {number} TiaoJianDan=11 TiaoJianDan value
+     * @property {number} QiHuo=6 QiHuo value
+     * @property {number} JJ_PK=1 JJ_PK value
+     * @property {number} JJ_DuoKong=2 JJ_DuoKong value
+     * @property {number} JJ_ChuangGuan=16 JJ_ChuangGuan value
+     * @property {number} JJ_QiHuo=15 JJ_QiHuo value
      * @property {number} MoNiChaoGu=10 MoNiChaoGu value
-     * @property {number} ChaoGuDaSai=11 ChaoGuDaSai value
-     * @property {number} GeGuJingChai=12 GeGuJingChai value
-     * @property {number} DaPanJingChai=13 DaPanJingChai value
+     * @property {number} ChaoGuDaSai=9 ChaoGuDaSai value
+     * @property {number} GeGuJingChai=7 GeGuJingChai value
+     * @property {number} DaPanJingChai=8 DaPanJingChai value
      * @property {number} MaxGameType=30 MaxGameType value
      */
     pb.GameType = (function () {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "GameType_NULL"] = 0;
-        values[valuesById[1] = "ShuangMang"] = 1;
-        values[valuesById[2] = "DingXiang"] = 2;
-        values[valuesById[3] = "ZhiBiao"] = 3;
-        values[valuesById[4] = "TiaoJianDan"] = 4;
-        values[valuesById[5] = "QiHuo"] = 5;
-        values[valuesById[6] = "JJ_PK"] = 6;
-        values[valuesById[7] = "JJ_DuoKong"] = 7;
-        values[valuesById[8] = "JJ_ChuangGuan"] = 8;
-        values[valuesById[9] = "JJ_QiHuo"] = 9;
+        values[valuesById[3] = "ShuangMang"] = 3;
+        values[valuesById[4] = "DingXiang"] = 4;
+        values[valuesById[17] = "ZhiBiao"] = 17;
+        values[valuesById[11] = "TiaoJianDan"] = 11;
+        values[valuesById[6] = "QiHuo"] = 6;
+        values[valuesById[1] = "JJ_PK"] = 1;
+        values[valuesById[2] = "JJ_DuoKong"] = 2;
+        values[valuesById[16] = "JJ_ChuangGuan"] = 16;
+        values[valuesById[15] = "JJ_QiHuo"] = 15;
         values[valuesById[10] = "MoNiChaoGu"] = 10;
-        values[valuesById[11] = "ChaoGuDaSai"] = 11;
-        values[valuesById[12] = "GeGuJingChai"] = 12;
-        values[valuesById[13] = "DaPanJingChai"] = 13;
+        values[valuesById[9] = "ChaoGuDaSai"] = 9;
+        values[valuesById[7] = "GeGuJingChai"] = 7;
+        values[valuesById[8] = "DaPanJingChai"] = 8;
         values[valuesById[30] = "MaxGameType"] = 30;
         return values;
     })();
@@ -1361,19 +1361,19 @@ $root.pb = (function () {
                     default:
                         return "game: enum value expected";
                     case 0:
-                    case 1:
-                    case 2:
                     case 3:
                     case 4:
-                    case 5:
+                    case 17:
+                    case 11:
                     case 6:
+                    case 1:
+                    case 2:
+                    case 16:
+                    case 15:
+                    case 10:
+                    case 9:
                     case 7:
                     case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
                     case 30:
                         break;
                 }
@@ -1404,56 +1404,56 @@ $root.pb = (function () {
                     message.game = 0;
                     break;
                 case "ShuangMang":
-                case 1:
-                    message.game = 1;
-                    break;
-                case "DingXiang":
-                case 2:
-                    message.game = 2;
-                    break;
-                case "ZhiBiao":
                 case 3:
                     message.game = 3;
                     break;
-                case "TiaoJianDan":
+                case "DingXiang":
                 case 4:
                     message.game = 4;
                     break;
-                case "QiHuo":
-                case 5:
-                    message.game = 5;
+                case "ZhiBiao":
+                case 17:
+                    message.game = 17;
                     break;
-                case "JJ_PK":
+                case "TiaoJianDan":
+                case 11:
+                    message.game = 11;
+                    break;
+                case "QiHuo":
                 case 6:
                     message.game = 6;
                     break;
+                case "JJ_PK":
+                case 1:
+                    message.game = 1;
+                    break;
                 case "JJ_DuoKong":
-                case 7:
-                    message.game = 7;
+                case 2:
+                    message.game = 2;
                     break;
                 case "JJ_ChuangGuan":
-                case 8:
-                    message.game = 8;
+                case 16:
+                    message.game = 16;
                     break;
                 case "JJ_QiHuo":
-                case 9:
-                    message.game = 9;
+                case 15:
+                    message.game = 15;
                     break;
                 case "MoNiChaoGu":
                 case 10:
                     message.game = 10;
                     break;
                 case "ChaoGuDaSai":
-                case 11:
-                    message.game = 11;
+                case 9:
+                    message.game = 9;
                     break;
                 case "GeGuJingChai":
-                case 12:
-                    message.game = 12;
+                case 7:
+                    message.game = 7;
                     break;
                 case "DaPanJingChai":
-                case 13:
-                    message.game = 13;
+                case 8:
+                    message.game = 8;
                     break;
                 case "MaxGameType":
                 case 30:
@@ -2957,19 +2957,19 @@ $root.pb = (function () {
                     default:
                         return "gType: enum value expected";
                     case 0:
-                    case 1:
-                    case 2:
                     case 3:
                     case 4:
-                    case 5:
+                    case 17:
+                    case 11:
                     case 6:
+                    case 1:
+                    case 2:
+                    case 16:
+                    case 15:
+                    case 10:
+                    case 9:
                     case 7:
                     case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
                     case 30:
                         break;
                 }
@@ -2986,6 +2986,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
+                    case 6:
                     case 10:
                     case 11:
                     case 20:
@@ -3043,56 +3044,56 @@ $root.pb = (function () {
                     message.gType = 0;
                     break;
                 case "ShuangMang":
-                case 1:
-                    message.gType = 1;
-                    break;
-                case "DingXiang":
-                case 2:
-                    message.gType = 2;
-                    break;
-                case "ZhiBiao":
                 case 3:
                     message.gType = 3;
                     break;
-                case "TiaoJianDan":
+                case "DingXiang":
                 case 4:
                     message.gType = 4;
                     break;
-                case "QiHuo":
-                case 5:
-                    message.gType = 5;
+                case "ZhiBiao":
+                case 17:
+                    message.gType = 17;
                     break;
-                case "JJ_PK":
+                case "TiaoJianDan":
+                case 11:
+                    message.gType = 11;
+                    break;
+                case "QiHuo":
                 case 6:
                     message.gType = 6;
                     break;
+                case "JJ_PK":
+                case 1:
+                    message.gType = 1;
+                    break;
                 case "JJ_DuoKong":
-                case 7:
-                    message.gType = 7;
+                case 2:
+                    message.gType = 2;
                     break;
                 case "JJ_ChuangGuan":
-                case 8:
-                    message.gType = 8;
+                case 16:
+                    message.gType = 16;
                     break;
                 case "JJ_QiHuo":
-                case 9:
-                    message.gType = 9;
+                case 15:
+                    message.gType = 15;
                     break;
                 case "MoNiChaoGu":
                 case 10:
                     message.gType = 10;
                     break;
                 case "ChaoGuDaSai":
-                case 11:
-                    message.gType = 11;
+                case 9:
+                    message.gType = 9;
                     break;
                 case "GeGuJingChai":
-                case 12:
-                    message.gType = 12;
+                case 7:
+                    message.gType = 7;
                     break;
                 case "DaPanJingChai":
-                case 13:
-                    message.gType = 13;
+                case 8:
+                    message.gType = 8;
                     break;
                 case "MaxGameType":
                 case 30:
@@ -3114,17 +3115,21 @@ $root.pb = (function () {
                 case 2:
                     message.kType = 2;
                     break;
-                case "Min15":
+                case "Min5":
                 case 3:
                     message.kType = 3;
                     break;
-                case "Min30":
+                case "Min15":
                 case 4:
                     message.kType = 4;
                     break;
-                case "Min60":
+                case "Min30":
                 case 5:
                     message.kType = 5;
+                    break;
+                case "Min60":
+                case 6:
+                    message.kType = 6;
                     break;
                 case "Day":
                 case 10:
@@ -3728,6 +3733,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
+                    case 6:
                     case 10:
                     case 11:
                     case 20:
@@ -3774,17 +3780,21 @@ $root.pb = (function () {
                 case 2:
                     message.kType = 2;
                     break;
-                case "Min15":
+                case "Min5":
                 case 3:
                     message.kType = 3;
                     break;
-                case "Min30":
+                case "Min15":
                 case 4:
                     message.kType = 4;
                     break;
-                case "Min60":
+                case "Min30":
                 case 5:
                     message.kType = 5;
+                    break;
+                case "Min60":
+                case 6:
+                    message.kType = 6;
                     break;
                 case "Day":
                 case 10:
@@ -5069,19 +5079,19 @@ $root.pb = (function () {
                     default:
                         return "game: enum value expected";
                     case 0:
-                    case 1:
-                    case 2:
                     case 3:
                     case 4:
-                    case 5:
+                    case 17:
+                    case 11:
                     case 6:
+                    case 1:
+                    case 2:
+                    case 16:
+                    case 15:
+                    case 10:
+                    case 9:
                     case 7:
                     case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
                     case 30:
                         break;
                 }
@@ -5106,56 +5116,56 @@ $root.pb = (function () {
                     message.game = 0;
                     break;
                 case "ShuangMang":
-                case 1:
-                    message.game = 1;
-                    break;
-                case "DingXiang":
-                case 2:
-                    message.game = 2;
-                    break;
-                case "ZhiBiao":
                 case 3:
                     message.game = 3;
                     break;
-                case "TiaoJianDan":
+                case "DingXiang":
                 case 4:
                     message.game = 4;
                     break;
-                case "QiHuo":
-                case 5:
-                    message.game = 5;
+                case "ZhiBiao":
+                case 17:
+                    message.game = 17;
                     break;
-                case "JJ_PK":
+                case "TiaoJianDan":
+                case 11:
+                    message.game = 11;
+                    break;
+                case "QiHuo":
                 case 6:
                     message.game = 6;
                     break;
+                case "JJ_PK":
+                case 1:
+                    message.game = 1;
+                    break;
                 case "JJ_DuoKong":
-                case 7:
-                    message.game = 7;
+                case 2:
+                    message.game = 2;
                     break;
                 case "JJ_ChuangGuan":
-                case 8:
-                    message.game = 8;
+                case 16:
+                    message.game = 16;
                     break;
                 case "JJ_QiHuo":
-                case 9:
-                    message.game = 9;
+                case 15:
+                    message.game = 15;
                     break;
                 case "MoNiChaoGu":
                 case 10:
                     message.game = 10;
                     break;
                 case "ChaoGuDaSai":
-                case 11:
-                    message.game = 11;
+                case 9:
+                    message.game = 9;
                     break;
                 case "GeGuJingChai":
-                case 12:
-                    message.game = 12;
+                case 7:
+                    message.game = 7;
                     break;
                 case "DaPanJingChai":
-                case 13:
-                    message.game = 13;
+                case 8:
+                    message.game = 8;
                     break;
                 case "MaxGameType":
                 case 30:
@@ -5596,19 +5606,19 @@ $root.pb = (function () {
                     default:
                         return "gType: enum value expected";
                     case 0:
-                    case 1:
-                    case 2:
                     case 3:
                     case 4:
-                    case 5:
+                    case 17:
+                    case 11:
                     case 6:
+                    case 1:
+                    case 2:
+                    case 16:
+                    case 15:
+                    case 10:
+                    case 9:
                     case 7:
                     case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
                     case 30:
                         break;
                 }
@@ -5642,56 +5652,56 @@ $root.pb = (function () {
                     message.gType = 0;
                     break;
                 case "ShuangMang":
-                case 1:
-                    message.gType = 1;
-                    break;
-                case "DingXiang":
-                case 2:
-                    message.gType = 2;
-                    break;
-                case "ZhiBiao":
                 case 3:
                     message.gType = 3;
                     break;
-                case "TiaoJianDan":
+                case "DingXiang":
                 case 4:
                     message.gType = 4;
                     break;
-                case "QiHuo":
-                case 5:
-                    message.gType = 5;
+                case "ZhiBiao":
+                case 17:
+                    message.gType = 17;
                     break;
-                case "JJ_PK":
+                case "TiaoJianDan":
+                case 11:
+                    message.gType = 11;
+                    break;
+                case "QiHuo":
                 case 6:
                     message.gType = 6;
                     break;
+                case "JJ_PK":
+                case 1:
+                    message.gType = 1;
+                    break;
                 case "JJ_DuoKong":
-                case 7:
-                    message.gType = 7;
+                case 2:
+                    message.gType = 2;
                     break;
                 case "JJ_ChuangGuan":
-                case 8:
-                    message.gType = 8;
+                case 16:
+                    message.gType = 16;
                     break;
                 case "JJ_QiHuo":
-                case 9:
-                    message.gType = 9;
+                case 15:
+                    message.gType = 15;
                     break;
                 case "MoNiChaoGu":
                 case 10:
                     message.gType = 10;
                     break;
                 case "ChaoGuDaSai":
-                case 11:
-                    message.gType = 11;
+                case 9:
+                    message.gType = 9;
                     break;
                 case "GeGuJingChai":
-                case 12:
-                    message.gType = 12;
+                case 7:
+                    message.gType = 7;
                     break;
                 case "DaPanJingChai":
-                case 13:
-                    message.gType = 13;
+                case 8:
+                    message.gType = 8;
                     break;
                 case "MaxGameType":
                 case 30:
@@ -6896,9 +6906,10 @@ $root.pb = (function () {
      * @property {number} KType_NULL=0 KType_NULL value
      * @property {number} Real=1 Real value
      * @property {number} Min=2 Min value
-     * @property {number} Min15=3 Min15 value
-     * @property {number} Min30=4 Min30 value
-     * @property {number} Min60=5 Min60 value
+     * @property {number} Min5=3 Min5 value
+     * @property {number} Min15=4 Min15 value
+     * @property {number} Min30=5 Min30 value
+     * @property {number} Min60=6 Min60 value
      * @property {number} Day=10 Day value
      * @property {number} Day7=11 Day7 value
      * @property {number} Mon=20 Mon value
@@ -6910,9 +6921,10 @@ $root.pb = (function () {
         values[valuesById[0] = "KType_NULL"] = 0;
         values[valuesById[1] = "Real"] = 1;
         values[valuesById[2] = "Min"] = 2;
-        values[valuesById[3] = "Min15"] = 3;
-        values[valuesById[4] = "Min30"] = 4;
-        values[valuesById[5] = "Min60"] = 5;
+        values[valuesById[3] = "Min5"] = 3;
+        values[valuesById[4] = "Min15"] = 4;
+        values[valuesById[5] = "Min30"] = 5;
+        values[valuesById[6] = "Min60"] = 6;
         values[valuesById[10] = "Day"] = 10;
         values[valuesById[11] = "Day7"] = 11;
         values[valuesById[20] = "Mon"] = 20;
@@ -7149,6 +7161,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
+                    case 6:
                     case 10:
                     case 11:
                     case 20:
@@ -7206,17 +7219,21 @@ $root.pb = (function () {
                 case 2:
                     message.ktype = 2;
                     break;
-                case "Min15":
+                case "Min5":
                 case 3:
                     message.ktype = 3;
                     break;
-                case "Min30":
+                case "Min15":
                 case 4:
                     message.ktype = 4;
                     break;
-                case "Min60":
+                case "Min30":
                 case 5:
                     message.ktype = 5;
+                    break;
+                case "Min60":
+                case 6:
+                    message.ktype = 6;
                     break;
                 case "Day":
                 case 10:
@@ -7733,6 +7750,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
+                    case 6:
                     case 10:
                     case 11:
                     case 20:
@@ -7825,17 +7843,21 @@ $root.pb = (function () {
                 case 2:
                     message.ktype = 2;
                     break;
-                case "Min15":
+                case "Min5":
                 case 3:
                     message.ktype = 3;
                     break;
-                case "Min30":
+                case "Min15":
                 case 4:
                     message.ktype = 4;
                     break;
-                case "Min60":
+                case "Min30":
                 case 5:
                     message.ktype = 5;
+                    break;
+                case "Min60":
+                case 6:
+                    message.ktype = 6;
                     break;
                 case "Day":
                 case 10:
@@ -8686,6 +8708,1152 @@ $root.pb = (function () {
         return CmdQuoteSubscribe;
     })();
 
+    pb.CmdQuoteQueryFuture = (function () {
+
+        /**
+         * Properties of a CmdQuoteQueryFuture.
+         * @memberof pb
+         * @interface ICmdQuoteQueryFuture
+         * @property {pb.KType|null} [ktype] CmdQuoteQueryFuture ktype
+         * @property {number|null} [code] CmdQuoteQueryFuture code
+         * @property {number|Long|null} [from] CmdQuoteQueryFuture from
+         * @property {number|null} [total] CmdQuoteQueryFuture total
+         * @property {number|Long|null} [to] CmdQuoteQueryFuture to
+         */
+
+        /**
+         * Constructs a new CmdQuoteQueryFuture.
+         * @memberof pb
+         * @classdesc Represents a CmdQuoteQueryFuture.
+         * @implements ICmdQuoteQueryFuture
+         * @constructor
+         * @param {pb.ICmdQuoteQueryFuture=} [properties] Properties to set
+         */
+        function CmdQuoteQueryFuture(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdQuoteQueryFuture ktype.
+         * @member {pb.KType} ktype
+         * @memberof pb.CmdQuoteQueryFuture
+         * @instance
+         */
+        CmdQuoteQueryFuture.prototype.ktype = 0;
+
+        /**
+         * CmdQuoteQueryFuture code.
+         * @member {number} code
+         * @memberof pb.CmdQuoteQueryFuture
+         * @instance
+         */
+        CmdQuoteQueryFuture.prototype.code = 0;
+
+        /**
+         * CmdQuoteQueryFuture from.
+         * @member {number|Long} from
+         * @memberof pb.CmdQuoteQueryFuture
+         * @instance
+         */
+        CmdQuoteQueryFuture.prototype.from = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * CmdQuoteQueryFuture total.
+         * @member {number} total
+         * @memberof pb.CmdQuoteQueryFuture
+         * @instance
+         */
+        CmdQuoteQueryFuture.prototype.total = 0;
+
+        /**
+         * CmdQuoteQueryFuture to.
+         * @member {number|Long} to
+         * @memberof pb.CmdQuoteQueryFuture
+         * @instance
+         */
+        CmdQuoteQueryFuture.prototype.to = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * Creates a new CmdQuoteQueryFuture instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdQuoteQueryFuture
+         * @static
+         * @param {pb.ICmdQuoteQueryFuture=} [properties] Properties to set
+         * @returns {pb.CmdQuoteQueryFuture} CmdQuoteQueryFuture instance
+         */
+        CmdQuoteQueryFuture.create = function create(properties) {
+            return new CmdQuoteQueryFuture(properties);
+        };
+
+        /**
+         * Encodes the specified CmdQuoteQueryFuture message. Does not implicitly {@link pb.CmdQuoteQueryFuture.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdQuoteQueryFuture
+         * @static
+         * @param {pb.ICmdQuoteQueryFuture} message CmdQuoteQueryFuture message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdQuoteQueryFuture.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.ktype != null && Object.hasOwnProperty.call(message, "ktype"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ktype);
+            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.code);
+            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.from);
+            if (message.total != null && Object.hasOwnProperty.call(message, "total"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.total);
+            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.to);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdQuoteQueryFuture message, length delimited. Does not implicitly {@link pb.CmdQuoteQueryFuture.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdQuoteQueryFuture
+         * @static
+         * @param {pb.ICmdQuoteQueryFuture} message CmdQuoteQueryFuture message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdQuoteQueryFuture.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdQuoteQueryFuture message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdQuoteQueryFuture
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdQuoteQueryFuture} CmdQuoteQueryFuture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdQuoteQueryFuture.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdQuoteQueryFuture();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.ktype = reader.int32();
+                        break;
+                    case 2:
+                        message.code = reader.uint32();
+                        break;
+                    case 3:
+                        message.from = reader.int64();
+                        break;
+                    case 4:
+                        message.total = reader.int32();
+                        break;
+                    case 5:
+                        message.to = reader.int64();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdQuoteQueryFuture message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdQuoteQueryFuture
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdQuoteQueryFuture} CmdQuoteQueryFuture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdQuoteQueryFuture.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdQuoteQueryFuture message.
+         * @function verify
+         * @memberof pb.CmdQuoteQueryFuture
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdQuoteQueryFuture.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.ktype != null && message.hasOwnProperty("ktype"))
+                switch (message.ktype) {
+                    default:
+                        return "ktype: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 10:
+                    case 11:
+                    case 20:
+                    case 21:
+                    case 30:
+                        break;
+                }
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code))
+                    return "code: integer expected";
+            if (message.from != null && message.hasOwnProperty("from"))
+                if (!$util.isInteger(message.from) && !(message.from && $util.isInteger(message.from.low) && $util.isInteger(message.from.high)))
+                    return "from: integer|Long expected";
+            if (message.total != null && message.hasOwnProperty("total"))
+                if (!$util.isInteger(message.total))
+                    return "total: integer expected";
+            if (message.to != null && message.hasOwnProperty("to"))
+                if (!$util.isInteger(message.to) && !(message.to && $util.isInteger(message.to.low) && $util.isInteger(message.to.high)))
+                    return "to: integer|Long expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdQuoteQueryFuture message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdQuoteQueryFuture
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdQuoteQueryFuture} CmdQuoteQueryFuture
+         */
+        CmdQuoteQueryFuture.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdQuoteQueryFuture)
+                return object;
+            var message = new $root.pb.CmdQuoteQueryFuture();
+            switch (object.ktype) {
+                case "KType_NULL":
+                case 0:
+                    message.ktype = 0;
+                    break;
+                case "Real":
+                case 1:
+                    message.ktype = 1;
+                    break;
+                case "Min":
+                case 2:
+                    message.ktype = 2;
+                    break;
+                case "Min5":
+                case 3:
+                    message.ktype = 3;
+                    break;
+                case "Min15":
+                case 4:
+                    message.ktype = 4;
+                    break;
+                case "Min30":
+                case 5:
+                    message.ktype = 5;
+                    break;
+                case "Min60":
+                case 6:
+                    message.ktype = 6;
+                    break;
+                case "Day":
+                case 10:
+                    message.ktype = 10;
+                    break;
+                case "Day7":
+                case 11:
+                    message.ktype = 11;
+                    break;
+                case "Mon":
+                case 20:
+                    message.ktype = 20;
+                    break;
+                case "Mon3":
+                case 21:
+                    message.ktype = 21;
+                    break;
+                case "Year":
+                case 30:
+                    message.ktype = 30;
+                    break;
+            }
+            if (object.code != null)
+                message.code = object.code >>> 0;
+            if (object.from != null)
+                if ($util.Long)
+                    (message.from = $util.Long.fromValue(object.from)).unsigned = false;
+                else if (typeof object.from === "string")
+                    message.from = parseInt(object.from, 10);
+                else if (typeof object.from === "number")
+                    message.from = object.from;
+                else if (typeof object.from === "object")
+                    message.from = new $util.LongBits(object.from.low >>> 0, object.from.high >>> 0).toNumber();
+            if (object.total != null)
+                message.total = object.total | 0;
+            if (object.to != null)
+                if ($util.Long)
+                    (message.to = $util.Long.fromValue(object.to)).unsigned = false;
+                else if (typeof object.to === "string")
+                    message.to = parseInt(object.to, 10);
+                else if (typeof object.to === "number")
+                    message.to = object.to;
+                else if (typeof object.to === "object")
+                    message.to = new $util.LongBits(object.to.low >>> 0, object.to.high >>> 0).toNumber();
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdQuoteQueryFuture message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdQuoteQueryFuture
+         * @static
+         * @param {pb.CmdQuoteQueryFuture} message CmdQuoteQueryFuture
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdQuoteQueryFuture.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.ktype = options.enums === String ? "KType_NULL" : 0;
+                object.code = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.from = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.from = options.longs === String ? "0" : 0;
+                object.total = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.to = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.to = options.longs === String ? "0" : 0;
+            }
+            if (message.ktype != null && message.hasOwnProperty("ktype"))
+                object.ktype = options.enums === String ? $root.pb.KType[message.ktype] : message.ktype;
+            if (message.code != null && message.hasOwnProperty("code"))
+                object.code = message.code;
+            if (message.from != null && message.hasOwnProperty("from"))
+                if (typeof message.from === "number")
+                    object.from = options.longs === String ? String(message.from) : message.from;
+                else
+                    object.from = options.longs === String ? $util.Long.prototype.toString.call(message.from) : options.longs === Number ? new $util.LongBits(message.from.low >>> 0, message.from.high >>> 0).toNumber() : message.from;
+            if (message.total != null && message.hasOwnProperty("total"))
+                object.total = message.total;
+            if (message.to != null && message.hasOwnProperty("to"))
+                if (typeof message.to === "number")
+                    object.to = options.longs === String ? String(message.to) : message.to;
+                else
+                    object.to = options.longs === String ? $util.Long.prototype.toString.call(message.to) : options.longs === Number ? new $util.LongBits(message.to.low >>> 0, message.to.high >>> 0).toNumber() : message.to;
+            return object;
+        };
+
+        /**
+         * Converts this CmdQuoteQueryFuture to JSON.
+         * @function toJSON
+         * @memberof pb.CmdQuoteQueryFuture
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdQuoteQueryFuture.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdQuoteQueryFuture;
+    })();
+
+    pb.QuoteItemFuture = (function () {
+
+        /**
+         * Properties of a QuoteItemFuture.
+         * @memberof pb
+         * @interface IQuoteItemFuture
+         * @property {number|null} [code] QuoteItemFuture code
+         * @property {pb.KType|null} [ktype] QuoteItemFuture ktype
+         * @property {number|Long|null} [timestamp] QuoteItemFuture timestamp
+         * @property {number|null} [open] QuoteItemFuture open
+         * @property {number|null} [close] QuoteItemFuture close
+         * @property {number|null} [high] QuoteItemFuture high
+         * @property {number|null} [low] QuoteItemFuture low
+         * @property {number|Long|null} [volume] QuoteItemFuture volume
+         * @property {number|Long|null} [volVolume] QuoteItemFuture volVolume
+         * @property {number|null} [volMavol1] QuoteItemFuture volMavol1
+         * @property {number|null} [volMavol2] QuoteItemFuture volMavol2
+         * @property {number|Long|null} [cclHold] QuoteItemFuture cclHold
+         * @property {number|null} [cclMaccl] QuoteItemFuture cclMaccl
+         */
+
+        /**
+         * Constructs a new QuoteItemFuture.
+         * @memberof pb
+         * @classdesc Represents a QuoteItemFuture.
+         * @implements IQuoteItemFuture
+         * @constructor
+         * @param {pb.IQuoteItemFuture=} [properties] Properties to set
+         */
+        function QuoteItemFuture(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * QuoteItemFuture code.
+         * @member {number} code
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         */
+        QuoteItemFuture.prototype.code = 0;
+
+        /**
+         * QuoteItemFuture ktype.
+         * @member {pb.KType} ktype
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         */
+        QuoteItemFuture.prototype.ktype = 0;
+
+        /**
+         * QuoteItemFuture timestamp.
+         * @member {number|Long} timestamp
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         */
+        QuoteItemFuture.prototype.timestamp = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * QuoteItemFuture open.
+         * @member {number} open
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         */
+        QuoteItemFuture.prototype.open = 0;
+
+        /**
+         * QuoteItemFuture close.
+         * @member {number} close
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         */
+        QuoteItemFuture.prototype.close = 0;
+
+        /**
+         * QuoteItemFuture high.
+         * @member {number} high
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         */
+        QuoteItemFuture.prototype.high = 0;
+
+        /**
+         * QuoteItemFuture low.
+         * @member {number} low
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         */
+        QuoteItemFuture.prototype.low = 0;
+
+        /**
+         * QuoteItemFuture volume.
+         * @member {number|Long} volume
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         */
+        QuoteItemFuture.prototype.volume = $util.Long ? $util.Long.fromBits(0, 0, true) : 0;
+
+        /**
+         * QuoteItemFuture volVolume.
+         * @member {number|Long} volVolume
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         */
+        QuoteItemFuture.prototype.volVolume = $util.Long ? $util.Long.fromBits(0, 0, true) : 0;
+
+        /**
+         * QuoteItemFuture volMavol1.
+         * @member {number} volMavol1
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         */
+        QuoteItemFuture.prototype.volMavol1 = 0;
+
+        /**
+         * QuoteItemFuture volMavol2.
+         * @member {number} volMavol2
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         */
+        QuoteItemFuture.prototype.volMavol2 = 0;
+
+        /**
+         * QuoteItemFuture cclHold.
+         * @member {number|Long} cclHold
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         */
+        QuoteItemFuture.prototype.cclHold = $util.Long ? $util.Long.fromBits(0, 0, true) : 0;
+
+        /**
+         * QuoteItemFuture cclMaccl.
+         * @member {number} cclMaccl
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         */
+        QuoteItemFuture.prototype.cclMaccl = 0;
+
+        /**
+         * Creates a new QuoteItemFuture instance using the specified properties.
+         * @function create
+         * @memberof pb.QuoteItemFuture
+         * @static
+         * @param {pb.IQuoteItemFuture=} [properties] Properties to set
+         * @returns {pb.QuoteItemFuture} QuoteItemFuture instance
+         */
+        QuoteItemFuture.create = function create(properties) {
+            return new QuoteItemFuture(properties);
+        };
+
+        /**
+         * Encodes the specified QuoteItemFuture message. Does not implicitly {@link pb.QuoteItemFuture.verify|verify} messages.
+         * @function encode
+         * @memberof pb.QuoteItemFuture
+         * @static
+         * @param {pb.IQuoteItemFuture} message QuoteItemFuture message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        QuoteItemFuture.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.code);
+            if (message.ktype != null && Object.hasOwnProperty.call(message, "ktype"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.ktype);
+            if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.timestamp);
+            if (message.open != null && Object.hasOwnProperty.call(message, "open"))
+                writer.uint32(/* id 4, wireType 1 =*/33).double(message.open);
+            if (message.close != null && Object.hasOwnProperty.call(message, "close"))
+                writer.uint32(/* id 5, wireType 1 =*/41).double(message.close);
+            if (message.high != null && Object.hasOwnProperty.call(message, "high"))
+                writer.uint32(/* id 6, wireType 1 =*/49).double(message.high);
+            if (message.low != null && Object.hasOwnProperty.call(message, "low"))
+                writer.uint32(/* id 7, wireType 1 =*/57).double(message.low);
+            if (message.volume != null && Object.hasOwnProperty.call(message, "volume"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.volume);
+            if (message.volVolume != null && Object.hasOwnProperty.call(message, "volVolume"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint64(message.volVolume);
+            if (message.volMavol1 != null && Object.hasOwnProperty.call(message, "volMavol1"))
+                writer.uint32(/* id 10, wireType 1 =*/81).double(message.volMavol1);
+            if (message.volMavol2 != null && Object.hasOwnProperty.call(message, "volMavol2"))
+                writer.uint32(/* id 11, wireType 1 =*/89).double(message.volMavol2);
+            if (message.cclHold != null && Object.hasOwnProperty.call(message, "cclHold"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint64(message.cclHold);
+            if (message.cclMaccl != null && Object.hasOwnProperty.call(message, "cclMaccl"))
+                writer.uint32(/* id 13, wireType 1 =*/105).double(message.cclMaccl);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified QuoteItemFuture message, length delimited. Does not implicitly {@link pb.QuoteItemFuture.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.QuoteItemFuture
+         * @static
+         * @param {pb.IQuoteItemFuture} message QuoteItemFuture message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        QuoteItemFuture.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a QuoteItemFuture message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.QuoteItemFuture
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.QuoteItemFuture} QuoteItemFuture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        QuoteItemFuture.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.QuoteItemFuture();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.code = reader.uint32();
+                        break;
+                    case 2:
+                        message.ktype = reader.int32();
+                        break;
+                    case 3:
+                        message.timestamp = reader.int64();
+                        break;
+                    case 4:
+                        message.open = reader.double();
+                        break;
+                    case 5:
+                        message.close = reader.double();
+                        break;
+                    case 6:
+                        message.high = reader.double();
+                        break;
+                    case 7:
+                        message.low = reader.double();
+                        break;
+                    case 8:
+                        message.volume = reader.uint64();
+                        break;
+                    case 9:
+                        message.volVolume = reader.uint64();
+                        break;
+                    case 10:
+                        message.volMavol1 = reader.double();
+                        break;
+                    case 11:
+                        message.volMavol2 = reader.double();
+                        break;
+                    case 12:
+                        message.cclHold = reader.uint64();
+                        break;
+                    case 13:
+                        message.cclMaccl = reader.double();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a QuoteItemFuture message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.QuoteItemFuture
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.QuoteItemFuture} QuoteItemFuture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        QuoteItemFuture.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a QuoteItemFuture message.
+         * @function verify
+         * @memberof pb.QuoteItemFuture
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        QuoteItemFuture.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code))
+                    return "code: integer expected";
+            if (message.ktype != null && message.hasOwnProperty("ktype"))
+                switch (message.ktype) {
+                    default:
+                        return "ktype: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 10:
+                    case 11:
+                    case 20:
+                    case 21:
+                    case 30:
+                        break;
+                }
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                if (!$util.isInteger(message.timestamp) && !(message.timestamp && $util.isInteger(message.timestamp.low) && $util.isInteger(message.timestamp.high)))
+                    return "timestamp: integer|Long expected";
+            if (message.open != null && message.hasOwnProperty("open"))
+                if (typeof message.open !== "number")
+                    return "open: number expected";
+            if (message.close != null && message.hasOwnProperty("close"))
+                if (typeof message.close !== "number")
+                    return "close: number expected";
+            if (message.high != null && message.hasOwnProperty("high"))
+                if (typeof message.high !== "number")
+                    return "high: number expected";
+            if (message.low != null && message.hasOwnProperty("low"))
+                if (typeof message.low !== "number")
+                    return "low: number expected";
+            if (message.volume != null && message.hasOwnProperty("volume"))
+                if (!$util.isInteger(message.volume) && !(message.volume && $util.isInteger(message.volume.low) && $util.isInteger(message.volume.high)))
+                    return "volume: integer|Long expected";
+            if (message.volVolume != null && message.hasOwnProperty("volVolume"))
+                if (!$util.isInteger(message.volVolume) && !(message.volVolume && $util.isInteger(message.volVolume.low) && $util.isInteger(message.volVolume.high)))
+                    return "volVolume: integer|Long expected";
+            if (message.volMavol1 != null && message.hasOwnProperty("volMavol1"))
+                if (typeof message.volMavol1 !== "number")
+                    return "volMavol1: number expected";
+            if (message.volMavol2 != null && message.hasOwnProperty("volMavol2"))
+                if (typeof message.volMavol2 !== "number")
+                    return "volMavol2: number expected";
+            if (message.cclHold != null && message.hasOwnProperty("cclHold"))
+                if (!$util.isInteger(message.cclHold) && !(message.cclHold && $util.isInteger(message.cclHold.low) && $util.isInteger(message.cclHold.high)))
+                    return "cclHold: integer|Long expected";
+            if (message.cclMaccl != null && message.hasOwnProperty("cclMaccl"))
+                if (typeof message.cclMaccl !== "number")
+                    return "cclMaccl: number expected";
+            return null;
+        };
+
+        /**
+         * Creates a QuoteItemFuture message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.QuoteItemFuture
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.QuoteItemFuture} QuoteItemFuture
+         */
+        QuoteItemFuture.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.QuoteItemFuture)
+                return object;
+            var message = new $root.pb.QuoteItemFuture();
+            if (object.code != null)
+                message.code = object.code >>> 0;
+            switch (object.ktype) {
+                case "KType_NULL":
+                case 0:
+                    message.ktype = 0;
+                    break;
+                case "Real":
+                case 1:
+                    message.ktype = 1;
+                    break;
+                case "Min":
+                case 2:
+                    message.ktype = 2;
+                    break;
+                case "Min5":
+                case 3:
+                    message.ktype = 3;
+                    break;
+                case "Min15":
+                case 4:
+                    message.ktype = 4;
+                    break;
+                case "Min30":
+                case 5:
+                    message.ktype = 5;
+                    break;
+                case "Min60":
+                case 6:
+                    message.ktype = 6;
+                    break;
+                case "Day":
+                case 10:
+                    message.ktype = 10;
+                    break;
+                case "Day7":
+                case 11:
+                    message.ktype = 11;
+                    break;
+                case "Mon":
+                case 20:
+                    message.ktype = 20;
+                    break;
+                case "Mon3":
+                case 21:
+                    message.ktype = 21;
+                    break;
+                case "Year":
+                case 30:
+                    message.ktype = 30;
+                    break;
+            }
+            if (object.timestamp != null)
+                if ($util.Long)
+                    (message.timestamp = $util.Long.fromValue(object.timestamp)).unsigned = false;
+                else if (typeof object.timestamp === "string")
+                    message.timestamp = parseInt(object.timestamp, 10);
+                else if (typeof object.timestamp === "number")
+                    message.timestamp = object.timestamp;
+                else if (typeof object.timestamp === "object")
+                    message.timestamp = new $util.LongBits(object.timestamp.low >>> 0, object.timestamp.high >>> 0).toNumber();
+            if (object.open != null)
+                message.open = Number(object.open);
+            if (object.close != null)
+                message.close = Number(object.close);
+            if (object.high != null)
+                message.high = Number(object.high);
+            if (object.low != null)
+                message.low = Number(object.low);
+            if (object.volume != null)
+                if ($util.Long)
+                    (message.volume = $util.Long.fromValue(object.volume)).unsigned = true;
+                else if (typeof object.volume === "string")
+                    message.volume = parseInt(object.volume, 10);
+                else if (typeof object.volume === "number")
+                    message.volume = object.volume;
+                else if (typeof object.volume === "object")
+                    message.volume = new $util.LongBits(object.volume.low >>> 0, object.volume.high >>> 0).toNumber(true);
+            if (object.volVolume != null)
+                if ($util.Long)
+                    (message.volVolume = $util.Long.fromValue(object.volVolume)).unsigned = true;
+                else if (typeof object.volVolume === "string")
+                    message.volVolume = parseInt(object.volVolume, 10);
+                else if (typeof object.volVolume === "number")
+                    message.volVolume = object.volVolume;
+                else if (typeof object.volVolume === "object")
+                    message.volVolume = new $util.LongBits(object.volVolume.low >>> 0, object.volVolume.high >>> 0).toNumber(true);
+            if (object.volMavol1 != null)
+                message.volMavol1 = Number(object.volMavol1);
+            if (object.volMavol2 != null)
+                message.volMavol2 = Number(object.volMavol2);
+            if (object.cclHold != null)
+                if ($util.Long)
+                    (message.cclHold = $util.Long.fromValue(object.cclHold)).unsigned = true;
+                else if (typeof object.cclHold === "string")
+                    message.cclHold = parseInt(object.cclHold, 10);
+                else if (typeof object.cclHold === "number")
+                    message.cclHold = object.cclHold;
+                else if (typeof object.cclHold === "object")
+                    message.cclHold = new $util.LongBits(object.cclHold.low >>> 0, object.cclHold.high >>> 0).toNumber(true);
+            if (object.cclMaccl != null)
+                message.cclMaccl = Number(object.cclMaccl);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a QuoteItemFuture message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.QuoteItemFuture
+         * @static
+         * @param {pb.QuoteItemFuture} message QuoteItemFuture
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        QuoteItemFuture.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.code = 0;
+                object.ktype = options.enums === String ? "KType_NULL" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.timestamp = options.longs === String ? "0" : 0;
+                object.open = 0;
+                object.close = 0;
+                object.high = 0;
+                object.low = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.volume = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.volume = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.volVolume = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.volVolume = options.longs === String ? "0" : 0;
+                object.volMavol1 = 0;
+                object.volMavol2 = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.cclHold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.cclHold = options.longs === String ? "0" : 0;
+                object.cclMaccl = 0;
+            }
+            if (message.code != null && message.hasOwnProperty("code"))
+                object.code = message.code;
+            if (message.ktype != null && message.hasOwnProperty("ktype"))
+                object.ktype = options.enums === String ? $root.pb.KType[message.ktype] : message.ktype;
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                if (typeof message.timestamp === "number")
+                    object.timestamp = options.longs === String ? String(message.timestamp) : message.timestamp;
+                else
+                    object.timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.timestamp) : options.longs === Number ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber() : message.timestamp;
+            if (message.open != null && message.hasOwnProperty("open"))
+                object.open = options.json && !isFinite(message.open) ? String(message.open) : message.open;
+            if (message.close != null && message.hasOwnProperty("close"))
+                object.close = options.json && !isFinite(message.close) ? String(message.close) : message.close;
+            if (message.high != null && message.hasOwnProperty("high"))
+                object.high = options.json && !isFinite(message.high) ? String(message.high) : message.high;
+            if (message.low != null && message.hasOwnProperty("low"))
+                object.low = options.json && !isFinite(message.low) ? String(message.low) : message.low;
+            if (message.volume != null && message.hasOwnProperty("volume"))
+                if (typeof message.volume === "number")
+                    object.volume = options.longs === String ? String(message.volume) : message.volume;
+                else
+                    object.volume = options.longs === String ? $util.Long.prototype.toString.call(message.volume) : options.longs === Number ? new $util.LongBits(message.volume.low >>> 0, message.volume.high >>> 0).toNumber(true) : message.volume;
+            if (message.volVolume != null && message.hasOwnProperty("volVolume"))
+                if (typeof message.volVolume === "number")
+                    object.volVolume = options.longs === String ? String(message.volVolume) : message.volVolume;
+                else
+                    object.volVolume = options.longs === String ? $util.Long.prototype.toString.call(message.volVolume) : options.longs === Number ? new $util.LongBits(message.volVolume.low >>> 0, message.volVolume.high >>> 0).toNumber(true) : message.volVolume;
+            if (message.volMavol1 != null && message.hasOwnProperty("volMavol1"))
+                object.volMavol1 = options.json && !isFinite(message.volMavol1) ? String(message.volMavol1) : message.volMavol1;
+            if (message.volMavol2 != null && message.hasOwnProperty("volMavol2"))
+                object.volMavol2 = options.json && !isFinite(message.volMavol2) ? String(message.volMavol2) : message.volMavol2;
+            if (message.cclHold != null && message.hasOwnProperty("cclHold"))
+                if (typeof message.cclHold === "number")
+                    object.cclHold = options.longs === String ? String(message.cclHold) : message.cclHold;
+                else
+                    object.cclHold = options.longs === String ? $util.Long.prototype.toString.call(message.cclHold) : options.longs === Number ? new $util.LongBits(message.cclHold.low >>> 0, message.cclHold.high >>> 0).toNumber(true) : message.cclHold;
+            if (message.cclMaccl != null && message.hasOwnProperty("cclMaccl"))
+                object.cclMaccl = options.json && !isFinite(message.cclMaccl) ? String(message.cclMaccl) : message.cclMaccl;
+            return object;
+        };
+
+        /**
+         * Converts this QuoteItemFuture to JSON.
+         * @function toJSON
+         * @memberof pb.QuoteItemFuture
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        QuoteItemFuture.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return QuoteItemFuture;
+    })();
+
+    pb.QuotesFuture = (function () {
+
+        /**
+         * Properties of a QuotesFuture.
+         * @memberof pb
+         * @interface IQuotesFuture
+         * @property {Array.<pb.IQuoteItemFuture>|null} [items] QuotesFuture items
+         */
+
+        /**
+         * Constructs a new QuotesFuture.
+         * @memberof pb
+         * @classdesc Represents a QuotesFuture.
+         * @implements IQuotesFuture
+         * @constructor
+         * @param {pb.IQuotesFuture=} [properties] Properties to set
+         */
+        function QuotesFuture(properties) {
+            this.items = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * QuotesFuture items.
+         * @member {Array.<pb.IQuoteItemFuture>} items
+         * @memberof pb.QuotesFuture
+         * @instance
+         */
+        QuotesFuture.prototype.items = $util.emptyArray;
+
+        /**
+         * Creates a new QuotesFuture instance using the specified properties.
+         * @function create
+         * @memberof pb.QuotesFuture
+         * @static
+         * @param {pb.IQuotesFuture=} [properties] Properties to set
+         * @returns {pb.QuotesFuture} QuotesFuture instance
+         */
+        QuotesFuture.create = function create(properties) {
+            return new QuotesFuture(properties);
+        };
+
+        /**
+         * Encodes the specified QuotesFuture message. Does not implicitly {@link pb.QuotesFuture.verify|verify} messages.
+         * @function encode
+         * @memberof pb.QuotesFuture
+         * @static
+         * @param {pb.IQuotesFuture} message QuotesFuture message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        QuotesFuture.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.items != null && message.items.length)
+                for (var i = 0; i < message.items.length; ++i)
+                    $root.pb.QuoteItemFuture.encode(message.items[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified QuotesFuture message, length delimited. Does not implicitly {@link pb.QuotesFuture.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.QuotesFuture
+         * @static
+         * @param {pb.IQuotesFuture} message QuotesFuture message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        QuotesFuture.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a QuotesFuture message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.QuotesFuture
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.QuotesFuture} QuotesFuture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        QuotesFuture.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.QuotesFuture();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        if (!(message.items && message.items.length))
+                            message.items = [];
+                        message.items.push($root.pb.QuoteItemFuture.decode(reader, reader.uint32()));
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a QuotesFuture message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.QuotesFuture
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.QuotesFuture} QuotesFuture
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        QuotesFuture.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a QuotesFuture message.
+         * @function verify
+         * @memberof pb.QuotesFuture
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        QuotesFuture.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.items != null && message.hasOwnProperty("items")) {
+                if (!Array.isArray(message.items))
+                    return "items: array expected";
+                for (var i = 0; i < message.items.length; ++i) {
+                    var error = $root.pb.QuoteItemFuture.verify(message.items[i]);
+                    if (error)
+                        return "items." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a QuotesFuture message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.QuotesFuture
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.QuotesFuture} QuotesFuture
+         */
+        QuotesFuture.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.QuotesFuture)
+                return object;
+            var message = new $root.pb.QuotesFuture();
+            if (object.items) {
+                if (!Array.isArray(object.items))
+                    throw TypeError(".pb.QuotesFuture.items: array expected");
+                message.items = [];
+                for (var i = 0; i < object.items.length; ++i) {
+                    if (typeof object.items[i] !== "object")
+                        throw TypeError(".pb.QuotesFuture.items: object expected");
+                    message.items[i] = $root.pb.QuoteItemFuture.fromObject(object.items[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a QuotesFuture message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.QuotesFuture
+         * @static
+         * @param {pb.QuotesFuture} message QuotesFuture
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        QuotesFuture.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.items = [];
+            if (message.items && message.items.length) {
+                object.items = [];
+                for (var j = 0; j < message.items.length; ++j)
+                    object.items[j] = $root.pb.QuoteItemFuture.toObject(message.items[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this QuotesFuture to JSON.
+         * @function toJSON
+         * @memberof pb.QuotesFuture
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        QuotesFuture.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return QuotesFuture;
+    })();
+
     pb.QuotesService = (function () {
 
         /**
@@ -8785,6 +9953,74 @@ $root.pb = (function () {
          */
 
         return QuotesService;
+    })();
+
+    pb.QuotesFutureService = (function () {
+
+        /**
+         * Constructs a new QuotesFutureService service.
+         * @memberof pb
+         * @classdesc Represents a QuotesFutureService
+         * @extends $protobuf.rpc.Service
+         * @constructor
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         */
+        function QuotesFutureService(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+        }
+
+        (QuotesFutureService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = QuotesFutureService;
+
+        /**
+         * Creates new QuotesFutureService service using the specified rpc implementation.
+         * @function create
+         * @memberof pb.QuotesFutureService
+         * @static
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         * @returns {QuotesFutureService} RPC service. Useful where requests and/or responses are streamed.
+         */
+        QuotesFutureService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+            return new this(rpcImpl, requestDelimited, responseDelimited);
+        };
+
+        /**
+         * Callback as used by {@link pb.QuotesFutureService#quotesQuery}.
+         * @memberof pb.QuotesFutureService
+         * @typedef QuotesQueryCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {pb.QuotesFuture} [response] QuotesFuture
+         */
+
+        /**
+         * Calls QuotesQuery.
+         * @function quotesQuery
+         * @memberof pb.QuotesFutureService
+         * @instance
+         * @param {pb.ICmdQuoteQueryFuture} request CmdQuoteQueryFuture message or plain object
+         * @param {pb.QuotesFutureService.QuotesQueryCallback} callback Node-style callback called with the error, if any, and QuotesFuture
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(QuotesFutureService.prototype.quotesQuery = function quotesQuery(request, callback) {
+            return this.rpcCall(quotesQuery, $root.pb.CmdQuoteQueryFuture, $root.pb.QuotesFuture, request, callback);
+        }, "name", { value: "QuotesQuery" });
+
+        /**
+         * Calls QuotesQuery.
+         * @function quotesQuery
+         * @memberof pb.QuotesFutureService
+         * @instance
+         * @param {pb.ICmdQuoteQueryFuture} request CmdQuoteQueryFuture message or plain object
+         * @returns {Promise<pb.QuotesFuture>} Promise
+         * @variation 2
+         */
+
+        return QuotesFutureService;
     })();
 
     /**

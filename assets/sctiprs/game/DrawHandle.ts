@@ -2,8 +2,8 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import DrawUtils from "../Utils/DrawUtils";
 import GameCfg from "./GameCfg";
-import Game = cc.Game;
-
+import GameData from '../GameData';
+import { pb } from '../../protos/proto';
 
 const { ccclass, property } = cc._decorator;
 
@@ -75,6 +75,15 @@ export default class NewClass extends cc.Component {
 
     timer = null;
 
+    btxPreCloseY = null;     ///宝塔前一日收盘价
+
+    btxPreOpenY = null;
+
+    btxChg = false;        ///宝塔线前一日的涨跌
+
+
+    //   multScale = 1;
+
     onLoad() {
         GlobalEvent.on(EventCfg.SETMALABEL, (labels) => {
             this.MAla = labels;
@@ -102,11 +111,11 @@ export default class NewClass extends cc.Component {
             if (10 + (cc.ext.beg_end[1] - cc.ext.beg_end[0] + 1) * cc.ext.hz_width < this.drawBordWidth) {
                 cc.ext.beg_end[1] += 1;
             } else {
-                if (GameCfg.huizhidatas >= cc.ext.gameData.gameDatas[0].data.length) {
-                    GameCfg.huizhidatas = cc.ext.gameData.gameDatas[0].data.length;
+                if (GameCfg.huizhidatas >= GameCfg.data[0].data.length) {
+                    GameCfg.huizhidatas = GameCfg.data[0].data.length;
                     return;
                 }
-                //  if(cc.ext.beg_end[1]>=cc.ext.gameData.gameDatas[0].data.length)
+
                 cc.ext.beg_end[0] += GameCfg.huizhidatas - cc.ext.beg_end[1];
                 cc.ext.beg_end[1] = GameCfg.huizhidatas;
             }
@@ -290,13 +299,18 @@ export default class NewClass extends cc.Component {
                                     if (cc.ext.beg_end[1] > GameCfg.huizhidatas) {
                                         cc.ext.beg_end[1] = GameCfg.huizhidatas
                                     }
-
                                 } else {
                                     cc.ext.beg_end[0] = 0;
                                     cc.ext.beg_end[1] = GameCfg.huizhidatas;
                                 }
                             }
+
+
+                            //  this.multScale = this.drawBordWidth / (num) / cc.ext.hz_width;
+                            //    GlobalEvent.emit(EventCfg.ONMARKRANGESHOWORHIDE);
+
                             cc.ext.hz_width = this.drawBordWidth / (num);
+
                             var pos = new cc.Vec2(event.getLocationX(), event.getLocationY());
                             let localPos = this.node.children[0].convertToNodeSpaceAR(pos);
                             this.Horizontal1.y = localPos.y;
@@ -365,8 +379,8 @@ export default class NewClass extends cc.Component {
     }
 
     setVOLInfo(index) {
-        if (cc.ext.gameData.gameDatas[0].data[index]) {
-            let value = parseFloat(cc.ext.gameData.gameDatas[0].data[index].value);
+        if (GameCfg.data[0].data[index]) {
+            let value = parseFloat(GameCfg.data[0].data[index].value);
             this.drawVol.node.children[0].getComponent(cc.Label).string = 'VOL(5,10): ' + value.toFixed(2);
         }
     }
@@ -404,7 +418,7 @@ export default class NewClass extends cc.Component {
         this.drawVol.clear();
         this.drawPCM.clear();
 
-        let viweData = cc.ext.gameData.gameDatas[0].data;
+        let viweData = GameCfg.data[0].data;
 
         if (!viweData || viweData.length <= 0) { return }
 
@@ -429,7 +443,14 @@ export default class NewClass extends cc.Component {
         this.part5.string = this.bottomValue.toFixed(2);
         GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.eachRate);
         for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
+
             this.onDrawCandle(viweData[index], index);
+
+            this.onDrawMA(index);
+
+            this.onDrawBoll(index);
+
+            this.onDrawVol(viweData[index], index);
         }
 
 
@@ -463,15 +484,23 @@ export default class NewClass extends cc.Component {
             this.drawBordWidth = 1280;
         }
 
-        GameCfg.huizhidatas = cc.ext.gameData.gameDatas[0].data.length - 150;
-        if (GameCfg.huizhidatas <= 0) { GameCfg.huizhidatas = parseInt(cc.ext.gameData.gameDatas[0].data.length / 2 + '') }
+        GameCfg.huizhidatas = GameCfg.data[0].data.length - 150;
+        if (GameCfg.huizhidatas <= 0) { GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '') }
 
         cc.ext.beg_end[1] = GameCfg.huizhidatas;
         cc.ext.beg_end[0] = cc.ext.beg_end[1] - GameCfg.huizhidatas;
+        let mixWidth = 6;
+        let maxWidth = 80;
         cc.ext.hz_width = this.drawBordWidth / GameCfg.huizhidatas;
 
+        if (cc.ext.hz_width > maxWidth) {
+            cc.ext.hz_width = maxWidth;
+        } else if (cc.ext.hz_width < mixWidth) {
+            cc.ext.hz_width = mixWidth;
+        }
+
         //绘制的数据
-        let data = cc.ext.gameData.gameDatas[0].data;
+        let data = GameCfg.data[0].data;
 
         let data5 = 5, data10 = 10;
 
@@ -591,61 +620,111 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    //绘制蜡烛线 曲线
+    //绘制蜡烛线 曲线 、宝塔线
     onDrawCandle(el, index) {
-        let some = index - cc.ext.beg_end[0];
+
+        let posInfo = {
+            highPos: null,
+            lowPos: null,
+            index: index,
+            // muit: this.multScale,
+        }
         let initY = 0;
         let drawBox = 340;
+        let some = index - cc.ext.beg_end[0];
+        let startX = some == 0 ? 10 : 10 + (some * cc.ext.hz_width);
+        let endX = 10 + ((some + 1) * cc.ext.hz_width);
         //根据区间价格决定坐标
         let openY = (el.open - this.bottomValue) / this.disValue * drawBox + initY;
         let closeY = (el.close - this.bottomValue) / this.disValue * drawBox + initY;
-        let startX = some == 0 ? 10 : 10 + (some * cc.ext.hz_width);
-        let endX = 10 + ((some + 1) * cc.ext.hz_width);
+        //宝塔线
+        if (GameCfg.GameType == pb.GameType.DingXiang && GameData.DXSet.line == '宝塔线') {
 
-        //判断颜色
-        // let hz_color;
-        //没涨没跌
+            if (index == 0) {
+                this.drawRect(this.drawBg, startX, closeY, endX - startX, openY - closeY, el.open > el.close);
+            } else {
+                //前一日上涨
+                if (this.btxChg) {
+                    //下跌
+                    //  if (el.open > el.close) {
+                    //红的
+                    if (this.btxPreOpenY < openY) {
+                        if (closeY <= this.btxPreOpenY) {
+                            this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, openY - closeY, true);
+                        } else {
+                            this.drawRect(this.drawBg, startX, openY, endX - startX, openY - closeY, true);
+                        }
 
-        let lowPrice, highPrice;
-        if (el.open == el.close) {
-            this.drawBg.strokeColor = GameCfg.HZ_white;
-            this.drawLine(this.drawBg, startX + 2, openY, endX, openY);
-            lowPrice = el.open;
-            highPrice = el.open;
-        }
-        //跌了
-        else {
-            if (el.open > el.close) {
-                lowPrice = el.close;
+                    } else if (this.btxPreOpenY > closeY) {
+                        if (openY <= this.btxPreOpenY) {
+                            this.drawRect(this.drawBg, startX, openY, endX - startX, openY - closeY, false);
+                        } else {
+                            this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, this.btxPreOpenY - closeY, false);
+                        }
+
+                    }
+
+                    //  }
+
+                } else {
+
+
+                }
+
+
+            }
+
+
+
+            this.btxChg = el.open > el.close ? false : true;
+            this.btxPreCloseY = closeY;
+            this.btxPreOpenY = openY;
+
+        } else {
+
+            //判断颜色
+            // let hz_color;
+            //没涨没跌
+            let lowPrice, highPrice;
+            if (el.open == el.close) {
+                this.drawBg.strokeColor = GameCfg.HZ_white;
+                this.drawLine(this.drawBg, startX + 2, openY, endX, openY);
+                lowPrice = el.open;
                 highPrice = el.open;
             }
-            //涨了
-            else if (el.open < el.close) {
-                lowPrice = el.open;
-                highPrice = el.close;
+            //跌了
+            else {
+                if (el.open > el.close) {
+                    lowPrice = el.close;
+                    highPrice = el.open;
+                }
+                //涨了
+                else if (el.open < el.close) {
+                    lowPrice = el.open;
+                    highPrice = el.close;
+                }
+                this.drawRect(this.drawBg, startX, closeY, endX - startX, openY - closeY, el.open > el.close);
             }
-            this.drawRect(this.drawBg, startX, closeY, endX - startX, openY - closeY, el.open > el.close);
-        }
-        //画最高价、
-        if (el.high > highPrice) {
-            let highY = (el.high - this.bottomValue) / this.disValue * drawBox + initY;
-            let highX = startX + (endX - startX) / 2;
-            let hy = openY > closeY ? openY : closeY;
-            this.drawLine(this.drawBg, highX, highY, highX, hy);
-        }
-        //画最低
-        if (el.low < lowPrice) {
-            let lowY = (el.low - this.bottomValue) / this.disValue * drawBox + initY;
-            let lowX = startX + (endX - startX) / 2;
-            let hy = openY < closeY ? openY : closeY;
-            this.drawLine(this.drawBg, lowX, lowY, lowX, hy);
-        }
 
-        this.onDrawMA(index);
 
-        this.onDrawBoll(index);
-
-        this.onDrawVol(el, index);
+            //画最高价、
+            if (el.high >= highPrice) {
+                let highY = (el.high - this.bottomValue) / this.disValue * drawBox + initY;
+                let highX = startX + (endX - startX) / 2;
+                let hy = openY > closeY ? openY : closeY;
+                this.drawLine(this.drawBg, highX, highY, highX, hy);
+                posInfo.highPos = cc.v2(highX, highY + 20);
+            }
+            //画最低
+            if (el.low <= lowPrice) {
+                let lowY = (el.low - this.bottomValue) / this.disValue * drawBox + initY;
+                let lowX = startX + (endX - startX) / 2;
+                let hy = openY < closeY ? openY : closeY;
+                this.drawLine(this.drawBg, lowX, lowY, lowX, hy);
+                posInfo.lowPos = cc.v2(lowX, lowY - 20);
+            }
+        }
+        GlobalEvent.emit(EventCfg.ONMARKUPDATE, posInfo);
 
     }
 
