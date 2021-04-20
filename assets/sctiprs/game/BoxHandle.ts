@@ -33,7 +33,7 @@ export default class NewClass extends cc.Component {
     onLoad() {
         GlobalEvent.on('updataLabel', (inde) => {
 
-            let datas = cc.ext.gameData.gameDatas[0].data;
+            let datas = GameCfg.data[0].data;
             let info = [];
             if (datas[inde - 1]) {
                 info.push('****/**/**');

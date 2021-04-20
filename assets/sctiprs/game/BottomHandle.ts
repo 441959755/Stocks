@@ -199,7 +199,10 @@ export default class NewClass extends cc.Component {
                 } else {
                     this._type = 2;
                 }
+
+
             } else {
+
                 this.flag = !this.flag;
                 this.mrBtn.node.active = !this.flag;
                 this.mcBtn.node.active = this.flag;
@@ -220,11 +223,14 @@ export default class NewClass extends cc.Component {
                     this.cyBtn.node.active = false;
                 }
                 this.setRoundNumber(name);
+
+
             }
         }
         //点击观望
         else if (name == 'gwBtn' || name == 'cyBtn') {
             this.setRoundNumber(name);
+
         }
         //全仓
         else if (name == 'fcBtn') {
@@ -409,6 +415,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit('roundNUmber');
 
         this.onSetMrCount();
+        GlobalEvent.emit(EventCfg.SLGEVENTNOTICE);
     }
 
     onBuyOrSell(state) {

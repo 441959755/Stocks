@@ -321,7 +321,7 @@ export default class NewClass extends cc.Component {
         GameCfg.data[0].name = items[1];
         GameCfg.data[0].code = items[0];
         GameCfg.data[0].circulate = items[4];
-        GlobalEvent.emit('onCmdQuoteQuery', data, 2);
+        GlobalEvent.emit('onCmdQuoteQuery', data);
     }
 
 

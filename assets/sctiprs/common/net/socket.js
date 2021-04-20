@@ -1,4 +1,4 @@
-import GameCfg from '../../game/GameCfg';
+//import GameCfg from '../../game/GameCfg';
 import { pb } from '../../../protos/proto';
 let MessageHead = pb.MessageHead;
 
@@ -28,7 +28,6 @@ Socket.prototype = {
                     cc.director.loadScene('hall');
                 }
             }
-
         });
     },
 
@@ -118,38 +117,35 @@ Socket.prototype = {
         let self = this;
         if (!this.heartbeat) {
             this.heartbeat = setInterval(() => {
-                self.ws = new WebSocket(self.host);
-                self.ws.binaryType = 'arraybuffer';
-                self.ws.onmessage = self.message.bind(self);
-                self.ws.onopen = self.connected.bind(self);
-                self.ws.onerror = function (event) {
-                    console.log('ws onerror');
-                }
-                self.ws.onclose = self.onclose.bind(self);
-                console.log('reconnect');
+                console.log('断线连接中...');
+                self.initSocket();
             }, 3000);
-
         }
 
+    },
+
+
+    initSocket() {
+        //  if (!host) { host = 'ws://3000' }
+        this.ws = new WebSocket(this.host);
+        this.ws.binaryType = 'arraybuffer';
+        //this.ws.responseType = "arraybuffer"
+        this.ws.onmessage = this.message.bind(this);
+        this.ws.onopen = this.connected.bind(this);
+        this.ws.onerror = function (event) {
+            console.log('ws onerror');
+        }
+        this.ws.onclose = this.onclose.bind(this);
+
+        this.heartbeat = null;
     }
 }
 
 function Socket(host) {
     this.sequence = 0;
     this.queue = {};
-    //  if (!host) { host = 'ws://3000' }
     this.host = host;
-    this.ws = new WebSocket(host);
-    this.ws.binaryType = 'arraybuffer';
-    //this.ws.responseType = "arraybuffer"
-    this.ws.onmessage = this.message.bind(this);
-    this.ws.onopen = this.connected.bind(this);
-    this.ws.onerror = function (event) {
-        console.log('ws onerror');
-    }
-    this.ws.onclose = this.onclose.bind(this);
-
-    this.heartbeat = null;
+    this.initSocket();
     //  this.notification = new cc.EventTarget();
 }
 

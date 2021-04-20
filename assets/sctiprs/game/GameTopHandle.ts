@@ -2,6 +2,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import PopupManager from "../Utils/PopupManager";
 import GameCfg from "./GameCfg";
+import { pb } from '../../protos/proto';
 
 
 const { ccclass, property } = cc._decorator;
@@ -76,10 +77,21 @@ export default class NewClass extends cc.Component {
             this.lv.string = 'LV:' + gameData.properties[2] || 0 + '';
         }
 
+
         //训练指标
-        if (GameCfg.GameType == 3) {
-            let nodes = this.rightNode.children;
+        let nodes = this.rightNode.children;
+        nodes.forEach(el => {
+            el.active = true;
+        })
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+
             nodes[0].active = false;
+            nodes[3].active = false;
+        } else if (GameCfg.GameType == pb.GameType.DingXiang) {
+            nodes[0].active = false;
+
+            nodes[2].active = false;
+
         }
     }
 
@@ -102,7 +114,10 @@ export default class NewClass extends cc.Component {
             })
         } else if (name == 'backBtn') {
             cc.director.loadScene('hall');
-
         }
+        else if (name == 'btnMyspic') {
+            GlobalEvent.emit(EventCfg.MYSPICCLICK);
+        }
+
     }
 }

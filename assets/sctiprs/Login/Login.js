@@ -4,7 +4,7 @@ import LLWSDK from "../common/sdk/LLWSDK";
 import LoadUtils from "../Utils/LoadUtils";
 
 import Socket from "../common/net/socket";
-import pb from '../../protos/proto';
+
 window.global = window;
 
 cc.ext = {};

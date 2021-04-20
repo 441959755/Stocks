@@ -35,9 +35,6 @@ export default class NewClass extends cc.Component {
 
     disValue = 0;       //当前绘制的最高值-当前绘制最低值
 
-
-    MaList = [];          //MA的前一个绘制点
-
     BollList = [];           //Boll的前一个绘制点
 
     VolList = [];            //均量线
@@ -350,14 +347,14 @@ export default class NewClass extends cc.Component {
 
     // ma boll
     setMALabelInfo(index) {
-        if (this.MaList[index] != 'null' && this.MaList[index]) {
+        if (GameCfg.MaList[index]) {
             this.MAla.forEach((el, t) => {
-                if (this.MaList[index][t]) {
+                if (GameCfg.MaList[index][t]) {
                     //   el.node.color = GameCfg.MAColor[t];
                     if (t == 0) {
-                        el.string = '日线 MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
+                        el.string = '日线 MA' + GameCfg.MAs[t] + ': ' + GameCfg.MaList[index][t].toFixed(2);
                     } else {
-                        el.string = 'MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
+                        el.string = 'MA' + GameCfg.MAs[t] + ': ' + GameCfg.MaList[index][t].toFixed(2);
                     }
 
                 }
@@ -368,7 +365,7 @@ export default class NewClass extends cc.Component {
     //bol
     setBOLLLabelInfo(index) {
         let arr = ['BOLL(20) BOLL', 'UB', 'LB'];
-        if (this.BollList[index] && this.BollList[index] != 'null') {
+        if (this.BollList[index]) {
             this.BOLLLabel.forEach((el, t) => {
                 //  el.node.color = GameCfg.BOLLColor[t];
                 if (this.BollList[index][t]) {
@@ -453,7 +450,6 @@ export default class NewClass extends cc.Component {
             this.onDrawVol(viweData[index], index);
         }
 
-
     }
 
     //Boll
@@ -478,7 +474,7 @@ export default class NewClass extends cc.Component {
         this.drawBOLL.lineWidth = 2;
         this.drawVol.lineWidth = 2;
         this.drawPCM.lineWidth = 2;
-        this.MaList = [];
+        GameCfg.MaList = [];
 
         if (cc.winSize.width > this.node.width) {
             this.drawBordWidth = 1280;
@@ -509,7 +505,7 @@ export default class NewClass extends cc.Component {
         data.forEach((el, index) => {
 
             if (index + 1 >= GameCfg.MAs[0]) {
-                this.MaList[index] = [];
+                GameCfg.MaList[index] = [];
                 if (GameCfg.MAs.includes(index + 1)) {
                     let MAPoint = 0;
                     for (let i = 0; i <= index; i++) {
@@ -517,7 +513,7 @@ export default class NewClass extends cc.Component {
                     }
                     //位置
                     let MAPointY = (MAPoint / (index + 1));
-                    this.MaList[index].push(MAPointY)
+                    GameCfg.MaList[index].push(MAPointY)
                 }
 
                 for (let i = 0; i < GameCfg.MAs.length; i++) {
@@ -530,11 +526,11 @@ export default class NewClass extends cc.Component {
                         }
                         //平均的位置
                         let MAY = (sumUp / GameCfg.MAs[i]);
-                        this.MaList[index].push(MAY);
+                        GameCfg.MaList[index].push(MAY);
                     }
                 }
             } else {
-                this.MaList.push('null');
+                GameCfg.MaList.push(null);
             }
 
             //boll
@@ -559,7 +555,7 @@ export default class NewClass extends cc.Component {
                 this.BollList[index].push(DN)
             } else {
 
-                this.BollList.push('null');
+                this.BollList.push(null);
             }
 
 
@@ -592,14 +588,14 @@ export default class NewClass extends cc.Component {
                     }
                 }
             } else {
-                this.VolList.push('null');
+                this.VolList.push(null);
             }
         });
     }
 
     //曲线MA
     onDrawMA(index) {
-        if (this.MaList[index] == 'null') {
+        if (!GameCfg.MaList[index]) {
             return;
         }
         let drawBox = 340, initY = 0, madata = 0;
@@ -608,10 +604,10 @@ export default class NewClass extends cc.Component {
 
             if (index >= GameCfg.MAs[i]) {
                 //平均的位置
-                let preMAY = (this.MaList[index - 1][i] - this.bottomValue) / this.disValue * drawBox + initY;
+                let preMAY = (GameCfg.MaList[index - 1][i] - this.bottomValue) / this.disValue * drawBox + initY;
                 let preMAX = 10 + ((index - 1 - cc.ext.beg_end[0]) * cc.ext.hz_width) + cc.ext.hz_width / 2;
 
-                let MAY = (this.MaList[index][i] - this.bottomValue) / this.disValue * drawBox + initY;
+                let MAY = (GameCfg.MaList[index][i] - this.bottomValue) / this.disValue * drawBox + initY;
                 let MAX = 10 + ((index - cc.ext.beg_end[0]) * cc.ext.hz_width) + cc.ext.hz_width / 2;
 
                 this.drawMA.strokeColor = GameCfg.MAColor[i];
@@ -642,33 +638,48 @@ export default class NewClass extends cc.Component {
 
             if (index == 0) {
                 this.drawRect(this.drawBg, startX, closeY, endX - startX, openY - closeY, el.open > el.close);
+                this.btxChg = el.open > el.close ? false : true;
+                this.btxPreCloseY = closeY;
+                this.btxPreOpenY = openY;
             } else {
                 //前一日上涨
                 if (this.btxChg) {
                     //下跌
-                    //  if (el.open > el.close) {
-                    //红的
-                    if (this.btxPreOpenY < openY) {
-                        if (closeY <= this.btxPreOpenY) {
-                            this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, openY - closeY, true);
-                        } else {
-                            this.drawRect(this.drawBg, startX, openY, endX - startX, openY - closeY, true);
+                    if (el.open > el.close) {
+
+                        if (closeY >= this.btxPreOpenY) {
+                            this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, closeY - this.btxPreOpenY, true);
+                            //this.btxPreCloseY = closeY;
+                            this.btxPreOpenY = this.btxPreOpenY;
+                        } else if (closeY < this.btxPreOpenY) {
+
+                            this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, this.btxPreCloseY - this.btxPreOpenY, true);
+                            this.drawRect(this.drawBg, startX, closeY, endX - startX, this.btxPreOpenY - closeY, false);
+                            this.btxPreOpenY = closeY;
                         }
 
-                    } else if (this.btxPreOpenY > closeY) {
-                        if (openY <= this.btxPreOpenY) {
-                            this.drawRect(this.drawBg, startX, openY, endX - startX, openY - closeY, false);
-                        } else {
-                            this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, this.btxPreOpenY - closeY, false);
-                        }
-
+                        //上红下绿
+                        // if (this.btxPreOpenY > closeY && this.btxPreOpenY < openY) {
+                        //     this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, openY - this.btxPreOpenY, true);
+                        //     this.drawRect(this.drawBg, startX, closeY, endX - startX, this.btxPreCloseY - closeY, false);
+                        // } else if (this.btxPreOpenY <= closeY) {
+                        //     this.drawRect(this.drawBg, startX, openY, endX - startX, openY - closeY, true);
+                        // } else {
+                        //     this.drawRect(this.drawBg, startX, openY, endX - startX, openY - closeY, false);
+                        // }
+                    } else {
+                        this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, closeY - this.btxPreOpenY, true);
+                        this.btxPreOpenY = this.btxPreOpenY;
                     }
 
-                    //  }
-
                 } else {
+                    if (el.open < el.close) {
 
 
+                    } else {
+                        this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, closeY - this.btxPreOpenY, false);
+                        this.btxPreOpenY = this.btxPreOpenY;
+                    }
                 }
 
 
@@ -678,7 +689,7 @@ export default class NewClass extends cc.Component {
 
             this.btxChg = el.open > el.close ? false : true;
             this.btxPreCloseY = closeY;
-            this.btxPreOpenY = openY;
+            // this.btxPreOpenY = openY;
 
         } else {
 
@@ -724,6 +735,7 @@ export default class NewClass extends cc.Component {
                 posInfo.lowPos = cc.v2(lowX, lowY - 20);
             }
         }
+
         GlobalEvent.emit(EventCfg.ONMARKUPDATE, posInfo);
 
     }
@@ -748,7 +760,7 @@ export default class NewClass extends cc.Component {
         this.drawRect(this.drawVol, startX, 0, width, hight, el.open > el.close);
 
         //均量线 白
-        if (this.VolList[index] == 'null') {
+        if (!this.VolList[index]) {
             return;
         }
 

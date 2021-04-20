@@ -1,6 +1,7 @@
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
+import { pb } from '../../protos/proto';
 
 const { ccclass, property } = cc._decorator;
 
@@ -34,15 +35,13 @@ export default class NewClass extends cc.Component {
         this.setColor();
     }
 
-
-
-
     protected onDestroy() {
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.HELPSHOW);
     }
 
     setColor() {
+        //黑底
         if (GameCfg.GameSet.isBW) {
             GameCfg.MAColor[0] = new cc.Color().fromHEX('#ffffff');
             GameCfg.MAColor[1] = new cc.Color().fromHEX('#ebeb12');
@@ -76,7 +75,9 @@ export default class NewClass extends cc.Component {
             GameCfg.RSI_COLOR[1] = new cc.Color().fromHEX('#f0dc05');
             GameCfg.RSI_COLOR[2] = new cc.Color().fromHEX('#d85cfc');
 
-        } else {
+        }
+        //百地
+        else {
             GameCfg.MAColor[0] = new cc.Color().fromHEX('#03004c');
             GameCfg.MAColor[1] = new cc.Color().fromHEX('#f39800');
             GameCfg.MAColor[2] = new cc.Color().fromHEX('#cc33cc');
@@ -114,14 +115,17 @@ export default class NewClass extends cc.Component {
     initData() {
         GameCfg.MAs = [];
         let j = 0;
-        if (GameCfg.GameType == 1) {
+        //双盲 定向
+        if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang) {
 
             for (let i = 1; i <= 6; i++) {
                 if (GameCfg.GameSet['isMA' + i]) {
                     GameCfg.MAs[j++] = GameCfg.GameSet['MA' + i + 'Date'];
                 }
             }
-        } else if (GameCfg.GameType == 3) {
+        }
+        //指标
+        else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             GameCfg.VOLGraph = [];
 
             if (GameCfg.GameSet.select == '均线') {

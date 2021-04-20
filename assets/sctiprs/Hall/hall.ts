@@ -2,6 +2,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from '../game/GameCfg';
 import LoadUtils from '../Utils/LoadUtils';
+import { pb } from '../../protos/proto';
 
 const { ccclass, property } = cc._decorator;
 
@@ -244,45 +245,41 @@ export default class NewClass extends cc.Component {
 
     onCmdGameStart(data, info1) {
         GlobalEvent.emit('EventCfg.LOADINGSHOW');
-        if (socket) {
+        //  if (socket) {
+        GameCfg.info = info1;
 
-            socket.send(4003, PB.onCmdGameStartConvertToBuff(data), (info) => {
+        socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(data), (res) => {
+            //console.log('onCmdGameStart' + JSON.stringify(res));
+            socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), (info) => {
+                //   console.log('onCmdQuoteQuery' + JSON.stringify(info));
+                info.items.forEach(el => {
+                    //  let date = new Date(el.timestamp);
+                    let ye = (el.timestamp + '').slice(0, 4);
+                    let mon = (el.timestamp + '').slice(4, 6);
+                    let da = (el.timestamp + '').slice(6);
+                    let fromDate = ye + '-' + mon + '-' + da;
+                    let data = {
+                        day: fromDate,
+                        open: el.open,
+                        close: el.price,
+                        high: el.high,
+                        low: el.low,
+                        price: el.amount,
+                        value: el.volume,
+                        Rate: el.volume / GameCfg.data[0].circulate * 100,
+                    }
+                    GameCfg.data[0].data.push(data);
+                });
 
-                console.log('onCmdGameStart' + JSON.stringify(info));
-                if (socket) {
-                    socket.send(2003, PB.onCmdQuoteQueryConvertToBuff(info1), (info) => {
-                        console.log('onCmdQuoteQuery' + JSON.stringify(info));
-                        info.items.forEach(el => {
-                            //  let date = new Date(el.timestamp);
-                            let ye = (el.timestamp + '').slice(0, 4);
-                            let mon = (el.timestamp + '').slice(4, 6);
-                            let da = (el.timestamp + '').slice(6);
-                            let fromDate = ye + '-' + mon + '-' + da;
-                            let data = {
-                                day: fromDate,
-                                open: el.open,
-                                close: el.price,
-                                high: el.high,
-                                low: el.low,
-                                price: el.amount,
-                                value: el.volume,
-                                Rate: el.volume / GameCfg.data[0].circulate * 100,
-                            }
-                            GameCfg.data[0].data.push(data);
-                        });
-
-                        //    cc.ext.gameData.gameDatas = GameCfg.data;
-                        cc.director.loadScene('game');
-                    })
-
-                } else {
-                    console.log('socket err');
-                }
+                cc.director.loadScene('game');
             })
-        }
+
+        })
+        //  }
     }
 
     onCmdQuoteQuery(data) {
+        // console.log(JSON.stringify(data));
         this.onCmdGameStart({ game: GameCfg.GameType }, data);
     }
 
