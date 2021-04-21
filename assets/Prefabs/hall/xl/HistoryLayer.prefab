@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "SMHistoryLayer",
+    "_name": "HistoryLayer",
     "_objFlags": 0,
     "_parent": null,
     "_children": [

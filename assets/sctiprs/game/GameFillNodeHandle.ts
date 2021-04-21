@@ -57,10 +57,7 @@ export default class NewClass extends cc.Component {
                 this.graphics.strokeColor = color;
                 DrawUtils.drawRectFill(this.graphics, startX + 1, 0, width - 2, this.node.height, color);
             })
-
-
         }, this);
-
     }
 
     protected onDestroy() {

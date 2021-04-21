@@ -243,6 +243,7 @@ export default class NewClass extends cc.Component {
         } else if (name == 'setZBBtn') {
             GlobalEvent.emit('OPENSETLAYER', 'ZB');
         } else if (name == 'historyZBBtn') {
+            GameCfg.GameType = pb.GameType.ZhiBiao;
             GlobalEvent.emit("OPENHISTORYLAYER", 'ZB');
         }
     }

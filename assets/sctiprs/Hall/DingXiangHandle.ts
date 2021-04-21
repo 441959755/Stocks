@@ -118,6 +118,7 @@ export default class NewClass extends cc.Component {
     }
 
     onBtnClick(event, data) {
+
         let name = event.target.name;
         if (name == 'DCnode') {
             event.target.parent.active = false;
@@ -172,7 +173,10 @@ export default class NewClass extends cc.Component {
         } else if (name == 'setDXBtnDX') {
             GlobalEvent.emit('OPENSETLAYER', 'DX');
         } else if (name == 'historyDXBtn') {
+
+            GameCfg.GameType = pb.GameType.DingXiang;
             GlobalEvent.emit("OPENHISTORYLAYER", 'DX');
+
         } else if (name == 'startDXBtn') {
             GameCfg.GameType = pb.GameType.DingXiang;
             GameCfg.GameSet = GameData.DXSet;

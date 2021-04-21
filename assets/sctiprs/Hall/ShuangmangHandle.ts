@@ -20,7 +20,7 @@ export default class NewClass extends cc.Component {
     curla: cc.Label = null;
 
     protected onEnable() {
-        GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
+        //  GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
         this.toggle1.isChecked = GameData.SMSet.isFC;
 
         this.initLa.string = smxlCfg.capital_init;
@@ -46,7 +46,7 @@ export default class NewClass extends cc.Component {
         }
         //点击历史记录
         else if (name == 'historySMBtn') {
-
+            GameCfg.GameType = pb.GameType.ShuangMang;
             GlobalEvent.emit('OPENHISTORYLAYER', 'SM');
         }
         //点击月报
@@ -56,6 +56,10 @@ export default class NewClass extends cc.Component {
         //点击收益曲线
         else if (name == 'xlSMBtn') {
             GlobalEvent.emit('OPENYIELDLAYER', 'SM');
+        }
+        else if (name == 'blackbtn') {
+            GameCfg.GameType = null;
+            this.node.active = false;
         }
 
     }

@@ -3,6 +3,7 @@ import EventCfg from "../Utils/EventCfg";
 
 import LoadUtils from "../Utils/LoadUtils";
 import GameData from "../GameData";
+import GameCfg from '../game/GameCfg';
 
 const { ccclass, property } = cc._decorator;
 
@@ -120,6 +121,7 @@ export default class NewClass extends cc.Component {
         else if (name == 'sys_back') {
             this.rightNode.active = false;
             this.otherSelf.node.active = false;
+            GameCfg.GameType = null;
         }
         else if (name == 'sys_help') {
             GlobalEvent.emit('OPENHELPLAYER', 'SM');

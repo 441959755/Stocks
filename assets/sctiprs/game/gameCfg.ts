@@ -36,8 +36,6 @@ export default {
 
     ziChan: 100000,
 
-    eachRate: [],
-
     allRate: 0,  //总盈利
 
     profitCount: 0,//次数盈  利
@@ -57,5 +55,14 @@ export default {
     ],
 
     info: null,
+
+    history: { //游戏记录
+
+        mark: [],        //标签信息
+        notice: [],      //通知栏
+        fill: [],         //bg填充颜色
+    },
+
+    GAMEFUPAN: false,  //游戏复盘
 
 }

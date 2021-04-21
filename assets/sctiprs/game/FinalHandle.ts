@@ -82,32 +82,43 @@ export default class NewClass extends cc.Component {
         this.yingZiJin.string = '本轮盈利:' + parseInt((GameCfg.finalfund - 100000) + '');
         this.AllZiJin.string = '最终资金:' + parseInt(GameCfg.finalfund + '');
 
-
-        let datas = {
-            uid: gameData.userID,
-            g_type: GameCfg.GameType,
-            quotes_code: GameCfg.data[0].code,
-            k_type: GameCfg.data[0].ktype,
-            k_from: parseInt(gpData[0].day.replace(/-/g, '')),
-            k_to: parseInt(gpData[gpData.length - 1].day.replace(/-/g, '')),
-            stock_profit_rate: ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2),
-            user_profit_rate: (GameCfg.allRate * 100).toFixed(2),
-            user_capital: gameData.properties[3],
-            user_profit: (GameCfg.finalfund - gameData.properties[3]),
-            ts: new Date().getTime() / 1000,
-            rank: 0,
-            ref_id: 0,
-        }
-        if (GameCfg.GameType < 4) {
-            datas.rank = datas.user_profit_rate >= datas.stock_profit_rate ? 1 : 2;
-            if (GameCfg.GameType == 1) {
-                datas.ref_id = 0;
+        //复盘中不保存记录
+        if (!GameCfg.GAMEFUPAN) {
+            let datas = {
+                uid: gameData.userID,
+                g_type: GameCfg.GameType,
+                quotes_code: GameCfg.data[0].code,
+                k_type: GameCfg.data[0].ktype,
+                k_from: parseInt(gpData[0].day.replace(/-/g, '')),
+                k_to: parseInt(gpData[gpData.length - 1].day.replace(/-/g, '')),
+                stock_profit_rate: ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2),
+                user_profit_rate: (GameCfg.allRate * 100).toFixed(2),
+                user_capital: gameData.properties[3],
+                user_profit: (GameCfg.finalfund - gameData.properties[3]),
+                ts: new Date().getTime() / 1000,
+                rank: 0,
+                ref_id: 0,
             }
+            //  if (GameCfg.GameType < 4) {
+            datas.rank = datas.user_profit_rate >= datas.stock_profit_rate ? 1 : 2;
+            //  if (GameCfg.GameType == 1) {
+            datas.ref_id = 0;
+            // }
+            //  }
+
+            this.saveHoistoryInfo(datas.ts);
+
+
+            socket.send(4005, PB.onCmdGameOverConvertToBuff(datas), (info) => {
+                console.log('GameOverInfo' + JSON.stringify(info));
+            })
         }
 
-        socket.send(4005, PB.onCmdGameOverConvertToBuff(datas), (info) => {
-            console.log('GameOverInfo' + JSON.stringify(info));
-        })
+    }
+
+    saveHoistoryInfo(ts) {
+        cc.sys.localStorage.setItem(ts, JSON.stringify(GameCfg.history));
+        cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
     }
 
     onBtnClick(event, data) {
@@ -115,17 +126,18 @@ export default class NewClass extends cc.Component {
         //返回大厅
         if (name == 'closeBtn') {
             GameCfg.huizhidatas = 0;
-            GameCfg.eachRate = [];
+
             GameCfg.allRate = 0;
             GameCfg.profitCount = 0;
             GameCfg.lossCount = 0;
             GameCfg.finalfund = 0;
+            GameCfg.GameType = null;
             cc.director.loadScene('hall');
         }
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
             GameCfg.huizhidatas = 0;
-            GameCfg.eachRate = [];
+
             GameCfg.allRate = 0;
             GameCfg.profitCount = 0;
             GameCfg.lossCount = 0;
@@ -137,6 +149,7 @@ export default class NewClass extends cc.Component {
         //复盘
         else if (name == 'lx_jsbt_qd') {
             this.node.active = false;
+            GameCfg.GAMEFUPAN = true;
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
 
         }

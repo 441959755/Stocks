@@ -32,6 +32,23 @@ export default class NewClass extends cc.Component {
         //  GlobalEvent.on(EventCfg.ONMARKRANGESHOWORHIDE, this.onMarkRangeShowOrHide.bind(this), this);
 
         GlobalEvent.on(EventCfg.ONMARKUPDATE, this.onMarkUpdate.bind(this), this);
+
+        if (GameCfg.GAMEFUPAN) {
+            this.createFuPanData();
+        }
+    }
+
+    //复盘的本地数据
+    createFuPanData() {
+        let data = GameCfg.history.mark;
+        if (data) {
+
+            data.forEach((el) => {
+                if (el) {
+                    this.onAddMard({ type: el[1], index: el[0] })
+                }
+            });
+        }
     }
 
     onEnable() {
@@ -98,18 +115,18 @@ export default class NewClass extends cc.Component {
     //1是开始
     //2买入
     //3卖出
-    onAddMard(type) {
+    onAddMard(info) {
         let node, inde;
-        if (type == 1) {
+        if (info.type == 1) {
             node = cc.instantiate(this.startItem);
             this.ratio = node.height / node.width;
-            inde = GameCfg.huizhidatas - 2;
-        } else if (type == 2) {
+            inde = info.index - 2;
+        } else if (info.type == 2) {
             node = cc.instantiate(this.bItem);
-            inde = GameCfg.huizhidatas - 1;
-        } else if (type == 3) {
+            inde = info.index - 1;
+        } else if (info.type == 3) {
             node = cc.instantiate(this.sItem);
-            inde = GameCfg.huizhidatas - 1;
+            inde = info.index - 1;
         } else {
             return;
         }
@@ -118,29 +135,54 @@ export default class NewClass extends cc.Component {
 
         this.markNodes[inde] = {
             node: node,
-            type: type,
+            type: info.type,
         };
 
-        //双盲
-        if (GameCfg.GameType == pb.GameType.ShuangMang) {
+        this.saveHistoryMark(inde, info.type);
+
+        // //双盲
+        // if (GameCfg.GameType == pb.GameType.ShuangMang) {
+        //     node.active = false;
+        // }
+        if (GameCfg.GAMEFUPAN) {
+            node.active = true;
+        } else {
             node.active = false;
         }
 
-        //  console.log(type);
+        //  console.log(type);MA5下穿MA10
 
+    }
+
+    saveHistoryMark(inde, type) {
+        //保存游戏记录
+        if (!GameCfg.GAMEFUPAN && GameCfg.GameType != pb.GameType.ShuangMang) {
+
+            GameCfg.history.mark.push([inde, type])
+
+            // this.markNodes.forEach((el, indx) => {
+
+            //     if (el) {
+            //         GameCfg.history.mark[indx] = el.type;
+            //     }
+
+            // })
+        }
     }
 
 
     //显示所有标签
     onMarkAllShow() {
         //双盲
-        if (GameCfg.GameType == pb.GameType.ShuangMang) {
-            this.showFlag = true;
-            this.markNodes.forEach(el => {
-                el.node.active = true;
-            })
-        }
+        //  if (GameCfg.GameType == pb.GameType.ShuangMang) {
+        this.showFlag = true;
+        this.markNodes.forEach(el => {
+            el.node.active = true;
+        })
+        //  }
     }
+
+
 
 
     onMarAllkhide() {

@@ -207,7 +207,7 @@ export default class NewClass extends cc.Component {
                 this.mrBtn.node.active = !this.flag;
                 this.mcBtn.node.active = this.flag;
                 if (name == 'mrBtn') {
-                    GlobalEvent.emit(EventCfg.ONADDMARK, 2);
+                    GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
 
                     this.keMcCount += this.keMrCount;
                     this.keMrCount = 0;
@@ -215,7 +215,7 @@ export default class NewClass extends cc.Component {
                     this.cyBtn.node.active = true;
                     this.gwBtn.node.active = false;
                 } else {
-                    GlobalEvent.emit(EventCfg.ONADDMARK, 3);
+                    GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
 
                     this.ziChan += parseFloat(this.keMcCount + '') * this.gpData[GameCfg.huizhidatas - 1].close;
                     this.keMcCount = 0;
@@ -415,6 +415,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit('roundNUmber');
 
         this.onSetMrCount();
+
         GlobalEvent.emit(EventCfg.SLGEVENTNOTICE);
     }
 
@@ -435,8 +436,8 @@ export default class NewClass extends cc.Component {
                 start: start,
                 end: null,
             }
-            GameCfg.eachRate.push(this.rateItem);
-            GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.eachRate);
+            GameCfg.history.fill.push(this.rateItem);
+            GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.history.fill);
         }
 
         //卖出
@@ -468,13 +469,13 @@ export default class NewClass extends cc.Component {
                     start: start,
                     end: null,
                 }
-                GameCfg.eachRate.push(this.rateItem);
+                GameCfg.history.fill.push(this.rateItem);
             }
             this.rateItem.rate = rate;
 
 
-            GameCfg.eachRate[GameCfg.eachRate.length - 1] = this.rateItem;
-            GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.eachRate);
+            GameCfg.history.fill[GameCfg.eachRate.length - 1] = this.rateItem;
+            GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.history.fill);
         }
         //观望
         else if (state == 'cyBtn') {
@@ -487,8 +488,9 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit('updateRate', [rate]);
 
             this.rateItem.rate = rate;
-            GameCfg.eachRate[GameCfg.eachRate.length - 1] = this.rateItem;
-            GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.eachRate);
+            GameCfg.history.fill[GameCfg.eachRate.length - 1] = this.rateItem;
+
+            GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.history.fill);
         }
     }
 

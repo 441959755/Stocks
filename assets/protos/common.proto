@@ -25,27 +25,55 @@ enum Constant {
 	MsgMaxBody_Len = 1024000;	// 最大的消息体长度
 }
 
-// 游戏类型
-enum GameType {
-	GameType_NULL = 0;
-	
-	ShuangMang = 3;		// 双盲训练
-	DingXiang = 4;		// 定向训练
-	ZhiBiao	 = 17;		// 指标训练
-	TiaoJianDan = 11;	// 条件单训练
-	QiHuo = 6;			// 期货训练
+// App平台类型
+enum AppPlantForm {
+	AppPlantForm_NULL = 0;
 
-	JJ_PK = 1;			// PK大战
-	JJ_DuoKong = 2;		// 多空大战
-	JJ_ChuangGuan = 16;	// 闯关赛
-	JJ_QiHuo = 15;		// 期货大战
+	WechatMinProgram = 1;	// 微信小程序
+	Ios = 11;				// 苹果IOS
+	Android = 21;			// 安卓平台
+}
 
-	MoNiChaoGu = 10;	// 模拟炒股
-	ChaoGuDaSai = 9;	// 炒股大赛
-	GeGuJingChai = 7;	// 个股竞猜
-	DaPanJingChai = 8;	// 大盘竞猜
+// 广告位置
+enum AdPosition {
+	AdPosition_NULL = 0;
 
-	MaxGameType = 30;	// 最大游戏类型编号
+	StartUp = 1;	// 启动页
+	Main = 11;		// 主页
+}
+
+// App渠道
+enum AppFrom {
+    // 炒股达人
+    Android_000 = 0;   // 安卓0渠道
+    Android_001 = 1;   // 安卓001渠道
+    Android_201 = 201; // 安卓201渠道
+    Android_204 = 204; // 安卓204渠道
+    Android_205 = 205; // 安卓205渠道
+    Android_206 = 206; // 安卓206渠道
+    Android_208 = 208; // 安卓208渠道
+    Android_209 = 209; // 安卓209渠道
+    Android_210 = 210; // 安卓210渠道
+    Android_211 = 211; // 安卓211渠道
+    Android_212 = 212; // 安卓212渠道
+    Android_301 = 301; // 安卓301渠道
+    Android_302 = 302; // 安卓302渠道
+    Android_601 = 601; // 安卓601渠道
+
+    // K线学院
+    Android_1000 = 1000; // 安卓1000渠道
+    Android_1204 = 1204; // 安卓1204渠道
+    Android_1205 = 1205; // 安卓1205渠道
+    Android_1208 = 1208; // 安卓1208渠道
+    Android_1212 = 1212; // 安卓1212渠道
+
+	IosAppleStore = 6666;	// 苹果商店下载的App
+	Ipad          = 6667;   // Ipad
+
+	WebsiteIos    = 7777;   // 企业网站下载的苹果
+	WebsiteAndriod= 7778;   // 企业网站下载的安卓
+
+	WeChatMinProgram = 8888;// 微信小程序
 }
 
 // 消息ID
@@ -61,13 +89,15 @@ enum MessageId {
 	Sync_S2C_GameProperty = 1002;// 同步玩家游戏属性
 	Sync_S2C_GameCounter = 1004;// 同步输赢计数器
 
-	// 股票相关
+	// 行情相关
 	Req_QuoteSubscribe = 2001;	// 订阅或取消订阅行情
 	Rep_QuoteSubscribe = 2002;	// 订阅或取消订阅行情响应(无响应)
 	Req_QuoteQuery = 2003;		// 查询行情
 	Rep_QuoteQuery = 2004;		// 查询行情响应
 	Req_QuoteEdit  = 2005;		// 编辑行情(废弃)
 	Req_StockEdit  = 2007;		// 编辑股票信息(废弃)
+	Req_QuoteQueryFuture = 2009;// 查询期货行情
+	Rep_QuoteQueryFuture = 2010;// 查询期货行情响应
 
 	// 玩家信息相关
 	Req_Game_UploadIcon = 3001;	// 上传头像
@@ -115,9 +145,11 @@ message ErrorInfo {
 	string err = 2;
 }
 
-message MessageSpan {
-  sfixed64 send = 1;
-  sfixed64 recv = 2;
+message AdClicked {
+	int32 uid = 1;		// uid
+	int32 pos = 2;		// 广告位置
+	string url = 3;		// 广告URL
+	AppFrom from = 4;	// 渠道
 }
 
 // 空请求

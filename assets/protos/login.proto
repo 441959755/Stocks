@@ -31,55 +31,21 @@ enum LoginType {
 	WebTest		  = 99; // web测试
 }
 
-// 登录来源
-enum LoginFrom {
-    // 炒股达人
-    Android_000 = 0;   // 安卓0渠道
-    Android_001 = 1;   // 安卓001渠道
-    Android_201 = 201; // 安卓201渠道
-    Android_204 = 204; // 安卓204渠道
-    Android_205 = 205; // 安卓205渠道
-    Android_206 = 206; // 安卓206渠道
-    Android_208 = 208; // 安卓208渠道
-    Android_209 = 209; // 安卓209渠道
-    Android_210 = 210; // 安卓210渠道
-    Android_211 = 211; // 安卓211渠道
-    Android_212 = 212; // 安卓212渠道
-    Android_301 = 301; // 安卓301渠道
-    Android_302 = 302; // 安卓302渠道
-    Android_601 = 601; // 安卓601渠道
-
-    // K线学院
-    Android_1000 = 1000; // 安卓1000渠道
-    Android_1204 = 1204; // 安卓1204渠道
-    Android_1205 = 1205; // 安卓1205渠道
-    Android_1208 = 1208; // 安卓1208渠道
-    Android_1212 = 1212; // 安卓1212渠道
-
-	IosAppleStore = 6666;	// 苹果商店下载的App
-	Ipad          = 6667;   // Ipad
-
-	WebsiteIos    = 7777;   // 企业网站下载的苹果
-	WebsiteAndriod= 7778;   // 企业网站下载的安卓
-
-	WeChatMinProgram = 8888;// 微信小程序
-}
-
 // 注册
 message CmdRegistry {
 	string account = 1; // 玩家账号：手机号、微信登录的Code
 	LoginType type = 2; // 登录类型
-	LoginFrom from = 3; // 登录来源
-	string pwd = 4;     // 玩家密码
-	string sms = 5;     // 手机验证码
+	string pwd = 3;     // 玩家密码
+	string sms = 4;     // 手机验证码
+	AppFrom from = 5; 	// App渠道
 }
 
 // 登录参数
 message CmdLogin {
 	string account = 1; // 玩家账号：手机号、微信登录的Code
 	LoginType type = 2; // 登录类型
-	LoginFrom from = 3; // 登录来源
-	string pwd = 4;     // 玩家密码
+	string pwd = 3;     // 玩家密码
+	AppFrom from = 4; 	// App渠道
 }
 // 登录响应
 message CmdLoginReply {

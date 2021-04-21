@@ -90,21 +90,15 @@ export default class NewClass extends cc.Component {
             this.DXLayer.active = true;
         }, this);
 
-        GlobalEvent.on('OPENHISTORYLAYER', (str, data) => {
+        GlobalEvent.on('OPENHISTORYLAYER', (str) => {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            if (str == 'SM') {
-                if (data) {
-                    this.openHistoryLayer && (this.openHistoryLayer(data, str));
-                } else {
-                    //SM的要获取服务器消息
-                    this.acquireSMhistoryInfo((info) => {
-                        this.openHistoryLayer && (this.openHistoryLayer(info, str));
-                    });
-                }
-            } else {
-                //其他在本地缓存取
-                this.openHistoryLayer && (this.openHistoryLayer(null, str));
-            }
+            //SM的要获取服务器消息
+            this.acquireSMhistoryInfo((info) => {
+
+                this.openHistoryLayer && (this.openHistoryLayer(info, str));
+            });
+
+
         }, this);
 
         GlobalEvent.on('OPENSETLAYER', (str) => {
@@ -210,17 +204,15 @@ export default class NewClass extends cc.Component {
 
 
     openHistoryLayer(info, type?) {
-
-
         if (!this.historyLayer) {
             //   this.historyLayer = cc.instantiate(this.historyPre)
             this.historyLayer = cc.instantiate(this.historyPre);
             this.node.addChild(this.historyLayer);
         }
         this.historyLayer.active = true;
-        this.historyLayer.getComponent('SMHistory').historyType = type;
-        this.historyLayer.getComponent('SMHistory').historyInfo = info;
-        this.historyLayer.getComponent('SMHistory').onShow();
+        //  this.historyLayer.getComponent('SMHistory').historyType = type;
+        this.historyLayer.getComponent('History').historyInfo = info;
+        this.historyLayer.getComponent('History').onShow();
         if (this.SMYieldLayer) {
             this.historyLayer.zIndex = this.SMYieldLayer.zIndex + 1;
         }
@@ -292,7 +284,7 @@ export default class NewClass extends cc.Component {
 
         if (socket) {
             let data1 = {
-                g_type: 1,
+                g_type: GameCfg.GameType,
                 from: data.getTime(),
                 to: new Date().getTime(),
                 page_size: 100,
