@@ -59,6 +59,11 @@ export default class NewClass extends cc.Component {
 
     userCapital = 0;
 
+    @property(cc.Node)
+    countNode: cc.Node = null;     //次数label父节点
+
+    @property(cc.Node)
+    zhijinNode: cc.Node = null;    //资净Label父节点
 
 
     onLoad() {
@@ -228,8 +233,41 @@ export default class NewClass extends cc.Component {
         let date = new Date();
         let day = date.getDate();
 
+        let maxCount = 0;
+        let maxMoney = 0;
+        xlCount.forEach(el => {
+            if (el) {
+                maxCount = Math.max(el, maxCount);
+            }
+        });
+
+        xlcvs.forEach(el => {
+            if (el) {
+                maxMoney = Math.max(el, maxMoney);
+            }
+
+        });
+
+        if (maxMoney <= 150000) {
+            maxMoney = 150000
+        } else {
+            maxMoney = Math.ceil((maxMoney - 50000) / 5) * 5 + 50000;
+        }
+
+        maxCount = Math.ceil(maxCount / 5) * 5;
+
+        this.countNode.children.forEach((el, index) => {
+            el.getComponent(cc.Label).string = maxCount - (maxCount / 5 * index) + '';
+        })
+
+        this.zhijinNode.children.forEach((el, index) => {
+            el.getComponent(cc.Label).string = maxMoney - ((maxMoney - 50000) / 5) * index + '';
+        })
+
+
+
         let w = this.draw.node.width / 30;
-        let h = this.draw.node.height / 5;
+        let h = this.draw.node.height / maxCount;
 
         for (let i = 1; i <= day; i++) {
 
@@ -247,7 +285,7 @@ export default class NewClass extends cc.Component {
             let y;
             if (!xlcvs[i] || xlcvs[i] <= 50000) { y = 0 } else {
                 let c = xlcvs[i] - 50000;
-                y = c * (this.draw.node.height / 100000);
+                y = c * (this.draw.node.height / (maxMoney - 50000));
             }
 
             dot2.setPosition(cc.v2((i - 1) * w, y));
@@ -257,7 +295,7 @@ export default class NewClass extends cc.Component {
                 this.draw.strokeColor = new cc.Color().fromHEX('#3B95D1');
                 DrawUtils.drawLine(this.draw, this.preDot1Pos.x, this.preDot1Pos.y, dot1.x, dot1.y);
 
-                this.draw.strokeColor = new cc.Color().fromHEX('#DB9B2A');
+                this.draw.strokeColor = new cc.Color().fromHEX('#DB5741');
                 DrawUtils.drawLine(this.draw, this.preDot2Pos.x, this.preDot2Pos.y, dot2.x, dot2.y);
             }
 
@@ -299,7 +337,7 @@ export default class NewClass extends cc.Component {
 
         if (!curDay || curDay.length <= 0) { return }
 
-        let w = this.draw.node.width / 20;
+        let w = this.draw.node.width / 25;
         //   let h = this.draw.node.height / 5;
         let dots = [];
 
