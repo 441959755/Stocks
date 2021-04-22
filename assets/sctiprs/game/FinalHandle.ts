@@ -59,14 +59,14 @@ export default class NewClass extends cc.Component {
 
         if (!gpData || gpData.length <= 0) { return }
 
-        this.headImg.spriteFrame = cc.ext.gameData.headImg;
-        this.levelLabel.string = 'LV:  ' + gameData.properties[2];
+        this.headImg.spriteFrame = GameData.headImg;
+        this.levelLabel.string = 'LV:  ' + GameData.properties[2];
 
         let max_exp = levelInfoCfg[GameData.properties[2]].max_exp;
 
-        this.expLabel.string = gameData.properties[1] + '/' + max_exp;
+        this.expLabel.string = GameData.properties[1] + '/' + max_exp;
 
-        this.userName.string = cc.ext.gameData.userName;
+        this.userName.string = GameData.userName;
 
         this.nameLabel.string = GameCfg.data[0].name;
         this.maLabel.string = GameCfg.data[0].code;
@@ -74,18 +74,18 @@ export default class NewClass extends cc.Component {
         this.timeLabel.string = gpData[0].day + ' -- ' + gpData[gpData.length - 1].day;
         this.riseLabel.string = ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2) + '%';
 
-        this.AllRise.string = '总盈利:' + (GameCfg.allRate * 100).toFixed(2) + '%';
-        this.yingCont.string = '盈  利:' + GameCfg.profitCount + '次';
-        this.kunCount.string = '亏 损:' + GameCfg.lossCount + '次';
+        this.AllRise.string = (GameCfg.allRate * 100).toFixed(2) + '%';
+        this.yingCont.string = GameCfg.profitCount + '次';
+        this.kunCount.string = GameCfg.lossCount + '次';
 
-        this.zijin.string = '原有资金:' + gameData.properties[3];
-        this.yingZiJin.string = '本轮盈利:' + parseInt((GameCfg.finalfund - 100000) + '');
-        this.AllZiJin.string = '最终资金:' + parseInt(GameCfg.finalfund + '');
+        this.zijin.string = GameData.properties[3];
+        this.yingZiJin.string = parseInt((GameCfg.finalfund - 100000) + '') + '';
+        this.AllZiJin.string = parseInt(GameCfg.finalfund + '') + '';
 
         //复盘中不保存记录
         if (!GameCfg.GAMEFUPAN) {
             let datas = {
-                uid: gameData.userID,
+                uid: GameData.userID,
                 g_type: GameCfg.GameType,
                 quotes_code: GameCfg.data[0].code,
                 k_type: GameCfg.data[0].ktype,
@@ -93,8 +93,8 @@ export default class NewClass extends cc.Component {
                 k_to: parseInt(gpData[gpData.length - 1].day.replace(/-/g, '')),
                 stock_profit_rate: ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2),
                 user_profit_rate: (GameCfg.allRate * 100).toFixed(2),
-                user_capital: gameData.properties[3],
-                user_profit: (GameCfg.finalfund - gameData.properties[3]),
+                user_capital: GameData.properties[3],
+                user_profit: (GameCfg.finalfund - GameData.properties[3]),
                 ts: new Date().getTime() / 1000,
                 rank: 0,
                 ref_id: 0,
@@ -105,9 +105,9 @@ export default class NewClass extends cc.Component {
             datas.ref_id = 0;
             // }
             //  }
-
+            GameCfg.TIMETEMP.push(datas.ts);
+            cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
             this.saveHoistoryInfo(datas.ts);
-
 
             socket.send(4005, PB.onCmdGameOverConvertToBuff(datas), (info) => {
                 console.log('GameOverInfo' + JSON.stringify(info));
@@ -132,6 +132,9 @@ export default class NewClass extends cc.Component {
             GameCfg.lossCount = 0;
             GameCfg.finalfund = 0;
             GameCfg.GameType = null;
+
+            GameCfg.GAMEFUPAN = false;
+
             cc.director.loadScene('hall');
         }
         //再来一局
@@ -142,6 +145,9 @@ export default class NewClass extends cc.Component {
             GameCfg.profitCount = 0;
             GameCfg.lossCount = 0;
             GameCfg.finalfund = 0;
+
+            GameCfg.GAMEFUPAN = false;
+
             cc.director.loadScene('game');
 
             // GameCfg.GAMEFUPAN = false;
@@ -151,10 +157,6 @@ export default class NewClass extends cc.Component {
             this.node.active = false;
             GameCfg.GAMEFUPAN = true;
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
-
         }
-
     }
-
-
 }

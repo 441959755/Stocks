@@ -22,6 +22,9 @@ export default class NewClass extends cc.Component {
     @property(cc.EditBox)
     edit: cc.EditBox = null;
 
+    @property([cc.Toggle])
+    hangqingToggle: cc.Toggle[] = [];
+
     _tipsLa = null;
 
     setProId = 0;
@@ -60,9 +63,21 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
 
         this.boxs.forEach((el, index) => {
-            let la = el.getChildByName('label').getComponent(cc.Label);
+            if (index != 0) {
+                let la = el.getChildByName('label').getComponent(cc.Label);
+            }
+
             if (index == 0) {
-                la.string = GameData.DXSet.market;
+                // la.string = GameData.DXSet.market;
+                if (GameData.DXSet.market == '随机行情') {
+                    this.hangqingToggle[0].isChecked = true;
+                } else if (GameData.DXSet.market == '单边上涨') {
+                    this.hangqingToggle[1].isChecked = true;
+                } else if (GameData.DXSet.market == '单边下跌') {
+                    this.hangqingToggle[2].isChecked = true;
+                } else if (GameData.DXSet.market == '震荡行情') {
+                    this.hangqingToggle[3].isChecked = true;
+                }
             } else if (index == 1) {
                 la.string = GameData.DXSet.search;
             } else if (index == 2) {
@@ -181,11 +196,26 @@ export default class NewClass extends cc.Component {
             GameCfg.GameType = pb.GameType.DingXiang;
             GameCfg.GameSet = GameData.DXSet;
             this.DXStartGameSet();
+        } else if (name == 'blackbtn') {
+            this.node.active = false;
+            GameCfg.GameType = null;
         }
     }
 
     onToggleClick() {
         GameData.DXSet.isFC = this.toggle.isChecked;
+    }
+
+    onHangQingToggleClick(event, data) {
+        if (data == 0) {
+            GameData.DXSet.market = '随机行情';
+        } else if (data == 1) {
+            GameData.DXSet.market = '单边上涨'
+        } else if (data == 2) {
+            GameData.DXSet.market = '单边下跌'
+        } else if (data == 3) {
+            GameData.DXSet.market = '震荡行情'
+        }
     }
 
 

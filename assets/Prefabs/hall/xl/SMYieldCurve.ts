@@ -65,6 +65,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     zhijinNode: cc.Node = null;    //资净Label父节点
 
+    @property([cc.Toggle])
+    typeToggle: cc.Toggle[] = [];
+
 
     onLoad() {
 
@@ -128,6 +131,9 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
         ActionUtils.openLayer(this.node);
+
+        this.typeToggle[0].node.children[1].active = true;
+        this.typeToggle[1].node.children[1].active = false;
     }
 
     onShow() {
@@ -135,6 +141,8 @@ export default class NewClass extends cc.Component {
         if (datas.length <= 0) {
             return;
         }
+
+
 
         let date = new Date();
         let year = date.getFullYear();
@@ -384,9 +392,15 @@ export default class NewClass extends cc.Component {
         if (data == 1) {
             this.QXNodes[0].active = true;
             this.QXNodes[1].active = false;
+            //  event.target.children[0] = false;
+            this.typeToggle[0].node.children[1].active = true;
+            this.typeToggle[1].node.children[1].active = false;
+
         } else {
             this.QXNodes[0].active = false;
             this.QXNodes[1].active = true;
+            this.typeToggle[0].node.children[1].active = false;
+            this.typeToggle[1].node.children[1].active = true;
         }
 
     }

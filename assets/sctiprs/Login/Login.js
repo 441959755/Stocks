@@ -4,6 +4,7 @@ import LLWSDK from "../common/sdk/LLWSDK";
 import LoadUtils from "../Utils/LoadUtils";
 
 import Socket from "../common/net/socket";
+import GameCfg from "../game/GameCfg";
 
 window.global = window;
 
@@ -175,6 +176,35 @@ cc.Class({
         } else {
             cc.ext.gameData.ZBSet = JSON.parse(ZBSet);
         }
+
+        {
+            GameCfg.TIMETEMP = JSON.parse(cc.sys.localStorage.getItem('TIMETEMP')) || [];
+            //上个月的数据清除
+            if (GameCfg.TIMETEMP.length > 0) {
+                var data = new Date(); //本月
+                data.setDate(1);
+                data.setHours(0);
+                data.setSeconds(0);
+                data.setMinutes(0);
+
+                let time = data.getTime() / 1000;
+                let arr = [];
+                GameCfg.TIMETEMP.forEach(el => {
+                    if (el <= time) {
+                        cc.sys.localStorage.removeItem(el);
+                        cc.sys.localStorage.removeItem(el + 'set');
+                    } else {
+                        arr.push(el);
+                    }
+
+                })
+
+                GameCfg.TIMETEMP = arr;
+
+            }
+        }
+
+
     },
 
     onDestroy() {

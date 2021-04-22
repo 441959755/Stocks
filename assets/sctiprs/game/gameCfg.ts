@@ -63,6 +63,8 @@ export default {
         fill: [],         //bg填充颜色
     },
 
+    TIMETEMP: [],   //玩的记录时间戳
+
     GAMEFUPAN: false,  //游戏复盘
 
 }

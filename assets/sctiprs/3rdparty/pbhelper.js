@@ -73,6 +73,7 @@ PBHelper.prototype = {
             uid: cc.ext.gameData.userID,
             token: cc.ext.gameData.token,
         })
+        console.log('游戏登入信息' + JSON.stringify(message));
         let buff = CmdGameLogin.encode(message).finish();
         console.log('onCmdGameLoginConvertToBuff' + buff);
 

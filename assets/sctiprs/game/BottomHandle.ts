@@ -474,7 +474,7 @@ export default class NewClass extends cc.Component {
             this.rateItem.rate = rate;
 
 
-            GameCfg.history.fill[GameCfg.eachRate.length - 1] = this.rateItem;
+            GameCfg.history.fill[GameCfg.history.fill.length - 1] = this.rateItem;
             GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.history.fill);
         }
         //观望
@@ -488,7 +488,7 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit('updateRate', [rate]);
 
             this.rateItem.rate = rate;
-            GameCfg.history.fill[GameCfg.eachRate.length - 1] = this.rateItem;
+            GameCfg.history.fill[GameCfg.history.fill.length - 1] = this.rateItem;
 
             GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.history.fill);
         }

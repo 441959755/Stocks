@@ -54,7 +54,6 @@ export default class NewClass extends cc.Component {
                 this.node.x -= 206;
             }
         }, this);
-
     }
 
     initMALa() {

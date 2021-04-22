@@ -762,29 +762,29 @@ export default class NewClass extends cc.Component {
 
     testStopCheck(el) {
 
-        if (el > 0.3) {
+        if (el > 30) {
             //收益大于30%
             // this.onCreateTipsItem('收益大于30%');
             this.onCreateTipsItem(31);
-        } else if (el > 0.2) {
+        } else if (el > 20) {
             //收益大于20%
             //   this.onCreateTipsItem('收益大于20%');
             this.onCreateTipsItem(32);
-        } else if (el > 0.1) {
+        } else if (el > 10) {
             //收益大于10 %
             //  this.onCreateTipsItem('收益大于10%');
             this.onCreateTipsItem(33);
         }
 
-        if (el < -0.2) {
+        if (el < -20) {
             // 亏损大于20%
             //this.onCreateTipsItem('亏损大于20%');
             this.onCreateTipsItem(34);
-        } else if (el < -0.15) {
+        } else if (el < -15) {
             // 亏损大于15%
             // this.onCreateTipsItem('亏损大于15%');
             this.onCreateTipsItem(35);
-        } else if (el < -0.1) {
+        } else if (el < -10) {
             // 亏损大于10%
             //  this.onCreateTipsItem('亏损大于10%');
             this.onCreateTipsItem(36);

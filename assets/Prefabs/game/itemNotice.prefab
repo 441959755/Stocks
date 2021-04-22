@@ -39,9 +39,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 6,
+      "g": 0,
+      "b": 0,
       "a": 255
     },
     "_contentSize": {
@@ -103,14 +103,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 151,
-      "g": 151,
-      "b": 151,
+      "r": 128,
+      "g": 128,
+      "b": 128,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 99.56,
+      "width": 85.34,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -163,7 +163,7 @@
     "_useOriginalSize": false,
     "_string": "三 阳 线",
     "_N$string": "三 阳 线",
-    "_fontSize": 28,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,

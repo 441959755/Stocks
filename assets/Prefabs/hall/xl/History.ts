@@ -3,6 +3,7 @@
 import ActionUtils from "../../../sctiprs/Utils/ActionUtils";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import EventCfg from '../../../sctiprs/Utils/EventCfg';
+import GameCfg from "../../../sctiprs/game/GameCfg";
 
 const { ccclass, property } = cc._decorator;
 
@@ -83,8 +84,13 @@ export default class NewClass extends cc.Component {
 
     onBtnClick(event, data) {
         let name = event.target.name;
-        if (name == 'Mask') {
+        if (name == 'blackbtn') {
             this.node.active = false;
+        }
+        //点击复盘
+        else if (name == 'btnFuPan') {
+            GameCfg.GAMEFUPAN = true;
+            //TODO进入游戏
         }
     }
 

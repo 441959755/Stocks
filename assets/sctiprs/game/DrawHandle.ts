@@ -72,11 +72,12 @@ export default class NewClass extends cc.Component {
 
     timer = null;
 
-    btxPreCloseY = null;     ///宝塔前一日收盘价
+    btxPreCloseY = [];     ///宝塔前一日收盘价
 
-    btxPreOpenY = null;
+    btxPreOpenY = [];
 
-    btxChg = false;        ///宝塔线前一日的涨跌
+    btxChg = [];        ///宝塔线前一日的涨跌
+    // btxList = [];
 
 
     //   multScale = 1;
@@ -302,7 +303,6 @@ export default class NewClass extends cc.Component {
                                 }
                             }
 
-
                             //  this.multScale = this.drawBordWidth / (num) / cc.ext.hz_width;
                             //    GlobalEvent.emit(EventCfg.ONMARKRANGESHOWORHIDE);
 
@@ -438,7 +438,7 @@ export default class NewClass extends cc.Component {
         this.part3.string = (this.bottomValue + this.disValue / 4 * 2).toFixed(2);
         this.part4.string = (this.bottomValue + this.disValue / 4 * 1).toFixed(2);
         this.part5.string = this.bottomValue.toFixed(2);
-        GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.eachRate);
+        GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.history.fill);
         for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
 
             this.onDrawCandle(viweData[index], index);
@@ -590,6 +590,25 @@ export default class NewClass extends cc.Component {
             } else {
                 this.VolList.push(null);
             }
+
+            // //宝塔线
+            // let arr = [];
+            // if (index == 0) {
+            //     //   0 最高值   1  最低值
+            //     arr[0] = el.open > el.close ? el.open : el.close;
+            //     arr[1] = el.open < el.close ? el.open : el.close;
+            //     arr[2] = el.open > el.close ? 0 : 1;
+            //     this.btxList.push(arr);
+            // } else {
+            //     arr[2] = el.open > el.close ? 0 : 1;
+            //     //前一个是涨
+            //     if (this.btxList[index - 1][2]) {
+
+
+            //     }
+
+            // }
+
         });
     }
 
@@ -633,63 +652,106 @@ export default class NewClass extends cc.Component {
         //根据区间价格决定坐标
         let openY = (el.open - this.bottomValue) / this.disValue * drawBox + initY;
         let closeY = (el.close - this.bottomValue) / this.disValue * drawBox + initY;
+
+
         //宝塔线
         if (GameCfg.GameType == pb.GameType.DingXiang && GameData.DXSet.line == '宝塔线') {
 
             if (index == 0) {
+                if (!this.btxPreCloseY[index]) {
+                    this.btxChg[index] = el.open >= el.close ? false : true;
+                    this.btxPreCloseY[index] = openY > closeY ? openY : closeY;
+                    this.btxPreOpenY[index] = openY < closeY ? openY : closeY;
+                }
                 this.drawRect(this.drawBg, startX, closeY, endX - startX, openY - closeY, el.open > el.close);
-                this.btxChg = el.open > el.close ? false : true;
-                this.btxPreCloseY = closeY;
-                this.btxPreOpenY = openY;
+
             } else {
                 //前一日上涨
-                if (this.btxChg) {
+                if (this.btxChg[index - 1]) {
                     //下跌
                     if (el.open > el.close) {
 
-                        if (closeY >= this.btxPreOpenY) {
-                            this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, closeY - this.btxPreOpenY, true);
-                            //this.btxPreCloseY = closeY;
-                            this.btxPreOpenY = this.btxPreOpenY;
-                        } else if (closeY < this.btxPreOpenY) {
+                        if (closeY >= this.btxPreOpenY[index - 1]) {
+                            this.drawRect(this.drawBg, startX, closeY, endX - startX, this.btxPreCloseY[index - 1] - closeY, false);
 
-                            this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, this.btxPreCloseY - this.btxPreOpenY, true);
-                            this.drawRect(this.drawBg, startX, closeY, endX - startX, this.btxPreOpenY - closeY, false);
-                            this.btxPreOpenY = closeY;
+                            // this.btxPreCloseY = closeY;
+                            if (!this.btxPreOpenY[index]) {
+                                this.btxPreOpenY[index] = closeY;
+                                this.btxPreCloseY[index] = this.btxPreCloseY[index - 1]
+                                this.btxChg[index] = false;
+                            }
+
+
+                        } else if (closeY < this.btxPreOpenY[index - 1]) {
+
+                            this.drawRect(this.drawBg, startX, this.btxPreOpenY[index - 1], endX - startX, this.btxPreCloseY[index - 1] - this.btxPreOpenY[index - 1], false);
+                            this.drawRect(this.drawBg, startX, closeY, endX - startX, this.btxPreOpenY[index - 1] - closeY, true);
+
+                            if (!this.btxPreOpenY[index]) {
+                                this.btxPreOpenY[index] = closeY;
+                                this.btxPreCloseY[index] = this.btxPreCloseY[index - 1]
+                                this.btxChg[index] = false;
+                            }
                         }
-
-                        //上红下绿
-                        // if (this.btxPreOpenY > closeY && this.btxPreOpenY < openY) {
-                        //     this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, openY - this.btxPreOpenY, true);
-                        //     this.drawRect(this.drawBg, startX, closeY, endX - startX, this.btxPreCloseY - closeY, false);
-                        // } else if (this.btxPreOpenY <= closeY) {
-                        //     this.drawRect(this.drawBg, startX, openY, endX - startX, openY - closeY, true);
-                        // } else {
-                        //     this.drawRect(this.drawBg, startX, openY, endX - startX, openY - closeY, false);
-                        // }
                     } else {
-                        this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, closeY - this.btxPreOpenY, true);
-                        this.btxPreOpenY = this.btxPreOpenY;
+                        this.drawRect(this.drawBg, startX, this.btxPreCloseY[index - 1], endX - startX, closeY - this.btxPreCloseY[index - 1], false);
+
+                        if (!this.btxPreOpenY[index]) {
+                            this.btxPreOpenY[index] = this.btxPreCloseY[index - 1];
+                            this.btxPreCloseY[index] = closeY;
+                            this.btxChg[index] = true;
+                        }
                     }
 
                 } else {
+                    //上涨
                     if (el.open < el.close) {
+                        if (closeY <= this.btxPreCloseY[index - 1]) {
+                            this.drawRect(this.drawBg, startX, this.btxPreOpenY[index - 1], endX - startX, closeY - this.btxPreOpenY[index - 1], true);
+
+                            if (!this.btxPreOpenY[index]) {
+                                this.btxPreOpenY[index] = this.btxPreOpenY[index - 1];
+                                this.btxPreCloseY[index] = closeY;
+                                this.btxChg[index] = true;
+                            }
+
+                        } else if (closeY > this.btxPreCloseY[index - 1]) {
+                            this.drawRect(this.drawBg, startX, this.btxPreCloseY[index - 1], endX - startX, closeY - this.btxPreCloseY[index - 1], false);
+                            this.drawRect(this.drawBg, startX, this.btxPreOpenY[index - 1], endX - startX, this.btxPreCloseY[index - 1] - this.btxPreOpenY[index - 1], true);
+                            //  this.btxPreCloseY = closeY;
+
+                            if (!this.btxPreOpenY[index]) {
+                                this.btxPreOpenY[index] = this.btxPreOpenY[index - 1];
+                                this.btxPreCloseY[index] = closeY;
+                                this.btxChg[index] = true;
+                            }
+                        }
+
+                    }
+                    //下跌
+                    else {
+                        this.drawRect(this.drawBg, startX, this.btxPreOpenY[index - 1], endX - startX, this.btxPreOpenY[index - 1] - closeY, true);
+                        // this.btxPreOpenY = closeY;
 
 
-                    } else {
-                        this.drawRect(this.drawBg, startX, this.btxPreOpenY, endX - startX, closeY - this.btxPreOpenY, false);
-                        this.btxPreOpenY = this.btxPreOpenY;
+                        if (!this.btxPreOpenY[index]) {
+                            this.btxPreOpenY[index] = closeY;
+                            this.btxPreCloseY[index] = this.btxPreCloseY[index - 1];
+                            this.btxChg[index] = false;
+                        }
+                        // this.btxPreCloseY=
                     }
                 }
-
-
+                // this.btxChg = el.open > el.close ? false : true;
             }
-
-
-
-            this.btxChg = el.open > el.close ? false : true;
-            this.btxPreCloseY = closeY;
+            let lowX = startX + (endX - startX) / 2;
+            posInfo.lowPos = cc.v2(lowX, this.btxPreOpenY[index] - 20);
+            posInfo.highPos = cc.v2(lowX, this.btxPreCloseY[index] + 20);
+            //  this.btxPreCloseY = closeY;
             // this.btxPreOpenY = openY;
+            // console.log(JSON.stringify(this.btxChg));
+            // console.log(JSON.stringify(this.btxPreOpenY));
+            // console.log(JSON.stringify(this.btxPreCloseY));
 
         } else {
 
@@ -735,6 +797,8 @@ export default class NewClass extends cc.Component {
                 posInfo.lowPos = cc.v2(lowX, lowY - 20);
             }
         }
+
+        //posInfo.lowPos = cc.v2(lowX, lowY - 20);
 
         GlobalEvent.emit(EventCfg.ONMARKUPDATE, posInfo);
 
@@ -783,7 +847,7 @@ export default class NewClass extends cc.Component {
 
     //成交量绘制
     start() {
-        if (GameCfg.GameType == 3) {
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             if (GameCfg.GameSet.select != '均线') {
                 this.drawMA.node.active = false;
             }
@@ -791,10 +855,9 @@ export default class NewClass extends cc.Component {
                 this.drawBOLL.node.active = false;
             }
 
-            setTimeout(() => {
-                GlobalEvent.emit('setDrawing', true);
-            }, 500);
-
+            // setTimeout(() => {
+            //     GlobalEvent.emit('setDrawing', true);
+            // }, 500);
         }
 
     }

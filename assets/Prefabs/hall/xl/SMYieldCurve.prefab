@@ -1945,7 +1945,7 @@
     "_N$target": {
       "__id__": 40
     },
-    "_N$isChecked": false,
+    "_N$isChecked": true,
     "toggleGroup": null,
     "checkMark": null,
     "checkEvents": [
@@ -2329,7 +2329,7 @@
     "_N$target": {
       "__id__": 50
     },
-    "_N$isChecked": true,
+    "_N$isChecked": false,
     "toggleGroup": null,
     "checkMark": null,
     "checkEvents": [
@@ -11117,6 +11117,14 @@
     "zhijinNode": {
       "__id__": 124
     },
+    "typeToggle": [
+      {
+        "__id__": 47
+      },
+      {
+        "__id__": 57
+      }
+    ],
     "_id": ""
   },
   {

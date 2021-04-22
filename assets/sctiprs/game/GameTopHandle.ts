@@ -3,6 +3,7 @@ import EventCfg from "../Utils/EventCfg";
 import PopupManager from "../Utils/PopupManager";
 import GameCfg from "./GameCfg";
 import { pb } from '../../protos/proto';
+import GameData from '../GameData';
 
 
 const { ccclass, property } = cc._decorator;
@@ -29,6 +30,14 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     rightNode: cc.Node = null;
 
+    @property(cc.Label)
+    gpName: cc.Label = null;
+
+    @property(cc.Label)
+    timeLabel: cc.Label = null;
+
+    @property(cc.Label)
+    GameName: cc.Label = null;
 
     protected onLoad() {
         //跟新盈利率
@@ -57,40 +66,72 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
+        //复盘
         GlobalEvent.on(EventCfg.GAMEFUPAN, () => {
-            let closeBtn = this.node.getChildByName('New Node').getChildByName('closeBtn');
-            let backBtn = this.node.getChildByName('New Node').getChildByName('backBtn');
+            let closeBtn = this.node.getChildByName('right').getChildByName('closeBtn');
+            let backBtn = this.node.getChildByName('right').getChildByName('backBtn');
             closeBtn.active = false;
             backBtn.active = true;
-
         }, this);
     }
 
     protected onEnable() {
-        if (cc.ext.gameData.headImg) {
-            this.userHead.spriteFrame = cc.ext.gameData.headImg;
+        if (GameData.headImg) {
+            this.userHead.spriteFrame = GameData.headImg;
         }
-        if (cc.ext.gameData.userName) {
-            this.userName.string = cc.ext.gameData.userName;
+        if (GameData.userName) {
+            this.userName.string = GameData.userName;
         }
-        if (gameData.properties[2]) {
-            this.lv.string = 'LV:' + gameData.properties[2] || 0 + '';
+        if (GameData.properties[2]) {
+            this.lv.string = 'LV:' + GameData.properties[2] || 0 + '';
         }
+
+        this.gpName.string = GameCfg.data[0].name + ' ' + GameCfg.data[0].code;
+        this.timeLabel.string = GameCfg.data[0].data[0].day + '--' + GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
 
 
         //训练指标
         let nodes = this.rightNode.children;
-        nodes.forEach(el => {
-            el.active = true;
-        })
-        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 
-            nodes[0].active = false;
-            nodes[3].active = false;
-        } else if (GameCfg.GameType == pb.GameType.DingXiang) {
-            nodes[0].active = false;
 
-            nodes[2].active = false;
+        if (GameCfg.GameType == pb.GameType.ShuangMang) {
+            this.GameName.string = '双盲训练';
+
+            nodes.forEach((el, index) => {
+                if (index == 1) {
+                    el.active = true;
+                } else {
+                    el.active = false;
+                }
+            })
+
+            let la = this.node.getChildByName('rate');
+            la.x = 0;
+            la.children[4].active = false;
+            la.children[5].active = false;
+
+        }
+        else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            this.GameName.string = '指标训练';
+
+            nodes.forEach((el, index) => {
+                if (index == 1) {
+                    el.active = true;
+                } else {
+                    el.active = false;
+                }
+            })
+        }
+        else if (GameCfg.GameType == pb.GameType.DingXiang) {
+            this.GameName.string = '定向训练';
+
+            nodes.forEach((el, index) => {
+                if (index == 1 || index == 3 || index == 4) {
+                    el.active = true;
+                } else {
+                    el.active = false;
+                }
+            })
 
         }
     }

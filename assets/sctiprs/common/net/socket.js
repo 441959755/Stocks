@@ -119,7 +119,7 @@ Socket.prototype = {
             this.heartbeat = setInterval(() => {
                 console.log('断线连接中...');
                 self.initSocket();
-            }, 3000);
+            }, 5000);
         }
 
     },

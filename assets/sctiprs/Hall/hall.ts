@@ -22,9 +22,14 @@ export default class NewClass extends cc.Component {
     loading: cc.Node = null;
 
     @property(cc.Prefab)
-    historyPre: cc.Prefab = null;
+    SMhistoryPre: cc.Prefab = null;
 
-    historyLayer: cc.Node = null;
+    SMhistoryLayer: cc.Node = null;
+
+    @property(cc.Prefab)
+    otherhistoryPre: cc.Prefab = null;
+
+    otherhistoryLayer: cc.Node = null;
 
     @property(cc.Prefab)
     ZBSetPre: cc.Prefab = null;
@@ -95,7 +100,7 @@ export default class NewClass extends cc.Component {
             //SM的要获取服务器消息
             this.acquireSMhistoryInfo((info) => {
 
-                this.openHistoryLayer && (this.openHistoryLayer(info, str));
+                this.openhistoryLayer && (this.openhistoryLayer(info, str));
             });
 
 
@@ -203,18 +208,32 @@ export default class NewClass extends cc.Component {
     }
 
 
-    openHistoryLayer(info, type?) {
-        if (!this.historyLayer) {
-            //   this.historyLayer = cc.instantiate(this.historyPre)
-            this.historyLayer = cc.instantiate(this.historyPre);
-            this.node.addChild(this.historyLayer);
+    openhistoryLayer(info, str?) {
+        let pre, node;
+        if (str == 'SM') {
+            pre = this.SMhistoryPre;
+            node = this.SMhistoryLayer;
+        } else {
+            pre = this.otherhistoryPre;
+            node = this.otherhistoryLayer;
         }
-        this.historyLayer.active = true;
-        //  this.historyLayer.getComponent('SMHistory').historyType = type;
-        this.historyLayer.getComponent('History').historyInfo = info;
-        this.historyLayer.getComponent('History').onShow();
+        if (!node) {
+            //   this.SMhistoryLayer = cc.instantiate(this.SMhistoryPre)
+            node = cc.instantiate(pre);
+            this.node.addChild(node);
+        }
+        node.active = true;
+        //  this.SMhistoryLayer.getComponent('SMHistory').historyType = type;
+        node.getComponent('History').historyInfo = info;
+        node.getComponent('History').onShow();
         if (this.SMYieldLayer) {
-            this.historyLayer.zIndex = this.SMYieldLayer.zIndex + 1;
+            this.SMhistoryLayer.zIndex = this.SMYieldLayer.zIndex + 1;
+        }
+
+        if (str == 'SM') {
+            this.SMhistoryLayer = node;
+        } else {
+            this.otherhistoryLayer = node;
         }
     }
 
@@ -224,7 +243,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.LOADINGHIDE);
         GlobalEvent.off('OPENSMLAYER')
         GlobalEvent.off('OPENZBLAYER');
-        GlobalEvent.off('OPENZBHISTORYLAYER');
+        GlobalEvent.off('OPENHISTORYLAYER');
         GlobalEvent.off('OPENZBSETLAYER');
         GlobalEvent.off('OPENMONTHLAYER');
         GlobalEvent.off('OPENYIELDLAYER');
