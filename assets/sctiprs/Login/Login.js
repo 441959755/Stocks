@@ -200,6 +200,7 @@ cc.Class({
                 })
 
                 GameCfg.TIMETEMP = arr;
+                cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP))
 
             }
         }

@@ -105,8 +105,7 @@ export default class NewClass extends cc.Component {
             datas.ref_id = 0;
             // }
             //  }
-            GameCfg.TIMETEMP.push(datas.ts);
-            cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
+
             this.saveHoistoryInfo(datas.ts);
 
             socket.send(4005, PB.onCmdGameOverConvertToBuff(datas), (info) => {
@@ -117,6 +116,8 @@ export default class NewClass extends cc.Component {
     }
 
     saveHoistoryInfo(ts) {
+        GameCfg.TIMETEMP.push(ts);
+        cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
         cc.sys.localStorage.setItem(ts, JSON.stringify(GameCfg.history));
         cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
     }
