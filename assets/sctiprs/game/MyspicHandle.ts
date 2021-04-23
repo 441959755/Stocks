@@ -51,10 +51,13 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
-        this.getMyspic();
+        if (!GameCfg.GAMEFUPAN) {
+            this.getMyspic();
+        }
     }
 
     onDraw() {
+
         this.draw.clear();
         let viewData = this.myspicData;
         if (!viewData || viewData.length <= 0) {
@@ -66,7 +69,7 @@ export default class NewClass extends cc.Component {
         this.topValue = 0;
 
         for (let i = cc.ext.beg_end[0]; i < cc.ext.beg_end[1]; i++) {
-            if (viewData[i].high && viewData[i].low) {
+            if (viewData[i] && viewData[i].low) {
                 this.topValue = Math.max(this.topValue, viewData[i].high);
                 this.bottomValue = Math.min(this.bottomValue, viewData[i].low);
             }
@@ -74,7 +77,10 @@ export default class NewClass extends cc.Component {
 
         this.disValue = this.topValue - this.bottomValue;
         for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
-            this.onDrawMyspic(viewData[index], index);
+            if (viewData[index]) {
+                this.onDrawMyspic(viewData[index], index);
+            }
+
         }
     }
 
@@ -142,6 +148,11 @@ export default class NewClass extends cc.Component {
 
     //获取指数
     getMyspic() {
+        //在复盘中不获取指数数据
+        if (GameCfg.GAMEFUPAN) {
+            return;
+        }
+
         let info1 = GameCfg.info;
         if (GameCfg.GameType == pb.GameType.DingXiang) {
             let code = info1.code;

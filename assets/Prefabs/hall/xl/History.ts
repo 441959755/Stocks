@@ -25,6 +25,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     label: cc.Label = null;
 
+    @property(cc.Label)
+    title: cc.Label = null;
+
 
     start() {
 
@@ -67,7 +70,7 @@ export default class NewClass extends cc.Component {
             let nodes = node.children;
             this.content.addChild(node);
             node.setPosition(cc.v2(0, 0));
-            nodes[0].getComponent(cc.Label).string = datas[i].uid;
+            nodes[0].getComponent(cc.Label).string = (i + 1) + '';
             nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
             nodes[2].getComponent(cc.Label).string = selectName(datas[i].quotesCode);
             nodes[3].getComponent(cc.Label).string = datas[i].kFrom;			// 行情起始日期YYYYMMDD或时间HHMMSS
@@ -76,11 +79,21 @@ export default class NewClass extends cc.Component {
             nodes[5].getComponent(cc.Label).string = datas[i].stockProfitRate.toFixed(2) + '%';
             nodes[6].getComponent(cc.Label).string = datas[i].userProfitRate.toFixed(2) + '%';
             nodes[7].getComponent(cc.Label).string = datas[i].userProfit;
-            nodes[8].getComponent(cc.Label).string = datas[i].ts;
+            if (GameCfg.GameType != pb.GameType.ShuangMang) {
+                nodes[8].getComponent(cc.Label).string = datas[i].ts;
+            }
+
             sumEar += datas[i].userProfit;
         }
 
         this.label.string = sumEar + '';
+
+
+        if (GameCfg.GameType == pb.GameType.ShuangMang) {
+            this.title.string = '双盲训练';
+        } else if (GameCfg.GameType == pb.GameType.DingXiang) {
+            this.title.string = '定向训练';
+        }
         // }
     }
 
@@ -91,10 +104,8 @@ export default class NewClass extends cc.Component {
         }
         //点击复盘
         else if (name == 'btnFuPan') {
-            GameCfg.GAMEFUPAN = true;
+
             //TODO进入游戏
-
-
             let nodes = event.target.parent.children;
             let ts = nodes[8].getComponent(cc.Label).string;
 
@@ -102,6 +113,7 @@ export default class NewClass extends cc.Component {
                 console.log('数据没保存');
                 return;
             }
+
             if (GameCfg.TIMETEMP.indexOf(parseInt(ts)) != -1) {
                 GameCfg.history = JSON.parse(cc.sys.localStorage.getItem(ts));
                 GameCfg.GameSet = JSON.parse(cc.sys.localStorage.getItem(ts + 'set'));
@@ -113,6 +125,7 @@ export default class NewClass extends cc.Component {
             }
 
             //  let datas = this.historyInfo.results;
+            GameCfg.huizhidatas = GameCfg.history.huizhidatas;
 
             let data = {
                 ktype: null,
@@ -161,6 +174,7 @@ export default class NewClass extends cc.Component {
             GameCfg.data[0].name = items[1];
             GameCfg.data[0].code = items[0];
             GameCfg.data[0].circulate = items[4];
+            GameCfg.GAMEFUPAN = true;
             GlobalEvent.emit('onCmdQuoteQuery', data);
         }
     }

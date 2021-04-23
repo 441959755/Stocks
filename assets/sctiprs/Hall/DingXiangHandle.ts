@@ -32,6 +32,10 @@ export default class NewClass extends cc.Component {
     onLoad() {
         this._tipsLa = this.edit.node.getChildByName('tipslabel');
         this.edit.node.on('editing-did-ended', (edit) => {
+            if (!this.onTipsInfo()) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, GameData.DXSet.market + '不支持自定义当前选项')
+                return;
+            }
             let str = edit.string;
             if (str == '') {
                 return;
@@ -51,7 +55,7 @@ export default class NewClass extends cc.Component {
                     this._tipsLa.color = new cc.Color().fromHEX('#BBBBBB');
                     this._tipsLa.active = false;
                     let arr = tt.split('|');
-                    this.boxs[2].getChildByName('label').getComponent(cc.Label).string = arr[0] + '  ' + arr[1];
+                    this.boxs[1].getChildByName('label').getComponent(cc.Label).string = arr[0] + '  ' + arr[1];
                     edit.string = '';
                 }
             }
@@ -59,6 +63,10 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
+        this.onShow();
+    }
+
+    onShow() {
         if (!GameData.DXSet) { return }
         GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
 
@@ -97,11 +105,27 @@ export default class NewClass extends cc.Component {
         this.toggle.isChecked = GameData.DXSet.isFC;
     }
 
+    onTipsInfo() {
+        if (GameData.DXSet.market != '随机行情') {
+            return false;
+        }
+        return true;
+    }
+
     onBoxSelectClick(event, data) {
         let index = parseInt(data);
+        if (data == 1 || data == 2 || data == 3 || data == 4 || data == 6 || data == 7) {
+            if (!this.onTipsInfo()) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, GameData.DXSet.market + '不支持自定义当前选项')
+                return;
+            }
+        }
         let downBox = this.downBoxs[index];
         downBox.active = true;
         this.setProId = data;
+
+
+
         //当前年月的天数
         if (index == 3 || index == 4) {
             let year = this.boxs[2].getChildByName('label').getComponent(cc.Label).string;
@@ -193,6 +217,7 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit("OPENHISTORYLAYER", 'DX');
 
         } else if (name == 'startDXBtn') {
+            GameCfg.GAMEFUPAN = false;
             GameCfg.GameType = pb.GameType.DingXiang;
             GameCfg.GameSet = GameData.DXSet;
             this.DXStartGameSet();
@@ -210,12 +235,25 @@ export default class NewClass extends cc.Component {
         if (data == 0) {
             GameData.DXSet.market = '随机行情';
         } else if (data == 1) {
+
             GameData.DXSet.market = '单边上涨'
+
+
         } else if (data == 2) {
             GameData.DXSet.market = '单边下跌'
         } else if (data == 3) {
             GameData.DXSet.market = '震荡行情'
         }
+
+        if (data != 0) {
+            GameData.DXSet.search = '随机选股';
+            GameData.DXSet.year = '随机';
+            GameData.DXSet.month = '--';
+            GameData.DXSet.KLine = '100';
+            GameData.DXSet.ZLine = '日线';
+            this.onShow();
+        }
+
     }
 
 
@@ -236,6 +274,7 @@ export default class NewClass extends cc.Component {
         //   console.log(JSON.stringify(stocklist));
         if (GameData.DXSet.search == '随机选股') {
             let le = parseInt(Math.random() * stocklist.length);
+            console.log('le' + le);
             items = stocklist[le].split('|');
             data.code = items[0];
             // if (data.code < 600000) {

@@ -1,7 +1,7 @@
 
 import HttpMgr from "../net/HttpMgr";
 import LLWUtils from "../utils/LLWUtils";
-import pb from '../../../protos/proto';
+
 export default class WebSDK {
 
     static _instance = null;
@@ -19,7 +19,7 @@ export default class WebSDK {
 
     login(call) {
 
-        let httpMgr = HttpMgr.getInstance();
+
         let uuid = LLWUtils.getUUID();
 
         let loginInfo = {
@@ -28,8 +28,6 @@ export default class WebSDK {
             from: 8888,
             pwd: ''
         };
-
-        console.log('loginInfo' + loginInfo);
 
         HttpMgr.getInstance().loginWeb(uuid, loginInfo, call, () => {
             console.log('onLoginCodeHttpRequest err');

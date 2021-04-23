@@ -136,12 +136,12 @@ cc.Class({
                 isMA6: true,
                 MA6Date: 120,
                 market: '随机行情',
-                search: '随机股票',
+                search: '随机选股',
                 year: '随机',
                 month: '--',
                 day: '--',
                 line: 'K线',
-                KLine: '50',
+                KLine: '100',
                 ZLine: '日线',
                 isFC: false,
             }
@@ -178,31 +178,35 @@ cc.Class({
         }
 
         {
-            GameCfg.TIMETEMP = JSON.parse(cc.sys.localStorage.getItem('TIMETEMP')) || [];
-            //上个月的数据清除
-            if (GameCfg.TIMETEMP.length > 0) {
-                var data = new Date(); //本月
-                data.setDate(1);
-                data.setHours(0);
-                data.setSeconds(0);
-                data.setMinutes(0);
+            let str = cc.sys.localStorage.getItem('TIMETEMP');
+            if (str) {
+                GameCfg.TIMETEMP = JSON.parse(str);
 
-                let time = data.getTime() / 1000;
-                let arr = [];
-                GameCfg.TIMETEMP.forEach(el => {
-                    if (el <= time) {
-                        cc.sys.localStorage.removeItem(el);
-                        cc.sys.localStorage.removeItem(el + 'set');
-                    } else {
-                        arr.push(el);
-                    }
+                //上个月的数据清除
+                if (GameCfg.TIMETEMP.length > 0) {
+                    var data = new Date(); //本月
+                    data.setDate(1);
+                    data.setHours(0);
+                    data.setSeconds(0);
+                    data.setMinutes(0);
 
-                })
+                    let time = data.getTime() / 1000;
+                    let arr = [];
+                    GameCfg.TIMETEMP.forEach(el => {
+                        if (el <= time) {
+                            cc.sys.localStorage.removeItem(el);
+                            cc.sys.localStorage.removeItem(el + 'set');
+                        } else {
+                            arr.push(el);
+                        }
+                    })
 
-                GameCfg.TIMETEMP = arr;
-                cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP))
+                    GameCfg.TIMETEMP = arr;
+                    cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP))
 
+                }
             }
+
         }
 
 

@@ -54,6 +54,9 @@ export default class NewClass extends cc.Component {
     onEnable() {
         //添加开始标签
         this.onAddMard(1);
+        if (GameCfg.GAMEFUPAN) {
+            this.showFlag = true;
+        }
     }
 
     onMarkRangeShowOrHide() {

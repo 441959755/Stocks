@@ -46,14 +46,14 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on('clickTipsInfoPos', (data) => {
             let locPos = this.content.parent.parent.convertToNodeSpaceAR(data.pos);
-            this.tipsLabel.node.y = locPos.y;
+            this.tipsLabel.node.parent.y = locPos.y;
             this.tipsLabel.string = data.str;
-            this.tipsLabel.node.active = true;
+            this.tipsLabel.node.parent.active = true;
             if (this.timeCall) {
                 clearTimeout(this.timeCall);
             }
             this.timeCall = setTimeout(() => {
-                this.tipsLabel.node.active = false;
+                this.tipsLabel.node.parent.active = false;
                 clearTimeout(this.timeCall);
                 this.timeCall = null;
             }, 3000);
@@ -762,29 +762,29 @@ export default class NewClass extends cc.Component {
 
     testStopCheck(el) {
 
-        if (el > 30) {
+        if (el > 0.3) {
             //收益大于30%
             // this.onCreateTipsItem('收益大于30%');
             this.onCreateTipsItem(31);
-        } else if (el > 20) {
+        } else if (el > 0.2) {
             //收益大于20%
             //   this.onCreateTipsItem('收益大于20%');
             this.onCreateTipsItem(32);
-        } else if (el > 10) {
+        } else if (el > 0.1) {
             //收益大于10 %
             //  this.onCreateTipsItem('收益大于10%');
             this.onCreateTipsItem(33);
         }
 
-        if (el < -20) {
+        if (el < -0.2) {
             // 亏损大于20%
             //this.onCreateTipsItem('亏损大于20%');
             this.onCreateTipsItem(34);
-        } else if (el < -15) {
+        } else if (el < -0.15) {
             // 亏损大于15%
             // this.onCreateTipsItem('亏损大于15%');
             this.onCreateTipsItem(35);
-        } else if (el < -10) {
+        } else if (el < -0.1) {
             // 亏损大于10%
             //  this.onCreateTipsItem('亏损大于10%');
             this.onCreateTipsItem(36);

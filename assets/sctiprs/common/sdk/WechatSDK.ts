@@ -1,5 +1,4 @@
 import HttpMgr from "../net/HttpMgr";
-import HttpUtils from "../net/HttpUtils";
 
 export default class WechatSDK {
     static _instance = null;

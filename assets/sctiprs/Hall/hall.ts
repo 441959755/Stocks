@@ -176,6 +176,18 @@ export default class NewClass extends cc.Component {
         }, this);
     }
 
+    onEnable() {
+        GameCfg.history.fill = [];
+        GameCfg.history.mark = [];
+        GameCfg.history.notice = [];
+        GameCfg.huizhidatas = 0;
+        GameCfg.allRate = 0;
+        GameCfg.profitCount = 0;
+        GameCfg.lossCount = 0;
+        GameCfg.finalfund = 0;
+        GameCfg.GameType = null;
+    }
+
     onTipsTextShow(content) {
         if (!this.tipsTextNode) {
             LoadUtils.loadRes('Prefabs/tipsText', (pre) => {
@@ -227,7 +239,7 @@ export default class NewClass extends cc.Component {
         node.getComponent('History').historyInfo = info;
         node.getComponent('History').onShow();
         if (this.SMYieldLayer) {
-            this.SMhistoryLayer.zIndex = this.SMYieldLayer.zIndex + 1;
+            node.zIndex = this.SMYieldLayer.zIndex + 1;
         }
 
         if (str == 'SM') {
@@ -263,6 +275,12 @@ export default class NewClass extends cc.Component {
             //console.log('onCmdGameStart' + JSON.stringify(res));
             socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), (info) => {
                 //   console.log('onCmdQuoteQuery' + JSON.stringify(info));
+                if (info.items.length <= 0) {
+                    console.log('获取的行情为空');
+                    console.log(JSON.stringify(GameCfg.data));
+                    GameCfg.GAMEFUPAN = false;
+                    return;
+                }
                 info.items.forEach(el => {
                     //  let date = new Date(el.timestamp);
                     let ye = (el.timestamp + '').slice(0, 4);
@@ -284,7 +302,6 @@ export default class NewClass extends cc.Component {
 
                 cc.director.loadScene('game');
             })
-
         })
         //  }
     }

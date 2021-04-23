@@ -68,10 +68,12 @@ export default class NewClass extends cc.Component {
 
         //复盘
         GlobalEvent.on(EventCfg.GAMEFUPAN, () => {
-            let closeBtn = this.node.getChildByName('right').getChildByName('closeBtn');
-            let backBtn = this.node.getChildByName('right').getChildByName('backBtn');
-            closeBtn.active = false;
-            backBtn.active = true;
+            // let closeBtn = this.node.getChildByName('right').getChildByName('closeBtn');
+            // let backBtn = this.node.getChildByName('right').getChildByName('backBtn');
+
+            // closeBtn.active = false;
+            // backBtn.active = true;
+            //  this.rightNode && (this.rightNode.active = false);
         }, this);
     }
 
@@ -126,13 +128,18 @@ export default class NewClass extends cc.Component {
             this.GameName.string = '定向训练';
 
             nodes.forEach((el, index) => {
-                if (index == 1 || index == 3 || index == 4) {
+                if (index == 1 || index == 3) {
                     el.active = true;
                 } else {
                     el.active = false;
                 }
             })
 
+        }
+
+        if (GameCfg.GAMEFUPAN) {
+            this.rightNode && (this.rightNode.active = false);
+            this.ALlRateLabel.string = (parseInt(GameCfg.history.allRate * 10000 + '') / 100) + '%';
         }
     }
 
@@ -158,6 +165,26 @@ export default class NewClass extends cc.Component {
         }
         else if (name == 'btnMyspic') {
             GlobalEvent.emit(EventCfg.MYSPICCLICK);
+        }
+
+        else if (name == 'sys_back') {
+            if (GameCfg.GAMEFUPAN) {
+                GameCfg.huizhidatas = 0;
+
+                GameCfg.allRate = 0;
+                GameCfg.profitCount = 0;
+                GameCfg.lossCount = 0;
+                GameCfg.finalfund = 0;
+                GameCfg.GameType = null;
+                GameCfg.GAMEFUPAN = false;
+                cc.director.loadScene('hall');
+
+            } else {
+                PopupManager.LoadPopupBox('tipsBox', '是否终止当前训练，查看训练结果？', (flag) => {
+                    GlobalEvent.emit(EventCfg.GAMEOVEER, flag);
+
+                })
+            }
         }
 
     }

@@ -61,6 +61,8 @@ export default {
         mark: [],        //标签信息
         notice: [],      //通知栏
         fill: [],         //bg填充颜色
+        huizhidatas: 0,
+        allRate: 0,
     },
 
     TIMETEMP: [],   //玩的记录时间戳

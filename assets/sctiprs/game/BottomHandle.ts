@@ -1,6 +1,7 @@
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
+import { pb } from "../../protos/proto";
 
 
 const { ccclass, property } = cc._decorator;
@@ -99,11 +100,17 @@ export default class NewClass extends cc.Component {
             this.node.children.forEach(el => {
                 el.active = false;
             })
-            let node = this.node.getChildByName('fupan');
-            node.active = true;
-            node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
-            node.children[1].getComponent(cc.Label).string = this.gpData[0].day + '-' + this.gpData[this.gpData.length - 1].day;
-            node.children[2].getComponent(cc.Label).string = '0.00%';
+            if (GameCfg.GameType == pb.GameType.ShuangMang) {
+                let node = this.node.getChildByName('fupan');
+                node.active = true;
+                node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
+                node.children[1].getComponent(cc.Label).string = this.gpData[0].day + '-' + this.gpData[this.gpData.length - 1].day;
+                node.children[2].getComponent(cc.Label).string = '0.00%';
+            } else if (GameCfg.GameType == pb.GameType.DingXiang) {
+                let node = this.node.getChildByName('fupan1');
+                node.active = true;
+            }
+
         }, this);
     }
 
@@ -156,20 +163,28 @@ export default class NewClass extends cc.Component {
         this.mrBtn.node.active = !this.flag;
         this.mcBtn.node.active = this.flag;
 
-        if (GameCfg.GameType == 3) {
-            if (GameCfg.data && GameCfg.data.length > 0) {
-                let info = this.node.getChildByName('info');
-                info.active = true;
-                let nodes = info.children;
-                nodes[2].getComponent(cc.Label).string = '股票信息:' + GameCfg.data[0].name;
-                nodes[1].getComponent(cc.Label).string = '起始时间:' + GameCfg.data[0].data[0].day;
-                let le = GameCfg.data[0].data.length;
-                nodes[0].getComponent(cc.Label).string = '结束时间:' + GameCfg.data[0].data[le - 1].day;
-            }
-        }
+        // if (GameCfg.GameType == ) {
+        //     if (GameCfg.data && GameCfg.data.length > 0) {
+        //         let info = this.node.getChildByName('info');
+        //         info.active = true;
+        //         let nodes = info.children;
+        //         nodes[2].getComponent(cc.Label).string = '股票信息:' + GameCfg.data[0].name;
+        //         nodes[1].getComponent(cc.Label).string = '起始时间:' + GameCfg.data[0].data[0].day;
+        //         let le = GameCfg.data[0].data.length;
+        //         nodes[0].getComponent(cc.Label).string = '结束时间:' + GameCfg.data[0].data[le - 1].day;
+        //     }
+        // }
         this.roundNumber = GameCfg.data[0].data.length - GameCfg.huizhidatas;
 
         this.tipsLabel.string = '回合数：' + this.roundNumber;
+
+        if (GameCfg.GAMEFUPAN) {
+            this.node.children.forEach(el => {
+                el.active = false;
+            })
+            let node = this.node.getChildByName('fupan1');
+            node.active = true;
+        }
     }
 
     //回合数
@@ -399,6 +414,12 @@ export default class NewClass extends cc.Component {
                 this.setRoundNumber('mcBtn');
             }
             this.selectBox.active = false;
+        } else if (name == 'xl_fupan_pre') {
+            GlobalEvent.emit(EventCfg.CLICKMOVE, 'pre');
+
+        } else if (name == 'xl_fupan_next') {
+            GlobalEvent.emit(EventCfg.CLICKMOVE, 'next');
+
         }
     }
 

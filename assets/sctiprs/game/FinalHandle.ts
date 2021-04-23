@@ -106,7 +106,7 @@ export default class NewClass extends cc.Component {
             // }
             //  }
 
-            this.saveHoistoryInfo(datas.ts);
+            this.saveHoistoryInfo(parseInt(datas.ts + ''));
 
             socket.send(4005, PB.onCmdGameOverConvertToBuff(datas), (info) => {
                 console.log('GameOverInfo' + JSON.stringify(info));
@@ -117,6 +117,8 @@ export default class NewClass extends cc.Component {
 
     saveHoistoryInfo(ts) {
         GameCfg.TIMETEMP.push(ts);
+        GameCfg.history.huizhidatas = GameCfg.huizhidatas;
+        GameCfg.history.allRate = GameCfg.allRate;
         cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
         cc.sys.localStorage.setItem(ts, JSON.stringify(GameCfg.history));
         cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));

@@ -50,4 +50,6 @@ export default {
 
     SLGEVENTNOTICE: 'SLGEVENTNOTICE',
 
+    CLICKMOVE: "CLICKMOVE",
+
 }

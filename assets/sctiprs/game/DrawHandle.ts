@@ -83,6 +83,15 @@ export default class NewClass extends cc.Component {
     //   multScale = 1;
 
     onLoad() {
+        GlobalEvent.on(EventCfg.CLICKMOVE, (data) => {
+            if (data == 'pre') {
+                this.onMoveLeftOrRight(1, 1, 0);
+            } else {
+                this.onMoveLeftOrRight(1, -1, 0);
+            }
+
+        }, this);
+
         GlobalEvent.on(EventCfg.SETMALABEL, (labels) => {
             this.MAla = labels;
             this.updataLabel(cc.ext.beg_end[1]);
@@ -187,43 +196,10 @@ export default class NewClass extends cc.Component {
                 if (Math.abs(calDisX) >= (cc.ext.hz_width / 2)) {
                     if (!this.timer) {
                         this.timer = setTimeout(() => {
-                            let count = Math.ceil(Math.abs(calDisX) / cc.ext.hz_width);
-                            if (calDisX > 0) {
-                                if (cc.ext.beg_end[0] == 0) {
-                                    clearTimeout(this.timer);
-                                    this.timer = null;
-                                    calDisX = 0;
-                                    calDisY = 0;
-                                    return;
-                                }
-                                if (cc.ext.beg_end[0] - count >= 0) {
-                                    cc.ext.beg_end[1] -= count;
-                                    cc.ext.beg_end[0] -= count;
-                                } else {
-                                    count = cc.ext.beg_end[0];
-                                    cc.ext.beg_end[0] -= count;
-                                    cc.ext.beg_end[1] -= count;
-                                }
-                            } else {
-                                if (GameCfg.huizhidatas == cc.ext.beg_end[1]) {
-                                    clearTimeout(this.timer);
-                                    this.timer = null;
-                                    calDisX = 0;
-                                    calDisY = 0;
-                                    return;
-                                }
-                                if (cc.ext.beg_end[1] + count < GameCfg.huizhidatas) {
-                                    cc.ext.beg_end[0] += count;
-                                    cc.ext.beg_end[1] += count;
-                                } else {
-                                    count = GameCfg.huizhidatas - cc.ext.beg_end[1];
-                                    cc.ext.beg_end[0] += count;
-                                    cc.ext.beg_end[1] += count;
-                                }
-                            }
 
-                            this.initDrawBg();
-                            GlobalEvent.emit('onDraw');
+                            let count = Math.ceil(Math.abs(calDisX) / cc.ext.hz_width);
+                            this.onMoveLeftOrRight(count, calDisX, calDisY);
+
                             var pos = new cc.Vec2(event.getLocationX(), event.getLocationY());
                             let localPos = this.node.children[0].convertToNodeSpaceAR(pos);
                             let index = cc.ext.beg_end[0] + (Math.floor((localPos.x - 10) / cc.ext.hz_width));
@@ -332,6 +308,44 @@ export default class NewClass extends cc.Component {
         if (GameCfg.data) {
             this.initData();
         }
+    }
+
+    onMoveLeftOrRight(count, calDisX, calDisY) {
+        if (calDisX > 0) {
+            if (cc.ext.beg_end[0] == 0) {
+                clearTimeout(this.timer);
+                this.timer = null;
+                calDisX = 0;
+                calDisY = 0;
+                return;
+            }
+            if (cc.ext.beg_end[0] - count >= 0) {
+                cc.ext.beg_end[1] -= count;
+                cc.ext.beg_end[0] -= count;
+            } else {
+                count = cc.ext.beg_end[0];
+                cc.ext.beg_end[0] -= count;
+                cc.ext.beg_end[1] -= count;
+            }
+        } else {
+            if (GameCfg.huizhidatas == cc.ext.beg_end[1]) {
+                clearTimeout(this.timer);
+                this.timer = null;
+                calDisX = 0;
+                calDisY = 0;
+                return;
+            }
+            if (cc.ext.beg_end[1] + count < GameCfg.huizhidatas) {
+                cc.ext.beg_end[0] += count;
+                cc.ext.beg_end[1] += count;
+            } else {
+                count = GameCfg.huizhidatas - cc.ext.beg_end[1];
+                cc.ext.beg_end[0] += count;
+                cc.ext.beg_end[1] += count;
+            }
+        }
+        this.initDrawBg();
+        GlobalEvent.emit('onDraw');
     }
 
     //跟新label
@@ -480,8 +494,10 @@ export default class NewClass extends cc.Component {
             this.drawBordWidth = 1280;
         }
 
-        GameCfg.huizhidatas = GameCfg.data[0].data.length - 150;
-        if (GameCfg.huizhidatas <= 0) { GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '') }
+        if (!GameCfg.GAMEFUPAN) {
+            GameCfg.huizhidatas = GameCfg.data[0].data.length - 150;
+            if (GameCfg.huizhidatas <= 0) { GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '') }
+        }
 
         cc.ext.beg_end[1] = GameCfg.huizhidatas;
         cc.ext.beg_end[0] = cc.ext.beg_end[1] - GameCfg.huizhidatas;

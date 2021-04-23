@@ -27,12 +27,11 @@ export default class NewClass extends cc.Component {
         this.curla.string = GameData.properties[3];
     }
 
-
     onClick(event, curstData) {
         let name = event.target.name;
         //点击双盲训练
         if (name == 'startSMBtn') {
-
+            GameCfg.GAMEFUPAN = false;
             GameCfg.GameType = pb.GameType.ShuangMang;
             GameCfg.GameSet = GameData.SMSet;
 
