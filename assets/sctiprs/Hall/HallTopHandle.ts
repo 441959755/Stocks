@@ -39,23 +39,23 @@ export default class NewClass extends cc.Component {
     onLoad() {
         //砖石
         GlobalEvent.on(EventCfg.BIRCKCHANGE, () => {
-            this.brick.string = gameData.properties[4];
+            this.brick.string = GameData.properties[4];
         }, this);
 
         //金币
         GlobalEvent.on(EventCfg.GOLDCHANGE, () => {
-            this.gold.string = gameData.properties[0];
+            this.gold.string = GameData.properties[0];
         }, this);
 
         //等级
         GlobalEvent.on(EventCfg.LEVELCHANGE, () => {
-            this.userLevel.string = gameData.properties[2];
+            this.userLevel.string = GameData.properties[2];
         }, this);
 
         //经验
         GlobalEvent.on(EventCfg.EXPCHANGE, () => {
-            this.userExp.string = gameData.properties[1] + '/' + cc.ext.gameData.maxExp;
-            this.progr.progress = gameData.properties[1] / cc.ext.gameData.maxExp;
+            this.userExp.string = GameData.properties[1] + '/' + GameData.maxExp;
+            this.progr.progress = GameData.properties[1] / GameData.maxExp;
         }, this);
 
         GlobalEvent.on(EventCfg.SHOWOTHERNODE, (other) => {
@@ -78,33 +78,33 @@ export default class NewClass extends cc.Component {
     }
 
     setHeadImg() {
-        let headUrl = cc.ext.gameData.headimgurl;
+        let headUrl = GameData.headimgurl;
         if (headUrl) {
             if (headUrl.indexOf('.jpg') != -1) {
                 LoadUtils.load(headUrl, (texture) => {
                     let spriteFrame = new cc.SpriteFrame(texture);
                     this.userHead.spriteFrame = spriteFrame;
-                    cc.ext.gameData.headImg = spriteFrame;
+                    GameData.headImg = spriteFrame;
                 })
             } else {
 
                 LoadUtils.load({ url: headUrl, type: 'png' }, (texture) => {
                     let spriteFrame = new cc.SpriteFrame(texture);
                     this.userHead.spriteFrame = spriteFrame;
-                    cc.ext.gameData.headImg = spriteFrame;
+                    GameData.headImg = spriteFrame;
                 })
             }
         }
     }
 
     setUserInfo() {
-        this.userExp.string = gameData.properties[1] + '/' + cc.ext.gameData.maxExp;
-        this.userLevel.string = 'LV:' + gameData.properties[2] || 0 + '';
-        this.gold.string = gameData.properties[0] || 0 + '';
-        this.brick.string = gameData.properties[4] || 0 + '';
-        this.UserName.string = cc.ext.gameData.userName || cc.ext.gameData.userID;
+        this.userExp.string = GameData.properties[1] + '/' + GameData.maxExp;
+        this.userLevel.string = 'LV:' + GameData.properties[2] || 0 + '';
+        this.gold.string = GameData.properties[0] || 0 + '';
+        this.brick.string = GameData.properties[4] || 0 + '';
+        this.UserName.string = GameData.userName || GameData.userID;
 
-        this.progr.progress = gameData.properties[1] / cc.ext.gameData.maxExp;
+        this.progr.progress = GameData.properties[1] / GameData.maxExp;
 
     }
 

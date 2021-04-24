@@ -3,6 +3,7 @@ import EventCfg from "../Utils/EventCfg";
 
 import GameCfg from "../game/GameCfg";
 import GameData from '../../sctiprs/GameData';
+import GameCfgText from '../GameText';
 
 import { pb } from '../../protos/proto';
 
@@ -44,7 +45,7 @@ export default class NewClass extends cc.Component {
             if (str == '') {
                 return;
             } else {
-                let datas = stocklist;
+                let datas = GameCfgText.stockList;
                 let flag = false, tt;
                 for (let i = 0; i < datas.length; i++) {
                     if (datas[i].indexOf(str) != -1) {
@@ -259,8 +260,8 @@ export default class NewClass extends cc.Component {
         }
         let items
         if (GameData.ZBSet.search == '随机选股') {
-            let le = parseInt(Math.random() * stocklist.length);
-            items = stocklist[le].split('|');
+            let le = parseInt(Math.random() * GameCfgText.stockList.length);
+            items = GameCfgText.stockList[le].split('|');
             data.code = items[0];
             // if (data.code < 600000) {
             //     this.sendMessageToSocket();
@@ -269,20 +270,20 @@ export default class NewClass extends cc.Component {
         } else {
             let dex;
             let arrStr = GameData.ZBSet.search.split(' ');
-            for (let i = 0; i < stocklist.length; i++) {
+            for (let i = 0; i < GameCfgText.stockList.length; i++) {
 
-                if (stocklist[i].indexOf(arrStr[0]) != -1) {
+                if (GameCfgText.stockList[i].indexOf(arrStr[0]) != -1) {
                     dex = i;
                     break;
                 }
 
-                if (stocklist[i].indexOf(arrStr[1]) != -1) {
+                if (GameCfgText.stockList[i].indexOf(arrStr[1]) != -1) {
                     dex = i;
                     break;
                 }
             }
             if (dex) {
-                items = stocklist[dex].split('|');
+                items = GameCfgText.stockList[dex].split('|');
                 data.code = items[0];
             } else {
                 console.log('输入的股票代码不正确');

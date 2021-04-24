@@ -1,4 +1,3 @@
-import delayTime = cc.delayTime;
 
 const { ccclass, property } = cc._decorator;
 

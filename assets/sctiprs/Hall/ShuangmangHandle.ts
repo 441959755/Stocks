@@ -5,6 +5,8 @@ import GameCfg from "../game/GameCfg";
 import GameData from "../GameData";
 import { pb } from '../../protos/proto';
 
+import GameCfgText from '../GameText';
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -23,7 +25,8 @@ export default class NewClass extends cc.Component {
         //  GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
         this.toggle1.isChecked = GameData.SMSet.isFC;
 
-        this.initLa.string = smxlCfg.capital_init;
+        this.initLa.string = GameCfgText.smxlCfg.capital_init;
+
         this.curla.string = GameData.properties[3];
     }
 
@@ -83,8 +86,8 @@ export default class NewClass extends cc.Component {
             to: 0,
         }
 
-        let le = parseInt(Math.random() * stocklist.length);
-        let items = stocklist[le].split('|');
+        let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
+        let items = GameCfgText.stockList[le].split('|');
         data.code = items[0];
         // if (data.code < 600000) {
         //     this.smStartGameSet();
@@ -109,14 +112,17 @@ export default class NewClass extends cc.Component {
         let month = start.slice(4, 6);
         let day = start.slice(6);
 
+        //开始的时间戳
         let d = new Date(year + '-' + month + '-' + day);
         ///console.log(d); 
         let t = d.getTime();
+
         if (sc <= 0) {
             this.smStartGameSet();
             return;
         }
 
+        //随机的时间戳
         let s = Math.random() * (sc - t) + t;
 
         let f = new Date(s);
@@ -129,6 +135,7 @@ export default class NewClass extends cc.Component {
 
             data.from = ye + '' + mon + '' + da;
         }
+
         GameCfg.data[0].data = [];
         GameCfg.data[0].name = items[1];
         GameCfg.data[0].code = items[0];

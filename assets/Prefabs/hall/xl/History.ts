@@ -5,6 +5,7 @@ import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import EventCfg from '../../../sctiprs/Utils/EventCfg';
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import { pb } from '../../../protos/proto';
+import GameCfgText from '../../../sctiprs/GameText'
 
 const { ccclass, property } = cc._decorator;
 
@@ -29,10 +30,6 @@ export default class NewClass extends cc.Component {
     title: cc.Label = null;
 
 
-    start() {
-
-    }
-
     protected onEnable() {
         ActionUtils.openLayer(this.node);
     }
@@ -47,9 +44,9 @@ export default class NewClass extends cc.Component {
 
         let selectName = function (code) {
             let name;
-            for (let i = 0; i < stocklist.length; i++) {
-                if (stocklist[i].indexOf(code) != -1) {
-                    let items = stocklist[i].split('|');
+            for (let i = 0; i < GameCfgText.stockList.length; i++) {
+                if (GameCfgText.stockList[i].indexOf(code) != -1) {
+                    let items = GameCfgText.stockList[i].split('|');
                     name = items[1];
                     break;
                 }
@@ -115,8 +112,14 @@ export default class NewClass extends cc.Component {
             }
 
             if (GameCfg.TIMETEMP.indexOf(parseInt(ts)) != -1) {
-                GameCfg.history = JSON.parse(cc.sys.localStorage.getItem(ts));
-                GameCfg.GameSet = JSON.parse(cc.sys.localStorage.getItem(ts + 'set'));
+                let history = cc.sys.localStorage.getItem(ts);
+                if (history) {
+                    GameCfg.history = JSON.parse(history);
+                }
+                let GameSet = cc.sys.localStorage.getItem(ts + 'set');
+                if (GameSet) {
+                    GameCfg.GameSet = JSON.parse(GameSet);
+                }
             }
 
             if (!GameCfg.history || !GameCfg.GameSet) {
@@ -157,16 +160,16 @@ export default class NewClass extends cc.Component {
             }
 
             let dex = -1, items;
-            for (let i = 0; i < stocklist.length; i++) {
+            for (let i = 0; i < GameCfgText.stockList.length; i++) {
 
-                if (stocklist[i].indexOf(data.code) != -1) {
+                if (GameCfgText.stockList[i].indexOf(data.code) != -1) {
                     dex = i;
                     break;
                 }
 
             }
             if (dex != -1) {
-                items = stocklist[dex].split('|');
+                items = GameCfgText.stockList[dex].split('|');
 
             }
 
@@ -179,5 +182,4 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    // update (dt) {}
 }

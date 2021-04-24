@@ -72,29 +72,35 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
 
+        //显示加载
         GlobalEvent.on(EventCfg.LOADINGSHOW, () => {
             this.loading.active = true;
         }, this);
 
+        //关闭加载
         GlobalEvent.on(EventCfg.LOADINGHIDE, () => {
             this.loading.active = false;
         }, this);
 
+        //提示
         GlobalEvent.on(EventCfg.TIPSTEXTSHOW, this.onTipsTextShow.bind(this), this);
 
-
+        //打开双盲
         GlobalEvent.on('OPENSMLAYER', () => {
             this.shuangmangLayer.active = true;
         }, this);
 
+        //打开指标
         GlobalEvent.on('OPENZBLAYER', () => {
             this.zhibiaoLayer.active = true;
         }, this);
 
+        //打开定向
         GlobalEvent.on('OPENDXLAYER', () => {
             this.DXLayer.active = true;
         }, this);
 
+        //打开历史记录
         GlobalEvent.on('OPENHISTORYLAYER', (str) => {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             //SM的要获取服务器消息
@@ -106,6 +112,7 @@ export default class NewClass extends cc.Component {
 
         }, this);
 
+        //打开设置
         GlobalEvent.on('OPENSETLAYER', (str) => {
             if (str == 'ZB') {
                 if (!this.ZBSetLayer) {
@@ -129,6 +136,7 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
+        //打开月报
         GlobalEvent.on('OPENMONTHLAYER', (str) => {
             //  if (str == 'SM') {
             if (socket) {
@@ -149,6 +157,7 @@ export default class NewClass extends cc.Component {
             //  }
         }, this);
 
+        //打开曲线图
         GlobalEvent.on('OPENYIELDLAYER', (str) => {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             this.acquireSMhistoryInfo((info) => {
@@ -156,6 +165,7 @@ export default class NewClass extends cc.Component {
             });
         }, this);
 
+        //打开帮助
         GlobalEvent.on('OPENHELPLAYER', (str) => {
             if (!this.helpLayer) {
                 this.helpLayer = cc.instantiate(this.helpPre);
@@ -164,6 +174,7 @@ export default class NewClass extends cc.Component {
             this.helpLayer.active = true;
         }, this);
 
+        //查询行情
         GlobalEvent.on('onCmdQuoteQuery', this.onCmdQuoteQuery.bind(this), this);
 
         //打开个人中心
@@ -335,40 +346,40 @@ export default class NewClass extends cc.Component {
 
     }
 
-    resetSize(cav) {
-        let frameSize = cc.view.getFrameSize();
-        let designSize = cc.view.getDesignResolutionSize();
+    // resetSize(cav) {
+    //     let frameSize = cc.view.getFrameSize();
+    //     let designSize = cc.view.getDesignResolutionSize();
 
-        if (frameSize.width / frameSize.height > designSize.width / designSize.height) {
-            cav.width = designSize.height * frameSize.width / frameSize.height;
-            cav.height = designSize.height;
-            cav.getComponent(cc.Canvas).designResolution = cc.size(cav.width, cav.height);
-        } else {
-            cav.width = designSize.width;
-            cav.height = designSize.width * frameSize.height / frameSize.width;
-            cav.getComponent(cc.Canvas).designResolution = cc.size(cav.width, cav.height);
-        }
-        this.fitScreen(cav, designSize);
-    }
+    //     if (frameSize.width / frameSize.height > designSize.width / designSize.height) {
+    //         cav.width = designSize.height * frameSize.width / frameSize.height;
+    //         cav.height = designSize.height;
+    //         cav.getComponent(cc.Canvas).designResolution = cc.size(cav.width, cav.height);
+    //     } else {
+    //         cav.width = designSize.width;
+    //         cav.height = designSize.width * frameSize.height / frameSize.width;
+    //         cav.getComponent(cc.Canvas).designResolution = cc.size(cav.width, cav.height);
+    //     }
+    //     this.fitScreen(cav, designSize);
+    // }
 
-    /**
-     * 背景适配
-     * @param canvasnode
-     * @param designSize
-     */
-    fitScreen(canvasnode, designSize) {
-        let scaleW = canvasnode.width / designSize.width;
-        let scaleH = canvasnode.height / designSize.height;
+    // /**
+    //  * 背景适配
+    //  * @param canvasnode
+    //  * @param designSize
+    //  */
+    // fitScreen(canvasnode, designSize) {
+    //     let scaleW = canvasnode.width / designSize.width;
+    //     let scaleH = canvasnode.height / designSize.height;
 
-        let bgNode = canvasnode.getChildByName('bg');
-        let bgScale = canvasnode.height / bgNode.height;
-        bgNode.width *= bgScale;
-        bgNode.height *= bgScale;
-        if (scaleW > scaleH) {
-            bgScale = canvasnode.width / bgNode.width;
-            bgNode.width *= bgScale;
-            bgNode.height *= bgScale;
-        }
-    }
+    //     let bgNode = canvasnode.getChildByName('bg');
+    //     let bgScale = canvasnode.height / bgNode.height;
+    //     bgNode.width *= bgScale;
+    //     bgNode.height *= bgScale;
+    //     if (scaleW > scaleH) {
+    //         bgScale = canvasnode.width / bgNode.width;
+    //         bgNode.width *= bgScale;
+    //         bgNode.height *= bgScale;
+    //     }
+    // }
 
 }

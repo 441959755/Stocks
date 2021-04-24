@@ -5,6 +5,8 @@ import GameCfg from '../game/GameCfg';
 import GameData from '../GameData';
 import { pb } from '../../protos/proto';
 
+import GameCfgText from '../GameText';
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -40,7 +42,7 @@ export default class NewClass extends cc.Component {
             if (str == '') {
                 return;
             } else {
-                let datas = stocklist;
+                let datas = GameCfgText.stockList;
                 let flag = false, tt;
                 for (let i = 0; i < datas.length; i++) {
                     if (datas[i].indexOf(str) != -1) {
@@ -71,8 +73,9 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
 
         this.boxs.forEach((el, index) => {
+            let la;
             if (index != 0) {
-                let la = el.getChildByName('label').getComponent(cc.Label);
+                la = el.getChildByName('label').getComponent(cc.Label);
             }
 
             if (index == 0) {
@@ -271,11 +274,11 @@ export default class NewClass extends cc.Component {
             to: 0,
         }
         let items
-        //   console.log(JSON.stringify(stocklist));
+        //   console.log(JSON.stringify(GameCfgText.stockList));
         if (GameData.DXSet.search == '随机选股') {
-            let le = parseInt(Math.random() * stocklist.length);
+            let le = parseInt(Math.random() * GameCfgText.stockList.length);
             console.log('le' + le);
-            items = stocklist[le].split('|');
+            items = GameCfgText.stockList[le].split('|');
             data.code = items[0];
             // if (data.code < 600000) {
             //     this.DXStartGameSet();
@@ -286,20 +289,20 @@ export default class NewClass extends cc.Component {
             let arrStr = GameData.DXSet.search.split(' ');
             arrStr[0] = arrStr[0].replace(/ /g, '');
             arrStr[1] = arrStr[1].replace(/ /g, '');
-            for (let i = 0; i < stocklist.length; i++) {
+            for (let i = 0; i < GameCfgText.stockList.length; i++) {
 
-                if (stocklist[i].indexOf(arrStr[0]) != -1) {
+                if (GameCfgText.stockList[i].indexOf(arrStr[0]) != -1) {
                     dex = i;
                     break;
                 }
 
-                if (stocklist[i].indexOf(arrStr[1]) != -1) {
+                if (GameCfgText.stockList[i].indexOf(arrStr[1]) != -1) {
                     dex = i;
                     break;
                 }
             }
             if (dex != -1) {
-                items = stocklist[dex].split('|');
+                items = GameCfgText.stockList[dex].split('|');
                 data.code = items[0];
             } else {
                 // console.log(arrStr[0]);
@@ -334,7 +337,7 @@ export default class NewClass extends cc.Component {
             let seletTime = GameData.DXSet.year + '' + GameData.DXSet.month + '' + GameData.DXSet.day;
             if (parseInt(seletTime) < parseInt(items[2])) {
 
-                if (gameData.DXSet.search == '随机选股') {
+                if (GameData.DXSet.search == '随机选股') {
                     this.DXStartGameSet();
 
                 } else {
@@ -345,7 +348,7 @@ export default class NewClass extends cc.Component {
             } else if (parseInt(seletTime) > parseInt(items[3])) {
                 if (parseInt(items[3]) != 0) {
 
-                    if (gameData.DXSet.search == '随机选股') {
+                    if (GameData.DXSet.search == '随机选股') {
                         this.DXStartGameSet();
                     } else {
                         console.log('时间不能大与股票结束时间');

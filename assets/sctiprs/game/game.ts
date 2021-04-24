@@ -18,7 +18,6 @@ export default class NewClass extends cc.Component {
     onLoad() {
         //游戏结算
         GlobalEvent.on(EventCfg.GAMEOVEER, (flag) => {
-
             setTimeout(() => {
                 this.finalLayer.active = flag;
             }, 100)

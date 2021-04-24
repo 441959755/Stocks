@@ -1,10 +1,10 @@
 import GameData from "../GameData";
 import LLWSDK from "../common/sdk/LLWSDK";
 
-import LoadUtils from "../Utils/LoadUtils";
-
 import Socket from "../common/net/socket";
 import GameCfg from "../game/GameCfg";
+
+import GameCfgText from '../GameText';
 
 window.global = window;
 
@@ -20,7 +20,9 @@ cc.Class({
 
     init() {
         let PBHelper = require('pbhelper');
+
         let pbhelper = new PBHelper();
+
         global.PB = pbhelper;
 
         global.gameData = cc.ext.gameData;
@@ -29,43 +31,13 @@ cc.Class({
     onLoad() {
         this.init();
         //游戏配置
-        LoadUtils.loadRes('protos/game', (text) => {
-            global.levelInfoCfg = JSON.parse(text.text).levelConf;
-            global.smxlCfg = JSON.parse(text.text).smxl;
-        })
+        GameCfgText.getOtherCfg();
 
         //股票配置
-        LoadUtils.loadRes('protos/stocklist', (text) => {
-            global.stocklist = text.text.split('\n');
-            // 股票代码|股票名称|第一个行情日期|最后一个行情日期（0为无最后行情，即股票还在上市中）|流通股数（注：请忽略该行）
-            let arr = [];
-            for (let i = 0; i < stocklist.length; i++) {
-                let items = stocklist[i].split('|');
+        GameCfgText.getStocktList();
 
-                let code = items[0] + '';
-
-                // if (code >= 1000000) {
-                //     code = parseInt(code) - 1000000;
-                // }
-                if (code.length >= 7) {
-                    code = code.slice(1, 7);
-                }
-
-                let head2 = code.slice(0, 2);
-
-                let head3 = code.slice(0, 3);
-
-                if (head2 == '60' || head2 == '00') {
-                    arr.push(stocklist[i]);
-                } else if (head3 == '688' || head3 == '002' || head3 == '300') {
-                    arr.push(stocklist[i]);
-                }
-            }
-            if (arr && arr.length > 0) {
-                stocklist = arr;
-            }
-        })
         cc.macro.ENABLE_MULTI_TOUCH = false;
+
         this.initData();
     },
 
@@ -181,7 +153,6 @@ cc.Class({
             let str = cc.sys.localStorage.getItem('TIMETEMP');
             if (str) {
                 GameCfg.TIMETEMP = JSON.parse(str);
-
                 //上个月的数据清除
                 if (GameCfg.TIMETEMP.length > 0) {
                     var data = new Date(); //本月
@@ -203,17 +174,14 @@ cc.Class({
 
                     GameCfg.TIMETEMP = arr;
                     cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP))
-
+                } else {
+                    console.log('in login' + '还没缓存数据');
                 }
             }
-
         }
-
-
     },
 
     onDestroy() {
-        LoadUtils.releaseRes('protos/stocklist');
-        LoadUtils.releaseRes('protos/game');
+        GameCfgText.releaseRes();
     }
 });
