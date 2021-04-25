@@ -69,6 +69,9 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     BOLLLabel: cc.Label[] = [];
 
+    @property(cc.Node)
+    voltext: cc.Node = null;
+
 
     timer = null;
 
@@ -102,12 +105,18 @@ export default class NewClass extends cc.Component {
 
         //ma boll pcm
         GlobalEvent.on('on_off', (flagData) => {
-            this.drawMA.node.active = !flagData.maboll;
-            this.drawBOLL.node.active = flagData.maboll;
+            this.drawMA.node.active = flagData.maboll;
+            this.MAla.forEach(el => {
+                el.node.active = flagData.maboll;
+            })
+            this.drawBOLL.node.active = !flagData.maboll;
+            this.BOLLLabel.forEach(el => {
+                el.node.active = !flagData.maboll;
+            })
             this.drawPCM.node.active = flagData.cpm;
-            this.drawVol.node.children[0].active = true;
+            this.voltext.active = true;
             if (flagData.macd || flagData.kdj || flagData.rsi) {
-                this.drawVol.node.children[0].active = false;
+                this.voltext.active = false;
             }
         }, this);
 
@@ -203,6 +212,7 @@ export default class NewClass extends cc.Component {
                             var pos = new cc.Vec2(event.getLocationX(), event.getLocationY());
                             let localPos = this.node.children[0].convertToNodeSpaceAR(pos);
                             let index = cc.ext.beg_end[0] + (Math.floor((localPos.x - 10) / cc.ext.hz_width));
+                            this.vertical1.x = cc.ext.hz_width * index + 10 - cc.ext.hz_width / 2;
                             if (index > cc.ext.beg_end[1]) {
                                 this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
                                 index = cc.ext.beg_end[1];
@@ -392,15 +402,16 @@ export default class NewClass extends cc.Component {
     setVOLInfo(index) {
         if (GameCfg.data[0].data[index]) {
             let value = parseFloat(GameCfg.data[0].data[index].value);
-            this.drawVol.node.children[0].getComponent(cc.Label).string = 'VOL(5,10): ' + value.toFixed(2);
+            this.voltext.getComponent(cc.Label).string = 'VOL(5,10): ' + value.toFixed(2);
         }
     }
 
     protected onEnable() {
         this.initDrawBg();
-        this.drawVol.node.children[0].color = GameCfg.VOLColor[0];
+        this.voltext.color = GameCfg.VOLColor[0];
         this.BOLLLabel.forEach((el, t) => {
             el.node.color = GameCfg.BOLLColor[t];
+            el.node.active = false;
         })
 
     }
@@ -468,7 +479,7 @@ export default class NewClass extends cc.Component {
 
     //Boll
     onDrawBoll(index) {
-        let drawBox = 340;
+        let drawBox = this.drawBOLL.node.height;
         if (index >= 20) {
             let prex = 10 + ((index - 1 - cc.ext.beg_end[0])) * cc.ext.hz_width + cc.ext.hz_width / 2;
             let x = 10 + ((index - cc.ext.beg_end[0])) * cc.ext.hz_width + cc.ext.hz_width / 2;
@@ -633,7 +644,7 @@ export default class NewClass extends cc.Component {
         if (!GameCfg.MaList[index]) {
             return;
         }
-        let drawBox = 340, initY = 0, madata = 0;
+        let drawBox = this.drawMA.node.height, initY = 0, madata = 0;
         //每段数据绘制
         for (let i = 0; i < GameCfg.MAs.length; i++) {
 
@@ -661,7 +672,7 @@ export default class NewClass extends cc.Component {
             // muit: this.multScale,
         }
         let initY = 0;
-        let drawBox = 340;
+        let drawBox = this.drawBg.node.height;
         let some = index - cc.ext.beg_end[0];
         let startX = some == 0 ? 10 : 10 + (some * cc.ext.hz_width);
         let endX = 10 + ((some + 1) * cc.ext.hz_width);

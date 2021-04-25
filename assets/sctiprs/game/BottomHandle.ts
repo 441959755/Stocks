@@ -145,7 +145,7 @@ export default class NewClass extends cc.Component {
 
         if (this.ziChan > 0 && GameCfg.huizhidatas <= this.gpData.length) {
             if (this.gpData[GameCfg.huizhidatas - 1]) {
-                this.keMrCount = (this.ziChan / parseFloat(this.gpData[GameCfg.huizhidatas - 1].open) + '');
+                this.keMrCount = parseInt(this.ziChan / ((parseFloat(this.gpData[GameCfg.huizhidatas - 1].open)) * 100) + '') * 100;
             }
 
         }
@@ -211,13 +211,14 @@ export default class NewClass extends cc.Component {
 
                 if (name == 'mrBtn') {
                     this._type = 1;
+                    GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
                 } else {
                     this._type = 2;
+                    GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
                 }
 
 
             } else {
-
                 this.flag = !this.flag;
                 this.mrBtn.node.active = !this.flag;
                 this.mcBtn.node.active = this.flag;
@@ -226,13 +227,18 @@ export default class NewClass extends cc.Component {
 
                     this.keMcCount += this.keMrCount;
                     this.keMrCount = 0;
-                    this.ziChan = 0;
+                    this.ziChan -= parseInt(this.ziChan / ((parseFloat(this.gpData[GameCfg.huizhidatas - 1].open)) * 100) + '') * 100;
+                    if (this.ziChan <= 0) {
+                        this.ziChan = 0;
+                        console.log('买入卖出数据有问题');
+                    }
                     this.cyBtn.node.active = true;
                     this.gwBtn.node.active = false;
                 } else {
                     GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
 
                     this.ziChan += parseFloat(this.keMcCount + '') * this.gpData[GameCfg.huizhidatas - 1].close;
+
                     this.keMcCount = 0;
                     this.gwBtn.node.active = true;
                     this.cyBtn.node.active = false;
@@ -252,31 +258,28 @@ export default class NewClass extends cc.Component {
             //买入
             if (this._type == 1) {
 
-
                 this.keMcCount += this.keMrCount;
                 this.keMrCount = 0;
-                this.ziChan = 0;
+                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].open;
+                console.log(this.gpData[GameCfg.huizhidatas - 2].open);
                 this.mrBtn.interactable = false;
                 this.mrBtn.enableAutoGrayEffect = true;
                 this.mcBtn.interactable = true;
                 this.mcBtn.enableAutoGrayEffect = false;
                 this.setRoundNumber('mrBtn');
-
-
             }
             //卖出
             else {
-
-
                 this.mrBtn.interactable = true;
                 this.mrBtn.enableAutoGrayEffect = false;
                 this.mcBtn.interactable = false;
                 this.mcBtn.enableAutoGrayEffect = true;
-                this.ziChan += parseFloat(this.keMcCount + '') * this.gpData[GameCfg.huizhidatas - 1].close;
+                this.ziChan += parseFloat(this.keMcCount + '') * this.gpData[GameCfg.huizhidatas - 2].close;
+
+                console.log(this.gpData[GameCfg.huizhidatas - 1].close);
 
                 this.keMcCount = 0;
                 this.setRoundNumber('mcBtn');
-
 
             }
             this.selectBox.active = false;
@@ -285,11 +288,13 @@ export default class NewClass extends cc.Component {
         else if (name == 'fcBtn1') {
             if (this._type == 1) {
 
-                this.keMcCount += parseFloat(this.ziChan * (3 / 4) / this.gpData[GameCfg.huizhidatas - 1].open + '');
-                this.ziChan -= this.ziChan * (3 / 4);
+                // this.keMcCount += parseFloat(this.ziChan * (3 / 4) / this.gpData[GameCfg.huizhidatas - 1].open + '');
+                this.keMcCount += parseInt((3 / 4 * this.keMrCount) / 100 + '') * 100;
+                this.keMrCount -= this.keMcCount;
+                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
                 //  this.keMrCount -= this.keMrCount * (3 / 4);
 
-                if (this.keMrCount <= 0) {
+                if (this.keMrCount < 100) {
                     this.mrBtn.interactable = false;
                     this.mrBtn.enableAutoGrayEffect = true;
                 }
@@ -297,9 +302,13 @@ export default class NewClass extends cc.Component {
                 this.mcBtn.enableAutoGrayEffect = false;
                 this.setRoundNumber('mrBtn');
             } else {
+                let mc = parseInt(this.keMcCount * (3 / 4) / 100 + '') * 100;
 
-                this.ziChan += parseFloat(this.keMcCount * (3 / 4) * this.gpData[GameCfg.huizhidatas - 1].close + '');
-                this.keMcCount -= this.keMcCount * (3 / 4);
+                this.keMcCount -= mc;
+
+                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 2].close);
+                //  this.keMcCount -= this.keMcCount * (3 / 4);
+
                 if (this.keMcCount <= 0) {
                     this.mcBtn.interactable = false;
                     this.mcBtn.enableAutoGrayEffect = true;
@@ -311,10 +320,12 @@ export default class NewClass extends cc.Component {
             this.selectBox.active = false;
         } else if (name == 'fcBtn2') {
             if (this._type == 1) {
-                this.keMcCount += parseFloat(this.ziChan * (2 / 3) / this.gpData[GameCfg.huizhidatas - 1].open + '');
-                this.ziChan -= this.ziChan * (2 / 3);
+                //  this.keMcCount += parseFloat(this.ziChan * (2 / 3) / this.gpData[GameCfg.huizhidatas - 1].open + '');
+                this.keMcCount += parseInt(2 / 3 * this.keMrCount / 100 + '') * 100;
+                this.keMrCount -= this.keMcCount;
+                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
 
-                if (this.keMrCount <= 0) {
+                if (this.keMrCount < 100) {
                     this.mrBtn.interactable = false;
                     this.mrBtn.enableAutoGrayEffect = true;
 
@@ -324,8 +335,11 @@ export default class NewClass extends cc.Component {
                 this.setRoundNumber('mrBtn');
             } else {
 
-                this.ziChan += parseFloat(this.keMcCount * (2 / 3) * this.gpData[GameCfg.huizhidatas - 1].close + '');
-                this.keMcCount -= this.keMcCount * (2 / 3);
+                let mc = parseInt(this.keMcCount * (2 / 3) / 100 + '') * 100;
+
+                this.keMcCount -= mc;
+
+                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 2].close);
                 if (this.keMcCount <= 0) {
 
                     this.mcBtn.interactable = false;
@@ -338,10 +352,11 @@ export default class NewClass extends cc.Component {
             this.selectBox.active = false;
         } else if (name == 'fcBtn3') {
             if (this._type == 1) {
-                this.keMcCount += parseFloat(this.ziChan * (1 / 2) / this.gpData[GameCfg.huizhidatas - 1].open + '');
-                this.ziChan -= this.ziChan * (1 / 2);
+                this.keMcCount += parseInt(1 / 2 * this.keMrCount / 100 + '') * 100;
+                this.keMrCount -= this.keMcCount;
+                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
 
-                if (this.keMrCount <= 0) {
+                if (this.keMrCount < 100) {
                     this.mrBtn.interactable = false;
                     this.mrBtn.enableAutoGrayEffect = true;
 
@@ -350,8 +365,11 @@ export default class NewClass extends cc.Component {
                 this.mcBtn.enableAutoGrayEffect = false;
                 this.setRoundNumber('mrBtn');
             } else {
-                this.ziChan += parseFloat(this.keMcCount * (1 / 2) * this.gpData[GameCfg.huizhidatas - 1].close + '');
-                this.keMcCount -= this.keMcCount * (3 / 4);
+                let mc = parseInt(this.keMcCount * (1 / 2) / 100 + '') * 100;
+
+                this.keMcCount -= mc;
+
+                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 2].close);
 
                 if (this.keMcCount <= 0) {
 
@@ -365,10 +383,11 @@ export default class NewClass extends cc.Component {
             this.selectBox.active = false;
         } else if (name == 'fcBtn4') {
             if (this._type == 1) {
-                this.keMcCount += parseFloat(this.ziChan * (1 / 3) / this.gpData[GameCfg.huizhidatas - 1].open + '');
-                this.ziChan -= this.ziChan * (1 / 3);
+                this.keMcCount += parseInt(1 / 3 * this.keMrCount / 100 + '') * 100;
+                this.keMrCount -= this.keMcCount;
+                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
 
-                if (this.keMrCount <= 0) {
+                if (this.keMrCount < 100) {
                     this.mrBtn.interactable = false;
                     this.mrBtn.enableAutoGrayEffect = true;
 
@@ -377,8 +396,11 @@ export default class NewClass extends cc.Component {
                 this.mcBtn.enableAutoGrayEffect = false;
                 this.setRoundNumber('mrBtn');
             } else {
-                this.ziChan += parseFloat(this.keMcCount * (1 / 3) * this.gpData[GameCfg.huizhidatas - 1].close + '');
-                this.keMcCount -= this.keMcCount * (1 / 3);
+                let mc = parseInt(this.keMcCount * (1 / 3) / 100 + '') * 100;
+
+                this.keMcCount -= mc;
+
+                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 2].close);
 
                 if (this.keMcCount <= 0) {
 
@@ -392,10 +414,11 @@ export default class NewClass extends cc.Component {
             this.selectBox.active = false;
         } else if (name == 'fcBtn5') {
             if (this._type == 1) {
-                this.keMcCount += parseFloat(this.ziChan * (1 / 4) / this.gpData[GameCfg.huizhidatas - 1].open + '');
-                this.ziChan -= this.ziChan * (1 / 4);
+                this.keMcCount += parseInt(1 / 4 * this.keMrCount / 100 + '') * 100;
+                this.keMrCount -= this.keMcCount;
+                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
 
-                if (this.keMrCount <= 0) {
+                if (this.keMrCount < 100) {
                     this.mrBtn.interactable = false;
                     this.mrBtn.enableAutoGrayEffect = true;
                 }
@@ -403,8 +426,11 @@ export default class NewClass extends cc.Component {
                 this.mcBtn.enableAutoGrayEffect = false;
                 this.setRoundNumber('mrBtn');
             } else {
-                this.ziChan += parseFloat(this.keMcCount * (1 / 4) * this.gpData[GameCfg.huizhidatas - 1].close + '');
-                this.keMcCount -= this.keMcCount * (1 / 4);
+                let mc = parseInt(this.keMcCount * (1 / 4) / 100 + '') * 100;
+
+                this.keMcCount -= mc;
+
+                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 2].close);
                 if (this.keMcCount <= 0) {
                     this.mcBtn.interactable = false;
                     this.mcBtn.enableAutoGrayEffect = true;
@@ -437,18 +463,23 @@ export default class NewClass extends cc.Component {
 
         this.onSetMrCount();
 
+        //事件通知
         GlobalEvent.emit(EventCfg.SLGEVENTNOTICE);
     }
 
     onBuyOrSell(state) {
+
         //买入
         let data = GameCfg.data[0].data;
         if (state == 'mrBtn') {
             this.buyData.push(GameCfg.huizhidatas - 2);
             let curClose = parseFloat(data[GameCfg.huizhidatas - 1].close);
+
             let preClose = parseFloat(data[GameCfg.huizhidatas - 2].close);
             let rate = (curClose - preClose) / preClose;
+            //   console.log('(' + curClose + '-' + preClose + ')' + "/" + preClose);
             GlobalEvent.emit('updateRate', [rate]);
+
             this.isFlag = true;
             let start = GameCfg.huizhidatas;
 
@@ -463,13 +494,17 @@ export default class NewClass extends cc.Component {
 
         //卖出
         else if (state == 'mcBtn') {
+
             this.saleData.push(GameCfg.huizhidatas - 2);
+
             let curClose = parseFloat(data[GameCfg.huizhidatas - 2].close);
-            console.log('curClose:' + curClose);
+
             let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
-            console.log('preClose:' + preClose);
 
             let rate = (curClose - preClose) / preClose;
+
+            //  console.log('(' + curClose + '-' + preClose + ')' + "/" + preClose);
+
             GameCfg.allRate = ((GameCfg.allRate + 1) * (rate + 1) - 1);
             if (rate < 0) {
                 GameCfg.lossCount++;
@@ -503,8 +538,8 @@ export default class NewClass extends cc.Component {
             if (!this.isFlag) {
                 return;
             }
-            let curClose = parseFloat(data[GameCfg.huizhidatas - 2].close);
-            let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].open);
+            let curClose = parseFloat(data[GameCfg.huizhidatas - 1].close);
+            let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
             let rate = (curClose - preClose) / preClose;
             GlobalEvent.emit('updateRate', [rate]);
 

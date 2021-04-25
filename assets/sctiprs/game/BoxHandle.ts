@@ -32,6 +32,18 @@ export default class NewClass extends cc.Component {
 
     lZoom: cc.Toggle = null;
 
+    @property(cc.Node)
+    selcetContent: cc.Node = null;
+
+    @property(cc.Label)
+    tipsLabel: cc.Label = null;
+
+    @property(cc.Label)
+    hsLa: cc.Label = null;
+
+    @property(cc.Label)
+    zfLa: cc.Label = null;
+
     onLoad() {
         GlobalEvent.on('updataLabel', (inde) => {
 
@@ -50,6 +62,14 @@ export default class NewClass extends cc.Component {
                 info.push(zd.toFixed(2));
                 let zf = zd / datas[inde - 2].close;
                 info.push(zf.toFixed(2));
+
+                this.hsLa.string = parseFloat(datas[inde - 1].Rate).toFixed(2) + '%';
+                if (info[9] < 0) {
+                    this.zfLa.node.color = new cc.Color().fromHEX('#76B87E');
+                } else {
+                    this.zfLa.node.color = cc.Color.RED;
+                }
+                this.zfLa.string = zf.toFixed(2);
             }
 
 
@@ -137,11 +157,13 @@ export default class NewClass extends cc.Component {
         this.lZoom = this.node.getChildByName('lZoomBtn').getComponent(cc.Toggle);
         this.lZoom.node.children[0].active = true;
         this.inotyBox.x = -cc.winSize.width / 2 - this.inotyBox.width / 2;
+
+        this.rightBox = this.node.getChildByName('rightBox');
+        this.tipsBox = this.node.getChildByName('tipsBox');
         //黑
         if (GameCfg.GameSet.isBW) {
-            this.rightBox = this.node.getChildByName('rightBox');
-            this.tipsBox = this.node.getChildByName('tipsBox');
-            this.node.getChildByName('rightBox').active = false;
+            this.rightBox.color = new cc.Color().fromHEX('#1E1E1E');
+            this.tipsBox.color = new cc.Color().fromHEX('#1E1E1E');
 
             this.inotyBox.getChildByName('bg').active = true;
             this.inotyBox.getChildByName('label').color = cc.Color.WHITE;
@@ -149,10 +171,9 @@ export default class NewClass extends cc.Component {
         }
         //白
         else {
-            this.rightBox = this.node.getChildByName('rightBox');
-            this.tipsBox = this.node.getChildByName('tipsBox');
-            this.node.getChildByName('rightBox').active = false;
 
+            this.rightBox.color = cc.Color.WHITE;
+            this.tipsBox.color = cc.Color.WHITE;
             this.inotyBox.getChildByName('bg').active = false;
             this.inotyBox.getChildByName('label').color = cc.Color.BLACK;
         }
@@ -184,6 +205,22 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('updataLabel');
         GlobalEvent.off('tipsPoint');
         GlobalEvent.off('hideTips');
+    }
+
+
+    onBtnSlecet(event, data) {
+        let name = event.target.name;
+
+        if (name == 'btnSlecet') {
+            this.selcetContent.active = !this.selcetContent.active;
+        }
+        else if (data == 'CPM' || data == 'MACD' || data == 'KDJ' || data == 'RSI') {
+            let str = event.target.getComponent(cc.Label).string;
+            this.tipsLabel.string = str;
+            this.selcetContent.active = false;
+            this.setBoxfalg(data);
+        }
+
     }
 
     setBoxfalg(data) {
@@ -258,6 +295,15 @@ export default class NewClass extends cc.Component {
         //先项
         if (data == 'ma' || data == 'CPM' || data == 'MACD' || data == 'KDJ' || data == 'RSI' || data == 'boll') {
             this.setBoxfalg(data);
+
+            if (data != 'ma' && data != 'boll') {
+                let str = event.target.getComponent(cc.Label).string;
+                this.tipsLabel.string = str;
+            }
+            if (data == 'CPM') {
+                this.tipsLabel.string = '成交量';
+            }
+
         } else if (data == 'rZoomBtn') {
             // this.rightBox.stopAllActions();
             if (this.rZoom.isChecked) {
@@ -280,7 +326,7 @@ export default class NewClass extends cc.Component {
                 this.lZoom.node.children[0].active = true;
                 this.inotyBox.x = -cc.winSize.width / 2 - this.inotyBox.width / 2;
             }
-            GlobalEvent.emit(EventCfg.SET_DRAW_SIZE, this.lZoom.isChecked);
+            // GlobalEvent.emit(EventCfg.SET_DRAW_SIZE, this.lZoom.isChecked);
         }
     }
 }

@@ -53,7 +53,7 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
         //添加开始标签
-        this.onAddMard(1);
+        this.onAddMard({ type: 1, index: GameCfg.huizhidatas });
         if (GameCfg.GAMEFUPAN) {
             this.showFlag = true;
         }

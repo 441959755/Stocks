@@ -21,6 +21,12 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     curla: cc.Label = null;
 
+    onLoad() {
+        GlobalEvent.on(EventCfg.SMINITFUND, () => {
+            this.curla.string = GameData.properties[3];
+        }, this);
+    }
+
     protected onEnable() {
         //  GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
         this.toggle1.isChecked = GameData.SMSet.isFC;
@@ -63,6 +69,11 @@ export default class NewClass extends cc.Component {
             GameCfg.GameType = null;
             this.node.active = false;
         }
+
+        else if (name == 'smxl_btn_czbig') {
+            GlobalEvent.emit(EventCfg.OPENSMRESETMONEYLAYER);
+        }
+
 
     }
 
@@ -146,4 +157,7 @@ export default class NewClass extends cc.Component {
 
     }
 
+    onDestroy() {
+        GlobalEvent.off(EventCfg.SMINITFUND);
+    }
 }

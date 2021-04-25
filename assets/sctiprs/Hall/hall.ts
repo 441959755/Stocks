@@ -66,8 +66,14 @@ export default class NewClass extends cc.Component {
 
     playerInfoLayer: cc.Node = null;
 
-
     tipsTextNode: cc.Node = null
+
+    @property(cc.Prefab)
+    SMResetPre: cc.Prefab = null;
+
+    SMResetNode: cc.Node = null;
+
+
 
 
     onLoad() {
@@ -184,6 +190,15 @@ export default class NewClass extends cc.Component {
                 this.node.addChild(this.playerInfoLayer);
             }
             this.playerInfoLayer.active = true;
+        }, this);
+
+        //打开双盲重置金币页面
+        GlobalEvent.on(EventCfg.OPENSMRESETMONEYLAYER, () => {
+            if (!this.SMResetNode) {
+                this.SMResetNode = cc.instantiate(this.SMResetPre);
+                this.node.addChild(this.SMResetNode);
+            }
+            this.SMResetNode.active = true;
         }, this);
     }
 

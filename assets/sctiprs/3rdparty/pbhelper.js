@@ -210,7 +210,8 @@ PBHelper.prototype = {
         } else if (id == pb.MessageId.Rep_Game_Start
             || id == pb.MessageId.Rep_Game_Over
             || id == pb.MessageId.Rep_Game_EditNick
-            || id == pb.MessageId.Rep_Game_UploadIcon) {
+            || id == pb.MessageId.Rep_Game_UploadIcon
+            || id == pb.MessageId.Rep_Game_SmxlReset) {
             data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
         } else if (id == pb.MessageId.Rep_Game_QueryGameResult) {

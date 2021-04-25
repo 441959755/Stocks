@@ -27,17 +27,17 @@
     "_active": true,
     "_components": [
       {
+        "__id__": 305
+      },
+      {
         "__id__": 306
       },
       {
         "__id__": 307
-      },
-      {
-        "__id__": 308
       }
     ],
     "_prefab": {
-      "__id__": 309
+      "__id__": 308
     },
     "_opacity": 255,
     "_color": {
@@ -244,11 +244,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 304
+        "__id__": 303
       }
     ],
     "_prefab": {
-      "__id__": 305
+      "__id__": 304
     },
     "_opacity": 255,
     "_color": {
@@ -1322,13 +1322,10 @@
     "_components": [
       {
         "__id__": 301
-      },
-      {
-        "__id__": 302
       }
     ],
     "_prefab": {
-      "__id__": 303
+      "__id__": 302
     },
     "_opacity": 255,
     "_color": {
@@ -11397,38 +11394,6 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.Layout",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 35
-    },
-    "_enabled": true,
-    "_layoutSize": {
-      "__type__": "cc.Size",
-      "width": 1334,
-      "height": 650
-    },
-    "_resize": 2,
-    "_N$layoutType": 1,
-    "_N$cellSize": {
-      "__type__": "cc.Size",
-      "width": 40,
-      "height": 40
-    },
-    "_N$startAxis": 0,
-    "_N$paddingLeft": 10,
-    "_N$paddingRight": 10,
-    "_N$paddingTop": 0,
-    "_N$paddingBottom": 0,
-    "_N$spacingX": 10,
-    "_N$spacingY": 0,
-    "_N$verticalDirection": 1,
-    "_N$horizontalDirection": 0,
-    "_N$affectedByScale": false,
     "_id": ""
   },
   {

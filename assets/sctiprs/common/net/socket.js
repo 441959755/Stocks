@@ -1,5 +1,7 @@
 //import GameCfg from '../../game/GameCfg';
 import { pb } from '../../../protos/proto';
+import GameData from '../../GameData';
+import GameCfgText from '../../GameText';
 let MessageHead = pb.MessageHead;
 
 Socket.prototype = {
@@ -12,8 +14,8 @@ Socket.prototype = {
 
             console.log(JSON.stringify(info));
             if (info && info.data) {
-                gameData.userID = info.data.uid;
-                gameData.userName = info.data.nickname;
+                GameData.userID = info.data.uid;
+                GameData.userName = info.data.nickname;
                 // if (!cc.ext.gameData.headimgurl) {
                 //     cc.ext.gameData.headimgurl = info.data.icon;
                 // }
@@ -21,8 +23,8 @@ Socket.prototype = {
                 // cc.ext.gameData.exp = info.data.properties[1];
                 // (cc.ext.gameData.level = info.da)ta.properties[2];
                 // cc.ext.gameData.ShuangMang_Gold = info.data.properties[3];
-                gameData.properties = info.data.properties;
-                cc.ext.gameData.maxExp = levelInfoCfg[gameData.properties[2]].max_exp;
+                GameData.properties = info.data.properties;
+                GameData.maxExp = GameCfgText.levelInfoCfg[GameData.properties[2]].max_exp;
 
                 if (cc.director.getScene().name == 'Login') {
                     cc.director.loadScene('hall');

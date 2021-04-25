@@ -4,6 +4,7 @@ import Game = cc.Game;
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameData from "../GameData";
+import GameCfgText from '../GameText';
 
 const { ccclass, property } = cc._decorator;
 
@@ -62,7 +63,7 @@ export default class NewClass extends cc.Component {
         this.headImg.spriteFrame = GameData.headImg;
         this.levelLabel.string = 'LV:  ' + GameData.properties[2];
 
-        let max_exp = levelInfoCfg[GameData.properties[2]].max_exp;
+        let max_exp = GameCfgText.levelInfoCfg[GameData.properties[2]].max_exp;
 
         this.expLabel.string = GameData.properties[1] + '/' + max_exp;
 

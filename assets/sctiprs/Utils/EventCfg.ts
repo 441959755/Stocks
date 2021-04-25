@@ -22,6 +22,9 @@ export default {
 
     SHOWOTHERNODE: 'SHOWOTHERNODE',
 
+    SMINITFUND: 'SMINITFUND',    //双盲初始游戏金币
+
+    OPENSMRESETMONEYLAYER: 'OPENSMRESETMONEYLAYER',  //打开双盲重置金币页面
 
     //game
     ADDFILLCOLOR: "ADDFILLCOLOR",

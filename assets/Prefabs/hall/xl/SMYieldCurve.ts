@@ -68,6 +68,9 @@ export default class NewClass extends cc.Component {
     @property([cc.Toggle])
     typeToggle: cc.Toggle[] = [];
 
+    @property([cc.Label])
+    dayFundLa: cc.Label[] = [];
+
 
     onLoad() {
 
@@ -259,8 +262,9 @@ export default class NewClass extends cc.Component {
         if (maxMoney <= 150000) {
             maxMoney = 150000
         } else {
-            maxMoney = Math.ceil((maxMoney - 50000) / 5) * 5 + 50000;
+            maxMoney = Math.ceil((maxMoney - 50000) / 20000) * 20000 + 50000;
         }
+
 
         maxCount = Math.ceil(maxCount / 5) * 5;
 
@@ -332,7 +336,6 @@ export default class NewClass extends cc.Component {
         let curDay = [];
         for (let i = 0; i < datas.length; i++) {
             let data1 = new Date(datas[i].ts * 1000);
-
             let day1 = data1.getDate();
             if (day1 == day) {
                 curDay.push(datas[i]);
@@ -345,22 +348,32 @@ export default class NewClass extends cc.Component {
 
         if (!curDay || curDay.length <= 0) { return }
 
+        let maxValue = 0;
+        curDay.forEach(el => {
+            maxValue = Math.max((el.userCapital + el.userProfit), maxValue);
+        })
+
+        maxValue = Math.ceil((maxValue - 50000) / 20000) * 20000;
+        this.dayFundLa.forEach((el, index) => {
+            el.string = 50000 + maxValue / 5 * index + '';
+        })
+
+
         let w = this.draw.node.width / 25;
         //   let h = this.draw.node.height / 5;
         let dots = [];
 
         let dot = cc.instantiate(this.dot2);
         this.draw1.node.addChild(dot);
-        let y = (curDay[0].userCapital - 50000) * (this.QXNodes[1].height / 100000);
+        let y = (curDay[0].userCapital - 50000) * (this.QXNodes[1].height / maxValue);
         if (y < 0) { y = 0 }
         dot.setPosition(0, y);
         dots.push(dot);
 
         curDay.forEach((el, index) => {
-
             let node = cc.instantiate(this.dot2);
             this.draw1.node.addChild(node);
-            let y1 = (el.userCapital + el.userProfit - 50000) * (this.QXNodes[1].height / 100000);
+            let y1 = (el.userCapital + el.userProfit - 50000) * (this.QXNodes[1].height / maxValue);
             if (y1 < 0) {
                 y1 = 0;
             }

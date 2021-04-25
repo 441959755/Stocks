@@ -61,7 +61,7 @@ export default class NewClass extends cc.Component {
         this.draw.clear();
         let viewData = this.myspicData;
         if (!viewData || viewData.length <= 0) {
-            console.log('指数的数据为空');
+            //  console.log('指数的数据为空');
             return;
         }
 

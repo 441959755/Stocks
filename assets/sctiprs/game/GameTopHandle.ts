@@ -93,54 +93,51 @@ export default class NewClass extends cc.Component {
 
 
         //训练指标
-        let nodes = this.rightNode.children;
+        //  let nodes = this.rightNode.children;
+        //z中止训练
+        let colseBtn = this.rightNode.getChildByName('closeBtn');
 
+        //切换指数
+        let btnMyspic = this.rightNode.getChildByName('btnMyspic');
+
+        //数据统计
+        let statBtn = this.rightNode.getChildByName('statBtn');
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             this.GameName.string = '双盲训练';
 
-            nodes.forEach((el, index) => {
-                if (index == 1) {
-                    el.active = true;
-                } else {
-                    el.active = false;
-                }
-            })
+            colseBtn.active = true;
+            btnMyspic.active = false;
+            statBtn.active = false;
 
             let la = this.node.getChildByName('rate');
             la.x = 0;
             la.children[4].active = false;
-            la.children[5].active = false;
+            // la.children[5].active = false;
 
         }
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.GameName.string = '指标训练';
 
-            nodes.forEach((el, index) => {
-                if (index == 1) {
-                    el.active = true;
-                } else {
-                    el.active = false;
-                }
-            })
+            colseBtn.active = true;
+            btnMyspic.active = false;
+            statBtn.active = false;
+
         }
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
             this.GameName.string = '定向训练';
 
-            nodes.forEach((el, index) => {
-                if (index == 1 || index == 3) {
-                    el.active = true;
-                } else {
-                    el.active = false;
-                }
-            })
-
+            colseBtn.active = true;
+            btnMyspic.active = true;
+            statBtn.active = false;
         }
 
         if (GameCfg.GAMEFUPAN) {
             this.rightNode && (this.rightNode.active = false);
             this.ALlRateLabel.string = (parseInt(GameCfg.history.allRate * 10000 + '') / 100) + '%';
         }
+
+
     }
 
     protected onDestroy() {

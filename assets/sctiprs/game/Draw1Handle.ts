@@ -111,8 +111,17 @@ export default class NewClass extends cc.Component {
         //  this.Mask.active = false;
         GlobalEvent.on('on_off', (flagData) => {
             this.drawMACD.node.active = flagData.macd;
+            this.MACDLabels.forEach(el => {
+                el.node.active = flagData.macd;
+            })
             this.drawKDJ.node.active = flagData.kdj;
+            this.KDJLabels.forEach(el => {
+                el.node.active = flagData.kdj;
+            })
             this.drawRSI.node.active = flagData.rsi;
+            this.RSILabels.forEach(el => {
+                el.node.active = flagData.rsi;
+            })
             this.drawPcm.node.active = flagData.cpm;
             this.drawVol.node.active = flagData.cpm;
             if (flagData.macd || flagData.kdj || flagData.rsi) {
@@ -120,11 +129,6 @@ export default class NewClass extends cc.Component {
                     this.Mask.active = true;
                 }
 
-                if (GameCfg.GameSet.isBW) {
-                    this.Mask.color = cc.Color.BLACK;
-                } else {
-                    this.Mask.color = cc.Color.WHITE;
-                }
                 this.drawVol.node.zIndex = 1;
                 this.drawPcm.node.zIndex = 2;
                 this.Mask.zIndex = 3;
@@ -411,6 +415,12 @@ export default class NewClass extends cc.Component {
         this.RSILabels.forEach((el, index) => {
             el.node.color = GameCfg.RSI_COLOR[index];
         })
+
+        if (GameCfg.GameSet.isBW) {
+            this.Mask.color = cc.Color.BLACK;
+        } else {
+            this.Mask.color = cc.Color.WHITE;
+        }
 
 
     }
