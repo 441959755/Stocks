@@ -495,6 +495,8 @@ export default class NewClass extends cc.Component {
                 start: start,
                 end: null,
             }
+            GameCfg.history.deal[GameCfg.history.deal.length] = [GameCfg.huizhidatas - 1, null, null]
+
             GameCfg.history.fill.push(this.rateItem);
             GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.history.fill);
         }
@@ -523,9 +525,12 @@ export default class NewClass extends cc.Component {
             this.isFlag = false;
 
             if (this.keMcCount == 0) {
-                this.rateItem.end = GameCfg.huizhidatas - 1;
+                this.rateItem.end = GameCfg.huizhidatas - 2;
+
+                GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = [GameCfg.huizhidatas - 2];
+                GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = [rate];
             } else {
-                this.rateItem.end = GameCfg.huizhidatas - 1;
+                this.rateItem.end = GameCfg.huizhidatas - 2;
                 let start = GameCfg.huizhidatas;
                 this.rateItem = {
                     rate: rate,
@@ -533,6 +538,12 @@ export default class NewClass extends cc.Component {
                     end: null,
                 }
                 GameCfg.history.fill.push(this.rateItem);
+
+                GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = [GameCfg.huizhidatas - 2];
+                GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = [rate];
+
+                GameCfg.history.deal[GameCfg.history.deal.length][0] = GameCfg.history.deal[GameCfg.history.deal.length - 1][0];
+                // GameCfg.history.deal[GameCfg.history.deal.length][1] = [rate];
             }
             this.rateItem.rate = rate;
 

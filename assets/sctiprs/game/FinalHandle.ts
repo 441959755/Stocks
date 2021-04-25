@@ -1,6 +1,6 @@
 import GameCfg from "./GameCfg";
 import ActionUtils from "../Utils/ActionUtils";
-import Game = cc.Game;
+
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameData from "../GameData";

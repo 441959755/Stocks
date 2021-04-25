@@ -55,4 +55,6 @@ export default {
 
     CLICKMOVE: "CLICKMOVE",
 
+    OPENSTATLAYER: 'OPENSTATLAYER',
+
 }

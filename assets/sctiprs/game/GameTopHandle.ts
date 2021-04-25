@@ -184,5 +184,9 @@ export default class NewClass extends cc.Component {
             }
         }
 
+        else if (name == 'statBtn') {
+            GlobalEvent.emit(EventCfg.OPENSTATLAYER);
+        }
+
     }
 }

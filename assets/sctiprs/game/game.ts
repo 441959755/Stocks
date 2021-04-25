@@ -15,6 +15,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     helpLayer: cc.Node = null;   //帮助界面
 
+    @property(cc.Node)
+    statLayer: cc.Node = null;
+
     onLoad() {
         //游戏结算
         GlobalEvent.on(EventCfg.GAMEOVEER, (flag) => {
@@ -29,6 +32,10 @@ export default class NewClass extends cc.Component {
             this.helpLayer.active = true;
         }, this);
 
+        GlobalEvent.on(EventCfg.OPENSTATLAYER, () => {
+            this.statLayer.active = true;
+        }, this);
+
         this.initData();
 
         this.setColor();
@@ -37,6 +44,7 @@ export default class NewClass extends cc.Component {
     protected onDestroy() {
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.HELPSHOW);
+        GlobalEvent.off(EventCfg.OPENSTATLAYER);
     }
 
     setColor() {
