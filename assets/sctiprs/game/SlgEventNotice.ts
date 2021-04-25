@@ -12,8 +12,8 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     content: cc.Node = null;
 
-    @property(cc.Node)
-    itemNotice: cc.Node = null;
+    @property(cc.Prefab)
+    itemNotice: cc.Prefab = null;
 
     @property(cc.Label)
     tipsLabel: cc.Label = null;

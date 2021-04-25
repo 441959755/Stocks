@@ -289,8 +289,11 @@ export default class NewClass extends cc.Component {
             if (this._type == 1) {
 
                 // this.keMcCount += parseFloat(this.ziChan * (3 / 4) / this.gpData[GameCfg.huizhidatas - 1].open + '');
-                this.keMcCount += parseInt((3 / 4 * this.keMrCount) / 100 + '') * 100;
-                this.keMrCount -= this.keMcCount;
+                let count = parseInt((3 / 4 * this.keMrCount) / 100 + '') * 100;
+
+                this.keMcCount += count;
+                this.keMrCount -= count;
+
                 this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
                 //  this.keMrCount -= this.keMrCount * (3 / 4);
 
@@ -321,8 +324,9 @@ export default class NewClass extends cc.Component {
         } else if (name == 'fcBtn2') {
             if (this._type == 1) {
                 //  this.keMcCount += parseFloat(this.ziChan * (2 / 3) / this.gpData[GameCfg.huizhidatas - 1].open + '');
-                this.keMcCount += parseInt(2 / 3 * this.keMrCount / 100 + '') * 100;
-                this.keMrCount -= this.keMcCount;
+                let count = parseInt(2 / 3 * this.keMrCount / 100 + '') * 100;
+                this.keMcCount += count;
+                this.keMrCount -= count;
                 this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
 
                 if (this.keMrCount < 100) {
@@ -352,8 +356,9 @@ export default class NewClass extends cc.Component {
             this.selectBox.active = false;
         } else if (name == 'fcBtn3') {
             if (this._type == 1) {
-                this.keMcCount += parseInt(1 / 2 * this.keMrCount / 100 + '') * 100;
-                this.keMrCount -= this.keMcCount;
+                let count = parseInt(1 / 2 * this.keMrCount / 100 + '') * 100;
+                this.keMcCount += count;
+                this.keMrCount -= count;
                 this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
 
                 if (this.keMrCount < 100) {
@@ -383,8 +388,9 @@ export default class NewClass extends cc.Component {
             this.selectBox.active = false;
         } else if (name == 'fcBtn4') {
             if (this._type == 1) {
-                this.keMcCount += parseInt(1 / 3 * this.keMrCount / 100 + '') * 100;
-                this.keMrCount -= this.keMcCount;
+                let count = parseInt(1 / 3 * this.keMrCount / 100 + '') * 100;
+                this.keMcCount += count
+                this.keMrCount -= count;
                 this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
 
                 if (this.keMrCount < 100) {
@@ -414,8 +420,9 @@ export default class NewClass extends cc.Component {
             this.selectBox.active = false;
         } else if (name == 'fcBtn5') {
             if (this._type == 1) {
-                this.keMcCount += parseInt(1 / 4 * this.keMrCount / 100 + '') * 100;
-                this.keMrCount -= this.keMcCount;
+                let count = parseInt(1 / 4 * this.keMrCount / 100 + '') * 100;
+                this.keMcCount += count;
+                this.keMrCount -= count;
                 this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
 
                 if (this.keMrCount < 100) {
