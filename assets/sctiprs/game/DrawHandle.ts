@@ -533,28 +533,28 @@ export default class NewClass extends cc.Component {
 
             if (index + 1 >= GameCfg.MAs[0]) {
                 GameCfg.MaList[index] = [];
-                if (GameCfg.MAs.includes(index + 1)) {
-                    let MAPoint = 0;
-                    for (let i = 0; i <= index; i++) {
-                        MAPoint += parseFloat(data[i].close);
-                    }
-                    //位置
-                    let MAPointY = (MAPoint / (index + 1));
-                    GameCfg.MaList[index].push(MAPointY)
-                }
+                // if (GameCfg.MAs.includes(index + 1)) {
+                //     let MAPoint = 0;
+                //     for (let i = 0; i <= index; i++) {
+                //         MAPoint += parseFloat(data[i].close);
+                //     }
+                //     //位置
+                //     let MAPointY = (MAPoint / (index + 1));
+                //     GameCfg.MaList[index].push(MAPointY)
+                // }
 
                 for (let i = 0; i < GameCfg.MAs.length; i++) {
-                    if (index >= GameCfg.MAs[i]) {
-                        let MaStart = index + 1 - GameCfg.MAs[i];
-                        let sumUp = 0;
-                        //天数的总和
-                        for (let t = MaStart; t <= index; t++) {
-                            sumUp += parseFloat(data[t].close);
-                        }
-                        //平均的位置
-                        let MAY = (sumUp / GameCfg.MAs[i]);
-                        GameCfg.MaList[index].push(MAY);
+                    //   if (index + 1 >= GameCfg.MAs[i]) {
+                    let MaStart = index + 1 - GameCfg.MAs[i];
+                    let sumUp = 0;
+                    //天数的总和
+                    for (let t = MaStart; t <= index; t++) {
+                        sumUp += parseFloat(data[t].close);
                     }
+                    //平均的位置
+                    let MAY = (sumUp / GameCfg.MAs[i]);
+                    GameCfg.MaList[index].push(MAY);
+                    //  }
                 }
             } else {
                 GameCfg.MaList.push(null);
@@ -677,18 +677,21 @@ export default class NewClass extends cc.Component {
         let startX = some == 0 ? 10 : 10 + (some * cc.ext.hz_width);
         let endX = 10 + ((some + 1) * cc.ext.hz_width);
         //根据区间价格决定坐标
-        let openY = (el.open - this.bottomValue) / this.disValue * drawBox + initY;
-        let closeY = (el.close - this.bottomValue) / this.disValue * drawBox + initY;
+        let openValue = (el.open - this.bottomValue);
+        let openY = openValue / this.disValue * drawBox + initY;
+        let closeValue = (el.close - this.bottomValue)
+        let closeY = closeValue / this.disValue * drawBox + initY;
 
-
+        let maxY, minY;
         //宝塔线
         if (GameCfg.GameType == pb.GameType.DingXiang && GameData.DXSet.line == '宝塔线') {
 
             if (index == 0) {
                 if (!this.btxPreCloseY[index]) {
                     this.btxChg[index] = el.open >= el.close ? false : true;
-                    this.btxPreCloseY[index] = openY > closeY ? openY : closeY;
-                    this.btxPreOpenY[index] = openY < closeY ? openY : closeY;
+
+                    this.btxPreCloseY[index] = openValue > closeValue ? openValue : closeValue;
+                    this.btxPreOpenY[index] = openValue < closeValue ? openValue : closeValue;
                 }
                 this.drawRect(this.drawBg, startX, closeY, endX - startX, openY - closeY, el.open > el.close);
 
@@ -698,34 +701,40 @@ export default class NewClass extends cc.Component {
                     //下跌
                     if (el.open > el.close) {
 
-                        if (closeY >= this.btxPreOpenY[index - 1]) {
-                            this.drawRect(this.drawBg, startX, closeY, endX - startX, this.btxPreCloseY[index - 1] - closeY, false);
+                        if (closeValue >= this.btxPreOpenY[index - 1]) {
+
+                            maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
+                            this.drawRect(this.drawBg, startX, closeY, endX - startX, maxY - closeY, false);
 
                             // this.btxPreCloseY = closeY;
                             if (!this.btxPreOpenY[index]) {
-                                this.btxPreOpenY[index] = closeY;
+                                this.btxPreOpenY[index] = closeValue;
                                 this.btxPreCloseY[index] = this.btxPreCloseY[index - 1]
                                 this.btxChg[index] = false;
                             }
 
 
                         } else if (closeY < this.btxPreOpenY[index - 1]) {
+                            minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
+                            maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
 
-                            this.drawRect(this.drawBg, startX, this.btxPreOpenY[index - 1], endX - startX, this.btxPreCloseY[index - 1] - this.btxPreOpenY[index - 1], false);
-                            this.drawRect(this.drawBg, startX, closeY, endX - startX, this.btxPreOpenY[index - 1] - closeY, true);
+                            this.drawRect(this.drawBg, startX, minY, endX - startX, maxY - minY, false);
+                            this.drawRect(this.drawBg, startX, closeY, endX - startX, minY - closeY, true);
 
                             if (!this.btxPreOpenY[index]) {
-                                this.btxPreOpenY[index] = closeY;
+                                this.btxPreOpenY[index] = closeValue;
                                 this.btxPreCloseY[index] = this.btxPreCloseY[index - 1]
                                 this.btxChg[index] = false;
                             }
                         }
                     } else {
-                        this.drawRect(this.drawBg, startX, this.btxPreCloseY[index - 1], endX - startX, closeY - this.btxPreCloseY[index - 1], false);
+                        minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
+                        maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
+                        this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, false);
 
                         if (!this.btxPreOpenY[index]) {
                             this.btxPreOpenY[index] = this.btxPreCloseY[index - 1];
-                            this.btxPreCloseY[index] = closeY;
+                            this.btxPreCloseY[index] = closeValue;
                             this.btxChg[index] = true;
                         }
                     }
@@ -734,22 +743,26 @@ export default class NewClass extends cc.Component {
                     //上涨
                     if (el.open < el.close) {
                         if (closeY <= this.btxPreCloseY[index - 1]) {
-                            this.drawRect(this.drawBg, startX, this.btxPreOpenY[index - 1], endX - startX, closeY - this.btxPreOpenY[index - 1], true);
+                            minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
+                            maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
+                            this.drawRect(this.drawBg, startX, minY, endX - startX, closeY - minY, true);
 
                             if (!this.btxPreOpenY[index]) {
                                 this.btxPreOpenY[index] = this.btxPreOpenY[index - 1];
-                                this.btxPreCloseY[index] = closeY;
+                                this.btxPreCloseY[index] = closeValue;
                                 this.btxChg[index] = true;
                             }
 
                         } else if (closeY > this.btxPreCloseY[index - 1]) {
-                            this.drawRect(this.drawBg, startX, this.btxPreCloseY[index - 1], endX - startX, closeY - this.btxPreCloseY[index - 1], false);
-                            this.drawRect(this.drawBg, startX, this.btxPreOpenY[index - 1], endX - startX, this.btxPreCloseY[index - 1] - this.btxPreOpenY[index - 1], true);
+                            minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
+                            maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
+                            this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, false);
+                            this.drawRect(this.drawBg, startX, minY, endX - startX, maxY - minY, true);
                             //  this.btxPreCloseY = closeY;
 
                             if (!this.btxPreOpenY[index]) {
                                 this.btxPreOpenY[index] = this.btxPreOpenY[index - 1];
-                                this.btxPreCloseY[index] = closeY;
+                                this.btxPreCloseY[index] = closeValue;
                                 this.btxChg[index] = true;
                             }
                         }
@@ -757,12 +770,14 @@ export default class NewClass extends cc.Component {
                     }
                     //下跌
                     else {
-                        this.drawRect(this.drawBg, startX, this.btxPreOpenY[index - 1], endX - startX, this.btxPreOpenY[index - 1] - closeY, true);
+                        minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
+                        maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
+                        this.drawRect(this.drawBg, startX, minY, endX - startX, minY - closeY, true);
                         // this.btxPreOpenY = closeY;
 
 
                         if (!this.btxPreOpenY[index]) {
-                            this.btxPreOpenY[index] = closeY;
+                            this.btxPreOpenY[index] = closeValue;
                             this.btxPreCloseY[index] = this.btxPreCloseY[index - 1];
                             this.btxChg[index] = false;
                         }
@@ -772,8 +787,8 @@ export default class NewClass extends cc.Component {
                 // this.btxChg = el.open > el.close ? false : true;
             }
             let lowX = startX + (endX - startX) / 2;
-            posInfo.lowPos = cc.v2(lowX, this.btxPreOpenY[index] - 20);
-            posInfo.highPos = cc.v2(lowX, this.btxPreCloseY[index] + 20);
+            posInfo.lowPos = cc.v2(lowX, minY - 20);
+            posInfo.highPos = cc.v2(lowX, maxY + 20);
             //  this.btxPreCloseY = closeY;
             // this.btxPreOpenY = openY;
             // console.log(JSON.stringify(this.btxChg));
