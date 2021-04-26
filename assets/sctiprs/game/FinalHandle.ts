@@ -6,6 +6,8 @@ import EventCfg from "../Utils/EventCfg";
 import GameData from "../GameData";
 import GameCfgText from '../GameText';
 
+import { pb } from '../../protos/proto';
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -73,14 +75,49 @@ export default class NewClass extends cc.Component {
         this.maLabel.string = GameCfg.data[0].code;
         //时间
         this.timeLabel.string = gpData[0].day + ' -- ' + gpData[gpData.length - 1].day;
-        this.riseLabel.string = ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2) + '%';
 
-        this.AllRise.string = (GameCfg.allRate * 100).toFixed(2) + '%';
+        //同期涨幅
+        let tq = ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2);
+
+
+        this.riseLabel.string = tq + '%';
+        if (parseFloat(tq) > 0) {
+            this.riseLabel.node.color = cc.Color.RED;
+        } else if (parseFloat(tq) < 0) {
+            this.riseLabel.node.color = cc.Color.GREEN;
+        } else {
+            this.riseLabel.node.color = cc.Color.WHITE;
+        }
+
+        //总盈利率
+        let all = (GameCfg.allRate * 100).toFixed(2);
+        this.AllRise.string = all + '%';
+
+        if (parseFloat(all) > 0) {
+            this.AllRise.node.color = cc.Color.RED;
+        } else if (parseFloat(all) < 0) {
+            this.AllRise.node.color = cc.Color.GREEN;
+        } else {
+            this.AllRise.node.color = cc.Color.WHITE;
+        }
+
         this.yingCont.string = GameCfg.profitCount + '次';
+        if (GameCfg.profitCount > 0) {
+            this.yingCont.node.color = cc.Color.RED;
+        } else {
+            this.yingCont.node.color = cc.Color.WHITE;
+        }
+
         this.kunCount.string = GameCfg.lossCount + '次';
 
+        if (GameCfg.lossCount > 0) {
+            this.kunCount.node.color = cc.Color.GREEN;
+        } else {
+            this.kunCount.node.color = cc.Color.WHITE;
+        }
+
         this.zijin.string = GameData.properties[3];
-        this.yingZiJin.string = parseInt((GameCfg.finalfund - 100000) + '') + '';
+        this.yingZiJin.string = parseInt((GameCfg.finalfund - GameCfg.ziChan) + '') + '';
         this.AllZiJin.string = parseInt(GameCfg.finalfund + '') + '';
 
         //复盘中不保存记录
@@ -95,7 +132,7 @@ export default class NewClass extends cc.Component {
                 stock_profit_rate: ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2),
                 user_profit_rate: (GameCfg.allRate * 100).toFixed(2),
                 user_capital: GameData.properties[3],
-                user_profit: (GameCfg.finalfund - GameData.properties[3]),
+                user_profit: (GameCfg.finalfund - GameCfg.ziChan),
                 ts: new Date().getTime() / 1000,
                 rank: 0,
                 ref_id: 0,
@@ -109,19 +146,22 @@ export default class NewClass extends cc.Component {
 
             this.saveHoistoryInfo(parseInt(datas.ts + ''));
 
-            socket.send(4005, PB.onCmdGameOverConvertToBuff(datas), (info) => {
+            socket.send(pb.MessageId.Req_Game_Over, PB.onCmdGameOverConvertToBuff(datas), (info) => {
                 console.log('GameOverInfo' + JSON.stringify(info));
             })
         }
-
     }
 
     saveHoistoryInfo(ts) {
+        //  console.log('GameCfg.history' + JSON.stringify(GameCfg.history));
         GameCfg.TIMETEMP.push(ts);
         GameCfg.history.huizhidatas = GameCfg.huizhidatas;
         GameCfg.history.allRate = GameCfg.allRate;
         cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
         cc.sys.localStorage.setItem(ts, JSON.stringify(GameCfg.history));
+        cc.sys.localStorage.setItem(ts + 'mark', JSON.stringify(GameCfg.mark));
+        cc.sys.localStorage.setItem(ts + 'notice', JSON.stringify(GameCfg.notice));
+        cc.sys.localStorage.setItem(ts + 'fill', JSON.stringify(GameCfg.fill));
         cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
     }
 

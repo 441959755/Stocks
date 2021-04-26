@@ -49,21 +49,21 @@ export default class NewClass extends cc.Component {
 
             let datas = GameCfg.data[0].data;
             let info = [];
-            if (datas[inde - 1]) {
+            if (datas[inde]) {
                 info.push('****/**/**');
-                info.push(parseFloat(datas[inde - 1].open).toFixed(2));
-                info.push(parseFloat(datas[inde - 1].high).toFixed(2));
-                info.push(parseFloat(datas[inde - 1].low).toFixed(2));
-                info.push(parseFloat(datas[inde - 1].close).toFixed(2));
-                info.push(parseInt(datas[inde - 1].value));
-                info.push(parseInt(parseInt(datas[inde - 1].price) / 10000 + '') + 'w');
-                info.push(parseFloat(datas[inde - 1].Rate).toFixed(2) + '%');
-                let zd = datas[inde - 1].close - datas[inde - 2].close;
+                info.push(parseFloat(datas[inde].open).toFixed(2));
+                info.push(parseFloat(datas[inde].high).toFixed(2));
+                info.push(parseFloat(datas[inde].low).toFixed(2));
+                info.push(parseFloat(datas[inde].close).toFixed(2));
+                info.push(parseInt(datas[inde].value));
+                info.push(parseInt(parseInt(datas[inde].price) / 10000 + '') + 'w');
+                info.push(parseFloat(datas[inde].Rate).toFixed(2) + '%');
+                let zd = datas[inde].close - datas[inde - 1].close;
                 info.push(zd.toFixed(2));
-                let zf = zd / datas[inde - 2].close;
+                let zf = zd / datas[inde - 1].close;
                 info.push(zf.toFixed(2));
 
-                this.hsLa.string = parseFloat(datas[inde - 1].Rate).toFixed(2) + '%';
+                this.hsLa.string = parseFloat(datas[inde].Rate).toFixed(2) + '%';
                 if (info[9] < 0) {
                     this.zfLa.node.color = new cc.Color().fromHEX('#76B87E');
                 } else {

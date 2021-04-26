@@ -58,6 +58,7 @@ export default class NewClass extends cc.Component {
                     this._tipsLa.active = false;
                     let arr = tt.split('|');
                     this.boxs[1].getChildByName('label').getComponent(cc.Label).string = arr[0] + '  ' + arr[1];
+                    GameData.DXSet.search = arr[0];
                     edit.string = '';
                 }
             }
@@ -200,6 +201,12 @@ export default class NewClass extends cc.Component {
                 GameData.DXSet.search = str;
             } else if (this.setProId == 2) {
                 GameData.DXSet.year = str;
+
+                if (GameData.DXSet.year == '随机') {
+                    this.boxs[3].getChildByName('label').getComponent(cc.Label).string = '--';
+                    this.boxs[4].getChildByName('label').getComponent(cc.Label).string = '--';
+                }
+
             } else if (this.setProId == 3) {
                 GameData.DXSet.month = str;
             } else if (this.setProId == 4) {
@@ -276,7 +283,7 @@ export default class NewClass extends cc.Component {
         let items
         //   console.log(JSON.stringify(GameCfgText.stockList));
         if (GameData.DXSet.search == '随机选股') {
-            let le = parseInt(Math.random() * GameCfgText.stockList.length);
+            let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
             console.log('le' + le);
             items = GameCfgText.stockList[le].split('|');
             data.code = items[0];
@@ -287,19 +294,24 @@ export default class NewClass extends cc.Component {
         } else {
             let dex = -1;
             let arrStr = GameData.DXSet.search.split(' ');
-            arrStr[0] = arrStr[0].replace(/ /g, '');
-            arrStr[1] = arrStr[1].replace(/ /g, '');
+            arrStr[0] && (arrStr[0] = arrStr[0].replace(/ /g, ''))
+            arrStr[1] && (arrStr[1] = arrStr[1].replace(/ /g, ''))
             for (let i = 0; i < GameCfgText.stockList.length; i++) {
 
-                if (GameCfgText.stockList[i].indexOf(arrStr[0]) != -1) {
-                    dex = i;
-                    break;
+                if (arrStr[0]) {
+                    if (GameCfgText.stockList[i].indexOf(arrStr[0]) != -1) {
+                        dex = i;
+                        break;
+                    }
                 }
 
-                if (GameCfgText.stockList[i].indexOf(arrStr[1]) != -1) {
-                    dex = i;
-                    break;
+                if (arrStr[1]) {
+                    if (GameCfgText.stockList[i].indexOf(arrStr[1]) != -1) {
+                        dex = i;
+                        break;
+                    }
                 }
+
             }
             if (dex != -1) {
                 items = GameCfgText.stockList[dex].split('|');
@@ -334,6 +346,13 @@ export default class NewClass extends cc.Component {
         }
 
         if (GameData.DXSet.year != '随机') {
+            if (GameData.DXSet.month == '--') {
+                GameData.DXSet.month = '01';
+            }
+            if (GameData.DXSet.day == '--') {
+                GameData.DXSet.day = '01';
+            }
+
             let seletTime = GameData.DXSet.year + '' + GameData.DXSet.month + '' + GameData.DXSet.day;
             if (parseInt(seletTime) < parseInt(items[2])) {
 
@@ -342,7 +361,7 @@ export default class NewClass extends cc.Component {
 
                 } else {
                     console.log('时间不能早与股票创建时间');
-                    EventCfg.emit(EventCfg.TIPSTEXTSHOW, '时间不能早与股票创建时间');
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能早与股票创建时间');
                 }
                 return;
             } else if (parseInt(seletTime) > parseInt(items[3])) {
@@ -352,7 +371,7 @@ export default class NewClass extends cc.Component {
                         this.DXStartGameSet();
                     } else {
                         console.log('时间不能大与股票结束时间');
-                        EventCfg.emit(EventCfg.TIPSTEXTSHOW, '时间不能大与股票结束时间');
+                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能大与股票结束时间');
                     }
                     return;
                 }
@@ -393,9 +412,15 @@ export default class NewClass extends cc.Component {
                 data.from = ye + '' + mon + '' + da;
             }
         }
+
+        GameCfg.data[0].code = items[0];
+        if (items[0].length >= 7) {
+            GameCfg.data[0].code = items[0].slice(1);
+        }
+
         GameCfg.data[0].data = [];
         GameCfg.data[0].name = items[1];
-        GameCfg.data[0].code = items[0];
+
         GameCfg.data[0].circulate = items[4];
         GlobalEvent.emit('onCmdQuoteQuery', data);
     }

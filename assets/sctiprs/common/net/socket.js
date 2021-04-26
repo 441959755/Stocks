@@ -8,11 +8,11 @@ Socket.prototype = {
     connected(event) {
         let self = this;
         console.log('connected');
-        self.heartbeat && (clearInterval(self.heartbeat))
-        self.heartbeat = null;
-        socket.send(4001, PB.onCmdGameLoginConvertToBuff(), (info) => {
-
+        self.reconnectBeat && (clearInterval(self.reconnectBeat))
+        self.reconnectBeat = null;
+        socket.send(pb.MessageId.Req_Game_Login, PB.onCmdGameLoginConvertToBuff(), (info) => {
             console.log(JSON.stringify(info));
+
             if (info && info.data) {
                 GameData.userID = info.data.uid;
                 GameData.userName = info.data.nickname;
@@ -29,6 +29,13 @@ Socket.prototype = {
                 if (cc.director.getScene().name == 'Login') {
                     cc.director.loadScene('hall');
                 }
+
+                if (!this.heartbeat) {
+                    this.heartbeat = setInterval(() => {
+                        socket.send(pb.MessageId.Sync_C2S_GameHeart, null, null);
+                    }, 5000);
+                }
+
             }
         });
     },
@@ -113,12 +120,14 @@ Socket.prototype = {
     onclose() {
         console.log('连接断开');
         this.reconnect();
+        this.heartbeat && (clearInterval(this.heartbeat))
+        this.heartbeat = null;
     },
 
     reconnect() {
         let self = this;
-        if (!this.heartbeat) {
-            this.heartbeat = setInterval(() => {
+        if (!this.reconnectBeat) {
+            this.reconnectBeat = setInterval(() => {
                 console.log('断线连接中...');
                 self.initSocket();
             }, 5000);
@@ -138,6 +147,8 @@ Socket.prototype = {
             console.log('ws onerror');
         }
         this.ws.onclose = this.onclose.bind(this);
+
+        this.reconnectBeat = null;
 
         this.heartbeat = null;
     }

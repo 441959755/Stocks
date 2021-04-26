@@ -9,23 +9,47 @@ export namespace pb {
         MsgMaxBody_Len = 1024000
     }
 
-    /** GameType enum. */
-    enum GameType {
-        GameType_NULL = 0,
-        ShuangMang = 3,
-        DingXiang = 4,
-        ZhiBiao = 17,
-        TiaoJianDan = 11,
-        QiHuo = 6,
-        JJ_PK = 1,
-        JJ_DuoKong = 2,
-        JJ_ChuangGuan = 16,
-        JJ_QiHuo = 15,
-        MoNiChaoGu = 10,
-        ChaoGuDaSai = 9,
-        GeGuJingChai = 7,
-        DaPanJingChai = 8,
-        MaxGameType = 30
+    /** AppPlantForm enum. */
+    enum AppPlantForm {
+        AppPlantForm_NULL = 0,
+        WechatMinProgram = 1,
+        Ios = 11,
+        Android = 21
+    }
+
+    /** AdPosition enum. */
+    enum AdPosition {
+        AdPosition_NULL = 0,
+        StartUp = 1,
+        Main = 11
+    }
+
+    /** AppFrom enum. */
+    enum AppFrom {
+        Android_000 = 0,
+        Android_001 = 1,
+        Android_201 = 201,
+        Android_204 = 204,
+        Android_205 = 205,
+        Android_206 = 206,
+        Android_208 = 208,
+        Android_209 = 209,
+        Android_210 = 210,
+        Android_211 = 211,
+        Android_212 = 212,
+        Android_301 = 301,
+        Android_302 = 302,
+        Android_601 = 601,
+        Android_1000 = 1000,
+        Android_1204 = 1204,
+        Android_1205 = 1205,
+        Android_1208 = 1208,
+        Android_1212 = 1212,
+        IosAppleStore = 6666,
+        Ipad = 6667,
+        WebsiteIos = 7777,
+        WebsiteAndriod = 7778,
+        WeChatMinProgram = 8888
     }
 
     /** MessageId enum. */
@@ -36,12 +60,15 @@ export namespace pb {
         Sync_S2C_QuoteItem = 1000,
         Sync_S2C_GameProperty = 1002,
         Sync_S2C_GameCounter = 1004,
+        Sync_C2S_GameHeart = 1006,
         Req_QuoteSubscribe = 2001,
         Rep_QuoteSubscribe = 2002,
         Req_QuoteQuery = 2003,
         Rep_QuoteQuery = 2004,
         Req_QuoteEdit = 2005,
         Req_StockEdit = 2007,
+        Req_QuoteQueryFuture = 2009,
+        Rep_QuoteQueryFuture = 2010,
         Req_Game_UploadIcon = 3001,
         Rep_Game_UploadIcon = 3002,
         Req_Game_EditNick = 3003,
@@ -266,97 +293,109 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a MessageSpan. */
-    interface IMessageSpan {
+    /** Properties of an AdClicked. */
+    interface IAdClicked {
 
-        /** MessageSpan send */
-        send?: (number|Long|null);
+        /** AdClicked uid */
+        uid?: (number|null);
 
-        /** MessageSpan recv */
-        recv?: (number|Long|null);
+        /** AdClicked pos */
+        pos?: (number|null);
+
+        /** AdClicked url */
+        url?: (string|null);
+
+        /** AdClicked from */
+        from?: (pb.AppFrom|null);
     }
 
-    /** Represents a MessageSpan. */
-    class MessageSpan implements IMessageSpan {
+    /** Represents an AdClicked. */
+    class AdClicked implements IAdClicked {
 
         /**
-         * Constructs a new MessageSpan.
+         * Constructs a new AdClicked.
          * @param [properties] Properties to set
          */
-        constructor(properties?: pb.IMessageSpan);
+        constructor(properties?: pb.IAdClicked);
 
-        /** MessageSpan send. */
-        public send: (number|Long);
+        /** AdClicked uid. */
+        public uid: number;
 
-        /** MessageSpan recv. */
-        public recv: (number|Long);
+        /** AdClicked pos. */
+        public pos: number;
+
+        /** AdClicked url. */
+        public url: string;
+
+        /** AdClicked from. */
+        public from: pb.AppFrom;
 
         /**
-         * Creates a new MessageSpan instance using the specified properties.
+         * Creates a new AdClicked instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns MessageSpan instance
+         * @returns AdClicked instance
          */
-        public static create(properties?: pb.IMessageSpan): pb.MessageSpan;
+        public static create(properties?: pb.IAdClicked): pb.AdClicked;
 
         /**
-         * Encodes the specified MessageSpan message. Does not implicitly {@link pb.MessageSpan.verify|verify} messages.
-         * @param message MessageSpan message or plain object to encode
+         * Encodes the specified AdClicked message. Does not implicitly {@link pb.AdClicked.verify|verify} messages.
+         * @param message AdClicked message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: pb.IMessageSpan, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: pb.IAdClicked, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified MessageSpan message, length delimited. Does not implicitly {@link pb.MessageSpan.verify|verify} messages.
-         * @param message MessageSpan message or plain object to encode
+         * Encodes the specified AdClicked message, length delimited. Does not implicitly {@link pb.AdClicked.verify|verify} messages.
+         * @param message AdClicked message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: pb.IMessageSpan, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: pb.IAdClicked, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a MessageSpan message from the specified reader or buffer.
+         * Decodes an AdClicked message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns MessageSpan
+         * @returns AdClicked
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.MessageSpan;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.AdClicked;
 
         /**
-         * Decodes a MessageSpan message from the specified reader or buffer, length delimited.
+         * Decodes an AdClicked message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns MessageSpan
+         * @returns AdClicked
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.MessageSpan;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.AdClicked;
 
         /**
-         * Verifies a MessageSpan message.
+         * Verifies an AdClicked message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a MessageSpan message from a plain object. Also converts values to their respective internal types.
+         * Creates an AdClicked message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns MessageSpan
+         * @returns AdClicked
          */
-        public static fromObject(object: { [k: string]: any }): pb.MessageSpan;
+        public static fromObject(object: { [k: string]: any }): pb.AdClicked;
 
         /**
-         * Creates a plain object from a MessageSpan message. Also converts values to other types if specified.
-         * @param message MessageSpan
+         * Creates a plain object from an AdClicked message. Also converts values to other types if specified.
+         * @param message AdClicked
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: pb.MessageSpan, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: pb.AdClicked, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this MessageSpan to JSON.
+         * Converts this AdClicked to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -530,6 +569,25 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** GameType enum. */
+    enum GameType {
+        GameType_NULL = 0,
+        ShuangMang = 3,
+        DingXiang = 4,
+        ZhiBiao = 17,
+        TiaoJianDan = 11,
+        QiHuo = 6,
+        JJ_PK = 1,
+        JJ_DuoKong = 2,
+        JJ_ChuangGuan = 16,
+        JJ_QiHuo = 15,
+        MoNiChaoGu = 10,
+        ChaoGuDaSai = 9,
+        GeGuJingChai = 7,
+        DaPanJingChai = 8,
+        MaxGameType = 30
+    }
+
     /** GamePropertyId enum. */
     enum GamePropertyId {
         Gold = 0,
@@ -543,8 +601,8 @@ export namespace pb {
     /** GameOperationId enum. */
     enum GameOperationId {
         GameOperationId_NULL = 0,
-        Bid = 1,
-        Ask = 2,
+        Ask = 1,
+        Bid = 2,
         Wait = 3,
         Hold = 4,
         Ask_Force = 5,
@@ -3727,34 +3785,6 @@ export namespace pb {
         WebTest = 99
     }
 
-    /** LoginFrom enum. */
-    enum LoginFrom {
-        Android_000 = 0,
-        Android_001 = 1,
-        Android_201 = 201,
-        Android_204 = 204,
-        Android_205 = 205,
-        Android_206 = 206,
-        Android_208 = 208,
-        Android_209 = 209,
-        Android_210 = 210,
-        Android_211 = 211,
-        Android_212 = 212,
-        Android_301 = 301,
-        Android_302 = 302,
-        Android_601 = 601,
-        Android_1000 = 1000,
-        Android_1204 = 1204,
-        Android_1205 = 1205,
-        Android_1208 = 1208,
-        Android_1212 = 1212,
-        IosAppleStore = 6666,
-        Ipad = 6667,
-        WebsiteIos = 7777,
-        WebsiteAndriod = 7778,
-        WeChatMinProgram = 8888
-    }
-
     /** Properties of a CmdRegistry. */
     interface ICmdRegistry {
 
@@ -3764,14 +3794,14 @@ export namespace pb {
         /** CmdRegistry type */
         type?: (pb.LoginType|null);
 
-        /** CmdRegistry from */
-        from?: (pb.LoginFrom|null);
-
         /** CmdRegistry pwd */
         pwd?: (string|null);
 
         /** CmdRegistry sms */
         sms?: (string|null);
+
+        /** CmdRegistry from */
+        from?: (pb.AppFrom|null);
     }
 
     /** Represents a CmdRegistry. */
@@ -3789,14 +3819,14 @@ export namespace pb {
         /** CmdRegistry type. */
         public type: pb.LoginType;
 
-        /** CmdRegistry from. */
-        public from: pb.LoginFrom;
-
         /** CmdRegistry pwd. */
         public pwd: string;
 
         /** CmdRegistry sms. */
         public sms: string;
+
+        /** CmdRegistry from. */
+        public from: pb.AppFrom;
 
         /**
          * Creates a new CmdRegistry instance using the specified properties.
@@ -3878,11 +3908,11 @@ export namespace pb {
         /** CmdLogin type */
         type?: (pb.LoginType|null);
 
-        /** CmdLogin from */
-        from?: (pb.LoginFrom|null);
-
         /** CmdLogin pwd */
         pwd?: (string|null);
+
+        /** CmdLogin from */
+        from?: (pb.AppFrom|null);
     }
 
     /** Represents a CmdLogin. */
@@ -3900,11 +3930,11 @@ export namespace pb {
         /** CmdLogin type. */
         public type: pb.LoginType;
 
-        /** CmdLogin from. */
-        public from: pb.LoginFrom;
-
         /** CmdLogin pwd. */
         public pwd: string;
+
+        /** CmdLogin from. */
+        public from: pb.AppFrom;
 
         /**
          * Creates a new CmdLogin instance using the specified properties.

@@ -57,16 +57,18 @@ export default {
     info: null,
 
     history: { //游戏记录
-
-        mark: [],        //标签信息
-        notice: [],      //通知栏
-        fill: [],         //bg填充颜色
         huizhidatas: 0,
         allRate: 0,       //总利率
         deal: [],    //交易天数、利率
     },
 
     TIMETEMP: [],   //玩的记录时间戳
+
+    mark: [], //标签信息
+
+    notice: [],      //通知栏
+
+    fill: [],         //bg填充颜色
 
     GAMEFUPAN: false,  //游戏复盘
 

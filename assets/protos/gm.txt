@@ -1,0 +1,33 @@
+打开http://www.websocket-test.com/
+
+
+在地址栏输入：ws://192.168.100.198/gm
+
+登录：
+在文本框输入密码：dodo, show me the money.
+点击连接后，在5秒内必须点击“发送密码”
+
+
+
+发送GM命令：
+
+添加玩家属性：
+gm:AddGameProperties(
+	[[
+		{"uid":1000142, "properties": [{"id": 0, "value":5000}]}
+	]]
+)
+
+重新设置玩家属性：
+gm:ResetGameProperties(
+	[[
+		{"uid":1000142, "properties": [{"id": 3, "value":10000}]}
+	]]
+)
+
+属性说明：
+Gold = 0;				// 金币
+Exp = 1;				// 经验
+Level = 2;				// 等级
+ShuangMang_Gold = 3;	// 双盲本月当前金币
+Diamond = 4;			// 钻石

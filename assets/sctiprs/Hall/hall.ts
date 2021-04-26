@@ -203,9 +203,9 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-        GameCfg.history.fill = [];
-        GameCfg.history.mark = [];
-        GameCfg.history.notice = [];
+        GameCfg.fill = [];
+        GameCfg.mark = [];
+        GameCfg.notice = [];
         GameCfg.huizhidatas = 0;
         GameCfg.allRate = 0;
         GameCfg.profitCount = 0;
@@ -303,7 +303,7 @@ export default class NewClass extends cc.Component {
                 //   console.log('onCmdQuoteQuery' + JSON.stringify(info));
                 if (info.items.length <= 0) {
                     console.log('获取的行情为空');
-                    console.log(JSON.stringify(GameCfg.data));
+                    // console.log(JSON.stringify(GameCfg.data));
                     GameCfg.GAMEFUPAN = false;
                     return;
                 }

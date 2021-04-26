@@ -20,10 +20,10 @@ export default class WebSDK {
     login(call) {
 
 
-        let uuid = LLWUtils.getUUID();
+        let uuid = new Date().getTime() + '';
 
         let loginInfo = {
-            account: '021OBl000AFyvL1wE4300Yw4111OBl0N',
+            account: uuid,
             type: 99,
             from: 8888,
             pwd: ''

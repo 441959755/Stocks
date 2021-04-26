@@ -146,6 +146,7 @@ export default class NewClass extends cc.Component {
         if (this.ziChan > 0 && GameCfg.huizhidatas <= this.gpData.length) {
             if (this.gpData[GameCfg.huizhidatas - 1]) {
                 this.keMrCount = parseInt(this.ziChan / ((parseFloat(this.gpData[GameCfg.huizhidatas - 1].open)) * 100) + '') * 100;
+                console.log(this.gpData[GameCfg.huizhidatas - 1].open);
             }
 
         }
@@ -227,7 +228,8 @@ export default class NewClass extends cc.Component {
 
                     this.keMcCount += this.keMrCount;
                     this.keMrCount = 0;
-                    this.ziChan -= parseInt(this.ziChan / ((parseFloat(this.gpData[GameCfg.huizhidatas - 1].open)) * 100) + '') * 100;
+                    this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].open;
+                    //  console.log(this.gpData[GameCfg.huizhidatas - 1].open);
                     if (this.ziChan <= 0) {
                         this.ziChan = 0;
                         console.log('买入卖出数据有问题');
@@ -237,7 +239,8 @@ export default class NewClass extends cc.Component {
                 } else {
                     GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
 
-                    this.ziChan += parseFloat(this.keMcCount + '') * this.gpData[GameCfg.huizhidatas - 1].close;
+                    this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
+                    //   console.log(this.gpData[GameCfg.huizhidatas - 1].close);
 
                     this.keMcCount = 0;
                     this.gwBtn.node.active = true;
@@ -260,7 +263,7 @@ export default class NewClass extends cc.Component {
 
                 this.keMcCount += this.keMrCount;
                 this.keMrCount = 0;
-                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].open;
+                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
                 console.log(this.gpData[GameCfg.huizhidatas - 2].open);
                 this.mrBtn.interactable = false;
                 this.mrBtn.enableAutoGrayEffect = true;
@@ -274,9 +277,9 @@ export default class NewClass extends cc.Component {
                 this.mrBtn.enableAutoGrayEffect = false;
                 this.mcBtn.interactable = false;
                 this.mcBtn.enableAutoGrayEffect = true;
-                this.ziChan += parseFloat(this.keMcCount + '') * this.gpData[GameCfg.huizhidatas - 2].close;
+                this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].close;
 
-                console.log(this.gpData[GameCfg.huizhidatas - 1].close);
+                //    console.log(this.gpData[GameCfg.huizhidatas - 1].close);
 
                 this.keMcCount = 0;
                 this.setRoundNumber('mcBtn');
@@ -497,8 +500,8 @@ export default class NewClass extends cc.Component {
             }
             GameCfg.history.deal[GameCfg.history.deal.length] = [GameCfg.huizhidatas - 1, null, null]
 
-            GameCfg.history.fill.push(this.rateItem);
-            GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.history.fill);
+            GameCfg.fill.push(this.rateItem);
+            GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
         }
 
         //卖出
@@ -525,31 +528,37 @@ export default class NewClass extends cc.Component {
             this.isFlag = false;
 
             if (this.keMcCount == 0) {
-                this.rateItem.end = GameCfg.huizhidatas - 2;
+                this.rateItem.end = GameCfg.huizhidatas - 1;
 
-                GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = [GameCfg.huizhidatas - 2];
-                GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = [rate];
+                GameCfg.fill.forEach(el => {
+                    if (!el.end) {
+                        el.end = this.rateItem.end;
+                    }
+                })
+
+                GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 2;
+                GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
             } else {
-                this.rateItem.end = GameCfg.huizhidatas - 2;
+                this.rateItem.end = GameCfg.huizhidatas - 1;
                 let start = GameCfg.huizhidatas;
                 this.rateItem = {
                     rate: rate,
                     start: start,
                     end: null,
                 }
-                GameCfg.history.fill.push(this.rateItem);
+                GameCfg.fill.push(this.rateItem);
 
-                GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = [GameCfg.huizhidatas - 2];
-                GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = [rate];
-
-                GameCfg.history.deal[GameCfg.history.deal.length][0] = GameCfg.history.deal[GameCfg.history.deal.length - 1][0];
+                GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 2;
+                GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
+                GameCfg.history.deal[GameCfg.history.deal.length] = [GameCfg.history.deal[GameCfg.history.deal.length - 1][0]];
+                //   GameCfg.history.deal[GameCfg.history.deal.length][0] = GameCfg.history.deal[GameCfg.history.deal.length - 1][0];
                 // GameCfg.history.deal[GameCfg.history.deal.length][1] = [rate];
             }
             this.rateItem.rate = rate;
 
 
-            GameCfg.history.fill[GameCfg.history.fill.length - 1] = this.rateItem;
-            GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.history.fill);
+            GameCfg.fill[GameCfg.fill.length - 1] = this.rateItem;
+            GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
         }
         //观望
         else if (state == 'cyBtn') {
@@ -562,9 +571,9 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit('updateRate', [rate]);
 
             this.rateItem.rate = rate;
-            GameCfg.history.fill[GameCfg.history.fill.length - 1] = this.rateItem;
+            GameCfg.fill[GameCfg.fill.length - 1] = this.rateItem;
 
-            GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.history.fill);
+            GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
         }
     }
 

@@ -88,6 +88,7 @@ enum MessageId {
 	Sync_S2C_QuoteItem = 1000;	// 同步实时行情
 	Sync_S2C_GameProperty = 1002;// 同步玩家游戏属性
 	Sync_S2C_GameCounter = 1004;// 同步输赢计数器
+	Sync_C2S_GameHeart = 1006;	// 游戏服务器心跳
 
 	// 行情相关
 	Req_QuoteSubscribe = 2001;	// 订阅或取消订阅行情

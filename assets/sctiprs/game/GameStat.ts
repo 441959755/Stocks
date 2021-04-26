@@ -35,18 +35,20 @@ export default class NewClass extends cc.Component {
 
         let max_exp = GameCfgText.levelInfoCfg[GameData.properties[2]].max_exp;
 
-        this.userExp.string = '经验值：' + GameData.properties[1] + '/' + max_exp;
+        this.userExp.string = 'EXP:' + GameData.properties[1] + '/' + max_exp;
 
         this.userName.string = GameData.userName;
 
         let datas = GameCfg.history.deal;
+
+        console.log(JSON.stringify(datas));
 
         let count = 0, yingcount = 0, kuiCount = 0;
 
         let minIndex = -1, min = 0;
         let maxIndex = -1, max = 0;
 
-        this.dealLas[0].string = count + '';
+        this.dealLas[0].string = datas.length + '';
 
         for (let i = 0; i < datas.length; i++) {
             if (datas[i][2] >= 0) {
@@ -72,15 +74,25 @@ export default class NewClass extends cc.Component {
         this.dealLas[2].string = kuiCount + '';
 
         if (max != 0) {
-            this.profitLas[0].string = datas[maxIndex][1] - datas[maxIndex][0] + '';
-            this.profitLas[0].string = datas[maxIndex][2] + '';
+            this.profitLas[0].string = datas[maxIndex][1] - datas[maxIndex][0] + 1 + '';
+            this.profitLas[1].string = (datas[maxIndex][2]).toFixed(2) + '%';
+            if (datas[maxIndex][2] > 0) {
+                this.profitLas[1].node.color = cc.Color.RED;
+            } else {
+                this.profitLas[1].node.color = cc.Color.WHITE;
+            }
         }
 
         if (min != 0) {
-            this.lossLas[0].string = datas[minIndex][1] - datas[minIndex][0] + '';
-            this.lossLas[1].string = datas[minIndex][2];
-        }
+            this.lossLas[0].string = datas[minIndex][1] - datas[minIndex][0] + 1 + '';
+            this.lossLas[1].string = datas[minIndex][2].toFixed(2) + '%';
 
+            if (datas[minIndex][2] > 0) {
+                this.lossLas[1].node.color = cc.Color.GREEN;
+            } else {
+                this.lossLas[1].node.color = cc.Color.WHITE;
+            }
+        }
 
     }
 

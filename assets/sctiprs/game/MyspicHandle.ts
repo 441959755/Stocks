@@ -87,7 +87,7 @@ export default class NewClass extends cc.Component {
     onDrawMyspic(el, index) {
 
         let initY = 0;
-        let drawBox = 340;
+        let drawBox = this.node.height;
         let some = index - cc.ext.beg_end[0];
         let startX = some == 0 ? 10 : 10 + (some * cc.ext.hz_width);
         let endX = 10 + ((some + 1) * cc.ext.hz_width);

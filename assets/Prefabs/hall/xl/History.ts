@@ -62,34 +62,64 @@ export default class NewClass extends cc.Component {
         // "userProfitRate":10.220000267028809,
         // "userCapital":"100000","userProfit":"800","ts":"1618454133","rank":2}]}
         let sumEar = 0;
+        let sumrate = 0;
         for (let i = 0; i < datas.length; i++) {
             let node = cc.instantiate(this.historyItem);
             let nodes = node.children;
             this.content.addChild(node);
             node.setPosition(cc.v2(0, 0));
             nodes[0].getComponent(cc.Label).string = (i + 1) + '';
+            if (datas[i].quotesCode.length >= 7) {
+                datas[i].quotesCode = datas[i].quotesCode.slice(1);
+            }
+
             nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
             nodes[2].getComponent(cc.Label).string = selectName(datas[i].quotesCode);
             nodes[3].getComponent(cc.Label).string = datas[i].kFrom;			// 行情起始日期YYYYMMDD或时间HHMMSS
             nodes[4].getComponent(cc.Label).string = datas[i].kTo;
 
             nodes[5].getComponent(cc.Label).string = datas[i].stockProfitRate.toFixed(2) + '%';
+            if (datas[i].stockProfitRate > 0) {
+                nodes[5].color = cc.Color.RED;
+            } else if (datas[i].stockProfitRate < 0) {
+                nodes[5].color = cc.Color.GREEN;
+            } else {
+                nodes[5].color = cc.Color.WHITE;
+            }
             nodes[6].getComponent(cc.Label).string = datas[i].userProfitRate.toFixed(2) + '%';
+            if (datas[i].userProfitRate > 0) {
+                nodes[6].color = cc.Color.RED;
+            } else if (datas[i].userProfitRate < 0) {
+                nodes[6].color = cc.Color.GREEN;
+            } else {
+                nodes[6].color = cc.Color.WHITE;
+            }
             nodes[7].getComponent(cc.Label).string = datas[i].userProfit;
+            if (datas[i].userProfit > 0) {
+                nodes[7].color = cc.Color.RED;
+            } else if (datas[i].userProfit < 0) {
+                nodes[7].color = cc.Color.GREEN;
+            } else {
+                nodes[7].color = cc.Color.WHITE;
+            }
             if (GameCfg.GameType != pb.GameType.ShuangMang) {
                 nodes[8].getComponent(cc.Label).string = datas[i].ts;
             }
 
             sumEar += datas[i].userProfit;
+
+            sumrate = ((sumrate + 1) * (datas[i].userProfitRate + 1) - 1);
         }
 
-        this.label.string = sumEar + '';
+
 
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             this.title.string = '双盲训练';
+            this.label.string = sumEar + '';
         } else if (GameCfg.GameType == pb.GameType.DingXiang) {
             this.title.string = '定向训练';
+            this.label.string = sumrate.toFixed(2) + '%';
         }
         // }
     }
@@ -120,7 +150,23 @@ export default class NewClass extends cc.Component {
                 if (GameSet) {
                     GameCfg.GameSet = JSON.parse(GameSet);
                 }
+
+                let mark = cc.sys.localStorage.getItem(ts + 'mark');
+                if (mark) {
+                    GameCfg.mark = JSON.parse(mark);
+                }
+
+                let notice = cc.sys.localStorage.getItem(ts + 'notice');
+                if (notice) {
+                    GameCfg.notice = JSON.parse(notice);
+                }
+
+                let fill = cc.sys.localStorage.getItem(ts + 'fill');
+                if (fill) {
+                    GameCfg.fill = JSON.parse(fill);
+                }
             }
+
 
             if (!GameCfg.history || !GameCfg.GameSet) {
                 console.log('没有取得数据');

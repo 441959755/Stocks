@@ -298,7 +298,7 @@ export default class NewClass extends cc.Component {
                             let localPos = this.node.children[0].convertToNodeSpaceAR(pos);
                             this.Horizontal1.y = localPos.y;
                             let index = cc.ext.beg_end[0] + (Math.floor((localPos.x - 10) / cc.ext.hz_width));
-                            if (index > cc.ext.beg_end[1]) {
+                            if (index >= cc.ext.beg_end[1]) {
                                 this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
                                 index = cc.ext.beg_end[1];
                             }
@@ -463,7 +463,7 @@ export default class NewClass extends cc.Component {
         this.part3.string = (this.bottomValue + this.disValue / 4 * 2).toFixed(2);
         this.part4.string = (this.bottomValue + this.disValue / 4 * 1).toFixed(2);
         this.part5.string = this.bottomValue.toFixed(2);
-        GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.history.fill);
+        GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
         for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
 
             this.onDrawCandle(viweData[index], index);

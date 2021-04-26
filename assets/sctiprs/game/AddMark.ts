@@ -40,7 +40,7 @@ export default class NewClass extends cc.Component {
 
     //复盘的本地数据
     createFuPanData() {
-        let data = GameCfg.history.mark;
+        let data = GameCfg.mark;
         if (data) {
 
             data.forEach((el) => {
@@ -161,12 +161,12 @@ export default class NewClass extends cc.Component {
         //保存游戏记录
         if (!GameCfg.GAMEFUPAN && GameCfg.GameType != pb.GameType.ShuangMang) {
 
-            GameCfg.history.mark.push([inde, type])
+            GameCfg.mark.push([inde, type])
 
             // this.markNodes.forEach((el, indx) => {
 
             //     if (el) {
-            //         GameCfg.history.mark[indx] = el.type;
+            //         GameCfg.mark[indx] = el.type;
             //     }
 
             // })

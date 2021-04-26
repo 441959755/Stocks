@@ -2,6 +2,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import PopupManager from "../Utils/PopupManager";
 import GameCfg from "./GameCfg";
+
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 
@@ -68,12 +69,20 @@ export default class NewClass extends cc.Component {
 
         //复盘
         GlobalEvent.on(EventCfg.GAMEFUPAN, () => {
-            // let closeBtn = this.node.getChildByName('right').getChildByName('closeBtn');
-            // let backBtn = this.node.getChildByName('right').getChildByName('backBtn');
+            //z中止训练
+            let colseBtn = this.rightNode.getChildByName('closeBtn');
 
-            // closeBtn.active = false;
-            // backBtn.active = true;
-            //  this.rightNode && (this.rightNode.active = false);
+            //切换指数
+            let btnMyspic = this.rightNode.getChildByName('btnMyspic');
+
+            //数据统计
+            let statBtn = this.rightNode.getChildByName('statBtn');
+
+            colseBtn.active = false;
+
+            btnMyspic.active = true;
+            statBtn.active = true;
+
         }, this);
     }
 
@@ -133,8 +142,12 @@ export default class NewClass extends cc.Component {
         }
 
         if (GameCfg.GAMEFUPAN) {
-            this.rightNode && (this.rightNode.active = false);
+            //  this.rightNode && (this.rightNode.active = false);
             this.ALlRateLabel.string = (parseInt(GameCfg.history.allRate * 10000 + '') / 100) + '%';
+
+            btnMyspic.active = false;
+            statBtn.active = true;
+            colseBtn.active = true;
         }
 
 

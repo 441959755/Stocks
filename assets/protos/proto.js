@@ -35,42 +35,94 @@ $root.pb = (function () {
     })();
 
     /**
-     * GameType enum.
-     * @name pb.GameType
+     * AppPlantForm enum.
+     * @name pb.AppPlantForm
      * @enum {number}
-     * @property {number} GameType_NULL=0 GameType_NULL value
-     * @property {number} ShuangMang=3 ShuangMang value
-     * @property {number} DingXiang=4 DingXiang value
-     * @property {number} ZhiBiao=17 ZhiBiao value
-     * @property {number} TiaoJianDan=11 TiaoJianDan value
-     * @property {number} QiHuo=6 QiHuo value
-     * @property {number} JJ_PK=1 JJ_PK value
-     * @property {number} JJ_DuoKong=2 JJ_DuoKong value
-     * @property {number} JJ_ChuangGuan=16 JJ_ChuangGuan value
-     * @property {number} JJ_QiHuo=15 JJ_QiHuo value
-     * @property {number} MoNiChaoGu=10 MoNiChaoGu value
-     * @property {number} ChaoGuDaSai=9 ChaoGuDaSai value
-     * @property {number} GeGuJingChai=7 GeGuJingChai value
-     * @property {number} DaPanJingChai=8 DaPanJingChai value
-     * @property {number} MaxGameType=30 MaxGameType value
+     * @property {number} AppPlantForm_NULL=0 AppPlantForm_NULL value
+     * @property {number} WechatMinProgram=1 WechatMinProgram value
+     * @property {number} Ios=11 Ios value
+     * @property {number} Android=21 Android value
      */
-    pb.GameType = (function () {
+    pb.AppPlantForm = (function () {
         var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "GameType_NULL"] = 0;
-        values[valuesById[3] = "ShuangMang"] = 3;
-        values[valuesById[4] = "DingXiang"] = 4;
-        values[valuesById[17] = "ZhiBiao"] = 17;
-        values[valuesById[11] = "TiaoJianDan"] = 11;
-        values[valuesById[6] = "QiHuo"] = 6;
-        values[valuesById[1] = "JJ_PK"] = 1;
-        values[valuesById[2] = "JJ_DuoKong"] = 2;
-        values[valuesById[16] = "JJ_ChuangGuan"] = 16;
-        values[valuesById[15] = "JJ_QiHuo"] = 15;
-        values[valuesById[10] = "MoNiChaoGu"] = 10;
-        values[valuesById[9] = "ChaoGuDaSai"] = 9;
-        values[valuesById[7] = "GeGuJingChai"] = 7;
-        values[valuesById[8] = "DaPanJingChai"] = 8;
-        values[valuesById[30] = "MaxGameType"] = 30;
+        values[valuesById[0] = "AppPlantForm_NULL"] = 0;
+        values[valuesById[1] = "WechatMinProgram"] = 1;
+        values[valuesById[11] = "Ios"] = 11;
+        values[valuesById[21] = "Android"] = 21;
+        return values;
+    })();
+
+    /**
+     * AdPosition enum.
+     * @name pb.AdPosition
+     * @enum {number}
+     * @property {number} AdPosition_NULL=0 AdPosition_NULL value
+     * @property {number} StartUp=1 StartUp value
+     * @property {number} Main=11 Main value
+     */
+    pb.AdPosition = (function () {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "AdPosition_NULL"] = 0;
+        values[valuesById[1] = "StartUp"] = 1;
+        values[valuesById[11] = "Main"] = 11;
+        return values;
+    })();
+
+    /**
+     * AppFrom enum.
+     * @name pb.AppFrom
+     * @enum {number}
+     * @property {number} Android_000=0 Android_000 value
+     * @property {number} Android_001=1 Android_001 value
+     * @property {number} Android_201=201 Android_201 value
+     * @property {number} Android_204=204 Android_204 value
+     * @property {number} Android_205=205 Android_205 value
+     * @property {number} Android_206=206 Android_206 value
+     * @property {number} Android_208=208 Android_208 value
+     * @property {number} Android_209=209 Android_209 value
+     * @property {number} Android_210=210 Android_210 value
+     * @property {number} Android_211=211 Android_211 value
+     * @property {number} Android_212=212 Android_212 value
+     * @property {number} Android_301=301 Android_301 value
+     * @property {number} Android_302=302 Android_302 value
+     * @property {number} Android_601=601 Android_601 value
+     * @property {number} Android_1000=1000 Android_1000 value
+     * @property {number} Android_1204=1204 Android_1204 value
+     * @property {number} Android_1205=1205 Android_1205 value
+     * @property {number} Android_1208=1208 Android_1208 value
+     * @property {number} Android_1212=1212 Android_1212 value
+     * @property {number} IosAppleStore=6666 IosAppleStore value
+     * @property {number} Ipad=6667 Ipad value
+     * @property {number} WebsiteIos=7777 WebsiteIos value
+     * @property {number} WebsiteAndriod=7778 WebsiteAndriod value
+     * @property {number} WeChatMinProgram=8888 WeChatMinProgram value
+     */
+    pb.AppFrom = (function () {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Android_000"] = 0;
+        values[valuesById[1] = "Android_001"] = 1;
+        values[valuesById[201] = "Android_201"] = 201;
+        values[valuesById[204] = "Android_204"] = 204;
+        values[valuesById[205] = "Android_205"] = 205;
+        values[valuesById[206] = "Android_206"] = 206;
+        values[valuesById[208] = "Android_208"] = 208;
+        values[valuesById[209] = "Android_209"] = 209;
+        values[valuesById[210] = "Android_210"] = 210;
+        values[valuesById[211] = "Android_211"] = 211;
+        values[valuesById[212] = "Android_212"] = 212;
+        values[valuesById[301] = "Android_301"] = 301;
+        values[valuesById[302] = "Android_302"] = 302;
+        values[valuesById[601] = "Android_601"] = 601;
+        values[valuesById[1000] = "Android_1000"] = 1000;
+        values[valuesById[1204] = "Android_1204"] = 1204;
+        values[valuesById[1205] = "Android_1205"] = 1205;
+        values[valuesById[1208] = "Android_1208"] = 1208;
+        values[valuesById[1212] = "Android_1212"] = 1212;
+        values[valuesById[6666] = "IosAppleStore"] = 6666;
+        values[valuesById[6667] = "Ipad"] = 6667;
+        values[valuesById[7777] = "WebsiteIos"] = 7777;
+        values[valuesById[7778] = "WebsiteAndriod"] = 7778;
+        values[valuesById[8888] = "WeChatMinProgram"] = 8888;
         return values;
     })();
 
@@ -84,12 +136,15 @@ $root.pb = (function () {
      * @property {number} Sync_S2C_QuoteItem=1000 Sync_S2C_QuoteItem value
      * @property {number} Sync_S2C_GameProperty=1002 Sync_S2C_GameProperty value
      * @property {number} Sync_S2C_GameCounter=1004 Sync_S2C_GameCounter value
+     * @property {number} Sync_C2S_GameHeart=1006 Sync_C2S_GameHeart value
      * @property {number} Req_QuoteSubscribe=2001 Req_QuoteSubscribe value
      * @property {number} Rep_QuoteSubscribe=2002 Rep_QuoteSubscribe value
      * @property {number} Req_QuoteQuery=2003 Req_QuoteQuery value
      * @property {number} Rep_QuoteQuery=2004 Rep_QuoteQuery value
      * @property {number} Req_QuoteEdit=2005 Req_QuoteEdit value
      * @property {number} Req_StockEdit=2007 Req_StockEdit value
+     * @property {number} Req_QuoteQueryFuture=2009 Req_QuoteQueryFuture value
+     * @property {number} Rep_QuoteQueryFuture=2010 Rep_QuoteQueryFuture value
      * @property {number} Req_Game_UploadIcon=3001 Req_Game_UploadIcon value
      * @property {number} Rep_Game_UploadIcon=3002 Rep_Game_UploadIcon value
      * @property {number} Req_Game_EditNick=3003 Req_Game_EditNick value
@@ -119,12 +174,15 @@ $root.pb = (function () {
         values[valuesById[1000] = "Sync_S2C_QuoteItem"] = 1000;
         values[valuesById[1002] = "Sync_S2C_GameProperty"] = 1002;
         values[valuesById[1004] = "Sync_S2C_GameCounter"] = 1004;
+        values[valuesById[1006] = "Sync_C2S_GameHeart"] = 1006;
         values[valuesById[2001] = "Req_QuoteSubscribe"] = 2001;
         values[valuesById[2002] = "Rep_QuoteSubscribe"] = 2002;
         values[valuesById[2003] = "Req_QuoteQuery"] = 2003;
         values[valuesById[2004] = "Rep_QuoteQuery"] = 2004;
         values[valuesById[2005] = "Req_QuoteEdit"] = 2005;
         values[valuesById[2007] = "Req_StockEdit"] = 2007;
+        values[valuesById[2009] = "Req_QuoteQueryFuture"] = 2009;
+        values[valuesById[2010] = "Rep_QuoteQueryFuture"] = 2010;
         values[valuesById[3001] = "Req_Game_UploadIcon"] = 3001;
         values[valuesById[3002] = "Rep_Game_UploadIcon"] = 3002;
         values[valuesById[3003] = "Req_Game_EditNick"] = 3003;
@@ -590,25 +648,27 @@ $root.pb = (function () {
         return ErrorInfo;
     })();
 
-    pb.MessageSpan = (function () {
+    pb.AdClicked = (function () {
 
         /**
-         * Properties of a MessageSpan.
+         * Properties of an AdClicked.
          * @memberof pb
-         * @interface IMessageSpan
-         * @property {number|Long|null} [send] MessageSpan send
-         * @property {number|Long|null} [recv] MessageSpan recv
+         * @interface IAdClicked
+         * @property {number|null} [uid] AdClicked uid
+         * @property {number|null} [pos] AdClicked pos
+         * @property {string|null} [url] AdClicked url
+         * @property {pb.AppFrom|null} [from] AdClicked from
          */
 
         /**
-         * Constructs a new MessageSpan.
+         * Constructs a new AdClicked.
          * @memberof pb
-         * @classdesc Represents a MessageSpan.
-         * @implements IMessageSpan
+         * @classdesc Represents an AdClicked.
+         * @implements IAdClicked
          * @constructor
-         * @param {pb.IMessageSpan=} [properties] Properties to set
+         * @param {pb.IAdClicked=} [properties] Properties to set
          */
-        function MessageSpan(properties) {
+        function AdClicked(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -616,88 +676,114 @@ $root.pb = (function () {
         }
 
         /**
-         * MessageSpan send.
-         * @member {number|Long} send
-         * @memberof pb.MessageSpan
+         * AdClicked uid.
+         * @member {number} uid
+         * @memberof pb.AdClicked
          * @instance
          */
-        MessageSpan.prototype.send = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        AdClicked.prototype.uid = 0;
 
         /**
-         * MessageSpan recv.
-         * @member {number|Long} recv
-         * @memberof pb.MessageSpan
+         * AdClicked pos.
+         * @member {number} pos
+         * @memberof pb.AdClicked
          * @instance
          */
-        MessageSpan.prototype.recv = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        AdClicked.prototype.pos = 0;
 
         /**
-         * Creates a new MessageSpan instance using the specified properties.
+         * AdClicked url.
+         * @member {string} url
+         * @memberof pb.AdClicked
+         * @instance
+         */
+        AdClicked.prototype.url = "";
+
+        /**
+         * AdClicked from.
+         * @member {pb.AppFrom} from
+         * @memberof pb.AdClicked
+         * @instance
+         */
+        AdClicked.prototype.from = 0;
+
+        /**
+         * Creates a new AdClicked instance using the specified properties.
          * @function create
-         * @memberof pb.MessageSpan
+         * @memberof pb.AdClicked
          * @static
-         * @param {pb.IMessageSpan=} [properties] Properties to set
-         * @returns {pb.MessageSpan} MessageSpan instance
+         * @param {pb.IAdClicked=} [properties] Properties to set
+         * @returns {pb.AdClicked} AdClicked instance
          */
-        MessageSpan.create = function create(properties) {
-            return new MessageSpan(properties);
+        AdClicked.create = function create(properties) {
+            return new AdClicked(properties);
         };
 
         /**
-         * Encodes the specified MessageSpan message. Does not implicitly {@link pb.MessageSpan.verify|verify} messages.
+         * Encodes the specified AdClicked message. Does not implicitly {@link pb.AdClicked.verify|verify} messages.
          * @function encode
-         * @memberof pb.MessageSpan
+         * @memberof pb.AdClicked
          * @static
-         * @param {pb.IMessageSpan} message MessageSpan message or plain object to encode
+         * @param {pb.IAdClicked} message AdClicked message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        MessageSpan.encode = function encode(message, writer) {
+        AdClicked.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.send != null && Object.hasOwnProperty.call(message, "send"))
-                writer.uint32(/* id 1, wireType 1 =*/9).sfixed64(message.send);
-            if (message.recv != null && Object.hasOwnProperty.call(message, "recv"))
-                writer.uint32(/* id 2, wireType 1 =*/17).sfixed64(message.recv);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
+            if (message.pos != null && Object.hasOwnProperty.call(message, "pos"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pos);
+            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.url);
+            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.from);
             return writer;
         };
 
         /**
-         * Encodes the specified MessageSpan message, length delimited. Does not implicitly {@link pb.MessageSpan.verify|verify} messages.
+         * Encodes the specified AdClicked message, length delimited. Does not implicitly {@link pb.AdClicked.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof pb.MessageSpan
+         * @memberof pb.AdClicked
          * @static
-         * @param {pb.IMessageSpan} message MessageSpan message or plain object to encode
+         * @param {pb.IAdClicked} message AdClicked message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        MessageSpan.encodeDelimited = function encodeDelimited(message, writer) {
+        AdClicked.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a MessageSpan message from the specified reader or buffer.
+         * Decodes an AdClicked message from the specified reader or buffer.
          * @function decode
-         * @memberof pb.MessageSpan
+         * @memberof pb.AdClicked
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {pb.MessageSpan} MessageSpan
+         * @returns {pb.AdClicked} AdClicked
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        MessageSpan.decode = function decode(reader, length) {
+        AdClicked.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.MessageSpan();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.AdClicked();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                     case 1:
-                        message.send = reader.sfixed64();
+                        message.uid = reader.int32();
                         break;
                     case 2:
-                        message.recv = reader.sfixed64();
+                        message.pos = reader.int32();
+                        break;
+                    case 3:
+                        message.url = reader.string();
+                        break;
+                    case 4:
+                        message.from = reader.int32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -708,124 +794,235 @@ $root.pb = (function () {
         };
 
         /**
-         * Decodes a MessageSpan message from the specified reader or buffer, length delimited.
+         * Decodes an AdClicked message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof pb.MessageSpan
+         * @memberof pb.AdClicked
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {pb.MessageSpan} MessageSpan
+         * @returns {pb.AdClicked} AdClicked
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        MessageSpan.decodeDelimited = function decodeDelimited(reader) {
+        AdClicked.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a MessageSpan message.
+         * Verifies an AdClicked message.
          * @function verify
-         * @memberof pb.MessageSpan
+         * @memberof pb.AdClicked
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        MessageSpan.verify = function verify(message) {
+        AdClicked.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.send != null && message.hasOwnProperty("send"))
-                if (!$util.isInteger(message.send) && !(message.send && $util.isInteger(message.send.low) && $util.isInteger(message.send.high)))
-                    return "send: integer|Long expected";
-            if (message.recv != null && message.hasOwnProperty("recv"))
-                if (!$util.isInteger(message.recv) && !(message.recv && $util.isInteger(message.recv.low) && $util.isInteger(message.recv.high)))
-                    return "recv: integer|Long expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.pos != null && message.hasOwnProperty("pos"))
+                if (!$util.isInteger(message.pos))
+                    return "pos: integer expected";
+            if (message.url != null && message.hasOwnProperty("url"))
+                if (!$util.isString(message.url))
+                    return "url: string expected";
+            if (message.from != null && message.hasOwnProperty("from"))
+                switch (message.from) {
+                    default:
+                        return "from: enum value expected";
+                    case 0:
+                    case 1:
+                    case 201:
+                    case 204:
+                    case 205:
+                    case 206:
+                    case 208:
+                    case 209:
+                    case 210:
+                    case 211:
+                    case 212:
+                    case 301:
+                    case 302:
+                    case 601:
+                    case 1000:
+                    case 1204:
+                    case 1205:
+                    case 1208:
+                    case 1212:
+                    case 6666:
+                    case 6667:
+                    case 7777:
+                    case 7778:
+                    case 8888:
+                        break;
+                }
             return null;
         };
 
         /**
-         * Creates a MessageSpan message from a plain object. Also converts values to their respective internal types.
+         * Creates an AdClicked message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof pb.MessageSpan
+         * @memberof pb.AdClicked
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {pb.MessageSpan} MessageSpan
+         * @returns {pb.AdClicked} AdClicked
          */
-        MessageSpan.fromObject = function fromObject(object) {
-            if (object instanceof $root.pb.MessageSpan)
+        AdClicked.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.AdClicked)
                 return object;
-            var message = new $root.pb.MessageSpan();
-            if (object.send != null)
-                if ($util.Long)
-                    (message.send = $util.Long.fromValue(object.send)).unsigned = false;
-                else if (typeof object.send === "string")
-                    message.send = parseInt(object.send, 10);
-                else if (typeof object.send === "number")
-                    message.send = object.send;
-                else if (typeof object.send === "object")
-                    message.send = new $util.LongBits(object.send.low >>> 0, object.send.high >>> 0).toNumber();
-            if (object.recv != null)
-                if ($util.Long)
-                    (message.recv = $util.Long.fromValue(object.recv)).unsigned = false;
-                else if (typeof object.recv === "string")
-                    message.recv = parseInt(object.recv, 10);
-                else if (typeof object.recv === "number")
-                    message.recv = object.recv;
-                else if (typeof object.recv === "object")
-                    message.recv = new $util.LongBits(object.recv.low >>> 0, object.recv.high >>> 0).toNumber();
+            var message = new $root.pb.AdClicked();
+            if (object.uid != null)
+                message.uid = object.uid | 0;
+            if (object.pos != null)
+                message.pos = object.pos | 0;
+            if (object.url != null)
+                message.url = String(object.url);
+            switch (object.from) {
+                case "Android_000":
+                case 0:
+                    message.from = 0;
+                    break;
+                case "Android_001":
+                case 1:
+                    message.from = 1;
+                    break;
+                case "Android_201":
+                case 201:
+                    message.from = 201;
+                    break;
+                case "Android_204":
+                case 204:
+                    message.from = 204;
+                    break;
+                case "Android_205":
+                case 205:
+                    message.from = 205;
+                    break;
+                case "Android_206":
+                case 206:
+                    message.from = 206;
+                    break;
+                case "Android_208":
+                case 208:
+                    message.from = 208;
+                    break;
+                case "Android_209":
+                case 209:
+                    message.from = 209;
+                    break;
+                case "Android_210":
+                case 210:
+                    message.from = 210;
+                    break;
+                case "Android_211":
+                case 211:
+                    message.from = 211;
+                    break;
+                case "Android_212":
+                case 212:
+                    message.from = 212;
+                    break;
+                case "Android_301":
+                case 301:
+                    message.from = 301;
+                    break;
+                case "Android_302":
+                case 302:
+                    message.from = 302;
+                    break;
+                case "Android_601":
+                case 601:
+                    message.from = 601;
+                    break;
+                case "Android_1000":
+                case 1000:
+                    message.from = 1000;
+                    break;
+                case "Android_1204":
+                case 1204:
+                    message.from = 1204;
+                    break;
+                case "Android_1205":
+                case 1205:
+                    message.from = 1205;
+                    break;
+                case "Android_1208":
+                case 1208:
+                    message.from = 1208;
+                    break;
+                case "Android_1212":
+                case 1212:
+                    message.from = 1212;
+                    break;
+                case "IosAppleStore":
+                case 6666:
+                    message.from = 6666;
+                    break;
+                case "Ipad":
+                case 6667:
+                    message.from = 6667;
+                    break;
+                case "WebsiteIos":
+                case 7777:
+                    message.from = 7777;
+                    break;
+                case "WebsiteAndriod":
+                case 7778:
+                    message.from = 7778;
+                    break;
+                case "WeChatMinProgram":
+                case 8888:
+                    message.from = 8888;
+                    break;
+            }
             return message;
         };
 
         /**
-         * Creates a plain object from a MessageSpan message. Also converts values to other types if specified.
+         * Creates a plain object from an AdClicked message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof pb.MessageSpan
+         * @memberof pb.AdClicked
          * @static
-         * @param {pb.MessageSpan} message MessageSpan
+         * @param {pb.AdClicked} message AdClicked
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        MessageSpan.toObject = function toObject(message, options) {
+        AdClicked.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.send = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.send = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.recv = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.recv = options.longs === String ? "0" : 0;
+                object.uid = 0;
+                object.pos = 0;
+                object.url = "";
+                object.from = options.enums === String ? "Android_000" : 0;
             }
-            if (message.send != null && message.hasOwnProperty("send"))
-                if (typeof message.send === "number")
-                    object.send = options.longs === String ? String(message.send) : message.send;
-                else
-                    object.send = options.longs === String ? $util.Long.prototype.toString.call(message.send) : options.longs === Number ? new $util.LongBits(message.send.low >>> 0, message.send.high >>> 0).toNumber() : message.send;
-            if (message.recv != null && message.hasOwnProperty("recv"))
-                if (typeof message.recv === "number")
-                    object.recv = options.longs === String ? String(message.recv) : message.recv;
-                else
-                    object.recv = options.longs === String ? $util.Long.prototype.toString.call(message.recv) : options.longs === Number ? new $util.LongBits(message.recv.low >>> 0, message.recv.high >>> 0).toNumber() : message.recv;
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            if (message.pos != null && message.hasOwnProperty("pos"))
+                object.pos = message.pos;
+            if (message.url != null && message.hasOwnProperty("url"))
+                object.url = message.url;
+            if (message.from != null && message.hasOwnProperty("from"))
+                object.from = options.enums === String ? $root.pb.AppFrom[message.from] : message.from;
             return object;
         };
 
         /**
-         * Converts this MessageSpan to JSON.
+         * Converts this AdClicked to JSON.
          * @function toJSON
-         * @memberof pb.MessageSpan
+         * @memberof pb.AdClicked
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        MessageSpan.prototype.toJSON = function toJSON() {
+        AdClicked.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return MessageSpan;
+        return AdClicked;
     })();
 
     pb.VoidRequest = (function () {
@@ -1149,6 +1346,46 @@ $root.pb = (function () {
     })();
 
     /**
+     * GameType enum.
+     * @name pb.GameType
+     * @enum {number}
+     * @property {number} GameType_NULL=0 GameType_NULL value
+     * @property {number} ShuangMang=3 ShuangMang value
+     * @property {number} DingXiang=4 DingXiang value
+     * @property {number} ZhiBiao=17 ZhiBiao value
+     * @property {number} TiaoJianDan=11 TiaoJianDan value
+     * @property {number} QiHuo=6 QiHuo value
+     * @property {number} JJ_PK=1 JJ_PK value
+     * @property {number} JJ_DuoKong=2 JJ_DuoKong value
+     * @property {number} JJ_ChuangGuan=16 JJ_ChuangGuan value
+     * @property {number} JJ_QiHuo=15 JJ_QiHuo value
+     * @property {number} MoNiChaoGu=10 MoNiChaoGu value
+     * @property {number} ChaoGuDaSai=9 ChaoGuDaSai value
+     * @property {number} GeGuJingChai=7 GeGuJingChai value
+     * @property {number} DaPanJingChai=8 DaPanJingChai value
+     * @property {number} MaxGameType=30 MaxGameType value
+     */
+    pb.GameType = (function () {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "GameType_NULL"] = 0;
+        values[valuesById[3] = "ShuangMang"] = 3;
+        values[valuesById[4] = "DingXiang"] = 4;
+        values[valuesById[17] = "ZhiBiao"] = 17;
+        values[valuesById[11] = "TiaoJianDan"] = 11;
+        values[valuesById[6] = "QiHuo"] = 6;
+        values[valuesById[1] = "JJ_PK"] = 1;
+        values[valuesById[2] = "JJ_DuoKong"] = 2;
+        values[valuesById[16] = "JJ_ChuangGuan"] = 16;
+        values[valuesById[15] = "JJ_QiHuo"] = 15;
+        values[valuesById[10] = "MoNiChaoGu"] = 10;
+        values[valuesById[9] = "ChaoGuDaSai"] = 9;
+        values[valuesById[7] = "GeGuJingChai"] = 7;
+        values[valuesById[8] = "DaPanJingChai"] = 8;
+        values[valuesById[30] = "MaxGameType"] = 30;
+        return values;
+    })();
+
+    /**
      * GamePropertyId enum.
      * @name pb.GamePropertyId
      * @enum {number}
@@ -1175,8 +1412,8 @@ $root.pb = (function () {
      * @name pb.GameOperationId
      * @enum {number}
      * @property {number} GameOperationId_NULL=0 GameOperationId_NULL value
-     * @property {number} Bid=1 Bid value
-     * @property {number} Ask=2 Ask value
+     * @property {number} Ask=1 Ask value
+     * @property {number} Bid=2 Bid value
      * @property {number} Wait=3 Wait value
      * @property {number} Hold=4 Hold value
      * @property {number} Ask_Force=5 Ask_Force value
@@ -1187,8 +1424,8 @@ $root.pb = (function () {
     pb.GameOperationId = (function () {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "GameOperationId_NULL"] = 0;
-        values[valuesById[1] = "Bid"] = 1;
-        values[valuesById[2] = "Ask"] = 2;
+        values[valuesById[1] = "Ask"] = 1;
+        values[valuesById[2] = "Bid"] = 2;
         values[valuesById[3] = "Wait"] = 3;
         values[valuesById[4] = "Hold"] = 4;
         values[valuesById[5] = "Ask_Force"] = 5;
@@ -3484,11 +3721,11 @@ $root.pb = (function () {
                 case 0:
                     message.opId = 0;
                     break;
-                case "Bid":
+                case "Ask":
                 case 1:
                     message.opId = 1;
                     break;
-                case "Ask":
+                case "Bid":
                 case 2:
                     message.opId = 2;
                     break;
@@ -10043,64 +10280,6 @@ $root.pb = (function () {
         return values;
     })();
 
-    /**
-     * LoginFrom enum.
-     * @name pb.LoginFrom
-     * @enum {number}
-     * @property {number} Android_000=0 Android_000 value
-     * @property {number} Android_001=1 Android_001 value
-     * @property {number} Android_201=201 Android_201 value
-     * @property {number} Android_204=204 Android_204 value
-     * @property {number} Android_205=205 Android_205 value
-     * @property {number} Android_206=206 Android_206 value
-     * @property {number} Android_208=208 Android_208 value
-     * @property {number} Android_209=209 Android_209 value
-     * @property {number} Android_210=210 Android_210 value
-     * @property {number} Android_211=211 Android_211 value
-     * @property {number} Android_212=212 Android_212 value
-     * @property {number} Android_301=301 Android_301 value
-     * @property {number} Android_302=302 Android_302 value
-     * @property {number} Android_601=601 Android_601 value
-     * @property {number} Android_1000=1000 Android_1000 value
-     * @property {number} Android_1204=1204 Android_1204 value
-     * @property {number} Android_1205=1205 Android_1205 value
-     * @property {number} Android_1208=1208 Android_1208 value
-     * @property {number} Android_1212=1212 Android_1212 value
-     * @property {number} IosAppleStore=6666 IosAppleStore value
-     * @property {number} Ipad=6667 Ipad value
-     * @property {number} WebsiteIos=7777 WebsiteIos value
-     * @property {number} WebsiteAndriod=7778 WebsiteAndriod value
-     * @property {number} WeChatMinProgram=8888 WeChatMinProgram value
-     */
-    pb.LoginFrom = (function () {
-        var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "Android_000"] = 0;
-        values[valuesById[1] = "Android_001"] = 1;
-        values[valuesById[201] = "Android_201"] = 201;
-        values[valuesById[204] = "Android_204"] = 204;
-        values[valuesById[205] = "Android_205"] = 205;
-        values[valuesById[206] = "Android_206"] = 206;
-        values[valuesById[208] = "Android_208"] = 208;
-        values[valuesById[209] = "Android_209"] = 209;
-        values[valuesById[210] = "Android_210"] = 210;
-        values[valuesById[211] = "Android_211"] = 211;
-        values[valuesById[212] = "Android_212"] = 212;
-        values[valuesById[301] = "Android_301"] = 301;
-        values[valuesById[302] = "Android_302"] = 302;
-        values[valuesById[601] = "Android_601"] = 601;
-        values[valuesById[1000] = "Android_1000"] = 1000;
-        values[valuesById[1204] = "Android_1204"] = 1204;
-        values[valuesById[1205] = "Android_1205"] = 1205;
-        values[valuesById[1208] = "Android_1208"] = 1208;
-        values[valuesById[1212] = "Android_1212"] = 1212;
-        values[valuesById[6666] = "IosAppleStore"] = 6666;
-        values[valuesById[6667] = "Ipad"] = 6667;
-        values[valuesById[7777] = "WebsiteIos"] = 7777;
-        values[valuesById[7778] = "WebsiteAndriod"] = 7778;
-        values[valuesById[8888] = "WeChatMinProgram"] = 8888;
-        return values;
-    })();
-
     pb.CmdRegistry = (function () {
 
         /**
@@ -10109,9 +10288,9 @@ $root.pb = (function () {
          * @interface ICmdRegistry
          * @property {string|null} [account] CmdRegistry account
          * @property {pb.LoginType|null} [type] CmdRegistry type
-         * @property {pb.LoginFrom|null} [from] CmdRegistry from
          * @property {string|null} [pwd] CmdRegistry pwd
          * @property {string|null} [sms] CmdRegistry sms
+         * @property {pb.AppFrom|null} [from] CmdRegistry from
          */
 
         /**
@@ -10146,14 +10325,6 @@ $root.pb = (function () {
         CmdRegistry.prototype.type = 0;
 
         /**
-         * CmdRegistry from.
-         * @member {pb.LoginFrom} from
-         * @memberof pb.CmdRegistry
-         * @instance
-         */
-        CmdRegistry.prototype.from = 0;
-
-        /**
          * CmdRegistry pwd.
          * @member {string} pwd
          * @memberof pb.CmdRegistry
@@ -10168,6 +10339,14 @@ $root.pb = (function () {
          * @instance
          */
         CmdRegistry.prototype.sms = "";
+
+        /**
+         * CmdRegistry from.
+         * @member {pb.AppFrom} from
+         * @memberof pb.CmdRegistry
+         * @instance
+         */
+        CmdRegistry.prototype.from = 0;
 
         /**
          * Creates a new CmdRegistry instance using the specified properties.
@@ -10197,12 +10376,12 @@ $root.pb = (function () {
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.account);
             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
-            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.from);
             if (message.pwd != null && Object.hasOwnProperty.call(message, "pwd"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pwd);
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pwd);
             if (message.sms != null && Object.hasOwnProperty.call(message, "sms"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.sms);
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.sms);
+            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.from);
             return writer;
         };
 
@@ -10244,13 +10423,13 @@ $root.pb = (function () {
                         message.type = reader.int32();
                         break;
                     case 3:
-                        message.from = reader.int32();
-                        break;
-                    case 4:
                         message.pwd = reader.string();
                         break;
-                    case 5:
+                    case 4:
                         message.sms = reader.string();
+                        break;
+                    case 5:
+                        message.from = reader.int32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -10301,6 +10480,12 @@ $root.pb = (function () {
                     case 99:
                         break;
                 }
+            if (message.pwd != null && message.hasOwnProperty("pwd"))
+                if (!$util.isString(message.pwd))
+                    return "pwd: string expected";
+            if (message.sms != null && message.hasOwnProperty("sms"))
+                if (!$util.isString(message.sms))
+                    return "sms: string expected";
             if (message.from != null && message.hasOwnProperty("from"))
                 switch (message.from) {
                     default:
@@ -10331,12 +10516,6 @@ $root.pb = (function () {
                     case 8888:
                         break;
                 }
-            if (message.pwd != null && message.hasOwnProperty("pwd"))
-                if (!$util.isString(message.pwd))
-                    return "pwd: string expected";
-            if (message.sms != null && message.hasOwnProperty("sms"))
-                if (!$util.isString(message.sms))
-                    return "sms: string expected";
             return null;
         };
 
@@ -10376,6 +10555,10 @@ $root.pb = (function () {
                     message.type = 99;
                     break;
             }
+            if (object.pwd != null)
+                message.pwd = String(object.pwd);
+            if (object.sms != null)
+                message.sms = String(object.sms);
             switch (object.from) {
                 case "Android_000":
                 case 0:
@@ -10474,10 +10657,6 @@ $root.pb = (function () {
                     message.from = 8888;
                     break;
             }
-            if (object.pwd != null)
-                message.pwd = String(object.pwd);
-            if (object.sms != null)
-                message.sms = String(object.sms);
             return message;
         };
 
@@ -10497,20 +10676,20 @@ $root.pb = (function () {
             if (options.defaults) {
                 object.account = "";
                 object.type = options.enums === String ? "LoginType_NULL" : 0;
-                object.from = options.enums === String ? "Android_000" : 0;
                 object.pwd = "";
                 object.sms = "";
+                object.from = options.enums === String ? "Android_000" : 0;
             }
             if (message.account != null && message.hasOwnProperty("account"))
                 object.account = message.account;
             if (message.type != null && message.hasOwnProperty("type"))
                 object.type = options.enums === String ? $root.pb.LoginType[message.type] : message.type;
-            if (message.from != null && message.hasOwnProperty("from"))
-                object.from = options.enums === String ? $root.pb.LoginFrom[message.from] : message.from;
             if (message.pwd != null && message.hasOwnProperty("pwd"))
                 object.pwd = message.pwd;
             if (message.sms != null && message.hasOwnProperty("sms"))
                 object.sms = message.sms;
+            if (message.from != null && message.hasOwnProperty("from"))
+                object.from = options.enums === String ? $root.pb.AppFrom[message.from] : message.from;
             return object;
         };
 
@@ -10536,8 +10715,8 @@ $root.pb = (function () {
          * @interface ICmdLogin
          * @property {string|null} [account] CmdLogin account
          * @property {pb.LoginType|null} [type] CmdLogin type
-         * @property {pb.LoginFrom|null} [from] CmdLogin from
          * @property {string|null} [pwd] CmdLogin pwd
+         * @property {pb.AppFrom|null} [from] CmdLogin from
          */
 
         /**
@@ -10572,20 +10751,20 @@ $root.pb = (function () {
         CmdLogin.prototype.type = 0;
 
         /**
-         * CmdLogin from.
-         * @member {pb.LoginFrom} from
-         * @memberof pb.CmdLogin
-         * @instance
-         */
-        CmdLogin.prototype.from = 0;
-
-        /**
          * CmdLogin pwd.
          * @member {string} pwd
          * @memberof pb.CmdLogin
          * @instance
          */
         CmdLogin.prototype.pwd = "";
+
+        /**
+         * CmdLogin from.
+         * @member {pb.AppFrom} from
+         * @memberof pb.CmdLogin
+         * @instance
+         */
+        CmdLogin.prototype.from = 0;
 
         /**
          * Creates a new CmdLogin instance using the specified properties.
@@ -10615,10 +10794,10 @@ $root.pb = (function () {
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.account);
             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
-            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.from);
             if (message.pwd != null && Object.hasOwnProperty.call(message, "pwd"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pwd);
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pwd);
+            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.from);
             return writer;
         };
 
@@ -10660,10 +10839,10 @@ $root.pb = (function () {
                         message.type = reader.int32();
                         break;
                     case 3:
-                        message.from = reader.int32();
+                        message.pwd = reader.string();
                         break;
                     case 4:
-                        message.pwd = reader.string();
+                        message.from = reader.int32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -10714,6 +10893,9 @@ $root.pb = (function () {
                     case 99:
                         break;
                 }
+            if (message.pwd != null && message.hasOwnProperty("pwd"))
+                if (!$util.isString(message.pwd))
+                    return "pwd: string expected";
             if (message.from != null && message.hasOwnProperty("from"))
                 switch (message.from) {
                     default:
@@ -10744,9 +10926,6 @@ $root.pb = (function () {
                     case 8888:
                         break;
                 }
-            if (message.pwd != null && message.hasOwnProperty("pwd"))
-                if (!$util.isString(message.pwd))
-                    return "pwd: string expected";
             return null;
         };
 
@@ -10786,6 +10965,8 @@ $root.pb = (function () {
                     message.type = 99;
                     break;
             }
+            if (object.pwd != null)
+                message.pwd = String(object.pwd);
             switch (object.from) {
                 case "Android_000":
                 case 0:
@@ -10884,8 +11065,6 @@ $root.pb = (function () {
                     message.from = 8888;
                     break;
             }
-            if (object.pwd != null)
-                message.pwd = String(object.pwd);
             return message;
         };
 
@@ -10905,17 +11084,17 @@ $root.pb = (function () {
             if (options.defaults) {
                 object.account = "";
                 object.type = options.enums === String ? "LoginType_NULL" : 0;
-                object.from = options.enums === String ? "Android_000" : 0;
                 object.pwd = "";
+                object.from = options.enums === String ? "Android_000" : 0;
             }
             if (message.account != null && message.hasOwnProperty("account"))
                 object.account = message.account;
             if (message.type != null && message.hasOwnProperty("type"))
                 object.type = options.enums === String ? $root.pb.LoginType[message.type] : message.type;
-            if (message.from != null && message.hasOwnProperty("from"))
-                object.from = options.enums === String ? $root.pb.LoginFrom[message.from] : message.from;
             if (message.pwd != null && message.hasOwnProperty("pwd"))
                 object.pwd = message.pwd;
+            if (message.from != null && message.hasOwnProperty("from"))
+                object.from = options.enums === String ? $root.pb.AppFrom[message.from] : message.from;
             return object;
         };
 

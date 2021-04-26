@@ -69,7 +69,7 @@ export default class NewClass extends cc.Component {
 
     //复盘的本地数据
     createFuPanData() {
-        let data = GameCfg.history.notice;
+        let data = GameCfg.notice;
         if (data) {
             data.forEach((el) => {
                 this.onCreateTipsItem(el[0]);
@@ -862,7 +862,7 @@ export default class NewClass extends cc.Component {
         itemHandle.onShow();
 
         if (!GameCfg.GAMEFUPAN && GameCfg.GameType != pb.GameType.ShuangMang) {
-            GameCfg.history.notice.push([id, GameCfg.huizhidatas - 1]);
+            GameCfg.notice.push([id, GameCfg.huizhidatas - 1]);
         }
     }
 

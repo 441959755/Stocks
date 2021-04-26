@@ -167,6 +167,9 @@ cc.Class({
                         if (el <= time) {
                             cc.sys.localStorage.removeItem(el);
                             cc.sys.localStorage.removeItem(el + 'set');
+                            cc.sys.localStorage.removeItem(el + 'fill');
+                            cc.sys.localStorage.removeItem(el + 'notice');
+                            cc.sys.localStorage.removeItem(el + 'mark');
                         } else {
                             arr.push(el);
                         }
