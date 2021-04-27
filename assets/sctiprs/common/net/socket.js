@@ -33,6 +33,7 @@ Socket.prototype = {
                 if (!this.heartbeat) {
                     this.heartbeat = setInterval(() => {
                         socket.send(pb.MessageId.Sync_C2S_GameHeart, null, null);
+                        console.log('发送心跳');
                     }, 5000);
                 }
 
@@ -126,13 +127,13 @@ Socket.prototype = {
 
     reconnect() {
         let self = this;
+        this.ws = null;
         if (!this.reconnectBeat) {
             this.reconnectBeat = setInterval(() => {
                 console.log('断线连接中...');
                 self.initSocket();
             }, 5000);
         }
-
     },
 
 
@@ -145,6 +146,7 @@ Socket.prototype = {
         this.ws.onopen = this.connected.bind(this);
         this.ws.onerror = function (event) {
             console.log('ws onerror');
+            this.ws.close();
         }
         this.ws.onclose = this.onclose.bind(this);
 

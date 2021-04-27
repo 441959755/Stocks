@@ -208,6 +208,7 @@ export default class NewClass extends cc.Component {
                 }
 
             } else if (this.setProId == 3) {
+
                 GameData.DXSet.month = str;
             } else if (this.setProId == 4) {
                 GameData.DXSet.day = str;
@@ -338,11 +339,11 @@ export default class NewClass extends cc.Component {
         if (GameData.DXSet.ZLine == '日线') {
             data.ktype = pb.KType.Day;
         } else if (GameData.DXSet.ZLine == '周线') {
-            data.ktype = pb.KType.Day7;
+            data.ktype = pb.KType.Day;
         } else if (GameData.DXSet.ZLine == '30分钟K') {
-            data.ktype = pb.KType.Min30;
+            data.ktype = pb.KType.Min;
         } else if (GameData.DXSet.ZLine == '60分钟K') {
-            data.ktype = pb.KType.Min60;
+            data.ktype = pb.KType.Min;
         }
 
         if (GameData.DXSet.year != '随机') {
@@ -352,6 +353,12 @@ export default class NewClass extends cc.Component {
             if (GameData.DXSet.day == '--') {
                 GameData.DXSet.day = '01';
             }
+            if (GameData.DXSet.month.length == 1) {
+                GameData.DXSet.month = '0' + GameData.DXSet.month;
+            }
+            if (GameData.DXSet.day.length == 1) {
+                GameData.DXSet.day = '0' + GameData.DXSet.day;
+            }
 
             let seletTime = GameData.DXSet.year + '' + GameData.DXSet.month + '' + GameData.DXSet.day;
             if (parseInt(seletTime) < parseInt(items[2])) {
@@ -360,9 +367,10 @@ export default class NewClass extends cc.Component {
                     this.DXStartGameSet();
 
                 } else {
-                    console.log('时间不能早与股票创建时间');
+
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能早与股票创建时间');
                 }
+                console.log('时间不能早与股票创建时间');
                 return;
             } else if (parseInt(seletTime) > parseInt(items[3])) {
                 if (parseInt(items[3]) != 0) {
@@ -370,9 +378,10 @@ export default class NewClass extends cc.Component {
                     if (GameData.DXSet.search == '随机选股') {
                         this.DXStartGameSet();
                     } else {
-                        console.log('时间不能大与股票结束时间');
+
                         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能大与股票结束时间');
                     }
+                    console.log('时间不能大与股票结束时间');
                     return;
                 }
             }

@@ -433,7 +433,7 @@ export default class NewClass extends cc.Component {
             return
         }
 
-        let bgheight = 150;
+        let bgheight = this.drawKDJ.node.height;
 
         let x = 10 + (some * cc.ext.hz_width) + cc.ext.hz_width / 2;
 
@@ -473,7 +473,7 @@ export default class NewClass extends cc.Component {
             return
         }
 
-        let bgHeight = 150;
+        let bgHeight = this.drawRSI.node.height;
         let RSIX = 10 + (some * cc.ext.hz_width) + cc.ext.hz_width / 2;
         let preRSIX = 10 + ((some - 1) * cc.ext.hz_width) + cc.ext.hz_width / 2;
         //RSI6
@@ -538,7 +538,7 @@ export default class NewClass extends cc.Component {
             return
         }
 
-        let bgHeight = 150;
+        let bgHeight = this.drawMACD.node.height;
         let difY = 0;
         if (this.DIFList[index] >= 0) {
             difY = this.DIFList[index] / this.maxDIF * bgHeight / 2;//+ bgHeight / 2;

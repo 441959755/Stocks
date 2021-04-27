@@ -67,7 +67,7 @@ export default class NewClass extends cc.Component {
 
         let max_exp = GameCfgText.levelInfoCfg[GameData.properties[2]].max_exp;
 
-        this.expLabel.string = GameData.properties[1] + '/' + max_exp;
+        this.expLabel.string = 'EXP:' + GameData.properties[1] + '/' + max_exp;
 
         this.userName.string = GameData.userName;
 
@@ -137,6 +137,7 @@ export default class NewClass extends cc.Component {
                 rank: 0,
                 ref_id: 0,
             }
+            console.log('GameCfg.finalfund' + GameCfg.finalfund + '-' + 'GameCfg.ziChan' + GameCfg.ziChan + '=' + (GameCfg.finalfund - GameCfg.ziChan));
             //  if (GameCfg.GameType < 4) {
             datas.rank = datas.user_profit_rate >= datas.stock_profit_rate ? 1 : 2;
             //  if (GameCfg.GameType == 1) {

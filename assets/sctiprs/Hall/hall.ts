@@ -312,7 +312,7 @@ export default class NewClass extends cc.Component {
                     let ye = (el.timestamp + '').slice(0, 4);
                     let mon = (el.timestamp + '').slice(4, 6);
                     let da = (el.timestamp + '').slice(6);
-                    let fromDate = ye + '-' + mon + '-' + da;
+                    let fromDate = ye + '/' + mon + '/' + da;
                     let data = {
                         day: fromDate,
                         open: el.open,

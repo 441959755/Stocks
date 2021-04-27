@@ -40,9 +40,11 @@ export default class NewClass extends cc.Component {
             } else {
                 this.node.width = this.node.width - 164;
             }
-            // this.masks.forEach(el => {
-            //     el.width = this.node.width;
-            // })
+
+            this.masks.forEach(el => {
+                el.width = this.node.width;
+            })
+
         }, this)
 
         GlobalEvent.on(EventCfg.SET_DRAW_SIZE, (falg) => {

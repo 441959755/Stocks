@@ -182,6 +182,15 @@ cc.Class({
                 }
             }
         }
+
+        {
+            let str = cc.sys.localStorage.getItem('SHUANGMANGCOUNT');
+            if (str) {
+
+            }
+        }
+
+
     },
 
     onDestroy() {

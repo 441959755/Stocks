@@ -44,6 +44,8 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     zfLa: cc.Label = null;
 
+
+
     onLoad() {
         GlobalEvent.on('updataLabel', (inde) => {
 
@@ -101,15 +103,15 @@ export default class NewClass extends cc.Component {
             this.tipsBox.active = true;
             if (point >= cc.winSize.width / 2) {
                 if (this.lZoom.isChecked) {
-                    this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2 + this.inotyBox.width;
+                    this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2 + this.inotyBox.width + 10;
                 } else {
-                    this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2;
+                    this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2 + 10;
                 }
             } else {
                 if (this.rZoom.isChecked) {
-                    this.tipsBox.x = cc.winSize.width / 2 - this.tipsBox.width / 2;
+                    this.tipsBox.x = cc.winSize.width / 2 - this.tipsBox.width / 2 - 10;
                 } else {
-                    this.tipsBox.x = cc.winSize.width / 2 - this.tipsBox.width / 2 - this.rightBox.width;
+                    this.tipsBox.x = cc.winSize.width / 2 - this.tipsBox.width / 2 - this.rightBox.width - 10;
                 }
             }
         }, this);
@@ -130,7 +132,7 @@ export default class NewClass extends cc.Component {
         this.rZoom.isChecked = false;
         //双盲
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
-            nodes[4].active = false;
+            //  nodes[4].active = false;
             this.lZoom.node.active = false;
             this.lZoom.isChecked = false;
         }
@@ -197,6 +199,7 @@ export default class NewClass extends cc.Component {
         this.setBoxfalg('CPM');
         this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
         // GlobalEvent.emit('labelPoint', cc.winSize.width - this.rightBox.width / 2 - 150);
+
     }
 
     protected onDestroy() {
@@ -326,7 +329,7 @@ export default class NewClass extends cc.Component {
                 this.lZoom.node.children[0].active = true;
                 this.inotyBox.x = -cc.winSize.width / 2 - this.inotyBox.width / 2;
             }
-            // GlobalEvent.emit(EventCfg.SET_DRAW_SIZE, this.lZoom.isChecked);
+            GlobalEvent.emit(EventCfg.SET_DRAW_SIZE, this.lZoom.isChecked);
         }
     }
 }

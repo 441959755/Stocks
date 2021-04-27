@@ -35,12 +35,15 @@ export default class NewClass extends cc.Component {
     }
 
     onShow() {
+
+        this.content.removeAllChildren();
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
         //   if (this.historyType == 'SM') {
         let datas = this.historyInfo.results;
         if (datas.length <= 0) {
             return;
         }
+
 
         let selectName = function (code) {
             let name;
@@ -108,20 +111,30 @@ export default class NewClass extends cc.Component {
 
             sumEar += datas[i].userProfit;
 
-            sumrate = ((sumrate + 1) * (datas[i].userProfitRate + 1) - 1);
+            sumrate = ((sumrate / 100 + 1) * (datas[i].userProfitRate / 100 + 1) - 1);
         }
-
-
-
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             this.title.string = '双盲训练';
             this.label.string = sumEar + '';
+            if (sumEar > 0) {
+                this.label.node.color = cc.Color.RED;
+            } else if (sumEar < 0) {
+                this.label.node.color = cc.Color.GREEN;
+            } else {
+                this.label.node.color = cc.Color.WHITE;
+            }
         } else if (GameCfg.GameType == pb.GameType.DingXiang) {
             this.title.string = '定向训练';
-            this.label.string = sumrate.toFixed(2) + '%';
+            this.label.string = (sumrate * 100).toFixed(2) + '%';
+            if (sumrate > 0) {
+                this.label.node.color = cc.Color.RED;
+            } else if (sumrate < 0) {
+                this.label.node.color = cc.Color.GREEN;
+            } else {
+                this.label.node.color = cc.Color.WHITE;
+            }
         }
-        // }
     }
 
     onBtnClick(event, data) {
@@ -202,7 +215,7 @@ export default class NewClass extends cc.Component {
             } else if (GameCfg.GameSet.ZLine == '30分钟K') {
                 data.ktype = pb.KType.Min30;
             } else if (GameCfg.GameSet.ZLine == '60分钟K') {
-                data.ktype = pb.KType.Min60;
+                data.ktype = pb.KType.Min;
             }
 
             let dex = -1, items;

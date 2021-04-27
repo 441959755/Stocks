@@ -75,12 +75,20 @@ export default class NewClass extends cc.Component {
     onLoad() {
 
         this.monthBg.on('touchstart', (event) => {
+            let datas = this.yieldInfo.results;
+            if (datas.length <= 0) {
+                return;
+            }
             this.Horizontal1.active = true;
             this.vertical1.active = true;
             this.tipsBoxShow(event);
         }, this);
 
         this.monthBg.on('touchmove', (event) => {
+            let datas = this.yieldInfo.results;
+            if (datas.length <= 0) {
+                return;
+            }
             this.tipsBoxShow(event);
         }, this);
 

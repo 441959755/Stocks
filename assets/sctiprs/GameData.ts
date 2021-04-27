@@ -150,4 +150,20 @@ export default class GameData {
         GlobalEvent.emit(EventCfg.SMINITFUND);
     }
 
+    //双盲的次数
+    /**
+     * name
+     */
+    private static _ShuangMangCount;
+
+    public static get ShuangMangCount() {
+        return this._ShuangMangCount;
+    }
+
+    public static set ShuangMangCount(val) {
+        this._ShuangMangCount = val;
+        let str = new Date.
+           // cc.sys.localStorage.setItem('SHUANGMANGCOUNT', val);
+    }
+
 }

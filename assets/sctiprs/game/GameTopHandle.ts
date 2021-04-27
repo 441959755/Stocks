@@ -31,11 +31,7 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     rightNode: cc.Node = null;
 
-    @property(cc.Label)
-    gpName: cc.Label = null;
 
-    @property(cc.Label)
-    timeLabel: cc.Label = null;
 
     @property(cc.Label)
     GameName: cc.Label = null;
@@ -78,10 +74,18 @@ export default class NewClass extends cc.Component {
             //数据统计
             let statBtn = this.rightNode.getChildByName('statBtn');
 
-            colseBtn.active = false;
+            if (GameCfg.GameType == pb.GameType.ShuangMang) {
+                colseBtn.active = true;
+                btnMyspic.active = false;
+                statBtn.active = false;
+            }
+            else if (GameCfg.GameType == pb.GameType.DingXiang) {
+                colseBtn.active = false;
+                btnMyspic.active = true;
+                statBtn.active = true;
+            }
 
-            btnMyspic.active = true;
-            statBtn.active = true;
+
 
         }, this);
     }
@@ -97,8 +101,7 @@ export default class NewClass extends cc.Component {
             this.lv.string = 'LV:' + GameData.properties[2] || 0 + '';
         }
 
-        this.gpName.string = GameCfg.data[0].name + ' ' + GameCfg.data[0].code;
-        this.timeLabel.string = GameCfg.data[0].data[0].day + '--' + GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
+
 
 
         //训练指标
@@ -121,7 +124,7 @@ export default class NewClass extends cc.Component {
 
             let la = this.node.getChildByName('rate');
             la.x = 0;
-            la.children[4].active = false;
+            //  la.children[4].active = false;
             // la.children[5].active = false;
 
         }
@@ -132,6 +135,7 @@ export default class NewClass extends cc.Component {
             btnMyspic.active = false;
             statBtn.active = false;
 
+
         }
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
             this.GameName.string = '定向训练';
@@ -139,15 +143,20 @@ export default class NewClass extends cc.Component {
             colseBtn.active = true;
             btnMyspic.active = true;
             statBtn.active = false;
+
+            if (GameCfg.GAMEFUPAN) {
+                btnMyspic.active = false;
+                statBtn.active = true;
+                colseBtn.active = true;
+            }
         }
 
         if (GameCfg.GAMEFUPAN) {
             //  this.rightNode && (this.rightNode.active = false);
             this.ALlRateLabel.string = (parseInt(GameCfg.history.allRate * 10000 + '') / 100) + '%';
-
-            btnMyspic.active = false;
-            statBtn.active = true;
-            colseBtn.active = true;
+            // btnMyspic.active = false;
+            // statBtn.active = true;
+            // colseBtn.active = true;
         }
 
 

@@ -171,7 +171,7 @@ export default class NewClass extends cc.Component {
 
             if ((10 + cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0])) < this.vertical1.x) {
                 this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
-                index = cc.ext.beg_end[1];
+                index = cc.ext.beg_end[1] - 1;
             }
             this.updataLabel(index);
         }, this);
@@ -215,7 +215,7 @@ export default class NewClass extends cc.Component {
                             this.vertical1.x = cc.ext.hz_width * index + 10 - cc.ext.hz_width / 2;
                             if (index > cc.ext.beg_end[1]) {
                                 this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
-                                index = cc.ext.beg_end[1];
+                                index = cc.ext.beg_end[1] - 1;
                             }
                             this.updataLabel(index);
                             calDisX = 0;
@@ -300,7 +300,7 @@ export default class NewClass extends cc.Component {
                             let index = cc.ext.beg_end[0] + (Math.floor((localPos.x - 10) / cc.ext.hz_width));
                             if (index >= cc.ext.beg_end[1]) {
                                 this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
-                                index = cc.ext.beg_end[1];
+                                index = cc.ext.beg_end[1] - 1;
                             }
                             this.updataLabel(index);
                             calDisY = 0;
@@ -376,7 +376,13 @@ export default class NewClass extends cc.Component {
                 if (GameCfg.MaList[index][t]) {
                     //   el.node.color = GameCfg.MAColor[t];
                     if (t == 0) {
-                        el.string = '日线 MA' + GameCfg.MAs[t] + ': ' + GameCfg.MaList[index][t].toFixed(2);
+                        if (GameCfg.GameType == pb.GameType.ShuangMang) {
+                            el.string = '日线 MA' + GameCfg.MAs[t] + ': ' + GameCfg.MaList[index][t].toFixed(2);
+                        } else if (GameCfg.GameType == pb.GameType.DingXiang) {
+                            el.string = GameCfg.GameSet.ZLine + GameCfg.MAs[t] + ': ' + GameCfg.MaList[index][t].toFixed(2);
+                        }
+
+
                     } else {
                         el.string = 'MA' + GameCfg.MAs[t] + ': ' + GameCfg.MaList[index][t].toFixed(2);
                     }
@@ -479,6 +485,10 @@ export default class NewClass extends cc.Component {
 
     //Boll
     onDrawBoll(index) {
+        if (!this.BollList[index]) {
+            return;
+        }
+
         let drawBox = this.drawBOLL.node.height;
         if (index >= 20) {
             let prex = 10 + ((index - 1 - cc.ext.beg_end[0])) * cc.ext.hz_width + cc.ext.hz_width / 2;
@@ -545,7 +555,10 @@ export default class NewClass extends cc.Component {
 
                 for (let i = 0; i < GameCfg.MAs.length; i++) {
                     //   if (index + 1 >= GameCfg.MAs[i]) {
-                    let MaStart = index + 1 - GameCfg.MAs[i];
+                    let MaStart = index + 1 - parseInt(GameCfg.MAs[i]);
+                    if (MaStart < 0) {
+                        break;
+                    }
                     let sumUp = 0;
                     //天数的总和
                     for (let t = MaStart; t <= index; t++) {
@@ -714,7 +727,7 @@ export default class NewClass extends cc.Component {
                             }
 
 
-                        } else if (closeY < this.btxPreOpenY[index - 1]) {
+                        } else if (closeValue < this.btxPreOpenY[index - 1]) {
                             minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
                             maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
 
@@ -742,7 +755,7 @@ export default class NewClass extends cc.Component {
                 } else {
                     //上涨
                     if (el.open < el.close) {
-                        if (closeY <= this.btxPreCloseY[index - 1]) {
+                        if (closeValue <= this.btxPreCloseY[index - 1]) {
                             minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
                             maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
                             this.drawRect(this.drawBg, startX, minY, endX - startX, closeY - minY, true);
@@ -753,7 +766,7 @@ export default class NewClass extends cc.Component {
                                 this.btxChg[index] = true;
                             }
 
-                        } else if (closeY > this.btxPreCloseY[index - 1]) {
+                        } else if (closeValue > this.btxPreCloseY[index - 1]) {
                             minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
                             maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
                             this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, false);
@@ -786,6 +799,8 @@ export default class NewClass extends cc.Component {
                 }
                 // this.btxChg = el.open > el.close ? false : true;
             }
+            minY = this.btxPreOpenY[index] / this.disValue * drawBox + initY;
+            maxY = this.btxPreCloseY[index] / this.disValue * drawBox + initY;
             let lowX = startX + (endX - startX) / 2;
             posInfo.lowPos = cc.v2(lowX, minY - 20);
             posInfo.highPos = cc.v2(lowX, maxY + 20);

@@ -86,12 +86,24 @@ export default class NewClass extends cc.Component {
     rateItem = null;
 
     isFlag = false;
+    @property(cc.Label)
+    gpName: cc.Label = null;
+
+    @property(cc.Label)
+    timeLabel: cc.Label = null;
 
     onLoad() {
 
         GlobalEvent.on(EventCfg.GAMEOVEER, () => {
+
             if (this.keMcCount > 0) {
-                this.ziChan += parseFloat(this.keMcCount + '') * this.gpData[GameCfg.huizhidatas - 1].close;
+                this.ziChan += (this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close);
+                this.keMcCount = 0;
+
+                let curClose = parseFloat(this.gpData[GameCfg.huizhidatas - 1].close);
+                let preClose = parseFloat(this.gpData[this.buyData[this.buyData.length - 1]].close);
+                let rate = (curClose - preClose) / preClose;
+                GameCfg.allRate = ((GameCfg.allRate + 1) * (rate + 1) - 1);
             }
             GameCfg.finalfund = this.ziChan;
         }, this);
@@ -104,7 +116,7 @@ export default class NewClass extends cc.Component {
                 let node = this.node.getChildByName('fupan');
                 node.active = true;
                 node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
-                node.children[1].getComponent(cc.Label).string = this.gpData[0].day + '-' + this.gpData[this.gpData.length - 1].day;
+                node.children[1].getComponent(cc.Label).string = this.gpData[0].day + '--' + this.gpData[this.gpData.length - 1].day;
                 node.children[2].getComponent(cc.Label).string = '0.00%';
             } else if (GameCfg.GameType == pb.GameType.DingXiang) {
                 let node = this.node.getChildByName('fupan1');
@@ -116,6 +128,9 @@ export default class NewClass extends cc.Component {
 
     protected start() {
         this.ziChan = GameCfg.ziChan;
+
+        console.log('this.ziChan' + this.ziChan);
+
         this.selectBox.active = false;
         //分仓
         if (GameCfg.GameSet.isFC) {
@@ -145,8 +160,8 @@ export default class NewClass extends cc.Component {
 
         if (this.ziChan > 0 && GameCfg.huizhidatas <= this.gpData.length) {
             if (this.gpData[GameCfg.huizhidatas - 1]) {
-                this.keMrCount = parseInt(this.ziChan / ((parseFloat(this.gpData[GameCfg.huizhidatas - 1].open)) * 100) + '') * 100;
-                console.log(this.gpData[GameCfg.huizhidatas - 1].open);
+                this.keMrCount = parseInt(this.ziChan / ((parseFloat(this.gpData[GameCfg.huizhidatas - 1].close)) * 100) + '') * 100;
+                console.log(this.gpData[GameCfg.huizhidatas - 1].close);
             }
 
         }
@@ -186,6 +201,8 @@ export default class NewClass extends cc.Component {
             let node = this.node.getChildByName('fupan1');
             node.active = true;
         }
+        this.gpName.string = GameCfg.data[0].name + ' ' + GameCfg.data[0].code;
+        this.timeLabel.string = GameCfg.data[0].data[0].day + '--' + GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
     }
 
     //回合数
@@ -228,12 +245,12 @@ export default class NewClass extends cc.Component {
 
                     this.keMcCount += this.keMrCount;
                     this.keMrCount = 0;
-                    this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].open;
+                    this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
                     //  console.log(this.gpData[GameCfg.huizhidatas - 1].open);
-                    if (this.ziChan <= 0) {
-                        this.ziChan = 0;
-                        console.log('买入卖出数据有问题');
-                    }
+                    // if (this.ziChan <= 0) {
+                    //     this.ziChan = 0;
+                    //     console.log('买入卖出数据有问题');
+                    // }
                     this.cyBtn.node.active = true;
                     this.gwBtn.node.active = false;
                 } else {
@@ -263,8 +280,8 @@ export default class NewClass extends cc.Component {
 
                 this.keMcCount += this.keMrCount;
                 this.keMrCount = 0;
-                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
-                console.log(this.gpData[GameCfg.huizhidatas - 2].open);
+                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
+                // console.log(this.gpData[GameCfg.huizhidatas - 2].open);
                 this.mrBtn.interactable = false;
                 this.mrBtn.enableAutoGrayEffect = true;
                 this.mcBtn.interactable = true;
@@ -277,7 +294,7 @@ export default class NewClass extends cc.Component {
                 this.mrBtn.enableAutoGrayEffect = false;
                 this.mcBtn.interactable = false;
                 this.mcBtn.enableAutoGrayEffect = true;
-                this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].close;
+                this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
 
                 //    console.log(this.gpData[GameCfg.huizhidatas - 1].close);
 
@@ -297,7 +314,7 @@ export default class NewClass extends cc.Component {
                 this.keMcCount += count;
                 this.keMrCount -= count;
 
-                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
+                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
                 //  this.keMrCount -= this.keMrCount * (3 / 4);
 
                 if (this.keMrCount < 100) {
@@ -312,7 +329,7 @@ export default class NewClass extends cc.Component {
 
                 this.keMcCount -= mc;
 
-                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 2].close);
+                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 1].close);
                 //  this.keMcCount -= this.keMcCount * (3 / 4);
 
                 if (this.keMcCount <= 0) {
@@ -330,7 +347,7 @@ export default class NewClass extends cc.Component {
                 let count = parseInt(2 / 3 * this.keMrCount / 100 + '') * 100;
                 this.keMcCount += count;
                 this.keMrCount -= count;
-                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
+                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
 
                 if (this.keMrCount < 100) {
                     this.mrBtn.interactable = false;
@@ -346,7 +363,7 @@ export default class NewClass extends cc.Component {
 
                 this.keMcCount -= mc;
 
-                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 2].close);
+                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 1].close);
                 if (this.keMcCount <= 0) {
 
                     this.mcBtn.interactable = false;
@@ -362,7 +379,7 @@ export default class NewClass extends cc.Component {
                 let count = parseInt(1 / 2 * this.keMrCount / 100 + '') * 100;
                 this.keMcCount += count;
                 this.keMrCount -= count;
-                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
+                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
 
                 if (this.keMrCount < 100) {
                     this.mrBtn.interactable = false;
@@ -377,7 +394,7 @@ export default class NewClass extends cc.Component {
 
                 this.keMcCount -= mc;
 
-                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 2].close);
+                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 1].close);
 
                 if (this.keMcCount <= 0) {
 
@@ -394,7 +411,7 @@ export default class NewClass extends cc.Component {
                 let count = parseInt(1 / 3 * this.keMrCount / 100 + '') * 100;
                 this.keMcCount += count
                 this.keMrCount -= count;
-                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
+                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
 
                 if (this.keMrCount < 100) {
                     this.mrBtn.interactable = false;
@@ -409,7 +426,7 @@ export default class NewClass extends cc.Component {
 
                 this.keMcCount -= mc;
 
-                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 2].close);
+                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 1].close);
 
                 if (this.keMcCount <= 0) {
 
@@ -426,7 +443,7 @@ export default class NewClass extends cc.Component {
                 let count = parseInt(1 / 4 * this.keMrCount / 100 + '') * 100;
                 this.keMcCount += count;
                 this.keMrCount -= count;
-                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 2].open;
+                this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
 
                 if (this.keMrCount < 100) {
                     this.mrBtn.interactable = false;
@@ -440,7 +457,7 @@ export default class NewClass extends cc.Component {
 
                 this.keMcCount -= mc;
 
-                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 2].close);
+                this.ziChan += (mc * this.gpData[GameCfg.huizhidatas - 1].close);
                 if (this.keMcCount <= 0) {
                     this.mcBtn.interactable = false;
                     this.mcBtn.enableAutoGrayEffect = true;
@@ -482,10 +499,12 @@ export default class NewClass extends cc.Component {
         //买入
         let data = GameCfg.data[0].data;
         if (state == 'mrBtn') {
-            this.buyData.push(GameCfg.huizhidatas - 2);
-            let curClose = parseFloat(data[GameCfg.huizhidatas - 1].close);
+            this.buyData.push(GameCfg.huizhidatas - 1);
 
-            let preClose = parseFloat(data[GameCfg.huizhidatas - 2].close);
+            let curClose = parseFloat(data[GameCfg.huizhidatas].close);
+
+            let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
+
             let rate = (curClose - preClose) / preClose;
             //   console.log('(' + curClose + '-' + preClose + ')' + "/" + preClose);
             GlobalEvent.emit('updateRate', [rate]);
@@ -507,9 +526,9 @@ export default class NewClass extends cc.Component {
         //卖出
         else if (state == 'mcBtn') {
 
-            this.saleData.push(GameCfg.huizhidatas - 2);
+            this.saleData.push(GameCfg.huizhidatas - 1);
 
-            let curClose = parseFloat(data[GameCfg.huizhidatas - 2].close);
+            let curClose = parseFloat(data[GameCfg.huizhidatas - 1].close);
 
             let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
 
@@ -525,9 +544,8 @@ export default class NewClass extends cc.Component {
             }
             GlobalEvent.emit('updateRate', [rate, GameCfg.allRate]);
 
-            this.isFlag = false;
-
             if (this.keMcCount == 0) {
+                this.isFlag = false;
                 this.rateItem.end = GameCfg.huizhidatas - 1;
 
                 GameCfg.fill.forEach(el => {
@@ -565,7 +583,7 @@ export default class NewClass extends cc.Component {
             if (!this.isFlag) {
                 return;
             }
-            let curClose = parseFloat(data[GameCfg.huizhidatas - 1].close);
+            let curClose = parseFloat(data[GameCfg.huizhidatas].close);
             let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
             let rate = (curClose - preClose) / preClose;
             GlobalEvent.emit('updateRate', [rate]);
