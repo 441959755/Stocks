@@ -7,6 +7,8 @@ import { pb } from '../../protos/proto';
 
 import GameCfgText from '../GameText';
 
+import LLWConfig from '../common/config/LLWConfig';
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -21,6 +23,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     curla: cc.Label = null;
 
+    @property(cc.Node)
+    CZBtn: cc.Node = null;
+
     onLoad() {
         GlobalEvent.on(EventCfg.SMINITFUND, () => {
             this.curla.string = GameData.properties[3];
@@ -34,12 +39,25 @@ export default class NewClass extends cc.Component {
         this.initLa.string = GameCfgText.smxlCfg.capital_init;
 
         this.curla.string = GameData.properties[3];
+
+
+        this.CZBtn.active = false;
+        if (GameData.ShuangMangCount <= 0) {
+            this.CZBtn.active = true;
+        }
     }
 
     onClick(event, curstData) {
         let name = event.target.name;
         //点击双盲训练
         if (name == 'startSMBtn') {
+            // if (GameData.properties[3] < 10000) {
+            //     if (GameData.ShuangMangCount <= 0) {
+            //         GlobalEvent.emit(EventCfg.OPENSMRESETMONEYLAYER);
+            //     } else {
+            //         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的金币不足，请点击重置，免费重置金币！');
+            //     }
+            // }
             GameCfg.GAMEFUPAN = false;
             GameCfg.GameType = pb.GameType.ShuangMang;
             GameCfg.GameSet = GameData.SMSet;
@@ -159,5 +177,28 @@ export default class NewClass extends cc.Component {
 
     onDestroy() {
         GlobalEvent.off(EventCfg.SMINITFUND);
+    }
+
+    //点击广告重置
+    onGameResetCount(info) {
+        let messageId;
+        //if (GameCfg.GameType == pb.GameType.ShuangMang) {
+        messageId = pb.MessageId.Req_Game_SmxlReport;
+        // } else if (GameCfg.GameType == pb.GameType.DingXiang) {
+
+        // }
+        let data = {
+            uid: GameData.userID,
+            pos: pb.GameType.ShuangMang,
+            url: '123',
+            from: LLWConfig.PLATTYPE,
+        }
+
+        socket.send(messageId, PB.onAdClickedConvertTpBuff(data), (info) => {
+            console.log('onGameResetCount' + JSON.stringify(info));
+
+            // callBack && (callBack(info));
+        });
+
     }
 }

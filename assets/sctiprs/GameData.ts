@@ -157,13 +157,29 @@ export default class GameData {
     private static _ShuangMangCount;
 
     public static get ShuangMangCount() {
+
         return this._ShuangMangCount;
     }
 
     public static set ShuangMangCount(val) {
         this._ShuangMangCount = val;
-        let str = new Date.
-           // cc.sys.localStorage.setItem('SHUANGMANGCOUNT', val);
+        let str = new Date().toLocaleDateString();
+        cc.sys.localStorage.setItem('SHUANGMANGCOUNT' + str, val);
     }
+
+
+    private static _DingXiangCount;
+
+    public static get DingXiangCount() {
+
+        return this._DingXiangCount;
+    }
+
+    public static set DingXiangCount(val) {
+        this._DingXiangCount = val;
+        let str = new Date().toLocaleDateString();
+        cc.sys.localStorage.setItem('DINGXIANGCOUNT' + str, val);
+    }
+
 
 }

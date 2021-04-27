@@ -361,6 +361,8 @@ export default class NewClass extends cc.Component {
 
     }
 
+ 
+
     // resetSize(cav) {
     //     let frameSize = cc.view.getFrameSize();
     //     let designSize = cc.view.getDesignResolutionSize();

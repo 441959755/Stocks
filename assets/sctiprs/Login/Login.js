@@ -184,10 +184,31 @@ cc.Class({
         }
 
         {
-            let str = cc.sys.localStorage.getItem('SHUANGMANGCOUNT');
-            if (str) {
-
+            let str = new Date().toLocaleDateString();
+            let count = cc.sys.localStorage.getItem('SHUANGMANGCOUNT' + str);
+            if (!count) {
+                GameData.ShuangMangCount = GameCfgText.smxlCfg.free;
+            } else {
+                GameData.ShuangMangCount = count;
             }
+
+            let time = (new Date).getTime() - 24 * 60 * 60 * 1000;
+            let preStr = new Date(time).toLocaleDateString();
+            cc.sys.localStorage.removeItem('SHUANGMANGCOUNT' + preStr);
+        }
+
+        {
+            let str = new Date().toLocaleDateString();
+            let count = cc.sys.localStorage.getItem('DINGXIANGCOUNT' + str);
+            if (!count) {
+                GameData.DingXiangCount = GameCfgText.smxlCfg.free;
+            } else {
+                GameData.DingXiangCount = count;
+            }
+
+            let time = (new Date).getTime() - 24 * 60 * 60 * 1000;
+            let preStr = new Date(time).toLocaleDateString();
+            cc.sys.localStorage.removeItem('DINGXIANGCOUNT' + preStr);
         }
 
 

@@ -32,6 +32,8 @@ let CmdEditNick = pb.CmdEditNick;
 
 let CmdUploadIcon = pb.CmdUploadIcon;
 
+let AdClicked = pb.AdClicked;
+
 
 function PBHelper() {
 
@@ -184,6 +186,19 @@ PBHelper.prototype = {
         })
         let buff = CmdUploadIcon.encode(message).finish();
         return buff;
+    },
+
+    onAdClickedConvertTpBuff(data) {
+        let message = AdClicked.create({
+            uid: data.uid,
+            pos: data.pos,
+            url: data.url,
+            from: data.from,
+        })
+
+        let buff = AdClicked.encode(message).finish();
+        return buff;
+
     },
 
     selectBlackData(id, buff) {

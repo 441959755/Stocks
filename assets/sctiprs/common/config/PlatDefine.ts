@@ -1,6 +1,6 @@
 // 渠道
-const PLAT_WEB = 1;
-const PLAT_WECHAT = 2;
+const PLAT_WEB = 0;
+const PLAT_WECHAT = 1;
 const PLAT_QQ = 3;
 const PLAT_ANDROID = 4;
 const PLAT_IOS = 5;
