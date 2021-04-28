@@ -52,12 +52,17 @@ export default class NewClass extends cc.Component {
             let datas = GameCfg.data[0].data;
             let info = [];
             if (datas[inde]) {
-                info.push('****/**/**');
+                if (GameCfg.GAMEFUPAN) {
+                    info.push(datas[inde].day);
+                } else {
+                    info.push('****/**/**');
+                }
+
                 info.push(parseFloat(datas[inde].open).toFixed(2));
                 info.push(parseFloat(datas[inde].high).toFixed(2));
                 info.push(parseFloat(datas[inde].low).toFixed(2));
                 info.push(parseFloat(datas[inde].close).toFixed(2));
-                info.push(parseInt(datas[inde].value));
+                info.push((parseInt(datas[inde].value) / 10000).toFixed(2) + 'w');
                 info.push(parseInt(parseInt(datas[inde].price) / 10000 + '') + 'w');
                 info.push(parseFloat(datas[inde].Rate).toFixed(2) + '%');
                 let zd = datas[inde].close - datas[inde - 1].close;
@@ -71,7 +76,7 @@ export default class NewClass extends cc.Component {
                 } else {
                     this.zfLa.node.color = cc.Color.RED;
                 }
-                this.zfLa.string = zf.toFixed(2);
+                this.zfLa.string = zf.toFixed(2) + '%';
             }
 
 
@@ -166,9 +171,11 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GameSet.isBW) {
             this.rightBox.color = new cc.Color().fromHEX('#1E1E1E');
             this.tipsBox.color = new cc.Color().fromHEX('#1E1E1E');
-
-            this.inotyBox.getChildByName('bg').active = true;
+            this.inotyBox.color = new cc.Color().fromHEX('#1E1E1E');
+            //  this.inotyBox.getChildByName('bg').active = true;
             this.inotyBox.getChildByName('label').color = cc.Color.WHITE;
+            this.selcetContent.color = new cc.Color().fromHEX('#1E1E1E');
+            this.selcetContent.parent.color = new cc.Color().fromHEX('#343434');
 
         }
         //白
@@ -176,7 +183,10 @@ export default class NewClass extends cc.Component {
 
             this.rightBox.color = cc.Color.WHITE;
             this.tipsBox.color = cc.Color.WHITE;
-            this.inotyBox.getChildByName('bg').active = false;
+            this.inotyBox.color = cc.Color.WHITE;
+            this.selcetContent.color = cc.Color.WHITE;
+            this.selcetContent.parent.color = cc.Color.WHITE;
+            //  this.inotyBox.getChildByName('bg').active = false;
             this.inotyBox.getChildByName('label').color = cc.Color.BLACK;
         }
         this.tipsBox.children.forEach(el => {
@@ -228,10 +238,10 @@ export default class NewClass extends cc.Component {
 
     setBoxfalg(data) {
         // this.rightBox.children.forEach(el => {
-        //     el.color = new cc.Color().fromHEX('#808080');
+        //     el.color = 
         // })
 
-        this.rightBox.getChildByName(data).color = cc.Color.RED;
+        this.rightBox.getChildByName(data).color = new cc.Color().fromHEX('#fd4432');
         if (data == 'ma' || data == 'boll') {
             if (data == 'ma') {
                 this.ma = true;
@@ -289,7 +299,7 @@ export default class NewClass extends cc.Component {
         //是否一直显示
         if (GameCfg.GameSet.isShowVol) {
             flagData.cpm = true;
-            this.rightBox.getChildByName('CPM').color = cc.Color.RED;
+            this.rightBox.getChildByName('CPM').color = new cc.Color().fromHEX('#fd4432');
         }
         GlobalEvent.emit('on_off', flagData);
     }

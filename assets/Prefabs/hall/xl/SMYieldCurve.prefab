@@ -628,8 +628,8 @@
         0,
         0,
         1,
-        1.5,
-        1.5,
+        1,
+        1,
         1
       ]
     },
@@ -1914,7 +1914,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 2,
-      "height": 60
+      "height": 30
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2378,7 +2378,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 431.13,
+      "width": 0,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -2429,8 +2429,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "统计时段： 2021.03.1--2021.03.24",
-    "_N$string": "统计时段： 2021.03.1--2021.03.24",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 28,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -3559,9 +3559,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 220,
-      "g": 213,
-      "b": 105,
+      "r": 219,
+      "g": 152,
+      "b": 86,
       "a": 255
     },
     "_contentSize": {
@@ -4327,9 +4327,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 220,
-      "g": 213,
-      "b": 105,
+      "r": 219,
+      "g": 152,
+      "b": 86,
       "a": 255
     },
     "_contentSize": {
@@ -5027,8 +5027,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "资金",
-    "_N$string": "资金",
+    "_string": "资产",
+    "_N$string": "资产",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -5086,8 +5086,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 96,
-      "height": 37
+      "width": 127,
+      "height": 46
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -5142,7 +5142,7 @@
       "__uuid__": "dcfa82a4-59f1-435b-8a08-f2dd338f706a"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -7068,7 +7068,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 145.64,
+      "width": 160.21,
       "height": 25.2
     },
     "_anchorPoint": {
@@ -7121,7 +7121,7 @@
     "_useOriginalSize": false,
     "_string": "时  间:2021.04.1",
     "_N$string": "时  间:2021.04.1",
-    "_fontSize": 20,
+    "_fontSize": 22,
     "_lineHeight": 20,
     "_enableWrapText": true,
     "_N$file": null,
@@ -7175,7 +7175,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 145.64,
+      "width": 160.21,
       "height": 25.2
     },
     "_anchorPoint": {
@@ -7228,7 +7228,7 @@
     "_useOriginalSize": false,
     "_string": "时  间:2021.04.1",
     "_N$string": "时  间:2021.04.1",
-    "_fontSize": 20,
+    "_fontSize": 22,
     "_lineHeight": 20,
     "_enableWrapText": true,
     "_N$file": null,
@@ -7282,7 +7282,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 145.64,
+      "width": 160.21,
       "height": 25.2
     },
     "_anchorPoint": {
@@ -7335,7 +7335,7 @@
     "_useOriginalSize": false,
     "_string": "时  间:2021.04.1",
     "_N$string": "时  间:2021.04.1",
-    "_fontSize": 20,
+    "_fontSize": 22,
     "_lineHeight": 20,
     "_enableWrapText": true,
     "_N$file": null,
@@ -7389,7 +7389,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 145.64,
+      "width": 160.21,
       "height": 25.2
     },
     "_anchorPoint": {
@@ -7442,7 +7442,7 @@
     "_useOriginalSize": false,
     "_string": "时  间:2021.04.1",
     "_N$string": "时  间:2021.04.1",
-    "_fontSize": 20,
+    "_fontSize": 22,
     "_lineHeight": 20,
     "_enableWrapText": true,
     "_N$file": null,
@@ -7496,7 +7496,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 145.64,
+      "width": 160.21,
       "height": 25.2
     },
     "_anchorPoint": {
@@ -7549,7 +7549,7 @@
     "_useOriginalSize": false,
     "_string": "时  间:2021.04.1",
     "_N$string": "时  间:2021.04.1",
-    "_fontSize": 20,
+    "_fontSize": 22,
     "_lineHeight": 20,
     "_enableWrapText": true,
     "_N$file": null,

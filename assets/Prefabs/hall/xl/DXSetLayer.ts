@@ -56,6 +56,12 @@ export default class NewClass extends cc.Component {
         this.toggles4[0].isChecked = GameData.DXSet.isShowVol;
         this.toggles5[0].isChecked = GameData.DXSet.isBW;
 
+        this.toggles1[1].isChecked = !GameData.DXSet.k_notice;
+        this.toggles2[1].isChecked = !GameData.DXSet.jx_notice;
+        this.toggles3[1].isChecked = !GameData.DXSet.StopCheck_notice;
+        this.toggles4[1].isChecked = !GameData.DXSet.isShowVol;
+        this.toggles5[1].isChecked = !GameData.DXSet.isBW;
+
         this.labels[0].string = GameData.DXSet.MA1Date;
         this.labels[1].string = GameData.DXSet.MA2Date;
         this.labels[2].string = GameData.DXSet.MA3Date;

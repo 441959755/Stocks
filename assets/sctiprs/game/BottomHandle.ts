@@ -11,6 +11,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     tipsLabel: cc.Label = null;
 
+    @property(cc.Label)
+    tipsLabel1: cc.Label = null;
+
     @property(cc.Button)
     mrBtn: cc.Button = null;
 
@@ -33,6 +36,8 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Label)
     tipsmc: cc.Label = null;
+
+
 
 
     _keMcCount = 0;       //可卖出的数量
@@ -89,8 +94,14 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     gpName: cc.Label = null;
 
+    @property([cc.Label])
+    timeLabel: cc.Label[] = [];
+
+    @property([cc.Label])
+    moneyLabel: cc.Label[] = [];
+
     @property(cc.Label)
-    timeLabel: cc.Label = null;
+    priceLabel: cc.Label[] = [];
 
     onLoad() {
 
@@ -116,7 +127,7 @@ export default class NewClass extends cc.Component {
                 let node = this.node.getChildByName('fupan');
                 node.active = true;
                 node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
-                node.children[1].getComponent(cc.Label).string = this.gpData[0].day + '--' + this.gpData[this.gpData.length - 1].day;
+                node.children[1].getComponent(cc.Label).string = (this.gpData[0].day.replace(/-/g, '/')) + '--' + (this.gpData[this.gpData.length - 1].day.replace(/-/g, '/'));
                 node.children[2].getComponent(cc.Label).string = '0.00%';
             } else if (GameCfg.GameType == pb.GameType.DingXiang) {
                 let node = this.node.getChildByName('fupan1');
@@ -129,7 +140,7 @@ export default class NewClass extends cc.Component {
     protected start() {
         this.ziChan = GameCfg.ziChan;
 
-        console.log('this.ziChan' + this.ziChan);
+        // console.log('this.ziChan' + this.ziChan);
 
         this.selectBox.active = false;
         //分仓
@@ -190,9 +201,28 @@ export default class NewClass extends cc.Component {
         //         nodes[0].getComponent(cc.Label).string = '结束时间:' + GameCfg.data[0].data[le - 1].day;
         //     }
         // }
+        let dxnode = this.timeLabel[0].node.parent.parent;
+
+        if (GameCfg.GameType == pb.GameType.ShuangMang) {
+            this.tipsLabel.node.active = true;
+            this.tipsLabel1.node.active = false;
+            dxnode.active = false;
+        } else if (GameCfg.GameType == pb.GameType.DingXiang) {
+            this.tipsLabel.node.active = false;
+            this.tipsLabel1.node.active = true;
+            dxnode.active = true;
+
+            if (GameCfg.GameSet.isFC) {
+                dxnode.x = -400;
+                dxnode.getComponent(cc.Layout).spacingX = 100;
+            }
+        }
+
+
         this.roundNumber = GameCfg.data[0].data.length - GameCfg.huizhidatas;
 
         this.tipsLabel.string = '回合数：' + this.roundNumber;
+        this.tipsLabel1.string = '回合数：' + this.roundNumber;
 
         if (GameCfg.GAMEFUPAN) {
             this.node.children.forEach(el => {
@@ -201,8 +231,23 @@ export default class NewClass extends cc.Component {
             let node = this.node.getChildByName('fupan1');
             node.active = true;
         }
-        this.gpName.string = GameCfg.data[0].name + ' ' + GameCfg.data[0].code;
-        this.timeLabel.string = GameCfg.data[0].data[0].day + '--' + GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
+        let code = GameCfg.data[0].code;
+        if (code.length >= 7) {
+            code = code.slice(1);
+        }
+
+        this.gpName.string = GameCfg.data[0].name + ' ' + code;
+        this.timeLabel[0].string = GameCfg.data[0].data[0].day.replace(/-/g, '/');
+        this.timeLabel[1].string = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day.replace(/-/g, '/');
+
+        this.moneyLabel[0].string = '总资产：' + GameCfg.ziChan;
+        this.moneyLabel[1].string = '当前资产：' + this.ziChan;
+
+        this.priceLabel[0].string = '买入均价：' + this.gpData[GameCfg.huizhidatas - 1].close;
+        this.priceLabel[1].string = '当前价格：' + this.gpData[GameCfg.huizhidatas - 1].close;
+
+
+
     }
 
     //回合数
@@ -211,6 +256,21 @@ export default class NewClass extends cc.Component {
             this.roundNumber = 0;
         }
         this.tipsLabel.string = '回合数：' + this.roundNumber;
+        this.tipsLabel1.string = '回合数：' + this.roundNumber;
+        this.moneyLabel[1].string = '当前资产：' + this.ziChan;
+
+        if (this.buyData.length == 0) {
+            this.priceLabel[0].string = '买入均价：' + this.gpData[GameCfg.huizhidatas - 1].close;
+        } else {
+            let jp = 0;
+            for (let i = 0; i < this.buyData.length; i++) {
+                jp += this.gpData[this.buyData[i]].close;
+            }
+            this.priceLabel[0].string = '买入均价：' + (jp / this.buyData.length).toFixed(2);
+        }
+
+        this.priceLabel[1].string = '当前价格：' + this.gpData[GameCfg.huizhidatas - 1].close;
+
         if (this.roundNumber <= 0) {
             GlobalEvent.emit(EventCfg.GAMEOVEER, true);
             return;

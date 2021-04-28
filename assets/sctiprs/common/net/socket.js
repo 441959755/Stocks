@@ -30,13 +30,16 @@ Socket.prototype = {
                     cc.director.loadScene('hall');
                 }
 
-                if (!this.heartbeat) {
-                    this.heartbeat = setInterval(() => {
+                if (!self.heartbeat) {
+                    self.heartbeat = setInterval(() => {
                         socket.send(pb.MessageId.Sync_C2S_GameHeart, null, null);
                         console.log('发送心跳');
                     }, 5000);
                 }
 
+                // if (self.preData) {
+                //     self.send(self.preData.actionCode, self.preData.proto, self.preData.callback);
+                // }
             }
         });
     },
@@ -78,7 +81,16 @@ Socket.prototype = {
     // },
 
     send(actionCode, proto, callback) {
-        if (this.ws.readyState == WebSocket.OPEN) {
+        if (!this.ws) {
+            console.log('未连接');
+            // this.preData = {
+            //     actionCode: actionCode,
+            //     proto: proto,
+            //     callback: callback,
+            // }
+            this.onclose();
+        }
+        else if (this.ws.readyState == WebSocket.OPEN) {
 
             let le = proto ? proto.length : 0;
 
@@ -111,6 +123,8 @@ Socket.prototype = {
 
         } else {
             console.log("send error. readyState = ", this.ws.readyState);
+
+            this.ws.close();
             // setTimeout(() => {
             //     this.send(actionCode, proto, callback);
             // }, 1000);
@@ -120,14 +134,17 @@ Socket.prototype = {
 
     onclose() {
         console.log('连接断开');
-        this.reconnect();
         this.heartbeat && (clearInterval(this.heartbeat))
         this.heartbeat = null;
+        this.reconnectBeat && (clearInterval(this.reconnectBeat))
+        this.reconnectBeat = null;
+        this.ws = null;
+        this.reconnect();
+
     },
 
     reconnect() {
         let self = this;
-        this.ws = null;
         if (!this.reconnectBeat) {
             this.reconnectBeat = setInterval(() => {
                 console.log('断线连接中...');
@@ -138,7 +155,7 @@ Socket.prototype = {
 
 
     initSocket() {
-        //  if (!host) { host = 'ws://3000' }
+
         this.ws = new WebSocket(this.host);
         this.ws.binaryType = 'arraybuffer';
         //this.ws.responseType = "arraybuffer"
@@ -146,13 +163,10 @@ Socket.prototype = {
         this.ws.onopen = this.connected.bind(this);
         this.ws.onerror = function (event) {
             console.log('ws onerror');
-            this.ws.close();
+            //  this.ws.close();
         }
         this.ws.onclose = this.onclose.bind(this);
 
-        this.reconnectBeat = null;
-
-        this.heartbeat = null;
     }
 }
 
@@ -161,6 +175,13 @@ function Socket(host) {
     this.queue = {};
     this.host = host;
     this.initSocket();
+
+    this.heartbeat && (clearInterval(this.heartbeat))
+    this.heartbeat = null;
+    this.reconnectBeat && (clearInterval(this.reconnectBeat))
+    this.reconnectBeat = null;
+
+    // this.preData = null;
     //  this.notification = new cc.EventTarget();
 }
 

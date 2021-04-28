@@ -6,6 +6,7 @@ import GameData from '../GameData';
 import { pb } from '../../protos/proto';
 
 import GameCfgText from '../GameText';
+import HttpUtils from '../common/net/HttpUtils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -31,10 +32,18 @@ export default class NewClass extends cc.Component {
 
     setProId = 0;
 
+    @property(cc.Node)
+    item: cc.Node = null;
+
+    @property(cc.Node)
+    content: cc.Node = null;
+
     onLoad() {
         this._tipsLa = this.edit.node.getChildByName('tipslabel');
         this.edit.node.on('editing-did-ended', (edit) => {
             if (!this.onTipsInfo()) {
+                edit.string = '';
+                GameData.DXSet.search = '随机选股';
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, GameData.DXSet.market + '不支持自定义当前选项')
                 return;
             }
@@ -43,22 +52,56 @@ export default class NewClass extends cc.Component {
                 return;
             } else {
                 let datas = GameCfgText.stockList;
-                let flag = false, tt;
+                let flag = false, tt = [];
                 for (let i = 0; i < datas.length; i++) {
-                    if (datas[i].indexOf(str) != -1) {
-                        tt = datas[i];
-                        flag = true;
+                    let arr1 = datas[i].split('|');
+                    let str1 = arr1[0];
+                    if (arr1[0].length >= 7) {
+                        str1 = arr1[0].slice(1);
+                    }
+                    if (tt.length >= 100) {
                         break;
+                    }
+                    if (str1.indexOf(str) != -1) {
+                        tt.push(datas[i]);
+                        flag = true;
+                        //  break;
+                    }
+
+                    else if (arr1[1].indexOf(str) != -1) {
+                        tt.push(datas[i]);
+                        flag = true;
+                        //  break;
                     }
                 }
                 if (!flag) {
-                    this._tipsLa.color = cc.Color.RED
+                    this._tipsLa.color = cc.Color.RED;
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '没有找查到您要的股票.');
+                    edit.string = '';
                 } else {
+                    this.content.removeAllChildren();
+                    this.downBoxs[8].active = true;
+                    this.setProId = 1;
                     this._tipsLa.color = new cc.Color().fromHEX('#BBBBBB');
                     this._tipsLa.active = false;
-                    let arr = tt.split('|');
-                    this.boxs[1].getChildByName('label').getComponent(cc.Label).string = arr[0] + '  ' + arr[1];
-                    GameData.DXSet.search = arr[0];
+                    // let item = cc.find('downBox/New ScrollView/view/content/item', this.downBoxs[1]);
+                    // let content = cc.find('downBox/New ScrollView/view/content', this.downBoxs[1]);
+                    for (let i = 0; i < tt.length; i++) {
+                        let arr = tt[i].split('|');
+                        let str = arr[0];
+                        if (arr[0].length >= 7) {
+                            str = arr[0].slice(1);
+                        }
+                        if (i == 0) {
+
+                            this.boxs[1].getChildByName('label').getComponent(cc.Label).string = str + '  ' + arr[1];
+                            GameData.DXSet.search = arr[0];
+                        }
+                        let node = cc.instantiate(this.item);
+                        this.content.addChild(node);
+                        node.getComponent(cc.Label).string = str + '  ' + arr[1];
+                    }
+
                     edit.string = '';
                 }
             }
@@ -130,6 +173,8 @@ export default class NewClass extends cc.Component {
 
 
 
+
+
         //当前年月的天数
         if (index == 3 || index == 4) {
             let year = this.boxs[2].getChildByName('label').getComponent(cc.Label).string;
@@ -168,7 +213,10 @@ export default class NewClass extends cc.Component {
         } else if (name == 'item') {
             let str = event.target.getComponent(cc.Label).string;
             this.boxs[this.setProId].getChildByName('label').getComponent(cc.Label).string = str;
-            this.downBoxs[this.setProId].active = false;
+            //  this.downBoxs[this.setProId].active = false;
+            this.downBoxs.forEach(el => {
+                el.active = false;
+            })
             if (this.setProId == 3) {
                 let downBox = this.downBoxs[this.setProId];
                 let year = this.boxs[3].getChildByName('label').getComponent(cc.Label).string;
@@ -218,6 +266,8 @@ export default class NewClass extends cc.Component {
                 GameData.DXSet.KLine = str;
             } else if (this.setProId == 7) {
                 GameData.DXSet.ZLine = str;
+
+                //   if(GameData.DXSet.ZLine!='')
             }
 
         } else if (name == 'setDXBtnDX') {
@@ -260,8 +310,10 @@ export default class NewClass extends cc.Component {
             GameData.DXSet.search = '随机选股';
             GameData.DXSet.year = '随机';
             GameData.DXSet.month = '--';
+            GameData.DXSet.day = '--';
             GameData.DXSet.KLine = '100';
             GameData.DXSet.ZLine = '日线';
+
             this.onShow();
         }
 
@@ -283,7 +335,7 @@ export default class NewClass extends cc.Component {
         }
         let items
         //   console.log(JSON.stringify(GameCfgText.stockList));
-        if (GameData.DXSet.search == '随机选股') {
+        if (GameData.DXSet.search == '随机选股' || GameData.DXSet.search == '') {
             let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
             console.log('le' + le);
             items = GameCfgText.stockList[le].split('|');
@@ -336,15 +388,7 @@ export default class NewClass extends cc.Component {
             data.kstyle = pb.KStyle.Down;
         }
 
-        if (GameData.DXSet.ZLine == '日线') {
-            data.ktype = pb.KType.Day;
-        } else if (GameData.DXSet.ZLine == '周线') {
-            data.ktype = pb.KType.Day;
-        } else if (GameData.DXSet.ZLine == '30分钟K') {
-            data.ktype = pb.KType.Min;
-        } else if (GameData.DXSet.ZLine == '60分钟K') {
-            data.ktype = pb.KType.Min;
-        }
+
 
         if (GameData.DXSet.year != '随机') {
             if (GameData.DXSet.month == '--') {
@@ -397,7 +441,12 @@ export default class NewClass extends cc.Component {
 
                 let d = new Date(year + '-' + month + '-' + day);
 
-                sc = d.getTime() - data.total * 24 * 60 * 60 * 1000;
+                if (GameData.DXSet.ZLine == '周线') {
+                    sc = d.getTime() - data.total * 24 * 60 * 60 * 1000 * 7;
+                } else {
+                    sc = d.getTime() - data.total * 24 * 60 * 60 * 1000;
+                }
+
             }
             let year = start.slice(0, 4);
             let month = start.slice(4, 6);
@@ -423,16 +472,49 @@ export default class NewClass extends cc.Component {
         }
 
         GameCfg.data[0].code = items[0];
-        if (items[0].length >= 7) {
-            GameCfg.data[0].code = items[0].slice(1);
-        }
+
+        // if (items[0].length >= 7) {
+        //     GameCfg.data[0].code = items[0].slice(1);
+        // }
 
         GameCfg.data[0].data = [];
         GameCfg.data[0].name = items[1];
 
         GameCfg.data[0].circulate = items[4];
-        GlobalEvent.emit('onCmdQuoteQuery', data);
+
+        if (GameData.DXSet.ZLine == '日线') {
+            data.ktype = pb.KType.Day;
+            GlobalEvent.emit('onCmdQuoteQuery', data);
+        } else if (GameData.DXSet.ZLine == '周线') {
+            data.ktype = pb.KType.Day;
+        } else if (GameData.DXSet.ZLine == '30分钟K') {
+            data.ktype = pb.KType.Min;
+        } else if (GameData.DXSet.ZLine == '60分钟K') {
+            data.ktype = pb.KType.Min;
+        }
+
     }
+
+    //http://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js?TYPE=m30k&rtntype=5&authorityType=fa&id=3008032
+
+    // //获取周K
+
+    // getWkData() {
+    //     let url = 'http://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js';
+
+    //     let code = GameCfg.data[0].code[0] == '6' ? GameCfg.data[0].code + '1' : GameCfg.data[0].code + '2';
+
+    //     let TYPE;
+    //     if (GameData.DXSet.ZLine == '周线') {
+    //         TYPE = 'wk'
+    //     } else if (GameData.DXSet.ZLine == '30分钟K') {
+    //         TYPE = 'm30k';
+    //     } else if (GameData.DXSet.ZLine == '60分钟K') {
+    //         TYPE = 'm60k';
+    //     }
+
+    // }
+
 
 
 }

@@ -38,10 +38,11 @@ cc.Class({
 
         cc.macro.ENABLE_MULTI_TOUCH = false;
 
-        this.initData();
+
     },
 
-    start() {
+    onEnable() {
+        this.initData();
         let self = this;
         // //TODO  接DSK
         let llwSDK = LLWSDK.getSDK()
@@ -61,6 +62,7 @@ cc.Class({
             }
         })
     },
+
 
     initData() {
         let SMSet = cc.sys.localStorage.getItem('SMSET');
@@ -187,7 +189,7 @@ cc.Class({
             let str = new Date().toLocaleDateString();
             let count = cc.sys.localStorage.getItem('SHUANGMANGCOUNT' + str);
             if (!count) {
-                GameData.ShuangMangCount = GameCfgText.smxlCfg.free;
+                GameData.ShuangMangCount = 5;
             } else {
                 GameData.ShuangMangCount = count;
             }
@@ -201,7 +203,7 @@ cc.Class({
             let str = new Date().toLocaleDateString();
             let count = cc.sys.localStorage.getItem('DINGXIANGCOUNT' + str);
             if (!count) {
-                GameData.DingXiangCount = GameCfgText.smxlCfg.free;
+                GameData.DingXiangCount = 5;
             } else {
                 GameData.DingXiangCount = count;
             }

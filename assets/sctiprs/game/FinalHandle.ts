@@ -72,9 +72,14 @@ export default class NewClass extends cc.Component {
         this.userName.string = GameData.userName;
 
         this.nameLabel.string = GameCfg.data[0].name;
-        this.maLabel.string = GameCfg.data[0].code;
+
+        let code = GameCfg.data[0].code;
+        if (code.length >= 7) {
+            code = code.slice(1);
+        }
+        this.maLabel.string = code;
         //时间
-        this.timeLabel.string = gpData[0].day + ' -- ' + gpData[gpData.length - 1].day;
+        this.timeLabel.string = (gpData[0].day.replace(/-/g, '/')) + ' -- ' + (gpData[gpData.length - 1].day.replace(/-/g, '/'));
 
         //同期涨幅
         let tq = ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2);
@@ -128,7 +133,9 @@ export default class NewClass extends cc.Component {
                 quotes_code: GameCfg.data[0].code,
                 k_type: GameCfg.data[0].ktype,
                 k_from: parseInt(gpData[0].day.replace(/-/g, '')),
+
                 k_to: parseInt(gpData[gpData.length - 1].day.replace(/-/g, '')),
+                //  k_to: parseInt(gpData[gpData.length - 1].day.replace(///g,'')),
                 stock_profit_rate: ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2),
                 user_profit_rate: (GameCfg.allRate * 100).toFixed(2),
                 user_capital: GameData.properties[3],

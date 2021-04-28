@@ -24,6 +24,9 @@ export default class NewClass extends cc.Component {
 
     showFlag = false;
 
+    rWidth = 0;
+    rHeight = 0;
+
     onLoad() {
         GlobalEvent.on(EventCfg.ONADDMARK, this.onAddMard.bind(this), this);
 
@@ -52,10 +55,12 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-        //添加开始标签
-        this.onAddMard({ type: 1, index: GameCfg.huizhidatas });
+
         if (GameCfg.GAMEFUPAN) {
             this.showFlag = true;
+        } else {
+            //添加开始标签
+            this.onAddMard({ type: 1, index: GameCfg.huizhidatas });
         }
     }
 
@@ -91,25 +96,36 @@ export default class NewClass extends cc.Component {
                     this.markNodes[posInfo.index - 1].node.active = true;
                 }
                 this.markNodes[posInfo.index - 1].node.position = posInfo.lowPos;
-                this.markNodes[posInfo.index - 1].node.position.y += 20;
+                this.markNodes[posInfo.index - 1].node.y -= (this.markNodes[posInfo.index].node.height / 2 + 10);
                 // this.markNodes[posInfo.index].node.
             }
+            this.markNodes[posInfo.index].node.width = cc.ext.hz_width;
+
+            if (this.markNodes[posInfo.index].node.width > 30) {
+                this.markNodes[posInfo.index].node.width = 30
+            } else if (this.markNodes[posInfo.index].node.width < this.rWidth / 2) {
+                this.markNodes[posInfo.index].node.width = this.rWidth / 2
+            }
+
+            this.markNodes[posInfo.index].node.height = this.markNodes[posInfo.index].node.width * this.ratio;
             //买入标签
             if (this.markNodes[posInfo.index].type == 2) {
                 this.markNodes[posInfo.index].node.position = posInfo.lowPos;
+                this.markNodes[posInfo.index].node.y -= (this.markNodes[posInfo.index].node.height / 2 + 20)
             }
             //卖出标签
             else if (this.markNodes[posInfo.index].type == 3) {
                 this.markNodes[posInfo.index].node.position = posInfo.highPos;
+                this.markNodes[posInfo.index].node.y += (this.markNodes[posInfo.index].node.height / 2 - 20)
             }
 
             //  if (cc.ext.hz_width >= 13) {
-            this.markNodes[posInfo.index].node.width = cc.ext.hz_width;
-            if (cc.ext.hz_width >= 30) {
-                this.markNodes[posInfo.index].node.width = 30;
-            }
+
+            // if (cc.ext.hz_width >= 30) {
+            //     this.markNodes[posInfo.index].node.width = 30;
+            // }
             //   }
-            this.markNodes[posInfo.index].node.height = this.markNodes[posInfo.index].node.width * this.ratio;
+
 
         }
     }
@@ -123,6 +139,8 @@ export default class NewClass extends cc.Component {
         if (info.type == 1) {
             node = cc.instantiate(this.startItem);
             this.ratio = node.height / node.width;
+            this.rWidth = node.width;
+            this.rHeight = node.height;
             inde = info.index - 2;
         } else if (info.type == 2) {
             node = cc.instantiate(this.bItem);
@@ -141,7 +159,7 @@ export default class NewClass extends cc.Component {
             type: info.type,
         };
 
-        this.saveHistoryMark(inde, info.type);
+        this.saveHistoryMark(info.index, info.type);
 
         // //双盲
         // if (GameCfg.GameType == pb.GameType.ShuangMang) {

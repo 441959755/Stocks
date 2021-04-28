@@ -80,7 +80,11 @@ export default class NewClass extends cc.Component {
 
     testKFrom() {
 
+
         let index = GameCfg.huizhidatas - 1;
+        if (index < 2) {
+            return;
+        }
         let data = GameCfg.data[0].data;
         let rate = (data[index].close - data[index].open) / data[index].open;
 
@@ -902,6 +906,9 @@ export default class NewClass extends cc.Component {
 
         let malist = GameCfg.MaList;
         let index = GameCfg.huizhidatas - 1;
+        if (index < 4) {
+            return;
+        }
         if (GameCfg.MAs.indexOf(60) != -1 && GameCfg.MAs.indexOf(120) != -1) {
             //  flag = true;
             //  if()

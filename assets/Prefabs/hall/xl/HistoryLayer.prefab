@@ -284,7 +284,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1248.26,
+      "width": 1266.12,
       "height": 40
     },
     "_anchorPoint": {
@@ -297,7 +297,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        105.985,
+        407.546,
         0,
         0,
         0,
@@ -348,7 +348,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 11.12,
+      "width": 13.35,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -360,7 +360,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -559.956,
+        -586.385,
         0,
         0,
         0,
@@ -401,7 +401,7 @@
     "_useOriginalSize": false,
     "_string": "1",
     "_N$string": "1",
-    "_fontSize": 20,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -425,7 +425,7 @@
     "asset": {
       "__uuid__": "ba705da6-0514-40e8-a73f-66af06b24e12"
     },
-    "fileId": "e7p12G8w1LsYV+Oqjd7FDb",
+    "fileId": "34/bWJJ9pEe52jRvs6VAUi",
     "sync": false
   },
   {
@@ -455,7 +455,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66.74,
+      "width": 80.09,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -467,7 +467,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -437.821,
+        -459.621,
         0,
         0,
         0,
@@ -508,7 +508,7 @@
     "_useOriginalSize": false,
     "_string": "600308",
     "_N$string": "600308",
-    "_fontSize": 20,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -532,7 +532,7 @@
     "asset": {
       "__uuid__": "ba705da6-0514-40e8-a73f-66af06b24e12"
     },
-    "fileId": "e0LMkk4+dMdJUJrAZKerlO",
+    "fileId": "9aAUmzpDVOHYppXGad1RkF",
     "sync": false
   },
   {
@@ -562,7 +562,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 80,
+      "width": 96,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -574,7 +574,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -291.451,
+        -306.576,
         0,
         0,
         0,
@@ -615,7 +615,7 @@
     "_useOriginalSize": false,
     "_string": "云龙股票",
     "_N$string": "云龙股票",
-    "_fontSize": 20,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -639,7 +639,7 @@
     "asset": {
       "__uuid__": "ba705da6-0514-40e8-a73f-66af06b24e12"
     },
-    "fileId": "2avw31tilP2LfFXRqRXfAm",
+    "fileId": "b2pu96J+VEMLmusICMvpOX",
     "sync": false
   },
   {
@@ -669,7 +669,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100.1,
+      "width": 120.12,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -681,7 +681,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -145.015,
+        -148.56000000000006,
         0,
         0,
         0,
@@ -722,7 +722,7 @@
     "_useOriginalSize": false,
     "_string": "2014.02.01",
     "_N$string": "2014.02.01",
-    "_fontSize": 20,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -746,7 +746,7 @@
     "asset": {
       "__uuid__": "ba705da6-0514-40e8-a73f-66af06b24e12"
     },
-    "fileId": "93JHTbtCJHqLqWCJxrDTy0",
+    "fileId": "cfrADUQChPnInLF+YaYHei",
     "sync": false
   },
   {
@@ -776,7 +776,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100.1,
+      "width": 120.12,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -788,7 +788,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -0.388,
+        4.324,
         0,
         0,
         0,
@@ -829,7 +829,7 @@
     "_useOriginalSize": false,
     "_string": "2014.09.17",
     "_N$string": "2014.09.17",
-    "_fontSize": 20,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -853,7 +853,7 @@
     "asset": {
       "__uuid__": "ba705da6-0514-40e8-a73f-66af06b24e12"
     },
-    "fileId": "18xGT5AOpMJ755KeZDa6nV",
+    "fileId": "5b/AJeEZVI97xZyLLbWLWo",
     "sync": false
   },
   {
@@ -883,7 +883,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 63.37,
+      "width": 76.04,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -895,7 +895,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        146.489,
+        154.509,
         0,
         0,
         0,
@@ -936,7 +936,7 @@
     "_useOriginalSize": false,
     "_string": "-7.77%",
     "_N$string": "-7.77%",
-    "_fontSize": 20,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -960,7 +960,7 @@
     "asset": {
       "__uuid__": "ba705da6-0514-40e8-a73f-66af06b24e12"
     },
-    "fileId": "fefRpx0UZGKp/CTvGLpQmw",
+    "fileId": "aeC4jb8S5Kq5LkMQL0BQDQ",
     "sync": false
   },
   {
@@ -990,7 +990,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 56.71,
+      "width": 68.05,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1002,7 +1002,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        291.387,
+        306.598,
         0,
         0,
         0,
@@ -1043,7 +1043,7 @@
     "_useOriginalSize": false,
     "_string": "0.00%",
     "_N$string": "0.00%",
-    "_fontSize": 20,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -1067,7 +1067,7 @@
     "asset": {
       "__uuid__": "ba705da6-0514-40e8-a73f-66af06b24e12"
     },
-    "fileId": "2bQPGF40pGfq3nGO3gA559",
+    "fileId": "6bE32qLRNCcbKr2Tu44LgX",
     "sync": false
   },
   {
@@ -1097,7 +1097,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 11.12,
+      "width": 13.35,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1109,7 +1109,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        436.98,
+        450.981,
         0,
         0,
         0,
@@ -1150,7 +1150,7 @@
     "_useOriginalSize": false,
     "_string": "0",
     "_N$string": "0",
-    "_fontSize": 20,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -1174,7 +1174,7 @@
     "asset": {
       "__uuid__": "ba705da6-0514-40e8-a73f-66af06b24e12"
     },
-    "fileId": "c8jyKWuiVCQIMpd5fllo2c",
+    "fileId": "f3o/COvzpJd4JAJCdlVNxR",
     "sync": false
   },
   {
@@ -1216,7 +1216,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        436.98,
+        454.173,
         0,
         0,
         0,
@@ -1257,7 +1257,7 @@
     "_useOriginalSize": false,
     "_string": "0",
     "_N$string": "0",
-    "_fontSize": 20,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -1281,7 +1281,7 @@
     "asset": {
       "__uuid__": "ba705da6-0514-40e8-a73f-66af06b24e12"
     },
-    "fileId": "46hNToChpL9qOnFciTWKoS",
+    "fileId": "3aAs0ewmpP8oGGRD0D6/N0",
     "sync": false
   },
   {
@@ -1326,7 +1326,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        562.693,
+        579.349,
         0,
         0,
         0,
@@ -1475,7 +1475,7 @@
     "asset": {
       "__uuid__": "ba705da6-0514-40e8-a73f-66af06b24e12"
     },
-    "fileId": "d1BrFzvF9B/69MpFByaw6M",
+    "fileId": "48mVHQl35LuYiRE2ENzFCv",
     "sync": false
   },
   {
@@ -1488,7 +1488,7 @@
     "_enabled": false,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 1248.26,
+      "width": 1266.12,
       "height": 40
     },
     "_resize": 1,
@@ -1503,7 +1503,7 @@
     "_N$paddingRight": 40,
     "_N$paddingTop": 0,
     "_N$paddingBottom": 0,
-    "_N$spacingX": 75,
+    "_N$spacingX": 65,
     "_N$spacingY": 0,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0,
@@ -1518,7 +1518,7 @@
     "asset": {
       "__uuid__": "ba705da6-0514-40e8-a73f-66af06b24e12"
     },
-    "fileId": "a9pVZFPL9C+JspQVQwetbt",
+    "fileId": "5fyYvuYidJtoTKc1cpEepB",
     "sync": false
   },
   {
@@ -1923,8 +1923,8 @@
         0,
         0,
         1,
-        1.5,
-        1.5,
+        1,
+        1,
         1
       ]
     },
@@ -2514,7 +2514,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1248,
+      "width": 1296,
       "height": 65.2
     },
     "_anchorPoint": {
@@ -2578,7 +2578,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48,
+      "width": 56,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -2590,7 +2590,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -560,
+        -580,
         0,
         0,
         0,
@@ -2631,7 +2631,7 @@
     "_useOriginalSize": false,
     "_string": "序号",
     "_N$string": "序号",
-    "_fontSize": 24,
+    "_fontSize": 28,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -2685,7 +2685,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 96,
+      "width": 112,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -2697,7 +2697,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -438,
+        -456,
         0,
         0,
         0,
@@ -2738,7 +2738,7 @@
     "_useOriginalSize": false,
     "_string": "股票代码",
     "_N$string": "股票代码",
-    "_fontSize": 24,
+    "_fontSize": 28,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -2792,7 +2792,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 96,
+      "width": 112,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -2804,7 +2804,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -292,
+        -304,
         0,
         0,
         0,
@@ -2845,7 +2845,7 @@
     "_useOriginalSize": false,
     "_string": "股票名称",
     "_N$string": "股票名称",
-    "_fontSize": 24,
+    "_fontSize": 28,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -2899,7 +2899,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 96,
+      "width": 112,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -2911,7 +2911,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -146,
+        -152,
         0,
         0,
         0,
@@ -2952,7 +2952,7 @@
     "_useOriginalSize": false,
     "_string": "起始时间",
     "_N$string": "起始时间",
-    "_fontSize": 24,
+    "_fontSize": 28,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -3006,7 +3006,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 96,
+      "width": 112,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -3059,7 +3059,7 @@
     "_useOriginalSize": false,
     "_string": "结束时间",
     "_N$string": "结束时间",
-    "_fontSize": 24,
+    "_fontSize": 28,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -3113,7 +3113,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 96,
+      "width": 112,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -3125,7 +3125,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        146,
+        152,
         0,
         0,
         0,
@@ -3166,7 +3166,7 @@
     "_useOriginalSize": false,
     "_string": "同期涨幅",
     "_N$string": "同期涨幅",
-    "_fontSize": 24,
+    "_fontSize": 28,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -3220,7 +3220,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 96,
+      "width": 112,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -3232,7 +3232,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        292,
+        304,
         0,
         0,
         0,
@@ -3273,7 +3273,7 @@
     "_useOriginalSize": false,
     "_string": "个股收益",
     "_N$string": "个股收益",
-    "_fontSize": 24,
+    "_fontSize": 28,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -3327,7 +3327,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 96,
+      "width": 112,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -3339,7 +3339,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        438,
+        456,
         0,
         0,
         0,
@@ -3380,7 +3380,7 @@
     "_useOriginalSize": false,
     "_string": "资金收益",
     "_N$string": "资金收益",
-    "_fontSize": 24,
+    "_fontSize": 28,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -3434,7 +3434,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48,
+      "width": 56,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -3446,7 +3446,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        560,
+        580,
         0,
         0,
         0,
@@ -3487,7 +3487,7 @@
     "_useOriginalSize": false,
     "_string": "复盘",
     "_N$string": "复盘",
-    "_fontSize": 24,
+    "_fontSize": 28,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -3524,7 +3524,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 1248,
+      "width": 1296,
       "height": 65.2
     },
     "_resize": 1,
@@ -3539,7 +3539,7 @@
     "_N$paddingRight": 40,
     "_N$paddingTop": 0,
     "_N$paddingBottom": 0,
-    "_N$spacingX": 50,
+    "_N$spacingX": 40,
     "_N$spacingY": 0,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0,

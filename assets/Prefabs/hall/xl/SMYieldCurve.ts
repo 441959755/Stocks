@@ -160,7 +160,7 @@ export default class NewClass extends cc.Component {
         let month = date.getMonth() + 1;
         let day = date.getDate();
 
-        this.timeLabel.string = '统计时段:' + year + '.' + month + '.' + 1 + '--' + year + '.' + month + '.' + day;
+        this.timeLabel.string = '统计时段:' + year + '/' + month + '/' + 1 + '--' + year + '/' + month + '/' + day;
 
         //  this.labels[0].string = datas[datas.length - 1].userCapital;
 

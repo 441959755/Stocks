@@ -119,6 +119,7 @@ export default class NewClass extends cc.Component {
             this.GameName.string = '双盲训练';
 
             colseBtn.active = true;
+            colseBtn.children[0].active = false;
             btnMyspic.active = false;
             statBtn.active = false;
 
@@ -139,7 +140,7 @@ export default class NewClass extends cc.Component {
         }
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
             this.GameName.string = '定向训练';
-
+            colseBtn.children[0].active = true;
             colseBtn.active = true;
             btnMyspic.active = true;
             statBtn.active = false;
@@ -176,9 +177,22 @@ export default class NewClass extends cc.Component {
         }
         //点击终止
         else if (name == 'closeBtn') {
-            PopupManager.LoadPopupBox('tipsBox', '是否终止当前训练，查看训练结果？', (flag) => {
-                GlobalEvent.emit(EventCfg.GAMEOVEER, flag);
-            })
+            if (GameCfg.GAMEFUPAN) {
+                GameCfg.huizhidatas = 0;
+
+                GameCfg.allRate = 0;
+                GameCfg.profitCount = 0;
+                GameCfg.lossCount = 0;
+                GameCfg.finalfund = 0;
+                GameCfg.GameType = null;
+                GameCfg.GAMEFUPAN = false;
+                cc.director.loadScene('hall');
+
+            } else {
+                PopupManager.LoadPopupBox('tipsBox', '是否终止当前训练，查看训练结果？', (flag) => {
+                    GlobalEvent.emit(EventCfg.GAMEOVEER, flag);
+                })
+            }
         } else if (name == 'backBtn') {
             cc.director.loadScene('hall');
         }

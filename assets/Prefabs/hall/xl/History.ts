@@ -185,15 +185,15 @@ export default class NewClass extends cc.Component {
                 console.log('没有取得数据');
                 return;
             }
-
+            console.log(JSON.stringify(GameCfg.GameSet));
             //  let datas = this.historyInfo.results;
             GameCfg.huizhidatas = GameCfg.history.huizhidatas;
-
+            console.log(nodes[3].getComponent(cc.Label).string);
             let data = {
                 ktype: null,
                 kstyle: null,
                 code: parseInt(nodes[1].getComponent(cc.Label).string),
-                from: parseInt(nodes[3].getComponent(cc.Label).string),
+                from: nodes[3].getComponent(cc.Label).string,
                 total: parseInt(GameCfg.GameSet.KLine) + 100,
                 to: 0,
             }
@@ -231,12 +231,14 @@ export default class NewClass extends cc.Component {
                 items = GameCfgText.stockList[dex].split('|');
 
             }
-
+            data.code = items[0];
             GameCfg.data[0].data = [];
             GameCfg.data[0].name = items[1];
             GameCfg.data[0].code = items[0];
+            //GameCfg.data[0].code = nodes[1].getComponent(cc.Label).string;
             GameCfg.data[0].circulate = items[4];
             GameCfg.GAMEFUPAN = true;
+            console.log('data' + JSON.stringify(data));
             GlobalEvent.emit('onCmdQuoteQuery', data);
         }
     }

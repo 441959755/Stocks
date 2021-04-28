@@ -448,6 +448,11 @@ export default class NewClass extends cc.Component {
 
         let viweData = GameCfg.data[0].data;
 
+        if (!viweData || !viweData[cc.ext.beg_end[0]]) {
+            console.log(JSON.stringify(viweData));
+            return;
+        }
+
         if (!viweData || viweData.length <= 0) { return }
 
         this.bottomValue = viweData[0].low;
@@ -802,8 +807,8 @@ export default class NewClass extends cc.Component {
             minY = this.btxPreOpenY[index] / this.disValue * drawBox + initY;
             maxY = this.btxPreCloseY[index] / this.disValue * drawBox + initY;
             let lowX = startX + (endX - startX) / 2;
-            posInfo.lowPos = cc.v2(lowX, minY - 20);
-            posInfo.highPos = cc.v2(lowX, maxY + 20);
+            posInfo.lowPos = cc.v2(lowX, minY);
+            posInfo.highPos = cc.v2(lowX, maxY);
             //  this.btxPreCloseY = closeY;
             // this.btxPreOpenY = openY;
             // console.log(JSON.stringify(this.btxChg));
@@ -843,7 +848,7 @@ export default class NewClass extends cc.Component {
                 let highX = startX + (endX - startX) / 2;
                 let hy = openY > closeY ? openY : closeY;
                 this.drawLine(this.drawBg, highX, highY, highX, hy);
-                posInfo.highPos = cc.v2(highX, highY + 20);
+                posInfo.highPos = cc.v2(highX, highY);
             }
             //画最低
             if (el.low <= lowPrice) {
@@ -851,7 +856,7 @@ export default class NewClass extends cc.Component {
                 let lowX = startX + (endX - startX) / 2;
                 let hy = openY < closeY ? openY : closeY;
                 this.drawLine(this.drawBg, lowX, lowY, lowX, hy);
-                posInfo.lowPos = cc.v2(lowX, lowY - 20);
+                posInfo.lowPos = cc.v2(lowX, lowY);
             }
         }
 

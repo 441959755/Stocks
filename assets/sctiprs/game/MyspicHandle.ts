@@ -171,7 +171,7 @@ export default class NewClass extends cc.Component {
                     let ye = (el.timestamp + '').slice(0, 4);
                     let mon = (el.timestamp + '').slice(4, 6);
                     let da = (el.timestamp + '').slice(6);
-                    let fromDate = ye + '-' + mon + '-' + da;
+                    let fromDate = ye + '/' + mon + '/' + da;
                     let data = {
                         day: fromDate,
                         open: el.open,
@@ -182,6 +182,11 @@ export default class NewClass extends cc.Component {
                         value: el.volume,
                         Rate: el.volume / GameCfg.data[0].circulate * 100,
                     }
+
+                    if (GameCfg.data[0].circulate == 0) {
+                        data.Rate = 1;
+                    }
+
                     this.myspicData.push(data);
                 });
                 this.onDraw();

@@ -51,5 +51,8 @@
     }
   },
   "migrate-history": [],
-  "start-scene": "1558e10d-bc37-42a5-9a07-556ec49d580d"
+  "start-scene": "1558e10d-bc37-42a5-9a07-556ec49d580d",
+  "version": "2.3.3",
+  "id": "c9208c3a-e459-4cab-b724-cb0a8be2cf1c",
+  "isNew": false
 }
