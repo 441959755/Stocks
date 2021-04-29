@@ -139,8 +139,14 @@ export default class NewClass extends cc.Component {
                 la.string = GameData.DXSet.year;
             } else if (index == 3) {
                 la.string = GameData.DXSet.month;
+                if (GameData.DXSet.year == '随机') {
+                    la.string = '--';
+                }
             } else if (index == 4) {
                 la.string = GameData.DXSet.day;
+                if (GameData.DXSet.year == '随机') {
+                    la.string = '--';
+                }
             } else if (index == 5) {
                 la.string = GameData.DXSet.line;
             } else if (index == 6) {

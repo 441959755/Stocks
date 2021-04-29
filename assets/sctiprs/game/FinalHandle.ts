@@ -163,7 +163,8 @@ export default class NewClass extends cc.Component {
     saveHoistoryInfo(ts) {
         //  console.log('GameCfg.history' + JSON.stringify(GameCfg.history));
         GameCfg.TIMETEMP.push(ts);
-        GameCfg.history.huizhidatas = parseInt(JSON.stringify(GameCfg.huizhidatas));
+        // GameCfg.history.huizhidatas = parseInt(JSON.stringify(GameCfg.huizhidatas));
+        GameCfg.history.huizhidatas = GameCfg.huizhidatas;
         GameCfg.history.allRate = GameCfg.allRate;
         cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
         cc.sys.localStorage.setItem(ts + 'ts', JSON.stringify(GameCfg.history));

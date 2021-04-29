@@ -242,9 +242,11 @@ export default class NewClass extends cc.Component {
             if (!GameCfg.GameSet.isFC || GameCfg.GAMEFUPAN) {
                 dxnode.x = 0;
                 dxnode.children[2].active = false;
+                dxnode.children[1].active = false;
                 dxnode.getComponent(cc.Layout).spacingX = 100;
             } else if (GameCfg.GameSet.isFC) {
                 dxnode.children[2].active = true;
+                dxnode.children[1].active = true;
             }
         }
 
@@ -296,14 +298,14 @@ export default class NewClass extends cc.Component {
                 code = code.slice(1);
             }
             if (GameCfg.GameSet.search == '随机选股') {
-                this.gpName.string = '????' + ' ' + '????';
+                this.gpName.string = '股票名称：' + '???? ' + ' ' + ' ???? ';
             } else {
                 this.gpName.string = GameCfg.data[0].name + ' ' + code;
             }
 
             if (GameCfg.GameSet.year == '随机') {
-                this.timeLabel[0].string = "????????";
-                this.timeLabel[1].string = '????????';
+                this.timeLabel[0].string = '起始时间：' + "????";
+                this.timeLabel[1].string = '结束时间' + '????';
             } else {
                 this.timeLabel[0].string = GameCfg.data[0].data[0].day.replace(/-/g, '/');
                 this.timeLabel[1].string = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day.replace(/-/g, '/');
@@ -330,6 +332,7 @@ export default class NewClass extends cc.Component {
             this.tipsLabel1.string = '回合数：' + this.roundNumber;
             //    if (!GameCfg.GAMEFUPAN) {
             this.moneyLabel[1].string = '当前资产：' + parseInt(this.ziChan + '');
+            this.moneyLabel[0].string = '总资产    ：' + parseInt((this.ziChan + (this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close)) + '');
 
             if (this.buyData.length == 0) {
                 this.priceLabel[0].string = '买入均价：' + this.gpData[GameCfg.huizhidatas - 1].close;
