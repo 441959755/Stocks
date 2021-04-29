@@ -163,10 +163,10 @@ export default class NewClass extends cc.Component {
     saveHoistoryInfo(ts) {
         //  console.log('GameCfg.history' + JSON.stringify(GameCfg.history));
         GameCfg.TIMETEMP.push(ts);
-        GameCfg.history.huizhidatas = GameCfg.huizhidatas;
+        GameCfg.history.huizhidatas = parseInt(JSON.stringify(GameCfg.huizhidatas));
         GameCfg.history.allRate = GameCfg.allRate;
         cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
-        cc.sys.localStorage.setItem(ts, JSON.stringify(GameCfg.history));
+        cc.sys.localStorage.setItem(ts + 'ts', JSON.stringify(GameCfg.history));
         cc.sys.localStorage.setItem(ts + 'mark', JSON.stringify(GameCfg.mark));
         cc.sys.localStorage.setItem(ts + 'notice', JSON.stringify(GameCfg.notice));
         cc.sys.localStorage.setItem(ts + 'fill', JSON.stringify(GameCfg.fill));
@@ -186,6 +186,9 @@ export default class NewClass extends cc.Component {
             GameCfg.GameType = null;
 
             GameCfg.GAMEFUPAN = false;
+            // GameCfg.history.huizhidatas = 0;
+            GameCfg.history.allRate = 0;
+            GameCfg.history.deal = [];
 
             cc.director.loadScene('hall');
         }
@@ -199,6 +202,11 @@ export default class NewClass extends cc.Component {
             GameCfg.finalfund = 0;
 
             GameCfg.GAMEFUPAN = false;
+
+            GameCfg.GAMEFUPAN = false;
+            //   GameCfg.history.huizhidatas = 0;
+            GameCfg.history.allRate = 0;
+            GameCfg.history.deal = [];
 
             cc.director.loadScene('game');
 

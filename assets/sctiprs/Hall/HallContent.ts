@@ -1,6 +1,7 @@
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
-
+import GameCfg from "../game/GameCfg";
+import { pb } from '../../protos/proto'
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -59,10 +60,13 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         if (name == 'smBtn') {
             GlobalEvent.emit('OPENSMLAYER');
+            GameCfg.GameType = pb.GameType.ShuangMang;
         } else if (name == 'zbBtn') {
             GlobalEvent.emit('OPENZBLAYER');
+            //  GameCfg.GameType = pb.GameType.Shuan;
         } else if (name == 'dxBtn') {
             GlobalEvent.emit('OPENDXLAYER');
+            GameCfg.GameType = pb.GameType.DingXiang;
         }
 
     }

@@ -60,6 +60,7 @@ export default {
         huizhidatas: 0,
         allRate: 0,       //总利率
         deal: [],    //交易天数、利率
+
     },
 
     TIMETEMP: [],   //玩的记录时间戳

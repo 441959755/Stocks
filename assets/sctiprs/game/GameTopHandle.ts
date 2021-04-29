@@ -154,7 +154,14 @@ export default class NewClass extends cc.Component {
 
         if (GameCfg.GAMEFUPAN) {
             //  this.rightNode && (this.rightNode.active = false);
-            this.ALlRateLabel.string = (parseInt(GameCfg.history.allRate * 10000 + '') / 100) + '%';
+            let tt = parseInt(GameCfg.history.allRate * 10000 + '') / 100;
+
+            this.ALlRateLabel.string = (tt) + '%';
+            if (tt > 0) {
+                this.ALlRateLabel.node.color = cc.Color.RED;
+            } else {
+                this.ALlRateLabel.node.color = cc.Color.GREEN;
+            }
             // btnMyspic.active = false;
             // statBtn.active = true;
             // colseBtn.active = true;
@@ -194,6 +201,14 @@ export default class NewClass extends cc.Component {
                 })
             }
         } else if (name == 'backBtn') {
+            GameCfg.huizhidatas = 0;
+
+            GameCfg.allRate = 0;
+            GameCfg.profitCount = 0;
+            GameCfg.lossCount = 0;
+            GameCfg.finalfund = 0;
+            GameCfg.GameType = null;
+            GameCfg.GAMEFUPAN = false;
             cc.director.loadScene('hall');
         }
         else if (name == 'btnMyspic') {

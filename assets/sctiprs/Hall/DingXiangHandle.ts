@@ -172,11 +172,8 @@ export default class NewClass extends cc.Component {
         this.setProId = data;
 
 
-
-
-
         //当前年月的天数
-        if (index == 3 || index == 4) {
+        if (/*index == 3 ||*/ index == 4) {
             let year = this.boxs[2].getChildByName('label').getComponent(cc.Label).string;
             let month = this.boxs[3].getChildByName('label').getComponent(cc.Label).string;
             var temp = new Date(parseInt(year), parseInt(month), 0);
@@ -188,9 +185,9 @@ export default class NewClass extends cc.Component {
                     if (index == 4) {
                         el.color = new cc.Color().fromHEX('#a0a0a0');
                         el.getComponent(cc.Button).interactable = false;
-                        el.getComponent(cc.Button).enabledInHierarchy = true;
+                        el.getComponent(cc.Button).enableAutoGrayEffect = true;
                     } else {
-                        this.boxs[5].getChildByName('label').getComponent(cc.Label).string = day + '';
+                        this.boxs[4].getChildByName('label').getComponent(cc.Label).string = day + '';
                     }
                 } else {
                     if (index == 4) {
@@ -198,7 +195,7 @@ export default class NewClass extends cc.Component {
                         el.getComponent(cc.Button).interactable = true;
                         el.getComponent(cc.Button).enableAutoGrayEffect = false;
                     } else {
-                        this.boxs[5].getChildByName('label').getComponent(cc.Label).string = day + '';
+                        this.boxs[4].getChildByName('label').getComponent(cc.Label).string = day + '';
                     }
                 }
             })
@@ -217,7 +214,7 @@ export default class NewClass extends cc.Component {
             this.downBoxs.forEach(el => {
                 el.active = false;
             })
-            if (this.setProId == 3) {
+            if (this.setProId == 4) {
                 let downBox = this.downBoxs[this.setProId];
                 let year = this.boxs[3].getChildByName('label').getComponent(cc.Label).string;
                 let month = this.boxs[4].getChildByName('label').getComponent(cc.Label).string;
@@ -228,9 +225,9 @@ export default class NewClass extends cc.Component {
                 content.children.forEach(el => {
                     let str = el.getComponent(cc.Label).string;
                     if (parseInt(str) > day) {
-                        this.boxs[5].getChildByName('label').getComponent(cc.Label).string = day + '';
+                        this.boxs[4].getChildByName('label').getComponent(cc.Label).string = day + '';
                     } else {
-                        this.boxs[5].getChildByName('label').getComponent(cc.Label).string = day + '';
+                        this.boxs[4].getChildByName('label').getComponent(cc.Label).string = day + '';
                     }
                 })
             }
@@ -481,6 +478,8 @@ export default class NewClass extends cc.Component {
         GameCfg.data[0].name = items[1];
 
         GameCfg.data[0].circulate = items[4];
+
+        console.log('给的数据:' + JSON.stringify(data));
 
         if (GameData.DXSet.ZLine == '日线') {
             data.ktype = pb.KType.Day;

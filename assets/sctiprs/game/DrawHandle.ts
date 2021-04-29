@@ -703,7 +703,7 @@ export default class NewClass extends cc.Component {
         let maxY, minY;
         //宝塔线
         if (GameCfg.GameType == pb.GameType.DingXiang && GameData.DXSet.line == '宝塔线') {
-
+            let ptlow = 0, pthigh = 0;
             if (index == 0) {
                 if (!this.btxPreCloseY[index]) {
                     this.btxChg[index] = el.open >= el.close ? false : true;
@@ -723,21 +723,23 @@ export default class NewClass extends cc.Component {
 
                             maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
                             this.drawRect(this.drawBg, startX, closeY, endX - startX, maxY - closeY, false);
-
+                            ptlow = closeY;
+                            pthigh = maxY;
                             // this.btxPreCloseY = closeY;
                             if (!this.btxPreOpenY[index]) {
                                 this.btxPreOpenY[index] = closeValue;
                                 this.btxPreCloseY[index] = this.btxPreCloseY[index - 1]
                                 this.btxChg[index] = false;
                             }
-
-
                         } else if (closeValue < this.btxPreOpenY[index - 1]) {
                             minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
                             maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
 
                             this.drawRect(this.drawBg, startX, minY, endX - startX, maxY - minY, false);
                             this.drawRect(this.drawBg, startX, closeY, endX - startX, minY - closeY, true);
+
+                            ptlow = closeY;
+                            pthigh = maxY;
 
                             if (!this.btxPreOpenY[index]) {
                                 this.btxPreOpenY[index] = closeValue;
@@ -749,6 +751,9 @@ export default class NewClass extends cc.Component {
                         minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
                         maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
                         this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, false);
+
+                        ptlow = maxY;
+                        pthigh = closeY;
 
                         if (!this.btxPreOpenY[index]) {
                             this.btxPreOpenY[index] = this.btxPreCloseY[index - 1];
@@ -771,6 +776,9 @@ export default class NewClass extends cc.Component {
                                 this.btxChg[index] = true;
                             }
 
+                            ptlow = minY;
+                            pthigh = closeY;
+
                         } else if (closeValue > this.btxPreCloseY[index - 1]) {
                             minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
                             maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
@@ -783,6 +791,9 @@ export default class NewClass extends cc.Component {
                                 this.btxPreCloseY[index] = closeValue;
                                 this.btxChg[index] = true;
                             }
+
+                            ptlow = minY;
+                            pthigh = closeY;
                         }
 
                     }
@@ -793,6 +804,8 @@ export default class NewClass extends cc.Component {
                         this.drawRect(this.drawBg, startX, minY, endX - startX, minY - closeY, true);
                         // this.btxPreOpenY = closeY;
 
+                        ptlow = closeY;
+                        pthigh = minY;
 
                         if (!this.btxPreOpenY[index]) {
                             this.btxPreOpenY[index] = closeValue;
@@ -804,11 +817,11 @@ export default class NewClass extends cc.Component {
                 }
                 // this.btxChg = el.open > el.close ? false : true;
             }
-            minY = this.btxPreOpenY[index] / this.disValue * drawBox + initY;
-            maxY = this.btxPreCloseY[index] / this.disValue * drawBox + initY;
+            // minY = this.btxPreOpenY[index] / this.disValue * drawBox + initY;
+            // maxY = this.btxPreCloseY[index] / this.disValue * drawBox + initY;
             let lowX = startX + (endX - startX) / 2;
-            posInfo.lowPos = cc.v2(lowX, minY);
-            posInfo.highPos = cc.v2(lowX, maxY);
+            posInfo.lowPos = cc.v2(lowX, ptlow);
+            posInfo.highPos = cc.v2(lowX, pthigh);
             //  this.btxPreCloseY = closeY;
             // this.btxPreOpenY = openY;
             // console.log(JSON.stringify(this.btxChg));

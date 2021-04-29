@@ -75,7 +75,7 @@ export default class NewClass extends cc.Component {
 
         if (max != 0) {
             this.profitLas[0].string = datas[maxIndex][1] - datas[maxIndex][0] + 1 + '';
-            this.profitLas[1].string = (datas[maxIndex][2]).toFixed(2) + '%';
+            this.profitLas[1].string = (datas[maxIndex][2] * 100).toFixed(2) + '%';
             if (datas[maxIndex][2] > 0) {
                 this.profitLas[1].node.color = cc.Color.RED;
             } else {
@@ -85,7 +85,7 @@ export default class NewClass extends cc.Component {
 
         if (min != 0) {
             this.lossLas[0].string = datas[minIndex][1] - datas[minIndex][0] + 1 + '';
-            this.lossLas[1].string = datas[minIndex][2].toFixed(2) + '%';
+            this.lossLas[1].string = ((datas[minIndex][2]) * 100).toFixed(2) + '%';
 
             if (datas[minIndex][2] > 0) {
                 this.lossLas[1].node.color = cc.Color.GREEN;

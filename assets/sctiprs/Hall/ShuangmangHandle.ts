@@ -170,7 +170,7 @@ export default class NewClass extends cc.Component {
         GameCfg.data[0].code = items[0];
         GameCfg.data[0].circulate = items[4];
         GameCfg.data[0].ktype = data.ktype;
-
+        console.log('给的数据:' + JSON.stringify(data));
         GlobalEvent.emit('onCmdQuoteQuery', data);
 
     }

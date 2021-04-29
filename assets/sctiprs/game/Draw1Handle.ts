@@ -479,12 +479,12 @@ export default class NewClass extends cc.Component {
         //RSI6
         if (index > 5) {
             let RSI6Y = this.Rs6[index - 5] / 100 * bgHeight;
-            if (RSI6Y > 150) {
-                RSI6Y = 150;
+            if (RSI6Y > bgHeight) {
+                RSI6Y = bgHeight;
             }
             let preRSI6Y = this.Rs6[index - 6] / 100 * bgHeight;
-            if (preRSI6Y > 150) {
-                preRSI6Y = 150;
+            if (preRSI6Y > bgHeight) {
+                preRSI6Y = bgHeight;
             }
             //    if (index > 5) {
             this.drawRSI.lineWidth = 2;
@@ -497,11 +497,11 @@ export default class NewClass extends cc.Component {
         if (index > 11) {
             let RSI12Y = this.Rs12[index - 11] / 100 * bgHeight;
             let preRSI12Y = this.Rs12[index - 12] / 100 * bgHeight;
-            if (RSI12Y > 150) {
-                RSI12Y = 150;
+            if (RSI12Y > bgHeight) {
+                RSI12Y = bgHeight;
             }
-            if (preRSI12Y > 150) {
-                preRSI12Y = 150;
+            if (preRSI12Y > bgHeight) {
+                preRSI12Y = bgHeight;
             }
             //   if (index > 11) {
             this.drawRSI.lineWidth = 2;

@@ -167,7 +167,7 @@ cc.Class({
                     let arr = [];
                     GameCfg.TIMETEMP.forEach(el => {
                         if (el <= time) {
-                            cc.sys.localStorage.removeItem(el);
+                            cc.sys.localStorage.removeItem(el + 'ts');
                             cc.sys.localStorage.removeItem(el + 'set');
                             cc.sys.localStorage.removeItem(el + 'fill');
                             cc.sys.localStorage.removeItem(el + 'notice');

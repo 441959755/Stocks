@@ -2,6 +2,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
 import { pb } from "../../protos/proto";
+import GameData from '../GameData';
 
 const { ccclass, property } = cc._decorator;
 
@@ -55,7 +56,12 @@ export default class NewClass extends cc.Component {
                 if (GameCfg.GAMEFUPAN) {
                     info.push(datas[inde].day);
                 } else {
-                    info.push('****/**/**');
+                    if (GameCfg.GameSet.year = '随机') {
+                        info.push('****/**/**');
+                    } else {
+                        info.push(datas[inde].day);
+                    }
+
                 }
 
                 info.push(parseFloat(datas[inde].open).toFixed(2));

@@ -153,35 +153,41 @@ export default class NewClass extends cc.Component {
                 console.log('数据没保存');
                 return;
             }
+            console.log(JSON.stringify(GameCfg.TIMETEMP));
 
             if (GameCfg.TIMETEMP.indexOf(parseInt(ts)) != -1) {
-                let history = cc.sys.localStorage.getItem(ts);
+                let history = cc.sys.localStorage.getItem(ts + 'ts');
                 if (history) {
                     GameCfg.history = JSON.parse(history);
+                    console.log(JSON.stringify(GameCfg.history));
                 }
                 let GameSet = cc.sys.localStorage.getItem(ts + 'set');
                 if (GameSet) {
                     GameCfg.GameSet = JSON.parse(GameSet);
+                    console.log(JSON.stringify(GameCfg.GameSet));
                 }
 
                 let mark = cc.sys.localStorage.getItem(ts + 'mark');
                 if (mark) {
                     GameCfg.mark = JSON.parse(mark);
+                    console.log(JSON.stringify(GameCfg.mark));
                 }
 
                 let notice = cc.sys.localStorage.getItem(ts + 'notice');
                 if (notice) {
                     GameCfg.notice = JSON.parse(notice);
+                    console.log(JSON.stringify(GameCfg.notice));
                 }
 
                 let fill = cc.sys.localStorage.getItem(ts + 'fill');
                 if (fill) {
                     GameCfg.fill = JSON.parse(fill);
+                    console.log(JSON.stringify(GameCfg.fill));
                 }
             }
 
 
-            if (!GameCfg.history || !GameCfg.GameSet) {
+            if (!GameCfg.history || !GameCfg.GameSet || !GameCfg.fill || !GameCfg.notice || !GameCfg.mark) {
                 console.log('没有取得数据');
                 return;
             }
@@ -189,6 +195,7 @@ export default class NewClass extends cc.Component {
             //  let datas = this.historyInfo.results;
             GameCfg.huizhidatas = GameCfg.history.huizhidatas;
             console.log(nodes[3].getComponent(cc.Label).string);
+            console.log('history' + GameCfg.history.huizhidatas)
             let data = {
                 ktype: null,
                 kstyle: null,
@@ -238,7 +245,13 @@ export default class NewClass extends cc.Component {
             //GameCfg.data[0].code = nodes[1].getComponent(cc.Label).string;
             GameCfg.data[0].circulate = items[4];
             GameCfg.GAMEFUPAN = true;
+
+            GameCfg.finalfund = parseInt(nodes[7].getComponent(cc.Label).string) + GameCfg.ziChan;
+
+            GameCfg.allRate = nodes[6].getComponent(cc.Label).string;
+
             console.log('data' + JSON.stringify(data));
+
             GlobalEvent.emit('onCmdQuoteQuery', data);
         }
     }

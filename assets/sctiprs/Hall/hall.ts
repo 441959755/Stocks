@@ -212,6 +212,11 @@ export default class NewClass extends cc.Component {
         GameCfg.lossCount = 0;
         GameCfg.finalfund = 0;
         GameCfg.GameType = null;
+
+        GameCfg.GAMEFUPAN = false;
+        // GameCfg.history.huizhidatas = 0;
+        GameCfg.history.allRate = 0;
+        GameCfg.history.deal = [];
     }
 
     onTipsTextShow(content) {

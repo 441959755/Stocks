@@ -195,7 +195,7 @@
       "array": [
         0,
         0,
-        458.1274386019681,
+        457.6402993123393,
         0,
         0,
         0,
@@ -20395,7 +20395,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        221.939,
         0,
         0,
         0,
@@ -20551,7 +20551,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -221.294,
         0,
         0,
         0,
@@ -20616,7 +20616,7 @@
       "__id__": 454
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 460
@@ -20645,7 +20645,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        500,
+        94.386,
         0,
         0,
         0,
@@ -21597,8 +21597,8 @@
     ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
-    "_N$transition": 0,
-    "transition": 0,
+    "_N$transition": 3,
+    "transition": 3,
     "_N$normalColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -21705,7 +21705,7 @@
         "__id__": 497
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 502
@@ -21722,19 +21722,19 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 640,
+      "width": 430,
       "height": 200
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": 0.5,
       "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -214.315,
+        80,
         0,
         0,
         0,
@@ -21802,7 +21802,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        100,
+        -115,
         0,
         0,
         0,
@@ -22149,7 +22149,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        320,
+        115,
         0,
         0,
         0,
@@ -22204,14 +22204,14 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -101.02,
         22.622,
         0,
         0,
@@ -22298,14 +22298,14 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -101.02,
         -15,
         0,
         0,
@@ -22377,7 +22377,7 @@
         "__id__": 500
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [],
     "_prefab": null,
     "_opacity": 255,
@@ -22402,7 +22402,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        540,
+        230,
         0,
         0,
         0,
@@ -22457,14 +22457,14 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -96.429,
         20,
         0,
         0,
@@ -22551,14 +22551,14 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -96.429,
         -15,
         0,
         0,
@@ -22625,7 +22625,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 640,
+      "width": 430,
       "height": 200
     },
     "_resize": 1,
@@ -22640,7 +22640,7 @@
     "_N$paddingRight": 0,
     "_N$paddingTop": 0,
     "_N$paddingBottom": 0,
-    "_N$spacingX": 20,
+    "_N$spacingX": 30,
     "_N$spacingY": 0,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0,
@@ -28038,7 +28038,7 @@
   {
     "__type__": "cc.Node",
     "_name": "statLayer",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 2
     },
@@ -30676,10 +30676,18 @@
       "__id__": 622
     },
     "_enabled": true,
-    "userName": null,
-    "userExp": null,
-    "userLe": null,
-    "userHead": null,
+    "userName": {
+      "__id__": 666
+    },
+    "userExp": {
+      "__id__": 672
+    },
+    "userLe": {
+      "__id__": 669
+    },
+    "userHead": {
+      "__id__": 675
+    },
     "dealLas": [
       {
         "__id__": 642

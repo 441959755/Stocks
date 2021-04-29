@@ -96,18 +96,18 @@ export default class NewClass extends cc.Component {
                     this.markNodes[posInfo.index - 1].node.active = true;
                 }
                 this.markNodes[posInfo.index - 1].node.position = posInfo.lowPos;
-                this.markNodes[posInfo.index - 1].node.y -= (this.markNodes[posInfo.index].node.height / 2 + 10);
+                this.markNodes[posInfo.index - 1].node.y -= (this.markNodes[posInfo.index].node.height / 2 + 20);
                 // this.markNodes[posInfo.index].node.
             }
-            this.markNodes[posInfo.index].node.width = cc.ext.hz_width;
+            // this.markNodes[posInfo.index].node.width = cc.ext.hz_width;
 
-            if (this.markNodes[posInfo.index].node.width > 30) {
-                this.markNodes[posInfo.index].node.width = 30
-            } else if (this.markNodes[posInfo.index].node.width < this.rWidth / 2) {
-                this.markNodes[posInfo.index].node.width = this.rWidth / 2
-            }
+            // if (this.markNodes[posInfo.index].node.width > 30) {
+            //     this.markNodes[posInfo.index].node.width = 30
+            // } else if (this.markNodes[posInfo.index].node.width < this.rWidth / 2) {
+            //     this.markNodes[posInfo.index].node.width = this.rWidth / 2
+            // }
 
-            this.markNodes[posInfo.index].node.height = this.markNodes[posInfo.index].node.width * this.ratio;
+            // this.markNodes[posInfo.index].node.height = this.markNodes[posInfo.index].node.width * this.ratio;
             //买入标签
             if (this.markNodes[posInfo.index].type == 2) {
                 this.markNodes[posInfo.index].node.position = posInfo.lowPos;
@@ -116,7 +116,7 @@ export default class NewClass extends cc.Component {
             //卖出标签
             else if (this.markNodes[posInfo.index].type == 3) {
                 this.markNodes[posInfo.index].node.position = posInfo.highPos;
-                this.markNodes[posInfo.index].node.y += (this.markNodes[posInfo.index].node.height / 2 - 20)
+                this.markNodes[posInfo.index].node.y += (this.markNodes[posInfo.index].node.height / 2 + 20)
             }
 
             //  if (cc.ext.hz_width >= 13) {
