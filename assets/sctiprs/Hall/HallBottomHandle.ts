@@ -11,16 +11,28 @@ export default class NewClass extends cc.Component {
 
     onClick(event, data) {
         let name = event.target.name;
+        //公告
+        if (name == 'main_smbt_gg1') {
 
-        if (name == 'btn_gg') {
+        }
+        //好友
+        else if (name == 'main_smbt_hy1') {
 
-        } else if (name == 'btn_hy') {
+        }
+        //反馈
+        else if (name == 'main_smbt_fk1') {
 
-        } else if (name == 'btn_rw') {
+        }
+        //任务
+        else if (name == 'main_smbt_rw1') {
 
-        } else if (name == 'btn_fk') {
+        }
+        //排行
+        else if (name == 'main_smbt_ph1') {
 
-        } else if (name == 'btn_ph') {
+        }
+        //商城
+        else if (name == 'main_smbt_sc1') {
 
         }
     }

@@ -34,6 +34,7 @@ export default class NewClass extends cc.Component {
 
     protected onEnable() {
         //  GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
+
         this.toggle1.isChecked = GameData.SMSet.isFC;
 
         this.initLa.string = GameCfgText.smxlCfg.capital_init;

@@ -120,6 +120,36 @@ export default class NewClass extends cc.Component {
     }
 
     initData() {
+
+        if (!GameCfg.GAMEFUPAN) {
+            GameCfg.huizhidatas = GameCfg.data[0].data.length - GameCfg.GameSet.KLine;
+
+            if (GameCfg.huizhidatas <= 0) {
+                GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
+                if (GameCfg.huizhidatas > 100) {
+                    GameCfg.huizhidatas = 100;
+                }
+            }
+        }
+
+        cc.ext.beg_end = [];
+
+        cc.ext.beg_end[1] = GameCfg.huizhidatas;
+        cc.ext.beg_end[0] = 0;
+        let mixWidth = 6;
+        let maxWidth = 70;
+        let drawWidth = 1080;
+        if (cc.winSize.width > this.node.width) {
+            drawWidth = 1280;
+        }
+        cc.ext.hz_width = drawWidth / GameCfg.huizhidatas;
+
+        if (cc.ext.hz_width > maxWidth) {
+            cc.ext.hz_width = maxWidth;
+        } else if (cc.ext.hz_width < mixWidth) {
+            cc.ext.hz_width = mixWidth;
+        }
+
         GameCfg.MAs = [];
         let j = 0;
         //双盲 定向

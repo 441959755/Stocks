@@ -1,4 +1,5 @@
 {
+  "start-scene": "1558e10d-bc37-42a5-9a07-556ec49d580d",
   "group-list": [
     "default"
   ],
@@ -8,17 +9,22 @@
     ]
   ],
   "excluded-modules": [
+    "Animation",
     "Collider",
+    "Dynamic Atlas",
     "DragonBones",
     "Geom Utils",
     "Intersection",
+    "Label Effect",
     "Mesh",
     "MotionStreak",
     "Physics",
-    "PageView",
     "PageViewIndicator",
+    "ParticleSystem",
     "RichText",
+    "Renderer Texture",
     "Spine Skeleton",
+    "StudioComponent",
     "TiledMap",
     "VideoPlayer",
     "3D",
@@ -27,9 +33,9 @@
     "3D Physics/Builtin",
     "3D Particle"
   ],
-  "last-module-event-record-time": 1619143936869,
-  "design-resolution-width": 1334,
-  "design-resolution-height": 750,
+  "last-module-event-record-time": 0,
+  "design-resolution-width": 960,
+  "design-resolution-height": 640,
   "fit-width": false,
   "fit-height": true,
   "use-project-simulator-setting": false,
@@ -50,9 +56,5 @@
       "enable": false
     }
   },
-  "migrate-history": [],
-  "start-scene": "1558e10d-bc37-42a5-9a07-556ec49d580d",
-  "version": "2.3.3",
-  "id": "c9208c3a-e459-4cab-b724-cb0a8be2cf1c",
-  "isNew": false
+  "migrate-history": []
 }

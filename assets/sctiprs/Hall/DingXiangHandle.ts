@@ -114,7 +114,7 @@ export default class NewClass extends cc.Component {
 
     onShow() {
         if (!GameData.DXSet) { return }
-        GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
+        //   GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
 
         this.boxs.forEach((el, index) => {
             let la;

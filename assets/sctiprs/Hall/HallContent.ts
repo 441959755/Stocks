@@ -2,6 +2,9 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from "../game/GameCfg";
 import { pb } from '../../protos/proto'
+import GameData from '../GameData';
+import LoadUtils from '../Utils/LoadUtils';
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -15,33 +18,57 @@ export default class NewClass extends cc.Component {
 
     flags = [];
 
-    @property([cc.Node])
-    xlNodes: cc.Node[] = [];
+    @property(cc.Sprite)
+    userHead: cc.Sprite = null;
+
+    @property(cc.Label)
+    UserName: cc.Label = null;
+
+    @property(cc.Label)
+    userLevel: cc.Label = null;
 
     protected onLoad() {
-        this.xlNodes.forEach(el => {
-            el.on('touchstart', (event) => {
-                let nodes = el.children;
-                nodes[0].active = true;
-                nodes[1].active = true;
-            }, this);
-            el.on('touchend', () => {
-                let nodes = el.children;
-                nodes[0].active = true;
-                nodes[1].active = false;
-                this.onBtnClick({ target: { name: el.name } }, null);
-            }, this);
-            el.on('touchcancel', () => {
-                let nodes = el.children;
-                nodes[0].active = true;
-                nodes[1].active = false;
-            }, this);
-        })
+
     }
 
 
     start() {
         this.initToggle()
+        //设置用户信息
+        this.setUserInfo();
+        //设置用户头像
+        this.setHeadImg();
+    }
+
+    setHeadImg() {
+        let headUrl = GameData.headimgurl;
+        if (headUrl) {
+            if (headUrl.indexOf('.jpg') != -1) {
+                LoadUtils.load(headUrl, (texture) => {
+                    let spriteFrame = new cc.SpriteFrame(texture);
+                    this.userHead.spriteFrame = spriteFrame;
+                    GameData.headImg = spriteFrame;
+                })
+            } else {
+
+                LoadUtils.load({ url: headUrl, type: 'png' }, (texture) => {
+                    let spriteFrame = new cc.SpriteFrame(texture);
+                    this.userHead.spriteFrame = spriteFrame;
+                    GameData.headImg = spriteFrame;
+                })
+            }
+        }
+    }
+
+    setUserInfo() {
+        // this.userExp.string = GameData.properties[1] + '/' + GameData.maxExp;
+        this.userLevel.string = 'LV:' + GameData.properties[2] || 0 + '';
+        //  this.gold.string = GameData.properties[0] || 0 + '';
+        //  this.brick.string = GameData.properties[4] || 0 + '';
+        this.UserName.string = GameData.userName || GameData.userID;
+
+        //    this.progr.progress = GameData.properties[1] / GameData.maxExp;
+
     }
 
     initToggle() {
@@ -58,15 +85,36 @@ export default class NewClass extends cc.Component {
 
     onBtnClick(event, data) {
         let name = event.target.name;
-        if (name == 'smBtn') {
+        //双盲
+        if (name == 'main_xl_smxl') {
             GlobalEvent.emit('OPENSMLAYER');
             GameCfg.GameType = pb.GameType.ShuangMang;
-        } else if (name == 'zbBtn') {
+        }
+        //指标
+        else if (name == 'main_xl_zbxl') {
             GlobalEvent.emit('OPENZBLAYER');
-            //  GameCfg.GameType = pb.GameType.Shuan;
-        } else if (name == 'dxBtn') {
+            GameCfg.GameType = pb.GameType.ZhiBiao;
+        }
+        //定向
+        else if (name == 'main_xl_dxxl') {
             GlobalEvent.emit('OPENDXLAYER');
             GameCfg.GameType = pb.GameType.DingXiang;
+        }
+        //期货
+        else if (name == 'main_xl_qhxl') {
+
+        }
+        //分时
+        else if (name == 'main_xl_fsxl') {
+
+        }
+        //条件
+        else if (name == 'main_xl_tjdxl') {
+
+        }
+        //打开个人中心
+        else if (name == 'userinfobg') {
+            GlobalEvent.emit('OPENPLAYERINFO');
         }
 
     }

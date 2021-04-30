@@ -315,9 +315,9 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-        if (GameCfg.data) {
-            this.initData();
-        }
+        //  if (GameCfg.data) {
+        this.initData();
+        //   }
     }
 
     onMoveLeftOrRight(count, calDisX, calDisY) {
@@ -412,7 +412,7 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    protected onEnable() {
+    onShow() {
         this.initDrawBg();
         this.voltext.color = GameCfg.VOLColor[0];
         this.BOLLLabel.forEach((el, t) => {
@@ -508,7 +508,7 @@ export default class NewClass extends cc.Component {
     }
 
     initData() {
-        cc.ext.beg_end = [];
+
         this.drawBg.lineWidth = 2;
         this.drawMA.lineWidth = 2;
         this.drawBOLL.lineWidth = 2;
@@ -518,23 +518,6 @@ export default class NewClass extends cc.Component {
 
         if (cc.winSize.width > this.node.width) {
             this.drawBordWidth = 1280;
-        }
-
-        if (!GameCfg.GAMEFUPAN) {
-            GameCfg.huizhidatas = GameCfg.data[0].data.length - 150;
-            if (GameCfg.huizhidatas <= 0) { GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '') }
-        }
-
-        cc.ext.beg_end[1] = GameCfg.huizhidatas;
-        cc.ext.beg_end[0] = cc.ext.beg_end[1] - GameCfg.huizhidatas;
-        let mixWidth = 6;
-        let maxWidth = 80;
-        cc.ext.hz_width = this.drawBordWidth / GameCfg.huizhidatas;
-
-        if (cc.ext.hz_width > maxWidth) {
-            cc.ext.hz_width = maxWidth;
-        } else if (cc.ext.hz_width < mixWidth) {
-            cc.ext.hz_width = mixWidth;
         }
 
         //绘制的数据
@@ -934,6 +917,8 @@ export default class NewClass extends cc.Component {
             //     GlobalEvent.emit('setDrawing', true);
             // }, 500);
         }
+
+        this.onShow();
 
     }
 

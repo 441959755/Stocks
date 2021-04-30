@@ -36,6 +36,8 @@ cc.Class({
         //股票配置
         GameCfgText.getStocktList();
 
+        GameCfgText.getQIHuoList();
+
         cc.macro.ENABLE_MULTI_TOUCH = false;
 
 

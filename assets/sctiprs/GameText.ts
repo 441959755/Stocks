@@ -9,6 +9,8 @@ export default class GameCfgText {
 
     public static stockList = null;          //股票配置
 
+    public static qihuoList = null;          //期货配置
+
     public static getStocktList() {
         LoadUtils.loadRes('protos/stocklist', (text) => {
 
@@ -50,12 +52,17 @@ export default class GameCfgText {
         })
     }
 
+    public static getQIHuoList() {
+        // 合约代码|合约中文名称|合约英文名称|合约种类|所在交易所|第一个日K日期（YYYYMMDD）|最后一个日K//日期（YYYYMMDD）|第一个分时时间戳（精确到秒）|最后一个分时时间戳（精确到秒）
+        LoadUtils.loadRes('protos/contractlist', (text) => {
+            this.qihuoList = text.text.split('\n');
+        })
+    }
 
     public static releaseRes() {
         LoadUtils.releaseRes('protos/stocklist');
         LoadUtils.releaseRes('protos/game');
+        LoadUtils.releaseRes('protos/contractlist');
     }
-
-
 
 }
