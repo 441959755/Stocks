@@ -2,6 +2,7 @@
 import ActionUtils from "../../../sctiprs/Utils/ActionUtils";
 import GlobalEvent from '../../../sctiprs/Utils/GlobalEvent';
 import EventCfg from '../../../sctiprs/Utils/EventCfg';
+import GameData from '../../../sctiprs/GameData';
 
 const { ccclass, property } = cc._decorator;
 
@@ -39,7 +40,7 @@ export default class NewClass extends cc.Component {
         // "winCode":600000,"winRate":0.699999988079071,
         // "loseCount":2,"loseCode":600001,"loseRate":-0.7599999904632568,
         // "count":5,"rankCaptial":0.20999999344348907,"rankRate":0.550000011920929}
-        this.labels[0].string = gameData.userName;
+        this.labels[0].string = GameData.userName;
         this.labels[1].string = '的训练记录(' + year + '年' + month + '月)';
         this.labels[2].string = this.monthlyInfo.capitalInit || 0;
         this.labels[3].string = this.monthlyInfo.capitalFinal || 0;

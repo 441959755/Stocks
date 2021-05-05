@@ -2,6 +2,7 @@
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import ActionUtils from "../../../sctiprs/Utils/ActionUtils";
+import GameData from '../../../sctiprs/GameData';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -31,10 +32,10 @@ export default class NewClass extends cc.Component {
     _Lid = 0;
 
     protected onLoad() {
-        GlobalEvent.on('ItemValue', (data) => {
-            this.MaDates[this._Lid].string = data;
-            this.scroll.active = false;
-        }, this);
+        // GlobalEvent.on('ItemValue', (data) => {
+        //     this.MaDates[this._Lid].string = data;
+        //     this.scroll.active = false;
+        // }, this);
 
         this.content.forEach(el => {
             el.removeAllChildren();
@@ -62,7 +63,7 @@ export default class NewClass extends cc.Component {
 
     //默认的选项
     initToggle() {
-        let data = cc.ext.gameData.SMSet;
+        let data = GameData.SMSet;
         this.showVol[0].isChecked = data.isShowVol;
         this.showVol[1].isChecked = !data.isShowVol;
         this.BW[0].isChecked = data.isBW;
@@ -85,7 +86,7 @@ export default class NewClass extends cc.Component {
 
     //保存设置的数据
     SaveToggle() {
-        let data = cc.ext.gameData.SMSet;
+        let data = GameData.SMSet;
         data.isShowVol = this.showVol[0].isChecked ? true : false;
         data.isBW = this.BW[0].isChecked ? true : false;
 
@@ -104,8 +105,7 @@ export default class NewClass extends cc.Component {
         data.MA5Date = parseInt(this.MaDates[4].string);
         data.MA6Date = parseInt(this.MaDates[5].string);
 
-
-        cc.ext.gameData.SMSet = data;
+        GameData.SMSet = data;
     }
 
     onBtnClick(event, data) {

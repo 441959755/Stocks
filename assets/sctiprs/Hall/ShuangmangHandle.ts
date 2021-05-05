@@ -27,6 +27,7 @@ export default class NewClass extends cc.Component {
     CZBtn: cc.Node = null;
 
     onLoad() {
+		//更新当前金币属性
         GlobalEvent.on(EventCfg.SMINITFUND, () => {
             this.curla.string = GameData.properties[3];
         }, this);
@@ -41,7 +42,7 @@ export default class NewClass extends cc.Component {
 
         this.curla.string = GameData.properties[3];
 
-
+		//是否重置
         this.CZBtn.active = false;
         if (GameData.ShuangMangCount <= 0) {
             this.CZBtn.active = true;
@@ -59,6 +60,8 @@ export default class NewClass extends cc.Component {
             //         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的金币不足，请点击重置，免费重置金币！');
             //     }
             // }
+			
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.GAMEFUPAN = false;
             GameCfg.GameType = pb.GameType.ShuangMang;
             GameCfg.GameSet = GameData.SMSet;

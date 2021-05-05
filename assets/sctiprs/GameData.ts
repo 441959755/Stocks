@@ -108,6 +108,17 @@ export default class GameData {
         this._SMSet = val;
         cc.sys.localStorage.setItem('SMSET', JSON.stringify(val));
     }
+	
+	//QHSet
+	private static _QHSet;
+	
+	public static get QHSet() {
+	    return this._QHSet;
+	}
+	public static set QHSet(val) {
+	    this._QHSet = val;
+	    cc.sys.localStorage.setItem('QHSET', JSON.stringify(val));
+	}
 
     private static _ZBSet;
 
@@ -165,6 +176,7 @@ export default class GameData {
         this._ShuangMangCount = val;
         let str = new Date().toLocaleDateString();
         cc.sys.localStorage.setItem('SHUANGMANGCOUNT' + str, val);
+		
     }
 
 

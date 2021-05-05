@@ -1,85 +1,129 @@
 import LoadUtils from './LoadUtils';
 import LocalStorageUtils from './LocalStorageUtils';
 
-export default class AudioUtils{
-  private AudioMaps:Map<string,cc.AudioClip>=new Map();
+export default class AudioUtils {
+	private static AudioMaps: Map<string, cc.AudioClip> = new Map();
 
-  public musicVolume=0;
+	public static musicVolume = 0;
 
-  public effectVolume=0;
+	public static effectVolume = 0;
 
-  public LoadAudios(url){
+	/**加载资源
+	 *  url 地址
+	 */
+	public static loadAudios(url) {
+		LoadUtils.loadResDir(url, clips => {
+			clips.forEach(element => {
+				this.AudioMaps.set(element.name, element);
+			});
+		});
 
-    LoadUtils.loadResDir(url,(clips)=>{
-        clips.forEach(element => {
-            this.AudioMaps.set(element.name,element);
-        });
-    })
+		let musicVolume = cc.sys.localStorage.getItem('MUSICVOLUME');
+		this.musicVolume = musicVolume ? parseFloat(musicVolume) : 1;
 
+		let effectVolume = cc.sys.localStorage.getItem('EFFECTVOLUME');
+		this.effectVolume = effectVolume ? parseFloat(effectVolume) : 1;
+	}
 
-  }
+	/**
+	 * str 资源名
+	 * loop 是否循环
+	 */
+	public static playMusic(str, loop?) {
+		if (this.AudioMaps.has(str)) {
+			cc.audioEngine.playMusic(str, loop);
+			return;
+		}
+		console.log('AudioUtils playMusic not ' + str);
+	}
 
-  public playMusic(str,loop?){
-      if(this.AudioMaps.has(str)){
-          cc.audioEngine.playMusic(str,loop);
-          return;
-      }
-      console.log('AudioUtils playMusic not '+str);
-  }
+	/**
+	 * 暂停
+	 */
+	public static pauseMusic() {
+		cc.audioEngine.pauseMusic();
+	}
 
-  public pauseMusic(){
-     cc.audioEngine.pauseMusic();
-  }
+	/**
+	 * 恢复播放
+	 */
+	public static resumeMusic() {
+		cc.audioEngine.resumeMusic();
+	}
 
+	/**
+	 * 获取音乐大小
+	 */
+	public static getMusicVolume() {
+		return cc.audioEngine.getMusicVolume();
+	}
 
-  public resumeMusic(){
-      cc.audioEngine.resumeMusic();
-  }
+	/**
+	 * @param {Object} val大小
+	 */
+	public static setMusicVolume(val) {
+		this.musicVolume = val;
+		cc.audioEngine.setMusicVolume(val);
+		cc.sys.localStorage.setItem('MUSICVOLUME', val);
+	}
 
-  public getMusicVolume(){
-      return cc.audioEngine.getMusicVolume();
-  }
+	/**
+	 * 播放音效
+	 */
+	public static playEffect(str, loop?) {
+		if (this.AudioMaps.has(str)) {
+			cc.audioEngine.playEffect(str, loop);
+			return;
+		}
 
-  public setMusicVolume(val){
-      this.musicVolume=val;
-      cc.audioEngine.setMusicVolume(val);
-  }
+		console.log('AudioUtils playEffect not ' + str);
+	}
 
+	/**
+	 * @param {Object} str暂停音效
+	 */
+	public static pauseEffect(str) {
+		cc.audioEngine.pauseEffect(str);
+	}
 
-  public playEffect(str,loop?){
-      if(this.AudioMaps.has(str)){
-          cc.audioEngine.playEffect(str,loop);
-          return;
-      }
+	/**
+	 * 暂停所有播放音效
+	 */
+	public static pauseAllEffects() {
+		cc.audioEngine.pauseAllEffects();
+	}
 
-      console.log('AudioUtils playEffect not '+str);
+	/**
+	 * @param {Object} str恢复播放音效
+	 */
+	public static resumeEffect(str) {
+		cc.audioEngine.resumeEffect(str);
+	}
 
-  }
+	/**
+	 * 恢复所有音效
+	 */
+	public static resumeAllEffects() {
+		cc.audioEngine.resumeAllEffects();
+	}
 
-  public pauseEffect(str){
-        cc.audioEngine.pauseEffect(str);
-  }
+	/**
+	 * @param {Object} val设置音效大小
+	 */
+	public static setEffectsVolume(val) {
+		this.effectVolume = val;
+		cc.audioEngine.setEffectsVolume(val);
+		cc.sys.localStorage.setItem('EFFECTVOLUME', val);
+	}
 
-  public pauseAllEffects(){
-      cc.audioEngine.pauseAllEffects();
-  }
-
-  public resumeEffect(str){
-    cc.audioEngine.resumeEffect(str);
-  }
-
-  public resumeAllEffects(){
-      cc.audioEngine.resumeAllEffects();
-  }
-
-  public setEffectsVolume(val){
-      this.effectVolume=val;
-      cc.audioEngine.setEffectsVolume(val);
-  }
-
-  public  getEffectsVolume(){
-      return cc.audioEngine.getEffectsVolume();
-  }
-
-  
+	/**
+	 * 获取音效大小
+	 */
+	public static getEffectsVolume() {
+		return cc.audioEngine.getEffectsVolume();
+	}
+	
+	public static releaseAudios(url){
+		
+	}
 }

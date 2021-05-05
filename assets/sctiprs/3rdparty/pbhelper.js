@@ -1,6 +1,6 @@
 
 import { pb } from '../../protos/proto';
-import GameCfg from '../game/GameCfg';
+import GameData from '../GameData';
 
 let Login = pb.CmdLogin;
 
@@ -72,8 +72,8 @@ PBHelper.prototype = {
     //游戏登入信息
     onCmdGameLoginConvertToBuff() {
         let message = CmdGameLogin.create({
-            uid: cc.ext.gameData.userID,
-            token: cc.ext.gameData.token,
+            uid: GameData.userID,
+            token: GameData.token,
         })
         console.log('游戏登入信息' + JSON.stringify(message));
         let buff = CmdGameLogin.encode(message).finish();
@@ -217,11 +217,11 @@ PBHelper.prototype = {
             // length: 1
 
             for (let i = 0; i < decode.items.length; i++) {
-                gameData.properties[decode.items[i].id] = decode.items[i].newValue;
+                GameData.properties[decode.items[i].id] = decode.items[i].newValue;
                 console.log('id:' + decode.items[i].id + '   ' + 'value:' + decode.items[i].newValue);
             }
 
-            gameData.properties = gameData.properties;
+            GameData.properties = GameData.properties;
         } else if (id == pb.MessageId.Rep_Game_Start
             || id == pb.MessageId.Rep_Game_Over
             || id == pb.MessageId.Rep_Game_EditNick

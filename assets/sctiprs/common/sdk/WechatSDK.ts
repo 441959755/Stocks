@@ -1,4 +1,5 @@
 import HttpMgr from "../net/HttpMgr";
+import GameData from '../../GameData';
 
 export default class WechatSDK {
     static _instance = null;
@@ -60,9 +61,9 @@ export default class WechatSDK {
             success(res) {
                 const webUserInfo = res.userInfo;
                 console.log(webUserInfo);
-                cc.ext.gameData.userName = webUserInfo.nickName;
-                cc.ext.gameData.sex = webUserInfo.gender;
-                cc.ext.gameData.headimgurl = webUserInfo.avatarUrl;
+                GameData.userName = webUserInfo.nickName;
+                GameData.sex = webUserInfo.gender;
+                GameData.headimgurl = webUserInfo.avatarUrl;
 
                 btn && (btn.destroy())
                 self.onLoginCodeHttpRequest(code, call);
