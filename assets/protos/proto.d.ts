@@ -725,8 +725,8 @@ export namespace pb {
         /** SmxlState resetTsPremonth */
         resetTsPremonth?: (number|Long|null);
 
-        /** SmxlState monthReportDone */
-        monthReportDone?: (boolean|null);
+        /** SmxlState lastMonthReportTs */
+        lastMonthReportTs?: (number|Long|null);
     }
 
     /** Represents a SmxlState. */
@@ -747,8 +747,8 @@ export namespace pb {
         /** SmxlState resetTsPremonth. */
         public resetTsPremonth: (number|Long);
 
-        /** SmxlState monthReportDone. */
-        public monthReportDone: boolean;
+        /** SmxlState lastMonthReportTs. */
+        public lastMonthReportTs: (number|Long);
 
         /**
          * Creates a new SmxlState instance using the specified properties.
@@ -1303,6 +1303,9 @@ export namespace pb {
 
         /** GameOperationItem opId */
         opId?: (pb.GameOperationId|null);
+
+        /** GameOperationItem opVal */
+        opVal?: (number|Long|null);
     }
 
     /** Represents a GameOperationItem. */
@@ -1319,6 +1322,9 @@ export namespace pb {
 
         /** GameOperationItem opId. */
         public opId: pb.GameOperationId;
+
+        /** GameOperationItem opVal. */
+        public opVal: (number|Long);
 
         /**
          * Creates a new GameOperationItem instance using the specified properties.
@@ -2710,15 +2716,13 @@ export namespace pb {
         KType_NULL = 0,
         Real = 1,
         Min = 2,
-        Min5 = 3,
-        Min15 = 4,
-        Min30 = 5,
-        Min60 = 6,
+        MinToday = 3,
+        Min5 = 4,
+        Min15 = 5,
+        Min30 = 6,
+        Min60 = 7,
         Day = 10,
-        Day7 = 11,
-        Mon = 20,
-        Mon3 = 21,
-        Year = 30
+        Day7 = 11
     }
 
     /** KStyle enum. */
@@ -3443,17 +3447,8 @@ export namespace pb {
         /** QuoteItemFuture volVolume */
         volVolume?: (number|Long|null);
 
-        /** QuoteItemFuture volMavol1 */
-        volMavol1?: (number|null);
-
-        /** QuoteItemFuture volMavol2 */
-        volMavol2?: (number|null);
-
         /** QuoteItemFuture cclHold */
         cclHold?: (number|Long|null);
-
-        /** QuoteItemFuture cclMaccl */
-        cclMaccl?: (number|null);
     }
 
     /** Represents a QuoteItemFuture. */
@@ -3492,17 +3487,8 @@ export namespace pb {
         /** QuoteItemFuture volVolume. */
         public volVolume: (number|Long);
 
-        /** QuoteItemFuture volMavol1. */
-        public volMavol1: number;
-
-        /** QuoteItemFuture volMavol2. */
-        public volMavol2: number;
-
         /** QuoteItemFuture cclHold. */
         public cclHold: (number|Long);
-
-        /** QuoteItemFuture cclMaccl. */
-        public cclMaccl: number;
 
         /**
          * Creates a new QuoteItemFuture instance using the specified properties.

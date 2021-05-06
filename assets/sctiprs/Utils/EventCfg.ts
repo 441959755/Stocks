@@ -24,6 +24,8 @@ export default {
 
 	OPENSMRESETMONEYLAYER: 'OPENSMRESETMONEYLAYER', //打开双盲重置金币页面
 
+	CmdQuoteQueryFuture: 'CmdQuoteQueryFuture',  //// 查询期货行情
+
 	//game
 	ADDFILLCOLOR: 'ADDFILLCOLOR',
 

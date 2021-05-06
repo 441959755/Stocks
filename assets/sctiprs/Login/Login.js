@@ -39,7 +39,6 @@ cc.Class({
 		ComUtils.onLoadNode();
 		ComUtils.onEvent();
 
-
 		//游戏配置
 		GameCfgText.getOtherCfg();
 
@@ -72,7 +71,7 @@ cc.Class({
 			} else {
 				console.log('login err');
 				GlobalEvent.emit(EventCfg.LOADINGHIDE);
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否了解.');
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');
 			}
 		})
 	},
@@ -256,9 +255,9 @@ cc.Class({
 					LXPZ: '随机',
 					HY: '随机',
 					year: '随机',
-					month: '--',
-					day: '--',
-					KLine: 150,
+					month: '随机',
+					day: '随机',
+					KLine: 100,
 					ZLine: '日线',
 				}
 				GameData.QHSet = QHSet;

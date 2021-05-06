@@ -1754,7 +1754,7 @@ $root.pb = (function () {
          * @property {number|Long|null} [resetTs] SmxlState resetTs
          * @property {number|null} [resetCounter] SmxlState resetCounter
          * @property {number|Long|null} [resetTsPremonth] SmxlState resetTsPremonth
-         * @property {boolean|null} [monthReportDone] SmxlState monthReportDone
+         * @property {number|Long|null} [lastMonthReportTs] SmxlState lastMonthReportTs
          */
 
         /**
@@ -1797,12 +1797,12 @@ $root.pb = (function () {
         SmxlState.prototype.resetTsPremonth = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
-         * SmxlState monthReportDone.
-         * @member {boolean} monthReportDone
+         * SmxlState lastMonthReportTs.
+         * @member {number|Long} lastMonthReportTs
          * @memberof pb.SmxlState
          * @instance
          */
-        SmxlState.prototype.monthReportDone = false;
+        SmxlState.prototype.lastMonthReportTs = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * Creates a new SmxlState instance using the specified properties.
@@ -1834,8 +1834,8 @@ $root.pb = (function () {
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.resetCounter);
             if (message.resetTsPremonth != null && Object.hasOwnProperty.call(message, "resetTsPremonth"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int64(message.resetTsPremonth);
-            if (message.monthReportDone != null && Object.hasOwnProperty.call(message, "monthReportDone"))
-                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.monthReportDone);
+            if (message.lastMonthReportTs != null && Object.hasOwnProperty.call(message, "lastMonthReportTs"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.lastMonthReportTs);
             return writer;
         };
 
@@ -1880,7 +1880,7 @@ $root.pb = (function () {
                         message.resetTsPremonth = reader.int64();
                         break;
                     case 4:
-                        message.monthReportDone = reader.bool();
+                        message.lastMonthReportTs = reader.int64();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -1926,9 +1926,9 @@ $root.pb = (function () {
             if (message.resetTsPremonth != null && message.hasOwnProperty("resetTsPremonth"))
                 if (!$util.isInteger(message.resetTsPremonth) && !(message.resetTsPremonth && $util.isInteger(message.resetTsPremonth.low) && $util.isInteger(message.resetTsPremonth.high)))
                     return "resetTsPremonth: integer|Long expected";
-            if (message.monthReportDone != null && message.hasOwnProperty("monthReportDone"))
-                if (typeof message.monthReportDone !== "boolean")
-                    return "monthReportDone: boolean expected";
+            if (message.lastMonthReportTs != null && message.hasOwnProperty("lastMonthReportTs"))
+                if (!$util.isInteger(message.lastMonthReportTs) && !(message.lastMonthReportTs && $util.isInteger(message.lastMonthReportTs.low) && $util.isInteger(message.lastMonthReportTs.high)))
+                    return "lastMonthReportTs: integer|Long expected";
             return null;
         };
 
@@ -1964,8 +1964,15 @@ $root.pb = (function () {
                     message.resetTsPremonth = object.resetTsPremonth;
                 else if (typeof object.resetTsPremonth === "object")
                     message.resetTsPremonth = new $util.LongBits(object.resetTsPremonth.low >>> 0, object.resetTsPremonth.high >>> 0).toNumber();
-            if (object.monthReportDone != null)
-                message.monthReportDone = Boolean(object.monthReportDone);
+            if (object.lastMonthReportTs != null)
+                if ($util.Long)
+                    (message.lastMonthReportTs = $util.Long.fromValue(object.lastMonthReportTs)).unsigned = false;
+                else if (typeof object.lastMonthReportTs === "string")
+                    message.lastMonthReportTs = parseInt(object.lastMonthReportTs, 10);
+                else if (typeof object.lastMonthReportTs === "number")
+                    message.lastMonthReportTs = object.lastMonthReportTs;
+                else if (typeof object.lastMonthReportTs === "object")
+                    message.lastMonthReportTs = new $util.LongBits(object.lastMonthReportTs.low >>> 0, object.lastMonthReportTs.high >>> 0).toNumber();
             return message;
         };
 
@@ -1994,7 +2001,11 @@ $root.pb = (function () {
                     object.resetTsPremonth = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.resetTsPremonth = options.longs === String ? "0" : 0;
-                object.monthReportDone = false;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.lastMonthReportTs = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.lastMonthReportTs = options.longs === String ? "0" : 0;
             }
             if (message.resetTs != null && message.hasOwnProperty("resetTs"))
                 if (typeof message.resetTs === "number")
@@ -2008,8 +2019,11 @@ $root.pb = (function () {
                     object.resetTsPremonth = options.longs === String ? String(message.resetTsPremonth) : message.resetTsPremonth;
                 else
                     object.resetTsPremonth = options.longs === String ? $util.Long.prototype.toString.call(message.resetTsPremonth) : options.longs === Number ? new $util.LongBits(message.resetTsPremonth.low >>> 0, message.resetTsPremonth.high >>> 0).toNumber() : message.resetTsPremonth;
-            if (message.monthReportDone != null && message.hasOwnProperty("monthReportDone"))
-                object.monthReportDone = message.monthReportDone;
+            if (message.lastMonthReportTs != null && message.hasOwnProperty("lastMonthReportTs"))
+                if (typeof message.lastMonthReportTs === "number")
+                    object.lastMonthReportTs = options.longs === String ? String(message.lastMonthReportTs) : message.lastMonthReportTs;
+                else
+                    object.lastMonthReportTs = options.longs === String ? $util.Long.prototype.toString.call(message.lastMonthReportTs) : options.longs === Number ? new $util.LongBits(message.lastMonthReportTs.low >>> 0, message.lastMonthReportTs.high >>> 0).toNumber() : message.lastMonthReportTs;
             return object;
         };
 
@@ -3224,11 +3238,9 @@ $root.pb = (function () {
                     case 4:
                     case 5:
                     case 6:
+                    case 7:
                     case 10:
                     case 11:
-                    case 20:
-                    case 21:
-                    case 30:
                         break;
                 }
             if (message.kFrom != null && message.hasOwnProperty("kFrom"))
@@ -3352,21 +3364,25 @@ $root.pb = (function () {
                 case 2:
                     message.kType = 2;
                     break;
-                case "Min5":
+                case "MinToday":
                 case 3:
                     message.kType = 3;
                     break;
-                case "Min15":
+                case "Min5":
                 case 4:
                     message.kType = 4;
                     break;
-                case "Min30":
+                case "Min15":
                 case 5:
                     message.kType = 5;
                     break;
-                case "Min60":
+                case "Min30":
                 case 6:
                     message.kType = 6;
+                    break;
+                case "Min60":
+                case 7:
+                    message.kType = 7;
                     break;
                 case "Day":
                 case 10:
@@ -3375,18 +3391,6 @@ $root.pb = (function () {
                 case "Day7":
                 case 11:
                     message.kType = 11;
-                    break;
-                case "Mon":
-                case 20:
-                    message.kType = 20;
-                    break;
-                case "Mon3":
-                case 21:
-                    message.kType = 21;
-                    break;
-                case "Year":
-                case 30:
-                    message.kType = 30;
                     break;
             }
             if (object.kFrom != null)
@@ -3545,6 +3549,7 @@ $root.pb = (function () {
          * @interface IGameOperationItem
          * @property {number|null} [ts] GameOperationItem ts
          * @property {pb.GameOperationId|null} [opId] GameOperationItem opId
+         * @property {number|Long|null} [opVal] GameOperationItem opVal
          */
 
         /**
@@ -3579,6 +3584,14 @@ $root.pb = (function () {
         GameOperationItem.prototype.opId = 0;
 
         /**
+         * GameOperationItem opVal.
+         * @member {number|Long} opVal
+         * @memberof pb.GameOperationItem
+         * @instance
+         */
+        GameOperationItem.prototype.opVal = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
          * Creates a new GameOperationItem instance using the specified properties.
          * @function create
          * @memberof pb.GameOperationItem
@@ -3606,6 +3619,8 @@ $root.pb = (function () {
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ts);
             if (message.opId != null && Object.hasOwnProperty.call(message, "opId"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.opId);
+            if (message.opVal != null && Object.hasOwnProperty.call(message, "opVal"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.opVal);
             return writer;
         };
 
@@ -3645,6 +3660,9 @@ $root.pb = (function () {
                         break;
                     case 2:
                         message.opId = reader.int32();
+                        break;
+                    case 3:
+                        message.opVal = reader.int64();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -3699,6 +3717,9 @@ $root.pb = (function () {
                     case 150:
                         break;
                 }
+            if (message.opVal != null && message.hasOwnProperty("opVal"))
+                if (!$util.isInteger(message.opVal) && !(message.opVal && $util.isInteger(message.opVal.low) && $util.isInteger(message.opVal.high)))
+                    return "opVal: integer|Long expected";
             return null;
         };
 
@@ -3754,6 +3775,15 @@ $root.pb = (function () {
                     message.opId = 150;
                     break;
             }
+            if (object.opVal != null)
+                if ($util.Long)
+                    (message.opVal = $util.Long.fromValue(object.opVal)).unsigned = false;
+                else if (typeof object.opVal === "string")
+                    message.opVal = parseInt(object.opVal, 10);
+                else if (typeof object.opVal === "number")
+                    message.opVal = object.opVal;
+                else if (typeof object.opVal === "object")
+                    message.opVal = new $util.LongBits(object.opVal.low >>> 0, object.opVal.high >>> 0).toNumber();
             return message;
         };
 
@@ -3773,11 +3803,21 @@ $root.pb = (function () {
             if (options.defaults) {
                 object.ts = 0;
                 object.opId = options.enums === String ? "GameOperationId_NULL" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.opVal = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.opVal = options.longs === String ? "0" : 0;
             }
             if (message.ts != null && message.hasOwnProperty("ts"))
                 object.ts = message.ts;
             if (message.opId != null && message.hasOwnProperty("opId"))
                 object.opId = options.enums === String ? $root.pb.GameOperationId[message.opId] : message.opId;
+            if (message.opVal != null && message.hasOwnProperty("opVal"))
+                if (typeof message.opVal === "number")
+                    object.opVal = options.longs === String ? String(message.opVal) : message.opVal;
+                else
+                    object.opVal = options.longs === String ? $util.Long.prototype.toString.call(message.opVal) : options.longs === Number ? new $util.LongBits(message.opVal.low >>> 0, message.opVal.high >>> 0).toNumber() : message.opVal;
             return object;
         };
 
@@ -3971,11 +4011,9 @@ $root.pb = (function () {
                     case 4:
                     case 5:
                     case 6:
+                    case 7:
                     case 10:
                     case 11:
-                    case 20:
-                    case 21:
-                    case 30:
                         break;
                 }
             if (message.items != null && message.hasOwnProperty("items")) {
@@ -4017,21 +4055,25 @@ $root.pb = (function () {
                 case 2:
                     message.kType = 2;
                     break;
-                case "Min5":
+                case "MinToday":
                 case 3:
                     message.kType = 3;
                     break;
-                case "Min15":
+                case "Min5":
                 case 4:
                     message.kType = 4;
                     break;
-                case "Min30":
+                case "Min15":
                 case 5:
                     message.kType = 5;
                     break;
-                case "Min60":
+                case "Min30":
                 case 6:
                     message.kType = 6;
+                    break;
+                case "Min60":
+                case 7:
+                    message.kType = 7;
                     break;
                 case "Day":
                 case 10:
@@ -4040,18 +4082,6 @@ $root.pb = (function () {
                 case "Day7":
                 case 11:
                     message.kType = 11;
-                    break;
-                case "Mon":
-                case 20:
-                    message.kType = 20;
-                    break;
-                case "Mon3":
-                case 21:
-                    message.kType = 21;
-                    break;
-                case "Year":
-                case 30:
-                    message.kType = 30;
                     break;
             }
             if (object.items) {
@@ -7143,30 +7173,26 @@ $root.pb = (function () {
      * @property {number} KType_NULL=0 KType_NULL value
      * @property {number} Real=1 Real value
      * @property {number} Min=2 Min value
-     * @property {number} Min5=3 Min5 value
-     * @property {number} Min15=4 Min15 value
-     * @property {number} Min30=5 Min30 value
-     * @property {number} Min60=6 Min60 value
+     * @property {number} MinToday=3 MinToday value
+     * @property {number} Min5=4 Min5 value
+     * @property {number} Min15=5 Min15 value
+     * @property {number} Min30=6 Min30 value
+     * @property {number} Min60=7 Min60 value
      * @property {number} Day=10 Day value
      * @property {number} Day7=11 Day7 value
-     * @property {number} Mon=20 Mon value
-     * @property {number} Mon3=21 Mon3 value
-     * @property {number} Year=30 Year value
      */
     pb.KType = (function () {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "KType_NULL"] = 0;
         values[valuesById[1] = "Real"] = 1;
         values[valuesById[2] = "Min"] = 2;
-        values[valuesById[3] = "Min5"] = 3;
-        values[valuesById[4] = "Min15"] = 4;
-        values[valuesById[5] = "Min30"] = 5;
-        values[valuesById[6] = "Min60"] = 6;
+        values[valuesById[3] = "MinToday"] = 3;
+        values[valuesById[4] = "Min5"] = 4;
+        values[valuesById[5] = "Min15"] = 5;
+        values[valuesById[6] = "Min30"] = 6;
+        values[valuesById[7] = "Min60"] = 7;
         values[valuesById[10] = "Day"] = 10;
         values[valuesById[11] = "Day7"] = 11;
-        values[valuesById[20] = "Mon"] = 20;
-        values[valuesById[21] = "Mon3"] = 21;
-        values[valuesById[30] = "Year"] = 30;
         return values;
     })();
 
@@ -7399,11 +7425,9 @@ $root.pb = (function () {
                     case 4:
                     case 5:
                     case 6:
+                    case 7:
                     case 10:
                     case 11:
-                    case 20:
-                    case 21:
-                    case 30:
                         break;
                 }
             if (message.code != null && message.hasOwnProperty("code"))
@@ -7456,21 +7480,25 @@ $root.pb = (function () {
                 case 2:
                     message.ktype = 2;
                     break;
-                case "Min5":
+                case "MinToday":
                 case 3:
                     message.ktype = 3;
                     break;
-                case "Min15":
+                case "Min5":
                 case 4:
                     message.ktype = 4;
                     break;
-                case "Min30":
+                case "Min15":
                 case 5:
                     message.ktype = 5;
                     break;
-                case "Min60":
+                case "Min30":
                 case 6:
                     message.ktype = 6;
+                    break;
+                case "Min60":
+                case 7:
+                    message.ktype = 7;
                     break;
                 case "Day":
                 case 10:
@@ -7479,18 +7507,6 @@ $root.pb = (function () {
                 case "Day7":
                 case 11:
                     message.ktype = 11;
-                    break;
-                case "Mon":
-                case 20:
-                    message.ktype = 20;
-                    break;
-                case "Mon3":
-                case 21:
-                    message.ktype = 21;
-                    break;
-                case "Year":
-                case 30:
-                    message.ktype = 30;
                     break;
             }
             if (object.code != null)
@@ -7988,11 +8004,9 @@ $root.pb = (function () {
                     case 4:
                     case 5:
                     case 6:
+                    case 7:
                     case 10:
                     case 11:
-                    case 20:
-                    case 21:
-                    case 30:
                         break;
                 }
             if (message.timestamp != null && message.hasOwnProperty("timestamp"))
@@ -8080,21 +8094,25 @@ $root.pb = (function () {
                 case 2:
                     message.ktype = 2;
                     break;
-                case "Min5":
+                case "MinToday":
                 case 3:
                     message.ktype = 3;
                     break;
-                case "Min15":
+                case "Min5":
                 case 4:
                     message.ktype = 4;
                     break;
-                case "Min30":
+                case "Min15":
                 case 5:
                     message.ktype = 5;
                     break;
-                case "Min60":
+                case "Min30":
                 case 6:
                     message.ktype = 6;
+                    break;
+                case "Min60":
+                case 7:
+                    message.ktype = 7;
                     break;
                 case "Day":
                 case 10:
@@ -8103,18 +8121,6 @@ $root.pb = (function () {
                 case "Day7":
                 case 11:
                     message.ktype = 11;
-                    break;
-                case "Mon":
-                case 20:
-                    message.ktype = 20;
-                    break;
-                case "Mon3":
-                case 21:
-                    message.ktype = 21;
-                    break;
-                case "Year":
-                case 30:
-                    message.ktype = 30;
                     break;
             }
             if (object.timestamp != null)
@@ -9142,11 +9148,9 @@ $root.pb = (function () {
                     case 4:
                     case 5:
                     case 6:
+                    case 7:
                     case 10:
                     case 11:
-                    case 20:
-                    case 21:
-                    case 30:
                         break;
                 }
             if (message.code != null && message.hasOwnProperty("code"))
@@ -9189,21 +9193,25 @@ $root.pb = (function () {
                 case 2:
                     message.ktype = 2;
                     break;
-                case "Min5":
+                case "MinToday":
                 case 3:
                     message.ktype = 3;
                     break;
-                case "Min15":
+                case "Min5":
                 case 4:
                     message.ktype = 4;
                     break;
-                case "Min30":
+                case "Min15":
                 case 5:
                     message.ktype = 5;
                     break;
-                case "Min60":
+                case "Min30":
                 case 6:
                     message.ktype = 6;
+                    break;
+                case "Min60":
+                case 7:
+                    message.ktype = 7;
                     break;
                 case "Day":
                 case 10:
@@ -9212,18 +9220,6 @@ $root.pb = (function () {
                 case "Day7":
                 case 11:
                     message.ktype = 11;
-                    break;
-                case "Mon":
-                case 20:
-                    message.ktype = 20;
-                    break;
-                case "Mon3":
-                case 21:
-                    message.ktype = 21;
-                    break;
-                case "Year":
-                case 30:
-                    message.ktype = 30;
                     break;
             }
             if (object.code != null)
@@ -9327,10 +9323,7 @@ $root.pb = (function () {
          * @property {number|null} [low] QuoteItemFuture low
          * @property {number|Long|null} [volume] QuoteItemFuture volume
          * @property {number|Long|null} [volVolume] QuoteItemFuture volVolume
-         * @property {number|null} [volMavol1] QuoteItemFuture volMavol1
-         * @property {number|null} [volMavol2] QuoteItemFuture volMavol2
          * @property {number|Long|null} [cclHold] QuoteItemFuture cclHold
-         * @property {number|null} [cclMaccl] QuoteItemFuture cclMaccl
          */
 
         /**
@@ -9421,36 +9414,12 @@ $root.pb = (function () {
         QuoteItemFuture.prototype.volVolume = $util.Long ? $util.Long.fromBits(0, 0, true) : 0;
 
         /**
-         * QuoteItemFuture volMavol1.
-         * @member {number} volMavol1
-         * @memberof pb.QuoteItemFuture
-         * @instance
-         */
-        QuoteItemFuture.prototype.volMavol1 = 0;
-
-        /**
-         * QuoteItemFuture volMavol2.
-         * @member {number} volMavol2
-         * @memberof pb.QuoteItemFuture
-         * @instance
-         */
-        QuoteItemFuture.prototype.volMavol2 = 0;
-
-        /**
          * QuoteItemFuture cclHold.
          * @member {number|Long} cclHold
          * @memberof pb.QuoteItemFuture
          * @instance
          */
         QuoteItemFuture.prototype.cclHold = $util.Long ? $util.Long.fromBits(0, 0, true) : 0;
-
-        /**
-         * QuoteItemFuture cclMaccl.
-         * @member {number} cclMaccl
-         * @memberof pb.QuoteItemFuture
-         * @instance
-         */
-        QuoteItemFuture.prototype.cclMaccl = 0;
 
         /**
          * Creates a new QuoteItemFuture instance using the specified properties.
@@ -9494,14 +9463,8 @@ $root.pb = (function () {
                 writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.volume);
             if (message.volVolume != null && Object.hasOwnProperty.call(message, "volVolume"))
                 writer.uint32(/* id 9, wireType 0 =*/72).uint64(message.volVolume);
-            if (message.volMavol1 != null && Object.hasOwnProperty.call(message, "volMavol1"))
-                writer.uint32(/* id 10, wireType 1 =*/81).double(message.volMavol1);
-            if (message.volMavol2 != null && Object.hasOwnProperty.call(message, "volMavol2"))
-                writer.uint32(/* id 11, wireType 1 =*/89).double(message.volMavol2);
             if (message.cclHold != null && Object.hasOwnProperty.call(message, "cclHold"))
                 writer.uint32(/* id 12, wireType 0 =*/96).uint64(message.cclHold);
-            if (message.cclMaccl != null && Object.hasOwnProperty.call(message, "cclMaccl"))
-                writer.uint32(/* id 13, wireType 1 =*/105).double(message.cclMaccl);
             return writer;
         };
 
@@ -9563,17 +9526,8 @@ $root.pb = (function () {
                     case 9:
                         message.volVolume = reader.uint64();
                         break;
-                    case 10:
-                        message.volMavol1 = reader.double();
-                        break;
-                    case 11:
-                        message.volMavol2 = reader.double();
-                        break;
                     case 12:
                         message.cclHold = reader.uint64();
-                        break;
-                    case 13:
-                        message.cclMaccl = reader.double();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -9624,11 +9578,9 @@ $root.pb = (function () {
                     case 4:
                     case 5:
                     case 6:
+                    case 7:
                     case 10:
                     case 11:
-                    case 20:
-                    case 21:
-                    case 30:
                         break;
                 }
             if (message.timestamp != null && message.hasOwnProperty("timestamp"))
@@ -9652,18 +9604,9 @@ $root.pb = (function () {
             if (message.volVolume != null && message.hasOwnProperty("volVolume"))
                 if (!$util.isInteger(message.volVolume) && !(message.volVolume && $util.isInteger(message.volVolume.low) && $util.isInteger(message.volVolume.high)))
                     return "volVolume: integer|Long expected";
-            if (message.volMavol1 != null && message.hasOwnProperty("volMavol1"))
-                if (typeof message.volMavol1 !== "number")
-                    return "volMavol1: number expected";
-            if (message.volMavol2 != null && message.hasOwnProperty("volMavol2"))
-                if (typeof message.volMavol2 !== "number")
-                    return "volMavol2: number expected";
             if (message.cclHold != null && message.hasOwnProperty("cclHold"))
                 if (!$util.isInteger(message.cclHold) && !(message.cclHold && $util.isInteger(message.cclHold.low) && $util.isInteger(message.cclHold.high)))
                     return "cclHold: integer|Long expected";
-            if (message.cclMaccl != null && message.hasOwnProperty("cclMaccl"))
-                if (typeof message.cclMaccl !== "number")
-                    return "cclMaccl: number expected";
             return null;
         };
 
@@ -9694,21 +9637,25 @@ $root.pb = (function () {
                 case 2:
                     message.ktype = 2;
                     break;
-                case "Min5":
+                case "MinToday":
                 case 3:
                     message.ktype = 3;
                     break;
-                case "Min15":
+                case "Min5":
                 case 4:
                     message.ktype = 4;
                     break;
-                case "Min30":
+                case "Min15":
                 case 5:
                     message.ktype = 5;
                     break;
-                case "Min60":
+                case "Min30":
                 case 6:
                     message.ktype = 6;
+                    break;
+                case "Min60":
+                case 7:
+                    message.ktype = 7;
                     break;
                 case "Day":
                 case 10:
@@ -9717,18 +9664,6 @@ $root.pb = (function () {
                 case "Day7":
                 case 11:
                     message.ktype = 11;
-                    break;
-                case "Mon":
-                case 20:
-                    message.ktype = 20;
-                    break;
-                case "Mon3":
-                case 21:
-                    message.ktype = 21;
-                    break;
-                case "Year":
-                case 30:
-                    message.ktype = 30;
                     break;
             }
             if (object.timestamp != null)
@@ -9766,10 +9701,6 @@ $root.pb = (function () {
                     message.volVolume = object.volVolume;
                 else if (typeof object.volVolume === "object")
                     message.volVolume = new $util.LongBits(object.volVolume.low >>> 0, object.volVolume.high >>> 0).toNumber(true);
-            if (object.volMavol1 != null)
-                message.volMavol1 = Number(object.volMavol1);
-            if (object.volMavol2 != null)
-                message.volMavol2 = Number(object.volMavol2);
             if (object.cclHold != null)
                 if ($util.Long)
                     (message.cclHold = $util.Long.fromValue(object.cclHold)).unsigned = true;
@@ -9779,8 +9710,6 @@ $root.pb = (function () {
                     message.cclHold = object.cclHold;
                 else if (typeof object.cclHold === "object")
                     message.cclHold = new $util.LongBits(object.cclHold.low >>> 0, object.cclHold.high >>> 0).toNumber(true);
-            if (object.cclMaccl != null)
-                message.cclMaccl = Number(object.cclMaccl);
             return message;
         };
 
@@ -9819,14 +9748,11 @@ $root.pb = (function () {
                     object.volVolume = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.volVolume = options.longs === String ? "0" : 0;
-                object.volMavol1 = 0;
-                object.volMavol2 = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
                     object.cclHold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.cclHold = options.longs === String ? "0" : 0;
-                object.cclMaccl = 0;
             }
             if (message.code != null && message.hasOwnProperty("code"))
                 object.code = message.code;
@@ -9855,17 +9781,11 @@ $root.pb = (function () {
                     object.volVolume = options.longs === String ? String(message.volVolume) : message.volVolume;
                 else
                     object.volVolume = options.longs === String ? $util.Long.prototype.toString.call(message.volVolume) : options.longs === Number ? new $util.LongBits(message.volVolume.low >>> 0, message.volVolume.high >>> 0).toNumber(true) : message.volVolume;
-            if (message.volMavol1 != null && message.hasOwnProperty("volMavol1"))
-                object.volMavol1 = options.json && !isFinite(message.volMavol1) ? String(message.volMavol1) : message.volMavol1;
-            if (message.volMavol2 != null && message.hasOwnProperty("volMavol2"))
-                object.volMavol2 = options.json && !isFinite(message.volMavol2) ? String(message.volMavol2) : message.volMavol2;
             if (message.cclHold != null && message.hasOwnProperty("cclHold"))
                 if (typeof message.cclHold === "number")
                     object.cclHold = options.longs === String ? String(message.cclHold) : message.cclHold;
                 else
                     object.cclHold = options.longs === String ? $util.Long.prototype.toString.call(message.cclHold) : options.longs === Number ? new $util.LongBits(message.cclHold.low >>> 0, message.cclHold.high >>> 0).toNumber(true) : message.cclHold;
-            if (message.cclMaccl != null && message.hasOwnProperty("cclMaccl"))
-                object.cclMaccl = options.json && !isFinite(message.cclMaccl) ? String(message.cclMaccl) : message.cclMaccl;
             return object;
         };
 
