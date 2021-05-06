@@ -1,5 +1,11 @@
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
+import GameData from '../GameData';
+import GameCfg from '../game/GameCfg';
+import { pb } from '../../protos/proto';
+
+import GameCfgText from '../GameText';
+import HttpUtils from '../common/net/HttpUtils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -9,12 +15,17 @@ export default class NewClass extends cc.Component {
 	SCArr = null; //上海期货交易所
 	ZCArr = null; //郑州商品交易所
 	XJArr = null; //中金所
-	
+
+	@property(cc.Node)
+	preItem: cc.Node = null;
+
 	@property([cc.Node])
-	box:cc.Node[]=[];
-	
+	box: cc.Node[] = [];
+
 	@property([cc.Node])
-	downBox:cc.Node[]=[];
+	downBox: cc.Node[] = [];
+
+	_id = 0;
 
 	onLoad() {
 		this.DCArr = {
@@ -323,18 +334,217 @@ export default class NewClass extends cc.Component {
 	start() {}
 
 	onEnable() {
+		GameCfg.GameType=pb.GameType.QiHuo;
+		let setDatas = GameData.QHSet;
+	}
+
+	onSelectBoxClick(evetn, data) {
+		this._id = parseInt(data);
+		this.downBox[this._id].active = true;
+		let content = cc.find('New ScrollView/view/content', this.downBox[this._id]);
+		let nodes = content.children;
+	
+		if (this._id == 1) {
 		
+			if (GameData.QHSet.JYS == '随机') {
+				nodes = content.children;
+				nodes.forEach((el, index) => {
+					if (index == 0) {
+						el.getComponent(cc.Label).string = '随机';
+					} else {
+						el.active = false;
+					}
+				});
+			}else if(GameData.QHSet.JYS=='大连商品'){
+				if(nodes.length<this.DCArr.type.length){
+					let tt=this.DCArr.type.length-nodes.length
+					for(let i=0;i< tt;i++){
+						let node=cc.instantiate(this.preItem);
+						content.addChild(node);
+					}
+				}
+				nodes = content.children;
+				nodes.forEach((el,index)=>{
+					if(index>=this.DCArr.type.length){
+						el.active=false;
+					}else{
+						el.active=true;
+						el.getComponent(cc.Label).string=this.DCArr.type[index];
+					}
+				})
+			}else if(GameData.QHSet.JYS=='上海期货'){
+				if(nodes.length<this.SCArr.type.length){
+						let tt=this.SCArr.type.length-nodes.length;
+					for(let i=0;i<tt;i++){
+						let node=cc.instantiate(this.preItem);
+						content.addChild(node);
+					}
+				}
+				nodes = content.children;
+				nodes.forEach((el,index)=>{
+					if(index>=this.SCArr.type.length){
+						el.active=false;
+					}else{
+						el.active=true;
+						el.getComponent(cc.Label).string=this.SCArr.type[index];
+					}
+				})
+			}else if(GameData.QHSet.JYS=='郑州商品'){
+				if(nodes.length<this.ZCArr.type.length){
+						let tt=this.ZCArr.type.length-nodes.length;
+					for(let i=0;i<tt;i++){
+						let node=cc.instantiate(this.preItem);
+						content.addChild(node);
+					}
+				}
+				nodes = content.children;
+				nodes.forEach((el,index)=>{
+					if(index>=this.ZCArr.type.length){
+						el.active=false;
+					}else{
+						el.active=true;
+						el.getComponent(cc.Label).string=this.ZCArr.type[index];
+					}
+				})
+			}else if(GameData.QHSet.JYS=='中金所'){
+				if(nodes.length<this.XJArr.type.length){
+					let tt=this.XJArr.type.length-nodes.length;
+					for(let i=0;i<tt;i++){
+						let node=cc.instantiate(this.preItem);
+						content.addChild(node);
+					}
+				}
+				nodes = content.children;
+				nodes.forEach((el,index)=>{
+					if(index>=this.XJArr.type.length){
+						el.active=false;
+					}else{
+						el.active=true;
+						el.getComponent(cc.Label).string=this.XJArr.type[index];
+					}
+				})
+			}
+		
+		}
+		else if(this._id == 2){
+		   if(GameData.QHSet.JYS=='随机'){
+			   nodes = content.children;
+			   nodes.forEach((el, index) => {
+			   	if (index == 0) {
+					el.active=true;
+			   		el.getComponent(cc.Label).string = '随机';
+			   	} else {
+			   		el.active = false;
+			   	}
+			   });
+		   }
+		   else if(GameData.QHSet.LXPZ!='随机'){
+			   let arr=[];
+			   if(this.DCArr.type.indexOf(GameData.QHSet.LXPZ)!=-1){
+				   let index=this.DCArr.type.indexOf(GameData.QHSet.LXPZ);
+				   arr.push(this.DCArr.main[index]);
+				   arr.push(this.DCArr.index[index]);
+			   }
+			   else if(this.SCArr.type.indexOf(GameData.QHSet.LXPZ)!=-1){
+				   let index=this.SCArr.type.indexOf(GameData.QHSet.LXPZ);
+				   arr.push(this.SCArr.main[index]);
+				   arr.push(this.SCArr.index[index]);
+			   }
+			   else if(this.XJArr.type.indexOf(GameData.QHSet.LXPZ)!=-1){
+				   let index=this.XJArr.type.indexOf(GameData.QHSet.LXPZ);
+				   arr.push(this.XJArr.main[index]);
+				   arr.push(this.XJArr.index[index]);
+			   }
+				else if(this.ZCArr.type.indexOf(GameData.QHSet.LXPZ)!=-1){
+					let index=this.ZCArr.type.indexOf(GameData.QHSet.LXPZ);
+					this.ZCArr.main&&(arr.push(this.ZCArr.main[index]));
+					this.ZCArr.index&&(arr.push(this.ZCArr.index[index]));
+				}
+				
+				if(nodes.length<arr.length){
+					let tt=arr.length-nodes.length
+					for(let i=0;i<tt;i++){
+						let node=cc.instantiate(this.preItem);
+						content.addChild(node);
+					}
+				}
+					nodes = content.children;
+				nodes.forEach((el,index)=>{
+					if(index>=arr.length){
+						el.active=false;
+					}else{
+						el.active=true;
+						el.getComponent(cc.Label).string=arr[index];
+					}
+				})
+		   }
+		
+		}
 	}
 
 	onBtnClick(event, data) {
-		let name = event.targe.name;
+		let name = event.target.name;
 
 		//设置
 		if (name == 'setQHBtnDX') {
+			
+			GlobalEvent.emit('OPENSETLAYER','QH');
+
 		}
 		//记录
 		else if (name == 'historyQHBtn') {
 		}
+		//
+		else if (name == 'item') {
+			let la = this.box[this._id].getChildByName('label').getComponent(cc.Label);
+
+			let str = event.target.getComponent(cc.Label).string;
+			la.string = str;
+			if (this._id == 0) {
+				GameData.QHSet.JYS = str;
+				this.box[1].getChildByName('label').getComponent(cc.Label).string='随机';
+				this.box[2].getChildByName('label').getComponent(cc.Label).string='随机';
+			} else if (this._id == 1) {
+				GameData.QHSet.LXPZ = str;
+				this.box[2].getChildByName('label').getComponent(cc.Label).string='随机';
+			} else if (this._id == 2) {
+				GameData.QHSet.HY = str;
+			} else if (this._id == 3) {
+				GameData.QHSet.year = str;
+			} else if (this._id == 4) {
+				GameData.QHSet.month = str;
+			} else if (this._id == 5) {
+				GameData.QHSet.day = str;
+			} else if (this._id == 6) {
+				GameData.QHSet.KLine = parseInt(str);
+			} else if (this._id == 7) {
+				GameData.QHSet.ZLine = Str;
+			}
+			this.downBox[this._id].active=false;
+		}
+		//
+		else if (name == 'DCnode') {
+			this.downBox.forEach(el => {
+				el.active = false;
+			});
+		}
+		else if(name=='startQHBtn'){
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+			GameCfg.GAMEFUPAN=false;
+			GameCfg.GameSet=GameData.QHSet;
+			GameCfg.GameType=pb.GameType.QiHuo;
+			this.QHStartGameSet();
+		}
+		else if(name=='blackbtn'){
+			this.node.active=false;
+			GameCfg.GameType=null;	
+		}
+	}
+	
+	QHStartGameSet(){
+		
+		
+		
 	}
 
 	//http://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js?TYPE=m30k&rtntype=5&authorityType=fa&id=3008032

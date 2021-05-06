@@ -18,6 +18,9 @@ export default class NewClass extends cc.Component {
 	@property(cc.Node)
 	DXLayer: cc.Node = null;
 
+	@property(cc.Node)
+	QHLayer: cc.Node = null;
+
 	@property(cc.Prefab)
 	SMhistoryPre: cc.Prefab = null;
 
@@ -69,6 +72,11 @@ export default class NewClass extends cc.Component {
 	SMResetPre: cc.Prefab = null;
 
 	SMResetNode: cc.Node = null;
+	
+	@property(cc.Prefab)
+	QHSetPre:cc.Prefab=null;
+	
+	QHSetNode:cc.Node=null;
 
 	onLoad() {
 		ComUtils.onLoadNode();
@@ -135,8 +143,12 @@ export default class NewClass extends cc.Component {
 						this.node.addChild(this.DXSetLayer);
 					}
 					this.DXSetLayer.active = true;
-				}else if(str=='QH'){
-					
+				} else if (str == 'QH') {
+					if(!this.QHSetNode){
+						this.QHSetNode=cc.instantiate(this.QHSetPre);
+						this.node.addChild(this.QHSetNode);
+					}
+					this.QHSetNode.active=true;
 				}
 			},
 			this
@@ -217,6 +229,15 @@ export default class NewClass extends cc.Component {
 					this.node.addChild(this.SMResetNode);
 				}
 				this.SMResetNode.active = true;
+			},
+			this
+		);
+
+		//打開期货
+		GlobalEvent.on(
+			'OPENQHLAYER',
+			() => {
+				this.QHLayer.active = true;
 			},
 			this
 		);

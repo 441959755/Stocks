@@ -4,8 +4,9 @@ import {
 } from '../../../protos/proto';
 import GameData from '../../GameData';
 import GameCfgText from '../../GameText';
-import GlobalEvent from '../../../Utils/GlobalEvent';
-import EventCfg from '../../../Utils/EventCfg';
+import GlobalEvent from '../../Utils/GlobalEvent';
+import EventCfg from '../../Utils/EventCfg';
+
 
 let MessageHead = pb.MessageHead;
 
@@ -15,11 +16,11 @@ Socket.prototype = {
 		console.log('connected');
 		self.reconnectBeat && (clearInterval(self.reconnectBeat))
 		self.reconnectBeat = null;
-		this.reconnectCount=0;
+		this.reconnectCount = 0;
 		GlobalEvent.emit(EventCfg.TIPSTEXTHIDE);
 		socket.send(pb.MessageId.Req_Game_Login, PB.onCmdGameLoginConvertToBuff(), (info) => {
 			console.log(JSON.stringify(info));
-			
+
 			if (info && info.data) {
 				GameData.userID = info.data.uid;
 				GameData.userName = info.data.nickname;
@@ -166,7 +167,7 @@ Socket.prototype = {
 
 
 	onShowTips() {
-		GlobalEvent.emit(EventCfg.TIPSTEXTSHOW,'网络连接错误，请检查网络是否正常连接。');
+		GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否正常连接。');
 	},
 
 

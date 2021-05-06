@@ -31,19 +31,15 @@ enum KType {
 	Real = 1;	// 实时（包含当前这一分钟的分时行情和买卖5档委托，随行情源每隔n秒同步一次）
 
 	// 历史行情
-	Min   = 2;	// 分时：1分钟
-	Min5  = 3;	// 分时：5分钟
-	Min15 = 4;	// 15分
-	Min30 = 5;	// 30分
-	Min60 = 6;	// 60分
+	Min   = 2;	// 分时：任何时间（时间格式：时间戳，精确到秒
+	MinToday= 3;// 分时：当天的（时间格式：HHMMSS
+	Min5  = 4;	// 5分钟（时间格式：时间戳，精确到秒
+	Min15 = 5;	// 15分（时间格式：时间戳，精确到秒
+	Min30 = 6;	// 30分（时间格式：时间戳，精确到秒
+	Min60 = 7;	// 60分（时间格式：时间戳，精确到秒
 
-	Day  = 10;  // 日K
+	Day  = 10;  // 日K（时间格式：YYYYMMDD
 	Day7 = 11;  // 周K
-
-	Mon   = 20; // 月K
-	Mon3  = 21;	// 季K
-
-	Year = 30; 	// 年K
 }
 
 // 行情K线波形
@@ -117,10 +113,7 @@ message QuoteItemFuture {
 
 	uint64 volume = 8;      // 成交量
 	uint64 vol_volume = 9;  // VOL.VOLUME
-	double vol_mavol1 = 10;	// VOL.MAVOL1
-	double vol_mavol2 = 11;	// VOL.MAVOL2
 	uint64 ccl_hold = 12;	// CCL.持仓量
-	double ccl_maccl = 13;	// CCL.MACCL
 }
 message QuotesFuture {
 	repeated QuoteItemFuture items = 1;

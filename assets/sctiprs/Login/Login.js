@@ -34,11 +34,12 @@ cc.Class({
 	},
 
 	onLoad() {
-		AudioUtils.LoadAudios('audios');
+		this.init();
+		//AudioUtils.LoadAudios('audios');
 		ComUtils.onLoadNode();
 		ComUtils.onEvent();
 
-		this.init();
+
 		//游戏配置
 		GameCfgText.getOtherCfg();
 
@@ -71,7 +72,7 @@ cc.Class({
 			} else {
 				console.log('login err');
 				GlobalEvent.emit(EventCfg.LOADINGHIDE);
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW,'网络连接错误，请检查网络是否了解.');
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否了解.');
 			}
 		})
 	},
@@ -81,6 +82,8 @@ cc.Class({
 		let SMSet = cc.sys.localStorage.getItem('SMSET');
 		if (!SMSet) {
 			SMSet = {
+				KLine: '100',
+				ZLine: '日线',
 				isShowVol: true,
 				isBW: true,
 				isMA1: true,
@@ -96,6 +99,7 @@ cc.Class({
 				isMA6: true,
 				MA6Date: 120,
 				isFC: false,
+
 			}
 			GameData.SMSet = SMSet;
 		} else {
@@ -128,7 +132,7 @@ cc.Class({
 				month: '--',
 				day: '--',
 				line: 'K线',
-				KLine: '100',
+				KLine: 100,
 				ZLine: '日线',
 				isFC: false,
 			}
@@ -146,7 +150,7 @@ cc.Class({
 				year: '2010',
 				month: '08',
 				day: '04',
-				KLine: '150',
+				KLine: 150,
 				ZLine: '日线',
 				showSign: true,
 				MA: [20, 10, 20, -8],
@@ -227,7 +231,7 @@ cc.Class({
 			let preStr = new Date(time).toLocaleDateString();
 			cc.sys.localStorage.removeItem('DINGXIANGCOUNT' + preStr);
 		}
-		
+
 		//期货设置
 		{
 			let QHSet = cc.sys.localStorage.getItem('QHSET');
@@ -248,6 +252,14 @@ cc.Class({
 					isMA6: true,
 					MA6Date: 120,
 					isFC: false,
+					JYS: '随机',
+					LXPZ: '随机',
+					HY: '随机',
+					year: '随机',
+					month: '--',
+					day: '--',
+					KLine: 150,
+					ZLine: '日线',
 				}
 				GameData.QHSet = QHSet;
 			} else {

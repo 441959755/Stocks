@@ -23,8 +23,8 @@ export default class NewClass extends cc.Component {
         }, 2000);
     }
 
-    onDisable() {
 
+    onDisable() {
         this.textData = '';
         this.node.opacity = 255;
     }

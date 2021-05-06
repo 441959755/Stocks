@@ -85,10 +85,10 @@ message GameCounter {
 
 // 双盲训练状态
 message SmxlState {
-	int64 reset_ts = 1;			// 当前月最后一次重置时间戳
-	int32 reset_counter = 2;	// 当前月重置次数（跨月自动清零）
-	int64 reset_ts_premonth = 3;// 上月最后一次重置时间戳
-	bool month_report_done = 4;	// 是否已经生成本月的双盲训练月报
+	int64 reset_ts = 1;				// 当前最后一次重置时间戳
+	int32 reset_counter = 2;		// 当前重置次数（跨月自动清零）
+	int64 reset_ts_premonth = 3;	// 非当前月的最后一次重置时间戳
+	int64 last_month_report_ts = 4;	// 最近一次生成月报的时间戳
 }
 
 
@@ -136,6 +136,7 @@ message GameResult {
 message GameOperationItem {
 	int32 ts = 1;				// 时间：日K线的格式为YYYYMMDD，分时K线的格式为HHMMSS
 	GameOperationId op_id = 2;	// 操作Id
+	int64 op_val = 3;			// 操作参数：买入或卖出量
 }
 message GameOperations {
 	int32 code = 1;							// 行情代码：股票或期货

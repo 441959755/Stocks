@@ -10,9 +10,7 @@ export default class NewClass extends cc.Component {
 
 	// LIFE-CYCLE CALLBACKS:
 
-	protected onEnable() {
-		
-		
+	protected onEnable() {	
 		cc.tween(this.loading)
 			.by(0.1, { angle: 10 })
 			.repeatForever()
