@@ -120,6 +120,13 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
+        //QH
+        GlobalEvent.on('onQHDraw', () => {
+            this.initDrawBg();
+            GlobalEvent.emit('onDraw');
+            this.updataLabel(cc.ext.beg_end[1]);
+        }, this);
+
 
         //每回合的绘制
         GlobalEvent.on('roundNUmber', () => {

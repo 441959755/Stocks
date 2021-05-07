@@ -163,6 +163,10 @@ export default class NewClass extends cc.Component {
             //  this.rZoom.isChecked = true;
             // GlobalEvent.emit('labelPoint', cc.winSize.width + this.rightBox.width / 2 - 150);
         }
+        else if (GameCfg.GameType == pb.GameType.QiHuo) {
+            this.lZoom.node.active = false;
+            this.lZoom.isChecked = false;
+        }
     }
 
     setBGColor() {

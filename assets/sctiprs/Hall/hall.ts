@@ -4,6 +4,7 @@ import GameCfg from '../game/GameCfg';
 import LoadUtils from '../Utils/LoadUtils';
 import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
+import GameData from '../GameData';
 
 const { ccclass, property } = cc._decorator;
 
@@ -72,11 +73,11 @@ export default class NewClass extends cc.Component {
 	SMResetPre: cc.Prefab = null;
 
 	SMResetNode: cc.Node = null;
-	
+
 	@property(cc.Prefab)
-	QHSetPre:cc.Prefab=null;
-	
-	QHSetNode:cc.Node=null;
+	QHSetPre: cc.Prefab = null;
+
+	QHSetNode: cc.Node = null;
 
 	onLoad() {
 		ComUtils.onLoadNode();
@@ -144,11 +145,11 @@ export default class NewClass extends cc.Component {
 					}
 					this.DXSetLayer.active = true;
 				} else if (str == 'QH') {
-					if(!this.QHSetNode){
-						this.QHSetNode=cc.instantiate(this.QHSetPre);
+					if (!this.QHSetNode) {
+						this.QHSetNode = cc.instantiate(this.QHSetPre);
 						this.node.addChild(this.QHSetNode);
 					}
-					this.QHSetNode.active=true;
+					this.QHSetNode.active = true;
 				}
 			},
 			this
@@ -241,6 +242,8 @@ export default class NewClass extends cc.Component {
 			},
 			this
 		);
+
+		GlobalEvent.on(EventCfg.CmdQuoteQueryFuture, this.onCmdQHGameStart.bind(this), this);
 	}
 
 	onEnable() {
@@ -310,6 +313,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off('onCmdQuoteQuery');
 		GlobalEvent.off('OPENDXKAYER');
 		GlobalEvent.off('OPENPLAYERINFO');
+		GlobalEvent.off('OPENQHLAYER');
 		ComUtils.onDestory();
 	}
 
@@ -321,7 +325,7 @@ export default class NewClass extends cc.Component {
 			//console.log('onCmdGameStart' + JSON.stringify(res));
 			socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
 				//   console.log('onCmdQuoteQuery' + JSON.stringify(info));
-				if (info.items.length <= 0) {
+				if (!info.items || info.items.length <= 0) {
 					console.log('获取的行情为空');
 					// console.log(JSON.stringify(GameCfg.data));
 					GameCfg.GAMEFUPAN = false;
@@ -383,6 +387,82 @@ export default class NewClass extends cc.Component {
 				callBack && callBack(info);
 			});
 		}
+	}
+
+	onCmdQHGameStart(data) {
+		let inf = {
+			game: pb.GameType.QiHuo
+		}
+		socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(inf), res => {
+			socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(data), info => {
+				//console.log(JSON.stringify(info));
+				if (!info.items || info.items.length <= 0) {
+					console.log('获取的行情为空');
+					GameCfg.GAMEFUPAN = false;
+					GlobalEvent.emit(EventCfg.LOADINGHIDE);
+					return;
+				}
+				if (GameData.QHSet.ZLine == '日线' || GameData.QHSet.ZLine == '5分钟K') {
+					info.items.forEach(el => {
+						// {"code":2000042,"ktype":"Day","timestamp":"1577235900","open":3112,"close":3116,"high":3120,"low":3112,"volume":"15032"},
+						let data = {
+							day: el.timestamp,
+							open: el.open,
+							close: el.close,
+							high: el.high,
+							low: el.low,
+							value: el.volume,
+						};
+						GameCfg.data[0].data.push(data);
+					});
+				} else {
+					let t
+					if (GameData.QHSet.ZLine == '15分钟K') {
+						t = 3;
+					} else if (GameData.QHSet.ZLine == '30分钟K') {
+						t = 6;
+					} else if (GameData.QHSet.ZLine == '60分钟K') {
+						t = 12;
+					}
+					for (let index = 0; index < info.items.length;) {
+						if (index + t - 1 < info.items.length) {
+							let el = info.items[index];
+							let day = el.timestamp;
+							let open = el.open;
+							let close = info.items[index + t - 1].close;
+
+							let high = 0, low = el.low, volume = 0;
+							for (let i = 0; i < t; i++) {
+								if (info.items[index + i].high >= high) {
+									high = info.items[index + i].high;
+								}
+
+								if (info.items[index + i].low <= low) {
+									low = info.items[index + i].low;
+								}
+
+								volume += info.items[index + i].volume;
+
+							}
+							let data = {
+								day: day,
+								open: open,
+								close: close,
+								high: high,
+								low: low,
+								value: volume,
+							}
+							GameCfg.data[0].data.push(data);
+							index += t;
+						} else {
+							break;
+						}
+					}
+				}
+
+				cc.director.loadScene('game');
+			})
+		})
 	}
 
 	// resetSize(cav) {

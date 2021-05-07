@@ -18,6 +18,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     statLayer: cc.Node = null;
 
+    @property(cc.Node)
+    selectLine: cc.Node = null;
+
     onLoad() {
         //游戏结算
         GlobalEvent.on(EventCfg.GAMEOVEER, (flag) => {
@@ -229,6 +232,12 @@ export default class NewClass extends cc.Component {
                 }
             }
 
+        }
+    }
+
+    start() {
+        if (GameCfg.GameType == pb.GameType.QiHuo) {
+            this.selectLine.active = true;
         }
     }
 

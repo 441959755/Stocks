@@ -25,7 +25,7 @@ export default class NewClass extends cc.Component {
 	@property([cc.Node])
 	downBox: cc.Node[] = [];
 
-	_id = 0;
+	_tid = 0;
 
 	onLoad() {
 		this.DCArr = {
@@ -95,7 +95,28 @@ export default class NewClass extends cc.Component {
 				'乙二醇指数',
 				'粳米指数'
 			],
-			indexCode: ['AL9', 'BL9', 'CL9', 'CSL9', 'ML9', 'YL9', 'LL9', 'VL9', 'BBL9', 'FBL9', 'IL9', 'JL9', 'JML9', 'JDL9', 'PL9', 'PPL9', 'EBL9', 'EGL9', 'RRL9']
+			indexCode: ['AL9', 'BL9', 'CL9', 'CSL9', 'ML9', 'YL9', 'LL9', 'VL9', 'BBL9', 'FBL9', 'IL9', 'JL9', 'JML9', 'JDL9', 'PL9', 'PPL9', 'EBL9', 'EGL9', 'RRL9'],
+			eachHand: ['10',
+				'10',
+				'10',
+				'10',
+				'10',
+				'10',
+				'10',
+				'5',
+				'500',
+				'10',
+				'100',
+				'100',
+				'60',
+				'10',
+				'10',
+				'5',
+				'5',
+				'10',
+
+				'10',
+			]
 		};
 
 		this.SCArr = {
@@ -111,7 +132,7 @@ export default class NewClass extends cc.Component {
 				'沪铜主连',
 				'沪铅主连',
 				'沪镍主连',
-				'螺纹钢主连',
+				'螺纹主连',
 				'燃油主连',
 				'线材主连',
 				'沪锡主连',
@@ -131,7 +152,7 @@ export default class NewClass extends cc.Component {
 				'沪铜指数',
 				'沪铅指数',
 				'沪镍指数',
-				'螺纹钢指数',
+				'螺纹指数',
 				'燃油指数',
 				'线材指数',
 				'沪锡指数',
@@ -141,7 +162,26 @@ export default class NewClass extends cc.Component {
 				'纸浆指数',
 				'原油指数'
 			],
-			indexCode: ['RUL9', 'AGL9', 'AUL9', 'ALL9', 'BUL9', 'CUL9', 'PBL9', 'NIL9', 'RBL9', 'FUL9', 'WRL9', 'SNL9', 'ZNL9', 'HCL9', 'SSL9', 'SPL9', 'SCL9']
+			indexCode: ['RUL9', 'AGL9', 'AUL9', 'ALL9', 'BUL9', 'CUL9', 'PBL9', 'NIL9', 'RBL9', 'FUL9', 'WRL9', 'SNL9', 'ZNL9', 'HCL9', 'SSL9', 'SPL9', 'SCL9'],
+			eachHand: ['10',
+				'15',
+				'1000',
+				'5',
+				'10',
+				'5',
+				'5',
+				'1',
+				'10',
+				'50',
+				'10',
+				'1',
+				'5',
+				'10',
+				'5',
+				'10',
+				'1000'
+
+			]
 		};
 
 		this.ZCArr = {
@@ -150,23 +190,23 @@ export default class NewClass extends cc.Component {
 				'RI',
 				'LR',
 				'JR',
-				'WS',
-				'WT',
+				// 'WS',
+				// 'WT',
 				'WH',
 				'PM',
 				'CF',
 				'CY',
 				'RS',
 				'RM',
-				'RO',
+				//	'RO',
 				'SR',
 				'MA',
-				'ME',
+				//	'ME',
 				'FG',
 				'SF',
 				'SM',
 				'TA',
-				'TC',
+				//	'TC',
 				'AP',
 				//	'ER',
 				'OI',
@@ -179,23 +219,23 @@ export default class NewClass extends cc.Component {
 				'早籼稻',
 				'晚籼稻',
 				'粳稻',
-				'强麦1',
-				'硬麦',
+				// '强麦1',
+				// '硬麦',
 				'强麦2',
 				'普通小麦',
 				'一号棉花',
 				'棉纱',
 				'菜籽',
 				'菜粕',
-				'菜油',
+				//	'菜油',
 				'白糖',
 				'甲醇2',
-				'甲醇1',
+				//	'甲醇1',
 				'玻璃',
 				'硅铁',
 				'锰硅',
 				'PTA',
-				'动力煤',
+				//	'动力煤',
 				'苹果',
 				//	'籼稻',
 				'菜籽油',
@@ -208,8 +248,8 @@ export default class NewClass extends cc.Component {
 				'早稻主连',
 				'晚稻主连',
 				'粳稻主连',
-				'强麦1主连',
-				'硬麦',
+				// '强麦1主连',
+				// '硬麦',
 				'强麦主连',
 				'普麦主连',
 				'郑棉主连',
@@ -218,13 +258,13 @@ export default class NewClass extends cc.Component {
 				'菜籽主连',
 
 				'白糖主连',
-				'新甲醇主连',
-				'甲醇1主连',
+				//	'新甲醇主连',
+				'甲醇主连',
 				'玻璃主连',
 				'硅铁主连',
 				'锰硅主连',
 				'PTA主连',
-				'动力煤主连',
+				//'动力煤主连',
 				'苹果主连',
 				//	'籼稻主连',
 				'菜籽油主连',
@@ -237,8 +277,8 @@ export default class NewClass extends cc.Component {
 				'RIL1',
 				'LRL1',
 				'JRL1',
-				'WSL1',
-				'WTL1',
+				// 'WSL1',
+				// 'WTL1',
 				'WHL1',
 				'PML1',
 				'CFL1',
@@ -247,13 +287,13 @@ export default class NewClass extends cc.Component {
 				'RML1',
 
 				'SRL1',
-				'MAL1',
+				//'MAL1',
 				'MEL1',
 				'FGL1',
 				'SFL1',
 				'SML1',
 				'TAL1',
-				'TCL1',
+				//	'TCL1',
 				'APL1',
 				//	'ERL1',
 				'OIL1',
@@ -266,8 +306,8 @@ export default class NewClass extends cc.Component {
 				'早稻指数',
 				'晚稻指数',
 				'粳稻指数',
-				'强麦1指数',
-				'硬麦',
+				// '强麦1指数',
+				// '硬麦',
 				'强麦指数',
 				'普麦指数',
 				'棉花指数',
@@ -276,13 +316,13 @@ export default class NewClass extends cc.Component {
 				'菜籽粕指数',
 
 				'白糖指数',
-				'新甲醇指数',
-				'甲醇1指数',
+				//	'新甲醇指数',
+				'甲醇指数',
 				'玻璃指数',
 				'硅铁指数',
 				'锰硅指数',
 				'PTA指数',
-				'动力煤指数',
+				//	'动力煤指数',
 				'苹果指数',
 				//	'籼稻指数',
 				'菜籽油指数',
@@ -295,8 +335,8 @@ export default class NewClass extends cc.Component {
 				'RIL9',
 				'LRL9',
 				'JRL9',
-				'WSL9',
-				'WTL9',
+				// 'WSL9',
+				// 'WTL9',
 				'WHL9',
 				'PML9',
 				'CFL9',
@@ -305,13 +345,13 @@ export default class NewClass extends cc.Component {
 				'RML9',
 
 				'SRL9',
-				'MAL9',
+				//'MAL9',
 				'MEL9',
 				'FGL9',
 				'SFL9',
 				'SML9',
 				'TAL9',
-				'TCL9',
+				//	'TCL9',
 				'APL9',
 				//	'ERL9',
 				'OIL9',
@@ -319,6 +359,35 @@ export default class NewClass extends cc.Component {
 				'CJL9',
 				'URL9',
 				'SAL9'
+			],
+
+			eachHand: ['20',
+				'20',
+				'20',
+
+
+				'20',
+				'50',
+				'5',
+				'5',
+				'10',
+				'10',
+
+				'10',
+				'10',
+				'50',
+				'20',
+				'5',
+				'5',
+				'5',
+
+				'10',
+
+				'10',
+				'100',
+				'5',
+				'20',
+				'20',
 			]
 		};
 
@@ -327,11 +396,13 @@ export default class NewClass extends cc.Component {
 			code: ['IF', 'IH', 'IC', 'SC'],
 			type: ['沪深300指数', '上证50指数', '中证500指数', '原油'],
 			main: ['沪深300', '沪深主连', '上证50', '上证主连', '中证500', '中证主连', '二债主连', '五债主连', '十债主连'],
-			mainCode: ['IF300', 'IFL8', 'IH50', 'IHL8', 'IC500', 'ICL8', 'TSL8', 'TFL8', 'TL8']
+			mainCode: ['IF300', 'IFL8', 'IH50', 'IHL8', 'IC500', 'ICL8', 'TSL8', 'TFL8', 'TL8'],
+			//eachHand: []
 		};
 	}
 
 	onEnable() {
+
 		GameCfg.GameType = pb.GameType.QiHuo;
 		let setDatas = GameData.QHSet;
 		this.box[0].getChildByName('label').getComponent(cc.Label).string = setDatas.JYS;
@@ -345,12 +416,12 @@ export default class NewClass extends cc.Component {
 	}
 
 	onSelectBoxClick(evetn, data) {
-		this._id = parseInt(data);
-		this.downBox[this._id].active = true;
-		let content = cc.find('New ScrollView/view/content', this.downBox[this._id]);
+		this._tid = parseInt(data);
+		this.downBox[this._tid].active = true;
+		let content = cc.find('New ScrollView/view/content', this.downBox[this._tid]);
 		let nodes = content.children;
 
-		if (this._id == 1) {
+		if (this._tid == 1) {
 
 			if (GameData.QHSet.JYS == '随机') {
 				nodes = content.children;
@@ -432,7 +503,7 @@ export default class NewClass extends cc.Component {
 			}
 
 		}
-		else if (this._id == 2) {
+		else if (this._tid == 2) {
 
 			if (GameData.QHSet.JYS == '随机') {
 				nodes = content.children;
@@ -488,16 +559,16 @@ export default class NewClass extends cc.Component {
 
 		}
 
-		else if (this._id == 5) {
+		else if (this._tid == 5) {
 			let year = this.box[3].getChildByName('label').getComponent(cc.Label).string;
 			let month = this.box[4].getChildByName('label').getComponent(cc.Label).string;
 			var temp = new Date(parseInt(year), parseInt(month), 0);
 			let day = temp.getDate();
-			let content = cc.find('New ScrollView/view/content', this.downBox[this._id]);
+			let content = cc.find('New ScrollView/view/content', this.downBox[this._tid]);
 			content.children.forEach(el => {
 				let str = el.getComponent(cc.Label).string;
 				if (parseInt(str) > day) {
-					if (this._id == 5) {
+					if (this._tid == 5) {
 						el.color = new cc.Color().fromHEX('#a0a0a0');
 						el.getComponent(cc.Button).interactable = false;
 						el.getComponent(cc.Button).enableAutoGrayEffect = true;
@@ -505,7 +576,7 @@ export default class NewClass extends cc.Component {
 						this.box[5].getChildByName('label').getComponent(cc.Label).string = day + '';
 					}
 				} else {
-					if (this._id == 5) {
+					if (this._tid == 5) {
 						el.color = cc.Color.WHITE;
 						el.getComponent(cc.Button).interactable = true;
 						el.getComponent(cc.Button).enableAutoGrayEffect = false;
@@ -531,28 +602,28 @@ export default class NewClass extends cc.Component {
 		}
 		//
 		else if (name == 'item') {
-			let la = this.box[this._id].getChildByName('label').getComponent(cc.Label);
+			let la = this.box[this._tid].getChildByName('label').getComponent(cc.Label);
 
 			let str = event.target.getComponent(cc.Label).string;
 			la.string = str;
-			if (this._id == 0) {
+			if (this._tid == 0) {
 				GameData.QHSet.JYS = str;
 				this.box[1].getChildByName('label').getComponent(cc.Label).string = '随机';
 				this.box[2].getChildByName('label').getComponent(cc.Label).string = '随机';
-			} else if (this._id == 1) {
+			} else if (this._tid == 1) {
 				GameData.QHSet.LXPZ = str;
 				this.box[2].getChildByName('label').getComponent(cc.Label).string = '随机';
-			} else if (this._id == 2) {
+			} else if (this._tid == 2) {
 				GameData.QHSet.HY = str;
-			} else if (this._id == 3) {
+			} else if (this._tid == 3) {
 				GameData.QHSet.year = str;
 				if (GameData.QHSet.year == '随机') {
 					this.box[4].getChildByName('label').getComponent(cc.Label).string = '随机';
 					this.box[5].getChildByName('label').getComponent(cc.Label).string = '随机';
 				}
-			} else if (this._id == 4) {
+			} else if (this._tid == 4) {
 				GameData.QHSet.month = str;
-				let downBox = this.downBox[this._id];
+				let downBox = this.downBox[this._tid];
 				let year = this.box[3].getChildByName('label').getComponent(cc.Label).string;
 				let month = this.box[4].getChildByName('label').getComponent(cc.Label).string;
 				var temp = new Date(parseInt(year), parseInt(month), 0);
@@ -567,14 +638,14 @@ export default class NewClass extends cc.Component {
 						this.box[5].getChildByName('label').getComponent(cc.Label).string = day + '';
 					}
 				});
-			} else if (this._id == 5) {
+			} else if (this._tid == 5) {
 				GameData.QHSet.day = str;
-			} else if (this._id == 6) {
+			} else if (this._tid == 6) {
 				GameData.QHSet.KLine = parseInt(str);
-			} else if (this._id == 7) {
+			} else if (this._tid == 7) {
 				GameData.QHSet.ZLine = str;
 			}
-			this.downBox[this._id].active = false;
+			this.downBox[this._tid].active = false;
 		}
 		//
 		else if (name == 'DCnode') {
@@ -633,26 +704,34 @@ export default class NewClass extends cc.Component {
 			if (rom == 0) {
 				rom1 = parseInt(Math.random() * this.DCArr.type.length + '');
 				lxpz = this.DCArr.type[rom1];
+				//	GameCfg.eachHand = this.DCArr.eachHand[rom1];
 			} else if (rom == 1) {
 				rom1 = parseInt(Math.random() * this.SCArr.type.length + '');
 				lxpz = this.SCArr.type[rom1];
+				//	GameCfg.eachHand = this.SCArr.eachHand[rom1];
 			} else if (rom == 2) {
 				rom1 = parseInt(Math.random() * this.XJArr.type.length + '');
 				lxpz = this.XJArr.type[rom1];
+				//GameCfg.eachHand = this.XJArr.eachHand[rom1];
 			} else if (rom == 3) {
 				rom1 = parseInt(Math.random() * this.ZCArr.type.length + '');
 				lxpz = this.ZCArr.type[rom1];
+				//	GameCfg.eachHand = this.ZCArr.eachHand[rom1];
 			}
 		} else {
 			lxpz = GameData.QHSet.LXPZ;
 			if (jys == '大连商品') {
 				rom1 = this.DCArr.type.indexOf(lxpz);
+				//	GameCfg.eachHand = this.DCArr.eachHand[rom1];
 			} else if (jys == '上海商品') {
 				rom1 = this.SCArr.type.indexOf(lxpz);
+				//	GameCfg.eachHand = this.SCArr.eachHand[rom1];
 			} else if (jys == '郑州商品') {
 				rom1 = this.XJArr.type.indexOf(lxpz);
+				//	GameCfg.eachHand = this.XJArr.eachHand[rom1];
 			} else if (jys == '中金所') {
 				rom1 = this.ZCArr.type.indexOf(lxpz);
+				//	GameCfg.eachHand = this.ZCArr.eachHand[rom1];
 			}
 		}
 
@@ -684,7 +763,9 @@ export default class NewClass extends cc.Component {
 					hy = this.ZCArr.index[rom1];
 				}
 			}
+
 		}
+
 
 		let items, index;
 		//	console.log(JSON.stringify(GameCfgText.qihuoList));
@@ -835,7 +916,14 @@ export default class NewClass extends cc.Component {
 		if (GameData.QHSet.ZLine == '日线') {
 			data.ktype = pb.KType.Day;
 		} else {
-			data.ktype = pb.KType.Min;
+			data.ktype = pb.KType.Min5;
+			if (GameData.QHSet.ZLine == '60分钟K') {
+				data.total *= 12;
+			} else if (GameData.QHSet.ZLine == '30分钟K') {
+				data.total *= 6;
+			} else if (GameData.QHSet.ZLine == '15分钟K') {
+				data.total *= 3;
+			}
 		}
 
 		GameCfg.data[0].code = items[0];
@@ -843,7 +931,7 @@ export default class NewClass extends cc.Component {
 		GameCfg.data[0].name = items[1];
 		console.log(JSON.stringify(data));
 
-		GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture);
+		GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, data);
 
 	}
 

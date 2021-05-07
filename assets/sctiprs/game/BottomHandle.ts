@@ -95,6 +95,19 @@ export default class NewClass extends cc.Component {
 	@property(cc.Label)
 	priceLabel: cc.Label[] = [];
 
+	_kdCount = 0;
+
+	_KKCount = 0;
+
+	@property(cc.Node)
+	kdNode: cc.Node = null;
+
+	@property(cc.Node)
+	fsNode: cc.Node = null;
+
+	@property(cc.Node)
+	kkNode: cc.Node = null;
+
 	onLoad() {
 		this.gpData = GameCfg.data[0].data;
 
@@ -215,20 +228,7 @@ export default class NewClass extends cc.Component {
 			this.gwBtn.node.active = true;
 			this.cyBtn.node.active = false;
 		}
-		// this.mrBtn.node.active = !this.flag;
-		// this.mcBtn.node.active = this.flag;
 
-		// if (GameCfg.GameType == ) {
-		//     if (GameCfg.data && GameCfg.data.length > 0) {
-		//         let info = this.node.getChildByName('info');
-		//         info.active = true;
-		//         let nodes = info.children;
-		//         nodes[2].getComponent(cc.Label).string = '股票信息:' + GameCfg.data[0].name;
-		//         nodes[1].getComponent(cc.Label).string = '起始时间:' +  this.gpData[0].day;
-		//         let le =  this.gpData.length;
-		//         nodes[0].getComponent(cc.Label).string = '结束时间:' +  this.gpData[le - 1].day;
-		//     }
-		// }
 		let dxnode = this.timeLabel[0].node.parent.parent;
 
 		if (GameCfg.GameType == pb.GameType.ShuangMang) {
@@ -249,6 +249,12 @@ export default class NewClass extends cc.Component {
 				dxnode.children[2].active = true;
 				dxnode.children[1].active = true;
 			}
+		} else if (GameCfg.GameType == pb.GameType.QiHuo) {
+			this.tipsLabel.node.active = true;
+			this.tipsLabel1.node.active = false;
+			dxnode.active = false;
+			this.node.getChildByName('qh').active = true;
+			this.node.getChildByName('isFC').active = false;
 		}
 
 		this.roundNumber = this.gpData.length - GameCfg.huizhidatas;
@@ -594,11 +600,162 @@ export default class NewClass extends cc.Component {
 		} else if (name == 'xl_fupan_next') {
 			GlobalEvent.emit(EventCfg.CLICKMOVE, 'next');
 		}
+
+		//开多
+		else if (name == 'qhxl_kd') {
+			if (this._KKCount == 3) {
+				this._KKCount = 0;
+				this._kdCount = 0;
+
+				this.gwBtn.node.active = true;
+				this.cyBtn.node.active = false;
+
+				let nodes = this.kdNode.children;
+				nodes.forEach(el => {
+					el.active = false;
+				});
+				nodes[this._kdCount].active = true;
+				let fsNodes = this.fsNode.children;
+				fsNodes[0].active = true;
+				fsNodes[1].active = false;
+
+				let kkNodes = this.kkNode.children;
+				kkNodes.forEach(el => {
+					el.active = false;
+				})
+				kkNodes[this._KKCount].active = true;
+				GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
+				this.setRoundNumber('mcBtn1');
+			} else {
+				this._kdCount += 1;
+				let nodes = this.kdNode.children;
+				nodes.forEach(el => {
+					el.active = false;
+				});
+				nodes[this._kdCount].active = true;
+
+				this.cyBtn.node.active = true;
+				this.gwBtn.node.active = false;
+
+				let fsNodes = this.fsNode.children;
+				fsNodes[0].active = false;
+				fsNodes[1].active = true;
+
+				let kkNodes = this.kkNode.children;
+				kkNodes.forEach(el => {
+					el.active = false;
+				})
+				kkNodes[4].active = true;
+				GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
+				this.setRoundNumber('mrBtn');
+			}
+		}
+		//反手
+		else if (name == 'qhxl_fs') {
+			GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
+			if (this._kdCount != 0) {
+				this.setRoundNumber('mcBtn');
+				this._KKCount = this._kdCount;
+				this._kdCount = 0;
+				let kkNodes = this.kkNode.children;
+				kkNodes.forEach(el => {
+					el.active = false;
+				})
+				kkNodes[this._KKCount].active = true;
+
+				let fsNodes = this.fsNode.children;
+				fsNodes[0].active = false;
+				fsNodes[1].active = true;
+
+				this.cyBtn.node.active = true;
+				this.gwBtn.node.active = false;
+
+				let nodes = this.kdNode.children;
+				nodes.forEach(el => {
+					el.active = false;
+				});
+				nodes[4].active = true;
+				this.setRoundNumber('mrBtn1');
+			} else {
+				this.setRoundNumber('mcBtn1');
+				this._kdCount = this._KKCount;
+				this._KKCount = 0;
+				let nodes = this.kdNode.children;
+				nodes.forEach(el => {
+					el.active = false;
+				});
+				nodes[this._kdCount].active = true;
+
+				this.cyBtn.node.active = true;
+				this.gwBtn.node.active = false;
+
+				let fsNodes = this.fsNode.children;
+				fsNodes[0].active = false;
+				fsNodes[1].active = true;
+
+				let kkNodes = this.kkNode.children;
+				kkNodes.forEach(el => {
+					el.active = false;
+				})
+				kkNodes[4].active = true;
+				this.setRoundNumber('mrBtn');
+			}
+			GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
+		}
+		else if (name == 'qhxl_kk') {
+			if (this._kdCount == 3) {
+				this._kdCount = 0;
+				this._KKCount = 0;
+
+				this.gwBtn.node.active = true;
+				this.cyBtn.node.active = false;
+
+				let nodes = this.kdNode.children;
+				nodes.forEach(el => {
+					el.active = false;
+				});
+				nodes[this._kdCount].active = true;
+				let fsNodes = this.fsNode.children;
+				fsNodes[0].active = true;
+				fsNodes[1].active = false;
+
+				let kkNodes = this.kkNode.children;
+				kkNodes.forEach(el => {
+					el.active = false;
+				})
+				kkNodes[this._KKCount].active = true;
+				GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
+				this.setRoundNumber('mcBtn');
+			} else {
+				this._KKCount += 1;
+				let nodes = this.kkNode.children;
+				nodes.forEach(el => {
+					el.active = false;
+				});
+				nodes[this._KKCount].active = true;
+
+				this.cyBtn.node.active = true;
+				this.gwBtn.node.active = false;
+
+				let fsNodes = this.fsNode.children;
+				fsNodes[0].active = false;
+				fsNodes[1].active = true;
+
+				let kdNodes = this.kdNode.children;
+				kdNodes.forEach(el => {
+					el.active = false;
+				})
+				kdNodes[4].active = true;
+				GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
+				this.setRoundNumber('mrBtn1');
+			}
+
+		}
 	}
 
-	setRoundNumber(name) {
+	setRoundNumber(name?) {
 		//买入卖出回合数
-		if (this.roundNumber > 0) {
+		if (this.roundNumber > 0 && name) {
 			//  GlobalEvent.emit('onBuyOrSell', name);
 			this.onBuyOrSell(name);
 		}
@@ -616,7 +773,7 @@ export default class NewClass extends cc.Component {
 	onBuyOrSell(state) {
 		//买入
 		let data = this.gpData;
-		if (state == 'mrBtn') {
+		if (state == 'mrBtn' || state == 'mrBtn1') {
 			this.buyData.push(GameCfg.huizhidatas - 1);
 
 			let curClose = parseFloat(data[GameCfg.huizhidatas].close);
@@ -624,6 +781,9 @@ export default class NewClass extends cc.Component {
 			let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
 
 			let rate = (curClose - preClose) / preClose;
+			if (state == 'mrBtn1') {
+				rate = -rate;
+			}
 			//   console.log('(' + curClose + '-' + preClose + ')' + "/" + preClose);
 			GlobalEvent.emit('updateRate', [rate]);
 
@@ -642,7 +802,7 @@ export default class NewClass extends cc.Component {
 		}
 
 		//卖出
-		else if (state == 'mcBtn') {
+		else if (state == 'mcBtn' || state == 'mcBtn1') {
 			this.saleData.push(GameCfg.huizhidatas - 1);
 
 			let curClose = parseFloat(data[GameCfg.huizhidatas - 1].close);
@@ -650,7 +810,9 @@ export default class NewClass extends cc.Component {
 			let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
 
 			let rate = (curClose - preClose) / preClose;
-
+			if (state == 'mcBtn1') {
+				rate = -rate;
+			}
 			//  console.log('(' + curClose + '-' + preClose + ')' + "/" + preClose);
 
 			GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;

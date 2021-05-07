@@ -85,8 +85,6 @@ export default class NewClass extends cc.Component {
                 statBtn.active = true;
             }
 
-
-
         }, this);
     }
 
@@ -100,9 +98,6 @@ export default class NewClass extends cc.Component {
         if (GameData.properties[2]) {
             this.lv.string = 'LV:' + GameData.properties[2] || 0 + '';
         }
-
-
-
 
         //训练指标
         //  let nodes = this.rightNode.children;
@@ -125,9 +120,6 @@ export default class NewClass extends cc.Component {
 
             let la = this.node.getChildByName('rate');
             la.x = 0;
-            //  la.children[4].active = false;
-            // la.children[5].active = false;
-
         }
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.GameName.string = '指标训练';
@@ -135,8 +127,6 @@ export default class NewClass extends cc.Component {
             colseBtn.active = true;
             btnMyspic.active = false;
             statBtn.active = false;
-
-
         }
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
             this.GameName.string = '定向训练';
@@ -144,12 +134,20 @@ export default class NewClass extends cc.Component {
             colseBtn.active = true;
             btnMyspic.active = true;
             statBtn.active = false;
-
             if (GameCfg.GAMEFUPAN) {
                 btnMyspic.active = false;
                 statBtn.active = true;
                 colseBtn.active = true;
             }
+        } else if (GameCfg.GameType == pb.GameType.QiHuo) {
+            this.GameName.string = '期货训练';
+            colseBtn.active = true;
+            colseBtn.children[0].active = false;
+            btnMyspic.active = false;
+            statBtn.active = false;
+            this.node.height = 80;
+            let la = this.node.getChildByName('rate');
+            la.x = 0;
         }
 
         if (GameCfg.GAMEFUPAN) {

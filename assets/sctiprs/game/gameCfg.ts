@@ -73,4 +73,6 @@ export default {
 
     GAMEFUPAN: false,  //游戏复盘
 
+    eachHand: 0,    //每手
+
 }

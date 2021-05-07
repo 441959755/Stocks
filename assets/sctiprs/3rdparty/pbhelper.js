@@ -34,6 +34,10 @@ let CmdUploadIcon = pb.CmdUploadIcon;
 
 let AdClicked = pb.AdClicked;
 
+let CmdQuoteQueryFuture = pb.CmdQuoteQueryFuture;
+
+let QuotesFuture = pb.QuotesFuture;
+
 
 function PBHelper() {
 
@@ -198,7 +202,19 @@ PBHelper.prototype = {
 
         let buff = AdClicked.encode(message).finish();
         return buff;
+    },
 
+    // 查询期货行情
+    onCmdQuoteQueryFutureConverToBuff(data) {
+        let message = CmdQuoteQueryFuture.create({
+            ktype: data.ktype,
+            code: data.code,
+            from: data.from,
+            total: data.total,
+            to: data.to,
+        })
+        let buff = CmdQuoteQueryFuture.encode(message).finish();
+        return buff;
     },
 
     selectBlackData(id, buff) {
@@ -234,6 +250,11 @@ PBHelper.prototype = {
             return data;
         } else if (id == pb.MessageId.Rep_Game_SmxlReport) {
             data = CmdGetSmxlReportReply.decode(new Uint8Array(buff));
+            return data;
+        }
+        //期货行情
+        else if (id == pb.MessageId.Rep_QuoteQueryFuture) {
+            data = QuotesFuture.decode(new Uint8Array(buff));
             return data;
         }
 
