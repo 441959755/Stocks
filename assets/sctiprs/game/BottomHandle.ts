@@ -179,6 +179,17 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on('HIDEBOTTOMNODE', (flag) => {
 			this.qhNode.active = flag;
+			this.cyBtn.node.active = flag;
+			this.gwBtn.node.active = flag;
+			if (flag) {
+				if (this._kdCount > 0 || this._KKCount > 0) {
+					this.cyBtn.node.active = true;
+					this.gwBtn.node.active = false;
+				} else {
+					this.cyBtn.node.active = false;
+					this.gwBtn.node.active = true;
+				}
+			}
 		}, this);
 	}
 

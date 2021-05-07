@@ -82,6 +82,7 @@ export default class NewClass extends cc.Component {
                 } else {
                     this.zfLa.node.color = cc.Color.RED;
                 }
+
                 this.zfLa.string = zf.toFixed(2) + '%';
             }
 
@@ -166,6 +167,7 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.QiHuo) {
             this.lZoom.node.active = false;
             this.lZoom.isChecked = false;
+            this.hsLa.node.parent.active = false;
         }
     }
 
