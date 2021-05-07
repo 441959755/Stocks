@@ -41,7 +41,8 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
-        this.qhData = GameCfg.data[0];
+        let str = JSON.stringify(GameCfg.data[0])
+        this.qhData = JSON.parse(str);
     }
 
     onEnable() {
@@ -70,22 +71,26 @@ export default class NewClass extends cc.Component {
     }
 
     onSaveData() {
-        this.beg = cc.ext.beg_end[0];
-        this.end = cc.ext.beg_end[1];
-        this.huizhidatas = GameCfg.huizhidatas;
+        if (GameCfg.huizhidatas < this.huizhidatas) {
+            return;
+        }
+        this.beg = JSON.parse(JSON.stringify(cc.ext.beg_end[0]));
+        this.end = JSON.parse(JSON.stringify(cc.ext.beg_end[1]));
+        this.huizhidatas = JSON.parse(JSON.stringify(GameCfg.huizhidatas));
 
     }
 
 
     onGetData(type) {
+
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         let time;
         if ((this.qhData.data[this.huizhidatas - 1].day + '').length < 10) {
-            time = this.qhData.data[this.huizhidatas - 1].day;
+            time = this.qhData.data[this.huizhidatas - 1].day + '';
             let year = time.slice(0, 4);
             let month = time.slice(4, 6);
             let day = time.slice(6);
-            time = new Date(year + '-' + month + '-' + day);
+            time = new Date(year + '-' + month + '-' + day).getTime() / 1000;
         } else {
             time = this.qhData.data[this.huizhidatas - 1].day;
         }
@@ -137,7 +142,9 @@ export default class NewClass extends cc.Component {
             total: total,
             to: to,
         }
+
         socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(data), info => {
+            GameCfg.data[0].data = [];
             console.log(JSON.stringify(info));
             if (type == 4 || type == 0 || type == 5) {
                 info.items.forEach(el => {
@@ -211,11 +218,14 @@ export default class NewClass extends cc.Component {
                 cc.ext.beg_end[0] = this.beg;
                 cc.ext.beg_end[1] = this.end;
                 GameCfg.huizhidatas = this.huizhidatas;
-                this.onDrawEvetn(this.qhData);
+                this.onDrawEvetn(this.qhData.data);
+
+                GlobalEvent.emit('HIDEBOTTOMNODE', true);
 
             } else {
                 this.onSaveData();
                 this.onGetData(0);
+                GlobalEvent.emit('HIDEBOTTOMNODE', false);
             }
         }
         else if (name == 'btn15min') {
@@ -230,10 +240,12 @@ export default class NewClass extends cc.Component {
                 cc.ext.beg_end[0] = this.beg;
                 cc.ext.beg_end[1] = this.end;
                 GameCfg.huizhidatas = this.huizhidatas;
-                this.onDrawEvetn(this.qhData);
+                this.onDrawEvetn(this.qhData.data);
+                GlobalEvent.emit('HIDEBOTTOMNODE', true);
             } else {
                 this.onSaveData();
                 this.onGetData(1);
+                GlobalEvent.emit('HIDEBOTTOMNODE', false);
             }
         }
 
@@ -249,10 +261,12 @@ export default class NewClass extends cc.Component {
                 cc.ext.beg_end[0] = this.beg;
                 cc.ext.beg_end[1] = this.end;
                 GameCfg.huizhidatas = this.huizhidatas;
-                this.onDrawEvetn(this.qhData);
+                this.onDrawEvetn(this.qhData.data);
+                GlobalEvent.emit('HIDEBOTTOMNODE', true);
             } else {
                 this.onSaveData();
                 this.onGetData(2);
+                GlobalEvent.emit('HIDEBOTTOMNODE', false);
             }
         }
 
@@ -268,10 +282,12 @@ export default class NewClass extends cc.Component {
                 cc.ext.beg_end[0] = this.beg;
                 cc.ext.beg_end[1] = this.end;
                 GameCfg.huizhidatas = this.huizhidatas;
-                this.onDrawEvetn(this.qhData);
+                this.onDrawEvetn(this.qhData.data);
+                GlobalEvent.emit('HIDEBOTTOMNODE', true);
             } else {
                 this.onSaveData();
                 this.onGetData(3);
+                GlobalEvent.emit('HIDEBOTTOMNODE', false);
             }
         }
 
@@ -287,10 +303,12 @@ export default class NewClass extends cc.Component {
                 cc.ext.beg_end[0] = this.beg;
                 cc.ext.beg_end[1] = this.end;
                 GameCfg.huizhidatas = this.huizhidatas;
-                this.onDrawEvetn(this.qhData);
+                this.onDrawEvetn(this.qhData.data);
+                GlobalEvent.emit('HIDEBOTTOMNODE', true);
             } else {
                 this.onSaveData();
                 this.onGetData(4);
+                GlobalEvent.emit('HIDEBOTTOMNODE', false);
             }
         }
 
@@ -306,11 +324,14 @@ export default class NewClass extends cc.Component {
                 cc.ext.beg_end[0] = this.beg;
                 cc.ext.beg_end[1] = this.end;
                 GameCfg.huizhidatas = this.huizhidatas;
-                this.onDrawEvetn(this.qhData);
+                this.onDrawEvetn(this.qhData.data);
+                GlobalEvent.emit('HIDEBOTTOMNODE', true);
             } else {
                 this.onSaveData();
                 this.onGetData(5);
+                GlobalEvent.emit('HIDEBOTTOMNODE', false);
             }
         }
+
     }
 }

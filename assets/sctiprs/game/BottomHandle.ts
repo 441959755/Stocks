@@ -108,6 +108,9 @@ export default class NewClass extends cc.Component {
 	@property(cc.Node)
 	kkNode: cc.Node = null;
 
+	@property(cc.Node)
+	qhNode: cc.Node = null;
+
 	onLoad() {
 		this.gpData = GameCfg.data[0].data;
 
@@ -173,6 +176,10 @@ export default class NewClass extends cc.Component {
 			},
 			this
 		);
+
+		GlobalEvent.on('HIDEBOTTOMNODE', (flag) => {
+			this.qhNode.active = flag;
+		}, this);
 	}
 
 	protected start() {
@@ -876,5 +883,6 @@ export default class NewClass extends cc.Component {
 	onDestroy() {
 		GlobalEvent.off(EventCfg.GAMEOVEER);
 		GlobalEvent.off(EventCfg.GAMEFUPAN);
+		GlobalEvent.off('HIDEBOTTOMNODE');
 	}
 }
