@@ -473,6 +473,9 @@ export default class NewClass extends cc.Component {
 
 		if (GameData.DXSet.ZLine == '日线') {
 			data.ktype = pb.KType.Day;
+
+			GameCfg.enterGameCache = data;
+
 			GlobalEvent.emit('onCmdQuoteQuery', data);
 		} else if (GameData.DXSet.ZLine == '周线') {
 			data.ktype = pb.KType.Day;

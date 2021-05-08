@@ -28,6 +28,11 @@ export default class NewClass extends cc.Component {
 	SMhistoryLayer: cc.Node = null;
 
 	@property(cc.Prefab)
+	QHhistoryPre: cc.Prefab = null;
+
+	QHhistoryLayer: cc.Node = null;
+
+	@property(cc.Prefab)
 	otherhistoryPre: cc.Prefab = null;
 
 	otherhistoryLayer: cc.Node = null;
@@ -275,7 +280,11 @@ export default class NewClass extends cc.Component {
 
 	openhistoryLayer(info, str?) {
 		let pre, node;
-		if (str == 'SM') {
+		if (str == 'QH') {
+			pre = this.QHhistoryPre;
+			node = this.QHhistoryLayer;
+		}
+		else if (str == 'SM') {
 			pre = this.SMhistoryPre;
 			node = this.SMhistoryLayer;
 		} else {
@@ -295,11 +304,11 @@ export default class NewClass extends cc.Component {
 			node.zIndex = this.SMYieldLayer.zIndex + 1;
 		}
 
-		if (str == 'SM') {
-			this.SMhistoryLayer = node;
-		} else {
-			this.otherhistoryLayer = node;
-		}
+		// if (str == 'SM') {
+		// 	this.SMhistoryLayer = node;
+		// } else {
+		// 	this.otherhistoryLayer = node;
+		// }
 	}
 
 	protected onDestroy() {

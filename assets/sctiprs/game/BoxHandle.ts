@@ -69,8 +69,16 @@ export default class NewClass extends cc.Component {
                 info.push(parseFloat(datas[inde].low).toFixed(2));
                 info.push(parseFloat(datas[inde].close).toFixed(2));
                 info.push((parseInt(datas[inde].value) / 10000).toFixed(2) + 'w');
-                info.push(parseInt(parseInt(datas[inde].price) / 10000 + '') + 'w');
-                info.push(parseFloat(datas[inde].Rate).toFixed(2) + '%');
+
+                if (GameCfg.GameType == pb.GameType.QiHuo) {
+                    info.push('--');
+                    info.push('--');
+                } else {
+                    info.push(parseInt(parseInt(datas[inde].price) / 10000 + '') + 'w');
+                    info.push(parseFloat(datas[inde].Rate).toFixed(2) + '%');
+                }
+
+
                 let zd = datas[inde].close - datas[inde - 1].close;
                 info.push(zd.toFixed(2));
                 let zf = zd / datas[inde - 1].close;

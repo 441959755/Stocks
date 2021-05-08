@@ -147,33 +147,29 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on('updataLabel', this.updataLabel.bind(this), this);
 
+        GlobalEvent.on('onQHDraw', () => {
+            this.initData();
+        }, this);
+
     }
 
-    protected start() {
-        this.drawMACD && (this.drawMACD.node.active = false)
-        this.drawKDJ && (this.drawKDJ.node.active = false)
-        this.drawRSI && (this.drawRSI.node.active = false)
-
-        if (GameCfg.GameType == 3) {
-            if (GameCfg.GameSet.select == 'MACD') {
-                this.drawMACD.node.active = true;
-                this.drawVol.node.active = false;
-                this.drawPcm.node.active = false;
-            } else if (GameCfg.GameSet.select == 'KDJ') {
-                this.drawKDJ.node.active = true;
-                this.drawVol.node.active = false;
-                this.drawPcm.node.active = false;
-            } else if (GameCfg.GameSet.select == 'RSI') {
-                this.drawRSI.node.active = true;
-                this.drawVol.node.active = false;
-                this.drawPcm.node.active = false;
-            }
-        }
+    //计算数据
+    initData() {
         let huizhidatas = GameCfg.data[0].data;
 
         let EMA1Data = 12, EMA2Data = 26, DEAData = 9;
         let EMA12 = 0, EMA26 = 0;
-
+        this.DIFList = [];
+        this.DEAList = [];
+        this.MACDList = [];
+        this.Klist = [];
+        this.Dlist = [];
+        this.jList = [];
+        this.UPRS = [];
+        this.DOWNRS = [];
+        this.Rs6 = [];
+        this.Rs12 = [];
+        this.Rs24 = [];
         this.drawMACD.lineWidth = 2;
 
         //画图的数据
@@ -285,6 +281,30 @@ export default class NewClass extends cc.Component {
 
             }
         })
+
+    }
+
+    protected start() {
+        this.drawMACD && (this.drawMACD.node.active = false)
+        this.drawKDJ && (this.drawKDJ.node.active = false)
+        this.drawRSI && (this.drawRSI.node.active = false)
+
+        if (GameCfg.GameType == 3) {
+            if (GameCfg.GameSet.select == 'MACD') {
+                this.drawMACD.node.active = true;
+                this.drawVol.node.active = false;
+                this.drawPcm.node.active = false;
+            } else if (GameCfg.GameSet.select == 'KDJ') {
+                this.drawKDJ.node.active = true;
+                this.drawVol.node.active = false;
+                this.drawPcm.node.active = false;
+            } else if (GameCfg.GameSet.select == 'RSI') {
+                this.drawRSI.node.active = true;
+                this.drawVol.node.active = false;
+                this.drawPcm.node.active = false;
+            }
+        }
+        this.initData();
         this.onDraw();
     }
 

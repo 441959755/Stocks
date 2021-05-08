@@ -137,7 +137,7 @@ export default class NewClass extends cc.Component {
 				'线材主连',
 				'沪锡主连',
 				'沪锌主连',
-				'卷板主连',
+				'热卷主连',
 				'不锈钢主连',
 				'纸浆主连',
 				'原油主连'
@@ -157,7 +157,7 @@ export default class NewClass extends cc.Component {
 				'线材指数',
 				'沪锡指数',
 				'沪锌指数',
-				'卷板指数',
+				'热卷指数',
 				'不锈钢指数',
 				'纸浆指数',
 				'原油指数'
@@ -402,7 +402,6 @@ export default class NewClass extends cc.Component {
 	}
 
 	onEnable() {
-
 		GameCfg.GameType = pb.GameType.QiHuo;
 		let setDatas = GameData.QHSet;
 		this.box[0].getChildByName('label').getComponent(cc.Label).string = setDatas.JYS;
@@ -599,6 +598,8 @@ export default class NewClass extends cc.Component {
 		}
 		//记录
 		else if (name == 'historyQHBtn') {
+			GameCfg.GameType = pb.GameType.QiHuo;
+			GlobalEvent.emit('OPENHISTORYLAYER', 'QH');
 		}
 		//
 		else if (name == 'item') {
@@ -764,23 +765,17 @@ export default class NewClass extends cc.Component {
 				}
 			}
 
+		} else {
+			hy = GameData.QHSet.HY;
 		}
 
 
 		let items, index;
-		//	console.log(JSON.stringify(GameCfgText.qihuoList));
-		for (let i = 0; i < GameCfgText.qihuoList.length; i++) {
-			index = GameCfgText.qihuoList[i].indexOf(hy);
-			if (index != -1) {
-				index = i;
-				break;
-			}
-		}
-		if (index == -1) {
-			console.log('没有找打期货' + hy);
+
+
+		items = GameCfgText.getQHItemInfo(hy);
+		if (!items) {
 			return;
-		} else {
-			items = GameCfgText.qihuoList[index].split('|');
 		}
 		data.code = items[0];
 
@@ -851,17 +846,7 @@ export default class NewClass extends cc.Component {
 				let f = parseInt(new Date(s).getTime() / 1000 + '');
 
 				{
-					// let ye = f.getFullYear();
-					// let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
-
-					// let da = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
-
-					// let shi = f.getHours() >= 10 ? f.getHours() : '0' + f.getHours();
-
-					// let miao = f.getSeconds() >= 10 ? f.getSeconds() : '0' + f.getSeconds();
-
 					data.from = f;
-
 				}
 
 			}
@@ -899,7 +884,6 @@ export default class NewClass extends cc.Component {
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能大与股票结束时间');
 					GlobalEvent.emit(EventCfg.LOADINGHIDE);
 				}
-
 				return;
 			}
 			if (GameData.QHSet.ZLine == '日线') {
@@ -908,9 +892,6 @@ export default class NewClass extends cc.Component {
 				data.from = new Date(year + '-' + month + '-' + day).getTime() / 1000;
 			}
 
-			// } else {
-
-			// }
 		}
 
 		if (GameData.QHSet.ZLine == '日线') {
@@ -930,6 +911,7 @@ export default class NewClass extends cc.Component {
 		GameCfg.data[0].data = [];
 		GameCfg.data[0].name = items[1];
 		console.log(JSON.stringify(data));
+		GameCfg.enterGameCache = data;
 
 		GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, data);
 
@@ -952,6 +934,6 @@ export default class NewClass extends cc.Component {
 	//     } else if (GameData.DXSet.ZLine == '60分钟K') {
 	//         TYPE = 'm60k';
 	//     }
-
+	//"ktype":10,"kstyle":null,"code":"2000001","from":"20141201","total":200,"to":0
 	// }
 }

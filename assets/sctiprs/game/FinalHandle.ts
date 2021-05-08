@@ -5,6 +5,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameData from "../GameData";
 import GameCfgText from '../GameText';
+import ComUtils from '../Utils/ComUtils';
 
 import { pb } from '../../protos/proto';
 
@@ -79,7 +80,9 @@ export default class NewClass extends cc.Component {
         }
         this.maLabel.string = code;
         //时间
-        this.timeLabel.string = (gpData[0].day.replace(/-/g, '/')) + ' -- ' + (gpData[gpData.length - 1].day.replace(/-/g, '/'));
+        // this.timeLabel.string = (gpData[0].day.replace(/-/g, '/')) + ' -- ' + (gpData[gpData.length - 1].day.replace(/-/g, '/'));
+
+        this.timeLabel.string = ComUtils.formatTime(gpData[0].day) + '--' + ComUtils.formatTime(gpData[gpData.length - 1].day);
 
         //同期涨幅
         let tq = ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2);
@@ -132,9 +135,9 @@ export default class NewClass extends cc.Component {
                 g_type: GameCfg.GameType,
                 quotes_code: GameCfg.data[0].code,
                 k_type: GameCfg.data[0].ktype,
-                k_from: parseInt(gpData[0].day.replace(/-/g, '')),
+                k_from: parseInt(ComUtils.fromatTime1(gpData[0].day)),
 
-                k_to: parseInt(gpData[gpData.length - 1].day.replace(/-/g, '')),
+                k_to: parseInt(ComUtils.fromatTime1(gpData[gpData.length - 1].day)),
                 //  k_to: parseInt(gpData[gpData.length - 1].day.replace(///g,'')),
                 stock_profit_rate: ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2),
                 user_profit_rate: (GameCfg.allRate * 100).toFixed(2),
@@ -172,6 +175,7 @@ export default class NewClass extends cc.Component {
         cc.sys.localStorage.setItem(ts + 'notice', JSON.stringify(GameCfg.notice));
         cc.sys.localStorage.setItem(ts + 'fill', JSON.stringify(GameCfg.fill));
         cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
+        cc.sys.localStorage.setItem(ts + 'cache', JSON.stringify(GameCfg.enterGameCache));
     }
 
     onBtnClick(event, data) {
@@ -190,6 +194,7 @@ export default class NewClass extends cc.Component {
             // GameCfg.history.huizhidatas = 0;
             GameCfg.history.allRate = 0;
             GameCfg.history.deal = [];
+            GameCfg.enterGameCache = null;
 
             cc.director.loadScene('hall');
         }

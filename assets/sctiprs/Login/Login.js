@@ -81,7 +81,7 @@ cc.Class({
 		let SMSet = cc.sys.localStorage.getItem('SMSET');
 		if (!SMSet) {
 			SMSet = {
-				KLine: '100',
+				KLine: '150',
 				ZLine: '日线',
 				isShowVol: true,
 				isBW: true,

@@ -13,7 +13,6 @@ export default class GameCfgText {
 
     public static getStocktList() {
         LoadUtils.loadRes('protos/stocklist', (text) => {
-
             this.stockList = text.text.split('\n');
             // 股票代码|股票名称|第一个行情日期|最后一个行情日期（0为无最后行情，即股票还在上市中）|流通股数（注：请忽略该行）
             let arr = [];
@@ -57,6 +56,44 @@ export default class GameCfgText {
         LoadUtils.loadRes('protos/contractlist', (text) => {
             this.qihuoList = text.text.split('\n');
         })
+    }
+
+    /**
+     * 
+     * @param item 
+     * return 一行  数组
+     */
+    public static getQHItemInfo(item) {
+        let index = -1;
+        for (let i = 0; i < this.qihuoList.length; i++) {
+            if (this.qihuoList[i].indexOf(item) != -1) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index != -1) {
+            return this.qihuoList[index].split('|');
+        } else {
+            console.log('没有找打期货' + item);
+            return;
+        }
+    }
+
+    /**
+    * 
+    * @param item 
+    * return 一行  数组
+    */
+    public static getGPItemInfo(item) {
+        let index, items;
+        for (let i = 0; i < this.stockList.length; i++) {
+            if (this.stockList[i].indexOf(item) != -1) {
+                items = this.stockList[i].split('|');
+                break;
+            }
+        }
+        return items;
     }
 
     public static releaseRes() {

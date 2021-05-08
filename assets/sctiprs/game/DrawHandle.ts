@@ -122,6 +122,7 @@ export default class NewClass extends cc.Component {
 
         //QH
         GlobalEvent.on('onQHDraw', () => {
+            this.initData();
             this.initDrawBg();
             GlobalEvent.emit('onDraw');
             this.updataLabel(cc.ext.beg_end[1]);
@@ -522,7 +523,8 @@ export default class NewClass extends cc.Component {
         this.drawVol.lineWidth = 2;
         this.drawPCM.lineWidth = 2;
         GameCfg.MaList = [];
-
+        this.BollList = [];
+        this.VolList = [];
         if (cc.winSize.width > this.node.width) {
             this.drawBordWidth = 1280;
         }
@@ -538,15 +540,6 @@ export default class NewClass extends cc.Component {
 
             if (index + 1 >= GameCfg.MAs[0]) {
                 GameCfg.MaList[index] = [];
-                // if (GameCfg.MAs.includes(index + 1)) {
-                //     let MAPoint = 0;
-                //     for (let i = 0; i <= index; i++) {
-                //         MAPoint += parseFloat(data[i].close);
-                //     }
-                //     //位置
-                //     let MAPointY = (MAPoint / (index + 1));
-                //     GameCfg.MaList[index].push(MAPointY)
-                // }
 
                 for (let i = 0; i < GameCfg.MAs.length; i++) {
                     //   if (index + 1 >= GameCfg.MAs[i]) {
@@ -625,25 +618,6 @@ export default class NewClass extends cc.Component {
             } else {
                 this.VolList.push(null);
             }
-
-            // //宝塔线
-            // let arr = [];
-            // if (index == 0) {
-            //     //   0 最高值   1  最低值
-            //     arr[0] = el.open > el.close ? el.open : el.close;
-            //     arr[1] = el.open < el.close ? el.open : el.close;
-            //     arr[2] = el.open > el.close ? 0 : 1;
-            //     this.btxList.push(arr);
-            // } else {
-            //     arr[2] = el.open > el.close ? 0 : 1;
-            //     //前一个是涨
-            //     if (this.btxList[index - 1][2]) {
-
-
-            //     }
-
-            // }
-
         });
     }
 

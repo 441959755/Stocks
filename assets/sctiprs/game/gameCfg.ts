@@ -75,4 +75,6 @@ export default {
 
     eachHand: 0,    //每手
 
+    enterGameCache: null,
+
 }

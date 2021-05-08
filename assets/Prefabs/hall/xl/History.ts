@@ -40,25 +40,13 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
         //   if (this.historyType == 'SM') {
         let datas = this.historyInfo.results;
+        // console.log(JSON.stringify(datas));
         if (datas.length <= 0) {
             return;
         }
 
+        let selectName, items;
 
-        let selectName = function (code) {
-            let name;
-            for (let i = 0; i < GameCfgText.stockList.length; i++) {
-                if (GameCfgText.stockList[i].indexOf(code) != -1) {
-                    let items = GameCfgText.stockList[i].split('|');
-                    name = items[1];
-                    break;
-                }
-            }
-            if (!name) {
-                console.log('没有找到该股票');
-            }
-            return name;
-        }
         // {"uid":1000042,"gType":"ShuangMang","quotesCode":600000,
         // "kType":"Day","kFrom":20100101,"kTo":20101010,
         // "stockProfitRate":19.1200008392334,
@@ -75,9 +63,15 @@ export default class NewClass extends cc.Component {
             if (datas[i].quotesCode.length >= 7) {
                 datas[i].quotesCode = datas[i].quotesCode.slice(1);
             }
-
-            nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
-            nodes[2].getComponent(cc.Label).string = selectName(datas[i].quotesCode);
+            if (GameCfg.GameType == pb.GameType.QiHuo) {
+                items = GameCfgText.getQHItemInfo(datas[i].quotesCode);
+                nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
+                items && (nodes[2].getComponent(cc.Label).string = items[1])
+            } else {
+                items = GameCfgText.getGPItemInfo(datas[i].quotesCode);
+                nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
+                items && (nodes[2].getComponent(cc.Label).string = items[1])
+            }
             nodes[3].getComponent(cc.Label).string = datas[i].kFrom;			// 行情起始日期YYYYMMDD或时间HHMMSS
             nodes[4].getComponent(cc.Label).string = datas[i].kTo;
 
@@ -124,8 +118,14 @@ export default class NewClass extends cc.Component {
             } else {
                 this.label.node.color = cc.Color.WHITE;
             }
-        } else if (GameCfg.GameType == pb.GameType.DingXiang) {
-            this.title.string = '定向训练';
+        }
+        else if (GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.QiHuo) {
+            if (GameCfg.GameType == pb.GameType.DingXiang) {
+                this.title.string = '定向训练';
+            } else if (GameCfg.GameType == pb.GameType.QiHuo) {
+                this.title.string = '期货训练';
+            }
+
             this.label.string = (sumrate * 100).toFixed(2) + '%';
             if (sumrate > 0) {
                 this.label.node.color = cc.Color.RED;
@@ -188,56 +188,27 @@ export default class NewClass extends cc.Component {
 
 
             if (!GameCfg.history || !GameCfg.GameSet || !GameCfg.fill || !GameCfg.notice || !GameCfg.mark) {
+                console.log(JSON.stringify(GameCfg.GameSet));
                 console.log('没有取得数据');
                 return;
             }
-            console.log(JSON.stringify(GameCfg.GameSet));
+
             //  let datas = this.historyInfo.results;
             GameCfg.huizhidatas = GameCfg.history.huizhidatas;
             console.log(nodes[3].getComponent(cc.Label).string);
             console.log('history' + GameCfg.history.huizhidatas)
             let data = {
-                ktype: null,
-                kstyle: null,
                 code: parseInt(nodes[1].getComponent(cc.Label).string),
-                from: nodes[3].getComponent(cc.Label).string,
-                total: parseInt(GameCfg.GameSet.KLine) + 100,
-                to: 0,
             }
 
-            if (GameCfg.GameSet.market == '随机行情') {
-                data.kstyle = pb.KStyle.Random;
-            } else if (GameCfg.GameSet.market == '震荡行情') {
-                data.kstyle = pb.KStyle.Wave;
-            } else if (GameCfg.GameSet.market == '单边向上行情') {
-                data.kstyle = pb.KStyle.Up;
-            } else if (GameCfg.GameSet.market == '单边向下行情') {
-                data.kstyle = pb.KStyle.Down;
-            }
-
-            if (GameCfg.GameSet.ZLine == '日线') {
-                data.ktype = pb.KType.Day;
-            } else if (GameCfg.GameSet.ZLine == '周线') {
-                data.ktype = pb.KType.Day7;
-            } else if (GameCfg.GameSet.ZLine == '30分钟K') {
-                data.ktype = pb.KType.Min30;
-            } else if (GameCfg.GameSet.ZLine == '60分钟K') {
-                data.ktype = pb.KType.Min;
-            }
 
             let dex = -1, items;
-            for (let i = 0; i < GameCfgText.stockList.length; i++) {
-
-                if (GameCfgText.stockList[i].indexOf(data.code) != -1) {
-                    dex = i;
-                    break;
-                }
-
+            if (GameCfg.GameType == pb.GameType.QiHuo) {
+                items = GameCfgText.getQHItemInfo(data.code);
+            } else {
+                items = GameCfgText.getGPItemInfo(data.code);
             }
-            if (dex != -1) {
-                items = GameCfgText.stockList[dex].split('|');
 
-            }
             data.code = items[0];
             GameCfg.data[0].data = [];
             GameCfg.data[0].name = items[1];
@@ -250,9 +221,19 @@ export default class NewClass extends cc.Component {
 
             GameCfg.allRate = nodes[6].getComponent(cc.Label).string;
 
-            console.log('data' + JSON.stringify(data));
+            let cache = cc.sys.localStorage.getItem(ts + 'cache');
+            if (!cache) {
+                console.log('没有保存此记录');
+                return;
+            }
 
-            GlobalEvent.emit('onCmdQuoteQuery', data);
+            console.log(JSON.parse(cache));
+            if (GameCfg.GameType == pb.GameType.QiHuo) {
+                GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, JSON.parse(cache));
+            } else {
+                GlobalEvent.emit('onCmdQuoteQuery', JSON.parse(cache));
+            }
+
         }
     }
 

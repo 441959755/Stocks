@@ -9,6 +9,8 @@ import GameCfgText from '../GameText';
 
 import LLWConfig from '../common/config/LLWConfig';
 
+import ComUtils from '../Utils/ComUtils';
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -27,7 +29,7 @@ export default class NewClass extends cc.Component {
     CZBtn: cc.Node = null;
 
     onLoad() {
-		//更新当前金币属性
+        //更新当前金币属性
         GlobalEvent.on(EventCfg.SMINITFUND, () => {
             this.curla.string = GameData.properties[3];
         }, this);
@@ -42,7 +44,7 @@ export default class NewClass extends cc.Component {
 
         this.curla.string = GameData.properties[3];
 
-		//是否重置
+        //是否重置
         this.CZBtn.active = false;
         if (GameData.ShuangMangCount <= 0) {
             this.CZBtn.active = true;
@@ -60,8 +62,8 @@ export default class NewClass extends cc.Component {
             //         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的金币不足，请点击重置，免费重置金币！');
             //     }
             // }
-			
-			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.GAMEFUPAN = false;
             GameCfg.GameType = pb.GameType.ShuangMang;
             GameCfg.GameSet = GameData.SMSet;
@@ -168,6 +170,7 @@ export default class NewClass extends cc.Component {
 
             data.from = ye + '' + mon + '' + da;
         }
+        //  data.from = ComUtils.fromatTime1(f);
 
         GameCfg.data[0].data = [];
         GameCfg.data[0].name = items[1];
@@ -175,6 +178,9 @@ export default class NewClass extends cc.Component {
         GameCfg.data[0].circulate = items[4];
         GameCfg.data[0].ktype = data.ktype;
         console.log('给的数据:' + JSON.stringify(data));
+
+        GameCfg.enterGameCache = data;
+
         GlobalEvent.emit('onCmdQuoteQuery', data);
 
     }

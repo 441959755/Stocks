@@ -38,6 +38,10 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameSet.ZLine == '日线') {
             this._selectID = 4;
         }
+
+        // GlobalEvent.on(EventCfg.GAMEOVEER, () => {
+        //     this.node.active = false;
+        // }, this);
     }
 
     start() {
@@ -96,30 +100,30 @@ export default class NewClass extends cc.Component {
         }
         let ktype, code, from, total, to;
         code = this.qhData.code;
-        total = 50;
+        total = 40;
         to = 0;
         let t = 0;
         if (type <= 3) {
             ktype = pb.KType.Min5;
             if (type == 0) {
-                from = time - 50 * 60 * 5;
+                from = time - 40 * 60 * 5;
             } else if (type == 1) {
-                from = time - 50 * 60 * 15;
+                from = time - 40 * 60 * 15;
                 total *= 3;
                 t = 3;
             } else if (type == 2) {
-                from = time - 50 * 60 * 30;
+                from = time - 40 * 60 * 30;
                 total *= 6;
                 t = 6;
             } else if (type == 3) {
-                from = time - 50 * 60 * 60;
+                from = time - 40 * 60 * 60;
                 total *= 12;
                 t = 12;
             }
 
         } else if (type == 4) {
             ktype = pb.KType.Day;
-            let f = new Date(time - 50 * 24 * 60 * 60);
+            let f = new Date(time - 40 * 24 * 60 * 60);
             let ye = f.getFullYear();
             let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
 
@@ -128,7 +132,7 @@ export default class NewClass extends cc.Component {
         } else if (type == 5) {
             ktype = pb.KType.Day7;
 
-            let f = new Date(time - 50 * 24 * 60 * 60 * 7);
+            let f = new Date(time - 40 * 24 * 60 * 60 * 7);
             let ye = f.getFullYear();
             let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
 
@@ -333,5 +337,9 @@ export default class NewClass extends cc.Component {
             }
         }
 
+    }
+
+    onDestroy() {
+        //  GlobalEvent.off(EventCfg.GAMEOVEER);
     }
 }
