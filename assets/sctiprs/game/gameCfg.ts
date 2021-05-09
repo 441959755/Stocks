@@ -4,9 +4,7 @@ export default {
 
     GameSet: null,   //游戏设置
 
-    MAs: [],         //均线日
-
-    MaList: [], //MA的每一个绘制点
+    MAs: [],         //设置均线日  
 
     HZ_white: cc.Color.WHITE,
 
@@ -75,6 +73,6 @@ export default {
 
     eachHand: 0,    //每手
 
-    enterGameCache: null,
+    enterGameCache: null,  //进入游戏的选择
 
 }

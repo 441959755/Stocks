@@ -81,7 +81,6 @@ export default class NewClass extends cc.Component {
         this.beg = JSON.parse(JSON.stringify(cc.ext.beg_end[0]));
         this.end = JSON.parse(JSON.stringify(cc.ext.beg_end[1]));
         this.huizhidatas = JSON.parse(JSON.stringify(GameCfg.huizhidatas));
-
     }
 
 

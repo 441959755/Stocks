@@ -16,10 +16,10 @@ export default class NewClass extends cc.Component {
     helpLayer: cc.Node = null;   //帮助界面
 
     @property(cc.Node)
-    statLayer: cc.Node = null;
+    statLayer: cc.Node = null;  //统计界面
 
     @property(cc.Node)
-    selectLine: cc.Node = null;
+    selectLine: cc.Node = null;   //选择条
 
     onLoad() {
         //游戏结算
@@ -84,7 +84,6 @@ export default class NewClass extends cc.Component {
             GameCfg.RSI_COLOR[0] = cc.Color.WHITE;
             GameCfg.RSI_COLOR[1] = new cc.Color().fromHEX('#f0dc05');
             GameCfg.RSI_COLOR[2] = new cc.Color().fromHEX('#d85cfc');
-
         }
         //百地
         else {
@@ -122,11 +121,13 @@ export default class NewClass extends cc.Component {
 
     }
 
+
     initData() {
 
         if (!GameCfg.GAMEFUPAN) {
             GameCfg.huizhidatas = GameCfg.data[0].data.length - GameCfg.GameSet.KLine;
 
+            //数据获取不到想要的条数
             if (GameCfg.huizhidatas <= 0) {
                 GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
                 if (GameCfg.huizhidatas > 100) {
@@ -139,6 +140,7 @@ export default class NewClass extends cc.Component {
 
         cc.ext.beg_end[1] = GameCfg.huizhidatas;
         cc.ext.beg_end[0] = 0;
+
         let mixWidth = 6;
         let maxWidth = 70;
         let drawWidth = 1080;
@@ -155,7 +157,7 @@ export default class NewClass extends cc.Component {
 
         GameCfg.MAs = [];
         let j = 0;
-        //双盲 定向
+        //双盲 定向   
         if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.QiHuo) {
 
             for (let i = 1; i <= 6; i++) {

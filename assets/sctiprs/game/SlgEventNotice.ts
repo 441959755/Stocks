@@ -3,6 +3,7 @@ import EventCfg from '../Utils/EventCfg';
 
 import GameCfg from '../game/GameCfg';
 import { pb } from '../../protos/proto';
+import DrawData from './DrawData';
 
 const { ccclass, property } = cc._decorator;
 
@@ -25,7 +26,7 @@ export default class NewClass extends cc.Component {
     onLoad() {
         GlobalEvent.on(EventCfg.SLGEVENTNOTICE, () => {
             if (GameCfg.GameSet.jx_notice) {
-                if (GameCfg.MaList && GameCfg.MaList.length > 0) {
+                if (DrawData.MaList && DrawData.MaList.length > 0) {
                     this.testMaEvent();
                 }
             }
@@ -904,7 +905,7 @@ export default class NewClass extends cc.Component {
 
         //let flag = false;
 
-        let malist = GameCfg.MaList;
+        let malist = DrawData.MaList;
         let index = GameCfg.huizhidatas - 1;
         if (index < 4) {
             return;

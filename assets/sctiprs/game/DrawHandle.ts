@@ -4,6 +4,7 @@ import DrawUtils from "../Utils/DrawUtils";
 import GameCfg from "./GameCfg";
 import GameData from '../GameData';
 import { pb } from '../../protos/proto';
+import DrawData from "./DrawData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -34,6 +35,8 @@ export default class NewClass extends cc.Component {
     bottomVol = 0;  //最低成交量
 
     disValue = 0;       //当前绘制的最高值-当前绘制最低值
+
+    MaList = [];
 
     BollList = [];           //Boll的前一个绘制点
 
@@ -385,14 +388,14 @@ export default class NewClass extends cc.Component {
                     //   el.node.color = GameCfg.MAColor[t];
                     if (t == 0) {
                         if (GameCfg.GameType == pb.GameType.ShuangMang) {
-                            el.string = '日线 MA' + GameCfg.MAs[t] + ': ' + GameCfg.MaList[index][t].toFixed(2);
+                            el.string = '日线 MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
                         } else if (GameCfg.GameType == pb.GameType.DingXiang) {
-                            el.string = GameCfg.GameSet.ZLine + GameCfg.MAs[t] + ': ' + GameCfg.MaList[index][t].toFixed(2);
+                            el.string = GameCfg.GameSet.ZLine + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
                         }
 
 
                     } else {
-                        el.string = 'MA' + GameCfg.MAs[t] + ': ' + GameCfg.MaList[index][t].toFixed(2);
+                        el.string = 'MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
                     }
 
                 }
@@ -454,10 +457,21 @@ export default class NewClass extends cc.Component {
         this.drawVol.clear();
         this.drawPCM.clear();
 
+        this.drawBg.lineWidth = 2;
+        this.drawMA.lineWidth = 2;
+        this.drawBOLL.lineWidth = 2;
+        this.drawVol.lineWidth = 2;
+        this.drawPCM.lineWidth = 2;
+
+        if (cc.winSize.width > this.node.width) {
+            this.drawBordWidth = 1280;
+        }
+
         let viweData = GameCfg.data[0].data;
 
         if (!viweData || !viweData[cc.ext.beg_end[0]]) {
-            console.log(JSON.stringify(viweData));
+            //    console.log(JSON.stringify(viweData));
+            console.log('行情数据为空');
             return;
         }
 
@@ -515,110 +529,16 @@ export default class NewClass extends cc.Component {
         }
     }
 
+
     initData() {
-
-        this.drawBg.lineWidth = 2;
-        this.drawMA.lineWidth = 2;
-        this.drawBOLL.lineWidth = 2;
-        this.drawVol.lineWidth = 2;
-        this.drawPCM.lineWidth = 2;
-        GameCfg.MaList = [];
-        this.BollList = [];
-        this.VolList = [];
-        if (cc.winSize.width > this.node.width) {
-            this.drawBordWidth = 1280;
-        }
-
         //绘制的数据
         let data = GameCfg.data[0].data;
 
-        let data5 = 5, data10 = 10;
+        DrawData.initData(data);
 
-        let k = 2, N = 20;
-
-        data.forEach((el, index) => {
-
-            if (index + 1 >= GameCfg.MAs[0]) {
-                GameCfg.MaList[index] = [];
-
-                for (let i = 0; i < GameCfg.MAs.length; i++) {
-                    //   if (index + 1 >= GameCfg.MAs[i]) {
-                    let MaStart = index + 1 - parseInt(GameCfg.MAs[i]);
-                    if (MaStart < 0) {
-                        break;
-                    }
-                    let sumUp = 0;
-                    //天数的总和
-                    for (let t = MaStart; t <= index; t++) {
-                        sumUp += parseFloat(data[t].close);
-                    }
-                    //平均的位置
-                    let MAY = (sumUp / GameCfg.MAs[i]);
-                    GameCfg.MaList[index].push(MAY);
-                    //  }
-                }
-            } else {
-                GameCfg.MaList.push(null);
-            }
-
-            //boll
-
-            if (index >= 19) {
-                this.BollList[index] = [];
-                let num = 0;
-                let i = index + 1 - 20;
-                for (; i <= index; i++) {
-                    num += parseFloat(data[i].close);
-                }
-                let MBY = 0
-                MBY = (num / N)//- this.bottomValue) / this.disValue * drawBox;
-
-                let MD = Math.sqrt(Math.pow(el.close - num / (index + 1), 2) / (index + 1));
-                let UP = (num / N) + k * MD;
-
-                let DN = (num / N) - k * MD;
-
-                this.BollList[index].push(MBY)
-                this.BollList[index].push(UP)
-                this.BollList[index].push(DN)
-            } else {
-
-                this.BollList.push(null);
-            }
-
-
-            //均量线 白
-
-            if (index >= data5 - 1) {
-                this.VolList[index] = [];
-                if (GameCfg.VOLGraph.includes(index + 1)) {
-                    let VolPoint = 0;
-                    for (let i = 0; i <= index; i++) {
-                        VolPoint += parseFloat(data[i].value);
-                    }
-                    //起点位置
-                    let VolPointY = (VolPoint / (index + 1));
-                    this.VolList[index].push(VolPointY);
-                }
-
-                //每段数据绘制
-                for (let i = 0; i < GameCfg.VOLGraph.length; i++) {
-                    if (index >= GameCfg.VOLGraph[i]) {
-                        let MaStart = index + 1 - GameCfg.VOLGraph[i];
-                        let sumUp = 0;
-                        //天数的总和
-                        for (let t = MaStart; t <= index; t++) {
-                            sumUp += parseFloat(data[t].value);
-                        }
-                        //平均的位置
-                        let VOlPointY = (sumUp / GameCfg.VOLGraph[i]);
-                        this.VolList[index].push(VOlPointY);
-                    }
-                }
-            } else {
-                this.VolList.push(null);
-            }
-        });
+        this.MaList = DrawData.MaList;
+        this.BollList = DrawData.BollList;
+        this.VolList = DrawData.VolList;
     }
 
     //曲线MA

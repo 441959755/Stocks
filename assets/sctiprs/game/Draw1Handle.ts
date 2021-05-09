@@ -4,7 +4,7 @@ import DrawUtils from "../Utils/DrawUtils";
 
 import GameCfg from "./GameCfg";
 
-
+import DrawData from "./DrawData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -63,10 +63,6 @@ export default class NewClass extends cc.Component {
     Dlist = [];
 
     jList = [];
-
-    n_high = null;
-
-    n_low = null;
 
     maxK = 0;
     minK = 0;
@@ -155,155 +151,39 @@ export default class NewClass extends cc.Component {
 
     //计算数据
     initData() {
-        let huizhidatas = GameCfg.data[0].data;
-
-        let EMA1Data = 12, EMA2Data = 26, DEAData = 9;
-        let EMA12 = 0, EMA26 = 0;
-        this.DIFList = [];
-        this.DEAList = [];
-        this.MACDList = [];
-        this.Klist = [];
-        this.Dlist = [];
-        this.jList = [];
-        this.UPRS = [];
-        this.DOWNRS = [];
-        this.Rs6 = [];
-        this.Rs12 = [];
-        this.Rs24 = [];
         this.drawMACD.lineWidth = 2;
-
-        //画图的数据
-        huizhidatas.forEach((el, index) => {
-            let RSV = 0;
-            if (index == 0) {
-                EMA12 = parseFloat(el.close);
-                EMA26 = parseFloat(el.close);
-                //   let dif = EMA12 - EMA26;
-                this.DIFList.push(0);
-                this.DEAList.push(0);
-                this.MACDList.push(0);
-                this.minDIF = this.DIFList[index];
-                this.maxDIF = this.DIFList[index];
-
-                this.minDEA = this.DEAList[index];
-                this.maxDEA = this.DEAList[index];
-
-                this.minMACD = this.MACDList[index];
-                this.maxMACD = this.MACDList[index];
-
-                RSV = (el.close - el.low) / (el.high - el.low) * 100;
-                let k = (2 / 3) * 50 + 1 / 3 * RSV;
-                let d = 2 / 3 * 50 + 1 / 3 * k;
-                let j = 3 * k - 2 * d;
-                this.Klist.push(k);
-                this.Dlist.push(d);
-                this.jList.push(j);
-
-                this.n_high = el.high;
-                this.n_low = el.low;
-
-                this.maxD = d;
-                this.minD = d;
-                this.maxJ = j;
-                this.minJ = j;
-                this.maxK = k;
-                this.minK = k;
-
-                this.UPRS.push(0);
-                this.DOWNRS.push(0);
-
-            } else {
-                EMA12 = (EMA12 * (EMA1Data - 1) + parseFloat(el.close)) / (EMA1Data + 1);
-                EMA26 = (EMA26 * (EMA2Data - 1) + parseFloat(el.close)) / (EMA2Data + 1);
-                let dif = EMA12 - EMA26
-                let dea = (this.DIFList[this.DIFList.length - 1] * (DEAData - 1) + dif * 2) / (DEAData + 1);
-                let macd = (dif - dea) * 2;
-                this.DIFList.push(dif);
-                this.DEAList.push(dea);
-                this.MACDList.push(macd);
-
-                this.n_low = Math.min(this.n_low, el.low);
-                this.n_high = Math.max(this.n_high, el.high);
-
-                RSV = (el.close - this.n_low) / (this.n_high - this.n_low) * 100;
-                let k = (2 / 3) * this.Klist[this.Klist.length - 1] + 1 / 3 * RSV;
-                let d = (2 / 3) * this.Dlist[this.Dlist.length - 1] + 1 / 3 * k;
-                let j = 3 * k - 2 * d;
-                this.Klist.push(k);
-                this.Dlist.push(d);
-                this.jList.push(j);
-
-                if (el.close < huizhidatas[index - 1].close) {
-                    this.UPRS.push(0);
-                    this.DOWNRS.push(this.DOWNRS[this.DOWNRS.length - 1] * 5 / 6 + (huizhidatas[index - 1].close - el.close) / 6);
-                } else {
-                    this.DOWNRS.push(0);
-                    this.UPRS.push(this.UPRS[this.UPRS.length - 1] * 5 / 6 + (el.close - huizhidatas[index - 1].close) / 6);
-                }
-
-                if (index >= 5) {
-                    let rs = index + 1 - 6;
-                    let UP6 = 0, DOWN6 = 0;
-                    for (; rs <= index; rs++) {
-                        UP6 += this.UPRS[rs];
-                        DOWN6 += this.DOWNRS[rs];
-                    }
-                    let RS = (UP6 / 6) / (DOWN6 / 6);
-                    this.Rs6.push(100 * RS / (1 + RS));
-                } else {
-                    this.Rs6.push('null');
-                }
-                if (index >= 11) {
-                    let rs = index + 1 - 12;
-                    let UP12 = 0, DOWN12 = 0;
-                    for (; rs <= index; rs++) {
-                        UP12 += this.UPRS[rs];
-                        DOWN12 += this.DOWNRS[rs];
-                    }
-                    let RS = (UP12 / 12) / (DOWN12 / 12);
-                    this.Rs12.push(100 * RS / (1 + RS));
-                } else {
-                    this.Rs12.push('null');
-                }
-
-                if (index >= 23) {
-                    let rs = index + 1 - 24;
-                    let UP24 = 0, DOWN24 = 0;
-                    for (; rs <= index; rs++) {
-                        UP24 += this.UPRS[rs];
-                        DOWN24 += this.DOWNRS[rs];
-                    }
-                    let RS = (UP24 / 24) / (DOWN24 / 24);
-                    this.Rs24.push(100 * RS / (1 + RS));
-                } else {
-                    this.Rs24.push('null');
-                }
-
-            }
-        })
-
+        this.DIFList = DrawData.DIFList;
+        this.DEAList = DrawData.DEAList;
+        this.MACDList = DrawData.MACDList;
+        this.Klist = DrawData.Klist;
+        this.Dlist = DrawData.Dlist;
+        this.jList = DrawData.jList;
+        this.UPRS = DrawData.UPRS;
+        this.DOWNRS = DrawData.DOWNRS;
+        this.Rs6 = DrawData.Rs6;
+        this.Rs12 = DrawData.Rs12;
+        this.Rs24 = DrawData.Rs24;
     }
 
     protected start() {
         this.drawMACD && (this.drawMACD.node.active = false)
         this.drawKDJ && (this.drawKDJ.node.active = false)
         this.drawRSI && (this.drawRSI.node.active = false)
-
-        if (GameCfg.GameType == 3) {
-            if (GameCfg.GameSet.select == 'MACD') {
-                this.drawMACD.node.active = true;
-                this.drawVol.node.active = false;
-                this.drawPcm.node.active = false;
-            } else if (GameCfg.GameSet.select == 'KDJ') {
-                this.drawKDJ.node.active = true;
-                this.drawVol.node.active = false;
-                this.drawPcm.node.active = false;
-            } else if (GameCfg.GameSet.select == 'RSI') {
-                this.drawRSI.node.active = true;
-                this.drawVol.node.active = false;
-                this.drawPcm.node.active = false;
-            }
-        }
+        // if (GameCfg.GameType == 3) {
+        //     if (GameCfg.GameSet.select == 'MACD') {
+        //         this.drawMACD.node.active = true;
+        //         this.drawVol.node.active = false;
+        //         this.drawPcm.node.active = false;
+        //     } else if (GameCfg.GameSet.select == 'KDJ') {
+        //         this.drawKDJ.node.active = true;
+        //         this.drawVol.node.active = false;
+        //         this.drawPcm.node.active = false;
+        //     } else if (GameCfg.GameSet.select == 'RSI') {
+        //         this.drawRSI.node.active = true;
+        //         this.drawVol.node.active = false;
+        //         this.drawPcm.node.active = false;
+        //     }
+        // }
         this.initData();
         this.onDraw();
     }
@@ -311,39 +191,42 @@ export default class NewClass extends cc.Component {
     updataLabel(index) {
         index -= 1;
         let arr = ['MACD(12,26,9) DIF', 'DEA', 'MACD'];
-        if (this.DIFList[index] && this.DIFList[index] != 'null') {
+
+        if (this.DIFList[index]) {
             this.MACDLabels[0].string = arr[0] + ': ' + this.DIFList[index].toFixed(2);
         }
-        if (this.DEAList[index] && this.DEAList[index] != 'null') {
+
+        if (this.DEAList[index]) {
             this.MACDLabels[1].string = arr[1] + ': ' + this.DEAList[index].toFixed(2);
         }
-        if (this.MACDList[index] && this.MACDList[index] != 'null') {
+
+        if (this.MACDList[index]) {
             this.MACDLabels[2].string = arr[2] + ': ' + this.MACDList[index].toFixed(2);
         }
 
         let arr1 = ['KDJ(9,3,3)', 'k', 'j'];
-        if (this.Klist[index] && this.Klist[index] != 'null') {
+        if (this.Klist[index]) {
             this.KDJLabels[0].string = arr1[0] + ': ' + this.Klist[index].toFixed(2);
         }
 
-        if (this.Dlist[index] && this.Dlist[index] != 'null') {
+        if (this.Dlist[index]) {
             this.KDJLabels[1].string = arr1[1] + ': ' + this.Dlist[index].toFixed(2);
         }
 
-        if (this.jList[index] && this.jList[index] != 'null') {
+        if (this.jList[index]) {
             this.KDJLabels[2].string = arr1[2] + ': ' + this.jList[index].toFixed(2);
         }
 
         let arr2 = ['RSI(6,12,24) RSI1', 'RSI2', 'RSI3'];
-        if (this.Rs6[index] != 'null' && this.Rs6[index]) {
+        if (this.Rs6[index]) {
             this.RSILabels[0].string = arr2[0] + ': ' + this.Rs6[index].toFixed(2);
         }
 
-        if (this.Rs12[index] != 'null' && this.Rs12[index]) {
+        if (this.Rs12[index]) {
             this.RSILabels[1].string = arr2[1] + ': ' + this.Rs12[index].toFixed(2);
         }
 
-        if (this.Rs24[index] != 'null' && this.Rs24[index]) {
+        if (this.Rs24[index]) {
             this.RSILabels[2].string = arr2[2] + ': ' + this.Rs24[index].toFixed(2);
         }
     }

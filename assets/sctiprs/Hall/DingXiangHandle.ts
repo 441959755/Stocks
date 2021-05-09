@@ -181,7 +181,7 @@ export default class NewClass extends cc.Component {
 		this.setProId = data;
 
 		//当前年月的天数
-		if (/*index == 3 ||*/ index == 4) {
+		if (index == 3 || index == 4) {
 			let year = this.boxs[2].getChildByName('label').getComponent(cc.Label).string;
 			let month = this.boxs[3].getChildByName('label').getComponent(cc.Label).string;
 			var temp = new Date(parseInt(year), parseInt(month), 0);
