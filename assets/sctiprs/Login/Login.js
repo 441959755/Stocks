@@ -257,7 +257,7 @@ cc.Class({
 					year: '随机',
 					month: '随机',
 					day: '随机',
-					KLine: 100,
+					KLine: 120,
 					ZLine: '日线',
 				}
 				GameData.QHSet = QHSet;

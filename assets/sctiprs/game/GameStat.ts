@@ -87,7 +87,7 @@ export default class NewClass extends cc.Component {
             this.lossLas[0].string = datas[minIndex][1] - datas[minIndex][0] + 1 + '';
             this.lossLas[1].string = ((datas[minIndex][2]) * 100).toFixed(2) + '%';
 
-            if (datas[minIndex][2] > 0) {
+            if (datas[minIndex][2] != 0) {
                 this.lossLas[1].node.color = cc.Color.GREEN;
             } else {
                 this.lossLas[1].node.color = cc.Color.WHITE;

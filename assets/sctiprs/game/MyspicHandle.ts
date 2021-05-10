@@ -141,11 +141,6 @@ export default class NewClass extends cc.Component {
         }
     }
 
-
-
-
-
-
     //获取指数
     getMyspic() {
         //在复盘中不获取指数数据
