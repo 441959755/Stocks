@@ -81,9 +81,18 @@ export default class NewClass extends cc.Component {
 
     Rs6 = [];
 
+    maxRs6 = 0;
+    minRs6 = 0;
+
     Rs12 = [];
 
+    maxRs12 = 0;
+    minRs12 = 0;
+
     Rs24 = [];
+
+    maxRs24 = 0;
+    minRs24 = 0;
 
     preRs6Point = null;
 
@@ -137,6 +146,8 @@ export default class NewClass extends cc.Component {
                 this.drawPcm.node.zIndex = 3;
                 this.Mask.zIndex = 1;
             }
+
+            this.setLabelValue();
         }, this);
 
         GlobalEvent.on('onDraw', this.onDraw.bind(this), this);
@@ -232,19 +243,63 @@ export default class NewClass extends cc.Component {
     }
 
     //设置label的值
-    setLabelValue(str) {
-        if (str == 'MACD') {
+    setLabelValue() {
+        this.label1.node.active = true;
+        this.label2.node.active = true;
+        this.label3.node.active = true;
+
+        let maxKDJ;
+        maxKDJ = Math.max(this.maxK, this.maxD);
+        maxKDJ = Math.max(maxKDJ, this.maxJ);
+
+        let minKDJ;
+        minKDJ = Math.max(this.minK, this.minD);
+        minKDJ = Math.max(minKDJ, this.minJ);
+
+        let min = parseInt(minKDJ / 10 + '') * 10 <= 0 ? 10 : parseInt(minKDJ / 10 + '') * 10
+        let max = Math.ceil(maxKDJ / 10) * 10;
+        let con = (max - min) / 2 + min;
+
+        this.maxK = max;
+        this.maxD = max;
+        this.maxJ = max;
+
+        let maxRSI;
+        maxRSI = Math.max(this.maxRs6, this.maxRs24);
+        maxRSI = Math.max(maxRSI, this.maxRs12);
+
+        let minRSI;
+        minRSI = Math.max(this.minRs6, this.minRs12);
+        minRSI = Math.max(minRSI, this.minRs24);
+
+
+        let min1 = parseInt(minRSI / 10 + '') * 10 <= 0 ? 10 : parseInt(minRSI / 10 + '') * 10
+        let max1 = Math.ceil(maxRSI / 10) * 10;
+        let con1 = (max - min) / 2 + min;
+
+        this.maxRs6 = max;
+        this.maxRs12 = max;
+        this.maxRs24 = max;
+
+        if (this.drawMACD.node.active == true) {
             this.label1.string = (this.minMACD / 2).toFixed(2) + '';
             this.label2.string = '0.00';
             this.label3.string = (this.maxMACD / 2).toFixed(2) + '';
-        } else if (str == 'KDJ') {
-            this.label1.string = '10';
-            this.label2.string = '50';
-            this.label3.string = '90';
+        } else if (this.drawKDJ.node.active == true) {
+            this.label1.string = min + '';
+            this.label2.string = con + '';
+            this.label3.string = max + '';
+        } else if (this.drawRSI.node.active == true) {
+
+            this.label1.string = min1 + '';
+            this.label2.string = con1 + '';
+            this.label3.string = max1 + '';
+
+
         } else {
-            this.label1.string = '20';
-            this.label2.string = '50';
-            this.label3.string = '80';
+            this.label1.node.active = false;
+            this.label2.node.active = false;
+            this.label3.node.active = false;
         }
     }
 
@@ -270,6 +325,15 @@ export default class NewClass extends cc.Component {
         this.minJ = this.jList[cc.ext.beg_end[0]];
         this.maxJ = this.jList[cc.ext.beg_end[0]];
 
+        this.minRs6 = this.Rs6[cc.ext.beg_end[0]];
+        this.maxRs6 = this.Rs6[cc.ext.beg_end[0]];
+
+        this.maxRs12 = this.Rs12[cc.ext.beg_end[0]];
+        this.minRs12 = this.Rs12[cc.ext.beg_end[0]];
+
+        this.maxRs24 = this.Rs24[cc.ext.beg_end[0]];
+        this.minRs24 = this.Rs24[cc.ext.beg_end[0]];
+
         for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
             this.minDIF = Math.min(this.minDIF, this.DIFList[index]);
             this.maxDIF = Math.max(this.maxDIF, this.DIFList[index]);
@@ -288,7 +352,20 @@ export default class NewClass extends cc.Component {
 
             this.minJ = Math.min(this.minJ, this.jList[index]);
             this.maxJ = Math.max(this.maxJ, this.jList[index]);
+
+            this.minRs6 = Math.min(this.minRs6, this.Rs6[index]);
+            this.maxRs6 = Math.max(this.maxRs6, this.Rs6[index]);
+
+            this.minRs12 = Math.min(this.minRs12, this.Rs12[index]);
+            this.maxRs12 = Math.max(this.maxRs12, this.Rs12[index]);
+
+            this.minRs24 = Math.min(this.minRs24, this.Rs24[index]);
+            this.maxRs24 = Math.max(this.maxRs24, this.Rs24[index]);
+
         }
+        this.setLabelValue();
+        // this.setLabelValue('RSI');
+        // this.setLabelValue('MACD');
 
         for (let i = 0; i < this.DIFList.length; i++) {
             if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
@@ -331,7 +408,7 @@ export default class NewClass extends cc.Component {
     onDrawKDJ(index) {
         let some = index - cc.ext.beg_end[0];
 
-        this.setLabelValue('KDJ');
+
         if (index <= 0) {
             return
         }
@@ -371,7 +448,7 @@ export default class NewClass extends cc.Component {
 
     onDrawRSI(index) {
         let some = index - cc.ext.beg_end[0];
-        this.setLabelValue('RSI');
+
         if (index <= 0) {
             return
         }
@@ -381,14 +458,18 @@ export default class NewClass extends cc.Component {
         let preRSIX = 10 + ((some - 1) * cc.ext.hz_width) + cc.ext.hz_width / 2;
         //RSI6
         if (index > 5) {
-            let RSI6Y = this.Rs6[index - 5] / 100 * bgHeight;
-            if (RSI6Y > bgHeight) {
-                RSI6Y = bgHeight;
-            }
-            let preRSI6Y = this.Rs6[index - 6] / 100 * bgHeight;
-            if (preRSI6Y > bgHeight) {
-                preRSI6Y = bgHeight;
-            }
+            // let RSI6Y = this.Rs6[index - 5] / this.maxRs6 * bgHeight;
+
+            // let preRSI6Y = this.Rs6[index - 6] / this.maxRs6 * bgHeight;
+            let RSI6Y = this.Rs6[index] / this.maxRs6 * bgHeight;
+
+            let preRSI6Y = this.Rs6[index - 1] / this.maxRs6 * bgHeight;
+            // if (RSI6Y > bgHeight) {
+            //     RSI6Y = bgHeight;
+            // }
+            // if (preRSI6Y > bgHeight) {
+            //     preRSI6Y = bgHeight;
+            // }
             //    if (index > 5) {
             this.drawRSI.lineWidth = 2;
             this.drawRSI.strokeColor = GameCfg.RSI_COLOR[0];
@@ -398,14 +479,16 @@ export default class NewClass extends cc.Component {
 
         //RSI12
         if (index > 11) {
-            let RSI12Y = this.Rs12[index - 11] / 100 * bgHeight;
-            let preRSI12Y = this.Rs12[index - 12] / 100 * bgHeight;
-            if (RSI12Y > bgHeight) {
-                RSI12Y = bgHeight;
-            }
-            if (preRSI12Y > bgHeight) {
-                preRSI12Y = bgHeight;
-            }
+            // let RSI12Y = this.Rs12[index - 11] / this.maxRs12 * bgHeight;
+            // let preRSI12Y = this.Rs12[index - 12] / this.maxRs12 * bgHeight;
+            let RSI12Y = this.Rs12[index] / this.maxRs12 * bgHeight;
+            let preRSI12Y = this.Rs12[index - 1] / this.maxRs12 * bgHeight;
+            // if (RSI12Y > bgHeight) {
+            //     RSI12Y = bgHeight;
+            // }
+            // if (preRSI12Y > bgHeight) {
+            //     preRSI12Y = bgHeight;
+            // }
             //   if (index > 11) {
             this.drawRSI.lineWidth = 2;
             this.drawRSI.strokeColor = GameCfg.RSI_COLOR[1];
@@ -416,14 +499,17 @@ export default class NewClass extends cc.Component {
 
         //RSI24
         if (index > 23) {
-            let RSI24Y = this.Rs24[index - 23] / 100 * bgHeight;
-            let preRSI24Y = this.Rs24[index - 24] / 100 * bgHeight;
-            if (RSI24Y > 150) {
-                RSI24Y = 150;
-            }
-            if (preRSI24Y > 150) {
-                preRSI24Y = 150;
-            }
+            // let RSI24Y = this.Rs24[index - 23] / this.maxRs24 * bgHeight;
+            // let preRSI24Y = this.Rs24[index - 24] / this.maxRs24 * bgHeight;
+
+            let RSI24Y = this.Rs24[index] / this.maxRs24 * bgHeight;
+            let preRSI24Y = this.Rs24[index - 1] / this.maxRs24 * bgHeight;
+            // if (RSI24Y > 150) {
+            //     RSI24Y = 150;
+            // }
+            // if (preRSI24Y > 150) {
+            //     preRSI24Y = 150;
+            // }
             //   if (index > 23) {
             this.drawRSI.lineWidth = 2;
             this.drawRSI.strokeColor = GameCfg.RSI_COLOR[2];
@@ -435,7 +521,7 @@ export default class NewClass extends cc.Component {
 
     onDrawMACD(index) {
         let some = index - cc.ext.beg_end[0];
-        this.setLabelValue('MACD');
+        // 
         //dif
         if (index <= 0) {
             return

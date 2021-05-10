@@ -1,5 +1,6 @@
 
 import LoadUtils from "../sctiprs/Utils/LoadUtils";
+import ComUtils from '../sctiprs/Utils/ComUtils';
 
 export default class GameCfgText {
 
@@ -94,6 +95,79 @@ export default class GameCfgText {
             }
         }
         return items;
+    }
+
+    /**
+ * 根据股票的名字获取股票的范围
+ */
+    public static getTimeByCodeName(str) {
+        str = str.split(' ')[0];
+        let items;
+        for (let i = 0; i < this.stockList.length; i++) {
+            if (this.stockList[i].indexOf(str) != -1) {
+                items = this.stockList[i].split('|');
+                break;
+            }
+        }
+
+        let data = {
+            start: null,
+            end: null,
+        };
+        data.start = items[2];
+        if (items[3] == 0) {
+            data.end = ComUtils.getCurYearMonthDay();
+        } else {
+            data.end = items[3];
+        }
+        return data;
+    }
+
+    /**
+* 根据期货的名字获取股票的范围
+*/
+    public static QHGetTimeByCodeName(str) {
+        let index = -1;
+        for (let i = 0; i < this.qihuoList.length; i++) {
+            if (this.qihuoList[i].indexOf(str) != -1) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index != -1) {
+
+            let data = {
+                start: null,
+                end: null,
+            };
+            let items = this.qihuoList[index].split('|');
+            data.start = items[5];
+            // if (items[3] == 0) {
+            //     data.end = ComUtils.getCurYearMonthDay();
+            // } else {
+            data.end = items[6];
+            //    }
+            if (data.start == 0 || data.end == 0) {
+                {
+                    let now = new Date(parseInt(items[7]) * 1000);
+                    let y = now.getFullYear();
+                    let m = now.getMonth() + 1;
+                    let d = now.getDate();
+                    data.start = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
+                }
+
+                {
+                    let now = new Date(parseInt(items[8]) * 1000);
+                    let y = now.getFullYear();
+                    let m = now.getMonth() + 1;
+                    let d = now.getDate();
+                    data.end = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
+                }
+            }
+
+            return data;
+        }
     }
 
     public static releaseRes() {

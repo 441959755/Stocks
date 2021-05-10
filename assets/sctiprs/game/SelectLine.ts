@@ -100,7 +100,7 @@ export default class NewClass extends cc.Component {
         let ktype, code, from, total, to;
         code = this.qhData.code;
         total = 40;
-        to = 0;
+        to = time;
         let t = 0;
         if (type <= 3) {
             ktype = pb.KType.Min5;
@@ -119,6 +119,7 @@ export default class NewClass extends cc.Component {
                 total *= 12;
                 t = 12;
             }
+            //  to=
 
         } else if (type == 4) {
             ktype = pb.KType.Day;

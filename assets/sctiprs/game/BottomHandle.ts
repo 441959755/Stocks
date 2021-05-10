@@ -245,7 +245,7 @@ export default class NewClass extends cc.Component {
 		if (this.ziChan > 0 && GameCfg.huizhidatas <= this.gpData.length) {
 			if (this.gpData[GameCfg.huizhidatas - 1]) {
 				this.keMrCount = parseInt(this.ziChan / (parseFloat(this.gpData[GameCfg.huizhidatas - 1].close) * 100) + '') * 100;
-				console.log(this.gpData[GameCfg.huizhidatas - 1].close);
+				//	console.log(this.gpData[GameCfg.huizhidatas - 1].close);
 			}
 		}
 	}
@@ -369,8 +369,10 @@ export default class NewClass extends cc.Component {
 			this.moneyLabel[0].string = '总资产    ：' + GameCfg.ziChan;
 			this.moneyLabel[1].string = '当前资产：' + this.ziChan;
 
-			this.priceLabel[0].string = '买入均价：' + this.gpData[GameCfg.huizhidatas - 1].close;
-			this.priceLabel[1].string = '当前价格：' + this.gpData[GameCfg.huizhidatas - 1].close;
+			this.priceLabel[0].string = '买入均价：' + 0;
+			if (GameCfg.huizhidatas >= 1) {
+				this.priceLabel[1].string = '当前价格：' + this.gpData[GameCfg.huizhidatas - 1].close;
+			}
 		}
 	}
 
@@ -389,7 +391,7 @@ export default class NewClass extends cc.Component {
 			}
 
 			if (this.buyData.length == 0) {
-				this.priceLabel[0].string = '买入均价：' + this.gpData[GameCfg.huizhidatas - 1].close;
+				this.priceLabel[0].string = '买入均价：' + 0;
 			} else {
 				let jp = 0;
 				for (let i = 0; i < this.buyData.length; i++) {
@@ -398,7 +400,9 @@ export default class NewClass extends cc.Component {
 				this.priceLabel[0].string = '买入均价：' + (jp / this.buyData.length).toFixed(2);
 			}
 
-			this.priceLabel[1].string = '当前价格：' + this.gpData[GameCfg.huizhidatas - 1].close;
+			if (GameCfg.huizhidatas >= 1) {
+				this.priceLabel[1].string = '当前价格：' + this.gpData[GameCfg.huizhidatas - 1].close;
+			}
 
 			if (this.roundNumber <= 0) {
 				GlobalEvent.emit(EventCfg.GAMEOVEER, true);

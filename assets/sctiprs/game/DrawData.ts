@@ -198,7 +198,13 @@ export default class DrawData {
                         UP6 += this.UPRS[rs];
                         DOWN6 += this.DOWNRS[rs];
                     }
-                    let RS = (UP6 / 6) / (DOWN6 / 6);
+                    let RS;
+                    if (DOWN6 == 0) {
+                        RS = 0;
+                    } else {
+                        RS = (UP6 / 6) / (DOWN6 / 6);
+                    }
+
                     this.Rs6.push(100 * RS / (1 + RS));
                 } else {
                     this.Rs6.push(null);
@@ -210,7 +216,13 @@ export default class DrawData {
                         UP12 += this.UPRS[rs];
                         DOWN12 += this.DOWNRS[rs];
                     }
-                    let RS = (UP12 / 12) / (DOWN12 / 12);
+                    let RS;
+                    if (DOWN12 == 0) {
+                        RS = 0;
+                    } else {
+                        RS = (UP12 / 12) / (DOWN12 / 12);
+                    }
+
                     this.Rs12.push(100 * RS / (1 + RS));
                 } else {
                     this.Rs12.push(null);
@@ -223,7 +235,13 @@ export default class DrawData {
                         UP24 += this.UPRS[rs];
                         DOWN24 += this.DOWNRS[rs];
                     }
-                    let RS = (UP24 / 24) / (DOWN24 / 24);
+                    let RS;
+                    if (DOWN24 == 0) {
+                        RS = 0;
+                    } else {
+                        RS = (UP24 / 24) / (DOWN24 / 24);
+                    }
+
                     this.Rs24.push(100 * RS / (1 + RS));
                 } else {
                     this.Rs24.push(null);

@@ -7,6 +7,7 @@ import { pb } from '../../protos/proto';
 
 import GameCfgText from '../GameText';
 import HttpUtils from '../common/net/HttpUtils';
+import ComUtils from '../Utils/ComUtils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -168,6 +169,119 @@ export default class NewClass extends cc.Component {
 		return true;
 	}
 
+	/**
+	 * 根据股票的名字获取股票的范围
+	 */
+	getTimeByCodeName(index) {
+
+		let year = this.boxs[2].getChildByName('label').getComponent(cc.Label).string;
+		let month = this.boxs[3].getChildByName('label').getComponent(cc.Label).string;
+		let day = this.boxs[4].getChildByName('label').getComponent(cc.Label).string;
+		let downBox = this.downBoxs[index];
+		let content = cc.find('New ScrollView/view/content', downBox);
+		if (GameData.DXSet.search == '随机选股') {
+
+			//	let sc = new Date().getTime();
+			let f = new Date();
+			let y = f.getFullYear() + '';
+			let m = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+			let d = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
+			let sc = ComUtils.GetPreMonthDay(y + '-' + m + '-' + d, 2);
+			y = sc.y;
+			m = sc.m;
+			d = sc.d;
+			let t;
+			if (index == 2) {
+				t = y;
+			} else if (index == 3) {
+				if (year != '随机' && year == y) {
+					t = m;
+				} else {
+					t = 12;
+				}
+			} else if (index == 4) {
+				if (year == y && parseInt(month) == m) {
+					t = d;
+				} else {
+					var temp = new Date(parseInt(y), parseInt(m + ''), 0);
+					let day = temp.getDate();
+					t = day;
+				}
+			}
+			content.children.forEach(el => {
+				let str = el.getComponent(cc.Label).string;
+				if (str == '随机') {
+
+				} else if (parseInt(str) > t) {
+					el.color = new cc.Color().fromHEX('#a0a0a0');
+					el.getComponent(cc.Button).interactable = false;
+					el.getComponent(cc.Button).enableAutoGrayEffect = true;
+				} else {
+					el.color = cc.Color.WHITE;
+					el.getComponent(cc.Button).interactable = true;
+					el.getComponent(cc.Button).enableAutoGrayEffect = false;
+				}
+			})
+		} else {
+			let date = GameCfgText.getTimeByCodeName(GameData.DXSet.search);
+			let ly = date.start.slice(0, 4);
+			let lm = date.start.slice(4, 6);
+			let ld = date.start.slice(6);
+
+			let cy = date.end.slice(0, 4);
+			let cm = date.end.slice(4, 6);
+			let cd = date.end.slice(6);
+			let min, max;
+			if (index == 2) {
+				min = ly;
+				max = cy;
+			} else if (index == 3) {
+				if (parseInt(year) == parseInt(ly)) {
+					min = lm;
+					max = 12;
+				} else if (parseInt(year) == parseInt(cy)) {
+					max = cm;
+					min = 1;
+				} else {
+					min = 1;
+					max = 12;
+				}
+
+			} else if (index == 4) {
+				if (parseInt(year) == parseInt(ly) && parseInt(month) == parseInt(lm)) {
+					min = ld;
+					var temp = new Date(parseInt(year), parseInt(month), 0);
+					let day = temp.getDate();
+					max = day;
+				} else if (parseInt(year) == parseInt(cy) && parseInt(month) == parseInt(cm)) {
+					max = cd;
+					min = 1;
+				} else {
+					var temp = new Date(parseInt(year), parseInt(month), 0);
+					let day = temp.getDate();
+					min = 1;
+					max = day;
+				}
+			}
+			content.children.forEach(el => {
+				let str = el.getComponent(cc.Label).string;
+				if (str == '随机') {
+
+				} else if (parseInt(str) < parseInt(min) || parseInt(str) > parseInt(max)) {
+					el.color = new cc.Color().fromHEX('#a0a0a0');
+					el.getComponent(cc.Button).interactable = false;
+					el.getComponent(cc.Button).enableAutoGrayEffect = true;
+				} else {
+					el.color = cc.Color.WHITE;
+					el.getComponent(cc.Button).interactable = true;
+					el.getComponent(cc.Button).enableAutoGrayEffect = false;
+				}
+			})
+
+		}
+
+	}
+
 	onBoxSelectClick(event, data) {
 		let index = parseInt(data);
 		if (data == 1 || data == 2 || data == 3 || data == 4 || data == 6 || data == 7) {
@@ -181,32 +295,50 @@ export default class NewClass extends cc.Component {
 		this.setProId = data;
 
 		//当前年月的天数
-		if (index == 3 || index == 4) {
+		if (index == 2 || index == 3 || index == 4) {
 			let year = this.boxs[2].getChildByName('label').getComponent(cc.Label).string;
 			let month = this.boxs[3].getChildByName('label').getComponent(cc.Label).string;
-			var temp = new Date(parseInt(year), parseInt(month), 0);
-			let day = temp.getDate();
-			let content = cc.find('New ScrollView/view/content', downBox);
-			content.children.forEach(el => {
-				let str = el.getComponent(cc.Label).string;
-				if (parseInt(str) > day) {
-					if (index == 4) {
+			if (index == 3 || index == 4) {
+				if (year == '随机') {
+					let content = cc.find('New ScrollView/view/content', downBox);
+					content.children.forEach(el => {
+
 						el.color = new cc.Color().fromHEX('#a0a0a0');
 						el.getComponent(cc.Button).interactable = false;
 						el.getComponent(cc.Button).enableAutoGrayEffect = true;
-					} else {
-						this.boxs[4].getChildByName('label').getComponent(cc.Label).string = day + '';
-					}
-				} else {
-					if (index == 4) {
-						el.color = cc.Color.WHITE;
-						el.getComponent(cc.Button).interactable = true;
-						el.getComponent(cc.Button).enableAutoGrayEffect = false;
-					} else {
-						this.boxs[4].getChildByName('label').getComponent(cc.Label).string = day + '';
-					}
+					})
+					return;
 				}
-			});
+			}
+			this.getTimeByCodeName(index);
+
+
+			// var temp = new Date(parseInt(year), parseInt(month), 0);
+			// let day = temp.getDate();
+			// if (index == 4) {
+			// 	let content = cc.find('New ScrollView/view/content', downBox);
+			// 	content.children.forEach(el => {
+			// 		let str = el.getComponent(cc.Label).string;
+			// 		if (parseInt(str) > day) {
+			// 			if (index == 4) {
+			// 				el.color = new cc.Color().fromHEX('#a0a0a0');
+			// 				el.getComponent(cc.Button).interactable = false;
+			// 				el.getComponent(cc.Button).enableAutoGrayEffect = true;
+			// 			} else {
+			// 				this.boxs[4].getChildByName('label').getComponent(cc.Label).string = day + '';
+			// 			}
+			// 		} else {
+			// 			if (index == 4) {
+			// 				el.color = cc.Color.WHITE;
+			// 				el.getComponent(cc.Button).interactable = true;
+			// 				el.getComponent(cc.Button).enableAutoGrayEffect = false;
+			// 			} else {
+			// 				this.boxs[4].getChildByName('label').getComponent(cc.Label).string = day + '';
+			// 			}
+			// 		}
+			// 	});
+			// }
+
 		}
 	}
 
@@ -221,20 +353,23 @@ export default class NewClass extends cc.Component {
 			this.downBoxs.forEach(el => {
 				el.active = false;
 			});
-			if (this.setProId == 4) {
-				let downBox = this.downBoxs[this.setProId];
-				let year = this.boxs[3].getChildByName('label').getComponent(cc.Label).string;
-				let month = this.boxs[4].getChildByName('label').getComponent(cc.Label).string;
+			if (this.setProId == 2 || this.setProId == 3 || this.setProId == 4) {
+				let downBox = this.downBoxs[4];
+				let year = this.boxs[2].getChildByName('label').getComponent(cc.Label).string;
+				let month = this.boxs[3].getChildByName('label').getComponent(cc.Label).string;
+				// if (year == '随机' || month == '--') {
+				// 	return;
+				// }
+
 				var temp = new Date(parseInt(year), parseInt(month), 0);
 				let day = temp.getDate();
 				let content = cc.find('New ScrollView/view/content', downBox);
-
+				let str = this.boxs[4].getChildByName('label').getComponent(cc.Label).string
 				content.children.forEach(el => {
-					let str = el.getComponent(cc.Label).string;
 					if (parseInt(str) > day) {
 						this.boxs[4].getChildByName('label').getComponent(cc.Label).string = day + '';
 					} else {
-						this.boxs[4].getChildByName('label').getComponent(cc.Label).string = day + '';
+						//this.boxs[4].getChildByName('label').getComponent(cc.Label).string = day + '';
 					}
 				});
 			} else if (this.setProId == 1) {
@@ -249,12 +384,81 @@ export default class NewClass extends cc.Component {
 				GameData.DXSet.market = str;
 			} else if (this.setProId == 1) {
 				GameData.DXSet.search = str;
+				if (GameData.DXSet.year != '随机') {
+					if (GameData.DXSet.search != '随机选股') {
+						let date = GameCfgText.getTimeByCodeName(GameData.DXSet.search);
+						let ly = date.start.slice(0, 4);
+						let lm = date.start.slice(4, 6);
+						let ld = date.start.slice(6);
+
+						// let cy = date.end.slice(0, 4);
+						// let cm = date.end.slice(4, 6);
+						// let cd = date.end.slice(6);
+						let st;
+						st = GameData.DXSet.year;
+						if (GameData.DXSet.month.length == 1) {
+							st += ('0' + GameData.DXSet.month);
+						} else {
+							st += (GameData.DXSet.month);
+						}
+
+						if (GameData.DXSet.day.length == 1) {
+							st += ('0' + GameData.DXSet.day)
+						} else {
+							st += GameData.DXSet.day;
+						}
+
+						if (parseInt(st) < parseInt(date.start) || parseInt(st) > parseInt(date.end)) {
+							GameData.DXSet.year = ly;
+							GameData.DXSet.month = lm;
+							GameData.DXSet.day = ld;
+							this.boxs[2].getChildByName('label').getComponent(cc.Label).string = ly;
+							this.boxs[3].getChildByName('label').getComponent(cc.Label).string = lm;
+							this.boxs[4].getChildByName('label').getComponent(cc.Label).string = ld;
+						}
+					}
+
+				}
+
 			} else if (this.setProId == 2) {
 				GameData.DXSet.year = str;
-
 				if (GameData.DXSet.year == '随机') {
 					this.boxs[3].getChildByName('label').getComponent(cc.Label).string = '--';
 					this.boxs[4].getChildByName('label').getComponent(cc.Label).string = '--';
+				} else {
+					if (GameData.DXSet.search != '随机选股') {
+						let date = GameCfgText.getTimeByCodeName(GameData.DXSet.search);
+						let ly = date.start.slice(0, 4);
+						let lm = date.start.slice(4, 6);
+						let ld = date.start.slice(6);
+
+						let cy = date.end.slice(0, 4);
+						let cm = date.end.slice(4, 6);
+						let cd = date.end.slice(6);
+						if (GameData.DXSet.year == ly) {
+							GameData.DXSet.month = lm;
+							GameData.DXSet.day = ld;
+							this.boxs[3].getChildByName('label').getComponent(cc.Label).string = lm;
+							this.boxs[4].getChildByName('label').getComponent(cc.Label).string = ld;
+						} else if (GameData.DXSet.year == cy) {
+							GameData.DXSet.month = '1';
+							GameData.DXSet.day = '1';
+							this.boxs[3].getChildByName('label').getComponent(cc.Label).string = '1';
+							this.boxs[4].getChildByName('label').getComponent(cc.Label).string = '1';
+						} else {
+							GameData.DXSet.month = '9';
+							GameData.DXSet.day = '10';
+							this.boxs[3].getChildByName('label').getComponent(cc.Label).string = '9';
+							this.boxs[4].getChildByName('label').getComponent(cc.Label).string = '10';
+						}
+
+					} else {
+						GameData.DXSet.month = '1';
+						GameData.DXSet.day = '1';
+						this.boxs[3].getChildByName('label').getComponent(cc.Label).string = '1';
+						this.boxs[4].getChildByName('label').getComponent(cc.Label).string = '1';
+					}
+
 				}
 			} else if (this.setProId == 3) {
 				GameData.DXSet.month = str;

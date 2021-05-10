@@ -407,6 +407,7 @@ export default class NewClass extends cc.Component {
 				//console.log(JSON.stringify(info));
 				if (!info.items || info.items.length <= 0) {
 					console.log('获取的行情为空');
+					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空' + JSON.stringify(data));
 					GameCfg.GAMEFUPAN = false;
 					GlobalEvent.emit(EventCfg.LOADINGHIDE);
 					return;
@@ -415,7 +416,7 @@ export default class NewClass extends cc.Component {
 					info.items.forEach(el => {
 						// {"code":2000042,"ktype":"Day","timestamp":"1577235900","open":3112,"close":3116,"high":3120,"low":3112,"volume":"15032"},
 						let data = {
-							day: el.timestamp,
+							day: el.timestamp + '',
 							open: el.open,
 							close: el.close,
 							high: el.high,
@@ -436,7 +437,7 @@ export default class NewClass extends cc.Component {
 					for (let index = 0; index < info.items.length;) {
 						if (index + t - 1 < info.items.length) {
 							let el = info.items[index];
-							let day = el.timestamp;
+							let day = el.timestamp + '';
 							let open = el.open;
 							let close = info.items[index + t - 1].close;
 

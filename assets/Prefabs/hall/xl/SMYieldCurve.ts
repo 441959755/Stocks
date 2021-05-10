@@ -130,7 +130,7 @@ export default class NewClass extends cc.Component {
             las[1].getComponent(cc.Label).string = '练习次数:' + this.daysData[pos1].count;
             las[2].getComponent(cc.Label).string = '初始资金:' + this.daysData[pos1].user_capital;
             las[3].getComponent(cc.Label).string = '最终资金:' + this.daysData[pos1].endMoney;
-            las[4].getComponent(cc.Label).string = '收    益:' + this.daysData[pos1].rate;
+            las[4].getComponent(cc.Label).string = '收    益:' + (this.daysData[pos1].rate).toFixed(2) + '%';
             this.pos = pos1;
         }
     }

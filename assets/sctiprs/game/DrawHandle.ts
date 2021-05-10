@@ -382,9 +382,9 @@ export default class NewClass extends cc.Component {
 
     // ma boll
     setMALabelInfo(index) {
-        if (GameCfg.MaList[index]) {
+        if (this.MaList[index]) {
             this.MAla.forEach((el, t) => {
-                if (GameCfg.MaList[index][t]) {
+                if (this.MaList[index][t]) {
                     //   el.node.color = GameCfg.MAColor[t];
                     if (t == 0) {
                         if (GameCfg.GameType == pb.GameType.ShuangMang) {
@@ -543,7 +543,7 @@ export default class NewClass extends cc.Component {
 
     //曲线MA
     onDrawMA(index) {
-        if (!GameCfg.MaList[index]) {
+        if (!this.MaList[index]) {
             return;
         }
         let drawBox = this.drawMA.node.height, initY = 0, madata = 0;
@@ -552,10 +552,10 @@ export default class NewClass extends cc.Component {
 
             if (index >= GameCfg.MAs[i]) {
                 //平均的位置
-                let preMAY = (GameCfg.MaList[index - 1][i] - this.bottomValue) / this.disValue * drawBox + initY;
+                let preMAY = (this.MaList[index - 1][i] - this.bottomValue) / this.disValue * drawBox + initY;
                 let preMAX = 10 + ((index - 1 - cc.ext.beg_end[0]) * cc.ext.hz_width) + cc.ext.hz_width / 2;
 
-                let MAY = (GameCfg.MaList[index][i] - this.bottomValue) / this.disValue * drawBox + initY;
+                let MAY = (this.MaList[index][i] - this.bottomValue) / this.disValue * drawBox + initY;
                 let MAX = 10 + ((index - cc.ext.beg_end[0]) * cc.ext.hz_width) + cc.ext.hz_width / 2;
 
                 this.drawMA.strokeColor = GameCfg.MAColor[i];

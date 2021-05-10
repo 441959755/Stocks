@@ -6,6 +6,7 @@ import { pb } from '../../protos/proto';
 
 import GameCfgText from '../GameText';
 import HttpUtils from '../common/net/HttpUtils';
+import ComUtils from '../Utils/ComUtils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -28,9 +29,16 @@ export default class NewClass extends cc.Component {
 	_tid = 0;
 
 	onLoad() {
+		GameCfgText.qihuoList.forEach(el => {
+			let items = el.split('|');
+			if (items[4] == 'DC') {
+				this.DCArr.type.push(items[1]);
+			}
+
+		});
 		this.DCArr = {
 			name: '大连商品',
-			code: ['A', 'B', 'C', 'CS', 'M', 'Y', 'L', 'V', 'BB', 'FB', 'I', 'J', 'JM', 'JD', 'P', 'PP', 'EB', 'EG', 'RR'],
+
 			type: [
 				'黄大豆一号',
 				'黄大豆二号',
@@ -118,6 +126,7 @@ export default class NewClass extends cc.Component {
 				'10',
 			]
 		};
+
 
 		this.SCArr = {
 			name: '上海商品',
@@ -254,7 +263,7 @@ export default class NewClass extends cc.Component {
 				'普麦主连',
 				'郑棉主连',
 				'棉纱主连',
-				'油菜籽主连',
+				//'油菜籽主连',
 				'菜籽主连',
 
 				'白糖主连',
@@ -267,7 +276,7 @@ export default class NewClass extends cc.Component {
 				//'动力煤主连',
 				'苹果主连',
 				//	'籼稻主连',
-				'菜籽油主连',
+				'菜油主连',
 				'动煤主连',
 				'红枣主连',
 				'尿素主连',
@@ -283,7 +292,7 @@ export default class NewClass extends cc.Component {
 				'PML1',
 				'CFL1',
 				'CYL1',
-				'RSL1',
+				//	'RSL1',
 				'RML1',
 
 				'SRL1',
@@ -312,7 +321,7 @@ export default class NewClass extends cc.Component {
 				'普麦指数',
 				'棉花指数',
 				'棉纱指数',
-				'油菜籽指数',
+				//	'油菜籽指数',
 				'菜籽粕指数',
 
 				'白糖指数',
@@ -325,7 +334,7 @@ export default class NewClass extends cc.Component {
 				//	'动力煤指数',
 				'苹果指数',
 				//	'籼稻指数',
-				'菜籽油指数',
+				'菜油指数',
 				'动煤指数',
 				'红枣指数',
 				'尿素指数',
@@ -341,7 +350,7 @@ export default class NewClass extends cc.Component {
 				'PML9',
 				'CFL9',
 				'CYL9',
-				'RSL9',
+				//	'RSL9',
 				'RML9',
 
 				'SRL9',
@@ -412,6 +421,115 @@ export default class NewClass extends cc.Component {
 		this.box[5].getChildByName('label').getComponent(cc.Label).string = setDatas.day;
 		this.box[6].getChildByName('label').getComponent(cc.Label).string = setDatas.KLine;
 		this.box[7].getChildByName('label').getComponent(cc.Label).string = setDatas.ZLine;
+	}
+
+	/**
+ * 根据期货的名字获取股票的范围
+ */
+	getQHTimeByCodeName(index) {
+		let year = this.box[3].getChildByName('label').getComponent(cc.Label).string;
+		let month = this.box[4].getChildByName('label').getComponent(cc.Label).string;
+		let day = this.box[5].getChildByName('label').getComponent(cc.Label).string;
+		let downBox = this.downBox[index];
+		let content = cc.find('New ScrollView/view/content', downBox);
+
+		if (GameData.QHSet.HY == '随机') {
+			let f = new Date();
+			let y = f.getFullYear() + '';
+			let m = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+			let d = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
+			let sc = ComUtils.GetPreMonthDay(y + '-' + m + '-' + d, 2);
+			y = sc.y;
+			m = sc.m;
+			d = sc.d;
+			let t;
+			if (index == 3) {
+				t = y;
+			} else if (index == 4) {
+				if (year != '随机' && year == y) {
+					t = m;
+				} else {
+					t = 12;
+				}
+			} else if (index == 5) {
+				if (year == y && parseInt(month) == m) {
+					t = d;
+				} else {
+					var temp = new Date(parseInt(y), parseInt(m + ''), 0);
+					let day1 = temp.getDate();
+					t = day1;
+				}
+			}
+			content.children.forEach(el => {
+				let str = el.getComponent(cc.Label).string;
+				if (str == '随机') {
+				} else if (parseInt(str) > t) {
+					el.color = new cc.Color().fromHEX('#a0a0a0');
+					el.getComponent(cc.Button).interactable = false;
+					el.getComponent(cc.Button).enableAutoGrayEffect = true;
+				} else {
+					el.color = cc.Color.WHITE;
+					el.getComponent(cc.Button).interactable = true;
+					el.getComponent(cc.Button).enableAutoGrayEffect = false;
+				}
+			})
+		} else {
+			let date = GameCfgText.QHGetTimeByCodeName(GameData.QHSet.HY);
+			let ly = date.start.slice(0, 4);
+			let lm = date.start.slice(4, 6);
+			let ld = date.start.slice(6);
+
+			let cy = date.end.slice(0, 4);
+			let cm = date.end.slice(4, 6);
+			let cd = date.end.slice(6);
+			let min, max;
+			if (index == 3) {
+				min = ly;
+				max = cy;
+			} else if (index == 4) {
+				if (parseInt(year) == parseInt(ly)) {
+					min = lm;
+					max = 12;
+				} else if (parseInt(year) == parseInt(cy)) {
+					max = cm;
+					min = 1;
+				} else {
+					min = 1;
+					max = 12;
+				}
+
+			} else if (index == 5) {
+				if (parseInt(year) == parseInt(ly) && parseInt(month) == parseInt(lm)) {
+					min = ld;
+					var temp = new Date(parseInt(year), parseInt(month), 0);
+					let day = temp.getDate();
+					max = day;
+				} else if (parseInt(year) == parseInt(cy) && parseInt(month) == parseInt(cm)) {
+					max = cd;
+					min = 1;
+				} else {
+					var temp = new Date(parseInt(year), parseInt(month), 0);
+					let day1 = temp.getDate();
+					min = 1;
+					max = day1;
+				}
+			}
+			content.children.forEach(el => {
+				let str = el.getComponent(cc.Label).string;
+				if (str == '随机') {
+
+				} else if (parseInt(str) < parseInt(min) || parseInt(str) > parseInt(max)) {
+					el.color = new cc.Color().fromHEX('#a0a0a0');
+					el.getComponent(cc.Button).interactable = false;
+					el.getComponent(cc.Button).enableAutoGrayEffect = true;
+				} else {
+					el.color = cc.Color.WHITE;
+					el.getComponent(cc.Button).interactable = true;
+					el.getComponent(cc.Button).enableAutoGrayEffect = false;
+				}
+			})
+		}
+
 	}
 
 	onSelectBoxClick(evetn, data) {
@@ -558,32 +676,50 @@ export default class NewClass extends cc.Component {
 
 		}
 
-		else if (this._tid == 5) {
+		else if (this._tid == 5 || this._tid == 3 || this._tid == 4) {
 			let year = this.box[3].getChildByName('label').getComponent(cc.Label).string;
 			let month = this.box[4].getChildByName('label').getComponent(cc.Label).string;
-			var temp = new Date(parseInt(year), parseInt(month), 0);
-			let day = temp.getDate();
-			let content = cc.find('New ScrollView/view/content', this.downBox[this._tid]);
-			content.children.forEach(el => {
-				let str = el.getComponent(cc.Label).string;
-				if (parseInt(str) > day) {
-					if (this._tid == 5) {
+			if (this._tid == 4 || this._tid == 5) {
+				if (year == '随机') {
+					content.children.forEach(el => {
+
 						el.color = new cc.Color().fromHEX('#a0a0a0');
 						el.getComponent(cc.Button).interactable = false;
 						el.getComponent(cc.Button).enableAutoGrayEffect = true;
-					} else {
-						this.box[5].getChildByName('label').getComponent(cc.Label).string = day + '';
-					}
-				} else {
-					if (this._tid == 5) {
-						el.color = cc.Color.WHITE;
-						el.getComponent(cc.Button).interactable = true;
-						el.getComponent(cc.Button).enableAutoGrayEffect = false;
-					} else {
-						this.box[5].getChildByName('label').getComponent(cc.Label).string = day + '';
-					}
+					})
+					return;
 				}
-			});
+			}
+			this.getQHTimeByCodeName(this._tid);
+			// if (year == '随机' || month == '--') {
+			// 	return;
+			// }
+			// var temp = new Date(parseInt(year), parseInt(month), 0);
+			// let day = temp.getDate();
+			// if (this._tid == 5) {
+			// 	let content = cc.find('New ScrollView/view/content', this.downBox[this._tid]);
+			// 	content.children.forEach(el => {
+			// 		let str = el.getComponent(cc.Label).string;
+			// 		if (parseInt(str) > day) {
+			// 			if (this._tid == 5) {
+			// 				el.color = new cc.Color().fromHEX('#a0a0a0');
+			// 				el.getComponent(cc.Button).interactable = false;
+			// 				el.getComponent(cc.Button).enableAutoGrayEffect = true;
+			// 			} else {
+			// 				this.box[5].getChildByName('label').getComponent(cc.Label).string = day + '';
+			// 			}
+			// 		} else {
+			// 			if (this._tid == 5) {
+			// 				el.color = cc.Color.WHITE;
+			// 				el.getComponent(cc.Button).interactable = true;
+			// 				el.getComponent(cc.Button).enableAutoGrayEffect = false;
+			// 			} else {
+			// 				this.box[5].getChildByName('label').getComponent(cc.Label).string = day + '';
+			// 			}
+			// 		}
+			// 	});
+			// }
+
 		}
 	}
 
@@ -607,6 +743,7 @@ export default class NewClass extends cc.Component {
 
 			let str = event.target.getComponent(cc.Label).string;
 			la.string = str;
+			this.downBox[this._tid].active = false;
 			if (this._tid == 0) {
 				GameData.QHSet.JYS = str;
 				this.box[1].getChildByName('label').getComponent(cc.Label).string = '随机';
@@ -616,37 +753,112 @@ export default class NewClass extends cc.Component {
 				this.box[2].getChildByName('label').getComponent(cc.Label).string = '随机';
 			} else if (this._tid == 2) {
 				GameData.QHSet.HY = str;
-			} else if (this._tid == 3) {
-				GameData.QHSet.year = str;
-				if (GameData.QHSet.year == '随机') {
-					this.box[4].getChildByName('label').getComponent(cc.Label).string = '随机';
-					this.box[5].getChildByName('label').getComponent(cc.Label).string = '随机';
+				if (GameData.QHSet.year != '随机') {
+					if (GameData.QHSet.HY != '随机') {
+						let date = GameCfgText.QHGetTimeByCodeName(GameData.QHSet.HY);
+						let ly = date.start.slice(0, 4);
+						let lm = date.start.slice(4, 6);
+						let ld = date.start.slice(6);
+						let st;
+						st = GameData.QHSet.year;
+						if (GameData.QHSet.month.length == 1) {
+							st += ('0' + GameData.QHSet.month);
+						} else {
+							st += (GameData.QHSet.month);
+						}
+
+						if (GameData.QHSet.day.length == 1) {
+							st += ('0' + GameData.QHSet.day)
+						} else {
+							st += GameData.QHSet.day;
+						}
+
+
+						if (parseInt(st) < parseInt(date.start) || parseInt(st) > parseInt(date.end)) {
+							GameData.QHSet.year = ly;
+							GameData.QHSet.month = lm;
+							GameData.QHSet.day = ld;
+							this.box[3].getChildByName('label').getComponent(cc.Label).string = ly;
+							this.box[4].getChildByName('label').getComponent(cc.Label).string = lm;
+							this.box[5].getChildByName('label').getComponent(cc.Label).string = ld;
+						}
+					}
 				}
-			} else if (this._tid == 4) {
-				GameData.QHSet.month = str;
-				let downBox = this.downBox[this._tid];
+
+			} else if (this._tid == 3 || this._tid == 4 || this._tid == 5) {
+				if (this._tid == 3) {
+					GameData.QHSet.year = str;
+					if (GameData.QHSet.year == '随机') {
+						this.box[4].getChildByName('label').getComponent(cc.Label).string = '随机';
+						this.box[5].getChildByName('label').getComponent(cc.Label).string = '随机';
+					} else {
+						if (GameData.QHSet.HY != '随机') {
+							let date = GameCfgText.QHGetTimeByCodeName(GameData.QHSet.HY);
+
+							let ly = date.start.slice(0, 4);
+							let lm = date.start.slice(4, 6);
+							let ld = date.start.slice(6);
+
+							let cy = date.end.slice(0, 4);
+							let cm = date.end.slice(4, 6);
+							let cd = date.end.slice(6);
+							if (GameData.QHSet.year == ly) {
+								GameData.QHSet.month = lm;
+								GameData.QHSet.day = ld;
+								this.box[4].getChildByName('label').getComponent(cc.Label).string = lm;
+								this.box[5].getChildByName('label').getComponent(cc.Label).string = ld;
+							} else if (GameData.QHSet.year == cy) {
+								GameData.QHSet.month = '1';
+								GameData.QHSet.day = '1';
+								this.box[4].getChildByName('label').getComponent(cc.Label).string = '1';
+								this.box[5].getChildByName('label').getComponent(cc.Label).string = '1';
+							} else {
+								GameData.QHSet.month = '9';
+								GameData.QHSet.day = '10';
+								this.box[4].getChildByName('label').getComponent(cc.Label).string = '9';
+								this.box[5].getChildByName('label').getComponent(cc.Label).string = '10';
+							}
+
+						} else {
+							GameData.QHSet.month = '1';
+							GameData.QHSet.day = '1';
+							this.box[4].getChildByName('label').getComponent(cc.Label).string = '1';
+							this.box[5].getChildByName('label').getComponent(cc.Label).string = '1';
+						}
+
+					}
+				} else if (this._tid == 4) {
+
+					GameData.QHSet.month = str;
+				} else if (this._tid == 5) {
+					GameData.QHSet.day = str;
+				}
+
 				let year = this.box[3].getChildByName('label').getComponent(cc.Label).string;
 				let month = this.box[4].getChildByName('label').getComponent(cc.Label).string;
+				if (year == '随机' || month == '--') {
+					return;
+				}
 				var temp = new Date(parseInt(year), parseInt(month), 0);
 				let day = temp.getDate();
+				let downBox = this.downBox[5];
 				let content = cc.find('New ScrollView/view/content', downBox);
-
+				let str1 = this.box[5].getChildByName('label').getComponent(cc.Label).string
 				content.children.forEach(el => {
-					let str = el.getComponent(cc.Label).string;
-					if (parseInt(str) > day) {
+
+					if (parseInt(str1) > day) {
 						this.box[5].getChildByName('label').getComponent(cc.Label).string = day + '';
 					} else {
-						this.box[5].getChildByName('label').getComponent(cc.Label).string = day + '';
+						//this.box[5].getChildByName('label').getComponent(cc.Label).string = day + '';
 					}
 				});
-			} else if (this._tid == 5) {
-				GameData.QHSet.day = str;
-			} else if (this._tid == 6) {
+			}
+			else if (this._tid == 6) {
 				GameData.QHSet.KLine = parseInt(str);
 			} else if (this._tid == 7) {
 				GameData.QHSet.ZLine = str;
 			}
-			this.downBox[this._tid].active = false;
+
 		}
 		//
 		else if (name == 'DCnode') {
@@ -858,13 +1070,22 @@ export default class NewClass extends cc.Component {
 			if (GameData.QHSet.month == '随机') {
 				month = '01';
 			} else {
-				month = GameData.QHSet.month;
+				if (GameData.QHSet.month.length <= 1) {
+					month = '0' + GameData.QHSet.month;
+				} else {
+					month = GameData.QHSet.month;
+				}
 			}
 
 			if (GameData.QHSet.day == '随机') {
 				day = '01';
 			} else {
-				day = GameData.QHSet.day;
+				if (GameData.QHSet.day.length <= 1) {
+					day = '0' + GameData.QHSet.day;
+				} else {
+					day = GameData.QHSet.day;
+				}
+
 			}
 
 			if (parseInt(start) > parseInt(year + month + day)) {

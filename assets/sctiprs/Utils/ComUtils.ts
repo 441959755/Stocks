@@ -150,4 +150,56 @@ export default class ComUtils {
 		return time;
 	}
 
+	/**
+	 * 获取当前年月日
+	 */
+	public static getCurYearMonthDay() {
+		let f = new Date();
+		let year = f.getFullYear();
+		let month = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+
+		let day = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
+		let str = year + '' + month + '' + day;
+		return str;
+
+	}
+
+	/**
+	 *获取几个月前的输入日期
+	 *{param:DateTime} date 输入日期(YYYY-MM-DD)
+	 *{param:number } monthNum 月数
+	 */
+	public static GetPreMonthDay(date, monthNum) {
+		var dateArr = date.split('-');
+		var year = dateArr[0]; //获取当前日期的年份
+		var month = dateArr[1]; //获取当前日期的月份
+		var day = dateArr[2]; //获取当前日期的日
+		let day1 = new Date(year, month, 0);
+		let days = day1.getDate(); //获取当前日期中月的天数
+		var year2 = year;
+		var month2 = parseInt(month) - monthNum;
+		if (month2 <= 0) {
+			var absM = Math.abs(month2);
+			year2 = parseInt(year2) - Math.ceil(absM / 12 == 0 ? 1 : parseInt(absM + '') / 12);
+			month2 = 12 - (absM % 12);
+		}
+		var day2 = day;
+		let days21 = new Date(year2, month2, 0);
+		let days2 = days21.getDate();
+		if (day2 > days2) {
+			day2 = days2;
+		}
+		// let month3
+		// if (month2 < 10) {
+		// 	month3 = '0' + month2;
+		// }
+		//var t2 = year2 + '-' + month2 + '-' + day2;
+		let data = {
+			y: year2,
+			m: month2,
+			d: day2,
+		}
+		return data;
+	}
+
 }

@@ -18,7 +18,7 @@ export default class LLWUtils {
     static getUUID() {
         let _uuid = cc.sys.localStorage.getItem('_uuid');
         if (!_uuid) {
-            _uuid = this.initUUID();
+            _uuid = new Date().getTime() + '';
             cc.sys.localStorage.setItem('_uuid', _uuid);
         }
         return _uuid;
