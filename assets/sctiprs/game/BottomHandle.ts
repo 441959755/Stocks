@@ -135,7 +135,7 @@ export default class NewClass extends cc.Component {
 
 					let curClose = parseFloat(this.gpData[GameCfg.huizhidatas - 1].close);
 					//	let preClose = parseFloat(this.gpData[this.buyData[this.buyData.length - 1]].close);
-					let preClose = this.onjunjia('B');
+					let preClose = this.onjunjia();
 					let rate = (curClose - preClose) / preClose;
 
 					if (rate < 0) {
@@ -146,6 +146,12 @@ export default class NewClass extends cc.Component {
 					GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
 				}
 				GameCfg.finalfund = this.ziChan;
+
+				this.curMrPJPrice = 0;   //当前平均买入价格
+
+				this.curMrCount = [];
+
+				this.curMcCount = 0;
 			},
 			this
 		);
@@ -300,10 +306,6 @@ export default class NewClass extends cc.Component {
 		}
 
 		this.roundNumber = this.gpData.length - GameCfg.huizhidatas;
-
-		if (this.roundNumber <= 0) {
-			this.roundNumber = 1;
-		}
 
 		this.tipsLabel.string = '回合数：' + this.roundNumber;
 		this.tipsLabel1.string = '回合数：' + this.roundNumber;
@@ -928,7 +930,8 @@ export default class NewClass extends cc.Component {
 		}
 	}
 
-	onjunjia(str) {
+	//买入的均价
+	onjunjia() {
 		let data = this.gpData;
 		let mrZE = 0, mrZL = 0;
 		//	if(this.curMrPJPrice==0){
@@ -951,13 +954,18 @@ export default class NewClass extends cc.Component {
 		//	}
 		// //卖出
 		// else {
-
-
-
 		// }
-
 		//	}
+	}
 
+	onCurPositionRete() {
+		let data = this.gpData;
+		let curClose = parseFloat(data[GameCfg.huizhidatas].close);
+
+		let preClose = this.onjunjia();
+
+		let rate = (curClose - preClose) / preClose;
+		return rate;
 	}
 
 
@@ -967,14 +975,7 @@ export default class NewClass extends cc.Component {
 		if (state == 'mrBtn' || state == 'mrBtn1') {
 			this.buyData.push(GameCfg.huizhidatas - 1);
 
-			let curClose = parseFloat(data[GameCfg.huizhidatas].close);
-
-			//let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
-			//let pjz=
-
-			let preClose = this.onjunjia('B');
-
-			let rate = (curClose - preClose) / preClose;
+			let rate = this.onCurPositionRete();
 			if (state == 'mrBtn1') {
 				rate = -rate;
 			}
@@ -1019,7 +1020,7 @@ export default class NewClass extends cc.Component {
 			// 	mrZE += (el * data[this.buyData[index]].close);
 			// })
 			// let preClose = mrZE / mrZL;
-			let preClose = this.onjunjia('B');
+			let preClose = this.onjunjia();
 			//	this.onjunjia('S');
 			let prezl = 0;
 			this.curMrCount.forEach((el) => {
@@ -1027,9 +1028,9 @@ export default class NewClass extends cc.Component {
 			})
 			this.curMrCount = [];
 			if (prezl - this.curMcCount > 0) {
-				this.curMrPJPrice = (preClose * prezl - curClose * this.curMcCount) / (prezl - this.curMcCount);
+				//this.curMrPJPrice = (preClose * prezl - curClose * this.curMcCount) / (prezl - this.curMcCount);
+				this.curMrPJPrice = preClose;
 				this.curMrCount.push(prezl - this.curMcCount);
-
 			}
 
 			let rate = (curClose - preClose) / preClose;
@@ -1039,11 +1040,14 @@ export default class NewClass extends cc.Component {
 			//  console.log('(' + curClose + '-' + preClose + ')' + "/" + preClose);
 
 			GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
+
+			//盈利亏损次数
 			if (rate < 0) {
 				GameCfg.lossCount++;
 			} else {
 				GameCfg.profitCount++;
 			}
+
 			GlobalEvent.emit('updateRate', [rate, GameCfg.allRate]);
 
 			if (this.keMcCount == 0) {
@@ -1059,8 +1063,10 @@ export default class NewClass extends cc.Component {
 				GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 2;
 				GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
 			} else {
+
 				this.rateItem.end = GameCfg.huizhidatas - 1;
 				let start = GameCfg.huizhidatas;
+
 				this.rateItem = {
 					rate: rate,
 					start: start,
@@ -1073,6 +1079,10 @@ export default class NewClass extends cc.Component {
 				GameCfg.history.deal[GameCfg.history.deal.length] = [GameCfg.history.deal[GameCfg.history.deal.length - 1][0]];
 				//   GameCfg.history.deal[GameCfg.history.deal.length][0] = GameCfg.history.deal[GameCfg.history.deal.length - 1][0];
 				// GameCfg.history.deal[GameCfg.history.deal.length][1] = [rate];
+
+				//下个持仓率
+				let rate1 = this.onCurPositionRete();
+				GlobalEvent.emit('updateRate', [rate]);
 			}
 			this.rateItem.rate = rate;
 			if (GameCfg.GameType == pb.GameType.QiHuo) {
@@ -1086,6 +1096,7 @@ export default class NewClass extends cc.Component {
 
 			this.buyData = [];
 		}
+
 		//观望
 		else if (state == 'cyBtn') {
 			if (!this.isFlag) {
@@ -1093,7 +1104,7 @@ export default class NewClass extends cc.Component {
 			}
 			let curClose = parseFloat(data[GameCfg.huizhidatas].close);
 			//let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
-			let preClose = this.onjunjia('B');
+			let preClose = this.onjunjia();
 			let rate = (curClose - preClose) / preClose;
 			if (this._KKCount > 0) {
 				rate = -rate;
