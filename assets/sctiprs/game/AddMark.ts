@@ -39,6 +39,7 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GAMEFUPAN) {
             this.createFuPanData();
         }
+        GlobalEvent.on(EventCfg.ADDMARKHIDEORSHOW, (flag) => { this.node.active = flag }, this);
     }
 
     //复盘的本地数据
@@ -218,6 +219,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.GAMEFUPAN);
         GlobalEvent.off(EventCfg.ONADDMARK);
         GlobalEvent.off(EventCfg.ONMARKUPDATE);
+        GlobalEvent.off(EventCfg.ADDMARKHIDE);
     }
 
     // update (dt) {}

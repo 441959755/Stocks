@@ -75,4 +75,6 @@ export default {
 
     enterGameCache: null,  //进入游戏的选择
 
+    selectZline: 0,
+
 }

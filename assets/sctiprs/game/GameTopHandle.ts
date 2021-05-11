@@ -73,9 +73,9 @@ export default class NewClass extends cc.Component {
 
             //数据统计
             let statBtn = this.rightNode.getChildByName('statBtn');
-
+            colseBtn.active = false;
             if (GameCfg.GameType == pb.GameType.ShuangMang) {
-                colseBtn.active = true;
+
                 btnMyspic.active = false;
                 statBtn.active = false;
             }
@@ -162,7 +162,7 @@ export default class NewClass extends cc.Component {
             }
             // btnMyspic.active = false;
             // statBtn.active = true;
-            // colseBtn.active = true;
+            colseBtn.active = false;
         }
 
 

@@ -422,6 +422,7 @@ export default class NewClass extends cc.Component {
 							high: el.high,
 							low: el.low,
 							value: el.volume,
+							ccl_hold: el.ccl_hold,
 						};
 						GameCfg.data[0].data.push(data);
 					});
@@ -461,6 +462,7 @@ export default class NewClass extends cc.Component {
 								high: high,
 								low: low,
 								value: volume,
+								ccl_hold: el.ccl_hold,
 							}
 							GameCfg.data[0].data.push(data);
 							index += t;

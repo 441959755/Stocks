@@ -15,6 +15,9 @@ const { ccclass, property } = cc._decorator;
 export default class NewClass extends cc.Component {
 
     @property(cc.Label)
+    nameTipsLabel: cc.Label = null;
+
+    @property(cc.Label)
     nameLabel: cc.Label = null;
 
     @property(cc.Label)
@@ -38,26 +41,33 @@ export default class NewClass extends cc.Component {
     @property(cc.Sprite)
     headImg: cc.Sprite = null;
 
-    @property(cc.RichText)
-    AllRise: cc.RichText = null;
+    @property(cc.Label)
+    AllRise: cc.Label = null;
 
-    @property(cc.RichText)
-    yingCont: cc.RichText = null;
+    @property(cc.Label)
+    yingCont: cc.Label = null;
 
-    @property(cc.RichText)
-    kunCount: cc.RichText = null;
+    @property(cc.Label)
+    kunCount: cc.Label = null;
 
-    @property(cc.RichText)
-    zijin: cc.RichText = null;
+    // @property(cc.Label)
+    // zijin: cc.Label = null;
 
-    @property(cc.RichText)
-    yingZiJin: cc.RichText = null;
+    // @property(cc.Label)
+    // yingZiJin: cc.Label = null;
 
-    @property(cc.RichText)
-    AllZiJin: cc.RichText = null;
+    // @property(cc.Label)
+    // AllZiJin: cc.Label = null;
+
+    @property(cc.Node)
+    qhxl_kui: cc.Node = null;
+
+    @property(cc.Node)
+    qhxl_zhuan: cc.Node = null;
 
     protected onEnable() {
         ActionUtils.openLayer(this.node);
+
 
         let gpData = GameCfg.data[0].data;
 
@@ -71,6 +81,8 @@ export default class NewClass extends cc.Component {
         this.expLabel.string = 'EXP:' + GameData.properties[1] + '/' + max_exp;
 
         this.userName.string = GameData.userName;
+
+
 
         this.nameLabel.string = GameCfg.data[0].name;
 
@@ -99,6 +111,8 @@ export default class NewClass extends cc.Component {
 
         //总盈利率
         let all = (GameCfg.allRate * 100).toFixed(2);
+        console.log('all' + all);
+        console.log('GameCfg.allRate' + GameCfg.allRate);
         this.AllRise.string = all + '%';
 
         if (parseFloat(all) > 0) {
@@ -124,9 +138,18 @@ export default class NewClass extends cc.Component {
             this.kunCount.node.color = cc.Color.WHITE;
         }
 
-        this.zijin.string = GameData.properties[3];
-        this.yingZiJin.string = parseInt((GameCfg.finalfund - GameCfg.ziChan) + '') + '';
-        this.AllZiJin.string = parseInt(GameCfg.finalfund + '') + '';
+        // this.zijin.string = GameData.properties[3];
+        // this.yingZiJin.string = parseInt((GameCfg.finalfund - GameCfg.ziChan) + '') + '';
+        // this.AllZiJin.string = parseInt(GameCfg.finalfund + '') + '';
+
+        if (GameCfg.GameType == pb.GameType.QiHuo) {
+            this.nameTipsLabel.string = '品种名称';
+            if (parseInt(all) > 0) {
+                this.qhxl_zhuan.active = true;
+            } else if (parseInt(all) < 0) {
+                this.qhxl_kui.active = false;
+            }
+        }
 
         //复盘中不保存记录
         if (!GameCfg.GAMEFUPAN) {

@@ -112,6 +112,12 @@ export default class NewClass extends cc.Component {
 	@property(cc.Node)
 	qhNode: cc.Node = null;
 
+	curMrPJPrice = 0;   //当前平均买入价格
+
+	curMrCount = [];
+
+	curMcCount = 0;
+
 	onLoad() {
 		this.gpData = GameCfg.data[0].data;
 
@@ -128,7 +134,8 @@ export default class NewClass extends cc.Component {
 					this.keMcCount = 0;
 
 					let curClose = parseFloat(this.gpData[GameCfg.huizhidatas - 1].close);
-					let preClose = parseFloat(this.gpData[this.buyData[this.buyData.length - 1]].close);
+					//	let preClose = parseFloat(this.gpData[this.buyData[this.buyData.length - 1]].close);
+					let preClose = this.onjunjia('B');
 					let rate = (curClose - preClose) / preClose;
 
 					if (rate < 0) {
@@ -294,6 +301,10 @@ export default class NewClass extends cc.Component {
 
 		this.roundNumber = this.gpData.length - GameCfg.huizhidatas;
 
+		if (this.roundNumber <= 0) {
+			this.roundNumber = 1;
+		}
+
 		this.tipsLabel.string = '回合数：' + this.roundNumber;
 		this.tipsLabel1.string = '回合数：' + this.roundNumber;
 
@@ -438,6 +449,8 @@ export default class NewClass extends cc.Component {
 					this.keMcCount += this.keMrCount;
 					this.keMrCount = 0;
 					this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
+					this.curMrCount.push(this.keMcCount);
+					//	console.log(JSON.stringify(this.curMrCount));
 					//  console.log(this.gpData[GameCfg.huizhidatas - 1].open);
 					// if (this.ziChan <= 0) {
 					//     this.ziChan = 0;
@@ -450,6 +463,9 @@ export default class NewClass extends cc.Component {
 
 					this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
 					//   console.log(this.gpData[GameCfg.huizhidatas - 1].close);
+					//	this.curMrCount = [];
+					this.curMcCount = JSON.parse(JSON.stringify(this.keMcCount));
+					//	console.log(JSON.stringify(this.curMcCount));
 
 					this.keMcCount = 0;
 					this.gwBtn.node.active = true;
@@ -471,6 +487,8 @@ export default class NewClass extends cc.Component {
 				this.ziChan -= this.keMrCount * this.gpData[GameCfg.huizhidatas - 1].close;
 				this.keMrCount = 0;
 				// console.log(this.gpData[GameCfg.huizhidatas - 2].open);
+				this.curMrCount.push(this.curMrCount);
+				//	console.log(JSON.stringify(this.curMrCount));
 				this.mrBtn.interactable = false;
 				this.mrBtn.enableAutoGrayEffect = true;
 				this.mcBtn.interactable = true;
@@ -484,9 +502,10 @@ export default class NewClass extends cc.Component {
 				this.mcBtn.interactable = false;
 				this.mcBtn.enableAutoGrayEffect = true;
 				this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
-
+				//	this.curMrCount = [];
 				//    console.log(this.gpData[GameCfg.huizhidatas - 1].close);
-
+				this.curMcCount = JSON.parse(JSON.stringify(this.keMcCount));
+				//console.log(JSON.stringify(this.curMcCount));
 				this.keMcCount = 0;
 				this.setRoundNumber('mcBtn');
 			}
@@ -500,7 +519,7 @@ export default class NewClass extends cc.Component {
 
 				this.keMcCount += count;
 				this.keMrCount -= count;
-
+				this.curMrCount.push(count);
 				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
 				//  this.keMrCount -= this.keMrCount * (3 / 4);
 
@@ -518,7 +537,7 @@ export default class NewClass extends cc.Component {
 
 				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
 				//  this.keMcCount -= this.keMcCount * (3 / 4);
-
+				this.curMcCount = mc;
 				if (this.keMcCount <= 0) {
 					this.mcBtn.interactable = false;
 					this.mcBtn.enableAutoGrayEffect = true;
@@ -526,6 +545,7 @@ export default class NewClass extends cc.Component {
 				this.mrBtn.interactable = true;
 				this.mrBtn.enableAutoGrayEffect = false;
 				this.setRoundNumber('mcBtn');
+				//	this.onsetCurMrCount(mc);
 			}
 			this.selectBox.active = false;
 		} else if (name == 'fcBtn2') {
@@ -535,7 +555,7 @@ export default class NewClass extends cc.Component {
 				this.keMcCount += count;
 				this.keMrCount -= count;
 				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
-
+				this.curMrCount.push(count);
 				if (this.keMrCount < 100) {
 					this.mrBtn.interactable = false;
 					this.mrBtn.enableAutoGrayEffect = true;
@@ -549,6 +569,7 @@ export default class NewClass extends cc.Component {
 				this.keMcCount -= mc;
 
 				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
+				this.curMcCount = mc;
 				if (this.keMcCount <= 0) {
 					this.mcBtn.interactable = false;
 					this.mcBtn.enableAutoGrayEffect = true;
@@ -556,6 +577,7 @@ export default class NewClass extends cc.Component {
 				this.mrBtn.interactable = true;
 				this.mrBtn.enableAutoGrayEffect = false;
 				this.setRoundNumber('mcBtn');
+				//	this.onsetCurMrCount(mc);
 			}
 			this.selectBox.active = false;
 		} else if (name == 'fcBtn3') {
@@ -564,7 +586,7 @@ export default class NewClass extends cc.Component {
 				this.keMcCount += count;
 				this.keMrCount -= count;
 				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
-
+				this.curMrCount.push(count);
 				if (this.keMrCount < 100) {
 					this.mrBtn.interactable = false;
 					this.mrBtn.enableAutoGrayEffect = true;
@@ -578,7 +600,7 @@ export default class NewClass extends cc.Component {
 				this.keMcCount -= mc;
 
 				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
-
+				this.curMcCount = mc;
 				if (this.keMcCount <= 0) {
 					this.mcBtn.interactable = false;
 					this.mcBtn.enableAutoGrayEffect = true;
@@ -586,6 +608,7 @@ export default class NewClass extends cc.Component {
 				this.mrBtn.interactable = true;
 				this.mrBtn.enableAutoGrayEffect = false;
 				this.setRoundNumber('mcBtn');
+				//this.onsetCurMrCount(mc);
 			}
 			this.selectBox.active = false;
 		} else if (name == 'fcBtn4') {
@@ -594,7 +617,7 @@ export default class NewClass extends cc.Component {
 				this.keMcCount += count;
 				this.keMrCount -= count;
 				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
-
+				this.curMrCount.push(count);
 				if (this.keMrCount < 100) {
 					this.mrBtn.interactable = false;
 					this.mrBtn.enableAutoGrayEffect = true;
@@ -608,7 +631,7 @@ export default class NewClass extends cc.Component {
 				this.keMcCount -= mc;
 
 				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
-
+				this.curMcCount = mc;
 				if (this.keMcCount <= 0) {
 					this.mcBtn.interactable = false;
 					this.mcBtn.enableAutoGrayEffect = true;
@@ -616,6 +639,7 @@ export default class NewClass extends cc.Component {
 				this.mrBtn.interactable = true;
 				this.mrBtn.enableAutoGrayEffect = false;
 				this.setRoundNumber('mcBtn');
+				//	this.onsetCurMrCount(mc);
 			}
 			this.selectBox.active = false;
 		} else if (name == 'fcBtn5') {
@@ -624,7 +648,7 @@ export default class NewClass extends cc.Component {
 				this.keMcCount += count;
 				this.keMrCount -= count;
 				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
-
+				this.curMrCount.push(count);
 				if (this.keMrCount < 100) {
 					this.mrBtn.interactable = false;
 					this.mrBtn.enableAutoGrayEffect = true;
@@ -638,6 +662,7 @@ export default class NewClass extends cc.Component {
 				this.keMcCount -= mc;
 
 				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
+				this.curMcCount = mc;
 				if (this.keMcCount <= 0) {
 					this.mcBtn.interactable = false;
 					this.mcBtn.enableAutoGrayEffect = true;
@@ -645,6 +670,7 @@ export default class NewClass extends cc.Component {
 				this.mrBtn.interactable = true;
 				this.mrBtn.enableAutoGrayEffect = false;
 				this.setRoundNumber('mcBtn');
+				//	this.onsetCurMrCount(mc);
 			}
 			this.selectBox.active = false;
 		} else if (name == 'xl_fupan_pre') {
@@ -655,7 +681,10 @@ export default class NewClass extends cc.Component {
 
 		//开多
 		else if (name == 'qhxl_kd') {
+
 			if (this._KKCount != 0) {
+				//	this.curMrCount.push(this.curMrCount);
+				this.curMcCount = 3;
 				this._KKCount = 0;
 				this._kdCount = 0;
 
@@ -706,6 +735,7 @@ export default class NewClass extends cc.Component {
 			// }
 			else {
 				this._kdCount += 1;
+				this.curMrCount.push(1);
 				let nodes = this.kdNode.children;
 				nodes.forEach(el => {
 					el.active = false;
@@ -732,9 +762,11 @@ export default class NewClass extends cc.Component {
 		else if (name == 'qhxl_fs') {
 			GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
 			if (this._kdCount != 0) {
+				this.curMcCount = this._kdCount;
 				this.setRoundNumber('mcBtn', 1);
 				this._KKCount = this._kdCount;
 				this._kdCount = 0;
+				this.curMrCount.push(this._KKCount);
 				let kkNodes = this.kkNode.children;
 				kkNodes.forEach(el => {
 					el.active = false;
@@ -755,9 +787,12 @@ export default class NewClass extends cc.Component {
 				nodes[4].active = true;
 				this.setRoundNumber('mrBtn1');
 			} else {
+				this.curMcCount = this._KKCount;
+
 				this.setRoundNumber('mcBtn1', 1);
 				this._kdCount = this._KKCount;
 				this._KKCount = 0;
+				this.curMrCount.push(this._kdCount);
 				let nodes = this.kdNode.children;
 				nodes.forEach(el => {
 					el.active = false;
@@ -781,7 +816,9 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
 		}
 		else if (name == 'qhxl_kk') {
+
 			if (this._kdCount != 0) {
+				this.curMcCount = 3;
 				this._kdCount = 0;
 				this._KKCount = 0;
 
@@ -832,6 +869,7 @@ export default class NewClass extends cc.Component {
 			// }
 			else {
 				this._KKCount += 1;
+				this.curMrCount.push(1);
 				let nodes = this.kkNode.children;
 				nodes.forEach(el => {
 					el.active = false;
@@ -876,6 +914,53 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.emit(EventCfg.SLGEVENTNOTICE);
 	}
 
+	onsetCurMrCount(mc) {
+		let num = 0;
+		this.curMrCount.forEach(el => {
+			num += el;
+		})
+		num -= mc;
+		if (num <= 0) {
+			this.curMrCount = [];
+		} else {
+			this.curMrCount = [];
+			this.curMrCount.push(num);
+		}
+	}
+
+	onjunjia(str) {
+		let data = this.gpData;
+		let mrZE = 0, mrZL = 0;
+		//	if(this.curMrPJPrice==0){
+		//买入
+		//	if (str == 'B') {
+		this.curMrCount.forEach((el, index) => {
+			mrZL += el;
+			if (index == 0 && this.curMrPJPrice != 0) {
+				mrZE += (el * this.curMrPJPrice);
+			} else {
+				//console.log()
+				if (this.buyData[index] && data[this.buyData[index]]) {
+					mrZE += (el * data[this.buyData[index]].close);
+				}
+
+			}
+
+		})
+		return mrZE / mrZL;
+		//	}
+		// //卖出
+		// else {
+
+
+
+		// }
+
+		//	}
+
+	}
+
+
 	onBuyOrSell(state) {
 		//买入
 		let data = this.gpData;
@@ -884,7 +969,10 @@ export default class NewClass extends cc.Component {
 
 			let curClose = parseFloat(data[GameCfg.huizhidatas].close);
 
-			let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
+			//let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
+			//let pjz=
+
+			let preClose = this.onjunjia('B');
 
 			let rate = (curClose - preClose) / preClose;
 			if (state == 'mrBtn1') {
@@ -924,7 +1012,25 @@ export default class NewClass extends cc.Component {
 
 			let curClose = parseFloat(data[GameCfg.huizhidatas - 1].close);
 
-			let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
+			//let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
+			// let mrZE = 0, mrZL = 0;
+			// this.curMrCount.forEach((el, index) => {
+			// 	mrZL += el;
+			// 	mrZE += (el * data[this.buyData[index]].close);
+			// })
+			// let preClose = mrZE / mrZL;
+			let preClose = this.onjunjia('B');
+			//	this.onjunjia('S');
+			let prezl = 0;
+			this.curMrCount.forEach((el) => {
+				prezl += el;
+			})
+			this.curMrCount = [];
+			if (prezl - this.curMcCount > 0) {
+				this.curMrPJPrice = (preClose * prezl - curClose * this.curMcCount) / (prezl - this.curMcCount);
+				this.curMrCount.push(prezl - this.curMcCount);
+
+			}
 
 			let rate = (curClose - preClose) / preClose;
 			if (state == 'mcBtn1') {
@@ -977,6 +1083,8 @@ export default class NewClass extends cc.Component {
 			}
 
 			GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
+
+			this.buyData = [];
 		}
 		//观望
 		else if (state == 'cyBtn') {
@@ -984,7 +1092,8 @@ export default class NewClass extends cc.Component {
 				return;
 			}
 			let curClose = parseFloat(data[GameCfg.huizhidatas].close);
-			let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
+			//let preClose = parseFloat(data[this.buyData[this.buyData.length - 1]].close);
+			let preClose = this.onjunjia('B');
 			let rate = (curClose - preClose) / preClose;
 			if (this._KKCount > 0) {
 				rate = -rate;

@@ -3,6 +3,7 @@ import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
 import { pb } from "../../protos/proto";
 import GameData from '../GameData';
+import ComUtils from '../Utils/ComUtils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -45,21 +46,25 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     zfLa: cc.Label = null;
 
+    @property(cc.Label)
+    ccLa: cc.Label = null;
 
 
     onLoad() {
+        //  let la1 = this.tipsText[0].node.parent.getChildByName('tips').children[7].getComponent(cc.Label);
         GlobalEvent.on('updataLabel', (inde) => {
 
             let datas = GameCfg.data[0].data;
             let info = [];
             if (datas[inde]) {
                 if (GameCfg.GAMEFUPAN) {
-                    info.push(datas[inde].day);
+                    //  info.push(datas[inde].day);
+                    info.push(ComUtils.formatTime(datas[inde].day));
                 } else {
-                    if (GameCfg.GameSet.year = '随机') {
+                    if (GameCfg.GameSet.year == '随机') {
                         info.push('****/**/**');
                     } else {
-                        info.push(datas[inde].day);
+                        info.push(ComUtils.formatTime(datas[inde].day));
                     }
 
                 }
@@ -68,14 +73,23 @@ export default class NewClass extends cc.Component {
                 info.push(parseFloat(datas[inde].high).toFixed(2));
                 info.push(parseFloat(datas[inde].low).toFixed(2));
                 info.push(parseFloat(datas[inde].close).toFixed(2));
-                info.push((parseInt(datas[inde].value) / 10000).toFixed(2) + 'w');
+                // if (parseInt(datas[inde].value) >= 10000) {
+                //     info.push((parseInt(datas[inde].value) / 10000).toFixed(2) + 'w');
+                // } else {
+                info.push((parseInt(datas[inde].value)));
+                //  }
+
 
                 if (GameCfg.GameType == pb.GameType.QiHuo) {
-                    info.push('--');
-                    info.push('--');
+                    info.push(parseInt(parseInt(datas[inde].volume) + ''));
+                    info.push(parseInt(parseInt(datas[inde].ccl_hold) + ''));
+                    this.ccLa.string = '持仓：';
+                    //   this.hsLa.string = parseInt(datas[inde].ccl_hold + '') + '';
                 } else {
-                    info.push(parseInt(parseInt(datas[inde].price) / 10000 + '') + 'w');
+                    //   info.push(parseInt(parseInt(datas[inde].price) / 10000 + '') + 'w');
+                    info.push(parseInt(datas[inde].price));
                     info.push(parseFloat(datas[inde].Rate).toFixed(2) + '%');
+                    this.hsLa.string = parseFloat(datas[inde].Rate).toFixed(2) + '%';
                 }
 
 
@@ -83,8 +97,7 @@ export default class NewClass extends cc.Component {
                 info.push(zd.toFixed(2));
                 let zf = zd / datas[inde - 1].close;
                 info.push(zf.toFixed(2));
-
-                this.hsLa.string = parseFloat(datas[inde].Rate).toFixed(2) + '%';
+                //  this.hsLa.string = parseFloat(datas[inde].Rate).toFixed(2) + '%';
                 if (info[9] < 0) {
                     this.zfLa.node.color = new cc.Color().fromHEX('#76B87E');
                 } else {

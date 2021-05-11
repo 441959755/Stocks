@@ -41,7 +41,7 @@ Socket.prototype = {
 				if (!self.heartbeat) {
 					self.heartbeat = setInterval(() => {
 						socket.send(pb.MessageId.Sync_C2S_GameHeart, null, null);
-						console.log('发送心跳');
+						//	console.log('发送心跳');
 					}, 5000);
 				}
 
@@ -130,7 +130,7 @@ Socket.prototype = {
 			proto && (this.ws.send(proto.buffer.slice(proto.byteOffset, proto.byteLength + proto.byteOffset)));
 
 		} else {
-			console.log("send error. readyState = ", this.ws.readyState);
+			console.log("send error. readyState ");
 
 			this.ws.close();
 			// setTimeout(() => {
@@ -177,7 +177,7 @@ Socket.prototype = {
 		//this.ws.responseType = "arraybuffer"
 		this.ws.onmessage = this.message.bind(this);
 		this.ws.onopen = this.connected.bind(this);
-		this.ws.onerror = function(event) {
+		this.ws.onerror = function (event) {
 			console.log('ws onerror');
 			//  this.ws.close();
 		}
@@ -204,7 +204,7 @@ function Socket(host) {
 
 var socket = null;
 
-module.exports = function(host) {
+module.exports = function (host) {
 	if (!socket) {
 		socket = new Socket(host);
 	}

@@ -93,25 +93,35 @@ export default class ComUtils {
 	 * return 2001/01/02
 	 */
 	public static formatTime(time) {
+		time = (time + '').replace(/-/g, '');
+		//if (GameCfg.GameType == pb.GameType.QiHuo) {
+		if (time.length < 10) {
+			time = time + '';
+			let year = time.slice(0, 4);
+			let month = time.slice(4, 6);
+			let day = time.slice(6);
+			time = year + '/' + month + '/' + day;
+		} else if (time.length >= 10) {
 
-		if (GameCfg.GameType == pb.GameType.QiHuo) {
-			if ((time + '').length < 10) {
-				time = time + '';
-				let year = time.slice(0, 4);
-				let month = time.slice(4, 6);
-				let day = time.slice(6);
-				time = year + '/' + month + '/' + day;
+			let f = new Date(parseInt(time) * 1000);
+			let year = f.getFullYear();
+			let month = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+
+			let day = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
+
+			if (GameCfg.selectZline == pb.KType.Min5) {
+				var h = f.getHours() >= 10 ? f.getHours() : '0' + f.getHours();
+				var mm = f.getMinutes() >= 10 ? f.getMinutes() : '0' + f.getMinutes();
+				time = year + '/' + month + '/' + day + ' ' + h + ':' + mm;
 			} else {
-				let f = new Date(time);
-				let year = f.getFullYear();
-				let month = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
-
-				let day = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
 				time = year + '/' + month + '/' + day;
 			}
-		} else {
-			time = ((time + '').replace(/-/g, '/'));
+
+
 		}
+		//	} else {
+		//time = ((time + '').replace(/-/g, '/'));
+		//	}
 		return time;
 
 	}
@@ -122,31 +132,32 @@ export default class ComUtils {
 	 * return yymmdd   200010101
 	 */
 	public static fromatTime1(time) {
-		if (GameCfg.GameType == pb.GameType.QiHuo) {
-			if ((time + '').length < 10) {
-				time = time + '';
-				let year = time.slice(0, 4);
-				let month = time.slice(4, 6);
-				let day = time.slice(6);
-				time = year + '' + month + '' + day;
-			} else {
-				let f = new Date(time);
-				let year = f.getFullYear();
-				let month = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
-
-				let day = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
-				time = year + '' + month + '' + day;
-			}
+		time = ((time + '').replace(/-/g, ''));
+		//	if (GameCfg.GameType == pb.GameType.QiHuo) {
+		if ((time + '').length < 10) {
+			time = time + '';
+			let year = time.slice(0, 4);
+			let month = time.slice(4, 6);
+			let day = time.slice(6);
+			time = year + '' + month + '' + day;
 		} else {
+			let f = new Date(time * 1000);
+			let year = f.getFullYear();
+			let month = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
 
-			// let ye = time.getFullYear();
-			// let mon = time.getMonth() + 1 >= 10 ? time.getMonth() + 1 : '0' + (time.getMonth() + 1);
-
-			// let da = time.getDate() >= 10 ? time.getDate() : '0' + (time.getDate());
-
-			// time = ye + '' + mon + '' + da;
-			time = ((time + '').replace(/-/g, ''));
+			let day = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
+			time = year + '' + month + '' + day;
 		}
+		// } else {
+
+		// 	// let ye = time.getFullYear();
+		// 	// let mon = time.getMonth() + 1 >= 10 ? time.getMonth() + 1 : '0' + (time.getMonth() + 1);
+
+		// 	// let da = time.getDate() >= 10 ? time.getDate() : '0' + (time.getDate());
+
+		// 	// time = ye + '' + mon + '' + da;
+		// 	time = ((time + '').replace(/-/g, ''));
+		// }
 		return time;
 	}
 

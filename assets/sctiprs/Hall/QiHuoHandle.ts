@@ -29,53 +29,6 @@ export default class NewClass extends cc.Component {
 	_tid = 0;
 
 	onLoad() {
-		GameCfgText.qihuoList.forEach(el => {
-			let items = el.split('|');
-			if (items[4] == 'DC') {
-				let str = items[1].slice(-items.length, -2);
-				if (this.DCArr.type.indexOf(str) == -1) {
-					this.DCArr.type.push(str);
-				}
-				if (!this.DCArr.main[this.DCArr.type.length - 1]) {
-					this.DCArr.main.push(items[1]);
-				} else {
-					this.DCArr.index.push(items[1]);
-				}
-			}
-			else if (items[4] == 'SC') {
-				let str = items[1].slice(-items.length, -2);
-				if (this.SCArr.type.indexOf(str) == -1) {
-					this.SCArr.type.push(str);
-				}
-				if (!this.SCArr.main[this.SCArr.type.length - 1]) {
-					this.SCArr.main.push(items[1]);
-				} else {
-					this.SCArr.index.push(items[1]);
-				}
-			}
-			else if (items[4] == 'ZC') {
-				let str = items[1].slice(-items.length, -2);
-				if (this.ZCArr.type.indexOf(str) == -1) {
-					this.ZCArr.type.push(str);
-				}
-				if (!this.ZCArr.main[this.ZCArr.type.length - 1]) {
-					this.ZCArr.main.push(items[1]);
-				} else {
-					this.ZCArr.index.push(items[1]);
-				}
-
-			} else if (items[4] == 'ZJS') {
-				let str = items[1].slice(-items.length, -2);
-				if (this.XJArr.type.indexOf(str) == -1) {
-					this.XJArr.type.push(str);
-				}
-				if (!this.XJArr.main[this.XJArr.type.length - 1]) {
-					this.XJArr.main.push(items[1]);
-				} else {
-					this.XJArr.index.push(items[1]);
-				}
-			}
-		});
 		this.DCArr = {
 			name: '大连商品',
 
@@ -126,7 +79,58 @@ export default class NewClass extends cc.Component {
 			name: '中金所',
 			type: [],
 			main: [],
+			index: [
+
+			],
 		};
+		GameCfgText.qihuoList.forEach(el => {
+			let items = el.split('|');
+			if (items[4] == 'DC') {
+				let str = items[1].slice(-items.length, -2);
+				if (this.DCArr.type.indexOf(str) == -1) {
+					this.DCArr.type.push(str);
+				}
+				if (!this.DCArr.main[this.DCArr.type.length - 1]) {
+					this.DCArr.main.push(items[1]);
+				} else {
+					this.DCArr.index.push(items[1]);
+				}
+			}
+			else if (items[4] == 'SC') {
+				let str = items[1].slice(-items.length, -2);
+				if (this.SCArr.type.indexOf(str) == -1) {
+					this.SCArr.type.push(str);
+				}
+				if (!this.SCArr.main[this.SCArr.type.length - 1]) {
+					this.SCArr.main.push(items[1]);
+				} else {
+					this.SCArr.index.push(items[1]);
+				}
+			}
+			else if (items[4] == 'ZC') {
+				let str = items[1].slice(-items.length, -2);
+				if (this.ZCArr.type.indexOf(str) == -1) {
+					this.ZCArr.type.push(str);
+				}
+				if (!this.ZCArr.main[this.ZCArr.type.length - 1]) {
+					this.ZCArr.main.push(items[1]);
+				} else {
+					this.ZCArr.index.push(items[1]);
+				}
+
+			} else if (items[4] == 'ZJS') {
+				//	let str = items[1].slice(-items.length, -2);
+				//	if (this.XJArr.type.indexOf(str) == -1) {
+				this.XJArr.type.push(items[1]);
+				//	}
+				//	if (!this.XJArr.main[this.XJArr.type.length - 1]) {
+				this.XJArr.main.push(items[1]);
+				// } else {
+				// 	this.XJArr.index.push(items[1]);
+				// }
+			}
+		});
+
 	}
 
 	onEnable() {
@@ -356,23 +360,23 @@ export default class NewClass extends cc.Component {
 				let arr = [];
 				if (this.DCArr.type.indexOf(GameData.QHSet.LXPZ) != -1) {
 					let index = this.DCArr.type.indexOf(GameData.QHSet.LXPZ);
-					arr.push(this.DCArr.main[index]);
-					arr.push(this.DCArr.index[index]);
+					this.DCArr.main[index] && arr.push(this.DCArr.main[index]);
+					this.DCArr.index[index] && arr.push(this.DCArr.index[index]);
 				}
 				else if (this.SCArr.type.indexOf(GameData.QHSet.LXPZ) != -1) {
 					let index = this.SCArr.type.indexOf(GameData.QHSet.LXPZ);
-					arr.push(this.SCArr.main[index]);
-					arr.push(this.SCArr.index[index]);
+					this.SCArr.main[index] && arr.push(this.SCArr.main[index]);
+					this.SCArr.index[index] && arr.push(this.SCArr.index[index]);
 				}
 				else if (this.XJArr.type.indexOf(GameData.QHSet.LXPZ) != -1) {
 					let index = this.XJArr.type.indexOf(GameData.QHSet.LXPZ);
-					arr.push(this.XJArr.main[index]);
-					arr.push(this.XJArr.index[index]);
+					this.XJArr.main[index] && arr.push(this.XJArr.main[index]);
+					this.XJArr.index[index] && arr.push(this.XJArr.index[index]);
 				}
 				else if (this.ZCArr.type.indexOf(GameData.QHSet.LXPZ) != -1) {
 					let index = this.ZCArr.type.indexOf(GameData.QHSet.LXPZ);
-					this.ZCArr.main && (arr.push(this.ZCArr.main[index]));
-					this.ZCArr.index && (arr.push(this.ZCArr.index[index]));
+					this.ZCArr.main[index] && (arr.push(this.ZCArr.main[index]));
+					this.ZCArr.index[index] && (arr.push(this.ZCArr.index[index]));
 				}
 
 				if (nodes.length < arr.length) {
@@ -442,6 +446,40 @@ export default class NewClass extends cc.Component {
 		}
 	}
 
+	onAutoSetTime() {
+		if (GameData.QHSet.year != '随机') {
+			if (GameData.QHSet.HY != '随机') {
+				let date = GameCfgText.QHGetTimeByCodeName(GameData.QHSet.HY);
+				let ly = date.start.slice(0, 4);
+				let lm = date.start.slice(4, 6);
+				let ld = date.start.slice(6);
+				let st;
+				st = GameData.QHSet.year;
+				if (GameData.QHSet.month.length == 1) {
+					st += ('0' + GameData.QHSet.month);
+				} else {
+					st += (GameData.QHSet.month);
+				}
+
+				if (GameData.QHSet.day.length == 1) {
+					st += ('0' + GameData.QHSet.day)
+				} else {
+					st += GameData.QHSet.day;
+				}
+
+
+				if (parseInt(st) < parseInt(date.start) || parseInt(st) > parseInt(date.end)) {
+					GameData.QHSet.year = ly;
+					GameData.QHSet.month = lm;
+					GameData.QHSet.day = ld;
+					this.box[3].getChildByName('label').getComponent(cc.Label).string = ly;
+					this.box[4].getChildByName('label').getComponent(cc.Label).string = lm;
+					this.box[5].getChildByName('label').getComponent(cc.Label).string = ld;
+				}
+			}
+		}
+	}
+
 	onBtnClick(event, data) {
 		let name = event.target.name;
 
@@ -467,42 +505,32 @@ export default class NewClass extends cc.Component {
 				GameData.QHSet.JYS = str;
 				this.box[1].getChildByName('label').getComponent(cc.Label).string = '随机';
 				this.box[2].getChildByName('label').getComponent(cc.Label).string = '随机';
+				GameData.QHSet.HY = '随机';
+				GameData.QHSet.LXPZ = '随机';
 			} else if (this._tid == 1) {
 				GameData.QHSet.LXPZ = str;
-				this.box[2].getChildByName('label').getComponent(cc.Label).string = '随机';
+				if (this.DCArr.type.indexOf(str) != -1) {
+					let t = this.DCArr.type.indexOf(str);
+					this.box[2].getChildByName('label').getComponent(cc.Label).string = this.DCArr.main[t];
+					GameData.QHSet.HY = this.DCArr.main[t];
+				} else if (this.SCArr.type.indexOf(str) != -1) {
+					let t = this.SCArr.type.indexOf(str);
+					this.box[2].getChildByName('label').getComponent(cc.Label).string = this.SCArr.main[t];
+					GameData.QHSet.HY = this.SCArr.main[t];
+				} else if (this.XJArr.type.indexOf(str) != -1) {
+					let t = this.XJArr.type.indexOf(str);
+					this.box[2].getChildByName('label').getComponent(cc.Label).string = this.XJArr.main[t];
+					GameData.QHSet.HY = this.XJArr.main[t];
+				} else if (this.ZCArr.type.indexOf(str) != -1) {
+					let t = this.ZCArr.type.indexOf(str);
+					this.box[2].getChildByName('label').getComponent(cc.Label).string = this.ZCArr.main[t];
+					GameData.QHSet.HY = this.ZCArr.main[t];
+				}
+				this.onAutoSetTime();
+
 			} else if (this._tid == 2) {
 				GameData.QHSet.HY = str;
-				if (GameData.QHSet.year != '随机') {
-					if (GameData.QHSet.HY != '随机') {
-						let date = GameCfgText.QHGetTimeByCodeName(GameData.QHSet.HY);
-						let ly = date.start.slice(0, 4);
-						let lm = date.start.slice(4, 6);
-						let ld = date.start.slice(6);
-						let st;
-						st = GameData.QHSet.year;
-						if (GameData.QHSet.month.length == 1) {
-							st += ('0' + GameData.QHSet.month);
-						} else {
-							st += (GameData.QHSet.month);
-						}
-
-						if (GameData.QHSet.day.length == 1) {
-							st += ('0' + GameData.QHSet.day)
-						} else {
-							st += GameData.QHSet.day;
-						}
-
-
-						if (parseInt(st) < parseInt(date.start) || parseInt(st) > parseInt(date.end)) {
-							GameData.QHSet.year = ly;
-							GameData.QHSet.month = lm;
-							GameData.QHSet.day = ld;
-							this.box[3].getChildByName('label').getComponent(cc.Label).string = ly;
-							this.box[4].getChildByName('label').getComponent(cc.Label).string = lm;
-							this.box[5].getChildByName('label').getComponent(cc.Label).string = ld;
-						}
-					}
-				}
+				this.onAutoSetTime();
 
 			} else if (this._tid == 3 || this._tid == 4 || this._tid == 5) {
 				if (this._tid == 3) {
@@ -849,7 +877,7 @@ export default class NewClass extends cc.Component {
 
 		GameCfg.data[0].code = items[0];
 		GameCfg.data[0].data = [];
-		GameCfg.data[0].name = items[1];
+		GameCfg.data[0].name = items[1] + '  ' + items[2] + items[3];
 		console.log(JSON.stringify(data));
 		GameCfg.enterGameCache = data;
 

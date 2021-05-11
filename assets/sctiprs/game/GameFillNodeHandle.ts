@@ -13,6 +13,12 @@ export default class NewClass extends cc.Component {
 
 
     onLoad() {
+        GlobalEvent.on(EventCfg.FILLNODEISSHOW, (flag) => {
+            this.node.active = flag;
+        }, this);
+
+
+
         GlobalEvent.on(EventCfg.ADDFILLCOLOR, (data) => {
             if (!data) {
                 return;
@@ -62,5 +68,6 @@ export default class NewClass extends cc.Component {
 
     protected onDestroy() {
         GlobalEvent.off(EventCfg.ADDFILLCOLOR);
+        GlobalEvent.off(EventCfg.FILLNODEISSHOW);
     }
 }
