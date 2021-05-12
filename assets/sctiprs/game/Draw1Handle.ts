@@ -156,6 +156,7 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on('onQHDraw', () => {
             this.initData();
+            this.onDraw();
         }, this);
 
     }
@@ -215,7 +216,7 @@ export default class NewClass extends cc.Component {
             this.MACDLabels[2].string = arr[2] + ': ' + this.MACDList[index].toFixed(2);
         }
 
-        let arr1 = ['KDJ(9,3,3)', 'k', 'j'];
+        let arr1 = ['KDJ(9,3,3) K', 'D', 'J'];
         if (this.Klist[index]) {
             this.KDJLabels[0].string = arr1[0] + ': ' + this.Klist[index].toFixed(2);
         }
@@ -353,14 +354,21 @@ export default class NewClass extends cc.Component {
             this.minJ = Math.min(this.minJ, this.jList[index]);
             this.maxJ = Math.max(this.maxJ, this.jList[index]);
 
-            this.minRs6 = Math.min(this.minRs6, this.Rs6[index]);
-            this.maxRs6 = Math.max(this.maxRs6, this.Rs6[index]);
+            if (this.Rs6[index]) {
+                this.minRs6 = Math.min(this.minRs6, this.Rs6[index]);
+                this.maxRs6 = Math.max(this.maxRs6, this.Rs6[index]);
+            }
 
-            this.minRs12 = Math.min(this.minRs12, this.Rs12[index]);
-            this.maxRs12 = Math.max(this.maxRs12, this.Rs12[index]);
+            if (this.Rs12[index]) {
+                this.minRs12 = Math.min(this.minRs12, this.Rs12[index]);
+                this.maxRs12 = Math.max(this.maxRs12, this.Rs12[index]);
+            }
 
-            this.minRs24 = Math.min(this.minRs24, this.Rs24[index]);
-            this.maxRs24 = Math.max(this.maxRs24, this.Rs24[index]);
+            if (this.Rs24[index]) {
+                this.minRs24 = Math.min(this.minRs24, this.Rs24[index]);
+                this.maxRs24 = Math.max(this.maxRs24, this.Rs24[index]);
+            }
+
 
         }
         this.setLabelValue();

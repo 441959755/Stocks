@@ -89,6 +89,13 @@ export default class NewClass extends cc.Component {
 				let str = items[1].slice(-items.length, -2);
 				if (this.DCArr.type.indexOf(str) == -1) {
 					this.DCArr.type.push(str);
+				} else {
+					let t = this.DCArr.type.indexOf(str);
+					if (!this.DCArr.main[t]) {
+						this.DCArr.main[t] = items[1];
+					} else {
+						this.DCArr.index[t] = items[1];
+					}
 				}
 				if (!this.DCArr.main[this.DCArr.type.length - 1]) {
 					this.DCArr.main.push(items[1]);
@@ -100,6 +107,13 @@ export default class NewClass extends cc.Component {
 				let str = items[1].slice(-items.length, -2);
 				if (this.SCArr.type.indexOf(str) == -1) {
 					this.SCArr.type.push(str);
+				} else {
+					let t = this.SCArr.type.indexOf(str);
+					if (!this.SCArr.main[t]) {
+						this.SCArr.main[t] = items[1];
+					} else {
+						this.SCArr.index[t] = items[1];
+					}
 				}
 				if (!this.SCArr.main[this.SCArr.type.length - 1]) {
 					this.SCArr.main.push(items[1]);
@@ -111,6 +125,13 @@ export default class NewClass extends cc.Component {
 				let str = items[1].slice(-items.length, -2);
 				if (this.ZCArr.type.indexOf(str) == -1) {
 					this.ZCArr.type.push(str);
+				} else {
+					let t = this.ZCArr.type.indexOf(str);
+					if (!this.ZCArr.main[t]) {
+						this.ZCArr.main[t] = items[1];
+					} else {
+						this.ZCArr.index[t] = items[1];
+					}
 				}
 				if (!this.ZCArr.main[this.ZCArr.type.length - 1]) {
 					this.ZCArr.main.push(items[1]);
@@ -196,6 +217,16 @@ export default class NewClass extends cc.Component {
 					el.getComponent(cc.Button).enableAutoGrayEffect = false;
 				}
 			})
+
+			let downBox1 = this.downBox[7];
+			let content1 = cc.find('New ScrollView/view/content', downBox1);
+			content1.children.forEach(el => {
+				el.color = cc.Color.WHITE;
+				el.getComponent(cc.Button).interactable = true;
+				el.getComponent(cc.Button).enableAutoGrayEffect = false;
+				//}
+			})
+
 		} else {
 			let date = GameCfgText.QHGetTimeByCodeName(GameData.QHSet.HY);
 			let ly = date.start.slice(0, 4);
@@ -251,6 +282,46 @@ export default class NewClass extends cc.Component {
 					el.getComponent(cc.Button).enableAutoGrayEffect = false;
 				}
 			})
+
+			let downBox1 = this.downBox[7];
+			let content1 = cc.find('New ScrollView/view/content', downBox1);
+			if (date.type == 2) {
+				content1.children.forEach(el => {
+					let str = el.getComponent(cc.Label).string;
+					if (str == '随机') {
+
+					} else if (str == '日线') {
+						this.box[7].getChildByName('label').getComponent(cc.Label).string = '5分钟K';
+						GameData.QHSet.ZLine = '5分钟K';
+						el.color = new cc.Color().fromHEX('#a0a0a0');
+						el.getComponent(cc.Button).interactable = false;
+						el.getComponent(cc.Button).enableAutoGrayEffect = true;
+					} else {
+						el.color = cc.Color.WHITE;
+						el.getComponent(cc.Button).interactable = true;
+						el.getComponent(cc.Button).enableAutoGrayEffect = false;
+					}
+				})
+			} else {
+
+				content1.children.forEach(el => {
+					let str = el.getComponent(cc.Label).string;
+					// if (str == '随机') {
+
+					// } else if (str == '日线') {
+					// 	this.box[7].getChildByName('label').getComponent(cc.Label).string = '5分钟K';
+					// 	GameData.QHSet.ZLine = '5分钟K';
+					// 	el.color = new cc.Color().fromHEX('#a0a0a0');
+					// 	el.getComponent(cc.Button).interactable = false;
+					// 	el.getComponent(cc.Button).enableAutoGrayEffect = true;
+					// } else {
+					el.color = cc.Color.WHITE;
+					el.getComponent(cc.Button).interactable = true;
+					el.getComponent(cc.Button).enableAutoGrayEffect = false;
+					//	}
+				})
+			}
+
 		}
 
 	}
@@ -527,10 +598,12 @@ export default class NewClass extends cc.Component {
 					GameData.QHSet.HY = this.ZCArr.main[t];
 				}
 				this.onAutoSetTime();
+				this.getQHTimeByCodeName(this._tid);
 
 			} else if (this._tid == 2) {
 				GameData.QHSet.HY = str;
 				this.onAutoSetTime();
+				this.getQHTimeByCodeName(this._tid);
 
 			} else if (this._tid == 3 || this._tid == 4 || this._tid == 5) {
 				if (this._tid == 3) {
@@ -812,6 +885,13 @@ export default class NewClass extends cc.Component {
 		} else {
 			//	if (GameData.QHSet.ZLine == '日线') {
 			let start = items[5], end = items[6], sc;
+			if (start == '0' || end == '0') {
+				let ts = GameCfgText.QHGetTimeByCodeName(items[1]);
+				start = ts.start;
+				end = ts.end;
+			}
+
+
 			let year, month, day;
 			year = GameData.QHSet.year;
 			if (GameData.QHSet.month == '随机') {

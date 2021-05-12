@@ -205,6 +205,7 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         //返回大厅
         if (name == 'closeBtn') {
+            GameCfg.data[0].data = [];
             GameCfg.huizhidatas = 0;
 
             GameCfg.allRate = 0;

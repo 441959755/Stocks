@@ -26,7 +26,7 @@ export default class NewClass extends cc.Component {
 	@property(cc.Label)
 	userLevel: cc.Label = null;
 
-	protected onLoad() {}
+	protected onLoad() { }
 
 	start() {
 		this.initToggle();
@@ -85,6 +85,7 @@ export default class NewClass extends cc.Component {
 		}
 		//指标
 		else if (name == 'main_xl_zbxl') {
+			return;
 			GlobalEvent.emit('OPENZBLAYER');
 			GameCfg.GameType = pb.GameType.ZhiBiao;
 		}

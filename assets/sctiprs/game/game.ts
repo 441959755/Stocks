@@ -2,6 +2,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
 import { pb } from '../../protos/proto';
+import ComUtils from '../Utils/ComUtils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -22,6 +23,8 @@ export default class NewClass extends cc.Component {
     selectLine: cc.Node = null;   //选择条
 
     onLoad() {
+        ComUtils.onLoadNode();
+        ComUtils.onEvent();
         //游戏结算
         GlobalEvent.on(EventCfg.GAMEOVEER, (flag) => {
             setTimeout(() => {
@@ -39,6 +42,10 @@ export default class NewClass extends cc.Component {
             this.statLayer.active = true;
         }, this);
 
+        GlobalEvent.on(EventCfg.LOADINGHIDE, () => {
+
+        }, this);
+
         this.initData();
 
         this.setColor();
@@ -48,6 +55,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.HELPSHOW);
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
+        ComUtils.onDestory();
     }
 
     setColor() {
@@ -242,5 +250,7 @@ export default class NewClass extends cc.Component {
             this.selectLine.active = true;
         }
     }
+
+
 
 }

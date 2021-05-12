@@ -54,7 +54,7 @@ export default class NewClass extends cc.Component {
         // "userCapital":"100000","userProfit":"800","ts":"1618454133","rank":2}]}
         let sumEar = 0;
         let sumrate = 0;
-        for (let i = 0; i < datas.length; i++) {
+        for (let i = datas.length - 1; i >= 0; i--) {
             let node = cc.instantiate(this.historyItem);
             let nodes = node.children;
             this.content.addChild(node);

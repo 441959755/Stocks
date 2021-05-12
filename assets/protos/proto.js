@@ -9322,7 +9322,6 @@ $root.pb = (function () {
          * @property {number|null} [high] QuoteItemFuture high
          * @property {number|null} [low] QuoteItemFuture low
          * @property {number|Long|null} [volume] QuoteItemFuture volume
-         * @property {number|Long|null} [volVolume] QuoteItemFuture volVolume
          * @property {number|Long|null} [cclHold] QuoteItemFuture cclHold
          */
 
@@ -9406,14 +9405,6 @@ $root.pb = (function () {
         QuoteItemFuture.prototype.volume = $util.Long ? $util.Long.fromBits(0, 0, true) : 0;
 
         /**
-         * QuoteItemFuture volVolume.
-         * @member {number|Long} volVolume
-         * @memberof pb.QuoteItemFuture
-         * @instance
-         */
-        QuoteItemFuture.prototype.volVolume = $util.Long ? $util.Long.fromBits(0, 0, true) : 0;
-
-        /**
          * QuoteItemFuture cclHold.
          * @member {number|Long} cclHold
          * @memberof pb.QuoteItemFuture
@@ -9461,10 +9452,8 @@ $root.pb = (function () {
                 writer.uint32(/* id 7, wireType 1 =*/57).double(message.low);
             if (message.volume != null && Object.hasOwnProperty.call(message, "volume"))
                 writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.volume);
-            if (message.volVolume != null && Object.hasOwnProperty.call(message, "volVolume"))
-                writer.uint32(/* id 9, wireType 0 =*/72).uint64(message.volVolume);
             if (message.cclHold != null && Object.hasOwnProperty.call(message, "cclHold"))
-                writer.uint32(/* id 12, wireType 0 =*/96).uint64(message.cclHold);
+                writer.uint32(/* id 9, wireType 0 =*/72).uint64(message.cclHold);
             return writer;
         };
 
@@ -9524,9 +9513,6 @@ $root.pb = (function () {
                         message.volume = reader.uint64();
                         break;
                     case 9:
-                        message.volVolume = reader.uint64();
-                        break;
-                    case 12:
                         message.cclHold = reader.uint64();
                         break;
                     default:
@@ -9601,9 +9587,6 @@ $root.pb = (function () {
             if (message.volume != null && message.hasOwnProperty("volume"))
                 if (!$util.isInteger(message.volume) && !(message.volume && $util.isInteger(message.volume.low) && $util.isInteger(message.volume.high)))
                     return "volume: integer|Long expected";
-            if (message.volVolume != null && message.hasOwnProperty("volVolume"))
-                if (!$util.isInteger(message.volVolume) && !(message.volVolume && $util.isInteger(message.volVolume.low) && $util.isInteger(message.volVolume.high)))
-                    return "volVolume: integer|Long expected";
             if (message.cclHold != null && message.hasOwnProperty("cclHold"))
                 if (!$util.isInteger(message.cclHold) && !(message.cclHold && $util.isInteger(message.cclHold.low) && $util.isInteger(message.cclHold.high)))
                     return "cclHold: integer|Long expected";
@@ -9692,15 +9675,6 @@ $root.pb = (function () {
                     message.volume = object.volume;
                 else if (typeof object.volume === "object")
                     message.volume = new $util.LongBits(object.volume.low >>> 0, object.volume.high >>> 0).toNumber(true);
-            if (object.volVolume != null)
-                if ($util.Long)
-                    (message.volVolume = $util.Long.fromValue(object.volVolume)).unsigned = true;
-                else if (typeof object.volVolume === "string")
-                    message.volVolume = parseInt(object.volVolume, 10);
-                else if (typeof object.volVolume === "number")
-                    message.volVolume = object.volVolume;
-                else if (typeof object.volVolume === "object")
-                    message.volVolume = new $util.LongBits(object.volVolume.low >>> 0, object.volVolume.high >>> 0).toNumber(true);
             if (object.cclHold != null)
                 if ($util.Long)
                     (message.cclHold = $util.Long.fromValue(object.cclHold)).unsigned = true;
@@ -9745,11 +9719,6 @@ $root.pb = (function () {
                     object.volume = options.longs === String ? "0" : 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
-                    object.volVolume = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.volVolume = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
                     object.cclHold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.cclHold = options.longs === String ? "0" : 0;
@@ -9776,11 +9745,6 @@ $root.pb = (function () {
                     object.volume = options.longs === String ? String(message.volume) : message.volume;
                 else
                     object.volume = options.longs === String ? $util.Long.prototype.toString.call(message.volume) : options.longs === Number ? new $util.LongBits(message.volume.low >>> 0, message.volume.high >>> 0).toNumber(true) : message.volume;
-            if (message.volVolume != null && message.hasOwnProperty("volVolume"))
-                if (typeof message.volVolume === "number")
-                    object.volVolume = options.longs === String ? String(message.volVolume) : message.volVolume;
-                else
-                    object.volVolume = options.longs === String ? $util.Long.prototype.toString.call(message.volVolume) : options.longs === Number ? new $util.LongBits(message.volVolume.low >>> 0, message.volVolume.high >>> 0).toNumber(true) : message.volVolume;
             if (message.cclHold != null && message.hasOwnProperty("cclHold"))
                 if (typeof message.cclHold === "number")
                     object.cclHold = options.longs === String ? String(message.cclHold) : message.cclHold;

@@ -96,15 +96,19 @@ export default class DrawData {
                     }
                     let MBY = 0
                     MBY = (num / N)//- this.bottomValue) / this.disValue * drawBox;
+                    if (index == N - 1) {
+                        this.BollList[index].push(MBY)
+                    } else {
+                        let MD = Math.sqrt(Math.pow(el.close - num / (index + 1), 2) / (N));
 
-                    let MD = Math.sqrt(Math.pow(el.close - num / (index + 1), 2) / (index + 1));
-                    let UP = (num / N) + k * MD;
+                        let UP = this.BollList[index - 1][0] + k * MD;
 
-                    let DN = (num / N) - k * MD;
+                        let DN = this.BollList[index - 1][0] - k * MD;
 
-                    this.BollList[index].push(MBY)
-                    this.BollList[index].push(UP)
-                    this.BollList[index].push(DN)
+                        this.BollList[index].push(MBY)
+                        this.BollList[index].push(UP)
+                        this.BollList[index].push(DN)
+                    }
                 } else {
                     this.BollList.push(null);
                 }

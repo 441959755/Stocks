@@ -140,6 +140,7 @@ export default class GameCfgText {
             let data = {
                 start: null,
                 end: null,
+                type: 1,
             };
             let items = this.qihuoList[index].split('|');
             data.start = items[5];
@@ -164,6 +165,7 @@ export default class GameCfgText {
                     let d = now.getDate();
                     data.end = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
                 }
+                data.type = 2;
             }
 
             return data;

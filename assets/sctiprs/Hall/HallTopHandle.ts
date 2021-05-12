@@ -38,34 +38,34 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         //砖石
-        GlobalEvent.on(EventCfg.BIRCKCHANGE, () => {
-            this.brick.string = GameData.properties[4];
-        }, this);
+        // GlobalEvent.on(EventCfg.BIRCKCHANGE, () => {
+        //     this.brick.string = GameData.properties[4];
+        // }, this);
 
-        //金币
-        GlobalEvent.on(EventCfg.GOLDCHANGE, () => {
-            this.gold.string = GameData.properties[0];
-        }, this);
+        // //金币
+        // GlobalEvent.on(EventCfg.GOLDCHANGE, () => {
+        //     this.gold.string = GameData.properties[0];
+        // }, this);
 
-        //等级
-        GlobalEvent.on(EventCfg.LEVELCHANGE, () => {
-            this.userLevel.string = GameData.properties[2];
-        }, this);
+        // //等级
+        // GlobalEvent.on(EventCfg.LEVELCHANGE, () => {
+        //     this.userLevel.string = GameData.properties[2];
+        // }, this);
 
-        //经验
-        GlobalEvent.on(EventCfg.EXPCHANGE, () => {
-            this.userExp.string = GameData.properties[1] + '/' + GameData.maxExp;
-            this.progr.progress = GameData.properties[1] / GameData.maxExp;
-        }, this);
+        // //经验
+        // GlobalEvent.on(EventCfg.EXPCHANGE, () => {
+        //     this.userExp.string = GameData.properties[1] + '/' + GameData.maxExp;
+        //     this.progr.progress = GameData.properties[1] / GameData.maxExp;
+        // }, this);
 
         // GlobalEvent.on(EventCfg.SHOWOTHERNODE, (other) => {
         //     this.rightNode.active = true;
         //     this.otherSelf = other;
         // }, this);
 
-        GlobalEvent.on(EventCfg.NAMECHANGE, () => {
-            this.UserName.string = GameData.userName;
-        }, this);
+        // GlobalEvent.on(EventCfg.NAMECHANGE, () => {
+        //     this.UserName.string = GameData.userName;
+        // }, this);
 
         //   this.rightNode.active = false;
     }
@@ -134,12 +134,12 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
-        GlobalEvent.off(EventCfg.BIRCKCHANGE);
-        GlobalEvent.off(EventCfg.GOLDCHANGE);
-        GlobalEvent.off(EventCfg.LEVELCHANGE);
-        GlobalEvent.off(EventCfg.EXPCHANGE);
+        // GlobalEvent.off(EventCfg.BIRCKCHANGE);
+        // GlobalEvent.off(EventCfg.GOLDCHANGE);
+        // GlobalEvent.off(EventCfg.LEVELCHANGE);
+        // GlobalEvent.off(EventCfg.EXPCHANGE);
         //   GlobalEvent.off(EventCfg.SHOWOTHERNODE);
-        GlobalEvent.off(EventCfg.NAMECHANGE);
+        // GlobalEvent.off(EventCfg.NAMECHANGE);
     }
 
 }

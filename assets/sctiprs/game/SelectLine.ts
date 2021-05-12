@@ -23,18 +23,6 @@ export default class NewClass extends cc.Component {
 
     end = 0;
 
-    arrMin5 = [];
-
-    arrMin15 = [];
-
-    arrMin30 = [];
-
-    arrMin60 = [];
-
-    arrDay = [];
-
-    arrDay7 = [];
-
     onLoad() {
         if (GameCfg.GameSet.ZKine == '5分钟K') {
             this._selectID = 0;
@@ -73,157 +61,6 @@ export default class NewClass extends cc.Component {
         nodes.forEach(e => {
             e.active = true;
         })
-
-        if (this._selectID == 0) {
-            this.arrMin5 = this.qhData.data;
-
-        }
-        else if (this._selectID == 4) {
-            this.arrDay = this.qhData.data;
-
-
-
-        }
-    }
-
-    getMin15(time) {
-        this.arrMin15 = [];
-        let arr = [];
-        if (this.arrMin5.length > 0) {
-            this.arrMin5.forEach(el => {
-                if (el.day <= time) {
-                    arr.push(el);
-                }
-            })
-        }
-        let r = arr.length % 3;
-        let t = 3;
-        for (let index = r; index < arr.length;) {
-            if (index + t - 1 < arr.length) {
-                let el = arr[index];
-                let day = el.timestamp;
-                let open = el.open;
-                let close = arr[index + t - 1].close;
-
-                let high = 0, low = el.low, volume = 0;
-                for (let i = 0; i < t; i++) {
-                    if (arr[index + i].high >= high) {
-                        high = arr[index + i].high;
-                    }
-
-                    if (arr[index + i].low <= low) {
-                        low = arr[index + i].low;
-                    }
-                    volume += arr[index + i].volume;
-                }
-                let data = {
-                    day: day,
-                    open: open,
-                    close: close,
-                    high: high,
-                    low: low,
-                    value: volume,
-                }
-                this.arrMin15.push(data);
-                index += t;
-            } else {
-                break;
-            }
-        }
-
-    }
-
-    getMin30(time) {
-        this.arrMin30 = [];
-        let arr = [];
-        if (this.arrMin5.length > 0) {
-            this.arrMin5.forEach(el => {
-                if (el.day <= time) {
-                    arr.push(el);
-                }
-            })
-        }
-        let r = arr.length % 6;
-        let t = 6;
-        for (let index = r; index < arr.length;) {
-            if (index + t - 1 < arr.length) {
-                let el = arr[index];
-                let day = el.timestamp;
-                let open = el.open;
-                let close = arr[index + t - 1].close;
-
-                let high = 0, low = el.low, volume = 0;
-                for (let i = 0; i < t; i++) {
-                    if (arr[index + i].high >= high) {
-                        high = arr[index + i].high;
-                    }
-
-                    if (arr[index + i].low <= low) {
-                        low = arr[index + i].low;
-                    }
-                    volume += arr[index + i].volume;
-                }
-                let data = {
-                    day: day,
-                    open: open,
-                    close: close,
-                    high: high,
-                    low: low,
-                    value: volume,
-                }
-                this.arrMin30.push(data);
-                index += t;
-            } else {
-                break;
-            }
-        }
-    }
-
-    getMin60(time) {
-        this.arrMin60 = [];
-        let arr = [];
-        if (this.arrMin5.length > 0) {
-            this.arrMin5.forEach(el => {
-                if (el.day <= time) {
-                    arr.push(el);
-                }
-            })
-        }
-        let r = arr.length % 12;
-        let t = 12;
-        for (let index = r; index < arr.length;) {
-            if (index + t - 1 < arr.length) {
-                let el = arr[index];
-                let day = el.timestamp;
-                let open = el.open;
-                let close = arr[index + t - 1].close;
-
-                let high = 0, low = el.low, volume = 0;
-                for (let i = 0; i < t; i++) {
-                    if (arr[index + i].high >= high) {
-                        high = arr[index + i].high;
-                    }
-
-                    if (arr[index + i].low <= low) {
-                        low = arr[index + i].low;
-                    }
-                    volume += arr[index + i].volume;
-                }
-                let data = {
-                    day: day,
-                    open: open,
-                    close: close,
-                    high: high,
-                    low: low,
-                    value: volume,
-                }
-                this.arrMin60.push(data);
-                index += t;
-            } else {
-                break;
-            }
-        }
-
     }
 
     hideAllNode() {
@@ -253,40 +90,24 @@ export default class NewClass extends cc.Component {
 
 
     onGetData(type) {
+
+        let tt = this.huizhidatas - 1;
+
+        if (GameCfg.GAMEFUPAN) {
+            tt = GameCfg.history.huizhidatas - 1;
+        }
+
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         let time;
-        if ((this.qhData.data[this.huizhidatas - 1].day + '').length < 10) {
-            time = this.qhData.data[this.huizhidatas - 1].day + '';
+        if ((this.qhData.data[tt].day + '').length < 10) {
+            time = this.qhData.data[tt].day + '';
             let year = time.slice(0, 4);
             let month = time.slice(4, 6);
             let day = time.slice(6);
             time = new Date(year + '-' + month + '-' + day).getTime() / 1000;
         } else {
-            time = this.qhData.data[this.qhData.data.length - 1].day;
+            time = this.qhData.data[tt].day;
         }
-
-        if (type < 4 && this.arrMin5.length > 0) {
-            if (type == 0) {
-                // this.getMin15(time);
-                GameCfg.data[0].data = this.arrMin5;
-            }
-            else if (type == 1) {
-                this.getMin15(time);
-                GameCfg.data[0].data = this.arrMin15;
-            }
-            else if (type == 2) {
-                this.getMin30(time);
-                GameCfg.data[0].data = this.arrMin30;
-            } else if (type == 3) {
-                this.getMin60(time);
-                GameCfg.data[0].data = this.arrMin60;
-            }
-            cc.ext.beg_end[0] = 0;
-            cc.ext.beg_end[1] = GameCfg.data[0].data.length;
-            GameCfg.huizhidatas = GameCfg.data[0].data.length;
-            this.onDrawEvetn(GameCfg.data[0].data);
-        }
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
         let ktype, code, from, total, to;
         code = this.qhData.code;
         total = 40;
@@ -295,23 +116,22 @@ export default class NewClass extends cc.Component {
         if (type <= 3) {
             ktype = pb.KType.Min5;
             //  GameCfg.GameSet.ktype = pb.KType.Min5;
-            // if (type == 0) {
-            //     from = time - 40 * 60 * 5;
-            // } else if (type == 1) {
-            //     from = time - 40 * 60 * 15;
-            //     // total *= 3;
-            //     t = 3;
-            // } else if (type == 2) {
-            //     from = time - 40 * 60 * 30;
+            if (type == 0) {
+                from = time - 40 * 60 * 5;
+            } else if (type == 1) {
+                from = time - 40 * 60 * 15;
+                // total *= 3;
+                t = 3;
+            } else if (type == 2) {
+                from = time - 40 * 60 * 30;
 
-            //     t = 6;
-            //     total *= 6;
-            // } else if (type == 3) {
-            //     from = time - 40 * 60 * 60;
-            //     total *= 12;
-            //     t = 12;
-            // }
-            from = this.qhData.data[0].day;
+                t = 6;
+                total *= 6;
+            } else if (type == 3) {
+                from = time - 40 * 60 * 60;
+                total *= 12;
+                t = 12;
+            }
 
         } else if (type == 4) {
             ktype = pb.KType.Day;
@@ -337,13 +157,14 @@ export default class NewClass extends cc.Component {
         let data = {
             ktype: ktype,
             code: code,
-            from: from,
+            from: 0,
             total: total,
             to: to,
         }
 
         console.log(JSON.stringify(data));
         socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(data), info => {
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
             GameCfg.data[0].data = [];
             console.log(info.items.length);
             if (type == 4 || type == 0 || type == 5) {
@@ -356,50 +177,47 @@ export default class NewClass extends cc.Component {
                         high: el.high,
                         low: el.low,
                         value: el.volume,
+                        ccl_hold: el.cclHold,
                     };
                     GameCfg.data[0].data.push(data);
-
                 });
-                if (type == 0) {
-                    this.arrMin5 = GameCfg.data[0].data;
+            } else {
+                for (let index = 0; index < info.items.length;) {
+                    if (index + t - 1 < info.items.length) {
+                        let el = info.items[index];
+                        let day = el.timestamp;
+                        let open = el.open;
+                        let close = info.items[index + t - 1].close;
+
+                        let high = 0, low = el.low, volume = 0;
+                        for (let i = 0; i < t; i++) {
+                            if (info.items[index + i].high >= high) {
+                                high = info.items[index + i].high;
+                            }
+
+                            if (info.items[index + i].low <= low) {
+                                low = info.items[index + i].low;
+                            }
+
+                            volume += info.items[index + i].volume;
+
+                        }
+                        let data = {
+                            day: day,
+                            open: open,
+                            close: close,
+                            high: high,
+                            low: low,
+                            value: volume,
+                            ccl_hold: el.cclHold,
+                        }
+                        GameCfg.data[0].data.push(data);
+                        index += t;
+                    } else {
+                        break;
+                    }
                 }
             }
-            // else {
-            //     for (let index = 0; index < info.items.length;) {
-            //         if (index + t - 1 < info.items.length) {
-            //             let el = info.items[index];
-            //             let day = el.timestamp;
-            //             let open = el.open;
-            //             let close = info.items[index + t - 1].close;
-
-            //             let high = 0, low = el.low, volume = 0;
-            //             for (let i = 0; i < t; i++) {
-            //                 if (info.items[index + i].high >= high) {
-            //                     high = info.items[index + i].high;
-            //                 }
-
-            //                 if (info.items[index + i].low <= low) {
-            //                     low = info.items[index + i].low;
-            //                 }
-
-            //                 volume += info.items[index + i].volume;
-
-            //             }
-            //             let data = {
-            //                 day: day,
-            //                 open: open,
-            //                 close: close,
-            //                 high: high,
-            //                 low: low,
-            //                 value: volume,
-            //             }
-            //             GameCfg.data[0].data.push(data);
-            //             index += t;
-            //         } else {
-            //             break;
-            //         }
-            //     }
-            // }
             cc.ext.beg_end[0] = 0;
             cc.ext.beg_end[1] = GameCfg.data[0].data.length;
             GameCfg.huizhidatas = GameCfg.data[0].data.length;
@@ -491,7 +309,6 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
         } else {
             this.onSaveData();
-
             this.onGetData(id);
             GlobalEvent.emit('HIDEBOTTOMNODE', false);
             GlobalEvent.emit(EventCfg.ADDMARKHIDEORSHOW, false);

@@ -127,7 +127,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on('onQHDraw', () => {
             this.initData();
             this.initDrawBg();
-            GlobalEvent.emit('onDraw');
+            //   GlobalEvent.emit('onDraw');
             this.updataLabel(cc.ext.beg_end[1]);
         }, this);
 
@@ -375,7 +375,7 @@ export default class NewClass extends cc.Component {
             return
         }
         this.setMALabelInfo(index - 1);
-        this.setBOLLLabelInfo(index - 1);
+        this.setBOLLLabelInfo(index);
         this.setVOLInfo(index - 1);
         GlobalEvent.emit('updataLabel', index);
     }

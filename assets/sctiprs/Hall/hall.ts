@@ -266,6 +266,7 @@ export default class NewClass extends cc.Component {
 		GameCfg.history.huizhidatas = 0;
 		GameCfg.history.allRate = 0;
 		GameCfg.history.deal = [];
+		GameCfg.data[0].data = [];
 	}
 
 	openYieldLaye(info) {
@@ -328,6 +329,7 @@ export default class NewClass extends cc.Component {
 
 	onCmdGameStart(data, info1) {
 		//  if (socket) {
+		GameCfg.data[0].data = [];
 		GameCfg.info = info1;
 
 		socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(data), res => {
@@ -399,6 +401,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	onCmdQHGameStart(data) {
+		GameCfg.data[0].data = [];
 		let inf = {
 			game: pb.GameType.QiHuo
 		}
@@ -415,6 +418,7 @@ export default class NewClass extends cc.Component {
 				if (GameData.QHSet.ZLine == '日线' || GameData.QHSet.ZLine == '5分钟K') {
 					info.items.forEach(el => {
 						// {"code":2000042,"ktype":"Day","timestamp":"1577235900","open":3112,"close":3116,"high":3120,"low":3112,"volume":"15032"},
+						//[{"code":2000113,"ktype":"Day","timestamp":"20171103","open":610.2,"close":607.4,"high":610.6,"low":606.6,"volume":"178060","cclHold":"442454"},
 						let data = {
 							day: el.timestamp + '',
 							open: el.open,
@@ -422,7 +426,7 @@ export default class NewClass extends cc.Component {
 							high: el.high,
 							low: el.low,
 							value: el.volume,
-							ccl_hold: el.ccl_hold,
+							ccl_hold: el.cclHold,
 						};
 						GameCfg.data[0].data.push(data);
 					});
@@ -462,7 +466,7 @@ export default class NewClass extends cc.Component {
 								high: high,
 								low: low,
 								value: volume,
-								ccl_hold: el.ccl_hold,
+								ccl_hold: el.cclHold,
 							}
 							GameCfg.data[0].data.push(data);
 							index += t;

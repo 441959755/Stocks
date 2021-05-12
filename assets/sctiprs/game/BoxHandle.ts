@@ -81,7 +81,7 @@ export default class NewClass extends cc.Component {
 
 
                 if (GameCfg.GameType == pb.GameType.QiHuo) {
-                    info.push(parseInt(parseInt(datas[inde].volume) + ''));
+                    info.push('--');
                     info.push(parseInt(parseInt(datas[inde].ccl_hold) + ''));
                     this.ccLa.string = '持仓：';
                     //   this.hsLa.string = parseInt(datas[inde].ccl_hold + '') + '';

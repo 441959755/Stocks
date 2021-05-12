@@ -3444,9 +3444,6 @@ export namespace pb {
         /** QuoteItemFuture volume */
         volume?: (number|Long|null);
 
-        /** QuoteItemFuture volVolume */
-        volVolume?: (number|Long|null);
-
         /** QuoteItemFuture cclHold */
         cclHold?: (number|Long|null);
     }
@@ -3483,9 +3480,6 @@ export namespace pb {
 
         /** QuoteItemFuture volume. */
         public volume: (number|Long);
-
-        /** QuoteItemFuture volVolume. */
-        public volVolume: (number|Long);
 
         /** QuoteItemFuture cclHold. */
         public cclHold: (number|Long);
