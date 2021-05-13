@@ -116,24 +116,28 @@ export default class NewClass extends cc.Component {
         //  this.Mask.active = false;
         GlobalEvent.on('on_off', (flagData) => {
             this.drawMACD.node.active = flagData.macd;
+
             this.MACDLabels.forEach(el => {
                 el.node.active = flagData.macd;
             })
+
             this.drawKDJ.node.active = flagData.kdj;
             this.KDJLabels.forEach(el => {
                 el.node.active = flagData.kdj;
             })
+
             this.drawRSI.node.active = flagData.rsi;
             this.RSILabels.forEach(el => {
                 el.node.active = flagData.rsi;
             })
+
             this.drawPcm.node.active = flagData.cpm;
             this.drawVol.node.active = flagData.cpm;
+
             if (flagData.macd || flagData.kdj || flagData.rsi) {
                 if (GameCfg.GameType != 3) {
                     this.Mask.active = true;
                 }
-
                 this.drawVol.node.zIndex = 1;
                 this.drawPcm.node.zIndex = 2;
                 this.Mask.zIndex = 3;
@@ -148,6 +152,7 @@ export default class NewClass extends cc.Component {
             }
 
             this.setLabelValue();
+            this.updataLabel(GameCfg.huizhidatas);
         }, this);
 
         GlobalEvent.on('onDraw', this.onDraw.bind(this), this);

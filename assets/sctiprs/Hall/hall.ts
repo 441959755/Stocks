@@ -365,7 +365,7 @@ export default class NewClass extends cc.Component {
 					}
 					GameCfg.data[0].data.push(data);
 				});
-
+				//	console.log(JSON.stringify(GameCfg.data[0].data));
 				cc.director.loadScene('game');
 			});
 		});
@@ -475,7 +475,7 @@ export default class NewClass extends cc.Component {
 						}
 					}
 				}
-
+				//console.log(JSON.stringify(GameCfg.data[0].data));
 				cc.director.loadScene('game');
 			})
 		})

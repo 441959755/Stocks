@@ -391,8 +391,9 @@ export default class NewClass extends cc.Component {
                             el.string = '日线 MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
                         } else if (GameCfg.GameType == pb.GameType.DingXiang) {
                             el.string = GameCfg.GameSet.ZLine + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
+                        } else if (GameCfg.GameType == pb.GameType.QiHuo) {
+                            el.string = ' MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
                         }
-
 
                     } else {
                         el.string = 'MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
