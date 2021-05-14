@@ -53,9 +53,9 @@ export default class NewClass extends cc.Component {
         this.labels[10].string = this.monthlyInfo.loseCode || 0;
         this.labels[11].string = (this.monthlyInfo.loseRate).toFixed(2) || 0;
 
-        this.labels[13].string = (((this.monthlyInfo.rankCaptial) + (this.monthlyInfo.rankRate)) / 2).toFixed(2) + '%';
-        this.labels[13].string = (this.monthlyInfo.rankCaptial).toFixed(2) || 0 + '%';
-        this.labels[14].string = (this.monthlyInfo.rankRate).toFixed(2) || 0 + '%';
+        this.labels[12].string = (((this.monthlyInfo.rankCaptial) + (this.monthlyInfo.rankRate)) / 2).toFixed(2) + '%';
+        this.labels[13].string = ((this.monthlyInfo.rankCaptial).toFixed(2) || 0) + '%';
+        this.labels[14].string = ((this.monthlyInfo.rankRate).toFixed(2) || 0) + '%';
     }
 
 

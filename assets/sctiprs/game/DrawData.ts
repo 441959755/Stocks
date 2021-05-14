@@ -1,4 +1,6 @@
 
+import { pb } from "../../protos/proto";
+import GameData from "../GameData";
 import GameCfg from "./GameCfg";
 //计算划线的数据
 
@@ -41,7 +43,68 @@ export default class DrawData {
     private static UPRS24 = [];
     private static DOWNRS24 = [];
 
+    public static arrMin5 = [];  //每5分钟的数据
+    public static arrMin15 = []; //每15分钟的数据
+    public static arrMin30 = []; //每30分钟的数据
+    public static arrMin60 = [];  //1小时的数据
+
+    public static arrDay = [];
+    public static arrDay1 = [];
+
+    public static dataChange(time, type, da) {
+        this.arrMin5 = da;
+        let t;
+        let arr = [];
+        if (this.arrMin5.length <= 0) {
+            console.log('this.arrMin5 is null');
+            return;
+        }
+        //  if (type == 1) {
+        t = type;
+        //  }
+
+        for (let index = this.arrMin5.length - 1; index >= 0;) {
+            if (index - t + 1 >= 0) {
+                let el = this.arrMin5[index];
+                if (el.day <= time) {
+                    let day = el.day;
+                    let open = this.arrMin5[index - t + 1].open;
+                    let close = el.close;
+
+                    let high = 0, low = el.low, volume = 0, ccl_hold;
+                    for (let i = 0; i < t; i++) {
+                        high = Math.max(this.arrMin5[index - i].high, high);
+                        low = Math.min(this.arrMin5[index - i].low, low);
+                        volume += this.arrMin5[index - i].value;
+                        ccl_hold += this.arrMin5[index - i].ccl_hold;
+                    }
+
+                    let data = {
+                        day: day,
+                        open: open,
+                        close: close,
+                        high: high,
+                        low: low,
+                        value: volume,
+                        ccl_hold: ccl_hold,
+                    }
+                    arr.unshift(data);
+                    index -= t;
+                } else {
+                    index--;
+                }
+            } else {
+                index--;
+            }
+        }
+        return arr;
+    }
+
     public static initData(data) {
+
+        // if (GameCfg.GameType == pb.GameType.QiHuo) {
+        //     this.dataChange(data);
+        // }
 
         this.MaList = [];
         this.BollList = [];
@@ -197,11 +260,12 @@ export default class DrawData {
                     EMA12 = (EMA12 * (EMA1Data - 1) + parseFloat(el.close) * 2) / (EMA1Data + 1);
                     EMA26 = (EMA26 * (EMA2Data - 1) + parseFloat(el.close) * 2) / (EMA2Data + 1);
                     let dif = EMA12 - EMA26
-                    let dea = (this.DIFList[index - 1] * (DEAData - 1) + dif * 2) / (DEAData + 1);
+                    let dea = (this.DEAList[index - 1] * (DEAData - 1) + dif * 2) / (DEAData + 1);
                     let macd = (dif - dea) * 2;
                     this.DIFList.push(dif);
                     this.DEAList.push(dea);
                     this.MACDList.push(macd);
+
 
                     if (index >= KDJDay - 1) {
                         this.n_low = el.low;

@@ -5,10 +5,9 @@ import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import EventCfg from '../../../sctiprs/Utils/EventCfg';
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import { pb } from '../../../protos/proto';
-import GameCfgText from '../../../sctiprs/GameText'
+import GameCfgText from '../../../sctiprs/GameText';
 
 const { ccclass, property } = cc._decorator;
-
 @ccclass
 export default class NewClass extends cc.Component {
 
@@ -60,12 +59,15 @@ export default class NewClass extends cc.Component {
             this.content.addChild(node);
             node.setPosition(cc.v2(0, 0));
             nodes[0].getComponent(cc.Label).string = (i + 1) + '';
+
             if (datas[i].quotesCode.length >= 7) {
                 datas[i].quotesCode = datas[i].quotesCode.slice(1);
             }
+
             if (GameCfg.GameType == pb.GameType.QiHuo) {
                 items = GameCfgText.getQHItemInfo(datas[i].quotesCode);
-                nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
+                //  nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
+                nodes[1].getComponent(cc.Label).string = items[2] + items[3];
                 items && (nodes[2].getComponent(cc.Label).string = items[1])
             } else {
                 items = GameCfgText.getGPItemInfo(datas[i].quotesCode);
@@ -200,7 +202,6 @@ export default class NewClass extends cc.Component {
             let data = {
                 code: parseInt(nodes[1].getComponent(cc.Label).string),
             }
-
 
             let dex = -1, items;
             if (GameCfg.GameType == pb.GameType.QiHuo) {

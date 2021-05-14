@@ -100,7 +100,7 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on(EventCfg.SETMALABEL, (labels) => {
             this.MAla = labels;
-            this.updataLabel(cc.ext.beg_end[1]);
+            this.updataLabel(cc.ext.beg_end[1] - 1);
             this.MAla.forEach((el, t) => {
                 el.node.color = GameCfg.MAColor[t];
             })
@@ -121,6 +121,7 @@ export default class NewClass extends cc.Component {
             if (flagData.macd || flagData.kdj || flagData.rsi) {
                 this.voltext.active = false;
             }
+            //   GlobalEvent.emit('updataLabel', cc.ext.beg_end[1] - 1);
         }, this);
 
         //QH
@@ -128,7 +129,7 @@ export default class NewClass extends cc.Component {
             this.initData();
             this.initDrawBg();
             //   GlobalEvent.emit('onDraw');
-            this.updataLabel(cc.ext.beg_end[1]);
+            this.updataLabel(cc.ext.beg_end[1] - 1);
         }, this);
 
 
@@ -148,7 +149,7 @@ export default class NewClass extends cc.Component {
             }
             this.initDrawBg();
             GlobalEvent.emit('onDraw');
-            this.updataLabel(cc.ext.beg_end[1]);
+            this.updataLabel(cc.ext.beg_end[1] - 1);
         }, this);
 
         let calDisY = 0;
@@ -374,9 +375,9 @@ export default class NewClass extends cc.Component {
         if (!index || index <= 1) {
             return
         }
-        this.setMALabelInfo(index - 1);
+        this.setMALabelInfo(index);
         this.setBOLLLabelInfo(index);
-        this.setVOLInfo(index - 1);
+        this.setVOLInfo(index);
         GlobalEvent.emit('updataLabel', index);
     }
 
@@ -418,6 +419,7 @@ export default class NewClass extends cc.Component {
     }
 
     setVOLInfo(index) {
+        //   console.log(index);
         if (GameCfg.data[0].data[index]) {
             let value = parseFloat(GameCfg.data[0].data[index].value);
             this.voltext.getComponent(cc.Label).string = 'VOL(5,10): ' + value.toFixed(2);

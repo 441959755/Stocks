@@ -705,7 +705,7 @@ export default class NewClass extends cc.Component {
 			kstyle: pb.KStyle.Random,
 			code: null,
 			from: null,
-			total: parseInt(GameData.QHSet.KLine) + 50,
+			total: parseInt(GameData.QHSet.KLine) + 1,
 			to: 0
 		};
 		let jys, lxpz, hy, rom, rom1, rom2;
@@ -868,14 +868,14 @@ export default class NewClass extends cc.Component {
 				}
 
 				if (end == 0) {
-					sc = new Date().getTime() - data.total * tt * 60 * 1000;
+					sc = new Date().getTime() / 1000 - data.total * tt * 60;
 				} else {
-					sc = end * 1000 - data.total * tt * 60 * 1000;
+					sc = end - data.total * tt * 60;
 				}
 
-				let s = parseInt(Math.random() * (sc - start) + start + '');
+				let f = parseInt(Math.random() * (sc - start) + start + '');
 
-				let f = parseInt(new Date(s).getTime() / 1000 + '');
+				//let f = parseInt(new Date(s * 1000).getTime() / 1000 + '');
 
 				{
 					data.from = f;

@@ -498,7 +498,7 @@ export default class NewClass extends cc.Component {
 				this.ziChan -= this.keMrCount * this.gpData[GameCfg.huizhidatas - 1].close;
 				this.keMrCount = 0;
 				// console.log(this.gpData[GameCfg.huizhidatas - 2].open);
-				this.curMrCount.push(this.curMrCount);
+				this.curMrCount.push(this.keMcCount);
 				//	console.log(JSON.stringify(this.curMrCount));
 				this.mrBtn.interactable = false;
 				this.mrBtn.enableAutoGrayEffect = true;
@@ -527,6 +527,9 @@ export default class NewClass extends cc.Component {
 			if (this._type == 1) {
 				// this.keMcCount += parseFloat(this.ziChan * (3 / 4) / this.gpData[GameCfg.huizhidatas - 1].open + '');
 				let count = parseInt(((3 / 4) * this.keMrCount) / 100 + '') * 100;
+				if (count < 100) {
+					count = 100;
+				}
 
 				this.keMcCount += count;
 				this.keMrCount -= count;
@@ -543,7 +546,9 @@ export default class NewClass extends cc.Component {
 				this.setRoundNumber('mrBtn');
 			} else {
 				let mc = parseInt((this.keMcCount * (3 / 4)) / 100 + '') * 100;
-
+				if (mc <= 100) {
+					mc = 100;
+				}
 				this.keMcCount -= mc;
 
 				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
@@ -563,6 +568,9 @@ export default class NewClass extends cc.Component {
 			if (this._type == 1) {
 				//  this.keMcCount += parseFloat(this.ziChan * (2 / 3) / this.gpData[GameCfg.huizhidatas - 1].open + '');
 				let count = parseInt(((2 / 3) * this.keMrCount) / 100 + '') * 100;
+				if (count < 100) {
+					count = 100;
+				}
 				this.keMcCount += count;
 				this.keMrCount -= count;
 				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
@@ -576,7 +584,9 @@ export default class NewClass extends cc.Component {
 				this.setRoundNumber('mrBtn');
 			} else {
 				let mc = parseInt((this.keMcCount * (2 / 3)) / 100 + '') * 100;
-
+				if (mc <= 100) {
+					mc = 100;
+				}
 				this.keMcCount -= mc;
 
 				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
@@ -594,6 +604,9 @@ export default class NewClass extends cc.Component {
 		} else if (name == 'fcBtn3') {
 			if (this._type == 1) {
 				let count = parseInt(((1 / 2) * this.keMrCount) / 100 + '') * 100;
+				if (count < 100) {
+					count = 100;
+				}
 				this.keMcCount += count;
 				this.keMrCount -= count;
 				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
@@ -607,7 +620,9 @@ export default class NewClass extends cc.Component {
 				this.setRoundNumber('mrBtn');
 			} else {
 				let mc = parseInt((this.keMcCount * (1 / 2)) / 100 + '') * 100;
-
+				if (mc <= 100) {
+					mc = 100;
+				}
 				this.keMcCount -= mc;
 
 				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
@@ -625,6 +640,9 @@ export default class NewClass extends cc.Component {
 		} else if (name == 'fcBtn4') {
 			if (this._type == 1) {
 				let count = parseInt(((1 / 3) * this.keMrCount) / 100 + '') * 100;
+				if (count < 100) {
+					count = 100;
+				}
 				this.keMcCount += count;
 				this.keMrCount -= count;
 				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
@@ -638,7 +656,9 @@ export default class NewClass extends cc.Component {
 				this.setRoundNumber('mrBtn');
 			} else {
 				let mc = parseInt((this.keMcCount * (1 / 3)) / 100 + '') * 100;
-
+				if (mc <= 100) {
+					mc = 100;
+				}
 				this.keMcCount -= mc;
 
 				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
@@ -656,6 +676,9 @@ export default class NewClass extends cc.Component {
 		} else if (name == 'fcBtn5') {
 			if (this._type == 1) {
 				let count = parseInt(((1 / 4) * this.keMrCount) / 100 + '') * 100;
+				if (count < 100) {
+					count = 100;
+				}
 				this.keMcCount += count;
 				this.keMrCount -= count;
 				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
@@ -669,6 +692,10 @@ export default class NewClass extends cc.Component {
 				this.setRoundNumber('mrBtn');
 			} else {
 				let mc = parseInt((this.keMcCount * (1 / 4)) / 100 + '') * 100;
+
+				if (mc <= 100) {
+					mc = 100;
+				}
 
 				this.keMcCount -= mc;
 
@@ -970,16 +997,21 @@ export default class NewClass extends cc.Component {
 
 	}
 
-	onCurPositionRete() {
+	onCurPositionRete(type?) {
+		let num = 0;
+		if (type) {
+			num = 1;
+		}
 		let data = this.gpData;
-		let curClose = parseFloat(data[GameCfg.huizhidatas].close);
+		let curClose = parseFloat(data[GameCfg.huizhidatas - num].close);
 
 		let preClose = this.onjunjia();
 		let prezl = 0;
 		this.curMrCount.forEach((el) => {
 			prezl += el;
 		})
-		let rate = (curClose * prezl - preClose * prezl) / GameCfg.ziChan;
+		//let rate = (curClose * prezl - preClose * prezl) / GameCfg.ziChan;
+		let rate = (curClose - preClose) / preClose;
 		return rate;
 	}
 
@@ -993,6 +1025,7 @@ export default class NewClass extends cc.Component {
 			prezl += el;
 		})
 		let rate = (curClose * prezl - preClose * prezl) / GameCfg.ziChan;
+
 		return rate;
 	}
 
@@ -1000,9 +1033,9 @@ export default class NewClass extends cc.Component {
 		//买入
 		let data = this.gpData;
 		if (state == 'mrBtn' || state == 'mrBtn1') {
-			// if (this.ke == 0) {
+			// if (this.curMcCount == 0) {
 			// 	GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '卖出要100股起哦');
-			// 	return
+			// 	// 	return
 			// }
 			this.buyData.push(GameCfg.huizhidatas - 1);
 
@@ -1042,10 +1075,12 @@ export default class NewClass extends cc.Component {
 
 		//卖出
 		else if (state == 'mcBtn' || state == 'mcBtn1') {
-			if (this.curMcCount == 0) {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '卖出要100股起哦');
-				return
-			}
+
+			// if (this.curMcCount == 0) {
+			// 	GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '卖出要100股起哦');
+			// 	return
+			// }
+
 			this.saleData.push(GameCfg.huizhidatas - 1);
 
 			let curClose = parseFloat(data[GameCfg.huizhidatas - 1].close);
@@ -1064,27 +1099,27 @@ export default class NewClass extends cc.Component {
 				prezl += el;
 			})
 
-
 			//	let rate = (curClose * this.curMcCount - preClose * this.curMcCount) / (preClose * prezl);
 			//let rate = (curClose * this.curMcCount - preClose * this.curMcCount) / GameCfg.ziChan;
-			let rate
+			let rate, allRate;
 			if (GameCfg.GameType == pb.GameType.QiHuo) {
 				rate = this.onAllPositionRete();
 				if (state == 'mcBtn1') {
 					rate = -rate;
 					//	this.ziChan = rate * GameCfg.ziChan + GameCfg.ziChan;
-
 				}
 				GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
 			} else {
-				rate = (this.ziChan + this.keMcCount * curClose - GameCfg.ziChan) / GameCfg.ziChan;
-				GameCfg.allRate = rate;
+				rate = this.onCurPositionRete(1);
+				allRate = (this.ziChan + this.keMcCount * curClose - GameCfg.ziChan) / GameCfg.ziChan;
+				GameCfg.allRate = allRate;
 			}
 
 
 			this.curMrCount = [];
 			if (prezl - this.curMcCount > 0) {
-				this.curMrPJPrice = (preClose * prezl - curClose * this.curMcCount) / (prezl - this.curMcCount);
+				// this.curMrPJPrice = (preClose * prezl - curClose * this.curMcCount) / (prezl - this.curMcCount);
+				this.curMrPJPrice = preClose;
 				//	this.curMrPJPrice = preClose;
 				this.curMrCount.push(prezl - this.curMcCount);
 			}
@@ -1121,6 +1156,7 @@ export default class NewClass extends cc.Component {
 
 				GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 2;
 				GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
+				this.curMrPJPrice = 0;
 			} else {
 
 				this.rateItem.end = GameCfg.huizhidatas - 1;

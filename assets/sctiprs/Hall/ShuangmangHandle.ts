@@ -67,6 +67,7 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = false;
             GameCfg.GameType = pb.GameType.ShuangMang;
             GameCfg.GameSet = GameData.SMSet;
+            // GameCfg.ziChan = GameData.properties[3];
 
             this.smStartGameSet();
 

@@ -162,9 +162,8 @@ export default class NewClass extends cc.Component {
             }
             // btnMyspic.active = false;
             // statBtn.active = true;
-            colseBtn.active = false;
         }
-
+        colseBtn.active = false;
 
     }
 

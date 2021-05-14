@@ -3271,8 +3271,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "个股收益",
-    "_N$string": "个股收益",
+    "_string": "训练收益",
+    "_N$string": "训练收益",
     "_fontSize": 28,
     "_lineHeight": 26,
     "_enableWrapText": true,

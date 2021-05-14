@@ -5,6 +5,7 @@ import LoadUtils from '../Utils/LoadUtils';
 import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
 import GameData from '../GameData';
+import DrawData from '../game/DrawData';
 
 const { ccclass, property } = cc._decorator;
 
@@ -83,6 +84,8 @@ export default class NewClass extends cc.Component {
 	QHSetPre: cc.Prefab = null;
 
 	QHSetNode: cc.Node = null;
+
+	curTotal = 0;
 
 	onLoad() {
 		ComUtils.onLoadNode();
@@ -331,11 +334,20 @@ export default class NewClass extends cc.Component {
 		//  if (socket) {
 		GameCfg.data[0].data = [];
 		GameCfg.info = info1;
-
 		socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(data), res => {
 			//console.log('onCmdGameStart' + JSON.stringify(res));
-			socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
-				//   console.log('onCmdQuoteQuery' + JSON.stringify(info));
+			//先去前面条数 要我这样写
+
+			let infoPre = {
+				ktype: info1.ktype,
+				kstyle: info1.kstyle,
+				code: info1.code,
+				form: 0,
+				total: 100,
+				to: info1.from,
+			}
+
+			socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(infoPre), info => {
 				if (!info.items || info.items.length <= 0) {
 					console.log('获取的行情为空');
 					// console.log(JSON.stringify(GameCfg.data));
@@ -366,8 +378,50 @@ export default class NewClass extends cc.Component {
 					GameCfg.data[0].data.push(data);
 				});
 				//	console.log(JSON.stringify(GameCfg.data[0].data));
-				cc.director.loadScene('game');
+				//cc.director.loadScene('game');
+				//在获取后面的
+				socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
+					//   console.log('onCmdQuoteQuery' + JSON.stringify(info));
+					if (!info.items || info.items.length <= 0) {
+						console.log('获取的行情为空');
+						// console.log(JSON.stringify(GameCfg.data));
+						GameCfg.GAMEFUPAN = false;
+						GlobalEvent.emit(EventCfg.LOADINGHIDE);
+						return;
+					}
+					info.items.forEach(el => {
+						//  let date = new Date(el.timestamp);
+						let ye = (el.timestamp + '').slice(0, 4);
+						let mon = (el.timestamp + '').slice(4, 6);
+						let da = (el.timestamp + '').slice(6);
+						let fromDate = ye + '-' + mon + '-' + da;
+						if (fromDate != GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day) {
+							let data = {
+								day: fromDate,
+								open: el.open,
+								close: el.price,
+								high: el.high,
+								low: el.low,
+								price: el.amount,
+								value: el.volume,
+								Rate: (el.volume / GameCfg.data[0].circulate) * 100
+							};
+
+							if (GameCfg.data[0].circulate == 0) {
+								data.Rate = 1;
+							}
+							GameCfg.data[0].data.push(data);
+						}
+
+					});
+					// console.log(JSON.stringify(GameCfg.data[0].data));
+					// console.log(JSON.stringify(GameCfg.data[0].data.length));
+					cc.director.loadScene('game');
+				});
+
 			});
+
+
 		});
 		//  }
 	}
@@ -400,86 +454,122 @@ export default class NewClass extends cc.Component {
 		}
 	}
 
+	//我也不知道为什么要我这样写
 	onCmdQHGameStart(data) {
+		let maxLength = 2000;
+		this.curTotal = 0;
 		GameCfg.data[0].data = [];
 		let inf = {
 			game: pb.GameType.QiHuo
 		}
 		socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(inf), res => {
-			socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(data), info => {
+
+			//先获取前面的
+			let preData = {
+				ktype: data.ktype,
+				code: data.code,
+				from: 0,
+				total: 100,
+				to: data.from,
+			}
+
+			data.total -= 100;
+			socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(preData), info => {
 				//console.log(JSON.stringify(info));
 				if (!info.items || info.items.length <= 0) {
 					console.log('获取的行情为空');
-					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空' + JSON.stringify(data));
+					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空' + JSON.stringify(preData));
 					GameCfg.GAMEFUPAN = false;
 					GlobalEvent.emit(EventCfg.LOADINGHIDE);
 					return;
 				}
+				//	if (GameData.QHSet.ZLine == '日线' || GameData.QHSet.ZLine == '5分钟K') {
+				info.items.forEach(el => {
+					// {"code":2000042,"ktype":"Day","timestamp":"1577235900","open":3112,"close":3116,"high":3120,"low":3112,"volume":"15032"},
+					//[{"code":2000113,"ktype":"Day","timestamp":"20171103","open":610.2,"close":607.4,"high":610.6,"low":606.6,"volume":"178060","cclHold":"442454"},
+					let data1 = {
+						day: el.timestamp + '',
+						open: el.open,
+						close: el.close,
+						high: el.high,
+						low: el.low,
+						value: el.volume,
+						ccl_hold: el.cclHold,
+					};
+					GameCfg.data[0].data.push(data1);
+				});
+
+				if (data.total > maxLength) {
+					this.curTotal = data.total - maxLength;
+					data.total = maxLength;
+				}
+				this.getQHHangQing(data);
+			})
+		})
+	}
+
+	getQHHangQing(data) {
+		let qhHQ = GameCfg.data[0].data;
+		socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(data), info => {
+			//console.log(JSON.stringify(info));
+			if (!info.items || info.items.length <= 0) {
+				console.log('获取的行情为空');
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空' + JSON.stringify(data));
+				GameCfg.GAMEFUPAN = false;
+				GlobalEvent.emit(EventCfg.LOADINGHIDE);
+				return;
+			}
+			info.items.forEach(el => {
+				// {"code":2000042,"ktype":"Day","timestamp":"1577235900","open":3112,"close":3116,"high":3120,"low":3112,"volume":"15032"},
+				//[{"code":2000113,"ktype":"Day","timestamp":"20171103","open":610.2,"close":607.4,"high":610.6,"low":606.6,"volume":"178060","cclHold":"442454"},
+				//	if (el.timestamp != GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day) {
+				let data1 = {
+					day: el.timestamp + '',
+					open: el.open,
+					close: el.close,
+					high: el.high,
+					low: el.low,
+					value: el.volume,
+					ccl_hold: el.cclHold,
+				};
+				qhHQ.push(data1);
+				//	}
+			});
+			// console.log(JSON.stringify(GameCfg.data[0].data.length));
+			// console.log(JSON.stringify(GameCfg.data[0].data));
+
+			if (this.curTotal > 0) {
+				if (this.curTotal >= 2000) {
+					this.curTotal -= 2000;
+					data.total = 2000;
+				} else {
+					data.total = this.curTotal;
+					this.curTotal = 0;
+				}
+				this.getQHHangQing(data);
+			} else {
 				if (GameData.QHSet.ZLine == '日线' || GameData.QHSet.ZLine == '5分钟K') {
-					info.items.forEach(el => {
-						// {"code":2000042,"ktype":"Day","timestamp":"1577235900","open":3112,"close":3116,"high":3120,"low":3112,"volume":"15032"},
-						//[{"code":2000113,"ktype":"Day","timestamp":"20171103","open":610.2,"close":607.4,"high":610.6,"low":606.6,"volume":"178060","cclHold":"442454"},
-						let data = {
-							day: el.timestamp + '',
-							open: el.open,
-							close: el.close,
-							high: el.high,
-							low: el.low,
-							value: el.volume,
-							ccl_hold: el.cclHold,
-						};
-						GameCfg.data[0].data.push(data);
-					});
 				} else {
 					let t
 					if (GameData.QHSet.ZLine == '15分钟K') {
 						t = 3;
+
+
 					} else if (GameData.QHSet.ZLine == '30分钟K') {
 						t = 6;
 					} else if (GameData.QHSet.ZLine == '60分钟K') {
 						t = 12;
 					}
-					for (let index = 0; index < info.items.length;) {
-						if (index + t - 1 < info.items.length) {
-							let el = info.items[index];
-							let day = el.timestamp + '';
-							let open = el.open;
-							let close = info.items[index + t - 1].close;
-
-							let high = 0, low = el.low, volume = 0;
-							for (let i = 0; i < t; i++) {
-								if (info.items[index + i].high >= high) {
-									high = info.items[index + i].high;
-								}
-
-								if (info.items[index + i].low <= low) {
-									low = info.items[index + i].low;
-								}
-
-								volume += info.items[index + i].volume;
-
-							}
-							let data = {
-								day: day,
-								open: open,
-								close: close,
-								high: high,
-								low: low,
-								value: volume,
-								ccl_hold: el.cclHold,
-							}
-							GameCfg.data[0].data.push(data);
-							index += t;
-						} else {
-							break;
-						}
-					}
+					qhHQ = DrawData.dataChange(qhHQ[qhHQ.length - 1].day, t, qhHQ);
 				}
-				//console.log(JSON.stringify(GameCfg.data[0].data));
+				GameCfg.data[0].data = qhHQ;
 				cc.director.loadScene('game');
-			})
+			}
+
 		})
 	}
+
+
 
 	// resetSize(cav) {
 	//     let frameSize = cc.view.getFrameSize();

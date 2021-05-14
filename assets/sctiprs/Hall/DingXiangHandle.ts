@@ -527,7 +527,7 @@ export default class NewClass extends cc.Component {
 			kstyle: null,
 			code: null,
 			from: null,
-			total: parseInt(GameData.DXSet.KLine) + 100,
+			total: parseInt(GameData.DXSet.KLine),
 			to: 0
 		};
 		let items;
@@ -664,9 +664,6 @@ export default class NewClass extends cc.Component {
 
 		GameCfg.data[0].code = items[0];
 
-		// if (items[0].length >= 7) {
-		//     GameCfg.data[0].code = items[0].slice(1);
-		// }
 
 		GameCfg.data[0].data = [];
 		GameCfg.data[0].name = items[1];

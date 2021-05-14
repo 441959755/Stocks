@@ -87,7 +87,7 @@ export default class NewClass extends cc.Component {
         this.nameLabel.string = GameCfg.data[0].name;
 
         let code = GameCfg.data[0].code;
-        if (code.length >= 7) {
+        if (code.length >= 7 && GameCfg.GameType != pb.GameType.QiHuo) {
             code = code.slice(1);
         }
         this.maLabel.string = code;
@@ -143,7 +143,8 @@ export default class NewClass extends cc.Component {
         // this.AllZiJin.string = parseInt(GameCfg.finalfund + '') + '';
 
         if (GameCfg.GameType == pb.GameType.QiHuo) {
-            this.nameTipsLabel.string = '品种名称';
+            this.nameTipsLabel.string = '品种合约';
+            this.maLabel.string = '';
             if (parseInt(all) > 0) {
                 this.qhxl_zhuan.active = true;
             } else if (parseInt(all) < 0) {
