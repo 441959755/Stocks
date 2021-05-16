@@ -4,6 +4,7 @@ import GameData from '../GameData';
 import GameCfg from '../game/GameCfg';
 import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
+import DrawDatas from './DrawData';
 
 const { ccclass, property } = cc._decorator;
 
@@ -298,16 +299,30 @@ export default class NewClass extends cc.Component {
     }
 
     onBlackDrawLine(id) {
-        if (this._selectID == id) {
 
-            cc.ext.beg_end[0] = this.beg;
-            cc.ext.beg_end[1] = this.end;
-            GameCfg.huizhidatas = this.huizhidatas;
-            this.onDrawEvetn(this.qhData.data);
-            GlobalEvent.emit('HIDEBOTTOMNODE', true);
-            GlobalEvent.emit(EventCfg.ADDMARKHIDEORSHOW, true);
-            GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
-        } else {
+        if (GameCfg.GameSet.ZLine == '5分钟K' || GameCfg.GameSet.ZLine == '15分钟K' || GameCfg.GameSet.ZLine == '30分钟K' || GameCfg.GameSet.ZLine == '60分钟K') {
+            if (this._selectID == id) {
+                cc.ext.beg_end[0] = this.beg;
+                cc.ext.beg_end[1] = this.end;
+                GameCfg.huizhidatas = this.huizhidatas;
+                this.onDrawEvetn(this.qhData.data);
+                GlobalEvent.emit('HIDEBOTTOMNODE', true);
+                GlobalEvent.emit(EventCfg.ADDMARKHIDEORSHOW, true);
+                GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
+            } else {
+                cc.ext.beg_end[0] = 0;
+                cc.ext.beg_end[1] = 0;
+                GameCfg.huizhidatas = 50;
+
+                GlobalEvent.emit('HIDEBOTTOMNODE', true);
+                GlobalEvent.emit(EventCfg.ADDMARKHIDEORSHOW, true);
+                GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
+            }
+        } else if (GameData.QHSet.ZLine == '日线') {
+
+        }
+
+        else {
             this.onSaveData();
             this.onGetData(id);
             GlobalEvent.emit('HIDEBOTTOMNODE', false);

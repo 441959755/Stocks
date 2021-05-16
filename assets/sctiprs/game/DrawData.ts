@@ -51,10 +51,10 @@ export default class DrawData {
     public static arrDay = [];
     public static arrDay1 = [];
 
-    public static dataChange(time, type, da) {
-        this.arrMin5 = da;
+    public static dataChange(time, type, arr) {
+        // this.arrMin5 = da;
         let t;
-        let arr = [];
+        let arr1 = [];
         if (this.arrMin5.length <= 0) {
             console.log('this.arrMin5 is null');
             return;
@@ -63,20 +63,20 @@ export default class DrawData {
         t = type;
         //  }
 
-        for (let index = this.arrMin5.length - 1; index >= 0;) {
+        for (let index = arr.length - 1; index >= 0;) {
             if (index - t + 1 >= 0) {
-                let el = this.arrMin5[index];
+                let el = arr[index];
                 if (el.day <= time) {
                     let day = el.day;
-                    let open = this.arrMin5[index - t + 1].open;
+                    let open = arr[index - t + 1].open;
                     let close = el.close;
 
                     let high = 0, low = el.low, volume = 0, ccl_hold;
                     for (let i = 0; i < t; i++) {
-                        high = Math.max(this.arrMin5[index - i].high, high);
-                        low = Math.min(this.arrMin5[index - i].low, low);
-                        volume += this.arrMin5[index - i].value;
-                        ccl_hold += this.arrMin5[index - i].ccl_hold;
+                        high = Math.max(arr[index - i].high, high);
+                        low = Math.min(arr[index - i].low, low);
+                        volume += arr[index - i].value;
+                        ccl_hold += arr[index - i].ccl_hold;
                     }
 
                     let data = {
@@ -88,7 +88,7 @@ export default class DrawData {
                         value: volume,
                         ccl_hold: ccl_hold,
                     }
-                    arr.unshift(data);
+                    arr1.unshift(data);
                     index -= t;
                 } else {
                     index--;
@@ -97,8 +97,10 @@ export default class DrawData {
                 index--;
             }
         }
-        return arr;
+        return arr1;
     }
+
+
 
     public static initData(data) {
 

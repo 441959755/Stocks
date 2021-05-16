@@ -63,7 +63,6 @@ export default class ComUtils {
 			})
 		}
 
-
 	}
 
 	public static onDestory() {

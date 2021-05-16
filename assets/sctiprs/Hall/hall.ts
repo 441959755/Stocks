@@ -469,7 +469,7 @@ export default class NewClass extends cc.Component {
 				ktype: data.ktype,
 				code: data.code,
 				from: 0,
-				total: 100,
+				total: 50,
 				to: data.from,
 			}
 
@@ -548,17 +548,22 @@ export default class NewClass extends cc.Component {
 				}
 				this.getQHHangQing(data);
 			} else {
-				if (GameData.QHSet.ZLine == '日线' || GameData.QHSet.ZLine == '5分钟K') {
-				} else {
+				if (GameData.QHSet.ZLine == '5分钟K') {
+					DrawData.arrMin5 = qhHQ;
+				} else if (GameData.QHSet.ZLine == '日线') {
+					DrawData.arrDay = qhHQ;
+				}
+				else {
 					let t
 					if (GameData.QHSet.ZLine == '15分钟K') {
 						t = 3;
-
-
+						DrawData.arrMin5 = qhHQ;
 					} else if (GameData.QHSet.ZLine == '30分钟K') {
 						t = 6;
+						DrawData.arrMin5 = qhHQ;
 					} else if (GameData.QHSet.ZLine == '60分钟K') {
 						t = 12;
+						DrawData.arrMin5 = qhHQ;
 					}
 					qhHQ = DrawData.dataChange(qhHQ[qhHQ.length - 1].day, t, qhHQ);
 				}
