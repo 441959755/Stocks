@@ -118,7 +118,7 @@ export default class NewClass extends cc.Component {
             })
             this.drawPCM.node.active = flagData.cpm;
             this.voltext.active = true;
-            if (flagData.macd || flagData.kdj || flagData.rsi) {
+            if (flagData.macd || flagData.kdj || flagData.rsi || flagData.ccl) {
                 this.voltext.active = false;
             }
             //   GlobalEvent.emit('updataLabel', cc.ext.beg_end[1] - 1);

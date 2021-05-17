@@ -94,7 +94,7 @@ export default class NewClass extends cc.Component {
         //时间
         // this.timeLabel.string = (gpData[0].day.replace(/-/g, '/')) + ' -- ' + (gpData[gpData.length - 1].day.replace(/-/g, '/'));
 
-        this.timeLabel.string = ComUtils.formatTime(gpData[0].day) + '--' + ComUtils.formatTime(gpData[gpData.length - 1].day);
+        this.timeLabel.string = ComUtils.formatTime(gpData[gpData.length - GameCfg.GameSet.KLine].day - 1) + '--' + ComUtils.formatTime(gpData[gpData.length - 1].day);
 
         //同期涨幅
         let tq = ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2);

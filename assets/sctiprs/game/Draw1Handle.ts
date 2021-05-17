@@ -146,6 +146,7 @@ export default class NewClass extends cc.Component {
             this.drawCcl.node.active = flagData.ccl;
             this.cclLabel.node.active = flagData.ccl;
 
+
             if (flagData.macd || flagData.kdj || flagData.rsi) {
                 if (GameCfg.GameType != 3) {
                     this.Mask.active = true;

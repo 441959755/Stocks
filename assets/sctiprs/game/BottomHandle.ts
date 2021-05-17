@@ -1058,11 +1058,13 @@ export default class NewClass extends cc.Component {
 			this.isFlag = true;
 			let start = GameCfg.huizhidatas;
 
+
 			this.rateItem = {
 				rate: rate,
 				start: start,
 				end: null
 			};
+
 			GameCfg.history.deal[GameCfg.history.deal.length] = [GameCfg.huizhidatas - 1, null, null];
 
 			//	if (GameCfg.GameType == pb.GameType.QiHuo) {
@@ -1216,8 +1218,8 @@ export default class NewClass extends cc.Component {
 			}
 			GlobalEvent.emit('updateRate', [rate]);
 
-			this.rateItem.rate = rate;
-			GameCfg.fill[GameCfg.fill.length - 1] = this.rateItem;
+			//	this.rateItem.rate = rate;
+			GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
 
 			GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
 		}
