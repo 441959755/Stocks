@@ -5,6 +5,7 @@ import DrawUtils from "../Utils/DrawUtils";
 import GameCfg from "./GameCfg";
 
 import DrawData from "./DrawData";
+import { pb } from "../../protos/proto";
 
 const { ccclass, property } = cc._decorator;
 
@@ -260,10 +261,12 @@ export default class NewClass extends cc.Component {
         if (this.Rs24[index]) {
             this.RSILabels[2].string = arr2[2] + ': ' + this.Rs24[index].toFixed(2);
         }
-
-        if (GameCfg.data[0].data[index].ccl_hold) {
-            this.cclLabel.string = 'OPI:' + GameCfg.data[0].data[index].ccl_hold.toFixed(2);
+        if (GameCfg.GameType == pb.GameType.QiHuo) {
+            if (GameCfg.data[0].data[index].ccl_hold) {
+                this.cclLabel.string = 'OPI:' + GameCfg.data[0].data[index].ccl_hold.toFixed(2);
+            }
         }
+
     }
 
     //设置label的值
@@ -377,8 +380,10 @@ export default class NewClass extends cc.Component {
         this.maxRs24 = this.Rs24[cc.ext.beg_end[0]];
         this.minRs24 = this.Rs24[cc.ext.beg_end[0]];
 
-        this.maxCcl = GameCfg.data[0].data[cc.ext.beg_end[0]].ccl_hold;
-        this.minCcl = GameCfg.data[0].data[cc.ext.beg_end[0]].ccl_hold;
+        if (GameCfg.GameType == pb.GameType.QiHuo) {
+            this.maxCcl = GameCfg.data[0].data[cc.ext.beg_end[0]].ccl_hold;
+            this.minCcl = GameCfg.data[0].data[cc.ext.beg_end[0]].ccl_hold;
+        }
 
         for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
             this.minDIF = Math.min(this.minDIF, this.DIFList[index]);
@@ -506,6 +511,9 @@ export default class NewClass extends cc.Component {
     }
 
     onDrawCCL(index) {
+        if (GameCfg.GameType != pb.GameType.QiHuo) {
+            return;
+        }
         let some = index - cc.ext.beg_end[0];
 
         if (index <= 0) {

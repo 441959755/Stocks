@@ -295,8 +295,9 @@ export default class NewClass extends cc.Component {
 			this.tipsLabel1.node.active = false;
 			dxnode.active = false;
 		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
-			this.tipsLabel.node.active = false;
-			this.tipsLabel1.node.active = true;
+
+			this.tipsLabel.node.active = true;
+			this.tipsLabel1.node.active = false;
 			dxnode.active = true;
 
 			if (!GameCfg.GameSet.isFC || GameCfg.GAMEFUPAN) {
@@ -307,6 +308,8 @@ export default class NewClass extends cc.Component {
 			} else if (GameCfg.GameSet.isFC) {
 				dxnode.children[2].active = true;
 				dxnode.children[1].active = true;
+				this.tipsLabel.node.active = false;
+				this.tipsLabel1.node.active = true;
 			}
 		} else if (GameCfg.GameType == pb.GameType.QiHuo) {
 			this.tipsLabel.node.active = true;
@@ -315,10 +318,9 @@ export default class NewClass extends cc.Component {
 			this.node.getChildByName('qh').active = true;
 			this.node.getChildByName('isFC').active = false;
 
-
 		}
-
 		this.roundNumber = this.gpData.length - GameCfg.huizhidatas;
+
 
 		this.tipsLabel.string = '回合数：' + this.roundNumber;
 		this.tipsLabel1.string = '回合数：' + this.roundNumber;

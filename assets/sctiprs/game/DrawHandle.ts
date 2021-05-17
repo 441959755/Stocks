@@ -234,7 +234,7 @@ export default class NewClass extends cc.Component {
                             calDisY = 0;
                             clearTimeout(this.timer);
                             this.timer = null;
-                        }, 5)
+                        }, 10)
                     }
                 }
             }
@@ -321,7 +321,7 @@ export default class NewClass extends cc.Component {
                             GlobalEvent.emit('onDraw');
                             clearTimeout(this.timer);
                             this.timer = null;
-                        }, 5);
+                        }, 10);
                     }
                 }
             }
