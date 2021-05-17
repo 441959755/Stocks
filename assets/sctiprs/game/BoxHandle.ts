@@ -9,16 +9,16 @@ const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
-    ma = null;
-    boll = null;
+    // ma = null;
+    // boll = null;
 
-    cpm = null;
+    // cpm = null;
 
-    macd = null;
+    // macd = null;
 
-    kdj = null;
+    // kdj = null;
 
-    rsi = null;
+    // rsi = null;
 
     rZoom = null;
 
@@ -48,6 +48,9 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Label)
     ccLa: cc.Label = null;
+
+    @property(cc.Node)
+    cclNode: cc.Node = null;
 
 
     onLoad() {
@@ -163,6 +166,7 @@ export default class NewClass extends cc.Component {
     start() {
         let nodes = this.node.children;
         this.rZoom.isChecked = false;
+        this.cclNode.active = false;
         //双盲
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             //  nodes[4].active = false;
@@ -189,6 +193,7 @@ export default class NewClass extends cc.Component {
             this.lZoom.node.active = false;
             this.lZoom.isChecked = false;
             this.hsLa.node.parent.active = false;
+            this.cclNode.active = true;
         }
     }
 
@@ -273,64 +278,83 @@ export default class NewClass extends cc.Component {
         // this.rightBox.children.forEach(el => {
         //     el.color = 
         // })
-
+        let ma = false, boll = false, macd = false, kdj = false, rsi = false, cpm = false, ccl = false;
         this.rightBox.getChildByName(data).color = new cc.Color().fromHEX('#fd4432');
         if (data == 'ma' || data == 'boll') {
             if (data == 'ma') {
-                this.ma = true;
-                this.boll = false;
+                ma = true;
+                boll = false;
                 this.rightBox.getChildByName('boll').color = new cc.Color().fromHEX('#808080');
             } else {
-                this.ma = false;
-                this.boll = true;
+                ma = false;
+                boll = true;
                 this.rightBox.getChildByName('ma').color = new cc.Color().fromHEX('#808080');
             }
         } else {
             if (data == 'CPM') {
-                this.macd = false;
-                this.kdj = false;
-                this.rsi = false;
-                this.cpm = true;
+                macd = false;
+                kdj = false;
+                rsi = false;
+                cpm = true;
+                ccl = false;
                 this.rightBox.getChildByName('MACD').color = new cc.Color().fromHEX('#808080');
                 this.rightBox.getChildByName('KDJ').color = new cc.Color().fromHEX('#808080');
                 this.rightBox.getChildByName('RSI').color = new cc.Color().fromHEX('#808080');
+                this.rightBox.getChildByName('CCL').color = new cc.Color().fromHEX('#808080');
             } else if (data == 'MACD') {
-                this.macd = true;
-                this.kdj = false;
-                this.rsi = false;
-                this.cpm = false;
+                macd = true;
+                kdj = false;
+                rsi = false;
+                cpm = false;
+                ccl = false;
                 this.rightBox.getChildByName('CPM').color = new cc.Color().fromHEX('#808080');
                 this.rightBox.getChildByName('KDJ').color = new cc.Color().fromHEX('#808080');
                 this.rightBox.getChildByName('RSI').color = new cc.Color().fromHEX('#808080');
+                this.rightBox.getChildByName('CCL').color = new cc.Color().fromHEX('#808080');
             } else if (data == 'KDJ') {
-                this.macd = false;
-                this.kdj = true;
-                this.rsi = false;
-                this.cpm = false;
+                macd = false;
+                kdj = true;
+                rsi = false;
+                cpm = false;
+                ccl = false;
                 this.rightBox.getChildByName('CPM').color = new cc.Color().fromHEX('#808080');
                 this.rightBox.getChildByName('MACD').color = new cc.Color().fromHEX('#808080');
                 this.rightBox.getChildByName('RSI').color = new cc.Color().fromHEX('#808080');
+                this.rightBox.getChildByName('CCL').color = new cc.Color().fromHEX('#808080');
             } else if (data == 'RSI') {
-                this.macd = false;
-                this.kdj = false;
-                this.rsi = true;
-                this.cpm = false;
+                macd = false;
+                kdj = false;
+                rsi = true;
+                cpm = false;
+                ccl = false;
                 this.rightBox.getChildByName('CPM').color = new cc.Color().fromHEX('#808080');
                 this.rightBox.getChildByName('MACD').color = new cc.Color().fromHEX('#808080');
                 this.rightBox.getChildByName('KDJ').color = new cc.Color().fromHEX('#808080');
+                this.rightBox.getChildByName('CCL').color = new cc.Color().fromHEX('#808080');
+            } else if (data == 'CCL') {
+                macd = false;
+                kdj = false;
+                rsi = false;
+                cpm = false;
+                ccl = true;
+                this.rightBox.getChildByName('CPM').color = new cc.Color().fromHEX('#808080');
+                this.rightBox.getChildByName('MACD').color = new cc.Color().fromHEX('#808080');
+                this.rightBox.getChildByName('KDJ').color = new cc.Color().fromHEX('#808080');
+                this.rightBox.getChildByName('RSI').color = new cc.Color().fromHEX('#808080');
             }
         }
 
         let flagData = {
-            maboll: this.ma,
-            cpm: this.cpm,
-            macd: this.macd,
-            kdj: this.kdj,
-            rsi: this.rsi,
+            maboll: ma,
+            cpm: cpm,
+            macd: macd,
+            kdj: kdj,
+            rsi: rsi,
+            ccl: ccl,
         }
 
         //是否一直显示
-        if (GameCfg.GameSet.isShowVol) {
+        if (GameCfg.GameSet.isShowVol && !flagData.ccl) {
             flagData.cpm = true;
             this.rightBox.getChildByName('CPM').color = new cc.Color().fromHEX('#fd4432');
         }
@@ -339,7 +363,7 @@ export default class NewClass extends cc.Component {
 
     onClick(event, data) {
         //先项
-        if (data == 'ma' || data == 'CPM' || data == 'MACD' || data == 'KDJ' || data == 'RSI' || data == 'boll') {
+        if (data == 'ma' || data == 'CPM' || data == 'MACD' || data == 'KDJ' || data == 'RSI' || data == 'boll' || data == 'CCL') {
             this.setBoxfalg(data);
 
             if (data != 'ma' && data != 'boll') {
@@ -348,6 +372,8 @@ export default class NewClass extends cc.Component {
             }
             if (data == 'CPM') {
                 this.tipsLabel.string = '成交量';
+            } else if (data == 'CCL') {
+                this.tipsLabel.string = '持仓量';
             }
 
         } else if (data == 'rZoomBtn') {

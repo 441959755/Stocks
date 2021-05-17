@@ -92,6 +92,10 @@ export default class NewClass extends cc.Component {
             GameCfg.RSI_COLOR[0] = cc.Color.WHITE;
             GameCfg.RSI_COLOR[1] = new cc.Color().fromHEX('#f0dc05');
             GameCfg.RSI_COLOR[2] = new cc.Color().fromHEX('#d85cfc');
+
+            // GameCfg.CCL_COL = new cc.Color().fromHEX('#808080');
+            GameCfg.CCL_COL = cc.Color.WHITE;
+
         }
         //百地
         else {
@@ -125,6 +129,9 @@ export default class NewClass extends cc.Component {
             GameCfg.RSI_COLOR[0] = cc.Color.BLACK;
             GameCfg.RSI_COLOR[1] = new cc.Color().fromHEX('#f39800');
             GameCfg.RSI_COLOR[2] = new cc.Color().fromHEX('#cc33cc');
+
+            //GameCfg.CCL_COL = new cc.Color().fromHEX('#808080');
+            GameCfg.CCL_COL = cc.Color.BLACK;
         }
 
     }

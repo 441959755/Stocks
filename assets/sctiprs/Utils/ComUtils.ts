@@ -212,4 +212,22 @@ export default class ComUtils {
 		return data;
 	}
 
+	//获取时间戳
+	public static getTimestamp(time) {
+		time = ((time + '').replace(/-/g, ''));
+		if (time.length == 10) {
+			return time;
+		}
+		let year = time.slice(0, 4);
+		let month = time.slice(4, 6);
+		let day = time.slice(6);
+
+		let d = new Date(year + '-' + month + '-' + day);
+		let t = d.getTime() / 1000;
+		return t;
+
+	}
+
+
+
 }

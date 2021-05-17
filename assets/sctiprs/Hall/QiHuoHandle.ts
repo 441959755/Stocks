@@ -705,7 +705,7 @@ export default class NewClass extends cc.Component {
 			kstyle: pb.KStyle.Random,
 			code: null,
 			from: null,
-			total: parseInt(GameData.QHSet.KLine) + 1,
+			total: parseInt(GameData.QHSet.KLine),
 			to: 0
 		};
 		let jys, lxpz, hy, rom, rom1, rom2;

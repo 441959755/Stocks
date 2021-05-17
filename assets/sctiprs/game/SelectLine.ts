@@ -5,6 +5,7 @@ import GameCfg from '../game/GameCfg';
 import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
 import DrawDatas from './DrawData';
+import DrawData from './DrawData';
 
 const { ccclass, property } = cc._decorator;
 
@@ -19,6 +20,8 @@ export default class NewClass extends cc.Component {
     qhData = null;
 
     huizhidatas = 0;
+
+    //    saveTime = null;
 
     beg = 0;
 
@@ -90,12 +93,13 @@ export default class NewClass extends cc.Component {
     }
 
 
-    onGetData(type) {
+    onGetData(type, id) {
 
         let tt = this.huizhidatas - 1;
-
+        //   this.saveTime = this.qhData.data[tt].day;
         if (GameCfg.GAMEFUPAN) {
             tt = GameCfg.history.huizhidatas - 1;
+            //    this.saveTime = this.qhData.data[tt].day;
         }
 
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
@@ -167,62 +171,71 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(data), info => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             GameCfg.data[0].data = [];
-            console.log(info.items.length);
-            if (type == 4 || type == 0 || type == 5) {
-                info.items.forEach(el => {
-                    // {"code":2000042,"ktype":"Day","timestamp":"1577235900","open":3112,"close":3116,"high":3120,"low":3112,"volume":"15032"},
-                    let data = {
-                        day: el.timestamp,
-                        open: el.open,
-                        close: el.close,
-                        high: el.high,
-                        low: el.low,
-                        value: el.volume,
-                        ccl_hold: el.cclHold,
-                    };
-                    GameCfg.data[0].data.push(data);
-                });
-            } else {
-                for (let index = 0; index < info.items.length;) {
-                    if (index + t - 1 < info.items.length) {
-                        let el = info.items[index];
-                        let day = el.timestamp;
-                        let open = el.open;
-                        let close = info.items[index + t - 1].close;
+            //  console.log(info.items.length);
+            info.items.forEach(el => {
+                // {"code":2000042,"ktype":"Day","timestamp":"1577235900","open":3112,"close":3116,"high":3120,"low":3112,"volume":"15032"},
+                let data = {
+                    day: el.timestamp,
+                    open: el.open,
+                    close: el.close,
+                    high: el.high,
+                    low: el.low,
+                    value: el.volume,
+                    ccl_hold: el.cclHold,
+                };
+                GameCfg.data[0].data.push(data);
+            });
 
-                        let high = 0, low = el.low, volume = 0;
-                        for (let i = 0; i < t; i++) {
-                            if (info.items[index + i].high >= high) {
-                                high = info.items[index + i].high;
-                            }
-
-                            if (info.items[index + i].low <= low) {
-                                low = info.items[index + i].low;
-                            }
-
-                            volume += info.items[index + i].volume;
-
-                        }
-                        let data = {
-                            day: day,
-                            open: open,
-                            close: close,
-                            high: high,
-                            low: low,
-                            value: volume,
-                            ccl_hold: el.cclHold,
-                        }
-                        GameCfg.data[0].data.push(data);
-                        index += t;
-                    } else {
-                        break;
-                    }
-                }
+            if (type == 0) {
+                DrawDatas.arrMin5 = GameCfg.data[0].data;
+            } else if (type == 4) {
+                DrawDatas.arrDay = GameCfg.data[0].data;
             }
-            cc.ext.beg_end[0] = 0;
-            cc.ext.beg_end[1] = GameCfg.data[0].data.length;
-            GameCfg.huizhidatas = GameCfg.data[0].data.length;
-            this.onDrawEvetn(GameCfg.data[0].data);
+            this.onChanageType(id);
+            // if (type == 4 || type == 0) {
+
+            // }
+            //  else {
+            //     for (let index = 0; index < info.items.length;) {
+            //         if (index + t - 1 < info.items.length) {
+            //             let el = info.items[index];
+            //             let day = el.timestamp;
+            //             let open = el.open;
+            //             let close = info.items[index + t - 1].close;
+
+            //             let high = 0, low = el.low, volume = 0;
+            //             for (let i = 0; i < t; i++) {
+            //                 if (info.items[index + i].high >= high) {
+            //                     high = info.items[index + i].high;
+            //                 }
+
+            //                 if (info.items[index + i].low <= low) {
+            //                     low = info.items[index + i].low;
+            //                 }
+
+            //                 volume += info.items[index + i].volume;
+
+            //             }
+            //             let data = {
+            //                 day: day,
+            //                 open: open,
+            //                 close: close,
+            //                 high: high,
+            //                 low: low,
+            //                 value: volume,
+            //                 ccl_hold: el.cclHold,
+            //             }
+            //             GameCfg.data[0].data.push(data);
+            //             index += t;
+            //         } else {
+            //             break;
+            //         }
+            //     }
+            // }
+            // cc.ext.beg_end[0] = 0;
+            // cc.ext.beg_end[1] = GameCfg.data[0].data.length;
+            // GameCfg.huizhidatas = GameCfg.data[0].data.length;
+            // this.onDrawEvetn(GameCfg.data[0].data);
         });
 
     }
@@ -302,36 +315,114 @@ export default class NewClass extends cc.Component {
 
         if (GameCfg.GameSet.ZLine == '5分钟K' || GameCfg.GameSet.ZLine == '15分钟K' || GameCfg.GameSet.ZLine == '30分钟K' || GameCfg.GameSet.ZLine == '60分钟K') {
             if (this._selectID == id) {
-                cc.ext.beg_end[0] = this.beg;
-                cc.ext.beg_end[1] = this.end;
-                GameCfg.huizhidatas = this.huizhidatas;
-                this.onDrawEvetn(this.qhData.data);
-                GlobalEvent.emit('HIDEBOTTOMNODE', true);
-                GlobalEvent.emit(EventCfg.ADDMARKHIDEORSHOW, true);
-                GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
+                this.onGoBlackGame();
             } else {
-                cc.ext.beg_end[0] = 0;
-                cc.ext.beg_end[1] = 0;
-                GameCfg.huizhidatas = 50;
 
-                GlobalEvent.emit('HIDEBOTTOMNODE', true);
-                GlobalEvent.emit(EventCfg.ADDMARKHIDEORSHOW, true);
-                GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
+                if (id >= 4) {
+                    if (DrawData.arrDay.length <= 0) {
+                        this.onSaveData();
+                        this.onGetData(4, id);
+                    } else {
+                        this.onSaveData();
+                        this.onChanageType(id);
+                    }
+                }
+                else {
+                    this.onSaveData();
+                    this.onChanageType(id);
+                }
             }
         } else if (GameData.QHSet.ZLine == '日线') {
+            if (this._selectID == id) {
+                this.onGoBlackGame();
+            } else {
 
-        }
 
-        else {
-            this.onSaveData();
-            this.onGetData(id);
-            GlobalEvent.emit('HIDEBOTTOMNODE', false);
-            GlobalEvent.emit(EventCfg.ADDMARKHIDEORSHOW, false);
-            GlobalEvent.emit(EventCfg.FILLNODEISSHOW, false);
+                // if (this._selectID == 5) {
+                //     if()
+
+                // }
+                // else
+                if (id < 4) {
+
+                    if (DrawData.arrMin5.length <= 0) {
+                        this.onSaveData();
+                        this.onGetData(0, id);
+                    } else {
+                        this.onSaveData();
+                        this.onChanageType(id);
+                    }
+                }
+                else {
+                    this.onSaveData();
+                    this.onChanageType(id);
+                }
+            }
         }
     }
+
 
     onDestroy() {
         //  GlobalEvent.off(EventCfg.GAMEOVEER);
     }
+
+    onGoBlackGame() {
+        cc.ext.beg_end[0] = this.beg;
+        cc.ext.beg_end[1] = this.end;
+        GameCfg.huizhidatas = this.huizhidatas;
+        this.onDrawEvetn(this.qhData.data);
+        GlobalEvent.emit('HIDEBOTTOMNODE', true);
+        GlobalEvent.emit(EventCfg.ADDMARKHIDEORSHOW, true);
+        GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
+    }
+
+    onChanageType(id) {
+        let le;
+        let dataArr = [];
+        // if (this.huizhidatas >= DrawDatas.arrMin5.length) {
+        //     le = DrawDatas.arrMin5.length - 1;
+
+        // } else {
+        //     le = this.huizhidatas;
+        // }
+        if (id == 0) {
+            //  dataArr = DrawDatas.dataChange(this.qhData.data[le].day, 1, DrawDatas.arrMin5);
+            dataArr = DrawDatas.getTimeSlotData(this.qhData.data[this.huizhidatas - 1].day, 50, DrawDatas.arrMin5);
+        } else if (id == 1) {
+            dataArr = DrawDatas.dataChange(this.qhData.data[this.huizhidatas - 1].day, 3, DrawDatas.arrMin5);
+        } else if (id == 2) {
+            dataArr = DrawDatas.dataChange(this.qhData.data[this.huizhidatas - 1].day, 6, DrawDatas.arrMin5);
+        } else if (id == 3) {
+            dataArr = DrawDatas.dataChange(this.qhData.data[this.huizhidatas - 1].day, 12, DrawDatas.arrMin5);
+        } else if (id == 4) {
+            // dataArr = DrawDatas.arrDay;
+            dataArr = DrawDatas.getTimeSlotData(this.qhData.data[this.huizhidatas - 1].day, 50, DrawDatas.arrDay);
+        } else if (id == 5) {
+            if (this.huizhidatas >= DrawDatas.arrDay.length) {
+                le = DrawDatas.arrDay.length - 1;
+
+            } else {
+                le = this.huizhidatas;
+            }
+            dataArr = DrawDatas.dataChange(this.qhData.data[this.huizhidatas - 1].day, 5, DrawDatas.arrDay);
+        }
+        if (dataArr.length > 50) {
+            dataArr = dataArr.slice(dataArr.length - 51);
+        }
+
+        cc.ext.beg_end[0] = 0;
+        cc.ext.beg_end[1] = dataArr.length;
+        GameCfg.huizhidatas = dataArr.length;
+
+        this.onDrawEvetn(dataArr);
+        let flag = false;
+        if (this._selectID == id) {
+            flag = true;
+        }
+
+        GlobalEvent.emit('HIDEBOTTOMNODE', flag);
+        GlobalEvent.emit(EventCfg.ADDMARKHIDEORSHOW, flag);
+        GlobalEvent.emit(EventCfg.FILLNODEISSHOW, flag);
+    }
+
 }

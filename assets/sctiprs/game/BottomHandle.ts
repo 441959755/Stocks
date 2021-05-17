@@ -3,6 +3,7 @@ import EventCfg from '../Utils/EventCfg';
 import GameCfg from './GameCfg';
 import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
+import DrawData from './DrawData';
 
 const { ccclass, property } = cc._decorator;
 @ccclass
@@ -118,6 +119,8 @@ export default class NewClass extends cc.Component {
 
 	curMcCount = 0;
 
+	allButData = [];
+
 	onLoad() {
 		this.gpData = GameCfg.data[0].data;
 
@@ -152,6 +155,7 @@ export default class NewClass extends cc.Component {
 				this.curMrCount = [];
 
 				this.curMcCount = 0;
+				this.allButData = [];
 			},
 			this
 		);
@@ -388,8 +392,8 @@ export default class NewClass extends cc.Component {
 				this.timeLabel[1].string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
 			}
 
-			this.moneyLabel[0].string = '总资产    ：' + GameCfg.ziChan;
-			this.moneyLabel[1].string = '当前资产：' + this.ziChan;
+			this.moneyLabel[0].string = '总资产    ：' + parseInt(GameCfg.ziChan + '');
+			this.moneyLabel[1].string = '当前资产：' + parseInt(this.ziChan + '');
 
 			this.priceLabel[0].string = '买入均价：' + 0;
 			if (GameCfg.huizhidatas >= 1) {
@@ -412,18 +416,18 @@ export default class NewClass extends cc.Component {
 				this.moneyLabel[0].string = '总资产    ：' + parseInt(this.ziChan + this.keMcCount * this.gpData[GameCfg.huizhidatas].close + '');
 			}
 
-			if (this.buyData.length == 0) {
+			if (this.allButData.length == 0) {
 				this.priceLabel[0].string = '买入均价：' + 0;
 			} else {
 				let jp = 0;
-				for (let i = 0; i < this.buyData.length; i++) {
-					jp += this.gpData[this.buyData[i]].close;
+				for (let i = 0; i < this.allButData.length; i++) {
+					jp += this.gpData[this.allButData[i]].close;
 				}
-				this.priceLabel[0].string = '买入均价：' + (jp / this.buyData.length).toFixed(2);
+				this.priceLabel[0].string = '买入均价：' + (jp / this.allButData.length).toFixed(2);
 			}
 
 			if (GameCfg.huizhidatas >= 1) {
-				this.priceLabel[1].string = '当前价格：' + this.gpData[GameCfg.huizhidatas - 1].close;
+				this.priceLabel[1].string = '当前价格：' + (this.gpData[GameCfg.huizhidatas].close).toFixed(2);
 			}
 
 			if (this.roundNumber <= 0) {
@@ -940,6 +944,7 @@ export default class NewClass extends cc.Component {
 			}
 
 		}
+
 	}
 
 	setRoundNumber(name?, flag?) {
@@ -959,6 +964,9 @@ export default class NewClass extends cc.Component {
 
 		//事件通知
 		GlobalEvent.emit(EventCfg.SLGEVENTNOTICE);
+
+		//
+		DrawData.reseleData();
 	}
 
 	onsetCurMrCount(mc) {
@@ -1038,6 +1046,7 @@ export default class NewClass extends cc.Component {
 			// 	// 	return
 			// }
 			this.buyData.push(GameCfg.huizhidatas - 1);
+			this.allButData.push(GameCfg.huizhidatas - 1);
 
 			let rate = this.onCurPositionRete();
 			if (state == 'mrBtn1') {

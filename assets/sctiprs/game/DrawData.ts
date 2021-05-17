@@ -1,6 +1,7 @@
 
 import { pb } from "../../protos/proto";
 import GameData from "../GameData";
+import ComUtils from "../Utils/ComUtils";
 import GameCfg from "./GameCfg";
 //计算划线的数据
 
@@ -49,14 +50,16 @@ export default class DrawData {
     public static arrMin60 = [];  //1小时的数据
 
     public static arrDay = [];
-    public static arrDay1 = [];
+    public static arrDay7 = [];
 
     public static dataChange(time, type, arr) {
+
+        time = ComUtils.getTimestamp(time);
         // this.arrMin5 = da;
         let t;
         let arr1 = [];
-        if (this.arrMin5.length <= 0) {
-            console.log('this.arrMin5 is null');
+        if (arr <= 0) {
+            console.log('arr is null');
             return;
         }
         //  if (type == 1) {
@@ -66,12 +69,12 @@ export default class DrawData {
         for (let index = arr.length - 1; index >= 0;) {
             if (index - t + 1 >= 0) {
                 let el = arr[index];
-                if (el.day <= time) {
+                if (parseInt(ComUtils.getTimestamp(el.day)) <= time) {
                     let day = el.day;
                     let open = arr[index - t + 1].open;
                     let close = el.close;
 
-                    let high = 0, low = el.low, volume = 0, ccl_hold;
+                    let high = 0, low = el.low, volume = 0, ccl_hold = 0;
                     for (let i = 0; i < t; i++) {
                         high = Math.max(arr[index - i].high, high);
                         low = Math.min(arr[index - i].low, low);
@@ -98,6 +101,28 @@ export default class DrawData {
             }
         }
         return arr1;
+    }
+
+    //
+    public static getTimeSlotData(to, total, arr) {
+        to = parseInt(ComUtils.getTimestamp(to));
+        let newArr = [];
+        for (let i = arr.length - 1; i >= 0; i--) {
+            let time = parseInt(ComUtils.getTimestamp(arr[i].day));
+            if (time <= to && newArr.length <= total) {
+                newArr.unshift(arr[i]);
+            }
+        }
+
+        return newArr;
+    }
+
+    public static reseleData() {
+        if (GameCfg.GameSet.ZLine == '5分钟K' || GameCfg.GameSet.ZLine == '15分钟K' || GameCfg.GameSet.ZLine == '30分钟K' || GameCfg.GameSet.ZLine == '60分钟K') {
+            this.arrDay = [];
+        } else {
+            this.arrMin5 = [];
+        }
     }
 
 

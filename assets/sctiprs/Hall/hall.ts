@@ -473,7 +473,15 @@ export default class NewClass extends cc.Component {
 				to: data.from,
 			}
 
-			data.total -= 100;
+			if (GameData.QHSet.ZLine == '15分钟K') {
+				preData.total *= 3;
+			} else if (GameData.QHSet.ZLine == '30分钟K') {
+				preData.total *= 6;
+			} else if (GameData.QHSet.ZLine == '60分钟K') {
+				preData.total *= 12;
+			}
+
+			//	data.total -= 50;
 			socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(preData), info => {
 				//console.log(JSON.stringify(info));
 				if (!info.items || info.items.length <= 0) {
@@ -546,6 +554,8 @@ export default class NewClass extends cc.Component {
 					data.total = this.curTotal;
 					this.curTotal = 0;
 				}
+				GameCfg.data[0].data = qhHQ;
+				data.from = qhHQ[qhHQ.length - 1].day;
 				this.getQHHangQing(data);
 			} else {
 				if (GameData.QHSet.ZLine == '5分钟K') {

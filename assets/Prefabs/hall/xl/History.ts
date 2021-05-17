@@ -45,7 +45,11 @@ export default class NewClass extends cc.Component {
         }
 
         let selectName, items;
-
+        let str = cc.sys.localStorage.getItem('TIMETEMP');
+        let TIMETEMP = [];
+        if (str) {
+            TIMETEMP = JSON.parse(str);
+        }
         // {"uid":1000042,"gType":"ShuangMang","quotesCode":600000,
         // "kType":"Day","kFrom":20100101,"kTo":20101010,
         // "stockProfitRate":19.1200008392334,
@@ -54,60 +58,63 @@ export default class NewClass extends cc.Component {
         let sumEar = 0;
         let sumrate = 0;
         for (let i = datas.length - 1; i >= 0; i--) {
-            let node = cc.instantiate(this.historyItem);
-            let nodes = node.children;
-            this.content.addChild(node);
-            node.setPosition(cc.v2(0, 0));
-            nodes[0].getComponent(cc.Label).string = (i + 1) + '';
+            if (TIMETEMP.indexOf(datas[i].ts) != -1) {
+                let node = cc.instantiate(this.historyItem);
+                let nodes = node.children;
+                this.content.addChild(node);
+                node.setPosition(cc.v2(0, 0));
+                nodes[0].getComponent(cc.Label).string = (i + 1) + '';
 
-            if (datas[i].quotesCode.length >= 7) {
-                datas[i].quotesCode = datas[i].quotesCode.slice(1);
+                if (datas[i].quotesCode.length >= 7) {
+                    datas[i].quotesCode = datas[i].quotesCode.slice(1);
+                }
+
+                if (GameCfg.GameType == pb.GameType.QiHuo) {
+                    items = GameCfgText.getQHItemInfo(datas[i].quotesCode);
+                    //  nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
+                    nodes[1].getComponent(cc.Label).string = items[2] + items[3];
+                    items && (nodes[2].getComponent(cc.Label).string = items[1])
+                } else {
+                    items = GameCfgText.getGPItemInfo(datas[i].quotesCode);
+                    nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
+                    items && (nodes[2].getComponent(cc.Label).string = items[1])
+                }
+                nodes[3].getComponent(cc.Label).string = datas[i].kFrom;			// 行情起始日期YYYYMMDD或时间HHMMSS
+                nodes[4].getComponent(cc.Label).string = datas[i].kTo;
+
+                nodes[5].getComponent(cc.Label).string = datas[i].stockProfitRate.toFixed(2) + '%';
+                if (datas[i].stockProfitRate > 0) {
+                    nodes[5].color = cc.Color.RED;
+                } else if (datas[i].stockProfitRate < 0) {
+                    nodes[5].color = cc.Color.GREEN;
+                } else {
+                    nodes[5].color = cc.Color.WHITE;
+                }
+                nodes[6].getComponent(cc.Label).string = datas[i].userProfitRate.toFixed(2) + '%';
+                if (datas[i].userProfitRate > 0) {
+                    nodes[6].color = cc.Color.RED;
+                } else if (datas[i].userProfitRate < 0) {
+                    nodes[6].color = cc.Color.GREEN;
+                } else {
+                    nodes[6].color = cc.Color.WHITE;
+                }
+                nodes[7].getComponent(cc.Label).string = datas[i].userProfit;
+                if (datas[i].userProfit > 0) {
+                    nodes[7].color = cc.Color.RED;
+                } else if (datas[i].userProfit < 0) {
+                    nodes[7].color = cc.Color.GREEN;
+                } else {
+                    nodes[7].color = cc.Color.WHITE;
+                }
+                if (GameCfg.GameType != pb.GameType.ShuangMang) {
+                    nodes[8].getComponent(cc.Label).string = datas[i].ts;
+                }
+
+                sumEar += datas[i].userProfit;
+
+                sumrate = ((sumrate / 100 + 1) * (datas[i].userProfitRate / 100 + 1) - 1);
             }
 
-            if (GameCfg.GameType == pb.GameType.QiHuo) {
-                items = GameCfgText.getQHItemInfo(datas[i].quotesCode);
-                //  nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
-                nodes[1].getComponent(cc.Label).string = items[2] + items[3];
-                items && (nodes[2].getComponent(cc.Label).string = items[1])
-            } else {
-                items = GameCfgText.getGPItemInfo(datas[i].quotesCode);
-                nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
-                items && (nodes[2].getComponent(cc.Label).string = items[1])
-            }
-            nodes[3].getComponent(cc.Label).string = datas[i].kFrom;			// 行情起始日期YYYYMMDD或时间HHMMSS
-            nodes[4].getComponent(cc.Label).string = datas[i].kTo;
-
-            nodes[5].getComponent(cc.Label).string = datas[i].stockProfitRate.toFixed(2) + '%';
-            if (datas[i].stockProfitRate > 0) {
-                nodes[5].color = cc.Color.RED;
-            } else if (datas[i].stockProfitRate < 0) {
-                nodes[5].color = cc.Color.GREEN;
-            } else {
-                nodes[5].color = cc.Color.WHITE;
-            }
-            nodes[6].getComponent(cc.Label).string = datas[i].userProfitRate.toFixed(2) + '%';
-            if (datas[i].userProfitRate > 0) {
-                nodes[6].color = cc.Color.RED;
-            } else if (datas[i].userProfitRate < 0) {
-                nodes[6].color = cc.Color.GREEN;
-            } else {
-                nodes[6].color = cc.Color.WHITE;
-            }
-            nodes[7].getComponent(cc.Label).string = datas[i].userProfit;
-            if (datas[i].userProfit > 0) {
-                nodes[7].color = cc.Color.RED;
-            } else if (datas[i].userProfit < 0) {
-                nodes[7].color = cc.Color.GREEN;
-            } else {
-                nodes[7].color = cc.Color.WHITE;
-            }
-            if (GameCfg.GameType != pb.GameType.ShuangMang) {
-                nodes[8].getComponent(cc.Label).string = datas[i].ts;
-            }
-
-            sumEar += datas[i].userProfit;
-
-            sumrate = ((sumrate / 100 + 1) * (datas[i].userProfitRate / 100 + 1) - 1);
         }
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
@@ -200,7 +207,7 @@ export default class NewClass extends cc.Component {
             console.log(nodes[3].getComponent(cc.Label).string);
             console.log('history' + GameCfg.history.huizhidatas)
             let data = {
-                code: parseInt(nodes[1].getComponent(cc.Label).string),
+                code: nodes[2].getComponent(cc.Label).string,
             }
 
             let dex = -1, items;
@@ -236,6 +243,45 @@ export default class NewClass extends cc.Component {
             }
 
         }
-    }
 
+        //清空记录
+        else if (name == 'xl_lsjl_qkjl') {
+            this.content.removeAllChildren();
+            let datas = this.historyInfo.results;
+            // console.log(JSON.stringify(datas));
+            if (datas.length <= 0) {
+                return;
+            }
+
+            let str = cc.sys.localStorage.getItem('TIMETEMP');
+            let TIMETEMP, arr = [];
+            if (str) {
+                TIMETEMP = JSON.parse(str);
+                arr = JSON.parse(str);
+                console.log(arr.length);
+
+                for (let i = datas.length - 1; i >= 0; i--) {
+
+                    if (TIMETEMP.length > 0) {
+
+                        if (TIMETEMP.indexOf(datas[i].ts) != -1) {
+                            cc.sys.localStorage.removeItem(datas[i].ts + 'ts');
+                            cc.sys.localStorage.removeItem(datas[i].ts + 'set');
+                            cc.sys.localStorage.removeItem(datas[i].ts + 'fill');
+                            cc.sys.localStorage.removeItem(datas[i].ts + 'notice');
+                            cc.sys.localStorage.removeItem(datas[i].ts + 'mark');
+                            cc.sys.localStorage.removeItem(datas[i].ts + 'cache');
+                            arr.splice(arr.indexOf(datas[i].ts), 1);
+                        }
+
+
+                    }
+                }
+                cc.sys.localStorage.removeItem('TIMETEMP');
+                console.log(arr.length);
+                cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(arr));
+            }
+        }
+
+    }
 }

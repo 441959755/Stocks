@@ -165,6 +165,22 @@ $root.pb = (function () {
      * @property {number} Rep_Game_SmxlReset=4012 Rep_Game_SmxlReset value
      * @property {number} Req_Game_GetGameOperation=4013 Req_Game_GetGameOperation value
      * @property {number} Rep_Game_GetGameOperation=4014 Rep_Game_GetGameOperation value
+     * @property {number} RoomMsgRange_BEG=5000 RoomMsgRange_BEG value
+     * @property {number} RoomMsgRange_END=5999 RoomMsgRange_END value
+     * @property {number} Req_Room_Create=5003 Req_Room_Create value
+     * @property {number} Rep_Room_Create=5004 Rep_Room_Create value
+     * @property {number} Req_Room_Enter=5005 Req_Room_Enter value
+     * @property {number} Rep_Room_Enter=5006 Rep_Room_Enter value
+     * @property {number} Req_Room_Leave=5007 Req_Room_Leave value
+     * @property {number} Rep_Room_Leave=5008 Rep_Room_Leave value
+     * @property {number} Req_Room_LostConn=5111 Req_Room_LostConn value
+     * @property {number} Req_Room_ReConn=5113 Req_Room_ReConn value
+     * @property {number} Sync_Room_Enter=5200 Sync_Room_Enter value
+     * @property {number} Sync_Room_Leave=5202 Sync_Room_Leave value
+     * @property {number} Sync_Room_Enter_Self=5204 Sync_Room_Enter_Self value
+     * @property {number} Sync_Room_ReConn=5206 Sync_Room_ReConn value
+     * @property {number} S2S_HeartBeat=10001 S2S_HeartBeat value
+     * @property {number} S2S_Broadcast=10003 S2S_Broadcast value
      */
     pb.MessageId = (function () {
         var valuesById = {}, values = Object.create(valuesById);
@@ -203,6 +219,22 @@ $root.pb = (function () {
         values[valuesById[4012] = "Rep_Game_SmxlReset"] = 4012;
         values[valuesById[4013] = "Req_Game_GetGameOperation"] = 4013;
         values[valuesById[4014] = "Rep_Game_GetGameOperation"] = 4014;
+        values[valuesById[5000] = "RoomMsgRange_BEG"] = 5000;
+        values[valuesById[5999] = "RoomMsgRange_END"] = 5999;
+        values[valuesById[5003] = "Req_Room_Create"] = 5003;
+        values[valuesById[5004] = "Rep_Room_Create"] = 5004;
+        values[valuesById[5005] = "Req_Room_Enter"] = 5005;
+        values[valuesById[5006] = "Rep_Room_Enter"] = 5006;
+        values[valuesById[5007] = "Req_Room_Leave"] = 5007;
+        values[valuesById[5008] = "Rep_Room_Leave"] = 5008;
+        values[valuesById[5111] = "Req_Room_LostConn"] = 5111;
+        values[valuesById[5113] = "Req_Room_ReConn"] = 5113;
+        values[valuesById[5200] = "Sync_Room_Enter"] = 5200;
+        values[valuesById[5202] = "Sync_Room_Leave"] = 5202;
+        values[valuesById[5204] = "Sync_Room_Enter_Self"] = 5204;
+        values[valuesById[5206] = "Sync_Room_ReConn"] = 5206;
+        values[valuesById[10001] = "S2S_HeartBeat"] = 10001;
+        values[valuesById[10003] = "S2S_Broadcast"] = 10003;
         return values;
     })();
 
@@ -216,6 +248,10 @@ $root.pb = (function () {
      * @property {number} CS_INVALID_PARAMETER=3 CS_INVALID_PARAMETER value
      * @property {number} CS_INVALID_ACCOUNT=4 CS_INVALID_ACCOUNT value
      * @property {number} CS_INVALID_PASSWORD=5 CS_INVALID_PASSWORD value
+     * @property {number} CS_TIMEOUT=6 CS_TIMEOUT value
+     * @property {number} CS_ROOM_INVALID=100 CS_ROOM_INVALID value
+     * @property {number} CS_ROOM_FULL=101 CS_ROOM_FULL value
+     * @property {number} CS_ROOM_FAIL_CHECKIN=102 CS_ROOM_FAIL_CHECKIN value
      */
     pb.ErrorCode = (function () {
         var valuesById = {}, values = Object.create(valuesById);
@@ -225,6 +261,10 @@ $root.pb = (function () {
         values[valuesById[3] = "CS_INVALID_PARAMETER"] = 3;
         values[valuesById[4] = "CS_INVALID_ACCOUNT"] = 4;
         values[valuesById[5] = "CS_INVALID_PASSWORD"] = 5;
+        values[valuesById[6] = "CS_TIMEOUT"] = 6;
+        values[valuesById[100] = "CS_ROOM_INVALID"] = 100;
+        values[valuesById[101] = "CS_ROOM_FULL"] = 101;
+        values[valuesById[102] = "CS_ROOM_FAIL_CHECKIN"] = 102;
         return values;
     })();
 
@@ -658,6 +698,7 @@ $root.pb = (function () {
          * @property {number|null} [pos] AdClicked pos
          * @property {string|null} [url] AdClicked url
          * @property {pb.AppFrom|null} [from] AdClicked from
+         * @property {string|null} [ua] AdClicked ua
          */
 
         /**
@@ -708,6 +749,14 @@ $root.pb = (function () {
         AdClicked.prototype.from = 0;
 
         /**
+         * AdClicked ua.
+         * @member {string} ua
+         * @memberof pb.AdClicked
+         * @instance
+         */
+        AdClicked.prototype.ua = "";
+
+        /**
          * Creates a new AdClicked instance using the specified properties.
          * @function create
          * @memberof pb.AdClicked
@@ -739,6 +788,8 @@ $root.pb = (function () {
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.url);
             if (message.from != null && Object.hasOwnProperty.call(message, "from"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.from);
+            if (message.ua != null && Object.hasOwnProperty.call(message, "ua"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.ua);
             return writer;
         };
 
@@ -784,6 +835,9 @@ $root.pb = (function () {
                         break;
                     case 4:
                         message.from = reader.int32();
+                        break;
+                    case 5:
+                        message.ua = reader.string();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -859,6 +913,9 @@ $root.pb = (function () {
                     case 8888:
                         break;
                 }
+            if (message.ua != null && message.hasOwnProperty("ua"))
+                if (!$util.isString(message.ua))
+                    return "ua: string expected";
             return null;
         };
 
@@ -978,6 +1035,8 @@ $root.pb = (function () {
                     message.from = 8888;
                     break;
             }
+            if (object.ua != null)
+                message.ua = String(object.ua);
             return message;
         };
 
@@ -999,6 +1058,7 @@ $root.pb = (function () {
                 object.pos = 0;
                 object.url = "";
                 object.from = options.enums === String ? "Android_000" : 0;
+                object.ua = "";
             }
             if (message.uid != null && message.hasOwnProperty("uid"))
                 object.uid = message.uid;
@@ -1008,6 +1068,8 @@ $root.pb = (function () {
                 object.url = message.url;
             if (message.from != null && message.hasOwnProperty("from"))
                 object.from = options.enums === String ? $root.pb.AppFrom[message.from] : message.from;
+            if (message.ua != null && message.hasOwnProperty("ua"))
+                object.ua = message.ua;
             return object;
         };
 
@@ -2912,8 +2974,8 @@ $root.pb = (function () {
          * @property {pb.GameType|null} [gType] GameResult gType
          * @property {number|null} [quotesCode] GameResult quotesCode
          * @property {pb.KType|null} [kType] GameResult kType
-         * @property {number|null} [kFrom] GameResult kFrom
-         * @property {number|null} [kTo] GameResult kTo
+         * @property {number|Long|null} [kFrom] GameResult kFrom
+         * @property {number|Long|null} [kTo] GameResult kTo
          * @property {number|null} [stockProfitRate] GameResult stockProfitRate
          * @property {number|null} [userProfitRate] GameResult userProfitRate
          * @property {number|Long|null} [userCapital] GameResult userCapital
@@ -2972,19 +3034,19 @@ $root.pb = (function () {
 
         /**
          * GameResult kFrom.
-         * @member {number} kFrom
+         * @member {number|Long} kFrom
          * @memberof pb.GameResult
          * @instance
          */
-        GameResult.prototype.kFrom = 0;
+        GameResult.prototype.kFrom = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * GameResult kTo.
-         * @member {number} kTo
+         * @member {number|Long} kTo
          * @memberof pb.GameResult
          * @instance
          */
-        GameResult.prototype.kTo = 0;
+        GameResult.prototype.kTo = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * GameResult stockProfitRate.
@@ -3075,9 +3137,9 @@ $root.pb = (function () {
             if (message.kType != null && Object.hasOwnProperty.call(message, "kType"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.kType);
             if (message.kFrom != null && Object.hasOwnProperty.call(message, "kFrom"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.kFrom);
+                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.kFrom);
             if (message.kTo != null && Object.hasOwnProperty.call(message, "kTo"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.kTo);
+                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.kTo);
             if (message.stockProfitRate != null && Object.hasOwnProperty.call(message, "stockProfitRate"))
                 writer.uint32(/* id 7, wireType 1 =*/57).double(message.stockProfitRate);
             if (message.userProfitRate != null && Object.hasOwnProperty.call(message, "userProfitRate"))
@@ -3139,10 +3201,10 @@ $root.pb = (function () {
                         message.kType = reader.int32();
                         break;
                     case 5:
-                        message.kFrom = reader.int32();
+                        message.kFrom = reader.int64();
                         break;
                     case 6:
-                        message.kTo = reader.int32();
+                        message.kTo = reader.int64();
                         break;
                     case 7:
                         message.stockProfitRate = reader.double();
@@ -3244,11 +3306,11 @@ $root.pb = (function () {
                         break;
                 }
             if (message.kFrom != null && message.hasOwnProperty("kFrom"))
-                if (!$util.isInteger(message.kFrom))
-                    return "kFrom: integer expected";
+                if (!$util.isInteger(message.kFrom) && !(message.kFrom && $util.isInteger(message.kFrom.low) && $util.isInteger(message.kFrom.high)))
+                    return "kFrom: integer|Long expected";
             if (message.kTo != null && message.hasOwnProperty("kTo"))
-                if (!$util.isInteger(message.kTo))
-                    return "kTo: integer expected";
+                if (!$util.isInteger(message.kTo) && !(message.kTo && $util.isInteger(message.kTo.low) && $util.isInteger(message.kTo.high)))
+                    return "kTo: integer|Long expected";
             if (message.stockProfitRate != null && message.hasOwnProperty("stockProfitRate"))
                 if (typeof message.stockProfitRate !== "number")
                     return "stockProfitRate: number expected";
@@ -3394,9 +3456,23 @@ $root.pb = (function () {
                     break;
             }
             if (object.kFrom != null)
-                message.kFrom = object.kFrom | 0;
+                if ($util.Long)
+                    (message.kFrom = $util.Long.fromValue(object.kFrom)).unsigned = false;
+                else if (typeof object.kFrom === "string")
+                    message.kFrom = parseInt(object.kFrom, 10);
+                else if (typeof object.kFrom === "number")
+                    message.kFrom = object.kFrom;
+                else if (typeof object.kFrom === "object")
+                    message.kFrom = new $util.LongBits(object.kFrom.low >>> 0, object.kFrom.high >>> 0).toNumber();
             if (object.kTo != null)
-                message.kTo = object.kTo | 0;
+                if ($util.Long)
+                    (message.kTo = $util.Long.fromValue(object.kTo)).unsigned = false;
+                else if (typeof object.kTo === "string")
+                    message.kTo = parseInt(object.kTo, 10);
+                else if (typeof object.kTo === "number")
+                    message.kTo = object.kTo;
+                else if (typeof object.kTo === "object")
+                    message.kTo = new $util.LongBits(object.kTo.low >>> 0, object.kTo.high >>> 0).toNumber();
             if (object.stockProfitRate != null)
                 message.stockProfitRate = Number(object.stockProfitRate);
             if (object.userProfitRate != null)
@@ -3460,8 +3536,16 @@ $root.pb = (function () {
                 object.gType = options.enums === String ? "GameType_NULL" : 0;
                 object.quotesCode = 0;
                 object.kType = options.enums === String ? "KType_NULL" : 0;
-                object.kFrom = 0;
-                object.kTo = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.kFrom = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.kFrom = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.kTo = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.kTo = options.longs === String ? "0" : 0;
                 object.stockProfitRate = 0;
                 object.userProfitRate = 0;
                 if ($util.Long) {
@@ -3495,9 +3579,15 @@ $root.pb = (function () {
             if (message.kType != null && message.hasOwnProperty("kType"))
                 object.kType = options.enums === String ? $root.pb.KType[message.kType] : message.kType;
             if (message.kFrom != null && message.hasOwnProperty("kFrom"))
-                object.kFrom = message.kFrom;
+                if (typeof message.kFrom === "number")
+                    object.kFrom = options.longs === String ? String(message.kFrom) : message.kFrom;
+                else
+                    object.kFrom = options.longs === String ? $util.Long.prototype.toString.call(message.kFrom) : options.longs === Number ? new $util.LongBits(message.kFrom.low >>> 0, message.kFrom.high >>> 0).toNumber() : message.kFrom;
             if (message.kTo != null && message.hasOwnProperty("kTo"))
-                object.kTo = message.kTo;
+                if (typeof message.kTo === "number")
+                    object.kTo = options.longs === String ? String(message.kTo) : message.kTo;
+                else
+                    object.kTo = options.longs === String ? $util.Long.prototype.toString.call(message.kTo) : options.longs === Number ? new $util.LongBits(message.kTo.low >>> 0, message.kTo.high >>> 0).toNumber() : message.kTo;
             if (message.stockProfitRate != null && message.hasOwnProperty("stockProfitRate"))
                 object.stockProfitRate = options.json && !isFinite(message.stockProfitRate) ? String(message.stockProfitRate) : message.stockProfitRate;
             if (message.userProfitRate != null && message.hasOwnProperty("userProfitRate"))
@@ -3547,9 +3637,13 @@ $root.pb = (function () {
          * Properties of a GameOperationItem.
          * @memberof pb
          * @interface IGameOperationItem
-         * @property {number|null} [ts] GameOperationItem ts
          * @property {pb.GameOperationId|null} [opId] GameOperationItem opId
-         * @property {number|Long|null} [opVal] GameOperationItem opVal
+         * @property {number|null} [code] GameOperationItem code
+         * @property {pb.KType|null} [kType] GameOperationItem kType
+         * @property {number|null} [kTs] GameOperationItem kTs
+         * @property {number|null} [price] GameOperationItem price
+         * @property {number|Long|null} [volume] GameOperationItem volume
+         * @property {number|Long|null} [opTs] GameOperationItem opTs
          */
 
         /**
@@ -3568,14 +3662,6 @@ $root.pb = (function () {
         }
 
         /**
-         * GameOperationItem ts.
-         * @member {number} ts
-         * @memberof pb.GameOperationItem
-         * @instance
-         */
-        GameOperationItem.prototype.ts = 0;
-
-        /**
          * GameOperationItem opId.
          * @member {pb.GameOperationId} opId
          * @memberof pb.GameOperationItem
@@ -3584,12 +3670,52 @@ $root.pb = (function () {
         GameOperationItem.prototype.opId = 0;
 
         /**
-         * GameOperationItem opVal.
-         * @member {number|Long} opVal
+         * GameOperationItem code.
+         * @member {number} code
          * @memberof pb.GameOperationItem
          * @instance
          */
-        GameOperationItem.prototype.opVal = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameOperationItem.prototype.code = 0;
+
+        /**
+         * GameOperationItem kType.
+         * @member {pb.KType} kType
+         * @memberof pb.GameOperationItem
+         * @instance
+         */
+        GameOperationItem.prototype.kType = 0;
+
+        /**
+         * GameOperationItem kTs.
+         * @member {number} kTs
+         * @memberof pb.GameOperationItem
+         * @instance
+         */
+        GameOperationItem.prototype.kTs = 0;
+
+        /**
+         * GameOperationItem price.
+         * @member {number} price
+         * @memberof pb.GameOperationItem
+         * @instance
+         */
+        GameOperationItem.prototype.price = 0;
+
+        /**
+         * GameOperationItem volume.
+         * @member {number|Long} volume
+         * @memberof pb.GameOperationItem
+         * @instance
+         */
+        GameOperationItem.prototype.volume = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * GameOperationItem opTs.
+         * @member {number|Long} opTs
+         * @memberof pb.GameOperationItem
+         * @instance
+         */
+        GameOperationItem.prototype.opTs = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * Creates a new GameOperationItem instance using the specified properties.
@@ -3615,12 +3741,20 @@ $root.pb = (function () {
         GameOperationItem.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ts != null && Object.hasOwnProperty.call(message, "ts"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ts);
             if (message.opId != null && Object.hasOwnProperty.call(message, "opId"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.opId);
-            if (message.opVal != null && Object.hasOwnProperty.call(message, "opVal"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.opVal);
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.opId);
+            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.code);
+            if (message.kType != null && Object.hasOwnProperty.call(message, "kType"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.kType);
+            if (message.kTs != null && Object.hasOwnProperty.call(message, "kTs"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.kTs);
+            if (message.price != null && Object.hasOwnProperty.call(message, "price"))
+                writer.uint32(/* id 5, wireType 1 =*/41).double(message.price);
+            if (message.volume != null && Object.hasOwnProperty.call(message, "volume"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.volume);
+            if (message.opTs != null && Object.hasOwnProperty.call(message, "opTs"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.opTs);
             return writer;
         };
 
@@ -3656,13 +3790,25 @@ $root.pb = (function () {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                     case 1:
-                        message.ts = reader.int32();
-                        break;
-                    case 2:
                         message.opId = reader.int32();
                         break;
+                    case 2:
+                        message.code = reader.int32();
+                        break;
                     case 3:
-                        message.opVal = reader.int64();
+                        message.kType = reader.int32();
+                        break;
+                    case 4:
+                        message.kTs = reader.int32();
+                        break;
+                    case 5:
+                        message.price = reader.double();
+                        break;
+                    case 6:
+                        message.volume = reader.int64();
+                        break;
+                    case 7:
+                        message.opTs = reader.int64();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -3699,9 +3845,6 @@ $root.pb = (function () {
         GameOperationItem.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.ts != null && message.hasOwnProperty("ts"))
-                if (!$util.isInteger(message.ts))
-                    return "ts: integer expected";
             if (message.opId != null && message.hasOwnProperty("opId"))
                 switch (message.opId) {
                     default:
@@ -3717,9 +3860,37 @@ $root.pb = (function () {
                     case 150:
                         break;
                 }
-            if (message.opVal != null && message.hasOwnProperty("opVal"))
-                if (!$util.isInteger(message.opVal) && !(message.opVal && $util.isInteger(message.opVal.low) && $util.isInteger(message.opVal.high)))
-                    return "opVal: integer|Long expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code))
+                    return "code: integer expected";
+            if (message.kType != null && message.hasOwnProperty("kType"))
+                switch (message.kType) {
+                    default:
+                        return "kType: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 10:
+                    case 11:
+                        break;
+                }
+            if (message.kTs != null && message.hasOwnProperty("kTs"))
+                if (!$util.isInteger(message.kTs))
+                    return "kTs: integer expected";
+            if (message.price != null && message.hasOwnProperty("price"))
+                if (typeof message.price !== "number")
+                    return "price: number expected";
+            if (message.volume != null && message.hasOwnProperty("volume"))
+                if (!$util.isInteger(message.volume) && !(message.volume && $util.isInteger(message.volume.low) && $util.isInteger(message.volume.high)))
+                    return "volume: integer|Long expected";
+            if (message.opTs != null && message.hasOwnProperty("opTs"))
+                if (!$util.isInteger(message.opTs) && !(message.opTs && $util.isInteger(message.opTs.low) && $util.isInteger(message.opTs.high)))
+                    return "opTs: integer|Long expected";
             return null;
         };
 
@@ -3735,8 +3906,6 @@ $root.pb = (function () {
             if (object instanceof $root.pb.GameOperationItem)
                 return object;
             var message = new $root.pb.GameOperationItem();
-            if (object.ts != null)
-                message.ts = object.ts | 0;
             switch (object.opId) {
                 case "GameOperationId_NULL":
                 case 0:
@@ -3775,271 +3944,6 @@ $root.pb = (function () {
                     message.opId = 150;
                     break;
             }
-            if (object.opVal != null)
-                if ($util.Long)
-                    (message.opVal = $util.Long.fromValue(object.opVal)).unsigned = false;
-                else if (typeof object.opVal === "string")
-                    message.opVal = parseInt(object.opVal, 10);
-                else if (typeof object.opVal === "number")
-                    message.opVal = object.opVal;
-                else if (typeof object.opVal === "object")
-                    message.opVal = new $util.LongBits(object.opVal.low >>> 0, object.opVal.high >>> 0).toNumber();
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a GameOperationItem message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof pb.GameOperationItem
-         * @static
-         * @param {pb.GameOperationItem} message GameOperationItem
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        GameOperationItem.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.ts = 0;
-                object.opId = options.enums === String ? "GameOperationId_NULL" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.opVal = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.opVal = options.longs === String ? "0" : 0;
-            }
-            if (message.ts != null && message.hasOwnProperty("ts"))
-                object.ts = message.ts;
-            if (message.opId != null && message.hasOwnProperty("opId"))
-                object.opId = options.enums === String ? $root.pb.GameOperationId[message.opId] : message.opId;
-            if (message.opVal != null && message.hasOwnProperty("opVal"))
-                if (typeof message.opVal === "number")
-                    object.opVal = options.longs === String ? String(message.opVal) : message.opVal;
-                else
-                    object.opVal = options.longs === String ? $util.Long.prototype.toString.call(message.opVal) : options.longs === Number ? new $util.LongBits(message.opVal.low >>> 0, message.opVal.high >>> 0).toNumber() : message.opVal;
-            return object;
-        };
-
-        /**
-         * Converts this GameOperationItem to JSON.
-         * @function toJSON
-         * @memberof pb.GameOperationItem
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        GameOperationItem.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return GameOperationItem;
-    })();
-
-    pb.GameOperations = (function () {
-
-        /**
-         * Properties of a GameOperations.
-         * @memberof pb
-         * @interface IGameOperations
-         * @property {number|null} [code] GameOperations code
-         * @property {pb.KType|null} [kType] GameOperations kType
-         * @property {Array.<pb.IGameOperationItem>|null} [items] GameOperations items
-         */
-
-        /**
-         * Constructs a new GameOperations.
-         * @memberof pb
-         * @classdesc Represents a GameOperations.
-         * @implements IGameOperations
-         * @constructor
-         * @param {pb.IGameOperations=} [properties] Properties to set
-         */
-        function GameOperations(properties) {
-            this.items = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * GameOperations code.
-         * @member {number} code
-         * @memberof pb.GameOperations
-         * @instance
-         */
-        GameOperations.prototype.code = 0;
-
-        /**
-         * GameOperations kType.
-         * @member {pb.KType} kType
-         * @memberof pb.GameOperations
-         * @instance
-         */
-        GameOperations.prototype.kType = 0;
-
-        /**
-         * GameOperations items.
-         * @member {Array.<pb.IGameOperationItem>} items
-         * @memberof pb.GameOperations
-         * @instance
-         */
-        GameOperations.prototype.items = $util.emptyArray;
-
-        /**
-         * Creates a new GameOperations instance using the specified properties.
-         * @function create
-         * @memberof pb.GameOperations
-         * @static
-         * @param {pb.IGameOperations=} [properties] Properties to set
-         * @returns {pb.GameOperations} GameOperations instance
-         */
-        GameOperations.create = function create(properties) {
-            return new GameOperations(properties);
-        };
-
-        /**
-         * Encodes the specified GameOperations message. Does not implicitly {@link pb.GameOperations.verify|verify} messages.
-         * @function encode
-         * @memberof pb.GameOperations
-         * @static
-         * @param {pb.IGameOperations} message GameOperations message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        GameOperations.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
-            if (message.kType != null && Object.hasOwnProperty.call(message, "kType"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.kType);
-            if (message.items != null && message.items.length)
-                for (var i = 0; i < message.items.length; ++i)
-                    $root.pb.GameOperationItem.encode(message.items[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified GameOperations message, length delimited. Does not implicitly {@link pb.GameOperations.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof pb.GameOperations
-         * @static
-         * @param {pb.IGameOperations} message GameOperations message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        GameOperations.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a GameOperations message from the specified reader or buffer.
-         * @function decode
-         * @memberof pb.GameOperations
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {pb.GameOperations} GameOperations
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        GameOperations.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.GameOperations();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                    case 1:
-                        message.code = reader.int32();
-                        break;
-                    case 2:
-                        message.kType = reader.int32();
-                        break;
-                    case 3:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.GameOperationItem.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a GameOperations message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof pb.GameOperations
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {pb.GameOperations} GameOperations
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        GameOperations.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a GameOperations message.
-         * @function verify
-         * @memberof pb.GameOperations
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        GameOperations.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.code != null && message.hasOwnProperty("code"))
-                if (!$util.isInteger(message.code))
-                    return "code: integer expected";
-            if (message.kType != null && message.hasOwnProperty("kType"))
-                switch (message.kType) {
-                    default:
-                        return "kType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 10:
-                    case 11:
-                        break;
-                }
-            if (message.items != null && message.hasOwnProperty("items")) {
-                if (!Array.isArray(message.items))
-                    return "items: array expected";
-                for (var i = 0; i < message.items.length; ++i) {
-                    var error = $root.pb.GameOperationItem.verify(message.items[i]);
-                    if (error)
-                        return "items." + error;
-                }
-            }
-            return null;
-        };
-
-        /**
-         * Creates a GameOperations message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof pb.GameOperations
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {pb.GameOperations} GameOperations
-         */
-        GameOperations.fromObject = function fromObject(object) {
-            if (object instanceof $root.pb.GameOperations)
-                return object;
-            var message = new $root.pb.GameOperations();
             if (object.code != null)
                 message.code = object.code | 0;
             switch (object.kType) {
@@ -4084,6 +3988,256 @@ $root.pb = (function () {
                     message.kType = 11;
                     break;
             }
+            if (object.kTs != null)
+                message.kTs = object.kTs | 0;
+            if (object.price != null)
+                message.price = Number(object.price);
+            if (object.volume != null)
+                if ($util.Long)
+                    (message.volume = $util.Long.fromValue(object.volume)).unsigned = false;
+                else if (typeof object.volume === "string")
+                    message.volume = parseInt(object.volume, 10);
+                else if (typeof object.volume === "number")
+                    message.volume = object.volume;
+                else if (typeof object.volume === "object")
+                    message.volume = new $util.LongBits(object.volume.low >>> 0, object.volume.high >>> 0).toNumber();
+            if (object.opTs != null)
+                if ($util.Long)
+                    (message.opTs = $util.Long.fromValue(object.opTs)).unsigned = false;
+                else if (typeof object.opTs === "string")
+                    message.opTs = parseInt(object.opTs, 10);
+                else if (typeof object.opTs === "number")
+                    message.opTs = object.opTs;
+                else if (typeof object.opTs === "object")
+                    message.opTs = new $util.LongBits(object.opTs.low >>> 0, object.opTs.high >>> 0).toNumber();
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GameOperationItem message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.GameOperationItem
+         * @static
+         * @param {pb.GameOperationItem} message GameOperationItem
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GameOperationItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.opId = options.enums === String ? "GameOperationId_NULL" : 0;
+                object.code = 0;
+                object.kType = options.enums === String ? "KType_NULL" : 0;
+                object.kTs = 0;
+                object.price = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.volume = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.volume = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.opTs = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.opTs = options.longs === String ? "0" : 0;
+            }
+            if (message.opId != null && message.hasOwnProperty("opId"))
+                object.opId = options.enums === String ? $root.pb.GameOperationId[message.opId] : message.opId;
+            if (message.code != null && message.hasOwnProperty("code"))
+                object.code = message.code;
+            if (message.kType != null && message.hasOwnProperty("kType"))
+                object.kType = options.enums === String ? $root.pb.KType[message.kType] : message.kType;
+            if (message.kTs != null && message.hasOwnProperty("kTs"))
+                object.kTs = message.kTs;
+            if (message.price != null && message.hasOwnProperty("price"))
+                object.price = options.json && !isFinite(message.price) ? String(message.price) : message.price;
+            if (message.volume != null && message.hasOwnProperty("volume"))
+                if (typeof message.volume === "number")
+                    object.volume = options.longs === String ? String(message.volume) : message.volume;
+                else
+                    object.volume = options.longs === String ? $util.Long.prototype.toString.call(message.volume) : options.longs === Number ? new $util.LongBits(message.volume.low >>> 0, message.volume.high >>> 0).toNumber() : message.volume;
+            if (message.opTs != null && message.hasOwnProperty("opTs"))
+                if (typeof message.opTs === "number")
+                    object.opTs = options.longs === String ? String(message.opTs) : message.opTs;
+                else
+                    object.opTs = options.longs === String ? $util.Long.prototype.toString.call(message.opTs) : options.longs === Number ? new $util.LongBits(message.opTs.low >>> 0, message.opTs.high >>> 0).toNumber() : message.opTs;
+            return object;
+        };
+
+        /**
+         * Converts this GameOperationItem to JSON.
+         * @function toJSON
+         * @memberof pb.GameOperationItem
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GameOperationItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameOperationItem;
+    })();
+
+    pb.GameOperations = (function () {
+
+        /**
+         * Properties of a GameOperations.
+         * @memberof pb
+         * @interface IGameOperations
+         * @property {Array.<pb.IGameOperationItem>|null} [items] GameOperations items
+         */
+
+        /**
+         * Constructs a new GameOperations.
+         * @memberof pb
+         * @classdesc Represents a GameOperations.
+         * @implements IGameOperations
+         * @constructor
+         * @param {pb.IGameOperations=} [properties] Properties to set
+         */
+        function GameOperations(properties) {
+            this.items = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GameOperations items.
+         * @member {Array.<pb.IGameOperationItem>} items
+         * @memberof pb.GameOperations
+         * @instance
+         */
+        GameOperations.prototype.items = $util.emptyArray;
+
+        /**
+         * Creates a new GameOperations instance using the specified properties.
+         * @function create
+         * @memberof pb.GameOperations
+         * @static
+         * @param {pb.IGameOperations=} [properties] Properties to set
+         * @returns {pb.GameOperations} GameOperations instance
+         */
+        GameOperations.create = function create(properties) {
+            return new GameOperations(properties);
+        };
+
+        /**
+         * Encodes the specified GameOperations message. Does not implicitly {@link pb.GameOperations.verify|verify} messages.
+         * @function encode
+         * @memberof pb.GameOperations
+         * @static
+         * @param {pb.IGameOperations} message GameOperations message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameOperations.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.items != null && message.items.length)
+                for (var i = 0; i < message.items.length; ++i)
+                    $root.pb.GameOperationItem.encode(message.items[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GameOperations message, length delimited. Does not implicitly {@link pb.GameOperations.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.GameOperations
+         * @static
+         * @param {pb.IGameOperations} message GameOperations message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameOperations.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GameOperations message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.GameOperations
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.GameOperations} GameOperations
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameOperations.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.GameOperations();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        if (!(message.items && message.items.length))
+                            message.items = [];
+                        message.items.push($root.pb.GameOperationItem.decode(reader, reader.uint32()));
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a GameOperations message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.GameOperations
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.GameOperations} GameOperations
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameOperations.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GameOperations message.
+         * @function verify
+         * @memberof pb.GameOperations
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GameOperations.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.items != null && message.hasOwnProperty("items")) {
+                if (!Array.isArray(message.items))
+                    return "items: array expected";
+                for (var i = 0; i < message.items.length; ++i) {
+                    var error = $root.pb.GameOperationItem.verify(message.items[i]);
+                    if (error)
+                        return "items." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a GameOperations message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.GameOperations
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.GameOperations} GameOperations
+         */
+        GameOperations.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.GameOperations)
+                return object;
+            var message = new $root.pb.GameOperations();
             if (object.items) {
                 if (!Array.isArray(object.items))
                     throw TypeError(".pb.GameOperations.items: array expected");
@@ -4112,14 +4266,6 @@ $root.pb = (function () {
             var object = {};
             if (options.arrays || options.defaults)
                 object.items = [];
-            if (options.defaults) {
-                object.code = 0;
-                object.kType = options.enums === String ? "KType_NULL" : 0;
-            }
-            if (message.code != null && message.hasOwnProperty("code"))
-                object.code = message.code;
-            if (message.kType != null && message.hasOwnProperty("kType"))
-                object.kType = options.enums === String ? $root.pb.KType[message.kType] : message.kType;
             if (message.items && message.items.length) {
                 object.items = [];
                 for (var j = 0; j < message.items.length; ++j)
@@ -7164,6 +7310,3043 @@ $root.pb = (function () {
         };
 
         return CmdGetSmxlReportReply;
+    })();
+
+    pb.CmdRoomCreate = (function () {
+
+        /**
+         * Properties of a CmdRoomCreate.
+         * @memberof pb
+         * @interface ICmdRoomCreate
+         * @property {pb.GameType|null} [game] CmdRoomCreate game
+         * @property {number|null} [uid] CmdRoomCreate uid
+         * @property {number|null} [node] CmdRoomCreate node
+         * @property {number|null} [capital] CmdRoomCreate capital
+         */
+
+        /**
+         * Constructs a new CmdRoomCreate.
+         * @memberof pb
+         * @classdesc Represents a CmdRoomCreate.
+         * @implements ICmdRoomCreate
+         * @constructor
+         * @param {pb.ICmdRoomCreate=} [properties] Properties to set
+         */
+        function CmdRoomCreate(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdRoomCreate game.
+         * @member {pb.GameType} game
+         * @memberof pb.CmdRoomCreate
+         * @instance
+         */
+        CmdRoomCreate.prototype.game = 0;
+
+        /**
+         * CmdRoomCreate uid.
+         * @member {number} uid
+         * @memberof pb.CmdRoomCreate
+         * @instance
+         */
+        CmdRoomCreate.prototype.uid = 0;
+
+        /**
+         * CmdRoomCreate node.
+         * @member {number} node
+         * @memberof pb.CmdRoomCreate
+         * @instance
+         */
+        CmdRoomCreate.prototype.node = 0;
+
+        /**
+         * CmdRoomCreate capital.
+         * @member {number} capital
+         * @memberof pb.CmdRoomCreate
+         * @instance
+         */
+        CmdRoomCreate.prototype.capital = 0;
+
+        /**
+         * Creates a new CmdRoomCreate instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdRoomCreate
+         * @static
+         * @param {pb.ICmdRoomCreate=} [properties] Properties to set
+         * @returns {pb.CmdRoomCreate} CmdRoomCreate instance
+         */
+        CmdRoomCreate.create = function create(properties) {
+            return new CmdRoomCreate(properties);
+        };
+
+        /**
+         * Encodes the specified CmdRoomCreate message. Does not implicitly {@link pb.CmdRoomCreate.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdRoomCreate
+         * @static
+         * @param {pb.ICmdRoomCreate} message CmdRoomCreate message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRoomCreate.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.game != null && Object.hasOwnProperty.call(message, "game"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.game);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.uid);
+            if (message.node != null && Object.hasOwnProperty.call(message, "node"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.node);
+            if (message.capital != null && Object.hasOwnProperty.call(message, "capital"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.capital);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdRoomCreate message, length delimited. Does not implicitly {@link pb.CmdRoomCreate.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdRoomCreate
+         * @static
+         * @param {pb.ICmdRoomCreate} message CmdRoomCreate message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRoomCreate.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdRoomCreate message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdRoomCreate
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdRoomCreate} CmdRoomCreate
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRoomCreate.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdRoomCreate();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.game = reader.int32();
+                        break;
+                    case 2:
+                        message.uid = reader.int32();
+                        break;
+                    case 3:
+                        message.node = reader.int32();
+                        break;
+                    case 4:
+                        message.capital = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdRoomCreate message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdRoomCreate
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdRoomCreate} CmdRoomCreate
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRoomCreate.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdRoomCreate message.
+         * @function verify
+         * @memberof pb.CmdRoomCreate
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdRoomCreate.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.game != null && message.hasOwnProperty("game"))
+                switch (message.game) {
+                    default:
+                        return "game: enum value expected";
+                    case 0:
+                    case 3:
+                    case 4:
+                    case 17:
+                    case 11:
+                    case 6:
+                    case 1:
+                    case 2:
+                    case 16:
+                    case 15:
+                    case 10:
+                    case 9:
+                    case 7:
+                    case 8:
+                    case 30:
+                        break;
+                }
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.node != null && message.hasOwnProperty("node"))
+                if (!$util.isInteger(message.node))
+                    return "node: integer expected";
+            if (message.capital != null && message.hasOwnProperty("capital"))
+                if (!$util.isInteger(message.capital))
+                    return "capital: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdRoomCreate message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdRoomCreate
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdRoomCreate} CmdRoomCreate
+         */
+        CmdRoomCreate.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdRoomCreate)
+                return object;
+            var message = new $root.pb.CmdRoomCreate();
+            switch (object.game) {
+                case "GameType_NULL":
+                case 0:
+                    message.game = 0;
+                    break;
+                case "ShuangMang":
+                case 3:
+                    message.game = 3;
+                    break;
+                case "DingXiang":
+                case 4:
+                    message.game = 4;
+                    break;
+                case "ZhiBiao":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "TiaoJianDan":
+                case 11:
+                    message.game = 11;
+                    break;
+                case "QiHuo":
+                case 6:
+                    message.game = 6;
+                    break;
+                case "JJ_PK":
+                case 1:
+                    message.game = 1;
+                    break;
+                case "JJ_DuoKong":
+                case 2:
+                    message.game = 2;
+                    break;
+                case "JJ_ChuangGuan":
+                case 16:
+                    message.game = 16;
+                    break;
+                case "JJ_QiHuo":
+                case 15:
+                    message.game = 15;
+                    break;
+                case "MoNiChaoGu":
+                case 10:
+                    message.game = 10;
+                    break;
+                case "ChaoGuDaSai":
+                case 9:
+                    message.game = 9;
+                    break;
+                case "GeGuJingChai":
+                case 7:
+                    message.game = 7;
+                    break;
+                case "DaPanJingChai":
+                case 8:
+                    message.game = 8;
+                    break;
+                case "MaxGameType":
+                case 30:
+                    message.game = 30;
+                    break;
+            }
+            if (object.uid != null)
+                message.uid = object.uid | 0;
+            if (object.node != null)
+                message.node = object.node | 0;
+            if (object.capital != null)
+                message.capital = object.capital | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdRoomCreate message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdRoomCreate
+         * @static
+         * @param {pb.CmdRoomCreate} message CmdRoomCreate
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdRoomCreate.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.game = options.enums === String ? "GameType_NULL" : 0;
+                object.uid = 0;
+                object.node = 0;
+                object.capital = 0;
+            }
+            if (message.game != null && message.hasOwnProperty("game"))
+                object.game = options.enums === String ? $root.pb.GameType[message.game] : message.game;
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            if (message.node != null && message.hasOwnProperty("node"))
+                object.node = message.node;
+            if (message.capital != null && message.hasOwnProperty("capital"))
+                object.capital = message.capital;
+            return object;
+        };
+
+        /**
+         * Converts this CmdRoomCreate to JSON.
+         * @function toJSON
+         * @memberof pb.CmdRoomCreate
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdRoomCreate.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdRoomCreate;
+    })();
+
+    pb.CmdRoomCreateReply = (function () {
+
+        /**
+         * Properties of a CmdRoomCreateReply.
+         * @memberof pb
+         * @interface ICmdRoomCreateReply
+         * @property {pb.IErrorInfo|null} [err] CmdRoomCreateReply err
+         * @property {number|null} [id] CmdRoomCreateReply id
+         */
+
+        /**
+         * Constructs a new CmdRoomCreateReply.
+         * @memberof pb
+         * @classdesc Represents a CmdRoomCreateReply.
+         * @implements ICmdRoomCreateReply
+         * @constructor
+         * @param {pb.ICmdRoomCreateReply=} [properties] Properties to set
+         */
+        function CmdRoomCreateReply(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdRoomCreateReply err.
+         * @member {pb.IErrorInfo|null|undefined} err
+         * @memberof pb.CmdRoomCreateReply
+         * @instance
+         */
+        CmdRoomCreateReply.prototype.err = null;
+
+        /**
+         * CmdRoomCreateReply id.
+         * @member {number} id
+         * @memberof pb.CmdRoomCreateReply
+         * @instance
+         */
+        CmdRoomCreateReply.prototype.id = 0;
+
+        /**
+         * Creates a new CmdRoomCreateReply instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdRoomCreateReply
+         * @static
+         * @param {pb.ICmdRoomCreateReply=} [properties] Properties to set
+         * @returns {pb.CmdRoomCreateReply} CmdRoomCreateReply instance
+         */
+        CmdRoomCreateReply.create = function create(properties) {
+            return new CmdRoomCreateReply(properties);
+        };
+
+        /**
+         * Encodes the specified CmdRoomCreateReply message. Does not implicitly {@link pb.CmdRoomCreateReply.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdRoomCreateReply
+         * @static
+         * @param {pb.ICmdRoomCreateReply} message CmdRoomCreateReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRoomCreateReply.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                $root.pb.ErrorInfo.encode(message.err, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.id);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdRoomCreateReply message, length delimited. Does not implicitly {@link pb.CmdRoomCreateReply.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdRoomCreateReply
+         * @static
+         * @param {pb.ICmdRoomCreateReply} message CmdRoomCreateReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRoomCreateReply.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdRoomCreateReply message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdRoomCreateReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdRoomCreateReply} CmdRoomCreateReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRoomCreateReply.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdRoomCreateReply();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.err = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                        break;
+                    case 2:
+                        message.id = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdRoomCreateReply message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdRoomCreateReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdRoomCreateReply} CmdRoomCreateReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRoomCreateReply.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdRoomCreateReply message.
+         * @function verify
+         * @memberof pb.CmdRoomCreateReply
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdRoomCreateReply.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err")) {
+                var error = $root.pb.ErrorInfo.verify(message.err);
+                if (error)
+                    return "err." + error;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdRoomCreateReply message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdRoomCreateReply
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdRoomCreateReply} CmdRoomCreateReply
+         */
+        CmdRoomCreateReply.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdRoomCreateReply)
+                return object;
+            var message = new $root.pb.CmdRoomCreateReply();
+            if (object.err != null) {
+                if (typeof object.err !== "object")
+                    throw TypeError(".pb.CmdRoomCreateReply.err: object expected");
+                message.err = $root.pb.ErrorInfo.fromObject(object.err);
+            }
+            if (object.id != null)
+                message.id = object.id | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdRoomCreateReply message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdRoomCreateReply
+         * @static
+         * @param {pb.CmdRoomCreateReply} message CmdRoomCreateReply
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdRoomCreateReply.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.err = null;
+                object.id = 0;
+            }
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = $root.pb.ErrorInfo.toObject(message.err, options);
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            return object;
+        };
+
+        /**
+         * Converts this CmdRoomCreateReply to JSON.
+         * @function toJSON
+         * @memberof pb.CmdRoomCreateReply
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdRoomCreateReply.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdRoomCreateReply;
+    })();
+
+    pb.CmdRoomEnter = (function () {
+
+        /**
+         * Properties of a CmdRoomEnter.
+         * @memberof pb
+         * @interface ICmdRoomEnter
+         * @property {number|null} [id] CmdRoomEnter id
+         * @property {pb.GameType|null} [game] CmdRoomEnter game
+         * @property {number|null} [uid] CmdRoomEnter uid
+         * @property {number|null} [node] CmdRoomEnter node
+         */
+
+        /**
+         * Constructs a new CmdRoomEnter.
+         * @memberof pb
+         * @classdesc Represents a CmdRoomEnter.
+         * @implements ICmdRoomEnter
+         * @constructor
+         * @param {pb.ICmdRoomEnter=} [properties] Properties to set
+         */
+        function CmdRoomEnter(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdRoomEnter id.
+         * @member {number} id
+         * @memberof pb.CmdRoomEnter
+         * @instance
+         */
+        CmdRoomEnter.prototype.id = 0;
+
+        /**
+         * CmdRoomEnter game.
+         * @member {pb.GameType} game
+         * @memberof pb.CmdRoomEnter
+         * @instance
+         */
+        CmdRoomEnter.prototype.game = 0;
+
+        /**
+         * CmdRoomEnter uid.
+         * @member {number} uid
+         * @memberof pb.CmdRoomEnter
+         * @instance
+         */
+        CmdRoomEnter.prototype.uid = 0;
+
+        /**
+         * CmdRoomEnter node.
+         * @member {number} node
+         * @memberof pb.CmdRoomEnter
+         * @instance
+         */
+        CmdRoomEnter.prototype.node = 0;
+
+        /**
+         * Creates a new CmdRoomEnter instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdRoomEnter
+         * @static
+         * @param {pb.ICmdRoomEnter=} [properties] Properties to set
+         * @returns {pb.CmdRoomEnter} CmdRoomEnter instance
+         */
+        CmdRoomEnter.create = function create(properties) {
+            return new CmdRoomEnter(properties);
+        };
+
+        /**
+         * Encodes the specified CmdRoomEnter message. Does not implicitly {@link pb.CmdRoomEnter.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdRoomEnter
+         * @static
+         * @param {pb.ICmdRoomEnter} message CmdRoomEnter message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRoomEnter.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
+            if (message.game != null && Object.hasOwnProperty.call(message, "game"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.game);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.uid);
+            if (message.node != null && Object.hasOwnProperty.call(message, "node"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.node);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdRoomEnter message, length delimited. Does not implicitly {@link pb.CmdRoomEnter.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdRoomEnter
+         * @static
+         * @param {pb.ICmdRoomEnter} message CmdRoomEnter message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRoomEnter.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdRoomEnter message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdRoomEnter
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdRoomEnter} CmdRoomEnter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRoomEnter.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdRoomEnter();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.id = reader.int32();
+                        break;
+                    case 2:
+                        message.game = reader.int32();
+                        break;
+                    case 3:
+                        message.uid = reader.int32();
+                        break;
+                    case 4:
+                        message.node = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdRoomEnter message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdRoomEnter
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdRoomEnter} CmdRoomEnter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRoomEnter.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdRoomEnter message.
+         * @function verify
+         * @memberof pb.CmdRoomEnter
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdRoomEnter.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.game != null && message.hasOwnProperty("game"))
+                switch (message.game) {
+                    default:
+                        return "game: enum value expected";
+                    case 0:
+                    case 3:
+                    case 4:
+                    case 17:
+                    case 11:
+                    case 6:
+                    case 1:
+                    case 2:
+                    case 16:
+                    case 15:
+                    case 10:
+                    case 9:
+                    case 7:
+                    case 8:
+                    case 30:
+                        break;
+                }
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.node != null && message.hasOwnProperty("node"))
+                if (!$util.isInteger(message.node))
+                    return "node: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdRoomEnter message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdRoomEnter
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdRoomEnter} CmdRoomEnter
+         */
+        CmdRoomEnter.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdRoomEnter)
+                return object;
+            var message = new $root.pb.CmdRoomEnter();
+            if (object.id != null)
+                message.id = object.id | 0;
+            switch (object.game) {
+                case "GameType_NULL":
+                case 0:
+                    message.game = 0;
+                    break;
+                case "ShuangMang":
+                case 3:
+                    message.game = 3;
+                    break;
+                case "DingXiang":
+                case 4:
+                    message.game = 4;
+                    break;
+                case "ZhiBiao":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "TiaoJianDan":
+                case 11:
+                    message.game = 11;
+                    break;
+                case "QiHuo":
+                case 6:
+                    message.game = 6;
+                    break;
+                case "JJ_PK":
+                case 1:
+                    message.game = 1;
+                    break;
+                case "JJ_DuoKong":
+                case 2:
+                    message.game = 2;
+                    break;
+                case "JJ_ChuangGuan":
+                case 16:
+                    message.game = 16;
+                    break;
+                case "JJ_QiHuo":
+                case 15:
+                    message.game = 15;
+                    break;
+                case "MoNiChaoGu":
+                case 10:
+                    message.game = 10;
+                    break;
+                case "ChaoGuDaSai":
+                case 9:
+                    message.game = 9;
+                    break;
+                case "GeGuJingChai":
+                case 7:
+                    message.game = 7;
+                    break;
+                case "DaPanJingChai":
+                case 8:
+                    message.game = 8;
+                    break;
+                case "MaxGameType":
+                case 30:
+                    message.game = 30;
+                    break;
+            }
+            if (object.uid != null)
+                message.uid = object.uid | 0;
+            if (object.node != null)
+                message.node = object.node | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdRoomEnter message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdRoomEnter
+         * @static
+         * @param {pb.CmdRoomEnter} message CmdRoomEnter
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdRoomEnter.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.game = options.enums === String ? "GameType_NULL" : 0;
+                object.uid = 0;
+                object.node = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.game != null && message.hasOwnProperty("game"))
+                object.game = options.enums === String ? $root.pb.GameType[message.game] : message.game;
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            if (message.node != null && message.hasOwnProperty("node"))
+                object.node = message.node;
+            return object;
+        };
+
+        /**
+         * Converts this CmdRoomEnter to JSON.
+         * @function toJSON
+         * @memberof pb.CmdRoomEnter
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdRoomEnter.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdRoomEnter;
+    })();
+
+    pb.CmdRoomEnterReply = (function () {
+
+        /**
+         * Properties of a CmdRoomEnterReply.
+         * @memberof pb
+         * @interface ICmdRoomEnterReply
+         * @property {pb.IErrorInfo|null} [err] CmdRoomEnterReply err
+         * @property {number|null} [id] CmdRoomEnterReply id
+         * @property {number|null} [node] CmdRoomEnterReply node
+         */
+
+        /**
+         * Constructs a new CmdRoomEnterReply.
+         * @memberof pb
+         * @classdesc Represents a CmdRoomEnterReply.
+         * @implements ICmdRoomEnterReply
+         * @constructor
+         * @param {pb.ICmdRoomEnterReply=} [properties] Properties to set
+         */
+        function CmdRoomEnterReply(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdRoomEnterReply err.
+         * @member {pb.IErrorInfo|null|undefined} err
+         * @memberof pb.CmdRoomEnterReply
+         * @instance
+         */
+        CmdRoomEnterReply.prototype.err = null;
+
+        /**
+         * CmdRoomEnterReply id.
+         * @member {number} id
+         * @memberof pb.CmdRoomEnterReply
+         * @instance
+         */
+        CmdRoomEnterReply.prototype.id = 0;
+
+        /**
+         * CmdRoomEnterReply node.
+         * @member {number} node
+         * @memberof pb.CmdRoomEnterReply
+         * @instance
+         */
+        CmdRoomEnterReply.prototype.node = 0;
+
+        /**
+         * Creates a new CmdRoomEnterReply instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdRoomEnterReply
+         * @static
+         * @param {pb.ICmdRoomEnterReply=} [properties] Properties to set
+         * @returns {pb.CmdRoomEnterReply} CmdRoomEnterReply instance
+         */
+        CmdRoomEnterReply.create = function create(properties) {
+            return new CmdRoomEnterReply(properties);
+        };
+
+        /**
+         * Encodes the specified CmdRoomEnterReply message. Does not implicitly {@link pb.CmdRoomEnterReply.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdRoomEnterReply
+         * @static
+         * @param {pb.ICmdRoomEnterReply} message CmdRoomEnterReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRoomEnterReply.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                $root.pb.ErrorInfo.encode(message.err, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.id);
+            if (message.node != null && Object.hasOwnProperty.call(message, "node"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.node);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdRoomEnterReply message, length delimited. Does not implicitly {@link pb.CmdRoomEnterReply.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdRoomEnterReply
+         * @static
+         * @param {pb.ICmdRoomEnterReply} message CmdRoomEnterReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRoomEnterReply.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdRoomEnterReply message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdRoomEnterReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdRoomEnterReply} CmdRoomEnterReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRoomEnterReply.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdRoomEnterReply();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.err = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                        break;
+                    case 2:
+                        message.id = reader.int32();
+                        break;
+                    case 3:
+                        message.node = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdRoomEnterReply message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdRoomEnterReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdRoomEnterReply} CmdRoomEnterReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRoomEnterReply.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdRoomEnterReply message.
+         * @function verify
+         * @memberof pb.CmdRoomEnterReply
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdRoomEnterReply.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err")) {
+                var error = $root.pb.ErrorInfo.verify(message.err);
+                if (error)
+                    return "err." + error;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.node != null && message.hasOwnProperty("node"))
+                if (!$util.isInteger(message.node))
+                    return "node: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdRoomEnterReply message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdRoomEnterReply
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdRoomEnterReply} CmdRoomEnterReply
+         */
+        CmdRoomEnterReply.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdRoomEnterReply)
+                return object;
+            var message = new $root.pb.CmdRoomEnterReply();
+            if (object.err != null) {
+                if (typeof object.err !== "object")
+                    throw TypeError(".pb.CmdRoomEnterReply.err: object expected");
+                message.err = $root.pb.ErrorInfo.fromObject(object.err);
+            }
+            if (object.id != null)
+                message.id = object.id | 0;
+            if (object.node != null)
+                message.node = object.node | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdRoomEnterReply message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdRoomEnterReply
+         * @static
+         * @param {pb.CmdRoomEnterReply} message CmdRoomEnterReply
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdRoomEnterReply.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.err = null;
+                object.id = 0;
+                object.node = 0;
+            }
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = $root.pb.ErrorInfo.toObject(message.err, options);
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.node != null && message.hasOwnProperty("node"))
+                object.node = message.node;
+            return object;
+        };
+
+        /**
+         * Converts this CmdRoomEnterReply to JSON.
+         * @function toJSON
+         * @memberof pb.CmdRoomEnterReply
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdRoomEnterReply.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdRoomEnterReply;
+    })();
+
+    pb.CmdRoomLeave = (function () {
+
+        /**
+         * Properties of a CmdRoomLeave.
+         * @memberof pb
+         * @interface ICmdRoomLeave
+         * @property {number|null} [id] CmdRoomLeave id
+         * @property {number|null} [uid] CmdRoomLeave uid
+         */
+
+        /**
+         * Constructs a new CmdRoomLeave.
+         * @memberof pb
+         * @classdesc Represents a CmdRoomLeave.
+         * @implements ICmdRoomLeave
+         * @constructor
+         * @param {pb.ICmdRoomLeave=} [properties] Properties to set
+         */
+        function CmdRoomLeave(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdRoomLeave id.
+         * @member {number} id
+         * @memberof pb.CmdRoomLeave
+         * @instance
+         */
+        CmdRoomLeave.prototype.id = 0;
+
+        /**
+         * CmdRoomLeave uid.
+         * @member {number} uid
+         * @memberof pb.CmdRoomLeave
+         * @instance
+         */
+        CmdRoomLeave.prototype.uid = 0;
+
+        /**
+         * Creates a new CmdRoomLeave instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdRoomLeave
+         * @static
+         * @param {pb.ICmdRoomLeave=} [properties] Properties to set
+         * @returns {pb.CmdRoomLeave} CmdRoomLeave instance
+         */
+        CmdRoomLeave.create = function create(properties) {
+            return new CmdRoomLeave(properties);
+        };
+
+        /**
+         * Encodes the specified CmdRoomLeave message. Does not implicitly {@link pb.CmdRoomLeave.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdRoomLeave
+         * @static
+         * @param {pb.ICmdRoomLeave} message CmdRoomLeave message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRoomLeave.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.uid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdRoomLeave message, length delimited. Does not implicitly {@link pb.CmdRoomLeave.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdRoomLeave
+         * @static
+         * @param {pb.ICmdRoomLeave} message CmdRoomLeave message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRoomLeave.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdRoomLeave message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdRoomLeave
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdRoomLeave} CmdRoomLeave
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRoomLeave.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdRoomLeave();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.id = reader.int32();
+                        break;
+                    case 2:
+                        message.uid = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdRoomLeave message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdRoomLeave
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdRoomLeave} CmdRoomLeave
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRoomLeave.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdRoomLeave message.
+         * @function verify
+         * @memberof pb.CmdRoomLeave
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdRoomLeave.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdRoomLeave message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdRoomLeave
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdRoomLeave} CmdRoomLeave
+         */
+        CmdRoomLeave.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdRoomLeave)
+                return object;
+            var message = new $root.pb.CmdRoomLeave();
+            if (object.id != null)
+                message.id = object.id | 0;
+            if (object.uid != null)
+                message.uid = object.uid | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdRoomLeave message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdRoomLeave
+         * @static
+         * @param {pb.CmdRoomLeave} message CmdRoomLeave
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdRoomLeave.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.uid = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            return object;
+        };
+
+        /**
+         * Converts this CmdRoomLeave to JSON.
+         * @function toJSON
+         * @memberof pb.CmdRoomLeave
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdRoomLeave.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdRoomLeave;
+    })();
+
+    pb.CmdRoomLeaveReply = (function () {
+
+        /**
+         * Properties of a CmdRoomLeaveReply.
+         * @memberof pb
+         * @interface ICmdRoomLeaveReply
+         * @property {pb.IErrorInfo|null} [err] CmdRoomLeaveReply err
+         */
+
+        /**
+         * Constructs a new CmdRoomLeaveReply.
+         * @memberof pb
+         * @classdesc Represents a CmdRoomLeaveReply.
+         * @implements ICmdRoomLeaveReply
+         * @constructor
+         * @param {pb.ICmdRoomLeaveReply=} [properties] Properties to set
+         */
+        function CmdRoomLeaveReply(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdRoomLeaveReply err.
+         * @member {pb.IErrorInfo|null|undefined} err
+         * @memberof pb.CmdRoomLeaveReply
+         * @instance
+         */
+        CmdRoomLeaveReply.prototype.err = null;
+
+        /**
+         * Creates a new CmdRoomLeaveReply instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdRoomLeaveReply
+         * @static
+         * @param {pb.ICmdRoomLeaveReply=} [properties] Properties to set
+         * @returns {pb.CmdRoomLeaveReply} CmdRoomLeaveReply instance
+         */
+        CmdRoomLeaveReply.create = function create(properties) {
+            return new CmdRoomLeaveReply(properties);
+        };
+
+        /**
+         * Encodes the specified CmdRoomLeaveReply message. Does not implicitly {@link pb.CmdRoomLeaveReply.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdRoomLeaveReply
+         * @static
+         * @param {pb.ICmdRoomLeaveReply} message CmdRoomLeaveReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRoomLeaveReply.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
+                $root.pb.ErrorInfo.encode(message.err, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdRoomLeaveReply message, length delimited. Does not implicitly {@link pb.CmdRoomLeaveReply.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdRoomLeaveReply
+         * @static
+         * @param {pb.ICmdRoomLeaveReply} message CmdRoomLeaveReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRoomLeaveReply.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdRoomLeaveReply message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdRoomLeaveReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdRoomLeaveReply} CmdRoomLeaveReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRoomLeaveReply.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdRoomLeaveReply();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.err = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdRoomLeaveReply message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdRoomLeaveReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdRoomLeaveReply} CmdRoomLeaveReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRoomLeaveReply.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdRoomLeaveReply message.
+         * @function verify
+         * @memberof pb.CmdRoomLeaveReply
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdRoomLeaveReply.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.err != null && message.hasOwnProperty("err")) {
+                var error = $root.pb.ErrorInfo.verify(message.err);
+                if (error)
+                    return "err." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a CmdRoomLeaveReply message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdRoomLeaveReply
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdRoomLeaveReply} CmdRoomLeaveReply
+         */
+        CmdRoomLeaveReply.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdRoomLeaveReply)
+                return object;
+            var message = new $root.pb.CmdRoomLeaveReply();
+            if (object.err != null) {
+                if (typeof object.err !== "object")
+                    throw TypeError(".pb.CmdRoomLeaveReply.err: object expected");
+                message.err = $root.pb.ErrorInfo.fromObject(object.err);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdRoomLeaveReply message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdRoomLeaveReply
+         * @static
+         * @param {pb.CmdRoomLeaveReply} message CmdRoomLeaveReply
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdRoomLeaveReply.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.err = null;
+            if (message.err != null && message.hasOwnProperty("err"))
+                object.err = $root.pb.ErrorInfo.toObject(message.err, options);
+            return object;
+        };
+
+        /**
+         * Converts this CmdRoomLeaveReply to JSON.
+         * @function toJSON
+         * @memberof pb.CmdRoomLeaveReply
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdRoomLeaveReply.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdRoomLeaveReply;
+    })();
+
+    pb.SyncRoomEnter = (function () {
+
+        /**
+         * Properties of a SyncRoomEnter.
+         * @memberof pb
+         * @interface ISyncRoomEnter
+         * @property {number|null} [id] SyncRoomEnter id
+         * @property {pb.GameType|null} [game] SyncRoomEnter game
+         * @property {pb.IGameData|null} [player] SyncRoomEnter player
+         */
+
+        /**
+         * Constructs a new SyncRoomEnter.
+         * @memberof pb
+         * @classdesc Represents a SyncRoomEnter.
+         * @implements ISyncRoomEnter
+         * @constructor
+         * @param {pb.ISyncRoomEnter=} [properties] Properties to set
+         */
+        function SyncRoomEnter(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * SyncRoomEnter id.
+         * @member {number} id
+         * @memberof pb.SyncRoomEnter
+         * @instance
+         */
+        SyncRoomEnter.prototype.id = 0;
+
+        /**
+         * SyncRoomEnter game.
+         * @member {pb.GameType} game
+         * @memberof pb.SyncRoomEnter
+         * @instance
+         */
+        SyncRoomEnter.prototype.game = 0;
+
+        /**
+         * SyncRoomEnter player.
+         * @member {pb.IGameData|null|undefined} player
+         * @memberof pb.SyncRoomEnter
+         * @instance
+         */
+        SyncRoomEnter.prototype.player = null;
+
+        /**
+         * Creates a new SyncRoomEnter instance using the specified properties.
+         * @function create
+         * @memberof pb.SyncRoomEnter
+         * @static
+         * @param {pb.ISyncRoomEnter=} [properties] Properties to set
+         * @returns {pb.SyncRoomEnter} SyncRoomEnter instance
+         */
+        SyncRoomEnter.create = function create(properties) {
+            return new SyncRoomEnter(properties);
+        };
+
+        /**
+         * Encodes the specified SyncRoomEnter message. Does not implicitly {@link pb.SyncRoomEnter.verify|verify} messages.
+         * @function encode
+         * @memberof pb.SyncRoomEnter
+         * @static
+         * @param {pb.ISyncRoomEnter} message SyncRoomEnter message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SyncRoomEnter.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
+            if (message.game != null && Object.hasOwnProperty.call(message, "game"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.game);
+            if (message.player != null && Object.hasOwnProperty.call(message, "player"))
+                $root.pb.GameData.encode(message.player, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified SyncRoomEnter message, length delimited. Does not implicitly {@link pb.SyncRoomEnter.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.SyncRoomEnter
+         * @static
+         * @param {pb.ISyncRoomEnter} message SyncRoomEnter message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SyncRoomEnter.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a SyncRoomEnter message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.SyncRoomEnter
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.SyncRoomEnter} SyncRoomEnter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SyncRoomEnter.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.SyncRoomEnter();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.id = reader.int32();
+                        break;
+                    case 2:
+                        message.game = reader.int32();
+                        break;
+                    case 3:
+                        message.player = $root.pb.GameData.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a SyncRoomEnter message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.SyncRoomEnter
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.SyncRoomEnter} SyncRoomEnter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SyncRoomEnter.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a SyncRoomEnter message.
+         * @function verify
+         * @memberof pb.SyncRoomEnter
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SyncRoomEnter.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.game != null && message.hasOwnProperty("game"))
+                switch (message.game) {
+                    default:
+                        return "game: enum value expected";
+                    case 0:
+                    case 3:
+                    case 4:
+                    case 17:
+                    case 11:
+                    case 6:
+                    case 1:
+                    case 2:
+                    case 16:
+                    case 15:
+                    case 10:
+                    case 9:
+                    case 7:
+                    case 8:
+                    case 30:
+                        break;
+                }
+            if (message.player != null && message.hasOwnProperty("player")) {
+                var error = $root.pb.GameData.verify(message.player);
+                if (error)
+                    return "player." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a SyncRoomEnter message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.SyncRoomEnter
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.SyncRoomEnter} SyncRoomEnter
+         */
+        SyncRoomEnter.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.SyncRoomEnter)
+                return object;
+            var message = new $root.pb.SyncRoomEnter();
+            if (object.id != null)
+                message.id = object.id | 0;
+            switch (object.game) {
+                case "GameType_NULL":
+                case 0:
+                    message.game = 0;
+                    break;
+                case "ShuangMang":
+                case 3:
+                    message.game = 3;
+                    break;
+                case "DingXiang":
+                case 4:
+                    message.game = 4;
+                    break;
+                case "ZhiBiao":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "TiaoJianDan":
+                case 11:
+                    message.game = 11;
+                    break;
+                case "QiHuo":
+                case 6:
+                    message.game = 6;
+                    break;
+                case "JJ_PK":
+                case 1:
+                    message.game = 1;
+                    break;
+                case "JJ_DuoKong":
+                case 2:
+                    message.game = 2;
+                    break;
+                case "JJ_ChuangGuan":
+                case 16:
+                    message.game = 16;
+                    break;
+                case "JJ_QiHuo":
+                case 15:
+                    message.game = 15;
+                    break;
+                case "MoNiChaoGu":
+                case 10:
+                    message.game = 10;
+                    break;
+                case "ChaoGuDaSai":
+                case 9:
+                    message.game = 9;
+                    break;
+                case "GeGuJingChai":
+                case 7:
+                    message.game = 7;
+                    break;
+                case "DaPanJingChai":
+                case 8:
+                    message.game = 8;
+                    break;
+                case "MaxGameType":
+                case 30:
+                    message.game = 30;
+                    break;
+            }
+            if (object.player != null) {
+                if (typeof object.player !== "object")
+                    throw TypeError(".pb.SyncRoomEnter.player: object expected");
+                message.player = $root.pb.GameData.fromObject(object.player);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a SyncRoomEnter message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.SyncRoomEnter
+         * @static
+         * @param {pb.SyncRoomEnter} message SyncRoomEnter
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SyncRoomEnter.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.game = options.enums === String ? "GameType_NULL" : 0;
+                object.player = null;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.game != null && message.hasOwnProperty("game"))
+                object.game = options.enums === String ? $root.pb.GameType[message.game] : message.game;
+            if (message.player != null && message.hasOwnProperty("player"))
+                object.player = $root.pb.GameData.toObject(message.player, options);
+            return object;
+        };
+
+        /**
+         * Converts this SyncRoomEnter to JSON.
+         * @function toJSON
+         * @memberof pb.SyncRoomEnter
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SyncRoomEnter.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return SyncRoomEnter;
+    })();
+
+    pb.SyncRoomLeave = (function () {
+
+        /**
+         * Properties of a SyncRoomLeave.
+         * @memberof pb
+         * @interface ISyncRoomLeave
+         * @property {number|null} [id] SyncRoomLeave id
+         * @property {pb.GameType|null} [game] SyncRoomLeave game
+         * @property {number|null} [uid] SyncRoomLeave uid
+         */
+
+        /**
+         * Constructs a new SyncRoomLeave.
+         * @memberof pb
+         * @classdesc Represents a SyncRoomLeave.
+         * @implements ISyncRoomLeave
+         * @constructor
+         * @param {pb.ISyncRoomLeave=} [properties] Properties to set
+         */
+        function SyncRoomLeave(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * SyncRoomLeave id.
+         * @member {number} id
+         * @memberof pb.SyncRoomLeave
+         * @instance
+         */
+        SyncRoomLeave.prototype.id = 0;
+
+        /**
+         * SyncRoomLeave game.
+         * @member {pb.GameType} game
+         * @memberof pb.SyncRoomLeave
+         * @instance
+         */
+        SyncRoomLeave.prototype.game = 0;
+
+        /**
+         * SyncRoomLeave uid.
+         * @member {number} uid
+         * @memberof pb.SyncRoomLeave
+         * @instance
+         */
+        SyncRoomLeave.prototype.uid = 0;
+
+        /**
+         * Creates a new SyncRoomLeave instance using the specified properties.
+         * @function create
+         * @memberof pb.SyncRoomLeave
+         * @static
+         * @param {pb.ISyncRoomLeave=} [properties] Properties to set
+         * @returns {pb.SyncRoomLeave} SyncRoomLeave instance
+         */
+        SyncRoomLeave.create = function create(properties) {
+            return new SyncRoomLeave(properties);
+        };
+
+        /**
+         * Encodes the specified SyncRoomLeave message. Does not implicitly {@link pb.SyncRoomLeave.verify|verify} messages.
+         * @function encode
+         * @memberof pb.SyncRoomLeave
+         * @static
+         * @param {pb.ISyncRoomLeave} message SyncRoomLeave message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SyncRoomLeave.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
+            if (message.game != null && Object.hasOwnProperty.call(message, "game"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.game);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.uid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified SyncRoomLeave message, length delimited. Does not implicitly {@link pb.SyncRoomLeave.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.SyncRoomLeave
+         * @static
+         * @param {pb.ISyncRoomLeave} message SyncRoomLeave message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SyncRoomLeave.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a SyncRoomLeave message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.SyncRoomLeave
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.SyncRoomLeave} SyncRoomLeave
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SyncRoomLeave.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.SyncRoomLeave();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.id = reader.int32();
+                        break;
+                    case 2:
+                        message.game = reader.int32();
+                        break;
+                    case 3:
+                        message.uid = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a SyncRoomLeave message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.SyncRoomLeave
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.SyncRoomLeave} SyncRoomLeave
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SyncRoomLeave.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a SyncRoomLeave message.
+         * @function verify
+         * @memberof pb.SyncRoomLeave
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SyncRoomLeave.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.game != null && message.hasOwnProperty("game"))
+                switch (message.game) {
+                    default:
+                        return "game: enum value expected";
+                    case 0:
+                    case 3:
+                    case 4:
+                    case 17:
+                    case 11:
+                    case 6:
+                    case 1:
+                    case 2:
+                    case 16:
+                    case 15:
+                    case 10:
+                    case 9:
+                    case 7:
+                    case 8:
+                    case 30:
+                        break;
+                }
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a SyncRoomLeave message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.SyncRoomLeave
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.SyncRoomLeave} SyncRoomLeave
+         */
+        SyncRoomLeave.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.SyncRoomLeave)
+                return object;
+            var message = new $root.pb.SyncRoomLeave();
+            if (object.id != null)
+                message.id = object.id | 0;
+            switch (object.game) {
+                case "GameType_NULL":
+                case 0:
+                    message.game = 0;
+                    break;
+                case "ShuangMang":
+                case 3:
+                    message.game = 3;
+                    break;
+                case "DingXiang":
+                case 4:
+                    message.game = 4;
+                    break;
+                case "ZhiBiao":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "TiaoJianDan":
+                case 11:
+                    message.game = 11;
+                    break;
+                case "QiHuo":
+                case 6:
+                    message.game = 6;
+                    break;
+                case "JJ_PK":
+                case 1:
+                    message.game = 1;
+                    break;
+                case "JJ_DuoKong":
+                case 2:
+                    message.game = 2;
+                    break;
+                case "JJ_ChuangGuan":
+                case 16:
+                    message.game = 16;
+                    break;
+                case "JJ_QiHuo":
+                case 15:
+                    message.game = 15;
+                    break;
+                case "MoNiChaoGu":
+                case 10:
+                    message.game = 10;
+                    break;
+                case "ChaoGuDaSai":
+                case 9:
+                    message.game = 9;
+                    break;
+                case "GeGuJingChai":
+                case 7:
+                    message.game = 7;
+                    break;
+                case "DaPanJingChai":
+                case 8:
+                    message.game = 8;
+                    break;
+                case "MaxGameType":
+                case 30:
+                    message.game = 30;
+                    break;
+            }
+            if (object.uid != null)
+                message.uid = object.uid | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a SyncRoomLeave message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.SyncRoomLeave
+         * @static
+         * @param {pb.SyncRoomLeave} message SyncRoomLeave
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SyncRoomLeave.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.game = options.enums === String ? "GameType_NULL" : 0;
+                object.uid = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.game != null && message.hasOwnProperty("game"))
+                object.game = options.enums === String ? $root.pb.GameType[message.game] : message.game;
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            return object;
+        };
+
+        /**
+         * Converts this SyncRoomLeave to JSON.
+         * @function toJSON
+         * @memberof pb.SyncRoomLeave
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SyncRoomLeave.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return SyncRoomLeave;
+    })();
+
+    pb.RoomData = (function () {
+
+        /**
+         * Properties of a RoomData.
+         * @memberof pb
+         * @interface IRoomData
+         * @property {number|null} [id] RoomData id
+         * @property {pb.GameType|null} [game] RoomData game
+         * @property {Uint8Array|null} [data] RoomData data
+         */
+
+        /**
+         * Constructs a new RoomData.
+         * @memberof pb
+         * @classdesc Represents a RoomData.
+         * @implements IRoomData
+         * @constructor
+         * @param {pb.IRoomData=} [properties] Properties to set
+         */
+        function RoomData(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * RoomData id.
+         * @member {number} id
+         * @memberof pb.RoomData
+         * @instance
+         */
+        RoomData.prototype.id = 0;
+
+        /**
+         * RoomData game.
+         * @member {pb.GameType} game
+         * @memberof pb.RoomData
+         * @instance
+         */
+        RoomData.prototype.game = 0;
+
+        /**
+         * RoomData data.
+         * @member {Uint8Array} data
+         * @memberof pb.RoomData
+         * @instance
+         */
+        RoomData.prototype.data = $util.newBuffer([]);
+
+        /**
+         * Creates a new RoomData instance using the specified properties.
+         * @function create
+         * @memberof pb.RoomData
+         * @static
+         * @param {pb.IRoomData=} [properties] Properties to set
+         * @returns {pb.RoomData} RoomData instance
+         */
+        RoomData.create = function create(properties) {
+            return new RoomData(properties);
+        };
+
+        /**
+         * Encodes the specified RoomData message. Does not implicitly {@link pb.RoomData.verify|verify} messages.
+         * @function encode
+         * @memberof pb.RoomData
+         * @static
+         * @param {pb.IRoomData} message RoomData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomData.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
+            if (message.game != null && Object.hasOwnProperty.call(message, "game"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.game);
+            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.data);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified RoomData message, length delimited. Does not implicitly {@link pb.RoomData.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.RoomData
+         * @static
+         * @param {pb.IRoomData} message RoomData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomData.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a RoomData message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.RoomData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.RoomData} RoomData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomData.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.RoomData();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.id = reader.int32();
+                        break;
+                    case 2:
+                        message.game = reader.int32();
+                        break;
+                    case 3:
+                        message.data = reader.bytes();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a RoomData message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.RoomData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.RoomData} RoomData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomData.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a RoomData message.
+         * @function verify
+         * @memberof pb.RoomData
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        RoomData.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.game != null && message.hasOwnProperty("game"))
+                switch (message.game) {
+                    default:
+                        return "game: enum value expected";
+                    case 0:
+                    case 3:
+                    case 4:
+                    case 17:
+                    case 11:
+                    case 6:
+                    case 1:
+                    case 2:
+                    case 16:
+                    case 15:
+                    case 10:
+                    case 9:
+                    case 7:
+                    case 8:
+                    case 30:
+                        break;
+                }
+            if (message.data != null && message.hasOwnProperty("data"))
+                if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                    return "data: buffer expected";
+            return null;
+        };
+
+        /**
+         * Creates a RoomData message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.RoomData
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.RoomData} RoomData
+         */
+        RoomData.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.RoomData)
+                return object;
+            var message = new $root.pb.RoomData();
+            if (object.id != null)
+                message.id = object.id | 0;
+            switch (object.game) {
+                case "GameType_NULL":
+                case 0:
+                    message.game = 0;
+                    break;
+                case "ShuangMang":
+                case 3:
+                    message.game = 3;
+                    break;
+                case "DingXiang":
+                case 4:
+                    message.game = 4;
+                    break;
+                case "ZhiBiao":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "TiaoJianDan":
+                case 11:
+                    message.game = 11;
+                    break;
+                case "QiHuo":
+                case 6:
+                    message.game = 6;
+                    break;
+                case "JJ_PK":
+                case 1:
+                    message.game = 1;
+                    break;
+                case "JJ_DuoKong":
+                case 2:
+                    message.game = 2;
+                    break;
+                case "JJ_ChuangGuan":
+                case 16:
+                    message.game = 16;
+                    break;
+                case "JJ_QiHuo":
+                case 15:
+                    message.game = 15;
+                    break;
+                case "MoNiChaoGu":
+                case 10:
+                    message.game = 10;
+                    break;
+                case "ChaoGuDaSai":
+                case 9:
+                    message.game = 9;
+                    break;
+                case "GeGuJingChai":
+                case 7:
+                    message.game = 7;
+                    break;
+                case "DaPanJingChai":
+                case 8:
+                    message.game = 8;
+                    break;
+                case "MaxGameType":
+                case 30:
+                    message.game = 30;
+                    break;
+            }
+            if (object.data != null)
+                if (typeof object.data === "string")
+                    $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                else if (object.data.length)
+                    message.data = object.data;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a RoomData message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.RoomData
+         * @static
+         * @param {pb.RoomData} message RoomData
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        RoomData.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.game = options.enums === String ? "GameType_NULL" : 0;
+                if (options.bytes === String)
+                    object.data = "";
+                else {
+                    object.data = [];
+                    if (options.bytes !== Array)
+                        object.data = $util.newBuffer(object.data);
+                }
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.game != null && message.hasOwnProperty("game"))
+                object.game = options.enums === String ? $root.pb.GameType[message.game] : message.game;
+            if (message.data != null && message.hasOwnProperty("data"))
+                object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+            return object;
+        };
+
+        /**
+         * Converts this RoomData to JSON.
+         * @function toJSON
+         * @memberof pb.RoomData
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        RoomData.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RoomData;
+    })();
+
+    pb.RoomDataPk = (function () {
+
+        /**
+         * Properties of a RoomDataPk.
+         * @memberof pb
+         * @interface IRoomDataPk
+         * @property {number|null} [status] RoomDataPk status
+         * @property {number|null} [capital] RoomDataPk capital
+         * @property {number|null} [code] RoomDataPk code
+         * @property {pb.KType|null} [ktype] RoomDataPk ktype
+         * @property {number|Long|null} [tsQuoteFrom] RoomDataPk tsQuoteFrom
+         * @property {number|Long|null} [tsQuoteTo] RoomDataPk tsQuoteTo
+         * @property {number|Long|null} [tsQuoteStart] RoomDataPk tsQuoteStart
+         * @property {Array.<pb.IGameData>|null} [players] RoomDataPk players
+         * @property {Array.<pb.IGameOperations>|null} [ops] RoomDataPk ops
+         * @property {number|Long|null} [tsGameFrom] RoomDataPk tsGameFrom
+         * @property {number|Long|null} [tsGameCur] RoomDataPk tsGameCur
+         */
+
+        /**
+         * Constructs a new RoomDataPk.
+         * @memberof pb
+         * @classdesc Represents a RoomDataPk.
+         * @implements IRoomDataPk
+         * @constructor
+         * @param {pb.IRoomDataPk=} [properties] Properties to set
+         */
+        function RoomDataPk(properties) {
+            this.players = [];
+            this.ops = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * RoomDataPk status.
+         * @member {number} status
+         * @memberof pb.RoomDataPk
+         * @instance
+         */
+        RoomDataPk.prototype.status = 0;
+
+        /**
+         * RoomDataPk capital.
+         * @member {number} capital
+         * @memberof pb.RoomDataPk
+         * @instance
+         */
+        RoomDataPk.prototype.capital = 0;
+
+        /**
+         * RoomDataPk code.
+         * @member {number} code
+         * @memberof pb.RoomDataPk
+         * @instance
+         */
+        RoomDataPk.prototype.code = 0;
+
+        /**
+         * RoomDataPk ktype.
+         * @member {pb.KType} ktype
+         * @memberof pb.RoomDataPk
+         * @instance
+         */
+        RoomDataPk.prototype.ktype = 0;
+
+        /**
+         * RoomDataPk tsQuoteFrom.
+         * @member {number|Long} tsQuoteFrom
+         * @memberof pb.RoomDataPk
+         * @instance
+         */
+        RoomDataPk.prototype.tsQuoteFrom = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * RoomDataPk tsQuoteTo.
+         * @member {number|Long} tsQuoteTo
+         * @memberof pb.RoomDataPk
+         * @instance
+         */
+        RoomDataPk.prototype.tsQuoteTo = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * RoomDataPk tsQuoteStart.
+         * @member {number|Long} tsQuoteStart
+         * @memberof pb.RoomDataPk
+         * @instance
+         */
+        RoomDataPk.prototype.tsQuoteStart = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * RoomDataPk players.
+         * @member {Array.<pb.IGameData>} players
+         * @memberof pb.RoomDataPk
+         * @instance
+         */
+        RoomDataPk.prototype.players = $util.emptyArray;
+
+        /**
+         * RoomDataPk ops.
+         * @member {Array.<pb.IGameOperations>} ops
+         * @memberof pb.RoomDataPk
+         * @instance
+         */
+        RoomDataPk.prototype.ops = $util.emptyArray;
+
+        /**
+         * RoomDataPk tsGameFrom.
+         * @member {number|Long} tsGameFrom
+         * @memberof pb.RoomDataPk
+         * @instance
+         */
+        RoomDataPk.prototype.tsGameFrom = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * RoomDataPk tsGameCur.
+         * @member {number|Long} tsGameCur
+         * @memberof pb.RoomDataPk
+         * @instance
+         */
+        RoomDataPk.prototype.tsGameCur = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * Creates a new RoomDataPk instance using the specified properties.
+         * @function create
+         * @memberof pb.RoomDataPk
+         * @static
+         * @param {pb.IRoomDataPk=} [properties] Properties to set
+         * @returns {pb.RoomDataPk} RoomDataPk instance
+         */
+        RoomDataPk.create = function create(properties) {
+            return new RoomDataPk(properties);
+        };
+
+        /**
+         * Encodes the specified RoomDataPk message. Does not implicitly {@link pb.RoomDataPk.verify|verify} messages.
+         * @function encode
+         * @memberof pb.RoomDataPk
+         * @static
+         * @param {pb.IRoomDataPk} message RoomDataPk message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomDataPk.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
+            if (message.capital != null && Object.hasOwnProperty.call(message, "capital"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.capital);
+            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.code);
+            if (message.ktype != null && Object.hasOwnProperty.call(message, "ktype"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.ktype);
+            if (message.tsQuoteFrom != null && Object.hasOwnProperty.call(message, "tsQuoteFrom"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.tsQuoteFrom);
+            if (message.tsQuoteTo != null && Object.hasOwnProperty.call(message, "tsQuoteTo"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.tsQuoteTo);
+            if (message.tsQuoteStart != null && Object.hasOwnProperty.call(message, "tsQuoteStart"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.tsQuoteStart);
+            if (message.players != null && message.players.length)
+                for (var i = 0; i < message.players.length; ++i)
+                    $root.pb.GameData.encode(message.players[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            if (message.ops != null && message.ops.length)
+                for (var i = 0; i < message.ops.length; ++i)
+                    $root.pb.GameOperations.encode(message.ops[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+            if (message.tsGameFrom != null && Object.hasOwnProperty.call(message, "tsGameFrom"))
+                writer.uint32(/* id 10, wireType 0 =*/80).int64(message.tsGameFrom);
+            if (message.tsGameCur != null && Object.hasOwnProperty.call(message, "tsGameCur"))
+                writer.uint32(/* id 11, wireType 0 =*/88).int64(message.tsGameCur);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified RoomDataPk message, length delimited. Does not implicitly {@link pb.RoomDataPk.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.RoomDataPk
+         * @static
+         * @param {pb.IRoomDataPk} message RoomDataPk message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomDataPk.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a RoomDataPk message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.RoomDataPk
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.RoomDataPk} RoomDataPk
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomDataPk.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.RoomDataPk();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.status = reader.int32();
+                        break;
+                    case 2:
+                        message.capital = reader.int32();
+                        break;
+                    case 3:
+                        message.code = reader.int32();
+                        break;
+                    case 4:
+                        message.ktype = reader.int32();
+                        break;
+                    case 5:
+                        message.tsQuoteFrom = reader.int64();
+                        break;
+                    case 6:
+                        message.tsQuoteTo = reader.int64();
+                        break;
+                    case 7:
+                        message.tsQuoteStart = reader.int64();
+                        break;
+                    case 8:
+                        if (!(message.players && message.players.length))
+                            message.players = [];
+                        message.players.push($root.pb.GameData.decode(reader, reader.uint32()));
+                        break;
+                    case 9:
+                        if (!(message.ops && message.ops.length))
+                            message.ops = [];
+                        message.ops.push($root.pb.GameOperations.decode(reader, reader.uint32()));
+                        break;
+                    case 10:
+                        message.tsGameFrom = reader.int64();
+                        break;
+                    case 11:
+                        message.tsGameCur = reader.int64();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a RoomDataPk message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.RoomDataPk
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.RoomDataPk} RoomDataPk
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomDataPk.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a RoomDataPk message.
+         * @function verify
+         * @memberof pb.RoomDataPk
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        RoomDataPk.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.status != null && message.hasOwnProperty("status"))
+                if (!$util.isInteger(message.status))
+                    return "status: integer expected";
+            if (message.capital != null && message.hasOwnProperty("capital"))
+                if (!$util.isInteger(message.capital))
+                    return "capital: integer expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code))
+                    return "code: integer expected";
+            if (message.ktype != null && message.hasOwnProperty("ktype"))
+                switch (message.ktype) {
+                    default:
+                        return "ktype: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 10:
+                    case 11:
+                        break;
+                }
+            if (message.tsQuoteFrom != null && message.hasOwnProperty("tsQuoteFrom"))
+                if (!$util.isInteger(message.tsQuoteFrom) && !(message.tsQuoteFrom && $util.isInteger(message.tsQuoteFrom.low) && $util.isInteger(message.tsQuoteFrom.high)))
+                    return "tsQuoteFrom: integer|Long expected";
+            if (message.tsQuoteTo != null && message.hasOwnProperty("tsQuoteTo"))
+                if (!$util.isInteger(message.tsQuoteTo) && !(message.tsQuoteTo && $util.isInteger(message.tsQuoteTo.low) && $util.isInteger(message.tsQuoteTo.high)))
+                    return "tsQuoteTo: integer|Long expected";
+            if (message.tsQuoteStart != null && message.hasOwnProperty("tsQuoteStart"))
+                if (!$util.isInteger(message.tsQuoteStart) && !(message.tsQuoteStart && $util.isInteger(message.tsQuoteStart.low) && $util.isInteger(message.tsQuoteStart.high)))
+                    return "tsQuoteStart: integer|Long expected";
+            if (message.players != null && message.hasOwnProperty("players")) {
+                if (!Array.isArray(message.players))
+                    return "players: array expected";
+                for (var i = 0; i < message.players.length; ++i) {
+                    var error = $root.pb.GameData.verify(message.players[i]);
+                    if (error)
+                        return "players." + error;
+                }
+            }
+            if (message.ops != null && message.hasOwnProperty("ops")) {
+                if (!Array.isArray(message.ops))
+                    return "ops: array expected";
+                for (var i = 0; i < message.ops.length; ++i) {
+                    var error = $root.pb.GameOperations.verify(message.ops[i]);
+                    if (error)
+                        return "ops." + error;
+                }
+            }
+            if (message.tsGameFrom != null && message.hasOwnProperty("tsGameFrom"))
+                if (!$util.isInteger(message.tsGameFrom) && !(message.tsGameFrom && $util.isInteger(message.tsGameFrom.low) && $util.isInteger(message.tsGameFrom.high)))
+                    return "tsGameFrom: integer|Long expected";
+            if (message.tsGameCur != null && message.hasOwnProperty("tsGameCur"))
+                if (!$util.isInteger(message.tsGameCur) && !(message.tsGameCur && $util.isInteger(message.tsGameCur.low) && $util.isInteger(message.tsGameCur.high)))
+                    return "tsGameCur: integer|Long expected";
+            return null;
+        };
+
+        /**
+         * Creates a RoomDataPk message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.RoomDataPk
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.RoomDataPk} RoomDataPk
+         */
+        RoomDataPk.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.RoomDataPk)
+                return object;
+            var message = new $root.pb.RoomDataPk();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.capital != null)
+                message.capital = object.capital | 0;
+            if (object.code != null)
+                message.code = object.code | 0;
+            switch (object.ktype) {
+                case "KType_NULL":
+                case 0:
+                    message.ktype = 0;
+                    break;
+                case "Real":
+                case 1:
+                    message.ktype = 1;
+                    break;
+                case "Min":
+                case 2:
+                    message.ktype = 2;
+                    break;
+                case "MinToday":
+                case 3:
+                    message.ktype = 3;
+                    break;
+                case "Min5":
+                case 4:
+                    message.ktype = 4;
+                    break;
+                case "Min15":
+                case 5:
+                    message.ktype = 5;
+                    break;
+                case "Min30":
+                case 6:
+                    message.ktype = 6;
+                    break;
+                case "Min60":
+                case 7:
+                    message.ktype = 7;
+                    break;
+                case "Day":
+                case 10:
+                    message.ktype = 10;
+                    break;
+                case "Day7":
+                case 11:
+                    message.ktype = 11;
+                    break;
+            }
+            if (object.tsQuoteFrom != null)
+                if ($util.Long)
+                    (message.tsQuoteFrom = $util.Long.fromValue(object.tsQuoteFrom)).unsigned = false;
+                else if (typeof object.tsQuoteFrom === "string")
+                    message.tsQuoteFrom = parseInt(object.tsQuoteFrom, 10);
+                else if (typeof object.tsQuoteFrom === "number")
+                    message.tsQuoteFrom = object.tsQuoteFrom;
+                else if (typeof object.tsQuoteFrom === "object")
+                    message.tsQuoteFrom = new $util.LongBits(object.tsQuoteFrom.low >>> 0, object.tsQuoteFrom.high >>> 0).toNumber();
+            if (object.tsQuoteTo != null)
+                if ($util.Long)
+                    (message.tsQuoteTo = $util.Long.fromValue(object.tsQuoteTo)).unsigned = false;
+                else if (typeof object.tsQuoteTo === "string")
+                    message.tsQuoteTo = parseInt(object.tsQuoteTo, 10);
+                else if (typeof object.tsQuoteTo === "number")
+                    message.tsQuoteTo = object.tsQuoteTo;
+                else if (typeof object.tsQuoteTo === "object")
+                    message.tsQuoteTo = new $util.LongBits(object.tsQuoteTo.low >>> 0, object.tsQuoteTo.high >>> 0).toNumber();
+            if (object.tsQuoteStart != null)
+                if ($util.Long)
+                    (message.tsQuoteStart = $util.Long.fromValue(object.tsQuoteStart)).unsigned = false;
+                else if (typeof object.tsQuoteStart === "string")
+                    message.tsQuoteStart = parseInt(object.tsQuoteStart, 10);
+                else if (typeof object.tsQuoteStart === "number")
+                    message.tsQuoteStart = object.tsQuoteStart;
+                else if (typeof object.tsQuoteStart === "object")
+                    message.tsQuoteStart = new $util.LongBits(object.tsQuoteStart.low >>> 0, object.tsQuoteStart.high >>> 0).toNumber();
+            if (object.players) {
+                if (!Array.isArray(object.players))
+                    throw TypeError(".pb.RoomDataPk.players: array expected");
+                message.players = [];
+                for (var i = 0; i < object.players.length; ++i) {
+                    if (typeof object.players[i] !== "object")
+                        throw TypeError(".pb.RoomDataPk.players: object expected");
+                    message.players[i] = $root.pb.GameData.fromObject(object.players[i]);
+                }
+            }
+            if (object.ops) {
+                if (!Array.isArray(object.ops))
+                    throw TypeError(".pb.RoomDataPk.ops: array expected");
+                message.ops = [];
+                for (var i = 0; i < object.ops.length; ++i) {
+                    if (typeof object.ops[i] !== "object")
+                        throw TypeError(".pb.RoomDataPk.ops: object expected");
+                    message.ops[i] = $root.pb.GameOperations.fromObject(object.ops[i]);
+                }
+            }
+            if (object.tsGameFrom != null)
+                if ($util.Long)
+                    (message.tsGameFrom = $util.Long.fromValue(object.tsGameFrom)).unsigned = false;
+                else if (typeof object.tsGameFrom === "string")
+                    message.tsGameFrom = parseInt(object.tsGameFrom, 10);
+                else if (typeof object.tsGameFrom === "number")
+                    message.tsGameFrom = object.tsGameFrom;
+                else if (typeof object.tsGameFrom === "object")
+                    message.tsGameFrom = new $util.LongBits(object.tsGameFrom.low >>> 0, object.tsGameFrom.high >>> 0).toNumber();
+            if (object.tsGameCur != null)
+                if ($util.Long)
+                    (message.tsGameCur = $util.Long.fromValue(object.tsGameCur)).unsigned = false;
+                else if (typeof object.tsGameCur === "string")
+                    message.tsGameCur = parseInt(object.tsGameCur, 10);
+                else if (typeof object.tsGameCur === "number")
+                    message.tsGameCur = object.tsGameCur;
+                else if (typeof object.tsGameCur === "object")
+                    message.tsGameCur = new $util.LongBits(object.tsGameCur.low >>> 0, object.tsGameCur.high >>> 0).toNumber();
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a RoomDataPk message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.RoomDataPk
+         * @static
+         * @param {pb.RoomDataPk} message RoomDataPk
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        RoomDataPk.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.players = [];
+                object.ops = [];
+            }
+            if (options.defaults) {
+                object.status = 0;
+                object.capital = 0;
+                object.code = 0;
+                object.ktype = options.enums === String ? "KType_NULL" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.tsQuoteFrom = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.tsQuoteFrom = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.tsQuoteTo = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.tsQuoteTo = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.tsQuoteStart = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.tsQuoteStart = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.tsGameFrom = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.tsGameFrom = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.tsGameCur = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.tsGameCur = options.longs === String ? "0" : 0;
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.capital != null && message.hasOwnProperty("capital"))
+                object.capital = message.capital;
+            if (message.code != null && message.hasOwnProperty("code"))
+                object.code = message.code;
+            if (message.ktype != null && message.hasOwnProperty("ktype"))
+                object.ktype = options.enums === String ? $root.pb.KType[message.ktype] : message.ktype;
+            if (message.tsQuoteFrom != null && message.hasOwnProperty("tsQuoteFrom"))
+                if (typeof message.tsQuoteFrom === "number")
+                    object.tsQuoteFrom = options.longs === String ? String(message.tsQuoteFrom) : message.tsQuoteFrom;
+                else
+                    object.tsQuoteFrom = options.longs === String ? $util.Long.prototype.toString.call(message.tsQuoteFrom) : options.longs === Number ? new $util.LongBits(message.tsQuoteFrom.low >>> 0, message.tsQuoteFrom.high >>> 0).toNumber() : message.tsQuoteFrom;
+            if (message.tsQuoteTo != null && message.hasOwnProperty("tsQuoteTo"))
+                if (typeof message.tsQuoteTo === "number")
+                    object.tsQuoteTo = options.longs === String ? String(message.tsQuoteTo) : message.tsQuoteTo;
+                else
+                    object.tsQuoteTo = options.longs === String ? $util.Long.prototype.toString.call(message.tsQuoteTo) : options.longs === Number ? new $util.LongBits(message.tsQuoteTo.low >>> 0, message.tsQuoteTo.high >>> 0).toNumber() : message.tsQuoteTo;
+            if (message.tsQuoteStart != null && message.hasOwnProperty("tsQuoteStart"))
+                if (typeof message.tsQuoteStart === "number")
+                    object.tsQuoteStart = options.longs === String ? String(message.tsQuoteStart) : message.tsQuoteStart;
+                else
+                    object.tsQuoteStart = options.longs === String ? $util.Long.prototype.toString.call(message.tsQuoteStart) : options.longs === Number ? new $util.LongBits(message.tsQuoteStart.low >>> 0, message.tsQuoteStart.high >>> 0).toNumber() : message.tsQuoteStart;
+            if (message.players && message.players.length) {
+                object.players = [];
+                for (var j = 0; j < message.players.length; ++j)
+                    object.players[j] = $root.pb.GameData.toObject(message.players[j], options);
+            }
+            if (message.ops && message.ops.length) {
+                object.ops = [];
+                for (var j = 0; j < message.ops.length; ++j)
+                    object.ops[j] = $root.pb.GameOperations.toObject(message.ops[j], options);
+            }
+            if (message.tsGameFrom != null && message.hasOwnProperty("tsGameFrom"))
+                if (typeof message.tsGameFrom === "number")
+                    object.tsGameFrom = options.longs === String ? String(message.tsGameFrom) : message.tsGameFrom;
+                else
+                    object.tsGameFrom = options.longs === String ? $util.Long.prototype.toString.call(message.tsGameFrom) : options.longs === Number ? new $util.LongBits(message.tsGameFrom.low >>> 0, message.tsGameFrom.high >>> 0).toNumber() : message.tsGameFrom;
+            if (message.tsGameCur != null && message.hasOwnProperty("tsGameCur"))
+                if (typeof message.tsGameCur === "number")
+                    object.tsGameCur = options.longs === String ? String(message.tsGameCur) : message.tsGameCur;
+                else
+                    object.tsGameCur = options.longs === String ? $util.Long.prototype.toString.call(message.tsGameCur) : options.longs === Number ? new $util.LongBits(message.tsGameCur.low >>> 0, message.tsGameCur.high >>> 0).toNumber() : message.tsGameCur;
+            return object;
+        };
+
+        /**
+         * Converts this RoomDataPk to JSON.
+         * @function toJSON
+         * @memberof pb.RoomDataPk
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        RoomDataPk.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RoomDataPk;
     })();
 
     /**

@@ -178,8 +178,9 @@ export default class NewClass extends cc.Component {
             datas.ref_id = 0;
             // }
             //  }
-
-            this.saveHoistoryInfo(parseInt(datas.ts + ''));
+            if (GameCfg.GameType != pb.GameType.ShuangMang) {
+                this.saveHoistoryInfo(parseInt(datas.ts + ''));
+            }
 
             socket.send(pb.MessageId.Req_Game_Over, PB.onCmdGameOverConvertToBuff(datas), (info) => {
                 console.log('GameOverInfo' + JSON.stringify(info));

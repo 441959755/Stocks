@@ -120,8 +120,8 @@ message GameResult {
 	GameType g_type = 2;		// 游戏类型
 	int32 quotes_code = 3;		// 行情代码：股票代码或期货代码
 	KType k_type = 4;			// 行情类型：日K，分时
-	int32 k_from = 5;			// 行情起始日期YYYYMMDD或时间HHMMSS
-	int32 k_to = 6;				// 行情结束日期YYYYMMDD或时间HHMMSS
+	int64 k_from = 5;			// 行情起始日期YYYYMMDD或时间HHMMSS
+	int64 k_to = 6;				// 行情结束日期YYYYMMDD或时间HHMMSS
 	double stock_profit_rate = 7;//同期股票涨跌幅
 	double user_profit_rate = 8;// 用户盈利率
 	int64 user_capital = 9;		// 用户初始资本金
@@ -134,14 +134,16 @@ message GameResult {
 
 // 游戏操作步骤
 message GameOperationItem {
-	int32 ts = 1;				// 时间：日K线的格式为YYYYMMDD，分时K线的格式为HHMMSS
-	GameOperationId op_id = 2;	// 操作Id
-	int64 op_val = 3;			// 操作参数：买入或卖出量
+	GameOperationId op_id = 1;	// 操作Id
+	int32 code = 2;				// 行情代码：股票或期货
+	KType k_type = 3;			// 行情类型：日K，分时
+	int32 k_ts = 4;				// 行情时间：日K线的格式为YYYYMMDD，分时K线的格式为HHMMSS
+	double price = 5;			// 操作参数：买入或卖出价格
+	int64 volume = 6;			// 操作参数：买入或卖出量
+	int64 op_ts = 7;			// 操作参数：操作时间戳
 }
 message GameOperations {
-	int32 code = 1;							// 行情代码：股票或期货
-	KType k_type = 2;						// 行情类型：日K，分时
-	repeated GameOperationItem items = 3;	// 操作集合
+	repeated GameOperationItem items = 1;	// 操作集合
 }
 
 
@@ -254,3 +256,83 @@ message CmdGetSmxlReportReply {
 // 重置双盲训练初始资本金应答
 // 应答类型：ErrorInfo
 
+
+
+// 创建房间
+message CmdRoomCreate {
+	GameType game = 1;	// 游戏类型
+	int32 uid = 2;		// 房主（第一个进入房间的，默认为房主）
+  	int32 node = 3;		// 用户所在节点（客户端不需要该参数）
+  	int32 capital = 4;	// 报名费
+}
+// 创建房间应答
+message CmdRoomCreateReply {
+	ErrorInfo err = 1;	// 结果
+	int32 id = 2;		// 房间ID
+}
+
+
+
+// 进入房间
+message CmdRoomEnter {
+	int32 id = 1;		// 房间ID
+	GameType game = 2;	// 游戏类型
+	int32 uid = 3;		// 用户ID
+  	int32 node = 4;		// 用户所在节点（客户端不需要该参数）
+}
+// 进入房间应答
+message CmdRoomEnterReply {
+	ErrorInfo err = 1;	// 结果
+	int32 id = 2;		// 房间ID
+  	int32 node = 3;		// 用户所在节点（客户端不需要该参数）
+}
+
+
+
+// 离开房间
+message CmdRoomLeave {
+	int32 id = 1;		// 房间ID
+	int32 uid = 2;		// 用户ID
+}
+// 离开房间应答
+message CmdRoomLeaveReply {
+	ErrorInfo err = 1;	// 结果
+}
+
+
+
+// 同步玩家进入房间
+message SyncRoomEnter {
+	int32 id = 1;		// 房间ID
+	GameType game = 2;	// 游戏类型
+	GameData player=3;	// 玩家数据
+}
+// 同步玩家离开房间
+message SyncRoomLeave {
+	int32 id = 1;		// 房间ID
+	GameType game = 2;	// 游戏类型
+	int32 uid = 3;		// 玩家ID
+}
+
+
+
+// 房间数据
+message RoomData {
+	int32 id = 1;		// 房间ID
+	GameType game = 2;	// 游戏类型
+	bytes data = 3;		// 房间数据
+}
+// PK房间数据
+message RoomDataPk {
+	int32 status = 1;				// 游戏状态
+	int32 capital = 2;				// 报名费
+	int32 code = 3;					// 行情代码
+	KType ktype = 4;				// 行情类型：日K，分时等等
+	int64 tsQuoteFrom = 5;			// 行情开始时间
+	int64 tsQuoteTo = 6;			// 行情结束时间
+	int64 tsQuoteStart = 7;			// 行情起始位置（开始玩的位置）
+	repeated GameData players = 8;	// 玩家数据
+	repeated GameOperations ops = 9;// 游戏操作（下标和玩家数组一致）
+	int64 tsGameFrom = 10;			// 游戏开始时间戳（精确：秒）
+	int64 tsGameCur = 11;			// 游戏当前时间戳（精确：秒）
+}

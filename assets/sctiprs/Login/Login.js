@@ -188,6 +188,7 @@ cc.Class({
 							cc.sys.localStorage.removeItem(el + 'fill');
 							cc.sys.localStorage.removeItem(el + 'notice');
 							cc.sys.localStorage.removeItem(el + 'mark');
+							cc.sys.localStorage.removeItem(datas[i].ts + 'cache');
 						} else {
 							arr.push(el);
 						}

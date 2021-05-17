@@ -26,6 +26,8 @@ export default {
 
     MACD_COL: [],
 
+    CCL_COL: null,  //持仓量颜色
+
     VOLGraph: [5, 10],          //成交量均线
 
     VOLColor: [cc.Color.WHITE, cc.Color.YELLOW],

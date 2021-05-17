@@ -71,6 +71,12 @@ export default class GameCfgText {
                 index = i;
                 break;
             }
+            let arr = this.qihuoList[i].split('|');
+
+            if ((arr[2] + arr[3]) == item) {
+                index = i;
+                break;
+            }
         }
 
         if (index != -1) {

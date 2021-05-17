@@ -26,6 +26,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Graphics)
     drawPcm: cc.Graphics = null;
 
+    @property(cc.Graphics)
+    drawCcl: cc.Graphics = null;
+
     // huizhidatas = null;
 
     DIFList = [];
@@ -71,6 +74,9 @@ export default class NewClass extends cc.Component {
     maxJ = 0;
     minJ = 0;
 
+    maxCcl = 0;
+    minCcl = 0;
+
     preK = null;
     preD = null;
     preJ = null;
@@ -112,6 +118,9 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     RSILabels: cc.Label[] = [];
 
+    @property(cc.Label)
+    cclLabel: cc.Label = null;
+
     onLoad() {
         //  this.Mask.active = false;
         GlobalEvent.on('on_off', (flagData) => {
@@ -133,6 +142,9 @@ export default class NewClass extends cc.Component {
 
             this.drawPcm.node.active = flagData.cpm;
             this.drawVol.node.active = flagData.cpm;
+
+            this.drawCcl.node.active = flagData.ccl;
+            this.cclLabel.node.active = flagData.ccl;
 
             if (flagData.macd || flagData.kdj || flagData.rsi) {
                 if (GameCfg.GameType != 3) {
@@ -247,6 +259,10 @@ export default class NewClass extends cc.Component {
         if (this.Rs24[index]) {
             this.RSILabels[2].string = arr2[2] + ': ' + this.Rs24[index].toFixed(2);
         }
+
+        if (GameCfg.data[0].data[index].ccl_hold) {
+            this.cclLabel.string = 'OPI:' + GameCfg.data[0].data[index].ccl_hold.toFixed(2);
+        }
     }
 
     //设置label的值
@@ -332,6 +348,7 @@ export default class NewClass extends cc.Component {
         this.drawRSI.clear();
         this.drawKDJ.clear();
         this.drawMACD.clear();
+        this.drawCcl.clear();
         this.minDIF = this.DIFList[cc.ext.beg_end[0]];
         this.maxDIF = this.DIFList[cc.ext.beg_end[0]];
 
@@ -358,6 +375,9 @@ export default class NewClass extends cc.Component {
 
         this.maxRs24 = this.Rs24[cc.ext.beg_end[0]];
         this.minRs24 = this.Rs24[cc.ext.beg_end[0]];
+
+        this.maxCcl = GameCfg.data[0].data[cc.ext.beg_end[0]].ccl_hold;
+        this.minCcl = GameCfg.data[0].data[cc.ext.beg_end[0]].ccl_hold;
 
         for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
             this.minDIF = Math.min(this.minDIF, this.DIFList[index]);
@@ -393,6 +413,10 @@ export default class NewClass extends cc.Component {
                 this.maxRs24 = Math.max(this.maxRs24, this.Rs24[index]);
             }
 
+            if (GameCfg.data[0].data[index].ccl_hold) {
+                this.maxCcl = Math.max(GameCfg.data[0].data[index].ccl_hold, this.maxCcl);
+                this.minCcl = Math.min(GameCfg.data[0].data[index].ccl_hold, this.minCcl);
+            }
 
         }
         this.setLabelValue();
@@ -404,6 +428,7 @@ export default class NewClass extends cc.Component {
                 this.onDrawMACD(i);
                 this.onDrawKDJ(i);
                 this.onDrawRSI(i);
+                this.onDrawCCL(i);
             }
         }
     }
@@ -434,7 +459,7 @@ export default class NewClass extends cc.Component {
             this.Mask.color = cc.Color.WHITE;
         }
 
-
+        this.cclLabel.node.color = GameCfg.CCL_COL;
     }
 
     onDrawKDJ(index) {
@@ -477,6 +502,28 @@ export default class NewClass extends cc.Component {
             this.drawKDJ.lineWidth = 2;
             DrawUtils.drawLine(this.drawKDJ, preX, prejy + 30, x, jY + 30);
         }
+    }
+
+    onDrawCCL(index) {
+        let some = index - cc.ext.beg_end[0];
+
+        if (index <= 0) {
+            return
+        }
+        let bgheight = this.drawCcl.node.height;
+
+        let x = 10 + (some * cc.ext.hz_width) + cc.ext.hz_width / 2;
+
+        let preX = 10 + ((some - 1) * cc.ext.hz_width) + cc.ext.hz_width / 2;
+
+        let y = GameCfg.data[0].data[index].ccl_hold / this.maxCcl * bgheight;
+
+        let preY = GameCfg.data[0].data[index - 1].ccl_hold / this.maxCcl * bgheight;
+
+        this.drawCcl.strokeColor = GameCfg.CCL_COL;
+        this.drawCcl.lineWidth = 2;
+        DrawUtils.drawLine(this.drawCcl, preX, preY, x, y);
+
     }
 
     onDrawRSI(index) {

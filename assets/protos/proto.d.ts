@@ -88,7 +88,23 @@ export namespace pb {
         Req_Game_SmxlReset = 4011,
         Rep_Game_SmxlReset = 4012,
         Req_Game_GetGameOperation = 4013,
-        Rep_Game_GetGameOperation = 4014
+        Rep_Game_GetGameOperation = 4014,
+        RoomMsgRange_BEG = 5000,
+        RoomMsgRange_END = 5999,
+        Req_Room_Create = 5003,
+        Rep_Room_Create = 5004,
+        Req_Room_Enter = 5005,
+        Rep_Room_Enter = 5006,
+        Req_Room_Leave = 5007,
+        Rep_Room_Leave = 5008,
+        Req_Room_LostConn = 5111,
+        Req_Room_ReConn = 5113,
+        Sync_Room_Enter = 5200,
+        Sync_Room_Leave = 5202,
+        Sync_Room_Enter_Self = 5204,
+        Sync_Room_ReConn = 5206,
+        S2S_HeartBeat = 10001,
+        S2S_Broadcast = 10003
     }
 
     /** ErrorCode enum. */
@@ -98,7 +114,11 @@ export namespace pb {
         CS_SERVER_ERROR = 2,
         CS_INVALID_PARAMETER = 3,
         CS_INVALID_ACCOUNT = 4,
-        CS_INVALID_PASSWORD = 5
+        CS_INVALID_PASSWORD = 5,
+        CS_TIMEOUT = 6,
+        CS_ROOM_INVALID = 100,
+        CS_ROOM_FULL = 101,
+        CS_ROOM_FAIL_CHECKIN = 102
     }
 
     /** Properties of a MessageHead. */
@@ -307,6 +327,9 @@ export namespace pb {
 
         /** AdClicked from */
         from?: (pb.AppFrom|null);
+
+        /** AdClicked ua */
+        ua?: (string|null);
     }
 
     /** Represents an AdClicked. */
@@ -329,6 +352,9 @@ export namespace pb {
 
         /** AdClicked from. */
         public from: pb.AppFrom;
+
+        /** AdClicked ua. */
+        public ua: string;
 
         /**
          * Creates a new AdClicked instance using the specified properties.
@@ -1149,10 +1175,10 @@ export namespace pb {
         kType?: (pb.KType|null);
 
         /** GameResult kFrom */
-        kFrom?: (number|null);
+        kFrom?: (number|Long|null);
 
         /** GameResult kTo */
-        kTo?: (number|null);
+        kTo?: (number|Long|null);
 
         /** GameResult stockProfitRate */
         stockProfitRate?: (number|null);
@@ -1198,10 +1224,10 @@ export namespace pb {
         public kType: pb.KType;
 
         /** GameResult kFrom. */
-        public kFrom: number;
+        public kFrom: (number|Long);
 
         /** GameResult kTo. */
-        public kTo: number;
+        public kTo: (number|Long);
 
         /** GameResult stockProfitRate. */
         public stockProfitRate: number;
@@ -1298,14 +1324,26 @@ export namespace pb {
     /** Properties of a GameOperationItem. */
     interface IGameOperationItem {
 
-        /** GameOperationItem ts */
-        ts?: (number|null);
-
         /** GameOperationItem opId */
         opId?: (pb.GameOperationId|null);
 
-        /** GameOperationItem opVal */
-        opVal?: (number|Long|null);
+        /** GameOperationItem code */
+        code?: (number|null);
+
+        /** GameOperationItem kType */
+        kType?: (pb.KType|null);
+
+        /** GameOperationItem kTs */
+        kTs?: (number|null);
+
+        /** GameOperationItem price */
+        price?: (number|null);
+
+        /** GameOperationItem volume */
+        volume?: (number|Long|null);
+
+        /** GameOperationItem opTs */
+        opTs?: (number|Long|null);
     }
 
     /** Represents a GameOperationItem. */
@@ -1317,14 +1355,26 @@ export namespace pb {
          */
         constructor(properties?: pb.IGameOperationItem);
 
-        /** GameOperationItem ts. */
-        public ts: number;
-
         /** GameOperationItem opId. */
         public opId: pb.GameOperationId;
 
-        /** GameOperationItem opVal. */
-        public opVal: (number|Long);
+        /** GameOperationItem code. */
+        public code: number;
+
+        /** GameOperationItem kType. */
+        public kType: pb.KType;
+
+        /** GameOperationItem kTs. */
+        public kTs: number;
+
+        /** GameOperationItem price. */
+        public price: number;
+
+        /** GameOperationItem volume. */
+        public volume: (number|Long);
+
+        /** GameOperationItem opTs. */
+        public opTs: (number|Long);
 
         /**
          * Creates a new GameOperationItem instance using the specified properties.
@@ -1400,12 +1450,6 @@ export namespace pb {
     /** Properties of a GameOperations. */
     interface IGameOperations {
 
-        /** GameOperations code */
-        code?: (number|null);
-
-        /** GameOperations kType */
-        kType?: (pb.KType|null);
-
         /** GameOperations items */
         items?: (pb.IGameOperationItem[]|null);
     }
@@ -1418,12 +1462,6 @@ export namespace pb {
          * @param [properties] Properties to set
          */
         constructor(properties?: pb.IGameOperations);
-
-        /** GameOperations code. */
-        public code: number;
-
-        /** GameOperations kType. */
-        public kType: pb.KType;
 
         /** GameOperations items. */
         public items: pb.IGameOperationItem[];
@@ -2706,6 +2744,1062 @@ export namespace pb {
 
         /**
          * Converts this CmdGetSmxlReportReply to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdRoomCreate. */
+    interface ICmdRoomCreate {
+
+        /** CmdRoomCreate game */
+        game?: (pb.GameType|null);
+
+        /** CmdRoomCreate uid */
+        uid?: (number|null);
+
+        /** CmdRoomCreate node */
+        node?: (number|null);
+
+        /** CmdRoomCreate capital */
+        capital?: (number|null);
+    }
+
+    /** Represents a CmdRoomCreate. */
+    class CmdRoomCreate implements ICmdRoomCreate {
+
+        /**
+         * Constructs a new CmdRoomCreate.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdRoomCreate);
+
+        /** CmdRoomCreate game. */
+        public game: pb.GameType;
+
+        /** CmdRoomCreate uid. */
+        public uid: number;
+
+        /** CmdRoomCreate node. */
+        public node: number;
+
+        /** CmdRoomCreate capital. */
+        public capital: number;
+
+        /**
+         * Creates a new CmdRoomCreate instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdRoomCreate instance
+         */
+        public static create(properties?: pb.ICmdRoomCreate): pb.CmdRoomCreate;
+
+        /**
+         * Encodes the specified CmdRoomCreate message. Does not implicitly {@link pb.CmdRoomCreate.verify|verify} messages.
+         * @param message CmdRoomCreate message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdRoomCreate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdRoomCreate message, length delimited. Does not implicitly {@link pb.CmdRoomCreate.verify|verify} messages.
+         * @param message CmdRoomCreate message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdRoomCreate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdRoomCreate message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdRoomCreate
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRoomCreate;
+
+        /**
+         * Decodes a CmdRoomCreate message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdRoomCreate
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRoomCreate;
+
+        /**
+         * Verifies a CmdRoomCreate message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdRoomCreate message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdRoomCreate
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdRoomCreate;
+
+        /**
+         * Creates a plain object from a CmdRoomCreate message. Also converts values to other types if specified.
+         * @param message CmdRoomCreate
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdRoomCreate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdRoomCreate to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdRoomCreateReply. */
+    interface ICmdRoomCreateReply {
+
+        /** CmdRoomCreateReply err */
+        err?: (pb.IErrorInfo|null);
+
+        /** CmdRoomCreateReply id */
+        id?: (number|null);
+    }
+
+    /** Represents a CmdRoomCreateReply. */
+    class CmdRoomCreateReply implements ICmdRoomCreateReply {
+
+        /**
+         * Constructs a new CmdRoomCreateReply.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdRoomCreateReply);
+
+        /** CmdRoomCreateReply err. */
+        public err?: (pb.IErrorInfo|null);
+
+        /** CmdRoomCreateReply id. */
+        public id: number;
+
+        /**
+         * Creates a new CmdRoomCreateReply instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdRoomCreateReply instance
+         */
+        public static create(properties?: pb.ICmdRoomCreateReply): pb.CmdRoomCreateReply;
+
+        /**
+         * Encodes the specified CmdRoomCreateReply message. Does not implicitly {@link pb.CmdRoomCreateReply.verify|verify} messages.
+         * @param message CmdRoomCreateReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdRoomCreateReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdRoomCreateReply message, length delimited. Does not implicitly {@link pb.CmdRoomCreateReply.verify|verify} messages.
+         * @param message CmdRoomCreateReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdRoomCreateReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdRoomCreateReply message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdRoomCreateReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRoomCreateReply;
+
+        /**
+         * Decodes a CmdRoomCreateReply message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdRoomCreateReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRoomCreateReply;
+
+        /**
+         * Verifies a CmdRoomCreateReply message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdRoomCreateReply message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdRoomCreateReply
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdRoomCreateReply;
+
+        /**
+         * Creates a plain object from a CmdRoomCreateReply message. Also converts values to other types if specified.
+         * @param message CmdRoomCreateReply
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdRoomCreateReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdRoomCreateReply to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdRoomEnter. */
+    interface ICmdRoomEnter {
+
+        /** CmdRoomEnter id */
+        id?: (number|null);
+
+        /** CmdRoomEnter game */
+        game?: (pb.GameType|null);
+
+        /** CmdRoomEnter uid */
+        uid?: (number|null);
+
+        /** CmdRoomEnter node */
+        node?: (number|null);
+    }
+
+    /** Represents a CmdRoomEnter. */
+    class CmdRoomEnter implements ICmdRoomEnter {
+
+        /**
+         * Constructs a new CmdRoomEnter.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdRoomEnter);
+
+        /** CmdRoomEnter id. */
+        public id: number;
+
+        /** CmdRoomEnter game. */
+        public game: pb.GameType;
+
+        /** CmdRoomEnter uid. */
+        public uid: number;
+
+        /** CmdRoomEnter node. */
+        public node: number;
+
+        /**
+         * Creates a new CmdRoomEnter instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdRoomEnter instance
+         */
+        public static create(properties?: pb.ICmdRoomEnter): pb.CmdRoomEnter;
+
+        /**
+         * Encodes the specified CmdRoomEnter message. Does not implicitly {@link pb.CmdRoomEnter.verify|verify} messages.
+         * @param message CmdRoomEnter message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdRoomEnter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdRoomEnter message, length delimited. Does not implicitly {@link pb.CmdRoomEnter.verify|verify} messages.
+         * @param message CmdRoomEnter message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdRoomEnter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdRoomEnter message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdRoomEnter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRoomEnter;
+
+        /**
+         * Decodes a CmdRoomEnter message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdRoomEnter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRoomEnter;
+
+        /**
+         * Verifies a CmdRoomEnter message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdRoomEnter message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdRoomEnter
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdRoomEnter;
+
+        /**
+         * Creates a plain object from a CmdRoomEnter message. Also converts values to other types if specified.
+         * @param message CmdRoomEnter
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdRoomEnter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdRoomEnter to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdRoomEnterReply. */
+    interface ICmdRoomEnterReply {
+
+        /** CmdRoomEnterReply err */
+        err?: (pb.IErrorInfo|null);
+
+        /** CmdRoomEnterReply id */
+        id?: (number|null);
+
+        /** CmdRoomEnterReply node */
+        node?: (number|null);
+    }
+
+    /** Represents a CmdRoomEnterReply. */
+    class CmdRoomEnterReply implements ICmdRoomEnterReply {
+
+        /**
+         * Constructs a new CmdRoomEnterReply.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdRoomEnterReply);
+
+        /** CmdRoomEnterReply err. */
+        public err?: (pb.IErrorInfo|null);
+
+        /** CmdRoomEnterReply id. */
+        public id: number;
+
+        /** CmdRoomEnterReply node. */
+        public node: number;
+
+        /**
+         * Creates a new CmdRoomEnterReply instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdRoomEnterReply instance
+         */
+        public static create(properties?: pb.ICmdRoomEnterReply): pb.CmdRoomEnterReply;
+
+        /**
+         * Encodes the specified CmdRoomEnterReply message. Does not implicitly {@link pb.CmdRoomEnterReply.verify|verify} messages.
+         * @param message CmdRoomEnterReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdRoomEnterReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdRoomEnterReply message, length delimited. Does not implicitly {@link pb.CmdRoomEnterReply.verify|verify} messages.
+         * @param message CmdRoomEnterReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdRoomEnterReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdRoomEnterReply message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdRoomEnterReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRoomEnterReply;
+
+        /**
+         * Decodes a CmdRoomEnterReply message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdRoomEnterReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRoomEnterReply;
+
+        /**
+         * Verifies a CmdRoomEnterReply message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdRoomEnterReply message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdRoomEnterReply
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdRoomEnterReply;
+
+        /**
+         * Creates a plain object from a CmdRoomEnterReply message. Also converts values to other types if specified.
+         * @param message CmdRoomEnterReply
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdRoomEnterReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdRoomEnterReply to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdRoomLeave. */
+    interface ICmdRoomLeave {
+
+        /** CmdRoomLeave id */
+        id?: (number|null);
+
+        /** CmdRoomLeave uid */
+        uid?: (number|null);
+    }
+
+    /** Represents a CmdRoomLeave. */
+    class CmdRoomLeave implements ICmdRoomLeave {
+
+        /**
+         * Constructs a new CmdRoomLeave.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdRoomLeave);
+
+        /** CmdRoomLeave id. */
+        public id: number;
+
+        /** CmdRoomLeave uid. */
+        public uid: number;
+
+        /**
+         * Creates a new CmdRoomLeave instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdRoomLeave instance
+         */
+        public static create(properties?: pb.ICmdRoomLeave): pb.CmdRoomLeave;
+
+        /**
+         * Encodes the specified CmdRoomLeave message. Does not implicitly {@link pb.CmdRoomLeave.verify|verify} messages.
+         * @param message CmdRoomLeave message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdRoomLeave, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdRoomLeave message, length delimited. Does not implicitly {@link pb.CmdRoomLeave.verify|verify} messages.
+         * @param message CmdRoomLeave message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdRoomLeave, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdRoomLeave message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdRoomLeave
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRoomLeave;
+
+        /**
+         * Decodes a CmdRoomLeave message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdRoomLeave
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRoomLeave;
+
+        /**
+         * Verifies a CmdRoomLeave message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdRoomLeave message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdRoomLeave
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdRoomLeave;
+
+        /**
+         * Creates a plain object from a CmdRoomLeave message. Also converts values to other types if specified.
+         * @param message CmdRoomLeave
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdRoomLeave, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdRoomLeave to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdRoomLeaveReply. */
+    interface ICmdRoomLeaveReply {
+
+        /** CmdRoomLeaveReply err */
+        err?: (pb.IErrorInfo|null);
+    }
+
+    /** Represents a CmdRoomLeaveReply. */
+    class CmdRoomLeaveReply implements ICmdRoomLeaveReply {
+
+        /**
+         * Constructs a new CmdRoomLeaveReply.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdRoomLeaveReply);
+
+        /** CmdRoomLeaveReply err. */
+        public err?: (pb.IErrorInfo|null);
+
+        /**
+         * Creates a new CmdRoomLeaveReply instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdRoomLeaveReply instance
+         */
+        public static create(properties?: pb.ICmdRoomLeaveReply): pb.CmdRoomLeaveReply;
+
+        /**
+         * Encodes the specified CmdRoomLeaveReply message. Does not implicitly {@link pb.CmdRoomLeaveReply.verify|verify} messages.
+         * @param message CmdRoomLeaveReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdRoomLeaveReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdRoomLeaveReply message, length delimited. Does not implicitly {@link pb.CmdRoomLeaveReply.verify|verify} messages.
+         * @param message CmdRoomLeaveReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdRoomLeaveReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdRoomLeaveReply message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdRoomLeaveReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRoomLeaveReply;
+
+        /**
+         * Decodes a CmdRoomLeaveReply message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdRoomLeaveReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRoomLeaveReply;
+
+        /**
+         * Verifies a CmdRoomLeaveReply message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdRoomLeaveReply message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdRoomLeaveReply
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdRoomLeaveReply;
+
+        /**
+         * Creates a plain object from a CmdRoomLeaveReply message. Also converts values to other types if specified.
+         * @param message CmdRoomLeaveReply
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdRoomLeaveReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdRoomLeaveReply to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a SyncRoomEnter. */
+    interface ISyncRoomEnter {
+
+        /** SyncRoomEnter id */
+        id?: (number|null);
+
+        /** SyncRoomEnter game */
+        game?: (pb.GameType|null);
+
+        /** SyncRoomEnter player */
+        player?: (pb.IGameData|null);
+    }
+
+    /** Represents a SyncRoomEnter. */
+    class SyncRoomEnter implements ISyncRoomEnter {
+
+        /**
+         * Constructs a new SyncRoomEnter.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ISyncRoomEnter);
+
+        /** SyncRoomEnter id. */
+        public id: number;
+
+        /** SyncRoomEnter game. */
+        public game: pb.GameType;
+
+        /** SyncRoomEnter player. */
+        public player?: (pb.IGameData|null);
+
+        /**
+         * Creates a new SyncRoomEnter instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SyncRoomEnter instance
+         */
+        public static create(properties?: pb.ISyncRoomEnter): pb.SyncRoomEnter;
+
+        /**
+         * Encodes the specified SyncRoomEnter message. Does not implicitly {@link pb.SyncRoomEnter.verify|verify} messages.
+         * @param message SyncRoomEnter message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ISyncRoomEnter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SyncRoomEnter message, length delimited. Does not implicitly {@link pb.SyncRoomEnter.verify|verify} messages.
+         * @param message SyncRoomEnter message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ISyncRoomEnter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SyncRoomEnter message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SyncRoomEnter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.SyncRoomEnter;
+
+        /**
+         * Decodes a SyncRoomEnter message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SyncRoomEnter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.SyncRoomEnter;
+
+        /**
+         * Verifies a SyncRoomEnter message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SyncRoomEnter message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SyncRoomEnter
+         */
+        public static fromObject(object: { [k: string]: any }): pb.SyncRoomEnter;
+
+        /**
+         * Creates a plain object from a SyncRoomEnter message. Also converts values to other types if specified.
+         * @param message SyncRoomEnter
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.SyncRoomEnter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SyncRoomEnter to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a SyncRoomLeave. */
+    interface ISyncRoomLeave {
+
+        /** SyncRoomLeave id */
+        id?: (number|null);
+
+        /** SyncRoomLeave game */
+        game?: (pb.GameType|null);
+
+        /** SyncRoomLeave uid */
+        uid?: (number|null);
+    }
+
+    /** Represents a SyncRoomLeave. */
+    class SyncRoomLeave implements ISyncRoomLeave {
+
+        /**
+         * Constructs a new SyncRoomLeave.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ISyncRoomLeave);
+
+        /** SyncRoomLeave id. */
+        public id: number;
+
+        /** SyncRoomLeave game. */
+        public game: pb.GameType;
+
+        /** SyncRoomLeave uid. */
+        public uid: number;
+
+        /**
+         * Creates a new SyncRoomLeave instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SyncRoomLeave instance
+         */
+        public static create(properties?: pb.ISyncRoomLeave): pb.SyncRoomLeave;
+
+        /**
+         * Encodes the specified SyncRoomLeave message. Does not implicitly {@link pb.SyncRoomLeave.verify|verify} messages.
+         * @param message SyncRoomLeave message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ISyncRoomLeave, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SyncRoomLeave message, length delimited. Does not implicitly {@link pb.SyncRoomLeave.verify|verify} messages.
+         * @param message SyncRoomLeave message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ISyncRoomLeave, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SyncRoomLeave message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SyncRoomLeave
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.SyncRoomLeave;
+
+        /**
+         * Decodes a SyncRoomLeave message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SyncRoomLeave
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.SyncRoomLeave;
+
+        /**
+         * Verifies a SyncRoomLeave message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SyncRoomLeave message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SyncRoomLeave
+         */
+        public static fromObject(object: { [k: string]: any }): pb.SyncRoomLeave;
+
+        /**
+         * Creates a plain object from a SyncRoomLeave message. Also converts values to other types if specified.
+         * @param message SyncRoomLeave
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.SyncRoomLeave, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SyncRoomLeave to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a RoomData. */
+    interface IRoomData {
+
+        /** RoomData id */
+        id?: (number|null);
+
+        /** RoomData game */
+        game?: (pb.GameType|null);
+
+        /** RoomData data */
+        data?: (Uint8Array|null);
+    }
+
+    /** Represents a RoomData. */
+    class RoomData implements IRoomData {
+
+        /**
+         * Constructs a new RoomData.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IRoomData);
+
+        /** RoomData id. */
+        public id: number;
+
+        /** RoomData game. */
+        public game: pb.GameType;
+
+        /** RoomData data. */
+        public data: Uint8Array;
+
+        /**
+         * Creates a new RoomData instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns RoomData instance
+         */
+        public static create(properties?: pb.IRoomData): pb.RoomData;
+
+        /**
+         * Encodes the specified RoomData message. Does not implicitly {@link pb.RoomData.verify|verify} messages.
+         * @param message RoomData message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IRoomData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified RoomData message, length delimited. Does not implicitly {@link pb.RoomData.verify|verify} messages.
+         * @param message RoomData message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IRoomData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a RoomData message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns RoomData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomData;
+
+        /**
+         * Decodes a RoomData message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns RoomData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomData;
+
+        /**
+         * Verifies a RoomData message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a RoomData message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns RoomData
+         */
+        public static fromObject(object: { [k: string]: any }): pb.RoomData;
+
+        /**
+         * Creates a plain object from a RoomData message. Also converts values to other types if specified.
+         * @param message RoomData
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.RoomData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this RoomData to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a RoomDataPk. */
+    interface IRoomDataPk {
+
+        /** RoomDataPk status */
+        status?: (number|null);
+
+        /** RoomDataPk capital */
+        capital?: (number|null);
+
+        /** RoomDataPk code */
+        code?: (number|null);
+
+        /** RoomDataPk ktype */
+        ktype?: (pb.KType|null);
+
+        /** RoomDataPk tsQuoteFrom */
+        tsQuoteFrom?: (number|Long|null);
+
+        /** RoomDataPk tsQuoteTo */
+        tsQuoteTo?: (number|Long|null);
+
+        /** RoomDataPk tsQuoteStart */
+        tsQuoteStart?: (number|Long|null);
+
+        /** RoomDataPk players */
+        players?: (pb.IGameData[]|null);
+
+        /** RoomDataPk ops */
+        ops?: (pb.IGameOperations[]|null);
+
+        /** RoomDataPk tsGameFrom */
+        tsGameFrom?: (number|Long|null);
+
+        /** RoomDataPk tsGameCur */
+        tsGameCur?: (number|Long|null);
+    }
+
+    /** Represents a RoomDataPk. */
+    class RoomDataPk implements IRoomDataPk {
+
+        /**
+         * Constructs a new RoomDataPk.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IRoomDataPk);
+
+        /** RoomDataPk status. */
+        public status: number;
+
+        /** RoomDataPk capital. */
+        public capital: number;
+
+        /** RoomDataPk code. */
+        public code: number;
+
+        /** RoomDataPk ktype. */
+        public ktype: pb.KType;
+
+        /** RoomDataPk tsQuoteFrom. */
+        public tsQuoteFrom: (number|Long);
+
+        /** RoomDataPk tsQuoteTo. */
+        public tsQuoteTo: (number|Long);
+
+        /** RoomDataPk tsQuoteStart. */
+        public tsQuoteStart: (number|Long);
+
+        /** RoomDataPk players. */
+        public players: pb.IGameData[];
+
+        /** RoomDataPk ops. */
+        public ops: pb.IGameOperations[];
+
+        /** RoomDataPk tsGameFrom. */
+        public tsGameFrom: (number|Long);
+
+        /** RoomDataPk tsGameCur. */
+        public tsGameCur: (number|Long);
+
+        /**
+         * Creates a new RoomDataPk instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns RoomDataPk instance
+         */
+        public static create(properties?: pb.IRoomDataPk): pb.RoomDataPk;
+
+        /**
+         * Encodes the specified RoomDataPk message. Does not implicitly {@link pb.RoomDataPk.verify|verify} messages.
+         * @param message RoomDataPk message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IRoomDataPk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified RoomDataPk message, length delimited. Does not implicitly {@link pb.RoomDataPk.verify|verify} messages.
+         * @param message RoomDataPk message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IRoomDataPk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a RoomDataPk message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns RoomDataPk
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomDataPk;
+
+        /**
+         * Decodes a RoomDataPk message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns RoomDataPk
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomDataPk;
+
+        /**
+         * Verifies a RoomDataPk message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a RoomDataPk message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns RoomDataPk
+         */
+        public static fromObject(object: { [k: string]: any }): pb.RoomDataPk;
+
+        /**
+         * Creates a plain object from a RoomDataPk message. Also converts values to other types if specified.
+         * @param message RoomDataPk
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.RoomDataPk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this RoomDataPk to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
