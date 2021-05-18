@@ -488,6 +488,10 @@ export default class NewClass extends cc.Component {
 			this.node.active = false;
 			GameCfg.GameType = null;
 		}
+
+		else if (name == 'sys_helpbig1') {
+			GlobalEvent.emit(EventCfg.OPENHELPLAYER);
+		}
 	}
 
 	onToggleClick() {

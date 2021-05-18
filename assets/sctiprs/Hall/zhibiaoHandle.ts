@@ -247,6 +247,10 @@ export default class NewClass extends cc.Component {
             GameCfg.GameType = pb.GameType.ZhiBiao;
             GlobalEvent.emit("OPENHISTORYLAYER", 'ZB');
         }
+
+        else if (name == 'sys_helpbig1') {
+            GlobalEvent.emit(EventCfg.OPENHELPLAYER);
+        }
     }
 
     zhibiaoStartGameSet() {

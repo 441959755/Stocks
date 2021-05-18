@@ -422,7 +422,7 @@ export default class NewClass extends cc.Component {
         //   console.log(index);
         if (GameCfg.data[0].data[index]) {
             let value = parseFloat(GameCfg.data[0].data[index].value);
-            this.voltext.getComponent(cc.Label).string = 'VOL(5,10): ' + value.toFixed(2);
+            this.voltext.getComponent(cc.Label).string = 'VOL(5,10): ' + value;
         }
     }
 

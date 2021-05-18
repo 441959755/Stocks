@@ -200,18 +200,18 @@ export default class NewClass extends cc.Component {
 			this
 		);
 
-		//打开帮助
-		GlobalEvent.on(
-			'OPENHELPLAYER',
-			str => {
-				if (!this.helpLayer) {
-					this.helpLayer = cc.instantiate(this.helpPre);
-					this.node.addChild(this.helpLayer);
-				}
-				this.helpLayer.active = true;
-			},
-			this
-		);
+
+		// GlobalEvent.on(
+		// 	'OPENHELPLAYER',
+		// 	str => {
+		// 		if (!this.helpLayer) {
+		// 			this.helpLayer = cc.instantiate(this.helpPre);
+		// 			this.node.addChild(this.helpLayer);
+		// 		}
+		// 		this.helpLayer.active = true;
+		// 	},
+		// 	this
+		// );
 
 		//查询行情
 		GlobalEvent.on('onCmdQuoteQuery', this.onCmdQuoteQuery.bind(this), this);
@@ -252,6 +252,18 @@ export default class NewClass extends cc.Component {
 		);
 
 		GlobalEvent.on(EventCfg.CmdQuoteQueryFuture, this.onCmdQHGameStart.bind(this), this);
+
+		//打开帮助
+		GlobalEvent.on(EventCfg.OPENHELPLAYER, () => {
+
+			if (!this.helpLayer) {
+				this.helpLayer = cc.instantiate(this.helpPre);
+				this.node.addChild(this.helpLayer, 66);
+
+			}
+			this.helpLayer.active = true;
+
+		}, this);
 	}
 
 
@@ -338,11 +350,12 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off('OPENZBSETLAYER');
 		GlobalEvent.off('OPENMONTHLAYER');
 		GlobalEvent.off('OPENYIELDLAYER');
-		GlobalEvent.off('OPENHELPLAYER');
+		//	GlobalEvent.off('OPENHELPLAYER');
 		GlobalEvent.off('onCmdQuoteQuery');
 		GlobalEvent.off('OPENDXKAYER');
 		GlobalEvent.off('OPENPLAYERINFO');
 		GlobalEvent.off('OPENQHLAYER');
+		GlobalEvent.off(EventCfg.OPENHELPLAYER);
 		ComUtils.onDestory();
 	}
 
