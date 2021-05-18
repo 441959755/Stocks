@@ -93,8 +93,8 @@ export default class NewClass extends cc.Component {
         this.maLabel.string = code;
         //时间
         // this.timeLabel.string = (gpData[0].day.replace(/-/g, '/')) + ' -- ' + (gpData[gpData.length - 1].day.replace(/-/g, '/'));
-
-        this.timeLabel.string = ComUtils.formatTime(gpData[gpData.length - GameCfg.GameSet.KLine].day - 1) + '--' + ComUtils.formatTime(gpData[gpData.length - 1].day);
+        ;
+        this.timeLabel.string = ComUtils.formatTime(GameCfg.enterGameCache.from) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas].day);
 
         //同期涨幅
         let tq = ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2);
@@ -159,9 +159,9 @@ export default class NewClass extends cc.Component {
                 g_type: GameCfg.GameType,
                 quotes_code: GameCfg.data[0].code,
                 k_type: GameCfg.data[0].ktype,
-                k_from: parseInt(ComUtils.fromatTime1(gpData[0].day)),
+                k_from: parseInt(ComUtils.fromatTime1(GameCfg.enterGameCache.from)),
 
-                k_to: parseInt(ComUtils.fromatTime1(gpData[gpData.length - 1].day)),
+                k_to: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas].day)),
                 //  k_to: parseInt(gpData[gpData.length - 1].day.replace(///g,'')),
                 stock_profit_rate: ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2),
                 user_profit_rate: (GameCfg.allRate * 100).toFixed(2),
@@ -214,14 +214,14 @@ export default class NewClass extends cc.Component {
             GameCfg.profitCount = 0;
             GameCfg.lossCount = 0;
             GameCfg.finalfund = 0;
-            GameCfg.GameType = null;
+            //    GameCfg.GameType = null;
 
             GameCfg.GAMEFUPAN = false;
             // GameCfg.history.huizhidatas = 0;
             GameCfg.history.allRate = 0;
             GameCfg.history.deal = [];
             GameCfg.enterGameCache = null;
-
+            //    GameCfg.ziChan = 100000;
             cc.director.loadScene('hall');
         }
         //再来一局
@@ -239,7 +239,7 @@ export default class NewClass extends cc.Component {
             //   GameCfg.history.huizhidatas = 0;
             GameCfg.history.allRate = 0;
             GameCfg.history.deal = [];
-
+            //   GameCfg.ziChan = 100000;
             cc.director.loadScene('game');
 
             // GameCfg.GAMEFUPAN = false;

@@ -27,6 +27,8 @@ export default class NewClass extends cc.Component {
 
     end = 0;
 
+    to = null;
+
     onLoad() {
         if (GameCfg.GameSet.ZKine == '5分钟K') {
             this._selectID = 0;
@@ -95,7 +97,7 @@ export default class NewClass extends cc.Component {
 
     onGetData(type, id) {
 
-        let tt = this.huizhidatas - 1;
+        let tt = this.huizhidatas;
         //   this.saveTime = this.qhData.data[tt].day;
         if (GameCfg.GAMEFUPAN) {
             tt = GameCfg.history.huizhidatas - 1;
@@ -121,23 +123,24 @@ export default class NewClass extends cc.Component {
         if (type <= 3) {
             ktype = pb.KType.Min5;
             //  GameCfg.GameSet.ktype = pb.KType.Min5;
-            if (type == 0) {
-                from = time - 40 * 60 * 5;
-            } else if (type == 1) {
-                from = time - 40 * 60 * 15;
-                // total *= 3;
-                t = 3;
-            } else if (type == 2) {
-                from = time - 40 * 60 * 30;
+            // if (type == 0) {
+            //     from = time - 40 * 60 * 5;
+            // } else if (type == 1) {
+            //     from = time - 40 * 60 * 15;
+            //     // total *= 3;
+            //     t = 3;
+            // } else if (type == 2) {
+            //     from = time - 40 * 60 * 30;
 
-                t = 6;
-                total *= 6;
-            } else if (type == 3) {
-                from = time - 40 * 60 * 60;
-                total *= 12;
-                t = 12;
-            }
-
+            //     t = 6;
+            //     total *= 6;
+            // } else if (type == 3) {
+            //     from = time - 40 * 60 * 60;
+            //     total *= 12;
+            //     t = 12;
+            // }
+            total *= 40;
+            to += 24 * 60 * 60;
         } else if (type == 4) {
             ktype = pb.KType.Day;
             //  GameCfg.GameSet.ktype = pb.KType.Day;
@@ -166,7 +169,7 @@ export default class NewClass extends cc.Component {
             total: total,
             to: to,
         }
-
+        this.to = to;
         console.log(JSON.stringify(data));
         socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(data), info => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
@@ -186,9 +189,9 @@ export default class NewClass extends cc.Component {
                 GameCfg.data[0].data.push(data);
             });
 
-            if (type == 0) {
+            if (type <= 3) {
                 DrawDatas.arrMin5 = GameCfg.data[0].data;
-            } else if (type == 4) {
+            } else if (type >= 4) {
                 DrawDatas.arrDay = GameCfg.data[0].data;
             }
             this.onChanageType(id);
@@ -385,18 +388,19 @@ export default class NewClass extends cc.Component {
         // } else {
         //     le = this.huizhidatas;
         // }
+        this.to = this.to ? this.to : this.qhData.data[this.huizhidatas].day;
         if (id == 0) {
             //  dataArr = DrawDatas.dataChange(this.qhData.data[le].day, 1, DrawDatas.arrMin5);
-            dataArr = DrawDatas.getTimeSlotData(this.qhData.data[this.huizhidatas - 1].day, 50, DrawDatas.arrMin5);
+            dataArr = DrawDatas.getTimeSlotData(this.to, 50, DrawDatas.arrMin5);
         } else if (id == 1) {
-            dataArr = DrawDatas.dataChange(this.qhData.data[this.huizhidatas - 1].day, 3, DrawDatas.arrMin5);
+            dataArr = DrawDatas.dataChange(this.to, 3, DrawDatas.arrMin5);
         } else if (id == 2) {
-            dataArr = DrawDatas.dataChange(this.qhData.data[this.huizhidatas - 1].day, 6, DrawDatas.arrMin5);
+            dataArr = DrawDatas.dataChange(this.to, 6, DrawDatas.arrMin5);
         } else if (id == 3) {
-            dataArr = DrawDatas.dataChange(this.qhData.data[this.huizhidatas - 1].day, 12, DrawDatas.arrMin5);
+            dataArr = DrawDatas.dataChange(this.to, 12, DrawDatas.arrMin5);
         } else if (id == 4) {
             // dataArr = DrawDatas.arrDay;
-            dataArr = DrawDatas.getTimeSlotData(this.qhData.data[this.huizhidatas - 1].day, 50, DrawDatas.arrDay);
+            dataArr = DrawDatas.getTimeSlotData(this.to, 50, DrawDatas.arrDay);
         } else if (id == 5) {
             if (this.huizhidatas >= DrawDatas.arrDay.length) {
                 le = DrawDatas.arrDay.length - 1;
@@ -404,7 +408,7 @@ export default class NewClass extends cc.Component {
             } else {
                 le = this.huizhidatas;
             }
-            dataArr = DrawDatas.dataChange(this.qhData.data[this.huizhidatas - 1].day, 5, DrawDatas.arrDay);
+            dataArr = DrawDatas.dataChange(this.to, 5, DrawDatas.arrDay);
         }
         if (dataArr.length > 50) {
             dataArr = dataArr.slice(dataArr.length - 51);

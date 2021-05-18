@@ -57,14 +57,15 @@ export default class NewClass extends cc.Component {
         // "userCapital":"100000","userProfit":"800","ts":"1618454133","rank":2}]}
         let sumEar = 0;
         let sumrate = 0;
+        let it = 0;
         for (let i = datas.length - 1; i >= 0; i--) {
-            if (TIMETEMP.indexOf(datas[i].ts) != -1) {
+            if (TIMETEMP.indexOf(datas[i].ts) != -1 || GameCfg.GameType == pb.GameType.ShuangMang) {
                 let node = cc.instantiate(this.historyItem);
                 let nodes = node.children;
                 this.content.addChild(node);
                 node.setPosition(cc.v2(0, 0));
-                nodes[0].getComponent(cc.Label).string = (i + 1) + '';
-
+                nodes[0].getComponent(cc.Label).string = (it++) + '';
+                datas[i].quotesCode += '';
                 if (datas[i].quotesCode.length >= 7) {
                     datas[i].quotesCode = datas[i].quotesCode.slice(1);
                 }
@@ -236,6 +237,7 @@ export default class NewClass extends cc.Component {
             }
 
             console.log(JSON.parse(cache));
+            GameCfg.enterGameCache = cache;
             if (GameCfg.GameType == pb.GameType.QiHuo) {
                 GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, JSON.parse(cache));
             } else {
@@ -279,6 +281,7 @@ export default class NewClass extends cc.Component {
                 }
                 cc.sys.localStorage.removeItem('TIMETEMP');
                 console.log(arr.length);
+                GameCfg.TIMETEMP = arr;
                 cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(arr));
             }
         }

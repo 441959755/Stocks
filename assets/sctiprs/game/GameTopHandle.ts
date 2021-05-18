@@ -188,7 +188,7 @@ export default class NewClass extends cc.Component {
                 GameCfg.profitCount = 0;
                 GameCfg.lossCount = 0;
                 GameCfg.finalfund = 0;
-                GameCfg.GameType = null;
+                //            GameCfg.GameType = null;
                 GameCfg.GAMEFUPAN = false;
                 cc.director.loadScene('hall');
 
@@ -204,7 +204,7 @@ export default class NewClass extends cc.Component {
             GameCfg.profitCount = 0;
             GameCfg.lossCount = 0;
             GameCfg.finalfund = 0;
-            GameCfg.GameType = null;
+            //   GameCfg.GameType = null;
             GameCfg.GAMEFUPAN = false;
             cc.director.loadScene('hall');
         }
@@ -220,7 +220,7 @@ export default class NewClass extends cc.Component {
                 GameCfg.profitCount = 0;
                 GameCfg.lossCount = 0;
                 GameCfg.finalfund = 0;
-                GameCfg.GameType = null;
+                //      GameCfg.GameType = null;
                 GameCfg.GAMEFUPAN = false;
                 cc.director.loadScene('hall');
 

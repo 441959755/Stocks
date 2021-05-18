@@ -262,7 +262,7 @@ export default class NewClass extends cc.Component {
             this.RSILabels[2].string = arr2[2] + ': ' + this.Rs24[index].toFixed(2);
         }
         if (GameCfg.GameType == pb.GameType.QiHuo) {
-            if (GameCfg.data[0].data[index].ccl_hold) {
+            if (GameCfg.data[0].data[index]) {
                 this.cclLabel.string = 'OPI:' + GameCfg.data[0].data[index].ccl_hold.toFixed(2);
             }
         }
@@ -380,7 +380,7 @@ export default class NewClass extends cc.Component {
         this.maxRs24 = this.Rs24[cc.ext.beg_end[0]];
         this.minRs24 = this.Rs24[cc.ext.beg_end[0]];
 
-        if (GameCfg.GameType == pb.GameType.QiHuo) {
+        if (GameCfg.GameType == pb.GameType.QiHuo && GameCfg.data[0].data[cc.ext.beg_end[0]]) {
             this.maxCcl = GameCfg.data[0].data[cc.ext.beg_end[0]].ccl_hold;
             this.minCcl = GameCfg.data[0].data[cc.ext.beg_end[0]].ccl_hold;
         }
@@ -419,7 +419,7 @@ export default class NewClass extends cc.Component {
                 this.maxRs24 = Math.max(this.maxRs24, this.Rs24[index]);
             }
 
-            if (GameCfg.data[0].data[index].ccl_hold) {
+            if (GameCfg.data[0].data[index] && GameCfg.data[0].data[index].ccl_hold) {
                 this.maxCcl = Math.max(GameCfg.data[0].data[index].ccl_hold, this.maxCcl);
                 this.minCcl = Math.min(GameCfg.data[0].data[index].ccl_hold, this.minCcl);
             }

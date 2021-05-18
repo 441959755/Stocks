@@ -60,7 +60,7 @@ export default class DrawData {
         let arr1 = [];
         if (arr <= 0) {
             console.log('arr is null');
-            return;
+            return arr1;
         }
         //  if (type == 1) {
         t = type;
@@ -71,7 +71,7 @@ export default class DrawData {
                 let el = arr[index];
                 if (parseInt(ComUtils.getTimestamp(el.day)) <= time) {
                     let day = el.day;
-                    let open = arr[index - t + 1].open;
+                    let open = arr[index].open;
                     let close = el.close;
 
                     let high = 0, low = el.low, volume = 0, ccl_hold = 0;

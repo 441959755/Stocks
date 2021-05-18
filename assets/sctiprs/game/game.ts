@@ -52,6 +52,7 @@ export default class NewClass extends cc.Component {
     }
 
     protected onDestroy() {
+
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.HELPSHOW);
         GlobalEvent.off(EventCfg.OPENSTATLAYER);

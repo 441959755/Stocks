@@ -183,7 +183,7 @@ export default class NewClass extends cc.Component {
 
             if ((10 + cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0])) < this.vertical1.x) {
                 this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
-                index = cc.ext.beg_end[1] - 1;
+                index = cc.ext.beg_end[1];
             }
             this.updataLabel(index);
         }, this);
@@ -227,7 +227,7 @@ export default class NewClass extends cc.Component {
                             this.vertical1.x = cc.ext.hz_width * index + 10 - cc.ext.hz_width / 2;
                             if (index > cc.ext.beg_end[1]) {
                                 this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
-                                index = cc.ext.beg_end[1] - 1;
+                                index = cc.ext.beg_end[1];
                             }
                             this.updataLabel(index);
                             calDisX = 0;
@@ -312,7 +312,7 @@ export default class NewClass extends cc.Component {
                             let index = cc.ext.beg_end[0] + (Math.floor((localPos.x - 10) / cc.ext.hz_width));
                             if (index >= cc.ext.beg_end[1]) {
                                 this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
-                                index = cc.ext.beg_end[1] - 1;
+                                index = cc.ext.beg_end[1];
                             }
                             this.updataLabel(index);
                             calDisY = 0;
@@ -391,7 +391,7 @@ export default class NewClass extends cc.Component {
                         if (GameCfg.GameType == pb.GameType.ShuangMang) {
                             el.string = '日线 MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
                         } else if (GameCfg.GameType == pb.GameType.DingXiang) {
-                            el.string = GameCfg.GameSet.ZLine + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
+                            el.string = GameCfg.GameSet.ZLine + ' MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
                         } else if (GameCfg.GameType == pb.GameType.QiHuo) {
                             el.string = ' MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
                         }

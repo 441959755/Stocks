@@ -158,15 +158,29 @@ export default class NewClass extends cc.Component {
             } else if (code.indexOf('300') != -1) {
                 info1.code = '1399006';
             }
-
-            socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), (res) => {
-                console.log('指数' + res.items.length);
-                res.items.forEach(el => {
+            console.log(JSON.stringify(info1));
+            let infoPre = {
+                ktype: info1.ktype,
+                kstyle: info1.kstyle,
+                code: info1.code,
+                form: 0,
+                total: 100,
+                to: info1.from,
+            }
+            socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(infoPre), info => {
+                if (!info.items || info.items.length <= 0) {
+                    console.log('获取的行情为空');
+                    // console.log(JSON.stringify(GameCfg.data));
+                    GameCfg.GAMEFUPAN = false;
+                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                    return;
+                }
+                info.items.forEach(el => {
                     //  let date = new Date(el.timestamp);
                     let ye = (el.timestamp + '').slice(0, 4);
                     let mon = (el.timestamp + '').slice(4, 6);
                     let da = (el.timestamp + '').slice(6);
-                    let fromDate = ye + '/' + mon + '/' + da;
+                    let fromDate = ye + '-' + mon + '-' + da;
                     let data = {
                         day: fromDate,
                         open: el.open,
@@ -175,17 +189,43 @@ export default class NewClass extends cc.Component {
                         low: el.low,
                         price: el.amount,
                         value: el.volume,
-                        Rate: el.volume / GameCfg.data[0].circulate * 100,
-                    }
+                        Rate: (el.volume / GameCfg.data[0].circulate) * 100
+                    };
 
                     if (GameCfg.data[0].circulate == 0) {
                         data.Rate = 1;
                     }
-
                     this.myspicData.push(data);
                 });
-                this.onDraw();
-                //  GameCfg.info = null;
+                socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), (res) => {
+                    console.log('指数' + res.items.length);
+                    res.items.forEach(el => {
+                        //  let date = new Date(el.timestamp);
+                        let ye = (el.timestamp + '').slice(0, 4);
+                        let mon = (el.timestamp + '').slice(4, 6);
+                        let da = (el.timestamp + '').slice(6);
+                        let fromDate = ye + '/' + mon + '/' + da;
+                        let data = {
+                            day: fromDate,
+                            open: el.open,
+                            close: el.price,
+                            high: el.high,
+                            low: el.low,
+                            price: el.amount,
+                            value: el.volume,
+                            Rate: el.volume / GameCfg.data[0].circulate * 100,
+                        }
+
+                        if (GameCfg.data[0].circulate == 0) {
+                            data.Rate = 1;
+                        }
+
+                        this.myspicData.push(data);
+                    });
+                    console.log(JSON.stringify(this.myspicData));
+                    this.onDraw();
+                    //  GameCfg.info = null;
+                })
             })
         }
     }

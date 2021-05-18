@@ -199,7 +199,7 @@ export default class NewClass extends cc.Component {
 				if (year == y && parseInt(month) == m) {
 					t = d;
 				} else {
-					var temp = new Date(parseInt(y), parseInt(m + ''), 0);
+					var temp = new Date(parseInt(year), parseInt(month + ''), 0);
 					let day1 = temp.getDate();
 					t = day1;
 				}

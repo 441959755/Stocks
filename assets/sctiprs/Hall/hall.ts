@@ -254,6 +254,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on(EventCfg.CmdQuoteQueryFuture, this.onCmdQHGameStart.bind(this), this);
 	}
 
+
 	onEnable() {
 		GameCfg.fill = [];
 		GameCfg.mark = [];
@@ -263,13 +264,28 @@ export default class NewClass extends cc.Component {
 		GameCfg.profitCount = 0;
 		GameCfg.lossCount = 0;
 		GameCfg.finalfund = 0;
-		GameCfg.GameType = null;
+		//	GameCfg.GameType = null;
 
 		GameCfg.GAMEFUPAN = false;
 		GameCfg.history.huizhidatas = 0;
 		GameCfg.history.allRate = 0;
 		GameCfg.history.deal = [];
 		GameCfg.data[0].data = [];
+		//	GameCfg.ziChan = 100000;
+
+		let event;
+		if (GameCfg.GameType == pb.GameType.ShuangMang) {
+			event = { target: { name: 'main_xl_smxl' } };
+		} else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+			event = { target: { name: 'main_xl_zbxl' } }
+		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
+			event = { target: { name: 'main_xl_dxxl' } }
+		} else if (GameCfg.GameType == pb.GameType.QiHuo) {
+			event = { target: { name: 'main_xl_qhxl' } }
+		}
+		if (event) {
+			GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
+		}
 	}
 
 	openYieldLaye(info) {
@@ -414,6 +430,7 @@ export default class NewClass extends cc.Component {
 						}
 
 					});
+					//	GameCfg.enterGameCache.from1 = GameCfg.data[0].data[0].day;
 					// console.log(JSON.stringify(GameCfg.data[0].data));
 					// console.log(JSON.stringify(GameCfg.data[0].data.length));
 					cc.director.loadScene('game');
@@ -578,6 +595,7 @@ export default class NewClass extends cc.Component {
 					qhHQ = DrawData.dataChange(qhHQ[qhHQ.length - 1].day, t, qhHQ);
 				}
 				GameCfg.data[0].data = qhHQ;
+				//	GameCfg.enterGameCache.from1 = GameCfg.data[0].data[0].day;
 				cc.director.loadScene('game');
 			}
 

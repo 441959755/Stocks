@@ -26,7 +26,11 @@ export default class NewClass extends cc.Component {
 	@property(cc.Label)
 	userLevel: cc.Label = null;
 
-	protected onLoad() { }
+	protected onLoad() {
+		GlobalEvent.on(EventCfg.BLACKGOTOLAYER, (event) => {
+			this.onBtnClick(event, null);
+		}, this);
+	}
 
 	start() {
 		this.initToggle();
@@ -109,6 +113,10 @@ export default class NewClass extends cc.Component {
 		else if (name == 'userinfobg') {
 			GlobalEvent.emit('OPENPLAYERINFO');
 		}
+	}
+
+	onDestroy() {
+		GlobalEvent.off(EventCfg.BLACKGOTOLAYER);
 	}
 
 	// update (dt) {}

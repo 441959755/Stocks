@@ -26,6 +26,8 @@ export default {
 
 	CmdQuoteQueryFuture: 'CmdQuoteQueryFuture',  //// 查询期货行情
 
+	BLACKGOTOLAYER: 'BLACKGOTOLAYER',
+
 	//game
 	ADDFILLCOLOR: 'ADDFILLCOLOR',
 

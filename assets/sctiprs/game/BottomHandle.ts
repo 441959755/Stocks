@@ -131,22 +131,36 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on(
 			EventCfg.GAMEOVEER,
 			() => {
-				if (this.keMcCount > 0) {
+				if (this.keMcCount > 0 || (this._KKCount != 0 || this._kdCount != 0)) {
 					this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
 					this.moneyLabel[1].string = '当前资产：' + parseInt(this.ziChan + '');
 					this.keMcCount = 0;
-
 					let curClose = parseFloat(this.gpData[GameCfg.huizhidatas - 1].close);
 					//	let preClose = parseFloat(this.gpData[this.buyData[this.buyData.length - 1]].close);
 					let preClose = this.onjunjia();
 					let rate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
+
+					if (GameCfg.GameType == pb.GameType.QiHuo) {
+						rate = this.onAllPositionRete();
+						if (this._KKCount != 0) {
+							rate = -rate;
+							//	this.ziChan = rate * GameCfg.ziChan + GameCfg.ziChan;
+						}
+						GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
+					} else {
+						GameCfg.allRate = rate;
+					}
 
 					if (rate < 0) {
 						GameCfg.lossCount++;
 					} else {
 						GameCfg.profitCount++;
 					}
-					GameCfg.allRate = rate;
+
+					GlobalEvent.emit('updateRate', [0, GameCfg.allRate]);
+
+					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas + 1 });
+
 				}
 				GameCfg.finalfund = this.ziChan;
 
@@ -156,6 +170,8 @@ export default class NewClass extends cc.Component {
 
 				this.curMcCount = 0;
 				this.allButData = [];
+				this.buyData = [];
+
 			},
 			this
 		);
@@ -196,7 +212,7 @@ export default class NewClass extends cc.Component {
 					node.active = true;
 					node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
 					// node.children[1].getComponent(cc.Label).string = this.gpData[0].day.replace(/-/g, '/') + '--' + this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
-					node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[0].day) + '--' + ComUtils.formatTime(this.gpData[this.gpData.length - 1].day)
+					node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(GameCfg.enterGameCache.from) + '--' + ComUtils.formatTime(this.gpData[this.gpData.length - 1].day)
 					let tq = ((this.gpData[this.gpData.length - 1].close - this.gpData[0].close) / this.gpData[0].close).toFixed(2);
 					node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
 					let node1 = this.node.getChildByName('fupan1');
@@ -234,9 +250,11 @@ export default class NewClass extends cc.Component {
 						max = el.close;
 					}
 				});
-				GameCfg.ziChan = (max * 3);
+				this.ziChan = (max * 3);
+			} else {
+				this.ziChan = JSON.parse(JSON.stringify(GameCfg.ziChan));
 			}
-			this.ziChan = GameCfg.ziChan;
+
 		} else {
 			this.ziChan = GameCfg.finalfund;
 		}
@@ -338,7 +356,7 @@ export default class NewClass extends cc.Component {
 				node.active = true;
 				node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
 				// node.children[1].getComponent(cc.Label).string = this.gpData[0].day.replace(/-/g, '/') + '--' + this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
-				node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[0].day) + '--' + ComUtils.formatTime(this.gpData[this.gpData.length - 1].day)
+				node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(GameCfg.enterGameCache.from) + '--' + ComUtils.formatTime(this.gpData[this.gpData.length - 1].day)
 				let tq = ((this.gpData[this.gpData.length - 1].close - this.gpData[0].close) / this.gpData[0].close).toFixed(2);
 				node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
 				let node1 = this.node.getChildByName('fupan1');
@@ -353,7 +371,7 @@ export default class NewClass extends cc.Component {
 				}
 
 				this.gpName.string = GameCfg.data[0].name + ' ' + code;
-				this.timeLabel[0].string = this.gpData[0].day.replace(/-/g, '/');
+				this.timeLabel[0].string = ComUtils.formatTime(GameCfg.enterGameCache.from);
 				this.timeLabel[1].string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
 
 				this.moneyLabel[0].string = '总资产    ：' + GameCfg.ziChan;
@@ -390,7 +408,7 @@ export default class NewClass extends cc.Component {
 				this.timeLabel[0].string = '起始时间：' + '????';
 				this.timeLabel[1].string = '结束时间:' + '????';
 			} else {
-				this.timeLabel[0].string = this.gpData[0].day.replace(/-/g, '/');
+				this.timeLabel[0].string = ComUtils.formatTime(GameCfg.enterGameCache.from);
 				this.timeLabel[1].string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
 			}
 
@@ -428,7 +446,7 @@ export default class NewClass extends cc.Component {
 				this.priceLabel[0].string = '买入均价：' + (jp / this.allButData.length).toFixed(2);
 			}
 
-			if (GameCfg.huizhidatas >= 1) {
+			if (GameCfg.huizhidatas >= 1 && this.gpData[GameCfg.huizhidatas]) {
 				this.priceLabel[1].string = '当前价格：' + (this.gpData[GameCfg.huizhidatas].close).toFixed(2);
 			}
 
@@ -1020,7 +1038,7 @@ export default class NewClass extends cc.Component {
 		this.curMrCount.forEach((el) => {
 			prezl += el;
 		})
-		//let rate = (curClose * prezl - preClose * prezl) / GameCfg.ziChan;
+
 		let rate = (curClose - preClose) / preClose;
 		return rate;
 	}
@@ -1043,14 +1061,12 @@ export default class NewClass extends cc.Component {
 		//买入
 		let data = this.gpData;
 		if (state == 'mrBtn' || state == 'mrBtn1') {
-			// if (this.curMcCount == 0) {
-			// 	GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '卖出要100股起哦');
-			// 	// 	return
-			// }
+
 			this.buyData.push(GameCfg.huizhidatas - 1);
 			this.allButData.push(GameCfg.huizhidatas - 1);
 
 			let rate = this.onCurPositionRete();
+
 			if (state == 'mrBtn1') {
 				rate = -rate;
 			}
