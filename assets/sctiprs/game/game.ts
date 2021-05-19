@@ -140,17 +140,17 @@ export default class NewClass extends cc.Component {
 
     initData() {
 
-        if (!GameCfg.GAMEFUPAN) {
-            GameCfg.huizhidatas = GameCfg.data[0].data.length - GameCfg.GameSet.KLine;
+        // if (!GameCfg.GAMEFUPAN) {
+        //     GameCfg.huizhidatas = GameCfg.data[0].data.length - GameCfg.GameSet.KLine;
 
-            //数据获取不到想要的条数
-            if (GameCfg.huizhidatas <= 0) {
-                GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
-                if (GameCfg.huizhidatas > 100) {
-                    GameCfg.huizhidatas = 100;
-                }
-            }
-        }
+        //     //数据获取不到想要的条数
+        //     if (GameCfg.huizhidatas <= 0) {
+        //         GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
+        //         if (GameCfg.huizhidatas > 100) {
+        //             GameCfg.huizhidatas = 100;
+        //         }
+        //     }
+        // }
 
         cc.ext.beg_end = [];
 

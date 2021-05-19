@@ -103,14 +103,16 @@ export default class NewClass extends cc.Component {
                 let zd = datas[inde].close - datas[inde - 1].close;
                 info.push(zd.toFixed(2));
                 let zf = (zd / datas[inde - 1].close) * 100;
-                info.push(zf.toFixed(2) + '%');
+                info.push(zf.toFixed(2));
                 //  this.hsLa.string = parseFloat(datas[inde].Rate).toFixed(2) + '%';
                 if (zf < 0) {
                     this.zfLa.node.color = new cc.Color().fromHEX('#76B87E');
-                    this.tipsText[9].node.color = new cc.Color().fromHEX('#76B87E');
+                    //    this.tipsBox.children[9].color = new cc.Color().fromHEX('#76B87E');
+                    //  this.tipsText[9].node.color = new cc.Color().fromHEX('#76B87E');
                 } else {
                     this.zfLa.node.color = cc.Color.RED;
-                    this.tipsText[9].node.color = cc.Color.RED;
+                    //   this.tipsBox.children[9].color = cc.Color.RED;
+                    //  this.tipsText[9].node.color = cc.Color.RED;
                 }
 
                 this.zfLa.string = zf.toFixed(2) + '%';
@@ -134,9 +136,13 @@ export default class NewClass extends cc.Component {
                     } else {
                         this.tipsText[index].node.color = cc.Color.RED;
                     }
+                    if (index == 9) {
+                        el += '%';
+                    }
                 }
                 this.tipsText[index].string = el;
             })
+
         }, this);
 
         GlobalEvent.on('tipsPoint', (point) => {

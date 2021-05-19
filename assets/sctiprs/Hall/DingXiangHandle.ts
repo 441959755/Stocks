@@ -483,6 +483,7 @@ export default class NewClass extends cc.Component {
 			GameCfg.GAMEFUPAN = false;
 			GameCfg.GameType = pb.GameType.DingXiang;
 			GameCfg.GameSet = GameData.DXSet;
+			GameCfg.ziChan = 100000;
 			this.DXStartGameSet();
 		} else if (name == 'blackbtn') {
 			this.node.active = false;

@@ -169,30 +169,30 @@ export default class NewClass extends cc.Component {
                 let history = cc.sys.localStorage.getItem(ts + 'ts');
                 if (history) {
                     GameCfg.history = JSON.parse(history);
-                    console.log(JSON.stringify(GameCfg.history));
+                    //   console.log(JSON.stringify(GameCfg.history));
                 }
                 let GameSet = cc.sys.localStorage.getItem(ts + 'set');
                 if (GameSet) {
                     GameCfg.GameSet = JSON.parse(GameSet);
-                    console.log(JSON.stringify(GameCfg.GameSet));
+                    //  console.log(JSON.stringify(GameCfg.GameSet));
                 }
 
                 let mark = cc.sys.localStorage.getItem(ts + 'mark');
                 if (mark) {
                     GameCfg.mark = JSON.parse(mark);
-                    console.log(JSON.stringify(GameCfg.mark));
+                    //   console.log(JSON.stringify(GameCfg.mark));
                 }
 
                 let notice = cc.sys.localStorage.getItem(ts + 'notice');
                 if (notice) {
                     GameCfg.notice = JSON.parse(notice);
-                    console.log(JSON.stringify(GameCfg.notice));
+                    //    console.log(JSON.stringify(GameCfg.notice));
                 }
 
                 let fill = cc.sys.localStorage.getItem(ts + 'fill');
                 if (fill) {
                     GameCfg.fill = JSON.parse(fill);
-                    console.log(JSON.stringify(GameCfg.fill));
+                    //   console.log(JSON.stringify(GameCfg.fill));
                 }
             }
 
@@ -237,7 +237,7 @@ export default class NewClass extends cc.Component {
             }
 
             console.log(JSON.parse(cache));
-            GameCfg.enterGameCache = cache;
+            GameCfg.enterGameCache = JSON.parse(cache);
             if (GameCfg.GameType == pb.GameType.QiHuo) {
                 GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, JSON.parse(cache));
             } else {

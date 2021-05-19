@@ -69,7 +69,7 @@ export default class DrawData {
         for (let index = arr.length - 1; index >= 0;) {
             if (index - t + 1 >= 0) {
                 let el = arr[index];
-                if (parseInt(ComUtils.getTimestamp(el.day)) <= time) {
+                if (parseInt(ComUtils.fromatTime1(el.day)) <= parseInt(ComUtils.fromatTime1(time))) {
                     let day = el.day;
                     let open = arr[index].open;
                     let close = el.close;
@@ -105,11 +105,19 @@ export default class DrawData {
 
     //
     public static getTimeSlotData(to, total, arr) {
+        arr.sort((a, b) => {
+            return a.day - b.day;
+        })
+        //    console.log(arr);
+
         to = parseInt(ComUtils.getTimestamp(to));
         let newArr = [];
         for (let i = arr.length - 1; i >= 0; i--) {
-            let time = parseInt(ComUtils.getTimestamp(arr[i].day));
-            if (time <= to && newArr.length <= total) {
+            //  let time = parseInt(ComUtils.getTimestamp(arr[i].day));
+            console.log(parseInt(ComUtils.fromatTime1(arr[i].day)));
+            console.log(parseInt(ComUtils.fromatTime1(to)));
+            if (parseInt(ComUtils.fromatTime1(arr[i].day)) <= parseInt(ComUtils.fromatTime1(to))
+                && newArr.length <= total) {
                 newArr.unshift(arr[i]);
             }
         }

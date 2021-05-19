@@ -630,8 +630,8 @@ export default class NewClass extends cc.Component {
 							} else if (GameData.QHSet.year == cy) {
 								GameData.QHSet.month = '4';
 								GameData.QHSet.day = '5';
-								this.box[4].getChildByName('label').getComponent(cc.Label).string = '1';
-								this.box[5].getChildByName('label').getComponent(cc.Label).string = '1';
+								this.box[4].getChildByName('label').getComponent(cc.Label).string = '4';
+								this.box[5].getChildByName('label').getComponent(cc.Label).string = '5';
 							} else {
 								GameData.QHSet.month = '9';
 								GameData.QHSet.day = '10';
@@ -642,8 +642,8 @@ export default class NewClass extends cc.Component {
 						} else {
 							GameData.QHSet.month = '4';
 							GameData.QHSet.day = '5';
-							this.box[4].getChildByName('label').getComponent(cc.Label).string = '1';
-							this.box[5].getChildByName('label').getComponent(cc.Label).string = '1';
+							this.box[4].getChildByName('label').getComponent(cc.Label).string = '4';
+							this.box[5].getChildByName('label').getComponent(cc.Label).string = '5';
 						}
 
 					}
@@ -691,6 +691,7 @@ export default class NewClass extends cc.Component {
 			GameCfg.GAMEFUPAN = false;
 			GameCfg.GameSet = GameData.QHSet;
 			GameCfg.GameType = pb.GameType.QiHuo;
+			GameCfg.ziChan = 100000;
 			this.QHStartGameSet();
 		}
 		else if (name == 'blackbtn') {
@@ -898,30 +899,30 @@ export default class NewClass extends cc.Component {
 
 			let year, month, day;
 			year = GameData.QHSet.year;
-			// if (GameData.QHSet.month == '随机') {
-			// 	month = '01';
-			// } else {
-			// 	if (GameData.QHSet.month.length <= 1) {
-			// 		month = '0' + GameData.QHSet.month;
-			// 	} else {
-			month = GameData.QHSet.month;
-			// 	}
-			// }
+			if (GameData.QHSet.month == '随机') {
+				month = '01';
+			} else {
+				if (GameData.QHSet.month.length <= 1) {
+					month = '0' + GameData.QHSet.month;
+				} else {
+					month = GameData.QHSet.month;
+				}
+			}
 
-			// if (GameData.QHSet.day == '随机') {
-			// 	day = '01';
-			// } else {
-			// 	if (GameData.QHSet.day.length <= 1) {
-			// 		day = '0' + GameData.QHSet.day;
-			// 	} else {
-			day = GameData.QHSet.day;
-			// 	}
+			if (GameData.QHSet.day == '随机') {
+				day = '01';
+			} else {
+				if (GameData.QHSet.day.length <= 1) {
+					day = '0' + GameData.QHSet.day;
+				} else {
+					day = GameData.QHSet.day;
+				}
 
-			// }
+			}
 
 			if (parseInt(start) > parseInt(year + month + day)) {
 				if (GameData.QHSet.HY == '随机') {
-					
+
 					this.QHStartGameSet();
 				} else {
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能早与期货创建时间');

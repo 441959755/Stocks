@@ -79,4 +79,6 @@ export default {
 
     selectZline: 0,
 
+    startIndex: 0,   //开始Index
+
 }

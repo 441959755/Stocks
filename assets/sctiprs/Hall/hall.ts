@@ -266,6 +266,25 @@ export default class NewClass extends cc.Component {
 		}, this);
 	}
 
+	start() {
+		setTimeout(() => {
+			let event;
+			if (GameCfg.GameType == pb.GameType.ShuangMang) {
+				event = { target: { name: 'main_xl_smxl' } };
+			} else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+				event = { target: { name: 'main_xl_zbxl' } }
+			} else if (GameCfg.GameType == pb.GameType.DingXiang) {
+				event = { target: { name: 'main_xl_dxxl' } }
+			} else if (GameCfg.GameType == pb.GameType.QiHuo) {
+				event = { target: { name: 'main_xl_qhxl' } }
+			}
+			if (event) {
+				GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
+			}
+		}, 100);
+
+	}
+
 
 	onEnable() {
 		GameCfg.fill = [];
@@ -285,19 +304,7 @@ export default class NewClass extends cc.Component {
 		GameCfg.data[0].data = [];
 		//	GameCfg.ziChan = 100000;
 
-		let event;
-		if (GameCfg.GameType == pb.GameType.ShuangMang) {
-			event = { target: { name: 'main_xl_smxl' } };
-		} else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-			event = { target: { name: 'main_xl_zbxl' } }
-		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
-			event = { target: { name: 'main_xl_dxxl' } }
-		} else if (GameCfg.GameType == pb.GameType.QiHuo) {
-			event = { target: { name: 'main_xl_qhxl' } }
-		}
-		if (event) {
-			GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
-		}
+
 	}
 
 	openYieldLaye(info) {
@@ -406,6 +413,9 @@ export default class NewClass extends cc.Component {
 					}
 					GameCfg.data[0].data.push(data);
 				});
+				GameCfg.enterGameCache.startTime = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
+				GameCfg.huizhidatas = info.items.length;
+				GameCfg.startIndex = info.items.length;
 				//	console.log(JSON.stringify(GameCfg.data[0].data));
 				//cc.director.loadScene('game');
 				//在获取后面的
@@ -443,7 +453,7 @@ export default class NewClass extends cc.Component {
 						}
 
 					});
-					//	GameCfg.enterGameCache.from1 = GameCfg.data[0].data[0].day;
+
 					// console.log(JSON.stringify(GameCfg.data[0].data));
 					// console.log(JSON.stringify(GameCfg.data[0].data.length));
 					cc.director.loadScene('game');
@@ -502,7 +512,8 @@ export default class NewClass extends cc.Component {
 				total: 50,
 				to: data.from,
 			}
-
+			GameCfg.huizhidatas = preData.total - 1;
+			GameCfg.startIndex = preData.total - 1;
 			if (GameData.QHSet.ZLine == '15分钟K') {
 				preData.total *= 3;
 			} else if (GameData.QHSet.ZLine == '30分钟K') {
@@ -536,7 +547,11 @@ export default class NewClass extends cc.Component {
 					};
 					GameCfg.data[0].data.push(data1);
 				});
+				GameCfg.enterGameCache.startTime = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
 
+				//	console.log(JSON.stringify(GameCfg.data[0].data));
+				//	console.log('GameCfg.huizhidatas' + GameCfg.huizhidatas)
+				//	console.log(GameCfg.enterGameCache.startTime);
 				if (data.total > maxLength) {
 					this.curTotal = data.total - maxLength;
 					data.total = maxLength;

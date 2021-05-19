@@ -83,6 +83,9 @@ cc.Class({
 			SMSet = {
 				KLine: '150',
 				ZLine: '日线',
+				year: '随机',
+				month: '--',
+				day: '--',
 				isShowVol: true,
 				isBW: true,
 				isMA1: true,

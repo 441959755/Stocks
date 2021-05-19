@@ -131,6 +131,7 @@ export default class ComUtils {
 	 * return yymmdd   200010101
 	 */
 	public static fromatTime1(time) {
+		time = time + '';
 		time = ((time + '').replace(/-/g, ''));
 		//	if (GameCfg.GameType == pb.GameType.QiHuo) {
 		if ((time + '').length < 10) {

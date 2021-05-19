@@ -429,14 +429,15 @@ export default class NewClass extends cc.Component {
         // this.setLabelValue('RSI');
         // this.setLabelValue('MACD');
 
-        for (let i = 0; i < this.DIFList.length; i++) {
-            if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
-                this.onDrawMACD(i);
-                this.onDrawKDJ(i);
-                this.onDrawRSI(i);
-                this.onDrawCCL(i);
-            }
+        //   for (let i = 0; i < this.DIFList.length; i++) {
+        for (let i = cc.ext.beg_end[0]; i < cc.ext.beg_end[1]; i++) {
+            this.onDrawMACD(i);
+            this.onDrawKDJ(i);
+            this.onDrawRSI(i);
+            this.onDrawCCL(i);
+            //   console.log(i);
         }
+        // }
     }
 
     onEnable() {

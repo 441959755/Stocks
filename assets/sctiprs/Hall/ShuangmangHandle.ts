@@ -67,7 +67,7 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = false;
             GameCfg.GameType = pb.GameType.ShuangMang;
             GameCfg.GameSet = GameData.SMSet;
-            // GameCfg.ziChan = GameData.properties[3];
+            GameCfg.ziChan = GameData.properties[3];
 
             this.smStartGameSet();
 
@@ -123,7 +123,7 @@ export default class NewClass extends cc.Component {
             kstyle: pb.KStyle.Random,
             code: null,
             from: null,
-            total: 300,
+            total: 150,
             to: 0,
         }
 

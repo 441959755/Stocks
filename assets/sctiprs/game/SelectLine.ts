@@ -17,6 +17,8 @@ export default class NewClass extends cc.Component {
 
     _selectID = 0;
 
+    _preSelectID = 0;
+
     qhData = null;
 
     huizhidatas = 0;
@@ -46,10 +48,17 @@ export default class NewClass extends cc.Component {
             this._selectID = 4;
         }
 
+        this._preSelectID = this._selectID;
+
         GlobalEvent.on(EventCfg.GAMEOVEER, () => {
             // this.node.active = false;
+
             if (this.qhData && this.qhData.data.length > 0) {
                 GameCfg.data[0].data = this.qhData.data;
+
+            }
+            if (this._selectID != this._preSelectID) {
+                GameCfg.huizhidatas = this.huizhidatas;
             }
 
         }, this);
@@ -100,7 +109,7 @@ export default class NewClass extends cc.Component {
         let tt = this.huizhidatas;
         //   this.saveTime = this.qhData.data[tt].day;
         if (GameCfg.GAMEFUPAN) {
-            tt = GameCfg.history.huizhidatas - 1;
+            tt = GameCfg.history.huizhidatas;
             //    this.saveTime = this.qhData.data[tt].day;
         }
 
@@ -320,48 +329,51 @@ export default class NewClass extends cc.Component {
             if (this._selectID == id) {
                 this.onGoBlackGame();
             } else {
+                if (this._preSelectID == this._selectID) {
+                    this.onSaveData();
+                }
 
                 if (id >= 4) {
                     if (DrawData.arrDay.length <= 0) {
-                        this.onSaveData();
+
                         this.onGetData(4, id);
                     } else {
-                        this.onSaveData();
+
                         this.onChanageType(id);
                     }
                 }
                 else {
-                    this.onSaveData();
+
                     this.onChanageType(id);
                 }
             }
         } else if (GameData.QHSet.ZLine == '日线') {
             if (this._selectID == id) {
+
                 this.onGoBlackGame();
             } else {
+                if (this._preSelectID == this._selectID) {
+                    this.onSaveData();
+                }
 
-
-                // if (this._selectID == 5) {
-                //     if()
-
-                // }
-                // else
                 if (id < 4) {
 
                     if (DrawData.arrMin5.length <= 0) {
-                        this.onSaveData();
+
                         this.onGetData(0, id);
                     } else {
-                        this.onSaveData();
+
                         this.onChanageType(id);
                     }
                 }
                 else {
-                    this.onSaveData();
+
                     this.onChanageType(id);
                 }
             }
         }
+
+        this._preSelectID = id;
     }
 
 
@@ -388,19 +400,19 @@ export default class NewClass extends cc.Component {
         // } else {
         //     le = this.huizhidatas;
         // }
-        this.to = this.to ? this.to : this.qhData.data[this.huizhidatas].day;
+        let to = this.qhData.data[this.huizhidatas - 1].day;
         if (id == 0) {
             //  dataArr = DrawDatas.dataChange(this.qhData.data[le].day, 1, DrawDatas.arrMin5);
-            dataArr = DrawDatas.getTimeSlotData(this.to, 50, DrawDatas.arrMin5);
+            dataArr = DrawDatas.getTimeSlotData(to, 50, DrawDatas.arrMin5);
         } else if (id == 1) {
-            dataArr = DrawDatas.dataChange(this.to, 3, DrawDatas.arrMin5);
+            dataArr = DrawDatas.dataChange(to, 3, DrawDatas.arrMin5);
         } else if (id == 2) {
-            dataArr = DrawDatas.dataChange(this.to, 6, DrawDatas.arrMin5);
+            dataArr = DrawDatas.dataChange(to, 6, DrawDatas.arrMin5);
         } else if (id == 3) {
-            dataArr = DrawDatas.dataChange(this.to, 12, DrawDatas.arrMin5);
+            dataArr = DrawDatas.dataChange(to, 12, DrawDatas.arrMin5);
         } else if (id == 4) {
             // dataArr = DrawDatas.arrDay;
-            dataArr = DrawDatas.getTimeSlotData(this.to, 50, DrawDatas.arrDay);
+            dataArr = DrawDatas.getTimeSlotData(to, 50, DrawDatas.arrDay);
         } else if (id == 5) {
             if (this.huizhidatas >= DrawDatas.arrDay.length) {
                 le = DrawDatas.arrDay.length - 1;
@@ -408,7 +420,7 @@ export default class NewClass extends cc.Component {
             } else {
                 le = this.huizhidatas;
             }
-            dataArr = DrawDatas.dataChange(this.to, 5, DrawDatas.arrDay);
+            dataArr = DrawDatas.dataChange(to, 5, DrawDatas.arrDay);
         }
         if (dataArr.length > 50) {
             dataArr = dataArr.slice(dataArr.length - 51);

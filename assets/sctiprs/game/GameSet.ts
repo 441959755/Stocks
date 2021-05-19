@@ -100,14 +100,18 @@ export default class NewClass extends cc.Component {
             this.node.color = cc.Color.BLACK;
             //  this.mask.color=cc.Color.BLACK;
             this.masks.forEach(el => {
-                el.color = cc.Color.BLACK;
+
+                el && (el.color = cc.Color.BLACK);
             })
             this.linesNode.children.forEach(el => {
-                el.color = cc.Color.WHITE;
-                if (el.children.length > 0) {
-                    el.children.forEach(e => {
-                        e.color = cc.Color.WHITE;
-                    })
+                if (el) {
+
+                    el.color = cc.Color.WHITE;
+                    if (el.children.length > 0) {
+                        el.children.forEach(e => {
+                            e.color = cc.Color.WHITE;
+                        })
+                    }
                 }
             })
             this.HNode.color = cc.Color.WHITE;

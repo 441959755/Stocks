@@ -181,9 +181,9 @@ export default class NewClass extends cc.Component {
             this.Horizontal1.y = localPos.y;
             let index = cc.ext.beg_end[0] + (Math.floor((localPos.x - 10) / cc.ext.hz_width));
 
-            if ((10 + cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0])) < this.vertical1.x) {
+            if (index >= cc.ext.beg_end[1]) {
                 this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
-                index = cc.ext.beg_end[1];
+                index = cc.ext.beg_end[1] - 1;
             }
             this.updataLabel(index);
         }, this);
@@ -209,7 +209,8 @@ export default class NewClass extends cc.Component {
         this.node.on('touchmove', (event) => {
             calDisY += event.getDelta().y;
             calDisX += event.getDelta().x;
-
+            var pos = new cc.Vec2(event.getLocationX(), event.getLocationY());
+            let localPos = this.node.children[0].convertToNodeSpaceAR(pos);
             //右移   //左移
             if (Math.abs(calDisX) > Math.abs(calDisY)) {
                 calDisY = 0;
@@ -221,14 +222,15 @@ export default class NewClass extends cc.Component {
                             let count = Math.ceil(Math.abs(calDisX) / cc.ext.hz_width);
                             this.onMoveLeftOrRight(count, calDisX, calDisY);
 
-                            var pos = new cc.Vec2(event.getLocationX(), event.getLocationY());
-                            let localPos = this.node.children[0].convertToNodeSpaceAR(pos);
+                            //  if (cc.ext.beg_end[1] - cc.ext.beg_end[0] < count) {
                             let index = cc.ext.beg_end[0] + (Math.floor((localPos.x - 10) / cc.ext.hz_width));
-                            this.vertical1.x = cc.ext.hz_width * index + 10 - cc.ext.hz_width / 2;
-                            if (index > cc.ext.beg_end[1]) {
+                            this.vertical1.x = Math.floor((localPos.x - 10) / cc.ext.hz_width) * cc.ext.hz_width + 10 + cc.ext.hz_width / 2;
+                            if (index >= cc.ext.beg_end[1]) {
                                 this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
-                                index = cc.ext.beg_end[1];
+                                index = cc.ext.beg_end[1] - 1;
                             }
+                            //  }
+
                             this.updataLabel(index);
                             calDisX = 0;
                             calDisY = 0;
@@ -306,13 +308,12 @@ export default class NewClass extends cc.Component {
 
                             cc.ext.hz_width = this.drawBordWidth / (num);
 
-                            var pos = new cc.Vec2(event.getLocationX(), event.getLocationY());
-                            let localPos = this.node.children[0].convertToNodeSpaceAR(pos);
+
                             this.Horizontal1.y = localPos.y;
                             let index = cc.ext.beg_end[0] + (Math.floor((localPos.x - 10) / cc.ext.hz_width));
                             if (index >= cc.ext.beg_end[1]) {
-                                this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
-                                index = cc.ext.beg_end[1];
+                                //     this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
+                                index = cc.ext.beg_end[1] - 1;
                             }
                             this.updataLabel(index);
                             calDisY = 0;
