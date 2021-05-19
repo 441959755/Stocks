@@ -171,6 +171,7 @@ export default class NewClass extends cc.Component {
 				this.curMcCount = 0;
 				this.allButData = [];
 				this.buyData = [];
+				//	this.saleData = [];
 
 			},
 			this

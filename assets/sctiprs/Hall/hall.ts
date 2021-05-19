@@ -6,6 +6,7 @@ import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
 import GameData from '../GameData';
 import DrawData from '../game/DrawData';
+import HttpUtils from '../common/net/HttpUtils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -418,6 +419,7 @@ export default class NewClass extends cc.Component {
 				GameCfg.enterGameCache.startTime = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
 				if (!GameCfg.GAMEFUPAN) {
 					GameCfg.huizhidatas = info.items.length;
+					GameData.huizhidatas = info.items.length;
 				}
 
 				GameCfg.startIndex = info.items.length;
@@ -519,6 +521,7 @@ export default class NewClass extends cc.Component {
 			}
 			if (!GameCfg.GAMEFUPAN) {
 				GameCfg.huizhidatas = preData.total - 1;
+				GameData.huizhidatas = preData.total - 1;
 			}
 
 			GameCfg.startIndex = preData.total - 1;

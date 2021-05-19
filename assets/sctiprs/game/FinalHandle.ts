@@ -226,15 +226,15 @@ export default class NewClass extends cc.Component {
         }
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
-            GameCfg.huizhidatas = 0;
+            GameCfg.huizhidatas = GameData.huizhidatas;
 
             GameCfg.allRate = 0;
             GameCfg.profitCount = 0;
             GameCfg.lossCount = 0;
             GameCfg.finalfund = 0;
-
-            GameCfg.GAMEFUPAN = false;
-
+            GameCfg.fill = [];
+            GameCfg.mark = [];
+            GameCfg.notice = [];
             GameCfg.GAMEFUPAN = false;
             //   GameCfg.history.huizhidatas = 0;
             GameCfg.history.allRate = 0;
