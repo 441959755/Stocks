@@ -37,6 +37,7 @@ export default class NewClass extends cc.Component {
 
     protected onEnable() {
         //  GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
+        GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
         this.toggle1.isChecked = GameData.SMSet.isFC;
 

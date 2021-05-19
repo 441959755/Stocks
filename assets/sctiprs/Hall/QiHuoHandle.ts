@@ -155,6 +155,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	onEnable() {
+		GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		GameCfg.GameType = pb.GameType.QiHuo;
 		let setDatas = GameData.QHSet;
 		this.box[0].getChildByName('label').getComponent(cc.Label).string = setDatas.JYS;

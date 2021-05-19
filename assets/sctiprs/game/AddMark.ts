@@ -219,7 +219,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.GAMEFUPAN);
         GlobalEvent.off(EventCfg.ONADDMARK);
         GlobalEvent.off(EventCfg.ONMARKUPDATE);
-        GlobalEvent.off(EventCfg.ADDMARKHIDE);
+        GlobalEvent.off(EventCfg.ADDMARKHIDEORSHOW);
     }
 
     // update (dt) {}

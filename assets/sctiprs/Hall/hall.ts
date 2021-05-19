@@ -267,22 +267,24 @@ export default class NewClass extends cc.Component {
 	}
 
 	start() {
-		setTimeout(() => {
-			let event;
-			if (GameCfg.GameType == pb.GameType.ShuangMang) {
-				event = { target: { name: 'main_xl_smxl' } };
-			} else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-				event = { target: { name: 'main_xl_zbxl' } }
-			} else if (GameCfg.GameType == pb.GameType.DingXiang) {
-				event = { target: { name: 'main_xl_dxxl' } }
-			} else if (GameCfg.GameType == pb.GameType.QiHuo) {
-				event = { target: { name: 'main_xl_qhxl' } }
-			}
-			if (event) {
-				GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
-			}
-		}, 100);
+		let event;
+		if (GameCfg.GameType == pb.GameType.ShuangMang) {
+			event = { target: { name: 'main_xl_smxl' } };
+		} else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+			event = { target: { name: 'main_xl_zbxl' } }
+		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
+			event = { target: { name: 'main_xl_dxxl' } }
+		} else if (GameCfg.GameType == pb.GameType.QiHuo) {
+			event = { target: { name: 'main_xl_qhxl' } }
+		}
 
+
+		if (event) {
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+			setTimeout(() => {
+				GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
+			}, 100);
+		}
 	}
 
 
@@ -414,7 +416,10 @@ export default class NewClass extends cc.Component {
 					GameCfg.data[0].data.push(data);
 				});
 				GameCfg.enterGameCache.startTime = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
-				GameCfg.huizhidatas = info.items.length;
+				if (!GameCfg.GAMEFUPAN) {
+					GameCfg.huizhidatas = info.items.length;
+				}
+
 				GameCfg.startIndex = info.items.length;
 				//	console.log(JSON.stringify(GameCfg.data[0].data));
 				//cc.director.loadScene('game');
@@ -512,7 +517,10 @@ export default class NewClass extends cc.Component {
 				total: 50,
 				to: data.from,
 			}
-			GameCfg.huizhidatas = preData.total - 1;
+			if (!GameCfg.GAMEFUPAN) {
+				GameCfg.huizhidatas = preData.total - 1;
+			}
+
 			GameCfg.startIndex = preData.total - 1;
 			if (GameData.QHSet.ZLine == '15分钟K') {
 				preData.total *= 3;

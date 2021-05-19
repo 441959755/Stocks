@@ -174,13 +174,13 @@ export default class NewClass extends cc.Component {
                 let GameSet = cc.sys.localStorage.getItem(ts + 'set');
                 if (GameSet) {
                     GameCfg.GameSet = JSON.parse(GameSet);
-                    //  console.log(JSON.stringify(GameCfg.GameSet));
+                    //    console.log(JSON.stringify(GameCfg.GameSet));
                 }
 
                 let mark = cc.sys.localStorage.getItem(ts + 'mark');
                 if (mark) {
                     GameCfg.mark = JSON.parse(mark);
-                    //   console.log(JSON.stringify(GameCfg.mark));
+                    //  console.log(JSON.stringify(GameCfg.mark));
                 }
 
                 let notice = cc.sys.localStorage.getItem(ts + 'notice');
@@ -192,7 +192,7 @@ export default class NewClass extends cc.Component {
                 let fill = cc.sys.localStorage.getItem(ts + 'fill');
                 if (fill) {
                     GameCfg.fill = JSON.parse(fill);
-                    //   console.log(JSON.stringify(GameCfg.fill));
+                    // console.log(JSON.stringify(GameCfg.fill));
                 }
             }
 

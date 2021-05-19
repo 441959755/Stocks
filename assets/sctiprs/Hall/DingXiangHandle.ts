@@ -111,6 +111,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	onEnable() {
+		GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		this.onShow();
 	}
 

@@ -159,7 +159,7 @@ export default class NewClass extends cc.Component {
 
 					GlobalEvent.emit('updateRate', [0, GameCfg.allRate]);
 
-					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas + 1 });
+					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
 
 				}
 				GameCfg.finalfund = this.ziChan;
@@ -217,6 +217,8 @@ export default class NewClass extends cc.Component {
 					node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
 					let node1 = this.node.getChildByName('fupan1');
 					node1.active = false;
+					let node = this.node.getChildByName('fupan1');
+					node.active = true;
 				}
 			},
 			this
@@ -362,6 +364,8 @@ export default class NewClass extends cc.Component {
 				node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
 				let node1 = this.node.getChildByName('fupan1');
 				node1.active = false;
+				// let node = this.node.getChildByName('fupan1');
+				// node.active = true;
 			}
 
 			else if (GameCfg.GameType == pb.GameType.DingXiang) {
@@ -775,31 +779,7 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
 				this.setRoundNumber('mcBtn1');
 			}
-			//else if (this._KKCount != 0) {
-			// 	this.setRoundNumber('mcBtn1');
-			// 	//this._kdCount = this._KKCount;
-			// 	this._KKCount = 0;
-			// 	let nodes = this.kdNode.children;
-			// 	nodes.forEach(el => {
-			// 		el.active = false;
-			// 	});
-			// 	nodes[this._kdCount].active = true;
 
-			// 	this.cyBtn.node.active = false;
-			// 	this.gwBtn.node.active = true;
-
-			// 	let fsNodes = this.fsNode.children;
-			// 	fsNodes[0].active = false;
-			// 	fsNodes[1].active = true;
-
-			// 	let kkNodes = this.kkNode.children;
-			// 	kkNodes.forEach(el => {
-			// 		el.active = false;
-			// 	})
-			// 	kkNodes[this._KKCount].active = true;
-			// 	GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
-			// 	//	this.setRoundNumber('mrBtn');
-			// }
 			else {
 				this._kdCount += 1;
 				this.ziChan -= (1 * this.gpData[GameCfg.huizhidatas - 1].close);
@@ -914,31 +894,7 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
 				this.setRoundNumber('mcBtn');
 			}
-			// else if (this._kdCount != 0) {
-			// 	this.setRoundNumber('mcBtn1');
-			// 	//this._kdCount = this._KKCount;
-			// 	this._kdCount = 0;
-			// 	let nodes = this.kdNode.children;
-			// 	nodes.forEach(el => {
-			// 		el.active = false;
-			// 	});
-			// 	nodes[this._kdCount].active = true;
 
-			// 	this.cyBtn.node.active = true;
-			// 	this.gwBtn.node.active = false;
-
-			// 	let fsNodes = this.fsNode.children;
-			// 	fsNodes[0].active = false;
-			// 	fsNodes[1].active = true;
-
-			// 	let kkNodes = this.kkNode.children;
-			// 	kkNodes.forEach(el => {
-			// 		el.active = false;
-			// 	})
-			// 	kkNodes[this._KKCount].active = true;
-			// 	GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
-			// 	//	this.setRoundNumber('mrBtn');
-			// }
 			else {
 				this._KKCount += 1;
 				this.ziChan -= (1 * this.gpData[GameCfg.huizhidatas - 1].close);
@@ -1146,7 +1102,7 @@ export default class NewClass extends cc.Component {
 				GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
 			} else {
 				rate = this.onCurPositionRete(1);
-				allRate = (this.ziChan + this.keMcCount * curClose - GameCfg.ziChan) / GameCfg.ziChan;
+				allRate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
 				GameCfg.allRate = allRate;
 			}
 
@@ -1220,7 +1176,8 @@ export default class NewClass extends cc.Component {
 				GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
 				GameCfg.fill[GameCfg.fill.length - 1].end = GameCfg.huizhidatas - 1;
 			} else {
-				GameCfg.fill[GameCfg.fill.length - 1].end = GameCfg.huizhidatas - 1;
+				GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
+				//GameCfg.fill[GameCfg.fill.length - 1].end = GameCfg.huizhidatas - 1;
 			}
 
 			GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);

@@ -312,7 +312,7 @@ export default class NewClass extends cc.Component {
                             this.Horizontal1.y = localPos.y;
                             let index = cc.ext.beg_end[0] + (Math.floor((localPos.x - 10) / cc.ext.hz_width));
                             if (index >= cc.ext.beg_end[1]) {
-                                //     this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
+                                this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
                                 index = cc.ext.beg_end[1] - 1;
                             }
                             this.updataLabel(index);
