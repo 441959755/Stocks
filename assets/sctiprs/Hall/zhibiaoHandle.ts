@@ -25,6 +25,12 @@ export default class NewClass extends cc.Component {
 
     _tipsLa = null;
 
+    @property(cc.Node)
+    content: cc.Node = null;
+
+    @property(cc.Node)
+    item: cc.Node = null;
+
     tips = [
         ['股价穿越均线', '均线交叉', '组合训练'],
         ['MACD金叉', '0轴穿越', '柱最大值转向', 'MACD背离', '经典用法'],
@@ -46,21 +52,54 @@ export default class NewClass extends cc.Component {
                 return;
             } else {
                 let datas = GameCfgText.stockList;
-                let flag = false, tt;
+                let flag = false,
+                    tt = [];
                 for (let i = 0; i < datas.length; i++) {
-                    if (datas[i].indexOf(str) != -1) {
-                        tt = datas[i];
-                        flag = true;
+                    let arr1 = datas[i].split('|');
+                    let str1 = arr1[0];
+                    if (arr1[0].length >= 7) {
+                        str1 = arr1[0].slice(1);
+                    }
+                    if (tt.length >= 100) {
                         break;
+                    }
+                    if (str1.indexOf(str) != -1) {
+                        tt.push(datas[i]);
+                        flag = true;
+                        //  break;
+                    } else if (arr1[1].indexOf(str) != -1) {
+                        tt.push(datas[i]);
+                        flag = true;
+                        //  break;
                     }
                 }
                 if (!flag) {
-                    this._tipsLa.color = cc.Color.RED
+                    this._tipsLa.color = cc.Color.RED;
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '没有找查到您要的股票.');
+                    edit.string = '';
                 } else {
+                    this.content.removeAllChildren();
+                    this.downBoxs[9].active = true;
+                    this.setProId = 1;
                     this._tipsLa.color = new cc.Color().fromHEX('#BBBBBB');
                     this._tipsLa.active = false;
-                    let arr = tt.split('|');
-                    this.boxs[2].getChildByName('label').getComponent(cc.Label).string = arr[0] + '  ' + arr[1];
+                    // let item = cc.find('downBox/New ScrollView/view/content/item', this.downBoxs[1]);
+                    // let content = cc.find('downBox/New ScrollView/view/content', this.downBoxs[1]);
+                    for (let i = 0; i < tt.length; i++) {
+                        let arr = tt[i].split('|');
+                        let str = arr[0];
+                        if (arr[0].length >= 7) {
+                            str = arr[0].slice(1);
+                        }
+                        if (i == 0) {
+                            this.boxs[2].getChildByName('label').getComponent(cc.Label).string = str + '  ' + arr[1];
+                            GameData.DXSet.search = arr[0];
+                        }
+                        let node = cc.instantiate(this.item);
+                        this.content.addChild(node);
+                        node.getComponent(cc.Label).string = str + '  ' + arr[1];
+                    }
+
                     edit.string = '';
                 }
             }
@@ -69,7 +108,8 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        //    GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
+        // GameCfg.GameType = pb.GameType.ZhiBiao;
+
         this.boxs.forEach((el, index) => {
             let la = el.getChildByName('label').getComponent(cc.Label);
             if (index == 0) {
@@ -89,15 +129,13 @@ export default class NewClass extends cc.Component {
                 la.string = GameData.ZBSet.month;
             } else if (index == 5) {
                 la.string = GameData.ZBSet.day;
-            } else if (index == 6) {
+            } else if (index == 7) {
                 la.string = GameData.ZBSet.KLine;
             } else if (index == 7) {
                 la.string = GameData.ZBSet.ZLine;
             }
         })
         this.toggle.isChecked = GameData.ZBSet.showSign;
-
-
 
     }
 
@@ -141,10 +179,6 @@ export default class NewClass extends cc.Component {
 
     onToggleBtnClick() {
         GameData.ZBSet.showSign = this.toggle.isChecked;
-    }
-
-    protected onDisable() {
-        GameData.ZBSet = GameData.ZBSet;
     }
 
     onBtnClick(event, data) {

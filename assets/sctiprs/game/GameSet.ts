@@ -42,7 +42,8 @@ export default class NewClass extends cc.Component {
             }
 
             this.masks.forEach(el => {
-                el.width = this.node.width;
+
+                el && (el.width = this.node.width)
             })
 
         }, this)
@@ -125,15 +126,18 @@ export default class NewClass extends cc.Component {
             this.node.color = cc.Color.WHITE;
             // this.mask.color=cc.Color.WHITE;
             this.masks.forEach(el => {
-                el.color = cc.Color.WHITE;
+                el && (el.color = cc.Color.WHITE)
             })
             this.linesNode.children.forEach(el => {
-                el.color = cc.Color.BLACK;
-                if (el.children.length > 0) {
-                    el.children.forEach(e => {
-                        e.color = cc.Color.BLACK;
-                    })
+                if (el) {
+                    el.color = cc.Color.BLACK;
+                    if (el.children.length > 0) {
+                        el.children.forEach(e => {
+                            e.color = cc.Color.BLACK;
+                        })
+                    }
                 }
+
             })
             this.HNode.color = cc.Color.BLACK;
             this.VNode.color = cc.Color.BLACK;

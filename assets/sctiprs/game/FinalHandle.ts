@@ -97,7 +97,7 @@ export default class NewClass extends cc.Component {
         this.timeLabel.string = ComUtils.formatTime(GameCfg.enterGameCache.startTime) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
 
         //同期涨幅
-        let tq = ((gpData[gpData.length - 1].close - gpData[0].close) / gpData[0].close).toFixed(2);
+        let tq = ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameCfg.startIndex - 1].close) / gpData[GameCfg.startIndex - 1].close * 100).toFixed(2);
 
 
         this.riseLabel.string = tq + '%';
@@ -163,7 +163,7 @@ export default class NewClass extends cc.Component {
 
                 k_to: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
                 //  k_to: parseInt(gpData[gpData.length - 1].day.replace(///g,'')),
-                stock_profit_rate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameCfg.startIndex - 1].close) / gpData[GameCfg.startIndex - 1].close).toFixed(2),
+                stock_profit_rate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameCfg.startIndex - 1].close) / gpData[GameCfg.startIndex - 1].close * 100).toFixed(2),
                 user_profit_rate: (GameCfg.allRate * 100).toFixed(2),
                 user_capital: GameData.properties[3],
                 user_profit: (GameCfg.finalfund - GameCfg.ziChan),

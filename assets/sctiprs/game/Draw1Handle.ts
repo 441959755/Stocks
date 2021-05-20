@@ -149,20 +149,21 @@ export default class NewClass extends cc.Component {
 
 
             if (flagData.macd || flagData.kdj || flagData.rsi) {
-                if (GameCfg.GameType != 3) {
-                    this.Mask.active = true;
-                }
-                this.drawVol.node.zIndex = 1;
-                this.drawPcm.node.zIndex = 2;
-                this.Mask.zIndex = 3;
-                this.drawMACD.node.zIndex = 4;
-                this.drawKDJ.node.zIndex = 5;
-                this.drawRSI.node.zIndex = 6;
+                // if (GameCfg.GameType != 3) {
+                this.Mask.active = true;
+                // }
+                // this.drawVol.node.zIndex = 1;
+                // this.drawPcm.node.zIndex = 2;
+                // this.Mask.zIndex = 3;
+                // this.drawMACD.node.zIndex = 4;
+                // this.drawKDJ.node.zIndex = 5;
+                // this.drawRSI.node.zIndex = 6;
 
             } else {
-                this.drawVol.node.zIndex = 2;
-                this.drawPcm.node.zIndex = 3;
-                this.Mask.zIndex = 1;
+                this.Mask.active = false
+                // this.drawVol.node.zIndex = 2;
+                // this.drawPcm.node.zIndex = 3;
+                // this.Mask.zIndex = 1;
             }
 
             this.setLabelValue();
@@ -263,7 +264,7 @@ export default class NewClass extends cc.Component {
         }
         if (GameCfg.GameType == pb.GameType.QiHuo) {
             if (GameCfg.data[0].data[index]) {
-                this.cclLabel.string = 'OPI:' + GameCfg.data[0].data[index].ccl_hold.toFixed(2);
+                this.cclLabel.string = 'CCL:' + GameCfg.data[0].data[index].ccl_hold;
             }
         }
 
@@ -548,7 +549,7 @@ export default class NewClass extends cc.Component {
         let RSIX = 10 + (some * cc.ext.hz_width) + cc.ext.hz_width / 2;
         let preRSIX = 10 + ((some - 1) * cc.ext.hz_width) + cc.ext.hz_width / 2;
         //RSI6
-        if (index > 5) {
+        if (index >= 6) {
             // let RSI6Y = this.Rs6[index - 5] / this.maxRs6 * bgHeight;
 
             // let preRSI6Y = this.Rs6[index - 6] / this.maxRs6 * bgHeight;
@@ -569,7 +570,7 @@ export default class NewClass extends cc.Component {
         }
 
         //RSI12
-        if (index > 11) {
+        if (index >= 12) {
             // let RSI12Y = this.Rs12[index - 11] / this.maxRs12 * bgHeight;
             // let preRSI12Y = this.Rs12[index - 12] / this.maxRs12 * bgHeight;
             let RSI12Y = this.Rs12[index] / this.maxRs6 * bgHeight;
@@ -589,7 +590,7 @@ export default class NewClass extends cc.Component {
         }
 
         //RSI24
-        if (index > 23) {
+        if (index >= 24) {
             // let RSI24Y = this.Rs24[index - 23] / this.maxRs24 * bgHeight;
             // let preRSI24Y = this.Rs24[index - 24] / this.maxRs24 * bgHeight;
 

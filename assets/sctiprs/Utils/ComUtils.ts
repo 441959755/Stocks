@@ -215,6 +215,9 @@ export default class ComUtils {
 
 	//获取时间戳
 	public static getTimestamp(time) {
+		if (time == 0) {
+			return 0;
+		}
 		time = ((time + '').replace(/-/g, ''));
 		if (time.length == 10) {
 			return time;

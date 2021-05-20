@@ -280,7 +280,6 @@ export default class NewClass extends cc.Component {
 			})
 
 		}
-
 	}
 
 	onBoxSelectClick(event, data) {
@@ -652,7 +651,12 @@ export default class NewClass extends cc.Component {
 
 			let d = new Date(year + '-' + month + '-' + day);
 			///console.log(d);
-			let t = d.getTime();
+			let t = d.getTime() + 24 * 60 * 60 * 1000 * 100;
+
+			if (sc < t && GameData.DXSet.year == '随机') {
+				this.DXStartGameSet();
+				return;
+			}
 
 			let s = Math.random() * (sc - t) + t;
 

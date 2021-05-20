@@ -22,7 +22,6 @@ export default class NewClass extends cc.Component {
     childs = null;
 
 
-
     protected onLoad() {
         GlobalEvent.on('ItemValue', (val) => {
             let lab = this.layers[this._page].children[this._index].getChildByName('label');
@@ -112,6 +111,7 @@ export default class NewClass extends cc.Component {
                 }
             })
             GameData.ZBSet = datas;
+            console.log(JSON.stringify(GameData.ZBSet));
             this.node.active = false;
         } else if (name == 'selectBtn') {
             this._index = parseInt(data);

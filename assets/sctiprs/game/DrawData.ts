@@ -105,17 +105,26 @@ export default class DrawData {
 
     //
     public static getTimeSlotData(to, total, arr) {
+        let newArr = [];
+        if (arr.length <= 0) {
+            console.log('arr is null   ingetTimeSlotData');
+            return newArr;
+        }
         arr.sort((a, b) => {
             return a.day - b.day;
         })
+
+        console.log('要的时间往下:' + parseInt(ComUtils.fromatTime1(to)));
+        console.log('给的时间:' + parseInt(ComUtils.fromatTime1(arr[0].day)));
+
         //    console.log(arr);
 
         to = parseInt(ComUtils.getTimestamp(to));
-        let newArr = [];
+
         for (let i = arr.length - 1; i >= 0; i--) {
             //  let time = parseInt(ComUtils.getTimestamp(arr[i].day));
-            console.log(parseInt(ComUtils.fromatTime1(arr[i].day)));
-            console.log(parseInt(ComUtils.fromatTime1(to)));
+            //   console.log(parseInt(ComUtils.fromatTime1(arr[i].day)));
+            //   console.log(parseInt(ComUtils.fromatTime1(to)));
             if (parseInt(ComUtils.fromatTime1(arr[i].day)) <= parseInt(ComUtils.fromatTime1(to))
                 && newArr.length <= total) {
                 newArr.unshift(arr[i]);
@@ -136,7 +145,9 @@ export default class DrawData {
 
 
     public static initData(data) {
-
+        if (data.length <= 0) {
+            return;
+        }
         // if (GameCfg.GameType == pb.GameType.QiHuo) {
         //     this.dataChange(data);
         // }
@@ -283,7 +294,9 @@ export default class DrawData {
 
                     // this.n_high = el.high;
                     // this.n_low = el.low;
-
+                    this.Rs6.push(null);
+                    this.Rs12.push(null);
+                    this.Rs24.push(null);
                     this.UPRS.push(0);
                     this.DOWNRS.push(0);
                     this.UPRS12.push(0);

@@ -818,11 +818,13 @@ export default class NewClass extends cc.Component {
 		data.code = items[0];
 
 		// 合约代码|合约中文名称|合约英文名称|合约种类|所在交易所|第一个日K日期（YYYYMMDD）|最后一个日K//日期（YYYYMMDD）|第一个分时时间戳（精确到秒）|最后一个分时时间戳（精确到秒）
+		let tim = GameCfgText.QHGetTimeByCodeName(data.code)
 		if (GameData.QHSet.year == '随机') {
 
 			if (GameData.QHSet.ZLine == '日线') {
 
-				let start = items[5], end = items[6], sc;
+
+				let start = tim.start, end = tim.end, sc;
 
 				if (end == 0) {
 					sc = new Date().getTime() - data.total * 24 * 60 * 60 * 1000;
@@ -844,7 +846,7 @@ export default class NewClass extends cc.Component {
 
 					let d = new Date(year + '-' + month + '-' + day);
 					///console.log(d);
-					let t = d.getTime();
+					let t = d.getTime() + 50 * 24 * 60 * 60 * 1000;
 
 					let s = Math.random() * (sc - t) + t;
 
@@ -860,7 +862,7 @@ export default class NewClass extends cc.Component {
 				}
 
 			} else {
-				let start = parseInt(items[7]), end = parseInt(items[8]), sc;
+				let start = parseInt(ComUtils.getTimestamp(tim.start)), end = parseInt(ComUtils.getTimestamp(tim.end)), sc;
 
 				let tt;
 				if (GameData.QHSet.ZLine == '60分钟K') {
@@ -879,6 +881,10 @@ export default class NewClass extends cc.Component {
 					sc = end - data.total * tt * 60;
 				}
 
+				start = start + 50 * tt * 60;
+
+
+
 				let f = parseInt(Math.random() * (sc - start) + start + '');
 
 				//let f = parseInt(new Date(s * 1000).getTime() / 1000 + '');
@@ -891,12 +897,9 @@ export default class NewClass extends cc.Component {
 		} else {
 			//	if (GameData.QHSet.ZLine == '日线') {
 			let start = items[5], end = items[6], sc;
-			if (start == '0' || end == '0') {
-				let ts = GameCfgText.QHGetTimeByCodeName(items[1]);
-				start = ts.start;
-				end = ts.end;
-			}
 
+			start = tim.start;
+			end = tim.end;
 
 			let year, month, day;
 			year = GameData.QHSet.year;

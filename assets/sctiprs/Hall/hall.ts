@@ -279,12 +279,8 @@ export default class NewClass extends cc.Component {
 			event = { target: { name: 'main_xl_qhxl' } }
 		}
 
-
 		if (event) {
-			GlobalEvent.emit(EventCfg.LOADINGSHOW);
-			setTimeout(() => {
-				GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
-			}, 100);
+			GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
 		}
 	}
 

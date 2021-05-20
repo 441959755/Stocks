@@ -57,7 +57,7 @@ export default class NewClass extends cc.Component {
         // "userCapital":"100000","userProfit":"800","ts":"1618454133","rank":2}]}
         let sumEar = 0;
         let sumrate = 0;
-        let it = 0;
+        let it = 1;
         for (let i = datas.length - 1; i >= 0; i--) {
             if (TIMETEMP.indexOf(datas[i].ts) != -1 || GameCfg.GameType == pb.GameType.ShuangMang) {
                 let node = cc.instantiate(this.historyItem);
@@ -113,7 +113,7 @@ export default class NewClass extends cc.Component {
 
                 sumEar += datas[i].userProfit;
 
-                sumrate = ((sumrate / 100 + 1) * (datas[i].userProfitRate / 100 + 1) - 1);
+                sumrate += datas[i].userProfitRate;
             }
 
         }
@@ -136,7 +136,7 @@ export default class NewClass extends cc.Component {
                 this.title.string = '期货训练';
             }
 
-            this.label.string = (sumrate * 100).toFixed(2) + '%';
+            this.label.string = (sumrate).toFixed(2) + '%';
             if (sumrate > 0) {
                 this.label.node.color = cc.Color.RED;
             } else if (sumrate < 0) {

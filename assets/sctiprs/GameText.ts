@@ -146,33 +146,53 @@ export default class GameCfgText {
             let data = {
                 start: null,
                 end: null,
-                type: 1,
             };
-            let items = this.qihuoList[index].split('|');
-            data.start = items[5];
-            // if (items[3] == 0) {
-            //     data.end = ComUtils.getCurYearMonthDay();
-            // } else {
-            data.end = items[6];
-            //    }
-            if (data.start == 0 || data.end == 0) {
-                {
-                    let now = new Date(parseInt(items[7]) * 1000);
-                    let y = now.getFullYear();
-                    let m = now.getMonth() + 1;
-                    let d = now.getDate();
-                    data.start = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
-                }
 
-                {
-                    let now = new Date(parseInt(items[8]) * 1000);
-                    let y = now.getFullYear();
-                    let m = now.getMonth() + 1;
-                    let d = now.getDate();
-                    data.end = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
-                }
-                data.type = 2;
+            let items = this.qihuoList[index].split('|');
+
+            if (ComUtils.getTimestamp(items[5]) > parseInt(items[7])) {
+                data.start = items[5];
+            } else {
+                let now = new Date(parseInt(items[7]) * 1000);
+                let y = now.getFullYear();
+                let m = now.getMonth() + 1;
+                let d = now.getDate();
+                data.start = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
             }
+            if (ComUtils.getTimestamp(items[6]) < parseInt(items[8])) {
+                data.end = items[6];
+            } else {
+                let now = new Date(parseInt(items[8]) * 1000);
+                let y = now.getFullYear();
+                let m = now.getMonth() + 1;
+                let d = now.getDate();
+                data.end = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
+            }
+
+            // data.start = items[5];
+            // // if (items[3] == 0) {
+            // //     data.end = ComUtils.getCurYearMonthDay();
+            // // } else {
+            // data.end = items[6];
+            // //    }
+            // if (data.start == 0 || data.end == 0) {
+            //     {
+            //         let now = new Date(parseInt(items[7]) * 1000);
+            //         let y = now.getFullYear();
+            //         let m = now.getMonth() + 1;
+            //         let d = now.getDate();
+            //         data.start = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
+            //     }
+
+            //     {
+            //         let now = new Date(parseInt(items[8]) * 1000);
+            //         let y = now.getFullYear();
+            //         let m = now.getMonth() + 1;
+            //         let d = now.getDate();
+            //         data.end = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
+            //     }
+            //     data.type = 2;
+            // }
 
             return data;
         }

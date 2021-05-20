@@ -245,7 +245,7 @@ export default class NewClass extends cc.Component {
 
         this.labels[3].string = zongjinge + '';
         this.labels[2].string = zonglilv.toFixed(2) + '%';
-        this.labels[0].string = GameData.properties[3];
+        this.labels[0].string = GameData.SmxlState.gold;
     }
 
     draw_line_month(xlCount, xlcvs) {

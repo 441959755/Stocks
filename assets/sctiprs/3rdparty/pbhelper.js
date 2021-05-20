@@ -228,6 +228,7 @@ PBHelper.prototype = {
             return data;
         } else if (id == pb.MessageId.Sync_S2C_GameProperty) {
             let decode = GameProperties.decode(new Uint8Array(buff));
+
             // items: Array(1)
             // 0: GamePropertyItem {id: 3, oldValue: 100000, newValue: 100000}
             // length: 1
@@ -238,6 +239,8 @@ PBHelper.prototype = {
             }
 
             GameData.properties = GameData.properties;
+
+
         } else if (id == pb.MessageId.Rep_Game_Start
             || id == pb.MessageId.Rep_Game_Over
             || id == pb.MessageId.Rep_Game_EditNick

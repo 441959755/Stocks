@@ -89,6 +89,17 @@ export default class GameData {
 
     public static huizhidatas = null;
 
+    private static _SmxlState = null;// 双盲训练状态
+
+    public static get SmxlState() {
+        return this._SmxlState;
+    }
+
+    public static set SmxlState(val) {
+        this._SmxlState = val;
+        GlobalEvent.emit(EventCfg.SMINITFUND);
+    }
+
     //SMset
     private static _token;
 
@@ -160,7 +171,7 @@ export default class GameData {
         GlobalEvent.emit(EventCfg.GOLDCHANGE);
         GlobalEvent.emit(EventCfg.LEVELCHANGE);
         GlobalEvent.emit(EventCfg.EXPCHANGE);
-        GlobalEvent.emit(EventCfg.SMINITFUND);
+
     }
 
     //双盲的次数

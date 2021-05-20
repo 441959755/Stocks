@@ -49,13 +49,13 @@ enum GameType {
 // 玩家的游戏属性
 enum GamePropertyId {
 	Gold = 0;				// 金币
-	Exp = 1;				// 经验
-	Level = 2;				// 等级
-	ShuangMang_Gold = 3;	// 双盲本月当前金币
-	Diamond = 4;			// 钻石
+	Diamond = 1;			// 钻石
+	VIP = 2;				// VIP天数
+	Exp = 3;				// 经验
+	Level = 4;				// 等级
+	Fame = 5;				// 威望、名誉
 
-
-	Max = 30;	// 最大属性
+	Max = 30;				// 最大属性
 }
 
 
@@ -75,6 +75,18 @@ enum GameOperationId {
 }
 
 
+// 背包项
+message BackbagGrid {
+	string properties = 1;			// 物品内容：json字符串
+	int64 ts = 2;					// 发放时间戳
+	string memo = 3;				// 物品说明
+}
+message Backbag {
+	repeated BackbagGrid grids = 1;	// 背包格子
+}
+
+
+
 // 游戏输赢计数器
 message GameCounter {
 	GameType game = 1;	// 游戏类型ID
@@ -89,6 +101,17 @@ message SmxlState {
 	int32 reset_counter = 2;		// 当前重置次数（跨月自动清零）
 	int64 reset_ts_premonth = 3;	// 非当前月的最后一次重置时间戳
 	int64 last_month_report_ts = 4;	// 最近一次生成月报的时间戳
+	int64 gold_init = 5;			// 本月初始资金
+	int64 gold = 6;					// 本月当前资金
+}
+// 闯关状态
+message CgState {
+}
+// 炒股大赛状态
+message CgdsState {
+}
+// 模拟炒股状态
+message MncgState {
 }
 
 
@@ -100,6 +123,11 @@ message GameData {
 	repeated int64 properties = 4;		// 玩家游戏属性
 	repeated GameCounter counters = 5;	// 游戏输赢计数器
 	SmxlState smlx_state = 6;			// 双盲训练状态
+	CgState cg_state = 7;				// 闯关状态
+	CgState cgds_state = 8;				// 炒股大赛状态
+	CgState mncg_state = 9;				// 模拟炒股状态
+	//int64 Today = 10;					// 今日时间戳（放客户端）
+	//repeated int32 TodayGameCounter= 11;// 今日游戏计数器（放客户端）
 }
 
 
@@ -111,6 +139,21 @@ message GamePropertyItem {
 }
 message GameProperties {
 	repeated GamePropertyItem items = 1;
+}
+
+
+// 游戏操作步骤
+message GameOperationItem {
+	GameOperationId op_id = 1;	// 操作Id
+	int32 code = 2;				// 行情代码：股票或期货
+	KType k_type = 3;			// 行情类型：日K，分时
+	int32 k_ts = 4;				// 行情时间：日K线的格式为YYYYMMDD，分时K线的格式为HHMMSS
+	double price = 5;			// 操作参数：买入或卖出价格
+	int64 volume = 6;			// 操作参数：买入或卖出量
+	int64 op_ts = 7;			// 操作参数：操作时间戳
+}
+message GameOperations {
+	repeated GameOperationItem items = 1;	// 操作集合
 }
 
 
@@ -131,20 +174,6 @@ message GameResult {
 	int64 ref_id = 13;			// 关联ID
 }
 
-
-// 游戏操作步骤
-message GameOperationItem {
-	GameOperationId op_id = 1;	// 操作Id
-	int32 code = 2;				// 行情代码：股票或期货
-	KType k_type = 3;			// 行情类型：日K，分时
-	int32 k_ts = 4;				// 行情时间：日K线的格式为YYYYMMDD，分时K线的格式为HHMMSS
-	double price = 5;			// 操作参数：买入或卖出价格
-	int64 volume = 6;			// 操作参数：买入或卖出量
-	int64 op_ts = 7;			// 操作参数：操作时间戳
-}
-message GameOperations {
-	repeated GameOperationItem items = 1;	// 操作集合
-}
 
 
 
@@ -188,6 +217,17 @@ message CmdEditIcon {
 }
 // 更改头像应答(修改成功后，ErrorInfo消息的err字段里面保存头像的URL)
 // 应答消息：ErrorInfo
+
+
+// 获取背包列表请求：空
+// 获取背包列表应答：Backbag
+
+
+// 领取背包物品请求
+message CmdGetItem {
+	int64 ts    = 1;	// 时间戳
+}
+// 领取背包物品应答：ErrorInfo
 
 
 // 开始游戏
@@ -301,6 +341,21 @@ message CmdRoomLeaveReply {
 
 
 
+// 同步玩家就绪：RoomPlayerStatus
+// 应答：（无）
+
+
+
+// 同步游戏状态：RoomGameStatus
+// 应答：（无）
+
+
+
+// 同步游戏操作：RoomGameOp
+// 应答：（无）
+
+
+
 // 同步玩家进入房间
 message SyncRoomEnter {
 	int32 id = 1;		// 房间ID
@@ -313,6 +368,27 @@ message SyncRoomLeave {
 	GameType game = 2;	// 游戏类型
 	int32 uid = 3;		// 玩家ID
 }
+// 同步房间玩家状态
+message RoomPlayerStatus {
+	int32 id = 1;		// 房间ID
+	int32 uid = 2;		// 用户ID
+	bool ready= 3;		// 是否就绪
+}
+// 同步房间游戏状态
+message RoomGameStatus {
+	int32 id = 1;		// 房间ID
+	int32 status= 2;	// 游戏状态：准备、开始、结束等等
+}
+// 同步房间游戏操作
+message RoomGameOp {
+	int32 id = 1;		// 房间ID
+	bytes ops = 2;		// 游戏操作
+}
+// 同步房间游戏结果
+message RoomGameResult {
+	int32 id = 1;		// 房间ID
+	bytes result = 2;	// 游戏结果
+}
 
 
 
@@ -323,6 +399,12 @@ message RoomData {
 	bytes data = 3;		// 房间数据
 }
 // PK房间数据
+message RoomPkPlayer {
+	GameData gd = 1;		// 玩家数据
+	bool ready = 2;			// 玩家是否就绪
+	GameOperations ops = 3;	// 游戏操作
+	GameResult result = 4;	// 游戏结果
+}
 message RoomDataPk {
 	int32 status = 1;				// 游戏状态
 	int32 capital = 2;				// 报名费
@@ -331,8 +413,7 @@ message RoomDataPk {
 	int64 tsQuoteFrom = 5;			// 行情开始时间
 	int64 tsQuoteTo = 6;			// 行情结束时间
 	int64 tsQuoteStart = 7;			// 行情起始位置（开始玩的位置）
-	repeated GameData players = 8;	// 玩家数据
-	repeated GameOperations ops = 9;// 游戏操作（下标和玩家数组一致）
-	int64 tsGameFrom = 10;			// 游戏开始时间戳（精确：秒）
-	int64 tsGameCur = 11;			// 游戏当前时间戳（精确：秒）
+	repeated RoomPkPlayer players = 8;	// 玩家数据
+	int64 tsGameFrom = 9;			// 游戏开始时间戳（精确：秒）
+	int64 tsGameCur = 10;			// 游戏当前时间戳（精确：秒）
 }

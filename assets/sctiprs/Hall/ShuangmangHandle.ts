@@ -31,7 +31,8 @@ export default class NewClass extends cc.Component {
     onLoad() {
         //更新当前金币属性
         GlobalEvent.on(EventCfg.SMINITFUND, () => {
-            this.curla.string = GameData.properties[3];
+            this.curla.string = GameData.SmxlState.gold;
+            this.initLa.string = GameData.SmxlState.gold_init;
         }, this);
     }
 
@@ -41,9 +42,9 @@ export default class NewClass extends cc.Component {
 
         this.toggle1.isChecked = GameData.SMSet.isFC;
 
-        this.initLa.string = GameCfgText.smxlCfg.capital_init;
+        this.initLa.string = GameData.SmxlState.gold_init;
 
-        this.curla.string = GameData.properties[3];
+        this.curla.string = GameData.SmxlState.gold;
 
         //是否重置
         this.CZBtn.active = false;
@@ -68,7 +69,7 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = false;
             GameCfg.GameType = pb.GameType.ShuangMang;
             GameCfg.GameSet = GameData.SMSet;
-            GameCfg.ziChan = GameData.properties[3];
+            GameCfg.ziChan = GameData.SmxlState.gold;
 
             this.smStartGameSet();
 
@@ -146,7 +147,7 @@ export default class NewClass extends cc.Component {
 
             let d = new Date(year + '-' + month + '-' + day);
 
-            sc = d.getTime() - 24 * 60 * 60 * 1000 * 300;
+            sc = d.getTime() - 24 * 60 * 60 * 1000 * data.total;
         }
 
 
@@ -157,18 +158,27 @@ export default class NewClass extends cc.Component {
         //开始的时间戳
         let d = new Date(year + '-' + month + '-' + day);
         ///console.log(d); 
-        let t = d.getTime();
+        let t = d.getTime() + 24 * 60 * 60 * 1000 * 100;
 
         if (sc <= 0) {
             this.smStartGameSet();
             return;
         }
 
+        if (sc < t) {
+            this.smStartGameSet();
+            return;
+        }
+
         //随机的时间戳
+
         let s = Math.random() * (sc - t) + t;
 
         let f = new Date(s);
-
+        // if (f.getTime() / 1000 - ComUtils.getTimestamp(start) <= 150 * 24 * 60 * 60) {
+        //     let miao = f.getTime() / 1000 - ComUtils.getTimestamp(start);
+        //     f = new Date((ComUtils.getTimestamp(start) + miao) * 1000);
+        // }
         {
             let ye = f.getFullYear();
             let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
@@ -176,6 +186,8 @@ export default class NewClass extends cc.Component {
             let da = f.getDate() >= 10 ? f.getDate() : '0' + (f.getDate());
 
             data.from = ye + '' + mon + '' + da;
+            console.log(data.from);
+
         }
         //  data.from = ComUtils.fromatTime1(f);
 

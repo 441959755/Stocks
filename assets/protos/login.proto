@@ -28,6 +28,7 @@ enum LoginType {
 	MobilePhoneId = 1;	// 手机号码
 	WeChat        = 2;	// 微信
 	QQ            = 3;	// QQ
+	AppTest		  = 98; // app测试
 	WebTest		  = 99; // web测试
 }
 

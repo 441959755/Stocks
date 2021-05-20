@@ -222,7 +222,7 @@ export default class NewClass extends cc.Component {
 
                         this.myspicData.push(data);
                     });
-                    console.log(JSON.stringify(this.myspicData));
+                    //   console.log(JSON.stringify(this.myspicData));
                     this.onDraw();
                     //  GameCfg.info = null;
                 })

@@ -89,7 +89,12 @@ enum MessageId {
 	Sync_S2C_QuoteItem = 1000;	// 同步实时行情
 	Sync_S2C_GameProperty = 1002;//同步玩家游戏属性
 	Sync_S2C_GameCounter = 1004;// 同步输赢计数器
-	Sync_C2S_GameHeart = 1006;	// 心跳
+	Sync_S2C_GameSmxl = 1006;	// 同步双盲训练状态
+	Sync_S2C_GameCg = 1008;		// 同步闯关大赛状态
+	Sync_S2C_GameCgds = 1010;	// 同步炒股大赛状态
+	Sync_S2C_GameMncg = 1012;	// 同步模拟炒股状态
+	
+	Sync_C2S_GameHeart = 1200;	// 心跳
 
 
 	// 行情相关
@@ -103,13 +108,17 @@ enum MessageId {
 	Rep_QuoteQueryFuture = 2010;// 查询期货行情响应
 
 
-	// 玩家信息相关
-	Req_Game_UploadIcon = 3001;	// 上传头像
-	Rep_Game_UploadIcon = 3002;	// 上传头像应答
-	Req_Game_EditNick = 3003;	// 更改昵称
-	Rep_Game_EditNick = 3004;	// 更改昵称应答
-	Req_Game_EditIcon = 3005;	// 更改头像
-	Rep_Game_EditIcon = 3006;	// 更改头像应答
+	// 大厅相关
+	Req_Hall_UploadIcon = 3001;	// 上传头像
+	Rep_Hall_UploadIcon = 3002;	// 上传头像应答
+	Req_Hall_EditNick = 3003;	// 更改昵称
+	Rep_Hall_EditNick = 3004;	// 更改昵称应答
+	Req_Hall_EditIcon = 3005;	// 更改头像
+	Rep_Hall_EditIcon = 3006;	// 更改头像应答
+	Req_Hall_BackBag = 3007;	// 获取背包列表
+	Rep_Hall_BackBag = 3008;	// 获取背包列表应答
+	Req_Hall_GetItem = 3009;	// 获取背包物品
+	Rep_Hall_GetItem = 3010;	// 获取背包物品应答
 
 
 	// 游戏相关
@@ -137,20 +146,31 @@ enum MessageId {
 	Req_Room_Enter = 5005;		// 进入房间
 	Rep_Room_Enter = 5006;		// 进入房间应答
 	Req_Room_Leave = 5007;		// 离开房间
-	Rep_Room_Leave = 5008;		// 离开房间应答
-	Req_Room_LostConn = 5111;	// 断线
-	Req_Room_ReConn = 5113;		// 重连
-
-	Sync_Room_Enter	= 5200;		// 同步玩家进入房间
-	Sync_Room_Leave	= 5202;		// 同步玩家离开房间
-	Sync_Room_Enter_Self= 5204;	// 自己进入房间（客户端收到该消息，将玩家拉入房间）
-	Sync_Room_ReConn= 5206;		// 重连（客户端收到该消息，将玩家拉入房间）
-
+	Rep_Room_Leave = 5008;		// 离开房间应答（客户端可以忽略，只要发送请求成功默认都成功离开房间）
+	Req_Room_Ready = 5009;		// 准备就绪
+	Rep_Room_Ready = 5010;		// 准备就绪应答（无）
+	Req_Room_GameStart = 5011;	// 游戏开始
+	Rep_Room_GameStart = 5012;	// 游戏开始应答（无）
+	Req_Room_GameOp = 5013;		// 游戏操作
+	Rep_Room_GameOp = 5014;		// 游戏操作应答（无）
+	// 房间的同步消息
+	Sync_Room_Enter	= 5200;		// 其他玩家进入房间
+	Sync_Room_Leave	= 5202;		// 其他玩家离开房间
+	Sync_Room_Enter_Self= 5204;	// 自己进入房间（客户端收到自己进入房间的消息，将玩家拉入房间）
+	Sync_Room_Leave_Self= 5206;	// 自己离开房间（客户端收到自己离开房间的消息，将玩家拉出房间）
+	Sync_Room_LostConn = 5208;	// 断线
+	Sync_Room_ReConn= 5210;		// 重连上
+	Sync_Room_Ready = 5212;		// 玩家准备就绪
+	Sync_Room_GameStatus = 5214;// 游戏状态
+	Sync_Room_GameOp = 5216;	// 游戏操作
+	Sync_Room_GameResult = 5218;// 游戏结果
+	Sync_Room_Invite = 5220;	// 房间邀请
 
 
 	// 服务器和服务器之间的消息
-	S2S_HeartBeat = 10001;	// 心跳
-	S2S_Broadcast = 10003;	// 广播消息
+	S2S_HeartBeat = 10001;				// 心跳
+	S2S_Broadcast = 10003;				// 广播消息
+	S2S_Update_PlayerProperty = 10005;	// 更新玩家属性
 	
 }
 
@@ -167,6 +187,7 @@ enum ErrorCode {
 	CS_ROOM_INVALID = 100;		// 无效的房间ID
 	CS_ROOM_FULL = 101;			// 房间已满
 	CS_ROOM_FAIL_CHECKIN = 102;	// 进入房间条件不满足：如钱不足、有密码等等
+	CS_ROOM_NOT_READY = 103;	// 玩家没有准备好
 }
 
 message MessageHead {

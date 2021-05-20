@@ -132,7 +132,11 @@ export default class NewClass extends cc.Component {
 			EventCfg.GAMEOVEER,
 			() => {
 				if (this.keMcCount > 0 || (this._KKCount != 0 || this._kdCount != 0)) {
+
 					this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
+
+					this.moneyLabel[0].string = '总资产    ：' + this.ziChan;
+					this.moneyLabel[1].string = '当前资产：' + this.ziChan;
 					this.moneyLabel[1].string = '当前资产：' + parseInt(this.ziChan + '');
 					this.keMcCount = 0;
 					let curClose = parseFloat(this.gpData[GameCfg.huizhidatas - 1].close);
@@ -189,7 +193,7 @@ export default class NewClass extends cc.Component {
 					node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
 					node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(GameCfg.enterGameCache.startTime) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day);
 
-					let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameCfg.startIndex - 1].close) / this.gpData[GameCfg.startIndex - 1].close).toFixed(2);
+					let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameCfg.startIndex - 1].close) / this.gpData[GameCfg.startIndex - 1].close * 100).toFixed(2);
 					node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
 					let node1 = this.node.getChildByName('fupan1');
 					node1.active = true;
@@ -214,7 +218,7 @@ export default class NewClass extends cc.Component {
 					node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
 					// node.children[1].getComponent(cc.Label).string = this.gpData[0].day.replace(/-/g, '/') + '--' + this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
 					node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(GameCfg.enterGameCache.startTime) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day)
-					let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameCfg.startIndex - 1].close) / this.gpData[GameCfg.startIndex - 1].close).toFixed(2);
+					let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameCfg.startIndex - 1].close) / this.gpData[GameCfg.startIndex - 1].close * 100).toFixed(2);
 					node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
 					let node1 = this.node.getChildByName('fupan1');
 					node1.active = false;
@@ -360,7 +364,7 @@ export default class NewClass extends cc.Component {
 				node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
 				// node.children[1].getComponent(cc.Label).string = this.gpData[0].day.replace(/-/g, '/') + '--' + this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
 				node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(GameCfg.enterGameCache.startTime) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day)
-				let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameCfg.startIndex - 1].close) / this.gpData[GameCfg.startIndex - 1].close).toFixed(2);
+				let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameCfg.startIndex - 1].close) / this.gpData[GameCfg.startIndex - 1].close * 100).toFixed(2);
 				// ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameCfg.startIndex - 1].close) / gpData[0].close).toFixed(2),
 				node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
 				let node1 = this.node.getChildByName('fupan1');
@@ -1094,15 +1098,16 @@ export default class NewClass extends cc.Component {
 			//	let rate = (curClose * this.curMcCount - preClose * this.curMcCount) / (preClose * prezl);
 			//let rate = (curClose * this.curMcCount - preClose * this.curMcCount) / GameCfg.ziChan;
 			let rate, allRate;
+			rate = this.onCurPositionRete(1);
 			if (GameCfg.GameType == pb.GameType.QiHuo) {
-				rate = this.onAllPositionRete();
+				// 	rate = this.onAllPositionRete();
 				if (state == 'mcBtn1') {
 					rate = -rate;
-					//	this.ziChan = rate * GameCfg.ziChan + GameCfg.ziChan;
+					// 		//	this.ziChan = rate * GameCfg.ziChan + GameCfg.ziChan;
 				}
 				GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
 			} else {
-				rate = this.onCurPositionRete(1);
+
 				allRate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
 				GameCfg.allRate = allRate;
 			}

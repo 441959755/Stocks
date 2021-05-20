@@ -845,17 +845,17 @@ export default class NewClass extends cc.Component {
         }
 
         else if (id == 31) {
-            str = '收益大于10%';
+            str = '收益大于30%';
         } else if (id == 32) {
             str = '收益大于20%';
         } else if (id == 33) {
-            str = '收益大于30%';
+            str = '收益大于10%';
         } else if (id == 34) {
-            str = '亏损大于10%';
+            str = '亏损大于20%';
         } else if (id == 35) {
             str = '亏损大于15%';
         } else if (id == 36) {
-            str = '亏损大于20%';
+            str = '亏损大于10%';
         }
 
 

@@ -29,7 +29,7 @@ export default class WechatSDK {
 
                                 type: "image",
 
-                                image: "res/raw-assets/cf/cf584a31-da7b-4c32-b1b6-a19fb1d7d605.png",
+                                image: "res/raw-assets/cf/cf584a31-da7b-4c32-b1b6-a19fb1d7d605.6ee22.png",
                                 style: {
                                     left: systemInfo.screenWidth * 0.5 - 88,
                                     top: systemInfo.screenHeight * 0.7,

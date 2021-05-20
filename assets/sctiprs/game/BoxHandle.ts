@@ -57,6 +57,8 @@ export default class NewClass extends cc.Component {
     CCLBtn: cc.Node = null;
 
 
+
+
     onLoad() {
         //  let la1 = this.tipsText[0].node.parent.getChildByName('tips').children[7].getComponent(cc.Label);
         GlobalEvent.on('updataLabel', (inde) => {
@@ -278,11 +280,13 @@ export default class NewClass extends cc.Component {
 
         if (name == 'btnSlecet') {
             this.selcetContent.active = !this.selcetContent.active;
+            //   this.touchNode.active = this.selcetContent.active;
         }
         else if (data == 'CPM' || data == 'MACD' || data == 'KDJ' || data == 'RSI' || data == 'CCL') {
             let str = event.target.getComponent(cc.Label).string;
             this.tipsLabel.string = str;
             this.selcetContent.active = false;
+            // this.touchNode.active = false;
             this.setBoxfalg(data);
         }
 
