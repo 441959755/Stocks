@@ -20,7 +20,7 @@ Socket.prototype = {
 		GlobalEvent.emit(EventCfg.TIPSTEXTHIDE);
 		socket.send(pb.MessageId.Req_Game_Login, PB.onCmdGameLoginConvertToBuff(), (info) => {
 			console.log(JSON.stringify(info));
-
+			// {"data":{"uid":1000033,"nickname":"1000033","icon":"default.jpg","properties":["0","0","0","88724",//"0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],"counters":[{},{"game":"JJ_PK"},{"game":"JJ_DuoKong"},{"game":"ShuangMang"},{"game":"DingXiang"},{},{"game":"QiHuo"},{"game":"GeGuJingChai"},{"game":"DaPanJingChai"},{"game":"ChaoGuDaSai"},{"game":"MoNiChaoGu"},{"game":"TiaoJianDan"},{},{},{},{"game":"JJ_QiHuo"},{"game":"JJ_ChuangGuan"},{"game":"ZhiBiao"},{},{},{},{},{},{},{},{},{},{},{},{}],"smlxState":{"resetTs":"1621420427","lastMonthReportTs":"1621420427"}}}
 			if (info && info.data) {
 				GameData.userID = info.data.uid;
 				GameData.userName = info.data.nickname;
@@ -32,7 +32,7 @@ Socket.prototype = {
 				// (cc.ext.gameData.level = info.da)ta.properties[2];
 				// cc.ext.gameData.ShuangMang_Gold = info.data.properties[3];
 				GameData.properties = info.data.properties;
-				GameData.SmxlState = info.data.smlx_state;
+				GameData.SmxlState = info.data.smlxState;
 				GameData.maxExp = GameCfgText.levelInfoCfg[GameData.properties[2]].max_exp;
 
 				if (cc.director.getScene().name == 'Login') {

@@ -32,7 +32,7 @@ export default class NewClass extends cc.Component {
         //更新当前金币属性
         GlobalEvent.on(EventCfg.SMINITFUND, () => {
             this.curla.string = GameData.SmxlState.gold;
-            this.initLa.string = GameData.SmxlState.gold_init;
+            this.initLa.string = GameData.SmxlState.goldInit;
         }, this);
     }
 
@@ -42,7 +42,7 @@ export default class NewClass extends cc.Component {
 
         this.toggle1.isChecked = GameData.SMSet.isFC;
 
-        this.initLa.string = GameData.SmxlState.gold_init;
+        this.initLa.string = GameData.SmxlState.goldInit;
 
         this.curla.string = GameData.SmxlState.gold;
 
