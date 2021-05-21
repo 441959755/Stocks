@@ -168,34 +168,29 @@ export default class GameCfgText {
                 let d = now.getDate();
                 data.end = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
             }
-
-            // data.start = items[5];
-            // // if (items[3] == 0) {
-            // //     data.end = ComUtils.getCurYearMonthDay();
-            // // } else {
-            // data.end = items[6];
-            // //    }
-            // if (data.start == 0 || data.end == 0) {
-            //     {
-            //         let now = new Date(parseInt(items[7]) * 1000);
-            //         let y = now.getFullYear();
-            //         let m = now.getMonth() + 1;
-            //         let d = now.getDate();
-            //         data.start = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
-            //     }
-
-            //     {
-            //         let now = new Date(parseInt(items[8]) * 1000);
-            //         let y = now.getFullYear();
-            //         let m = now.getMonth() + 1;
-            //         let d = now.getDate();
-            //         data.end = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
-            //     }
-            //     data.type = 2;
-            // }
-
             return data;
         }
+    }
+
+    //根据时间随机先股票xx
+    public static getItemsByTime(time) {
+
+        let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
+        while (le--) {
+            let items = GameCfgText.stockList[le].split('|');
+
+            if (parseInt(time) - parseInt(items[2]) > 100) {
+                //  if (items[3] == 0) {
+                return items;
+                // } else 
+            }
+
+            if (le <= 0) {
+                le = GameCfgText.stockList.length - 1;
+            }
+        }
+
+
     }
 
     public static releaseRes() {

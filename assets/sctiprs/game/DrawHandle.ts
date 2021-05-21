@@ -57,8 +57,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     part5: cc.Label = null;  //分线5
 
-
-
     drawBordWidth = 1080;
 
     @property(cc.Node)
@@ -328,9 +326,11 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-        //  if (GameCfg.data) {
+        // if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+        //     this.drawBordWidth += 164;
+        // }
+
         this.initData();
-        //   }
     }
 
     onMoveLeftOrRight(count, calDisX, calDisY) {

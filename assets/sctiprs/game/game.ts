@@ -59,6 +59,8 @@ export default class NewClass extends cc.Component {
         ComUtils.onDestory();
     }
 
+
+
     setColor() {
         //黑底
         if (GameCfg.GameSet.isBW) {
@@ -140,18 +142,6 @@ export default class NewClass extends cc.Component {
 
     initData() {
 
-        // if (!GameCfg.GAMEFUPAN) {
-        //     GameCfg.huizhidatas = GameCfg.data[0].data.length - GameCfg.GameSet.KLine;
-
-        //     //数据获取不到想要的条数
-        //     if (GameCfg.huizhidatas <= 0) {
-        //         GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
-        //         if (GameCfg.huizhidatas > 100) {
-        //             GameCfg.huizhidatas = 100;
-        //         }
-        //     }
-        // }
-
         cc.ext.beg_end = [];
 
         cc.ext.beg_end[1] = GameCfg.huizhidatas;
@@ -181,6 +171,7 @@ export default class NewClass extends cc.Component {
                     GameCfg.MAs[j++] = GameCfg.GameSet['MA' + i + 'Date'];
                 }
             }
+
         }
         //指标
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {

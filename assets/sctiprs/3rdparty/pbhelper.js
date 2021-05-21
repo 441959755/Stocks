@@ -38,6 +38,10 @@ let CmdQuoteQueryFuture = pb.CmdQuoteQueryFuture;
 
 let QuotesFuture = pb.QuotesFuture;
 
+let SmxlState = pb.SmxlState;
+
+
+
 
 function PBHelper() {
 
@@ -259,6 +263,13 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Rep_QuoteQueryFuture) {
             data = QuotesFuture.decode(new Uint8Array(buff));
             return data;
+        }
+        //// 同步双盲训练状态
+        else if (id == pb.MessageId.Sync_S2C_GameSmxl) {
+            data = SmxlState.decode(new Uint8Array(buff));
+            console.log('同步双盲训练状态' + JSON.stringify(data));
+            GameData.SmxlState = data;
+
         }
 
     }

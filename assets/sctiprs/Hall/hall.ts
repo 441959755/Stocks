@@ -201,19 +201,6 @@ export default class NewClass extends cc.Component {
 			this
 		);
 
-
-		// GlobalEvent.on(
-		// 	'OPENHELPLAYER',
-		// 	str => {
-		// 		if (!this.helpLayer) {
-		// 			this.helpLayer = cc.instantiate(this.helpPre);
-		// 			this.node.addChild(this.helpLayer);
-		// 		}
-		// 		this.helpLayer.active = true;
-		// 	},
-		// 	this
-		// );
-
 		//查询行情
 		GlobalEvent.on('onCmdQuoteQuery', this.onCmdQuoteQuery.bind(this), this);
 
@@ -301,6 +288,7 @@ export default class NewClass extends cc.Component {
 		GameCfg.history.allRate = 0;
 		GameCfg.history.deal = [];
 		GameCfg.data[0].data = [];
+		//	GameCfg.enterGameCache.startTime = null;
 		//	GameCfg.ziChan = 100000;
 
 
@@ -412,16 +400,16 @@ export default class NewClass extends cc.Component {
 					}
 					GameCfg.data[0].data.push(data);
 				});
-				GameCfg.enterGameCache.startTime = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
+
+				//	GameCfg.enterGameCache.startTime = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
+
 				if (!GameCfg.GAMEFUPAN) {
 					GameCfg.huizhidatas = info.items.length;
 					GameData.huizhidatas = info.items.length;
 				}
 
 				GameCfg.startIndex = info.items.length;
-				//	console.log(JSON.stringify(GameCfg.data[0].data));
-				//cc.director.loadScene('game');
-				//在获取后面的
+
 				socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
 					//   console.log('onCmdQuoteQuery' + JSON.stringify(info));
 					if (!info.items || info.items.length <= 0) {
@@ -554,7 +542,7 @@ export default class NewClass extends cc.Component {
 					};
 					GameCfg.data[0].data.push(data1);
 				});
-				GameCfg.enterGameCache.startTime = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
+				//	GameCfg.enterGameCache.startTime = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
 
 				//	console.log(JSON.stringify(GameCfg.data[0].data));
 				//	console.log('GameCfg.huizhidatas' + GameCfg.huizhidatas)

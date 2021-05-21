@@ -344,8 +344,34 @@ export default class NewClass extends cc.Component {
 			this.node.getChildByName('isFC').active = false;
 
 		}
-		this.roundNumber = this.gpData.length - GameCfg.huizhidatas;
+		else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+			this.tipsLabel.node.active = true;
+			this.tipsLabel1.node.active = false;
+			dxnode.active = false;
+			let info = this.node.getChildByName('ZBInfo');
+			info.active = true;
+			let name = info.getChildByName('name');
+			let sT = info.getChildByName('startTime');
+			let et = sT.getChildByName('endTime');
+			if (GameCfg.GameSet.search == '随机选股') {
+				name.getComponent(cc.Label).string = '股票名称：' + '???? ' + ' ' + ' ???? ';
+			} else {
+				let code = GameCfg.data[0].code;
+				if (code.length >= 7) {
+					code = code.slice(1);
+				}
+				name.getComponent(cc.Label).string = GameCfg.data[0].name + ' ' + code;
+			}
+			if (GameCfg.GameSet.year == '随机') {
+				sT.getComponent(cc.Label).string = '起始时间：' + '????';
+				et.getComponent(cc.Label).string = '结束时间:' + '????';
+			} else {
+				sT.getComponent(cc.Label).string = ComUtils.formatTime(GameCfg.enterGameCache.startTime);
+				et.getComponent(cc.Label).string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
+			}
+		}
 
+		this.roundNumber = this.gpData.length - GameCfg.huizhidatas;
 
 		this.tipsLabel.string = '回合数：' + this.roundNumber;
 		this.tipsLabel1.string = '回合数：' + this.roundNumber;
@@ -408,6 +434,7 @@ export default class NewClass extends cc.Component {
 			if (code.length >= 7) {
 				code = code.slice(1);
 			}
+
 			if (GameCfg.GameSet.search == '随机选股') {
 				this.gpName.string = '股票名称：' + '???? ' + ' ' + ' ???? ';
 			} else {
@@ -426,6 +453,7 @@ export default class NewClass extends cc.Component {
 			this.moneyLabel[1].string = '当前资产：' + parseInt(this.ziChan + '');
 
 			this.priceLabel[0].string = '买入均价：' + 0;
+
 			if (GameCfg.huizhidatas >= 1) {
 				this.priceLabel[1].string = '当前价格：' + this.gpData[GameCfg.huizhidatas - 1].close;
 			}

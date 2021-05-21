@@ -3,6 +3,7 @@ const { ccclass, property } = cc._decorator;
 import GlobalEvent from "../Utils/GlobalEvent";
 import GameCfg from "./GameCfg";
 import EventCfg from './../Utils/EventCfg';
+import { pb } from "../../protos/proto";
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -60,40 +61,46 @@ export default class NewClass extends cc.Component {
     }
 
     initMALa() {
-        let MAla = [];
-        if (GameCfg.GameSet.isMA1) {
-            MAla.push(this.MALabel[0])
+
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+
         } else {
-            this.MALabel[0].node.active = false;
+            let MAla = [];
+            if (GameCfg.GameSet.isMA1) {
+                MAla.push(this.MALabel[0])
+            } else {
+                this.MALabel[0].node.active = false;
+            }
+            if (GameCfg.GameSet.isMA2) {
+                MAla.push(this.MALabel[1])
+            } else {
+                this.MALabel[1].node.active = false;
+            }
+            if (GameCfg.GameSet.isMA3) {
+                MAla.push(this.MALabel[2])
+            } else {
+                this.MALabel[2].node.active = false;
+            }
+            if (GameCfg.GameSet.isMA4) {
+                MAla.push(this.MALabel[3])
+            } else {
+                this.MALabel[3].node.active = false;
+            }
+            if (GameCfg.GameSet.isMA5) {
+                MAla.push(this.MALabel[4])
+            } else {
+                this.MALabel[4].node.active = false;
+            }
+            if (GameCfg.GameSet.isMA6) {
+                MAla.push(this.MALabel[5])
+            } else {
+                this.MALabel[5].node.active = false;
+            }
+            if (MAla.length > 0) {
+                GlobalEvent.emit(EventCfg.SETMALABEL, MAla);
+            }
         }
-        if (GameCfg.GameSet.isMA2) {
-            MAla.push(this.MALabel[1])
-        } else {
-            this.MALabel[1].node.active = false;
-        }
-        if (GameCfg.GameSet.isMA3) {
-            MAla.push(this.MALabel[2])
-        } else {
-            this.MALabel[2].node.active = false;
-        }
-        if (GameCfg.GameSet.isMA4) {
-            MAla.push(this.MALabel[3])
-        } else {
-            this.MALabel[3].node.active = false;
-        }
-        if (GameCfg.GameSet.isMA5) {
-            MAla.push(this.MALabel[4])
-        } else {
-            this.MALabel[4].node.active = false;
-        }
-        if (GameCfg.GameSet.isMA6) {
-            MAla.push(this.MALabel[5])
-        } else {
-            this.MALabel[5].node.active = false;
-        }
-        if (MAla.length > 0) {
-            GlobalEvent.emit(EventCfg.SETMALABEL, MAla);
-        }
+
     }
 
     start() {
@@ -149,6 +156,8 @@ export default class NewClass extends cc.Component {
         }
 
         this.initMALa();
+
+
     }
 
     // onEnable() {

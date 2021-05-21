@@ -56,9 +56,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     CCLBtn: cc.Node = null;
 
-
-
-
     onLoad() {
         //  let la1 = this.tipsText[0].node.parent.getChildByName('tips').children[7].getComponent(cc.Label);
         GlobalEvent.on('updataLabel', (inde) => {
@@ -142,7 +139,7 @@ export default class NewClass extends cc.Component {
                         el += '%';
                     }
                 }
-                this.tipsText[index].string = el;
+                this.tipsText[index] && (this.tipsText[index].string = el)
             })
 
         }, this);
@@ -175,6 +172,8 @@ export default class NewClass extends cc.Component {
                 }, 800);
             }
         }, this);
+
+        this.setBGColor();
     }
 
     start() {
@@ -182,29 +181,38 @@ export default class NewClass extends cc.Component {
         this.rZoom.isChecked = false;
         this.cclNode.active = false;
         this.CCLBtn.active = false;
+        this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
         //双盲
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             //  nodes[4].active = false;
             this.lZoom.node.active = false;
             this.lZoom.isChecked = false;
+
+            this.setBoxfalg('ma');
+            this.setBoxfalg('CPM');
         }
 
         //定向
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
-
-
+            this.setBoxfalg('ma');
+            this.setBoxfalg('CPM');
         }
         //训练指标
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-            // this.node.active=false;
-            nodes[0].active = false;
-            nodes[1].active = false;
-            nodes[2].active = false;
-            nodes[3].active = false;
-            //  this.rZoom.isChecked = true;
-            // GlobalEvent.emit('labelPoint', cc.winSize.width + this.rightBox.width / 2 - 150);
+
+            this.setBoxfalg('ma');
+            this.setBoxfalg('CPM');
+            this.rZoom.node.active = false;
+            this.rightBox.active = false;
+            this.selcetContent.parent.active = false;
+            this.rZoom.isChecked = true;
+            setTimeout(() => {
+                GlobalEvent.emit('setDrawing', true);
+            }, 100);
         }
         else if (GameCfg.GameType == pb.GameType.QiHuo) {
+            this.setBoxfalg('ma');
+            this.setBoxfalg('CPM');
             this.lZoom.node.active = false;
             this.lZoom.isChecked = false;
             this.hsLa.node.parent.active = false;
@@ -230,11 +238,9 @@ export default class NewClass extends cc.Component {
             this.inotyBox.getChildByName('label').color = cc.Color.WHITE;
             this.selcetContent.color = new cc.Color().fromHEX('#1E1E1E');
             this.selcetContent.parent.color = new cc.Color().fromHEX('#343434');
-
         }
         //白
         else {
-
             this.rightBox.color = cc.Color.WHITE;
             this.tipsBox.color = cc.Color.WHITE;
             this.inotyBox.color = cc.Color.WHITE;
@@ -246,24 +252,9 @@ export default class NewClass extends cc.Component {
         this.tipsBox.children.forEach(el => {
             this.tipsText.push(el.getComponent(cc.Label));
         })
-        // this.maboll = this.rightBox.getChildByName('ma_boll').getComponent(cc.Toggle);
-        // let toggleContainer = this.rightBox.getChildByName('New ToggleContainer');
-        // this.cpm = toggleContainer.getChildByName('CPM').getComponent(cc.Toggle);
-        // this.macd = toggleContainer.getChildByName('MACD').getComponent(cc.Toggle);
-        // this.kdj = toggleContainer.getChildByName('KDJ').getComponent(cc.Toggle);
-        // this.rsi = toggleContainer.getChildByName('RSI').getComponent(cc.Toggle);
+
         this.rZoom = this.node.getChildByName('rZoomBtn').getComponent(cc.Toggle);
         this.rightBox.active = true;
-    }
-
-
-    onEnable() {
-        this.setBGColor();
-        this.setBoxfalg('ma');
-        this.setBoxfalg('CPM');
-        this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
-        // GlobalEvent.emit('labelPoint', cc.winSize.width - this.rightBox.width / 2 - 150);
-
     }
 
     protected onDestroy() {
@@ -293,9 +284,6 @@ export default class NewClass extends cc.Component {
     }
 
     setBoxfalg(data) {
-        // this.rightBox.children.forEach(el => {
-        //     el.color = 
-        // })
 
         this.rightBox.getChildByName(data).color = new cc.Color().fromHEX('#fd4432');
         if (data == 'ma' || data == 'boll') {
@@ -395,15 +383,13 @@ export default class NewClass extends cc.Component {
             }
 
         } else if (data == 'rZoomBtn') {
-            // this.rightBox.stopAllActions();
+            ;
             if (this.rZoom.isChecked) {
                 this.rZoom.node.children[0].active = false;
                 this.rightBox.x = cc.winSize.width / 2 + this.rightBox.width / 2;
-                //   GlobalEvent.emit('labelPoint', cc.winSize.width + this.rightBox.width / 2 - 150);
             } else {
                 this.rZoom.node.children[0].active = true;
                 this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
-                //   GlobalEvent.emit('labelPoint', cc.winSize.width - this.rightBox.width / 2 - 150);
             }
             GlobalEvent.emit('setDrawing', this.rZoom.isChecked);
 

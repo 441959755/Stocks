@@ -94,7 +94,7 @@ export default class NewClass extends cc.Component {
         //时间
         // this.timeLabel.string = (gpData[0].day.replace(/-/g, '/')) + ' -- ' + (gpData[gpData.length - 1].day.replace(/-/g, '/'));
         ;
-        this.timeLabel.string = ComUtils.formatTime(GameCfg.enterGameCache.startTime) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
+        this.timeLabel.string = ComUtils.formatTime(gpData[GameCfg.startIndex - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
 
         //同期涨幅
         let tq = ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameCfg.startIndex - 1].close) / gpData[GameCfg.startIndex - 1].close * 100).toFixed(2);
@@ -159,7 +159,7 @@ export default class NewClass extends cc.Component {
                 g_type: GameCfg.GameType,
                 quotes_code: GameCfg.data[0].code,
                 k_type: GameCfg.data[0].ktype,
-                k_from: parseInt(ComUtils.fromatTime1(GameCfg.enterGameCache.startTime)),
+                k_from: parseInt(ComUtils.fromatTime1(gpData[GameCfg.startIndex - 1].day)),
 
                 k_to: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
                 //  k_to: parseInt(gpData[gpData.length - 1].day.replace(///g,'')),

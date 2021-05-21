@@ -132,10 +132,7 @@ export default class NewClass extends cc.Component {
         let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
         let items = GameCfgText.stockList[le].split('|');
         data.code = items[0];
-        // if (data.code < 600000) {
-        //     this.smStartGameSet();
-        //     return;
-        // }
+
 
         let start = items[2], end = items[3], sc;
         if (end == 0) {
