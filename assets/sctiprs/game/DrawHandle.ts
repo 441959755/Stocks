@@ -20,27 +20,13 @@ export default class NewClass extends cc.Component {
     @property(cc.Graphics)
     drawBOLL: cc.Graphics = null;
 
-    @property(cc.Graphics)
-    drawVol: cc.Graphics = null;
-
-    @property(cc.Graphics)
-    drawPCM: cc.Graphics = null;
-
-    topValue = 0;     //当前绘制的最高值
-
-    bottomValue = 0;  //当前绘制最低值
-
-    topVol = 0;     //最高成交量
-
-    bottomVol = 0;  //最低成交量
-
     disValue = 0;       //当前绘制的最高值-当前绘制最低值
 
     MaList = [];
 
     BollList = [];           //Boll的前一个绘制点
 
-    VolList = [];            //均量线
+
 
     @property(cc.Label)
     part1: cc.Label = null;  //分线1
@@ -70,9 +56,6 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     BOLLLabel: cc.Label[] = [];
 
-    @property(cc.Node)
-    voltext: cc.Node = null;
-
 
     timer = null;
 
@@ -85,6 +68,9 @@ export default class NewClass extends cc.Component {
 
 
     //   multScale = 1;
+    topValue = 0;     //当前绘制的最高值
+
+    bottomValue = 0;  //当前绘制最低值
 
     onLoad() {
         GlobalEvent.on(EventCfg.CLICKMOVE, (data) => {
@@ -114,12 +100,6 @@ export default class NewClass extends cc.Component {
             this.BOLLLabel.forEach(el => {
                 el.node.active = !flagData.maboll;
             })
-            this.drawPCM.node.active = flagData.cpm;
-            this.voltext.active = true;
-            if (flagData.macd || flagData.kdj || flagData.rsi || flagData.ccl) {
-                this.voltext.active = false;
-            }
-            //   GlobalEvent.emit('updataLabel', cc.ext.beg_end[1] - 1);
         }, this);
 
         //QH
@@ -378,7 +358,6 @@ export default class NewClass extends cc.Component {
         }
         this.setMALabelInfo(index);
         this.setBOLLLabelInfo(index);
-        this.setVOLInfo(index);
         GlobalEvent.emit('updataLabel', index);
     }
 
@@ -389,12 +368,10 @@ export default class NewClass extends cc.Component {
                 if (this.MaList[index][t]) {
                     //   el.node.color = GameCfg.MAColor[t];
                     if (t == 0) {
-                        if (GameCfg.GameType == pb.GameType.ShuangMang) {
-                            el.string = '日线 MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
-                        } else if (GameCfg.GameType == pb.GameType.DingXiang) {
-                            el.string = GameCfg.GameSet.ZLine + ' MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
-                        } else if (GameCfg.GameType == pb.GameType.QiHuo) {
+                        if (GameCfg.GameType == pb.GameType.QiHuo) {
                             el.string = ' MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
+                        } else {
+                            el.string = GameCfg.GameSet.ZLine + ' MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
                         }
 
                     } else {
@@ -408,7 +385,7 @@ export default class NewClass extends cc.Component {
 
     //bol
     setBOLLLabelInfo(index) {
-        let arr = ['BOLL(20) BOLL', 'UB', 'LB'];
+        let arr = ['BOLL(' + GameCfg.BOLL[0] + ') BOLL', 'UB', 'LB'];
         if (this.BollList[index]) {
             this.BOLLLabel.forEach((el, t) => {
                 //  el.node.color = GameCfg.BOLLColor[t];
@@ -419,17 +396,11 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    setVOLInfo(index) {
-        //   console.log(index);
-        if (GameCfg.data[0].data[index]) {
-            let value = parseFloat(GameCfg.data[0].data[index].value);
-            this.voltext.getComponent(cc.Label).string = 'VOL(5,10): ' + value;
-        }
-    }
+
 
     onShow() {
         this.initDrawBg();
-        this.voltext.color = GameCfg.VOLColor[0];
+
         this.BOLLLabel.forEach((el, t) => {
             el.node.color = GameCfg.BOLLColor[t];
             el.node.active = false;
@@ -458,14 +429,11 @@ export default class NewClass extends cc.Component {
         this.drawBg.clear();
         this.drawMA.clear();
         this.drawBOLL.clear();
-        this.drawVol.clear();
-        this.drawPCM.clear();
+
 
         this.drawBg.lineWidth = 2;
         this.drawMA.lineWidth = 2;
         this.drawBOLL.lineWidth = 2;
-        this.drawVol.lineWidth = 2;
-        this.drawPCM.lineWidth = 2;
 
         if (cc.winSize.width > this.node.width) {
             this.drawBordWidth = 1280;
@@ -474,7 +442,6 @@ export default class NewClass extends cc.Component {
         let viweData = GameCfg.data[0].data;
 
         if (!viweData || !viweData[cc.ext.beg_end[0]]) {
-            //    console.log(JSON.stringify(viweData));
             console.log('行情数据为空');
             return;
         }
@@ -482,16 +449,14 @@ export default class NewClass extends cc.Component {
         if (!viweData || viweData.length <= 0) { return }
 
         this.bottomValue = viweData[0].low;
-        this.bottomVol = viweData[0].value;
+
         this.topValue = 0;
-        this.topVol = 0;
+        //  this.topVol = 0;
 
         for (let i = cc.ext.beg_end[0]; i < cc.ext.beg_end[1]; i++) {
             this.topValue = Math.max(this.topValue, viweData[i].high);     //最高价
             this.bottomValue = Math.min(this.bottomValue, viweData[i].low); //最低价
 
-            this.topVol = Math.max(this.topVol, viweData[i].value);
-            this.bottomVol = Math.min(this.bottomVol, viweData[i].value);
         }
 
         this.disValue = this.topValue - this.bottomValue;
@@ -509,7 +474,7 @@ export default class NewClass extends cc.Component {
 
             this.onDrawBoll(index);
 
-            this.onDrawVol(viweData[index], index);
+
         }
 
     }
@@ -542,7 +507,7 @@ export default class NewClass extends cc.Component {
 
         this.MaList = DrawData.MaList;
         this.BollList = DrawData.BollList;
-        this.VolList = DrawData.VolList;
+
     }
 
     //曲线MA
@@ -767,46 +732,7 @@ export default class NewClass extends cc.Component {
 
     }
 
-    //成交量绘制
-    onDrawVol(el, index) {
 
-        let some = index - cc.ext.beg_end[0];
-
-        let initY = 0;
-        let drawBox = 150;
-        let disVol = this.topVol - this.bottomVol;
-
-        let startX = some == 0 ? 10 : 10 + (some * cc.ext.hz_width);
-        // // console.log('startX='+startX);
-        let endX = 10 + ((some + 1) * cc.ext.hz_width);
-
-        let hight = el.value * (150 / this.topVol);
-
-        let width = endX - startX;
-
-        this.drawRect(this.drawVol, startX, 0, width, hight, el.open > el.close);
-
-        //均量线 白
-        if (!this.VolList[index]) {
-            return;
-        }
-
-        //每段数据绘制
-        for (let i = 0; i < GameCfg.VOLGraph.length; i++) {
-            if (index >= GameCfg.VOLGraph[i]) {
-
-                let preY = this.VolList[index - 1][i] * (150 / this.topVol);
-                let preX = 10 + ((some - 1) * cc.ext.hz_width) + width / 2
-
-                //平均的位置
-                let VOlPointY = this.VolList[index][i] * (150 / this.topVol);
-                let VOlPointX = startX + width / 2;
-
-                this.drawPCM.strokeColor = GameCfg.VOLColor[i];
-                this.drawLine(this.drawPCM, preX, preY, VOlPointX, VOlPointY);
-            }
-        }
-    }
 
     //成交量绘制
     start() {

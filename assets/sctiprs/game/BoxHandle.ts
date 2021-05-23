@@ -174,6 +174,8 @@ export default class NewClass extends cc.Component {
         }, this);
 
         this.setBGColor();
+
+        GlobalEvent.on('setBoxfalg', this.setBoxfalg.bind(this), this);
     }
 
     start() {
@@ -200,15 +202,43 @@ export default class NewClass extends cc.Component {
         //训练指标
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 
-            this.setBoxfalg('ma');
-            this.setBoxfalg('CPM');
+
             this.rZoom.node.active = false;
             this.rightBox.active = false;
             this.selcetContent.parent.active = false;
             this.rZoom.isChecked = true;
+            if (GameCfg.GameSet.select == '均线') {
+                this.setBoxfalg('ma');
+                this.setBoxfalg('CPM');
+            }
+            else if (GameCfg.GameSet.select == 'MACD') {
+                this.setBoxfalg('ma');
+                this.setBoxfalg('MACD');
+            } else if (GameCfg.GameSet.select == 'BOLL') {
+                this.setBoxfalg('boll');
+                this.setBoxfalg('CPM');
+            }
+            else if (GameCfg.GameSet.select == 'KDJ') {
+                this.setBoxfalg('ma');
+                this.setBoxfalg('KDJ');
+            }
+            else if (GameCfg.GameSet.select == 'EXPMA') {
+                this.setBoxfalg('ma');
+                this.setBoxfalg('CPM');
+            }
+            else if (GameCfg.GameSet.select == 'RSI') {
+                this.setBoxfalg('ma');
+                this.setBoxfalg('RSI');
+            }
+            else if (GameCfg.GameSet.select == '成交量') {
+                this.setBoxfalg('ma');
+                this.setBoxfalg('CPM');
+            }
+
             setTimeout(() => {
                 GlobalEvent.emit('setDrawing', true);
             }, 100);
+
         }
         else if (GameCfg.GameType == pb.GameType.QiHuo) {
             this.setBoxfalg('ma');
@@ -263,6 +293,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('updataLabel');
         GlobalEvent.off('tipsPoint');
         GlobalEvent.off('hideTips');
+        GlobalEvent.off('setBoxfalg');
     }
 
 

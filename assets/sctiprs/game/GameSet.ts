@@ -61,11 +61,17 @@ export default class NewClass extends cc.Component {
     }
 
     initMALa() {
-
+        let MAla = [];
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            this.MALabel.forEach(el => {
+                el.node.active = false;
+            })
+            GameCfg.MAs.forEach((el, index) => {
+                this.MALabel[index].node.active = true;
+                MAla.push(this.MALabel[index])
+            })
 
         } else {
-            let MAla = [];
             if (GameCfg.GameSet.isMA1) {
                 MAla.push(this.MALabel[0])
             } else {
@@ -96,9 +102,9 @@ export default class NewClass extends cc.Component {
             } else {
                 this.MALabel[5].node.active = false;
             }
-            if (MAla.length > 0) {
-                GlobalEvent.emit(EventCfg.SETMALABEL, MAla);
-            }
+        }
+        if (MAla.length > 0) {
+            GlobalEvent.emit(EventCfg.SETMALABEL, MAla);
         }
 
     }

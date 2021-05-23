@@ -8357,7 +8357,7 @@
     "drawVol": {
       "__id__": 169
     },
-    "drawPcm": {
+    "drawPCM": {
       "__id__": 172
     },
     "drawCcl": {
@@ -8410,6 +8410,9 @@
     ],
     "cclLabel": {
       "__id__": 254
+    },
+    "voltext": {
+      "__id__": 257
     },
     "_id": "13oSGV275JyL7Atiqu35Ox"
   },
@@ -12337,7 +12340,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        0,
+        5.684341886080802e-14,
         0,
         0,
         0,
@@ -12625,7 +12628,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1152,
+      "width": 1154,
       "height": 330
     },
     "_anchorPoint": {
@@ -12707,8 +12710,8 @@
       "__id__": 128
     },
     "_alignFlags": 40,
-    "_left": 1,
-    "_right": 1,
+    "_left": 0,
+    "_right": 0,
     "_top": 151,
     "_bottom": 151,
     "_verticalCenter": 0,
@@ -12751,7 +12754,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1152,
+      "width": 1154,
       "height": 140
     },
     "_anchorPoint": {
@@ -12763,8 +12766,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        1,
-        1,
+        0,
+        0,
         0,
         0,
         0,
@@ -12832,11 +12835,11 @@
     "_target": {
       "__id__": 128
     },
-    "_alignFlags": 44,
-    "_left": 1,
-    "_right": 1,
+    "_alignFlags": 40,
+    "_left": 0,
+    "_right": 0,
     "_top": 234,
-    "_bottom": 1,
+    "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -13370,12 +13373,6 @@
     "drawBOLL": {
       "__id__": 277
     },
-    "drawVol": {
-      "__id__": 169
-    },
-    "drawPCM": {
-      "__id__": 172
-    },
     "part1": {
       "__id__": 194
     },
@@ -13408,9 +13405,6 @@
         "__id__": 232
       }
     ],
-    "voltext": {
-      "__id__": 257
-    },
     "_id": "43q8Li4uFGNoPBCA/SzcR3"
   },
   {
@@ -24524,7 +24518,7 @@
         "__id__": 552
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 556
@@ -24812,7 +24806,7 @@
       "ctor": "Float64Array",
       "array": [
         30.000000000000014,
-        -26.612,
+        28.603,
         0,
         0,
         0,
@@ -24874,7 +24868,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        46.033,
+        -46,
         0,
         0,
         0,

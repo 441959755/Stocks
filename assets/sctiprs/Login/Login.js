@@ -162,7 +162,7 @@ cc.Class({
 				KDJ: [9],
 				RSI: [6, 12, 24],
 				EXPMA: [12, 50],
-				isShowVol: false,
+				isShowVol: true,
 				isBW: true,
 			}
 			GameData.ZBSet = ZBSet;

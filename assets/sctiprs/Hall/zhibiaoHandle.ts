@@ -307,7 +307,13 @@ export default class NewClass extends cc.Component {
         } else if (str == '成交量') {
             tt = 6;
         }
-        this.boxs[1].getChildByName('label').getComponent(cc.Label).string = this.tips[tt][0];
+        let sl = this.boxs[1].getChildByName('label').getComponent(cc.Label).string;
+
+        if (this.tips[tt].indexOf(sl) == -1) {
+            this.boxs[1].getChildByName('label').getComponent(cc.Label).string = this.tips[tt][0];
+            GameData.ZBSet.strategy = this.tips[tt][0];
+        }
+
         this.tips[tt].forEach((el, index) => {
             if (!nodes[index]) {
                 let node = cc.instantiate(item);
@@ -522,9 +528,14 @@ export default class NewClass extends cc.Component {
             let m, d;
             if (GameData.ZBSet.month.length < 2) {
                 m = '0' + GameData.ZBSet.month.length;
+            } else {
+                m = GameData.ZBSet.month;
             }
+
             if (GameData.ZBSet.day.length < 2) {
                 d = '0' + GameData.ZBSet.day;
+            } else {
+                d = GameData.ZBSet.day;
             }
             let seletTime = GameData.ZBSet.year + '' + m + '' + d;
             data.from = seletTime;

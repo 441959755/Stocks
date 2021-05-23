@@ -158,9 +158,9 @@ export default class DrawData {
 
         let data5 = 5, data10 = 10;
 
-        let k = 2, N = 20;
-        let KDJDay = 9;
-        let EMA1Data = 12, EMA2Data = 26, DEAData = 9;
+        let k = 2, N = GameCfg.BOLL[0];
+        //let KDJDay = 9,;
+        let EMA1Data = GameCfg.MACD[0], EMA2Data = GameCfg.MACD[1], DEAData = GameCfg.MACD[2];
         let EMA12 = 0, EMA26 = 0;
         this.DIFList = [];
         this.DEAList = [];
@@ -269,7 +269,7 @@ export default class DrawData {
                     this.VolList.push(null);
                 }
 
-                if (index < KDJDay - 1) {
+                if (index < GameCfg.KDJ[0] - 1) {
                     this.Klist.push(50);
                     this.Dlist.push(50);
                     this.jList.push(50);
@@ -284,16 +284,6 @@ export default class DrawData {
                     this.DEAList.push(0);
                     this.MACDList.push(0);
 
-                    // RSV = (el.close - el.low) / (el.high - el.low) * 100;
-                    // let k = (2 / 3) * 50 + 1 / 3 * RSV;
-                    // let d = 2 / 3 * 50 + 1 / 3 * k;
-                    // let j = 3 * k - 2 * d;
-                    // this.Klist.push(k);
-                    // this.Dlist.push(d);
-                    // this.jList.push(j);
-
-                    // this.n_high = el.high;
-                    // this.n_low = el.low;
                     this.Rs6.push(null);
                     this.Rs12.push(null);
                     this.Rs24.push(null);
@@ -315,10 +305,10 @@ export default class DrawData {
                     this.MACDList.push(macd);
 
 
-                    if (index >= KDJDay - 1) {
+                    if (index >= GameCfg.KDJ[0] - 1) {
                         this.n_low = el.low;
                         this.n_high = el.high;
-                        for (let t = (index + 1) - KDJDay; t <= index; t++) {
+                        for (let t = (index + 1) - GameCfg.KDJ[0]; t <= index; t++) {
                             this.n_low = Math.min(this.n_low, data[t].low);
                             this.n_high = Math.max(this.n_high, data[t].high);
                         }
@@ -335,27 +325,27 @@ export default class DrawData {
 
                     if (el.close < data[index - 1].close) {
 
-                        this.DOWNRS.push(this.DOWNRS[index - 1] * 5 / 6 + (data[index - 1].close - el.close) / 6)
-                        this.UPRS.push(this.UPRS[index - 1] * 5 / 6 + (0) / 6);
+                        this.DOWNRS.push(this.DOWNRS[index - 1] * (GameCfg.RSI[0] - 1) / GameCfg.RSI[0] + (data[index - 1].close - el.close) / GameCfg.RSI[0])
+                        this.UPRS.push(this.UPRS[index - 1] * (GameCfg.RSI[0] - 1) / GameCfg.RSI[0] + (0) / GameCfg.RSI[0]);
 
-                        this.UPRS12.push(this.UPRS12[index - 1] * 11 / 12 + (0) / 12)
-                        this.DOWNRS12.push(this.DOWNRS12[index - 1] * 11 / 12 + (data[index - 1].close - el.close) / 12);
+                        this.UPRS12.push(this.UPRS12[index - 1] * (GameCfg.RSI[1] - 1) / GameCfg.RSI[1] + (0) / GameCfg.RSI[1])
+                        this.DOWNRS12.push(this.DOWNRS12[index - 1] * (GameCfg.RSI[1] - 1) / GameCfg.RSI[1] + (data[index - 1].close - el.close) / GameCfg.RSI[1]);
 
-                        this.UPRS24.push(this.UPRS24[index - 1] * 23 / 24 + (0) / 24)
-                        this.DOWNRS24.push(this.DOWNRS24[index - 1] * 23 / 24 + (data[index - 1].close - el.close) / 24);
+                        this.UPRS24.push(this.UPRS24[index - 1] * (GameCfg.RSI[2] - 1) / GameCfg.RSI[2] + (0) / GameCfg.RSI[2])
+                        this.DOWNRS24.push(this.DOWNRS24[index - 1] * (GameCfg.RSI[2] - 1) / GameCfg.RSI[2] + (data[index - 1].close - el.close) / GameCfg.RSI[2]);
 
                     } else {
 
-                        this.DOWNRS.push(this.DOWNRS[index - 1] * 5 / 6 + (0) / 6)
-                        this.UPRS.push(this.UPRS[index - 1] * 5 / 6 + (el.close - data[index - 1].close) / 6);
+                        this.DOWNRS.push(this.DOWNRS[index - 1] * (GameCfg.RSI[0] - 1) / GameCfg.RSI[0] + (0) / GameCfg.RSI[0])
+                        this.UPRS.push(this.UPRS[index - 1] * (GameCfg.RSI[0] - 1) / GameCfg.RSI[0] + (el.close - data[index - 1].close) / GameCfg.RSI[0]);
 
-                        this.UPRS12.push(this.UPRS12[index - 1] * 11 / 12 + (el.close - data[index - 1].close) / 12)
-                        this.DOWNRS12.push(this.DOWNRS12[index - 1] * 11 / 12 + (0) / 12);
+                        this.UPRS12.push(this.UPRS12[index - 1] * (GameCfg.RSI[1] - 1) / GameCfg.RSI[1] + (el.close - data[index - 1].close) / GameCfg.RSI[1])
+                        this.DOWNRS12.push(this.DOWNRS12[index - 1] * (GameCfg.RSI[1] - 1) / GameCfg.RSI[1] + (0) / GameCfg.RSI[1]);
 
-                        this.UPRS24.push(this.UPRS24[index - 1] * 23 / 24 + (el.close - data[index - 1].close) / 24)
-                        this.DOWNRS24.push(this.DOWNRS24[index - 1] * 23 / 24 + (0) / 24);
+                        this.UPRS24.push(this.UPRS24[index - 1] * (GameCfg.RSI[2] - 1) / GameCfg.RSI[2] + (el.close - data[index - 1].close) / GameCfg.RSI[2])
+                        this.DOWNRS24.push(this.DOWNRS24[index - 1] * (GameCfg.RSI[2] - 1) / GameCfg.RSI[2] + (0) / GameCfg.RSI[2]);
                     }
-                    if (index >= 5) {
+                    if (index >= GameCfg.RSI[0] - 1) {
                         //    let rs = index + 1 - 6;
                         let UP6 = 0, DOWN6 = 0;
                         // for (; rs <= index; rs++) {
@@ -386,7 +376,7 @@ export default class DrawData {
                     } else {
                         this.Rs6.push(null);
                     }
-                    if (index >= 11) {
+                    if (index >= GameCfg.RSI[1] - 1) {
                         //  let rs = index + 1 - 12;
                         let UP12 = 0, DOWN12 = 0;
                         // for (; rs <= index; rs++) {
@@ -417,7 +407,7 @@ export default class DrawData {
                         this.Rs12.push(null);
                     }
 
-                    if (index >= 23) {
+                    if (index >= GameCfg.RSI[2] - 1) {
                         //  let rs = index + 1 - 24;
                         let UP24 = 0, DOWN24 = 0;
                         // for (; rs <= index; rs++) {

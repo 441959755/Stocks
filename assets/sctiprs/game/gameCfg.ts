@@ -6,6 +6,16 @@ export default {
 
     MAs: [],         //设置均线日  
 
+    BOLL: [20],
+
+    MACD: [12, 26, 9],
+
+    KDJ: [9],
+
+    RSI: [6, 12, 24],
+
+    VOLGraph: [5, 10],          //成交量均线
+
     HZ_white: cc.Color.WHITE,
 
     // MAGraph: [5, 10, 20, 30, 60, 120],   //价格均线
@@ -28,7 +38,7 @@ export default {
 
     CCL_COL: null,  //持仓量颜色
 
-    VOLGraph: [5, 10],          //成交量均线
+
 
     VOLColor: [cc.Color.WHITE, cc.Color.YELLOW],
 
@@ -78,7 +88,5 @@ export default {
     enterGameCache: null,  //进入游戏的选择
 
     selectZline: 0,
-
-    startIndex: 0,   //开始Index
 
 }

@@ -359,8 +359,6 @@ export default class NewClass extends cc.Component {
 		GameCfg.info = info1;
 		socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(data), res => {
 			//console.log('onCmdGameStart' + JSON.stringify(res));
-			//先去前面条数 要我这样写
-
 			let infoPre = {
 				ktype: info1.ktype,
 				kstyle: info1.kstyle,
@@ -405,10 +403,10 @@ export default class NewClass extends cc.Component {
 
 				if (!GameCfg.GAMEFUPAN) {
 					GameCfg.huizhidatas = info.items.length;
-					GameData.huizhidatas = info.items.length;
 				}
+				GameData.huizhidatas = info.items.length;
 
-				GameCfg.startIndex = info.items.length;
+				//	GameData.huizhidatas = info.items.length;
 
 				socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
 					//   console.log('onCmdQuoteQuery' + JSON.stringify(info));
@@ -505,10 +503,10 @@ export default class NewClass extends cc.Component {
 			}
 			if (!GameCfg.GAMEFUPAN) {
 				GameCfg.huizhidatas = preData.total - 1;
-				GameData.huizhidatas = preData.total - 1;
 			}
+			GameData.huizhidatas = preData.total - 1;
 
-			GameCfg.startIndex = preData.total - 1;
+			//	GameData.huizhidatas = preData.total - 1;
 			if (GameData.QHSet.ZLine == '15分钟K') {
 				preData.total *= 3;
 			} else if (GameData.QHSet.ZLine == '30分钟K') {

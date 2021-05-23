@@ -4,6 +4,7 @@ import GameCfg from './GameCfg';
 import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
 import DrawData from './DrawData';
+import GameData from '../GameData';
 
 const { ccclass, property } = cc._decorator;
 @ccclass
@@ -191,9 +192,9 @@ export default class NewClass extends cc.Component {
 					let node = this.node.getChildByName('fupan');
 					node.active = true;
 					node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
-					node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(GameCfg.enterGameCache.startTime) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day);
+					node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day);
 
-					let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameCfg.startIndex - 1].close) / this.gpData[GameCfg.startIndex - 1].close * 100).toFixed(2);
+					let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameData.huizhidatas - 1].close) / this.gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
 					node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
 					let node1 = this.node.getChildByName('fupan1');
 					node1.active = true;
@@ -208,7 +209,7 @@ export default class NewClass extends cc.Component {
 						code = code.slice(1);
 					}
 					this.gpName.string = GameCfg.data[0].name + ' ' + code;
-					this.timeLabel[0].string = ComUtils.formatTime(GameCfg.enterGameCache.startTime);
+					this.timeLabel[0].string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
 					this.timeLabel[1].string = ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day);
 					// dxnode.getComponent(cc.Layout).spacingX = 100;
 				}
@@ -217,8 +218,8 @@ export default class NewClass extends cc.Component {
 					node.active = true;
 					node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
 					// node.children[1].getComponent(cc.Label).string = this.gpData[0].day.replace(/-/g, '/') + '--' + this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
-					node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(GameCfg.enterGameCache.startTime) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day)
-					let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameCfg.startIndex - 1].close) / this.gpData[GameCfg.startIndex - 1].close * 100).toFixed(2);
+					node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day)
+					let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameData.huizhidatas - 1].close) / this.gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
 					node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
 					let node1 = this.node.getChildByName('fupan1');
 					node1.active = false;
@@ -366,7 +367,7 @@ export default class NewClass extends cc.Component {
 				sT.getComponent(cc.Label).string = '起始时间：' + '????';
 				et.getComponent(cc.Label).string = '结束时间:' + '????';
 			} else {
-				sT.getComponent(cc.Label).string = ComUtils.formatTime(GameCfg.enterGameCache.startTime);
+				sT.getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
 				et.getComponent(cc.Label).string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
 			}
 		}
@@ -389,9 +390,9 @@ export default class NewClass extends cc.Component {
 				node.active = true;
 				node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
 				// node.children[1].getComponent(cc.Label).string = this.gpData[0].day.replace(/-/g, '/') + '--' + this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
-				node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(GameCfg.enterGameCache.startTime) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day)
-				let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameCfg.startIndex - 1].close) / this.gpData[GameCfg.startIndex - 1].close * 100).toFixed(2);
-				// ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameCfg.startIndex - 1].close) / gpData[0].close).toFixed(2),
+				node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day)
+				let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameData.huizhidatas - 1].close) / this.gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
+				// ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[0].close).toFixed(2),
 				node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
 				let node1 = this.node.getChildByName('fupan1');
 				node1.active = false;
@@ -407,7 +408,7 @@ export default class NewClass extends cc.Component {
 				}
 
 				this.gpName.string = GameCfg.data[0].name + ' ' + code;
-				this.timeLabel[0].string = ComUtils.formatTime(GameCfg.enterGameCache.startTime);
+				this.timeLabel[0].string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
 				this.timeLabel[1].string = this.gpData[GameCfg.huizhidatas - 1].day.replace(/-/g, '/');
 
 				this.moneyLabel[0].string = '总资产    ：' + GameCfg.ziChan;
@@ -445,7 +446,7 @@ export default class NewClass extends cc.Component {
 				this.timeLabel[0].string = '起始时间：' + '????';
 				this.timeLabel[1].string = '结束时间:' + '????';
 			} else {
-				this.timeLabel[0].string = ComUtils.formatTime(GameCfg.enterGameCache.startTime);
+				this.timeLabel[0].string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
 				this.timeLabel[1].string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
 			}
 

@@ -46,10 +46,16 @@ export default class NewClass extends cc.Component {
 
         }, this);
 
+        if (GameCfg.GameType == pb.GameType.QiHuo) {
+            this.selectLine.active = true;
+        }
+
         this.initData();
 
         this.setColor();
     }
+
+
 
     protected onDestroy() {
 
@@ -165,18 +171,14 @@ export default class NewClass extends cc.Component {
         let j = 0;
         //双盲 定向   
         if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.QiHuo) {
-
             for (let i = 1; i <= 6; i++) {
                 if (GameCfg.GameSet['isMA' + i]) {
                     GameCfg.MAs[j++] = GameCfg.GameSet['MA' + i + 'Date'];
                 }
             }
-
         }
         //指标
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-            GameCfg.VOLGraph = [];
-
             if (GameCfg.GameSet.select == '均线') {
                 if (GameCfg.GameSet.strategy == '股价穿越均线') {
                     GameCfg.MAs.push(GameCfg.GameSet.MA[0]);
@@ -190,6 +192,7 @@ export default class NewClass extends cc.Component {
                     GameCfg.MAs = ma;
                 }
             } else if (GameCfg.GameSet.select == 'MACD') {
+                GameCfg.MACD = GameCfg.GameSet.MACD;
                 if (GameCfg.GameSet.strategy == 'MACD金叉') {
 
                 } else if (GameCfg.GameSet.strategy == '0轴穿越') {
@@ -201,7 +204,9 @@ export default class NewClass extends cc.Component {
                 } else if (GameCfg.GameSet.strategy == '经典用法') {
 
                 }
+
             } else if (GameCfg.GameSet.select == 'BOLL') {
+                GameCfg.BOLL = GameCfg.GameSet.BOLL;
                 if (GameCfg.GameSet.strategy == '布林带中轨') {
 
                 } else if (GameCfg.GameSet.strategy == '单边突破上轨') {
@@ -212,6 +217,7 @@ export default class NewClass extends cc.Component {
 
                 }
             } else if (GameCfg.GameSet.select == 'KDJ') {
+                GameCfg.KDJ = GameCfg.GameSet.KDJ;
                 if (GameCfg.GameSet.strategy == '超买超卖') {
 
                 } else if (GameCfg.GameSet.strategy == 'KDJ金叉') {
@@ -228,6 +234,7 @@ export default class NewClass extends cc.Component {
 
                 }
             } else if (GameCfg.GameSet.select == 'RSI') {
+                GameCfg.RSI = GameCfg.GameSet.RSI;
                 if (GameCfg.GameSet.strategy == 'RSI金叉') {
 
                 } else if (GameCfg.GameSet.strategy == '超买超卖') {
@@ -236,6 +243,7 @@ export default class NewClass extends cc.Component {
 
                 }
             } else if (GameCfg.GameSet.select == '成交量') {
+                GameCfg.VOLGraph = GameCfg.GameSet.VOL;
                 if (GameCfg.GameSet.strategy == '量柱和均量线') {
                     GameCfg.VOLGraph = GameCfg.GameSet.VOL;
                 }
@@ -243,13 +251,5 @@ export default class NewClass extends cc.Component {
 
         }
     }
-
-    start() {
-        if (GameCfg.GameType == pb.GameType.QiHuo) {
-            this.selectLine.active = true;
-        }
-    }
-
-
 
 }

@@ -24,11 +24,14 @@ export default class NewClass extends cc.Component {
     @property(cc.Graphics)
     drawVol: cc.Graphics = null;
 
+
     @property(cc.Graphics)
-    drawPcm: cc.Graphics = null;
+    drawPCM: cc.Graphics = null;
 
     @property(cc.Graphics)
     drawCcl: cc.Graphics = null;
+
+    VolList = [];            //均量线
 
     // huizhidatas = null;
 
@@ -122,6 +125,15 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     cclLabel: cc.Label = null;
 
+    @property(cc.Node)
+    voltext: cc.Node = null;
+
+
+
+    topVol = 0;     //最高成交量
+
+    bottomVol = 0;  //最低成交量
+
     onLoad() {
         //  this.Mask.active = false;
         GlobalEvent.on('on_off', (flagData) => {
@@ -141,29 +153,20 @@ export default class NewClass extends cc.Component {
                 el.node.active = flagData.rsi;
             })
 
-            this.drawPcm.node.active = flagData.cpm;
+            this.drawPCM.node.active = flagData.cpm;
+
             this.drawVol.node.active = flagData.cpm;
 
             this.drawCcl.node.active = flagData.ccl;
             this.cclLabel.node.active = flagData.ccl;
 
-
-            if (flagData.macd || flagData.kdj || flagData.rsi) {
-                // if (GameCfg.GameType != 3) {
+            this.voltext.active = true;
+            if (flagData.macd || flagData.kdj || flagData.rsi || flagData.ccl) {
                 this.Mask.active = true;
-                // }
-                // this.drawVol.node.zIndex = 1;
-                // this.drawPcm.node.zIndex = 2;
-                // this.Mask.zIndex = 3;
-                // this.drawMACD.node.zIndex = 4;
-                // this.drawKDJ.node.zIndex = 5;
-                // this.drawRSI.node.zIndex = 6;
-
+                this.voltext.active = false;
             } else {
                 this.Mask.active = false
-                // this.drawVol.node.zIndex = 2;
-                // this.drawPcm.node.zIndex = 3;
-                // this.Mask.zIndex = 1;
+                this.voltext.active = true;
             }
 
             this.setLabelValue();
@@ -183,7 +186,7 @@ export default class NewClass extends cc.Component {
 
     //计算数据
     initData() {
-        this.drawMACD.lineWidth = 2;
+
         this.DIFList = DrawData.DIFList;
         this.DEAList = DrawData.DEAList;
         this.MACDList = DrawData.MACDList;
@@ -195,35 +198,24 @@ export default class NewClass extends cc.Component {
         this.Rs6 = DrawData.Rs6;
         this.Rs12 = DrawData.Rs12;
         this.Rs24 = DrawData.Rs24;
+        this.VolList = DrawData.VolList;
     }
 
     protected start() {
         this.drawMACD && (this.drawMACD.node.active = false)
         this.drawKDJ && (this.drawKDJ.node.active = false)
         this.drawRSI && (this.drawRSI.node.active = false)
-        // if (GameCfg.GameType == 3) {
-        //     if (GameCfg.GameSet.select == 'MACD') {
-        //         this.drawMACD.node.active = true;
-        //         this.drawVol.node.active = false;
-        //         this.drawPcm.node.active = false;
-        //     } else if (GameCfg.GameSet.select == 'KDJ') {
-        //         this.drawKDJ.node.active = true;
-        //         this.drawVol.node.active = false;
-        //         this.drawPcm.node.active = false;
-        //     } else if (GameCfg.GameSet.select == 'RSI') {
-        //         this.drawRSI.node.active = true;
-        //         this.drawVol.node.active = false;
-        //         this.drawPcm.node.active = false;
-        //     }
-        // }
+
         this.initData();
         this.onDraw();
+
+        this.onShow();
     }
 
     updataLabel(index) {
         //  console.log(index);
         // index -= 1;
-        let arr = ['MACD(12,26,9) DIF', 'DEA', 'MACD'];
+        let arr = ['MACD(' + GameCfg.MACD[0] + ',' + GameCfg.MACD[1] + ',' + GameCfg.MACD[2] + ') DIF', 'DEA', 'MACD'];
 
         if (this.DIFList[index]) {
             this.MACDLabels[0].string = arr[0] + ': ' + this.DIFList[index].toFixed(2);
@@ -237,7 +229,7 @@ export default class NewClass extends cc.Component {
             this.MACDLabels[2].string = arr[2] + ': ' + this.MACDList[index].toFixed(2);
         }
 
-        let arr1 = ['KDJ(9,3,3) K', 'D', 'J'];
+        let arr1 = ['KDJ(' + GameCfg.KDJ[0] + ',' + GameCfg.KDJ[1] + ',' + GameCfg.KDJ[2] + ') K', 'D', 'J'];
         if (this.Klist[index]) {
             this.KDJLabels[0].string = arr1[0] + ': ' + this.Klist[index].toFixed(2);
         }
@@ -250,7 +242,7 @@ export default class NewClass extends cc.Component {
             this.KDJLabels[2].string = arr1[2] + ': ' + this.jList[index].toFixed(2);
         }
 
-        let arr2 = ['RSI(6,12,24) RSI1', 'RSI2', 'RSI3'];
+        let arr2 = ['RSI(' + GameCfg.RSI[0] + ',' + GameCfg.RSI[1] + ',' + GameCfg.RSI[2] + ') RSI1', 'RSI2', 'RSI3'];
         if (this.Rs6[index]) {
             this.RSILabels[0].string = arr2[0] + ': ' + this.Rs6[index].toFixed(2);
         }
@@ -266,6 +258,11 @@ export default class NewClass extends cc.Component {
             if (GameCfg.data[0].data[index]) {
                 this.cclLabel.string = 'CCL:' + GameCfg.data[0].data[index].ccl_hold;
             }
+        }
+
+        if (GameCfg.data[0].data[index]) {
+            let value = parseFloat(GameCfg.data[0].data[index].value);
+            this.voltext.getComponent(cc.Label).string = 'VOL(5,10): ' + value;
         }
 
     }
@@ -354,6 +351,8 @@ export default class NewClass extends cc.Component {
         this.drawKDJ.clear();
         this.drawMACD.clear();
         this.drawCcl.clear();
+        this.drawPCM.clear();
+        this.drawVol.clear();
         this.minDIF = this.DIFList[cc.ext.beg_end[0]];
         this.maxDIF = this.DIFList[cc.ext.beg_end[0]];
 
@@ -380,6 +379,10 @@ export default class NewClass extends cc.Component {
 
         this.maxRs24 = this.Rs24[cc.ext.beg_end[0]];
         this.minRs24 = this.Rs24[cc.ext.beg_end[0]];
+
+        let viweData = GameCfg.data[0].data;
+        this.topVol = 0;
+        this.bottomVol = viweData[0].value;
 
         if (GameCfg.GameType == pb.GameType.QiHuo && GameCfg.data[0].data[cc.ext.beg_end[0]]) {
             this.maxCcl = GameCfg.data[0].data[cc.ext.beg_end[0]].ccl_hold;
@@ -425,23 +428,30 @@ export default class NewClass extends cc.Component {
                 this.minCcl = Math.min(GameCfg.data[0].data[index].ccl_hold, this.minCcl);
             }
 
+            this.topVol = Math.max(this.topVol, viweData[index].value);
+            this.bottomVol = Math.min(this.bottomVol, viweData[index].value);
+
         }
         this.setLabelValue();
-        // this.setLabelValue('RSI');
-        // this.setLabelValue('MACD');
 
-        //   for (let i = 0; i < this.DIFList.length; i++) {
+        this.drawPCM.lineWidth = 2;
+        this.drawVol.lineWidth = 2;
+        this.drawMACD.lineWidth = 2;
+        this.drawKDJ.lineWidth = 2;
+        this.drawCcl.lineWidth = 2;
+        this.drawRSI.lineWidth = 2;
         for (let i = cc.ext.beg_end[0]; i < cc.ext.beg_end[1]; i++) {
             this.onDrawMACD(i);
             this.onDrawKDJ(i);
             this.onDrawRSI(i);
             this.onDrawCCL(i);
-            //   console.log(i);
+            this.onDrawVol(viweData[i], i);
+
         }
-        // }
+
     }
 
-    onEnable() {
+    onShow() {
 
         this.MACDLabels.forEach((el, index) => {
             if (index == 0) {
@@ -468,6 +478,8 @@ export default class NewClass extends cc.Component {
         }
 
         this.cclLabel.node.color = GameCfg.CCL_COL;
+
+        this.voltext.color = GameCfg.VOLColor[0];
     }
 
     onDrawKDJ(index) {
@@ -499,15 +511,15 @@ export default class NewClass extends cc.Component {
 
         if (index > 0) {
             this.drawKDJ.strokeColor = GameCfg.K_D_J_Line[0];
-            this.drawKDJ.lineWidth = 2;
+
             DrawUtils.drawLine(this.drawKDJ, preX, preky + 30, x, kY + 30);
 
             this.drawKDJ.strokeColor = GameCfg.K_D_J_Line[1];
-            this.drawKDJ.lineWidth = 2;
+
             DrawUtils.drawLine(this.drawKDJ, preX, predy + 30, x, dY + 30);
 
             this.drawKDJ.strokeColor = GameCfg.K_D_J_Line[2];
-            this.drawKDJ.lineWidth = 2;
+
             DrawUtils.drawLine(this.drawKDJ, preX, prejy + 30, x, jY + 30);
         }
     }
@@ -532,7 +544,7 @@ export default class NewClass extends cc.Component {
         let preY = GameCfg.data[0].data[index - 1].ccl_hold / this.maxCcl * bgheight;
 
         this.drawCcl.strokeColor = GameCfg.CCL_COL;
-        this.drawCcl.lineWidth = 2;
+
         DrawUtils.drawLine(this.drawCcl, preX, preY, x, y);
 
     }
@@ -563,7 +575,7 @@ export default class NewClass extends cc.Component {
             //     preRSI6Y = bgHeight;
             // }
             //    if (index > 5) {
-            this.drawRSI.lineWidth = 2;
+
             this.drawRSI.strokeColor = GameCfg.RSI_COLOR[0];
             DrawUtils.drawLine(this.drawRSI, preRSIX, preRSI6Y + 10, RSIX, RSI6Y + 10);
             //    }
@@ -582,7 +594,7 @@ export default class NewClass extends cc.Component {
             //     preRSI12Y = bgHeight;
             // }
             //   if (index > 11) {
-            this.drawRSI.lineWidth = 2;
+
             this.drawRSI.strokeColor = GameCfg.RSI_COLOR[1];
             DrawUtils.drawLine(this.drawRSI, preRSIX, preRSI12Y + 10, RSIX, RSI12Y + 10);
             //  }
@@ -603,7 +615,7 @@ export default class NewClass extends cc.Component {
             //     preRSI24Y = 150;
             // }
             //   if (index > 23) {
-            this.drawRSI.lineWidth = 2;
+
             this.drawRSI.strokeColor = GameCfg.RSI_COLOR[2];
             DrawUtils.drawLine(this.drawRSI, preRSIX, preRSI24Y + 10, RSIX, RSI24Y + 10);
             //  }
@@ -687,9 +699,72 @@ export default class NewClass extends cc.Component {
         }
     }
 
+    //成交量绘制
+    onDrawVol(el, index) {
+
+        let some = index - cc.ext.beg_end[0];
+
+        let initY = 0;
+        let drawBox = 150;
+        let disVol = this.topVol - this.bottomVol;
+
+        let startX = some == 0 ? 10 : 10 + (some * cc.ext.hz_width);
+        // // console.log('startX='+startX);
+        let endX = 10 + ((some + 1) * cc.ext.hz_width);
+
+        let hight = el.value * (150 / this.topVol);
+
+        let width = endX - startX;
+
+        this.drawRect(this.drawVol, startX, 0, width, hight, el.open > el.close);
+
+        //均量线 白
+        if (!this.VolList[index]) {
+            return;
+        }
+
+        //每段数据绘制
+        for (let i = 0; i < GameCfg.VOLGraph.length; i++) {
+            if (index >= GameCfg.VOLGraph[i]) {
+
+                let preY = this.VolList[index - 1][i] * (150 / this.topVol);
+                let preX = 10 + ((some - 1) * cc.ext.hz_width) + width / 2
+
+                //平均的位置
+                let VOlPointY = this.VolList[index][i] * (150 / this.topVol);
+                let VOlPointX = startX + width / 2;
+
+                this.drawPCM.strokeColor = GameCfg.VOLColor[i];
+                DrawUtils.drawLine(this.drawPCM, preX, preY, VOlPointX, VOlPointY);
+            }
+        }
+    }
+
 
     protected onDestroy() {
         GlobalEvent.off('onDraw');
         GlobalEvent.off('updataLabel')
+    }
+
+    //画框
+    drawRect(ctx, x, y, w, h, flag?) {
+        let col;
+        if (flag) {
+            if (GameCfg.GameSet.isBW) {
+                col = new cc.Color().fromHEX('#54ffff');
+            } else {
+                col = new cc.Color().fromHEX('#00BA50');
+            }
+            ctx.strokeColor = col;
+        } else if (flag != undefined) {
+            if (GameCfg.GameSet.isBW) {
+                col = new cc.Color().fromHEX('#ea233b');
+            } else {
+                col = new cc.Color().fromHEX('#e2233e');
+            }
+            ctx.strokeColor = col;
+            col = null;
+        }
+        DrawUtils.drawRect(ctx, x + 3, y, w - 3, h, col);
     }
 }
