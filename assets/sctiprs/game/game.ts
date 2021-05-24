@@ -105,6 +105,9 @@ export default class NewClass extends cc.Component {
             // GameCfg.CCL_COL = new cc.Color().fromHEX('#808080');
             GameCfg.CCL_COL = cc.Color.WHITE;
 
+            GameCfg.EXPMA_COL[0] = new cc.Color().fromHEX('#ffffff');
+            GameCfg.EXPMA_COL[1] = new cc.Color().fromHEX('#ebeb12');
+
         }
         //百地
         else {
@@ -141,6 +144,9 @@ export default class NewClass extends cc.Component {
 
             //GameCfg.CCL_COL = new cc.Color().fromHEX('#808080');
             GameCfg.CCL_COL = cc.Color.BLACK;
+
+            GameCfg.EXPMA_COL[0] = new cc.Color().fromHEX('#03004c');
+            GameCfg.EXPMA_COL[1] = new cc.Color().fromHEX('#f39800');
         }
 
     }
@@ -228,6 +234,7 @@ export default class NewClass extends cc.Component {
 
                 }
             } else if (GameCfg.GameSet.select == 'EXPMA') {
+                GameCfg.EXPMA = GameCfg.GameSet.EXPMA;
                 if (GameCfg.GameSet.strategy == 'EXPMA金叉') {
 
                 } else if (GameCfg.GameSet.strategy == '经典用法') {

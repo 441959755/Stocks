@@ -523,12 +523,16 @@ export default class NewClass extends cc.Component {
 				let m, d;
 				if (GameData.DXSet.month.length < 2) {
 					m = '0' + GameData.DXSet.month.length;
+				} else {
+					m = GameData.DXSet.month;
 				}
 				if (GameData.DXSet.day.length < 2) {
 					d = '0' + GameData.DXSet.day;
+				} else {
+					d = GameData.DXSet.day;
 				}
 				let seletTime = GameData.DXSet.year + '' + m + '' + d;
-				items = GameCfgText.getTimeByCodeName(seletTime);
+				items = GameCfgText.getItemsByTime(seletTime);
 				data.code = items[0];
 			}
 

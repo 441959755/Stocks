@@ -21,6 +21,8 @@ export default class NewClass extends cc.Component {
     rsi = null;
     ccl = null;
 
+    EXPMA = null;
+
     rZoom = null;
 
     tipsText: cc.Label[] = [];
@@ -223,7 +225,7 @@ export default class NewClass extends cc.Component {
                 this.setBoxfalg('KDJ');
             }
             else if (GameCfg.GameSet.select == 'EXPMA') {
-                this.setBoxfalg('ma');
+                this.setBoxfalg('EXPMA');
                 this.setBoxfalg('CPM');
             }
             else if (GameCfg.GameSet.select == 'RSI') {
@@ -316,7 +318,8 @@ export default class NewClass extends cc.Component {
 
     setBoxfalg(data) {
 
-        this.rightBox.getChildByName(data).color = new cc.Color().fromHEX('#fd4432');
+        let node = this.rightBox.getChildByName(data);
+        node && (node.color = new cc.Color().fromHEX('#fd4432'))
         if (data == 'ma' || data == 'boll') {
             if (data == 'ma') {
                 this.ma = true;
@@ -378,16 +381,22 @@ export default class NewClass extends cc.Component {
                 this.rightBox.getChildByName('MACD').color = new cc.Color().fromHEX('#808080');
                 this.rightBox.getChildByName('KDJ').color = new cc.Color().fromHEX('#808080');
                 this.rightBox.getChildByName('RSI').color = new cc.Color().fromHEX('#808080');
+            } else if (data == 'EXPMA') {
+                this.ma = false;
+                this.boll = false;
+                this.EXPMA = true;
             }
         }
 
         let flagData = {
-            maboll: this.ma,
+            ma: this.ma,
+            boll: this.boll,
             cpm: this.cpm,
             macd: this.macd,
             kdj: this.kdj,
             rsi: this.rsi,
             ccl: this.ccl,
+            expma: this.EXPMA,
         }
 
         //是否一直显示

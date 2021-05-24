@@ -178,8 +178,12 @@ export default class GameCfgText {
         let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
         while (le--) {
             let items = GameCfgText.stockList[le].split('|');
-
+            let str;
+            if (items[3] == 0) {
+                str = ComUtils.getCurYearMonthDay();
+            }
             if (parseInt(time) - parseInt(items[2]) > 100) {
+
                 //  if (items[3] == 0) {
                 return items;
                 // } else 

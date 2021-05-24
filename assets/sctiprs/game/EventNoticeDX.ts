@@ -35,7 +35,6 @@ export default class NewClass extends cc.Component {
                 this.testKFrom();
             }
 
-
         }, this);
 
         GlobalEvent.on('updateRate', (data) => {
@@ -59,7 +58,6 @@ export default class NewClass extends cc.Component {
                 this.timeCall = null;
             }, 3000);
 
-
         }, this);
 
         if (GameCfg.GAMEFUPAN) {
@@ -77,7 +75,6 @@ export default class NewClass extends cc.Component {
             });
         }
     }
-
 
     testKFrom() {
 
@@ -870,35 +867,6 @@ export default class NewClass extends cc.Component {
             GameCfg.notice.push([id, GameCfg.huizhidatas - 1]);
         }
     }
-
-    // ////曙光初现
-    // isSGCX(rate1, data, index) {
-    //     if (rate1 >= -0.105 && rate1 < -0.03) {
-    //         if (data[index].open < data[index - 1].close) {
-    //             if (data[index - 1].open >= data[index].close && data[index].close >= (data[index - 1].open + data[index - 1].close) / 2) {
-    //                 ////曙光初现
-    //                 return true;
-    //             }
-    //         }
-    //     }
-    //     return false;
-    // }
-
-    // //////旭日东升：
-    // /*
-    // /@ rate1 
-    // */
-    // isXRDS(rate1, data, index) {
-    //     if (rate1 >= -0.105 && rate1 < -0.03) {
-    //         if (data[index].open >= data[index - 1].open + data[index - 1].close / 2) {
-    //             if (data[index].close > data[index - 1].open) {
-    //                 ////旭日东升：
-    //                 return true;
-    //             }
-    //         }
-    //     }
-    //     return false;
-    // }
 
     //检测均线策略
     testMaEvent() {

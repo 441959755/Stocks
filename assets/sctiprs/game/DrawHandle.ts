@@ -20,13 +20,19 @@ export default class NewClass extends cc.Component {
     @property(cc.Graphics)
     drawBOLL: cc.Graphics = null;
 
+    @property(cc.Graphics)
+    drawEXPMA: cc.Graphics = null;
+
     disValue = 0;       //当前绘制的最高值-当前绘制最低值
 
     MaList = [];
 
     BollList = [];           //Boll的前一个绘制点
 
+    maxEXPMA = null;
 
+    EXPMA1 = [];
+    EXPMA2 = [];
 
     @property(cc.Label)
     part1: cc.Label = null;  //分线1
@@ -72,6 +78,9 @@ export default class NewClass extends cc.Component {
 
     bottomValue = 0;  //当前绘制最低值
 
+    @property([cc.Label])
+    EXPMALabel: cc.Label[] = [];
+
     onLoad() {
         GlobalEvent.on(EventCfg.CLICKMOVE, (data) => {
             if (data == 'pre') {
@@ -92,13 +101,18 @@ export default class NewClass extends cc.Component {
 
         //ma boll pcm
         GlobalEvent.on('on_off', (flagData) => {
-            this.drawMA.node.active = flagData.maboll;
+            this.drawMA.node.active = flagData.ma;
             this.MAla.forEach(el => {
-                el.node.active = flagData.maboll;
+                el.node.active = flagData.ma;
             })
-            this.drawBOLL.node.active = !flagData.maboll;
+            this.drawBOLL.node.active = flagData.boll;
             this.BOLLLabel.forEach(el => {
-                el.node.active = !flagData.maboll;
+                el.node.active = flagData.boll;
+            })
+            this.drawEXPMA.node.active = flagData.expma;
+            //   this.EXPMALabel..active = flagData.expma;
+            this.EXPMALabel.forEach(el => {
+                el.node.active = flagData.expma;
             })
         }, this);
 
@@ -358,6 +372,7 @@ export default class NewClass extends cc.Component {
         }
         this.setMALabelInfo(index);
         this.setBOLLLabelInfo(index);
+        this.setEXPMALabelInfo(index)
         GlobalEvent.emit('updataLabel', index);
     }
 
@@ -396,6 +411,14 @@ export default class NewClass extends cc.Component {
         }
     }
 
+    setEXPMALabelInfo(index) {
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            let arr = ['EXPMA(' + GameCfg.EXPMA[0] + ',' + GameCfg.EXPMA[1] + ') EXP1: ', ' EXP2: '];
+            this.EXPMALabel[0].string = arr[0] + (this.EXPMA1[index]).toFixed(2);
+            this.EXPMALabel[2].string = arr[1] + (this.EXPMA2[index]).toFixed(2);
+        }
+    }
+
 
 
     onShow() {
@@ -405,6 +428,8 @@ export default class NewClass extends cc.Component {
             el.node.color = GameCfg.BOLLColor[t];
             el.node.active = false;
         })
+
+
 
     }
 
@@ -429,11 +454,12 @@ export default class NewClass extends cc.Component {
         this.drawBg.clear();
         this.drawMA.clear();
         this.drawBOLL.clear();
-
+        this.drawEXPMA.clear();
 
         this.drawBg.lineWidth = 2;
         this.drawMA.lineWidth = 2;
         this.drawBOLL.lineWidth = 2;
+        this.drawEXPMA.lineWidth = 2;
 
         if (cc.winSize.width > this.node.width) {
             this.drawBordWidth = 1280;
@@ -452,10 +478,15 @@ export default class NewClass extends cc.Component {
 
         this.topValue = 0;
         //  this.topVol = 0;
-
+        // this.maxEXPMA = 0;
         for (let i = cc.ext.beg_end[0]; i < cc.ext.beg_end[1]; i++) {
             this.topValue = Math.max(this.topValue, viweData[i].high);     //最高价
             this.bottomValue = Math.min(this.bottomValue, viweData[i].low); //最低价
+
+            // if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            //     this.maxEXPMA = Math.max(this.EXPMA2[i], this.maxEXPMA);
+            //     this.maxEXPMA = Math.max(this.EXPMA1[i], this.maxEXPMA);
+            // }
 
         }
 
@@ -474,7 +505,9 @@ export default class NewClass extends cc.Component {
 
             this.onDrawBoll(index);
 
-
+            if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                this.onDrawEXPMA(index);
+            }
         }
 
     }
@@ -508,6 +541,9 @@ export default class NewClass extends cc.Component {
         this.MaList = DrawData.MaList;
         this.BollList = DrawData.BollList;
 
+        this.EXPMA1 = DrawData.EXPMA1;
+        this.EXPMA2 = DrawData.EXPMA2;
+
     }
 
     //曲线MA
@@ -529,8 +565,31 @@ export default class NewClass extends cc.Component {
 
                 this.drawMA.strokeColor = GameCfg.MAColor[i];
                 this.drawLine(this.drawMA, preMAX, preMAY, MAX, MAY, i);
+
             }
         }
+    }
+
+    onDrawEXPMA(index) {
+        let drawBox = this.drawEXPMA.node.height;
+        if (index > 0) {
+            let prey1 = (this.EXPMA1[index - 1] - this.bottomValue) / this.disValue * drawBox;
+            let prex = 10 + ((index - 1 - cc.ext.beg_end[0]) * cc.ext.hz_width) + cc.ext.hz_width / 2;
+
+            let y1 = (this.EXPMA1[index] - this.bottomValue) / this.disValue * drawBox;
+            let x = 10 + ((index - cc.ext.beg_end[0]) * cc.ext.hz_width) + cc.ext.hz_width / 2;
+
+            let prey2 = (this.EXPMA2[index - 1] - this.bottomValue) / this.disValue * drawBox;
+            let y2 = (this.EXPMA2[index] - this.bottomValue) / this.disValue * drawBox;
+
+            this.drawEXPMA.strokeColor = GameCfg.EXPMA_COL[0];
+            this.drawLine(this.drawEXPMA, prex, prey1, x, y1);
+
+
+            this.drawEXPMA.strokeColor = GameCfg.EXPMA_COL[1];
+            this.drawLine(this.drawEXPMA, prex, prey2, x, y2);
+        }
+
     }
 
     //绘制蜡烛线 曲线 、宝塔线

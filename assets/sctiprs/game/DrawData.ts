@@ -52,6 +52,10 @@ export default class DrawData {
     public static arrDay = [];
     public static arrDay7 = [];
 
+    public static EXPMA1 = [];
+
+    public static EXPMA2 = [];
+
     public static dataChange(time, type, arr) {
 
         time = ComUtils.getTimestamp(time);
@@ -177,8 +181,26 @@ export default class DrawData {
         this.Rs6 = [];
         this.Rs12 = [];
         this.Rs24 = [];
+
+        this.EXPMA1 = [];
+        this.EXPMA2 = [];
+
         try {
             data.forEach((el, index) => {
+
+                if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                    if (index == 0) {
+                        this.EXPMA1.push(el.close);
+                        this.EXPMA2.push(el.close);
+                    } else {
+                        let EXPMA1, EXPMA2;
+                        EXPMA1 = (el.close - this.EXPMA1[index - 1]) * 2 / (GameCfg.EXPMA[0] + 1) + this.EXPMA1[index - 1];
+
+                        EXPMA2 = (el.close - this.EXPMA2[index - 1]) * 2 / (GameCfg.EXPMA[1] + 1) + this.EXPMA2[index - 1];
+                        this.EXPMA1.push(EXPMA1);
+                        this.EXPMA2.push(EXPMA2);
+                    }
+                }
 
                 //ma
                 if (index + 1 >= GameCfg.MAs[0]) {
