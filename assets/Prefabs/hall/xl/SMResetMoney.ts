@@ -30,7 +30,7 @@ export default class NewClass extends cc.Component {
 
                 if (data && !data.code) {
                     this.node.active = false;
-                    GlobalEvent.emit('EventCfg.TIPSTEXTSHOW', '双盲本月当前金币重置成功。');
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '双盲本月当前金币重置成功。');
 
                 } else {
                     console.log('重置失败' + JSON.stringify(data));

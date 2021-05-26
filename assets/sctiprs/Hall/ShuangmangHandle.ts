@@ -33,6 +33,11 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.SMINITFUND, () => {
             this.curla.string = GameData.SmxlState.gold;
             this.initLa.string = GameData.SmxlState.goldInit;
+            //是否重置
+            this.CZBtn.active = false;
+            if (GameData.SmxlState.gold < 10000) {
+                this.CZBtn.active = true;
+            }
         }, this);
     }
 
@@ -48,7 +53,7 @@ export default class NewClass extends cc.Component {
 
         //是否重置
         this.CZBtn.active = false;
-        if (GameData.ShuangMangCount <= 0) {
+        if (GameData.SmxlState.gold < 10000) {
             this.CZBtn.active = true;
         }
     }
@@ -57,13 +62,15 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         //点击双盲训练
         if (name == 'startSMBtn') {
-            // if (GameData.properties[3] < 10000) {
-            //     if (GameData.ShuangMangCount <= 0) {
-            //         GlobalEvent.emit(EventCfg.OPENSMRESETMONEYLAYER);
-            //     } else {
-            //         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的金币不足，请点击重置，免费重置金币！');
-            //     }
-            // }
+            if (GameData.SmxlState.gold < 10000) {
+                if (GameData.ShuangMangCount <= 0) {
+                    GlobalEvent.emit(EventCfg.OPENSMRESETMONEYLAYER);
+                    return;
+                } else {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的金币不足，请点击重置，免费重置金币！');
+                    return;
+                }
+            }
 
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.GAMEFUPAN = false;

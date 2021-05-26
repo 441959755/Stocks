@@ -148,7 +148,7 @@ export default class NewClass extends cc.Component {
             return;
         }
 
-        let info1 = GameCfg.info;
+        let info1 = JSON.parse(JSON.stringify(GameCfg.info));
         if (GameCfg.GameType == pb.GameType.DingXiang) {
             let code = info1.code;
             if (code.indexOf('60') != -1 || code.indexOf('688') != -1) {

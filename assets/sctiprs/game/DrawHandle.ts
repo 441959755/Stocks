@@ -415,7 +415,7 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             let arr = ['EXPMA(' + GameCfg.EXPMA[0] + ',' + GameCfg.EXPMA[1] + ') EXP1: ', ' EXP2: '];
             this.EXPMALabel[0].string = arr[0] + (this.EXPMA1[index]).toFixed(2);
-            this.EXPMALabel[2].string = arr[1] + (this.EXPMA2[index]).toFixed(2);
+            this.EXPMALabel[1].string = arr[1] + (this.EXPMA2[index]).toFixed(2);
         }
     }
 

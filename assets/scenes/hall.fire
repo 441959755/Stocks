@@ -195,7 +195,7 @@
       "array": [
         0,
         0,
-        458.1274386019681,
+        457.25482821239444,
         0,
         0,
         0,
@@ -12170,7 +12170,7 @@
       "__id__": 258
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 262
@@ -12246,7 +12246,7 @@
       "__uuid__": "31cf9490-c8be-4a95-b5b1-adb42ad4e327"
     },
     "_type": 0,
-    "_sizeMode": 2,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",

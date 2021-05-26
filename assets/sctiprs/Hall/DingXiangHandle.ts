@@ -539,7 +539,9 @@ export default class NewClass extends cc.Component {
 		} else {
 			let dex = -1;
 			let arrStr = GameData.DXSet.search.split(' ');
-			data.code = arrStr[0];
+			//	data.code = arrStr[0];
+			items = GameCfgText.getGPItemInfo(arrStr[0])
+			data.code = items[0];
 		}
 
 		if (GameData.DXSet.market == '随机行情') {

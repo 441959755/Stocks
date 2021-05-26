@@ -883,22 +883,25 @@ export default class NewClass extends cc.Component {
             //  if()
             let ma60 = GameCfg.MAs.indexOf(60);
             let ma120 = GameCfg.MAs.indexOf(120);
+            if (index >= 120 - 1) {
+                if (malist[index - 1][ma60] < malist[index - 1][ma120]) {
+                    if (malist[index][ma60] >= malist[index][ma120]) {
+                        //todo  生成事件栏
+                        //MA60上穿MA120
+                        //    this.onCreateTipsItem('MA60上穿MA120');
+                        this.onCreateTipsItem(16);
 
-            if (malist[index - 1][ma60] < malist[index - 1][ma120]) {
-                if (malist[index][ma60] >= malist[index][ma120]) {
-                    //todo  生成事件栏
-                    //MA60上穿MA120
-                    //    this.onCreateTipsItem('MA60上穿MA120');
-                    this.onCreateTipsItem(16);
-
-                }
-            } else if (malist[index - 1][ma60] > malist[index - 1][ma120]) {
-                if (malist[index][ma60] <= malist[index][ma120]) {
-                    //MA60下穿MA120
-                    // this.onCreateTipsItem('MA60下穿MA120');
-                    this.onCreateTipsItem(22);
+                    }
+                } else if (malist[index - 1][ma60] > malist[index - 1][ma120]) {
+                    if (malist[index][ma60] <= malist[index][ma120]) {
+                        //MA60下穿MA120
+                        // this.onCreateTipsItem('MA60下穿MA120');
+                        this.onCreateTipsItem(22);
+                    }
                 }
             }
+
+
         }
 
         if (GameCfg.MAs.indexOf(30) != -1 && GameCfg.MAs.indexOf(60) != -1) {
@@ -906,112 +909,123 @@ export default class NewClass extends cc.Component {
             let ma30 = GameCfg.MAs.indexOf(30);
             let ma60 = GameCfg.MAs.indexOf(60);
 
-            if (malist[index - 1][ma30] < malist[index - 1][ma60]) {
-                if (malist[index][ma30] >= malist[index][ma60]) {
-                    //todo  生成事件栏
-                    //MA30上穿MA60
-                    //  this.onCreateTipsItem('MA30上穿MA60');
-                    this.onCreateTipsItem(15);
+            if (index >= 60 - 1) {
+                if (malist[index - 1][ma30] < malist[index - 1][ma60]) {
+                    if (malist[index][ma30] >= malist[index][ma60]) {
+                        //todo  生成事件栏
+                        //MA30上穿MA60
+                        //  this.onCreateTipsItem('MA30上穿MA60');
+                        this.onCreateTipsItem(15);
 
-                }
-            } else if (malist[index - 1][ma30] > malist[index - 1][ma60]) {
-                if (malist[index][ma30] <= malist[index][ma60]) {
-                    //MA30下穿MA60
-                    //  this.onCreateTipsItem('MA30下穿MA60');
-                    this.onCreateTipsItem(21);
+                    }
+                } else if (malist[index - 1][ma30] > malist[index - 1][ma60]) {
+                    if (malist[index][ma30] <= malist[index][ma60]) {
+                        //MA30下穿MA60
+                        //  this.onCreateTipsItem('MA30下穿MA60');
+                        this.onCreateTipsItem(21);
+                    }
                 }
             }
+
         }
 
         if (GameCfg.MAs.indexOf(10) != -1 && GameCfg.MAs.indexOf(30) != -1) {
             let ma10 = GameCfg.MAs.indexOf(10);
             let ma30 = GameCfg.MAs.indexOf(30);
+            if (index >= 30 - 1) {
+                if (malist[index - 1][ma10] < malist[index - 1][ma30]) {
+                    if (malist[index][ma10] >= malist[index][ma30]) {
+                        //todo  生成事件栏
+                        //MA10上穿MA30
+                        //  this.onCreateTipsItem('MA10上穿MA30');
+                        this.onCreateTipsItem(14);
 
-            if (malist[index - 1][ma10] < malist[index - 1][ma30]) {
-                if (malist[index][ma10] >= malist[index][ma30]) {
-                    //todo  生成事件栏
-                    //MA10上穿MA30
-                    //  this.onCreateTipsItem('MA10上穿MA30');
-                    this.onCreateTipsItem(14);
-
-                }
-            } else if (malist[index - 1][ma10] > malist[index - 1][ma30]) {
-                if (malist[index][ma10] <= malist[index][ma30]) {
-                    //MA10下穿MA30
-                    // this.onCreateTipsItem('MA10下穿MA30');
-                    this.onCreateTipsItem(20);
+                    }
+                } else if (malist[index - 1][ma10] > malist[index - 1][ma30]) {
+                    if (malist[index][ma10] <= malist[index][ma30]) {
+                        //MA10下穿MA30
+                        // this.onCreateTipsItem('MA10下穿MA30');
+                        this.onCreateTipsItem(20);
+                    }
                 }
             }
+
         }
 
         if (GameCfg.MAs.indexOf(10) != -1 && GameCfg.MAs.indexOf(20) != -1) {
             let ma10 = GameCfg.MAs.indexOf(10);
             let ma20 = GameCfg.MAs.indexOf(20);
+            if (index >= 20 - 1) {
+                if (malist[index - 1][ma10] < malist[index - 1][ma20]) {
+                    if (malist[index][ma10] >= malist[index][ma20]) {
+                        //todo  生成事件栏
+                        //MA10上穿MA20
+                        // this.onCreateTipsItem('MA10上穿MA20');
+                        this.onCreateTipsItem(13);
 
-            if (malist[index - 1][ma10] < malist[index - 1][ma20]) {
-                if (malist[index][ma10] >= malist[index][ma20]) {
-                    //todo  生成事件栏
-                    //MA10上穿MA20
-                    // this.onCreateTipsItem('MA10上穿MA20');
-                    this.onCreateTipsItem(13);
+                    }
+                } else if (malist[index - 1][ma10] > malist[index - 1][ma20]) {
+                    if (malist[index][ma10] <= malist[index][ma20]) {
+                        //todo  生成事件栏
+                        //MA10下穿MA20
+                        //  this.onCreateTipsItem('MA10下穿MA20');
+                        this.onCreateTipsItem(19);
 
-                }
-            } else if (malist[index - 1][ma10] > malist[index - 1][ma20]) {
-                if (malist[index][ma10] <= malist[index][ma20]) {
-                    //todo  生成事件栏
-                    //MA10下穿MA20
-                    //  this.onCreateTipsItem('MA10下穿MA20');
-                    this.onCreateTipsItem(19);
-
+                    }
                 }
             }
+
         }
 
         if (GameCfg.MAs.indexOf(5) != -1 && GameCfg.MAs.indexOf(20) != -1) {
             let ma5 = GameCfg.MAs.indexOf(5);
             let ma20 = GameCfg.MAs.indexOf(20);
+            if (index >= 20 - 1) {
+                if (malist[index - 1][ma5] < malist[index - 1][ma20]) {
+                    if (malist[index][ma5] >= malist[index][ma20]) {
+                        //todo  生成事件栏
+                        //MA5上穿MA20
+                        // this.onCreateTipsItem('MA5上穿MA20');
+                        this.onCreateTipsItem(12);
 
-            if (malist[index - 1][ma5] < malist[index - 1][ma20]) {
-                if (malist[index][ma5] >= malist[index][ma20]) {
-                    //todo  生成事件栏
-                    //MA5上穿MA20
-                    // this.onCreateTipsItem('MA5上穿MA20');
-                    this.onCreateTipsItem(12);
+                    }
+                } else if (malist[index - 1][ma5] > malist[index - 1][ma20]) {
+                    if (malist[index][ma5] <= malist[index][ma20]) {
+                        //todo  生成事件栏
+                        //MA5下穿MA20
+                        // this.onCreateTipsItem('MA5下穿MA20');
+                        this.onCreateTipsItem(18);
 
-                }
-            } else if (malist[index - 1][ma5] > malist[index - 1][ma20]) {
-                if (malist[index][ma5] <= malist[index][ma20]) {
-                    //todo  生成事件栏
-                    //MA5下穿MA20
-                    // this.onCreateTipsItem('MA5下穿MA20');
-                    this.onCreateTipsItem(18);
-
+                    }
                 }
             }
+
         }
 
 
         if (GameCfg.MAs.indexOf(5) != -1 && GameCfg.MAs.indexOf(10) != -1) {
             let ma5 = GameCfg.MAs.indexOf(5);
             let ma10 = GameCfg.MAs.indexOf(10);
+            if (index >= 10 - 1) {
+                if (malist[index - 1][ma5] < malist[index - 1][ma10]) {
+                    if (malist[index][ma5] >= malist[index][ma10]) {
+                        //todo  生成事件栏
+                        //MA5上穿MA10
+                        //   this.onCreateTipsItem('MA5上穿MA10');
+                        this.onCreateTipsItem(11);
 
-            if (malist[index - 1][ma5] < malist[index - 1][ma10]) {
-                if (malist[index][ma5] >= malist[index][ma10]) {
-                    //todo  生成事件栏
-                    //MA5上穿MA10
-                    //   this.onCreateTipsItem('MA5上穿MA10');
-                    this.onCreateTipsItem(11);
+                    }
+                } else if (malist[index - 1][ma5] > malist[index - 1][ma10]) {
+                    if (malist[index][ma5] <= malist[index][ma10]) {
+                        //todo  生成事件栏
+                        //MA5下穿MA10
+                        // this.onCreateTipsItem('MA5下穿MA10');
+                        this.onCreateTipsItem(17);
 
-                }
-            } else if (malist[index - 1][ma5] > malist[index - 1][ma10]) {
-                if (malist[index][ma5] <= malist[index][ma10]) {
-                    //todo  生成事件栏
-                    //MA5下穿MA10
-                    // this.onCreateTipsItem('MA5下穿MA10');
-                    this.onCreateTipsItem(17);
-
+                    }
                 }
             }
+
         }
     }
 
