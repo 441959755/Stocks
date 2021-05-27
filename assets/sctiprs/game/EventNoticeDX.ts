@@ -45,6 +45,9 @@ export default class NewClass extends cc.Component {
 
 
         GlobalEvent.on('clickTipsInfoPos', (data) => {
+            if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                return
+            }
             let locPos = this.content.parent.parent.convertToNodeSpaceAR(data.pos);
             this.tipsLabel.node.parent.y = locPos.y;
             this.tipsLabel.string = data.str;

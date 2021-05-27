@@ -10,6 +10,17 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
+    @property(cc.Node)
+    content: cc.Node = null;
+
+    @property(cc.Prefab)
+    itemNotice: cc.Prefab = null;
+
+    @property(cc.Label)
+    tipsLabel: cc.Label = null;
+
+    timeCall = null;
+
     gpData = null;
 
     maList = null;
@@ -37,6 +48,18 @@ export default class NewClass extends cc.Component {
     disMin = 0;
     disMax = 0;
 
+    BollState = 0;
+
+    EXPMA1 = null;
+    EXPMA2 = null;
+
+    RSI1 = null;
+    RSI2 = null;
+    RSI3 = null;
+
+    RSIState = 0;
+
+    VOlList = null;
 
     onLoad() {
         GlobalEvent.on(EventCfg.SLGEVENTNOTICE, () => {
@@ -51,8 +74,37 @@ export default class NewClass extends cc.Component {
                 else if (GameCfg.GameSet.select == 'BOLL') {
                     this.testBOLLEvent();
                 }
+                else if (GameCfg.GameSet.select == 'EXPMA') {
+                    this.testEXPMAEvent();
+                }
+
+                else if (GameCfg.GameSet.select == 'RSI') {
+                    this.testRSIEvent();
+                }
+                else if (GameCfg.GameSet.select == '成交量') {
+                    this.testVOLEvetnt();
+                }
             }
         })
+
+        GlobalEvent.on('clickTipsInfoPos', (data) => {
+            if (GameCfg.GameType != pb.GameType.ZhiBiao) {
+                return
+            }
+            let locPos = this.content.parent.parent.convertToNodeSpaceAR(data.pos);
+            this.tipsLabel.node.parent.y = locPos.y;
+            this.tipsLabel.string = data.str;
+            this.tipsLabel.node.parent.active = true;
+            if (this.timeCall) {
+                clearTimeout(this.timeCall);
+            }
+            this.timeCall = setTimeout(() => {
+                this.tipsLabel.node.parent.active = false;
+                clearTimeout(this.timeCall);
+                this.timeCall = null;
+            }, 3000);
+
+        }, this);
     }
 
     initData() {
@@ -68,6 +120,15 @@ export default class NewClass extends cc.Component {
         this.JList = DrawData.jList;
 
         this.BollList = DrawData.BollList;
+
+        this.EXPMA1 = DrawData.EXPMA1;
+        this.EXPMA2 = DrawData.EXPMA2;
+
+        this.RSI1 = DrawData.Rs6;
+        this.RSI2 = DrawData.Rs12;
+        this.RSI3 = DrawData.Rs24;
+
+        this.VOlList = DrawData.VolList;
     }
 
 
@@ -379,8 +440,348 @@ export default class NewClass extends cc.Component {
     testBOLLEvent() {
         let index = GameCfg.huizhidatas - 1;
 
+        let dis = this.BollList[index][1] - this.BollList[index][2];
+        if (!this.disMin) {
+            this.disMin = dis;
+        }
+        this.disMax = Math.max(dis, this.disMax);
+        this.disMin = Math.min(dis, this.disMin);
+        if (dis > 1.5 * this.disMin) {
+            this.BollState = 1;
+        } else if (dis <= this.disMax * 2 / 3) {
+            this.BollState = 2;
+        }
 
 
+        //1) 股价突破中轨
+        if (this.gpData[index - 1].low <= this.BollList[index - 1][0] && this.gpData[index - 1].close > this.BollList[index - 1][0]) {
+            if (this.BollList[index][0] >= this.BollList[index - 1][0]) {
+                if (this.BollList[index][1] >= this.BollList[index - 1][1]) {
+                    if (this.gpData[index].close > this.BollList[index][0]) {
+                        let preMax = Math.max(this.gpData[index - 1].open, this.gpData[index - 1].close);
+                        if (this.gpData[index].close > preMax) {
+                            if (this.gpData[index].low > this.gpData[index - 1].low) {
+                                //B
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //2)股价跌破中轨
+        if (this.gpData[index - 1].close >= this.BollList[index - 1][0]) {
+            if (this.gpData[index].close < this.BollList[index][0]) {
+                //s
+            }
+        }
+
+        //3）股价触碰上轨
+        if (this.gpData[index].high >= this.BollList[index][1]) {
+            if (this.gpData[index].close < this.BollList[index][1]) {
+
+                if (this.BollList[index][0] <= this.BollList[index - 1][0]) {
+                    //s
+                }
+                else if (this.BollList[index][0] > this.BollList[index - 1][0]) {
+                    if (this.BollList[index][1] <= this.BollList[index - 1][1] || this.BollList[index][2] <= this.BollList[index - 1][2]) {
+                        //s
+                    }
+                }
+
+            }
+        }
+
+        //4）股价突破上轨
+        if (this.BollState == 1) {
+            if (this.gpData[index].close > this.BollState[index][1]) {
+                //B
+            }
+        }
+
+        //5）股价跌破下轨
+        if (this.BollState == 1) {
+            if (this.gpData[index - 1].close >= this.BollList[index - 1][2]) {
+                if (this.gpData[index].close < this.BollList[index][2]) {
+                    //s
+                }
+            }
+        }
+
+        // /6）布林带下轨支撑
+        if (this.gpData[index - 1].close > this.BollList[index - 1][2]) {
+            if (this.gpData[index].low <= this.BollList[index][2]) {
+                if (this.gpData[index].low > this.gpData[index - 1].low) {
+                    let min = Math.min(this.gpData[index].open, this.gpData[index].close);
+                    let premin = Math.min(this.gpData[index - 1].open, this.gpData[index].close)
+                    if (min >= premin) {
+                        if (this.BollList[index][0] > this.BollList[index - 1][0] || this.BollList[index][1] > this.BollList[index - 1][1] || this.BollList[index][2] > this.BollList[index - 1][2]) {
+                            //b
+                        }
+                    }
+
+                }
+            }
+        }
+
+        // 7）布林带上轨阻力
+        //TODO
+
+        //8）判断震荡行情
+
+
+    }
+
+    testEXPMAEvent() {
+        //EXP均线金叉
+        let index = GameCfg.huizhidatas - 1;
+        if (this.EXPMA2[index] >= this.EXPMA2[index - 1] && this.EXPMA1[index] >= this.EXPMA1[index - 1]) {
+            if (this.EXPMA1[index] > this.EXPMA2[index]) {
+                //B
+            }
+        }
+
+        //EXP均线死叉
+        if (this.EXPMA2[index] < this.EXPMA2[index - 1]) {
+            if (this.EXPMA1[index] < this.EXPMA2[index]) {
+                //s
+            }
+        }
+
+        //短线转向买点
+        if (this.EXPMA2[index] > this.EXPMA2[index]) {
+            if (this.EXPMA1[index] > this.EXPMA1[index - 1]) {
+                if (this.gpData[index].close > this.EXPMA1[index]) {
+                    let max = Math.max(this.gpData[index - 1].open, this.gpData[index - 1].close);
+                    if (this.gpData[index].close > max) {
+                        //B
+                    }
+                }
+            }
+        }
+
+        //短线转向卖点
+        //TODO
+        if (this.gpData[index].close > this.EXPMA1[index]) {
+            if (this.gpData[index].close < this.gpData[index - 1].low) {
+
+            }
+        }
+
+        // 乖离过大买点
+        //TODO
+        if (this.EXPMA1[index] < this.EXPMA2[index]) {
+            if ((this.EXPMA1[index] - this.gpData[index].close) / this.EXPMA1[index] >= 0.1) {
+
+            }
+        }
+
+        //乖离过大卖点
+        if (this.EXPMA1[index] > this.EXPMA2[index]) {
+            if ((this.gpData[index].close - this.EXPMA2[index]) / this.EXPMA1[index] >= 0.1) {
+                let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].ope);
+                if (this.gpData[index].close < max) {
+                    //s
+                }
+            }
+        }
+
+    }
+
+    testRSIEvent() {
+        let index = GameCfg.huizhidatas - 1;
+        {//RSI金叉
+            if (this.RSI3[index] < 50) {
+                if (this.RSI2[index] > this.RSI3[index]) {
+                    //B
+                }
+            }
+
+            if (this.RSI3 >= 50) {
+                if (this.RSI1[index] > this.RSI2[index] || this.RSI2[index] > this.RSI3[index]) {
+                    //B
+                }
+            }
+
+            if (this.RSI1[index - 1] < this.RSI3[index - 1]) {
+                if (this.RSI1[index] > this.RSI3[index]) {
+                    //B
+                }
+            }
+        }
+
+        {//RSI死叉
+            if (this.RSI1[index - 1] > this.RSI2[index - 1]) {
+                if (this.RSI1[index] < this.RSI2[index]) {
+                    //s
+                }
+            }
+            else if (this.RSI2[index - 1] > this.RSI3[index - 1]) {
+                if (this.RSI2[index] < this.RSI3[index]) {
+                    //s
+                }
+            }
+            else if (this.RSI1[index - 1] > this.RSI3[index - 1]) {
+                if (this.RSI1[index] < this.RSI3[index]) {
+                    //s
+                }
+            }
+        }
+
+        {//RSI超卖
+
+
+        }
+
+        {//RSI超买
+            if (this.RSI1[index] > 80) {
+                if (this.gpData[index].close < this.gpData[index - 1].close) {
+                    if (this.RSI1[index] < this.RSI1[index - 1] && this.RSI2[index] <= this.RSI2[index - 1]) {
+                        //s
+                    }
+                }
+            }
+
+        }
+
+        {
+            //高位钝化买点
+            if (this.RSI2[index] >= 75) {
+                if (this.RSI1[index] > this.RSI2[index] && this.RSI2[index] > this.RSI3[index]) {
+                    if (this.RSI1[index] > this.RSI1[index - 1]) {
+                        let max = Math.max(this.gpData[index - 1].open, this.gpData[index - 1].close);
+                        if (this.gpData[index].close > max) {
+                            //B
+                            this.RSIState = 1;
+                        }
+                    }
+                }
+            } else {
+                if (this.RSIState == 1 && this.RSI2[index] < 75) {
+                    //s
+                    this.RSIState = 0;
+                }
+            }
+
+        }
+
+
+        {
+            //低位钝化卖点
+            if (this.RSI2[index] <= 25) {
+                if (this.RSI1[index] < this.RSI2[index] && this.RSI2[index] < this.RSI3[index]) {
+                    if (this.RSI1[index] < this.RSI1[index - 1]) {
+                        let min = Math.min(this.gpData[index - 1].close, this.gpData[index - 1].open);
+                        if (this.gpData[index].close < min) {
+                            //S
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+
+    }
+
+    testVOLEvetnt() {
+        let index = GameCfg.huizhidatas - 1;
+        //均量线金叉
+        if (this.VOlList[index][0] > this.VOlList[index][1]) {
+            if (this.gpData[index].value > this.VOlList[index][0]) {
+                if (this.gpData[index].value > this.VOlList[index][1]) {
+                    if (this.VOlList[index][1] > this.VOlList[index - 1][0]) {
+                        //b
+                    }
+                }
+            }
+
+        }
+        //均量线死叉
+        {
+            if (this.VOlList[index][0] < this.VOlList[index][1]) {
+                //S
+            }
+
+        }
+
+        //倍量阳柱(阳线）
+        {
+            if (this.gpData[index].value >= 1.9 * this.gpData[index - 1].value) {
+                if (this.gpData[index].close > this.gpData[index - 1].close) {
+                    let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
+                    if (this.gpData[index].close >= max && this.gpData[index].close > this.gpData[index].open) {
+                        if (this.gpData[index].value > this.VOlList[index][0] && this.gpData[index].value > this.VOlList[index][1]) {
+                            //TODO还有一个条件没写
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+        //量价齐升
+        {
+            if (this.gpData[index].value > this.gpData[index - 1].value) {
+                if (this.gpData[index].value > this.VOlList[index][0]) {
+                    if (this.gpData[index].value > this.VOlList[index][1]) {
+                        let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
+                        if (this.gpData[index].close >= max) {
+                            //TODO 长期什么鬼
+                        }
+                    }
+                }
+            }
+        }
+
+        //价升量减
+        {
+            if (this.gpData[index].close > this.gpData[index - 1].close) {
+                if (this.gpData[index].value < this.VOlList[index][0] && this.gpData[index].value < this.gpData[index - 1].value) {
+                    if (this.gpData[index].value > this.VOlList[index][1]) {
+                        if (this.VOlList[index - 1][0] <= this.VOlList[index][0]) {
+                            if (!(this.gpData[index - 1].open > this.gpData[index - 1].close && this.gpData[index].open < this.gpData[index].close)) {
+                                //TODO
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 量增价跌
+        if (this.gpData[index].value > this.gpData[index - 1].value) {
+            if (this.gpData[index].close < this.gpData[index - 1].low) {
+                //TODO
+            }
+        }
+
+        //量缩价跌
+        if (this.gpData[index].value < this.gpData[index - 1].value) {
+            if (this.gpData[index].valuew < this.VOlList[index][0]) {
+                if (this.gpData[index].close < this.gpData[index - 1].low) {
+                    //TODO
+                }
+            }
+        }
+
+
+    }
+
+    onCreateTipsItem(id, str) {
+
+        let node = cc.instantiate(this.itemNotice);
+        this.content.addChild(node);
+
+        let itemHandle = node.getComponent('ItemNotice')
+        itemHandle.text = str;
+        itemHandle.onShow();
+
+        // if (!GameCfg.GAMEFUPAN && GameCfg.GameType != pb.GameType.ShuangMang) {
+        //     GameCfg.notice.push([id, GameCfg.huizhidatas - 1]);
+        // }
     }
 
     start() {
