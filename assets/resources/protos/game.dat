@@ -1,0 +1,233 @@
+{
+    "levelConf": [
+        {
+            "level": 1,
+            "max_exp": 100
+        },
+        {
+            "level": 2,
+            "max_exp": 300
+        }
+    ],
+    "smxl": {
+        "free": 5,
+        "capital_init": 100000,
+        "capital_min": {
+            "value": 10000,
+            "cost": [
+                {
+                    "i": 1,
+                    "v": -50
+                }
+            ]
+        },
+        "capital_max": {
+            "value": 1000000000,
+            "cost": [
+                {
+                    "i": 0,
+                    "v": -1000
+                }
+            ]
+        }
+    },
+    "dxxl": {
+        "cost": [
+            {
+                "i": 0,
+                "v": -500
+            }
+        ]
+    },
+    "zbxl": {
+        "cost": [
+            {
+                "i": 0,
+                "v": -500
+            }
+        ]
+    },
+    "qhxl": {
+        "cost": [
+            {
+                "i": 0,
+                "v": -500
+            }
+        ]
+    },
+    "cgs": {
+        "stages": [
+            {
+                "sequence": 0,
+                "progress": 1,
+                "lifes": 0,
+                "awards": [
+                    {
+                        "i": 0,
+                        "v": 100
+                    }
+                ],
+                "cost": [
+                    {
+                        "i": 0,
+                        "v": -500
+                    }
+                ]
+            },
+            {
+                "sequence": 1,
+                "progress": 2,
+                "lifes": 2,
+                "awards": [
+                    {
+                        "i": 0,
+                        "v": 200
+                    }
+                ],
+                "cost": [
+                    {
+                        "i": 0,
+                        "v": -500
+                    }
+                ]
+            },
+            {
+                "sequence": 2,
+                "progress": 3,
+                "lifes": 2,
+                "awards": [
+                    {
+                        "i": 0,
+                        "v": 400
+                    }
+                ],
+                "cost": [
+                    {
+                        "i": 0,
+                        "v": -500
+                    }
+                ]
+            },
+            {
+                "sequence": 3,
+                "progress": 4,
+                "lifes": 3,
+                "awards": [
+                    {
+                        "i": 0,
+                        "v": 600
+                    }
+                ],
+                "cost": [
+                    {
+                        "i": 0,
+                        "v": -500
+                    }
+                ]
+            },
+            {
+                "sequence": 4,
+                "progress": 5,
+                "lifes": 3,
+                "awards": [
+                    {
+                        "i": 0,
+                        "v": 1000
+                    }
+                ],
+                "cost": [
+                    {
+                        "i": 0,
+                        "v": -500
+                    }
+                ]
+            },
+            {
+                "sequence": 5,
+                "progress": 6,
+                "lifes": 4,
+                "awards": [
+                    {
+                        "i": 0,
+                        "v": 1500
+                    }
+                ],
+                "cost": [
+                    {
+                        "i": 0,
+                        "v": -500
+                    }
+                ]
+            },
+            {
+                "sequence": 6,
+                "progress": 7,
+                "lifes": 4,
+                "awards": [
+                    {
+                        "i": 0,
+                        "v": 2000
+                    }
+                ],
+                "cost": [
+                    {
+                        "i": 0,
+                        "v": -500
+                    }
+                ]
+            },
+            {
+                "sequence": 7,
+                "progress": 8,
+                "lifes": 5,
+                "awards": [
+                    {
+                        "i": 0,
+                        "v": 4000
+                    }
+                ],
+                "cost": [
+                    {
+                        "i": 0,
+                        "v": -500
+                    }
+                ]
+            },
+            {
+                "sequence": 8,
+                "progress": 9,
+                "lifes": 5,
+                "awards": [
+                    {
+                        "i": 0,
+                        "v": 8000
+                    }
+                ],
+                "cost": [
+                    {
+                        "i": 0,
+                        "v": -500
+                    }
+                ]
+            },
+            {
+                "sequence": 9,
+                "progress": 10,
+                "lifes": 5,
+                "awards": [
+                    {
+                        "i": 0,
+                        "v": 20000
+                    }
+                ],
+                "cost": [
+                    {
+                        "i": 0,
+                        "v": -500
+                    }
+                ]
+            }
+        ],
+        "times": 15
+    }
+}

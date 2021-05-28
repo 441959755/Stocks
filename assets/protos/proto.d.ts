@@ -64,7 +64,11 @@ export namespace pb {
         Sync_S2C_GameCg = 1008,
         Sync_S2C_GameCgds = 1010,
         Sync_S2C_GameMncg = 1012,
+        Sync_S2C_Broadcast = 1014,
+        Sync_S2C_GameCg_GD = 1016,
+        Sync_S2C_GameTimes = 1018,
         Sync_C2S_GameHeart = 1200,
+        Sync_Email = 1300,
         Req_QuoteSubscribe = 2001,
         Rep_QuoteSubscribe = 2002,
         Req_QuoteQuery = 2003,
@@ -91,12 +95,20 @@ export namespace pb {
         Rep_Game_Over = 4006,
         Req_Game_QueryGameResult = 4007,
         Rep_Game_QueryGameResult = 4008,
-        Req_Game_SmxlReport = 4009,
-        Rep_Game_SmxlReport = 4010,
-        Req_Game_SmxlReset = 4011,
-        Rep_Game_SmxlReset = 4012,
-        Req_Game_GetGameOperation = 4013,
-        Rep_Game_GetGameOperation = 4014,
+        Req_Game_GetGameOperation = 4009,
+        Rep_Game_GetGameOperation = 4010,
+        Req_Game_SmxlReport = 4011,
+        Rep_Game_SmxlReport = 4012,
+        Req_Game_SmxlReset = 4013,
+        Rep_Game_SmxlReset = 4014,
+        Req_Game_CgsGetConf = 4015,
+        Rep_Game_CgsGetConf = 4016,
+        Req_Game_CgsGetClearanceRank = 4017,
+        Rep_Game_CgsGetClearanceRank = 4018,
+        Req_Game_CgsGetStageRank = 4019,
+        Rep_Game_CgsGetStageRank = 4020,
+        Req_Game_CgsGetSeasonRank = 4021,
+        Rep_Game_CgsGetSeasonRank = 4022,
         RoomMsgRange_BEG = 5000,
         RoomMsgRange_END = 5999,
         Req_Room_Create = 5003,
@@ -121,10 +133,9 @@ export namespace pb {
         Sync_Room_GameStatus = 5214,
         Sync_Room_GameOp = 5216,
         Sync_Room_GameResult = 5218,
-        Sync_Room_Invite = 5220,
         S2S_HeartBeat = 10001,
-        S2S_Broadcast = 10003,
-        S2S_Update_PlayerProperty = 10005
+        S2S_Update_PlayerProperty = 10003,
+        S2S_Update_PlayerGameCounter = 10005
     }
 
     /** ErrorCode enum. */
@@ -136,6 +147,7 @@ export namespace pb {
         CS_INVALID_ACCOUNT = 4,
         CS_INVALID_PASSWORD = 5,
         CS_TIMEOUT = 6,
+        CS_CHECK_FAILURE = 7,
         CS_ROOM_INVALID = 100,
         CS_ROOM_FULL = 101,
         CS_ROOM_FAIL_CHECKIN = 102,
@@ -616,6 +628,16 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** MessageType enum. */
+    enum MessageType {
+        MessageType_NULL = 0,
+        Notice = 1,
+        Popup_Adv = 2,
+        Chat = 9,
+        RoomChat = 10,
+        RoomInvite = 11
+    }
+
     /** GameType enum. */
     enum GameType {
         GameType_NULL = 0,
@@ -653,9 +675,11 @@ export namespace pb {
         Bid = 2,
         Wait = 3,
         Hold = 4,
-        Ask_Force = 5,
+        Bid_Force = 5,
+        Ask_Force = 6,
         Long = 8,
         Short = 9,
+        Close_Force = 10,
         END = 150
     }
 
@@ -953,6 +977,192 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a GameCounters. */
+    interface IGameCounters {
+
+        /** GameCounters items */
+        items?: (pb.IGameCounter[]|null);
+    }
+
+    /** Represents a GameCounters. */
+    class GameCounters implements IGameCounters {
+
+        /**
+         * Constructs a new GameCounters.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IGameCounters);
+
+        /** GameCounters items. */
+        public items: pb.IGameCounter[];
+
+        /**
+         * Creates a new GameCounters instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameCounters instance
+         */
+        public static create(properties?: pb.IGameCounters): pb.GameCounters;
+
+        /**
+         * Encodes the specified GameCounters message. Does not implicitly {@link pb.GameCounters.verify|verify} messages.
+         * @param message GameCounters message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IGameCounters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameCounters message, length delimited. Does not implicitly {@link pb.GameCounters.verify|verify} messages.
+         * @param message GameCounters message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IGameCounters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameCounters message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameCounters
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.GameCounters;
+
+        /**
+         * Decodes a GameCounters message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameCounters
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.GameCounters;
+
+        /**
+         * Verifies a GameCounters message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameCounters message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameCounters
+         */
+        public static fromObject(object: { [k: string]: any }): pb.GameCounters;
+
+        /**
+         * Creates a plain object from a GameCounters message. Also converts values to other types if specified.
+         * @param message GameCounters
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.GameCounters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameCounters to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a TodayGameTimes. */
+    interface ITodayGameTimes {
+
+        /** TodayGameTimes ts */
+        ts?: (number|Long|null);
+
+        /** TodayGameTimes counter */
+        counter?: (number[]|null);
+    }
+
+    /** Represents a TodayGameTimes. */
+    class TodayGameTimes implements ITodayGameTimes {
+
+        /**
+         * Constructs a new TodayGameTimes.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ITodayGameTimes);
+
+        /** TodayGameTimes ts. */
+        public ts: (number|Long);
+
+        /** TodayGameTimes counter. */
+        public counter: number[];
+
+        /**
+         * Creates a new TodayGameTimes instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns TodayGameTimes instance
+         */
+        public static create(properties?: pb.ITodayGameTimes): pb.TodayGameTimes;
+
+        /**
+         * Encodes the specified TodayGameTimes message. Does not implicitly {@link pb.TodayGameTimes.verify|verify} messages.
+         * @param message TodayGameTimes message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ITodayGameTimes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified TodayGameTimes message, length delimited. Does not implicitly {@link pb.TodayGameTimes.verify|verify} messages.
+         * @param message TodayGameTimes message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ITodayGameTimes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a TodayGameTimes message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns TodayGameTimes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.TodayGameTimes;
+
+        /**
+         * Decodes a TodayGameTimes message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns TodayGameTimes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.TodayGameTimes;
+
+        /**
+         * Verifies a TodayGameTimes message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a TodayGameTimes message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns TodayGameTimes
+         */
+        public static fromObject(object: { [k: string]: any }): pb.TodayGameTimes;
+
+        /**
+         * Creates a plain object from a TodayGameTimes message. Also converts values to other types if specified.
+         * @param message TodayGameTimes
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.TodayGameTimes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this TodayGameTimes to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a SmxlState. */
     interface ISmxlState {
 
@@ -973,6 +1183,12 @@ export namespace pb {
 
         /** SmxlState gold */
         gold?: (number|Long|null);
+
+        /** SmxlState todayTs */
+        todayTs?: (number|Long|null);
+
+        /** SmxlState todayTimes */
+        todayTimes?: (number|null);
     }
 
     /** Represents a SmxlState. */
@@ -1001,6 +1217,12 @@ export namespace pb {
 
         /** SmxlState gold. */
         public gold: (number|Long);
+
+        /** SmxlState todayTs. */
+        public todayTs: (number|Long);
+
+        /** SmxlState todayTimes. */
+        public todayTimes: number;
 
         /**
          * Creates a new SmxlState instance using the specified properties.
@@ -1073,8 +1295,134 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a CgLogAward. */
+    interface ICgLogAward {
+
+        /** CgLogAward stage */
+        stage?: (number|null);
+
+        /** CgLogAward awarded */
+        awarded?: (boolean|null);
+
+        /** CgLogAward gotten */
+        gotten?: (boolean|null);
+    }
+
+    /** Represents a CgLogAward. */
+    class CgLogAward implements ICgLogAward {
+
+        /**
+         * Constructs a new CgLogAward.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICgLogAward);
+
+        /** CgLogAward stage. */
+        public stage: number;
+
+        /** CgLogAward awarded. */
+        public awarded: boolean;
+
+        /** CgLogAward gotten. */
+        public gotten: boolean;
+
+        /**
+         * Creates a new CgLogAward instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CgLogAward instance
+         */
+        public static create(properties?: pb.ICgLogAward): pb.CgLogAward;
+
+        /**
+         * Encodes the specified CgLogAward message. Does not implicitly {@link pb.CgLogAward.verify|verify} messages.
+         * @param message CgLogAward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICgLogAward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CgLogAward message, length delimited. Does not implicitly {@link pb.CgLogAward.verify|verify} messages.
+         * @param message CgLogAward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICgLogAward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CgLogAward message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CgLogAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CgLogAward;
+
+        /**
+         * Decodes a CgLogAward message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CgLogAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CgLogAward;
+
+        /**
+         * Verifies a CgLogAward message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CgLogAward message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CgLogAward
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CgLogAward;
+
+        /**
+         * Creates a plain object from a CgLogAward message. Also converts values to other types if specified.
+         * @param message CgLogAward
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CgLogAward, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CgLogAward to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a CgState. */
     interface ICgState {
+
+        /** CgState seasonId */
+        seasonId?: (number|Long|null);
+
+        /** CgState stage */
+        stage?: (number|null);
+
+        /** CgState progress */
+        progress?: (number|null);
+
+        /** CgState lifes */
+        lifes?: (number|null);
+
+        /** CgState win */
+        win?: (number|null);
+
+        /** CgState lose */
+        lose?: (number|null);
+
+        /** CgState clearance */
+        clearance?: (boolean|null);
+
+        /** CgState awards */
+        awards?: (pb.ICgLogAward[]|null);
     }
 
     /** Represents a CgState. */
@@ -1085,6 +1433,30 @@ export namespace pb {
          * @param [properties] Properties to set
          */
         constructor(properties?: pb.ICgState);
+
+        /** CgState seasonId. */
+        public seasonId: (number|Long);
+
+        /** CgState stage. */
+        public stage: number;
+
+        /** CgState progress. */
+        public progress: number;
+
+        /** CgState lifes. */
+        public lifes: number;
+
+        /** CgState win. */
+        public win: number;
+
+        /** CgState lose. */
+        public lose: number;
+
+        /** CgState clearance. */
+        public clearance: boolean;
+
+        /** CgState awards. */
+        public awards: pb.ICgLogAward[];
 
         /**
          * Creates a new CgState instance using the specified properties.
@@ -1350,10 +1722,16 @@ export namespace pb {
         cgState?: (pb.ICgState|null);
 
         /** GameData cgdsState */
-        cgdsState?: (pb.ICgState|null);
+        cgdsState?: (pb.ICgdsState|null);
 
         /** GameData mncgState */
-        mncgState?: (pb.ICgState|null);
+        mncgState?: (pb.IMncgState|null);
+
+        /** GameData todayTs */
+        todayTs?: (number|Long|null);
+
+        /** GameData todayTimes */
+        todayTimes?: (number[]|null);
     }
 
     /** Represents a GameData. */
@@ -1387,10 +1765,16 @@ export namespace pb {
         public cgState?: (pb.ICgState|null);
 
         /** GameData cgdsState. */
-        public cgdsState?: (pb.ICgState|null);
+        public cgdsState?: (pb.ICgdsState|null);
 
         /** GameData mncgState. */
-        public mncgState?: (pb.ICgState|null);
+        public mncgState?: (pb.IMncgState|null);
+
+        /** GameData todayTs. */
+        public todayTs: (number|Long);
+
+        /** GameData todayTimes. */
+        public todayTimes: number[];
 
         /**
          * Creates a new GameData instance using the specified properties.
@@ -1668,7 +2052,10 @@ export namespace pb {
         kType?: (pb.KType|null);
 
         /** GameOperationItem kTs */
-        kTs?: (number|null);
+        kTs?: (number|Long|null);
+
+        /** GameOperationItem kOffset */
+        kOffset?: (number|null);
 
         /** GameOperationItem price */
         price?: (number|null);
@@ -1699,7 +2086,10 @@ export namespace pb {
         public kType: pb.KType;
 
         /** GameOperationItem kTs. */
-        public kTs: number;
+        public kTs: (number|Long);
+
+        /** GameOperationItem kOffset. */
+        public kOffset: number;
 
         /** GameOperationItem price. */
         public price: number;
@@ -1912,6 +2302,12 @@ export namespace pb {
 
         /** GameResult refId */
         refId?: (number|Long|null);
+
+        /** GameResult kStartup */
+        kStartup?: (number|Long|null);
+
+        /** GameResult kStop */
+        kStop?: (number|Long|null);
     }
 
     /** Represents a GameResult. */
@@ -1961,6 +2357,12 @@ export namespace pb {
 
         /** GameResult refId. */
         public refId: (number|Long);
+
+        /** GameResult kStartup. */
+        public kStartup: (number|Long);
+
+        /** GameResult kStop. */
+        public kStop: (number|Long);
 
         /**
          * Creates a new GameResult instance using the specified properties.
@@ -4343,6 +4745,9 @@ export namespace pb {
         /** RoomGameOp id */
         id?: (number|null);
 
+        /** RoomGameOp uid */
+        uid?: (number|null);
+
         /** RoomGameOp ops */
         ops?: (Uint8Array|null);
     }
@@ -4358,6 +4763,9 @@ export namespace pb {
 
         /** RoomGameOp id. */
         public id: number;
+
+        /** RoomGameOp uid. */
+        public uid: number;
 
         /** RoomGameOp ops. */
         public ops: Uint8Array;
@@ -4640,11 +5048,17 @@ export namespace pb {
         /** RoomPkPlayer ready */
         ready?: (boolean|null);
 
+        /** RoomPkPlayer giveup */
+        giveup?: (boolean|null);
+
         /** RoomPkPlayer ops */
         ops?: (pb.IGameOperations|null);
 
         /** RoomPkPlayer result */
         result?: (pb.IGameResult|null);
+
+        /** RoomPkPlayer curPos */
+        curPos?: (number|Long|null);
     }
 
     /** Represents a RoomPkPlayer. */
@@ -4662,11 +5076,17 @@ export namespace pb {
         /** RoomPkPlayer ready. */
         public ready: boolean;
 
+        /** RoomPkPlayer giveup. */
+        public giveup: boolean;
+
         /** RoomPkPlayer ops. */
         public ops?: (pb.IGameOperations|null);
 
         /** RoomPkPlayer result. */
         public result?: (pb.IGameResult|null);
+
+        /** RoomPkPlayer curPos. */
+        public curPos: (number|Long);
 
         /**
          * Creates a new RoomPkPlayer instance using the specified properties.
@@ -4771,6 +5191,12 @@ export namespace pb {
 
         /** RoomDataPk tsGameCur */
         tsGameCur?: (number|Long|null);
+
+        /** RoomDataPk quotes */
+        quotes?: (pb.IQuotes|null);
+
+        /** RoomDataPk quotesFuture */
+        quotesFuture?: (pb.IQuotesFuture|null);
     }
 
     /** Represents a RoomDataPk. */
@@ -4811,6 +5237,12 @@ export namespace pb {
 
         /** RoomDataPk tsGameCur. */
         public tsGameCur: (number|Long);
+
+        /** RoomDataPk quotes. */
+        public quotes?: (pb.IQuotes|null);
+
+        /** RoomDataPk quotesFuture. */
+        public quotesFuture?: (pb.IQuotesFuture|null);
 
         /**
          * Creates a new RoomDataPk instance using the specified properties.
@@ -4878,6 +5310,798 @@ export namespace pb {
 
         /**
          * Converts this RoomDataPk to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an Email. */
+    interface IEmail {
+
+        /** Email sender */
+        sender?: (number|null);
+
+        /** Email receiver */
+        receiver?: (number|null);
+
+        /** Email type */
+        type?: (pb.MessageType|null);
+
+        /** Email text */
+        text?: (string|null);
+
+        /** Email ts */
+        ts?: (number|Long|null);
+    }
+
+    /** Represents an Email. */
+    class Email implements IEmail {
+
+        /**
+         * Constructs a new Email.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IEmail);
+
+        /** Email sender. */
+        public sender: number;
+
+        /** Email receiver. */
+        public receiver: number;
+
+        /** Email type. */
+        public type: pb.MessageType;
+
+        /** Email text. */
+        public text: string;
+
+        /** Email ts. */
+        public ts: (number|Long);
+
+        /**
+         * Creates a new Email instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Email instance
+         */
+        public static create(properties?: pb.IEmail): pb.Email;
+
+        /**
+         * Encodes the specified Email message. Does not implicitly {@link pb.Email.verify|verify} messages.
+         * @param message Email message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IEmail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Email message, length delimited. Does not implicitly {@link pb.Email.verify|verify} messages.
+         * @param message Email message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IEmail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an Email message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Email
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.Email;
+
+        /**
+         * Decodes an Email message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Email
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.Email;
+
+        /**
+         * Verifies an Email message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an Email message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Email
+         */
+        public static fromObject(object: { [k: string]: any }): pb.Email;
+
+        /**
+         * Creates a plain object from an Email message. Also converts values to other types if specified.
+         * @param message Email
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.Email, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Email to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CgsConf. */
+    interface ICgsConf {
+
+        /** CgsConf id */
+        id?: (number|null);
+
+        /** CgsConf from */
+        from?: (number|Long|null);
+
+        /** CgsConf to */
+        to?: (number|Long|null);
+
+        /** CgsConf conf */
+        conf?: (string|null);
+
+        /** CgsConf award */
+        award?: (string|null);
+
+        /** CgsConf status */
+        status?: (number|null);
+
+        /** CgsConf people */
+        people?: (number[]|null);
+    }
+
+    /** Represents a CgsConf. */
+    class CgsConf implements ICgsConf {
+
+        /**
+         * Constructs a new CgsConf.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICgsConf);
+
+        /** CgsConf id. */
+        public id: number;
+
+        /** CgsConf from. */
+        public from: (number|Long);
+
+        /** CgsConf to. */
+        public to: (number|Long);
+
+        /** CgsConf conf. */
+        public conf: string;
+
+        /** CgsConf award. */
+        public award: string;
+
+        /** CgsConf status. */
+        public status: number;
+
+        /** CgsConf people. */
+        public people: number[];
+
+        /**
+         * Creates a new CgsConf instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CgsConf instance
+         */
+        public static create(properties?: pb.ICgsConf): pb.CgsConf;
+
+        /**
+         * Encodes the specified CgsConf message. Does not implicitly {@link pb.CgsConf.verify|verify} messages.
+         * @param message CgsConf message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICgsConf, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CgsConf message, length delimited. Does not implicitly {@link pb.CgsConf.verify|verify} messages.
+         * @param message CgsConf message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICgsConf, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CgsConf message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CgsConf
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CgsConf;
+
+        /**
+         * Decodes a CgsConf message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CgsConf
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CgsConf;
+
+        /**
+         * Verifies a CgsConf message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CgsConf message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CgsConf
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CgsConf;
+
+        /**
+         * Creates a plain object from a CgsConf message. Also converts values to other types if specified.
+         * @param message CgsConf
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CgsConf, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CgsConf to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a RankingItem. */
+    interface IRankingItem {
+
+        /** RankingItem uid */
+        uid?: (number|null);
+
+        /** RankingItem nickname */
+        nickname?: (string|null);
+
+        /** RankingItem icon */
+        icon?: (string|null);
+
+        /** RankingItem cgsClearance */
+        cgsClearance?: (number|null);
+
+        /** RankingItem cgsNetwin */
+        cgsNetwin?: (number|null);
+
+        /** RankingItem cgsProgress */
+        cgsProgress?: (number|null);
+    }
+
+    /** Represents a RankingItem. */
+    class RankingItem implements IRankingItem {
+
+        /**
+         * Constructs a new RankingItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IRankingItem);
+
+        /** RankingItem uid. */
+        public uid: number;
+
+        /** RankingItem nickname. */
+        public nickname: string;
+
+        /** RankingItem icon. */
+        public icon: string;
+
+        /** RankingItem cgsClearance. */
+        public cgsClearance: number;
+
+        /** RankingItem cgsNetwin. */
+        public cgsNetwin: number;
+
+        /** RankingItem cgsProgress. */
+        public cgsProgress: number;
+
+        /**
+         * Creates a new RankingItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns RankingItem instance
+         */
+        public static create(properties?: pb.IRankingItem): pb.RankingItem;
+
+        /**
+         * Encodes the specified RankingItem message. Does not implicitly {@link pb.RankingItem.verify|verify} messages.
+         * @param message RankingItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IRankingItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified RankingItem message, length delimited. Does not implicitly {@link pb.RankingItem.verify|verify} messages.
+         * @param message RankingItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IRankingItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a RankingItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns RankingItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RankingItem;
+
+        /**
+         * Decodes a RankingItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns RankingItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RankingItem;
+
+        /**
+         * Verifies a RankingItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a RankingItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns RankingItem
+         */
+        public static fromObject(object: { [k: string]: any }): pb.RankingItem;
+
+        /**
+         * Creates a plain object from a RankingItem message. Also converts values to other types if specified.
+         * @param message RankingItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.RankingItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this RankingItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a RankingList. */
+    interface IRankingList {
+
+        /** RankingList id */
+        id?: (number|null);
+
+        /** RankingList Items */
+        Items?: (pb.IRankingItem[]|null);
+    }
+
+    /** Represents a RankingList. */
+    class RankingList implements IRankingList {
+
+        /**
+         * Constructs a new RankingList.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IRankingList);
+
+        /** RankingList id. */
+        public id: number;
+
+        /** RankingList Items. */
+        public Items: pb.IRankingItem[];
+
+        /**
+         * Creates a new RankingList instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns RankingList instance
+         */
+        public static create(properties?: pb.IRankingList): pb.RankingList;
+
+        /**
+         * Encodes the specified RankingList message. Does not implicitly {@link pb.RankingList.verify|verify} messages.
+         * @param message RankingList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IRankingList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified RankingList message, length delimited. Does not implicitly {@link pb.RankingList.verify|verify} messages.
+         * @param message RankingList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IRankingList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a RankingList message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns RankingList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RankingList;
+
+        /**
+         * Decodes a RankingList message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns RankingList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RankingList;
+
+        /**
+         * Verifies a RankingList message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a RankingList message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns RankingList
+         */
+        public static fromObject(object: { [k: string]: any }): pb.RankingList;
+
+        /**
+         * Creates a plain object from a RankingList message. Also converts values to other types if specified.
+         * @param message RankingList
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.RankingList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this RankingList to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdCgsRanking. */
+    interface ICmdCgsRanking {
+
+        /** CmdCgsRanking id */
+        id?: (number|null);
+
+        /** CmdCgsRanking stage */
+        stage?: (number|null);
+    }
+
+    /** Represents a CmdCgsRanking. */
+    class CmdCgsRanking implements ICmdCgsRanking {
+
+        /**
+         * Constructs a new CmdCgsRanking.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdCgsRanking);
+
+        /** CmdCgsRanking id. */
+        public id: number;
+
+        /** CmdCgsRanking stage. */
+        public stage: number;
+
+        /**
+         * Creates a new CmdCgsRanking instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdCgsRanking instance
+         */
+        public static create(properties?: pb.ICmdCgsRanking): pb.CmdCgsRanking;
+
+        /**
+         * Encodes the specified CmdCgsRanking message. Does not implicitly {@link pb.CmdCgsRanking.verify|verify} messages.
+         * @param message CmdCgsRanking message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdCgsRanking, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdCgsRanking message, length delimited. Does not implicitly {@link pb.CmdCgsRanking.verify|verify} messages.
+         * @param message CmdCgsRanking message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdCgsRanking, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdCgsRanking message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdCgsRanking
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdCgsRanking;
+
+        /**
+         * Decodes a CmdCgsRanking message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdCgsRanking
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdCgsRanking;
+
+        /**
+         * Verifies a CmdCgsRanking message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdCgsRanking message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdCgsRanking
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdCgsRanking;
+
+        /**
+         * Creates a plain object from a CmdCgsRanking message. Also converts values to other types if specified.
+         * @param message CmdCgsRanking
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdCgsRanking, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdCgsRanking to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a JjPlayer. */
+    interface IJjPlayer {
+
+        /** JjPlayer gd */
+        gd?: (pb.IGameData|null);
+
+        /** JjPlayer ops */
+        ops?: (pb.IGameOperations|null);
+
+        /** JjPlayer result */
+        result?: (pb.IGameResult|null);
+    }
+
+    /** Represents a JjPlayer. */
+    class JjPlayer implements IJjPlayer {
+
+        /**
+         * Constructs a new JjPlayer.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IJjPlayer);
+
+        /** JjPlayer gd. */
+        public gd?: (pb.IGameData|null);
+
+        /** JjPlayer ops. */
+        public ops?: (pb.IGameOperations|null);
+
+        /** JjPlayer result. */
+        public result?: (pb.IGameResult|null);
+
+        /**
+         * Creates a new JjPlayer instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns JjPlayer instance
+         */
+        public static create(properties?: pb.IJjPlayer): pb.JjPlayer;
+
+        /**
+         * Encodes the specified JjPlayer message. Does not implicitly {@link pb.JjPlayer.verify|verify} messages.
+         * @param message JjPlayer message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IJjPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified JjPlayer message, length delimited. Does not implicitly {@link pb.JjPlayer.verify|verify} messages.
+         * @param message JjPlayer message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IJjPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a JjPlayer message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns JjPlayer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.JjPlayer;
+
+        /**
+         * Decodes a JjPlayer message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns JjPlayer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.JjPlayer;
+
+        /**
+         * Verifies a JjPlayer message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a JjPlayer message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns JjPlayer
+         */
+        public static fromObject(object: { [k: string]: any }): pb.JjPlayer;
+
+        /**
+         * Creates a plain object from a JjPlayer message. Also converts values to other types if specified.
+         * @param message JjPlayer
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.JjPlayer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this JjPlayer to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a JjGame. */
+    interface IJjGame {
+
+        /** JjGame code */
+        code?: (number|null);
+
+        /** JjGame ktype */
+        ktype?: (pb.KType|null);
+
+        /** JjGame tsQuoteFrom */
+        tsQuoteFrom?: (number|Long|null);
+
+        /** JjGame tsQuoteTo */
+        tsQuoteTo?: (number|Long|null);
+
+        /** JjGame tsQuoteStart */
+        tsQuoteStart?: (number|Long|null);
+
+        /** JjGame quotes */
+        quotes?: (pb.IQuotes|null);
+
+        /** JjGame quotesFuture */
+        quotesFuture?: (pb.IQuotesFuture|null);
+
+        /** JjGame players */
+        players?: (pb.IJjPlayer[]|null);
+
+        /** JjGame capital */
+        capital?: (number|null);
+    }
+
+    /** Represents a JjGame. */
+    class JjGame implements IJjGame {
+
+        /**
+         * Constructs a new JjGame.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IJjGame);
+
+        /** JjGame code. */
+        public code: number;
+
+        /** JjGame ktype. */
+        public ktype: pb.KType;
+
+        /** JjGame tsQuoteFrom. */
+        public tsQuoteFrom: (number|Long);
+
+        /** JjGame tsQuoteTo. */
+        public tsQuoteTo: (number|Long);
+
+        /** JjGame tsQuoteStart. */
+        public tsQuoteStart: (number|Long);
+
+        /** JjGame quotes. */
+        public quotes?: (pb.IQuotes|null);
+
+        /** JjGame quotesFuture. */
+        public quotesFuture?: (pb.IQuotesFuture|null);
+
+        /** JjGame players. */
+        public players: pb.IJjPlayer[];
+
+        /** JjGame capital. */
+        public capital: number;
+
+        /**
+         * Creates a new JjGame instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns JjGame instance
+         */
+        public static create(properties?: pb.IJjGame): pb.JjGame;
+
+        /**
+         * Encodes the specified JjGame message. Does not implicitly {@link pb.JjGame.verify|verify} messages.
+         * @param message JjGame message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IJjGame, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified JjGame message, length delimited. Does not implicitly {@link pb.JjGame.verify|verify} messages.
+         * @param message JjGame message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IJjGame, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a JjGame message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns JjGame
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.JjGame;
+
+        /**
+         * Decodes a JjGame message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns JjGame
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.JjGame;
+
+        /**
+         * Verifies a JjGame message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a JjGame message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns JjGame
+         */
+        public static fromObject(object: { [k: string]: any }): pb.JjGame;
+
+        /**
+         * Creates a plain object from a JjGame message. Also converts values to other types if specified.
+         * @param message JjGame
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.JjGame, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this JjGame to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

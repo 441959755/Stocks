@@ -14,7 +14,7 @@ export default class GameCfgText {
 
     public static getStocktList() {
         LoadUtils.loadRes('protos/stocklist', (text) => {
-            this.stockList = text.text.split('\n');
+            this.stockList = text._nativeAsset.split('\n');
             // 股票代码|股票名称|第一个行情日期|最后一个行情日期（0为无最后行情，即股票还在上市中）|流通股数（注：请忽略该行）
             let arr = [];
             for (let i = 0; i < this.stockList.length; i++) {
@@ -47,15 +47,15 @@ export default class GameCfgText {
 
     public static getOtherCfg() {
         LoadUtils.loadRes('protos/game', (text) => {
-            this.levelInfoCfg = JSON.parse(text.text).levelConf;
-            this.smxlCfg = JSON.parse(text.text).smxl;
+            this.levelInfoCfg = JSON.parse(text._nativeAsset).levelConf;
+            this.smxlCfg = JSON.parse(text._nativeAsset).smxl;
         })
     }
 
     public static getQIHuoList() {
         // 合约代码|合约中文名称|合约英文名称|合约种类|所在交易所|第一个日K日期（YYYYMMDD）|最后一个日K//日期（YYYYMMDD）|第一个分时时间戳（精确到秒）|最后一个分时时间戳（精确到秒）
         LoadUtils.loadRes('protos/contractlist', (text) => {
-            this.qihuoList = text.text.split('\n');
+            this.qihuoList = text._nativeAsset.split('\n');
         })
     }
 

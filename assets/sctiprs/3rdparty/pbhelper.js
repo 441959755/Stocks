@@ -40,6 +40,9 @@ let QuotesFuture = pb.QuotesFuture;
 
 let SmxlState = pb.SmxlState;
 
+// 当日游戏次数计数器
+let TodayGameTimes = pb.TodayGameTimes;
+
 
 
 
@@ -269,6 +272,12 @@ PBHelper.prototype = {
             data = SmxlState.decode(new Uint8Array(buff));
             console.log('同步双盲训练状态' + JSON.stringify(data));
             GameData.SmxlState = data;
+
+        }
+        //同步当日游戏次数数据
+        else if (id == pb.MessageId.Sync_S2C_GameTimes) {
+            data = TodayGameTimes.decode(new Uint8Array(buff));
+            console.log('当日游戏次数计数器:' + JSON.stringify(data));
 
         }
 

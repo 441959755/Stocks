@@ -33,7 +33,7 @@ Socket.prototype = {
 				// cc.ext.gameData.ShuangMang_Gold = info.data.properties[3];
 				GameData.properties = info.data.properties;
 				GameData.SmxlState = info.data.smlxState;
-				GameData.maxExp = GameCfgText.levelInfoCfg[GameData.properties[2]].max_exp;
+				GameCfgText.levelInfoCfg && (GameData.maxExp = GameCfgText.levelInfoCfg[GameData.properties[2]].max_exp)
 
 				if (cc.director.getScene().name == 'Login') {
 					cc.director.loadScene('hall');

@@ -179,7 +179,7 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.QiHuo) {
             for (let i = 1; i <= 6; i++) {
                 if (GameCfg.GameSet['isMA' + i]) {
-                    GameCfg.MAs[j++] = GameCfg.GameSet['MA' + i + 'Date'];
+                    GameCfg.MAs[j++] = parseInt(GameCfg.GameSet['MA' + i + 'Date']);
                 }
             }
         }

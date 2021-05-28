@@ -3,6 +3,7 @@ import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import DrawData from "./DrawData";
 import GameCfg from "./GameCfg";
+import StrategyAIData from "./StrategyAIData";
 
 
 const { ccclass, property } = cc._decorator;
@@ -61,6 +62,10 @@ export default class NewClass extends cc.Component {
 
     VOlList = null;
 
+    textInfo = [];
+
+    curState = null;
+
     onLoad() {
         GlobalEvent.on(EventCfg.SLGEVENTNOTICE, () => {
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
@@ -93,7 +98,14 @@ export default class NewClass extends cc.Component {
             }
             let locPos = this.content.parent.parent.convertToNodeSpaceAR(data.pos);
             this.tipsLabel.node.parent.y = locPos.y;
-            this.tipsLabel.string = data.str;
+            let str = '';
+            for (let i = 0; i < this.textInfo.length; i++) {
+                if (data.str == this.textInfo[i].name) {
+                    str = this.textInfo[i].info;
+                    break;
+                }
+            }
+            this.tipsLabel.string = str;
             this.tipsLabel.node.parent.active = true;
             if (this.timeCall) {
                 clearTimeout(this.timeCall);
@@ -105,6 +117,7 @@ export default class NewClass extends cc.Component {
             }, 3000);
 
         }, this);
+
     }
 
     initData() {
@@ -129,6 +142,8 @@ export default class NewClass extends cc.Component {
         this.RSI3 = DrawData.Rs24;
 
         this.VOlList = DrawData.VolList;
+
+        //TODO this.textInfo.push();
     }
 
 
@@ -155,6 +170,14 @@ export default class NewClass extends cc.Component {
                         let max = Math.max(this.gpData[index - 1].close.this.gpData[index - 1].open);
                         if (this.gpData[index].close > max) {
                             //B
+
+                            this.onCreateTipsItem('短线转向买点');
+                            if (this.curState != 'B') {
+                                this.curState = 'B';
+                                StrategyAIData.onBuyFunc();
+                            }
+
+
                         }
                     }
                 }
@@ -166,6 +189,12 @@ export default class NewClass extends cc.Component {
                     let max = Math.max(this.gpData[index - 1].close.this.gpData[index - 1].open);
                     if (this.gpData[index].close < max) {
                         //S
+                        this.onCreateTipsItem('短线转向卖点')
+
+                        if (this.curState != 'S') {
+                            this.curState = 'S';
+                            StrategyAIData.onSellFunc();
+                        }
 
                     }
                 }
@@ -178,6 +207,12 @@ export default class NewClass extends cc.Component {
                     if (this.gpData[index].close > min) {
                         if (this.gpData[index].low > this.gpData[index - 1].low) {
                             //B
+                            this.onCreateTipsItem('乖离过大买点')
+                            if (this.curState != 'B') {
+                                this.curState = "B";
+                                StrategyAIData.onBuyFunc();
+                            }
+
                         }
                     }
                 }
@@ -189,6 +224,12 @@ export default class NewClass extends cc.Component {
                     let min = Math.min(this.gpData[index - 1].close.this.gpData[index - 1].open);
                     if (this.gpData[index].close < min) {
                         //s
+                        this.onCreateTipsItem('乖离过大卖点')
+                        if (this.curState != 'S') {
+                            this.curState = 'S';
+                            StrategyAIData.onSellFunc();
+                        }
+
                     }
                 }
             }
@@ -205,6 +246,12 @@ export default class NewClass extends cc.Component {
                     if (this.gpData[index] > b) {
                         //
                         str = '上穿' + GameCfg.MAs[c] + '均线';
+                        this.onCreateTipsItem(str)
+                        if (this.curState != 'B') {
+                            this.curState = 'B';
+                            StrategyAIData.onBuyFunc();
+                        }
+
                         //B
                     }
                 }
@@ -215,7 +262,11 @@ export default class NewClass extends cc.Component {
                 if (this.gpData[index].close < this.maList[c][index]) {
                     str = '下穿' + GameCfg.MAs[c] + '均线';
                     //S
-
+                    this.onCreateTipsItem(str)
+                    if (this.curState != 'S') {
+                        this.curState = 'S';
+                        StrategyAIData.onSellFunc();
+                    }
                 }
             }
 
@@ -227,6 +278,11 @@ export default class NewClass extends cc.Component {
                 if (this.maList[j][index] >= this.maList[j][index - 1] && this.maList[z][index] >= this.maList[z][index - 1]) {
                     if (this.JXState == 0) {
                         this.JXState = 1;
+                        this.onCreateTipsItem('均线金叉')
+                        if (this.curState != 'B') {
+                            this.curState = 'B';
+                            StrategyAIData.onBuyFunc();
+                        }
                         //B
                     } else {
                         if (this.JXState == 2) {
@@ -234,6 +290,11 @@ export default class NewClass extends cc.Component {
                             if (this.gpData[index].close > max) {
                                 this.JXState = 1;
                                 //B
+                                this.onCreateTipsItem('均线金叉')
+                                if (this.curState != 'B') {
+                                    this.curState = 'B';
+                                    StrategyAIData.onBuyFunc();
+                                }
                             }
                         }
                     }
@@ -246,6 +307,11 @@ export default class NewClass extends cc.Component {
                 if (this.maList[j][index] < this.maList[z][index]) {
                     this.JXState = 2;
                     //S
+                    this.onCreateTipsItem('均线死叉')
+                    if (this.curState != 'S') {
+                        this.curState = 'S';
+                        StrategyAIData.onSellFunc();
+                    }
                 }
             }
 
@@ -770,18 +836,16 @@ export default class NewClass extends cc.Component {
 
     }
 
-    onCreateTipsItem(id, str) {
+    onCreateTipsItem(str) {
 
         let node = cc.instantiate(this.itemNotice);
         this.content.addChild(node);
 
         let itemHandle = node.getComponent('ItemNotice')
+
         itemHandle.text = str;
         itemHandle.onShow();
 
-        // if (!GameCfg.GAMEFUPAN && GameCfg.GameType != pb.GameType.ShuangMang) {
-        //     GameCfg.notice.push([id, GameCfg.huizhidatas - 1]);
-        // }
     }
 
     start() {

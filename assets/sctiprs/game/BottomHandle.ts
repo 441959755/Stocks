@@ -120,7 +120,7 @@ export default class NewClass extends cc.Component {
 
 	curMcCount = 0;
 
-	allButData = [];
+	//	allButData = [];
 
 	onLoad() {
 		this.gpData = GameCfg.data[0].data;
@@ -136,9 +136,9 @@ export default class NewClass extends cc.Component {
 
 					this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
 
-					this.moneyLabel[0].string = '总资产    ：' + this.ziChan;
-					this.moneyLabel[1].string = '当前资产：' + this.ziChan;
-					this.moneyLabel[1].string = '当前资产：' + parseInt(this.ziChan + '');
+					this.moneyLabel[0].string = '总资产    ：' + parseInt(this.ziChan + '');
+					this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
+					this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
 					this.keMcCount = 0;
 					let curClose = parseFloat(this.gpData[GameCfg.huizhidatas - 1].close);
 					//	let preClose = parseFloat(this.gpData[this.buyData[this.buyData.length - 1]].close);
@@ -174,7 +174,7 @@ export default class NewClass extends cc.Component {
 				this.curMrCount = [];
 
 				this.curMcCount = 0;
-				this.allButData = [];
+				//	this.allButData = [];
 				this.buyData = [];
 				//	this.saleData = [];
 
@@ -412,7 +412,7 @@ export default class NewClass extends cc.Component {
 				this.timeLabel[1].string = this.gpData[GameCfg.huizhidatas - 1].day.replace(/-/g, '/');
 
 				this.moneyLabel[0].string = '总资产    ：' + GameCfg.ziChan;
-				this.moneyLabel[1].string = '当前资产：' + GameCfg.finalfund;
+				this.moneyLabel[1].string = '可用资产：' + GameCfg.finalfund;
 
 				let datas = GameCfg.history.deal;
 
@@ -451,7 +451,7 @@ export default class NewClass extends cc.Component {
 			}
 
 			this.moneyLabel[0].string = '总资产    ：' + parseInt(GameCfg.ziChan + '');
-			this.moneyLabel[1].string = '当前资产：' + parseInt(this.ziChan + '');
+			this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
 
 			this.priceLabel[0].string = '买入均价：' + 0;
 
@@ -473,16 +473,6 @@ export default class NewClass extends cc.Component {
 			this.moneyLabel[1].string = '当前资产：' + parseInt(this.ziChan + '');
 			if (GameCfg.huizhidatas < this.gpData.length) {
 				this.moneyLabel[0].string = '总资产    ：' + parseInt(this.ziChan + this.keMcCount * this.gpData[GameCfg.huizhidatas].close + '');
-			}
-
-			if (this.allButData.length == 0) {
-				this.priceLabel[0].string = '买入均价：' + 0;
-			} else {
-				let jp = 0;
-				for (let i = 0; i < this.allButData.length; i++) {
-					jp += this.gpData[this.allButData[i]].close;
-				}
-				this.priceLabel[0].string = '买入均价：' + (jp / this.allButData.length).toFixed(2);
 			}
 
 			if (GameCfg.huizhidatas >= 1 && this.gpData[GameCfg.huizhidatas]) {
@@ -524,12 +514,7 @@ export default class NewClass extends cc.Component {
 					this.keMrCount = 0;
 					this.ziChan -= this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
 					this.curMrCount.push(this.keMcCount);
-					//	console.log(JSON.stringify(this.curMrCount));
-					//  console.log(this.gpData[GameCfg.huizhidatas - 1].open);
-					// if (this.ziChan <= 0) {
-					//     this.ziChan = 0;
-					//     console.log('买入卖出数据有问题');
-					// }
+
 					this.cyBtn.node.active = true;
 					this.gwBtn.node.active = false;
 				} else {
@@ -979,6 +964,8 @@ export default class NewClass extends cc.Component {
 
 		//
 		DrawData.reseleData();
+
+		this.priceLabel[0].string = '买入均价：' + this.onjunjia().toFixed(2);
 	}
 
 	onsetCurMrCount(mc) {
@@ -999,6 +986,9 @@ export default class NewClass extends cc.Component {
 	onjunjia() {
 		let data = this.gpData;
 		let mrZE = 0, mrZL = 0;
+		if (this.curMrCount.length == 0) {
+			return 0;
+		}
 
 		this.curMrCount.forEach((el, index) => {
 			mrZL += parseInt(el);
@@ -1014,7 +1004,6 @@ export default class NewClass extends cc.Component {
 
 		})
 		return mrZE / mrZL;
-
 	}
 
 	onCurPositionRete(type?) {
@@ -1059,7 +1048,7 @@ export default class NewClass extends cc.Component {
 		if (state == 'mrBtn' || state == 'mrBtn1') {
 
 			this.buyData.push(GameCfg.huizhidatas - 1);
-			this.allButData.push(GameCfg.huizhidatas - 1);
+			//	this.allButData.push(GameCfg.huizhidatas - 1);
 
 			let rate = this.onCurPositionRete();
 

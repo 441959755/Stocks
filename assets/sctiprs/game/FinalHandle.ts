@@ -8,6 +8,7 @@ import GameCfgText from '../GameText';
 import ComUtils from '../Utils/ComUtils';
 
 import { pb } from '../../protos/proto';
+import GlobalHandle from "../global/GlobalHandle";
 
 const { ccclass, property } = cc._decorator;
 
@@ -50,20 +51,17 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     kunCount: cc.Label = null;
 
-    // @property(cc.Label)
-    // zijin: cc.Label = null;
-
-    // @property(cc.Label)
-    // yingZiJin: cc.Label = null;
-
-    // @property(cc.Label)
-    // AllZiJin: cc.Label = null;
-
     @property(cc.Node)
     qhxl_kui: cc.Node = null;
 
     @property(cc.Node)
     qhxl_zhuan: cc.Node = null;
+
+    @property(cc.Node)
+    content: cc.Node = null;
+
+    @property(cc.Node)
+    contentZB: cc.Node = null;
 
     protected onEnable() {
         ActionUtils.openLayer(this.node);
@@ -73,27 +71,128 @@ export default class NewClass extends cc.Component {
 
         if (!gpData || gpData.length <= 0) { return }
 
+        //用户信息
         this.headImg.spriteFrame = GameData.headImg;
         this.levelLabel.string = 'LV:  ' + GameData.properties[2];
-
         let max_exp = GameCfgText.levelInfoCfg[GameData.properties[2]].max_exp;
-
         this.expLabel.string = 'EXP:' + GameData.properties[1] + '/' + max_exp;
-
         this.userName.string = GameData.userName;
 
+        this.contentZB.active = false;
+        this.content.active = false;
+        //对局数据
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            this.contentZB.active = true;
+            this.showContentZB();
+        } else {
+            this.content.active = true;
+            this.showContent();
+        }
+
+        //复盘中不保存记录
+        if (!GameCfg.GAMEFUPAN) {
+            let datas = {
+                uid: GameData.userID,
+                g_type: GameCfg.GameType,
+                quotes_code: GameCfg.data[0].code,
+                k_type: GameCfg.data[0].ktype,
+                k_from: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
+
+                k_to: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
+                //  k_to: parseInt(gpData[gpData.length - 1].day.replace(///g,'')),
+                stock_profit_rate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100).toFixed(2),
+                user_profit_rate: (GameCfg.allRate * 100).toFixed(2),
+                user_capital: GameData.properties[3],
+                user_profit: (GameCfg.finalfund - GameCfg.ziChan),
+                ts: new Date().getTime() / 1000,
+                rank: 0,
+                ref_id: 0,
+                k_startup: GameData.huizhidatas - 1,
+                k_stop: GameCfg.huizhidatas - 1,
+
+            }
+            console.log('GameCfg.finalfund' + GameCfg.finalfund + '-' + 'GameCfg.ziChan' + GameCfg.ziChan + '=' + (GameCfg.finalfund - GameCfg.ziChan));
+            //  if (GameCfg.GameType < 4) {
+            datas.rank = datas.user_profit_rate >= datas.stock_profit_rate ? 1 : 2;
+            //  if (GameCfg.GameType == 1) {
+            datas.ref_id = 0;
+            // }
+            //  }
+            if (GameCfg.GameType != pb.GameType.ShuangMang) {
+                this.saveHoistoryInfo(parseInt(datas.ts + ''));
+            }
+
+            GlobalHandle.onCmdGameOverReq(datas);
+        }
+    }
+
+    showContentZB() {
+        let gpData = GameCfg.data[0].data;
+        let boxs = this.contentZB.children;
+        {
+            let la = boxs[0].getChildByName('label1').getComponent(cc.Label);
+            la && (la.string = GameCfg.data[0].name)
+
+            let la1 = boxs[0].getChildByName('label2').getComponent(cc.Label);
+            let code = GameCfg.data[0].code;
+            if (code.length >= 7) {
+                code = code.slice(1);
+            }
+            la1 && (la1.string = code);
+        }
+
+        {
+            let la = boxs[1].getChildByName('label1').getComponent(cc.Label);
+            la && (la.string = ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day))
+        }
+
+        {
+            let la = boxs[2].getChildByName('label1').getComponent(cc.Label);
+            la && (la.string = ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100).toFixed(2))
+        }
+
+        {
+            let la = boxs[3].getChildByName('richText').getComponent(cc.Label);
+            la && (la.string = GameCfg.GameSet.select + '/' + GameCfg.GameSet.strategy)
+        }
+
+        {
+            //策略信号次数   相似度次数
+            let la = boxs[4].getChildByName('richText').getComponent(cc.Label);
 
 
+            let la1 = boxs[4].getChildByName('richText1').getComponent(cc.Label);
+
+        }
+
+        {
+            //策略信号收益    相似度次数
+            let la = boxs[5].getChildByName('richText').getComponent(cc.Label);
+
+            let la1 = boxs[5].getChildByName('richText1').getComponent(cc.Label);
+        }
+
+        { //你的训练收益    相似度次数
+            let la = boxs[6].getChildByName('richText').getComponent(cc.Label);
+
+            let la1 = boxs[6].getChildByName('richText1').getComponent(cc.Label);
+        }
+
+        {
+            //综合相似度
+            let la = boxs[7].getChildByName('richText').getComponent(cc.Label);
+        }
+    }
+
+    showContent() {
+        let gpData = GameCfg.data[0].data;
         this.nameLabel.string = GameCfg.data[0].name;
-
         let code = GameCfg.data[0].code;
         if (code.length >= 7 && GameCfg.GameType != pb.GameType.QiHuo) {
             code = code.slice(1);
         }
         this.maLabel.string = code;
-        //时间
-        // this.timeLabel.string = (gpData[0].day.replace(/-/g, '/')) + ' -- ' + (gpData[gpData.length - 1].day.replace(/-/g, '/'));
-        ;
+
         this.timeLabel.string = ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
 
         //同期涨幅
@@ -111,8 +210,7 @@ export default class NewClass extends cc.Component {
 
         //总盈利率
         let all = (GameCfg.allRate * 100).toFixed(2);
-        console.log('all' + all);
-        console.log('GameCfg.allRate' + GameCfg.allRate);
+
         this.AllRise.string = all + '%';
 
         if (parseFloat(all) > 0) {
@@ -137,11 +235,6 @@ export default class NewClass extends cc.Component {
         } else {
             this.kunCount.node.color = cc.Color.WHITE;
         }
-
-        // this.zijin.string = GameData.properties[3];
-        // this.yingZiJin.string = parseInt((GameCfg.finalfund - GameCfg.ziChan) + '') + '';
-        // this.AllZiJin.string = parseInt(GameCfg.finalfund + '') + '';
-
         if (GameCfg.GameType == pb.GameType.QiHuo) {
             this.nameTipsLabel.string = '品种合约';
             this.maLabel.string = '';
@@ -150,41 +243,6 @@ export default class NewClass extends cc.Component {
             } else if (parseInt(all) < 0) {
                 this.qhxl_kui.active = false;
             }
-        }
-
-        //复盘中不保存记录
-        if (!GameCfg.GAMEFUPAN) {
-            let datas = {
-                uid: GameData.userID,
-                g_type: GameCfg.GameType,
-                quotes_code: GameCfg.data[0].code,
-                k_type: GameCfg.data[0].ktype,
-                k_from: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
-
-                k_to: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
-                //  k_to: parseInt(gpData[gpData.length - 1].day.replace(///g,'')),
-                stock_profit_rate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100).toFixed(2),
-                user_profit_rate: (GameCfg.allRate * 100).toFixed(2),
-                user_capital: GameData.properties[3],
-                user_profit: (GameCfg.finalfund - GameCfg.ziChan),
-                ts: new Date().getTime() / 1000,
-                rank: 0,
-                ref_id: 0,
-            }
-            console.log('GameCfg.finalfund' + GameCfg.finalfund + '-' + 'GameCfg.ziChan' + GameCfg.ziChan + '=' + (GameCfg.finalfund - GameCfg.ziChan));
-            //  if (GameCfg.GameType < 4) {
-            datas.rank = datas.user_profit_rate >= datas.stock_profit_rate ? 1 : 2;
-            //  if (GameCfg.GameType == 1) {
-            datas.ref_id = 0;
-            // }
-            //  }
-            if (GameCfg.GameType != pb.GameType.ShuangMang) {
-                this.saveHoistoryInfo(parseInt(datas.ts + ''));
-            }
-
-            socket.send(pb.MessageId.Req_Game_Over, PB.onCmdGameOverConvertToBuff(datas), (info) => {
-                console.log('GameOverInfo' + JSON.stringify(info));
-            })
         }
     }
 
@@ -226,23 +284,25 @@ export default class NewClass extends cc.Component {
         }
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
-            GameCfg.huizhidatas = GameData.huizhidatas;
+            GlobalHandle.onCmdGameStartReq(() => {
+                GameCfg.huizhidatas = GameData.huizhidatas;
 
-            GameCfg.allRate = 0;
-            GameCfg.profitCount = 0;
-            GameCfg.lossCount = 0;
-            GameCfg.finalfund = 0;
-            GameCfg.fill = [];
-            GameCfg.mark = [];
-            GameCfg.notice = [];
-            GameCfg.GAMEFUPAN = false;
-            //   GameCfg.history.huizhidatas = 0;
-            GameCfg.history.allRate = 0;
-            GameCfg.history.deal = [];
-            //   GameCfg.ziChan = 100000;
-            cc.director.loadScene('game');
+                GameCfg.allRate = 0;
+                GameCfg.profitCount = 0;
+                GameCfg.lossCount = 0;
+                GameCfg.finalfund = 0;
+                GameCfg.fill = [];
+                GameCfg.mark = [];
+                GameCfg.notice = [];
+                GameCfg.GAMEFUPAN = false;
+                //   GameCfg.history.huizhidatas = 0;
+                GameCfg.history.allRate = 0;
+                GameCfg.history.deal = [];
+                //   GameCfg.ziChan = 100000;
+                cc.director.loadScene('game');
 
-            // GameCfg.GAMEFUPAN = false;
+                // GameCfg.GAMEFUPAN = false;
+            })
         }
         //复盘
         else if (name == 'lx_jsbt_qd') {

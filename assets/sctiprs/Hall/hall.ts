@@ -7,6 +7,7 @@ import ComUtils from '../Utils/ComUtils';
 import GameData from '../GameData';
 import DrawData from '../game/DrawData';
 import HttpUtils from '../common/net/HttpUtils';
+import GlobalHandle from '../global/GlobalHandle';
 
 const { ccclass, property } = cc._decorator;
 
@@ -357,7 +358,8 @@ export default class NewClass extends cc.Component {
 		//  if (socket) {
 		GameCfg.data[0].data = [];
 		GameCfg.info = info1;
-		socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(data), res => {
+		// socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(data), res => {
+		GlobalHandle.onCmdGameStartReq(() => {
 			//console.log('onCmdGameStart' + JSON.stringify(res));
 			let infoPre = {
 				ktype: info1.ktype,
@@ -488,11 +490,9 @@ export default class NewClass extends cc.Component {
 		let maxLength = 2000;
 		this.curTotal = 0;
 		GameCfg.data[0].data = [];
-		let inf = {
-			game: pb.GameType.QiHuo
-		}
-		socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(inf), res => {
 
+		//socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(inf), res => {
+		GlobalHandle.onCmdGameStartReq(() => {
 			//先获取前面的
 			let preData = {
 				ktype: data.ktype,

@@ -32,14 +32,15 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on(EventCfg.GAMEFUPAN, this.onMarkAllShow.bind(this), this);
 
-        //  GlobalEvent.on(EventCfg.ONMARKRANGESHOWORHIDE, this.onMarkRangeShowOrHide.bind(this), this);
-
         GlobalEvent.on(EventCfg.ONMARKUPDATE, this.onMarkUpdate.bind(this), this);
 
         if (GameCfg.GAMEFUPAN) {
             this.createFuPanData();
         }
+
         GlobalEvent.on(EventCfg.ADDMARKHIDEORSHOW, (flag) => { this.node.active = flag }, this);
+
+        // GlobalEvent.on(EventCfg.ONADDMARKAI, this.onAddMarkAI.bind(this), this);
     }
 
     //复盘的本地数据
@@ -149,7 +150,13 @@ export default class NewClass extends cc.Component {
         } else if (info.type == 3) {
             node = cc.instantiate(this.sItem);
             inde = info.index - 1;
-        } else {
+        }
+        //策略買入 
+        else if (info.type == 12) {
+
+        }
+
+        else {
             return;
         }
         this.node.addChild(node);
@@ -160,20 +167,9 @@ export default class NewClass extends cc.Component {
             type: info.type,
         };
 
+        node.active = false;
+
         this.saveHistoryMark(info.index, info.type);
-
-        // //双盲
-        // if (GameCfg.GameType == pb.GameType.ShuangMang) {
-        //     node.active = false;
-        // }
-        if (GameCfg.GAMEFUPAN) {
-            node.active = true;
-        } else {
-            node.active = false;
-        }
-
-        //  console.log(type);MA5下穿MA10
-
     }
 
     saveHistoryMark(inde, type) {
@@ -182,13 +178,7 @@ export default class NewClass extends cc.Component {
 
             GameCfg.mark.push([inde, type])
 
-            // this.markNodes.forEach((el, indx) => {
 
-            //     if (el) {
-            //         GameCfg.mark[indx] = el.type;
-            //     }
-
-            // })
         }
     }
 
@@ -220,6 +210,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.ONADDMARK);
         GlobalEvent.off(EventCfg.ONMARKUPDATE);
         GlobalEvent.off(EventCfg.ADDMARKHIDEORSHOW);
+
     }
 
     // update (dt) {}

@@ -1,3 +1,5 @@
+import { pb } from "../../protos/proto";
+import GameCfg from "../../sctiprs/game/GameCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
@@ -75,7 +77,12 @@ export default class NewClass extends cc.Component {
         if (name == 'itemNotice') {
             let pos = this.node.convertToWorldSpaceAR(cc.v2(0, 0));
 
-            GlobalEvent.emit('clickTipsInfoPos', { pos: pos, str: this.infoCfg });
+            if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                GlobalEvent.emit('clickTipsInfoPos', { pos: pos, str: this.text });
+            } else {
+                GlobalEvent.emit('clickTipsInfoPos', { pos: pos, str: this.infoCfg });
+            }
+
         }
     }
 }

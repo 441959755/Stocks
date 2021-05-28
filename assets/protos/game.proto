@@ -22,6 +22,25 @@ import "common.proto";
 import "quote.proto";
 
 
+
+
+
+
+// Email消息类型
+enum MessageType {
+	MessageType_NULL = 0;
+
+	Notice = 1;		// 系统消息
+	Popup_Adv = 2;	// 弹窗广告
+
+	
+	Chat = 9;		// 普通聊天
+	
+	RoomChat = 10;	// 房间聊天消息
+	RoomInvite = 11;// 房间邀请
+}
+
+
 // 游戏类型
 enum GameType {
 	GameType_NULL = 0;
@@ -67,11 +86,13 @@ enum GameOperationId {
 	Bid = 2;					// 卖出
 	Wait = 3;					// 观望
 	Hold = 4;					// 持有
-	Ask_Force = 5;				// 强制卖出
+	Bid_Force = 5;				// 强制卖出
+	Ask_Force = 6;				// 强制买入
 	Long = 8;					// 买空
 	Short = 9;					// 卖空
+	Close_Force = 10;			// 强行平仓
 
-	END = 150;					// 结束
+	END = 150;					// 回合结束
 }
 
 
@@ -93,8 +114,14 @@ message GameCounter {
 	int32 win = 2;		// 总共赢的次数
 	int32 lose = 3;		// 总共输的次数
 }
-
-
+message GameCounters {
+	repeated GameCounter items = 1;	// 所有游戏的计数器
+}
+// 当日游戏次数计数器
+message TodayGameTimes {
+	int64 ts = 1;				// 当日时间戳
+	repeated int32 counter = 2;	// 游戏次数
+}
 // 双盲训练状态
 message SmxlState {
 	int64 reset_ts = 1;				// 当前最后一次重置时间戳
@@ -103,9 +130,25 @@ message SmxlState {
 	int64 last_month_report_ts = 4;	// 最近一次生成月报的时间戳
 	int64 gold_init = 5;			// 本月初始资金
 	int64 gold = 6;					// 本月当前资金
+	int64 today_ts = 7;				// 当天时间戳
+	int32 today_times = 8;			// 当日游戏次数
 }
 // 闯关状态
+message CgLogAward {
+	int32 stage = 1;				// 关卡序号
+	bool awarded  = 2;				// 关卡奖励是否派发过
+	bool gotten = 3;				// 关卡奖励是否领取过
+}
 message CgState {
+	int64 season_id = 1;			// 赛季ID，时间戳：YYYYMM
+	int32 stage = 2;				// 当前关卡序号
+	int32 progress = 3;				// 当前关卡进度
+	int32 lifes = 4;				// 当前关卡生命值
+	int32 win = 5;					// 胜场次
+	int32 lose = 6;					// 负场次
+	bool clearance = 7;				// 是否通关
+	repeated CgLogAward awards = 8;// 关卡奖励日志
+
 }
 // 炒股大赛状态
 message CgdsState {
@@ -113,8 +156,6 @@ message CgdsState {
 // 模拟炒股状态
 message MncgState {
 }
-
-
 // 玩家的游戏数据
 message GameData {
 	int32 uid = 1;						// uid
@@ -124,14 +165,14 @@ message GameData {
 	repeated GameCounter counters = 5;	// 游戏输赢计数器
 	SmxlState smlx_state = 6;			// 双盲训练状态
 	CgState cg_state = 7;				// 闯关状态
-	CgState cgds_state = 8;				// 炒股大赛状态
-	CgState mncg_state = 9;				// 模拟炒股状态
-	//int64 Today = 10;					// 今日时间戳（放客户端）
-	//repeated int32 TodayGameCounter= 11;// 今日游戏计数器（放客户端）
+	CgdsState cgds_state = 8;			// 炒股大赛状态
+	MncgState mncg_state = 9;			// 模拟炒股状态
+	int64 today_ts = 10;				// 今日时间戳
+	repeated int32 today_times= 11;		// 今日游戏计数器
 }
 
 
-// 玩家游戏属性
+// 同步玩家游戏属性
 message GamePropertyItem {
 	GamePropertyId id = 1;		// 属性ID
 	int64 old_value = 2;		// 原属性值
@@ -147,10 +188,11 @@ message GameOperationItem {
 	GameOperationId op_id = 1;	// 操作Id
 	int32 code = 2;				// 行情代码：股票或期货
 	KType k_type = 3;			// 行情类型：日K，分时
-	int32 k_ts = 4;				// 行情时间：日K线的格式为YYYYMMDD，分时K线的格式为HHMMSS
-	double price = 5;			// 操作参数：买入或卖出价格
-	int64 volume = 6;			// 操作参数：买入或卖出量
-	int64 op_ts = 7;			// 操作参数：操作时间戳
+	int64 k_ts = 4;				// 操作参数：操作时所在的行情时间：日K线的格式为YYYYMMDD，分时K线的格式为HHMMSS
+	int32 k_offset = 5;			// 操作参数：操作时所在的行情偏移量
+	double price = 6;			// 操作参数：买入或卖出价格
+	int64 volume = 7;			// 操作参数：买入或卖出量
+	int64 op_ts = 8;			// 操作参数：操作时间戳
 }
 message GameOperations {
 	repeated GameOperationItem items = 1;	// 操作集合
@@ -165,13 +207,15 @@ message GameResult {
 	KType k_type = 4;			// 行情类型：日K，分时
 	int64 k_from = 5;			// 行情起始日期YYYYMMDD或时间HHMMSS
 	int64 k_to = 6;				// 行情结束日期YYYYMMDD或时间HHMMSS
-	double stock_profit_rate = 7;//同期股票涨跌幅
-	double user_profit_rate = 8;// 用户盈利率
+	double stock_profit_rate = 7;//同期股票涨跌幅（*100%）
+	double user_profit_rate = 8;// 用户盈利率（*100%）
 	int64 user_capital = 9;		// 用户初始资本金
 	int64 user_profit = 10;		// 用户盈利额
 	int64 ts = 11;				// 游戏结果时间戳
 	int32 rank = 12;			// 游戏结果：本场排行（若是单人或双人游戏，排名第2则为输）
 	int64 ref_id = 13;			// 关联ID
+	int64 k_startup = 14;		// 行情起始位置（开始玩的位置），距离起始行情的偏移量
+	int64 k_stop = 15;			// 行情结束位置（开始玩的位置），距离起始行情的偏移量
 }
 
 
@@ -310,9 +354,6 @@ message CmdRoomCreateReply {
 	ErrorInfo err = 1;	// 结果
 	int32 id = 2;		// 房间ID
 }
-
-
-
 // 进入房间
 message CmdRoomEnter {
 	int32 id = 1;		// 房间ID
@@ -326,9 +367,6 @@ message CmdRoomEnterReply {
 	int32 id = 2;		// 房间ID
   	int32 node = 3;		// 用户所在节点（客户端不需要该参数）
 }
-
-
-
 // 离开房间
 message CmdRoomLeave {
 	int32 id = 1;		// 房间ID
@@ -339,22 +377,12 @@ message CmdRoomLeaveReply {
 	ErrorInfo err = 1;	// 结果
 }
 
-
-
 // 同步玩家就绪：RoomPlayerStatus
 // 应答：（无）
-
-
-
 // 同步游戏状态：RoomGameStatus
 // 应答：（无）
-
-
-
 // 同步游戏操作：RoomGameOp
 // 应答：（无）
-
-
 
 // 同步玩家进入房间
 message SyncRoomEnter {
@@ -382,15 +410,14 @@ message RoomGameStatus {
 // 同步房间游戏操作
 message RoomGameOp {
 	int32 id = 1;		// 房间ID
-	bytes ops = 2;		// 游戏操作
+	int32 uid = 2;		// 用户ID
+	bytes ops = 3;		// 游戏操作
 }
 // 同步房间游戏结果
 message RoomGameResult {
 	int32 id = 1;		// 房间ID
 	bytes result = 2;	// 游戏结果
 }
-
-
 
 // 房间数据
 message RoomData {
@@ -402,8 +429,10 @@ message RoomData {
 message RoomPkPlayer {
 	GameData gd = 1;		// 玩家数据
 	bool ready = 2;			// 玩家是否就绪
-	GameOperations ops = 3;	// 游戏操作
-	GameResult result = 4;	// 游戏结果
+	bool giveup = 3;		// 玩家是否逃跑
+	GameOperations ops = 4;	// 游戏操作
+	GameResult result = 5;	// 游戏结果
+	int64 curPos = 6;		// 游戏进度，距离起始行情的偏移量
 }
 message RoomDataPk {
 	int32 status = 1;				// 游戏状态
@@ -412,8 +441,71 @@ message RoomDataPk {
 	KType ktype = 4;				// 行情类型：日K，分时等等
 	int64 tsQuoteFrom = 5;			// 行情开始时间
 	int64 tsQuoteTo = 6;			// 行情结束时间
-	int64 tsQuoteStart = 7;			// 行情起始位置（开始玩的位置）
+	int64 tsQuoteStart = 7;			// 行情起始位置（开始玩的位置），距离起始行情的偏移量
 	repeated RoomPkPlayer players = 8;	// 玩家数据
 	int64 tsGameFrom = 9;			// 游戏开始时间戳（精确：秒）
 	int64 tsGameCur = 10;			// 游戏当前时间戳（精确：秒）
+	Quotes quotes = 11;				// 股票行情
+	QuotesFuture quotes_future = 12;// 期货行情
+}
+
+
+
+// Email
+message Email {
+	int32 sender = 1;		// 发送者用户ID（0为系统发送者）
+	int32 receiver = 2;		// 接收者用户ID或房间ID（房间邀请信息填0，房间广播填房间ID）
+	MessageType type = 3;	// 消息类型
+	string text = 4;		// 消息内容
+	int64 ts = 5;			// 发送时间
+}
+
+
+
+// 闯关赛相关
+// 闯关赛配置
+message CgsConf {
+	int32 id = 1;			// 当前这一轮闯关赛的时间编码：YYYYMMDD
+	int64 from = 2;			// 开始时间戳：精确到秒
+	int64 to = 3;			// 结束时间戳：精确到秒
+	string conf = 4;		// 闯关赛配置：Json
+	string award = 5;		// 赛季榜奖励：Json
+	int32 status = 6;		// 游戏状态：0表示未开始，1表示游戏中，2表示已结束
+	repeated int32 people=7;// 每一关的人数
+
+}
+// 闯关赛通关排行榜
+message RankingItem {
+	int32 uid = 1;			// uid
+	string nickname = 2;	// 昵称
+	string icon = 3;		// 头像
+	int32 cgs_clearance = 4;// 闯关赛的登顶次数
+	int32 cgs_netwin = 5;	// 闯关赛的净胜
+	int32 cgs_progress = 6;	// 闯关赛的关卡进度
+}
+message RankingList {
+	int32 id = 1;					// 当前这一轮闯关赛的时间编码：YYYYMMDD
+	repeated RankingItem Items = 2;	// 排行
+}
+// 闯关赛排行榜查询
+message CmdCgsRanking {
+	int32 id = 1;	// 当前这一轮闯关赛的时间编码：YYYYMMDD
+	int32 stage = 2;// 关卡序号
+}
+// 闯关赛游戏数据
+message JjPlayer {
+	GameData gd = 1;		// 玩家数据
+	GameOperations ops = 2;	// 游戏操作
+	GameResult result = 3;	// 游戏结果
+}
+message JjGame {
+	int32 code = 1;					// 行情代码
+	KType ktype = 2;				// 行情类型：日K，分时等等
+	int64 tsQuoteFrom = 3;			// 行情开始时间
+	int64 tsQuoteTo = 4;			// 行情结束时间
+	int64 tsQuoteStart = 5;			// 行情起始位置（开始玩的位置），距离起始行情的偏移量
+	Quotes quotes = 6;				// 股票行情
+	QuotesFuture quotes_future = 7;	// 期货行情
+	repeated JjPlayer players = 8;	// 玩家数据
+	int32 capital = 9;				// 报名费
 }

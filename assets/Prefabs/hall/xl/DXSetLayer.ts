@@ -94,14 +94,14 @@ export default class NewClass extends cc.Component {
 
         GameData.DXSet.isBW = this.toggles5[0].isChecked;
 
-        GameData.DXSet.MA1Date = this.labels[0].string;
-        GameData.DXSet.MA2Date = this.labels[1].string;
-        GameData.DXSet.MA3Date = this.labels[2].string;
+        GameData.DXSet.MA1Date = parseInt(this.labels[0].string);
+        GameData.DXSet.MA2Date = parseInt(this.labels[1].string);
+        GameData.DXSet.MA3Date = parseInt(this.labels[2].string);;
 
-        GameData.DXSet.MA4Date = this.labels[3].string;
+        GameData.DXSet.MA4Date = parseInt(this.labels[3].string);
 
-        GameData.DXSet.MA5Date = this.labels[4].string;
-        GameData.DXSet.MA6Date = this.labels[5].string;
+        GameData.DXSet.MA5Date = parseInt(this.labels[4].string);
+        GameData.DXSet.MA6Date = parseInt(this.labels[5].string);
 
         GameData.DXSet.isMA1 = this.toggles[0].isChecked;
         GameData.DXSet.isMA2 = this.toggles[1].isChecked;
