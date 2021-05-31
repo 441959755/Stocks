@@ -1,6 +1,9 @@
 
 import LoadUtils from "../sctiprs/Utils/LoadUtils";
 import ComUtils from '../sctiprs/Utils/ComUtils';
+import GameCfg from "./game/GameCfg";
+import { pb } from '../protos/proto';
+import GameData from "./GameData";
 
 export default class GameCfgText {
 
@@ -196,6 +199,230 @@ export default class GameCfgText {
 
 
     }
+
+    //随机SM一只股票
+    public static getGPSMByRandom(cb?) {
+        let data = {
+            ktype: pb.KType.Day,
+            kstyle: pb.KStyle.Random,
+            code: null,
+            from: null,
+            total: 150,
+            to: 0,
+        }
+
+        let le = parseInt(Math.random() * this.stockList.length + '');
+        let items = this.stockList[le].split('|');
+        data.code = items[0];
+
+
+        let start = items[2], end = items[3], sc;
+        if (end == 0) {
+            sc = new Date().getTime() - 24 * 60 * 60 * 1000 * 300;
+        } else {
+            let year = end.slice(0, 4);
+            let month = end.slice(4, 6);
+            let day = end.slice(6);
+
+            let d = new Date(year + '-' + month + '-' + day);
+
+            sc = d.getTime() - 24 * 60 * 60 * 1000 * data.total;
+        }
+
+
+        let year = start.slice(0, 4);
+        let month = start.slice(4, 6);
+        let day = start.slice(6);
+
+        //开始的时间戳
+        let d = new Date(year + '-' + month + '-' + day);
+        ///console.log(d); 
+        let t = d.getTime() + 24 * 60 * 60 * 1000 * 100;
+
+        if (sc <= 0) {
+            this.getGPSMByRandom();
+
+            return;
+        }
+
+        if (sc < t) {
+            this.getGPSMByRandom();
+
+            return;
+        }
+
+        //随机的时间戳
+
+        let s = Math.random() * (sc - t) + t;
+
+        let f = new Date(s);
+        {
+            let ye = f.getFullYear();
+            let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+
+            let da = f.getDate() >= 10 ? f.getDate() : '0' + (f.getDate());
+
+            data.from = ye + '' + mon + '' + da;
+            console.log(data.from);
+
+        }
+
+        GameCfg.data[0].data = [];
+        GameCfg.data[0].name = items[1];
+        GameCfg.data[0].code = items[0];
+        GameCfg.data[0].circulate = items[4];
+        GameCfg.data[0].ktype = data.ktype;
+
+        return data;
+    }
+
+    //随机DX一只股票
+    public static getGPDXByRandom(cb?) {
+        let data = {
+            ktype: null,
+            kstyle: null,
+            code: null,
+            from: null,
+            total: parseInt(GameData.DXSet.KLine),
+            to: 0
+        };
+        let items;
+
+        let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
+
+        items = GameCfgText.stockList[le].split('|');
+        data.code = items[0];
+
+
+
+        data.kstyle = pb.KStyle.Random;
+
+        let start = items[2],
+            end = items[3],
+            sc;
+        if (end == 0) {
+
+            sc = new Date().getTime() - data.total * 24 * 60 * 60 * 1000;
+
+        } else {
+            let year = end.slice(0, 4);
+            let month = end.slice(4, 6);
+            let day = end.slice(6);
+
+            let d = new Date(year + '-' + month + '-' + day);
+
+
+            sc = d.getTime() - data.total * 24 * 60 * 60 * 1000;
+
+        }
+        let year = start.slice(0, 4);
+        let month = start.slice(4, 6);
+        let day = start.slice(6);
+
+        let d = new Date(year + '-' + month + '-' + day);
+
+        let t;
+
+        t = d.getTime() + 24 * 60 * 60 * 1000 * 100;
+
+
+        if (sc < t && GameData.DXSet.year == '随机' && GameData.DXSet.search == '随机选股') {
+            this.getGPDXByRandom();
+            return;
+        }
+
+        let s = Math.random() * (sc - t) + t;
+
+        let f = new Date(s);
+
+        {
+            let ye = f.getFullYear();
+            let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+
+            let da = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
+
+            data.from = ye + '' + mon + '' + da;
+        }
+
+
+        GameCfg.data[0].code = items[0];
+
+        data.ktype = pb.KType.Day;
+        GameCfg.data[0].data = [];
+        GameCfg.data[0].name = items[1];
+
+        GameCfg.data[0].circulate = items[4];
+
+        console.log('给的数据:' + JSON.stringify(data));
+        return data;
+
+    }
+
+    //随机QH一只期货
+    public static getQHQHByRandom(cb?) {
+        let data = {
+            ktype: null,
+            kstyle: pb.KStyle.Random,
+            code: null,
+            from: null,
+            total: parseInt(GameData.QHSet.KLine),
+            to: 0
+        };
+
+        let rom = parseInt(Math.random() * this.qihuoList.length + '');
+
+        let items = this.qihuoList[rom].split('|');
+        data.code = items[0];
+        let tim = GameCfgText.QHGetTimeByCodeName(data.code)
+        data.ktype = pb.KType.Day;
+
+        let start = tim.start, end = tim.end, sc;
+
+        if (end == 0) {
+            sc = new Date().getTime() - data.total * 24 * 60 * 60 * 1000;
+        } else {
+            let year = end.slice(0, 4);
+            let month = end.slice(4, 6);
+            let day = end.slice(6);
+
+            let d = new Date(year + '-' + month + '-' + day);
+            sc = d.getTime() - data.total * 24 * 60 * 60 * 1000;
+        }
+        let f;
+        if (start == 0) {
+            f = new Date(sc);
+        } else {
+            let year = start.slice(0, 4);
+            let month = start.slice(4, 6);
+            let day = start.slice(6);
+
+            let d = new Date(year + '-' + month + '-' + day);
+            ///console.log(d);
+            let t = d.getTime() + 50 * 24 * 60 * 60 * 1000;
+
+            let s = Math.random() * (sc - t) + t;
+
+            f = new Date(s);
+        }
+        {
+            let ye = f.getFullYear();
+            let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+
+            let da = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
+
+            data.from = ye + '' + mon + '' + da;
+        }
+
+        GameCfg.data[0].code = items[0];
+        GameCfg.data[0].data = [];
+        GameCfg.data[0].name = items[1] + '  ' + items[2] + items[3];
+        console.log(JSON.stringify(data));
+        GameCfg.enterGameCache = data;
+
+        return data;
+
+    }
+
 
     public static releaseRes() {
         LoadUtils.releaseRes('protos/stocklist');

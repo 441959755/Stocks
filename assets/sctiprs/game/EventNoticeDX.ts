@@ -21,6 +21,9 @@ export default class NewClass extends cc.Component {
 
     timeCall = null;
 
+    _idd = 0;
+
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
@@ -767,32 +770,46 @@ export default class NewClass extends cc.Component {
 
     testStopCheck(el) {
 
-        if (el > 0.3) {
+        if (el > 0.3 && this._idd != 31) {
             //收益大于30%
             // this.onCreateTipsItem('收益大于30%');
             this.onCreateTipsItem(31);
-        } else if (el > 0.2) {
+            this._idd = 31
+            return;
+        } else if (el > 0.2 && this._idd != 32) {
             //收益大于20%
             //   this.onCreateTipsItem('收益大于20%');
             this.onCreateTipsItem(32);
-        } else if (el > 0.1) {
+            this._idd = 32;
+            return;
+        } else if (el > 0.1 && this._idd != 33) {
             //收益大于10 %
             //  this.onCreateTipsItem('收益大于10%');
             this.onCreateTipsItem(33);
+            this._idd = 33;
+            return;
         }
 
-        if (el < -0.2) {
+        else if (el < -0.2 && this._idd != 34) {
             // 亏损大于20%
             //this.onCreateTipsItem('亏损大于20%');
             this.onCreateTipsItem(34);
-        } else if (el < -0.15) {
+            this._idd = 34;
+            return;
+        } else if (el < -0.15 && this._idd != 35) {
             // 亏损大于15%
             // this.onCreateTipsItem('亏损大于15%');
             this.onCreateTipsItem(35);
-        } else if (el < -0.1) {
+            this._idd = 35;
+            return;
+        } else if (el < -0.1 && this._idd != 36) {
             // 亏损大于10%
             //  this.onCreateTipsItem('亏损大于10%');
             this.onCreateTipsItem(36);
+            this._idd = 36;
+            return;
+        } else {
+            this._idd = 0;
         }
     }
 

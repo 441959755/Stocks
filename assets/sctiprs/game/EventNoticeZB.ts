@@ -176,8 +176,6 @@ export default class NewClass extends cc.Component {
                                 this.curState = 'B';
                                 StrategyAIData.onBuyFunc();
                             }
-
-
                         }
                     }
                 }
@@ -186,7 +184,7 @@ export default class NewClass extends cc.Component {
             //短线转向卖点
             if (this.maList[j][index] <= this.maList[j][index - 1]) {
                 if (this.gpData[index].close < this.maList[j][index]) {
-                    let max = Math.max(this.gpData[index - 1].close.this.gpData[index - 1].open);
+                    let max = Math.min(this.gpData[index - 1].close.this.gpData[index - 1].open);
                     if (this.gpData[index].close < max) {
                         //S
                         this.onCreateTipsItem('短线转向卖点')
@@ -202,7 +200,7 @@ export default class NewClass extends cc.Component {
 
             //乖离过大买点
             if (this.maList[j][index] < this.maList[z][index]) {
-                if ((this.maList[j][index] - this.gpData[index].close) / this.maList[index] >= -0.1) {
+                if ((this.maList[j][index] - this.gpData[index].close) / this.maList[j][index] >= -0.12) {
                     let min = Math.min(this.gpData[index - 1].close.this.gpData[index - 1].open);
                     if (this.gpData[index].close > min) {
                         if (this.gpData[index].low > this.gpData[index - 1].low) {
@@ -220,9 +218,9 @@ export default class NewClass extends cc.Component {
 
             //乖离过大卖点
             if (this.maList[j][index] > this.maList[z][index]) {
-                if (((this.gpData[index].close - this.maList[j][index]) / this.maList[j][index]) >= 0.1) {
-                    let min = Math.min(this.gpData[index - 1].close.this.gpData[index - 1].open);
-                    if (this.gpData[index].close < min) {
+                if (((this.gpData[index].close - this.maList[j][index]) / this.maList[j][index]) >= 0.12) {
+                    let max = Math.max(this.gpData[index - 1].close.this.gpData[index - 1].open);
+                    if (this.gpData[index].close < max) {
                         //s
                         this.onCreateTipsItem('乖离过大卖点')
                         if (this.curState != 'S') {
@@ -321,116 +319,124 @@ export default class NewClass extends cc.Component {
     }
 
     testMACDEvent() {
-        //1) MACD 金叉
         let index = GameCfg.huizhidatas - 1;
-        if (this.difList[index - 1] <= this.deaList[index - 1]) {
-            if (this.difList[index] > this.deaList[index]) {
+        if (GameCfg.GameSet.strategy == 'MACD金叉' || GameCfg.GameSet.strategy == '经典用法') {
+            //1) MACD 金叉
+            if (this.difList[index - 1] <= this.deaList[index - 1]) {
+                if (this.difList[index] > this.deaList[index]) {
 
+                }
             }
-        }
 
-        //2) MACD 死叉
-        if (this.difList[index - 1] >= this.deaList[index - 1]) {
-            if (this.difList[index] < this.deaList[index]) {
+            //2) MACD 死叉
+            if (this.difList[index - 1] >= this.deaList[index - 1]) {
+                if (this.difList[index] < this.deaList[index]) {
 
-            }
-        }
-
-        //3）DIF向上穿越0轴
-        if (this.difList[index - 1] < 0) {
-            if (this.difList[index] > 0) {
-
-            }
-        }
-
-        //4）DIF向下穿越0轴
-        if (this.difList[index - 1] > 0) {
-            if (this.difList[index] < 0) {
-
-            }
-        }
-
-        //5）MACD底背离
-        //TODO
-
-        //6）MACD顶背离
-        //TODO
-
-        //7）绿柱最低值转向
-        if (this.gpData[index - 1].close < this.gpData[index - 2].close) {
-            if (this.macdList[index] < 0) {
-                if (this.macdList[index] > this.macdList[index - 1]) {
-                    this.MACDMIN = this.macdList[index - 1];
-                    if (this.macdList[index] >= this.difList[index] || this.difList[index] > 0) {
-                        if (this.difList[index] > this.difList[index - 1]) {
-                            //B
-                            this.MACDState = 1;
-                        }
-                    }
                 }
             }
         }
 
-        if (this.MACDState == 1 && this.macdList[index] < this.MACDMIN) {
-            if (Math.abs(this.macdList[index]) >= 0.04) {
-                //s
-                this.MACDState = 2;
-            }
-        }
+        if (GameCfg.GameSet.strategy == '0轴穿越' || GameCfg.GameSet.strategy == '经典用法') {
+            //3）DIF向上穿越0轴
+            if (this.difList[index - 1] < 0) {
+                if (this.difList[index] > 0) {
 
-        if (this.MACDState == 0) {
-            if (this.macdList[index - 1] < 0) {
-                if (this.macdList[index] > 0) {
-                    this.MACDState = 1;
-                    //B
                 }
             }
-        }
-        //8）红柱最高值转向
 
-        if (this.gpData[index - 1].close > this.gpData[index - 2].close) {
-            if (this.macdList[index] > 0) {
-                if (this.macdList[index] < this.macdList[index - 1]) {
-                    this.MACDMAX = this.macdList[index - 1];
-                    if (this.difList[index] < this.difList[index - 1]) {
-                        if (this.deaList[index] > 0) {
-                            if (this.macdList[index] <= this.difList[index]) {
-                                //s
-                                this.MACDState = 2;
-                            }
-                        } else if (this.deaList[index] <= 0) {
-                            if (this.macdList[index] < this.macdList[index - 1]) {
-                                this.MACDState = 2;
-                            }
-                        }
-                    }
+            //4）DIF向下穿越0轴
+            if (this.difList[index - 1] > 0) {
+                if (this.difList[index] < 0) {
+
                 }
             }
         }
 
-        if (this.MACDState == 2 && this.MACDState[index] > 0) {
-            if (this.macdList[index] > this.macdList[index - 1]) {
-                if (this.deaList[index] > this.deaList[index - 1]) {
-                    let max = Math.max(this.gpData[index - 1].close.this.gpData[index - 1].open);
-                    if (this.gpData[index].close >= max) {
-                        if (this.macdList[index] >= 0.04) {
-                            // this.MACDState = 1;
-                            //B
-                        }
-                    }
-                }
-            }
+        if (GameCfg.GameSet.strategy == 'MACD背离' || GameCfg.GameSet.strategy == '经典用法') {
+            //5）MACD底背离
+            //TODO
+
+            //6）MACD顶背离
+            //TODO
         }
 
-        if (this.MACDState == 0) {
-            if (this.macdList[index - 1] > 0) {
+
+        if (GameCfg.GameSet.strategy == '柱最大值转向' || GameCfg.GameSet.strategy == '经典用法') {
+            //7）绿柱最低值转向
+            if (this.gpData[index - 1].close < this.gpData[index - 2].close) {
                 if (this.macdList[index] < 0) {
-                    this.MACDState = 2;
+                    if (this.macdList[index] > this.macdList[index - 1]) {
+                        this.MACDMIN = this.macdList[index - 1];
+                        if (this.macdList[index] >= this.difList[index] || this.difList[index] > 0) {
+                            if (this.difList[index] > this.difList[index - 1]) {
+                                //B
+                                this.MACDState = 1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (this.MACDState == 1 && this.macdList[index] < this.MACDMIN) {
+                if (Math.abs(this.macdList[index]) >= 0.04) {
                     //s
+                    this.MACDState = 2;
+                }
+            }
+
+            if (this.MACDState == 0) {
+                if (this.macdList[index - 1] < 0) {
+                    if (this.macdList[index] > 0) {
+                        this.MACDState = 1;
+                        //B
+                    }
+                }
+            }
+            //8）红柱最高值转向
+
+            if (this.gpData[index - 1].close > this.gpData[index - 2].close) {
+                if (this.macdList[index] > 0) {
+                    if (this.macdList[index] < this.macdList[index - 1]) {
+                        this.MACDMAX = this.macdList[index - 1];
+                        if (this.difList[index] < this.difList[index - 1]) {
+                            if (this.deaList[index] > 0) {
+                                if (this.macdList[index] <= this.difList[index]) {
+                                    //s
+                                    this.MACDState = 2;
+                                }
+                            } else if (this.deaList[index] <= 0) {
+                                if (this.macdList[index] < this.macdList[index - 1]) {
+                                    this.MACDState = 2;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (this.MACDState == 2 && this.MACDState[index] > 0) {
+                if (this.macdList[index] > this.macdList[index - 1]) {
+                    if (this.deaList[index] > this.deaList[index - 1]) {
+                        let max = Math.max(this.gpData[index - 1].close.this.gpData[index - 1].open);
+                        if (this.gpData[index].close >= max) {
+                            if (this.macdList[index] >= 0.04) {
+                                // this.MACDState = 1;
+                                //B
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (this.MACDState == 0) {
+                if (this.macdList[index - 1] > 0) {
+                    if (this.macdList[index] < 0) {
+                        this.MACDState = 2;
+                        //s
+                    }
                 }
             }
         }
-
     }
 
     testKDJEvent() {

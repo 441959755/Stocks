@@ -64,7 +64,7 @@ export default class NewClass extends cc.Component {
         } else if (this.text == '收益大于30%') {
             this.infoCfg = '第伞止盈目标30%';
         } else if (this.text == '亏损大于10%') {
-            this.infoCfg = '第一止损目标-8%';
+            this.infoCfg = '第一止损目标-10%';
         } else if (this.text == '亏损大于15%') {
             this.infoCfg = '第二止损目标-15%';
         } else if (this.text == '亏损大于20%') {

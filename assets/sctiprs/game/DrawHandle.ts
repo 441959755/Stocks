@@ -171,11 +171,15 @@ export default class NewClass extends cc.Component {
             let localPos = this.node.children[0].convertToNodeSpaceAR(pos);
             this.vertical1.x = Math.floor((localPos.x - 10) / cc.ext.hz_width) * cc.ext.hz_width + 10 + cc.ext.hz_width / 2;
             this.Horizontal1.y = localPos.y;
+
             let index = cc.ext.beg_end[0] + (Math.floor((localPos.x - 10) / cc.ext.hz_width));
 
             if (index >= cc.ext.beg_end[1]) {
                 this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
                 index = cc.ext.beg_end[1] - 1;
+            }
+            else if (index <= cc.ext.beg_end[0]) {
+                this.vertical1.x = 10 + cc.ext.hz_width / 2;
             }
             this.updataLabel(index);
         }, this);
@@ -220,6 +224,9 @@ export default class NewClass extends cc.Component {
                             if (index >= cc.ext.beg_end[1]) {
                                 this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
                                 index = cc.ext.beg_end[1] - 1;
+                            }
+                            else if (index <= cc.ext.beg_end[0]) {
+                                this.vertical1.x = 10 + cc.ext.hz_width / 2;
                             }
                             //  }
 
@@ -306,6 +313,8 @@ export default class NewClass extends cc.Component {
                             if (index >= cc.ext.beg_end[1]) {
                                 this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
                                 index = cc.ext.beg_end[1] - 1;
+                            } else if (index <= cc.ext.beg_end[0]) {
+                                this.vertical1.x = 10 + cc.ext.hz_width / 2;
                             }
                             this.updataLabel(index);
                             calDisY = 0;
@@ -367,7 +376,7 @@ export default class NewClass extends cc.Component {
 
     //跟新label
     updataLabel(index) {
-        if (!index || index <= 1) {
+        if (index < 0) {
             return
         }
         this.setMALabelInfo(index);

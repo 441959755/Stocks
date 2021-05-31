@@ -193,8 +193,8 @@ export default class NewClass extends cc.Component {
                 cc.director.loadScene('hall');
 
             } else {
-                PopupManager.LoadPopupBox('tipsBox', '是否终止当前训练，查看训练结果？', (flag) => {
-                    GlobalEvent.emit(EventCfg.GAMEOVEER, flag);
+                PopupManager.LoadPopupBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
+                    GlobalEvent.emit(EventCfg.GAMEOVEER);
                 })
             }
         } else if (name == 'backBtn') {
@@ -225,8 +225,8 @@ export default class NewClass extends cc.Component {
                 cc.director.loadScene('hall');
 
             } else {
-                PopupManager.LoadPopupBox('tipsBox', '是否终止当前训练，查看训练结果？', (flag) => {
-                    GlobalEvent.emit(EventCfg.GAMEOVEER, flag);
+                PopupManager.LoadPopupBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
+                    GlobalEvent.emit(EventCfg.GAMEOVEER);
 
                 })
             }

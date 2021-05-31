@@ -42,16 +42,16 @@ export default class NewClass extends cc.Component {
         // "count":5,"rankCaptial":0.20999999344348907,"rankRate":0.550000011920929}
         this.labels[0].string = GameData.userName;
         this.labels[1].string = '的训练记录(' + year + '年' + month + '月)';
-        this.labels[2].string = this.monthlyInfo.capitalInit || 0;
-        this.labels[3].string = this.monthlyInfo.capitalFinal || 0;
-        this.labels[4].string = this.monthlyInfo.profitRate.toFixed(2) || 0;
-        this.labels[5].string = this.monthlyInfo.count || 0;
-        this.labels[6].string = this.monthlyInfo.winCount || 0;
-        this.labels[7].string = this.monthlyInfo.winCode || 0;
-        this.labels[8].string = this.monthlyInfo.winRate.toFixed(2) || 0;
-        this.labels[9].string = this.monthlyInfo.loseCount || 0;
-        this.labels[10].string = this.monthlyInfo.loseCode || 0;
-        this.labels[11].string = (this.monthlyInfo.loseRate).toFixed(2) || 0;
+        this.monthlyInfo.capitalInit && (this.labels[2].string = this.monthlyInfo.capitalInit);
+        this.monthlyInfo.capitalFinal && (this.labels[3].string = this.monthlyInfo.capitalFinal);
+        this.monthlyInfo.profitRate && (this.labels[4].string = this.monthlyInfo.profitRate.toFixed(2));
+        this.monthlyInfo.count && (this.labels[5].string = this.monthlyInfo.count);
+        this.monthlyInfo.winCount && (this.labels[6].string = this.monthlyInfo.winCount);
+        this.monthlyInfo.winCode && (this.labels[7].string = this.monthlyInfo.winCode);
+        this.monthlyInfo.winRate && (this.labels[8].string = this.monthlyInfo.winRate.toFixed(2));
+        this.monthlyInfo.loseCount && (this.labels[9].string = this.monthlyInfo.loseCount);
+        this.monthlyInfo.loseCode && (this.labels[10].string = this.monthlyInfo.loseCode);
+        this.monthlyInfo.loseRate && (this.labels[11].string = (this.monthlyInfo.loseRate).toFixed(2));
 
         this.labels[12].string = (((this.monthlyInfo.rankCaptial) + (this.monthlyInfo.rankRate)) / 2).toFixed(2) + '%';
         this.labels[13].string = ((this.monthlyInfo.rankCaptial).toFixed(2) || 0) + '%';

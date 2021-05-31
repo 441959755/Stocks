@@ -10,6 +10,8 @@ import ComUtils from '../Utils/ComUtils';
 import { pb } from '../../protos/proto';
 import GlobalHandle from "../global/GlobalHandle";
 
+import StrategyAIData from "./StrategyAIData";
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -101,8 +103,8 @@ export default class NewClass extends cc.Component {
                 k_to: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
                 //  k_to: parseInt(gpData[gpData.length - 1].day.replace(///g,'')),
                 stock_profit_rate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100).toFixed(2),
-                user_profit_rate: (GameCfg.allRate * 100).toFixed(2),
-                user_capital: GameData.properties[3],
+                user_profit_rate: (GameCfg.allRate * 100),
+                user_capital: GameData.SmxlState.gold,
                 user_profit: (GameCfg.finalfund - GameCfg.ziChan),
                 ts: new Date().getTime() / 1000,
                 rank: 0,
@@ -159,6 +161,8 @@ export default class NewClass extends cc.Component {
         {
             //策略信号次数   相似度次数
             let la = boxs[4].getChildByName('richText').getComponent(cc.Label);
+
+            la.string = StrategyAIData.AICount + '';
 
 
             let la1 = boxs[4].getChildByName('richText1').getComponent(cc.Label);
@@ -284,7 +288,19 @@ export default class NewClass extends cc.Component {
         }
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
-            GlobalHandle.onCmdGameStartReq(() => {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            let data = null;
+            if (GameCfg.GameType == pb.GameType.ShuangMang) {
+                data = GameCfgText.getGPSMByRandom();
+            }
+            else if (GameCfg.GameType == pb.GameType.DingXiang) {
+                data = GameCfgText.getGPDXByRandom();
+            }
+            else if (GameCfg.GameType == pb.GameType.QiHuo) {
+                data = GameCfgText.getQHQHByRandom();
+            }
+
+            let cb = () => {
                 GameCfg.huizhidatas = GameData.huizhidatas;
 
                 GameCfg.allRate = 0;
@@ -299,9 +315,20 @@ export default class NewClass extends cc.Component {
                 GameCfg.history.allRate = 0;
                 GameCfg.history.deal = [];
                 //   GameCfg.ziChan = 100000;
+                GlobalEvent.emit(EventCfg.LEVELCHANGE);
                 cc.director.loadScene('game');
 
                 // GameCfg.GAMEFUPAN = false;
+            }
+
+            GlobalHandle.onCmdGameStartReq(() => {
+                if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang) {
+                    GlobalHandle.onCmdGameStartQuoteQuery(data, cb)
+                }
+                else if (GameCfg.GameType == pb.GameType.QiHuo) {
+                    GlobalHandle.onCmdGameStartQuoteQueryQH(data, cb);
+                }
+
             })
         }
         //复盘

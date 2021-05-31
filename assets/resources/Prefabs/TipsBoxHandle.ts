@@ -21,10 +21,10 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         if (name == 'qdBtn') {
             this.node.active = false;
-            this._call && (this._call(true));
+            this._call && (this._call());
         } else if (name == 'qxBtn') {
             this.node.active = false;
-            this._call && (this._call(false));
+            // this._call && (this._call(false));
         }
     }
 

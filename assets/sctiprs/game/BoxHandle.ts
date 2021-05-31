@@ -100,12 +100,16 @@ export default class NewClass extends cc.Component {
                     this.hsLa.string = parseFloat(datas[inde].Rate).toFixed(2) + '%';
                 }
 
+                let zd = 0.00, zf = 0.00;
+                if (inde > 0) {
+                    zd = datas[inde].close - datas[inde - 1].close;
+                    zf = (zd / datas[inde - 1].close) * 100;
+                }
 
-                let zd = datas[inde].close - datas[inde - 1].close;
                 info.push(zd.toFixed(2));
-                let zf = (zd / datas[inde - 1].close) * 100;
+
                 info.push(zf.toFixed(2));
-                //  this.hsLa.string = parseFloat(datas[inde].Rate).toFixed(2) + '%';
+
                 if (zf < 0) {
                     this.zfLa.node.color = new cc.Color().fromHEX('#76B87E');
                     //    this.tipsBox.children[9].color = new cc.Color().fromHEX('#76B87E');

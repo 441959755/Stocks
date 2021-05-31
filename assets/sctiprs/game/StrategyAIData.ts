@@ -14,8 +14,14 @@ export default class StrategyAIData {
 
     private static preBuyprice = 0; //上次买入价格
 
+    public static AICount = 0;   //策略次数
+
+
+
 
     public static onBuyFunc() {
+        this.AICount++;
+
 
         let gpdata = GameCfg.data[0].data;
 
@@ -26,6 +32,9 @@ export default class StrategyAIData {
 
 
     public static onSellFunc() {
+
+        this.AICount++;
+
         let gpdata = GameCfg.data[0].data;
 
         let curClose = parseFloat(gpdata[GameCfg.huizhidatas - 1].close);
@@ -52,6 +61,7 @@ export default class StrategyAIData {
         this.profitrate = 0;
         this.succRate = 0;
         this.succRate = 0;
+        this.AICount = 0;
     }
 
 }

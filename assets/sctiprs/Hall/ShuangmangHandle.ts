@@ -6,10 +6,7 @@ import GameData from "../GameData";
 import { pb } from '../../protos/proto';
 
 import GameCfgText from '../GameText';
-
-import LLWConfig from '../common/config/LLWConfig';
-
-import ComUtils from '../Utils/ComUtils';
+import GlobalHandle from "../global/GlobalHandle";
 
 const { ccclass, property } = cc._decorator;
 
@@ -131,79 +128,8 @@ export default class NewClass extends cc.Component {
     }
 
     smStartGameSet() {
-        let data = {
-            ktype: pb.KType.Day,
-            kstyle: pb.KStyle.Random,
-            code: null,
-            from: null,
-            total: 150,
-            to: 0,
-        }
+        let data = GameCfgText.getGPSMByRandom()
 
-        let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
-        let items = GameCfgText.stockList[le].split('|');
-        data.code = items[0];
-
-
-        let start = items[2], end = items[3], sc;
-        if (end == 0) {
-            sc = new Date().getTime() - 24 * 60 * 60 * 1000 * 300;
-        } else {
-            let year = end.slice(0, 4);
-            let month = end.slice(4, 6);
-            let day = end.slice(6);
-
-            let d = new Date(year + '-' + month + '-' + day);
-
-            sc = d.getTime() - 24 * 60 * 60 * 1000 * data.total;
-        }
-
-
-        let year = start.slice(0, 4);
-        let month = start.slice(4, 6);
-        let day = start.slice(6);
-
-        //开始的时间戳
-        let d = new Date(year + '-' + month + '-' + day);
-        ///console.log(d); 
-        let t = d.getTime() + 24 * 60 * 60 * 1000 * 100;
-
-        if (sc <= 0) {
-            this.smStartGameSet();
-            return;
-        }
-
-        if (sc < t) {
-            this.smStartGameSet();
-            return;
-        }
-
-        //随机的时间戳
-
-        let s = Math.random() * (sc - t) + t;
-
-        let f = new Date(s);
-        // if (f.getTime() / 1000 - ComUtils.getTimestamp(start) <= 150 * 24 * 60 * 60) {
-        //     let miao = f.getTime() / 1000 - ComUtils.getTimestamp(start);
-        //     f = new Date((ComUtils.getTimestamp(start) + miao) * 1000);
-        // }
-        {
-            let ye = f.getFullYear();
-            let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
-
-            let da = f.getDate() >= 10 ? f.getDate() : '0' + (f.getDate());
-
-            data.from = ye + '' + mon + '' + da;
-            console.log(data.from);
-
-        }
-        //  data.from = ComUtils.fromatTime1(f);
-
-        GameCfg.data[0].data = [];
-        GameCfg.data[0].name = items[1];
-        GameCfg.data[0].code = items[0];
-        GameCfg.data[0].circulate = items[4];
-        GameCfg.data[0].ktype = data.ktype;
         console.log('给的数据:' + JSON.stringify(data));
 
         GameCfg.enterGameCache = data;
@@ -218,24 +144,6 @@ export default class NewClass extends cc.Component {
 
     //点击广告重置
     onGameResetCount(info) {
-        let messageId;
-        //if (GameCfg.GameType == pb.GameType.ShuangMang) {
-        messageId = pb.MessageId.Req_Game_SmxlReport;
-        // } else if (GameCfg.GameType == pb.GameType.DingXiang) {
-
-        // }
-        let data = {
-            uid: GameData.userID,
-            pos: pb.GameType.ShuangMang,
-            url: '123',
-            from: LLWConfig.PLATTYPE,
-        }
-
-        socket.send(messageId, PB.onAdClickedConvertTpBuff(data), (info) => {
-            console.log('onGameResetCount' + JSON.stringify(info));
-
-            // callBack && (callBack(info));
-        });
-
+        GlobalHandle.onGameResetSMCapital();
     }
 }

@@ -106,10 +106,11 @@ export default class NewClass extends cc.Component {
 
     onGetData(type, id) {
 
-        let tt = this.huizhidatas;
+        let tt = this.huizhidatas - 1;
+
         //   this.saveTime = this.qhData.data[tt].day;
         if (GameCfg.GAMEFUPAN) {
-            tt = GameCfg.history.huizhidatas;
+            tt = GameCfg.history.huizhidatas - 1;
             //    this.saveTime = this.qhData.data[tt].day;
         }
 

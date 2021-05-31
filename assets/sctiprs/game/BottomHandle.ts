@@ -131,29 +131,34 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(
 			EventCfg.GAMEOVEER,
-			() => {
+			(flag) => {
+				let count = 1;
+				//	if (!flag) { count = 1 }
 				if (this.keMcCount > 0 || (this._KKCount != 0 || this._kdCount != 0)) {
 
-					this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
+					this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - count].close;
 
 					this.moneyLabel[0].string = '总资产    ：' + parseInt(this.ziChan + '');
 					this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
 					this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
 					this.keMcCount = 0;
-					let curClose = parseFloat(this.gpData[GameCfg.huizhidatas - 1].close);
+					let curClose = parseFloat(this.gpData[GameCfg.huizhidatas - count].close);
 					//	let preClose = parseFloat(this.gpData[this.buyData[this.buyData.length - 1]].close);
 					let preClose = this.onjunjia();
-					let rate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
 
-					if (GameCfg.GameType == pb.GameType.QiHuo) {
-						rate = this.onAllPositionRete();
+					let rate = this.onCurPositionRete(count);
+
+					//	let rate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
+
+					if (GameCfg.GameType == pb.GameType.QiHuo || !GameCfg.GameSet.isFC) {
+						//	rate = this.onAllPositionRete();
 						if (this._KKCount != 0) {
 							rate = -rate;
 							//	this.ziChan = rate * GameCfg.ziChan + GameCfg.ziChan;
 						}
 						GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
 					} else {
-						GameCfg.allRate = rate;
+						GameCfg.allRate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
 					}
 
 					if (rate < 0) {
@@ -470,7 +475,7 @@ export default class NewClass extends cc.Component {
 			this.tipsLabel.string = '回合数：' + this.roundNumber;
 			this.tipsLabel1.string = '回合数：' + this.roundNumber;
 			//    if (!GameCfg.GAMEFUPAN) {
-			this.moneyLabel[1].string = '当前资产：' + parseInt(this.ziChan + '');
+			this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
 			if (GameCfg.huizhidatas < this.gpData.length) {
 				this.moneyLabel[0].string = '总资产    ：' + parseInt(this.ziChan + this.keMcCount * this.gpData[GameCfg.huizhidatas].close + '');
 			}
@@ -480,6 +485,7 @@ export default class NewClass extends cc.Component {
 			}
 
 			if (this.roundNumber <= 0) {
+				GameCfg.huizhidatas = this.gpData.length;
 				GlobalEvent.emit(EventCfg.GAMEOVEER, true);
 				return;
 			}
