@@ -14928,7 +14928,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 356,
+      "width": 352,
       "height": 120
     },
     "_anchorPoint": {
@@ -14993,8 +14993,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 27,
-      "height": 45
+      "width": 23,
+      "height": 36
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -15005,7 +15005,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -292.5,
+        -290.5,
         0,
         0,
         0,
@@ -15545,7 +15545,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 356,
+      "width": 352,
       "height": 120
     },
     "_resize": 1,
@@ -20995,7 +20995,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 359,
+      "width": 355,
       "height": 120
     },
     "_anchorPoint": {
@@ -21060,8 +21060,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 27,
-      "height": 45
+      "width": 23,
+      "height": 36
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -21072,7 +21072,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -295.5,
+        -293.5,
         0,
         0,
         0,
@@ -21612,7 +21612,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 359,
+      "width": 355,
       "height": 120
     },
     "_resize": 1,
@@ -45431,8 +45431,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -461.75300000000016,
-        164.04399999999998,
+        179.37400000000002,
+        169.04399999999998,
         0,
         0,
         0,
@@ -45748,7 +45748,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 120,
-      "height": 54.4
+      "height": 106.8
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -45971,7 +45971,7 @@
       "__id__": 992
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 998
@@ -46724,7 +46724,7 @@
     "_layoutSize": {
       "__type__": "cc.Size",
       "width": 120,
-      "height": 54.4
+      "height": 106.8
     },
     "_resize": 1,
     "_N$layoutType": 2,

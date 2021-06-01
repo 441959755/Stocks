@@ -186,6 +186,7 @@ export default class DrawData {
 
         this.EXPMA1 = [];
         this.EXPMA2 = [];
+        this.btx = [];
 
         try {
             data.forEach((el, index) => {

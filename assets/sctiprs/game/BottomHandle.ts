@@ -135,44 +135,47 @@ export default class NewClass extends cc.Component {
 				let count = 1;
 				//	if (!flag) { count = 1 }
 				if (this.keMcCount > 0 || (this._KKCount != 0 || this._kdCount != 0)) {
-
-					this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - count].close;
-
-					this.moneyLabel[0].string = '总资产    ：' + parseInt(this.ziChan + '');
-					this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
-					this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
-					this.keMcCount = 0;
-					let curClose = parseFloat(this.gpData[GameCfg.huizhidatas - count].close);
-					//	let preClose = parseFloat(this.gpData[this.buyData[this.buyData.length - 1]].close);
 					let preClose = this.onjunjia();
+					if (preClose) {
+						this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - count].close;
 
-					let rate = this.onCurPositionRete(count);
+						this.moneyLabel[0].string = '总资产    ：' + parseInt(this.ziChan + '');
+						this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
+						this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
+						this.keMcCount = 0;
+						let curClose = parseFloat(this.gpData[GameCfg.huizhidatas - count].close);
+						//	let preClose = parseFloat(this.gpData[this.buyData[this.buyData.length - 1]].close);
 
-					//	let rate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
 
-					if (GameCfg.GameType == pb.GameType.QiHuo || !GameCfg.GameSet.isFC) {
-						//	rate = this.onAllPositionRete();
-						if (this._KKCount != 0) {
-							rate = -rate;
-							//	this.ziChan = rate * GameCfg.ziChan + GameCfg.ziChan;
+						let rate = this.onCurPositionRete(count);
+
+						//	let rate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
+
+						if (GameCfg.GameType == pb.GameType.QiHuo || !GameCfg.GameSet.isFC) {
+							//	rate = this.onAllPositionRete();
+							if (this._KKCount != 0) {
+								rate = -rate;
+								//	this.ziChan = rate * GameCfg.ziChan + GameCfg.ziChan;
+							}
+							GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
+						} else {
+							GameCfg.allRate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
 						}
-						GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
-					} else {
-						GameCfg.allRate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
+
+						if (rate < 0) {
+							GameCfg.lossCount++;
+						} else {
+							GameCfg.profitCount++;
+						}
+
+						GlobalEvent.emit('updateRate', [0, GameCfg.allRate]);
+
+						GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
+
+						GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 1;
+						GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
 					}
 
-					if (rate < 0) {
-						GameCfg.lossCount++;
-					} else {
-						GameCfg.profitCount++;
-					}
-
-					GlobalEvent.emit('updateRate', [0, GameCfg.allRate]);
-
-					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
-
-					GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 1;
-					GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
 				}
 				GameCfg.finalfund = this.ziChan;
 

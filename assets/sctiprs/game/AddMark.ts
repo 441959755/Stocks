@@ -98,12 +98,11 @@ export default class NewClass extends cc.Component {
             }
 
             //开始标签
-            if (this.markNodes[posInfo.index - 1] && this.markNodes[posInfo.index - 1].type == 1) {
-                if (this.showFlag) {
-                    this.markNodes[posInfo.index - 1].node.active = true;
-                }
-                this.markNodes[posInfo.index - 1].node.position = posInfo.lowPos;
-                this.markNodes[posInfo.index - 1].node.y -= (this.markNodes[posInfo.index].node.height / 2);
+            if (this.markNodes[posInfo.index] && this.markNodes[posInfo.index].type == 1) {
+
+                this.markNodes[posInfo.index].node.position = posInfo.lowPos;
+                this.markNodes[posInfo.index].node.x += cc.ext.hz_width;
+                this.markNodes[posInfo.index].node.y -= 10;
                 // this.markNodes[posInfo.index].node.
             }
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
@@ -148,7 +147,9 @@ export default class NewClass extends cc.Component {
     //2买入
     //3卖出
     onAddMard(info) {
+
         let node, inde;
+
         if (info.type == 1) {
             inde = info.index - 2;
             if (this.markNodes[inde]) { return }
@@ -198,6 +199,7 @@ export default class NewClass extends cc.Component {
         };
 
         node.active = false;
+        node.x = -9999;
 
         this.saveHistoryMark(info.index, info.type);
     }
@@ -216,10 +218,15 @@ export default class NewClass extends cc.Component {
         //双盲
         //  if (GameCfg.GameType == pb.GameType.ShuangMang) {
         this.showFlag = true;
-        this.markNodes.forEach(el => {
-            el.node.active = true;
+        this.markNodes.forEach((el, i) => {
+            if (el && el.node) {
+                //   
+                if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
+                    el.node.active = true;
+                }
+            }
+
         })
-        //  }
     }
 
 

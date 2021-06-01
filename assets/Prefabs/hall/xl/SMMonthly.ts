@@ -26,6 +26,10 @@ export default class NewClass extends cc.Component {
     }
 
     onShow() {
+        if (!this.monthlyInfo) {
+            console.log('this.monthlyInfo is null' + this.monthlyInfo);
+            return;
+        }
         let date = new Date();
         let year = date.getFullYear();
         let month = date.getMonth();

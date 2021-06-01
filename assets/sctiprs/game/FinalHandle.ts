@@ -102,7 +102,7 @@ export default class NewClass extends cc.Component {
 
                 k_to: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
                 //  k_to: parseInt(gpData[gpData.length - 1].day.replace(///g,'')),
-                stock_profit_rate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100).toFixed(2),
+                stock_profit_rate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100),
                 user_profit_rate: (GameCfg.allRate * 100),
                 user_capital: GameData.SmxlState.gold,
                 user_profit: (GameCfg.finalfund - GameCfg.ziChan),
@@ -111,7 +111,11 @@ export default class NewClass extends cc.Component {
                 ref_id: 0,
                 k_startup: GameData.huizhidatas - 1,
                 k_stop: GameCfg.huizhidatas - 1,
-
+            }
+            if (GameCfg.GameType == pb.GameType.ShuangMang) {
+                datas.user_capital = GameData.SmxlState.gold;
+            } else {
+                datas.user_capital = GameCfg.ziChan;
             }
             console.log('GameCfg.finalfund' + GameCfg.finalfund + '-' + 'GameCfg.ziChan' + GameCfg.ziChan + '=' + (GameCfg.finalfund - GameCfg.ziChan));
             //  if (GameCfg.GameType < 4) {

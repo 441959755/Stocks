@@ -171,7 +171,7 @@ export default class NewClass extends cc.Component {
 			str => {
 				//  if (str == 'SM') {
 				if (socket) {
-					socket.send(4009, null, info => {
+					socket.send(pb.MessageId.Req_Game_SmxlReport, null, info => {
 						console.log('OPENMONTHLAYER' + JSON.stringify(info));
 
 						if (!this.SMMonthlyLayer) {

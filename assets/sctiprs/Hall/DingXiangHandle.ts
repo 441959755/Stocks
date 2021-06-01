@@ -659,16 +659,16 @@ export default class NewClass extends cc.Component {
 		if (GameData.DXSet.ZLine == '日线') {
 			data.ktype = pb.KType.Day;
 
-			GameCfg.enterGameCache = data;
-
-			GlobalEvent.emit('onCmdQuoteQuery', data);
 		} else if (GameData.DXSet.ZLine == '周线') {
-			data.ktype = pb.KType.Day;
+			data.ktype = pb.KType.Day7;
 		} else if (GameData.DXSet.ZLine == '30分钟K') {
 			data.ktype = pb.KType.Min;
 		} else if (GameData.DXSet.ZLine == '60分钟K') {
 			data.ktype = pb.KType.Min;
 		}
+		GameCfg.enterGameCache = data;
+
+		GlobalEvent.emit('onCmdQuoteQuery', data);
 	}
 
 	//http://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js?TYPE=m30k&rtntype=5&authorityType=fa&id=3008032
