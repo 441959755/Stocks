@@ -56,6 +56,8 @@ export default class DrawData {
 
     public static EXPMA2 = [];
 
+    public static btx = [];
+
     public static dataChange(time, type, arr) {
 
         time = ComUtils.getTimestamp(time);
@@ -187,6 +189,25 @@ export default class DrawData {
 
         try {
             data.forEach((el, index) => {
+
+                if (GameCfg.GameType == pb.GameType.DingXiang && GameCfg.GameSet.line == '宝塔线') {
+                    let arr = [];
+                    if (index == 0) {
+                        arr[0] = el.open;
+                        arr[1] = el.close;
+                        arr[2] = false;
+                        //   arr[2] = el.close > el.open ? true : false;
+                    } else {
+                        arr[0] = this.btx[index - 1][1];
+                        arr[1] = el.close;
+                        // let max = Math.max(arr[0], arr[1]);
+                        // if (this.btx[index - 1][2]) {
+                        arr[2] = false;
+                        // }
+
+                    }
+                    this.btx.push(arr);
+                }
 
                 if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                     if (index == 0) {

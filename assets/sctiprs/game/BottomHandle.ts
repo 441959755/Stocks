@@ -171,6 +171,8 @@ export default class NewClass extends cc.Component {
 
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
 
+					GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 1;
+					GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
 				}
 				GameCfg.finalfund = this.ziChan;
 
@@ -1018,6 +1020,7 @@ export default class NewClass extends cc.Component {
 			num = 1;
 		}
 		let data = this.gpData;
+		if (!data[GameCfg.huizhidatas - num]) { return 0 }
 		let curClose = parseFloat(data[GameCfg.huizhidatas - num].close);
 
 		let preClose = this.onjunjia();

@@ -16,6 +16,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     timeLabel: cc.Label = null;
 
+    @property(cc.Label)
+    timeLabel1: cc.Label = null;
+
     @property([cc.Label])
     labels: cc.Label[] = [];
 
@@ -153,15 +156,17 @@ export default class NewClass extends cc.Component {
         if (datas.length <= 0) {
             return;
         }
-
-
-
+        this.QXNodes[0].active = true;
+        this.QXNodes[1].active = false;
+        this.userCapital = 0;
+        this.daysData = [];
         let date = new Date();
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
         let day = date.getDate();
+        var d = new Date(year, month, 0).getDate();
 
-        this.timeLabel.string = '统计时段:' + year + '/' + month + '/' + 1 + '--' + year + '/' + month + '/' + day;
+        this.timeLabel.string = '统计时段:' + year + '/' + month + '/' + 1 + '--' + year + '/' + month + '/' + d;
 
         //  this.labels[0].string = datas[datas.length - 1].userCapital;
 
@@ -336,7 +341,7 @@ export default class NewClass extends cc.Component {
 
         this.dayLabel[0].string = this.daysData[day - 1].count;
         this.dayLabel[1].string = this.daysData[day - 1].endMoney - this.daysData[day - 1].user_capital + '';
-        this.timeLabel.string = '统计时段:' + year + '.' + month + '.' + day;
+        this.timeLabel1.string = '统计时段:' + year + '.' + month + '.' + day;
         let datas = this.yieldInfo.results;
         if (datas.length <= 0) {
             return;

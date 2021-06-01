@@ -390,6 +390,10 @@ export default class NewClass extends cc.Component {
         }
 
         for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
+            if (!viweData[index]) {
+                console.log('viewData is null' + index)
+                return;
+            }
             this.minDIF = Math.min(this.minDIF, this.DIFList[index]);
             this.maxDIF = Math.max(this.maxDIF, this.DIFList[index]);
 
@@ -765,6 +769,6 @@ export default class NewClass extends cc.Component {
             ctx.strokeColor = col;
             col = null;
         }
-        DrawUtils.drawRect(ctx, x + 3, y, w - 3, h, col);
+        DrawUtils.drawRect(ctx, x, y, w - 4, h, col);
     }
 }

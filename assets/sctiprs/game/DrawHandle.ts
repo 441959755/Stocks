@@ -34,6 +34,8 @@ export default class NewClass extends cc.Component {
     EXPMA1 = [];
     EXPMA2 = [];
 
+    btx = [];
+
     @property(cc.Label)
     part1: cc.Label = null;  //分线1
 
@@ -65,11 +67,11 @@ export default class NewClass extends cc.Component {
 
     timer = null;
 
-    btxPreCloseY = [];     ///宝塔前一日收盘价
+    // btxPreCloseY = [];     ///宝塔前一日收盘价
 
-    btxPreOpenY = [];
+    // btxPreOpenY = [];
 
-    btxChg = [];        ///宝塔线前一日的涨跌
+    // btxChg = [];        ///宝塔线前一日的涨跌
     // btxList = [];
 
 
@@ -553,6 +555,8 @@ export default class NewClass extends cc.Component {
         this.EXPMA1 = DrawData.EXPMA1;
         this.EXPMA2 = DrawData.EXPMA2;
 
+        this.btx = DrawData.btx;
+
     }
 
     //曲线MA
@@ -594,22 +598,22 @@ export default class NewClass extends cc.Component {
             this.drawEXPMA.strokeColor = GameCfg.EXPMA_COL[0];
             this.drawLine(this.drawEXPMA, prex, prey1, x, y1);
 
-
             this.drawEXPMA.strokeColor = GameCfg.EXPMA_COL[1];
             this.drawLine(this.drawEXPMA, prex, prey2, x, y2);
         }
-
     }
 
     //绘制蜡烛线 曲线 、宝塔线
     onDrawCandle(el, index) {
 
+        //最高点最低点
         let posInfo = {
             highPos: null,
             lowPos: null,
             index: index,
             // muit: this.multScale,
         }
+
         let initY = 0;
         let drawBox = this.drawBg.node.height;
         let some = index - cc.ext.beg_end[0];
@@ -621,133 +625,160 @@ export default class NewClass extends cc.Component {
         let closeValue = (el.close - this.bottomValue)
         let closeY = closeValue / this.disValue * drawBox + initY;
 
+
         let maxY, minY;
         //宝塔线
-        if (GameCfg.GameType == pb.GameType.DingXiang && GameData.DXSet.line == '宝塔线') {
+        if (GameCfg.GameType == pb.GameType.DingXiang && GameCfg.GameSet.line == '宝塔线') {
+
             let ptlow = 0, pthigh = 0;
             if (index == 0) {
-                if (!this.btxPreCloseY[index]) {
-                    this.btxChg[index] = el.open >= el.close ? false : true;
-
-                    this.btxPreCloseY[index] = openValue > closeValue ? openValue : closeValue;
-                    this.btxPreOpenY[index] = openValue < closeValue ? openValue : closeValue;
-                }
                 this.drawRect(this.drawBg, startX, closeY, endX - startX, openY - closeY, el.open > el.close);
-
+                //
+                this.btx[index][2] = el.open > el.close ? 1 : 2;
             } else {
-                //前一日上涨
-                if (this.btxChg[index - 1]) {
-                    //下跌
-                    if (el.open > el.close) {
 
-                        if (closeValue >= this.btxPreOpenY[index - 1]) {
+                minY = (this.btx[index - 1][0] - this.bottomValue) / this.disValue * drawBox + initY;
+                maxY = (this.btx[index - 1][1] - this.bottomValue) / this.disValue * drawBox + initY;
+                let max = Math.max(minY, maxY);
+                let min = Math.min(minY, maxY);
+                //绿
+                if (this.btx[index - 1][2] == 1) {
 
-                            maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
-                            this.drawRect(this.drawBg, startX, closeY, endX - startX, maxY - closeY, false);
-                            ptlow = closeY;
-                            pthigh = maxY;
-                            // this.btxPreCloseY = closeY;
-                            if (!this.btxPreOpenY[index]) {
-                                this.btxPreOpenY[index] = closeValue;
-                                this.btxPreCloseY[index] = this.btxPreCloseY[index - 1]
-                                this.btxChg[index] = false;
-                            }
-                        } else if (closeValue < this.btxPreOpenY[index - 1]) {
-                            minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
-                            maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
-
-                            this.drawRect(this.drawBg, startX, minY, endX - startX, maxY - minY, false);
-                            this.drawRect(this.drawBg, startX, closeY, endX - startX, minY - closeY, true);
-
-                            ptlow = closeY;
-                            pthigh = maxY;
-
-                            if (!this.btxPreOpenY[index]) {
-                                this.btxPreOpenY[index] = closeValue;
-                                this.btxPreCloseY[index] = this.btxPreCloseY[index - 1]
-                                this.btxChg[index] = false;
-                            }
-                        }
-                    } else {
-                        minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
-                        maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
+                    if (max < closeY && max != maxY) {
+                        this.btx[index][2] = max;
+                        this.drawRect(this.drawBg, startX, max, endX - startX, closeY - max, false);
+                        this.drawRect(this.drawBg, startX, maxY, endX - startX, max - maxY, true);
+                    }
+                    else if (max < closeY) {
+                        this.btx[index][2] = 2;
                         this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, false);
-
-                        ptlow = maxY;
-                        pthigh = closeY;
-
-                        if (!this.btxPreOpenY[index]) {
-                            this.btxPreOpenY[index] = this.btxPreCloseY[index - 1];
-                            this.btxPreCloseY[index] = closeValue;
-                            this.btxChg[index] = true;
-                        }
                     }
-
-                } else {
-                    //上涨
-                    if (el.open < el.close) {
-                        if (closeValue <= this.btxPreCloseY[index - 1]) {
-                            minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
-                            maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
-                            this.drawRect(this.drawBg, startX, minY, endX - startX, closeY - minY, true);
-
-                            if (!this.btxPreOpenY[index]) {
-                                this.btxPreOpenY[index] = this.btxPreOpenY[index - 1];
-                                this.btxPreCloseY[index] = closeValue;
-                                this.btxChg[index] = true;
-                            }
-
-                            ptlow = minY;
-                            pthigh = closeY;
-
-                        } else if (closeValue > this.btxPreCloseY[index - 1]) {
-                            minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
-                            maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
-                            this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, false);
-                            this.drawRect(this.drawBg, startX, minY, endX - startX, maxY - minY, true);
-                            //  this.btxPreCloseY = closeY;
-
-                            if (!this.btxPreOpenY[index]) {
-                                this.btxPreOpenY[index] = this.btxPreOpenY[index - 1];
-                                this.btxPreCloseY[index] = closeValue;
-                                this.btxChg[index] = true;
-                            }
-
-                            ptlow = minY;
-                            pthigh = closeY;
-                        }
-
-                    }
-                    //下跌
                     else {
-                        minY = this.btxPreOpenY[index - 1] / this.disValue * drawBox + initY;
-                        maxY = this.btxPreCloseY[index - 1] / this.disValue * drawBox + initY;
-                        this.drawRect(this.drawBg, startX, minY, endX - startX, minY - closeY, true);
-                        // this.btxPreOpenY = closeY;
-
-                        ptlow = closeY;
-                        pthigh = minY;
-
-                        if (!this.btxPreOpenY[index]) {
-                            this.btxPreOpenY[index] = closeValue;
-                            this.btxPreCloseY[index] = this.btxPreCloseY[index - 1];
-                            this.btxChg[index] = false;
-                        }
-                        // this.btxPreCloseY=
+                        this.btx[index][2] = 1;
+                        this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, true);
                     }
                 }
-                // this.btxChg = el.open > el.close ? false : true;
+                //红
+                else if (this.btx[index - 1][2] == 2) {
+
+                    if (closeY < min && min == maxY) {
+                        this.btx[index][2] = 1;
+                        this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, true);
+                    }
+                    else if (closeY > min) {
+                        this.btx[index][2] = 2;
+                        this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, false);
+                    }
+                    else {
+                        this.drawRect(this.drawBg, startX, min, endX - startX, max - min, false);
+                        this.drawRect(this.drawBg, startX, closeY, endX - startX, min - closeY, true);
+                        this.btx[index][2] = min;
+                    }
+                } else {
+
+                    // if (closeY <= this.btx[index - 1][2] && maxY <= this.btx[index - 1][2]) {
+                    //     this.btx[index][2] = 1;
+                    //     this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, true);
+                    // }
+                    // else if (closeY > this.btx[index - 1][2] && maxY > this.btx[index - 1][2]) {
+                    //     this.btx[index][2] = 2;
+                    //     this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, false);
+                    // }
+                    // else {
+                    //     this.drawRect(this.drawBg, startX, min, endX - startX, max - min, false);
+                    //     //   this.drawRect(this.drawBg, startX, closeY, endX - startX, min - closeY, true);
+                    //     this.btx[index][2] = min;
+                    // }
+
+                    if (closeY < min && min == maxY) {
+                        this.btx[index][2] = 1;
+                        this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, true);
+                    }
+                    else if (closeY > min) {
+                        this.btx[index][2] = 2;
+                        this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, false);
+                    }
+                    else {
+                        this.drawRect(this.drawBg, startX, min, endX - startX, max - min, false);
+                        this.drawRect(this.drawBg, startX, closeY, endX - startX, min - closeY, true);
+                        this.btx[index][2] = min;
+                    }
+                }
+
+                //前一日上涨
+                // if (GameCfg.data[0].data[index - 1].close > GameCfg.data[0].data[index - 1].open) {
+                //     //下跌
+                //     if (el.open > el.close) {
+
+                //         if (this.btx[index - 1][2]) {
+                //             this.btx[index][2] = true;
+                //         }
+
+                //         if (closeValue >= (this.btx[index - 1][0] - this.bottomValue)) {
+                //             //this.btx[index][2] = true;
+                //             this.drawRect(this.drawBg, startX, closeY, endX - startX, maxY - closeY, this.btx[index][2]);
+
+                //         } else if (closeValue < (this.btx[index - 1][0] - this.bottomValue)) {
+
+                //             this.drawRect(this.drawBg, startX, closeY, endX - startX, minY - closeY, this.btx[index][2]);
+                //         }
+                //     } else {
+
+                //         if (this.btx[index - 1][2]) {
+
+                //             if (closeValue >= (this.btx[index - 1][1] - this.bottomValue)) {
+                //                 this.btx[index][2] = false;
+                //                 this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, false);
+                //                 this.drawRect(this.drawBg, startX, min, endX - startX, max - min, true);
+                //             } else {
+                //                 this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - max, this.btx[index][2]);
+                //             }
+                //         } else {
+
+                //             this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, false);
+                //         }
+
+                //     }
+
+                // } else {
+                //     //上涨
+                //     if (el.open < el.close) {
+                //         if (this.btx[index - 1][2]) {
+                //             this.btx[index][2] = true;
+                //         }
+                //         if (closeValue <= (this.btx[index - 1][0] - this.bottomValue)) {
+                //             //  this.btx[index][2] = true;
+                //             this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, this.btx[index][2]);
+
+                //         } else if (closeValue > (this.btx[index - 1][0] - this.bottomValue)) {
+
+                //             this.btx[index][2] = false;
+                //             this.drawRect(this.drawBg, startX, max, endX - startX, closeY - max, false);
+                //             this.drawRect(this.drawBg, startX, min, endX - startX, max - min, true);
+                //         }
+
+                //     }
+                //     //下跌
+                //     else {
+                //         if (this.btx[index - 1][2]) {
+                //             this.btx[index][2] = true;
+                //         }
+                //         else if (!this.btx[index - 1][2]) {
+                //             if (openY <= minY) {
+                //                 this.btx[index][2] = true;
+                //             }
+                //         }
+
+                //         this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, this.btx[index][2]);
+                //     }
+                // }
+                ptlow = closeY > maxY ? maxY : closeY;
+                pthigh = closeY > maxY ? closeY : minY;
             }
-            // minY = this.btxPreOpenY[index] / this.disValue * drawBox + initY;
-            // maxY = this.btxPreCloseY[index] / this.disValue * drawBox + initY;
+
             let lowX = startX + (endX - startX) / 2;
             posInfo.lowPos = cc.v2(lowX, ptlow);
             posInfo.highPos = cc.v2(lowX, pthigh);
-            //  this.btxPreCloseY = closeY;
-            // this.btxPreOpenY = openY;
-            // console.log(JSON.stringify(this.btxChg));
-            // console.log(JSON.stringify(this.btxPreOpenY));
-            // console.log(JSON.stringify(this.btxPreCloseY));
 
         } else {
 
@@ -843,9 +874,12 @@ export default class NewClass extends cc.Component {
                 col = new cc.Color().fromHEX('#e2233e');
             }
             ctx.strokeColor = col;
-            col = null;
+
+            if (GameCfg.GameSet.line != '宝塔线') {
+                col = null;
+            }
         }
-        DrawUtils.drawRect(ctx, x + 3, y, w - 3, h, col);
+        DrawUtils.drawRect(ctx, x, y, w - 4, h, col);
     }
 
     //
