@@ -678,20 +678,6 @@ export default class NewClass extends cc.Component {
                     }
                 } else {
 
-                    // if (closeY <= this.btx[index - 1][2] && maxY <= this.btx[index - 1][2]) {
-                    //     this.btx[index][2] = 1;
-                    //     this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, true);
-                    // }
-                    // else if (closeY > this.btx[index - 1][2] && maxY > this.btx[index - 1][2]) {
-                    //     this.btx[index][2] = 2;
-                    //     this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, false);
-                    // }
-                    // else {
-                    //     this.drawRect(this.drawBg, startX, min, endX - startX, max - min, false);
-                    //     //   this.drawRect(this.drawBg, startX, closeY, endX - startX, min - closeY, true);
-                    //     this.btx[index][2] = min;
-                    // }
-
                     if (closeY < min && min == maxY) {
                         this.btx[index][2] = 1;
                         this.drawRect(this.drawBg, startX, maxY, endX - startX, closeY - maxY, true);
@@ -745,7 +731,7 @@ export default class NewClass extends cc.Component {
             //画最高价、
             if (el.high >= highPrice) {
                 let highY = (el.high - this.bottomValue) / this.disValue * drawBox + initY;
-                let highX = startX + (endX - startX) / 2;
+                let highX = startX + (endX - startX) / 2 - 1.5;
                 let hy = openY > closeY ? openY : closeY;
                 this.drawLine(this.drawBg, highX, highY, highX, hy);
                 posInfo.highPos = cc.v2(highX, highY);
@@ -753,7 +739,7 @@ export default class NewClass extends cc.Component {
             //画最低
             if (el.low <= lowPrice) {
                 let lowY = (el.low - this.bottomValue) / this.disValue * drawBox + initY;
-                let lowX = startX + (endX - startX) / 2;
+                let lowX = startX + (endX - startX) / 2 - 1.5;
                 let hy = openY < closeY ? openY : closeY;
                 this.drawLine(this.drawBg, lowX, lowY, lowX, hy);
                 posInfo.lowPos = cc.v2(lowX, lowY);

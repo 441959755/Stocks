@@ -81,11 +81,12 @@ export default class NewClass extends cc.Component {
                 info.push(parseFloat(datas[inde].high).toFixed(2));
                 info.push(parseFloat(datas[inde].low).toFixed(2));
                 info.push(parseFloat(datas[inde].close).toFixed(2));
-                // if (parseInt(datas[inde].value) >= 10000) {
-                //     info.push((parseInt(datas[inde].value) / 10000).toFixed(2) + 'w');
-                // } else {
-                info.push((parseInt(datas[inde].value)));
-                //  }
+
+                if (parseInt(datas[inde].value) >= 100) {
+                    info.push(parseInt(datas[inde].value / 100 + '') + '手');
+                } else {
+                    info.push((parseInt(datas[inde].value)));
+                }
 
 
                 if (GameCfg.GameType == pb.GameType.QiHuo) {
@@ -94,8 +95,8 @@ export default class NewClass extends cc.Component {
                     this.ccLa.string = '持仓：';
                     //   this.hsLa.string = parseInt(datas[inde].ccl_hold + '') + '';
                 } else {
-                    //   info.push(parseInt(parseInt(datas[inde].price) / 10000 + '') + 'w');
-                    info.push(parseInt(datas[inde].price));
+                    info.push(((datas[inde].price) / 10000).toFixed(2) + 'w');
+                    //  info.push(parseInt(datas[inde].price));
                     info.push(parseFloat(datas[inde].Rate).toFixed(2) + '%');
                     this.hsLa.string = parseFloat(datas[inde].Rate).toFixed(2) + '%';
                 }
@@ -157,6 +158,7 @@ export default class NewClass extends cc.Component {
             if (point >= cc.winSize.width / 2) {
                 if (this.lZoom.isChecked) {
                     this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2 + this.inotyBox.width + 10;
+
                 } else {
                     this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2 + 10;
                 }
@@ -441,10 +443,12 @@ export default class NewClass extends cc.Component {
             if (this.lZoom.isChecked) {
                 this.lZoom.node.children[0].active = false;
                 this.inotyBox.x = -cc.winSize.width / 2 + this.inotyBox.width / 2;
+                this.selcetContent.parent.x += this.inotyBox.width;
 
             } else {
                 this.lZoom.node.children[0].active = true;
                 this.inotyBox.x = -cc.winSize.width / 2 - this.inotyBox.width / 2;
+                this.selcetContent.parent.x -= this.inotyBox.width;
             }
             GlobalEvent.emit(EventCfg.SET_DRAW_SIZE, this.lZoom.isChecked);
         }

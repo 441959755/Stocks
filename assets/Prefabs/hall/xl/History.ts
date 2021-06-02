@@ -30,7 +30,7 @@ export default class NewClass extends cc.Component {
 
 
     protected onEnable() {
-        ActionUtils.openLayer(this.node);
+        // ActionUtils.openLayer(this.node);
     }
 
     onShow() {
@@ -151,6 +151,7 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         if (name == 'blackbtn') {
             this.node.active = false;
+            GameCfg.historyType = null;
         }
         //点击复盘
         else if (name == 'btnFuPan') {
@@ -238,6 +239,7 @@ export default class NewClass extends cc.Component {
 
             console.log(JSON.parse(cache));
             GameCfg.enterGameCache = JSON.parse(cache);
+            GameCfg.historyType = GameCfg.GameType;
             if (GameCfg.GameType == pb.GameType.QiHuo) {
                 GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, JSON.parse(cache));
             } else {
@@ -275,7 +277,6 @@ export default class NewClass extends cc.Component {
                             cc.sys.localStorage.removeItem(datas[i].ts + 'cache');
                             arr.splice(arr.indexOf(datas[i].ts), 1);
                         }
-
 
                     }
                 }

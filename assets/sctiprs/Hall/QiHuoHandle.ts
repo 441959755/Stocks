@@ -155,6 +155,9 @@ export default class NewClass extends cc.Component {
 	}
 
 	onEnable() {
+		if (GameCfg.historyType) {
+			GlobalEvent.emit('OPENHISTORYLAYER', 'QH');
+		}
 		GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		GameCfg.GameType = pb.GameType.QiHuo;
 		let setDatas = GameData.QHSet;
@@ -563,7 +566,7 @@ export default class NewClass extends cc.Component {
 		}
 		//记录
 		else if (name == 'historyQHBtn') {
-			GameCfg.GameType = pb.GameType.QiHuo;
+
 			GlobalEvent.emit('OPENHISTORYLAYER', 'QH');
 		}
 		//

@@ -51,6 +51,7 @@ export default class NewClass extends cc.Component {
         this.dealLas[0].string = datas.length + '';
 
         for (let i = 0; i < datas.length; i++) {
+            if (!datas[i][2]) { continue }
             if (datas[i][2] >= 0) {
                 yingcount++;
                 let t = Math.max(max, datas[i][2]);
@@ -58,7 +59,6 @@ export default class NewClass extends cc.Component {
                     maxIndex = i;
                     max = datas[i][2];
                 }
-
 
             } else {
                 kuiCount++;

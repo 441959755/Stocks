@@ -776,13 +776,13 @@ export default class NewClass extends cc.Component {
             this.onCreateTipsItem(31);
             this._idd = 31
             return;
-        } else if (el > 0.2 && this._idd != 32) {
+        } else if ((el > 0.2 && el <= 0.3) && (this._idd != 32 && this._idd != 31)) {
             //收益大于20%
             //   this.onCreateTipsItem('收益大于20%');
             this.onCreateTipsItem(32);
             this._idd = 32;
             return;
-        } else if (el > 0.1 && this._idd != 33) {
+        } else if ((el > 0.1 && el <= 0.2) && this._idd != 33 && this._idd != 32 && this._idd != 31) {
             //收益大于10 %
             //  this.onCreateTipsItem('收益大于10%');
             this.onCreateTipsItem(33);
@@ -796,20 +796,24 @@ export default class NewClass extends cc.Component {
             this.onCreateTipsItem(34);
             this._idd = 34;
             return;
-        } else if (el < -0.15 && this._idd != 35) {
+        } else if ((el < -0.15 && el >= -0.2) && this._idd != 35 && this._idd != 34) {
             // 亏损大于15%
             // this.onCreateTipsItem('亏损大于15%');
             this.onCreateTipsItem(35);
             this._idd = 35;
             return;
-        } else if (el < -0.1 && this._idd != 36) {
+        } else if ((el < -0.1 && el >= -0.15) && this._idd != 36 && this._idd != 35 && this._idd != 34) {
             // 亏损大于10%
             //  this.onCreateTipsItem('亏损大于10%');
             this.onCreateTipsItem(36);
             this._idd = 36;
             return;
         } else {
-            this._idd = 0;
+            if (el < 0.1 && el >= 0) {
+                this._idd = 0;
+            } else if (el > -0.1 && el <= 0) {
+                this._idd = 0;
+            }
         }
     }
 

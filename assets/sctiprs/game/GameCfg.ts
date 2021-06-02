@@ -93,4 +93,7 @@ export default {
 
     selectZline: 0,
 
+
+    historyType: null,   //哪进入复盘的
+
 }

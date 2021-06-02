@@ -41,6 +41,10 @@ export default class NewClass extends cc.Component {
     }
 
     protected onEnable() {
+        if (GameCfg.historyType && GameCfg.huizhidatas == GameCfg.GameType) {
+            GlobalEvent.emit('OPENHISTORYLAYER', 'SM');
+        }
+
         //  GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
@@ -89,7 +93,7 @@ export default class NewClass extends cc.Component {
         }
         //点击历史记录
         else if (name == 'historySMBtn') {
-            GameCfg.GameType = pb.GameType.ShuangMang;
+
             GlobalEvent.emit('OPENHISTORYLAYER', 'SM');
         }
         //点击月报

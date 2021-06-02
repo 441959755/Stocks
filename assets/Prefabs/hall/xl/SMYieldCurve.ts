@@ -75,6 +75,8 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     dayFundLa: cc.Label[] = [];
 
+    cb = null;
+
 
     onLoad() {
 
@@ -96,6 +98,44 @@ export default class NewClass extends cc.Component {
             this.tipsBoxShow(event);
         }, this);
 
+        this.monthBg.on('touchend', (event) => {
+            this.Horizontal1.active = false;
+            this.vertical1.active = false;
+
+            if (this.cb) {
+                clearTimeout(this.cb);
+                this.cb = null;
+            }
+            this.cb = setTimeout(() => {
+                this.tipsNode.active = false;
+            }, 1500);
+
+        }, this);
+
+
+        this.monthBg.on('touchcancel', (event) => {
+            //   this.tipsNode.active = false;
+            this.Horizontal1.active = false;
+            this.vertical1.active = false;
+
+            if (this.cb) {
+                clearTimeout(this.cb);
+                this.cb = null;
+            }
+            this.cb = setTimeout(() => {
+                this.tipsNode.active = false;
+            }, 1500);
+
+        }, this);
+
+    }
+
+
+    onDisable() {
+        if (this.cb) {
+            clearTimeout(this.cb);
+            this.cb = null;
+        }
     }
 
     tipsBoxShow(event) {
@@ -103,6 +143,7 @@ export default class NewClass extends cc.Component {
         let h = this.draw.node.height / 5;
         let pos = new cc.Vec2(event.getLocationX(), event.getLocationY());
         let localPos = this.draw.node.convertToNodeSpaceAR(pos);
+        if (localPos.x < 0) { return }
 
         this.Horizontal1.y = localPos.y;
         this.vertical1.x = localPos.x;
@@ -133,7 +174,11 @@ export default class NewClass extends cc.Component {
             las[1].getComponent(cc.Label).string = '练习次数:' + this.daysData[pos1].count;
             las[2].getComponent(cc.Label).string = '初始资金:' + this.daysData[pos1].user_capital;
             las[3].getComponent(cc.Label).string = '最终资金:' + this.daysData[pos1].endMoney;
-            las[4].getComponent(cc.Label).string = '收    益:' + (this.daysData[pos1].rate).toFixed(2) + '%';
+            las[4].getComponent(cc.Label).string = '收    益:' + ((this.daysData[pos1].endMoney - this.daysData[pos1].user_capital) / this.daysData[pos1].user_capital * 100).toFixed(2) + '%';
+
+        }
+        else {
+            this.tipsNode.active = false;
             this.pos = pos1;
         }
     }
@@ -142,7 +187,7 @@ export default class NewClass extends cc.Component {
         this.Horizontal1.active = false;
         this.vertical1.active = false;
         this.tipsNode.active = false;
-
+        this.tipsNode.zIndex = 99;
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
         //    ActionUtils.openLayer(this.node);
@@ -170,7 +215,7 @@ export default class NewClass extends cc.Component {
 
         //  this.labels[0].string = datas[datas.length - 1].userCapital;
 
-        this.labels[1].string = datas[0].userCapital;
+
 
         let zongjinge = 0, zonglilv = 0;
 
@@ -248,8 +293,16 @@ export default class NewClass extends cc.Component {
 
         this.draw_line_day();
 
+        this.labels[1].string = datas[0].userCapital;
         this.labels[3].string = zongjinge + '';
-        this.labels[2].string = zonglilv.toFixed(2) + '%';
+        if (zongjinge < 0) {
+            this.labels[3].node.color = cc.Color.GREEN;
+            this.labels[2].node.color = cc.Color.GREEN;
+        } else if (zongjinge == 0) {
+            this.labels[3].node.color = cc.Color.RED;
+            this.labels[2].node.color = cc.Color.RED;
+        }
+        this.labels[2].string = (zongjinge / datas[0].userCapital * 100).toFixed(2) + '%';
         this.labels[0].string = GameData.SmxlState.gold;
     }
 
@@ -304,7 +357,9 @@ export default class NewClass extends cc.Component {
             dot1.setPosition(cc.v2((i - 1) * w, xlCount[i] * h || 0));
 
             let dot2 = cc.instantiate(this.dot2);
+
             this.draw.node.addChild(dot2);
+            dot2.zIndex = 6;
             if (!xlcvs[i]) {
                 xlcvs[i] = this.userCapital;
             }
@@ -341,6 +396,11 @@ export default class NewClass extends cc.Component {
 
         this.dayLabel[0].string = this.daysData[day - 1].count;
         this.dayLabel[1].string = this.daysData[day - 1].endMoney - this.daysData[day - 1].user_capital + '';
+        if (this.daysData[day - 1].endMoney - this.daysData[day - 1].user_capital < 0) {
+            this.dayLabel[1].node.color = cc.Color.GREEN;
+        } else {
+            this.dayLabel[1].node.color = cc.Color.RED;
+        }
         this.timeLabel1.string = '统计时段:' + year + '.' + month + '.' + day;
         let datas = this.yieldInfo.results;
         if (datas.length <= 0) {
@@ -387,7 +447,9 @@ export default class NewClass extends cc.Component {
         let dots = [];
 
         let dot = cc.instantiate(this.dot2);
+
         this.draw1.node.addChild(dot);
+        dot.zIndex = 6;
         let y = (curDay[0].userCapital - 50000) * (this.QXNodes[1].height / maxValue);
         if (y < 0) { y = 0 }
         dot.setPosition(0, y);

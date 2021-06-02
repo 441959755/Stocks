@@ -113,6 +113,10 @@ export default class NewClass extends cc.Component {
 	onEnable() {
 		GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		this.onShow();
+
+		if (GameCfg.historyType) {
+			GlobalEvent.emit('OPENHISTORYLAYER', 'DX');
+		}
 	}
 
 	onShow() {

@@ -202,6 +202,7 @@ export default class GameCfgText {
 
     //随机SM一只股票
     public static getGPSMByRandom(cb?) {
+
         let data = {
             ktype: pb.KType.Day,
             kstyle: pb.KStyle.Random,

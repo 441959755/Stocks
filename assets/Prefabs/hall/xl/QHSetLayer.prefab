@@ -9671,8 +9671,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -249.96699999999998,
-        15.076000000000022,
+        -217.019,
+        -10.173999999999978,
         0,
         0,
         0,
@@ -10639,7 +10639,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "f799e9b4-537e-41ac-b3ec-3a9dcbff781f"
+      "__uuid__": "f23c3ad9-64c1-4a76-b7a1-38660b448107"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -10652,9 +10652,7 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": {
-      "__uuid__": "3185f123-13e3-4a08-97ff-7bfb8e0c5ba6"
-    },
+    "_atlas": null,
     "_id": ""
   },
   {

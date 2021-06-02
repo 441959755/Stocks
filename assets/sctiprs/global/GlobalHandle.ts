@@ -30,6 +30,7 @@ export default class GlobalHandle {
 
     //获取行情
     public static onCmdGameStartQuoteQuery(info1, cb) {
+
         let infoPre = {
             ktype: info1.ktype,
             kstyle: info1.kstyle,

@@ -52,6 +52,11 @@ export default class WechatSDK {
                 })
             }
         })
+
+        //设置屏幕常亮
+        wx.setKeepScreenOn({
+            keepScreenOn: true
+        })
     }
 
     //获取用户信息

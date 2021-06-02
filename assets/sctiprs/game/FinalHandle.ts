@@ -65,6 +65,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     contentZB: cc.Node = null;
 
+    @property(cc.Node)
+    DXXLGG: cc.Node = null;
+
     protected onEnable() {
         ActionUtils.openLayer(this.node);
 
@@ -72,6 +75,11 @@ export default class NewClass extends cc.Component {
         let gpData = GameCfg.data[0].data;
 
         if (!gpData || gpData.length <= 0) { return }
+
+        this.DXXLGG.active = false;
+        if (GameCfg.GameType == pb.GameType.DingXiang) {
+            this.DXXLGG.active = true;
+        }
 
         //用户信息
         this.headImg.spriteFrame = GameData.headImg;
@@ -294,6 +302,7 @@ export default class NewClass extends cc.Component {
         else if (name == 'lx_jsbt_zlyj') {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             let data = null;
+
             if (GameCfg.GameType == pb.GameType.ShuangMang) {
                 data = GameCfgText.getGPSMByRandom();
             }
@@ -303,37 +312,56 @@ export default class NewClass extends cc.Component {
             else if (GameCfg.GameType == pb.GameType.QiHuo) {
                 data = GameCfgText.getQHQHByRandom();
             }
+            if (data) {
+                let cb = () => {
+                    GameCfg.huizhidatas = GameData.huizhidatas;
 
-            let cb = () => {
-                GameCfg.huizhidatas = GameData.huizhidatas;
+                    GameCfg.allRate = 0;
+                    GameCfg.profitCount = 0;
+                    GameCfg.lossCount = 0;
+                    GameCfg.finalfund = 0;
+                    GameCfg.fill = [];
+                    GameCfg.mark = [];
+                    GameCfg.notice = [];
+                    GameCfg.GAMEFUPAN = false;
+                    //   GameCfg.history.huizhidatas = 0;
+                    GameCfg.history.allRate = 0;
+                    GameCfg.history.deal = [];
+                    //   GameCfg.ziChan = 100000;
+                    GlobalEvent.emit(EventCfg.LEVELCHANGE);
+                    cc.director.loadScene('game');
 
-                GameCfg.allRate = 0;
-                GameCfg.profitCount = 0;
-                GameCfg.lossCount = 0;
-                GameCfg.finalfund = 0;
-                GameCfg.fill = [];
-                GameCfg.mark = [];
-                GameCfg.notice = [];
-                GameCfg.GAMEFUPAN = false;
-                //   GameCfg.history.huizhidatas = 0;
-                GameCfg.history.allRate = 0;
-                GameCfg.history.deal = [];
-                //   GameCfg.ziChan = 100000;
-                GlobalEvent.emit(EventCfg.LEVELCHANGE);
-                cc.director.loadScene('game');
+                    // GameCfg.GAMEFUPAN = false;
+                }
 
-                // GameCfg.GAMEFUPAN = false;
+                GlobalHandle.onCmdGameStartReq(() => {
+                    if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang) {
+                        GlobalHandle.onCmdGameStartQuoteQuery(data, cb)
+                    }
+                    else if (GameCfg.GameType == pb.GameType.QiHuo) {
+                        GlobalHandle.onCmdGameStartQuoteQueryQH(data, cb);
+                    }
+
+                })
             }
+        }
+        else if (name == 'lx_jsbt_xl') {
+            GameCfg.huizhidatas = GameData.huizhidatas;
 
-            GlobalHandle.onCmdGameStartReq(() => {
-                if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang) {
-                    GlobalHandle.onCmdGameStartQuoteQuery(data, cb)
-                }
-                else if (GameCfg.GameType == pb.GameType.QiHuo) {
-                    GlobalHandle.onCmdGameStartQuoteQueryQH(data, cb);
-                }
-
-            })
+            GameCfg.allRate = 0;
+            GameCfg.profitCount = 0;
+            GameCfg.lossCount = 0;
+            GameCfg.finalfund = 0;
+            GameCfg.fill = [];
+            GameCfg.mark = [];
+            GameCfg.notice = [];
+            GameCfg.GAMEFUPAN = false;
+            //   GameCfg.history.huizhidatas = 0;
+            GameCfg.history.allRate = 0;
+            GameCfg.history.deal = [];
+            //   GameCfg.ziChan = 100000;
+            GlobalEvent.emit(EventCfg.LEVELCHANGE);
+            cc.director.loadScene('game');
         }
         //复盘
         else if (name == 'lx_jsbt_qd') {
