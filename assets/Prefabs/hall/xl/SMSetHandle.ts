@@ -41,41 +41,16 @@ export default class NewClass extends cc.Component {
             el.removeAllChildren();
         })
 
-        for (let data = 0; data <= 5; data++) {
-            let index = 1, max = 30;
-            if (data == 0) {
-                index = 1;
-                max = 30;
-                this._Lid = 0;
-            } else if (data == 1) {
-                index = 2; max = 60;
-                this._Lid = 1;
-            } else if (data == 2) {
-                index = 3; max = 90;
-                this._Lid = 2;
-            } else if (data == 3) {
-                index = 5; max = 120;
-                this._Lid = 3;
-            } else if (data == 4) {
-                index = 10; max = 240;
-                this._Lid = 4;
-            } else if (data == 5) {
-                index = 120; max = 240;
-                this._Lid = 5;
-            }
-            this.content.forEach(el => {
-                el.active = false;
-            })
-            // 
+        // 
 
-            if (this.content[this._Lid].children.length <= 0) {
-                for (let i = index; i <= max; i++) {
-                    let node = cc.instantiate(this.preNode);
-                    this.content[this._Lid].addChild(node);
-                    node.getComponent(cc.Label).string = i + '';
-                }
-            }
+        //  if (this.content[this._Lid].children.length <= 0) {
+        for (let i = 1; i <= 240; i++) {
+            let node = cc.instantiate(this.preNode);
+            this.content[0].addChild(node);
+            node.getComponent(cc.Label).string = i + '';
         }
+        //   }
+
 
     }
 
@@ -156,7 +131,7 @@ export default class NewClass extends cc.Component {
             this.node.active = false;
 
         } else if (name == 'lx_srk_1') {
-
+            this._Lid = parseInt(data);
             this.scroll.active = true;
             let parnet = event.target.parent.parent;
             if (parseInt(data) < 3) {
@@ -164,9 +139,32 @@ export default class NewClass extends cc.Component {
             } else {
                 this.scroll.y = parnet.y + parnet.height / 2 + this.scroll.height;
             }
+            let index = 1, max = 30;
+            if (this._Lid == 0) {
+                index = 1;
+                max = 30;
+            } else if (this._Lid == 1) {
+                index = 2; max = 60;
+            } else if (this._Lid == 2) {
+                index = 3; max = 90;
+            } else if (this._Lid == 3) {
+                index = 5; max = 120;
+            } else if (this._Lid == 4) {
+                index = 10; max = 240;
+            } else if (this._Lid == 5) {
+                index = 120; max = 240;
+            }
 
-            this.scroll.getComponent(cc.ScrollView).content = this.content[this._Lid];
-            this.content[this._Lid].active = true;
+            this.scroll.getComponent(cc.ScrollView).content = this.content[0];
+            this.content[0].active = true;
+
+            this.content[0].children.forEach((el, t) => {
+                if (t >= (index - 1) && t <= (max - 1)) {
+                    el.active = true;
+                } else {
+                    el.active = false;
+                }
+            })
 
         } else if (name == 'viewMask') {
             this.scroll.active = false;

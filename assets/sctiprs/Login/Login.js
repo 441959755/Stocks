@@ -44,7 +44,6 @@ cc.Class({
 
 		//股票配置
 		GameCfgText.getStocktList();
-
 		//期货配置
 		GameCfgText.getQIHuoList();
 
@@ -205,36 +204,6 @@ cc.Class({
 			}
 		}
 
-		//双盲次数
-		{
-			let str = new Date().toLocaleDateString();
-			let count = cc.sys.localStorage.getItem('SHUANGMANGCOUNT' + str);
-			if (!count) {
-				GameData.ShuangMangCount = 5;
-			} else {
-				GameData.ShuangMangCount = count;
-			}
-
-			let time = (new Date).getTime() - 24 * 60 * 60 * 1000;
-			let preStr = new Date(time).toLocaleDateString();
-			cc.sys.localStorage.removeItem('SHUANGMANGCOUNT' + preStr);
-		}
-
-		//定向次数
-		{
-			let str = new Date().toLocaleDateString();
-			let count = cc.sys.localStorage.getItem('DINGXIANGCOUNT' + str);
-			if (!count) {
-				GameData.DingXiangCount = 5;
-			} else {
-				GameData.DingXiangCount = count;
-			}
-
-			let time = (new Date).getTime() - 24 * 60 * 60 * 1000;
-			let preStr = new Date(time).toLocaleDateString();
-			cc.sys.localStorage.removeItem('DINGXIANGCOUNT' + preStr);
-		}
-
 		//期货设置
 		{
 			let QHSet = cc.sys.localStorage.getItem('QHSET');
@@ -268,6 +237,16 @@ cc.Class({
 			} else {
 				GameData.QHSet = JSON.parse(QHSet);
 			}
+		}
+
+		let DXHistoryInfo = cc.sys.localStorage.getItem('DXHISTORYINFO') || [];
+		if (DXHistoryInfo) {
+			GameData.DXHistoryInfo = JSON.parse(DXHistoryInfo);
+		}
+
+		let QHHistoryInfo = cc.sys.localStorage.getItem('QHHISTORYINFO') || [];
+		if (QHHistoryInfo) {
+			GameData.QHHistoryInfo.JSON.parse(QHHistoryInfo);
 		}
 
 	},

@@ -80,7 +80,6 @@ export default class NewClass extends cc.Component {
             if (viewData[index]) {
                 this.onDrawMyspic(viewData[index], index);
             }
-
         }
     }
 
@@ -182,19 +181,17 @@ export default class NewClass extends cc.Component {
                     let da = (el.timestamp + '').slice(6);
                     let fromDate = ye + '-' + mon + '-' + da;
                     let data = {
-                        day: fromDate,
-                        open: el.open,
-                        close: el.price,
-                        high: el.high,
-                        low: el.low,
-                        price: el.amount,
-                        value: el.volume,
+                        day: fromDate || 0,
+                        open: el.open || 0,
+                        close: el.price || 0,
+                        high: el.high || 0,
+                        low: el.low || 0,
+                        price: el.amount || 0,
+                        value: el.volume || 0,
                         Rate: (el.volume / GameCfg.data[0].circulate) * 100
                     };
 
-                    if (GameCfg.data[0].circulate == 0) {
-                        data.Rate = 1;
-                    }
+
                     this.myspicData.push(data);
                 });
                 socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), (res) => {
@@ -206,18 +203,14 @@ export default class NewClass extends cc.Component {
                         let da = (el.timestamp + '').slice(6);
                         let fromDate = ye + '/' + mon + '/' + da;
                         let data = {
-                            day: fromDate,
-                            open: el.open,
-                            close: el.price,
-                            high: el.high,
-                            low: el.low,
-                            price: el.amount,
-                            value: el.volume,
+                            day: fromDate || 0,
+                            open: el.open || 0,
+                            close: el.price || 0,
+                            high: el.high || 0,
+                            low: el.low || 0,
+                            price: el.amount || 0,
+                            value: el.volume || 0,
                             Rate: el.volume / GameCfg.data[0].circulate * 100,
-                        }
-
-                        if (GameCfg.data[0].circulate == 0) {
-                            data.Rate = 1;
                         }
 
                         this.myspicData.push(data);

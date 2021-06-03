@@ -114,16 +114,13 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		this.onShow();
 
-		if (GameCfg.historyType) {
-			GlobalEvent.emit('OPENHISTORYLAYER', 'DX');
-		}
+
 	}
 
 	onShow() {
 		if (!GameData.DXSet) {
 			return;
 		}
-		//   GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
 
 		this.boxs.forEach((el, index) => {
 			let la;
@@ -546,6 +543,8 @@ export default class NewClass extends cc.Component {
 			//	data.code = arrStr[0];
 			items = GameCfgText.getGPItemInfo(arrStr[0])
 			data.code = items[0];
+
+			ComUtils.saveHistory(data.code);
 		}
 
 		if (GameData.DXSet.market == '随机行情') {

@@ -206,8 +206,8 @@ export default class NewClass extends cc.Component {
 
             //  let datas = this.historyInfo.results;
             GameCfg.huizhidatas = GameCfg.history.huizhidatas;
-            console.log(nodes[3].getComponent(cc.Label).string);
-            console.log('history' + GameCfg.history.huizhidatas)
+            // console.log(nodes[3].getComponent(cc.Label).string);
+            // console.log('history' + GameCfg.history.huizhidatas)
             let data = {
                 code: nodes[2].getComponent(cc.Label).string,
             }
@@ -252,7 +252,7 @@ export default class NewClass extends cc.Component {
         else if (name == 'xl_lsjl_qkjl') {
             this.content.removeAllChildren();
             let datas = this.historyInfo.results;
-            // console.log(JSON.stringify(datas));
+
             if (datas.length <= 0) {
                 return;
             }

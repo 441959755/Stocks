@@ -232,6 +232,19 @@ export default class ComUtils {
 
 	}
 
+	//保存缓存
+	public static saveHistory(code) {
+		code += '';
+		if (code.length >= 7) {
+			code = code.slice(1, 7);
+		}
+		if (GameCfg.GameType == pb.GameType.DingXiang) {
+
+
+		}
+
+	}
+
 
 
 }

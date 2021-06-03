@@ -49,11 +49,11 @@ export default class NewClass extends cc.Component {
         // "count":5,"rankCaptial":0.20999999344348907,"rankRate":0.550000011920929}
         // this.labels[0].string = GameData.userName;
         // this.labels[1].string = '的训练记录(' + year + '年' + month + '月)';
-        this.monthlyInfo.capitalInit && (this.labels[2].string = GameData.SmxlState.goldInit);
-        this.monthlyInfo.capitalFinal && (this.labels[3].string = GameData.SmxlState.gold);
+        this.monthlyInfo.capitalInit && (this.labels[2].string = this.monthlyInfo.capitalInit);
+        this.monthlyInfo.capitalFinal && (this.labels[3].string = this.monthlyInfo.capitalFinal);
         if (this.monthlyInfo.profitRate) {
-            this.labels[4].string = ((GameData.SmxlState.gold - GameData.SmxlState.goldInit) / GameData.SmxlState.goldInit * 100).toFixed(2) + '%';
-            if ((GameData.SmxlState.gold - GameData.SmxlState.goldInit) / GameData.SmxlState.goldInit > 0) {
+            this.labels[4].string = ((this.monthlyInfo.capitalFinal - this.monthlyInfo.capitalInit) / this.monthlyInfo.capitalInit * 100).toFixed(2) + '%';
+            if ((this.monthlyInfo.capitalFinal - this.monthlyInfo.capitalInit) / this.monthlyInfo.capitalInit > 0) {
                 this.labels[4].node.color = cc.Color.RED;
             } else {
                 this.labels[4].node.color = cc.Color.GREEN;

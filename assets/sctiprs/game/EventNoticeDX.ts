@@ -277,13 +277,14 @@ export default class NewClass extends cc.Component {
                     if (data[index].high == data[index].close) {
                         //涨停板(GtGjDH)
 
-
                         if (rate1 >= -0.06 && rate1 < 0) {
                             if (data[index].close > data[index - 1].open) {
                                 if (data[index].open < data[index - 1].close) {
                                     // 看涨吞没：
                                     //this.onCreateTipsItem('看涨吞没');
                                     this.onCreateTipsItem(4);
+
+
                                 }
                             }
                         }
@@ -821,12 +822,16 @@ export default class NewClass extends cc.Component {
         let str;
         if (id == 1) {
             str = '曙光初现';
+            GlobalEvent.emit(EventCfg.CREATEBLOCK, 1);
         } else if (id == 2) {
             str = '旭日东升';
+            GlobalEvent.emit(EventCfg.CREATEBLOCK, 2);
         } else if (id == 3) {
             str = '红三兵';
+            GlobalEvent.emit(EventCfg.CREATEBLOCK, 3);
         } else if (id == 4) {
             str = '看涨吞没';
+            GlobalEvent.emit(EventCfg.CREATEBLOCK, 4);
         } else if (id == 5) {
             str = '三只乌鸦';
         } else if (id == 6) {

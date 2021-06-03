@@ -77,6 +77,8 @@ export default class NewClass extends cc.Component {
 
     cb = null;
 
+    doty = [];
+
 
     onLoad() {
 
@@ -168,7 +170,7 @@ export default class NewClass extends cc.Component {
                 this.tipsNode.scaleX = -1;
                 this.tipsNode.children[0].scaleX = -1;
             }
-            this.tipsNode.setPosition(cc.v2(this.vertical1.x, this.Horizontal1.y));
+            this.tipsNode.setPosition(cc.v2(this.vertical1.x, this.doty[pos1]));
             let las = this.tipsNode.children[0].children;
             las[0].getComponent(cc.Label).string = '时    间:' + this.daysData[pos1].time;
             las[1].getComponent(cc.Label).string = '练习次数:' + this.daysData[pos1].count;
@@ -223,6 +225,7 @@ export default class NewClass extends cc.Component {
         let currCount = 0, currCvs = 0;    //这天的训练次数 收益曲线
 
         for (let i = 0; i < datas.length; i++) {
+
             zongjinge += datas[i].userProfit;
             zonglilv += datas[i].userProfitRate;
 
@@ -239,7 +242,12 @@ export default class NewClass extends cc.Component {
             if (xlcvs[day1]) {
                 xlcvs[day1] += datas[i].userProfit;
             } else {
-                xlcvs[day1] = (datas[i].userProfit + datas[i].userCapital);
+                if (!datas[i].userProfit) {
+                    xlcvs[day1] = xlcvs[day1 - 1];
+                } else {
+                    xlcvs[day1] = (datas[i].userProfit + datas[i].userCapital);
+                }
+
                 if (!this.userCapital) {
                     this.userCapital = datas[i].userCapital;
                 }
@@ -262,8 +270,7 @@ export default class NewClass extends cc.Component {
                 };
                 this.daysData[day1 - 1] = info;
             }
-            //     }
-            // }
+
         }
 
         for (let j = 0; j < day; j++) {
@@ -307,6 +314,7 @@ export default class NewClass extends cc.Component {
     }
 
     draw_line_month(xlCount, xlcvs) {
+        this.doty = [];
         if (xlCount.length <= 0) { return };
         let date = new Date();
         let day = date.getDate();
@@ -343,8 +351,6 @@ export default class NewClass extends cc.Component {
             el.getComponent(cc.Label).string = maxMoney - ((maxMoney - 50000) / 5) * index + '';
         })
 
-
-
         let w = this.draw.node.width / 30;
         let h = this.draw.node.height / maxCount;
 
@@ -370,6 +376,7 @@ export default class NewClass extends cc.Component {
             }
 
             dot2.setPosition(cc.v2((i - 1) * w, y));
+            this.doty.push(y);
 
             if (i >= 2) {
                 this.draw.lineWidth = 2;

@@ -2,7 +2,6 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
 import { pb } from "../../protos/proto";
-import GameData from '../GameData';
 import ComUtils from '../Utils/ComUtils';
 
 const { ccclass, property } = cc._decorator;
@@ -66,7 +65,6 @@ export default class NewClass extends cc.Component {
             let info = [];
             if (datas[inde]) {
                 if (GameCfg.GAMEFUPAN) {
-                    //  info.push(datas[inde].day);
                     info.push(ComUtils.formatTime(datas[inde].day));
                 } else {
                     if (GameCfg.GameSet.year == '随机') {
@@ -74,13 +72,12 @@ export default class NewClass extends cc.Component {
                     } else {
                         info.push(ComUtils.formatTime(datas[inde].day));
                     }
-
                 }
 
-                info.push(parseFloat(datas[inde].open).toFixed(2));
-                info.push(parseFloat(datas[inde].high).toFixed(2));
-                info.push(parseFloat(datas[inde].low).toFixed(2));
-                info.push(parseFloat(datas[inde].close).toFixed(2));
+                info.push((datas[inde].open).toFixed(2));
+                info.push((datas[inde].high).toFixed(2));
+                info.push((datas[inde].low).toFixed(2));
+                info.push((datas[inde].close).toFixed(2));
 
                 if (parseInt(datas[inde].value) >= 100) {
                     info.push(parseInt(datas[inde].value / 100 + '') + '手');
@@ -91,14 +88,13 @@ export default class NewClass extends cc.Component {
 
                 if (GameCfg.GameType == pb.GameType.QiHuo) {
                     info.push('--');
-                    info.push(parseInt(parseInt(datas[inde].ccl_hold) + ''));
+                    info.push(datas[inde].ccl_hold);
                     this.ccLa.string = '持仓：';
-                    //   this.hsLa.string = parseInt(datas[inde].ccl_hold + '') + '';
+
                 } else {
                     info.push(((datas[inde].price) / 10000).toFixed(2) + 'w');
-                    //  info.push(parseInt(datas[inde].price));
-                    info.push(parseFloat(datas[inde].Rate).toFixed(2) + '%');
-                    this.hsLa.string = parseFloat(datas[inde].Rate).toFixed(2) + '%';
+                    info.push((datas[inde].Rate).toFixed(2) + '%');
+                    this.hsLa.string = (datas[inde].Rate).toFixed(2) + '%';
                 }
 
                 let zd = 0.00, zf = 0.00;
@@ -113,12 +109,8 @@ export default class NewClass extends cc.Component {
 
                 if (zf < 0) {
                     this.zfLa.node.color = new cc.Color().fromHEX('#76B87E');
-                    //    this.tipsBox.children[9].color = new cc.Color().fromHEX('#76B87E');
-                    //  this.tipsText[9].node.color = new cc.Color().fromHEX('#76B87E');
                 } else {
                     this.zfLa.node.color = cc.Color.RED;
-                    //   this.tipsBox.children[9].color = cc.Color.RED;
-                    //  this.tipsText[9].node.color = cc.Color.RED;
                 }
 
                 this.zfLa.string = zf.toFixed(2) + '%';
@@ -210,7 +202,6 @@ export default class NewClass extends cc.Component {
         //训练指标
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 
-
             this.rZoom.node.active = false;
             this.rightBox.active = false;
             this.selcetContent.parent.active = false;
@@ -258,6 +249,7 @@ export default class NewClass extends cc.Component {
             this.CCLBtn.active = true;
         }
     }
+
 
     setBGColor() {
         this.inotyBox = this.node.getChildByName('leftinoty');
@@ -307,7 +299,6 @@ export default class NewClass extends cc.Component {
 
     onBtnSlecet(event, data) {
         let name = event.target.name;
-
         if (name == 'btnSlecet') {
             this.selcetContent.active = !this.selcetContent.active;
             //   this.touchNode.active = this.selcetContent.active;
@@ -316,14 +307,11 @@ export default class NewClass extends cc.Component {
             let str = event.target.getComponent(cc.Label).string;
             this.tipsLabel.string = str;
             this.selcetContent.active = false;
-            // this.touchNode.active = false;
             this.setBoxfalg(data);
         }
-
     }
 
     setBoxfalg(data) {
-
         let node = this.rightBox.getChildByName(data);
         node && (node.color = new cc.Color().fromHEX('#fd4432'))
         if (data == 'ma' || data == 'boll') {
@@ -427,7 +415,6 @@ export default class NewClass extends cc.Component {
             } else if (data == 'CCL') {
                 this.tipsLabel.string = '持仓量';
             }
-
         } else if (data == 'rZoomBtn') {
             ;
             if (this.rZoom.isChecked) {

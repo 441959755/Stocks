@@ -155,9 +155,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	onEnable() {
-		if (GameCfg.historyType) {
-			GlobalEvent.emit('OPENHISTORYLAYER', 'QH');
-		}
+	
 		GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		GameCfg.GameType = pb.GameType.QiHuo;
 		let setDatas = GameData.QHSet;
@@ -752,12 +750,12 @@ export default class NewClass extends cc.Component {
 				lxpz = this.SCArr.type[rom1];
 				//	GameCfg.eachHand = this.SCArr.eachHand[rom1];
 			} else if (rom == 2) {
-				rom1 = parseInt(Math.random() * this.XJArr.type.length + '');
-				lxpz = this.XJArr.type[rom1];
-				//GameCfg.eachHand = this.XJArr.eachHand[rom1];
-			} else if (rom == 3) {
 				rom1 = parseInt(Math.random() * this.ZCArr.type.length + '');
 				lxpz = this.ZCArr.type[rom1];
+				//GameCfg.eachHand = this.XJArr.eachHand[rom1];
+			} else if (rom == 3) {
+				rom1 = parseInt(Math.random() * this.XJArr.type.length + '');
+				lxpz = this.XJArr.type[rom1];
 				//	GameCfg.eachHand = this.ZCArr.eachHand[rom1];
 			}
 		} else {
@@ -769,10 +767,10 @@ export default class NewClass extends cc.Component {
 				rom1 = this.SCArr.type.indexOf(lxpz);
 				//	GameCfg.eachHand = this.SCArr.eachHand[rom1];
 			} else if (jys == '郑州商品') {
-				rom1 = this.XJArr.type.indexOf(lxpz);
+				rom1 = this.ZCArr.type.indexOf(lxpz);
 				//	GameCfg.eachHand = this.XJArr.eachHand[rom1];
 			} else if (jys == '中金所') {
-				rom1 = this.ZCArr.type.indexOf(lxpz);
+				rom1 = this.XJArr.type.indexOf(lxpz);
 				//	GameCfg.eachHand = this.ZCArr.eachHand[rom1];
 			}
 		}
@@ -794,11 +792,11 @@ export default class NewClass extends cc.Component {
 				} else {
 					hy = this.SCArr.index[rom1];
 				}
-			} else if (rom == 2) {
+			} else if (rom == 3) {
 				//if (rom2 == 0) {
 				hy = this.XJArr.main[rom1];
 
-			} else if (rom == 3) {
+			} else if (rom == 2) {
 				if (rom2 == 0) {
 					hy = this.ZCArr.main[rom1];
 				} else {

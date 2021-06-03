@@ -54,13 +54,13 @@ export default class GlobalHandle {
                 let da = (el.timestamp + '').slice(6);
                 let fromDate = ye + '-' + mon + '-' + da;
                 let data = {
-                    day: fromDate,
-                    open: el.open,
-                    close: el.price,
-                    high: el.high,
-                    low: el.low,
-                    price: el.amount,
-                    value: el.volume,
+                    day: fromDate || 0,
+                    open: el.open || 0,
+                    close: el.price || 0,
+                    high: el.high || 0,
+                    low: el.low || 0,
+                    price: el.amount || 0,
+                    value: el.volume || 0,
                     Rate: (el.volume / GameCfg.data[0].circulate) * 100
                 };
 
@@ -98,13 +98,13 @@ export default class GlobalHandle {
                     let fromDate = ye + '-' + mon + '-' + da;
                     //  if (fromDate != d) {
                     let data = {
-                        day: fromDate,
-                        open: el.open,
-                        close: el.price,
-                        high: el.high,
-                        low: el.low,
-                        price: el.amount,
-                        value: el.volume,
+                        day: fromDate || 0,
+                        open: el.open || 0,
+                        close: el.price || 0,
+                        high: el.high || 0,
+                        low: el.low || 0,
+                        price: el.amount || 0,
+                        value: el.volume || 0,
                         Rate: (el.volume / GameCfg.data[0].circulate) * 100
                     };
 
@@ -165,12 +165,12 @@ export default class GlobalHandle {
                 //[{"code":2000113,"ktype":"Day","timestamp":"20171103","open":610.2,"close":607.4,"high":610.6,"low":606.6,"volume":"178060","cclHold":"442454"},
                 let data1 = {
                     day: el.timestamp + '',
-                    open: el.open,
-                    close: el.close,
-                    high: el.high,
-                    low: el.low,
-                    value: el.volume,
-                    ccl_hold: el.cclHold,
+                    open: el.open || 0,
+                    close: el.close || 0,
+                    high: el.high || 0,
+                    low: el.low || 0,
+                    value: el.volume || 0,
+                    ccl_hold: el.cclHold || 0,
                 };
                 GameCfg.data[0].data.push(data1);
             });
@@ -204,12 +204,12 @@ export default class GlobalHandle {
                 //	if (el.timestamp != GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day) {
                 let data1 = {
                     day: el.timestamp + '',
-                    open: el.open,
-                    close: el.close,
-                    high: el.high,
-                    low: el.low,
-                    value: el.volume,
-                    ccl_hold: el.cclHold,
+                    open: el.open || 0,
+                    close: el.close || 0,
+                    high: el.high || 0,
+                    low: el.low || 0,
+                    value: el.volume || 0,
+                    ccl_hold: el.cclHold || 0,
                 };
                 qhHQ.push(data1);
                 //	}

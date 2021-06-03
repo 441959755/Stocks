@@ -1,6 +1,5 @@
 
 import { pb } from "../../protos/proto";
-import GameData from "../GameData";
 import ComUtils from "../Utils/ComUtils";
 import GameCfg from "./GameCfg";
 //计算划线的数据
@@ -57,6 +56,8 @@ export default class DrawData {
     public static EXPMA2 = [];
 
     public static btx = [];
+
+
 
     public static dataChange(time, type, arr) {
 
@@ -148,15 +149,11 @@ export default class DrawData {
         }
     }
 
-
-
     public static initData(data) {
         if (data.length <= 0) {
+            console.log('DrawData  initData  data is null' + data);
             return;
         }
-        // if (GameCfg.GameType == pb.GameType.QiHuo) {
-        //     this.dataChange(data);
-        // }
 
         this.MaList = [];
         this.BollList = [];
@@ -165,7 +162,6 @@ export default class DrawData {
         let data5 = 5, data10 = 10;
 
         let k = 2, N = GameCfg.BOLL[0];
-        //let KDJDay = 9,;
         let EMA1Data = GameCfg.MACD[0], EMA2Data = GameCfg.MACD[1], DEAData = GameCfg.MACD[2];
         let EMA12 = 0, EMA26 = 0;
         this.DIFList = [];
@@ -191,21 +187,16 @@ export default class DrawData {
         try {
             data.forEach((el, index) => {
 
-                if (GameCfg.GameType == pb.GameType.DingXiang && GameCfg.GameSet.line == '宝塔线') {
+                if (GameCfg.GameSet.line == '宝塔线') {
                     let arr = [];
                     if (index == 0) {
                         arr[0] = el.open;
                         arr[1] = el.close;
                         arr[2] = false;
-                        //   arr[2] = el.close > el.open ? true : false;
                     } else {
                         arr[0] = this.btx[index - 1][1];
                         arr[1] = el.close;
-                        // let max = Math.max(arr[0], arr[1]);
-                        // if (this.btx[index - 1][2]) {
                         arr[2] = false;
-                        // }
-
                     }
                     this.btx.push(arr);
                 }
@@ -489,6 +480,55 @@ export default class DrawData {
         }
 
 
+    }
+
+    //获取输赢次数
+    public static getBukoCount() {
+
+        let datas = GameCfg.fill;
+
+        let data = {
+            yCount: 0,
+            sCount: 0,
+            minRate: 0,
+            maxRate: 0,
+            minDay: 0,
+            maxDay: 0,
+        }
+
+        let minIndex = -1;
+        let maxIndex = -1;
+
+        for (let i = 0; i < datas.length; i++) {
+
+            if (!datas[i].rate) { continue }
+            if (datas[i].rate >= 0) {
+                data.yCount++;
+                let t = Math.max(data.maxRate, datas[i].rate);
+                if (t == datas[i].rate) {
+                    maxIndex = i;
+                    data.maxRate = datas[i].rate;
+                }
+
+            } else {
+                data.sCount++;
+                let t = Math.min(data.minRate, datas[i].rate);
+                if (t == datas[i].rate) {
+                    minIndex = i;
+                    data.minRate = datas[i].rate;
+                }
+            }
+        }
+
+        if (maxIndex != -1) {
+            data.maxDay = datas[maxIndex].end - datas[maxIndex].start + 1;
+        }
+
+        if (minIndex != -1) {
+            data.minDay = datas[minIndex].end - datas[minIndex].start + 1;
+        }
+
+        return data;
     }
 
 }

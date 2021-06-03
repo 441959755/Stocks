@@ -11,6 +11,7 @@ import { pb } from '../../protos/proto';
 import GlobalHandle from "../global/GlobalHandle";
 
 import StrategyAIData from "./StrategyAIData";
+import DrawData from "./DrawData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -237,16 +238,18 @@ export default class NewClass extends cc.Component {
             this.AllRise.node.color = cc.Color.WHITE;
         }
 
-        this.yingCont.string = GameCfg.profitCount + '次';
-        if (GameCfg.profitCount > 0) {
+        let info = DrawData.getBukoCount();
+
+        this.yingCont.string = info.yCount + '次';
+        if (info.yCount > 0) {
             this.yingCont.node.color = cc.Color.RED;
         } else {
             this.yingCont.node.color = cc.Color.WHITE;
         }
 
-        this.kunCount.string = GameCfg.lossCount + '次';
+        this.kunCount.string = info.sCount + '次';
 
-        if (GameCfg.lossCount > 0) {
+        if (info.sCount > 0) {
             this.kunCount.node.color = cc.Color.GREEN;
         } else {
             this.kunCount.node.color = cc.Color.WHITE;
@@ -285,15 +288,14 @@ export default class NewClass extends cc.Component {
             GameCfg.huizhidatas = 0;
 
             GameCfg.allRate = 0;
-            GameCfg.profitCount = 0;
-            GameCfg.lossCount = 0;
+
             GameCfg.finalfund = 0;
             //    GameCfg.GameType = null;
 
             GameCfg.GAMEFUPAN = false;
             // GameCfg.history.huizhidatas = 0;
             GameCfg.history.allRate = 0;
-            GameCfg.history.deal = [];
+
             GameCfg.enterGameCache = null;
             //    GameCfg.ziChan = 100000;
             cc.director.loadScene('hall');
@@ -317,8 +319,7 @@ export default class NewClass extends cc.Component {
                     GameCfg.huizhidatas = GameData.huizhidatas;
 
                     GameCfg.allRate = 0;
-                    GameCfg.profitCount = 0;
-                    GameCfg.lossCount = 0;
+
                     GameCfg.finalfund = 0;
                     GameCfg.fill = [];
                     GameCfg.mark = [];
@@ -326,7 +327,7 @@ export default class NewClass extends cc.Component {
                     GameCfg.GAMEFUPAN = false;
                     //   GameCfg.history.huizhidatas = 0;
                     GameCfg.history.allRate = 0;
-                    GameCfg.history.deal = [];
+
                     //   GameCfg.ziChan = 100000;
                     GlobalEvent.emit(EventCfg.LEVELCHANGE);
                     cc.director.loadScene('game');
@@ -349,8 +350,7 @@ export default class NewClass extends cc.Component {
             GameCfg.huizhidatas = GameData.huizhidatas;
 
             GameCfg.allRate = 0;
-            GameCfg.profitCount = 0;
-            GameCfg.lossCount = 0;
+
             GameCfg.finalfund = 0;
             GameCfg.fill = [];
             GameCfg.mark = [];
@@ -358,7 +358,7 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = false;
             //   GameCfg.history.huizhidatas = 0;
             GameCfg.history.allRate = 0;
-            GameCfg.history.deal = [];
+
             //   GameCfg.ziChan = 100000;
             GlobalEvent.emit(EventCfg.LEVELCHANGE);
             cc.director.loadScene('game');

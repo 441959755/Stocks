@@ -90,7 +90,6 @@ export default class NewClass extends cc.Component {
             } else {
                 this.onMoveLeftOrRight(1, -1, 0);
             }
-
         }, this);
 
         GlobalEvent.on(EventCfg.SETMALABEL, (labels) => {

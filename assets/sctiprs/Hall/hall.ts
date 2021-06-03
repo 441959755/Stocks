@@ -139,25 +139,25 @@ export default class NewClass extends cc.Component {
 				if (str == 'ZB') {
 					if (!this.ZBSetLayer) {
 						this.ZBSetLayer = cc.instantiate(this.ZBSetPre);
-						this.node.addChild(this.ZBSetLayer);
+						this.node.addChild(this.ZBSetLayer, 30);
 					}
 					this.ZBSetLayer.active = true;
 				} else if (str == 'SM') {
 					if (!this.SMSetLayer) {
 						this.SMSetLayer = cc.instantiate(this.SMSetPre);
-						this.node.addChild(this.SMSetLayer);
+						this.node.addChild(this.SMSetLayer, 30);
 					}
 					this.SMSetLayer.active = true;
 				} else if (str == 'DX') {
 					if (!this.DXSetLayer) {
 						this.DXSetLayer = cc.instantiate(this.DXSetPre);
-						this.node.addChild(this.DXSetLayer);
+						this.node.addChild(this.DXSetLayer, 30);
 					}
 					this.DXSetLayer.active = true;
 				} else if (str == 'QH') {
 					if (!this.QHSetNode) {
 						this.QHSetNode = cc.instantiate(this.QHSetPre);
-						this.node.addChild(this.QHSetNode);
+						this.node.addChild(this.QHSetNode, 30);
 					}
 					this.QHSetNode.active = true;
 				}
@@ -176,7 +176,7 @@ export default class NewClass extends cc.Component {
 
 						if (!this.SMMonthlyLayer) {
 							this.SMMonthlyLayer = cc.instantiate(this.SMMothlyPre);
-							this.node.addChild(this.SMMonthlyLayer);
+							this.node.addChild(this.SMMonthlyLayer, 30);
 						}
 						this.SMMonthlyLayer.active = true;
 
@@ -256,19 +256,28 @@ export default class NewClass extends cc.Component {
 	}
 
 	start() {
-		let event;
+		let event, str;
 		if (GameCfg.GameType == pb.GameType.ShuangMang) {
 			event = { target: { name: 'main_xl_smxl' } };
+			str = 'SM';
 		} else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 			event = { target: { name: 'main_xl_zbxl' } }
+			str = 'ZB';
 		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
 			event = { target: { name: 'main_xl_dxxl' } }
+			str = 'DX';
 		} else if (GameCfg.GameType == pb.GameType.QiHuo) {
 			event = { target: { name: 'main_xl_qhxl' } }
+			str = 'QH';
 		}
 
 		if (event) {
+			if (GameCfg.historyType) {
+				GlobalEvent.emit('OPENHISTORYLAYER', str);
+			}
+
 			GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
+
 		}
 	}
 
@@ -279,15 +288,14 @@ export default class NewClass extends cc.Component {
 		GameCfg.notice = [];
 		GameCfg.huizhidatas = 0;
 		GameCfg.allRate = 0;
-		GameCfg.profitCount = 0;
-		GameCfg.lossCount = 0;
+
 		GameCfg.finalfund = 0;
 		//	GameCfg.GameType = null;
 
 		GameCfg.GAMEFUPAN = false;
 		GameCfg.history.huizhidatas = 0;
 		GameCfg.history.allRate = 0;
-		GameCfg.history.deal = [];
+		//	GameCfg.history.deal = [];
 		GameCfg.data[0].data = [];
 		//	GameCfg.enterGameCache.startTime = null;
 		//	GameCfg.ziChan = 100000;
@@ -321,7 +329,7 @@ export default class NewClass extends cc.Component {
 		if (!node) {
 			//   this.SMhistoryLayer = cc.instantiate(this.SMhistoryPre)
 			node = cc.instantiate(pre);
-			this.node.addChild(node);
+			this.node.addChild(node, 40);
 		}
 		node.active = true;
 		//  this.SMhistoryLayer.getComponent('SMHistory').historyType = type;

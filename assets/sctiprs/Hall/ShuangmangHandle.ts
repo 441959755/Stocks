@@ -41,9 +41,7 @@ export default class NewClass extends cc.Component {
     }
 
     protected onEnable() {
-        if (GameCfg.historyType && GameCfg.huizhidatas == GameCfg.GameType) {
-            GlobalEvent.emit('OPENHISTORYLAYER', 'SM');
-        }
+
 
         //  GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
         GlobalEvent.emit(EventCfg.LOADINGHIDE);

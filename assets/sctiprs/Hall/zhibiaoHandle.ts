@@ -112,9 +112,7 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
 
-        if (GameCfg.historyType) {
-            GlobalEvent.emit('OPENHISTORYLAYER', 'ZB');
-        }
+
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
         // GameCfg.GameType = pb.GameType.ZhiBiao;
 

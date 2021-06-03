@@ -1,7 +1,5 @@
 import GlobalEvent from "./Utils/GlobalEvent";
 import EventCfg from "./Utils/EventCfg";
-import GameCfg from "./game/GameCfg";
-import Game = cc.Game;
 
 export default class GameData {
 
@@ -174,37 +172,61 @@ export default class GameData {
 
     }
 
+    //保存选择的股票
+    private static _DXHistoryInfo = [];
+
+    public static set DXHistoryInfo(val) {
+        this._DXHistoryInfo = val;
+        cc.sys.localStorage.setItem('DXHISTORYINFO', JSON.stringify(val));
+    }
+
+    public static get DXHistoryInfo() {
+        return this._DXHistoryInfo;
+    }
+
+    private static _QHHistoryInfo = [];
+    public static set QHHistoryInfo(val) {
+        this.QHHistoryInfo = val;
+        cc.sys.localStorage.setItem('QHHISTORYINFO', JSON.stringify(val));
+    }
+
+    public static get QHHistoryInfo() {
+        return this._QHHistoryInfo;
+    }
+
+
+
     //双盲的次数
     /**
      * name
      */
-    private static _ShuangMangCount;
+    // private static _ShuangMangCount;
 
-    public static get ShuangMangCount() {
+    // public static get ShuangMangCount() {
 
-        return this._ShuangMangCount;
-    }
+    //     return this._ShuangMangCount;
+    // }
 
-    public static set ShuangMangCount(val) {
-        this._ShuangMangCount = val;
-        let str = new Date().toLocaleDateString();
-        cc.sys.localStorage.setItem('SHUANGMANGCOUNT' + str, val);
+    // public static set ShuangMangCount(val) {
+    //     this._ShuangMangCount = val;
+    //     let str = new Date().toLocaleDateString();
+    //     cc.sys.localStorage.setItem('SHUANGMANGCOUNT' + str, val);
 
-    }
+    // }
 
 
-    private static _DingXiangCount;
+    // private static _DingXiangCount;
 
-    public static get DingXiangCount() {
+    // public static get DingXiangCount() {
 
-        return this._DingXiangCount;
-    }
+    //     return this._DingXiangCount;
+    // }
 
-    public static set DingXiangCount(val) {
-        this._DingXiangCount = val;
-        let str = new Date().toLocaleDateString();
-        cc.sys.localStorage.setItem('DINGXIANGCOUNT' + str, val);
-    }
+    // public static set DingXiangCount(val) {
+    //     this._DingXiangCount = val;
+    //     let str = new Date().toLocaleDateString();
+    //     cc.sys.localStorage.setItem('DINGXIANGCOUNT' + str, val);
+    // }
 
 
 }

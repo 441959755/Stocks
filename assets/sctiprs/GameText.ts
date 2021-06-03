@@ -196,8 +196,6 @@ export default class GameCfgText {
                 le = GameCfgText.stockList.length - 1;
             }
         }
-
-
     }
 
     //随机SM一只股票

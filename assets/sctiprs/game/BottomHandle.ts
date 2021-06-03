@@ -162,18 +162,19 @@ export default class NewClass extends cc.Component {
 							GameCfg.allRate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
 						}
 
-						if (rate < 0) {
-							GameCfg.lossCount++;
-						} else {
-							GameCfg.profitCount++;
-						}
 
 						GlobalEvent.emit('updateRate', [0, GameCfg.allRate]);
 
 						GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
 
-						GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 1;
-						GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
+						this.rateItem.end = GameCfg.huizhidatas - 1;
+
+						GameCfg.fill.forEach(el => {
+							if (!el.end) {
+								el.end = this.rateItem.end;
+							}
+						});
+
 					}
 
 				}
@@ -221,7 +222,11 @@ export default class NewClass extends cc.Component {
 					this.gpName.string = GameCfg.data[0].name + ' ' + code;
 					this.timeLabel[0].string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
 					this.timeLabel[1].string = ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day);
-					// dxnode.getComponent(cc.Layout).spacingX = 100;
+
+					let info = DrawData.getBukoCount();
+
+					this.priceLabel[0].string = '盈利操作次数：' + info.yCount;
+					this.priceLabel[1].string = '亏损操作次数：' + info.sCount;
 				}
 				else if (GameCfg.GameType == pb.GameType.QiHuo) {
 					let node = this.node.getChildByName('fupan');
@@ -233,8 +238,8 @@ export default class NewClass extends cc.Component {
 					node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
 					let node1 = this.node.getChildByName('fupan1');
 					node1.active = false;
-					let node = this.node.getChildByName('fupan1');
-					node.active = true;
+					let node2 = this.node.getChildByName('fupan1');
+					node2.active = true;
 				}
 			},
 			this
@@ -424,21 +429,10 @@ export default class NewClass extends cc.Component {
 				this.moneyLabel[0].string = '总资产    ：' + GameCfg.ziChan;
 				this.moneyLabel[1].string = '可用资产：' + GameCfg.finalfund;
 
-				let datas = GameCfg.history.deal;
+				let info = DrawData.getBukoCount();
 
-				console.log(JSON.stringify(datas));
-				let count = 0,
-					yingcount = 0,
-					kuiCount = 0;
-				for (let i = 0; i < datas.length; i++) {
-					if (datas[i][2] >= 0) {
-						yingcount++;
-					} else {
-						kuiCount++;
-					}
-				}
-				this.priceLabel[0].string = '盈利操作次数：' + yingcount;
-				this.priceLabel[1].string = '亏损操作次数：' + kuiCount;
+				this.priceLabel[0].string = '盈利操作次数：' + info.yCount;
+				this.priceLabel[1].string = '亏损操作次数：' + info.sCount;
 			}
 		} else {
 			let code = GameCfg.data[0].code;
@@ -1080,7 +1074,7 @@ export default class NewClass extends cc.Component {
 				end: null
 			};
 
-			GameCfg.history.deal[GameCfg.history.deal.length] = [GameCfg.huizhidatas - 1, null, null];
+			//		GameCfg.history.deal[GameCfg.history.deal.length] = [GameCfg.huizhidatas - 1, null, null];
 
 			//	if (GameCfg.GameType == pb.GameType.QiHuo) {
 			if (GameCfg.fill.length > 0 && GameCfg.fill[GameCfg.fill.length - 1].end) {
@@ -1159,14 +1153,6 @@ export default class NewClass extends cc.Component {
 			//  console.log('(' + curClose + '-' + preClose + ')' + "/" + preClose);
 			///	GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
 
-
-			//盈利亏损次数
-			if (rate < 0) {
-				GameCfg.lossCount++;
-			} else {
-				GameCfg.profitCount++;
-			}
-
 			GlobalEvent.emit('updateRate', [rate, GameCfg.allRate]);
 
 			if (this.keMcCount == 0) {
@@ -1179,8 +1165,8 @@ export default class NewClass extends cc.Component {
 					}
 				});
 
-				GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 2;
-				GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
+				// GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 2;
+				// GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
 				this.curMrPJPrice = 0;
 			} else {
 				this.curMrPJPrice = preClose;
@@ -1197,9 +1183,9 @@ export default class NewClass extends cc.Component {
 				};
 				GameCfg.fill.push(this.rateItem);
 
-				GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 2;
-				GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
-				GameCfg.history.deal[GameCfg.history.deal.length] = [GameCfg.history.deal[GameCfg.history.deal.length - 1][0]];
+				// GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 2;
+				// GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
+				// GameCfg.history.deal[GameCfg.history.deal.length] = [GameCfg.history.deal[GameCfg.history.deal.length - 1][0]];
 				//   GameCfg.history.deal[GameCfg.history.deal.length][0] = GameCfg.history.deal[GameCfg.history.deal.length - 1][0];
 				// GameCfg.history.deal[GameCfg.history.deal.length][1] = [rate];
 

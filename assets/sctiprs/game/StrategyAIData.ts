@@ -16,12 +16,8 @@ export default class StrategyAIData {
 
     public static AICount = 0;   //策略次数
 
-
-
-
     public static onBuyFunc() {
         this.AICount++;
-
 
         let gpdata = GameCfg.data[0].data;
 

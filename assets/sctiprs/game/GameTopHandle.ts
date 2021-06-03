@@ -185,8 +185,7 @@ export default class NewClass extends cc.Component {
                 GameCfg.huizhidatas = 0;
 
                 GameCfg.allRate = 0;
-                GameCfg.profitCount = 0;
-                GameCfg.lossCount = 0;
+
                 GameCfg.finalfund = 0;
                 //            GameCfg.GameType = null;
                 GameCfg.GAMEFUPAN = false;
@@ -201,8 +200,7 @@ export default class NewClass extends cc.Component {
             GameCfg.huizhidatas = 0;
 
             GameCfg.allRate = 0;
-            GameCfg.profitCount = 0;
-            GameCfg.lossCount = 0;
+
             GameCfg.finalfund = 0;
             //   GameCfg.GameType = null;
             GameCfg.GAMEFUPAN = false;
@@ -217,8 +215,7 @@ export default class NewClass extends cc.Component {
                 GameCfg.huizhidatas = 0;
 
                 GameCfg.allRate = 0;
-                GameCfg.profitCount = 0;
-                GameCfg.lossCount = 0;
+
                 GameCfg.finalfund = 0;
                 //      GameCfg.GameType = null;
                 GameCfg.GAMEFUPAN = false;

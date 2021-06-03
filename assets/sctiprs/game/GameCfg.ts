@@ -52,10 +52,6 @@ export default {
 
     allRate: 0,  //总盈利
 
-    profitCount: 0,//次数盈  利
-
-    lossCount: 0,//亏 损次数
-
     finalfund: 0,
 
     data: [
@@ -73,8 +69,7 @@ export default {
     history: { //游戏记录
         huizhidatas: 0,
         allRate: 0,       //总利率
-        deal: [],    //交易天数、利率
-
+        //  deal: [],    //交易天数、利率
     },
 
     TIMETEMP: [],   //玩的记录时间戳

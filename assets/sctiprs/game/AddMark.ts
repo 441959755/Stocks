@@ -225,12 +225,8 @@ export default class NewClass extends cc.Component {
                     el.node.active = true;
                 }
             }
-
         })
     }
-
-
-
 
     onMarAllkhide() {
         this.markNodes.forEach(el => {
@@ -245,8 +241,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.ONADDMARK);
         GlobalEvent.off(EventCfg.ONMARKUPDATE);
         GlobalEvent.off(EventCfg.ADDMARKHIDEORSHOW);
-
     }
 
-    // update (dt) {}
 }
