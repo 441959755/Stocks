@@ -186,7 +186,7 @@ export default class GameData {
 
     private static _QHHistoryInfo = [];
     public static set QHHistoryInfo(val) {
-        this.QHHistoryInfo = val;
+        this._QHHistoryInfo = val;
         cc.sys.localStorage.setItem('QHHISTORYINFO', JSON.stringify(val));
     }
 

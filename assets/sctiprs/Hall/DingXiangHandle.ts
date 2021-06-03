@@ -108,6 +108,21 @@ export default class NewClass extends cc.Component {
 			},
 			this
 		);
+
+		if (GameData.DXHistoryInfo.length > 0) {
+
+			let content = cc.find('New ScrollView/view/content', this.downBoxs[1]);
+
+			let item = content.children[0];
+
+			GameData.DXHistoryInfo.forEach(el => {
+				let node = cc.instantiate(item);
+				content.addChild(node);
+
+				node.getComponent(cc.Label).string = el;
+			})
+
+		}
 	}
 
 	onEnable() {
@@ -162,6 +177,8 @@ export default class NewClass extends cc.Component {
 			}
 		});
 		this.toggle.isChecked = GameData.DXSet.isFC;
+
+
 	}
 
 	onTipsInfo() {
@@ -544,7 +561,12 @@ export default class NewClass extends cc.Component {
 			items = GameCfgText.getGPItemInfo(arrStr[0])
 			data.code = items[0];
 
-			ComUtils.saveHistory(data.code);
+			let code = data.code + '';
+			if (code.length >= 7) {
+				code = code.slice(1, 7);
+			}
+
+			ComUtils.saveHistory(code + '' + items[1]);
 		}
 
 		if (GameData.DXSet.market == '随机行情') {

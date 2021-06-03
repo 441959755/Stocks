@@ -3,6 +3,7 @@ import EventCfg from '../Utils/EventCfg';
 import LoadUtils from './LoadUtils';
 import GameCfg from '../game/GameCfg';
 import { pb } from '../../protos/proto'
+import GameData from '../GameData';
 
 export default class ComUtils {
 	private static loading = null;
@@ -234,12 +235,18 @@ export default class ComUtils {
 
 	//保存缓存
 	public static saveHistory(code) {
-		code += '';
-		if (code.length >= 7) {
-			code = code.slice(1, 7);
-		}
+
 		if (GameCfg.GameType == pb.GameType.DingXiang) {
 
+			if (GameData.DXHistoryInfo.indexOf(code) == -1) {
+				GameData.DXHistoryInfo.push(code);
+			}
+
+			if (GameData.DXHistoryInfo.length > 20) {
+				GameData.DXHistoryInfo.shift();
+			}
+
+			GameData.DXHistoryInfo = GameData.DXHistoryInfo;
 
 		}
 

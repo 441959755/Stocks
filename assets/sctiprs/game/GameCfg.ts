@@ -91,4 +91,8 @@ export default {
 
     historyType: null,   //哪进入复盘的
 
+    blockHistoy: [],
+
+
+
 }

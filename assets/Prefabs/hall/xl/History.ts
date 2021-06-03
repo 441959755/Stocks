@@ -195,6 +195,11 @@ export default class NewClass extends cc.Component {
                     GameCfg.fill = JSON.parse(fill);
                     // console.log(JSON.stringify(GameCfg.fill));
                 }
+
+                let blockHistory = cc.sys.localStorage.getItem(ts + 'block');
+                if (blockHistory) {
+                    GameCfg.blockHistoy = JSON.parse(blockHistory);
+                }
             }
 
 

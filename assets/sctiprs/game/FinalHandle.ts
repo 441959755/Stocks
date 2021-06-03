@@ -278,6 +278,7 @@ export default class NewClass extends cc.Component {
         cc.sys.localStorage.setItem(ts + 'fill', JSON.stringify(GameCfg.fill));
         cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
         cc.sys.localStorage.setItem(ts + 'cache', JSON.stringify(GameCfg.enterGameCache));
+        cc.sys.localStorage.setItem(ts + 'block', JSON.stringify(GameCfg.blockHistoy));
     }
 
     onBtnClick(event, data) {
@@ -322,6 +323,7 @@ export default class NewClass extends cc.Component {
 
                     GameCfg.finalfund = 0;
                     GameCfg.fill = [];
+                    GameCfg.blockHistoy = [];
                     GameCfg.mark = [];
                     GameCfg.notice = [];
                     GameCfg.GAMEFUPAN = false;
@@ -353,6 +355,7 @@ export default class NewClass extends cc.Component {
 
             GameCfg.finalfund = 0;
             GameCfg.fill = [];
+            GameCfg.blockHistoy = [];
             GameCfg.mark = [];
             GameCfg.notice = [];
             GameCfg.GAMEFUPAN = false;

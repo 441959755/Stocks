@@ -239,14 +239,19 @@ cc.Class({
 			}
 		}
 
-		let DXHistoryInfo = cc.sys.localStorage.getItem('DXHISTORYINFO') || [];
-		if (DXHistoryInfo) {
+		let DXHistoryInfo = cc.sys.localStorage.getItem('DXHISTORYINFO');
+		if (!DXHistoryInfo) {
+			GameData.DXHistoryInfo = [];
+		} else {
 			GameData.DXHistoryInfo = JSON.parse(DXHistoryInfo);
+
 		}
 
-		let QHHistoryInfo = cc.sys.localStorage.getItem('QHHISTORYINFO') || [];
-		if (QHHistoryInfo) {
-			GameData.QHHistoryInfo.JSON.parse(QHHistoryInfo);
+		let QHHistoryInfo = cc.sys.localStorage.getItem('QHHISTORYINFO');
+		if (!QHHistoryInfo) {
+			GameData.QHHistoryInfo = [];
+		} else {
+			GameData.QHHistoryInfo = JSON.parse(QHHistoryInfo);
 		}
 
 	},

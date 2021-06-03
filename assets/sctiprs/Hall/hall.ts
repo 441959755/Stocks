@@ -288,7 +288,7 @@ export default class NewClass extends cc.Component {
 		GameCfg.notice = [];
 		GameCfg.huizhidatas = 0;
 		GameCfg.allRate = 0;
-
+		GameCfg.blockHistoy = [];
 		GameCfg.finalfund = 0;
 		//	GameCfg.GameType = null;
 
@@ -398,7 +398,7 @@ export default class NewClass extends cc.Component {
 			};
 
 			socket.send(pb.MessageId.Req_Game_QueryGameResult, PB.onCmdQueryGameResultConvertToBuff(data1), info => {
-				console.log('acquireSMhistoryInfo' + JSON.stringify(info));
+				//	console.log('acquireSMhistoryInfo' + JSON.stringify(info));
 
 				callBack && callBack(info);
 			});
