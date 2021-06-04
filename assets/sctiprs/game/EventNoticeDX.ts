@@ -53,6 +53,7 @@ export default class NewClass extends cc.Component {
             }
             let locPos = this.content.parent.parent.convertToNodeSpaceAR(data.pos);
             this.tipsLabel.node.parent.y = locPos.y;
+
             this.tipsLabel.string = data.str;
             this.tipsLabel.node.parent.active = true;
             if (this.timeCall) {
@@ -77,7 +78,7 @@ export default class NewClass extends cc.Component {
         let data = GameCfg.notice;
         if (data) {
             data.forEach((el) => {
-                this.onCreateTipsItem(el[0]);
+                this.onCreateTipsItem(el[0], el[1]);
             });
         }
     }
@@ -90,15 +91,15 @@ export default class NewClass extends cc.Component {
             return;
         }
         let data = GameCfg.data[0].data;
-        let rate = (data[index].close - data[index].open) / data[index].open;
+        let rate = (data[index].close - data[index - 1].close) / data[index - 1].close;
 
-        let rate1 = (data[index - 1].close - data[index - 1].open) / data[index - 1].open;
+        let rate1 = (data[index - 1].close - data[index - 2].close) / data[index - 2].close;
 
-        let rate2 = (data[index - 2].close - data[index - 2].open) / data[index - 2].open;
+        let rate2 = (data[index - 2].close - data[index - 3].close) / data[index - 3].close;
 
         {
             //小阳线（XH）：
-            if (rate > 0 && rate < 0.03) {
+            if (rate > 0 && rate < 0.02) {
                 if (data[index].low == data[index].open) {
                     if (data[index].high == data[index].close) {
                         //光头光脚小阳线(GtGjXH)
@@ -122,13 +123,14 @@ export default class NewClass extends cc.Component {
 
         {
             //中阳线（ZH）：
-            if (rate >= 0.03 && rate < 0.06) {
+            if (rate >= 0.02 && rate < 0.055) {
 
-                //光头光脚中阳线(GtGjZH)
+
                 if (data[index].low == data[index].open) {
+                    //光头光脚中阳线(GtGjZH)
                     if (data[index].high == data[index].close) {
 
-                        if (rate1 >= -0.105 && rate1 < -0.03) {
+                        if (rate1 >= -0.105 && rate1 < -0.02) {
 
                             if (data[index].open < data[index - 1].close) {
                                 if (data[index].close >= (data[index - 1].open + data[index - 1].close) / 2) {
@@ -150,22 +152,26 @@ export default class NewClass extends cc.Component {
 
                         }
 
-                        else if (rate1 >= 0.03 && rate1 < 0.06) {
-                            if (rate2 >= 0.03 && rate2 < 0.06) {
+                        else if (rate1 >= 0.02 && rate1 < 0.055) {
+                            if (rate2 >= 0.02 && rate2 < 0.055) {
                                 if (data[index].open >= (data[index - 1].open + data[index - 1].close) / 2) {
                                     if (data[index].close > data[index - 1].high) {
-                                        //红三兵：
-                                        //  this.onCreateTipsItem('红三兵');
-                                        this.onCreateTipsItem(3);
+                                        if (data[index - 1].open >= (data[index - 2].open + data[index - 2].close) / 2) {
+                                            if (data[index - 1].close > data[index - 3].high) {
+                                                this.onCreateTipsItem(3);
+                                            }
+                                        }
+
                                     }
                                 }
                             }
                         }
 
                     }
+
                     else if (data[index].high > data[index].close) {
 
-                        if (rate1 >= -0.105 && rate1 < -0.03) {
+                        if (rate1 >= -0.105 && rate1 < -0.02) {
                             if (data[index].open < data[index - 1].close) {
                                 if (data[index - 1].open >= data[index].close && data[index].close >= (data[index - 1].open + data[index - 1].close) / 2) {
                                     ////曙光初现
@@ -175,7 +181,7 @@ export default class NewClass extends cc.Component {
 
                             }
 
-                            else if (data[index].open >= data[index - 1].open + data[index - 1].close / 2) {
+                            else if (data[index].open >= (data[index - 1].open + data[index - 1].close) / 2) {
                                 if (data[index].close > data[index - 1].open) {
                                     ////旭日东升：
                                     //this.onCreateTipsItem('旭日东升');
@@ -185,8 +191,8 @@ export default class NewClass extends cc.Component {
 
                         }
 
-                        else if (rate1 >= 0.03 && rate1 < 0.06) {
-                            if (rate2 >= 0.03 && rate2 < 0.06) {
+                        else if (rate1 >= 0.02 && rate1 < 0.055) {
+                            if (rate2 >= 0.02 && rate2 < 0.055) {
                                 if (data[index].open >= (data[index - 1].open + data[index - 1].close) / 2) {
                                     if (data[index].close > data[index - 1].high) {
                                         //红三兵：
@@ -201,7 +207,7 @@ export default class NewClass extends cc.Component {
                 }
 
                 else if (data[index].low < data[index].open && data[index].high == data[index].close) {
-                    if (rate1 >= -0.105 && rate1 < -0.03) {
+                    if (rate1 >= -0.105 && rate1 < -0.02) {
                         if (data[index].open < data[index - 1].close) {
                             if (data[index - 1].open >= data[index].close && data[index].close >= (data[index - 1].open + data[index - 1].close) / 2) {
                                 ////曙光初现
@@ -211,7 +217,7 @@ export default class NewClass extends cc.Component {
 
                         }
 
-                        else if (data[index].open >= data[index - 1].open + data[index - 1].close / 2) {
+                        else if (data[index].open >= (data[index - 1].open + data[index - 1].close) / 2) {
                             if (data[index].close > data[index - 1].open) {
                                 ////旭日东升：
                                 // this.onCreateTipsItem('旭日东升');
@@ -220,8 +226,8 @@ export default class NewClass extends cc.Component {
                         }
 
                     }
-                    else if (rate1 >= 0.03 && rate1 < 0.06) {
-                        if (rate2 >= 0.03 && rate2 < 0.06) {
+                    else if (rate1 >= 0.02 && rate1 < 0.055) {
+                        if (rate2 >= 0.02 && rate2 < 0.055) {
                             if (data[index].open >= (data[index - 1].open + data[index - 1].close) / 2) {
                                 if (data[index].close > data[index - 1].high) {
                                     //红三兵：
@@ -234,7 +240,7 @@ export default class NewClass extends cc.Component {
                 }
 
                 else if (data[index].low < data[index].open && data[index].high > data[index].close) {
-                    if (rate1 >= -0.105 && rate1 < -0.03) {
+                    if (rate1 >= -0.105 && rate1 < -0.02) {
                         if (data[index].open < data[index - 1].close) {
                             if (data[index - 1].open >= data[index].close && data[index].close >= (data[index - 1].open + data[index - 1].close) / 2) {
                                 ////曙光初现
@@ -244,7 +250,7 @@ export default class NewClass extends cc.Component {
 
                         }
 
-                        else if (data[index].open >= data[index - 1].open + data[index - 1].close / 2) {
+                        else if (data[index].open >= (data[index - 1].open + data[index - 1].close) / 2) {
                             if (data[index].close > data[index - 1].open) {
                                 ////旭日东升：
                                 // this.onCreateTipsItem('旭日东升');
@@ -253,8 +259,8 @@ export default class NewClass extends cc.Component {
                         }
 
                     }
-                    else if (rate1 >= 0.03 && rate1 < 0.06) {
-                        if (rate2 >= 0.03 && rate2 < 0.06) {
+                    else if (rate1 >= 0.02 && rate1 < 0.055) {
+                        if (rate2 >= 0.02 && rate2 < 0.055) {
                             if (data[index].open >= (data[index - 1].open + data[index - 1].close) / 2) {
                                 if (data[index].close > data[index - 1].high) {
                                     //红三兵：
@@ -271,13 +277,13 @@ export default class NewClass extends cc.Component {
 
         {
             //大阳线
-            if (rate >= 0.06 && rate <= 0.105) {
+            if (rate >= 0.055 && rate <= 0.105) {
 
                 if (data[index].low == data[index].open) {
                     if (data[index].high == data[index].close) {
                         //涨停板(GtGjDH)
 
-                        if (rate1 >= -0.06 && rate1 < 0) {
+                        if (rate1 >= -0.055 && rate1 < 0) {
                             if (data[index].close > data[index - 1].open) {
                                 if (data[index].open < data[index - 1].close) {
                                     // 看涨吞没：
@@ -288,7 +294,7 @@ export default class NewClass extends cc.Component {
                                 }
                             }
                         }
-                        if (rate1 >= -0.105 && rate1 < -0.03) {
+                        if (rate1 >= -0.105 && rate1 < -0.02) {
                             if (data[index].open < data[index - 1].close) {
                                 if (data[index - 1].open >= data[index].close && data[index].close >= (data[index - 1].open + data[index - 1].close) / 2) {
                                     ////曙光初现
@@ -298,7 +304,7 @@ export default class NewClass extends cc.Component {
 
                             }
 
-                            else if (data[index].open >= data[index - 1].open + data[index - 1].close / 2) {
+                            else if (data[index].open >= (data[index - 1].open + data[index - 1].close) / 2) {
                                 if (data[index].close > data[index - 1].open) {
                                     ////旭日东升：
                                     //  this.onCreateTipsItem('旭日东升');
@@ -308,8 +314,8 @@ export default class NewClass extends cc.Component {
 
                         }
 
-                        if (rate1 >= 0.06 && rate1 <= 0.105) {
-                            if (rate2 >= 0.06 && rate2 <= 0.105) {
+                        if (rate1 >= 0.055 && rate1 <= 0.105) {
+                            if (rate2 >= 0.055 && rate2 <= 0.105) {
                                 if (data[index].open >= (data[index - 1].open + data[index - 1].close) / 2) {
                                     if (data[index].close > data[index - 1].high) {
                                         if (data[index - 1].open >= (data[index - 2].open + data[index - 1].close) / 2) {
@@ -328,7 +334,7 @@ export default class NewClass extends cc.Component {
 
                 else if (data[index].low < data[index].open) {
                     if (data[index].high == data[index].close) {
-                        if (rate1 >= -0.06 && rate1 < 0) {
+                        if (rate1 >= -0.055 && rate1 < 0) {
                             if (data[index].close > data[index - 1].open) {
                                 if (data[index].open < data[index - 1].close) {
                                     // 看涨吞没：
@@ -337,7 +343,7 @@ export default class NewClass extends cc.Component {
                                 }
                             }
                         }
-                        if (rate1 >= -0.105 && rate1 < -0.03) {
+                        if (rate1 >= -0.105 && rate1 < -0.02) {
                             if (data[index].open < data[index - 1].close) {
                                 if (data[index - 1].open > data[index].close && data[index].close >= (data[index - 1].open + data[index - 1].close) / 2) {
                                     ////曙光初现
@@ -347,7 +353,7 @@ export default class NewClass extends cc.Component {
 
                             }
 
-                            else if (data[index].open >= data[index - 1].open + data[index - 1].close / 2) {
+                            else if (data[index].open >= (data[index - 1].open + data[index - 1].close) / 2) {
                                 if (data[index].close > data[index - 1].open) {
                                     ////旭日东升：
                                     // this.onCreateTipsItem('旭日东升');
@@ -356,8 +362,8 @@ export default class NewClass extends cc.Component {
                             }
 
                         }
-                        if (rate1 >= 0.06 && rate1 <= 0.105) {
-                            if (rate2 >= 0.06 && rate2 <= 0.105) {
+                        if (rate1 >= 0.055 && rate1 <= 0.105) {
+                            if (rate2 >= 0.055 && rate2 <= 0.105) {
                                 if (data[index].open >= (data[index - 1].open + data[index - 1].close) / 2) {
                                     if (data[index].close > data[index - 1].high) {
 
@@ -374,7 +380,7 @@ export default class NewClass extends cc.Component {
 
                 else if (data[index].low < data[index].open) {
                     if (data[index].high > data[index].close) {
-                        if (rate1 >= -0.06 && rate1 < 0) {
+                        if (rate1 >= -0.055 && rate1 < 0) {
                             if (data[index].close > data[index - 1].open) {
                                 if (data[index].open < data[index - 1].close) {
                                     // 看涨吞没：
@@ -384,7 +390,7 @@ export default class NewClass extends cc.Component {
                             }
                         }
 
-                        if (rate1 >= -0.105 && rate1 < -0.03) {
+                        if (rate1 >= -0.105 && rate1 < -0.02) {
                             if (data[index].open < data[index - 1].close) {
                                 if (data[index - 1].open > data[index].close && data[index].close >= (data[index - 1].open + data[index - 1].close) / 2) {
                                     ////曙光初现
@@ -394,7 +400,7 @@ export default class NewClass extends cc.Component {
 
                             }
 
-                            else if (data[index].open >= data[index - 1].open + data[index - 1].close / 2) {
+                            else if (data[index].open >= (data[index - 1].open + data[index - 1].close) / 2) {
                                 if (data[index].close > data[index - 1].open) {
                                     ////旭日东升：
                                     //this.onCreateTipsItem('旭日东升');
@@ -404,8 +410,8 @@ export default class NewClass extends cc.Component {
 
                         }
 
-                        if (rate1 >= 0.06 && rate1 <= 0.105) {
-                            if (rate2 >= 0.06 && rate2 <= 0.105) {
+                        if (rate1 >= 0.055 && rate1 <= 0.105) {
+                            if (rate2 >= 0.055 && rate2 <= 0.105) {
                                 if (data[index].open >= (data[index - 1].open + data[index - 1].close) / 2) {
                                     if (data[index].close > data[index - 1].high) {
                                         if (data[index - 1].open >= (data[index - 2].open + data[index - 1].close) / 2) {
@@ -427,7 +433,7 @@ export default class NewClass extends cc.Component {
 
         {
             //小阴线
-            if (rate > -0.03 && rate < 0) {
+            if (rate > -0.02 && rate < 0) {
 
                 if (data[index].low == data[index].close) {
                     if (data[index].high == data[index].open) {
@@ -451,15 +457,15 @@ export default class NewClass extends cc.Component {
             }
 
             //中阴线
-            else if (rate >= -0.06 && rate < -0.03) {
+            else if (rate >= -0.055 && rate < -0.02) {
 
                 if (data[index].low == data[index].close) {
                     if (data[index].high == data[index].open) {
                         //光头光脚小阴线(GtGjXL)
 
-                        if (rate1 >= -0.06 && rate1 < -0.03) {
-                            if (rate2 >= -0.06 && rate2 < -0.03) {
-                                if (data[index].open <= (data[index - 1].open + data[index - 1]) / 2) {
+                        if (rate1 >= -0.055 && rate1 < -0.02) {
+                            if (rate2 >= -0.055 && rate2 < -0.02) {
+                                if (data[index].open <= (data[index - 1].open + data[index - 1].close) / 2) {
                                     if (data[index].close < data[index - 1].low) {
                                         if (data[index - 1].open <= (data[index - 2].open + data[index - 2].close) / 2) {
                                             if (data[index - 1].close < data[index - 2].low) {
@@ -476,9 +482,9 @@ export default class NewClass extends cc.Component {
 
                     else if (data[index].high > data[index].open) {
                         //只带上影线小阴线(SyXL)
-                        if (rate1 >= -0.06 && rate1 < -0.03) {
-                            if (rate2 >= -0.06 && rate2 < -0.03) {
-                                if (data[index].open <= (data[index - 1].open + data[index - 1]) / 2) {
+                        if (rate1 >= -0.055 && rate1 < -0.02) {
+                            if (rate2 >= -0.055 && rate2 < -0.02) {
+                                if (data[index].open <= (data[index - 1].open + data[index - 1].close) / 2) {
                                     if (data[index].close < data[index - 1].low) {
                                         if (data[index - 1].open <= (data[index - 2].open + data[index - 2].close) / 2) {
                                             if (data[index - 1].close < data[index - 2].low) {
@@ -498,9 +504,9 @@ export default class NewClass extends cc.Component {
                     if (data[index].high == data[index].open) {
                         //只带下影线小阴线(XyXL)
 
-                        if (rate1 >= -0.06 && rate1 < -0.03) {
-                            if (rate2 >= -0.06 && rate2 < -0.03) {
-                                if (data[index].open <= (data[index - 1].open + data[index - 1]) / 2) {
+                        if (rate1 >= -0.055 && rate1 < -0.02) {
+                            if (rate2 >= -0.055 && rate2 < -0.02) {
+                                if (data[index].open <= (data[index - 1].open + data[index - 1].close) / 2) {
                                     if (data[index].close < data[index - 1].low) {
                                         if (data[index - 1].open <= (data[index - 2].open + data[index - 2].close) / 2) {
                                             if (data[index - 1].close < data[index - 2].low) {
@@ -517,9 +523,9 @@ export default class NewClass extends cc.Component {
 
                     else if (data[index].high > data[index].open) {
                         //带上下影线小阴线(SyXyXL)
-                        if (rate1 >= -0.06 && rate1 < -0.03) {
-                            if (rate2 >= -0.06 && rate2 < -0.03) {
-                                if (data[index].open <= (data[index - 1].open + data[index - 1]) / 2) {
+                        if (rate1 >= -0.055 && rate1 < -0.02) {
+                            if (rate2 >= -0.055 && rate2 < -0.02) {
+                                if (data[index].open <= (data[index - 1].open + data[index - 1].close) / 2) {
                                     if (data[index].close < data[index - 1].low) {
                                         if (data[index - 1].open <= (data[index - 2].open + data[index - 2].close) / 2) {
                                             if (data[index - 1].close < data[index - 2].low) {
@@ -539,12 +545,12 @@ export default class NewClass extends cc.Component {
             }
 
             //大阴线
-            else if (rate >= -0.105 && rate <= -0.06) {
+            else if (rate >= -0.105 && rate <= -0.055) {
 
                 if (data[index].low == data[index].close) {
                     if (data[index].high == data[index].open) {
 
-                        if (rate1 > 0 && rate1 < 0.06) {
+                        if (rate1 > 0 && rate1 < 0.055) {
                             if (data[index].open > data[index - 1].close) {
                                 if (data[index].close < data[index - 1].open) {
                                     //看跌吞没：
@@ -554,7 +560,7 @@ export default class NewClass extends cc.Component {
                             }
                         }
 
-                        if (rate1 > 0.03 && rate1 <= 0.105) {
+                        if (rate1 > 0.02 && rate1 <= 0.105) {
                             if (data[index].open > data[index - 1].high) {
                                 if (data[index - 1].open <= data[index].close && data[index].close < (data[index - 1].close + data[index - 1].open) / 2) {
                                     //乌云盖顶：
@@ -564,7 +570,7 @@ export default class NewClass extends cc.Component {
                             }
                         }
 
-                        if (rate1 >= 0.03 && rate1 < 0.06) {
+                        if (rate1 >= 0.02 && rate1 < 0.055) {
                             if (data[index].open < data[index - 1].close) {
                                 if (data[index].close < data[index - 1].open) {
                                     //倾盆大雨：
@@ -574,9 +580,9 @@ export default class NewClass extends cc.Component {
                             }
                         }
 
-                        if (rate1 >= -0.105 && rate1 <= -0.06) {
-                            if (rate2 >= -0.105 && rate2 <= -0.06) {
-                                if (data[index].open <= (data[index - 1].open + data[index - 1]) / 2) {
+                        if (rate1 >= -0.105 && rate1 <= -0.055) {
+                            if (rate2 >= -0.105 && rate2 <= -0.055) {
+                                if (data[index].open <= (data[index - 1].open + data[index - 1].close) / 2) {
                                     if (data[index].close < data[index - 1].low) {
                                         if (data[index - 1].open <= (data[index - 2].open + data[index - 2].close) / 2) {
                                             if (data[index - 1].close < data[index - 2].low) {
@@ -592,7 +598,7 @@ export default class NewClass extends cc.Component {
 
                     }
                     else if (data[index].high > data[index].open) {
-                        if (rate1 > 0 && rate1 < 0.06) {
+                        if (rate1 > 0 && rate1 < 0.055) {
                             if (data[index].open > data[index - 1].close) {
                                 if (data[index].close < data[index - 1].open) {
                                     //看跌吞没：
@@ -602,7 +608,7 @@ export default class NewClass extends cc.Component {
                             }
                         }
 
-                        if (rate1 > 0.03 && rate1 <= 0.105) {
+                        if (rate1 > 0.02 && rate1 <= 0.105) {
                             if (data[index].open > data[index - 1].high) {
                                 if (data[index - 1].open <= data[index].close && data[index].close < (data[index - 1].close + data[index - 1].open) / 2) {
                                     //乌云盖顶：
@@ -612,7 +618,7 @@ export default class NewClass extends cc.Component {
                             }
                         }
 
-                        if (rate1 >= 0.03 && rate1 < 0.06) {
+                        if (rate1 >= 0.02 && rate1 < 0.055) {
                             if (data[index].open < data[index - 1].close) {
                                 if (data[index].close < data[index - 1].open) {
                                     //倾盆大雨：
@@ -622,9 +628,9 @@ export default class NewClass extends cc.Component {
                             }
                         }
 
-                        if (rate1 >= -0.105 && rate1 <= -0.06) {
-                            if (rate2 >= -0.105 && rate2 <= -0.06) {
-                                if (data[index].open <= (data[index - 1].open + data[index - 1]) / 2) {
+                        if (rate1 >= -0.105 && rate1 <= -0.055) {
+                            if (rate2 >= -0.105 && rate2 <= -0.055) {
+                                if (data[index].open <= (data[index - 1].open + data[index - 1].close) / 2) {
                                     if (data[index].close < data[index - 1].low) {
                                         if (data[index - 1].open <= (data[index - 2].open + data[index - 2].close) / 2) {
                                             if (data[index - 1].close < data[index - 2].low) {
@@ -643,7 +649,7 @@ export default class NewClass extends cc.Component {
 
                 else if (data[index].low < data[index].close) {
                     if (data[index].high == data[index].open) {
-                        if (rate1 > 0 && rate1 < 0.06) {
+                        if (rate1 > 0 && rate1 < 0.055) {
                             if (data[index].open > data[index - 1].close) {
                                 if (data[index].close < data[index - 1].open) {
                                     //看跌吞没：
@@ -653,7 +659,7 @@ export default class NewClass extends cc.Component {
                             }
                         }
 
-                        if (rate1 > 0.03 && rate1 <= 0.105) {
+                        if (rate1 > 0.02 && rate1 <= 0.105) {
                             if (data[index].open > data[index - 1].high) {
                                 if (data[index - 1].open <= data[index].close && data[index].close < (data[index - 1].close + data[index - 1].open) / 2) {
                                     //乌云盖顶：
@@ -663,7 +669,7 @@ export default class NewClass extends cc.Component {
                             }
                         }
 
-                        if (rate1 >= 0.03 && rate1 < 0.06) {
+                        if (rate1 >= 0.02 && rate1 < 0.055) {
                             if (data[index].open < data[index - 1].close) {
                                 if (data[index].close < data[index - 1].open) {
                                     //倾盆大雨：
@@ -673,9 +679,9 @@ export default class NewClass extends cc.Component {
                             }
                         }
 
-                        if (rate1 >= -0.105 && rate1 <= -0.06) {
-                            if (rate2 >= -0.105 && rate2 <= -0.06) {
-                                if (data[index].open <= (data[index - 1].open + data[index - 1]) / 2) {
+                        if (rate1 >= -0.105 && rate1 <= -0.055) {
+                            if (rate2 >= -0.105 && rate2 <= -0.055) {
+                                if (data[index].open <= (data[index - 1].open + data[index - 1].close) / 2) {
                                     if (data[index].close < data[index - 1].low) {
                                         if (data[index - 1].open <= (data[index - 2].open + data[index - 2].close) / 2) {
                                             if (data[index - 1].close < data[index - 2].low) {
@@ -692,7 +698,7 @@ export default class NewClass extends cc.Component {
                     }
 
                     else if (data[index].high > data[index].open) {
-                        if (rate1 > 0 && rate1 < 0.06) {
+                        if (rate1 > 0 && rate1 < 0.055) {
                             if (data[index].open > data[index - 1].close) {
                                 if (data[index].close < data[index - 1].open) {
                                     //看跌吞没：
@@ -702,7 +708,7 @@ export default class NewClass extends cc.Component {
                             }
                         }
 
-                        if (rate1 > 0.03 && rate1 <= 0.105) {
+                        if (rate1 > 0.02 && rate1 <= 0.105) {
                             if (data[index].open > data[index - 1].high) {
                                 if (data[index - 1].open <= data[index].close && data[index].close < (data[index - 1].close + data[index - 1].open) / 2) {
                                     //乌云盖顶：
@@ -712,7 +718,7 @@ export default class NewClass extends cc.Component {
                             }
                         }
 
-                        if (rate1 >= 0.03 && rate1 < 0.06) {
+                        if (rate1 >= 0.02 && rate1 < 0.055) {
                             if (data[index].open < data[index - 1].close) {
                                 if (data[index].close < data[index - 1].open) {
                                     //倾盆大雨：
@@ -722,9 +728,9 @@ export default class NewClass extends cc.Component {
                             }
                         }
 
-                        if (rate1 >= -0.105 && rate1 <= -0.06) {
-                            if (rate2 >= -0.105 && rate2 <= -0.06) {
-                                if (data[index].open <= (data[index - 1].open + data[index - 1]) / 2) {
+                        if (rate1 >= -0.105 && rate1 <= -0.055) {
+                            if (rate2 >= -0.105 && rate2 <= -0.055) {
+                                if (data[index].open <= (data[index - 1].open + data[index - 1].close) / 2) {
                                     if (data[index].close < data[index - 1].low) {
                                         if (data[index - 1].open <= (data[index - 2].open + data[index - 2].close) / 2) {
                                             if (data[index - 1].close < data[index - 2].low) {
@@ -818,7 +824,10 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    onCreateTipsItem(id) {
+    onCreateTipsItem(id, index?) {
+        if (!index) {
+            index = GameCfg.huizhidatas - 1;
+        }
         let str;
         if (id == 1) {
             str = '曙光初现';
@@ -844,22 +853,22 @@ export default class NewClass extends cc.Component {
         } else if (id == 5) {
             str = '三只乌鸦';
             if (!GameCfg.GAMEFUPAN) {
-                GlobalEvent.emit(EventCfg.CREATEBLOCK, 1);
+                GlobalEvent.emit(EventCfg.CREATEBLOCK, 5);
             }
         } else if (id == 6) {
             str = '看跌吞没';
             if (!GameCfg.GAMEFUPAN) {
-                GlobalEvent.emit(EventCfg.CREATEBLOCK, 2);
+                GlobalEvent.emit(EventCfg.CREATEBLOCK, 6);
             }
         } else if (id == 7) {
             str = '乌云盖顶';
             if (!GameCfg.GAMEFUPAN) {
-                GlobalEvent.emit(EventCfg.CREATEBLOCK, 3);
+                GlobalEvent.emit(EventCfg.CREATEBLOCK, 7);
             }
         } else if (id == 8) {
             str = '倾盆大雨';
             if (!GameCfg.GAMEFUPAN) {
-                GlobalEvent.emit(EventCfg.CREATEBLOCK, 4);
+                GlobalEvent.emit(EventCfg.CREATEBLOCK, 8);
             }
         }
 
@@ -911,6 +920,8 @@ export default class NewClass extends cc.Component {
 
         let itemHandle = node.getComponent('ItemNotice')
         itemHandle.text = str;
+
+        index && (itemHandle.Pindex = index)
         itemHandle.onShow();
 
         if (!GameCfg.GAMEFUPAN && GameCfg.GameType != pb.GameType.ShuangMang) {

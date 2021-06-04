@@ -64,6 +64,19 @@ export default class NewClass extends cc.Component {
             node = cc.instantiate(this.block4);
         }
 
+        else if (type == 5) {
+            node = cc.instantiate(this.block1);
+        }
+        else if (type == 6) {
+            node = cc.instantiate(this.block2);
+        }
+        else if (type == 7) {
+            node = cc.instantiate(this.block3);
+        }
+        else if (type == 8) {
+            node = cc.instantiate(this.block4);
+        }
+
         this.node.addChild(node);
 
         node.x = startX;

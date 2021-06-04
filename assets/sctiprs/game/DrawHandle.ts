@@ -330,11 +330,50 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-        // if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-        //     this.drawBordWidth += 164;
-        // }
-
         this.initData();
+
+        GlobalEvent.on(EventCfg.NOTICEDRAWMOVW, this.noticeDrawMove.bind(this), this);
+    }
+
+    noticeDrawMove(index) {
+
+        if (index >= cc.ext.beg_end[0] && index < cc.ext.beg_end[1]) {
+
+        }
+        else {
+
+            if (index < cc.ext.beg_end[0]) {
+                let count = cc.ext.beg_end[0] + parseInt((cc.ext.beg_end[1] - cc.ext.beg_end[0]) / 2 + '') - index;
+                // let count = mid - index;
+                if (cc.ext.beg_end[0] - count < 0) {
+                    cc.ext.beg_end[1] -= (cc.ext.beg_end[0] - count) - count;
+                    cc.ext.beg_end[0] = 0;
+
+                } else {
+
+                    cc.ext.beg_end[0] -= count;
+                    cc.ext.beg_end[1] -= count;
+                }
+            } else {
+                let count = index - cc.ext.beg_end[0] + parseInt((cc.ext.beg_end[1] - cc.ext.beg_end[0]) / 2 + '');
+                // let count = index - mid;
+                if (cc.ext.beg_end[1] + count > GameCfg.huizhidatas) {
+                    cc.ext.beg_end[0] += (count - (cc.ext.beg_end[1] + count - GameCfg.huizhidatas));
+                    cc.ext.beg_end[1] = GameCfg.huizhidatas;
+                } else {
+                    cc.ext.beg_end[0] += count;
+                    cc.ext.beg_end[1] += count;
+                }
+
+            }
+
+            this.initDrawBg();
+            GlobalEvent.emit('onDraw');
+        }
+
+        let x = 10 + ((index - cc.ext.beg_end[0])) * cc.ext.hz_width + cc.ext.hz_width / 2;
+        this.vertical1.x = x;
+        this.vertical1.active = true;
     }
 
     onMoveLeftOrRight(count, calDisX, calDisY) {
@@ -428,8 +467,6 @@ export default class NewClass extends cc.Component {
             this.EXPMALabel[1].string = arr[1] + (this.EXPMA2[index]).toFixed(2);
         }
     }
-
-
 
     onShow() {
         this.initDrawBg();

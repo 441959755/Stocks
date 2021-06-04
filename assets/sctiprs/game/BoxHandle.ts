@@ -3,6 +3,7 @@ import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
 import { pb } from "../../protos/proto";
 import ComUtils from '../Utils/ComUtils';
+import DrawData from "./DrawData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -32,9 +33,7 @@ export default class NewClass extends cc.Component {
 
     timerCall = null;
 
-    inotyBox: cc.Node = null;
-
-    lZoom: cc.Toggle = null;
+    lZoom = null;
 
     @property(cc.Node)
     selcetContent: cc.Node = null;
@@ -56,6 +55,9 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Node)
     CCLBtn: cc.Node = null;
+
+    @property(cc.Node)
+    tipsTitle: cc.Node = null;
 
     onLoad() {
         //  let la1 = this.tipsText[0].node.parent.getChildByName('tips').children[7].getComponent(cc.Label);
@@ -85,7 +87,6 @@ export default class NewClass extends cc.Component {
                     info.push((parseInt(datas[inde].value)));
                 }
 
-
                 if (GameCfg.GameType == pb.GameType.QiHuo) {
                     info.push('--');
                     info.push(datas[inde].ccl_hold);
@@ -114,31 +115,70 @@ export default class NewClass extends cc.Component {
                 }
 
                 this.zfLa.string = zf.toFixed(2) + '%';
+
+                info.push(DrawData.getCurrentEarning(inde));
+
+                info.push(DrawData.getCurrentBlockMark(inde));
             }
 
 
             info.forEach((el, index) => {
-                //黑背景
-                if (GameCfg.GameSet.isBW) {
-                    if (index >= 5 && index < 8) {
-                        this.tipsText[index].node.color = cc.Color.YELLOW;
+
+                //本轮收益
+                if (index == 10) {
+
+                    if (el === null) {
+                        this.tipsText[index].node.active = false;
+                        this.tipsTitle.children[10].active = false;
                     }
-                } else {
-                    if (index >= 5 && index < 8) {
-                        this.tipsText[index].node.color = new cc.Color().fromHEX('#AF84D1');
-                    }
-                }
-                if (index >= 8 && index <= 9) {
-                    if (el < 0) {
-                        this.tipsText[index].node.color = new cc.Color().fromHEX('#76B87E');
+                    else if (el < 0) {
+                        this.tipsText[index].node.active = true;
+                        this.tipsTitle.children[10].active = true;
+                        this.tipsText[index].string = parseInt(el * 10000 + '') / 100 + '%';
+                        this.tipsText[index].node.color = cc.Color.GREEN;
                     } else {
+                        this.tipsText[index].node.active = true;
+                        this.tipsTitle.children[10].active = true;
+                        this.tipsText[index].string = parseInt(el * 10000 + '') / 100 + '%';
                         this.tipsText[index].node.color = cc.Color.RED;
                     }
-                    if (index == 9) {
-                        el += '%';
+                }
+                else if (index == 11) {
+                    if (el === null) {
+                        this.tipsText[index].node.active = false;
+                        this.tipsTitle.children[11].active = false;
+                    }
+                    else {
+                        this.tipsText[index].node.active = true;
+                        this.tipsTitle.children[11].active = true;
+                        this.tipsText[index].string = el;
                     }
                 }
-                this.tipsText[index] && (this.tipsText[index].string = el)
+                else {
+                    //黑背景
+                    if (GameCfg.GameSet.isBW) {
+                        if (index >= 5 && index < 8) {
+                            this.tipsText[index].node.color = cc.Color.YELLOW;
+                        }
+                    } else {
+                        if (index >= 5 && index < 8) {
+                            this.tipsText[index].node.color = new cc.Color().fromHEX('#AF84D1');
+                        }
+                    }
+                    if (index >= 8 && index <= 9) {
+                        if (el < 0) {
+                            this.tipsText[index].node.color = new cc.Color().fromHEX('#76B87E');
+                        } else {
+                            this.tipsText[index].node.color = cc.Color.RED;
+                        }
+                        if (index == 9) {
+                            el += '%';
+                        }
+                    }
+                    this.tipsText[index] && (this.tipsText[index].string = el)
+                }
+
+
             })
 
         }, this);
@@ -148,8 +188,8 @@ export default class NewClass extends cc.Component {
             this.timerCall = null;
             this.tipsBox.active = true;
             if (point >= cc.winSize.width / 2) {
-                if (this.lZoom.isChecked) {
-                    this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2 + this.inotyBox.width + 10;
+                if (this.lZoom) {
+                    this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2 + 206 + 10;
 
                 } else {
                     this.tipsBox.x = -cc.winSize.width / 2 + this.tipsBox.width / 2 + 10;
@@ -176,10 +216,19 @@ export default class NewClass extends cc.Component {
         this.setBGColor();
 
         GlobalEvent.on('setBoxfalg', this.setBoxfalg.bind(this), this);
+
+        GlobalEvent.on(EventCfg.SET_DRAW_SIZE, (flag) => {
+            this.lZoom = flag;
+            if (flag) {
+                this.selcetContent.parent.x += 206;
+            } else {
+                this.selcetContent.parent.x -= 206;
+            }
+
+        }, this);
     }
 
     start() {
-        let nodes = this.node.children;
         this.rZoom.isChecked = false;
         this.cclNode.active = false;
         this.CCLBtn.active = false;
@@ -187,8 +236,7 @@ export default class NewClass extends cc.Component {
         //双盲
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             //  nodes[4].active = false;
-            this.lZoom.node.active = false;
-            this.lZoom.isChecked = false;
+
 
             this.setBoxfalg('ma');
             this.setBoxfalg('CPM');
@@ -242,8 +290,8 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.QiHuo) {
             this.setBoxfalg('ma');
             this.setBoxfalg('CPM');
-            this.lZoom.node.active = false;
-            this.lZoom.isChecked = false;
+            // this.lZoom.node.active = false;
+            // this.lZoom.isChecked = false;
             this.hsLa.node.parent.active = false;
             this.cclNode.active = true;
             this.CCLBtn.active = true;
@@ -252,10 +300,11 @@ export default class NewClass extends cc.Component {
 
 
     setBGColor() {
-        this.inotyBox = this.node.getChildByName('leftinoty');
-        this.lZoom = this.node.getChildByName('lZoomBtn').getComponent(cc.Toggle);
-        this.lZoom.node.children[0].active = true;
-        this.inotyBox.x = -cc.winSize.width / 2 - this.inotyBox.width / 2;
+        // this.inotyBox = this.node.getChildByName('leftinoty');
+        //  this.inotyBox = cc.find('Canvas/tipsBox/leftinoty');
+        // this.lZoom = this.node.getChildByName('lZoomBtn').getComponent(cc.Toggle);
+        // this.lZoom.node.children[0].active = true;
+
 
         this.rightBox = this.node.getChildByName('rightBox');
         this.tipsBox = this.node.getChildByName('tipsBox');
@@ -263,9 +312,7 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GameSet.isBW) {
             this.rightBox.color = new cc.Color().fromHEX('#1E1E1E');
             this.tipsBox.color = new cc.Color().fromHEX('#1E1E1E');
-            this.inotyBox.color = new cc.Color().fromHEX('#1E1E1E');
-            //  this.inotyBox.getChildByName('bg').active = true;
-            this.inotyBox.getChildByName('label').color = cc.Color.WHITE;
+
             this.selcetContent.color = new cc.Color().fromHEX('#1E1E1E');
             this.selcetContent.parent.color = new cc.Color().fromHEX('#343434');
         }
@@ -273,11 +320,11 @@ export default class NewClass extends cc.Component {
         else {
             this.rightBox.color = cc.Color.WHITE;
             this.tipsBox.color = cc.Color.WHITE;
-            this.inotyBox.color = cc.Color.WHITE;
+
             this.selcetContent.color = cc.Color.WHITE;
             this.selcetContent.parent.color = cc.Color.WHITE;
             //  this.inotyBox.getChildByName('bg').active = false;
-            this.inotyBox.getChildByName('label').color = cc.Color.BLACK;
+
         }
         this.tipsBox.children.forEach(el => {
             this.tipsText.push(el.getComponent(cc.Label));
@@ -294,6 +341,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('tipsPoint');
         GlobalEvent.off('hideTips');
         GlobalEvent.off('setBoxfalg');
+        GlobalEvent.off(EventCfg.SET_DRAW_SIZE);
     }
 
 
@@ -426,18 +474,6 @@ export default class NewClass extends cc.Component {
             }
             GlobalEvent.emit('setDrawing', this.rZoom.isChecked);
 
-        } else if (data == 'lZoomBtn') {
-            if (this.lZoom.isChecked) {
-                this.lZoom.node.children[0].active = false;
-                this.inotyBox.x = -cc.winSize.width / 2 + this.inotyBox.width / 2;
-                this.selcetContent.parent.x += this.inotyBox.width;
-
-            } else {
-                this.lZoom.node.children[0].active = true;
-                this.inotyBox.x = -cc.winSize.width / 2 - this.inotyBox.width / 2;
-                this.selcetContent.parent.x -= this.inotyBox.width;
-            }
-            GlobalEvent.emit(EventCfg.SET_DRAW_SIZE, this.lZoom.isChecked);
         }
     }
 }

@@ -1,5 +1,6 @@
 import { pb } from "../../protos/proto";
 import GameCfg from "../../sctiprs/game/GameCfg";
+import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
@@ -14,6 +15,8 @@ export default class NewClass extends cc.Component {
     text: string = '';
 
     infoCfg = null;
+
+    Pindex = null;
 
     onShow() {
         this.label.string = this.text;
@@ -83,6 +86,9 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit('clickTipsInfoPos', { pos: pos, str: this.infoCfg });
             }
 
+            if (this.Pindex && GameCfg.GAMEFUPAN) {
+                GlobalEvent.emit(EventCfg.NOTICEDRAWMOVW, this.Pindex)
+            }
         }
     }
 }

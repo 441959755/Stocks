@@ -108,11 +108,11 @@ export default class NewClass extends cc.Component {
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                 if (this.markNodes[posInfo.index].type == 2 || this.markNodes[posInfo.index].type == 3) {
                     this.markNodes[posInfo.index].node.position = posInfo.highPos;
-                    this.markNodes[posInfo.index].node.y += (this.markNodes[posInfo.index].node.height / 2 + 20)
+                    this.markNodes[posInfo.index].node.y += (this.markNodes[posInfo.index].node.height / 2 + 5)
                 }
                 else {
                     this.markNodes[posInfo.index].node.position = posInfo.lowPos;
-                    this.markNodes[posInfo.index].node.y -= (this.markNodes[posInfo.index].node.height / 2 + 20)
+                    this.markNodes[posInfo.index].node.y -= (this.markNodes[posInfo.index].node.height / 2 + 5)
                 }
 
             }
@@ -120,12 +120,12 @@ export default class NewClass extends cc.Component {
                 //买入标签
                 if (this.markNodes[posInfo.index].type == 2) {
                     this.markNodes[posInfo.index].node.position = posInfo.lowPos;
-                    this.markNodes[posInfo.index].node.y -= (this.markNodes[posInfo.index].node.height / 2 + 20)
+                    this.markNodes[posInfo.index].node.y -= (this.markNodes[posInfo.index].node.height / 2 + 5)
                 }
                 //卖出标签
                 else if (this.markNodes[posInfo.index].type == 3) {
                     this.markNodes[posInfo.index].node.position = posInfo.highPos;
-                    this.markNodes[posInfo.index].node.y += (this.markNodes[posInfo.index].node.height / 2 + 20)
+                    this.markNodes[posInfo.index].node.y += (this.markNodes[posInfo.index].node.height / 2 + 5)
                 }
             }
 

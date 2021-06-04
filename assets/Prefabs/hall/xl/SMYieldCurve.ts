@@ -367,7 +367,12 @@ export default class NewClass extends cc.Component {
             this.draw.node.addChild(dot2);
             dot2.zIndex = 6;
             if (!xlcvs[i]) {
-                xlcvs[i] = this.userCapital;
+                if (i == 0) {
+                    xlcvs[i] = this.userCapital;
+                } else {
+                    xlcvs[i] = xlcvs[i - 1];
+                }
+
             }
             let y;
             if (!xlcvs[i] || xlcvs[i] <= 50000) { y = 0 } else {

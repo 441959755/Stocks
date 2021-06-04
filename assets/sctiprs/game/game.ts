@@ -13,8 +13,8 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     finalLayer: cc.Node = null;  //结算界面
 
-    @property(cc.Node)
-    helpLayer: cc.Node = null;   //帮助界面
+    // @property(cc.Node)
+    // helpLayer: cc.Node = null;   //帮助界面
 
     @property(cc.Node)
     statLayer: cc.Node = null;  //统计界面
@@ -33,10 +33,10 @@ export default class NewClass extends cc.Component {
 
         }, this)
 
-        //打开帮组
-        GlobalEvent.on(EventCfg.HELPSHOW, () => {
-            this.helpLayer.active = true;
-        }, this);
+        // //打开帮组
+        // GlobalEvent.on(EventCfg.HELPSHOW, () => {
+        //     this.helpLayer.active = true;
+        // }, this);
 
         GlobalEvent.on(EventCfg.OPENSTATLAYER, () => {
             this.statLayer.active = true;

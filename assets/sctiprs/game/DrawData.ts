@@ -531,4 +531,41 @@ export default class DrawData {
         return data;
     }
 
+
+    //获取本轮收益
+    public static getCurrentEarning(index) {
+
+        let datas = GameCfg.fill;
+
+        for (let i = 0; i < datas.length; i++) {
+
+            if (datas[i].end == index) {
+                return datas[i].rate;
+            }
+
+        }
+
+        return null;
+    }
+
+    //获取当前标签
+    public static getCurrentBlockMark(index) {
+        let datas = GameCfg.blockHistoy;
+
+        let id = null;
+        for (let i = 0; i < datas.length; i++) {
+            if (datas[i][0] == index) {
+                id = datas[i][1];
+                break;
+            }
+        }
+
+        let arr = ['曙光初现', '旭日东升', '红三兵', '看涨吞没', '三只乌鸦', '看跌吞没', '乌云盖顶', '倾盆大雨']
+        if (id) {
+            return arr[id - 1];
+        }
+        return id;
+
+    }
+
 }

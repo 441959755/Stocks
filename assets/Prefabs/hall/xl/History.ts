@@ -280,6 +280,8 @@ export default class NewClass extends cc.Component {
                             cc.sys.localStorage.removeItem(datas[i].ts + 'notice');
                             cc.sys.localStorage.removeItem(datas[i].ts + 'mark');
                             cc.sys.localStorage.removeItem(datas[i].ts + 'cache');
+                            cc.sys.localStorage.removeItem(datas[i].ts + 'block');
+
                             arr.splice(arr.indexOf(datas[i].ts), 1);
                         }
 
