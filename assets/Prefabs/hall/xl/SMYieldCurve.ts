@@ -500,7 +500,7 @@ export default class NewClass extends cc.Component {
         if (name == 'closeBtn') {
             this.node.active = false;
         } else if (name == 'lx_smxl_ysyqxxxsj') {
-            GlobalEvent.emit('OPENHISTORYLAYER', 'SM', this.yieldInfo);
+            GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
         }
     }
 

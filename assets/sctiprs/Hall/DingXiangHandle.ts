@@ -467,10 +467,10 @@ export default class NewClass extends cc.Component {
 				//   if(GameData.DXSet.ZLine!='')
 			}
 		} else if (name == 'setDXBtnDX') {
-			GlobalEvent.emit('OPENSETLAYER', 'DX');
+			GlobalEvent.emit(EventCfg.OPENSETLAYER);
 		} else if (name == 'historyDXBtn') {
 			GameCfg.GameType = pb.GameType.DingXiang;
-			GlobalEvent.emit('OPENHISTORYLAYER', 'DX');
+			GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
 		} else if (name == 'startDXBtn') {
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			GameCfg.GAMEFUPAN = false;

@@ -87,12 +87,12 @@ export default class NewClass extends cc.Component {
         //点击训练设置
         else if (name == 'setSMBtn') {
 
-            GlobalEvent.emit('OPENSETLAYER', 'SM');
+            GlobalEvent.emit(EventCfg.OPENSETLAYER);
         }
         //点击历史记录
         else if (name == 'historySMBtn') {
 
-            GlobalEvent.emit('OPENHISTORYLAYER', 'SM');
+            GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
         }
         //点击月报
         else if (name == 'ypSMBtn') {

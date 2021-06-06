@@ -1,4 +1,8 @@
 export default {
+
+	OPENSETLAYER: 'OPENSETLAYER',//打开设置界面
+
+	OPENHISTORYLAYER: 'OPENHISTORYLAYER',//打开历史记录界面
 	//hall
 	GOLDCHANGE: 'GOLDCHANGE', //金币改变
 

@@ -285,44 +285,44 @@ export default class NewClass extends cc.Component {
 				}
 			})
 
-			let downBox1 = this.downBox[7];
-			let content1 = cc.find('New ScrollView/view/content', downBox1);
-			if (date.type == 2) {
-				content1.children.forEach(el => {
-					let str = el.getComponent(cc.Label).string;
-					if (str == '随机') {
+			// let downBox1 = this.downBox[7];
+			// let content1 = cc.find('New ScrollView/view/content', downBox1);
+			// if (index == 2) {
+			// 	content1.children.forEach(el => {
+			// 		let str = el.getComponent(cc.Label).string;
+			// 		if (str == '随机') {
 
-					} else if (str == '日线') {
-						this.box[7].getChildByName('label').getComponent(cc.Label).string = '5分钟K';
-						GameData.QHSet.ZLine = '5分钟K';
-						el.color = new cc.Color().fromHEX('#a0a0a0');
-						el.getComponent(cc.Button).interactable = false;
-						el.getComponent(cc.Button).enableAutoGrayEffect = true;
-					} else {
-						el.color = cc.Color.WHITE;
-						el.getComponent(cc.Button).interactable = true;
-						el.getComponent(cc.Button).enableAutoGrayEffect = false;
-					}
-				})
-			} else {
+			// 		} else if (str == '日线') {
+			// 			this.box[7].getChildByName('label').getComponent(cc.Label).string = '5分钟K';
+			// 			GameData.QHSet.ZLine = '5分钟K';
+			// 			el.color = new cc.Color().fromHEX('#a0a0a0');
+			// 			el.getComponent(cc.Button).interactable = false;
+			// 			el.getComponent(cc.Button).enableAutoGrayEffect = true;
+			// 		} else {
+			// 			el.color = cc.Color.WHITE;
+			// 			el.getComponent(cc.Button).interactable = true;
+			// 			el.getComponent(cc.Button).enableAutoGrayEffect = false;
+			// 		}
+			// 	})
+			// } else {
 
-				content1.children.forEach(el => {
-					let str = el.getComponent(cc.Label).string;
-					// if (str == '随机') {
+			// 	content1.children.forEach(el => {
+			// 		let str = el.getComponent(cc.Label).string;
+			// 		// if (str == '随机') {
 
-					// } else if (str == '日线') {
-					// 	this.box[7].getChildByName('label').getComponent(cc.Label).string = '5分钟K';
-					// 	GameData.QHSet.ZLine = '5分钟K';
-					// 	el.color = new cc.Color().fromHEX('#a0a0a0');
-					// 	el.getComponent(cc.Button).interactable = false;
-					// 	el.getComponent(cc.Button).enableAutoGrayEffect = true;
-					// } else {
-					el.color = cc.Color.WHITE;
-					el.getComponent(cc.Button).interactable = true;
-					el.getComponent(cc.Button).enableAutoGrayEffect = false;
-					//	}
-				})
-			}
+			// 		// } else if (str == '日线') {
+			// 		// 	this.box[7].getChildByName('label').getComponent(cc.Label).string = '5分钟K';
+			// 		// 	GameData.QHSet.ZLine = '5分钟K';
+			// 		// 	el.color = new cc.Color().fromHEX('#a0a0a0');
+			// 		// 	el.getComponent(cc.Button).interactable = false;
+			// 		// 	el.getComponent(cc.Button).enableAutoGrayEffect = true;
+			// 		// } else {
+			// 		el.color = cc.Color.WHITE;
+			// 		el.getComponent(cc.Button).interactable = true;
+			// 		el.getComponent(cc.Button).enableAutoGrayEffect = false;
+			// 		//	}
+			// 	})
+			// }
 
 		}
 
@@ -559,13 +559,13 @@ export default class NewClass extends cc.Component {
 		//设置
 		if (name == 'setQHBtnDX') {
 
-			GlobalEvent.emit('OPENSETLAYER', 'QH');
+			GlobalEvent.emit(EventCfg.OPENSETLAYER);
 
 		}
 		//记录
 		else if (name == 'historyQHBtn') {
 
-			GlobalEvent.emit('OPENHISTORYLAYER', 'QH');
+			GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
 		}
 		//
 		else if (name == 'item') {

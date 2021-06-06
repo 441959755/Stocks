@@ -468,10 +468,10 @@ export default class NewClass extends cc.Component {
 
             this.zhibiaoStartGameSet();
         } else if (name == 'setZBBtn') {
-            GlobalEvent.emit('OPENSETLAYER', 'ZB');
+            GlobalEvent.emit(EventCfg.OPENSETLAYER);
         } else if (name == 'historyZBBtn') {
             GameCfg.GameType = pb.GameType.ZhiBiao;
-            GlobalEvent.emit("OPENHISTORYLAYER", 'ZB');
+            GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
         }
 
         else if (name == 'sys_helpbig1') {

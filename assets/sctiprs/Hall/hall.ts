@@ -121,12 +121,12 @@ export default class NewClass extends cc.Component {
 
 		//打开历史记录
 		GlobalEvent.on(
-			'OPENHISTORYLAYER',
-			str => {
+			EventCfg.OPENHISTORYLAYER,
+			() => {
 				GlobalEvent.emit(EventCfg.LOADINGSHOW);
 				//SM的要获取服务器消息
 				this.acquireSMhistoryInfo(info => {
-					this.openhistoryLayer && this.openhistoryLayer(info, str);
+					this.openhistoryLayer && this.openhistoryLayer(info);
 				});
 			},
 			this
@@ -134,27 +134,27 @@ export default class NewClass extends cc.Component {
 
 		//打开设置
 		GlobalEvent.on(
-			'OPENSETLAYER',
-			str => {
-				if (str == 'ZB') {
+			EventCfg.OPENSETLAYER,
+			() => {
+				if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 					if (!this.ZBSetLayer) {
 						this.ZBSetLayer = cc.instantiate(this.ZBSetPre);
 						this.node.addChild(this.ZBSetLayer, 30);
 					}
 					this.ZBSetLayer.active = true;
-				} else if (str == 'SM') {
+				} else if (GameCfg.GameType == pb.GameType.ShuangMang) {
 					if (!this.SMSetLayer) {
 						this.SMSetLayer = cc.instantiate(this.SMSetPre);
 						this.node.addChild(this.SMSetLayer, 30);
 					}
 					this.SMSetLayer.active = true;
-				} else if (str == 'DX') {
+				} else if (GameCfg.GameType == pb.GameType.DingXiang) {
 					if (!this.DXSetLayer) {
 						this.DXSetLayer = cc.instantiate(this.DXSetPre);
 						this.node.addChild(this.DXSetLayer, 30);
 					}
 					this.DXSetLayer.active = true;
-				} else if (str == 'QH') {
+				} else if (GameCfg.GameType == pb.GameType.QiHuo) {
 					if (!this.QHSetNode) {
 						this.QHSetNode = cc.instantiate(this.QHSetPre);
 						this.node.addChild(this.QHSetNode, 30);
@@ -248,7 +248,6 @@ export default class NewClass extends cc.Component {
 			if (!this.helpLayer) {
 				this.helpLayer = cc.instantiate(this.helpPre);
 				this.node.addChild(this.helpLayer, 66);
-
 			}
 			this.helpLayer.active = true;
 
@@ -256,28 +255,24 @@ export default class NewClass extends cc.Component {
 	}
 
 	start() {
-		let event, str;
+
+		//回到进入游戏的界面
+		let event;
 		if (GameCfg.GameType == pb.GameType.ShuangMang) {
 			event = { target: { name: 'main_xl_smxl' } };
-			str = 'SM';
 		} else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 			event = { target: { name: 'main_xl_zbxl' } }
-			str = 'ZB';
 		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
 			event = { target: { name: 'main_xl_dxxl' } }
-			str = 'DX';
 		} else if (GameCfg.GameType == pb.GameType.QiHuo) {
 			event = { target: { name: 'main_xl_qhxl' } }
-			str = 'QH';
 		}
 
 		if (event) {
-			if (GameCfg.historyType) {
-				GlobalEvent.emit('OPENHISTORYLAYER', str);
-			}
-
 			GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
-
+			if (GameCfg.historyType) {
+				GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
+			}
 		}
 	}
 
@@ -299,9 +294,8 @@ export default class NewClass extends cc.Component {
 		GameCfg.data[0].data = [];
 		//	GameCfg.enterGameCache.startTime = null;
 		//	GameCfg.ziChan = 100000;
-
-
 	}
+
 
 	openYieldLaye(info) {
 		if (!this.SMYieldLayer) {
@@ -313,43 +307,37 @@ export default class NewClass extends cc.Component {
 		this.SMYieldLayer.getComponent('SMYieldCurve').onShow();
 	}
 
-	openhistoryLayer(info, str?) {
+	openhistoryLayer(info) {
 		let pre, node;
-		if (str == 'QH') {
+		if (GameCfg.GameType == pb.GameType.QiHuo) {
 			pre = this.QHhistoryPre;
 			node = this.QHhistoryLayer;
 		}
-		else if (str == 'SM') {
+		else if (GameCfg.GameType == pb.GameType.ShuangMang) {
 			pre = this.SMhistoryPre;
 			node = this.SMhistoryLayer;
-		} else {
+		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
 			pre = this.otherhistoryPre;
 			node = this.otherhistoryLayer;
 		}
+
 		if (!node) {
-			//   this.SMhistoryLayer = cc.instantiate(this.SMhistoryPre)
 			node = cc.instantiate(pre);
 			this.node.addChild(node, 40);
 		}
 		node.active = true;
-		//  this.SMhistoryLayer.getComponent('SMHistory').historyType = type;
+
 		node.getComponent('History').historyInfo = info;
 		node.getComponent('History').onShow();
 		if (this.SMYieldLayer) {
 			node.zIndex = this.SMYieldLayer.zIndex + 1;
 		}
-
-		// if (str == 'SM') {
-		// 	this.SMhistoryLayer = node;
-		// } else {
-		// 	this.otherhistoryLayer = node;
-		// }
 	}
 
 	protected onDestroy() {
 		GlobalEvent.off('OPENSMLAYER');
 		GlobalEvent.off('OPENZBLAYER');
-		GlobalEvent.off('OPENHISTORYLAYER');
+		GlobalEvent.off(EventCfg.OPENHISTORYLAYER);
 		GlobalEvent.off('OPENZBSETLAYER');
 		GlobalEvent.off('OPENMONTHLAYER');
 		GlobalEvent.off('OPENYIELDLAYER');
@@ -359,6 +347,8 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off('OPENPLAYERINFO');
 		GlobalEvent.off('OPENQHLAYER');
 		GlobalEvent.off(EventCfg.OPENHELPLAYER);
+		GlobalEvent.off(EventCfg.OPENSETLAYER);
+		
 		ComUtils.onDestory();
 	}
 
@@ -368,7 +358,6 @@ export default class NewClass extends cc.Component {
 		GameCfg.info = info1;
 		// socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(data), res => {
 		GlobalHandle.onCmdGameStartReq(() => {
-
 			GlobalHandle.onCmdGameStartQuoteQuery(info1, () => {
 				cc.director.loadScene('game');
 			})

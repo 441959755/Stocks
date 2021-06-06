@@ -5,7 +5,6 @@ import Socket from "../common/net/socket";
 import GameCfg from "../game/GameCfg";
 
 import GameCfgText from '../GameText';
-
 import ComUtils from '../Utils/ComUtils';
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
@@ -14,7 +13,6 @@ import AudioUtils from '../Utils/AudioUtils';
 window.global = window;
 
 cc.ext = {};
-//cc.ext.gameData = GameData;
 
 cc.Class({
 	extends: cc.Component,
@@ -29,8 +27,6 @@ cc.Class({
 		let pbhelper = new PBHelper();
 
 		global.PB = pbhelper;
-
-		global.gameData = GameData;
 	},
 
 	onLoad() {
@@ -74,7 +70,6 @@ cc.Class({
 			}
 		})
 	},
-
 
 	initData() {
 		let SMSet = cc.sys.localStorage.getItem('SMSET');
@@ -239,6 +234,7 @@ cc.Class({
 			}
 		}
 
+		//选择的股票信息
 		let DXHistoryInfo = cc.sys.localStorage.getItem('DXHISTORYINFO');
 		if (!DXHistoryInfo) {
 			GameData.DXHistoryInfo = [];
