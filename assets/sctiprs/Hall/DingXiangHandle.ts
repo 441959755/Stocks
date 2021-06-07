@@ -693,7 +693,7 @@ export default class NewClass extends cc.Component {
 		}
 		GameCfg.enterGameCache = data;
 
-		GlobalEvent.emit('onCmdQuoteQuery', data);
+		GlobalEvent.emit(EventCfg.onCmdQuoteQuery, data);
 	}
 
 	//http://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js?TYPE=m30k&rtntype=5&authorityType=fa&id=3008032

@@ -94,7 +94,7 @@ export default class NewClass extends cc.Component {
 		ComUtils.onEvent();
 		//打开双盲
 		GlobalEvent.on(
-			'OPENSMLAYER',
+			EventCfg.OPENSMLAYER,
 			() => {
 				this.shuangmangLayer.active = true;
 			},
@@ -103,7 +103,7 @@ export default class NewClass extends cc.Component {
 
 		//打开指标
 		GlobalEvent.on(
-			'OPENZBLAYER',
+			EventCfg.OPENZBLAYER,
 			() => {
 				this.zhibiaoLayer.active = true;
 			},
@@ -112,7 +112,7 @@ export default class NewClass extends cc.Component {
 
 		//打开定向
 		GlobalEvent.on(
-			'OPENDXLAYER',
+			EventCfg.OPENDXLAYER,
 			() => {
 				this.DXLayer.active = true;
 			},
@@ -167,8 +167,8 @@ export default class NewClass extends cc.Component {
 
 		//打开月报
 		GlobalEvent.on(
-			'OPENMONTHLAYER',
-			str => {
+			EventCfg.OPENMONTHLAYER,
+			() => {
 				//  if (str == 'SM') {
 				if (socket) {
 					socket.send(pb.MessageId.Req_Game_SmxlReport, null, info => {
@@ -192,8 +192,8 @@ export default class NewClass extends cc.Component {
 
 		//打开曲线图
 		GlobalEvent.on(
-			'OPENYIELDLAYER',
-			str => {
+			EventCfg.OPENYIELDLAYER,
+			() => {
 				GlobalEvent.emit(EventCfg.LOADINGSHOW);
 				this.acquireSMhistoryInfo(info => {
 					this.openYieldLaye && this.openYieldLaye(info);
@@ -203,11 +203,11 @@ export default class NewClass extends cc.Component {
 		);
 
 		//查询行情
-		GlobalEvent.on('onCmdQuoteQuery', this.onCmdQuoteQuery.bind(this), this);
+		GlobalEvent.on(EventCfg.onCmdQuoteQuery, this.onCmdQuoteQuery.bind(this), this);
 
 		//打开个人中心
 		GlobalEvent.on(
-			'OPENPLAYERINFO',
+			EventCfg.OPENPLAYERINFO,
 			() => {
 				if (!this.playerInfoLayer) {
 					this.playerInfoLayer = cc.instantiate(this.playerInfo);
@@ -233,7 +233,7 @@ export default class NewClass extends cc.Component {
 
 		//打開期货
 		GlobalEvent.on(
-			'OPENQHLAYER',
+			EventCfg.OPENQHLAYER,
 			() => {
 				this.QHLayer.active = true;
 			},
@@ -271,6 +271,7 @@ export default class NewClass extends cc.Component {
 		if (event) {
 			GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
 			if (GameCfg.historyType) {
+				GlobalEvent.emit(EventCfg.LOADINGSHOW);
 				GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
 			}
 		}
@@ -335,28 +336,24 @@ export default class NewClass extends cc.Component {
 	}
 
 	protected onDestroy() {
-		GlobalEvent.off('OPENSMLAYER');
-		GlobalEvent.off('OPENZBLAYER');
+		GlobalEvent.off(EventCfg.OPENSMLAYER);
+		GlobalEvent.off(EventCfg.OPENZBLAYER);
+		GlobalEvent.off(EventCfg.OPENDXLAYER);
 		GlobalEvent.off(EventCfg.OPENHISTORYLAYER);
-		GlobalEvent.off('OPENZBSETLAYER');
-		GlobalEvent.off('OPENMONTHLAYER');
-		GlobalEvent.off('OPENYIELDLAYER');
-		//	GlobalEvent.off('OPENHELPLAYER');
-		GlobalEvent.off('onCmdQuoteQuery');
-		GlobalEvent.off('OPENDXKAYER');
-		GlobalEvent.off('OPENPLAYERINFO');
-		GlobalEvent.off('OPENQHLAYER');
+		GlobalEvent.off(EventCfg.OPENMONTHLAYER);
+		GlobalEvent.off(EventCfg.OPENYIELDLAYER);
+		GlobalEvent.off(EventCfg.onCmdQuoteQuery);
+		GlobalEvent.off(EventCfg.OPENPLAYERINFO);
+		GlobalEvent.off(EventCfg.OPENQHLAYER);
 		GlobalEvent.off(EventCfg.OPENHELPLAYER);
 		GlobalEvent.off(EventCfg.OPENSETLAYER);
-		
+
 		ComUtils.onDestory();
 	}
 
 	onCmdGameStart(data, info1) {
-		//  if (socket) {
 		GameCfg.data[0].data = [];
 		GameCfg.info = info1;
-		// socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(data), res => {
 		GlobalHandle.onCmdGameStartReq(() => {
 			GlobalHandle.onCmdGameStartQuoteQuery(info1, () => {
 				cc.director.loadScene('game');

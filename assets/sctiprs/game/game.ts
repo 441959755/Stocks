@@ -159,6 +159,10 @@ export default class NewClass extends cc.Component {
         cc.ext.beg_end[1] = GameCfg.huizhidatas;
         cc.ext.beg_end[0] = 0;
 
+        if (GameCfg.huizhidatas > 100) {
+            cc.ext.beg_end[0] = cc.ext.beg_end[1] - 100;
+        }
+
         let mixWidth = 6;
         let maxWidth = 70;
         let drawWidth = 1080;

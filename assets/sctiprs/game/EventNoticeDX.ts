@@ -67,21 +67,21 @@ export default class NewClass extends cc.Component {
 
         }, this);
 
-        if (GameCfg.GAMEFUPAN) {
-            this.createFuPanData();
-        }
+        // if (GameCfg.GAMEFUPAN) {
+        //     this.createFuPanData();
+        // }
 
     }
 
-    //复盘的本地数据
-    createFuPanData() {
-        let data = GameCfg.notice;
-        if (data) {
-            data.forEach((el) => {
-                this.onCreateTipsItem(el[0], el[1]);
-            });
-        }
-    }
+    // //复盘的本地数据
+    // createFuPanData() {
+    //     let data = GameCfg.notice;
+    //     if (data) {
+    //         data.forEach((el) => {
+    //             this.onCreateTipsItem(el[0], el[1]);
+    //         });
+    //     }
+    // }
 
     testKFrom() {
 

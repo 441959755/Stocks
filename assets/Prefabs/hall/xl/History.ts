@@ -6,6 +6,7 @@ import EventCfg from '../../../sctiprs/Utils/EventCfg';
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import { pb } from '../../../protos/proto';
 import GameCfgText from '../../../sctiprs/GameText';
+import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 
 const { ccclass, property } = cc._decorator;
 @ccclass
@@ -50,6 +51,7 @@ export default class NewClass extends cc.Component {
         if (str) {
             TIMETEMP = JSON.parse(str);
         }
+        // "uid":1000145,"gType":"DingXiang","quotesCode":1002148,"kFrom":"20100921","kTo":"20101028","stockProfitRate":-2.930000066757202,"userProfitRate":7.619999885559082,"userCapital":"100000","userProfit":"7623","ts":"1623050522","rank":1
         // {"uid":1000042,"gType":"ShuangMang","quotesCode":600000,
         // "kType":"Day","kFrom":20100101,"kTo":20101010,
         // "stockProfitRate":19.1200008392334,
@@ -109,6 +111,8 @@ export default class NewClass extends cc.Component {
                 }
                 if (GameCfg.GameType != pb.GameType.ShuangMang) {
                     nodes[8].getComponent(cc.Label).string = datas[i].ts;
+                    nodes[9].getComponent(cc.Label).string = datas[i].kStartup;
+                    nodes[10].getComponent(cc.Label).string = datas[i].kStop;
                 }
 
                 sumEar += datas[i].userProfit;
@@ -166,90 +170,45 @@ export default class NewClass extends cc.Component {
             }
             console.log(JSON.stringify(GameCfg.TIMETEMP));
 
-            if (GameCfg.TIMETEMP.indexOf(parseInt(ts)) != -1) {
-                let history = cc.sys.localStorage.getItem(ts + 'ts');
-                if (history) {
-                    GameCfg.history = JSON.parse(history);
-                    //   console.log(JSON.stringify(GameCfg.history));
-                }
-                let GameSet = cc.sys.localStorage.getItem(ts + 'set');
-                if (GameSet) {
-                    GameCfg.GameSet = JSON.parse(GameSet);
-                    //    console.log(JSON.stringify(GameCfg.GameSet));
+            let cb = () => {
+                GameCfg.huizhidatas = parseInt(nodes[10].getComponent(cc.Label).string) + 1;
+                let data = {
+                    code: nodes[2].getComponent(cc.Label).string,
                 }
 
-                let mark = cc.sys.localStorage.getItem(ts + 'mark');
-                if (mark) {
-                    GameCfg.mark = JSON.parse(mark);
-                    //  console.log(JSON.stringify(GameCfg.mark));
+                let dex = -1, items;
+                if (GameCfg.GameType == pb.GameType.QiHuo) {
+                    items = GameCfgText.getQHItemInfo(data.code);
+                } else {
+                    items = GameCfgText.getGPItemInfo(data.code);
                 }
 
-                let notice = cc.sys.localStorage.getItem(ts + 'notice');
-                if (notice) {
-                    GameCfg.notice = JSON.parse(notice);
-                    //    console.log(JSON.stringify(GameCfg.notice));
+                data.code = items[0];
+                GameCfg.data[0].data = [];
+                GameCfg.data[0].name = items[1];
+                GameCfg.data[0].code = items[0];
+                GameCfg.data[0].circulate = items[4];
+                GameCfg.GAMEFUPAN = true;
+                GameCfg.finalfund = parseInt(nodes[7].getComponent(cc.Label).string) + GameCfg.ziChan;
+                GameCfg.allRate = nodes[6].getComponent(cc.Label).string;
+
+                let cache = cc.sys.localStorage.getItem(ts + 'cache');
+                if (!cache) {
+                    console.log('没有保存此记录');
+                    return;
                 }
 
-                let fill = cc.sys.localStorage.getItem(ts + 'fill');
-                if (fill) {
-                    GameCfg.fill = JSON.parse(fill);
-                    // console.log(JSON.stringify(GameCfg.fill));
+                console.log(JSON.parse(cache));
+                GameCfg.enterGameCache = JSON.parse(cache);
+                GameCfg.historyType = GameCfg.GameType;
+                if (GameCfg.GameType == pb.GameType.QiHuo) {
+                    GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, JSON.parse(cache));
+                } else {
+                    GlobalEvent.emit(EventCfg.onCmdQuoteQuery, JSON.parse(cache));
                 }
 
-                let blockHistory = cc.sys.localStorage.getItem(ts + 'block');
-                if (blockHistory) {
-                    GameCfg.blockHistoy = JSON.parse(blockHistory);
-                }
             }
-
-
-            if (!GameCfg.history || !GameCfg.GameSet || !GameCfg.fill || !GameCfg.notice || !GameCfg.mark) {
-                console.log(JSON.stringify(GameCfg.GameSet));
-                console.log('没有取得数据');
-                return;
-            }
-
-            //  let datas = this.historyInfo.results;
-            GameCfg.huizhidatas = GameCfg.history.huizhidatas;
-            // console.log(nodes[3].getComponent(cc.Label).string);
-            // console.log('history' + GameCfg.history.huizhidatas)
-            let data = {
-                code: nodes[2].getComponent(cc.Label).string,
-            }
-
-            let dex = -1, items;
-            if (GameCfg.GameType == pb.GameType.QiHuo) {
-                items = GameCfgText.getQHItemInfo(data.code);
-            } else {
-                items = GameCfgText.getGPItemInfo(data.code);
-            }
-
-            data.code = items[0];
-            GameCfg.data[0].data = [];
-            GameCfg.data[0].name = items[1];
-            GameCfg.data[0].code = items[0];
-            //GameCfg.data[0].code = nodes[1].getComponent(cc.Label).string;
-            GameCfg.data[0].circulate = items[4];
-            GameCfg.GAMEFUPAN = true;
-
-            GameCfg.finalfund = parseInt(nodes[7].getComponent(cc.Label).string) + GameCfg.ziChan;
-
-            GameCfg.allRate = nodes[6].getComponent(cc.Label).string;
-
-            let cache = cc.sys.localStorage.getItem(ts + 'cache');
-            if (!cache) {
-                console.log('没有保存此记录');
-                return;
-            }
-
-            console.log(JSON.parse(cache));
-            GameCfg.enterGameCache = JSON.parse(cache);
-            GameCfg.historyType = GameCfg.GameType;
-            if (GameCfg.GameType == pb.GameType.QiHuo) {
-                GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, JSON.parse(cache));
-            } else {
-                GlobalEvent.emit('onCmdQuoteQuery', JSON.parse(cache));
-            }
+            GlobalHandle.GetGameOperations(ts, cb);
 
         }
 
@@ -274,13 +233,13 @@ export default class NewClass extends cc.Component {
                     if (TIMETEMP.length > 0) {
 
                         if (TIMETEMP.indexOf(datas[i].ts) != -1) {
-                            cc.sys.localStorage.removeItem(datas[i].ts + 'ts');
-                            cc.sys.localStorage.removeItem(datas[i].ts + 'set');
-                            cc.sys.localStorage.removeItem(datas[i].ts + 'fill');
-                            cc.sys.localStorage.removeItem(datas[i].ts + 'notice');
-                            cc.sys.localStorage.removeItem(datas[i].ts + 'mark');
+
+                            //  cc.sys.localStorage.removeItem(datas[i].ts + 'set');
+                            //  cc.sys.localStorage.removeItem(datas[i].ts + 'fill');
+                            //  cc.sys.localStorage.removeItem(datas[i].ts + 'notice');
+                            //   cc.sys.localStorage.removeItem(datas[i].ts + 'mark');
                             cc.sys.localStorage.removeItem(datas[i].ts + 'cache');
-                            cc.sys.localStorage.removeItem(datas[i].ts + 'block');
+                            //   cc.sys.localStorage.removeItem(datas[i].ts + 'block');
 
                             arr.splice(arr.indexOf(datas[i].ts), 1);
                         }

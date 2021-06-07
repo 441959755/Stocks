@@ -14,14 +14,26 @@ export default class NewClass extends cc.Component {
     @property(cc.Toggle)
     lZoom: cc.Toggle = null;
 
+    @property(cc.Node)
+    selectBox: cc.Node = null;
+
 
     onLoad() {
+        GlobalEvent.on(EventCfg.OPENSELECTBOX, (point) => {
+            this.selectBox.x = this.node.convertToNodeSpaceAR(point).x;
+            this.selectBox.active = true;
+        }, this);
+    }
 
+    onDestroy() {
+        GlobalEvent.off(EventCfg.OPENSELECTBOX);
     }
 
 
 
     start() {
+        this.selectBox.active = false;
+
         this.leftinoty.x = -cc.winSize.width / 2 - this.leftinoty.width / 2;
 
         if (GameCfg.GameSet.isBW) {
@@ -54,6 +66,11 @@ export default class NewClass extends cc.Component {
 
             }
             GlobalEvent.emit(EventCfg.SET_DRAW_SIZE, this.lZoom.isChecked);
+        }
+        else if (name == 'fcBtn' || name == 'fcBtn1' || name == 'fcBtn2' || name == 'fcBtn3' || name == 'fcBtn4' || name == 'fcBtn5') {
+            let percent = eval(data);
+            GlobalEvent.emit(EventCfg.CLICKFCBTN, percent);
+            this.selectBox.active = false;
         }
     }
 }

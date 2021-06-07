@@ -93,6 +93,17 @@ export default {
 
     blockHistoy: [],
 
+    GameOperationItem: [] //操作集合
+    // {
+    //     op_id: null,
+    //     code: null,
+    //     k_type: null,
+    //     //  k_ts: null,
+    //     // k_offset: null,
+    // volume
+    // k_offset
+    // },
+
 
 
 }

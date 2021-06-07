@@ -96,11 +96,11 @@ export default class NewClass extends cc.Component {
         }
         //点击月报
         else if (name == 'ypSMBtn') {
-            GlobalEvent.emit('OPENMONTHLAYER', 'SM');
+            GlobalEvent.emit(EventCfg.OPENMONTHLAYER);
         }
         //点击收益曲线
         else if (name == 'xlSMBtn') {
-            GlobalEvent.emit('OPENYIELDLAYER', 'SM');
+            GlobalEvent.emit(EventCfg.OPENYIELDLAYER);
         }
         else if (name == 'blackbtn') {
             GameCfg.GameType = null;
@@ -136,7 +136,7 @@ export default class NewClass extends cc.Component {
 
         GameCfg.enterGameCache = data;
 
-        GlobalEvent.emit('onCmdQuoteQuery', data);
+        GlobalEvent.emit(EventCfg.onCmdQuoteQuery, data);
 
     }
 

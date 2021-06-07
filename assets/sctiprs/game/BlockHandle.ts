@@ -30,12 +30,12 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
-        if (GameCfg.GAMEFUPAN) {
-            let data = GameCfg.blockHistoy;
-            data.forEach(el => {
-                this.createBlock(el[1], el[0]);
-            });
-        }
+        // if (GameCfg.GAMEFUPAN) {
+        //     let data = GameCfg.blockHistoy;
+        //     data.forEach(el => {
+        //         this.createBlock(el[1], el[0]);
+        //     });
+        // }
     }
 
     //创建方块

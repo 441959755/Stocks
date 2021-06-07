@@ -38,9 +38,9 @@ export default class NewClass extends cc.Component {
     onLoad() {
         this.node.removeAllChildren();
 
-        if (GameCfg.GAMEFUPAN) {
-            this.createFuPanData();
-        }
+        // if (GameCfg.GAMEFUPAN) {
+        //     this.createFuPanData();
+        // }
 
         GlobalEvent.on(EventCfg.ONADDMARK, this.onAddMard.bind(this), this);
 
@@ -53,17 +53,17 @@ export default class NewClass extends cc.Component {
     }
 
     //复盘的本地数据
-    createFuPanData() {
-        let data = GameCfg.mark;
-        if (data) {
+    // createFuPanData() {
+    //     let data = GameCfg.mark;
+    //     if (data) {
 
-            data.forEach((el) => {
-                if (el) {
-                    this.onAddMard({ type: el[1], index: el[0] })
-                }
-            });
-        }
-    }
+    //         data.forEach((el) => {
+    //             if (el) {
+    //                 this.onAddMard({ type: el[1], index: el[0] })
+    //             }
+    //         });
+    //     }
+    // }
 
     onEnable() {
 

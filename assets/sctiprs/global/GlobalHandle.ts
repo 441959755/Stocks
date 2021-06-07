@@ -90,30 +90,30 @@ export default class GlobalHandle {
                 }
 
                 //  let d = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
-                info.items.forEach(el => {
-                    //  let date = new Date(el.timestamp);
-                    let ye = (el.timestamp + '').slice(0, 4);
-                    let mon = (el.timestamp + '').slice(4, 6);
-                    let da = (el.timestamp + '').slice(6);
-                    let fromDate = ye + '-' + mon + '-' + da;
-                    //  if (fromDate != d) {
-                    let data = {
-                        day: fromDate || 0,
-                        open: el.open || 0,
-                        close: el.price || 0,
-                        high: el.high || 0,
-                        low: el.low || 0,
-                        price: el.amount || 0,
-                        value: el.volume || 0,
-                        Rate: (el.volume / GameCfg.data[0].circulate) * 100
-                    };
+                info.items.forEach((el, index) => {
+                    if (index != 0) {
+                        //  let date = new Date(el.timestamp);
+                        let ye = (el.timestamp + '').slice(0, 4);
+                        let mon = (el.timestamp + '').slice(4, 6);
+                        let da = (el.timestamp + '').slice(6);
+                        let fromDate = ye + '-' + mon + '-' + da;
+                        //  if (fromDate != d) {
+                        let data = {
+                            day: fromDate || 0,
+                            open: el.open || 0,
+                            close: el.price || 0,
+                            high: el.high || 0,
+                            low: el.low || 0,
+                            price: el.amount || 0,
+                            value: el.volume || 0,
+                            Rate: (el.volume / GameCfg.data[0].circulate) * 100
+                        };
 
-                    if (GameCfg.data[0].circulate == 0) {
-                        data.Rate = 1;
+                        if (GameCfg.data[0].circulate == 0) {
+                            data.Rate = 1;
+                        }
+                        GameCfg.data[0].data.push(data);
                     }
-                    GameCfg.data[0].data.push(data);
-                    //  }
-
                 });
                 // console.log(JSON.stringify(GameCfg.data[0].data));
                 // console.log(JSON.stringify(GameCfg.data[0].data.length));
@@ -160,7 +160,7 @@ export default class GlobalHandle {
                 return;
             }
             //	if (GameData.QHSet.ZLine == '日线' || GameData.QHSet.ZLine == '5分钟K') {
-            info.items.forEach(el => {
+            info.items.forEach((el) => {
                 // {"code":2000042,"ktype":"Day","timestamp":"1577235900","open":3112,"close":3116,"high":3120,"low":3112,"volume":"15032"},
                 //[{"code":2000113,"ktype":"Day","timestamp":"20171103","open":610.2,"close":607.4,"high":610.6,"low":606.6,"volume":"178060","cclHold":"442454"},
                 let data1 = {
@@ -174,11 +174,7 @@ export default class GlobalHandle {
                 };
                 GameCfg.data[0].data.push(data1);
             });
-            //	GameCfg.enterGameCache.startTime = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
 
-            //	console.log(JSON.stringify(GameCfg.data[0].data));
-            //	console.log('GameCfg.huizhidatas' + GameCfg.huizhidatas)
-            //	console.log(GameCfg.enterGameCache.startTime);
             if (data.total > maxLength) {
                 this.curTotal = data.total - maxLength;
                 data.total = maxLength;
@@ -198,20 +194,23 @@ export default class GlobalHandle {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 return;
             }
-            info.items.forEach(el => {
+            info.items.forEach((el, index) => {
                 // {"code":2000042,"ktype":"Day","timestamp":"1577235900","open":3112,"close":3116,"high":3120,"low":3112,"volume":"15032"},
                 //[{"code":2000113,"ktype":"Day","timestamp":"20171103","open":610.2,"close":607.4,"high":610.6,"low":606.6,"volume":"178060","cclHold":"442454"},
                 //	if (el.timestamp != GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day) {
-                let data1 = {
-                    day: el.timestamp + '',
-                    open: el.open || 0,
-                    close: el.close || 0,
-                    high: el.high || 0,
-                    low: el.low || 0,
-                    value: el.volume || 0,
-                    ccl_hold: el.cclHold || 0,
-                };
-                qhHQ.push(data1);
+                if (index != 0) {
+                    let data1 = {
+                        day: el.timestamp + '',
+                        open: el.open || 0,
+                        close: el.close || 0,
+                        high: el.high || 0,
+                        low: el.low || 0,
+                        value: el.volume || 0,
+                        ccl_hold: el.cclHold || 0,
+                    };
+                    qhHQ.push(data1);
+                }
+
                 //	}
             });
             // console.log(JSON.stringify(GameCfg.data[0].data.length));
@@ -277,5 +276,24 @@ export default class GlobalHandle {
             // callBack && (callBack(info));
         });
 
+    }
+
+
+    // 查询游戏操作步骤
+    public static GetGameOperations(ts, cb?) {
+        let data = {
+            uid: GameData.userID,
+            ts: ts,
+        }
+
+        socket.send(pb.MessageId.Req_Game_GetGameOperation, PB.onCmdGetGameOperations(data), (info) => {
+            console.log(JSON.stringify(info));
+            if (!info.err) {
+                if (info.operations && info.operations.items) {
+                    GameCfg.GameOperationItem = info.operations.items;
+                    cb && (cb);
+                }
+            }
+        })
     }
 }

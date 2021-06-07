@@ -2,50 +2,6 @@
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 
-let Login = pb.CmdLogin;
-
-let CmdLoginReply = pb.CmdLoginReply;
-
-let CmdGameLogin = pb.CmdGameLogin;
-
-let CmdGameLoginReply = pb.CmdGameLoginReply;
-
-let CmdQuoteQuery = pb.CmdQuoteQuery;
-
-let Quotes = pb.Quotes;
-
-let GameProperties = pb.GameProperties;
-
-let CmdGameStart = pb.CmdGameStart;
-
-let CmdGameOver = pb.CmdGameOver;
-
-let ErrorInfo = pb.ErrorInfo;
-
-let CmdQueryGameResult = pb.CmdQueryGameResult;
-
-let CmdQueryGameResultReply = pb.CmdQueryGameResultReply;
-
-let CmdGetSmxlReportReply = pb.CmdGetSmxlReportReply;
-
-let CmdEditNick = pb.CmdEditNick;
-
-let CmdUploadIcon = pb.CmdUploadIcon;
-
-let AdClicked = pb.AdClicked;
-
-let CmdQuoteQueryFuture = pb.CmdQuoteQueryFuture;
-
-let QuotesFuture = pb.QuotesFuture;
-
-let SmxlState = pb.SmxlState;
-
-// 当日游戏次数计数器
-let TodayGameTimes = pb.TodayGameTimes;
-
-
-
-
 function PBHelper() {
 
 }
@@ -56,17 +12,17 @@ PBHelper.prototype = {
 
     //登入信息转BUff
     onCmdLoginConvertToBuff(data) {
+        let Login = pb.CmdLogin;
         console.log('message' + JSON.stringify(data));
         let message = Login.create({ account: data.account, type: data.type, from: data.from, pwd: data.pwd });
 
         let buff = Login.encode(message).finish();
-
         return buff;
     },
 
     //登人返回信息
     onCmdLoginConvertToData(buff) {
-
+        let CmdLoginReply = pb.CmdLoginReply;
         let decoded = CmdLoginReply.decode(new Uint8Array(buff));
         // let decoded = CmdLoginReply.decode(buff);
         console.log('onCmdLoginConvertToData:' + JSON.stringify(decoded));
@@ -82,6 +38,7 @@ PBHelper.prototype = {
 
     //游戏登入信息
     onCmdGameLoginConvertToBuff() {
+        let CmdGameLogin = pb.CmdGameLogin;
         let message = CmdGameLogin.create({
             uid: GameData.userID,
             token: GameData.token,
@@ -95,6 +52,7 @@ PBHelper.prototype = {
 
     //游戏登入返回信息
     onCmdGameLoginReplyConvertToData(buff) {
+        let CmdGameLoginReply = pb.CmdGameLoginReply;
         let decoded = CmdGameLoginReply.decode(new Uint8Array(buff));
         console.log(' onCmdGameLoginReplyConvertToData:' + JSON.stringify(decoded));
         return decoded;
@@ -102,6 +60,7 @@ PBHelper.prototype = {
 
     //游戏开始
     onCmdGameStartConvertToBuff(data) {
+        let CmdGameStart = pb.CmdGameStart;
         let message = CmdGameStart.create({
             game: data.game,
         })
@@ -111,6 +70,7 @@ PBHelper.prototype = {
 
     //查询行情
     onCmdQuoteQueryConvertToBuff(data) {
+        let CmdQuoteQuery = pb.CmdQuoteQuery;
         let message = CmdQuoteQuery.create({
             ktype: data.ktype,
             code: data.code,
@@ -125,43 +85,42 @@ PBHelper.prototype = {
     },
 
     //游戏结束上传数据
-    onCmdGameOverConvertToBuff(data) {
+    onCmdGameOverConvertToBuff(datas) {
+        let CmdGameOver = pb.CmdGameOver;
+        let data = datas.result;
+        let items = {
+            items: datas.operations,
+        }
+
         let message = CmdGameOver.create({
             result: {
                 uid: data.uid,
                 gType: data.g_type,
-                // g_type: data.g_type,
-                //   quotes_code: data.quotes_code,
                 quotesCode: data.quotes_code,
-                //   k_type: data.k_type,
-
                 kType: data.k_type,
-                // k_from: data.k_from,
-
                 kFrom: data.k_from,
-                //  k_to: data.k_to,
-
                 kTo: data.k_to,
-                //   stock_profit_rate: data.stock_profit_rate,
                 stockProfitRate: data.stock_profit_rate,
                 userProfitRate: data.user_profit_rate,
-                // user_profit_rate: data.user_profit_rate,
-                // user_capital: data.user_capital,
-                // user_profit: data.user_profit,
                 userCapital: data.user_capital,
                 userProfit: data.user_profit,
                 ts: data.ts,
                 rank: data.rank,
                 refId: data.ref_id,
-            }
+                kStartup: data.k_startup,
+                kStop: data.k_stop,
+            },
+            operations: items,
         })
 
         let buff = CmdGameOver.encode(message).finish();
+
         return buff;
     },
 
     //查询游戏结果
     onCmdQueryGameResultConvertToBuff(data) {
+        let CmdQueryGameResult = pb.CmdQueryGameResult;
         let message = CmdQueryGameResult.create({
             gType: data.g_type,
             from: data.from,
@@ -175,12 +134,14 @@ PBHelper.prototype = {
 
     //查询游戏结果应答
     onCmdQueryGameResultReplyConvertToData(buff) {
+        let CmdQueryGameResultReply = pb.CmdQueryGameResultReply;
         let decode = CmdQueryGameResultReply.decode(new Uint8Array(buff));
         console.log('查询游戏结果应答' + JSON.stringify(decode));
         return decode;
     },
 
     onCmdEditNickConvertToBuff(data) {
+        let CmdEditNick = pb.CmdEditNick;
         let message = CmdEditNick.create({
             uid: data.uid,
             nick: data.nick,
@@ -191,6 +152,7 @@ PBHelper.prototype = {
     },
 
     onCmdUploadIconConvertToBuff(data) {
+        let CmdUploadIcon = pb.CmdUploadIcon;
         let message = CmdUploadIcon.create({
             uid: data.uid,
             icon: data.icon,
@@ -200,6 +162,7 @@ PBHelper.prototype = {
     },
 
     onAdClickedConvertTpBuff(data) {
+        let AdClicked = pb.AdClicked;
         let message = AdClicked.create({
             uid: data.uid,
             pos: data.pos,
@@ -213,6 +176,7 @@ PBHelper.prototype = {
 
     // 查询期货行情
     onCmdQuoteQueryFutureConverToBuff(data) {
+        let CmdQuoteQueryFuture = pb.CmdQuoteQueryFuture;
         let message = CmdQuoteQueryFuture.create({
             ktype: data.ktype,
             code: data.code,
@@ -224,6 +188,27 @@ PBHelper.prototype = {
         return buff;
     },
 
+    // 查询游戏操作步骤
+    onCmdGetGameOperations(data) {
+        let CmdGetGameOperations = pb.CmdGetGameOperations;
+        let message = CmdGetGameOperations.create({
+            uid: data.uid,
+            ts: data.ts,
+        })
+        let buff = CmdGetGameOperations.encode(message).finish();
+
+        return buff;
+    },
+
+    // 查询游戏操作步骤应答
+    onCmdGetGameOperationsReply(buff) {
+        let CmdGetGameOperationsReply = pb.CmdGetGameOperationsReply;
+        let decode = CmdGetGameOperationsReply.decode(new Uint8Array(buff));
+        console.log('查询游戏操作步骤应答' + JSON.stringify(decode));
+        return decode;
+
+    },
+
     selectBlackData(id, buff) {
         let data;
         console.log('id:' + id + '跟新数据');
@@ -231,9 +216,11 @@ PBHelper.prototype = {
             data = this.onCmdGameLoginReplyConvertToData(buff);
             return data;
         } else if (id == pb.MessageId.Rep_QuoteQuery) {
+            let Quotes = pb.Quotes;
             data = Quotes.decode(new Uint8Array(buff));
             return data;
         } else if (id == pb.MessageId.Sync_S2C_GameProperty) {
+            let GameProperties = pb.GameProperties;
             let decode = GameProperties.decode(new Uint8Array(buff));
 
             // items: Array(1)
@@ -253,22 +240,26 @@ PBHelper.prototype = {
             || id == pb.MessageId.Rep_Game_EditNick
             || id == pb.MessageId.Rep_Game_UploadIcon
             || id == pb.MessageId.Rep_Game_SmxlReset) {
+            let ErrorInfo = pb.ErrorInfo;
             data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
         } else if (id == pb.MessageId.Rep_Game_QueryGameResult) {
             data = this.onCmdQueryGameResultReplyConvertToData(buff);
             return data;
         } else if (id == pb.MessageId.Rep_Game_SmxlReport) {
+            let CmdGetSmxlReportReply = pb.CmdGetSmxlReportReply;
             data = CmdGetSmxlReportReply.decode(new Uint8Array(buff));
             return data;
         }
         //期货行情
         else if (id == pb.MessageId.Rep_QuoteQueryFuture) {
+            let QuotesFuture = pb.QuotesFuture;
             data = QuotesFuture.decode(new Uint8Array(buff));
             return data;
         }
         //// 同步双盲训练状态
         else if (id == pb.MessageId.Sync_S2C_GameSmxl) {
+            let SmxlState = pb.SmxlState;
             data = SmxlState.decode(new Uint8Array(buff));
             console.log('同步双盲训练状态' + JSON.stringify(data));
             GameData.SmxlState = data;
@@ -276,9 +267,15 @@ PBHelper.prototype = {
         }
         //同步当日游戏次数数据
         else if (id == pb.MessageId.Sync_S2C_GameTimes) {
+            // 当日游戏次数计数器
+            let TodayGameTimes = pb.TodayGameTimes;
             data = TodayGameTimes.decode(new Uint8Array(buff));
             console.log('当日游戏次数计数器:' + JSON.stringify(data));
 
+        }
+        else if (id == pb.MessageId.Rep_Game_GetGameOperation) {
+            let data = this.onCmdGetGameOperationsReply(buff);
+            return data;
         }
 
     }

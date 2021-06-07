@@ -1,0 +1,221 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package pb;
+option go_package = ".;pb";
+
+
+
+import "common.proto";
+import "login.proto";
+import "game.proto";
+
+
+
+
+
+// 同步操作
+enum SyncAct {
+	SyncAct_NULL = 0;
+
+  Set = 1; // 添加or更新
+  Del = 2; // 删除
+}
+
+
+// 服务器命令ID
+enum ServerCmdId {
+	ServerCmdId_NULL = 0;
+
+	ReloadGameConf = 1;	// 重新加载游戏配置
+}
+
+
+
+// 分配一个UID请求：无
+// 分配一个UID应答
+message CmdNewUidReply {
+  uint32 uid = 1;
+}
+
+
+// 分配一个RoomId请求：无
+// 分配一个RoomId应答
+message CmdNewRoomIdReply {
+  uint32 id = 1;
+}
+
+
+// 分配一个Gate服务器
+message CmdGateAddr {
+  int32 uid = 1;
+}
+// 分配一个Gate服务器应答
+message CmdGateAddrReply {
+  int32 uid = 1;
+  string addr = 2;
+}
+
+
+// 玩家登录
+message CmdUserLogin {
+  int32 uid = 1;      // uid
+	LoginType type = 2; // 登录类型
+	AppFrom from = 3;   // 登录来源
+  string ip = 4;      // 登录IP
+}
+// 玩家登录应答
+message CmdUserLoginReply {
+  int32 uid = 1;
+  string token = 2;
+  string addr = 3;
+}
+
+
+
+// 玩家在游戏服务器登入
+message CmdUserGameLogin {
+  int32 uid = 1;
+  int32 node_id = 2;  // 游戏服务器的NodeID
+}
+// 玩家在游戏服务器登入应答：VoidReply
+
+// 玩家在游戏服务器登出
+message CmdUserGameLogout {
+  int32 uid = 1;
+}
+// 玩家在游戏服务器登出应答：VoidReply
+
+
+
+
+// 获取玩家游戏数据
+message CmdUserGameData {
+  int32 uid = 1;  // uid
+}
+// 获取玩家游戏数据应答
+message CmdUserGameDataReply {
+   // 持久化游戏数据
+  GameData gd = 1;
+  // 内存状态
+  int32 room_id = 2;      // 房间Id
+  int32 room_at_node = 3; // 房间所在游戏服务器的NodeID
+}
+
+
+// 修改玩家游戏属性
+message CmdGameProperties {
+	int32 uid = 1;						                  // uid
+	repeated GamePropertyItem properties = 2;		// 新的玩家游戏属性
+  string memo = 3;                            // 更新说明
+  bool backbag = 4;                           // 玩家离线时，是否将更新放入背包中
+}
+
+
+// 命令
+message ServerCmd {
+	ServerCmdId id = 1;   // 命令ID
+	bytes parameters = 2; // 命令参数
+}
+// 消息
+message Message {
+	MessageId id = 1; // 消息ID
+  bytes     buf= 2; // 消息缓冲区
+}
+
+
+
+// 房间列表
+message Room {
+  SyncAct act = 1;  // 同步操作
+	int32 id = 2;     // 房间ID
+	GameType game = 3;// 游戏类型
+  int32 max = 4;    // 最大玩家数
+  int32 cur = 5;    // 当前玩家数
+  int32 node = 6;   // 所在节点
+  
+}
+message RoomList {
+	repeated Room items = 1;  // 房间列表
+}
+
+
+// 玩家位置
+message PlayerNode {
+  int32 uid = 1;      // 玩家ID
+  int32 node_id = 2;  // 玩家所在游戏服务器的NodeID
+}
+
+
+// 广播消息
+message BroadcastMsg {
+	MessageId      id  = 1; // 消息ID
+  bytes          buf = 2; // 消息缓冲区
+  repeated int32 uids= 3; // 玩家ID数组
+}
+
+
+// 闯关赛赛季榜奖励
+message CmdCgsConf {
+  int32 id = 1;           // 赛季ID
+  string award_json = 2;  // 奖励Json
+}
+
+
+
+
+
+
+
+// GRPC
+service MasterService {
+  // 登录相关
+  rpc NewUid (VoidRequest) returns (CmdNewUidReply) {}
+  rpc GetGateAddr (CmdGateAddr) returns (CmdGateAddrReply) {}
+  rpc UserLogin (CmdUserLogin) returns (CmdUserLoginReply) {}
+  rpc UserGameLogin (CmdUserGameLogin) returns (VoidReply) {}
+  rpc UserGameLogout (CmdUserGameLogout) returns (VoidReply) {}
+
+  // 房间相关
+  rpc NewRoomId (VoidRequest) returns (CmdNewRoomIdReply) {}
+  rpc SyncRooms (RoomList) returns (VoidReply) {}
+  rpc EnterRoom (CmdRoomEnter) returns (CmdRoomEnterReply) {}
+
+  // 其他
+  rpc HeartBeat (VoidRequest) returns (VoidReply) {}
+}
+
+
+service GameService {
+  // GM相关
+  rpc GetGameData (CmdUserGameData) returns (CmdUserGameDataReply) {}
+  rpc AddGameProperties (CmdGameProperties) returns (ErrorInfo) {}
+  rpc ResetGameProperties (CmdGameProperties) returns (ErrorInfo) {}
+  rpc OpenCgs (CmdCgsConf) returns (ErrorInfo) {}
+  rpc CloseCgs (CmdCgsConf) returns (ErrorInfo) {}
+  rpc SetCgsAward (CmdCgsConf) returns (ErrorInfo) {}
+
+  rpc Execute (ServerCmd) returns (ErrorInfo) {}
+  rpc Process (Message) returns (Message) {}
+  rpc SendMessage (Message) returns (VoidReply) {}
+
+  // 房间相关
+  rpc SyncRooms (VoidRequest) returns (RoomList) {}
+  rpc ForwardRoomMsg (Message) returns (Message) {}
+  rpc CreateRoom (CmdRoomCreate) returns (CmdRoomCreateReply) {}
+  rpc EnterRoom (CmdRoomEnter) returns (CmdRoomEnterReply) {}
+  rpc LeaveRoom (CmdRoomLeave) returns (CmdRoomLeaveReply) {}
+}

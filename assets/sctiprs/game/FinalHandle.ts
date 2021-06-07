@@ -137,7 +137,12 @@ export default class NewClass extends cc.Component {
                 this.saveHoistoryInfo(parseInt(datas.ts + ''));
             }
 
-            GlobalHandle.onCmdGameOverReq(datas);
+            let CmdGameOver = {
+                result: datas,
+                operations: GameCfg.GameOperationItem,
+            }
+
+            GlobalHandle.onCmdGameOverReq(CmdGameOver);
         }
     }
 
@@ -272,13 +277,7 @@ export default class NewClass extends cc.Component {
         GameCfg.history.huizhidatas = GameCfg.huizhidatas;
         GameCfg.history.allRate = GameCfg.allRate;
         cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
-        cc.sys.localStorage.setItem(ts + 'ts', JSON.stringify(GameCfg.history));
-        cc.sys.localStorage.setItem(ts + 'mark', JSON.stringify(GameCfg.mark));
-        cc.sys.localStorage.setItem(ts + 'notice', JSON.stringify(GameCfg.notice));
-        cc.sys.localStorage.setItem(ts + 'fill', JSON.stringify(GameCfg.fill));
-        cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
         cc.sys.localStorage.setItem(ts + 'cache', JSON.stringify(GameCfg.enterGameCache));
-        cc.sys.localStorage.setItem(ts + 'block', JSON.stringify(GameCfg.blockHistoy));
     }
 
     onBtnClick(event, data) {
@@ -298,6 +297,7 @@ export default class NewClass extends cc.Component {
             GameCfg.history.allRate = 0;
 
             GameCfg.enterGameCache = null;
+            GameCfg.GameOperationItem = [];
             //    GameCfg.ziChan = 100000;
             cc.director.loadScene('hall');
         }
@@ -329,7 +329,7 @@ export default class NewClass extends cc.Component {
                     GameCfg.GAMEFUPAN = false;
                     //   GameCfg.history.huizhidatas = 0;
                     GameCfg.history.allRate = 0;
-
+                    GameCfg.GameOperationItem = [];
                     //   GameCfg.ziChan = 100000;
                     GlobalEvent.emit(EventCfg.LEVELCHANGE);
                     cc.director.loadScene('game');
@@ -361,7 +361,7 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = false;
             //   GameCfg.history.huizhidatas = 0;
             GameCfg.history.allRate = 0;
-
+            GameCfg.GameOperationItem = [];
             //   GameCfg.ziChan = 100000;
             GlobalEvent.emit(EventCfg.LEVELCHANGE);
             cc.director.loadScene('game');

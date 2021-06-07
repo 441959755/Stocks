@@ -84,22 +84,22 @@ export default class NewClass extends cc.Component {
 		let name = event.target.name;
 		//双盲
 		if (name == 'main_xl_smxl') {
-			GlobalEvent.emit('OPENSMLAYER');
+			GlobalEvent.emit(EventCfg.OPENSMLAYER);
 			GameCfg.GameType = pb.GameType.ShuangMang;
 		}
 		//指标
 		else if (name == 'main_xl_zbxl') {
-			GlobalEvent.emit('OPENZBLAYER');
+			GlobalEvent.emit(EventCfg.OPENZBLAYER);
 			GameCfg.GameType = pb.GameType.ZhiBiao;
 		}
 		//定向
 		else if (name == 'main_xl_dxxl') {
-			GlobalEvent.emit('OPENDXLAYER');
+			GlobalEvent.emit(EventCfg.OPENDXLAYER);
 			GameCfg.GameType = pb.GameType.DingXiang;
 		}
 		//期货
 		else if (name == 'main_xl_qhxl') {
-			GlobalEvent.emit('OPENQHLAYER');
+			GlobalEvent.emit(EventCfg.OPENQHLAYER);
 			GameCfg.GameType = pb.GameType.QiHuo;
 		}
 		//分时
@@ -110,7 +110,7 @@ export default class NewClass extends cc.Component {
 		}
 		//打开个人中心
 		else if (name == 'userinfobg') {
-			GlobalEvent.emit('OPENPLAYERINFO');
+			GlobalEvent.emit(EventCfg.OPENPLAYERINFO);
 		}
 	}
 

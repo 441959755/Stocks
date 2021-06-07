@@ -27,9 +27,6 @@ export default class NewClass extends cc.Component {
 	@property(cc.Button)
 	cyBtn: cc.Button = null;
 
-	@property(cc.Node)
-	selectBox: cc.Node = null;
-
 	roundNumber = 150;
 
 	@property(cc.Label)
@@ -120,7 +117,12 @@ export default class NewClass extends cc.Component {
 
 	curMcCount = 0;
 
-	//	allButData = [];
+	@property(cc.Node)
+	zhangting: cc.Node = null;
+
+	@property(cc.Node)
+	dieting: cc.Node = null;
+
 
 	onLoad() {
 		this.gpData = GameCfg.data[0].data;
@@ -143,25 +145,18 @@ export default class NewClass extends cc.Component {
 						this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
 						this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
 						this.keMcCount = 0;
-						let curClose = parseFloat(this.gpData[GameCfg.huizhidatas - count].close);
-						//	let preClose = parseFloat(this.gpData[this.buyData[this.buyData.length - 1]].close);
-
 
 						let rate = this.onCurPositionRete(count);
 
-						//	let rate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
-
 						if (GameCfg.GameType == pb.GameType.QiHuo || !GameCfg.GameSet.isFC) {
-							//	rate = this.onAllPositionRete();
+
 							if (this._KKCount != 0) {
 								rate = -rate;
-								//	this.ziChan = rate * GameCfg.ziChan + GameCfg.ziChan;
 							}
 							GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
 						} else {
 							GameCfg.allRate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
 						}
-
 
 						GlobalEvent.emit('updateRate', [0, GameCfg.allRate]);
 
@@ -175,8 +170,16 @@ export default class NewClass extends cc.Component {
 							}
 						});
 
-					}
+						if (!GameCfg.GAMEFUPAN) {
+							let item = {
+								opId: pb.GameOperationId.Bid,
+								volume: 1,
+								kOffset: GameCfg.huizhidatas - 1,
 
+							}
+							GameCfg.GameOperationItem.push(item);
+						}
+					}
 				}
 				GameCfg.finalfund = this.ziChan;
 
@@ -185,9 +188,8 @@ export default class NewClass extends cc.Component {
 				this.curMrCount = [];
 
 				this.curMcCount = 0;
-				//	this.allButData = [];
+
 				this.buyData = [];
-				//	this.saleData = [];
 
 			},
 			this
@@ -262,6 +264,65 @@ export default class NewClass extends cc.Component {
 				}
 			}
 		}, this);
+
+		GlobalEvent.on(EventCfg.CLICKFCBTN, (percent) => {
+			//买入
+			if (this._type == 1) {
+				let count = parseInt(percent * this.keMrCount / 100 + '') * 100;
+				if (count < 100) {
+					count = 100;
+				}
+				this.keMcCount += count;
+				this.keMrCount -= count;
+				this.curMrCount.push(count);
+				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
+
+				if (!GameCfg.GAMEFUPAN) {
+					if (this.keMrCount < 100) {
+						this.mrBtn.interactable = false;
+						this.mrBtn.enableAutoGrayEffect = true;
+					}
+					this.mcBtn.interactable = true;
+					this.mcBtn.enableAutoGrayEffect = false;
+
+					let item = {
+						opId: pb.GameOperationId.Ask,
+						volume: percent,
+						kOffset: GameCfg.huizhidatas - 1,
+
+					}
+					GameCfg.GameOperationItem.push(item);
+				}
+				this.setRoundNumber('mrBtn');
+			}
+			//卖出
+			else {
+				let mc = parseInt(this.keMcCount * percent / 100 + '') * 100;
+				if (mc < 100) {
+					mc = 100;
+				}
+				this.keMcCount -= mc;
+				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
+				this.curMcCount = mc;
+				if (!GameCfg.GAMEFUPAN) {
+					if (this.keMcCount <= 0) {
+						this.mcBtn.interactable = false;
+						this.mcBtn.enableAutoGrayEffect = true;
+					}
+					this.mrBtn.interactable = true;
+					this.mrBtn.enableAutoGrayEffect = false;
+					let item = {
+						opId: pb.GameOperationId.Bid,
+						volume: percent,
+						kOffset: GameCfg.huizhidatas - 1,
+
+					}
+					GameCfg.GameOperationItem.push(item);
+				}
+				this.setRoundNumber('mcBtn');
+			}
+
+		}, this);
 	}
 
 	protected start() {
@@ -280,9 +341,18 @@ export default class NewClass extends cc.Component {
 
 		} else {
 			this.ziChan = GameCfg.finalfund;
+
+			let opt = GameCfg.GameOperationItem;
+			opt.forEach((el, index) => {
+				if (GameCfg.GameType == pb.GameType.DingXiang) {
+					GameCfg.huizhidatas = el.kOffset;
+					GlobalEvent.emit(EventCfg.CLICKFCBTN, el.volume);
+				}
+			})
+
 		}
 
-		this.selectBox.active = false;
+
 		//分仓
 		if (GameCfg.GameSet.isFC) {
 			this.mcBtn.node.x = -266;
@@ -496,11 +566,10 @@ export default class NewClass extends cc.Component {
 		//点击买入卖出
 		if (name == 'mrBtn' || name == 'mcBtn') {
 			if (GameCfg.GameSet.isFC) {
-				this.selectBox.active = true;
+
 				let point = event.target.convertToWorldSpaceAR(cc.v2(0, 0));
 
-				this.selectBox.x = this.selectBox.parent.convertToNodeSpaceAR(point).x;
-
+				GlobalEvent.emit(EventCfg.OPENSELECTBOX, point);
 				if (name == 'mrBtn') {
 					this._type = 1;
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
@@ -522,18 +591,34 @@ export default class NewClass extends cc.Component {
 
 					this.cyBtn.node.active = true;
 					this.gwBtn.node.active = false;
+					if (!GameCfg.GAMEFUPAN) {
+						let item = {
+							opId: pb.GameOperationId.Ask,
+							volume: 1,
+							kOffset: GameCfg.huizhidatas - 1,
+
+						}
+						GameCfg.GameOperationItem.push(item);
+					}
 				} else {
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
 
 					this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
-					//   console.log(this.gpData[GameCfg.huizhidatas - 1].close);
-					//	this.curMrCount = [];
+
 					this.curMcCount = JSON.parse(JSON.stringify(this.keMcCount));
-					//	console.log(JSON.stringify(this.curMcCount));
 
 					this.keMcCount = 0;
 					this.gwBtn.node.active = true;
 					this.cyBtn.node.active = false;
+					if (!GameCfg.GAMEFUPAN) {
+						let item = {
+							opId: pb.GameOperationId.Bid,
+							volume: 1,
+							kOffset: GameCfg.huizhidatas - 1,
+
+						}
+						GameCfg.GameOperationItem.push(item);
+					}
 				}
 				this.setRoundNumber(name);
 			}
@@ -541,231 +626,21 @@ export default class NewClass extends cc.Component {
 		//点击观望
 		else if (name == 'gwBtn' || name == 'cyBtn') {
 			this.setRoundNumber(name);
-		}
-		//全仓
-		else if (name == 'fcBtn') {
-			//买入
-			if (this._type == 1) {
-				this.keMcCount += this.keMrCount;
+			let item = {
+				opId: null,
+				kOffset: GameCfg.huizhidatas - 1,
 
-				this.ziChan -= this.keMrCount * this.gpData[GameCfg.huizhidatas - 1].close;
-				this.curMrCount.push(this.keMrCount);
-				this.keMrCount = 0;
-				// console.log(this.gpData[GameCfg.huizhidatas - 2].open);
-
-				//	console.log(JSON.stringify(this.curMrCount));
-				this.mrBtn.interactable = false;
-				this.mrBtn.enableAutoGrayEffect = true;
-				this.mcBtn.interactable = true;
-				this.mcBtn.enableAutoGrayEffect = false;
-				this.setRoundNumber('mrBtn');
 			}
-			//卖出
+			if (name == 'gwBtn') {
+				item.opId = pb.GameOperationId.Wait;
+			}
 			else {
-				this.mrBtn.interactable = true;
-				this.mrBtn.enableAutoGrayEffect = false;
-				this.mcBtn.interactable = false;
-				this.mcBtn.enableAutoGrayEffect = true;
-				this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - 1].close;
-				//	this.curMrCount = [];
-				//    console.log(this.gpData[GameCfg.huizhidatas - 1].close);
-				this.curMcCount = JSON.parse(JSON.stringify(this.keMcCount));
-				//console.log(JSON.stringify(this.curMcCount));
-				this.keMcCount = 0;
-				this.setRoundNumber('mcBtn');
+				item.opId = pb.GameOperationId.Hold;
 			}
-			this.selectBox.active = false;
+
+			GameCfg.GameOperationItem.push(item);
 		}
-		//3/4
-		else if (name == 'fcBtn1') {
-			if (this._type == 1) {
-				// this.keMcCount += parseFloat(this.ziChan * (3 / 4) / this.gpData[GameCfg.huizhidatas - 1].open + '');
-				let count = parseInt(((3 / 4) * this.keMrCount) / 100 + '') * 100;
-				if (count < 100) {
-					count = 100;
-				}
-
-				this.keMcCount += count;
-				this.keMrCount -= count;
-				this.curMrCount.push(count);
-				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
-				//  this.keMrCount -= this.keMrCount * (3 / 4);
-
-				if (this.keMrCount < 100) {
-					this.mrBtn.interactable = false;
-					this.mrBtn.enableAutoGrayEffect = true;
-				}
-				this.mcBtn.interactable = true;
-				this.mcBtn.enableAutoGrayEffect = false;
-				this.setRoundNumber('mrBtn');
-			} else {
-				let mc = parseInt((this.keMcCount * (3 / 4)) / 100 + '') * 100;
-				if (mc <= 100) {
-					mc = 100;
-				}
-				this.keMcCount -= mc;
-
-				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
-				//  this.keMcCount -= this.keMcCount * (3 / 4);
-				this.curMcCount = mc;
-				if (this.keMcCount <= 0) {
-					this.mcBtn.interactable = false;
-					this.mcBtn.enableAutoGrayEffect = true;
-				}
-				this.mrBtn.interactable = true;
-				this.mrBtn.enableAutoGrayEffect = false;
-				this.setRoundNumber('mcBtn');
-				//	this.onsetCurMrCount(mc);
-			}
-			this.selectBox.active = false;
-		} else if (name == 'fcBtn2') {
-			if (this._type == 1) {
-				//  this.keMcCount += parseFloat(this.ziChan * (2 / 3) / this.gpData[GameCfg.huizhidatas - 1].open + '');
-				let count = parseInt(((2 / 3) * this.keMrCount) / 100 + '') * 100;
-				if (count < 100) {
-					count = 100;
-				}
-				this.keMcCount += count;
-				this.keMrCount -= count;
-				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
-				this.curMrCount.push(count);
-				if (this.keMrCount < 100) {
-					this.mrBtn.interactable = false;
-					this.mrBtn.enableAutoGrayEffect = true;
-				}
-				this.mcBtn.interactable = true;
-				this.mcBtn.enableAutoGrayEffect = false;
-				this.setRoundNumber('mrBtn');
-			} else {
-				let mc = parseInt((this.keMcCount * (2 / 3)) / 100 + '') * 100;
-				if (mc <= 100) {
-					mc = 100;
-				}
-				this.keMcCount -= mc;
-
-				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
-				this.curMcCount = mc;
-				if (this.keMcCount <= 0) {
-					this.mcBtn.interactable = false;
-					this.mcBtn.enableAutoGrayEffect = true;
-				}
-				this.mrBtn.interactable = true;
-				this.mrBtn.enableAutoGrayEffect = false;
-				this.setRoundNumber('mcBtn');
-				//	this.onsetCurMrCount(mc);
-			}
-			this.selectBox.active = false;
-		} else if (name == 'fcBtn3') {
-			if (this._type == 1) {
-				let count = parseInt(((1 / 2) * this.keMrCount) / 100 + '') * 100;
-				if (count < 100) {
-					count = 100;
-				}
-				this.keMcCount += count;
-				this.keMrCount -= count;
-				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
-				this.curMrCount.push(count);
-				if (this.keMrCount < 100) {
-					this.mrBtn.interactable = false;
-					this.mrBtn.enableAutoGrayEffect = true;
-				}
-				this.mcBtn.interactable = true;
-				this.mcBtn.enableAutoGrayEffect = false;
-				this.setRoundNumber('mrBtn');
-			} else {
-				let mc = parseInt((this.keMcCount * (1 / 2)) / 100 + '') * 100;
-				if (mc <= 100) {
-					mc = 100;
-				}
-				this.keMcCount -= mc;
-
-				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
-				this.curMcCount = mc;
-				if (this.keMcCount <= 0) {
-					this.mcBtn.interactable = false;
-					this.mcBtn.enableAutoGrayEffect = true;
-				}
-				this.mrBtn.interactable = true;
-				this.mrBtn.enableAutoGrayEffect = false;
-				this.setRoundNumber('mcBtn');
-				//this.onsetCurMrCount(mc);
-			}
-			this.selectBox.active = false;
-		} else if (name == 'fcBtn4') {
-			if (this._type == 1) {
-				let count = parseInt(((1 / 3) * this.keMrCount) / 100 + '') * 100;
-				if (count < 100) {
-					count = 100;
-				}
-				this.keMcCount += count;
-				this.keMrCount -= count;
-				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
-				this.curMrCount.push(count);
-				if (this.keMrCount < 100) {
-					this.mrBtn.interactable = false;
-					this.mrBtn.enableAutoGrayEffect = true;
-				}
-				this.mcBtn.interactable = true;
-				this.mcBtn.enableAutoGrayEffect = false;
-				this.setRoundNumber('mrBtn');
-			} else {
-				let mc = parseInt((this.keMcCount * (1 / 3)) / 100 + '') * 100;
-				if (mc <= 100) {
-					mc = 100;
-				}
-				this.keMcCount -= mc;
-
-				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
-				this.curMcCount = mc;
-				if (this.keMcCount <= 0) {
-					this.mcBtn.interactable = false;
-					this.mcBtn.enableAutoGrayEffect = true;
-				}
-				this.mrBtn.interactable = true;
-				this.mrBtn.enableAutoGrayEffect = false;
-				this.setRoundNumber('mcBtn');
-				//	this.onsetCurMrCount(mc);
-			}
-			this.selectBox.active = false;
-		} else if (name == 'fcBtn5') {
-			if (this._type == 1) {
-				let count = parseInt(((1 / 4) * this.keMrCount) / 100 + '') * 100;
-				if (count < 100) {
-					count = 100;
-				}
-				this.keMcCount += count;
-				this.keMrCount -= count;
-				this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
-				this.curMrCount.push(count);
-				if (this.keMrCount < 100) {
-					this.mrBtn.interactable = false;
-					this.mrBtn.enableAutoGrayEffect = true;
-				}
-				this.mcBtn.interactable = true;
-				this.mcBtn.enableAutoGrayEffect = false;
-				this.setRoundNumber('mrBtn');
-			} else {
-				let mc = parseInt((this.keMcCount * (1 / 4)) / 100 + '') * 100;
-
-				if (mc <= 100) {
-					mc = 100;
-				}
-
-				this.keMcCount -= mc;
-
-				this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
-				this.curMcCount = mc;
-				if (this.keMcCount <= 0) {
-					this.mcBtn.interactable = false;
-					this.mcBtn.enableAutoGrayEffect = true;
-				}
-				this.mrBtn.interactable = true;
-				this.mrBtn.enableAutoGrayEffect = false;
-				this.setRoundNumber('mcBtn');
-				//	this.onsetCurMrCount(mc);
-			}
-			this.selectBox.active = false;
-		} else if (name == 'xl_fupan_pre') {
+		else if (name == 'xl_fupan_pre') {
 			GlobalEvent.emit(EventCfg.CLICKMOVE, 'pre');
 		} else if (name == 'xl_fupan_next') {
 			GlobalEvent.emit(EventCfg.CLICKMOVE, 'next');
@@ -1049,6 +924,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	onBuyOrSell(state) {
+		this.getRaisingLimit();
 		//买入
 		let data = this.gpData;
 		if (state == 'mrBtn' || state == 'mrBtn1') {
@@ -1136,22 +1012,7 @@ export default class NewClass extends cc.Component {
 				GameCfg.allRate = allRate;
 			}
 
-
 			this.curMrCount = [];
-			//	if (prezl - this.curMcCount > 0) {
-			// this.curMrPJPrice = (preClose * prezl - curClose * this.curMcCount) / (prezl - this.curMcCount);
-
-			//	}
-
-			// if (state == 'mcBtn1') {
-			// 	rate = -rate;
-			// 	//	this.ziChan = rate * GameCfg.ziChan + GameCfg.ziChan;
-
-			// } else {
-
-			//	}
-			//  console.log('(' + curClose + '-' + preClose + ')' + "/" + preClose);
-			///	GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
 
 			GlobalEvent.emit('updateRate', [rate, GameCfg.allRate]);
 
@@ -1165,8 +1026,6 @@ export default class NewClass extends cc.Component {
 					}
 				});
 
-				// GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 2;
-				// GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
 				this.curMrPJPrice = 0;
 			} else {
 				this.curMrPJPrice = preClose;
@@ -1182,12 +1041,6 @@ export default class NewClass extends cc.Component {
 					end: null
 				};
 				GameCfg.fill.push(this.rateItem);
-
-				// GameCfg.history.deal[GameCfg.history.deal.length - 1][1] = GameCfg.huizhidatas - 2;
-				// GameCfg.history.deal[GameCfg.history.deal.length - 1][2] = rate;
-				// GameCfg.history.deal[GameCfg.history.deal.length] = [GameCfg.history.deal[GameCfg.history.deal.length - 1][0]];
-				//   GameCfg.history.deal[GameCfg.history.deal.length][0] = GameCfg.history.deal[GameCfg.history.deal.length - 1][0];
-				// GameCfg.history.deal[GameCfg.history.deal.length][1] = [rate];
 
 				//下个持仓率
 				let rate1 = this.onCurPositionRete();
@@ -1237,5 +1090,57 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.GAMEOVEER);
 		GlobalEvent.off(EventCfg.GAMEFUPAN);
 		GlobalEvent.off('HIDEBOTTOMNODE');
+
+		GlobalEvent.off(EventCfg.CLICKFCBTN);
+	}
+
+	//获取涨停板
+	getRaisingLimit() {
+		this.zhangting.active = false;
+		this.dieting.active = false;
+		let index = GameCfg.huizhidatas - 1;
+		if (GameCfg.GameType != pb.GameType.QiHuo) {
+			let code = GameCfg.data[0].code + '';
+
+			let str = code.slice(0, 2);
+			let str1 = code.slice(0, 3);
+			let rate = (this.gpData[index].close - this.gpData[index - 1].close) / this.gpData[index - 1].close * 100;
+			if (str == '60' || str == '00') {
+				if (rate >= 9.95) {
+					this.zhangting.active = true;
+				} else if (rate <= -9.95) {
+					this.dieting.active = true;
+				}
+
+			}
+			else if (str1 == '688') {
+				if (rate >= 19.94) {
+					this.zhangting.active = true;
+				} else if (rate <= -19.94) {
+					this.dieting.active = true;
+				}
+			}
+			else if (str1 == '300') {
+				let time = ComUtils.fromatTime1(this.gpData[index].day);
+				if (time >= 20200824) {
+					if (rate >= 19.94) {
+						this.zhangting.active = true;
+					}
+					else if (rate <= -19.94) {
+						this.dieting.active = true;
+					}
+				}
+				else if (time < 20200824) {
+					if (rate >= 9.95) {
+						this.zhangting.active = true;
+					}
+					else if (rate <= -9.95) {
+						this.dieting.active = true;
+					}
+				}
+			}
+
+		}
+
 	}
 }

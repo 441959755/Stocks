@@ -147,7 +147,7 @@ export default class NewClass extends cc.Component {
 				//	if (!this.XJArr.main[this.XJArr.type.length - 1]) {
 				this.XJArr.main.push(items[1]);
 				// } else {
-				// 	this.XJArr.index.push(items[1]);
+				this.XJArr.index.push(items[1]);
 				// }
 			}
 		});

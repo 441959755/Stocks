@@ -476,8 +476,6 @@ export default class NewClass extends cc.Component {
             el.node.active = false;
         })
 
-
-
     }
 
     onDestroy() {
@@ -524,17 +522,10 @@ export default class NewClass extends cc.Component {
         this.bottomValue = viweData[0].low;
 
         this.topValue = 0;
-        //  this.topVol = 0;
-        // this.maxEXPMA = 0;
+
         for (let i = cc.ext.beg_end[0]; i < cc.ext.beg_end[1]; i++) {
             this.topValue = Math.max(this.topValue, viweData[i].high);     //最高价
             this.bottomValue = Math.min(this.bottomValue, viweData[i].low); //最低价
-
-            // if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-            //     this.maxEXPMA = Math.max(this.EXPMA2[i], this.maxEXPMA);
-            //     this.maxEXPMA = Math.max(this.EXPMA1[i], this.maxEXPMA);
-            // }
-
         }
 
         this.disValue = this.topValue - this.bottomValue;
@@ -799,14 +790,11 @@ export default class NewClass extends cc.Component {
             if (GameCfg.GameSet.select != 'BOLL') {
                 this.drawBOLL.node.active = false;
             }
-
-            // setTimeout(() => {
-            //     GlobalEvent.emit('setDrawing', true);
-            // }, 500);
         }
 
-        this.onShow();
-
+        if (!GameCfg.GAMEFUPAN) {
+            this.onShow();
+        }
     }
 
     //画线
