@@ -357,11 +357,6 @@ message CmdGetGameOperations {
 	int32 uid = 1;	// 用户ID
 	int64 ts = 2;	// 游戏结果的时间戳
 }
-// 查询游戏操作步骤应答
-message CmdGetGameOperationsReply {
-	ErrorInfo err = 1;				// 查询结果
-	GameOperations operations = 2;	// 游戏操作步骤集合
-}
 
 
 // 查询双盲月报
@@ -660,8 +655,8 @@ message CmdCgdsReg {
 	int32 id = 1;			// 炒股大赛的时间编码：YYYYMMDD
 }
 message CmdCgdsRegReply {
-	ErrorInfo result = 1;	// 报名结果
-	CgdsStateItem state = 2;// 炒股大赛状态
+	ErrorInfo result = 1;				// 报名结果
+	CgdsStateItem cgds_state_item = 2;	// 炒股大赛状态
 }
 // 炒股大赛排行榜
 message CmdCgdsRanking {

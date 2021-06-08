@@ -65,6 +65,13 @@ export namespace pb {
         CS_CHECK_FAILURE_CAPITAL = 8,
         CS_CHECK_FAILURE_STOCK = 9,
         CS_CHECK_FAILURE_ORDER = 10,
+        CS_NO_TRADING_TIME = 11,
+        CS_NO_REGISTRY_TIME = 12,
+        CS_NO_REGISTRY = 13,
+        CS_ALREADY_REGISTRY = 14,
+        CS_CHECK_FAILURE_CGDS_ID = 15,
+        CS_CHECK_FAILURE_TIME = 16,
+        CS_CHECK_FAILURE_PROPERTY = 17,
         CS_ROOM_INVALID = 100,
         CS_ROOM_FULL = 101,
         CS_ROOM_FAIL_CHECKIN = 102,
@@ -131,10 +138,10 @@ export namespace pb {
         Rep_Game_CgsGetSeasonRank = 4022,
         Req_Game_OrderQuery = 4023,
         Rep_Game_OrderQuery = 4024,
-        Req_Game_MncgOrder = 4025,
-        Rep_Game_MncgOrder = 4026,
-        Req_Game_MncgOrderCancel = 4027,
-        Rep_Game_MncgOrderCancel = 4028,
+        Req_Game_Order = 4025,
+        Rep_Game_Order = 4026,
+        Req_Game_OrderCancel = 4027,
+        Rep_Game_OrderCancel = 4028,
         Req_Game_MncgExchange = 4029,
         Rep_Game_MncgExchange = 4030,
         Req_Game_MncgEditStockList = 4031,
@@ -143,12 +150,8 @@ export namespace pb {
         Rep_Game_CgdsList = 4034,
         Req_Game_CgdsReg = 4035,
         Rep_Game_CgdsReg = 4036,
-        Req_Game_CgdsOrder = 4037,
-        Rep_Game_CgdsOrder = 4038,
-        Req_Game_CgdsOrderCancel = 4039,
-        Rep_Game_CgdsOrderCancel = 4040,
-        Req_Game_CgdsRanking = 4041,
-        Rep_Game_CgdsRanking = 4042,
+        Req_Game_CgdsRanking = 4037,
+        Rep_Game_CgdsRanking = 4038,
         RoomMsgRange_BEG = 5000,
         RoomMsgRange_END = 5999,
         Req_Room_Create = 5003,
@@ -173,7 +176,14 @@ export namespace pb {
         S2S_Update_PlayerProperty = 10003,
         S2S_Update_PlayerGameCounter = 10005,
         S2S_OrderCancel = 10007,
-        S2S_Sync_Cgds = 10009
+        S2S_Sync_Cgds = 10009,
+        S2S_Set_CgdsTitle = 10011,
+        S2S_Set_CgdsLogo = 100013,
+        S2S_Set_CgdsUrl = 100015,
+        S2S_Set_CgdsConf = 10017,
+        S2S_Set_CgdsAward = 10019,
+        S2S_Open_Cgds = 10021,
+        S2S_Close_Cgds = 10023
     }
 
     /** Properties of a MessageHead. */
@@ -3672,102 +3682,6 @@ export namespace pb {
 
         /**
          * Converts this CmdGetGameOperations to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a CmdGetGameOperationsReply. */
-    interface ICmdGetGameOperationsReply {
-
-        /** CmdGetGameOperationsReply err */
-        err?: (pb.IErrorInfo|null);
-
-        /** CmdGetGameOperationsReply operations */
-        operations?: (pb.IGameOperations|null);
-    }
-
-    /** Represents a CmdGetGameOperationsReply. */
-    class CmdGetGameOperationsReply implements ICmdGetGameOperationsReply {
-
-        /**
-         * Constructs a new CmdGetGameOperationsReply.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: pb.ICmdGetGameOperationsReply);
-
-        /** CmdGetGameOperationsReply err. */
-        public err?: (pb.IErrorInfo|null);
-
-        /** CmdGetGameOperationsReply operations. */
-        public operations?: (pb.IGameOperations|null);
-
-        /**
-         * Creates a new CmdGetGameOperationsReply instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns CmdGetGameOperationsReply instance
-         */
-        public static create(properties?: pb.ICmdGetGameOperationsReply): pb.CmdGetGameOperationsReply;
-
-        /**
-         * Encodes the specified CmdGetGameOperationsReply message. Does not implicitly {@link pb.CmdGetGameOperationsReply.verify|verify} messages.
-         * @param message CmdGetGameOperationsReply message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: pb.ICmdGetGameOperationsReply, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified CmdGetGameOperationsReply message, length delimited. Does not implicitly {@link pb.CmdGetGameOperationsReply.verify|verify} messages.
-         * @param message CmdGetGameOperationsReply message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: pb.ICmdGetGameOperationsReply, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a CmdGetGameOperationsReply message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns CmdGetGameOperationsReply
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetGameOperationsReply;
-
-        /**
-         * Decodes a CmdGetGameOperationsReply message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns CmdGetGameOperationsReply
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetGameOperationsReply;
-
-        /**
-         * Verifies a CmdGetGameOperationsReply message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a CmdGetGameOperationsReply message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns CmdGetGameOperationsReply
-         */
-        public static fromObject(object: { [k: string]: any }): pb.CmdGetGameOperationsReply;
-
-        /**
-         * Creates a plain object from a CmdGetGameOperationsReply message. Also converts values to other types if specified.
-         * @param message CmdGetGameOperationsReply
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: pb.CmdGetGameOperationsReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this CmdGetGameOperationsReply to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -7943,8 +7857,8 @@ export namespace pb {
         /** CmdCgdsRegReply result */
         result?: (pb.IErrorInfo|null);
 
-        /** CmdCgdsRegReply state */
-        state?: (pb.ICgdsStateItem|null);
+        /** CmdCgdsRegReply cgdsStateItem */
+        cgdsStateItem?: (pb.ICgdsStateItem|null);
     }
 
     /** Represents a CmdCgdsRegReply. */
@@ -7959,8 +7873,8 @@ export namespace pb {
         /** CmdCgdsRegReply result. */
         public result?: (pb.IErrorInfo|null);
 
-        /** CmdCgdsRegReply state. */
-        public state?: (pb.ICgdsStateItem|null);
+        /** CmdCgdsRegReply cgdsStateItem. */
+        public cgdsStateItem?: (pb.ICgdsStateItem|null);
 
         /**
          * Creates a new CmdCgdsRegReply instance using the specified properties.

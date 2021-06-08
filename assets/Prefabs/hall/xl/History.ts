@@ -7,6 +7,7 @@ import GameCfg from "../../../sctiprs/game/GameCfg";
 import { pb } from '../../../protos/proto';
 import GameCfgText from '../../../sctiprs/GameText';
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
+import GameData from "../../../sctiprs/GameData";
 
 const { ccclass, property } = cc._decorator;
 @ccclass
@@ -29,9 +30,59 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     title: cc.Label = null;
 
+    _preNodes: [];
 
     protected onEnable() {
-        // ActionUtils.openLayer(this.node);
+
+        GlobalEvent.on(EventCfg.HISTORYOPTDATA, () => {
+
+            let nodes = this._preNodes;
+
+            let ts = nodes[8].getComponent(cc.Label).string;
+            let data = {
+                code: nodes[2].getComponent(cc.Label).string,
+            }
+
+            let dex = -1, items;
+            if (GameCfg.GameType == pb.GameType.QiHuo) {
+                items = GameCfgText.getQHItemInfo(data.code);
+            } else {
+                items = GameCfgText.getGPItemInfo(data.code);
+            }
+
+            data.code = items[0];
+            GameCfg.data[0].data = [];
+            GameCfg.data[0].name = items[1];
+            GameCfg.data[0].code = items[0];
+            GameCfg.data[0].circulate = items[4];
+            GameCfg.GAMEFUPAN = true;
+            // GameCfg.finalfund = parseInt(nodes[7].getComponent(cc.Label).string) + GameCfg.ziChan;
+            // GameCfg.allRate = nodes[6].getComponent(cc.Label).string;
+            GameCfg.huizhidatas = parseInt(nodes[10].getComponent(cc.Label).string) + 1;
+            GameData.huizhidatas = parseInt(nodes[9].getComponent(cc.Label).string) + 1;
+
+            let cache = cc.sys.localStorage.getItem(ts + 'cache');
+            if (!cache) {
+                console.log('没有保存此记录');
+                return;
+            }
+            GameCfg.GameSet = JSON.parse(cc.sys.localStorage.getItem(ts + 'set'));
+
+            console.log(JSON.parse(cache));
+            GameCfg.enterGameCache = JSON.parse(cache);
+            GameCfg.historyType = GameCfg.GameType;
+            if (GameCfg.GameType == pb.GameType.QiHuo) {
+                GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, JSON.parse(cache));
+            } else {
+                GlobalEvent.emit(EventCfg.onCmdQuoteQuery, JSON.parse(cache));
+            }
+
+        }, this);
+    }
+
+
+    onDestroy() {
+        GlobalEvent.off(EventCfg.HISTORYOPTDATA);
     }
 
     onShow() {
@@ -161,7 +212,9 @@ export default class NewClass extends cc.Component {
         else if (name == 'btnFuPan') {
 
             //TODO进入游戏
+
             let nodes = event.target.parent.children;
+            this._preNodes = nodes
             let ts = nodes[8].getComponent(cc.Label).string;
 
             if (GameCfg.TIMETEMP.length <= 0) {
@@ -170,46 +223,7 @@ export default class NewClass extends cc.Component {
             }
             console.log(JSON.stringify(GameCfg.TIMETEMP));
 
-            let cb = () => {
-                GameCfg.huizhidatas = parseInt(nodes[10].getComponent(cc.Label).string) + 1;
-                let data = {
-                    code: nodes[2].getComponent(cc.Label).string,
-                }
-
-                let dex = -1, items;
-                if (GameCfg.GameType == pb.GameType.QiHuo) {
-                    items = GameCfgText.getQHItemInfo(data.code);
-                } else {
-                    items = GameCfgText.getGPItemInfo(data.code);
-                }
-
-                data.code = items[0];
-                GameCfg.data[0].data = [];
-                GameCfg.data[0].name = items[1];
-                GameCfg.data[0].code = items[0];
-                GameCfg.data[0].circulate = items[4];
-                GameCfg.GAMEFUPAN = true;
-                GameCfg.finalfund = parseInt(nodes[7].getComponent(cc.Label).string) + GameCfg.ziChan;
-                GameCfg.allRate = nodes[6].getComponent(cc.Label).string;
-
-                let cache = cc.sys.localStorage.getItem(ts + 'cache');
-                if (!cache) {
-                    console.log('没有保存此记录');
-                    return;
-                }
-
-                console.log(JSON.parse(cache));
-                GameCfg.enterGameCache = JSON.parse(cache);
-                GameCfg.historyType = GameCfg.GameType;
-                if (GameCfg.GameType == pb.GameType.QiHuo) {
-                    GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, JSON.parse(cache));
-                } else {
-                    GlobalEvent.emit(EventCfg.onCmdQuoteQuery, JSON.parse(cache));
-                }
-
-            }
-            GlobalHandle.GetGameOperations(ts, cb);
-
+            GlobalHandle.GetGameOperations(ts);
         }
 
         //清空记录

@@ -531,7 +531,6 @@ export default class DrawData {
         return data;
     }
 
-
     //获取本轮收益
     public static getCurrentEarning(index) {
 

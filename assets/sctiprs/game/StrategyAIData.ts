@@ -16,21 +16,40 @@ export default class StrategyAIData {
 
     public static AICount = 0;   //策略次数
 
+    public static buyCount = 0;   //買入次數
+
+    public static sellCount = 0;  //賣出次數
+
+    public static hostory = [];
+
+
+    //策略买入
     public static onBuyFunc() {
         this.AICount++;
 
+        this.buyCount++;
         let gpdata = GameCfg.data[0].data;
 
         this.preBuyprice = gpdata[GameCfg.huizhidatas - 1].close;
 
         GlobalEvent.emit(EventCfg.ONADDMARK, { type: 12, index: GameCfg.huizhidatas });
+
+        let item = {
+            start: GameCfg.huizhidatas - 1,
+            end: null,
+            rate: null,
+        }
+        this.hostory.push(item);
     }
 
-
+    //策略卖出
     public static onSellFunc() {
+        if (this.sellCount >= this.buyCount) {
+            return;
+        }
 
         this.AICount++;
-
+        this.sellCount++;
         let gpdata = GameCfg.data[0].data;
 
         let curClose = parseFloat(gpdata[GameCfg.huizhidatas - 1].close);
@@ -47,7 +66,24 @@ export default class StrategyAIData {
 
         GlobalEvent.emit(EventCfg.ONADDMARK, { type: 13, index: GameCfg.huizhidatas });
 
+        if (!this.hostory[this.hostory.length - 1].end) {
+            this.hostory[this.hostory.length - 1].end = GameCfg.huizhidatas - 1;
+            this.hostory[this.hostory.length - 1].rate = rate;
+        }
     }
+
+    //比较相似
+    public static onCompareReult() {
+        let datas = GameCfg.fill;
+        datas.forEach(el => {
+            for (let i = 0; i < this.hostory.length; i++) {
+                if (el.start >= this.hostory[i].start)
+            }
+        })
+
+    }
+
+
 
 
     public static onClearData() {

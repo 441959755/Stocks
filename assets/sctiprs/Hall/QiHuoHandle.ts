@@ -140,9 +140,9 @@ export default class NewClass extends cc.Component {
 				}
 
 			} else if (items[4] == 'ZJS') {
-				//	let str = items[1].slice(-items.length, -2);
+				let str = items[1].slice(-items.length, -2);
 				//	if (this.XJArr.type.indexOf(str) == -1) {
-				this.XJArr.type.push(items[1]);
+				this.XJArr.type.push(str);
 				//	}
 				//	if (!this.XJArr.main[this.XJArr.type.length - 1]) {
 				this.XJArr.main.push(items[1]);

@@ -66,6 +66,7 @@ Socket.prototype = {
 
 		console.log(decoded);
 
+
 		let info = PB.selectBlackData(decoded.messageId, badBuf);
 
 		var callback = this.queue[decoded.messageId];
@@ -124,6 +125,7 @@ Socket.prototype = {
 			//     dataView.setInt8(i, buff[i]);
 			// }
 			//发送包头
+
 
 			buff && (this.ws.send(buff.buffer.slice(buff.byteOffset, buff.byteLength + buff.byteOffset)));
 

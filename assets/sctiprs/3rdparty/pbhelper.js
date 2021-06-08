@@ -88,9 +88,6 @@ PBHelper.prototype = {
     onCmdGameOverConvertToBuff(datas) {
         let CmdGameOver = pb.CmdGameOver;
         let data = datas.result;
-        let items = {
-            items: datas.operations,
-        }
 
         let message = CmdGameOver.create({
             result: {
@@ -110,10 +107,15 @@ PBHelper.prototype = {
                 kStartup: data.k_startup,
                 kStop: data.k_stop,
             },
-            operations: items,
+            operations: {
+                items: datas.operations,
+                junXian: [],
+            }
         })
 
         let buff = CmdGameOver.encode(message).finish();
+
+        // let decode = CmdGameOver.decode(new Uint8Array(buff));
 
         return buff;
     },
@@ -202,8 +204,8 @@ PBHelper.prototype = {
 
     // 查询游戏操作步骤应答
     onCmdGetGameOperationsReply(buff) {
-        let CmdGetGameOperationsReply = pb.CmdGetGameOperationsReply;
-        let decode = CmdGetGameOperationsReply.decode(new Uint8Array(buff));
+        let GameOperations = pb.GameOperations;
+        let decode = GameOperations.decode(new Uint8Array(buff));
         console.log('查询游戏操作步骤应答' + JSON.stringify(decode));
         return decode;
 

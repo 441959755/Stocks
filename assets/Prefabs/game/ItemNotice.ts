@@ -18,6 +18,8 @@ export default class NewClass extends cc.Component {
 
     Pindex = null;
 
+    _zbStr = null;
+
     onShow() {
         this.label.string = this.text;
         if (this.text == '曙光初现') {
@@ -81,7 +83,7 @@ export default class NewClass extends cc.Component {
             let pos = this.node.convertToWorldSpaceAR(cc.v2(0, 0));
 
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                GlobalEvent.emit('clickTipsInfoPos', { pos: pos, str: this.text });
+                GlobalEvent.emit('clickTipsInfoPos', { pos: pos, str: this._zbStr });
             } else {
                 GlobalEvent.emit('clickTipsInfoPos', { pos: pos, str: this.infoCfg });
             }

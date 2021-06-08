@@ -2,6 +2,7 @@ import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
 import GameCfg from './GameCfg';
 import { pb } from '../../protos/proto';
+import GameData from '../GameData';
 
 const { ccclass, property } = cc._decorator;
 
@@ -69,9 +70,13 @@ export default class NewClass extends cc.Component {
 
         if (GameCfg.GAMEFUPAN) {
             this.showFlag = true;
-        } else {
+        }
+        if (!GameCfg.GAMEFUPAN) {
             //添加开始标签
             this.onAddMard({ type: 1, index: GameCfg.huizhidatas });
+        }
+        else {
+            this.onAddMard({ type: 1, index: GameData.huizhidatas });
         }
     }
 
@@ -102,7 +107,7 @@ export default class NewClass extends cc.Component {
 
                 this.markNodes[posInfo.index].node.position = posInfo.lowPos;
                 this.markNodes[posInfo.index].node.x += cc.ext.hz_width;
-                this.markNodes[posInfo.index].node.y -= 10;
+                //   this.markNodes[posInfo.index].node.y -= 10;
                 // this.markNodes[posInfo.index].node.
             }
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
@@ -201,7 +206,7 @@ export default class NewClass extends cc.Component {
         node.active = false;
         node.x = -9999;
 
-        this.saveHistoryMark(info.index, info.type);
+        // this.saveHistoryMark(info.index, info.type);
     }
 
     saveHistoryMark(inde, type) {

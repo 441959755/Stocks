@@ -278,6 +278,8 @@ export default class NewClass extends cc.Component {
         GameCfg.history.allRate = GameCfg.allRate;
         cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
         cc.sys.localStorage.setItem(ts + 'cache', JSON.stringify(GameCfg.enterGameCache));
+
+        cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
     }
 
     onBtnClick(event, data) {

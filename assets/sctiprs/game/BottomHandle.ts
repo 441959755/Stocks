@@ -5,6 +5,7 @@ import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
 import DrawData from './DrawData';
 import GameData from '../GameData';
+import StrategyAIData from './StrategyAIData';
 
 const { ccclass, property } = cc._decorator;
 @ccclass
@@ -191,6 +192,8 @@ export default class NewClass extends cc.Component {
 
 				this.buyData = [];
 
+				StrategyAIData.onSellFunc();
+
 			},
 			this
 		);
@@ -343,10 +346,43 @@ export default class NewClass extends cc.Component {
 			this.ziChan = GameCfg.finalfund;
 
 			let opt = GameCfg.GameOperationItem;
+
 			opt.forEach((el, index) => {
+				GameCfg.huizhidatas = el.kOffset + 1;
 				if (GameCfg.GameType == pb.GameType.DingXiang) {
-					GameCfg.huizhidatas = el.kOffset;
-					GlobalEvent.emit(EventCfg.CLICKFCBTN, el.volume);
+					if (el.opId == pb.GameOperationId.Ask) {
+						this._type = 1;
+						GlobalEvent.emit(EventCfg.CLICKFCBTN, el.volume);
+						GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
+					} else if (el.opId == pb.GameOperationId.Bid) {
+						this._type = 2;
+						GlobalEvent.emit(EventCfg.CLICKFCBTN, el.volume);
+						GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
+					}
+					else if (el.opId == pb.GameOperationId.Wait) {
+						this.onClick({ target: { name: 'gwBtn' } }, null);
+					}
+					else if (el.opId == pb.GameOperationId.Hold) {
+						this.onClick({ targte: { name: 'cyBtn' } }, null);
+					}
+				}
+				else if (GameCfg.GameType == pb.GameType.QiHuo) {
+					if (el.opId == pb.GameOperationId.Long) {
+						this.onClick({ target: { name: 'qhxl_kd' } }, null);
+					}
+					else if (el.opId == pb.GameOperationId.Short) {
+						this.onClick({ target: { name: 'qhxl_kk' } }, null);
+					}
+					else if (el.opId == pb.GameOperationId.Close_Force) {
+						this.onClick({ target: { name: 'qhxl_fs' } }, null);
+					}
+					else if (el.opId == pb.GameOperationId.Wait) {
+						this.onClick({ target: { name: 'gwBtn' } }, null);
+					}
+					else if (el.opId == pb.GameOperationId.Hold) {
+						this.onClick({ targte: { name: 'cyBtn' } }, null);
+					}
+
 				}
 			})
 
@@ -704,6 +740,15 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
 				this.setRoundNumber('mrBtn');
 			}
+			if (!GameCfg.GAMEFUPAN) {
+				let item = {
+					opId: pb.GameOperationId.Long,
+					volume: 1,
+					kOffset: GameCfg.huizhidatas - 1,
+
+				}
+				GameCfg.GameOperationItem.push(item);
+			}
 		}
 		//反手
 		else if (name == 'qhxl_fs') {
@@ -763,6 +808,15 @@ export default class NewClass extends cc.Component {
 				this.setRoundNumber('mrBtn');
 			}
 			GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
+			if (!GameCfg.GAMEFUPAN) {
+				let item = {
+					opId: pb.GameOperationId.Close_Force,
+					volume: 1,
+					kOffset: GameCfg.huizhidatas - 1,
+
+				}
+				GameCfg.GameOperationItem.push(item);
+			}
 		}
 		else if (name == 'qhxl_kk') {
 
@@ -818,6 +872,15 @@ export default class NewClass extends cc.Component {
 				kdNodes[4].active = true;
 				GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
 				this.setRoundNumber('mrBtn1');
+			}
+			if (!GameCfg.GAMEFUPAN) {
+				let item = {
+					opId: pb.GameOperationId.Short,
+					volume: 1,
+					kOffset: GameCfg.huizhidatas - 1,
+
+				}
+				GameCfg.GameOperationItem.push(item);
 			}
 
 		}

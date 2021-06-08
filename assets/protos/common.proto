@@ -87,9 +87,16 @@ enum ErrorCode {
 	CS_INVALID_PASSWORD = 5;	// 无效密码
 	CS_TIMEOUT = 6;				// 执行超时
 	CS_CHECK_FAILURE = 7;		// 条件检查失败
-	CS_CHECK_FAILURE_CAPITAL = 8;// 资产检查失败
-	CS_CHECK_FAILURE_STOCK = 9;	// 股票检查失败
+	CS_CHECK_FAILURE_CAPITAL =8;//资金账户检查失败
+	CS_CHECK_FAILURE_STOCK = 9;	// 股票账户检查失败
 	CS_CHECK_FAILURE_ORDER = 10;// 无效的订单号
+	CS_NO_TRADING_TIME = 11;	// 非交易时间
+	CS_NO_REGISTRY_TIME = 12;	// 非报名时间
+	CS_NO_REGISTRY = 13;		// 没有报名
+	CS_ALREADY_REGISTRY = 14;	// 已经报名
+	CS_CHECK_FAILURE_CGDS_ID=15;// 无效的炒股大赛ID
+	CS_CHECK_FAILURE_TIME = 16;	// 在比赛时间范围外
+	CS_CHECK_FAILURE_PROPERTY=17;// 玩家属性检查失败
 
 	CS_ROOM_INVALID = 100;		// 无效的房间ID
 	CS_ROOM_FULL = 101;			// 房间已满
@@ -159,7 +166,7 @@ enum MessageId {
 	Req_Game_QueryGameResult = 4007;	// 查询游戏结果：CmdQueryGameResult
 	Rep_Game_QueryGameResult = 4008;	// 查询游戏结果应答：CmdQueryGameResultReply
 	Req_Game_GetGameOperation = 4009;	// 查询游戏操作步骤：CmdGetGameOperations
-	Rep_Game_GetGameOperation = 4010;	// 查询游戏操作步骤应答：CmdGetGameOperationsReply
+	Rep_Game_GetGameOperation = 4010;	// 查询游戏操作步骤应答：GameOperations
 	// 双盲训练相关
 	Req_Game_SmxlReport = 4011;			// 查询双盲训练月报：空
 	Rep_Game_SmxlReport = 4012;			// 查询双盲训练月报应答：CmdGetSmxlReportReply
@@ -178,11 +185,11 @@ enum MessageId {
 	// 模拟炒股和炒股大赛共用
 	Req_Game_OrderQuery = 4023;			// 查询交易记录：CmdQueryStockOrder
 	Rep_Game_OrderQuery = 4024;			// 查询交易记录应答：StockOrderList
+	Req_Game_Order = 4025;				// 股票委托：CmdStockOrder
+	Rep_Game_Order = 4026;				// 股票委托应答：CmdStockOrderReply
+	Req_Game_OrderCancel = 4027;		// 撤销股票委托：CmdStockOrderCancel
+	Rep_Game_OrderCancel = 4028;		// 撤销股票委托：ErrorInfo
 	// 模拟炒股
-	Req_Game_MncgOrder = 4025;			// 股票委托：CmdStockOrder
-	Rep_Game_MncgOrder = 4026;			// 股票委托应答：CmdStockOrderReply
-	Req_Game_MncgOrderCancel = 4027;	// 撤销股票委托：CmdStockOrderCancel
-	Rep_Game_MncgOrderCancel = 4028;	// 撤销股票委托：ErrorInfo
 	Req_Game_MncgExchange = 4029;		// 金币和资产互相兑换：CmdMncgExchange
 	Rep_Game_MncgExchange = 4030;		// 金币和资产互相兑换应答：CmdMncgExchangeReply
 	Req_Game_MncgEditStockList = 4031;	// 关注/删除股票：CmdMncgEditStock
@@ -192,12 +199,8 @@ enum MessageId {
 	Rep_Game_CgdsList = 4034;			// 获取炒股大赛列表应答：CgdsList
 	Req_Game_CgdsReg = 4035;			// 报名炒股大赛：CmdCgdsReg
 	Rep_Game_CgdsReg = 4036;			// 报名炒股大赛应答：CmdCgdsRegReply
-	Req_Game_CgdsOrder = 4037;			// 炒股大赛股票委托：CmdStockOrder
-	Rep_Game_CgdsOrder = 4038;			// 炒股大赛股票委托应答：CmdStockOrderReply
-	Req_Game_CgdsOrderCancel = 4039;	// 炒股大赛撤销股票委托：CmdStockOrderCancel
-	Rep_Game_CgdsOrderCancel = 4040;	// 炒股大赛撤销股票委托应答：ErrorInfo
-	Req_Game_CgdsRanking = 4041;		// 获取炒股大赛排行榜：CmdCgdsRanking
-	Rep_Game_CgdsRanking = 4042;		// 获取炒股大赛排行榜应答：RankingList
+	Req_Game_CgdsRanking = 4037;		// 获取炒股大赛排行榜：CmdCgdsRanking
+	Rep_Game_CgdsRanking = 4038;		// 获取炒股大赛排行榜应答：RankingList
 
 	// 房间相关
 	RoomMsgRange_BEG = 5000;	// 房间消息范围开始
@@ -229,6 +232,13 @@ enum MessageId {
 	S2S_Update_PlayerGameCounter = 10005;	// 更新玩家游戏结果计数器：GameCounter
 	S2S_OrderCancel = 10007;				// 撤销订单：CmdStockOrderCancel
 	S2S_Sync_Cgds = 10009;					// 同步炒股大赛数据：CgdsList
+	S2S_Set_CgdsTitle = 10011;				// 设置炒股大赛标题：CgdsConf
+	S2S_Set_CgdsLogo = 100013;				// 设置炒股大赛Logo：CgdsConf
+	S2S_Set_CgdsUrl = 100015;				// 设置炒股大赛URL：CgdsConf
+	S2S_Set_CgdsConf = 10017;				// 设置炒股大赛Conf：CgdsConf
+	S2S_Set_CgdsAward = 10019;				// 设置炒股大赛Award：CgdsConf
+	S2S_Open_Cgds = 10021;					// 创建炒股大赛：CgdsConf
+	S2S_Close_Cgds = 10023;					// 关闭炒股大赛：CgdsConf
 	
 }
 

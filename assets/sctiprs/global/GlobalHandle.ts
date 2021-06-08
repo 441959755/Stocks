@@ -289,9 +289,18 @@ export default class GlobalHandle {
         socket.send(pb.MessageId.Req_Game_GetGameOperation, PB.onCmdGetGameOperations(data), (info) => {
             console.log(JSON.stringify(info));
             if (!info.err) {
-                if (info.operations && info.operations.items) {
-                    GameCfg.GameOperationItem = info.operations.items;
-                    cb && (cb);
+                if (info && info.items) {
+                    GameCfg.GameOperationItem = info.items;
+                    // for (let i = 0; i < info.items.length; i++) {
+                    //     if (GameCfg.GameOperationItem.length == 0) {
+                    //         GameCfg.GameOperationItem.push(info.items[i]);
+                    //     }
+                    //     else if (GameCfg.GameOperationItem.indexOf(info.items[i]) == -1) {
+                    //         GameCfg.GameOperationItem.push(info.items[i]);
+                    //     }
+                    // }
+                    //  cb && (cb);
+                    GlobalEvent.emit(EventCfg.HISTORYOPTDATA);
                 }
             }
         })

@@ -141,6 +141,13 @@ $root.pb = (function () {
      * @property {number} CS_CHECK_FAILURE_CAPITAL=8 CS_CHECK_FAILURE_CAPITAL value
      * @property {number} CS_CHECK_FAILURE_STOCK=9 CS_CHECK_FAILURE_STOCK value
      * @property {number} CS_CHECK_FAILURE_ORDER=10 CS_CHECK_FAILURE_ORDER value
+     * @property {number} CS_NO_TRADING_TIME=11 CS_NO_TRADING_TIME value
+     * @property {number} CS_NO_REGISTRY_TIME=12 CS_NO_REGISTRY_TIME value
+     * @property {number} CS_NO_REGISTRY=13 CS_NO_REGISTRY value
+     * @property {number} CS_ALREADY_REGISTRY=14 CS_ALREADY_REGISTRY value
+     * @property {number} CS_CHECK_FAILURE_CGDS_ID=15 CS_CHECK_FAILURE_CGDS_ID value
+     * @property {number} CS_CHECK_FAILURE_TIME=16 CS_CHECK_FAILURE_TIME value
+     * @property {number} CS_CHECK_FAILURE_PROPERTY=17 CS_CHECK_FAILURE_PROPERTY value
      * @property {number} CS_ROOM_INVALID=100 CS_ROOM_INVALID value
      * @property {number} CS_ROOM_FULL=101 CS_ROOM_FULL value
      * @property {number} CS_ROOM_FAIL_CHECKIN=102 CS_ROOM_FAIL_CHECKIN value
@@ -159,6 +166,13 @@ $root.pb = (function () {
         values[valuesById[8] = "CS_CHECK_FAILURE_CAPITAL"] = 8;
         values[valuesById[9] = "CS_CHECK_FAILURE_STOCK"] = 9;
         values[valuesById[10] = "CS_CHECK_FAILURE_ORDER"] = 10;
+        values[valuesById[11] = "CS_NO_TRADING_TIME"] = 11;
+        values[valuesById[12] = "CS_NO_REGISTRY_TIME"] = 12;
+        values[valuesById[13] = "CS_NO_REGISTRY"] = 13;
+        values[valuesById[14] = "CS_ALREADY_REGISTRY"] = 14;
+        values[valuesById[15] = "CS_CHECK_FAILURE_CGDS_ID"] = 15;
+        values[valuesById[16] = "CS_CHECK_FAILURE_TIME"] = 16;
+        values[valuesById[17] = "CS_CHECK_FAILURE_PROPERTY"] = 17;
         values[valuesById[100] = "CS_ROOM_INVALID"] = 100;
         values[valuesById[101] = "CS_ROOM_FULL"] = 101;
         values[valuesById[102] = "CS_ROOM_FAIL_CHECKIN"] = 102;
@@ -228,10 +242,10 @@ $root.pb = (function () {
      * @property {number} Rep_Game_CgsGetSeasonRank=4022 Rep_Game_CgsGetSeasonRank value
      * @property {number} Req_Game_OrderQuery=4023 Req_Game_OrderQuery value
      * @property {number} Rep_Game_OrderQuery=4024 Rep_Game_OrderQuery value
-     * @property {number} Req_Game_MncgOrder=4025 Req_Game_MncgOrder value
-     * @property {number} Rep_Game_MncgOrder=4026 Rep_Game_MncgOrder value
-     * @property {number} Req_Game_MncgOrderCancel=4027 Req_Game_MncgOrderCancel value
-     * @property {number} Rep_Game_MncgOrderCancel=4028 Rep_Game_MncgOrderCancel value
+     * @property {number} Req_Game_Order=4025 Req_Game_Order value
+     * @property {number} Rep_Game_Order=4026 Rep_Game_Order value
+     * @property {number} Req_Game_OrderCancel=4027 Req_Game_OrderCancel value
+     * @property {number} Rep_Game_OrderCancel=4028 Rep_Game_OrderCancel value
      * @property {number} Req_Game_MncgExchange=4029 Req_Game_MncgExchange value
      * @property {number} Rep_Game_MncgExchange=4030 Rep_Game_MncgExchange value
      * @property {number} Req_Game_MncgEditStockList=4031 Req_Game_MncgEditStockList value
@@ -240,12 +254,8 @@ $root.pb = (function () {
      * @property {number} Rep_Game_CgdsList=4034 Rep_Game_CgdsList value
      * @property {number} Req_Game_CgdsReg=4035 Req_Game_CgdsReg value
      * @property {number} Rep_Game_CgdsReg=4036 Rep_Game_CgdsReg value
-     * @property {number} Req_Game_CgdsOrder=4037 Req_Game_CgdsOrder value
-     * @property {number} Rep_Game_CgdsOrder=4038 Rep_Game_CgdsOrder value
-     * @property {number} Req_Game_CgdsOrderCancel=4039 Req_Game_CgdsOrderCancel value
-     * @property {number} Rep_Game_CgdsOrderCancel=4040 Rep_Game_CgdsOrderCancel value
-     * @property {number} Req_Game_CgdsRanking=4041 Req_Game_CgdsRanking value
-     * @property {number} Rep_Game_CgdsRanking=4042 Rep_Game_CgdsRanking value
+     * @property {number} Req_Game_CgdsRanking=4037 Req_Game_CgdsRanking value
+     * @property {number} Rep_Game_CgdsRanking=4038 Rep_Game_CgdsRanking value
      * @property {number} RoomMsgRange_BEG=5000 RoomMsgRange_BEG value
      * @property {number} RoomMsgRange_END=5999 RoomMsgRange_END value
      * @property {number} Req_Room_Create=5003 Req_Room_Create value
@@ -271,6 +281,13 @@ $root.pb = (function () {
      * @property {number} S2S_Update_PlayerGameCounter=10005 S2S_Update_PlayerGameCounter value
      * @property {number} S2S_OrderCancel=10007 S2S_OrderCancel value
      * @property {number} S2S_Sync_Cgds=10009 S2S_Sync_Cgds value
+     * @property {number} S2S_Set_CgdsTitle=10011 S2S_Set_CgdsTitle value
+     * @property {number} S2S_Set_CgdsLogo=100013 S2S_Set_CgdsLogo value
+     * @property {number} S2S_Set_CgdsUrl=100015 S2S_Set_CgdsUrl value
+     * @property {number} S2S_Set_CgdsConf=10017 S2S_Set_CgdsConf value
+     * @property {number} S2S_Set_CgdsAward=10019 S2S_Set_CgdsAward value
+     * @property {number} S2S_Open_Cgds=10021 S2S_Open_Cgds value
+     * @property {number} S2S_Close_Cgds=10023 S2S_Close_Cgds value
      */
     pb.MessageId = (function () {
         var valuesById = {}, values = Object.create(valuesById);
@@ -332,10 +349,10 @@ $root.pb = (function () {
         values[valuesById[4022] = "Rep_Game_CgsGetSeasonRank"] = 4022;
         values[valuesById[4023] = "Req_Game_OrderQuery"] = 4023;
         values[valuesById[4024] = "Rep_Game_OrderQuery"] = 4024;
-        values[valuesById[4025] = "Req_Game_MncgOrder"] = 4025;
-        values[valuesById[4026] = "Rep_Game_MncgOrder"] = 4026;
-        values[valuesById[4027] = "Req_Game_MncgOrderCancel"] = 4027;
-        values[valuesById[4028] = "Rep_Game_MncgOrderCancel"] = 4028;
+        values[valuesById[4025] = "Req_Game_Order"] = 4025;
+        values[valuesById[4026] = "Rep_Game_Order"] = 4026;
+        values[valuesById[4027] = "Req_Game_OrderCancel"] = 4027;
+        values[valuesById[4028] = "Rep_Game_OrderCancel"] = 4028;
         values[valuesById[4029] = "Req_Game_MncgExchange"] = 4029;
         values[valuesById[4030] = "Rep_Game_MncgExchange"] = 4030;
         values[valuesById[4031] = "Req_Game_MncgEditStockList"] = 4031;
@@ -344,12 +361,8 @@ $root.pb = (function () {
         values[valuesById[4034] = "Rep_Game_CgdsList"] = 4034;
         values[valuesById[4035] = "Req_Game_CgdsReg"] = 4035;
         values[valuesById[4036] = "Rep_Game_CgdsReg"] = 4036;
-        values[valuesById[4037] = "Req_Game_CgdsOrder"] = 4037;
-        values[valuesById[4038] = "Rep_Game_CgdsOrder"] = 4038;
-        values[valuesById[4039] = "Req_Game_CgdsOrderCancel"] = 4039;
-        values[valuesById[4040] = "Rep_Game_CgdsOrderCancel"] = 4040;
-        values[valuesById[4041] = "Req_Game_CgdsRanking"] = 4041;
-        values[valuesById[4042] = "Rep_Game_CgdsRanking"] = 4042;
+        values[valuesById[4037] = "Req_Game_CgdsRanking"] = 4037;
+        values[valuesById[4038] = "Rep_Game_CgdsRanking"] = 4038;
         values[valuesById[5000] = "RoomMsgRange_BEG"] = 5000;
         values[valuesById[5999] = "RoomMsgRange_END"] = 5999;
         values[valuesById[5003] = "Req_Room_Create"] = 5003;
@@ -375,6 +388,13 @@ $root.pb = (function () {
         values[valuesById[10005] = "S2S_Update_PlayerGameCounter"] = 10005;
         values[valuesById[10007] = "S2S_OrderCancel"] = 10007;
         values[valuesById[10009] = "S2S_Sync_Cgds"] = 10009;
+        values[valuesById[10011] = "S2S_Set_CgdsTitle"] = 10011;
+        values[valuesById[100013] = "S2S_Set_CgdsLogo"] = 100013;
+        values[valuesById[100015] = "S2S_Set_CgdsUrl"] = 100015;
+        values[valuesById[10017] = "S2S_Set_CgdsConf"] = 10017;
+        values[valuesById[10019] = "S2S_Set_CgdsAward"] = 10019;
+        values[valuesById[10021] = "S2S_Open_Cgds"] = 10021;
+        values[valuesById[10023] = "S2S_Close_Cgds"] = 10023;
         return values;
     })();
 
@@ -9779,226 +9799,6 @@ $root.pb = (function () {
         };
 
         return CmdGetGameOperations;
-    })();
-
-    pb.CmdGetGameOperationsReply = (function () {
-
-        /**
-         * Properties of a CmdGetGameOperationsReply.
-         * @memberof pb
-         * @interface ICmdGetGameOperationsReply
-         * @property {pb.IErrorInfo|null} [err] CmdGetGameOperationsReply err
-         * @property {pb.IGameOperations|null} [operations] CmdGetGameOperationsReply operations
-         */
-
-        /**
-         * Constructs a new CmdGetGameOperationsReply.
-         * @memberof pb
-         * @classdesc Represents a CmdGetGameOperationsReply.
-         * @implements ICmdGetGameOperationsReply
-         * @constructor
-         * @param {pb.ICmdGetGameOperationsReply=} [properties] Properties to set
-         */
-        function CmdGetGameOperationsReply(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * CmdGetGameOperationsReply err.
-         * @member {pb.IErrorInfo|null|undefined} err
-         * @memberof pb.CmdGetGameOperationsReply
-         * @instance
-         */
-        CmdGetGameOperationsReply.prototype.err = null;
-
-        /**
-         * CmdGetGameOperationsReply operations.
-         * @member {pb.IGameOperations|null|undefined} operations
-         * @memberof pb.CmdGetGameOperationsReply
-         * @instance
-         */
-        CmdGetGameOperationsReply.prototype.operations = null;
-
-        /**
-         * Creates a new CmdGetGameOperationsReply instance using the specified properties.
-         * @function create
-         * @memberof pb.CmdGetGameOperationsReply
-         * @static
-         * @param {pb.ICmdGetGameOperationsReply=} [properties] Properties to set
-         * @returns {pb.CmdGetGameOperationsReply} CmdGetGameOperationsReply instance
-         */
-        CmdGetGameOperationsReply.create = function create(properties) {
-            return new CmdGetGameOperationsReply(properties);
-        };
-
-        /**
-         * Encodes the specified CmdGetGameOperationsReply message. Does not implicitly {@link pb.CmdGetGameOperationsReply.verify|verify} messages.
-         * @function encode
-         * @memberof pb.CmdGetGameOperationsReply
-         * @static
-         * @param {pb.ICmdGetGameOperationsReply} message CmdGetGameOperationsReply message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CmdGetGameOperationsReply.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.err != null && Object.hasOwnProperty.call(message, "err"))
-                $root.pb.ErrorInfo.encode(message.err, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.operations != null && Object.hasOwnProperty.call(message, "operations"))
-                $root.pb.GameOperations.encode(message.operations, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified CmdGetGameOperationsReply message, length delimited. Does not implicitly {@link pb.CmdGetGameOperationsReply.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof pb.CmdGetGameOperationsReply
-         * @static
-         * @param {pb.ICmdGetGameOperationsReply} message CmdGetGameOperationsReply message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CmdGetGameOperationsReply.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a CmdGetGameOperationsReply message from the specified reader or buffer.
-         * @function decode
-         * @memberof pb.CmdGetGameOperationsReply
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {pb.CmdGetGameOperationsReply} CmdGetGameOperationsReply
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CmdGetGameOperationsReply.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdGetGameOperationsReply();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                    case 1:
-                        message.err = $root.pb.ErrorInfo.decode(reader, reader.uint32());
-                        break;
-                    case 2:
-                        message.operations = $root.pb.GameOperations.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a CmdGetGameOperationsReply message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof pb.CmdGetGameOperationsReply
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {pb.CmdGetGameOperationsReply} CmdGetGameOperationsReply
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CmdGetGameOperationsReply.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a CmdGetGameOperationsReply message.
-         * @function verify
-         * @memberof pb.CmdGetGameOperationsReply
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CmdGetGameOperationsReply.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.err != null && message.hasOwnProperty("err")) {
-                var error = $root.pb.ErrorInfo.verify(message.err);
-                if (error)
-                    return "err." + error;
-            }
-            if (message.operations != null && message.hasOwnProperty("operations")) {
-                var error = $root.pb.GameOperations.verify(message.operations);
-                if (error)
-                    return "operations." + error;
-            }
-            return null;
-        };
-
-        /**
-         * Creates a CmdGetGameOperationsReply message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof pb.CmdGetGameOperationsReply
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {pb.CmdGetGameOperationsReply} CmdGetGameOperationsReply
-         */
-        CmdGetGameOperationsReply.fromObject = function fromObject(object) {
-            if (object instanceof $root.pb.CmdGetGameOperationsReply)
-                return object;
-            var message = new $root.pb.CmdGetGameOperationsReply();
-            if (object.err != null) {
-                if (typeof object.err !== "object")
-                    throw TypeError(".pb.CmdGetGameOperationsReply.err: object expected");
-                message.err = $root.pb.ErrorInfo.fromObject(object.err);
-            }
-            if (object.operations != null) {
-                if (typeof object.operations !== "object")
-                    throw TypeError(".pb.CmdGetGameOperationsReply.operations: object expected");
-                message.operations = $root.pb.GameOperations.fromObject(object.operations);
-            }
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a CmdGetGameOperationsReply message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof pb.CmdGetGameOperationsReply
-         * @static
-         * @param {pb.CmdGetGameOperationsReply} message CmdGetGameOperationsReply
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CmdGetGameOperationsReply.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.err = null;
-                object.operations = null;
-            }
-            if (message.err != null && message.hasOwnProperty("err"))
-                object.err = $root.pb.ErrorInfo.toObject(message.err, options);
-            if (message.operations != null && message.hasOwnProperty("operations"))
-                object.operations = $root.pb.GameOperations.toObject(message.operations, options);
-            return object;
-        };
-
-        /**
-         * Converts this CmdGetGameOperationsReply to JSON.
-         * @function toJSON
-         * @memberof pb.CmdGetGameOperationsReply
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CmdGetGameOperationsReply.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return CmdGetGameOperationsReply;
     })();
 
     pb.CmdGetSmxlReportReply = (function () {
@@ -21310,7 +21110,7 @@ $root.pb = (function () {
          * @memberof pb
          * @interface ICmdCgdsRegReply
          * @property {pb.IErrorInfo|null} [result] CmdCgdsRegReply result
-         * @property {pb.ICgdsStateItem|null} [state] CmdCgdsRegReply state
+         * @property {pb.ICgdsStateItem|null} [cgdsStateItem] CmdCgdsRegReply cgdsStateItem
          */
 
         /**
@@ -21337,12 +21137,12 @@ $root.pb = (function () {
         CmdCgdsRegReply.prototype.result = null;
 
         /**
-         * CmdCgdsRegReply state.
-         * @member {pb.ICgdsStateItem|null|undefined} state
+         * CmdCgdsRegReply cgdsStateItem.
+         * @member {pb.ICgdsStateItem|null|undefined} cgdsStateItem
          * @memberof pb.CmdCgdsRegReply
          * @instance
          */
-        CmdCgdsRegReply.prototype.state = null;
+        CmdCgdsRegReply.prototype.cgdsStateItem = null;
 
         /**
          * Creates a new CmdCgdsRegReply instance using the specified properties.
@@ -21370,8 +21170,8 @@ $root.pb = (function () {
                 writer = $Writer.create();
             if (message.result != null && Object.hasOwnProperty.call(message, "result"))
                 $root.pb.ErrorInfo.encode(message.result, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
-                $root.pb.CgdsStateItem.encode(message.state, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.cgdsStateItem != null && Object.hasOwnProperty.call(message, "cgdsStateItem"))
+                $root.pb.CgdsStateItem.encode(message.cgdsStateItem, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
 
@@ -21410,7 +21210,7 @@ $root.pb = (function () {
                         message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
                         break;
                     case 2:
-                        message.state = $root.pb.CgdsStateItem.decode(reader, reader.uint32());
+                        message.cgdsStateItem = $root.pb.CgdsStateItem.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -21452,10 +21252,10 @@ $root.pb = (function () {
                 if (error)
                     return "result." + error;
             }
-            if (message.state != null && message.hasOwnProperty("state")) {
-                var error = $root.pb.CgdsStateItem.verify(message.state);
+            if (message.cgdsStateItem != null && message.hasOwnProperty("cgdsStateItem")) {
+                var error = $root.pb.CgdsStateItem.verify(message.cgdsStateItem);
                 if (error)
-                    return "state." + error;
+                    return "cgdsStateItem." + error;
             }
             return null;
         };
@@ -21477,10 +21277,10 @@ $root.pb = (function () {
                     throw TypeError(".pb.CmdCgdsRegReply.result: object expected");
                 message.result = $root.pb.ErrorInfo.fromObject(object.result);
             }
-            if (object.state != null) {
-                if (typeof object.state !== "object")
-                    throw TypeError(".pb.CmdCgdsRegReply.state: object expected");
-                message.state = $root.pb.CgdsStateItem.fromObject(object.state);
+            if (object.cgdsStateItem != null) {
+                if (typeof object.cgdsStateItem !== "object")
+                    throw TypeError(".pb.CmdCgdsRegReply.cgdsStateItem: object expected");
+                message.cgdsStateItem = $root.pb.CgdsStateItem.fromObject(object.cgdsStateItem);
             }
             return message;
         };
@@ -21500,12 +21300,12 @@ $root.pb = (function () {
             var object = {};
             if (options.defaults) {
                 object.result = null;
-                object.state = null;
+                object.cgdsStateItem = null;
             }
             if (message.result != null && message.hasOwnProperty("result"))
                 object.result = $root.pb.ErrorInfo.toObject(message.result, options);
-            if (message.state != null && message.hasOwnProperty("state"))
-                object.state = $root.pb.CgdsStateItem.toObject(message.state, options);
+            if (message.cgdsStateItem != null && message.hasOwnProperty("cgdsStateItem"))
+                object.cgdsStateItem = $root.pb.CgdsStateItem.toObject(message.cgdsStateItem, options);
             return object;
         };
 
@@ -29828,10 +29628,6 @@ $root.pb = (function () {
                     case 4036:
                     case 4037:
                     case 4038:
-                    case 4039:
-                    case 4040:
-                    case 4041:
-                    case 4042:
                     case 5000:
                     case 5999:
                     case 5003:
@@ -29857,6 +29653,13 @@ $root.pb = (function () {
                     case 10005:
                     case 10007:
                     case 10009:
+                    case 10011:
+                    case 100013:
+                    case 100015:
+                    case 10017:
+                    case 10019:
+                    case 10021:
+                    case 10023:
                         break;
                 }
             if (message.buf != null && message.hasOwnProperty("buf"))
@@ -30110,19 +29913,19 @@ $root.pb = (function () {
                 case 4024:
                     message.id = 4024;
                     break;
-                case "Req_Game_MncgOrder":
+                case "Req_Game_Order":
                 case 4025:
                     message.id = 4025;
                     break;
-                case "Rep_Game_MncgOrder":
+                case "Rep_Game_Order":
                 case 4026:
                     message.id = 4026;
                     break;
-                case "Req_Game_MncgOrderCancel":
+                case "Req_Game_OrderCancel":
                 case 4027:
                     message.id = 4027;
                     break;
-                case "Rep_Game_MncgOrderCancel":
+                case "Rep_Game_OrderCancel":
                 case 4028:
                     message.id = 4028;
                     break;
@@ -30158,29 +29961,13 @@ $root.pb = (function () {
                 case 4036:
                     message.id = 4036;
                     break;
-                case "Req_Game_CgdsOrder":
+                case "Req_Game_CgdsRanking":
                 case 4037:
                     message.id = 4037;
                     break;
-                case "Rep_Game_CgdsOrder":
+                case "Rep_Game_CgdsRanking":
                 case 4038:
                     message.id = 4038;
-                    break;
-                case "Req_Game_CgdsOrderCancel":
-                case 4039:
-                    message.id = 4039;
-                    break;
-                case "Rep_Game_CgdsOrderCancel":
-                case 4040:
-                    message.id = 4040;
-                    break;
-                case "Req_Game_CgdsRanking":
-                case 4041:
-                    message.id = 4041;
-                    break;
-                case "Rep_Game_CgdsRanking":
-                case 4042:
-                    message.id = 4042;
                     break;
                 case "RoomMsgRange_BEG":
                 case 5000:
@@ -30281,6 +30068,34 @@ $root.pb = (function () {
                 case "S2S_Sync_Cgds":
                 case 10009:
                     message.id = 10009;
+                    break;
+                case "S2S_Set_CgdsTitle":
+                case 10011:
+                    message.id = 10011;
+                    break;
+                case "S2S_Set_CgdsLogo":
+                case 100013:
+                    message.id = 100013;
+                    break;
+                case "S2S_Set_CgdsUrl":
+                case 100015:
+                    message.id = 100015;
+                    break;
+                case "S2S_Set_CgdsConf":
+                case 10017:
+                    message.id = 10017;
+                    break;
+                case "S2S_Set_CgdsAward":
+                case 10019:
+                    message.id = 10019;
+                    break;
+                case "S2S_Open_Cgds":
+                case 10021:
+                    message.id = 10021;
+                    break;
+                case "S2S_Close_Cgds":
+                case 10023:
+                    message.id = 10023;
                     break;
             }
             if (object.buf != null)
@@ -31403,10 +31218,6 @@ $root.pb = (function () {
                     case 4036:
                     case 4037:
                     case 4038:
-                    case 4039:
-                    case 4040:
-                    case 4041:
-                    case 4042:
                     case 5000:
                     case 5999:
                     case 5003:
@@ -31432,6 +31243,13 @@ $root.pb = (function () {
                     case 10005:
                     case 10007:
                     case 10009:
+                    case 10011:
+                    case 100013:
+                    case 100015:
+                    case 10017:
+                    case 10019:
+                    case 10021:
+                    case 10023:
                         break;
                 }
             if (message.buf != null && message.hasOwnProperty("buf"))
@@ -31692,19 +31510,19 @@ $root.pb = (function () {
                 case 4024:
                     message.id = 4024;
                     break;
-                case "Req_Game_MncgOrder":
+                case "Req_Game_Order":
                 case 4025:
                     message.id = 4025;
                     break;
-                case "Rep_Game_MncgOrder":
+                case "Rep_Game_Order":
                 case 4026:
                     message.id = 4026;
                     break;
-                case "Req_Game_MncgOrderCancel":
+                case "Req_Game_OrderCancel":
                 case 4027:
                     message.id = 4027;
                     break;
-                case "Rep_Game_MncgOrderCancel":
+                case "Rep_Game_OrderCancel":
                 case 4028:
                     message.id = 4028;
                     break;
@@ -31740,29 +31558,13 @@ $root.pb = (function () {
                 case 4036:
                     message.id = 4036;
                     break;
-                case "Req_Game_CgdsOrder":
+                case "Req_Game_CgdsRanking":
                 case 4037:
                     message.id = 4037;
                     break;
-                case "Rep_Game_CgdsOrder":
+                case "Rep_Game_CgdsRanking":
                 case 4038:
                     message.id = 4038;
-                    break;
-                case "Req_Game_CgdsOrderCancel":
-                case 4039:
-                    message.id = 4039;
-                    break;
-                case "Rep_Game_CgdsOrderCancel":
-                case 4040:
-                    message.id = 4040;
-                    break;
-                case "Req_Game_CgdsRanking":
-                case 4041:
-                    message.id = 4041;
-                    break;
-                case "Rep_Game_CgdsRanking":
-                case 4042:
-                    message.id = 4042;
                     break;
                 case "RoomMsgRange_BEG":
                 case 5000:
@@ -31863,6 +31665,34 @@ $root.pb = (function () {
                 case "S2S_Sync_Cgds":
                 case 10009:
                     message.id = 10009;
+                    break;
+                case "S2S_Set_CgdsTitle":
+                case 10011:
+                    message.id = 10011;
+                    break;
+                case "S2S_Set_CgdsLogo":
+                case 100013:
+                    message.id = 100013;
+                    break;
+                case "S2S_Set_CgdsUrl":
+                case 100015:
+                    message.id = 100015;
+                    break;
+                case "S2S_Set_CgdsConf":
+                case 10017:
+                    message.id = 10017;
+                    break;
+                case "S2S_Set_CgdsAward":
+                case 10019:
+                    message.id = 10019;
+                    break;
+                case "S2S_Open_Cgds":
+                case 10021:
+                    message.id = 10021;
+                    break;
+                case "S2S_Close_Cgds":
+                case 10023:
+                    message.id = 10023;
                     break;
             }
             if (object.buf != null)

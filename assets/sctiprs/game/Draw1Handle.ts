@@ -381,6 +381,7 @@ export default class NewClass extends cc.Component {
         this.minRs24 = this.Rs24[cc.ext.beg_end[0]];
 
         let viweData = GameCfg.data[0].data;
+        if (viweData.length <= 0) { return }
         this.topVol = 0;
         this.bottomVol = viweData[0].value;
 

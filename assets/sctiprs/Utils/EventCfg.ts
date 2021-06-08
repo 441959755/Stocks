@@ -18,6 +18,8 @@ export default {
 	OPENPLAYERINFO: 'OPENPLAYERINFO',//玩家信息界面
 
 	onCmdQuoteQuery: 'onCmdQuoteQuery', //查询行情
+
+	HISTORYOPTDATA: 'GETHISTORYOPTDATA',
 	//hall
 	GOLDCHANGE: 'GOLDCHANGE', //金币改变
 

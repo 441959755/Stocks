@@ -831,45 +831,41 @@ export default class NewClass extends cc.Component {
         let str;
         if (id == 1) {
             str = '曙光初现';
-            if (!GameCfg.GAMEFUPAN) {
-                GlobalEvent.emit(EventCfg.CREATEBLOCK, 1);
-            }
+
+            GlobalEvent.emit(EventCfg.CREATEBLOCK, 1);
+
 
         } else if (id == 2) {
             str = '旭日东升';
-            if (!GameCfg.GAMEFUPAN) {
-                GlobalEvent.emit(EventCfg.CREATEBLOCK, 2);
-            }
+
+            GlobalEvent.emit(EventCfg.CREATEBLOCK, 2);
+
         } else if (id == 3) {
             str = '红三兵';
-            if (!GameCfg.GAMEFUPAN) {
-                GlobalEvent.emit(EventCfg.CREATEBLOCK, 3);
-            }
+
+            GlobalEvent.emit(EventCfg.CREATEBLOCK, 3);
+
         } else if (id == 4) {
             str = '看涨吞没';
-            if (!GameCfg.GAMEFUPAN) {
-                GlobalEvent.emit(EventCfg.CREATEBLOCK, 4);
-            }
+
+            GlobalEvent.emit(EventCfg.CREATEBLOCK, 4);
+
         } else if (id == 5) {
             str = '三只乌鸦';
-            if (!GameCfg.GAMEFUPAN) {
-                GlobalEvent.emit(EventCfg.CREATEBLOCK, 5);
-            }
+
+            GlobalEvent.emit(EventCfg.CREATEBLOCK, 5);
+
         } else if (id == 6) {
             str = '看跌吞没';
-            if (!GameCfg.GAMEFUPAN) {
-                GlobalEvent.emit(EventCfg.CREATEBLOCK, 6);
-            }
+
+            GlobalEvent.emit(EventCfg.CREATEBLOCK, 6);
+
         } else if (id == 7) {
             str = '乌云盖顶';
-            if (!GameCfg.GAMEFUPAN) {
-                GlobalEvent.emit(EventCfg.CREATEBLOCK, 7);
-            }
+            GlobalEvent.emit(EventCfg.CREATEBLOCK, 7);
         } else if (id == 8) {
             str = '倾盆大雨';
-            if (!GameCfg.GAMEFUPAN) {
-                GlobalEvent.emit(EventCfg.CREATEBLOCK, 8);
-            }
+            GlobalEvent.emit(EventCfg.CREATEBLOCK, 8);
         }
 
         else if (id == 11) {
@@ -924,9 +920,9 @@ export default class NewClass extends cc.Component {
         index && (itemHandle.Pindex = index)
         itemHandle.onShow();
 
-        if (!GameCfg.GAMEFUPAN && GameCfg.GameType != pb.GameType.ShuangMang) {
-            GameCfg.notice.push([id, GameCfg.huizhidatas - 1]);
-        }
+        // if (!GameCfg.GAMEFUPAN && GameCfg.GameType != pb.GameType.ShuangMang) {
+        //     GameCfg.notice.push([id, GameCfg.huizhidatas - 1]);
+        // }
     }
 
     //检测均线策略
