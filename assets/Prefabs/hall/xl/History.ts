@@ -56,7 +56,7 @@ export default class NewClass extends cc.Component {
             GameCfg.data[0].code = items[0];
             GameCfg.data[0].circulate = items[4];
             GameCfg.GAMEFUPAN = true;
-            // GameCfg.finalfund = parseInt(nodes[7].getComponent(cc.Label).string) + GameCfg.ziChan;
+            // GameCfg.finalfund = GameCfg.ziChan;
             // GameCfg.allRate = nodes[6].getComponent(cc.Label).string;
             GameCfg.huizhidatas = parseInt(nodes[10].getComponent(cc.Label).string) + 1;
             GameData.huizhidatas = parseInt(nodes[9].getComponent(cc.Label).string) + 1;

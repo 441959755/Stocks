@@ -41376,7 +41376,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "lx_zbxljs_lh",
+    "_name": "node1",
     "_objFlags": 0,
     "_parent": {
       "__id__": 902

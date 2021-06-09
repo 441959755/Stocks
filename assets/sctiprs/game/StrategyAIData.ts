@@ -74,12 +74,32 @@ export default class StrategyAIData {
 
     //比较相似
     public static onCompareReult() {
+        let info = {
+            low: [],
+            middle: [],
+            high: [],
+        }
         let datas = GameCfg.fill;
         datas.forEach(el => {
             for (let i = 0; i < this.hostory.length; i++) {
-                if (el.start >= this.hostory[i].start)
+                //完全无重合：判断为相似度低
+                if ((el.start < this.hostory[i].start && el.end < this.hostory[i].start) || el.start > this.hostory[i].end && el.end > this.hostory[i].end) {
+                    info.low.push(el);
+                }
+                else {
+                    let diff1 = Math.abs(el.start - this.hostory[i].start);
+                    let diff2 = Math.abs(el.end - this.hostory[i].end);
+                    if (diff1 + diff2 <= 6) {
+                        info.high.push(el);
+                    }
+                    else {
+                        info.middle.push(el);
+                    }
+                }
             }
         })
+
+        return info;
 
     }
 

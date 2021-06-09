@@ -147,6 +147,8 @@ export default class NewClass extends cc.Component {
     }
 
     showContentZB() {
+
+        let info = StrategyAIData.onCompareReult();
         let gpData = GameCfg.data[0].data;
         let boxs = this.contentZB.children;
         {
@@ -180,29 +182,55 @@ export default class NewClass extends cc.Component {
             //策略信号次数   相似度次数
             let la = boxs[4].getChildByName('richText').getComponent(cc.Label);
 
-            la.string = StrategyAIData.AICount + '';
+            la.string = StrategyAIData.buyCount + '';
 
 
             let la1 = boxs[4].getChildByName('richText1').getComponent(cc.Label);
+
+            la1.string = info.high.length + '';
 
         }
 
         {
             //策略信号收益    相似度次数
             let la = boxs[5].getChildByName('richText').getComponent(cc.Label);
+            la.string = (StrategyAIData.profitrate * 100).toFixed(2) + '%';
 
             let la1 = boxs[5].getChildByName('richText1').getComponent(cc.Label);
+            la1.string = info.middle.length + '';
         }
 
         { //你的训练收益    相似度次数
             let la = boxs[6].getChildByName('richText').getComponent(cc.Label);
+            la.string = (GameCfg.allRate * 100).toFixed(2) + '%';
 
             let la1 = boxs[6].getChildByName('richText1').getComponent(cc.Label);
+            la1.string = info.low.length + '';
         }
 
         {
             //综合相似度
             let la = boxs[7].getChildByName('richText').getComponent(cc.Label);
+            let point = (3 * info.high.length + info.middle.length) / (3 * info.high.length + info.middle.length + 2 * info.low.length) * 100;
+
+            la.string = point + '%';
+            let node1 = boxs[7].getChildByName('node1');
+            let node2 = boxs[7].getChildByName('node2');
+            let node3 = boxs[7].getChildByName('node3');
+
+            node1.active = false;
+            node2.active = false;
+            node3.active = false;
+            if (point >= 85) {
+                node1.active = true;
+            }
+            else if (point >= 60) {
+                node2.active = true;
+            }
+            else {
+                node3.active = true;
+            }
+
         }
     }
 

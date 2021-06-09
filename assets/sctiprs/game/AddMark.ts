@@ -53,18 +53,6 @@ export default class NewClass extends cc.Component {
 
     }
 
-    //复盘的本地数据
-    // createFuPanData() {
-    //     let data = GameCfg.mark;
-    //     if (data) {
-
-    //         data.forEach((el) => {
-    //             if (el) {
-    //                 this.onAddMard({ type: el[1], index: el[0] })
-    //             }
-    //         });
-    //     }
-    // }
 
     onEnable() {
 
@@ -206,17 +194,7 @@ export default class NewClass extends cc.Component {
         node.active = false;
         node.x = -9999;
 
-        // this.saveHistoryMark(info.index, info.type);
     }
-
-    saveHistoryMark(inde, type) {
-        //保存游戏记录
-        if (!GameCfg.GAMEFUPAN && GameCfg.GameType != pb.GameType.ShuangMang) {
-
-            GameCfg.mark.push([inde, type])
-        }
-    }
-
 
     //显示所有标签
     onMarkAllShow() {
