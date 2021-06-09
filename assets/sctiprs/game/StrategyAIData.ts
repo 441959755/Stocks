@@ -100,11 +100,7 @@ export default class StrategyAIData {
         })
 
         return info;
-
     }
-
-
-
 
     public static onClearData() {
         this.Ycount = 0;

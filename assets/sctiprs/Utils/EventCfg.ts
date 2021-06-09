@@ -95,4 +95,6 @@ export default {
 	OPENSELECTBOX: 'OPENSELECTBOX',//分仓买入卖出
 
 	CLICKFCBTN: 'CLICKFCBTN',//点击选择分仓
+
+	SETMARKCOLOR: 'SETMARKCOLOR',
 };

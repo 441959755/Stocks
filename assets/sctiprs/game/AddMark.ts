@@ -3,6 +3,7 @@ import EventCfg from '../Utils/EventCfg';
 import GameCfg from './GameCfg';
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
+import StrategyAIData from './StrategyAIData';
 
 const { ccclass, property } = cc._decorator;
 
@@ -25,23 +26,20 @@ export default class NewClass extends cc.Component {
     ZBItem: cc.Prefab = null;       //指标AI标签
 
     @property(cc.Prefab)
-    ZItem: cc.Prefab = null;     //指标玩家标签
+    Zb: cc.Prefab = null;     //指标玩家标签
+
+    @property(cc.Prefab)
+    Zs: cc.Prefab = null;     //指标玩家标签
 
     markNodes = [];
 
     ratio = 1;
-
-    showFlag = false;
 
     rWidth = 0;
     rHeight = 0;
 
     onLoad() {
         this.node.removeAllChildren();
-
-        // if (GameCfg.GAMEFUPAN) {
-        //     this.createFuPanData();
-        // }
 
         GlobalEvent.on(EventCfg.ONADDMARK, this.onAddMard.bind(this), this);
 
@@ -51,14 +49,62 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on(EventCfg.ADDMARKHIDEORSHOW, (flag) => { this.node.active = flag }, this);
 
+        GlobalEvent.on(EventCfg.SETMARKCOLOR, this.setMarkColor.bind(this), this);
+    }
+
+    //
+    setMarkColor() {
+        let info = StrategyAIData.onCompareReult();
+
+        info.low.forEach(el => {
+            if (this.markNodes[el.start]) {
+                let nodes = this.markNodes[el.start].children;
+                nodes[0].active = true;
+                nodes[1].active = false;
+                nodes[2].active = false;
+            }
+            if (this.markNodes[el.end]) {
+                let nodes = this.markNodes[el.end].children;
+                nodes[0].active = true;
+                nodes[1].active = false;
+                nodes[2].active = false;
+            }
+        })
+
+        info.middle.forEach(el => {
+            if (this.markNodes[el.start]) {
+                let nodes = this.markNodes[el.start].children;
+                nodes[1].active = true;
+                nodes[0].active = false;
+                nodes[2].active = false;
+            }
+            if (this.markNodes[el.end]) {
+                let nodes = this.markNodes[el.end].children;
+                nodes[1].active = true;
+                nodes[0].active = false;
+                nodes[2].active = false;
+            }
+        })
+
+        info.high.forEach(el => {
+            if (this.markNodes[el.start]) {
+                let nodes = this.markNodes[el.start].children;
+                nodes[2].active = true;
+                nodes[0].active = false;
+                nodes[1].active = false;
+            }
+            if (this.markNodes[el.end]) {
+                let nodes = this.markNodes[el.end].children;
+                nodes[2].active = true;
+                nodes[0].active = false;
+                nodes[1].active = false;
+            }
+        })
+
     }
 
 
     onEnable() {
-
-        if (GameCfg.GAMEFUPAN) {
-            this.showFlag = true;
-        }
         if (!GameCfg.GAMEFUPAN) {
             //添加开始标签
             this.onAddMard({ type: 1, index: GameCfg.huizhidatas });
@@ -71,32 +117,28 @@ export default class NewClass extends cc.Component {
     onMarkRangeShowOrHide() {
         this.markNodes.forEach((el, i) => {
             if (el && el.node) {
-                //   
                 if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
                     el.node.active = false;
                 }
             }
-
         })
     }
 
 
     onMarkUpdate(posInfo) {
-
         this.onMarkRangeShowOrHide();
         if (this.markNodes[posInfo.index]) {
 
-            if (this.showFlag) {
-                this.markNodes[posInfo.index].node.active = true;
-            }
+            //  if (GameCfg.GAMEFUPAN) {
+            this.markNodes[posInfo.index].node.active = true;
+            //  }
 
             //开始标签
-            if (this.markNodes[posInfo.index] && this.markNodes[posInfo.index].type == 1) {
+            if (this.markNodes[posInfo.index - 1] && this.markNodes[posInfo.index - 1].type == 1) {
 
-                this.markNodes[posInfo.index].node.position = posInfo.lowPos;
-                this.markNodes[posInfo.index].node.x += cc.ext.hz_width;
-                //   this.markNodes[posInfo.index].node.y -= 10;
-                // this.markNodes[posInfo.index].node.
+                this.markNodes[posInfo.index - 1].node.position = posInfo.lowPos;
+                // this.markNodes[posInfo.index].node.x += cc.ext.hz_width;
+
             }
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                 if (this.markNodes[posInfo.index].type == 2 || this.markNodes[posInfo.index].type == 3) {
@@ -131,7 +173,6 @@ export default class NewClass extends cc.Component {
                 s = 2;
             }
             this.markNodes[posInfo.index].node.scale = s;
-
         }
     }
 
@@ -153,7 +194,7 @@ export default class NewClass extends cc.Component {
 
         } else if (info.type == 2) {
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                node = cc.instantiate(this.ZItem);
+                node = cc.instantiate(this.Zb);
             } else {
                 node = cc.instantiate(this.bItem);
             }
@@ -161,7 +202,7 @@ export default class NewClass extends cc.Component {
             inde = info.index - 1;
         } else if (info.type == 3) {
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                node = cc.instantiate(this.ZItem);
+                node = cc.instantiate(this.Zs);
             }
             else {
                 node = cc.instantiate(this.sItem);
@@ -193,14 +234,11 @@ export default class NewClass extends cc.Component {
 
         node.active = false;
         node.x = -9999;
-
     }
 
     //显示所有标签
     onMarkAllShow() {
-        //双盲
-        //  if (GameCfg.GameType == pb.GameType.ShuangMang) {
-        this.showFlag = true;
+
         this.markNodes.forEach((el, i) => {
             if (el && el.node) {
                 //   

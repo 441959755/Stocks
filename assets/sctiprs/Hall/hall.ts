@@ -36,6 +36,11 @@ export default class NewClass extends cc.Component {
 	QHhistoryLayer: cc.Node = null;
 
 	@property(cc.Prefab)
+	ZBhistoryPre: cc.Prefab = null;
+
+	ZBhistoryLayer: cc.Node = null;
+
+	@property(cc.Prefab)
 	otherhistoryPre: cc.Prefab = null;
 
 	otherhistoryLayer: cc.Node = null;
@@ -86,7 +91,6 @@ export default class NewClass extends cc.Component {
 	QHSetPre: cc.Prefab = null;
 
 	QHSetNode: cc.Node = null;
-
 
 
 	onLoad() {
@@ -320,6 +324,10 @@ export default class NewClass extends cc.Component {
 		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
 			pre = this.otherhistoryPre;
 			node = this.otherhistoryLayer;
+		}
+		else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+			pre = this.ZBhistoryPre;
+			node = this.ZBhistoryLayer;
 		}
 
 		if (!node) {

@@ -299,7 +299,7 @@ export default class GlobalHandle {
                     //         GameCfg.GameOperationItem.push(info.items[i]);
                     //     }
                     // }
-                    //  cb && (cb);
+                    // cb && (cb);
                     GlobalEvent.emit(EventCfg.HISTORYOPTDATA);
                 }
             }

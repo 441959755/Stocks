@@ -84,6 +84,11 @@ export default class NewClass extends cc.Component {
                 btnMyspic.active = true;
                 statBtn.active = true;
             }
+            else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                colseBtn.active = false;
+                btnMyspic.active = false;
+                statBtn.active = true;
+            }
 
         }, this);
     }
@@ -123,10 +128,12 @@ export default class NewClass extends cc.Component {
         }
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.GameName.string = '指标训练';
-
             colseBtn.active = true;
             btnMyspic.active = false;
             statBtn.active = false;
+            if (GameCfg.GAMEFUPAN) {
+                statBtn.active = true;
+            }
         }
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
             this.GameName.string = '定向训练';
@@ -151,7 +158,7 @@ export default class NewClass extends cc.Component {
         }
 
         if (GameCfg.GAMEFUPAN) {
-            //  this.rightNode && (this.rightNode.active = false);
+
             let tt = parseInt(GameCfg.history.allRate * 10000 + '') / 100;
 
             this.ALlRateLabel.string = (tt) + '%';
@@ -160,8 +167,7 @@ export default class NewClass extends cc.Component {
             } else {
                 this.ALlRateLabel.node.color = cc.Color.GREEN;
             }
-            // btnMyspic.active = false;
-            // statBtn.active = true;
+
         }
         colseBtn.active = false;
 

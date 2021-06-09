@@ -110,7 +110,7 @@ export default class NewClass extends cc.Component {
 
         //   this.saveTime = this.qhData.data[tt].day;
         if (GameCfg.GAMEFUPAN) {
-            tt = GameCfg.history.huizhidatas - 1;
+            tt = GameCfg.huizhidatas - 1;
             //    this.saveTime = this.qhData.data[tt].day;
         }
 

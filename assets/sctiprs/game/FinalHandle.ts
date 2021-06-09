@@ -196,6 +196,12 @@ export default class NewClass extends cc.Component {
             let la = boxs[5].getChildByName('richText').getComponent(cc.Label);
             la.string = (StrategyAIData.profitrate * 100).toFixed(2) + '%';
 
+            if (StrategyAIData.profitrate < 0) {
+                la.node.color = cc.Color.GREEN;
+            } else {
+                la.node.color = cc.Color.RED;
+            }
+
             let la1 = boxs[5].getChildByName('richText1').getComponent(cc.Label);
             la1.string = info.middle.length + '';
         }
@@ -203,6 +209,11 @@ export default class NewClass extends cc.Component {
         { //你的训练收益    相似度次数
             let la = boxs[6].getChildByName('richText').getComponent(cc.Label);
             la.string = (GameCfg.allRate * 100).toFixed(2) + '%';
+            if (GameCfg.allRate < 0) {
+                la.node.color = cc.Color.GREEN;
+            } else {
+                la.node.color = cc.Color.RED;
+            }
 
             let la1 = boxs[6].getChildByName('richText1').getComponent(cc.Label);
             la1.string = info.low.length + '';
@@ -211,9 +222,13 @@ export default class NewClass extends cc.Component {
         {
             //综合相似度
             let la = boxs[7].getChildByName('richText').getComponent(cc.Label);
-            let point = (3 * info.high.length + info.middle.length) / (3 * info.high.length + info.middle.length + 2 * info.low.length) * 100;
 
-            la.string = point + '%';
+            let point = (3 * info.high.length + info.middle.length) / (3 * info.high.length + info.middle.length + 2 * info.low.length) * 100;
+            if ((3 * info.high.length + info.middle.length + 2 * info.low.length) == 0) {
+                point = 0;
+            }
+
+            la.string = (point).toFixed(2) + '%';
             let node1 = boxs[7].getChildByName('node1');
             let node2 = boxs[7].getChildByName('node2');
             let node3 = boxs[7].getChildByName('node3');
@@ -299,15 +314,16 @@ export default class NewClass extends cc.Component {
     }
 
     saveHoistoryInfo(ts) {
-        //  console.log('GameCfg.history' + JSON.stringify(GameCfg.history));
         GameCfg.TIMETEMP.push(ts);
-        // GameCfg.history.huizhidatas = parseInt(JSON.stringify(GameCfg.huizhidatas));
-        GameCfg.history.huizhidatas = GameCfg.huizhidatas;
-        GameCfg.history.allRate = GameCfg.allRate;
         cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
         cc.sys.localStorage.setItem(ts + 'cache', JSON.stringify(GameCfg.enterGameCache));
 
         cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
+
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            let AiRate = StrategyAIData.profitrate * 100;
+            cc.sys.localStorage.setItem(ts + 'AIRATE', AiRate);
+        }
     }
 
     onBtnClick(event, data) {

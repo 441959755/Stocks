@@ -124,6 +124,9 @@ export default class NewClass extends cc.Component {
 	@property(cc.Node)
 	dieting: cc.Node = null;
 
+	@property(cc.Node)
+	xlzb: cc.Node = null;
+
 
 	onLoad() {
 		this.gpData = GameCfg.data[0].data;
@@ -237,7 +240,6 @@ export default class NewClass extends cc.Component {
 					let node = this.node.getChildByName('fupan');
 					node.active = true;
 					node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
-					// node.children[1].getComponent(cc.Label).string = this.gpData[0].day.replace(/-/g, '/') + '--' + this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
 					node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day)
 					let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameData.huizhidatas - 1].close) / this.gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
 					node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
@@ -245,6 +247,11 @@ export default class NewClass extends cc.Component {
 					node1.active = false;
 					let node2 = this.node.getChildByName('fupan1');
 					node2.active = true;
+				}
+				else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+					let node = this.node.getChildByName('fupan1');
+					node.active = true;
+					this.xlzb.active = true;
 				}
 			},
 			this
@@ -385,9 +392,10 @@ export default class NewClass extends cc.Component {
 					else if (el.opId == pb.GameOperationId.Hold) {
 						this.onClick({ target: { name: 'cyBtn' } }, null);
 					}
-
 				}
 			})
+
+			GlobalEvent.emit(EventCfg.SETMARKCOLOR);
 
 		}
 
@@ -542,6 +550,11 @@ export default class NewClass extends cc.Component {
 
 				this.priceLabel[0].string = '盈利操作次数：' + info.yCount;
 				this.priceLabel[1].string = '亏损操作次数：' + info.sCount;
+			}
+			else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+				let node = this.node.getChildByName('fupan1');
+				node.active = true;
+				this.xlzb.active = true;
 			}
 		} else {
 			let code = GameCfg.data[0].code;

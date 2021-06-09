@@ -64,7 +64,7 @@ export default class NewClass extends cc.Component {
 
     textInfo = [];
 
-    curState = null;
+    curState = 's';
 
     _str = null;
 
@@ -107,7 +107,7 @@ export default class NewClass extends cc.Component {
                     break;
                 }
             }
-            this.tipsLabel.string = str;
+            this.tipsLabel.string = data.str;
             this.tipsLabel.node.parent.active = true;
             if (this.timeCall) {
                 clearTimeout(this.timeCall);

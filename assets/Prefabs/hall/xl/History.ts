@@ -1,6 +1,5 @@
-//import ActionUtils from "../Utils/ActionUtils";
 
-import ActionUtils from "../../../sctiprs/Utils/ActionUtils";
+//import ActionUtils from "../../../sctiprs/Utils/ActionUtils";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import EventCfg from '../../../sctiprs/Utils/EventCfg';
 import GameCfg from "../../../sctiprs/game/GameCfg";
@@ -8,7 +7,7 @@ import { pb } from '../../../protos/proto';
 import GameCfgText from '../../../sctiprs/GameText';
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import GameData from "../../../sctiprs/GameData";
-
+let preNodes = []
 const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
@@ -30,13 +29,10 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     title: cc.Label = null;
 
-    _preNodes: [];
-
-    protected onEnable() {
-
+    onLoad() {
         GlobalEvent.on(EventCfg.HISTORYOPTDATA, () => {
 
-            let nodes = this._preNodes;
+            let nodes = preNodes;
 
             let ts = nodes[8].getComponent(cc.Label).string;
             let data = {
@@ -80,7 +76,6 @@ export default class NewClass extends cc.Component {
         }, this);
     }
 
-
     onDestroy() {
         GlobalEvent.off(EventCfg.HISTORYOPTDATA);
     }
@@ -111,6 +106,7 @@ export default class NewClass extends cc.Component {
         let sumEar = 0;
         let sumrate = 0;
         let it = 1;
+
         for (let i = datas.length - 1; i >= 0; i--) {
             if (TIMETEMP.indexOf(datas[i].ts) != -1 || GameCfg.GameType == pb.GameType.ShuangMang) {
                 let node = cc.instantiate(this.historyItem);
@@ -166,6 +162,31 @@ export default class NewClass extends cc.Component {
                     nodes[10].getComponent(cc.Label).string = datas[i].kStop;
                 }
 
+                if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                    let GameSet = cc.sys.localStorage.getItem(datas[i].ts + 'set');
+                    if (GameSet) {
+                        GameSet = JSON.parse(GameSet);
+                        nodes[12].getComponent(cc.Label).string = GameSet.select + ' ' + GameSet.strategy;
+                    }
+
+
+                    let AIrate = cc.sys.localStorage.getItem(datas[i].ts + 'AIRATE');
+
+                    if (AIrate) {
+                        nodes[11].getComponent(cc.Label).string = parseFloat(AIrate).toFixed(2) + '%';
+                        if (parseFloat(AIrate) > 0) {
+                            nodes[11].color = cc.Color.RED;
+                        }
+                        else if (parseFloat(AIrate) == 0) {
+                            nodes[11].color = cc.Color.WHITE;
+                        }
+                        else {
+                            nodes[11].color = cc.Color.GREEN;
+                        }
+                    }
+
+                }
+
                 sumEar += datas[i].userProfit;
 
                 sumrate += datas[i].userProfitRate;
@@ -174,7 +195,7 @@ export default class NewClass extends cc.Component {
         }
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
-            this.title.string = '双盲训练';
+            // this.title.string = '双盲训练';
             this.label.string = sumEar + '';
             if (sumEar > 0) {
                 this.label.node.color = cc.Color.RED;
@@ -185,11 +206,11 @@ export default class NewClass extends cc.Component {
             }
         }
         else if (GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.QiHuo) {
-            if (GameCfg.GameType == pb.GameType.DingXiang) {
-                this.title.string = '定向训练';
-            } else if (GameCfg.GameType == pb.GameType.QiHuo) {
-                this.title.string = '期货训练';
-            }
+            // if (GameCfg.GameType == pb.GameType.DingXiang) {
+            //     this.title.string = '定向训练';
+            // } else if (GameCfg.GameType == pb.GameType.QiHuo) {
+            //     this.title.string = '期货训练';
+            // }
 
             this.label.string = (sumrate).toFixed(2) + '%';
             if (sumrate > 0) {
@@ -200,6 +221,7 @@ export default class NewClass extends cc.Component {
                 this.label.node.color = cc.Color.WHITE;
             }
         }
+
     }
 
     onBtnClick(event, data) {
@@ -210,11 +232,8 @@ export default class NewClass extends cc.Component {
         }
         //点击复盘
         else if (name == 'btnFuPan') {
-
-            //TODO进入游戏
-
             let nodes = event.target.parent.children;
-            this._preNodes = nodes
+            preNodes = nodes;
             let ts = nodes[8].getComponent(cc.Label).string;
 
             if (GameCfg.TIMETEMP.length <= 0) {
