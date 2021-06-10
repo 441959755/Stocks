@@ -108,6 +108,21 @@ export default class NewClass extends cc.Component {
                 }
             }
         }, this);
+
+        if (GameData.ZBHistoryInfo.length > 0) {
+
+            let content = cc.find('New ScrollView/view/content', this.downBoxs[2]);
+
+            let item = content.children[0];
+
+            GameData.ZBHistoryInfo.forEach(el => {
+                let node = cc.instantiate(item);
+                content.addChild(node);
+
+                node.getComponent(cc.Label).string = el;
+            })
+
+        }
     }
 
     onEnable() {
@@ -486,11 +501,11 @@ export default class NewClass extends cc.Component {
 
     zhibiaoStartGameSet() {
         let data = {
-            ktype: 10,     //4 30分钟  5  60分钟  10  日   11周
+            ktype: null,    //4 30分钟  5  60分钟  10  日   11周
             kstyle: 0,      // 0随机行情   1震荡行情  2单边向上行情 3单边向下行情
             code: null,       //股票代码（0表示忽略和随机）
             from: null,       //// 开始时间戳（不能为0，查询日K行情的格式为：YYYYMMDD；查询分时行情的格式为：HHMMSS）
-            total: parseInt(GameData.ZBSet.KLine),  // K线条数
+            total: parseInt(GameData.ZBSet.KLine) + 1,  // K线条数
             to: 0,           //	// 结束时间戳（0表示忽略该参数；格式同from）
         }
         let items
@@ -524,6 +539,11 @@ export default class NewClass extends cc.Component {
             let arrStr = GameData.ZBSet.search.split(' ');
             items = GameCfgText.getGPItemInfo(arrStr[0]);
             data.code = items[0];
+            let code = data.code + '';
+            if (code.length >= 7) {
+                code = code.slice(1, 7);
+            }
+            ComUtils.saveHistory(code + '' + items[1]);
         }
 
         if (GameData.ZBSet.year != '随机') {

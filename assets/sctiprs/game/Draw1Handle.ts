@@ -181,7 +181,6 @@ export default class NewClass extends cc.Component {
             this.initData();
             this.onDraw();
         }, this);
-
     }
 
     //计算数据
@@ -208,7 +207,6 @@ export default class NewClass extends cc.Component {
 
         this.initData();
         this.onDraw();
-
         this.onShow();
     }
 

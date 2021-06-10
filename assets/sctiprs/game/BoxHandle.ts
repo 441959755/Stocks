@@ -93,7 +93,14 @@ export default class NewClass extends cc.Component {
                     this.ccLa.string = '持仓：';
 
                 } else {
-                    info.push(((datas[inde].price) / 10000).toFixed(2) + 'w');
+                    if (datas[inde].price >= 100000000) {
+                        info.push(((datas[inde].price) / 100000000).toFixed(2) + '亿');
+                    }
+                    else {
+                        info.push(((datas[inde].price) / 10000).toFixed(2) + '万');
+                    }
+
+
                     info.push((datas[inde].Rate).toFixed(2) + '%');
                     this.hsLa.string = (datas[inde].Rate).toFixed(2) + '%';
                 }

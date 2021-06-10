@@ -32,6 +32,7 @@ export default class NewClass extends cc.Component {
     Zs: cc.Prefab = null;     //指标玩家标签
 
     markNodes = [];
+    AIMarkNodes = [];
 
     ratio = 1;
 
@@ -55,16 +56,16 @@ export default class NewClass extends cc.Component {
     //
     setMarkColor() {
         let info = StrategyAIData.onCompareReult();
-
+        this.markNodes;
         info.low.forEach(el => {
             if (this.markNodes[el.start]) {
-                let nodes = this.markNodes[el.start].children;
+                let nodes = this.markNodes[el.start].node.children;
                 nodes[0].active = true;
                 nodes[1].active = false;
                 nodes[2].active = false;
             }
             if (this.markNodes[el.end]) {
-                let nodes = this.markNodes[el.end].children;
+                let nodes = this.markNodes[el.end].node.children;
                 nodes[0].active = true;
                 nodes[1].active = false;
                 nodes[2].active = false;
@@ -73,13 +74,13 @@ export default class NewClass extends cc.Component {
 
         info.middle.forEach(el => {
             if (this.markNodes[el.start]) {
-                let nodes = this.markNodes[el.start].children;
+                let nodes = this.markNodes[el.start].node.children;
                 nodes[1].active = true;
                 nodes[0].active = false;
                 nodes[2].active = false;
             }
             if (this.markNodes[el.end]) {
-                let nodes = this.markNodes[el.end].children;
+                let nodes = this.markNodes[el.end].node.children;
                 nodes[1].active = true;
                 nodes[0].active = false;
                 nodes[2].active = false;
@@ -88,13 +89,13 @@ export default class NewClass extends cc.Component {
 
         info.high.forEach(el => {
             if (this.markNodes[el.start]) {
-                let nodes = this.markNodes[el.start].children;
+                let nodes = this.markNodes[el.start].node.children;
                 nodes[2].active = true;
                 nodes[0].active = false;
                 nodes[1].active = false;
             }
             if (this.markNodes[el.end]) {
-                let nodes = this.markNodes[el.end].children;
+                let nodes = this.markNodes[el.end].node.children;
                 nodes[2].active = true;
                 nodes[0].active = false;
                 nodes[1].active = false;
@@ -119,6 +120,7 @@ export default class NewClass extends cc.Component {
             if (el && el.node) {
                 if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
                     el.node.active = false;
+                    this.AIMarkNodes[i] && (this.AIMarkNodes[i].node.active = false)
                 }
             }
         })
@@ -127,29 +129,59 @@ export default class NewClass extends cc.Component {
 
     onMarkUpdate(posInfo) {
         this.onMarkRangeShowOrHide();
+
+        //开始标签
+        if (this.markNodes[posInfo.index - 1] && this.markNodes[posInfo.index - 1].type == 1) {
+
+            this.markNodes[posInfo.index - 1].node.position = posInfo.lowPos;
+            // this.markNodes[posInfo.index].node.x += cc.ext.hz_width;
+            if (GameCfg.GAMEFUPAN) {
+                this.markNodes[posInfo.index - 1].node.active = true;
+            }
+            //放大
+            let s = cc.ext.hz_width / 15;
+
+            if (s <= 0.7) {
+                s = 0.7;
+            } else if (s >= 2) {
+                s = 2;
+            }
+            this.markNodes[posInfo.index - 1].node.scale = s;
+        }
+
+        if (this.AIMarkNodes[posInfo.index]) {
+            this.AIMarkNodes[posInfo.index].node.position = posInfo.lowPos;
+            this.AIMarkNodes[posInfo.index].node.y -= (this.AIMarkNodes[posInfo.index].node.height / 2 + 5)
+            if (GameCfg.GAMEFUPAN || GameCfg.GameSet.showSign) {
+                this.AIMarkNodes[posInfo.index].node.active = true;
+            }
+            else if (!GameCfg.GameSet.showSign) {
+                this.AIMarkNodes[posInfo.index].node.active = false;
+            }
+
+
+            //放大
+            let s = cc.ext.hz_width / 15;
+
+            if (s <= 0.7) {
+                s = 0.7;
+            } else if (s >= 2) {
+                s = 2;
+            }
+            this.AIMarkNodes[posInfo.index].node.scale = s;
+        }
+
         if (this.markNodes[posInfo.index]) {
 
-            //  if (GameCfg.GAMEFUPAN) {
-            this.markNodes[posInfo.index].node.active = true;
-            //  }
-
-            //开始标签
-            if (this.markNodes[posInfo.index - 1] && this.markNodes[posInfo.index - 1].type == 1) {
-
-                this.markNodes[posInfo.index - 1].node.position = posInfo.lowPos;
-                // this.markNodes[posInfo.index].node.x += cc.ext.hz_width;
-
+            if (GameCfg.GAMEFUPAN) {
+                this.markNodes[posInfo.index].node.active = true;
             }
+
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                 if (this.markNodes[posInfo.index].type == 2 || this.markNodes[posInfo.index].type == 3) {
                     this.markNodes[posInfo.index].node.position = posInfo.highPos;
                     this.markNodes[posInfo.index].node.y += (this.markNodes[posInfo.index].node.height / 2 + 5)
                 }
-                else {
-                    this.markNodes[posInfo.index].node.position = posInfo.lowPos;
-                    this.markNodes[posInfo.index].node.y -= (this.markNodes[posInfo.index].node.height / 2 + 5)
-                }
-
             }
             else {
                 //买入标签
@@ -165,11 +197,11 @@ export default class NewClass extends cc.Component {
             }
 
             //放大
-            let s = cc.ext.hz_width / 14;
+            let s = cc.ext.hz_width / 15;
 
             if (s <= 0.7) {
                 s = 0.7;
-            } else if (s >= 1.5) {
+            } else if (s >= 2) {
                 s = 2;
             }
             this.markNodes[posInfo.index].node.scale = s;
@@ -226,11 +258,18 @@ export default class NewClass extends cc.Component {
         }
         this.node.addChild(node);
 
+        if (info.type == 12 || info.type == 13) {
+            this.AIMarkNodes[inde] = {
+                node: node,
+                type: info.type,
+            };
+        } else {
+            this.markNodes[inde] = {
+                node: node,
+                type: info.type,
+            };
+        }
 
-        this.markNodes[inde] = {
-            node: node,
-            type: info.type,
-        };
 
         node.active = false;
         node.x = -9999;

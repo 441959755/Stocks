@@ -249,6 +249,17 @@ export default class ComUtils {
 			GameData.DXHistoryInfo = GameData.DXHistoryInfo;
 
 		}
+		else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+			if (GameData.ZBHistoryInfo.indexOf(code) == -1) {
+				GameData.ZBHistoryInfo.push(code);
+			}
+
+			if (GameData.ZBHistoryInfo.length > 20) {
+				GameData.ZBHistoryInfo.shift();
+			}
+
+			GameData.ZBHistoryInfo = GameData.ZBHistoryInfo;
+		}
 
 	}
 

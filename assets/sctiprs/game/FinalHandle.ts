@@ -341,7 +341,7 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = false;
             // GameCfg.history.huizhidatas = 0;
             GameCfg.history.allRate = 0;
-
+            StrategyAIData.onClearData();
             GameCfg.enterGameCache = null;
             GameCfg.GameOperationItem = [];
             //    GameCfg.ziChan = 100000;
@@ -361,26 +361,24 @@ export default class NewClass extends cc.Component {
             else if (GameCfg.GameType == pb.GameType.QiHuo) {
                 data = GameCfgText.getQHQHByRandom();
             }
+            else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                data = GameCfgText.getGPZBByRandom();
+            }
             if (data) {
                 let cb = () => {
                     GameCfg.huizhidatas = GameData.huizhidatas;
-
                     GameCfg.allRate = 0;
-
                     GameCfg.finalfund = 0;
                     GameCfg.fill = [];
                     GameCfg.blockHistoy = [];
                     GameCfg.mark = [];
                     GameCfg.notice = [];
                     GameCfg.GAMEFUPAN = false;
-                    //   GameCfg.history.huizhidatas = 0;
                     GameCfg.history.allRate = 0;
                     GameCfg.GameOperationItem = [];
-                    //   GameCfg.ziChan = 100000;
                     GlobalEvent.emit(EventCfg.LEVELCHANGE);
+                    StrategyAIData.onClearData();
                     cc.director.loadScene('game');
-
-                    // GameCfg.GAMEFUPAN = false;
                 }
 
                 GlobalHandle.onCmdGameStartReq(() => {
@@ -389,6 +387,9 @@ export default class NewClass extends cc.Component {
                     }
                     else if (GameCfg.GameType == pb.GameType.QiHuo) {
                         GlobalHandle.onCmdGameStartQuoteQueryQH(data, cb);
+                    }
+                    else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                        GlobalHandle.onCmdGameStartQuoteQuery(data, cb);
                     }
 
                 })

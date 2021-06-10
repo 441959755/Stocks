@@ -16525,7 +16525,7 @@
       "ctor": "Float64Array",
       "array": [
         -7.430000000000007,
-        -43.18900000000001,
+        -43.189,
         0,
         0,
         0,
@@ -16594,8 +16594,8 @@
     "_alignFlags": 45,
     "_left": 12.570000000000007,
     "_right": 27.429999999999993,
-    "_top": 46.769000000000005,
-    "_bottom": -39.608999999999995,
+    "_top": 46.769,
+    "_bottom": -39.609,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -18041,7 +18041,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 240,
       "height": 48
     },
     "_anchorPoint": {
@@ -18197,7 +18197,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 240,
       "height": 50
     },
     "_anchorPoint": {
@@ -50851,7 +50851,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 240,
       "height": 200
     },
     "_anchorPoint": {
@@ -50863,7 +50863,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        156.826,
+        177.112,
         -7.35,
         0,
         0,
@@ -50931,7 +50931,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        74.59199999999998,
+        54.30600000000004,
         -84.34100000000001,
         0,
         0,
@@ -51109,7 +51109,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 220,
       "height": 200
     },
     "_anchorPoint": {
@@ -51175,7 +51175,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 220,
       "height": 200
     },
     "_anchorPoint": {
@@ -51241,7 +51241,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 220,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -51306,7 +51306,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 56,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -51359,7 +51359,7 @@
     "_useOriginalSize": true,
     "_string": "均线",
     "_N$string": "均线",
-    "_fontSize": 32,
+    "_fontSize": 28,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -51371,7 +51371,7 @@
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 2,
+    "_N$overflow": 0,
     "_N$cacheMode": 0,
     "_id": "1dqXqxZV9KsZwaqe/MpBoZ"
   },
@@ -51469,7 +51469,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 220,
       "height": 54.4
     },
     "_resize": 1,

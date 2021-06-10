@@ -252,6 +252,7 @@ export default class NewClass extends cc.Component {
 					let node = this.node.getChildByName('fupan1');
 					node.active = true;
 					this.xlzb.active = true;
+					GlobalEvent.emit(EventCfg.SETMARKCOLOR);
 				}
 			},
 			this
@@ -359,7 +360,7 @@ export default class NewClass extends cc.Component {
 			opt.forEach((el, index) => {
 				GameCfg.huizhidatas = el.kOffset;
 				this.onSetMrCount();
-				if (GameCfg.GameType == pb.GameType.DingXiang) {
+				if (GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.ZhiBiao) {
 					if (el.opId == pb.GameOperationId.Ask) {
 						this._type = 1;
 						this.onClickCfBtn(el.volume);
@@ -395,7 +396,9 @@ export default class NewClass extends cc.Component {
 				}
 			})
 
-			GlobalEvent.emit(EventCfg.SETMARKCOLOR);
+			if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+				GlobalEvent.emit(EventCfg.SETMARKCOLOR);
+			}
 
 		}
 

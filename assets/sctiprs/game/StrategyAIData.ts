@@ -81,22 +81,63 @@ export default class StrategyAIData {
         }
         let datas = GameCfg.fill;
         datas.forEach(el => {
-            for (let i = 0; i < this.hostory.length; i++) {
-                //完全无重合：判断为相似度低
-                if ((el.start < this.hostory[i].start && el.end < this.hostory[i].start) || el.start > this.hostory[i].end && el.end > this.hostory[i].end) {
-                    info.low.push(el);
-                }
-                else {
-                    let diff1 = Math.abs(el.start - this.hostory[i].start);
-                    let diff2 = Math.abs(el.end - this.hostory[i].end);
-                    if (diff1 + diff2 <= 6) {
-                        info.high.push(el);
+
+            if (this.hostory.length == 0) {
+                info.low.push({
+                    start: el.start - 1,
+                    end: el.end,
+                    rate: el.rate,
+                });
+            }
+            else {
+                let t = 0;
+                for (let i = 0; i < this.hostory.length; i++) {
+                    //完全无重合：判断为相似度低
+                    if (((el.start - 1) < this.hostory[i].start && el.end < this.hostory[i].start) || (el.start - 1) > this.hostory[i].end && el.end > this.hostory[i].end) {
+                        if (t == 0) {
+                            t = 1;
+                        }
+
                     }
                     else {
-                        info.middle.push(el);
+
+                        let diff1 = Math.abs((el.start - 1) - this.hostory[i].start);
+                        let diff2 = Math.abs(el.end - this.hostory[i].end);
+                        if (diff1 + diff2 <= 6) {
+
+                            t = 2;
+                        }
+                        else {
+                            if (t == 0 || t == 1) {
+                                t = 3;
+                            }
+
+
+                        }
                     }
                 }
+
+                if (t == 1) {
+                    info.low.push({
+                        start: el.start - 1,
+                        end: el.end,
+                        rate: el.rate,
+                    });
+                } else if (t == 2) {
+                    info.high.push({
+                        start: el.start - 1,
+                        end: el.end,
+                        rate: el.rate,
+                    });
+                } else if (t == 3) {
+                    info.middle.push({
+                        start: el.start - 1,
+                        end: el.end,
+                        rate: el.rate,
+                    });
+                }
             }
+
         })
 
         return info;
@@ -110,6 +151,9 @@ export default class StrategyAIData {
         this.succRate = 0;
         this.succRate = 0;
         this.AICount = 0;
+        this.hostory = [];
+        this.sellCount = 0;
+        this.buyCount = 0;
     }
 
 }

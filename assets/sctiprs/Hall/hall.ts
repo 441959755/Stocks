@@ -8,6 +8,7 @@ import GameData from '../GameData';
 import DrawData from '../game/DrawData';
 import HttpUtils from '../common/net/HttpUtils';
 import GlobalHandle from '../global/GlobalHandle';
+import StrategyAIData from '../game/StrategyAIData';
 
 const { ccclass, property } = cc._decorator;
 
@@ -293,12 +294,10 @@ export default class NewClass extends cc.Component {
 		//	GameCfg.GameType = null;
 
 		GameCfg.GAMEFUPAN = false;
-		GameCfg.history.huizhidatas = 0;
-		GameCfg.history.allRate = 0;
-		//	GameCfg.history.deal = [];
+		StrategyAIData.onClearData();
+		GameCfg.enterGameCache = null;
 		GameCfg.data[0].data = [];
-		//	GameCfg.enterGameCache.startTime = null;
-		//	GameCfg.ziChan = 100000;
+
 	}
 
 

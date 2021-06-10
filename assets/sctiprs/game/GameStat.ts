@@ -120,6 +120,9 @@ export default class NewClass extends cc.Component {
 
                 let la2 = boxs[3].getChildByName('la3').getComponent(cc.Label);
                 la2.string = ((data.yCount / (data.yCount + data.sCount)) * 100).toFixed(2) + '';
+                if (data.yCount + data.sCount == 0) {
+                    la2.string = 0.00 + '%';
+                }
             }
 
             {

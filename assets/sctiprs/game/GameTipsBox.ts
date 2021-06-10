@@ -68,7 +68,25 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.SET_DRAW_SIZE, this.lZoom.isChecked);
         }
         else if (name == 'fcBtn' || name == 'fcBtn1' || name == 'fcBtn2' || name == 'fcBtn3' || name == 'fcBtn4' || name == 'fcBtn5') {
-            let percent = eval(data);
+            let percent;
+            let per = parseInt(data);
+            if (per == 1) {
+                percent = 1;
+            } else if (per == 2) {
+                percent = 3 / 4;
+            }
+            else if (per == 3) {
+                percent = 2 / 3;
+            }
+            else if (per == 4) {
+                percent = 1 / 2;
+            }
+            else if (per == 5) {
+                percent = 1 / 3;
+            }
+            else if (per == 6) {
+                percent = 1 / 4;
+            }
             GlobalEvent.emit(EventCfg.CLICKFCBTN, percent);
             this.selectBox.active = false;
         }

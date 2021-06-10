@@ -128,8 +128,6 @@ export default class NewClass extends cc.Component {
 	onEnable() {
 		GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		this.onShow();
-
-
 	}
 
 	onShow() {
@@ -525,7 +523,7 @@ export default class NewClass extends cc.Component {
 			kstyle: null,
 			code: null,
 			from: null,
-			total: parseInt(GameData.DXSet.KLine),
+			total: parseInt(GameData.DXSet.KLine) + 1,
 			to: 0
 		};
 		let items;

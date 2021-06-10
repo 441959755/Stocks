@@ -246,6 +246,13 @@ cc.Class({
 			GameData.QHHistoryInfo = JSON.parse(QHHistoryInfo);
 		}
 
+		let ZBHistoryInfo = cc.sys.localStorage.getItem('ZBHISTORYINFO');
+		if (!ZBHistoryInfo) {
+			GameData.ZBHistoryInfo = [];
+		} else {
+			GameData.ZBHistoryInfo = JSON.parse(ZBHistoryInfo);
+		}
+
 	},
 
 	onDestroy() {

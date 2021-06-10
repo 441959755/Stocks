@@ -30,13 +30,12 @@ export default class GlobalHandle {
 
     //获取行情
     public static onCmdGameStartQuoteQuery(info1, cb) {
-
         let infoPre = {
             ktype: info1.ktype,
             kstyle: info1.kstyle,
             code: info1.code,
             form: 0,
-            total: 100,
+            total: 100 + 1,
             to: info1.from,
         }
         socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(infoPre), info => {
@@ -290,7 +289,24 @@ export default class GlobalHandle {
             console.log(JSON.stringify(info));
             if (!info.err) {
                 if (info && info.items) {
-                    GameCfg.GameOperationItem = info.items;
+                    GameCfg.GameOperationItem = [];
+                    let arr = [];
+                    info.items.forEach(el => {
+                        arr.push(el.kOffset);
+                    });
+
+                    arr = Array.from(new Set(arr));
+
+                    arr.forEach(e => {
+                        for (let i = 0; i < info.items.length; i++) {
+                            if (info.items[i].kOffset == e) {
+                                GameCfg.GameOperationItem.push(info.items[i]);
+                                break;
+                            }
+                        }
+                    })
+
+                    GameCfg.GameOperationItem;
                     // for (let i = 0; i < info.items.length; i++) {
                     //     if (GameCfg.GameOperationItem.length == 0) {
                     //         GameCfg.GameOperationItem.push(info.items[i]);

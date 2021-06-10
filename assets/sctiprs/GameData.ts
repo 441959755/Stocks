@@ -194,6 +194,16 @@ export default class GameData {
         return this._QHHistoryInfo;
     }
 
+    private static _ZBHistoryInfo = [];
+    public static set ZBHistoryInfo(val) {
+        this._ZBHistoryInfo = val;
+        cc.sys.localStorage.setItem('ZBHISTORYINFO', JSON.stringify(val));
+    }
+
+    public static get ZBHistoryInfo() {
+        return this._ZBHistoryInfo;
+    }
+
 
 
     //双盲的次数

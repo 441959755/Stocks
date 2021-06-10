@@ -303,9 +303,6 @@ export default class NewClass extends cc.Component {
                                 }
                             }
 
-                            //  this.multScale = this.drawBordWidth / (num) / cc.ext.hz_width;
-                            //    GlobalEvent.emit(EventCfg.ONMARKRANGESHOWORHIDE);
-
                             cc.ext.hz_width = this.drawBordWidth / (num);
 
 
@@ -416,7 +413,7 @@ export default class NewClass extends cc.Component {
 
     //跟新label
     updataLabel(index) {
-        if (index < 0) {
+        if (index < 0 || cc.ext.beg_end[1] > GameCfg.huizhidatas) {
             return
         }
         this.setMALabelInfo(index);
