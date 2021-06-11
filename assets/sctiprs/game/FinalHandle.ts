@@ -72,7 +72,6 @@ export default class NewClass extends cc.Component {
     protected onEnable() {
         ActionUtils.openLayer(this.node);
 
-
         let gpData = GameCfg.data[0].data;
 
         if (!gpData || gpData.length <= 0) { return }
@@ -110,7 +109,6 @@ export default class NewClass extends cc.Component {
                 k_from: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
 
                 k_to: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
-                //  k_to: parseInt(gpData[gpData.length - 1].day.replace(///g,'')),
                 stock_profit_rate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100),
                 user_profit_rate: (GameCfg.allRate * 100),
                 user_capital: GameData.SmxlState.gold,
@@ -127,12 +125,11 @@ export default class NewClass extends cc.Component {
                 datas.user_capital = GameCfg.ziChan;
             }
             console.log('GameCfg.finalfund' + GameCfg.finalfund + '-' + 'GameCfg.ziChan' + GameCfg.ziChan + '=' + (GameCfg.finalfund - GameCfg.ziChan));
-            //  if (GameCfg.GameType < 4) {
+
             datas.rank = datas.user_profit_rate >= datas.stock_profit_rate ? 1 : 2;
-            //  if (GameCfg.GameType == 1) {
+
             datas.ref_id = 0;
-            // }
-            //  }
+
             if (GameCfg.GameType != pb.GameType.ShuangMang) {
                 this.saveHoistoryInfo(parseInt(datas.ts + ''));
             }
@@ -141,7 +138,6 @@ export default class NewClass extends cc.Component {
                 result: datas,
                 operations: GameCfg.GameOperationItem,
             }
-
             GlobalHandle.onCmdGameOverReq(CmdGameOver);
         }
     }
@@ -170,7 +166,14 @@ export default class NewClass extends cc.Component {
 
         {
             let la = boxs[2].getChildByName('label1').getComponent(cc.Label);
-            la && (la.string = ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100).toFixed(2))
+            let rate = ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100).toFixed(2)
+            la && (la.string = rate + '%')
+            if (parseInt(rate) < 0) {
+                la.node.color = cc.Color.GREEN;
+            } else {
+                la.node.color = cc.Color.RED;
+            }
+
         }
 
         {
@@ -316,7 +319,9 @@ export default class NewClass extends cc.Component {
     saveHoistoryInfo(ts) {
         GameCfg.TIMETEMP.push(ts);
         cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
-        cc.sys.localStorage.setItem(ts + 'cache', JSON.stringify(GameCfg.enterGameCache));
+
+        let cache = JSON.stringify(GameCfg.enterGameCache);
+        cc.sys.localStorage.setItem(ts + 'cache', cache);
 
         cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
 

@@ -100,10 +100,12 @@ export namespace pb {
         Rep_QuoteSubscribe = 2002,
         Req_QuoteQuery = 2003,
         Rep_QuoteQuery = 2004,
-        Req_QuoteEdit = 2005,
-        Req_StockEdit = 2007,
-        Req_QuoteQueryFuture = 2009,
-        Rep_QuoteQueryFuture = 2010,
+        Req_QuoteQueryFuture = 2005,
+        Rep_QuoteQueryFuture = 2006,
+        Req_IsTradingDay = 2007,
+        Rep_IsTradingDay = 2008,
+        Req_QueryTradingDay = 2009,
+        Rep_QueryTradingDay = 2010,
         Req_Hall_UploadIcon = 3001,
         Rep_Hall_UploadIcon = 3002,
         Req_Hall_EditNick = 3003,
@@ -172,6 +174,12 @@ export namespace pb {
         Sync_Room_GameStatus = 5214,
         Sync_Room_GameOp = 5216,
         Sync_Room_GameResult = 5218,
+        Req_Game_ZsjcBettingList = 6000,
+        Rep_Game_ZsjcBettingList = 6001,
+        Req_Game_ZsjcBet = 6002,
+        Rep_Game_ZsjcBet = 6003,
+        Req_Game_ZsjcRanking = 6004,
+        Rep_Game_ZsjcRanking = 6005,
         S2S_HeartBeat = 10001,
         S2S_Update_PlayerProperty = 10003,
         S2S_Update_PlayerGameCounter = 10005,
@@ -183,7 +191,11 @@ export namespace pb {
         S2S_Set_CgdsConf = 10017,
         S2S_Set_CgdsAward = 10019,
         S2S_Open_Cgds = 10021,
-        S2S_Close_Cgds = 10023
+        S2S_Close_Cgds = 10023,
+        S2S_Reload_Cgds = 10025,
+        S2S_Reload_GameConf = 10027,
+        S2S_Sync_ZsjcBetting = 10028,
+        S2S_Sync_ZsjcState = 10030
     }
 
     /** Properties of a MessageHead. */
@@ -1887,6 +1899,96 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a ZsjcState. */
+    interface IZsjcState {
+
+        /** ZsjcState items */
+        items?: (pb.IZsjcGameData[]|null);
+    }
+
+    /** Represents a ZsjcState. */
+    class ZsjcState implements IZsjcState {
+
+        /**
+         * Constructs a new ZsjcState.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IZsjcState);
+
+        /** ZsjcState items. */
+        public items: pb.IZsjcGameData[];
+
+        /**
+         * Creates a new ZsjcState instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ZsjcState instance
+         */
+        public static create(properties?: pb.IZsjcState): pb.ZsjcState;
+
+        /**
+         * Encodes the specified ZsjcState message. Does not implicitly {@link pb.ZsjcState.verify|verify} messages.
+         * @param message ZsjcState message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IZsjcState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ZsjcState message, length delimited. Does not implicitly {@link pb.ZsjcState.verify|verify} messages.
+         * @param message ZsjcState message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IZsjcState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ZsjcState message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ZsjcState
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ZsjcState;
+
+        /**
+         * Decodes a ZsjcState message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ZsjcState
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ZsjcState;
+
+        /**
+         * Verifies a ZsjcState message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ZsjcState message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ZsjcState
+         */
+        public static fromObject(object: { [k: string]: any }): pb.ZsjcState;
+
+        /**
+         * Creates a plain object from a ZsjcState message. Also converts values to other types if specified.
+         * @param message ZsjcState
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.ZsjcState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ZsjcState to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a GameData. */
     interface IGameData {
 
@@ -1919,6 +2021,9 @@ export namespace pb {
 
         /** GameData stockList */
         stockList?: (number[]|null);
+
+        /** GameData zsjcState */
+        zsjcState?: (pb.IZsjcState|null);
     }
 
     /** Represents a GameData. */
@@ -1959,6 +2064,9 @@ export namespace pb {
 
         /** GameData stockList. */
         public stockList: number[];
+
+        /** GameData zsjcState. */
+        public zsjcState?: (pb.IZsjcState|null);
 
         /**
          * Creates a new GameData instance using the specified properties.
@@ -5169,289 +5277,295 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a RoomPkPlayer. */
-    interface IRoomPkPlayer {
+    /** Properties of a RoomPlayer. */
+    interface IRoomPlayer {
 
-        /** RoomPkPlayer gd */
+        /** RoomPlayer gd */
         gd?: (pb.IGameData|null);
 
-        /** RoomPkPlayer ready */
+        /** RoomPlayer ready */
         ready?: (boolean|null);
 
-        /** RoomPkPlayer giveup */
+        /** RoomPlayer giveup */
         giveup?: (boolean|null);
 
-        /** RoomPkPlayer ops */
+        /** RoomPlayer ops */
         ops?: (pb.IGameOperations|null);
 
-        /** RoomPkPlayer result */
+        /** RoomPlayer result */
         result?: (pb.IGameResult|null);
 
-        /** RoomPkPlayer curPos */
+        /** RoomPlayer curPos */
         curPos?: (number|Long|null);
 
-        /** RoomPkPlayer junXian */
+        /** RoomPlayer junXian */
         junXian?: (number[]|null);
     }
 
-    /** Represents a RoomPkPlayer. */
-    class RoomPkPlayer implements IRoomPkPlayer {
+    /** Represents a RoomPlayer. */
+    class RoomPlayer implements IRoomPlayer {
 
         /**
-         * Constructs a new RoomPkPlayer.
+         * Constructs a new RoomPlayer.
          * @param [properties] Properties to set
          */
-        constructor(properties?: pb.IRoomPkPlayer);
+        constructor(properties?: pb.IRoomPlayer);
 
-        /** RoomPkPlayer gd. */
+        /** RoomPlayer gd. */
         public gd?: (pb.IGameData|null);
 
-        /** RoomPkPlayer ready. */
+        /** RoomPlayer ready. */
         public ready: boolean;
 
-        /** RoomPkPlayer giveup. */
+        /** RoomPlayer giveup. */
         public giveup: boolean;
 
-        /** RoomPkPlayer ops. */
+        /** RoomPlayer ops. */
         public ops?: (pb.IGameOperations|null);
 
-        /** RoomPkPlayer result. */
+        /** RoomPlayer result. */
         public result?: (pb.IGameResult|null);
 
-        /** RoomPkPlayer curPos. */
+        /** RoomPlayer curPos. */
         public curPos: (number|Long);
 
-        /** RoomPkPlayer junXian. */
+        /** RoomPlayer junXian. */
         public junXian: number[];
 
         /**
-         * Creates a new RoomPkPlayer instance using the specified properties.
+         * Creates a new RoomPlayer instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns RoomPkPlayer instance
+         * @returns RoomPlayer instance
          */
-        public static create(properties?: pb.IRoomPkPlayer): pb.RoomPkPlayer;
+        public static create(properties?: pb.IRoomPlayer): pb.RoomPlayer;
 
         /**
-         * Encodes the specified RoomPkPlayer message. Does not implicitly {@link pb.RoomPkPlayer.verify|verify} messages.
-         * @param message RoomPkPlayer message or plain object to encode
+         * Encodes the specified RoomPlayer message. Does not implicitly {@link pb.RoomPlayer.verify|verify} messages.
+         * @param message RoomPlayer message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: pb.IRoomPkPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: pb.IRoomPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified RoomPkPlayer message, length delimited. Does not implicitly {@link pb.RoomPkPlayer.verify|verify} messages.
-         * @param message RoomPkPlayer message or plain object to encode
+         * Encodes the specified RoomPlayer message, length delimited. Does not implicitly {@link pb.RoomPlayer.verify|verify} messages.
+         * @param message RoomPlayer message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: pb.IRoomPkPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: pb.IRoomPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a RoomPkPlayer message from the specified reader or buffer.
+         * Decodes a RoomPlayer message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns RoomPkPlayer
+         * @returns RoomPlayer
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomPkPlayer;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomPlayer;
 
         /**
-         * Decodes a RoomPkPlayer message from the specified reader or buffer, length delimited.
+         * Decodes a RoomPlayer message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns RoomPkPlayer
+         * @returns RoomPlayer
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomPkPlayer;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomPlayer;
 
         /**
-         * Verifies a RoomPkPlayer message.
+         * Verifies a RoomPlayer message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a RoomPkPlayer message from a plain object. Also converts values to their respective internal types.
+         * Creates a RoomPlayer message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns RoomPkPlayer
+         * @returns RoomPlayer
          */
-        public static fromObject(object: { [k: string]: any }): pb.RoomPkPlayer;
+        public static fromObject(object: { [k: string]: any }): pb.RoomPlayer;
 
         /**
-         * Creates a plain object from a RoomPkPlayer message. Also converts values to other types if specified.
-         * @param message RoomPkPlayer
+         * Creates a plain object from a RoomPlayer message. Also converts values to other types if specified.
+         * @param message RoomPlayer
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: pb.RoomPkPlayer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: pb.RoomPlayer, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this RoomPkPlayer to JSON.
+         * Converts this RoomPlayer to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a RoomDataPk. */
-    interface IRoomDataPk {
+    /** Properties of a RoomGameData. */
+    interface IRoomGameData {
 
-        /** RoomDataPk id */
+        /** RoomGameData id */
         id?: (number|null);
 
-        /** RoomDataPk status */
+        /** RoomGameData game */
+        game?: (pb.GameType|null);
+
+        /** RoomGameData status */
         status?: (number|null);
 
-        /** RoomDataPk capital */
+        /** RoomGameData capital */
         capital?: (number|null);
 
-        /** RoomDataPk code */
+        /** RoomGameData code */
         code?: (number|null);
 
-        /** RoomDataPk ktype */
+        /** RoomGameData ktype */
         ktype?: (pb.KType|null);
 
-        /** RoomDataPk tsQuoteFrom */
+        /** RoomGameData tsQuoteFrom */
         tsQuoteFrom?: (number|Long|null);
 
-        /** RoomDataPk tsQuoteTo */
+        /** RoomGameData tsQuoteTo */
         tsQuoteTo?: (number|Long|null);
 
-        /** RoomDataPk tsQuoteStart */
+        /** RoomGameData tsQuoteStart */
         tsQuoteStart?: (number|Long|null);
 
-        /** RoomDataPk players */
-        players?: (pb.IRoomPkPlayer[]|null);
+        /** RoomGameData players */
+        players?: (pb.IRoomPlayer[]|null);
 
-        /** RoomDataPk tsGameFrom */
+        /** RoomGameData tsGameFrom */
         tsGameFrom?: (number|Long|null);
 
-        /** RoomDataPk tsGameCur */
+        /** RoomGameData tsGameCur */
         tsGameCur?: (number|Long|null);
 
-        /** RoomDataPk quotes */
+        /** RoomGameData quotes */
         quotes?: (pb.IQuotes|null);
 
-        /** RoomDataPk quotesFuture */
+        /** RoomGameData quotesFuture */
         quotesFuture?: (pb.IQuotesFuture|null);
     }
 
-    /** Represents a RoomDataPk. */
-    class RoomDataPk implements IRoomDataPk {
+    /** Represents a RoomGameData. */
+    class RoomGameData implements IRoomGameData {
 
         /**
-         * Constructs a new RoomDataPk.
+         * Constructs a new RoomGameData.
          * @param [properties] Properties to set
          */
-        constructor(properties?: pb.IRoomDataPk);
+        constructor(properties?: pb.IRoomGameData);
 
-        /** RoomDataPk id. */
+        /** RoomGameData id. */
         public id: number;
 
-        /** RoomDataPk status. */
+        /** RoomGameData game. */
+        public game: pb.GameType;
+
+        /** RoomGameData status. */
         public status: number;
 
-        /** RoomDataPk capital. */
+        /** RoomGameData capital. */
         public capital: number;
 
-        /** RoomDataPk code. */
+        /** RoomGameData code. */
         public code: number;
 
-        /** RoomDataPk ktype. */
+        /** RoomGameData ktype. */
         public ktype: pb.KType;
 
-        /** RoomDataPk tsQuoteFrom. */
+        /** RoomGameData tsQuoteFrom. */
         public tsQuoteFrom: (number|Long);
 
-        /** RoomDataPk tsQuoteTo. */
+        /** RoomGameData tsQuoteTo. */
         public tsQuoteTo: (number|Long);
 
-        /** RoomDataPk tsQuoteStart. */
+        /** RoomGameData tsQuoteStart. */
         public tsQuoteStart: (number|Long);
 
-        /** RoomDataPk players. */
-        public players: pb.IRoomPkPlayer[];
+        /** RoomGameData players. */
+        public players: pb.IRoomPlayer[];
 
-        /** RoomDataPk tsGameFrom. */
+        /** RoomGameData tsGameFrom. */
         public tsGameFrom: (number|Long);
 
-        /** RoomDataPk tsGameCur. */
+        /** RoomGameData tsGameCur. */
         public tsGameCur: (number|Long);
 
-        /** RoomDataPk quotes. */
+        /** RoomGameData quotes. */
         public quotes?: (pb.IQuotes|null);
 
-        /** RoomDataPk quotesFuture. */
+        /** RoomGameData quotesFuture. */
         public quotesFuture?: (pb.IQuotesFuture|null);
 
         /**
-         * Creates a new RoomDataPk instance using the specified properties.
+         * Creates a new RoomGameData instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns RoomDataPk instance
+         * @returns RoomGameData instance
          */
-        public static create(properties?: pb.IRoomDataPk): pb.RoomDataPk;
+        public static create(properties?: pb.IRoomGameData): pb.RoomGameData;
 
         /**
-         * Encodes the specified RoomDataPk message. Does not implicitly {@link pb.RoomDataPk.verify|verify} messages.
-         * @param message RoomDataPk message or plain object to encode
+         * Encodes the specified RoomGameData message. Does not implicitly {@link pb.RoomGameData.verify|verify} messages.
+         * @param message RoomGameData message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: pb.IRoomDataPk, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: pb.IRoomGameData, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified RoomDataPk message, length delimited. Does not implicitly {@link pb.RoomDataPk.verify|verify} messages.
-         * @param message RoomDataPk message or plain object to encode
+         * Encodes the specified RoomGameData message, length delimited. Does not implicitly {@link pb.RoomGameData.verify|verify} messages.
+         * @param message RoomGameData message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: pb.IRoomDataPk, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: pb.IRoomGameData, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a RoomDataPk message from the specified reader or buffer.
+         * Decodes a RoomGameData message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns RoomDataPk
+         * @returns RoomGameData
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomDataPk;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomGameData;
 
         /**
-         * Decodes a RoomDataPk message from the specified reader or buffer, length delimited.
+         * Decodes a RoomGameData message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns RoomDataPk
+         * @returns RoomGameData
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomDataPk;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomGameData;
 
         /**
-         * Verifies a RoomDataPk message.
+         * Verifies a RoomGameData message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a RoomDataPk message from a plain object. Also converts values to their respective internal types.
+         * Creates a RoomGameData message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns RoomDataPk
+         * @returns RoomGameData
          */
-        public static fromObject(object: { [k: string]: any }): pb.RoomDataPk;
+        public static fromObject(object: { [k: string]: any }): pb.RoomGameData;
 
         /**
-         * Creates a plain object from a RoomDataPk message. Also converts values to other types if specified.
-         * @param message RoomDataPk
+         * Creates a plain object from a RoomGameData message. Also converts values to other types if specified.
+         * @param message RoomGameData
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: pb.RoomDataPk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: pb.RoomGameData, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this RoomDataPk to JSON.
+         * Converts this RoomGameData to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -5720,6 +5834,9 @@ export namespace pb {
 
         /** RankingItem cgdsAccount */
         cgdsAccount?: (number|null);
+
+        /** RankingItem zsjcCount */
+        zsjcCount?: (number|null);
     }
 
     /** Represents a RankingItem. */
@@ -5751,6 +5868,9 @@ export namespace pb {
 
         /** RankingItem cgdsAccount. */
         public cgdsAccount: number;
+
+        /** RankingItem zsjcCount. */
+        public zsjcCount: number;
 
         /**
          * Creates a new RankingItem instance using the specified properties.
@@ -8037,6 +8157,454 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** PriceType enum. */
+    enum PriceType {
+        PriceType_NULL = 0,
+        Open = 1,
+        Close = 2,
+        High = 3,
+        Low = 4
+    }
+
+    /** ZsjcGameType enum. */
+    enum ZsjcGameType {
+        kpjc = 0,
+        drjc = 1,
+        spjc = 2
+    }
+
+    /** Properties of a ZsjcOption. */
+    interface IZsjcOption {
+
+        /** ZsjcOption ts */
+        ts?: (number|Long|null);
+
+        /** ZsjcOption pt */
+        pt?: (pb.PriceType|null);
+
+        /** ZsjcOption money */
+        money?: (number|null);
+    }
+
+    /** Represents a ZsjcOption. */
+    class ZsjcOption implements IZsjcOption {
+
+        /**
+         * Constructs a new ZsjcOption.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IZsjcOption);
+
+        /** ZsjcOption ts. */
+        public ts: (number|Long);
+
+        /** ZsjcOption pt. */
+        public pt: pb.PriceType;
+
+        /** ZsjcOption money. */
+        public money: number;
+
+        /**
+         * Creates a new ZsjcOption instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ZsjcOption instance
+         */
+        public static create(properties?: pb.IZsjcOption): pb.ZsjcOption;
+
+        /**
+         * Encodes the specified ZsjcOption message. Does not implicitly {@link pb.ZsjcOption.verify|verify} messages.
+         * @param message ZsjcOption message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IZsjcOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ZsjcOption message, length delimited. Does not implicitly {@link pb.ZsjcOption.verify|verify} messages.
+         * @param message ZsjcOption message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IZsjcOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ZsjcOption message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ZsjcOption
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ZsjcOption;
+
+        /**
+         * Decodes a ZsjcOption message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ZsjcOption
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ZsjcOption;
+
+        /**
+         * Verifies a ZsjcOption message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ZsjcOption message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ZsjcOption
+         */
+        public static fromObject(object: { [k: string]: any }): pb.ZsjcOption;
+
+        /**
+         * Creates a plain object from a ZsjcOption message. Also converts values to other types if specified.
+         * @param message ZsjcOption
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.ZsjcOption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ZsjcOption to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ZsjcGameData. */
+    interface IZsjcGameData {
+
+        /** ZsjcGameData gameType */
+        gameType?: (pb.ZsjcGameType|null);
+
+        /** ZsjcGameData code */
+        code?: (number|null);
+
+        /** ZsjcGameData tsSettling */
+        tsSettling?: (number|Long|null);
+
+        /** ZsjcGameData settled */
+        settled?: (boolean|null);
+
+        /** ZsjcGameData first */
+        first?: (pb.IZsjcOption|null);
+
+        /** ZsjcGameData second */
+        second?: (pb.IZsjcOption|null);
+    }
+
+    /** Represents a ZsjcGameData. */
+    class ZsjcGameData implements IZsjcGameData {
+
+        /**
+         * Constructs a new ZsjcGameData.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IZsjcGameData);
+
+        /** ZsjcGameData gameType. */
+        public gameType: pb.ZsjcGameType;
+
+        /** ZsjcGameData code. */
+        public code: number;
+
+        /** ZsjcGameData tsSettling. */
+        public tsSettling: (number|Long);
+
+        /** ZsjcGameData settled. */
+        public settled: boolean;
+
+        /** ZsjcGameData first. */
+        public first?: (pb.IZsjcOption|null);
+
+        /** ZsjcGameData second. */
+        public second?: (pb.IZsjcOption|null);
+
+        /**
+         * Creates a new ZsjcGameData instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ZsjcGameData instance
+         */
+        public static create(properties?: pb.IZsjcGameData): pb.ZsjcGameData;
+
+        /**
+         * Encodes the specified ZsjcGameData message. Does not implicitly {@link pb.ZsjcGameData.verify|verify} messages.
+         * @param message ZsjcGameData message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IZsjcGameData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ZsjcGameData message, length delimited. Does not implicitly {@link pb.ZsjcGameData.verify|verify} messages.
+         * @param message ZsjcGameData message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IZsjcGameData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ZsjcGameData message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ZsjcGameData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ZsjcGameData;
+
+        /**
+         * Decodes a ZsjcGameData message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ZsjcGameData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ZsjcGameData;
+
+        /**
+         * Verifies a ZsjcGameData message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ZsjcGameData message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ZsjcGameData
+         */
+        public static fromObject(object: { [k: string]: any }): pb.ZsjcGameData;
+
+        /**
+         * Creates a plain object from a ZsjcGameData message. Also converts values to other types if specified.
+         * @param message ZsjcGameData
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.ZsjcGameData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ZsjcGameData to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ZsjcGameList. */
+    interface IZsjcGameList {
+
+        /** ZsjcGameList items */
+        items?: (pb.IZsjcGameData[]|null);
+    }
+
+    /** Represents a ZsjcGameList. */
+    class ZsjcGameList implements IZsjcGameList {
+
+        /**
+         * Constructs a new ZsjcGameList.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IZsjcGameList);
+
+        /** ZsjcGameList items. */
+        public items: pb.IZsjcGameData[];
+
+        /**
+         * Creates a new ZsjcGameList instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ZsjcGameList instance
+         */
+        public static create(properties?: pb.IZsjcGameList): pb.ZsjcGameList;
+
+        /**
+         * Encodes the specified ZsjcGameList message. Does not implicitly {@link pb.ZsjcGameList.verify|verify} messages.
+         * @param message ZsjcGameList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IZsjcGameList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ZsjcGameList message, length delimited. Does not implicitly {@link pb.ZsjcGameList.verify|verify} messages.
+         * @param message ZsjcGameList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IZsjcGameList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ZsjcGameList message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ZsjcGameList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ZsjcGameList;
+
+        /**
+         * Decodes a ZsjcGameList message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ZsjcGameList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ZsjcGameList;
+
+        /**
+         * Verifies a ZsjcGameList message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ZsjcGameList message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ZsjcGameList
+         */
+        public static fromObject(object: { [k: string]: any }): pb.ZsjcGameList;
+
+        /**
+         * Creates a plain object from a ZsjcGameList message. Also converts values to other types if specified.
+         * @param message ZsjcGameList
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.ZsjcGameList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ZsjcGameList to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdBet. */
+    interface ICmdBet {
+
+        /** CmdBet uid */
+        uid?: (number|null);
+
+        /** CmdBet money */
+        money?: (number|null);
+
+        /** CmdBet gameIndex */
+        gameIndex?: (number|null);
+
+        /** CmdBet betting */
+        betting?: (number|null);
+
+        /** CmdBet nickname */
+        nickname?: (string|null);
+
+        /** CmdBet icon */
+        icon?: (string|null);
+    }
+
+    /** Represents a CmdBet. */
+    class CmdBet implements ICmdBet {
+
+        /**
+         * Constructs a new CmdBet.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdBet);
+
+        /** CmdBet uid. */
+        public uid: number;
+
+        /** CmdBet money. */
+        public money: number;
+
+        /** CmdBet gameIndex. */
+        public gameIndex: number;
+
+        /** CmdBet betting. */
+        public betting: number;
+
+        /** CmdBet nickname. */
+        public nickname: string;
+
+        /** CmdBet icon. */
+        public icon: string;
+
+        /**
+         * Creates a new CmdBet instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdBet instance
+         */
+        public static create(properties?: pb.ICmdBet): pb.CmdBet;
+
+        /**
+         * Encodes the specified CmdBet message. Does not implicitly {@link pb.CmdBet.verify|verify} messages.
+         * @param message CmdBet message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdBet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdBet message, length delimited. Does not implicitly {@link pb.CmdBet.verify|verify} messages.
+         * @param message CmdBet message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdBet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdBet message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdBet
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdBet;
+
+        /**
+         * Decodes a CmdBet message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdBet
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdBet;
+
+        /**
+         * Verifies a CmdBet message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdBet message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdBet
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdBet;
+
+        /**
+         * Creates a plain object from a CmdBet message. Also converts values to other types if specified.
+         * @param message CmdBet
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdBet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdBet to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** KType enum. */
     enum KType {
         KType_NULL = 0,
@@ -8629,6 +9197,198 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a CmdTradingDay. */
+    interface ICmdTradingDay {
+
+        /** CmdTradingDay date */
+        date?: (number|null);
+
+        /** CmdTradingDay n */
+        n?: (number|null);
+    }
+
+    /** Represents a CmdTradingDay. */
+    class CmdTradingDay implements ICmdTradingDay {
+
+        /**
+         * Constructs a new CmdTradingDay.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdTradingDay);
+
+        /** CmdTradingDay date. */
+        public date: number;
+
+        /** CmdTradingDay n. */
+        public n: number;
+
+        /**
+         * Creates a new CmdTradingDay instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdTradingDay instance
+         */
+        public static create(properties?: pb.ICmdTradingDay): pb.CmdTradingDay;
+
+        /**
+         * Encodes the specified CmdTradingDay message. Does not implicitly {@link pb.CmdTradingDay.verify|verify} messages.
+         * @param message CmdTradingDay message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdTradingDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdTradingDay message, length delimited. Does not implicitly {@link pb.CmdTradingDay.verify|verify} messages.
+         * @param message CmdTradingDay message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdTradingDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdTradingDay message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdTradingDay
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdTradingDay;
+
+        /**
+         * Decodes a CmdTradingDay message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdTradingDay
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdTradingDay;
+
+        /**
+         * Verifies a CmdTradingDay message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdTradingDay message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdTradingDay
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdTradingDay;
+
+        /**
+         * Creates a plain object from a CmdTradingDay message. Also converts values to other types if specified.
+         * @param message CmdTradingDay
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdTradingDay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdTradingDay to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdTradingDayReply. */
+    interface ICmdTradingDayReply {
+
+        /** CmdTradingDayReply isTradingDay */
+        isTradingDay?: (boolean|null);
+
+        /** CmdTradingDayReply days */
+        days?: (number[]|null);
+    }
+
+    /** Represents a CmdTradingDayReply. */
+    class CmdTradingDayReply implements ICmdTradingDayReply {
+
+        /**
+         * Constructs a new CmdTradingDayReply.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdTradingDayReply);
+
+        /** CmdTradingDayReply isTradingDay. */
+        public isTradingDay: boolean;
+
+        /** CmdTradingDayReply days. */
+        public days: number[];
+
+        /**
+         * Creates a new CmdTradingDayReply instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdTradingDayReply instance
+         */
+        public static create(properties?: pb.ICmdTradingDayReply): pb.CmdTradingDayReply;
+
+        /**
+         * Encodes the specified CmdTradingDayReply message. Does not implicitly {@link pb.CmdTradingDayReply.verify|verify} messages.
+         * @param message CmdTradingDayReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdTradingDayReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdTradingDayReply message, length delimited. Does not implicitly {@link pb.CmdTradingDayReply.verify|verify} messages.
+         * @param message CmdTradingDayReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdTradingDayReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdTradingDayReply message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdTradingDayReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdTradingDayReply;
+
+        /**
+         * Decodes a CmdTradingDayReply message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdTradingDayReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdTradingDayReply;
+
+        /**
+         * Verifies a CmdTradingDayReply message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdTradingDayReply message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdTradingDayReply
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdTradingDayReply;
+
+        /**
+         * Creates a plain object from a CmdTradingDayReply message. Also converts values to other types if specified.
+         * @param message CmdTradingDayReply
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdTradingDayReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdTradingDayReply to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a CmdQuoteQueryFuture. */
     interface ICmdQuoteQueryFuture {
 
@@ -9018,6 +9778,34 @@ export namespace pb {
          * @returns Promise
          */
         public quotesSubscribe(request: pb.ICmdQuoteSubscribe): Promise<pb.ErrorInfo>;
+
+        /**
+         * Calls IsTradingDay.
+         * @param request CmdTradingDay message or plain object
+         * @param callback Node-style callback called with the error, if any, and CmdTradingDayReply
+         */
+        public isTradingDay(request: pb.ICmdTradingDay, callback: pb.QuotesService.IsTradingDayCallback): void;
+
+        /**
+         * Calls IsTradingDay.
+         * @param request CmdTradingDay message or plain object
+         * @returns Promise
+         */
+        public isTradingDay(request: pb.ICmdTradingDay): Promise<pb.CmdTradingDayReply>;
+
+        /**
+         * Calls QueryTradingDay.
+         * @param request CmdTradingDay message or plain object
+         * @param callback Node-style callback called with the error, if any, and CmdTradingDayReply
+         */
+        public queryTradingDay(request: pb.ICmdTradingDay, callback: pb.QuotesService.QueryTradingDayCallback): void;
+
+        /**
+         * Calls QueryTradingDay.
+         * @param request CmdTradingDay message or plain object
+         * @returns Promise
+         */
+        public queryTradingDay(request: pb.ICmdTradingDay): Promise<pb.CmdTradingDayReply>;
     }
 
     namespace QuotesService {
@@ -9035,6 +9823,20 @@ export namespace pb {
          * @param [response] ErrorInfo
          */
         type QuotesSubscribeCallback = (error: (Error|null), response?: pb.ErrorInfo) => void;
+
+        /**
+         * Callback as used by {@link pb.QuotesService#isTradingDay}.
+         * @param error Error, if any
+         * @param [response] CmdTradingDayReply
+         */
+        type IsTradingDayCallback = (error: (Error|null), response?: pb.CmdTradingDayReply) => void;
+
+        /**
+         * Callback as used by {@link pb.QuotesService#queryTradingDay}.
+         * @param error Error, if any
+         * @param [response] CmdTradingDayReply
+         */
+        type QueryTradingDayCallback = (error: (Error|null), response?: pb.CmdTradingDayReply) => void;
     }
 
     /** Represents a QuotesFutureService */

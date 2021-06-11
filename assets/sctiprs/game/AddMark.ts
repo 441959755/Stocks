@@ -105,13 +105,14 @@ export default class NewClass extends cc.Component {
     }
 
 
-    onEnable() {
+    start() {
         if (!GameCfg.GAMEFUPAN) {
             //添加开始标签
             this.onAddMard({ type: 1, index: GameCfg.huizhidatas });
         }
         else {
             this.onAddMard({ type: 1, index: GameData.huizhidatas });
+            this.onMarkAllShow();
         }
     }
 
@@ -283,6 +284,7 @@ export default class NewClass extends cc.Component {
                 //   
                 if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
                     el.node.active = true;
+                    this.AIMarkNodes[i] && (this.AIMarkNodes[i].node.active = true)
                 }
             }
         })

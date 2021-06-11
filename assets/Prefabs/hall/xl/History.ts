@@ -54,6 +54,7 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = true;
             // GameCfg.finalfund = GameCfg.ziChan;
             // GameCfg.allRate = nodes[6].getComponent(cc.Label).string;
+            GameCfg.allRate = 0;
             GameCfg.huizhidatas = parseInt(nodes[10].getComponent(cc.Label).string) + 1;
             GameData.huizhidatas = parseInt(nodes[9].getComponent(cc.Label).string) + 1;
 
@@ -221,7 +222,6 @@ export default class NewClass extends cc.Component {
                 this.label.node.color = cc.Color.WHITE;
             }
         }
-
     }
 
     onBtnClick(event, data) {

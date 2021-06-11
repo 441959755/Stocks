@@ -69,7 +69,7 @@ message QuoteItem {
 	double amount = 6;      // 成交额
 	uint64 count = 7;		// 成交笔数
 	double open = 8;        // 开盘价
-	double close = 9;       // 昨收价
+	double close = 9;       // 收盘价
 	double high = 10;       // 最高价
 	double low = 11;        // 最低价
 
@@ -91,6 +91,17 @@ message CmdQuoteSubscribe {
 	repeated QuoteSubscribeItem items = 1;
 }
 
+// 查询是否为交易日
+message CmdTradingDay {
+	int32 date = 1;	// YYYYMMDD
+	int32 n = 2;	// 前后n个交易日
+}
+message CmdTradingDayReply {
+	bool is_trading_day = 1;
+	repeated int32 days = 2;	// 查询某个日期前后的交易日
+}
+
+
 
 
 // 查询期货行情
@@ -107,7 +118,7 @@ message QuoteItemFuture {
 	int64 timestamp = 3;    // 时间戳
 	
 	double open = 4;        // 开盘价
-	double close = 5;       // 昨收价
+	double close = 5;       // 收盘价
 	double high = 6;       	// 最高价
 	double low = 7;        	// 最低价
 
@@ -128,6 +139,8 @@ message QuotesFuture {
 service QuotesService {
   rpc QuotesQuery (CmdQuoteQuery) returns (Quotes) {}
   rpc QuotesSubscribe (CmdQuoteSubscribe) returns (ErrorInfo) {}
+  rpc IsTradingDay (CmdTradingDay) returns (CmdTradingDayReply) {}
+  rpc QueryTradingDay (CmdTradingDay) returns (CmdTradingDayReply) {}
 }
 
 service QuotesFutureService {

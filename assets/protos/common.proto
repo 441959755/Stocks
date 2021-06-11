@@ -137,10 +137,12 @@ enum MessageId {
 	Rep_QuoteSubscribe = 2002;	// 订阅或取消订阅行情响应(无响应)
 	Req_QuoteQuery = 2003;		// 查询行情：CmdQuoteQuery
 	Rep_QuoteQuery = 2004;		// 查询行情响应：Quotes
-	Req_QuoteEdit  = 2005;		// 编辑行情(废弃)
-	Req_StockEdit  = 2007;		// 编辑股票信息(废弃)
-	Req_QuoteQueryFuture = 2009;// 查询期货行情：CmdQuoteQueryFuture
-	Rep_QuoteQueryFuture = 2010;// 查询期货行情响应：QuotesFuture
+	Req_QuoteQueryFuture = 2005;// 查询期货行情：CmdQuoteQueryFuture
+	Rep_QuoteQueryFuture = 2006;// 查询期货行情响应：QuotesFuture
+	Req_IsTradingDay = 2007;	// 查询某个日期是否为交易日：CmdTradingDay
+	Rep_IsTradingDay = 2008;	// 查询某个日期是否为交易日响应：CmdTradingDayReply
+	Req_QueryTradingDay = 2009;	// 查询某个日期前后的交易日：CmdTradingDay
+	Rep_QueryTradingDay = 2010;	// 查询某个日期前后的交易日响应：CmdTradingDayReply
 
 
 	// 大厅相关
@@ -225,6 +227,13 @@ enum MessageId {
 	Sync_Room_GameOp = 5216;	// 游戏操作：RoomGameOp
 	Sync_Room_GameResult = 5218;// 游戏结果：RoomGameResult
 
+	// 竞猜相关
+	Req_Game_ZsjcBettingList = 6000;	// 指数竞猜列表：无
+	Rep_Game_ZsjcBettingList = 6001;	// 指数竞猜列表应答：IndexBettingList
+	Req_Game_ZsjcBet = 6002;			// 指数竞猜下注：CmdBet
+	Rep_Game_ZsjcBet = 6003;			// 指数竞猜下注应答：ErrorInfo
+	Req_Game_ZsjcRanking = 6004;		// 指数竞猜排行榜：无
+	Rep_Game_ZsjcRanking = 6005;		// 指数竞猜排行榜应答：RankingList
 
 	// 服务器和服务器之间的消息
 	S2S_HeartBeat = 10001;					// 心跳
@@ -239,7 +248,10 @@ enum MessageId {
 	S2S_Set_CgdsAward = 10019;				// 设置炒股大赛Award：CgdsConf
 	S2S_Open_Cgds = 10021;					// 创建炒股大赛：CgdsConf
 	S2S_Close_Cgds = 10023;					// 关闭炒股大赛：CgdsConf
-	
+	S2S_Reload_Cgds = 10025;				// 重新加载炒股大赛列表
+	S2S_Reload_GameConf = 10027;			// 重新加载游戏配置
+	S2S_Sync_ZsjcBetting = 10028;			// 同步指数竞猜的下注信息：CmdBet
+	S2S_Sync_ZsjcState = 10030;				// 同步指数竞猜的游戏状态
 }
 
 message MessageHead {

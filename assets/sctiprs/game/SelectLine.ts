@@ -91,6 +91,7 @@ export default class NewClass extends cc.Component {
 
     onDrawEvetn(data) {
         GameCfg.data[0].data = data;
+        cc.ext.hz_width = 10;
         GlobalEvent.emit('onQHDraw');
     }
 

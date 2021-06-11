@@ -2,7 +2,6 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import DrawUtils from "../Utils/DrawUtils";
 import GameCfg from "./GameCfg";
-import GameData from '../GameData';
 import { pb } from '../../protos/proto';
 import DrawData from "./DrawData";
 
@@ -67,13 +66,6 @@ export default class NewClass extends cc.Component {
 
     timer = null;
 
-    // btxPreCloseY = [];     ///宝塔前一日收盘价
-
-    // btxPreOpenY = [];
-
-    // btxChg = [];        ///宝塔线前一日的涨跌
-    // btxList = [];
-
 
     //   multScale = 1;
     topValue = 0;     //当前绘制的最高值
@@ -84,6 +76,7 @@ export default class NewClass extends cc.Component {
     EXPMALabel: cc.Label[] = [];
 
     onLoad() {
+        this.drawBordWidth = cc.winSize.width - 180 - this.part1.node.width - 25;
         GlobalEvent.on(EventCfg.CLICKMOVE, (data) => {
             if (data == 'pre') {
                 this.onMoveLeftOrRight(1, 1, 0);
@@ -152,11 +145,14 @@ export default class NewClass extends cc.Component {
         //设置画布大小
         GlobalEvent.on('setDrawing', (falg) => {
             this.drawBordWidth = falg ? (this.drawBordWidth + 164) : (this.drawBordWidth - 164);
+            // this.drawBordWidth = this.drawBg.node.width - this.part1.node.width - 15;
+
             this.setDrawing();
         }, this);
 
         GlobalEvent.on(EventCfg.SET_DRAW_SIZE, (falg) => {
             this.drawBordWidth = falg ? (this.drawBordWidth - 206) : (this.drawBordWidth + 206);
+            //  this.drawBordWidth = this.drawBg.node.width - this.part1.node.width - 15;
             this.setDrawing();
         }, this);
 
@@ -490,9 +486,19 @@ export default class NewClass extends cc.Component {
 
     //绘制初始
     initDrawBg() {
+        if (!cc.ext.beg_end[0]) {
+            cc.ext.beg_end[0] = 0;
+        }
         if (cc.ext.beg_end[0] < 0 || cc.ext.beg_end[1] > GameCfg.huizhidatas) {
             return;
         }
+
+        let viweData = GameCfg.data[0].data;
+        if (!viweData || !viweData[cc.ext.beg_end[0]] || !viweData[cc.ext.beg_end[1] - 1]) {
+            console.log('行情数据为空' + cc.ext.beg_end[0] + viweData[cc.ext.beg_end[1] - 1]);
+            return;
+        }
+
         this.drawBg.clear();
         this.drawMA.clear();
         this.drawBOLL.clear();
@@ -503,18 +509,10 @@ export default class NewClass extends cc.Component {
         this.drawBOLL.lineWidth = 2;
         this.drawEXPMA.lineWidth = 2;
 
-        if (cc.winSize.width > this.node.width) {
-            this.drawBordWidth = 1280;
-        }
-
-        let viweData = GameCfg.data[0].data;
-
-        if (!viweData || !viweData[cc.ext.beg_end[0]]) {
-            console.log('行情数据为空');
-            return;
-        }
-
-        if (!viweData || viweData.length <= 0) { return }
+        // this.drawBordWidth = this.drawBg.node.width - this.part1.node.width - 25;
+        // if (cc.winSize.width > this.node.width) {
+        //     this.drawBordWidth = 1280;
+        // }
 
         this.bottomValue = viweData[0].low;
 
@@ -531,7 +529,9 @@ export default class NewClass extends cc.Component {
         this.part3.string = (this.bottomValue + this.disValue / 4 * 2).toFixed(2);
         this.part4.string = (this.bottomValue + this.disValue / 4 * 1).toFixed(2);
         this.part5.string = this.bottomValue.toFixed(2);
+
         GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
+
         for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
 
             this.onDrawCandle(viweData[index], index);
@@ -776,8 +776,6 @@ export default class NewClass extends cc.Component {
 
     }
 
-
-
     //成交量绘制
     start() {
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
@@ -789,9 +787,9 @@ export default class NewClass extends cc.Component {
             }
         }
 
-        if (!GameCfg.GAMEFUPAN) {
-            this.onShow();
-        }
+        //    if (!GameCfg.GAMEFUPAN) {
+        this.onShow();
+        //   }
     }
 
     //画线
@@ -821,7 +819,7 @@ export default class NewClass extends cc.Component {
                 col = null;
             }
         }
-        DrawUtils.drawRect(ctx, x, y, w - 4, h, col);
+        DrawUtils.drawRect(ctx, x, y, w - 5, h, col);
     }
 
     //

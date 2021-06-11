@@ -50,16 +50,12 @@ export default class NewClass extends cc.Component {
 
         this.userName.string = GameData.userName;
         let data = DrawData.getBukoCount();
+
         if (GameCfg.GameType == pb.GameType.DingXiang) {
             this.dxNode.active = true;
-
-
             this.dealLas[0].string = (data.yCount + data.sCount) + '';
-
-
             this.dealLas[1].string = data.yCount + '';
             this.dealLas[2].string = data.sCount + '';
-
             if (data.maxRate != 0) {
                 this.profitLas[0].string = data.maxDay + '';
                 this.profitLas[1].string = (data.maxRate * 100).toFixed(2) + '%';
@@ -69,7 +65,6 @@ export default class NewClass extends cc.Component {
                     this.profitLas[1].node.color = cc.Color.WHITE;
                 }
             }
-
             if (data.minRate != 0) {
                 this.lossLas[0].string = data.minDay + '';
                 this.lossLas[1].string = ((data.minRate) * 100).toFixed(2) + '%';
@@ -81,7 +76,6 @@ export default class NewClass extends cc.Component {
                 }
             }
         }
-
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             let info = StrategyAIData.onCompareReult();
             this.zbNode.active = true;
@@ -167,7 +161,6 @@ export default class NewClass extends cc.Component {
 
     onBtnClick(event, data) {
         let name = event.target.name;
-
         if (name == 'closeBtn') {
             this.node.active = false;
         }

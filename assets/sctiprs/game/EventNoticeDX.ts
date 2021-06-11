@@ -23,10 +23,10 @@ export default class NewClass extends cc.Component {
 
     _idd = 0;
 
-
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        this.content.getComponent(cc.Layout).verticalDirection = cc.Layout.VerticalDirection.BOTTOM_TO_TOP;
         GlobalEvent.on(EventCfg.SLGEVENTNOTICE, () => {
             if (GameCfg.GameSet.jx_notice) {
                 if (DrawData.MaList && DrawData.MaList.length > 0) {
@@ -67,24 +67,10 @@ export default class NewClass extends cc.Component {
 
         }, this);
 
-        // if (GameCfg.GAMEFUPAN) {
-        //     this.createFuPanData();
-        // }
-
     }
 
-    // //复盘的本地数据
-    // createFuPanData() {
-    //     let data = GameCfg.notice;
-    //     if (data) {
-    //         data.forEach((el) => {
-    //             this.onCreateTipsItem(el[0], el[1]);
-    //         });
-    //     }
-    // }
 
     testKFrom() {
-
 
         let index = GameCfg.huizhidatas - 1;
         if (index < 2) {

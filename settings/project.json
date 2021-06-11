@@ -56,5 +56,7 @@
       "enable": false
     }
   },
-  "migrate-history": []
+  "migrate-history": [
+    "cloud-function"
+  ]
 }

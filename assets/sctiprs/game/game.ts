@@ -22,6 +22,12 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     selectLine: cc.Node = null;   //选择条
 
+    @property(cc.Node)
+    drawNode: cc.Node = null;
+
+    @property(cc.Node)
+    poritLa: cc.Node = null;
+
     onLoad() {
         ComUtils.onLoadNode();
         ComUtils.onEvent();
@@ -54,8 +60,6 @@ export default class NewClass extends cc.Component {
 
         this.setColor();
     }
-
-
 
     protected onDestroy() {
 
@@ -158,18 +162,18 @@ export default class NewClass extends cc.Component {
 
         cc.ext.beg_end[1] = GameCfg.huizhidatas;
         cc.ext.beg_end[0] = 0;
-
         if (GameCfg.huizhidatas > 100) {
-            cc.ext.beg_end[0] = cc.ext.beg_end[1] - 100;
+            cc.ext.beg_end[0] = cc.ext.beg_end[1] - 180;
+        }
+        if (cc.ext.beg_end[0] < 0) {
+            cc.ext.beg_end[0] = 0;
         }
 
         let mixWidth = 6;
         let maxWidth = 70;
-        let drawWidth = 1080;
-        if (cc.winSize.width > this.node.width) {
-            drawWidth = 1280;
-        }
-        cc.ext.hz_width = drawWidth / GameCfg.huizhidatas;
+        let drawWidth = cc.winSize.width - 180 - this.poritLa.width - 25;
+
+        cc.ext.hz_width = drawWidth / (cc.ext.beg_end[1] - cc.ext.beg_end[0]);
 
         if (cc.ext.hz_width > maxWidth) {
             cc.ext.hz_width = maxWidth;

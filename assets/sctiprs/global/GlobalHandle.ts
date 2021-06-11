@@ -23,6 +23,7 @@ export default class GlobalHandle {
 
     //游戏结束
     public static onCmdGameOverReq(datas) {
+        console.log(datas);
         socket.send(pb.MessageId.Req_Game_Over, PB.onCmdGameOverConvertToBuff(datas), (info) => {
             console.log('GameOverInfo' + JSON.stringify(info));
         })
@@ -120,7 +121,6 @@ export default class GlobalHandle {
             });
 
         });
-
     }
 
     public static onCmdGameStartQuoteQueryQH(data, cb?) {

@@ -69,7 +69,8 @@ export default class NewClass extends cc.Component {
     _str = null;
 
     onLoad() {
-
+        //   this.content.removeAllChildren();
+        this.content.getComponent(cc.Layout).verticalDirection = cc.Layout.VerticalDirection.BOTTOM_TO_TOP;
         GlobalEvent.on(EventCfg.SLGEVENTNOTICE, () => {
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                 if (GameCfg.GameSet.select == '均线') {
@@ -1221,6 +1222,7 @@ export default class NewClass extends cc.Component {
         let node = cc.instantiate(this.itemNotice);
         this.content.addChild(node);
         let itemHandle = node.getComponent('ItemNotice')
+
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 
             node.active = GameCfg.GameSet.showSign;

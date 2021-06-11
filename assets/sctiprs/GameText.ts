@@ -348,7 +348,7 @@ export default class GameCfgText {
         GameCfg.data[0].name = items[1];
 
         GameCfg.data[0].circulate = items[4];
-        // data = GameCfg.enterGameCache;
+        GameCfg.enterGameCache = data;
 
         console.log('给的数据:' + JSON.stringify(data));
         return data;
@@ -409,10 +409,7 @@ export default class GameCfgText {
             data.from = ye + '' + mon + '' + da;
         }
         GameCfg.enterGameCache = data;
-        // } else {
-        //     GameCfg.enterGameCache.code = data.code;
-        //     data = GameCfg.enterGameCache;
-        // }
+
         GameCfg.data[0].code = items[0];
         GameCfg.data[0].data = [];
         GameCfg.data[0].name = items[1] + '  ' + items[2] + items[3];

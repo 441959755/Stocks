@@ -291,7 +291,7 @@ export default class NewClass extends cc.Component {
 		GameCfg.allRate = 0;
 		GameCfg.blockHistoy = [];
 		GameCfg.finalfund = 0;
-		//	GameCfg.GameType = null;
+		//GameCfg.GameType = null;
 
 		GameCfg.GAMEFUPAN = false;
 		StrategyAIData.onClearData();

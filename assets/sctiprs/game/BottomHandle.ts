@@ -127,8 +127,8 @@ export default class NewClass extends cc.Component {
 	@property(cc.Node)
 	xlzb: cc.Node = null;
 
-
 	onLoad() {
+
 		this.gpData = GameCfg.data[0].data;
 
 		if (this.gpData.length <= 0) {
@@ -144,16 +144,12 @@ export default class NewClass extends cc.Component {
 					let preClose = this.onjunjia();
 					if (preClose) {
 						this.ziChan += this.keMcCount * this.gpData[GameCfg.huizhidatas - count].close;
-
 						this.moneyLabel[0].string = '总资产    ：' + parseInt(this.ziChan + '');
 						this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
 						this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
 						this.keMcCount = 0;
-
 						let rate = this.onCurPositionRete(count);
-
 						if (GameCfg.GameType == pb.GameType.QiHuo || !GameCfg.GameSet.isFC) {
-
 							if (this._KKCount != 0) {
 								rate = -rate;
 							}
@@ -161,7 +157,6 @@ export default class NewClass extends cc.Component {
 						} else {
 							GameCfg.allRate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
 						}
-
 						GlobalEvent.emit('updateRate', [0, GameCfg.allRate]);
 
 						GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
@@ -175,11 +170,32 @@ export default class NewClass extends cc.Component {
 						});
 
 						if (!GameCfg.GAMEFUPAN) {
-							let item = {
-								opId: pb.GameOperationId.Bid,
-								volume: 1,
-								kOffset: GameCfg.huizhidatas,
+							let item;
+							if (GameCfg.GameType == pb.GameType.ZhiBiao || GameCfg.GameType == pb.GameType.DingXiang) {
+								item = {
+									opId: pb.GameOperationId.Bid,
+									volume: 1,
+									kOffset: GameCfg.huizhidatas,
 
+								}
+
+							}
+							else if (GameCfg.GameType == pb.GameType.QiHuo) {
+								if (this._kdCount > 0) {
+									item = {
+										opId: pb.GameOperationId.Short,
+										volume: 1,
+										kOffset: GameCfg.huizhidatas,
+
+									}
+								}
+								else {
+									item = {
+										opId: pb.GameOperationId.Long,
+										volume: 1,
+										kOffset: GameCfg.huizhidatas,
+									}
+								}
 							}
 							GameCfg.GameOperationItem.push(item);
 						}
@@ -281,6 +297,8 @@ export default class NewClass extends cc.Component {
 
 
 	onClickCfBtn(percent) {
+		//	if (GameCfg.huizhidatas > this.gpData.length) { return }
+		if (!this.gpData[GameCfg.huizhidatas - 1]) { return }
 		//买入
 		if (this._type == 1) {
 			let count = parseInt(percent * this.keMrCount / 100 + '') * 100;
@@ -317,8 +335,10 @@ export default class NewClass extends cc.Component {
 				mc = 100;
 			}
 			this.keMcCount -= mc;
+
 			this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
 			this.curMcCount = mc;
+
 			if (!GameCfg.GAMEFUPAN) {
 				if (this.keMcCount <= 0) {
 					this.mcBtn.interactable = false;
@@ -326,7 +346,9 @@ export default class NewClass extends cc.Component {
 				}
 				this.mrBtn.interactable = true;
 				this.mrBtn.enableAutoGrayEffect = false;
-				let item = {
+				let item;
+
+				item = {
 					opId: pb.GameOperationId.Bid,
 					volume: percent,
 					kOffset: GameCfg.huizhidatas,
@@ -352,7 +374,6 @@ export default class NewClass extends cc.Component {
 				});
 				this.ziChan = (max * 3);
 			}
-
 		} else {
 
 			let opt = GameCfg.GameOperationItem;
@@ -478,7 +499,6 @@ export default class NewClass extends cc.Component {
 			dxnode.active = false;
 			this.node.getChildByName('qh').active = true;
 			this.node.getChildByName('isFC').active = false;
-
 		}
 		else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 			this.tipsLabel.node.active = true;
@@ -709,7 +729,6 @@ export default class NewClass extends cc.Component {
 					opId: pb.GameOperationId.Long,
 					volume: 1,
 					kOffset: GameCfg.huizhidatas,
-
 				}
 				GameCfg.GameOperationItem.push(item);
 			}
@@ -808,7 +827,10 @@ export default class NewClass extends cc.Component {
 					el.active = false;
 				});
 				nodes[4].active = true;
+				//	if (!GameCfg.GAMEFUPAN) {
 				this.setRoundNumber('mrBtn1');
+				//	}
+
 			} else {
 				this.curMcCount = this._KKCount;
 
@@ -834,7 +856,9 @@ export default class NewClass extends cc.Component {
 					el.active = false;
 				})
 				kkNodes[4].active = true;
+				//	if (!GameCfg.GAMEFUPAN) {
 				this.setRoundNumber('mrBtn');
+				//	}
 			}
 			GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
 
@@ -1083,7 +1107,7 @@ export default class NewClass extends cc.Component {
 			//let rate = (curClose * this.curMcCount - preClose * this.curMcCount) / GameCfg.ziChan;
 			let rate, allRate;
 			rate = this.onCurPositionRete(1);
-			if (GameCfg.GameType == pb.GameType.QiHuo) {
+			if (GameCfg.GameType == pb.GameType.QiHuo || !GameCfg.GameSet.isFC) {
 				// 	rate = this.onAllPositionRete();
 				if (state == 'mcBtn1') {
 					rate = -rate;

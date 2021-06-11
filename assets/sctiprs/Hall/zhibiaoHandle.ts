@@ -170,14 +170,16 @@ export default class NewClass extends cc.Component {
         if (index == 5 || index == 4 || index == 3) {
             let year = this.boxs[3].getChildByName('label').getComponent(cc.Label).string;
             let month = this.boxs[4].getChildByName('label').getComponent(cc.Label).string;
-            if (year == '随机') {
-                let content = cc.find('New ScrollView/view/content', downBox);
-                content.children.forEach(el => {
-                    el.color = new cc.Color().fromHEX('#a0a0a0');
-                    el.getComponent(cc.Button).interactable = false;
-                    el.getComponent(cc.Button).enableAutoGrayEffect = true;
-                })
-                return;
+            if (index == 4 || index == 5) {
+                if (year == '随机') {
+                    let content = cc.find('New ScrollView/view/content', downBox);
+                    content.children.forEach(el => {
+                        el.color = new cc.Color().fromHEX('#a0a0a0');
+                        el.getComponent(cc.Button).interactable = false;
+                        el.getComponent(cc.Button).enableAutoGrayEffect = true;
+                    })
+                    return;
+                }
             }
             this.getTimeByCodeName(index);
         }

@@ -345,6 +345,18 @@ export default class NewClass extends cc.Component {
     }
 
     onDraw() {
+        if (!cc.ext.beg_end[0]) {
+            cc.ext.beg_end[0] = 0;
+        }
+        if (cc.ext.beg_end[0] < 0 || cc.ext.beg_end[1] > GameCfg.huizhidatas) {
+            return;
+        }
+
+        let viweData = GameCfg.data[0].data;
+        if (!viweData || !viweData[cc.ext.beg_end[0]]) {
+            console.log('行情数据为空');
+            return;
+        }
         this.drawRSI.clear();
         this.drawKDJ.clear();
         this.drawMACD.clear();
@@ -378,7 +390,7 @@ export default class NewClass extends cc.Component {
         this.maxRs24 = this.Rs24[cc.ext.beg_end[0]];
         this.minRs24 = this.Rs24[cc.ext.beg_end[0]];
 
-        let viweData = GameCfg.data[0].data;
+
         if (viweData.length <= 0) { return }
         this.topVol = 0;
         this.bottomVol = viweData[0].value;
@@ -389,10 +401,10 @@ export default class NewClass extends cc.Component {
         }
 
         for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
-            if (!viweData[index]) {
-                console.log('viewData is null' + index)
-                return;
-            }
+            // if (!viweData[index]) {
+            //     console.log('viewData is null' + index)
+            //     return;
+            // }
             this.minDIF = Math.min(this.minDIF, this.DIFList[index]);
             this.maxDIF = Math.max(this.maxDIF, this.DIFList[index]);
 
@@ -455,7 +467,6 @@ export default class NewClass extends cc.Component {
     }
 
     onShow() {
-
         this.MACDLabels.forEach((el, index) => {
             if (index == 0) {
                 el.node.color = GameCfg.DIF_LINE_COL;
@@ -487,7 +498,6 @@ export default class NewClass extends cc.Component {
 
     onDrawKDJ(index) {
         let some = index - cc.ext.beg_end[0];
-
 
         if (index <= 0) {
             return
@@ -743,10 +753,11 @@ export default class NewClass extends cc.Component {
         }
     }
 
-
     protected onDestroy() {
         GlobalEvent.off('onDraw');
-        GlobalEvent.off('updataLabel')
+        GlobalEvent.off('updataLabel');
+        GlobalEvent.off('on_off');
+        GlobalEvent.off('onQHDraw');
     }
 
     //画框
@@ -768,6 +779,6 @@ export default class NewClass extends cc.Component {
             ctx.strokeColor = col;
             col = null;
         }
-        DrawUtils.drawRect(ctx, x, y, w - 4, h, col);
+        DrawUtils.drawRect(ctx, x, y, w - 5, h, col);
     }
 }

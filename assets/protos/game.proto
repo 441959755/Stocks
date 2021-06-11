@@ -71,10 +71,14 @@ enum GameType {
 enum GamePropertyId {
 	Gold = 0;				// 金币
 	Diamond = 1;			// 钻石
-	VIP = 2;				// VIP天数
+	Vip = 2;				// VIP天数
 	Exp = 3;				// 经验
 	Level = 4;				// 等级
 	Fame = 5;				// 威望、名誉
+	Coupon = 6;				// 奖券
+
+	
+	VipExpiration = 29;		// VIP截止日期的时间戳
 
 	Max = 30;				// 最大属性
 }
@@ -184,7 +188,7 @@ message CgState {
 	int32 win = 5;					// 胜场次
 	int32 lose = 6;					// 负场次
 	bool clearance = 7;				// 是否通关
-	repeated CgLogAward awards = 8;// 关卡奖励日志
+	repeated CgLogAward awards = 8;	// 关卡奖励日志
 
 }
 // 模拟炒股状态
@@ -201,6 +205,10 @@ message CgdsStateItem {
 message CgdsState {
 	repeated CgdsStateItem items = 1;	// 参与中的所有炒股大赛状态
 }
+// 指数竞猜状态
+message ZsjcState {
+	repeated ZsjcGameData items =1;		// 竞猜数据
+}
 // 玩家的游戏数据
 message GameData {
 	int32 uid = 1;						// uid
@@ -213,6 +221,10 @@ message GameData {
 	int64 today_ts = 8;					// 今日时间戳
 	repeated int32 today_times= 9;		// 今日游戏计数器
 	repeated int32 stock_list = 10;		// 关注的股票列表
+	ZsjcState zsjc_state = 11;			// 指数竞猜状态
+	string location = 12;				// 位置
+	string gender = 13;					// 性别
+	repeated int32 favor_list = 14;		// 关注的玩家列表
 }
 
 
@@ -471,8 +483,8 @@ message RoomData {
 	GameType game = 2;	// 游戏类型
 	bytes data = 3;		// 房间数据
 }
-// PK房间数据
-message RoomPkPlayer {
+// 竞技房间数据
+message RoomPlayer {
 	GameData gd = 1;			// 玩家数据
 	bool ready = 2;				// 玩家是否就绪
 	bool giveup = 3;			// 玩家是否逃跑
@@ -481,20 +493,21 @@ message RoomPkPlayer {
 	int64 curPos = 6;			// 游戏进度，距离起始行情的偏移量
 	repeated int32 jun_xian = 7;// 行情均线设置
 }
-message RoomDataPk {
+message RoomGameData {
 	int32 id = 1;					// 房号
-	int32 status = 2;				// 游戏状态
-	int32 capital = 3;				// 报名费
-	int32 code = 4;					// 行情代码
-	KType ktype = 5;				// 行情类型：日K，分时等等
-	int64 tsQuoteFrom = 6;			// 行情开始时间
-	int64 tsQuoteTo = 7;			// 行情结束时间
-	int64 tsQuoteStart = 8;			// 行情起始位置（开始玩的位置），距离起始行情的偏移量
-	repeated RoomPkPlayer players = 9;	// 玩家数据
-	int64 tsGameFrom = 10;			// 游戏开始时间戳（精确：秒）
-	int64 tsGameCur = 11;			// 游戏当前时间戳（精确：秒）
-	Quotes quotes = 12;				// 股票行情
-	QuotesFuture quotes_future = 13;// 期货行情
+	GameType game = 2;				// 游戏类型
+	int32 status = 3;				// 游戏状态
+	int32 capital = 4;				// 报名费
+	int32 code = 5;					// 行情代码
+	KType ktype = 6;				// 行情类型：日K，分时等等
+	int64 tsQuoteFrom = 7;			// 行情开始时间
+	int64 tsQuoteTo = 8;			// 行情结束时间
+	int64 tsQuoteStart = 9;			// 行情起始位置（开始玩的位置），距离起始行情的偏移量
+	repeated RoomPlayer players = 10;// 玩家数据
+	int64 tsGameFrom = 11;			// 游戏开始时间戳（精确：秒）
+	int64 tsGameCur = 12;			// 游戏当前时间戳（精确：秒）
+	Quotes quotes = 13;				// 股票行情
+	QuotesFuture quotes_future = 14;// 期货行情
 }
 
 
@@ -527,10 +540,13 @@ message RankingItem {
 	int32 uid = 1;			// uid
 	string nickname = 2;	// 昵称
 	string icon = 3;		// 头像
-	int32 cgs_clearance = 4;// 闯关赛的登顶次数
-	int32 cgs_netwin = 5;	// 闯关赛的净胜
-	int32 cgs_progress = 6;	// 闯关赛的关卡进度
-	int32 cgds_account = 7;	// 炒股大赛资金账户余额
+	string gender = 4;		// 性别
+	string location = 5;	// 位置
+	int32 cgs_clearance = 6;// 闯关赛的登顶次数
+	int32 cgs_netwin = 7;	// 闯关赛的净胜
+	int32 cgs_progress = 8;	// 闯关赛的关卡进度
+	int32 cgds_account = 9;	// 炒股大赛资金账户余额
+	int32 zsjc_count = 10;	// 指数竞猜：猜对次数
 }
 message RankingList {
 	int32 id = 1;					// 当前这一轮闯关赛的时间编码：YYYYMMDD
@@ -648,11 +664,11 @@ message CgdsConf {
 }
 // 炒股大赛列表
 message CgdsList {
-	repeated CgdsConf items = 1;	// 炒股大赛列表
+	repeated CgdsConf items = 1;		// 炒股大赛列表
 }
 // 报名
 message CmdCgdsReg {
-	int32 id = 1;			// 炒股大赛的时间编码：YYYYMMDD
+	int32 id = 1;						// 炒股大赛的时间编码：YYYYMMDD
 }
 message CmdCgdsRegReply {
 	ErrorInfo result = 1;				// 报名结果
@@ -660,5 +676,50 @@ message CmdCgdsRegReply {
 }
 // 炒股大赛排行榜
 message CmdCgdsRanking {
-	int32 id = 1;			// 炒股大赛的时间编码：YYYYMMDD
+	int32 id = 1;						// 炒股大赛的时间编码：YYYYMMDD
+}
+
+
+
+// 竞猜相关
+// 价格类型
+enum PriceType {
+	PriceType_NULL = 0;
+
+	Open = 1;	// 开盘价
+	Close = 2;	// 收盘价
+	High = 3;	// 最高价
+	Low = 4;	// 最低价
+}
+enum ZsjcGameType {
+	kpjc = 0;	// 开盘竞猜
+	drjc = 1;	// 当日竞猜
+	spjc = 2;	// 收盘竞猜
+}
+message ZsjcOption {
+	int64 ts = 1;			// 行情时间编码：YYYYMMDD
+	PriceType pt = 2;		// 价格类型
+	int32 money = 3;		// 赌注
+}
+message ZsjcGameData {
+	ZsjcGameType game_type = 1;	// 指数竞猜游戏类型
+	int32 code = 2;				// 股票代码
+	int64 ts_settling = 3;		// 结算截止时间
+	bool settled = 4;			// 是否已经结算
+	ZsjcOption first = 5;		// 第一个选项
+	ZsjcOption second = 6;		// 第二个选项
+}
+// 指数竞猜游戏列表
+message ZsjcGameList {
+	repeated ZsjcGameData items = 1;
+}
+// 指数竞猜下注
+message CmdBet {
+	int32 uid = 1;			// 玩家ID
+	int32 money = 2;		// 赌注
+	int32 game_index = 3;	// 竞猜列表的下标：用于指示对那个游戏进行下注
+	int32 betting = 4;		// 下注对象：1表示第一个，2表示第二个
+	string nickname = 5;	// 昵称
+	string icon = 6;		// 头像
+	string gender = 7;		// 性别
 }
