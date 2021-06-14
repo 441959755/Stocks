@@ -46,9 +46,11 @@ Socket.prototype = {
 					}, 5000);
 				}
 
-				// if (self.preData) {
-				//     self.send(self.preData.actionCode, self.preData.proto, self.preData.callback);
-				// }
+
+				if (self._preData) {
+					self.send(self._preData.actionCode, self._preData.proto, self._preData.callback);
+					self._preData = null;
+				}
 			}
 		});
 	},
@@ -92,15 +94,8 @@ Socket.prototype = {
 	// },
 
 	send(actionCode, proto, callback) {
-		if (!this.ws) {
-			console.log('未连接');
-			// this.preData = {
-			//     actionCode: actionCode,
-			//     proto: proto,
-			//     callback: callback,
-			// }
-			this.onclose();
-		} else if (this.ws.readyState == WebSocket.OPEN) {
+
+		if (this.ws && this.ws.readyState == WebSocket.OPEN) {
 
 			let le = proto ? proto.length : 0;
 
@@ -134,6 +129,11 @@ Socket.prototype = {
 
 		} else {
 			console.log("send error. readyState ");
+			this._preData = {
+				actionCode: actionCode,
+				proto: proto,
+				callback: callback,
+			}
 
 			this.ws.close();
 			// setTimeout(() => {
@@ -200,6 +200,7 @@ function Socket(host) {
 	this.reconnectBeat = null;
 
 	this.reconnectCount = 0;
+	this._preData = null;
 
 	// this.preData = null;
 	//  this.notification = new cc.EventTarget();

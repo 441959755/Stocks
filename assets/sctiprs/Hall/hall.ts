@@ -1,12 +1,10 @@
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
 import GameCfg from '../game/GameCfg';
-import LoadUtils from '../Utils/LoadUtils';
+
 import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
-import GameData from '../GameData';
-import DrawData from '../game/DrawData';
-import HttpUtils from '../common/net/HttpUtils';
+
 import GlobalHandle from '../global/GlobalHandle';
 import StrategyAIData from '../game/StrategyAIData';
 
@@ -260,7 +258,6 @@ export default class NewClass extends cc.Component {
 	}
 
 	start() {
-
 		//回到进入游戏的界面
 		let event;
 		if (GameCfg.GameType == pb.GameType.ShuangMang) {
@@ -354,7 +351,6 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.OPENQHLAYER);
 		GlobalEvent.off(EventCfg.OPENHELPLAYER);
 		GlobalEvent.off(EventCfg.OPENSETLAYER);
-
 		ComUtils.onDestory();
 	}
 
@@ -365,13 +361,12 @@ export default class NewClass extends cc.Component {
 			GlobalHandle.onCmdGameStartQuoteQuery(info1, () => {
 				cc.director.loadScene('game');
 			})
-
 		});
 
 	}
 
 	onCmdQuoteQuery(data) {
-		// console.log(JSON.stringify(data));
+
 		this.onCmdGameStart({ game: GameCfg.GameType }, data);
 	}
 

@@ -19,15 +19,6 @@ export default class NewClass extends cc.Component {
     currRateLabel: cc.Label = null;
 
 
-    @property(cc.Sprite)
-    userHead: cc.Sprite = null
-
-    @property(cc.Label)
-    userName: cc.Label = null;
-
-    @property(cc.Label)
-    lv: cc.Label = null;
-
     @property(cc.Node)
     rightNode: cc.Node = null;
 
@@ -94,15 +85,15 @@ export default class NewClass extends cc.Component {
     }
 
     protected onEnable() {
-        if (GameData.headImg) {
-            this.userHead.spriteFrame = GameData.headImg;
-        }
-        if (GameData.userName) {
-            this.userName.string = GameData.userName;
-        }
-        if (GameData.properties[2]) {
-            this.lv.string = 'LV:' + GameData.properties[2] || 0 + '';
-        }
+        // if (GameData.headImg) {
+        //     this.userHead.spriteFrame = GameData.headImg;
+        // }
+        // if (GameData.userName) {
+        //     this.userName.string = GameData.userName;
+        // }
+        // if (GameData.properties[2]) {
+        //     this.lv.string = 'LV:' + GameData.properties[2] || 0 + '';
+        // }
 
         //训练指标
         //  let nodes = this.rightNode.children;

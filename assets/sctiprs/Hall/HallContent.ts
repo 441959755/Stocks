@@ -118,5 +118,4 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.BLACKGOTOLAYER);
 	}
 
-	// update (dt) {}
 }

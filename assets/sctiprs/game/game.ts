@@ -39,11 +39,7 @@ export default class NewClass extends cc.Component {
 
         }, this)
 
-        // //打开帮组
-        // GlobalEvent.on(EventCfg.HELPSHOW, () => {
-        //     this.helpLayer.active = true;
-        // }, this);
-
+        
         GlobalEvent.on(EventCfg.OPENSTATLAYER, () => {
             this.statLayer.active = true;
         }, this);
