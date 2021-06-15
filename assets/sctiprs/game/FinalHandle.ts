@@ -335,25 +335,14 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         //返回大厅
         if (name == 'closeBtn') {
-            GameCfg.data[0].data = [];
-            GameCfg.huizhidatas = 0;
-
-            GameCfg.allRate = 0;
-
-            GameCfg.finalfund = 0;
-            //    GameCfg.GameType = null;
-
-            GameCfg.GAMEFUPAN = false;
-            // GameCfg.history.huizhidatas = 0;
-            GameCfg.history.allRate = 0;
-            StrategyAIData.onClearData();
-            GameCfg.enterGameCache = null;
-            GameCfg.GameOperationItem = [];
-            //    GameCfg.ziChan = 100000;
-            cc.director.loadScene('hall');
+            this.clearGameData();
         }
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
+            if (GameCfg.GameType == pb.GameType.QiHuo) {
+                this.clearGameData();
+                return;
+            }
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             let data = null;
 
@@ -424,5 +413,23 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = true;
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
         }
+    }
+
+    clearGameData() {
+        GameCfg.data[0].data = [];
+        GameCfg.huizhidatas = 0;
+
+        GameCfg.allRate = 0;
+
+        GameCfg.finalfund = 0;
+
+        GameCfg.GAMEFUPAN = false;
+
+        GameCfg.history.allRate = 0;
+        StrategyAIData.onClearData();
+        GameCfg.enterGameCache = null;
+        GameCfg.GameOperationItem = [];
+
+        cc.director.loadScene('hall');
     }
 }

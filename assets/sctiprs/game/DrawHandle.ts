@@ -4,6 +4,7 @@ import DrawUtils from "../Utils/DrawUtils";
 import GameCfg from "./GameCfg";
 import { pb } from '../../protos/proto';
 import DrawData from "./DrawData";
+import ComUtils from "../Utils/ComUtils";
 
 const { ccclass, property } = cc._decorator;
 
@@ -63,11 +64,8 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     BOLLLabel: cc.Label[] = [];
 
-
     timer = null;
 
-
-    //   multScale = 1;
     topValue = 0;     //当前绘制的最高值
 
     bottomValue = 0;  //当前绘制最低值
@@ -77,6 +75,11 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         this.drawBordWidth = cc.winSize.width - 180 - this.part1.node.width - 25;
+        let mixWidth = 6;
+        let maxWidth = 80;
+        let minCount = parseInt(this.drawBordWidth / maxWidth + '');
+        let maxCount = parseInt(this.drawBordWidth / mixWidth + '');
+
         GlobalEvent.on(EventCfg.CLICKMOVE, (data) => {
             if (data == 'pre') {
                 this.onMoveLeftOrRight(1, 1, 0);
@@ -87,7 +90,6 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on(EventCfg.SETMALABEL, (labels) => {
             this.MAla = labels;
-            this.updataLabel(cc.ext.beg_end[1] - 1);
             this.MAla.forEach((el, t) => {
                 el.node.color = GameCfg.MAColor[t];
             })
@@ -194,10 +196,7 @@ export default class NewClass extends cc.Component {
             this.Horizontal1.active = false;
             this.vertical1.active = false;
         })
-        let mixWidth = 6;
-        let maxWidth = 80;
-        let minCount = parseInt(this.drawBordWidth / maxWidth + '');
-        let maxCount = parseInt(this.drawBordWidth / mixWidth + '');
+
 
         this.node.on('touchmove', (event) => {
             calDisY += event.getDelta().y;
@@ -328,8 +327,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.NOTICEDRAWMOVW, this.noticeDrawMove.bind(this), this);
     }
 
+    //跳转到标签买卖点
     noticeDrawMove(index) {
-
         if (index >= cc.ext.beg_end[0] && index < cc.ext.beg_end[1]) {
 
         }
@@ -430,7 +429,6 @@ export default class NewClass extends cc.Component {
                         } else {
                             el.string = GameCfg.GameSet.ZLine + ' MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
                         }
-
                     } else {
                         el.string = 'MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
                     }
@@ -463,7 +461,6 @@ export default class NewClass extends cc.Component {
 
     onShow() {
         this.initDrawBg();
-
         this.BOLLLabel.forEach((el, t) => {
             el.node.color = GameCfg.BOLLColor[t];
             el.node.active = false;
@@ -479,9 +476,8 @@ export default class NewClass extends cc.Component {
         this.node.off('touchmove');
         GlobalEvent.off('setDrawing');
         GlobalEvent.off('on_off');
-        //   GlobalEvent.off('labelPoint');
-        //  GlobalEvent.off('onBuyOrSell');
-        GlobalEvent.off(EventCfg.SETMALABEL)
+        GlobalEvent.off(EventCfg.SETMALABEL);
+        GlobalEvent.off(EventCfg.NOTICEDRAWMOVW);
     }
 
     //绘制初始
@@ -508,11 +504,6 @@ export default class NewClass extends cc.Component {
         this.drawMA.lineWidth = 2;
         this.drawBOLL.lineWidth = 2;
         this.drawEXPMA.lineWidth = 2;
-
-        // this.drawBordWidth = this.drawBg.node.width - this.part1.node.width - 25;
-        // if (cc.winSize.width > this.node.width) {
-        //     this.drawBordWidth = 1280;
-        // }
 
         this.bottomValue = viweData[0].low;
 
@@ -552,7 +543,6 @@ export default class NewClass extends cc.Component {
         if (!this.BollList[index]) {
             return;
         }
-
         let drawBox = this.drawBOLL.node.height;
         if (index >= 20) {
             let prex = 10 + ((index - 1 - cc.ext.beg_end[0])) * cc.ext.hz_width + cc.ext.hz_width / 2;
@@ -580,7 +570,6 @@ export default class NewClass extends cc.Component {
         this.EXPMA2 = DrawData.EXPMA2;
 
         this.btx = DrawData.btx;
-
     }
 
     //曲线MA
@@ -629,13 +618,11 @@ export default class NewClass extends cc.Component {
 
     //绘制蜡烛线 曲线 、宝塔线
     onDrawCandle(el, index) {
-
         //最高点最低点
         let posInfo = {
             highPos: null,
             lowPos: null,
             index: index,
-            // muit: this.multScale,
         }
 
         let initY = 0;
@@ -739,16 +726,26 @@ export default class NewClass extends cc.Component {
             }
             //跌了
             else {
+                let hy, by;
                 if (el.open > el.close) {
                     lowPrice = el.close;
                     highPrice = el.open;
+                    hy = openY;
+                    by = closeY;
+
                 }
                 //涨了
                 else if (el.open < el.close) {
                     lowPrice = el.open;
                     highPrice = el.close;
+                    hy = closeY;
+                    by = openY;
+
                 }
-                this.drawRect(this.drawBg, startX, closeY, endX - startX, openY - closeY, el.open > el.close);
+                let flag = el.open > el.close;
+
+                this.drawRect(this.drawBg, startX, by, endX - startX, hy - by, flag);
+
             }
 
 
@@ -770,7 +767,6 @@ export default class NewClass extends cc.Component {
             }
         }
 
-        //posInfo.lowPos = cc.v2(lowX, lowY - 20);
 
         GlobalEvent.emit(EventCfg.ONMARKUPDATE, posInfo);
 
@@ -787,9 +783,9 @@ export default class NewClass extends cc.Component {
             }
         }
 
-        //    if (!GameCfg.GAMEFUPAN) {
         this.onShow();
-        //   }
+        //跟新label
+        this.updataLabel(GameCfg.huizhidatas - 1);
     }
 
     //画线
@@ -815,11 +811,13 @@ export default class NewClass extends cc.Component {
             }
             ctx.strokeColor = col;
 
-            if (GameCfg.GameSet.line != '宝塔线') {
+
+            if (GameCfg.GameSet.line != '宝塔线' && !this.sign) {
                 col = null;
             }
         }
         DrawUtils.drawRect(ctx, x, y, w - 5, h, col);
+
     }
 
     //
@@ -838,4 +836,55 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit('onDraw');
     }
 
+    //获取涨停板
+    getRaisingLimit(index) {
+        if (GameCfg.GameType != pb.GameType.QiHuo) {
+            // let index = GameCfg.huizhidatas - 1;
+            let code = GameCfg.data[0].code + '';
+            let data = GameCfg.data[0].data;
+            let str = code.slice(0, 2);
+            let str1 = code.slice(0, 3);
+            if (data[index - 1]) {
+                let rate = (data[index].close - data[index - 1].close) / data[index - 1].close * 100;
+                if (str == '60' || str == '00') {
+                    if (rate >= 9.95) {
+                        return true;
+                    } else if (rate <= -9.95) {
+                        return true;
+                    }
+                }
+                else if (str1 == '688') {
+                    if (rate >= 19.94) {
+                        return true;
+                    } else if (rate <= -19.94) {
+                        return true;
+                    }
+                }
+                else if (str1 == '300') {
+                    let time = ComUtils.fromatTime1(data[index].day);
+                    if (time >= 20200824) {
+                        if (rate >= 19.94) {
+                            return true;
+                        }
+                        else if (rate <= -19.94) {
+                            return true;
+                        }
+                    }
+                    else if (time < 20200824) {
+                        if (rate >= 9.95) {
+                            return true;
+                        }
+                        else if (rate <= -9.95) {
+                            return true;
+                        }
+                    }
+                }
+
+
+            }
+
+        }
+        return false;
+
+    }
 }

@@ -128,8 +128,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     voltext: cc.Node = null;
 
-
-
     topVol = 0;     //最高成交量
 
     bottomVol = 0;  //最低成交量
@@ -208,11 +206,24 @@ export default class NewClass extends cc.Component {
         this.initData();
         this.onDraw();
         this.onShow();
+
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            this.MACDLabels[0].node.parent.x = 10;
+            this.KDJLabels[0].node.parent.x = 10;
+            this.RSILabels[0].node.parent.x = 10;
+            this.cclLabel.node.parent.x = 10;
+            this.voltext.x = 10;
+        } else {
+            this.MACDLabels[0].node.parent.x = 102;
+            this.KDJLabels[0].node.parent.x = 102;
+            this.RSILabels[0].node.parent.x = 102;
+            this.cclLabel.node.parent.x = 102;
+            this.voltext.x = 102;
+        }
     }
 
     updataLabel(index) {
-        //  console.log(index);
-        // index -= 1;
+
         let arr = ['MACD(' + GameCfg.MACD[0] + ',' + GameCfg.MACD[1] + ',' + GameCfg.MACD[2] + ') DIF', 'DEA', 'MACD'];
 
         if (this.DIFList[index]) {
@@ -272,37 +283,23 @@ export default class NewClass extends cc.Component {
         this.label3.node.active = true;
 
         let maxKDJ;
-        // maxKDJ = Math.max(this.maxK, this.maxD);
-        // maxKDJ = Math.max(maxKDJ, this.maxJ);
+
         maxKDJ = this.maxK;
 
         let minKDJ;
-        // minKDJ = Math.max(this.minK, this.minD);
-        // minKDJ = Math.max(minKDJ, this.minJ);
-        minKDJ = this.minK;
 
-        // let min = parseInt(minKDJ / 10 + '') * 10 <= 0 ? 10 : parseInt(minKDJ / 10 + '') * 10
-        // let max = Math.ceil(maxKDJ / 10) * 10;
-        // let con = (max - min) / 2 + min;
+        minKDJ = this.minK;
 
         this.maxK = maxKDJ;
         this.maxD = maxKDJ;
         this.maxJ = maxKDJ;
 
         let maxRSI;
-        // maxRSI = Math.max(this.maxRs6, this.maxRs24);
-        // maxRSI = Math.max(maxRSI, this.maxRs12);
+
         maxRSI = this.maxRs6;
-
         let minRSI;
-        // minRSI = Math.max(this.minRs6, this.minRs12);
-        // minRSI = Math.max(minRSI, this.minRs24);
+
         minRSI = this.minRs6;
-
-
-        // let min1 = parseInt(minRSI / 10 + '') * 10 <= 0 ? 10 : parseInt(minRSI / 10 + '') * 10
-        // let max1 = Math.ceil(maxRSI / 10) * 10;
-        // let con1 = (maxKDJ - minKDJ) / 2 + minKDJ;
 
         this.maxRs6 = maxKDJ;
         this.maxRs12 = maxKDJ;
@@ -322,18 +319,12 @@ export default class NewClass extends cc.Component {
 
         } else if (this.drawKDJ.node.active == true) {
 
-            // this.label1.string = (minKDJ + (maxKDJ - minKDJ) / 4 * 1).toFixed(2);
-            // this.label2.string = (minKDJ + (maxKDJ - minKDJ) / 4 * 2).toFixed(2);
-            // this.label3.string = (minKDJ + (maxKDJ - minKDJ) / 4 * 3).toFixed(2);
             this.label1.string = 10 + '';
             this.label2.string = 50 + '';
             this.label3.string = 90 + '';
 
         } else if (this.drawRSI.node.active == true) {
 
-            // this.label1.string = (minRSI + (maxRSI - minRSI) / 4 * 1).toFixed(2);
-            // this.label2.string = (minRSI + (maxRSI - minRSI) / 4 * 2).toFixed(2);
-            // this.label3.string = (minRSI + (maxRSI - minRSI) / 4 * 3).toFixed(2);
             this.label1.string = 20 + '';
             this.label2.string = 50 + '';
             this.label3.string = 80 + '';
@@ -401,10 +392,7 @@ export default class NewClass extends cc.Component {
         }
 
         for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
-            // if (!viweData[index]) {
-            //     console.log('viewData is null' + index)
-            //     return;
-            // }
+
             this.minDIF = Math.min(this.minDIF, this.DIFList[index]);
             this.maxDIF = Math.max(this.maxDIF, this.DIFList[index]);
 
@@ -575,89 +563,52 @@ export default class NewClass extends cc.Component {
         let preRSIX = 10 + ((some - 1) * cc.ext.hz_width) + cc.ext.hz_width / 2;
         //RSI6
         if (index >= 6) {
-            // let RSI6Y = this.Rs6[index - 5] / this.maxRs6 * bgHeight;
 
-            // let preRSI6Y = this.Rs6[index - 6] / this.maxRs6 * bgHeight;
             let RSI6Y = this.Rs6[index] / this.maxRs6 * bgHeight;
 
             let preRSI6Y = this.Rs6[index - 1] / this.maxRs6 * bgHeight;
-            // if (RSI6Y > bgHeight) {
-            //     RSI6Y = bgHeight;
-            // }
-            // if (preRSI6Y > bgHeight) {
-            //     preRSI6Y = bgHeight;
-            // }
-            //    if (index > 5) {
 
             this.drawRSI.strokeColor = GameCfg.RSI_COLOR[0];
             DrawUtils.drawLine(this.drawRSI, preRSIX, preRSI6Y + 10, RSIX, RSI6Y + 10);
-            //    }
+
         }
 
-        //RSI12
         if (index >= 12) {
-            // let RSI12Y = this.Rs12[index - 11] / this.maxRs12 * bgHeight;
-            // let preRSI12Y = this.Rs12[index - 12] / this.maxRs12 * bgHeight;
+
             let RSI12Y = this.Rs12[index] / this.maxRs6 * bgHeight;
             let preRSI12Y = this.Rs12[index - 1] / this.maxRs6 * bgHeight;
-            // if (RSI12Y > bgHeight) {
-            //     RSI12Y = bgHeight;
-            // }
-            // if (preRSI12Y > bgHeight) {
-            //     preRSI12Y = bgHeight;
-            // }
-            //   if (index > 11) {
 
             this.drawRSI.strokeColor = GameCfg.RSI_COLOR[1];
             DrawUtils.drawLine(this.drawRSI, preRSIX, preRSI12Y + 10, RSIX, RSI12Y + 10);
-            //  }
 
         }
 
-        //RSI24
         if (index >= 24) {
-            // let RSI24Y = this.Rs24[index - 23] / this.maxRs24 * bgHeight;
-            // let preRSI24Y = this.Rs24[index - 24] / this.maxRs24 * bgHeight;
 
             let RSI24Y = this.Rs24[index] / this.maxRs6 * bgHeight;
             let preRSI24Y = this.Rs24[index - 1] / this.maxRs6 * bgHeight;
-            // if (RSI24Y > 150) {
-            //     RSI24Y = 150;
-            // }
-            // if (preRSI24Y > 150) {
-            //     preRSI24Y = 150;
-            // }
-            //   if (index > 23) {
 
             this.drawRSI.strokeColor = GameCfg.RSI_COLOR[2];
             DrawUtils.drawLine(this.drawRSI, preRSIX, preRSI24Y + 10, RSIX, RSI24Y + 10);
-            //  }
 
         }
     }
 
     onDrawMACD(index) {
         let some = index - cc.ext.beg_end[0];
-        // 
-        //dif
+
         if (index <= 0) {
             return
         }
 
         let bgHeight = this.drawMACD.node.height;
         let difY = 0;
-        //  if (this.DIFList[index] >= 0) {
+
         difY = this.DIFList[index] / this.maxMACD * bgHeight / 2;//+ bgHeight / 2;
-        // } else if (this.DIFList[index] <= 0) {
-        //     difY = (this.DIFList[index] /this.maxMACD * bgHeight / 2)
-        // }
 
         let predifY = 0;
-        //  if (this.DIFList[index - 1] >= 0) {
+
         predifY = this.DIFList[index - 1] / this.maxMACD * bgHeight / 2;//+ bgHeight / 2;
-        // } else if (this.DIFList[index - 1] <= 0) {
-        //     predifY = -(this.DIFList[index - 1] / this.minDIF * bgHeight / 2)
-        // }
 
         let difx = 10 + (some * cc.ext.hz_width) + cc.ext.hz_width / 2;
         let preX = 10 + ((some - 1) * cc.ext.hz_width) + cc.ext.hz_width / 2;
@@ -667,28 +618,20 @@ export default class NewClass extends cc.Component {
             this.drawMACD.lineWidth = 2;
             DrawUtils.drawLine(this.drawMACD, preX, predifY, difx, difY);
         }
-        //  this.preDIF = [difx, difY];
 
-        //dea
         let deaY = 0;
-        //  if (this.DEAList[index] >= 0) {
+
         deaY = this.DEAList[index] / this.maxMACD * bgHeight / 2;
-        // } else if (this.DEAList[index] <= 0) {
-        //     deaY = -(this.DEAList[index] / this.minDEA * bgHeight / 2);
-        // }
 
         let predeaY = 0;
-        //  if (this.DEAList[index - 1] >= 0) {
+
         predeaY = this.DEAList[index - 1] / this.maxMACD * bgHeight / 2;
-        // } else if (this.DEAList[index - 1] <= 0) {
-        //     predeaY = -(this.DEAList[index - 1] / this.minDEA * bgHeight / 2);
-        // }
+
         if (index > 0) {
             this.drawMACD.strokeColor = GameCfg.DEA_LINE_COL;
             this.drawMACD.lineWidth = 2;
             DrawUtils.drawLine(this.drawMACD, preX, predeaY, difx, deaY);
         }
-        //    this.preDEA = [difx, deaY];
 
         //MACD
         //MACD线的宽度

@@ -39,7 +39,7 @@ export default class NewClass extends cc.Component {
 
         }, this)
 
-        
+
         GlobalEvent.on(EventCfg.OPENSTATLAYER, () => {
             this.statLayer.active = true;
         }, this);

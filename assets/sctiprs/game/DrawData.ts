@@ -547,6 +547,22 @@ export default class DrawData {
         return null;
     }
 
+    //本轮收益是开多还是开空
+    public static getCurrentState(index) {
+        let datas = GameCfg.fill;
+        if (GameCfg.GameType != pb.GameType.QiHuo) {
+            return;
+        }
+        for (let i = 0; i < datas.length; i++) {
+
+            if (datas[i].end == index) {
+                return datas[i].state;
+            }
+
+        }
+        return;
+    }
+
     //获取当前标签
     public static getCurrentBlockMark(index) {
         let datas = GameCfg.blockHistoy;

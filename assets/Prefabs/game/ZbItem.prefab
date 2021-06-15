@@ -14,7 +14,7 @@
   {
     "__type__": "cc.Node",
     "_name": "bItem",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": null,
     "_children": [],
     "_active": true,

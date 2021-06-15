@@ -447,6 +447,7 @@ export default class NewClass extends cc.Component {
 
 		this.setLabelData();
 		this.onShow();
+		this.getRaisingLimit();
 	}
 
 	onSetMrCount() {
@@ -934,6 +935,7 @@ export default class NewClass extends cc.Component {
 
 	setRoundNumber(name?, flag?) {
 		//买入卖出回合数
+		this.getRaisingLimit();
 		if (this.roundNumber > 0 && name) {
 			//  GlobalEvent.emit('onBuyOrSell', name);
 			this.onBuyOrSell(name);
@@ -1032,7 +1034,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	onBuyOrSell(state) {
-		this.getRaisingLimit();
+
 		//买入
 		let data = this.gpData;
 		if (state == 'mrBtn' || state == 'mrBtn1') {
@@ -1041,9 +1043,10 @@ export default class NewClass extends cc.Component {
 			//	this.allButData.push(GameCfg.huizhidatas - 1);
 
 			let rate = this.onCurPositionRete();
-
+			let sign = 1;
 			if (state == 'mrBtn1') {
 				rate = -rate;
+				sign = 2;
 			}
 			//   console.log('(' + curClose + '-' + preClose + ')' + "/" + preClose);
 			GlobalEvent.emit('updateRate', [rate]);
@@ -1055,7 +1058,8 @@ export default class NewClass extends cc.Component {
 			this.rateItem = {
 				rate: rate,
 				start: start,
-				end: null
+				end: null,
+				state: sign,
 			};
 
 			//		GameCfg.history.deal[GameCfg.history.deal.length] = [GameCfg.huizhidatas - 1, null, null];
@@ -1146,7 +1150,8 @@ export default class NewClass extends cc.Component {
 				this.rateItem = {
 					rate: rate,
 					start: start,
-					end: null
+					end: null,
+					state: false,
 				};
 				GameCfg.fill.push(this.rateItem);
 
@@ -1212,41 +1217,46 @@ export default class NewClass extends cc.Component {
 
 			let str = code.slice(0, 2);
 			let str1 = code.slice(0, 3);
-			let rate = (this.gpData[index].close - this.gpData[index - 1].close) / this.gpData[index - 1].close * 100;
-			if (str == '60' || str == '00') {
-				if (rate >= 9.95) {
-					this.zhangting.active = true;
-				} else if (rate <= -9.95) {
-					this.dieting.active = true;
+			if (this.gpData[index + 1]) {
+				let rate = (this.gpData[index + 1].close - this.gpData[index].close) / this.gpData[index].close * 100;
+				if (str == '60' || str == '00') {
+					if (rate >= 9.95) {
+						this.zhangting.active = true;
+
+					} else if (rate <= -9.95) {
+						this.dieting.active = true;
+
+					}
+				}
+				else if (str1 == '688') {
+					if (rate >= 19.94) {
+						this.zhangting.active = true;
+					} else if (rate <= -19.94) {
+						this.dieting.active = true;
+					}
+				}
+				else if (str1 == '300') {
+					let time = ComUtils.fromatTime1(this.gpData[index].day);
+					if (time >= 20200824) {
+						if (rate >= 19.94) {
+							this.zhangting.active = true;
+						}
+						else if (rate <= -19.94) {
+							this.dieting.active = true;
+						}
+					}
+					else if (time < 20200824) {
+						if (rate >= 9.95) {
+							this.zhangting.active = true;
+						}
+						else if (rate <= -9.95) {
+							this.dieting.active = true;
+						}
+					}
 				}
 
 			}
-			else if (str1 == '688') {
-				if (rate >= 19.94) {
-					this.zhangting.active = true;
-				} else if (rate <= -19.94) {
-					this.dieting.active = true;
-				}
-			}
-			else if (str1 == '300') {
-				let time = ComUtils.fromatTime1(this.gpData[index].day);
-				if (time >= 20200824) {
-					if (rate >= 19.94) {
-						this.zhangting.active = true;
-					}
-					else if (rate <= -19.94) {
-						this.dieting.active = true;
-					}
-				}
-				else if (time < 20200824) {
-					if (rate >= 9.95) {
-						this.zhangting.active = true;
-					}
-					else if (rate <= -9.95) {
-						this.dieting.active = true;
-					}
-				}
-			}
+
 
 		}
 

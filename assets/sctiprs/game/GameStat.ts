@@ -1,5 +1,4 @@
 import GameData from '../GameData';
-
 import GameCfgText from '../GameText';
 import GameCfg from './GameCfg';
 import DrawData from './DrawData';
@@ -94,25 +93,39 @@ export default class NewClass extends cc.Component {
                 la.string = StrategyAIData.buyCount + '';
 
                 let la1 = boxs[1].getChildByName('la2').getComponent(cc.Label);
-                la1.string = (StrategyAIData.profitrate * 100).toFixed(2);
+                la1.string = (StrategyAIData.profitrate * 100).toFixed(2) + '%';
             }
 
             {
                 let la = boxs[2].getChildByName('la1').getComponent(cc.Label);
-                la.string = (data.yCount + data.sCount) + '';
+                la.string = (StrategyAIData.Ycount) + '';
 
                 let la1 = boxs[2].getChildByName('la2').getComponent(cc.Label);
-                la1.string = (GameCfg.allRate * 100).toFixed(2);
+                la1.string = (StrategyAIData.Scount) + '';
+
+                let la2 = boxs[2].getChildByName('la3').getComponent(cc.Label);
+                la2.string = ((StrategyAIData.Ycount / (StrategyAIData.Ycount + StrategyAIData.Scount)) * 100).toFixed(2) + '';
+                if (StrategyAIData.Ycount + StrategyAIData.Scount == 0) {
+                    la2.string = 0.00 + '%';
+                }
             }
 
             {
                 let la = boxs[3].getChildByName('la1').getComponent(cc.Label);
-                la.string = (data.yCount) + '';
+                la.string = (data.yCount + data.sCount) + '';
 
                 let la1 = boxs[3].getChildByName('la2').getComponent(cc.Label);
+                la1.string = (GameCfg.allRate * 100).toFixed(2) + '%';
+            }
+
+            {
+                let la = boxs[4].getChildByName('la1').getComponent(cc.Label);
+                la.string = (data.yCount) + '';
+
+                let la1 = boxs[4].getChildByName('la2').getComponent(cc.Label);
                 la1.string = (data.sCount) + '';
 
-                let la2 = boxs[3].getChildByName('la3').getComponent(cc.Label);
+                let la2 = boxs[4].getChildByName('la3').getComponent(cc.Label);
                 la2.string = ((data.yCount / (data.yCount + data.sCount)) * 100).toFixed(2) + '';
                 if (data.yCount + data.sCount == 0) {
                     la2.string = 0.00 + '%';
@@ -120,13 +133,13 @@ export default class NewClass extends cc.Component {
             }
 
             {
-                let la = boxs[4].getChildByName('la1').getComponent(cc.Label);
+                let la = boxs[5].getChildByName('la1').getComponent(cc.Label);
                 la.string = info.high.length + '';
 
-                let la1 = boxs[4].getChildByName('la2').getComponent(cc.Label);
+                let la1 = boxs[5].getChildByName('la2').getComponent(cc.Label);
                 la1.string = info.middle.length + '';
 
-                let la2 = boxs[4].getChildByName('la3').getComponent(cc.Label);
+                let la2 = boxs[5].getChildByName('la3').getComponent(cc.Label);
                 la2.string = info.low.length + '';
             }
 
@@ -135,11 +148,11 @@ export default class NewClass extends cc.Component {
                 if ((3 * info.high.length + info.middle.length + 2 * info.low.length) == 0) {
                     point = 0;
                 }
-                let node1 = boxs[5].getChildByName('node1');
+                let node1 = boxs[6].getChildByName('node1');
 
-                let node2 = boxs[5].getChildByName('node2');
+                let node2 = boxs[6].getChildByName('node2');
 
-                let node3 = boxs[5].getChildByName('node3');
+                let node3 = boxs[6].getChildByName('node3');
 
                 node1.active = false;
                 node2.active = false;

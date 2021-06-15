@@ -64,6 +64,8 @@ export default {
         }
     ],
 
+    //  RAISINGLIMIT: false, //记录涨停板
+
     info: null,
 
     history: { //游戏记录

@@ -452,10 +452,10 @@ export default class NewClass extends cc.Component {
                             this.boxs[4].getChildByName('label').getComponent(cc.Label).string = '1';
                             this.boxs[5].getChildByName('label').getComponent(cc.Label).string = '1';
                         } else {
-                            // GameData.ZBSet.month = '9';
-                            // GameData.ZBSet.day = '10';
-                            // this.boxs[4].getChildByName('label').getComponent(cc.Label).string = '9';
-                            // this.boxs[5].getChildByName('label').getComponent(cc.Label).string = '10';
+                            GameData.ZBSet.month = '9';
+                            GameData.ZBSet.day = '10';
+                            this.boxs[4].getChildByName('label').getComponent(cc.Label).string = '9';
+                            this.boxs[5].getChildByName('label').getComponent(cc.Label).string = '10';
                         }
 
                     } else {
@@ -545,7 +545,7 @@ export default class NewClass extends cc.Component {
             if (code.length >= 7) {
                 code = code.slice(1, 7);
             }
-            ComUtils.saveHistory(code + '' + items[1]);
+            ComUtils.saveHistory(code + ' ' + items[1]);
         }
 
         if (GameData.ZBSet.year != '随机') {

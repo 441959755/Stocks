@@ -564,7 +564,7 @@ export default class NewClass extends cc.Component {
 				code = code.slice(1, 7);
 			}
 
-			ComUtils.saveHistory(code + '' + items[1]);
+			ComUtils.saveHistory(code + ' ' + items[1]);
 		}
 
 		if (GameData.DXSet.market == '随机行情') {

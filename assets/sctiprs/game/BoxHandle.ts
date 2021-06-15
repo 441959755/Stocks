@@ -133,7 +133,16 @@ export default class NewClass extends cc.Component {
 
                 //本轮收益
                 if (index == 10) {
-
+                    let la = this.tipsTitle.children[10].getComponent(cc.Label);
+                    let state = DrawData.getCurrentState(inde);
+                    if (state == 1) {
+                        la.string = '本轮多单收益:';
+                    }
+                    else if (state == 2) {
+                        la.string = '本轮空单收益:';
+                    } else {
+                        la.string = '本 轮 收 益 :';
+                    }
                     if (el === null) {
                         this.tipsText[index].node.active = false;
                         this.tipsTitle.children[10].active = false;
@@ -141,6 +150,7 @@ export default class NewClass extends cc.Component {
                     else if (el < 0) {
                         this.tipsText[index].node.active = true;
                         this.tipsTitle.children[10].active = true;
+
                         this.tipsText[index].string = parseInt(el * 10000 + '') / 100 + '%';
                         this.tipsText[index].node.color = cc.Color.GREEN;
                     } else {

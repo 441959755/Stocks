@@ -125,7 +125,17 @@ export default class GameCfgText {
         };
         data.start = items[2];
         if (items[3] == 0) {
-            data.end = ComUtils.getCurYearMonthDay();
+            // data.end = ComUtils.getCurYearMonthDay();
+            let f = new Date();
+            let y = f.getFullYear() + '';
+            let m = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+            let d = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
+            let sc = ComUtils.GetPreMonthDay(y + '-' + m + '-' + d, 2);
+
+            y = sc.y;
+            m = sc.m >= 10 ? sc.m : '0' + sc.m;
+            d = sc.d >= 10 ? sc.d : '0' + sc.d;
+            data.end = y + '' + m + '' + d;
         } else {
             data.end = items[3];
         }

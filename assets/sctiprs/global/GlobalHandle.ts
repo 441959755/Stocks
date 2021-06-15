@@ -70,6 +70,15 @@ export default class GlobalHandle {
                 GameCfg.data[0].data.push(data);
             });
 
+            if (info1.kstyle == pb.KStyle.Wave) {
+                cb && (cb());
+                if (!GameCfg.GAMEFUPAN) {
+                    GameCfg.huizhidatas = info.items.length - 100;
+                }
+                GameData.huizhidatas = info.items.length - 100;
+                return;
+            }
+
             //	GameCfg.enterGameCache.startTime = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
 
             if (!GameCfg.GAMEFUPAN) {
@@ -77,7 +86,10 @@ export default class GlobalHandle {
             }
             GameData.huizhidatas = info.items.length;
 
+
+
             //	GameData.huizhidatas = info.items.length;
+            info1.kstyle = pb.KStyle.Random;
 
             socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
                 //   console.log('onCmdQuoteQuery' + JSON.stringify(info));

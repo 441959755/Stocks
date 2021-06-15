@@ -68,9 +68,11 @@ export default class NewClass extends cc.Component {
 
     _str = null;
 
+    RSIRecord = null;
+
     onLoad() {
         //   this.content.removeAllChildren();
-        this.content.getComponent(cc.Layout).verticalDirection = cc.Layout.VerticalDirection.BOTTOM_TO_TOP;
+        // this.content.getComponent(cc.Layout).verticalDirection = cc.Layout.VerticalDirection.BOTTOM_TO_TOP;
         GlobalEvent.on(EventCfg.SLGEVENTNOTICE, () => {
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                 if (GameCfg.GameSet.select == '均线') {
@@ -182,7 +184,7 @@ export default class NewClass extends cc.Component {
             if (this.maList[index][j] > this.maList[index][z]) {
                 if (this.maList[index][j] > this.maList[index - 1][z]) {
                     if (this.gpData[index].close > this.maList[index][j]) {
-                        let max = Math.max(this.gpData[index - 1].close.this.gpData[index - 1].open);
+                        let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
                         if (this.gpData[index].close > max) {
                             //B
                             this._str = '1）金叉后，即MA1在MA2之上（MA1 > MA2）;\n  2) 且MA1趋势向上（MA1(n) > MA1(n - 1) ）；\n 3）此时若股价上涨有效站上MA1时（即close > MA1 ）, 且股价反转上日K线（即close > 上日K线实体高价）；\n则可算短线买入信号“B”！'
@@ -201,7 +203,7 @@ export default class NewClass extends cc.Component {
             //短线转向卖点
             if (this.maList[index][j] <= this.maList[index - 1][j]) {
                 if (this.gpData[index].close < this.maList[index][j]) {
-                    let max = Math.min(this.gpData[index - 1].close.this.gpData[index - 1].open);
+                    let max = Math.min(this.gpData[index - 1].close, this.gpData[index - 1].open);
                     if (this.gpData[index].close < max) {
                         //S
                         this._str = '1) 当MA1趋势转向下（MA1(n) <=  MA1(n-1)）；\n 2) 此时若股价有效跌破MA1线时（即close < MA1）, 且股价跌破上日K线（即close < 上日K线实体低价）；\n 则可算短线卖出信号S。'
@@ -220,7 +222,7 @@ export default class NewClass extends cc.Component {
             //乖离过大买点
             if (this.maList[index][j] < this.maList[index][z]) {
                 if ((this.maList[index][j] - this.gpData[index].close) / this.maList[index][j] >= -0.12) {
-                    let min = Math.min(this.gpData[index - 1].close.this.gpData[index - 1].open);
+                    let min = Math.min(this.gpData[index - 1].close, this.gpData[index - 1].open);
                     if (this.gpData[index].close > min) {
                         if (this.gpData[index].low > this.gpData[index - 1].low) {
                             //B
@@ -240,7 +242,7 @@ export default class NewClass extends cc.Component {
             //乖离过大卖点
             if (this.maList[index][j] > this.maList[index][z]) {
                 if (((this.gpData[index].close - this.maList[index][j]) / this.maList[index][j]) >= 0.12) {
-                    let max = Math.max(this.gpData[index - 1].close.this.gpData[index - 1].open);
+                    let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
                     if (this.gpData[index].close < max) {
                         //s
                         this._str = '1）上涨过程中(MA1>MA2)，当股价上涨远离MA1过大时（超过10%，即(close-MA1)/MA1>= 0.10）；\n  2）此时后若股价收盘价跌破上日K线实体高价（阳线收盘价，阴线开盘价），则股价会做超买回落；\n短线可做卖出信号“S”'
@@ -383,7 +385,6 @@ export default class NewClass extends cc.Component {
             if (this.difList[index - 1] < 0) {
                 if (this.difList[index] > 0) {
 
-
                     this._str = '１） DIF白线从下向上穿越0轴：当DIF（白线）从下方向上穿越MACD的0轴时，代表由弱转强，可作为短线买入信号“B”，买入个股！'
                     if (this.curState != 'B') {
                         this.onCreateTipsItem('DIF向上穿越0轴');
@@ -503,7 +504,7 @@ export default class NewClass extends cc.Component {
             if (this.MACDState == 2 && this.MACDState[index] > 0) {
                 if (this.macdList[index] > this.macdList[index - 1]) {
                     if (this.deaList[index] > this.deaList[index - 1]) {
-                        let max = Math.max(this.gpData[index - 1].close.this.gpData[index - 1].open);
+                        let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
                         if (this.gpData[index].close >= max) {
                             if (this.macdList[index] >= 0.04) {
                                 // this.MACDState = 1;
@@ -984,12 +985,14 @@ export default class NewClass extends cc.Component {
 
         if (GameCfg.GameSet.strategy == '经典用法' || GameCfg.GameSet.strategy == '超买超卖') {
             {//RSI超卖
-                this._str = '1）当白线RSI1数值连续低于20； 2）同时当收盘股价并未再创新低时； 则说明目前处于短期的超卖区域，短线可博反弹，买入信号"B".'
-                if (this.RSI1[index - 2] < 20 && this.RSI1[index - 1] < 20 && this.RSI1[index] < 20) {
+                if (this.RSI1[index - 1] < 20) {
                     let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].ope);
                     if (this.gpData[index].close >= max) {
                         if (this.RSI1[index] > this.RSI1[index - 1] && this.RSI2[index] > this.RSI2[index - 1]) {
+                            this._str = '1）当白线RSI1数值连续低于20； 2）同时当收盘股价并未再创新低时； 则说明目前处于短期的超卖区域，短线可博反弹，买入信号"B".'
                             if (this.curState != 'B') {
+                                this.RSIState = 2;
+                                this.RSIRecord = this.gpData[index - 1].close;
                                 this.onCreateTipsItem('RSI超卖');
                                 this.curState = 'B';
                                 StrategyAIData.onBuyFunc();
@@ -998,6 +1001,17 @@ export default class NewClass extends cc.Component {
 
                     }
                 }
+
+
+                if (this.RSIState == 2 && this.gpData[index].close < this.RSIRecord) {
+                    this.RSIState = 0;
+                    this.RSIRecord = 0;
+                    this._str = '止损：出现超卖信号时，记下当时B信号K线的实体最低价，当后续K线收盘价跌破前最低价时，标“S”，止损卖出！'
+                    this.onCreateTipsItem('RSI超卖止损');
+                    this.curState = 'S';
+                    StrategyAIData.onSellFunc();
+                }
+
 
 
             }
