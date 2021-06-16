@@ -4,7 +4,8 @@ import LoadUtils from './LoadUtils';
 import GameCfg from '../game/GameCfg';
 import { pb } from '../../protos/proto'
 import GameData from '../GameData';
-
+import LLWConfig from '../common/config/LLWConfig';
+import PlatDefine from '../common/config/PlatDefine';
 export default class ComUtils {
 	private static loading = null;
 
@@ -261,6 +262,23 @@ export default class ComUtils {
 			GameData.ZBHistoryInfo = GameData.ZBHistoryInfo;
 		}
 
+	}
+
+	//iphoneX位置适配
+	changeIphoneXAdWidth() {
+		if (LLWConfig.PLATTYPE != PlatDefine.PLAT_WECHAT) {
+			return;
+		}
+		let winSize = wx.getSystemInfoSync();
+		let name = winSize.model.toString().indexOf('x');
+
+		if (name != -1) {
+
+			console.log('IphoneX');
+		} else {
+
+			console.log('node IphoneX');
+		}
 	}
 
 

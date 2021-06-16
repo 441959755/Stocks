@@ -70,6 +70,11 @@ export default class NewClass extends cc.Component {
 
     RSIRecord = null;
 
+    macdH1 = null;
+    macdH2 = null;
+    macdL1 = null;
+    macdL2 = null;
+
     onLoad() {
         //   this.content.removeAllChildren();
         // this.content.getComponent(cc.Layout).verticalDirection = cc.Layout.VerticalDirection.BOTTOM_TO_TOP;
@@ -412,6 +417,24 @@ export default class NewClass extends cc.Component {
 
         if (GameCfg.GameSet.strategy == 'MACD背离' || GameCfg.GameSet.strategy == '经典用法') {
 
+            let high = this.gpData[index].high;
+            let low = this.gpData[index].low;
+            if (this.macdL1 === null) {
+                this.macdL1 = low;
+            }
+            if (this.difList[index] >= this, this.deaList && this.difList[index] > 0) {
+                this.macdH1 = Math.max(this.macdH1, high);
+                if (this.deaList < this.difList
+
+                    && this.deaList) {
+
+                }
+            }
+
+            this.macdL1 = Math.min(this.macdL1, low);
+
+
+
             //5）MACD底背离
             this._str = '１） MACD底背离： 下跌过程中，当股价一波低于一波，而对应的DIF（白线）的波谷却没有新低，反而逐渐高起来了，即为股价的ＭＡＣＤ底背离现象，预示着股价将要反弹上涨，短线可做为买入信号“B”；'
             //TODO
@@ -670,7 +693,7 @@ export default class NewClass extends cc.Component {
 
         if (GameCfg.GameSet.strategy == '经典用法' || GameCfg.GameSet.strategy == '布林带中轨') {
             //1) 股价突破中轨
-            if (this.gpData[index - 1].low <= this.BollList[index - 1][0] && this.gpData[index - 1].close > this.BollList[index - 1][0]) {
+            if (this.gpData[index - 1].low <= this.BollList[index - 1][0] && this.gpData[index].close > this.BollList[index][0]) {
                 if (this.BollList[index][0] >= this.BollList[index - 1][0]) {
                     if (this.BollList[index][1] >= this.BollList[index - 1][1]) {
                         if (this.gpData[index].close > this.BollList[index][0]) {
