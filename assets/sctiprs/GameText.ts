@@ -277,7 +277,7 @@ export default class GameCfgText {
             GameCfg.data[0].circulate = items[4];
             GameCfg.data[0].ktype = data.ktype;
 
-            return data;
+            GameCfg.enterGameCache = data;
         }
     }
 
@@ -288,7 +288,7 @@ export default class GameCfgText {
             kstyle: GameCfg.enterGameCache.kstyle,
             code: null,
             from: null,
-            total: parseInt(GameData.DXSet.KLine),
+            total: parseInt(GameData.DXSet.KLine) + 1,
             to: 0
         };
         let items;
@@ -357,7 +357,7 @@ export default class GameCfgText {
         GameCfg.enterGameCache = data;
 
         console.log('给的数据:' + JSON.stringify(data));
-        return data;
+
 
     }
 
@@ -368,7 +368,7 @@ export default class GameCfgText {
             kstyle: pb.KStyle.Random,
             code: null,
             from: null,
-            total: parseInt(GameData.QHSet.KLine),
+            total: parseInt(GameData.QHSet.KLine) + 1,
             to: 0
         };
         let rom = parseInt(Math.random() * this.qihuoList.length + '');
@@ -420,7 +420,7 @@ export default class GameCfgText {
         GameCfg.data[0].data = [];
         GameCfg.data[0].name = items[1] + '  ' + items[2] + items[3];
         console.log(JSON.stringify(data));
-        return data;
+
     }
 
     public static getGPZBByRandom(cb?) {
@@ -429,7 +429,7 @@ export default class GameCfgText {
             kstyle: 0,      // 0随机行情   1震荡行情  2单边向上行情 3单边向下行情
             code: null,       //股票代码（0表示忽略和随机）
             from: null,       //// 开始时间戳（不能为0，查询日K行情的格式为：YYYYMMDD；查询分时行情的格式为：HHMMSS）
-            total: parseInt(GameData.ZBSet.KLine),  // K线条数
+            total: parseInt(GameData.ZBSet.KLine) + 1,  // K线条数
             to: 0,           //	// 结束时间戳（0表示忽略该参数；格式同from）
         }
         let items;
@@ -496,7 +496,6 @@ export default class GameCfgText {
         console.log('给的数据:' + JSON.stringify(data));
         GameCfg.enterGameCache = data;
 
-        return data;
     }
 
 

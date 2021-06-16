@@ -339,6 +339,7 @@ export default class NewClass extends cc.Component {
         }
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
+            GameCfg.GameOperationItem = [];
             if (GameCfg.GameType == pb.GameType.QiHuo) {
                 this.clearGameData();
                 return;
@@ -347,17 +348,18 @@ export default class NewClass extends cc.Component {
             let data = null;
 
             if (GameCfg.GameType == pb.GameType.ShuangMang) {
-                data = GameCfgText.getGPSMByRandom();
+                GameCfgText.getGPSMByRandom();
             }
             else if (GameCfg.GameType == pb.GameType.DingXiang) {
-                data = GameCfgText.getGPDXByRandom();
+                GameCfgText.getGPDXByRandom();
             }
             else if (GameCfg.GameType == pb.GameType.QiHuo) {
-                data = GameCfgText.getQHQHByRandom();
+                GameCfgText.getQHQHByRandom();
             }
             else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                data = GameCfgText.getGPZBByRandom();
+                GameCfgText.getGPZBByRandom();
             }
+            data = GameCfg.enterGameCache;
             if (data) {
                 let cb = () => {
                     GameCfg.huizhidatas = GameData.huizhidatas;

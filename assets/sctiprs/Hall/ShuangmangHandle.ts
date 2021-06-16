@@ -130,19 +130,18 @@ export default class NewClass extends cc.Component {
     }
 
     smStartGameSet() {
-        let data = GameCfgText.getGPSMByRandom()
-        console.log('给的数据:' + JSON.stringify(data));
-        if (data) {
-            GameCfg.enterGameCache = data;
+        GameCfgText.getGPSMByRandom()
 
-            GlobalEvent.emit(EventCfg.onCmdQuoteQuery, data);
-        }
+        console.log('给的数据:' + JSON.stringify(GameCfg.enterGameCache));
+
+        GlobalEvent.emit(EventCfg.onCmdQuoteQuery, GameCfg.enterGameCache);
+
     }
 
     onDestroy() {
         GlobalEvent.off(EventCfg.SMINITFUND);
     }
-
+  
     //点击广告重置
     onGameResetCount(info) {
         GlobalHandle.onGameResetSMCapital();
