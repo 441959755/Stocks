@@ -35,7 +35,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.GAMEOVEER, () => {
             setTimeout(() => {
                 this.finalLayer.active = true;
-            }, 100)
+            }, 66)
 
         }, this)
 

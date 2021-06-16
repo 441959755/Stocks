@@ -178,7 +178,6 @@ export default class NewClass extends cc.Component {
 									kOffset: GameCfg.huizhidatas,
 
 								}
-
 							}
 							else if (GameCfg.GameType == pb.GameType.QiHuo) {
 								if (this._kdCount > 0) {
@@ -197,7 +196,9 @@ export default class NewClass extends cc.Component {
 									}
 								}
 							}
+
 							GameCfg.GameOperationItem.push(item);
+
 						}
 					}
 				}
@@ -310,14 +311,14 @@ export default class NewClass extends cc.Component {
 			this.curMrCount.push(count);
 			this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
 
-			if (!GameCfg.GAMEFUPAN) {
-				if (this.keMrCount < 100) {
-					this.mrBtn.interactable = false;
-					this.mrBtn.enableAutoGrayEffect = true;
-				}
-				this.mcBtn.interactable = true;
-				this.mcBtn.enableAutoGrayEffect = false;
-
+			//if (!GameCfg.GAMEFUPAN) {
+			if (this.keMrCount < 100) {
+				this.mrBtn.interactable = false;
+				this.mrBtn.enableAutoGrayEffect = true;
+			}
+			this.mcBtn.interactable = true;
+			this.mcBtn.enableAutoGrayEffect = false;
+			if (this.roundNumber > 0) {
 				let item = {
 					opId: pb.GameOperationId.Ask,
 					volume: percent,
@@ -326,6 +327,7 @@ export default class NewClass extends cc.Component {
 				}
 				GameCfg.GameOperationItem.push(item);
 			}
+			//	}
 			this.setRoundNumber('mrBtn');
 		}
 		//卖出
@@ -339,15 +341,15 @@ export default class NewClass extends cc.Component {
 			this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
 			this.curMcCount = mc;
 
-			if (!GameCfg.GAMEFUPAN) {
-				if (this.keMcCount <= 0) {
-					this.mcBtn.interactable = false;
-					this.mcBtn.enableAutoGrayEffect = true;
-				}
-				this.mrBtn.interactable = true;
-				this.mrBtn.enableAutoGrayEffect = false;
-				let item;
-
+			//	if (!GameCfg.GAMEFUPAN) {
+			if (this.keMcCount <= 0) {
+				this.mcBtn.interactable = false;
+				this.mcBtn.enableAutoGrayEffect = true;
+			}
+			this.mrBtn.interactable = true;
+			this.mrBtn.enableAutoGrayEffect = false;
+			let item;
+			if (this.roundNumber > 0) {
 				item = {
 					opId: pb.GameOperationId.Bid,
 					volume: percent,
@@ -356,6 +358,7 @@ export default class NewClass extends cc.Component {
 				}
 				GameCfg.GameOperationItem.push(item);
 			}
+			//	}
 			this.setRoundNumber('mcBtn');
 		}
 	}
@@ -667,7 +670,7 @@ export default class NewClass extends cc.Component {
 
 					this.cyBtn.node.active = true;
 					this.gwBtn.node.active = false;
-					if (!GameCfg.GAMEFUPAN) {
+					if (this.roundNumber > 0) {
 						let item = {
 							opId: pb.GameOperationId.Ask,
 							volume: 1,
@@ -686,7 +689,7 @@ export default class NewClass extends cc.Component {
 					this.keMcCount = 0;
 					this.gwBtn.node.active = true;
 					this.cyBtn.node.active = false;
-					if (!GameCfg.GAMEFUPAN) {
+					if (this.roundNumber > 0) {
 						let item = {
 							opId: pb.GameOperationId.Bid,
 							volume: 1,
@@ -701,20 +704,20 @@ export default class NewClass extends cc.Component {
 		}
 		//点击观望
 		else if (name == 'gwBtn' || name == 'cyBtn') {
+			if (this.roundNumber > 0) {
+				let item = {
+					opId: null,
+					kOffset: GameCfg.huizhidatas,
+				}
+				if (name == 'gwBtn') {
+					item.opId = pb.GameOperationId.Wait;
+				}
+				else {
+					item.opId = pb.GameOperationId.Hold;
+				}
 
-			let item = {
-				opId: null,
-				kOffset: GameCfg.huizhidatas,
-
+				GameCfg.GameOperationItem.push(item);
 			}
-			if (name == 'gwBtn') {
-				item.opId = pb.GameOperationId.Wait;
-			}
-			else {
-				item.opId = pb.GameOperationId.Hold;
-			}
-
-			GameCfg.GameOperationItem.push(item);
 			this.setRoundNumber(name);
 		}
 		else if (name == 'xl_fupan_pre') {
@@ -725,7 +728,7 @@ export default class NewClass extends cc.Component {
 
 		//开多
 		else if (name == 'qhxl_kd') {
-			if (!GameCfg.GAMEFUPAN) {
+			if (this.roundNumber > 0) {
 				let item = {
 					opId: pb.GameOperationId.Long,
 					volume: 1,
@@ -792,7 +795,7 @@ export default class NewClass extends cc.Component {
 		}
 		//反手
 		else if (name == 'qhxl_fs') {
-			if (!GameCfg.GAMEFUPAN) {
+			if (this.roundNumber > 0) {
 				let item = {
 					opId: pb.GameOperationId.Close_Force,
 					volume: 1,
@@ -865,7 +868,7 @@ export default class NewClass extends cc.Component {
 
 		}
 		else if (name == 'qhxl_kk') {
-			if (!GameCfg.GAMEFUPAN) {
+			if (this.roundNumber > 0) {
 				let item = {
 					opId: pb.GameOperationId.Short,
 					volume: 1,

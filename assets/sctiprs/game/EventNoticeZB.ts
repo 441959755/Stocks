@@ -70,10 +70,16 @@ export default class NewClass extends cc.Component {
 
     RSIRecord = null;
 
-    macdH1 = null;
-    macdH2 = null;
+    macdH1 = 0;
+    macdH2 = 0;
     macdL1 = null;
     macdL2 = null;
+
+    FlagDing1 = false;
+
+    FlagDing2 = false;
+    DIF1 = 0;
+    DIF2 = 0;
 
     onLoad() {
         //   this.content.removeAllChildren();
@@ -419,29 +425,112 @@ export default class NewClass extends cc.Component {
 
             let high = this.gpData[index].high;
             let low = this.gpData[index].low;
-            if (this.macdL1 === null) {
-                this.macdL1 = low;
+
+            if (this.difList[index] >= this.deaList[index] && this.difList[index] >= 0) {
+                if (!this.FlagDing1) {
+                    this.macdH1 = Math.max(this.macdH1, high);
+                    this.DIF1 = Math.max(this.DIF1, this.difList[index]);
+                }
+                else if (high > this.macdH1 && !this.FlagDing2) {
+                    this.macdH2 = Math.max(this.macdH2, high);
+                    this.DIF2 = Math.max(this.DIF2, this.difList[index]);
+                }
             }
-            if (this.difList[index] >= this, this.deaList && this.difList[index] > 0) {
-                this.macdH1 = Math.max(this.macdH1, high);
-                if (this.deaList < this.difList
-
-                    && this.deaList) {
-
+            else if (this.difList[index] < this.deaList[index] && this.DIF1 > 0) {
+                if (!this.FlagDing1) {
+                    this.FlagDing1 = true;
+                }
+                else if (this.macdH2 && this.macdH2 > this.macdH1) {
+                    this.FlagDing2 = true;
                 }
             }
 
-            this.macdL1 = Math.min(this.macdL1, low);
+            if (this.FlagDing1 && this.FlagDing2) {
+                if (this.macdH2 > this.macdH1 && this.DIF2 <= this.DIF1) {
+                    if (this.difList[index] <= this.difList[index - 1]) {
+                        this._str = '1） MACD 顶背离： 上涨过程中，当股价一波高于一波，而对应的DIF（白线）的波峰却没有新高，反而逐渐变低了，即为股价的ＭＡＣＤ顶背离现象，预示着股价将要回落下跌，短线可做为卖出信号“S”。'
+                        if (this.curState != 'S') {
+                            this.onCreateTipsItem('MACD顶背离');
+                            this.curState = 'S';
+                            StrategyAIData.onSellFunc();
+                        }
+                        this.macdH1 = this.macdH2;
+                        this.macdH2 = 0;
+                        this.FlagDing1 = false;
+                        this.FlagDing2 = false;
+                        this.macdL1 = 0;
+                        this.macdL2 = 0;
+                        this.DIF1 = this.DIF2;
+                        this.DIF2 = 0;
+                    }
 
+                } else {
+                    this.macdH1 = this.macdH2;
+                    this.macdH2 = 0;
+                    this.FlagDing1 = false;
+                    this.FlagDing2 = false;
+                    this.macdL1 = 0;
+                    this.macdL2 = 0;
+                    this.DIF2 = 0;
+                    this.DIF1 = this.DIF2;
+                }
+            }
 
+            if (this.difList[index] < this.deaList[index] && this.difList[index] < 0) {
+                if (!this.macdL1) {
+                    this.macdL1 = low;
+                }
+                if (!this.FlagDing1) {
+                    this.macdL1 = Math.min(this.macdL1, low);
+                    this.DIF1 = Math.min(this.DIF1, this.difList[index]);
+                } else if (low < this.macdL1) {
+                    if (!this.macdL2) {
+                        this.macdL2 = low;
+                    }
+                    this.macdL2 = Math.min(low, this.macdL2);
+                    this.DIF2 = Math.min(this.DIF2, this.difList[index]);
+                }
 
-            //5）MACD底背离
-            this._str = '１） MACD底背离： 下跌过程中，当股价一波低于一波，而对应的DIF（白线）的波谷却没有新低，反而逐渐高起来了，即为股价的ＭＡＣＤ底背离现象，预示着股价将要反弹上涨，短线可做为买入信号“B”；'
-            //TODO
+            }
+            else if (this.difList[index] > this.deaList[index] && this.DIF1 < 0) {
+                if (!this.FlagDing1) {
+                    this.FlagDing1 = true;
+                }
+                else if (this.macdL2 && this.macdL2 < this.macdL1) {
+                    this.FlagDing2 = true;
+                }
+            }
 
-            this._str = '1） MACD 顶背离： 上涨过程中，当股价一波高于一波，而对应的DIF（白线）的波峰却没有新高，反而逐渐变低了，即为股价的ＭＡＣＤ顶背离现象，预示着股价将要回落下跌，短线可做为卖出信号“S”。'
-            //6）MACD顶背离
-            //TODO
+            if (this.FlagDing1 && this.FlagDing2 && this.macdL2) {
+                if (this.macdL2 < this.macdL1 && this.DIF2 >= this.DIF1) {
+                    if (this.difList[index] >= this.difList[index - 1]) {
+                        //5）MACD底背离
+                        this._str = '１） MACD底背离： 下跌过程中，当股价一波低于一波，而对应的DIF（白线）的波谷却没有新低，反而逐渐高起来了，即为股价的ＭＡＣＤ底背离现象，预示着股价将要反弹上涨，短线可做为买入信号“B”；'
+                        if (this.curState != 'B') {
+                            this.onCreateTipsItem('MACD底背离');
+                            this.curState = 'B';
+                            StrategyAIData.onBuyFunc();
+                        }
+                        this.macdH1 = 0;
+                        this.macdH2 = 0;
+                        this.FlagDing1 = false;
+                        this.FlagDing2 = false;
+                        this.macdL1 = this.macdL2;
+                        this.macdL2 = null;
+                        this.DIF2 = 0;
+                        this.DIF1 = this.DIF2;
+                    }
+                } else {
+                    this.macdH1 = 0;
+                    this.macdH2 = 0;
+                    this.FlagDing1 = false;
+                    this.FlagDing2 = false;
+                    this.macdL1 = this.macdL2;
+                    this.macdL2 = null;
+                    this.DIF2 = 0;
+                    this.DIF1 = this.DIF2;
+                }
+            }
         }
 
 
@@ -1272,5 +1361,6 @@ export default class NewClass extends cc.Component {
         index && (itemHandle.Pindex = index)
         itemHandle.onShow();
     }
+
 
 }

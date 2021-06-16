@@ -131,13 +131,12 @@ export default class NewClass extends cc.Component {
 
     smStartGameSet() {
         let data = GameCfgText.getGPSMByRandom()
-
         console.log('给的数据:' + JSON.stringify(data));
+        if (data) {
+            GameCfg.enterGameCache = data;
 
-        GameCfg.enterGameCache = data;
-
-        GlobalEvent.emit(EventCfg.onCmdQuoteQuery, data);
-
+            GlobalEvent.emit(EventCfg.onCmdQuoteQuery, data);
+        }
     }
 
     onDestroy() {

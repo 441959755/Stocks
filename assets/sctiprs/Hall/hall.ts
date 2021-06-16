@@ -358,7 +358,7 @@ export default class NewClass extends cc.Component {
 		GameCfg.data[0].data = [];
 		GameCfg.info = info1;
 		GlobalHandle.onCmdGameStartReq(() => {
-			GlobalHandle.onCmdGameStartQuoteQuery(info1, () => {
+			GlobalHandle.onCmdGameStartQuoteQuery(GameCfg.info, () => {
 				cc.director.loadScene('game');
 			})
 		});

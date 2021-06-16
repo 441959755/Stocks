@@ -251,38 +251,34 @@ export default class GameCfgText {
         if (sc <= 0) {
             this.getGPSMByRandom();
 
-            return;
         }
-
-        if (sc < t) {
+        else if (sc < t) {
             this.getGPSMByRandom();
 
-            return;
         }
+        else {
+            //随机的时间戳
+            let s = Math.random() * (sc - t) + t;
 
-        //随机的时间戳
+            let f = new Date(s);
+            {
+                let ye = f.getFullYear();
+                let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
 
-        let s = Math.random() * (sc - t) + t;
+                let da = f.getDate() >= 10 ? f.getDate() : '0' + (f.getDate());
 
-        let f = new Date(s);
-        {
-            let ye = f.getFullYear();
-            let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+                data.from = ye + '' + mon + '' + da;
+                console.log(data.from);
+            }
 
-            let da = f.getDate() >= 10 ? f.getDate() : '0' + (f.getDate());
+            GameCfg.data[0].data = [];
+            GameCfg.data[0].name = items[1];
+            GameCfg.data[0].code = items[0];
+            GameCfg.data[0].circulate = items[4];
+            GameCfg.data[0].ktype = data.ktype;
 
-            data.from = ye + '' + mon + '' + da;
-            console.log(data.from);
-
+            return data;
         }
-
-        GameCfg.data[0].data = [];
-        GameCfg.data[0].name = items[1];
-        GameCfg.data[0].code = items[0];
-        GameCfg.data[0].circulate = items[4];
-        GameCfg.data[0].ktype = data.ktype;
-
-        return data;
     }
 
     //随机DX一只股票
