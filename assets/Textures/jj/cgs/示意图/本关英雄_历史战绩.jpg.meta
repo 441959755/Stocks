@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "4400f196-3927-45dd-8648-e4f66d534cd5",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 1280,
+  "height": 720,
+  "platformSettings": {},
+  "subMetas": {
+    "本关英雄_历史战绩": {
+      "ver": "1.0.4",
+      "uuid": "facedd8d-2831-4e59-82d3-b2619016c44b",
+      "rawTextureUuid": "4400f196-3927-45dd-8648-e4f66d534cd5",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1280,
+      "height": 720,
+      "rawWidth": 1280,
+      "rawHeight": 720,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

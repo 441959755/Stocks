@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "6488e758-4738-4196-b7f5-f921e3cd573f",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 1280,
+  "height": 720,
+  "platformSettings": {},
+  "subMetas": {
+    "多空大战结算": {
+      "ver": "1.0.4",
+      "uuid": "8578a863-9fd6-43c5-a520-28cee896bc8c",
+      "rawTextureUuid": "6488e758-4738-4196-b7f5-f921e3cd573f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1280,
+      "height": 720,
+      "rawWidth": 1280,
+      "rawHeight": 720,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

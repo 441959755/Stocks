@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "44e51b3e-31f7-495c-8b8c-e48fd703ba9b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 1280,
+  "height": 720,
+  "platformSettings": {},
+  "subMetas": {
+    "PK大战匹配": {
+      "ver": "1.0.4",
+      "uuid": "75919392-1be5-4ccf-bfdf-349e4a35c527",
+      "rawTextureUuid": "44e51b3e-31f7-495c-8b8c-e48fd703ba9b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1280,
+      "height": 720,
+      "rawWidth": 1280,
+      "rawHeight": 720,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
