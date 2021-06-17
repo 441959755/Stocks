@@ -199,6 +199,7 @@ export default class NewClass extends cc.Component {
                     let ma = [];
                     ma.push(GameCfg.GameSet.MA[0], GameCfg.GameSet.MA[1], GameCfg.GameSet.MA[2])
                     ma.sort((a, b) => { return a - b; })
+                    ma = Array.from(new Set(ma));
                     GameCfg.MAs = ma;
                 }
             } else if (GameCfg.GameSet.select == 'MACD') {

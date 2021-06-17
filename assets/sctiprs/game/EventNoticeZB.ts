@@ -5,7 +5,6 @@ import DrawData from "./DrawData";
 import GameCfg from "./GameCfg";
 import StrategyAIData from "./StrategyAIData";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
