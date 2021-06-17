@@ -35,7 +35,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.GAMEOVEER, () => {
             setTimeout(() => {
                 this.finalLayer.active = true;
-            }, 66)
+            }, 80)
 
         }, this)
 
@@ -227,7 +227,7 @@ export default class NewClass extends cc.Component {
 
                 }
             } else if (GameCfg.GameSet.select == 'KDJ') {
-                GameCfg.KDJ = GameCfg.GameSet.KDJ;
+                GameCfg.KDJ[0] = GameCfg.GameSet.KDJ;
                 if (GameCfg.GameSet.strategy == '超买超卖') {
 
                 } else if (GameCfg.GameSet.strategy == 'KDJ金叉') {

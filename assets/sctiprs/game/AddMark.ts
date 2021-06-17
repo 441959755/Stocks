@@ -223,14 +223,16 @@ export default class NewClass extends cc.Component {
             this.rHeight = node.height;
 
         } else if (info.type == 2) {
+            inde = info.index - 1;
+            if (this.markNodes[inde]) { return }
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                 node = cc.instantiate(this.Zb);
             } else {
                 node = cc.instantiate(this.bItem);
             }
-
-            inde = info.index - 1;
         } else if (info.type == 3) {
+            inde = info.index - 1;
+            if (this.markNodes[inde]) { return }
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                 node = cc.instantiate(this.Zs);
             }
@@ -238,17 +240,20 @@ export default class NewClass extends cc.Component {
                 node = cc.instantiate(this.sItem);
             }
 
-            inde = info.index - 1;
+
         }
         //策略買入 
         else if (info.type == 12) {
-            node = cc.instantiate(this.ZBItem);
             inde = info.index - 1;
+            if (this.AIMarkNodes[inde]) { return }
+            node = cc.instantiate(this.ZBItem);
         }
         //卖出
         else if (info.type == 13) {
-            node = cc.instantiate(this.ZSItem);
             inde = info.index - 1;
+            if (this.AIMarkNodes[inde]) { return }
+            node = cc.instantiate(this.ZSItem);
+
         }
 
         else {
@@ -273,7 +278,11 @@ export default class NewClass extends cc.Component {
                 }
 
                 this.AIMarkNodes[this.currPint.index].node.scale = this.currScale;
+            } else {
+                node.active = false;
+                node.x = -9999;
             }
+
         } else {
             this.markNodes[inde] = {
                 node: node,

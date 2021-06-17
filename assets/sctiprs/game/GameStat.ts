@@ -94,6 +94,12 @@ export default class NewClass extends cc.Component {
 
                 let la1 = boxs[1].getChildByName('la2').getComponent(cc.Label);
                 la1.string = (StrategyAIData.profitrate * 100).toFixed(2) + '%';
+
+                if (StrategyAIData.profitrate < 0) {
+                    la1.node.color = GameCfg.labelGreen;
+                } else {
+                    la1.node.color = GameCfg.labelRed;
+                }
             }
 
             {
@@ -104,7 +110,7 @@ export default class NewClass extends cc.Component {
                 la1.string = (StrategyAIData.Scount) + '';
 
                 let la2 = boxs[2].getChildByName('la3').getComponent(cc.Label);
-                la2.string = ((StrategyAIData.Ycount / (StrategyAIData.Ycount + StrategyAIData.Scount)) * 100).toFixed(2) + '';
+                la2.string = ((StrategyAIData.Ycount / (StrategyAIData.Ycount + StrategyAIData.Scount)) * 100).toFixed(2) + '%';
                 if (StrategyAIData.Ycount + StrategyAIData.Scount == 0) {
                     la2.string = 0.00 + '%';
                 }
@@ -116,6 +122,12 @@ export default class NewClass extends cc.Component {
 
                 let la1 = boxs[3].getChildByName('la2').getComponent(cc.Label);
                 la1.string = (GameCfg.allRate * 100).toFixed(2) + '%';
+
+                if (GameCfg.allRate < 0) {
+                    la1.node.color = GameCfg.labelGreen;
+                } else {
+                    la1.node.color = GameCfg.labelRed;
+                }
             }
 
             {
@@ -126,7 +138,7 @@ export default class NewClass extends cc.Component {
                 la1.string = (data.sCount) + '';
 
                 let la2 = boxs[4].getChildByName('la3').getComponent(cc.Label);
-                la2.string = ((data.yCount / (data.yCount + data.sCount)) * 100).toFixed(2) + '';
+                la2.string = ((data.yCount / (data.yCount + data.sCount)) * 100).toFixed(2) + '%';
                 if (data.yCount + data.sCount == 0) {
                     la2.string = 0.00 + '%';
                 }

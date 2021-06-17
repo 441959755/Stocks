@@ -198,7 +198,7 @@
       "array": [
         0,
         0,
-        461.4264834047346,
+        461.4376098903127,
         0,
         0,
         0,
@@ -17778,7 +17778,7 @@
       "ctor": "Float64Array",
       "array": [
         -26.075,
-        186.29999999999998,
+        188.29999999999998,
         0,
         0,
         0,
@@ -17872,7 +17872,7 @@
       "ctor": "Float64Array",
       "array": [
         -26.075,
-        146.49999999999997,
+        150.49999999999997,
         0,
         0,
         0,
@@ -17966,7 +17966,7 @@
       "ctor": "Float64Array",
       "array": [
         -26.075,
-        106.69999999999996,
+        112.69999999999996,
         0,
         0,
         0,
@@ -18060,7 +18060,7 @@
       "ctor": "Float64Array",
       "array": [
         -26.075,
-        66.89999999999995,
+        74.89999999999995,
         0,
         0,
         0,
@@ -18154,7 +18154,7 @@
       "ctor": "Float64Array",
       "array": [
         -26.075,
-        27.09999999999995,
+        37.09999999999995,
         0,
         0,
         0,
@@ -18248,7 +18248,7 @@
       "ctor": "Float64Array",
       "array": [
         -26.075,
-        -12.700000000000045,
+        -0.7000000000000455,
         0,
         0,
         0,
@@ -18342,7 +18342,7 @@
       "ctor": "Float64Array",
       "array": [
         -26.075,
-        -52.50000000000004,
+        -38.50000000000004,
         0,
         0,
         0,
@@ -18436,7 +18436,7 @@
       "ctor": "Float64Array",
       "array": [
         -26.075,
-        -92.30000000000004,
+        -76.30000000000004,
         0,
         0,
         0,
@@ -18530,7 +18530,7 @@
       "ctor": "Float64Array",
       "array": [
         -26.075,
-        -132.10000000000005,
+        -114.10000000000005,
         0,
         0,
         0,
@@ -18623,8 +18623,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        26.397,
-        -171.9,
+        -26,
+        -190.352,
         0,
         0,
         0,
@@ -18664,7 +18664,7 @@
     "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
-    "_fontSize": 18,
+    "_fontSize": 20,
     "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
@@ -18718,7 +18718,7 @@
       "ctor": "Float64Array",
       "array": [
         -27.029,
-        -211.70000000000007,
+        -224.174,
         0,
         0,
         0,
@@ -19008,7 +19008,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        186.29999999999998,
+        188.29999999999998,
         0,
         0,
         0,
@@ -19102,7 +19102,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        146.49999999999997,
+        150.49999999999997,
         0,
         0,
         0,
@@ -19196,7 +19196,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        106.69999999999996,
+        112.69999999999996,
         0,
         0,
         0,
@@ -19290,7 +19290,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        66.89999999999995,
+        74.89999999999995,
         0,
         0,
         0,
@@ -19384,7 +19384,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        27.09999999999995,
+        37.09999999999995,
         0,
         0,
         0,
@@ -19478,7 +19478,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -12.700000000000045,
+        -0.7000000000000455,
         0,
         0,
         0,
@@ -19572,7 +19572,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -52.50000000000004,
+        -38.50000000000004,
         0,
         0,
         0,
@@ -19666,7 +19666,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -92.30000000000004,
+        -76.30000000000004,
         0,
         0,
         0,
@@ -19760,7 +19760,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -132.10000000000005,
+        -114.10000000000005,
         0,
         0,
         0,
@@ -19841,7 +19841,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 97,
+      "width": 107.78,
       "height": 37.8
     },
     "_anchorPoint": {
@@ -19854,7 +19854,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -171.90000000000006,
+        -151.90000000000006,
         0,
         0,
         0,
@@ -19894,7 +19894,7 @@
     "_useOriginalSize": true,
     "_string": "本 轮 收 益 :",
     "_N$string": "本 轮 收 益 :",
-    "_fontSize": 18,
+    "_fontSize": 20,
     "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
@@ -19948,7 +19948,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -211.70000000000007,
+        -225.5,
         0,
         0,
         0,
@@ -20055,9 +20055,9 @@
     "_N$paddingLeft": 0,
     "_N$paddingRight": 0,
     "_N$paddingTop": 5,
-    "_N$paddingBottom": 2,
+    "_N$paddingBottom": 0,
     "_N$spacingX": 0,
-    "_N$spacingY": 2,
+    "_N$spacingY": 0,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0,
     "_N$affectedByScale": false,
@@ -20243,9 +20243,9 @@
     "_N$paddingLeft": 0,
     "_N$paddingRight": 0,
     "_N$paddingTop": 5,
-    "_N$paddingBottom": 2,
+    "_N$paddingBottom": 0,
     "_N$spacingX": 0,
-    "_N$spacingY": 2,
+    "_N$spacingY": 0,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0,
     "_N$affectedByScale": false,
@@ -28389,9 +28389,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 245,
+      "g": 251,
+      "b": 244,
       "a": 255
     },
     "_contentSize": {
@@ -28464,14 +28464,14 @@
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
-      "y": 0
+      "y": 1
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
         0,
-        10,
+        440,
         0,
         0,
         0,
@@ -28522,7 +28522,7 @@
     "_N$paddingBottom": 0,
     "_N$spacingX": 5,
     "_N$spacingY": 5,
-    "_N$verticalDirection": 1,
+    "_N$verticalDirection": 0,
     "_N$horizontalDirection": 0,
     "_N$affectedByScale": false,
     "_id": "52IEy68sZClaiEeFmxFCVY"
@@ -33878,7 +33878,7 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_trs": {

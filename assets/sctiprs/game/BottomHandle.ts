@@ -171,7 +171,7 @@ export default class NewClass extends cc.Component {
 
 						if (!GameCfg.GAMEFUPAN) {
 							let item;
-							if (GameCfg.GameType == pb.GameType.ZhiBiao || GameCfg.GameType == pb.GameType.DingXiang) {
+							if (GameCfg.GameType == pb.GameType.ZhiBiao || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.ShuangMang) {
 								item = {
 									opId: pb.GameOperationId.Bid,
 									volume: 1,
@@ -1217,6 +1217,9 @@ export default class NewClass extends cc.Component {
 		let index = GameCfg.huizhidatas - 1;
 		if (GameCfg.GameType != pb.GameType.QiHuo) {
 			let code = GameCfg.data[0].code + '';
+			if (code.length >= 7) {
+				code = code.slice(1);
+			}
 
 			let str = code.slice(0, 2);
 			let str1 = code.slice(0, 3);
@@ -1254,6 +1257,19 @@ export default class NewClass extends cc.Component {
 						}
 						else if (rate <= -9.95) {
 							this.dieting.active = true;
+						}
+					}
+				}
+
+				if (this.gpData[index + 1].close == this.gpData[index + 1].high) {
+					if (this.gpData[index + 1].close == this.gpData[index + 1].low) {
+						if (this.gpData[index + 1].close == this.gpData[index + 1].open) {
+							if (rate >= 4.88) {
+								this.zhangting.active = true;
+							}
+							else if (rate <= -4.88) {
+								this.dieting.active = true;
+							}
 						}
 					}
 				}

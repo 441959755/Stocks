@@ -354,23 +354,24 @@ export default class NewClass extends cc.Component {
             this.downBoxs.forEach(el => {
                 el.active = false;
             });
-            if (this.setProId == 5) {
-                let downBox = this.downBoxs[this.setProId];
-                let year = this.boxs[3].getChildByName('label').getComponent(cc.Label).string;
-                let month = this.boxs[4].getChildByName('label').getComponent(cc.Label).string;
-                var temp = new Date(parseInt(year), parseInt(month), 0);
-                let day = temp.getDate();
-                let content = cc.find('New ScrollView/view/content', downBox);
+            // if (this.setProId == 5) {
+            //     let downBox = this.downBoxs[this.setProId];
+            //     let year = this.boxs[3].getChildByName('label').getComponent(cc.Label).string;
+            //     let month = this.boxs[4].getChildByName('label').getComponent(cc.Label).string;
+            //     var temp = new Date(parseInt(year), parseInt(month), 0);
+            //     let day = temp.getDate();
+            //     let content = cc.find('New ScrollView/view/content', downBox);
 
-                content.children.forEach(el => {
-                    let str = el.getComponent(cc.Label).string;
-                    if (parseInt(str) > day) {
-                        this.boxs[5].getChildByName('label').getComponent(cc.Label).string = day + '';
-                    } else {
-                        this.boxs[5].getChildByName('label').getComponent(cc.Label).string = day + '';
-                    }
-                })
-            } else if (this.setProId == 0) {
+            //     content.children.forEach(el => {
+            //         let str = el.getComponent(cc.Label).string;
+            //         if (parseInt(str) > day) {
+            //             this.boxs[5].getChildByName('label').getComponent(cc.Label).string = day + '';
+            //         } else {
+            //             this.boxs[5].getChildByName('label').getComponent(cc.Label).string = day + '';
+            //         }
+            //     })
+            // } else 
+            if (this.setProId == 0) {
                 this.onCreatStrategy(str);
             } else if (this.setProId == 2) {
                 if (str == '随机选股') {

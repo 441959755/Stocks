@@ -73,6 +73,8 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     EXPMALabel: cc.Label[] = [];
 
+    sign = false;
+
     onLoad() {
         this.drawBordWidth = cc.winSize.width - 180 - this.part1.node.width - 25;
         let mixWidth = 6;
@@ -505,8 +507,7 @@ export default class NewClass extends cc.Component {
         this.drawBOLL.lineWidth = 2;
         this.drawEXPMA.lineWidth = 2;
 
-        this.bottomValue = viweData[0].low;
-
+        this.bottomValue = viweData[cc.ext.beg_end[0]].low;
         this.topValue = 0;
 
         for (let i = cc.ext.beg_end[0]; i < cc.ext.beg_end[1]; i++) {
@@ -744,6 +745,7 @@ export default class NewClass extends cc.Component {
                 }
                 let flag = el.open > el.close;
 
+                this.sign = this.getRaisingLimit(index);
                 this.drawRect(this.drawBg, startX, by, endX - startX, hy - by, flag);
 
             }
@@ -802,6 +804,15 @@ export default class NewClass extends cc.Component {
             } else {
                 col = new cc.Color().fromHEX('#00BA50');
             }
+
+            if (this.sign) {
+                if (GameCfg.GameSet.isBW) {
+                    col = new cc.Color().fromHEX('#3972F6');
+                } else {
+                    col = new cc.Color().fromHEX('#2B8917');
+                }
+            }
+
             ctx.strokeColor = col;
         } else if (flag != undefined) {
             if (GameCfg.GameSet.isBW) {
@@ -841,6 +852,9 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GameType != pb.GameType.QiHuo) {
             // let index = GameCfg.huizhidatas - 1;
             let code = GameCfg.data[0].code + '';
+            if (code.length >= 7) {
+                code = code.slice(1);
+            }
             let data = GameCfg.data[0].data;
             let str = code.slice(0, 2);
             let str1 = code.slice(0, 3);

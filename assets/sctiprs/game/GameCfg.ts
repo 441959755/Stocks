@@ -42,7 +42,8 @@ export default {
 
     CCL_COL: null,  //持仓量颜色
 
-
+    labelRed: new cc.Color().fromHEX('#e94343'),
+    labelGreen: new cc.Color().fromHEX('#31a633'),
 
     VOLColor: [cc.Color.WHITE, cc.Color.YELLOW],
 
