@@ -80,6 +80,8 @@ export default class GameData {
     public static headimgurl = null; //头像地址
     public static headImg = null;
 
+    public static roomId = null;
+
     public static openid = null;
     public static sessionKey = null;
 
@@ -88,6 +90,8 @@ export default class GameData {
     public static huizhidatas = null;
 
     private static _SmxlState = null;// 双盲训练状态
+
+    public static otherPlayers = null;
 
     public static get SmxlState() {
         return this._SmxlState;

@@ -552,7 +552,7 @@ export default class NewClass extends cc.Component {
         if (GameData.ZBSet.year != '随机') {
             let m, d;
             if (GameData.ZBSet.month.length < 2) {
-                m = '0' + GameData.ZBSet.month.length;
+                m = '0' + GameData.ZBSet.month;
             } else {
                 m = GameData.ZBSet.month;
             }

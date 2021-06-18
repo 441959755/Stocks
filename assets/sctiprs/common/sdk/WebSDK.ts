@@ -1,4 +1,5 @@
 
+import { pb } from "../../../protos/proto";
 import HttpMgr from "../net/HttpMgr";
 import LLWUtils from "../utils/LLWUtils";
 
@@ -19,13 +20,12 @@ export default class WebSDK {
 
     login(call) {
 
-
         let uuid = LLWUtils.getUUID();
 
         let loginInfo = {
             account: uuid,
-            type: 99,
-            from: 8888,
+            type: pb.LoginType.WebTest,
+            from: pb.AppFrom.WeChatMinProgram,
             pwd: ''
         };
 

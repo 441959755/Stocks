@@ -62,6 +62,8 @@ export default {
             data: [],
             circulate: 0,
             ktype: 0,
+            tsGameFrom: null,
+            tsGameCur: null,
         }
     ],
 
@@ -72,7 +74,6 @@ export default {
     history: { //游戏记录
         huizhidatas: 0,
         allRate: 0,       //总利率
-        //  deal: [],    //交易天数、利率
     },
 
     TIMETEMP: [],   //玩的记录时间戳
@@ -95,7 +96,9 @@ export default {
 
     blockHistoy: [],
 
-    GameOperationItem: [] //操作集合
+    GameOperationItem: [], //操作集合
+
+    RoomGameData: null,
 
 
 }

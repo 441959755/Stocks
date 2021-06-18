@@ -9,49 +9,6 @@ export namespace pb {
         MsgMaxBody_Len = 1024000
     }
 
-    /** AppPlantForm enum. */
-    enum AppPlantForm {
-        AppPlantForm_NULL = 0,
-        WechatMinProgram = 1,
-        Ios = 11,
-        Android = 21
-    }
-
-    /** AdPosition enum. */
-    enum AdPosition {
-        AdPosition_NULL = 0,
-        StartUp = 1,
-        Main = 11
-    }
-
-    /** AppFrom enum. */
-    enum AppFrom {
-        Android_000 = 0,
-        Android_001 = 1,
-        Android_201 = 201,
-        Android_204 = 204,
-        Android_205 = 205,
-        Android_206 = 206,
-        Android_208 = 208,
-        Android_209 = 209,
-        Android_210 = 210,
-        Android_211 = 211,
-        Android_212 = 212,
-        Android_301 = 301,
-        Android_302 = 302,
-        Android_601 = 601,
-        Android_1000 = 1000,
-        Android_1204 = 1204,
-        Android_1205 = 1205,
-        Android_1208 = 1208,
-        Android_1212 = 1212,
-        IosAppleStore = 6666,
-        Ipad = 6667,
-        WebsiteIos = 7777,
-        WebsiteAndriod = 7778,
-        WeChatMinProgram = 8888
-    }
-
     /** ErrorCode enum. */
     enum ErrorCode {
         CS_OK = 0,
@@ -72,6 +29,11 @@ export namespace pb {
         CS_CHECK_FAILURE_CGDS_ID = 15,
         CS_CHECK_FAILURE_TIME = 16,
         CS_CHECK_FAILURE_PROPERTY = 17,
+        CS_CHECK_FAILURE_TOKEN = 18,
+        CS_ALREADY_UNLOCK = 19,
+        CS_CHECK_PHONE_UNREGISTRY = 20,
+        CS_CHECK_ACCOUNT_FORBIDDEN = 21,
+        CS_INVALID_SMSCODE = 22,
         CS_ROOM_INVALID = 100,
         CS_ROOM_FULL = 101,
         CS_ROOM_FAIL_CHECKIN = 102,
@@ -94,6 +56,8 @@ export namespace pb {
         Sync_S2C_GameCg_GD = 1016,
         Sync_S2C_GameTimes = 1018,
         Sync_S2C_StockOrderResult = 1020,
+        Sync_S2C_MutipleLogin = 1022,
+        Sync_S2C_TaskProgress = 1024,
         Sync_C2S_GameHeart = 1200,
         Sync_Email = 1300,
         Req_QuoteSubscribe = 2001,
@@ -106,16 +70,42 @@ export namespace pb {
         Rep_IsTradingDay = 2008,
         Req_QueryTradingDay = 2009,
         Rep_QueryTradingDay = 2010,
+        Req_QueryAiStockList = 2011,
+        Rep_QueryAiStockList = 2012,
+        Req_QueryAiSignal = 2013,
+        Rep_QueryAiSignal = 2014,
         Req_Hall_UploadIcon = 3001,
         Rep_Hall_UploadIcon = 3002,
-        Req_Hall_EditNick = 3003,
-        Rep_Hall_EditNick = 3004,
+        Req_Hall_DownloadIcon = 3003,
+        Rep_Hall_DownploadIcon = 3004,
         Req_Hall_EditIcon = 3005,
         Rep_Hall_EditIcon = 3006,
-        Req_Hall_BackBag = 3007,
-        Rep_Hall_BackBag = 3008,
-        Req_Hall_GetItem = 3009,
-        Rep_Hall_GetItem = 3010,
+        Req_Hall_EditNick = 3007,
+        Rep_Hall_EditNick = 3008,
+        Req_Hall_EditLocation = 3009,
+        Rep_Hall_EditLocation = 3010,
+        Req_Hall_EditGender = 3011,
+        Rep_Hall_EditGender = 3012,
+        Req_Hall_BackBag = 3013,
+        Rep_Hall_BackBag = 3014,
+        Req_Hall_GetItem = 3015,
+        Rep_Hall_GetItem = 3016,
+        Req_Hall_EditFavorList = 3017,
+        Rep_Hall_EditFavorList = 3018,
+        Req_Hall_QueryPlayer = 3019,
+        Rep_Hall_QueryPlayer = 3020,
+        Req_Hall_SaveStudyProgress = 3021,
+        Rep_Hall_SaveStudyProgress = 3022,
+        Req_Hall_GetDailyTaskAward = 3023,
+        Rep_Hall_GetDailyTaskAward = 3024,
+        Req_Hall_UnlockGame = 3025,
+        Rep_Hall_UnlockGame = 3026,
+        Req_Hall_GetWeeklyAward = 3027,
+        Rep_Hall_GetWeeklyAward = 3028,
+        Req_Hall_QueryEventLog = 3029,
+        Rep_Hall_QueryEventLog = 3030,
+        Req_Hall_Logout = 3999,
+        Rep_Hall_Logout = 4000,
         Req_Game_Login = 4001,
         Rep_Game_Login = 4002,
         Req_Game_Start = 4003,
@@ -154,8 +144,12 @@ export namespace pb {
         Rep_Game_CgdsReg = 4036,
         Req_Game_CgdsRanking = 4037,
         Rep_Game_CgdsRanking = 4038,
-        RoomMsgRange_BEG = 5000,
-        RoomMsgRange_END = 5999,
+        Req_Game_ZsjcBettingList = 4039,
+        Rep_Game_ZsjcBettingList = 4040,
+        Req_Game_ZsjcBet = 4041,
+        Rep_Game_ZsjcBet = 4042,
+        Req_Game_ZsjcRanking = 4043,
+        Rep_Game_ZsjcRanking = 4044,
         Req_Room_Create = 5003,
         Rep_Room_Create = 5004,
         Req_Room_Enter = 5005,
@@ -174,12 +168,6 @@ export namespace pb {
         Sync_Room_GameStatus = 5214,
         Sync_Room_GameOp = 5216,
         Sync_Room_GameResult = 5218,
-        Req_Game_ZsjcBettingList = 6000,
-        Rep_Game_ZsjcBettingList = 6001,
-        Req_Game_ZsjcBet = 6002,
-        Rep_Game_ZsjcBet = 6003,
-        Req_Game_ZsjcRanking = 6004,
-        Rep_Game_ZsjcRanking = 6005,
         S2S_HeartBeat = 10001,
         S2S_Update_PlayerProperty = 10003,
         S2S_Update_PlayerGameCounter = 10005,
@@ -195,7 +183,8 @@ export namespace pb {
         S2S_Reload_Cgds = 10025,
         S2S_Reload_GameConf = 10027,
         S2S_Sync_ZsjcBetting = 10028,
-        S2S_Sync_ZsjcState = 10030
+        S2S_Sync_ZsjcState = 10030,
+        S2S_Update_DailyTaskProgress = 10032
     }
 
     /** Properties of a MessageHead. */
@@ -385,120 +374,6 @@ export namespace pb {
 
         /**
          * Converts this ErrorInfo to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of an AdClicked. */
-    interface IAdClicked {
-
-        /** AdClicked uid */
-        uid?: (number|null);
-
-        /** AdClicked pos */
-        pos?: (number|null);
-
-        /** AdClicked url */
-        url?: (string|null);
-
-        /** AdClicked from */
-        from?: (pb.AppFrom|null);
-
-        /** AdClicked ua */
-        ua?: (string|null);
-    }
-
-    /** Represents an AdClicked. */
-    class AdClicked implements IAdClicked {
-
-        /**
-         * Constructs a new AdClicked.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: pb.IAdClicked);
-
-        /** AdClicked uid. */
-        public uid: number;
-
-        /** AdClicked pos. */
-        public pos: number;
-
-        /** AdClicked url. */
-        public url: string;
-
-        /** AdClicked from. */
-        public from: pb.AppFrom;
-
-        /** AdClicked ua. */
-        public ua: string;
-
-        /**
-         * Creates a new AdClicked instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns AdClicked instance
-         */
-        public static create(properties?: pb.IAdClicked): pb.AdClicked;
-
-        /**
-         * Encodes the specified AdClicked message. Does not implicitly {@link pb.AdClicked.verify|verify} messages.
-         * @param message AdClicked message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: pb.IAdClicked, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified AdClicked message, length delimited. Does not implicitly {@link pb.AdClicked.verify|verify} messages.
-         * @param message AdClicked message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: pb.IAdClicked, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes an AdClicked message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns AdClicked
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.AdClicked;
-
-        /**
-         * Decodes an AdClicked message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns AdClicked
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.AdClicked;
-
-        /**
-         * Verifies an AdClicked message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates an AdClicked message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns AdClicked
-         */
-        public static fromObject(object: { [k: string]: any }): pb.AdClicked;
-
-        /**
-         * Creates a plain object from an AdClicked message. Also converts values to other types if specified.
-         * @param message AdClicked
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: pb.AdClicked, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this AdClicked to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -707,11 +582,34 @@ export namespace pb {
     enum GamePropertyId {
         Gold = 0,
         Diamond = 1,
-        VIP = 2,
+        Vip = 2,
         Exp = 3,
         Level = 4,
         Fame = 5,
+        Coupon = 6,
+        UnlockDxxl = 20,
+        UnlockQhxl = 21,
+        UnlockTjdxl = 22,
+        UnlockZbxl = 23,
+        VipExpiration = 29,
         Max = 30
+    }
+
+    /** EventId enum. */
+    enum EventId {
+        EventId_NULL = 0,
+        EventId_WeeklyAward = 1,
+        EventId_Zsjc = 2
+    }
+
+    /** TaskId enum. */
+    enum TaskId {
+        Pk = 0,
+        Dk = 1,
+        Zsjc = 2,
+        Ggjc = 3,
+        MaxDailyTaskId = 4,
+        MaxStudyTaskId = 8
     }
 
     /** GameOperationId enum. */
@@ -1152,9 +1050,6 @@ export namespace pb {
     /** Properties of a TodayGameTimes. */
     interface ITodayGameTimes {
 
-        /** TodayGameTimes ts */
-        ts?: (number|Long|null);
-
         /** TodayGameTimes counter */
         counter?: (number[]|null);
     }
@@ -1167,9 +1062,6 @@ export namespace pb {
          * @param [properties] Properties to set
          */
         constructor(properties?: pb.ITodayGameTimes);
-
-        /** TodayGameTimes ts. */
-        public ts: (number|Long);
 
         /** TodayGameTimes counter. */
         public counter: number[];
@@ -1989,6 +1881,102 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a Tasks. */
+    interface ITasks {
+
+        /** Tasks study */
+        study?: (pb.ITaskItem[]|null);
+
+        /** Tasks daily */
+        daily?: (pb.ITaskItem[]|null);
+    }
+
+    /** Represents a Tasks. */
+    class Tasks implements ITasks {
+
+        /**
+         * Constructs a new Tasks.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ITasks);
+
+        /** Tasks study. */
+        public study: pb.ITaskItem[];
+
+        /** Tasks daily. */
+        public daily: pb.ITaskItem[];
+
+        /**
+         * Creates a new Tasks instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Tasks instance
+         */
+        public static create(properties?: pb.ITasks): pb.Tasks;
+
+        /**
+         * Encodes the specified Tasks message. Does not implicitly {@link pb.Tasks.verify|verify} messages.
+         * @param message Tasks message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ITasks, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Tasks message, length delimited. Does not implicitly {@link pb.Tasks.verify|verify} messages.
+         * @param message Tasks message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ITasks, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a Tasks message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Tasks
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.Tasks;
+
+        /**
+         * Decodes a Tasks message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Tasks
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.Tasks;
+
+        /**
+         * Verifies a Tasks message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a Tasks message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Tasks
+         */
+        public static fromObject(object: { [k: string]: any }): pb.Tasks;
+
+        /**
+         * Creates a plain object from a Tasks message. Also converts values to other types if specified.
+         * @param message Tasks
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.Tasks, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Tasks to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a GameData. */
     interface IGameData {
 
@@ -2013,8 +2001,8 @@ export namespace pb {
         /** GameData cgState */
         cgState?: (pb.ICgState|null);
 
-        /** GameData todayTs */
-        todayTs?: (number|Long|null);
+        /** GameData today */
+        today?: (number|Long|null);
 
         /** GameData todayTimes */
         todayTimes?: (number[]|null);
@@ -2024,6 +2012,21 @@ export namespace pb {
 
         /** GameData zsjcState */
         zsjcState?: (pb.IZsjcState|null);
+
+        /** GameData location */
+        location?: (string|null);
+
+        /** GameData gender */
+        gender?: (string|null);
+
+        /** GameData favorList */
+        favorList?: (number[]|null);
+
+        /** GameData tasks */
+        tasks?: (pb.ITasks|null);
+
+        /** GameData week */
+        week?: (number|null);
     }
 
     /** Represents a GameData. */
@@ -2056,8 +2059,8 @@ export namespace pb {
         /** GameData cgState. */
         public cgState?: (pb.ICgState|null);
 
-        /** GameData todayTs. */
-        public todayTs: (number|Long);
+        /** GameData today. */
+        public today: (number|Long);
 
         /** GameData todayTimes. */
         public todayTimes: number[];
@@ -2067,6 +2070,21 @@ export namespace pb {
 
         /** GameData zsjcState. */
         public zsjcState?: (pb.IZsjcState|null);
+
+        /** GameData location. */
+        public location: string;
+
+        /** GameData gender. */
+        public gender: string;
+
+        /** GameData favorList. */
+        public favorList: number[];
+
+        /** GameData tasks. */
+        public tasks?: (pb.ITasks|null);
+
+        /** GameData week. */
+        public week: number;
 
         /**
          * Creates a new GameData instance using the specified properties.
@@ -3021,193 +3039,223 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a CmdEditNick. */
-    interface ICmdEditNick {
+    /** Properties of a PlayerInfo. */
+    interface IPlayerInfo {
 
-        /** CmdEditNick uid */
+        /** PlayerInfo uid */
         uid?: (number|null);
 
-        /** CmdEditNick nick */
+        /** PlayerInfo nick */
         nick?: (string|null);
+
+        /** PlayerInfo icon */
+        icon?: (string|null);
+
+        /** PlayerInfo gender */
+        gender?: (string|null);
+
+        /** PlayerInfo location */
+        location?: (string|null);
+
+        /** PlayerInfo properties */
+        properties?: ((number|Long)[]|null);
+
+        /** PlayerInfo counters */
+        counters?: (pb.IGameCounter[]|null);
     }
 
-    /** Represents a CmdEditNick. */
-    class CmdEditNick implements ICmdEditNick {
+    /** Represents a PlayerInfo. */
+    class PlayerInfo implements IPlayerInfo {
 
         /**
-         * Constructs a new CmdEditNick.
+         * Constructs a new PlayerInfo.
          * @param [properties] Properties to set
          */
-        constructor(properties?: pb.ICmdEditNick);
+        constructor(properties?: pb.IPlayerInfo);
 
-        /** CmdEditNick uid. */
+        /** PlayerInfo uid. */
         public uid: number;
 
-        /** CmdEditNick nick. */
+        /** PlayerInfo nick. */
         public nick: string;
 
+        /** PlayerInfo icon. */
+        public icon: string;
+
+        /** PlayerInfo gender. */
+        public gender: string;
+
+        /** PlayerInfo location. */
+        public location: string;
+
+        /** PlayerInfo properties. */
+        public properties: (number|Long)[];
+
+        /** PlayerInfo counters. */
+        public counters: pb.IGameCounter[];
+
         /**
-         * Creates a new CmdEditNick instance using the specified properties.
+         * Creates a new PlayerInfo instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns CmdEditNick instance
+         * @returns PlayerInfo instance
          */
-        public static create(properties?: pb.ICmdEditNick): pb.CmdEditNick;
+        public static create(properties?: pb.IPlayerInfo): pb.PlayerInfo;
 
         /**
-         * Encodes the specified CmdEditNick message. Does not implicitly {@link pb.CmdEditNick.verify|verify} messages.
-         * @param message CmdEditNick message or plain object to encode
+         * Encodes the specified PlayerInfo message. Does not implicitly {@link pb.PlayerInfo.verify|verify} messages.
+         * @param message PlayerInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: pb.ICmdEditNick, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: pb.IPlayerInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified CmdEditNick message, length delimited. Does not implicitly {@link pb.CmdEditNick.verify|verify} messages.
-         * @param message CmdEditNick message or plain object to encode
+         * Encodes the specified PlayerInfo message, length delimited. Does not implicitly {@link pb.PlayerInfo.verify|verify} messages.
+         * @param message PlayerInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: pb.ICmdEditNick, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: pb.IPlayerInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a CmdEditNick message from the specified reader or buffer.
+         * Decodes a PlayerInfo message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns CmdEditNick
+         * @returns PlayerInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdEditNick;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.PlayerInfo;
 
         /**
-         * Decodes a CmdEditNick message from the specified reader or buffer, length delimited.
+         * Decodes a PlayerInfo message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns CmdEditNick
+         * @returns PlayerInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdEditNick;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.PlayerInfo;
 
         /**
-         * Verifies a CmdEditNick message.
+         * Verifies a PlayerInfo message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a CmdEditNick message from a plain object. Also converts values to their respective internal types.
+         * Creates a PlayerInfo message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns CmdEditNick
+         * @returns PlayerInfo
          */
-        public static fromObject(object: { [k: string]: any }): pb.CmdEditNick;
+        public static fromObject(object: { [k: string]: any }): pb.PlayerInfo;
 
         /**
-         * Creates a plain object from a CmdEditNick message. Also converts values to other types if specified.
-         * @param message CmdEditNick
+         * Creates a plain object from a PlayerInfo message. Also converts values to other types if specified.
+         * @param message PlayerInfo
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: pb.CmdEditNick, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: pb.PlayerInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this CmdEditNick to JSON.
+         * Converts this PlayerInfo to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a CmdEditIcon. */
-    interface ICmdEditIcon {
+    /** Properties of a CmdEditFavorList. */
+    interface ICmdEditFavorList {
 
-        /** CmdEditIcon uid */
+        /** CmdEditFavorList removed */
+        removed?: (boolean|null);
+
+        /** CmdEditFavorList uid */
         uid?: (number|null);
-
-        /** CmdEditIcon icon */
-        icon?: (string|null);
     }
 
-    /** Represents a CmdEditIcon. */
-    class CmdEditIcon implements ICmdEditIcon {
+    /** Represents a CmdEditFavorList. */
+    class CmdEditFavorList implements ICmdEditFavorList {
 
         /**
-         * Constructs a new CmdEditIcon.
+         * Constructs a new CmdEditFavorList.
          * @param [properties] Properties to set
          */
-        constructor(properties?: pb.ICmdEditIcon);
+        constructor(properties?: pb.ICmdEditFavorList);
 
-        /** CmdEditIcon uid. */
+        /** CmdEditFavorList removed. */
+        public removed: boolean;
+
+        /** CmdEditFavorList uid. */
         public uid: number;
 
-        /** CmdEditIcon icon. */
-        public icon: string;
-
         /**
-         * Creates a new CmdEditIcon instance using the specified properties.
+         * Creates a new CmdEditFavorList instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns CmdEditIcon instance
+         * @returns CmdEditFavorList instance
          */
-        public static create(properties?: pb.ICmdEditIcon): pb.CmdEditIcon;
+        public static create(properties?: pb.ICmdEditFavorList): pb.CmdEditFavorList;
 
         /**
-         * Encodes the specified CmdEditIcon message. Does not implicitly {@link pb.CmdEditIcon.verify|verify} messages.
-         * @param message CmdEditIcon message or plain object to encode
+         * Encodes the specified CmdEditFavorList message. Does not implicitly {@link pb.CmdEditFavorList.verify|verify} messages.
+         * @param message CmdEditFavorList message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: pb.ICmdEditIcon, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: pb.ICmdEditFavorList, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified CmdEditIcon message, length delimited. Does not implicitly {@link pb.CmdEditIcon.verify|verify} messages.
-         * @param message CmdEditIcon message or plain object to encode
+         * Encodes the specified CmdEditFavorList message, length delimited. Does not implicitly {@link pb.CmdEditFavorList.verify|verify} messages.
+         * @param message CmdEditFavorList message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: pb.ICmdEditIcon, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: pb.ICmdEditFavorList, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a CmdEditIcon message from the specified reader or buffer.
+         * Decodes a CmdEditFavorList message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns CmdEditIcon
+         * @returns CmdEditFavorList
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdEditIcon;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdEditFavorList;
 
         /**
-         * Decodes a CmdEditIcon message from the specified reader or buffer, length delimited.
+         * Decodes a CmdEditFavorList message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns CmdEditIcon
+         * @returns CmdEditFavorList
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdEditIcon;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdEditFavorList;
 
         /**
-         * Verifies a CmdEditIcon message.
+         * Verifies a CmdEditFavorList message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a CmdEditIcon message from a plain object. Also converts values to their respective internal types.
+         * Creates a CmdEditFavorList message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns CmdEditIcon
+         * @returns CmdEditFavorList
          */
-        public static fromObject(object: { [k: string]: any }): pb.CmdEditIcon;
+        public static fromObject(object: { [k: string]: any }): pb.CmdEditFavorList;
 
         /**
-         * Creates a plain object from a CmdEditIcon message. Also converts values to other types if specified.
-         * @param message CmdEditIcon
+         * Creates a plain object from a CmdEditFavorList message. Also converts values to other types if specified.
+         * @param message CmdEditFavorList
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: pb.CmdEditIcon, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: pb.CmdEditFavorList, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this CmdEditIcon to JSON.
+         * Converts this CmdEditFavorList to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -3298,6 +3346,402 @@ export namespace pb {
 
         /**
          * Converts this CmdGetItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a TaskItem. */
+    interface ITaskItem {
+
+        /** TaskItem taskId */
+        taskId?: (number|null);
+
+        /** TaskItem progress */
+        progress?: (number|null);
+
+        /** TaskItem award */
+        award?: (number|null);
+
+        /** TaskItem got */
+        got?: (number|null);
+    }
+
+    /** Represents a TaskItem. */
+    class TaskItem implements ITaskItem {
+
+        /**
+         * Constructs a new TaskItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ITaskItem);
+
+        /** TaskItem taskId. */
+        public taskId: number;
+
+        /** TaskItem progress. */
+        public progress: number;
+
+        /** TaskItem award. */
+        public award: number;
+
+        /** TaskItem got. */
+        public got: number;
+
+        /**
+         * Creates a new TaskItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns TaskItem instance
+         */
+        public static create(properties?: pb.ITaskItem): pb.TaskItem;
+
+        /**
+         * Encodes the specified TaskItem message. Does not implicitly {@link pb.TaskItem.verify|verify} messages.
+         * @param message TaskItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ITaskItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified TaskItem message, length delimited. Does not implicitly {@link pb.TaskItem.verify|verify} messages.
+         * @param message TaskItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ITaskItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a TaskItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns TaskItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.TaskItem;
+
+        /**
+         * Decodes a TaskItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns TaskItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.TaskItem;
+
+        /**
+         * Verifies a TaskItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a TaskItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns TaskItem
+         */
+        public static fromObject(object: { [k: string]: any }): pb.TaskItem;
+
+        /**
+         * Creates a plain object from a TaskItem message. Also converts values to other types if specified.
+         * @param message TaskItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.TaskItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this TaskItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdStudyProgress. */
+    interface ICmdStudyProgress {
+
+        /** CmdStudyProgress index */
+        index?: (number|null);
+
+        /** CmdStudyProgress progress */
+        progress?: (number|null);
+
+        /** CmdStudyProgress award */
+        award?: (number|null);
+    }
+
+    /** Represents a CmdStudyProgress. */
+    class CmdStudyProgress implements ICmdStudyProgress {
+
+        /**
+         * Constructs a new CmdStudyProgress.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdStudyProgress);
+
+        /** CmdStudyProgress index. */
+        public index: number;
+
+        /** CmdStudyProgress progress. */
+        public progress: number;
+
+        /** CmdStudyProgress award. */
+        public award: number;
+
+        /**
+         * Creates a new CmdStudyProgress instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdStudyProgress instance
+         */
+        public static create(properties?: pb.ICmdStudyProgress): pb.CmdStudyProgress;
+
+        /**
+         * Encodes the specified CmdStudyProgress message. Does not implicitly {@link pb.CmdStudyProgress.verify|verify} messages.
+         * @param message CmdStudyProgress message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdStudyProgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdStudyProgress message, length delimited. Does not implicitly {@link pb.CmdStudyProgress.verify|verify} messages.
+         * @param message CmdStudyProgress message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdStudyProgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdStudyProgress message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdStudyProgress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdStudyProgress;
+
+        /**
+         * Decodes a CmdStudyProgress message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdStudyProgress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdStudyProgress;
+
+        /**
+         * Verifies a CmdStudyProgress message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdStudyProgress message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdStudyProgress
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdStudyProgress;
+
+        /**
+         * Creates a plain object from a CmdStudyProgress message. Also converts values to other types if specified.
+         * @param message CmdStudyProgress
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdStudyProgress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdStudyProgress to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdGetDailyAward. */
+    interface ICmdGetDailyAward {
+
+        /** CmdGetDailyAward index */
+        index?: (number|null);
+    }
+
+    /** Represents a CmdGetDailyAward. */
+    class CmdGetDailyAward implements ICmdGetDailyAward {
+
+        /**
+         * Constructs a new CmdGetDailyAward.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdGetDailyAward);
+
+        /** CmdGetDailyAward index. */
+        public index: number;
+
+        /**
+         * Creates a new CmdGetDailyAward instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdGetDailyAward instance
+         */
+        public static create(properties?: pb.ICmdGetDailyAward): pb.CmdGetDailyAward;
+
+        /**
+         * Encodes the specified CmdGetDailyAward message. Does not implicitly {@link pb.CmdGetDailyAward.verify|verify} messages.
+         * @param message CmdGetDailyAward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdGetDailyAward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdGetDailyAward message, length delimited. Does not implicitly {@link pb.CmdGetDailyAward.verify|verify} messages.
+         * @param message CmdGetDailyAward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdGetDailyAward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdGetDailyAward message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdGetDailyAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetDailyAward;
+
+        /**
+         * Decodes a CmdGetDailyAward message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdGetDailyAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetDailyAward;
+
+        /**
+         * Verifies a CmdGetDailyAward message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdGetDailyAward message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdGetDailyAward
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdGetDailyAward;
+
+        /**
+         * Creates a plain object from a CmdGetDailyAward message. Also converts values to other types if specified.
+         * @param message CmdGetDailyAward
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdGetDailyAward, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdGetDailyAward to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdDailyTaskProgress. */
+    interface ICmdDailyTaskProgress {
+
+        /** CmdDailyTaskProgress uid */
+        uid?: (number|null);
+
+        /** CmdDailyTaskProgress taskId */
+        taskId?: (number|null);
+    }
+
+    /** Represents a CmdDailyTaskProgress. */
+    class CmdDailyTaskProgress implements ICmdDailyTaskProgress {
+
+        /**
+         * Constructs a new CmdDailyTaskProgress.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdDailyTaskProgress);
+
+        /** CmdDailyTaskProgress uid. */
+        public uid: number;
+
+        /** CmdDailyTaskProgress taskId. */
+        public taskId: number;
+
+        /**
+         * Creates a new CmdDailyTaskProgress instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdDailyTaskProgress instance
+         */
+        public static create(properties?: pb.ICmdDailyTaskProgress): pb.CmdDailyTaskProgress;
+
+        /**
+         * Encodes the specified CmdDailyTaskProgress message. Does not implicitly {@link pb.CmdDailyTaskProgress.verify|verify} messages.
+         * @param message CmdDailyTaskProgress message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdDailyTaskProgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdDailyTaskProgress message, length delimited. Does not implicitly {@link pb.CmdDailyTaskProgress.verify|verify} messages.
+         * @param message CmdDailyTaskProgress message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdDailyTaskProgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdDailyTaskProgress message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdDailyTaskProgress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdDailyTaskProgress;
+
+        /**
+         * Decodes a CmdDailyTaskProgress message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdDailyTaskProgress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdDailyTaskProgress;
+
+        /**
+         * Verifies a CmdDailyTaskProgress message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdDailyTaskProgress message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdDailyTaskProgress
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdDailyTaskProgress;
+
+        /**
+         * Creates a plain object from a CmdDailyTaskProgress message. Also converts values to other types if specified.
+         * @param message CmdDailyTaskProgress
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdDailyTaskProgress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdDailyTaskProgress to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -3790,6 +4234,96 @@ export namespace pb {
 
         /**
          * Converts this CmdGetGameOperations to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdUnlockGame. */
+    interface ICmdUnlockGame {
+
+        /** CmdUnlockGame gType */
+        gType?: (pb.GameType|null);
+    }
+
+    /** Represents a CmdUnlockGame. */
+    class CmdUnlockGame implements ICmdUnlockGame {
+
+        /**
+         * Constructs a new CmdUnlockGame.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdUnlockGame);
+
+        /** CmdUnlockGame gType. */
+        public gType: pb.GameType;
+
+        /**
+         * Creates a new CmdUnlockGame instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdUnlockGame instance
+         */
+        public static create(properties?: pb.ICmdUnlockGame): pb.CmdUnlockGame;
+
+        /**
+         * Encodes the specified CmdUnlockGame message. Does not implicitly {@link pb.CmdUnlockGame.verify|verify} messages.
+         * @param message CmdUnlockGame message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdUnlockGame, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdUnlockGame message, length delimited. Does not implicitly {@link pb.CmdUnlockGame.verify|verify} messages.
+         * @param message CmdUnlockGame message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdUnlockGame, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdUnlockGame message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdUnlockGame
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdUnlockGame;
+
+        /**
+         * Decodes a CmdUnlockGame message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdUnlockGame
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdUnlockGame;
+
+        /**
+         * Verifies a CmdUnlockGame message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdUnlockGame message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdUnlockGame
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdUnlockGame;
+
+        /**
+         * Creates a plain object from a CmdUnlockGame message. Also converts values to other types if specified.
+         * @param message CmdUnlockGame
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdUnlockGame, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdUnlockGame to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -5823,6 +6357,12 @@ export namespace pb {
         /** RankingItem icon */
         icon?: (string|null);
 
+        /** RankingItem gender */
+        gender?: (string|null);
+
+        /** RankingItem location */
+        location?: (string|null);
+
         /** RankingItem cgsClearance */
         cgsClearance?: (number|null);
 
@@ -5856,6 +6396,12 @@ export namespace pb {
 
         /** RankingItem icon. */
         public icon: string;
+
+        /** RankingItem gender. */
+        public gender: string;
+
+        /** RankingItem location. */
+        public location: string;
 
         /** RankingItem cgsClearance. */
         public cgsClearance: number;
@@ -8505,6 +9051,9 @@ export namespace pb {
 
         /** CmdBet icon */
         icon?: (string|null);
+
+        /** CmdBet gender */
+        gender?: (string|null);
     }
 
     /** Represents a CmdBet. */
@@ -8533,6 +9082,9 @@ export namespace pb {
 
         /** CmdBet icon. */
         public icon: string;
+
+        /** CmdBet gender. */
+        public gender: string;
 
         /**
          * Creates a new CmdBet instance using the specified properties.
@@ -8600,6 +9152,504 @@ export namespace pb {
 
         /**
          * Converts this CmdBet to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdGetWeeklyAward. */
+    interface ICmdGetWeeklyAward {
+
+        /** CmdGetWeeklyAward code */
+        code?: (string|null);
+    }
+
+    /** Represents a CmdGetWeeklyAward. */
+    class CmdGetWeeklyAward implements ICmdGetWeeklyAward {
+
+        /**
+         * Constructs a new CmdGetWeeklyAward.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdGetWeeklyAward);
+
+        /** CmdGetWeeklyAward code. */
+        public code: string;
+
+        /**
+         * Creates a new CmdGetWeeklyAward instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdGetWeeklyAward instance
+         */
+        public static create(properties?: pb.ICmdGetWeeklyAward): pb.CmdGetWeeklyAward;
+
+        /**
+         * Encodes the specified CmdGetWeeklyAward message. Does not implicitly {@link pb.CmdGetWeeklyAward.verify|verify} messages.
+         * @param message CmdGetWeeklyAward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdGetWeeklyAward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdGetWeeklyAward message, length delimited. Does not implicitly {@link pb.CmdGetWeeklyAward.verify|verify} messages.
+         * @param message CmdGetWeeklyAward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdGetWeeklyAward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdGetWeeklyAward message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdGetWeeklyAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetWeeklyAward;
+
+        /**
+         * Decodes a CmdGetWeeklyAward message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdGetWeeklyAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetWeeklyAward;
+
+        /**
+         * Verifies a CmdGetWeeklyAward message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdGetWeeklyAward message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdGetWeeklyAward
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdGetWeeklyAward;
+
+        /**
+         * Creates a plain object from a CmdGetWeeklyAward message. Also converts values to other types if specified.
+         * @param message CmdGetWeeklyAward
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdGetWeeklyAward, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdGetWeeklyAward to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdGetWeeklyAwardReply. */
+    interface ICmdGetWeeklyAwardReply {
+
+        /** CmdGetWeeklyAwardReply result */
+        result?: (pb.IErrorInfo|null);
+
+        /** CmdGetWeeklyAwardReply award */
+        award?: (pb.IGameProperties|null);
+    }
+
+    /** Represents a CmdGetWeeklyAwardReply. */
+    class CmdGetWeeklyAwardReply implements ICmdGetWeeklyAwardReply {
+
+        /**
+         * Constructs a new CmdGetWeeklyAwardReply.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdGetWeeklyAwardReply);
+
+        /** CmdGetWeeklyAwardReply result. */
+        public result?: (pb.IErrorInfo|null);
+
+        /** CmdGetWeeklyAwardReply award. */
+        public award?: (pb.IGameProperties|null);
+
+        /**
+         * Creates a new CmdGetWeeklyAwardReply instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdGetWeeklyAwardReply instance
+         */
+        public static create(properties?: pb.ICmdGetWeeklyAwardReply): pb.CmdGetWeeklyAwardReply;
+
+        /**
+         * Encodes the specified CmdGetWeeklyAwardReply message. Does not implicitly {@link pb.CmdGetWeeklyAwardReply.verify|verify} messages.
+         * @param message CmdGetWeeklyAwardReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdGetWeeklyAwardReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdGetWeeklyAwardReply message, length delimited. Does not implicitly {@link pb.CmdGetWeeklyAwardReply.verify|verify} messages.
+         * @param message CmdGetWeeklyAwardReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdGetWeeklyAwardReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdGetWeeklyAwardReply message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdGetWeeklyAwardReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetWeeklyAwardReply;
+
+        /**
+         * Decodes a CmdGetWeeklyAwardReply message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdGetWeeklyAwardReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetWeeklyAwardReply;
+
+        /**
+         * Verifies a CmdGetWeeklyAwardReply message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdGetWeeklyAwardReply message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdGetWeeklyAwardReply
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdGetWeeklyAwardReply;
+
+        /**
+         * Creates a plain object from a CmdGetWeeklyAwardReply message. Also converts values to other types if specified.
+         * @param message CmdGetWeeklyAwardReply
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdGetWeeklyAwardReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdGetWeeklyAwardReply to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdQueryEventLog. */
+    interface ICmdQueryEventLog {
+
+        /** CmdQueryEventLog eventId */
+        eventId?: (pb.EventId|null);
+
+        /** CmdQueryEventLog uid */
+        uid?: (number|null);
+
+        /** CmdQueryEventLog from */
+        from?: (number|Long|null);
+
+        /** CmdQueryEventLog to */
+        to?: (number|Long|null);
+
+        /** CmdQueryEventLog total */
+        total?: (number|null);
+    }
+
+    /** Represents a CmdQueryEventLog. */
+    class CmdQueryEventLog implements ICmdQueryEventLog {
+
+        /**
+         * Constructs a new CmdQueryEventLog.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdQueryEventLog);
+
+        /** CmdQueryEventLog eventId. */
+        public eventId: pb.EventId;
+
+        /** CmdQueryEventLog uid. */
+        public uid: number;
+
+        /** CmdQueryEventLog from. */
+        public from: (number|Long);
+
+        /** CmdQueryEventLog to. */
+        public to: (number|Long);
+
+        /** CmdQueryEventLog total. */
+        public total: number;
+
+        /**
+         * Creates a new CmdQueryEventLog instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdQueryEventLog instance
+         */
+        public static create(properties?: pb.ICmdQueryEventLog): pb.CmdQueryEventLog;
+
+        /**
+         * Encodes the specified CmdQueryEventLog message. Does not implicitly {@link pb.CmdQueryEventLog.verify|verify} messages.
+         * @param message CmdQueryEventLog message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdQueryEventLog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdQueryEventLog message, length delimited. Does not implicitly {@link pb.CmdQueryEventLog.verify|verify} messages.
+         * @param message CmdQueryEventLog message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdQueryEventLog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdQueryEventLog message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdQueryEventLog
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQueryEventLog;
+
+        /**
+         * Decodes a CmdQueryEventLog message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdQueryEventLog
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQueryEventLog;
+
+        /**
+         * Verifies a CmdQueryEventLog message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdQueryEventLog message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdQueryEventLog
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdQueryEventLog;
+
+        /**
+         * Creates a plain object from a CmdQueryEventLog message. Also converts values to other types if specified.
+         * @param message CmdQueryEventLog
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdQueryEventLog, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdQueryEventLog to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an EventLog. */
+    interface IEventLog {
+
+        /** EventLog eventId */
+        eventId?: (pb.EventId|null);
+
+        /** EventLog uid */
+        uid?: (number|null);
+
+        /** EventLog ts */
+        ts?: (number|Long|null);
+
+        /** EventLog log */
+        log?: (string|null);
+    }
+
+    /** Represents an EventLog. */
+    class EventLog implements IEventLog {
+
+        /**
+         * Constructs a new EventLog.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IEventLog);
+
+        /** EventLog eventId. */
+        public eventId: pb.EventId;
+
+        /** EventLog uid. */
+        public uid: number;
+
+        /** EventLog ts. */
+        public ts: (number|Long);
+
+        /** EventLog log. */
+        public log: string;
+
+        /**
+         * Creates a new EventLog instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns EventLog instance
+         */
+        public static create(properties?: pb.IEventLog): pb.EventLog;
+
+        /**
+         * Encodes the specified EventLog message. Does not implicitly {@link pb.EventLog.verify|verify} messages.
+         * @param message EventLog message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IEventLog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified EventLog message, length delimited. Does not implicitly {@link pb.EventLog.verify|verify} messages.
+         * @param message EventLog message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IEventLog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an EventLog message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns EventLog
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.EventLog;
+
+        /**
+         * Decodes an EventLog message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns EventLog
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.EventLog;
+
+        /**
+         * Verifies an EventLog message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an EventLog message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns EventLog
+         */
+        public static fromObject(object: { [k: string]: any }): pb.EventLog;
+
+        /**
+         * Creates a plain object from an EventLog message. Also converts values to other types if specified.
+         * @param message EventLog
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.EventLog, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this EventLog to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an Events. */
+    interface IEvents {
+
+        /** Events items */
+        items?: (pb.IEventLog[]|null);
+    }
+
+    /** Represents an Events. */
+    class Events implements IEvents {
+
+        /**
+         * Constructs a new Events.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IEvents);
+
+        /** Events items. */
+        public items: pb.IEventLog[];
+
+        /**
+         * Creates a new Events instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Events instance
+         */
+        public static create(properties?: pb.IEvents): pb.Events;
+
+        /**
+         * Encodes the specified Events message. Does not implicitly {@link pb.Events.verify|verify} messages.
+         * @param message Events message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IEvents, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Events message, length delimited. Does not implicitly {@link pb.Events.verify|verify} messages.
+         * @param message Events message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IEvents, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an Events message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Events
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.Events;
+
+        /**
+         * Decodes an Events message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Events
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.Events;
+
+        /**
+         * Verifies an Events message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an Events message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Events
+         */
+        public static fromObject(object: { [k: string]: any }): pb.Events;
+
+        /**
+         * Creates a plain object from an Events message. Also converts values to other types if specified.
+         * @param message Events
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.Events, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Events to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -9731,6 +10781,630 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a CmdQueryAiStockList. */
+    interface ICmdQueryAiStockList {
+
+        /** CmdQueryAiStockList rankFrom */
+        rankFrom?: (number|null);
+
+        /** CmdQueryAiStockList total */
+        total?: (number|null);
+    }
+
+    /** Represents a CmdQueryAiStockList. */
+    class CmdQueryAiStockList implements ICmdQueryAiStockList {
+
+        /**
+         * Constructs a new CmdQueryAiStockList.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdQueryAiStockList);
+
+        /** CmdQueryAiStockList rankFrom. */
+        public rankFrom: number;
+
+        /** CmdQueryAiStockList total. */
+        public total: number;
+
+        /**
+         * Creates a new CmdQueryAiStockList instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdQueryAiStockList instance
+         */
+        public static create(properties?: pb.ICmdQueryAiStockList): pb.CmdQueryAiStockList;
+
+        /**
+         * Encodes the specified CmdQueryAiStockList message. Does not implicitly {@link pb.CmdQueryAiStockList.verify|verify} messages.
+         * @param message CmdQueryAiStockList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdQueryAiStockList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdQueryAiStockList message, length delimited. Does not implicitly {@link pb.CmdQueryAiStockList.verify|verify} messages.
+         * @param message CmdQueryAiStockList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdQueryAiStockList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdQueryAiStockList message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdQueryAiStockList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQueryAiStockList;
+
+        /**
+         * Decodes a CmdQueryAiStockList message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdQueryAiStockList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQueryAiStockList;
+
+        /**
+         * Verifies a CmdQueryAiStockList message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdQueryAiStockList message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdQueryAiStockList
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdQueryAiStockList;
+
+        /**
+         * Creates a plain object from a CmdQueryAiStockList message. Also converts values to other types if specified.
+         * @param message CmdQueryAiStockList
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdQueryAiStockList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdQueryAiStockList to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an AiStockItem. */
+    interface IAiStockItem {
+
+        /** AiStockItem code */
+        code?: (number|null);
+
+        /** AiStockItem industry */
+        industry?: (string|null);
+
+        /** AiStockItem tsUpdated */
+        tsUpdated?: (number|Long|null);
+
+        /** AiStockItem profitRanking */
+        profitRanking?: (number|null);
+
+        /** AiStockItem profitRate */
+        profitRate?: (number|null);
+
+        /** AiStockItem lastAskPrice */
+        lastAskPrice?: (number|null);
+
+        /** AiStockItem lastBidPrice */
+        lastBidPrice?: (number|null);
+
+        /** AiStockItem curAskPrice */
+        curAskPrice?: (number|null);
+    }
+
+    /** Represents an AiStockItem. */
+    class AiStockItem implements IAiStockItem {
+
+        /**
+         * Constructs a new AiStockItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IAiStockItem);
+
+        /** AiStockItem code. */
+        public code: number;
+
+        /** AiStockItem industry. */
+        public industry: string;
+
+        /** AiStockItem tsUpdated. */
+        public tsUpdated: (number|Long);
+
+        /** AiStockItem profitRanking. */
+        public profitRanking: number;
+
+        /** AiStockItem profitRate. */
+        public profitRate: number;
+
+        /** AiStockItem lastAskPrice. */
+        public lastAskPrice: number;
+
+        /** AiStockItem lastBidPrice. */
+        public lastBidPrice: number;
+
+        /** AiStockItem curAskPrice. */
+        public curAskPrice: number;
+
+        /**
+         * Creates a new AiStockItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns AiStockItem instance
+         */
+        public static create(properties?: pb.IAiStockItem): pb.AiStockItem;
+
+        /**
+         * Encodes the specified AiStockItem message. Does not implicitly {@link pb.AiStockItem.verify|verify} messages.
+         * @param message AiStockItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IAiStockItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified AiStockItem message, length delimited. Does not implicitly {@link pb.AiStockItem.verify|verify} messages.
+         * @param message AiStockItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IAiStockItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an AiStockItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns AiStockItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.AiStockItem;
+
+        /**
+         * Decodes an AiStockItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns AiStockItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.AiStockItem;
+
+        /**
+         * Verifies an AiStockItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an AiStockItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns AiStockItem
+         */
+        public static fromObject(object: { [k: string]: any }): pb.AiStockItem;
+
+        /**
+         * Creates a plain object from an AiStockItem message. Also converts values to other types if specified.
+         * @param message AiStockItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.AiStockItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this AiStockItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdQueryAiStockListReply. */
+    interface ICmdQueryAiStockListReply {
+
+        /** CmdQueryAiStockListReply items */
+        items?: (pb.IAiStockItem[]|null);
+    }
+
+    /** Represents a CmdQueryAiStockListReply. */
+    class CmdQueryAiStockListReply implements ICmdQueryAiStockListReply {
+
+        /**
+         * Constructs a new CmdQueryAiStockListReply.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdQueryAiStockListReply);
+
+        /** CmdQueryAiStockListReply items. */
+        public items: pb.IAiStockItem[];
+
+        /**
+         * Creates a new CmdQueryAiStockListReply instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdQueryAiStockListReply instance
+         */
+        public static create(properties?: pb.ICmdQueryAiStockListReply): pb.CmdQueryAiStockListReply;
+
+        /**
+         * Encodes the specified CmdQueryAiStockListReply message. Does not implicitly {@link pb.CmdQueryAiStockListReply.verify|verify} messages.
+         * @param message CmdQueryAiStockListReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdQueryAiStockListReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdQueryAiStockListReply message, length delimited. Does not implicitly {@link pb.CmdQueryAiStockListReply.verify|verify} messages.
+         * @param message CmdQueryAiStockListReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdQueryAiStockListReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdQueryAiStockListReply message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdQueryAiStockListReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQueryAiStockListReply;
+
+        /**
+         * Decodes a CmdQueryAiStockListReply message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdQueryAiStockListReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQueryAiStockListReply;
+
+        /**
+         * Verifies a CmdQueryAiStockListReply message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdQueryAiStockListReply message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdQueryAiStockListReply
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdQueryAiStockListReply;
+
+        /**
+         * Creates a plain object from a CmdQueryAiStockListReply message. Also converts values to other types if specified.
+         * @param message CmdQueryAiStockListReply
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdQueryAiStockListReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdQueryAiStockListReply to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdQueryAiSignal. */
+    interface ICmdQueryAiSignal {
+
+        /** CmdQueryAiSignal code */
+        code?: (number|null);
+    }
+
+    /** Represents a CmdQueryAiSignal. */
+    class CmdQueryAiSignal implements ICmdQueryAiSignal {
+
+        /**
+         * Constructs a new CmdQueryAiSignal.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdQueryAiSignal);
+
+        /** CmdQueryAiSignal code. */
+        public code: number;
+
+        /**
+         * Creates a new CmdQueryAiSignal instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdQueryAiSignal instance
+         */
+        public static create(properties?: pb.ICmdQueryAiSignal): pb.CmdQueryAiSignal;
+
+        /**
+         * Encodes the specified CmdQueryAiSignal message. Does not implicitly {@link pb.CmdQueryAiSignal.verify|verify} messages.
+         * @param message CmdQueryAiSignal message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdQueryAiSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdQueryAiSignal message, length delimited. Does not implicitly {@link pb.CmdQueryAiSignal.verify|verify} messages.
+         * @param message CmdQueryAiSignal message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdQueryAiSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdQueryAiSignal message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdQueryAiSignal
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQueryAiSignal;
+
+        /**
+         * Decodes a CmdQueryAiSignal message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdQueryAiSignal
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQueryAiSignal;
+
+        /**
+         * Verifies a CmdQueryAiSignal message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdQueryAiSignal message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdQueryAiSignal
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdQueryAiSignal;
+
+        /**
+         * Creates a plain object from a CmdQueryAiSignal message. Also converts values to other types if specified.
+         * @param message CmdQueryAiSignal
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdQueryAiSignal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdQueryAiSignal to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an AiSignalItem. */
+    interface IAiSignalItem {
+
+        /** AiSignalItem ts */
+        ts?: (number|Long|null);
+
+        /** AiSignalItem flag */
+        flag?: (number|null);
+
+        /** AiSignalItem price */
+        price?: (number|null);
+
+        /** AiSignalItem ma10 */
+        ma10?: (number|null);
+
+        /** AiSignalItem ma30 */
+        ma30?: (number|null);
+    }
+
+    /** Represents an AiSignalItem. */
+    class AiSignalItem implements IAiSignalItem {
+
+        /**
+         * Constructs a new AiSignalItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IAiSignalItem);
+
+        /** AiSignalItem ts. */
+        public ts: (number|Long);
+
+        /** AiSignalItem flag. */
+        public flag: number;
+
+        /** AiSignalItem price. */
+        public price: number;
+
+        /** AiSignalItem ma10. */
+        public ma10: number;
+
+        /** AiSignalItem ma30. */
+        public ma30: number;
+
+        /**
+         * Creates a new AiSignalItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns AiSignalItem instance
+         */
+        public static create(properties?: pb.IAiSignalItem): pb.AiSignalItem;
+
+        /**
+         * Encodes the specified AiSignalItem message. Does not implicitly {@link pb.AiSignalItem.verify|verify} messages.
+         * @param message AiSignalItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IAiSignalItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified AiSignalItem message, length delimited. Does not implicitly {@link pb.AiSignalItem.verify|verify} messages.
+         * @param message AiSignalItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IAiSignalItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an AiSignalItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns AiSignalItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.AiSignalItem;
+
+        /**
+         * Decodes an AiSignalItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns AiSignalItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.AiSignalItem;
+
+        /**
+         * Verifies an AiSignalItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an AiSignalItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns AiSignalItem
+         */
+        public static fromObject(object: { [k: string]: any }): pb.AiSignalItem;
+
+        /**
+         * Creates a plain object from an AiSignalItem message. Also converts values to other types if specified.
+         * @param message AiSignalItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.AiSignalItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this AiSignalItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdQueryAiSignalReply. */
+    interface ICmdQueryAiSignalReply {
+
+        /** CmdQueryAiSignalReply code */
+        code?: (number|null);
+
+        /** CmdQueryAiSignalReply industry */
+        industry?: (string|null);
+
+        /** CmdQueryAiSignalReply signals */
+        signals?: (pb.IAiSignalItem[]|null);
+    }
+
+    /** Represents a CmdQueryAiSignalReply. */
+    class CmdQueryAiSignalReply implements ICmdQueryAiSignalReply {
+
+        /**
+         * Constructs a new CmdQueryAiSignalReply.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdQueryAiSignalReply);
+
+        /** CmdQueryAiSignalReply code. */
+        public code: number;
+
+        /** CmdQueryAiSignalReply industry. */
+        public industry: string;
+
+        /** CmdQueryAiSignalReply signals. */
+        public signals: pb.IAiSignalItem[];
+
+        /**
+         * Creates a new CmdQueryAiSignalReply instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdQueryAiSignalReply instance
+         */
+        public static create(properties?: pb.ICmdQueryAiSignalReply): pb.CmdQueryAiSignalReply;
+
+        /**
+         * Encodes the specified CmdQueryAiSignalReply message. Does not implicitly {@link pb.CmdQueryAiSignalReply.verify|verify} messages.
+         * @param message CmdQueryAiSignalReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdQueryAiSignalReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdQueryAiSignalReply message, length delimited. Does not implicitly {@link pb.CmdQueryAiSignalReply.verify|verify} messages.
+         * @param message CmdQueryAiSignalReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdQueryAiSignalReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdQueryAiSignalReply message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdQueryAiSignalReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQueryAiSignalReply;
+
+        /**
+         * Decodes a CmdQueryAiSignalReply message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdQueryAiSignalReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQueryAiSignalReply;
+
+        /**
+         * Verifies a CmdQueryAiSignalReply message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdQueryAiSignalReply message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdQueryAiSignalReply
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdQueryAiSignalReply;
+
+        /**
+         * Creates a plain object from a CmdQueryAiSignalReply message. Also converts values to other types if specified.
+         * @param message CmdQueryAiSignalReply
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdQueryAiSignalReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdQueryAiSignalReply to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Represents a QuotesService */
     class QuotesService extends $protobuf.rpc.Service {
 
@@ -9806,6 +11480,34 @@ export namespace pb {
          * @returns Promise
          */
         public queryTradingDay(request: pb.ICmdTradingDay): Promise<pb.CmdTradingDayReply>;
+
+        /**
+         * Calls QueryAiStockList.
+         * @param request CmdQueryAiStockList message or plain object
+         * @param callback Node-style callback called with the error, if any, and CmdQueryAiStockListReply
+         */
+        public queryAiStockList(request: pb.ICmdQueryAiStockList, callback: pb.QuotesService.QueryAiStockListCallback): void;
+
+        /**
+         * Calls QueryAiStockList.
+         * @param request CmdQueryAiStockList message or plain object
+         * @returns Promise
+         */
+        public queryAiStockList(request: pb.ICmdQueryAiStockList): Promise<pb.CmdQueryAiStockListReply>;
+
+        /**
+         * Calls QueryAiSignal.
+         * @param request CmdQueryAiSignal message or plain object
+         * @param callback Node-style callback called with the error, if any, and CmdQueryAiSignalReply
+         */
+        public queryAiSignal(request: pb.ICmdQueryAiSignal, callback: pb.QuotesService.QueryAiSignalCallback): void;
+
+        /**
+         * Calls QueryAiSignal.
+         * @param request CmdQueryAiSignal message or plain object
+         * @returns Promise
+         */
+        public queryAiSignal(request: pb.ICmdQueryAiSignal): Promise<pb.CmdQueryAiSignalReply>;
     }
 
     namespace QuotesService {
@@ -9837,6 +11539,20 @@ export namespace pb {
          * @param [response] CmdTradingDayReply
          */
         type QueryTradingDayCallback = (error: (Error|null), response?: pb.CmdTradingDayReply) => void;
+
+        /**
+         * Callback as used by {@link pb.QuotesService#queryAiStockList}.
+         * @param error Error, if any
+         * @param [response] CmdQueryAiStockListReply
+         */
+        type QueryAiStockListCallback = (error: (Error|null), response?: pb.CmdQueryAiStockListReply) => void;
+
+        /**
+         * Callback as used by {@link pb.QuotesService#queryAiSignal}.
+         * @param error Error, if any
+         * @param [response] CmdQueryAiSignalReply
+         */
+        type QueryAiSignalCallback = (error: (Error|null), response?: pb.CmdQueryAiSignalReply) => void;
     }
 
     /** Represents a QuotesFutureService */
@@ -9884,14 +11600,164 @@ export namespace pb {
         type QuotesQueryCallback = (error: (Error|null), response?: pb.QuotesFuture) => void;
     }
 
+    /** AppFrom enum. */
+    enum AppFrom {
+        Android_000 = 0,
+        Android_001 = 1,
+        Android_201 = 201,
+        Android_204 = 204,
+        Android_205 = 205,
+        Android_206 = 206,
+        Android_208 = 208,
+        Android_209 = 209,
+        Android_210 = 210,
+        Android_211 = 211,
+        Android_212 = 212,
+        Android_301 = 301,
+        Android_302 = 302,
+        Android_601 = 601,
+        Android_1000 = 1000,
+        Android_1204 = 1204,
+        Android_1205 = 1205,
+        Android_1208 = 1208,
+        Android_1212 = 1212,
+        WebsiteAndriod = 4999,
+        WebsiteIos = 6666,
+        IosAppleStore = 6667,
+        Ipad = 6668,
+        WeChatMinProgram = 8888
+    }
+
     /** LoginType enum. */
     enum LoginType {
         LoginType_NULL = 0,
         MobilePhoneId = 1,
         WeChat = 2,
         QQ = 3,
+        WeChat_MiniProg = 4,
         AppTest = 98,
         WebTest = 99
+    }
+
+    /** AdPosition enum. */
+    enum AdPosition {
+        AdPosition_NULL = 0,
+        StartUp = 1,
+        Main = 11
+    }
+
+    /** Properties of an AdClicked. */
+    interface IAdClicked {
+
+        /** AdClicked uid */
+        uid?: (number|null);
+
+        /** AdClicked pos */
+        pos?: (number|null);
+
+        /** AdClicked url */
+        url?: (string|null);
+
+        /** AdClicked from */
+        from?: (pb.AppFrom|null);
+
+        /** AdClicked ua */
+        ua?: (string|null);
+    }
+
+    /** Represents an AdClicked. */
+    class AdClicked implements IAdClicked {
+
+        /**
+         * Constructs a new AdClicked.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IAdClicked);
+
+        /** AdClicked uid. */
+        public uid: number;
+
+        /** AdClicked pos. */
+        public pos: number;
+
+        /** AdClicked url. */
+        public url: string;
+
+        /** AdClicked from. */
+        public from: pb.AppFrom;
+
+        /** AdClicked ua. */
+        public ua: string;
+
+        /**
+         * Creates a new AdClicked instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns AdClicked instance
+         */
+        public static create(properties?: pb.IAdClicked): pb.AdClicked;
+
+        /**
+         * Encodes the specified AdClicked message. Does not implicitly {@link pb.AdClicked.verify|verify} messages.
+         * @param message AdClicked message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IAdClicked, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified AdClicked message, length delimited. Does not implicitly {@link pb.AdClicked.verify|verify} messages.
+         * @param message AdClicked message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IAdClicked, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an AdClicked message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns AdClicked
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.AdClicked;
+
+        /**
+         * Decodes an AdClicked message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns AdClicked
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.AdClicked;
+
+        /**
+         * Verifies an AdClicked message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an AdClicked message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns AdClicked
+         */
+        public static fromObject(object: { [k: string]: any }): pb.AdClicked;
+
+        /**
+         * Creates a plain object from an AdClicked message. Also converts values to other types if specified.
+         * @param message AdClicked
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.AdClicked, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this AdClicked to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
     }
 
     /** Properties of a CmdRegistry. */
@@ -9906,8 +11772,8 @@ export namespace pb {
         /** CmdRegistry pwd */
         pwd?: (string|null);
 
-        /** CmdRegistry sms */
-        sms?: (string|null);
+        /** CmdRegistry smsCode */
+        smsCode?: (string|null);
 
         /** CmdRegistry from */
         from?: (pb.AppFrom|null);
@@ -9931,8 +11797,8 @@ export namespace pb {
         /** CmdRegistry pwd. */
         public pwd: string;
 
-        /** CmdRegistry sms. */
-        public sms: string;
+        /** CmdRegistry smsCode. */
+        public smsCode: string;
 
         /** CmdRegistry from. */
         public from: pb.AppFrom;

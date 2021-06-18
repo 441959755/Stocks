@@ -1,6 +1,9 @@
 
 import { pb } from '../../protos/proto';
+import GameCfg from '../game/GameCfg';
 import GameData from '../GameData';
+import EventCfg from '../Utils/EventCfg';
+import GlobalEvent from '../Utils/GlobalEvent';
 
 function PBHelper() {
 
@@ -211,6 +214,33 @@ PBHelper.prototype = {
 
     },
 
+    onReqRoomEnterBuff(data) {
+        let CmdRoomEnter = pb.CmdRoomEnter;
+        let message = CmdRoomEnter.create(data);
+        let buff = CmdRoomEnter.encode(message).finish();
+        return buff;
+    },
+
+    onRepRoomEnterMessage(buff) {
+        let CmdRoomEnterReply = pb.CmdRoomEnterReply;
+        let decode = CmdRoomEnterReply.decode(new Uint8Array(buff));
+        return decode;
+    },
+
+    //自己进入房间（客户端收到自己进入房间的消息，将玩家拉入房间）：
+    onSyncRoomEnterSelfMessage(buff) {
+        let RoomData = pb.RoomData;
+        let decode = RoomData.decode(new Uint8Array(buff));
+        return decode;
+    },
+
+    //房间数据
+    onRoomGameDataMessage(buff) {
+        let RoomGameData = pb.RoomGameData;
+        let decode = RoomGameData.decode(new Uint8Array(buff));
+        return decode;
+    },
+
     selectBlackData(id, buff) {
         let data;
         console.log('id:' + id + '跟新数据');
@@ -235,7 +265,6 @@ PBHelper.prototype = {
             }
 
             GameData.properties = GameData.properties;
-
 
         } else if (id == pb.MessageId.Rep_Game_Start
             || id == pb.MessageId.Rep_Game_Over
@@ -278,6 +307,24 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Rep_Game_GetGameOperation) {
             let data = this.onCmdGetGameOperationsReply(buff);
             return data;
+        }
+        //进入房间应答
+        else if (id == pb.MessageId.Rep_Room_Enter) {
+            let data = this.onRepRoomEnterMessage(buff);
+            return data;
+        }
+        //自己进入房间（客户端收到自己进入房间的消息，将玩家拉入房间）
+        else if (id == pb.MessageId.Sync_Room_Enter_Self) {
+            let data = this.onSyncRoomEnterSelfMessage(buff);
+
+            if (data.game == pb.GameType.JJ_PK || data.game == pb.GameType.JJ_QiHuo) {
+                let message = this.onRoomGameDataMessage(data.data);
+                console.log(JSON.stringify(message));
+                GlobalEvent.emit(EventCfg.RoomGameData, message);
+                GameCfg.RoomGameData = message;
+            }
+
+
         }
 
     }

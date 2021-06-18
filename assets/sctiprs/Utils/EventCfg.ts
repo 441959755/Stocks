@@ -97,4 +97,9 @@ export default {
 	CLICKFCBTN: 'CLICKFCBTN',//点击选择分仓
 
 	SETMARKCOLOR: 'SETMARKCOLOR',
+
+	//pk
+	OPENMATCHPK: 'OPENMATCHPK',
+
+	RoomGameData: 'RoomGameData',
 };

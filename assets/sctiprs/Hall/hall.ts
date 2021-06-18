@@ -7,6 +7,8 @@ import ComUtils from '../Utils/ComUtils';
 
 import GlobalHandle from '../global/GlobalHandle';
 import StrategyAIData from '../game/StrategyAIData';
+import GameCfgText from '../GameText';
+import GameData from '../GameData';
 
 const { ccclass, property } = cc._decorator;
 
@@ -91,6 +93,9 @@ export default class NewClass extends cc.Component {
 
 	QHSetNode: cc.Node = null;
 
+	@property(cc.Node)
+	matchPK: cc.Node = null;
+
 
 	onLoad() {
 		ComUtils.onLoadNode();
@@ -172,7 +177,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on(
 			EventCfg.OPENMONTHLAYER,
 			() => {
-				//  if (str == 'SM') {
+
 				if (socket) {
 					socket.send(pb.MessageId.Req_Game_SmxlReport, null, info => {
 						console.log('OPENMONTHLAYER' + JSON.stringify(info));
@@ -188,7 +193,6 @@ export default class NewClass extends cc.Component {
 					});
 				}
 
-				//  }
 			},
 			this
 		);
@@ -255,6 +259,56 @@ export default class NewClass extends cc.Component {
 			this.helpLayer.active = true;
 
 		}, this);
+
+		//匹配PK
+		GlobalEvent.on(EventCfg.OPENMATCHPK, () => { this.matchPK.active = true; }, this)
+
+		GlobalEvent.on(EventCfg.RoomGameData, this.onEnterRoomGameData.bind(this), this);
+	}
+
+	onEnterRoomGameData(info) {
+		let code = info.code + '';
+		if (code.length >= 7) {
+			code = code.slice(1);
+		}
+		let items = GameCfgText.getGPPKItemInfo(code);
+		GameCfg.data[0].code = code;
+		GameCfg.data[0].name = items[1];
+		GameCfg.data[0].data = [];
+		GameCfg.data[0].circulate = items[4];
+		GameCfg.data[0].tsGameFrom = info.tsGameFrom;
+		GameCfg.data[0].tsGameCur = info.tsGameCur;
+
+		info.quotes.items.forEach(el => {
+			let ye = (el.timestamp + '').slice(0, 4);
+			let mon = (el.timestamp + '').slice(4, 6);
+			let da = (el.timestamp + '').slice(6);
+			let fromDate = ye + '-' + mon + '-' + da;
+			//  if (fromDate != d) {
+			let data = {
+				day: fromDate || 0,
+				open: el.open || 0,
+				close: el.price || 0,
+				high: el.high || 0,
+				low: el.low || 0,
+				price: el.amount || 0,
+				value: el.volume || 0,
+				Rate: (el.volume / GameCfg.data[0].circulate) * 100
+			};
+
+			if (GameCfg.data[0].circulate == 0) {
+				data.Rate = 1;
+			}
+			GameCfg.data[0].data.push(data);
+		});
+
+		GameData.huizhidatas = info.tsQuoteStart;
+		GameCfg.huizhidatas = info.tsQuoteStart;
+
+		GameData.otherPlayers = info.players;
+
+		cc.director.loadScene('game');
+
 	}
 
 	start() {
@@ -276,6 +330,10 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit(EventCfg.LOADINGSHOW);
 				GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
 			}
+		}
+
+		if (GameCfg.RoomGameData) {
+			this.onEnterRoomGameData(GameCfg.RoomGameData);
 		}
 	}
 
@@ -351,6 +409,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.OPENQHLAYER);
 		GlobalEvent.off(EventCfg.OPENHELPLAYER);
 		GlobalEvent.off(EventCfg.OPENSETLAYER);
+		GlobalEvent.off(EventCfg.RoomGameData);
 		ComUtils.onDestory();
 	}
 
@@ -358,9 +417,11 @@ export default class NewClass extends cc.Component {
 		GameCfg.data[0].data = [];
 		GameCfg.info = info1;
 		GlobalHandle.onCmdGameStartReq(() => {
+
 			GlobalHandle.onCmdGameStartQuoteQuery(GameCfg.info, () => {
 				cc.director.loadScene('game');
 			})
+
 		});
 
 	}

@@ -26,7 +26,7 @@ export default class NewClass extends cc.Component {
 		let index = 0;
 		let arr = ['...', '..', '.'];
 		this.callBack1 = setTimeout(() => {
-			this.loading.angle += 10;
+			this.loading.rotation += 10;
 			if (index > 2) {
 				index = 0;
 			}

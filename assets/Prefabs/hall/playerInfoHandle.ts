@@ -43,7 +43,7 @@ export default class NewClass extends cc.Component {
         GameData.properties[2] && (this.lvLa.string = 'lv: ' + GameData.properties[2])
         let max_exp
         if (GameCfgText.levelInfoCfg) {
-            max_exp = GameCfgText.levelInfoCfg[GameData.properties[2]].max_exp;
+            max_exp = GameCfgText.levelInfoCfg[GameData.properties[2]];
         }
 
         GameData.properties[1] && (this.expLa.string = GameData.properties[1] + '/' + max_exp)

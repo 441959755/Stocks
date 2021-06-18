@@ -50,6 +50,8 @@ enum KStyle {
 	Down = 3;	// 单边向下行情
 }
 
+
+
 // 查询股票行情
 message CmdQuoteQuery {
 	KType ktype = 1;   	// K线类型（目前只有分时和日K）
@@ -103,7 +105,6 @@ message CmdTradingDayReply {
 
 
 
-
 // 查询期货行情
 message CmdQuoteQueryFuture {
 	KType ktype = 1;   	// K线类型
@@ -131,16 +132,53 @@ message QuotesFuture {
 
 
 
+// AI选股相关
+// 查询AI股票列表：两个字段为空时，则返回最新更新前100个股票的列表
+message CmdQueryAiStockList {
+	int32 rank_from = 1;   	// 排行起始位置
+	int32 total = 2;		// 查询条数
+}
+message AiStockItem {
+	uint32 code = 1;			// 股票代码
+	string industry = 2;		// 板块
+	int64 ts_updated = 3;		// 更新时间戳：精确到秒
+	int32 profit_ranking = 4;	// 盈利率排行
+	double profit_rate = 5;		// 盈利率
+	double last_ask_price = 6;	// 最新建议买入价格
+	double last_bid_price = 7;	// 最新建议卖出价格
+	double cur_ask_price = 8;	// 当前建议买入价格
+}
+message CmdQueryAiStockListReply {
+	repeated AiStockItem items = 2;
+}
+// 查询某支股票的AI信号
+message CmdQueryAiSignal {
+	uint32 code = 1;		// 股票代码
+}
+message AiSignalItem {
+	int64 ts = 1;			// 时间戳：YYYYMMDD
+	double flag = 2;		// 买卖信号：-1为买，0为中，1为卖
+	double price = 3;		// 当前价格
+	double ma10 = 4;		// 10日均线
+	double ma30 = 5;		// 30日均线
+}
+message CmdQueryAiSignalReply {
+	uint32 code = 1;					// 股票代码
+	string industry = 2;				// 板块
+	repeated AiSignalItem signals = 3;	// 信号
+}
+
 
 
 
 // GRPC
-
 service QuotesService {
   rpc QuotesQuery (CmdQuoteQuery) returns (Quotes) {}
   rpc QuotesSubscribe (CmdQuoteSubscribe) returns (ErrorInfo) {}
   rpc IsTradingDay (CmdTradingDay) returns (CmdTradingDayReply) {}
   rpc QueryTradingDay (CmdTradingDay) returns (CmdTradingDayReply) {}
+  rpc QueryAiStockList (CmdQueryAiStockList) returns (CmdQueryAiStockListReply) {}
+  rpc QueryAiSignal (CmdQueryAiSignal) returns (CmdQueryAiSignalReply) {}
 }
 
 service QuotesFutureService {

@@ -493,7 +493,7 @@ export default class NewClass extends cc.Component {
 
         let viweData = GameCfg.data[0].data;
         if (!viweData || !viweData[cc.ext.beg_end[0]] || !viweData[cc.ext.beg_end[1] - 1]) {
-            console.log('行情数据为空' + cc.ext.beg_end[0] + viweData[cc.ext.beg_end[1] - 1]);
+            console.log('行情数据为空' + cc.ext.beg_end[0] + cc.ext.beg_end[1]);
             return;
         }
 

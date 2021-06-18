@@ -1,5 +1,6 @@
 import HttpMgr from "../net/HttpMgr";
 import GameData from '../../GameData';
+import { pb } from "../../../protos/proto";
 
 export default class WechatSDK {
     static _instance = null;
@@ -81,8 +82,8 @@ export default class WechatSDK {
 
         let loginInfo = {
             account: code,
-            type: 2,
-            from: 8888,
+            type: pb.LoginType.WeChat_MiniProg,
+            from: pb.AppFrom.WeChatMinProgram,
             pwd: ''
         };
 

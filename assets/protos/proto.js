@@ -35,98 +35,6 @@ $root.pb = (function () {
     })();
 
     /**
-     * AppPlantForm enum.
-     * @name pb.AppPlantForm
-     * @enum {number}
-     * @property {number} AppPlantForm_NULL=0 AppPlantForm_NULL value
-     * @property {number} WechatMinProgram=1 WechatMinProgram value
-     * @property {number} Ios=11 Ios value
-     * @property {number} Android=21 Android value
-     */
-    pb.AppPlantForm = (function () {
-        var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "AppPlantForm_NULL"] = 0;
-        values[valuesById[1] = "WechatMinProgram"] = 1;
-        values[valuesById[11] = "Ios"] = 11;
-        values[valuesById[21] = "Android"] = 21;
-        return values;
-    })();
-
-    /**
-     * AdPosition enum.
-     * @name pb.AdPosition
-     * @enum {number}
-     * @property {number} AdPosition_NULL=0 AdPosition_NULL value
-     * @property {number} StartUp=1 StartUp value
-     * @property {number} Main=11 Main value
-     */
-    pb.AdPosition = (function () {
-        var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "AdPosition_NULL"] = 0;
-        values[valuesById[1] = "StartUp"] = 1;
-        values[valuesById[11] = "Main"] = 11;
-        return values;
-    })();
-
-    /**
-     * AppFrom enum.
-     * @name pb.AppFrom
-     * @enum {number}
-     * @property {number} Android_000=0 Android_000 value
-     * @property {number} Android_001=1 Android_001 value
-     * @property {number} Android_201=201 Android_201 value
-     * @property {number} Android_204=204 Android_204 value
-     * @property {number} Android_205=205 Android_205 value
-     * @property {number} Android_206=206 Android_206 value
-     * @property {number} Android_208=208 Android_208 value
-     * @property {number} Android_209=209 Android_209 value
-     * @property {number} Android_210=210 Android_210 value
-     * @property {number} Android_211=211 Android_211 value
-     * @property {number} Android_212=212 Android_212 value
-     * @property {number} Android_301=301 Android_301 value
-     * @property {number} Android_302=302 Android_302 value
-     * @property {number} Android_601=601 Android_601 value
-     * @property {number} Android_1000=1000 Android_1000 value
-     * @property {number} Android_1204=1204 Android_1204 value
-     * @property {number} Android_1205=1205 Android_1205 value
-     * @property {number} Android_1208=1208 Android_1208 value
-     * @property {number} Android_1212=1212 Android_1212 value
-     * @property {number} IosAppleStore=6666 IosAppleStore value
-     * @property {number} Ipad=6667 Ipad value
-     * @property {number} WebsiteIos=7777 WebsiteIos value
-     * @property {number} WebsiteAndriod=7778 WebsiteAndriod value
-     * @property {number} WeChatMinProgram=8888 WeChatMinProgram value
-     */
-    pb.AppFrom = (function () {
-        var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "Android_000"] = 0;
-        values[valuesById[1] = "Android_001"] = 1;
-        values[valuesById[201] = "Android_201"] = 201;
-        values[valuesById[204] = "Android_204"] = 204;
-        values[valuesById[205] = "Android_205"] = 205;
-        values[valuesById[206] = "Android_206"] = 206;
-        values[valuesById[208] = "Android_208"] = 208;
-        values[valuesById[209] = "Android_209"] = 209;
-        values[valuesById[210] = "Android_210"] = 210;
-        values[valuesById[211] = "Android_211"] = 211;
-        values[valuesById[212] = "Android_212"] = 212;
-        values[valuesById[301] = "Android_301"] = 301;
-        values[valuesById[302] = "Android_302"] = 302;
-        values[valuesById[601] = "Android_601"] = 601;
-        values[valuesById[1000] = "Android_1000"] = 1000;
-        values[valuesById[1204] = "Android_1204"] = 1204;
-        values[valuesById[1205] = "Android_1205"] = 1205;
-        values[valuesById[1208] = "Android_1208"] = 1208;
-        values[valuesById[1212] = "Android_1212"] = 1212;
-        values[valuesById[6666] = "IosAppleStore"] = 6666;
-        values[valuesById[6667] = "Ipad"] = 6667;
-        values[valuesById[7777] = "WebsiteIos"] = 7777;
-        values[valuesById[7778] = "WebsiteAndriod"] = 7778;
-        values[valuesById[8888] = "WeChatMinProgram"] = 8888;
-        return values;
-    })();
-
-    /**
      * ErrorCode enum.
      * @name pb.ErrorCode
      * @enum {number}
@@ -148,6 +56,11 @@ $root.pb = (function () {
      * @property {number} CS_CHECK_FAILURE_CGDS_ID=15 CS_CHECK_FAILURE_CGDS_ID value
      * @property {number} CS_CHECK_FAILURE_TIME=16 CS_CHECK_FAILURE_TIME value
      * @property {number} CS_CHECK_FAILURE_PROPERTY=17 CS_CHECK_FAILURE_PROPERTY value
+     * @property {number} CS_CHECK_FAILURE_TOKEN=18 CS_CHECK_FAILURE_TOKEN value
+     * @property {number} CS_ALREADY_UNLOCK=19 CS_ALREADY_UNLOCK value
+     * @property {number} CS_CHECK_PHONE_UNREGISTRY=20 CS_CHECK_PHONE_UNREGISTRY value
+     * @property {number} CS_CHECK_ACCOUNT_FORBIDDEN=21 CS_CHECK_ACCOUNT_FORBIDDEN value
+     * @property {number} CS_INVALID_SMSCODE=22 CS_INVALID_SMSCODE value
      * @property {number} CS_ROOM_INVALID=100 CS_ROOM_INVALID value
      * @property {number} CS_ROOM_FULL=101 CS_ROOM_FULL value
      * @property {number} CS_ROOM_FAIL_CHECKIN=102 CS_ROOM_FAIL_CHECKIN value
@@ -173,6 +86,11 @@ $root.pb = (function () {
         values[valuesById[15] = "CS_CHECK_FAILURE_CGDS_ID"] = 15;
         values[valuesById[16] = "CS_CHECK_FAILURE_TIME"] = 16;
         values[valuesById[17] = "CS_CHECK_FAILURE_PROPERTY"] = 17;
+        values[valuesById[18] = "CS_CHECK_FAILURE_TOKEN"] = 18;
+        values[valuesById[19] = "CS_ALREADY_UNLOCK"] = 19;
+        values[valuesById[20] = "CS_CHECK_PHONE_UNREGISTRY"] = 20;
+        values[valuesById[21] = "CS_CHECK_ACCOUNT_FORBIDDEN"] = 21;
+        values[valuesById[22] = "CS_INVALID_SMSCODE"] = 22;
         values[valuesById[100] = "CS_ROOM_INVALID"] = 100;
         values[valuesById[101] = "CS_ROOM_FULL"] = 101;
         values[valuesById[102] = "CS_ROOM_FAIL_CHECKIN"] = 102;
@@ -198,6 +116,8 @@ $root.pb = (function () {
      * @property {number} Sync_S2C_GameCg_GD=1016 Sync_S2C_GameCg_GD value
      * @property {number} Sync_S2C_GameTimes=1018 Sync_S2C_GameTimes value
      * @property {number} Sync_S2C_StockOrderResult=1020 Sync_S2C_StockOrderResult value
+     * @property {number} Sync_S2C_MutipleLogin=1022 Sync_S2C_MutipleLogin value
+     * @property {number} Sync_S2C_TaskProgress=1024 Sync_S2C_TaskProgress value
      * @property {number} Sync_C2S_GameHeart=1200 Sync_C2S_GameHeart value
      * @property {number} Sync_Email=1300 Sync_Email value
      * @property {number} Req_QuoteSubscribe=2001 Req_QuoteSubscribe value
@@ -210,16 +130,42 @@ $root.pb = (function () {
      * @property {number} Rep_IsTradingDay=2008 Rep_IsTradingDay value
      * @property {number} Req_QueryTradingDay=2009 Req_QueryTradingDay value
      * @property {number} Rep_QueryTradingDay=2010 Rep_QueryTradingDay value
+     * @property {number} Req_QueryAiStockList=2011 Req_QueryAiStockList value
+     * @property {number} Rep_QueryAiStockList=2012 Rep_QueryAiStockList value
+     * @property {number} Req_QueryAiSignal=2013 Req_QueryAiSignal value
+     * @property {number} Rep_QueryAiSignal=2014 Rep_QueryAiSignal value
      * @property {number} Req_Hall_UploadIcon=3001 Req_Hall_UploadIcon value
      * @property {number} Rep_Hall_UploadIcon=3002 Rep_Hall_UploadIcon value
-     * @property {number} Req_Hall_EditNick=3003 Req_Hall_EditNick value
-     * @property {number} Rep_Hall_EditNick=3004 Rep_Hall_EditNick value
+     * @property {number} Req_Hall_DownloadIcon=3003 Req_Hall_DownloadIcon value
+     * @property {number} Rep_Hall_DownploadIcon=3004 Rep_Hall_DownploadIcon value
      * @property {number} Req_Hall_EditIcon=3005 Req_Hall_EditIcon value
      * @property {number} Rep_Hall_EditIcon=3006 Rep_Hall_EditIcon value
-     * @property {number} Req_Hall_BackBag=3007 Req_Hall_BackBag value
-     * @property {number} Rep_Hall_BackBag=3008 Rep_Hall_BackBag value
-     * @property {number} Req_Hall_GetItem=3009 Req_Hall_GetItem value
-     * @property {number} Rep_Hall_GetItem=3010 Rep_Hall_GetItem value
+     * @property {number} Req_Hall_EditNick=3007 Req_Hall_EditNick value
+     * @property {number} Rep_Hall_EditNick=3008 Rep_Hall_EditNick value
+     * @property {number} Req_Hall_EditLocation=3009 Req_Hall_EditLocation value
+     * @property {number} Rep_Hall_EditLocation=3010 Rep_Hall_EditLocation value
+     * @property {number} Req_Hall_EditGender=3011 Req_Hall_EditGender value
+     * @property {number} Rep_Hall_EditGender=3012 Rep_Hall_EditGender value
+     * @property {number} Req_Hall_BackBag=3013 Req_Hall_BackBag value
+     * @property {number} Rep_Hall_BackBag=3014 Rep_Hall_BackBag value
+     * @property {number} Req_Hall_GetItem=3015 Req_Hall_GetItem value
+     * @property {number} Rep_Hall_GetItem=3016 Rep_Hall_GetItem value
+     * @property {number} Req_Hall_EditFavorList=3017 Req_Hall_EditFavorList value
+     * @property {number} Rep_Hall_EditFavorList=3018 Rep_Hall_EditFavorList value
+     * @property {number} Req_Hall_QueryPlayer=3019 Req_Hall_QueryPlayer value
+     * @property {number} Rep_Hall_QueryPlayer=3020 Rep_Hall_QueryPlayer value
+     * @property {number} Req_Hall_SaveStudyProgress=3021 Req_Hall_SaveStudyProgress value
+     * @property {number} Rep_Hall_SaveStudyProgress=3022 Rep_Hall_SaveStudyProgress value
+     * @property {number} Req_Hall_GetDailyTaskAward=3023 Req_Hall_GetDailyTaskAward value
+     * @property {number} Rep_Hall_GetDailyTaskAward=3024 Rep_Hall_GetDailyTaskAward value
+     * @property {number} Req_Hall_UnlockGame=3025 Req_Hall_UnlockGame value
+     * @property {number} Rep_Hall_UnlockGame=3026 Rep_Hall_UnlockGame value
+     * @property {number} Req_Hall_GetWeeklyAward=3027 Req_Hall_GetWeeklyAward value
+     * @property {number} Rep_Hall_GetWeeklyAward=3028 Rep_Hall_GetWeeklyAward value
+     * @property {number} Req_Hall_QueryEventLog=3029 Req_Hall_QueryEventLog value
+     * @property {number} Rep_Hall_QueryEventLog=3030 Rep_Hall_QueryEventLog value
+     * @property {number} Req_Hall_Logout=3999 Req_Hall_Logout value
+     * @property {number} Rep_Hall_Logout=4000 Rep_Hall_Logout value
      * @property {number} Req_Game_Login=4001 Req_Game_Login value
      * @property {number} Rep_Game_Login=4002 Rep_Game_Login value
      * @property {number} Req_Game_Start=4003 Req_Game_Start value
@@ -258,8 +204,12 @@ $root.pb = (function () {
      * @property {number} Rep_Game_CgdsReg=4036 Rep_Game_CgdsReg value
      * @property {number} Req_Game_CgdsRanking=4037 Req_Game_CgdsRanking value
      * @property {number} Rep_Game_CgdsRanking=4038 Rep_Game_CgdsRanking value
-     * @property {number} RoomMsgRange_BEG=5000 RoomMsgRange_BEG value
-     * @property {number} RoomMsgRange_END=5999 RoomMsgRange_END value
+     * @property {number} Req_Game_ZsjcBettingList=4039 Req_Game_ZsjcBettingList value
+     * @property {number} Rep_Game_ZsjcBettingList=4040 Rep_Game_ZsjcBettingList value
+     * @property {number} Req_Game_ZsjcBet=4041 Req_Game_ZsjcBet value
+     * @property {number} Rep_Game_ZsjcBet=4042 Rep_Game_ZsjcBet value
+     * @property {number} Req_Game_ZsjcRanking=4043 Req_Game_ZsjcRanking value
+     * @property {number} Rep_Game_ZsjcRanking=4044 Rep_Game_ZsjcRanking value
      * @property {number} Req_Room_Create=5003 Req_Room_Create value
      * @property {number} Rep_Room_Create=5004 Rep_Room_Create value
      * @property {number} Req_Room_Enter=5005 Req_Room_Enter value
@@ -278,12 +228,6 @@ $root.pb = (function () {
      * @property {number} Sync_Room_GameStatus=5214 Sync_Room_GameStatus value
      * @property {number} Sync_Room_GameOp=5216 Sync_Room_GameOp value
      * @property {number} Sync_Room_GameResult=5218 Sync_Room_GameResult value
-     * @property {number} Req_Game_ZsjcBettingList=6000 Req_Game_ZsjcBettingList value
-     * @property {number} Rep_Game_ZsjcBettingList=6001 Rep_Game_ZsjcBettingList value
-     * @property {number} Req_Game_ZsjcBet=6002 Req_Game_ZsjcBet value
-     * @property {number} Rep_Game_ZsjcBet=6003 Rep_Game_ZsjcBet value
-     * @property {number} Req_Game_ZsjcRanking=6004 Req_Game_ZsjcRanking value
-     * @property {number} Rep_Game_ZsjcRanking=6005 Rep_Game_ZsjcRanking value
      * @property {number} S2S_HeartBeat=10001 S2S_HeartBeat value
      * @property {number} S2S_Update_PlayerProperty=10003 S2S_Update_PlayerProperty value
      * @property {number} S2S_Update_PlayerGameCounter=10005 S2S_Update_PlayerGameCounter value
@@ -300,6 +244,7 @@ $root.pb = (function () {
      * @property {number} S2S_Reload_GameConf=10027 S2S_Reload_GameConf value
      * @property {number} S2S_Sync_ZsjcBetting=10028 S2S_Sync_ZsjcBetting value
      * @property {number} S2S_Sync_ZsjcState=10030 S2S_Sync_ZsjcState value
+     * @property {number} S2S_Update_DailyTaskProgress=10032 S2S_Update_DailyTaskProgress value
      */
     pb.MessageId = (function () {
         var valuesById = {}, values = Object.create(valuesById);
@@ -317,6 +262,8 @@ $root.pb = (function () {
         values[valuesById[1016] = "Sync_S2C_GameCg_GD"] = 1016;
         values[valuesById[1018] = "Sync_S2C_GameTimes"] = 1018;
         values[valuesById[1020] = "Sync_S2C_StockOrderResult"] = 1020;
+        values[valuesById[1022] = "Sync_S2C_MutipleLogin"] = 1022;
+        values[valuesById[1024] = "Sync_S2C_TaskProgress"] = 1024;
         values[valuesById[1200] = "Sync_C2S_GameHeart"] = 1200;
         values[valuesById[1300] = "Sync_Email"] = 1300;
         values[valuesById[2001] = "Req_QuoteSubscribe"] = 2001;
@@ -329,16 +276,42 @@ $root.pb = (function () {
         values[valuesById[2008] = "Rep_IsTradingDay"] = 2008;
         values[valuesById[2009] = "Req_QueryTradingDay"] = 2009;
         values[valuesById[2010] = "Rep_QueryTradingDay"] = 2010;
+        values[valuesById[2011] = "Req_QueryAiStockList"] = 2011;
+        values[valuesById[2012] = "Rep_QueryAiStockList"] = 2012;
+        values[valuesById[2013] = "Req_QueryAiSignal"] = 2013;
+        values[valuesById[2014] = "Rep_QueryAiSignal"] = 2014;
         values[valuesById[3001] = "Req_Hall_UploadIcon"] = 3001;
         values[valuesById[3002] = "Rep_Hall_UploadIcon"] = 3002;
-        values[valuesById[3003] = "Req_Hall_EditNick"] = 3003;
-        values[valuesById[3004] = "Rep_Hall_EditNick"] = 3004;
+        values[valuesById[3003] = "Req_Hall_DownloadIcon"] = 3003;
+        values[valuesById[3004] = "Rep_Hall_DownploadIcon"] = 3004;
         values[valuesById[3005] = "Req_Hall_EditIcon"] = 3005;
         values[valuesById[3006] = "Rep_Hall_EditIcon"] = 3006;
-        values[valuesById[3007] = "Req_Hall_BackBag"] = 3007;
-        values[valuesById[3008] = "Rep_Hall_BackBag"] = 3008;
-        values[valuesById[3009] = "Req_Hall_GetItem"] = 3009;
-        values[valuesById[3010] = "Rep_Hall_GetItem"] = 3010;
+        values[valuesById[3007] = "Req_Hall_EditNick"] = 3007;
+        values[valuesById[3008] = "Rep_Hall_EditNick"] = 3008;
+        values[valuesById[3009] = "Req_Hall_EditLocation"] = 3009;
+        values[valuesById[3010] = "Rep_Hall_EditLocation"] = 3010;
+        values[valuesById[3011] = "Req_Hall_EditGender"] = 3011;
+        values[valuesById[3012] = "Rep_Hall_EditGender"] = 3012;
+        values[valuesById[3013] = "Req_Hall_BackBag"] = 3013;
+        values[valuesById[3014] = "Rep_Hall_BackBag"] = 3014;
+        values[valuesById[3015] = "Req_Hall_GetItem"] = 3015;
+        values[valuesById[3016] = "Rep_Hall_GetItem"] = 3016;
+        values[valuesById[3017] = "Req_Hall_EditFavorList"] = 3017;
+        values[valuesById[3018] = "Rep_Hall_EditFavorList"] = 3018;
+        values[valuesById[3019] = "Req_Hall_QueryPlayer"] = 3019;
+        values[valuesById[3020] = "Rep_Hall_QueryPlayer"] = 3020;
+        values[valuesById[3021] = "Req_Hall_SaveStudyProgress"] = 3021;
+        values[valuesById[3022] = "Rep_Hall_SaveStudyProgress"] = 3022;
+        values[valuesById[3023] = "Req_Hall_GetDailyTaskAward"] = 3023;
+        values[valuesById[3024] = "Rep_Hall_GetDailyTaskAward"] = 3024;
+        values[valuesById[3025] = "Req_Hall_UnlockGame"] = 3025;
+        values[valuesById[3026] = "Rep_Hall_UnlockGame"] = 3026;
+        values[valuesById[3027] = "Req_Hall_GetWeeklyAward"] = 3027;
+        values[valuesById[3028] = "Rep_Hall_GetWeeklyAward"] = 3028;
+        values[valuesById[3029] = "Req_Hall_QueryEventLog"] = 3029;
+        values[valuesById[3030] = "Rep_Hall_QueryEventLog"] = 3030;
+        values[valuesById[3999] = "Req_Hall_Logout"] = 3999;
+        values[valuesById[4000] = "Rep_Hall_Logout"] = 4000;
         values[valuesById[4001] = "Req_Game_Login"] = 4001;
         values[valuesById[4002] = "Rep_Game_Login"] = 4002;
         values[valuesById[4003] = "Req_Game_Start"] = 4003;
@@ -377,8 +350,12 @@ $root.pb = (function () {
         values[valuesById[4036] = "Rep_Game_CgdsReg"] = 4036;
         values[valuesById[4037] = "Req_Game_CgdsRanking"] = 4037;
         values[valuesById[4038] = "Rep_Game_CgdsRanking"] = 4038;
-        values[valuesById[5000] = "RoomMsgRange_BEG"] = 5000;
-        values[valuesById[5999] = "RoomMsgRange_END"] = 5999;
+        values[valuesById[4039] = "Req_Game_ZsjcBettingList"] = 4039;
+        values[valuesById[4040] = "Rep_Game_ZsjcBettingList"] = 4040;
+        values[valuesById[4041] = "Req_Game_ZsjcBet"] = 4041;
+        values[valuesById[4042] = "Rep_Game_ZsjcBet"] = 4042;
+        values[valuesById[4043] = "Req_Game_ZsjcRanking"] = 4043;
+        values[valuesById[4044] = "Rep_Game_ZsjcRanking"] = 4044;
         values[valuesById[5003] = "Req_Room_Create"] = 5003;
         values[valuesById[5004] = "Rep_Room_Create"] = 5004;
         values[valuesById[5005] = "Req_Room_Enter"] = 5005;
@@ -397,12 +374,6 @@ $root.pb = (function () {
         values[valuesById[5214] = "Sync_Room_GameStatus"] = 5214;
         values[valuesById[5216] = "Sync_Room_GameOp"] = 5216;
         values[valuesById[5218] = "Sync_Room_GameResult"] = 5218;
-        values[valuesById[6000] = "Req_Game_ZsjcBettingList"] = 6000;
-        values[valuesById[6001] = "Rep_Game_ZsjcBettingList"] = 6001;
-        values[valuesById[6002] = "Req_Game_ZsjcBet"] = 6002;
-        values[valuesById[6003] = "Rep_Game_ZsjcBet"] = 6003;
-        values[valuesById[6004] = "Req_Game_ZsjcRanking"] = 6004;
-        values[valuesById[6005] = "Rep_Game_ZsjcRanking"] = 6005;
         values[valuesById[10001] = "S2S_HeartBeat"] = 10001;
         values[valuesById[10003] = "S2S_Update_PlayerProperty"] = 10003;
         values[valuesById[10005] = "S2S_Update_PlayerGameCounter"] = 10005;
@@ -419,6 +390,7 @@ $root.pb = (function () {
         values[valuesById[10027] = "S2S_Reload_GameConf"] = 10027;
         values[valuesById[10028] = "S2S_Sync_ZsjcBetting"] = 10028;
         values[valuesById[10030] = "S2S_Sync_ZsjcState"] = 10030;
+        values[valuesById[10032] = "S2S_Update_DailyTaskProgress"] = 10032;
         return values;
     })();
 
@@ -842,405 +814,6 @@ $root.pb = (function () {
         return ErrorInfo;
     })();
 
-    pb.AdClicked = (function () {
-
-        /**
-         * Properties of an AdClicked.
-         * @memberof pb
-         * @interface IAdClicked
-         * @property {number|null} [uid] AdClicked uid
-         * @property {number|null} [pos] AdClicked pos
-         * @property {string|null} [url] AdClicked url
-         * @property {pb.AppFrom|null} [from] AdClicked from
-         * @property {string|null} [ua] AdClicked ua
-         */
-
-        /**
-         * Constructs a new AdClicked.
-         * @memberof pb
-         * @classdesc Represents an AdClicked.
-         * @implements IAdClicked
-         * @constructor
-         * @param {pb.IAdClicked=} [properties] Properties to set
-         */
-        function AdClicked(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * AdClicked uid.
-         * @member {number} uid
-         * @memberof pb.AdClicked
-         * @instance
-         */
-        AdClicked.prototype.uid = 0;
-
-        /**
-         * AdClicked pos.
-         * @member {number} pos
-         * @memberof pb.AdClicked
-         * @instance
-         */
-        AdClicked.prototype.pos = 0;
-
-        /**
-         * AdClicked url.
-         * @member {string} url
-         * @memberof pb.AdClicked
-         * @instance
-         */
-        AdClicked.prototype.url = "";
-
-        /**
-         * AdClicked from.
-         * @member {pb.AppFrom} from
-         * @memberof pb.AdClicked
-         * @instance
-         */
-        AdClicked.prototype.from = 0;
-
-        /**
-         * AdClicked ua.
-         * @member {string} ua
-         * @memberof pb.AdClicked
-         * @instance
-         */
-        AdClicked.prototype.ua = "";
-
-        /**
-         * Creates a new AdClicked instance using the specified properties.
-         * @function create
-         * @memberof pb.AdClicked
-         * @static
-         * @param {pb.IAdClicked=} [properties] Properties to set
-         * @returns {pb.AdClicked} AdClicked instance
-         */
-        AdClicked.create = function create(properties) {
-            return new AdClicked(properties);
-        };
-
-        /**
-         * Encodes the specified AdClicked message. Does not implicitly {@link pb.AdClicked.verify|verify} messages.
-         * @function encode
-         * @memberof pb.AdClicked
-         * @static
-         * @param {pb.IAdClicked} message AdClicked message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        AdClicked.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
-            if (message.pos != null && Object.hasOwnProperty.call(message, "pos"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pos);
-            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.url);
-            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.from);
-            if (message.ua != null && Object.hasOwnProperty.call(message, "ua"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.ua);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified AdClicked message, length delimited. Does not implicitly {@link pb.AdClicked.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof pb.AdClicked
-         * @static
-         * @param {pb.IAdClicked} message AdClicked message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        AdClicked.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes an AdClicked message from the specified reader or buffer.
-         * @function decode
-         * @memberof pb.AdClicked
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {pb.AdClicked} AdClicked
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        AdClicked.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.AdClicked();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.pos = reader.int32();
-                        break;
-                    case 3:
-                        message.url = reader.string();
-                        break;
-                    case 4:
-                        message.from = reader.int32();
-                        break;
-                    case 5:
-                        message.ua = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes an AdClicked message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof pb.AdClicked
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {pb.AdClicked} AdClicked
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        AdClicked.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies an AdClicked message.
-         * @function verify
-         * @memberof pb.AdClicked
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        AdClicked.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.uid != null && message.hasOwnProperty("uid"))
-                if (!$util.isInteger(message.uid))
-                    return "uid: integer expected";
-            if (message.pos != null && message.hasOwnProperty("pos"))
-                if (!$util.isInteger(message.pos))
-                    return "pos: integer expected";
-            if (message.url != null && message.hasOwnProperty("url"))
-                if (!$util.isString(message.url))
-                    return "url: string expected";
-            if (message.from != null && message.hasOwnProperty("from"))
-                switch (message.from) {
-                    default:
-                        return "from: enum value expected";
-                    case 0:
-                    case 1:
-                    case 201:
-                    case 204:
-                    case 205:
-                    case 206:
-                    case 208:
-                    case 209:
-                    case 210:
-                    case 211:
-                    case 212:
-                    case 301:
-                    case 302:
-                    case 601:
-                    case 1000:
-                    case 1204:
-                    case 1205:
-                    case 1208:
-                    case 1212:
-                    case 6666:
-                    case 6667:
-                    case 7777:
-                    case 7778:
-                    case 8888:
-                        break;
-                }
-            if (message.ua != null && message.hasOwnProperty("ua"))
-                if (!$util.isString(message.ua))
-                    return "ua: string expected";
-            return null;
-        };
-
-        /**
-         * Creates an AdClicked message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof pb.AdClicked
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {pb.AdClicked} AdClicked
-         */
-        AdClicked.fromObject = function fromObject(object) {
-            if (object instanceof $root.pb.AdClicked)
-                return object;
-            var message = new $root.pb.AdClicked();
-            if (object.uid != null)
-                message.uid = object.uid | 0;
-            if (object.pos != null)
-                message.pos = object.pos | 0;
-            if (object.url != null)
-                message.url = String(object.url);
-            switch (object.from) {
-                case "Android_000":
-                case 0:
-                    message.from = 0;
-                    break;
-                case "Android_001":
-                case 1:
-                    message.from = 1;
-                    break;
-                case "Android_201":
-                case 201:
-                    message.from = 201;
-                    break;
-                case "Android_204":
-                case 204:
-                    message.from = 204;
-                    break;
-                case "Android_205":
-                case 205:
-                    message.from = 205;
-                    break;
-                case "Android_206":
-                case 206:
-                    message.from = 206;
-                    break;
-                case "Android_208":
-                case 208:
-                    message.from = 208;
-                    break;
-                case "Android_209":
-                case 209:
-                    message.from = 209;
-                    break;
-                case "Android_210":
-                case 210:
-                    message.from = 210;
-                    break;
-                case "Android_211":
-                case 211:
-                    message.from = 211;
-                    break;
-                case "Android_212":
-                case 212:
-                    message.from = 212;
-                    break;
-                case "Android_301":
-                case 301:
-                    message.from = 301;
-                    break;
-                case "Android_302":
-                case 302:
-                    message.from = 302;
-                    break;
-                case "Android_601":
-                case 601:
-                    message.from = 601;
-                    break;
-                case "Android_1000":
-                case 1000:
-                    message.from = 1000;
-                    break;
-                case "Android_1204":
-                case 1204:
-                    message.from = 1204;
-                    break;
-                case "Android_1205":
-                case 1205:
-                    message.from = 1205;
-                    break;
-                case "Android_1208":
-                case 1208:
-                    message.from = 1208;
-                    break;
-                case "Android_1212":
-                case 1212:
-                    message.from = 1212;
-                    break;
-                case "IosAppleStore":
-                case 6666:
-                    message.from = 6666;
-                    break;
-                case "Ipad":
-                case 6667:
-                    message.from = 6667;
-                    break;
-                case "WebsiteIos":
-                case 7777:
-                    message.from = 7777;
-                    break;
-                case "WebsiteAndriod":
-                case 7778:
-                    message.from = 7778;
-                    break;
-                case "WeChatMinProgram":
-                case 8888:
-                    message.from = 8888;
-                    break;
-            }
-            if (object.ua != null)
-                message.ua = String(object.ua);
-            return message;
-        };
-
-        /**
-         * Creates a plain object from an AdClicked message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof pb.AdClicked
-         * @static
-         * @param {pb.AdClicked} message AdClicked
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        AdClicked.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.uid = 0;
-                object.pos = 0;
-                object.url = "";
-                object.from = options.enums === String ? "Android_000" : 0;
-                object.ua = "";
-            }
-            if (message.uid != null && message.hasOwnProperty("uid"))
-                object.uid = message.uid;
-            if (message.pos != null && message.hasOwnProperty("pos"))
-                object.pos = message.pos;
-            if (message.url != null && message.hasOwnProperty("url"))
-                object.url = message.url;
-            if (message.from != null && message.hasOwnProperty("from"))
-                object.from = options.enums === String ? $root.pb.AppFrom[message.from] : message.from;
-            if (message.ua != null && message.hasOwnProperty("ua"))
-                object.ua = message.ua;
-            return object;
-        };
-
-        /**
-         * Converts this AdClicked to JSON.
-         * @function toJSON
-         * @memberof pb.AdClicked
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        AdClicked.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return AdClicked;
-    })();
-
     pb.VoidRequest = (function () {
 
         /**
@@ -1633,21 +1206,71 @@ $root.pb = (function () {
      * @enum {number}
      * @property {number} Gold=0 Gold value
      * @property {number} Diamond=1 Diamond value
-     * @property {number} VIP=2 VIP value
+     * @property {number} Vip=2 Vip value
      * @property {number} Exp=3 Exp value
      * @property {number} Level=4 Level value
      * @property {number} Fame=5 Fame value
+     * @property {number} Coupon=6 Coupon value
+     * @property {number} UnlockDxxl=20 UnlockDxxl value
+     * @property {number} UnlockQhxl=21 UnlockQhxl value
+     * @property {number} UnlockTjdxl=22 UnlockTjdxl value
+     * @property {number} UnlockZbxl=23 UnlockZbxl value
+     * @property {number} VipExpiration=29 VipExpiration value
      * @property {number} Max=30 Max value
      */
     pb.GamePropertyId = (function () {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Gold"] = 0;
         values[valuesById[1] = "Diamond"] = 1;
-        values[valuesById[2] = "VIP"] = 2;
+        values[valuesById[2] = "Vip"] = 2;
         values[valuesById[3] = "Exp"] = 3;
         values[valuesById[4] = "Level"] = 4;
         values[valuesById[5] = "Fame"] = 5;
+        values[valuesById[6] = "Coupon"] = 6;
+        values[valuesById[20] = "UnlockDxxl"] = 20;
+        values[valuesById[21] = "UnlockQhxl"] = 21;
+        values[valuesById[22] = "UnlockTjdxl"] = 22;
+        values[valuesById[23] = "UnlockZbxl"] = 23;
+        values[valuesById[29] = "VipExpiration"] = 29;
         values[valuesById[30] = "Max"] = 30;
+        return values;
+    })();
+
+    /**
+     * EventId enum.
+     * @name pb.EventId
+     * @enum {number}
+     * @property {number} EventId_NULL=0 EventId_NULL value
+     * @property {number} EventId_WeeklyAward=1 EventId_WeeklyAward value
+     * @property {number} EventId_Zsjc=2 EventId_Zsjc value
+     */
+    pb.EventId = (function () {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "EventId_NULL"] = 0;
+        values[valuesById[1] = "EventId_WeeklyAward"] = 1;
+        values[valuesById[2] = "EventId_Zsjc"] = 2;
+        return values;
+    })();
+
+    /**
+     * TaskId enum.
+     * @name pb.TaskId
+     * @enum {number}
+     * @property {number} Pk=0 Pk value
+     * @property {number} Dk=1 Dk value
+     * @property {number} Zsjc=2 Zsjc value
+     * @property {number} Ggjc=3 Ggjc value
+     * @property {number} MaxDailyTaskId=4 MaxDailyTaskId value
+     * @property {number} MaxStudyTaskId=8 MaxStudyTaskId value
+     */
+    pb.TaskId = (function () {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Pk"] = 0;
+        values[valuesById[1] = "Dk"] = 1;
+        values[valuesById[2] = "Zsjc"] = 2;
+        values[valuesById[3] = "Ggjc"] = 3;
+        values[valuesById[4] = "MaxDailyTaskId"] = 4;
+        values[valuesById[8] = "MaxStudyTaskId"] = 8;
         return values;
     })();
 
@@ -2751,7 +2374,6 @@ $root.pb = (function () {
          * Properties of a TodayGameTimes.
          * @memberof pb
          * @interface ITodayGameTimes
-         * @property {number|Long|null} [ts] TodayGameTimes ts
          * @property {Array.<number>|null} [counter] TodayGameTimes counter
          */
 
@@ -2770,14 +2392,6 @@ $root.pb = (function () {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
-
-        /**
-         * TodayGameTimes ts.
-         * @member {number|Long} ts
-         * @memberof pb.TodayGameTimes
-         * @instance
-         */
-        TodayGameTimes.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * TodayGameTimes counter.
@@ -2811,10 +2425,8 @@ $root.pb = (function () {
         TodayGameTimes.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ts != null && Object.hasOwnProperty.call(message, "ts"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.ts);
             if (message.counter != null && message.counter.length) {
-                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                writer.uint32(/* id 1, wireType 2 =*/10).fork();
                 for (var i = 0; i < message.counter.length; ++i)
                     writer.int32(message.counter[i]);
                 writer.ldelim();
@@ -2854,9 +2466,6 @@ $root.pb = (function () {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                     case 1:
-                        message.ts = reader.int64();
-                        break;
-                    case 2:
                         if (!(message.counter && message.counter.length))
                             message.counter = [];
                         if ((tag & 7) === 2) {
@@ -2901,9 +2510,6 @@ $root.pb = (function () {
         TodayGameTimes.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.ts != null && message.hasOwnProperty("ts"))
-                if (!$util.isInteger(message.ts) && !(message.ts && $util.isInteger(message.ts.low) && $util.isInteger(message.ts.high)))
-                    return "ts: integer|Long expected";
             if (message.counter != null && message.hasOwnProperty("counter")) {
                 if (!Array.isArray(message.counter))
                     return "counter: array expected";
@@ -2926,15 +2532,6 @@ $root.pb = (function () {
             if (object instanceof $root.pb.TodayGameTimes)
                 return object;
             var message = new $root.pb.TodayGameTimes();
-            if (object.ts != null)
-                if ($util.Long)
-                    (message.ts = $util.Long.fromValue(object.ts)).unsigned = false;
-                else if (typeof object.ts === "string")
-                    message.ts = parseInt(object.ts, 10);
-                else if (typeof object.ts === "number")
-                    message.ts = object.ts;
-                else if (typeof object.ts === "object")
-                    message.ts = new $util.LongBits(object.ts.low >>> 0, object.ts.high >>> 0).toNumber();
             if (object.counter) {
                 if (!Array.isArray(object.counter))
                     throw TypeError(".pb.TodayGameTimes.counter: array expected");
@@ -2960,17 +2557,6 @@ $root.pb = (function () {
             var object = {};
             if (options.arrays || options.defaults)
                 object.counter = [];
-            if (options.defaults)
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.ts = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.ts = options.longs === String ? "0" : 0;
-            if (message.ts != null && message.hasOwnProperty("ts"))
-                if (typeof message.ts === "number")
-                    object.ts = options.longs === String ? String(message.ts) : message.ts;
-                else
-                    object.ts = options.longs === String ? $util.Long.prototype.toString.call(message.ts) : options.longs === Number ? new $util.LongBits(message.ts.low >>> 0, message.ts.high >>> 0).toNumber() : message.ts;
             if (message.counter && message.counter.length) {
                 object.counter = [];
                 for (var j = 0; j < message.counter.length; ++j)
@@ -4902,6 +4488,258 @@ $root.pb = (function () {
         return ZsjcState;
     })();
 
+    pb.Tasks = (function () {
+
+        /**
+         * Properties of a Tasks.
+         * @memberof pb
+         * @interface ITasks
+         * @property {Array.<pb.ITaskItem>|null} [study] Tasks study
+         * @property {Array.<pb.ITaskItem>|null} [daily] Tasks daily
+         */
+
+        /**
+         * Constructs a new Tasks.
+         * @memberof pb
+         * @classdesc Represents a Tasks.
+         * @implements ITasks
+         * @constructor
+         * @param {pb.ITasks=} [properties] Properties to set
+         */
+        function Tasks(properties) {
+            this.study = [];
+            this.daily = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Tasks study.
+         * @member {Array.<pb.ITaskItem>} study
+         * @memberof pb.Tasks
+         * @instance
+         */
+        Tasks.prototype.study = $util.emptyArray;
+
+        /**
+         * Tasks daily.
+         * @member {Array.<pb.ITaskItem>} daily
+         * @memberof pb.Tasks
+         * @instance
+         */
+        Tasks.prototype.daily = $util.emptyArray;
+
+        /**
+         * Creates a new Tasks instance using the specified properties.
+         * @function create
+         * @memberof pb.Tasks
+         * @static
+         * @param {pb.ITasks=} [properties] Properties to set
+         * @returns {pb.Tasks} Tasks instance
+         */
+        Tasks.create = function create(properties) {
+            return new Tasks(properties);
+        };
+
+        /**
+         * Encodes the specified Tasks message. Does not implicitly {@link pb.Tasks.verify|verify} messages.
+         * @function encode
+         * @memberof pb.Tasks
+         * @static
+         * @param {pb.ITasks} message Tasks message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Tasks.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.study != null && message.study.length)
+                for (var i = 0; i < message.study.length; ++i)
+                    $root.pb.TaskItem.encode(message.study[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.daily != null && message.daily.length)
+                for (var i = 0; i < message.daily.length; ++i)
+                    $root.pb.TaskItem.encode(message.daily[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Tasks message, length delimited. Does not implicitly {@link pb.Tasks.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.Tasks
+         * @static
+         * @param {pb.ITasks} message Tasks message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Tasks.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Tasks message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.Tasks
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.Tasks} Tasks
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Tasks.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.Tasks();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        if (!(message.study && message.study.length))
+                            message.study = [];
+                        message.study.push($root.pb.TaskItem.decode(reader, reader.uint32()));
+                        break;
+                    case 2:
+                        if (!(message.daily && message.daily.length))
+                            message.daily = [];
+                        message.daily.push($root.pb.TaskItem.decode(reader, reader.uint32()));
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Tasks message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.Tasks
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.Tasks} Tasks
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Tasks.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Tasks message.
+         * @function verify
+         * @memberof pb.Tasks
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Tasks.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.study != null && message.hasOwnProperty("study")) {
+                if (!Array.isArray(message.study))
+                    return "study: array expected";
+                for (var i = 0; i < message.study.length; ++i) {
+                    var error = $root.pb.TaskItem.verify(message.study[i]);
+                    if (error)
+                        return "study." + error;
+                }
+            }
+            if (message.daily != null && message.hasOwnProperty("daily")) {
+                if (!Array.isArray(message.daily))
+                    return "daily: array expected";
+                for (var i = 0; i < message.daily.length; ++i) {
+                    var error = $root.pb.TaskItem.verify(message.daily[i]);
+                    if (error)
+                        return "daily." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a Tasks message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.Tasks
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.Tasks} Tasks
+         */
+        Tasks.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.Tasks)
+                return object;
+            var message = new $root.pb.Tasks();
+            if (object.study) {
+                if (!Array.isArray(object.study))
+                    throw TypeError(".pb.Tasks.study: array expected");
+                message.study = [];
+                for (var i = 0; i < object.study.length; ++i) {
+                    if (typeof object.study[i] !== "object")
+                        throw TypeError(".pb.Tasks.study: object expected");
+                    message.study[i] = $root.pb.TaskItem.fromObject(object.study[i]);
+                }
+            }
+            if (object.daily) {
+                if (!Array.isArray(object.daily))
+                    throw TypeError(".pb.Tasks.daily: array expected");
+                message.daily = [];
+                for (var i = 0; i < object.daily.length; ++i) {
+                    if (typeof object.daily[i] !== "object")
+                        throw TypeError(".pb.Tasks.daily: object expected");
+                    message.daily[i] = $root.pb.TaskItem.fromObject(object.daily[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Tasks message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.Tasks
+         * @static
+         * @param {pb.Tasks} message Tasks
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Tasks.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.study = [];
+                object.daily = [];
+            }
+            if (message.study && message.study.length) {
+                object.study = [];
+                for (var j = 0; j < message.study.length; ++j)
+                    object.study[j] = $root.pb.TaskItem.toObject(message.study[j], options);
+            }
+            if (message.daily && message.daily.length) {
+                object.daily = [];
+                for (var j = 0; j < message.daily.length; ++j)
+                    object.daily[j] = $root.pb.TaskItem.toObject(message.daily[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this Tasks to JSON.
+         * @function toJSON
+         * @memberof pb.Tasks
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Tasks.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Tasks;
+    })();
+
     pb.GameData = (function () {
 
         /**
@@ -4915,10 +4753,15 @@ $root.pb = (function () {
          * @property {Array.<pb.IGameCounter>|null} [counters] GameData counters
          * @property {pb.ISmxlState|null} [smlxState] GameData smlxState
          * @property {pb.ICgState|null} [cgState] GameData cgState
-         * @property {number|Long|null} [todayTs] GameData todayTs
+         * @property {number|Long|null} [today] GameData today
          * @property {Array.<number>|null} [todayTimes] GameData todayTimes
          * @property {Array.<number>|null} [stockList] GameData stockList
          * @property {pb.IZsjcState|null} [zsjcState] GameData zsjcState
+         * @property {string|null} [location] GameData location
+         * @property {string|null} [gender] GameData gender
+         * @property {Array.<number>|null} [favorList] GameData favorList
+         * @property {pb.ITasks|null} [tasks] GameData tasks
+         * @property {number|null} [week] GameData week
          */
 
         /**
@@ -4934,6 +4777,7 @@ $root.pb = (function () {
             this.counters = [];
             this.todayTimes = [];
             this.stockList = [];
+            this.favorList = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -4997,12 +4841,12 @@ $root.pb = (function () {
         GameData.prototype.cgState = null;
 
         /**
-         * GameData todayTs.
-         * @member {number|Long} todayTs
+         * GameData today.
+         * @member {number|Long} today
          * @memberof pb.GameData
          * @instance
          */
-        GameData.prototype.todayTs = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameData.prototype.today = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
          * GameData todayTimes.
@@ -5027,6 +4871,46 @@ $root.pb = (function () {
          * @instance
          */
         GameData.prototype.zsjcState = null;
+
+        /**
+         * GameData location.
+         * @member {string} location
+         * @memberof pb.GameData
+         * @instance
+         */
+        GameData.prototype.location = "";
+
+        /**
+         * GameData gender.
+         * @member {string} gender
+         * @memberof pb.GameData
+         * @instance
+         */
+        GameData.prototype.gender = "";
+
+        /**
+         * GameData favorList.
+         * @member {Array.<number>} favorList
+         * @memberof pb.GameData
+         * @instance
+         */
+        GameData.prototype.favorList = $util.emptyArray;
+
+        /**
+         * GameData tasks.
+         * @member {pb.ITasks|null|undefined} tasks
+         * @memberof pb.GameData
+         * @instance
+         */
+        GameData.prototype.tasks = null;
+
+        /**
+         * GameData week.
+         * @member {number} week
+         * @memberof pb.GameData
+         * @instance
+         */
+        GameData.prototype.week = 0;
 
         /**
          * Creates a new GameData instance using the specified properties.
@@ -5071,8 +4955,8 @@ $root.pb = (function () {
                 $root.pb.SmxlState.encode(message.smlxState, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
             if (message.cgState != null && Object.hasOwnProperty.call(message, "cgState"))
                 $root.pb.CgState.encode(message.cgState, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-            if (message.todayTs != null && Object.hasOwnProperty.call(message, "todayTs"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.todayTs);
+            if (message.today != null && Object.hasOwnProperty.call(message, "today"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.today);
             if (message.todayTimes != null && message.todayTimes.length) {
                 writer.uint32(/* id 9, wireType 2 =*/74).fork();
                 for (var i = 0; i < message.todayTimes.length; ++i)
@@ -5087,6 +4971,20 @@ $root.pb = (function () {
             }
             if (message.zsjcState != null && Object.hasOwnProperty.call(message, "zsjcState"))
                 $root.pb.ZsjcState.encode(message.zsjcState, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                writer.uint32(/* id 12, wireType 2 =*/98).string(message.location);
+            if (message.gender != null && Object.hasOwnProperty.call(message, "gender"))
+                writer.uint32(/* id 13, wireType 2 =*/106).string(message.gender);
+            if (message.favorList != null && message.favorList.length) {
+                writer.uint32(/* id 14, wireType 2 =*/114).fork();
+                for (var i = 0; i < message.favorList.length; ++i)
+                    writer.int32(message.favorList[i]);
+                writer.ldelim();
+            }
+            if (message.tasks != null && Object.hasOwnProperty.call(message, "tasks"))
+                $root.pb.Tasks.encode(message.tasks, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+            if (message.week != null && Object.hasOwnProperty.call(message, "week"))
+                writer.uint32(/* id 16, wireType 0 =*/128).int32(message.week);
             return writer;
         };
 
@@ -5152,7 +5050,7 @@ $root.pb = (function () {
                         message.cgState = $root.pb.CgState.decode(reader, reader.uint32());
                         break;
                     case 8:
-                        message.todayTs = reader.int64();
+                        message.today = reader.int64();
                         break;
                     case 9:
                         if (!(message.todayTimes && message.todayTimes.length))
@@ -5176,6 +5074,28 @@ $root.pb = (function () {
                         break;
                     case 11:
                         message.zsjcState = $root.pb.ZsjcState.decode(reader, reader.uint32());
+                        break;
+                    case 12:
+                        message.location = reader.string();
+                        break;
+                    case 13:
+                        message.gender = reader.string();
+                        break;
+                    case 14:
+                        if (!(message.favorList && message.favorList.length))
+                            message.favorList = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.favorList.push(reader.int32());
+                        } else
+                            message.favorList.push(reader.int32());
+                        break;
+                    case 15:
+                        message.tasks = $root.pb.Tasks.decode(reader, reader.uint32());
+                        break;
+                    case 16:
+                        message.week = reader.int32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -5247,9 +5167,9 @@ $root.pb = (function () {
                 if (error)
                     return "cgState." + error;
             }
-            if (message.todayTs != null && message.hasOwnProperty("todayTs"))
-                if (!$util.isInteger(message.todayTs) && !(message.todayTs && $util.isInteger(message.todayTs.low) && $util.isInteger(message.todayTs.high)))
-                    return "todayTs: integer|Long expected";
+            if (message.today != null && message.hasOwnProperty("today"))
+                if (!$util.isInteger(message.today) && !(message.today && $util.isInteger(message.today.low) && $util.isInteger(message.today.high)))
+                    return "today: integer|Long expected";
             if (message.todayTimes != null && message.hasOwnProperty("todayTimes")) {
                 if (!Array.isArray(message.todayTimes))
                     return "todayTimes: array expected";
@@ -5269,6 +5189,27 @@ $root.pb = (function () {
                 if (error)
                     return "zsjcState." + error;
             }
+            if (message.location != null && message.hasOwnProperty("location"))
+                if (!$util.isString(message.location))
+                    return "location: string expected";
+            if (message.gender != null && message.hasOwnProperty("gender"))
+                if (!$util.isString(message.gender))
+                    return "gender: string expected";
+            if (message.favorList != null && message.hasOwnProperty("favorList")) {
+                if (!Array.isArray(message.favorList))
+                    return "favorList: array expected";
+                for (var i = 0; i < message.favorList.length; ++i)
+                    if (!$util.isInteger(message.favorList[i]))
+                        return "favorList: integer[] expected";
+            }
+            if (message.tasks != null && message.hasOwnProperty("tasks")) {
+                var error = $root.pb.Tasks.verify(message.tasks);
+                if (error)
+                    return "tasks." + error;
+            }
+            if (message.week != null && message.hasOwnProperty("week"))
+                if (!$util.isInteger(message.week))
+                    return "week: integer expected";
             return null;
         };
 
@@ -5324,15 +5265,15 @@ $root.pb = (function () {
                     throw TypeError(".pb.GameData.cgState: object expected");
                 message.cgState = $root.pb.CgState.fromObject(object.cgState);
             }
-            if (object.todayTs != null)
+            if (object.today != null)
                 if ($util.Long)
-                    (message.todayTs = $util.Long.fromValue(object.todayTs)).unsigned = false;
-                else if (typeof object.todayTs === "string")
-                    message.todayTs = parseInt(object.todayTs, 10);
-                else if (typeof object.todayTs === "number")
-                    message.todayTs = object.todayTs;
-                else if (typeof object.todayTs === "object")
-                    message.todayTs = new $util.LongBits(object.todayTs.low >>> 0, object.todayTs.high >>> 0).toNumber();
+                    (message.today = $util.Long.fromValue(object.today)).unsigned = false;
+                else if (typeof object.today === "string")
+                    message.today = parseInt(object.today, 10);
+                else if (typeof object.today === "number")
+                    message.today = object.today;
+                else if (typeof object.today === "object")
+                    message.today = new $util.LongBits(object.today.low >>> 0, object.today.high >>> 0).toNumber();
             if (object.todayTimes) {
                 if (!Array.isArray(object.todayTimes))
                     throw TypeError(".pb.GameData.todayTimes: array expected");
@@ -5352,6 +5293,24 @@ $root.pb = (function () {
                     throw TypeError(".pb.GameData.zsjcState: object expected");
                 message.zsjcState = $root.pb.ZsjcState.fromObject(object.zsjcState);
             }
+            if (object.location != null)
+                message.location = String(object.location);
+            if (object.gender != null)
+                message.gender = String(object.gender);
+            if (object.favorList) {
+                if (!Array.isArray(object.favorList))
+                    throw TypeError(".pb.GameData.favorList: array expected");
+                message.favorList = [];
+                for (var i = 0; i < object.favorList.length; ++i)
+                    message.favorList[i] = object.favorList[i] | 0;
+            }
+            if (object.tasks != null) {
+                if (typeof object.tasks !== "object")
+                    throw TypeError(".pb.GameData.tasks: object expected");
+                message.tasks = $root.pb.Tasks.fromObject(object.tasks);
+            }
+            if (object.week != null)
+                message.week = object.week | 0;
             return message;
         };
 
@@ -5373,6 +5332,7 @@ $root.pb = (function () {
                 object.counters = [];
                 object.todayTimes = [];
                 object.stockList = [];
+                object.favorList = [];
             }
             if (options.defaults) {
                 object.uid = 0;
@@ -5382,10 +5342,14 @@ $root.pb = (function () {
                 object.cgState = null;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
-                    object.todayTs = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.today = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.todayTs = options.longs === String ? "0" : 0;
+                    object.today = options.longs === String ? "0" : 0;
                 object.zsjcState = null;
+                object.location = "";
+                object.gender = "";
+                object.tasks = null;
+                object.week = 0;
             }
             if (message.uid != null && message.hasOwnProperty("uid"))
                 object.uid = message.uid;
@@ -5410,11 +5374,11 @@ $root.pb = (function () {
                 object.smlxState = $root.pb.SmxlState.toObject(message.smlxState, options);
             if (message.cgState != null && message.hasOwnProperty("cgState"))
                 object.cgState = $root.pb.CgState.toObject(message.cgState, options);
-            if (message.todayTs != null && message.hasOwnProperty("todayTs"))
-                if (typeof message.todayTs === "number")
-                    object.todayTs = options.longs === String ? String(message.todayTs) : message.todayTs;
+            if (message.today != null && message.hasOwnProperty("today"))
+                if (typeof message.today === "number")
+                    object.today = options.longs === String ? String(message.today) : message.today;
                 else
-                    object.todayTs = options.longs === String ? $util.Long.prototype.toString.call(message.todayTs) : options.longs === Number ? new $util.LongBits(message.todayTs.low >>> 0, message.todayTs.high >>> 0).toNumber() : message.todayTs;
+                    object.today = options.longs === String ? $util.Long.prototype.toString.call(message.today) : options.longs === Number ? new $util.LongBits(message.today.low >>> 0, message.today.high >>> 0).toNumber() : message.today;
             if (message.todayTimes && message.todayTimes.length) {
                 object.todayTimes = [];
                 for (var j = 0; j < message.todayTimes.length; ++j)
@@ -5427,6 +5391,19 @@ $root.pb = (function () {
             }
             if (message.zsjcState != null && message.hasOwnProperty("zsjcState"))
                 object.zsjcState = $root.pb.ZsjcState.toObject(message.zsjcState, options);
+            if (message.location != null && message.hasOwnProperty("location"))
+                object.location = message.location;
+            if (message.gender != null && message.hasOwnProperty("gender"))
+                object.gender = message.gender;
+            if (message.favorList && message.favorList.length) {
+                object.favorList = [];
+                for (var j = 0; j < message.favorList.length; ++j)
+                    object.favorList[j] = message.favorList[j];
+            }
+            if (message.tasks != null && message.hasOwnProperty("tasks"))
+                object.tasks = $root.pb.Tasks.toObject(message.tasks, options);
+            if (message.week != null && message.hasOwnProperty("week"))
+                object.week = message.week;
             return object;
         };
 
@@ -5612,6 +5589,12 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
+                    case 6:
+                    case 20:
+                    case 21:
+                    case 22:
+                    case 23:
+                    case 29:
                     case 30:
                         break;
                 }
@@ -5645,7 +5628,7 @@ $root.pb = (function () {
                 case 1:
                     message.id = 1;
                     break;
-                case "VIP":
+                case "Vip":
                 case 2:
                     message.id = 2;
                     break;
@@ -5660,6 +5643,30 @@ $root.pb = (function () {
                 case "Fame":
                 case 5:
                     message.id = 5;
+                    break;
+                case "Coupon":
+                case 6:
+                    message.id = 6;
+                    break;
+                case "UnlockDxxl":
+                case 20:
+                    message.id = 20;
+                    break;
+                case "UnlockQhxl":
+                case 21:
+                    message.id = 21;
+                    break;
+                case "UnlockTjdxl":
+                case 22:
+                    message.id = 22;
+                    break;
+                case "UnlockZbxl":
+                case 23:
+                    message.id = 23;
+                    break;
+                case "VipExpiration":
+                case 29:
+                    message.id = 29;
                     break;
                 case "Max":
                 case 30:
@@ -8098,25 +8105,32 @@ $root.pb = (function () {
         return CmdUploadIcon;
     })();
 
-    pb.CmdEditNick = (function () {
+    pb.PlayerInfo = (function () {
 
         /**
-         * Properties of a CmdEditNick.
+         * Properties of a PlayerInfo.
          * @memberof pb
-         * @interface ICmdEditNick
-         * @property {number|null} [uid] CmdEditNick uid
-         * @property {string|null} [nick] CmdEditNick nick
+         * @interface IPlayerInfo
+         * @property {number|null} [uid] PlayerInfo uid
+         * @property {string|null} [nick] PlayerInfo nick
+         * @property {string|null} [icon] PlayerInfo icon
+         * @property {string|null} [gender] PlayerInfo gender
+         * @property {string|null} [location] PlayerInfo location
+         * @property {Array.<number|Long>|null} [properties] PlayerInfo properties
+         * @property {Array.<pb.IGameCounter>|null} [counters] PlayerInfo counters
          */
 
         /**
-         * Constructs a new CmdEditNick.
+         * Constructs a new PlayerInfo.
          * @memberof pb
-         * @classdesc Represents a CmdEditNick.
-         * @implements ICmdEditNick
+         * @classdesc Represents a PlayerInfo.
+         * @implements IPlayerInfo
          * @constructor
-         * @param {pb.ICmdEditNick=} [properties] Properties to set
+         * @param {pb.IPlayerInfo=} [properties] Properties to set
          */
-        function CmdEditNick(properties) {
+        function PlayerInfo(properties) {
+            this.properties = [];
+            this.counters = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -8124,80 +8138,135 @@ $root.pb = (function () {
         }
 
         /**
-         * CmdEditNick uid.
+         * PlayerInfo uid.
          * @member {number} uid
-         * @memberof pb.CmdEditNick
+         * @memberof pb.PlayerInfo
          * @instance
          */
-        CmdEditNick.prototype.uid = 0;
+        PlayerInfo.prototype.uid = 0;
 
         /**
-         * CmdEditNick nick.
+         * PlayerInfo nick.
          * @member {string} nick
-         * @memberof pb.CmdEditNick
+         * @memberof pb.PlayerInfo
          * @instance
          */
-        CmdEditNick.prototype.nick = "";
+        PlayerInfo.prototype.nick = "";
 
         /**
-         * Creates a new CmdEditNick instance using the specified properties.
-         * @function create
-         * @memberof pb.CmdEditNick
-         * @static
-         * @param {pb.ICmdEditNick=} [properties] Properties to set
-         * @returns {pb.CmdEditNick} CmdEditNick instance
+         * PlayerInfo icon.
+         * @member {string} icon
+         * @memberof pb.PlayerInfo
+         * @instance
          */
-        CmdEditNick.create = function create(properties) {
-            return new CmdEditNick(properties);
+        PlayerInfo.prototype.icon = "";
+
+        /**
+         * PlayerInfo gender.
+         * @member {string} gender
+         * @memberof pb.PlayerInfo
+         * @instance
+         */
+        PlayerInfo.prototype.gender = "";
+
+        /**
+         * PlayerInfo location.
+         * @member {string} location
+         * @memberof pb.PlayerInfo
+         * @instance
+         */
+        PlayerInfo.prototype.location = "";
+
+        /**
+         * PlayerInfo properties.
+         * @member {Array.<number|Long>} properties
+         * @memberof pb.PlayerInfo
+         * @instance
+         */
+        PlayerInfo.prototype.properties = $util.emptyArray;
+
+        /**
+         * PlayerInfo counters.
+         * @member {Array.<pb.IGameCounter>} counters
+         * @memberof pb.PlayerInfo
+         * @instance
+         */
+        PlayerInfo.prototype.counters = $util.emptyArray;
+
+        /**
+         * Creates a new PlayerInfo instance using the specified properties.
+         * @function create
+         * @memberof pb.PlayerInfo
+         * @static
+         * @param {pb.IPlayerInfo=} [properties] Properties to set
+         * @returns {pb.PlayerInfo} PlayerInfo instance
+         */
+        PlayerInfo.create = function create(properties) {
+            return new PlayerInfo(properties);
         };
 
         /**
-         * Encodes the specified CmdEditNick message. Does not implicitly {@link pb.CmdEditNick.verify|verify} messages.
+         * Encodes the specified PlayerInfo message. Does not implicitly {@link pb.PlayerInfo.verify|verify} messages.
          * @function encode
-         * @memberof pb.CmdEditNick
+         * @memberof pb.PlayerInfo
          * @static
-         * @param {pb.ICmdEditNick} message CmdEditNick message or plain object to encode
+         * @param {pb.IPlayerInfo} message PlayerInfo message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CmdEditNick.encode = function encode(message, writer) {
+        PlayerInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
             if (message.nick != null && Object.hasOwnProperty.call(message, "nick"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nick);
+            if (message.icon != null && Object.hasOwnProperty.call(message, "icon"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.icon);
+            if (message.gender != null && Object.hasOwnProperty.call(message, "gender"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.gender);
+            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.location);
+            if (message.properties != null && message.properties.length) {
+                writer.uint32(/* id 6, wireType 2 =*/50).fork();
+                for (var i = 0; i < message.properties.length; ++i)
+                    writer.int64(message.properties[i]);
+                writer.ldelim();
+            }
+            if (message.counters != null && message.counters.length)
+                for (var i = 0; i < message.counters.length; ++i)
+                    $root.pb.GameCounter.encode(message.counters[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified CmdEditNick message, length delimited. Does not implicitly {@link pb.CmdEditNick.verify|verify} messages.
+         * Encodes the specified PlayerInfo message, length delimited. Does not implicitly {@link pb.PlayerInfo.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof pb.CmdEditNick
+         * @memberof pb.PlayerInfo
          * @static
-         * @param {pb.ICmdEditNick} message CmdEditNick message or plain object to encode
+         * @param {pb.IPlayerInfo} message PlayerInfo message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CmdEditNick.encodeDelimited = function encodeDelimited(message, writer) {
+        PlayerInfo.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a CmdEditNick message from the specified reader or buffer.
+         * Decodes a PlayerInfo message from the specified reader or buffer.
          * @function decode
-         * @memberof pb.CmdEditNick
+         * @memberof pb.PlayerInfo
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {pb.CmdEditNick} CmdEditNick
+         * @returns {pb.PlayerInfo} PlayerInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CmdEditNick.decode = function decode(reader, length) {
+        PlayerInfo.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdEditNick();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.PlayerInfo();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -8207,6 +8276,30 @@ $root.pb = (function () {
                     case 2:
                         message.nick = reader.string();
                         break;
+                    case 3:
+                        message.icon = reader.string();
+                        break;
+                    case 4:
+                        message.gender = reader.string();
+                        break;
+                    case 5:
+                        message.location = reader.string();
+                        break;
+                    case 6:
+                        if (!(message.properties && message.properties.length))
+                            message.properties = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.properties.push(reader.int64());
+                        } else
+                            message.properties.push(reader.int64());
+                        break;
+                    case 7:
+                        if (!(message.counters && message.counters.length))
+                            message.counters = [];
+                        message.counters.push($root.pb.GameCounter.decode(reader, reader.uint32()));
+                        break;
                     default:
                         reader.skipType(tag & 7);
                         break;
@@ -8216,30 +8309,30 @@ $root.pb = (function () {
         };
 
         /**
-         * Decodes a CmdEditNick message from the specified reader or buffer, length delimited.
+         * Decodes a PlayerInfo message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof pb.CmdEditNick
+         * @memberof pb.PlayerInfo
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {pb.CmdEditNick} CmdEditNick
+         * @returns {pb.PlayerInfo} PlayerInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CmdEditNick.decodeDelimited = function decodeDelimited(reader) {
+        PlayerInfo.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a CmdEditNick message.
+         * Verifies a PlayerInfo message.
          * @function verify
-         * @memberof pb.CmdEditNick
+         * @memberof pb.PlayerInfo
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CmdEditNick.verify = function verify(message) {
+        PlayerInfo.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.uid != null && message.hasOwnProperty("uid"))
@@ -8248,85 +8341,166 @@ $root.pb = (function () {
             if (message.nick != null && message.hasOwnProperty("nick"))
                 if (!$util.isString(message.nick))
                     return "nick: string expected";
+            if (message.icon != null && message.hasOwnProperty("icon"))
+                if (!$util.isString(message.icon))
+                    return "icon: string expected";
+            if (message.gender != null && message.hasOwnProperty("gender"))
+                if (!$util.isString(message.gender))
+                    return "gender: string expected";
+            if (message.location != null && message.hasOwnProperty("location"))
+                if (!$util.isString(message.location))
+                    return "location: string expected";
+            if (message.properties != null && message.hasOwnProperty("properties")) {
+                if (!Array.isArray(message.properties))
+                    return "properties: array expected";
+                for (var i = 0; i < message.properties.length; ++i)
+                    if (!$util.isInteger(message.properties[i]) && !(message.properties[i] && $util.isInteger(message.properties[i].low) && $util.isInteger(message.properties[i].high)))
+                        return "properties: integer|Long[] expected";
+            }
+            if (message.counters != null && message.hasOwnProperty("counters")) {
+                if (!Array.isArray(message.counters))
+                    return "counters: array expected";
+                for (var i = 0; i < message.counters.length; ++i) {
+                    var error = $root.pb.GameCounter.verify(message.counters[i]);
+                    if (error)
+                        return "counters." + error;
+                }
+            }
             return null;
         };
 
         /**
-         * Creates a CmdEditNick message from a plain object. Also converts values to their respective internal types.
+         * Creates a PlayerInfo message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof pb.CmdEditNick
+         * @memberof pb.PlayerInfo
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {pb.CmdEditNick} CmdEditNick
+         * @returns {pb.PlayerInfo} PlayerInfo
          */
-        CmdEditNick.fromObject = function fromObject(object) {
-            if (object instanceof $root.pb.CmdEditNick)
+        PlayerInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.PlayerInfo)
                 return object;
-            var message = new $root.pb.CmdEditNick();
+            var message = new $root.pb.PlayerInfo();
             if (object.uid != null)
                 message.uid = object.uid | 0;
             if (object.nick != null)
                 message.nick = String(object.nick);
+            if (object.icon != null)
+                message.icon = String(object.icon);
+            if (object.gender != null)
+                message.gender = String(object.gender);
+            if (object.location != null)
+                message.location = String(object.location);
+            if (object.properties) {
+                if (!Array.isArray(object.properties))
+                    throw TypeError(".pb.PlayerInfo.properties: array expected");
+                message.properties = [];
+                for (var i = 0; i < object.properties.length; ++i)
+                    if ($util.Long)
+                        (message.properties[i] = $util.Long.fromValue(object.properties[i])).unsigned = false;
+                    else if (typeof object.properties[i] === "string")
+                        message.properties[i] = parseInt(object.properties[i], 10);
+                    else if (typeof object.properties[i] === "number")
+                        message.properties[i] = object.properties[i];
+                    else if (typeof object.properties[i] === "object")
+                        message.properties[i] = new $util.LongBits(object.properties[i].low >>> 0, object.properties[i].high >>> 0).toNumber();
+            }
+            if (object.counters) {
+                if (!Array.isArray(object.counters))
+                    throw TypeError(".pb.PlayerInfo.counters: array expected");
+                message.counters = [];
+                for (var i = 0; i < object.counters.length; ++i) {
+                    if (typeof object.counters[i] !== "object")
+                        throw TypeError(".pb.PlayerInfo.counters: object expected");
+                    message.counters[i] = $root.pb.GameCounter.fromObject(object.counters[i]);
+                }
+            }
             return message;
         };
 
         /**
-         * Creates a plain object from a CmdEditNick message. Also converts values to other types if specified.
+         * Creates a plain object from a PlayerInfo message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof pb.CmdEditNick
+         * @memberof pb.PlayerInfo
          * @static
-         * @param {pb.CmdEditNick} message CmdEditNick
+         * @param {pb.PlayerInfo} message PlayerInfo
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CmdEditNick.toObject = function toObject(message, options) {
+        PlayerInfo.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults) {
+                object.properties = [];
+                object.counters = [];
+            }
             if (options.defaults) {
                 object.uid = 0;
                 object.nick = "";
+                object.icon = "";
+                object.gender = "";
+                object.location = "";
             }
             if (message.uid != null && message.hasOwnProperty("uid"))
                 object.uid = message.uid;
             if (message.nick != null && message.hasOwnProperty("nick"))
                 object.nick = message.nick;
+            if (message.icon != null && message.hasOwnProperty("icon"))
+                object.icon = message.icon;
+            if (message.gender != null && message.hasOwnProperty("gender"))
+                object.gender = message.gender;
+            if (message.location != null && message.hasOwnProperty("location"))
+                object.location = message.location;
+            if (message.properties && message.properties.length) {
+                object.properties = [];
+                for (var j = 0; j < message.properties.length; ++j)
+                    if (typeof message.properties[j] === "number")
+                        object.properties[j] = options.longs === String ? String(message.properties[j]) : message.properties[j];
+                    else
+                        object.properties[j] = options.longs === String ? $util.Long.prototype.toString.call(message.properties[j]) : options.longs === Number ? new $util.LongBits(message.properties[j].low >>> 0, message.properties[j].high >>> 0).toNumber() : message.properties[j];
+            }
+            if (message.counters && message.counters.length) {
+                object.counters = [];
+                for (var j = 0; j < message.counters.length; ++j)
+                    object.counters[j] = $root.pb.GameCounter.toObject(message.counters[j], options);
+            }
             return object;
         };
 
         /**
-         * Converts this CmdEditNick to JSON.
+         * Converts this PlayerInfo to JSON.
          * @function toJSON
-         * @memberof pb.CmdEditNick
+         * @memberof pb.PlayerInfo
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CmdEditNick.prototype.toJSON = function toJSON() {
+        PlayerInfo.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return CmdEditNick;
+        return PlayerInfo;
     })();
 
-    pb.CmdEditIcon = (function () {
+    pb.CmdEditFavorList = (function () {
 
         /**
-         * Properties of a CmdEditIcon.
+         * Properties of a CmdEditFavorList.
          * @memberof pb
-         * @interface ICmdEditIcon
-         * @property {number|null} [uid] CmdEditIcon uid
-         * @property {string|null} [icon] CmdEditIcon icon
+         * @interface ICmdEditFavorList
+         * @property {boolean|null} [removed] CmdEditFavorList removed
+         * @property {number|null} [uid] CmdEditFavorList uid
          */
 
         /**
-         * Constructs a new CmdEditIcon.
+         * Constructs a new CmdEditFavorList.
          * @memberof pb
-         * @classdesc Represents a CmdEditIcon.
-         * @implements ICmdEditIcon
+         * @classdesc Represents a CmdEditFavorList.
+         * @implements ICmdEditFavorList
          * @constructor
-         * @param {pb.ICmdEditIcon=} [properties] Properties to set
+         * @param {pb.ICmdEditFavorList=} [properties] Properties to set
          */
-        function CmdEditIcon(properties) {
+        function CmdEditFavorList(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -8334,88 +8508,88 @@ $root.pb = (function () {
         }
 
         /**
-         * CmdEditIcon uid.
+         * CmdEditFavorList removed.
+         * @member {boolean} removed
+         * @memberof pb.CmdEditFavorList
+         * @instance
+         */
+        CmdEditFavorList.prototype.removed = false;
+
+        /**
+         * CmdEditFavorList uid.
          * @member {number} uid
-         * @memberof pb.CmdEditIcon
+         * @memberof pb.CmdEditFavorList
          * @instance
          */
-        CmdEditIcon.prototype.uid = 0;
+        CmdEditFavorList.prototype.uid = 0;
 
         /**
-         * CmdEditIcon icon.
-         * @member {string} icon
-         * @memberof pb.CmdEditIcon
-         * @instance
-         */
-        CmdEditIcon.prototype.icon = "";
-
-        /**
-         * Creates a new CmdEditIcon instance using the specified properties.
+         * Creates a new CmdEditFavorList instance using the specified properties.
          * @function create
-         * @memberof pb.CmdEditIcon
+         * @memberof pb.CmdEditFavorList
          * @static
-         * @param {pb.ICmdEditIcon=} [properties] Properties to set
-         * @returns {pb.CmdEditIcon} CmdEditIcon instance
+         * @param {pb.ICmdEditFavorList=} [properties] Properties to set
+         * @returns {pb.CmdEditFavorList} CmdEditFavorList instance
          */
-        CmdEditIcon.create = function create(properties) {
-            return new CmdEditIcon(properties);
+        CmdEditFavorList.create = function create(properties) {
+            return new CmdEditFavorList(properties);
         };
 
         /**
-         * Encodes the specified CmdEditIcon message. Does not implicitly {@link pb.CmdEditIcon.verify|verify} messages.
+         * Encodes the specified CmdEditFavorList message. Does not implicitly {@link pb.CmdEditFavorList.verify|verify} messages.
          * @function encode
-         * @memberof pb.CmdEditIcon
+         * @memberof pb.CmdEditFavorList
          * @static
-         * @param {pb.ICmdEditIcon} message CmdEditIcon message or plain object to encode
+         * @param {pb.ICmdEditFavorList} message CmdEditFavorList message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CmdEditIcon.encode = function encode(message, writer) {
+        CmdEditFavorList.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.removed != null && Object.hasOwnProperty.call(message, "removed"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.removed);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
-            if (message.icon != null && Object.hasOwnProperty.call(message, "icon"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.icon);
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.uid);
             return writer;
         };
 
         /**
-         * Encodes the specified CmdEditIcon message, length delimited. Does not implicitly {@link pb.CmdEditIcon.verify|verify} messages.
+         * Encodes the specified CmdEditFavorList message, length delimited. Does not implicitly {@link pb.CmdEditFavorList.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof pb.CmdEditIcon
+         * @memberof pb.CmdEditFavorList
          * @static
-         * @param {pb.ICmdEditIcon} message CmdEditIcon message or plain object to encode
+         * @param {pb.ICmdEditFavorList} message CmdEditFavorList message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CmdEditIcon.encodeDelimited = function encodeDelimited(message, writer) {
+        CmdEditFavorList.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a CmdEditIcon message from the specified reader or buffer.
+         * Decodes a CmdEditFavorList message from the specified reader or buffer.
          * @function decode
-         * @memberof pb.CmdEditIcon
+         * @memberof pb.CmdEditFavorList
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {pb.CmdEditIcon} CmdEditIcon
+         * @returns {pb.CmdEditFavorList} CmdEditFavorList
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CmdEditIcon.decode = function decode(reader, length) {
+        CmdEditFavorList.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdEditIcon();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdEditFavorList();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                     case 1:
-                        message.uid = reader.int32();
+                        message.removed = reader.bool();
                         break;
                     case 2:
-                        message.icon = reader.string();
+                        message.uid = reader.int32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -8426,96 +8600,96 @@ $root.pb = (function () {
         };
 
         /**
-         * Decodes a CmdEditIcon message from the specified reader or buffer, length delimited.
+         * Decodes a CmdEditFavorList message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof pb.CmdEditIcon
+         * @memberof pb.CmdEditFavorList
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {pb.CmdEditIcon} CmdEditIcon
+         * @returns {pb.CmdEditFavorList} CmdEditFavorList
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CmdEditIcon.decodeDelimited = function decodeDelimited(reader) {
+        CmdEditFavorList.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a CmdEditIcon message.
+         * Verifies a CmdEditFavorList message.
          * @function verify
-         * @memberof pb.CmdEditIcon
+         * @memberof pb.CmdEditFavorList
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CmdEditIcon.verify = function verify(message) {
+        CmdEditFavorList.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.removed != null && message.hasOwnProperty("removed"))
+                if (typeof message.removed !== "boolean")
+                    return "removed: boolean expected";
             if (message.uid != null && message.hasOwnProperty("uid"))
                 if (!$util.isInteger(message.uid))
                     return "uid: integer expected";
-            if (message.icon != null && message.hasOwnProperty("icon"))
-                if (!$util.isString(message.icon))
-                    return "icon: string expected";
             return null;
         };
 
         /**
-         * Creates a CmdEditIcon message from a plain object. Also converts values to their respective internal types.
+         * Creates a CmdEditFavorList message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof pb.CmdEditIcon
+         * @memberof pb.CmdEditFavorList
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {pb.CmdEditIcon} CmdEditIcon
+         * @returns {pb.CmdEditFavorList} CmdEditFavorList
          */
-        CmdEditIcon.fromObject = function fromObject(object) {
-            if (object instanceof $root.pb.CmdEditIcon)
+        CmdEditFavorList.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdEditFavorList)
                 return object;
-            var message = new $root.pb.CmdEditIcon();
+            var message = new $root.pb.CmdEditFavorList();
+            if (object.removed != null)
+                message.removed = Boolean(object.removed);
             if (object.uid != null)
                 message.uid = object.uid | 0;
-            if (object.icon != null)
-                message.icon = String(object.icon);
             return message;
         };
 
         /**
-         * Creates a plain object from a CmdEditIcon message. Also converts values to other types if specified.
+         * Creates a plain object from a CmdEditFavorList message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof pb.CmdEditIcon
+         * @memberof pb.CmdEditFavorList
          * @static
-         * @param {pb.CmdEditIcon} message CmdEditIcon
+         * @param {pb.CmdEditFavorList} message CmdEditFavorList
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CmdEditIcon.toObject = function toObject(message, options) {
+        CmdEditFavorList.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
+                object.removed = false;
                 object.uid = 0;
-                object.icon = "";
             }
+            if (message.removed != null && message.hasOwnProperty("removed"))
+                object.removed = message.removed;
             if (message.uid != null && message.hasOwnProperty("uid"))
                 object.uid = message.uid;
-            if (message.icon != null && message.hasOwnProperty("icon"))
-                object.icon = message.icon;
             return object;
         };
 
         /**
-         * Converts this CmdEditIcon to JSON.
+         * Converts this CmdEditFavorList to JSON.
          * @function toJSON
-         * @memberof pb.CmdEditIcon
+         * @memberof pb.CmdEditFavorList
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CmdEditIcon.prototype.toJSON = function toJSON() {
+        CmdEditFavorList.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return CmdEditIcon;
+        return CmdEditFavorList;
     })();
 
     pb.CmdGetItem = (function () {
@@ -8717,6 +8891,889 @@ $root.pb = (function () {
         };
 
         return CmdGetItem;
+    })();
+
+    pb.TaskItem = (function () {
+
+        /**
+         * Properties of a TaskItem.
+         * @memberof pb
+         * @interface ITaskItem
+         * @property {number|null} [taskId] TaskItem taskId
+         * @property {number|null} [progress] TaskItem progress
+         * @property {number|null} [award] TaskItem award
+         * @property {number|null} [got] TaskItem got
+         */
+
+        /**
+         * Constructs a new TaskItem.
+         * @memberof pb
+         * @classdesc Represents a TaskItem.
+         * @implements ITaskItem
+         * @constructor
+         * @param {pb.ITaskItem=} [properties] Properties to set
+         */
+        function TaskItem(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * TaskItem taskId.
+         * @member {number} taskId
+         * @memberof pb.TaskItem
+         * @instance
+         */
+        TaskItem.prototype.taskId = 0;
+
+        /**
+         * TaskItem progress.
+         * @member {number} progress
+         * @memberof pb.TaskItem
+         * @instance
+         */
+        TaskItem.prototype.progress = 0;
+
+        /**
+         * TaskItem award.
+         * @member {number} award
+         * @memberof pb.TaskItem
+         * @instance
+         */
+        TaskItem.prototype.award = 0;
+
+        /**
+         * TaskItem got.
+         * @member {number} got
+         * @memberof pb.TaskItem
+         * @instance
+         */
+        TaskItem.prototype.got = 0;
+
+        /**
+         * Creates a new TaskItem instance using the specified properties.
+         * @function create
+         * @memberof pb.TaskItem
+         * @static
+         * @param {pb.ITaskItem=} [properties] Properties to set
+         * @returns {pb.TaskItem} TaskItem instance
+         */
+        TaskItem.create = function create(properties) {
+            return new TaskItem(properties);
+        };
+
+        /**
+         * Encodes the specified TaskItem message. Does not implicitly {@link pb.TaskItem.verify|verify} messages.
+         * @function encode
+         * @memberof pb.TaskItem
+         * @static
+         * @param {pb.ITaskItem} message TaskItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TaskItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.taskId != null && Object.hasOwnProperty.call(message, "taskId"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.taskId);
+            if (message.progress != null && Object.hasOwnProperty.call(message, "progress"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.progress);
+            if (message.award != null && Object.hasOwnProperty.call(message, "award"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.award);
+            if (message.got != null && Object.hasOwnProperty.call(message, "got"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.got);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified TaskItem message, length delimited. Does not implicitly {@link pb.TaskItem.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.TaskItem
+         * @static
+         * @param {pb.ITaskItem} message TaskItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TaskItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a TaskItem message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.TaskItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.TaskItem} TaskItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TaskItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.TaskItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.taskId = reader.int32();
+                        break;
+                    case 2:
+                        message.progress = reader.int32();
+                        break;
+                    case 3:
+                        message.award = reader.int32();
+                        break;
+                    case 4:
+                        message.got = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a TaskItem message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.TaskItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.TaskItem} TaskItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TaskItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a TaskItem message.
+         * @function verify
+         * @memberof pb.TaskItem
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        TaskItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.taskId != null && message.hasOwnProperty("taskId"))
+                if (!$util.isInteger(message.taskId))
+                    return "taskId: integer expected";
+            if (message.progress != null && message.hasOwnProperty("progress"))
+                if (!$util.isInteger(message.progress))
+                    return "progress: integer expected";
+            if (message.award != null && message.hasOwnProperty("award"))
+                if (!$util.isInteger(message.award))
+                    return "award: integer expected";
+            if (message.got != null && message.hasOwnProperty("got"))
+                if (!$util.isInteger(message.got))
+                    return "got: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a TaskItem message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.TaskItem
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.TaskItem} TaskItem
+         */
+        TaskItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.TaskItem)
+                return object;
+            var message = new $root.pb.TaskItem();
+            if (object.taskId != null)
+                message.taskId = object.taskId | 0;
+            if (object.progress != null)
+                message.progress = object.progress | 0;
+            if (object.award != null)
+                message.award = object.award | 0;
+            if (object.got != null)
+                message.got = object.got | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a TaskItem message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.TaskItem
+         * @static
+         * @param {pb.TaskItem} message TaskItem
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        TaskItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.taskId = 0;
+                object.progress = 0;
+                object.award = 0;
+                object.got = 0;
+            }
+            if (message.taskId != null && message.hasOwnProperty("taskId"))
+                object.taskId = message.taskId;
+            if (message.progress != null && message.hasOwnProperty("progress"))
+                object.progress = message.progress;
+            if (message.award != null && message.hasOwnProperty("award"))
+                object.award = message.award;
+            if (message.got != null && message.hasOwnProperty("got"))
+                object.got = message.got;
+            return object;
+        };
+
+        /**
+         * Converts this TaskItem to JSON.
+         * @function toJSON
+         * @memberof pb.TaskItem
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        TaskItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TaskItem;
+    })();
+
+    pb.CmdStudyProgress = (function () {
+
+        /**
+         * Properties of a CmdStudyProgress.
+         * @memberof pb
+         * @interface ICmdStudyProgress
+         * @property {number|null} [index] CmdStudyProgress index
+         * @property {number|null} [progress] CmdStudyProgress progress
+         * @property {number|null} [award] CmdStudyProgress award
+         */
+
+        /**
+         * Constructs a new CmdStudyProgress.
+         * @memberof pb
+         * @classdesc Represents a CmdStudyProgress.
+         * @implements ICmdStudyProgress
+         * @constructor
+         * @param {pb.ICmdStudyProgress=} [properties] Properties to set
+         */
+        function CmdStudyProgress(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdStudyProgress index.
+         * @member {number} index
+         * @memberof pb.CmdStudyProgress
+         * @instance
+         */
+        CmdStudyProgress.prototype.index = 0;
+
+        /**
+         * CmdStudyProgress progress.
+         * @member {number} progress
+         * @memberof pb.CmdStudyProgress
+         * @instance
+         */
+        CmdStudyProgress.prototype.progress = 0;
+
+        /**
+         * CmdStudyProgress award.
+         * @member {number} award
+         * @memberof pb.CmdStudyProgress
+         * @instance
+         */
+        CmdStudyProgress.prototype.award = 0;
+
+        /**
+         * Creates a new CmdStudyProgress instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdStudyProgress
+         * @static
+         * @param {pb.ICmdStudyProgress=} [properties] Properties to set
+         * @returns {pb.CmdStudyProgress} CmdStudyProgress instance
+         */
+        CmdStudyProgress.create = function create(properties) {
+            return new CmdStudyProgress(properties);
+        };
+
+        /**
+         * Encodes the specified CmdStudyProgress message. Does not implicitly {@link pb.CmdStudyProgress.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdStudyProgress
+         * @static
+         * @param {pb.ICmdStudyProgress} message CmdStudyProgress message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdStudyProgress.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.index != null && Object.hasOwnProperty.call(message, "index"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.index);
+            if (message.progress != null && Object.hasOwnProperty.call(message, "progress"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.progress);
+            if (message.award != null && Object.hasOwnProperty.call(message, "award"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.award);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdStudyProgress message, length delimited. Does not implicitly {@link pb.CmdStudyProgress.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdStudyProgress
+         * @static
+         * @param {pb.ICmdStudyProgress} message CmdStudyProgress message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdStudyProgress.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdStudyProgress message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdStudyProgress
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdStudyProgress} CmdStudyProgress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdStudyProgress.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdStudyProgress();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.index = reader.int32();
+                        break;
+                    case 2:
+                        message.progress = reader.int32();
+                        break;
+                    case 3:
+                        message.award = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdStudyProgress message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdStudyProgress
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdStudyProgress} CmdStudyProgress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdStudyProgress.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdStudyProgress message.
+         * @function verify
+         * @memberof pb.CmdStudyProgress
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdStudyProgress.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.index != null && message.hasOwnProperty("index"))
+                if (!$util.isInteger(message.index))
+                    return "index: integer expected";
+            if (message.progress != null && message.hasOwnProperty("progress"))
+                if (!$util.isInteger(message.progress))
+                    return "progress: integer expected";
+            if (message.award != null && message.hasOwnProperty("award"))
+                if (!$util.isInteger(message.award))
+                    return "award: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdStudyProgress message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdStudyProgress
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdStudyProgress} CmdStudyProgress
+         */
+        CmdStudyProgress.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdStudyProgress)
+                return object;
+            var message = new $root.pb.CmdStudyProgress();
+            if (object.index != null)
+                message.index = object.index | 0;
+            if (object.progress != null)
+                message.progress = object.progress | 0;
+            if (object.award != null)
+                message.award = object.award | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdStudyProgress message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdStudyProgress
+         * @static
+         * @param {pb.CmdStudyProgress} message CmdStudyProgress
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdStudyProgress.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.index = 0;
+                object.progress = 0;
+                object.award = 0;
+            }
+            if (message.index != null && message.hasOwnProperty("index"))
+                object.index = message.index;
+            if (message.progress != null && message.hasOwnProperty("progress"))
+                object.progress = message.progress;
+            if (message.award != null && message.hasOwnProperty("award"))
+                object.award = message.award;
+            return object;
+        };
+
+        /**
+         * Converts this CmdStudyProgress to JSON.
+         * @function toJSON
+         * @memberof pb.CmdStudyProgress
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdStudyProgress.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdStudyProgress;
+    })();
+
+    pb.CmdGetDailyAward = (function () {
+
+        /**
+         * Properties of a CmdGetDailyAward.
+         * @memberof pb
+         * @interface ICmdGetDailyAward
+         * @property {number|null} [index] CmdGetDailyAward index
+         */
+
+        /**
+         * Constructs a new CmdGetDailyAward.
+         * @memberof pb
+         * @classdesc Represents a CmdGetDailyAward.
+         * @implements ICmdGetDailyAward
+         * @constructor
+         * @param {pb.ICmdGetDailyAward=} [properties] Properties to set
+         */
+        function CmdGetDailyAward(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdGetDailyAward index.
+         * @member {number} index
+         * @memberof pb.CmdGetDailyAward
+         * @instance
+         */
+        CmdGetDailyAward.prototype.index = 0;
+
+        /**
+         * Creates a new CmdGetDailyAward instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdGetDailyAward
+         * @static
+         * @param {pb.ICmdGetDailyAward=} [properties] Properties to set
+         * @returns {pb.CmdGetDailyAward} CmdGetDailyAward instance
+         */
+        CmdGetDailyAward.create = function create(properties) {
+            return new CmdGetDailyAward(properties);
+        };
+
+        /**
+         * Encodes the specified CmdGetDailyAward message. Does not implicitly {@link pb.CmdGetDailyAward.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdGetDailyAward
+         * @static
+         * @param {pb.ICmdGetDailyAward} message CmdGetDailyAward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdGetDailyAward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.index != null && Object.hasOwnProperty.call(message, "index"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.index);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdGetDailyAward message, length delimited. Does not implicitly {@link pb.CmdGetDailyAward.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdGetDailyAward
+         * @static
+         * @param {pb.ICmdGetDailyAward} message CmdGetDailyAward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdGetDailyAward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdGetDailyAward message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdGetDailyAward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdGetDailyAward} CmdGetDailyAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdGetDailyAward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdGetDailyAward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.index = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdGetDailyAward message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdGetDailyAward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdGetDailyAward} CmdGetDailyAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdGetDailyAward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdGetDailyAward message.
+         * @function verify
+         * @memberof pb.CmdGetDailyAward
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdGetDailyAward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.index != null && message.hasOwnProperty("index"))
+                if (!$util.isInteger(message.index))
+                    return "index: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdGetDailyAward message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdGetDailyAward
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdGetDailyAward} CmdGetDailyAward
+         */
+        CmdGetDailyAward.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdGetDailyAward)
+                return object;
+            var message = new $root.pb.CmdGetDailyAward();
+            if (object.index != null)
+                message.index = object.index | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdGetDailyAward message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdGetDailyAward
+         * @static
+         * @param {pb.CmdGetDailyAward} message CmdGetDailyAward
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdGetDailyAward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.index = 0;
+            if (message.index != null && message.hasOwnProperty("index"))
+                object.index = message.index;
+            return object;
+        };
+
+        /**
+         * Converts this CmdGetDailyAward to JSON.
+         * @function toJSON
+         * @memberof pb.CmdGetDailyAward
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdGetDailyAward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdGetDailyAward;
+    })();
+
+    pb.CmdDailyTaskProgress = (function () {
+
+        /**
+         * Properties of a CmdDailyTaskProgress.
+         * @memberof pb
+         * @interface ICmdDailyTaskProgress
+         * @property {number|null} [uid] CmdDailyTaskProgress uid
+         * @property {number|null} [taskId] CmdDailyTaskProgress taskId
+         */
+
+        /**
+         * Constructs a new CmdDailyTaskProgress.
+         * @memberof pb
+         * @classdesc Represents a CmdDailyTaskProgress.
+         * @implements ICmdDailyTaskProgress
+         * @constructor
+         * @param {pb.ICmdDailyTaskProgress=} [properties] Properties to set
+         */
+        function CmdDailyTaskProgress(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdDailyTaskProgress uid.
+         * @member {number} uid
+         * @memberof pb.CmdDailyTaskProgress
+         * @instance
+         */
+        CmdDailyTaskProgress.prototype.uid = 0;
+
+        /**
+         * CmdDailyTaskProgress taskId.
+         * @member {number} taskId
+         * @memberof pb.CmdDailyTaskProgress
+         * @instance
+         */
+        CmdDailyTaskProgress.prototype.taskId = 0;
+
+        /**
+         * Creates a new CmdDailyTaskProgress instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdDailyTaskProgress
+         * @static
+         * @param {pb.ICmdDailyTaskProgress=} [properties] Properties to set
+         * @returns {pb.CmdDailyTaskProgress} CmdDailyTaskProgress instance
+         */
+        CmdDailyTaskProgress.create = function create(properties) {
+            return new CmdDailyTaskProgress(properties);
+        };
+
+        /**
+         * Encodes the specified CmdDailyTaskProgress message. Does not implicitly {@link pb.CmdDailyTaskProgress.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdDailyTaskProgress
+         * @static
+         * @param {pb.ICmdDailyTaskProgress} message CmdDailyTaskProgress message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdDailyTaskProgress.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
+            if (message.taskId != null && Object.hasOwnProperty.call(message, "taskId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.taskId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdDailyTaskProgress message, length delimited. Does not implicitly {@link pb.CmdDailyTaskProgress.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdDailyTaskProgress
+         * @static
+         * @param {pb.ICmdDailyTaskProgress} message CmdDailyTaskProgress message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdDailyTaskProgress.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdDailyTaskProgress message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdDailyTaskProgress
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdDailyTaskProgress} CmdDailyTaskProgress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdDailyTaskProgress.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdDailyTaskProgress();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.uid = reader.int32();
+                        break;
+                    case 2:
+                        message.taskId = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdDailyTaskProgress message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdDailyTaskProgress
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdDailyTaskProgress} CmdDailyTaskProgress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdDailyTaskProgress.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdDailyTaskProgress message.
+         * @function verify
+         * @memberof pb.CmdDailyTaskProgress
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdDailyTaskProgress.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.taskId != null && message.hasOwnProperty("taskId"))
+                if (!$util.isInteger(message.taskId))
+                    return "taskId: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdDailyTaskProgress message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdDailyTaskProgress
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdDailyTaskProgress} CmdDailyTaskProgress
+         */
+        CmdDailyTaskProgress.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdDailyTaskProgress)
+                return object;
+            var message = new $root.pb.CmdDailyTaskProgress();
+            if (object.uid != null)
+                message.uid = object.uid | 0;
+            if (object.taskId != null)
+                message.taskId = object.taskId | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdDailyTaskProgress message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdDailyTaskProgress
+         * @static
+         * @param {pb.CmdDailyTaskProgress} message CmdDailyTaskProgress
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdDailyTaskProgress.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.uid = 0;
+                object.taskId = 0;
+            }
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            if (message.taskId != null && message.hasOwnProperty("taskId"))
+                object.taskId = message.taskId;
+            return object;
+        };
+
+        /**
+         * Converts this CmdDailyTaskProgress to JSON.
+         * @function toJSON
+         * @memberof pb.CmdDailyTaskProgress
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdDailyTaskProgress.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdDailyTaskProgress;
     })();
 
     pb.CmdGameStart = (function () {
@@ -10058,6 +11115,281 @@ $root.pb = (function () {
         };
 
         return CmdGetGameOperations;
+    })();
+
+    pb.CmdUnlockGame = (function () {
+
+        /**
+         * Properties of a CmdUnlockGame.
+         * @memberof pb
+         * @interface ICmdUnlockGame
+         * @property {pb.GameType|null} [gType] CmdUnlockGame gType
+         */
+
+        /**
+         * Constructs a new CmdUnlockGame.
+         * @memberof pb
+         * @classdesc Represents a CmdUnlockGame.
+         * @implements ICmdUnlockGame
+         * @constructor
+         * @param {pb.ICmdUnlockGame=} [properties] Properties to set
+         */
+        function CmdUnlockGame(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdUnlockGame gType.
+         * @member {pb.GameType} gType
+         * @memberof pb.CmdUnlockGame
+         * @instance
+         */
+        CmdUnlockGame.prototype.gType = 0;
+
+        /**
+         * Creates a new CmdUnlockGame instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdUnlockGame
+         * @static
+         * @param {pb.ICmdUnlockGame=} [properties] Properties to set
+         * @returns {pb.CmdUnlockGame} CmdUnlockGame instance
+         */
+        CmdUnlockGame.create = function create(properties) {
+            return new CmdUnlockGame(properties);
+        };
+
+        /**
+         * Encodes the specified CmdUnlockGame message. Does not implicitly {@link pb.CmdUnlockGame.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdUnlockGame
+         * @static
+         * @param {pb.ICmdUnlockGame} message CmdUnlockGame message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdUnlockGame.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.gType != null && Object.hasOwnProperty.call(message, "gType"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.gType);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdUnlockGame message, length delimited. Does not implicitly {@link pb.CmdUnlockGame.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdUnlockGame
+         * @static
+         * @param {pb.ICmdUnlockGame} message CmdUnlockGame message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdUnlockGame.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdUnlockGame message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdUnlockGame
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdUnlockGame} CmdUnlockGame
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdUnlockGame.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdUnlockGame();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.gType = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdUnlockGame message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdUnlockGame
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdUnlockGame} CmdUnlockGame
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdUnlockGame.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdUnlockGame message.
+         * @function verify
+         * @memberof pb.CmdUnlockGame
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdUnlockGame.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.gType != null && message.hasOwnProperty("gType"))
+                switch (message.gType) {
+                    default:
+                        return "gType: enum value expected";
+                    case 0:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 17:
+                    case 11:
+                    case 6:
+                    case 16:
+                    case 1:
+                    case 2:
+                    case 9:
+                    case 15:
+                    case 10:
+                    case 12:
+                    case 7:
+                    case 8:
+                    case 30:
+                        break;
+                }
+            return null;
+        };
+
+        /**
+         * Creates a CmdUnlockGame message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdUnlockGame
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdUnlockGame} CmdUnlockGame
+         */
+        CmdUnlockGame.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdUnlockGame)
+                return object;
+            var message = new $root.pb.CmdUnlockGame();
+            switch (object.gType) {
+                case "GameType_NULL":
+                case 0:
+                    message.gType = 0;
+                    break;
+                case "ShuangMang":
+                case 3:
+                    message.gType = 3;
+                    break;
+                case "DingXiang":
+                case 4:
+                    message.gType = 4;
+                    break;
+                case "FenShi":
+                case 5:
+                    message.gType = 5;
+                    break;
+                case "ZhiBiao":
+                case 17:
+                    message.gType = 17;
+                    break;
+                case "TiaoJianDan":
+                case 11:
+                    message.gType = 11;
+                    break;
+                case "QiHuo":
+                case 6:
+                    message.gType = 6;
+                    break;
+                case "TiaoZhan":
+                case 16:
+                    message.gType = 16;
+                    break;
+                case "JJ_PK":
+                case 1:
+                    message.gType = 1;
+                    break;
+                case "JJ_DuoKong":
+                case 2:
+                    message.gType = 2;
+                    break;
+                case "JJ_ChuangGuan":
+                case 9:
+                    message.gType = 9;
+                    break;
+                case "JJ_QiHuo":
+                case 15:
+                    message.gType = 15;
+                    break;
+                case "MoNiChaoGu":
+                case 10:
+                    message.gType = 10;
+                    break;
+                case "ChaoGuDaSai":
+                case 12:
+                    message.gType = 12;
+                    break;
+                case "GeGuJingChai":
+                case 7:
+                    message.gType = 7;
+                    break;
+                case "DaPanJingChai":
+                case 8:
+                    message.gType = 8;
+                    break;
+                case "MaxGameType":
+                case 30:
+                    message.gType = 30;
+                    break;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdUnlockGame message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdUnlockGame
+         * @static
+         * @param {pb.CmdUnlockGame} message CmdUnlockGame
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdUnlockGame.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.gType = options.enums === String ? "GameType_NULL" : 0;
+            if (message.gType != null && message.hasOwnProperty("gType"))
+                object.gType = options.enums === String ? $root.pb.GameType[message.gType] : message.gType;
+            return object;
+        };
+
+        /**
+         * Converts this CmdUnlockGame to JSON.
+         * @function toJSON
+         * @memberof pb.CmdUnlockGame
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdUnlockGame.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdUnlockGame;
     })();
 
     pb.CmdGetSmxlReportReply = (function () {
@@ -15866,6 +17198,8 @@ $root.pb = (function () {
          * @property {number|null} [uid] RankingItem uid
          * @property {string|null} [nickname] RankingItem nickname
          * @property {string|null} [icon] RankingItem icon
+         * @property {string|null} [gender] RankingItem gender
+         * @property {string|null} [location] RankingItem location
          * @property {number|null} [cgsClearance] RankingItem cgsClearance
          * @property {number|null} [cgsNetwin] RankingItem cgsNetwin
          * @property {number|null} [cgsProgress] RankingItem cgsProgress
@@ -15911,6 +17245,22 @@ $root.pb = (function () {
          * @instance
          */
         RankingItem.prototype.icon = "";
+
+        /**
+         * RankingItem gender.
+         * @member {string} gender
+         * @memberof pb.RankingItem
+         * @instance
+         */
+        RankingItem.prototype.gender = "";
+
+        /**
+         * RankingItem location.
+         * @member {string} location
+         * @memberof pb.RankingItem
+         * @instance
+         */
+        RankingItem.prototype.location = "";
 
         /**
          * RankingItem cgsClearance.
@@ -15982,16 +17332,20 @@ $root.pb = (function () {
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nickname);
             if (message.icon != null && Object.hasOwnProperty.call(message, "icon"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.icon);
+            if (message.gender != null && Object.hasOwnProperty.call(message, "gender"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.gender);
+            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.location);
             if (message.cgsClearance != null && Object.hasOwnProperty.call(message, "cgsClearance"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.cgsClearance);
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.cgsClearance);
             if (message.cgsNetwin != null && Object.hasOwnProperty.call(message, "cgsNetwin"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.cgsNetwin);
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.cgsNetwin);
             if (message.cgsProgress != null && Object.hasOwnProperty.call(message, "cgsProgress"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.cgsProgress);
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.cgsProgress);
             if (message.cgdsAccount != null && Object.hasOwnProperty.call(message, "cgdsAccount"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.cgdsAccount);
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.cgdsAccount);
             if (message.zsjcCount != null && Object.hasOwnProperty.call(message, "zsjcCount"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.zsjcCount);
+                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.zsjcCount);
             return writer;
         };
 
@@ -16036,18 +17390,24 @@ $root.pb = (function () {
                         message.icon = reader.string();
                         break;
                     case 4:
-                        message.cgsClearance = reader.int32();
+                        message.gender = reader.string();
                         break;
                     case 5:
-                        message.cgsNetwin = reader.int32();
+                        message.location = reader.string();
                         break;
                     case 6:
-                        message.cgsProgress = reader.int32();
+                        message.cgsClearance = reader.int32();
                         break;
                     case 7:
-                        message.cgdsAccount = reader.int32();
+                        message.cgsNetwin = reader.int32();
                         break;
                     case 8:
+                        message.cgsProgress = reader.int32();
+                        break;
+                    case 9:
+                        message.cgdsAccount = reader.int32();
+                        break;
+                    case 10:
                         message.zsjcCount = reader.int32();
                         break;
                     default:
@@ -16094,6 +17454,12 @@ $root.pb = (function () {
             if (message.icon != null && message.hasOwnProperty("icon"))
                 if (!$util.isString(message.icon))
                     return "icon: string expected";
+            if (message.gender != null && message.hasOwnProperty("gender"))
+                if (!$util.isString(message.gender))
+                    return "gender: string expected";
+            if (message.location != null && message.hasOwnProperty("location"))
+                if (!$util.isString(message.location))
+                    return "location: string expected";
             if (message.cgsClearance != null && message.hasOwnProperty("cgsClearance"))
                 if (!$util.isInteger(message.cgsClearance))
                     return "cgsClearance: integer expected";
@@ -16130,6 +17496,10 @@ $root.pb = (function () {
                 message.nickname = String(object.nickname);
             if (object.icon != null)
                 message.icon = String(object.icon);
+            if (object.gender != null)
+                message.gender = String(object.gender);
+            if (object.location != null)
+                message.location = String(object.location);
             if (object.cgsClearance != null)
                 message.cgsClearance = object.cgsClearance | 0;
             if (object.cgsNetwin != null)
@@ -16160,6 +17530,8 @@ $root.pb = (function () {
                 object.uid = 0;
                 object.nickname = "";
                 object.icon = "";
+                object.gender = "";
+                object.location = "";
                 object.cgsClearance = 0;
                 object.cgsNetwin = 0;
                 object.cgsProgress = 0;
@@ -16172,6 +17544,10 @@ $root.pb = (function () {
                 object.nickname = message.nickname;
             if (message.icon != null && message.hasOwnProperty("icon"))
                 object.icon = message.icon;
+            if (message.gender != null && message.hasOwnProperty("gender"))
+                object.gender = message.gender;
+            if (message.location != null && message.hasOwnProperty("location"))
+                object.location = message.location;
             if (message.cgsClearance != null && message.hasOwnProperty("cgsClearance"))
                 object.cgsClearance = message.cgsClearance;
             if (message.cgsNetwin != null && message.hasOwnProperty("cgsNetwin"))
@@ -22771,6 +24147,7 @@ $root.pb = (function () {
          * @property {number|null} [betting] CmdBet betting
          * @property {string|null} [nickname] CmdBet nickname
          * @property {string|null} [icon] CmdBet icon
+         * @property {string|null} [gender] CmdBet gender
          */
 
         /**
@@ -22837,6 +24214,14 @@ $root.pb = (function () {
         CmdBet.prototype.icon = "";
 
         /**
+         * CmdBet gender.
+         * @member {string} gender
+         * @memberof pb.CmdBet
+         * @instance
+         */
+        CmdBet.prototype.gender = "";
+
+        /**
          * Creates a new CmdBet instance using the specified properties.
          * @function create
          * @memberof pb.CmdBet
@@ -22872,6 +24257,8 @@ $root.pb = (function () {
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.nickname);
             if (message.icon != null && Object.hasOwnProperty.call(message, "icon"))
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.icon);
+            if (message.gender != null && Object.hasOwnProperty.call(message, "gender"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.gender);
             return writer;
         };
 
@@ -22923,6 +24310,9 @@ $root.pb = (function () {
                         break;
                     case 6:
                         message.icon = reader.string();
+                        break;
+                    case 7:
+                        message.gender = reader.string();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -22977,6 +24367,9 @@ $root.pb = (function () {
             if (message.icon != null && message.hasOwnProperty("icon"))
                 if (!$util.isString(message.icon))
                     return "icon: string expected";
+            if (message.gender != null && message.hasOwnProperty("gender"))
+                if (!$util.isString(message.gender))
+                    return "gender: string expected";
             return null;
         };
 
@@ -23004,6 +24397,8 @@ $root.pb = (function () {
                 message.nickname = String(object.nickname);
             if (object.icon != null)
                 message.icon = String(object.icon);
+            if (object.gender != null)
+                message.gender = String(object.gender);
             return message;
         };
 
@@ -23027,6 +24422,7 @@ $root.pb = (function () {
                 object.betting = 0;
                 object.nickname = "";
                 object.icon = "";
+                object.gender = "";
             }
             if (message.uid != null && message.hasOwnProperty("uid"))
                 object.uid = message.uid;
@@ -23040,6 +24436,8 @@ $root.pb = (function () {
                 object.nickname = message.nickname;
             if (message.icon != null && message.hasOwnProperty("icon"))
                 object.icon = message.icon;
+            if (message.gender != null && message.hasOwnProperty("gender"))
+                object.gender = message.gender;
             return object;
         };
 
@@ -23055,6 +24453,1229 @@ $root.pb = (function () {
         };
 
         return CmdBet;
+    })();
+
+    pb.CmdGetWeeklyAward = (function () {
+
+        /**
+         * Properties of a CmdGetWeeklyAward.
+         * @memberof pb
+         * @interface ICmdGetWeeklyAward
+         * @property {string|null} [code] CmdGetWeeklyAward code
+         */
+
+        /**
+         * Constructs a new CmdGetWeeklyAward.
+         * @memberof pb
+         * @classdesc Represents a CmdGetWeeklyAward.
+         * @implements ICmdGetWeeklyAward
+         * @constructor
+         * @param {pb.ICmdGetWeeklyAward=} [properties] Properties to set
+         */
+        function CmdGetWeeklyAward(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdGetWeeklyAward code.
+         * @member {string} code
+         * @memberof pb.CmdGetWeeklyAward
+         * @instance
+         */
+        CmdGetWeeklyAward.prototype.code = "";
+
+        /**
+         * Creates a new CmdGetWeeklyAward instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdGetWeeklyAward
+         * @static
+         * @param {pb.ICmdGetWeeklyAward=} [properties] Properties to set
+         * @returns {pb.CmdGetWeeklyAward} CmdGetWeeklyAward instance
+         */
+        CmdGetWeeklyAward.create = function create(properties) {
+            return new CmdGetWeeklyAward(properties);
+        };
+
+        /**
+         * Encodes the specified CmdGetWeeklyAward message. Does not implicitly {@link pb.CmdGetWeeklyAward.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdGetWeeklyAward
+         * @static
+         * @param {pb.ICmdGetWeeklyAward} message CmdGetWeeklyAward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdGetWeeklyAward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.code);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdGetWeeklyAward message, length delimited. Does not implicitly {@link pb.CmdGetWeeklyAward.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdGetWeeklyAward
+         * @static
+         * @param {pb.ICmdGetWeeklyAward} message CmdGetWeeklyAward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdGetWeeklyAward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdGetWeeklyAward message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdGetWeeklyAward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdGetWeeklyAward} CmdGetWeeklyAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdGetWeeklyAward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdGetWeeklyAward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.code = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdGetWeeklyAward message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdGetWeeklyAward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdGetWeeklyAward} CmdGetWeeklyAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdGetWeeklyAward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdGetWeeklyAward message.
+         * @function verify
+         * @memberof pb.CmdGetWeeklyAward
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdGetWeeklyAward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isString(message.code))
+                    return "code: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdGetWeeklyAward message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdGetWeeklyAward
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdGetWeeklyAward} CmdGetWeeklyAward
+         */
+        CmdGetWeeklyAward.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdGetWeeklyAward)
+                return object;
+            var message = new $root.pb.CmdGetWeeklyAward();
+            if (object.code != null)
+                message.code = String(object.code);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdGetWeeklyAward message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdGetWeeklyAward
+         * @static
+         * @param {pb.CmdGetWeeklyAward} message CmdGetWeeklyAward
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdGetWeeklyAward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.code = "";
+            if (message.code != null && message.hasOwnProperty("code"))
+                object.code = message.code;
+            return object;
+        };
+
+        /**
+         * Converts this CmdGetWeeklyAward to JSON.
+         * @function toJSON
+         * @memberof pb.CmdGetWeeklyAward
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdGetWeeklyAward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdGetWeeklyAward;
+    })();
+
+    pb.CmdGetWeeklyAwardReply = (function () {
+
+        /**
+         * Properties of a CmdGetWeeklyAwardReply.
+         * @memberof pb
+         * @interface ICmdGetWeeklyAwardReply
+         * @property {pb.IErrorInfo|null} [result] CmdGetWeeklyAwardReply result
+         * @property {pb.IGameProperties|null} [award] CmdGetWeeklyAwardReply award
+         */
+
+        /**
+         * Constructs a new CmdGetWeeklyAwardReply.
+         * @memberof pb
+         * @classdesc Represents a CmdGetWeeklyAwardReply.
+         * @implements ICmdGetWeeklyAwardReply
+         * @constructor
+         * @param {pb.ICmdGetWeeklyAwardReply=} [properties] Properties to set
+         */
+        function CmdGetWeeklyAwardReply(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdGetWeeklyAwardReply result.
+         * @member {pb.IErrorInfo|null|undefined} result
+         * @memberof pb.CmdGetWeeklyAwardReply
+         * @instance
+         */
+        CmdGetWeeklyAwardReply.prototype.result = null;
+
+        /**
+         * CmdGetWeeklyAwardReply award.
+         * @member {pb.IGameProperties|null|undefined} award
+         * @memberof pb.CmdGetWeeklyAwardReply
+         * @instance
+         */
+        CmdGetWeeklyAwardReply.prototype.award = null;
+
+        /**
+         * Creates a new CmdGetWeeklyAwardReply instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdGetWeeklyAwardReply
+         * @static
+         * @param {pb.ICmdGetWeeklyAwardReply=} [properties] Properties to set
+         * @returns {pb.CmdGetWeeklyAwardReply} CmdGetWeeklyAwardReply instance
+         */
+        CmdGetWeeklyAwardReply.create = function create(properties) {
+            return new CmdGetWeeklyAwardReply(properties);
+        };
+
+        /**
+         * Encodes the specified CmdGetWeeklyAwardReply message. Does not implicitly {@link pb.CmdGetWeeklyAwardReply.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdGetWeeklyAwardReply
+         * @static
+         * @param {pb.ICmdGetWeeklyAwardReply} message CmdGetWeeklyAwardReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdGetWeeklyAwardReply.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.result != null && Object.hasOwnProperty.call(message, "result"))
+                $root.pb.ErrorInfo.encode(message.result, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.award != null && Object.hasOwnProperty.call(message, "award"))
+                $root.pb.GameProperties.encode(message.award, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdGetWeeklyAwardReply message, length delimited. Does not implicitly {@link pb.CmdGetWeeklyAwardReply.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdGetWeeklyAwardReply
+         * @static
+         * @param {pb.ICmdGetWeeklyAwardReply} message CmdGetWeeklyAwardReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdGetWeeklyAwardReply.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdGetWeeklyAwardReply message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdGetWeeklyAwardReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdGetWeeklyAwardReply} CmdGetWeeklyAwardReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdGetWeeklyAwardReply.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdGetWeeklyAwardReply();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                        break;
+                    case 2:
+                        message.award = $root.pb.GameProperties.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdGetWeeklyAwardReply message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdGetWeeklyAwardReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdGetWeeklyAwardReply} CmdGetWeeklyAwardReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdGetWeeklyAwardReply.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdGetWeeklyAwardReply message.
+         * @function verify
+         * @memberof pb.CmdGetWeeklyAwardReply
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdGetWeeklyAwardReply.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.result != null && message.hasOwnProperty("result")) {
+                var error = $root.pb.ErrorInfo.verify(message.result);
+                if (error)
+                    return "result." + error;
+            }
+            if (message.award != null && message.hasOwnProperty("award")) {
+                var error = $root.pb.GameProperties.verify(message.award);
+                if (error)
+                    return "award." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a CmdGetWeeklyAwardReply message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdGetWeeklyAwardReply
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdGetWeeklyAwardReply} CmdGetWeeklyAwardReply
+         */
+        CmdGetWeeklyAwardReply.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdGetWeeklyAwardReply)
+                return object;
+            var message = new $root.pb.CmdGetWeeklyAwardReply();
+            if (object.result != null) {
+                if (typeof object.result !== "object")
+                    throw TypeError(".pb.CmdGetWeeklyAwardReply.result: object expected");
+                message.result = $root.pb.ErrorInfo.fromObject(object.result);
+            }
+            if (object.award != null) {
+                if (typeof object.award !== "object")
+                    throw TypeError(".pb.CmdGetWeeklyAwardReply.award: object expected");
+                message.award = $root.pb.GameProperties.fromObject(object.award);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdGetWeeklyAwardReply message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdGetWeeklyAwardReply
+         * @static
+         * @param {pb.CmdGetWeeklyAwardReply} message CmdGetWeeklyAwardReply
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdGetWeeklyAwardReply.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.result = null;
+                object.award = null;
+            }
+            if (message.result != null && message.hasOwnProperty("result"))
+                object.result = $root.pb.ErrorInfo.toObject(message.result, options);
+            if (message.award != null && message.hasOwnProperty("award"))
+                object.award = $root.pb.GameProperties.toObject(message.award, options);
+            return object;
+        };
+
+        /**
+         * Converts this CmdGetWeeklyAwardReply to JSON.
+         * @function toJSON
+         * @memberof pb.CmdGetWeeklyAwardReply
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdGetWeeklyAwardReply.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdGetWeeklyAwardReply;
+    })();
+
+    pb.CmdQueryEventLog = (function () {
+
+        /**
+         * Properties of a CmdQueryEventLog.
+         * @memberof pb
+         * @interface ICmdQueryEventLog
+         * @property {pb.EventId|null} [eventId] CmdQueryEventLog eventId
+         * @property {number|null} [uid] CmdQueryEventLog uid
+         * @property {number|Long|null} [from] CmdQueryEventLog from
+         * @property {number|Long|null} [to] CmdQueryEventLog to
+         * @property {number|null} [total] CmdQueryEventLog total
+         */
+
+        /**
+         * Constructs a new CmdQueryEventLog.
+         * @memberof pb
+         * @classdesc Represents a CmdQueryEventLog.
+         * @implements ICmdQueryEventLog
+         * @constructor
+         * @param {pb.ICmdQueryEventLog=} [properties] Properties to set
+         */
+        function CmdQueryEventLog(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdQueryEventLog eventId.
+         * @member {pb.EventId} eventId
+         * @memberof pb.CmdQueryEventLog
+         * @instance
+         */
+        CmdQueryEventLog.prototype.eventId = 0;
+
+        /**
+         * CmdQueryEventLog uid.
+         * @member {number} uid
+         * @memberof pb.CmdQueryEventLog
+         * @instance
+         */
+        CmdQueryEventLog.prototype.uid = 0;
+
+        /**
+         * CmdQueryEventLog from.
+         * @member {number|Long} from
+         * @memberof pb.CmdQueryEventLog
+         * @instance
+         */
+        CmdQueryEventLog.prototype.from = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * CmdQueryEventLog to.
+         * @member {number|Long} to
+         * @memberof pb.CmdQueryEventLog
+         * @instance
+         */
+        CmdQueryEventLog.prototype.to = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * CmdQueryEventLog total.
+         * @member {number} total
+         * @memberof pb.CmdQueryEventLog
+         * @instance
+         */
+        CmdQueryEventLog.prototype.total = 0;
+
+        /**
+         * Creates a new CmdQueryEventLog instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdQueryEventLog
+         * @static
+         * @param {pb.ICmdQueryEventLog=} [properties] Properties to set
+         * @returns {pb.CmdQueryEventLog} CmdQueryEventLog instance
+         */
+        CmdQueryEventLog.create = function create(properties) {
+            return new CmdQueryEventLog(properties);
+        };
+
+        /**
+         * Encodes the specified CmdQueryEventLog message. Does not implicitly {@link pb.CmdQueryEventLog.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdQueryEventLog
+         * @static
+         * @param {pb.ICmdQueryEventLog} message CmdQueryEventLog message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdQueryEventLog.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eventId != null && Object.hasOwnProperty.call(message, "eventId"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eventId);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.uid);
+            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.from);
+            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.to);
+            if (message.total != null && Object.hasOwnProperty.call(message, "total"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.total);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdQueryEventLog message, length delimited. Does not implicitly {@link pb.CmdQueryEventLog.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdQueryEventLog
+         * @static
+         * @param {pb.ICmdQueryEventLog} message CmdQueryEventLog message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdQueryEventLog.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdQueryEventLog message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdQueryEventLog
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdQueryEventLog} CmdQueryEventLog
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdQueryEventLog.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdQueryEventLog();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.eventId = reader.int32();
+                        break;
+                    case 2:
+                        message.uid = reader.int32();
+                        break;
+                    case 3:
+                        message.from = reader.int64();
+                        break;
+                    case 4:
+                        message.to = reader.int64();
+                        break;
+                    case 5:
+                        message.total = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdQueryEventLog message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdQueryEventLog
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdQueryEventLog} CmdQueryEventLog
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdQueryEventLog.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdQueryEventLog message.
+         * @function verify
+         * @memberof pb.CmdQueryEventLog
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdQueryEventLog.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eventId != null && message.hasOwnProperty("eventId"))
+                switch (message.eventId) {
+                    default:
+                        return "eventId: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                        break;
+                }
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.from != null && message.hasOwnProperty("from"))
+                if (!$util.isInteger(message.from) && !(message.from && $util.isInteger(message.from.low) && $util.isInteger(message.from.high)))
+                    return "from: integer|Long expected";
+            if (message.to != null && message.hasOwnProperty("to"))
+                if (!$util.isInteger(message.to) && !(message.to && $util.isInteger(message.to.low) && $util.isInteger(message.to.high)))
+                    return "to: integer|Long expected";
+            if (message.total != null && message.hasOwnProperty("total"))
+                if (!$util.isInteger(message.total))
+                    return "total: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdQueryEventLog message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdQueryEventLog
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdQueryEventLog} CmdQueryEventLog
+         */
+        CmdQueryEventLog.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdQueryEventLog)
+                return object;
+            var message = new $root.pb.CmdQueryEventLog();
+            switch (object.eventId) {
+                case "EventId_NULL":
+                case 0:
+                    message.eventId = 0;
+                    break;
+                case "EventId_WeeklyAward":
+                case 1:
+                    message.eventId = 1;
+                    break;
+                case "EventId_Zsjc":
+                case 2:
+                    message.eventId = 2;
+                    break;
+            }
+            if (object.uid != null)
+                message.uid = object.uid | 0;
+            if (object.from != null)
+                if ($util.Long)
+                    (message.from = $util.Long.fromValue(object.from)).unsigned = false;
+                else if (typeof object.from === "string")
+                    message.from = parseInt(object.from, 10);
+                else if (typeof object.from === "number")
+                    message.from = object.from;
+                else if (typeof object.from === "object")
+                    message.from = new $util.LongBits(object.from.low >>> 0, object.from.high >>> 0).toNumber();
+            if (object.to != null)
+                if ($util.Long)
+                    (message.to = $util.Long.fromValue(object.to)).unsigned = false;
+                else if (typeof object.to === "string")
+                    message.to = parseInt(object.to, 10);
+                else if (typeof object.to === "number")
+                    message.to = object.to;
+                else if (typeof object.to === "object")
+                    message.to = new $util.LongBits(object.to.low >>> 0, object.to.high >>> 0).toNumber();
+            if (object.total != null)
+                message.total = object.total | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdQueryEventLog message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdQueryEventLog
+         * @static
+         * @param {pb.CmdQueryEventLog} message CmdQueryEventLog
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdQueryEventLog.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.eventId = options.enums === String ? "EventId_NULL" : 0;
+                object.uid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.from = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.from = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.to = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.to = options.longs === String ? "0" : 0;
+                object.total = 0;
+            }
+            if (message.eventId != null && message.hasOwnProperty("eventId"))
+                object.eventId = options.enums === String ? $root.pb.EventId[message.eventId] : message.eventId;
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            if (message.from != null && message.hasOwnProperty("from"))
+                if (typeof message.from === "number")
+                    object.from = options.longs === String ? String(message.from) : message.from;
+                else
+                    object.from = options.longs === String ? $util.Long.prototype.toString.call(message.from) : options.longs === Number ? new $util.LongBits(message.from.low >>> 0, message.from.high >>> 0).toNumber() : message.from;
+            if (message.to != null && message.hasOwnProperty("to"))
+                if (typeof message.to === "number")
+                    object.to = options.longs === String ? String(message.to) : message.to;
+                else
+                    object.to = options.longs === String ? $util.Long.prototype.toString.call(message.to) : options.longs === Number ? new $util.LongBits(message.to.low >>> 0, message.to.high >>> 0).toNumber() : message.to;
+            if (message.total != null && message.hasOwnProperty("total"))
+                object.total = message.total;
+            return object;
+        };
+
+        /**
+         * Converts this CmdQueryEventLog to JSON.
+         * @function toJSON
+         * @memberof pb.CmdQueryEventLog
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdQueryEventLog.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdQueryEventLog;
+    })();
+
+    pb.EventLog = (function () {
+
+        /**
+         * Properties of an EventLog.
+         * @memberof pb
+         * @interface IEventLog
+         * @property {pb.EventId|null} [eventId] EventLog eventId
+         * @property {number|null} [uid] EventLog uid
+         * @property {number|Long|null} [ts] EventLog ts
+         * @property {string|null} [log] EventLog log
+         */
+
+        /**
+         * Constructs a new EventLog.
+         * @memberof pb
+         * @classdesc Represents an EventLog.
+         * @implements IEventLog
+         * @constructor
+         * @param {pb.IEventLog=} [properties] Properties to set
+         */
+        function EventLog(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * EventLog eventId.
+         * @member {pb.EventId} eventId
+         * @memberof pb.EventLog
+         * @instance
+         */
+        EventLog.prototype.eventId = 0;
+
+        /**
+         * EventLog uid.
+         * @member {number} uid
+         * @memberof pb.EventLog
+         * @instance
+         */
+        EventLog.prototype.uid = 0;
+
+        /**
+         * EventLog ts.
+         * @member {number|Long} ts
+         * @memberof pb.EventLog
+         * @instance
+         */
+        EventLog.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * EventLog log.
+         * @member {string} log
+         * @memberof pb.EventLog
+         * @instance
+         */
+        EventLog.prototype.log = "";
+
+        /**
+         * Creates a new EventLog instance using the specified properties.
+         * @function create
+         * @memberof pb.EventLog
+         * @static
+         * @param {pb.IEventLog=} [properties] Properties to set
+         * @returns {pb.EventLog} EventLog instance
+         */
+        EventLog.create = function create(properties) {
+            return new EventLog(properties);
+        };
+
+        /**
+         * Encodes the specified EventLog message. Does not implicitly {@link pb.EventLog.verify|verify} messages.
+         * @function encode
+         * @memberof pb.EventLog
+         * @static
+         * @param {pb.IEventLog} message EventLog message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        EventLog.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.eventId != null && Object.hasOwnProperty.call(message, "eventId"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eventId);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.uid);
+            if (message.ts != null && Object.hasOwnProperty.call(message, "ts"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.ts);
+            if (message.log != null && Object.hasOwnProperty.call(message, "log"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.log);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified EventLog message, length delimited. Does not implicitly {@link pb.EventLog.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.EventLog
+         * @static
+         * @param {pb.IEventLog} message EventLog message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        EventLog.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an EventLog message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.EventLog
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.EventLog} EventLog
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        EventLog.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.EventLog();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.eventId = reader.int32();
+                        break;
+                    case 2:
+                        message.uid = reader.int32();
+                        break;
+                    case 3:
+                        message.ts = reader.int64();
+                        break;
+                    case 4:
+                        message.log = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an EventLog message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.EventLog
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.EventLog} EventLog
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        EventLog.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an EventLog message.
+         * @function verify
+         * @memberof pb.EventLog
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        EventLog.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.eventId != null && message.hasOwnProperty("eventId"))
+                switch (message.eventId) {
+                    default:
+                        return "eventId: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                        break;
+                }
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.ts != null && message.hasOwnProperty("ts"))
+                if (!$util.isInteger(message.ts) && !(message.ts && $util.isInteger(message.ts.low) && $util.isInteger(message.ts.high)))
+                    return "ts: integer|Long expected";
+            if (message.log != null && message.hasOwnProperty("log"))
+                if (!$util.isString(message.log))
+                    return "log: string expected";
+            return null;
+        };
+
+        /**
+         * Creates an EventLog message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.EventLog
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.EventLog} EventLog
+         */
+        EventLog.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.EventLog)
+                return object;
+            var message = new $root.pb.EventLog();
+            switch (object.eventId) {
+                case "EventId_NULL":
+                case 0:
+                    message.eventId = 0;
+                    break;
+                case "EventId_WeeklyAward":
+                case 1:
+                    message.eventId = 1;
+                    break;
+                case "EventId_Zsjc":
+                case 2:
+                    message.eventId = 2;
+                    break;
+            }
+            if (object.uid != null)
+                message.uid = object.uid | 0;
+            if (object.ts != null)
+                if ($util.Long)
+                    (message.ts = $util.Long.fromValue(object.ts)).unsigned = false;
+                else if (typeof object.ts === "string")
+                    message.ts = parseInt(object.ts, 10);
+                else if (typeof object.ts === "number")
+                    message.ts = object.ts;
+                else if (typeof object.ts === "object")
+                    message.ts = new $util.LongBits(object.ts.low >>> 0, object.ts.high >>> 0).toNumber();
+            if (object.log != null)
+                message.log = String(object.log);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an EventLog message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.EventLog
+         * @static
+         * @param {pb.EventLog} message EventLog
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        EventLog.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.eventId = options.enums === String ? "EventId_NULL" : 0;
+                object.uid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.ts = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.ts = options.longs === String ? "0" : 0;
+                object.log = "";
+            }
+            if (message.eventId != null && message.hasOwnProperty("eventId"))
+                object.eventId = options.enums === String ? $root.pb.EventId[message.eventId] : message.eventId;
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            if (message.ts != null && message.hasOwnProperty("ts"))
+                if (typeof message.ts === "number")
+                    object.ts = options.longs === String ? String(message.ts) : message.ts;
+                else
+                    object.ts = options.longs === String ? $util.Long.prototype.toString.call(message.ts) : options.longs === Number ? new $util.LongBits(message.ts.low >>> 0, message.ts.high >>> 0).toNumber() : message.ts;
+            if (message.log != null && message.hasOwnProperty("log"))
+                object.log = message.log;
+            return object;
+        };
+
+        /**
+         * Converts this EventLog to JSON.
+         * @function toJSON
+         * @memberof pb.EventLog
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        EventLog.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return EventLog;
+    })();
+
+    pb.Events = (function () {
+
+        /**
+         * Properties of an Events.
+         * @memberof pb
+         * @interface IEvents
+         * @property {Array.<pb.IEventLog>|null} [items] Events items
+         */
+
+        /**
+         * Constructs a new Events.
+         * @memberof pb
+         * @classdesc Represents an Events.
+         * @implements IEvents
+         * @constructor
+         * @param {pb.IEvents=} [properties] Properties to set
+         */
+        function Events(properties) {
+            this.items = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Events items.
+         * @member {Array.<pb.IEventLog>} items
+         * @memberof pb.Events
+         * @instance
+         */
+        Events.prototype.items = $util.emptyArray;
+
+        /**
+         * Creates a new Events instance using the specified properties.
+         * @function create
+         * @memberof pb.Events
+         * @static
+         * @param {pb.IEvents=} [properties] Properties to set
+         * @returns {pb.Events} Events instance
+         */
+        Events.create = function create(properties) {
+            return new Events(properties);
+        };
+
+        /**
+         * Encodes the specified Events message. Does not implicitly {@link pb.Events.verify|verify} messages.
+         * @function encode
+         * @memberof pb.Events
+         * @static
+         * @param {pb.IEvents} message Events message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Events.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.items != null && message.items.length)
+                for (var i = 0; i < message.items.length; ++i)
+                    $root.pb.EventLog.encode(message.items[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Events message, length delimited. Does not implicitly {@link pb.Events.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.Events
+         * @static
+         * @param {pb.IEvents} message Events message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Events.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an Events message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.Events
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.Events} Events
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Events.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.Events();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        if (!(message.items && message.items.length))
+                            message.items = [];
+                        message.items.push($root.pb.EventLog.decode(reader, reader.uint32()));
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an Events message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.Events
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.Events} Events
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Events.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an Events message.
+         * @function verify
+         * @memberof pb.Events
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Events.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.items != null && message.hasOwnProperty("items")) {
+                if (!Array.isArray(message.items))
+                    return "items: array expected";
+                for (var i = 0; i < message.items.length; ++i) {
+                    var error = $root.pb.EventLog.verify(message.items[i]);
+                    if (error)
+                        return "items." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates an Events message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.Events
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.Events} Events
+         */
+        Events.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.Events)
+                return object;
+            var message = new $root.pb.Events();
+            if (object.items) {
+                if (!Array.isArray(object.items))
+                    throw TypeError(".pb.Events.items: array expected");
+                message.items = [];
+                for (var i = 0; i < object.items.length; ++i) {
+                    if (typeof object.items[i] !== "object")
+                        throw TypeError(".pb.Events.items: object expected");
+                    message.items[i] = $root.pb.EventLog.fromObject(object.items[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an Events message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.Events
+         * @static
+         * @param {pb.Events} message Events
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Events.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.items = [];
+            if (message.items && message.items.length) {
+                object.items = [];
+                for (var j = 0; j < message.items.length; ++j)
+                    object.items[j] = $root.pb.EventLog.toObject(message.items[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this Events to JSON.
+         * @function toJSON
+         * @memberof pb.Events
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Events.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Events;
     })();
 
     /**
@@ -26310,6 +28931,1511 @@ $root.pb = (function () {
         return QuotesFuture;
     })();
 
+    pb.CmdQueryAiStockList = (function () {
+
+        /**
+         * Properties of a CmdQueryAiStockList.
+         * @memberof pb
+         * @interface ICmdQueryAiStockList
+         * @property {number|null} [rankFrom] CmdQueryAiStockList rankFrom
+         * @property {number|null} [total] CmdQueryAiStockList total
+         */
+
+        /**
+         * Constructs a new CmdQueryAiStockList.
+         * @memberof pb
+         * @classdesc Represents a CmdQueryAiStockList.
+         * @implements ICmdQueryAiStockList
+         * @constructor
+         * @param {pb.ICmdQueryAiStockList=} [properties] Properties to set
+         */
+        function CmdQueryAiStockList(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdQueryAiStockList rankFrom.
+         * @member {number} rankFrom
+         * @memberof pb.CmdQueryAiStockList
+         * @instance
+         */
+        CmdQueryAiStockList.prototype.rankFrom = 0;
+
+        /**
+         * CmdQueryAiStockList total.
+         * @member {number} total
+         * @memberof pb.CmdQueryAiStockList
+         * @instance
+         */
+        CmdQueryAiStockList.prototype.total = 0;
+
+        /**
+         * Creates a new CmdQueryAiStockList instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdQueryAiStockList
+         * @static
+         * @param {pb.ICmdQueryAiStockList=} [properties] Properties to set
+         * @returns {pb.CmdQueryAiStockList} CmdQueryAiStockList instance
+         */
+        CmdQueryAiStockList.create = function create(properties) {
+            return new CmdQueryAiStockList(properties);
+        };
+
+        /**
+         * Encodes the specified CmdQueryAiStockList message. Does not implicitly {@link pb.CmdQueryAiStockList.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdQueryAiStockList
+         * @static
+         * @param {pb.ICmdQueryAiStockList} message CmdQueryAiStockList message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdQueryAiStockList.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.rankFrom != null && Object.hasOwnProperty.call(message, "rankFrom"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.rankFrom);
+            if (message.total != null && Object.hasOwnProperty.call(message, "total"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.total);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdQueryAiStockList message, length delimited. Does not implicitly {@link pb.CmdQueryAiStockList.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdQueryAiStockList
+         * @static
+         * @param {pb.ICmdQueryAiStockList} message CmdQueryAiStockList message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdQueryAiStockList.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdQueryAiStockList message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdQueryAiStockList
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdQueryAiStockList} CmdQueryAiStockList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdQueryAiStockList.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdQueryAiStockList();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.rankFrom = reader.int32();
+                        break;
+                    case 2:
+                        message.total = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdQueryAiStockList message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdQueryAiStockList
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdQueryAiStockList} CmdQueryAiStockList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdQueryAiStockList.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdQueryAiStockList message.
+         * @function verify
+         * @memberof pb.CmdQueryAiStockList
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdQueryAiStockList.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.rankFrom != null && message.hasOwnProperty("rankFrom"))
+                if (!$util.isInteger(message.rankFrom))
+                    return "rankFrom: integer expected";
+            if (message.total != null && message.hasOwnProperty("total"))
+                if (!$util.isInteger(message.total))
+                    return "total: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdQueryAiStockList message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdQueryAiStockList
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdQueryAiStockList} CmdQueryAiStockList
+         */
+        CmdQueryAiStockList.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdQueryAiStockList)
+                return object;
+            var message = new $root.pb.CmdQueryAiStockList();
+            if (object.rankFrom != null)
+                message.rankFrom = object.rankFrom | 0;
+            if (object.total != null)
+                message.total = object.total | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdQueryAiStockList message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdQueryAiStockList
+         * @static
+         * @param {pb.CmdQueryAiStockList} message CmdQueryAiStockList
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdQueryAiStockList.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.rankFrom = 0;
+                object.total = 0;
+            }
+            if (message.rankFrom != null && message.hasOwnProperty("rankFrom"))
+                object.rankFrom = message.rankFrom;
+            if (message.total != null && message.hasOwnProperty("total"))
+                object.total = message.total;
+            return object;
+        };
+
+        /**
+         * Converts this CmdQueryAiStockList to JSON.
+         * @function toJSON
+         * @memberof pb.CmdQueryAiStockList
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdQueryAiStockList.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdQueryAiStockList;
+    })();
+
+    pb.AiStockItem = (function () {
+
+        /**
+         * Properties of an AiStockItem.
+         * @memberof pb
+         * @interface IAiStockItem
+         * @property {number|null} [code] AiStockItem code
+         * @property {string|null} [industry] AiStockItem industry
+         * @property {number|Long|null} [tsUpdated] AiStockItem tsUpdated
+         * @property {number|null} [profitRanking] AiStockItem profitRanking
+         * @property {number|null} [profitRate] AiStockItem profitRate
+         * @property {number|null} [lastAskPrice] AiStockItem lastAskPrice
+         * @property {number|null} [lastBidPrice] AiStockItem lastBidPrice
+         * @property {number|null} [curAskPrice] AiStockItem curAskPrice
+         */
+
+        /**
+         * Constructs a new AiStockItem.
+         * @memberof pb
+         * @classdesc Represents an AiStockItem.
+         * @implements IAiStockItem
+         * @constructor
+         * @param {pb.IAiStockItem=} [properties] Properties to set
+         */
+        function AiStockItem(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * AiStockItem code.
+         * @member {number} code
+         * @memberof pb.AiStockItem
+         * @instance
+         */
+        AiStockItem.prototype.code = 0;
+
+        /**
+         * AiStockItem industry.
+         * @member {string} industry
+         * @memberof pb.AiStockItem
+         * @instance
+         */
+        AiStockItem.prototype.industry = "";
+
+        /**
+         * AiStockItem tsUpdated.
+         * @member {number|Long} tsUpdated
+         * @memberof pb.AiStockItem
+         * @instance
+         */
+        AiStockItem.prototype.tsUpdated = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * AiStockItem profitRanking.
+         * @member {number} profitRanking
+         * @memberof pb.AiStockItem
+         * @instance
+         */
+        AiStockItem.prototype.profitRanking = 0;
+
+        /**
+         * AiStockItem profitRate.
+         * @member {number} profitRate
+         * @memberof pb.AiStockItem
+         * @instance
+         */
+        AiStockItem.prototype.profitRate = 0;
+
+        /**
+         * AiStockItem lastAskPrice.
+         * @member {number} lastAskPrice
+         * @memberof pb.AiStockItem
+         * @instance
+         */
+        AiStockItem.prototype.lastAskPrice = 0;
+
+        /**
+         * AiStockItem lastBidPrice.
+         * @member {number} lastBidPrice
+         * @memberof pb.AiStockItem
+         * @instance
+         */
+        AiStockItem.prototype.lastBidPrice = 0;
+
+        /**
+         * AiStockItem curAskPrice.
+         * @member {number} curAskPrice
+         * @memberof pb.AiStockItem
+         * @instance
+         */
+        AiStockItem.prototype.curAskPrice = 0;
+
+        /**
+         * Creates a new AiStockItem instance using the specified properties.
+         * @function create
+         * @memberof pb.AiStockItem
+         * @static
+         * @param {pb.IAiStockItem=} [properties] Properties to set
+         * @returns {pb.AiStockItem} AiStockItem instance
+         */
+        AiStockItem.create = function create(properties) {
+            return new AiStockItem(properties);
+        };
+
+        /**
+         * Encodes the specified AiStockItem message. Does not implicitly {@link pb.AiStockItem.verify|verify} messages.
+         * @function encode
+         * @memberof pb.AiStockItem
+         * @static
+         * @param {pb.IAiStockItem} message AiStockItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AiStockItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.code);
+            if (message.industry != null && Object.hasOwnProperty.call(message, "industry"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.industry);
+            if (message.tsUpdated != null && Object.hasOwnProperty.call(message, "tsUpdated"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.tsUpdated);
+            if (message.profitRanking != null && Object.hasOwnProperty.call(message, "profitRanking"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.profitRanking);
+            if (message.profitRate != null && Object.hasOwnProperty.call(message, "profitRate"))
+                writer.uint32(/* id 5, wireType 1 =*/41).double(message.profitRate);
+            if (message.lastAskPrice != null && Object.hasOwnProperty.call(message, "lastAskPrice"))
+                writer.uint32(/* id 6, wireType 1 =*/49).double(message.lastAskPrice);
+            if (message.lastBidPrice != null && Object.hasOwnProperty.call(message, "lastBidPrice"))
+                writer.uint32(/* id 7, wireType 1 =*/57).double(message.lastBidPrice);
+            if (message.curAskPrice != null && Object.hasOwnProperty.call(message, "curAskPrice"))
+                writer.uint32(/* id 8, wireType 1 =*/65).double(message.curAskPrice);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified AiStockItem message, length delimited. Does not implicitly {@link pb.AiStockItem.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.AiStockItem
+         * @static
+         * @param {pb.IAiStockItem} message AiStockItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AiStockItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an AiStockItem message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.AiStockItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.AiStockItem} AiStockItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AiStockItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.AiStockItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.code = reader.uint32();
+                        break;
+                    case 2:
+                        message.industry = reader.string();
+                        break;
+                    case 3:
+                        message.tsUpdated = reader.int64();
+                        break;
+                    case 4:
+                        message.profitRanking = reader.int32();
+                        break;
+                    case 5:
+                        message.profitRate = reader.double();
+                        break;
+                    case 6:
+                        message.lastAskPrice = reader.double();
+                        break;
+                    case 7:
+                        message.lastBidPrice = reader.double();
+                        break;
+                    case 8:
+                        message.curAskPrice = reader.double();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an AiStockItem message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.AiStockItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.AiStockItem} AiStockItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AiStockItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an AiStockItem message.
+         * @function verify
+         * @memberof pb.AiStockItem
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        AiStockItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code))
+                    return "code: integer expected";
+            if (message.industry != null && message.hasOwnProperty("industry"))
+                if (!$util.isString(message.industry))
+                    return "industry: string expected";
+            if (message.tsUpdated != null && message.hasOwnProperty("tsUpdated"))
+                if (!$util.isInteger(message.tsUpdated) && !(message.tsUpdated && $util.isInteger(message.tsUpdated.low) && $util.isInteger(message.tsUpdated.high)))
+                    return "tsUpdated: integer|Long expected";
+            if (message.profitRanking != null && message.hasOwnProperty("profitRanking"))
+                if (!$util.isInteger(message.profitRanking))
+                    return "profitRanking: integer expected";
+            if (message.profitRate != null && message.hasOwnProperty("profitRate"))
+                if (typeof message.profitRate !== "number")
+                    return "profitRate: number expected";
+            if (message.lastAskPrice != null && message.hasOwnProperty("lastAskPrice"))
+                if (typeof message.lastAskPrice !== "number")
+                    return "lastAskPrice: number expected";
+            if (message.lastBidPrice != null && message.hasOwnProperty("lastBidPrice"))
+                if (typeof message.lastBidPrice !== "number")
+                    return "lastBidPrice: number expected";
+            if (message.curAskPrice != null && message.hasOwnProperty("curAskPrice"))
+                if (typeof message.curAskPrice !== "number")
+                    return "curAskPrice: number expected";
+            return null;
+        };
+
+        /**
+         * Creates an AiStockItem message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.AiStockItem
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.AiStockItem} AiStockItem
+         */
+        AiStockItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.AiStockItem)
+                return object;
+            var message = new $root.pb.AiStockItem();
+            if (object.code != null)
+                message.code = object.code >>> 0;
+            if (object.industry != null)
+                message.industry = String(object.industry);
+            if (object.tsUpdated != null)
+                if ($util.Long)
+                    (message.tsUpdated = $util.Long.fromValue(object.tsUpdated)).unsigned = false;
+                else if (typeof object.tsUpdated === "string")
+                    message.tsUpdated = parseInt(object.tsUpdated, 10);
+                else if (typeof object.tsUpdated === "number")
+                    message.tsUpdated = object.tsUpdated;
+                else if (typeof object.tsUpdated === "object")
+                    message.tsUpdated = new $util.LongBits(object.tsUpdated.low >>> 0, object.tsUpdated.high >>> 0).toNumber();
+            if (object.profitRanking != null)
+                message.profitRanking = object.profitRanking | 0;
+            if (object.profitRate != null)
+                message.profitRate = Number(object.profitRate);
+            if (object.lastAskPrice != null)
+                message.lastAskPrice = Number(object.lastAskPrice);
+            if (object.lastBidPrice != null)
+                message.lastBidPrice = Number(object.lastBidPrice);
+            if (object.curAskPrice != null)
+                message.curAskPrice = Number(object.curAskPrice);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an AiStockItem message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.AiStockItem
+         * @static
+         * @param {pb.AiStockItem} message AiStockItem
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        AiStockItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.code = 0;
+                object.industry = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.tsUpdated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.tsUpdated = options.longs === String ? "0" : 0;
+                object.profitRanking = 0;
+                object.profitRate = 0;
+                object.lastAskPrice = 0;
+                object.lastBidPrice = 0;
+                object.curAskPrice = 0;
+            }
+            if (message.code != null && message.hasOwnProperty("code"))
+                object.code = message.code;
+            if (message.industry != null && message.hasOwnProperty("industry"))
+                object.industry = message.industry;
+            if (message.tsUpdated != null && message.hasOwnProperty("tsUpdated"))
+                if (typeof message.tsUpdated === "number")
+                    object.tsUpdated = options.longs === String ? String(message.tsUpdated) : message.tsUpdated;
+                else
+                    object.tsUpdated = options.longs === String ? $util.Long.prototype.toString.call(message.tsUpdated) : options.longs === Number ? new $util.LongBits(message.tsUpdated.low >>> 0, message.tsUpdated.high >>> 0).toNumber() : message.tsUpdated;
+            if (message.profitRanking != null && message.hasOwnProperty("profitRanking"))
+                object.profitRanking = message.profitRanking;
+            if (message.profitRate != null && message.hasOwnProperty("profitRate"))
+                object.profitRate = options.json && !isFinite(message.profitRate) ? String(message.profitRate) : message.profitRate;
+            if (message.lastAskPrice != null && message.hasOwnProperty("lastAskPrice"))
+                object.lastAskPrice = options.json && !isFinite(message.lastAskPrice) ? String(message.lastAskPrice) : message.lastAskPrice;
+            if (message.lastBidPrice != null && message.hasOwnProperty("lastBidPrice"))
+                object.lastBidPrice = options.json && !isFinite(message.lastBidPrice) ? String(message.lastBidPrice) : message.lastBidPrice;
+            if (message.curAskPrice != null && message.hasOwnProperty("curAskPrice"))
+                object.curAskPrice = options.json && !isFinite(message.curAskPrice) ? String(message.curAskPrice) : message.curAskPrice;
+            return object;
+        };
+
+        /**
+         * Converts this AiStockItem to JSON.
+         * @function toJSON
+         * @memberof pb.AiStockItem
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        AiStockItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return AiStockItem;
+    })();
+
+    pb.CmdQueryAiStockListReply = (function () {
+
+        /**
+         * Properties of a CmdQueryAiStockListReply.
+         * @memberof pb
+         * @interface ICmdQueryAiStockListReply
+         * @property {Array.<pb.IAiStockItem>|null} [items] CmdQueryAiStockListReply items
+         */
+
+        /**
+         * Constructs a new CmdQueryAiStockListReply.
+         * @memberof pb
+         * @classdesc Represents a CmdQueryAiStockListReply.
+         * @implements ICmdQueryAiStockListReply
+         * @constructor
+         * @param {pb.ICmdQueryAiStockListReply=} [properties] Properties to set
+         */
+        function CmdQueryAiStockListReply(properties) {
+            this.items = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdQueryAiStockListReply items.
+         * @member {Array.<pb.IAiStockItem>} items
+         * @memberof pb.CmdQueryAiStockListReply
+         * @instance
+         */
+        CmdQueryAiStockListReply.prototype.items = $util.emptyArray;
+
+        /**
+         * Creates a new CmdQueryAiStockListReply instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdQueryAiStockListReply
+         * @static
+         * @param {pb.ICmdQueryAiStockListReply=} [properties] Properties to set
+         * @returns {pb.CmdQueryAiStockListReply} CmdQueryAiStockListReply instance
+         */
+        CmdQueryAiStockListReply.create = function create(properties) {
+            return new CmdQueryAiStockListReply(properties);
+        };
+
+        /**
+         * Encodes the specified CmdQueryAiStockListReply message. Does not implicitly {@link pb.CmdQueryAiStockListReply.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdQueryAiStockListReply
+         * @static
+         * @param {pb.ICmdQueryAiStockListReply} message CmdQueryAiStockListReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdQueryAiStockListReply.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.items != null && message.items.length)
+                for (var i = 0; i < message.items.length; ++i)
+                    $root.pb.AiStockItem.encode(message.items[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdQueryAiStockListReply message, length delimited. Does not implicitly {@link pb.CmdQueryAiStockListReply.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdQueryAiStockListReply
+         * @static
+         * @param {pb.ICmdQueryAiStockListReply} message CmdQueryAiStockListReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdQueryAiStockListReply.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdQueryAiStockListReply message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdQueryAiStockListReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdQueryAiStockListReply} CmdQueryAiStockListReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdQueryAiStockListReply.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdQueryAiStockListReply();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 2:
+                        if (!(message.items && message.items.length))
+                            message.items = [];
+                        message.items.push($root.pb.AiStockItem.decode(reader, reader.uint32()));
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdQueryAiStockListReply message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdQueryAiStockListReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdQueryAiStockListReply} CmdQueryAiStockListReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdQueryAiStockListReply.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdQueryAiStockListReply message.
+         * @function verify
+         * @memberof pb.CmdQueryAiStockListReply
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdQueryAiStockListReply.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.items != null && message.hasOwnProperty("items")) {
+                if (!Array.isArray(message.items))
+                    return "items: array expected";
+                for (var i = 0; i < message.items.length; ++i) {
+                    var error = $root.pb.AiStockItem.verify(message.items[i]);
+                    if (error)
+                        return "items." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a CmdQueryAiStockListReply message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdQueryAiStockListReply
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdQueryAiStockListReply} CmdQueryAiStockListReply
+         */
+        CmdQueryAiStockListReply.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdQueryAiStockListReply)
+                return object;
+            var message = new $root.pb.CmdQueryAiStockListReply();
+            if (object.items) {
+                if (!Array.isArray(object.items))
+                    throw TypeError(".pb.CmdQueryAiStockListReply.items: array expected");
+                message.items = [];
+                for (var i = 0; i < object.items.length; ++i) {
+                    if (typeof object.items[i] !== "object")
+                        throw TypeError(".pb.CmdQueryAiStockListReply.items: object expected");
+                    message.items[i] = $root.pb.AiStockItem.fromObject(object.items[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdQueryAiStockListReply message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdQueryAiStockListReply
+         * @static
+         * @param {pb.CmdQueryAiStockListReply} message CmdQueryAiStockListReply
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdQueryAiStockListReply.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.items = [];
+            if (message.items && message.items.length) {
+                object.items = [];
+                for (var j = 0; j < message.items.length; ++j)
+                    object.items[j] = $root.pb.AiStockItem.toObject(message.items[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this CmdQueryAiStockListReply to JSON.
+         * @function toJSON
+         * @memberof pb.CmdQueryAiStockListReply
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdQueryAiStockListReply.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdQueryAiStockListReply;
+    })();
+
+    pb.CmdQueryAiSignal = (function () {
+
+        /**
+         * Properties of a CmdQueryAiSignal.
+         * @memberof pb
+         * @interface ICmdQueryAiSignal
+         * @property {number|null} [code] CmdQueryAiSignal code
+         */
+
+        /**
+         * Constructs a new CmdQueryAiSignal.
+         * @memberof pb
+         * @classdesc Represents a CmdQueryAiSignal.
+         * @implements ICmdQueryAiSignal
+         * @constructor
+         * @param {pb.ICmdQueryAiSignal=} [properties] Properties to set
+         */
+        function CmdQueryAiSignal(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdQueryAiSignal code.
+         * @member {number} code
+         * @memberof pb.CmdQueryAiSignal
+         * @instance
+         */
+        CmdQueryAiSignal.prototype.code = 0;
+
+        /**
+         * Creates a new CmdQueryAiSignal instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdQueryAiSignal
+         * @static
+         * @param {pb.ICmdQueryAiSignal=} [properties] Properties to set
+         * @returns {pb.CmdQueryAiSignal} CmdQueryAiSignal instance
+         */
+        CmdQueryAiSignal.create = function create(properties) {
+            return new CmdQueryAiSignal(properties);
+        };
+
+        /**
+         * Encodes the specified CmdQueryAiSignal message. Does not implicitly {@link pb.CmdQueryAiSignal.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdQueryAiSignal
+         * @static
+         * @param {pb.ICmdQueryAiSignal} message CmdQueryAiSignal message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdQueryAiSignal.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.code);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdQueryAiSignal message, length delimited. Does not implicitly {@link pb.CmdQueryAiSignal.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdQueryAiSignal
+         * @static
+         * @param {pb.ICmdQueryAiSignal} message CmdQueryAiSignal message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdQueryAiSignal.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdQueryAiSignal message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdQueryAiSignal
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdQueryAiSignal} CmdQueryAiSignal
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdQueryAiSignal.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdQueryAiSignal();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.code = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdQueryAiSignal message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdQueryAiSignal
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdQueryAiSignal} CmdQueryAiSignal
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdQueryAiSignal.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdQueryAiSignal message.
+         * @function verify
+         * @memberof pb.CmdQueryAiSignal
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdQueryAiSignal.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code))
+                    return "code: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdQueryAiSignal message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdQueryAiSignal
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdQueryAiSignal} CmdQueryAiSignal
+         */
+        CmdQueryAiSignal.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdQueryAiSignal)
+                return object;
+            var message = new $root.pb.CmdQueryAiSignal();
+            if (object.code != null)
+                message.code = object.code >>> 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdQueryAiSignal message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdQueryAiSignal
+         * @static
+         * @param {pb.CmdQueryAiSignal} message CmdQueryAiSignal
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdQueryAiSignal.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.code = 0;
+            if (message.code != null && message.hasOwnProperty("code"))
+                object.code = message.code;
+            return object;
+        };
+
+        /**
+         * Converts this CmdQueryAiSignal to JSON.
+         * @function toJSON
+         * @memberof pb.CmdQueryAiSignal
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdQueryAiSignal.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdQueryAiSignal;
+    })();
+
+    pb.AiSignalItem = (function () {
+
+        /**
+         * Properties of an AiSignalItem.
+         * @memberof pb
+         * @interface IAiSignalItem
+         * @property {number|Long|null} [ts] AiSignalItem ts
+         * @property {number|null} [flag] AiSignalItem flag
+         * @property {number|null} [price] AiSignalItem price
+         * @property {number|null} [ma10] AiSignalItem ma10
+         * @property {number|null} [ma30] AiSignalItem ma30
+         */
+
+        /**
+         * Constructs a new AiSignalItem.
+         * @memberof pb
+         * @classdesc Represents an AiSignalItem.
+         * @implements IAiSignalItem
+         * @constructor
+         * @param {pb.IAiSignalItem=} [properties] Properties to set
+         */
+        function AiSignalItem(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * AiSignalItem ts.
+         * @member {number|Long} ts
+         * @memberof pb.AiSignalItem
+         * @instance
+         */
+        AiSignalItem.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * AiSignalItem flag.
+         * @member {number} flag
+         * @memberof pb.AiSignalItem
+         * @instance
+         */
+        AiSignalItem.prototype.flag = 0;
+
+        /**
+         * AiSignalItem price.
+         * @member {number} price
+         * @memberof pb.AiSignalItem
+         * @instance
+         */
+        AiSignalItem.prototype.price = 0;
+
+        /**
+         * AiSignalItem ma10.
+         * @member {number} ma10
+         * @memberof pb.AiSignalItem
+         * @instance
+         */
+        AiSignalItem.prototype.ma10 = 0;
+
+        /**
+         * AiSignalItem ma30.
+         * @member {number} ma30
+         * @memberof pb.AiSignalItem
+         * @instance
+         */
+        AiSignalItem.prototype.ma30 = 0;
+
+        /**
+         * Creates a new AiSignalItem instance using the specified properties.
+         * @function create
+         * @memberof pb.AiSignalItem
+         * @static
+         * @param {pb.IAiSignalItem=} [properties] Properties to set
+         * @returns {pb.AiSignalItem} AiSignalItem instance
+         */
+        AiSignalItem.create = function create(properties) {
+            return new AiSignalItem(properties);
+        };
+
+        /**
+         * Encodes the specified AiSignalItem message. Does not implicitly {@link pb.AiSignalItem.verify|verify} messages.
+         * @function encode
+         * @memberof pb.AiSignalItem
+         * @static
+         * @param {pb.IAiSignalItem} message AiSignalItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AiSignalItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.ts != null && Object.hasOwnProperty.call(message, "ts"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.ts);
+            if (message.flag != null && Object.hasOwnProperty.call(message, "flag"))
+                writer.uint32(/* id 2, wireType 1 =*/17).double(message.flag);
+            if (message.price != null && Object.hasOwnProperty.call(message, "price"))
+                writer.uint32(/* id 3, wireType 1 =*/25).double(message.price);
+            if (message.ma10 != null && Object.hasOwnProperty.call(message, "ma10"))
+                writer.uint32(/* id 4, wireType 1 =*/33).double(message.ma10);
+            if (message.ma30 != null && Object.hasOwnProperty.call(message, "ma30"))
+                writer.uint32(/* id 5, wireType 1 =*/41).double(message.ma30);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified AiSignalItem message, length delimited. Does not implicitly {@link pb.AiSignalItem.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.AiSignalItem
+         * @static
+         * @param {pb.IAiSignalItem} message AiSignalItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AiSignalItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an AiSignalItem message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.AiSignalItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.AiSignalItem} AiSignalItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AiSignalItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.AiSignalItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.ts = reader.int64();
+                        break;
+                    case 2:
+                        message.flag = reader.double();
+                        break;
+                    case 3:
+                        message.price = reader.double();
+                        break;
+                    case 4:
+                        message.ma10 = reader.double();
+                        break;
+                    case 5:
+                        message.ma30 = reader.double();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an AiSignalItem message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.AiSignalItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.AiSignalItem} AiSignalItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AiSignalItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an AiSignalItem message.
+         * @function verify
+         * @memberof pb.AiSignalItem
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        AiSignalItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.ts != null && message.hasOwnProperty("ts"))
+                if (!$util.isInteger(message.ts) && !(message.ts && $util.isInteger(message.ts.low) && $util.isInteger(message.ts.high)))
+                    return "ts: integer|Long expected";
+            if (message.flag != null && message.hasOwnProperty("flag"))
+                if (typeof message.flag !== "number")
+                    return "flag: number expected";
+            if (message.price != null && message.hasOwnProperty("price"))
+                if (typeof message.price !== "number")
+                    return "price: number expected";
+            if (message.ma10 != null && message.hasOwnProperty("ma10"))
+                if (typeof message.ma10 !== "number")
+                    return "ma10: number expected";
+            if (message.ma30 != null && message.hasOwnProperty("ma30"))
+                if (typeof message.ma30 !== "number")
+                    return "ma30: number expected";
+            return null;
+        };
+
+        /**
+         * Creates an AiSignalItem message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.AiSignalItem
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.AiSignalItem} AiSignalItem
+         */
+        AiSignalItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.AiSignalItem)
+                return object;
+            var message = new $root.pb.AiSignalItem();
+            if (object.ts != null)
+                if ($util.Long)
+                    (message.ts = $util.Long.fromValue(object.ts)).unsigned = false;
+                else if (typeof object.ts === "string")
+                    message.ts = parseInt(object.ts, 10);
+                else if (typeof object.ts === "number")
+                    message.ts = object.ts;
+                else if (typeof object.ts === "object")
+                    message.ts = new $util.LongBits(object.ts.low >>> 0, object.ts.high >>> 0).toNumber();
+            if (object.flag != null)
+                message.flag = Number(object.flag);
+            if (object.price != null)
+                message.price = Number(object.price);
+            if (object.ma10 != null)
+                message.ma10 = Number(object.ma10);
+            if (object.ma30 != null)
+                message.ma30 = Number(object.ma30);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an AiSignalItem message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.AiSignalItem
+         * @static
+         * @param {pb.AiSignalItem} message AiSignalItem
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        AiSignalItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.ts = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.ts = options.longs === String ? "0" : 0;
+                object.flag = 0;
+                object.price = 0;
+                object.ma10 = 0;
+                object.ma30 = 0;
+            }
+            if (message.ts != null && message.hasOwnProperty("ts"))
+                if (typeof message.ts === "number")
+                    object.ts = options.longs === String ? String(message.ts) : message.ts;
+                else
+                    object.ts = options.longs === String ? $util.Long.prototype.toString.call(message.ts) : options.longs === Number ? new $util.LongBits(message.ts.low >>> 0, message.ts.high >>> 0).toNumber() : message.ts;
+            if (message.flag != null && message.hasOwnProperty("flag"))
+                object.flag = options.json && !isFinite(message.flag) ? String(message.flag) : message.flag;
+            if (message.price != null && message.hasOwnProperty("price"))
+                object.price = options.json && !isFinite(message.price) ? String(message.price) : message.price;
+            if (message.ma10 != null && message.hasOwnProperty("ma10"))
+                object.ma10 = options.json && !isFinite(message.ma10) ? String(message.ma10) : message.ma10;
+            if (message.ma30 != null && message.hasOwnProperty("ma30"))
+                object.ma30 = options.json && !isFinite(message.ma30) ? String(message.ma30) : message.ma30;
+            return object;
+        };
+
+        /**
+         * Converts this AiSignalItem to JSON.
+         * @function toJSON
+         * @memberof pb.AiSignalItem
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        AiSignalItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return AiSignalItem;
+    })();
+
+    pb.CmdQueryAiSignalReply = (function () {
+
+        /**
+         * Properties of a CmdQueryAiSignalReply.
+         * @memberof pb
+         * @interface ICmdQueryAiSignalReply
+         * @property {number|null} [code] CmdQueryAiSignalReply code
+         * @property {string|null} [industry] CmdQueryAiSignalReply industry
+         * @property {Array.<pb.IAiSignalItem>|null} [signals] CmdQueryAiSignalReply signals
+         */
+
+        /**
+         * Constructs a new CmdQueryAiSignalReply.
+         * @memberof pb
+         * @classdesc Represents a CmdQueryAiSignalReply.
+         * @implements ICmdQueryAiSignalReply
+         * @constructor
+         * @param {pb.ICmdQueryAiSignalReply=} [properties] Properties to set
+         */
+        function CmdQueryAiSignalReply(properties) {
+            this.signals = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdQueryAiSignalReply code.
+         * @member {number} code
+         * @memberof pb.CmdQueryAiSignalReply
+         * @instance
+         */
+        CmdQueryAiSignalReply.prototype.code = 0;
+
+        /**
+         * CmdQueryAiSignalReply industry.
+         * @member {string} industry
+         * @memberof pb.CmdQueryAiSignalReply
+         * @instance
+         */
+        CmdQueryAiSignalReply.prototype.industry = "";
+
+        /**
+         * CmdQueryAiSignalReply signals.
+         * @member {Array.<pb.IAiSignalItem>} signals
+         * @memberof pb.CmdQueryAiSignalReply
+         * @instance
+         */
+        CmdQueryAiSignalReply.prototype.signals = $util.emptyArray;
+
+        /**
+         * Creates a new CmdQueryAiSignalReply instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdQueryAiSignalReply
+         * @static
+         * @param {pb.ICmdQueryAiSignalReply=} [properties] Properties to set
+         * @returns {pb.CmdQueryAiSignalReply} CmdQueryAiSignalReply instance
+         */
+        CmdQueryAiSignalReply.create = function create(properties) {
+            return new CmdQueryAiSignalReply(properties);
+        };
+
+        /**
+         * Encodes the specified CmdQueryAiSignalReply message. Does not implicitly {@link pb.CmdQueryAiSignalReply.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdQueryAiSignalReply
+         * @static
+         * @param {pb.ICmdQueryAiSignalReply} message CmdQueryAiSignalReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdQueryAiSignalReply.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.code);
+            if (message.industry != null && Object.hasOwnProperty.call(message, "industry"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.industry);
+            if (message.signals != null && message.signals.length)
+                for (var i = 0; i < message.signals.length; ++i)
+                    $root.pb.AiSignalItem.encode(message.signals[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdQueryAiSignalReply message, length delimited. Does not implicitly {@link pb.CmdQueryAiSignalReply.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdQueryAiSignalReply
+         * @static
+         * @param {pb.ICmdQueryAiSignalReply} message CmdQueryAiSignalReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdQueryAiSignalReply.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdQueryAiSignalReply message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdQueryAiSignalReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdQueryAiSignalReply} CmdQueryAiSignalReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdQueryAiSignalReply.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdQueryAiSignalReply();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.code = reader.uint32();
+                        break;
+                    case 2:
+                        message.industry = reader.string();
+                        break;
+                    case 3:
+                        if (!(message.signals && message.signals.length))
+                            message.signals = [];
+                        message.signals.push($root.pb.AiSignalItem.decode(reader, reader.uint32()));
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdQueryAiSignalReply message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdQueryAiSignalReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdQueryAiSignalReply} CmdQueryAiSignalReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdQueryAiSignalReply.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdQueryAiSignalReply message.
+         * @function verify
+         * @memberof pb.CmdQueryAiSignalReply
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdQueryAiSignalReply.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code))
+                    return "code: integer expected";
+            if (message.industry != null && message.hasOwnProperty("industry"))
+                if (!$util.isString(message.industry))
+                    return "industry: string expected";
+            if (message.signals != null && message.hasOwnProperty("signals")) {
+                if (!Array.isArray(message.signals))
+                    return "signals: array expected";
+                for (var i = 0; i < message.signals.length; ++i) {
+                    var error = $root.pb.AiSignalItem.verify(message.signals[i]);
+                    if (error)
+                        return "signals." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a CmdQueryAiSignalReply message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdQueryAiSignalReply
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdQueryAiSignalReply} CmdQueryAiSignalReply
+         */
+        CmdQueryAiSignalReply.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdQueryAiSignalReply)
+                return object;
+            var message = new $root.pb.CmdQueryAiSignalReply();
+            if (object.code != null)
+                message.code = object.code >>> 0;
+            if (object.industry != null)
+                message.industry = String(object.industry);
+            if (object.signals) {
+                if (!Array.isArray(object.signals))
+                    throw TypeError(".pb.CmdQueryAiSignalReply.signals: array expected");
+                message.signals = [];
+                for (var i = 0; i < object.signals.length; ++i) {
+                    if (typeof object.signals[i] !== "object")
+                        throw TypeError(".pb.CmdQueryAiSignalReply.signals: object expected");
+                    message.signals[i] = $root.pb.AiSignalItem.fromObject(object.signals[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdQueryAiSignalReply message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdQueryAiSignalReply
+         * @static
+         * @param {pb.CmdQueryAiSignalReply} message CmdQueryAiSignalReply
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdQueryAiSignalReply.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.signals = [];
+            if (options.defaults) {
+                object.code = 0;
+                object.industry = "";
+            }
+            if (message.code != null && message.hasOwnProperty("code"))
+                object.code = message.code;
+            if (message.industry != null && message.hasOwnProperty("industry"))
+                object.industry = message.industry;
+            if (message.signals && message.signals.length) {
+                object.signals = [];
+                for (var j = 0; j < message.signals.length; ++j)
+                    object.signals[j] = $root.pb.AiSignalItem.toObject(message.signals[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this CmdQueryAiSignalReply to JSON.
+         * @function toJSON
+         * @memberof pb.CmdQueryAiSignalReply
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdQueryAiSignalReply.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdQueryAiSignalReply;
+    })();
+
     pb.QuotesService = (function () {
 
         /**
@@ -26474,6 +30600,72 @@ $root.pb = (function () {
          * @variation 2
          */
 
+        /**
+         * Callback as used by {@link pb.QuotesService#queryAiStockList}.
+         * @memberof pb.QuotesService
+         * @typedef QueryAiStockListCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {pb.CmdQueryAiStockListReply} [response] CmdQueryAiStockListReply
+         */
+
+        /**
+         * Calls QueryAiStockList.
+         * @function queryAiStockList
+         * @memberof pb.QuotesService
+         * @instance
+         * @param {pb.ICmdQueryAiStockList} request CmdQueryAiStockList message or plain object
+         * @param {pb.QuotesService.QueryAiStockListCallback} callback Node-style callback called with the error, if any, and CmdQueryAiStockListReply
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(QuotesService.prototype.queryAiStockList = function queryAiStockList(request, callback) {
+            return this.rpcCall(queryAiStockList, $root.pb.CmdQueryAiStockList, $root.pb.CmdQueryAiStockListReply, request, callback);
+        }, "name", { value: "QueryAiStockList" });
+
+        /**
+         * Calls QueryAiStockList.
+         * @function queryAiStockList
+         * @memberof pb.QuotesService
+         * @instance
+         * @param {pb.ICmdQueryAiStockList} request CmdQueryAiStockList message or plain object
+         * @returns {Promise<pb.CmdQueryAiStockListReply>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link pb.QuotesService#queryAiSignal}.
+         * @memberof pb.QuotesService
+         * @typedef QueryAiSignalCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {pb.CmdQueryAiSignalReply} [response] CmdQueryAiSignalReply
+         */
+
+        /**
+         * Calls QueryAiSignal.
+         * @function queryAiSignal
+         * @memberof pb.QuotesService
+         * @instance
+         * @param {pb.ICmdQueryAiSignal} request CmdQueryAiSignal message or plain object
+         * @param {pb.QuotesService.QueryAiSignalCallback} callback Node-style callback called with the error, if any, and CmdQueryAiSignalReply
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(QuotesService.prototype.queryAiSignal = function queryAiSignal(request, callback) {
+            return this.rpcCall(queryAiSignal, $root.pb.CmdQueryAiSignal, $root.pb.CmdQueryAiSignalReply, request, callback);
+        }, "name", { value: "QueryAiSignal" });
+
+        /**
+         * Calls QueryAiSignal.
+         * @function queryAiSignal
+         * @memberof pb.QuotesService
+         * @instance
+         * @param {pb.ICmdQueryAiSignal} request CmdQueryAiSignal message or plain object
+         * @returns {Promise<pb.CmdQueryAiSignalReply>} Promise
+         * @variation 2
+         */
+
         return QuotesService;
     })();
 
@@ -26546,6 +30738,64 @@ $root.pb = (function () {
     })();
 
     /**
+     * AppFrom enum.
+     * @name pb.AppFrom
+     * @enum {number}
+     * @property {number} Android_000=0 Android_000 value
+     * @property {number} Android_001=1 Android_001 value
+     * @property {number} Android_201=201 Android_201 value
+     * @property {number} Android_204=204 Android_204 value
+     * @property {number} Android_205=205 Android_205 value
+     * @property {number} Android_206=206 Android_206 value
+     * @property {number} Android_208=208 Android_208 value
+     * @property {number} Android_209=209 Android_209 value
+     * @property {number} Android_210=210 Android_210 value
+     * @property {number} Android_211=211 Android_211 value
+     * @property {number} Android_212=212 Android_212 value
+     * @property {number} Android_301=301 Android_301 value
+     * @property {number} Android_302=302 Android_302 value
+     * @property {number} Android_601=601 Android_601 value
+     * @property {number} Android_1000=1000 Android_1000 value
+     * @property {number} Android_1204=1204 Android_1204 value
+     * @property {number} Android_1205=1205 Android_1205 value
+     * @property {number} Android_1208=1208 Android_1208 value
+     * @property {number} Android_1212=1212 Android_1212 value
+     * @property {number} WebsiteAndriod=4999 WebsiteAndriod value
+     * @property {number} WebsiteIos=6666 WebsiteIos value
+     * @property {number} IosAppleStore=6667 IosAppleStore value
+     * @property {number} Ipad=6668 Ipad value
+     * @property {number} WeChatMinProgram=8888 WeChatMinProgram value
+     */
+    pb.AppFrom = (function () {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Android_000"] = 0;
+        values[valuesById[1] = "Android_001"] = 1;
+        values[valuesById[201] = "Android_201"] = 201;
+        values[valuesById[204] = "Android_204"] = 204;
+        values[valuesById[205] = "Android_205"] = 205;
+        values[valuesById[206] = "Android_206"] = 206;
+        values[valuesById[208] = "Android_208"] = 208;
+        values[valuesById[209] = "Android_209"] = 209;
+        values[valuesById[210] = "Android_210"] = 210;
+        values[valuesById[211] = "Android_211"] = 211;
+        values[valuesById[212] = "Android_212"] = 212;
+        values[valuesById[301] = "Android_301"] = 301;
+        values[valuesById[302] = "Android_302"] = 302;
+        values[valuesById[601] = "Android_601"] = 601;
+        values[valuesById[1000] = "Android_1000"] = 1000;
+        values[valuesById[1204] = "Android_1204"] = 1204;
+        values[valuesById[1205] = "Android_1205"] = 1205;
+        values[valuesById[1208] = "Android_1208"] = 1208;
+        values[valuesById[1212] = "Android_1212"] = 1212;
+        values[valuesById[4999] = "WebsiteAndriod"] = 4999;
+        values[valuesById[6666] = "WebsiteIos"] = 6666;
+        values[valuesById[6667] = "IosAppleStore"] = 6667;
+        values[valuesById[6668] = "Ipad"] = 6668;
+        values[valuesById[8888] = "WeChatMinProgram"] = 8888;
+        return values;
+    })();
+
+    /**
      * LoginType enum.
      * @name pb.LoginType
      * @enum {number}
@@ -26553,6 +30803,7 @@ $root.pb = (function () {
      * @property {number} MobilePhoneId=1 MobilePhoneId value
      * @property {number} WeChat=2 WeChat value
      * @property {number} QQ=3 QQ value
+     * @property {number} WeChat_MiniProg=4 WeChat_MiniProg value
      * @property {number} AppTest=98 AppTest value
      * @property {number} WebTest=99 WebTest value
      */
@@ -26562,33 +30813,50 @@ $root.pb = (function () {
         values[valuesById[1] = "MobilePhoneId"] = 1;
         values[valuesById[2] = "WeChat"] = 2;
         values[valuesById[3] = "QQ"] = 3;
+        values[valuesById[4] = "WeChat_MiniProg"] = 4;
         values[valuesById[98] = "AppTest"] = 98;
         values[valuesById[99] = "WebTest"] = 99;
         return values;
     })();
 
-    pb.CmdRegistry = (function () {
+    /**
+     * AdPosition enum.
+     * @name pb.AdPosition
+     * @enum {number}
+     * @property {number} AdPosition_NULL=0 AdPosition_NULL value
+     * @property {number} StartUp=1 StartUp value
+     * @property {number} Main=11 Main value
+     */
+    pb.AdPosition = (function () {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "AdPosition_NULL"] = 0;
+        values[valuesById[1] = "StartUp"] = 1;
+        values[valuesById[11] = "Main"] = 11;
+        return values;
+    })();
+
+    pb.AdClicked = (function () {
 
         /**
-         * Properties of a CmdRegistry.
+         * Properties of an AdClicked.
          * @memberof pb
-         * @interface ICmdRegistry
-         * @property {string|null} [account] CmdRegistry account
-         * @property {pb.LoginType|null} [type] CmdRegistry type
-         * @property {string|null} [pwd] CmdRegistry pwd
-         * @property {string|null} [sms] CmdRegistry sms
-         * @property {pb.AppFrom|null} [from] CmdRegistry from
+         * @interface IAdClicked
+         * @property {number|null} [uid] AdClicked uid
+         * @property {number|null} [pos] AdClicked pos
+         * @property {string|null} [url] AdClicked url
+         * @property {pb.AppFrom|null} [from] AdClicked from
+         * @property {string|null} [ua] AdClicked ua
          */
 
         /**
-         * Constructs a new CmdRegistry.
+         * Constructs a new AdClicked.
          * @memberof pb
-         * @classdesc Represents a CmdRegistry.
-         * @implements ICmdRegistry
+         * @classdesc Represents an AdClicked.
+         * @implements IAdClicked
          * @constructor
-         * @param {pb.ICmdRegistry=} [properties] Properties to set
+         * @param {pb.IAdClicked=} [properties] Properties to set
          */
-        function CmdRegistry(properties) {
+        function AdClicked(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -26596,127 +30864,127 @@ $root.pb = (function () {
         }
 
         /**
-         * CmdRegistry account.
-         * @member {string} account
-         * @memberof pb.CmdRegistry
+         * AdClicked uid.
+         * @member {number} uid
+         * @memberof pb.AdClicked
          * @instance
          */
-        CmdRegistry.prototype.account = "";
+        AdClicked.prototype.uid = 0;
 
         /**
-         * CmdRegistry type.
-         * @member {pb.LoginType} type
-         * @memberof pb.CmdRegistry
+         * AdClicked pos.
+         * @member {number} pos
+         * @memberof pb.AdClicked
          * @instance
          */
-        CmdRegistry.prototype.type = 0;
+        AdClicked.prototype.pos = 0;
 
         /**
-         * CmdRegistry pwd.
-         * @member {string} pwd
-         * @memberof pb.CmdRegistry
+         * AdClicked url.
+         * @member {string} url
+         * @memberof pb.AdClicked
          * @instance
          */
-        CmdRegistry.prototype.pwd = "";
+        AdClicked.prototype.url = "";
 
         /**
-         * CmdRegistry sms.
-         * @member {string} sms
-         * @memberof pb.CmdRegistry
-         * @instance
-         */
-        CmdRegistry.prototype.sms = "";
-
-        /**
-         * CmdRegistry from.
+         * AdClicked from.
          * @member {pb.AppFrom} from
-         * @memberof pb.CmdRegistry
+         * @memberof pb.AdClicked
          * @instance
          */
-        CmdRegistry.prototype.from = 0;
+        AdClicked.prototype.from = 0;
 
         /**
-         * Creates a new CmdRegistry instance using the specified properties.
-         * @function create
-         * @memberof pb.CmdRegistry
-         * @static
-         * @param {pb.ICmdRegistry=} [properties] Properties to set
-         * @returns {pb.CmdRegistry} CmdRegistry instance
+         * AdClicked ua.
+         * @member {string} ua
+         * @memberof pb.AdClicked
+         * @instance
          */
-        CmdRegistry.create = function create(properties) {
-            return new CmdRegistry(properties);
+        AdClicked.prototype.ua = "";
+
+        /**
+         * Creates a new AdClicked instance using the specified properties.
+         * @function create
+         * @memberof pb.AdClicked
+         * @static
+         * @param {pb.IAdClicked=} [properties] Properties to set
+         * @returns {pb.AdClicked} AdClicked instance
+         */
+        AdClicked.create = function create(properties) {
+            return new AdClicked(properties);
         };
 
         /**
-         * Encodes the specified CmdRegistry message. Does not implicitly {@link pb.CmdRegistry.verify|verify} messages.
+         * Encodes the specified AdClicked message. Does not implicitly {@link pb.AdClicked.verify|verify} messages.
          * @function encode
-         * @memberof pb.CmdRegistry
+         * @memberof pb.AdClicked
          * @static
-         * @param {pb.ICmdRegistry} message CmdRegistry message or plain object to encode
+         * @param {pb.IAdClicked} message AdClicked message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CmdRegistry.encode = function encode(message, writer) {
+        AdClicked.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.account != null && Object.hasOwnProperty.call(message, "account"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.account);
-            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
-            if (message.pwd != null && Object.hasOwnProperty.call(message, "pwd"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pwd);
-            if (message.sms != null && Object.hasOwnProperty.call(message, "sms"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.sms);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
+            if (message.pos != null && Object.hasOwnProperty.call(message, "pos"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pos);
+            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.url);
             if (message.from != null && Object.hasOwnProperty.call(message, "from"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.from);
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.from);
+            if (message.ua != null && Object.hasOwnProperty.call(message, "ua"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.ua);
             return writer;
         };
 
         /**
-         * Encodes the specified CmdRegistry message, length delimited. Does not implicitly {@link pb.CmdRegistry.verify|verify} messages.
+         * Encodes the specified AdClicked message, length delimited. Does not implicitly {@link pb.AdClicked.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof pb.CmdRegistry
+         * @memberof pb.AdClicked
          * @static
-         * @param {pb.ICmdRegistry} message CmdRegistry message or plain object to encode
+         * @param {pb.IAdClicked} message AdClicked message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CmdRegistry.encodeDelimited = function encodeDelimited(message, writer) {
+        AdClicked.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a CmdRegistry message from the specified reader or buffer.
+         * Decodes an AdClicked message from the specified reader or buffer.
          * @function decode
-         * @memberof pb.CmdRegistry
+         * @memberof pb.AdClicked
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {pb.CmdRegistry} CmdRegistry
+         * @returns {pb.AdClicked} AdClicked
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CmdRegistry.decode = function decode(reader, length) {
+        AdClicked.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdRegistry();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.AdClicked();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                     case 1:
-                        message.account = reader.string();
+                        message.uid = reader.int32();
                         break;
                     case 2:
-                        message.type = reader.int32();
+                        message.pos = reader.int32();
                         break;
                     case 3:
-                        message.pwd = reader.string();
+                        message.url = reader.string();
                         break;
                     case 4:
-                        message.sms = reader.string();
+                        message.from = reader.int32();
                         break;
                     case 5:
-                        message.from = reader.int32();
+                        message.ua = reader.string();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -26727,53 +30995,41 @@ $root.pb = (function () {
         };
 
         /**
-         * Decodes a CmdRegistry message from the specified reader or buffer, length delimited.
+         * Decodes an AdClicked message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof pb.CmdRegistry
+         * @memberof pb.AdClicked
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {pb.CmdRegistry} CmdRegistry
+         * @returns {pb.AdClicked} AdClicked
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CmdRegistry.decodeDelimited = function decodeDelimited(reader) {
+        AdClicked.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a CmdRegistry message.
+         * Verifies an AdClicked message.
          * @function verify
-         * @memberof pb.CmdRegistry
+         * @memberof pb.AdClicked
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CmdRegistry.verify = function verify(message) {
+        AdClicked.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.account != null && message.hasOwnProperty("account"))
-                if (!$util.isString(message.account))
-                    return "account: string expected";
-            if (message.type != null && message.hasOwnProperty("type"))
-                switch (message.type) {
-                    default:
-                        return "type: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 98:
-                    case 99:
-                        break;
-                }
-            if (message.pwd != null && message.hasOwnProperty("pwd"))
-                if (!$util.isString(message.pwd))
-                    return "pwd: string expected";
-            if (message.sms != null && message.hasOwnProperty("sms"))
-                if (!$util.isString(message.sms))
-                    return "sms: string expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.pos != null && message.hasOwnProperty("pos"))
+                if (!$util.isInteger(message.pos))
+                    return "pos: integer expected";
+            if (message.url != null && message.hasOwnProperty("url"))
+                if (!$util.isString(message.url))
+                    return "url: string expected";
             if (message.from != null && message.hasOwnProperty("from"))
                 switch (message.from) {
                     default:
@@ -26797,60 +31053,37 @@ $root.pb = (function () {
                     case 1205:
                     case 1208:
                     case 1212:
+                    case 4999:
                     case 6666:
                     case 6667:
-                    case 7777:
-                    case 7778:
+                    case 6668:
                     case 8888:
                         break;
                 }
+            if (message.ua != null && message.hasOwnProperty("ua"))
+                if (!$util.isString(message.ua))
+                    return "ua: string expected";
             return null;
         };
 
         /**
-         * Creates a CmdRegistry message from a plain object. Also converts values to their respective internal types.
+         * Creates an AdClicked message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof pb.CmdRegistry
+         * @memberof pb.AdClicked
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {pb.CmdRegistry} CmdRegistry
+         * @returns {pb.AdClicked} AdClicked
          */
-        CmdRegistry.fromObject = function fromObject(object) {
-            if (object instanceof $root.pb.CmdRegistry)
+        AdClicked.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.AdClicked)
                 return object;
-            var message = new $root.pb.CmdRegistry();
-            if (object.account != null)
-                message.account = String(object.account);
-            switch (object.type) {
-                case "LoginType_NULL":
-                case 0:
-                    message.type = 0;
-                    break;
-                case "MobilePhoneId":
-                case 1:
-                    message.type = 1;
-                    break;
-                case "WeChat":
-                case 2:
-                    message.type = 2;
-                    break;
-                case "QQ":
-                case 3:
-                    message.type = 3;
-                    break;
-                case "AppTest":
-                case 98:
-                    message.type = 98;
-                    break;
-                case "WebTest":
-                case 99:
-                    message.type = 99;
-                    break;
-            }
-            if (object.pwd != null)
-                message.pwd = String(object.pwd);
-            if (object.sms != null)
-                message.sms = String(object.sms);
+            var message = new $root.pb.AdClicked();
+            if (object.uid != null)
+                message.uid = object.uid | 0;
+            if (object.pos != null)
+                message.pos = object.pos | 0;
+            if (object.url != null)
+                message.url = String(object.url);
             switch (object.from) {
                 case "Android_000":
                 case 0:
@@ -26928,21 +31161,460 @@ $root.pb = (function () {
                 case 1212:
                     message.from = 1212;
                     break;
-                case "IosAppleStore":
+                case "WebsiteAndriod":
+                case 4999:
+                    message.from = 4999;
+                    break;
+                case "WebsiteIos":
                 case 6666:
                     message.from = 6666;
                     break;
-                case "Ipad":
+                case "IosAppleStore":
                 case 6667:
                     message.from = 6667;
                     break;
-                case "WebsiteIos":
-                case 7777:
-                    message.from = 7777;
+                case "Ipad":
+                case 6668:
+                    message.from = 6668;
+                    break;
+                case "WeChatMinProgram":
+                case 8888:
+                    message.from = 8888;
+                    break;
+            }
+            if (object.ua != null)
+                message.ua = String(object.ua);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an AdClicked message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.AdClicked
+         * @static
+         * @param {pb.AdClicked} message AdClicked
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        AdClicked.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.uid = 0;
+                object.pos = 0;
+                object.url = "";
+                object.from = options.enums === String ? "Android_000" : 0;
+                object.ua = "";
+            }
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            if (message.pos != null && message.hasOwnProperty("pos"))
+                object.pos = message.pos;
+            if (message.url != null && message.hasOwnProperty("url"))
+                object.url = message.url;
+            if (message.from != null && message.hasOwnProperty("from"))
+                object.from = options.enums === String ? $root.pb.AppFrom[message.from] : message.from;
+            if (message.ua != null && message.hasOwnProperty("ua"))
+                object.ua = message.ua;
+            return object;
+        };
+
+        /**
+         * Converts this AdClicked to JSON.
+         * @function toJSON
+         * @memberof pb.AdClicked
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        AdClicked.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return AdClicked;
+    })();
+
+    pb.CmdRegistry = (function () {
+
+        /**
+         * Properties of a CmdRegistry.
+         * @memberof pb
+         * @interface ICmdRegistry
+         * @property {string|null} [account] CmdRegistry account
+         * @property {pb.LoginType|null} [type] CmdRegistry type
+         * @property {string|null} [pwd] CmdRegistry pwd
+         * @property {string|null} [smsCode] CmdRegistry smsCode
+         * @property {pb.AppFrom|null} [from] CmdRegistry from
+         */
+
+        /**
+         * Constructs a new CmdRegistry.
+         * @memberof pb
+         * @classdesc Represents a CmdRegistry.
+         * @implements ICmdRegistry
+         * @constructor
+         * @param {pb.ICmdRegistry=} [properties] Properties to set
+         */
+        function CmdRegistry(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdRegistry account.
+         * @member {string} account
+         * @memberof pb.CmdRegistry
+         * @instance
+         */
+        CmdRegistry.prototype.account = "";
+
+        /**
+         * CmdRegistry type.
+         * @member {pb.LoginType} type
+         * @memberof pb.CmdRegistry
+         * @instance
+         */
+        CmdRegistry.prototype.type = 0;
+
+        /**
+         * CmdRegistry pwd.
+         * @member {string} pwd
+         * @memberof pb.CmdRegistry
+         * @instance
+         */
+        CmdRegistry.prototype.pwd = "";
+
+        /**
+         * CmdRegistry smsCode.
+         * @member {string} smsCode
+         * @memberof pb.CmdRegistry
+         * @instance
+         */
+        CmdRegistry.prototype.smsCode = "";
+
+        /**
+         * CmdRegistry from.
+         * @member {pb.AppFrom} from
+         * @memberof pb.CmdRegistry
+         * @instance
+         */
+        CmdRegistry.prototype.from = 0;
+
+        /**
+         * Creates a new CmdRegistry instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdRegistry
+         * @static
+         * @param {pb.ICmdRegistry=} [properties] Properties to set
+         * @returns {pb.CmdRegistry} CmdRegistry instance
+         */
+        CmdRegistry.create = function create(properties) {
+            return new CmdRegistry(properties);
+        };
+
+        /**
+         * Encodes the specified CmdRegistry message. Does not implicitly {@link pb.CmdRegistry.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdRegistry
+         * @static
+         * @param {pb.ICmdRegistry} message CmdRegistry message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRegistry.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.account != null && Object.hasOwnProperty.call(message, "account"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.account);
+            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+            if (message.pwd != null && Object.hasOwnProperty.call(message, "pwd"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pwd);
+            if (message.smsCode != null && Object.hasOwnProperty.call(message, "smsCode"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.smsCode);
+            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.from);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdRegistry message, length delimited. Does not implicitly {@link pb.CmdRegistry.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdRegistry
+         * @static
+         * @param {pb.ICmdRegistry} message CmdRegistry message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRegistry.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdRegistry message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdRegistry
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdRegistry} CmdRegistry
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRegistry.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdRegistry();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.account = reader.string();
+                        break;
+                    case 2:
+                        message.type = reader.int32();
+                        break;
+                    case 3:
+                        message.pwd = reader.string();
+                        break;
+                    case 4:
+                        message.smsCode = reader.string();
+                        break;
+                    case 5:
+                        message.from = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdRegistry message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdRegistry
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdRegistry} CmdRegistry
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRegistry.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdRegistry message.
+         * @function verify
+         * @memberof pb.CmdRegistry
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdRegistry.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.account != null && message.hasOwnProperty("account"))
+                if (!$util.isString(message.account))
+                    return "account: string expected";
+            if (message.type != null && message.hasOwnProperty("type"))
+                switch (message.type) {
+                    default:
+                        return "type: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 98:
+                    case 99:
+                        break;
+                }
+            if (message.pwd != null && message.hasOwnProperty("pwd"))
+                if (!$util.isString(message.pwd))
+                    return "pwd: string expected";
+            if (message.smsCode != null && message.hasOwnProperty("smsCode"))
+                if (!$util.isString(message.smsCode))
+                    return "smsCode: string expected";
+            if (message.from != null && message.hasOwnProperty("from"))
+                switch (message.from) {
+                    default:
+                        return "from: enum value expected";
+                    case 0:
+                    case 1:
+                    case 201:
+                    case 204:
+                    case 205:
+                    case 206:
+                    case 208:
+                    case 209:
+                    case 210:
+                    case 211:
+                    case 212:
+                    case 301:
+                    case 302:
+                    case 601:
+                    case 1000:
+                    case 1204:
+                    case 1205:
+                    case 1208:
+                    case 1212:
+                    case 4999:
+                    case 6666:
+                    case 6667:
+                    case 6668:
+                    case 8888:
+                        break;
+                }
+            return null;
+        };
+
+        /**
+         * Creates a CmdRegistry message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdRegistry
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdRegistry} CmdRegistry
+         */
+        CmdRegistry.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdRegistry)
+                return object;
+            var message = new $root.pb.CmdRegistry();
+            if (object.account != null)
+                message.account = String(object.account);
+            switch (object.type) {
+                case "LoginType_NULL":
+                case 0:
+                    message.type = 0;
+                    break;
+                case "MobilePhoneId":
+                case 1:
+                    message.type = 1;
+                    break;
+                case "WeChat":
+                case 2:
+                    message.type = 2;
+                    break;
+                case "QQ":
+                case 3:
+                    message.type = 3;
+                    break;
+                case "WeChat_MiniProg":
+                case 4:
+                    message.type = 4;
+                    break;
+                case "AppTest":
+                case 98:
+                    message.type = 98;
+                    break;
+                case "WebTest":
+                case 99:
+                    message.type = 99;
+                    break;
+            }
+            if (object.pwd != null)
+                message.pwd = String(object.pwd);
+            if (object.smsCode != null)
+                message.smsCode = String(object.smsCode);
+            switch (object.from) {
+                case "Android_000":
+                case 0:
+                    message.from = 0;
+                    break;
+                case "Android_001":
+                case 1:
+                    message.from = 1;
+                    break;
+                case "Android_201":
+                case 201:
+                    message.from = 201;
+                    break;
+                case "Android_204":
+                case 204:
+                    message.from = 204;
+                    break;
+                case "Android_205":
+                case 205:
+                    message.from = 205;
+                    break;
+                case "Android_206":
+                case 206:
+                    message.from = 206;
+                    break;
+                case "Android_208":
+                case 208:
+                    message.from = 208;
+                    break;
+                case "Android_209":
+                case 209:
+                    message.from = 209;
+                    break;
+                case "Android_210":
+                case 210:
+                    message.from = 210;
+                    break;
+                case "Android_211":
+                case 211:
+                    message.from = 211;
+                    break;
+                case "Android_212":
+                case 212:
+                    message.from = 212;
+                    break;
+                case "Android_301":
+                case 301:
+                    message.from = 301;
+                    break;
+                case "Android_302":
+                case 302:
+                    message.from = 302;
+                    break;
+                case "Android_601":
+                case 601:
+                    message.from = 601;
+                    break;
+                case "Android_1000":
+                case 1000:
+                    message.from = 1000;
+                    break;
+                case "Android_1204":
+                case 1204:
+                    message.from = 1204;
+                    break;
+                case "Android_1205":
+                case 1205:
+                    message.from = 1205;
+                    break;
+                case "Android_1208":
+                case 1208:
+                    message.from = 1208;
+                    break;
+                case "Android_1212":
+                case 1212:
+                    message.from = 1212;
                     break;
                 case "WebsiteAndriod":
-                case 7778:
-                    message.from = 7778;
+                case 4999:
+                    message.from = 4999;
+                    break;
+                case "WebsiteIos":
+                case 6666:
+                    message.from = 6666;
+                    break;
+                case "IosAppleStore":
+                case 6667:
+                    message.from = 6667;
+                    break;
+                case "Ipad":
+                case 6668:
+                    message.from = 6668;
                     break;
                 case "WeChatMinProgram":
                 case 8888:
@@ -26969,7 +31641,7 @@ $root.pb = (function () {
                 object.account = "";
                 object.type = options.enums === String ? "LoginType_NULL" : 0;
                 object.pwd = "";
-                object.sms = "";
+                object.smsCode = "";
                 object.from = options.enums === String ? "Android_000" : 0;
             }
             if (message.account != null && message.hasOwnProperty("account"))
@@ -26978,8 +31650,8 @@ $root.pb = (function () {
                 object.type = options.enums === String ? $root.pb.LoginType[message.type] : message.type;
             if (message.pwd != null && message.hasOwnProperty("pwd"))
                 object.pwd = message.pwd;
-            if (message.sms != null && message.hasOwnProperty("sms"))
-                object.sms = message.sms;
+            if (message.smsCode != null && message.hasOwnProperty("smsCode"))
+                object.smsCode = message.smsCode;
             if (message.from != null && message.hasOwnProperty("from"))
                 object.from = options.enums === String ? $root.pb.AppFrom[message.from] : message.from;
             return object;
@@ -27182,6 +31854,7 @@ $root.pb = (function () {
                     case 1:
                     case 2:
                     case 3:
+                    case 4:
                     case 98:
                     case 99:
                         break;
@@ -27212,10 +31885,10 @@ $root.pb = (function () {
                     case 1205:
                     case 1208:
                     case 1212:
+                    case 4999:
                     case 6666:
                     case 6667:
-                    case 7777:
-                    case 7778:
+                    case 6668:
                     case 8888:
                         break;
                 }
@@ -27252,6 +31925,10 @@ $root.pb = (function () {
                 case "QQ":
                 case 3:
                     message.type = 3;
+                    break;
+                case "WeChat_MiniProg":
+                case 4:
+                    message.type = 4;
                     break;
                 case "AppTest":
                 case 98:
@@ -27341,21 +32018,21 @@ $root.pb = (function () {
                 case 1212:
                     message.from = 1212;
                     break;
-                case "IosAppleStore":
+                case "WebsiteAndriod":
+                case 4999:
+                    message.from = 4999;
+                    break;
+                case "WebsiteIos":
                 case 6666:
                     message.from = 6666;
                     break;
-                case "Ipad":
+                case "IosAppleStore":
                 case 6667:
                     message.from = 6667;
                     break;
-                case "WebsiteIos":
-                case 7777:
-                    message.from = 7777;
-                    break;
-                case "WebsiteAndriod":
-                case 7778:
-                    message.from = 7778;
+                case "Ipad":
+                case 6668:
+                    message.from = 6668;
                     break;
                 case "WeChatMinProgram":
                 case 8888:
@@ -29677,6 +34354,7 @@ $root.pb = (function () {
                     case 1:
                     case 2:
                     case 3:
+                    case 4:
                     case 98:
                     case 99:
                         break;
@@ -29704,10 +34382,10 @@ $root.pb = (function () {
                     case 1205:
                     case 1208:
                     case 1212:
+                    case 4999:
                     case 6666:
                     case 6667:
-                    case 7777:
-                    case 7778:
+                    case 6668:
                     case 8888:
                         break;
                 }
@@ -29747,6 +34425,10 @@ $root.pb = (function () {
                 case "QQ":
                 case 3:
                     message.type = 3;
+                    break;
+                case "WeChat_MiniProg":
+                case 4:
+                    message.type = 4;
                     break;
                 case "AppTest":
                 case 98:
@@ -29834,21 +34516,21 @@ $root.pb = (function () {
                 case 1212:
                     message.from = 1212;
                     break;
-                case "IosAppleStore":
+                case "WebsiteAndriod":
+                case 4999:
+                    message.from = 4999;
+                    break;
+                case "WebsiteIos":
                 case 6666:
                     message.from = 6666;
                     break;
-                case "Ipad":
+                case "IosAppleStore":
                 case 6667:
                     message.from = 6667;
                     break;
-                case "WebsiteIos":
-                case 7777:
-                    message.from = 7777;
-                    break;
-                case "WebsiteAndriod":
-                case 7778:
-                    message.from = 7778;
+                case "Ipad":
+                case 6668:
+                    message.from = 6668;
                     break;
                 case "WeChatMinProgram":
                 case 8888:
@@ -31627,6 +36309,8 @@ $root.pb = (function () {
                     case 1016:
                     case 1018:
                     case 1020:
+                    case 1022:
+                    case 1024:
                     case 1200:
                     case 1300:
                     case 2001:
@@ -31639,6 +36323,10 @@ $root.pb = (function () {
                     case 2008:
                     case 2009:
                     case 2010:
+                    case 2011:
+                    case 2012:
+                    case 2013:
+                    case 2014:
                     case 3001:
                     case 3002:
                     case 3003:
@@ -31649,6 +36337,28 @@ $root.pb = (function () {
                     case 3008:
                     case 3009:
                     case 3010:
+                    case 3011:
+                    case 3012:
+                    case 3013:
+                    case 3014:
+                    case 3015:
+                    case 3016:
+                    case 3017:
+                    case 3018:
+                    case 3019:
+                    case 3020:
+                    case 3021:
+                    case 3022:
+                    case 3023:
+                    case 3024:
+                    case 3025:
+                    case 3026:
+                    case 3027:
+                    case 3028:
+                    case 3029:
+                    case 3030:
+                    case 3999:
+                    case 4000:
                     case 4001:
                     case 4002:
                     case 4003:
@@ -31687,8 +36397,12 @@ $root.pb = (function () {
                     case 4036:
                     case 4037:
                     case 4038:
-                    case 5000:
-                    case 5999:
+                    case 4039:
+                    case 4040:
+                    case 4041:
+                    case 4042:
+                    case 4043:
+                    case 4044:
                     case 5003:
                     case 5004:
                     case 5005:
@@ -31707,12 +36421,6 @@ $root.pb = (function () {
                     case 5214:
                     case 5216:
                     case 5218:
-                    case 6000:
-                    case 6001:
-                    case 6002:
-                    case 6003:
-                    case 6004:
-                    case 6005:
                     case 10001:
                     case 10003:
                     case 10005:
@@ -31729,6 +36437,7 @@ $root.pb = (function () {
                     case 10027:
                     case 10028:
                     case 10030:
+                    case 10032:
                         break;
                 }
             if (message.buf != null && message.hasOwnProperty("buf"))
@@ -31806,6 +36515,14 @@ $root.pb = (function () {
                 case 1020:
                     message.id = 1020;
                     break;
+                case "Sync_S2C_MutipleLogin":
+                case 1022:
+                    message.id = 1022;
+                    break;
+                case "Sync_S2C_TaskProgress":
+                case 1024:
+                    message.id = 1024;
+                    break;
                 case "Sync_C2S_GameHeart":
                 case 1200:
                     message.id = 1200;
@@ -31854,6 +36571,22 @@ $root.pb = (function () {
                 case 2010:
                     message.id = 2010;
                     break;
+                case "Req_QueryAiStockList":
+                case 2011:
+                    message.id = 2011;
+                    break;
+                case "Rep_QueryAiStockList":
+                case 2012:
+                    message.id = 2012;
+                    break;
+                case "Req_QueryAiSignal":
+                case 2013:
+                    message.id = 2013;
+                    break;
+                case "Rep_QueryAiSignal":
+                case 2014:
+                    message.id = 2014;
+                    break;
                 case "Req_Hall_UploadIcon":
                 case 3001:
                     message.id = 3001;
@@ -31862,11 +36595,11 @@ $root.pb = (function () {
                 case 3002:
                     message.id = 3002;
                     break;
-                case "Req_Hall_EditNick":
+                case "Req_Hall_DownloadIcon":
                 case 3003:
                     message.id = 3003;
                     break;
-                case "Rep_Hall_EditNick":
+                case "Rep_Hall_DownploadIcon":
                 case 3004:
                     message.id = 3004;
                     break;
@@ -31878,21 +36611,109 @@ $root.pb = (function () {
                 case 3006:
                     message.id = 3006;
                     break;
-                case "Req_Hall_BackBag":
+                case "Req_Hall_EditNick":
                 case 3007:
                     message.id = 3007;
                     break;
-                case "Rep_Hall_BackBag":
+                case "Rep_Hall_EditNick":
                 case 3008:
                     message.id = 3008;
                     break;
-                case "Req_Hall_GetItem":
+                case "Req_Hall_EditLocation":
                 case 3009:
                     message.id = 3009;
                     break;
-                case "Rep_Hall_GetItem":
+                case "Rep_Hall_EditLocation":
                 case 3010:
                     message.id = 3010;
+                    break;
+                case "Req_Hall_EditGender":
+                case 3011:
+                    message.id = 3011;
+                    break;
+                case "Rep_Hall_EditGender":
+                case 3012:
+                    message.id = 3012;
+                    break;
+                case "Req_Hall_BackBag":
+                case 3013:
+                    message.id = 3013;
+                    break;
+                case "Rep_Hall_BackBag":
+                case 3014:
+                    message.id = 3014;
+                    break;
+                case "Req_Hall_GetItem":
+                case 3015:
+                    message.id = 3015;
+                    break;
+                case "Rep_Hall_GetItem":
+                case 3016:
+                    message.id = 3016;
+                    break;
+                case "Req_Hall_EditFavorList":
+                case 3017:
+                    message.id = 3017;
+                    break;
+                case "Rep_Hall_EditFavorList":
+                case 3018:
+                    message.id = 3018;
+                    break;
+                case "Req_Hall_QueryPlayer":
+                case 3019:
+                    message.id = 3019;
+                    break;
+                case "Rep_Hall_QueryPlayer":
+                case 3020:
+                    message.id = 3020;
+                    break;
+                case "Req_Hall_SaveStudyProgress":
+                case 3021:
+                    message.id = 3021;
+                    break;
+                case "Rep_Hall_SaveStudyProgress":
+                case 3022:
+                    message.id = 3022;
+                    break;
+                case "Req_Hall_GetDailyTaskAward":
+                case 3023:
+                    message.id = 3023;
+                    break;
+                case "Rep_Hall_GetDailyTaskAward":
+                case 3024:
+                    message.id = 3024;
+                    break;
+                case "Req_Hall_UnlockGame":
+                case 3025:
+                    message.id = 3025;
+                    break;
+                case "Rep_Hall_UnlockGame":
+                case 3026:
+                    message.id = 3026;
+                    break;
+                case "Req_Hall_GetWeeklyAward":
+                case 3027:
+                    message.id = 3027;
+                    break;
+                case "Rep_Hall_GetWeeklyAward":
+                case 3028:
+                    message.id = 3028;
+                    break;
+                case "Req_Hall_QueryEventLog":
+                case 3029:
+                    message.id = 3029;
+                    break;
+                case "Rep_Hall_QueryEventLog":
+                case 3030:
+                    message.id = 3030;
+                    break;
+                case "Req_Hall_Logout":
+                case 3999:
+                    message.id = 3999;
+                    break;
+                case "Rep_Hall_Logout":
+                case 4000:
+                    message.id = 4000;
                     break;
                 case "Req_Game_Login":
                 case 4001:
@@ -32046,13 +36867,29 @@ $root.pb = (function () {
                 case 4038:
                     message.id = 4038;
                     break;
-                case "RoomMsgRange_BEG":
-                case 5000:
-                    message.id = 5000;
+                case "Req_Game_ZsjcBettingList":
+                case 4039:
+                    message.id = 4039;
                     break;
-                case "RoomMsgRange_END":
-                case 5999:
-                    message.id = 5999;
+                case "Rep_Game_ZsjcBettingList":
+                case 4040:
+                    message.id = 4040;
+                    break;
+                case "Req_Game_ZsjcBet":
+                case 4041:
+                    message.id = 4041;
+                    break;
+                case "Rep_Game_ZsjcBet":
+                case 4042:
+                    message.id = 4042;
+                    break;
+                case "Req_Game_ZsjcRanking":
+                case 4043:
+                    message.id = 4043;
+                    break;
+                case "Rep_Game_ZsjcRanking":
+                case 4044:
+                    message.id = 4044;
                     break;
                 case "Req_Room_Create":
                 case 5003:
@@ -32126,30 +36963,6 @@ $root.pb = (function () {
                 case 5218:
                     message.id = 5218;
                     break;
-                case "Req_Game_ZsjcBettingList":
-                case 6000:
-                    message.id = 6000;
-                    break;
-                case "Rep_Game_ZsjcBettingList":
-                case 6001:
-                    message.id = 6001;
-                    break;
-                case "Req_Game_ZsjcBet":
-                case 6002:
-                    message.id = 6002;
-                    break;
-                case "Rep_Game_ZsjcBet":
-                case 6003:
-                    message.id = 6003;
-                    break;
-                case "Req_Game_ZsjcRanking":
-                case 6004:
-                    message.id = 6004;
-                    break;
-                case "Rep_Game_ZsjcRanking":
-                case 6005:
-                    message.id = 6005;
-                    break;
                 case "S2S_HeartBeat":
                 case 10001:
                     message.id = 10001;
@@ -32213,6 +37026,10 @@ $root.pb = (function () {
                 case "S2S_Sync_ZsjcState":
                 case 10030:
                     message.id = 10030;
+                    break;
+                case "S2S_Update_DailyTaskProgress":
+                case 10032:
+                    message.id = 10032;
                     break;
             }
             if (object.buf != null)
@@ -33277,6 +38094,8 @@ $root.pb = (function () {
                     case 1016:
                     case 1018:
                     case 1020:
+                    case 1022:
+                    case 1024:
                     case 1200:
                     case 1300:
                     case 2001:
@@ -33289,6 +38108,10 @@ $root.pb = (function () {
                     case 2008:
                     case 2009:
                     case 2010:
+                    case 2011:
+                    case 2012:
+                    case 2013:
+                    case 2014:
                     case 3001:
                     case 3002:
                     case 3003:
@@ -33299,6 +38122,28 @@ $root.pb = (function () {
                     case 3008:
                     case 3009:
                     case 3010:
+                    case 3011:
+                    case 3012:
+                    case 3013:
+                    case 3014:
+                    case 3015:
+                    case 3016:
+                    case 3017:
+                    case 3018:
+                    case 3019:
+                    case 3020:
+                    case 3021:
+                    case 3022:
+                    case 3023:
+                    case 3024:
+                    case 3025:
+                    case 3026:
+                    case 3027:
+                    case 3028:
+                    case 3029:
+                    case 3030:
+                    case 3999:
+                    case 4000:
                     case 4001:
                     case 4002:
                     case 4003:
@@ -33337,8 +38182,12 @@ $root.pb = (function () {
                     case 4036:
                     case 4037:
                     case 4038:
-                    case 5000:
-                    case 5999:
+                    case 4039:
+                    case 4040:
+                    case 4041:
+                    case 4042:
+                    case 4043:
+                    case 4044:
                     case 5003:
                     case 5004:
                     case 5005:
@@ -33357,12 +38206,6 @@ $root.pb = (function () {
                     case 5214:
                     case 5216:
                     case 5218:
-                    case 6000:
-                    case 6001:
-                    case 6002:
-                    case 6003:
-                    case 6004:
-                    case 6005:
                     case 10001:
                     case 10003:
                     case 10005:
@@ -33379,6 +38222,7 @@ $root.pb = (function () {
                     case 10027:
                     case 10028:
                     case 10030:
+                    case 10032:
                         break;
                 }
             if (message.buf != null && message.hasOwnProperty("buf"))
@@ -33463,6 +38307,14 @@ $root.pb = (function () {
                 case 1020:
                     message.id = 1020;
                     break;
+                case "Sync_S2C_MutipleLogin":
+                case 1022:
+                    message.id = 1022;
+                    break;
+                case "Sync_S2C_TaskProgress":
+                case 1024:
+                    message.id = 1024;
+                    break;
                 case "Sync_C2S_GameHeart":
                 case 1200:
                     message.id = 1200;
@@ -33511,6 +38363,22 @@ $root.pb = (function () {
                 case 2010:
                     message.id = 2010;
                     break;
+                case "Req_QueryAiStockList":
+                case 2011:
+                    message.id = 2011;
+                    break;
+                case "Rep_QueryAiStockList":
+                case 2012:
+                    message.id = 2012;
+                    break;
+                case "Req_QueryAiSignal":
+                case 2013:
+                    message.id = 2013;
+                    break;
+                case "Rep_QueryAiSignal":
+                case 2014:
+                    message.id = 2014;
+                    break;
                 case "Req_Hall_UploadIcon":
                 case 3001:
                     message.id = 3001;
@@ -33519,11 +38387,11 @@ $root.pb = (function () {
                 case 3002:
                     message.id = 3002;
                     break;
-                case "Req_Hall_EditNick":
+                case "Req_Hall_DownloadIcon":
                 case 3003:
                     message.id = 3003;
                     break;
-                case "Rep_Hall_EditNick":
+                case "Rep_Hall_DownploadIcon":
                 case 3004:
                     message.id = 3004;
                     break;
@@ -33535,21 +38403,109 @@ $root.pb = (function () {
                 case 3006:
                     message.id = 3006;
                     break;
-                case "Req_Hall_BackBag":
+                case "Req_Hall_EditNick":
                 case 3007:
                     message.id = 3007;
                     break;
-                case "Rep_Hall_BackBag":
+                case "Rep_Hall_EditNick":
                 case 3008:
                     message.id = 3008;
                     break;
-                case "Req_Hall_GetItem":
+                case "Req_Hall_EditLocation":
                 case 3009:
                     message.id = 3009;
                     break;
-                case "Rep_Hall_GetItem":
+                case "Rep_Hall_EditLocation":
                 case 3010:
                     message.id = 3010;
+                    break;
+                case "Req_Hall_EditGender":
+                case 3011:
+                    message.id = 3011;
+                    break;
+                case "Rep_Hall_EditGender":
+                case 3012:
+                    message.id = 3012;
+                    break;
+                case "Req_Hall_BackBag":
+                case 3013:
+                    message.id = 3013;
+                    break;
+                case "Rep_Hall_BackBag":
+                case 3014:
+                    message.id = 3014;
+                    break;
+                case "Req_Hall_GetItem":
+                case 3015:
+                    message.id = 3015;
+                    break;
+                case "Rep_Hall_GetItem":
+                case 3016:
+                    message.id = 3016;
+                    break;
+                case "Req_Hall_EditFavorList":
+                case 3017:
+                    message.id = 3017;
+                    break;
+                case "Rep_Hall_EditFavorList":
+                case 3018:
+                    message.id = 3018;
+                    break;
+                case "Req_Hall_QueryPlayer":
+                case 3019:
+                    message.id = 3019;
+                    break;
+                case "Rep_Hall_QueryPlayer":
+                case 3020:
+                    message.id = 3020;
+                    break;
+                case "Req_Hall_SaveStudyProgress":
+                case 3021:
+                    message.id = 3021;
+                    break;
+                case "Rep_Hall_SaveStudyProgress":
+                case 3022:
+                    message.id = 3022;
+                    break;
+                case "Req_Hall_GetDailyTaskAward":
+                case 3023:
+                    message.id = 3023;
+                    break;
+                case "Rep_Hall_GetDailyTaskAward":
+                case 3024:
+                    message.id = 3024;
+                    break;
+                case "Req_Hall_UnlockGame":
+                case 3025:
+                    message.id = 3025;
+                    break;
+                case "Rep_Hall_UnlockGame":
+                case 3026:
+                    message.id = 3026;
+                    break;
+                case "Req_Hall_GetWeeklyAward":
+                case 3027:
+                    message.id = 3027;
+                    break;
+                case "Rep_Hall_GetWeeklyAward":
+                case 3028:
+                    message.id = 3028;
+                    break;
+                case "Req_Hall_QueryEventLog":
+                case 3029:
+                    message.id = 3029;
+                    break;
+                case "Rep_Hall_QueryEventLog":
+                case 3030:
+                    message.id = 3030;
+                    break;
+                case "Req_Hall_Logout":
+                case 3999:
+                    message.id = 3999;
+                    break;
+                case "Rep_Hall_Logout":
+                case 4000:
+                    message.id = 4000;
                     break;
                 case "Req_Game_Login":
                 case 4001:
@@ -33703,13 +38659,29 @@ $root.pb = (function () {
                 case 4038:
                     message.id = 4038;
                     break;
-                case "RoomMsgRange_BEG":
-                case 5000:
-                    message.id = 5000;
+                case "Req_Game_ZsjcBettingList":
+                case 4039:
+                    message.id = 4039;
                     break;
-                case "RoomMsgRange_END":
-                case 5999:
-                    message.id = 5999;
+                case "Rep_Game_ZsjcBettingList":
+                case 4040:
+                    message.id = 4040;
+                    break;
+                case "Req_Game_ZsjcBet":
+                case 4041:
+                    message.id = 4041;
+                    break;
+                case "Rep_Game_ZsjcBet":
+                case 4042:
+                    message.id = 4042;
+                    break;
+                case "Req_Game_ZsjcRanking":
+                case 4043:
+                    message.id = 4043;
+                    break;
+                case "Rep_Game_ZsjcRanking":
+                case 4044:
+                    message.id = 4044;
                     break;
                 case "Req_Room_Create":
                 case 5003:
@@ -33783,30 +38755,6 @@ $root.pb = (function () {
                 case 5218:
                     message.id = 5218;
                     break;
-                case "Req_Game_ZsjcBettingList":
-                case 6000:
-                    message.id = 6000;
-                    break;
-                case "Rep_Game_ZsjcBettingList":
-                case 6001:
-                    message.id = 6001;
-                    break;
-                case "Req_Game_ZsjcBet":
-                case 6002:
-                    message.id = 6002;
-                    break;
-                case "Rep_Game_ZsjcBet":
-                case 6003:
-                    message.id = 6003;
-                    break;
-                case "Req_Game_ZsjcRanking":
-                case 6004:
-                    message.id = 6004;
-                    break;
-                case "Rep_Game_ZsjcRanking":
-                case 6005:
-                    message.id = 6005;
-                    break;
                 case "S2S_HeartBeat":
                 case 10001:
                     message.id = 10001;
@@ -33870,6 +38818,10 @@ $root.pb = (function () {
                 case "S2S_Sync_ZsjcState":
                 case 10030:
                     message.id = 10030;
+                    break;
+                case "S2S_Update_DailyTaskProgress":
+                case 10032:
+                    message.id = 10032;
                     break;
             }
             if (object.buf != null)

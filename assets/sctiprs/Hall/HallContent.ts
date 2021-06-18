@@ -112,6 +112,11 @@ export default class NewClass extends cc.Component {
 		else if (name == 'userinfobg') {
 			GlobalEvent.emit(EventCfg.OPENPLAYERINFO);
 		}
+
+		//pk
+		else if (name == 'main_jj_pkdz') {
+			GlobalEvent.emit(EventCfg.OPENMATCHPK);
+		}
 	}
 
 	onDestroy() {

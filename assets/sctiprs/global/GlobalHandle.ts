@@ -16,6 +16,7 @@ export default class GlobalHandle {
             game: GameCfg.GameType,
         }
         socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(info), res => {
+            console.log(JSON.stringify(res));
             cb && (cb());
         })
 
@@ -289,7 +290,6 @@ export default class GlobalHandle {
 
     }
 
-
     // 查询游戏操作步骤
     public static GetGameOperations(ts, cb?) {
         let data = {
@@ -332,5 +332,27 @@ export default class GlobalHandle {
                 }
             }
         })
+    }
+
+    //进入房间：CmdRoomEnter
+
+    public static onReqRoomEnter(arr) {
+
+        let data = {
+            game: pb.GameType.JJ_PK,
+            uid: GameData.userID,
+            junXian: arr,
+        }
+
+        socket.send(pb.MessageId.Req_Room_Enter, PB.onReqRoomEnterBuff(data), (res) => {
+            console.log(JSON.stringify(res));
+            if (res.err) {
+
+            } else {
+                GameData.roomId = res.id;
+            }
+
+        })
+
     }
 }

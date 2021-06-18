@@ -9,6 +9,7 @@ import ComUtils from '../Utils/ComUtils';
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
 import AudioUtils from '../Utils/AudioUtils';
+import LLLog from '../common/utils/LLLog'
 
 window.global = window;
 
@@ -42,6 +43,8 @@ cc.Class({
 		GameCfgText.getStocktList();
 		//期货配置
 		GameCfgText.getQIHuoList();
+
+		LLLog.reConsole();
 
 		cc.macro.ENABLE_MULTI_TOUCH = false;
 

@@ -39,8 +39,6 @@ enum MessageType {
 	RoomChat = 10;	// 房间聊天消息
 	RoomInvite = 11;// 房间邀请
 }
-
-
 // 游戏类型
 enum GameType {
 	GameType_NULL = 0;
@@ -65,8 +63,6 @@ enum GameType {
 
 	MaxGameType = 30;	// 最大游戏类型编号
 }
-
-
 // 玩家的游戏属性
 enum GamePropertyId {
 	Gold = 0;				// 金币
@@ -78,9 +74,31 @@ enum GamePropertyId {
 	Coupon = 6;				// 奖券
 
 	
+	UnlockDxxl = 20;		// 定向训练解锁标志
+	UnlockQhxl = 21;		// 期货训练解锁标志
+	UnlockTjdxl = 22;		// 条件单训练解锁标志
+	UnlockZbxl = 23;		// 指标训练解锁标志
+
 	VipExpiration = 29;		// VIP截止日期的时间戳
 
 	Max = 30;				// 最大属性
+}
+// 事件ID
+enum EventId {
+	EventId_NULL = 0;
+
+	EventId_WeeklyAward = 1;	// 每周豪礼
+	EventId_Zsjc = 2;			// 指数竞猜结果
+}
+// 任务编号
+enum TaskId {
+	Pk = 0;			// PK任务
+	Dk = 1;			// 多空任务
+	Zsjc = 2;		// 指数竞猜任务
+	Ggjc = 3;		// 个股竞猜任务
+
+	MaxDailyTaskId = 4;	// 日常任务最大下标（不包括最大ID，小于等于最大ID）
+	MaxStudyTaskId = 8;	// 学习任务最大下标（不包括最大ID，小于等于最大ID）
 }
 
 
@@ -137,6 +155,7 @@ enum OrderState {
 }
 
 
+
 // 背包项
 message BackbagGrid {
 	string properties = 1;			// 物品内容：json字符串
@@ -146,9 +165,6 @@ message BackbagGrid {
 message Backbag {
 	repeated BackbagGrid grids = 1;	// 背包格子
 }
-
-
-
 // 游戏输赢计数器
 message GameCounter {
 	GameType game = 1;	// 游戏类型ID
@@ -160,8 +176,7 @@ message GameCounters {
 }
 // 当日游戏次数计数器
 message TodayGameTimes {
-	int64 ts = 1;				// 当日时间戳
-	repeated int32 counter = 2;	// 游戏次数
+	repeated int32 counter = 1;	// 游戏次数
 }
 // 双盲训练状态
 message SmxlState {
@@ -209,6 +224,10 @@ message CgdsState {
 message ZsjcState {
 	repeated ZsjcGameData items =1;		// 竞猜数据
 }
+message Tasks {
+	repeated TaskItem study = 1;	// 学习任务
+	repeated TaskItem daily = 2;	// 日常任务
+}
 // 玩家的游戏数据
 message GameData {
 	int32 uid = 1;						// uid
@@ -218,13 +237,15 @@ message GameData {
 	repeated GameCounter counters = 5;	// 游戏输赢计数器
 	SmxlState smlx_state = 6;			// 双盲训练状态
 	CgState cg_state = 7;				// 闯关状态
-	int64 today_ts = 8;					// 今日时间戳
+	int64 today = 8;					// 今日时间戳：YYYYMMDD
 	repeated int32 today_times= 9;		// 今日游戏计数器
 	repeated int32 stock_list = 10;		// 关注的股票列表
 	ZsjcState zsjc_state = 11;			// 指数竞猜状态
 	string location = 12;				// 位置
 	string gender = 13;					// 性别
 	repeated int32 favor_list = 14;		// 关注的玩家列表
+	Tasks tasks = 15;					// 任务
+	int32 week = 16;					// 每周时间戳：YYYYWW
 }
 
 
@@ -254,8 +275,6 @@ message GameOperations {
 	repeated GameOperationItem items = 1;	// 操作集合
 	repeated int32 jun_xian = 2;			// 行情均线设置
 }
-
-
 // 游戏结果
 message GameResult {
 	int32 uid = 1;				// uid
@@ -291,63 +310,64 @@ message CmdGameLoginReply {
 	ErrorInfo result = 1;	// 登录结果
 	GameData data = 2; 		// 玩家的游戏数据
 }
-
-
 // 上传头像
 message CmdUploadIcon {
 	int32 uid    = 1;	// 玩家ID
 	bytes icon = 2;		// 玩家头像数据（不能大于500K，客户端先将原图处理再上传）
 }
-// 上传头像应答(修改成功后，ErrorInfo消息的err字段里面保存头像的URL)
-// 应答消息：ErrorInfo
-
-
-// 更改昵称
-message CmdEditNick {
-	int32 uid    = 1;	// 玩家ID
-	string nick = 2;	// 新昵称
+// 更改玩家信息
+message PlayerInfo {
+	int32 uid    = 1;					// 玩家ID
+	string nick = 2;					// 昵称
+	string icon = 3;					// 头像
+	string gender = 4;					// 性别
+	string location = 5;				// 位置
+	repeated int64 properties = 6;		// 玩家游戏属性
+	repeated GameCounter counters = 7;	// 游戏输赢计数器
 }
-// 更改昵称应答(修改成功后，ErrorInfo消息的err字段里面保存新的昵称)
-// 应答消息：ErrorInfo
-
-
-// 更改头像
-message CmdEditIcon {
-	int32 uid    = 1;	// 玩家ID
-	string icon = 2;	// 玩家头像URL
+// 更改关注列表
+message CmdEditFavorList {
+	bool removed = 1;		// 操作：false表示添加，true表示删除
+	int32 uid = 2;			// 关注玩家ID
 }
-// 更改头像应答(修改成功后，ErrorInfo消息的err字段里面保存头像的URL)
-// 应答消息：ErrorInfo
-
-
-// 获取背包列表请求：空
-// 获取背包列表应答：Backbag
-
-
 // 领取背包物品请求
 message CmdGetItem {
 	int64 ts    = 1;	// 时间戳
 }
-// 领取背包物品应答：ErrorInfo
+// 任务进度
+message TaskItem {
+	int32 task_id = 1;	// 任务Id
+	int32 progress = 2;	// 任务进度
+	int32 award = 3;	// 已发放奖励
+	int32 got = 4;		// 已领取奖励
+}
+// 学习进度
+message CmdStudyProgress {
+	int32 index = 1;	// 任务下标
+	int32 progress = 2;	// 任务进度
+	int32 award = 3;	// 答题奖励
+}
+// 领取日常任务奖励
+message CmdGetDailyAward {
+	int32 index = 1;	// 任务下标
+}
+// 更新日常任务进度
+message CmdDailyTaskProgress {
+	int32 uid    = 1;	// 玩家ID
+	int32 task_id = 2;	// 任务Id
+}
+
 
 
 // 开始游戏
 message CmdGameStart {
 	GameType game    = 1;	// 游戏类型
 }
-// 开始游戏应答
-// 应答消息：ErrorInfo
-
-
 // 结束游戏
 message CmdGameOver {
 	GameResult result = 1;			// 游戏结果
 	GameOperations operations = 2;	// 游戏操作步骤集合
 }
-// 结束游戏应答
-// 应答消息：无消息体
-
-
 // 查询游戏结果
 message CmdQueryGameResult {
 	// 查询自己的游戏结果
@@ -362,12 +382,14 @@ message CmdQueryGameResult {
 message CmdQueryGameResultReply {
 	repeated GameResult results = 1;// 游戏结果数组
 }
-
-
 // 查询游戏操作步骤
 message CmdGetGameOperations {
 	int32 uid = 1;	// 用户ID
 	int64 ts = 2;	// 游戏结果的时间戳
+}
+// 解锁游戏
+message CmdUnlockGame {
+	GameType g_type = 1;	// 游戏类型
 }
 
 
@@ -390,10 +412,6 @@ message CmdGetSmxlReportReply {
 }
 
 
-// 重置双盲训练初始资本金
-// 请求类型：无消息体
-// 重置双盲训练初始资本金应答
-// 应答类型：ErrorInfo
 
 
 
@@ -435,14 +453,6 @@ message CmdRoomLeave {
 message CmdRoomLeaveReply {
 	ErrorInfo err = 1;	// 结果
 }
-
-// 同步玩家就绪：RoomPlayerStatus
-// 应答：（无）
-// 同步游戏状态：RoomGameStatus
-// 应答：（无）
-// 同步游戏操作：RoomGameOp
-// 应答：（无）
-
 // 同步玩家进入房间
 message SyncRoomEnter {
 	int32 id = 1;		// 房间ID
@@ -722,4 +732,34 @@ message CmdBet {
 	string nickname = 5;	// 昵称
 	string icon = 6;		// 头像
 	string gender = 7;		// 性别
+}
+
+
+
+// 领取每周豪礼
+message CmdGetWeeklyAward {
+	string code = 1;	// 一次性兑换码
+}
+message CmdGetWeeklyAwardReply {
+	ErrorInfo result = 1;		// 结果
+	GameProperties award = 2;	// 奖励
+}
+
+
+// 事件查询
+message CmdQueryEventLog {
+	EventId event_id = 1;	// 事件ID
+	int32 uid = 2;			// 玩家ID
+	int64 from = 3;			// 事件起始时间戳：精确到秒
+	int64 to = 4;			// 事件结束时间戳：精确到秒
+	int32 total = 5;		// 条数
+}
+message EventLog {
+	EventId event_id = 1;	// 事件ID
+	int32 uid = 2;			// 玩家ID
+	int64 ts = 3;			// 事件时间戳
+	string log = 4;			// 事件内容
+}
+message Events {
+	repeated EventLog items = 1;
 }

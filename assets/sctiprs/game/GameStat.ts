@@ -43,7 +43,7 @@ export default class NewClass extends cc.Component {
 
         this.userLe.string = 'LV:' + GameData.properties[2];
 
-        let max_exp = GameCfgText.levelInfoCfg[GameData.properties[2]].max_exp;
+        let max_exp = GameCfgText.levelInfoCfg[GameData.properties[2]];
 
         this.userExp.string = 'EXP:' + GameData.properties[1] + '/' + max_exp;
 

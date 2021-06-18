@@ -21,6 +21,41 @@ option go_package = ".;pb";
 
 import "common.proto";
 
+
+
+// App渠道
+enum AppFrom {
+    // 炒股达人
+    Android_000 = 0;   		// 安卓0渠道
+    Android_001 = 1;   		// 安卓001渠道
+    Android_201 = 201; 		// 安卓201渠道
+    Android_204 = 204; 		// 安卓204渠道
+    Android_205 = 205; 		// 安卓205渠道
+    Android_206 = 206; 		// 安卓206渠道
+    Android_208 = 208; 		// 安卓208渠道
+    Android_209 = 209; 		// 安卓209渠道
+    Android_210 = 210; 		// 安卓210渠道
+    Android_211 = 211; 		// 安卓211渠道
+    Android_212 = 212; 		// 安卓212渠道
+    Android_301 = 301; 		// 安卓301渠道
+    Android_302 = 302; 		// 安卓302渠道
+    Android_601 = 601; 		// 安卓601渠道
+
+    // K线学院
+    Android_1000 = 1000; 	// 安卓1000渠道
+    Android_1204 = 1204; 	// 安卓1204渠道
+    Android_1205 = 1205; 	// 安卓1205渠道
+    Android_1208 = 1208; 	// 安卓1208渠道
+    Android_1212 = 1212; 	// 安卓1212渠道
+
+	WebsiteAndriod= 4999;   // 企业网站下载的安卓
+	WebsiteIos    = 6666;   // 企业网站下载的苹果
+	IosAppleStore = 6667;	// 苹果商店下载的App
+	Ipad          = 6668;   // Ipad
+
+	WeChatMinProgram = 8888;// 微信小程序
+}
+
 // 登录类型
 enum LoginType {
 	LoginType_NULL = 0;
@@ -28,8 +63,27 @@ enum LoginType {
 	MobilePhoneId = 1;	// 手机号码
 	WeChat        = 2;	// 微信
 	QQ            = 3;	// QQ
+	WeChat_MiniProg=4;	// 微信小程序
 	AppTest		  = 98; // app测试
 	WebTest		  = 99; // web测试
+}
+
+// 广告位置
+enum AdPosition {
+	AdPosition_NULL = 0;
+
+	StartUp = 1;	// 启动页
+	Main = 11;		// 主页
+}
+
+
+// 广告统计
+message AdClicked {
+	int32 uid = 1;		// uid
+	int32 pos = 2;		// 广告位置
+	string url = 3;		// 广告URL
+	AppFrom from = 4;	// 渠道
+	string ua = 5;		// 浏览器的user_agent
 }
 
 // 注册
@@ -37,9 +91,10 @@ message CmdRegistry {
 	string account = 1; // 玩家账号：手机号、微信登录的Code
 	LoginType type = 2; // 登录类型
 	string pwd = 3;     // 玩家密码
-	string sms = 4;     // 手机验证码
+	string sms_code = 4;// 手机验证码
 	AppFrom from = 5; 	// App渠道
 }
+// 返回类型：ErrorInfo
 
 // 登录参数
 message CmdLogin {
