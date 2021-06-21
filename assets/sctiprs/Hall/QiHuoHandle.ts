@@ -613,6 +613,8 @@ export default class NewClass extends cc.Component {
 					if (GameData.QHSet.year == '随机') {
 						this.box[4].getChildByName('label').getComponent(cc.Label).string = '随机';
 						this.box[5].getChildByName('label').getComponent(cc.Label).string = '随机';
+						GameData.QHSet.month = '随机';
+						GameData.QHSet.day = '随机';
 					} else {
 						if (GameData.QHSet.HY != '随机') {
 							let date = GameCfgText.QHGetTimeByCodeName(GameData.QHSet.HY);

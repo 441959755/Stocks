@@ -5,6 +5,8 @@ import LLWConfig from "../config/LLWConfig";
 export default class LLLog {
 
     static reConsole() {
+        window.Number.toFixed = (n, fixed) => ~~(Math.pow(10, fixed) * n) / Math.pow(10, fixed);
+
         if (!LLWConfig.ISLOG) { return }
 
         window.console = (function (origConsole) {

@@ -95,15 +95,21 @@ export default class NewClass extends cc.Component {
             this.MAla.forEach((el, t) => {
                 el.node.color = GameCfg.MAColor[t];
             })
+            //跟新label
+            this.updataLabel(GameCfg.huizhidatas - 1);
+
         }, this);
 
         //ma boll pcm
         GlobalEvent.on('on_off', (flagData) => {
+
             this.drawMA.node.active = flagData.ma;
+
             this.MAla.forEach(el => {
                 el.node.active = flagData.ma;
             })
             this.drawBOLL.node.active = flagData.boll;
+
             this.BOLLLabel.forEach(el => {
                 el.node.active = flagData.boll;
             })
@@ -786,8 +792,7 @@ export default class NewClass extends cc.Component {
         }
 
         this.onShow();
-        //跟新label
-        this.updataLabel(GameCfg.huizhidatas - 1);
+
     }
 
     //画线

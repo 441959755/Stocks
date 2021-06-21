@@ -440,7 +440,8 @@ export default class NewClass extends cc.Component {
                 this.rightBox.getChildByName('MACD').color = new cc.Color().fromHEX('#808080');
                 this.rightBox.getChildByName('KDJ').color = new cc.Color().fromHEX('#808080');
                 this.rightBox.getChildByName('RSI').color = new cc.Color().fromHEX('#808080');
-            } else if (data == 'EXPMA') {
+            }
+            if (data == 'EXPMA') {
                 this.ma = false;
                 this.boll = false;
                 this.EXPMA = true;

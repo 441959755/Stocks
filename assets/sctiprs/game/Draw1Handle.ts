@@ -271,7 +271,7 @@ export default class NewClass extends cc.Component {
 
         if (GameCfg.data[0].data[index]) {
             let value = parseFloat(GameCfg.data[0].data[index].value);
-            this.voltext.getComponent(cc.Label).string = 'VOL(5,10): ' + value;
+            this.voltext.getComponent(cc.Label).string = 'VOL(' + GameCfg.VOLGraph[0] + ',' + GameCfg.VOLGraph[1] + '):' + value;
         }
 
     }

@@ -5,6 +5,8 @@ import { pb } from "../../../protos/proto";
 export default class WechatSDK {
     static _instance = null;
 
+    videoAd = null;
+
     static getInstance() {
         if (!this._instance) {
             this._instance = new WechatSDK();
@@ -58,6 +60,43 @@ export default class WechatSDK {
         wx.setKeepScreenOn({
             keepScreenOn: true
         })
+
+        this.ADInit();
+    }
+
+    ADInit() {
+        this.videoAd = wx.createRewardedVideoAd({
+            adUnitId: 'adunit-2b80486c280a9b33'
+        })
+    }
+
+    showVideoAd(callback?) {
+        if (this.videoAd) {
+            this.videoAd.onLoad(() => {
+                console.log('激励视频 广告加载成功')
+            })
+
+            this.videoAd.show().then(() => {
+                console.log('激励视频 广告显示');
+            })
+
+            this.videoAd.onError(err => {
+                console.log(err)
+            })
+
+            this.videoAd.onClose(res => {
+                // 用户点击了【关闭广告】按钮
+                // 小于 2.1.0 的基础库版本，res 是一个 undefined
+                if (res && res.isEnded || res === undefined) {
+                    // 正常播放结束，可以下发游戏奖励
+                    callback(1);
+                }
+                else {
+                    // 播放中途退出，不下发游戏奖励
+                    callback(0);
+                }
+            })
+        }
     }
 
     //获取用户信息

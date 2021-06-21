@@ -159,12 +159,12 @@ export default class NewClass extends cc.Component {
 			} else if (index == 3) {
 				la.string = GameData.DXSet.month;
 				if (GameData.DXSet.year == '随机') {
-					la.string = '--';
+					la.string = '随机';
 				}
 			} else if (index == 4) {
 				la.string = GameData.DXSet.day;
 				if (GameData.DXSet.year == '随机') {
-					la.string = '--';
+					la.string = '随机';
 				}
 			} else if (index == 5) {
 				la.string = GameData.DXSet.line;
@@ -412,8 +412,10 @@ export default class NewClass extends cc.Component {
 			} else if (this.setProId == 2) {
 				GameData.DXSet.year = str;
 				if (GameData.DXSet.year == '随机') {
-					this.boxs[3].getChildByName('label').getComponent(cc.Label).string = '--';
-					this.boxs[4].getChildByName('label').getComponent(cc.Label).string = '--';
+					this.boxs[3].getChildByName('label').getComponent(cc.Label).string = '随机';
+					this.boxs[4].getChildByName('label').getComponent(cc.Label).string = '随机';
+					GameData.DXSet.month = '随机';
+					GameData.DXSet.day = '随机';
 				} else {
 					if (GameData.DXSet.search != '随机选股') {
 						let date = GameCfgText.getTimeByCodeName(GameData.DXSet.search);
@@ -504,8 +506,8 @@ export default class NewClass extends cc.Component {
 		if (data != 0) {
 			GameData.DXSet.search = '随机选股';
 			GameData.DXSet.year = '随机';
-			GameData.DXSet.month = '--';
-			GameData.DXSet.day = '--';
+			GameData.DXSet.month = '随机';
+			GameData.DXSet.day = '随机';
 			GameData.DXSet.KLine = '100';
 			GameData.DXSet.ZLine = '日线';
 
@@ -578,10 +580,10 @@ export default class NewClass extends cc.Component {
 		}
 
 		if (GameData.DXSet.year != '随机') {
-			if (GameData.DXSet.month == '--') {
+			if (GameData.DXSet.month == '随机') {
 				GameData.DXSet.month = '01';
 			}
-			if (GameData.DXSet.day == '--') {
+			if (GameData.DXSet.day == '随机') {
 				GameData.DXSet.day = '01';
 			}
 			if (GameData.DXSet.month.length == 1) {

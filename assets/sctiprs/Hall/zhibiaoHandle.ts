@@ -156,6 +156,7 @@ export default class NewClass extends cc.Component {
                 la.string = GameData.ZBSet.ZLine;
             }
         })
+
         this.toggle.isChecked = GameData.ZBSet.showSign;
         this.onCreatStrategy(GameData.ZBSet.select);
     }
@@ -427,8 +428,10 @@ export default class NewClass extends cc.Component {
             } else if (this.setProId == 3) {
                 GameData.ZBSet.year = str;
                 if (GameData.ZBSet.year == '随机') {
-                    this.boxs[4].getChildByName('label').getComponent(cc.Label).string = '--';
-                    this.boxs[5].getChildByName('label').getComponent(cc.Label).string = '--';
+                    this.boxs[4].getChildByName('label').getComponent(cc.Label).string = '随机';
+                    this.boxs[5].getChildByName('label').getComponent(cc.Label).string = '随机';
+                    GameData.ZBSet.month = '随机';
+                    GameData.ZBSet.day = '随机';
                 } else {
                     if (GameData.ZBSet.search != '随机选股') {
                         let date = GameCfgText.getTimeByCodeName(GameData.ZBSet.search);

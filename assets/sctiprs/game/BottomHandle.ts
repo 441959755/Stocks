@@ -171,7 +171,7 @@ export default class NewClass extends cc.Component {
 
 						if (!GameCfg.GAMEFUPAN) {
 							let item;
-							if (GameCfg.GameType == pb.GameType.ZhiBiao || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.ShuangMang) {
+							if (GameCfg.GameType == pb.GameType.ZhiBiao || GameCfg.GameType == pb.GameType.DingXiang) {
 								item = {
 									opId: pb.GameOperationId.Bid,
 									volume: 1,
@@ -450,7 +450,7 @@ export default class NewClass extends cc.Component {
 
 		this.setLabelData();
 		this.onShow();
-		this.getRaisingLimit();
+		this.getRaisingLimit(GameCfg.huizhidatas - 1);
 	}
 
 	onSetMrCount() {
@@ -938,7 +938,7 @@ export default class NewClass extends cc.Component {
 
 	setRoundNumber(name?, flag?) {
 		//买入卖出回合数
-		this.getRaisingLimit();
+		this.getRaisingLimit(GameCfg.huizhidatas);
 		if (this.roundNumber > 0 && name) {
 			//  GlobalEvent.emit('onBuyOrSell', name);
 			this.onBuyOrSell(name);
@@ -1211,10 +1211,10 @@ export default class NewClass extends cc.Component {
 	}
 
 	//获取涨停板
-	getRaisingLimit() {
+	getRaisingLimit(number) {
 		this.zhangting.active = false;
 		this.dieting.active = false;
-		let index = GameCfg.huizhidatas - 1;
+		let index = number - 1;
 		if (GameCfg.GameType != pb.GameType.QiHuo) {
 			let code = GameCfg.data[0].code + '';
 			if (code.length >= 7) {
@@ -1227,36 +1227,44 @@ export default class NewClass extends cc.Component {
 				let rate = (this.gpData[index + 1].close - this.gpData[index].close) / this.gpData[index].close * 100;
 				if (str == '60' || str == '00') {
 					if (rate >= 9.95) {
+						this.dieting.active = true;
 						this.zhangting.active = true;
 
 					} else if (rate <= -9.95) {
 						this.dieting.active = true;
+						this.zhangting.active = true;
 
 					}
 				}
 				else if (str1 == '688') {
 					if (rate >= 19.94) {
+						this.dieting.active = true;
 						this.zhangting.active = true;
 					} else if (rate <= -19.94) {
 						this.dieting.active = true;
+						this.zhangting.active = true;
 					}
 				}
 				else if (str1 == '300') {
 					let time = ComUtils.fromatTime1(this.gpData[index].day);
 					if (time >= 20200824) {
 						if (rate >= 19.94) {
+							this.dieting.active = true;
 							this.zhangting.active = true;
 						}
 						else if (rate <= -19.94) {
 							this.dieting.active = true;
+							this.zhangting.active = true;
 						}
 					}
 					else if (time < 20200824) {
 						if (rate >= 9.95) {
+							this.dieting.active = true;
 							this.zhangting.active = true;
 						}
 						else if (rate <= -9.95) {
 							this.dieting.active = true;
+							this.zhangting.active = true;
 						}
 					}
 				}
@@ -1266,9 +1274,11 @@ export default class NewClass extends cc.Component {
 						if (this.gpData[index + 1].close == this.gpData[index + 1].open) {
 							if (rate >= 4.88) {
 								this.zhangting.active = true;
+								this.dieting.active = true;
 							}
 							else if (rate <= -4.88) {
 								this.dieting.active = true;
+								this.zhangting.active = true;
 							}
 						}
 					}
