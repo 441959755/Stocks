@@ -84,9 +84,9 @@ export default class NewClass extends cc.Component {
 
         this.blockNods[index - 1] = [node, index - 1];
 
-        if (!GameCfg.GAMEFUPAN) {
-            GameCfg.blockHistoy.push([index - 1, type]);
-        }
+        //   if (!GameCfg.GAMEFUPAN) {
+        GameCfg.blockHistoy.push([index - 1, type]);
+        //   }
     }
 
     //跟新方块的位置

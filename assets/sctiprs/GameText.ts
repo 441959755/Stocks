@@ -161,6 +161,40 @@ export default class GameCfgText {
         return data;
     }
 
+    public static getTimeByItems(time) {
+        let arr = [];
+        for (let i = 0; i < this.stockList.length; i++) {
+
+            let items = this.stockList[i].split('|');
+
+            let start = items[2];
+            let end;
+            if (items[3] == 0) {
+                // data.end = ComUtils.getCurYearMonthDay();
+                let f = new Date();
+                let y = f.getFullYear() + '';
+                let m = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+                let d = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
+                let sc = ComUtils.GetPreMonthDay(y + '-' + m + '-' + d, 2);
+
+                y = sc.y;
+                m = sc.m >= 10 ? sc.m : '0' + sc.m;
+                d = sc.d >= 10 ? sc.d : '0' + sc.d;
+                end = y + '' + m + '' + d;
+            } else {
+                end = items[3];
+            }
+            if ((parseInt(time) - 100) > parseInt(start) && (parseInt(time) + 100) < parseInt(end)) {
+                arr.push(items);
+            }
+
+        }
+
+        let index = parseInt(Math.random() * arr.length + '');
+        return arr[index];
+
+    }
+
     /**
 * 根据期货的名字获取股票的范围
 */

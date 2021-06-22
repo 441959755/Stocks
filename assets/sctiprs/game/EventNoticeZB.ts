@@ -126,6 +126,10 @@ export default class NewClass extends cc.Component {
 
     MAIndex2 = 0;
 
+    EXPSTART = false;
+
+    EXPEND = false;
+
     onLoad() {
         //   this.content.removeAllChildren();
         // this.content.getComponent(cc.Layout).verticalDirection = cc.Layout.VerticalDirection.BOTTOM_TO_TOP;
@@ -253,14 +257,13 @@ export default class NewClass extends cc.Component {
 
     testMaEvent() {
         let index = GameCfg.huizhidatas - 1;
-        let c = 0, j = 0, z = 1;
 
         if (GameCfg.GameSet.strategy == '组合训练') {
 
             //短线转向买点
             if (this.maList[index][0] > this.maList[index][1]) {
                 if (this.maList[index][0] > this.maList[index - 1][0]) {
-                    if (this.gpData[index].close > this.maList[index][0]) {
+                    if (this.gpData[index].close > this.maList[index][0] && this.gpData[index - 1].close < this.maList[index - 1][0]) {
                         let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
                         if (this.gpData[index].close > max) {
                             //B
@@ -280,7 +283,7 @@ export default class NewClass extends cc.Component {
 
             //短线转向卖点
             if (this.maList[index][0] <= this.maList[index - 1][0]) {
-                if (this.gpData[index].close < this.maList[index][0]) {
+                if (this.gpData[index].close < this.maList[index][0] && this.gpData[index - 1].close > this.maList[index - 1][0]) {
                     let max = Math.min(this.gpData[index - 1].close, this.gpData[index - 1].open);
                     if (this.gpData[index].close < max) {
                         //S
@@ -381,7 +384,7 @@ export default class NewClass extends cc.Component {
             }
 
         }
-        else if (GameCfg.GameSet.strategy == '均线交叉' || GameCfg.GameSet.strategy == '组合训练') {
+        if (GameCfg.GameSet.strategy == '均线交叉' || GameCfg.GameSet.strategy == '组合训练') {
 
             //3）均线金叉
             if (this.maList[index][this.MAIndex1] > this.maList[index][this.MAIndex2] && this.gpData[index].close > this.maList[index][this.MAIndex2]) {
@@ -507,6 +510,12 @@ export default class NewClass extends cc.Component {
             let low = this.gpData[index].low;
 
             if (this.difList[index] >= this.deaList[index] && this.difList[index] >= 0) {
+                this.macdL1 = 0;
+                this.macdL2 = 0;
+                this.DIF4 = 0;
+                this.DIF3 = 0;
+                this.FlagDing3 = false;
+                this.FlagDing4 = false;
                 if (!this.FlagDing1) {
                     this.macdH1 = Math.max(this.macdH1, high);
                     this.DIF1 = Math.max(this.DIF1, this.difList[index]);
@@ -540,7 +549,10 @@ export default class NewClass extends cc.Component {
                     this.macdH2 = 0;
                     this.FlagDing1 = false;
                     this.FlagDing2 = false;
-
+                    this.macdL1 = 0;
+                    this.macdL2 = 0;
+                    this.DIF4 = 0;
+                    this.DIF3 = 0;
                     this.DIF1 = this.DIF2;
                     this.DIF2 = 0;
                     if (this.curState != 'S') {
@@ -559,6 +571,10 @@ export default class NewClass extends cc.Component {
 
                     this.DIF2 = 0;
                     this.DIF1 = this.DIF2;
+                    this.macdL1 = 0;
+                    this.macdL2 = 0;
+                    this.DIF4 = 0;
+                    this.DIF3 = 0;
                 }
             }
 
@@ -568,6 +584,13 @@ export default class NewClass extends cc.Component {
             // }
 
             if (this.difList[index] < this.deaList[index] && this.difList[index] < 0) {
+                this.macdH1 = 0;
+                this.macdH2 = 0;
+                this.FlagDing1 = false;
+                this.FlagDing2 = false;
+                this.DIF2 = 0;
+                this.DIF1 = 0;
+
                 if (!this.macdL1) {
                     this.macdL1 = low;
                     this.DIF3 = this.difList[index];
@@ -605,6 +628,11 @@ export default class NewClass extends cc.Component {
 
             if (this.FlagDing3 && this.FlagDing4 && this.macdL2) {
                 if (this.macdL2 < this.macdL1 && this.DIF4 >= this.DIF3) {
+                    this.macdH1 = 0;
+                    this.macdH2 = 0;
+
+                    this.DIF2 = 0;
+                    this.DIF1 = 0;
                     this.FlagDing3 = false;
                     this.FlagDing4 = false;
                     this.macdL1 = this.macdL2;
@@ -621,6 +649,11 @@ export default class NewClass extends cc.Component {
                     }
 
                 } else {
+                    this.macdH1 = 0;
+                    this.macdH2 = 0;
+
+                    this.DIF2 = 0;
+                    this.DIF1 = 0;
                     this.FlagDing3 = false;
                     this.FlagDing4 = false;
                     this.macdL1 = this.macdL2;
@@ -919,7 +952,16 @@ export default class NewClass extends cc.Component {
             let low = this.gpData[index].low;
 
             if (this.KList[index] > 50 && this.KList[index] >= this.DList[index]) {
-
+                this.kdjl1 = 0;
+                this.kdjl2 = 0;
+                this.d3 = 0;
+                this.d4 = 0;
+                this.k3 = 0;
+                this.k4 = 0;
+                this.j3 = 0;
+                this.j4 = 0;
+                this.kdjflag3 = false
+                this.kdjflag4 = false;
                 if (!this.kdjflag1) {
                     this.kdjH1 = Math.max(this.kdjH1, high);
                     this.d1 = Math.max(this.d1, this.DList[index]);
@@ -927,12 +969,12 @@ export default class NewClass extends cc.Component {
                     this.j1 = Math.max(this.j1, this.JList[index]);
 
                 } else if (high > this.kdjH1) {
-                    if (!this.kdjflag2) {
-                        this.kdjH2 = Math.max(this.kdjH2, high);
-                        this.d2 = Math.max(this.d2, this.DList[index]);
-                        this.k2 = Math.max(this.k2, this.KList[index]);
-                        this.j2 = Math.max(this.j2, this.JList[index]);
-                    }
+                    //  if (!this.kdjflag2) {
+                    this.kdjH2 = Math.max(this.kdjH2, high);
+                    this.d2 = Math.max(this.d2, this.DList[index]);
+                    this.k2 = Math.max(this.k2, this.KList[index]);
+                    this.j2 = Math.max(this.j2, this.JList[index]);
+                    //  }
 
                     if (this.gpData[index + 1]) {
                         if (this.gpData[index + 1].high < this.gpData[index].high) {
@@ -958,7 +1000,14 @@ export default class NewClass extends cc.Component {
                     //5）KDJ顶背离
                     this.FlagDing = true;
                     this.FlagDi = false;
-
+                    this.kdjl1 = 0;
+                    this.kdjl2 = 0;
+                    this.d3 = 0;
+                    this.d4 = 0;
+                    this.k3 = 0;
+                    this.k4 = 0;
+                    this.j3 = 0;
+                    this.j4 = 0;
                     this.kdjH1 = this.kdjH2;
                     this.kdjH2 = 0;
                     this.d1 = this.d2;
@@ -978,6 +1027,15 @@ export default class NewClass extends cc.Component {
 
                 }
                 else {
+                    this.kdjl1 = 0;
+                    this.kdjl2 = 0;
+                    this.d3 = 0;
+                    this.d4 = 0;
+                    this.k3 = 0;
+                    this.k4 = 0;
+                    this.j3 = 0;
+                    this.j4 = 0;
+
                     this.FlagDing = false;
                     this.FlagDi = false;
 
@@ -994,6 +1052,18 @@ export default class NewClass extends cc.Component {
             }
 
             if (this.KList[index] < 50 && this.KList[index] < this.DList[index]) {
+
+                this.FlagDing = false;
+                this.FlagDi = false;
+
+                this.kdjH1 = 0;
+                this.kdjH2 = 0;
+                this.d1 = 0;
+                this.d2 = 0;
+                this.k1 = 0;
+                this.k2 = 0;
+                this.j1 = 0;
+                this.j2 = 0;
                 if (!this.kdjflag3) {
                     if (!this.kdjl1) {
                         this.kdjl1 = low;
@@ -1006,27 +1076,27 @@ export default class NewClass extends cc.Component {
                     this.k3 = Math.min(this.k3, this.KList[index]);
                     this.j3 = Math.min(this.j3, this.JList[index]);
                 } else if (low < this.kdjl1) {
-                    if (!this.kdjflag4) {
-                        if (!this.kdjl2) {
-                            this.kdjl2 = low;
-                            this.d4 = this.DList[index];
-                            this.k4 = this.KList[index];
-                            this.j4 = this.JList[index];
-                        }
-                        this.kdjl2 = Math.min(this.kdjl2, low);
-                        this.d4 = Math.min(this.d4, this.DList[index]);
-                        this.k4 = Math.min(this.k4, this.KList[index]);
-                        this.j4 = Math.min(this.j4, this.JList[index]);
+                    // if (!this.kdjflag4) {
+                    if (!this.kdjl2) {
+                        this.kdjl2 = low;
+                        this.d4 = this.DList[index];
+                        this.k4 = this.KList[index];
+                        this.j4 = this.JList[index];
+                    }
+                    this.kdjl2 = Math.min(this.kdjl2, low);
+                    this.d4 = Math.min(this.d4, this.DList[index]);
+                    this.k4 = Math.min(this.k4, this.KList[index]);
+                    this.j4 = Math.min(this.j4, this.JList[index]);
 
-                        if (this.gpData[index + 1]) {
-                            if (this.gpData[index + 1].low > this.gpData[index].low) {
-                                this.kdjflag4 = true;
-                            }
-                            else {
-                                this.kdjflag4 = false;
-                            }
+                    if (this.gpData[index + 1]) {
+                        if (this.gpData[index + 1].low > this.gpData[index].low) {
+                            this.kdjflag4 = true;
+                        }
+                        else {
+                            this.kdjflag4 = false;
                         }
                     }
+                    //  }
                 }
             }
             else if (this.KList[index] > this.DList[index] && this.kdjl1) {
@@ -1044,7 +1114,14 @@ export default class NewClass extends cc.Component {
                     this.FlagDi = true;
                     this.kdjl1 = this.kdjl2;
                     this.kdjl2 = 0;
-
+                    this.kdjH1 = 0;
+                    this.kdjH2 = 0;
+                    this.d1 = 0;
+                    this.d2 = 0;
+                    this.k1 = 0;
+                    this.k2 = 0;
+                    this.j1 = 0;
+                    this.j2 = 0;
 
                     this.d3 = this.d4;
                     this.d4 = 0;
@@ -1063,7 +1140,14 @@ export default class NewClass extends cc.Component {
 
 
                 } else {
-
+                    this.kdjH1 = 0;
+                    this.kdjH2 = 0;
+                    this.d1 = 0;
+                    this.d2 = 0;
+                    this.k1 = 0;
+                    this.k2 = 0;
+                    this.j1 = 0;
+                    this.j2 = 0;
                     this.kdjflag3 = false
                     this.kdjflag4 = false;
                     this.FlagDing = false;
@@ -1286,55 +1370,26 @@ export default class NewClass extends cc.Component {
     testEXPMAEvent() {
         //EXP均线金叉
         let index = GameCfg.huizhidatas - 1;
-        if (GameCfg.GameSet.strategy == 'EXPMA金叉' || GameCfg.GameSet.strategy == '经典用法') {
-            if (this.EXPMA2[index] >= this.EXPMA2[index - 1] && this.EXPMA1[index] >= this.EXPMA1[index - 1]) {
-                if (this.EXPMA1[index] > this.EXPMA2[index]) {
-                    //B
-                    this._str = '1）当黄色EXP2均线走平转向上趋势时；2）此时若白色EXP1均线金叉黄色EXP2均线时；可做买入信号"B"， 短线买入个股！'
 
-                    if (this.curState != 'B') {
-                        this.onCreateTipsItem('EXP均线金叉');
-                        this.curState = 'B';
-                        StrategyAIData.onBuyFunc();
-                        return;
-                    }
-                }
-            }
-
-            //EXP均线死叉
-            //  if (this.EXPMA2[index] < this.EXPMA2[index - 1]) {
-            if (this.EXPMA1[index] < this.EXPMA2[index]) {
-                //s
-                this._str = '1）当黄色EXP2均线走平转向下趋势时,2）此时若白色EXP1均线死叉黄色EXP2均线时； 可做短线卖出信号"S"， 卖出个股！'
-
-                if (this.curState != 'S') {
-                    this.onCreateTipsItem('EXP均线死叉');
-                    this.curState = 'S';
-                    StrategyAIData.onSellFunc();
-                    return;
-                }
-            }
-            //  }
-        }
 
         if (GameCfg.GameSet.strategy == '经典用法') {
             //短线转向买点
-            if (this.EXPMA2[index] > this.EXPMA2[index]) {
+            if (this.EXPMA1[index] > this.EXPMA2[index]) {
                 if (this.EXPMA1[index] > this.EXPMA1[index - 1]) {
-                    if (this.gpData[index].close > this.EXPMA1[index]) {
-                        let min = Math.min(this.gpData[index - 1].open, this.gpData[index - 1].close);
-                        if (this.gpData[index].close > min) {
-                            if (this.gpData[index].low > this.gpData[index - 1].low) {
-                                //B
-                                this._str = '1）EXP 金叉后，且白线exp1趋势向上；3）此时若股价上涨又从下有效站上exp1时,即股价再次反转向上时；则可做短线买入信号“B”！'
+                    if (this.gpData[index].close > this.EXPMA1[index] && this.gpData[index - 1].close < this.EXPMA1[index - 1]) {
+                        let max = Math.max(this.gpData[index - 1].open, this.gpData[index - 1].close);
+                        if (this.gpData[index].close > max) {
+                            //   if (this.gpData[index].low > this.gpData[index - 1].low) {
+                            //B
+                            this._str = '1）EXP 金叉后，且白线exp1趋势向上；3）此时若股价上涨又从下有效站上exp1时,即股价再次反转向上时；则可做短线买入信号“B”！'
 
-                                if (this.curState != 'B') {
-                                    this.onCreateTipsItem('短线转向买点');
-                                    this.curState = 'B';
-                                    StrategyAIData.onBuyFunc();
-                                    return;
-                                }
+                            if (this.curState != 'B') {
+                                this.onCreateTipsItem('短线转向买点');
+                                this.curState = 'B';
+                                StrategyAIData.onBuyFunc();
+                                return;
                             }
+                            //  }
 
                         }
                     }
@@ -1344,7 +1399,7 @@ export default class NewClass extends cc.Component {
             //短线转向卖点
 
             if (this.EXPMA1[index] <= this.EXPMA1[index - 1]) {
-                if (this.gpData[index].close < this.EXPMA1[index]) {
+                if (this.gpData[index].close < this.EXPMA1[index] && this.gpData[index - 1].close > this.EXPMA1[index - 1]) {
                     let min = Math.min(this.gpData[index - 1].open, this.gpData[index - 1].close);
                     if (this.gpData[index].close < min) {
                         this._str = '1）当白线exp1趋势转向下时； 2） 此时若股价有效跌破exp1线时, 且股价反转跌破上日K线； 则可做短线卖出信号"S" !'
@@ -1361,24 +1416,29 @@ export default class NewClass extends cc.Component {
             }
 
             // 乖离过大买点
-            //TODO
+
             if (this.EXPMA1[index] < this.EXPMA2[index]) {
                 if ((this.EXPMA1[index] - this.gpData[index].close) / this.EXPMA1[index] >= 0.1) {
                     let min = Math.min(this.gpData[index - 1].close, this.gpData[index - 1].open);
-                    this._str = '1）下跌过程中，当股价下跌远离exp1过大时（比如超过-10%时）；2）此后接下来若股价不再创新低时，则短线会有超跌反弹；短线可做买入信号“B”.'
+                    if (this.gpData[index].close > min) {
+                        if (this.gpData[index].low > this.gpData[index - 1].low) {
+                            this._str = '1）下跌过程中，当股价下跌远离exp1过大时（比如超过-10%时）；2）此后接下来若股价不再创新低时，则短线会有超跌反弹；短线可做买入信号“B”.'
 
-                    if (this.curState != 'B') {
-                        this.onCreateTipsItem('乖离过大买点');
-                        this.curState = 'B';
-                        StrategyAIData.onBuyFunc();
-                        return;
+                            if (this.curState != 'B') {
+                                this.onCreateTipsItem('乖离过大买点');
+                                this.curState = 'B';
+                                StrategyAIData.onBuyFunc();
+                                return;
+                            }
+                        }
                     }
+
                 }
             }
 
             //乖离过大卖点
             if (this.EXPMA1[index] > this.EXPMA2[index]) {
-                if ((this.gpData[index].close - this.EXPMA2[index]) / this.EXPMA1[index] >= 0.1) {
+                if ((this.gpData[index].close - this.EXPMA1[index]) / this.EXPMA1[index] >= 0.1) {
                     let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
                     if (this.gpData[index].close < max) {
                         //s
@@ -1390,6 +1450,43 @@ export default class NewClass extends cc.Component {
                             StrategyAIData.onSellFunc();
                             return;
                         }
+                    }
+                }
+            }
+        }
+
+        if (GameCfg.GameSet.strategy == 'EXPMA金叉' || GameCfg.GameSet.strategy == '经典用法') {
+            if (this.EXPMA1[index - 1] < this.EXPMA2[index - 1] || !this.EXPSTART) {
+                this.EXPSTART = true;
+                if (this.EXPMA2[index] >= this.EXPMA2[index - 1] && this.EXPMA1[index] >= this.EXPMA1[index - 1]) {
+                    if (this.EXPMA1[index] > this.EXPMA2[index]) {
+                        //B
+                        this._str = '1）当黄色EXP2均线走平转向上趋势时；2）此时若白色EXP1均线金叉黄色EXP2均线时；可做买入信号"B"， 短线买入个股！'
+
+                        if (this.curState != 'B') {
+
+                            this.onCreateTipsItem('EXP均线金叉');
+                            this.curState = 'B';
+                            StrategyAIData.onBuyFunc();
+                            return;
+                        }
+                    }
+                }
+            }
+
+            //EXP均线死叉
+            if (this.EXPMA1[index - 1] > this.EXPMA2[index - 1] || !this.EXPEND) {
+                this.EXPEND = true;
+                if (this.EXPMA1[index] < this.EXPMA2[index]) {
+                    //s
+                    this._str = '1）当黄色EXP2均线走平转向下趋势时,2）此时若白色EXP1均线死叉黄色EXP2均线时； 可做短线卖出信号"S"， 卖出个股！'
+
+                    if (this.curState != 'S') {
+
+                        this.onCreateTipsItem('EXP均线死叉');
+                        this.curState = 'S';
+                        StrategyAIData.onSellFunc();
+                        return;
                     }
                 }
             }

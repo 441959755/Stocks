@@ -21,16 +21,6 @@ export default class NewClass extends cc.Component {
 
     childs = null;
 
-
-    protected onLoad() {
-        GlobalEvent.on('ItemValue', (val) => {
-            let lab = this.layers[this._page].children[this._index].getChildByName('label');
-            lab.getComponent(cc.Label).string = val;
-            this.childs.active = false;
-        }, this);
-    }
-
-
     start() {
         this.openLayer();
     }
@@ -73,6 +63,12 @@ export default class NewClass extends cc.Component {
                 toggle4.getComponent(cc.Toggle).isChecked = !GameData.ZBSet.isBW;
             }
         })
+
+        GlobalEvent.on('ItemValue', (val) => {
+            let lab = this.layers[this._page].children[this._index].getChildByName('label');
+            lab.getComponent(cc.Label).string = val;
+            this.childs.active = false;
+        }, this);
     }
 
     onBtnClick(event, data) {
@@ -217,7 +213,7 @@ export default class NewClass extends cc.Component {
         this.openLayer();
     }
 
-    protected onDestroy() {
+    protected onDisable() {
         GlobalEvent.off('ItemValue');
     }
 }

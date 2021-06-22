@@ -91,10 +91,13 @@ export default class NewClass extends cc.Component {
         }, this);
 
         GlobalEvent.on(EventCfg.SETMALABEL, (labels) => {
-            this.MAla = labels;
-            this.MAla.forEach((el, t) => {
-                el.node.color = GameCfg.MAColor[t];
-            })
+            if (labels && labels.length > 0) {
+                this.MAla = labels;
+                this.MAla.forEach((el, t) => {
+                    el.node.color = GameCfg.MAColor[t];
+                })
+            }
+
             //跟新label
             this.updataLabel(GameCfg.huizhidatas - 1);
 

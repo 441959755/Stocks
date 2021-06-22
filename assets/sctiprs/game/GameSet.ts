@@ -107,9 +107,9 @@ export default class NewClass extends cc.Component {
                 this.MALabel[5].node.active = false;
             }
         }
-        if (MAla.length > 0) {
-            GlobalEvent.emit(EventCfg.SETMALABEL, MAla);
-        }
+        // if (MAla.length > 0) {
+        GlobalEvent.emit(EventCfg.SETMALABEL, MAla);
+        //  }
 
     }
 

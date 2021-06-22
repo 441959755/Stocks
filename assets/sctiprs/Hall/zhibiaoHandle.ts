@@ -536,7 +536,7 @@ export default class NewClass extends cc.Component {
                     d = '0' + GameData.ZBSet.day;
                 }
                 let seletTime = GameData.ZBSet.year + '' + m + '' + d;
-                items = GameCfgText.getTimeByCodeName(seletTime);
+                items = GameCfgText.getTimeByItems(seletTime);
                 data.code = items[0];
             }
 
