@@ -107,7 +107,7 @@ export default class WechatSDK {
                 const webUserInfo = res.userInfo;
                 console.log(webUserInfo);
                 GameData.userName = webUserInfo.nickName;
-                GameData.sex = webUserInfo.gender;
+                GameData.gender = webUserInfo.gender;
                 GameData.headimgurl = webUserInfo.avatarUrl;
 
                 btn && (btn.destroy())
@@ -187,28 +187,31 @@ export default class WechatSDK {
                 //     }
                 // })
 
+                wx.getLocalImgData({
+                    localId: res.localIds[0], // 图片的localID
+                    success: function (res) {
+                        const localData = res.localData;
+                        let imageBase64 = '';
+                        if (localData.indexOf('data:image') == 0) {
+                            //苹果的直接赋值，默认生成'data:image/jpeg;base64,'的头部拼接
+                            imageBase64 = localData;
+
+                        } else {
+                            //此处是安卓中的唯一得坑！在拼接前需要对localData进行换行符的全局替换
+                            //此时一个正常的base64图片路径就完美生成赋值到img的src中了
+                            imageBase64 = 'data:image/jpeg;base64,' + localData.replace(/\n/g, '');
+
+                        }
+                        //  let image_base64 = imageBase64;
+                        call(imageBase64);
+                        //   $('#img').attr('src', imageBase64);
+
+                    }
+                });
+
             }
         })
     }
-
-    // getLocalImgData() {
-    //     wx.getLocalImgData({
-    //         localId: req.localIds[0].toString(),
-    //         success: function (res) {
-    //             const localData = res.localData;
-    //             let imageBase64 = '';
-    //             if (localData.indexOf('data:image') == 0) {
-    //                 //苹果的直接赋值，默认生成'data:image/jpeg;base64,'的头部拼接
-    //                 imageBase64 = localData;
-    //             } else {
-    //                 //此处是安卓中的唯一得坑！在拼接前需要对localData进行换行符的全局替换
-    //                 //此时一个正常的base64图片路径就完美生成赋值到img的src中了
-    //                 imageBase64 = 'data:image/jpeg;base64,' + localData.replace(/\n/g, '');
-    //             }
-    //         }
-    //     });
-
-    // }
 
 
 }

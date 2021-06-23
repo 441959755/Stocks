@@ -59,8 +59,11 @@ $root.pb = (function () {
      * @property {number} CS_CHECK_FAILURE_TOKEN=18 CS_CHECK_FAILURE_TOKEN value
      * @property {number} CS_ALREADY_UNLOCK=19 CS_ALREADY_UNLOCK value
      * @property {number} CS_CHECK_PHONE_UNREGISTRY=20 CS_CHECK_PHONE_UNREGISTRY value
-     * @property {number} CS_CHECK_ACCOUNT_FORBIDDEN=21 CS_CHECK_ACCOUNT_FORBIDDEN value
-     * @property {number} CS_INVALID_SMSCODE=22 CS_INVALID_SMSCODE value
+     * @property {number} CS_CHECK_PHONE_UNBOUND=21 CS_CHECK_PHONE_UNBOUND value
+     * @property {number} CS_CHECK_ACCOUNT_FORBIDDEN=22 CS_CHECK_ACCOUNT_FORBIDDEN value
+     * @property {number} CS_INVALID_SMSCODE=23 CS_INVALID_SMSCODE value
+     * @property {number} CS_CHECK_FAILURE_ONCE=24 CS_CHECK_FAILURE_ONCE value
+     * @property {number} CS_PAYMENT_FAILURE=25 CS_PAYMENT_FAILURE value
      * @property {number} CS_ROOM_INVALID=100 CS_ROOM_INVALID value
      * @property {number} CS_ROOM_FULL=101 CS_ROOM_FULL value
      * @property {number} CS_ROOM_FAIL_CHECKIN=102 CS_ROOM_FAIL_CHECKIN value
@@ -89,8 +92,11 @@ $root.pb = (function () {
         values[valuesById[18] = "CS_CHECK_FAILURE_TOKEN"] = 18;
         values[valuesById[19] = "CS_ALREADY_UNLOCK"] = 19;
         values[valuesById[20] = "CS_CHECK_PHONE_UNREGISTRY"] = 20;
-        values[valuesById[21] = "CS_CHECK_ACCOUNT_FORBIDDEN"] = 21;
-        values[valuesById[22] = "CS_INVALID_SMSCODE"] = 22;
+        values[valuesById[21] = "CS_CHECK_PHONE_UNBOUND"] = 21;
+        values[valuesById[22] = "CS_CHECK_ACCOUNT_FORBIDDEN"] = 22;
+        values[valuesById[23] = "CS_INVALID_SMSCODE"] = 23;
+        values[valuesById[24] = "CS_CHECK_FAILURE_ONCE"] = 24;
+        values[valuesById[25] = "CS_PAYMENT_FAILURE"] = 25;
         values[valuesById[100] = "CS_ROOM_INVALID"] = 100;
         values[valuesById[101] = "CS_ROOM_FULL"] = 101;
         values[valuesById[102] = "CS_ROOM_FAIL_CHECKIN"] = 102;
@@ -118,6 +124,7 @@ $root.pb = (function () {
      * @property {number} Sync_S2C_StockOrderResult=1020 Sync_S2C_StockOrderResult value
      * @property {number} Sync_S2C_MutipleLogin=1022 Sync_S2C_MutipleLogin value
      * @property {number} Sync_S2C_TaskProgress=1024 Sync_S2C_TaskProgress value
+     * @property {number} Sync_S2C_ActivityConf=1026 Sync_S2C_ActivityConf value
      * @property {number} Sync_C2S_GameHeart=1200 Sync_C2S_GameHeart value
      * @property {number} Sync_Email=1300 Sync_Email value
      * @property {number} Req_QuoteSubscribe=2001 Req_QuoteSubscribe value
@@ -164,6 +171,10 @@ $root.pb = (function () {
      * @property {number} Rep_Hall_GetWeeklyAward=3028 Rep_Hall_GetWeeklyAward value
      * @property {number} Req_Hall_QueryEventLog=3029 Req_Hall_QueryEventLog value
      * @property {number} Rep_Hall_QueryEventLog=3030 Rep_Hall_QueryEventLog value
+     * @property {number} Req_Hall_ShopOrder=3031 Req_Hall_ShopOrder value
+     * @property {number} Rep_Hall_ShopOrder=3032 Rep_Hall_ShopOrder value
+     * @property {number} Req_Hall_MobileBind=3033 Req_Hall_MobileBind value
+     * @property {number} Rep_Hall_MobileBind=3034 Rep_Hall_MobileBind value
      * @property {number} Req_Hall_Logout=3999 Req_Hall_Logout value
      * @property {number} Rep_Hall_Logout=4000 Rep_Hall_Logout value
      * @property {number} Req_Game_Login=4001 Req_Game_Login value
@@ -264,6 +275,7 @@ $root.pb = (function () {
         values[valuesById[1020] = "Sync_S2C_StockOrderResult"] = 1020;
         values[valuesById[1022] = "Sync_S2C_MutipleLogin"] = 1022;
         values[valuesById[1024] = "Sync_S2C_TaskProgress"] = 1024;
+        values[valuesById[1026] = "Sync_S2C_ActivityConf"] = 1026;
         values[valuesById[1200] = "Sync_C2S_GameHeart"] = 1200;
         values[valuesById[1300] = "Sync_Email"] = 1300;
         values[valuesById[2001] = "Req_QuoteSubscribe"] = 2001;
@@ -310,6 +322,10 @@ $root.pb = (function () {
         values[valuesById[3028] = "Rep_Hall_GetWeeklyAward"] = 3028;
         values[valuesById[3029] = "Req_Hall_QueryEventLog"] = 3029;
         values[valuesById[3030] = "Rep_Hall_QueryEventLog"] = 3030;
+        values[valuesById[3031] = "Req_Hall_ShopOrder"] = 3031;
+        values[valuesById[3032] = "Rep_Hall_ShopOrder"] = 3032;
+        values[valuesById[3033] = "Req_Hall_MobileBind"] = 3033;
+        values[valuesById[3034] = "Rep_Hall_MobileBind"] = 3034;
         values[valuesById[3999] = "Req_Hall_Logout"] = 3999;
         values[valuesById[4000] = "Rep_Hall_Logout"] = 4000;
         values[valuesById[4001] = "Req_Game_Login"] = 4001;
@@ -1135,6 +1151,56 @@ $root.pb = (function () {
     })();
 
     /**
+     * FeeType enum.
+     * @name pb.FeeType
+     * @enum {number}
+     * @property {number} FeeType_NULL=0 FeeType_NULL value
+     * @property {number} FeeType_RMB=1 FeeType_RMB value
+     * @property {number} FeeType_Diamond=2 FeeType_Diamond value
+     * @property {number} FeeType_Coupon=3 FeeType_Coupon value
+     */
+    pb.FeeType = (function () {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "FeeType_NULL"] = 0;
+        values[valuesById[1] = "FeeType_RMB"] = 1;
+        values[valuesById[2] = "FeeType_Diamond"] = 2;
+        values[valuesById[3] = "FeeType_Coupon"] = 3;
+        return values;
+    })();
+
+    /**
+     * PaymentType enum.
+     * @name pb.PaymentType
+     * @enum {number}
+     * @property {number} PaymentType_NULL=0 PaymentType_NULL value
+     * @property {number} WechatPay=1 WechatPay value
+     * @property {number} ApplePay=2 ApplePay value
+     */
+    pb.PaymentType = (function () {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "PaymentType_NULL"] = 0;
+        values[valuesById[1] = "WechatPay"] = 1;
+        values[valuesById[2] = "ApplePay"] = 2;
+        return values;
+    })();
+
+    /**
+     * ItemOrderState enum.
+     * @name pb.ItemOrderState
+     * @enum {number}
+     * @property {number} ItemOrderState_Init=0 ItemOrderState_Init value
+     * @property {number} Pay=1 Pay value
+     * @property {number} EMS=2 EMS value
+     */
+    pb.ItemOrderState = (function () {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "ItemOrderState_Init"] = 0;
+        values[valuesById[1] = "Pay"] = 1;
+        values[valuesById[2] = "EMS"] = 2;
+        return values;
+    })();
+
+    /**
      * MessageType enum.
      * @name pb.MessageType
      * @enum {number}
@@ -1215,7 +1281,8 @@ $root.pb = (function () {
      * @property {number} UnlockQhxl=21 UnlockQhxl value
      * @property {number} UnlockTjdxl=22 UnlockTjdxl value
      * @property {number} UnlockZbxl=23 UnlockZbxl value
-     * @property {number} VipExpiration=29 VipExpiration value
+     * @property {number} VipExpiration=28 VipExpiration value
+     * @property {number} RMB=29 RMB value
      * @property {number} Max=30 Max value
      */
     pb.GamePropertyId = (function () {
@@ -1231,7 +1298,8 @@ $root.pb = (function () {
         values[valuesById[21] = "UnlockQhxl"] = 21;
         values[valuesById[22] = "UnlockTjdxl"] = 22;
         values[valuesById[23] = "UnlockZbxl"] = 23;
-        values[valuesById[29] = "VipExpiration"] = 29;
+        values[valuesById[28] = "VipExpiration"] = 28;
+        values[valuesById[29] = "RMB"] = 29;
         values[valuesById[30] = "Max"] = 30;
         return values;
     })();
@@ -4762,6 +4830,7 @@ $root.pb = (function () {
          * @property {Array.<number>|null} [favorList] GameData favorList
          * @property {pb.ITasks|null} [tasks] GameData tasks
          * @property {number|null} [week] GameData week
+         * @property {string|null} [mobile] GameData mobile
          */
 
         /**
@@ -4913,6 +4982,14 @@ $root.pb = (function () {
         GameData.prototype.week = 0;
 
         /**
+         * GameData mobile.
+         * @member {string} mobile
+         * @memberof pb.GameData
+         * @instance
+         */
+        GameData.prototype.mobile = "";
+
+        /**
          * Creates a new GameData instance using the specified properties.
          * @function create
          * @memberof pb.GameData
@@ -4985,6 +5062,8 @@ $root.pb = (function () {
                 $root.pb.Tasks.encode(message.tasks, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
             if (message.week != null && Object.hasOwnProperty.call(message, "week"))
                 writer.uint32(/* id 16, wireType 0 =*/128).int32(message.week);
+            if (message.mobile != null && Object.hasOwnProperty.call(message, "mobile"))
+                writer.uint32(/* id 17, wireType 2 =*/138).string(message.mobile);
             return writer;
         };
 
@@ -5096,6 +5175,9 @@ $root.pb = (function () {
                         break;
                     case 16:
                         message.week = reader.int32();
+                        break;
+                    case 17:
+                        message.mobile = reader.string();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -5210,6 +5292,9 @@ $root.pb = (function () {
             if (message.week != null && message.hasOwnProperty("week"))
                 if (!$util.isInteger(message.week))
                     return "week: integer expected";
+            if (message.mobile != null && message.hasOwnProperty("mobile"))
+                if (!$util.isString(message.mobile))
+                    return "mobile: string expected";
             return null;
         };
 
@@ -5311,6 +5396,8 @@ $root.pb = (function () {
             }
             if (object.week != null)
                 message.week = object.week | 0;
+            if (object.mobile != null)
+                message.mobile = String(object.mobile);
             return message;
         };
 
@@ -5350,6 +5437,7 @@ $root.pb = (function () {
                 object.gender = "";
                 object.tasks = null;
                 object.week = 0;
+                object.mobile = "";
             }
             if (message.uid != null && message.hasOwnProperty("uid"))
                 object.uid = message.uid;
@@ -5404,6 +5492,8 @@ $root.pb = (function () {
                 object.tasks = $root.pb.Tasks.toObject(message.tasks, options);
             if (message.week != null && message.hasOwnProperty("week"))
                 object.week = message.week;
+            if (message.mobile != null && message.hasOwnProperty("mobile"))
+                object.mobile = message.mobile;
             return object;
         };
 
@@ -5594,6 +5684,7 @@ $root.pb = (function () {
                     case 21:
                     case 22:
                     case 23:
+                    case 28:
                     case 29:
                     case 30:
                         break;
@@ -5665,6 +5756,10 @@ $root.pb = (function () {
                     message.id = 23;
                     break;
                 case "VipExpiration":
+                case 28:
+                    message.id = 28;
+                    break;
+                case "RMB":
                 case 29:
                     message.id = 29;
                     break;
@@ -19736,6 +19831,7 @@ $root.pb = (function () {
          * @property {number|null} [price] StockOrder price
          * @property {number|null} [volume] StockOrder volume
          * @property {number|null} [uid] StockOrder uid
+         * @property {number|Long|null} [ts] StockOrder ts
          * @property {number|null} [id] StockOrder id
          * @property {number|null} [node] StockOrder node
          */
@@ -19812,6 +19908,14 @@ $root.pb = (function () {
         StockOrder.prototype.uid = 0;
 
         /**
+         * StockOrder ts.
+         * @member {number|Long} ts
+         * @memberof pb.StockOrder
+         * @instance
+         */
+        StockOrder.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
          * StockOrder id.
          * @member {number} id
          * @memberof pb.StockOrder
@@ -19865,10 +19969,12 @@ $root.pb = (function () {
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.volume);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.uid);
+            if (message.ts != null && Object.hasOwnProperty.call(message, "ts"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.ts);
             if (message.id != null && Object.hasOwnProperty.call(message, "id"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.id);
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.id);
             if (message.node != null && Object.hasOwnProperty.call(message, "node"))
-                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.node);
+                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.node);
             return writer;
         };
 
@@ -19925,9 +20031,12 @@ $root.pb = (function () {
                         message.uid = reader.int32();
                         break;
                     case 8:
-                        message.id = reader.int32();
+                        message.ts = reader.int64();
                         break;
                     case 9:
+                        message.id = reader.int32();
+                        break;
+                    case 10:
                         message.node = reader.int32();
                         break;
                     default:
@@ -20005,6 +20114,9 @@ $root.pb = (function () {
             if (message.uid != null && message.hasOwnProperty("uid"))
                 if (!$util.isInteger(message.uid))
                     return "uid: integer expected";
+            if (message.ts != null && message.hasOwnProperty("ts"))
+                if (!$util.isInteger(message.ts) && !(message.ts && $util.isInteger(message.ts.low) && $util.isInteger(message.ts.high)))
+                    return "ts: integer|Long expected";
             if (message.id != null && message.hasOwnProperty("id"))
                 if (!$util.isInteger(message.id))
                     return "id: integer expected";
@@ -20099,6 +20211,15 @@ $root.pb = (function () {
                 message.volume = object.volume | 0;
             if (object.uid != null)
                 message.uid = object.uid | 0;
+            if (object.ts != null)
+                if ($util.Long)
+                    (message.ts = $util.Long.fromValue(object.ts)).unsigned = false;
+                else if (typeof object.ts === "string")
+                    message.ts = parseInt(object.ts, 10);
+                else if (typeof object.ts === "number")
+                    message.ts = object.ts;
+                else if (typeof object.ts === "object")
+                    message.ts = new $util.LongBits(object.ts.low >>> 0, object.ts.high >>> 0).toNumber();
             if (object.id != null)
                 message.id = object.id | 0;
             if (object.node != null)
@@ -20131,6 +20252,11 @@ $root.pb = (function () {
                 object.price = 0;
                 object.volume = 0;
                 object.uid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.ts = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.ts = options.longs === String ? "0" : 0;
                 object.id = 0;
                 object.node = 0;
             }
@@ -20151,6 +20277,11 @@ $root.pb = (function () {
                 object.volume = message.volume;
             if (message.uid != null && message.hasOwnProperty("uid"))
                 object.uid = message.uid;
+            if (message.ts != null && message.hasOwnProperty("ts"))
+                if (typeof message.ts === "number")
+                    object.ts = options.longs === String ? String(message.ts) : message.ts;
+                else
+                    object.ts = options.longs === String ? $util.Long.prototype.toString.call(message.ts) : options.longs === Number ? new $util.LongBits(message.ts.low >>> 0, message.ts.high >>> 0).toNumber() : message.ts;
             if (message.id != null && message.hasOwnProperty("id"))
                 object.id = message.id;
             if (message.node != null && message.hasOwnProperty("node"))
@@ -25678,6 +25809,1004 @@ $root.pb = (function () {
         return Events;
     })();
 
+    pb.ItemOrder = (function () {
+
+        /**
+         * Properties of an ItemOrder.
+         * @memberof pb
+         * @interface IItemOrder
+         * @property {number|null} [itemId] ItemOrder itemId
+         * @property {number|null} [activityId] ItemOrder activityId
+         * @property {number|null} [count] ItemOrder count
+         */
+
+        /**
+         * Constructs a new ItemOrder.
+         * @memberof pb
+         * @classdesc Represents an ItemOrder.
+         * @implements IItemOrder
+         * @constructor
+         * @param {pb.IItemOrder=} [properties] Properties to set
+         */
+        function ItemOrder(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ItemOrder itemId.
+         * @member {number} itemId
+         * @memberof pb.ItemOrder
+         * @instance
+         */
+        ItemOrder.prototype.itemId = 0;
+
+        /**
+         * ItemOrder activityId.
+         * @member {number} activityId
+         * @memberof pb.ItemOrder
+         * @instance
+         */
+        ItemOrder.prototype.activityId = 0;
+
+        /**
+         * ItemOrder count.
+         * @member {number} count
+         * @memberof pb.ItemOrder
+         * @instance
+         */
+        ItemOrder.prototype.count = 0;
+
+        /**
+         * Creates a new ItemOrder instance using the specified properties.
+         * @function create
+         * @memberof pb.ItemOrder
+         * @static
+         * @param {pb.IItemOrder=} [properties] Properties to set
+         * @returns {pb.ItemOrder} ItemOrder instance
+         */
+        ItemOrder.create = function create(properties) {
+            return new ItemOrder(properties);
+        };
+
+        /**
+         * Encodes the specified ItemOrder message. Does not implicitly {@link pb.ItemOrder.verify|verify} messages.
+         * @function encode
+         * @memberof pb.ItemOrder
+         * @static
+         * @param {pb.IItemOrder} message ItemOrder message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ItemOrder.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.itemId != null && Object.hasOwnProperty.call(message, "itemId"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.itemId);
+            if (message.activityId != null && Object.hasOwnProperty.call(message, "activityId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.activityId);
+            if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.count);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ItemOrder message, length delimited. Does not implicitly {@link pb.ItemOrder.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.ItemOrder
+         * @static
+         * @param {pb.IItemOrder} message ItemOrder message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ItemOrder.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an ItemOrder message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.ItemOrder
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.ItemOrder} ItemOrder
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ItemOrder.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.ItemOrder();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.itemId = reader.int32();
+                        break;
+                    case 2:
+                        message.activityId = reader.int32();
+                        break;
+                    case 3:
+                        message.count = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an ItemOrder message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.ItemOrder
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.ItemOrder} ItemOrder
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ItemOrder.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an ItemOrder message.
+         * @function verify
+         * @memberof pb.ItemOrder
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ItemOrder.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.itemId != null && message.hasOwnProperty("itemId"))
+                if (!$util.isInteger(message.itemId))
+                    return "itemId: integer expected";
+            if (message.activityId != null && message.hasOwnProperty("activityId"))
+                if (!$util.isInteger(message.activityId))
+                    return "activityId: integer expected";
+            if (message.count != null && message.hasOwnProperty("count"))
+                if (!$util.isInteger(message.count))
+                    return "count: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates an ItemOrder message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.ItemOrder
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.ItemOrder} ItemOrder
+         */
+        ItemOrder.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.ItemOrder)
+                return object;
+            var message = new $root.pb.ItemOrder();
+            if (object.itemId != null)
+                message.itemId = object.itemId | 0;
+            if (object.activityId != null)
+                message.activityId = object.activityId | 0;
+            if (object.count != null)
+                message.count = object.count | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an ItemOrder message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.ItemOrder
+         * @static
+         * @param {pb.ItemOrder} message ItemOrder
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ItemOrder.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.itemId = 0;
+                object.activityId = 0;
+                object.count = 0;
+            }
+            if (message.itemId != null && message.hasOwnProperty("itemId"))
+                object.itemId = message.itemId;
+            if (message.activityId != null && message.hasOwnProperty("activityId"))
+                object.activityId = message.activityId;
+            if (message.count != null && message.hasOwnProperty("count"))
+                object.count = message.count;
+            return object;
+        };
+
+        /**
+         * Converts this ItemOrder to JSON.
+         * @function toJSON
+         * @memberof pb.ItemOrder
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ItemOrder.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ItemOrder;
+    })();
+
+    pb.CmdMobileBind = (function () {
+
+        /**
+         * Properties of a CmdMobileBind.
+         * @memberof pb
+         * @interface ICmdMobileBind
+         * @property {string|null} [mobile] CmdMobileBind mobile
+         * @property {string|null} [smsCode] CmdMobileBind smsCode
+         */
+
+        /**
+         * Constructs a new CmdMobileBind.
+         * @memberof pb
+         * @classdesc Represents a CmdMobileBind.
+         * @implements ICmdMobileBind
+         * @constructor
+         * @param {pb.ICmdMobileBind=} [properties] Properties to set
+         */
+        function CmdMobileBind(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdMobileBind mobile.
+         * @member {string} mobile
+         * @memberof pb.CmdMobileBind
+         * @instance
+         */
+        CmdMobileBind.prototype.mobile = "";
+
+        /**
+         * CmdMobileBind smsCode.
+         * @member {string} smsCode
+         * @memberof pb.CmdMobileBind
+         * @instance
+         */
+        CmdMobileBind.prototype.smsCode = "";
+
+        /**
+         * Creates a new CmdMobileBind instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdMobileBind
+         * @static
+         * @param {pb.ICmdMobileBind=} [properties] Properties to set
+         * @returns {pb.CmdMobileBind} CmdMobileBind instance
+         */
+        CmdMobileBind.create = function create(properties) {
+            return new CmdMobileBind(properties);
+        };
+
+        /**
+         * Encodes the specified CmdMobileBind message. Does not implicitly {@link pb.CmdMobileBind.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdMobileBind
+         * @static
+         * @param {pb.ICmdMobileBind} message CmdMobileBind message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdMobileBind.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.mobile != null && Object.hasOwnProperty.call(message, "mobile"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.mobile);
+            if (message.smsCode != null && Object.hasOwnProperty.call(message, "smsCode"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.smsCode);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdMobileBind message, length delimited. Does not implicitly {@link pb.CmdMobileBind.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdMobileBind
+         * @static
+         * @param {pb.ICmdMobileBind} message CmdMobileBind message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdMobileBind.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdMobileBind message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdMobileBind
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdMobileBind} CmdMobileBind
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdMobileBind.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdMobileBind();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.mobile = reader.string();
+                        break;
+                    case 2:
+                        message.smsCode = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdMobileBind message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdMobileBind
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdMobileBind} CmdMobileBind
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdMobileBind.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdMobileBind message.
+         * @function verify
+         * @memberof pb.CmdMobileBind
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdMobileBind.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.mobile != null && message.hasOwnProperty("mobile"))
+                if (!$util.isString(message.mobile))
+                    return "mobile: string expected";
+            if (message.smsCode != null && message.hasOwnProperty("smsCode"))
+                if (!$util.isString(message.smsCode))
+                    return "smsCode: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdMobileBind message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdMobileBind
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdMobileBind} CmdMobileBind
+         */
+        CmdMobileBind.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdMobileBind)
+                return object;
+            var message = new $root.pb.CmdMobileBind();
+            if (object.mobile != null)
+                message.mobile = String(object.mobile);
+            if (object.smsCode != null)
+                message.smsCode = String(object.smsCode);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdMobileBind message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdMobileBind
+         * @static
+         * @param {pb.CmdMobileBind} message CmdMobileBind
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdMobileBind.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.mobile = "";
+                object.smsCode = "";
+            }
+            if (message.mobile != null && message.hasOwnProperty("mobile"))
+                object.mobile = message.mobile;
+            if (message.smsCode != null && message.hasOwnProperty("smsCode"))
+                object.smsCode = message.smsCode;
+            return object;
+        };
+
+        /**
+         * Converts this CmdMobileBind to JSON.
+         * @function toJSON
+         * @memberof pb.CmdMobileBind
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdMobileBind.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdMobileBind;
+    })();
+
+    pb.ActivityItem = (function () {
+
+        /**
+         * Properties of an ActivityItem.
+         * @memberof pb
+         * @interface IActivityItem
+         * @property {number|null} [id] ActivityItem id
+         * @property {string|null} [title] ActivityItem title
+         * @property {string|null} [icon] ActivityItem icon
+         * @property {string|null} [image] ActivityItem image
+         * @property {number|Long|null} [from] ActivityItem from
+         * @property {number|Long|null} [to] ActivityItem to
+         * @property {number|null} [itemId] ActivityItem itemId
+         */
+
+        /**
+         * Constructs a new ActivityItem.
+         * @memberof pb
+         * @classdesc Represents an ActivityItem.
+         * @implements IActivityItem
+         * @constructor
+         * @param {pb.IActivityItem=} [properties] Properties to set
+         */
+        function ActivityItem(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ActivityItem id.
+         * @member {number} id
+         * @memberof pb.ActivityItem
+         * @instance
+         */
+        ActivityItem.prototype.id = 0;
+
+        /**
+         * ActivityItem title.
+         * @member {string} title
+         * @memberof pb.ActivityItem
+         * @instance
+         */
+        ActivityItem.prototype.title = "";
+
+        /**
+         * ActivityItem icon.
+         * @member {string} icon
+         * @memberof pb.ActivityItem
+         * @instance
+         */
+        ActivityItem.prototype.icon = "";
+
+        /**
+         * ActivityItem image.
+         * @member {string} image
+         * @memberof pb.ActivityItem
+         * @instance
+         */
+        ActivityItem.prototype.image = "";
+
+        /**
+         * ActivityItem from.
+         * @member {number|Long} from
+         * @memberof pb.ActivityItem
+         * @instance
+         */
+        ActivityItem.prototype.from = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * ActivityItem to.
+         * @member {number|Long} to
+         * @memberof pb.ActivityItem
+         * @instance
+         */
+        ActivityItem.prototype.to = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * ActivityItem itemId.
+         * @member {number} itemId
+         * @memberof pb.ActivityItem
+         * @instance
+         */
+        ActivityItem.prototype.itemId = 0;
+
+        /**
+         * Creates a new ActivityItem instance using the specified properties.
+         * @function create
+         * @memberof pb.ActivityItem
+         * @static
+         * @param {pb.IActivityItem=} [properties] Properties to set
+         * @returns {pb.ActivityItem} ActivityItem instance
+         */
+        ActivityItem.create = function create(properties) {
+            return new ActivityItem(properties);
+        };
+
+        /**
+         * Encodes the specified ActivityItem message. Does not implicitly {@link pb.ActivityItem.verify|verify} messages.
+         * @function encode
+         * @memberof pb.ActivityItem
+         * @static
+         * @param {pb.IActivityItem} message ActivityItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ActivityItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
+            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+            if (message.icon != null && Object.hasOwnProperty.call(message, "icon"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.icon);
+            if (message.image != null && Object.hasOwnProperty.call(message, "image"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.image);
+            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.from);
+            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.to);
+            if (message.itemId != null && Object.hasOwnProperty.call(message, "itemId"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.itemId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ActivityItem message, length delimited. Does not implicitly {@link pb.ActivityItem.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.ActivityItem
+         * @static
+         * @param {pb.IActivityItem} message ActivityItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ActivityItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an ActivityItem message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.ActivityItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.ActivityItem} ActivityItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ActivityItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.ActivityItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.id = reader.int32();
+                        break;
+                    case 2:
+                        message.title = reader.string();
+                        break;
+                    case 3:
+                        message.icon = reader.string();
+                        break;
+                    case 4:
+                        message.image = reader.string();
+                        break;
+                    case 5:
+                        message.from = reader.int64();
+                        break;
+                    case 6:
+                        message.to = reader.int64();
+                        break;
+                    case 7:
+                        message.itemId = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an ActivityItem message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.ActivityItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.ActivityItem} ActivityItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ActivityItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an ActivityItem message.
+         * @function verify
+         * @memberof pb.ActivityItem
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ActivityItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            if (message.icon != null && message.hasOwnProperty("icon"))
+                if (!$util.isString(message.icon))
+                    return "icon: string expected";
+            if (message.image != null && message.hasOwnProperty("image"))
+                if (!$util.isString(message.image))
+                    return "image: string expected";
+            if (message.from != null && message.hasOwnProperty("from"))
+                if (!$util.isInteger(message.from) && !(message.from && $util.isInteger(message.from.low) && $util.isInteger(message.from.high)))
+                    return "from: integer|Long expected";
+            if (message.to != null && message.hasOwnProperty("to"))
+                if (!$util.isInteger(message.to) && !(message.to && $util.isInteger(message.to.low) && $util.isInteger(message.to.high)))
+                    return "to: integer|Long expected";
+            if (message.itemId != null && message.hasOwnProperty("itemId"))
+                if (!$util.isInteger(message.itemId))
+                    return "itemId: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates an ActivityItem message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.ActivityItem
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.ActivityItem} ActivityItem
+         */
+        ActivityItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.ActivityItem)
+                return object;
+            var message = new $root.pb.ActivityItem();
+            if (object.id != null)
+                message.id = object.id | 0;
+            if (object.title != null)
+                message.title = String(object.title);
+            if (object.icon != null)
+                message.icon = String(object.icon);
+            if (object.image != null)
+                message.image = String(object.image);
+            if (object.from != null)
+                if ($util.Long)
+                    (message.from = $util.Long.fromValue(object.from)).unsigned = false;
+                else if (typeof object.from === "string")
+                    message.from = parseInt(object.from, 10);
+                else if (typeof object.from === "number")
+                    message.from = object.from;
+                else if (typeof object.from === "object")
+                    message.from = new $util.LongBits(object.from.low >>> 0, object.from.high >>> 0).toNumber();
+            if (object.to != null)
+                if ($util.Long)
+                    (message.to = $util.Long.fromValue(object.to)).unsigned = false;
+                else if (typeof object.to === "string")
+                    message.to = parseInt(object.to, 10);
+                else if (typeof object.to === "number")
+                    message.to = object.to;
+                else if (typeof object.to === "object")
+                    message.to = new $util.LongBits(object.to.low >>> 0, object.to.high >>> 0).toNumber();
+            if (object.itemId != null)
+                message.itemId = object.itemId | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an ActivityItem message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.ActivityItem
+         * @static
+         * @param {pb.ActivityItem} message ActivityItem
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ActivityItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.title = "";
+                object.icon = "";
+                object.image = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.from = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.from = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.to = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.to = options.longs === String ? "0" : 0;
+                object.itemId = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            if (message.icon != null && message.hasOwnProperty("icon"))
+                object.icon = message.icon;
+            if (message.image != null && message.hasOwnProperty("image"))
+                object.image = message.image;
+            if (message.from != null && message.hasOwnProperty("from"))
+                if (typeof message.from === "number")
+                    object.from = options.longs === String ? String(message.from) : message.from;
+                else
+                    object.from = options.longs === String ? $util.Long.prototype.toString.call(message.from) : options.longs === Number ? new $util.LongBits(message.from.low >>> 0, message.from.high >>> 0).toNumber() : message.from;
+            if (message.to != null && message.hasOwnProperty("to"))
+                if (typeof message.to === "number")
+                    object.to = options.longs === String ? String(message.to) : message.to;
+                else
+                    object.to = options.longs === String ? $util.Long.prototype.toString.call(message.to) : options.longs === Number ? new $util.LongBits(message.to.low >>> 0, message.to.high >>> 0).toNumber() : message.to;
+            if (message.itemId != null && message.hasOwnProperty("itemId"))
+                object.itemId = message.itemId;
+            return object;
+        };
+
+        /**
+         * Converts this ActivityItem to JSON.
+         * @function toJSON
+         * @memberof pb.ActivityItem
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ActivityItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ActivityItem;
+    })();
+
+    pb.ActivityConf = (function () {
+
+        /**
+         * Properties of an ActivityConf.
+         * @memberof pb
+         * @interface IActivityConf
+         * @property {Array.<pb.IActivityItem>|null} [items] ActivityConf items
+         */
+
+        /**
+         * Constructs a new ActivityConf.
+         * @memberof pb
+         * @classdesc Represents an ActivityConf.
+         * @implements IActivityConf
+         * @constructor
+         * @param {pb.IActivityConf=} [properties] Properties to set
+         */
+        function ActivityConf(properties) {
+            this.items = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ActivityConf items.
+         * @member {Array.<pb.IActivityItem>} items
+         * @memberof pb.ActivityConf
+         * @instance
+         */
+        ActivityConf.prototype.items = $util.emptyArray;
+
+        /**
+         * Creates a new ActivityConf instance using the specified properties.
+         * @function create
+         * @memberof pb.ActivityConf
+         * @static
+         * @param {pb.IActivityConf=} [properties] Properties to set
+         * @returns {pb.ActivityConf} ActivityConf instance
+         */
+        ActivityConf.create = function create(properties) {
+            return new ActivityConf(properties);
+        };
+
+        /**
+         * Encodes the specified ActivityConf message. Does not implicitly {@link pb.ActivityConf.verify|verify} messages.
+         * @function encode
+         * @memberof pb.ActivityConf
+         * @static
+         * @param {pb.IActivityConf} message ActivityConf message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ActivityConf.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.items != null && message.items.length)
+                for (var i = 0; i < message.items.length; ++i)
+                    $root.pb.ActivityItem.encode(message.items[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ActivityConf message, length delimited. Does not implicitly {@link pb.ActivityConf.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.ActivityConf
+         * @static
+         * @param {pb.IActivityConf} message ActivityConf message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ActivityConf.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an ActivityConf message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.ActivityConf
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.ActivityConf} ActivityConf
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ActivityConf.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.ActivityConf();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        if (!(message.items && message.items.length))
+                            message.items = [];
+                        message.items.push($root.pb.ActivityItem.decode(reader, reader.uint32()));
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an ActivityConf message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.ActivityConf
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.ActivityConf} ActivityConf
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ActivityConf.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an ActivityConf message.
+         * @function verify
+         * @memberof pb.ActivityConf
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ActivityConf.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.items != null && message.hasOwnProperty("items")) {
+                if (!Array.isArray(message.items))
+                    return "items: array expected";
+                for (var i = 0; i < message.items.length; ++i) {
+                    var error = $root.pb.ActivityItem.verify(message.items[i]);
+                    if (error)
+                        return "items." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates an ActivityConf message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.ActivityConf
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.ActivityConf} ActivityConf
+         */
+        ActivityConf.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.ActivityConf)
+                return object;
+            var message = new $root.pb.ActivityConf();
+            if (object.items) {
+                if (!Array.isArray(object.items))
+                    throw TypeError(".pb.ActivityConf.items: array expected");
+                message.items = [];
+                for (var i = 0; i < object.items.length; ++i) {
+                    if (typeof object.items[i] !== "object")
+                        throw TypeError(".pb.ActivityConf.items: object expected");
+                    message.items[i] = $root.pb.ActivityItem.fromObject(object.items[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an ActivityConf message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.ActivityConf
+         * @static
+         * @param {pb.ActivityConf} message ActivityConf
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ActivityConf.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.items = [];
+            if (message.items && message.items.length) {
+                object.items = [];
+                for (var j = 0; j < message.items.length; ++j)
+                    object.items[j] = $root.pb.ActivityItem.toObject(message.items[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this ActivityConf to JSON.
+         * @function toJSON
+         * @memberof pb.ActivityConf
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ActivityConf.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ActivityConf;
+    })();
+
     /**
      * KType enum.
      * @name pb.KType
@@ -30765,6 +31894,7 @@ $root.pb = (function () {
      * @property {number} IosAppleStore=6667 IosAppleStore value
      * @property {number} Ipad=6668 Ipad value
      * @property {number} WeChatMinProgram=8888 WeChatMinProgram value
+     * @property {number} Test=10000 Test value
      */
     pb.AppFrom = (function () {
         var valuesById = {}, values = Object.create(valuesById);
@@ -30792,6 +31922,7 @@ $root.pb = (function () {
         values[valuesById[6667] = "IosAppleStore"] = 6667;
         values[valuesById[6668] = "Ipad"] = 6668;
         values[valuesById[8888] = "WeChatMinProgram"] = 8888;
+        values[valuesById[10000] = "Test"] = 10000;
         return values;
     })();
 
@@ -31058,6 +32189,7 @@ $root.pb = (function () {
                     case 6667:
                     case 6668:
                     case 8888:
+                    case 10000:
                         break;
                 }
             if (message.ua != null && message.hasOwnProperty("ua"))
@@ -31180,6 +32312,10 @@ $root.pb = (function () {
                 case "WeChatMinProgram":
                 case 8888:
                     message.from = 8888;
+                    break;
+                case "Test":
+                case 10000:
+                    message.from = 10000;
                     break;
             }
             if (object.ua != null)
@@ -31470,6 +32606,7 @@ $root.pb = (function () {
                     case 6667:
                     case 6668:
                     case 8888:
+                    case 10000:
                         break;
                 }
             return null;
@@ -31619,6 +32756,10 @@ $root.pb = (function () {
                 case "WeChatMinProgram":
                 case 8888:
                     message.from = 8888;
+                    break;
+                case "Test":
+                case 10000:
+                    message.from = 10000;
                     break;
             }
             return message;
@@ -31890,6 +33031,7 @@ $root.pb = (function () {
                     case 6667:
                     case 6668:
                     case 8888:
+                    case 10000:
                         break;
                 }
             return null;
@@ -32037,6 +33179,10 @@ $root.pb = (function () {
                 case "WeChatMinProgram":
                 case 8888:
                     message.from = 8888;
+                    break;
+                case "Test":
+                case 10000:
+                    message.from = 10000;
                     break;
             }
             return message;
@@ -34387,6 +35533,7 @@ $root.pb = (function () {
                     case 6667:
                     case 6668:
                     case 8888:
+                    case 10000:
                         break;
                 }
             if (message.ip != null && message.hasOwnProperty("ip"))
@@ -34535,6 +35682,10 @@ $root.pb = (function () {
                 case "WeChatMinProgram":
                 case 8888:
                     message.from = 8888;
+                    break;
+                case "Test":
+                case 10000:
+                    message.from = 10000;
                     break;
             }
             if (object.ip != null)
@@ -36311,6 +37462,7 @@ $root.pb = (function () {
                     case 1020:
                     case 1022:
                     case 1024:
+                    case 1026:
                     case 1200:
                     case 1300:
                     case 2001:
@@ -36357,6 +37509,10 @@ $root.pb = (function () {
                     case 3028:
                     case 3029:
                     case 3030:
+                    case 3031:
+                    case 3032:
+                    case 3033:
+                    case 3034:
                     case 3999:
                     case 4000:
                     case 4001:
@@ -36522,6 +37678,10 @@ $root.pb = (function () {
                 case "Sync_S2C_TaskProgress":
                 case 1024:
                     message.id = 1024;
+                    break;
+                case "Sync_S2C_ActivityConf":
+                case 1026:
+                    message.id = 1026;
                     break;
                 case "Sync_C2S_GameHeart":
                 case 1200:
@@ -36706,6 +37866,22 @@ $root.pb = (function () {
                 case "Rep_Hall_QueryEventLog":
                 case 3030:
                     message.id = 3030;
+                    break;
+                case "Req_Hall_ShopOrder":
+                case 3031:
+                    message.id = 3031;
+                    break;
+                case "Rep_Hall_ShopOrder":
+                case 3032:
+                    message.id = 3032;
+                    break;
+                case "Req_Hall_MobileBind":
+                case 3033:
+                    message.id = 3033;
+                    break;
+                case "Rep_Hall_MobileBind":
+                case 3034:
+                    message.id = 3034;
                     break;
                 case "Req_Hall_Logout":
                 case 3999:
@@ -38096,6 +39272,7 @@ $root.pb = (function () {
                     case 1020:
                     case 1022:
                     case 1024:
+                    case 1026:
                     case 1200:
                     case 1300:
                     case 2001:
@@ -38142,6 +39319,10 @@ $root.pb = (function () {
                     case 3028:
                     case 3029:
                     case 3030:
+                    case 3031:
+                    case 3032:
+                    case 3033:
+                    case 3034:
                     case 3999:
                     case 4000:
                     case 4001:
@@ -38314,6 +39495,10 @@ $root.pb = (function () {
                 case "Sync_S2C_TaskProgress":
                 case 1024:
                     message.id = 1024;
+                    break;
+                case "Sync_S2C_ActivityConf":
+                case 1026:
+                    message.id = 1026;
                     break;
                 case "Sync_C2S_GameHeart":
                 case 1200:
@@ -38498,6 +39683,22 @@ $root.pb = (function () {
                 case "Rep_Hall_QueryEventLog":
                 case 3030:
                     message.id = 3030;
+                    break;
+                case "Req_Hall_ShopOrder":
+                case 3031:
+                    message.id = 3031;
+                    break;
+                case "Rep_Hall_ShopOrder":
+                case 3032:
+                    message.id = 3032;
+                    break;
+                case "Req_Hall_MobileBind":
+                case 3033:
+                    message.id = 3033;
+                    break;
+                case "Rep_Hall_MobileBind":
+                case 3034:
+                    message.id = 3034;
                     break;
                 case "Req_Hall_Logout":
                 case 3999:

@@ -35,4 +35,8 @@ export default class WebSDK {
         })
 
     }
+
+    chooseImage() {
+        console.log('webSDK is chooseImage null');
+    }
 }

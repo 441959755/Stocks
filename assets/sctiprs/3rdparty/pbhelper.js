@@ -145,26 +145,24 @@ PBHelper.prototype = {
         return decode;
     },
 
-    onCmdEditNickConvertToBuff(data) {
-        let CmdEditNick = pb.CmdEditNick;
-        let message = CmdEditNick.create({
-            uid: data.uid,
-            nick: data.nick,
-        })
 
+    //修改玩家信息
+    onCmdEditInfoConvertToBuff(data) {
+        let CmdEditNick = pb.PlayerInfo;
+        let message = CmdEditNick.create(data);
         let buff = CmdEditNick.encode(message).finish();
         return buff;
     },
 
-    onCmdUploadIconConvertToBuff(data) {
-        let CmdUploadIcon = pb.CmdUploadIcon;
-        let message = CmdUploadIcon.create({
-            uid: data.uid,
-            icon: data.icon,
-        })
-        let buff = CmdUploadIcon.encode(message).finish();
-        return buff;
-    },
+    // onCmdUploadIconConvertToBuff(data) {
+    //     let CmdUploadIcon = pb.PlayerInfo;
+    //     let message = CmdUploadIcon.create({
+    //         uid: data.uid,
+    //         icon: data.icon,
+    //     })
+    //     let buff = CmdUploadIcon.encode(message).finish();
+    //     return buff;
+    // },
 
     onAdClickedConvertTpBuff(data) {
         let AdClicked = pb.AdClicked;
@@ -246,6 +244,7 @@ PBHelper.prototype = {
         console.log('id:' + id + '跟新数据');
         if (id == pb.MessageId.Rep_Game_Login) {
             data = this.onCmdGameLoginReplyConvertToData(buff);
+
             return data;
         } else if (id == pb.MessageId.Rep_QuoteQuery) {
             let Quotes = pb.Quotes;

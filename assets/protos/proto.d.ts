@@ -32,8 +32,11 @@ export namespace pb {
         CS_CHECK_FAILURE_TOKEN = 18,
         CS_ALREADY_UNLOCK = 19,
         CS_CHECK_PHONE_UNREGISTRY = 20,
-        CS_CHECK_ACCOUNT_FORBIDDEN = 21,
-        CS_INVALID_SMSCODE = 22,
+        CS_CHECK_PHONE_UNBOUND = 21,
+        CS_CHECK_ACCOUNT_FORBIDDEN = 22,
+        CS_INVALID_SMSCODE = 23,
+        CS_CHECK_FAILURE_ONCE = 24,
+        CS_PAYMENT_FAILURE = 25,
         CS_ROOM_INVALID = 100,
         CS_ROOM_FULL = 101,
         CS_ROOM_FAIL_CHECKIN = 102,
@@ -58,6 +61,7 @@ export namespace pb {
         Sync_S2C_StockOrderResult = 1020,
         Sync_S2C_MutipleLogin = 1022,
         Sync_S2C_TaskProgress = 1024,
+        Sync_S2C_ActivityConf = 1026,
         Sync_C2S_GameHeart = 1200,
         Sync_Email = 1300,
         Req_QuoteSubscribe = 2001,
@@ -104,6 +108,10 @@ export namespace pb {
         Rep_Hall_GetWeeklyAward = 3028,
         Req_Hall_QueryEventLog = 3029,
         Rep_Hall_QueryEventLog = 3030,
+        Req_Hall_ShopOrder = 3031,
+        Rep_Hall_ShopOrder = 3032,
+        Req_Hall_MobileBind = 3033,
+        Rep_Hall_MobileBind = 3034,
         Req_Hall_Logout = 3999,
         Rep_Hall_Logout = 4000,
         Req_Game_Login = 4001,
@@ -547,6 +555,28 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** FeeType enum. */
+    enum FeeType {
+        FeeType_NULL = 0,
+        FeeType_RMB = 1,
+        FeeType_Diamond = 2,
+        FeeType_Coupon = 3
+    }
+
+    /** PaymentType enum. */
+    enum PaymentType {
+        PaymentType_NULL = 0,
+        WechatPay = 1,
+        ApplePay = 2
+    }
+
+    /** ItemOrderState enum. */
+    enum ItemOrderState {
+        ItemOrderState_Init = 0,
+        Pay = 1,
+        EMS = 2
+    }
+
     /** MessageType enum. */
     enum MessageType {
         MessageType_NULL = 0,
@@ -591,7 +621,8 @@ export namespace pb {
         UnlockQhxl = 21,
         UnlockTjdxl = 22,
         UnlockZbxl = 23,
-        VipExpiration = 29,
+        VipExpiration = 28,
+        RMB = 29,
         Max = 30
     }
 
@@ -2027,6 +2058,9 @@ export namespace pb {
 
         /** GameData week */
         week?: (number|null);
+
+        /** GameData mobile */
+        mobile?: (string|null);
     }
 
     /** Represents a GameData. */
@@ -2085,6 +2119,9 @@ export namespace pb {
 
         /** GameData week. */
         public week: number;
+
+        /** GameData mobile. */
+        public mobile: string;
 
         /**
          * Creates a new GameData instance using the specified properties.
@@ -7293,6 +7330,9 @@ export namespace pb {
         /** StockOrder uid */
         uid?: (number|null);
 
+        /** StockOrder ts */
+        ts?: (number|Long|null);
+
         /** StockOrder id */
         id?: (number|null);
 
@@ -7329,6 +7369,9 @@ export namespace pb {
 
         /** StockOrder uid. */
         public uid: number;
+
+        /** StockOrder ts. */
+        public ts: (number|Long);
 
         /** StockOrder id. */
         public id: number;
@@ -9655,6 +9698,420 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of an ItemOrder. */
+    interface IItemOrder {
+
+        /** ItemOrder itemId */
+        itemId?: (number|null);
+
+        /** ItemOrder activityId */
+        activityId?: (number|null);
+
+        /** ItemOrder count */
+        count?: (number|null);
+    }
+
+    /** Represents an ItemOrder. */
+    class ItemOrder implements IItemOrder {
+
+        /**
+         * Constructs a new ItemOrder.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IItemOrder);
+
+        /** ItemOrder itemId. */
+        public itemId: number;
+
+        /** ItemOrder activityId. */
+        public activityId: number;
+
+        /** ItemOrder count. */
+        public count: number;
+
+        /**
+         * Creates a new ItemOrder instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ItemOrder instance
+         */
+        public static create(properties?: pb.IItemOrder): pb.ItemOrder;
+
+        /**
+         * Encodes the specified ItemOrder message. Does not implicitly {@link pb.ItemOrder.verify|verify} messages.
+         * @param message ItemOrder message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IItemOrder, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ItemOrder message, length delimited. Does not implicitly {@link pb.ItemOrder.verify|verify} messages.
+         * @param message ItemOrder message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IItemOrder, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an ItemOrder message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ItemOrder
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ItemOrder;
+
+        /**
+         * Decodes an ItemOrder message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ItemOrder
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ItemOrder;
+
+        /**
+         * Verifies an ItemOrder message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an ItemOrder message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ItemOrder
+         */
+        public static fromObject(object: { [k: string]: any }): pb.ItemOrder;
+
+        /**
+         * Creates a plain object from an ItemOrder message. Also converts values to other types if specified.
+         * @param message ItemOrder
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.ItemOrder, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ItemOrder to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdMobileBind. */
+    interface ICmdMobileBind {
+
+        /** CmdMobileBind mobile */
+        mobile?: (string|null);
+
+        /** CmdMobileBind smsCode */
+        smsCode?: (string|null);
+    }
+
+    /** Represents a CmdMobileBind. */
+    class CmdMobileBind implements ICmdMobileBind {
+
+        /**
+         * Constructs a new CmdMobileBind.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdMobileBind);
+
+        /** CmdMobileBind mobile. */
+        public mobile: string;
+
+        /** CmdMobileBind smsCode. */
+        public smsCode: string;
+
+        /**
+         * Creates a new CmdMobileBind instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdMobileBind instance
+         */
+        public static create(properties?: pb.ICmdMobileBind): pb.CmdMobileBind;
+
+        /**
+         * Encodes the specified CmdMobileBind message. Does not implicitly {@link pb.CmdMobileBind.verify|verify} messages.
+         * @param message CmdMobileBind message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdMobileBind, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdMobileBind message, length delimited. Does not implicitly {@link pb.CmdMobileBind.verify|verify} messages.
+         * @param message CmdMobileBind message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdMobileBind, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdMobileBind message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdMobileBind
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdMobileBind;
+
+        /**
+         * Decodes a CmdMobileBind message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdMobileBind
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdMobileBind;
+
+        /**
+         * Verifies a CmdMobileBind message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdMobileBind message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdMobileBind
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdMobileBind;
+
+        /**
+         * Creates a plain object from a CmdMobileBind message. Also converts values to other types if specified.
+         * @param message CmdMobileBind
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdMobileBind, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdMobileBind to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an ActivityItem. */
+    interface IActivityItem {
+
+        /** ActivityItem id */
+        id?: (number|null);
+
+        /** ActivityItem title */
+        title?: (string|null);
+
+        /** ActivityItem icon */
+        icon?: (string|null);
+
+        /** ActivityItem image */
+        image?: (string|null);
+
+        /** ActivityItem from */
+        from?: (number|Long|null);
+
+        /** ActivityItem to */
+        to?: (number|Long|null);
+
+        /** ActivityItem itemId */
+        itemId?: (number|null);
+    }
+
+    /** Represents an ActivityItem. */
+    class ActivityItem implements IActivityItem {
+
+        /**
+         * Constructs a new ActivityItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IActivityItem);
+
+        /** ActivityItem id. */
+        public id: number;
+
+        /** ActivityItem title. */
+        public title: string;
+
+        /** ActivityItem icon. */
+        public icon: string;
+
+        /** ActivityItem image. */
+        public image: string;
+
+        /** ActivityItem from. */
+        public from: (number|Long);
+
+        /** ActivityItem to. */
+        public to: (number|Long);
+
+        /** ActivityItem itemId. */
+        public itemId: number;
+
+        /**
+         * Creates a new ActivityItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ActivityItem instance
+         */
+        public static create(properties?: pb.IActivityItem): pb.ActivityItem;
+
+        /**
+         * Encodes the specified ActivityItem message. Does not implicitly {@link pb.ActivityItem.verify|verify} messages.
+         * @param message ActivityItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IActivityItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ActivityItem message, length delimited. Does not implicitly {@link pb.ActivityItem.verify|verify} messages.
+         * @param message ActivityItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IActivityItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an ActivityItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ActivityItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ActivityItem;
+
+        /**
+         * Decodes an ActivityItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ActivityItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ActivityItem;
+
+        /**
+         * Verifies an ActivityItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an ActivityItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ActivityItem
+         */
+        public static fromObject(object: { [k: string]: any }): pb.ActivityItem;
+
+        /**
+         * Creates a plain object from an ActivityItem message. Also converts values to other types if specified.
+         * @param message ActivityItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.ActivityItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ActivityItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an ActivityConf. */
+    interface IActivityConf {
+
+        /** ActivityConf items */
+        items?: (pb.IActivityItem[]|null);
+    }
+
+    /** Represents an ActivityConf. */
+    class ActivityConf implements IActivityConf {
+
+        /**
+         * Constructs a new ActivityConf.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IActivityConf);
+
+        /** ActivityConf items. */
+        public items: pb.IActivityItem[];
+
+        /**
+         * Creates a new ActivityConf instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ActivityConf instance
+         */
+        public static create(properties?: pb.IActivityConf): pb.ActivityConf;
+
+        /**
+         * Encodes the specified ActivityConf message. Does not implicitly {@link pb.ActivityConf.verify|verify} messages.
+         * @param message ActivityConf message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IActivityConf, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ActivityConf message, length delimited. Does not implicitly {@link pb.ActivityConf.verify|verify} messages.
+         * @param message ActivityConf message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IActivityConf, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an ActivityConf message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ActivityConf
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ActivityConf;
+
+        /**
+         * Decodes an ActivityConf message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ActivityConf
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ActivityConf;
+
+        /**
+         * Verifies an ActivityConf message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an ActivityConf message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ActivityConf
+         */
+        public static fromObject(object: { [k: string]: any }): pb.ActivityConf;
+
+        /**
+         * Creates a plain object from an ActivityConf message. Also converts values to other types if specified.
+         * @param message ActivityConf
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.ActivityConf, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ActivityConf to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** KType enum. */
     enum KType {
         KType_NULL = 0,
@@ -11625,7 +12082,8 @@ export namespace pb {
         WebsiteIos = 6666,
         IosAppleStore = 6667,
         Ipad = 6668,
-        WeChatMinProgram = 8888
+        WeChatMinProgram = 8888,
+        Test = 10000
     }
 
     /** LoginType enum. */

@@ -26,6 +26,27 @@ import "quote.proto";
 
 
 
+// 计费类型
+enum FeeType {
+	FeeType_NULL = 0;
+
+	FeeType_RMB = 1;		// 人民币
+	FeeType_Diamond = 2;	// 钻石
+	FeeType_Coupon = 3;		// 奖券
+}
+// 支付类型
+enum PaymentType {
+	PaymentType_NULL = 0;
+
+	WechatPay = 1;	// 微信支付
+	ApplePay = 2;	// 苹果支付
+}
+// 订单状态
+enum ItemOrderState {
+	ItemOrderState_Init = 0;	// 未支付，初始状态
+	Pay = 1;					// 已支付
+	EMS = 2;					// 已发货
+}
 // Email消息类型
 enum MessageType {
 	MessageType_NULL = 0;
@@ -79,7 +100,8 @@ enum GamePropertyId {
 	UnlockTjdxl = 22;		// 条件单训练解锁标志
 	UnlockZbxl = 23;		// 指标训练解锁标志
 
-	VipExpiration = 29;		// VIP截止日期的时间戳
+	VipExpiration = 28;		// VIP截止日期的时间戳
+	RMB = 29;				// 充值的人民币
 
 	Max = 30;				// 最大属性
 }
@@ -246,6 +268,7 @@ message GameData {
 	repeated int32 favor_list = 14;		// 关注的玩家列表
 	Tasks tasks = 15;					// 任务
 	int32 week = 16;					// 每周时间戳：YYYYWW
+	string mobile = 17;					// 绑定手机号
 }
 
 
@@ -611,15 +634,16 @@ message CmdStockOrderCancel {
 	int32 node = 6;		// 订单所在的节点
 }
 message StockOrder {
-	int64 order_id = 1;	// 订单ID
+	int64 order_id = 1;	// 订单ID：下单时间戳
 	int32 code = 2;		// 股票代码
 	OrderType type = 3;	// 订单类型：市价/限价买、市价/限价卖
 	OrderState state = 4;// 订单状态：委托中（未成交）、已成交、手动撤销、自动撤销
 	double price = 5;	// 成交价格
 	int32 volume = 6;	// 成交量
 	int32 uid = 7;		// 玩家ID
-	int32 id = 8;		// 炒股大赛ID
-	int32 node = 9;		// 订单所在的节点
+	int64 ts = 8;		// 成交时间戳
+	int32 id = 9;		// 炒股大赛ID
+	int32 node = 10;	// 订单所在的节点
 }
 message StockOrderList {
 	repeated StockOrder items = 1;	// 订单列表
@@ -762,4 +786,30 @@ message EventLog {
 }
 message Events {
 	repeated EventLog items = 1;
+}
+
+// 商城相关
+message ItemOrder {
+	int32 item_id = 1;		// 商品ID
+	int32 activity_id = 2;	// 购买活动ID（如：端午节活动）
+	int32 count = 3;		// 购买数量
+}
+// 绑定手机号
+message CmdMobileBind {
+	string mobile = 1; 		// 手机号
+	string sms_code = 2; 	// 手机验证码
+}
+
+// 购买活动配置
+message ActivityItem {
+	int32 id = 1;		// 活动编码：YYYYMMDD
+	string title = 2;	// 活动标题
+	string icon = 3;	// 活动图标
+	string image = 4;	// 活动图片
+	int64 from = 5;		// 活动开始时间戳：精确到秒
+	int64 to = 6;		// 活动截止时间戳：精确到秒
+	int32 item_id = 7;	// 活动相关购买商品ID
+}
+message ActivityConf {
+	repeated ActivityItem items = 1;
 }

@@ -255,12 +255,12 @@ export default class NewClass extends cc.Component {
 
                 }
             } else if (GameCfg.GameSet.select == '成交量') {
-                GameCfg.VOLGraph = GameCfg.GameSet.VOL;
+                //   GameCfg.VOLGraph = GameCfg.GameSet.VOL;
                 if (GameCfg.GameSet.strategy == '量柱和均量线') {
                     GameCfg.VOLGraph = GameCfg.GameSet.VOL;
                 }
             }
-
+            GameCfg.VOLGraph = GameCfg.GameSet.VOL;
         }
     }
 

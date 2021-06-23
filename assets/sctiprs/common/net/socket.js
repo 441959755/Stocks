@@ -24,29 +24,26 @@ Socket.prototype = {
 			if (info && info.data) {
 				GameData.userID = info.data.uid;
 				GameData.userName = info.data.nickname;
-				// if (!cc.ext.gameData.headimgurl) {
-				//     cc.ext.gameData.headimgurl = info.data.icon;
-				// }
-				// cc.ext.gameData.gold = info.data.properties[0];
-				// cc.ext.gameData.exp = info.data.properties[1];
-				// (cc.ext.gameData.level = info.da)ta.properties[2];
-				// cc.ext.gameData.ShuangMang_Gold = info.data.properties[3];
+
 				GameData.properties = info.data.properties;
 				GameData.SmxlState = info.data.smlxState;
 				GameCfgText.levelInfoCfg && (GameData.maxExp = GameCfgText.levelInfoCfg[GameData.properties[2]])
+				GameData.gender = info.data.gender || '男';
+				GameData.location = info.data.location || '中国';
+
 
 				if (cc.director.getScene().name == 'Login') {
 					cc.director.loadScene('hall');
 				}
 
+				//心跳
 				if (!self.heartbeat) {
 					self.heartbeat = setInterval(() => {
 						socket.send(pb.MessageId.Sync_C2S_GameHeart, null, null);
-						//	console.log('发送心跳');
 					}, 5000);
 				}
 
-
+				//上个没有发送的消息
 				if (self._preData) {
 					self.send(self._preData.actionCode, self._preData.proto, self._preData.callback);
 					self._preData = null;
@@ -85,13 +82,6 @@ Socket.prototype = {
 		// }
 	},
 
-	// on(actionCode, cb) {
-	//     this.notification.on(actionCode.toString(), (event) => {
-	//         if (cb) {
-	//             cb(event.detail);
-	//         }
-	//     })
-	// },
 
 	send(actionCode, proto, callback) {
 

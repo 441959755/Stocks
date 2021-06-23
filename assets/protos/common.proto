@@ -48,8 +48,11 @@ enum ErrorCode {
 	CS_CHECK_FAILURE_TOKEN = 18;	// 无效的token
 	CS_ALREADY_UNLOCK = 19;			// 已经解锁
 	CS_CHECK_PHONE_UNREGISTRY = 20;	// 手机号未注册
-	CS_CHECK_ACCOUNT_FORBIDDEN = 21;// 账号已被禁用
-	CS_INVALID_SMSCODE = 22;		// 无效的短信验证码
+	CS_CHECK_PHONE_UNBOUND = 21;	// 手机号未绑定
+	CS_CHECK_ACCOUNT_FORBIDDEN = 22;// 账号已被禁用
+	CS_INVALID_SMSCODE = 23;		// 无效的短信验证码
+	CS_CHECK_FAILURE_ONCE = 24;		// 已经参加过活动
+	CS_PAYMENT_FAILURE = 25;		// 支付失败
 
 	CS_ROOM_INVALID = 100;			// 无效的房间ID
 	CS_ROOM_FULL = 101;				// 房间已满
@@ -81,6 +84,7 @@ enum MessageId {
 	Sync_S2C_StockOrderResult = 1020;		// 同步股票委托处理结果：StockOrderResult
 	Sync_S2C_MutipleLogin = 1022;			// 同步多个客户端同时登录：无
 	Sync_S2C_TaskProgress = 1024;			// 同步任务进度及奖励：TaskItem
+	Sync_S2C_ActivityConf = 1026;			// 同步当前活动配置：ActivityConf
 	
 	Sync_C2S_GameHeart = 1200;				// 心跳
 	
@@ -135,6 +139,10 @@ enum MessageId {
 	Rep_Hall_GetWeeklyAward = 3028;			// 领取每周豪礼应答：ErrorInfo
 	Req_Hall_QueryEventLog = 3029;			// 查询事件：CmdQueryEventLog
 	Rep_Hall_QueryEventLog = 3030;			// 查询事件应答：Events
+	Req_Hall_ShopOrder = 3031;				// 商城购买：ItemOrder
+	Rep_Hall_ShopOrder = 3032;				// 商城购买应答：ErrorInfo
+	Req_Hall_MobileBind = 3033;				// 手机号绑定：CmdMobileBind
+	Rep_Hall_MobileBind = 3034;				// 手机号绑定应答：ErrorInfo
 
 	Req_Hall_Logout = 3999;					// 登出：无
 	Rep_Hall_Logout = 4000;					// 登出应答：无（发送请求成功后会自动断开tcp长连接）
@@ -191,7 +199,6 @@ enum MessageId {
 	Rep_Game_ZsjcBet = 4042;				// 指数竞猜下注应答：ErrorInfo
 	Req_Game_ZsjcRanking = 4043;			// 指数竞猜排行榜：无
 	Rep_Game_ZsjcRanking = 4044;			// 指数竞猜排行榜应答：RankingList
-
 	// 房间相关
 	Req_Room_Create = 5003;					// 创建房间：CmdRoomCreate
 	Rep_Room_Create = 5004;					// 创建房间应答：CmdRoomCreateReply
@@ -212,7 +219,6 @@ enum MessageId {
 	Sync_Room_GameStatus = 5214;			// 游戏状态：RoomGameStatus
 	Sync_Room_GameOp = 5216;				// 游戏操作：RoomGameOp
 	Sync_Room_GameResult = 5218;			// 游戏结果：RoomGameResult
-
 
 
 	// 服务器和服务器之间的消息

@@ -1,5 +1,8 @@
 import GameData from "../../sctiprs/GameData";
-import GameCfgText from '../../sctiprs/GameText';
+
+import EventCfg from "../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
+import { pb } from "../../protos/proto";
 
 const { ccclass, property } = cc._decorator;
 
@@ -18,17 +21,19 @@ export default class NewClass extends cc.Component {
     @property(cc.Sprite)
     headImg: cc.Sprite = null;
 
-    @property(cc.Label)
-    userIDLa: cc.Label = null;
+    @property(cc.Node)
+    otherNode: cc.Node = null;
 
-    @property(cc.Label)
-    nameLa: cc.Label = null;
+    onLoad() {
+        GlobalEvent.on(EventCfg.HEADIMGCHANGE, () => {
+            this.headImg.spriteFrame = GameData.headImg;
+        }, this);
+    }
 
-    @property(cc.Label)
-    lvLa: cc.Label = null;
 
-    @property(cc.Label)
-    expLa: cc.Label = null;
+    onDestroy() {
+        GlobalEvent.off(EventCfg.HEADIMGCHANGE);
+    }
 
 
     onEnable() {
@@ -36,17 +41,17 @@ export default class NewClass extends cc.Component {
             this.headImg.spriteFrame = GameData.headImg;
         }
 
-        GameData.userID && (this.userIDLa.string = 'ID:    ' + GameData.userID)
+        // GameData.userID && (this.userIDLa.string = 'ID:    ' + GameData.userID)
 
-        GameData.userName && (this.nameLa.string = '昵称:    ' + GameData.userName)
+        // GameData.userName && (this.nameLa.string = '昵称:    ' + GameData.userName)
 
-        GameData.properties[2] && (this.lvLa.string = 'lv: ' + GameData.properties[2])
-        let max_exp
-        if (GameCfgText.levelInfoCfg) {
-            max_exp = GameCfgText.levelInfoCfg[GameData.properties[2]];
-        }
+        // GameData.properties[2] && (this.lvLa.string = 'lv: ' + GameData.properties[2])
+        // let max_exp
+        // if (GameCfgText.levelInfoCfg) {
+        //     max_exp = GameCfgText.levelInfoCfg[GameData.properties[2]];
+        // }
 
-        GameData.properties[1] && (this.expLa.string = GameData.properties[1] + '/' + max_exp)
+        // GameData.properties[1] && (this.expLa.string = GameData.properties[1] + '/' + max_exp)
 
     }
 
@@ -59,7 +64,6 @@ export default class NewClass extends cc.Component {
                 el.active = false;
             }
         })
-
     }
 
     onBtnClick(event, data) {
@@ -72,7 +76,7 @@ export default class NewClass extends cc.Component {
                     uid: GameData.userID,
                     nick: v,
                 }
-                socket.send(3003, PB.onCmdEditNickConvertToBuff(data), (info) => {
+                socket.send(pb.MessageId.Req_Hall_EditNick, PB.onCmdEditNickConvertToBuff(data), (info) => {
                     console.log('onCmdEditNickConvertToBuff:' + JSON.stringify(info));
                     if (!info.code) {
                         this.tckNode.active = false;
@@ -91,43 +95,43 @@ export default class NewClass extends cc.Component {
         } else if (name == 'nameBG') {
             this.tckNode.active = true;
         } else if (name == 'playerSprite') {
-            llwSDK.chooseImage((img) => {
-                this.load_picture_async(img);
-            });
+            // llwSDK.chooseImage((img) => {
+            //     this.load_picture_async(img);
+            // });
         } else if (name == 'closeBtn') {
             this.node.active = false;
         }
 
     }
 
-    load_picture_async(imgurl, temp?) {
-        // return new Promise((resolve, reject) => {
-        //     var self = this;
-        //     cc.loader.load(imgurl, function (err, texture) {
-        let data = {
-            uid: GameData.userID,
-            icon: imgurl,
-        }
-        console.log('imgurl:' + imgurl);
-        socket.send(3001, PB.onCmdUploadIconConvertToBuff(data), (info) => {
-            console.log('onCmdUploadIconConvertToBuff:' + JSON.stringify(info));
-            if (!info.code) {
-                //   this.tckNode.active = false;
-                // GameData.userName = v;
-                // GameData.userName && (this.nameLa.string = '昵称:    ' + GameData.userName)
-                GameData.headImg = new cc.SpriteFrame(imgurl);
-                if (GameData.headImg) {
-                    this.headImg.spriteFrame = GameData.headImg;
-                }
-            } else {
-                console.log('图片有吴!:' + info.code + info.err);
-            }
+    // load_picture_async(imgurl, temp?) {
+    //     // return new Promise((resolve, reject) => {
+    //     //     var self = this;
+    //     //     cc.loader.load(imgurl, function (err, texture) {
+    //     let data = {
+    //         uid: GameData.userID,
+    //         icon: imgurl,
+    //     }
+    //     console.log('imgurl:' + imgurl);
+    //     socket.send(pb.MessageId.Req_Hall_UploadIcon, PB.onCmdUploadIconConvertToBuff(data), (info) => {
+    //         console.log('onCmdUploadIconConvertToBuff:' + JSON.stringify(info));
+    //         if (!info.code) {
+    //             //   this.tckNode.active = false;
+    //             // GameData.userName = v;
+    //             // GameData.userName && (this.nameLa.string = '昵称:    ' + GameData.userName)
+    //             GameData.headImg = new cc.SpriteFrame(imgurl);
+    //             if (GameData.headImg) {
+    //                 this.headImg.spriteFrame = GameData.headImg;
+    //             }
+    //         } else {
+    //             console.log('图片有吴!:' + info.code + info.err);
+    //         }
 
-        })
+    //     })
 
-        //     });
-        // })
-    }
+    //     //     });
+    //     // })
+    // }
 
     testTextLength(v) {
         let flag = 1;

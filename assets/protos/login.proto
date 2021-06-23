@@ -54,6 +54,8 @@ enum AppFrom {
 	Ipad          = 6668;   // Ipad
 
 	WeChatMinProgram = 8888;// 微信小程序
+
+	Test = 10000;			// 测试
 }
 
 // 登录类型
@@ -142,3 +144,5 @@ service LoginService {
   rpc GetSms (CmdGetSms) returns (ErrorInfo) {}
   rpc ResetPwd (CmdResetPwd) returns (ErrorInfo) {}
 }
+
+

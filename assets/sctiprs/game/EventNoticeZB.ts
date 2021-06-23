@@ -1187,25 +1187,43 @@ export default class NewClass extends cc.Component {
 
         if (GameCfg.GameSet.strategy == '经典用法' || GameCfg.GameSet.strategy == '布林带中轨') {
             //1) 股价突破中轨
-            if (this.gpData[index - 1].low <= this.BollList[index - 1][0] && this.gpData[index].close > this.BollList[index][0]) {
-                if (this.BollList[index][0] >= this.BollList[index - 1][0]) {
-                    if (this.BollList[index][1] >= this.BollList[index - 1][1]) {
-                        if (this.gpData[index].close > this.BollList[index][0]) {
-                            let preMax = Math.max(this.gpData[index - 1].open, this.gpData[index - 1].close);
-                            if (this.gpData[index].close > preMax) {
-                                if (this.gpData[index].low > this.gpData[index - 1].low) {
-                                    //B
-                                    this._str = '股价突破中轨：当BOLL通道趋势有转平向上时，当股价从下向上突破中轨时，可做短线买入信号Ｂ；'
+            // if (this.gpData[index - 1].low <= this.BollList[index - 1][0] && this.gpData[index].close > this.BollList[index][0]) {
+            //     if (this.BollList[index][0] >= this.BollList[index - 1][0]) {
+            //         if (this.BollList[index][1] >= this.BollList[index - 1][1]) {
+            //             if (this.gpData[index].close > this.BollList[index][0]) {
+            //                 let preMax = Math.max(this.gpData[index - 1].open, this.gpData[index - 1].close);
+            //                 if (this.gpData[index].close > preMax) {
+            //                     if (this.gpData[index].low > this.gpData[index - 1].low) {
+            //                         //B
+            //                         this._str = '股价突破中轨：当BOLL通道趋势有转平向上时，当股价从下向上突破中轨时，可做短线买入信号Ｂ；'
 
-                                    if (this.curState != 'B') {
-                                        this.preBollInfo = 1;
-                                        this.onCreateTipsItem('股价突破中轨');
-                                        this.curState = 'B';
-                                        StrategyAIData.onBuyFunc();
-                                        return;
-                                    }
-                                }
-                            }
+            //                         if (this.curState != 'B') {
+            //                             this.preBollInfo = 1;
+            //                             this.onCreateTipsItem('股价突破中轨');
+            //                             this.curState = 'B';
+            //                             StrategyAIData.onBuyFunc();
+            //                             return;
+            //                         }
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+            //1) 股价突破中轨
+            if (this.BollList[index][0] >= this.BollList[index - 1][0] && this.BollList[index][1] >= this.BollList[index - 1][1] && this.BollList[index][2] >= this.BollList[index - 1][2]) {
+                if (this.gpData[index - 1].low < this.BollList[index - 1][0] && this.gpData[index].close < this.BollList[index][0]) {
+                    if (this.gpData[index].close > this.gpData[index - 1].close && this.gpData[index].low > this.gpData[index - 1].low) {
+                        //B
+                        this._str = '股价突破中轨：当BOLL通道趋势有转平向上时，当股价从下向上突破中轨时，可做短线买入信号Ｂ；'
+
+                        if (this.curState != 'B') {
+
+                            this.preBollInfo = 1;
+                            this.onCreateTipsItem('股价突破中轨');
+                            this.curState = 'B';
+                            StrategyAIData.onBuyFunc();
+                            return;
                         }
                     }
                 }
@@ -1497,76 +1515,77 @@ export default class NewClass extends cc.Component {
         let index = GameCfg.huizhidatas - 1;
 
         if (GameCfg.GameSet.strategy == 'RSI金叉' || GameCfg.GameSet.strategy == '经典用法') {
-            {//RSI金叉
-                if (this.RSI3[index] < 50) {
-                    if (this.RSI2[index] > this.RSI3[index]) {
-                        //B
-                        this._str = '当黄线RSI1从下向上穿越紫线RSI3时, 称为RSI1金叉! 可作为买入信号"B"，短线买入个股。'
+            //  {//RSI金叉
+            if (this.RSI1[index - 1] < this.RSI3[index - 1]) {
+                if (this.RSI1[index] > this.RSI3[index]) {
+                    //B
+                    this._str = '当黄线RSI1从下向上穿越紫线RSI3时, 称为RSI1金叉! 可作为买入信号"B"，短线买入个股。'
 
-                        if (this.curState != 'B') {
-                            this.onCreateTipsItem('RSI金叉');
-                            this.curState = 'B';
-                            StrategyAIData.onBuyFunc();
-                            return;
-                        }
-                    }
-                }
-
-                if (this.RSI3 >= 50) {
-                    if (this.RSI1[index] > this.RSI2[index] || this.RSI2[index] > this.RSI3[index]) {
-                        this._str = '当黄线RSI1从下向上穿越紫线RSI3时, 称为RSI1金叉! 可作为买入信号"B"，短线买入个股。'
-
-                        if (this.curState != 'B') {
-                            this.onCreateTipsItem('RSI金叉');
-                            this.curState = 'B';
-                            StrategyAIData.onBuyFunc();
-                            return;
-                        }
-                    }
-                }
-
-                if (this.RSI1[index - 1] < this.RSI3[index - 1]) {
-                    if (this.RSI1[index] > this.RSI3[index]) {
-                        this._str = '当黄线RSI1从下向上穿越紫线RSI3时, 称为RSI1金叉! 可作为买入信号"B"，短线买入个股。'
-
-                        if (this.curState != 'B') {
-                            this.onCreateTipsItem('RSI金叉');
-                            this.curState = 'B';
-                            StrategyAIData.onBuyFunc();
-                            return;
-                        }
+                    if (this.curState != 'B') {
+                        this.onCreateTipsItem('RSI金叉');
+                        this.curState = 'B';
+                        StrategyAIData.onBuyFunc();
+                        return;
                     }
                 }
             }
 
+            // if (this.RSI1[index - 1] > this.RSI3[index - 1]) {
+            //     if (this.RSI1[index] > this.RSI2[index] || this.RSI2[index] > this.RSI3[index]) {
+            //         this._str = '当黄线RSI1从下向上穿越紫线RSI3时, 称为RSI1金叉! 可作为买入信号"B"，短线买入个股。'
+
+            //         if (this.curState != 'B') {
+            //             this.onCreateTipsItem('RSI金叉');
+            //             this.curState = 'B';
+            //             StrategyAIData.onBuyFunc();
+            //             return;
+            //         }
+            //     }
+            // }
+
+            //     if (this.RSI1[index - 1] < this.RSI3[index - 1]) {
+            //         if (this.RSI1[index] > this.RSI3[index]) {
+            //             this._str = '当黄线RSI1从下向上穿越紫线RSI3时, 称为RSI1金叉! 可作为买入信号"B"，短线买入个股。'
+
+            //             if (this.curState != 'B') {
+            //                 this.onCreateTipsItem('RSI金叉');
+            //                 this.curState = 'B';
+            //                 StrategyAIData.onBuyFunc();
+            //                 return;
+            //             }
+            //         }
+            //     }
+            // }
+
             {//RSI死叉
-                if (this.RSI1[index - 1] > this.RSI2[index - 1]) {
-                    if (this.RSI1[index] < this.RSI2[index]) {
-                        //s
-                        this._str = '当黄线RSI1从上向下穿越紫线RSI3时, 称为RSI1死叉!可作为卖出信号"S"，短线卖出个股。'
+                // if (this.RSI1[index - 1] > this.RSI2[index - 1]) {
+                //     if (this.RSI1[index] < this.RSI2[index]) {
+                //         //s
+                //         this._str = '当黄线RSI1从上向下穿越紫线RSI3时, 称为RSI1死叉!可作为卖出信号"S"，短线卖出个股。'
 
-                        if (this.curState != 'S') {
-                            this.onCreateTipsItem('RSI死叉');
-                            this.curState = 'S';
-                            StrategyAIData.onSellFunc();
-                            return;
-                        }
-                    }
-                }
-                else if (this.RSI2[index - 1] > this.RSI3[index - 1]) {
-                    if (this.RSI2[index] < this.RSI3[index]) {
-                        //s
-                        this._str = '当黄线RSI1从上向下穿越紫线RSI3时, 称为RSI1死叉!可作为卖出信号"S"，短线卖出个股。'
+                //         if (this.curState != 'S') {
+                //             this.onCreateTipsItem('RSI死叉');
+                //             this.curState = 'S';
+                //             StrategyAIData.onSellFunc();
+                //             return;
+                //         }
+                //     }
+                // }
+                // else if (this.RSI2[index - 1] > this.RSI3[index - 1]) {
+                //     if (this.RSI2[index] < this.RSI3[index]) {
+                //         //s
+                //         this._str = '当黄线RSI1从上向下穿越紫线RSI3时, 称为RSI1死叉!可作为卖出信号"S"，短线卖出个股。'
 
-                        if (this.curState != 'S') {
-                            this.onCreateTipsItem('RSI死叉');
-                            this.curState = 'S';
-                            StrategyAIData.onSellFunc();
-                            return;
-                        }
-                    }
-                }
-                else if (this.RSI1[index - 1] > this.RSI3[index - 1]) {
+                //         if (this.curState != 'S') {
+                //             this.onCreateTipsItem('RSI死叉');
+                //             this.curState = 'S';
+                //             StrategyAIData.onSellFunc();
+                //             return;
+                //         }
+                //     }
+                // }
+                // else 
+                if (this.RSI1[index - 1] > this.RSI3[index - 1]) {
                     if (this.RSI1[index] < this.RSI3[index]) {
                         //s
                         this._str = '当黄线RSI1从上向下穿越紫线RSI3时, 称为RSI1死叉!可作为卖出信号"S"，短线卖出个股。'

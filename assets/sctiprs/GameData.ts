@@ -75,10 +75,21 @@ export default class GameData {
 
     public static maxExp = null;
 
-    public static sex = null;     //性别
+    public static gender = null;     //性别
 
     public static headimgurl = null; //头像地址
-    public static headImg = null;
+
+    public static _headImg = null;
+
+    public static get headImg() {
+        return this._headImg;
+    }
+    public static set headImg(val) {
+        this._headImg = val;
+        GlobalEvent.emit(EventCfg.HEADIMGCHANGE);
+    }
+
+    public static location = null;
 
     public static roomId = null;
 
