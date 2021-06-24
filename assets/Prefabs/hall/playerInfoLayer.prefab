@@ -9971,7 +9971,9 @@
     "content": {
       "__id__": 253
     },
-    "tipsLabel": null,
+    "tipsLabel": {
+      "__id__": 249
+    },
     "_id": ""
   },
   {
