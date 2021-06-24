@@ -127,6 +127,7 @@ export default class NewClass extends cc.Component {
 	@property(cc.Node)
 	xlzb: cc.Node = null;
 
+	limitUP = 0;  //0没有  1涨停  2跌停
 	onLoad() {
 
 		this.gpData = GameCfg.data[0].data;
@@ -934,6 +935,15 @@ export default class NewClass extends cc.Component {
 
 		}
 
+		//
+		else if (name == 'zhangBtn' || name == 'dieBtn') {
+			if (name == 'zhangBtn' && this.limitUP == 1) {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '涨停时不可买入');
+			} else if (name == 'dieBtn' && this.limitUP == 2) {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '跌停时不可卖出');
+			}
+		}
+
 	}
 
 	setRoundNumber(name?, flag?) {
@@ -1212,6 +1222,7 @@ export default class NewClass extends cc.Component {
 
 	//获取涨停板
 	getRaisingLimit(number) {
+		this.limitUP = 0;
 		this.zhangting.active = false;
 		this.dieting.active = false;
 		let index = number - 1;
@@ -1227,10 +1238,12 @@ export default class NewClass extends cc.Component {
 				let rate = (this.gpData[index + 1].close - this.gpData[index].close) / this.gpData[index].close * 100;
 				if (str == '60' || str == '00') {
 					if (rate >= 9.95) {
+						this.limitUP = 1;
 						this.dieting.active = true;
 						this.zhangting.active = true;
 
 					} else if (rate <= -9.95) {
+						this.limitUP = 2;
 						this.dieting.active = true;
 						this.zhangting.active = true;
 
@@ -1238,9 +1251,11 @@ export default class NewClass extends cc.Component {
 				}
 				else if (str1 == '688') {
 					if (rate >= 19.94) {
+						this.limitUP = 1;
 						this.dieting.active = true;
 						this.zhangting.active = true;
 					} else if (rate <= -19.94) {
+						this.limitUP = 2;
 						this.dieting.active = true;
 						this.zhangting.active = true;
 					}
@@ -1249,20 +1264,24 @@ export default class NewClass extends cc.Component {
 					let time = ComUtils.fromatTime1(this.gpData[index].day);
 					if (time >= 20200824) {
 						if (rate >= 19.94) {
+							this.limitUP = 1;
 							this.dieting.active = true;
 							this.zhangting.active = true;
 						}
 						else if (rate <= -19.94) {
+							this.limitUP = 2;
 							this.dieting.active = true;
 							this.zhangting.active = true;
 						}
 					}
 					else if (time < 20200824) {
 						if (rate >= 9.95) {
+							this.limitUP = 1;
 							this.dieting.active = true;
 							this.zhangting.active = true;
 						}
 						else if (rate <= -9.95) {
+							this.limitUP = 2;
 							this.dieting.active = true;
 							this.zhangting.active = true;
 						}
@@ -1273,10 +1292,12 @@ export default class NewClass extends cc.Component {
 					if (this.gpData[index + 1].close == this.gpData[index + 1].low) {
 						if (this.gpData[index + 1].close == this.gpData[index + 1].open) {
 							if (rate >= 4.88) {
+								this.limitUP = 1;
 								this.zhangting.active = true;
 								this.dieting.active = true;
 							}
 							else if (rate <= -4.88) {
+								this.limitUP = 2;
 								this.dieting.active = true;
 								this.zhangting.active = true;
 							}

@@ -139,10 +139,12 @@ enum MessageId {
 	Rep_Hall_GetWeeklyAward = 3028;			// 领取每周豪礼应答：ErrorInfo
 	Req_Hall_QueryEventLog = 3029;			// 查询事件：CmdQueryEventLog
 	Rep_Hall_QueryEventLog = 3030;			// 查询事件应答：Events
-	Req_Hall_ShopOrder = 3031;				// 商城购买：ItemOrder
-	Rep_Hall_ShopOrder = 3032;				// 商城购买应答：ErrorInfo
-	Req_Hall_MobileBind = 3033;				// 手机号绑定：CmdMobileBind
-	Rep_Hall_MobileBind = 3034;				// 手机号绑定应答：ErrorInfo
+	Req_Hall_ShopOrder = 3031;				// 商城下购买订单：ItemOrder
+	Rep_Hall_ShopOrder = 3032;				// 商城下购买应答：CmdShopOrderReply
+	Req_Hall_ShopOrderQuery = 3033;			// 商城购买订单支付结果查询：CmdShopOrderQuery
+	Rep_Hall_ShopOrderQuery = 3034;			// 商城购买订单支付结果查询应答：ErrorInfo
+	Req_Hall_MobileBind = 3035;				// 手机号绑定：CmdMobileBind
+	Rep_Hall_MobileBind = 3036;				// 手机号绑定应答：ErrorInfo
 
 	Req_Hall_Logout = 3999;					// 登出：无
 	Rep_Hall_Logout = 4000;					// 登出应答：无（发送请求成功后会自动断开tcp长连接）
@@ -239,6 +241,7 @@ enum MessageId {
 	S2S_Sync_ZsjcBetting = 10028;			// 同步指数竞猜的下注信息：CmdBet
 	S2S_Sync_ZsjcState = 10030;				// 同步指数竞猜的游戏状态
 	S2S_Update_DailyTaskProgress = 10032;	// 同步日常任务进度：CmdDailyProgress
+	S2S_Sync_Pay = 10034;					// 支付成功回调处理：CmdPay
 }
 
 message MessageHead {

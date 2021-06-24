@@ -83,9 +83,9 @@ export default class NewClass extends cc.Component {
 
         //用户信息
         this.headImg.spriteFrame = GameData.headImg;
-        this.levelLabel.string = 'LV:  ' + GameData.properties[2];
-        let max_exp = GameCfgText.levelInfoCfg[GameData.properties[2]];
-        this.expLabel.string = 'EXP:' + GameData.properties[1] + '/' + max_exp;
+        this.levelLabel.string = 'LV:  ' + GameData.properties[pb.GamePropertyId.Level] || '1';
+        let max_exp = GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
+        this.expLabel.string = 'EXP:' + GameData.properties[pb.GamePropertyId.Exp] + '/' + max_exp;
         this.userName.string = GameData.userName;
 
         this.contentZB.active = false;

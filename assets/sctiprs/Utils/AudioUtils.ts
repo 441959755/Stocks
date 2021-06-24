@@ -31,7 +31,7 @@ export default class AudioUtils {
 	 */
 	public static playMusic(str, loop?) {
 		if (this.AudioMaps.has(str)) {
-			cc.audioEngine.playMusic(str, loop);
+			cc.audioEngine.playMusic(this.AudioMaps.get(str), loop);
 			return;
 		}
 		console.log('AudioUtils playMusic not ' + str);
@@ -55,7 +55,7 @@ export default class AudioUtils {
 	 * 获取音乐大小
 	 */
 	public static getMusicVolume() {
-		return cc.audioEngine.getMusicVolume();
+		return this.musicVolume;
 	}
 
 	/**
@@ -72,7 +72,7 @@ export default class AudioUtils {
 	 */
 	public static playEffect(str, loop?) {
 		if (this.AudioMaps.has(str)) {
-			cc.audioEngine.playEffect(str, loop);
+			cc.audioEngine.playEffect(this.AudioMaps.get(str), loop);
 			return;
 		}
 
@@ -120,10 +120,10 @@ export default class AudioUtils {
 	 * 获取音效大小
 	 */
 	public static getEffectsVolume() {
-		return cc.audioEngine.getEffectsVolume();
+		return this.effectVolume;
 	}
-	
-	public static releaseAudios(url){
-		
+
+	public static releaseAudios(url) {
+
 	}
 }

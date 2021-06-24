@@ -43,9 +43,9 @@ export default class NewClass extends cc.Component {
 
             name.getComponent(cc.Label).string = GameData.userName;
 
-            lv.getComponent(cc.Label).string = GameData.level;
+            lv.getComponent(cc.Label).string = GameData.properties[pb.GamePropertyId.Level] || 1;
 
-            exp.getComponent(cc.Label).string = GameData.exp;
+            exp.getComponent(cc.Label).string = GameData.properties[pb.GamePropertyId.Exp];
         }
 
         this.onSlideShow();

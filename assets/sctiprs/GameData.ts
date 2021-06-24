@@ -38,44 +38,20 @@ export default class GameData {
         return this._brick;
     }
 
-    //金币
-    private static _gold = null;
 
-    public static set gold(val) {
-        this._gold = val;
-        GlobalEvent.emit(EventCfg.GOLDCHANGE);
-    }
-
-    public static get gold() {
-        return this._gold;
-    }
-
-    //等级
-    private static _level = null;
-
-    public static set level(val) {
-        this._level = val;
-        GlobalEvent.emit(EventCfg.LEVELCHANGE);
-    }
-
-    public static get level() {
-        return this._level;
-    }
-
-    private static _exp = null;
-
-    public static set exp(val) {
-        this._exp = val;
-        GlobalEvent.emit(EventCfg.EXPCHANGE);
-    }
-
-    public static get exp() {
-        return this._exp;
-    }
 
     public static maxExp = null;
 
-    public static gender = null;     //性别
+    public static _gender = null;     //性别
+
+    public static set gender(val) {
+        this._gender = val;
+        GlobalEvent.emit(EventCfg.GENDERCHANGE);
+    }
+
+    public static get gender() {
+        return this._gender;
+    }
 
     public static headimgurl = null; //头像地址
 
@@ -89,7 +65,15 @@ export default class GameData {
         GlobalEvent.emit(EventCfg.HEADIMGCHANGE);
     }
 
-    public static location = null;
+    private static _location = null;
+
+    public static get location() {
+        return this._location;
+    }
+    public static set location(val) {
+        this._location = val;
+        GlobalEvent.emit(EventCfg.LOCALTIONCHANGE);
+    }
 
     public static roomId = null;
 
@@ -103,6 +87,10 @@ export default class GameData {
     private static _SmxlState = null;// 双盲训练状态
 
     public static otherPlayers = null;
+
+    public static GameCounters = null;  //游戏输赢次数
+
+    public static todayGameCount = null;  //今日游戏次数
 
     public static get SmxlState() {
         return this._SmxlState;

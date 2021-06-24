@@ -32,7 +32,7 @@ cc.Class({
 
 	onLoad() {
 		this.init();
-		//AudioUtils.LoadAudios('audios');
+		AudioUtils.loadAudios('audios');
 		ComUtils.onLoadNode();
 		ComUtils.onEvent();
 
@@ -47,6 +47,22 @@ cc.Class({
 		LLLog.reConsole();
 
 		cc.macro.ENABLE_MULTI_TOUCH = false;
+
+		cc.Button.prototype._onTouchEnded = function (t) {
+			if (this.interactable && this.enabledInHierarchy) {
+
+				AudioUtils.playEffect("click", false);//播放按钮Button音频
+
+				if (this._pressed) {
+					cc.Component.EventHandler.emitEvents(this.clickEvents, t);
+					this.node.emit("click", this);
+				}
+				this._pressed = !1;
+				this._updateState();
+				t.stopPropagation();
+			}
+		}
+
 
 	},
 

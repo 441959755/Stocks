@@ -36,7 +36,6 @@ export default class ComUtils {
 				this.tipsText.active = true;
 				this.tipsText.getComponent('TipsTextHandle').textData = content;
 				this.tipsText.getComponent('TipsTextHandle').onShow();
-
 			} else {
 				console.log('ComUtils 中节点加载错误！');
 			}

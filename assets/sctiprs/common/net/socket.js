@@ -30,7 +30,8 @@ Socket.prototype = {
 				GameCfgText.levelInfoCfg && (GameData.maxExp = GameCfgText.levelInfoCfg[GameData.properties[2]])
 				GameData.gender = info.data.gender || '男';
 				GameData.location = info.data.location || '中国';
-
+				GameData.GameCounters = info.data.counters;
+				GameData.todayGameCount = info.data.todayTimes;
 
 				if (cc.director.getScene().name == 'Login') {
 					cc.director.loadScene('hall');

@@ -101,8 +101,9 @@ export default class GameCfgText {
     public static getGPItemInfo(item) {
         let index, items;
         for (let i = 0; i < this.stockList.length; i++) {
-            if (this.stockList[i].indexOf(item) != -1) {
-                items = this.stockList[i].split('|');
+            items = this.stockList[i].split('|');
+            if (items[0].indexOf(item) != -1) {
+
                 break;
             }
         }

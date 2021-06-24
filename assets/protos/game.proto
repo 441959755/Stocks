@@ -20,6 +20,7 @@ option go_package = ".;pb";
 
 import "common.proto";
 import "quote.proto";
+import "login.proto";
 
 
 
@@ -38,8 +39,9 @@ enum FeeType {
 enum PaymentType {
 	PaymentType_NULL = 0;
 
-	WechatPay = 1;	// 微信支付
-	ApplePay = 2;	// 苹果支付
+	WechatPay = 1;		// 微信支付
+	ApplePay = 2;		// 苹果支付
+	WechatMiniPay = 3;	// 微信小程序支付
 }
 // 订单状态
 enum ItemOrderState {
@@ -193,9 +195,11 @@ message GameCounter {
 	int32 win = 2;		// 总共赢的次数
 	int32 lose = 3;		// 总共输的次数
 }
+
 message GameCounters {
 	repeated GameCounter items = 1;	// 所有游戏的计数器
 }
+
 // 当日游戏次数计数器
 message TodayGameTimes {
 	repeated int32 counter = 1;	// 游戏次数
@@ -393,12 +397,11 @@ message CmdGameOver {
 }
 // 查询游戏结果
 message CmdQueryGameResult {
-	// 查询自己的游戏结果
-	GameType g_type = 1;	// 游戏类型
-	int64 from = 2;			// 游戏起始时间戳
-	int64 to = 3;			// 游戏结束时间戳
-	int32 page_size = 4;	// 每页记录条数
-	int32 uid = 5;			// 玩家ID
+	int32 uid = 1;			// 玩家ID（必填）
+	GameType g_type = 2;	// 游戏类型
+	int64 from = 3;			// 游戏起始时间戳（查询一段时间）
+	int64 to = 4;			// 游戏结束时间戳（查询一段时间）
+	int32 page_size = 5;	// 每页记录条数
 	int32 ts = 6;			// 游戏时间戳（查询一条游戏结果的时候填写）
 }
 // 查询游戏结果应答
@@ -414,10 +417,6 @@ message CmdGetGameOperations {
 message CmdUnlockGame {
 	GameType g_type = 1;	// 游戏类型
 }
-
-
-// 查询双盲月报
-// 请求类型：无消息体
 // 查询双盲月报应答
 message CmdGetSmxlReportReply {
 	int64 capital_init = 1;		// 初始资本金
@@ -637,7 +636,7 @@ message StockOrder {
 	int64 order_id = 1;	// 订单ID：下单时间戳
 	int32 code = 2;		// 股票代码
 	OrderType type = 3;	// 订单类型：市价/限价买、市价/限价卖
-	OrderState state = 4;// 订单状态：委托中（未成交）、已成交、手动撤销、自动撤销
+	OrderState state =4;// 订单状态：委托中（未成交）、已成交、手动撤销、自动撤销
 	double price = 5;	// 成交价格
 	int32 volume = 6;	// 成交量
 	int32 uid = 7;		// 玩家ID
@@ -793,7 +792,20 @@ message ItemOrder {
 	int32 item_id = 1;		// 商品ID
 	int32 activity_id = 2;	// 购买活动ID（如：端午节活动）
 	int32 count = 3;		// 购买数量
+	AppFrom from = 4;		// 渠道（类型：AppFrom）
 }
+message CmdShopOrderReply {
+	ErrorInfo result = 1;	// 结果
+	int64 order_id = 2;		// 订单ID
+	string wx_xml = 3;		// 微信支付参数
+}
+message CmdShopOrderQuery {
+	int32 uid = 1;			// 玩家ID
+	int64 order_id = 2;		// 订单ID
+	AppFrom from = 3;		// 渠道（类型：AppFrom）
+	string wx_result = 4;	// 微信支付参数
+}
+
 // 绑定手机号
 message CmdMobileBind {
 	string mobile = 1; 		// 手机号

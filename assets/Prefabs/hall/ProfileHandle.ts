@@ -1,4 +1,5 @@
 
+import { pb } from "../../protos/proto";
 import LLWSDK from "../../sctiprs/common/sdk/LLWSDK";
 import GameData from "../../sctiprs/GameData";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
@@ -51,6 +52,14 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.NAMECHANGE, () => {
             this.userName.string = GameData.userName;
         }, this);
+
+        GlobalEvent.on(EventCfg.LOCALTIONCHANGE, () => {
+            this.diqu.string = GameData.location;
+        }, this);
+
+        GlobalEvent.on(EventCfg.GENDERCHANGE, () => {
+            this.gender.string = GameData.gender;
+        }, this);
     }
 
     onDestroy() {
@@ -58,17 +67,18 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.BIRCKCHANGE);
         GlobalEvent.off(EventCfg.HEADIMGCHANGE);
         GlobalEvent.off(EventCfg.NAMECHANGE);
+        GlobalEvent.off(EventCfg.LOCALTIONCHANGE);
+        GlobalEvent.off(EventCfg.GENDERCHANGE);
     }
 
     start() {
-        this.gold.string = GameData.properties[0];
-        this.brick.string = GameData.properties[1];
+        this.gold.string = GameData.properties[pb.GamePropertyId.Gold];
+        this.brick.string = GameData.properties[pb.GamePropertyId.Diamond];
         this.headImg.spriteFrame = GameData.headImg;
         this.userID.string = GameData.userID;
         this.userName.string = GameData.userName;
         this.gender.string = GameData.gender;
         this.diqu.string = GameData.location;
-
     }
 
     onEnable() {

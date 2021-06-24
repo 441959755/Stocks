@@ -110,8 +110,10 @@ export namespace pb {
         Rep_Hall_QueryEventLog = 3030,
         Req_Hall_ShopOrder = 3031,
         Rep_Hall_ShopOrder = 3032,
-        Req_Hall_MobileBind = 3033,
-        Rep_Hall_MobileBind = 3034,
+        Req_Hall_ShopOrderQuery = 3033,
+        Rep_Hall_ShopOrderQuery = 3034,
+        Req_Hall_MobileBind = 3035,
+        Rep_Hall_MobileBind = 3036,
         Req_Hall_Logout = 3999,
         Rep_Hall_Logout = 4000,
         Req_Game_Login = 4001,
@@ -192,7 +194,8 @@ export namespace pb {
         S2S_Reload_GameConf = 10027,
         S2S_Sync_ZsjcBetting = 10028,
         S2S_Sync_ZsjcState = 10030,
-        S2S_Update_DailyTaskProgress = 10032
+        S2S_Update_DailyTaskProgress = 10032,
+        S2S_Sync_Pay = 10034
     }
 
     /** Properties of a MessageHead. */
@@ -567,7 +570,8 @@ export namespace pb {
     enum PaymentType {
         PaymentType_NULL = 0,
         WechatPay = 1,
-        ApplePay = 2
+        ApplePay = 2,
+        WechatMiniPay = 3
     }
 
     /** ItemOrderState enum. */
@@ -3973,6 +3977,9 @@ export namespace pb {
     /** Properties of a CmdQueryGameResult. */
     interface ICmdQueryGameResult {
 
+        /** CmdQueryGameResult uid */
+        uid?: (number|null);
+
         /** CmdQueryGameResult gType */
         gType?: (pb.GameType|null);
 
@@ -3984,9 +3991,6 @@ export namespace pb {
 
         /** CmdQueryGameResult pageSize */
         pageSize?: (number|null);
-
-        /** CmdQueryGameResult uid */
-        uid?: (number|null);
 
         /** CmdQueryGameResult ts */
         ts?: (number|null);
@@ -4001,6 +4005,9 @@ export namespace pb {
          */
         constructor(properties?: pb.ICmdQueryGameResult);
 
+        /** CmdQueryGameResult uid. */
+        public uid: number;
+
         /** CmdQueryGameResult gType. */
         public gType: pb.GameType;
 
@@ -4012,9 +4019,6 @@ export namespace pb {
 
         /** CmdQueryGameResult pageSize. */
         public pageSize: number;
-
-        /** CmdQueryGameResult uid. */
-        public uid: number;
 
         /** CmdQueryGameResult ts. */
         public ts: number;
@@ -9709,6 +9713,9 @@ export namespace pb {
 
         /** ItemOrder count */
         count?: (number|null);
+
+        /** ItemOrder from */
+        from?: (pb.AppFrom|null);
     }
 
     /** Represents an ItemOrder. */
@@ -9728,6 +9735,9 @@ export namespace pb {
 
         /** ItemOrder count. */
         public count: number;
+
+        /** ItemOrder from. */
+        public from: pb.AppFrom;
 
         /**
          * Creates a new ItemOrder instance using the specified properties.
@@ -9795,6 +9805,216 @@ export namespace pb {
 
         /**
          * Converts this ItemOrder to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdShopOrderReply. */
+    interface ICmdShopOrderReply {
+
+        /** CmdShopOrderReply result */
+        result?: (pb.IErrorInfo|null);
+
+        /** CmdShopOrderReply orderId */
+        orderId?: (number|Long|null);
+
+        /** CmdShopOrderReply wxXml */
+        wxXml?: (string|null);
+    }
+
+    /** Represents a CmdShopOrderReply. */
+    class CmdShopOrderReply implements ICmdShopOrderReply {
+
+        /**
+         * Constructs a new CmdShopOrderReply.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdShopOrderReply);
+
+        /** CmdShopOrderReply result. */
+        public result?: (pb.IErrorInfo|null);
+
+        /** CmdShopOrderReply orderId. */
+        public orderId: (number|Long);
+
+        /** CmdShopOrderReply wxXml. */
+        public wxXml: string;
+
+        /**
+         * Creates a new CmdShopOrderReply instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdShopOrderReply instance
+         */
+        public static create(properties?: pb.ICmdShopOrderReply): pb.CmdShopOrderReply;
+
+        /**
+         * Encodes the specified CmdShopOrderReply message. Does not implicitly {@link pb.CmdShopOrderReply.verify|verify} messages.
+         * @param message CmdShopOrderReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdShopOrderReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdShopOrderReply message, length delimited. Does not implicitly {@link pb.CmdShopOrderReply.verify|verify} messages.
+         * @param message CmdShopOrderReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdShopOrderReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdShopOrderReply message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdShopOrderReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdShopOrderReply;
+
+        /**
+         * Decodes a CmdShopOrderReply message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdShopOrderReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdShopOrderReply;
+
+        /**
+         * Verifies a CmdShopOrderReply message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdShopOrderReply message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdShopOrderReply
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdShopOrderReply;
+
+        /**
+         * Creates a plain object from a CmdShopOrderReply message. Also converts values to other types if specified.
+         * @param message CmdShopOrderReply
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdShopOrderReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdShopOrderReply to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdShopOrderQuery. */
+    interface ICmdShopOrderQuery {
+
+        /** CmdShopOrderQuery uid */
+        uid?: (number|null);
+
+        /** CmdShopOrderQuery orderId */
+        orderId?: (number|Long|null);
+
+        /** CmdShopOrderQuery from */
+        from?: (pb.AppFrom|null);
+
+        /** CmdShopOrderQuery wxResult */
+        wxResult?: (string|null);
+    }
+
+    /** Represents a CmdShopOrderQuery. */
+    class CmdShopOrderQuery implements ICmdShopOrderQuery {
+
+        /**
+         * Constructs a new CmdShopOrderQuery.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdShopOrderQuery);
+
+        /** CmdShopOrderQuery uid. */
+        public uid: number;
+
+        /** CmdShopOrderQuery orderId. */
+        public orderId: (number|Long);
+
+        /** CmdShopOrderQuery from. */
+        public from: pb.AppFrom;
+
+        /** CmdShopOrderQuery wxResult. */
+        public wxResult: string;
+
+        /**
+         * Creates a new CmdShopOrderQuery instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdShopOrderQuery instance
+         */
+        public static create(properties?: pb.ICmdShopOrderQuery): pb.CmdShopOrderQuery;
+
+        /**
+         * Encodes the specified CmdShopOrderQuery message. Does not implicitly {@link pb.CmdShopOrderQuery.verify|verify} messages.
+         * @param message CmdShopOrderQuery message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdShopOrderQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdShopOrderQuery message, length delimited. Does not implicitly {@link pb.CmdShopOrderQuery.verify|verify} messages.
+         * @param message CmdShopOrderQuery message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdShopOrderQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdShopOrderQuery message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdShopOrderQuery
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdShopOrderQuery;
+
+        /**
+         * Decodes a CmdShopOrderQuery message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdShopOrderQuery
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdShopOrderQuery;
+
+        /**
+         * Verifies a CmdShopOrderQuery message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdShopOrderQuery message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdShopOrderQuery
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdShopOrderQuery;
+
+        /**
+         * Creates a plain object from a CmdShopOrderQuery message. Also converts values to other types if specified.
+         * @param message CmdShopOrderQuery
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdShopOrderQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdShopOrderQuery to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -12921,6 +13141,102 @@ export namespace pb {
 
         /**
          * Converts this CmdResetPwd to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdPay. */
+    interface ICmdPay {
+
+        /** CmdPay uid */
+        uid?: (number|null);
+
+        /** CmdPay orderId */
+        orderId?: (number|Long|null);
+    }
+
+    /** Represents a CmdPay. */
+    class CmdPay implements ICmdPay {
+
+        /**
+         * Constructs a new CmdPay.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdPay);
+
+        /** CmdPay uid. */
+        public uid: number;
+
+        /** CmdPay orderId. */
+        public orderId: (number|Long);
+
+        /**
+         * Creates a new CmdPay instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdPay instance
+         */
+        public static create(properties?: pb.ICmdPay): pb.CmdPay;
+
+        /**
+         * Encodes the specified CmdPay message. Does not implicitly {@link pb.CmdPay.verify|verify} messages.
+         * @param message CmdPay message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdPay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdPay message, length delimited. Does not implicitly {@link pb.CmdPay.verify|verify} messages.
+         * @param message CmdPay message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdPay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdPay message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdPay
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdPay;
+
+        /**
+         * Decodes a CmdPay message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdPay
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdPay;
+
+        /**
+         * Verifies a CmdPay message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdPay message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdPay
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdPay;
+
+        /**
+         * Creates a plain object from a CmdPay message. Also converts values to other types if specified.
+         * @param message CmdPay
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdPay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdPay to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

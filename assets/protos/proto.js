@@ -173,8 +173,10 @@ $root.pb = (function () {
      * @property {number} Rep_Hall_QueryEventLog=3030 Rep_Hall_QueryEventLog value
      * @property {number} Req_Hall_ShopOrder=3031 Req_Hall_ShopOrder value
      * @property {number} Rep_Hall_ShopOrder=3032 Rep_Hall_ShopOrder value
-     * @property {number} Req_Hall_MobileBind=3033 Req_Hall_MobileBind value
-     * @property {number} Rep_Hall_MobileBind=3034 Rep_Hall_MobileBind value
+     * @property {number} Req_Hall_ShopOrderQuery=3033 Req_Hall_ShopOrderQuery value
+     * @property {number} Rep_Hall_ShopOrderQuery=3034 Rep_Hall_ShopOrderQuery value
+     * @property {number} Req_Hall_MobileBind=3035 Req_Hall_MobileBind value
+     * @property {number} Rep_Hall_MobileBind=3036 Rep_Hall_MobileBind value
      * @property {number} Req_Hall_Logout=3999 Req_Hall_Logout value
      * @property {number} Rep_Hall_Logout=4000 Rep_Hall_Logout value
      * @property {number} Req_Game_Login=4001 Req_Game_Login value
@@ -256,6 +258,7 @@ $root.pb = (function () {
      * @property {number} S2S_Sync_ZsjcBetting=10028 S2S_Sync_ZsjcBetting value
      * @property {number} S2S_Sync_ZsjcState=10030 S2S_Sync_ZsjcState value
      * @property {number} S2S_Update_DailyTaskProgress=10032 S2S_Update_DailyTaskProgress value
+     * @property {number} S2S_Sync_Pay=10034 S2S_Sync_Pay value
      */
     pb.MessageId = (function () {
         var valuesById = {}, values = Object.create(valuesById);
@@ -324,8 +327,10 @@ $root.pb = (function () {
         values[valuesById[3030] = "Rep_Hall_QueryEventLog"] = 3030;
         values[valuesById[3031] = "Req_Hall_ShopOrder"] = 3031;
         values[valuesById[3032] = "Rep_Hall_ShopOrder"] = 3032;
-        values[valuesById[3033] = "Req_Hall_MobileBind"] = 3033;
-        values[valuesById[3034] = "Rep_Hall_MobileBind"] = 3034;
+        values[valuesById[3033] = "Req_Hall_ShopOrderQuery"] = 3033;
+        values[valuesById[3034] = "Rep_Hall_ShopOrderQuery"] = 3034;
+        values[valuesById[3035] = "Req_Hall_MobileBind"] = 3035;
+        values[valuesById[3036] = "Rep_Hall_MobileBind"] = 3036;
         values[valuesById[3999] = "Req_Hall_Logout"] = 3999;
         values[valuesById[4000] = "Rep_Hall_Logout"] = 4000;
         values[valuesById[4001] = "Req_Game_Login"] = 4001;
@@ -407,6 +412,7 @@ $root.pb = (function () {
         values[valuesById[10028] = "S2S_Sync_ZsjcBetting"] = 10028;
         values[valuesById[10030] = "S2S_Sync_ZsjcState"] = 10030;
         values[valuesById[10032] = "S2S_Update_DailyTaskProgress"] = 10032;
+        values[valuesById[10034] = "S2S_Sync_Pay"] = 10034;
         return values;
     })();
 
@@ -1175,12 +1181,14 @@ $root.pb = (function () {
      * @property {number} PaymentType_NULL=0 PaymentType_NULL value
      * @property {number} WechatPay=1 WechatPay value
      * @property {number} ApplePay=2 ApplePay value
+     * @property {number} WechatMiniPay=3 WechatMiniPay value
      */
     pb.PaymentType = (function () {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "PaymentType_NULL"] = 0;
         values[valuesById[1] = "WechatPay"] = 1;
         values[valuesById[2] = "ApplePay"] = 2;
+        values[valuesById[3] = "WechatMiniPay"] = 3;
         return values;
     })();
 
@@ -10372,11 +10380,11 @@ $root.pb = (function () {
          * Properties of a CmdQueryGameResult.
          * @memberof pb
          * @interface ICmdQueryGameResult
+         * @property {number|null} [uid] CmdQueryGameResult uid
          * @property {pb.GameType|null} [gType] CmdQueryGameResult gType
          * @property {number|Long|null} [from] CmdQueryGameResult from
          * @property {number|Long|null} [to] CmdQueryGameResult to
          * @property {number|null} [pageSize] CmdQueryGameResult pageSize
-         * @property {number|null} [uid] CmdQueryGameResult uid
          * @property {number|null} [ts] CmdQueryGameResult ts
          */
 
@@ -10394,6 +10402,14 @@ $root.pb = (function () {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+
+        /**
+         * CmdQueryGameResult uid.
+         * @member {number} uid
+         * @memberof pb.CmdQueryGameResult
+         * @instance
+         */
+        CmdQueryGameResult.prototype.uid = 0;
 
         /**
          * CmdQueryGameResult gType.
@@ -10428,14 +10444,6 @@ $root.pb = (function () {
         CmdQueryGameResult.prototype.pageSize = 0;
 
         /**
-         * CmdQueryGameResult uid.
-         * @member {number} uid
-         * @memberof pb.CmdQueryGameResult
-         * @instance
-         */
-        CmdQueryGameResult.prototype.uid = 0;
-
-        /**
          * CmdQueryGameResult ts.
          * @member {number} ts
          * @memberof pb.CmdQueryGameResult
@@ -10467,16 +10475,16 @@ $root.pb = (function () {
         CmdQueryGameResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.gType != null && Object.hasOwnProperty.call(message, "gType"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.gType);
-            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.from);
-            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.to);
-            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.uid);
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
+            if (message.gType != null && Object.hasOwnProperty.call(message, "gType"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.gType);
+            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.from);
+            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.to);
+            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.pageSize);
             if (message.ts != null && Object.hasOwnProperty.call(message, "ts"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.ts);
             return writer;
@@ -10514,19 +10522,19 @@ $root.pb = (function () {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                     case 1:
-                        message.gType = reader.int32();
+                        message.uid = reader.int32();
                         break;
                     case 2:
-                        message.from = reader.int64();
+                        message.gType = reader.int32();
                         break;
                     case 3:
-                        message.to = reader.int64();
+                        message.from = reader.int64();
                         break;
                     case 4:
-                        message.pageSize = reader.int32();
+                        message.to = reader.int64();
                         break;
                     case 5:
-                        message.uid = reader.int32();
+                        message.pageSize = reader.int32();
                         break;
                     case 6:
                         message.ts = reader.int32();
@@ -10566,6 +10574,9 @@ $root.pb = (function () {
         CmdQueryGameResult.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
             if (message.gType != null && message.hasOwnProperty("gType"))
                 switch (message.gType) {
                     default:
@@ -10598,9 +10609,6 @@ $root.pb = (function () {
             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                 if (!$util.isInteger(message.pageSize))
                     return "pageSize: integer expected";
-            if (message.uid != null && message.hasOwnProperty("uid"))
-                if (!$util.isInteger(message.uid))
-                    return "uid: integer expected";
             if (message.ts != null && message.hasOwnProperty("ts"))
                 if (!$util.isInteger(message.ts))
                     return "ts: integer expected";
@@ -10619,6 +10627,8 @@ $root.pb = (function () {
             if (object instanceof $root.pb.CmdQueryGameResult)
                 return object;
             var message = new $root.pb.CmdQueryGameResult();
+            if (object.uid != null)
+                message.uid = object.uid | 0;
             switch (object.gType) {
                 case "GameType_NULL":
                 case 0:
@@ -10709,8 +10719,6 @@ $root.pb = (function () {
                     message.to = new $util.LongBits(object.to.low >>> 0, object.to.high >>> 0).toNumber();
             if (object.pageSize != null)
                 message.pageSize = object.pageSize | 0;
-            if (object.uid != null)
-                message.uid = object.uid | 0;
             if (object.ts != null)
                 message.ts = object.ts | 0;
             return message;
@@ -10730,6 +10738,7 @@ $root.pb = (function () {
                 options = {};
             var object = {};
             if (options.defaults) {
+                object.uid = 0;
                 object.gType = options.enums === String ? "GameType_NULL" : 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
@@ -10742,9 +10751,10 @@ $root.pb = (function () {
                 } else
                     object.to = options.longs === String ? "0" : 0;
                 object.pageSize = 0;
-                object.uid = 0;
                 object.ts = 0;
             }
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
             if (message.gType != null && message.hasOwnProperty("gType"))
                 object.gType = options.enums === String ? $root.pb.GameType[message.gType] : message.gType;
             if (message.from != null && message.hasOwnProperty("from"))
@@ -10759,8 +10769,6 @@ $root.pb = (function () {
                     object.to = options.longs === String ? $util.Long.prototype.toString.call(message.to) : options.longs === Number ? new $util.LongBits(message.to.low >>> 0, message.to.high >>> 0).toNumber() : message.to;
             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                 object.pageSize = message.pageSize;
-            if (message.uid != null && message.hasOwnProperty("uid"))
-                object.uid = message.uid;
             if (message.ts != null && message.hasOwnProperty("ts"))
                 object.ts = message.ts;
             return object;
@@ -25818,6 +25826,7 @@ $root.pb = (function () {
          * @property {number|null} [itemId] ItemOrder itemId
          * @property {number|null} [activityId] ItemOrder activityId
          * @property {number|null} [count] ItemOrder count
+         * @property {pb.AppFrom|null} [from] ItemOrder from
          */
 
         /**
@@ -25860,6 +25869,14 @@ $root.pb = (function () {
         ItemOrder.prototype.count = 0;
 
         /**
+         * ItemOrder from.
+         * @member {pb.AppFrom} from
+         * @memberof pb.ItemOrder
+         * @instance
+         */
+        ItemOrder.prototype.from = 0;
+
+        /**
          * Creates a new ItemOrder instance using the specified properties.
          * @function create
          * @memberof pb.ItemOrder
@@ -25889,6 +25906,8 @@ $root.pb = (function () {
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.activityId);
             if (message.count != null && Object.hasOwnProperty.call(message, "count"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.count);
+            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.from);
             return writer;
         };
 
@@ -25931,6 +25950,9 @@ $root.pb = (function () {
                         break;
                     case 3:
                         message.count = reader.int32();
+                        break;
+                    case 4:
+                        message.from = reader.int32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -25976,6 +25998,37 @@ $root.pb = (function () {
             if (message.count != null && message.hasOwnProperty("count"))
                 if (!$util.isInteger(message.count))
                     return "count: integer expected";
+            if (message.from != null && message.hasOwnProperty("from"))
+                switch (message.from) {
+                    default:
+                        return "from: enum value expected";
+                    case 0:
+                    case 1:
+                    case 201:
+                    case 204:
+                    case 205:
+                    case 206:
+                    case 208:
+                    case 209:
+                    case 210:
+                    case 211:
+                    case 212:
+                    case 301:
+                    case 302:
+                    case 601:
+                    case 1000:
+                    case 1204:
+                    case 1205:
+                    case 1208:
+                    case 1212:
+                    case 4999:
+                    case 6666:
+                    case 6667:
+                    case 6668:
+                    case 8888:
+                    case 10000:
+                        break;
+                }
             return null;
         };
 
@@ -25997,6 +26050,108 @@ $root.pb = (function () {
                 message.activityId = object.activityId | 0;
             if (object.count != null)
                 message.count = object.count | 0;
+            switch (object.from) {
+                case "Android_000":
+                case 0:
+                    message.from = 0;
+                    break;
+                case "Android_001":
+                case 1:
+                    message.from = 1;
+                    break;
+                case "Android_201":
+                case 201:
+                    message.from = 201;
+                    break;
+                case "Android_204":
+                case 204:
+                    message.from = 204;
+                    break;
+                case "Android_205":
+                case 205:
+                    message.from = 205;
+                    break;
+                case "Android_206":
+                case 206:
+                    message.from = 206;
+                    break;
+                case "Android_208":
+                case 208:
+                    message.from = 208;
+                    break;
+                case "Android_209":
+                case 209:
+                    message.from = 209;
+                    break;
+                case "Android_210":
+                case 210:
+                    message.from = 210;
+                    break;
+                case "Android_211":
+                case 211:
+                    message.from = 211;
+                    break;
+                case "Android_212":
+                case 212:
+                    message.from = 212;
+                    break;
+                case "Android_301":
+                case 301:
+                    message.from = 301;
+                    break;
+                case "Android_302":
+                case 302:
+                    message.from = 302;
+                    break;
+                case "Android_601":
+                case 601:
+                    message.from = 601;
+                    break;
+                case "Android_1000":
+                case 1000:
+                    message.from = 1000;
+                    break;
+                case "Android_1204":
+                case 1204:
+                    message.from = 1204;
+                    break;
+                case "Android_1205":
+                case 1205:
+                    message.from = 1205;
+                    break;
+                case "Android_1208":
+                case 1208:
+                    message.from = 1208;
+                    break;
+                case "Android_1212":
+                case 1212:
+                    message.from = 1212;
+                    break;
+                case "WebsiteAndriod":
+                case 4999:
+                    message.from = 4999;
+                    break;
+                case "WebsiteIos":
+                case 6666:
+                    message.from = 6666;
+                    break;
+                case "IosAppleStore":
+                case 6667:
+                    message.from = 6667;
+                    break;
+                case "Ipad":
+                case 6668:
+                    message.from = 6668;
+                    break;
+                case "WeChatMinProgram":
+                case 8888:
+                    message.from = 8888;
+                    break;
+                case "Test":
+                case 10000:
+                    message.from = 10000;
+                    break;
+            }
             return message;
         };
 
@@ -26017,6 +26172,7 @@ $root.pb = (function () {
                 object.itemId = 0;
                 object.activityId = 0;
                 object.count = 0;
+                object.from = options.enums === String ? "Android_000" : 0;
             }
             if (message.itemId != null && message.hasOwnProperty("itemId"))
                 object.itemId = message.itemId;
@@ -26024,6 +26180,8 @@ $root.pb = (function () {
                 object.activityId = message.activityId;
             if (message.count != null && message.hasOwnProperty("count"))
                 object.count = message.count;
+            if (message.from != null && message.hasOwnProperty("from"))
+                object.from = options.enums === String ? $root.pb.AppFrom[message.from] : message.from;
             return object;
         };
 
@@ -26039,6 +26197,653 @@ $root.pb = (function () {
         };
 
         return ItemOrder;
+    })();
+
+    pb.CmdShopOrderReply = (function () {
+
+        /**
+         * Properties of a CmdShopOrderReply.
+         * @memberof pb
+         * @interface ICmdShopOrderReply
+         * @property {pb.IErrorInfo|null} [result] CmdShopOrderReply result
+         * @property {number|Long|null} [orderId] CmdShopOrderReply orderId
+         * @property {string|null} [wxXml] CmdShopOrderReply wxXml
+         */
+
+        /**
+         * Constructs a new CmdShopOrderReply.
+         * @memberof pb
+         * @classdesc Represents a CmdShopOrderReply.
+         * @implements ICmdShopOrderReply
+         * @constructor
+         * @param {pb.ICmdShopOrderReply=} [properties] Properties to set
+         */
+        function CmdShopOrderReply(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdShopOrderReply result.
+         * @member {pb.IErrorInfo|null|undefined} result
+         * @memberof pb.CmdShopOrderReply
+         * @instance
+         */
+        CmdShopOrderReply.prototype.result = null;
+
+        /**
+         * CmdShopOrderReply orderId.
+         * @member {number|Long} orderId
+         * @memberof pb.CmdShopOrderReply
+         * @instance
+         */
+        CmdShopOrderReply.prototype.orderId = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * CmdShopOrderReply wxXml.
+         * @member {string} wxXml
+         * @memberof pb.CmdShopOrderReply
+         * @instance
+         */
+        CmdShopOrderReply.prototype.wxXml = "";
+
+        /**
+         * Creates a new CmdShopOrderReply instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdShopOrderReply
+         * @static
+         * @param {pb.ICmdShopOrderReply=} [properties] Properties to set
+         * @returns {pb.CmdShopOrderReply} CmdShopOrderReply instance
+         */
+        CmdShopOrderReply.create = function create(properties) {
+            return new CmdShopOrderReply(properties);
+        };
+
+        /**
+         * Encodes the specified CmdShopOrderReply message. Does not implicitly {@link pb.CmdShopOrderReply.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdShopOrderReply
+         * @static
+         * @param {pb.ICmdShopOrderReply} message CmdShopOrderReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdShopOrderReply.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.result != null && Object.hasOwnProperty.call(message, "result"))
+                $root.pb.ErrorInfo.encode(message.result, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.orderId != null && Object.hasOwnProperty.call(message, "orderId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.orderId);
+            if (message.wxXml != null && Object.hasOwnProperty.call(message, "wxXml"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.wxXml);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdShopOrderReply message, length delimited. Does not implicitly {@link pb.CmdShopOrderReply.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdShopOrderReply
+         * @static
+         * @param {pb.ICmdShopOrderReply} message CmdShopOrderReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdShopOrderReply.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdShopOrderReply message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdShopOrderReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdShopOrderReply} CmdShopOrderReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdShopOrderReply.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdShopOrderReply();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                        break;
+                    case 2:
+                        message.orderId = reader.int64();
+                        break;
+                    case 3:
+                        message.wxXml = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdShopOrderReply message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdShopOrderReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdShopOrderReply} CmdShopOrderReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdShopOrderReply.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdShopOrderReply message.
+         * @function verify
+         * @memberof pb.CmdShopOrderReply
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdShopOrderReply.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.result != null && message.hasOwnProperty("result")) {
+                var error = $root.pb.ErrorInfo.verify(message.result);
+                if (error)
+                    return "result." + error;
+            }
+            if (message.orderId != null && message.hasOwnProperty("orderId"))
+                if (!$util.isInteger(message.orderId) && !(message.orderId && $util.isInteger(message.orderId.low) && $util.isInteger(message.orderId.high)))
+                    return "orderId: integer|Long expected";
+            if (message.wxXml != null && message.hasOwnProperty("wxXml"))
+                if (!$util.isString(message.wxXml))
+                    return "wxXml: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdShopOrderReply message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdShopOrderReply
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdShopOrderReply} CmdShopOrderReply
+         */
+        CmdShopOrderReply.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdShopOrderReply)
+                return object;
+            var message = new $root.pb.CmdShopOrderReply();
+            if (object.result != null) {
+                if (typeof object.result !== "object")
+                    throw TypeError(".pb.CmdShopOrderReply.result: object expected");
+                message.result = $root.pb.ErrorInfo.fromObject(object.result);
+            }
+            if (object.orderId != null)
+                if ($util.Long)
+                    (message.orderId = $util.Long.fromValue(object.orderId)).unsigned = false;
+                else if (typeof object.orderId === "string")
+                    message.orderId = parseInt(object.orderId, 10);
+                else if (typeof object.orderId === "number")
+                    message.orderId = object.orderId;
+                else if (typeof object.orderId === "object")
+                    message.orderId = new $util.LongBits(object.orderId.low >>> 0, object.orderId.high >>> 0).toNumber();
+            if (object.wxXml != null)
+                message.wxXml = String(object.wxXml);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdShopOrderReply message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdShopOrderReply
+         * @static
+         * @param {pb.CmdShopOrderReply} message CmdShopOrderReply
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdShopOrderReply.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.result = null;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.orderId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.orderId = options.longs === String ? "0" : 0;
+                object.wxXml = "";
+            }
+            if (message.result != null && message.hasOwnProperty("result"))
+                object.result = $root.pb.ErrorInfo.toObject(message.result, options);
+            if (message.orderId != null && message.hasOwnProperty("orderId"))
+                if (typeof message.orderId === "number")
+                    object.orderId = options.longs === String ? String(message.orderId) : message.orderId;
+                else
+                    object.orderId = options.longs === String ? $util.Long.prototype.toString.call(message.orderId) : options.longs === Number ? new $util.LongBits(message.orderId.low >>> 0, message.orderId.high >>> 0).toNumber() : message.orderId;
+            if (message.wxXml != null && message.hasOwnProperty("wxXml"))
+                object.wxXml = message.wxXml;
+            return object;
+        };
+
+        /**
+         * Converts this CmdShopOrderReply to JSON.
+         * @function toJSON
+         * @memberof pb.CmdShopOrderReply
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdShopOrderReply.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdShopOrderReply;
+    })();
+
+    pb.CmdShopOrderQuery = (function () {
+
+        /**
+         * Properties of a CmdShopOrderQuery.
+         * @memberof pb
+         * @interface ICmdShopOrderQuery
+         * @property {number|null} [uid] CmdShopOrderQuery uid
+         * @property {number|Long|null} [orderId] CmdShopOrderQuery orderId
+         * @property {pb.AppFrom|null} [from] CmdShopOrderQuery from
+         * @property {string|null} [wxResult] CmdShopOrderQuery wxResult
+         */
+
+        /**
+         * Constructs a new CmdShopOrderQuery.
+         * @memberof pb
+         * @classdesc Represents a CmdShopOrderQuery.
+         * @implements ICmdShopOrderQuery
+         * @constructor
+         * @param {pb.ICmdShopOrderQuery=} [properties] Properties to set
+         */
+        function CmdShopOrderQuery(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdShopOrderQuery uid.
+         * @member {number} uid
+         * @memberof pb.CmdShopOrderQuery
+         * @instance
+         */
+        CmdShopOrderQuery.prototype.uid = 0;
+
+        /**
+         * CmdShopOrderQuery orderId.
+         * @member {number|Long} orderId
+         * @memberof pb.CmdShopOrderQuery
+         * @instance
+         */
+        CmdShopOrderQuery.prototype.orderId = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * CmdShopOrderQuery from.
+         * @member {pb.AppFrom} from
+         * @memberof pb.CmdShopOrderQuery
+         * @instance
+         */
+        CmdShopOrderQuery.prototype.from = 0;
+
+        /**
+         * CmdShopOrderQuery wxResult.
+         * @member {string} wxResult
+         * @memberof pb.CmdShopOrderQuery
+         * @instance
+         */
+        CmdShopOrderQuery.prototype.wxResult = "";
+
+        /**
+         * Creates a new CmdShopOrderQuery instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdShopOrderQuery
+         * @static
+         * @param {pb.ICmdShopOrderQuery=} [properties] Properties to set
+         * @returns {pb.CmdShopOrderQuery} CmdShopOrderQuery instance
+         */
+        CmdShopOrderQuery.create = function create(properties) {
+            return new CmdShopOrderQuery(properties);
+        };
+
+        /**
+         * Encodes the specified CmdShopOrderQuery message. Does not implicitly {@link pb.CmdShopOrderQuery.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdShopOrderQuery
+         * @static
+         * @param {pb.ICmdShopOrderQuery} message CmdShopOrderQuery message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdShopOrderQuery.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
+            if (message.orderId != null && Object.hasOwnProperty.call(message, "orderId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.orderId);
+            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.from);
+            if (message.wxResult != null && Object.hasOwnProperty.call(message, "wxResult"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.wxResult);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdShopOrderQuery message, length delimited. Does not implicitly {@link pb.CmdShopOrderQuery.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdShopOrderQuery
+         * @static
+         * @param {pb.ICmdShopOrderQuery} message CmdShopOrderQuery message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdShopOrderQuery.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdShopOrderQuery message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdShopOrderQuery
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdShopOrderQuery} CmdShopOrderQuery
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdShopOrderQuery.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdShopOrderQuery();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.uid = reader.int32();
+                        break;
+                    case 2:
+                        message.orderId = reader.int64();
+                        break;
+                    case 3:
+                        message.from = reader.int32();
+                        break;
+                    case 4:
+                        message.wxResult = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdShopOrderQuery message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdShopOrderQuery
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdShopOrderQuery} CmdShopOrderQuery
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdShopOrderQuery.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdShopOrderQuery message.
+         * @function verify
+         * @memberof pb.CmdShopOrderQuery
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdShopOrderQuery.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.orderId != null && message.hasOwnProperty("orderId"))
+                if (!$util.isInteger(message.orderId) && !(message.orderId && $util.isInteger(message.orderId.low) && $util.isInteger(message.orderId.high)))
+                    return "orderId: integer|Long expected";
+            if (message.from != null && message.hasOwnProperty("from"))
+                switch (message.from) {
+                    default:
+                        return "from: enum value expected";
+                    case 0:
+                    case 1:
+                    case 201:
+                    case 204:
+                    case 205:
+                    case 206:
+                    case 208:
+                    case 209:
+                    case 210:
+                    case 211:
+                    case 212:
+                    case 301:
+                    case 302:
+                    case 601:
+                    case 1000:
+                    case 1204:
+                    case 1205:
+                    case 1208:
+                    case 1212:
+                    case 4999:
+                    case 6666:
+                    case 6667:
+                    case 6668:
+                    case 8888:
+                    case 10000:
+                        break;
+                }
+            if (message.wxResult != null && message.hasOwnProperty("wxResult"))
+                if (!$util.isString(message.wxResult))
+                    return "wxResult: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdShopOrderQuery message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdShopOrderQuery
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdShopOrderQuery} CmdShopOrderQuery
+         */
+        CmdShopOrderQuery.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdShopOrderQuery)
+                return object;
+            var message = new $root.pb.CmdShopOrderQuery();
+            if (object.uid != null)
+                message.uid = object.uid | 0;
+            if (object.orderId != null)
+                if ($util.Long)
+                    (message.orderId = $util.Long.fromValue(object.orderId)).unsigned = false;
+                else if (typeof object.orderId === "string")
+                    message.orderId = parseInt(object.orderId, 10);
+                else if (typeof object.orderId === "number")
+                    message.orderId = object.orderId;
+                else if (typeof object.orderId === "object")
+                    message.orderId = new $util.LongBits(object.orderId.low >>> 0, object.orderId.high >>> 0).toNumber();
+            switch (object.from) {
+                case "Android_000":
+                case 0:
+                    message.from = 0;
+                    break;
+                case "Android_001":
+                case 1:
+                    message.from = 1;
+                    break;
+                case "Android_201":
+                case 201:
+                    message.from = 201;
+                    break;
+                case "Android_204":
+                case 204:
+                    message.from = 204;
+                    break;
+                case "Android_205":
+                case 205:
+                    message.from = 205;
+                    break;
+                case "Android_206":
+                case 206:
+                    message.from = 206;
+                    break;
+                case "Android_208":
+                case 208:
+                    message.from = 208;
+                    break;
+                case "Android_209":
+                case 209:
+                    message.from = 209;
+                    break;
+                case "Android_210":
+                case 210:
+                    message.from = 210;
+                    break;
+                case "Android_211":
+                case 211:
+                    message.from = 211;
+                    break;
+                case "Android_212":
+                case 212:
+                    message.from = 212;
+                    break;
+                case "Android_301":
+                case 301:
+                    message.from = 301;
+                    break;
+                case "Android_302":
+                case 302:
+                    message.from = 302;
+                    break;
+                case "Android_601":
+                case 601:
+                    message.from = 601;
+                    break;
+                case "Android_1000":
+                case 1000:
+                    message.from = 1000;
+                    break;
+                case "Android_1204":
+                case 1204:
+                    message.from = 1204;
+                    break;
+                case "Android_1205":
+                case 1205:
+                    message.from = 1205;
+                    break;
+                case "Android_1208":
+                case 1208:
+                    message.from = 1208;
+                    break;
+                case "Android_1212":
+                case 1212:
+                    message.from = 1212;
+                    break;
+                case "WebsiteAndriod":
+                case 4999:
+                    message.from = 4999;
+                    break;
+                case "WebsiteIos":
+                case 6666:
+                    message.from = 6666;
+                    break;
+                case "IosAppleStore":
+                case 6667:
+                    message.from = 6667;
+                    break;
+                case "Ipad":
+                case 6668:
+                    message.from = 6668;
+                    break;
+                case "WeChatMinProgram":
+                case 8888:
+                    message.from = 8888;
+                    break;
+                case "Test":
+                case 10000:
+                    message.from = 10000;
+                    break;
+            }
+            if (object.wxResult != null)
+                message.wxResult = String(object.wxResult);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdShopOrderQuery message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdShopOrderQuery
+         * @static
+         * @param {pb.CmdShopOrderQuery} message CmdShopOrderQuery
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdShopOrderQuery.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.uid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.orderId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.orderId = options.longs === String ? "0" : 0;
+                object.from = options.enums === String ? "Android_000" : 0;
+                object.wxResult = "";
+            }
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            if (message.orderId != null && message.hasOwnProperty("orderId"))
+                if (typeof message.orderId === "number")
+                    object.orderId = options.longs === String ? String(message.orderId) : message.orderId;
+                else
+                    object.orderId = options.longs === String ? $util.Long.prototype.toString.call(message.orderId) : options.longs === Number ? new $util.LongBits(message.orderId.low >>> 0, message.orderId.high >>> 0).toNumber() : message.orderId;
+            if (message.from != null && message.hasOwnProperty("from"))
+                object.from = options.enums === String ? $root.pb.AppFrom[message.from] : message.from;
+            if (message.wxResult != null && message.hasOwnProperty("wxResult"))
+                object.wxResult = message.wxResult;
+            return object;
+        };
+
+        /**
+         * Converts this CmdShopOrderQuery to JSON.
+         * @function toJSON
+         * @memberof pb.CmdShopOrderQuery
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdShopOrderQuery.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdShopOrderQuery;
     })();
 
     pb.CmdMobileBind = (function () {
@@ -34316,6 +35121,230 @@ $root.pb = (function () {
         return CmdResetPwd;
     })();
 
+    pb.CmdPay = (function () {
+
+        /**
+         * Properties of a CmdPay.
+         * @memberof pb
+         * @interface ICmdPay
+         * @property {number|null} [uid] CmdPay uid
+         * @property {number|Long|null} [orderId] CmdPay orderId
+         */
+
+        /**
+         * Constructs a new CmdPay.
+         * @memberof pb
+         * @classdesc Represents a CmdPay.
+         * @implements ICmdPay
+         * @constructor
+         * @param {pb.ICmdPay=} [properties] Properties to set
+         */
+        function CmdPay(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdPay uid.
+         * @member {number} uid
+         * @memberof pb.CmdPay
+         * @instance
+         */
+        CmdPay.prototype.uid = 0;
+
+        /**
+         * CmdPay orderId.
+         * @member {number|Long} orderId
+         * @memberof pb.CmdPay
+         * @instance
+         */
+        CmdPay.prototype.orderId = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * Creates a new CmdPay instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdPay
+         * @static
+         * @param {pb.ICmdPay=} [properties] Properties to set
+         * @returns {pb.CmdPay} CmdPay instance
+         */
+        CmdPay.create = function create(properties) {
+            return new CmdPay(properties);
+        };
+
+        /**
+         * Encodes the specified CmdPay message. Does not implicitly {@link pb.CmdPay.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdPay
+         * @static
+         * @param {pb.ICmdPay} message CmdPay message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdPay.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
+            if (message.orderId != null && Object.hasOwnProperty.call(message, "orderId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.orderId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdPay message, length delimited. Does not implicitly {@link pb.CmdPay.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdPay
+         * @static
+         * @param {pb.ICmdPay} message CmdPay message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdPay.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdPay message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdPay
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdPay} CmdPay
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdPay.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdPay();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.uid = reader.int32();
+                        break;
+                    case 2:
+                        message.orderId = reader.int64();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdPay message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdPay
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdPay} CmdPay
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdPay.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdPay message.
+         * @function verify
+         * @memberof pb.CmdPay
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdPay.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.orderId != null && message.hasOwnProperty("orderId"))
+                if (!$util.isInteger(message.orderId) && !(message.orderId && $util.isInteger(message.orderId.low) && $util.isInteger(message.orderId.high)))
+                    return "orderId: integer|Long expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdPay message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdPay
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdPay} CmdPay
+         */
+        CmdPay.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdPay)
+                return object;
+            var message = new $root.pb.CmdPay();
+            if (object.uid != null)
+                message.uid = object.uid | 0;
+            if (object.orderId != null)
+                if ($util.Long)
+                    (message.orderId = $util.Long.fromValue(object.orderId)).unsigned = false;
+                else if (typeof object.orderId === "string")
+                    message.orderId = parseInt(object.orderId, 10);
+                else if (typeof object.orderId === "number")
+                    message.orderId = object.orderId;
+                else if (typeof object.orderId === "object")
+                    message.orderId = new $util.LongBits(object.orderId.low >>> 0, object.orderId.high >>> 0).toNumber();
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdPay message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdPay
+         * @static
+         * @param {pb.CmdPay} message CmdPay
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdPay.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.uid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.orderId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.orderId = options.longs === String ? "0" : 0;
+            }
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            if (message.orderId != null && message.hasOwnProperty("orderId"))
+                if (typeof message.orderId === "number")
+                    object.orderId = options.longs === String ? String(message.orderId) : message.orderId;
+                else
+                    object.orderId = options.longs === String ? $util.Long.prototype.toString.call(message.orderId) : options.longs === Number ? new $util.LongBits(message.orderId.low >>> 0, message.orderId.high >>> 0).toNumber() : message.orderId;
+            return object;
+        };
+
+        /**
+         * Converts this CmdPay to JSON.
+         * @function toJSON
+         * @memberof pb.CmdPay
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdPay.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdPay;
+    })();
+
     pb.LoginService = (function () {
 
         /**
@@ -37513,6 +38542,8 @@ $root.pb = (function () {
                     case 3032:
                     case 3033:
                     case 3034:
+                    case 3035:
+                    case 3036:
                     case 3999:
                     case 4000:
                     case 4001:
@@ -37594,6 +38625,7 @@ $root.pb = (function () {
                     case 10028:
                     case 10030:
                     case 10032:
+                    case 10034:
                         break;
                 }
             if (message.buf != null && message.hasOwnProperty("buf"))
@@ -37875,13 +38907,21 @@ $root.pb = (function () {
                 case 3032:
                     message.id = 3032;
                     break;
-                case "Req_Hall_MobileBind":
+                case "Req_Hall_ShopOrderQuery":
                 case 3033:
                     message.id = 3033;
                     break;
-                case "Rep_Hall_MobileBind":
+                case "Rep_Hall_ShopOrderQuery":
                 case 3034:
                     message.id = 3034;
+                    break;
+                case "Req_Hall_MobileBind":
+                case 3035:
+                    message.id = 3035;
+                    break;
+                case "Rep_Hall_MobileBind":
+                case 3036:
+                    message.id = 3036;
                     break;
                 case "Req_Hall_Logout":
                 case 3999:
@@ -38206,6 +39246,10 @@ $root.pb = (function () {
                 case "S2S_Update_DailyTaskProgress":
                 case 10032:
                     message.id = 10032;
+                    break;
+                case "S2S_Sync_Pay":
+                case 10034:
+                    message.id = 10034;
                     break;
             }
             if (object.buf != null)
@@ -39323,6 +40367,8 @@ $root.pb = (function () {
                     case 3032:
                     case 3033:
                     case 3034:
+                    case 3035:
+                    case 3036:
                     case 3999:
                     case 4000:
                     case 4001:
@@ -39404,6 +40450,7 @@ $root.pb = (function () {
                     case 10028:
                     case 10030:
                     case 10032:
+                    case 10034:
                         break;
                 }
             if (message.buf != null && message.hasOwnProperty("buf"))
@@ -39692,13 +40739,21 @@ $root.pb = (function () {
                 case 3032:
                     message.id = 3032;
                     break;
-                case "Req_Hall_MobileBind":
+                case "Req_Hall_ShopOrderQuery":
                 case 3033:
                     message.id = 3033;
                     break;
-                case "Rep_Hall_MobileBind":
+                case "Rep_Hall_ShopOrderQuery":
                 case 3034:
                     message.id = 3034;
+                    break;
+                case "Req_Hall_MobileBind":
+                case 3035:
+                    message.id = 3035;
+                    break;
+                case "Rep_Hall_MobileBind":
+                case 3036:
+                    message.id = 3036;
                     break;
                 case "Req_Hall_Logout":
                 case 3999:
@@ -40023,6 +41078,10 @@ $root.pb = (function () {
                 case "S2S_Update_DailyTaskProgress":
                 case 10032:
                     message.id = 10032;
+                    break;
+                case "S2S_Sync_Pay":
+                case 10034:
+                    message.id = 10034;
                     break;
             }
             if (object.buf != null)

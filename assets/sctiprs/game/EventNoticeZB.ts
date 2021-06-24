@@ -48,6 +48,9 @@ export default class NewClass extends cc.Component {
     disMin = 0;
     disMax = 0;
 
+    kdis = 0;
+    sdis = 0;
+
     BollState = 0;
 
     EXPMA1 = null;
@@ -352,7 +355,7 @@ export default class NewClass extends cc.Component {
                     if (this.gpData[index].close > b) {
                         //
                         this._str = '1）股价上穿均线： 当均线转平向上，若股价从均线下方上穿均线时，则此时可作为短线买入信号“B”，买入个股！'
-                        str = '上穿' + GameCfg.MAs[this.MAIndex] + '均线';
+                        str = '上穿均线MA' + GameCfg.MAs[this.MAIndex] + '均线';
 
                         if (this.curState != 'B') {
                             this.onCreateTipsItem(str)
@@ -371,7 +374,7 @@ export default class NewClass extends cc.Component {
                 if (this.gpData[index].close < this.maList[index][this.MAIndex]) {
 
                     this._str = '1）股价下穿均线： 股价之前在均线之上运行，当收盘股价下穿均线时，则此时可作为短线卖出信号“S”，卖出个股！'
-                    str = '下穿' + GameCfg.MAs[this.MAIndex] + '均线';
+                    str = '下穿均线MA' + GameCfg.MAs[this.MAIndex] + '均线';
                     //S
 
                     if (this.curState != 'S') {
@@ -402,19 +405,19 @@ export default class NewClass extends cc.Component {
                         //B
                     } else {
                         if (this.JXState == 2) {
-                            let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
-                            if (this.gpData[index].close > max) {
-                                this.JXState = 1;
-                                //B
-                                this._str = '1）短期均线上穿中长期均线：当中长期均线趋势转平或向上时，此时若短期均线上穿中长期均线，则可作为短线买入信号“B”，买入个股！'
+                            //   let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
+                            //    if (this.gpData[index].close > max) {
+                            this.JXState = 1;
+                            //B
+                            this._str = '1）短期均线上穿中长期均线：当中长期均线趋势转平或向上时，此时若短期均线上穿中长期均线，则可作为短线买入信号“B”，买入个股！'
 
-                                if (this.curState != 'B') {
-                                    this.onCreateTipsItem('均线金叉')
-                                    this.curState = 'B';
-                                    StrategyAIData.onBuyFunc();
-                                    return;
-                                }
+                            if (this.curState != 'B') {
+                                this.onCreateTipsItem('均线金叉')
+                                this.curState = 'B';
+                                StrategyAIData.onBuyFunc();
+                                return;
                             }
+                            // }
                         }
                     }
 
@@ -820,7 +823,7 @@ export default class NewClass extends cc.Component {
     testKDJEvent() {
         let index = GameCfg.huizhidatas - 1;
         //１） KDJ 金叉
-        if (GameCfg.GameSet.strategy == '金典用法' || GameCfg.GameSet.strategy == 'KDJ金叉') {
+        if (GameCfg.GameSet.strategy == '经典用法' || GameCfg.GameSet.strategy == 'KDJ金叉') {
             if (this.KList[index - 1] < this.DList[index - 1]) {
                 if (this.KList[index] > this.DList[index]) {
                     if (this.DList[index] > this.DList[index - 1]) {
@@ -906,7 +909,7 @@ export default class NewClass extends cc.Component {
             }
         }
 
-        if (GameCfg.GameSet.strategy == '超买超卖' || GameCfg.GameSet.strategy == '金典用法') {
+        if (GameCfg.GameSet.strategy == '超买超卖' || GameCfg.GameSet.strategy == '经典用法') {
             // 3）KDJ超买
             if (this.JList[index - 3] >= 100 && this.JList[index - 2] >= 100 && this.JList[index - 1] >= 100) {
                 this.KDJCS = true;
@@ -915,8 +918,9 @@ export default class NewClass extends cc.Component {
             if (this.gpData[index].close < max && this.gpData[index].high <= this.gpData[index - 1].high && this.KDJCS) {
                 //s
                 this._str = '1） KDJ 超买： 当J值>=100时, 且连续3天以上，为KDJ超买区间，股价至少会形成短期头部，可作为短线卖出信号“Ｓ”。'
+                this.KDJCS = false;
                 if (this.curState != 'S') {
-                    this.KDJCS = false;
+
                     this.onCreateTipsItem('KDJ超买');
                     this.curState = 'S';
                     StrategyAIData.onSellFunc();
@@ -934,9 +938,9 @@ export default class NewClass extends cc.Component {
             if (this.gpData[index].close > min && this.gpData[index].low >= this.gpData[index - 1].low && this.KDJCB) {
                 //B
                 this._str = '１） KDJ 超卖当J值<=0时, 且连续3天以上，为KDJ超卖区间，股价至少会形成短期底部，可作为短线买入信号“Ｂ”；'
-
+                this.KDJCB = false;
                 if (this.curState != 'B') {
-                    this.KDJCB = false;
+
                     this.onCreateTipsItem('KDJ超卖');
                     this.curState = 'B';
                     StrategyAIData.onBuyFunc();
@@ -946,7 +950,7 @@ export default class NewClass extends cc.Component {
 
         }
 
-        if (GameCfg.GameSet.strategy == '金典用法' || GameCfg.GameSet.strategy == 'KDJ背离') {
+        if (GameCfg.GameSet.strategy == '经典用法' || GameCfg.GameSet.strategy == 'KDJ背离') {
 
             let high = this.gpData[index].high;
             let low = this.gpData[index].low;
@@ -1181,8 +1185,10 @@ export default class NewClass extends cc.Component {
         this.disMin = Math.min(dis, this.disMin);
         if (dis > 1.5 * this.disMin) {
             this.BollState = 1;
+            this.disMax = 0;
         } else if (dis <= this.disMax * 2 / 3) {
             this.BollState = 2;
+            this.disMin = 0;
         }
 
         if (GameCfg.GameSet.strategy == '经典用法' || GameCfg.GameSet.strategy == '布林带中轨') {
@@ -1211,8 +1217,10 @@ export default class NewClass extends cc.Component {
             //     }
             // }
             //1) 股价突破中轨
-            if (this.BollList[index][0] >= this.BollList[index - 1][0] && this.BollList[index][1] >= this.BollList[index - 1][1] && this.BollList[index][2] >= this.BollList[index - 1][2]) {
-                if (this.gpData[index - 1].low < this.BollList[index - 1][0] && this.gpData[index].close < this.BollList[index][0]) {
+            if (this.BollList[index][0] >= this.BollList[index - 1][0] && this.BollList[index][1] >= this.BollList[index - 1][1] ||
+                this.BollList[index][1] >= this.BollList[index - 1][1] && this.BollList[index][2] >= this.BollList[index - 1][2] ||
+                this.BollList[index][0] >= this.BollList[index - 1][0] && this.BollList[index][2] >= this.BollList[index - 1][2]) {
+                if (this.gpData[index - 1].low < this.BollList[index - 1][0] && this.gpData[index].close > this.BollList[index][0]) {
                     if (this.gpData[index].close > this.gpData[index - 1].close && this.gpData[index].low > this.gpData[index - 1].low) {
                         //B
                         this._str = '股价突破中轨：当BOLL通道趋势有转平向上时，当股价从下向上突破中轨时，可做短线买入信号Ｂ；'
@@ -1246,11 +1254,11 @@ export default class NewClass extends cc.Component {
             }
         }
 
-        if (GameCfg.GameSet.strategy == '金典用法' || GameCfg.GameSet.strategy == '单边突破上轨') {
+        if (GameCfg.GameSet.strategy == '经典用法' || GameCfg.GameSet.strategy == '单边突破上轨') {
             //3）股价触碰上轨
             if (this.gpData[index].high >= this.BollList[index][1]) {
                 if (this.gpData[index].close < this.BollList[index][1]) {
-                    let max = Math.max(this.gpData[index].open, this.gpData[index].close);
+                    let max = Math.max(this.gpData[index - 1].open, this.gpData[index - 1].close);
                     if (this.gpData[index].close < max) {
                         //s
                         this._str = '1）股价触碰上轨：股价由下向上突破上轨，但没有效站稳上轨时；或股价远离上轨后，转向回落时；可作为短线卖出信号“S”，止赢个股！'
@@ -1298,7 +1306,7 @@ export default class NewClass extends cc.Component {
             }
         }
 
-        if (GameCfg.GameSet.strategy == '金典用法' || GameCfg.GameSet.strategy == '上下轨间震荡') {
+        if (GameCfg.GameSet.strategy == '经典用法' || GameCfg.GameSet.strategy == '上下轨间震荡') {
             //5）股价跌破下轨
             if (this.BollState == 1) {
                 if (this.gpData[index - 1].close >= this.BollList[index - 1][2]) {
@@ -1322,50 +1330,50 @@ export default class NewClass extends cc.Component {
             // 7）布林带上轨阻力
             let fu = 0;
             if (index >= 4) {
-                fu = (this.BollList[index][1] - this.BollList[index - 4][1]) / this.BollList[index - 4][1];
+                fu = (this.BollList[index][0] - this.BollList[index - 4][0]) / this.BollList[index - 4][0];
                 if (Math.abs(fu) < 0.01) {
 
                     // /6）布林带下轨支撑
-                    if (this.gpData[index - 1].close > this.BollList[index - 1][2]) {
-                        if (this.gpData[index].low <= this.BollList[index][2]) {
-                            if (this.gpData[index].low > this.gpData[index - 1].low) {
-                                let min = Math.min(this.gpData[index].open, this.gpData[index].close);
-                                let premin = Math.min(this.gpData[index - 1].open, this.gpData[index].close)
-                                if (min >= premin) {
-                                    if (this.BollList[index][0] > this.BollList[index - 1][0] || this.BollList[index][1] > this.BollList[index - 1][1] || this.BollList[index][2] > this.BollList[index - 1][2]) {
-                                        //b
-                                        this._str = '1）在震荡行情中，当天最低价触碰到布林带下轨； 2）当接下来K线不再创新低时，股价获得下轨支撑，短线反弹；可做短线买入信号“B”。'
+                    // if (this.gpData[index - 1].close > this.BollList[index - 1][2]) {
+                    if (this.gpData[index - 1].low <= this.BollList[index - 1][2]) {
+                        if (this.gpData[index].low > this.gpData[index - 1].low) {
+                            let min = Math.min(this.gpData[index].open, this.gpData[index].close);
+                            let premin = Math.min(this.gpData[index - 1].open, this.gpData[index].close)
+                            if (min >= premin) {
+                                if (this.BollList[index][0] > this.BollList[index - 1][0] || this.BollList[index][1] > this.BollList[index - 1][1] || this.BollList[index][2] > this.BollList[index - 1][2]) {
+                                    //b
+                                    this._str = '1）在震荡行情中，当天最低价触碰到布林带下轨； 2）当接下来K线不再创新低时，股价获得下轨支撑，短线反弹；可做短线买入信号“B”。'
 
-                                        if (this.curState != 'B') {
-                                            this.preBollInfo = 6;
-                                            this.onCreateTipsItem('布林带下轨支撑');
-                                            this.curState = 'B';
-                                            StrategyAIData.onBuyFunc();
-                                            return;
-                                        }
+                                    if (this.curState != 'B') {
+                                        this.preBollInfo = 6;
+                                        this.onCreateTipsItem('布林带下轨支撑');
+                                        this.curState = 'B';
+                                        StrategyAIData.onBuyFunc();
+                                        return;
                                     }
                                 }
-
                             }
+
                         }
                     }
+                    //   }
 
-                    if (this.gpData[index - 1].close < this.BollList[index][0]) {
-                        if (this.gpData[index].high >= this.BollList[index][0]) {
-                            this._str = '1）股价触碰上轨： 股价由下向上突破上轨，但没有效站稳上轨时；或股价远离上轨后，转向回落时；可作为短线卖出信号“S”，止赢个股！！'
-                            if (this.curState != 'S') {
-                                this.preBollInfo = 7;
-                                this.onCreateTipsItem('碰上轨回落');
-                                this.curState = 'S';
-                                StrategyAIData.onSellFunc();
-                                return;
-                            }
+                    // if (this.gpData[index - 1].close < this.BollList[index][0]) {
+                    if (this.gpData[index].high >= this.BollList[index][1] && this.gpData[index].close < this.BollList[index][1]) {
+                        this._str = '1）布林带上轨阻力： 股价由下向上突破上轨，但没有效站稳上轨时；或股价远离上轨后，转向回落时；可作为短线卖出信号“S”，止赢个股！！'
+                        if (this.curState != 'S') {
+                            this.preBollInfo = 7;
+                            this.onCreateTipsItem('碰上轨回落');
+                            this.curState = 'S';
+                            StrategyAIData.onSellFunc();
+                            return;
                         }
                     }
-                    else if (this.preBollInfo == 6) {
+                    //  }
+                    if (this.preBollInfo == 6) {
                         if (this.gpData[index].close < this.BollList[index][0]) {
-                            if (this.gpData[index - 1].close >= this.BollList[index][0] || this.gpData[index - 1].high >= this.BollList[index][0]) {
-                                this._str = '1）股价触碰上轨： 股价由下向上突破上轨，但没有效站稳上轨时；或股价远离上轨后，转向回落时；可作为短线卖出信号“S”，止赢个股！！'
+                            if (this.gpData[index - 1].close >= this.BollList[index - 1][0]) {
+                                this._str = '1）布林带上轨阻力： 股价由下向上突破上轨，但没有效站稳上轨时；或股价远离上轨后，转向回落时；可作为短线卖出信号“S”，止赢个股！！'
                                 if (this.curState != 'S') {
                                     this.preBollInfo = 7;
                                     this.onCreateTipsItem('碰上轨回落');

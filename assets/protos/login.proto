@@ -135,6 +135,15 @@ message CmdResetPwd {
 	string captcha = 3; // 手机验证码或原密码
 }
 
+// 支付成功回调
+message CmdPay {
+	int32 uid = 1;			// uid
+	int64 order_id = 2;		// 订单号
+}
+
+
+
+
 
 // Rpc service
 service LoginService {

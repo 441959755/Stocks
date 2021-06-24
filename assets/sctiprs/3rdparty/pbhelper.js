@@ -254,10 +254,6 @@ PBHelper.prototype = {
             let GameProperties = pb.GameProperties;
             let decode = GameProperties.decode(new Uint8Array(buff));
 
-            // items: Array(1)
-            // 0: GamePropertyItem {id: 3, oldValue: 100000, newValue: 100000}
-            // length: 1
-
             for (let i = 0; i < decode.items.length; i++) {
                 GameData.properties[decode.items[i].id] = decode.items[i].newValue;
                 console.log('id:' + decode.items[i].id + '   ' + 'value:' + decode.items[i].newValue);
@@ -265,7 +261,16 @@ PBHelper.prototype = {
 
             GameData.properties = GameData.properties;
 
-        } else if (id == pb.MessageId.Rep_Game_Start
+        }
+        // 同步输赢计数器：GameCounters
+        else if (id == pb.MessageId.Sync_S2C_GameCounter) {
+            let GameCounters = pb.GameCounters;
+            let decode = GameCounters.decode(new Uint8Array(buff));
+            console.log('同步输赢计数器：GameCounters' + JSON.stringify(decode));
+            GameData.GameCounters = decode;
+        }
+
+        else if (id == pb.MessageId.Rep_Game_Start
             || id == pb.MessageId.Rep_Game_Over
             || id == pb.MessageId.Rep_Game_EditNick
             || id == pb.MessageId.Rep_Game_UploadIcon
@@ -301,6 +306,7 @@ PBHelper.prototype = {
             let TodayGameTimes = pb.TodayGameTimes;
             data = TodayGameTimes.decode(new Uint8Array(buff));
             console.log('当日游戏次数计数器:' + JSON.stringify(data));
+            GameData.todayGameCount = data.counter;
 
         }
         else if (id == pb.MessageId.Rep_Game_GetGameOperation) {

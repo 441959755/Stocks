@@ -26,6 +26,11 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     title: cc.Label = null;
 
+    @property(cc.Node)
+    content: cc.Node = null;
+
+    location = '';
+
 
     onLoad() {
         this.content1.active = false;
@@ -48,7 +53,36 @@ export default class NewClass extends cc.Component {
             this.layer.active = true;
             this.content3.active = true;
             this.title.string = '选择地区';
+            this.location = '';
+            let items = GameData.location.split(' ');
+            this.initLocation(items);
         }, this);
+    }
+
+    initLocation(items) {
+        let nodes = this.content.children;
+
+        for (let index = 0; index < nodes.length; index++) {
+            let str = nodes[index].children[0].children[0].getComponent(cc.Label).string;
+            if (str == items[0]) {
+                nodes[index].children[0].children[1].active = true;
+                let arr = nodes[index].children;
+                if (items[1]) {
+                    for (let t = 1; t < arr.length; t++) {
+                        let str = arr[t].children[0].getComponent(cc.Label).string;
+                        if (str == items[1]) {
+                            arr[t].children[1].active = true;
+                        } else {
+                            arr[t].children[1].active = false;
+                        }
+                        arr[t].active = false;
+                    }
+                }
+
+            } else {
+                nodes[index].children[0].children[1].active = false;
+            }
+        }
     }
 
     start() {
@@ -72,13 +106,95 @@ export default class NewClass extends cc.Component {
             this.onChangeUserGender(index);
         }
 
-        else if (name == 'item') {
-
+        else if (name == 'node') {
+            this.selectLocation(event.target);
         }
 
     }
 
+    selectLocation(node) {
+        let nodes = node.parent.children;
+
+        let str = this.location.split(' ');
+
+
+        if (str[0] != '' && str.length == 1) {
+            if (node.children[0].getComponent(cc.Label).string == this.location) {
+                nodes.forEach((element, index) => {
+                    if (index != 0 && element.active) {
+                        element.active = false;
+                    }
+                    else if (index != 0 && !element.active) {
+                        element.active = true;
+                    }
+
+                });
+                let nodes1 = this.content.children;
+                for (let index = 0; index < nodes1.length; index++) {
+                    let str1 = nodes1[index].children[0].children[0].getComponent(cc.Label).string;
+                    if (str1 == str[0]) {
+                        this.location = '';
+                    }
+                }
+                return;
+            }
+            this.location += ' ' + node.children[0].getComponent(cc.Label).string;
+            node.children[1].active = true;
+
+            this.content1.active = false;
+            this.content2.active = false;
+            this.content3.active = false;
+            this.layer.active = false;
+            GameData.location = this.location;
+            let data = {
+                uid: GameData.userID,
+                location: GameData.location,
+            }
+
+            let id = pb.MessageId.Req_Hall_EditLocation;
+            this.onSendMessage(id, data);
+        }
+        else if (str[0] == '') {
+            this.location = node.children[0].getComponent(cc.Label).string;
+            node.children[1].active = true;
+
+            nodes.forEach(element => {
+                element.active = true;
+            });
+        } else {
+            nodes.forEach((element, index) => {
+                if (index != 0 && element.active) {
+                    element.active = false;
+                }
+                else if (index != 0 && !element.active) {
+                    element.active = true;
+                }
+
+            });
+        }
+
+        let items = this.location.split(' ');
+        this.initLocation(items);
+    }
+
     onChangeUserGender(index) {
+        let str;
+        if (index == 1) {
+            str = '男';
+        } else {
+            str = '女';
+        }
+        this.content1.active = false;
+        this.content2.active = false;
+        this.content3.active = false;
+        this.layer.active = false;
+        GameData.gender = str;
+        let data = {
+            uid: GameData.userID,
+            gender: GameData.gender,
+        }
+        let id = pb.MessageId.Req_Hall_EditGender;
+        this.onSendMessage(id, data);
 
     }
 
