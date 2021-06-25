@@ -532,8 +532,14 @@ export default class NewClass extends cc.Component {
                 if (GameData.ZBSet.month.length < 2) {
                     m = '0' + GameData.ZBSet.month;
                 }
+                else {
+                    m = GameData.ZBSet.month;
+                }
                 if (GameData.ZBSet.day.length < 2) {
                     d = '0' + GameData.ZBSet.day;
+                }
+                else {
+                    d = GameData.ZBSet.day;
                 }
                 let seletTime = GameData.ZBSet.year + '' + m + '' + d;
                 items = GameCfgText.getTimeByItems(seletTime);

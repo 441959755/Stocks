@@ -180,18 +180,61 @@ export default class NewClass extends cc.Component {
                 }
             }
             let content = cc.find('New ScrollView/view/content', this.childs);
-            if (content.children.length == 0) {
-                for (let i = start; i <= end; i++) {
-                    let node = cc.instantiate(this.item);
+            //  if (content.children.length == 0) {
+            for (let i = start; i <= end; i++) {
+                let node;
+                if (!content.children[i - start]) {
+                    node = cc.instantiate(this.item);
                     content.addChild(node);
-                    if (this._page == 0 && this._index == 3) {
-                        node.getComponent(cc.Label).string = '-' + i + '%';
-                    } else {
-                        node.getComponent(cc.Label).string = i;
-                    }
-
                 }
+                else {
+                    node = content.children[i - start];
+                }
+
+                node.getComponent(cc.Label).string = i;
+                if (this._page == 0 && this._index == 3) {
+                    node.getComponent(cc.Label).string = '-' + i + '%';
+                }
+                if (this._page == 0 && this._index == 0) {
+                    let str1 = this.layers[this._page].children[1].getChildByName('label').getComponent(cc.Label).string;
+
+                    let str2 = this.layers[this._page].children[2].getChildByName('label').getComponent(cc.Label).string;
+                    node.color = new cc.Color().fromHEX('#FFFFFF');
+                    if (i == str1 || i == str2) {
+                        let bu = node.getComponent(cc.Button);
+                        bu.interactable = false;
+                        bu.enableAutoGrayEffect = true;
+                        node.color = new cc.Color().fromHEX('#808080');
+                    }
+                }
+                else if (this._page == 0 && this._index == 1) {
+                    let str1 = this.layers[this._page].children[0].getChildByName('label').getComponent(cc.Label).string;
+
+                    let str2 = this.layers[this._page].children[2].getChildByName('label').getComponent(cc.Label).string;
+                    node.color = new cc.Color().fromHEX('#FFFFFF');
+                    if (i == str1 || i == str2) {
+                        let bu = node.getComponent(cc.Button);
+                        bu.interactable = false;
+                        bu.enableAutoGrayEffect = true;
+                        node.color = new cc.Color().fromHEX('#808080');
+                    }
+                }
+                else if (this._page == 0 && this._index == 2) {
+                    let str1 = this.layers[this._page].children[1].getChildByName('label').getComponent(cc.Label).string;
+
+                    let str2 = this.layers[this._page].children[2].getChildByName('label').getComponent(cc.Label).string;
+                    node.color = new cc.Color().fromHEX('#FFFFFF');
+                    if (i == str1 || i == str2) {
+                        let bu = node.getComponent(cc.Button);
+                        bu.interactable = false;
+                        bu.enableAutoGrayEffect = true;
+                        node.color = new cc.Color().fromHEX('#808080');
+                    }
+                }
+
+
             }
+            // }
         } else if (name == 'DCnode') {
             event.target.parent.active = false;
         }

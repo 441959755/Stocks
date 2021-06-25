@@ -168,7 +168,7 @@ cc.Class({
 				KLine: 150,
 				ZLine: '日线',
 				showSign: true,
-				MA: [20, 10, 20, -8],
+				MA: [20, 10, 30, -8],
 				VOL: [5, 20],
 				MACD: [12, 26, 9],
 				BOLL: [20],

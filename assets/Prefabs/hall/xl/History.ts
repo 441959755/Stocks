@@ -207,11 +207,6 @@ export default class NewClass extends cc.Component {
             }
         }
         else if (GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.QiHuo) {
-            // if (GameCfg.GameType == pb.GameType.DingXiang) {
-            //     this.title.string = '定向训练';
-            // } else if (GameCfg.GameType == pb.GameType.QiHuo) {
-            //     this.title.string = '期货训练';
-            // }
 
             this.label.string = (sumrate).toFixed(2) + '%';
             if (sumrate > 0) {
@@ -267,12 +262,7 @@ export default class NewClass extends cc.Component {
 
                         if (TIMETEMP.indexOf(datas[i].ts) != -1) {
 
-                            //  cc.sys.localStorage.removeItem(datas[i].ts + 'set');
-                            //  cc.sys.localStorage.removeItem(datas[i].ts + 'fill');
-                            //  cc.sys.localStorage.removeItem(datas[i].ts + 'notice');
-                            //   cc.sys.localStorage.removeItem(datas[i].ts + 'mark');
                             cc.sys.localStorage.removeItem(datas[i].ts + 'cache');
-                            //   cc.sys.localStorage.removeItem(datas[i].ts + 'block');
 
                             arr.splice(arr.indexOf(datas[i].ts), 1);
                         }

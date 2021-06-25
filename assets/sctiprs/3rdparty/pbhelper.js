@@ -126,12 +126,7 @@ PBHelper.prototype = {
     //查询游戏结果
     onCmdQueryGameResultConvertToBuff(data) {
         let CmdQueryGameResult = pb.CmdQueryGameResult;
-        let message = CmdQueryGameResult.create({
-            gType: data.g_type,
-            from: data.from,
-            to: data.to,
-            pageSize: data.page_size,
-        })
+        let message = CmdQueryGameResult.create(data)
 
         let buff = CmdQueryGameResult.encode(message).finish();
         return buff;
@@ -239,6 +234,7 @@ PBHelper.prototype = {
         return decode;
     },
 
+
     selectBlackData(id, buff) {
         let data;
         console.log('id:' + id + '跟新数据');
@@ -279,8 +275,10 @@ PBHelper.prototype = {
             data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
         } else if (id == pb.MessageId.Rep_Game_QueryGameResult) {
+
             data = this.onCmdQueryGameResultReplyConvertToData(buff);
             return data;
+
         } else if (id == pb.MessageId.Rep_Game_SmxlReport) {
             let CmdGetSmxlReportReply = pb.CmdGetSmxlReportReply;
             data = CmdGetSmxlReportReply.decode(new Uint8Array(buff));

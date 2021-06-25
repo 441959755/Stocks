@@ -54,6 +54,7 @@ export default class NewClass extends cc.Component {
         let ind = parseInt(data);
         this.layers.forEach((el, index) => {
             if (index == ind) {
+
                 el.active = true;
             } else {
                 el.active = false;

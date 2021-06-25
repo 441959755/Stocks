@@ -53,6 +53,8 @@ export default class NewClass extends cc.Component {
 
     BollState = 0;
 
+    BOllFlag = 0;
+
     EXPMA1 = null;
     EXPMA2 = null;
 
@@ -228,30 +230,10 @@ export default class NewClass extends cc.Component {
 
     start() {
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+
             this.MAIndex = GameCfg.MAs.indexOf(GameCfg.GameSet.MA[0]);
-
-            if (GameCfg.MAs.length == 3) {
-
-                if (this.MAIndex == 0) {
-                    this.MAIndex1 = 1;
-                    this.MAIndex2 = 2;
-                } else if (this.MAIndex == 1) {
-                    this.MAIndex1 = 0;
-                    this.MAIndex2 = 2;
-                }
-                else if (this.MAIndex == 2) {
-                    this.MAIndex1 = 0;
-                    this.MAIndex2 = 1;
-                }
-            }
-            else if (GameCfg.MAs.length == 2) {
-                this.MAIndex1 = 0;
-                this.MAIndex2 = 1;
-            }
-            else if (GameCfg.MAs.length == 1) {
-                this.MAIndex1 = 0;
-                this.MAIndex2 = 0;
-            }
+            this.MAIndex1 = GameCfg.MAs.indexOf(GameCfg.GameSet.MA[1]);
+            this.MAIndex2 = GameCfg.MAs.indexOf(GameCfg.GameSet.MA[2]);
 
         }
 
@@ -264,9 +246,9 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GameSet.strategy == '组合训练') {
 
             //短线转向买点
-            if (this.maList[index][0] > this.maList[index][1]) {
-                if (this.maList[index][0] > this.maList[index - 1][0]) {
-                    if (this.gpData[index].close > this.maList[index][0] && this.gpData[index - 1].close < this.maList[index - 1][0]) {
+            if (this.maList[index][this.MAIndex1] > this.maList[index][this.MAIndex2]) {
+                if (this.maList[index][this.MAIndex1] > this.maList[index - 1][this.MAIndex1]) {
+                    if (this.gpData[index].close > this.maList[index][this.MAIndex1] && this.gpData[index - 1].close < this.maList[index - 1][this.MAIndex1]) {
                         let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
                         if (this.gpData[index].close > max) {
                             //B
@@ -285,8 +267,8 @@ export default class NewClass extends cc.Component {
             }
 
             //短线转向卖点
-            if (this.maList[index][0] <= this.maList[index - 1][0]) {
-                if (this.gpData[index].close < this.maList[index][0] && this.gpData[index - 1].close > this.maList[index - 1][0]) {
+            if (this.maList[index][this.MAIndex1] <= this.maList[index - 1][this.MAIndex1]) {
+                if (this.gpData[index].close < this.maList[index][this.MAIndex1] && this.gpData[index - 1].close > this.maList[index - 1][this.MAIndex1]) {
                     let max = Math.min(this.gpData[index - 1].close, this.gpData[index - 1].open);
                     if (this.gpData[index].close < max) {
                         //S
@@ -355,7 +337,7 @@ export default class NewClass extends cc.Component {
                     if (this.gpData[index].close > b) {
                         //
                         this._str = '1）股价上穿均线： 当均线转平向上，若股价从均线下方上穿均线时，则此时可作为短线买入信号“B”，买入个股！'
-                        str = '上穿均线MA' + GameCfg.MAs[this.MAIndex] + '均线';
+                        str = '上穿MA' + GameCfg.MAs[this.MAIndex] + '均线';
 
                         if (this.curState != 'B') {
                             this.onCreateTipsItem(str)
@@ -374,7 +356,7 @@ export default class NewClass extends cc.Component {
                 if (this.gpData[index].close < this.maList[index][this.MAIndex]) {
 
                     this._str = '1）股价下穿均线： 股价之前在均线之上运行，当收盘股价下穿均线时，则此时可作为短线卖出信号“S”，卖出个股！'
-                    str = '下穿均线MA' + GameCfg.MAs[this.MAIndex] + '均线';
+                    str = '下穿MA' + GameCfg.MAs[this.MAIndex] + '均线';
                     //S
 
                     if (this.curState != 'S') {
@@ -1181,15 +1163,56 @@ export default class NewClass extends cc.Component {
         if (!this.disMin) {
             this.disMin = dis;
         }
-        this.disMax = Math.max(dis, this.disMax);
-        this.disMin = Math.min(dis, this.disMin);
-        if (dis > 1.5 * this.disMin) {
-            this.BollState = 1;
-            this.disMax = 0;
-        } else if (dis <= this.disMax * 2 / 3) {
-            this.BollState = 2;
-            this.disMin = 0;
+
+        if (this.BollState == 0) {
+            this.disMax = Math.max(dis, this.disMax);
+            this.disMin = Math.min(dis, this.disMin);
+            if (dis <= this.disMax * 2 / 3) {
+
+                this.BollState = 2;
+                this.disMin = Math.min(dis, this.disMin);
+            }
+            else if (dis > 1.5 * this.disMin) {
+
+                this.BollState = 1;
+                this.disMax = Math.max(dis, this.disMax);
+            }
         }
+
+        if (this.BollState == 1) {
+            if (dis <= this.disMax * 2 / 3) {
+                // if (this.BollList == 1) {
+                this.disMin = dis;
+                //    }
+
+                this.BollState = 2;
+                this.disMin = Math.min(dis, this.disMin);
+            }
+            else if (dis > 1.5 * this.disMin) {
+
+                this.BollState = 1;
+                this.disMax = Math.max(dis, this.disMax);
+            }
+
+        }
+        else if (this.BollState == 2) {
+            if (dis > 1.5 * this.disMin) {
+                //   if (this.BollList == 2) {
+                this.disMax = 0;
+                //    }
+                this.BollState = 1;
+                this.disMax = Math.max(dis, this.disMax);
+            }
+            else if (dis <= this.disMax * 2 / 3) {
+
+                this.BollState = 2;
+                this.disMin = Math.min(dis, this.disMin);
+            }
+
+        }
+
+
+
 
         if (GameCfg.GameSet.strategy == '经典用法' || GameCfg.GameSet.strategy == '布林带中轨') {
             //1) 股价突破中轨
@@ -1427,7 +1450,7 @@ export default class NewClass extends cc.Component {
             if (this.EXPMA1[index] <= this.EXPMA1[index - 1]) {
                 if (this.gpData[index].close < this.EXPMA1[index] && this.gpData[index - 1].close > this.EXPMA1[index - 1]) {
                     let min = Math.min(this.gpData[index - 1].open, this.gpData[index - 1].close);
-                    if (this.gpData[index].close < min) {
+                    if (this.gpData[index].low < min) {
                         this._str = '1）当白线exp1趋势转向下时； 2） 此时若股价有效跌破exp1线时, 且股价反转跌破上日K线； 则可做短线卖出信号"S" !'
 
                         if (this.curState != 'S') {

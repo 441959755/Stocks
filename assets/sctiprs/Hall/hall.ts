@@ -443,12 +443,10 @@ export default class NewClass extends cc.Component {
 				g_type: GameCfg.GameType,
 				from: data.getTime(),
 				to: new Date().getTime(),
-				page_size: 100
+				pageSize: 100
 			};
 
 			socket.send(pb.MessageId.Req_Game_QueryGameResult, PB.onCmdQueryGameResultConvertToBuff(data1), info => {
-				//	console.log('acquireSMhistoryInfo' + JSON.stringify(info));
-
 				callBack && callBack(info);
 			});
 		}
