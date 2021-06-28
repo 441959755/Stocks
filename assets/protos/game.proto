@@ -53,7 +53,7 @@ enum ItemOrderState {
 enum MessageType {
 	MessageType_NULL = 0;
 
-	Notice = 1;		// 系统消息
+	SystemNotice= 1;// 系统消息
 	Popup_Adv = 2;	// 弹窗广告
 
 	
@@ -189,17 +189,16 @@ message BackbagGrid {
 message Backbag {
 	repeated BackbagGrid grids = 1;	// 背包格子
 }
+
 // 游戏输赢计数器
 message GameCounter {
 	GameType game = 1;	// 游戏类型ID
 	int32 win = 2;		// 总共赢的次数
 	int32 lose = 3;		// 总共输的次数
 }
-
 message GameCounters {
 	repeated GameCounter items = 1;	// 所有游戏的计数器
 }
-
 // 当日游戏次数计数器
 message TodayGameTimes {
 	repeated int32 counter = 1;	// 游戏次数
@@ -360,6 +359,10 @@ message CmdEditFavorList {
 // 领取背包物品请求
 message CmdGetItem {
 	int64 ts    = 1;	// 时间戳
+}
+// 重置游戏胜负统计
+message CmdResetGameCounter {
+	GameType game = 1;	// 游戏类型ID
 }
 // 任务进度
 message TaskItem {
@@ -544,8 +547,8 @@ message RoomGameData {
 
 
 
-// Email
-message Email {
+// Notice
+message Notice {
 	int32 sender = 1;		// 发送者用户ID（0为系统发送者）
 	int32 receiver = 2;		// 接收者用户ID或房间ID（房间邀请信息填0，房间广播填房间ID）
 	MessageType type = 3;	// 消息类型

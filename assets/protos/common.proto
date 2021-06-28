@@ -78,13 +78,15 @@ enum MessageId {
 	Sync_S2C_GameCg = 1008;					// 同步闯关大赛状态：CgState
 	Sync_S2C_GameMncg = 1010;				// 同步模拟炒股状态：MncgState
 	Sync_S2C_GameCgds = 1012;				// 同步炒股大赛状态：CgdsState
-	Sync_S2C_Broadcast = 1014;				// 服务器广播：
+	Sync_S2C_Broadcast = 1014;				// 系统广播：Notice
 	Sync_S2C_GameCg_GD = 1016;				// 同步闯关赛游戏数据：JjGame
 	Sync_S2C_GameTimes = 1018;				// 同步当日游戏次数数据：TodayGameTimes
 	Sync_S2C_StockOrderResult = 1020;		// 同步股票委托处理结果：StockOrderResult
 	Sync_S2C_MutipleLogin = 1022;			// 同步多个客户端同时登录：无
 	Sync_S2C_TaskProgress = 1024;			// 同步任务进度及奖励：TaskItem
 	Sync_S2C_ActivityConf = 1026;			// 同步当前活动配置：ActivityConf
+	Sync_S2C_SystemMsg = 1028;				// 管理员消息：Notice
+	Sync_S2C_FirstLoginToday = 1030;		// 当日首次登录会收到：空
 	
 	Sync_C2S_GameHeart = 1200;				// 心跳
 	
@@ -145,6 +147,8 @@ enum MessageId {
 	Rep_Hall_ShopOrderQuery = 3034;			// 商城购买订单支付结果查询应答：ErrorInfo
 	Req_Hall_MobileBind = 3035;				// 手机号绑定：CmdMobileBind
 	Rep_Hall_MobileBind = 3036;				// 手机号绑定应答：ErrorInfo
+	Req_Hall_ResetGameCounter = 3037;		// 重置游戏胜负统计：CmdResetGameCounter
+	Rep_Hall_ResetGameCounter = 3038;		// 重置游戏胜负统计应答：无
 
 	Req_Hall_Logout = 3999;					// 登出：无
 	Rep_Hall_Logout = 4000;					// 登出应答：无（发送请求成功后会自动断开tcp长连接）

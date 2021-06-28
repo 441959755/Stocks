@@ -29,7 +29,7 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     title: cc.Label = null;
 
-    onLoad() {
+    onEnable() {
         GlobalEvent.on(EventCfg.HISTORYOPTDATA, () => {
 
             let nodes = preNodes;
@@ -77,7 +77,7 @@ export default class NewClass extends cc.Component {
         }, this);
     }
 
-    onDestroy() {
+    onDisable() {
         GlobalEvent.off(EventCfg.HISTORYOPTDATA);
     }
 

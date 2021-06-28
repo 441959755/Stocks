@@ -272,6 +272,54 @@ cc.Class({
 			GameData.ZBHistoryInfo = JSON.parse(ZBHistoryInfo);
 		}
 
+		//获取DX今天的看广告的次数
+		{
+			let str = new Date().toLocaleDateString();
+			let ADCount = cc.sys.localStorage.getItem('DINGXIANGADCOUNT' + str);
+			if (!ADCount) {
+				GameData.DingXiangADCount = 0;
+			}
+			else {
+				GameData.DingXiangADCount = parseInt(ADCount);
+			}
+
+			let str1 = new Date(new Date().getTime() - 24 * 60 * 60 * 1000).toLocaleDateString();
+
+			cc.sys.localStorage.removeItem('DINGXIANGADCOUNT' + str1);
+		}
+
+		//获取QH今天看广告的次数
+		{
+			let str = new Date().toLocaleDateString();
+			let ADCount = cc.sys.localStorage.getItem('QHADCOUNT' + str);
+			if (!ADCount) {
+				GameData.QHADCount = 0;
+			}
+			else {
+				GameData.QHADCount = parseInt(ADCount);
+			}
+
+			let str1 = new Date(new Date().getTime() - 24 * 60 * 60 * 1000).toLocaleDateString();
+
+			cc.sys.localStorage.removeItem('QHADCOUNT' + str1);
+		}
+
+		//获取TJ今天看广告的次数
+		{
+			let str = new Date().toLocaleDateString();
+			let ADCount = cc.sys.localStorage.getItem('TJADCOUNT' + str);
+			if (!ADCount) {
+				GameData.TJADCount = 0;
+			}
+			else {
+				GameData.TJADCount = parseInt(ADCount);
+			}
+
+			let str1 = new Date(new Date().getTime() - 24 * 60 * 60 * 1000).toLocaleDateString();
+
+			cc.sys.localStorage.removeItem('TJADCOUNT' + str1);
+		}
+
 	},
 
 	onDestroy() {

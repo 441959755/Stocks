@@ -234,6 +234,15 @@ PBHelper.prototype = {
         return decode;
     },
 
+    //重置游戏胜负统计：CmdResetGameCounter
+    onResetGameCounter(data) {
+        let CmdResetGameCounter = pb.CmdResetGameCounter;
+        let message = CmdResetGameCounter.create(data);
+        let buff = CmdResetGameCounter.encode(message).finish();
+        return buff;
+
+    },
+
 
     selectBlackData(id, buff) {
         let data;
@@ -270,7 +279,8 @@ PBHelper.prototype = {
             || id == pb.MessageId.Rep_Game_Over
             || id == pb.MessageId.Rep_Game_EditNick
             || id == pb.MessageId.Rep_Game_UploadIcon
-            || id == pb.MessageId.Rep_Game_SmxlReset) {
+            || id == pb.MessageId.Rep_Game_SmxlReset
+            || id == pb.MessageId.Rep_Hall_ResetGameCounter) {
             let ErrorInfo = pb.ErrorInfo;
             data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
@@ -328,6 +338,12 @@ PBHelper.prototype = {
             }
 
 
+        }
+        //  获取背包列表应答：Backbag
+        else if (id == pb.MessageId.Rep_Hall_BackBag) {
+            let backbag = pb.Backbag;
+            let data = backbag.decode(new Uint8Array(buff));
+            return data;
         }
 
     }

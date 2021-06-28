@@ -228,18 +228,44 @@ export default class GameData {
     // }
 
 
-    // private static _DingXiangCount;
+    private static _DingXiangADCount;
 
-    // public static get DingXiangCount() {
+    public static get DingXiangADCount() {
 
-    //     return this._DingXiangCount;
-    // }
+        return this._DingXiangADCount;
+    }
 
-    // public static set DingXiangCount(val) {
-    //     this._DingXiangCount = val;
-    //     let str = new Date().toLocaleDateString();
-    //     cc.sys.localStorage.setItem('DINGXIANGCOUNT' + str, val);
-    // }
+    public static set DingXiangADCount(val) {
+        this._DingXiangADCount = val;
+        let str = new Date().toLocaleDateString();
+        cc.sys.localStorage.setItem('DINGXIANGADCOUNT' + str, val);
+    }
+
+
+    private static _QHADCount;
+
+    public static get QHADCount() {
+
+        return this._QHADCount;
+    }
+
+    public static set QHADCount(val) {
+        this._QHADCount = val;
+        let str = new Date().toLocaleDateString();
+        cc.sys.localStorage.setItem('QHADCOUNT' + str, val);
+    }
+
+    private static _TJADCount;
+
+    public static get TJADCount() {
+        return this._TJADCount;
+    }
+
+    public static set TJADCount(val) {
+        this._TJADCount = val;
+        let str = new Date().toLocaleDateString();
+        cc.sys.localStorage.setItem('TJADCOUNT' + str, val);
+    }
 
 
 }

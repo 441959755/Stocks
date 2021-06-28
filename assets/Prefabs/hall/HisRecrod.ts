@@ -25,8 +25,33 @@ export default class NewClass extends cc.Component {
 
     HisData = null;
 
-    start() {
+    HisCount = 0;
 
+    @property(cc.ScrollView)
+    scrollview: cc.ScrollView = null;
+
+    onLoad() {
+        this.scrollview.node.on('scroll-to-bottom', () => {
+            console.log('scroll-to-bottom');
+            //已经取完
+            if (this.HisData.length < this.HisCount) {
+                console.log('已经取完')
+            }
+
+            else {
+                let ts;
+                if (this.HisData) {
+                    ts = this.HisData[this.HisData.length - 1].ts;
+                }
+                let data = {
+                    uid: GameData.userID,
+                    to: ts,
+                    pageSize: 20,
+                }
+                this.onQueryGameResult(data);
+            }
+
+        }, this);
     }
 
     onToggleClick(event) {
@@ -42,41 +67,49 @@ export default class NewClass extends cc.Component {
         this.tipsNode.active = false;
 
         if (!this.HisData) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
             let ts = new Date().getTime() / 1000;
             let data = {
                 uid: GameData.userID,
                 to: ts,
                 pageSize: 20,
             }
+            this.onQueryGameResult(data);
+        }
+    }
 
-            socket.send(pb.MessageId.Req_Game_QueryGameResult, PB.onCmdQueryGameResultConvertToBuff(data), info => {
-                this.HisData = info.results;
-                console.log(JSON.stringify(this.HisData));
-                if (this.HisData.length == 0) {
-                    this.tipsNode.active = true;
-                }
-                else {
-                    this.HisData.forEach((el, index) => {
+    onQueryGameResult(data) {
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        socket.send(pb.MessageId.Req_Game_QueryGameResult, PB.onCmdQueryGameResultConvertToBuff(data), info => {
+            console.log(JSON.stringify(info.results));
+            if (info.results.length == 0) {
+                this.tipsNode.active = true;
+            }
+            else {
+                this.HisData = [];
+                info.results.forEach((el, index) => {
+                    this.HisData.push(el);
+                    if (el.gType == pb.GameType.ShuangMang) {
+
+                    } else {
                         let node = cc.instantiate(this.item);
                         this.content.addChild(node);
                         let nodeHandle = node.getComponent('HisItem');
                         nodeHandle.itemData = el;
                         nodeHandle.itemIndex = index + 1;
                         nodeHandle.onShow();
-                    });
+                    }
+                });
 
-                }
-
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
-
-
-            });
-
-        }
+            }
+            this.HisCount += data.pageSize;
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+        });
 
     }
 
-    // update (dt) {}
+    onDestroy() {
+        //  this.scrollview.node.off('scroll-to-bottom');
+    }
+
 }

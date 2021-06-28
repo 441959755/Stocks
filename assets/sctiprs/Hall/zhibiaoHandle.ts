@@ -8,6 +8,7 @@ import ComUtils from '../Utils/ComUtils';
 
 import { pb } from '../../protos/proto';
 import DrawData from "../game/DrawData";
+import LLWConfig from "../common/config/LLWConfig";
 
 const { ccclass, property } = cc._decorator;
 
@@ -481,6 +482,9 @@ export default class NewClass extends cc.Component {
                 GameData.ZBSet.ZLine = str;
             }
         } else if (name == 'startZBBtn') {
+            if (!GameData.properties[pb.GamePropertyId.UnlockDxxl] && !GameData.properties[pb.GamePropertyId.Vip] && !LLWConfig.ISLOG) {
+
+            }
 
             GameCfg.GameType = pb.GameType.ZhiBiao;
             GameCfg.GameSet = GameData.ZBSet;

@@ -125,6 +125,8 @@ $root.pb = (function () {
      * @property {number} Sync_S2C_MutipleLogin=1022 Sync_S2C_MutipleLogin value
      * @property {number} Sync_S2C_TaskProgress=1024 Sync_S2C_TaskProgress value
      * @property {number} Sync_S2C_ActivityConf=1026 Sync_S2C_ActivityConf value
+     * @property {number} Sync_S2C_SystemMsg=1028 Sync_S2C_SystemMsg value
+     * @property {number} Sync_S2C_FirstLoginToday=1030 Sync_S2C_FirstLoginToday value
      * @property {number} Sync_C2S_GameHeart=1200 Sync_C2S_GameHeart value
      * @property {number} Sync_Email=1300 Sync_Email value
      * @property {number} Req_QuoteSubscribe=2001 Req_QuoteSubscribe value
@@ -177,6 +179,8 @@ $root.pb = (function () {
      * @property {number} Rep_Hall_ShopOrderQuery=3034 Rep_Hall_ShopOrderQuery value
      * @property {number} Req_Hall_MobileBind=3035 Req_Hall_MobileBind value
      * @property {number} Rep_Hall_MobileBind=3036 Rep_Hall_MobileBind value
+     * @property {number} Req_Hall_ResetGameCounter=3037 Req_Hall_ResetGameCounter value
+     * @property {number} Rep_Hall_ResetGameCounter=3038 Rep_Hall_ResetGameCounter value
      * @property {number} Req_Hall_Logout=3999 Req_Hall_Logout value
      * @property {number} Rep_Hall_Logout=4000 Rep_Hall_Logout value
      * @property {number} Req_Game_Login=4001 Req_Game_Login value
@@ -279,6 +283,8 @@ $root.pb = (function () {
         values[valuesById[1022] = "Sync_S2C_MutipleLogin"] = 1022;
         values[valuesById[1024] = "Sync_S2C_TaskProgress"] = 1024;
         values[valuesById[1026] = "Sync_S2C_ActivityConf"] = 1026;
+        values[valuesById[1028] = "Sync_S2C_SystemMsg"] = 1028;
+        values[valuesById[1030] = "Sync_S2C_FirstLoginToday"] = 1030;
         values[valuesById[1200] = "Sync_C2S_GameHeart"] = 1200;
         values[valuesById[1300] = "Sync_Email"] = 1300;
         values[valuesById[2001] = "Req_QuoteSubscribe"] = 2001;
@@ -331,6 +337,8 @@ $root.pb = (function () {
         values[valuesById[3034] = "Rep_Hall_ShopOrderQuery"] = 3034;
         values[valuesById[3035] = "Req_Hall_MobileBind"] = 3035;
         values[valuesById[3036] = "Rep_Hall_MobileBind"] = 3036;
+        values[valuesById[3037] = "Req_Hall_ResetGameCounter"] = 3037;
+        values[valuesById[3038] = "Rep_Hall_ResetGameCounter"] = 3038;
         values[valuesById[3999] = "Req_Hall_Logout"] = 3999;
         values[valuesById[4000] = "Rep_Hall_Logout"] = 4000;
         values[valuesById[4001] = "Req_Game_Login"] = 4001;
@@ -1213,7 +1221,7 @@ $root.pb = (function () {
      * @name pb.MessageType
      * @enum {number}
      * @property {number} MessageType_NULL=0 MessageType_NULL value
-     * @property {number} Notice=1 Notice value
+     * @property {number} SystemNotice=1 SystemNotice value
      * @property {number} Popup_Adv=2 Popup_Adv value
      * @property {number} Chat=9 Chat value
      * @property {number} RoomChat=10 RoomChat value
@@ -1222,7 +1230,7 @@ $root.pb = (function () {
     pb.MessageType = (function () {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "MessageType_NULL"] = 0;
-        values[valuesById[1] = "Notice"] = 1;
+        values[valuesById[1] = "SystemNotice"] = 1;
         values[valuesById[2] = "Popup_Adv"] = 2;
         values[valuesById[9] = "Chat"] = 9;
         values[valuesById[10] = "RoomChat"] = 10;
@@ -8996,6 +9004,281 @@ $root.pb = (function () {
         return CmdGetItem;
     })();
 
+    pb.CmdResetGameCounter = (function () {
+
+        /**
+         * Properties of a CmdResetGameCounter.
+         * @memberof pb
+         * @interface ICmdResetGameCounter
+         * @property {pb.GameType|null} [game] CmdResetGameCounter game
+         */
+
+        /**
+         * Constructs a new CmdResetGameCounter.
+         * @memberof pb
+         * @classdesc Represents a CmdResetGameCounter.
+         * @implements ICmdResetGameCounter
+         * @constructor
+         * @param {pb.ICmdResetGameCounter=} [properties] Properties to set
+         */
+        function CmdResetGameCounter(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdResetGameCounter game.
+         * @member {pb.GameType} game
+         * @memberof pb.CmdResetGameCounter
+         * @instance
+         */
+        CmdResetGameCounter.prototype.game = 0;
+
+        /**
+         * Creates a new CmdResetGameCounter instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdResetGameCounter
+         * @static
+         * @param {pb.ICmdResetGameCounter=} [properties] Properties to set
+         * @returns {pb.CmdResetGameCounter} CmdResetGameCounter instance
+         */
+        CmdResetGameCounter.create = function create(properties) {
+            return new CmdResetGameCounter(properties);
+        };
+
+        /**
+         * Encodes the specified CmdResetGameCounter message. Does not implicitly {@link pb.CmdResetGameCounter.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdResetGameCounter
+         * @static
+         * @param {pb.ICmdResetGameCounter} message CmdResetGameCounter message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdResetGameCounter.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.game != null && Object.hasOwnProperty.call(message, "game"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.game);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdResetGameCounter message, length delimited. Does not implicitly {@link pb.CmdResetGameCounter.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdResetGameCounter
+         * @static
+         * @param {pb.ICmdResetGameCounter} message CmdResetGameCounter message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdResetGameCounter.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdResetGameCounter message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdResetGameCounter
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdResetGameCounter} CmdResetGameCounter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdResetGameCounter.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdResetGameCounter();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.game = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdResetGameCounter message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdResetGameCounter
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdResetGameCounter} CmdResetGameCounter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdResetGameCounter.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdResetGameCounter message.
+         * @function verify
+         * @memberof pb.CmdResetGameCounter
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdResetGameCounter.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.game != null && message.hasOwnProperty("game"))
+                switch (message.game) {
+                    default:
+                        return "game: enum value expected";
+                    case 0:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 17:
+                    case 11:
+                    case 6:
+                    case 16:
+                    case 1:
+                    case 2:
+                    case 9:
+                    case 15:
+                    case 10:
+                    case 12:
+                    case 7:
+                    case 8:
+                    case 30:
+                        break;
+                }
+            return null;
+        };
+
+        /**
+         * Creates a CmdResetGameCounter message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdResetGameCounter
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdResetGameCounter} CmdResetGameCounter
+         */
+        CmdResetGameCounter.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdResetGameCounter)
+                return object;
+            var message = new $root.pb.CmdResetGameCounter();
+            switch (object.game) {
+                case "GameType_NULL":
+                case 0:
+                    message.game = 0;
+                    break;
+                case "ShuangMang":
+                case 3:
+                    message.game = 3;
+                    break;
+                case "DingXiang":
+                case 4:
+                    message.game = 4;
+                    break;
+                case "FenShi":
+                case 5:
+                    message.game = 5;
+                    break;
+                case "ZhiBiao":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "TiaoJianDan":
+                case 11:
+                    message.game = 11;
+                    break;
+                case "QiHuo":
+                case 6:
+                    message.game = 6;
+                    break;
+                case "TiaoZhan":
+                case 16:
+                    message.game = 16;
+                    break;
+                case "JJ_PK":
+                case 1:
+                    message.game = 1;
+                    break;
+                case "JJ_DuoKong":
+                case 2:
+                    message.game = 2;
+                    break;
+                case "JJ_ChuangGuan":
+                case 9:
+                    message.game = 9;
+                    break;
+                case "JJ_QiHuo":
+                case 15:
+                    message.game = 15;
+                    break;
+                case "MoNiChaoGu":
+                case 10:
+                    message.game = 10;
+                    break;
+                case "ChaoGuDaSai":
+                case 12:
+                    message.game = 12;
+                    break;
+                case "GeGuJingChai":
+                case 7:
+                    message.game = 7;
+                    break;
+                case "DaPanJingChai":
+                case 8:
+                    message.game = 8;
+                    break;
+                case "MaxGameType":
+                case 30:
+                    message.game = 30;
+                    break;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdResetGameCounter message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdResetGameCounter
+         * @static
+         * @param {pb.CmdResetGameCounter} message CmdResetGameCounter
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdResetGameCounter.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.game = options.enums === String ? "GameType_NULL" : 0;
+            if (message.game != null && message.hasOwnProperty("game"))
+                object.game = options.enums === String ? $root.pb.GameType[message.game] : message.game;
+            return object;
+        };
+
+        /**
+         * Converts this CmdResetGameCounter to JSON.
+         * @function toJSON
+         * @memberof pb.CmdResetGameCounter
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdResetGameCounter.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdResetGameCounter;
+    })();
+
     pb.TaskItem = (function () {
 
         /**
@@ -16596,28 +16879,28 @@ $root.pb = (function () {
         return RoomGameData;
     })();
 
-    pb.Email = (function () {
+    pb.Notice = (function () {
 
         /**
-         * Properties of an Email.
+         * Properties of a Notice.
          * @memberof pb
-         * @interface IEmail
-         * @property {number|null} [sender] Email sender
-         * @property {number|null} [receiver] Email receiver
-         * @property {pb.MessageType|null} [type] Email type
-         * @property {string|null} [text] Email text
-         * @property {number|Long|null} [ts] Email ts
+         * @interface INotice
+         * @property {number|null} [sender] Notice sender
+         * @property {number|null} [receiver] Notice receiver
+         * @property {pb.MessageType|null} [type] Notice type
+         * @property {string|null} [text] Notice text
+         * @property {number|Long|null} [ts] Notice ts
          */
 
         /**
-         * Constructs a new Email.
+         * Constructs a new Notice.
          * @memberof pb
-         * @classdesc Represents an Email.
-         * @implements IEmail
+         * @classdesc Represents a Notice.
+         * @implements INotice
          * @constructor
-         * @param {pb.IEmail=} [properties] Properties to set
+         * @param {pb.INotice=} [properties] Properties to set
          */
-        function Email(properties) {
+        function Notice(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -16625,67 +16908,67 @@ $root.pb = (function () {
         }
 
         /**
-         * Email sender.
+         * Notice sender.
          * @member {number} sender
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @instance
          */
-        Email.prototype.sender = 0;
+        Notice.prototype.sender = 0;
 
         /**
-         * Email receiver.
+         * Notice receiver.
          * @member {number} receiver
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @instance
          */
-        Email.prototype.receiver = 0;
+        Notice.prototype.receiver = 0;
 
         /**
-         * Email type.
+         * Notice type.
          * @member {pb.MessageType} type
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @instance
          */
-        Email.prototype.type = 0;
+        Notice.prototype.type = 0;
 
         /**
-         * Email text.
+         * Notice text.
          * @member {string} text
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @instance
          */
-        Email.prototype.text = "";
+        Notice.prototype.text = "";
 
         /**
-         * Email ts.
+         * Notice ts.
          * @member {number|Long} ts
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @instance
          */
-        Email.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        Notice.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
-         * Creates a new Email instance using the specified properties.
+         * Creates a new Notice instance using the specified properties.
          * @function create
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @static
-         * @param {pb.IEmail=} [properties] Properties to set
-         * @returns {pb.Email} Email instance
+         * @param {pb.INotice=} [properties] Properties to set
+         * @returns {pb.Notice} Notice instance
          */
-        Email.create = function create(properties) {
-            return new Email(properties);
+        Notice.create = function create(properties) {
+            return new Notice(properties);
         };
 
         /**
-         * Encodes the specified Email message. Does not implicitly {@link pb.Email.verify|verify} messages.
+         * Encodes the specified Notice message. Does not implicitly {@link pb.Notice.verify|verify} messages.
          * @function encode
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @static
-         * @param {pb.IEmail} message Email message or plain object to encode
+         * @param {pb.INotice} message Notice message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        Email.encode = function encode(message, writer) {
+        Notice.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.sender != null && Object.hasOwnProperty.call(message, "sender"))
@@ -16702,33 +16985,33 @@ $root.pb = (function () {
         };
 
         /**
-         * Encodes the specified Email message, length delimited. Does not implicitly {@link pb.Email.verify|verify} messages.
+         * Encodes the specified Notice message, length delimited. Does not implicitly {@link pb.Notice.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @static
-         * @param {pb.IEmail} message Email message or plain object to encode
+         * @param {pb.INotice} message Notice message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        Email.encodeDelimited = function encodeDelimited(message, writer) {
+        Notice.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes an Email message from the specified reader or buffer.
+         * Decodes a Notice message from the specified reader or buffer.
          * @function decode
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {pb.Email} Email
+         * @returns {pb.Notice} Notice
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        Email.decode = function decode(reader, length) {
+        Notice.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.Email();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.Notice();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -16756,30 +17039,30 @@ $root.pb = (function () {
         };
 
         /**
-         * Decodes an Email message from the specified reader or buffer, length delimited.
+         * Decodes a Notice message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {pb.Email} Email
+         * @returns {pb.Notice} Notice
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        Email.decodeDelimited = function decodeDelimited(reader) {
+        Notice.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies an Email message.
+         * Verifies a Notice message.
          * @function verify
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        Email.verify = function verify(message) {
+        Notice.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.sender != null && message.hasOwnProperty("sender"))
@@ -16810,17 +17093,17 @@ $root.pb = (function () {
         };
 
         /**
-         * Creates an Email message from a plain object. Also converts values to their respective internal types.
+         * Creates a Notice message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {pb.Email} Email
+         * @returns {pb.Notice} Notice
          */
-        Email.fromObject = function fromObject(object) {
-            if (object instanceof $root.pb.Email)
+        Notice.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.Notice)
                 return object;
-            var message = new $root.pb.Email();
+            var message = new $root.pb.Notice();
             if (object.sender != null)
                 message.sender = object.sender | 0;
             if (object.receiver != null)
@@ -16830,7 +17113,7 @@ $root.pb = (function () {
                 case 0:
                     message.type = 0;
                     break;
-                case "Notice":
+                case "SystemNotice":
                 case 1:
                     message.type = 1;
                     break;
@@ -16866,15 +17149,15 @@ $root.pb = (function () {
         };
 
         /**
-         * Creates a plain object from an Email message. Also converts values to other types if specified.
+         * Creates a plain object from a Notice message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @static
-         * @param {pb.Email} message Email
+         * @param {pb.Notice} message Notice
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        Email.toObject = function toObject(message, options) {
+        Notice.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -16906,17 +17189,17 @@ $root.pb = (function () {
         };
 
         /**
-         * Converts this Email to JSON.
+         * Converts this Notice to JSON.
          * @function toJSON
-         * @memberof pb.Email
+         * @memberof pb.Notice
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        Email.prototype.toJSON = function toJSON() {
+        Notice.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return Email;
+        return Notice;
     })();
 
     pb.CgsConf = (function () {
@@ -38492,6 +38775,8 @@ $root.pb = (function () {
                     case 1022:
                     case 1024:
                     case 1026:
+                    case 1028:
+                    case 1030:
                     case 1200:
                     case 1300:
                     case 2001:
@@ -38544,6 +38829,8 @@ $root.pb = (function () {
                     case 3034:
                     case 3035:
                     case 3036:
+                    case 3037:
+                    case 3038:
                     case 3999:
                     case 4000:
                     case 4001:
@@ -38714,6 +39001,14 @@ $root.pb = (function () {
                 case "Sync_S2C_ActivityConf":
                 case 1026:
                     message.id = 1026;
+                    break;
+                case "Sync_S2C_SystemMsg":
+                case 1028:
+                    message.id = 1028;
+                    break;
+                case "Sync_S2C_FirstLoginToday":
+                case 1030:
+                    message.id = 1030;
                     break;
                 case "Sync_C2S_GameHeart":
                 case 1200:
@@ -38922,6 +39217,14 @@ $root.pb = (function () {
                 case "Rep_Hall_MobileBind":
                 case 3036:
                     message.id = 3036;
+                    break;
+                case "Req_Hall_ResetGameCounter":
+                case 3037:
+                    message.id = 3037;
+                    break;
+                case "Rep_Hall_ResetGameCounter":
+                case 3038:
+                    message.id = 3038;
                     break;
                 case "Req_Hall_Logout":
                 case 3999:
@@ -40317,6 +40620,8 @@ $root.pb = (function () {
                     case 1022:
                     case 1024:
                     case 1026:
+                    case 1028:
+                    case 1030:
                     case 1200:
                     case 1300:
                     case 2001:
@@ -40369,6 +40674,8 @@ $root.pb = (function () {
                     case 3034:
                     case 3035:
                     case 3036:
+                    case 3037:
+                    case 3038:
                     case 3999:
                     case 4000:
                     case 4001:
@@ -40546,6 +40853,14 @@ $root.pb = (function () {
                 case "Sync_S2C_ActivityConf":
                 case 1026:
                     message.id = 1026;
+                    break;
+                case "Sync_S2C_SystemMsg":
+                case 1028:
+                    message.id = 1028;
+                    break;
+                case "Sync_S2C_FirstLoginToday":
+                case 1030:
+                    message.id = 1030;
                     break;
                 case "Sync_C2S_GameHeart":
                 case 1200:
@@ -40754,6 +41069,14 @@ $root.pb = (function () {
                 case "Rep_Hall_MobileBind":
                 case 3036:
                     message.id = 3036;
+                    break;
+                case "Req_Hall_ResetGameCounter":
+                case 3037:
+                    message.id = 3037;
+                    break;
+                case "Rep_Hall_ResetGameCounter":
+                case 3038:
+                    message.id = 3038;
                     break;
                 case "Req_Hall_Logout":
                 case 3999:

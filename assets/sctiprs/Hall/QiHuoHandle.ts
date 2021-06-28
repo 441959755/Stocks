@@ -28,6 +28,16 @@ export default class NewClass extends cc.Component {
 
 	_tid = 0;
 
+	curCount = 0;
+
+	curState = 0;
+
+	@property(cc.Label)
+	tipsLabel1: cc.Label = null;
+
+	@property(cc.Label)
+	tipsLabel2: cc.Label = null;
+
 	onLoad() {
 		this.DCArr = {
 			name: '大连商品',
@@ -167,6 +177,33 @@ export default class NewClass extends cc.Component {
 		this.box[5].getChildByName('label').getComponent(cc.Label).string = setDatas.day;
 		this.box[6].getChildByName('label').getComponent(cc.Label).string = setDatas.KLine;
 		this.box[7].getChildByName('label').getComponent(cc.Label).string = setDatas.ZLine;
+
+		if (!GameData.properties[pb.GamePropertyId.UnlockQhxl] && !GameData.properties[pb.GamePropertyId.Vip]) {
+			this.tipsLabel1.node.active = true;
+			this.tipsLabel2.node.active = true;
+			this.curCount = GameCfgText.gameTextCfg.qhxl.free - GameData.todayGameCount[pb.GameType.QiHuo];
+			if (this.curCount > 0) {
+				this.tipsLabel1.string = '今日剩余次数：' + this.curCount;
+				this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameTextCfg.qhxl.cost[0].v);
+				this.curState = 1;
+			}
+			else {
+
+				this.curCount = GameCfgText.gameTextCfg.qhxl.ad + this.curCount;
+				if (this.curCount > 0) {
+					this.tipsLabel1.string = '今日看视频获取次数：' + this.curCount;
+					this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameTextCfg.qhxl.cost[0].v);
+					this.curState = 2;
+				}
+				else {
+					this.tipsLabel1.string = '今日次数已用完';
+					this.tipsLabel2.string = '开启VIP或解锁该功能取消次数限制';
+					this.curState = 3;
+				}
+			}
+		} else {
+			this.curState = 0;
+		}
 	}
 
 	/**
@@ -691,6 +728,16 @@ export default class NewClass extends cc.Component {
 			});
 		}
 		else if (name == 'startQHBtn') {
+
+			if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameTextCfg.qhxl.cost[0].v) {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+				return;
+			}
+			else if (this.curState == 3) {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
+				return;
+			}
+
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			GameCfg.GAMEFUPAN = false;
 			GameCfg.GameSet = GameData.QHSet;

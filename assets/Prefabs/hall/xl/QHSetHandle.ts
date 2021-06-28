@@ -3,6 +3,7 @@ import EventCfg from '../../../sctiprs/Utils/EventCfg';
 import ActionUtils from '../../../sctiprs/Utils/ActionUtils';
 import GameData from '../../../sctiprs/GameData';
 
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -30,12 +31,9 @@ export default class NewClass extends cc.Component {
 
 	_Lid = 0;
 
-	onLoad() {
-		// GlobalEvent.on('ItemValue', (data) => {
-		//     this.MaDates[this._Lid].string = data;
-		//     this.scroll.active = false;
-		// }, this);
 
+
+	onLoad() {
 		this.content.forEach(el => {
 			el.removeAllChildren();
 		});

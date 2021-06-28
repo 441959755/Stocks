@@ -318,7 +318,7 @@ export default class GlobalHandle {
                         }
                     })
 
-                    GameCfg.GameOperationItem;
+                    //GameCfg.GameOperationItem;
                     // for (let i = 0; i < info.items.length; i++) {
                     //     if (GameCfg.GameOperationItem.length == 0) {
                     //         GameCfg.GameOperationItem.push(info.items[i]);
@@ -328,7 +328,12 @@ export default class GlobalHandle {
                     //     }
                     // }
                     // cb && (cb);
-                    GlobalEvent.emit(EventCfg.HISTORYOPTDATA);
+                    if (cb) {
+                        cb();
+                    } else {
+                        GlobalEvent.emit(EventCfg.HISTORYOPTDATA);
+                    }
+
                 }
             }
         })

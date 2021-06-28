@@ -71,7 +71,9 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.GENDERCHANGE);
     }
 
-    start() {
+
+
+    onEnable() {
         this.gold.string = GameData.properties[pb.GamePropertyId.Gold];
         this.brick.string = GameData.properties[pb.GamePropertyId.Diamond];
         this.headImg.spriteFrame = GameData.headImg;
@@ -79,10 +81,35 @@ export default class NewClass extends cc.Component {
         this.userName.string = GameData.userName;
         this.gender.string = GameData.gender;
         this.diqu.string = GameData.location;
-    }
-
-    onEnable() {
-
+        let str;
+        if (GameData.properties[pb.GamePropertyId.Fame] <= 99) {
+            str = '股市小白';
+        }
+        else if (GameData.properties[pb.GamePropertyId.Fame] <= 249) {
+            str = '股市新手';
+        }
+        else if (GameData.properties[pb.GamePropertyId.Fame] <= 499) {
+            str = '股市菜鸡';
+        }
+        else if (GameData.properties[pb.GamePropertyId.Fame] <= 999) {
+            str = '初级股民';
+        }
+        else if (GameData.properties[pb.GamePropertyId.Fame] <= 1999) {
+            str = '中级股民';
+        }
+        else if (GameData.properties[pb.GamePropertyId.Fame] <= 2999) {
+            str = '高级股民';
+        }
+        else if (GameData.properties[pb.GamePropertyId.Fame] <= 3999) {
+            str = '股市牛人';
+        }
+        else if (GameData.properties[pb.GamePropertyId.Fame] <= 4999) {
+            str = '股市大神';
+        }
+        else if (GameData.properties[pb.GamePropertyId.Fame] >= 5000) {
+            str = '股市至尊';
+        }
+        this.chenghao.string = str;
     }
 
     onBtnClick(event, data) {

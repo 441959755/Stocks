@@ -9,6 +9,8 @@ export default class GameCfgText {
 
     public static smxlCfg = null;           //训练次数配置
 
+    public static gameTextCfg = null;
+
     public static levelInfoCfg = null;     //等级经验配置
 
     public static stockList = null;          //股票配置
@@ -53,8 +55,10 @@ export default class GameCfgText {
 
     public static getOtherCfg() {
         LoadUtils.loadRes('protos/game', (text) => {
-            this.levelInfoCfg = JSON.parse(text._nativeAsset).level_exp;
-            this.smxlCfg = JSON.parse(text._nativeAsset).smxl;
+            let nati = JSON.parse(text._nativeAsset)
+            this.levelInfoCfg = nati.level_exp;
+            this.smxlCfg = nati.smxl;
+            this.gameTextCfg = nati;
         })
     }
 

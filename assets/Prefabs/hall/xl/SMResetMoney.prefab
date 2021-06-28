@@ -27,17 +27,17 @@
     "_active": true,
     "_components": [
       {
+        "__id__": 52
+      },
+      {
         "__id__": 53
       },
       {
         "__id__": 54
-      },
-      {
-        "__id__": 55
       }
     ],
     "_prefab": {
-      "__id__": 56
+      "__id__": 55
     },
     "_opacity": 255,
     "_color": {
@@ -241,11 +241,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 51
+        "__id__": 50
       }
     ],
     "_prefab": {
-      "__id__": 52
+      "__id__": 51
     },
     "_opacity": 255,
     "_color": {
@@ -328,7 +328,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 650,
+      "width": 644,
       "height": 80
     },
     "_anchorPoint": {
@@ -341,7 +341,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        185,
+        182,
         0,
         0,
         0,
@@ -395,7 +395,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 650,
+      "width": 644,
       "height": 80
     },
     "_anchorPoint": {
@@ -548,7 +548,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -305,
+        -302,
         0,
         0,
         0,
@@ -925,9 +925,9 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 41,
-    "_left": 0,
-    "_right": 0,
-    "_top": 0,
+    "_left": 3,
+    "_right": 3,
+    "_top": 3,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -967,11 +967,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 49
+        "__id__": 48
       }
     ],
     "_prefab": {
-      "__id__": 50
+      "__id__": 49
     },
     "_opacity": 255,
     "_color": {
@@ -1035,11 +1035,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 47
+        "__id__": 46
       }
     ],
     "_prefab": {
-      "__id__": 48
+      "__id__": 47
     },
     "_opacity": 255,
     "_color": {
@@ -1113,13 +1113,9 @@
       }
     ],
     "_active": true,
-    "_components": [
-      {
-        "__id__": 45
-      }
-    ],
+    "_components": [],
     "_prefab": {
-      "__id__": 46
+      "__id__": 45
     },
     "_opacity": 255,
     "_color": {
@@ -1195,7 +1191,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 549.35,
+      "width": 554.7,
       "height": 90.4
     },
     "_anchorPoint": {
@@ -1246,8 +1242,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "    使用          金币重置您的训练资金，重置后，您的\n双盲训练资金变回最初的100000资金。",
-    "_N$string": "    使用          金币重置您的训练资金，重置后，您的\n双盲训练资金变回最初的100000资金。",
+    "_string": "    使用                  重置您的训练资金，重置后，您的\n双盲训练资金变回最初的100000资金。",
+    "_N$string": "    使用                  重置您的训练资金，重置后，您的\n双盲训练资金变回最初的100000资金。",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -1302,7 +1298,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53.39,
+      "width": 101.39,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1353,8 +1349,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "1000",
-    "_N$string": "1000",
+    "_string": "1000金币",
+    "_N$string": "1000金币",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -1789,33 +1785,6 @@
     },
     "fileId": "37FMT6Dp9IabIQQ3lw1CLT",
     "sync": false
-  },
-  {
-    "__type__": "cc.Widget",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 27
-    },
-    "_enabled": true,
-    "alignMode": 1,
-    "_target": null,
-    "_alignFlags": 45,
-    "_left": 0,
-    "_right": 0,
-    "_top": 0,
-    "_bottom": 0,
-    "_verticalCenter": 0,
-    "_horizontalCenter": 0,
-    "_isAbsLeft": true,
-    "_isAbsRight": true,
-    "_isAbsTop": true,
-    "_isAbsBottom": true,
-    "_isAbsHorizontalCenter": true,
-    "_isAbsVerticalCenter": true,
-    "_originalWidth": 100,
-    "_originalHeight": 100,
-    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

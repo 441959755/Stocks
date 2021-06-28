@@ -62,6 +62,8 @@ export namespace pb {
         Sync_S2C_MutipleLogin = 1022,
         Sync_S2C_TaskProgress = 1024,
         Sync_S2C_ActivityConf = 1026,
+        Sync_S2C_SystemMsg = 1028,
+        Sync_S2C_FirstLoginToday = 1030,
         Sync_C2S_GameHeart = 1200,
         Sync_Email = 1300,
         Req_QuoteSubscribe = 2001,
@@ -114,6 +116,8 @@ export namespace pb {
         Rep_Hall_ShopOrderQuery = 3034,
         Req_Hall_MobileBind = 3035,
         Rep_Hall_MobileBind = 3036,
+        Req_Hall_ResetGameCounter = 3037,
+        Rep_Hall_ResetGameCounter = 3038,
         Req_Hall_Logout = 3999,
         Rep_Hall_Logout = 4000,
         Req_Game_Login = 4001,
@@ -584,7 +588,7 @@ export namespace pb {
     /** MessageType enum. */
     enum MessageType {
         MessageType_NULL = 0,
-        Notice = 1,
+        SystemNotice = 1,
         Popup_Adv = 2,
         Chat = 9,
         RoomChat = 10,
@@ -3392,6 +3396,96 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a CmdResetGameCounter. */
+    interface ICmdResetGameCounter {
+
+        /** CmdResetGameCounter game */
+        game?: (pb.GameType|null);
+    }
+
+    /** Represents a CmdResetGameCounter. */
+    class CmdResetGameCounter implements ICmdResetGameCounter {
+
+        /**
+         * Constructs a new CmdResetGameCounter.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdResetGameCounter);
+
+        /** CmdResetGameCounter game. */
+        public game: pb.GameType;
+
+        /**
+         * Creates a new CmdResetGameCounter instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdResetGameCounter instance
+         */
+        public static create(properties?: pb.ICmdResetGameCounter): pb.CmdResetGameCounter;
+
+        /**
+         * Encodes the specified CmdResetGameCounter message. Does not implicitly {@link pb.CmdResetGameCounter.verify|verify} messages.
+         * @param message CmdResetGameCounter message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdResetGameCounter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdResetGameCounter message, length delimited. Does not implicitly {@link pb.CmdResetGameCounter.verify|verify} messages.
+         * @param message CmdResetGameCounter message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdResetGameCounter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdResetGameCounter message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdResetGameCounter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdResetGameCounter;
+
+        /**
+         * Decodes a CmdResetGameCounter message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdResetGameCounter
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdResetGameCounter;
+
+        /**
+         * Verifies a CmdResetGameCounter message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdResetGameCounter message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdResetGameCounter
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdResetGameCounter;
+
+        /**
+         * Creates a plain object from a CmdResetGameCounter message. Also converts values to other types if specified.
+         * @param message CmdResetGameCounter
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdResetGameCounter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdResetGameCounter to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a TaskItem. */
     interface ITaskItem {
 
@@ -6146,115 +6240,115 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of an Email. */
-    interface IEmail {
+    /** Properties of a Notice. */
+    interface INotice {
 
-        /** Email sender */
+        /** Notice sender */
         sender?: (number|null);
 
-        /** Email receiver */
+        /** Notice receiver */
         receiver?: (number|null);
 
-        /** Email type */
+        /** Notice type */
         type?: (pb.MessageType|null);
 
-        /** Email text */
+        /** Notice text */
         text?: (string|null);
 
-        /** Email ts */
+        /** Notice ts */
         ts?: (number|Long|null);
     }
 
-    /** Represents an Email. */
-    class Email implements IEmail {
+    /** Represents a Notice. */
+    class Notice implements INotice {
 
         /**
-         * Constructs a new Email.
+         * Constructs a new Notice.
          * @param [properties] Properties to set
          */
-        constructor(properties?: pb.IEmail);
+        constructor(properties?: pb.INotice);
 
-        /** Email sender. */
+        /** Notice sender. */
         public sender: number;
 
-        /** Email receiver. */
+        /** Notice receiver. */
         public receiver: number;
 
-        /** Email type. */
+        /** Notice type. */
         public type: pb.MessageType;
 
-        /** Email text. */
+        /** Notice text. */
         public text: string;
 
-        /** Email ts. */
+        /** Notice ts. */
         public ts: (number|Long);
 
         /**
-         * Creates a new Email instance using the specified properties.
+         * Creates a new Notice instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns Email instance
+         * @returns Notice instance
          */
-        public static create(properties?: pb.IEmail): pb.Email;
+        public static create(properties?: pb.INotice): pb.Notice;
 
         /**
-         * Encodes the specified Email message. Does not implicitly {@link pb.Email.verify|verify} messages.
-         * @param message Email message or plain object to encode
+         * Encodes the specified Notice message. Does not implicitly {@link pb.Notice.verify|verify} messages.
+         * @param message Notice message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: pb.IEmail, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: pb.INotice, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified Email message, length delimited. Does not implicitly {@link pb.Email.verify|verify} messages.
-         * @param message Email message or plain object to encode
+         * Encodes the specified Notice message, length delimited. Does not implicitly {@link pb.Notice.verify|verify} messages.
+         * @param message Notice message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: pb.IEmail, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: pb.INotice, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes an Email message from the specified reader or buffer.
+         * Decodes a Notice message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns Email
+         * @returns Notice
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.Email;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.Notice;
 
         /**
-         * Decodes an Email message from the specified reader or buffer, length delimited.
+         * Decodes a Notice message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns Email
+         * @returns Notice
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.Email;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.Notice;
 
         /**
-         * Verifies an Email message.
+         * Verifies a Notice message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates an Email message from a plain object. Also converts values to their respective internal types.
+         * Creates a Notice message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns Email
+         * @returns Notice
          */
-        public static fromObject(object: { [k: string]: any }): pb.Email;
+        public static fromObject(object: { [k: string]: any }): pb.Notice;
 
         /**
-         * Creates a plain object from an Email message. Also converts values to other types if specified.
-         * @param message Email
+         * Creates a plain object from a Notice message. Also converts values to other types if specified.
+         * @param message Notice
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: pb.Email, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: pb.Notice, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this Email to JSON.
+         * Converts this Notice to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

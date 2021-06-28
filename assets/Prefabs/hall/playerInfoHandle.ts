@@ -24,6 +24,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     otherNode: cc.Node = null;
 
+    @property(cc.Toggle)
+    toggle1: cc.Toggle = null;
+
     onLoad() {
         GlobalEvent.on(EventCfg.HEADIMGCHANGE, () => {
             this.headImg.spriteFrame = GameData.headImg;
@@ -47,6 +50,8 @@ export default class NewClass extends cc.Component {
                 el.active = false;
             }
         })
+
+        this.toggle1.isChecked = true;
 
     }
 

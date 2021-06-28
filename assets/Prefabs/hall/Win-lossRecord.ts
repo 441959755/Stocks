@@ -44,12 +44,16 @@ export default class NewClass extends cc.Component {
                 nodes[index].active = false;
                 let itemHeadle = nodes[index].getComponent('Win-lossItem');
                 let win = 0;
+                let lose = 0;
                 if (GameData.GameCounters[index].win) {
                     win = GameData.GameCounters[index].win;
                 }
+                if (GameData.GameCounters[index].lose) {
+                    lose = GameData.GameCounters[index].lose;
+                }
 
                 itemHeadle.winNum = win;
-                itemHeadle.loseNum = el - win;
+                itemHeadle.loseNum = lose;
 
                 if (index == pb.GameType.ShuangMang) {
                     itemHeadle.nameStr = '双盲训练:';
