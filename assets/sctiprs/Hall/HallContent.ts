@@ -26,9 +26,24 @@ export default class NewClass extends cc.Component {
 	@property(cc.Label)
 	userLevel: cc.Label = null;
 
+	@property(cc.Node)
+	girlNode: cc.Node = null;
+
 	protected onLoad() {
 		GlobalEvent.on(EventCfg.BLACKGOTOLAYER, (event) => {
 			this.onBtnClick(event, null);
+		}, this);
+
+		GlobalEvent.on(EventCfg.GENDERCHANGE, () => {
+			if (GameData.gender == 1) {
+				this.girlNode.active = false;
+			} else {
+				this.girlNode.active = true;
+			}
+		}, this);
+
+		GlobalEvent.on(EventCfg.HEADIMGCHANGE, () => {
+			this.userHead.spriteFrame = GameData.headImg;
 		}, this);
 	}
 
@@ -61,10 +76,16 @@ export default class NewClass extends cc.Component {
 
 	setUserInfo() {
 		// this.userExp.string = GameData.properties[1] + '/' + GameData.maxExp;
-		this.userLevel.string = 'LV:' + GameData.properties[2] || 0 + '';
+		this.userLevel.string = 'LV:' + (GameData.properties[pb.GamePropertyId.Level] || 1) + '';
 		//  this.gold.string = GameData.properties[0] || 0 + '';
 		//  this.brick.string = GameData.properties[4] || 0 + '';
 		this.UserName.string = GameData.userName || GameData.userID;
+
+		if (GameData.gender == 1) {
+			this.girlNode.active = false;
+		} else {
+			this.girlNode.active = true;
+		}
 
 		//    this.progr.progress = GameData.properties[1] / GameData.maxExp;
 	}
@@ -121,6 +142,8 @@ export default class NewClass extends cc.Component {
 
 	onDestroy() {
 		GlobalEvent.off(EventCfg.BLACKGOTOLAYER);
+		GlobalEvent.off(EventCfg.GENDERCHANGE);
+		GlobalEvent.off(EventCfg.HEADIMGCHANGE);
 	}
 
 }

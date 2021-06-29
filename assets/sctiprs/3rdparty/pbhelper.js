@@ -272,7 +272,7 @@ PBHelper.prototype = {
             let GameCounters = pb.GameCounters;
             let decode = GameCounters.decode(new Uint8Array(buff));
             console.log('同步输赢计数器：GameCounters' + JSON.stringify(decode));
-            GameData.GameCounters = decode;
+            GameData.GameCounters = decode.items;
         }
 
         else if (id == pb.MessageId.Rep_Game_Start
@@ -280,7 +280,8 @@ PBHelper.prototype = {
             || id == pb.MessageId.Rep_Game_EditNick
             || id == pb.MessageId.Rep_Game_UploadIcon
             || id == pb.MessageId.Rep_Game_SmxlReset
-            || id == pb.MessageId.Rep_Hall_ResetGameCounter) {
+            || id == pb.MessageId.Rep_Hall_ResetGameCounter
+            || id == pb.MessageId.Rep_Hall_GetItem) {
             let ErrorInfo = pb.ErrorInfo;
             data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
@@ -333,17 +334,65 @@ PBHelper.prototype = {
             if (data.game == pb.GameType.JJ_PK || data.game == pb.GameType.JJ_QiHuo) {
                 let message = this.onRoomGameDataMessage(data.data);
                 console.log(JSON.stringify(message));
-                GlobalEvent.emit(EventCfg.RoomGameData, message);
+                GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
                 GameCfg.RoomGameData = message;
             }
-
+        }
+        // 其他玩家进入房间：SyncRoomEnter
+        else if (id == pb.MessageId.Sync_Room_Enter) {
+            let SyncRoomEnter = pb.SyncRoomEnter;
+            let data = SyncRoomEnter.decode(new Uint8Array(buff));
+            console.log('其他玩家进入房间:' + JSON.stringify(data));
+            GlobalEvent.emit(EventCfg.RoomGameDataOther, data);
+        }
+        //// 玩家离开房间
+        else if (id == pb.MessageId.Sync_Room_Leave || id == pb.MessageId.Sync_Room_Leave_Self) {
+            let SyncRoomLeave = pb.SyncRoomLeave;
+            let data = SyncRoomLeave.decode(new Uint8Array(buff));
+            console.log('玩家离开房间' + JSON.stringify(data));
 
         }
+
         //  获取背包列表应答：Backbag
         else if (id == pb.MessageId.Rep_Hall_BackBag) {
             let backbag = pb.Backbag;
             let data = backbag.decode(new Uint8Array(buff));
             return data;
+        }
+        // 玩家准备就绪
+        else if (id == pb.MessageId.Sync_Room_Ready) {
+            let RoomPlayerStatus = pb.RoomPlayerStatus;
+            let data = RoomPlayerStatus.decode(new Uint8Array(buff));
+            console.log('玩家准备就绪' + JSON.stringify(data));
+
+        }
+        //// 同步房间游戏状态
+        else if (id == pb.MessageId.Sync_Room_GameStatus) {
+            let RoomGameStatus = pb.RoomGameStatus;
+            let data = RoomGameStatus.decode(new Uint8Array(buff));
+            console.log('同步房间游戏状态' + JSON.stringify(data));
+            GlobalEvent.emit(EventCfg.RoomGameStatus, data);
+        }
+
+        /// 重连上
+        else if (id == pb.MessageId.Sync_Room_ReConn) {
+            let RoomData = pb.RoomData;
+            let data = RoomData.decode(new Uint8Array(buff));
+            console.log(' 重连上' + JSON.stringify(data));
+        }
+
+        //// 游戏操作
+        else if (id == pb.MessageId.Sync_Room_GameOp) {
+            let RoomGameOp = pb.RoomGameOp;
+            let data = RoomGameOp.decode(new Uint8Array(buff));
+            console.log('游戏操作' + JSON.stringify(data));
+        }
+
+        //// 游戏结果
+        else if (id == pb.MessageId.Sync_Room_GameResult) {
+            let RoomGameResult = pb.RoomGameResult;
+            let data = RoomGameResult.decode(new Uint8Array(buff));
+            console.log('游戏结果' + JSON.stringify(data));
         }
 
     }

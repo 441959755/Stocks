@@ -31,6 +31,12 @@ export default class NewClass extends cc.Component {
 
     location = '';
 
+    @property(cc.Toggle)
+    toggle1: cc.Toggle = null;
+
+    @property(cc.Toggle)
+    toggle2: cc.Toggle = null;
+
 
     onLoad() {
         this.content1.active = false;
@@ -87,6 +93,16 @@ export default class NewClass extends cc.Component {
 
     start() {
 
+    }
+
+    onEnable() {
+        if (GameData.gender == 1) {
+            this.toggle1.isChecked = true;
+            this.toggle2.isChecked = false;
+        } else {
+            this.toggle2.isChecked = true;
+            this.toggle1.isChecked = false;
+        }
     }
 
     onBtnClick(event, data) {
@@ -180,9 +196,9 @@ export default class NewClass extends cc.Component {
     onChangeUserGender(index) {
         let str;
         if (index == 1) {
-            str = '男';
+            str = '1';
         } else {
-            str = '女';
+            str = '0';
         }
         this.content1.active = false;
         this.content2.active = false;

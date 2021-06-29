@@ -128,6 +128,8 @@ export default class NewClass extends cc.Component {
 	xlzb: cc.Node = null;
 
 	limitUP = 0;  //0没有  1涨停  2跌停
+
+	cb1 = null;
 	onLoad() {
 
 		this.gpData = GameCfg.data[0].data;
@@ -221,58 +223,7 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(
 			EventCfg.GAMEFUPAN,
-			() => {
-				this.node.children.forEach(el => {
-					el.active = false;
-				});
-				if (GameCfg.GameType == pb.GameType.ShuangMang) {
-					let node = this.node.getChildByName('fupan');
-					node.active = true;
-					node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
-					node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day);
-
-					let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameData.huizhidatas - 1].close) / this.gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
-					node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
-					let node1 = this.node.getChildByName('fupan1');
-					node1.active = true;
-				} else if (GameCfg.GameType == pb.GameType.DingXiang) {
-					let node = this.node.getChildByName('fupan1');
-					node.active = true;
-					let dxnode = this.node.getChildByName('DXInfo');
-					dxnode.active = true;
-					dxnode.x = 0;
-					let code = GameCfg.data[0].code;
-					if (code.length >= 7) {
-						code = code.slice(1);
-					}
-					this.gpName.string = GameCfg.data[0].name + ' ' + code;
-					this.timeLabel[0].string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
-					this.timeLabel[1].string = ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day);
-
-					let info = DrawData.getBukoCount();
-
-					this.priceLabel[0].string = '盈利操作次数：' + info.yCount;
-					this.priceLabel[1].string = '亏损操作次数：' + info.sCount;
-				}
-				else if (GameCfg.GameType == pb.GameType.QiHuo) {
-					let node = this.node.getChildByName('fupan');
-					node.active = true;
-					node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
-					node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day)
-					let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameData.huizhidatas - 1].close) / this.gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
-					node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
-					let node1 = this.node.getChildByName('fupan1');
-					node1.active = false;
-					let node2 = this.node.getChildByName('fupan1');
-					node2.active = true;
-				}
-				else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-					let node = this.node.getChildByName('fupan1');
-					node.active = true;
-					this.xlzb.active = true;
-					GlobalEvent.emit(EventCfg.SETMARKCOLOR);
-				}
-			},
+			this.onShowGAMEFUPAN.bind(this),
 			this
 		);
 
@@ -364,6 +315,71 @@ export default class NewClass extends cc.Component {
 		}
 	}
 
+	onShowGAMEFUPAN() {
+		this.node.children.forEach(el => {
+			el.active = false;
+		});
+		let node = this.node.getChildByName('fupan1');
+		node.active = true;
+		if (GameCfg.GameType == pb.GameType.ShuangMang) {
+			let node = this.node.getChildByName('fupan');
+			node.active = true;
+			node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
+			node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day);
+
+			let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameData.huizhidatas - 1].close) / this.gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
+			node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
+			let node1 = this.node.getChildByName('fupan1');
+			node1.active = true;
+		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
+
+			let dxnode = this.node.getChildByName('DXInfo');
+			dxnode.active = true;
+			dxnode.x = 0;
+			let code = GameCfg.data[0].code;
+			if (code.length >= 7) {
+				code = code.slice(1);
+			}
+			this.gpName.string = GameCfg.data[0].name + ' ' + code;
+			this.timeLabel[0].string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
+			this.timeLabel[1].string = ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day);
+
+			this.moneyLabel[0].string = '总资产    ：' + GameCfg.ziChan;
+			this.moneyLabel[1].string = '可用资产：' + GameCfg.finalfund;
+			let info = DrawData.getBukoCount();
+
+			this.priceLabel[0].string = '盈利操作次数：' + info.yCount;
+			this.priceLabel[1].string = '亏损操作次数：' + info.sCount;
+		}
+		else if (GameCfg.GameType == pb.GameType.QiHuo) {
+			let node = this.node.getChildByName('fupan');
+			node.active = true;
+			node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
+			node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day)
+			let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameData.huizhidatas - 1].close) / this.gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
+			node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
+
+		}
+		else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+			this.xlzb.active = true;
+			GlobalEvent.emit(EventCfg.SETMARKCOLOR);
+		}
+
+		else if (GameCfg.GameType == pb.GameType.JJ_PK) {
+			let pkNode = this.node.getChildByName('pk');
+			pkNode.active = true;
+			pkNode.getChildByName('timeLabel').active = false;
+			let pkFP = pkNode.getChildByName('FUPAN');
+			pkFP.active = true;
+			pkFP.children[0].getComponent(cc.Label).string = GameCfg.data[0].name + '    ' + GameCfg.data[0].code;
+
+			pkFP.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day)
+
+			let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameData.huizhidatas - 1].close) / this.gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
+			pkFP.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
+		}
+	}
+
 	protected start() {
 		this.ziChan = JSON.parse(JSON.stringify(GameCfg.ziChan));
 		this.onSetMrCount();
@@ -424,7 +440,6 @@ export default class NewClass extends cc.Component {
 			if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 				GlobalEvent.emit(EventCfg.SETMARKCOLOR);
 			}
-
 		}
 
 
@@ -481,12 +496,11 @@ export default class NewClass extends cc.Component {
 			this.tipsLabel.node.active = true;
 			this.tipsLabel1.node.active = false;
 			dxnode.active = false;
-		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
 
+		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
 			this.tipsLabel.node.active = true;
 			this.tipsLabel1.node.active = false;
 			dxnode.active = true;
-
 			if (!GameCfg.GameSet.isFC || GameCfg.GAMEFUPAN) {
 				dxnode.x = 0;
 				dxnode.children[2].active = false;
@@ -531,6 +545,37 @@ export default class NewClass extends cc.Component {
 				et.getComponent(cc.Label).string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
 			}
 		}
+		else if (GameCfg.GameType == pb.GameType.JJ_PK) {
+			this.tipsLabel.node.active = true;
+			this.tipsLabel1.node.active = false;
+			dxnode.active = false;
+			let pkNode = this.node.getChildByName('pk');
+			pkNode.active = true;
+			let timeLabel = pkNode.getChildByName('timeLabel').getComponent(cc.Label);
+			timeLabel.node.active = true;
+			if (GameCfg.data[0].tsGameFrom && GameCfg.data[0].tsGameCur) {
+				let num = GameCfg.data[0].tsGameCur - GameCfg.data[0].tsGameFrom;
+				num = 3 * 60 - num;
+				this.cb1 = setInterval(() => {
+					if (num <= 0) {
+						clearInterval(this.cb1);
+					}
+					timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
+					num--;
+
+				}, 1000)
+			}
+			else {
+				let num = 3 * 60;
+				this.cb1 = setInterval(() => {
+					if (num <= 0) {
+						clearInterval(this.cb1);
+					}
+					timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
+					num--;
+				}, 1000)
+			}
+		}
 
 		this.roundNumber = this.gpData.length - GameCfg.huizhidatas;
 
@@ -538,52 +583,7 @@ export default class NewClass extends cc.Component {
 		this.tipsLabel1.string = '回合数：' + this.roundNumber;
 
 		if (GameCfg.GAMEFUPAN) {
-			this.node.children.forEach(el => {
-				el.active = false;
-			});
-			let node = this.node.getChildByName('fupan1');
-			node.active = true;
-
-			if (GameCfg.GameType == pb.GameType.QiHuo) {
-
-				let node = this.node.getChildByName('fupan');
-				node.active = true;
-				node.children[0].getComponent(cc.Label).string = GameCfg.data[0].name;
-				// node.children[1].getComponent(cc.Label).string = this.gpData[0].day.replace(/-/g, '/') + '--' + this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
-				node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day)
-				let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameData.huizhidatas - 1].close) / this.gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
-				// ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[0].close).toFixed(2),
-				node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
-				let node1 = this.node.getChildByName('fupan1');
-				node1.active = false;
-				// let node = this.node.getChildByName('fupan1');
-				// node.active = true;
-			}
-
-			else if (GameCfg.GameType == pb.GameType.DingXiang) {
-				dxnode.active = true;
-				let code = GameCfg.data[0].code;
-				if (code.length >= 7) {
-					code = code.slice(1);
-				}
-
-				this.gpName.string = GameCfg.data[0].name + ' ' + code;
-				this.timeLabel[0].string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
-				this.timeLabel[1].string = this.gpData[GameCfg.huizhidatas - 1].day.replace(/-/g, '/');
-
-				this.moneyLabel[0].string = '总资产    ：' + GameCfg.ziChan;
-				this.moneyLabel[1].string = '可用资产：' + GameCfg.finalfund;
-
-				let info = DrawData.getBukoCount();
-
-				this.priceLabel[0].string = '盈利操作次数：' + info.yCount;
-				this.priceLabel[1].string = '亏损操作次数：' + info.sCount;
-			}
-			else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-				let node = this.node.getChildByName('fupan1');
-				node.active = true;
-				this.xlzb.active = true;
-			}
+			this.onShowGAMEFUPAN();
 		} else {
 			let code = GameCfg.data[0].code;
 			if (code.length >= 7) {
@@ -1218,6 +1218,8 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off('HIDEBOTTOMNODE');
 
 		GlobalEvent.off(EventCfg.CLICKFCBTN);
+		this.cb1 && (clearInterval(this.cb1));
+		this.cb1 = null;
 	}
 
 	//获取涨停板

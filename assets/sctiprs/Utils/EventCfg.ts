@@ -107,5 +107,10 @@ export default {
 	//pk
 	OPENMATCHPK: 'OPENMATCHPK',
 
-	RoomGameData: 'RoomGameData',
+	RoomGameDataSelf: 'RoomGameDataSelf',
+
+	RoomGameDataOther: 'RoomGameDataOther',
+
+	RoomGameStatus: 'RoomGameStatus',
+
 };

@@ -252,8 +252,6 @@ export default class NewClass extends cc.Component {
         this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
         //双盲
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
-            //  nodes[4].active = false;
-
 
             this.setBoxfalg('ma');
             this.setBoxfalg('CPM');
@@ -307,22 +305,18 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.QiHuo) {
             this.setBoxfalg('ma');
             this.setBoxfalg('CPM');
-            // this.lZoom.node.active = false;
-            // this.lZoom.isChecked = false;
             this.hsLa.node.parent.active = false;
             this.cclNode.active = true;
             this.CCLBtn.active = true;
+        }
+        else if (GameCfg.GameType == pb.GameType.JJ_PK) {
+            this.setBoxfalg('ma');
+            this.setBoxfalg('CPM');
         }
     }
 
 
     setBGColor() {
-        // this.inotyBox = this.node.getChildByName('leftinoty');
-        //  this.inotyBox = cc.find('Canvas/tipsBox/leftinoty');
-        // this.lZoom = this.node.getChildByName('lZoomBtn').getComponent(cc.Toggle);
-        // this.lZoom.node.children[0].active = true;
-
-
         this.rightBox = this.node.getChildByName('rightBox');
         this.tipsBox = this.node.getChildByName('tipsBox');
         //黑
@@ -340,7 +334,6 @@ export default class NewClass extends cc.Component {
 
             this.selcetContent.color = cc.Color.WHITE;
             this.selcetContent.parent.color = cc.Color.WHITE;
-            //  this.inotyBox.getChildByName('bg').active = false;
 
         }
         this.tipsBox.children.forEach(el => {

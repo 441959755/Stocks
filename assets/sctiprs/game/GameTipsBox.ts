@@ -46,7 +46,7 @@ export default class NewClass extends cc.Component {
             this.leftinoty.getChildByName('label').color = cc.Color.BLACK;
         }
 
-        if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.QiHuo) {
+        if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.QiHuo || GameCfg.GameType == pb.GameType.JJ_PK) {
             this.lZoom.node.active = false;
             this.lZoom.isChecked = false;
         }

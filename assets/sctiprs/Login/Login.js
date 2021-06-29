@@ -121,6 +121,36 @@ cc.Class({
 			GameData.SMSet = JSON.parse(SMSet);
 		}
 
+		let JJPKSet = cc.sys.localStorage.getItem('JJPKSET');
+		if (!JJPKSet) {
+			JJPKSet = {
+				KLine: '150',
+				ZLine: '日线',
+				year: '随机',
+				month: '随机',
+				day: '随机',
+				isShowVol: true,
+				isBW: true,
+				isMA1: true,
+				MA1Date: 5,
+				isMA2: true,
+				MA2Date: 10,
+				isMA3: true,
+				MA3Date: 20,
+				isMA4: true,
+				MA4Date: 30,
+				isMA5: true,
+				MA5Date: 60,
+				isMA6: true,
+				MA6Date: 120,
+				isFC: false,
+
+			}
+			GameData.JJPKSet = JJPKSet;
+		} else {
+			GameData.JJPKSet = JSON.parse(JJPKSet);
+		}
+
 		let DXSet = cc.sys.localStorage.getItem('DXSET');
 		if (!DXSet) {
 			DXSet = {

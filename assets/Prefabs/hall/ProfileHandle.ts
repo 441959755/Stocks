@@ -58,7 +58,8 @@ export default class NewClass extends cc.Component {
         }, this);
 
         GlobalEvent.on(EventCfg.GENDERCHANGE, () => {
-            this.gender.string = GameData.gender;
+            let str = GameData.gender == 1 ? '男' : '女';
+            this.gender.string = str;
         }, this);
     }
 
@@ -79,7 +80,8 @@ export default class NewClass extends cc.Component {
         this.headImg.spriteFrame = GameData.headImg;
         this.userID.string = GameData.userID;
         this.userName.string = GameData.userName;
-        this.gender.string = GameData.gender;
+        let str1 = GameData.gender == 1 ? '男' : '女';
+        this.gender.string = str1;
         this.diqu.string = GameData.location;
         let str;
         if (GameData.properties[pb.GamePropertyId.Fame] <= 99) {

@@ -86,7 +86,7 @@ export default class GameData {
 
     private static _SmxlState = null;// 双盲训练状态
 
-    public static otherPlayers = null;
+    public static Players = [];
 
     public static GameCounters = null;  //游戏输赢次数
 
@@ -121,6 +121,18 @@ export default class GameData {
     public static set SMSet(val) {
         this._SMSet = val;
         cc.sys.localStorage.setItem('SMSET', JSON.stringify(val));
+    }
+
+
+    //SMset
+    private static _JJPKSet;
+
+    public static get JJPKSet() {
+        return this._JJPKSet;
+    }
+    public static set JJPKSet(val) {
+        this._JJPKSet = val;
+        cc.sys.localStorage.setItem('JJPKSET', JSON.stringify(val));
     }
 
     //QHSet

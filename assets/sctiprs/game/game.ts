@@ -159,7 +159,7 @@ export default class NewClass extends cc.Component {
         cc.ext.beg_end[1] = GameCfg.huizhidatas;
         cc.ext.beg_end[0] = 0;
         if (GameCfg.huizhidatas > 100) {
-            cc.ext.beg_end[0] = cc.ext.beg_end[1] - 180;
+            cc.ext.beg_end[0] = cc.ext.beg_end[1] - 100;
         }
         if (cc.ext.beg_end[0] < 0) {
             cc.ext.beg_end[0] = 0;
@@ -180,7 +180,7 @@ export default class NewClass extends cc.Component {
         GameCfg.MAs = [];
         let j = 0;
         //双盲 定向   
-        if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.QiHuo) {
+        if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.QiHuo || GameCfg.GameType == pb.GameType.JJ_PK) {
             for (let i = 1; i <= 6; i++) {
                 if (GameCfg.GameSet['isMA' + i]) {
                     GameCfg.MAs[j++] = parseInt(GameCfg.GameSet['MA' + i + 'Date']);

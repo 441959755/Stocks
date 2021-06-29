@@ -16,13 +16,14 @@ export default class NewClass extends cc.Component {
     ALlRateLabel: cc.Label = null;
 
     @property(cc.Label)
+    tipsLabel: cc.Label = null;
+
+    @property(cc.Label)
     currRateLabel: cc.Label = null;
 
 
     @property(cc.Node)
     rightNode: cc.Node = null;
-
-
 
     @property(cc.Label)
     GameName: cc.Label = null;
@@ -30,7 +31,6 @@ export default class NewClass extends cc.Component {
     protected onLoad() {
         //跟新盈利率
         GlobalEvent.on('updateRate', (data) => {
-
             if (data.length >= 2) {
                 if (data[1] > 0) {
                     this.ALlRateLabel.node.color = cc.Color.RED;
@@ -55,48 +55,44 @@ export default class NewClass extends cc.Component {
         }, this);
 
         //复盘
-        GlobalEvent.on(EventCfg.GAMEFUPAN, () => {
-            //z中止训练
-            let colseBtn = this.rightNode.getChildByName('closeBtn');
+        GlobalEvent.on(EventCfg.GAMEFUPAN, this.onShowGANEFUPAN.bind(this), this);
+    }
 
-            //切换指数
-            let btnMyspic = this.rightNode.getChildByName('btnMyspic');
 
-            //数据统计
-            let statBtn = this.rightNode.getChildByName('statBtn');
-            colseBtn.active = false;
-            if (GameCfg.GameType == pb.GameType.ShuangMang) {
+    onShowGANEFUPAN() {
+        if (!GameCfg.GAMEFUPAN) { return }
+        //z中止训练
+        let colseBtn = this.rightNode.getChildByName('closeBtn');
 
-                btnMyspic.active = false;
-                statBtn.active = false;
-            }
-            else if (GameCfg.GameType == pb.GameType.DingXiang) {
-                colseBtn.active = false;
-                btnMyspic.active = true;
-                statBtn.active = true;
-            }
-            else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                colseBtn.active = false;
-                btnMyspic.active = false;
-                statBtn.active = true;
-            }
+        //切换指数
+        let btnMyspic = this.rightNode.getChildByName('btnMyspic');
 
-        }, this);
+        //数据统计
+        let statBtn = this.rightNode.getChildByName('statBtn');
+        colseBtn.active = false;
+        if (GameCfg.GameType == pb.GameType.ShuangMang) {
+            btnMyspic.active = false;
+            statBtn.active = false;
+        }
+        else if (GameCfg.GameType == pb.GameType.DingXiang) {
+            btnMyspic.active = true;
+            statBtn.active = true;
+        }
+        else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            btnMyspic.active = false;
+            statBtn.active = true;
+        }
+        else if (GameCfg.GameType == pb.GameType.JJ_PK) {
+            btnMyspic.active = false;
+            statBtn.active = false;
+
+            this.tipsLabel.string = '结果：';
+            this.currRateLabel.string = '胜利';
+        }
     }
 
     protected onEnable() {
-        // if (GameData.headImg) {
-        //     this.userHead.spriteFrame = GameData.headImg;
-        // }
-        // if (GameData.userName) {
-        //     this.userName.string = GameData.userName;
-        // }
-        // if (GameData.properties[2]) {
-        //     this.lv.string = 'LV:' + GameData.properties[2] || 0 + '';
-        // }
 
-        //训练指标
-        //  let nodes = this.rightNode.children;
         //z中止训练
         let colseBtn = this.rightNode.getChildByName('closeBtn');
 
@@ -109,59 +105,43 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             this.GameName.string = '双盲训练';
 
-            colseBtn.active = true;
-            colseBtn.children[0].active = false;
-            btnMyspic.active = false;
-            statBtn.active = false;
+            this.rightNode.active = false;
 
             let la = this.node.getChildByName('rate');
             la.x = 0;
         }
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.GameName.string = '指标训练';
-            colseBtn.active = true;
+
             btnMyspic.active = false;
             statBtn.active = false;
-            if (GameCfg.GAMEFUPAN) {
-                statBtn.active = true;
-            }
         }
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
             this.GameName.string = '定向训练';
-            colseBtn.children[0].active = true;
-            colseBtn.active = true;
+
             btnMyspic.active = true;
             statBtn.active = false;
-            if (GameCfg.GAMEFUPAN) {
-                btnMyspic.active = false;
-                statBtn.active = true;
-                colseBtn.active = true;
-            }
         } else if (GameCfg.GameType == pb.GameType.QiHuo) {
             this.GameName.string = '期货训练';
-            colseBtn.active = true;
-            colseBtn.children[0].active = false;
+
             btnMyspic.active = false;
             statBtn.active = false;
+
             this.node.height = 80;
             let la = this.node.getChildByName('rate');
             la.x = 0;
         }
 
-        if (GameCfg.GAMEFUPAN) {
-
-            let tt = parseInt(GameCfg.history.allRate * 10000 + '') / 100;
-
-            this.ALlRateLabel.string = (tt) + '%';
-            if (tt > 0) {
-                this.ALlRateLabel.node.color = cc.Color.RED;
-            } else {
-                this.ALlRateLabel.node.color = cc.Color.GREEN;
-            }
-
+        else if (GameCfg.GameType == pb.GameType.JJ_PK) {
+            this.GameName.string = 'P K 大战';
+            this.rightNode.active = false;
+            let la = this.node.getChildByName('rate');
+            la.x = 0;
         }
-        colseBtn.active = false;
 
+        this.onShowGANEFUPAN();
+
+        colseBtn.active = false;
     }
 
     protected onDestroy() {
@@ -178,6 +158,7 @@ export default class NewClass extends cc.Component {
         }
         //点击终止
         else if (name == 'closeBtn') {
+
             if (GameCfg.GAMEFUPAN) {
                 GameCfg.huizhidatas = 0;
 
