@@ -28,15 +28,25 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     poritLa: cc.Node = null;
 
+    @property(cc.Node)
+    pkFinalLayer: cc.Node = null;
+
     onLoad() {
         ComUtils.onLoadNode();
         ComUtils.onEvent();
         //游戏结算
-        GlobalEvent.on(EventCfg.GAMEOVEER, () => {
-            setTimeout(() => {
-                this.finalLayer.active = true;
-            }, 80)
-
+        GlobalEvent.on(EventCfg.GAMEOVEER, (message) => {
+            if (GameCfg.GameType != pb.GameType.JJ_PK) {
+                setTimeout(() => {
+                    this.finalLayer.active = true;
+                }, 80)
+            }
+            else if (GameCfg.GameType == pb.GameType.JJ_PK && message) {
+                this.pkFinalLayer.active = true;
+                let handle = this.pkFinalLayer.getComponent('PKFinalHandle');
+                handle.gameResult = message;
+                handle.onShow();
+            }
         }, this)
 
 
@@ -44,9 +54,6 @@ export default class NewClass extends cc.Component {
             this.statLayer.active = true;
         }, this);
 
-        GlobalEvent.on(EventCfg.LOADINGHIDE, () => {
-
-        }, this);
 
         if (GameCfg.GameType == pb.GameType.QiHuo) {
             this.selectLine.active = true;
@@ -58,9 +65,7 @@ export default class NewClass extends cc.Component {
     }
 
     protected onDestroy() {
-
         GlobalEvent.off(EventCfg.GAMEOVEER);
-        GlobalEvent.off(EventCfg.HELPSHOW);
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
         ComUtils.onDestory();
     }
@@ -153,11 +158,11 @@ export default class NewClass extends cc.Component {
 
 
     initData() {
-
         cc.ext.beg_end = [];
 
         cc.ext.beg_end[1] = GameCfg.huizhidatas;
         cc.ext.beg_end[0] = 0;
+
         if (GameCfg.huizhidatas > 100) {
             cc.ext.beg_end[0] = cc.ext.beg_end[1] - 100;
         }
@@ -167,6 +172,7 @@ export default class NewClass extends cc.Component {
 
         let mixWidth = 6;
         let maxWidth = 70;
+
         let drawWidth = cc.winSize.width - 180 - this.poritLa.width - 25;
 
         cc.ext.hz_width = drawWidth / (cc.ext.beg_end[1] - cc.ext.beg_end[0]);

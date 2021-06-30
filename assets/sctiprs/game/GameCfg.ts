@@ -96,8 +96,6 @@ export default {
 
     blockHistoy: [],
 
-    GameOperationItem: [], //操作集合
-
     RoomGameData: null,
 
 

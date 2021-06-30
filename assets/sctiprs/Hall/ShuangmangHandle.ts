@@ -83,24 +83,29 @@ export default class NewClass extends cc.Component {
             this.smStartGameSet();
 
         }
+
         //点击训练设置
         else if (name == 'setSMBtn') {
 
             GlobalEvent.emit(EventCfg.OPENSETLAYER);
         }
+
         //点击历史记录
         else if (name == 'historySMBtn') {
 
             GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
         }
+
         //点击月报
         else if (name == 'ypSMBtn') {
             GlobalEvent.emit(EventCfg.OPENMONTHLAYER);
         }
+
         //点击收益曲线
         else if (name == 'xlSMBtn') {
             GlobalEvent.emit(EventCfg.OPENYIELDLAYER);
         }
+
         else if (name == 'blackbtn') {
             GameCfg.GameType = null;
             this.node.active = false;

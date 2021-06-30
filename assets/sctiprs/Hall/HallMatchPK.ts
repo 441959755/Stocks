@@ -71,7 +71,7 @@ export default class NewClass extends cc.Component {
             exp.getComponent(cc.Label).string = '经验值：' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.gameTextCfg.level_exp[(GameData.properties[pb.GamePropertyId.Level] || 1)];
         }
 
-        this.onSlideShow();
+
 
         let arr = [];
 
@@ -103,9 +103,14 @@ export default class NewClass extends cc.Component {
 
         arr = Array.from(new Set(arr));
 
-
-
-        GlobalHandle.onReqRoomEnter(arr);
+        GlobalHandle.onReqRoomEnter(arr, (flag) => {
+            if (flag) {
+                this.onSlideShow();
+            }
+            else {
+                this.node.active = false;
+            }
+        });
     }
 
     onSlideShow() {

@@ -4,6 +4,7 @@ import GameCfg from '../game/GameCfg';
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import LoadUtils from '../Utils/LoadUtils';
+import GlobalHandle from '../global/GlobalHandle';
 
 const { ccclass, property } = cc._decorator;
 
@@ -136,7 +137,16 @@ export default class NewClass extends cc.Component {
 
 		//pk
 		else if (name == 'main_jj_pkdz') {
+			//	GameCfg.GameType = pb.GameType.JJ_PK;
+			//	GlobalHandle.onCmdGameStartReq((res) => {
+			//	if (!res) {
 			GlobalEvent.emit(EventCfg.OPENMATCHPK);
+			// 	}
+			// 	else {
+			// 		GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
+			// 	}
+
+			// })
 		}
 	}
 

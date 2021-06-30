@@ -5,6 +5,7 @@ import EventCfg from "../Utils/EventCfg";
 import GameData from "../GameData";
 import LLWConfig from "../common/config/LLWConfig";
 import DrawData from "../game/DrawData";
+import UpGameOpt from "./UpGameOpt";
 
 export default class GlobalHandle {
 
@@ -17,7 +18,7 @@ export default class GlobalHandle {
         }
         socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(info), res => {
             console.log(JSON.stringify(res));
-            cb && (cb());
+            cb && (cb(res));
         })
 
     }
@@ -301,7 +302,7 @@ export default class GlobalHandle {
             console.log(JSON.stringify(info));
             if (!info.err) {
                 if (info && info.items) {
-                    GameCfg.GameOperationItem = [];
+
                     let arr = [];
                     info.items.forEach(el => {
                         arr.push(el.kOffset);
@@ -312,22 +313,12 @@ export default class GlobalHandle {
                     arr.forEach(e => {
                         for (let i = 0; i < info.items.length; i++) {
                             if (info.items[i].kOffset == e) {
-                                GameCfg.GameOperationItem.push(info.items[i]);
+                                UpGameOpt.addOpt(info.items[i])
                                 break;
                             }
                         }
                     })
 
-                    //GameCfg.GameOperationItem;
-                    // for (let i = 0; i < info.items.length; i++) {
-                    //     if (GameCfg.GameOperationItem.length == 0) {
-                    //         GameCfg.GameOperationItem.push(info.items[i]);
-                    //     }
-                    //     else if (GameCfg.GameOperationItem.indexOf(info.items[i]) == -1) {
-                    //         GameCfg.GameOperationItem.push(info.items[i]);
-                    //     }
-                    // }
-                    // cb && (cb);
                     if (cb) {
                         cb();
                     } else {
@@ -341,7 +332,7 @@ export default class GlobalHandle {
 
     //进入房间：CmdRoomEnter
 
-    public static onReqRoomEnter(arr) {
+    public static onReqRoomEnter(arr, call?) {
 
         let data = {
             game: pb.GameType.JJ_PK,
@@ -352,12 +343,53 @@ export default class GlobalHandle {
         socket.send(pb.MessageId.Req_Room_Enter, PB.onReqRoomEnterBuff(data), (res) => {
             console.log(JSON.stringify(res));
             if (res.err) {
-
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
+                call && (call());
             } else {
                 GameData.roomId = res.id;
+
+                call && call(1);
             }
 
         })
 
+    }
+
+    //离开房间：CmdRoomLeave
+    public static onReqRoomLeave(call?) {
+        let data = {
+            id: GameData.roomId,
+            uid: GameData.userID,
+        }
+        let CmdRoomLeave = pb.CmdRoomLeave;
+        let message = CmdRoomLeave.create(data);
+        let bufff = CmdRoomLeave.encode(message).finish();
+
+        socket.send(pb.MessageId.Req_Room_Leave, bufff, (res) => {
+            console.log(JSON.stringify(res));
+            call && call(res);
+        })
+    }
+
+    //上传房间游戏操作
+    public static onUpRoomGameOp(ops) {
+
+        let GameOperations = pb.GameOperations;
+        let data1 = GameOperations.create(ops);
+        let buff1 = GameOperations.encode(data1).finish();
+
+        let data = {
+            id: GameData.roomId,
+            uid: GameData.userID,
+            ops: buff1,
+        }
+
+        let RoomGameOp = pb.RoomGameOp;
+        let message = RoomGameOp.create(data);
+        let buff = RoomGameOp.encode(message).finish();
+
+        socket.send(pb.MessageId.Sync_Room_GameOp, buff, (res) => {
+            console.log(JSON.stringify(res));
+        })
     }
 }

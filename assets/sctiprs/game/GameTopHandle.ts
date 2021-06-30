@@ -5,6 +5,7 @@ import GameCfg from "./GameCfg";
 
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
+import GlobalHandle from "../global/GlobalHandle";
 
 
 const { ccclass, property } = cc._decorator;
@@ -157,54 +158,33 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.HELPSHOW);
         }
         //点击终止
-        else if (name == 'closeBtn') {
-
-            if (GameCfg.GAMEFUPAN) {
+        else if (name == 'backBtn' || name == 'closeBtn' || name == 'sys_back') {
+            if (!GameCfg.GAMEFUPAN) {
+                if (GameCfg.GameType == pb.GameType.JJ_PK) {
+                    PopupManager.LoadPopupBox('tipsBox', '您正在比赛中，现在退出会被认定为逃跑用户，请确认在退出', () => {
+                        GlobalHandle.onReqRoomLeave();
+                        GameCfg.huizhidatas = 0;
+                        GameCfg.allRate = 0;
+                        GameCfg.finalfund = 0;
+                        GameCfg.GAMEFUPAN = false;
+                        cc.director.loadScene('hall');
+                    })
+                }
+                else {
+                    PopupManager.LoadPopupBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
+                        GlobalEvent.emit(EventCfg.GAMEOVEER);
+                    })
+                }
+            } else {
                 GameCfg.huizhidatas = 0;
-
                 GameCfg.allRate = 0;
-
                 GameCfg.finalfund = 0;
-                //            GameCfg.GameType = null;
                 GameCfg.GAMEFUPAN = false;
                 cc.director.loadScene('hall');
-
-            } else {
-                PopupManager.LoadPopupBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
-                    GlobalEvent.emit(EventCfg.GAMEOVEER);
-                })
             }
-        } else if (name == 'backBtn') {
-            GameCfg.huizhidatas = 0;
-
-            GameCfg.allRate = 0;
-
-            GameCfg.finalfund = 0;
-            //   GameCfg.GameType = null;
-            GameCfg.GAMEFUPAN = false;
-            cc.director.loadScene('hall');
         }
         else if (name == 'btnMyspic') {
             GlobalEvent.emit(EventCfg.MYSPICCLICK);
-        }
-
-        else if (name == 'sys_back') {
-            if (GameCfg.GAMEFUPAN) {
-                GameCfg.huizhidatas = 0;
-
-                GameCfg.allRate = 0;
-
-                GameCfg.finalfund = 0;
-                //      GameCfg.GameType = null;
-                GameCfg.GAMEFUPAN = false;
-                cc.director.loadScene('hall');
-
-            } else {
-                PopupManager.LoadPopupBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
-                    GlobalEvent.emit(EventCfg.GAMEOVEER);
-
-                })
-            }
         }
 
         else if (name == 'statBtn') {

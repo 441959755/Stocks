@@ -1,4 +1,5 @@
 export default {
+
 	OPENSMLAYER: 'OPENSMLAYER',//slsm
 
 	OPENZBLAYER: 'OPENZBLAYER',//slzb
@@ -33,7 +34,7 @@ export default {
 
 	GENDERCHANGE: 'GENDERCHANGE',//性别修改
 
-	NAMECHANGE: 'NAMECHANGE',
+	NAMECHANGE: 'NAMECHANGE',   //name改变
 
 	LOCALTIONCHANGE: 'LOCALTIONCHANGE',
 
@@ -64,11 +65,11 @@ export default {
 
 	HELPSHOW: 'HELPSHOW',
 
-	SETMALABEL: 'SETMALABEL',
+	SETMALABEL: 'SETMALABEL',       //均线LABEL
 
-	GAMEFUPAN: 'GAMEFUPAN',
+	GAMEFUPAN: 'GAMEFUPAN',         //游戏复盘
 
-	SET_DRAW_SIZE: 'SET_DRAW_SIZE',
+	SET_DRAW_SIZE: 'SET_DRAW_SIZE',   //设置画盘大小
 
 	ONMARKUPDATE: 'ONMARKUPDATE',
 
@@ -102,15 +103,15 @@ export default {
 
 	CLICKFCBTN: 'CLICKFCBTN',//点击选择分仓
 
-	SETMARKCOLOR: 'SETMARKCOLOR',
+	SETMARKCOLOR: 'SETMARKCOLOR',    //标签颜色
 
 	//pk
-	OPENMATCHPK: 'OPENMATCHPK',
+	OPENMATCHPK: 'OPENMATCHPK',    //pk匹配
 
-	RoomGameDataSelf: 'RoomGameDataSelf',
+	RoomGameDataSelf: 'RoomGameDataSelf',  //自己进入房间
 
-	RoomGameDataOther: 'RoomGameDataOther',
+	RoomGameDataOther: 'RoomGameDataOther',  //其他人进入房间
 
-	RoomGameStatus: 'RoomGameStatus',
+	RoomGameStatus: 'RoomGameStatus',	  //房间状态
 
 };

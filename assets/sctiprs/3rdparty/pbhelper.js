@@ -245,17 +245,19 @@ PBHelper.prototype = {
 
 
     selectBlackData(id, buff) {
-        let data;
         console.log('id:' + id + '跟新数据');
         if (id == pb.MessageId.Rep_Game_Login) {
-            data = this.onCmdGameLoginReplyConvertToData(buff);
+            let data = this.onCmdGameLoginReplyConvertToData(buff);
+            return data;
+        }
 
-            return data;
-        } else if (id == pb.MessageId.Rep_QuoteQuery) {
+        else if (id == pb.MessageId.Rep_QuoteQuery) {
             let Quotes = pb.Quotes;
-            data = Quotes.decode(new Uint8Array(buff));
+            let data = Quotes.decode(new Uint8Array(buff));
             return data;
-        } else if (id == pb.MessageId.Sync_S2C_GameProperty) {
+        }
+
+        else if (id == pb.MessageId.Sync_S2C_GameProperty) {
             let GameProperties = pb.GameProperties;
             let decode = GameProperties.decode(new Uint8Array(buff));
 
@@ -267,6 +269,7 @@ PBHelper.prototype = {
             GameData.properties = GameData.properties;
 
         }
+
         // 同步输赢计数器：GameCounters
         else if (id == pb.MessageId.Sync_S2C_GameCounter) {
             let GameCounters = pb.GameCounters;
@@ -283,28 +286,32 @@ PBHelper.prototype = {
             || id == pb.MessageId.Rep_Hall_ResetGameCounter
             || id == pb.MessageId.Rep_Hall_GetItem) {
             let ErrorInfo = pb.ErrorInfo;
-            data = ErrorInfo.decode(new Uint8Array(buff));
+            let data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
-        } else if (id == pb.MessageId.Rep_Game_QueryGameResult) {
+        }
 
-            data = this.onCmdQueryGameResultReplyConvertToData(buff);
+        else if (id == pb.MessageId.Rep_Game_QueryGameResult) {
+
+            let data = this.onCmdQueryGameResultReplyConvertToData(buff);
             return data;
 
-        } else if (id == pb.MessageId.Rep_Game_SmxlReport) {
+        }
+
+        else if (id == pb.MessageId.Rep_Game_SmxlReport) {
             let CmdGetSmxlReportReply = pb.CmdGetSmxlReportReply;
-            data = CmdGetSmxlReportReply.decode(new Uint8Array(buff));
+            let data = CmdGetSmxlReportReply.decode(new Uint8Array(buff));
             return data;
         }
         //期货行情
         else if (id == pb.MessageId.Rep_QuoteQueryFuture) {
             let QuotesFuture = pb.QuotesFuture;
-            data = QuotesFuture.decode(new Uint8Array(buff));
+            let data = QuotesFuture.decode(new Uint8Array(buff));
             return data;
         }
         //// 同步双盲训练状态
         else if (id == pb.MessageId.Sync_S2C_GameSmxl) {
             let SmxlState = pb.SmxlState;
-            data = SmxlState.decode(new Uint8Array(buff));
+            let data = SmxlState.decode(new Uint8Array(buff));
             console.log('同步双盲训练状态' + JSON.stringify(data));
             GameData.SmxlState = data;
 
@@ -313,7 +320,7 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Sync_S2C_GameTimes) {
             // 当日游戏次数计数器
             let TodayGameTimes = pb.TodayGameTimes;
-            data = TodayGameTimes.decode(new Uint8Array(buff));
+            let data = TodayGameTimes.decode(new Uint8Array(buff));
             console.log('当日游戏次数计数器:' + JSON.stringify(data));
             GameData.todayGameCount = data.counter;
 
@@ -322,11 +329,13 @@ PBHelper.prototype = {
             let data = this.onCmdGetGameOperationsReply(buff);
             return data;
         }
+
         //进入房间应答
         else if (id == pb.MessageId.Rep_Room_Enter) {
             let data = this.onRepRoomEnterMessage(buff);
             return data;
         }
+
         //自己进入房间（客户端收到自己进入房间的消息，将玩家拉入房间）
         else if (id == pb.MessageId.Sync_Room_Enter_Self) {
             let data = this.onSyncRoomEnterSelfMessage(buff);
@@ -391,8 +400,30 @@ PBHelper.prototype = {
         //// 游戏结果
         else if (id == pb.MessageId.Sync_Room_GameResult) {
             let RoomGameResult = pb.RoomGameResult;
-            let data = RoomGameResult.decode(new Uint8Array(buff));
-            console.log('游戏结果' + JSON.stringify(data));
+            let data1 = RoomGameResult.decode(new Uint8Array(buff));
+
+            let RoomGameData = pb.RoomGameData;
+
+            result = RoomGameData.decode(data1.result);
+            console.log('游戏结果' + JSON.stringify(result));
+
+            GlobalEvent.emit(EventCfg.GAMEOVEER, result);
+        }
+
+        //离开房间应答
+        else if (id == pb.MessageId.Rep_Room_Leave) {
+            let CmdRoomLeaveReply = pb.CmdRoomLeaveReply;
+            let data = CmdRoomLeaveReply.decode(new Uint8Array(buff));
+            console.log('离开房间应答' + JSON.stringify(data));
+            return data;
+        }
+
+        //// 同步房间游戏操作
+        else if (id == pb.MessageId.Sync_Room_GameOp) {
+            let RoomGameOp = pb.RoomGameOp;
+            let data = RoomGameOp.decode(new Uint8Array(buff));
+            console.log('同步房间游戏操作' + JSON.stringify(data));
+
         }
 
     }

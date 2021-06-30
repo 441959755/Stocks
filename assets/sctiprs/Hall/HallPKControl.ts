@@ -98,7 +98,6 @@ export default class NewClass extends cc.Component {
             GameData.Players[1] = info.players[1].gd;
             // GlobalEvent.emit('SHOWOTHERPLAYER');
 
-
             this.onRoomGameStatus();
         }
 

@@ -12,6 +12,7 @@ import GlobalHandle from "../global/GlobalHandle";
 
 import StrategyAIData from "./StrategyAIData";
 import DrawData from "./DrawData";
+import UpGameOpt from "../global/UpGameOpt";
 
 const { ccclass, property } = cc._decorator;
 
@@ -134,14 +135,13 @@ export default class NewClass extends cc.Component {
                 this.saveHoistoryInfo(parseInt(datas.ts + ''));
                 CmdGameOver = {
                     result: datas,
-                    operations: GameCfg.GameOperationItem,
+                    operations: UpGameOpt.player1Opt,
                 }
             } else {
                 CmdGameOver = {
                     result: datas,
                 }
-                GameCfg.GameOperationItem = [];
-                GameCfg.GameOperationItem.length = 0;
+
             }
             GlobalHandle.onCmdGameOverReq(CmdGameOver);
         }
@@ -344,8 +344,7 @@ export default class NewClass extends cc.Component {
         }
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
-            GameCfg.GameOperationItem = [];
-            GameCfg.GameOperationItem.length = 0;
+
             if (GameCfg.GameType == pb.GameType.QiHuo) {
                 this.clearGameData();
                 return;
@@ -377,8 +376,7 @@ export default class NewClass extends cc.Component {
                     GameCfg.notice = [];
                     GameCfg.GAMEFUPAN = false;
                     GameCfg.history.allRate = 0;
-                    GameCfg.GameOperationItem = [];
-                    GameCfg.GameOperationItem.length = 0;
+
                     GlobalEvent.emit(EventCfg.LEVELCHANGE);
                     StrategyAIData.onClearData();
                     cc.director.loadScene('game');
@@ -411,8 +409,7 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = false;
             //   GameCfg.history.huizhidatas = 0;
             GameCfg.history.allRate = 0;
-            GameCfg.GameOperationItem = [];
-            GameCfg.GameOperationItem.length = 0;
+
             //   GameCfg.ziChan = 100000;
             GlobalEvent.emit(EventCfg.LEVELCHANGE);
             cc.director.loadScene('game');
@@ -438,9 +435,11 @@ export default class NewClass extends cc.Component {
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
         GameCfg.enterGameCache = null;
-        GameCfg.GameOperationItem = [];
-        GameCfg.GameOperationItem.length = 0;
 
         cc.director.loadScene('hall');
+    }
+
+    onDestroy() {
+        UpGameOpt.clearGameOpt();
     }
 }
