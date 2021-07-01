@@ -20,10 +20,12 @@ export default class UpGameOpt {
 
     private static cb = null;
 
+    //   private static count = 0;
+
     //添加操作
     public static addOpt(el) {
         this.arrOpt.push(el);
-
+        //  this.count++;
         if (GameCfg.GameType == pb.GameType.JJ_PK) {
             this.cb && (clearTimeout(this.cb));
             this.cb = null;
@@ -50,9 +52,16 @@ export default class UpGameOpt {
     }
 
     //上传
-    public static UpGameOpt() {
-
+    public static UpGameOpt(end?) {
+        //  console.log(this.count);
         if (GameCfg.GameType == pb.GameType.JJ_PK) {
+            if (end) {
+                this.arrOpt.push({
+                    opId: pb.GameOperationId.END,
+                    volume: 1,
+                    kOffset: 150,
+                });
+            }
             this.cb && (clearTimeout(this.cb));
             this.cb = null;
             GlobalHandle.onUpRoomGameOp({ items: this.arrOpt });

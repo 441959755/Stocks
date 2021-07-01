@@ -5,6 +5,8 @@ import GameCfg from "./GameCfg";
 import StrategyAIData from "./StrategyAIData";
 import GameCfgText from "../GameText";
 import UpGameOpt from "../global/UpGameOpt";
+import GlobalEvent from "../Utils/GlobalEvent";
+import EventCfg from "../Utils/EventCfg";
 
 const { ccclass, property } = cc._decorator;
 
@@ -34,6 +36,7 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Label)
     HasRisen: cc.Label = null;    //同期涨幅
+
 
 
     onShow() {
@@ -78,12 +81,13 @@ export default class NewClass extends cc.Component {
             userHead.spriteFrame = GameData.headImg;
 
             //消极
-            if (userProfitRate1 == -999 && !this.gameResult.players[0].ops.itmes) {
+            if (userProfitRate1 == -999 && !this.gameResult.players[0].ops.items) {
 
                 loseSp.active = true;
                 winSp.active = false;
                 xj.active = true;
                 this.onResultAward(3, this.selfResultLabel, userProfitRate1);
+
             }
             //逃跑
             else if (this.gameResult.players[0].giveup) {
@@ -92,16 +96,19 @@ export default class NewClass extends cc.Component {
                 winSp.active = false;
                 taopao.active = true;
                 this.onResultAward(4, this.selfResultLabel, userProfitRate1);
+
             }
             else if (userProfitRate1 > userProfitRate2) {
                 loseSp.active = false;
                 winSp.active = true;
                 this.onResultAward(1, this.selfResultLabel, userProfitRate1);
+
             }
             else if (userProfitRate1 < userProfitRate2) {
                 loseSp.active = true;
                 winSp.active = false;
                 this.onResultAward(2, this.selfResultLabel, userProfitRate1);
+
             }
         }
 
@@ -123,11 +130,12 @@ export default class NewClass extends cc.Component {
             //  userHead.spriteFrame = GameData.headImg;
 
             //消极
-            if (userProfitRate2 == -999 && !this.gameResult.players[1].ops.itmes) {
+            if (userProfitRate2 == -999 && !this.gameResult.players[1].ops.items) {
                 loseSp.active = true;
                 winSp.active = false;
                 xj.active = true;
                 this.onResultAward(3, this.otherResultLabel, userProfitRate2)
+
             }
             //逃跑
             else if (this.gameResult.players[1].giveup) {
@@ -135,16 +143,19 @@ export default class NewClass extends cc.Component {
                 winSp.active = false;
                 taopao.active = true;
                 this.onResultAward(4, this.otherResultLabel, userProfitRate2)
+
             }
             else if (userProfitRate1 < userProfitRate2) {
                 loseSp.active = false;
                 winSp.active = true;
                 this.onResultAward(1, this.otherResultLabel, userProfitRate2)
+
             }
             else if (userProfitRate1 > userProfitRate2) {
                 loseSp.active = true;
                 winSp.active = false;
                 this.onResultAward(2, this.otherResultLabel, userProfitRate2)
+
             }
         }
 
@@ -218,19 +229,48 @@ export default class NewClass extends cc.Component {
 
         //复盘
         else if (name == 'pk_jsbt_qd') {
+            GameCfg.fill = [];
+            GameCfg.fill.length = 0;
+            GameCfg.allRate = 0;
 
+            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 1);
+
+            GameCfg.GAMEFUPAN = true;
+            GlobalEvent.emit(EventCfg.GAMEFUPAN);
+            GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[0].ops.items)
+
+            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 2);
+            GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[1].ops.items)
+            this.node.active = false;
         }
         //训练该股
         else if (name == 'pk_jsbt_xl') {
 
+
         }
         //zj复盘
         else if (name == 'Btn_fupan_self') {
+            GameCfg.fill = [];
+            GameCfg.fill.length = 0;
+            GameCfg.allRate = 0;
 
+            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN);
+            this.node.active = false;
+            GameCfg.GAMEFUPAN = true;
+            GlobalEvent.emit(EventCfg.GAMEFUPAN);
+            GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[0].ops.items)
         }
         //tr复盘
         else if (name == 'Btn_fupan_other') {
+            GameCfg.fill = [];
+            GameCfg.fill.length = 0;
+            GameCfg.allRate = 0;
 
+            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN);
+            this.node.active = false;
+            GameCfg.GAMEFUPAN = true;
+            GlobalEvent.emit(EventCfg.GAMEFUPAN);
+            GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[1].ops.items)
         }
     }
 

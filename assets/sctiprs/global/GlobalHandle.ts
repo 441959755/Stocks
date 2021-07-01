@@ -333,13 +333,11 @@ export default class GlobalHandle {
     //进入房间：CmdRoomEnter
 
     public static onReqRoomEnter(arr, call?) {
-
         let data = {
             game: pb.GameType.JJ_PK,
             uid: GameData.userID,
             junXian: arr,
         }
-
         socket.send(pb.MessageId.Req_Room_Enter, PB.onReqRoomEnterBuff(data), (res) => {
             console.log(JSON.stringify(res));
             if (res.err) {
@@ -347,10 +345,8 @@ export default class GlobalHandle {
                 call && (call());
             } else {
                 GameData.roomId = res.id;
-
                 call && call(1);
             }
-
         })
 
     }

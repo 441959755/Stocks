@@ -20,9 +20,9 @@ export default class HttpMgr {
 
 
     loginWeb(openId, data, call, err) {
-        // let url = 'http://192.168.100.198:80/l';
+        let url = 'http://192.168.100.198:80/l';
         //let url = 'http://121.9.210.218:8080/l';
-        let url = 'http://test.cgdr168.com/l';
+        //  let url = 'http://test.cgdr168.com/l';
 
         let buff1 = PB.onCmdLoginConvertToBuff(data);
 

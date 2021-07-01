@@ -126,11 +126,8 @@ Socket.prototype = {
 				callback: callback,
 			}
 
-			this.ws.close();
-			// setTimeout(() => {
-			//     this.send(actionCode, proto, callback);
-			// }, 1000);
-			// callback(GameCfg.datas);
+			//this.ws.close();
+
 		}
 	},
 

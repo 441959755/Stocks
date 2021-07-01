@@ -114,4 +114,7 @@ export default {
 
 	RoomGameStatus: 'RoomGameStatus',	  //房间状态
 
+	CUTGAMEFUPAN: 'CUTGAMEFUPAN',    //切换
+
+	GAMEFUPANOPT: 'GAMEFUPANOPT',    //复盘操作
 };

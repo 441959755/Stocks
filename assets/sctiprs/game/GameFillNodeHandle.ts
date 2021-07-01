@@ -11,13 +11,10 @@ export default class NewClass extends cc.Component {
     @property(cc.Graphics)
     graphics: cc.Graphics = null;
 
-
     onLoad() {
         GlobalEvent.on(EventCfg.FILLNODEISSHOW, (flag) => {
             this.node.active = flag;
         }, this);
-
-
 
         GlobalEvent.on(EventCfg.ADDFILLCOLOR, (data) => {
             if (!data) {
@@ -64,10 +61,13 @@ export default class NewClass extends cc.Component {
                 DrawUtils.drawRectFill(this.graphics, startX + 1, 0, width - 4, this.node.height, color);
             })
         }, this);
+
+
     }
 
     protected onDestroy() {
         GlobalEvent.off(EventCfg.ADDFILLCOLOR);
         GlobalEvent.off(EventCfg.FILLNODEISSHOW);
+
     }
 }

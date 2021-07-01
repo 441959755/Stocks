@@ -31,19 +31,24 @@ export default class NewClass extends cc.Component {
     @property(cc.Prefab)
     Zs: cc.Prefab = null;     //指标玩家标签
 
-    markNodes = [];
-    AIMarkNodes = [];
+    startNode = [];          //开始mark
 
-    ratio = 1;
+    markNodes = [];         //xl  mark
 
-    rWidth = 0;
-    rHeight = 0;
+    AIMarkNodes = [];      //AI的mark
 
-    currPint = null;
+    mark1Nodes = [];       //pk 自己的mark
 
-    currScale = null;
+    mark2Nodes = [];       //pk 其他的mark
+
+    currPint = null;       //当前绘制的坐标
+
+    currScale = null;       //当前的缩放
+
+    status = 0;
 
     onLoad() {
+
         this.node.removeAllChildren();
 
         GlobalEvent.on(EventCfg.ONADDMARK, this.onAddMard.bind(this), this);
@@ -55,10 +60,75 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.ADDMARKHIDEORSHOW, (flag) => { this.node.active = flag }, this);
 
         GlobalEvent.on(EventCfg.SETMARKCOLOR, this.setMarkColor.bind(this), this);
+
+        GlobalEvent.on(EventCfg.CUTGAMEFUPAN, this.onShowCutMark.bind(this), this);
+
     }
+
+    onShowCutMark(status) {
+        this.status = status;
+
+        this.markNodes.forEach(el => {
+            if (el && el.node) {
+                el.node.destroy();
+            }
+        })
+        this.markNodes = [];
+        this.markNodes.length = 0;
+
+        this.mark1Nodes.forEach(el => {
+            if (el && el.node) {
+                el.node.active = false;
+            }
+        })
+
+        this.mark2Nodes.forEach(el => {
+            if (el && el.node) {
+                el.node.active = false;
+            }
+        })
+
+        if (this.status == 1) {
+            this.mark1Nodes.forEach((el, i) => {
+                if (el && el.node) {
+                    if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
+                        el.node.active = true;
+                    }
+                }
+            })
+        }
+        else if (this.status == 2) {
+            this.mark2Nodes.forEach((el, i) => {
+                if (el && el.node) {
+                    if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
+                        el.node.active = true;
+                    }
+                }
+            })
+        } else if (this.status == 3) {
+            this.mark1Nodes.forEach((el, i) => {
+                if (el && el.node) {
+                    if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
+                        el.node.active = true;
+                    }
+                }
+            })
+            this.mark2Nodes.forEach((el, i) => {
+                if (el && el.node) {
+                    if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
+                        el.node.active = true;
+                    }
+                }
+            })
+        }
+
+    }
+
 
     //
     setMarkColor() {
+
+
         let info = StrategyAIData.onCompareReult();
         this.markNodes;
         info.low.forEach(el => {
@@ -110,12 +180,10 @@ export default class NewClass extends cc.Component {
 
 
     start() {
+        this.onAddMard({ type: 1, index: GameData.huizhidatas });
         if (!GameCfg.GAMEFUPAN) {
-            //添加开始标签
-            this.onAddMard({ type: 1, index: GameCfg.huizhidatas });
         }
         else {
-            this.onAddMard({ type: 1, index: GameData.huizhidatas });
             this.onMarkAllShow();
         }
     }
@@ -133,7 +201,15 @@ export default class NewClass extends cc.Component {
         this.AIMarkNodes.forEach((el, index) => {
             if (el && el.node) {
                 if (index < cc.ext.beg_end[0] || index >= cc.ext.beg_end[1]) {
-                    this.AIMarkNodes[index] && (this.AIMarkNodes[index].node.active = false)
+                    el.node.active = false;
+                }
+            }
+        })
+
+        this.startNode.forEach((el, index) => {
+            if (el && el.node) {
+                if (index < cc.ext.beg_end[0] || index >= cc.ext.beg_end[1]) {
+                    el.node.active = false;
                 }
             }
         })
@@ -143,7 +219,6 @@ export default class NewClass extends cc.Component {
     onMarkUpdate(posInfo) {
         this.currPint = posInfo;
         this.onMarkRangeShowOrHide();
-
         //放大
         this.currScale = cc.ext.hz_width / 15;
 
@@ -152,18 +227,20 @@ export default class NewClass extends cc.Component {
         } else if (this.currScale >= 2) {
             this.currScale = 2;
         }
-        //开始标签
-        if (this.markNodes[posInfo.index - 1] && this.markNodes[posInfo.index - 1].type == 1) {
 
-            this.markNodes[posInfo.index - 1].node.position = posInfo.lowPos;
-            // this.markNodes[posInfo.index].node.x += cc.ext.hz_width;
+        //开始标签
+        if (this.startNode[posInfo.index] && this.startNode[posInfo.index].type == 1) {
+
+            this.startNode[posInfo.index].node.position = posInfo.lowPos;
+
             if (GameCfg.GAMEFUPAN) {
-                this.markNodes[posInfo.index - 1].node.active = true;
+                this.startNode[posInfo.index].node.active = true;
             }
 
-            this.markNodes[posInfo.index - 1].node.scale = this.currScale;
+            this.startNode[posInfo.index].node.scale = this.currScale;
         }
 
+        //AI 标签
         if (this.AIMarkNodes[posInfo.index]) {
             this.AIMarkNodes[posInfo.index].node.position = posInfo.lowPos;
             this.AIMarkNodes[posInfo.index].node.y -= (this.AIMarkNodes[posInfo.index].node.height / 2 + 5)
@@ -177,6 +254,7 @@ export default class NewClass extends cc.Component {
             this.AIMarkNodes[posInfo.index].node.scale = this.currScale;
         }
 
+        //玩家
         if (this.markNodes[posInfo.index]) {
 
             if (GameCfg.GAMEFUPAN) {
@@ -201,8 +279,27 @@ export default class NewClass extends cc.Component {
                     this.markNodes[posInfo.index].node.y += (this.markNodes[posInfo.index].node.height / 2 + 5)
                 }
             }
-
             this.markNodes[posInfo.index].node.scale = this.currScale;
+        }
+
+        //pk 切换
+        if (this.status) {
+            if (this.status == 1 || this.status == 3) {
+                if (this.mark1Nodes[posInfo.index]) {
+                    // this.mark1Nodes[posInfo.index].node.active = true;
+                    this.mark1Nodes[posInfo.index].node.position = posInfo.highPos;
+                    this.mark1Nodes[posInfo.index].node.y += (this.markNodes[posInfo.index].node.height / 2 + 5)
+                }
+            }
+
+            if (this.status == 2 || this.status == 3) {
+                if (this.mark2Nodes[posInfo.index]) {
+                    //   this.mark2Nodes[posInfo.index].node.active = true;
+                    this.mark2Nodes[posInfo.index].node.position = posInfo.lowPos;
+                    this.mark2Nodes[posInfo.index].node.y -= (this.markNodes[posInfo.index].node.height / 2 + 5)
+                }
+
+            }
         }
     }
 
@@ -213,17 +310,39 @@ export default class NewClass extends cc.Component {
     onAddMard(info) {
 
         let node, inde;
-
-        if (info.type == 1) {
-            inde = info.index - 2;
-            if (this.markNodes[inde]) { return }
+        inde = info.index - 1;
+        if (this.status == 1) {
+            if (this.mark1Nodes[inde]) { return }
+            if (info.type == 2) {
+                node = cc.instantiate(this.Zb);
+            }
+            else if (info.type == 3) {
+                node = cc.instantiate(this.Zs);
+            }
+            node.children[0].active = false;
+            node.children[1].active = false;
+            this.mark1Nodes[inde] = {
+                node: node,
+                type: info.type,
+            }
+        }
+        else if (this.status == 2) {
+            if (this.mark2Nodes[inde]) { return }
+            if (info.type == 2) {
+                node = cc.instantiate(this.ZBItem);
+            }
+            else if (info.type == 3) {
+                node = cc.instantiate(this.ZSItem);
+            }
+            this.mark2Nodes[inde] = {
+                node: node,
+                type: info.type,
+            }
+        }
+        else if (info.type == 1) {
+            if (this.startNode[inde]) { return }
             node = cc.instantiate(this.startItem);
-            this.ratio = node.height / node.width;
-            this.rWidth = node.width;
-            this.rHeight = node.height;
-
         } else if (info.type == 2) {
-            inde = info.index - 1;
             if (this.markNodes[inde]) { return }
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                 node = cc.instantiate(this.Zb);
@@ -231,7 +350,6 @@ export default class NewClass extends cc.Component {
                 node = cc.instantiate(this.bItem);
             }
         } else if (info.type == 3) {
-            inde = info.index - 1;
             if (this.markNodes[inde]) { return }
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                 node = cc.instantiate(this.Zs);
@@ -239,59 +357,62 @@ export default class NewClass extends cc.Component {
             else {
                 node = cc.instantiate(this.sItem);
             }
-
-
         }
         //策略買入 
         else if (info.type == 12) {
-            inde = info.index - 1;
             if (this.AIMarkNodes[inde]) { return }
             node = cc.instantiate(this.ZBItem);
         }
         //卖出
         else if (info.type == 13) {
-            inde = info.index - 1;
             if (this.AIMarkNodes[inde]) { return }
             node = cc.instantiate(this.ZSItem);
-
         }
 
-        else {
-            return;
-        }
         this.node.addChild(node);
-
-        if (info.type == 12 || info.type == 13) {
-            this.AIMarkNodes[inde] = {
-                node: node,
-                type: info.type,
-            };
-
-            if (this.AIMarkNodes[this.currPint.index]) {
-                this.AIMarkNodes[this.currPint.index].node.position = this.currPint.lowPos;
-                this.AIMarkNodes[this.currPint.index].node.y -= (this.AIMarkNodes[this.currPint.index].node.height / 2 + 5)
-                if (GameCfg.GAMEFUPAN || GameCfg.GameSet.showSign) {
-                    this.AIMarkNodes[this.currPint.index].node.active = true;
+        if (!this.status) {
+            if (info.type == 1) {
+                this.startNode[inde] = {
+                    node: node,
+                    type: info.type,
                 }
-                else if (!GameCfg.GameSet.showSign) {
-                    this.AIMarkNodes[this.currPint.index].node.active = false;
-                }
-
-                this.AIMarkNodes[this.currPint.index].node.scale = this.currScale;
-            } else {
                 node.active = false;
                 node.x = -9999;
             }
 
-        } else {
-            this.markNodes[inde] = {
-                node: node,
-                type: info.type,
-            };
+            else if (info.type == 12 || info.type == 13) {
+                this.AIMarkNodes[inde] = {
+                    node: node,
+                    type: info.type,
+                };
 
-            node.active = false;
-            node.x = -9999;
+                if (this.AIMarkNodes[this.currPint.index]) {
+                    this.AIMarkNodes[this.currPint.index].node.position = this.currPint.lowPos;
+                    this.AIMarkNodes[this.currPint.index].node.y -= (this.AIMarkNodes[this.currPint.index].node.height / 2 + 5)
+                    if (GameCfg.GAMEFUPAN || GameCfg.GameSet.showSign) {
+                        this.AIMarkNodes[this.currPint.index].node.active = true;
+                    }
+                    else if (!GameCfg.GameSet.showSign) {
+                        this.AIMarkNodes[this.currPint.index].node.active = false;
+                    }
+
+                    this.AIMarkNodes[this.currPint.index].node.scale = this.currScale;
+                } else {
+                    node.active = false;
+                    node.x = -9999;
+                }
+
+            } else {
+                this.markNodes[inde] = {
+                    node: node,
+                    type: info.type,
+                };
+
+                node.active = false;
+                node.x = -9999;
+            }
         }
+
     }
 
     //显示所有标签
@@ -302,7 +423,7 @@ export default class NewClass extends cc.Component {
                 //   
                 if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
                     el.node.active = true;
-                    this.AIMarkNodes[i] && (this.AIMarkNodes[i].node.active = true)
+
                 }
             }
         })
@@ -310,16 +431,19 @@ export default class NewClass extends cc.Component {
         this.AIMarkNodes.forEach((el, index) => {
             if (el && el.node) {
                 if (index >= cc.ext.beg_end[0] && index < cc.ext.beg_end[1]) {
-                    this.AIMarkNodes[index] && (this.AIMarkNodes[index].node.active = true)
+                    el.node.active = true;
                 }
             }
         })
-    }
 
-    onMarAllkhide() {
-        this.markNodes.forEach(el => {
-            el.node.active = false;
+        this.startNode.forEach((el, index) => {
+            if (el && el.node) {
+                if (index >= cc.ext.beg_end[0] && index < cc.ext.beg_end[1]) {
+                    el.node.active = true;
+                }
+            }
         })
+
     }
 
     onDestroy() {
@@ -327,6 +451,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.ONADDMARK);
         GlobalEvent.off(EventCfg.ONMARKUPDATE);
         GlobalEvent.off(EventCfg.ADDMARKHIDEORSHOW);
+        GlobalEvent.off(EventCfg.CUTGAMEFUPAN);
+
     }
 
 }

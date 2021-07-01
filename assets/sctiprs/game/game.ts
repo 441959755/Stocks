@@ -41,11 +41,13 @@ export default class NewClass extends cc.Component {
                     this.finalLayer.active = true;
                 }, 80)
             }
-            else if (GameCfg.GameType == pb.GameType.JJ_PK && message) {
+            else if (GameCfg.GameType == pb.GameType.JJ_PK) {
                 this.pkFinalLayer.active = true;
-                let handle = this.pkFinalLayer.getComponent('PKFinalHandle');
-                handle.gameResult = message;
-                handle.onShow();
+                if (message) {
+                    let handle = this.pkFinalLayer.getComponent('PKFinalHandle');
+                    handle.gameResult = message;
+                    handle.onShow();
+                }
             }
         }, this)
 

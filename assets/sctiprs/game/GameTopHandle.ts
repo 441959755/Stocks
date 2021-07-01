@@ -60,7 +60,7 @@ export default class NewClass extends cc.Component {
     }
 
 
-    onShowGANEFUPAN() {
+    onShowGANEFUPAN(str?) {
         if (!GameCfg.GAMEFUPAN) { return }
         //z中止训练
         let colseBtn = this.rightNode.getChildByName('closeBtn');
@@ -88,7 +88,7 @@ export default class NewClass extends cc.Component {
             statBtn.active = false;
 
             this.tipsLabel.string = '结果：';
-            this.currRateLabel.string = '胜利';
+            this.currRateLabel.string = str;
         }
     }
 
@@ -176,11 +176,15 @@ export default class NewClass extends cc.Component {
                     })
                 }
             } else {
-                GameCfg.huizhidatas = 0;
-                GameCfg.allRate = 0;
-                GameCfg.finalfund = 0;
-                GameCfg.GAMEFUPAN = false;
-                cc.director.loadScene('hall');
+                if (GameCfg.GameType == pb.GameType.JJ_PK) {
+                    GlobalEvent.emit(EventCfg.GAMEOVEER);
+                } else {
+                    GameCfg.huizhidatas = 0;
+                    GameCfg.allRate = 0;
+                    GameCfg.finalfund = 0;
+                    GameCfg.GAMEFUPAN = false;
+                    cc.director.loadScene('hall');
+                }
             }
         }
         else if (name == 'btnMyspic') {
