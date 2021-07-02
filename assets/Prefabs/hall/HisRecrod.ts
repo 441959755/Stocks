@@ -23,7 +23,7 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     content: cc.Node = null;
 
-    HisData = null;
+    HisData = [];
 
     HisCount = 0;
 
@@ -40,7 +40,7 @@ export default class NewClass extends cc.Component {
 
             else {
                 let ts;
-                if (this.HisData) {
+                if (this.HisData.length > 0) {
                     ts = this.HisData[this.HisData.length - 1].ts;
                 }
                 let data = {
@@ -60,21 +60,25 @@ export default class NewClass extends cc.Component {
             let handle = el.getComponent('HisItem');
             handle.onHisItemRate(event.isChecked);
         })
-
     }
 
     onEnable() {
-        this.tipsNode.active = false;
+        if (this.HisData.length > 0) {
 
-        if (!this.HisData) {
+        } else {
+            this.tipsNode.active = false;
+
+            //   if (!this.HisData) {
 
             let ts = new Date().getTime() / 1000;
             let data = {
                 uid: GameData.userID,
+                gType: pb.GameType.JJ_PK,
                 to: ts,
                 pageSize: 20,
             }
             this.onQueryGameResult(data);
+            //    }
         }
     }
 
@@ -86,7 +90,7 @@ export default class NewClass extends cc.Component {
                 this.tipsNode.active = true;
             }
             else {
-                this.HisData = [];
+
                 info.results.forEach((el, index) => {
                     this.HisData.push(el);
                     if (el.gType == pb.GameType.ShuangMang) {
@@ -96,7 +100,7 @@ export default class NewClass extends cc.Component {
                         this.content.addChild(node);
                         let nodeHandle = node.getComponent('HisItem');
                         nodeHandle.itemData = el;
-                        nodeHandle.itemIndex = index + 1;
+                        nodeHandle.itemIndex = this.HisData.length;
                         nodeHandle.onShow();
                     }
                 });

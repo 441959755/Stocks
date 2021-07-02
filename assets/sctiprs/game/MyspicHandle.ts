@@ -29,14 +29,16 @@ export default class NewClass extends cc.Component {
 
 
     onLoad() {
-        // this.node.active = false;
+
         if (GameCfg.GameType != pb.GameType.DingXiang) {
             this.draw.node.active = false;
             return;
         }
 
         GlobalEvent.on('onDraw', this.onDraw.bind(this), this);
+
         let flag = false;
+
         this.draw.node.active = flag;
         GlobalEvent.on(EventCfg.MYSPICCLICK, () => {
             flag = !flag;
@@ -57,7 +59,6 @@ export default class NewClass extends cc.Component {
     }
 
     onDraw() {
-
         this.draw.clear();
         let viewData = this.myspicData;
         if (!viewData || viewData.length <= 0) {
@@ -147,9 +148,9 @@ export default class NewClass extends cc.Component {
             return;
         }
 
-        let info1 = JSON.parse(JSON.stringify(GameCfg.info));
+        let info1 = JSON.parse(JSON.stringify(GameCfg.enterGameCache));
         if (GameCfg.GameType == pb.GameType.DingXiang) {
-            let code = info1.code;
+            let code = info1.code + '';
             if (code.indexOf('60') != -1 || code.indexOf('688') != -1) {
                 info1.code = '1000001';
             } else if (code.indexOf('00') != -1 || code.indexOf('002') != -1) {
@@ -157,6 +158,7 @@ export default class NewClass extends cc.Component {
             } else if (code.indexOf('300') != -1) {
                 info1.code = '1399006';
             }
+
             console.log(JSON.stringify(info1));
             let infoPre = {
                 ktype: info1.ktype,
@@ -215,9 +217,8 @@ export default class NewClass extends cc.Component {
 
                         this.myspicData.push(data);
                     });
-                    //   console.log(JSON.stringify(this.myspicData));
                     this.onDraw();
-                    //  GameCfg.info = null;
+
                 })
             })
         }
@@ -251,5 +252,5 @@ export default class NewClass extends cc.Component {
         DrawUtils.drawLine(ctx, sX, sY, eX, eY, falg);
     }
 
-    // update (dt) {}
+
 }

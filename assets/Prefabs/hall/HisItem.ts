@@ -2,6 +2,7 @@ import { pb } from "../../protos/proto";
 import GameCfg from "../../sctiprs/game/GameCfg";
 import GameData from "../../sctiprs/GameData";
 import GameCfgText from "../../sctiprs/GameText";
+import EnterGameControl from "../../sctiprs/global/EnterGameControl";
 import GlobalHandle from "../../sctiprs/global/GlobalHandle";
 import ComUtils from "../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
@@ -31,6 +32,7 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     recLabel: cc.Label = null;
 
+    gameSet1 = null;
 
     onHisItemRate(flag) {
         this.recLabel.string = '****';
@@ -46,27 +48,40 @@ export default class NewClass extends cc.Component {
         this.recLabel.string = '****';
         if (this.itemData.gType == pb.GameType.ShuangMang) {
             this.modeLabel.string = '双盲训练';
+            this.gameSet1 = GameData.SMSet;
+            this.node.active = false;
         }
         else if (this.itemData.gType == pb.GameType.DingXiang) {
             this.modeLabel.string = '定向训练';
+            this.gameSet1 = GameData.DXSet;
+            this.node.active = false;
         }
         else if (this.itemData.gType == pb.GameType.FenShi) {
             this.modeLabel.string = '分时训练';
+            //  this.gameSet1 = GameData.SHSet;
+            this.node.active = false;
         }
         else if (this.itemData.gType == pb.GameType.ZhiBiao) {
             this.modeLabel.string = '指标训练';
+            this.gameSet1 = GameData.ZBSet;
+            this.node.active = false;
         }
         else if (this.itemData.gType == pb.GameType.TiaoJianDan) {
             this.modeLabel.string = '条件单训练';
+            this.node.active = false;
         }
         else if (this.itemData.gType == pb.GameType.QiHuo) {
             this.modeLabel.string = '期货训练';
+            this.gameSet1 = GameData.QHSet;
+            this.node.active = false;
         }
         else if (this.itemData.gType == pb.GameType.TiaoZhan) {
             this.modeLabel.string = '挑    战';
+
         }
         else if (this.itemData.gType == pb.GameType.JJ_PK) {
             this.modeLabel.string = 'P K 大战';
+            this.gameSet1 = GameData.JJPKSet;
         }
         else if (this.itemData.gType == pb.GameType.JJ_DuoKong) {
             this.modeLabel.string = '多空大战';
@@ -96,6 +111,7 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         if (name == 'cgs_fupan') {
 
+            GameCfg.GameSet = this.gameSet1;
             let ts = this.itemData.ts;
             GameCfg.GAMEFUPAN = true;
             GameCfg.huizhidatas = this.itemData.kStop + 1;
@@ -106,16 +122,31 @@ export default class NewClass extends cc.Component {
 
         }
         else if (name == 'btn_xl') {
+            if (GameCfg.GameType == pb.GameType.JJ_PK) {
+                let gameCount = EnterGameControl.onCurDXIsEnterGame();
+
+                if (gameCount.status == 3) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
+                    return;
+                }
+            }
+
+            GameCfg.GameSet = GameData.JJPKSet;
             GameCfg.GAMEFUPAN = false;
             GameCfg.huizhidatas = this.itemData.kStartup + 1;
             GameData.huizhidatas = this.itemData.kStartup + 1;
+
+            GameCfg.GameSet.year = this.itemData.kFrom.slice(0, 4);
+
+            GameCfg.GameSet.search = this.itemData.quotesCode;
+
             this.onGamenterStart();
         }
     }
 
     onGamenterStart() {
         let data = { code: this.itemData.quotesCode }
-        let dex = -1, items;
+        let items;
         if (GameCfg.GameType == pb.GameType.QiHuo) {
             items = GameCfgText.getQHItemInfo(data.code);
         } else {
@@ -128,54 +159,30 @@ export default class NewClass extends cc.Component {
         GameCfg.data[0].code = items[0];
         GameCfg.data[0].circulate = items[4];
 
-
         GameCfg.allRate = 0;
 
-        // if (this.itemData.gType == pb.GameType.ShuangMang) {
-        //     GameCfg.GameSet = GameData.SMSet;
-        //     GameCfg.enterGameCache = {
-        //         ktype: pb.KType.Day,
-        //         kstyle: pb.KStyle.Random,
-        //         code: items[0],
-        //         from: this.itemData.kFrom,
-        //         total: 150 + 1,
-        //         to: 0,
-        //     }
-        // }
-        // else if (this.itemData.gType == pb.GameType.DingXiang) {
-        //     GameCfg.GameSet = GameData.DXSet;
-        // }
-        // else if (this.itemData.gType == pb.GameType.FenShi) {
-        //     GameCfg.GameSet = GameData.DSSet;
-        // }
-        // else if (this.itemData.gType == pb.GameType.ZhiBiao) {
-        //     GameCfg.GameSet = GameData.ZBSet;
-        // }
-        // else if (this.itemData.gType == pb.GameType.TiaoJianDan) {
-        //     this.modeLabel.string = TJSet;
-        // }
-        // else if (this.itemData.gType == pb.GameType.QiHuo) {
-        //     this.modeLabel.string = GameData.QHSet;
-        // }
         let ts = this.itemData.ts;
-        let cache = cc.sys.localStorage.getItem(ts + 'cache');
-        if (!cache) {
-            console.log('没有保存此记录');
-            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '本地记录的缓存已被您清除');
-            return;
-        }
-        GameCfg.GameSet = JSON.parse(cc.sys.localStorage.getItem(ts + 'set'));
 
-        console.log(JSON.parse(cache));
-        GameCfg.enterGameCache = JSON.parse(cache);
-        // GameCfg.historyType = this.itemData.gType;
-        GameCfg.GameType = this.itemData.gType;
+        let cache = {
+            ktype: pb.KType.Day,
+            kstyle: pb.KStyle.Random,
+            code: this.itemData.quotesCode,
+            from: this.itemData.kFrom,
+            total: 150,
+            to: 0,
+        }
+
+        GameCfg.enterGameCache = cache;
+
+        GameCfg.GameType = this.itemData.kType;
+
         if (GameCfg.GameType == pb.GameType.QiHuo) {
-            GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, JSON.parse(cache));
+            GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, cache);
         } else {
-            GlobalEvent.emit(EventCfg.onCmdQuoteQuery, JSON.parse(cache));
+            GlobalHandle.onCmdGameStartQuoteQuery(cache, () => {
+                cc.director.loadScene('game');
+            });
         }
     }
-
 
 }

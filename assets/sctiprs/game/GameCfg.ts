@@ -69,8 +69,6 @@ export default {
 
     //  RAISINGLIMIT: false, //记录涨停板
 
-    info: null,
-
     history: { //游戏记录
         huizhidatas: 0,
         allRate: 0,       //总利率
@@ -97,6 +95,8 @@ export default {
     blockHistoy: [],
 
     RoomGameData: null,
+
+    RoomGameResult: null,  //游戲結果
 
 
 }

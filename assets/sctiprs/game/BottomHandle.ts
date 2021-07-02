@@ -337,7 +337,6 @@ export default class NewClass extends cc.Component {
 		this.node.children.forEach(el => {
 			el.active = false;
 		});
-
 		let node = this.node.getChildByName('fupan1');
 		node.active = !this.status;
 		if (GameCfg.GameType == pb.GameType.ShuangMang) {
@@ -495,7 +494,6 @@ export default class NewClass extends cc.Component {
 		if (this.ziChan > 0 && GameCfg.huizhidatas <= this.gpData.length) {
 			if (this.gpData[GameCfg.huizhidatas - 1]) {
 				this.keMrCount = parseInt(this.ziChan / (parseFloat(this.gpData[GameCfg.huizhidatas - 1].close) * 100) + '') * 100;
-
 			}
 		}
 	}
@@ -980,7 +978,13 @@ export default class NewClass extends cc.Component {
 
 		//切换标签
 		else if (name == 'btn_cut') {
-			GlobalEvent.on(EventCfg.CUTGAMEFUPAN, ++this.status);
+
+			this.status++;
+			if (this.status > 4) {
+				this.status = 1;
+			}
+
+			GlobalEvent.on(EventCfg.CUTGAMEFUPAN, this.status);
 		}
 
 	}

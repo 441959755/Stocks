@@ -276,6 +276,7 @@ PBHelper.prototype = {
             let decode = GameCounters.decode(new Uint8Array(buff));
             console.log('同步输赢计数器：GameCounters' + JSON.stringify(decode));
             GameData.GameCounters = decode.items;
+            GlobalEvent.emit(EventCfg.GMAECOUNTERSCHANGE);
         }
 
         else if (id == pb.MessageId.Rep_Game_Start

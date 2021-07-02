@@ -1,5 +1,7 @@
 import { pb } from "../../protos/proto";
 import GameData from "../../sctiprs/GameData";
+import EventCfg from "../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
 
@@ -16,12 +18,22 @@ export default class NewClass extends cc.Component {
     tipsLabel: cc.Node = null;
 
 
+    onLoad() {
+        GlobalEvent.on(EventCfg.GMAECOUNTERSCHANGE, () => {
+            this.onShow();
+        }, this);
+    }
+
+    onDestroy() {
+        GlobalEvent.off(EventCfg.GMAECOUNTERSCHANGE);
+    }
 
     start() {
 
     }
 
-    onEnable() {
+    onShow() {
+        GlobalEvent.emit(EventCfg.LOADINGHIDE);
         if (GameData.GameCounters.length == 0) {
             this.tipsLabel.active = true;
             return
@@ -135,6 +147,11 @@ export default class NewClass extends cc.Component {
 
 
         }
+    }
+
+    onEnable() {
+        this.onShow();
+
     }
 
     // update (dt) {}

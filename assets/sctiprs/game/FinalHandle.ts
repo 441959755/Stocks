@@ -13,6 +13,7 @@ import GlobalHandle from "../global/GlobalHandle";
 import StrategyAIData from "./StrategyAIData";
 import DrawData from "./DrawData";
 import UpGameOpt from "../global/UpGameOpt";
+import EnterGameControl from "../global/EnterGameControl";
 
 const { ccclass, property } = cc._decorator;
 
@@ -366,34 +367,7 @@ export default class NewClass extends cc.Component {
             }
             data = GameCfg.enterGameCache;
             if (data) {
-                let cb = () => {
-                    GameCfg.huizhidatas = GameData.huizhidatas;
-                    GameCfg.allRate = 0;
-                    GameCfg.finalfund = 0;
-                    GameCfg.fill = [];
-                    GameCfg.blockHistoy = [];
-                    GameCfg.mark = [];
-                    GameCfg.notice = [];
-                    GameCfg.GAMEFUPAN = false;
-                    GameCfg.history.allRate = 0;
-
-                    GlobalEvent.emit(EventCfg.LEVELCHANGE);
-                    StrategyAIData.onClearData();
-                    cc.director.loadScene('game');
-                }
-
-                GlobalHandle.onCmdGameStartReq(() => {
-                    if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang) {
-                        GlobalHandle.onCmdGameStartQuoteQuery(data, cb)
-                    }
-                    else if (GameCfg.GameType == pb.GameType.QiHuo) {
-                        GlobalHandle.onCmdGameStartQuoteQueryQH(data, cb);
-                    }
-                    else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                        GlobalHandle.onCmdGameStartQuoteQuery(data, cb);
-                    }
-
-                })
+                EnterGameControl.onClearPreGameDataEnter(data);
             }
         }
         else if (name == 'lx_jsbt_xl') {

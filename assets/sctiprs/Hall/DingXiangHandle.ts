@@ -7,6 +7,7 @@ import { pb } from '../../protos/proto';
 
 import GameCfgText from '../GameText';
 import ComUtils from '../Utils/ComUtils';
+import EnterGameControl from '../global/EnterGameControl';
 
 const { ccclass, property } = cc._decorator;
 
@@ -43,7 +44,6 @@ export default class NewClass extends cc.Component {
 	@property(cc.Label)
 	tipsLabel2: cc.Label = null;
 
-	curCount = 0;
 
 	curState = 0;
 
@@ -137,32 +137,29 @@ export default class NewClass extends cc.Component {
 	onEnable() {
 		this.tipsLabel1.node.active = false;
 		this.tipsLabel2.node.active = false;
-		if (!GameData.properties[pb.GamePropertyId.UnlockDxxl] && !GameData.properties[pb.GamePropertyId.Vip]) {
+
+		let gameCount = EnterGameControl.onCurDXIsEnterGame();
+		if (gameCount.status == 0) {
+			this.curState = 0;
+		} else if (gameCount.status == 1) {
 			this.tipsLabel1.node.active = true;
 			this.tipsLabel2.node.active = true;
-			this.curCount = GameCfgText.gameTextCfg.dxxl.free - GameData.todayGameCount[pb.GameType.DingXiang];
-			if (this.curCount > 0) {
-				this.tipsLabel1.string = '今日剩余次数：' + this.curCount;
-				this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameTextCfg.dxxl.cost[0].v);
-				this.curState = 1;
-			}
-			else {
-				console.log(GameCfgText.gameTextCfg.dxxl.ad);
-				console.log(this.curCount);
-				this.curCount = GameCfgText.gameTextCfg.dxxl.ad + this.curCount;
-				if (this.curCount > 0) {
-					this.tipsLabel1.string = '今日看视频获取次数：' + this.curCount;
-					this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameTextCfg.dxxl.cost[0].v);
-					this.curState = 2;
-				}
-				else {
-					this.tipsLabel1.string = '今日次数已用完';
-					this.tipsLabel2.string = '开启VIP或解锁该功能取消次数限制';
-					this.curState = 3;
-				}
-			}
-		} else {
-			this.curState = 0;
+			this.tipsLabel1.string = '今日剩余次数：' + gameCount.count;
+			this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameTextCfg.dxxl.cost[0].v);
+			this.curState = 1;
+		}
+		else if (gameCount.status == 2) {
+			this.tipsLabel1.node.active = true;
+			this.tipsLabel2.node.active = true;
+			this.tipsLabel1.string = '今日看视频获取次数：' + gameCount.count;
+			this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameTextCfg.dxxl.cost[0].v);
+			this.curState = 2;
+		} else if (gameCount.status == 3) {
+			this.tipsLabel1.node.active = true;
+			this.tipsLabel2.node.active = true;
+			this.tipsLabel1.string = '今日次数已用完';
+			this.tipsLabel2.string = '开启VIP或解锁该功能取消次数限制';
+			this.curState = 3;
 		}
 
 		GlobalEvent.emit(EventCfg.LOADINGHIDE);

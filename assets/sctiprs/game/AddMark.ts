@@ -125,9 +125,7 @@ export default class NewClass extends cc.Component {
     }
 
 
-    //
     setMarkColor() {
-
 
         let info = StrategyAIData.onCompareReult();
         this.markNodes;
@@ -288,7 +286,7 @@ export default class NewClass extends cc.Component {
                 if (this.mark1Nodes[posInfo.index]) {
                     // this.mark1Nodes[posInfo.index].node.active = true;
                     this.mark1Nodes[posInfo.index].node.position = posInfo.highPos;
-                    this.mark1Nodes[posInfo.index].node.y += (this.markNodes[posInfo.index].node.height / 2 + 5)
+                    this.mark1Nodes[posInfo.index].node.y += (this.mark1Nodes[posInfo.index].node.height / 2 + 5)
                 }
             }
 
@@ -296,7 +294,7 @@ export default class NewClass extends cc.Component {
                 if (this.mark2Nodes[posInfo.index]) {
                     //   this.mark2Nodes[posInfo.index].node.active = true;
                     this.mark2Nodes[posInfo.index].node.position = posInfo.lowPos;
-                    this.mark2Nodes[posInfo.index].node.y -= (this.markNodes[posInfo.index].node.height / 2 + 5)
+                    this.mark2Nodes[posInfo.index].node.y -= (this.mark2Nodes[posInfo.index].node.height / 2 + 5)
                 }
 
             }

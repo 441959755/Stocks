@@ -7,6 +7,7 @@ import GameCfgText from "../GameText";
 import UpGameOpt from "../global/UpGameOpt";
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
+import LoadUtils from '../Utils/LoadUtils'
 
 const { ccclass, property } = cc._decorator;
 
@@ -38,8 +39,13 @@ export default class NewClass extends cc.Component {
     HasRisen: cc.Label = null;    //同期涨幅
 
 
+    @property(cc.Prefab)
+    EnterGameBox: cc.Prefab = null;
+
+    EnterGameLayer: cc.Node = null;
 
     onShow() {
+        GameCfg.RoomGameResult = this.gameResult;
         let gpData = GameCfg.data[0].data;
         this.codeLabel.string = '股票名称：' + GameCfg.data[0].name + '    ' + GameCfg.data[0].code;
         this.codeTimeLabel.string = '训练时段：' + ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
@@ -161,6 +167,10 @@ export default class NewClass extends cc.Component {
 
     }
 
+    onEnable() {
+        GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
+    }
+
     onResultAward(status, arr, Rate) {
         if (status == 1) {
 
@@ -233,8 +243,9 @@ export default class NewClass extends cc.Component {
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
 
-            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 1);
+            GlobalEvent.emit(EventCfg.FILLNODEISSHOW, false);
 
+            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 1);
             GameCfg.GAMEFUPAN = true;
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
             GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[0].ops.items)
@@ -245,8 +256,15 @@ export default class NewClass extends cc.Component {
         }
         //训练该股
         else if (name == 'pk_jsbt_xl') {
-
-
+            if (!this.EnterGameLayer) {
+                GlobalEvent.emit(EventCfg.LOADINGSHOW);
+                LoadUtils.loadRes('Prefabs/enterXLGame', (pre) => {
+                    this.EnterGameLayer = cc.instantiate(pre);
+                    this.node.addChild(this.EnterGameLayer);
+                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                })
+            }
+            this.EnterGameLayer.active = true;
         }
         //zj复盘
         else if (name == 'Btn_fupan_self') {
@@ -288,6 +306,9 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
+        GameCfg.RoomGameResult = null;
         UpGameOpt.clearGameOpt();
+        LoadUtils.releaseRes('Prefabs/enterXLGame');
     }
+
 }
