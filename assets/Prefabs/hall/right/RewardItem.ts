@@ -23,8 +23,57 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     lingQu: cc.Node = null;
 
+    @property(cc.Label)
+    goldLa: cc.Label = null;
+
+    @property(cc.Label)
+    diaLa: cc.Label = null;
+
+    @property(cc.Label)
+    vipLa: cc.Label = null;
+
+    @property(cc.Label)
+    expLa: cc.Label = null;
+
+    @property(cc.Label)
+    tickLa: cc.Label = null;
+
     onShow() {
         this.yiLingQu.active = this.LQFALG;
+
+        let arr = JSON.parse(this.itemData.properties).p;
+
+        this.itemNodes.children.forEach(el => {
+            el.active = false;
+        })
+
+        arr.forEach(el => {
+            for (let i = 0; i < el.length; i++) {
+                if (el[i].i == pb.GamePropertyId.Gold) {
+                    this.itemNodes.children[0].active = true;
+                    this.goldLa.string = el[i].v;
+                }
+                else if (el[i].i == pb.GamePropertyId.Diamond) {
+                    this.itemNodes.children[1].active = true;
+                    this.diaLa.string = el[i].v;
+                }
+                else if (el[i].i == pb.GamePropertyId.Vip) {
+                    this.itemNodes.children[2].active = true;
+                    this.vipLa.string = el[i].v;
+                }
+                else if (el[i].i == pb.GamePropertyId.Exp) {
+                    this.itemNodes.children[3].active = true;
+                    this.expLa.string = el[i].v;
+                }
+                else if (el[i].i == pb.GamePropertyId.Fame) {
+                    this.itemNodes.children[4].active = true;
+                    this.tickLa.string = el[i].v;
+                }
+            }
+
+        });
+
+        this.tipsLabel.string = this.itemData.memo;
     }
 
     start() {

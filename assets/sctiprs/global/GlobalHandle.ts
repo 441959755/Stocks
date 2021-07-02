@@ -38,7 +38,7 @@ export default class GlobalHandle {
             kstyle: info1.kstyle,
             code: info1.code,
             form: 0,
-            total: 100 + 1,
+            total: 100 + 6,
             to: info1.from,
         }
         socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(infoPre), info => {

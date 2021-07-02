@@ -8,6 +8,7 @@ import GameData from '../GameData';
 import StrategyAIData from './StrategyAIData';
 import PopupManager from '../Utils/PopupManager';
 import UpGameOpt from '../global/UpGameOpt';
+import LoadUtils from '../Utils/LoadUtils';
 
 const { ccclass, property } = cc._decorator;
 @ccclass
@@ -664,9 +665,13 @@ export default class NewClass extends cc.Component {
 			//pk
 			if (GameCfg.GameType == pb.GameType.JJ_PK) {
 				PopupManager.LoadPopupBox('tipsBox', '您的操作回合数已经用完，请等候其他用户操作结束');
-			}
 
-			GlobalEvent.emit(EventCfg.GAMEOVEER);
+				GameCfg.GAMEWAIT = true;
+
+			}
+			else {
+				GlobalEvent.emit(EventCfg.GAMEOVEER);
+			}
 
 			return;
 		}
@@ -978,13 +983,13 @@ export default class NewClass extends cc.Component {
 
 		//切换标签
 		else if (name == 'btn_cut') {
-
 			this.status++;
+
 			if (this.status > 4) {
 				this.status = 1;
 			}
 
-			GlobalEvent.on(EventCfg.CUTGAMEFUPAN, this.status);
+			GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, this.status);
 		}
 
 	}
@@ -1231,6 +1236,10 @@ export default class NewClass extends cc.Component {
 	}
 
 	onDestroy() {
+		if (GameCfg.GameType == pb.GameType.JJ_PK) {
+			LoadUtils.releaseRes('Prefabs/tipsBox');
+		}
+
 		GlobalEvent.off(EventCfg.GAMEOVEER);
 		GlobalEvent.off(EventCfg.GAMEFUPAN);
 		GlobalEvent.off('HIDEBOTTOMNODE');
@@ -1240,6 +1249,7 @@ export default class NewClass extends cc.Component {
 		this.cb1 = null;
 
 		GlobalEvent.off(EventCfg.CUTGAMEFUPAN);
+
 	}
 
 	//获取涨停板
@@ -1256,7 +1266,7 @@ export default class NewClass extends cc.Component {
 
 			let str = code.slice(0, 2);
 			let str1 = code.slice(0, 3);
-			if (this.gpData[index + 1]) {
+			if (this.gpData[index + 1] && this.gpData[index]) {
 				let rate = (this.gpData[index + 1].close - this.gpData[index].close) / this.gpData[index].close * 100;
 				if (str == '60' || str == '00') {
 					if (rate >= 9.95) {

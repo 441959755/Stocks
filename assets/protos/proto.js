@@ -1246,7 +1246,7 @@ $root.pb = (function () {
      * @property {number} ShuangMang=3 ShuangMang value
      * @property {number} DingXiang=4 DingXiang value
      * @property {number} FenShi=5 FenShi value
-     * @property {number} ZhiBiao=17 ZhiBiao value
+     * @property {number} ZhiBiao=10 ZhiBiao value
      * @property {number} TiaoJianDan=11 TiaoJianDan value
      * @property {number} QiHuo=6 QiHuo value
      * @property {number} TiaoZhan=16 TiaoZhan value
@@ -1254,8 +1254,8 @@ $root.pb = (function () {
      * @property {number} JJ_DuoKong=2 JJ_DuoKong value
      * @property {number} JJ_ChuangGuan=9 JJ_ChuangGuan value
      * @property {number} JJ_QiHuo=15 JJ_QiHuo value
-     * @property {number} MoNiChaoGu=10 MoNiChaoGu value
-     * @property {number} ChaoGuDaSai=12 ChaoGuDaSai value
+     * @property {number} MoNiChaoGu=12 MoNiChaoGu value
+     * @property {number} ChaoGuDaSai=13 ChaoGuDaSai value
      * @property {number} GeGuJingChai=7 GeGuJingChai value
      * @property {number} DaPanJingChai=8 DaPanJingChai value
      * @property {number} MaxGameType=30 MaxGameType value
@@ -1266,7 +1266,7 @@ $root.pb = (function () {
         values[valuesById[3] = "ShuangMang"] = 3;
         values[valuesById[4] = "DingXiang"] = 4;
         values[valuesById[5] = "FenShi"] = 5;
-        values[valuesById[17] = "ZhiBiao"] = 17;
+        values[valuesById[10] = "ZhiBiao"] = 10;
         values[valuesById[11] = "TiaoJianDan"] = 11;
         values[valuesById[6] = "QiHuo"] = 6;
         values[valuesById[16] = "TiaoZhan"] = 16;
@@ -1274,8 +1274,8 @@ $root.pb = (function () {
         values[valuesById[2] = "JJ_DuoKong"] = 2;
         values[valuesById[9] = "JJ_ChuangGuan"] = 9;
         values[valuesById[15] = "JJ_QiHuo"] = 15;
-        values[valuesById[10] = "MoNiChaoGu"] = 10;
-        values[valuesById[12] = "ChaoGuDaSai"] = 12;
+        values[valuesById[12] = "MoNiChaoGu"] = 12;
+        values[valuesById[13] = "ChaoGuDaSai"] = 13;
         values[valuesById[7] = "GeGuJingChai"] = 7;
         values[valuesById[8] = "DaPanJingChai"] = 8;
         values[valuesById[30] = "MaxGameType"] = 30;
@@ -2090,7 +2090,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
-                    case 17:
+                    case 10:
                     case 11:
                     case 6:
                     case 16:
@@ -2098,8 +2098,8 @@ $root.pb = (function () {
                     case 2:
                     case 9:
                     case 15:
-                    case 10:
                     case 12:
+                    case 13:
                     case 7:
                     case 8:
                     case 30:
@@ -2144,8 +2144,8 @@ $root.pb = (function () {
                     message.game = 5;
                     break;
                 case "ZhiBiao":
-                case 17:
-                    message.game = 17;
+                case 10:
+                    message.game = 10;
                     break;
                 case "TiaoJianDan":
                 case 11:
@@ -2176,12 +2176,12 @@ $root.pb = (function () {
                     message.game = 15;
                     break;
                 case "MoNiChaoGu":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "ChaoGuDaSai":
                 case 12:
                     message.game = 12;
+                    break;
+                case "ChaoGuDaSai":
+                case 13:
+                    message.game = 13;
                     break;
                 case "GeGuJingChai":
                 case 7:
@@ -7155,7 +7155,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
-                    case 17:
+                    case 10:
                     case 11:
                     case 6:
                     case 16:
@@ -7163,8 +7163,8 @@ $root.pb = (function () {
                     case 2:
                     case 9:
                     case 15:
-                    case 10:
                     case 12:
+                    case 13:
                     case 7:
                     case 8:
                     case 30:
@@ -7257,8 +7257,8 @@ $root.pb = (function () {
                     message.gType = 5;
                     break;
                 case "ZhiBiao":
-                case 17:
-                    message.gType = 17;
+                case 10:
+                    message.gType = 10;
                     break;
                 case "TiaoJianDan":
                 case 11:
@@ -7289,12 +7289,12 @@ $root.pb = (function () {
                     message.gType = 15;
                     break;
                 case "MoNiChaoGu":
-                case 10:
-                    message.gType = 10;
-                    break;
-                case "ChaoGuDaSai":
                 case 12:
                     message.gType = 12;
+                    break;
+                case "ChaoGuDaSai":
+                case 13:
+                    message.gType = 13;
                     break;
                 case "GeGuJingChai":
                 case 7:
@@ -9142,7 +9142,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
-                    case 17:
+                    case 10:
                     case 11:
                     case 6:
                     case 16:
@@ -9150,8 +9150,8 @@ $root.pb = (function () {
                     case 2:
                     case 9:
                     case 15:
-                    case 10:
                     case 12:
+                    case 13:
                     case 7:
                     case 8:
                     case 30:
@@ -9190,8 +9190,8 @@ $root.pb = (function () {
                     message.game = 5;
                     break;
                 case "ZhiBiao":
-                case 17:
-                    message.game = 17;
+                case 10:
+                    message.game = 10;
                     break;
                 case "TiaoJianDan":
                 case 11:
@@ -9222,12 +9222,12 @@ $root.pb = (function () {
                     message.game = 15;
                     break;
                 case "MoNiChaoGu":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "ChaoGuDaSai":
                 case 12:
                     message.game = 12;
+                    break;
+                case "ChaoGuDaSai":
+                case 13:
+                    message.game = 13;
                     break;
                 case "GeGuJingChai":
                 case 7:
@@ -10300,7 +10300,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
-                    case 17:
+                    case 10:
                     case 11:
                     case 6:
                     case 16:
@@ -10308,8 +10308,8 @@ $root.pb = (function () {
                     case 2:
                     case 9:
                     case 15:
-                    case 10:
                     case 12:
+                    case 13:
                     case 7:
                     case 8:
                     case 30:
@@ -10348,8 +10348,8 @@ $root.pb = (function () {
                     message.game = 5;
                     break;
                 case "ZhiBiao":
-                case 17:
-                    message.game = 17;
+                case 10:
+                    message.game = 10;
                     break;
                 case "TiaoJianDan":
                 case 11:
@@ -10380,12 +10380,12 @@ $root.pb = (function () {
                     message.game = 15;
                     break;
                 case "MoNiChaoGu":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "ChaoGuDaSai":
                 case 12:
                     message.game = 12;
+                    break;
+                case "ChaoGuDaSai":
+                case 13:
+                    message.game = 13;
                     break;
                 case "GeGuJingChai":
                 case 7:
@@ -10868,7 +10868,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
-                    case 17:
+                    case 10:
                     case 11:
                     case 6:
                     case 16:
@@ -10876,8 +10876,8 @@ $root.pb = (function () {
                     case 2:
                     case 9:
                     case 15:
-                    case 10:
                     case 12:
+                    case 13:
                     case 7:
                     case 8:
                     case 30:
@@ -10930,8 +10930,8 @@ $root.pb = (function () {
                     message.gType = 5;
                     break;
                 case "ZhiBiao":
-                case 17:
-                    message.gType = 17;
+                case 10:
+                    message.gType = 10;
                     break;
                 case "TiaoJianDan":
                 case 11:
@@ -10962,12 +10962,12 @@ $root.pb = (function () {
                     message.gType = 15;
                     break;
                 case "MoNiChaoGu":
-                case 10:
-                    message.gType = 10;
-                    break;
-                case "ChaoGuDaSai":
                 case 12:
                     message.gType = 12;
+                    break;
+                case "ChaoGuDaSai":
+                case 13:
+                    message.gType = 13;
                     break;
                 case "GeGuJingChai":
                 case 7:
@@ -11641,7 +11641,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
-                    case 17:
+                    case 10:
                     case 11:
                     case 6:
                     case 16:
@@ -11649,8 +11649,8 @@ $root.pb = (function () {
                     case 2:
                     case 9:
                     case 15:
-                    case 10:
                     case 12:
+                    case 13:
                     case 7:
                     case 8:
                     case 30:
@@ -11689,8 +11689,8 @@ $root.pb = (function () {
                     message.gType = 5;
                     break;
                 case "ZhiBiao":
-                case 17:
-                    message.gType = 17;
+                case 10:
+                    message.gType = 10;
                     break;
                 case "TiaoJianDan":
                 case 11:
@@ -11721,12 +11721,12 @@ $root.pb = (function () {
                     message.gType = 15;
                     break;
                 case "MoNiChaoGu":
-                case 10:
-                    message.gType = 10;
-                    break;
-                case "ChaoGuDaSai":
                 case 12:
                     message.gType = 12;
+                    break;
+                case "ChaoGuDaSai":
+                case 13:
+                    message.gType = 13;
                     break;
                 case "GeGuJingChai":
                 case 7:
@@ -12456,7 +12456,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
-                    case 17:
+                    case 10:
                     case 11:
                     case 6:
                     case 16:
@@ -12464,8 +12464,8 @@ $root.pb = (function () {
                     case 2:
                     case 9:
                     case 15:
-                    case 10:
                     case 12:
+                    case 13:
                     case 7:
                     case 8:
                     case 30:
@@ -12523,8 +12523,8 @@ $root.pb = (function () {
                     message.game = 5;
                     break;
                 case "ZhiBiao":
-                case 17:
-                    message.game = 17;
+                case 10:
+                    message.game = 10;
                     break;
                 case "TiaoJianDan":
                 case 11:
@@ -12555,12 +12555,12 @@ $root.pb = (function () {
                     message.game = 15;
                     break;
                 case "MoNiChaoGu":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "ChaoGuDaSai":
                 case 12:
                     message.game = 12;
+                    break;
+                case "ChaoGuDaSai":
+                case 13:
+                    message.game = 13;
                     break;
                 case "GeGuJingChai":
                 case 7:
@@ -13085,7 +13085,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
-                    case 17:
+                    case 10:
                     case 11:
                     case 6:
                     case 16:
@@ -13093,8 +13093,8 @@ $root.pb = (function () {
                     case 2:
                     case 9:
                     case 15:
-                    case 10:
                     case 12:
+                    case 13:
                     case 7:
                     case 8:
                     case 30:
@@ -13151,8 +13151,8 @@ $root.pb = (function () {
                     message.game = 5;
                     break;
                 case "ZhiBiao":
-                case 17:
-                    message.game = 17;
+                case 10:
+                    message.game = 10;
                     break;
                 case "TiaoJianDan":
                 case 11:
@@ -13183,12 +13183,12 @@ $root.pb = (function () {
                     message.game = 15;
                     break;
                 case "MoNiChaoGu":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "ChaoGuDaSai":
                 case 12:
                     message.game = 12;
+                    break;
+                case "ChaoGuDaSai":
+                case 13:
+                    message.game = 13;
                     break;
                 case "GeGuJingChai":
                 case 7:
@@ -14081,7 +14081,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
-                    case 17:
+                    case 10:
                     case 11:
                     case 6:
                     case 16:
@@ -14089,8 +14089,8 @@ $root.pb = (function () {
                     case 2:
                     case 9:
                     case 15:
-                    case 10:
                     case 12:
+                    case 13:
                     case 7:
                     case 8:
                     case 30:
@@ -14136,8 +14136,8 @@ $root.pb = (function () {
                     message.game = 5;
                     break;
                 case "ZhiBiao":
-                case 17:
-                    message.game = 17;
+                case 10:
+                    message.game = 10;
                     break;
                 case "TiaoJianDan":
                 case 11:
@@ -14168,12 +14168,12 @@ $root.pb = (function () {
                     message.game = 15;
                     break;
                 case "MoNiChaoGu":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "ChaoGuDaSai":
                 case 12:
                     message.game = 12;
+                    break;
+                case "ChaoGuDaSai":
+                case 13:
+                    message.game = 13;
                     break;
                 case "GeGuJingChai":
                 case 7:
@@ -14406,7 +14406,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
-                    case 17:
+                    case 10:
                     case 11:
                     case 6:
                     case 16:
@@ -14414,8 +14414,8 @@ $root.pb = (function () {
                     case 2:
                     case 9:
                     case 15:
-                    case 10:
                     case 12:
+                    case 13:
                     case 7:
                     case 8:
                     case 30:
@@ -14459,8 +14459,8 @@ $root.pb = (function () {
                     message.game = 5;
                     break;
                 case "ZhiBiao":
-                case 17:
-                    message.game = 17;
+                case 10:
+                    message.game = 10;
                     break;
                 case "TiaoJianDan":
                 case 11:
@@ -14491,12 +14491,12 @@ $root.pb = (function () {
                     message.game = 15;
                     break;
                 case "MoNiChaoGu":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "ChaoGuDaSai":
                 case 12:
                     message.game = 12;
+                    break;
+                case "ChaoGuDaSai":
+                case 13:
+                    message.game = 13;
                     break;
                 case "GeGuJingChai":
                 case 7:
@@ -15628,7 +15628,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
-                    case 17:
+                    case 10:
                     case 11:
                     case 6:
                     case 16:
@@ -15636,8 +15636,8 @@ $root.pb = (function () {
                     case 2:
                     case 9:
                     case 15:
-                    case 10:
                     case 12:
+                    case 13:
                     case 7:
                     case 8:
                     case 30:
@@ -15681,8 +15681,8 @@ $root.pb = (function () {
                     message.game = 5;
                     break;
                 case "ZhiBiao":
-                case 17:
-                    message.game = 17;
+                case 10:
+                    message.game = 10;
                     break;
                 case "TiaoJianDan":
                 case 11:
@@ -15713,12 +15713,12 @@ $root.pb = (function () {
                     message.game = 15;
                     break;
                 case "MoNiChaoGu":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "ChaoGuDaSai":
                 case 12:
                     message.game = 12;
+                    break;
+                case "ChaoGuDaSai":
+                case 13:
+                    message.game = 13;
                     break;
                 case "GeGuJingChai":
                 case 7:
@@ -16489,7 +16489,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
-                    case 17:
+                    case 10:
                     case 11:
                     case 6:
                     case 16:
@@ -16497,8 +16497,8 @@ $root.pb = (function () {
                     case 2:
                     case 9:
                     case 15:
-                    case 10:
                     case 12:
+                    case 13:
                     case 7:
                     case 8:
                     case 30:
@@ -16598,8 +16598,8 @@ $root.pb = (function () {
                     message.game = 5;
                     break;
                 case "ZhiBiao":
-                case 17:
-                    message.game = 17;
+                case 10:
+                    message.game = 10;
                     break;
                 case "TiaoJianDan":
                 case 11:
@@ -16630,12 +16630,12 @@ $root.pb = (function () {
                     message.game = 15;
                     break;
                 case "MoNiChaoGu":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "ChaoGuDaSai":
                 case 12:
                     message.game = 12;
+                    break;
+                case "ChaoGuDaSai":
+                case 13:
+                    message.game = 13;
                     break;
                 case "GeGuJingChai":
                 case 7:
@@ -39827,7 +39827,7 @@ $root.pb = (function () {
                     case 3:
                     case 4:
                     case 5:
-                    case 17:
+                    case 10:
                     case 11:
                     case 6:
                     case 16:
@@ -39835,8 +39835,8 @@ $root.pb = (function () {
                     case 2:
                     case 9:
                     case 15:
-                    case 10:
                     case 12:
+                    case 13:
                     case 7:
                     case 8:
                     case 30:
@@ -39900,8 +39900,8 @@ $root.pb = (function () {
                     message.game = 5;
                     break;
                 case "ZhiBiao":
-                case 17:
-                    message.game = 17;
+                case 10:
+                    message.game = 10;
                     break;
                 case "TiaoJianDan":
                 case 11:
@@ -39932,12 +39932,12 @@ $root.pb = (function () {
                     message.game = 15;
                     break;
                 case "MoNiChaoGu":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "ChaoGuDaSai":
                 case 12:
                     message.game = 12;
+                    break;
+                case "ChaoGuDaSai":
+                case 13:
+                    message.game = 13;
                     break;
                 case "GeGuJingChai":
                 case 7:

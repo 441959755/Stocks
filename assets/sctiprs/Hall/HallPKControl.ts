@@ -89,10 +89,10 @@ export default class NewClass extends cc.Component {
             // }
         });
 
-        if (info.game == pb.GameType.JJ_PK) {
-            GameCfg.GameSet = GameData.JJPKSet;
-            GameCfg.GameType = pb.GameType.JJ_PK;
-        }
+        // if (info.game == pb.GameType.JJ_PK) {
+        GameCfg.GameSet = GameData.JJPKSet;
+        GameCfg.GameType = pb.GameType.JJ_PK;
+        //    }
 
         if (info.players[1].gd) {
             GameData.Players[1] = info.players[1].gd;

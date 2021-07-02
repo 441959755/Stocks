@@ -161,14 +161,28 @@ export default class NewClass extends cc.Component {
         else if (name == 'backBtn' || name == 'closeBtn' || name == 'sys_back') {
             if (!GameCfg.GAMEFUPAN) {
                 if (GameCfg.GameType == pb.GameType.JJ_PK) {
-                    PopupManager.LoadPopupBox('tipsBox', '您正在比赛中，现在退出会被认定为逃跑用户，请确认在退出', () => {
-                        GlobalHandle.onReqRoomLeave();
-                        GameCfg.huizhidatas = 0;
-                        GameCfg.allRate = 0;
-                        GameCfg.finalfund = 0;
-                        GameCfg.GAMEFUPAN = false;
-                        cc.director.loadScene('hall');
-                    })
+
+                    if (GameCfg.GAMEWAIT) {
+                        PopupManager.LoadPopupBox('tipsBox', '您的成绩已出，现在退出无任何影响。稍后记得在奖励中心领取奖励。', () => {
+                            GlobalHandle.onReqRoomLeave();
+                            GameCfg.huizhidatas = 0;
+                            GameCfg.allRate = 0;
+                            GameCfg.finalfund = 0;
+                            GameCfg.GAMEFUPAN = false;
+                            cc.director.loadScene('hall');
+                        })
+                    }
+                    else {
+                        PopupManager.LoadPopupBox('tipsBox', '您正在比赛中，现在退出会被认定为逃跑用户，请确认在退出', () => {
+                            GlobalHandle.onReqRoomLeave();
+                            GameCfg.huizhidatas = 0;
+                            GameCfg.allRate = 0;
+                            GameCfg.finalfund = 0;
+                            GameCfg.GAMEFUPAN = false;
+                            cc.director.loadScene('hall');
+                        })
+                    }
+
                 }
                 else {
                     PopupManager.LoadPopupBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {

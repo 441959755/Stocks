@@ -75,7 +75,7 @@ enum MessageId {
 	Sync_S2C_GameProperty = 1002;			// 同步玩家游戏属性：GameProperties
 	Sync_S2C_GameCounter = 1004;			// 同步输赢计数器：GameCounters
 	Sync_S2C_GameSmxl = 1006;				// 同步双盲训练状态：SmxlState
-	Sync_S2C_GameCg = 1008;					// 同步闯关大赛状态：CgState
+	Sync_S2C_GameCg = 1008;					// 同步闯关赛状态：CgState
 	Sync_S2C_GameMncg = 1010;				// 同步模拟炒股状态：MncgState
 	Sync_S2C_GameCgds = 1012;				// 同步炒股大赛状态：CgdsState
 	Sync_S2C_Broadcast = 1014;				// 系统广播：Notice

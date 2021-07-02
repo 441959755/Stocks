@@ -69,7 +69,7 @@ enum GameType {
 	ShuangMang = 3;		// 双盲训练
 	DingXiang = 4;		// 定向训练
 	FenShi = 5;			// 分时训练
-	ZhiBiao	 = 17;		// 指标训练
+	ZhiBiao	 = 10;		// 指标训练
 	TiaoJianDan = 11;	// 条件单训练
 	QiHuo = 6;			// 期货训练
 	TiaoZhan = 16;		// 挑战（用其他玩家的训练记录进行游戏）
@@ -79,8 +79,8 @@ enum GameType {
 	JJ_ChuangGuan = 9;	// 闯关赛
 	JJ_QiHuo = 15;		// 期货大战
 
-	MoNiChaoGu = 10;	// 模拟炒股
-	ChaoGuDaSai = 12;	// 炒股大赛
+	MoNiChaoGu = 12;	// 模拟炒股
+	ChaoGuDaSai = 13;	// 炒股大赛
 	GeGuJingChai = 7;	// 个股竞猜
 	DaPanJingChai = 8;	// 大盘竞猜
 
@@ -189,7 +189,6 @@ message BackbagGrid {
 message Backbag {
 	repeated BackbagGrid grids = 1;	// 背包格子
 }
-
 // 游戏输赢计数器
 message GameCounter {
 	GameType game = 1;	// 游戏类型ID

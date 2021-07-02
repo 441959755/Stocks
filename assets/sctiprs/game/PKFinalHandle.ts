@@ -242,7 +242,6 @@ export default class NewClass extends cc.Component {
             GameCfg.fill = [];
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
-
             GlobalEvent.emit(EventCfg.FILLNODEISSHOW, false);
 
             GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 1);
@@ -252,6 +251,7 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 2);
             GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[1].ops.items)
+
             this.node.active = false;
         }
         //训练该股

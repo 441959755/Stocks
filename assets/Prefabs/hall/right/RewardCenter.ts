@@ -13,24 +13,30 @@ export default class NewClass extends cc.Component {
 
     rewardData = null;
 
+    onLoad() {
+        this.content.removeAllChildren();
+    }
+
 
     onShow() {
         if (this.rewardData.length == 0) {
             return;
         } else {
-            console.log('RewardCenter rewardData: ' + this.rewardData);
-            this.rewardData.forEach((el) => {
-                let node = cc.instantiate(this.item);
-                this.content.addChild(node);
-                let handle = node.getComponent('RewardItem');
-                if (handle) {
-                    handle.itemData = el;
-                    handle.onShow();
-                }
-                else {
-                    console.log('RewardCenter onShow handle is null');
-                }
-            });
+            if (this.content.childrenCount == 0) {
+                console.log('RewardCenter rewardData: ' + this.rewardData);
+                this.rewardData.forEach((el) => {
+                    let node = cc.instantiate(this.item);
+                    this.content.addChild(node);
+                    let handle = node.getComponent('RewardItem');
+                    if (handle) {
+                        handle.itemData = el;
+                        handle.onShow();
+                    }
+                    else {
+                        console.log('RewardCenter onShow handle is null');
+                    }
+                });
+            }
         }
     }
 

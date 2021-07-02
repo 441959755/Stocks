@@ -110,10 +110,12 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'cgs_fupan') {
-
+            GameCfg.GameSet = GameData.JJPKSet;
             GameCfg.GameSet = this.gameSet1;
             let ts = this.itemData.ts;
             GameCfg.GAMEFUPAN = true;
+            GameCfg.GameType = this.itemData.kType;
+
             GameCfg.huizhidatas = this.itemData.kStop + 1;
             GameData.huizhidatas = this.itemData.kStartup + 1;
             GlobalHandle.GetGameOperations(ts, () => {
@@ -131,12 +133,13 @@ export default class NewClass extends cc.Component {
                 }
             }
 
-            GameCfg.GameSet = GameData.JJPKSet;
+            GameCfg.GameType = pb.GameType.DingXiang;
+            GameCfg.GameSet = GameData.DXSet;
             GameCfg.GAMEFUPAN = false;
             GameCfg.huizhidatas = this.itemData.kStartup + 1;
             GameData.huizhidatas = this.itemData.kStartup + 1;
 
-            GameCfg.GameSet.year = this.itemData.kFrom.slice(0, 4);
+            GameCfg.GameSet.year = (this.itemData.kFrom + '').slice(0, 4);
 
             GameCfg.GameSet.search = this.itemData.quotesCode;
 
@@ -174,7 +177,7 @@ export default class NewClass extends cc.Component {
 
         GameCfg.enterGameCache = cache;
 
-        GameCfg.GameType = this.itemData.kType;
+        // GameCfg.GameType = this.itemData.kType;
 
         if (GameCfg.GameType == pb.GameType.QiHuo) {
             GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, cache);

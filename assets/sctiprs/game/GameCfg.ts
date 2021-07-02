@@ -82,6 +82,8 @@ export default {
 
     fill: [],         //bg填充颜色
 
+    GAMEWAIT: false,  //游戏走完，等待游戏结果
+
     GAMEFUPAN: false,  //游戏复盘
 
     eachHand: 0,    //每手
@@ -97,6 +99,8 @@ export default {
     RoomGameData: null,
 
     RoomGameResult: null,  //游戲結果
+
+
 
 
 }

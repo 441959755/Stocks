@@ -3,6 +3,7 @@ import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
 import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
+import PopupManager from "../Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -42,6 +43,7 @@ export default class NewClass extends cc.Component {
                 }, 80)
             }
             else if (GameCfg.GameType == pb.GameType.JJ_PK) {
+                PopupManager.delPopupNode();
                 this.pkFinalLayer.active = true;
                 if (message) {
                     let handle = this.pkFinalLayer.getComponent('PKFinalHandle');
@@ -67,9 +69,12 @@ export default class NewClass extends cc.Component {
     }
 
     protected onDestroy() {
+
+        GameCfg.GAMEWAIT = false;
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
         ComUtils.onDestory();
+
     }
 
 

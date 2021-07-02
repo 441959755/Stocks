@@ -289,7 +289,6 @@ export default class NewClass extends cc.Component {
 		}
 
 		if (GameCfg.RoomGameData) {
-			//this.onEnterRoomGameData(GameCfg.RoomGameData);
 			GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameCfg.RoomGameData);
 		}
 	}
@@ -399,10 +398,11 @@ export default class NewClass extends cc.Component {
 
 		if (socket) {
 			let data1 = {
+				uid: GameData.userID,
 				g_type: GameCfg.GameType,
-				from: data.getTime(),
-				to: new Date().getTime(),
-				pageSize: 100
+				//	from: parseInt(data.getTime() / 1000 + ''),
+				to: parseInt(new Date().getTime() / 1000 + ''),
+				pageSize: 100,
 			};
 
 			socket.send(pb.MessageId.Req_Game_QueryGameResult, PB.onCmdQueryGameResultConvertToBuff(data1), info => {
@@ -411,7 +411,7 @@ export default class NewClass extends cc.Component {
 		}
 	}
 
-	//我也不知道为什么要我这样写
+	//
 	onCmdQHGameStart(data) {
 
 		GameCfg.data[0].data = [];

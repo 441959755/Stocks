@@ -187,6 +187,7 @@ export default class NewClass extends cc.Component {
     }
 
     onMarkRangeShowOrHide() {
+
         this.markNodes.forEach((el, i) => {
             if (el && el.node) {
                 if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
@@ -211,6 +212,41 @@ export default class NewClass extends cc.Component {
                 }
             }
         })
+
+        if (this.status == 1) {
+            this.mark1Nodes.forEach((el, i) => {
+                if (el && el.node) {
+                    if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
+                        el.node.active = false;
+                    }
+                }
+            })
+        }
+        else if (this.status == 2) {
+            this.mark2Nodes.forEach((el, i) => {
+                if (el && el.node) {
+                    if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
+                        el.node.active = false;
+                    }
+                }
+            })
+        } else if (this.status == 3) {
+            this.mark1Nodes.forEach((el, i) => {
+                if (el && el.node) {
+                    if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
+                        el.node.active = false;
+                    }
+                }
+            })
+            this.mark2Nodes.forEach((el, i) => {
+                if (el && el.node) {
+                    if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
+                        el.node.active = false;
+                    }
+                }
+            })
+        }
+
     }
 
 
@@ -282,23 +318,25 @@ export default class NewClass extends cc.Component {
 
         //pk 切换
         if (this.status) {
-            if (this.status == 1 || this.status == 3) {
-                if (this.mark1Nodes[posInfo.index]) {
-                    // this.mark1Nodes[posInfo.index].node.active = true;
-                    this.mark1Nodes[posInfo.index].node.position = posInfo.highPos;
-                    this.mark1Nodes[posInfo.index].node.y += (this.mark1Nodes[posInfo.index].node.height / 2 + 5)
+
+            if (this.mark1Nodes[posInfo.index]) {
+                if (this.status == 1 || this.status == 3) {
+                    this.mark1Nodes[posInfo.index].node.active = true;
                 }
+                this.mark1Nodes[posInfo.index].node.position = posInfo.highPos;
+                this.mark1Nodes[posInfo.index].node.y += (this.mark1Nodes[posInfo.index].node.height / 2 + 5)
             }
 
-            if (this.status == 2 || this.status == 3) {
-                if (this.mark2Nodes[posInfo.index]) {
-                    //   this.mark2Nodes[posInfo.index].node.active = true;
-                    this.mark2Nodes[posInfo.index].node.position = posInfo.lowPos;
-                    this.mark2Nodes[posInfo.index].node.y -= (this.mark2Nodes[posInfo.index].node.height / 2 + 5)
+            if (this.mark2Nodes[posInfo.index]) {
+                if (this.status == 2 || this.status == 3) {
+                    this.mark2Nodes[posInfo.index].node.active = true;
                 }
-
+                this.mark2Nodes[posInfo.index].node.position = posInfo.lowPos;
+                this.mark2Nodes[posInfo.index].node.y -= (this.mark2Nodes[posInfo.index].node.height / 2 + 5)
             }
+
         }
+
     }
 
     //添加标签
@@ -306,7 +344,6 @@ export default class NewClass extends cc.Component {
     //2买入
     //3卖出
     onAddMard(info) {
-
         let node, inde;
         inde = info.index - 1;
         if (this.status == 1) {
@@ -318,7 +355,7 @@ export default class NewClass extends cc.Component {
                 node = cc.instantiate(this.Zs);
             }
             node.children[0].active = false;
-            node.children[1].active = false;
+            node.children[2].active = false;
             this.mark1Nodes[inde] = {
                 node: node,
                 type: info.type,
@@ -374,8 +411,7 @@ export default class NewClass extends cc.Component {
                     node: node,
                     type: info.type,
                 }
-                node.active = false;
-                node.x = -9999;
+
             }
 
             else if (info.type == 12 || info.type == 13) {
@@ -395,9 +431,7 @@ export default class NewClass extends cc.Component {
                     }
 
                     this.AIMarkNodes[this.currPint.index].node.scale = this.currScale;
-                } else {
-                    node.active = false;
-                    node.x = -9999;
+                    return;
                 }
 
             } else {
@@ -405,11 +439,10 @@ export default class NewClass extends cc.Component {
                     node: node,
                     type: info.type,
                 };
-
-                node.active = false;
-                node.x = -9999;
             }
         }
+        node.active = false;
+        node.x = -9999;
 
     }
 

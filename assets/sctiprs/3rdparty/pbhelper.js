@@ -125,6 +125,7 @@ PBHelper.prototype = {
 
     //查询游戏结果
     onCmdQueryGameResultConvertToBuff(data) {
+        console.log(JSON.stringify(data));
         let CmdQueryGameResult = pb.CmdQueryGameResult;
         let message = CmdQueryGameResult.create(data)
 
@@ -408,7 +409,8 @@ PBHelper.prototype = {
             result = RoomGameData.decode(data1.result);
             console.log('游戏结果' + JSON.stringify(result));
 
-            GlobalEvent.emit(EventCfg.GAMEOVEER, result);
+            setTimeout(() => { GlobalEvent.emit(EventCfg.GAMEOVEER, result); }, 1000);
+
         }
 
         //离开房间应答

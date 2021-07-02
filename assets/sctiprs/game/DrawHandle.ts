@@ -866,7 +866,7 @@ export default class NewClass extends cc.Component {
             let data = GameCfg.data[0].data;
             let str = code.slice(0, 2);
             let str1 = code.slice(0, 3);
-            if (data[index - 1]) {
+            if (data[index - 1] && data[index]) {
                 let rate = (data[index].close - data[index - 1].close) / data[index - 1].close * 100;
                 if (str == '60' || str == '00') {
                     if (rate >= 9.95) {
