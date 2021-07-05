@@ -88,9 +88,9 @@ export default class NewClass extends cc.Component {
 
             name.string = '昵称：' + GameCfg.RoomGameData.players[status - 1].gd.nickname;
 
-            let r = GameCfg.RoomGameData.players[status - 1].gd.userProfitRate;
+            let r = GameCfg.RoomGameData.players[status - 1].result.userProfitRate;
 
-            let rank = GameCfg.RoomGameData.players[status - 1].gd.rank;
+            let rank = GameCfg.RoomGameData.players[status - 1].result.rank;
 
             if (r > 0) {
                 rate.node.color = cc.Color.RED;

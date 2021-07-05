@@ -307,4 +307,6 @@ export default class ComUtils {
 		return (parseInt(num * 100 + '') / 100).toFixed(2);
 	}
 
+	
+
 }

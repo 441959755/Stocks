@@ -121,4 +121,6 @@ export default {
 	GAMEFUPANOPT: 'GAMEFUPANOPT',    //复盘操作
 
 	PKFUPAN: 'PKFUPAN',    //pk复盘
+
+	OPENOTHERINFOBOX:'OPENOTHERINFOBOX',//其他玩家信息框
 };

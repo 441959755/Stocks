@@ -5,6 +5,7 @@ import GameCfg from "../game/GameCfg";
 import GameData from "../GameData";
 import { pb } from "../../protos/proto";
 
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -30,20 +31,21 @@ export default class NewClass extends cc.Component {
 
     // 同步房间游戏状态
     onRoomGameStatus(data?) {
-
         setTimeout(() => {
             cc.director.loadScene('game');
         }, 500)
-
     }
 
 
     onOtherEnterRoomGameData(info) {
 
         GameData.Players[1] = info.player;
+
         GlobalEvent.emit('SHOWOTHERPLAYER');
 
     }
+
+
 
     onSelfEnterRoomGameData(info) {
         let code = info.code + '';
@@ -99,9 +101,8 @@ export default class NewClass extends cc.Component {
         //    }
 
         if (info.players[1].gd) {
-            GameData.Players[1] = info.players[1].gd;
-            // GlobalEvent.emit('SHOWOTHERPLAYER');
-
+            //    GameData.Players[1] = info.players[1].gd;
+            GlobalEvent.emit('SHOWOTHERPLAYER');
             this.onRoomGameStatus();
         }
 

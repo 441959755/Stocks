@@ -305,6 +305,9 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.PKFUPAN, 2);
         }
+        else if (name == 'otheruserInfo') {
+            GlobalEvent.emit(EventCfg.OPENOTHERINFOBOX);
+        }
     }
 
     onQuitGame() {

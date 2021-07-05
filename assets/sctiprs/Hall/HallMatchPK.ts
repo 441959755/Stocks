@@ -5,6 +5,7 @@ import GameCfgText from "../GameText";
 import GlobalHandle from "../global/GlobalHandle";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
+import LoadUtils from "../Utils/LoadUtils";
 
 const { ccclass, property } = cc._decorator;
 
@@ -34,10 +35,11 @@ export default class NewClass extends cc.Component {
     }
 
     onShowOtherPlayer() {
+        this.onLoadHead();
         this.callBack && (clearInterval(this.callBack));
         this.callBack = null;
 
-        let head = this.player2.getChildByName('head');
+
         let name = this.player2.getChildByName('name');
         let lv = this.player2.getChildByName('lv');
         let exp = this.player2.getChildByName('exp');
@@ -46,9 +48,10 @@ export default class NewClass extends cc.Component {
         lv.active = true;
         exp.active = true;
 
-        //   head.getComponent(cc.Sprite).spriteFrame = GameData.Players[1].gd.icon;
-        let index = parseInt(Math.random() * this.tx.length + '');
-        head.getComponent(cc.Sprite).spriteFrame = this.tx[index];
+
+
+        //  let index = parseInt(Math.random() * this.tx.length + '');
+        //   head.getComponent(cc.Sprite).spriteFrame = this.tx[index];
         name.getComponent(cc.Label).string = GameData.Players[1].uid;
 
         lv.getComponent(cc.Label).string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1) + '';
@@ -63,6 +66,17 @@ export default class NewClass extends cc.Component {
 
     onEnterGameAnim() {
         this.enterGameAnim.play();
+    }
+
+    onLoadHead() {
+        let url = 'http://login.cgdr168.com/icon/' + GameData.Players[1].icon + '.png';
+
+        LoadUtils.load(url, (res) => {
+            let texture = new cc.SpriteFrame(res);
+            GameData.Players[1].icon = texture;
+            let head = this.player2.getChildByName('head');
+            head.getComponent(cc.Sprite).spriteFrame = GameData.Players[1].icon;
+        })
     }
 
 

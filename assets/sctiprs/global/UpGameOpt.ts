@@ -24,6 +24,14 @@ export default class UpGameOpt {
 
     //添加操作
     public static addOpt(el) {
+        if (GameCfg.GAMEFRTD && GameCfg.RoomGameData.players[0].ops.items.length > 0) {
+
+            let le = GameCfg.RoomGameData.players[0].ops.items.length - 1;
+
+            if (el.kOffset <= GameCfg.RoomGameData.players[0].ops.items[le].kOffset) {
+                return;
+            }
+        }
 
         if (GameCfg.GameType == pb.GameType.JJ_PK) {
             el.kOffset -= 1;

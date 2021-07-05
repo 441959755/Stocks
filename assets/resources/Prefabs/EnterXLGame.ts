@@ -66,7 +66,7 @@ export default class NewClass extends cc.Component {
 
                 GameCfg.GameSet = GameData.DXSet;
 
-                GameCfg.GameSet.year = data.from.slice(0, 4);
+                GameCfg.GameSet.year = (data.from + '').slice(0, 4);
 
                 GameCfg.GameSet.search = data.code;
 

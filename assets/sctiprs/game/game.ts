@@ -35,18 +35,22 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     startGameNode: cc.Node = null;
 
+    @property(cc.Node)
+    otherPlayerInfo: cc.Node = null;
+
     onLoad() {
         ComUtils.onLoadNode();
         ComUtils.onEvent();
         //游戏结算
         GlobalEvent.on(EventCfg.GAMEOVEER, (message) => {
+
             if (GameCfg.GameType != pb.GameType.JJ_PK) {
                 setTimeout(() => {
                     this.finalLayer.active = true;
                 }, 80)
             }
             else if (GameCfg.GameType == pb.GameType.JJ_PK) {
-                PopupManager.delPopupNode();
+
                 this.pkFinalLayer.active = true;
                 if (message) {
                     let handle = this.pkFinalLayer.getComponent('PKFinalHandle');
@@ -69,6 +73,10 @@ export default class NewClass extends cc.Component {
         this.initData();
 
         this.setColor();
+
+        GlobalEvent.on(EventCfg.OPENOTHERINFOBOX, () => {
+            this.otherPlayerInfo.active = true;
+        }, this);
     }
 
     start() {
@@ -87,6 +95,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
         ComUtils.onDestory();
+        GlobalEvent.off(EventCfg.OPENOTHERINFOBOX);
+        PopupManager.delPopupNode();
 
     }
 

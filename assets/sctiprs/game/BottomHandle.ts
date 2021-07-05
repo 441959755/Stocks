@@ -282,13 +282,16 @@ export default class NewClass extends cc.Component {
 			this.curMrCount.push(count);
 			this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
 
-			//if (!GameCfg.GAMEFUPAN) {
-			if (this.keMrCount < 100) {
-				this.mrBtn.interactable = false;
-				this.mrBtn.enableAutoGrayEffect = true;
+			if (!GameCfg.GAMEFRTD) {
+				if (this.keMrCount < 100) {
+					this.mrBtn.interactable = false;
+					this.mrBtn.enableAutoGrayEffect = true;
+				}
+				this.mcBtn.interactable = true;
+				this.mcBtn.enableAutoGrayEffect = false;
 			}
-			this.mcBtn.interactable = true;
-			this.mcBtn.enableAutoGrayEffect = false;
+
+
 			if (this.roundNumber > 0) {
 				let item = {
 					opId: pb.GameOperationId.Ask,
@@ -311,14 +314,16 @@ export default class NewClass extends cc.Component {
 
 			this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
 			this.curMcCount = mc;
-
-			//	if (!GameCfg.GAMEFUPAN) {
-			if (this.keMcCount <= 0) {
-				this.mcBtn.interactable = false;
-				this.mcBtn.enableAutoGrayEffect = true;
+			if (!GameCfg.GAMEFRTD) {
+				if (this.keMcCount <= 0) {
+					this.mcBtn.interactable = false;
+					this.mcBtn.enableAutoGrayEffect = true;
+				}
+				this.mrBtn.interactable = true;
+				this.mrBtn.enableAutoGrayEffect = false;
 			}
-			this.mrBtn.interactable = true;
-			this.mrBtn.enableAutoGrayEffect = false;
+
+
 			let item;
 			if (this.roundNumber > 0) {
 				item = {
@@ -444,7 +449,6 @@ export default class NewClass extends cc.Component {
 		if (GameCfg.GameType == pb.GameType.JJ_PK && GameCfg.GAMEFRTD) {
 
 			GameCfg.huizhidatas = GameCfg.RoomGameData.players[0].curPos;
-
 		} else {
 			GameCfg.huizhidatas = this.gpData.length;
 		}
@@ -456,35 +460,6 @@ export default class NewClass extends cc.Component {
 	protected start() {
 		this.ziChan = JSON.parse(JSON.stringify(GameCfg.ziChan));
 		this.onSetMrCount();
-
-		//不是复盘的情况
-		if (!GameCfg.GAMEFUPAN) {
-			if (GameCfg.GameType == pb.GameType.QiHuo) {
-				let max = 0;
-				this.gpData.forEach(el => {
-					if (max < el.close) {
-						max = el.close;
-					}
-				});
-				this.ziChan = (max * 3);
-			}
-		}
-		//复盘的情况
-		else {
-			let opt = UpGameOpt.player1Opt;
-
-			this.onGameFUPANOPT(opt);
-
-		}
-
-		//断线重连的情况
-		if (GameCfg.GAMEFRTD) {
-			UpGameOpt.ChanagekOffset(GameCfg.RoomGameData.players[0].ops.items);
-			console.log(GameCfg.RoomGameData.players[0].ops.items);
-			this.onGameFUPANOPT(GameCfg.RoomGameData.players[0].ops.items);
-		}
-
-
 		//分仓
 		if (GameCfg.GameSet.isFC) {
 			this.mcBtn.node.x = -266;
@@ -505,6 +480,48 @@ export default class NewClass extends cc.Component {
 			this.mrBtn.node.active = true;
 			this.mcBtn.node.active = false;
 		}
+
+		//不是复盘的情况
+		if (!GameCfg.GAMEFUPAN) {
+			if (GameCfg.GameType == pb.GameType.QiHuo) {
+				let max = 0;
+				this.gpData.forEach(el => {
+					if (max < el.close) {
+						max = el.close;
+					}
+				});
+				this.ziChan = (max * 3);
+			}
+		}
+		//复盘的情况
+		else {
+			let opt = UpGameOpt.player1Opt;
+
+			this.onGameFUPANOPT(opt);
+		}
+
+		//断线重连的情况
+		if (GameCfg.GAMEFRTD) {
+
+			UpGameOpt.ChanagekOffset(GameCfg.RoomGameData.players[0].ops.items);
+
+			this.onGameFUPANOPT(GameCfg.RoomGameData.players[0].ops.items);
+
+			if (GameCfg.GameType == pb.GameType.JJ_PK) {
+				if (GameCfg.RoomGameData.players[0].ops.items.length > 0) {
+					let le = GameCfg.RoomGameData.players[0].ops.items.length - 1;
+					if (GameCfg.RoomGameData.players[0].ops.items[le].opId == pb.GameOperationId.Ask) {
+						this.mrBtn.node.active = false;
+						this.mcBtn.node.active = true;
+					} else {
+						this.mrBtn.node.active = true;
+						this.mcBtn.node.active = false;
+					}
+				}
+			}
+		}
+
+
 
 		this.setLabelData();
 		this.onShow();

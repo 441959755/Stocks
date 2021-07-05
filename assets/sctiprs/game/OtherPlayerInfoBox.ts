@@ -1,5 +1,7 @@
 import { pb } from "../../protos/proto";
 import GameData from "../GameData";
+import EventCfg from "../Utils/EventCfg";
+import GlobalEvent from "../Utils/GlobalEvent";
 import GameCfg from "./GameCfg";
 
 const { ccclass, property } = cc._decorator;
@@ -47,15 +49,18 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     wgzNode: cc.Node = null;
 
+    @property(cc.Node)
+    xhNode: cc.Node = null;
+
     start() {
 
-        this.headImg.spriteFrame = GameCfg.RoomGameData.players[1].gd.icon;
+        //this.headImg.spriteFrame = GameCfg.RoomGameData.players[1].gd.icon;
 
         this.userID.string = 'I    D：' + GameCfg.RoomGameData.players[1].gd.uid;
 
         this.userName.string = '昵称：' + GameCfg.RoomGameData.players[1].gd.nickname;
 
-        if (GameCfg.RoomGameData.player[0].gd.gender == 1) {
+        if (GameCfg.RoomGameData.players[0].gd.gender == 1) {
             this.gender[1].active = true;
             this.gender[0].active = false;
         }
@@ -64,7 +69,7 @@ export default class NewClass extends cc.Component {
             this.gender[0].active = true;
         }
 
-        this.diqu.string = GameCfg.RoomGameData.players[1].gd.location || '中国';
+        this.diqu.string = '地区：' + GameCfg.RoomGameData.players[1].gd.location || '中国';
 
         let ch = GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Fame];
         let str;
@@ -115,13 +120,17 @@ export default class NewClass extends cc.Component {
         }
 
         this.ygzNode.active = false;
-        this.wgzNode.active = false;
+        this.wgzNode.active = true;
+        this.xhNode.active = false;
+
+        let flag = true;
 
         if (GameCfg.RoomGameData.players[0].gd.favorList) {
             let arr = GameCfg.RoomGameData.players[0].gd.favorList;
             arr.forEach(el => {
                 if (el == GameCfg.RoomGameData.players[1].gd.uid) {
                     this.ygzNode.active = true;
+                    flag = true;
                 }
                 else {
                     this.wgzNode.active = true;
@@ -131,6 +140,17 @@ export default class NewClass extends cc.Component {
             this.wgzNode.active = true;;
         }
 
+        if (GameCfg.RoomGameData.players[1].gd.favorList) {
+            let arr = GameCfg.RoomGameData.players[1].gd.favorList;
+            arr.forEach(el => {
+                if (el == GameCfg.RoomGameData.players[0].gd.uid && flag) {
+                    this.xhNode.active = true;
+                    this.ygzNode.active = false;
+                    this.wgzNode.active = false;
+                }
+            });
+
+        }
     }
 
     onBtnClick(event, data) {
@@ -140,7 +160,8 @@ export default class NewClass extends cc.Component {
         }
         else if (name == 'phb_grxx_jhy') {
             if (GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level] < 10) {
-
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '对方等级不满10级，不能添加到关注列表');
+                return;
             }
 
             let data = {
