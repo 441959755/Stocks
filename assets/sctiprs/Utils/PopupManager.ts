@@ -25,7 +25,7 @@ export default class PopupManager {
 
 
     public static delPopupNode() {
-        this.tipsBox.active = false;
+        this.tipsBox && (this.tipsBox.active = false);
     }
 
 }

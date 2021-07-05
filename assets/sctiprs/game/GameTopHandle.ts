@@ -6,6 +6,7 @@ import GameCfg from "./GameCfg";
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import GlobalHandle from "../global/GlobalHandle";
+import ComUtils from "../Utils/ComUtils";
 
 
 const { ccclass, property } = cc._decorator;
@@ -28,6 +29,13 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Label)
     GameName: cc.Label = null;
+
+    @property(cc.Node)
+    pkfupan1: cc.Node = null;
+
+    @property(cc.Node)
+    pkfupan2: cc.Node = null;
+
 
     protected onLoad() {
         //跟新盈利率
@@ -57,6 +65,65 @@ export default class NewClass extends cc.Component {
 
         //复盘
         GlobalEvent.on(EventCfg.GAMEFUPAN, this.onShowGANEFUPAN.bind(this), this);
+
+        //pk复盘
+        GlobalEvent.on(EventCfg.PKFUPAN, this.onShowPKFUPAN.bind(this), this);
+    }
+
+
+    onShowPKFUPAN(status) {
+        //  GameCfg.RoomGameData
+        this.pkfupan1.active = false;
+        this.pkfupan2.active = false;
+
+        if (status == 1 || status == 2) {
+
+            this.pkfupan1.active = true;
+
+            let name = this.pkfupan1.getChildByName('name').getComponent(cc.Label);
+
+            let rate = this.pkfupan1.getChildByName('rate').getChildByName('label2').getComponent(cc.Label);
+
+            let result = this.pkfupan1.getChildByName('rate').getChildByName('label4').getComponent(cc.Label);
+
+            name.string = '昵称：' + GameCfg.RoomGameData.players[status - 1].gd.nickname;
+
+            let r = GameCfg.RoomGameData.players[status - 1].gd.userProfitRate;
+
+            let rank = GameCfg.RoomGameData.players[status - 1].gd.rank;
+
+            if (r > 0) {
+                rate.node.color = cc.Color.RED;
+            }
+            else {
+                rate.node.color = cc.Color.GREEN;
+            }
+
+            rate.string = ComUtils.changeTwoDecimal(r) + '%';
+
+            if (rank == 1) {
+                result.string = '胜利';
+            }
+            else {
+                result.string = '失败';
+            }
+        }
+        else {
+            this.pkfupan2.active = true;
+
+            let name1 = this.pkfupan2.getChildByName('player1').getChildByName('name').getComponent(cc.Label);
+
+            let rate1 = this.pkfupan2.getChildByName('player1').getChildByName('label2').getComponent(cc.Label);
+
+            let name2 = this.pkfupan2.getChildByName('player2').getChildByName('name').getComponent(cc.Label);
+
+            let rate2 = this.pkfupan2.getChildByName('player2').getChildByName('label2').getComponent(cc.Label);
+
+            name1.string = GameCfg.RoomGameData.players[0].gd.nickname;
+            name2.string = GameCfg.RoomGameData.players[1].gd.nickname;
+
+        }
+
     }
 
 
@@ -83,13 +150,7 @@ export default class NewClass extends cc.Component {
             btnMyspic.active = false;
             statBtn.active = true;
         }
-        else if (GameCfg.GameType == pb.GameType.JJ_PK) {
-            btnMyspic.active = false;
-            statBtn.active = false;
 
-            this.tipsLabel.string = '结果：';
-            this.currRateLabel.string = str;
-        }
     }
 
     protected onEnable() {
@@ -148,6 +209,7 @@ export default class NewClass extends cc.Component {
     protected onDestroy() {
         GlobalEvent.off('updateRate');
         GlobalEvent.off(EventCfg.GAMEFUPAN);
+        GlobalEvent.off(EventCfg.PKFUPAN);
     }
 
     //点击事件

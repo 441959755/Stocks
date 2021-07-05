@@ -30,7 +30,11 @@ export default class NewClass extends cc.Component {
 
     // 同步房间游戏状态
     onRoomGameStatus(data?) {
-        cc.director.loadScene('game');
+
+        setTimeout(() => {
+            cc.director.loadScene('game');
+        }, 500)
+
     }
 
 

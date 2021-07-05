@@ -387,5 +387,9 @@ export default class GlobalHandle {
         socket.send(pb.MessageId.Sync_Room_GameOp, buff, (res) => {
             console.log(JSON.stringify(res));
         })
+
+
     }
+
+
 }

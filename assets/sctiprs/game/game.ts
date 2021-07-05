@@ -32,6 +32,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     pkFinalLayer: cc.Node = null;
 
+    @property(cc.Node)
+    startGameNode: cc.Node = null;
+
     onLoad() {
         ComUtils.onLoadNode();
         ComUtils.onEvent();
@@ -68,9 +71,19 @@ export default class NewClass extends cc.Component {
         this.setColor();
     }
 
-    protected onDestroy() {
+    start() {
 
+        //游戏开始动画
+        if (GameCfg.GameType == pb.GameType.JJ_PK && !GameCfg.GAMEFRTD) {
+            this.startGameNode.active = true;
+        }
+
+    }
+
+    protected onDestroy() {
+        GameCfg.GAMEFRTD = false;
         GameCfg.GAMEWAIT = false;
+        GameCfg.RoomGameData = null;
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
         ComUtils.onDestory();

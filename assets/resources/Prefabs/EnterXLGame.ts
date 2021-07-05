@@ -54,8 +54,8 @@ export default class NewClass extends cc.Component {
                 let data = {
                     ktype: pb.KType.Day,
                     kstyle: pb.KStyle.Random,
-                    from: GameCfg.RoomGameResult.players[0].result.kFrom,
-                    code: GameCfg.RoomGameResult.players[0].result.quotesCode,
+                    from: GameCfg.RoomGameData.players[0].result.kFrom,
+                    code: GameCfg.RoomGameData.players[0].result.quotesCode,
                     total: 150,
                     to: 0,
                 }

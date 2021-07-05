@@ -441,7 +441,15 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.SETMARKCOLOR);
 		}
 
-		GameCfg.huizhidatas = this.gpData.length;
+		if (GameCfg.GameType == pb.GameType.JJ_PK && GameCfg.GAMEFRTD) {
+
+			GameCfg.huizhidatas = GameCfg.RoomGameData.players[0].curPos;
+
+		} else {
+			GameCfg.huizhidatas = this.gpData.length;
+		}
+
+
 		GlobalEvent.emit('roundNUmber');
 	}
 
@@ -449,6 +457,7 @@ export default class NewClass extends cc.Component {
 		this.ziChan = JSON.parse(JSON.stringify(GameCfg.ziChan));
 		this.onSetMrCount();
 
+		//不是复盘的情况
 		if (!GameCfg.GAMEFUPAN) {
 			if (GameCfg.GameType == pb.GameType.QiHuo) {
 				let max = 0;
@@ -459,12 +468,23 @@ export default class NewClass extends cc.Component {
 				});
 				this.ziChan = (max * 3);
 			}
-		} else {
+		}
+		//复盘的情况
+		else {
 			let opt = UpGameOpt.player1Opt;
 
 			this.onGameFUPANOPT(opt);
 
 		}
+
+		//断线重连的情况
+		if (GameCfg.GAMEFRTD) {
+			UpGameOpt.ChanagekOffset(GameCfg.RoomGameData.players[0].ops.items);
+			console.log(GameCfg.RoomGameData.players[0].ops.items);
+			this.onGameFUPANOPT(GameCfg.RoomGameData.players[0].ops.items);
+		}
+
+
 		//分仓
 		if (GameCfg.GameSet.isFC) {
 			this.mcBtn.node.x = -266;
@@ -587,7 +607,7 @@ export default class NewClass extends cc.Component {
 				}, 1000)
 			}
 			else {
-				let num = 3 * 60;
+				let num = 3 * 60 + 3;
 				this.cb1 = setInterval(() => {
 					if (num <= 0) {
 						clearInterval(this.cb1);
@@ -665,17 +685,13 @@ export default class NewClass extends cc.Component {
 			//pk
 			if (GameCfg.GameType == pb.GameType.JJ_PK) {
 				PopupManager.LoadPopupBox('tipsBox', '您的操作回合数已经用完，请等候其他用户操作结束');
-
 				GameCfg.GAMEWAIT = true;
-
 			}
 			else {
 				GlobalEvent.emit(EventCfg.GAMEOVEER);
 			}
-
 			return;
 		}
-
 	}
 
 	onClick(event, data) {

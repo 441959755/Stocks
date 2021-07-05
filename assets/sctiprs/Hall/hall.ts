@@ -290,6 +290,8 @@ export default class NewClass extends cc.Component {
 
 		if (GameCfg.RoomGameData) {
 			GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameCfg.RoomGameData);
+			GameData.roomId = GameCfg.RoomGameData.id;
+			GameCfg.GAMEFRTD = true;
 		}
 	}
 

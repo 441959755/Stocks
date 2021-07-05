@@ -66,6 +66,7 @@ export default class NewClass extends cc.Component {
     }
 
     onShowCutMark(status) {
+
         this.status = status;
 
         this.markNodes.forEach(el => {
@@ -73,6 +74,7 @@ export default class NewClass extends cc.Component {
                 el.node.destroy();
             }
         })
+
         this.markNodes = [];
         this.markNodes.length = 0;
 

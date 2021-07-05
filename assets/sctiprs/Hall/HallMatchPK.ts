@@ -20,10 +20,17 @@ export default class NewClass extends cc.Component {
     @property([cc.SpriteFrame])
     tx: cc.SpriteFrame[] = [];
 
+    @property(cc.Animation)
+    enterGameAnim: cc.Animation = null;
+
+
+
     callBack = null;
 
+    spIndex = 0;
     onLoad() {
         GlobalEvent.on('SHOWOTHERPLAYER', this.onShowOtherPlayer.bind(this), this);
+        //this.enterGameAnim.on('finished', this.onFinished, this);
     }
 
     onShowOtherPlayer() {
@@ -47,7 +54,18 @@ export default class NewClass extends cc.Component {
         lv.getComponent(cc.Label).string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1) + '';
 
         exp.getComponent(cc.Label).string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + ' /' + GameCfgText.gameTextCfg.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
+
+        // GameData.Players[1].icon = this.tx[this.spIndex];
+
+        //进入游戏动画
+        this.onEnterGameAnim();
     }
+
+    onEnterGameAnim() {
+        this.enterGameAnim.play();
+    }
+
+
 
     onEnable() {
 
@@ -117,12 +135,13 @@ export default class NewClass extends cc.Component {
 
         let sp = this.player2.getChildByName('head').getComponent(cc.Sprite);
 
-        let index = 0;
+        this.spIndex = 0;
+
         this.callBack = setInterval(() => {
-            if (index >= this.tx.length) {
-                index = 0;
+            if (this.spIndex >= this.tx.length) {
+                this.spIndex = 0;
             }
-            sp.spriteFrame = this.tx[index++];
+            sp.spriteFrame = this.tx[this.spIndex++];
         }, 100);
 
     }
@@ -130,7 +149,6 @@ export default class NewClass extends cc.Component {
     onDisable() {
         this.callBack && (clearInterval(this.callBack));
         this.callBack = null;
-
     }
 
     onBtnClick(event, data) {

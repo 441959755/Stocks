@@ -344,7 +344,7 @@ PBHelper.prototype = {
 
             if (data.game == pb.GameType.JJ_PK || data.game == pb.GameType.JJ_QiHuo) {
                 let message = this.onRoomGameDataMessage(data.data);
-                console.log(JSON.stringify(message));
+                console.log('自己进入房间' + JSON.stringify(message));
                 GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
                 GameCfg.RoomGameData = message;
             }
@@ -406,8 +406,9 @@ PBHelper.prototype = {
 
             let RoomGameData = pb.RoomGameData;
 
-            result = RoomGameData.decode(data1.result);
+            let result = RoomGameData.decode(data1.result);
             console.log('游戏结果' + JSON.stringify(result));
+            GameCfg.RoomGameData = result;
 
             setTimeout(() => { GlobalEvent.emit(EventCfg.GAMEOVEER, result); }, 1000);
 
@@ -426,8 +427,8 @@ PBHelper.prototype = {
             let RoomGameOp = pb.RoomGameOp;
             let data = RoomGameOp.decode(new Uint8Array(buff));
             console.log('同步房间游戏操作' + JSON.stringify(data));
-
         }
+
 
     }
 

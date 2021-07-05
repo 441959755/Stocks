@@ -24,6 +24,12 @@ export default class UpGameOpt {
 
     //添加操作
     public static addOpt(el) {
+
+        if (GameCfg.GameType == pb.GameType.JJ_PK) {
+            el.kOffset -= 1;
+        }
+
+        console.log('操作' + JSON.stringify(el));
         this.arrOpt.push(el);
         //  this.count++;
         if (GameCfg.GameType == pb.GameType.JJ_PK) {
@@ -53,13 +59,13 @@ export default class UpGameOpt {
 
     //上传
     public static UpGameOpt(end?) {
-        //  console.log(this.count);
+        //   console.log(this.count);
         if (GameCfg.GameType == pb.GameType.JJ_PK) {
             if (end) {
                 this.arrOpt.push({
                     opId: pb.GameOperationId.END,
-                    volume: 1,
-                    kOffset: 150,
+                    // volume: 1,
+                    // kOffset: 255,
                 });
             }
             this.cb && (clearTimeout(this.cb));
@@ -78,5 +84,12 @@ export default class UpGameOpt {
         this.player2Opt.length = 0;
         this.cb && (clearTimeout(this.cb));
         this.cb = null;
+    }
+
+    //kOffset
+    public static ChanagekOffset(item) {
+        item.forEach(el => {
+            el.kOffset += 1;
+        });
     }
 }

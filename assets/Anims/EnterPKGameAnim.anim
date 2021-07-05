@@ -1,0 +1,65 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "EnterPKGameAnim",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.75,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "bg/player1": {
+        "props": {
+          "x": [
+            {
+              "frame": 0,
+              "value": -278
+            },
+            {
+              "frame": 0.45,
+              "value": -75
+            },
+            {
+              "frame": 0.5,
+              "value": -75
+            },
+            {
+              "frame": 0.75,
+              "value": -278
+            }
+          ]
+        }
+      },
+      "bg/player2": {
+        "props": {
+          "x": [
+            {
+              "frame": 0,
+              "value": 278
+            },
+            {
+              "frame": 0.45,
+              "value": 75
+            },
+            {
+              "frame": 0.5,
+              "value": 75
+            },
+            {
+              "frame": 0.75,
+              "value": 278
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 0.45,
+      "func": "playLZ",
+      "params": []
+    }
+  ]
+}

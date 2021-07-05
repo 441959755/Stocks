@@ -119,4 +119,6 @@ export default {
 	CUTGAMEFUPAN: 'CUTGAMEFUPAN',    //切换
 
 	GAMEFUPANOPT: 'GAMEFUPANOPT',    //复盘操作
+
+	PKFUPAN: 'PKFUPAN',    //pk复盘
 };

@@ -299,10 +299,12 @@ export default class ComUtils {
 		}
 		return minute + ":" + second;
 
-
 	}
 
+	//保留2位小数
+	public static changeTwoDecimal(num) {
 
-
+		return (parseInt(num * 100 + '') / 100).toFixed(2);
+	}
 
 }

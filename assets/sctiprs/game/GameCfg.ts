@@ -96,9 +96,9 @@ export default {
 
     blockHistoy: [],
 
-    RoomGameData: null,
+    RoomGameData: null,//游戲結果
 
-    RoomGameResult: null,  //游戲結果
+    GAMEFRTD: false,  //是否断线重连
 
 
 
