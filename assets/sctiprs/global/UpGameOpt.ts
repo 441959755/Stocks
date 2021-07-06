@@ -33,14 +33,14 @@ export default class UpGameOpt {
             }
         }
 
-        if (GameCfg.GameType == pb.GameType.JJ_PK) {
+        if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
             el.kOffset -= 1;
         }
 
         console.log('操作' + JSON.stringify(el));
         this.arrOpt.push(el);
         //  this.count++;
-        if (GameCfg.GameType == pb.GameType.JJ_PK) {
+        if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
             this.cb && (clearTimeout(this.cb));
             this.cb = null;
             let curTime = new Date().getTime() / 1000;
@@ -68,7 +68,7 @@ export default class UpGameOpt {
     //上传
     public static UpGameOpt(end?) {
         //   console.log(this.count);
-        if (GameCfg.GameType == pb.GameType.JJ_PK) {
+        if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
             if (end) {
                 this.arrOpt.push({
                     opId: pb.GameOperationId.END,
@@ -92,6 +92,8 @@ export default class UpGameOpt {
         this.player2Opt.length = 0;
         this.cb && (clearTimeout(this.cb));
         this.cb = null;
+        this.arrOpt = [];
+        this.arrOpt.length = 0;
     }
 
     //kOffset

@@ -3,8 +3,6 @@ import EventCfg from "../Utils/EventCfg";
 import GameCfgText from "../GameText";
 import GameCfg from "../game/GameCfg";
 import GameData from "../GameData";
-import { pb } from "../../protos/proto";
-
 
 const { ccclass, property } = cc._decorator;
 
@@ -36,16 +34,12 @@ export default class NewClass extends cc.Component {
         }, 500)
     }
 
-
     onOtherEnterRoomGameData(info) {
 
         GameData.Players[1] = info.player;
 
         GlobalEvent.emit('SHOWOTHERPLAYER');
-
     }
-
-
 
     onSelfEnterRoomGameData(info) {
         let code = info.code + '';
@@ -66,8 +60,6 @@ export default class NewClass extends cc.Component {
         if (info.players[0].gd) {
             GameData.Players[0] = info.players[0].gd;
         }
-
-
 
         info.quotes.items.forEach((el, index) => {
             //   if (index != 0) {
@@ -95,20 +87,11 @@ export default class NewClass extends cc.Component {
             // }
         });
 
-        // if (info.game == pb.GameType.JJ_PK) {
-        GameCfg.GameSet = GameData.JJPKSet;
-        GameCfg.GameType = pb.GameType.JJ_PK;
-        //    }
-
         if (info.players[1].gd) {
             //    GameData.Players[1] = info.players[1].gd;
             GlobalEvent.emit('SHOWOTHERPLAYER');
             this.onRoomGameStatus();
         }
-
-    }
-
-    start() {
 
     }
 
@@ -118,5 +101,5 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.RoomGameDataOther);
     }
 
-    // update (dt) {}
+
 }

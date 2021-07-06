@@ -52,8 +52,7 @@ export default class NewClass extends cc.Component {
             GameCfg.data[0].code = items[0];
             GameCfg.data[0].circulate = items[4];
             GameCfg.GAMEFUPAN = true;
-            // GameCfg.finalfund = GameCfg.ziChan;
-            // GameCfg.allRate = nodes[6].getComponent(cc.Label).string;
+
             GameCfg.allRate = 0;
             GameCfg.huizhidatas = parseInt(nodes[10].getComponent(cc.Label).string) + 1;
             GameData.huizhidatas = parseInt(nodes[9].getComponent(cc.Label).string) + 1;
@@ -69,9 +68,13 @@ export default class NewClass extends cc.Component {
             GameCfg.enterGameCache = JSON.parse(cache);
             GameCfg.historyType = GameCfg.GameType;
             if (GameCfg.GameType == pb.GameType.QiHuo) {
-                GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, JSON.parse(cache));
+                GlobalHandle.onCmdGameStartQuoteQueryQH(GameCfg.enterGameCache, () => {
+                    cc.director.loadScene('game');
+                });
             } else {
-                GlobalEvent.emit(EventCfg.onCmdQuoteQuery, JSON.parse(cache));
+                GlobalHandle.onCmdGameStartQuoteQuery(GameCfg.enterGameCache, () => {
+                    cc.director.loadScene('game');
+                })
             }
 
         }, this);

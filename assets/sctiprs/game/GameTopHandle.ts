@@ -200,6 +200,12 @@ export default class NewClass extends cc.Component {
             let la = this.node.getChildByName('rate');
             la.x = 0;
         }
+        else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+            this.GameName.string = '多空大战';
+            this.rightNode.active = false;
+            let la = this.node.getChildByName('rate');
+            la.x = 0;
+        }
 
         this.onShowGANEFUPAN();
 
@@ -222,7 +228,7 @@ export default class NewClass extends cc.Component {
         //点击终止
         else if (name == 'backBtn' || name == 'closeBtn' || name == 'sys_back') {
             if (!GameCfg.GAMEFUPAN) {
-                if (GameCfg.GameType == pb.GameType.JJ_PK) {
+                if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 
                     if (GameCfg.GAMEWAIT) {
                         PopupManager.LoadPopupBox('tipsBox', '您的成绩已出，现在退出无任何影响。稍后记得在奖励中心领取奖励。', () => {
@@ -252,7 +258,7 @@ export default class NewClass extends cc.Component {
                     })
                 }
             } else {
-                if (GameCfg.GameType == pb.GameType.JJ_PK) {
+                if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
                     GlobalEvent.emit(EventCfg.GAMEOVEER);
                 } else {
                     GameCfg.huizhidatas = 0;

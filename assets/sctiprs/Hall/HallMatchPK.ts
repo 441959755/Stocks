@@ -48,17 +48,11 @@ export default class NewClass extends cc.Component {
         lv.active = true;
         exp.active = true;
 
-
-
-        //  let index = parseInt(Math.random() * this.tx.length + '');
-        //   head.getComponent(cc.Sprite).spriteFrame = this.tx[index];
         name.getComponent(cc.Label).string = GameData.Players[1].uid;
 
         lv.getComponent(cc.Label).string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1) + '';
 
         exp.getComponent(cc.Label).string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + ' /' + GameCfgText.gameTextCfg.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
-
-        // GameData.Players[1].icon = this.tx[this.spIndex];
 
         //进入游戏动画
         this.onEnterGameAnim();
@@ -69,7 +63,8 @@ export default class NewClass extends cc.Component {
     }
 
     onLoadHead() {
-        let url = 'http://login.cgdr168.com/icon/' + GameData.Players[1].icon + '.png';
+        //test.chaogugame.com/icon/X.png
+        let url = 'http://test.chaogugame.com/icon/' + GameData.Players[1].icon + '.png';
 
         LoadUtils.load(url, (res) => {
             let texture = new cc.SpriteFrame(res);
@@ -80,13 +75,11 @@ export default class NewClass extends cc.Component {
     }
 
 
-
     onEnable() {
 
         this.player2.getChildByName('name').active = false;
         this.player2.getChildByName('lv').active = false;;
         this.player2.getChildByName('exp').active = false;
-
 
         {
             let head = this.player1.getChildByName('head');
@@ -102,8 +95,6 @@ export default class NewClass extends cc.Component {
 
             exp.getComponent(cc.Label).string = '经验值：' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.gameTextCfg.level_exp[(GameData.properties[pb.GamePropertyId.Level] || 1)];
         }
-
-
 
         let arr = [];
 

@@ -5,6 +5,7 @@ import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import LoadUtils from '../Utils/LoadUtils';
 import GlobalHandle from '../global/GlobalHandle';
+import EnterGameControl from '../global/EnterGameControl';
 
 const { ccclass, property } = cc._decorator;
 
@@ -137,16 +138,26 @@ export default class NewClass extends cc.Component {
 
 		//pk
 		else if (name == 'main_jj_pkdz') {
-			//	GameCfg.GameType = pb.GameType.JJ_PK;
-			//	GlobalHandle.onCmdGameStartReq((res) => {
-			//	if (!res) {
-			GlobalEvent.emit(EventCfg.OPENMATCHPK);
-			// 	}
-			// 	else {
-			// 		GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
-			// 	}
+			if (EnterGameControl.onCurPKEnterGame()) {
+				GameCfg.GameType = pb.GameType.JJ_PK;
+				GameCfg.GameSet = GameData.JJPKSet;
+				GlobalEvent.emit(EventCfg.OPENMATCHPK);
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
+			}
 
-			// })
+		}
+		else if (name == 'main_jj_dkdz') {
+			if (EnterGameControl.onCurPKEnterGame()) {
+				GameCfg.GameType = pb.GameType.JJ_DuoKong;
+				GameCfg.GameSet = GameData.JJPKSet;
+				GlobalEvent.emit(EventCfg.OPENMATCHPK);
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
+			}
+
 		}
 	}
 

@@ -263,14 +263,15 @@ message GameData {
 	CgState cg_state = 7;				// 闯关状态
 	int64 today = 8;					// 今日时间戳：YYYYMMDD
 	repeated int32 today_times= 9;		// 今日游戏计数器
-	repeated int32 stock_list = 10;		// 关注的股票列表
+	repeated int32 stock_list = 10;		// 关注股票列表
 	ZsjcState zsjc_state = 11;			// 指数竞猜状态
 	string location = 12;				// 位置
 	string gender = 13;					// 性别
-	repeated int32 favor_list = 14;		// 关注的玩家列表
+	repeated int32 favor_list = 14;		// 关注玩家列表
 	Tasks tasks = 15;					// 任务
 	int32 week = 16;					// 每周时间戳：YYYYWW
 	string mobile = 17;					// 绑定手机号
+	repeated int32 ai_stock_list = 18;	// 智能选股收藏股票列表
 }
 
 
@@ -391,6 +392,7 @@ message CmdDailyTaskProgress {
 // 开始游戏
 message CmdGameStart {
 	GameType game    = 1;	// 游戏类型
+	bool is_junxian = 2;	// 指标训练时，是否为均线
 }
 // 结束游戏
 message CmdGameOver {

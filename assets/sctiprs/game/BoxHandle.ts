@@ -309,7 +309,8 @@ export default class NewClass extends cc.Component {
             this.cclNode.active = true;
             this.CCLBtn.active = true;
         }
-        else if (GameCfg.GameType == pb.GameType.JJ_PK) {
+        else if (GameCfg.GameType == pb.GameType.JJ_PK ||
+            GameCfg.GameType == pb.GameType.JJ_DuoKong) {
             this.setBoxfalg('ma');
             this.setBoxfalg('CPM');
         }

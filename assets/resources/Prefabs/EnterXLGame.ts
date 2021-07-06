@@ -18,7 +18,7 @@ export default class NewClass extends cc.Component {
     codename: cc.Label = null;
 
     onEnable() {
-        if (GameCfg.GameType == pb.GameType.JJ_PK) {
+        if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
             this.xlname.string = '前往定向训练场训练改股票';
         }
 
@@ -42,7 +42,7 @@ export default class NewClass extends cc.Component {
         }
         else if (name == 'qdBtn') {
 
-            if (GameCfg.GameType == pb.GameType.JJ_PK) {
+            if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 
                 let gameCount = EnterGameControl.onCurDXIsEnterGame();
 

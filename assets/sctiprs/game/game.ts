@@ -43,20 +43,18 @@ export default class NewClass extends cc.Component {
         ComUtils.onEvent();
         //游戏结算
         GlobalEvent.on(EventCfg.GAMEOVEER, (message) => {
-
-            if (GameCfg.GameType != pb.GameType.JJ_PK) {
-                setTimeout(() => {
-                    this.finalLayer.active = true;
-                }, 80)
-            }
-            else if (GameCfg.GameType == pb.GameType.JJ_PK) {
-
+            if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
                 this.pkFinalLayer.active = true;
                 if (message) {
                     let handle = this.pkFinalLayer.getComponent('PKFinalHandle');
                     handle.gameResult = message;
                     handle.onShow();
                 }
+            }
+            else {
+                setTimeout(() => {
+                    this.finalLayer.active = true;
+                }, 80)
             }
         }, this)
 
@@ -82,7 +80,7 @@ export default class NewClass extends cc.Component {
     start() {
 
         //游戏开始动画
-        if (GameCfg.GameType == pb.GameType.JJ_PK && !GameCfg.GAMEFRTD) {
+        if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) && !GameCfg.GAMEFRTD) {
             this.startGameNode.active = true;
         }
 
@@ -99,7 +97,6 @@ export default class NewClass extends cc.Component {
         PopupManager.delPopupNode();
 
     }
-
 
 
     setColor() {
@@ -216,7 +213,11 @@ export default class NewClass extends cc.Component {
         GameCfg.MAs = [];
         let j = 0;
         //双盲 定向   
-        if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.QiHuo || GameCfg.GameType == pb.GameType.JJ_PK) {
+        if (GameCfg.GameType == pb.GameType.ShuangMang ||
+            GameCfg.GameType == pb.GameType.DingXiang ||
+            GameCfg.GameType == pb.GameType.QiHuo ||
+            GameCfg.GameType == pb.GameType.JJ_PK ||
+            GameCfg.GameType == pb.GameType.JJ_DuoKong) {
             for (let i = 1; i <= 6; i++) {
                 if (GameCfg.GameSet['isMA' + i]) {
                     GameCfg.MAs[j++] = parseInt(GameCfg.GameSet['MA' + i + 'Date']);

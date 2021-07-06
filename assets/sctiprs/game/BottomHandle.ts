@@ -130,14 +130,8 @@ export default class NewClass extends cc.Component {
 	@property(cc.Node)
 	xlzb: cc.Node = null;
 
-	@property(cc.Node)
-	cutNode: cc.Node = null;
-
 	limitUP = 0;  //0没有  1涨停  2跌停
 
-	status = 0;
-
-	cb1 = null;
 	onLoad() {
 
 		this.gpData = GameCfg.data[0].data;
@@ -193,12 +187,7 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(EventCfg.GAMEFUPANOPT, this.onGameFUPANOPT.bind(this), this);
 
-		GlobalEvent.on(EventCfg.CUTGAMEFUPAN, (status) => {
-			if (status) {
-				this.cutNode.active = true;
-				this.status = status;
-			}
-		}, this);
+
 	}
 
 	//游戏结束结算盈利率
@@ -282,13 +271,17 @@ export default class NewClass extends cc.Component {
 			this.curMrCount.push(count);
 			this.ziChan -= count * this.gpData[GameCfg.huizhidatas - 1].close;
 
-			if (!GameCfg.GAMEFRTD) {
+			if (!GameCfg.GAMEFRTD && GameCfg.GameSet.isFC) {
 				if (this.keMrCount < 100) {
 					this.mrBtn.interactable = false;
 					this.mrBtn.enableAutoGrayEffect = true;
 				}
 				this.mcBtn.interactable = true;
 				this.mcBtn.enableAutoGrayEffect = false;
+			}
+			else {
+				this.mrBtn.node.active = false;
+				this.mcBtn.node.active = true;
 			}
 
 
@@ -301,7 +294,6 @@ export default class NewClass extends cc.Component {
 				}
 				UpGameOpt.addOpt(item);
 			}
-			//	}
 			this.setRoundNumber('mrBtn');
 		}
 		//卖出
@@ -314,13 +306,17 @@ export default class NewClass extends cc.Component {
 
 			this.ziChan += mc * this.gpData[GameCfg.huizhidatas - 1].close;
 			this.curMcCount = mc;
-			if (!GameCfg.GAMEFRTD) {
+			if (!GameCfg.GAMEFRTD && GameCfg.GameSet.isFC) {
 				if (this.keMcCount <= 0) {
 					this.mcBtn.interactable = false;
 					this.mcBtn.enableAutoGrayEffect = true;
 				}
 				this.mrBtn.interactable = true;
 				this.mrBtn.enableAutoGrayEffect = false;
+			}
+			else {
+				this.mrBtn.node.active = true;
+				this.mcBtn.node.active = false;
 			}
 
 
@@ -344,7 +340,7 @@ export default class NewClass extends cc.Component {
 			el.active = false;
 		});
 		let node = this.node.getChildByName('fupan1');
-		node.active = !this.status;
+		node.active = true;
 		if (GameCfg.GameType == pb.GameType.ShuangMang) {
 			let node = this.node.getChildByName('fupan');
 			node.active = true;
@@ -389,23 +385,12 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.SETMARKCOLOR);
 		}
 
-		else if (GameCfg.GameType == pb.GameType.JJ_PK) {
-			let pkNode = this.node.getChildByName('pk');
-			pkNode.active = true;
-			pkNode.getChildByName('timeLabel').active = false;
-			let pkFP = pkNode.getChildByName('FUPAN');
-			pkFP.active = true;
-			pkFP.children[0].getComponent(cc.Label).string = GameCfg.data[0].name + '    ' + GameCfg.data[0].code;
 
-			pkFP.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day)
-
-			let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameData.huizhidatas - 1].close) / this.gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
-			pkFP.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
-		}
 	}
 
 	//游戏复盘操作
 	onGameFUPANOPT(opt) {
+		let pkSelf = this.node.getComponent('PKBottomHandle');
 		opt.forEach((el, index) => {
 			GameCfg.huizhidatas = el.kOffset;
 			this.onSetMrCount();
@@ -440,14 +425,28 @@ export default class NewClass extends cc.Component {
 					this.onClick({ target: { name: 'cyBtn' } }, null);
 				}
 			}
+			else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+				if (el.opId == pb.GameOperationId.Ask) {
+					pkSelf.onBtnClick({ target: { name: 'mzBtn' } });
+				}
+				else if (el.opId == pb.GameOperationId.Long) {
+					pkSelf.onBtnClick({ target: { name: 'mdBtn' } });
+				}
+				else if (el.opId == pb.GameOperationId.Short) {
+					pkSelf.onBtnClick({ target: { name: 'pcBtn' } });
+				}
+				else if (el.opId == pb.GameOperationId.Bid) {
+					pkSelf.onBtnClick({ target: { name: 'pcBtn1' } });
+				}
+
+			}
 		})
 
 		if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 			GlobalEvent.emit(EventCfg.SETMARKCOLOR);
 		}
 
-		if (GameCfg.GameType == pb.GameType.JJ_PK && GameCfg.GAMEFRTD) {
-
+		if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) && GameCfg.GAMEFRTD) {
 			GameCfg.huizhidatas = GameCfg.RoomGameData.players[0].curPos;
 		} else {
 			GameCfg.huizhidatas = this.gpData.length;
@@ -507,21 +506,7 @@ export default class NewClass extends cc.Component {
 
 			this.onGameFUPANOPT(GameCfg.RoomGameData.players[0].ops.items);
 
-			if (GameCfg.GameType == pb.GameType.JJ_PK) {
-				if (GameCfg.RoomGameData.players[0].ops.items.length > 0) {
-					let le = GameCfg.RoomGameData.players[0].ops.items.length - 1;
-					if (GameCfg.RoomGameData.players[0].ops.items[le].opId == pb.GameOperationId.Ask) {
-						this.mrBtn.node.active = false;
-						this.mcBtn.node.active = true;
-					} else {
-						this.mrBtn.node.active = true;
-						this.mcBtn.node.active = false;
-					}
-				}
-			}
 		}
-
-
 
 		this.setLabelData();
 		this.onShow();
@@ -548,12 +533,11 @@ export default class NewClass extends cc.Component {
 			this.cyBtn.node.active = false;
 		}
 
-		let dxnode = this.timeLabel[0].node.parent.parent;
+		let dxnode = this.node.getChildByName('DXInfo');
 
 		if (GameCfg.GameType == pb.GameType.ShuangMang) {
 			this.tipsLabel.node.active = true;
 			this.tipsLabel1.node.active = false;
-			dxnode.active = false;
 
 		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
 			this.tipsLabel.node.active = true;
@@ -601,37 +585,6 @@ export default class NewClass extends cc.Component {
 			} else {
 				sT.getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
 				et.getComponent(cc.Label).string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
-			}
-		}
-		else if (GameCfg.GameType == pb.GameType.JJ_PK) {
-			this.tipsLabel.node.active = true;
-			this.tipsLabel1.node.active = false;
-			dxnode.active = false;
-			let pkNode = this.node.getChildByName('pk');
-			pkNode.active = true;
-			let timeLabel = pkNode.getChildByName('timeLabel').getComponent(cc.Label);
-			timeLabel.node.active = true;
-			if (GameCfg.data[0].tsGameFrom && GameCfg.data[0].tsGameCur) {
-				let num = GameCfg.data[0].tsGameCur - GameCfg.data[0].tsGameFrom;
-				num = 3 * 60 - num;
-				this.cb1 = setInterval(() => {
-					if (num <= 0) {
-						clearInterval(this.cb1);
-					}
-					timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
-					num--;
-
-				}, 1000)
-			}
-			else {
-				let num = 3 * 60 + 3;
-				this.cb1 = setInterval(() => {
-					if (num <= 0) {
-						clearInterval(this.cb1);
-					}
-					timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
-					num--;
-				}, 1000)
 			}
 		}
 
@@ -700,7 +653,7 @@ export default class NewClass extends cc.Component {
 		if (this.roundNumber <= 0) {
 			GameCfg.huizhidatas = this.gpData.length;
 			//pk
-			if (GameCfg.GameType == pb.GameType.JJ_PK) {
+			if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 				PopupManager.LoadPopupBox('tipsBox', '您的操作回合数已经用完，请等候其他用户操作结束');
 				GameCfg.GAMEWAIT = true;
 			}
@@ -1013,18 +966,6 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '跌停时不可买入卖出');
 			}
 		}
-
-		//切换标签
-		else if (name == 'btn_cut') {
-			this.status++;
-
-			if (this.status > 4) {
-				this.status = 1;
-			}
-
-			GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, this.status);
-		}
-
 	}
 
 	setRoundNumber(name?, flag?) {
@@ -1104,16 +1045,14 @@ export default class NewClass extends cc.Component {
 		this.curMrCount.forEach((el) => {
 			prezl += el;
 		})
-		//	console.log(JSON.stringify(this.curMrCount));
 
 		let rate = (curClose - preClose) / preClose;
 
-		// console.log('(' + curClose + '-' + preClose + ')' + '/' + preClose);
-		// console.log('rete=' + rate);
 		return rate;
 	}
 
 	onAllPositionRete() {
+
 		let data = this.gpData;
 		let curClose = parseFloat(data[GameCfg.huizhidatas - 1].close);
 
@@ -1132,10 +1071,10 @@ export default class NewClass extends cc.Component {
 		//买入
 		let data = this.gpData;
 		if (state == 'mrBtn' || state == 'mrBtn1') {
-
 			this.buyData.push(GameCfg.huizhidatas - 1);
 
 			let rate = this.onCurPositionRete();
+
 			let sign = 1;
 			if (state == 'mrBtn1') {
 				rate = -rate;
@@ -1147,15 +1086,12 @@ export default class NewClass extends cc.Component {
 			this.isFlag = true;
 			let start = GameCfg.huizhidatas;
 
-
 			this.rateItem = {
 				rate: rate,
 				start: start,
 				end: null,
 				state: sign,
 			};
-
-
 			if (GameCfg.fill.length > 0 && GameCfg.fill[GameCfg.fill.length - 1].end) {
 				GameCfg.fill.push(this.rateItem);
 			} else if (GameCfg.fill.length == 0) {
@@ -1163,9 +1099,8 @@ export default class NewClass extends cc.Component {
 			} else {
 				GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
 			}
-
-
 			GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
+
 		}
 
 		//卖出
@@ -1182,6 +1117,7 @@ export default class NewClass extends cc.Component {
 
 			let rate, allRate;
 			rate = this.onCurPositionRete(1);
+
 			if (GameCfg.GameType == pb.GameType.QiHuo || !GameCfg.GameSet.isFC) {
 
 				if (state == 'mcBtn1') {
@@ -1278,11 +1214,6 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off('HIDEBOTTOMNODE');
 
 		GlobalEvent.off(EventCfg.CLICKFCBTN);
-		this.cb1 && (clearInterval(this.cb1));
-		this.cb1 = null;
-
-		GlobalEvent.off(EventCfg.CUTGAMEFUPAN);
-
 	}
 
 	//获取涨停板

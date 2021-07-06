@@ -136,7 +136,7 @@ export default class NewClass extends cc.Component {
                 this.saveHoistoryInfo(parseInt(datas.ts + ''));
                 CmdGameOver = {
                     result: datas,
-                    operations: UpGameOpt.player1Opt,
+                    operations: UpGameOpt.arrOpt,
                 }
             } else {
                 CmdGameOver = {

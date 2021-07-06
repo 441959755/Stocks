@@ -9,6 +9,14 @@ import GlobalHandle from "./GlobalHandle";
 
 export default class EnterGameControl {
 
+    public static onCurPKEnterGame() {
+        let kjb = GameCfgText.gameTextCfg.pk.cost[0].v;
+        if (GameData.properties[pb.GamePropertyId.Gold] >= Math.abs(kjb)) {
+            return true;
+        }
+        return false;
+    }
+
     //当前定向是否可以进入游戏   
     public static onCurDXIsEnterGame() {
         let data = {
