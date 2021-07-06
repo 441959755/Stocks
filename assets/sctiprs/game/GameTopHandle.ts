@@ -67,16 +67,31 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.GAMEFUPAN, this.onShowGANEFUPAN.bind(this), this);
 
         //pk复盘
-        GlobalEvent.on(EventCfg.PKFUPAN, this.onShowPKFUPAN.bind(this), this);
+        GlobalEvent.on(EventCfg.CUTGAMEFUPAN, this.onShowPKFUPAN.bind(this), this);
     }
 
 
     onShowPKFUPAN(status) {
+        status = Math.abs(status);
         //  GameCfg.RoomGameData
         this.pkfupan1.active = false;
         this.pkfupan2.active = false;
+        if (status == 3) {
+            this.pkfupan2.active = true;
 
-        if (status == 1 || status == 2) {
+            let name1 = this.pkfupan2.getChildByName('player1').getChildByName('name').getComponent(cc.Label);
+
+            let rate1 = this.pkfupan2.getChildByName('player1').getChildByName('label2').getComponent(cc.Label);
+
+            let name2 = this.pkfupan2.getChildByName('player2').getChildByName('name').getComponent(cc.Label);
+
+            let rate2 = this.pkfupan2.getChildByName('player2').getChildByName('label2').getComponent(cc.Label);
+
+            name1.string = GameCfg.RoomGameData.players[0].gd.nickname;
+            name2.string = GameCfg.RoomGameData.players[1].gd.nickname;
+
+        }
+        else {
 
             this.pkfupan1.active = true;
 
@@ -108,21 +123,7 @@ export default class NewClass extends cc.Component {
                 result.string = '失败';
             }
         }
-        else {
-            this.pkfupan2.active = true;
 
-            let name1 = this.pkfupan2.getChildByName('player1').getChildByName('name').getComponent(cc.Label);
-
-            let rate1 = this.pkfupan2.getChildByName('player1').getChildByName('label2').getComponent(cc.Label);
-
-            let name2 = this.pkfupan2.getChildByName('player2').getChildByName('name').getComponent(cc.Label);
-
-            let rate2 = this.pkfupan2.getChildByName('player2').getChildByName('label2').getComponent(cc.Label);
-
-            name1.string = GameCfg.RoomGameData.players[0].gd.nickname;
-            name2.string = GameCfg.RoomGameData.players[1].gd.nickname;
-
-        }
 
     }
 
@@ -215,7 +216,7 @@ export default class NewClass extends cc.Component {
     protected onDestroy() {
         GlobalEvent.off('updateRate');
         GlobalEvent.off(EventCfg.GAMEFUPAN);
-        GlobalEvent.off(EventCfg.PKFUPAN);
+        GlobalEvent.off(EventCfg.CUTGAMEFUPAN);
     }
 
     //点击事件

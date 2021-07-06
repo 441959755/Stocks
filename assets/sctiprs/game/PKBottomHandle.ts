@@ -37,6 +37,10 @@ export default class NewClass extends cc.Component {
             if (status) {
                 this.cutNode.active = true;
                 this.status = status;
+                if (status == 3) {
+                    // fupan1
+                    this.node.getChildByName('fupan1').active = false;
+                }
             }
         }, this);
 
@@ -71,8 +75,14 @@ export default class NewClass extends cc.Component {
 
     start() {
         if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-            this.node.getChildByName('JJ_DuoKong').active = true;
+
             this.node.getChildByName('isFC').active = false;
+            if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+                this.node.getChildByName('JJ_DuoKong').active = true;
+            }
+            else if ((GameCfg.GameType == pb.GameType.JJ_PK){
+                this.node.getChildByName('isFC').active = true;
+            }
 
             this.node.getChildByName('label1').active = true;
             this.node.getChildByName('label2').active = false;
@@ -118,11 +128,10 @@ export default class NewClass extends cc.Component {
         //切换标签
         if (name == 'btn_cut') {
             this.status++;
-
             if (this.status > 4) {
                 this.status = 1;
             }
-            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, this.status);
+            GlobalEvent.emit(EventCfg.PKFUPAN, this.status);
         }
         else if (name == 'mzBtn') {
             this.mzStatusNode[0].active = false;
@@ -192,7 +201,7 @@ export default class NewClass extends cc.Component {
                 }
                 UpGameOpt.addOpt(item);
             }
-            this.bself.setRoundNumber('mcBtn1')
+            this.bself.setRoundNumber('mcBtn1', 1)
         }
         else if (name == 'pcBtn') {
             this.mdStatusNode[1].active = false;
@@ -215,7 +224,7 @@ export default class NewClass extends cc.Component {
                 }
                 UpGameOpt.addOpt(item);
             }
-            this.bself.setRoundNumber('mcBtn')
+            this.bself.setRoundNumber('mcBtn', 1)
         }
 
     }

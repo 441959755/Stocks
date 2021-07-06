@@ -44,6 +44,7 @@ export default class NewClass extends cc.Component {
         //游戏结算
         GlobalEvent.on(EventCfg.GAMEOVEER, (message) => {
             if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+                PopupManager.delPopupNode();
                 this.pkFinalLayer.active = true;
                 if (message) {
                     let handle = this.pkFinalLayer.getComponent('PKFinalHandle');
@@ -95,7 +96,6 @@ export default class NewClass extends cc.Component {
         ComUtils.onDestory();
         GlobalEvent.off(EventCfg.OPENOTHERINFOBOX);
         PopupManager.delPopupNode();
-
     }
 
 

@@ -42,6 +42,7 @@ export default class NewClass extends cc.Component {
     }
 
     onSelfEnterRoomGameData(info) {
+        GameCfg.GameType = info.game;
         let code = info.code + '';
         if (code.length >= 7) {
             code = code.slice(1);

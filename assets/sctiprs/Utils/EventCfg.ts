@@ -122,5 +122,5 @@ export default {
 
 	PKFUPAN: 'PKFUPAN',    //pk复盘
 
-	OPENOTHERINFOBOX:'OPENOTHERINFOBOX',//其他玩家信息框
+	OPENOTHERINFOBOX: 'OPENOTHERINFOBOX',//其他玩家信息框
 };

@@ -207,7 +207,7 @@
       "array": [
         0,
         0,
-        495.6371639033816,
+        457.2614131981836,
         0,
         0,
         0,
@@ -31279,8 +31279,8 @@
       "__id__": 488
     },
     "component": "",
-    "_componentId": "1e3b3wFV6tEYLO0E0Gwn49V",
-    "handler": "onClick",
+    "_componentId": "09fefwo10xPWLZhJNub6Cqk",
+    "handler": "onBtnClick",
     "customEventData": ""
   },
   {

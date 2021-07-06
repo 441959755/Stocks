@@ -47,6 +47,8 @@ export default class NewClass extends cc.Component {
 
     status = 0;
 
+
+
     onLoad() {
 
         this.node.removeAllChildren();
@@ -62,6 +64,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.SETMARKCOLOR, this.setMarkColor.bind(this), this);
 
         GlobalEvent.on(EventCfg.CUTGAMEFUPAN, this.onShowCutMark.bind(this), this);
+
+        GlobalEvent.on(EventCfg.PKFUPAN, this.onShowCutMark.bind(this), this);
 
     }
 
@@ -108,6 +112,7 @@ export default class NewClass extends cc.Component {
                 }
             })
         } else if (this.status == 3) {
+
             this.mark1Nodes.forEach((el, i) => {
                 if (el && el.node) {
                     if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
@@ -123,12 +128,10 @@ export default class NewClass extends cc.Component {
                 }
             })
         }
-
     }
 
 
     setMarkColor() {
-
         let info = StrategyAIData.onCompareReult();
         this.markNodes;
         info.low.forEach(el => {
@@ -362,6 +365,7 @@ export default class NewClass extends cc.Component {
                 node: node,
                 type: info.type,
             }
+
         }
         else if (this.status == 2) {
             if (this.mark2Nodes[inde]) { return }
@@ -407,7 +411,7 @@ export default class NewClass extends cc.Component {
         }
 
         this.node.addChild(node);
-        if (!this.status) {
+        if (!this.status || this.status < 0) {
             if (info.type == 1) {
                 this.startNode[inde] = {
                     node: node,
@@ -450,7 +454,6 @@ export default class NewClass extends cc.Component {
 
     //显示所有标签
     onMarkAllShow() {
-
         this.markNodes.forEach((el, i) => {
             if (el && el.node) {
                 //   
@@ -485,7 +488,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.ONMARKUPDATE);
         GlobalEvent.off(EventCfg.ADDMARKHIDEORSHOW);
         GlobalEvent.off(EventCfg.CUTGAMEFUPAN);
-
+        GlobalEvent.off(EventCfg.PKFUPAN);
     }
+
 
 }

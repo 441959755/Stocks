@@ -260,7 +260,7 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[1].ops.items)
 
             this.node.active = false;
-            GlobalEvent.emit(EventCfg.PKFUPAN, 3);
+            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 3);
         }
         //训练该股
         else if (name == 'pk_jsbt_xl') {
@@ -282,12 +282,13 @@ export default class NewClass extends cc.Component {
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
 
-            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN);
+            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, -1);
             this.node.active = false;
             GameCfg.GAMEFUPAN = true;
-            GlobalEvent.emit(EventCfg.GAMEFUPAN);
+
             GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[0].ops.items)
-            GlobalEvent.emit(EventCfg.PKFUPAN, 1);
+            GlobalEvent.emit(EventCfg.GAMEFUPAN);
+            //GlobalEvent.emit(EventCfg.PKFUPAN, 1);
         }
         //tr复盘
         else if (name == 'Btn_fupan_other') {
@@ -295,13 +296,13 @@ export default class NewClass extends cc.Component {
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
 
-            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN);
+            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, -2);
             this.node.active = false;
             GameCfg.GAMEFUPAN = true;
-            GlobalEvent.emit(EventCfg.GAMEFUPAN);
-            GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[1].ops.items)
 
-            GlobalEvent.emit(EventCfg.PKFUPAN, 2);
+            GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[1].ops.items)
+            GlobalEvent.emit(EventCfg.GAMEFUPAN);
+            // GlobalEvent.emit(EventCfg.PKFUPAN, 2);
         }
         else if (name == 'otheruserInfo') {
             GlobalEvent.emit(EventCfg.OPENOTHERINFOBOX);
@@ -322,7 +323,6 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
-
         UpGameOpt.clearGameOpt();
         LoadUtils.releaseRes('Prefabs/enterXLGame');
     }
