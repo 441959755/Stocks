@@ -92,7 +92,7 @@ export default class NewClass extends cc.Component {
             UpGameOpt.ChanagekOffset(this.gameResult.players[1].ops.items);
 
             //消极
-            if (userProfitRate1 == -999 && !this.gameResult.players[0].ops.items) {
+            if (userProfitRate1 == -999 && this.gameResult.players[0].ops.items.length == 0) {
 
                 loseSp.active = true;
                 winSp.active = false;
@@ -138,10 +138,13 @@ export default class NewClass extends cc.Component {
             userLevel.string = 'LV: ' + this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level];
             userExp.string = 'EXP: ' + this.gameResult.players[1].gd.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
 
-            //  userHead.spriteFrame = GameData.headImg;
+            if (GameData.Players[1].icon) {
+                userHead.spriteFrame = GameData.Players[1].icon;
+            }
+
 
             //消极
-            if (userProfitRate2 == -999 && !this.gameResult.players[1].ops.items) {
+            if (userProfitRate2 == -999 && this.gameResult.players[0].ops.items.length == 0) {
                 loseSp.active = true;
                 winSp.active = false;
                 xj.active = true;

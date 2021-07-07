@@ -56,6 +56,9 @@ export default class NewClass extends cc.Component {
 
         //this.headImg.spriteFrame = GameCfg.RoomGameData.players[1].gd.icon;
 
+        if (GameData.Players[1].icon) {
+            this.headImg.spriteFrame = GameData.Players[1].icon;
+        }
         this.userID.string = 'I    D：' + GameCfg.RoomGameData.players[1].gd.uid;
 
         this.userName.string = '昵称：' + GameCfg.RoomGameData.players[1].gd.nickname;

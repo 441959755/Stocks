@@ -4,6 +4,7 @@ import GameCfg from "./GameCfg";
 import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
 import PopupManager from "../Utils/PopupManager";
+import GameData from "../GameData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -99,6 +100,7 @@ export default class NewClass extends cc.Component {
         PopupManager.delPopupNode();
         GameCfg.GAMEFUPAN = false;
         GameCfg.GAMEFUPANDATA = null;
+        GameData.Players = [];
     }
 
 

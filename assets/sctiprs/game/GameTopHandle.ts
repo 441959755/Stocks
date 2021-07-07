@@ -244,8 +244,8 @@ export default class NewClass extends cc.Component {
                         str = '您正在比赛中，现在退出会被认定为逃跑用户，请确认在退出';
                     }
                     PopupManager.LoadPopupBox('tipsBox', str, () => {
-                        GameCfg.GameType = null;
                         GlobalHandle.onReqRoomLeave();
+                        GameCfg.GameType = null;
                         GameCfg.huizhidatas = 0;
                         GameCfg.allRate = 0;
                         GameCfg.finalfund = 0;

@@ -24,14 +24,15 @@ export default class NewClass extends cc.Component {
     @property(cc.Animation)
     enterGameAnim: cc.Animation = null;
 
-
+    // cb = null;
 
     callBack = null;
 
     spIndex = 0;
     onLoad() {
         GlobalEvent.on('SHOWOTHERPLAYER', this.onShowOtherPlayer.bind(this), this);
-        //this.enterGameAnim.on('finished', this.onFinished, this);
+        // GlobalEvent.on('enterGameAnim', this.onEnterGameAnim.bind(this), this);
+
     }
 
     onShowOtherPlayer() {
@@ -54,12 +55,13 @@ export default class NewClass extends cc.Component {
 
         exp.getComponent(cc.Label).string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + ' /' + GameCfgText.gameTextCfg.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
 
-        //进入游戏动画
+        进入游戏动画
         this.onEnterGameAnim();
     }
 
     onEnterGameAnim() {
-        this.enterGameAnim.play();
+
+        this.enterGameAnim && (this.enterGameAnim.play());
     }
 
     onLoadHead() {
@@ -69,6 +71,7 @@ export default class NewClass extends cc.Component {
         //let url = 'https://img1.baidu.com/it/u=3139177467,1950838334&fm=26&fmt=auto&gp=0.jpg';
         // let url = 'https://www.cgdr168.com/icon/200003.png';
         let url = 'http://test.chaogugame.com/icon/' + GameData.Players[1].icon + '.png';
+        GameData.Players[1].icon = null;
         LoadUtils.load(url, (res) => {
             let texture = new cc.SpriteFrame(res);
             GameData.Players[1].icon = texture;
@@ -170,6 +173,7 @@ export default class NewClass extends cc.Component {
 
     onDestroy() {
         GlobalEvent.off('SHOWOTHERPLAYER');
+        // GlobalEvent.off('enterGameAnim');
     }
 
 

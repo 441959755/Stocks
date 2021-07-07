@@ -31,7 +31,7 @@ export default class NewClass extends cc.Component {
     onRoomGameStatus(data?) {
         setTimeout(() => {
             cc.director.loadScene('game');
-        }, 500)
+        }, 800)
     }
 
     onOtherEnterRoomGameData(info) {
@@ -92,7 +92,7 @@ export default class NewClass extends cc.Component {
         )
 
         if (info.players[1].gd && info.quotes) {
-            //    GameData.Players[1] = info.players[1].gd;
+            GameData.Players[1] = info.players[1].gd;
             GlobalEvent.emit('SHOWOTHERPLAYER');
             this.onRoomGameStatus();
         }
