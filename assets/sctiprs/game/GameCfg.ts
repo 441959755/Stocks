@@ -1,5 +1,4 @@
 export default {
-
     GameType: 0,     //双盲 1  指标 2
 
     GameSet: null,   //游戏设置
@@ -67,8 +66,6 @@ export default {
         }
     ],
 
-    //  RAISINGLIMIT: false, //记录涨停板
-
     history: { //游戏记录
         huizhidatas: 0,
         allRate: 0,       //总利率
@@ -85,6 +82,8 @@ export default {
     GAMEWAIT: false,  //游戏走完，等待游戏结果
 
     GAMEFUPAN: false,  //游戏复盘
+
+    GAMEFUPANDATA: null,  //复盘数据
 
     eachHand: 0,    //每手
 

@@ -428,15 +428,19 @@ export default class NewClass extends cc.Component {
 			else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 				if (el.opId == pb.GameOperationId.Ask) {
 					pkSelf.onBtnClick({ target: { name: 'mzBtn' } });
+					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: el.kOffset });
 				}
 				else if (el.opId == pb.GameOperationId.Long) {
 					pkSelf.onBtnClick({ target: { name: 'mdBtn' } });
+					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: el.kOffset });
 				}
 				else if (el.opId == pb.GameOperationId.Short) {
-					pkSelf.onBtnClick({ target: { name: 'pcBtn' } });
+					pkSelf.onBtnClick({ target: { name: 'pcBtn1' } });
+					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: el.kOffset });
 				}
 				else if (el.opId == pb.GameOperationId.Bid) {
-					pkSelf.onBtnClick({ target: { name: 'pcBtn1' } });
+					pkSelf.onBtnClick({ target: { name: 'pcBtn' } });
+					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: el.kOffset });
 				}
 
 			}
@@ -961,9 +965,9 @@ export default class NewClass extends cc.Component {
 		//
 		else if (name == 'zhangBtn' || name == 'dieBtn') {
 			if (this.limitUP == 1) {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '涨停时不可买入卖出');
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '涨停板不能买入！');
 			} else if (this.limitUP == 2) {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '跌停时不可买入卖出');
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '跌停板不能卖出！');
 			}
 		}
 	}
@@ -1021,12 +1025,10 @@ export default class NewClass extends cc.Component {
 				mrZE += (el * this.curMrPJPrice);
 			} else {
 				//console.log()
-				if (this.buyData[index] && data[this.buyData[index]]) {
+				if (data[this.buyData[index]]) {
 					mrZE += (el * data[this.buyData[index]].close);
 				}
-
 			}
-
 		})
 		return mrZE / mrZL;
 	}
@@ -1218,93 +1220,19 @@ export default class NewClass extends cc.Component {
 
 	//获取涨停板
 	getRaisingLimit(number) {
-		this.limitUP = 0;
 		this.zhangting.active = false;
 		this.dieting.active = false;
-		let index = number - 1;
-		if (GameCfg.GameType != pb.GameType.QiHuo) {
-			let code = GameCfg.data[0].code + '';
-			if (code.length >= 7) {
-				code = code.slice(1);
-			}
+		this.limitUP = 0;
 
-			let str = code.slice(0, 2);
-			let str1 = code.slice(0, 3);
-			if (this.gpData[index + 1] && this.gpData[index]) {
-				let rate = (this.gpData[index + 1].close - this.gpData[index].close) / this.gpData[index].close * 100;
-				if (str == '60' || str == '00') {
-					if (rate >= 9.95) {
-						this.limitUP = 1;
-						this.dieting.active = true;
-						this.zhangting.active = true;
-
-					} else if (rate <= -9.95) {
-						this.limitUP = 2;
-						this.dieting.active = true;
-						this.zhangting.active = true;
-
-					}
-				}
-				else if (str1 == '688') {
-					if (rate >= 19.94) {
-						this.limitUP = 1;
-						this.dieting.active = true;
-						this.zhangting.active = true;
-					} else if (rate <= -19.94) {
-						this.limitUP = 2;
-						this.dieting.active = true;
-						this.zhangting.active = true;
-					}
-				}
-				else if (str1 == '300') {
-					let time = ComUtils.fromatTime1(this.gpData[index].day);
-					if (time >= 20200824) {
-						if (rate >= 19.94) {
-							this.limitUP = 1;
-							this.dieting.active = true;
-							this.zhangting.active = true;
-						}
-						else if (rate <= -19.94) {
-							this.limitUP = 2;
-							this.dieting.active = true;
-							this.zhangting.active = true;
-						}
-					}
-					else if (time < 20200824) {
-						if (rate >= 9.95) {
-							this.limitUP = 1;
-							this.dieting.active = true;
-							this.zhangting.active = true;
-						}
-						else if (rate <= -9.95) {
-							this.limitUP = 2;
-							this.dieting.active = true;
-							this.zhangting.active = true;
-						}
-					}
-				}
-
-				if (this.gpData[index + 1].close == this.gpData[index + 1].high) {
-					if (this.gpData[index + 1].close == this.gpData[index + 1].low) {
-						if (this.gpData[index + 1].close == this.gpData[index + 1].open) {
-							if (rate >= 4.88) {
-								this.limitUP = 1;
-								this.zhangting.active = true;
-								this.dieting.active = true;
-							}
-							else if (rate <= -4.88) {
-								this.limitUP = 2;
-								this.dieting.active = true;
-								this.zhangting.active = true;
-							}
-						}
-					}
-				}
-
-			}
-
-
+		this.limitUP = DrawData.getRaisingLimit(number, true);
+		if (this.limitUP == 1) {
+			this.zhangting.active = true;
 		}
+		else if (this.limitUP == 2) {
+			this.dieting.active = true;
+		}
+
+		GlobalEvent.emit(EventCfg.RAISINGLIMIT, this.limitUP);
 
 	}
 }

@@ -62,7 +62,7 @@ export default class NewClass extends cc.Component {
             GameData.Players[0] = info.players[0].gd;
         }
 
-        info.quotes.items.forEach((el, index) => {
+        info.quotes && (info.quotes.items.forEach((el, index) => {
             //   if (index != 0) {
             //  let date = new Date(el.timestamp);
             let ye = (el.timestamp + '').slice(0, 4);
@@ -85,15 +85,17 @@ export default class NewClass extends cc.Component {
                 data.Rate = 1;
             }
             GameCfg.data[0].data.push(data);
-            // }
-        });
 
-        if (info.players[1].gd) {
+
+        })
+
+        )
+
+        if (info.players[1].gd && info.quotes) {
             //    GameData.Players[1] = info.players[1].gd;
             GlobalEvent.emit('SHOWOTHERPLAYER');
             this.onRoomGameStatus();
         }
-
     }
 
     onDestroy() {

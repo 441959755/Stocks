@@ -276,9 +276,12 @@ export default class NewClass extends cc.Component {
 		} else if (GameCfg.GameType == pb.GameType.QiHuo) {
 			event = { target: { name: 'main_xl_qhxl' } }
 		}
-		// else if (GameCfg.GameType == pb.GameType.JJ_PK) {
-		// 	event = { target: { name: 'main_jj_pkdz' } }
-		// }
+		else if (GameCfg.GameType == pb.GameType.JJ_PK) {
+			event = { target: { name: 'main_jj_pkdz' } }
+		}
+		else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+			event = { target: { name: 'main_jj_dkdz' } }
+		}
 
 		if (event) {
 			GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);

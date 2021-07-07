@@ -67,18 +67,13 @@ export default class NewClass extends cc.Component {
 
         } else {
             this.tipsNode.active = false;
-
-            //   if (!this.HisData) {
-
             let ts = new Date().getTime() / 1000;
             let data = {
                 uid: GameData.userID,
-                gType: pb.GameType.JJ_PK,
                 to: ts,
-                pageSize: 20,
+                pageSize: 30,
             }
             this.onQueryGameResult(data);
-            //    }
         }
     }
 
@@ -93,9 +88,7 @@ export default class NewClass extends cc.Component {
 
                 info.results.forEach((el, index) => {
                     this.HisData.push(el);
-                    if (el.gType == pb.GameType.ShuangMang) {
-
-                    } else {
+                    if (el.gType == pb.GameType.JJ_PK || el.gType == pb.GameType.JJ_DuoKong) {
                         let node = cc.instantiate(this.item);
                         this.content.addChild(node);
                         let nodeHandle = node.getComponent('HisItem');

@@ -583,4 +583,79 @@ export default class DrawData {
 
     }
 
+    //获取涨停盘
+    public static getRaisingLimit(index, flag?) {
+
+        if (GameCfg.GameType == pb.GameType.QiHuo) {
+            return;
+        }
+
+        let limitUP = 0;
+        let code = GameCfg.data[0].code + '';
+        if (code.length >= 7) {
+            code = code.slice(1);
+        }
+
+        let str = code.slice(0, 2);
+        let str1 = code.slice(0, 3);
+        let gpData = GameCfg.data[0].data;
+
+        if (gpData[index - 1] && gpData[index]) {
+            let rate = (gpData[index].close - gpData[index - 1].close) / gpData[index - 1].close * 100;
+
+            if (str == '60' || str == '00') {
+                if (rate >= 9.95) {
+                    limitUP = 1;
+                }
+                else if (rate <= -9.95) {
+                    limitUP = 2;
+                }
+            }
+            else if (str1 == '688') {
+                if (rate >= 19.94) {
+                    limitUP = 1;
+                }
+                else if (rate <= -19.94) {
+                    limitUP = 2;
+                }
+            }
+            else if (str1 == '300') {
+                let time = ComUtils.fromatTime1(gpData[index].day);
+                if (time >= 20200824) {
+                    if (rate >= 19.94) {
+                        limitUP = 1;
+                    }
+                    else if (rate <= -19.94) {
+                        limitUP = 2;
+                    }
+                }
+                else if (time < 20200824) {
+                    if (rate >= 9.95) {
+                        limitUP = 1;
+                    }
+                    else if (rate <= -9.95) {
+                        limitUP = 2;
+                    }
+                }
+            }
+            if (flag) {
+                if (gpData[index].close == gpData[index].high) {
+                    if (gpData[index].close == gpData[index].low) {
+                        if (gpData[index].close == gpData[index].open) {
+                            if (rate >= 4.88) {
+                                limitUP = 1;
+                            }
+                            else if (rate <= -4.88) {
+                                limitUP = 2;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        return limitUP;
+
+    }
+
 }

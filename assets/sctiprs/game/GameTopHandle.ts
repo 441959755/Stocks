@@ -70,10 +70,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.CUTGAMEFUPAN, this.onShowPKFUPAN.bind(this), this);
     }
 
-
     onShowPKFUPAN(status) {
         status = Math.abs(status);
-        //  GameCfg.RoomGameData
         this.pkfupan1.active = false;
         this.pkfupan2.active = false;
         if (status == 3) {
@@ -89,7 +87,6 @@ export default class NewClass extends cc.Component {
 
             name1.string = GameCfg.RoomGameData.players[0].gd.nickname;
             name2.string = GameCfg.RoomGameData.players[1].gd.nickname;
-
         }
         else {
 
@@ -101,11 +98,17 @@ export default class NewClass extends cc.Component {
 
             let result = this.pkfupan1.getChildByName('rate').getChildByName('label4').getComponent(cc.Label);
 
-            name.string = '昵称：' + GameCfg.RoomGameData.players[status - 1].gd.nickname;
+            name.string = '昵称：' + GameData.userName;
 
-            let r = GameCfg.RoomGameData.players[status - 1].result.userProfitRate;
-
-            let rank = GameCfg.RoomGameData.players[status - 1].result.rank;
+            let r, rank;
+            if (GameCfg.RoomGameData) {
+                r = GameCfg.RoomGameData.players[status - 1].result.userProfitRate;
+                rank = GameCfg.RoomGameData.players[status - 1].result.rank;
+            }
+            else if (GameCfg.GAMEFUPANDATA) {
+                r = GameCfg.GAMEFUPANDATA.userProfitRate || 0.00;
+                rank = GameCfg.GAMEFUPANDATA.rank;
+            }
 
             if (r > 0) {
                 rate.node.color = cc.Color.RED;
@@ -151,7 +154,9 @@ export default class NewClass extends cc.Component {
             btnMyspic.active = false;
             statBtn.active = true;
         }
-
+        else if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+            this.onShowPKFUPAN(1)
+        }
     }
 
     protected onEnable() {
@@ -231,27 +236,22 @@ export default class NewClass extends cc.Component {
             if (!GameCfg.GAMEFUPAN) {
                 if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 
+                    let str;
                     if (GameCfg.GAMEWAIT) {
-                        PopupManager.LoadPopupBox('tipsBox', '您的成绩已出，现在退出无任何影响。稍后记得在奖励中心领取奖励。', () => {
-                            GlobalHandle.onReqRoomLeave();
-                            GameCfg.huizhidatas = 0;
-                            GameCfg.allRate = 0;
-                            GameCfg.finalfund = 0;
-                            GameCfg.GAMEFUPAN = false;
-                            cc.director.loadScene('hall');
-                        })
+                        str = '您的成绩已出，现在退出无任何影响。稍后记得在奖励中心领取奖励。';
                     }
                     else {
-                        PopupManager.LoadPopupBox('tipsBox', '您正在比赛中，现在退出会被认定为逃跑用户，请确认在退出', () => {
-                            GlobalHandle.onReqRoomLeave();
-                            GameCfg.huizhidatas = 0;
-                            GameCfg.allRate = 0;
-                            GameCfg.finalfund = 0;
-                            GameCfg.GAMEFUPAN = false;
-                            cc.director.loadScene('hall');
-                        })
+                        str = '您正在比赛中，现在退出会被认定为逃跑用户，请确认在退出';
                     }
-
+                    PopupManager.LoadPopupBox('tipsBox', str, () => {
+                        GameCfg.GameType = null;
+                        GlobalHandle.onReqRoomLeave();
+                        GameCfg.huizhidatas = 0;
+                        GameCfg.allRate = 0;
+                        GameCfg.finalfund = 0;
+                        GameCfg.GAMEFUPAN = false;
+                        cc.director.loadScene('hall');
+                    })
                 }
                 else {
                     PopupManager.LoadPopupBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
@@ -260,13 +260,15 @@ export default class NewClass extends cc.Component {
                 }
             } else {
                 if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-                    GlobalEvent.emit(EventCfg.GAMEOVEER);
+                    if (GameCfg.GAMEFUPANDATA) {
+                        this.onBlackHAll();
+                    }
+                    else {
+                        GlobalEvent.emit(EventCfg.GAMEOVEER);
+                    }
+
                 } else {
-                    GameCfg.huizhidatas = 0;
-                    GameCfg.allRate = 0;
-                    GameCfg.finalfund = 0;
-                    GameCfg.GAMEFUPAN = false;
-                    cc.director.loadScene('hall');
+                    this.onBlackHAll();
                 }
             }
         }
@@ -278,5 +280,14 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.OPENSTATLAYER);
         }
 
+    }
+
+    onBlackHAll() {
+        GameCfg.GameType = null;
+        GameCfg.huizhidatas = 0;
+        GameCfg.allRate = 0;
+        GameCfg.finalfund = 0;
+        GameCfg.GAMEFUPAN = false;
+        cc.director.loadScene('hall');
     }
 }

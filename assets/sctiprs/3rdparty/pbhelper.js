@@ -342,7 +342,7 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Sync_Room_Enter_Self) {
             let data = this.onSyncRoomEnterSelfMessage(buff);
 
-            if (data.game == pb.GameType.JJ_PK || data.game == pb.GameType.JJ_QiHuo) {
+            if (data.game == pb.GameType.JJ_PK || data.game == pb.GameType.JJ_DuoKong) {
                 let message = this.onRoomGameDataMessage(data.data);
                 console.log('自己进入房间' + JSON.stringify(message));
                 GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);

@@ -35,6 +35,8 @@ export default class NewClass extends cc.Component {
 
     markNodes = [];         //xl  mark
 
+    bmarkNodes = [];
+
     AIMarkNodes = [];      //AI的mark
 
     mark1Nodes = [];       //pk 自己的mark
@@ -81,6 +83,15 @@ export default class NewClass extends cc.Component {
 
         this.markNodes = [];
         this.markNodes.length = 0;
+
+        this.bmarkNodes.forEach(el => {
+            if (el && el.node) {
+                el.node.destroy();
+            }
+        })
+
+        this.bmarkNodes = [];
+        this.bmarkNodes.length = 0;
 
         this.mark1Nodes.forEach(el => {
             if (el && el.node) {
@@ -194,6 +205,15 @@ export default class NewClass extends cc.Component {
     onMarkRangeShowOrHide() {
 
         this.markNodes.forEach((el, i) => {
+            if (el && el.node) {
+                if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
+                    el.node.active = false;
+
+                }
+            }
+        })
+
+        this.bmarkNodes.forEach((el, i) => {
             if (el && el.node) {
                 if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
                     el.node.active = false;
@@ -321,6 +341,28 @@ export default class NewClass extends cc.Component {
             this.markNodes[posInfo.index].node.scale = this.currScale;
         }
 
+        if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+            if (this.bmarkNodes[posInfo.index]) {
+
+                if (GameCfg.GAMEFUPAN) {
+                    this.bmarkNodes[posInfo.index].node.active = true;
+                }
+
+                //买入标签
+                if (this.bmarkNodes[posInfo.index].type == 2) {
+                    this.bmarkNodes[posInfo.index].node.position = posInfo.lowPos;
+                    this.bmarkNodes[posInfo.index].node.y -= (this.bmarkNodes[posInfo.index].node.height / 2 + 5)
+                }
+                //卖出标签
+                else if (this.bmarkNodes[posInfo.index].type == 3) {
+                    this.bmarkNodes[posInfo.index].node.position = posInfo.highPos;
+                    this.bmarkNodes[posInfo.index].node.y += (this.bmarkNodes[posInfo.index].node.height / 2 + 5)
+                }
+
+                this.bmarkNodes[posInfo.index].node.scale = this.currScale;
+            }
+        }
+
         //pk 切换
         if (this.status) {
 
@@ -384,14 +426,14 @@ export default class NewClass extends cc.Component {
             if (this.startNode[inde]) { return }
             node = cc.instantiate(this.startItem);
         } else if (info.type == 2) {
-            if (this.markNodes[inde]) { return }
+            //   if (this.markNodes[inde]) { return }
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                 node = cc.instantiate(this.Zb);
             } else {
                 node = cc.instantiate(this.bItem);
             }
         } else if (info.type == 3) {
-            if (this.markNodes[inde]) { return }
+            //  if (this.markNodes[inde]) { return }
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                 node = cc.instantiate(this.Zs);
             }
@@ -441,10 +483,18 @@ export default class NewClass extends cc.Component {
                 }
 
             } else {
-                this.markNodes[inde] = {
-                    node: node,
-                    type: info.type,
-                };
+                if (this.markNodes[inde]) {
+                    this.bmarkNodes[inde] = {
+                        node: node,
+                        type: info.type,
+                    }
+                } else {
+                    this.markNodes[inde] = {
+                        node: node,
+                        type: info.type,
+                    };
+                }
+
             }
         }
         node.active = false;
@@ -455,6 +505,16 @@ export default class NewClass extends cc.Component {
     //显示所有标签
     onMarkAllShow() {
         this.markNodes.forEach((el, i) => {
+            if (el && el.node) {
+                //   
+                if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
+                    el.node.active = true;
+
+                }
+            }
+        })
+
+        this.bmarkNodes.forEach((el, i) => {
             if (el && el.node) {
                 //   
                 if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {

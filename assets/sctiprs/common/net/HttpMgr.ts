@@ -71,5 +71,24 @@ export default class HttpMgr {
         }, err);
     }
 
-
+    // items = [{ "opId": "Ask", "kOffset": 105, "volume": "1" },
+    // { "opId": "Bid", "kOffset": 106, "volume": "1" },
+    // { "opId": "Long", "kOffset": 106, "volume": "1" },
+    // { "opId": "Short", "kOffset": 107, "volume": "1" },
+    // { "opId": "Ask", "kOffset": 107, "volume": "1" },
+    // { "opId": "Bid", "kOffset": 108, "volume": "1" },
+    // { "opId": "Long", "kOffset": 108, "volume": "1" },
+    // { "opId": "Short", "kOffset": 109, "volume": "1" },
+    // { "opId": "Ask", "kOffset": 109, "volume": "1" },
+    // { "opId": "Bid", "kOffset": 110, "volume": "1" },
+    // { "opId": "Long", "kOffset": 110, "volume": "1" },
+    // { "opId": "Short", "kOffset": 111, "volume": "1" },
+    // { "opId": "Ask", "kOffset": 111, "volume": "1" },
+    // { "opId": "Bid", "kOffset": 112, "volume": "1" },
+    // { "opId": "Long", "kOffset": 112, "volume": "1" },
+    // { "opId": "Short", "kOffset": 113, "volume": "1" },
+    // { "opId": "Ask", "kOffset": 113, "volume": "1" },
+    // { "opId": "Bid", "kOffset": 114, "volume": "1" },
+    // { "opId": "Long", "kOffset": 114, "volume": "1" },
+    // { "opId": "Short", "kOffset": 115, "volume": "1" }]
 }

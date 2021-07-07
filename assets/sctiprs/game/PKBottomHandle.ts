@@ -32,6 +32,18 @@ export default class NewClass extends cc.Component {
     @property(cc.Button)
     cyBtn: cc.Button = null;
 
+    @property(cc.Node)
+    mzb: cc.Node = null;
+
+    @property(cc.Node)
+    mdb: cc.Node = null;
+
+    @property(cc.Node)
+    pcb: cc.Node = null;
+
+    @property(cc.Node)
+    pcb1: cc.Node = null;
+
     onLoad() {
         GlobalEvent.on(EventCfg.CUTGAMEFUPAN, (status) => {
             if (status) {
@@ -45,7 +57,9 @@ export default class NewClass extends cc.Component {
         }, this);
 
         GlobalEvent.on(EventCfg.GAMEFUPAN, this.onGameFUPANSHOW.bind(this), this);
+        this.bself = this.node.getComponent('BottomHandle');
 
+        GlobalEvent.on(EventCfg.RAISINGLIMIT, this.getRaisingLimit.bind(this), this);
     }
 
     onDestroy() {
@@ -65,61 +79,68 @@ export default class NewClass extends cc.Component {
             pkFP.active = true;
             pkFP.children[0].getComponent(cc.Label).string = GameCfg.data[0].name + '    ' + GameCfg.data[0].code;
 
-            let kFrom = GameCfg.RoomGameData.players[0].result.kFrom;
-            let kTo = GameCfg.RoomGameData.players[0].result.kTo;
+            let kFrom, kTo, tq
+            if (GameCfg.RoomGameData) {
+                kFrom = GameCfg.RoomGameData.players[0].result.kFrom;
+                kTo = GameCfg.RoomGameData.players[0].result.kTo;
+                tq = GameCfg.RoomGameData.players[0].result.stockProfitRate.toFixed(2);
+            }
+            else if (GameCfg.GAMEFUPANDATA) {
+                kFrom = GameCfg.GAMEFUPANDATA.kFrom;
+                kTo = GameCfg.GAMEFUPANDATA.kTo;
+                tq = GameCfg.GAMEFUPANDATA.stockProfitRate.toFixed(2);
+            }
+
             pkFP.children[1].getComponent(cc.Label).string = ComUtils.formatTime(kFrom) + '--' + ComUtils.formatTime(kTo)
-            let tq = GameCfg.RoomGameData.players[0].result.stockProfitRate.toFixed(2);
             pkFP.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
         }
     }
 
     start() {
-        if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-
-            this.node.getChildByName('isFC').active = false;
-            if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-                this.node.getChildByName('JJ_DuoKong').active = true;
-            }
-            else if ((GameCfg.GameType == pb.GameType.JJ_PK){
-                this.node.getChildByName('isFC').active = true;
-            }
-
-            this.node.getChildByName('label1').active = true;
-            this.node.getChildByName('label2').active = false;
-
-            let pkNode = this.node.getChildByName('pk');
-            pkNode.active = true;
-            let timeLabel = pkNode.getChildByName('timeLabel').getComponent(cc.Label);
-            timeLabel.node.active = true;
-            if (GameCfg.data[0].tsGameFrom && GameCfg.data[0].tsGameCur) {
-                let num = GameCfg.data[0].tsGameCur - GameCfg.data[0].tsGameFrom;
-                num = 3 * 60 - num;
-                this.cb1 = setInterval(() => {
-                    if (num <= 0) {
-                        clearInterval(this.cb1);
-                    }
-                    timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
-                    num--;
-
-                }, 1000)
-            }
-            else {
-                let num = 3 * 60 + 3;
-                this.cb1 = setInterval(() => {
-                    if (num <= 0) {
-                        clearInterval(this.cb1);
-                    }
-                    timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
-                    num--;
-                }, 1000)
-            }
-        }
-
         if (GameCfg.GAMEFUPAN) {
             this.onGameFUPANSHOW();
-        }
+        } else {
+            if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 
-        this.bself = this.node.getComponent('BottomHandle');
+                this.node.getChildByName('isFC').active = false;
+                if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+                    this.node.getChildByName('JJ_DuoKong').active = true;
+                }
+                else if (GameCfg.GameType == pb.GameType.JJ_PK) {
+                    this.node.getChildByName('isFC').active = true;
+                }
+
+                this.node.getChildByName('label1').active = true;
+                this.node.getChildByName('label2').active = false;
+
+                let pkNode = this.node.getChildByName('pk');
+                pkNode.active = true;
+                let timeLabel = pkNode.getChildByName('timeLabel').getComponent(cc.Label);
+                timeLabel.node.active = true;
+                if (GameCfg.data[0].tsGameFrom && GameCfg.data[0].tsGameCur) {
+                    let num = GameCfg.data[0].tsGameCur - GameCfg.data[0].tsGameFrom;
+                    num = 3 * 60 - num;
+                    this.cb1 = setInterval(() => {
+                        if (num <= 0) {
+                            clearInterval(this.cb1);
+                        }
+                        timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
+                        num--;
+
+                    }, 1000)
+                }
+                else {
+                    let num = 3 * 60 + 3;
+                    this.cb1 = setInterval(() => {
+                        if (num <= 0) {
+                            clearInterval(this.cb1);
+                        }
+                        timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
+                        num--;
+                    }, 1000)
+                }
+            }
+        }
     }
 
     onBtnClick(event, data) {
@@ -152,7 +173,6 @@ export default class NewClass extends cc.Component {
                 }
                 UpGameOpt.addOpt(item);
             }
-
             this.bself.setRoundNumber('mrBtn')
         }
         else if (name == 'mdBtn') {
@@ -175,7 +195,6 @@ export default class NewClass extends cc.Component {
                 }
                 UpGameOpt.addOpt(item);
             }
-
             this.bself.setRoundNumber('mrBtn1')
         }
         else if (name == 'pcBtn1') {
@@ -225,6 +244,47 @@ export default class NewClass extends cc.Component {
                 UpGameOpt.addOpt(item);
             }
             this.bself.setRoundNumber('mcBtn', 1)
+        }
+        else if (name == 'dkdz_mz2') {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '涨停板不能买涨！')
+        }
+        else if (name == 'dkdz_md2') {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '跌停板不能买跌！')
+        }
+        else if (name == 'dkdz_pc1') {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '涨停板不能买跌中平仓!')
+        }
+        else if (name == 'dkdz_pc2') {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '跌停板不能买涨中平仓！')
+        }
+
+    }
+
+    //获取涨停板
+    getRaisingLimit(limitUP) {
+
+        this.mzb.active = false;
+        this.mdb.active = false;
+        this.pcb.active = false;
+        this.pcb1.active = false;
+        //涨
+        if (limitUP == 1) {
+            this.mzb.active = true;
+            if (this.bself._KKCount) {
+                // this.pcb.active = true;
+                this.pcb1.active = true;
+            }
+
+        }
+        //跌
+        else if (limitUP == 2) {
+            this.mdb.active = true;
+            if (this.bself._KKCount) {
+
+            } else {
+                this.pcb.active = true;
+                //  this.pcb1.active = true;
+            }
         }
 
     }

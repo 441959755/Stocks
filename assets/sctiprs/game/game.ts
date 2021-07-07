@@ -81,10 +81,11 @@ export default class NewClass extends cc.Component {
     start() {
 
         //游戏开始动画
-        if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) && !GameCfg.GAMEFRTD) {
-            this.startGameNode.active = true;
+        if (!GameCfg.GAMEFUPAN) {
+            if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) && !GameCfg.GAMEFRTD) {
+                this.startGameNode.active = true;
+            }
         }
-
     }
 
     protected onDestroy() {
@@ -96,6 +97,8 @@ export default class NewClass extends cc.Component {
         ComUtils.onDestory();
         GlobalEvent.off(EventCfg.OPENOTHERINFOBOX);
         PopupManager.delPopupNode();
+        GameCfg.GAMEFUPAN = false;
+        GameCfg.GAMEFUPANDATA = null;
     }
 
 

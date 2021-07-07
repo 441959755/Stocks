@@ -336,6 +336,8 @@ export default class NewClass extends cc.Component {
         this.initData();
 
         GlobalEvent.on(EventCfg.NOTICEDRAWMOVW, this.noticeDrawMove.bind(this), this);
+
+        // GlobalEvent.on(EventCfg.RAISINGLIMIT, this.getRaisingLimit.bind(this), this);
     }
 
     //跳转到标签买卖点
@@ -857,56 +859,7 @@ export default class NewClass extends cc.Component {
 
     //获取涨停板
     getRaisingLimit(index) {
-        if (GameCfg.GameType != pb.GameType.QiHuo) {
-            // let index = GameCfg.huizhidatas - 1;
-            let code = GameCfg.data[0].code + '';
-            if (code.length >= 7) {
-                code = code.slice(1);
-            }
-            let data = GameCfg.data[0].data;
-            let str = code.slice(0, 2);
-            let str1 = code.slice(0, 3);
-            if (data[index - 1] && data[index]) {
-                let rate = (data[index].close - data[index - 1].close) / data[index - 1].close * 100;
-                if (str == '60' || str == '00') {
-                    if (rate >= 9.95) {
-                        return true;
-                    } else if (rate <= -9.95) {
-                        return true;
-                    }
-                }
-                else if (str1 == '688') {
-                    if (rate >= 19.94) {
-                        return true;
-                    } else if (rate <= -19.94) {
-                        return true;
-                    }
-                }
-                else if (str1 == '300') {
-                    let time = ComUtils.fromatTime1(data[index].day);
-                    if (time >= 20200824) {
-                        if (rate >= 19.94) {
-                            return true;
-                        }
-                        else if (rate <= -19.94) {
-                            return true;
-                        }
-                    }
-                    else if (time < 20200824) {
-                        if (rate >= 9.95) {
-                            return true;
-                        }
-                        else if (rate <= -9.95) {
-                            return true;
-                        }
-                    }
-                }
-
-
-            }
-
-        }
-        return false;
-
+        let falg = DrawData.getRaisingLimit(index);
+        return !!falg;
     }
 }

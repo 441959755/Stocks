@@ -84,8 +84,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.HISTORYOPTDATA);
     }
 
-    onShow() {
 
+    onShow() {
         this.content.removeAllChildren();
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
         //   if (this.historyType == 'SM') {
@@ -112,7 +112,7 @@ export default class NewClass extends cc.Component {
         let it = 1;
 
         for (let i = datas.length - 1; i >= 0; i--) {
-            if (TIMETEMP.indexOf(datas[i].ts) != -1 || GameCfg.GameType == pb.GameType.ShuangMang) {
+            if (TIMETEMP.indexOf(datas[i].ts) != -1 && datas[i].gType == GameCfg.GameType) {
                 let node = cc.instantiate(this.historyItem);
                 let nodes = node.children;
                 this.content.addChild(node);

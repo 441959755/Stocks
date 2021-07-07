@@ -64,8 +64,11 @@ export default class NewClass extends cc.Component {
 
     onLoadHead() {
         //test.chaogugame.com/icon/X.png
+        //login.cgdr168.com/icon/X.png
+        //let url = 'http://login.chaogugame.com/icon/' + GameData.Players[1].icon + '.png';
+        //let url = 'https://img1.baidu.com/it/u=3139177467,1950838334&fm=26&fmt=auto&gp=0.jpg';
+        // let url = 'https://www.cgdr168.com/icon/200003.png';
         let url = 'http://test.chaogugame.com/icon/' + GameData.Players[1].icon + '.png';
-
         LoadUtils.load(url, (res) => {
             let texture = new cc.SpriteFrame(res);
             GameData.Players[1].icon = texture;

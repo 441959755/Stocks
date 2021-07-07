@@ -73,17 +73,17 @@ export default class NewClass extends cc.Component {
             if (str == items[0]) {
                 nodes[index].children[0].children[1].active = true;
                 let arr = nodes[index].children;
-                if (items[1]) {
-                    for (let t = 1; t < arr.length; t++) {
-                        let str = arr[t].children[0].getComponent(cc.Label).string;
-                        if (str == items[1]) {
-                            arr[t].children[1].active = true;
-                        } else {
-                            arr[t].children[1].active = false;
-                        }
-                        arr[t].active = false;
+                //  if (items[1]) {
+                for (let t = 1; t < arr.length; t++) {
+                    let str = arr[t].children[0].getComponent(cc.Label).string;
+                    if (str == items[1]) {
+                        arr[t].children[1].active = true;
+                    } else {
+                        arr[t].children[1].active = false;
                     }
+                    arr[t].active = false;
                 }
+                //  }
 
             } else {
                 nodes[index].children[0].children[1].active = false;
@@ -145,13 +145,13 @@ export default class NewClass extends cc.Component {
                     }
 
                 });
-                let nodes1 = this.content.children;
-                for (let index = 0; index < nodes1.length; index++) {
-                    let str1 = nodes1[index].children[0].children[0].getComponent(cc.Label).string;
-                    if (str1 == str[0]) {
-                        this.location = '';
-                    }
-                }
+                // let nodes1 = this.content.children;
+                // for (let index = 0; index < nodes1.length; index++) {
+                //     let str1 = nodes1[index].children[0].children[0].getComponent(cc.Label).string;
+                //     if (str1 == str[0]) {
+                //         this.location = '';
+                //     }
+                // }
                 return;
             }
             this.location += ' ' + node.children[0].getComponent(cc.Label).string;

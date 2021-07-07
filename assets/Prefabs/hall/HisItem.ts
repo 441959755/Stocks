@@ -85,6 +85,7 @@ export default class NewClass extends cc.Component {
         }
         else if (this.itemData.gType == pb.GameType.JJ_DuoKong) {
             this.modeLabel.string = '多空大战';
+            this.gameSet1 = GameData.JJPKSet;
         }
         else if (this.itemData.gType == pb.GameType.JJ_ChuangGuan) {
             this.modeLabel.string = '闯  关赛';
@@ -114,24 +115,24 @@ export default class NewClass extends cc.Component {
             GameCfg.GameSet = this.gameSet1;
             let ts = this.itemData.ts;
             GameCfg.GAMEFUPAN = true;
-            GameCfg.GameType = this.itemData.kType;
-
+            GameCfg.GameType = this.itemData.gType;
             GameCfg.huizhidatas = this.itemData.kStop + 1;
             GameData.huizhidatas = this.itemData.kStartup + 1;
+            GameCfg.GAMEFUPANDATA = this.itemData;
             GlobalHandle.GetGameOperations(ts, () => {
                 this.onGamenterStart();
             });
 
         }
         else if (name == 'btn_xl') {
-            if (GameCfg.GameType == pb.GameType.JJ_PK) {
-                let gameCount = EnterGameControl.onCurDXIsEnterGame();
+            //   if (GameCfg.GameType == pb.GameType.JJ_PK) {
+            let gameCount = EnterGameControl.onCurDXIsEnterGame();
 
-                if (gameCount.status == 3) {
-                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
-                    return;
-                }
+            if (gameCount.status == 3) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
+                return;
             }
+            //   }
 
             GameCfg.GameType = pb.GameType.DingXiang;
             GameCfg.GameSet = GameData.DXSet;
@@ -171,21 +172,13 @@ export default class NewClass extends cc.Component {
             kstyle: pb.KStyle.Random,
             code: this.itemData.quotesCode,
             from: this.itemData.kFrom,
-            total: 150,
+            total: 150 + 1,
             to: 0,
         }
 
         GameCfg.enterGameCache = cache;
 
-        // GameCfg.GameType = this.itemData.kType;
-
-        if (GameCfg.GameType == pb.GameType.QiHuo) {
-            GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, cache);
-        } else {
-            GlobalHandle.onCmdGameStartQuoteQuery(cache, () => {
-                cc.director.loadScene('game');
-            });
-        }
+        EnterGameControl.onClearPreGameDataEnter(cache);
     }
 
 }

@@ -73,10 +73,10 @@ export default class NewClass extends cc.Component {
     testKFrom() {
 
         let index = GameCfg.huizhidatas - 1;
-        if (index < 2) {
+        let data = GameCfg.data[0].data;
+        if (index < 3) {
             return;
         }
-        let data = GameCfg.data[0].data;
         let rate = (data[index].close - data[index - 1].close) / data[index - 1].close;
 
         let rate1 = (data[index - 1].close - data[index - 2].close) / data[index - 2].close;

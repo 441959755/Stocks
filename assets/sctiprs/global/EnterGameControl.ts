@@ -63,7 +63,7 @@ export default class EnterGameControl {
             GameCfg.blockHistoy = [];
             GameCfg.mark = [];
             GameCfg.notice = [];
-            GameCfg.GAMEFUPAN = false;
+
             GameCfg.history.allRate = 0;
 
             GlobalEvent.emit(EventCfg.LEVELCHANGE);
@@ -76,7 +76,7 @@ export default class EnterGameControl {
                 cb && cb();
             }
             else {
-                if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang) {
+                if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
                     GlobalHandle.onCmdGameStartQuoteQuery(data, cb)
                 }
                 else if (GameCfg.GameType == pb.GameType.QiHuo) {

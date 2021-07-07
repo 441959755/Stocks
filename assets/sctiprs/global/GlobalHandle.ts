@@ -334,7 +334,7 @@ export default class GlobalHandle {
 
     public static onReqRoomEnter(arr, call?) {
         let data = {
-            game: pb.GameType.JJ_PK,
+            game: GameCfg.GameType,
             uid: GameData.userID,
             junXian: arr,
         }
