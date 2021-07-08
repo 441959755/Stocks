@@ -9,8 +9,6 @@
     ]
   ],
   "excluded-modules": [
-    "Animation",
-    "Collider",
     "Dynamic Atlas",
     "DragonBones",
     "Geom Utils",
@@ -20,7 +18,6 @@
     "MotionStreak",
     "Physics",
     "PageViewIndicator",
-    "ParticleSystem",
     "RichText",
     "Renderer Texture",
     "Spine Skeleton",

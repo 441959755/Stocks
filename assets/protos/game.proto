@@ -138,7 +138,6 @@ enum GameOperationId {
 	Ask_Force = 6;				// 强制买入
 	Long = 8;					// 买空
 	Short = 9;					// 卖空
-	Close_Force = 10;			// 强行平仓
 
 	END = 150;					// 回合结束
 }
@@ -610,6 +609,11 @@ message JjGame {
 	repeated JjPlayer players = 8;	// 玩家数据
 	int32 capital = 9;				// 报名费
 }
+// 领取闯关赛关卡奖励
+message CmdCgsGetStageAward {
+	int32 id = 1;	// 当前这一轮闯关赛的时间编码：YYYYMMDD
+	int32 stage = 2;// 关卡序号
+}
 
 
 
@@ -674,6 +678,7 @@ message CmdMncgExchangeReply {
 message CmdMncgEditStock {
 	bool removed = 1;		// 操作：false表示添加，true表示删除
 	int32 code = 2;			// 股票代码
+	bool is_ai_stock = 3;	// 是否为AI选股
 }
 message CmdQueryStockOrder {
 	int32 uid = 1;			// 玩家ID

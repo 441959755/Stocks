@@ -4,7 +4,6 @@ import GameCfg from '../game/GameCfg';
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import LoadUtils from '../Utils/LoadUtils';
-import GlobalHandle from '../global/GlobalHandle';
 import EnterGameControl from '../global/EnterGameControl';
 
 const { ccclass, property } = cc._decorator;
@@ -47,6 +46,8 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on(EventCfg.HEADIMGCHANGE, () => {
 			this.userHead.spriteFrame = GameData.headImg;
 		}, this);
+
+
 	}
 
 	start() {
@@ -88,7 +89,6 @@ export default class NewClass extends cc.Component {
 		} else {
 			this.girlNode.active = true;
 		}
-
 		//    this.progr.progress = GameData.properties[1] / GameData.maxExp;
 	}
 
@@ -98,6 +98,18 @@ export default class NewClass extends cc.Component {
 			this.Layers[index].active = el.isChecked;
 		});
 	}
+
+	changeToggle(index) {
+		this.toggles.forEach((el, i) => {
+			el.isChecked = false;
+			if (index == i) {
+				el.isChecked = true;
+			}
+		})
+
+		this.initToggle();
+	}
+
 
 	onToggleClick(event, data) {
 		this.initToggle();
@@ -148,6 +160,7 @@ export default class NewClass extends cc.Component {
 			}
 
 		}
+
 		else if (name == 'main_jj_dkdz') {
 			if (EnterGameControl.onCurPKEnterGame()) {
 				GameCfg.GameType = pb.GameType.JJ_DuoKong;
@@ -157,8 +170,13 @@ export default class NewClass extends cc.Component {
 			else {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
 			}
-
 		}
+
+		else if (name == 'toggle1') {
+			let index = parseInt(name.slice(-1));
+			this.changeToggle(index);
+		}
+
 	}
 
 	onDestroy() {

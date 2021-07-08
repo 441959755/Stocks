@@ -108,7 +108,6 @@ export default class NewClass extends cc.Component {
 			this.node.active = false;
 		} else if (name == 'saveSetBtn') {
 			//保存选择的数据
-			//cc.ext.gameData.gameSetData
 			this.SaveToggle();
 			this.node.active = false;
 		} else if (name == 'lx_srk_1') {

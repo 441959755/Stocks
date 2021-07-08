@@ -210,7 +210,7 @@ export default class NewClass extends cc.Component {
 				} else {
 					GameCfg.allRate = (this.ziChan + this.keMcCount * preClose - GameCfg.ziChan) / GameCfg.ziChan;
 				}
-				GlobalEvent.emit('updateRate', [0, GameCfg.allRate]);
+				GlobalEvent.emit(EventCfg.UPDATERATE, [0, GameCfg.allRate]);
 
 				GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
 
@@ -1083,7 +1083,7 @@ export default class NewClass extends cc.Component {
 				sign = 2;
 			}
 
-			GlobalEvent.emit('updateRate', [rate]);
+			GlobalEvent.emit(EventCfg.UPDATERATE, [rate]);
 
 			this.isFlag = true;
 			let start = GameCfg.huizhidatas;
@@ -1135,7 +1135,7 @@ export default class NewClass extends cc.Component {
 
 			this.curMrCount = [];
 
-			GlobalEvent.emit('updateRate', [rate, GameCfg.allRate]);
+			GlobalEvent.emit(EventCfg.UPDATERATE, [rate, GameCfg.allRate]);
 
 			if (this.keMcCount == 0) {
 				this.isFlag = false;
@@ -1166,7 +1166,7 @@ export default class NewClass extends cc.Component {
 
 				//下个持仓率
 				let rate1 = this.onCurPositionRete();
-				GlobalEvent.emit('updateRate', [rate1]);
+				GlobalEvent.emit(EventCfg.UPDATERATE, [rate1]);
 			}
 			this.rateItem.rate = rate;
 			if (GameCfg.GameType == pb.GameType.QiHuo) {
@@ -1198,7 +1198,7 @@ export default class NewClass extends cc.Component {
 				rate = -rate;
 			}
 
-			GlobalEvent.emit('updateRate', [rate]);
+			GlobalEvent.emit(EventCfg.UPDATERATE, [rate]);
 
 			GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
 

@@ -81,16 +81,14 @@ export default class GlobalHandle {
                 return;
             }
 
-            //	GameCfg.enterGameCache.startTime = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
-
             if (!GameCfg.GAMEFUPAN) {
                 GameCfg.huizhidatas = info.items.length;
             }
+            // if (GameCfg.GameType != pb.GameType.JJ_DuoKong && GameCfg.GameType != pb.GameType.JJ_DuoKong) {
             GameData.huizhidatas = info.items.length;
+            //   }
 
 
-
-            //	GameData.huizhidatas = info.items.length;
             info1.kstyle = pb.KStyle.Random;
 
             socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {

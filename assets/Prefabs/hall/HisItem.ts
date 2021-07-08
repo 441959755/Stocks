@@ -4,6 +4,7 @@ import GameData from "../../sctiprs/GameData";
 import GameCfgText from "../../sctiprs/GameText";
 import EnterGameControl from "../../sctiprs/global/EnterGameControl";
 import GlobalHandle from "../../sctiprs/global/GlobalHandle";
+import UpGameOpt from "../../sctiprs/global/UpGameOpt";
 import ComUtils from "../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
@@ -116,10 +117,11 @@ export default class NewClass extends cc.Component {
             let ts = this.itemData.ts;
             GameCfg.GAMEFUPAN = true;
             GameCfg.GameType = this.itemData.gType;
-            GameCfg.huizhidatas = this.itemData.kStop + 1;
-            GameData.huizhidatas = this.itemData.kStartup + 1;
+            GameCfg.huizhidatas = this.itemData.kStop;
+            GameData.huizhidatas = this.itemData.kStartup;
             GameCfg.GAMEFUPANDATA = this.itemData;
             GlobalHandle.GetGameOperations(ts, () => {
+                UpGameOpt.ChanagekOffset(UpGameOpt.player1Opt);
                 this.onGamenterStart();
             });
 
@@ -137,8 +139,8 @@ export default class NewClass extends cc.Component {
             GameCfg.GameType = pb.GameType.DingXiang;
             GameCfg.GameSet = GameData.DXSet;
             GameCfg.GAMEFUPAN = false;
-            GameCfg.huizhidatas = this.itemData.kStartup + 1;
-            GameData.huizhidatas = this.itemData.kStartup + 1;
+            GameCfg.huizhidatas = this.itemData.kStartup;
+            GameData.huizhidatas = this.itemData.kStartup;
 
             GameCfg.GameSet.year = (this.itemData.kFrom + '').slice(0, 4);
 

@@ -108,6 +108,8 @@ enum MessageId {
 	Rep_QueryAiStockList = 2012;			// 查询AI选股的股票列表响应：CmdQueryAiStockListReply
 	Req_QueryAiSignal = 2013;				// 查询某个股票的买卖信号：CmdQueryAiSignal
 	Rep_QueryAiSignal = 2014;				// 查询某个股票的买卖信号响应：CmdQueryAiSignalReply
+	Req_EditAiStockList = 2015;				// 收藏/取消收藏智能选股：CmdMncgEditStock
+	Rep_EditAiStockList = 2016;				// 收藏/取消收藏智能选股：无
 
 
 	// 大厅相关
@@ -179,32 +181,34 @@ enum MessageId {
 	Rep_Game_CgsGetStageRank = 4020;		// 查询闯关赛关卡排行应答：RankingList
 	Req_Game_CgsGetSeasonRank = 4021;		// 查询闯关赛排行榜：CmdCgsRanking
 	Rep_Game_CgsGetSeasonRank = 4022;		// 查询闯关赛排行榜应答：RankingList
+	Req_Game_CgsGetStageAward = 4023;		// 领取闯关赛奖励：CmdGetCgsStageAward
+	Rep_Game_CgsGetStageAward = 4024;		// 领取闯关赛奖励应答：ErrorInfo
 	// 模拟炒股和炒股大赛共用
-	Req_Game_OrderQuery = 4023;				// 查询交易记录：CmdQueryStockOrder
-	Rep_Game_OrderQuery = 4024;				// 查询交易记录应答：StockOrderList
-	Req_Game_Order = 4025;					// 股票委托：CmdStockOrder
-	Rep_Game_Order = 4026;					// 股票委托应答：CmdStockOrderReply
-	Req_Game_OrderCancel = 4027;			// 撤销股票委托：CmdStockOrderCancel
-	Rep_Game_OrderCancel = 4028;			// 撤销股票委托：ErrorInfo
+	Req_Game_OrderQuery = 4025;				// 查询交易记录：CmdQueryStockOrder
+	Rep_Game_OrderQuery = 4026;				// 查询交易记录应答：StockOrderList
+	Req_Game_Order = 4027;					// 股票委托：CmdStockOrder
+	Rep_Game_Order = 4028;					// 股票委托应答：CmdStockOrderReply
+	Req_Game_OrderCancel = 4029;			// 撤销股票委托：CmdStockOrderCancel
+	Rep_Game_OrderCancel = 4030;			// 撤销股票委托：ErrorInfo
 	// 模拟炒股
-	Req_Game_MncgExchange = 4029;			// 金币和资产互相兑换：CmdMncgExchange
-	Rep_Game_MncgExchange = 4030;			// 金币和资产互相兑换应答：CmdMncgExchangeReply
-	Req_Game_MncgEditStockList = 4031;		// 关注/删除股票：CmdMncgEditStock
-	Rep_Game_MncgEditStockList = 4032;		// 关注/删除股票应答：无
+	Req_Game_MncgExchange = 4031;			// 金币和资产互相兑换：CmdMncgExchange
+	Rep_Game_MncgExchange = 4032;			// 金币和资产互相兑换应答：CmdMncgExchangeReply
+	Req_Game_MncgEditStockList = 4033;		// 关注/删除股票：CmdMncgEditStock
+	Rep_Game_MncgEditStockList = 4034;		// 关注/删除股票应答：无
 	// 炒股大赛
-	Req_Game_CgdsList = 4033;				// 获取炒股大赛列表：无
-	Rep_Game_CgdsList = 4034;				// 获取炒股大赛列表应答：CgdsList
-	Req_Game_CgdsReg = 4035;				// 报名炒股大赛：CmdCgdsReg
-	Rep_Game_CgdsReg = 4036;				// 报名炒股大赛应答：CmdCgdsRegReply
-	Req_Game_CgdsRanking = 4037;			// 获取炒股大赛排行榜：CmdCgdsRanking
-	Rep_Game_CgdsRanking = 4038;			// 获取炒股大赛排行榜应答：RankingList
+	Req_Game_CgdsList = 4035;				// 获取炒股大赛列表：无
+	Rep_Game_CgdsList = 4036;				// 获取炒股大赛列表应答：CgdsList
+	Req_Game_CgdsReg = 4037;				// 报名炒股大赛：CmdCgdsReg
+	Rep_Game_CgdsReg = 4038;				// 报名炒股大赛应答：CmdCgdsRegReply
+	Req_Game_CgdsRanking = 4039;			// 获取炒股大赛排行榜：CmdCgdsRanking
+	Rep_Game_CgdsRanking = 4040;			// 获取炒股大赛排行榜应答：RankingList
 	// 竞猜相关
-	Req_Game_ZsjcBettingList = 4039;		// 指数竞猜列表：无
-	Rep_Game_ZsjcBettingList = 4040;		// 指数竞猜列表应答：IndexBettingList
-	Req_Game_ZsjcBet = 4041;				// 指数竞猜下注：CmdBet
-	Rep_Game_ZsjcBet = 4042;				// 指数竞猜下注应答：ErrorInfo
-	Req_Game_ZsjcRanking = 4043;			// 指数竞猜排行榜：无
-	Rep_Game_ZsjcRanking = 4044;			// 指数竞猜排行榜应答：RankingList
+	Req_Game_ZsjcBettingList = 4041;		// 指数竞猜列表：无
+	Rep_Game_ZsjcBettingList = 4042;		// 指数竞猜列表应答：IndexBettingList
+	Req_Game_ZsjcBet = 4043;				// 指数竞猜下注：CmdBet
+	Rep_Game_ZsjcBet = 4044;				// 指数竞猜下注应答：ErrorInfo
+	Req_Game_ZsjcRanking = 4045;			// 指数竞猜排行榜：无
+	Rep_Game_ZsjcRanking = 4046;			// 指数竞猜排行榜应答：RankingList
 	// 房间相关
 	Req_Room_Create = 5003;					// 创建房间：CmdRoomCreate
 	Rep_Room_Create = 5004;					// 创建房间应答：CmdRoomCreateReply

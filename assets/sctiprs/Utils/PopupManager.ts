@@ -5,9 +5,12 @@ export default class PopupManager {
 
     public static tipsBox = null;
 
+    private static flag = false;
+
     //选择加载的Prefa
     public static LoadPopupBox(name, text, call?) {
-        if (!this.tipsBox) {
+        if (!this.tipsBox && !this.flag) {
+            this.flag = true;
             LoadUtils.loadRes('Prefabs/' + name, (pre) => {
                 let node = cc.instantiate(pre);
                 cc.find('Canvas').addChild(node, 99);
@@ -17,7 +20,7 @@ export default class PopupManager {
                 this.tipsBox = node;
                 this.tipsBox.emit('contentText', { text: text, call: call });
             })
-        } else {
+        } else if (this.tipsBox && this.flag) {
             this.tipsBox.active = true;
             this.tipsBox.emit('contentText', { text: text, call: call });
         }
@@ -27,6 +30,7 @@ export default class PopupManager {
     public static delPopupNode() {
         this.tipsBox && (this.tipsBox.destroy());
         this.tipsBox = null;
+        this.flag = false;
     }
 
 }

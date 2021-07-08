@@ -99,7 +99,4 @@ export default {
 
     GAMEFRTD: false,  //是否断线重连
 
-
-
-
 }

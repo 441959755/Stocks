@@ -93,9 +93,6 @@ export default class NewClass extends cc.Component {
 
 	QHSetNode: cc.Node = null;
 
-
-
-
 	onLoad() {
 		ComUtils.onLoadNode();
 		ComUtils.onEvent();
@@ -176,21 +173,18 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on(
 			EventCfg.OPENMONTHLAYER,
 			() => {
+				socket.send(pb.MessageId.Req_Game_SmxlReport, null, info => {
+					console.log('OPENMONTHLAYER' + JSON.stringify(info));
 
-				if (socket) {
-					socket.send(pb.MessageId.Req_Game_SmxlReport, null, info => {
-						console.log('OPENMONTHLAYER' + JSON.stringify(info));
+					if (!this.SMMonthlyLayer) {
+						this.SMMonthlyLayer = cc.instantiate(this.SMMothlyPre);
+						this.node.addChild(this.SMMonthlyLayer, 30);
+					}
+					this.SMMonthlyLayer.active = true;
 
-						if (!this.SMMonthlyLayer) {
-							this.SMMonthlyLayer = cc.instantiate(this.SMMothlyPre);
-							this.node.addChild(this.SMMonthlyLayer, 30);
-						}
-						this.SMMonthlyLayer.active = true;
-
-						this.SMMonthlyLayer.getComponent('SMMonthly').monthlyInfo = info;
-						this.SMMonthlyLayer.getComponent('SMMonthly').onShow();
-					});
-				}
+					this.SMMonthlyLayer.getComponent('SMMonthly').monthlyInfo = info;
+					this.SMMonthlyLayer.getComponent('SMMonthly').onShow();
+				});
 
 			},
 			this
@@ -259,7 +253,6 @@ export default class NewClass extends cc.Component {
 
 		}, this);
 
-
 	}
 
 
@@ -277,10 +270,10 @@ export default class NewClass extends cc.Component {
 			event = { target: { name: 'main_xl_qhxl' } }
 		}
 		else if (GameCfg.GameType == pb.GameType.JJ_PK) {
-			event = { target: { name: 'main_jj_pkdz' } }
+			event = { target: { name: 'toggle1' } }
 		}
 		else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-			event = { target: { name: 'main_jj_dkdz' } }
+			event = { target: { name: 'toggle1' } }
 		}
 
 		if (event) {

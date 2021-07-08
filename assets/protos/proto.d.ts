@@ -80,6 +80,8 @@ export namespace pb {
         Rep_QueryAiStockList = 2012,
         Req_QueryAiSignal = 2013,
         Rep_QueryAiSignal = 2014,
+        Req_EditAiStockList = 2015,
+        Rep_EditAiStockList = 2016,
         Req_Hall_UploadIcon = 3001,
         Rep_Hall_UploadIcon = 3002,
         Req_Hall_DownloadIcon = 3003,
@@ -142,28 +144,30 @@ export namespace pb {
         Rep_Game_CgsGetStageRank = 4020,
         Req_Game_CgsGetSeasonRank = 4021,
         Rep_Game_CgsGetSeasonRank = 4022,
-        Req_Game_OrderQuery = 4023,
-        Rep_Game_OrderQuery = 4024,
-        Req_Game_Order = 4025,
-        Rep_Game_Order = 4026,
-        Req_Game_OrderCancel = 4027,
-        Rep_Game_OrderCancel = 4028,
-        Req_Game_MncgExchange = 4029,
-        Rep_Game_MncgExchange = 4030,
-        Req_Game_MncgEditStockList = 4031,
-        Rep_Game_MncgEditStockList = 4032,
-        Req_Game_CgdsList = 4033,
-        Rep_Game_CgdsList = 4034,
-        Req_Game_CgdsReg = 4035,
-        Rep_Game_CgdsReg = 4036,
-        Req_Game_CgdsRanking = 4037,
-        Rep_Game_CgdsRanking = 4038,
-        Req_Game_ZsjcBettingList = 4039,
-        Rep_Game_ZsjcBettingList = 4040,
-        Req_Game_ZsjcBet = 4041,
-        Rep_Game_ZsjcBet = 4042,
-        Req_Game_ZsjcRanking = 4043,
-        Rep_Game_ZsjcRanking = 4044,
+        Req_Game_CgsGetStageAward = 4023,
+        Rep_Game_CgsGetStageAward = 4024,
+        Req_Game_OrderQuery = 4025,
+        Rep_Game_OrderQuery = 4026,
+        Req_Game_Order = 4027,
+        Rep_Game_Order = 4028,
+        Req_Game_OrderCancel = 4029,
+        Rep_Game_OrderCancel = 4030,
+        Req_Game_MncgExchange = 4031,
+        Rep_Game_MncgExchange = 4032,
+        Req_Game_MncgEditStockList = 4033,
+        Rep_Game_MncgEditStockList = 4034,
+        Req_Game_CgdsList = 4035,
+        Rep_Game_CgdsList = 4036,
+        Req_Game_CgdsReg = 4037,
+        Rep_Game_CgdsReg = 4038,
+        Req_Game_CgdsRanking = 4039,
+        Rep_Game_CgdsRanking = 4040,
+        Req_Game_ZsjcBettingList = 4041,
+        Rep_Game_ZsjcBettingList = 4042,
+        Req_Game_ZsjcBet = 4043,
+        Rep_Game_ZsjcBet = 4044,
+        Req_Game_ZsjcRanking = 4045,
+        Rep_Game_ZsjcRanking = 4046,
         Req_Room_Create = 5003,
         Rep_Room_Create = 5004,
         Req_Room_Enter = 5005,
@@ -662,7 +666,6 @@ export namespace pb {
         Ask_Force = 6,
         Long = 8,
         Short = 9,
-        Close_Force = 10,
         END = 150
     }
 
@@ -2069,6 +2072,9 @@ export namespace pb {
 
         /** GameData mobile */
         mobile?: (string|null);
+
+        /** GameData aiStockList */
+        aiStockList?: (number[]|null);
     }
 
     /** Represents a GameData. */
@@ -2130,6 +2136,9 @@ export namespace pb {
 
         /** GameData mobile. */
         public mobile: string;
+
+        /** GameData aiStockList. */
+        public aiStockList: number[];
 
         /**
          * Creates a new GameData instance using the specified properties.
@@ -3887,6 +3896,9 @@ export namespace pb {
 
         /** CmdGameStart game */
         game?: (pb.GameType|null);
+
+        /** CmdGameStart isJunxian */
+        isJunxian?: (boolean|null);
     }
 
     /** Represents a CmdGameStart. */
@@ -3900,6 +3912,9 @@ export namespace pb {
 
         /** CmdGameStart game. */
         public game: pb.GameType;
+
+        /** CmdGameStart isJunxian. */
+        public isJunxian: boolean;
 
         /**
          * Creates a new CmdGameStart instance using the specified properties.
@@ -7056,6 +7071,102 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a CmdCgsGetStageAward. */
+    interface ICmdCgsGetStageAward {
+
+        /** CmdCgsGetStageAward id */
+        id?: (number|null);
+
+        /** CmdCgsGetStageAward stage */
+        stage?: (number|null);
+    }
+
+    /** Represents a CmdCgsGetStageAward. */
+    class CmdCgsGetStageAward implements ICmdCgsGetStageAward {
+
+        /**
+         * Constructs a new CmdCgsGetStageAward.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdCgsGetStageAward);
+
+        /** CmdCgsGetStageAward id. */
+        public id: number;
+
+        /** CmdCgsGetStageAward stage. */
+        public stage: number;
+
+        /**
+         * Creates a new CmdCgsGetStageAward instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdCgsGetStageAward instance
+         */
+        public static create(properties?: pb.ICmdCgsGetStageAward): pb.CmdCgsGetStageAward;
+
+        /**
+         * Encodes the specified CmdCgsGetStageAward message. Does not implicitly {@link pb.CmdCgsGetStageAward.verify|verify} messages.
+         * @param message CmdCgsGetStageAward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdCgsGetStageAward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdCgsGetStageAward message, length delimited. Does not implicitly {@link pb.CmdCgsGetStageAward.verify|verify} messages.
+         * @param message CmdCgsGetStageAward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdCgsGetStageAward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdCgsGetStageAward message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdCgsGetStageAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdCgsGetStageAward;
+
+        /**
+         * Decodes a CmdCgsGetStageAward message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdCgsGetStageAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdCgsGetStageAward;
+
+        /**
+         * Verifies a CmdCgsGetStageAward message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdCgsGetStageAward message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdCgsGetStageAward
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdCgsGetStageAward;
+
+        /**
+         * Creates a plain object from a CmdCgsGetStageAward message. Also converts values to other types if specified.
+         * @param message CmdCgsGetStageAward
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdCgsGetStageAward, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdCgsGetStageAward to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a CmdStockOrder. */
     interface ICmdStockOrder {
 
@@ -8126,6 +8237,9 @@ export namespace pb {
 
         /** CmdMncgEditStock code */
         code?: (number|null);
+
+        /** CmdMncgEditStock isAiStock */
+        isAiStock?: (boolean|null);
     }
 
     /** Represents a CmdMncgEditStock. */
@@ -8142,6 +8256,9 @@ export namespace pb {
 
         /** CmdMncgEditStock code. */
         public code: number;
+
+        /** CmdMncgEditStock isAiStock. */
+        public isAiStock: boolean;
 
         /**
          * Creates a new CmdMncgEditStock instance using the specified properties.
@@ -11654,6 +11771,9 @@ export namespace pb {
         /** AiStockItem code */
         code?: (number|null);
 
+        /** AiStockItem name */
+        name?: (string|null);
+
         /** AiStockItem industry */
         industry?: (string|null);
 
@@ -11687,6 +11807,9 @@ export namespace pb {
 
         /** AiStockItem code. */
         public code: number;
+
+        /** AiStockItem name. */
+        public name: string;
 
         /** AiStockItem industry. */
         public industry: string;

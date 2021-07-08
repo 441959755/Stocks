@@ -49,13 +49,13 @@ export default class NewClass extends cc.Component {
         lv.active = true;
         exp.active = true;
 
-        name.getComponent(cc.Label).string = GameData.Players[1].uid;
+        name.getComponent(cc.Label).string = GameData.Players[1].nickname;
 
-        lv.getComponent(cc.Label).string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1) + '';
+        lv.getComponent(cc.Label).string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1);
 
         exp.getComponent(cc.Label).string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + ' /' + GameCfgText.gameTextCfg.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
 
-        进入游戏动画
+        // 进入游戏动画
         this.onEnterGameAnim();
     }
 

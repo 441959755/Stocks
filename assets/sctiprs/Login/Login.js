@@ -11,10 +11,6 @@ import EventCfg from '../Utils/EventCfg';
 import AudioUtils from '../Utils/AudioUtils';
 import LLLog from '../common/utils/LLLog'
 
-window.global = window;
-
-cc.ext = {};
-
 cc.Class({
 	extends: cc.Component,
 
@@ -23,6 +19,9 @@ cc.Class({
 	},
 
 	init() {
+		window.global = window;
+		cc.ext = {};
+
 		let PBHelper = require('pbhelper');
 
 		let pbhelper = new PBHelper();
@@ -35,7 +34,6 @@ cc.Class({
 		AudioUtils.loadAudios('audios');
 		ComUtils.onLoadNode();
 		ComUtils.onEvent();
-
 		//游戏配置
 		GameCfgText.getOtherCfg();
 
@@ -62,14 +60,11 @@ cc.Class({
 				t.stopPropagation();
 			}
 		}
-
-
 	},
 
 	start() {
 		this.initData();
-		let self = this;
-		// //TODO  接DSK
+		// 接DSK
 		let llwSDK = LLWSDK.getSDK()
 		global.llwSDK = llwSDK;
 		llwSDK.login((decoded) => {
@@ -89,6 +84,7 @@ cc.Class({
 			}
 		})
 	},
+
 
 	initData() {
 		let SMSet = cc.sys.localStorage.getItem('SMSET');
@@ -351,6 +347,7 @@ cc.Class({
 		}
 
 	},
+
 
 	onDestroy() {
 		GameCfgText.releaseRes();

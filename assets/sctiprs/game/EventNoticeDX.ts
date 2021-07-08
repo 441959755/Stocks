@@ -40,7 +40,7 @@ export default class NewClass extends cc.Component {
 
         }, this);
 
-        GlobalEvent.on('updateRate', (data) => {
+        GlobalEvent.on(EventCfg.UPDATERATE, (data) => {
             if (GameCfg.GameSet.StopCheck_notice) {
                 this.testStopCheck(data[0]);
             }
@@ -1074,7 +1074,7 @@ export default class NewClass extends cc.Component {
 
     onDestroy() {
         GlobalEvent.off(EventCfg.SLGEVENTNOTICE);
-        GlobalEvent.off('updateRate');
+        GlobalEvent.off(EventCfg.UPDATERATE);
         GlobalEvent.off('clickTipsInfoPos');
     }
 

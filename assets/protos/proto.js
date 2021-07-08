@@ -143,6 +143,8 @@ $root.pb = (function () {
      * @property {number} Rep_QueryAiStockList=2012 Rep_QueryAiStockList value
      * @property {number} Req_QueryAiSignal=2013 Req_QueryAiSignal value
      * @property {number} Rep_QueryAiSignal=2014 Rep_QueryAiSignal value
+     * @property {number} Req_EditAiStockList=2015 Req_EditAiStockList value
+     * @property {number} Rep_EditAiStockList=2016 Rep_EditAiStockList value
      * @property {number} Req_Hall_UploadIcon=3001 Req_Hall_UploadIcon value
      * @property {number} Rep_Hall_UploadIcon=3002 Rep_Hall_UploadIcon value
      * @property {number} Req_Hall_DownloadIcon=3003 Req_Hall_DownloadIcon value
@@ -205,28 +207,30 @@ $root.pb = (function () {
      * @property {number} Rep_Game_CgsGetStageRank=4020 Rep_Game_CgsGetStageRank value
      * @property {number} Req_Game_CgsGetSeasonRank=4021 Req_Game_CgsGetSeasonRank value
      * @property {number} Rep_Game_CgsGetSeasonRank=4022 Rep_Game_CgsGetSeasonRank value
-     * @property {number} Req_Game_OrderQuery=4023 Req_Game_OrderQuery value
-     * @property {number} Rep_Game_OrderQuery=4024 Rep_Game_OrderQuery value
-     * @property {number} Req_Game_Order=4025 Req_Game_Order value
-     * @property {number} Rep_Game_Order=4026 Rep_Game_Order value
-     * @property {number} Req_Game_OrderCancel=4027 Req_Game_OrderCancel value
-     * @property {number} Rep_Game_OrderCancel=4028 Rep_Game_OrderCancel value
-     * @property {number} Req_Game_MncgExchange=4029 Req_Game_MncgExchange value
-     * @property {number} Rep_Game_MncgExchange=4030 Rep_Game_MncgExchange value
-     * @property {number} Req_Game_MncgEditStockList=4031 Req_Game_MncgEditStockList value
-     * @property {number} Rep_Game_MncgEditStockList=4032 Rep_Game_MncgEditStockList value
-     * @property {number} Req_Game_CgdsList=4033 Req_Game_CgdsList value
-     * @property {number} Rep_Game_CgdsList=4034 Rep_Game_CgdsList value
-     * @property {number} Req_Game_CgdsReg=4035 Req_Game_CgdsReg value
-     * @property {number} Rep_Game_CgdsReg=4036 Rep_Game_CgdsReg value
-     * @property {number} Req_Game_CgdsRanking=4037 Req_Game_CgdsRanking value
-     * @property {number} Rep_Game_CgdsRanking=4038 Rep_Game_CgdsRanking value
-     * @property {number} Req_Game_ZsjcBettingList=4039 Req_Game_ZsjcBettingList value
-     * @property {number} Rep_Game_ZsjcBettingList=4040 Rep_Game_ZsjcBettingList value
-     * @property {number} Req_Game_ZsjcBet=4041 Req_Game_ZsjcBet value
-     * @property {number} Rep_Game_ZsjcBet=4042 Rep_Game_ZsjcBet value
-     * @property {number} Req_Game_ZsjcRanking=4043 Req_Game_ZsjcRanking value
-     * @property {number} Rep_Game_ZsjcRanking=4044 Rep_Game_ZsjcRanking value
+     * @property {number} Req_Game_CgsGetStageAward=4023 Req_Game_CgsGetStageAward value
+     * @property {number} Rep_Game_CgsGetStageAward=4024 Rep_Game_CgsGetStageAward value
+     * @property {number} Req_Game_OrderQuery=4025 Req_Game_OrderQuery value
+     * @property {number} Rep_Game_OrderQuery=4026 Rep_Game_OrderQuery value
+     * @property {number} Req_Game_Order=4027 Req_Game_Order value
+     * @property {number} Rep_Game_Order=4028 Rep_Game_Order value
+     * @property {number} Req_Game_OrderCancel=4029 Req_Game_OrderCancel value
+     * @property {number} Rep_Game_OrderCancel=4030 Rep_Game_OrderCancel value
+     * @property {number} Req_Game_MncgExchange=4031 Req_Game_MncgExchange value
+     * @property {number} Rep_Game_MncgExchange=4032 Rep_Game_MncgExchange value
+     * @property {number} Req_Game_MncgEditStockList=4033 Req_Game_MncgEditStockList value
+     * @property {number} Rep_Game_MncgEditStockList=4034 Rep_Game_MncgEditStockList value
+     * @property {number} Req_Game_CgdsList=4035 Req_Game_CgdsList value
+     * @property {number} Rep_Game_CgdsList=4036 Rep_Game_CgdsList value
+     * @property {number} Req_Game_CgdsReg=4037 Req_Game_CgdsReg value
+     * @property {number} Rep_Game_CgdsReg=4038 Rep_Game_CgdsReg value
+     * @property {number} Req_Game_CgdsRanking=4039 Req_Game_CgdsRanking value
+     * @property {number} Rep_Game_CgdsRanking=4040 Rep_Game_CgdsRanking value
+     * @property {number} Req_Game_ZsjcBettingList=4041 Req_Game_ZsjcBettingList value
+     * @property {number} Rep_Game_ZsjcBettingList=4042 Rep_Game_ZsjcBettingList value
+     * @property {number} Req_Game_ZsjcBet=4043 Req_Game_ZsjcBet value
+     * @property {number} Rep_Game_ZsjcBet=4044 Rep_Game_ZsjcBet value
+     * @property {number} Req_Game_ZsjcRanking=4045 Req_Game_ZsjcRanking value
+     * @property {number} Rep_Game_ZsjcRanking=4046 Rep_Game_ZsjcRanking value
      * @property {number} Req_Room_Create=5003 Req_Room_Create value
      * @property {number} Rep_Room_Create=5004 Rep_Room_Create value
      * @property {number} Req_Room_Enter=5005 Req_Room_Enter value
@@ -301,6 +305,8 @@ $root.pb = (function () {
         values[valuesById[2012] = "Rep_QueryAiStockList"] = 2012;
         values[valuesById[2013] = "Req_QueryAiSignal"] = 2013;
         values[valuesById[2014] = "Rep_QueryAiSignal"] = 2014;
+        values[valuesById[2015] = "Req_EditAiStockList"] = 2015;
+        values[valuesById[2016] = "Rep_EditAiStockList"] = 2016;
         values[valuesById[3001] = "Req_Hall_UploadIcon"] = 3001;
         values[valuesById[3002] = "Rep_Hall_UploadIcon"] = 3002;
         values[valuesById[3003] = "Req_Hall_DownloadIcon"] = 3003;
@@ -363,28 +369,30 @@ $root.pb = (function () {
         values[valuesById[4020] = "Rep_Game_CgsGetStageRank"] = 4020;
         values[valuesById[4021] = "Req_Game_CgsGetSeasonRank"] = 4021;
         values[valuesById[4022] = "Rep_Game_CgsGetSeasonRank"] = 4022;
-        values[valuesById[4023] = "Req_Game_OrderQuery"] = 4023;
-        values[valuesById[4024] = "Rep_Game_OrderQuery"] = 4024;
-        values[valuesById[4025] = "Req_Game_Order"] = 4025;
-        values[valuesById[4026] = "Rep_Game_Order"] = 4026;
-        values[valuesById[4027] = "Req_Game_OrderCancel"] = 4027;
-        values[valuesById[4028] = "Rep_Game_OrderCancel"] = 4028;
-        values[valuesById[4029] = "Req_Game_MncgExchange"] = 4029;
-        values[valuesById[4030] = "Rep_Game_MncgExchange"] = 4030;
-        values[valuesById[4031] = "Req_Game_MncgEditStockList"] = 4031;
-        values[valuesById[4032] = "Rep_Game_MncgEditStockList"] = 4032;
-        values[valuesById[4033] = "Req_Game_CgdsList"] = 4033;
-        values[valuesById[4034] = "Rep_Game_CgdsList"] = 4034;
-        values[valuesById[4035] = "Req_Game_CgdsReg"] = 4035;
-        values[valuesById[4036] = "Rep_Game_CgdsReg"] = 4036;
-        values[valuesById[4037] = "Req_Game_CgdsRanking"] = 4037;
-        values[valuesById[4038] = "Rep_Game_CgdsRanking"] = 4038;
-        values[valuesById[4039] = "Req_Game_ZsjcBettingList"] = 4039;
-        values[valuesById[4040] = "Rep_Game_ZsjcBettingList"] = 4040;
-        values[valuesById[4041] = "Req_Game_ZsjcBet"] = 4041;
-        values[valuesById[4042] = "Rep_Game_ZsjcBet"] = 4042;
-        values[valuesById[4043] = "Req_Game_ZsjcRanking"] = 4043;
-        values[valuesById[4044] = "Rep_Game_ZsjcRanking"] = 4044;
+        values[valuesById[4023] = "Req_Game_CgsGetStageAward"] = 4023;
+        values[valuesById[4024] = "Rep_Game_CgsGetStageAward"] = 4024;
+        values[valuesById[4025] = "Req_Game_OrderQuery"] = 4025;
+        values[valuesById[4026] = "Rep_Game_OrderQuery"] = 4026;
+        values[valuesById[4027] = "Req_Game_Order"] = 4027;
+        values[valuesById[4028] = "Rep_Game_Order"] = 4028;
+        values[valuesById[4029] = "Req_Game_OrderCancel"] = 4029;
+        values[valuesById[4030] = "Rep_Game_OrderCancel"] = 4030;
+        values[valuesById[4031] = "Req_Game_MncgExchange"] = 4031;
+        values[valuesById[4032] = "Rep_Game_MncgExchange"] = 4032;
+        values[valuesById[4033] = "Req_Game_MncgEditStockList"] = 4033;
+        values[valuesById[4034] = "Rep_Game_MncgEditStockList"] = 4034;
+        values[valuesById[4035] = "Req_Game_CgdsList"] = 4035;
+        values[valuesById[4036] = "Rep_Game_CgdsList"] = 4036;
+        values[valuesById[4037] = "Req_Game_CgdsReg"] = 4037;
+        values[valuesById[4038] = "Rep_Game_CgdsReg"] = 4038;
+        values[valuesById[4039] = "Req_Game_CgdsRanking"] = 4039;
+        values[valuesById[4040] = "Rep_Game_CgdsRanking"] = 4040;
+        values[valuesById[4041] = "Req_Game_ZsjcBettingList"] = 4041;
+        values[valuesById[4042] = "Rep_Game_ZsjcBettingList"] = 4042;
+        values[valuesById[4043] = "Req_Game_ZsjcBet"] = 4043;
+        values[valuesById[4044] = "Rep_Game_ZsjcBet"] = 4044;
+        values[valuesById[4045] = "Req_Game_ZsjcRanking"] = 4045;
+        values[valuesById[4046] = "Rep_Game_ZsjcRanking"] = 4046;
         values[valuesById[5003] = "Req_Room_Create"] = 5003;
         values[valuesById[5004] = "Rep_Room_Create"] = 5004;
         values[valuesById[5005] = "Req_Room_Enter"] = 5005;
@@ -1371,7 +1379,6 @@ $root.pb = (function () {
      * @property {number} Ask_Force=6 Ask_Force value
      * @property {number} Long=8 Long value
      * @property {number} Short=9 Short value
-     * @property {number} Close_Force=10 Close_Force value
      * @property {number} END=150 END value
      */
     pb.GameOperationId = (function () {
@@ -1385,7 +1392,6 @@ $root.pb = (function () {
         values[valuesById[6] = "Ask_Force"] = 6;
         values[valuesById[8] = "Long"] = 8;
         values[valuesById[9] = "Short"] = 9;
-        values[valuesById[10] = "Close_Force"] = 10;
         values[valuesById[150] = "END"] = 150;
         return values;
     })();
@@ -4847,6 +4853,7 @@ $root.pb = (function () {
          * @property {pb.ITasks|null} [tasks] GameData tasks
          * @property {number|null} [week] GameData week
          * @property {string|null} [mobile] GameData mobile
+         * @property {Array.<number>|null} [aiStockList] GameData aiStockList
          */
 
         /**
@@ -4863,6 +4870,7 @@ $root.pb = (function () {
             this.todayTimes = [];
             this.stockList = [];
             this.favorList = [];
+            this.aiStockList = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -5006,6 +5014,14 @@ $root.pb = (function () {
         GameData.prototype.mobile = "";
 
         /**
+         * GameData aiStockList.
+         * @member {Array.<number>} aiStockList
+         * @memberof pb.GameData
+         * @instance
+         */
+        GameData.prototype.aiStockList = $util.emptyArray;
+
+        /**
          * Creates a new GameData instance using the specified properties.
          * @function create
          * @memberof pb.GameData
@@ -5080,6 +5096,12 @@ $root.pb = (function () {
                 writer.uint32(/* id 16, wireType 0 =*/128).int32(message.week);
             if (message.mobile != null && Object.hasOwnProperty.call(message, "mobile"))
                 writer.uint32(/* id 17, wireType 2 =*/138).string(message.mobile);
+            if (message.aiStockList != null && message.aiStockList.length) {
+                writer.uint32(/* id 18, wireType 2 =*/146).fork();
+                for (var i = 0; i < message.aiStockList.length; ++i)
+                    writer.int32(message.aiStockList[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
@@ -5194,6 +5216,16 @@ $root.pb = (function () {
                         break;
                     case 17:
                         message.mobile = reader.string();
+                        break;
+                    case 18:
+                        if (!(message.aiStockList && message.aiStockList.length))
+                            message.aiStockList = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.aiStockList.push(reader.int32());
+                        } else
+                            message.aiStockList.push(reader.int32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -5311,6 +5343,13 @@ $root.pb = (function () {
             if (message.mobile != null && message.hasOwnProperty("mobile"))
                 if (!$util.isString(message.mobile))
                     return "mobile: string expected";
+            if (message.aiStockList != null && message.hasOwnProperty("aiStockList")) {
+                if (!Array.isArray(message.aiStockList))
+                    return "aiStockList: array expected";
+                for (var i = 0; i < message.aiStockList.length; ++i)
+                    if (!$util.isInteger(message.aiStockList[i]))
+                        return "aiStockList: integer[] expected";
+            }
             return null;
         };
 
@@ -5414,6 +5453,13 @@ $root.pb = (function () {
                 message.week = object.week | 0;
             if (object.mobile != null)
                 message.mobile = String(object.mobile);
+            if (object.aiStockList) {
+                if (!Array.isArray(object.aiStockList))
+                    throw TypeError(".pb.GameData.aiStockList: array expected");
+                message.aiStockList = [];
+                for (var i = 0; i < object.aiStockList.length; ++i)
+                    message.aiStockList[i] = object.aiStockList[i] | 0;
+            }
             return message;
         };
 
@@ -5436,6 +5482,7 @@ $root.pb = (function () {
                 object.todayTimes = [];
                 object.stockList = [];
                 object.favorList = [];
+                object.aiStockList = [];
             }
             if (options.defaults) {
                 object.uid = 0;
@@ -5510,6 +5557,11 @@ $root.pb = (function () {
                 object.week = message.week;
             if (message.mobile != null && message.hasOwnProperty("mobile"))
                 object.mobile = message.mobile;
+            if (message.aiStockList && message.aiStockList.length) {
+                object.aiStockList = [];
+                for (var j = 0; j < message.aiStockList.length; ++j)
+                    object.aiStockList[j] = message.aiStockList[j];
+            }
             return object;
         };
 
@@ -6309,7 +6361,6 @@ $root.pb = (function () {
                     case 6:
                     case 8:
                     case 9:
-                    case 10:
                     case 150:
                         break;
                 }
@@ -6398,10 +6449,6 @@ $root.pb = (function () {
                 case "Short":
                 case 9:
                     message.opId = 9;
-                    break;
-                case "Close_Force":
-                case 10:
-                    message.opId = 10;
                     break;
                 case "END":
                 case 150:
@@ -10169,6 +10216,7 @@ $root.pb = (function () {
          * @memberof pb
          * @interface ICmdGameStart
          * @property {pb.GameType|null} [game] CmdGameStart game
+         * @property {boolean|null} [isJunxian] CmdGameStart isJunxian
          */
 
         /**
@@ -10193,6 +10241,14 @@ $root.pb = (function () {
          * @instance
          */
         CmdGameStart.prototype.game = 0;
+
+        /**
+         * CmdGameStart isJunxian.
+         * @member {boolean} isJunxian
+         * @memberof pb.CmdGameStart
+         * @instance
+         */
+        CmdGameStart.prototype.isJunxian = false;
 
         /**
          * Creates a new CmdGameStart instance using the specified properties.
@@ -10220,6 +10276,8 @@ $root.pb = (function () {
                 writer = $Writer.create();
             if (message.game != null && Object.hasOwnProperty.call(message, "game"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.game);
+            if (message.isJunxian != null && Object.hasOwnProperty.call(message, "isJunxian"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.isJunxian);
             return writer;
         };
 
@@ -10256,6 +10314,9 @@ $root.pb = (function () {
                 switch (tag >>> 3) {
                     case 1:
                         message.game = reader.int32();
+                        break;
+                    case 2:
+                        message.isJunxian = reader.bool();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -10315,6 +10376,9 @@ $root.pb = (function () {
                     case 30:
                         break;
                 }
+            if (message.isJunxian != null && message.hasOwnProperty("isJunxian"))
+                if (typeof message.isJunxian !== "boolean")
+                    return "isJunxian: boolean expected";
             return null;
         };
 
@@ -10400,6 +10464,8 @@ $root.pb = (function () {
                     message.game = 30;
                     break;
             }
+            if (object.isJunxian != null)
+                message.isJunxian = Boolean(object.isJunxian);
             return message;
         };
 
@@ -10416,10 +10482,14 @@ $root.pb = (function () {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.game = options.enums === String ? "GameType_NULL" : 0;
+                object.isJunxian = false;
+            }
             if (message.game != null && message.hasOwnProperty("game"))
                 object.game = options.enums === String ? $root.pb.GameType[message.game] : message.game;
+            if (message.isJunxian != null && message.hasOwnProperty("isJunxian"))
+                object.isJunxian = message.isJunxian;
             return object;
         };
 
@@ -19140,6 +19210,216 @@ $root.pb = (function () {
         return JjGame;
     })();
 
+    pb.CmdCgsGetStageAward = (function () {
+
+        /**
+         * Properties of a CmdCgsGetStageAward.
+         * @memberof pb
+         * @interface ICmdCgsGetStageAward
+         * @property {number|null} [id] CmdCgsGetStageAward id
+         * @property {number|null} [stage] CmdCgsGetStageAward stage
+         */
+
+        /**
+         * Constructs a new CmdCgsGetStageAward.
+         * @memberof pb
+         * @classdesc Represents a CmdCgsGetStageAward.
+         * @implements ICmdCgsGetStageAward
+         * @constructor
+         * @param {pb.ICmdCgsGetStageAward=} [properties] Properties to set
+         */
+        function CmdCgsGetStageAward(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdCgsGetStageAward id.
+         * @member {number} id
+         * @memberof pb.CmdCgsGetStageAward
+         * @instance
+         */
+        CmdCgsGetStageAward.prototype.id = 0;
+
+        /**
+         * CmdCgsGetStageAward stage.
+         * @member {number} stage
+         * @memberof pb.CmdCgsGetStageAward
+         * @instance
+         */
+        CmdCgsGetStageAward.prototype.stage = 0;
+
+        /**
+         * Creates a new CmdCgsGetStageAward instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdCgsGetStageAward
+         * @static
+         * @param {pb.ICmdCgsGetStageAward=} [properties] Properties to set
+         * @returns {pb.CmdCgsGetStageAward} CmdCgsGetStageAward instance
+         */
+        CmdCgsGetStageAward.create = function create(properties) {
+            return new CmdCgsGetStageAward(properties);
+        };
+
+        /**
+         * Encodes the specified CmdCgsGetStageAward message. Does not implicitly {@link pb.CmdCgsGetStageAward.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdCgsGetStageAward
+         * @static
+         * @param {pb.ICmdCgsGetStageAward} message CmdCgsGetStageAward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdCgsGetStageAward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
+            if (message.stage != null && Object.hasOwnProperty.call(message, "stage"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.stage);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdCgsGetStageAward message, length delimited. Does not implicitly {@link pb.CmdCgsGetStageAward.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdCgsGetStageAward
+         * @static
+         * @param {pb.ICmdCgsGetStageAward} message CmdCgsGetStageAward message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdCgsGetStageAward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdCgsGetStageAward message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdCgsGetStageAward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdCgsGetStageAward} CmdCgsGetStageAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdCgsGetStageAward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdCgsGetStageAward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.id = reader.int32();
+                        break;
+                    case 2:
+                        message.stage = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdCgsGetStageAward message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdCgsGetStageAward
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdCgsGetStageAward} CmdCgsGetStageAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdCgsGetStageAward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdCgsGetStageAward message.
+         * @function verify
+         * @memberof pb.CmdCgsGetStageAward
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdCgsGetStageAward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.stage != null && message.hasOwnProperty("stage"))
+                if (!$util.isInteger(message.stage))
+                    return "stage: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdCgsGetStageAward message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdCgsGetStageAward
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdCgsGetStageAward} CmdCgsGetStageAward
+         */
+        CmdCgsGetStageAward.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdCgsGetStageAward)
+                return object;
+            var message = new $root.pb.CmdCgsGetStageAward();
+            if (object.id != null)
+                message.id = object.id | 0;
+            if (object.stage != null)
+                message.stage = object.stage | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdCgsGetStageAward message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdCgsGetStageAward
+         * @static
+         * @param {pb.CmdCgsGetStageAward} message CmdCgsGetStageAward
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdCgsGetStageAward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.stage = 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.stage != null && message.hasOwnProperty("stage"))
+                object.stage = message.stage;
+            return object;
+        };
+
+        /**
+         * Converts this CmdCgsGetStageAward to JSON.
+         * @function toJSON
+         * @memberof pb.CmdCgsGetStageAward
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdCgsGetStageAward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdCgsGetStageAward;
+    })();
+
     pb.CmdStockOrder = (function () {
 
         /**
@@ -21927,6 +22207,7 @@ $root.pb = (function () {
          * @interface ICmdMncgEditStock
          * @property {boolean|null} [removed] CmdMncgEditStock removed
          * @property {number|null} [code] CmdMncgEditStock code
+         * @property {boolean|null} [isAiStock] CmdMncgEditStock isAiStock
          */
 
         /**
@@ -21961,6 +22242,14 @@ $root.pb = (function () {
         CmdMncgEditStock.prototype.code = 0;
 
         /**
+         * CmdMncgEditStock isAiStock.
+         * @member {boolean} isAiStock
+         * @memberof pb.CmdMncgEditStock
+         * @instance
+         */
+        CmdMncgEditStock.prototype.isAiStock = false;
+
+        /**
          * Creates a new CmdMncgEditStock instance using the specified properties.
          * @function create
          * @memberof pb.CmdMncgEditStock
@@ -21988,6 +22277,8 @@ $root.pb = (function () {
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.removed);
             if (message.code != null && Object.hasOwnProperty.call(message, "code"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.code);
+            if (message.isAiStock != null && Object.hasOwnProperty.call(message, "isAiStock"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isAiStock);
             return writer;
         };
 
@@ -22027,6 +22318,9 @@ $root.pb = (function () {
                         break;
                     case 2:
                         message.code = reader.int32();
+                        break;
+                    case 3:
+                        message.isAiStock = reader.bool();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -22069,6 +22363,9 @@ $root.pb = (function () {
             if (message.code != null && message.hasOwnProperty("code"))
                 if (!$util.isInteger(message.code))
                     return "code: integer expected";
+            if (message.isAiStock != null && message.hasOwnProperty("isAiStock"))
+                if (typeof message.isAiStock !== "boolean")
+                    return "isAiStock: boolean expected";
             return null;
         };
 
@@ -22088,6 +22385,8 @@ $root.pb = (function () {
                 message.removed = Boolean(object.removed);
             if (object.code != null)
                 message.code = object.code | 0;
+            if (object.isAiStock != null)
+                message.isAiStock = Boolean(object.isAiStock);
             return message;
         };
 
@@ -22107,11 +22406,14 @@ $root.pb = (function () {
             if (options.defaults) {
                 object.removed = false;
                 object.code = 0;
+                object.isAiStock = false;
             }
             if (message.removed != null && message.hasOwnProperty("removed"))
                 object.removed = message.removed;
             if (message.code != null && message.hasOwnProperty("code"))
                 object.code = message.code;
+            if (message.isAiStock != null && message.hasOwnProperty("isAiStock"))
+                object.isAiStock = message.isAiStock;
             return object;
         };
 
@@ -31365,6 +31667,7 @@ $root.pb = (function () {
          * @memberof pb
          * @interface IAiStockItem
          * @property {number|null} [code] AiStockItem code
+         * @property {string|null} [name] AiStockItem name
          * @property {string|null} [industry] AiStockItem industry
          * @property {number|Long|null} [tsUpdated] AiStockItem tsUpdated
          * @property {number|null} [profitRanking] AiStockItem profitRanking
@@ -31396,6 +31699,14 @@ $root.pb = (function () {
          * @instance
          */
         AiStockItem.prototype.code = 0;
+
+        /**
+         * AiStockItem name.
+         * @member {string} name
+         * @memberof pb.AiStockItem
+         * @instance
+         */
+        AiStockItem.prototype.name = "";
 
         /**
          * AiStockItem industry.
@@ -31479,20 +31790,22 @@ $root.pb = (function () {
                 writer = $Writer.create();
             if (message.code != null && Object.hasOwnProperty.call(message, "code"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.code);
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
             if (message.industry != null && Object.hasOwnProperty.call(message, "industry"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.industry);
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.industry);
             if (message.tsUpdated != null && Object.hasOwnProperty.call(message, "tsUpdated"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.tsUpdated);
+                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.tsUpdated);
             if (message.profitRanking != null && Object.hasOwnProperty.call(message, "profitRanking"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.profitRanking);
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.profitRanking);
             if (message.profitRate != null && Object.hasOwnProperty.call(message, "profitRate"))
-                writer.uint32(/* id 5, wireType 1 =*/41).double(message.profitRate);
+                writer.uint32(/* id 6, wireType 1 =*/49).double(message.profitRate);
             if (message.lastAskPrice != null && Object.hasOwnProperty.call(message, "lastAskPrice"))
-                writer.uint32(/* id 6, wireType 1 =*/49).double(message.lastAskPrice);
+                writer.uint32(/* id 7, wireType 1 =*/57).double(message.lastAskPrice);
             if (message.lastBidPrice != null && Object.hasOwnProperty.call(message, "lastBidPrice"))
-                writer.uint32(/* id 7, wireType 1 =*/57).double(message.lastBidPrice);
+                writer.uint32(/* id 8, wireType 1 =*/65).double(message.lastBidPrice);
             if (message.curAskPrice != null && Object.hasOwnProperty.call(message, "curAskPrice"))
-                writer.uint32(/* id 8, wireType 1 =*/65).double(message.curAskPrice);
+                writer.uint32(/* id 9, wireType 1 =*/73).double(message.curAskPrice);
             return writer;
         };
 
@@ -31531,24 +31844,27 @@ $root.pb = (function () {
                         message.code = reader.uint32();
                         break;
                     case 2:
-                        message.industry = reader.string();
+                        message.name = reader.string();
                         break;
                     case 3:
-                        message.tsUpdated = reader.int64();
+                        message.industry = reader.string();
                         break;
                     case 4:
-                        message.profitRanking = reader.int32();
+                        message.tsUpdated = reader.int64();
                         break;
                     case 5:
-                        message.profitRate = reader.double();
+                        message.profitRanking = reader.int32();
                         break;
                     case 6:
-                        message.lastAskPrice = reader.double();
+                        message.profitRate = reader.double();
                         break;
                     case 7:
-                        message.lastBidPrice = reader.double();
+                        message.lastAskPrice = reader.double();
                         break;
                     case 8:
+                        message.lastBidPrice = reader.double();
+                        break;
+                    case 9:
                         message.curAskPrice = reader.double();
                         break;
                     default:
@@ -31589,6 +31905,9 @@ $root.pb = (function () {
             if (message.code != null && message.hasOwnProperty("code"))
                 if (!$util.isInteger(message.code))
                     return "code: integer expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
             if (message.industry != null && message.hasOwnProperty("industry"))
                 if (!$util.isString(message.industry))
                     return "industry: string expected";
@@ -31627,6 +31946,8 @@ $root.pb = (function () {
             var message = new $root.pb.AiStockItem();
             if (object.code != null)
                 message.code = object.code >>> 0;
+            if (object.name != null)
+                message.name = String(object.name);
             if (object.industry != null)
                 message.industry = String(object.industry);
             if (object.tsUpdated != null)
@@ -31666,6 +31987,7 @@ $root.pb = (function () {
             var object = {};
             if (options.defaults) {
                 object.code = 0;
+                object.name = "";
                 object.industry = "";
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
@@ -31680,6 +32002,8 @@ $root.pb = (function () {
             }
             if (message.code != null && message.hasOwnProperty("code"))
                 object.code = message.code;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
             if (message.industry != null && message.hasOwnProperty("industry"))
                 object.industry = message.industry;
             if (message.tsUpdated != null && message.hasOwnProperty("tsUpdated"))
@@ -38793,6 +39117,8 @@ $root.pb = (function () {
                     case 2012:
                     case 2013:
                     case 2014:
+                    case 2015:
+                    case 2016:
                     case 3001:
                     case 3002:
                     case 3003:
@@ -38877,6 +39203,8 @@ $root.pb = (function () {
                     case 4042:
                     case 4043:
                     case 4044:
+                    case 4045:
+                    case 4046:
                     case 5003:
                     case 5004:
                     case 5005:
@@ -39073,6 +39401,14 @@ $root.pb = (function () {
                 case "Rep_QueryAiSignal":
                 case 2014:
                     message.id = 2014;
+                    break;
+                case "Req_EditAiStockList":
+                case 2015:
+                    message.id = 2015;
+                    break;
+                case "Rep_EditAiStockList":
+                case 2016:
+                    message.id = 2016;
                     break;
                 case "Req_Hall_UploadIcon":
                 case 3001:
@@ -39322,93 +39658,101 @@ $root.pb = (function () {
                 case 4022:
                     message.id = 4022;
                     break;
-                case "Req_Game_OrderQuery":
+                case "Req_Game_CgsGetStageAward":
                 case 4023:
                     message.id = 4023;
                     break;
-                case "Rep_Game_OrderQuery":
+                case "Rep_Game_CgsGetStageAward":
                 case 4024:
                     message.id = 4024;
                     break;
-                case "Req_Game_Order":
+                case "Req_Game_OrderQuery":
                 case 4025:
                     message.id = 4025;
                     break;
-                case "Rep_Game_Order":
+                case "Rep_Game_OrderQuery":
                 case 4026:
                     message.id = 4026;
                     break;
-                case "Req_Game_OrderCancel":
+                case "Req_Game_Order":
                 case 4027:
                     message.id = 4027;
                     break;
-                case "Rep_Game_OrderCancel":
+                case "Rep_Game_Order":
                 case 4028:
                     message.id = 4028;
                     break;
-                case "Req_Game_MncgExchange":
+                case "Req_Game_OrderCancel":
                 case 4029:
                     message.id = 4029;
                     break;
-                case "Rep_Game_MncgExchange":
+                case "Rep_Game_OrderCancel":
                 case 4030:
                     message.id = 4030;
                     break;
-                case "Req_Game_MncgEditStockList":
+                case "Req_Game_MncgExchange":
                 case 4031:
                     message.id = 4031;
                     break;
-                case "Rep_Game_MncgEditStockList":
+                case "Rep_Game_MncgExchange":
                 case 4032:
                     message.id = 4032;
                     break;
-                case "Req_Game_CgdsList":
+                case "Req_Game_MncgEditStockList":
                 case 4033:
                     message.id = 4033;
                     break;
-                case "Rep_Game_CgdsList":
+                case "Rep_Game_MncgEditStockList":
                 case 4034:
                     message.id = 4034;
                     break;
-                case "Req_Game_CgdsReg":
+                case "Req_Game_CgdsList":
                 case 4035:
                     message.id = 4035;
                     break;
-                case "Rep_Game_CgdsReg":
+                case "Rep_Game_CgdsList":
                 case 4036:
                     message.id = 4036;
                     break;
-                case "Req_Game_CgdsRanking":
+                case "Req_Game_CgdsReg":
                 case 4037:
                     message.id = 4037;
                     break;
-                case "Rep_Game_CgdsRanking":
+                case "Rep_Game_CgdsReg":
                 case 4038:
                     message.id = 4038;
                     break;
-                case "Req_Game_ZsjcBettingList":
+                case "Req_Game_CgdsRanking":
                 case 4039:
                     message.id = 4039;
                     break;
-                case "Rep_Game_ZsjcBettingList":
+                case "Rep_Game_CgdsRanking":
                 case 4040:
                     message.id = 4040;
                     break;
-                case "Req_Game_ZsjcBet":
+                case "Req_Game_ZsjcBettingList":
                 case 4041:
                     message.id = 4041;
                     break;
-                case "Rep_Game_ZsjcBet":
+                case "Rep_Game_ZsjcBettingList":
                 case 4042:
                     message.id = 4042;
                     break;
-                case "Req_Game_ZsjcRanking":
+                case "Req_Game_ZsjcBet":
                 case 4043:
                     message.id = 4043;
                     break;
-                case "Rep_Game_ZsjcRanking":
+                case "Rep_Game_ZsjcBet":
                 case 4044:
                     message.id = 4044;
+                    break;
+                case "Req_Game_ZsjcRanking":
+                case 4045:
+                    message.id = 4045;
+                    break;
+                case "Rep_Game_ZsjcRanking":
+                case 4046:
+                    message.id = 4046;
                     break;
                 case "Req_Room_Create":
                 case 5003:
@@ -40638,6 +40982,8 @@ $root.pb = (function () {
                     case 2012:
                     case 2013:
                     case 2014:
+                    case 2015:
+                    case 2016:
                     case 3001:
                     case 3002:
                     case 3003:
@@ -40722,6 +41068,8 @@ $root.pb = (function () {
                     case 4042:
                     case 4043:
                     case 4044:
+                    case 4045:
+                    case 4046:
                     case 5003:
                     case 5004:
                     case 5005:
@@ -40925,6 +41273,14 @@ $root.pb = (function () {
                 case "Rep_QueryAiSignal":
                 case 2014:
                     message.id = 2014;
+                    break;
+                case "Req_EditAiStockList":
+                case 2015:
+                    message.id = 2015;
+                    break;
+                case "Rep_EditAiStockList":
+                case 2016:
+                    message.id = 2016;
                     break;
                 case "Req_Hall_UploadIcon":
                 case 3001:
@@ -41174,93 +41530,101 @@ $root.pb = (function () {
                 case 4022:
                     message.id = 4022;
                     break;
-                case "Req_Game_OrderQuery":
+                case "Req_Game_CgsGetStageAward":
                 case 4023:
                     message.id = 4023;
                     break;
-                case "Rep_Game_OrderQuery":
+                case "Rep_Game_CgsGetStageAward":
                 case 4024:
                     message.id = 4024;
                     break;
-                case "Req_Game_Order":
+                case "Req_Game_OrderQuery":
                 case 4025:
                     message.id = 4025;
                     break;
-                case "Rep_Game_Order":
+                case "Rep_Game_OrderQuery":
                 case 4026:
                     message.id = 4026;
                     break;
-                case "Req_Game_OrderCancel":
+                case "Req_Game_Order":
                 case 4027:
                     message.id = 4027;
                     break;
-                case "Rep_Game_OrderCancel":
+                case "Rep_Game_Order":
                 case 4028:
                     message.id = 4028;
                     break;
-                case "Req_Game_MncgExchange":
+                case "Req_Game_OrderCancel":
                 case 4029:
                     message.id = 4029;
                     break;
-                case "Rep_Game_MncgExchange":
+                case "Rep_Game_OrderCancel":
                 case 4030:
                     message.id = 4030;
                     break;
-                case "Req_Game_MncgEditStockList":
+                case "Req_Game_MncgExchange":
                 case 4031:
                     message.id = 4031;
                     break;
-                case "Rep_Game_MncgEditStockList":
+                case "Rep_Game_MncgExchange":
                 case 4032:
                     message.id = 4032;
                     break;
-                case "Req_Game_CgdsList":
+                case "Req_Game_MncgEditStockList":
                 case 4033:
                     message.id = 4033;
                     break;
-                case "Rep_Game_CgdsList":
+                case "Rep_Game_MncgEditStockList":
                 case 4034:
                     message.id = 4034;
                     break;
-                case "Req_Game_CgdsReg":
+                case "Req_Game_CgdsList":
                 case 4035:
                     message.id = 4035;
                     break;
-                case "Rep_Game_CgdsReg":
+                case "Rep_Game_CgdsList":
                 case 4036:
                     message.id = 4036;
                     break;
-                case "Req_Game_CgdsRanking":
+                case "Req_Game_CgdsReg":
                 case 4037:
                     message.id = 4037;
                     break;
-                case "Rep_Game_CgdsRanking":
+                case "Rep_Game_CgdsReg":
                 case 4038:
                     message.id = 4038;
                     break;
-                case "Req_Game_ZsjcBettingList":
+                case "Req_Game_CgdsRanking":
                 case 4039:
                     message.id = 4039;
                     break;
-                case "Rep_Game_ZsjcBettingList":
+                case "Rep_Game_CgdsRanking":
                 case 4040:
                     message.id = 4040;
                     break;
-                case "Req_Game_ZsjcBet":
+                case "Req_Game_ZsjcBettingList":
                 case 4041:
                     message.id = 4041;
                     break;
-                case "Rep_Game_ZsjcBet":
+                case "Rep_Game_ZsjcBettingList":
                 case 4042:
                     message.id = 4042;
                     break;
-                case "Req_Game_ZsjcRanking":
+                case "Req_Game_ZsjcBet":
                 case 4043:
                     message.id = 4043;
                     break;
-                case "Rep_Game_ZsjcRanking":
+                case "Rep_Game_ZsjcBet":
                 case 4044:
                     message.id = 4044;
+                    break;
+                case "Req_Game_ZsjcRanking":
+                case 4045:
+                    message.id = 4045;
+                    break;
+                case "Rep_Game_ZsjcRanking":
+                case 4046:
+                    message.id = 4046;
                     break;
                 case "Req_Room_Create":
                 case 5003:
