@@ -171,6 +171,13 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
 			}
 		}
+		//打开闯关赛
+		else if (name == 'main_jj_cgs') {
+			GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
+			GameCfg.GameSet = GameData.JJPKSet;
+			GlobalEvent.emit(EventCfg.OPENCHUANGUAN);
+
+		}
 
 		else if (name == 'toggle1') {
 			let index = parseInt(name.slice(-1));

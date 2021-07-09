@@ -24,15 +24,11 @@ export default class NewClass extends cc.Component {
     @property(cc.Animation)
     enterGameAnim: cc.Animation = null;
 
-    // cb = null;
-
     callBack = null;
 
     spIndex = 0;
     onLoad() {
         GlobalEvent.on('SHOWOTHERPLAYER', this.onShowOtherPlayer.bind(this), this);
-        // GlobalEvent.on('enterGameAnim', this.onEnterGameAnim.bind(this), this);
-
     }
 
     onShowOtherPlayer() {
@@ -166,14 +162,17 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
 
         if (name == 'blackbtn') {
-            this.node.active = false;
-            GameCfg.GameType = null;
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            GlobalHandle.onReqRoomLeave(() => {
+                this.node.active = false;
+                GameCfg.GameType = null;
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            });
         }
     }
 
     onDestroy() {
         GlobalEvent.off('SHOWOTHERPLAYER');
-        // GlobalEvent.off('enterGameAnim');
     }
 
 

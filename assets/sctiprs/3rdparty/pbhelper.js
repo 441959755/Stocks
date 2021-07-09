@@ -286,7 +286,8 @@ PBHelper.prototype = {
             || id == pb.MessageId.Rep_Game_UploadIcon
             || id == pb.MessageId.Rep_Game_SmxlReset
             || id == pb.MessageId.Rep_Hall_ResetGameCounter
-            || id == pb.MessageId.Rep_Hall_GetItem) {
+            || id == pb.MessageId.Rep_Hall_GetItem
+            || id == pb.MessageId.Rep_Game_CgsGetStageAward) {
             let ErrorInfo = pb.ErrorInfo;
             let data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
@@ -429,7 +430,23 @@ PBHelper.prototype = {
             console.log('同步房间游戏操作' + JSON.stringify(data));
         }
 
+        //查询当前一轮闯关赛配置数据应答：CgsConf
+        else if (id == pb.MessageId.Rep_Game_CgsGetConf) {
+            let CgsConf = pb.CgsConf;
+            let data = CgsConf.decode(new Uint8Array(buff));
+            return data;
+        }
 
+        //查询闯关赛通关排行应答：RankingList
+        //  查询闯关赛关卡排行应答：RankingList
+        //  查询闯关赛排行榜应答：RankingList
+        else if (id == pb.MessageId.Rep_Game_CgsGetClearanceRank ||
+            id == pb.MessageId.Rep_Game_CgsGetStageRank ||
+            id == pb.MessageId.Rep_Game_CgsGetSeasonRank) {
+            let RankingList = pb.RankingList;
+            let data = RankingList.decode(new Uint8Array(buff));
+            return data;
+        }
     }
 
 }

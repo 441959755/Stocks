@@ -7851,6 +7851,9 @@ export namespace pb {
         /** StockPosition code */
         code?: (number|null);
 
+        /** StockPosition volumeFree */
+        volumeFree?: (number|null);
+
         /** StockPosition volume */
         volume?: (number|null);
 
@@ -7869,6 +7872,9 @@ export namespace pb {
 
         /** StockPosition code. */
         public code: number;
+
+        /** StockPosition volumeFree. */
+        public volumeFree: number;
 
         /** StockPosition volume. */
         public volume: number;
@@ -11675,6 +11681,9 @@ export namespace pb {
         /** CmdQueryAiStockList rankFrom */
         rankFrom?: (number|null);
 
+        /** CmdQueryAiStockList tsUpdateFrom */
+        tsUpdateFrom?: (number|Long|null);
+
         /** CmdQueryAiStockList total */
         total?: (number|null);
     }
@@ -11690,6 +11699,9 @@ export namespace pb {
 
         /** CmdQueryAiStockList rankFrom. */
         public rankFrom: number;
+
+        /** CmdQueryAiStockList tsUpdateFrom. */
+        public tsUpdateFrom: (number|Long);
 
         /** CmdQueryAiStockList total. */
         public total: number;
@@ -12537,15 +12549,19 @@ export namespace pb {
     /** AdPosition enum. */
     enum AdPosition {
         AdPosition_NULL = 0,
-        StartUp = 1,
-        Main = 11
+        AdPosition_Startup = 1,
+        AdPosition_Main = 2,
+        AdPosition_Exit = 3,
+        AdPosition_Plugin = 4,
+        AdPosition_CgdsList = 5,
+        AdPosition_AiStockList = 6
     }
 
     /** Properties of an AdClicked. */
     interface IAdClicked {
 
-        /** AdClicked uid */
-        uid?: (number|null);
+        /** AdClicked id */
+        id?: (number|null);
 
         /** AdClicked pos */
         pos?: (number|null);
@@ -12553,11 +12569,14 @@ export namespace pb {
         /** AdClicked url */
         url?: (string|null);
 
+        /** AdClicked title */
+        title?: (string|null);
+
+        /** AdClicked uid */
+        uid?: (number|null);
+
         /** AdClicked from */
         from?: (pb.AppFrom|null);
-
-        /** AdClicked ua */
-        ua?: (string|null);
     }
 
     /** Represents an AdClicked. */
@@ -12569,8 +12588,8 @@ export namespace pb {
          */
         constructor(properties?: pb.IAdClicked);
 
-        /** AdClicked uid. */
-        public uid: number;
+        /** AdClicked id. */
+        public id: number;
 
         /** AdClicked pos. */
         public pos: number;
@@ -12578,11 +12597,14 @@ export namespace pb {
         /** AdClicked url. */
         public url: string;
 
+        /** AdClicked title. */
+        public title: string;
+
+        /** AdClicked uid. */
+        public uid: number;
+
         /** AdClicked from. */
         public from: pb.AppFrom;
-
-        /** AdClicked ua. */
-        public ua: string;
 
         /**
          * Creates a new AdClicked instance using the specified properties.

@@ -351,18 +351,25 @@ export default class GlobalHandle {
 
     //离开房间：CmdRoomLeave
     public static onReqRoomLeave(call?) {
-        let data = {
-            id: GameData.roomId,
-            uid: GameData.userID,
-        }
-        let CmdRoomLeave = pb.CmdRoomLeave;
-        let message = CmdRoomLeave.create(data);
-        let bufff = CmdRoomLeave.encode(message).finish();
+        if (GameData.userID) {
+            let data = {
+                id: GameData.roomId,
+                uid: GameData.userID,
+            }
+            let CmdRoomLeave = pb.CmdRoomLeave;
+            let message = CmdRoomLeave.create(data);
+            let bufff = CmdRoomLeave.encode(message).finish();
 
-        socket.send(pb.MessageId.Req_Room_Leave, bufff, (res) => {
-            console.log(JSON.stringify(res));
-            call && call(res);
-        })
+            socket.send(pb.MessageId.Req_Room_Leave, bufff, (res) => {
+                console.log('onReqRoomLeave' + JSON.stringify(res));
+                call && call(res);
+            })
+        }
+        else {
+            console.log('err: GameData userID is null');
+            call && call();
+        }
+
     }
 
     //上传房间游戏操作

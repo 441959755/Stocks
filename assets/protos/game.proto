@@ -661,8 +661,9 @@ message StockOrderResult {
 }
 message StockPosition {
 	int32 code = 1;			// 股票代码
-	int32 volume = 2;		// 持仓量
-	double price_cost = 3;	// 持仓均格：即成本价
+	int32 volume_free = 2;	// 可卖出的持仓量
+	int32 volume = 3;		// 持仓量
+	double price_cost = 4;	// 持仓均格：即成本价
 }
 message StockPositionList {
 	repeated StockPosition items = 1;	// 持仓列表

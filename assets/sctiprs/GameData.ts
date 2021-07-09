@@ -31,7 +31,7 @@ export default class GameData {
 
     public static set brick(val) {
         this._brick = val;
-        GlobalEvent.emit(EventCfg.BIRCKCHANGE);
+        GlobalEvent.emit(EventCfg.DIAMONDCHANGE);
     }
 
     public static get brick() {
@@ -84,13 +84,13 @@ export default class GameData {
 
     public static huizhidatas = null;
 
-    private static _SmxlState = null;// 双盲训练状态
-
     public static Players = [];
 
     public static GameCounters = null;  //游戏输赢次数
 
     public static todayGameCount = null;  //今日游戏次数
+
+    private static _SmxlState = null;// 双盲训练状态
 
     public static get SmxlState() {
         return this._SmxlState;
@@ -100,6 +100,8 @@ export default class GameData {
         this._SmxlState = val;
         GlobalEvent.emit(EventCfg.SMINITFUND);
     }
+
+    public static cgState = null;  //闯关大赛状态
 
     //SMset
     private static _token;
@@ -180,7 +182,7 @@ export default class GameData {
         this._properties = val;
         cc.sys.localStorage.setItem('properties', JSON.stringify(val));
         //砖石
-        GlobalEvent.emit(EventCfg.BIRCKCHANGE);
+        GlobalEvent.emit(EventCfg.DIAMONDCHANGE);
         GlobalEvent.emit(EventCfg.GOLDCHANGE);
         GlobalEvent.emit(EventCfg.LEVELCHANGE);
         GlobalEvent.emit(EventCfg.EXPCHANGE);

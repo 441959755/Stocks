@@ -34,15 +34,15 @@ export default class NewClass extends cc.Component {
     gold: cc.Label = null;
 
     @property(cc.Label)
-    brick: cc.Label = null;
+    diamond: cc.Label = null;
 
     onLoad() {
         GlobalEvent.on(EventCfg.GOLDCHANGE, () => {
-            this.gold.string = GameData.properties[0];
+            this.gold.string = GameData.properties[pb.GamePropertyId.Gold];
         }, this);
 
-        GlobalEvent.on(EventCfg.BIRCKCHANGE, () => {
-            this.brick.string = GameData.properties[1];
+        GlobalEvent.on(EventCfg.DIAMONDCHANGE, () => {
+            this.diamond.string = GameData.properties[pb.GamePropertyId.Diamond];
         }, this);
 
         GlobalEvent.on(EventCfg.HEADIMGCHANGE, () => {
@@ -65,7 +65,7 @@ export default class NewClass extends cc.Component {
 
     onDestroy() {
         GlobalEvent.off(EventCfg.GOLDCHANGE);
-        GlobalEvent.off(EventCfg.BIRCKCHANGE);
+        GlobalEvent.off(EventCfg.DIAMONDCHANGE);
         GlobalEvent.off(EventCfg.HEADIMGCHANGE);
         GlobalEvent.off(EventCfg.NAMECHANGE);
         GlobalEvent.off(EventCfg.LOCALTIONCHANGE);
@@ -76,7 +76,7 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
         this.gold.string = GameData.properties[pb.GamePropertyId.Gold];
-        this.brick.string = GameData.properties[pb.GamePropertyId.Diamond];
+        this.diamond.string = GameData.properties[pb.GamePropertyId.Diamond];
         this.headImg.spriteFrame = GameData.headImg;
         this.userID.string = GameData.userID;
         this.userName.string = GameData.userName;

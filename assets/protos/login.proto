@@ -74,18 +74,23 @@ enum LoginType {
 enum AdPosition {
 	AdPosition_NULL = 0;
 
-	StartUp = 1;	// 启动页
-	Main = 11;		// 主页
+	AdPosition_Startup = 1;			// 启动页
+	AdPosition_Main = 2;			// 主页
+	AdPosition_Exit = 3;			// 退出页
+	AdPosition_Plugin = 4;			// 插屏
+	AdPosition_CgdsList = 5;		// 炒股大赛列表
+	AdPosition_AiStockList = 6;		// Ai股票列表
 }
 
 
 // 广告统计
 message AdClicked {
-	int32 uid = 1;		// uid
+	int32 id = 1;		// 广告ID：内部广告自己编号，外部广告填0，服务器通过Hash(URL)计算得到广告ID
 	int32 pos = 2;		// 广告位置
 	string url = 3;		// 广告URL
-	AppFrom from = 4;	// 渠道
-	string ua = 5;		// 浏览器的user_agent
+	string title = 4;	// 广告标题
+	int32 uid = 5;		// uid（可为0）
+	AppFrom from = 6;	// 渠道
 }
 
 // 注册

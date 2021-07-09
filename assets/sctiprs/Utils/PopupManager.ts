@@ -5,12 +5,15 @@ export default class PopupManager {
 
     public static tipsBox = null;
 
+    public static MRTBox = null;
+
     private static flag = false;
 
     //选择加载的Prefa
-    public static LoadPopupBox(name, text, call?) {
+    public static LoadTipsBox(name, text, call?) {
         if (!this.tipsBox && !this.flag) {
             this.flag = true;
+
             LoadUtils.loadRes('Prefabs/' + name, (pre) => {
                 let node = cc.instantiate(pre);
                 cc.find('Canvas').addChild(node, 99);
@@ -20,10 +23,40 @@ export default class PopupManager {
                 this.tipsBox = node;
                 this.tipsBox.emit('contentText', { text: text, call: call });
             })
-        } else if (this.tipsBox && this.flag) {
+
+            setTimeout(() => {
+                this.flag = false;
+            }, 1000);
+
+        } else if (this.tipsBox) {
             this.tipsBox.active = true;
             this.tipsBox.emit('contentText', { text: text, call: call });
         }
+    }
+
+    //加载名人堂
+    public static LoadMRTBox(name, data, call?) {
+        if (!this.MRTBox && !this.flag) {
+            this.flag = true;
+
+            LoadUtils.loadRes('Prefabs/' + name, (pre) => {
+                let node = cc.instantiate(pre);
+                cc.find('Canvas').addChild(node);
+                this.MRTBox = node;
+                let handle = this.MRTBox.getComponent('MRTHandle');
+                handle.MRTData = data;
+                handle.initShow();
+            })
+
+            setTimeout(() => {
+                this.flag = false;
+            }, 1000);
+        }
+        else if (this.MRTBox) {
+            this.MRTBox.active = true;
+
+        }
+
     }
 
 
@@ -31,6 +64,11 @@ export default class PopupManager {
         this.tipsBox && (this.tipsBox.destroy());
         this.tipsBox = null;
         this.flag = false;
+        this.MRTBox && (this.MRTBox.destroy());
+        this.MRTBox = null;
+
+
+
     }
 
 }

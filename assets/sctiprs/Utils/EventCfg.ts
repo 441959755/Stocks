@@ -8,6 +8,11 @@ export default {
 
 	OPENDXLAYER: 'OPENDXLAYER', //打开训练定向界面
 
+	//pk
+	OPENMATCHPK: 'OPENMATCHPK',    //pk匹配
+
+	OPENCHUANGUAN: 'OPENCHUANGUAN',
+
 	OPENSETLAYER: 'OPENSETLAYER',//打开设置界面
 
 	OPENHISTORYLAYER: 'OPENHISTORYLAYER',//打开历史记录界面
@@ -24,7 +29,7 @@ export default {
 	//hall
 	GOLDCHANGE: 'GOLDCHANGE', //金币改变
 
-	BIRCKCHANGE: 'BIRCKCHANGE', //砖石改变
+	DIAMONDCHANGE: 'DIAMONDCHANGE', //砖石改变
 
 	LEVELCHANGE: 'LEVELCHANGE', //等级
 
@@ -112,8 +117,7 @@ export default {
 
 	SETMARKCOLOR: 'SETMARKCOLOR',    //标签颜色
 
-	//pk
-	OPENMATCHPK: 'OPENMATCHPK',    //pk匹配
+
 
 	RoomGameDataSelf: 'RoomGameDataSelf',  //自己进入房间
 

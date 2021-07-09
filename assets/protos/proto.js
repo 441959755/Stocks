@@ -9,7 +9,7 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.pb = (function () {
+$root.pb = (function() {
 
     /**
      * Namespace pb.
@@ -26,7 +26,7 @@ $root.pb = (function () {
      * @property {number} MsgHead_Len=10 MsgHead_Len value
      * @property {number} MsgMaxBody_Len=1024000 MsgMaxBody_Len value
      */
-    pb.Constant = (function () {
+    pb.Constant = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Constant_NULL"] = 0;
         values[valuesById[10] = "MsgHead_Len"] = 10;
@@ -69,7 +69,7 @@ $root.pb = (function () {
      * @property {number} CS_ROOM_FAIL_CHECKIN=102 CS_ROOM_FAIL_CHECKIN value
      * @property {number} CS_ROOM_NOT_READY=103 CS_ROOM_NOT_READY value
      */
-    pb.ErrorCode = (function () {
+    pb.ErrorCode = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "CS_OK"] = 0;
         values[valuesById[1] = "CS_UNKNOW"] = 1;
@@ -268,7 +268,7 @@ $root.pb = (function () {
      * @property {number} S2S_Update_DailyTaskProgress=10032 S2S_Update_DailyTaskProgress value
      * @property {number} S2S_Sync_Pay=10034 S2S_Sync_Pay value
      */
-    pb.MessageId = (function () {
+    pb.MessageId = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "MessageId_NULL"] = 0;
         values[valuesById[101] = "Cmd_Save_Stock2Db"] = 101;
@@ -432,7 +432,7 @@ $root.pb = (function () {
         return values;
     })();
 
-    pb.MessageHead = (function () {
+    pb.MessageHead = (function() {
 
         /**
          * Properties of a MessageHead.
@@ -535,15 +535,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.messageId = reader.sfixed32();
-                        break;
-                    case 2:
-                        message.messageLen = reader.sfixed32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.messageId = reader.sfixed32();
+                    break;
+                case 2:
+                    message.messageLen = reader.sfixed32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -642,7 +642,7 @@ $root.pb = (function () {
         return MessageHead;
     })();
 
-    pb.ErrorInfo = (function () {
+    pb.ErrorInfo = (function() {
 
         /**
          * Properties of an ErrorInfo.
@@ -745,15 +745,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.code = reader.int32();
-                        break;
-                    case 2:
-                        message.err = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.code = reader.int32();
+                    break;
+                case 2:
+                    message.err = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -852,7 +852,7 @@ $root.pb = (function () {
         return ErrorInfo;
     })();
 
-    pb.VoidRequest = (function () {
+    pb.VoidRequest = (function() {
 
         /**
          * Properties of a VoidRequest.
@@ -933,9 +933,9 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -1012,7 +1012,7 @@ $root.pb = (function () {
         return VoidRequest;
     })();
 
-    pb.VoidReply = (function () {
+    pb.VoidReply = (function() {
 
         /**
          * Properties of a VoidReply.
@@ -1093,9 +1093,9 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -1181,7 +1181,7 @@ $root.pb = (function () {
      * @property {number} FeeType_Diamond=2 FeeType_Diamond value
      * @property {number} FeeType_Coupon=3 FeeType_Coupon value
      */
-    pb.FeeType = (function () {
+    pb.FeeType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "FeeType_NULL"] = 0;
         values[valuesById[1] = "FeeType_RMB"] = 1;
@@ -1199,7 +1199,7 @@ $root.pb = (function () {
      * @property {number} ApplePay=2 ApplePay value
      * @property {number} WechatMiniPay=3 WechatMiniPay value
      */
-    pb.PaymentType = (function () {
+    pb.PaymentType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "PaymentType_NULL"] = 0;
         values[valuesById[1] = "WechatPay"] = 1;
@@ -1216,7 +1216,7 @@ $root.pb = (function () {
      * @property {number} Pay=1 Pay value
      * @property {number} EMS=2 EMS value
      */
-    pb.ItemOrderState = (function () {
+    pb.ItemOrderState = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "ItemOrderState_Init"] = 0;
         values[valuesById[1] = "Pay"] = 1;
@@ -1235,7 +1235,7 @@ $root.pb = (function () {
      * @property {number} RoomChat=10 RoomChat value
      * @property {number} RoomInvite=11 RoomInvite value
      */
-    pb.MessageType = (function () {
+    pb.MessageType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "MessageType_NULL"] = 0;
         values[valuesById[1] = "SystemNotice"] = 1;
@@ -1268,7 +1268,7 @@ $root.pb = (function () {
      * @property {number} DaPanJingChai=8 DaPanJingChai value
      * @property {number} MaxGameType=30 MaxGameType value
      */
-    pb.GameType = (function () {
+    pb.GameType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "GameType_NULL"] = 0;
         values[valuesById[3] = "ShuangMang"] = 3;
@@ -1309,7 +1309,7 @@ $root.pb = (function () {
      * @property {number} RMB=29 RMB value
      * @property {number} Max=30 Max value
      */
-    pb.GamePropertyId = (function () {
+    pb.GamePropertyId = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Gold"] = 0;
         values[valuesById[1] = "Diamond"] = 1;
@@ -1336,7 +1336,7 @@ $root.pb = (function () {
      * @property {number} EventId_WeeklyAward=1 EventId_WeeklyAward value
      * @property {number} EventId_Zsjc=2 EventId_Zsjc value
      */
-    pb.EventId = (function () {
+    pb.EventId = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "EventId_NULL"] = 0;
         values[valuesById[1] = "EventId_WeeklyAward"] = 1;
@@ -1355,7 +1355,7 @@ $root.pb = (function () {
      * @property {number} MaxDailyTaskId=4 MaxDailyTaskId value
      * @property {number} MaxStudyTaskId=8 MaxStudyTaskId value
      */
-    pb.TaskId = (function () {
+    pb.TaskId = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Pk"] = 0;
         values[valuesById[1] = "Dk"] = 1;
@@ -1381,7 +1381,7 @@ $root.pb = (function () {
      * @property {number} Short=9 Short value
      * @property {number} END=150 END value
      */
-    pb.GameOperationId = (function () {
+    pb.GameOperationId = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "GameOperationId_NULL"] = 0;
         values[valuesById[1] = "Ask"] = 1;
@@ -1405,7 +1405,7 @@ $root.pb = (function () {
      * @property {number} Lost=2 Lost value
      * @property {number} Giveup=-1 Giveup value
      */
-    pb.GamePkResult = (function () {
+    pb.GamePkResult = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Draw"] = 0;
         values[valuesById[1] = "Win"] = 1;
@@ -1422,7 +1422,7 @@ $root.pb = (function () {
      * @property {number} Forward=1 Forward value
      * @property {number} Reverse=2 Reverse value
      */
-    pb.ExchangeDirection = (function () {
+    pb.ExchangeDirection = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "ExchangeDirection_NULL"] = 0;
         values[valuesById[1] = "Forward"] = 1;
@@ -1443,7 +1443,7 @@ $root.pb = (function () {
      * @property {number} BidLimit_Cancel=6 BidLimit_Cancel value
      * @property {number} BidMarket_Auto=7 BidMarket_Auto value
      */
-    pb.OrderType = (function () {
+    pb.OrderType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "OrderType_NULL"] = 0;
         values[valuesById[1] = "AskMarket"] = 1;
@@ -1466,7 +1466,7 @@ $root.pb = (function () {
      * @property {number} ManulCancel=3 ManulCancel value
      * @property {number} AutoCancel=4 AutoCancel value
      */
-    pb.OrderState = (function () {
+    pb.OrderState = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Init"] = 0;
         values[valuesById[1] = "Partial"] = 1;
@@ -1476,7 +1476,7 @@ $root.pb = (function () {
         return values;
     })();
 
-    pb.BackbagGrid = (function () {
+    pb.BackbagGrid = (function() {
 
         /**
          * Properties of a BackbagGrid.
@@ -1516,7 +1516,7 @@ $root.pb = (function () {
          * @memberof pb.BackbagGrid
          * @instance
          */
-        BackbagGrid.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        BackbagGrid.prototype.ts = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * BackbagGrid memo.
@@ -1590,18 +1590,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.properties = reader.string();
-                        break;
-                    case 2:
-                        message.ts = reader.int64();
-                        break;
-                    case 3:
-                        message.memo = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.properties = reader.string();
+                    break;
+                case 2:
+                    message.ts = reader.int64();
+                    break;
+                case 3:
+                    message.memo = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -1722,7 +1722,7 @@ $root.pb = (function () {
         return BackbagGrid;
     })();
 
-    pb.Backbag = (function () {
+    pb.Backbag = (function() {
 
         /**
          * Properties of a Backbag.
@@ -1816,14 +1816,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.grids && message.grids.length))
-                            message.grids = [];
-                        message.grids.push($root.pb.BackbagGrid.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.grids && message.grids.length))
+                        message.grids = [];
+                    message.grids.push($root.pb.BackbagGrid.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -1930,7 +1930,7 @@ $root.pb = (function () {
         return Backbag;
     })();
 
-    pb.GameCounter = (function () {
+    pb.GameCounter = (function() {
 
         /**
          * Properties of a GameCounter.
@@ -2044,18 +2044,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.game = reader.int32();
-                        break;
-                    case 2:
-                        message.win = reader.int32();
-                        break;
-                    case 3:
-                        message.lose = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.game = reader.int32();
+                    break;
+                case 2:
+                    message.win = reader.int32();
+                    break;
+                case 3:
+                    message.lose = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -2090,26 +2090,26 @@ $root.pb = (function () {
                 return "object expected";
             if (message.game != null && message.hasOwnProperty("game"))
                 switch (message.game) {
-                    default:
-                        return "game: enum value expected";
-                    case 0:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 10:
-                    case 11:
-                    case 6:
-                    case 16:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 15:
-                    case 12:
-                    case 13:
-                    case 7:
-                    case 8:
-                    case 30:
-                        break;
+                default:
+                    return "game: enum value expected";
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 10:
+                case 11:
+                case 6:
+                case 16:
+                case 1:
+                case 2:
+                case 9:
+                case 15:
+                case 12:
+                case 13:
+                case 7:
+                case 8:
+                case 30:
+                    break;
                 }
             if (message.win != null && message.hasOwnProperty("win"))
                 if (!$util.isInteger(message.win))
@@ -2133,74 +2133,74 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.GameCounter();
             switch (object.game) {
-                case "GameType_NULL":
-                case 0:
-                    message.game = 0;
-                    break;
-                case "ShuangMang":
-                case 3:
-                    message.game = 3;
-                    break;
-                case "DingXiang":
-                case 4:
-                    message.game = 4;
-                    break;
-                case "FenShi":
-                case 5:
-                    message.game = 5;
-                    break;
-                case "ZhiBiao":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "TiaoJianDan":
-                case 11:
-                    message.game = 11;
-                    break;
-                case "QiHuo":
-                case 6:
-                    message.game = 6;
-                    break;
-                case "TiaoZhan":
-                case 16:
-                    message.game = 16;
-                    break;
-                case "JJ_PK":
-                case 1:
-                    message.game = 1;
-                    break;
-                case "JJ_DuoKong":
-                case 2:
-                    message.game = 2;
-                    break;
-                case "JJ_ChuangGuan":
-                case 9:
-                    message.game = 9;
-                    break;
-                case "JJ_QiHuo":
-                case 15:
-                    message.game = 15;
-                    break;
-                case "MoNiChaoGu":
-                case 12:
-                    message.game = 12;
-                    break;
-                case "ChaoGuDaSai":
-                case 13:
-                    message.game = 13;
-                    break;
-                case "GeGuJingChai":
-                case 7:
-                    message.game = 7;
-                    break;
-                case "DaPanJingChai":
-                case 8:
-                    message.game = 8;
-                    break;
-                case "MaxGameType":
-                case 30:
-                    message.game = 30;
-                    break;
+            case "GameType_NULL":
+            case 0:
+                message.game = 0;
+                break;
+            case "ShuangMang":
+            case 3:
+                message.game = 3;
+                break;
+            case "DingXiang":
+            case 4:
+                message.game = 4;
+                break;
+            case "FenShi":
+            case 5:
+                message.game = 5;
+                break;
+            case "ZhiBiao":
+            case 10:
+                message.game = 10;
+                break;
+            case "TiaoJianDan":
+            case 11:
+                message.game = 11;
+                break;
+            case "QiHuo":
+            case 6:
+                message.game = 6;
+                break;
+            case "TiaoZhan":
+            case 16:
+                message.game = 16;
+                break;
+            case "JJ_PK":
+            case 1:
+                message.game = 1;
+                break;
+            case "JJ_DuoKong":
+            case 2:
+                message.game = 2;
+                break;
+            case "JJ_ChuangGuan":
+            case 9:
+                message.game = 9;
+                break;
+            case "JJ_QiHuo":
+            case 15:
+                message.game = 15;
+                break;
+            case "MoNiChaoGu":
+            case 12:
+                message.game = 12;
+                break;
+            case "ChaoGuDaSai":
+            case 13:
+                message.game = 13;
+                break;
+            case "GeGuJingChai":
+            case 7:
+                message.game = 7;
+                break;
+            case "DaPanJingChai":
+            case 8:
+                message.game = 8;
+                break;
+            case "MaxGameType":
+            case 30:
+                message.game = 30;
+                break;
             }
             if (object.win != null)
                 message.win = object.win | 0;
@@ -2250,7 +2250,7 @@ $root.pb = (function () {
         return GameCounter;
     })();
 
-    pb.GameCounters = (function () {
+    pb.GameCounters = (function() {
 
         /**
          * Properties of a GameCounters.
@@ -2344,14 +2344,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.GameCounter.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.GameCounter.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -2458,7 +2458,7 @@ $root.pb = (function () {
         return GameCounters;
     })();
 
-    pb.TodayGameTimes = (function () {
+    pb.TodayGameTimes = (function() {
 
         /**
          * Properties of a TodayGameTimes.
@@ -2555,19 +2555,19 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.counter && message.counter.length))
-                            message.counter = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.counter.push(reader.int32());
-                        } else
+                case 1:
+                    if (!(message.counter && message.counter.length))
+                        message.counter = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.counter.push(reader.int32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    } else
+                        message.counter.push(reader.int32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -2669,7 +2669,7 @@ $root.pb = (function () {
         return TodayGameTimes;
     })();
 
-    pb.SmxlState = (function () {
+    pb.SmxlState = (function() {
 
         /**
          * Properties of a SmxlState.
@@ -2706,7 +2706,7 @@ $root.pb = (function () {
          * @memberof pb.SmxlState
          * @instance
          */
-        SmxlState.prototype.resetTs = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        SmxlState.prototype.resetTs = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * SmxlState resetCounter.
@@ -2722,7 +2722,7 @@ $root.pb = (function () {
          * @memberof pb.SmxlState
          * @instance
          */
-        SmxlState.prototype.resetTsPremonth = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        SmxlState.prototype.resetTsPremonth = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * SmxlState lastMonthReportTs.
@@ -2730,7 +2730,7 @@ $root.pb = (function () {
          * @memberof pb.SmxlState
          * @instance
          */
-        SmxlState.prototype.lastMonthReportTs = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        SmxlState.prototype.lastMonthReportTs = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * SmxlState goldInit.
@@ -2738,7 +2738,7 @@ $root.pb = (function () {
          * @memberof pb.SmxlState
          * @instance
          */
-        SmxlState.prototype.goldInit = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        SmxlState.prototype.goldInit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * SmxlState gold.
@@ -2746,7 +2746,7 @@ $root.pb = (function () {
          * @memberof pb.SmxlState
          * @instance
          */
-        SmxlState.prototype.gold = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        SmxlState.prototype.gold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * SmxlState todayTs.
@@ -2754,7 +2754,7 @@ $root.pb = (function () {
          * @memberof pb.SmxlState
          * @instance
          */
-        SmxlState.prototype.todayTs = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        SmxlState.prototype.todayTs = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * SmxlState todayTimes.
@@ -2838,33 +2838,33 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.resetTs = reader.int64();
-                        break;
-                    case 2:
-                        message.resetCounter = reader.int32();
-                        break;
-                    case 3:
-                        message.resetTsPremonth = reader.int64();
-                        break;
-                    case 4:
-                        message.lastMonthReportTs = reader.int64();
-                        break;
-                    case 5:
-                        message.goldInit = reader.int64();
-                        break;
-                    case 6:
-                        message.gold = reader.int64();
-                        break;
-                    case 7:
-                        message.todayTs = reader.int64();
-                        break;
-                    case 8:
-                        message.todayTimes = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.resetTs = reader.int64();
+                    break;
+                case 2:
+                    message.resetCounter = reader.int32();
+                    break;
+                case 3:
+                    message.resetTsPremonth = reader.int64();
+                    break;
+                case 4:
+                    message.lastMonthReportTs = reader.int64();
+                    break;
+                case 5:
+                    message.goldInit = reader.int64();
+                    break;
+                case 6:
+                    message.gold = reader.int64();
+                    break;
+                case 7:
+                    message.todayTs = reader.int64();
+                    break;
+                case 8:
+                    message.todayTimes = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -3095,7 +3095,7 @@ $root.pb = (function () {
         return SmxlState;
     })();
 
-    pb.CgLogAward = (function () {
+    pb.CgLogAward = (function() {
 
         /**
          * Properties of a CgLogAward.
@@ -3209,18 +3209,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.stage = reader.int32();
-                        break;
-                    case 2:
-                        message.awarded = reader.bool();
-                        break;
-                    case 3:
-                        message.gotten = reader.bool();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.stage = reader.int32();
+                    break;
+                case 2:
+                    message.awarded = reader.bool();
+                    break;
+                case 3:
+                    message.gotten = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -3327,7 +3327,7 @@ $root.pb = (function () {
         return CgLogAward;
     })();
 
-    pb.CgState = (function () {
+    pb.CgState = (function() {
 
         /**
          * Properties of a CgState.
@@ -3365,7 +3365,7 @@ $root.pb = (function () {
          * @memberof pb.CgState
          * @instance
          */
-        CgState.prototype.seasonId = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CgState.prototype.seasonId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CgState stage.
@@ -3498,35 +3498,35 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.seasonId = reader.int64();
-                        break;
-                    case 2:
-                        message.stage = reader.int32();
-                        break;
-                    case 3:
-                        message.progress = reader.int32();
-                        break;
-                    case 4:
-                        message.lifes = reader.int32();
-                        break;
-                    case 5:
-                        message.win = reader.int32();
-                        break;
-                    case 6:
-                        message.lose = reader.int32();
-                        break;
-                    case 7:
-                        message.clearance = reader.bool();
-                        break;
-                    case 8:
-                        if (!(message.awards && message.awards.length))
-                            message.awards = [];
-                        message.awards.push($root.pb.CgLogAward.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.seasonId = reader.int64();
+                    break;
+                case 2:
+                    message.stage = reader.int32();
+                    break;
+                case 3:
+                    message.progress = reader.int32();
+                    break;
+                case 4:
+                    message.lifes = reader.int32();
+                    break;
+                case 5:
+                    message.win = reader.int32();
+                    break;
+                case 6:
+                    message.lose = reader.int32();
+                    break;
+                case 7:
+                    message.clearance = reader.bool();
+                    break;
+                case 8:
+                    if (!(message.awards && message.awards.length))
+                        message.awards = [];
+                    message.awards.push($root.pb.CgLogAward.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -3705,7 +3705,7 @@ $root.pb = (function () {
         return CgState;
     })();
 
-    pb.MncgState = (function () {
+    pb.MncgState = (function() {
 
         /**
          * Properties of a MncgState.
@@ -3819,18 +3819,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.account = reader.double();
-                        break;
-                    case 2:
-                        message.orderList = $root.pb.StockOrderList.decode(reader, reader.uint32());
-                        break;
-                    case 3:
-                        message.positionList = $root.pb.StockPositionList.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.account = reader.double();
+                    break;
+                case 2:
+                    message.orderList = $root.pb.StockOrderList.decode(reader, reader.uint32());
+                    break;
+                case 3:
+                    message.positionList = $root.pb.StockPositionList.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -3947,7 +3947,7 @@ $root.pb = (function () {
         return MncgState;
     })();
 
-    pb.CgdsStateItem = (function () {
+    pb.CgdsStateItem = (function() {
 
         /**
          * Properties of a CgdsStateItem.
@@ -4050,15 +4050,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.state = $root.pb.MncgState.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.state = $root.pb.MncgState.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -4162,7 +4162,7 @@ $root.pb = (function () {
         return CgdsStateItem;
     })();
 
-    pb.CgdsState = (function () {
+    pb.CgdsState = (function() {
 
         /**
          * Properties of a CgdsState.
@@ -4256,14 +4256,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.CgdsStateItem.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.CgdsStateItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -4370,7 +4370,7 @@ $root.pb = (function () {
         return CgdsState;
     })();
 
-    pb.ZsjcState = (function () {
+    pb.ZsjcState = (function() {
 
         /**
          * Properties of a ZsjcState.
@@ -4464,14 +4464,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.ZsjcGameData.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.ZsjcGameData.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -4578,7 +4578,7 @@ $root.pb = (function () {
         return ZsjcState;
     })();
 
-    pb.Tasks = (function () {
+    pb.Tasks = (function() {
 
         /**
          * Properties of a Tasks.
@@ -4685,19 +4685,19 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.study && message.study.length))
-                            message.study = [];
-                        message.study.push($root.pb.TaskItem.decode(reader, reader.uint32()));
-                        break;
-                    case 2:
-                        if (!(message.daily && message.daily.length))
-                            message.daily = [];
-                        message.daily.push($root.pb.TaskItem.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.study && message.study.length))
+                        message.study = [];
+                    message.study.push($root.pb.TaskItem.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    if (!(message.daily && message.daily.length))
+                        message.daily = [];
+                    message.daily.push($root.pb.TaskItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -4830,7 +4830,7 @@ $root.pb = (function () {
         return Tasks;
     })();
 
-    pb.GameData = (function () {
+    pb.GameData = (function() {
 
         /**
          * Properties of a GameData.
@@ -4939,7 +4939,7 @@ $root.pb = (function () {
          * @memberof pb.GameData
          * @instance
          */
-        GameData.prototype.today = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameData.prototype.today = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * GameData todayTimes.
@@ -5136,100 +5136,100 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.nickname = reader.string();
-                        break;
-                    case 3:
-                        message.icon = reader.string();
-                        break;
-                    case 4:
-                        if (!(message.properties && message.properties.length))
-                            message.properties = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.properties.push(reader.int64());
-                        } else
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.nickname = reader.string();
+                    break;
+                case 3:
+                    message.icon = reader.string();
+                    break;
+                case 4:
+                    if (!(message.properties && message.properties.length))
+                        message.properties = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.properties.push(reader.int64());
-                        break;
-                    case 5:
-                        if (!(message.counters && message.counters.length))
-                            message.counters = [];
-                        message.counters.push($root.pb.GameCounter.decode(reader, reader.uint32()));
-                        break;
-                    case 6:
-                        message.smlxState = $root.pb.SmxlState.decode(reader, reader.uint32());
-                        break;
-                    case 7:
-                        message.cgState = $root.pb.CgState.decode(reader, reader.uint32());
-                        break;
-                    case 8:
-                        message.today = reader.int64();
-                        break;
-                    case 9:
-                        if (!(message.todayTimes && message.todayTimes.length))
-                            message.todayTimes = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.todayTimes.push(reader.int32());
-                        } else
+                    } else
+                        message.properties.push(reader.int64());
+                    break;
+                case 5:
+                    if (!(message.counters && message.counters.length))
+                        message.counters = [];
+                    message.counters.push($root.pb.GameCounter.decode(reader, reader.uint32()));
+                    break;
+                case 6:
+                    message.smlxState = $root.pb.SmxlState.decode(reader, reader.uint32());
+                    break;
+                case 7:
+                    message.cgState = $root.pb.CgState.decode(reader, reader.uint32());
+                    break;
+                case 8:
+                    message.today = reader.int64();
+                    break;
+                case 9:
+                    if (!(message.todayTimes && message.todayTimes.length))
+                        message.todayTimes = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.todayTimes.push(reader.int32());
-                        break;
-                    case 10:
-                        if (!(message.stockList && message.stockList.length))
-                            message.stockList = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.stockList.push(reader.int32());
-                        } else
+                    } else
+                        message.todayTimes.push(reader.int32());
+                    break;
+                case 10:
+                    if (!(message.stockList && message.stockList.length))
+                        message.stockList = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.stockList.push(reader.int32());
-                        break;
-                    case 11:
-                        message.zsjcState = $root.pb.ZsjcState.decode(reader, reader.uint32());
-                        break;
-                    case 12:
-                        message.location = reader.string();
-                        break;
-                    case 13:
-                        message.gender = reader.string();
-                        break;
-                    case 14:
-                        if (!(message.favorList && message.favorList.length))
-                            message.favorList = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.favorList.push(reader.int32());
-                        } else
+                    } else
+                        message.stockList.push(reader.int32());
+                    break;
+                case 11:
+                    message.zsjcState = $root.pb.ZsjcState.decode(reader, reader.uint32());
+                    break;
+                case 12:
+                    message.location = reader.string();
+                    break;
+                case 13:
+                    message.gender = reader.string();
+                    break;
+                case 14:
+                    if (!(message.favorList && message.favorList.length))
+                        message.favorList = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.favorList.push(reader.int32());
-                        break;
-                    case 15:
-                        message.tasks = $root.pb.Tasks.decode(reader, reader.uint32());
-                        break;
-                    case 16:
-                        message.week = reader.int32();
-                        break;
-                    case 17:
-                        message.mobile = reader.string();
-                        break;
-                    case 18:
-                        if (!(message.aiStockList && message.aiStockList.length))
-                            message.aiStockList = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.aiStockList.push(reader.int32());
-                        } else
+                    } else
+                        message.favorList.push(reader.int32());
+                    break;
+                case 15:
+                    message.tasks = $root.pb.Tasks.decode(reader, reader.uint32());
+                    break;
+                case 16:
+                    message.week = reader.int32();
+                    break;
+                case 17:
+                    message.mobile = reader.string();
+                    break;
+                case 18:
+                    if (!(message.aiStockList && message.aiStockList.length))
+                        message.aiStockList = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.aiStockList.push(reader.int32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    } else
+                        message.aiStockList.push(reader.int32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -5579,7 +5579,7 @@ $root.pb = (function () {
         return GameData;
     })();
 
-    pb.GamePropertyItem = (function () {
+    pb.GamePropertyItem = (function() {
 
         /**
          * Properties of a GamePropertyItem.
@@ -5619,7 +5619,7 @@ $root.pb = (function () {
          * @memberof pb.GamePropertyItem
          * @instance
          */
-        GamePropertyItem.prototype.oldValue = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GamePropertyItem.prototype.oldValue = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * GamePropertyItem newValue.
@@ -5627,7 +5627,7 @@ $root.pb = (function () {
          * @memberof pb.GamePropertyItem
          * @instance
          */
-        GamePropertyItem.prototype.newValue = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GamePropertyItem.prototype.newValue = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new GamePropertyItem instance using the specified properties.
@@ -5693,18 +5693,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.oldValue = reader.int64();
-                        break;
-                    case 3:
-                        message.newValue = reader.int64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.oldValue = reader.int64();
+                    break;
+                case 3:
+                    message.newValue = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -5739,23 +5739,23 @@ $root.pb = (function () {
                 return "object expected";
             if (message.id != null && message.hasOwnProperty("id"))
                 switch (message.id) {
-                    default:
-                        return "id: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 20:
-                    case 21:
-                    case 22:
-                    case 23:
-                    case 28:
-                    case 29:
-                    case 30:
-                        break;
+                default:
+                    return "id: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 28:
+                case 29:
+                case 30:
+                    break;
                 }
             if (message.oldValue != null && message.hasOwnProperty("oldValue"))
                 if (!$util.isInteger(message.oldValue) && !(message.oldValue && $util.isInteger(message.oldValue.low) && $util.isInteger(message.oldValue.high)))
@@ -5779,62 +5779,62 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.GamePropertyItem();
             switch (object.id) {
-                case "Gold":
-                case 0:
-                    message.id = 0;
-                    break;
-                case "Diamond":
-                case 1:
-                    message.id = 1;
-                    break;
-                case "Vip":
-                case 2:
-                    message.id = 2;
-                    break;
-                case "Exp":
-                case 3:
-                    message.id = 3;
-                    break;
-                case "Level":
-                case 4:
-                    message.id = 4;
-                    break;
-                case "Fame":
-                case 5:
-                    message.id = 5;
-                    break;
-                case "Coupon":
-                case 6:
-                    message.id = 6;
-                    break;
-                case "UnlockDxxl":
-                case 20:
-                    message.id = 20;
-                    break;
-                case "UnlockQhxl":
-                case 21:
-                    message.id = 21;
-                    break;
-                case "UnlockTjdxl":
-                case 22:
-                    message.id = 22;
-                    break;
-                case "UnlockZbxl":
-                case 23:
-                    message.id = 23;
-                    break;
-                case "VipExpiration":
-                case 28:
-                    message.id = 28;
-                    break;
-                case "RMB":
-                case 29:
-                    message.id = 29;
-                    break;
-                case "Max":
-                case 30:
-                    message.id = 30;
-                    break;
+            case "Gold":
+            case 0:
+                message.id = 0;
+                break;
+            case "Diamond":
+            case 1:
+                message.id = 1;
+                break;
+            case "Vip":
+            case 2:
+                message.id = 2;
+                break;
+            case "Exp":
+            case 3:
+                message.id = 3;
+                break;
+            case "Level":
+            case 4:
+                message.id = 4;
+                break;
+            case "Fame":
+            case 5:
+                message.id = 5;
+                break;
+            case "Coupon":
+            case 6:
+                message.id = 6;
+                break;
+            case "UnlockDxxl":
+            case 20:
+                message.id = 20;
+                break;
+            case "UnlockQhxl":
+            case 21:
+                message.id = 21;
+                break;
+            case "UnlockTjdxl":
+            case 22:
+                message.id = 22;
+                break;
+            case "UnlockZbxl":
+            case 23:
+                message.id = 23;
+                break;
+            case "VipExpiration":
+            case 28:
+                message.id = 28;
+                break;
+            case "RMB":
+            case 29:
+                message.id = 29;
+                break;
+            case "Max":
+            case 30:
+                message.id = 30;
+                break;
             }
             if (object.oldValue != null)
                 if ($util.Long)
@@ -5912,7 +5912,7 @@ $root.pb = (function () {
         return GamePropertyItem;
     })();
 
-    pb.GameProperties = (function () {
+    pb.GameProperties = (function() {
 
         /**
          * Properties of a GameProperties.
@@ -6006,14 +6006,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.GamePropertyItem.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.GamePropertyItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -6120,7 +6120,7 @@ $root.pb = (function () {
         return GameProperties;
     })();
 
-    pb.GameOperationItem = (function () {
+    pb.GameOperationItem = (function() {
 
         /**
          * Properties of a GameOperationItem.
@@ -6181,7 +6181,7 @@ $root.pb = (function () {
          * @memberof pb.GameOperationItem
          * @instance
          */
-        GameOperationItem.prototype.kTs = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameOperationItem.prototype.kTs = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * GameOperationItem kOffset.
@@ -6205,7 +6205,7 @@ $root.pb = (function () {
          * @memberof pb.GameOperationItem
          * @instance
          */
-        GameOperationItem.prototype.volume = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameOperationItem.prototype.volume = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * GameOperationItem opTs.
@@ -6213,7 +6213,7 @@ $root.pb = (function () {
          * @memberof pb.GameOperationItem
          * @instance
          */
-        GameOperationItem.prototype.opTs = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameOperationItem.prototype.opTs = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new GameOperationItem instance using the specified properties.
@@ -6289,33 +6289,33 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.opId = reader.int32();
-                        break;
-                    case 2:
-                        message.code = reader.int32();
-                        break;
-                    case 3:
-                        message.kType = reader.int32();
-                        break;
-                    case 4:
-                        message.kTs = reader.int64();
-                        break;
-                    case 5:
-                        message.kOffset = reader.int32();
-                        break;
-                    case 6:
-                        message.price = reader.double();
-                        break;
-                    case 7:
-                        message.volume = reader.int64();
-                        break;
-                    case 8:
-                        message.opTs = reader.int64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.opId = reader.int32();
+                    break;
+                case 2:
+                    message.code = reader.int32();
+                    break;
+                case 3:
+                    message.kType = reader.int32();
+                    break;
+                case 4:
+                    message.kTs = reader.int64();
+                    break;
+                case 5:
+                    message.kOffset = reader.int32();
+                    break;
+                case 6:
+                    message.price = reader.double();
+                    break;
+                case 7:
+                    message.volume = reader.int64();
+                    break;
+                case 8:
+                    message.opTs = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -6350,38 +6350,38 @@ $root.pb = (function () {
                 return "object expected";
             if (message.opId != null && message.hasOwnProperty("opId"))
                 switch (message.opId) {
-                    default:
-                        return "opId: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 8:
-                    case 9:
-                    case 150:
-                        break;
+                default:
+                    return "opId: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 8:
+                case 9:
+                case 150:
+                    break;
                 }
             if (message.code != null && message.hasOwnProperty("code"))
                 if (!$util.isInteger(message.code))
                     return "code: integer expected";
             if (message.kType != null && message.hasOwnProperty("kType"))
                 switch (message.kType) {
-                    default:
-                        return "kType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 10:
-                    case 11:
-                        break;
+                default:
+                    return "kType: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 10:
+                case 11:
+                    break;
                 }
             if (message.kTs != null && message.hasOwnProperty("kTs"))
                 if (!$util.isInteger(message.kTs) && !(message.kTs && $util.isInteger(message.kTs.low) && $util.isInteger(message.kTs.high)))
@@ -6414,90 +6414,90 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.GameOperationItem();
             switch (object.opId) {
-                case "GameOperationId_NULL":
-                case 0:
-                    message.opId = 0;
-                    break;
-                case "Ask":
-                case 1:
-                    message.opId = 1;
-                    break;
-                case "Bid":
-                case 2:
-                    message.opId = 2;
-                    break;
-                case "Wait":
-                case 3:
-                    message.opId = 3;
-                    break;
-                case "Hold":
-                case 4:
-                    message.opId = 4;
-                    break;
-                case "Bid_Force":
-                case 5:
-                    message.opId = 5;
-                    break;
-                case "Ask_Force":
-                case 6:
-                    message.opId = 6;
-                    break;
-                case "Long":
-                case 8:
-                    message.opId = 8;
-                    break;
-                case "Short":
-                case 9:
-                    message.opId = 9;
-                    break;
-                case "END":
-                case 150:
-                    message.opId = 150;
-                    break;
+            case "GameOperationId_NULL":
+            case 0:
+                message.opId = 0;
+                break;
+            case "Ask":
+            case 1:
+                message.opId = 1;
+                break;
+            case "Bid":
+            case 2:
+                message.opId = 2;
+                break;
+            case "Wait":
+            case 3:
+                message.opId = 3;
+                break;
+            case "Hold":
+            case 4:
+                message.opId = 4;
+                break;
+            case "Bid_Force":
+            case 5:
+                message.opId = 5;
+                break;
+            case "Ask_Force":
+            case 6:
+                message.opId = 6;
+                break;
+            case "Long":
+            case 8:
+                message.opId = 8;
+                break;
+            case "Short":
+            case 9:
+                message.opId = 9;
+                break;
+            case "END":
+            case 150:
+                message.opId = 150;
+                break;
             }
             if (object.code != null)
                 message.code = object.code | 0;
             switch (object.kType) {
-                case "KType_NULL":
-                case 0:
-                    message.kType = 0;
-                    break;
-                case "Real":
-                case 1:
-                    message.kType = 1;
-                    break;
-                case "Min":
-                case 2:
-                    message.kType = 2;
-                    break;
-                case "MinToday":
-                case 3:
-                    message.kType = 3;
-                    break;
-                case "Min5":
-                case 4:
-                    message.kType = 4;
-                    break;
-                case "Min15":
-                case 5:
-                    message.kType = 5;
-                    break;
-                case "Min30":
-                case 6:
-                    message.kType = 6;
-                    break;
-                case "Min60":
-                case 7:
-                    message.kType = 7;
-                    break;
-                case "Day":
-                case 10:
-                    message.kType = 10;
-                    break;
-                case "Day7":
-                case 11:
-                    message.kType = 11;
-                    break;
+            case "KType_NULL":
+            case 0:
+                message.kType = 0;
+                break;
+            case "Real":
+            case 1:
+                message.kType = 1;
+                break;
+            case "Min":
+            case 2:
+                message.kType = 2;
+                break;
+            case "MinToday":
+            case 3:
+                message.kType = 3;
+                break;
+            case "Min5":
+            case 4:
+                message.kType = 4;
+                break;
+            case "Min15":
+            case 5:
+                message.kType = 5;
+                break;
+            case "Min30":
+            case 6:
+                message.kType = 6;
+                break;
+            case "Min60":
+            case 7:
+                message.kType = 7;
+                break;
+            case "Day":
+            case 10:
+                message.kType = 10;
+                break;
+            case "Day7":
+            case 11:
+                message.kType = 11;
+                break;
             }
             if (object.kTs != null)
                 if ($util.Long)
@@ -6610,7 +6610,7 @@ $root.pb = (function () {
         return GameOperationItem;
     })();
 
-    pb.GameOperations = (function () {
+    pb.GameOperations = (function() {
 
         /**
          * Properties of a GameOperations.
@@ -6720,24 +6720,24 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.GameOperationItem.decode(reader, reader.uint32()));
-                        break;
-                    case 2:
-                        if (!(message.junXian && message.junXian.length))
-                            message.junXian = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.junXian.push(reader.int32());
-                        } else
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.GameOperationItem.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    if (!(message.junXian && message.junXian.length))
+                        message.junXian = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.junXian.push(reader.int32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    } else
+                        message.junXian.push(reader.int32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -6865,7 +6865,7 @@ $root.pb = (function () {
         return GameOperations;
     })();
 
-    pb.GameResult = (function () {
+    pb.GameResult = (function() {
 
         /**
          * Properties of a GameResult.
@@ -6941,7 +6941,7 @@ $root.pb = (function () {
          * @memberof pb.GameResult
          * @instance
          */
-        GameResult.prototype.kFrom = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameResult.prototype.kFrom = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * GameResult kTo.
@@ -6949,7 +6949,7 @@ $root.pb = (function () {
          * @memberof pb.GameResult
          * @instance
          */
-        GameResult.prototype.kTo = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameResult.prototype.kTo = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * GameResult stockProfitRate.
@@ -6973,7 +6973,7 @@ $root.pb = (function () {
          * @memberof pb.GameResult
          * @instance
          */
-        GameResult.prototype.userCapital = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameResult.prototype.userCapital = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * GameResult userProfit.
@@ -6981,7 +6981,7 @@ $root.pb = (function () {
          * @memberof pb.GameResult
          * @instance
          */
-        GameResult.prototype.userProfit = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameResult.prototype.userProfit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * GameResult ts.
@@ -6989,7 +6989,7 @@ $root.pb = (function () {
          * @memberof pb.GameResult
          * @instance
          */
-        GameResult.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameResult.prototype.ts = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * GameResult rank.
@@ -7005,7 +7005,7 @@ $root.pb = (function () {
          * @memberof pb.GameResult
          * @instance
          */
-        GameResult.prototype.refId = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameResult.prototype.refId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * GameResult kStartup.
@@ -7013,7 +7013,7 @@ $root.pb = (function () {
          * @memberof pb.GameResult
          * @instance
          */
-        GameResult.prototype.kStartup = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameResult.prototype.kStartup = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * GameResult kStop.
@@ -7021,7 +7021,7 @@ $root.pb = (function () {
          * @memberof pb.GameResult
          * @instance
          */
-        GameResult.prototype.kStop = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        GameResult.prototype.kStop = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new GameResult instance using the specified properties.
@@ -7111,54 +7111,54 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.gType = reader.int32();
-                        break;
-                    case 3:
-                        message.quotesCode = reader.int32();
-                        break;
-                    case 4:
-                        message.kType = reader.int32();
-                        break;
-                    case 5:
-                        message.kFrom = reader.int64();
-                        break;
-                    case 6:
-                        message.kTo = reader.int64();
-                        break;
-                    case 7:
-                        message.stockProfitRate = reader.double();
-                        break;
-                    case 8:
-                        message.userProfitRate = reader.double();
-                        break;
-                    case 9:
-                        message.userCapital = reader.int64();
-                        break;
-                    case 10:
-                        message.userProfit = reader.int64();
-                        break;
-                    case 11:
-                        message.ts = reader.int64();
-                        break;
-                    case 12:
-                        message.rank = reader.int32();
-                        break;
-                    case 13:
-                        message.refId = reader.int64();
-                        break;
-                    case 14:
-                        message.kStartup = reader.int64();
-                        break;
-                    case 15:
-                        message.kStop = reader.int64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.gType = reader.int32();
+                    break;
+                case 3:
+                    message.quotesCode = reader.int32();
+                    break;
+                case 4:
+                    message.kType = reader.int32();
+                    break;
+                case 5:
+                    message.kFrom = reader.int64();
+                    break;
+                case 6:
+                    message.kTo = reader.int64();
+                    break;
+                case 7:
+                    message.stockProfitRate = reader.double();
+                    break;
+                case 8:
+                    message.userProfitRate = reader.double();
+                    break;
+                case 9:
+                    message.userCapital = reader.int64();
+                    break;
+                case 10:
+                    message.userProfit = reader.int64();
+                    break;
+                case 11:
+                    message.ts = reader.int64();
+                    break;
+                case 12:
+                    message.rank = reader.int32();
+                    break;
+                case 13:
+                    message.refId = reader.int64();
+                    break;
+                case 14:
+                    message.kStartup = reader.int64();
+                    break;
+                case 15:
+                    message.kStop = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -7196,45 +7196,45 @@ $root.pb = (function () {
                     return "uid: integer expected";
             if (message.gType != null && message.hasOwnProperty("gType"))
                 switch (message.gType) {
-                    default:
-                        return "gType: enum value expected";
-                    case 0:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 10:
-                    case 11:
-                    case 6:
-                    case 16:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 15:
-                    case 12:
-                    case 13:
-                    case 7:
-                    case 8:
-                    case 30:
-                        break;
+                default:
+                    return "gType: enum value expected";
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 10:
+                case 11:
+                case 6:
+                case 16:
+                case 1:
+                case 2:
+                case 9:
+                case 15:
+                case 12:
+                case 13:
+                case 7:
+                case 8:
+                case 30:
+                    break;
                 }
             if (message.quotesCode != null && message.hasOwnProperty("quotesCode"))
                 if (!$util.isInteger(message.quotesCode))
                     return "quotesCode: integer expected";
             if (message.kType != null && message.hasOwnProperty("kType"))
                 switch (message.kType) {
-                    default:
-                        return "kType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 10:
-                    case 11:
-                        break;
+                default:
+                    return "kType: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 10:
+                case 11:
+                    break;
                 }
             if (message.kFrom != null && message.hasOwnProperty("kFrom"))
                 if (!$util.isInteger(message.kFrom) && !(message.kFrom && $util.isInteger(message.kFrom.low) && $util.isInteger(message.kFrom.high)))
@@ -7287,118 +7287,118 @@ $root.pb = (function () {
             if (object.uid != null)
                 message.uid = object.uid | 0;
             switch (object.gType) {
-                case "GameType_NULL":
-                case 0:
-                    message.gType = 0;
-                    break;
-                case "ShuangMang":
-                case 3:
-                    message.gType = 3;
-                    break;
-                case "DingXiang":
-                case 4:
-                    message.gType = 4;
-                    break;
-                case "FenShi":
-                case 5:
-                    message.gType = 5;
-                    break;
-                case "ZhiBiao":
-                case 10:
-                    message.gType = 10;
-                    break;
-                case "TiaoJianDan":
-                case 11:
-                    message.gType = 11;
-                    break;
-                case "QiHuo":
-                case 6:
-                    message.gType = 6;
-                    break;
-                case "TiaoZhan":
-                case 16:
-                    message.gType = 16;
-                    break;
-                case "JJ_PK":
-                case 1:
-                    message.gType = 1;
-                    break;
-                case "JJ_DuoKong":
-                case 2:
-                    message.gType = 2;
-                    break;
-                case "JJ_ChuangGuan":
-                case 9:
-                    message.gType = 9;
-                    break;
-                case "JJ_QiHuo":
-                case 15:
-                    message.gType = 15;
-                    break;
-                case "MoNiChaoGu":
-                case 12:
-                    message.gType = 12;
-                    break;
-                case "ChaoGuDaSai":
-                case 13:
-                    message.gType = 13;
-                    break;
-                case "GeGuJingChai":
-                case 7:
-                    message.gType = 7;
-                    break;
-                case "DaPanJingChai":
-                case 8:
-                    message.gType = 8;
-                    break;
-                case "MaxGameType":
-                case 30:
-                    message.gType = 30;
-                    break;
+            case "GameType_NULL":
+            case 0:
+                message.gType = 0;
+                break;
+            case "ShuangMang":
+            case 3:
+                message.gType = 3;
+                break;
+            case "DingXiang":
+            case 4:
+                message.gType = 4;
+                break;
+            case "FenShi":
+            case 5:
+                message.gType = 5;
+                break;
+            case "ZhiBiao":
+            case 10:
+                message.gType = 10;
+                break;
+            case "TiaoJianDan":
+            case 11:
+                message.gType = 11;
+                break;
+            case "QiHuo":
+            case 6:
+                message.gType = 6;
+                break;
+            case "TiaoZhan":
+            case 16:
+                message.gType = 16;
+                break;
+            case "JJ_PK":
+            case 1:
+                message.gType = 1;
+                break;
+            case "JJ_DuoKong":
+            case 2:
+                message.gType = 2;
+                break;
+            case "JJ_ChuangGuan":
+            case 9:
+                message.gType = 9;
+                break;
+            case "JJ_QiHuo":
+            case 15:
+                message.gType = 15;
+                break;
+            case "MoNiChaoGu":
+            case 12:
+                message.gType = 12;
+                break;
+            case "ChaoGuDaSai":
+            case 13:
+                message.gType = 13;
+                break;
+            case "GeGuJingChai":
+            case 7:
+                message.gType = 7;
+                break;
+            case "DaPanJingChai":
+            case 8:
+                message.gType = 8;
+                break;
+            case "MaxGameType":
+            case 30:
+                message.gType = 30;
+                break;
             }
             if (object.quotesCode != null)
                 message.quotesCode = object.quotesCode | 0;
             switch (object.kType) {
-                case "KType_NULL":
-                case 0:
-                    message.kType = 0;
-                    break;
-                case "Real":
-                case 1:
-                    message.kType = 1;
-                    break;
-                case "Min":
-                case 2:
-                    message.kType = 2;
-                    break;
-                case "MinToday":
-                case 3:
-                    message.kType = 3;
-                    break;
-                case "Min5":
-                case 4:
-                    message.kType = 4;
-                    break;
-                case "Min15":
-                case 5:
-                    message.kType = 5;
-                    break;
-                case "Min30":
-                case 6:
-                    message.kType = 6;
-                    break;
-                case "Min60":
-                case 7:
-                    message.kType = 7;
-                    break;
-                case "Day":
-                case 10:
-                    message.kType = 10;
-                    break;
-                case "Day7":
-                case 11:
-                    message.kType = 11;
-                    break;
+            case "KType_NULL":
+            case 0:
+                message.kType = 0;
+                break;
+            case "Real":
+            case 1:
+                message.kType = 1;
+                break;
+            case "Min":
+            case 2:
+                message.kType = 2;
+                break;
+            case "MinToday":
+            case 3:
+                message.kType = 3;
+                break;
+            case "Min5":
+            case 4:
+                message.kType = 4;
+                break;
+            case "Min15":
+            case 5:
+                message.kType = 5;
+                break;
+            case "Min30":
+            case 6:
+                message.kType = 6;
+                break;
+            case "Min60":
+            case 7:
+                message.kType = 7;
+                break;
+            case "Day":
+            case 10:
+                message.kType = 10;
+                break;
+            case "Day7":
+            case 11:
+                message.kType = 11;
+                break;
             }
             if (object.kFrom != null)
                 if ($util.Long)
@@ -7614,7 +7614,7 @@ $root.pb = (function () {
         return GameResult;
     })();
 
-    pb.CmdGameLogin = (function () {
+    pb.CmdGameLogin = (function() {
 
         /**
          * Properties of a CmdGameLogin.
@@ -7717,15 +7717,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.token = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.token = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -7824,7 +7824,7 @@ $root.pb = (function () {
         return CmdGameLogin;
     })();
 
-    pb.CmdGameLoginReply = (function () {
+    pb.CmdGameLoginReply = (function() {
 
         /**
          * Properties of a CmdGameLoginReply.
@@ -7927,15 +7927,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
-                        break;
-                    case 2:
-                        message.data = $root.pb.GameData.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.data = $root.pb.GameData.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -8044,7 +8044,7 @@ $root.pb = (function () {
         return CmdGameLoginReply;
     })();
 
-    pb.CmdUploadIcon = (function () {
+    pb.CmdUploadIcon = (function() {
 
         /**
          * Properties of a CmdUploadIcon.
@@ -8147,15 +8147,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.icon = reader.bytes();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.icon = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -8263,7 +8263,7 @@ $root.pb = (function () {
         return CmdUploadIcon;
     })();
 
-    pb.PlayerInfo = (function () {
+    pb.PlayerInfo = (function() {
 
         /**
          * Properties of a PlayerInfo.
@@ -8428,39 +8428,39 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.nick = reader.string();
-                        break;
-                    case 3:
-                        message.icon = reader.string();
-                        break;
-                    case 4:
-                        message.gender = reader.string();
-                        break;
-                    case 5:
-                        message.location = reader.string();
-                        break;
-                    case 6:
-                        if (!(message.properties && message.properties.length))
-                            message.properties = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.properties.push(reader.int64());
-                        } else
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.nick = reader.string();
+                    break;
+                case 3:
+                    message.icon = reader.string();
+                    break;
+                case 4:
+                    message.gender = reader.string();
+                    break;
+                case 5:
+                    message.location = reader.string();
+                    break;
+                case 6:
+                    if (!(message.properties && message.properties.length))
+                        message.properties = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.properties.push(reader.int64());
-                        break;
-                    case 7:
-                        if (!(message.counters && message.counters.length))
-                            message.counters = [];
-                        message.counters.push($root.pb.GameCounter.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    } else
+                        message.properties.push(reader.int64());
+                    break;
+                case 7:
+                    if (!(message.counters && message.counters.length))
+                        message.counters = [];
+                    message.counters.push($root.pb.GameCounter.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -8640,7 +8640,7 @@ $root.pb = (function () {
         return PlayerInfo;
     })();
 
-    pb.CmdEditFavorList = (function () {
+    pb.CmdEditFavorList = (function() {
 
         /**
          * Properties of a CmdEditFavorList.
@@ -8743,15 +8743,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.removed = reader.bool();
-                        break;
-                    case 2:
-                        message.uid = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.removed = reader.bool();
+                    break;
+                case 2:
+                    message.uid = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -8850,7 +8850,7 @@ $root.pb = (function () {
         return CmdEditFavorList;
     })();
 
-    pb.CmdGetItem = (function () {
+    pb.CmdGetItem = (function() {
 
         /**
          * Properties of a CmdGetItem.
@@ -8880,7 +8880,7 @@ $root.pb = (function () {
          * @memberof pb.CmdGetItem
          * @instance
          */
-        CmdGetItem.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdGetItem.prototype.ts = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new CmdGetItem instance using the specified properties.
@@ -8942,12 +8942,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.ts = reader.int64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.ts = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -9051,7 +9051,7 @@ $root.pb = (function () {
         return CmdGetItem;
     })();
 
-    pb.CmdResetGameCounter = (function () {
+    pb.CmdResetGameCounter = (function() {
 
         /**
          * Properties of a CmdResetGameCounter.
@@ -9143,12 +9143,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.game = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.game = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -9183,26 +9183,26 @@ $root.pb = (function () {
                 return "object expected";
             if (message.game != null && message.hasOwnProperty("game"))
                 switch (message.game) {
-                    default:
-                        return "game: enum value expected";
-                    case 0:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 10:
-                    case 11:
-                    case 6:
-                    case 16:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 15:
-                    case 12:
-                    case 13:
-                    case 7:
-                    case 8:
-                    case 30:
-                        break;
+                default:
+                    return "game: enum value expected";
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 10:
+                case 11:
+                case 6:
+                case 16:
+                case 1:
+                case 2:
+                case 9:
+                case 15:
+                case 12:
+                case 13:
+                case 7:
+                case 8:
+                case 30:
+                    break;
                 }
             return null;
         };
@@ -9220,74 +9220,74 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.CmdResetGameCounter();
             switch (object.game) {
-                case "GameType_NULL":
-                case 0:
-                    message.game = 0;
-                    break;
-                case "ShuangMang":
-                case 3:
-                    message.game = 3;
-                    break;
-                case "DingXiang":
-                case 4:
-                    message.game = 4;
-                    break;
-                case "FenShi":
-                case 5:
-                    message.game = 5;
-                    break;
-                case "ZhiBiao":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "TiaoJianDan":
-                case 11:
-                    message.game = 11;
-                    break;
-                case "QiHuo":
-                case 6:
-                    message.game = 6;
-                    break;
-                case "TiaoZhan":
-                case 16:
-                    message.game = 16;
-                    break;
-                case "JJ_PK":
-                case 1:
-                    message.game = 1;
-                    break;
-                case "JJ_DuoKong":
-                case 2:
-                    message.game = 2;
-                    break;
-                case "JJ_ChuangGuan":
-                case 9:
-                    message.game = 9;
-                    break;
-                case "JJ_QiHuo":
-                case 15:
-                    message.game = 15;
-                    break;
-                case "MoNiChaoGu":
-                case 12:
-                    message.game = 12;
-                    break;
-                case "ChaoGuDaSai":
-                case 13:
-                    message.game = 13;
-                    break;
-                case "GeGuJingChai":
-                case 7:
-                    message.game = 7;
-                    break;
-                case "DaPanJingChai":
-                case 8:
-                    message.game = 8;
-                    break;
-                case "MaxGameType":
-                case 30:
-                    message.game = 30;
-                    break;
+            case "GameType_NULL":
+            case 0:
+                message.game = 0;
+                break;
+            case "ShuangMang":
+            case 3:
+                message.game = 3;
+                break;
+            case "DingXiang":
+            case 4:
+                message.game = 4;
+                break;
+            case "FenShi":
+            case 5:
+                message.game = 5;
+                break;
+            case "ZhiBiao":
+            case 10:
+                message.game = 10;
+                break;
+            case "TiaoJianDan":
+            case 11:
+                message.game = 11;
+                break;
+            case "QiHuo":
+            case 6:
+                message.game = 6;
+                break;
+            case "TiaoZhan":
+            case 16:
+                message.game = 16;
+                break;
+            case "JJ_PK":
+            case 1:
+                message.game = 1;
+                break;
+            case "JJ_DuoKong":
+            case 2:
+                message.game = 2;
+                break;
+            case "JJ_ChuangGuan":
+            case 9:
+                message.game = 9;
+                break;
+            case "JJ_QiHuo":
+            case 15:
+                message.game = 15;
+                break;
+            case "MoNiChaoGu":
+            case 12:
+                message.game = 12;
+                break;
+            case "ChaoGuDaSai":
+            case 13:
+                message.game = 13;
+                break;
+            case "GeGuJingChai":
+            case 7:
+                message.game = 7;
+                break;
+            case "DaPanJingChai":
+            case 8:
+                message.game = 8;
+                break;
+            case "MaxGameType":
+            case 30:
+                message.game = 30;
+                break;
             }
             return message;
         };
@@ -9326,7 +9326,7 @@ $root.pb = (function () {
         return CmdResetGameCounter;
     })();
 
-    pb.TaskItem = (function () {
+    pb.TaskItem = (function() {
 
         /**
          * Properties of a TaskItem.
@@ -9451,21 +9451,21 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.taskId = reader.int32();
-                        break;
-                    case 2:
-                        message.progress = reader.int32();
-                        break;
-                    case 3:
-                        message.award = reader.int32();
-                        break;
-                    case 4:
-                        message.got = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.taskId = reader.int32();
+                    break;
+                case 2:
+                    message.progress = reader.int32();
+                    break;
+                case 3:
+                    message.award = reader.int32();
+                    break;
+                case 4:
+                    message.got = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -9580,7 +9580,7 @@ $root.pb = (function () {
         return TaskItem;
     })();
 
-    pb.CmdStudyProgress = (function () {
+    pb.CmdStudyProgress = (function() {
 
         /**
          * Properties of a CmdStudyProgress.
@@ -9694,18 +9694,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.index = reader.int32();
-                        break;
-                    case 2:
-                        message.progress = reader.int32();
-                        break;
-                    case 3:
-                        message.award = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.index = reader.int32();
+                    break;
+                case 2:
+                    message.progress = reader.int32();
+                    break;
+                case 3:
+                    message.award = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -9812,7 +9812,7 @@ $root.pb = (function () {
         return CmdStudyProgress;
     })();
 
-    pb.CmdGetDailyAward = (function () {
+    pb.CmdGetDailyAward = (function() {
 
         /**
          * Properties of a CmdGetDailyAward.
@@ -9904,12 +9904,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.index = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.index = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -9999,7 +9999,7 @@ $root.pb = (function () {
         return CmdGetDailyAward;
     })();
 
-    pb.CmdDailyTaskProgress = (function () {
+    pb.CmdDailyTaskProgress = (function() {
 
         /**
          * Properties of a CmdDailyTaskProgress.
@@ -10102,15 +10102,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.taskId = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.taskId = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -10209,7 +10209,7 @@ $root.pb = (function () {
         return CmdDailyTaskProgress;
     })();
 
-    pb.CmdGameStart = (function () {
+    pb.CmdGameStart = (function() {
 
         /**
          * Properties of a CmdGameStart.
@@ -10312,15 +10312,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.game = reader.int32();
-                        break;
-                    case 2:
-                        message.isJunxian = reader.bool();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.game = reader.int32();
+                    break;
+                case 2:
+                    message.isJunxian = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -10355,26 +10355,26 @@ $root.pb = (function () {
                 return "object expected";
             if (message.game != null && message.hasOwnProperty("game"))
                 switch (message.game) {
-                    default:
-                        return "game: enum value expected";
-                    case 0:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 10:
-                    case 11:
-                    case 6:
-                    case 16:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 15:
-                    case 12:
-                    case 13:
-                    case 7:
-                    case 8:
-                    case 30:
-                        break;
+                default:
+                    return "game: enum value expected";
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 10:
+                case 11:
+                case 6:
+                case 16:
+                case 1:
+                case 2:
+                case 9:
+                case 15:
+                case 12:
+                case 13:
+                case 7:
+                case 8:
+                case 30:
+                    break;
                 }
             if (message.isJunxian != null && message.hasOwnProperty("isJunxian"))
                 if (typeof message.isJunxian !== "boolean")
@@ -10395,74 +10395,74 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.CmdGameStart();
             switch (object.game) {
-                case "GameType_NULL":
-                case 0:
-                    message.game = 0;
-                    break;
-                case "ShuangMang":
-                case 3:
-                    message.game = 3;
-                    break;
-                case "DingXiang":
-                case 4:
-                    message.game = 4;
-                    break;
-                case "FenShi":
-                case 5:
-                    message.game = 5;
-                    break;
-                case "ZhiBiao":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "TiaoJianDan":
-                case 11:
-                    message.game = 11;
-                    break;
-                case "QiHuo":
-                case 6:
-                    message.game = 6;
-                    break;
-                case "TiaoZhan":
-                case 16:
-                    message.game = 16;
-                    break;
-                case "JJ_PK":
-                case 1:
-                    message.game = 1;
-                    break;
-                case "JJ_DuoKong":
-                case 2:
-                    message.game = 2;
-                    break;
-                case "JJ_ChuangGuan":
-                case 9:
-                    message.game = 9;
-                    break;
-                case "JJ_QiHuo":
-                case 15:
-                    message.game = 15;
-                    break;
-                case "MoNiChaoGu":
-                case 12:
-                    message.game = 12;
-                    break;
-                case "ChaoGuDaSai":
-                case 13:
-                    message.game = 13;
-                    break;
-                case "GeGuJingChai":
-                case 7:
-                    message.game = 7;
-                    break;
-                case "DaPanJingChai":
-                case 8:
-                    message.game = 8;
-                    break;
-                case "MaxGameType":
-                case 30:
-                    message.game = 30;
-                    break;
+            case "GameType_NULL":
+            case 0:
+                message.game = 0;
+                break;
+            case "ShuangMang":
+            case 3:
+                message.game = 3;
+                break;
+            case "DingXiang":
+            case 4:
+                message.game = 4;
+                break;
+            case "FenShi":
+            case 5:
+                message.game = 5;
+                break;
+            case "ZhiBiao":
+            case 10:
+                message.game = 10;
+                break;
+            case "TiaoJianDan":
+            case 11:
+                message.game = 11;
+                break;
+            case "QiHuo":
+            case 6:
+                message.game = 6;
+                break;
+            case "TiaoZhan":
+            case 16:
+                message.game = 16;
+                break;
+            case "JJ_PK":
+            case 1:
+                message.game = 1;
+                break;
+            case "JJ_DuoKong":
+            case 2:
+                message.game = 2;
+                break;
+            case "JJ_ChuangGuan":
+            case 9:
+                message.game = 9;
+                break;
+            case "JJ_QiHuo":
+            case 15:
+                message.game = 15;
+                break;
+            case "MoNiChaoGu":
+            case 12:
+                message.game = 12;
+                break;
+            case "ChaoGuDaSai":
+            case 13:
+                message.game = 13;
+                break;
+            case "GeGuJingChai":
+            case 7:
+                message.game = 7;
+                break;
+            case "DaPanJingChai":
+            case 8:
+                message.game = 8;
+                break;
+            case "MaxGameType":
+            case 30:
+                message.game = 30;
+                break;
             }
             if (object.isJunxian != null)
                 message.isJunxian = Boolean(object.isJunxian);
@@ -10507,7 +10507,7 @@ $root.pb = (function () {
         return CmdGameStart;
     })();
 
-    pb.CmdGameOver = (function () {
+    pb.CmdGameOver = (function() {
 
         /**
          * Properties of a CmdGameOver.
@@ -10610,15 +10610,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.result = $root.pb.GameResult.decode(reader, reader.uint32());
-                        break;
-                    case 2:
-                        message.operations = $root.pb.GameOperations.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.result = $root.pb.GameResult.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.operations = $root.pb.GameOperations.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -10727,7 +10727,7 @@ $root.pb = (function () {
         return CmdGameOver;
     })();
 
-    pb.CmdQueryGameResult = (function () {
+    pb.CmdQueryGameResult = (function() {
 
         /**
          * Properties of a CmdQueryGameResult.
@@ -10778,7 +10778,7 @@ $root.pb = (function () {
          * @memberof pb.CmdQueryGameResult
          * @instance
          */
-        CmdQueryGameResult.prototype.from = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdQueryGameResult.prototype.from = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdQueryGameResult to.
@@ -10786,7 +10786,7 @@ $root.pb = (function () {
          * @memberof pb.CmdQueryGameResult
          * @instance
          */
-        CmdQueryGameResult.prototype.to = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdQueryGameResult.prototype.to = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdQueryGameResult pageSize.
@@ -10874,27 +10874,27 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.gType = reader.int32();
-                        break;
-                    case 3:
-                        message.from = reader.int64();
-                        break;
-                    case 4:
-                        message.to = reader.int64();
-                        break;
-                    case 5:
-                        message.pageSize = reader.int32();
-                        break;
-                    case 6:
-                        message.ts = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.gType = reader.int32();
+                    break;
+                case 3:
+                    message.from = reader.int64();
+                    break;
+                case 4:
+                    message.to = reader.int64();
+                    break;
+                case 5:
+                    message.pageSize = reader.int32();
+                    break;
+                case 6:
+                    message.ts = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -10932,26 +10932,26 @@ $root.pb = (function () {
                     return "uid: integer expected";
             if (message.gType != null && message.hasOwnProperty("gType"))
                 switch (message.gType) {
-                    default:
-                        return "gType: enum value expected";
-                    case 0:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 10:
-                    case 11:
-                    case 6:
-                    case 16:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 15:
-                    case 12:
-                    case 13:
-                    case 7:
-                    case 8:
-                    case 30:
-                        break;
+                default:
+                    return "gType: enum value expected";
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 10:
+                case 11:
+                case 6:
+                case 16:
+                case 1:
+                case 2:
+                case 9:
+                case 15:
+                case 12:
+                case 13:
+                case 7:
+                case 8:
+                case 30:
+                    break;
                 }
             if (message.from != null && message.hasOwnProperty("from"))
                 if (!$util.isInteger(message.from) && !(message.from && $util.isInteger(message.from.low) && $util.isInteger(message.from.high)))
@@ -10983,74 +10983,74 @@ $root.pb = (function () {
             if (object.uid != null)
                 message.uid = object.uid | 0;
             switch (object.gType) {
-                case "GameType_NULL":
-                case 0:
-                    message.gType = 0;
-                    break;
-                case "ShuangMang":
-                case 3:
-                    message.gType = 3;
-                    break;
-                case "DingXiang":
-                case 4:
-                    message.gType = 4;
-                    break;
-                case "FenShi":
-                case 5:
-                    message.gType = 5;
-                    break;
-                case "ZhiBiao":
-                case 10:
-                    message.gType = 10;
-                    break;
-                case "TiaoJianDan":
-                case 11:
-                    message.gType = 11;
-                    break;
-                case "QiHuo":
-                case 6:
-                    message.gType = 6;
-                    break;
-                case "TiaoZhan":
-                case 16:
-                    message.gType = 16;
-                    break;
-                case "JJ_PK":
-                case 1:
-                    message.gType = 1;
-                    break;
-                case "JJ_DuoKong":
-                case 2:
-                    message.gType = 2;
-                    break;
-                case "JJ_ChuangGuan":
-                case 9:
-                    message.gType = 9;
-                    break;
-                case "JJ_QiHuo":
-                case 15:
-                    message.gType = 15;
-                    break;
-                case "MoNiChaoGu":
-                case 12:
-                    message.gType = 12;
-                    break;
-                case "ChaoGuDaSai":
-                case 13:
-                    message.gType = 13;
-                    break;
-                case "GeGuJingChai":
-                case 7:
-                    message.gType = 7;
-                    break;
-                case "DaPanJingChai":
-                case 8:
-                    message.gType = 8;
-                    break;
-                case "MaxGameType":
-                case 30:
-                    message.gType = 30;
-                    break;
+            case "GameType_NULL":
+            case 0:
+                message.gType = 0;
+                break;
+            case "ShuangMang":
+            case 3:
+                message.gType = 3;
+                break;
+            case "DingXiang":
+            case 4:
+                message.gType = 4;
+                break;
+            case "FenShi":
+            case 5:
+                message.gType = 5;
+                break;
+            case "ZhiBiao":
+            case 10:
+                message.gType = 10;
+                break;
+            case "TiaoJianDan":
+            case 11:
+                message.gType = 11;
+                break;
+            case "QiHuo":
+            case 6:
+                message.gType = 6;
+                break;
+            case "TiaoZhan":
+            case 16:
+                message.gType = 16;
+                break;
+            case "JJ_PK":
+            case 1:
+                message.gType = 1;
+                break;
+            case "JJ_DuoKong":
+            case 2:
+                message.gType = 2;
+                break;
+            case "JJ_ChuangGuan":
+            case 9:
+                message.gType = 9;
+                break;
+            case "JJ_QiHuo":
+            case 15:
+                message.gType = 15;
+                break;
+            case "MoNiChaoGu":
+            case 12:
+                message.gType = 12;
+                break;
+            case "ChaoGuDaSai":
+            case 13:
+                message.gType = 13;
+                break;
+            case "GeGuJingChai":
+            case 7:
+                message.gType = 7;
+                break;
+            case "DaPanJingChai":
+            case 8:
+                message.gType = 8;
+                break;
+            case "MaxGameType":
+            case 30:
+                message.gType = 30;
+                break;
             }
             if (object.from != null)
                 if ($util.Long)
@@ -11141,7 +11141,7 @@ $root.pb = (function () {
         return CmdQueryGameResult;
     })();
 
-    pb.CmdQueryGameResultReply = (function () {
+    pb.CmdQueryGameResultReply = (function() {
 
         /**
          * Properties of a CmdQueryGameResultReply.
@@ -11235,14 +11235,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.results && message.results.length))
-                            message.results = [];
-                        message.results.push($root.pb.GameResult.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.results && message.results.length))
+                        message.results = [];
+                    message.results.push($root.pb.GameResult.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -11349,7 +11349,7 @@ $root.pb = (function () {
         return CmdQueryGameResultReply;
     })();
 
-    pb.CmdGetGameOperations = (function () {
+    pb.CmdGetGameOperations = (function() {
 
         /**
          * Properties of a CmdGetGameOperations.
@@ -11388,7 +11388,7 @@ $root.pb = (function () {
          * @memberof pb.CmdGetGameOperations
          * @instance
          */
-        CmdGetGameOperations.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdGetGameOperations.prototype.ts = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new CmdGetGameOperations instance using the specified properties.
@@ -11452,15 +11452,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.ts = reader.int64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.ts = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -11573,7 +11573,7 @@ $root.pb = (function () {
         return CmdGetGameOperations;
     })();
 
-    pb.CmdUnlockGame = (function () {
+    pb.CmdUnlockGame = (function() {
 
         /**
          * Properties of a CmdUnlockGame.
@@ -11665,12 +11665,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.gType = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.gType = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -11705,26 +11705,26 @@ $root.pb = (function () {
                 return "object expected";
             if (message.gType != null && message.hasOwnProperty("gType"))
                 switch (message.gType) {
-                    default:
-                        return "gType: enum value expected";
-                    case 0:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 10:
-                    case 11:
-                    case 6:
-                    case 16:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 15:
-                    case 12:
-                    case 13:
-                    case 7:
-                    case 8:
-                    case 30:
-                        break;
+                default:
+                    return "gType: enum value expected";
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 10:
+                case 11:
+                case 6:
+                case 16:
+                case 1:
+                case 2:
+                case 9:
+                case 15:
+                case 12:
+                case 13:
+                case 7:
+                case 8:
+                case 30:
+                    break;
                 }
             return null;
         };
@@ -11742,74 +11742,74 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.CmdUnlockGame();
             switch (object.gType) {
-                case "GameType_NULL":
-                case 0:
-                    message.gType = 0;
-                    break;
-                case "ShuangMang":
-                case 3:
-                    message.gType = 3;
-                    break;
-                case "DingXiang":
-                case 4:
-                    message.gType = 4;
-                    break;
-                case "FenShi":
-                case 5:
-                    message.gType = 5;
-                    break;
-                case "ZhiBiao":
-                case 10:
-                    message.gType = 10;
-                    break;
-                case "TiaoJianDan":
-                case 11:
-                    message.gType = 11;
-                    break;
-                case "QiHuo":
-                case 6:
-                    message.gType = 6;
-                    break;
-                case "TiaoZhan":
-                case 16:
-                    message.gType = 16;
-                    break;
-                case "JJ_PK":
-                case 1:
-                    message.gType = 1;
-                    break;
-                case "JJ_DuoKong":
-                case 2:
-                    message.gType = 2;
-                    break;
-                case "JJ_ChuangGuan":
-                case 9:
-                    message.gType = 9;
-                    break;
-                case "JJ_QiHuo":
-                case 15:
-                    message.gType = 15;
-                    break;
-                case "MoNiChaoGu":
-                case 12:
-                    message.gType = 12;
-                    break;
-                case "ChaoGuDaSai":
-                case 13:
-                    message.gType = 13;
-                    break;
-                case "GeGuJingChai":
-                case 7:
-                    message.gType = 7;
-                    break;
-                case "DaPanJingChai":
-                case 8:
-                    message.gType = 8;
-                    break;
-                case "MaxGameType":
-                case 30:
-                    message.gType = 30;
-                    break;
+            case "GameType_NULL":
+            case 0:
+                message.gType = 0;
+                break;
+            case "ShuangMang":
+            case 3:
+                message.gType = 3;
+                break;
+            case "DingXiang":
+            case 4:
+                message.gType = 4;
+                break;
+            case "FenShi":
+            case 5:
+                message.gType = 5;
+                break;
+            case "ZhiBiao":
+            case 10:
+                message.gType = 10;
+                break;
+            case "TiaoJianDan":
+            case 11:
+                message.gType = 11;
+                break;
+            case "QiHuo":
+            case 6:
+                message.gType = 6;
+                break;
+            case "TiaoZhan":
+            case 16:
+                message.gType = 16;
+                break;
+            case "JJ_PK":
+            case 1:
+                message.gType = 1;
+                break;
+            case "JJ_DuoKong":
+            case 2:
+                message.gType = 2;
+                break;
+            case "JJ_ChuangGuan":
+            case 9:
+                message.gType = 9;
+                break;
+            case "JJ_QiHuo":
+            case 15:
+                message.gType = 15;
+                break;
+            case "MoNiChaoGu":
+            case 12:
+                message.gType = 12;
+                break;
+            case "ChaoGuDaSai":
+            case 13:
+                message.gType = 13;
+                break;
+            case "GeGuJingChai":
+            case 7:
+                message.gType = 7;
+                break;
+            case "DaPanJingChai":
+            case 8:
+                message.gType = 8;
+                break;
+            case "MaxGameType":
+            case 30:
+                message.gType = 30;
+                break;
             }
             return message;
         };
@@ -11848,7 +11848,7 @@ $root.pb = (function () {
         return CmdUnlockGame;
     })();
 
-    pb.CmdGetSmxlReportReply = (function () {
+    pb.CmdGetSmxlReportReply = (function() {
 
         /**
          * Properties of a CmdGetSmxlReportReply.
@@ -11889,7 +11889,7 @@ $root.pb = (function () {
          * @memberof pb.CmdGetSmxlReportReply
          * @instance
          */
-        CmdGetSmxlReportReply.prototype.capitalInit = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdGetSmxlReportReply.prototype.capitalInit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdGetSmxlReportReply capitalFinal.
@@ -11897,7 +11897,7 @@ $root.pb = (function () {
          * @memberof pb.CmdGetSmxlReportReply
          * @instance
          */
-        CmdGetSmxlReportReply.prototype.capitalFinal = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdGetSmxlReportReply.prototype.capitalFinal = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdGetSmxlReportReply profitRate.
@@ -12061,45 +12061,45 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.capitalInit = reader.int64();
-                        break;
-                    case 2:
-                        message.capitalFinal = reader.int64();
-                        break;
-                    case 3:
-                        message.profitRate = reader.float();
-                        break;
-                    case 4:
-                        message.winCount = reader.int32();
-                        break;
-                    case 5:
-                        message.winCode = reader.int32();
-                        break;
-                    case 6:
-                        message.winRate = reader.float();
-                        break;
-                    case 7:
-                        message.loseCount = reader.int32();
-                        break;
-                    case 8:
-                        message.loseCode = reader.int32();
-                        break;
-                    case 9:
-                        message.loseRate = reader.float();
-                        break;
-                    case 10:
-                        message.count = reader.int32();
-                        break;
-                    case 11:
-                        message.rankCaptial = reader.float();
-                        break;
-                    case 12:
-                        message.rankRate = reader.float();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.capitalInit = reader.int64();
+                    break;
+                case 2:
+                    message.capitalFinal = reader.int64();
+                    break;
+                case 3:
+                    message.profitRate = reader.float();
+                    break;
+                case 4:
+                    message.winCount = reader.int32();
+                    break;
+                case 5:
+                    message.winCode = reader.int32();
+                    break;
+                case 6:
+                    message.winRate = reader.float();
+                    break;
+                case 7:
+                    message.loseCount = reader.int32();
+                    break;
+                case 8:
+                    message.loseCode = reader.int32();
+                    break;
+                case 9:
+                    message.loseRate = reader.float();
+                    break;
+                case 10:
+                    message.count = reader.int32();
+                    break;
+                case 11:
+                    message.rankCaptial = reader.float();
+                    break;
+                case 12:
+                    message.rankRate = reader.float();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -12306,7 +12306,7 @@ $root.pb = (function () {
         return CmdGetSmxlReportReply;
     })();
 
-    pb.CmdRoomCreate = (function () {
+    pb.CmdRoomCreate = (function() {
 
         /**
          * Properties of a CmdRoomCreate.
@@ -12458,34 +12458,34 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.game = reader.int32();
-                        break;
-                    case 2:
-                        message.uid = reader.int32();
-                        break;
-                    case 3:
-                        message.node = reader.int32();
-                        break;
-                    case 4:
-                        message.capital = reader.int32();
-                        break;
-                    case 5:
-                        message.pwd = reader.string();
-                        break;
-                    case 6:
-                        if (!(message.junXian && message.junXian.length))
-                            message.junXian = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.junXian.push(reader.int32());
-                        } else
+                case 1:
+                    message.game = reader.int32();
+                    break;
+                case 2:
+                    message.uid = reader.int32();
+                    break;
+                case 3:
+                    message.node = reader.int32();
+                    break;
+                case 4:
+                    message.capital = reader.int32();
+                    break;
+                case 5:
+                    message.pwd = reader.string();
+                    break;
+                case 6:
+                    if (!(message.junXian && message.junXian.length))
+                        message.junXian = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.junXian.push(reader.int32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    } else
+                        message.junXian.push(reader.int32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -12520,26 +12520,26 @@ $root.pb = (function () {
                 return "object expected";
             if (message.game != null && message.hasOwnProperty("game"))
                 switch (message.game) {
-                    default:
-                        return "game: enum value expected";
-                    case 0:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 10:
-                    case 11:
-                    case 6:
-                    case 16:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 15:
-                    case 12:
-                    case 13:
-                    case 7:
-                    case 8:
-                    case 30:
-                        break;
+                default:
+                    return "game: enum value expected";
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 10:
+                case 11:
+                case 6:
+                case 16:
+                case 1:
+                case 2:
+                case 9:
+                case 15:
+                case 12:
+                case 13:
+                case 7:
+                case 8:
+                case 30:
+                    break;
                 }
             if (message.uid != null && message.hasOwnProperty("uid"))
                 if (!$util.isInteger(message.uid))
@@ -12576,74 +12576,74 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.CmdRoomCreate();
             switch (object.game) {
-                case "GameType_NULL":
-                case 0:
-                    message.game = 0;
-                    break;
-                case "ShuangMang":
-                case 3:
-                    message.game = 3;
-                    break;
-                case "DingXiang":
-                case 4:
-                    message.game = 4;
-                    break;
-                case "FenShi":
-                case 5:
-                    message.game = 5;
-                    break;
-                case "ZhiBiao":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "TiaoJianDan":
-                case 11:
-                    message.game = 11;
-                    break;
-                case "QiHuo":
-                case 6:
-                    message.game = 6;
-                    break;
-                case "TiaoZhan":
-                case 16:
-                    message.game = 16;
-                    break;
-                case "JJ_PK":
-                case 1:
-                    message.game = 1;
-                    break;
-                case "JJ_DuoKong":
-                case 2:
-                    message.game = 2;
-                    break;
-                case "JJ_ChuangGuan":
-                case 9:
-                    message.game = 9;
-                    break;
-                case "JJ_QiHuo":
-                case 15:
-                    message.game = 15;
-                    break;
-                case "MoNiChaoGu":
-                case 12:
-                    message.game = 12;
-                    break;
-                case "ChaoGuDaSai":
-                case 13:
-                    message.game = 13;
-                    break;
-                case "GeGuJingChai":
-                case 7:
-                    message.game = 7;
-                    break;
-                case "DaPanJingChai":
-                case 8:
-                    message.game = 8;
-                    break;
-                case "MaxGameType":
-                case 30:
-                    message.game = 30;
-                    break;
+            case "GameType_NULL":
+            case 0:
+                message.game = 0;
+                break;
+            case "ShuangMang":
+            case 3:
+                message.game = 3;
+                break;
+            case "DingXiang":
+            case 4:
+                message.game = 4;
+                break;
+            case "FenShi":
+            case 5:
+                message.game = 5;
+                break;
+            case "ZhiBiao":
+            case 10:
+                message.game = 10;
+                break;
+            case "TiaoJianDan":
+            case 11:
+                message.game = 11;
+                break;
+            case "QiHuo":
+            case 6:
+                message.game = 6;
+                break;
+            case "TiaoZhan":
+            case 16:
+                message.game = 16;
+                break;
+            case "JJ_PK":
+            case 1:
+                message.game = 1;
+                break;
+            case "JJ_DuoKong":
+            case 2:
+                message.game = 2;
+                break;
+            case "JJ_ChuangGuan":
+            case 9:
+                message.game = 9;
+                break;
+            case "JJ_QiHuo":
+            case 15:
+                message.game = 15;
+                break;
+            case "MoNiChaoGu":
+            case 12:
+                message.game = 12;
+                break;
+            case "ChaoGuDaSai":
+            case 13:
+                message.game = 13;
+                break;
+            case "GeGuJingChai":
+            case 7:
+                message.game = 7;
+                break;
+            case "DaPanJingChai":
+            case 8:
+                message.game = 8;
+                break;
+            case "MaxGameType":
+            case 30:
+                message.game = 30;
+                break;
             }
             if (object.uid != null)
                 message.uid = object.uid | 0;
@@ -12717,7 +12717,7 @@ $root.pb = (function () {
         return CmdRoomCreate;
     })();
 
-    pb.CmdRoomCreateReply = (function () {
+    pb.CmdRoomCreateReply = (function() {
 
         /**
          * Properties of a CmdRoomCreateReply.
@@ -12820,15 +12820,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.err = $root.pb.ErrorInfo.decode(reader, reader.uint32());
-                        break;
-                    case 2:
-                        message.id = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.err = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.id = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -12932,7 +12932,7 @@ $root.pb = (function () {
         return CmdRoomCreateReply;
     })();
 
-    pb.CmdRoomEnter = (function () {
+    pb.CmdRoomEnter = (function() {
 
         /**
          * Properties of a CmdRoomEnter.
@@ -13084,34 +13084,34 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.game = reader.int32();
-                        break;
-                    case 3:
-                        message.uid = reader.int32();
-                        break;
-                    case 4:
-                        message.node = reader.int32();
-                        break;
-                    case 5:
-                        message.pwd = reader.string();
-                        break;
-                    case 6:
-                        if (!(message.junXian && message.junXian.length))
-                            message.junXian = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.junXian.push(reader.int32());
-                        } else
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.game = reader.int32();
+                    break;
+                case 3:
+                    message.uid = reader.int32();
+                    break;
+                case 4:
+                    message.node = reader.int32();
+                    break;
+                case 5:
+                    message.pwd = reader.string();
+                    break;
+                case 6:
+                    if (!(message.junXian && message.junXian.length))
+                        message.junXian = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.junXian.push(reader.int32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    } else
+                        message.junXian.push(reader.int32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -13149,26 +13149,26 @@ $root.pb = (function () {
                     return "id: integer expected";
             if (message.game != null && message.hasOwnProperty("game"))
                 switch (message.game) {
-                    default:
-                        return "game: enum value expected";
-                    case 0:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 10:
-                    case 11:
-                    case 6:
-                    case 16:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 15:
-                    case 12:
-                    case 13:
-                    case 7:
-                    case 8:
-                    case 30:
-                        break;
+                default:
+                    return "game: enum value expected";
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 10:
+                case 11:
+                case 6:
+                case 16:
+                case 1:
+                case 2:
+                case 9:
+                case 15:
+                case 12:
+                case 13:
+                case 7:
+                case 8:
+                case 30:
+                    break;
                 }
             if (message.uid != null && message.hasOwnProperty("uid"))
                 if (!$util.isInteger(message.uid))
@@ -13204,74 +13204,74 @@ $root.pb = (function () {
             if (object.id != null)
                 message.id = object.id | 0;
             switch (object.game) {
-                case "GameType_NULL":
-                case 0:
-                    message.game = 0;
-                    break;
-                case "ShuangMang":
-                case 3:
-                    message.game = 3;
-                    break;
-                case "DingXiang":
-                case 4:
-                    message.game = 4;
-                    break;
-                case "FenShi":
-                case 5:
-                    message.game = 5;
-                    break;
-                case "ZhiBiao":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "TiaoJianDan":
-                case 11:
-                    message.game = 11;
-                    break;
-                case "QiHuo":
-                case 6:
-                    message.game = 6;
-                    break;
-                case "TiaoZhan":
-                case 16:
-                    message.game = 16;
-                    break;
-                case "JJ_PK":
-                case 1:
-                    message.game = 1;
-                    break;
-                case "JJ_DuoKong":
-                case 2:
-                    message.game = 2;
-                    break;
-                case "JJ_ChuangGuan":
-                case 9:
-                    message.game = 9;
-                    break;
-                case "JJ_QiHuo":
-                case 15:
-                    message.game = 15;
-                    break;
-                case "MoNiChaoGu":
-                case 12:
-                    message.game = 12;
-                    break;
-                case "ChaoGuDaSai":
-                case 13:
-                    message.game = 13;
-                    break;
-                case "GeGuJingChai":
-                case 7:
-                    message.game = 7;
-                    break;
-                case "DaPanJingChai":
-                case 8:
-                    message.game = 8;
-                    break;
-                case "MaxGameType":
-                case 30:
-                    message.game = 30;
-                    break;
+            case "GameType_NULL":
+            case 0:
+                message.game = 0;
+                break;
+            case "ShuangMang":
+            case 3:
+                message.game = 3;
+                break;
+            case "DingXiang":
+            case 4:
+                message.game = 4;
+                break;
+            case "FenShi":
+            case 5:
+                message.game = 5;
+                break;
+            case "ZhiBiao":
+            case 10:
+                message.game = 10;
+                break;
+            case "TiaoJianDan":
+            case 11:
+                message.game = 11;
+                break;
+            case "QiHuo":
+            case 6:
+                message.game = 6;
+                break;
+            case "TiaoZhan":
+            case 16:
+                message.game = 16;
+                break;
+            case "JJ_PK":
+            case 1:
+                message.game = 1;
+                break;
+            case "JJ_DuoKong":
+            case 2:
+                message.game = 2;
+                break;
+            case "JJ_ChuangGuan":
+            case 9:
+                message.game = 9;
+                break;
+            case "JJ_QiHuo":
+            case 15:
+                message.game = 15;
+                break;
+            case "MoNiChaoGu":
+            case 12:
+                message.game = 12;
+                break;
+            case "ChaoGuDaSai":
+            case 13:
+                message.game = 13;
+                break;
+            case "GeGuJingChai":
+            case 7:
+                message.game = 7;
+                break;
+            case "DaPanJingChai":
+            case 8:
+                message.game = 8;
+                break;
+            case "MaxGameType":
+            case 30:
+                message.game = 30;
+                break;
             }
             if (object.uid != null)
                 message.uid = object.uid | 0;
@@ -13343,7 +13343,7 @@ $root.pb = (function () {
         return CmdRoomEnter;
     })();
 
-    pb.CmdRoomEnterReply = (function () {
+    pb.CmdRoomEnterReply = (function() {
 
         /**
          * Properties of a CmdRoomEnterReply.
@@ -13457,18 +13457,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.err = $root.pb.ErrorInfo.decode(reader, reader.uint32());
-                        break;
-                    case 2:
-                        message.id = reader.int32();
-                        break;
-                    case 3:
-                        message.node = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.err = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.id = reader.int32();
+                    break;
+                case 3:
+                    message.node = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -13580,7 +13580,7 @@ $root.pb = (function () {
         return CmdRoomEnterReply;
     })();
 
-    pb.CmdRoomLeave = (function () {
+    pb.CmdRoomLeave = (function() {
 
         /**
          * Properties of a CmdRoomLeave.
@@ -13683,15 +13683,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.uid = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.uid = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -13790,7 +13790,7 @@ $root.pb = (function () {
         return CmdRoomLeave;
     })();
 
-    pb.CmdRoomLeaveReply = (function () {
+    pb.CmdRoomLeaveReply = (function() {
 
         /**
          * Properties of a CmdRoomLeaveReply.
@@ -13882,12 +13882,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.err = $root.pb.ErrorInfo.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.err = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -13982,7 +13982,7 @@ $root.pb = (function () {
         return CmdRoomLeaveReply;
     })();
 
-    pb.SyncRoomEnter = (function () {
+    pb.SyncRoomEnter = (function() {
 
         /**
          * Properties of a SyncRoomEnter.
@@ -14096,18 +14096,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.game = reader.int32();
-                        break;
-                    case 3:
-                        message.player = $root.pb.GameData.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.game = reader.int32();
+                    break;
+                case 3:
+                    message.player = $root.pb.GameData.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -14145,26 +14145,26 @@ $root.pb = (function () {
                     return "id: integer expected";
             if (message.game != null && message.hasOwnProperty("game"))
                 switch (message.game) {
-                    default:
-                        return "game: enum value expected";
-                    case 0:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 10:
-                    case 11:
-                    case 6:
-                    case 16:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 15:
-                    case 12:
-                    case 13:
-                    case 7:
-                    case 8:
-                    case 30:
-                        break;
+                default:
+                    return "game: enum value expected";
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 10:
+                case 11:
+                case 6:
+                case 16:
+                case 1:
+                case 2:
+                case 9:
+                case 15:
+                case 12:
+                case 13:
+                case 7:
+                case 8:
+                case 30:
+                    break;
                 }
             if (message.player != null && message.hasOwnProperty("player")) {
                 var error = $root.pb.GameData.verify(message.player);
@@ -14189,74 +14189,74 @@ $root.pb = (function () {
             if (object.id != null)
                 message.id = object.id | 0;
             switch (object.game) {
-                case "GameType_NULL":
-                case 0:
-                    message.game = 0;
-                    break;
-                case "ShuangMang":
-                case 3:
-                    message.game = 3;
-                    break;
-                case "DingXiang":
-                case 4:
-                    message.game = 4;
-                    break;
-                case "FenShi":
-                case 5:
-                    message.game = 5;
-                    break;
-                case "ZhiBiao":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "TiaoJianDan":
-                case 11:
-                    message.game = 11;
-                    break;
-                case "QiHuo":
-                case 6:
-                    message.game = 6;
-                    break;
-                case "TiaoZhan":
-                case 16:
-                    message.game = 16;
-                    break;
-                case "JJ_PK":
-                case 1:
-                    message.game = 1;
-                    break;
-                case "JJ_DuoKong":
-                case 2:
-                    message.game = 2;
-                    break;
-                case "JJ_ChuangGuan":
-                case 9:
-                    message.game = 9;
-                    break;
-                case "JJ_QiHuo":
-                case 15:
-                    message.game = 15;
-                    break;
-                case "MoNiChaoGu":
-                case 12:
-                    message.game = 12;
-                    break;
-                case "ChaoGuDaSai":
-                case 13:
-                    message.game = 13;
-                    break;
-                case "GeGuJingChai":
-                case 7:
-                    message.game = 7;
-                    break;
-                case "DaPanJingChai":
-                case 8:
-                    message.game = 8;
-                    break;
-                case "MaxGameType":
-                case 30:
-                    message.game = 30;
-                    break;
+            case "GameType_NULL":
+            case 0:
+                message.game = 0;
+                break;
+            case "ShuangMang":
+            case 3:
+                message.game = 3;
+                break;
+            case "DingXiang":
+            case 4:
+                message.game = 4;
+                break;
+            case "FenShi":
+            case 5:
+                message.game = 5;
+                break;
+            case "ZhiBiao":
+            case 10:
+                message.game = 10;
+                break;
+            case "TiaoJianDan":
+            case 11:
+                message.game = 11;
+                break;
+            case "QiHuo":
+            case 6:
+                message.game = 6;
+                break;
+            case "TiaoZhan":
+            case 16:
+                message.game = 16;
+                break;
+            case "JJ_PK":
+            case 1:
+                message.game = 1;
+                break;
+            case "JJ_DuoKong":
+            case 2:
+                message.game = 2;
+                break;
+            case "JJ_ChuangGuan":
+            case 9:
+                message.game = 9;
+                break;
+            case "JJ_QiHuo":
+            case 15:
+                message.game = 15;
+                break;
+            case "MoNiChaoGu":
+            case 12:
+                message.game = 12;
+                break;
+            case "ChaoGuDaSai":
+            case 13:
+                message.game = 13;
+                break;
+            case "GeGuJingChai":
+            case 7:
+                message.game = 7;
+                break;
+            case "DaPanJingChai":
+            case 8:
+                message.game = 8;
+                break;
+            case "MaxGameType":
+            case 30:
+                message.game = 30;
+                break;
             }
             if (object.player != null) {
                 if (typeof object.player !== "object")
@@ -14307,7 +14307,7 @@ $root.pb = (function () {
         return SyncRoomEnter;
     })();
 
-    pb.SyncRoomLeave = (function () {
+    pb.SyncRoomLeave = (function() {
 
         /**
          * Properties of a SyncRoomLeave.
@@ -14421,18 +14421,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.game = reader.int32();
-                        break;
-                    case 3:
-                        message.uid = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.game = reader.int32();
+                    break;
+                case 3:
+                    message.uid = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -14470,26 +14470,26 @@ $root.pb = (function () {
                     return "id: integer expected";
             if (message.game != null && message.hasOwnProperty("game"))
                 switch (message.game) {
-                    default:
-                        return "game: enum value expected";
-                    case 0:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 10:
-                    case 11:
-                    case 6:
-                    case 16:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 15:
-                    case 12:
-                    case 13:
-                    case 7:
-                    case 8:
-                    case 30:
-                        break;
+                default:
+                    return "game: enum value expected";
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 10:
+                case 11:
+                case 6:
+                case 16:
+                case 1:
+                case 2:
+                case 9:
+                case 15:
+                case 12:
+                case 13:
+                case 7:
+                case 8:
+                case 30:
+                    break;
                 }
             if (message.uid != null && message.hasOwnProperty("uid"))
                 if (!$util.isInteger(message.uid))
@@ -14512,74 +14512,74 @@ $root.pb = (function () {
             if (object.id != null)
                 message.id = object.id | 0;
             switch (object.game) {
-                case "GameType_NULL":
-                case 0:
-                    message.game = 0;
-                    break;
-                case "ShuangMang":
-                case 3:
-                    message.game = 3;
-                    break;
-                case "DingXiang":
-                case 4:
-                    message.game = 4;
-                    break;
-                case "FenShi":
-                case 5:
-                    message.game = 5;
-                    break;
-                case "ZhiBiao":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "TiaoJianDan":
-                case 11:
-                    message.game = 11;
-                    break;
-                case "QiHuo":
-                case 6:
-                    message.game = 6;
-                    break;
-                case "TiaoZhan":
-                case 16:
-                    message.game = 16;
-                    break;
-                case "JJ_PK":
-                case 1:
-                    message.game = 1;
-                    break;
-                case "JJ_DuoKong":
-                case 2:
-                    message.game = 2;
-                    break;
-                case "JJ_ChuangGuan":
-                case 9:
-                    message.game = 9;
-                    break;
-                case "JJ_QiHuo":
-                case 15:
-                    message.game = 15;
-                    break;
-                case "MoNiChaoGu":
-                case 12:
-                    message.game = 12;
-                    break;
-                case "ChaoGuDaSai":
-                case 13:
-                    message.game = 13;
-                    break;
-                case "GeGuJingChai":
-                case 7:
-                    message.game = 7;
-                    break;
-                case "DaPanJingChai":
-                case 8:
-                    message.game = 8;
-                    break;
-                case "MaxGameType":
-                case 30:
-                    message.game = 30;
-                    break;
+            case "GameType_NULL":
+            case 0:
+                message.game = 0;
+                break;
+            case "ShuangMang":
+            case 3:
+                message.game = 3;
+                break;
+            case "DingXiang":
+            case 4:
+                message.game = 4;
+                break;
+            case "FenShi":
+            case 5:
+                message.game = 5;
+                break;
+            case "ZhiBiao":
+            case 10:
+                message.game = 10;
+                break;
+            case "TiaoJianDan":
+            case 11:
+                message.game = 11;
+                break;
+            case "QiHuo":
+            case 6:
+                message.game = 6;
+                break;
+            case "TiaoZhan":
+            case 16:
+                message.game = 16;
+                break;
+            case "JJ_PK":
+            case 1:
+                message.game = 1;
+                break;
+            case "JJ_DuoKong":
+            case 2:
+                message.game = 2;
+                break;
+            case "JJ_ChuangGuan":
+            case 9:
+                message.game = 9;
+                break;
+            case "JJ_QiHuo":
+            case 15:
+                message.game = 15;
+                break;
+            case "MoNiChaoGu":
+            case 12:
+                message.game = 12;
+                break;
+            case "ChaoGuDaSai":
+            case 13:
+                message.game = 13;
+                break;
+            case "GeGuJingChai":
+            case 7:
+                message.game = 7;
+                break;
+            case "DaPanJingChai":
+            case 8:
+                message.game = 8;
+                break;
+            case "MaxGameType":
+            case 30:
+                message.game = 30;
+                break;
             }
             if (object.uid != null)
                 message.uid = object.uid | 0;
@@ -14627,7 +14627,7 @@ $root.pb = (function () {
         return SyncRoomLeave;
     })();
 
-    pb.RoomPlayerStatus = (function () {
+    pb.RoomPlayerStatus = (function() {
 
         /**
          * Properties of a RoomPlayerStatus.
@@ -14741,18 +14741,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.uid = reader.int32();
-                        break;
-                    case 3:
-                        message.ready = reader.bool();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.uid = reader.int32();
+                    break;
+                case 3:
+                    message.ready = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -14859,7 +14859,7 @@ $root.pb = (function () {
         return RoomPlayerStatus;
     })();
 
-    pb.RoomGameStatus = (function () {
+    pb.RoomGameStatus = (function() {
 
         /**
          * Properties of a RoomGameStatus.
@@ -14962,15 +14962,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.status = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.status = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -15069,7 +15069,7 @@ $root.pb = (function () {
         return RoomGameStatus;
     })();
 
-    pb.RoomGameOp = (function () {
+    pb.RoomGameOp = (function() {
 
         /**
          * Properties of a RoomGameOp.
@@ -15183,18 +15183,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.uid = reader.int32();
-                        break;
-                    case 3:
-                        message.ops = reader.bytes();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.uid = reader.int32();
+                    break;
+                case 3:
+                    message.ops = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -15310,7 +15310,7 @@ $root.pb = (function () {
         return RoomGameOp;
     })();
 
-    pb.RoomGameResult = (function () {
+    pb.RoomGameResult = (function() {
 
         /**
          * Properties of a RoomGameResult.
@@ -15413,15 +15413,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.result = reader.bytes();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.result = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -15529,7 +15529,7 @@ $root.pb = (function () {
         return RoomGameResult;
     })();
 
-    pb.RoomData = (function () {
+    pb.RoomData = (function() {
 
         /**
          * Properties of a RoomData.
@@ -15643,18 +15643,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.game = reader.int32();
-                        break;
-                    case 3:
-                        message.data = reader.bytes();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.game = reader.int32();
+                    break;
+                case 3:
+                    message.data = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -15692,26 +15692,26 @@ $root.pb = (function () {
                     return "id: integer expected";
             if (message.game != null && message.hasOwnProperty("game"))
                 switch (message.game) {
-                    default:
-                        return "game: enum value expected";
-                    case 0:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 10:
-                    case 11:
-                    case 6:
-                    case 16:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 15:
-                    case 12:
-                    case 13:
-                    case 7:
-                    case 8:
-                    case 30:
-                        break;
+                default:
+                    return "game: enum value expected";
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 10:
+                case 11:
+                case 6:
+                case 16:
+                case 1:
+                case 2:
+                case 9:
+                case 15:
+                case 12:
+                case 13:
+                case 7:
+                case 8:
+                case 30:
+                    break;
                 }
             if (message.data != null && message.hasOwnProperty("data"))
                 if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
@@ -15734,74 +15734,74 @@ $root.pb = (function () {
             if (object.id != null)
                 message.id = object.id | 0;
             switch (object.game) {
-                case "GameType_NULL":
-                case 0:
-                    message.game = 0;
-                    break;
-                case "ShuangMang":
-                case 3:
-                    message.game = 3;
-                    break;
-                case "DingXiang":
-                case 4:
-                    message.game = 4;
-                    break;
-                case "FenShi":
-                case 5:
-                    message.game = 5;
-                    break;
-                case "ZhiBiao":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "TiaoJianDan":
-                case 11:
-                    message.game = 11;
-                    break;
-                case "QiHuo":
-                case 6:
-                    message.game = 6;
-                    break;
-                case "TiaoZhan":
-                case 16:
-                    message.game = 16;
-                    break;
-                case "JJ_PK":
-                case 1:
-                    message.game = 1;
-                    break;
-                case "JJ_DuoKong":
-                case 2:
-                    message.game = 2;
-                    break;
-                case "JJ_ChuangGuan":
-                case 9:
-                    message.game = 9;
-                    break;
-                case "JJ_QiHuo":
-                case 15:
-                    message.game = 15;
-                    break;
-                case "MoNiChaoGu":
-                case 12:
-                    message.game = 12;
-                    break;
-                case "ChaoGuDaSai":
-                case 13:
-                    message.game = 13;
-                    break;
-                case "GeGuJingChai":
-                case 7:
-                    message.game = 7;
-                    break;
-                case "DaPanJingChai":
-                case 8:
-                    message.game = 8;
-                    break;
-                case "MaxGameType":
-                case 30:
-                    message.game = 30;
-                    break;
+            case "GameType_NULL":
+            case 0:
+                message.game = 0;
+                break;
+            case "ShuangMang":
+            case 3:
+                message.game = 3;
+                break;
+            case "DingXiang":
+            case 4:
+                message.game = 4;
+                break;
+            case "FenShi":
+            case 5:
+                message.game = 5;
+                break;
+            case "ZhiBiao":
+            case 10:
+                message.game = 10;
+                break;
+            case "TiaoJianDan":
+            case 11:
+                message.game = 11;
+                break;
+            case "QiHuo":
+            case 6:
+                message.game = 6;
+                break;
+            case "TiaoZhan":
+            case 16:
+                message.game = 16;
+                break;
+            case "JJ_PK":
+            case 1:
+                message.game = 1;
+                break;
+            case "JJ_DuoKong":
+            case 2:
+                message.game = 2;
+                break;
+            case "JJ_ChuangGuan":
+            case 9:
+                message.game = 9;
+                break;
+            case "JJ_QiHuo":
+            case 15:
+                message.game = 15;
+                break;
+            case "MoNiChaoGu":
+            case 12:
+                message.game = 12;
+                break;
+            case "ChaoGuDaSai":
+            case 13:
+                message.game = 13;
+                break;
+            case "GeGuJingChai":
+            case 7:
+                message.game = 7;
+                break;
+            case "DaPanJingChai":
+            case 8:
+                message.game = 8;
+                break;
+            case "MaxGameType":
+            case 30:
+                message.game = 30;
+                break;
             }
             if (object.data != null)
                 if (typeof object.data === "string")
@@ -15858,7 +15858,7 @@ $root.pb = (function () {
         return RoomData;
     })();
 
-    pb.RoomPlayer = (function () {
+    pb.RoomPlayer = (function() {
 
         /**
          * Properties of a RoomPlayer.
@@ -15935,7 +15935,7 @@ $root.pb = (function () {
          * @memberof pb.RoomPlayer
          * @instance
          */
-        RoomPlayer.prototype.curPos = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        RoomPlayer.prototype.curPos = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * RoomPlayer junXian.
@@ -16021,37 +16021,37 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.gd = $root.pb.GameData.decode(reader, reader.uint32());
-                        break;
-                    case 2:
-                        message.ready = reader.bool();
-                        break;
-                    case 3:
-                        message.giveup = reader.bool();
-                        break;
-                    case 4:
-                        message.ops = $root.pb.GameOperations.decode(reader, reader.uint32());
-                        break;
-                    case 5:
-                        message.result = $root.pb.GameResult.decode(reader, reader.uint32());
-                        break;
-                    case 6:
-                        message.curPos = reader.int64();
-                        break;
-                    case 7:
-                        if (!(message.junXian && message.junXian.length))
-                            message.junXian = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.junXian.push(reader.int32());
-                        } else
+                case 1:
+                    message.gd = $root.pb.GameData.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.ready = reader.bool();
+                    break;
+                case 3:
+                    message.giveup = reader.bool();
+                    break;
+                case 4:
+                    message.ops = $root.pb.GameOperations.decode(reader, reader.uint32());
+                    break;
+                case 5:
+                    message.result = $root.pb.GameResult.decode(reader, reader.uint32());
+                    break;
+                case 6:
+                    message.curPos = reader.int64();
+                    break;
+                case 7:
+                    if (!(message.junXian && message.junXian.length))
+                        message.junXian = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.junXian.push(reader.int32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    } else
+                        message.junXian.push(reader.int32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -16232,7 +16232,7 @@ $root.pb = (function () {
         return RoomPlayer;
     })();
 
-    pb.RoomGameData = (function () {
+    pb.RoomGameData = (function() {
 
         /**
          * Properties of a RoomGameData.
@@ -16324,7 +16324,7 @@ $root.pb = (function () {
          * @memberof pb.RoomGameData
          * @instance
          */
-        RoomGameData.prototype.tsQuoteFrom = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        RoomGameData.prototype.tsQuoteFrom = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * RoomGameData tsQuoteTo.
@@ -16332,7 +16332,7 @@ $root.pb = (function () {
          * @memberof pb.RoomGameData
          * @instance
          */
-        RoomGameData.prototype.tsQuoteTo = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        RoomGameData.prototype.tsQuoteTo = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * RoomGameData tsQuoteStart.
@@ -16340,7 +16340,7 @@ $root.pb = (function () {
          * @memberof pb.RoomGameData
          * @instance
          */
-        RoomGameData.prototype.tsQuoteStart = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        RoomGameData.prototype.tsQuoteStart = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * RoomGameData players.
@@ -16356,7 +16356,7 @@ $root.pb = (function () {
          * @memberof pb.RoomGameData
          * @instance
          */
-        RoomGameData.prototype.tsGameFrom = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        RoomGameData.prototype.tsGameFrom = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * RoomGameData tsGameCur.
@@ -16364,7 +16364,7 @@ $root.pb = (function () {
          * @memberof pb.RoomGameData
          * @instance
          */
-        RoomGameData.prototype.tsGameCur = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        RoomGameData.prototype.tsGameCur = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * RoomGameData quotes.
@@ -16469,53 +16469,53 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.game = reader.int32();
-                        break;
-                    case 3:
-                        message.status = reader.int32();
-                        break;
-                    case 4:
-                        message.capital = reader.int32();
-                        break;
-                    case 5:
-                        message.code = reader.int32();
-                        break;
-                    case 6:
-                        message.ktype = reader.int32();
-                        break;
-                    case 7:
-                        message.tsQuoteFrom = reader.int64();
-                        break;
-                    case 8:
-                        message.tsQuoteTo = reader.int64();
-                        break;
-                    case 9:
-                        message.tsQuoteStart = reader.int64();
-                        break;
-                    case 10:
-                        if (!(message.players && message.players.length))
-                            message.players = [];
-                        message.players.push($root.pb.RoomPlayer.decode(reader, reader.uint32()));
-                        break;
-                    case 11:
-                        message.tsGameFrom = reader.int64();
-                        break;
-                    case 12:
-                        message.tsGameCur = reader.int64();
-                        break;
-                    case 13:
-                        message.quotes = $root.pb.Quotes.decode(reader, reader.uint32());
-                        break;
-                    case 14:
-                        message.quotesFuture = $root.pb.QuotesFuture.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.game = reader.int32();
+                    break;
+                case 3:
+                    message.status = reader.int32();
+                    break;
+                case 4:
+                    message.capital = reader.int32();
+                    break;
+                case 5:
+                    message.code = reader.int32();
+                    break;
+                case 6:
+                    message.ktype = reader.int32();
+                    break;
+                case 7:
+                    message.tsQuoteFrom = reader.int64();
+                    break;
+                case 8:
+                    message.tsQuoteTo = reader.int64();
+                    break;
+                case 9:
+                    message.tsQuoteStart = reader.int64();
+                    break;
+                case 10:
+                    if (!(message.players && message.players.length))
+                        message.players = [];
+                    message.players.push($root.pb.RoomPlayer.decode(reader, reader.uint32()));
+                    break;
+                case 11:
+                    message.tsGameFrom = reader.int64();
+                    break;
+                case 12:
+                    message.tsGameCur = reader.int64();
+                    break;
+                case 13:
+                    message.quotes = $root.pb.Quotes.decode(reader, reader.uint32());
+                    break;
+                case 14:
+                    message.quotesFuture = $root.pb.QuotesFuture.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -16553,26 +16553,26 @@ $root.pb = (function () {
                     return "id: integer expected";
             if (message.game != null && message.hasOwnProperty("game"))
                 switch (message.game) {
-                    default:
-                        return "game: enum value expected";
-                    case 0:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 10:
-                    case 11:
-                    case 6:
-                    case 16:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 15:
-                    case 12:
-                    case 13:
-                    case 7:
-                    case 8:
-                    case 30:
-                        break;
+                default:
+                    return "game: enum value expected";
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 10:
+                case 11:
+                case 6:
+                case 16:
+                case 1:
+                case 2:
+                case 9:
+                case 15:
+                case 12:
+                case 13:
+                case 7:
+                case 8:
+                case 30:
+                    break;
                 }
             if (message.status != null && message.hasOwnProperty("status"))
                 if (!$util.isInteger(message.status))
@@ -16585,19 +16585,19 @@ $root.pb = (function () {
                     return "code: integer expected";
             if (message.ktype != null && message.hasOwnProperty("ktype"))
                 switch (message.ktype) {
-                    default:
-                        return "ktype: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 10:
-                    case 11:
-                        break;
+                default:
+                    return "ktype: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 10:
+                case 11:
+                    break;
                 }
             if (message.tsQuoteFrom != null && message.hasOwnProperty("tsQuoteFrom"))
                 if (!$util.isInteger(message.tsQuoteFrom) && !(message.tsQuoteFrom && $util.isInteger(message.tsQuoteFrom.low) && $util.isInteger(message.tsQuoteFrom.high)))
@@ -16651,74 +16651,74 @@ $root.pb = (function () {
             if (object.id != null)
                 message.id = object.id | 0;
             switch (object.game) {
-                case "GameType_NULL":
-                case 0:
-                    message.game = 0;
-                    break;
-                case "ShuangMang":
-                case 3:
-                    message.game = 3;
-                    break;
-                case "DingXiang":
-                case 4:
-                    message.game = 4;
-                    break;
-                case "FenShi":
-                case 5:
-                    message.game = 5;
-                    break;
-                case "ZhiBiao":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "TiaoJianDan":
-                case 11:
-                    message.game = 11;
-                    break;
-                case "QiHuo":
-                case 6:
-                    message.game = 6;
-                    break;
-                case "TiaoZhan":
-                case 16:
-                    message.game = 16;
-                    break;
-                case "JJ_PK":
-                case 1:
-                    message.game = 1;
-                    break;
-                case "JJ_DuoKong":
-                case 2:
-                    message.game = 2;
-                    break;
-                case "JJ_ChuangGuan":
-                case 9:
-                    message.game = 9;
-                    break;
-                case "JJ_QiHuo":
-                case 15:
-                    message.game = 15;
-                    break;
-                case "MoNiChaoGu":
-                case 12:
-                    message.game = 12;
-                    break;
-                case "ChaoGuDaSai":
-                case 13:
-                    message.game = 13;
-                    break;
-                case "GeGuJingChai":
-                case 7:
-                    message.game = 7;
-                    break;
-                case "DaPanJingChai":
-                case 8:
-                    message.game = 8;
-                    break;
-                case "MaxGameType":
-                case 30:
-                    message.game = 30;
-                    break;
+            case "GameType_NULL":
+            case 0:
+                message.game = 0;
+                break;
+            case "ShuangMang":
+            case 3:
+                message.game = 3;
+                break;
+            case "DingXiang":
+            case 4:
+                message.game = 4;
+                break;
+            case "FenShi":
+            case 5:
+                message.game = 5;
+                break;
+            case "ZhiBiao":
+            case 10:
+                message.game = 10;
+                break;
+            case "TiaoJianDan":
+            case 11:
+                message.game = 11;
+                break;
+            case "QiHuo":
+            case 6:
+                message.game = 6;
+                break;
+            case "TiaoZhan":
+            case 16:
+                message.game = 16;
+                break;
+            case "JJ_PK":
+            case 1:
+                message.game = 1;
+                break;
+            case "JJ_DuoKong":
+            case 2:
+                message.game = 2;
+                break;
+            case "JJ_ChuangGuan":
+            case 9:
+                message.game = 9;
+                break;
+            case "JJ_QiHuo":
+            case 15:
+                message.game = 15;
+                break;
+            case "MoNiChaoGu":
+            case 12:
+                message.game = 12;
+                break;
+            case "ChaoGuDaSai":
+            case 13:
+                message.game = 13;
+                break;
+            case "GeGuJingChai":
+            case 7:
+                message.game = 7;
+                break;
+            case "DaPanJingChai":
+            case 8:
+                message.game = 8;
+                break;
+            case "MaxGameType":
+            case 30:
+                message.game = 30;
+                break;
             }
             if (object.status != null)
                 message.status = object.status | 0;
@@ -16727,46 +16727,46 @@ $root.pb = (function () {
             if (object.code != null)
                 message.code = object.code | 0;
             switch (object.ktype) {
-                case "KType_NULL":
-                case 0:
-                    message.ktype = 0;
-                    break;
-                case "Real":
-                case 1:
-                    message.ktype = 1;
-                    break;
-                case "Min":
-                case 2:
-                    message.ktype = 2;
-                    break;
-                case "MinToday":
-                case 3:
-                    message.ktype = 3;
-                    break;
-                case "Min5":
-                case 4:
-                    message.ktype = 4;
-                    break;
-                case "Min15":
-                case 5:
-                    message.ktype = 5;
-                    break;
-                case "Min30":
-                case 6:
-                    message.ktype = 6;
-                    break;
-                case "Min60":
-                case 7:
-                    message.ktype = 7;
-                    break;
-                case "Day":
-                case 10:
-                    message.ktype = 10;
-                    break;
-                case "Day7":
-                case 11:
-                    message.ktype = 11;
-                    break;
+            case "KType_NULL":
+            case 0:
+                message.ktype = 0;
+                break;
+            case "Real":
+            case 1:
+                message.ktype = 1;
+                break;
+            case "Min":
+            case 2:
+                message.ktype = 2;
+                break;
+            case "MinToday":
+            case 3:
+                message.ktype = 3;
+                break;
+            case "Min5":
+            case 4:
+                message.ktype = 4;
+                break;
+            case "Min15":
+            case 5:
+                message.ktype = 5;
+                break;
+            case "Min30":
+            case 6:
+                message.ktype = 6;
+                break;
+            case "Min60":
+            case 7:
+                message.ktype = 7;
+                break;
+            case "Day":
+            case 10:
+                message.ktype = 10;
+                break;
+            case "Day7":
+            case 11:
+                message.ktype = 11;
+                break;
             }
             if (object.tsQuoteFrom != null)
                 if ($util.Long)
@@ -16949,7 +16949,7 @@ $root.pb = (function () {
         return RoomGameData;
     })();
 
-    pb.Notice = (function () {
+    pb.Notice = (function() {
 
         /**
          * Properties of a Notice.
@@ -17015,7 +17015,7 @@ $root.pb = (function () {
          * @memberof pb.Notice
          * @instance
          */
-        Notice.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        Notice.prototype.ts = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new Notice instance using the specified properties.
@@ -17085,24 +17085,24 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.sender = reader.int32();
-                        break;
-                    case 2:
-                        message.receiver = reader.int32();
-                        break;
-                    case 3:
-                        message.type = reader.int32();
-                        break;
-                    case 4:
-                        message.text = reader.string();
-                        break;
-                    case 5:
-                        message.ts = reader.int64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.sender = reader.int32();
+                    break;
+                case 2:
+                    message.receiver = reader.int32();
+                    break;
+                case 3:
+                    message.type = reader.int32();
+                    break;
+                case 4:
+                    message.text = reader.string();
+                    break;
+                case 5:
+                    message.ts = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -17143,15 +17143,15 @@ $root.pb = (function () {
                     return "receiver: integer expected";
             if (message.type != null && message.hasOwnProperty("type"))
                 switch (message.type) {
-                    default:
-                        return "type: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 10:
-                    case 11:
-                        break;
+                default:
+                    return "type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 9:
+                case 10:
+                case 11:
+                    break;
                 }
             if (message.text != null && message.hasOwnProperty("text"))
                 if (!$util.isString(message.text))
@@ -17179,30 +17179,30 @@ $root.pb = (function () {
             if (object.receiver != null)
                 message.receiver = object.receiver | 0;
             switch (object.type) {
-                case "MessageType_NULL":
-                case 0:
-                    message.type = 0;
-                    break;
-                case "SystemNotice":
-                case 1:
-                    message.type = 1;
-                    break;
-                case "Popup_Adv":
-                case 2:
-                    message.type = 2;
-                    break;
-                case "Chat":
-                case 9:
-                    message.type = 9;
-                    break;
-                case "RoomChat":
-                case 10:
-                    message.type = 10;
-                    break;
-                case "RoomInvite":
-                case 11:
-                    message.type = 11;
-                    break;
+            case "MessageType_NULL":
+            case 0:
+                message.type = 0;
+                break;
+            case "SystemNotice":
+            case 1:
+                message.type = 1;
+                break;
+            case "Popup_Adv":
+            case 2:
+                message.type = 2;
+                break;
+            case "Chat":
+            case 9:
+                message.type = 9;
+                break;
+            case "RoomChat":
+            case 10:
+                message.type = 10;
+                break;
+            case "RoomInvite":
+            case 11:
+                message.type = 11;
+                break;
             }
             if (object.text != null)
                 message.text = String(object.text);
@@ -17272,7 +17272,7 @@ $root.pb = (function () {
         return Notice;
     })();
 
-    pb.CgsConf = (function () {
+    pb.CgsConf = (function() {
 
         /**
          * Properties of a CgsConf.
@@ -17317,7 +17317,7 @@ $root.pb = (function () {
          * @memberof pb.CgsConf
          * @instance
          */
-        CgsConf.prototype.from = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CgsConf.prototype.from = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CgsConf to.
@@ -17325,7 +17325,7 @@ $root.pb = (function () {
          * @memberof pb.CgsConf
          * @instance
          */
-        CgsConf.prototype.to = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CgsConf.prototype.to = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CgsConf conf.
@@ -17435,37 +17435,37 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.from = reader.int64();
-                        break;
-                    case 3:
-                        message.to = reader.int64();
-                        break;
-                    case 4:
-                        message.conf = reader.string();
-                        break;
-                    case 5:
-                        message.award = reader.string();
-                        break;
-                    case 6:
-                        message.status = reader.int32();
-                        break;
-                    case 7:
-                        if (!(message.people && message.people.length))
-                            message.people = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.people.push(reader.int32());
-                        } else
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.from = reader.int64();
+                    break;
+                case 3:
+                    message.to = reader.int64();
+                    break;
+                case 4:
+                    message.conf = reader.string();
+                    break;
+                case 5:
+                    message.award = reader.string();
+                    break;
+                case 6:
+                    message.status = reader.int32();
+                    break;
+                case 7:
+                    if (!(message.people && message.people.length))
+                        message.people = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.people.push(reader.int32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    } else
+                        message.people.push(reader.int32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -17645,7 +17645,7 @@ $root.pb = (function () {
         return CgsConf;
     })();
 
-    pb.RankingItem = (function () {
+    pb.RankingItem = (function() {
 
         /**
          * Properties of a RankingItem.
@@ -17836,39 +17836,39 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.nickname = reader.string();
-                        break;
-                    case 3:
-                        message.icon = reader.string();
-                        break;
-                    case 4:
-                        message.gender = reader.string();
-                        break;
-                    case 5:
-                        message.location = reader.string();
-                        break;
-                    case 6:
-                        message.cgsClearance = reader.int32();
-                        break;
-                    case 7:
-                        message.cgsNetwin = reader.int32();
-                        break;
-                    case 8:
-                        message.cgsProgress = reader.int32();
-                        break;
-                    case 9:
-                        message.cgdsAccount = reader.int32();
-                        break;
-                    case 10:
-                        message.zsjcCount = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.nickname = reader.string();
+                    break;
+                case 3:
+                    message.icon = reader.string();
+                    break;
+                case 4:
+                    message.gender = reader.string();
+                    break;
+                case 5:
+                    message.location = reader.string();
+                    break;
+                case 6:
+                    message.cgsClearance = reader.int32();
+                    break;
+                case 7:
+                    message.cgsNetwin = reader.int32();
+                    break;
+                case 8:
+                    message.cgsProgress = reader.int32();
+                    break;
+                case 9:
+                    message.cgdsAccount = reader.int32();
+                    break;
+                case 10:
+                    message.zsjcCount = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -18031,7 +18031,7 @@ $root.pb = (function () {
         return RankingItem;
     })();
 
-    pb.RankingList = (function () {
+    pb.RankingList = (function() {
 
         /**
          * Properties of a RankingList.
@@ -18136,17 +18136,17 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        if (!(message.Items && message.Items.length))
-                            message.Items = [];
-                        message.Items.push($root.pb.RankingItem.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    if (!(message.Items && message.Items.length))
+                        message.Items = [];
+                    message.Items.push($root.pb.RankingItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -18262,7 +18262,7 @@ $root.pb = (function () {
         return RankingList;
     })();
 
-    pb.CmdCgsRanking = (function () {
+    pb.CmdCgsRanking = (function() {
 
         /**
          * Properties of a CmdCgsRanking.
@@ -18365,15 +18365,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.stage = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.stage = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -18472,7 +18472,7 @@ $root.pb = (function () {
         return CmdCgsRanking;
     })();
 
-    pb.JjPlayer = (function () {
+    pb.JjPlayer = (function() {
 
         /**
          * Properties of a JjPlayer.
@@ -18586,18 +18586,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.gd = $root.pb.GameData.decode(reader, reader.uint32());
-                        break;
-                    case 2:
-                        message.ops = $root.pb.GameOperations.decode(reader, reader.uint32());
-                        break;
-                    case 3:
-                        message.result = $root.pb.GameResult.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.gd = $root.pb.GameData.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.ops = $root.pb.GameOperations.decode(reader, reader.uint32());
+                    break;
+                case 3:
+                    message.result = $root.pb.GameResult.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -18719,7 +18719,7 @@ $root.pb = (function () {
         return JjPlayer;
     })();
 
-    pb.JjGame = (function () {
+    pb.JjGame = (function() {
 
         /**
          * Properties of a JjGame.
@@ -18774,7 +18774,7 @@ $root.pb = (function () {
          * @memberof pb.JjGame
          * @instance
          */
-        JjGame.prototype.tsQuoteFrom = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        JjGame.prototype.tsQuoteFrom = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * JjGame tsQuoteTo.
@@ -18782,7 +18782,7 @@ $root.pb = (function () {
          * @memberof pb.JjGame
          * @instance
          */
-        JjGame.prototype.tsQuoteTo = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        JjGame.prototype.tsQuoteTo = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * JjGame tsQuoteStart.
@@ -18790,7 +18790,7 @@ $root.pb = (function () {
          * @memberof pb.JjGame
          * @instance
          */
-        JjGame.prototype.tsQuoteStart = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        JjGame.prototype.tsQuoteStart = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * JjGame quotes.
@@ -18901,38 +18901,38 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.code = reader.int32();
-                        break;
-                    case 2:
-                        message.ktype = reader.int32();
-                        break;
-                    case 3:
-                        message.tsQuoteFrom = reader.int64();
-                        break;
-                    case 4:
-                        message.tsQuoteTo = reader.int64();
-                        break;
-                    case 5:
-                        message.tsQuoteStart = reader.int64();
-                        break;
-                    case 6:
-                        message.quotes = $root.pb.Quotes.decode(reader, reader.uint32());
-                        break;
-                    case 7:
-                        message.quotesFuture = $root.pb.QuotesFuture.decode(reader, reader.uint32());
-                        break;
-                    case 8:
-                        if (!(message.players && message.players.length))
-                            message.players = [];
-                        message.players.push($root.pb.JjPlayer.decode(reader, reader.uint32()));
-                        break;
-                    case 9:
-                        message.capital = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.code = reader.int32();
+                    break;
+                case 2:
+                    message.ktype = reader.int32();
+                    break;
+                case 3:
+                    message.tsQuoteFrom = reader.int64();
+                    break;
+                case 4:
+                    message.tsQuoteTo = reader.int64();
+                    break;
+                case 5:
+                    message.tsQuoteStart = reader.int64();
+                    break;
+                case 6:
+                    message.quotes = $root.pb.Quotes.decode(reader, reader.uint32());
+                    break;
+                case 7:
+                    message.quotesFuture = $root.pb.QuotesFuture.decode(reader, reader.uint32());
+                    break;
+                case 8:
+                    if (!(message.players && message.players.length))
+                        message.players = [];
+                    message.players.push($root.pb.JjPlayer.decode(reader, reader.uint32()));
+                    break;
+                case 9:
+                    message.capital = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -18970,19 +18970,19 @@ $root.pb = (function () {
                     return "code: integer expected";
             if (message.ktype != null && message.hasOwnProperty("ktype"))
                 switch (message.ktype) {
-                    default:
-                        return "ktype: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 10:
-                    case 11:
-                        break;
+                default:
+                    return "ktype: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 10:
+                case 11:
+                    break;
                 }
             if (message.tsQuoteFrom != null && message.hasOwnProperty("tsQuoteFrom"))
                 if (!$util.isInteger(message.tsQuoteFrom) && !(message.tsQuoteFrom && $util.isInteger(message.tsQuoteFrom.low) && $util.isInteger(message.tsQuoteFrom.high)))
@@ -19033,46 +19033,46 @@ $root.pb = (function () {
             if (object.code != null)
                 message.code = object.code | 0;
             switch (object.ktype) {
-                case "KType_NULL":
-                case 0:
-                    message.ktype = 0;
-                    break;
-                case "Real":
-                case 1:
-                    message.ktype = 1;
-                    break;
-                case "Min":
-                case 2:
-                    message.ktype = 2;
-                    break;
-                case "MinToday":
-                case 3:
-                    message.ktype = 3;
-                    break;
-                case "Min5":
-                case 4:
-                    message.ktype = 4;
-                    break;
-                case "Min15":
-                case 5:
-                    message.ktype = 5;
-                    break;
-                case "Min30":
-                case 6:
-                    message.ktype = 6;
-                    break;
-                case "Min60":
-                case 7:
-                    message.ktype = 7;
-                    break;
-                case "Day":
-                case 10:
-                    message.ktype = 10;
-                    break;
-                case "Day7":
-                case 11:
-                    message.ktype = 11;
-                    break;
+            case "KType_NULL":
+            case 0:
+                message.ktype = 0;
+                break;
+            case "Real":
+            case 1:
+                message.ktype = 1;
+                break;
+            case "Min":
+            case 2:
+                message.ktype = 2;
+                break;
+            case "MinToday":
+            case 3:
+                message.ktype = 3;
+                break;
+            case "Min5":
+            case 4:
+                message.ktype = 4;
+                break;
+            case "Min15":
+            case 5:
+                message.ktype = 5;
+                break;
+            case "Min30":
+            case 6:
+                message.ktype = 6;
+                break;
+            case "Min60":
+            case 7:
+                message.ktype = 7;
+                break;
+            case "Day":
+            case 10:
+                message.ktype = 10;
+                break;
+            case "Day7":
+            case 11:
+                message.ktype = 11;
+                break;
             }
             if (object.tsQuoteFrom != null)
                 if ($util.Long)
@@ -19210,7 +19210,7 @@ $root.pb = (function () {
         return JjGame;
     })();
 
-    pb.CmdCgsGetStageAward = (function () {
+    pb.CmdCgsGetStageAward = (function() {
 
         /**
          * Properties of a CmdCgsGetStageAward.
@@ -19313,15 +19313,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.stage = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.stage = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -19420,7 +19420,7 @@ $root.pb = (function () {
         return CmdCgsGetStageAward;
     })();
 
-    pb.CmdStockOrder = (function () {
+    pb.CmdStockOrder = (function() {
 
         /**
          * Properties of a CmdStockOrder.
@@ -19578,30 +19578,30 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.code = reader.int32();
-                        break;
-                    case 2:
-                        message.type = reader.int32();
-                        break;
-                    case 3:
-                        message.price = reader.double();
-                        break;
-                    case 4:
-                        message.volume = reader.int32();
-                        break;
-                    case 5:
-                        message.amount = reader.int32();
-                        break;
-                    case 6:
-                        message.uid = reader.int32();
-                        break;
-                    case 7:
-                        message.id = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.code = reader.int32();
+                    break;
+                case 2:
+                    message.type = reader.int32();
+                    break;
+                case 3:
+                    message.price = reader.double();
+                    break;
+                case 4:
+                    message.volume = reader.int32();
+                    break;
+                case 5:
+                    message.amount = reader.int32();
+                    break;
+                case 6:
+                    message.uid = reader.int32();
+                    break;
+                case 7:
+                    message.id = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -19639,17 +19639,17 @@ $root.pb = (function () {
                     return "code: integer expected";
             if (message.type != null && message.hasOwnProperty("type"))
                 switch (message.type) {
-                    default:
-                        return "type: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                        break;
+                default:
+                    return "type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    break;
                 }
             if (message.price != null && message.hasOwnProperty("price"))
                 if (typeof message.price !== "number")
@@ -19684,38 +19684,38 @@ $root.pb = (function () {
             if (object.code != null)
                 message.code = object.code | 0;
             switch (object.type) {
-                case "OrderType_NULL":
-                case 0:
-                    message.type = 0;
-                    break;
-                case "AskMarket":
-                case 1:
-                    message.type = 1;
-                    break;
-                case "BidMarket":
-                case 2:
-                    message.type = 2;
-                    break;
-                case "AskLimit":
-                case 3:
-                    message.type = 3;
-                    break;
-                case "BidLimit":
-                case 4:
-                    message.type = 4;
-                    break;
-                case "AskLimit_Cancel":
-                case 5:
-                    message.type = 5;
-                    break;
-                case "BidLimit_Cancel":
-                case 6:
-                    message.type = 6;
-                    break;
-                case "BidMarket_Auto":
-                case 7:
-                    message.type = 7;
-                    break;
+            case "OrderType_NULL":
+            case 0:
+                message.type = 0;
+                break;
+            case "AskMarket":
+            case 1:
+                message.type = 1;
+                break;
+            case "BidMarket":
+            case 2:
+                message.type = 2;
+                break;
+            case "AskLimit":
+            case 3:
+                message.type = 3;
+                break;
+            case "BidLimit":
+            case 4:
+                message.type = 4;
+                break;
+            case "AskLimit_Cancel":
+            case 5:
+                message.type = 5;
+                break;
+            case "BidLimit_Cancel":
+            case 6:
+                message.type = 6;
+                break;
+            case "BidMarket_Auto":
+            case 7:
+                message.type = 7;
+                break;
             }
             if (object.price != null)
                 message.price = Number(object.price);
@@ -19783,7 +19783,7 @@ $root.pb = (function () {
         return CmdStockOrder;
     })();
 
-    pb.CmdStockOrderReply = (function () {
+    pb.CmdStockOrderReply = (function() {
 
         /**
          * Properties of a CmdStockOrderReply.
@@ -19815,7 +19815,7 @@ $root.pb = (function () {
          * @memberof pb.CmdStockOrderReply
          * @instance
          */
-        CmdStockOrderReply.prototype.orderId = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdStockOrderReply.prototype.orderId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdStockOrderReply node.
@@ -19897,18 +19897,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.orderId = reader.int64();
-                        break;
-                    case 2:
-                        message.node = reader.int32();
-                        break;
-                    case 3:
-                        message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.orderId = reader.int64();
+                    break;
+                case 2:
+                    message.node = reader.int32();
+                    break;
+                case 3:
+                    message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -20034,7 +20034,7 @@ $root.pb = (function () {
         return CmdStockOrderReply;
     })();
 
-    pb.CmdStockOrderCancel = (function () {
+    pb.CmdStockOrderCancel = (function() {
 
         /**
          * Properties of a CmdStockOrderCancel.
@@ -20069,7 +20069,7 @@ $root.pb = (function () {
          * @memberof pb.CmdStockOrderCancel
          * @instance
          */
-        CmdStockOrderCancel.prototype.orderId = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdStockOrderCancel.prototype.orderId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdStockOrderCancel type.
@@ -20181,27 +20181,27 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.orderId = reader.int64();
-                        break;
-                    case 2:
-                        message.type = reader.int32();
-                        break;
-                    case 3:
-                        message.code = reader.int32();
-                        break;
-                    case 4:
-                        message.uid = reader.int32();
-                        break;
-                    case 5:
-                        message.id = reader.int32();
-                        break;
-                    case 6:
-                        message.node = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.orderId = reader.int64();
+                    break;
+                case 2:
+                    message.type = reader.int32();
+                    break;
+                case 3:
+                    message.code = reader.int32();
+                    break;
+                case 4:
+                    message.uid = reader.int32();
+                    break;
+                case 5:
+                    message.id = reader.int32();
+                    break;
+                case 6:
+                    message.node = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -20239,17 +20239,17 @@ $root.pb = (function () {
                     return "orderId: integer|Long expected";
             if (message.type != null && message.hasOwnProperty("type"))
                 switch (message.type) {
-                    default:
-                        return "type: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                        break;
+                default:
+                    return "type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    break;
                 }
             if (message.code != null && message.hasOwnProperty("code"))
                 if (!$util.isInteger(message.code))
@@ -20288,38 +20288,38 @@ $root.pb = (function () {
                 else if (typeof object.orderId === "object")
                     message.orderId = new $util.LongBits(object.orderId.low >>> 0, object.orderId.high >>> 0).toNumber();
             switch (object.type) {
-                case "OrderType_NULL":
-                case 0:
-                    message.type = 0;
-                    break;
-                case "AskMarket":
-                case 1:
-                    message.type = 1;
-                    break;
-                case "BidMarket":
-                case 2:
-                    message.type = 2;
-                    break;
-                case "AskLimit":
-                case 3:
-                    message.type = 3;
-                    break;
-                case "BidLimit":
-                case 4:
-                    message.type = 4;
-                    break;
-                case "AskLimit_Cancel":
-                case 5:
-                    message.type = 5;
-                    break;
-                case "BidLimit_Cancel":
-                case 6:
-                    message.type = 6;
-                    break;
-                case "BidMarket_Auto":
-                case 7:
-                    message.type = 7;
-                    break;
+            case "OrderType_NULL":
+            case 0:
+                message.type = 0;
+                break;
+            case "AskMarket":
+            case 1:
+                message.type = 1;
+                break;
+            case "BidMarket":
+            case 2:
+                message.type = 2;
+                break;
+            case "AskLimit":
+            case 3:
+                message.type = 3;
+                break;
+            case "BidLimit":
+            case 4:
+                message.type = 4;
+                break;
+            case "AskLimit_Cancel":
+            case 5:
+                message.type = 5;
+                break;
+            case "BidLimit_Cancel":
+            case 6:
+                message.type = 6;
+                break;
+            case "BidMarket_Auto":
+            case 7:
+                message.type = 7;
+                break;
             }
             if (object.code != null)
                 message.code = object.code | 0;
@@ -20389,7 +20389,7 @@ $root.pb = (function () {
         return CmdStockOrderCancel;
     })();
 
-    pb.StockOrder = (function () {
+    pb.StockOrder = (function() {
 
         /**
          * Properties of a StockOrder.
@@ -20428,7 +20428,7 @@ $root.pb = (function () {
          * @memberof pb.StockOrder
          * @instance
          */
-        StockOrder.prototype.orderId = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        StockOrder.prototype.orderId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * StockOrder code.
@@ -20484,7 +20484,7 @@ $root.pb = (function () {
          * @memberof pb.StockOrder
          * @instance
          */
-        StockOrder.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        StockOrder.prototype.ts = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * StockOrder id.
@@ -20580,39 +20580,39 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.orderId = reader.int64();
-                        break;
-                    case 2:
-                        message.code = reader.int32();
-                        break;
-                    case 3:
-                        message.type = reader.int32();
-                        break;
-                    case 4:
-                        message.state = reader.int32();
-                        break;
-                    case 5:
-                        message.price = reader.double();
-                        break;
-                    case 6:
-                        message.volume = reader.int32();
-                        break;
-                    case 7:
-                        message.uid = reader.int32();
-                        break;
-                    case 8:
-                        message.ts = reader.int64();
-                        break;
-                    case 9:
-                        message.id = reader.int32();
-                        break;
-                    case 10:
-                        message.node = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.orderId = reader.int64();
+                    break;
+                case 2:
+                    message.code = reader.int32();
+                    break;
+                case 3:
+                    message.type = reader.int32();
+                    break;
+                case 4:
+                    message.state = reader.int32();
+                    break;
+                case 5:
+                    message.price = reader.double();
+                    break;
+                case 6:
+                    message.volume = reader.int32();
+                    break;
+                case 7:
+                    message.uid = reader.int32();
+                    break;
+                case 8:
+                    message.ts = reader.int64();
+                    break;
+                case 9:
+                    message.id = reader.int32();
+                    break;
+                case 10:
+                    message.node = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -20653,28 +20653,28 @@ $root.pb = (function () {
                     return "code: integer expected";
             if (message.type != null && message.hasOwnProperty("type"))
                 switch (message.type) {
-                    default:
-                        return "type: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                        break;
+                default:
+                    return "type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    break;
                 }
             if (message.state != null && message.hasOwnProperty("state"))
                 switch (message.state) {
-                    default:
-                        return "state: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                        break;
+                default:
+                    return "state: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    break;
                 }
             if (message.price != null && message.hasOwnProperty("price"))
                 if (typeof message.price !== "number")
@@ -20721,60 +20721,60 @@ $root.pb = (function () {
             if (object.code != null)
                 message.code = object.code | 0;
             switch (object.type) {
-                case "OrderType_NULL":
-                case 0:
-                    message.type = 0;
-                    break;
-                case "AskMarket":
-                case 1:
-                    message.type = 1;
-                    break;
-                case "BidMarket":
-                case 2:
-                    message.type = 2;
-                    break;
-                case "AskLimit":
-                case 3:
-                    message.type = 3;
-                    break;
-                case "BidLimit":
-                case 4:
-                    message.type = 4;
-                    break;
-                case "AskLimit_Cancel":
-                case 5:
-                    message.type = 5;
-                    break;
-                case "BidLimit_Cancel":
-                case 6:
-                    message.type = 6;
-                    break;
-                case "BidMarket_Auto":
-                case 7:
-                    message.type = 7;
-                    break;
+            case "OrderType_NULL":
+            case 0:
+                message.type = 0;
+                break;
+            case "AskMarket":
+            case 1:
+                message.type = 1;
+                break;
+            case "BidMarket":
+            case 2:
+                message.type = 2;
+                break;
+            case "AskLimit":
+            case 3:
+                message.type = 3;
+                break;
+            case "BidLimit":
+            case 4:
+                message.type = 4;
+                break;
+            case "AskLimit_Cancel":
+            case 5:
+                message.type = 5;
+                break;
+            case "BidLimit_Cancel":
+            case 6:
+                message.type = 6;
+                break;
+            case "BidMarket_Auto":
+            case 7:
+                message.type = 7;
+                break;
             }
             switch (object.state) {
-                case "Init":
-                case 0:
-                    message.state = 0;
-                    break;
-                case "Partial":
-                case 1:
-                    message.state = 1;
-                    break;
-                case "Done":
-                case 2:
-                    message.state = 2;
-                    break;
-                case "ManulCancel":
-                case 3:
-                    message.state = 3;
-                    break;
-                case "AutoCancel":
-                case 4:
-                    message.state = 4;
-                    break;
+            case "Init":
+            case 0:
+                message.state = 0;
+                break;
+            case "Partial":
+            case 1:
+                message.state = 1;
+                break;
+            case "Done":
+            case 2:
+                message.state = 2;
+                break;
+            case "ManulCancel":
+            case 3:
+                message.state = 3;
+                break;
+            case "AutoCancel":
+            case 4:
+                message.state = 4;
+                break;
             }
             if (object.price != null)
                 message.price = Number(object.price);
@@ -20874,7 +20874,7 @@ $root.pb = (function () {
         return StockOrder;
     })();
 
-    pb.StockOrderList = (function () {
+    pb.StockOrderList = (function() {
 
         /**
          * Properties of a StockOrderList.
@@ -20968,14 +20968,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.StockOrder.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.StockOrder.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -21082,7 +21082,7 @@ $root.pb = (function () {
         return StockOrderList;
     })();
 
-    pb.StockOrderResult = (function () {
+    pb.StockOrderResult = (function() {
 
         /**
          * Properties of a StockOrderResult.
@@ -21185,15 +21185,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
-                        break;
-                    case 3:
-                        message.order = $root.pb.StockOrder.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                    break;
+                case 3:
+                    message.order = $root.pb.StockOrder.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -21302,13 +21302,14 @@ $root.pb = (function () {
         return StockOrderResult;
     })();
 
-    pb.StockPosition = (function () {
+    pb.StockPosition = (function() {
 
         /**
          * Properties of a StockPosition.
          * @memberof pb
          * @interface IStockPosition
          * @property {number|null} [code] StockPosition code
+         * @property {number|null} [volumeFree] StockPosition volumeFree
          * @property {number|null} [volume] StockPosition volume
          * @property {number|null} [priceCost] StockPosition priceCost
          */
@@ -21335,6 +21336,14 @@ $root.pb = (function () {
          * @instance
          */
         StockPosition.prototype.code = 0;
+
+        /**
+         * StockPosition volumeFree.
+         * @member {number} volumeFree
+         * @memberof pb.StockPosition
+         * @instance
+         */
+        StockPosition.prototype.volumeFree = 0;
 
         /**
          * StockPosition volume.
@@ -21378,10 +21387,12 @@ $root.pb = (function () {
                 writer = $Writer.create();
             if (message.code != null && Object.hasOwnProperty.call(message, "code"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+            if (message.volumeFree != null && Object.hasOwnProperty.call(message, "volumeFree"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.volumeFree);
             if (message.volume != null && Object.hasOwnProperty.call(message, "volume"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.volume);
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.volume);
             if (message.priceCost != null && Object.hasOwnProperty.call(message, "priceCost"))
-                writer.uint32(/* id 3, wireType 1 =*/25).double(message.priceCost);
+                writer.uint32(/* id 4, wireType 1 =*/33).double(message.priceCost);
             return writer;
         };
 
@@ -21416,18 +21427,21 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.code = reader.int32();
-                        break;
-                    case 2:
-                        message.volume = reader.int32();
-                        break;
-                    case 3:
-                        message.priceCost = reader.double();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.code = reader.int32();
+                    break;
+                case 2:
+                    message.volumeFree = reader.int32();
+                    break;
+                case 3:
+                    message.volume = reader.int32();
+                    break;
+                case 4:
+                    message.priceCost = reader.double();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -21463,6 +21477,9 @@ $root.pb = (function () {
             if (message.code != null && message.hasOwnProperty("code"))
                 if (!$util.isInteger(message.code))
                     return "code: integer expected";
+            if (message.volumeFree != null && message.hasOwnProperty("volumeFree"))
+                if (!$util.isInteger(message.volumeFree))
+                    return "volumeFree: integer expected";
             if (message.volume != null && message.hasOwnProperty("volume"))
                 if (!$util.isInteger(message.volume))
                     return "volume: integer expected";
@@ -21486,6 +21503,8 @@ $root.pb = (function () {
             var message = new $root.pb.StockPosition();
             if (object.code != null)
                 message.code = object.code | 0;
+            if (object.volumeFree != null)
+                message.volumeFree = object.volumeFree | 0;
             if (object.volume != null)
                 message.volume = object.volume | 0;
             if (object.priceCost != null)
@@ -21508,11 +21527,14 @@ $root.pb = (function () {
             var object = {};
             if (options.defaults) {
                 object.code = 0;
+                object.volumeFree = 0;
                 object.volume = 0;
                 object.priceCost = 0;
             }
             if (message.code != null && message.hasOwnProperty("code"))
                 object.code = message.code;
+            if (message.volumeFree != null && message.hasOwnProperty("volumeFree"))
+                object.volumeFree = message.volumeFree;
             if (message.volume != null && message.hasOwnProperty("volume"))
                 object.volume = message.volume;
             if (message.priceCost != null && message.hasOwnProperty("priceCost"))
@@ -21534,7 +21556,7 @@ $root.pb = (function () {
         return StockPosition;
     })();
 
-    pb.StockPositionList = (function () {
+    pb.StockPositionList = (function() {
 
         /**
          * Properties of a StockPositionList.
@@ -21628,14 +21650,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.StockPosition.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.StockPosition.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -21742,7 +21764,7 @@ $root.pb = (function () {
         return StockPositionList;
     })();
 
-    pb.CmdMncgExchange = (function () {
+    pb.CmdMncgExchange = (function() {
 
         /**
          * Properties of a CmdMncgExchange.
@@ -21781,7 +21803,7 @@ $root.pb = (function () {
          * @memberof pb.CmdMncgExchange
          * @instance
          */
-        CmdMncgExchange.prototype.amount = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdMncgExchange.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new CmdMncgExchange instance using the specified properties.
@@ -21845,15 +21867,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.direction = reader.int32();
-                        break;
-                    case 2:
-                        message.amount = reader.int64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.direction = reader.int32();
+                    break;
+                case 2:
+                    message.amount = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -21888,12 +21910,12 @@ $root.pb = (function () {
                 return "object expected";
             if (message.direction != null && message.hasOwnProperty("direction"))
                 switch (message.direction) {
-                    default:
-                        return "direction: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                        break;
+                default:
+                    return "direction: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
                 }
             if (message.amount != null && message.hasOwnProperty("amount"))
                 if (!$util.isInteger(message.amount) && !(message.amount && $util.isInteger(message.amount.low) && $util.isInteger(message.amount.high)))
@@ -21914,18 +21936,18 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.CmdMncgExchange();
             switch (object.direction) {
-                case "ExchangeDirection_NULL":
-                case 0:
-                    message.direction = 0;
-                    break;
-                case "Forward":
-                case 1:
-                    message.direction = 1;
-                    break;
-                case "Reverse":
-                case 2:
-                    message.direction = 2;
-                    break;
+            case "ExchangeDirection_NULL":
+            case 0:
+                message.direction = 0;
+                break;
+            case "Forward":
+            case 1:
+                message.direction = 1;
+                break;
+            case "Reverse":
+            case 2:
+                message.direction = 2;
+                break;
             }
             if (object.amount != null)
                 if ($util.Long)
@@ -21984,7 +22006,7 @@ $root.pb = (function () {
         return CmdMncgExchange;
     })();
 
-    pb.CmdMncgExchangeReply = (function () {
+    pb.CmdMncgExchangeReply = (function() {
 
         /**
          * Properties of a CmdMncgExchangeReply.
@@ -22087,15 +22109,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
-                        break;
-                    case 2:
-                        message.account = reader.double();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.account = reader.double();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -22199,7 +22221,7 @@ $root.pb = (function () {
         return CmdMncgExchangeReply;
     })();
 
-    pb.CmdMncgEditStock = (function () {
+    pb.CmdMncgEditStock = (function() {
 
         /**
          * Properties of a CmdMncgEditStock.
@@ -22313,18 +22335,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.removed = reader.bool();
-                        break;
-                    case 2:
-                        message.code = reader.int32();
-                        break;
-                    case 3:
-                        message.isAiStock = reader.bool();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.removed = reader.bool();
+                    break;
+                case 2:
+                    message.code = reader.int32();
+                    break;
+                case 3:
+                    message.isAiStock = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -22431,7 +22453,7 @@ $root.pb = (function () {
         return CmdMncgEditStock;
     })();
 
-    pb.CmdQueryStockOrder = (function () {
+    pb.CmdQueryStockOrder = (function() {
 
         /**
          * Properties of a CmdQueryStockOrder.
@@ -22474,7 +22496,7 @@ $root.pb = (function () {
          * @memberof pb.CmdQueryStockOrder
          * @instance
          */
-        CmdQueryStockOrder.prototype.from = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdQueryStockOrder.prototype.from = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdQueryStockOrder to.
@@ -22482,7 +22504,7 @@ $root.pb = (function () {
          * @memberof pb.CmdQueryStockOrder
          * @instance
          */
-        CmdQueryStockOrder.prototype.to = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdQueryStockOrder.prototype.to = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdQueryStockOrder pageSize.
@@ -22498,7 +22520,7 @@ $root.pb = (function () {
          * @memberof pb.CmdQueryStockOrder
          * @instance
          */
-        CmdQueryStockOrder.prototype.orderId = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdQueryStockOrder.prototype.orderId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdQueryStockOrder id.
@@ -22578,27 +22600,27 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.from = reader.int64();
-                        break;
-                    case 3:
-                        message.to = reader.int64();
-                        break;
-                    case 4:
-                        message.pageSize = reader.int32();
-                        break;
-                    case 5:
-                        message.orderId = reader.int64();
-                        break;
-                    case 6:
-                        message.id = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.from = reader.int64();
+                    break;
+                case 3:
+                    message.to = reader.int64();
+                    break;
+                case 4:
+                    message.pageSize = reader.int32();
+                    break;
+                case 5:
+                    message.orderId = reader.int64();
+                    break;
+                case 6:
+                    message.id = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -22771,7 +22793,7 @@ $root.pb = (function () {
         return CmdQueryStockOrder;
     })();
 
-    pb.CgdsConf = (function () {
+    pb.CgdsConf = (function() {
 
         /**
          * Properties of a CgdsConf.
@@ -22818,7 +22840,7 @@ $root.pb = (function () {
          * @memberof pb.CgdsConf
          * @instance
          */
-        CgdsConf.prototype.regTo = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CgdsConf.prototype.regTo = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CgdsConf from.
@@ -22826,7 +22848,7 @@ $root.pb = (function () {
          * @memberof pb.CgdsConf
          * @instance
          */
-        CgdsConf.prototype.from = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CgdsConf.prototype.from = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CgdsConf to.
@@ -22834,7 +22856,7 @@ $root.pb = (function () {
          * @memberof pb.CgdsConf
          * @instance
          */
-        CgdsConf.prototype.to = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CgdsConf.prototype.to = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CgdsConf conf.
@@ -22962,39 +22984,39 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.regTo = reader.int64();
-                        break;
-                    case 3:
-                        message.from = reader.int64();
-                        break;
-                    case 4:
-                        message.to = reader.int64();
-                        break;
-                    case 5:
-                        message.conf = reader.string();
-                        break;
-                    case 6:
-                        message.award = reader.string();
-                        break;
-                    case 7:
-                        message.status = reader.int32();
-                        break;
-                    case 8:
-                        message.title = reader.string();
-                        break;
-                    case 9:
-                        message.logo = reader.string();
-                        break;
-                    case 10:
-                        message.url = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.regTo = reader.int64();
+                    break;
+                case 3:
+                    message.from = reader.int64();
+                    break;
+                case 4:
+                    message.to = reader.int64();
+                    break;
+                case 5:
+                    message.conf = reader.string();
+                    break;
+                case 6:
+                    message.award = reader.string();
+                    break;
+                case 7:
+                    message.status = reader.int32();
+                    break;
+                case 8:
+                    message.title = reader.string();
+                    break;
+                case 9:
+                    message.logo = reader.string();
+                    break;
+                case 10:
+                    message.url = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -23199,7 +23221,7 @@ $root.pb = (function () {
         return CgdsConf;
     })();
 
-    pb.CgdsList = (function () {
+    pb.CgdsList = (function() {
 
         /**
          * Properties of a CgdsList.
@@ -23293,14 +23315,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.CgdsConf.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.CgdsConf.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -23407,7 +23429,7 @@ $root.pb = (function () {
         return CgdsList;
     })();
 
-    pb.CmdCgdsReg = (function () {
+    pb.CmdCgdsReg = (function() {
 
         /**
          * Properties of a CmdCgdsReg.
@@ -23499,12 +23521,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -23594,7 +23616,7 @@ $root.pb = (function () {
         return CmdCgdsReg;
     })();
 
-    pb.CmdCgdsRegReply = (function () {
+    pb.CmdCgdsRegReply = (function() {
 
         /**
          * Properties of a CmdCgdsRegReply.
@@ -23697,15 +23719,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
-                        break;
-                    case 2:
-                        message.cgdsStateItem = $root.pb.CgdsStateItem.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.cgdsStateItem = $root.pb.CgdsStateItem.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -23814,7 +23836,7 @@ $root.pb = (function () {
         return CmdCgdsRegReply;
     })();
 
-    pb.CmdCgdsRanking = (function () {
+    pb.CmdCgdsRanking = (function() {
 
         /**
          * Properties of a CmdCgdsRanking.
@@ -23906,12 +23928,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -24011,7 +24033,7 @@ $root.pb = (function () {
      * @property {number} High=3 High value
      * @property {number} Low=4 Low value
      */
-    pb.PriceType = (function () {
+    pb.PriceType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "PriceType_NULL"] = 0;
         values[valuesById[1] = "Open"] = 1;
@@ -24029,7 +24051,7 @@ $root.pb = (function () {
      * @property {number} drjc=1 drjc value
      * @property {number} spjc=2 spjc value
      */
-    pb.ZsjcGameType = (function () {
+    pb.ZsjcGameType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "kpjc"] = 0;
         values[valuesById[1] = "drjc"] = 1;
@@ -24037,7 +24059,7 @@ $root.pb = (function () {
         return values;
     })();
 
-    pb.ZsjcOption = (function () {
+    pb.ZsjcOption = (function() {
 
         /**
          * Properties of a ZsjcOption.
@@ -24069,7 +24091,7 @@ $root.pb = (function () {
          * @memberof pb.ZsjcOption
          * @instance
          */
-        ZsjcOption.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        ZsjcOption.prototype.ts = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * ZsjcOption pt.
@@ -24151,18 +24173,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.ts = reader.int64();
-                        break;
-                    case 2:
-                        message.pt = reader.int32();
-                        break;
-                    case 3:
-                        message.money = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.ts = reader.int64();
+                    break;
+                case 2:
+                    message.pt = reader.int32();
+                    break;
+                case 3:
+                    message.money = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -24200,14 +24222,14 @@ $root.pb = (function () {
                     return "ts: integer|Long expected";
             if (message.pt != null && message.hasOwnProperty("pt"))
                 switch (message.pt) {
-                    default:
-                        return "pt: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                        break;
+                default:
+                    return "pt: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    break;
                 }
             if (message.money != null && message.hasOwnProperty("money"))
                 if (!$util.isInteger(message.money))
@@ -24237,26 +24259,26 @@ $root.pb = (function () {
                 else if (typeof object.ts === "object")
                     message.ts = new $util.LongBits(object.ts.low >>> 0, object.ts.high >>> 0).toNumber();
             switch (object.pt) {
-                case "PriceType_NULL":
-                case 0:
-                    message.pt = 0;
-                    break;
-                case "Open":
-                case 1:
-                    message.pt = 1;
-                    break;
-                case "Close":
-                case 2:
-                    message.pt = 2;
-                    break;
-                case "High":
-                case 3:
-                    message.pt = 3;
-                    break;
-                case "Low":
-                case 4:
-                    message.pt = 4;
-                    break;
+            case "PriceType_NULL":
+            case 0:
+                message.pt = 0;
+                break;
+            case "Open":
+            case 1:
+                message.pt = 1;
+                break;
+            case "Close":
+            case 2:
+                message.pt = 2;
+                break;
+            case "High":
+            case 3:
+                message.pt = 3;
+                break;
+            case "Low":
+            case 4:
+                message.pt = 4;
+                break;
             }
             if (object.money != null)
                 message.money = object.money | 0;
@@ -24311,7 +24333,7 @@ $root.pb = (function () {
         return ZsjcOption;
     })();
 
-    pb.ZsjcGameData = (function () {
+    pb.ZsjcGameData = (function() {
 
         /**
          * Properties of a ZsjcGameData.
@@ -24362,7 +24384,7 @@ $root.pb = (function () {
          * @memberof pb.ZsjcGameData
          * @instance
          */
-        ZsjcGameData.prototype.tsSettling = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        ZsjcGameData.prototype.tsSettling = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * ZsjcGameData settled.
@@ -24458,27 +24480,27 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.gameType = reader.int32();
-                        break;
-                    case 2:
-                        message.code = reader.int32();
-                        break;
-                    case 3:
-                        message.tsSettling = reader.int64();
-                        break;
-                    case 4:
-                        message.settled = reader.bool();
-                        break;
-                    case 5:
-                        message.first = $root.pb.ZsjcOption.decode(reader, reader.uint32());
-                        break;
-                    case 6:
-                        message.second = $root.pb.ZsjcOption.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.gameType = reader.int32();
+                    break;
+                case 2:
+                    message.code = reader.int32();
+                    break;
+                case 3:
+                    message.tsSettling = reader.int64();
+                    break;
+                case 4:
+                    message.settled = reader.bool();
+                    break;
+                case 5:
+                    message.first = $root.pb.ZsjcOption.decode(reader, reader.uint32());
+                    break;
+                case 6:
+                    message.second = $root.pb.ZsjcOption.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -24513,12 +24535,12 @@ $root.pb = (function () {
                 return "object expected";
             if (message.gameType != null && message.hasOwnProperty("gameType"))
                 switch (message.gameType) {
-                    default:
-                        return "gameType: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                        break;
+                default:
+                    return "gameType: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
                 }
             if (message.code != null && message.hasOwnProperty("code"))
                 if (!$util.isInteger(message.code))
@@ -24555,18 +24577,18 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.ZsjcGameData();
             switch (object.gameType) {
-                case "kpjc":
-                case 0:
-                    message.gameType = 0;
-                    break;
-                case "drjc":
-                case 1:
-                    message.gameType = 1;
-                    break;
-                case "spjc":
-                case 2:
-                    message.gameType = 2;
-                    break;
+            case "kpjc":
+            case 0:
+                message.gameType = 0;
+                break;
+            case "drjc":
+            case 1:
+                message.gameType = 1;
+                break;
+            case "spjc":
+            case 2:
+                message.gameType = 2;
+                break;
             }
             if (object.code != null)
                 message.code = object.code | 0;
@@ -24651,7 +24673,7 @@ $root.pb = (function () {
         return ZsjcGameData;
     })();
 
-    pb.ZsjcGameList = (function () {
+    pb.ZsjcGameList = (function() {
 
         /**
          * Properties of a ZsjcGameList.
@@ -24745,14 +24767,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.ZsjcGameData.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.ZsjcGameData.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -24859,7 +24881,7 @@ $root.pb = (function () {
         return ZsjcGameList;
     })();
 
-    pb.CmdBet = (function () {
+    pb.CmdBet = (function() {
 
         /**
          * Properties of a CmdBet.
@@ -25017,30 +25039,30 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.money = reader.int32();
-                        break;
-                    case 3:
-                        message.gameIndex = reader.int32();
-                        break;
-                    case 4:
-                        message.betting = reader.int32();
-                        break;
-                    case 5:
-                        message.nickname = reader.string();
-                        break;
-                    case 6:
-                        message.icon = reader.string();
-                        break;
-                    case 7:
-                        message.gender = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.money = reader.int32();
+                    break;
+                case 3:
+                    message.gameIndex = reader.int32();
+                    break;
+                case 4:
+                    message.betting = reader.int32();
+                    break;
+                case 5:
+                    message.nickname = reader.string();
+                    break;
+                case 6:
+                    message.icon = reader.string();
+                    break;
+                case 7:
+                    message.gender = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -25179,7 +25201,7 @@ $root.pb = (function () {
         return CmdBet;
     })();
 
-    pb.CmdGetWeeklyAward = (function () {
+    pb.CmdGetWeeklyAward = (function() {
 
         /**
          * Properties of a CmdGetWeeklyAward.
@@ -25271,12 +25293,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.code = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.code = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -25366,7 +25388,7 @@ $root.pb = (function () {
         return CmdGetWeeklyAward;
     })();
 
-    pb.CmdGetWeeklyAwardReply = (function () {
+    pb.CmdGetWeeklyAwardReply = (function() {
 
         /**
          * Properties of a CmdGetWeeklyAwardReply.
@@ -25469,15 +25491,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
-                        break;
-                    case 2:
-                        message.award = $root.pb.GameProperties.decode(reader, reader.uint32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.award = $root.pb.GameProperties.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -25586,7 +25608,7 @@ $root.pb = (function () {
         return CmdGetWeeklyAwardReply;
     })();
 
-    pb.CmdQueryEventLog = (function () {
+    pb.CmdQueryEventLog = (function() {
 
         /**
          * Properties of a CmdQueryEventLog.
@@ -25636,7 +25658,7 @@ $root.pb = (function () {
          * @memberof pb.CmdQueryEventLog
          * @instance
          */
-        CmdQueryEventLog.prototype.from = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdQueryEventLog.prototype.from = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdQueryEventLog to.
@@ -25644,7 +25666,7 @@ $root.pb = (function () {
          * @memberof pb.CmdQueryEventLog
          * @instance
          */
-        CmdQueryEventLog.prototype.to = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdQueryEventLog.prototype.to = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdQueryEventLog total.
@@ -25722,24 +25744,24 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.eventId = reader.int32();
-                        break;
-                    case 2:
-                        message.uid = reader.int32();
-                        break;
-                    case 3:
-                        message.from = reader.int64();
-                        break;
-                    case 4:
-                        message.to = reader.int64();
-                        break;
-                    case 5:
-                        message.total = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.eventId = reader.int32();
+                    break;
+                case 2:
+                    message.uid = reader.int32();
+                    break;
+                case 3:
+                    message.from = reader.int64();
+                    break;
+                case 4:
+                    message.to = reader.int64();
+                    break;
+                case 5:
+                    message.total = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -25774,12 +25796,12 @@ $root.pb = (function () {
                 return "object expected";
             if (message.eventId != null && message.hasOwnProperty("eventId"))
                 switch (message.eventId) {
-                    default:
-                        return "eventId: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                        break;
+                default:
+                    return "eventId: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
                 }
             if (message.uid != null && message.hasOwnProperty("uid"))
                 if (!$util.isInteger(message.uid))
@@ -25809,18 +25831,18 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.CmdQueryEventLog();
             switch (object.eventId) {
-                case "EventId_NULL":
-                case 0:
-                    message.eventId = 0;
-                    break;
-                case "EventId_WeeklyAward":
-                case 1:
-                    message.eventId = 1;
-                    break;
-                case "EventId_Zsjc":
-                case 2:
-                    message.eventId = 2;
-                    break;
+            case "EventId_NULL":
+            case 0:
+                message.eventId = 0;
+                break;
+            case "EventId_WeeklyAward":
+            case 1:
+                message.eventId = 1;
+                break;
+            case "EventId_Zsjc":
+            case 2:
+                message.eventId = 2;
+                break;
             }
             if (object.uid != null)
                 message.uid = object.uid | 0;
@@ -25908,7 +25930,7 @@ $root.pb = (function () {
         return CmdQueryEventLog;
     })();
 
-    pb.EventLog = (function () {
+    pb.EventLog = (function() {
 
         /**
          * Properties of an EventLog.
@@ -25957,7 +25979,7 @@ $root.pb = (function () {
          * @memberof pb.EventLog
          * @instance
          */
-        EventLog.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        EventLog.prototype.ts = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * EventLog log.
@@ -26033,21 +26055,21 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.eventId = reader.int32();
-                        break;
-                    case 2:
-                        message.uid = reader.int32();
-                        break;
-                    case 3:
-                        message.ts = reader.int64();
-                        break;
-                    case 4:
-                        message.log = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.eventId = reader.int32();
+                    break;
+                case 2:
+                    message.uid = reader.int32();
+                    break;
+                case 3:
+                    message.ts = reader.int64();
+                    break;
+                case 4:
+                    message.log = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -26082,12 +26104,12 @@ $root.pb = (function () {
                 return "object expected";
             if (message.eventId != null && message.hasOwnProperty("eventId"))
                 switch (message.eventId) {
-                    default:
-                        return "eventId: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                        break;
+                default:
+                    return "eventId: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
                 }
             if (message.uid != null && message.hasOwnProperty("uid"))
                 if (!$util.isInteger(message.uid))
@@ -26114,18 +26136,18 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.EventLog();
             switch (object.eventId) {
-                case "EventId_NULL":
-                case 0:
-                    message.eventId = 0;
-                    break;
-                case "EventId_WeeklyAward":
-                case 1:
-                    message.eventId = 1;
-                    break;
-                case "EventId_Zsjc":
-                case 2:
-                    message.eventId = 2;
-                    break;
+            case "EventId_NULL":
+            case 0:
+                message.eventId = 0;
+                break;
+            case "EventId_WeeklyAward":
+            case 1:
+                message.eventId = 1;
+                break;
+            case "EventId_Zsjc":
+            case 2:
+                message.eventId = 2;
+                break;
             }
             if (object.uid != null)
                 message.uid = object.uid | 0;
@@ -26194,7 +26216,7 @@ $root.pb = (function () {
         return EventLog;
     })();
 
-    pb.Events = (function () {
+    pb.Events = (function() {
 
         /**
          * Properties of an Events.
@@ -26288,14 +26310,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.EventLog.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.EventLog.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -26402,7 +26424,7 @@ $root.pb = (function () {
         return Events;
     })();
 
-    pb.ItemOrder = (function () {
+    pb.ItemOrder = (function() {
 
         /**
          * Properties of an ItemOrder.
@@ -26527,21 +26549,21 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.itemId = reader.int32();
-                        break;
-                    case 2:
-                        message.activityId = reader.int32();
-                        break;
-                    case 3:
-                        message.count = reader.int32();
-                        break;
-                    case 4:
-                        message.from = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.itemId = reader.int32();
+                    break;
+                case 2:
+                    message.activityId = reader.int32();
+                    break;
+                case 3:
+                    message.count = reader.int32();
+                    break;
+                case 4:
+                    message.from = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -26585,34 +26607,34 @@ $root.pb = (function () {
                     return "count: integer expected";
             if (message.from != null && message.hasOwnProperty("from"))
                 switch (message.from) {
-                    default:
-                        return "from: enum value expected";
-                    case 0:
-                    case 1:
-                    case 201:
-                    case 204:
-                    case 205:
-                    case 206:
-                    case 208:
-                    case 209:
-                    case 210:
-                    case 211:
-                    case 212:
-                    case 301:
-                    case 302:
-                    case 601:
-                    case 1000:
-                    case 1204:
-                    case 1205:
-                    case 1208:
-                    case 1212:
-                    case 4999:
-                    case 6666:
-                    case 6667:
-                    case 6668:
-                    case 8888:
-                    case 10000:
-                        break;
+                default:
+                    return "from: enum value expected";
+                case 0:
+                case 1:
+                case 201:
+                case 204:
+                case 205:
+                case 206:
+                case 208:
+                case 209:
+                case 210:
+                case 211:
+                case 212:
+                case 301:
+                case 302:
+                case 601:
+                case 1000:
+                case 1204:
+                case 1205:
+                case 1208:
+                case 1212:
+                case 4999:
+                case 6666:
+                case 6667:
+                case 6668:
+                case 8888:
+                case 10000:
+                    break;
                 }
             return null;
         };
@@ -26636,106 +26658,106 @@ $root.pb = (function () {
             if (object.count != null)
                 message.count = object.count | 0;
             switch (object.from) {
-                case "Android_000":
-                case 0:
-                    message.from = 0;
-                    break;
-                case "Android_001":
-                case 1:
-                    message.from = 1;
-                    break;
-                case "Android_201":
-                case 201:
-                    message.from = 201;
-                    break;
-                case "Android_204":
-                case 204:
-                    message.from = 204;
-                    break;
-                case "Android_205":
-                case 205:
-                    message.from = 205;
-                    break;
-                case "Android_206":
-                case 206:
-                    message.from = 206;
-                    break;
-                case "Android_208":
-                case 208:
-                    message.from = 208;
-                    break;
-                case "Android_209":
-                case 209:
-                    message.from = 209;
-                    break;
-                case "Android_210":
-                case 210:
-                    message.from = 210;
-                    break;
-                case "Android_211":
-                case 211:
-                    message.from = 211;
-                    break;
-                case "Android_212":
-                case 212:
-                    message.from = 212;
-                    break;
-                case "Android_301":
-                case 301:
-                    message.from = 301;
-                    break;
-                case "Android_302":
-                case 302:
-                    message.from = 302;
-                    break;
-                case "Android_601":
-                case 601:
-                    message.from = 601;
-                    break;
-                case "Android_1000":
-                case 1000:
-                    message.from = 1000;
-                    break;
-                case "Android_1204":
-                case 1204:
-                    message.from = 1204;
-                    break;
-                case "Android_1205":
-                case 1205:
-                    message.from = 1205;
-                    break;
-                case "Android_1208":
-                case 1208:
-                    message.from = 1208;
-                    break;
-                case "Android_1212":
-                case 1212:
-                    message.from = 1212;
-                    break;
-                case "WebsiteAndriod":
-                case 4999:
-                    message.from = 4999;
-                    break;
-                case "WebsiteIos":
-                case 6666:
-                    message.from = 6666;
-                    break;
-                case "IosAppleStore":
-                case 6667:
-                    message.from = 6667;
-                    break;
-                case "Ipad":
-                case 6668:
-                    message.from = 6668;
-                    break;
-                case "WeChatMinProgram":
-                case 8888:
-                    message.from = 8888;
-                    break;
-                case "Test":
-                case 10000:
-                    message.from = 10000;
-                    break;
+            case "Android_000":
+            case 0:
+                message.from = 0;
+                break;
+            case "Android_001":
+            case 1:
+                message.from = 1;
+                break;
+            case "Android_201":
+            case 201:
+                message.from = 201;
+                break;
+            case "Android_204":
+            case 204:
+                message.from = 204;
+                break;
+            case "Android_205":
+            case 205:
+                message.from = 205;
+                break;
+            case "Android_206":
+            case 206:
+                message.from = 206;
+                break;
+            case "Android_208":
+            case 208:
+                message.from = 208;
+                break;
+            case "Android_209":
+            case 209:
+                message.from = 209;
+                break;
+            case "Android_210":
+            case 210:
+                message.from = 210;
+                break;
+            case "Android_211":
+            case 211:
+                message.from = 211;
+                break;
+            case "Android_212":
+            case 212:
+                message.from = 212;
+                break;
+            case "Android_301":
+            case 301:
+                message.from = 301;
+                break;
+            case "Android_302":
+            case 302:
+                message.from = 302;
+                break;
+            case "Android_601":
+            case 601:
+                message.from = 601;
+                break;
+            case "Android_1000":
+            case 1000:
+                message.from = 1000;
+                break;
+            case "Android_1204":
+            case 1204:
+                message.from = 1204;
+                break;
+            case "Android_1205":
+            case 1205:
+                message.from = 1205;
+                break;
+            case "Android_1208":
+            case 1208:
+                message.from = 1208;
+                break;
+            case "Android_1212":
+            case 1212:
+                message.from = 1212;
+                break;
+            case "WebsiteAndriod":
+            case 4999:
+                message.from = 4999;
+                break;
+            case "WebsiteIos":
+            case 6666:
+                message.from = 6666;
+                break;
+            case "IosAppleStore":
+            case 6667:
+                message.from = 6667;
+                break;
+            case "Ipad":
+            case 6668:
+                message.from = 6668;
+                break;
+            case "WeChatMinProgram":
+            case 8888:
+                message.from = 8888;
+                break;
+            case "Test":
+            case 10000:
+                message.from = 10000;
+                break;
             }
             return message;
         };
@@ -26784,7 +26806,7 @@ $root.pb = (function () {
         return ItemOrder;
     })();
 
-    pb.CmdShopOrderReply = (function () {
+    pb.CmdShopOrderReply = (function() {
 
         /**
          * Properties of a CmdShopOrderReply.
@@ -26824,7 +26846,7 @@ $root.pb = (function () {
          * @memberof pb.CmdShopOrderReply
          * @instance
          */
-        CmdShopOrderReply.prototype.orderId = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdShopOrderReply.prototype.orderId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdShopOrderReply wxXml.
@@ -26898,18 +26920,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
-                        break;
-                    case 2:
-                        message.orderId = reader.int64();
-                        break;
-                    case 3:
-                        message.wxXml = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.result = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.orderId = reader.int64();
+                    break;
+                case 3:
+                    message.wxXml = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -27035,7 +27057,7 @@ $root.pb = (function () {
         return CmdShopOrderReply;
     })();
 
-    pb.CmdShopOrderQuery = (function () {
+    pb.CmdShopOrderQuery = (function() {
 
         /**
          * Properties of a CmdShopOrderQuery.
@@ -27076,7 +27098,7 @@ $root.pb = (function () {
          * @memberof pb.CmdShopOrderQuery
          * @instance
          */
-        CmdShopOrderQuery.prototype.orderId = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdShopOrderQuery.prototype.orderId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdShopOrderQuery from.
@@ -27160,21 +27182,21 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.orderId = reader.int64();
-                        break;
-                    case 3:
-                        message.from = reader.int32();
-                        break;
-                    case 4:
-                        message.wxResult = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.orderId = reader.int64();
+                    break;
+                case 3:
+                    message.from = reader.int32();
+                    break;
+                case 4:
+                    message.wxResult = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -27215,34 +27237,34 @@ $root.pb = (function () {
                     return "orderId: integer|Long expected";
             if (message.from != null && message.hasOwnProperty("from"))
                 switch (message.from) {
-                    default:
-                        return "from: enum value expected";
-                    case 0:
-                    case 1:
-                    case 201:
-                    case 204:
-                    case 205:
-                    case 206:
-                    case 208:
-                    case 209:
-                    case 210:
-                    case 211:
-                    case 212:
-                    case 301:
-                    case 302:
-                    case 601:
-                    case 1000:
-                    case 1204:
-                    case 1205:
-                    case 1208:
-                    case 1212:
-                    case 4999:
-                    case 6666:
-                    case 6667:
-                    case 6668:
-                    case 8888:
-                    case 10000:
-                        break;
+                default:
+                    return "from: enum value expected";
+                case 0:
+                case 1:
+                case 201:
+                case 204:
+                case 205:
+                case 206:
+                case 208:
+                case 209:
+                case 210:
+                case 211:
+                case 212:
+                case 301:
+                case 302:
+                case 601:
+                case 1000:
+                case 1204:
+                case 1205:
+                case 1208:
+                case 1212:
+                case 4999:
+                case 6666:
+                case 6667:
+                case 6668:
+                case 8888:
+                case 10000:
+                    break;
                 }
             if (message.wxResult != null && message.hasOwnProperty("wxResult"))
                 if (!$util.isString(message.wxResult))
@@ -27274,106 +27296,106 @@ $root.pb = (function () {
                 else if (typeof object.orderId === "object")
                     message.orderId = new $util.LongBits(object.orderId.low >>> 0, object.orderId.high >>> 0).toNumber();
             switch (object.from) {
-                case "Android_000":
-                case 0:
-                    message.from = 0;
-                    break;
-                case "Android_001":
-                case 1:
-                    message.from = 1;
-                    break;
-                case "Android_201":
-                case 201:
-                    message.from = 201;
-                    break;
-                case "Android_204":
-                case 204:
-                    message.from = 204;
-                    break;
-                case "Android_205":
-                case 205:
-                    message.from = 205;
-                    break;
-                case "Android_206":
-                case 206:
-                    message.from = 206;
-                    break;
-                case "Android_208":
-                case 208:
-                    message.from = 208;
-                    break;
-                case "Android_209":
-                case 209:
-                    message.from = 209;
-                    break;
-                case "Android_210":
-                case 210:
-                    message.from = 210;
-                    break;
-                case "Android_211":
-                case 211:
-                    message.from = 211;
-                    break;
-                case "Android_212":
-                case 212:
-                    message.from = 212;
-                    break;
-                case "Android_301":
-                case 301:
-                    message.from = 301;
-                    break;
-                case "Android_302":
-                case 302:
-                    message.from = 302;
-                    break;
-                case "Android_601":
-                case 601:
-                    message.from = 601;
-                    break;
-                case "Android_1000":
-                case 1000:
-                    message.from = 1000;
-                    break;
-                case "Android_1204":
-                case 1204:
-                    message.from = 1204;
-                    break;
-                case "Android_1205":
-                case 1205:
-                    message.from = 1205;
-                    break;
-                case "Android_1208":
-                case 1208:
-                    message.from = 1208;
-                    break;
-                case "Android_1212":
-                case 1212:
-                    message.from = 1212;
-                    break;
-                case "WebsiteAndriod":
-                case 4999:
-                    message.from = 4999;
-                    break;
-                case "WebsiteIos":
-                case 6666:
-                    message.from = 6666;
-                    break;
-                case "IosAppleStore":
-                case 6667:
-                    message.from = 6667;
-                    break;
-                case "Ipad":
-                case 6668:
-                    message.from = 6668;
-                    break;
-                case "WeChatMinProgram":
-                case 8888:
-                    message.from = 8888;
-                    break;
-                case "Test":
-                case 10000:
-                    message.from = 10000;
-                    break;
+            case "Android_000":
+            case 0:
+                message.from = 0;
+                break;
+            case "Android_001":
+            case 1:
+                message.from = 1;
+                break;
+            case "Android_201":
+            case 201:
+                message.from = 201;
+                break;
+            case "Android_204":
+            case 204:
+                message.from = 204;
+                break;
+            case "Android_205":
+            case 205:
+                message.from = 205;
+                break;
+            case "Android_206":
+            case 206:
+                message.from = 206;
+                break;
+            case "Android_208":
+            case 208:
+                message.from = 208;
+                break;
+            case "Android_209":
+            case 209:
+                message.from = 209;
+                break;
+            case "Android_210":
+            case 210:
+                message.from = 210;
+                break;
+            case "Android_211":
+            case 211:
+                message.from = 211;
+                break;
+            case "Android_212":
+            case 212:
+                message.from = 212;
+                break;
+            case "Android_301":
+            case 301:
+                message.from = 301;
+                break;
+            case "Android_302":
+            case 302:
+                message.from = 302;
+                break;
+            case "Android_601":
+            case 601:
+                message.from = 601;
+                break;
+            case "Android_1000":
+            case 1000:
+                message.from = 1000;
+                break;
+            case "Android_1204":
+            case 1204:
+                message.from = 1204;
+                break;
+            case "Android_1205":
+            case 1205:
+                message.from = 1205;
+                break;
+            case "Android_1208":
+            case 1208:
+                message.from = 1208;
+                break;
+            case "Android_1212":
+            case 1212:
+                message.from = 1212;
+                break;
+            case "WebsiteAndriod":
+            case 4999:
+                message.from = 4999;
+                break;
+            case "WebsiteIos":
+            case 6666:
+                message.from = 6666;
+                break;
+            case "IosAppleStore":
+            case 6667:
+                message.from = 6667;
+                break;
+            case "Ipad":
+            case 6668:
+                message.from = 6668;
+                break;
+            case "WeChatMinProgram":
+            case 8888:
+                message.from = 8888;
+                break;
+            case "Test":
+            case 10000:
+                message.from = 10000;
+                break;
             }
             if (object.wxResult != null)
                 message.wxResult = String(object.wxResult);
@@ -27431,7 +27453,7 @@ $root.pb = (function () {
         return CmdShopOrderQuery;
     })();
 
-    pb.CmdMobileBind = (function () {
+    pb.CmdMobileBind = (function() {
 
         /**
          * Properties of a CmdMobileBind.
@@ -27534,15 +27556,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.mobile = reader.string();
-                        break;
-                    case 2:
-                        message.smsCode = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.mobile = reader.string();
+                    break;
+                case 2:
+                    message.smsCode = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -27641,7 +27663,7 @@ $root.pb = (function () {
         return CmdMobileBind;
     })();
 
-    pb.ActivityItem = (function () {
+    pb.ActivityItem = (function() {
 
         /**
          * Properties of an ActivityItem.
@@ -27709,7 +27731,7 @@ $root.pb = (function () {
          * @memberof pb.ActivityItem
          * @instance
          */
-        ActivityItem.prototype.from = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        ActivityItem.prototype.from = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * ActivityItem to.
@@ -27717,7 +27739,7 @@ $root.pb = (function () {
          * @memberof pb.ActivityItem
          * @instance
          */
-        ActivityItem.prototype.to = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        ActivityItem.prototype.to = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * ActivityItem itemId.
@@ -27799,30 +27821,30 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.title = reader.string();
-                        break;
-                    case 3:
-                        message.icon = reader.string();
-                        break;
-                    case 4:
-                        message.image = reader.string();
-                        break;
-                    case 5:
-                        message.from = reader.int64();
-                        break;
-                    case 6:
-                        message.to = reader.int64();
-                        break;
-                    case 7:
-                        message.itemId = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.title = reader.string();
+                    break;
+                case 3:
+                    message.icon = reader.string();
+                    break;
+                case 4:
+                    message.image = reader.string();
+                    break;
+                case 5:
+                    message.from = reader.int64();
+                    break;
+                case 6:
+                    message.to = reader.int64();
+                    break;
+                case 7:
+                    message.itemId = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -27989,7 +28011,7 @@ $root.pb = (function () {
         return ActivityItem;
     })();
 
-    pb.ActivityConf = (function () {
+    pb.ActivityConf = (function() {
 
         /**
          * Properties of an ActivityConf.
@@ -28083,14 +28105,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.ActivityItem.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.ActivityItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -28212,7 +28234,7 @@ $root.pb = (function () {
      * @property {number} Day=10 Day value
      * @property {number} Day7=11 Day7 value
      */
-    pb.KType = (function () {
+    pb.KType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "KType_NULL"] = 0;
         values[valuesById[1] = "Real"] = 1;
@@ -28236,7 +28258,7 @@ $root.pb = (function () {
      * @property {number} Up=2 Up value
      * @property {number} Down=3 Down value
      */
-    pb.KStyle = (function () {
+    pb.KStyle = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Random"] = 0;
         values[valuesById[1] = "Wave"] = 1;
@@ -28245,7 +28267,7 @@ $root.pb = (function () {
         return values;
     })();
 
-    pb.CmdQuoteQuery = (function () {
+    pb.CmdQuoteQuery = (function() {
 
         /**
          * Properties of a CmdQuoteQuery.
@@ -28296,7 +28318,7 @@ $root.pb = (function () {
          * @memberof pb.CmdQuoteQuery
          * @instance
          */
-        CmdQuoteQuery.prototype.from = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdQuoteQuery.prototype.from = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdQuoteQuery total.
@@ -28312,7 +28334,7 @@ $root.pb = (function () {
          * @memberof pb.CmdQuoteQuery
          * @instance
          */
-        CmdQuoteQuery.prototype.to = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdQuoteQuery.prototype.to = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdQuoteQuery kstyle.
@@ -28392,27 +28414,27 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.ktype = reader.int32();
-                        break;
-                    case 2:
-                        message.code = reader.uint32();
-                        break;
-                    case 3:
-                        message.from = reader.int64();
-                        break;
-                    case 4:
-                        message.total = reader.int32();
-                        break;
-                    case 5:
-                        message.to = reader.int64();
-                        break;
-                    case 6:
-                        message.kstyle = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.ktype = reader.int32();
+                    break;
+                case 2:
+                    message.code = reader.uint32();
+                    break;
+                case 3:
+                    message.from = reader.int64();
+                    break;
+                case 4:
+                    message.total = reader.int32();
+                    break;
+                case 5:
+                    message.to = reader.int64();
+                    break;
+                case 6:
+                    message.kstyle = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -28447,19 +28469,19 @@ $root.pb = (function () {
                 return "object expected";
             if (message.ktype != null && message.hasOwnProperty("ktype"))
                 switch (message.ktype) {
-                    default:
-                        return "ktype: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 10:
-                    case 11:
-                        break;
+                default:
+                    return "ktype: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 10:
+                case 11:
+                    break;
                 }
             if (message.code != null && message.hasOwnProperty("code"))
                 if (!$util.isInteger(message.code))
@@ -28475,13 +28497,13 @@ $root.pb = (function () {
                     return "to: integer|Long expected";
             if (message.kstyle != null && message.hasOwnProperty("kstyle"))
                 switch (message.kstyle) {
-                    default:
-                        return "kstyle: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                        break;
+                default:
+                    return "kstyle: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    break;
                 }
             return null;
         };
@@ -28499,46 +28521,46 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.CmdQuoteQuery();
             switch (object.ktype) {
-                case "KType_NULL":
-                case 0:
-                    message.ktype = 0;
-                    break;
-                case "Real":
-                case 1:
-                    message.ktype = 1;
-                    break;
-                case "Min":
-                case 2:
-                    message.ktype = 2;
-                    break;
-                case "MinToday":
-                case 3:
-                    message.ktype = 3;
-                    break;
-                case "Min5":
-                case 4:
-                    message.ktype = 4;
-                    break;
-                case "Min15":
-                case 5:
-                    message.ktype = 5;
-                    break;
-                case "Min30":
-                case 6:
-                    message.ktype = 6;
-                    break;
-                case "Min60":
-                case 7:
-                    message.ktype = 7;
-                    break;
-                case "Day":
-                case 10:
-                    message.ktype = 10;
-                    break;
-                case "Day7":
-                case 11:
-                    message.ktype = 11;
-                    break;
+            case "KType_NULL":
+            case 0:
+                message.ktype = 0;
+                break;
+            case "Real":
+            case 1:
+                message.ktype = 1;
+                break;
+            case "Min":
+            case 2:
+                message.ktype = 2;
+                break;
+            case "MinToday":
+            case 3:
+                message.ktype = 3;
+                break;
+            case "Min5":
+            case 4:
+                message.ktype = 4;
+                break;
+            case "Min15":
+            case 5:
+                message.ktype = 5;
+                break;
+            case "Min30":
+            case 6:
+                message.ktype = 6;
+                break;
+            case "Min60":
+            case 7:
+                message.ktype = 7;
+                break;
+            case "Day":
+            case 10:
+                message.ktype = 10;
+                break;
+            case "Day7":
+            case 11:
+                message.ktype = 11;
+                break;
             }
             if (object.code != null)
                 message.code = object.code >>> 0;
@@ -28563,22 +28585,22 @@ $root.pb = (function () {
                 else if (typeof object.to === "object")
                     message.to = new $util.LongBits(object.to.low >>> 0, object.to.high >>> 0).toNumber();
             switch (object.kstyle) {
-                case "Random":
-                case 0:
-                    message.kstyle = 0;
-                    break;
-                case "Wave":
-                case 1:
-                    message.kstyle = 1;
-                    break;
-                case "Up":
-                case 2:
-                    message.kstyle = 2;
-                    break;
-                case "Down":
-                case 3:
-                    message.kstyle = 3;
-                    break;
+            case "Random":
+            case 0:
+                message.kstyle = 0;
+                break;
+            case "Wave":
+            case 1:
+                message.kstyle = 1;
+                break;
+            case "Up":
+            case 2:
+                message.kstyle = 2;
+                break;
+            case "Down":
+            case 3:
+                message.kstyle = 3;
+                break;
             }
             return message;
         };
@@ -28647,7 +28669,7 @@ $root.pb = (function () {
         return CmdQuoteQuery;
     })();
 
-    pb.QuoteItem = (function () {
+    pb.QuoteItem = (function() {
 
         /**
          * Properties of a QuoteItem.
@@ -28711,7 +28733,7 @@ $root.pb = (function () {
          * @memberof pb.QuoteItem
          * @instance
          */
-        QuoteItem.prototype.timestamp = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        QuoteItem.prototype.timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * QuoteItem price.
@@ -28727,7 +28749,7 @@ $root.pb = (function () {
          * @memberof pb.QuoteItem
          * @instance
          */
-        QuoteItem.prototype.volume = $util.Long ? $util.Long.fromBits(0, 0, true) : 0;
+        QuoteItem.prototype.volume = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         /**
          * QuoteItem amount.
@@ -28743,7 +28765,7 @@ $root.pb = (function () {
          * @memberof pb.QuoteItem
          * @instance
          */
-        QuoteItem.prototype.count = $util.Long ? $util.Long.fromBits(0, 0, true) : 0;
+        QuoteItem.prototype.count = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         /**
          * QuoteItem open.
@@ -28913,82 +28935,82 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.code = reader.uint32();
-                        break;
-                    case 2:
-                        message.ktype = reader.int32();
-                        break;
-                    case 3:
-                        message.timestamp = reader.int64();
-                        break;
-                    case 4:
-                        message.price = reader.double();
-                        break;
-                    case 5:
-                        message.volume = reader.uint64();
-                        break;
-                    case 6:
-                        message.amount = reader.double();
-                        break;
-                    case 7:
-                        message.count = reader.uint64();
-                        break;
-                    case 8:
-                        message.open = reader.double();
-                        break;
-                    case 9:
-                        message.close = reader.double();
-                        break;
-                    case 10:
-                        message.high = reader.double();
-                        break;
-                    case 11:
-                        message.low = reader.double();
-                        break;
-                    case 12:
-                        if (!(message.ask5Price && message.ask5Price.length))
-                            message.ask5Price = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.ask5Price.push(reader.double());
-                        } else
+                case 1:
+                    message.code = reader.uint32();
+                    break;
+                case 2:
+                    message.ktype = reader.int32();
+                    break;
+                case 3:
+                    message.timestamp = reader.int64();
+                    break;
+                case 4:
+                    message.price = reader.double();
+                    break;
+                case 5:
+                    message.volume = reader.uint64();
+                    break;
+                case 6:
+                    message.amount = reader.double();
+                    break;
+                case 7:
+                    message.count = reader.uint64();
+                    break;
+                case 8:
+                    message.open = reader.double();
+                    break;
+                case 9:
+                    message.close = reader.double();
+                    break;
+                case 10:
+                    message.high = reader.double();
+                    break;
+                case 11:
+                    message.low = reader.double();
+                    break;
+                case 12:
+                    if (!(message.ask5Price && message.ask5Price.length))
+                        message.ask5Price = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.ask5Price.push(reader.double());
-                        break;
-                    case 13:
-                        if (!(message.ask5Volume && message.ask5Volume.length))
-                            message.ask5Volume = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.ask5Volume.push(reader.uint64());
-                        } else
+                    } else
+                        message.ask5Price.push(reader.double());
+                    break;
+                case 13:
+                    if (!(message.ask5Volume && message.ask5Volume.length))
+                        message.ask5Volume = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.ask5Volume.push(reader.uint64());
-                        break;
-                    case 14:
-                        if (!(message.bid5Price && message.bid5Price.length))
-                            message.bid5Price = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.bid5Price.push(reader.double());
-                        } else
+                    } else
+                        message.ask5Volume.push(reader.uint64());
+                    break;
+                case 14:
+                    if (!(message.bid5Price && message.bid5Price.length))
+                        message.bid5Price = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.bid5Price.push(reader.double());
-                        break;
-                    case 15:
-                        if (!(message.bid5Volume && message.bid5Volume.length))
-                            message.bid5Volume = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.bid5Volume.push(reader.uint64());
-                        } else
+                    } else
+                        message.bid5Price.push(reader.double());
+                    break;
+                case 15:
+                    if (!(message.bid5Volume && message.bid5Volume.length))
+                        message.bid5Volume = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.bid5Volume.push(reader.uint64());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    } else
+                        message.bid5Volume.push(reader.uint64());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -29026,19 +29048,19 @@ $root.pb = (function () {
                     return "code: integer expected";
             if (message.ktype != null && message.hasOwnProperty("ktype"))
                 switch (message.ktype) {
-                    default:
-                        return "ktype: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 10:
-                    case 11:
-                        break;
+                default:
+                    return "ktype: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 10:
+                case 11:
+                    break;
                 }
             if (message.timestamp != null && message.hasOwnProperty("timestamp"))
                 if (!$util.isInteger(message.timestamp) && !(message.timestamp && $util.isInteger(message.timestamp.low) && $util.isInteger(message.timestamp.high)))
@@ -29113,46 +29135,46 @@ $root.pb = (function () {
             if (object.code != null)
                 message.code = object.code >>> 0;
             switch (object.ktype) {
-                case "KType_NULL":
-                case 0:
-                    message.ktype = 0;
-                    break;
-                case "Real":
-                case 1:
-                    message.ktype = 1;
-                    break;
-                case "Min":
-                case 2:
-                    message.ktype = 2;
-                    break;
-                case "MinToday":
-                case 3:
-                    message.ktype = 3;
-                    break;
-                case "Min5":
-                case 4:
-                    message.ktype = 4;
-                    break;
-                case "Min15":
-                case 5:
-                    message.ktype = 5;
-                    break;
-                case "Min30":
-                case 6:
-                    message.ktype = 6;
-                    break;
-                case "Min60":
-                case 7:
-                    message.ktype = 7;
-                    break;
-                case "Day":
-                case 10:
-                    message.ktype = 10;
-                    break;
-                case "Day7":
-                case 11:
-                    message.ktype = 11;
-                    break;
+            case "KType_NULL":
+            case 0:
+                message.ktype = 0;
+                break;
+            case "Real":
+            case 1:
+                message.ktype = 1;
+                break;
+            case "Min":
+            case 2:
+                message.ktype = 2;
+                break;
+            case "MinToday":
+            case 3:
+                message.ktype = 3;
+                break;
+            case "Min5":
+            case 4:
+                message.ktype = 4;
+                break;
+            case "Min15":
+            case 5:
+                message.ktype = 5;
+                break;
+            case "Min30":
+            case 6:
+                message.ktype = 6;
+                break;
+            case "Min60":
+            case 7:
+                message.ktype = 7;
+                break;
+            case "Day":
+            case 10:
+                message.ktype = 10;
+                break;
+            case "Day7":
+            case 11:
+                message.ktype = 11;
+                break;
             }
             if (object.timestamp != null)
                 if ($util.Long)
@@ -29356,7 +29378,7 @@ $root.pb = (function () {
         return QuoteItem;
     })();
 
-    pb.Quotes = (function () {
+    pb.Quotes = (function() {
 
         /**
          * Properties of a Quotes.
@@ -29450,14 +29472,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.QuoteItem.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.QuoteItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -29564,7 +29586,7 @@ $root.pb = (function () {
         return Quotes;
     })();
 
-    pb.QuoteSubscribeItem = (function () {
+    pb.QuoteSubscribeItem = (function() {
 
         /**
          * Properties of a QuoteSubscribeItem.
@@ -29667,15 +29689,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.code = reader.string();
-                        break;
-                    case 2:
-                        message.flag = reader.bool();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.code = reader.string();
+                    break;
+                case 2:
+                    message.flag = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -29774,7 +29796,7 @@ $root.pb = (function () {
         return QuoteSubscribeItem;
     })();
 
-    pb.CmdQuoteSubscribe = (function () {
+    pb.CmdQuoteSubscribe = (function() {
 
         /**
          * Properties of a CmdQuoteSubscribe.
@@ -29868,14 +29890,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.QuoteSubscribeItem.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.QuoteSubscribeItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -29982,7 +30004,7 @@ $root.pb = (function () {
         return CmdQuoteSubscribe;
     })();
 
-    pb.CmdTradingDay = (function () {
+    pb.CmdTradingDay = (function() {
 
         /**
          * Properties of a CmdTradingDay.
@@ -30085,15 +30107,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.date = reader.int32();
-                        break;
-                    case 2:
-                        message.n = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.date = reader.int32();
+                    break;
+                case 2:
+                    message.n = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -30192,7 +30214,7 @@ $root.pb = (function () {
         return CmdTradingDay;
     })();
 
-    pb.CmdTradingDayReply = (function () {
+    pb.CmdTradingDayReply = (function() {
 
         /**
          * Properties of a CmdTradingDayReply.
@@ -30300,22 +30322,22 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.isTradingDay = reader.bool();
-                        break;
-                    case 2:
-                        if (!(message.days && message.days.length))
-                            message.days = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.days.push(reader.int32());
-                        } else
+                case 1:
+                    message.isTradingDay = reader.bool();
+                    break;
+                case 2:
+                    if (!(message.days && message.days.length))
+                        message.days = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.days.push(reader.int32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    } else
+                        message.days.push(reader.int32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -30426,7 +30448,7 @@ $root.pb = (function () {
         return CmdTradingDayReply;
     })();
 
-    pb.CmdQuoteQueryFuture = (function () {
+    pb.CmdQuoteQueryFuture = (function() {
 
         /**
          * Properties of a CmdQuoteQueryFuture.
@@ -30476,7 +30498,7 @@ $root.pb = (function () {
          * @memberof pb.CmdQuoteQueryFuture
          * @instance
          */
-        CmdQuoteQueryFuture.prototype.from = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdQuoteQueryFuture.prototype.from = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdQuoteQueryFuture total.
@@ -30492,7 +30514,7 @@ $root.pb = (function () {
          * @memberof pb.CmdQuoteQueryFuture
          * @instance
          */
-        CmdQuoteQueryFuture.prototype.to = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdQuoteQueryFuture.prototype.to = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new CmdQuoteQueryFuture instance using the specified properties.
@@ -30562,24 +30584,24 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.ktype = reader.int32();
-                        break;
-                    case 2:
-                        message.code = reader.uint32();
-                        break;
-                    case 3:
-                        message.from = reader.int64();
-                        break;
-                    case 4:
-                        message.total = reader.int32();
-                        break;
-                    case 5:
-                        message.to = reader.int64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.ktype = reader.int32();
+                    break;
+                case 2:
+                    message.code = reader.uint32();
+                    break;
+                case 3:
+                    message.from = reader.int64();
+                    break;
+                case 4:
+                    message.total = reader.int32();
+                    break;
+                case 5:
+                    message.to = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -30614,19 +30636,19 @@ $root.pb = (function () {
                 return "object expected";
             if (message.ktype != null && message.hasOwnProperty("ktype"))
                 switch (message.ktype) {
-                    default:
-                        return "ktype: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 10:
-                    case 11:
-                        break;
+                default:
+                    return "ktype: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 10:
+                case 11:
+                    break;
                 }
             if (message.code != null && message.hasOwnProperty("code"))
                 if (!$util.isInteger(message.code))
@@ -30656,46 +30678,46 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.CmdQuoteQueryFuture();
             switch (object.ktype) {
-                case "KType_NULL":
-                case 0:
-                    message.ktype = 0;
-                    break;
-                case "Real":
-                case 1:
-                    message.ktype = 1;
-                    break;
-                case "Min":
-                case 2:
-                    message.ktype = 2;
-                    break;
-                case "MinToday":
-                case 3:
-                    message.ktype = 3;
-                    break;
-                case "Min5":
-                case 4:
-                    message.ktype = 4;
-                    break;
-                case "Min15":
-                case 5:
-                    message.ktype = 5;
-                    break;
-                case "Min30":
-                case 6:
-                    message.ktype = 6;
-                    break;
-                case "Min60":
-                case 7:
-                    message.ktype = 7;
-                    break;
-                case "Day":
-                case 10:
-                    message.ktype = 10;
-                    break;
-                case "Day7":
-                case 11:
-                    message.ktype = 11;
-                    break;
+            case "KType_NULL":
+            case 0:
+                message.ktype = 0;
+                break;
+            case "Real":
+            case 1:
+                message.ktype = 1;
+                break;
+            case "Min":
+            case 2:
+                message.ktype = 2;
+                break;
+            case "MinToday":
+            case 3:
+                message.ktype = 3;
+                break;
+            case "Min5":
+            case 4:
+                message.ktype = 4;
+                break;
+            case "Min15":
+            case 5:
+                message.ktype = 5;
+                break;
+            case "Min30":
+            case 6:
+                message.ktype = 6;
+                break;
+            case "Min60":
+            case 7:
+                message.ktype = 7;
+                break;
+            case "Day":
+            case 10:
+                message.ktype = 10;
+                break;
+            case "Day7":
+            case 11:
+                message.ktype = 11;
+                break;
             }
             if (object.code != null)
                 message.code = object.code >>> 0;
@@ -30783,7 +30805,7 @@ $root.pb = (function () {
         return CmdQuoteQueryFuture;
     })();
 
-    pb.QuoteItemFuture = (function () {
+    pb.QuoteItemFuture = (function() {
 
         /**
          * Properties of a QuoteItemFuture.
@@ -30837,7 +30859,7 @@ $root.pb = (function () {
          * @memberof pb.QuoteItemFuture
          * @instance
          */
-        QuoteItemFuture.prototype.timestamp = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        QuoteItemFuture.prototype.timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * QuoteItemFuture open.
@@ -30877,7 +30899,7 @@ $root.pb = (function () {
          * @memberof pb.QuoteItemFuture
          * @instance
          */
-        QuoteItemFuture.prototype.volume = $util.Long ? $util.Long.fromBits(0, 0, true) : 0;
+        QuoteItemFuture.prototype.volume = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         /**
          * QuoteItemFuture cclHold.
@@ -30885,7 +30907,7 @@ $root.pb = (function () {
          * @memberof pb.QuoteItemFuture
          * @instance
          */
-        QuoteItemFuture.prototype.cclHold = $util.Long ? $util.Long.fromBits(0, 0, true) : 0;
+        QuoteItemFuture.prototype.cclHold = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         /**
          * Creates a new QuoteItemFuture instance using the specified properties.
@@ -30963,36 +30985,36 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.code = reader.uint32();
-                        break;
-                    case 2:
-                        message.ktype = reader.int32();
-                        break;
-                    case 3:
-                        message.timestamp = reader.int64();
-                        break;
-                    case 4:
-                        message.open = reader.double();
-                        break;
-                    case 5:
-                        message.close = reader.double();
-                        break;
-                    case 6:
-                        message.high = reader.double();
-                        break;
-                    case 7:
-                        message.low = reader.double();
-                        break;
-                    case 8:
-                        message.volume = reader.uint64();
-                        break;
-                    case 9:
-                        message.cclHold = reader.uint64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.code = reader.uint32();
+                    break;
+                case 2:
+                    message.ktype = reader.int32();
+                    break;
+                case 3:
+                    message.timestamp = reader.int64();
+                    break;
+                case 4:
+                    message.open = reader.double();
+                    break;
+                case 5:
+                    message.close = reader.double();
+                    break;
+                case 6:
+                    message.high = reader.double();
+                    break;
+                case 7:
+                    message.low = reader.double();
+                    break;
+                case 8:
+                    message.volume = reader.uint64();
+                    break;
+                case 9:
+                    message.cclHold = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -31030,19 +31052,19 @@ $root.pb = (function () {
                     return "code: integer expected";
             if (message.ktype != null && message.hasOwnProperty("ktype"))
                 switch (message.ktype) {
-                    default:
-                        return "ktype: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 10:
-                    case 11:
-                        break;
+                default:
+                    return "ktype: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 10:
+                case 11:
+                    break;
                 }
             if (message.timestamp != null && message.hasOwnProperty("timestamp"))
                 if (!$util.isInteger(message.timestamp) && !(message.timestamp && $util.isInteger(message.timestamp.low) && $util.isInteger(message.timestamp.high)))
@@ -31083,46 +31105,46 @@ $root.pb = (function () {
             if (object.code != null)
                 message.code = object.code >>> 0;
             switch (object.ktype) {
-                case "KType_NULL":
-                case 0:
-                    message.ktype = 0;
-                    break;
-                case "Real":
-                case 1:
-                    message.ktype = 1;
-                    break;
-                case "Min":
-                case 2:
-                    message.ktype = 2;
-                    break;
-                case "MinToday":
-                case 3:
-                    message.ktype = 3;
-                    break;
-                case "Min5":
-                case 4:
-                    message.ktype = 4;
-                    break;
-                case "Min15":
-                case 5:
-                    message.ktype = 5;
-                    break;
-                case "Min30":
-                case 6:
-                    message.ktype = 6;
-                    break;
-                case "Min60":
-                case 7:
-                    message.ktype = 7;
-                    break;
-                case "Day":
-                case 10:
-                    message.ktype = 10;
-                    break;
-                case "Day7":
-                case 11:
-                    message.ktype = 11;
-                    break;
+            case "KType_NULL":
+            case 0:
+                message.ktype = 0;
+                break;
+            case "Real":
+            case 1:
+                message.ktype = 1;
+                break;
+            case "Min":
+            case 2:
+                message.ktype = 2;
+                break;
+            case "MinToday":
+            case 3:
+                message.ktype = 3;
+                break;
+            case "Min5":
+            case 4:
+                message.ktype = 4;
+                break;
+            case "Min15":
+            case 5:
+                message.ktype = 5;
+                break;
+            case "Min30":
+            case 6:
+                message.ktype = 6;
+                break;
+            case "Min60":
+            case 7:
+                message.ktype = 7;
+                break;
+            case "Day":
+            case 10:
+                message.ktype = 10;
+                break;
+            case "Day7":
+            case 11:
+                message.ktype = 11;
+                break;
             }
             if (object.timestamp != null)
                 if ($util.Long)
@@ -31242,7 +31264,7 @@ $root.pb = (function () {
         return QuoteItemFuture;
     })();
 
-    pb.QuotesFuture = (function () {
+    pb.QuotesFuture = (function() {
 
         /**
          * Properties of a QuotesFuture.
@@ -31336,14 +31358,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.QuoteItemFuture.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.QuoteItemFuture.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -31450,13 +31472,14 @@ $root.pb = (function () {
         return QuotesFuture;
     })();
 
-    pb.CmdQueryAiStockList = (function () {
+    pb.CmdQueryAiStockList = (function() {
 
         /**
          * Properties of a CmdQueryAiStockList.
          * @memberof pb
          * @interface ICmdQueryAiStockList
          * @property {number|null} [rankFrom] CmdQueryAiStockList rankFrom
+         * @property {number|Long|null} [tsUpdateFrom] CmdQueryAiStockList tsUpdateFrom
          * @property {number|null} [total] CmdQueryAiStockList total
          */
 
@@ -31482,6 +31505,14 @@ $root.pb = (function () {
          * @instance
          */
         CmdQueryAiStockList.prototype.rankFrom = 0;
+
+        /**
+         * CmdQueryAiStockList tsUpdateFrom.
+         * @member {number|Long} tsUpdateFrom
+         * @memberof pb.CmdQueryAiStockList
+         * @instance
+         */
+        CmdQueryAiStockList.prototype.tsUpdateFrom = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CmdQueryAiStockList total.
@@ -31517,8 +31548,10 @@ $root.pb = (function () {
                 writer = $Writer.create();
             if (message.rankFrom != null && Object.hasOwnProperty.call(message, "rankFrom"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.rankFrom);
+            if (message.tsUpdateFrom != null && Object.hasOwnProperty.call(message, "tsUpdateFrom"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.tsUpdateFrom);
             if (message.total != null && Object.hasOwnProperty.call(message, "total"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.total);
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.total);
             return writer;
         };
 
@@ -31553,15 +31586,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.rankFrom = reader.int32();
-                        break;
-                    case 2:
-                        message.total = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.rankFrom = reader.int32();
+                    break;
+                case 2:
+                    message.tsUpdateFrom = reader.int64();
+                    break;
+                case 3:
+                    message.total = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -31597,6 +31633,9 @@ $root.pb = (function () {
             if (message.rankFrom != null && message.hasOwnProperty("rankFrom"))
                 if (!$util.isInteger(message.rankFrom))
                     return "rankFrom: integer expected";
+            if (message.tsUpdateFrom != null && message.hasOwnProperty("tsUpdateFrom"))
+                if (!$util.isInteger(message.tsUpdateFrom) && !(message.tsUpdateFrom && $util.isInteger(message.tsUpdateFrom.low) && $util.isInteger(message.tsUpdateFrom.high)))
+                    return "tsUpdateFrom: integer|Long expected";
             if (message.total != null && message.hasOwnProperty("total"))
                 if (!$util.isInteger(message.total))
                     return "total: integer expected";
@@ -31617,6 +31656,15 @@ $root.pb = (function () {
             var message = new $root.pb.CmdQueryAiStockList();
             if (object.rankFrom != null)
                 message.rankFrom = object.rankFrom | 0;
+            if (object.tsUpdateFrom != null)
+                if ($util.Long)
+                    (message.tsUpdateFrom = $util.Long.fromValue(object.tsUpdateFrom)).unsigned = false;
+                else if (typeof object.tsUpdateFrom === "string")
+                    message.tsUpdateFrom = parseInt(object.tsUpdateFrom, 10);
+                else if (typeof object.tsUpdateFrom === "number")
+                    message.tsUpdateFrom = object.tsUpdateFrom;
+                else if (typeof object.tsUpdateFrom === "object")
+                    message.tsUpdateFrom = new $util.LongBits(object.tsUpdateFrom.low >>> 0, object.tsUpdateFrom.high >>> 0).toNumber();
             if (object.total != null)
                 message.total = object.total | 0;
             return message;
@@ -31637,10 +31685,20 @@ $root.pb = (function () {
             var object = {};
             if (options.defaults) {
                 object.rankFrom = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.tsUpdateFrom = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.tsUpdateFrom = options.longs === String ? "0" : 0;
                 object.total = 0;
             }
             if (message.rankFrom != null && message.hasOwnProperty("rankFrom"))
                 object.rankFrom = message.rankFrom;
+            if (message.tsUpdateFrom != null && message.hasOwnProperty("tsUpdateFrom"))
+                if (typeof message.tsUpdateFrom === "number")
+                    object.tsUpdateFrom = options.longs === String ? String(message.tsUpdateFrom) : message.tsUpdateFrom;
+                else
+                    object.tsUpdateFrom = options.longs === String ? $util.Long.prototype.toString.call(message.tsUpdateFrom) : options.longs === Number ? new $util.LongBits(message.tsUpdateFrom.low >>> 0, message.tsUpdateFrom.high >>> 0).toNumber() : message.tsUpdateFrom;
             if (message.total != null && message.hasOwnProperty("total"))
                 object.total = message.total;
             return object;
@@ -31660,7 +31718,7 @@ $root.pb = (function () {
         return CmdQueryAiStockList;
     })();
 
-    pb.AiStockItem = (function () {
+    pb.AiStockItem = (function() {
 
         /**
          * Properties of an AiStockItem.
@@ -31722,7 +31780,7 @@ $root.pb = (function () {
          * @memberof pb.AiStockItem
          * @instance
          */
-        AiStockItem.prototype.tsUpdated = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        AiStockItem.prototype.tsUpdated = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * AiStockItem profitRanking.
@@ -31840,36 +31898,36 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.code = reader.uint32();
-                        break;
-                    case 2:
-                        message.name = reader.string();
-                        break;
-                    case 3:
-                        message.industry = reader.string();
-                        break;
-                    case 4:
-                        message.tsUpdated = reader.int64();
-                        break;
-                    case 5:
-                        message.profitRanking = reader.int32();
-                        break;
-                    case 6:
-                        message.profitRate = reader.double();
-                        break;
-                    case 7:
-                        message.lastAskPrice = reader.double();
-                        break;
-                    case 8:
-                        message.lastBidPrice = reader.double();
-                        break;
-                    case 9:
-                        message.curAskPrice = reader.double();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.code = reader.uint32();
+                    break;
+                case 2:
+                    message.name = reader.string();
+                    break;
+                case 3:
+                    message.industry = reader.string();
+                    break;
+                case 4:
+                    message.tsUpdated = reader.int64();
+                    break;
+                case 5:
+                    message.profitRanking = reader.int32();
+                    break;
+                case 6:
+                    message.profitRate = reader.double();
+                    break;
+                case 7:
+                    message.lastAskPrice = reader.double();
+                    break;
+                case 8:
+                    message.lastBidPrice = reader.double();
+                    break;
+                case 9:
+                    message.curAskPrice = reader.double();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -32038,7 +32096,7 @@ $root.pb = (function () {
         return AiStockItem;
     })();
 
-    pb.CmdQueryAiStockListReply = (function () {
+    pb.CmdQueryAiStockListReply = (function() {
 
         /**
          * Properties of a CmdQueryAiStockListReply.
@@ -32132,14 +32190,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 2:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.AiStockItem.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 2:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.AiStockItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -32246,7 +32304,7 @@ $root.pb = (function () {
         return CmdQueryAiStockListReply;
     })();
 
-    pb.CmdQueryAiSignal = (function () {
+    pb.CmdQueryAiSignal = (function() {
 
         /**
          * Properties of a CmdQueryAiSignal.
@@ -32338,12 +32396,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.code = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.code = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -32433,7 +32491,7 @@ $root.pb = (function () {
         return CmdQueryAiSignal;
     })();
 
-    pb.AiSignalItem = (function () {
+    pb.AiSignalItem = (function() {
 
         /**
          * Properties of an AiSignalItem.
@@ -32467,7 +32525,7 @@ $root.pb = (function () {
          * @memberof pb.AiSignalItem
          * @instance
          */
-        AiSignalItem.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        AiSignalItem.prototype.ts = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * AiSignalItem flag.
@@ -32569,24 +32627,24 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.ts = reader.int64();
-                        break;
-                    case 2:
-                        message.flag = reader.double();
-                        break;
-                    case 3:
-                        message.price = reader.double();
-                        break;
-                    case 4:
-                        message.ma10 = reader.double();
-                        break;
-                    case 5:
-                        message.ma30 = reader.double();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.ts = reader.int64();
+                    break;
+                case 2:
+                    message.flag = reader.double();
+                    break;
+                case 3:
+                    message.price = reader.double();
+                    break;
+                case 4:
+                    message.ma10 = reader.double();
+                    break;
+                case 5:
+                    message.ma30 = reader.double();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -32723,7 +32781,7 @@ $root.pb = (function () {
         return AiSignalItem;
     })();
 
-    pb.CmdQueryAiSignalReply = (function () {
+    pb.CmdQueryAiSignalReply = (function() {
 
         /**
          * Properties of a CmdQueryAiSignalReply.
@@ -32839,20 +32897,20 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.code = reader.uint32();
-                        break;
-                    case 2:
-                        message.industry = reader.string();
-                        break;
-                    case 3:
-                        if (!(message.signals && message.signals.length))
-                            message.signals = [];
-                        message.signals.push($root.pb.AiSignalItem.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.code = reader.uint32();
+                    break;
+                case 2:
+                    message.industry = reader.string();
+                    break;
+                case 3:
+                    if (!(message.signals && message.signals.length))
+                        message.signals = [];
+                    message.signals.push($root.pb.AiSignalItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -32977,7 +33035,7 @@ $root.pb = (function () {
         return CmdQueryAiSignalReply;
     })();
 
-    pb.QuotesService = (function () {
+    pb.QuotesService = (function() {
 
         /**
          * Constructs a new QuotesService service.
@@ -33210,7 +33268,7 @@ $root.pb = (function () {
         return QuotesService;
     })();
 
-    pb.QuotesFutureService = (function () {
+    pb.QuotesFutureService = (function() {
 
         /**
          * Constructs a new QuotesFutureService service.
@@ -33308,7 +33366,7 @@ $root.pb = (function () {
      * @property {number} WeChatMinProgram=8888 WeChatMinProgram value
      * @property {number} Test=10000 Test value
      */
-    pb.AppFrom = (function () {
+    pb.AppFrom = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Android_000"] = 0;
         values[valuesById[1] = "Android_001"] = 1;
@@ -33350,7 +33408,7 @@ $root.pb = (function () {
      * @property {number} AppTest=98 AppTest value
      * @property {number} WebTest=99 WebTest value
      */
-    pb.LoginType = (function () {
+    pb.LoginType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "LoginType_NULL"] = 0;
         values[valuesById[1] = "MobilePhoneId"] = 1;
@@ -33367,28 +33425,37 @@ $root.pb = (function () {
      * @name pb.AdPosition
      * @enum {number}
      * @property {number} AdPosition_NULL=0 AdPosition_NULL value
-     * @property {number} StartUp=1 StartUp value
-     * @property {number} Main=11 Main value
+     * @property {number} AdPosition_Startup=1 AdPosition_Startup value
+     * @property {number} AdPosition_Main=2 AdPosition_Main value
+     * @property {number} AdPosition_Exit=3 AdPosition_Exit value
+     * @property {number} AdPosition_Plugin=4 AdPosition_Plugin value
+     * @property {number} AdPosition_CgdsList=5 AdPosition_CgdsList value
+     * @property {number} AdPosition_AiStockList=6 AdPosition_AiStockList value
      */
-    pb.AdPosition = (function () {
+    pb.AdPosition = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "AdPosition_NULL"] = 0;
-        values[valuesById[1] = "StartUp"] = 1;
-        values[valuesById[11] = "Main"] = 11;
+        values[valuesById[1] = "AdPosition_Startup"] = 1;
+        values[valuesById[2] = "AdPosition_Main"] = 2;
+        values[valuesById[3] = "AdPosition_Exit"] = 3;
+        values[valuesById[4] = "AdPosition_Plugin"] = 4;
+        values[valuesById[5] = "AdPosition_CgdsList"] = 5;
+        values[valuesById[6] = "AdPosition_AiStockList"] = 6;
         return values;
     })();
 
-    pb.AdClicked = (function () {
+    pb.AdClicked = (function() {
 
         /**
          * Properties of an AdClicked.
          * @memberof pb
          * @interface IAdClicked
-         * @property {number|null} [uid] AdClicked uid
+         * @property {number|null} [id] AdClicked id
          * @property {number|null} [pos] AdClicked pos
          * @property {string|null} [url] AdClicked url
+         * @property {string|null} [title] AdClicked title
+         * @property {number|null} [uid] AdClicked uid
          * @property {pb.AppFrom|null} [from] AdClicked from
-         * @property {string|null} [ua] AdClicked ua
          */
 
         /**
@@ -33407,12 +33474,12 @@ $root.pb = (function () {
         }
 
         /**
-         * AdClicked uid.
-         * @member {number} uid
+         * AdClicked id.
+         * @member {number} id
          * @memberof pb.AdClicked
          * @instance
          */
-        AdClicked.prototype.uid = 0;
+        AdClicked.prototype.id = 0;
 
         /**
          * AdClicked pos.
@@ -33431,20 +33498,28 @@ $root.pb = (function () {
         AdClicked.prototype.url = "";
 
         /**
+         * AdClicked title.
+         * @member {string} title
+         * @memberof pb.AdClicked
+         * @instance
+         */
+        AdClicked.prototype.title = "";
+
+        /**
+         * AdClicked uid.
+         * @member {number} uid
+         * @memberof pb.AdClicked
+         * @instance
+         */
+        AdClicked.prototype.uid = 0;
+
+        /**
          * AdClicked from.
          * @member {pb.AppFrom} from
          * @memberof pb.AdClicked
          * @instance
          */
         AdClicked.prototype.from = 0;
-
-        /**
-         * AdClicked ua.
-         * @member {string} ua
-         * @memberof pb.AdClicked
-         * @instance
-         */
-        AdClicked.prototype.ua = "";
 
         /**
          * Creates a new AdClicked instance using the specified properties.
@@ -33470,16 +33545,18 @@ $root.pb = (function () {
         AdClicked.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
             if (message.pos != null && Object.hasOwnProperty.call(message, "pos"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pos);
             if (message.url != null && Object.hasOwnProperty.call(message, "url"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.url);
+            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.title);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.uid);
             if (message.from != null && Object.hasOwnProperty.call(message, "from"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.from);
-            if (message.ua != null && Object.hasOwnProperty.call(message, "ua"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.ua);
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.from);
             return writer;
         };
 
@@ -33514,24 +33591,27 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.pos = reader.int32();
-                        break;
-                    case 3:
-                        message.url = reader.string();
-                        break;
-                    case 4:
-                        message.from = reader.int32();
-                        break;
-                    case 5:
-                        message.ua = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.pos = reader.int32();
+                    break;
+                case 3:
+                    message.url = reader.string();
+                    break;
+                case 4:
+                    message.title = reader.string();
+                    break;
+                case 5:
+                    message.uid = reader.int32();
+                    break;
+                case 6:
+                    message.from = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -33564,49 +33644,52 @@ $root.pb = (function () {
         AdClicked.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.uid != null && message.hasOwnProperty("uid"))
-                if (!$util.isInteger(message.uid))
-                    return "uid: integer expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
             if (message.pos != null && message.hasOwnProperty("pos"))
                 if (!$util.isInteger(message.pos))
                     return "pos: integer expected";
             if (message.url != null && message.hasOwnProperty("url"))
                 if (!$util.isString(message.url))
                     return "url: string expected";
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
             if (message.from != null && message.hasOwnProperty("from"))
                 switch (message.from) {
-                    default:
-                        return "from: enum value expected";
-                    case 0:
-                    case 1:
-                    case 201:
-                    case 204:
-                    case 205:
-                    case 206:
-                    case 208:
-                    case 209:
-                    case 210:
-                    case 211:
-                    case 212:
-                    case 301:
-                    case 302:
-                    case 601:
-                    case 1000:
-                    case 1204:
-                    case 1205:
-                    case 1208:
-                    case 1212:
-                    case 4999:
-                    case 6666:
-                    case 6667:
-                    case 6668:
-                    case 8888:
-                    case 10000:
-                        break;
+                default:
+                    return "from: enum value expected";
+                case 0:
+                case 1:
+                case 201:
+                case 204:
+                case 205:
+                case 206:
+                case 208:
+                case 209:
+                case 210:
+                case 211:
+                case 212:
+                case 301:
+                case 302:
+                case 601:
+                case 1000:
+                case 1204:
+                case 1205:
+                case 1208:
+                case 1212:
+                case 4999:
+                case 6666:
+                case 6667:
+                case 6668:
+                case 8888:
+                case 10000:
+                    break;
                 }
-            if (message.ua != null && message.hasOwnProperty("ua"))
-                if (!$util.isString(message.ua))
-                    return "ua: string expected";
             return null;
         };
 
@@ -33622,116 +33705,118 @@ $root.pb = (function () {
             if (object instanceof $root.pb.AdClicked)
                 return object;
             var message = new $root.pb.AdClicked();
-            if (object.uid != null)
-                message.uid = object.uid | 0;
+            if (object.id != null)
+                message.id = object.id | 0;
             if (object.pos != null)
                 message.pos = object.pos | 0;
             if (object.url != null)
                 message.url = String(object.url);
+            if (object.title != null)
+                message.title = String(object.title);
+            if (object.uid != null)
+                message.uid = object.uid | 0;
             switch (object.from) {
-                case "Android_000":
-                case 0:
-                    message.from = 0;
-                    break;
-                case "Android_001":
-                case 1:
-                    message.from = 1;
-                    break;
-                case "Android_201":
-                case 201:
-                    message.from = 201;
-                    break;
-                case "Android_204":
-                case 204:
-                    message.from = 204;
-                    break;
-                case "Android_205":
-                case 205:
-                    message.from = 205;
-                    break;
-                case "Android_206":
-                case 206:
-                    message.from = 206;
-                    break;
-                case "Android_208":
-                case 208:
-                    message.from = 208;
-                    break;
-                case "Android_209":
-                case 209:
-                    message.from = 209;
-                    break;
-                case "Android_210":
-                case 210:
-                    message.from = 210;
-                    break;
-                case "Android_211":
-                case 211:
-                    message.from = 211;
-                    break;
-                case "Android_212":
-                case 212:
-                    message.from = 212;
-                    break;
-                case "Android_301":
-                case 301:
-                    message.from = 301;
-                    break;
-                case "Android_302":
-                case 302:
-                    message.from = 302;
-                    break;
-                case "Android_601":
-                case 601:
-                    message.from = 601;
-                    break;
-                case "Android_1000":
-                case 1000:
-                    message.from = 1000;
-                    break;
-                case "Android_1204":
-                case 1204:
-                    message.from = 1204;
-                    break;
-                case "Android_1205":
-                case 1205:
-                    message.from = 1205;
-                    break;
-                case "Android_1208":
-                case 1208:
-                    message.from = 1208;
-                    break;
-                case "Android_1212":
-                case 1212:
-                    message.from = 1212;
-                    break;
-                case "WebsiteAndriod":
-                case 4999:
-                    message.from = 4999;
-                    break;
-                case "WebsiteIos":
-                case 6666:
-                    message.from = 6666;
-                    break;
-                case "IosAppleStore":
-                case 6667:
-                    message.from = 6667;
-                    break;
-                case "Ipad":
-                case 6668:
-                    message.from = 6668;
-                    break;
-                case "WeChatMinProgram":
-                case 8888:
-                    message.from = 8888;
-                    break;
-                case "Test":
-                case 10000:
-                    message.from = 10000;
-                    break;
+            case "Android_000":
+            case 0:
+                message.from = 0;
+                break;
+            case "Android_001":
+            case 1:
+                message.from = 1;
+                break;
+            case "Android_201":
+            case 201:
+                message.from = 201;
+                break;
+            case "Android_204":
+            case 204:
+                message.from = 204;
+                break;
+            case "Android_205":
+            case 205:
+                message.from = 205;
+                break;
+            case "Android_206":
+            case 206:
+                message.from = 206;
+                break;
+            case "Android_208":
+            case 208:
+                message.from = 208;
+                break;
+            case "Android_209":
+            case 209:
+                message.from = 209;
+                break;
+            case "Android_210":
+            case 210:
+                message.from = 210;
+                break;
+            case "Android_211":
+            case 211:
+                message.from = 211;
+                break;
+            case "Android_212":
+            case 212:
+                message.from = 212;
+                break;
+            case "Android_301":
+            case 301:
+                message.from = 301;
+                break;
+            case "Android_302":
+            case 302:
+                message.from = 302;
+                break;
+            case "Android_601":
+            case 601:
+                message.from = 601;
+                break;
+            case "Android_1000":
+            case 1000:
+                message.from = 1000;
+                break;
+            case "Android_1204":
+            case 1204:
+                message.from = 1204;
+                break;
+            case "Android_1205":
+            case 1205:
+                message.from = 1205;
+                break;
+            case "Android_1208":
+            case 1208:
+                message.from = 1208;
+                break;
+            case "Android_1212":
+            case 1212:
+                message.from = 1212;
+                break;
+            case "WebsiteAndriod":
+            case 4999:
+                message.from = 4999;
+                break;
+            case "WebsiteIos":
+            case 6666:
+                message.from = 6666;
+                break;
+            case "IosAppleStore":
+            case 6667:
+                message.from = 6667;
+                break;
+            case "Ipad":
+            case 6668:
+                message.from = 6668;
+                break;
+            case "WeChatMinProgram":
+            case 8888:
+                message.from = 8888;
+                break;
+            case "Test":
+            case 10000:
+                message.from = 10000;
+                break;
             }
-            if (object.ua != null)
-                message.ua = String(object.ua);
             return message;
         };
 
@@ -33749,22 +33834,25 @@ $root.pb = (function () {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.uid = 0;
+                object.id = 0;
                 object.pos = 0;
                 object.url = "";
+                object.title = "";
+                object.uid = 0;
                 object.from = options.enums === String ? "Android_000" : 0;
-                object.ua = "";
             }
-            if (message.uid != null && message.hasOwnProperty("uid"))
-                object.uid = message.uid;
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
             if (message.pos != null && message.hasOwnProperty("pos"))
                 object.pos = message.pos;
             if (message.url != null && message.hasOwnProperty("url"))
                 object.url = message.url;
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
             if (message.from != null && message.hasOwnProperty("from"))
                 object.from = options.enums === String ? $root.pb.AppFrom[message.from] : message.from;
-            if (message.ua != null && message.hasOwnProperty("ua"))
-                object.ua = message.ua;
             return object;
         };
 
@@ -33782,7 +33870,7 @@ $root.pb = (function () {
         return AdClicked;
     })();
 
-    pb.CmdRegistry = (function () {
+    pb.CmdRegistry = (function() {
 
         /**
          * Properties of a CmdRegistry.
@@ -33918,24 +34006,24 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.account = reader.string();
-                        break;
-                    case 2:
-                        message.type = reader.int32();
-                        break;
-                    case 3:
-                        message.pwd = reader.string();
-                        break;
-                    case 4:
-                        message.smsCode = reader.string();
-                        break;
-                    case 5:
-                        message.from = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.account = reader.string();
+                    break;
+                case 2:
+                    message.type = reader.int32();
+                    break;
+                case 3:
+                    message.pwd = reader.string();
+                    break;
+                case 4:
+                    message.smsCode = reader.string();
+                    break;
+                case 5:
+                    message.from = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -33973,16 +34061,16 @@ $root.pb = (function () {
                     return "account: string expected";
             if (message.type != null && message.hasOwnProperty("type"))
                 switch (message.type) {
-                    default:
-                        return "type: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 98:
-                    case 99:
-                        break;
+                default:
+                    return "type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 98:
+                case 99:
+                    break;
                 }
             if (message.pwd != null && message.hasOwnProperty("pwd"))
                 if (!$util.isString(message.pwd))
@@ -33992,34 +34080,34 @@ $root.pb = (function () {
                     return "smsCode: string expected";
             if (message.from != null && message.hasOwnProperty("from"))
                 switch (message.from) {
-                    default:
-                        return "from: enum value expected";
-                    case 0:
-                    case 1:
-                    case 201:
-                    case 204:
-                    case 205:
-                    case 206:
-                    case 208:
-                    case 209:
-                    case 210:
-                    case 211:
-                    case 212:
-                    case 301:
-                    case 302:
-                    case 601:
-                    case 1000:
-                    case 1204:
-                    case 1205:
-                    case 1208:
-                    case 1212:
-                    case 4999:
-                    case 6666:
-                    case 6667:
-                    case 6668:
-                    case 8888:
-                    case 10000:
-                        break;
+                default:
+                    return "from: enum value expected";
+                case 0:
+                case 1:
+                case 201:
+                case 204:
+                case 205:
+                case 206:
+                case 208:
+                case 209:
+                case 210:
+                case 211:
+                case 212:
+                case 301:
+                case 302:
+                case 601:
+                case 1000:
+                case 1204:
+                case 1205:
+                case 1208:
+                case 1212:
+                case 4999:
+                case 6666:
+                case 6667:
+                case 6668:
+                case 8888:
+                case 10000:
+                    break;
                 }
             return null;
         };
@@ -34039,140 +34127,140 @@ $root.pb = (function () {
             if (object.account != null)
                 message.account = String(object.account);
             switch (object.type) {
-                case "LoginType_NULL":
-                case 0:
-                    message.type = 0;
-                    break;
-                case "MobilePhoneId":
-                case 1:
-                    message.type = 1;
-                    break;
-                case "WeChat":
-                case 2:
-                    message.type = 2;
-                    break;
-                case "QQ":
-                case 3:
-                    message.type = 3;
-                    break;
-                case "WeChat_MiniProg":
-                case 4:
-                    message.type = 4;
-                    break;
-                case "AppTest":
-                case 98:
-                    message.type = 98;
-                    break;
-                case "WebTest":
-                case 99:
-                    message.type = 99;
-                    break;
+            case "LoginType_NULL":
+            case 0:
+                message.type = 0;
+                break;
+            case "MobilePhoneId":
+            case 1:
+                message.type = 1;
+                break;
+            case "WeChat":
+            case 2:
+                message.type = 2;
+                break;
+            case "QQ":
+            case 3:
+                message.type = 3;
+                break;
+            case "WeChat_MiniProg":
+            case 4:
+                message.type = 4;
+                break;
+            case "AppTest":
+            case 98:
+                message.type = 98;
+                break;
+            case "WebTest":
+            case 99:
+                message.type = 99;
+                break;
             }
             if (object.pwd != null)
                 message.pwd = String(object.pwd);
             if (object.smsCode != null)
                 message.smsCode = String(object.smsCode);
             switch (object.from) {
-                case "Android_000":
-                case 0:
-                    message.from = 0;
-                    break;
-                case "Android_001":
-                case 1:
-                    message.from = 1;
-                    break;
-                case "Android_201":
-                case 201:
-                    message.from = 201;
-                    break;
-                case "Android_204":
-                case 204:
-                    message.from = 204;
-                    break;
-                case "Android_205":
-                case 205:
-                    message.from = 205;
-                    break;
-                case "Android_206":
-                case 206:
-                    message.from = 206;
-                    break;
-                case "Android_208":
-                case 208:
-                    message.from = 208;
-                    break;
-                case "Android_209":
-                case 209:
-                    message.from = 209;
-                    break;
-                case "Android_210":
-                case 210:
-                    message.from = 210;
-                    break;
-                case "Android_211":
-                case 211:
-                    message.from = 211;
-                    break;
-                case "Android_212":
-                case 212:
-                    message.from = 212;
-                    break;
-                case "Android_301":
-                case 301:
-                    message.from = 301;
-                    break;
-                case "Android_302":
-                case 302:
-                    message.from = 302;
-                    break;
-                case "Android_601":
-                case 601:
-                    message.from = 601;
-                    break;
-                case "Android_1000":
-                case 1000:
-                    message.from = 1000;
-                    break;
-                case "Android_1204":
-                case 1204:
-                    message.from = 1204;
-                    break;
-                case "Android_1205":
-                case 1205:
-                    message.from = 1205;
-                    break;
-                case "Android_1208":
-                case 1208:
-                    message.from = 1208;
-                    break;
-                case "Android_1212":
-                case 1212:
-                    message.from = 1212;
-                    break;
-                case "WebsiteAndriod":
-                case 4999:
-                    message.from = 4999;
-                    break;
-                case "WebsiteIos":
-                case 6666:
-                    message.from = 6666;
-                    break;
-                case "IosAppleStore":
-                case 6667:
-                    message.from = 6667;
-                    break;
-                case "Ipad":
-                case 6668:
-                    message.from = 6668;
-                    break;
-                case "WeChatMinProgram":
-                case 8888:
-                    message.from = 8888;
-                    break;
-                case "Test":
-                case 10000:
-                    message.from = 10000;
-                    break;
+            case "Android_000":
+            case 0:
+                message.from = 0;
+                break;
+            case "Android_001":
+            case 1:
+                message.from = 1;
+                break;
+            case "Android_201":
+            case 201:
+                message.from = 201;
+                break;
+            case "Android_204":
+            case 204:
+                message.from = 204;
+                break;
+            case "Android_205":
+            case 205:
+                message.from = 205;
+                break;
+            case "Android_206":
+            case 206:
+                message.from = 206;
+                break;
+            case "Android_208":
+            case 208:
+                message.from = 208;
+                break;
+            case "Android_209":
+            case 209:
+                message.from = 209;
+                break;
+            case "Android_210":
+            case 210:
+                message.from = 210;
+                break;
+            case "Android_211":
+            case 211:
+                message.from = 211;
+                break;
+            case "Android_212":
+            case 212:
+                message.from = 212;
+                break;
+            case "Android_301":
+            case 301:
+                message.from = 301;
+                break;
+            case "Android_302":
+            case 302:
+                message.from = 302;
+                break;
+            case "Android_601":
+            case 601:
+                message.from = 601;
+                break;
+            case "Android_1000":
+            case 1000:
+                message.from = 1000;
+                break;
+            case "Android_1204":
+            case 1204:
+                message.from = 1204;
+                break;
+            case "Android_1205":
+            case 1205:
+                message.from = 1205;
+                break;
+            case "Android_1208":
+            case 1208:
+                message.from = 1208;
+                break;
+            case "Android_1212":
+            case 1212:
+                message.from = 1212;
+                break;
+            case "WebsiteAndriod":
+            case 4999:
+                message.from = 4999;
+                break;
+            case "WebsiteIos":
+            case 6666:
+                message.from = 6666;
+                break;
+            case "IosAppleStore":
+            case 6667:
+                message.from = 6667;
+                break;
+            case "Ipad":
+            case 6668:
+                message.from = 6668;
+                break;
+            case "WeChatMinProgram":
+            case 8888:
+                message.from = 8888;
+                break;
+            case "Test":
+            case 10000:
+                message.from = 10000;
+                break;
             }
             return message;
         };
@@ -34224,7 +34312,7 @@ $root.pb = (function () {
         return CmdRegistry;
     })();
 
-    pb.CmdLogin = (function () {
+    pb.CmdLogin = (function() {
 
         /**
          * Properties of a CmdLogin.
@@ -34349,21 +34437,21 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.account = reader.string();
-                        break;
-                    case 2:
-                        message.type = reader.int32();
-                        break;
-                    case 3:
-                        message.pwd = reader.string();
-                        break;
-                    case 4:
-                        message.from = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.account = reader.string();
+                    break;
+                case 2:
+                    message.type = reader.int32();
+                    break;
+                case 3:
+                    message.pwd = reader.string();
+                    break;
+                case 4:
+                    message.from = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -34401,50 +34489,50 @@ $root.pb = (function () {
                     return "account: string expected";
             if (message.type != null && message.hasOwnProperty("type"))
                 switch (message.type) {
-                    default:
-                        return "type: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 98:
-                    case 99:
-                        break;
+                default:
+                    return "type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 98:
+                case 99:
+                    break;
                 }
             if (message.pwd != null && message.hasOwnProperty("pwd"))
                 if (!$util.isString(message.pwd))
                     return "pwd: string expected";
             if (message.from != null && message.hasOwnProperty("from"))
                 switch (message.from) {
-                    default:
-                        return "from: enum value expected";
-                    case 0:
-                    case 1:
-                    case 201:
-                    case 204:
-                    case 205:
-                    case 206:
-                    case 208:
-                    case 209:
-                    case 210:
-                    case 211:
-                    case 212:
-                    case 301:
-                    case 302:
-                    case 601:
-                    case 1000:
-                    case 1204:
-                    case 1205:
-                    case 1208:
-                    case 1212:
-                    case 4999:
-                    case 6666:
-                    case 6667:
-                    case 6668:
-                    case 8888:
-                    case 10000:
-                        break;
+                default:
+                    return "from: enum value expected";
+                case 0:
+                case 1:
+                case 201:
+                case 204:
+                case 205:
+                case 206:
+                case 208:
+                case 209:
+                case 210:
+                case 211:
+                case 212:
+                case 301:
+                case 302:
+                case 601:
+                case 1000:
+                case 1204:
+                case 1205:
+                case 1208:
+                case 1212:
+                case 4999:
+                case 6666:
+                case 6667:
+                case 6668:
+                case 8888:
+                case 10000:
+                    break;
                 }
             return null;
         };
@@ -34464,138 +34552,138 @@ $root.pb = (function () {
             if (object.account != null)
                 message.account = String(object.account);
             switch (object.type) {
-                case "LoginType_NULL":
-                case 0:
-                    message.type = 0;
-                    break;
-                case "MobilePhoneId":
-                case 1:
-                    message.type = 1;
-                    break;
-                case "WeChat":
-                case 2:
-                    message.type = 2;
-                    break;
-                case "QQ":
-                case 3:
-                    message.type = 3;
-                    break;
-                case "WeChat_MiniProg":
-                case 4:
-                    message.type = 4;
-                    break;
-                case "AppTest":
-                case 98:
-                    message.type = 98;
-                    break;
-                case "WebTest":
-                case 99:
-                    message.type = 99;
-                    break;
+            case "LoginType_NULL":
+            case 0:
+                message.type = 0;
+                break;
+            case "MobilePhoneId":
+            case 1:
+                message.type = 1;
+                break;
+            case "WeChat":
+            case 2:
+                message.type = 2;
+                break;
+            case "QQ":
+            case 3:
+                message.type = 3;
+                break;
+            case "WeChat_MiniProg":
+            case 4:
+                message.type = 4;
+                break;
+            case "AppTest":
+            case 98:
+                message.type = 98;
+                break;
+            case "WebTest":
+            case 99:
+                message.type = 99;
+                break;
             }
             if (object.pwd != null)
                 message.pwd = String(object.pwd);
             switch (object.from) {
-                case "Android_000":
-                case 0:
-                    message.from = 0;
-                    break;
-                case "Android_001":
-                case 1:
-                    message.from = 1;
-                    break;
-                case "Android_201":
-                case 201:
-                    message.from = 201;
-                    break;
-                case "Android_204":
-                case 204:
-                    message.from = 204;
-                    break;
-                case "Android_205":
-                case 205:
-                    message.from = 205;
-                    break;
-                case "Android_206":
-                case 206:
-                    message.from = 206;
-                    break;
-                case "Android_208":
-                case 208:
-                    message.from = 208;
-                    break;
-                case "Android_209":
-                case 209:
-                    message.from = 209;
-                    break;
-                case "Android_210":
-                case 210:
-                    message.from = 210;
-                    break;
-                case "Android_211":
-                case 211:
-                    message.from = 211;
-                    break;
-                case "Android_212":
-                case 212:
-                    message.from = 212;
-                    break;
-                case "Android_301":
-                case 301:
-                    message.from = 301;
-                    break;
-                case "Android_302":
-                case 302:
-                    message.from = 302;
-                    break;
-                case "Android_601":
-                case 601:
-                    message.from = 601;
-                    break;
-                case "Android_1000":
-                case 1000:
-                    message.from = 1000;
-                    break;
-                case "Android_1204":
-                case 1204:
-                    message.from = 1204;
-                    break;
-                case "Android_1205":
-                case 1205:
-                    message.from = 1205;
-                    break;
-                case "Android_1208":
-                case 1208:
-                    message.from = 1208;
-                    break;
-                case "Android_1212":
-                case 1212:
-                    message.from = 1212;
-                    break;
-                case "WebsiteAndriod":
-                case 4999:
-                    message.from = 4999;
-                    break;
-                case "WebsiteIos":
-                case 6666:
-                    message.from = 6666;
-                    break;
-                case "IosAppleStore":
-                case 6667:
-                    message.from = 6667;
-                    break;
-                case "Ipad":
-                case 6668:
-                    message.from = 6668;
-                    break;
-                case "WeChatMinProgram":
-                case 8888:
-                    message.from = 8888;
-                    break;
-                case "Test":
-                case 10000:
-                    message.from = 10000;
-                    break;
+            case "Android_000":
+            case 0:
+                message.from = 0;
+                break;
+            case "Android_001":
+            case 1:
+                message.from = 1;
+                break;
+            case "Android_201":
+            case 201:
+                message.from = 201;
+                break;
+            case "Android_204":
+            case 204:
+                message.from = 204;
+                break;
+            case "Android_205":
+            case 205:
+                message.from = 205;
+                break;
+            case "Android_206":
+            case 206:
+                message.from = 206;
+                break;
+            case "Android_208":
+            case 208:
+                message.from = 208;
+                break;
+            case "Android_209":
+            case 209:
+                message.from = 209;
+                break;
+            case "Android_210":
+            case 210:
+                message.from = 210;
+                break;
+            case "Android_211":
+            case 211:
+                message.from = 211;
+                break;
+            case "Android_212":
+            case 212:
+                message.from = 212;
+                break;
+            case "Android_301":
+            case 301:
+                message.from = 301;
+                break;
+            case "Android_302":
+            case 302:
+                message.from = 302;
+                break;
+            case "Android_601":
+            case 601:
+                message.from = 601;
+                break;
+            case "Android_1000":
+            case 1000:
+                message.from = 1000;
+                break;
+            case "Android_1204":
+            case 1204:
+                message.from = 1204;
+                break;
+            case "Android_1205":
+            case 1205:
+                message.from = 1205;
+                break;
+            case "Android_1208":
+            case 1208:
+                message.from = 1208;
+                break;
+            case "Android_1212":
+            case 1212:
+                message.from = 1212;
+                break;
+            case "WebsiteAndriod":
+            case 4999:
+                message.from = 4999;
+                break;
+            case "WebsiteIos":
+            case 6666:
+                message.from = 6666;
+                break;
+            case "IosAppleStore":
+            case 6667:
+                message.from = 6667;
+                break;
+            case "Ipad":
+            case 6668:
+                message.from = 6668;
+                break;
+            case "WeChatMinProgram":
+            case 8888:
+                message.from = 8888;
+                break;
+            case "Test":
+            case 10000:
+                message.from = 10000;
+                break;
             }
             return message;
         };
@@ -34644,7 +34732,7 @@ $root.pb = (function () {
         return CmdLogin;
     })();
 
-    pb.CmdLoginReply = (function () {
+    pb.CmdLoginReply = (function() {
 
         /**
          * Properties of a CmdLoginReply.
@@ -34769,21 +34857,21 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.err = $root.pb.ErrorInfo.decode(reader, reader.uint32());
-                        break;
-                    case 2:
-                        message.uid = reader.int32();
-                        break;
-                    case 3:
-                        message.token = reader.string();
-                        break;
-                    case 4:
-                        message.gameAddr = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.err = $root.pb.ErrorInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.uid = reader.int32();
+                    break;
+                case 3:
+                    message.token = reader.string();
+                    break;
+                case 4:
+                    message.gameAddr = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -34903,7 +34991,7 @@ $root.pb = (function () {
         return CmdLoginReply;
     })();
 
-    pb.CmdGetCaptcha = (function () {
+    pb.CmdGetCaptcha = (function() {
 
         /**
          * Properties of a CmdGetCaptcha.
@@ -34995,12 +35083,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.account = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.account = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -35090,7 +35178,7 @@ $root.pb = (function () {
         return CmdGetCaptcha;
     })();
 
-    pb.CmdGetCaptchaReply = (function () {
+    pb.CmdGetCaptchaReply = (function() {
 
         /**
          * Properties of a CmdGetCaptchaReply.
@@ -35182,12 +35270,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.captcha = reader.bytes();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.captcha = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -35286,7 +35374,7 @@ $root.pb = (function () {
         return CmdGetCaptchaReply;
     })();
 
-    pb.CmdGetSms = (function () {
+    pb.CmdGetSms = (function() {
 
         /**
          * Properties of a CmdGetSms.
@@ -35389,15 +35477,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.account = reader.string();
-                        break;
-                    case 2:
-                        message.captcha = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.account = reader.string();
+                    break;
+                case 2:
+                    message.captcha = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -35496,7 +35584,7 @@ $root.pb = (function () {
         return CmdGetSms;
     })();
 
-    pb.CmdResetPwd = (function () {
+    pb.CmdResetPwd = (function() {
 
         /**
          * Properties of a CmdResetPwd.
@@ -35610,18 +35698,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.account = reader.string();
-                        break;
-                    case 2:
-                        message.pwd = reader.string();
-                        break;
-                    case 3:
-                        message.captcha = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.account = reader.string();
+                    break;
+                case 2:
+                    message.pwd = reader.string();
+                    break;
+                case 3:
+                    message.captcha = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -35728,7 +35816,7 @@ $root.pb = (function () {
         return CmdResetPwd;
     })();
 
-    pb.CmdPay = (function () {
+    pb.CmdPay = (function() {
 
         /**
          * Properties of a CmdPay.
@@ -35767,7 +35855,7 @@ $root.pb = (function () {
          * @memberof pb.CmdPay
          * @instance
          */
-        CmdPay.prototype.orderId = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+        CmdPay.prototype.orderId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new CmdPay instance using the specified properties.
@@ -35831,15 +35919,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.orderId = reader.int64();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.orderId = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -35952,7 +36040,7 @@ $root.pb = (function () {
         return CmdPay;
     })();
 
-    pb.LoginService = (function () {
+    pb.LoginService = (function() {
 
         /**
          * Constructs a new LoginService service.
@@ -36160,7 +36248,7 @@ $root.pb = (function () {
      * @property {number} Set=1 Set value
      * @property {number} Del=2 Del value
      */
-    pb.SyncAct = (function () {
+    pb.SyncAct = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "SyncAct_NULL"] = 0;
         values[valuesById[1] = "Set"] = 1;
@@ -36175,14 +36263,14 @@ $root.pb = (function () {
      * @property {number} ServerCmdId_NULL=0 ServerCmdId_NULL value
      * @property {number} ReloadGameConf=1 ReloadGameConf value
      */
-    pb.ServerCmdId = (function () {
+    pb.ServerCmdId = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "ServerCmdId_NULL"] = 0;
         values[valuesById[1] = "ReloadGameConf"] = 1;
         return values;
     })();
 
-    pb.CmdNewUidReply = (function () {
+    pb.CmdNewUidReply = (function() {
 
         /**
          * Properties of a CmdNewUidReply.
@@ -36274,12 +36362,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -36369,7 +36457,7 @@ $root.pb = (function () {
         return CmdNewUidReply;
     })();
 
-    pb.CmdNewRoomIdReply = (function () {
+    pb.CmdNewRoomIdReply = (function() {
 
         /**
          * Properties of a CmdNewRoomIdReply.
@@ -36461,12 +36549,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -36556,7 +36644,7 @@ $root.pb = (function () {
         return CmdNewRoomIdReply;
     })();
 
-    pb.CmdGateAddr = (function () {
+    pb.CmdGateAddr = (function() {
 
         /**
          * Properties of a CmdGateAddr.
@@ -36648,12 +36736,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -36743,7 +36831,7 @@ $root.pb = (function () {
         return CmdGateAddr;
     })();
 
-    pb.CmdGateAddrReply = (function () {
+    pb.CmdGateAddrReply = (function() {
 
         /**
          * Properties of a CmdGateAddrReply.
@@ -36846,15 +36934,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.addr = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.addr = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -36953,7 +37041,7 @@ $root.pb = (function () {
         return CmdGateAddrReply;
     })();
 
-    pb.CmdUserLogin = (function () {
+    pb.CmdUserLogin = (function() {
 
         /**
          * Properties of a CmdUserLogin.
@@ -37078,21 +37166,21 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.type = reader.int32();
-                        break;
-                    case 3:
-                        message.from = reader.int32();
-                        break;
-                    case 4:
-                        message.ip = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.type = reader.int32();
+                    break;
+                case 3:
+                    message.from = reader.int32();
+                    break;
+                case 4:
+                    message.ip = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -37130,47 +37218,47 @@ $root.pb = (function () {
                     return "uid: integer expected";
             if (message.type != null && message.hasOwnProperty("type"))
                 switch (message.type) {
-                    default:
-                        return "type: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 98:
-                    case 99:
-                        break;
+                default:
+                    return "type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 98:
+                case 99:
+                    break;
                 }
             if (message.from != null && message.hasOwnProperty("from"))
                 switch (message.from) {
-                    default:
-                        return "from: enum value expected";
-                    case 0:
-                    case 1:
-                    case 201:
-                    case 204:
-                    case 205:
-                    case 206:
-                    case 208:
-                    case 209:
-                    case 210:
-                    case 211:
-                    case 212:
-                    case 301:
-                    case 302:
-                    case 601:
-                    case 1000:
-                    case 1204:
-                    case 1205:
-                    case 1208:
-                    case 1212:
-                    case 4999:
-                    case 6666:
-                    case 6667:
-                    case 6668:
-                    case 8888:
-                    case 10000:
-                        break;
+                default:
+                    return "from: enum value expected";
+                case 0:
+                case 1:
+                case 201:
+                case 204:
+                case 205:
+                case 206:
+                case 208:
+                case 209:
+                case 210:
+                case 211:
+                case 212:
+                case 301:
+                case 302:
+                case 601:
+                case 1000:
+                case 1204:
+                case 1205:
+                case 1208:
+                case 1212:
+                case 4999:
+                case 6666:
+                case 6667:
+                case 6668:
+                case 8888:
+                case 10000:
+                    break;
                 }
             if (message.ip != null && message.hasOwnProperty("ip"))
                 if (!$util.isString(message.ip))
@@ -37193,136 +37281,136 @@ $root.pb = (function () {
             if (object.uid != null)
                 message.uid = object.uid | 0;
             switch (object.type) {
-                case "LoginType_NULL":
-                case 0:
-                    message.type = 0;
-                    break;
-                case "MobilePhoneId":
-                case 1:
-                    message.type = 1;
-                    break;
-                case "WeChat":
-                case 2:
-                    message.type = 2;
-                    break;
-                case "QQ":
-                case 3:
-                    message.type = 3;
-                    break;
-                case "WeChat_MiniProg":
-                case 4:
-                    message.type = 4;
-                    break;
-                case "AppTest":
-                case 98:
-                    message.type = 98;
-                    break;
-                case "WebTest":
-                case 99:
-                    message.type = 99;
-                    break;
+            case "LoginType_NULL":
+            case 0:
+                message.type = 0;
+                break;
+            case "MobilePhoneId":
+            case 1:
+                message.type = 1;
+                break;
+            case "WeChat":
+            case 2:
+                message.type = 2;
+                break;
+            case "QQ":
+            case 3:
+                message.type = 3;
+                break;
+            case "WeChat_MiniProg":
+            case 4:
+                message.type = 4;
+                break;
+            case "AppTest":
+            case 98:
+                message.type = 98;
+                break;
+            case "WebTest":
+            case 99:
+                message.type = 99;
+                break;
             }
             switch (object.from) {
-                case "Android_000":
-                case 0:
-                    message.from = 0;
-                    break;
-                case "Android_001":
-                case 1:
-                    message.from = 1;
-                    break;
-                case "Android_201":
-                case 201:
-                    message.from = 201;
-                    break;
-                case "Android_204":
-                case 204:
-                    message.from = 204;
-                    break;
-                case "Android_205":
-                case 205:
-                    message.from = 205;
-                    break;
-                case "Android_206":
-                case 206:
-                    message.from = 206;
-                    break;
-                case "Android_208":
-                case 208:
-                    message.from = 208;
-                    break;
-                case "Android_209":
-                case 209:
-                    message.from = 209;
-                    break;
-                case "Android_210":
-                case 210:
-                    message.from = 210;
-                    break;
-                case "Android_211":
-                case 211:
-                    message.from = 211;
-                    break;
-                case "Android_212":
-                case 212:
-                    message.from = 212;
-                    break;
-                case "Android_301":
-                case 301:
-                    message.from = 301;
-                    break;
-                case "Android_302":
-                case 302:
-                    message.from = 302;
-                    break;
-                case "Android_601":
-                case 601:
-                    message.from = 601;
-                    break;
-                case "Android_1000":
-                case 1000:
-                    message.from = 1000;
-                    break;
-                case "Android_1204":
-                case 1204:
-                    message.from = 1204;
-                    break;
-                case "Android_1205":
-                case 1205:
-                    message.from = 1205;
-                    break;
-                case "Android_1208":
-                case 1208:
-                    message.from = 1208;
-                    break;
-                case "Android_1212":
-                case 1212:
-                    message.from = 1212;
-                    break;
-                case "WebsiteAndriod":
-                case 4999:
-                    message.from = 4999;
-                    break;
-                case "WebsiteIos":
-                case 6666:
-                    message.from = 6666;
-                    break;
-                case "IosAppleStore":
-                case 6667:
-                    message.from = 6667;
-                    break;
-                case "Ipad":
-                case 6668:
-                    message.from = 6668;
-                    break;
-                case "WeChatMinProgram":
-                case 8888:
-                    message.from = 8888;
-                    break;
-                case "Test":
-                case 10000:
-                    message.from = 10000;
-                    break;
+            case "Android_000":
+            case 0:
+                message.from = 0;
+                break;
+            case "Android_001":
+            case 1:
+                message.from = 1;
+                break;
+            case "Android_201":
+            case 201:
+                message.from = 201;
+                break;
+            case "Android_204":
+            case 204:
+                message.from = 204;
+                break;
+            case "Android_205":
+            case 205:
+                message.from = 205;
+                break;
+            case "Android_206":
+            case 206:
+                message.from = 206;
+                break;
+            case "Android_208":
+            case 208:
+                message.from = 208;
+                break;
+            case "Android_209":
+            case 209:
+                message.from = 209;
+                break;
+            case "Android_210":
+            case 210:
+                message.from = 210;
+                break;
+            case "Android_211":
+            case 211:
+                message.from = 211;
+                break;
+            case "Android_212":
+            case 212:
+                message.from = 212;
+                break;
+            case "Android_301":
+            case 301:
+                message.from = 301;
+                break;
+            case "Android_302":
+            case 302:
+                message.from = 302;
+                break;
+            case "Android_601":
+            case 601:
+                message.from = 601;
+                break;
+            case "Android_1000":
+            case 1000:
+                message.from = 1000;
+                break;
+            case "Android_1204":
+            case 1204:
+                message.from = 1204;
+                break;
+            case "Android_1205":
+            case 1205:
+                message.from = 1205;
+                break;
+            case "Android_1208":
+            case 1208:
+                message.from = 1208;
+                break;
+            case "Android_1212":
+            case 1212:
+                message.from = 1212;
+                break;
+            case "WebsiteAndriod":
+            case 4999:
+                message.from = 4999;
+                break;
+            case "WebsiteIos":
+            case 6666:
+                message.from = 6666;
+                break;
+            case "IosAppleStore":
+            case 6667:
+                message.from = 6667;
+                break;
+            case "Ipad":
+            case 6668:
+                message.from = 6668;
+                break;
+            case "WeChatMinProgram":
+            case 8888:
+                message.from = 8888;
+                break;
+            case "Test":
+            case 10000:
+                message.from = 10000;
+                break;
             }
             if (object.ip != null)
                 message.ip = String(object.ip);
@@ -37373,7 +37461,7 @@ $root.pb = (function () {
         return CmdUserLogin;
     })();
 
-    pb.CmdUserLoginReply = (function () {
+    pb.CmdUserLoginReply = (function() {
 
         /**
          * Properties of a CmdUserLoginReply.
@@ -37487,18 +37575,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.token = reader.string();
-                        break;
-                    case 3:
-                        message.addr = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.token = reader.string();
+                    break;
+                case 3:
+                    message.addr = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -37605,7 +37693,7 @@ $root.pb = (function () {
         return CmdUserLoginReply;
     })();
 
-    pb.CmdUserGameLogin = (function () {
+    pb.CmdUserGameLogin = (function() {
 
         /**
          * Properties of a CmdUserGameLogin.
@@ -37708,15 +37796,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.nodeId = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.nodeId = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -37815,7 +37903,7 @@ $root.pb = (function () {
         return CmdUserGameLogin;
     })();
 
-    pb.CmdUserGameLogout = (function () {
+    pb.CmdUserGameLogout = (function() {
 
         /**
          * Properties of a CmdUserGameLogout.
@@ -37907,12 +37995,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -38002,7 +38090,7 @@ $root.pb = (function () {
         return CmdUserGameLogout;
     })();
 
-    pb.CmdUserGameData = (function () {
+    pb.CmdUserGameData = (function() {
 
         /**
          * Properties of a CmdUserGameData.
@@ -38094,12 +38182,12 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -38189,7 +38277,7 @@ $root.pb = (function () {
         return CmdUserGameData;
     })();
 
-    pb.CmdUserGameDataReply = (function () {
+    pb.CmdUserGameDataReply = (function() {
 
         /**
          * Properties of a CmdUserGameDataReply.
@@ -38303,18 +38391,18 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.gd = $root.pb.GameData.decode(reader, reader.uint32());
-                        break;
-                    case 2:
-                        message.roomId = reader.int32();
-                        break;
-                    case 3:
-                        message.roomAtNode = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.gd = $root.pb.GameData.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.roomId = reader.int32();
+                    break;
+                case 3:
+                    message.roomAtNode = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -38426,7 +38514,7 @@ $root.pb = (function () {
         return CmdUserGameDataReply;
     })();
 
-    pb.CmdGameProperties = (function () {
+    pb.CmdGameProperties = (function() {
 
         /**
          * Properties of a CmdGameProperties.
@@ -38553,23 +38641,23 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        if (!(message.properties && message.properties.length))
-                            message.properties = [];
-                        message.properties.push($root.pb.GamePropertyItem.decode(reader, reader.uint32()));
-                        break;
-                    case 3:
-                        message.memo = reader.string();
-                        break;
-                    case 4:
-                        message.backbag = reader.bool();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    if (!(message.properties && message.properties.length))
+                        message.properties = [];
+                    message.properties.push($root.pb.GamePropertyItem.decode(reader, reader.uint32()));
+                    break;
+                case 3:
+                    message.memo = reader.string();
+                    break;
+                case 4:
+                    message.backbag = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -38702,7 +38790,7 @@ $root.pb = (function () {
         return CmdGameProperties;
     })();
 
-    pb.ServerCmd = (function () {
+    pb.ServerCmd = (function() {
 
         /**
          * Properties of a ServerCmd.
@@ -38805,15 +38893,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.parameters = reader.bytes();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.parameters = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -38848,11 +38936,11 @@ $root.pb = (function () {
                 return "object expected";
             if (message.id != null && message.hasOwnProperty("id"))
                 switch (message.id) {
-                    default:
-                        return "id: enum value expected";
-                    case 0:
-                    case 1:
-                        break;
+                default:
+                    return "id: enum value expected";
+                case 0:
+                case 1:
+                    break;
                 }
             if (message.parameters != null && message.hasOwnProperty("parameters"))
                 if (!(message.parameters && typeof message.parameters.length === "number" || $util.isString(message.parameters)))
@@ -38873,14 +38961,14 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.ServerCmd();
             switch (object.id) {
-                case "ServerCmdId_NULL":
-                case 0:
-                    message.id = 0;
-                    break;
-                case "ReloadGameConf":
-                case 1:
-                    message.id = 1;
-                    break;
+            case "ServerCmdId_NULL":
+            case 0:
+                message.id = 0;
+                break;
+            case "ReloadGameConf":
+            case 1:
+                message.id = 1;
+                break;
             }
             if (object.parameters != null)
                 if (typeof object.parameters === "string")
@@ -38934,7 +39022,7 @@ $root.pb = (function () {
         return ServerCmd;
     })();
 
-    pb.Message = (function () {
+    pb.Message = (function() {
 
         /**
          * Properties of a Message.
@@ -39037,15 +39125,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.buf = reader.bytes();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.buf = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -39080,168 +39168,168 @@ $root.pb = (function () {
                 return "object expected";
             if (message.id != null && message.hasOwnProperty("id"))
                 switch (message.id) {
-                    default:
-                        return "id: enum value expected";
-                    case 0:
-                    case 101:
-                    case 103:
-                    case 1000:
-                    case 1002:
-                    case 1004:
-                    case 1006:
-                    case 1008:
-                    case 1010:
-                    case 1012:
-                    case 1014:
-                    case 1016:
-                    case 1018:
-                    case 1020:
-                    case 1022:
-                    case 1024:
-                    case 1026:
-                    case 1028:
-                    case 1030:
-                    case 1200:
-                    case 1300:
-                    case 2001:
-                    case 2002:
-                    case 2003:
-                    case 2004:
-                    case 2005:
-                    case 2006:
-                    case 2007:
-                    case 2008:
-                    case 2009:
-                    case 2010:
-                    case 2011:
-                    case 2012:
-                    case 2013:
-                    case 2014:
-                    case 2015:
-                    case 2016:
-                    case 3001:
-                    case 3002:
-                    case 3003:
-                    case 3004:
-                    case 3005:
-                    case 3006:
-                    case 3007:
-                    case 3008:
-                    case 3009:
-                    case 3010:
-                    case 3011:
-                    case 3012:
-                    case 3013:
-                    case 3014:
-                    case 3015:
-                    case 3016:
-                    case 3017:
-                    case 3018:
-                    case 3019:
-                    case 3020:
-                    case 3021:
-                    case 3022:
-                    case 3023:
-                    case 3024:
-                    case 3025:
-                    case 3026:
-                    case 3027:
-                    case 3028:
-                    case 3029:
-                    case 3030:
-                    case 3031:
-                    case 3032:
-                    case 3033:
-                    case 3034:
-                    case 3035:
-                    case 3036:
-                    case 3037:
-                    case 3038:
-                    case 3999:
-                    case 4000:
-                    case 4001:
-                    case 4002:
-                    case 4003:
-                    case 4004:
-                    case 4005:
-                    case 4006:
-                    case 4007:
-                    case 4008:
-                    case 4009:
-                    case 4010:
-                    case 4011:
-                    case 4012:
-                    case 4013:
-                    case 4014:
-                    case 4015:
-                    case 4016:
-                    case 4017:
-                    case 4018:
-                    case 4019:
-                    case 4020:
-                    case 4021:
-                    case 4022:
-                    case 4023:
-                    case 4024:
-                    case 4025:
-                    case 4026:
-                    case 4027:
-                    case 4028:
-                    case 4029:
-                    case 4030:
-                    case 4031:
-                    case 4032:
-                    case 4033:
-                    case 4034:
-                    case 4035:
-                    case 4036:
-                    case 4037:
-                    case 4038:
-                    case 4039:
-                    case 4040:
-                    case 4041:
-                    case 4042:
-                    case 4043:
-                    case 4044:
-                    case 4045:
-                    case 4046:
-                    case 5003:
-                    case 5004:
-                    case 5005:
-                    case 5006:
-                    case 5007:
-                    case 5008:
-                    case 5009:
-                    case 5010:
-                    case 5200:
-                    case 5202:
-                    case 5204:
-                    case 5206:
-                    case 5208:
-                    case 5210:
-                    case 5212:
-                    case 5214:
-                    case 5216:
-                    case 5218:
-                    case 10001:
-                    case 10003:
-                    case 10005:
-                    case 10007:
-                    case 10009:
-                    case 10011:
-                    case 100013:
-                    case 100015:
-                    case 10017:
-                    case 10019:
-                    case 10021:
-                    case 10023:
-                    case 10025:
-                    case 10027:
-                    case 10028:
-                    case 10030:
-                    case 10032:
-                    case 10034:
-                        break;
+                default:
+                    return "id: enum value expected";
+                case 0:
+                case 101:
+                case 103:
+                case 1000:
+                case 1002:
+                case 1004:
+                case 1006:
+                case 1008:
+                case 1010:
+                case 1012:
+                case 1014:
+                case 1016:
+                case 1018:
+                case 1020:
+                case 1022:
+                case 1024:
+                case 1026:
+                case 1028:
+                case 1030:
+                case 1200:
+                case 1300:
+                case 2001:
+                case 2002:
+                case 2003:
+                case 2004:
+                case 2005:
+                case 2006:
+                case 2007:
+                case 2008:
+                case 2009:
+                case 2010:
+                case 2011:
+                case 2012:
+                case 2013:
+                case 2014:
+                case 2015:
+                case 2016:
+                case 3001:
+                case 3002:
+                case 3003:
+                case 3004:
+                case 3005:
+                case 3006:
+                case 3007:
+                case 3008:
+                case 3009:
+                case 3010:
+                case 3011:
+                case 3012:
+                case 3013:
+                case 3014:
+                case 3015:
+                case 3016:
+                case 3017:
+                case 3018:
+                case 3019:
+                case 3020:
+                case 3021:
+                case 3022:
+                case 3023:
+                case 3024:
+                case 3025:
+                case 3026:
+                case 3027:
+                case 3028:
+                case 3029:
+                case 3030:
+                case 3031:
+                case 3032:
+                case 3033:
+                case 3034:
+                case 3035:
+                case 3036:
+                case 3037:
+                case 3038:
+                case 3999:
+                case 4000:
+                case 4001:
+                case 4002:
+                case 4003:
+                case 4004:
+                case 4005:
+                case 4006:
+                case 4007:
+                case 4008:
+                case 4009:
+                case 4010:
+                case 4011:
+                case 4012:
+                case 4013:
+                case 4014:
+                case 4015:
+                case 4016:
+                case 4017:
+                case 4018:
+                case 4019:
+                case 4020:
+                case 4021:
+                case 4022:
+                case 4023:
+                case 4024:
+                case 4025:
+                case 4026:
+                case 4027:
+                case 4028:
+                case 4029:
+                case 4030:
+                case 4031:
+                case 4032:
+                case 4033:
+                case 4034:
+                case 4035:
+                case 4036:
+                case 4037:
+                case 4038:
+                case 4039:
+                case 4040:
+                case 4041:
+                case 4042:
+                case 4043:
+                case 4044:
+                case 4045:
+                case 4046:
+                case 5003:
+                case 5004:
+                case 5005:
+                case 5006:
+                case 5007:
+                case 5008:
+                case 5009:
+                case 5010:
+                case 5200:
+                case 5202:
+                case 5204:
+                case 5206:
+                case 5208:
+                case 5210:
+                case 5212:
+                case 5214:
+                case 5216:
+                case 5218:
+                case 10001:
+                case 10003:
+                case 10005:
+                case 10007:
+                case 10009:
+                case 10011:
+                case 100013:
+                case 100015:
+                case 10017:
+                case 10019:
+                case 10021:
+                case 10023:
+                case 10025:
+                case 10027:
+                case 10028:
+                case 10030:
+                case 10032:
+                case 10034:
+                    break;
                 }
             if (message.buf != null && message.hasOwnProperty("buf"))
                 if (!(message.buf && typeof message.buf.length === "number" || $util.isString(message.buf)))
@@ -39262,642 +39350,642 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.Message();
             switch (object.id) {
-                case "MessageId_NULL":
-                case 0:
-                    message.id = 0;
-                    break;
-                case "Cmd_Save_Stock2Db":
-                case 101:
-                    message.id = 101;
-                    break;
-                case "Cmd_Make_StockList":
-                case 103:
-                    message.id = 103;
-                    break;
-                case "Sync_S2C_QuoteItem":
-                case 1000:
-                    message.id = 1000;
-                    break;
-                case "Sync_S2C_GameProperty":
-                case 1002:
-                    message.id = 1002;
-                    break;
-                case "Sync_S2C_GameCounter":
-                case 1004:
-                    message.id = 1004;
-                    break;
-                case "Sync_S2C_GameSmxl":
-                case 1006:
-                    message.id = 1006;
-                    break;
-                case "Sync_S2C_GameCg":
-                case 1008:
-                    message.id = 1008;
-                    break;
-                case "Sync_S2C_GameMncg":
-                case 1010:
-                    message.id = 1010;
-                    break;
-                case "Sync_S2C_GameCgds":
-                case 1012:
-                    message.id = 1012;
-                    break;
-                case "Sync_S2C_Broadcast":
-                case 1014:
-                    message.id = 1014;
-                    break;
-                case "Sync_S2C_GameCg_GD":
-                case 1016:
-                    message.id = 1016;
-                    break;
-                case "Sync_S2C_GameTimes":
-                case 1018:
-                    message.id = 1018;
-                    break;
-                case "Sync_S2C_StockOrderResult":
-                case 1020:
-                    message.id = 1020;
-                    break;
-                case "Sync_S2C_MutipleLogin":
-                case 1022:
-                    message.id = 1022;
-                    break;
-                case "Sync_S2C_TaskProgress":
-                case 1024:
-                    message.id = 1024;
-                    break;
-                case "Sync_S2C_ActivityConf":
-                case 1026:
-                    message.id = 1026;
-                    break;
-                case "Sync_S2C_SystemMsg":
-                case 1028:
-                    message.id = 1028;
-                    break;
-                case "Sync_S2C_FirstLoginToday":
-                case 1030:
-                    message.id = 1030;
-                    break;
-                case "Sync_C2S_GameHeart":
-                case 1200:
-                    message.id = 1200;
-                    break;
-                case "Sync_Email":
-                case 1300:
-                    message.id = 1300;
-                    break;
-                case "Req_QuoteSubscribe":
-                case 2001:
-                    message.id = 2001;
-                    break;
-                case "Rep_QuoteSubscribe":
-                case 2002:
-                    message.id = 2002;
-                    break;
-                case "Req_QuoteQuery":
-                case 2003:
-                    message.id = 2003;
-                    break;
-                case "Rep_QuoteQuery":
-                case 2004:
-                    message.id = 2004;
-                    break;
-                case "Req_QuoteQueryFuture":
-                case 2005:
-                    message.id = 2005;
-                    break;
-                case "Rep_QuoteQueryFuture":
-                case 2006:
-                    message.id = 2006;
-                    break;
-                case "Req_IsTradingDay":
-                case 2007:
-                    message.id = 2007;
-                    break;
-                case "Rep_IsTradingDay":
-                case 2008:
-                    message.id = 2008;
-                    break;
-                case "Req_QueryTradingDay":
-                case 2009:
-                    message.id = 2009;
-                    break;
-                case "Rep_QueryTradingDay":
-                case 2010:
-                    message.id = 2010;
-                    break;
-                case "Req_QueryAiStockList":
-                case 2011:
-                    message.id = 2011;
-                    break;
-                case "Rep_QueryAiStockList":
-                case 2012:
-                    message.id = 2012;
-                    break;
-                case "Req_QueryAiSignal":
-                case 2013:
-                    message.id = 2013;
-                    break;
-                case "Rep_QueryAiSignal":
-                case 2014:
-                    message.id = 2014;
-                    break;
-                case "Req_EditAiStockList":
-                case 2015:
-                    message.id = 2015;
-                    break;
-                case "Rep_EditAiStockList":
-                case 2016:
-                    message.id = 2016;
-                    break;
-                case "Req_Hall_UploadIcon":
-                case 3001:
-                    message.id = 3001;
-                    break;
-                case "Rep_Hall_UploadIcon":
-                case 3002:
-                    message.id = 3002;
-                    break;
-                case "Req_Hall_DownloadIcon":
-                case 3003:
-                    message.id = 3003;
-                    break;
-                case "Rep_Hall_DownploadIcon":
-                case 3004:
-                    message.id = 3004;
-                    break;
-                case "Req_Hall_EditIcon":
-                case 3005:
-                    message.id = 3005;
-                    break;
-                case "Rep_Hall_EditIcon":
-                case 3006:
-                    message.id = 3006;
-                    break;
-                case "Req_Hall_EditNick":
-                case 3007:
-                    message.id = 3007;
-                    break;
-                case "Rep_Hall_EditNick":
-                case 3008:
-                    message.id = 3008;
-                    break;
-                case "Req_Hall_EditLocation":
-                case 3009:
-                    message.id = 3009;
-                    break;
-                case "Rep_Hall_EditLocation":
-                case 3010:
-                    message.id = 3010;
-                    break;
-                case "Req_Hall_EditGender":
-                case 3011:
-                    message.id = 3011;
-                    break;
-                case "Rep_Hall_EditGender":
-                case 3012:
-                    message.id = 3012;
-                    break;
-                case "Req_Hall_BackBag":
-                case 3013:
-                    message.id = 3013;
-                    break;
-                case "Rep_Hall_BackBag":
-                case 3014:
-                    message.id = 3014;
-                    break;
-                case "Req_Hall_GetItem":
-                case 3015:
-                    message.id = 3015;
-                    break;
-                case "Rep_Hall_GetItem":
-                case 3016:
-                    message.id = 3016;
-                    break;
-                case "Req_Hall_EditFavorList":
-                case 3017:
-                    message.id = 3017;
-                    break;
-                case "Rep_Hall_EditFavorList":
-                case 3018:
-                    message.id = 3018;
-                    break;
-                case "Req_Hall_QueryPlayer":
-                case 3019:
-                    message.id = 3019;
-                    break;
-                case "Rep_Hall_QueryPlayer":
-                case 3020:
-                    message.id = 3020;
-                    break;
-                case "Req_Hall_SaveStudyProgress":
-                case 3021:
-                    message.id = 3021;
-                    break;
-                case "Rep_Hall_SaveStudyProgress":
-                case 3022:
-                    message.id = 3022;
-                    break;
-                case "Req_Hall_GetDailyTaskAward":
-                case 3023:
-                    message.id = 3023;
-                    break;
-                case "Rep_Hall_GetDailyTaskAward":
-                case 3024:
-                    message.id = 3024;
-                    break;
-                case "Req_Hall_UnlockGame":
-                case 3025:
-                    message.id = 3025;
-                    break;
-                case "Rep_Hall_UnlockGame":
-                case 3026:
-                    message.id = 3026;
-                    break;
-                case "Req_Hall_GetWeeklyAward":
-                case 3027:
-                    message.id = 3027;
-                    break;
-                case "Rep_Hall_GetWeeklyAward":
-                case 3028:
-                    message.id = 3028;
-                    break;
-                case "Req_Hall_QueryEventLog":
-                case 3029:
-                    message.id = 3029;
-                    break;
-                case "Rep_Hall_QueryEventLog":
-                case 3030:
-                    message.id = 3030;
-                    break;
-                case "Req_Hall_ShopOrder":
-                case 3031:
-                    message.id = 3031;
-                    break;
-                case "Rep_Hall_ShopOrder":
-                case 3032:
-                    message.id = 3032;
-                    break;
-                case "Req_Hall_ShopOrderQuery":
-                case 3033:
-                    message.id = 3033;
-                    break;
-                case "Rep_Hall_ShopOrderQuery":
-                case 3034:
-                    message.id = 3034;
-                    break;
-                case "Req_Hall_MobileBind":
-                case 3035:
-                    message.id = 3035;
-                    break;
-                case "Rep_Hall_MobileBind":
-                case 3036:
-                    message.id = 3036;
-                    break;
-                case "Req_Hall_ResetGameCounter":
-                case 3037:
-                    message.id = 3037;
-                    break;
-                case "Rep_Hall_ResetGameCounter":
-                case 3038:
-                    message.id = 3038;
-                    break;
-                case "Req_Hall_Logout":
-                case 3999:
-                    message.id = 3999;
-                    break;
-                case "Rep_Hall_Logout":
-                case 4000:
-                    message.id = 4000;
-                    break;
-                case "Req_Game_Login":
-                case 4001:
-                    message.id = 4001;
-                    break;
-                case "Rep_Game_Login":
-                case 4002:
-                    message.id = 4002;
-                    break;
-                case "Req_Game_Start":
-                case 4003:
-                    message.id = 4003;
-                    break;
-                case "Rep_Game_Start":
-                case 4004:
-                    message.id = 4004;
-                    break;
-                case "Req_Game_Over":
-                case 4005:
-                    message.id = 4005;
-                    break;
-                case "Rep_Game_Over":
-                case 4006:
-                    message.id = 4006;
-                    break;
-                case "Req_Game_QueryGameResult":
-                case 4007:
-                    message.id = 4007;
-                    break;
-                case "Rep_Game_QueryGameResult":
-                case 4008:
-                    message.id = 4008;
-                    break;
-                case "Req_Game_GetGameOperation":
-                case 4009:
-                    message.id = 4009;
-                    break;
-                case "Rep_Game_GetGameOperation":
-                case 4010:
-                    message.id = 4010;
-                    break;
-                case "Req_Game_SmxlReport":
-                case 4011:
-                    message.id = 4011;
-                    break;
-                case "Rep_Game_SmxlReport":
-                case 4012:
-                    message.id = 4012;
-                    break;
-                case "Req_Game_SmxlReset":
-                case 4013:
-                    message.id = 4013;
-                    break;
-                case "Rep_Game_SmxlReset":
-                case 4014:
-                    message.id = 4014;
-                    break;
-                case "Req_Game_CgsGetConf":
-                case 4015:
-                    message.id = 4015;
-                    break;
-                case "Rep_Game_CgsGetConf":
-                case 4016:
-                    message.id = 4016;
-                    break;
-                case "Req_Game_CgsGetClearanceRank":
-                case 4017:
-                    message.id = 4017;
-                    break;
-                case "Rep_Game_CgsGetClearanceRank":
-                case 4018:
-                    message.id = 4018;
-                    break;
-                case "Req_Game_CgsGetStageRank":
-                case 4019:
-                    message.id = 4019;
-                    break;
-                case "Rep_Game_CgsGetStageRank":
-                case 4020:
-                    message.id = 4020;
-                    break;
-                case "Req_Game_CgsGetSeasonRank":
-                case 4021:
-                    message.id = 4021;
-                    break;
-                case "Rep_Game_CgsGetSeasonRank":
-                case 4022:
-                    message.id = 4022;
-                    break;
-                case "Req_Game_CgsGetStageAward":
-                case 4023:
-                    message.id = 4023;
-                    break;
-                case "Rep_Game_CgsGetStageAward":
-                case 4024:
-                    message.id = 4024;
-                    break;
-                case "Req_Game_OrderQuery":
-                case 4025:
-                    message.id = 4025;
-                    break;
-                case "Rep_Game_OrderQuery":
-                case 4026:
-                    message.id = 4026;
-                    break;
-                case "Req_Game_Order":
-                case 4027:
-                    message.id = 4027;
-                    break;
-                case "Rep_Game_Order":
-                case 4028:
-                    message.id = 4028;
-                    break;
-                case "Req_Game_OrderCancel":
-                case 4029:
-                    message.id = 4029;
-                    break;
-                case "Rep_Game_OrderCancel":
-                case 4030:
-                    message.id = 4030;
-                    break;
-                case "Req_Game_MncgExchange":
-                case 4031:
-                    message.id = 4031;
-                    break;
-                case "Rep_Game_MncgExchange":
-                case 4032:
-                    message.id = 4032;
-                    break;
-                case "Req_Game_MncgEditStockList":
-                case 4033:
-                    message.id = 4033;
-                    break;
-                case "Rep_Game_MncgEditStockList":
-                case 4034:
-                    message.id = 4034;
-                    break;
-                case "Req_Game_CgdsList":
-                case 4035:
-                    message.id = 4035;
-                    break;
-                case "Rep_Game_CgdsList":
-                case 4036:
-                    message.id = 4036;
-                    break;
-                case "Req_Game_CgdsReg":
-                case 4037:
-                    message.id = 4037;
-                    break;
-                case "Rep_Game_CgdsReg":
-                case 4038:
-                    message.id = 4038;
-                    break;
-                case "Req_Game_CgdsRanking":
-                case 4039:
-                    message.id = 4039;
-                    break;
-                case "Rep_Game_CgdsRanking":
-                case 4040:
-                    message.id = 4040;
-                    break;
-                case "Req_Game_ZsjcBettingList":
-                case 4041:
-                    message.id = 4041;
-                    break;
-                case "Rep_Game_ZsjcBettingList":
-                case 4042:
-                    message.id = 4042;
-                    break;
-                case "Req_Game_ZsjcBet":
-                case 4043:
-                    message.id = 4043;
-                    break;
-                case "Rep_Game_ZsjcBet":
-                case 4044:
-                    message.id = 4044;
-                    break;
-                case "Req_Game_ZsjcRanking":
-                case 4045:
-                    message.id = 4045;
-                    break;
-                case "Rep_Game_ZsjcRanking":
-                case 4046:
-                    message.id = 4046;
-                    break;
-                case "Req_Room_Create":
-                case 5003:
-                    message.id = 5003;
-                    break;
-                case "Rep_Room_Create":
-                case 5004:
-                    message.id = 5004;
-                    break;
-                case "Req_Room_Enter":
-                case 5005:
-                    message.id = 5005;
-                    break;
-                case "Rep_Room_Enter":
-                case 5006:
-                    message.id = 5006;
-                    break;
-                case "Req_Room_Leave":
-                case 5007:
-                    message.id = 5007;
-                    break;
-                case "Rep_Room_Leave":
-                case 5008:
-                    message.id = 5008;
-                    break;
-                case "Req_Room_Ready":
-                case 5009:
-                    message.id = 5009;
-                    break;
-                case "Rep_Room_Ready":
-                case 5010:
-                    message.id = 5010;
-                    break;
-                case "Sync_Room_Enter":
-                case 5200:
-                    message.id = 5200;
-                    break;
-                case "Sync_Room_Leave":
-                case 5202:
-                    message.id = 5202;
-                    break;
-                case "Sync_Room_Enter_Self":
-                case 5204:
-                    message.id = 5204;
-                    break;
-                case "Sync_Room_Leave_Self":
-                case 5206:
-                    message.id = 5206;
-                    break;
-                case "Sync_Room_LostConn":
-                case 5208:
-                    message.id = 5208;
-                    break;
-                case "Sync_Room_ReConn":
-                case 5210:
-                    message.id = 5210;
-                    break;
-                case "Sync_Room_Ready":
-                case 5212:
-                    message.id = 5212;
-                    break;
-                case "Sync_Room_GameStatus":
-                case 5214:
-                    message.id = 5214;
-                    break;
-                case "Sync_Room_GameOp":
-                case 5216:
-                    message.id = 5216;
-                    break;
-                case "Sync_Room_GameResult":
-                case 5218:
-                    message.id = 5218;
-                    break;
-                case "S2S_HeartBeat":
-                case 10001:
-                    message.id = 10001;
-                    break;
-                case "S2S_Update_PlayerProperty":
-                case 10003:
-                    message.id = 10003;
-                    break;
-                case "S2S_Update_PlayerGameCounter":
-                case 10005:
-                    message.id = 10005;
-                    break;
-                case "S2S_OrderCancel":
-                case 10007:
-                    message.id = 10007;
-                    break;
-                case "S2S_Sync_Cgds":
-                case 10009:
-                    message.id = 10009;
-                    break;
-                case "S2S_Set_CgdsTitle":
-                case 10011:
-                    message.id = 10011;
-                    break;
-                case "S2S_Set_CgdsLogo":
-                case 100013:
-                    message.id = 100013;
-                    break;
-                case "S2S_Set_CgdsUrl":
-                case 100015:
-                    message.id = 100015;
-                    break;
-                case "S2S_Set_CgdsConf":
-                case 10017:
-                    message.id = 10017;
-                    break;
-                case "S2S_Set_CgdsAward":
-                case 10019:
-                    message.id = 10019;
-                    break;
-                case "S2S_Open_Cgds":
-                case 10021:
-                    message.id = 10021;
-                    break;
-                case "S2S_Close_Cgds":
-                case 10023:
-                    message.id = 10023;
-                    break;
-                case "S2S_Reload_Cgds":
-                case 10025:
-                    message.id = 10025;
-                    break;
-                case "S2S_Reload_GameConf":
-                case 10027:
-                    message.id = 10027;
-                    break;
-                case "S2S_Sync_ZsjcBetting":
-                case 10028:
-                    message.id = 10028;
-                    break;
-                case "S2S_Sync_ZsjcState":
-                case 10030:
-                    message.id = 10030;
-                    break;
-                case "S2S_Update_DailyTaskProgress":
-                case 10032:
-                    message.id = 10032;
-                    break;
-                case "S2S_Sync_Pay":
-                case 10034:
-                    message.id = 10034;
-                    break;
+            case "MessageId_NULL":
+            case 0:
+                message.id = 0;
+                break;
+            case "Cmd_Save_Stock2Db":
+            case 101:
+                message.id = 101;
+                break;
+            case "Cmd_Make_StockList":
+            case 103:
+                message.id = 103;
+                break;
+            case "Sync_S2C_QuoteItem":
+            case 1000:
+                message.id = 1000;
+                break;
+            case "Sync_S2C_GameProperty":
+            case 1002:
+                message.id = 1002;
+                break;
+            case "Sync_S2C_GameCounter":
+            case 1004:
+                message.id = 1004;
+                break;
+            case "Sync_S2C_GameSmxl":
+            case 1006:
+                message.id = 1006;
+                break;
+            case "Sync_S2C_GameCg":
+            case 1008:
+                message.id = 1008;
+                break;
+            case "Sync_S2C_GameMncg":
+            case 1010:
+                message.id = 1010;
+                break;
+            case "Sync_S2C_GameCgds":
+            case 1012:
+                message.id = 1012;
+                break;
+            case "Sync_S2C_Broadcast":
+            case 1014:
+                message.id = 1014;
+                break;
+            case "Sync_S2C_GameCg_GD":
+            case 1016:
+                message.id = 1016;
+                break;
+            case "Sync_S2C_GameTimes":
+            case 1018:
+                message.id = 1018;
+                break;
+            case "Sync_S2C_StockOrderResult":
+            case 1020:
+                message.id = 1020;
+                break;
+            case "Sync_S2C_MutipleLogin":
+            case 1022:
+                message.id = 1022;
+                break;
+            case "Sync_S2C_TaskProgress":
+            case 1024:
+                message.id = 1024;
+                break;
+            case "Sync_S2C_ActivityConf":
+            case 1026:
+                message.id = 1026;
+                break;
+            case "Sync_S2C_SystemMsg":
+            case 1028:
+                message.id = 1028;
+                break;
+            case "Sync_S2C_FirstLoginToday":
+            case 1030:
+                message.id = 1030;
+                break;
+            case "Sync_C2S_GameHeart":
+            case 1200:
+                message.id = 1200;
+                break;
+            case "Sync_Email":
+            case 1300:
+                message.id = 1300;
+                break;
+            case "Req_QuoteSubscribe":
+            case 2001:
+                message.id = 2001;
+                break;
+            case "Rep_QuoteSubscribe":
+            case 2002:
+                message.id = 2002;
+                break;
+            case "Req_QuoteQuery":
+            case 2003:
+                message.id = 2003;
+                break;
+            case "Rep_QuoteQuery":
+            case 2004:
+                message.id = 2004;
+                break;
+            case "Req_QuoteQueryFuture":
+            case 2005:
+                message.id = 2005;
+                break;
+            case "Rep_QuoteQueryFuture":
+            case 2006:
+                message.id = 2006;
+                break;
+            case "Req_IsTradingDay":
+            case 2007:
+                message.id = 2007;
+                break;
+            case "Rep_IsTradingDay":
+            case 2008:
+                message.id = 2008;
+                break;
+            case "Req_QueryTradingDay":
+            case 2009:
+                message.id = 2009;
+                break;
+            case "Rep_QueryTradingDay":
+            case 2010:
+                message.id = 2010;
+                break;
+            case "Req_QueryAiStockList":
+            case 2011:
+                message.id = 2011;
+                break;
+            case "Rep_QueryAiStockList":
+            case 2012:
+                message.id = 2012;
+                break;
+            case "Req_QueryAiSignal":
+            case 2013:
+                message.id = 2013;
+                break;
+            case "Rep_QueryAiSignal":
+            case 2014:
+                message.id = 2014;
+                break;
+            case "Req_EditAiStockList":
+            case 2015:
+                message.id = 2015;
+                break;
+            case "Rep_EditAiStockList":
+            case 2016:
+                message.id = 2016;
+                break;
+            case "Req_Hall_UploadIcon":
+            case 3001:
+                message.id = 3001;
+                break;
+            case "Rep_Hall_UploadIcon":
+            case 3002:
+                message.id = 3002;
+                break;
+            case "Req_Hall_DownloadIcon":
+            case 3003:
+                message.id = 3003;
+                break;
+            case "Rep_Hall_DownploadIcon":
+            case 3004:
+                message.id = 3004;
+                break;
+            case "Req_Hall_EditIcon":
+            case 3005:
+                message.id = 3005;
+                break;
+            case "Rep_Hall_EditIcon":
+            case 3006:
+                message.id = 3006;
+                break;
+            case "Req_Hall_EditNick":
+            case 3007:
+                message.id = 3007;
+                break;
+            case "Rep_Hall_EditNick":
+            case 3008:
+                message.id = 3008;
+                break;
+            case "Req_Hall_EditLocation":
+            case 3009:
+                message.id = 3009;
+                break;
+            case "Rep_Hall_EditLocation":
+            case 3010:
+                message.id = 3010;
+                break;
+            case "Req_Hall_EditGender":
+            case 3011:
+                message.id = 3011;
+                break;
+            case "Rep_Hall_EditGender":
+            case 3012:
+                message.id = 3012;
+                break;
+            case "Req_Hall_BackBag":
+            case 3013:
+                message.id = 3013;
+                break;
+            case "Rep_Hall_BackBag":
+            case 3014:
+                message.id = 3014;
+                break;
+            case "Req_Hall_GetItem":
+            case 3015:
+                message.id = 3015;
+                break;
+            case "Rep_Hall_GetItem":
+            case 3016:
+                message.id = 3016;
+                break;
+            case "Req_Hall_EditFavorList":
+            case 3017:
+                message.id = 3017;
+                break;
+            case "Rep_Hall_EditFavorList":
+            case 3018:
+                message.id = 3018;
+                break;
+            case "Req_Hall_QueryPlayer":
+            case 3019:
+                message.id = 3019;
+                break;
+            case "Rep_Hall_QueryPlayer":
+            case 3020:
+                message.id = 3020;
+                break;
+            case "Req_Hall_SaveStudyProgress":
+            case 3021:
+                message.id = 3021;
+                break;
+            case "Rep_Hall_SaveStudyProgress":
+            case 3022:
+                message.id = 3022;
+                break;
+            case "Req_Hall_GetDailyTaskAward":
+            case 3023:
+                message.id = 3023;
+                break;
+            case "Rep_Hall_GetDailyTaskAward":
+            case 3024:
+                message.id = 3024;
+                break;
+            case "Req_Hall_UnlockGame":
+            case 3025:
+                message.id = 3025;
+                break;
+            case "Rep_Hall_UnlockGame":
+            case 3026:
+                message.id = 3026;
+                break;
+            case "Req_Hall_GetWeeklyAward":
+            case 3027:
+                message.id = 3027;
+                break;
+            case "Rep_Hall_GetWeeklyAward":
+            case 3028:
+                message.id = 3028;
+                break;
+            case "Req_Hall_QueryEventLog":
+            case 3029:
+                message.id = 3029;
+                break;
+            case "Rep_Hall_QueryEventLog":
+            case 3030:
+                message.id = 3030;
+                break;
+            case "Req_Hall_ShopOrder":
+            case 3031:
+                message.id = 3031;
+                break;
+            case "Rep_Hall_ShopOrder":
+            case 3032:
+                message.id = 3032;
+                break;
+            case "Req_Hall_ShopOrderQuery":
+            case 3033:
+                message.id = 3033;
+                break;
+            case "Rep_Hall_ShopOrderQuery":
+            case 3034:
+                message.id = 3034;
+                break;
+            case "Req_Hall_MobileBind":
+            case 3035:
+                message.id = 3035;
+                break;
+            case "Rep_Hall_MobileBind":
+            case 3036:
+                message.id = 3036;
+                break;
+            case "Req_Hall_ResetGameCounter":
+            case 3037:
+                message.id = 3037;
+                break;
+            case "Rep_Hall_ResetGameCounter":
+            case 3038:
+                message.id = 3038;
+                break;
+            case "Req_Hall_Logout":
+            case 3999:
+                message.id = 3999;
+                break;
+            case "Rep_Hall_Logout":
+            case 4000:
+                message.id = 4000;
+                break;
+            case "Req_Game_Login":
+            case 4001:
+                message.id = 4001;
+                break;
+            case "Rep_Game_Login":
+            case 4002:
+                message.id = 4002;
+                break;
+            case "Req_Game_Start":
+            case 4003:
+                message.id = 4003;
+                break;
+            case "Rep_Game_Start":
+            case 4004:
+                message.id = 4004;
+                break;
+            case "Req_Game_Over":
+            case 4005:
+                message.id = 4005;
+                break;
+            case "Rep_Game_Over":
+            case 4006:
+                message.id = 4006;
+                break;
+            case "Req_Game_QueryGameResult":
+            case 4007:
+                message.id = 4007;
+                break;
+            case "Rep_Game_QueryGameResult":
+            case 4008:
+                message.id = 4008;
+                break;
+            case "Req_Game_GetGameOperation":
+            case 4009:
+                message.id = 4009;
+                break;
+            case "Rep_Game_GetGameOperation":
+            case 4010:
+                message.id = 4010;
+                break;
+            case "Req_Game_SmxlReport":
+            case 4011:
+                message.id = 4011;
+                break;
+            case "Rep_Game_SmxlReport":
+            case 4012:
+                message.id = 4012;
+                break;
+            case "Req_Game_SmxlReset":
+            case 4013:
+                message.id = 4013;
+                break;
+            case "Rep_Game_SmxlReset":
+            case 4014:
+                message.id = 4014;
+                break;
+            case "Req_Game_CgsGetConf":
+            case 4015:
+                message.id = 4015;
+                break;
+            case "Rep_Game_CgsGetConf":
+            case 4016:
+                message.id = 4016;
+                break;
+            case "Req_Game_CgsGetClearanceRank":
+            case 4017:
+                message.id = 4017;
+                break;
+            case "Rep_Game_CgsGetClearanceRank":
+            case 4018:
+                message.id = 4018;
+                break;
+            case "Req_Game_CgsGetStageRank":
+            case 4019:
+                message.id = 4019;
+                break;
+            case "Rep_Game_CgsGetStageRank":
+            case 4020:
+                message.id = 4020;
+                break;
+            case "Req_Game_CgsGetSeasonRank":
+            case 4021:
+                message.id = 4021;
+                break;
+            case "Rep_Game_CgsGetSeasonRank":
+            case 4022:
+                message.id = 4022;
+                break;
+            case "Req_Game_CgsGetStageAward":
+            case 4023:
+                message.id = 4023;
+                break;
+            case "Rep_Game_CgsGetStageAward":
+            case 4024:
+                message.id = 4024;
+                break;
+            case "Req_Game_OrderQuery":
+            case 4025:
+                message.id = 4025;
+                break;
+            case "Rep_Game_OrderQuery":
+            case 4026:
+                message.id = 4026;
+                break;
+            case "Req_Game_Order":
+            case 4027:
+                message.id = 4027;
+                break;
+            case "Rep_Game_Order":
+            case 4028:
+                message.id = 4028;
+                break;
+            case "Req_Game_OrderCancel":
+            case 4029:
+                message.id = 4029;
+                break;
+            case "Rep_Game_OrderCancel":
+            case 4030:
+                message.id = 4030;
+                break;
+            case "Req_Game_MncgExchange":
+            case 4031:
+                message.id = 4031;
+                break;
+            case "Rep_Game_MncgExchange":
+            case 4032:
+                message.id = 4032;
+                break;
+            case "Req_Game_MncgEditStockList":
+            case 4033:
+                message.id = 4033;
+                break;
+            case "Rep_Game_MncgEditStockList":
+            case 4034:
+                message.id = 4034;
+                break;
+            case "Req_Game_CgdsList":
+            case 4035:
+                message.id = 4035;
+                break;
+            case "Rep_Game_CgdsList":
+            case 4036:
+                message.id = 4036;
+                break;
+            case "Req_Game_CgdsReg":
+            case 4037:
+                message.id = 4037;
+                break;
+            case "Rep_Game_CgdsReg":
+            case 4038:
+                message.id = 4038;
+                break;
+            case "Req_Game_CgdsRanking":
+            case 4039:
+                message.id = 4039;
+                break;
+            case "Rep_Game_CgdsRanking":
+            case 4040:
+                message.id = 4040;
+                break;
+            case "Req_Game_ZsjcBettingList":
+            case 4041:
+                message.id = 4041;
+                break;
+            case "Rep_Game_ZsjcBettingList":
+            case 4042:
+                message.id = 4042;
+                break;
+            case "Req_Game_ZsjcBet":
+            case 4043:
+                message.id = 4043;
+                break;
+            case "Rep_Game_ZsjcBet":
+            case 4044:
+                message.id = 4044;
+                break;
+            case "Req_Game_ZsjcRanking":
+            case 4045:
+                message.id = 4045;
+                break;
+            case "Rep_Game_ZsjcRanking":
+            case 4046:
+                message.id = 4046;
+                break;
+            case "Req_Room_Create":
+            case 5003:
+                message.id = 5003;
+                break;
+            case "Rep_Room_Create":
+            case 5004:
+                message.id = 5004;
+                break;
+            case "Req_Room_Enter":
+            case 5005:
+                message.id = 5005;
+                break;
+            case "Rep_Room_Enter":
+            case 5006:
+                message.id = 5006;
+                break;
+            case "Req_Room_Leave":
+            case 5007:
+                message.id = 5007;
+                break;
+            case "Rep_Room_Leave":
+            case 5008:
+                message.id = 5008;
+                break;
+            case "Req_Room_Ready":
+            case 5009:
+                message.id = 5009;
+                break;
+            case "Rep_Room_Ready":
+            case 5010:
+                message.id = 5010;
+                break;
+            case "Sync_Room_Enter":
+            case 5200:
+                message.id = 5200;
+                break;
+            case "Sync_Room_Leave":
+            case 5202:
+                message.id = 5202;
+                break;
+            case "Sync_Room_Enter_Self":
+            case 5204:
+                message.id = 5204;
+                break;
+            case "Sync_Room_Leave_Self":
+            case 5206:
+                message.id = 5206;
+                break;
+            case "Sync_Room_LostConn":
+            case 5208:
+                message.id = 5208;
+                break;
+            case "Sync_Room_ReConn":
+            case 5210:
+                message.id = 5210;
+                break;
+            case "Sync_Room_Ready":
+            case 5212:
+                message.id = 5212;
+                break;
+            case "Sync_Room_GameStatus":
+            case 5214:
+                message.id = 5214;
+                break;
+            case "Sync_Room_GameOp":
+            case 5216:
+                message.id = 5216;
+                break;
+            case "Sync_Room_GameResult":
+            case 5218:
+                message.id = 5218;
+                break;
+            case "S2S_HeartBeat":
+            case 10001:
+                message.id = 10001;
+                break;
+            case "S2S_Update_PlayerProperty":
+            case 10003:
+                message.id = 10003;
+                break;
+            case "S2S_Update_PlayerGameCounter":
+            case 10005:
+                message.id = 10005;
+                break;
+            case "S2S_OrderCancel":
+            case 10007:
+                message.id = 10007;
+                break;
+            case "S2S_Sync_Cgds":
+            case 10009:
+                message.id = 10009;
+                break;
+            case "S2S_Set_CgdsTitle":
+            case 10011:
+                message.id = 10011;
+                break;
+            case "S2S_Set_CgdsLogo":
+            case 100013:
+                message.id = 100013;
+                break;
+            case "S2S_Set_CgdsUrl":
+            case 100015:
+                message.id = 100015;
+                break;
+            case "S2S_Set_CgdsConf":
+            case 10017:
+                message.id = 10017;
+                break;
+            case "S2S_Set_CgdsAward":
+            case 10019:
+                message.id = 10019;
+                break;
+            case "S2S_Open_Cgds":
+            case 10021:
+                message.id = 10021;
+                break;
+            case "S2S_Close_Cgds":
+            case 10023:
+                message.id = 10023;
+                break;
+            case "S2S_Reload_Cgds":
+            case 10025:
+                message.id = 10025;
+                break;
+            case "S2S_Reload_GameConf":
+            case 10027:
+                message.id = 10027;
+                break;
+            case "S2S_Sync_ZsjcBetting":
+            case 10028:
+                message.id = 10028;
+                break;
+            case "S2S_Sync_ZsjcState":
+            case 10030:
+                message.id = 10030;
+                break;
+            case "S2S_Update_DailyTaskProgress":
+            case 10032:
+                message.id = 10032;
+                break;
+            case "S2S_Sync_Pay":
+            case 10034:
+                message.id = 10034;
+                break;
             }
             if (object.buf != null)
                 if (typeof object.buf === "string")
@@ -39951,7 +40039,7 @@ $root.pb = (function () {
         return Message;
     })();
 
-    pb.Room = (function () {
+    pb.Room = (function() {
 
         /**
          * Properties of a Room.
@@ -40098,27 +40186,27 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.act = reader.int32();
-                        break;
-                    case 2:
-                        message.id = reader.int32();
-                        break;
-                    case 3:
-                        message.game = reader.int32();
-                        break;
-                    case 4:
-                        message.max = reader.int32();
-                        break;
-                    case 5:
-                        message.cur = reader.int32();
-                        break;
-                    case 6:
-                        message.node = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.act = reader.int32();
+                    break;
+                case 2:
+                    message.id = reader.int32();
+                    break;
+                case 3:
+                    message.game = reader.int32();
+                    break;
+                case 4:
+                    message.max = reader.int32();
+                    break;
+                case 5:
+                    message.cur = reader.int32();
+                    break;
+                case 6:
+                    message.node = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -40153,38 +40241,38 @@ $root.pb = (function () {
                 return "object expected";
             if (message.act != null && message.hasOwnProperty("act"))
                 switch (message.act) {
-                    default:
-                        return "act: enum value expected";
-                    case 0:
-                    case 1:
-                    case 2:
-                        break;
+                default:
+                    return "act: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
                 }
             if (message.id != null && message.hasOwnProperty("id"))
                 if (!$util.isInteger(message.id))
                     return "id: integer expected";
             if (message.game != null && message.hasOwnProperty("game"))
                 switch (message.game) {
-                    default:
-                        return "game: enum value expected";
-                    case 0:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 10:
-                    case 11:
-                    case 6:
-                    case 16:
-                    case 1:
-                    case 2:
-                    case 9:
-                    case 15:
-                    case 12:
-                    case 13:
-                    case 7:
-                    case 8:
-                    case 30:
-                        break;
+                default:
+                    return "game: enum value expected";
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 10:
+                case 11:
+                case 6:
+                case 16:
+                case 1:
+                case 2:
+                case 9:
+                case 15:
+                case 12:
+                case 13:
+                case 7:
+                case 8:
+                case 30:
+                    break;
                 }
             if (message.max != null && message.hasOwnProperty("max"))
                 if (!$util.isInteger(message.max))
@@ -40211,90 +40299,90 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.Room();
             switch (object.act) {
-                case "SyncAct_NULL":
-                case 0:
-                    message.act = 0;
-                    break;
-                case "Set":
-                case 1:
-                    message.act = 1;
-                    break;
-                case "Del":
-                case 2:
-                    message.act = 2;
-                    break;
+            case "SyncAct_NULL":
+            case 0:
+                message.act = 0;
+                break;
+            case "Set":
+            case 1:
+                message.act = 1;
+                break;
+            case "Del":
+            case 2:
+                message.act = 2;
+                break;
             }
             if (object.id != null)
                 message.id = object.id | 0;
             switch (object.game) {
-                case "GameType_NULL":
-                case 0:
-                    message.game = 0;
-                    break;
-                case "ShuangMang":
-                case 3:
-                    message.game = 3;
-                    break;
-                case "DingXiang":
-                case 4:
-                    message.game = 4;
-                    break;
-                case "FenShi":
-                case 5:
-                    message.game = 5;
-                    break;
-                case "ZhiBiao":
-                case 10:
-                    message.game = 10;
-                    break;
-                case "TiaoJianDan":
-                case 11:
-                    message.game = 11;
-                    break;
-                case "QiHuo":
-                case 6:
-                    message.game = 6;
-                    break;
-                case "TiaoZhan":
-                case 16:
-                    message.game = 16;
-                    break;
-                case "JJ_PK":
-                case 1:
-                    message.game = 1;
-                    break;
-                case "JJ_DuoKong":
-                case 2:
-                    message.game = 2;
-                    break;
-                case "JJ_ChuangGuan":
-                case 9:
-                    message.game = 9;
-                    break;
-                case "JJ_QiHuo":
-                case 15:
-                    message.game = 15;
-                    break;
-                case "MoNiChaoGu":
-                case 12:
-                    message.game = 12;
-                    break;
-                case "ChaoGuDaSai":
-                case 13:
-                    message.game = 13;
-                    break;
-                case "GeGuJingChai":
-                case 7:
-                    message.game = 7;
-                    break;
-                case "DaPanJingChai":
-                case 8:
-                    message.game = 8;
-                    break;
-                case "MaxGameType":
-                case 30:
-                    message.game = 30;
-                    break;
+            case "GameType_NULL":
+            case 0:
+                message.game = 0;
+                break;
+            case "ShuangMang":
+            case 3:
+                message.game = 3;
+                break;
+            case "DingXiang":
+            case 4:
+                message.game = 4;
+                break;
+            case "FenShi":
+            case 5:
+                message.game = 5;
+                break;
+            case "ZhiBiao":
+            case 10:
+                message.game = 10;
+                break;
+            case "TiaoJianDan":
+            case 11:
+                message.game = 11;
+                break;
+            case "QiHuo":
+            case 6:
+                message.game = 6;
+                break;
+            case "TiaoZhan":
+            case 16:
+                message.game = 16;
+                break;
+            case "JJ_PK":
+            case 1:
+                message.game = 1;
+                break;
+            case "JJ_DuoKong":
+            case 2:
+                message.game = 2;
+                break;
+            case "JJ_ChuangGuan":
+            case 9:
+                message.game = 9;
+                break;
+            case "JJ_QiHuo":
+            case 15:
+                message.game = 15;
+                break;
+            case "MoNiChaoGu":
+            case 12:
+                message.game = 12;
+                break;
+            case "ChaoGuDaSai":
+            case 13:
+                message.game = 13;
+                break;
+            case "GeGuJingChai":
+            case 7:
+                message.game = 7;
+                break;
+            case "DaPanJingChai":
+            case 8:
+                message.game = 8;
+                break;
+            case "MaxGameType":
+            case 30:
+                message.game = 30;
+                break;
             }
             if (object.max != null)
                 message.max = object.max | 0;
@@ -40355,7 +40443,7 @@ $root.pb = (function () {
         return Room;
     })();
 
-    pb.RoomList = (function () {
+    pb.RoomList = (function() {
 
         /**
          * Properties of a RoomList.
@@ -40449,14 +40537,14 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        if (!(message.items && message.items.length))
-                            message.items = [];
-                        message.items.push($root.pb.Room.decode(reader, reader.uint32()));
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.Room.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -40563,7 +40651,7 @@ $root.pb = (function () {
         return RoomList;
     })();
 
-    pb.PlayerNode = (function () {
+    pb.PlayerNode = (function() {
 
         /**
          * Properties of a PlayerNode.
@@ -40666,15 +40754,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.uid = reader.int32();
-                        break;
-                    case 2:
-                        message.nodeId = reader.int32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.nodeId = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -40773,7 +40861,7 @@ $root.pb = (function () {
         return PlayerNode;
     })();
 
-    pb.BroadcastMsg = (function () {
+    pb.BroadcastMsg = (function() {
 
         /**
          * Properties of a BroadcastMsg.
@@ -40892,25 +40980,25 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.buf = reader.bytes();
-                        break;
-                    case 3:
-                        if (!(message.uids && message.uids.length))
-                            message.uids = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.uids.push(reader.int32());
-                        } else
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.buf = reader.bytes();
+                    break;
+                case 3:
+                    if (!(message.uids && message.uids.length))
+                        message.uids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.uids.push(reader.int32());
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    } else
+                        message.uids.push(reader.int32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -40945,168 +41033,168 @@ $root.pb = (function () {
                 return "object expected";
             if (message.id != null && message.hasOwnProperty("id"))
                 switch (message.id) {
-                    default:
-                        return "id: enum value expected";
-                    case 0:
-                    case 101:
-                    case 103:
-                    case 1000:
-                    case 1002:
-                    case 1004:
-                    case 1006:
-                    case 1008:
-                    case 1010:
-                    case 1012:
-                    case 1014:
-                    case 1016:
-                    case 1018:
-                    case 1020:
-                    case 1022:
-                    case 1024:
-                    case 1026:
-                    case 1028:
-                    case 1030:
-                    case 1200:
-                    case 1300:
-                    case 2001:
-                    case 2002:
-                    case 2003:
-                    case 2004:
-                    case 2005:
-                    case 2006:
-                    case 2007:
-                    case 2008:
-                    case 2009:
-                    case 2010:
-                    case 2011:
-                    case 2012:
-                    case 2013:
-                    case 2014:
-                    case 2015:
-                    case 2016:
-                    case 3001:
-                    case 3002:
-                    case 3003:
-                    case 3004:
-                    case 3005:
-                    case 3006:
-                    case 3007:
-                    case 3008:
-                    case 3009:
-                    case 3010:
-                    case 3011:
-                    case 3012:
-                    case 3013:
-                    case 3014:
-                    case 3015:
-                    case 3016:
-                    case 3017:
-                    case 3018:
-                    case 3019:
-                    case 3020:
-                    case 3021:
-                    case 3022:
-                    case 3023:
-                    case 3024:
-                    case 3025:
-                    case 3026:
-                    case 3027:
-                    case 3028:
-                    case 3029:
-                    case 3030:
-                    case 3031:
-                    case 3032:
-                    case 3033:
-                    case 3034:
-                    case 3035:
-                    case 3036:
-                    case 3037:
-                    case 3038:
-                    case 3999:
-                    case 4000:
-                    case 4001:
-                    case 4002:
-                    case 4003:
-                    case 4004:
-                    case 4005:
-                    case 4006:
-                    case 4007:
-                    case 4008:
-                    case 4009:
-                    case 4010:
-                    case 4011:
-                    case 4012:
-                    case 4013:
-                    case 4014:
-                    case 4015:
-                    case 4016:
-                    case 4017:
-                    case 4018:
-                    case 4019:
-                    case 4020:
-                    case 4021:
-                    case 4022:
-                    case 4023:
-                    case 4024:
-                    case 4025:
-                    case 4026:
-                    case 4027:
-                    case 4028:
-                    case 4029:
-                    case 4030:
-                    case 4031:
-                    case 4032:
-                    case 4033:
-                    case 4034:
-                    case 4035:
-                    case 4036:
-                    case 4037:
-                    case 4038:
-                    case 4039:
-                    case 4040:
-                    case 4041:
-                    case 4042:
-                    case 4043:
-                    case 4044:
-                    case 4045:
-                    case 4046:
-                    case 5003:
-                    case 5004:
-                    case 5005:
-                    case 5006:
-                    case 5007:
-                    case 5008:
-                    case 5009:
-                    case 5010:
-                    case 5200:
-                    case 5202:
-                    case 5204:
-                    case 5206:
-                    case 5208:
-                    case 5210:
-                    case 5212:
-                    case 5214:
-                    case 5216:
-                    case 5218:
-                    case 10001:
-                    case 10003:
-                    case 10005:
-                    case 10007:
-                    case 10009:
-                    case 10011:
-                    case 100013:
-                    case 100015:
-                    case 10017:
-                    case 10019:
-                    case 10021:
-                    case 10023:
-                    case 10025:
-                    case 10027:
-                    case 10028:
-                    case 10030:
-                    case 10032:
-                    case 10034:
-                        break;
+                default:
+                    return "id: enum value expected";
+                case 0:
+                case 101:
+                case 103:
+                case 1000:
+                case 1002:
+                case 1004:
+                case 1006:
+                case 1008:
+                case 1010:
+                case 1012:
+                case 1014:
+                case 1016:
+                case 1018:
+                case 1020:
+                case 1022:
+                case 1024:
+                case 1026:
+                case 1028:
+                case 1030:
+                case 1200:
+                case 1300:
+                case 2001:
+                case 2002:
+                case 2003:
+                case 2004:
+                case 2005:
+                case 2006:
+                case 2007:
+                case 2008:
+                case 2009:
+                case 2010:
+                case 2011:
+                case 2012:
+                case 2013:
+                case 2014:
+                case 2015:
+                case 2016:
+                case 3001:
+                case 3002:
+                case 3003:
+                case 3004:
+                case 3005:
+                case 3006:
+                case 3007:
+                case 3008:
+                case 3009:
+                case 3010:
+                case 3011:
+                case 3012:
+                case 3013:
+                case 3014:
+                case 3015:
+                case 3016:
+                case 3017:
+                case 3018:
+                case 3019:
+                case 3020:
+                case 3021:
+                case 3022:
+                case 3023:
+                case 3024:
+                case 3025:
+                case 3026:
+                case 3027:
+                case 3028:
+                case 3029:
+                case 3030:
+                case 3031:
+                case 3032:
+                case 3033:
+                case 3034:
+                case 3035:
+                case 3036:
+                case 3037:
+                case 3038:
+                case 3999:
+                case 4000:
+                case 4001:
+                case 4002:
+                case 4003:
+                case 4004:
+                case 4005:
+                case 4006:
+                case 4007:
+                case 4008:
+                case 4009:
+                case 4010:
+                case 4011:
+                case 4012:
+                case 4013:
+                case 4014:
+                case 4015:
+                case 4016:
+                case 4017:
+                case 4018:
+                case 4019:
+                case 4020:
+                case 4021:
+                case 4022:
+                case 4023:
+                case 4024:
+                case 4025:
+                case 4026:
+                case 4027:
+                case 4028:
+                case 4029:
+                case 4030:
+                case 4031:
+                case 4032:
+                case 4033:
+                case 4034:
+                case 4035:
+                case 4036:
+                case 4037:
+                case 4038:
+                case 4039:
+                case 4040:
+                case 4041:
+                case 4042:
+                case 4043:
+                case 4044:
+                case 4045:
+                case 4046:
+                case 5003:
+                case 5004:
+                case 5005:
+                case 5006:
+                case 5007:
+                case 5008:
+                case 5009:
+                case 5010:
+                case 5200:
+                case 5202:
+                case 5204:
+                case 5206:
+                case 5208:
+                case 5210:
+                case 5212:
+                case 5214:
+                case 5216:
+                case 5218:
+                case 10001:
+                case 10003:
+                case 10005:
+                case 10007:
+                case 10009:
+                case 10011:
+                case 100013:
+                case 100015:
+                case 10017:
+                case 10019:
+                case 10021:
+                case 10023:
+                case 10025:
+                case 10027:
+                case 10028:
+                case 10030:
+                case 10032:
+                case 10034:
+                    break;
                 }
             if (message.buf != null && message.hasOwnProperty("buf"))
                 if (!(message.buf && typeof message.buf.length === "number" || $util.isString(message.buf)))
@@ -41134,642 +41222,642 @@ $root.pb = (function () {
                 return object;
             var message = new $root.pb.BroadcastMsg();
             switch (object.id) {
-                case "MessageId_NULL":
-                case 0:
-                    message.id = 0;
-                    break;
-                case "Cmd_Save_Stock2Db":
-                case 101:
-                    message.id = 101;
-                    break;
-                case "Cmd_Make_StockList":
-                case 103:
-                    message.id = 103;
-                    break;
-                case "Sync_S2C_QuoteItem":
-                case 1000:
-                    message.id = 1000;
-                    break;
-                case "Sync_S2C_GameProperty":
-                case 1002:
-                    message.id = 1002;
-                    break;
-                case "Sync_S2C_GameCounter":
-                case 1004:
-                    message.id = 1004;
-                    break;
-                case "Sync_S2C_GameSmxl":
-                case 1006:
-                    message.id = 1006;
-                    break;
-                case "Sync_S2C_GameCg":
-                case 1008:
-                    message.id = 1008;
-                    break;
-                case "Sync_S2C_GameMncg":
-                case 1010:
-                    message.id = 1010;
-                    break;
-                case "Sync_S2C_GameCgds":
-                case 1012:
-                    message.id = 1012;
-                    break;
-                case "Sync_S2C_Broadcast":
-                case 1014:
-                    message.id = 1014;
-                    break;
-                case "Sync_S2C_GameCg_GD":
-                case 1016:
-                    message.id = 1016;
-                    break;
-                case "Sync_S2C_GameTimes":
-                case 1018:
-                    message.id = 1018;
-                    break;
-                case "Sync_S2C_StockOrderResult":
-                case 1020:
-                    message.id = 1020;
-                    break;
-                case "Sync_S2C_MutipleLogin":
-                case 1022:
-                    message.id = 1022;
-                    break;
-                case "Sync_S2C_TaskProgress":
-                case 1024:
-                    message.id = 1024;
-                    break;
-                case "Sync_S2C_ActivityConf":
-                case 1026:
-                    message.id = 1026;
-                    break;
-                case "Sync_S2C_SystemMsg":
-                case 1028:
-                    message.id = 1028;
-                    break;
-                case "Sync_S2C_FirstLoginToday":
-                case 1030:
-                    message.id = 1030;
-                    break;
-                case "Sync_C2S_GameHeart":
-                case 1200:
-                    message.id = 1200;
-                    break;
-                case "Sync_Email":
-                case 1300:
-                    message.id = 1300;
-                    break;
-                case "Req_QuoteSubscribe":
-                case 2001:
-                    message.id = 2001;
-                    break;
-                case "Rep_QuoteSubscribe":
-                case 2002:
-                    message.id = 2002;
-                    break;
-                case "Req_QuoteQuery":
-                case 2003:
-                    message.id = 2003;
-                    break;
-                case "Rep_QuoteQuery":
-                case 2004:
-                    message.id = 2004;
-                    break;
-                case "Req_QuoteQueryFuture":
-                case 2005:
-                    message.id = 2005;
-                    break;
-                case "Rep_QuoteQueryFuture":
-                case 2006:
-                    message.id = 2006;
-                    break;
-                case "Req_IsTradingDay":
-                case 2007:
-                    message.id = 2007;
-                    break;
-                case "Rep_IsTradingDay":
-                case 2008:
-                    message.id = 2008;
-                    break;
-                case "Req_QueryTradingDay":
-                case 2009:
-                    message.id = 2009;
-                    break;
-                case "Rep_QueryTradingDay":
-                case 2010:
-                    message.id = 2010;
-                    break;
-                case "Req_QueryAiStockList":
-                case 2011:
-                    message.id = 2011;
-                    break;
-                case "Rep_QueryAiStockList":
-                case 2012:
-                    message.id = 2012;
-                    break;
-                case "Req_QueryAiSignal":
-                case 2013:
-                    message.id = 2013;
-                    break;
-                case "Rep_QueryAiSignal":
-                case 2014:
-                    message.id = 2014;
-                    break;
-                case "Req_EditAiStockList":
-                case 2015:
-                    message.id = 2015;
-                    break;
-                case "Rep_EditAiStockList":
-                case 2016:
-                    message.id = 2016;
-                    break;
-                case "Req_Hall_UploadIcon":
-                case 3001:
-                    message.id = 3001;
-                    break;
-                case "Rep_Hall_UploadIcon":
-                case 3002:
-                    message.id = 3002;
-                    break;
-                case "Req_Hall_DownloadIcon":
-                case 3003:
-                    message.id = 3003;
-                    break;
-                case "Rep_Hall_DownploadIcon":
-                case 3004:
-                    message.id = 3004;
-                    break;
-                case "Req_Hall_EditIcon":
-                case 3005:
-                    message.id = 3005;
-                    break;
-                case "Rep_Hall_EditIcon":
-                case 3006:
-                    message.id = 3006;
-                    break;
-                case "Req_Hall_EditNick":
-                case 3007:
-                    message.id = 3007;
-                    break;
-                case "Rep_Hall_EditNick":
-                case 3008:
-                    message.id = 3008;
-                    break;
-                case "Req_Hall_EditLocation":
-                case 3009:
-                    message.id = 3009;
-                    break;
-                case "Rep_Hall_EditLocation":
-                case 3010:
-                    message.id = 3010;
-                    break;
-                case "Req_Hall_EditGender":
-                case 3011:
-                    message.id = 3011;
-                    break;
-                case "Rep_Hall_EditGender":
-                case 3012:
-                    message.id = 3012;
-                    break;
-                case "Req_Hall_BackBag":
-                case 3013:
-                    message.id = 3013;
-                    break;
-                case "Rep_Hall_BackBag":
-                case 3014:
-                    message.id = 3014;
-                    break;
-                case "Req_Hall_GetItem":
-                case 3015:
-                    message.id = 3015;
-                    break;
-                case "Rep_Hall_GetItem":
-                case 3016:
-                    message.id = 3016;
-                    break;
-                case "Req_Hall_EditFavorList":
-                case 3017:
-                    message.id = 3017;
-                    break;
-                case "Rep_Hall_EditFavorList":
-                case 3018:
-                    message.id = 3018;
-                    break;
-                case "Req_Hall_QueryPlayer":
-                case 3019:
-                    message.id = 3019;
-                    break;
-                case "Rep_Hall_QueryPlayer":
-                case 3020:
-                    message.id = 3020;
-                    break;
-                case "Req_Hall_SaveStudyProgress":
-                case 3021:
-                    message.id = 3021;
-                    break;
-                case "Rep_Hall_SaveStudyProgress":
-                case 3022:
-                    message.id = 3022;
-                    break;
-                case "Req_Hall_GetDailyTaskAward":
-                case 3023:
-                    message.id = 3023;
-                    break;
-                case "Rep_Hall_GetDailyTaskAward":
-                case 3024:
-                    message.id = 3024;
-                    break;
-                case "Req_Hall_UnlockGame":
-                case 3025:
-                    message.id = 3025;
-                    break;
-                case "Rep_Hall_UnlockGame":
-                case 3026:
-                    message.id = 3026;
-                    break;
-                case "Req_Hall_GetWeeklyAward":
-                case 3027:
-                    message.id = 3027;
-                    break;
-                case "Rep_Hall_GetWeeklyAward":
-                case 3028:
-                    message.id = 3028;
-                    break;
-                case "Req_Hall_QueryEventLog":
-                case 3029:
-                    message.id = 3029;
-                    break;
-                case "Rep_Hall_QueryEventLog":
-                case 3030:
-                    message.id = 3030;
-                    break;
-                case "Req_Hall_ShopOrder":
-                case 3031:
-                    message.id = 3031;
-                    break;
-                case "Rep_Hall_ShopOrder":
-                case 3032:
-                    message.id = 3032;
-                    break;
-                case "Req_Hall_ShopOrderQuery":
-                case 3033:
-                    message.id = 3033;
-                    break;
-                case "Rep_Hall_ShopOrderQuery":
-                case 3034:
-                    message.id = 3034;
-                    break;
-                case "Req_Hall_MobileBind":
-                case 3035:
-                    message.id = 3035;
-                    break;
-                case "Rep_Hall_MobileBind":
-                case 3036:
-                    message.id = 3036;
-                    break;
-                case "Req_Hall_ResetGameCounter":
-                case 3037:
-                    message.id = 3037;
-                    break;
-                case "Rep_Hall_ResetGameCounter":
-                case 3038:
-                    message.id = 3038;
-                    break;
-                case "Req_Hall_Logout":
-                case 3999:
-                    message.id = 3999;
-                    break;
-                case "Rep_Hall_Logout":
-                case 4000:
-                    message.id = 4000;
-                    break;
-                case "Req_Game_Login":
-                case 4001:
-                    message.id = 4001;
-                    break;
-                case "Rep_Game_Login":
-                case 4002:
-                    message.id = 4002;
-                    break;
-                case "Req_Game_Start":
-                case 4003:
-                    message.id = 4003;
-                    break;
-                case "Rep_Game_Start":
-                case 4004:
-                    message.id = 4004;
-                    break;
-                case "Req_Game_Over":
-                case 4005:
-                    message.id = 4005;
-                    break;
-                case "Rep_Game_Over":
-                case 4006:
-                    message.id = 4006;
-                    break;
-                case "Req_Game_QueryGameResult":
-                case 4007:
-                    message.id = 4007;
-                    break;
-                case "Rep_Game_QueryGameResult":
-                case 4008:
-                    message.id = 4008;
-                    break;
-                case "Req_Game_GetGameOperation":
-                case 4009:
-                    message.id = 4009;
-                    break;
-                case "Rep_Game_GetGameOperation":
-                case 4010:
-                    message.id = 4010;
-                    break;
-                case "Req_Game_SmxlReport":
-                case 4011:
-                    message.id = 4011;
-                    break;
-                case "Rep_Game_SmxlReport":
-                case 4012:
-                    message.id = 4012;
-                    break;
-                case "Req_Game_SmxlReset":
-                case 4013:
-                    message.id = 4013;
-                    break;
-                case "Rep_Game_SmxlReset":
-                case 4014:
-                    message.id = 4014;
-                    break;
-                case "Req_Game_CgsGetConf":
-                case 4015:
-                    message.id = 4015;
-                    break;
-                case "Rep_Game_CgsGetConf":
-                case 4016:
-                    message.id = 4016;
-                    break;
-                case "Req_Game_CgsGetClearanceRank":
-                case 4017:
-                    message.id = 4017;
-                    break;
-                case "Rep_Game_CgsGetClearanceRank":
-                case 4018:
-                    message.id = 4018;
-                    break;
-                case "Req_Game_CgsGetStageRank":
-                case 4019:
-                    message.id = 4019;
-                    break;
-                case "Rep_Game_CgsGetStageRank":
-                case 4020:
-                    message.id = 4020;
-                    break;
-                case "Req_Game_CgsGetSeasonRank":
-                case 4021:
-                    message.id = 4021;
-                    break;
-                case "Rep_Game_CgsGetSeasonRank":
-                case 4022:
-                    message.id = 4022;
-                    break;
-                case "Req_Game_CgsGetStageAward":
-                case 4023:
-                    message.id = 4023;
-                    break;
-                case "Rep_Game_CgsGetStageAward":
-                case 4024:
-                    message.id = 4024;
-                    break;
-                case "Req_Game_OrderQuery":
-                case 4025:
-                    message.id = 4025;
-                    break;
-                case "Rep_Game_OrderQuery":
-                case 4026:
-                    message.id = 4026;
-                    break;
-                case "Req_Game_Order":
-                case 4027:
-                    message.id = 4027;
-                    break;
-                case "Rep_Game_Order":
-                case 4028:
-                    message.id = 4028;
-                    break;
-                case "Req_Game_OrderCancel":
-                case 4029:
-                    message.id = 4029;
-                    break;
-                case "Rep_Game_OrderCancel":
-                case 4030:
-                    message.id = 4030;
-                    break;
-                case "Req_Game_MncgExchange":
-                case 4031:
-                    message.id = 4031;
-                    break;
-                case "Rep_Game_MncgExchange":
-                case 4032:
-                    message.id = 4032;
-                    break;
-                case "Req_Game_MncgEditStockList":
-                case 4033:
-                    message.id = 4033;
-                    break;
-                case "Rep_Game_MncgEditStockList":
-                case 4034:
-                    message.id = 4034;
-                    break;
-                case "Req_Game_CgdsList":
-                case 4035:
-                    message.id = 4035;
-                    break;
-                case "Rep_Game_CgdsList":
-                case 4036:
-                    message.id = 4036;
-                    break;
-                case "Req_Game_CgdsReg":
-                case 4037:
-                    message.id = 4037;
-                    break;
-                case "Rep_Game_CgdsReg":
-                case 4038:
-                    message.id = 4038;
-                    break;
-                case "Req_Game_CgdsRanking":
-                case 4039:
-                    message.id = 4039;
-                    break;
-                case "Rep_Game_CgdsRanking":
-                case 4040:
-                    message.id = 4040;
-                    break;
-                case "Req_Game_ZsjcBettingList":
-                case 4041:
-                    message.id = 4041;
-                    break;
-                case "Rep_Game_ZsjcBettingList":
-                case 4042:
-                    message.id = 4042;
-                    break;
-                case "Req_Game_ZsjcBet":
-                case 4043:
-                    message.id = 4043;
-                    break;
-                case "Rep_Game_ZsjcBet":
-                case 4044:
-                    message.id = 4044;
-                    break;
-                case "Req_Game_ZsjcRanking":
-                case 4045:
-                    message.id = 4045;
-                    break;
-                case "Rep_Game_ZsjcRanking":
-                case 4046:
-                    message.id = 4046;
-                    break;
-                case "Req_Room_Create":
-                case 5003:
-                    message.id = 5003;
-                    break;
-                case "Rep_Room_Create":
-                case 5004:
-                    message.id = 5004;
-                    break;
-                case "Req_Room_Enter":
-                case 5005:
-                    message.id = 5005;
-                    break;
-                case "Rep_Room_Enter":
-                case 5006:
-                    message.id = 5006;
-                    break;
-                case "Req_Room_Leave":
-                case 5007:
-                    message.id = 5007;
-                    break;
-                case "Rep_Room_Leave":
-                case 5008:
-                    message.id = 5008;
-                    break;
-                case "Req_Room_Ready":
-                case 5009:
-                    message.id = 5009;
-                    break;
-                case "Rep_Room_Ready":
-                case 5010:
-                    message.id = 5010;
-                    break;
-                case "Sync_Room_Enter":
-                case 5200:
-                    message.id = 5200;
-                    break;
-                case "Sync_Room_Leave":
-                case 5202:
-                    message.id = 5202;
-                    break;
-                case "Sync_Room_Enter_Self":
-                case 5204:
-                    message.id = 5204;
-                    break;
-                case "Sync_Room_Leave_Self":
-                case 5206:
-                    message.id = 5206;
-                    break;
-                case "Sync_Room_LostConn":
-                case 5208:
-                    message.id = 5208;
-                    break;
-                case "Sync_Room_ReConn":
-                case 5210:
-                    message.id = 5210;
-                    break;
-                case "Sync_Room_Ready":
-                case 5212:
-                    message.id = 5212;
-                    break;
-                case "Sync_Room_GameStatus":
-                case 5214:
-                    message.id = 5214;
-                    break;
-                case "Sync_Room_GameOp":
-                case 5216:
-                    message.id = 5216;
-                    break;
-                case "Sync_Room_GameResult":
-                case 5218:
-                    message.id = 5218;
-                    break;
-                case "S2S_HeartBeat":
-                case 10001:
-                    message.id = 10001;
-                    break;
-                case "S2S_Update_PlayerProperty":
-                case 10003:
-                    message.id = 10003;
-                    break;
-                case "S2S_Update_PlayerGameCounter":
-                case 10005:
-                    message.id = 10005;
-                    break;
-                case "S2S_OrderCancel":
-                case 10007:
-                    message.id = 10007;
-                    break;
-                case "S2S_Sync_Cgds":
-                case 10009:
-                    message.id = 10009;
-                    break;
-                case "S2S_Set_CgdsTitle":
-                case 10011:
-                    message.id = 10011;
-                    break;
-                case "S2S_Set_CgdsLogo":
-                case 100013:
-                    message.id = 100013;
-                    break;
-                case "S2S_Set_CgdsUrl":
-                case 100015:
-                    message.id = 100015;
-                    break;
-                case "S2S_Set_CgdsConf":
-                case 10017:
-                    message.id = 10017;
-                    break;
-                case "S2S_Set_CgdsAward":
-                case 10019:
-                    message.id = 10019;
-                    break;
-                case "S2S_Open_Cgds":
-                case 10021:
-                    message.id = 10021;
-                    break;
-                case "S2S_Close_Cgds":
-                case 10023:
-                    message.id = 10023;
-                    break;
-                case "S2S_Reload_Cgds":
-                case 10025:
-                    message.id = 10025;
-                    break;
-                case "S2S_Reload_GameConf":
-                case 10027:
-                    message.id = 10027;
-                    break;
-                case "S2S_Sync_ZsjcBetting":
-                case 10028:
-                    message.id = 10028;
-                    break;
-                case "S2S_Sync_ZsjcState":
-                case 10030:
-                    message.id = 10030;
-                    break;
-                case "S2S_Update_DailyTaskProgress":
-                case 10032:
-                    message.id = 10032;
-                    break;
-                case "S2S_Sync_Pay":
-                case 10034:
-                    message.id = 10034;
-                    break;
+            case "MessageId_NULL":
+            case 0:
+                message.id = 0;
+                break;
+            case "Cmd_Save_Stock2Db":
+            case 101:
+                message.id = 101;
+                break;
+            case "Cmd_Make_StockList":
+            case 103:
+                message.id = 103;
+                break;
+            case "Sync_S2C_QuoteItem":
+            case 1000:
+                message.id = 1000;
+                break;
+            case "Sync_S2C_GameProperty":
+            case 1002:
+                message.id = 1002;
+                break;
+            case "Sync_S2C_GameCounter":
+            case 1004:
+                message.id = 1004;
+                break;
+            case "Sync_S2C_GameSmxl":
+            case 1006:
+                message.id = 1006;
+                break;
+            case "Sync_S2C_GameCg":
+            case 1008:
+                message.id = 1008;
+                break;
+            case "Sync_S2C_GameMncg":
+            case 1010:
+                message.id = 1010;
+                break;
+            case "Sync_S2C_GameCgds":
+            case 1012:
+                message.id = 1012;
+                break;
+            case "Sync_S2C_Broadcast":
+            case 1014:
+                message.id = 1014;
+                break;
+            case "Sync_S2C_GameCg_GD":
+            case 1016:
+                message.id = 1016;
+                break;
+            case "Sync_S2C_GameTimes":
+            case 1018:
+                message.id = 1018;
+                break;
+            case "Sync_S2C_StockOrderResult":
+            case 1020:
+                message.id = 1020;
+                break;
+            case "Sync_S2C_MutipleLogin":
+            case 1022:
+                message.id = 1022;
+                break;
+            case "Sync_S2C_TaskProgress":
+            case 1024:
+                message.id = 1024;
+                break;
+            case "Sync_S2C_ActivityConf":
+            case 1026:
+                message.id = 1026;
+                break;
+            case "Sync_S2C_SystemMsg":
+            case 1028:
+                message.id = 1028;
+                break;
+            case "Sync_S2C_FirstLoginToday":
+            case 1030:
+                message.id = 1030;
+                break;
+            case "Sync_C2S_GameHeart":
+            case 1200:
+                message.id = 1200;
+                break;
+            case "Sync_Email":
+            case 1300:
+                message.id = 1300;
+                break;
+            case "Req_QuoteSubscribe":
+            case 2001:
+                message.id = 2001;
+                break;
+            case "Rep_QuoteSubscribe":
+            case 2002:
+                message.id = 2002;
+                break;
+            case "Req_QuoteQuery":
+            case 2003:
+                message.id = 2003;
+                break;
+            case "Rep_QuoteQuery":
+            case 2004:
+                message.id = 2004;
+                break;
+            case "Req_QuoteQueryFuture":
+            case 2005:
+                message.id = 2005;
+                break;
+            case "Rep_QuoteQueryFuture":
+            case 2006:
+                message.id = 2006;
+                break;
+            case "Req_IsTradingDay":
+            case 2007:
+                message.id = 2007;
+                break;
+            case "Rep_IsTradingDay":
+            case 2008:
+                message.id = 2008;
+                break;
+            case "Req_QueryTradingDay":
+            case 2009:
+                message.id = 2009;
+                break;
+            case "Rep_QueryTradingDay":
+            case 2010:
+                message.id = 2010;
+                break;
+            case "Req_QueryAiStockList":
+            case 2011:
+                message.id = 2011;
+                break;
+            case "Rep_QueryAiStockList":
+            case 2012:
+                message.id = 2012;
+                break;
+            case "Req_QueryAiSignal":
+            case 2013:
+                message.id = 2013;
+                break;
+            case "Rep_QueryAiSignal":
+            case 2014:
+                message.id = 2014;
+                break;
+            case "Req_EditAiStockList":
+            case 2015:
+                message.id = 2015;
+                break;
+            case "Rep_EditAiStockList":
+            case 2016:
+                message.id = 2016;
+                break;
+            case "Req_Hall_UploadIcon":
+            case 3001:
+                message.id = 3001;
+                break;
+            case "Rep_Hall_UploadIcon":
+            case 3002:
+                message.id = 3002;
+                break;
+            case "Req_Hall_DownloadIcon":
+            case 3003:
+                message.id = 3003;
+                break;
+            case "Rep_Hall_DownploadIcon":
+            case 3004:
+                message.id = 3004;
+                break;
+            case "Req_Hall_EditIcon":
+            case 3005:
+                message.id = 3005;
+                break;
+            case "Rep_Hall_EditIcon":
+            case 3006:
+                message.id = 3006;
+                break;
+            case "Req_Hall_EditNick":
+            case 3007:
+                message.id = 3007;
+                break;
+            case "Rep_Hall_EditNick":
+            case 3008:
+                message.id = 3008;
+                break;
+            case "Req_Hall_EditLocation":
+            case 3009:
+                message.id = 3009;
+                break;
+            case "Rep_Hall_EditLocation":
+            case 3010:
+                message.id = 3010;
+                break;
+            case "Req_Hall_EditGender":
+            case 3011:
+                message.id = 3011;
+                break;
+            case "Rep_Hall_EditGender":
+            case 3012:
+                message.id = 3012;
+                break;
+            case "Req_Hall_BackBag":
+            case 3013:
+                message.id = 3013;
+                break;
+            case "Rep_Hall_BackBag":
+            case 3014:
+                message.id = 3014;
+                break;
+            case "Req_Hall_GetItem":
+            case 3015:
+                message.id = 3015;
+                break;
+            case "Rep_Hall_GetItem":
+            case 3016:
+                message.id = 3016;
+                break;
+            case "Req_Hall_EditFavorList":
+            case 3017:
+                message.id = 3017;
+                break;
+            case "Rep_Hall_EditFavorList":
+            case 3018:
+                message.id = 3018;
+                break;
+            case "Req_Hall_QueryPlayer":
+            case 3019:
+                message.id = 3019;
+                break;
+            case "Rep_Hall_QueryPlayer":
+            case 3020:
+                message.id = 3020;
+                break;
+            case "Req_Hall_SaveStudyProgress":
+            case 3021:
+                message.id = 3021;
+                break;
+            case "Rep_Hall_SaveStudyProgress":
+            case 3022:
+                message.id = 3022;
+                break;
+            case "Req_Hall_GetDailyTaskAward":
+            case 3023:
+                message.id = 3023;
+                break;
+            case "Rep_Hall_GetDailyTaskAward":
+            case 3024:
+                message.id = 3024;
+                break;
+            case "Req_Hall_UnlockGame":
+            case 3025:
+                message.id = 3025;
+                break;
+            case "Rep_Hall_UnlockGame":
+            case 3026:
+                message.id = 3026;
+                break;
+            case "Req_Hall_GetWeeklyAward":
+            case 3027:
+                message.id = 3027;
+                break;
+            case "Rep_Hall_GetWeeklyAward":
+            case 3028:
+                message.id = 3028;
+                break;
+            case "Req_Hall_QueryEventLog":
+            case 3029:
+                message.id = 3029;
+                break;
+            case "Rep_Hall_QueryEventLog":
+            case 3030:
+                message.id = 3030;
+                break;
+            case "Req_Hall_ShopOrder":
+            case 3031:
+                message.id = 3031;
+                break;
+            case "Rep_Hall_ShopOrder":
+            case 3032:
+                message.id = 3032;
+                break;
+            case "Req_Hall_ShopOrderQuery":
+            case 3033:
+                message.id = 3033;
+                break;
+            case "Rep_Hall_ShopOrderQuery":
+            case 3034:
+                message.id = 3034;
+                break;
+            case "Req_Hall_MobileBind":
+            case 3035:
+                message.id = 3035;
+                break;
+            case "Rep_Hall_MobileBind":
+            case 3036:
+                message.id = 3036;
+                break;
+            case "Req_Hall_ResetGameCounter":
+            case 3037:
+                message.id = 3037;
+                break;
+            case "Rep_Hall_ResetGameCounter":
+            case 3038:
+                message.id = 3038;
+                break;
+            case "Req_Hall_Logout":
+            case 3999:
+                message.id = 3999;
+                break;
+            case "Rep_Hall_Logout":
+            case 4000:
+                message.id = 4000;
+                break;
+            case "Req_Game_Login":
+            case 4001:
+                message.id = 4001;
+                break;
+            case "Rep_Game_Login":
+            case 4002:
+                message.id = 4002;
+                break;
+            case "Req_Game_Start":
+            case 4003:
+                message.id = 4003;
+                break;
+            case "Rep_Game_Start":
+            case 4004:
+                message.id = 4004;
+                break;
+            case "Req_Game_Over":
+            case 4005:
+                message.id = 4005;
+                break;
+            case "Rep_Game_Over":
+            case 4006:
+                message.id = 4006;
+                break;
+            case "Req_Game_QueryGameResult":
+            case 4007:
+                message.id = 4007;
+                break;
+            case "Rep_Game_QueryGameResult":
+            case 4008:
+                message.id = 4008;
+                break;
+            case "Req_Game_GetGameOperation":
+            case 4009:
+                message.id = 4009;
+                break;
+            case "Rep_Game_GetGameOperation":
+            case 4010:
+                message.id = 4010;
+                break;
+            case "Req_Game_SmxlReport":
+            case 4011:
+                message.id = 4011;
+                break;
+            case "Rep_Game_SmxlReport":
+            case 4012:
+                message.id = 4012;
+                break;
+            case "Req_Game_SmxlReset":
+            case 4013:
+                message.id = 4013;
+                break;
+            case "Rep_Game_SmxlReset":
+            case 4014:
+                message.id = 4014;
+                break;
+            case "Req_Game_CgsGetConf":
+            case 4015:
+                message.id = 4015;
+                break;
+            case "Rep_Game_CgsGetConf":
+            case 4016:
+                message.id = 4016;
+                break;
+            case "Req_Game_CgsGetClearanceRank":
+            case 4017:
+                message.id = 4017;
+                break;
+            case "Rep_Game_CgsGetClearanceRank":
+            case 4018:
+                message.id = 4018;
+                break;
+            case "Req_Game_CgsGetStageRank":
+            case 4019:
+                message.id = 4019;
+                break;
+            case "Rep_Game_CgsGetStageRank":
+            case 4020:
+                message.id = 4020;
+                break;
+            case "Req_Game_CgsGetSeasonRank":
+            case 4021:
+                message.id = 4021;
+                break;
+            case "Rep_Game_CgsGetSeasonRank":
+            case 4022:
+                message.id = 4022;
+                break;
+            case "Req_Game_CgsGetStageAward":
+            case 4023:
+                message.id = 4023;
+                break;
+            case "Rep_Game_CgsGetStageAward":
+            case 4024:
+                message.id = 4024;
+                break;
+            case "Req_Game_OrderQuery":
+            case 4025:
+                message.id = 4025;
+                break;
+            case "Rep_Game_OrderQuery":
+            case 4026:
+                message.id = 4026;
+                break;
+            case "Req_Game_Order":
+            case 4027:
+                message.id = 4027;
+                break;
+            case "Rep_Game_Order":
+            case 4028:
+                message.id = 4028;
+                break;
+            case "Req_Game_OrderCancel":
+            case 4029:
+                message.id = 4029;
+                break;
+            case "Rep_Game_OrderCancel":
+            case 4030:
+                message.id = 4030;
+                break;
+            case "Req_Game_MncgExchange":
+            case 4031:
+                message.id = 4031;
+                break;
+            case "Rep_Game_MncgExchange":
+            case 4032:
+                message.id = 4032;
+                break;
+            case "Req_Game_MncgEditStockList":
+            case 4033:
+                message.id = 4033;
+                break;
+            case "Rep_Game_MncgEditStockList":
+            case 4034:
+                message.id = 4034;
+                break;
+            case "Req_Game_CgdsList":
+            case 4035:
+                message.id = 4035;
+                break;
+            case "Rep_Game_CgdsList":
+            case 4036:
+                message.id = 4036;
+                break;
+            case "Req_Game_CgdsReg":
+            case 4037:
+                message.id = 4037;
+                break;
+            case "Rep_Game_CgdsReg":
+            case 4038:
+                message.id = 4038;
+                break;
+            case "Req_Game_CgdsRanking":
+            case 4039:
+                message.id = 4039;
+                break;
+            case "Rep_Game_CgdsRanking":
+            case 4040:
+                message.id = 4040;
+                break;
+            case "Req_Game_ZsjcBettingList":
+            case 4041:
+                message.id = 4041;
+                break;
+            case "Rep_Game_ZsjcBettingList":
+            case 4042:
+                message.id = 4042;
+                break;
+            case "Req_Game_ZsjcBet":
+            case 4043:
+                message.id = 4043;
+                break;
+            case "Rep_Game_ZsjcBet":
+            case 4044:
+                message.id = 4044;
+                break;
+            case "Req_Game_ZsjcRanking":
+            case 4045:
+                message.id = 4045;
+                break;
+            case "Rep_Game_ZsjcRanking":
+            case 4046:
+                message.id = 4046;
+                break;
+            case "Req_Room_Create":
+            case 5003:
+                message.id = 5003;
+                break;
+            case "Rep_Room_Create":
+            case 5004:
+                message.id = 5004;
+                break;
+            case "Req_Room_Enter":
+            case 5005:
+                message.id = 5005;
+                break;
+            case "Rep_Room_Enter":
+            case 5006:
+                message.id = 5006;
+                break;
+            case "Req_Room_Leave":
+            case 5007:
+                message.id = 5007;
+                break;
+            case "Rep_Room_Leave":
+            case 5008:
+                message.id = 5008;
+                break;
+            case "Req_Room_Ready":
+            case 5009:
+                message.id = 5009;
+                break;
+            case "Rep_Room_Ready":
+            case 5010:
+                message.id = 5010;
+                break;
+            case "Sync_Room_Enter":
+            case 5200:
+                message.id = 5200;
+                break;
+            case "Sync_Room_Leave":
+            case 5202:
+                message.id = 5202;
+                break;
+            case "Sync_Room_Enter_Self":
+            case 5204:
+                message.id = 5204;
+                break;
+            case "Sync_Room_Leave_Self":
+            case 5206:
+                message.id = 5206;
+                break;
+            case "Sync_Room_LostConn":
+            case 5208:
+                message.id = 5208;
+                break;
+            case "Sync_Room_ReConn":
+            case 5210:
+                message.id = 5210;
+                break;
+            case "Sync_Room_Ready":
+            case 5212:
+                message.id = 5212;
+                break;
+            case "Sync_Room_GameStatus":
+            case 5214:
+                message.id = 5214;
+                break;
+            case "Sync_Room_GameOp":
+            case 5216:
+                message.id = 5216;
+                break;
+            case "Sync_Room_GameResult":
+            case 5218:
+                message.id = 5218;
+                break;
+            case "S2S_HeartBeat":
+            case 10001:
+                message.id = 10001;
+                break;
+            case "S2S_Update_PlayerProperty":
+            case 10003:
+                message.id = 10003;
+                break;
+            case "S2S_Update_PlayerGameCounter":
+            case 10005:
+                message.id = 10005;
+                break;
+            case "S2S_OrderCancel":
+            case 10007:
+                message.id = 10007;
+                break;
+            case "S2S_Sync_Cgds":
+            case 10009:
+                message.id = 10009;
+                break;
+            case "S2S_Set_CgdsTitle":
+            case 10011:
+                message.id = 10011;
+                break;
+            case "S2S_Set_CgdsLogo":
+            case 100013:
+                message.id = 100013;
+                break;
+            case "S2S_Set_CgdsUrl":
+            case 100015:
+                message.id = 100015;
+                break;
+            case "S2S_Set_CgdsConf":
+            case 10017:
+                message.id = 10017;
+                break;
+            case "S2S_Set_CgdsAward":
+            case 10019:
+                message.id = 10019;
+                break;
+            case "S2S_Open_Cgds":
+            case 10021:
+                message.id = 10021;
+                break;
+            case "S2S_Close_Cgds":
+            case 10023:
+                message.id = 10023;
+                break;
+            case "S2S_Reload_Cgds":
+            case 10025:
+                message.id = 10025;
+                break;
+            case "S2S_Reload_GameConf":
+            case 10027:
+                message.id = 10027;
+                break;
+            case "S2S_Sync_ZsjcBetting":
+            case 10028:
+                message.id = 10028;
+                break;
+            case "S2S_Sync_ZsjcState":
+            case 10030:
+                message.id = 10030;
+                break;
+            case "S2S_Update_DailyTaskProgress":
+            case 10032:
+                message.id = 10032;
+                break;
+            case "S2S_Sync_Pay":
+            case 10034:
+                message.id = 10034;
+                break;
             }
             if (object.buf != null)
                 if (typeof object.buf === "string")
@@ -41837,7 +41925,7 @@ $root.pb = (function () {
         return BroadcastMsg;
     })();
 
-    pb.CmdCgsConf = (function () {
+    pb.CmdCgsConf = (function() {
 
         /**
          * Properties of a CmdCgsConf.
@@ -41940,15 +42028,15 @@ $root.pb = (function () {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.int32();
-                        break;
-                    case 2:
-                        message.awardJson = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                case 1:
+                    message.id = reader.int32();
+                    break;
+                case 2:
+                    message.awardJson = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
             return message;
@@ -42047,7 +42135,7 @@ $root.pb = (function () {
         return CmdCgsConf;
     })();
 
-    pb.MasterService = (function () {
+    pb.MasterService = (function() {
 
         /**
          * Constructs a new MasterService service.
@@ -42379,7 +42467,7 @@ $root.pb = (function () {
         return MasterService;
     })();
 
-    pb.GameService = (function () {
+    pb.GameService = (function() {
 
         /**
          * Constructs a new GameService service.

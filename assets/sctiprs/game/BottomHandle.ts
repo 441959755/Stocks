@@ -658,7 +658,7 @@ export default class NewClass extends cc.Component {
 			GameCfg.huizhidatas = this.gpData.length;
 			//pk
 			if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-				PopupManager.LoadPopupBox('tipsBox', '您的操作回合数已经用完，请等候其他用户操作结束');
+				PopupManager.LoadTipsBox('tipsBox', '您的操作回合数已经用完，请等候其他用户操作结束');
 				GameCfg.GAMEWAIT = true;
 			}
 			else {

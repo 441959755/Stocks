@@ -12,10 +12,15 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     matchPK: cc.Node = null;
 
+    @property(cc.Node)
+    chuangGuan: cc.Node = null;
 
     onLoad() {
         //匹配PK
         GlobalEvent.on(EventCfg.OPENMATCHPK, () => { this.matchPK.active = true; }, this)
+
+        //闯关
+        GlobalEvent.on(EventCfg.OPENCHUANGUAN, () => { this.chuangGuan.active = true; }, this);
 
         //自己进入房间的消息
         GlobalEvent.on(EventCfg.RoomGameDataSelf, this.onSelfEnterRoomGameData.bind(this), this);
@@ -86,7 +91,6 @@ export default class NewClass extends cc.Component {
             }
             GameCfg.data[0].data.push(data);
 
-
         })
 
         )
@@ -102,6 +106,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENMATCHPK);
         GlobalEvent.off(EventCfg.RoomGameDataSelf);
         GlobalEvent.off(EventCfg.RoomGameDataOther);
+        GlobalEvent.off(EventCfg.OPENCHUANGUAN);
     }
 
 

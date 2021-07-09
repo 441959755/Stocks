@@ -328,7 +328,7 @@ export default class NewClass extends cc.Component {
                     else {
                         str = '您正在比赛中，现在退出会被认定为逃跑用户，请确认在退出';
                     }
-                    PopupManager.LoadPopupBox('tipsBox', str, () => {
+                    PopupManager.LoadTipsBox('tipsBox', str, () => {
                         GlobalHandle.onReqRoomLeave();
                         GameCfg.huizhidatas = 0;
                         GameCfg.allRate = 0;
@@ -338,7 +338,7 @@ export default class NewClass extends cc.Component {
                     })
                 }
                 else {
-                    PopupManager.LoadPopupBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
+                    PopupManager.LoadTipsBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
                         GlobalEvent.emit(EventCfg.GAMEOVEER);
                     })
                 }
