@@ -15,6 +15,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     chuangGuan: cc.Node = null;
 
+    @property(cc.Node)
+    cgsLvRank: cc.Node = null;
+
     onLoad() {
         //匹配PK
         GlobalEvent.on(EventCfg.OPENMATCHPK, () => { this.matchPK.active = true; }, this)
@@ -30,6 +33,15 @@ export default class NewClass extends cc.Component {
 
         //// 同步房间游戏状态
         GlobalEvent.on(EventCfg.RoomGameStatus, this.onRoomGameStatus.bind(this), this);
+
+        GlobalEvent.on(EventCfg.OPENCGSLVRANK, this.openCgsLvRank.bind(this), this);
+    }
+
+    openCgsLvRank(data) {
+        this.cgsLvRank.active = true;
+        let handle = this.cgsLvRank.getComponent('CgsLvRank');
+        handle.curData = data;
+        handle.initShow();
     }
 
     // 同步房间游戏状态
@@ -107,6 +119,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.RoomGameDataSelf);
         GlobalEvent.off(EventCfg.RoomGameDataOther);
         GlobalEvent.off(EventCfg.OPENCHUANGUAN);
+        GlobalEvent.off(EventCfg.OPENCGSLVRANK)
     }
 
 

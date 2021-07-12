@@ -21,7 +21,7 @@ export default class LoadUtils {
     public static loadRes(url, call?) {
         cc.loader.loadRes(url, (err, pre) => {
             if (err) {
-                console.log('LoadUtils err' + err);
+                console.log('LoadUtils err');
                 return;
             }
             call && (call(pre))
@@ -53,7 +53,7 @@ export default class LoadUtils {
     public static load(url, call?) {
         cc.loader.load(url, (err, res) => {
             if (err) {
-                console.log('LoadUtils load' + err);
+                console.log('LoadUtils load err');
                 return;
             }
             call && (call(res));

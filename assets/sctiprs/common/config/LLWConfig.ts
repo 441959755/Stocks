@@ -5,8 +5,8 @@ const VERSION = 0;
 const GAMEID = 0;
 //const PLATTYPE = PlatDefine.PLAT_WECHAT;
 const PLATTYPE = PlatDefine.PLAT_WEB;
-const url = 'http://test.chaogugame.com/icon/';
-//const url = 'https://www.cgdr168.com/icon/';
+const LOADHEADURL = 'http://test.chaogugame.com/icon/';
+//const LOADHEADURL = 'https://www.cgdr168.com/icon/';
 
 const ISLOG = false;
 
@@ -31,8 +31,8 @@ export default class LLWConfig {
         return ISLOG;
     }
 
-    static get url() {
-        return url;
+    static get LOADHEADURL() {
+        return LOADHEADURL;
     }
 }
 

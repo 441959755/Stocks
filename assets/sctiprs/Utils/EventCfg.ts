@@ -65,6 +65,8 @@ export default {
 
 	GMAECOUNTERSCHANGE: 'GMAECOUNTERSCHANGE',  //输赢记录重置 或改变
 
+	OPENCGSLVRANK: 'OPENCGSLVRANK',//打开闯关赛关卡排行
+
 	//game
 	ADDFILLCOLOR: 'ADDFILLCOLOR',
 

@@ -7,6 +7,8 @@ export default class PopupManager {
 
     public static MRTBox = null;
 
+    public static stageRankBox = null;
+
     private static flag = false;
 
     //选择加载的Prefa
@@ -56,6 +58,28 @@ export default class PopupManager {
 
     }
 
+    //加载闯关赛关卡排行
+    // public static loadStageRank(name, data, call?) {
+    //     if (!this.stageRankBox && !this.flag) {
+    //         this.flag = true;
+    //         LoadUtils.loadRes('Prefabs/' + name, (pre) => {
+    //             let node = cc.instantiate(pre);
+    //             cc.find('Canvas').addChild(node);
+    //             this.stageRankBox = node;
+    //             let handle = this.stageRankBox.getComponent('CgsLv');
+    //             handle.curData = data;
+    //             handle.initShow();
+    //         })
+    //         setTimeout(() => {
+    //             this.flag = false;
+    //         }, 1000);
+    //     }
+    //     else if (this.stageRankBox) {
+    //         this.stageRankBox.active = true;
+    //     }
+    // }
+
+
 
     public static delPopupNode() {
         this.tipsBox && (this.tipsBox.destroy());
@@ -63,6 +87,8 @@ export default class PopupManager {
         this.flag = false;
         this.MRTBox && (this.MRTBox.destroy());
         this.MRTBox = null;
+        this.stageRankBox && (this.stageRankBox.destroy());
+        this.stageRankBox = null;
 
     }
 

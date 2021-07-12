@@ -49,7 +49,7 @@ cc.Class({
 		cc.Button.prototype._onTouchEnded = function (t) {
 			if (this.interactable && this.enabledInHierarchy) {
 
-				AudioUtils.playEffect("click", false);//播放按钮Button音频
+				AudioUtils.playEffect("click", false);
 
 				if (this._pressed) {
 					cc.Component.EventHandler.emitEvents(this.clickEvents, t);
