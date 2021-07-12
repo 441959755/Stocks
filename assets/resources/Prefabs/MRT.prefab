@@ -2306,7 +2306,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "c9de3ElTL1DZp7hle2m54mP",
+    "_componentId": "34b64e3VMtHtbEOlRPkYpur",
     "handler": "onBtnClick",
     "customEventData": ""
   },
@@ -3672,8 +3672,12 @@
       "__id__": 1
     },
     "_enabled": true,
-    "item": null,
-    "content": null,
+    "item": {
+      "__id__": 6
+    },
+    "content": {
+      "__id__": 86
+    },
     "_id": ""
   },
   {

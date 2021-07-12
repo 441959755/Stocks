@@ -1,3 +1,4 @@
+import ComUtils from "../../sctiprs/Utils/ComUtils";
 
 
 const { ccclass, property } = cc._decorator;
@@ -48,9 +49,42 @@ export default class NewClass extends cc.Component {
 
             let man = userNode.getChildByName('main_sex__man');
 
+            let countLabel = node.getChildByName('label').getComponent(cc.Label);
 
+            if (!el.icon || el.icon == 'default_icon' || el.icon == 'default.jpg') {
+
+            }
+            else {
+                ComUtils.onLoadHead(el.icon, (res) => {
+                    let texture = new cc.SpriteFrame(res);
+                    head.spriteFrame = texture;
+                })
+            }
+
+            if (el.nickname) {
+                username.string = el.nickname;
+            } else {
+                username.string = el.uid;
+            }
+
+            if (el.level) {
+                userlv.string = 'LV: ' + el.level;
+            } else {
+                userlv.string = '';
+            }
+
+            man.children[0].active = !el.gender;
+
+            countLabel.string = el.cgsClearance;
         });
 
+    }
+
+    onBtnClick(event, data) {
+        let name = event.target.name;
+        if (name == 'blackbtn') {
+            this.node.active = false;
+        }
     }
 
     // update (dt) {}

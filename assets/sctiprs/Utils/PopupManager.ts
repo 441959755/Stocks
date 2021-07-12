@@ -38,7 +38,6 @@ export default class PopupManager {
     public static LoadMRTBox(name, data, call?) {
         if (!this.MRTBox && !this.flag) {
             this.flag = true;
-
             LoadUtils.loadRes('Prefabs/' + name, (pre) => {
                 let node = cc.instantiate(pre);
                 cc.find('Canvas').addChild(node);
@@ -47,14 +46,12 @@ export default class PopupManager {
                 handle.MRTData = data;
                 handle.initShow();
             })
-
             setTimeout(() => {
                 this.flag = false;
             }, 1000);
         }
         else if (this.MRTBox) {
             this.MRTBox.active = true;
-
         }
 
     }
@@ -66,8 +63,6 @@ export default class PopupManager {
         this.flag = false;
         this.MRTBox && (this.MRTBox.destroy());
         this.MRTBox = null;
-
-
 
     }
 

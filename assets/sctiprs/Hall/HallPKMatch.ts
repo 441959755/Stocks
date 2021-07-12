@@ -3,6 +3,7 @@ import GameCfg from "../game/GameCfg";
 import GameData from "../GameData";
 import GameCfgText from "../GameText";
 import GlobalHandle from "../global/GlobalHandle";
+import ComUtils from "../Utils/ComUtils";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import LoadUtils from "../Utils/LoadUtils";
@@ -61,14 +62,9 @@ export default class NewClass extends cc.Component {
     }
 
     onLoadHead() {
-        //test.chaogugame.com/icon/X.png
-        //login.cgdr168.com/icon/X.png
-        //let url = 'http://login.chaogugame.com/icon/' + GameData.Players[1].icon + '.png';
-        //let url = 'https://img1.baidu.com/it/u=3139177467,1950838334&fm=26&fmt=auto&gp=0.jpg';
-        // let url = 'https://www.cgdr168.com/icon/200003.png';
-        let url = 'http://test.chaogugame.com/icon/' + GameData.Players[1].icon + '.png';
+        let name = GameData.Players[1].icon;
         GameData.Players[1].icon = null;
-        LoadUtils.load(url, (res) => {
+        ComUtils.onLoadHead(GameData.Players[1].icon, (res) => {
             let texture = new cc.SpriteFrame(res);
             GameData.Players[1].icon = texture;
             let head = this.player2.getChildByName('head');

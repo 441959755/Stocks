@@ -307,6 +307,14 @@ export default class ComUtils {
 		return (parseInt(num * 100 + '') / 100).toFixed(2);
 	}
 
-	
+	//加载头像
+	public static onLoadHead(name, call) {
+		let url = LLWConfig.url + name + '.png';
+		LoadUtils.load(url, (res) => {
+			call && call(res);
+		})
+	}
+
+
 
 }
