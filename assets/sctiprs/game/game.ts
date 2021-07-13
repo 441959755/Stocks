@@ -39,6 +39,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     otherPlayerInfo: cc.Node = null;
 
+    @property(cc.Node)
+    CGSFinalLayer: cc.Node = null;
+
     onLoad() {
         ComUtils.onLoadNode();
         ComUtils.onEvent();
@@ -55,7 +58,13 @@ export default class NewClass extends cc.Component {
             }
             else {
                 setTimeout(() => {
-                    this.finalLayer.active = true;
+                    if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+                        this.CGSFinalLayer.active = true;
+                    }
+                    else {
+                        this.finalLayer.active = true;
+                    }
+
                 }, 80)
             }
         }, this)
@@ -83,7 +92,9 @@ export default class NewClass extends cc.Component {
 
         //游戏开始动画
         if (!GameCfg.GAMEFUPAN) {
-            if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) && !GameCfg.GAMEFRTD) {
+            if ((GameCfg.GameType == pb.GameType.JJ_PK ||
+                GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+                GameCfg.GameType == pb.GameType.JJ_ChuangGuan) && !GameCfg.GAMEFRTD) {
                 this.startGameNode.active = true;
             }
         }
@@ -101,6 +112,7 @@ export default class NewClass extends cc.Component {
         GameCfg.GAMEFUPAN = false;
         GameCfg.GAMEFUPANDATA = null;
         GameData.Players = [];
+        GameData.CGSConfData = null;
     }
 
 
@@ -222,7 +234,8 @@ export default class NewClass extends cc.Component {
             GameCfg.GameType == pb.GameType.DingXiang ||
             GameCfg.GameType == pb.GameType.QiHuo ||
             GameCfg.GameType == pb.GameType.JJ_PK ||
-            GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+            GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+            GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
             for (let i = 1; i <= 6; i++) {
                 if (GameCfg.GameSet['isMA' + i]) {
                     GameCfg.MAs[j++] = parseInt(GameCfg.GameSet['MA' + i + 'Date']);

@@ -100,13 +100,16 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GAMEFUPAN) {
             this.onGameFUPANSHOW();
         } else {
-            if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+            if (GameCfg.GameType == pb.GameType.JJ_PK ||
+                GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+                GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
 
                 this.node.getChildByName('isFC').active = false;
                 if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
                     this.node.getChildByName('JJ_DuoKong').active = true;
                 }
-                else if (GameCfg.GameType == pb.GameType.JJ_PK) {
+                else if (GameCfg.GameType == pb.GameType.JJ_PK
+                    || GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
                     this.node.getChildByName('isFC').active = true;
                 }
 
@@ -133,6 +136,9 @@ export default class NewClass extends cc.Component {
                     let num = 3 * 60 + 3;
                     this.cb1 = setInterval(() => {
                         if (num <= 0) {
+                            if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+                                GlobalEvent.emit(EventCfg.GAMEOVEER);
+                            }
                             clearInterval(this.cb1);
                         }
                         timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);

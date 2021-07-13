@@ -310,7 +310,8 @@ export default class NewClass extends cc.Component {
             this.CCLBtn.active = true;
         }
         else if (GameCfg.GameType == pb.GameType.JJ_PK ||
-            GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+            GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+            GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
             this.setBoxfalg('ma');
             this.setBoxfalg('CPM');
         }

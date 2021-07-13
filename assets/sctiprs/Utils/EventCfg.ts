@@ -67,6 +67,8 @@ export default {
 
 	OPENCGSLVRANK: 'OPENCGSLVRANK',//打开闯关赛关卡排行
 
+	GETCGSDATA: 'GETCGSDATA',//获取闯关赛数据
+
 	//game
 	ADDFILLCOLOR: 'ADDFILLCOLOR',
 

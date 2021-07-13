@@ -281,5 +281,7 @@ export default class GameData {
         cc.sys.localStorage.setItem('TJADCOUNT' + str, val);
     }
 
+    public static CGSConfData = null;
+
 
 }

@@ -187,7 +187,6 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(EventCfg.GAMEFUPANOPT, this.onGameFUPANOPT.bind(this), this);
 
-
 	}
 
 	//游戏结束结算盈利率
@@ -224,7 +223,10 @@ export default class NewClass extends cc.Component {
 
 				if (!GameCfg.GAMEFUPAN) {
 					let item;
-					if (GameCfg.GameType == pb.GameType.ZhiBiao || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.JJ_PK) {
+					if (GameCfg.GameType == pb.GameType.ZhiBiao ||
+						GameCfg.GameType == pb.GameType.DingXiang ||
+						GameCfg.GameType == pb.GameType.JJ_PK ||
+						GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
 						item = {
 							opId: pb.GameOperationId.Bid,
 							volume: 1,
@@ -394,7 +396,10 @@ export default class NewClass extends cc.Component {
 		opt.forEach((el, index) => {
 			GameCfg.huizhidatas = el.kOffset;
 			this.onSetMrCount();
-			if (GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.ZhiBiao || GameCfg.GameType == pb.GameType.JJ_PK) {
+			if (GameCfg.GameType == pb.GameType.DingXiang ||
+				GameCfg.GameType == pb.GameType.ZhiBiao ||
+				GameCfg.GameType == pb.GameType.JJ_PK ||
+				GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
 				if (el.opId == pb.GameOperationId.Ask) {
 					this._type = 1;
 					this.onClickCfBtn(el.volume);

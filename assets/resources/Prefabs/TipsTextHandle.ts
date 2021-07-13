@@ -9,23 +9,30 @@ export default class NewClass extends cc.Component {
 
     textData = '';
 
+    callOut = null;
 
     onShow() {
         this.label.string = this.textData;
-        setTimeout(() => {
+        if (!this.callOut) {
+            this.callOut = setTimeout(() => {
+                cc.tween(this.node)
+                    .to(0.5, { opacity: 0 })
+                    .call(() => {
+                        this.node.active = false;
+                        this.callOut && (clearTimeout(this.callOut))
+                        this.callOut = null;
+                    })
+                    .start();
+            }, 2000);
+        }
 
-            cc.tween(this.node)
-                .to(0.5, { opacity: 0 })
-                .call(() => {
-                    this.node.active = false;
-                })
-                .start();
-        }, 2000);
     }
 
 
     onDisable() {
         this.textData = '';
         this.node.opacity = 255;
+        this.callOut && (clearTimeout(this.callOut))
+        this.callOut = null;
     }
 }

@@ -62,14 +62,15 @@ export default class NewClass extends cc.Component {
     }
 
     onLoadHead() {
-        let name = GameData.Players[1].icon;
+        if (GameData.Players[1].icon) {
+            ComUtils.onLoadHead(GameData.Players[1].icon, (res) => {
+                let texture = new cc.SpriteFrame(res);
+                GameData.Players[1].icon = texture;
+                let head = this.player2.getChildByName('head');
+                head.getComponent(cc.Sprite).spriteFrame = GameData.Players[1].icon;
+            })
+        }
         GameData.Players[1].icon = null;
-        ComUtils.onLoadHead(GameData.Players[1].icon, (res) => {
-            let texture = new cc.SpriteFrame(res);
-            GameData.Players[1].icon = texture;
-            let head = this.player2.getChildByName('head');
-            head.getComponent(cc.Sprite).spriteFrame = GameData.Players[1].icon;
-        })
     }
 
 
@@ -94,44 +95,50 @@ export default class NewClass extends cc.Component {
             exp.getComponent(cc.Label).string = '经验值：' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.gameTextCfg.level_exp[(GameData.properties[pb.GamePropertyId.Level] || 1)];
         }
 
-        let arr = [];
-
-        let smArr = GameData.JJPKSet;
-
-        if (smArr.isMA1 && arr.indexOf(smArr.MA1Date) == -1) {
-            arr.push(smArr.MA1Date);
+        if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+            this.onSlideShow();
         }
+        else {
+            let arr = [];
 
-        if (smArr.isMA2 && arr.indexOf(smArr.MA2Date) == -1) {
-            arr.push(smArr.MA2Date);
-        }
+            let smArr = GameData.JJPKSet;
 
-        if (smArr.isMA3 && arr.indexOf(smArr.MA3Date) == -1) {
-            arr.push(smArr.MA3Date);
-        }
-
-        if (smArr.isMA4 && arr.indexOf(smArr.MA4Date) == -1) {
-            arr.push(smArr.MA4Date);
-        }
-
-        if (smArr.isMA5 && arr.indexOf(smArr.MA5Date) == -1) {
-            arr.push(smArr.MA5Date);
-        }
-
-        if (smArr.isMA6 && arr.indexOf(smArr.MA6Date) == -1) {
-            arr.push(smArr.MA6Date);
-        }
-
-        arr = Array.from(new Set(arr));
-
-        GlobalHandle.onReqRoomEnter(arr, (flag) => {
-            if (flag) {
-                this.onSlideShow();
+            if (smArr.isMA1 && arr.indexOf(smArr.MA1Date) == -1) {
+                arr.push(smArr.MA1Date);
             }
-            else {
-                this.node.active = false;
+
+            if (smArr.isMA2 && arr.indexOf(smArr.MA2Date) == -1) {
+                arr.push(smArr.MA2Date);
             }
-        });
+
+            if (smArr.isMA3 && arr.indexOf(smArr.MA3Date) == -1) {
+                arr.push(smArr.MA3Date);
+            }
+
+            if (smArr.isMA4 && arr.indexOf(smArr.MA4Date) == -1) {
+                arr.push(smArr.MA4Date);
+            }
+
+            if (smArr.isMA5 && arr.indexOf(smArr.MA5Date) == -1) {
+                arr.push(smArr.MA5Date);
+            }
+
+            if (smArr.isMA6 && arr.indexOf(smArr.MA6Date) == -1) {
+                arr.push(smArr.MA6Date);
+            }
+
+            arr = Array.from(new Set(arr));
+
+            GlobalHandle.onReqRoomEnter(arr, (flag) => {
+                if (flag) {
+                    this.onSlideShow();
+                }
+                else {
+                    this.node.active = false;
+                }
+            });
+        }
+
     }
 
     onSlideShow() {

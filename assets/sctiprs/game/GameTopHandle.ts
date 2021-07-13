@@ -125,7 +125,7 @@ export default class NewClass extends cc.Component {
         this.pkNode.active = false;
         if (status == 3) {
             this.pkNode.active = true;
-            this.name1.string = GameCfg.RoomGameData.players[0].gd.nickname;
+            this.name1.string = GameData.userName;
             this.name2.string = GameCfg.RoomGameData.players[1].gd.nickname;
 
             this.box1.active = true;
@@ -165,14 +165,14 @@ export default class NewClass extends cc.Component {
             let result = this.pkfupan1.getChildByName('rate').getChildByName('label4').getComponent(cc.Label);
             if (status == 1) {
                 head.spriteFrame = GameData.headImg;
+                name.string = '昵称：' + GameData.userName;
             }
             else {
                 if (GameData.Players[1].icon) {
                     head.spriteFrame = GameData.Players[1].icon;
+                    name.string = '昵称：' + GameCfg.RoomGameData.players[status - 1].gd.nickname;
                 }
             }
-
-            name.string = '昵称：' + GameData.userName;
 
             let r, rank;
             if (GameCfg.RoomGameData) {
@@ -225,7 +225,9 @@ export default class NewClass extends cc.Component {
             btnMyspic.active = false;
             statBtn.active = true;
         }
-        else if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+        else if (GameCfg.GameType == pb.GameType.JJ_PK ||
+            GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+            GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
             this.onShowPKFUPAN(1)
         }
     }
@@ -272,7 +274,8 @@ export default class NewClass extends cc.Component {
         }
 
         else if (GameCfg.GameType == pb.GameType.JJ_PK
-            || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+            || GameCfg.GameType == pb.GameType.JJ_DuoKong
+            || GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
             this.GameName.string = '';
             this.rightNode.active = false;
             let la = this.node.getChildByName('rate');
@@ -319,7 +322,9 @@ export default class NewClass extends cc.Component {
         //点击终止
         else if (name == 'backBtn' || name == 'closeBtn' || name == 'sys_back') {
             if (!GameCfg.GAMEFUPAN) {
-                if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+                if (GameCfg.GameType == pb.GameType.JJ_PK ||
+                    GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+                    GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
 
                     let str;
                     if (GameCfg.GAMEWAIT) {
@@ -343,7 +348,9 @@ export default class NewClass extends cc.Component {
                     })
                 }
             } else {
-                if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+                if (GameCfg.GameType == pb.GameType.JJ_PK ||
+                    GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+                    GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
                     if (GameCfg.GAMEFUPANDATA) {
                         this.onBlackHAll();
                     }

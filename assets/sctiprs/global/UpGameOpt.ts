@@ -24,6 +24,7 @@ export default class UpGameOpt {
 
     //添加操作
     public static addOpt(el) {
+
         if (GameCfg.GAMEFRTD && GameCfg.RoomGameData.players[0].ops.items.length > 0) {
 
             let le = GameCfg.RoomGameData.players[0].ops.items.length - 1;

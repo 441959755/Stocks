@@ -105,32 +105,32 @@ export default class NewClass extends cc.Component {
         if (!GameCfg.GAMEFUPAN) {
             let datas = {
                 uid: GameData.userID,
-                g_type: GameCfg.GameType,
+                gType: GameCfg.GameType,
                 quotes_code: GameCfg.data[0].code,
-                k_type: GameCfg.data[0].ktype,
-                k_from: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
+                kType: GameCfg.data[0].ktype,
+                kFrom: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
 
-                k_to: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
-                stock_profit_rate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100),
-                user_profit_rate: (GameCfg.allRate * 100),
-                user_capital: GameData.SmxlState.gold,
-                user_profit: (GameCfg.finalfund - GameCfg.ziChan),
-                ts: new Date().getTime() / 1000,
+                kTo: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
+                stockProfitRate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100),
+                userProfitRate: (GameCfg.allRate * 100),
+                userCapital: GameData.SmxlState.gold,
+                userProfit: (GameCfg.finalfund - GameCfg.ziChan),
+                ts: parseInt(new Date().getTime() / 1000 + ''),
                 rank: 0,
-                ref_id: 0,
-                k_startup: GameData.huizhidatas - 1,
-                k_stop: GameCfg.huizhidatas - 1,
+                refId: 0,
+                kStartup: GameData.huizhidatas - 1,
+                kStop: GameCfg.huizhidatas - 1,
             }
             if (GameCfg.GameType == pb.GameType.ShuangMang) {
-                datas.user_capital = GameData.SmxlState.gold;
+                datas.userCapital = GameData.SmxlState.gold;
             } else {
-                datas.user_capital = GameCfg.ziChan;
+                datas.userCapital = GameCfg.ziChan;
             }
             console.log('GameCfg.finalfund' + GameCfg.finalfund + '-' + 'GameCfg.ziChan' + GameCfg.ziChan + '=' + (GameCfg.finalfund - GameCfg.ziChan));
 
-            datas.rank = datas.user_profit_rate >= datas.stock_profit_rate ? 1 : 2;
+            datas.rank = datas.userProfitRate >= datas.stockProfitRate ? 1 : 2;
 
-            datas.ref_id = 0;
+            datas.refId = 0;
             let CmdGameOver;
             if (GameCfg.GameType != pb.GameType.ShuangMang) {
                 this.saveHoistoryInfo(parseInt(datas.ts + ''));

@@ -90,31 +90,9 @@ PBHelper.prototype = {
     //游戏结束上传数据
     onCmdGameOverConvertToBuff(datas) {
         let CmdGameOver = pb.CmdGameOver;
-        let data = datas.result;
 
-        let message = CmdGameOver.create({
-            result: {
-                uid: data.uid,
-                gType: data.g_type,
-                quotesCode: data.quotes_code,
-                kType: data.k_type,
-                kFrom: data.k_from,
-                kTo: data.k_to,
-                stockProfitRate: data.stock_profit_rate,
-                userProfitRate: data.user_profit_rate,
-                userCapital: data.user_capital,
-                userProfit: data.user_profit,
-                ts: data.ts,
-                rank: data.rank,
-                refId: data.ref_id,
-                kStartup: data.k_startup,
-                kStop: data.k_stop,
-            },
-            operations: {
-                items: datas.operations,
-                junXian: [],
-            }
-        })
+
+        let message = CmdGameOver.create(datas)
 
         let buff = CmdGameOver.encode(message).finish();
 
@@ -446,6 +424,13 @@ PBHelper.prototype = {
             let RankingList = pb.RankingList;
             let data = RankingList.decode(new Uint8Array(buff));
             return data;
+        }
+        //同步闯关赛游戏数据
+        else if (id == pb.MessageId.Sync_S2C_GameCg_GD) {
+            let JjGame = pb.JjGame;
+            let data = JjGame.decode(new Uint8Array(buff));
+            //  console.log('闯关赛游戏数据' + JSON.stringify(data));
+            GlobalEvent.emit(EventCfg.GETCGSDATA, data);
         }
     }
 

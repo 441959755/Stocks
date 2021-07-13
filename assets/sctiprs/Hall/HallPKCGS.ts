@@ -1,5 +1,8 @@
 import { pb } from "../../protos/proto";
+import GameCfg from "../game/GameCfg";
 import GameData from "../GameData";
+import GameCfgText from "../GameText";
+import GlobalHandle from "../global/GlobalHandle";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import PopupManager from "../Utils/PopupManager";
@@ -30,7 +33,67 @@ export default class NewClass extends cc.Component {
     //  StageRankData = null;
 
     onLoad() {
+        GlobalEvent.on(EventCfg.GETCGSDATA, (info) => {
+            GameCfg.RoomGameData = info;
+            let code = info.code + '';
+            if (code.length >= 7) {
+                code = code.slice(1);
+            }
 
+            let items = GameCfgText.getGPPKItemInfo(code);
+            GameCfg.data[0].code = code;
+            GameCfg.data[0].name = items[1];
+            GameCfg.data[0].data = [];
+            GameCfg.data[0].circulate = items[4];
+
+            GameData.huizhidatas = info.tsQuoteStart + 1;
+            GameCfg.huizhidatas = info.tsQuoteStart + 1;
+
+            info.quotes && (info.quotes.items.forEach((el, index) => {
+                //   if (index != 0) {
+                //  let date = new Date(el.timestamp);
+                let ye = (el.timestamp + '').slice(0, 4);
+                let mon = (el.timestamp + '').slice(4, 6);
+                let da = (el.timestamp + '').slice(6);
+                let fromDate = ye + '-' + mon + '-' + da;
+                //  if (fromDate != d) {
+                let data = {
+                    day: fromDate || 0,
+                    open: el.open || 0,
+                    close: el.price || 0,
+                    high: el.high || 0,
+                    low: el.low || 0,
+                    price: el.amount || 0,
+                    value: el.volume || 0,
+                    Rate: (el.volume / GameCfg.data[0].circulate) * 100
+                };
+
+                if (GameCfg.data[0].circulate == 0) {
+                    data.Rate = 1;
+                }
+                GameCfg.data[0].data.push(data);
+
+            })
+            )
+
+            GlobalEvent.emit(EventCfg.OPENMATCHPK);
+            GameData.Players[1] = info.players[0].gd;
+
+            let timeout = Math.random() * 2 + 3;
+
+            setTimeout(() => {
+                GlobalEvent.emit('SHOWOTHERPLAYER');
+                setTimeout(() => {
+                    cc.director.loadScene('game');
+                }, 1000)
+
+            }, timeout * 1000);
+
+        }, this);
+    }
+
+    onDestroy() {
+        GlobalEvent.off(EventCfg.GETCGSDATA);
     }
 
     start() {
@@ -68,14 +131,49 @@ export default class NewClass extends cc.Component {
             // }
 
         }
+        //挑战
+        else if (name == 'tzBtn') {
+
+            let stage = parseInt(data) - 1;
+            let stages = JSON.parse(this.confdata.conf);
+            let gold = stages.Stages[stage].Cost[0].v;
+            if (GameData.properties[pb.GamePropertyId.Gold] < Math.abs(gold)) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+                return;
+            }
+
+            if (GameData.todayGameCount[pb.GameType.JJ_ChuangGuan] >= stages.Times) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已超上限');
+                return;
+            }
+
+            GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
+            GameCfg.GameSet = GameData.JJPKSet;
+
+            // GlobalEvent.emit(EventCfg.OPENMATCHPK);
+            GlobalHandle.onCmdGameStartReq(() => {
+
+            })
+        }
+    }
+
+    //同步闯关赛游戏数据
+    syncCGSGameData() {
+        socket.send(pb.MessageId.Sync_S2C_GameCg_GD, null, (res) => {
+            console.log('闯关赛配置2' + JSON.stringify(res));
+            this.confdata = res;
+            this.onUpShowTimeCount();
+            this.onUpContent();
+        })
     }
 
 
     // 查询当前一轮闯关赛配置数据
     reqGameCgsGetConf() {
         socket.send(pb.MessageId.Req_Game_CgsGetConf, null, (res) => {
-            console.log('闯关赛配置' + JSON.stringify(res));
+            console.log('闯关赛配置1' + JSON.stringify(res));
             this.confdata = res;
+            GameData.CGSConfData = res;
             this.onUpShowTimeCount();
             this.onUpContent();
         })
@@ -142,7 +240,7 @@ export default class NewClass extends cc.Component {
 
             costLabel.string = '报名（' + Math.abs(stages.Stages[index].Cost[0].v) + '金币）'
 
-            if (index > GameData.cgState.stage) {
+            if (GameData.cgState && index > GameData.cgState.stage) {
                 node1.children[1].active = false;
                 node1.children[2].active = false;
                 node1.children[0].active = true;
@@ -157,7 +255,7 @@ export default class NewClass extends cc.Component {
                 taBtn.children[0].active = true;
                 // ckBtn.children[0].active = true;
             }
-            else if (index == GameData.cgState.stage) {
+            else if (GameData.cgState && index == GameData.cgState.stage) {
                 node1.children[0].active = false;
                 node1.children[1].active = true;
                 node1.children[2].active = false;
@@ -180,7 +278,7 @@ export default class NewClass extends cc.Component {
 
                 costLabel.node.color = cc.Color.WHITE;
             }
-            else if (index < GameData.cgState.stage) {
+            else if (GameData.cgState && index < GameData.cgState.stage) {
                 node1.children[0].active = false;
                 node1.children[1].active = false;
                 node1.children[2].active = true;

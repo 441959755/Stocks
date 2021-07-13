@@ -14,7 +14,6 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
-
     gameResult = null;
 
     @property(cc.Node)
@@ -37,10 +36,6 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Label)
     HasRisen: cc.Label = null;    //同期涨幅
-
-
-    @property(cc.Prefab)
-    EnterGameBox: cc.Prefab = null;
 
     EnterGameLayer: cc.Node = null;
 
@@ -82,7 +77,7 @@ export default class NewClass extends cc.Component {
             let xj = this.player1.getChildByName('jj_xj');
             let taopao = this.player1.getChildByName('jj_toapao');
 
-            userName.string = this.gameResult.players[0].gd.uid;
+            userName.string = this.gameResult.players[0].gd.nickname;
             userLevel.string = 'LV: ' + this.gameResult.players[0].gd.properties[pb.GamePropertyId.Level];
             userExp.string = 'EXP: ' + this.gameResult.players[0].gd.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
 
@@ -134,9 +129,9 @@ export default class NewClass extends cc.Component {
             let xj = this.player1.getChildByName('jj_xj');
             let taopao = this.player1.getChildByName('jj_toapao');
 
-            userName.string = this.gameResult.players[1].gd.uid;
+            userName.string = this.gameResult.players[1].gd.nickname;
             userLevel.string = 'LV: ' + this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level];
-            userExp.string = 'EXP: ' + this.gameResult.players[1].gd.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
+            userExp.string = 'EXP: ' + this.gameResult.players[1].gd.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level]];
 
             if (GameData.Players[1].icon) {
                 userHead.spriteFrame = GameData.Players[1].icon;
