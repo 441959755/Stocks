@@ -136,4 +136,6 @@ export default {
 	PKFUPAN: 'PKFUPAN',    //pk复盘
 
 	OPENOTHERINFOBOX: 'OPENOTHERINFOBOX',//其他玩家信息框
+
+	CLEARINTERVAL: 'CLEARINTERVAL',  //竞技结束计时
 };

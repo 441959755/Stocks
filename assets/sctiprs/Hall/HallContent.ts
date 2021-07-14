@@ -56,7 +56,13 @@ export default class NewClass extends cc.Component {
 		this.setUserInfo();
 		//设置用户头像
 		this.setHeadImg();
+
+		if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+			this.onBtnClick({ target: { name: 'main_jj_cgs' } }, null);
+		}
 	}
+
+
 
 	setHeadImg() {
 		let headUrl = GameData.headimgurl;

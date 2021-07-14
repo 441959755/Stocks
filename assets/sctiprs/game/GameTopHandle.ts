@@ -170,8 +170,8 @@ export default class NewClass extends cc.Component {
             else {
                 if (GameData.Players[1].icon) {
                     head.spriteFrame = GameData.Players[1].icon;
-                    name.string = '昵称：' + GameCfg.RoomGameData.players[status - 1].gd.nickname;
                 }
+                name.string = '昵称：' + GameCfg.RoomGameData.players[status - 1].gd.nickname;
             }
 
             let r, rank;
@@ -225,11 +225,7 @@ export default class NewClass extends cc.Component {
             btnMyspic.active = false;
             statBtn.active = true;
         }
-        else if (GameCfg.GameType == pb.GameType.JJ_PK ||
-            GameCfg.GameType == pb.GameType.JJ_DuoKong ||
-            GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
-            this.onShowPKFUPAN(1)
-        }
+
     }
 
     protected onEnable() {
@@ -290,18 +286,28 @@ export default class NewClass extends cc.Component {
             }
             //其他人
             {
-                if (GameData.Players[1].icon) {
-                    this.head2.spriteFrame = GameData.Players[1].icon;
-                }
-                this.name2.string = GameData.Players[1].nickname;
-                this.level2.string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1);
-                this.pkAllRateLa2.string = "****";
+                if (GameData.Players[1]) {
 
+                    if (GameData.Players[1].icon) {
+                        this.head2.spriteFrame = GameData.Players[1].icon;
+                    }
+                    this.name2.string = GameData.Players[1].nickname;
+                    this.level2.string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1);
+                    this.pkAllRateLa2.string = "****";
+                }
             }
 
         }
 
         this.onShowGANEFUPAN();
+        if (GameCfg.GAMEFUPAN) {
+            if (GameCfg.GameType == pb.GameType.JJ_PK ||
+                GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+                GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+
+                this.onShowPKFUPAN(1)
+            }
+        }
 
         colseBtn.active = false;
     }

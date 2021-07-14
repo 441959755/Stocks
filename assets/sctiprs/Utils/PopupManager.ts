@@ -3,13 +3,17 @@ import ActionUtils from "./ActionUtils";
 
 export default class PopupManager {
 
-    public static tipsBox = null;
+    private static tipsBox = null;
 
-    public static MRTBox = null;
+    private static MRTBox = null;
 
-    public static stageRankBox = null;
+    private static stageRankBox = null;
 
     private static flag = false;
+
+    private static OtherPlayerHisBox = null;
+
+    private static urls = [];
 
     //选择加载的Prefa
     public static LoadTipsBox(name, text, call?) {
@@ -40,6 +44,7 @@ export default class PopupManager {
     public static LoadMRTBox(name, data, call?) {
         if (!this.MRTBox && !this.flag) {
             this.flag = true;
+
             LoadUtils.loadRes('Prefabs/' + name, (pre) => {
                 let node = cc.instantiate(pre);
                 cc.find('Canvas').addChild(node);
@@ -48,6 +53,7 @@ export default class PopupManager {
                 handle.MRTData = data;
                 handle.initShow();
             })
+            this.urls.push('Prefabs/' + name);
             setTimeout(() => {
                 this.flag = false;
             }, 1000);
@@ -59,29 +65,63 @@ export default class PopupManager {
     }
 
     //加载闯关赛关卡排行
-    // public static loadStageRank(name, data, call?) {
-    //     if (!this.stageRankBox && !this.flag) {
-    //         this.flag = true;
-    //         LoadUtils.loadRes('Prefabs/' + name, (pre) => {
-    //             let node = cc.instantiate(pre);
-    //             cc.find('Canvas').addChild(node);
-    //             this.stageRankBox = node;
-    //             let handle = this.stageRankBox.getComponent('CgsLv');
-    //             handle.curData = data;
-    //             handle.initShow();
-    //         })
-    //         setTimeout(() => {
-    //             this.flag = false;
-    //         }, 1000);
-    //     }
-    //     else if (this.stageRankBox) {
-    //         this.stageRankBox.active = true;
-    //     }
-    // }
+    public static loadStageRank(name, data, call?) {
+        if (!this.stageRankBox && !this.flag) {
+            this.flag = true;
+            LoadUtils.loadRes('Prefabs/' + name, (pre) => {
+                let node = cc.instantiate(pre);
+                cc.find('Canvas').addChild(node);
+                this.stageRankBox = node;
+                this.stageRankBox.active = true;
+                let handle = this.stageRankBox.getComponent('CgsLvRank');
+                handle.curData = data;
+                handle.initShow();
+            })
+            this.urls.push('Prefabs/' + name);
+            setTimeout(() => {
+                this.flag = false;
+            }, 1000);
+        }
+        else if (this.stageRankBox) {
+            this.stageRankBox.active = true;
+            let handle = this.stageRankBox.getComponent('CgsLvRank');
+            handle.curData = data;
+            handle.initShow();
 
+        }
+    }
 
+    //打开其他玩家历史战绩
+    public static loadOtherPlayerHisInfo(name, data, call?) {
+
+        if (!this.OtherPlayerHisBox && !this.flag) {
+            this.flag = true;
+
+            LoadUtils.loadRes('Prefabs/' + name, (pre) => {
+                let node = cc.instantiate(pre);
+                cc.find('Canvas').addChild(node);
+                this.OtherPlayerHisBox = node;
+                this.OtherPlayerHisBox.active = true;
+                this.OtherPlayerHisBox.getComponent('OtherPlayerHisInfo').playeInfo = data;
+                this.OtherPlayerHisBox.getComponent('OtherPlayerHisInfo').onShow();
+            })
+            this.urls.push('Prefabs/' + name);
+            setTimeout(() => {
+                this.flag = false;
+            }, 1000);
+        }
+        else if (this.OtherPlayerHisBox) {
+            this.OtherPlayerHisBox.active = true;
+            this.OtherPlayerHisBox.getComponent('OtherPlayerHisInfo').playeInfo = data;
+            this.OtherPlayerHisBox.getComponent('OtherPlayerHisInfo').onShow();
+        }
+    }
 
     public static delPopupNode() {
+        this.urls.forEach(el => {
+            LoadUtils.releaseRes(el);
+        })
+        this.urls = [];
         this.tipsBox && (this.tipsBox.destroy());
         this.tipsBox = null;
         this.flag = false;
@@ -89,7 +129,8 @@ export default class PopupManager {
         this.MRTBox = null;
         this.stageRankBox && (this.stageRankBox.destroy());
         this.stageRankBox = null;
-
+        this.OtherPlayerHisBox && (this.OtherPlayerHisBox.destroy());
+        this.OtherPlayerHisBox = null;
     }
 
 }

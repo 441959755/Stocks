@@ -40,6 +40,7 @@ export default class NewClass extends cc.Component {
     EnterGameLayer: cc.Node = null;
 
     onShow() {
+        GlobalEvent.emit(EventCfg.CLEARINTERVAL);
 
         let gpData = GameCfg.data[0].data;
         this.codeLabel.string = '股票名称：' + GameCfg.data[0].name + '    ' + GameCfg.data[0].code;

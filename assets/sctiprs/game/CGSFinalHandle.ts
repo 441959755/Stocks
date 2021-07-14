@@ -47,13 +47,14 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-
         if (GameCfg.GAMEFUPAN) {
             return;
         }
+        GlobalEvent.emit(EventCfg.CLEARINTERVAL);
+
 
         let player = GameCfg.RoomGameData.players[0];
-        GameCfg.RoomGameData.players[1] = JSON.parse(JSON.stringify(player));
+        GameCfg.RoomGameData.players.unshift(JSON.parse(JSON.stringify(player)));
 
         let gpData = GameCfg.data[0].data;
         this.codeLabel.string = '股票名称：' + GameCfg.data[0].name + '    ' + GameCfg.data[0].code;
@@ -175,14 +176,14 @@ export default class NewClass extends cc.Component {
 
             this.otherResultLabel[0].string = '-' + stages.Lose[0].v;
             this.otherResultLabel[1].string = '-' + stages.Lose[1].v;
-            this.otherResultLabel[2].string = '-' + stages.Lose[2].v;
+            this.otherResultLabel[2].string = '' + stages.Lose[2].v;
             this.otherResultLabel[3].string = '-' + 1;
             this.otherResultLabel[4].string = "-" + 0;
             this.otherResultLabel[5].string = ComUtils.changeTwoDecimal(GameCfg.RoomGameData.players[1].result.userProfitRate) + '%'
         } else {
             this.selfResultLabel[0].string = '-' + stages.Lose[0].v;
             this.selfResultLabel[1].string = '-' + stages.Lose[1].v;
-            this.selfResultLabel[2].string = '-' + stages.Lose[2].v;
+            this.selfResultLabel[2].string = '' + stages.Lose[2].v;
             this.selfResultLabel[3].string = '-' + 1;
             this.selfResultLabel[4].string = "-" + 0;
             this.selfResultLabel[5].string = ComUtils.changeTwoDecimal(GameCfg.allRate) + '%';

@@ -275,6 +275,9 @@ export default class NewClass extends cc.Component {
 		else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 			event = { target: { name: 'toggle1' } }
 		}
+		else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+			event = { target: { name: 'toggle1' } }
+		}
 
 		if (event) {
 			GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
@@ -374,7 +377,6 @@ export default class NewClass extends cc.Component {
 		GameCfg.enterGameCache = info1;
 
 		GlobalHandle.onCmdGameStartReq(() => {
-
 			GlobalHandle.onCmdGameStartQuoteQuery(info1, () => {
 				cc.director.loadScene('game');
 			})
@@ -384,7 +386,6 @@ export default class NewClass extends cc.Component {
 	}
 
 	onCmdQuoteQuery(data) {
-
 		this.onCmdGameStart({ game: GameCfg.GameType }, data);
 	}
 

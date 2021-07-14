@@ -151,6 +151,10 @@ enum MessageId {
 	Rep_Hall_MobileBind = 3036;				// 手机号绑定应答：ErrorInfo
 	Req_Hall_ResetGameCounter = 3037;		// 重置游戏胜负统计：CmdResetGameCounter
 	Rep_Hall_ResetGameCounter = 3038;		// 重置游戏胜负统计应答：无
+	Req_Hall_GetLevelRanking = 3039;		// 查询等级排行：无包体
+	Rep_Hall_GetLevelRanking = 3040;		// 查询等级排行应答：RankingList
+	Req_Hall_GetFameRanking = 3041;			// 查询威望排行：无包体
+	Rep_Hall_GetFameRanking = 3042;			// 查询威望排行应答：RankingList
 
 	Req_Hall_Logout = 3999;					// 登出：无
 	Rep_Hall_Logout = 4000;					// 登出应答：无（发送请求成功后会自动断开tcp长连接）
@@ -181,7 +185,7 @@ enum MessageId {
 	Rep_Game_CgsGetStageRank = 4020;		// 查询闯关赛关卡排行应答：RankingList
 	Req_Game_CgsGetSeasonRank = 4021;		// 查询闯关赛排行榜：CmdCgsRanking
 	Rep_Game_CgsGetSeasonRank = 4022;		// 查询闯关赛排行榜应答：RankingList
-	Req_Game_CgsGetStageAward = 4023;		// 领取闯关赛奖励：CmdGetCgsStageAward
+	Req_Game_CgsGetStageAward = 4023;		// 领取闯关赛奖励：CmdCgsGetStageAward
 	Rep_Game_CgsGetStageAward = 4024;		// 领取闯关赛奖励应答：ErrorInfo
 	// 模拟炒股和炒股大赛共用
 	Req_Game_OrderQuery = 4025;				// 查询交易记录：CmdQueryStockOrder
@@ -238,8 +242,8 @@ enum MessageId {
 	S2S_OrderCancel = 10007;				// 撤销订单：CmdStockOrderCancel
 	S2S_Sync_Cgds = 10009;					// 同步炒股大赛数据：CgdsList
 	S2S_Set_CgdsTitle = 10011;				// 设置炒股大赛标题：CgdsConf
-	S2S_Set_CgdsLogo = 100013;				// 设置炒股大赛Logo：CgdsConf
-	S2S_Set_CgdsUrl = 100015;				// 设置炒股大赛URL：CgdsConf
+	S2S_Set_CgdsLogo = 10013;				// 设置炒股大赛Logo：CgdsConf
+	S2S_Set_CgdsUrl = 10015;				// 设置炒股大赛URL：CgdsConf
 	S2S_Set_CgdsConf = 10017;				// 设置炒股大赛Conf：CgdsConf
 	S2S_Set_CgdsAward = 10019;				// 设置炒股大赛Award：CgdsConf
 	S2S_Open_Cgds = 10021;					// 创建炒股大赛：CgdsConf

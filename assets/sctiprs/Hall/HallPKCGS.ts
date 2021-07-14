@@ -122,13 +122,9 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'ckBtn') {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            //   if (!this.StageRankData) {
+
             let stage = parseInt(data) - 1;
             this.reqGameCgsGetStageRank(this.confdata.id, stage);
-            // }
-            // else {
-            //     // PopupManager.loadStageRank('CgsLv', null);
-            // }
 
         }
         //挑战
@@ -152,6 +148,36 @@ export default class NewClass extends cc.Component {
 
             // GlobalEvent.emit(EventCfg.OPENMATCHPK);
             GlobalHandle.onCmdGameStartReq(() => {
+
+            })
+        }
+
+        //领取奖励
+        else if (name == 'node4') {
+            let box = event.target.getChildByName('box');
+            if (!box.children[0].active) { return }
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            let info = {
+                id: this.confdata.id,
+                stage: parseInt(data) - 1,
+            }
+
+            let CmdCgsGetStageAward = pb.CmdCgsGetStageAward;
+            let message = CmdCgsGetStageAward.create(info);
+            let buff = CmdCgsGetStageAward.encode(message).finish();
+
+            socket.send(pb.MessageId.Req_Game_CgsGetStageAward, buff, (res) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                console.log('领取闯关赛奖励' + JSON.stringify(res));
+                if (!res.err) {
+
+                    box.children.forEach(el => {
+                        el.active = false;
+                    });
+                    box.children[2].active = true;
+                    let awardLabel = event.target.getChildByName('label2').getComponent(cc.Label);
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '奖励：' + awardLabel.string)
+                }
 
             })
         }
@@ -217,6 +243,11 @@ export default class NewClass extends cc.Component {
             let node4 = el.getChildByName('node4');
             let node5 = el.getChildByName('node5');
 
+            let box = node4.getChildByName('box');
+            box.children.forEach(el => {
+                el.active = false;
+            })
+
             let peopleLabel = node3.getChildByName('label1').getComponent(cc.Label);
             let lifesLabel = node3.getChildByName('label3').getComponent(cc.Label);
             let cgs_jdt = node3.getChildByName('cgs_jdt');
@@ -240,10 +271,23 @@ export default class NewClass extends cc.Component {
 
             costLabel.string = '报名（' + Math.abs(stages.Stages[index].Cost[0].v) + '金币）'
 
+            let awards = GameData.cgState.awards[index];
+
+            if (awards.gotten) {
+                box.children[2].active = true;
+            }
+            else if (awards.awarded) {
+                box.children[0].active = true;
+            } else {
+                box.children[1].active = true;
+            }
+
+
             if (GameData.cgState && index > GameData.cgState.stage) {
                 node1.children[1].active = false;
                 node1.children[2].active = false;
                 node1.children[0].active = true;
+
                 cgs_jdt.active = false;
                 lifesLabel.string = '';
                 if (GameData.cgState.lifes) {
@@ -364,7 +408,7 @@ export default class NewClass extends cc.Component {
             stage: stage,
         }
 
-        let CmdCgsRanking = pb.CmdCgdsRanking;
+        let CmdCgsRanking = pb.CmdCgsRanking;
         let message = CmdCgsRanking.create(data);
         let buff = CmdCgsRanking.encode(message).finish();
 
@@ -372,9 +416,9 @@ export default class NewClass extends cc.Component {
 
             console.log('闯关赛关卡排行' + JSON.stringify(res));
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            GlobalEvent.emit(EventCfg.OPENCGSLVRANK, res);
+            // GlobalEvent.emit(EventCfg.OPENCGSLVRANK, res);
             //  this.StageRankData = res;
-            //   PopupManager.loadStageRank('CgsLv', res);
+            PopupManager.loadStageRank('cgsLvRank', res);
 
         })
     }

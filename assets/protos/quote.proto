@@ -133,11 +133,12 @@ message QuotesFuture {
 
 
 // AI选股相关
-// 查询AI股票列表：三个字段为空时，则返回最新更新的前100个股票
+// 查询AI股票列表：前三个字段为空时，则返回最新更新的前100个信号的股票（包括买卖信号，如果只显示买入信号，需要客户端过滤掉卖出信号）
 message CmdQueryAiStockList {
-	int32 rank_from = 1;   	// 收益排行起始位置
-	int64 ts_update_from=2; // 更新时间戳起始位置：精确到秒
-	int32 total = 3;		// 查询条数
+	int32 rank_from = 1;   		// 收益排行起始位置
+	int64 ts_update_from=2; 	// 信号更新时间戳起始位置：精确到秒
+	int32 total = 3;			// 查询条数
+	repeated int32 codes = 4;	// 按照股票代码查询
 }
 message AiStockItem {
 	uint32 code = 1;			// 股票代码
@@ -149,6 +150,7 @@ message AiStockItem {
 	double last_ask_price = 7;	// 最近一次建议买入价格(要么没有，要么买卖价成对出现)
 	double last_bid_price = 8;	// 最近一次建议卖出价格(要么没有，要么买卖价成对出现)
 	double cur_ask_price = 9;	// 当前建议买入价格
+	double today_signal = 10;	// 今日信号
 }
 message CmdQueryAiStockListReply {
 	repeated AiStockItem items = 2;

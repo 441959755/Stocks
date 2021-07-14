@@ -1,18 +1,17 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
-import GameData from "../../sctiprs/GameData";
+import { pb } from "../../protos/proto";
+import GameCfg from "../../sctiprs/game/GameCfg";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
-import { pb } from "../../protos/proto";
+
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
+
+    playeInfo = null;
+
+    HisData = [];
 
     @property(cc.Node)
     tipsNode: cc.Node = null;
@@ -23,12 +22,14 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     content: cc.Node = null;
 
-    HisData = [];
-
     HisCount = 0;
 
+    // LIFE-CYCLE CALLBACKS:
     @property(cc.ScrollView)
     scrollview: cc.ScrollView = null;
+
+    @property(cc.Label)
+    playerName: cc.Label = null;
 
     onLoad() {
         this.scrollview.node.on('scroll-to-bottom', () => {
@@ -44,9 +45,10 @@ export default class NewClass extends cc.Component {
                     ts = this.HisData[this.HisData.length - 1].ts;
                 }
                 let data = {
-                    uid: GameData.userID,
+                    uid: this.playeInfo.uid,
                     to: ts,
                     pageSize: 20,
+                    gType: GameCfg.GameType,
                 }
                 this.onQueryGameResult(data);
             }
@@ -57,21 +59,30 @@ export default class NewClass extends cc.Component {
     onToggleClick(event) {
 
         this.content.children.forEach(el => {
-            let handle = el.getComponent('HisItem');
+            let handle = el.getComponent('OtherPlayerItem');
             handle.onHisItemRate(event.isChecked);
         })
     }
 
-    onEnable() {
-        if (this.HisData.length > 0) {
 
-        } else {
-            this.tipsNode.active = false;
+    onShow() {
+
+        if (this.playeInfo.nickname) {
+            this.playerName.string = this.playeInfo.nickname + '  历史战绩';
+        }
+        else {
+            this.playerName.string = this.playeInfo.uid + '  历史战绩';
+        }
+        this.tipsNode.active = false;
+
+        if (this.HisData.length <= 0) {
             let ts = new Date().getTime() / 1000;
+
             let data = {
-                uid: GameData.userID,
+                uid: this.playeInfo.uid,
                 to: ts,
                 pageSize: 30,
+                gType: GameCfg.GameType,
             }
             this.onQueryGameResult(data);
         }
@@ -79,29 +90,43 @@ export default class NewClass extends cc.Component {
 
     onQueryGameResult(data) {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        socket.send(pb.MessageId.Req_Game_QueryGameResult, PB.onCmdQueryGameResultConvertToBuff(data), info => {
-            console.log(JSON.stringify(info.results));
+
+        let CmdQueryGameResult = pb.CmdQueryGameResult;
+        let message = CmdQueryGameResult.create(data)
+        let buff = CmdQueryGameResult.encode(message).finish();
+
+        socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, info => {
+
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
             if (info.results.length == 0) {
                 this.tipsNode.active = true;
             }
             else {
-
                 info.results.forEach((el, index) => {
                     this.HisData.push(el);
-                    if (el.gType == pb.GameType.JJ_PK || el.gType == pb.GameType.JJ_DuoKong) {
-                        let node = cc.instantiate(this.item);
-                        this.content.addChild(node);
-                        let nodeHandle = node.getComponent('HisItem');
-                        nodeHandle.itemData = el;
-                        nodeHandle.itemIndex = this.HisData.length;
-                        nodeHandle.onShow();
-                    }
+
+                    let node = cc.instantiate(this.item);
+                    this.content.addChild(node);
+
+                    let nodehandle = node.getComponent('OtherPlayerItem');
+                    nodehandle.itemData = el;
+                    nodehandle.itemIndex = this.HisData.length;
+                    nodehandle.onShow();
                 });
 
             }
+
             this.HisCount += data.pageSize;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         });
 
+
+    }
+
+    onBtnClick(event, data) {
+        let name = event.target.name;
+        if (name == 'closeBtn') {
+            this.node.active = false;
+        }
     }
 }

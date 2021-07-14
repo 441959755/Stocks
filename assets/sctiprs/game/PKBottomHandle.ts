@@ -1,4 +1,5 @@
 import { pb } from "../../protos/proto";
+import GlobalHandle from "../global/GlobalHandle";
 import UpGameOpt from "../global/UpGameOpt";
 import ComUtils from "../Utils/ComUtils";
 import EventCfg from "../Utils/EventCfg";
@@ -60,17 +61,28 @@ export default class NewClass extends cc.Component {
         this.bself = this.node.getComponent('BottomHandle');
 
         GlobalEvent.on(EventCfg.RAISINGLIMIT, this.getRaisingLimit.bind(this), this);
+
+        GlobalEvent.on(EventCfg.CLEARINTERVAL, () => {
+            this.cb1 && (clearInterval(this.cb1));
+            this.cb1 = null;
+        }, this);
+
     }
 
     onDestroy() {
         this.cb1 && (clearInterval(this.cb1));
         this.cb1 = null;
         GlobalEvent.off(EventCfg.CUTGAMEFUPAN);
+        GlobalEvent.off(EventCfg.GAMEFUPAN);
+        GlobalEvent.off(EventCfg.RAISINGLIMIT);
+        GlobalEvent.off(EventCfg.CLEARINTERVAL);
     }
 
 
     onGameFUPANSHOW() {
-        if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+        if (GameCfg.GameType == pb.GameType.JJ_PK ||
+            GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+            GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
 
             let pkNode = this.node.getChildByName('pk');
             pkNode.active = true;

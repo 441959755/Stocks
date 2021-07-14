@@ -24186,7 +24186,7 @@
   {
     "__type__": "cc.Node",
     "_name": "bottom",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 2
     },
@@ -33814,7 +33814,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        527,
+        528.5,
         10,
         0,
         0,
@@ -33956,7 +33956,11 @@
       "__id__": 732
     },
     "_enabled": true,
-    "_materials": [],
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {

@@ -34,7 +34,6 @@ PBHelper.prototype = {
             console.log('登入错误:' + decoded.err.err);
             return;
         }
-
         return decoded;
 
     },
@@ -432,6 +431,7 @@ PBHelper.prototype = {
             //  console.log('闯关赛游戏数据' + JSON.stringify(data));
             GlobalEvent.emit(EventCfg.GETCGSDATA, data);
         }
+
     }
 
 }
