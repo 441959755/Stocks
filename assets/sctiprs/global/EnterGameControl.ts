@@ -54,7 +54,7 @@ export default class EnterGameControl {
 
 
     //清除上局数据在进入游戏
-    public static onClearPreGameDataEnter(data?) {
+    public static onClearPreGameDataEnter(data?, flag?) {
         let cb = () => {
             GameCfg.huizhidatas = GameData.huizhidatas;
             GameCfg.allRate = 0;
@@ -71,22 +71,27 @@ export default class EnterGameControl {
             cc.director.loadScene('game');
         }
 
-        GlobalHandle.onCmdGameStartReq(() => {
-            if (!data) {
-                cb && cb();
-            }
-            else {
-                if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-                    GlobalHandle.onCmdGameStartQuoteQuery(data, cb)
+        if (flag) {
+            GlobalHandle.onCmdGameStartQuoteQuery(data, cb)
+        } else {
+            GlobalHandle.onCmdGameStartReq(() => {
+                if (!data) {
+                    cb && cb();
                 }
-                else if (GameCfg.GameType == pb.GameType.QiHuo) {
-                    GlobalHandle.onCmdGameStartQuoteQueryQH(data, cb);
+                else {
+                    if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+                        GlobalHandle.onCmdGameStartQuoteQuery(data, cb)
+                    }
+                    else if (GameCfg.GameType == pb.GameType.QiHuo) {
+                        GlobalHandle.onCmdGameStartQuoteQueryQH(data, cb);
+                    }
+                    else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                        GlobalHandle.onCmdGameStartQuoteQuery(data, cb);
+                    }
                 }
-                else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                    GlobalHandle.onCmdGameStartQuoteQuery(data, cb);
-                }
-            }
-        })
+            })
+        }
+
     }
 
 

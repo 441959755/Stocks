@@ -120,7 +120,13 @@ export default class NewClass extends cc.Component {
             GameCfg.huizhidatas = this.itemData.kStop;
             GameData.huizhidatas = this.itemData.kStartup;
             GameCfg.GAMEFUPANDATA = this.itemData;
-            GlobalHandle.GetGameOperations(ts, () => {
+
+            let info = {
+                uid: GameData.userID,
+                ts: ts,
+            }
+
+            GlobalHandle.GetGameOperations(info, () => {
                 UpGameOpt.ChanagekOffset(UpGameOpt.player1Opt);
                 this.onGamenterStart();
             });

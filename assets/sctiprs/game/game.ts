@@ -5,6 +5,7 @@ import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
 import PopupManager from "../Utils/PopupManager";
 import GameData from "../GameData";
+import UpGameOpt from "../global/UpGameOpt";
 
 const { ccclass, property } = cc._decorator;
 
@@ -42,6 +43,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     CGSFinalLayer: cc.Node = null;
 
+    @property(cc.Node)
+    LxFinalLayer: cc.Node = null;
+
     onLoad() {
         ComUtils.onLoadNode();
         ComUtils.onEvent();
@@ -58,13 +62,17 @@ export default class NewClass extends cc.Component {
             }
             else {
                 setTimeout(() => {
-                    if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+                    if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
                         this.CGSFinalLayer.active = true;
                     }
                     else {
-                        this.finalLayer.active = true;
+                        if (GameCfg.JJ_XUNLIAN) {
+                            this.LxFinalLayer.active = true;
+                        }
+                        else {
+                            this.finalLayer.active = true;
+                        }
                     }
-
                 }, 80)
             }
         }, this)
@@ -103,16 +111,17 @@ export default class NewClass extends cc.Component {
     protected onDestroy() {
         GameCfg.GAMEFRTD = false;
         GameCfg.GAMEWAIT = false;
-        GameCfg.RoomGameData = null;
+        //  GameCfg.RoomGameData = null;
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
         ComUtils.onDestory();
         GlobalEvent.off(EventCfg.OPENOTHERINFOBOX);
         PopupManager.delPopupNode();
         GameCfg.GAMEFUPAN = false;
-        GameCfg.GAMEFUPANDATA = null;
-        GameData.Players = [];
+        //  GameCfg.GAMEFUPANDATA = null;
+        //    GameData.Players = [];
         GameData.CGSConfData = null;
+        UpGameOpt.clearGameOpt();
     }
 
 

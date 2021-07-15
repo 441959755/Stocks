@@ -92,15 +92,16 @@ export default class NewClass extends cc.Component {
             pkFP.children[0].getComponent(cc.Label).string = GameCfg.data[0].name + '    ' + GameCfg.data[0].code;
 
             let kFrom, kTo, tq
-            if (GameCfg.RoomGameData) {
-                kFrom = GameCfg.RoomGameData.players[0].result.kFrom;
-                kTo = GameCfg.RoomGameData.players[0].result.kTo;
-                tq = GameCfg.RoomGameData.players[0].result.stockProfitRate.toFixed(2);
-            }
-            else if (GameCfg.GAMEFUPANDATA) {
+
+            if (GameCfg.GAMEFUPANDATA) {
                 kFrom = GameCfg.GAMEFUPANDATA.kFrom;
                 kTo = GameCfg.GAMEFUPANDATA.kTo;
                 tq = GameCfg.GAMEFUPANDATA.stockProfitRate.toFixed(2);
+            }
+            else if (GameCfg.RoomGameData) {
+                kFrom = GameCfg.RoomGameData.players[0].result.kFrom;
+                kTo = GameCfg.RoomGameData.players[0].result.kTo;
+                tq = GameCfg.RoomGameData.players[0].result.stockProfitRate.toFixed(2);
             }
 
             pkFP.children[1].getComponent(cc.Label).string = ComUtils.formatTime(kFrom) + '--' + ComUtils.formatTime(kTo)
@@ -114,14 +115,14 @@ export default class NewClass extends cc.Component {
         } else {
             if (GameCfg.GameType == pb.GameType.JJ_PK ||
                 GameCfg.GameType == pb.GameType.JJ_DuoKong ||
-                GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+                GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.JJ_XUNLIAN) {
 
                 this.node.getChildByName('isFC').active = false;
                 if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
                     this.node.getChildByName('JJ_DuoKong').active = true;
                 }
                 else if (GameCfg.GameType == pb.GameType.JJ_PK
-                    || GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+                    || GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.JJ_XUNLIAN) {
                     this.node.getChildByName('isFC').active = true;
                 }
 
@@ -148,7 +149,7 @@ export default class NewClass extends cc.Component {
                     let num = 3 * 60 + 3;
                     this.cb1 = setInterval(() => {
                         if (num <= 0) {
-                            if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+                            if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.JJ_XUNLIAN) {
                                 GlobalEvent.emit(EventCfg.GAMEOVEER);
                             }
                             clearInterval(this.cb1);

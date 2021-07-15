@@ -90,17 +90,16 @@ export default class NewClass extends cc.Component {
             }, timeout * 1000);
 
         }, this);
+
+        this.reqGameCgsGetConf();
+
+        this.reqGameCgsGetClearanceRank();
     }
 
     onDestroy() {
         GlobalEvent.off(EventCfg.GETCGSDATA);
     }
 
-    start() {
-        this.reqGameCgsGetConf();
-
-        this.reqGameCgsGetClearanceRank();
-    }
 
     onEnable() {
         if (this.confdata) {
@@ -196,8 +195,12 @@ export default class NewClass extends cc.Component {
 
     // 查询当前一轮闯关赛配置数据
     reqGameCgsGetConf() {
+
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         socket.send(pb.MessageId.Req_Game_CgsGetConf, null, (res) => {
             console.log('闯关赛配置1' + JSON.stringify(res));
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
             this.confdata = res;
             GameData.CGSConfData = res;
             this.onUpShowTimeCount();
@@ -233,6 +236,15 @@ export default class NewClass extends cc.Component {
     }
 
     onUpContent() {
+        if (!GameData.CGSSAVELEVEL) {
+            GameData.CGSSAVELEVEL = GameData.cgState.stage;
+        }
+        if (GameData.cgState.stage > GameData.CGSSAVELEVEL) {
+            PopupManager.LoadTipsBox('tipsBox', '闯关成功')
+        }
+        else if (GameData.cgState.stage < GameData.CGSSAVELEVEL) {
+            PopupManager.LoadTipsBox('tipsBox', '闯关失败')
+        }
         let items = this.content.children;
         let stages = JSON.parse(this.confdata.conf);
         items.forEach((el, index) => {

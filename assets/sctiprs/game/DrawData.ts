@@ -658,4 +658,25 @@ export default class DrawData {
 
     }
 
+    public static getWinLosCountByOps(opts) {
+        let data = {
+            yCount: 0,
+            sCount: 0,
+        }
+
+        let gpData = GameCfg.data[0].data;
+
+        for (let i = 0; i < opts.length; i++) {
+            if (gpData[opts[i].kOffset].close < gpData[opts[i + 1].kOffset].close) {
+                data.yCount++;
+            }
+            else if (gpData[opts[i].kOffset].close > gpData[opts[i + 1].kOffset].close) {
+                data.sCount++;
+            }
+            ++i;
+        }
+
+        return data;
+
+    }
 }

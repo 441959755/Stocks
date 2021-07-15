@@ -283,5 +283,7 @@ export default class GameData {
 
     public static CGSConfData = null;
 
+    public static CGSSAVELEVEL = 0;
+
 
 }

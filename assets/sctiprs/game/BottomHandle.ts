@@ -548,7 +548,7 @@ export default class NewClass extends cc.Component {
 			this.tipsLabel.node.active = true;
 			this.tipsLabel1.node.active = false;
 
-		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
+		} else if (GameCfg.GameType == pb.GameType.DingXiang && !GameCfg.JJ_XUNLIAN) {
 			this.tipsLabel.node.active = true;
 			this.tipsLabel1.node.active = false;
 			dxnode.active = true;

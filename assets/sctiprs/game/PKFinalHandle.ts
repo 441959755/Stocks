@@ -234,7 +234,6 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         //返回大厅
         if (name == 'closeBtn') {
-            GameCfg.GameType = null;
             this.onQuitGame();
         }
 

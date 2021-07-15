@@ -1,5 +1,6 @@
 import { pb } from "../../protos/proto";
 import GameCfg from "../../sctiprs/game/GameCfg";
+import GameData from "../../sctiprs/GameData";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 
@@ -66,7 +67,7 @@ export default class NewClass extends cc.Component {
 
 
     onShow() {
-
+        GameData.Players[1] = this.playeInfo;
         if (this.playeInfo.nickname) {
             this.playerName.string = this.playeInfo.nickname + '  历史战绩';
         }

@@ -152,6 +152,9 @@ export default class NewClass extends cc.Component {
                 //         this.location = '';
                 //     }
                 // }
+                nodes.forEach(element => {
+                    element.active = true;
+                });
                 return;
             }
             this.location += ' ' + node.children[0].getComponent(cc.Label).string;
@@ -169,6 +172,9 @@ export default class NewClass extends cc.Component {
 
             let id = pb.MessageId.Req_Hall_EditLocation;
             this.onSendMessage(id, data);
+            nodes.forEach(element => {
+                element.active = true;
+            });
         }
         else if (str[0] == '') {
             this.location = node.children[0].getComponent(cc.Label).string;

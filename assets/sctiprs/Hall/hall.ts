@@ -310,7 +310,9 @@ export default class NewClass extends cc.Component {
 		StrategyAIData.onClearData();
 		GameCfg.enterGameCache = null;
 		GameCfg.data[0].data = [];
-
+		GameCfg.GAMEFUPANDATA = null;
+		GameData.Players = [];
+		GameCfg.RoomGameData = null;
 	}
 
 

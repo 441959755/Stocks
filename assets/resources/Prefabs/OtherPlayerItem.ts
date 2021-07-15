@@ -107,22 +107,33 @@ export default class NewClass extends cc.Component {
             this.modeLabel.string = '大盘竞猜';
         }
 
+        if (GameData.Players[1].icon) {
+            ComUtils.onLoadHead(GameData.Players[1].icon, (res) => {
+                let texture = new cc.SpriteFrame(res);
+                GameData.Players[1].icon = texture;
+            })
+        }
+        GameData.Players[1].icon = null;
     }
 
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'cgs_fupan') {
+
             GameCfg.GameSet = GameData.JJPKSet;
-            //    GameCfg.GameSet = this.gameSet1;
             let ts = this.itemData.ts;
             GameCfg.GAMEFUPAN = true;
             GameCfg.GameType = this.itemData.gType;
             GameCfg.huizhidatas = this.itemData.kStop;
             GameData.huizhidatas = this.itemData.kStartup;
             GameCfg.GAMEFUPANDATA = this.itemData;
-            GlobalHandle.GetGameOperations(ts, () => {
+            let info = {
+                uid: GameData.Players[1].uid,
+                ts: ts,
+            }
+            GlobalHandle.GetGameOperations(info, () => {
                 UpGameOpt.ChanagekOffset(UpGameOpt.player1Opt);
-                this.onGamenterStart();
+                this.onGamenterStart(true);
             });
 
         }
@@ -148,9 +159,42 @@ export default class NewClass extends cc.Component {
 
             this.onGamenterStart();
         }
+
+        else if (name == 'btn_tz') {
+            GameCfg.JJ_XUNLIAN = true;
+            GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
+            GameCfg.GameSet = GameData.JJPKSet;
+            GameCfg.GAMEFUPAN = false;
+            GameCfg.huizhidatas = this.itemData.kStartup;
+            GameData.huizhidatas = this.itemData.kStartup;
+            GameCfg.GameSet.year = (this.itemData.kFrom + '').slice(0, 4);
+            GameCfg.GameSet.search = this.itemData.quotesCode;
+
+            GameCfg.GAMEFUPANDATA = this.itemData;
+
+            let ts = this.itemData.ts;
+            let info = {
+                uid: GameData.Players[1].uid,
+                ts: ts,
+            }
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            GlobalHandle.GetGameOperations(info, () => {
+                // UpGameOpt.ChanagekOffset(UpGameOpt.player1Opt);
+                GameCfg.RoomGameData = {
+                    players: [{ gd: {} }, {
+                        gd: GameData.Players[1],
+                        ops: { items: UpGameOpt.player1Opt },
+                        result: this.itemData
+                    }],
+                }
+                this.onGamenterStart(true);
+            });
+
+
+        }
     }
 
-    onGamenterStart() {
+    onGamenterStart(flag?) {
         let data = { code: this.itemData.quotesCode }
         let items;
         if (GameCfg.GameType == pb.GameType.QiHuo) {
@@ -180,7 +224,7 @@ export default class NewClass extends cc.Component {
 
         GameCfg.enterGameCache = cache;
 
-        EnterGameControl.onClearPreGameDataEnter(cache);
+        EnterGameControl.onClearPreGameDataEnter(cache, flag);
     }
 
 }

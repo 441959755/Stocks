@@ -290,11 +290,7 @@ export default class GlobalHandle {
     }
 
     // 查询游戏操作步骤
-    public static GetGameOperations(ts, cb?) {
-        let data = {
-            uid: GameData.userID,
-            ts: ts,
-        }
+    public static GetGameOperations(data, cb?) {
 
         socket.send(pb.MessageId.Req_Game_GetGameOperation, PB.onCmdGetGameOperations(data), (info) => {
             console.log(JSON.stringify(info));

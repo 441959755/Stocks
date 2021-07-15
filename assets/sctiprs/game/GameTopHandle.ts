@@ -130,8 +130,10 @@ export default class NewClass extends cc.Component {
 
             this.box1.active = true;
             this.box2.active = true;
+            let userProfitRate1;
 
-            let userProfitRate1 = GameCfg.RoomGameData.players[0].result.userProfitRate || 0;
+            userProfitRate1 = GameCfg.RoomGameData.players[0].result.userProfitRate || 0;
+
 
             let userProfitRate2 = GameCfg.RoomGameData.players[1].result.userProfitRate || 0;
 
@@ -171,17 +173,23 @@ export default class NewClass extends cc.Component {
                 if (GameData.Players[1].icon) {
                     head.spriteFrame = GameData.Players[1].icon;
                 }
-                name.string = '昵称：' + GameCfg.RoomGameData.players[status - 1].gd.nickname;
+                if (GameData.Players[1].nickname) {
+                    name.string = '昵称：' + GameData.Players[1].nickname;
+                } else {
+                    name.string = '昵称：' + GameCfg.RoomGameData.players[status - 1].gd.nickname;
+                }
+
             }
 
             let r, rank;
-            if (GameCfg.RoomGameData) {
-                r = GameCfg.RoomGameData.players[status - 1].result.userProfitRate;
-                rank = GameCfg.RoomGameData.players[status - 1].result.rank;
-            }
-            else if (GameCfg.GAMEFUPANDATA) {
+
+            if (GameCfg.GAMEFUPANDATA) {
                 r = GameCfg.GAMEFUPANDATA.userProfitRate || 0.00;
                 rank = GameCfg.GAMEFUPANDATA.rank;
+            }
+            else if (GameCfg.RoomGameData) {
+                r = GameCfg.RoomGameData.players[status - 1].result.userProfitRate;
+                rank = GameCfg.RoomGameData.players[status - 1].result.rank;
             }
 
             if (r > 0) {
@@ -225,7 +233,6 @@ export default class NewClass extends cc.Component {
             btnMyspic.active = false;
             statBtn.active = true;
         }
-
     }
 
     protected onEnable() {
@@ -254,7 +261,11 @@ export default class NewClass extends cc.Component {
             statBtn.active = false;
         }
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
-            this.GameName.string = '定向训练';
+
+            this.GameName.string = '';
+            if (!GameCfg.JJ_XUNLIAN) {
+                this.GameName.string = '定向训练';
+            }
 
             btnMyspic.active = true;
             statBtn.active = false;
@@ -272,40 +283,55 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.JJ_PK
             || GameCfg.GameType == pb.GameType.JJ_DuoKong
             || GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+
+
             this.GameName.string = '';
+
             this.rightNode.active = false;
             let la = this.node.getChildByName('rate');
             la.x = 0;
-            this.pkNode.active = true;
-            //自己的信息
-            {
-                this.head1.spriteFrame = GameData.headImg;
-                this.name1.string = GameData.userName;
-                this.level1.string = 'LV:' + GameData.properties[pb.GamePropertyId.Level];
 
-            }
-            //其他人
-            {
-                if (GameData.Players[1]) {
+            if (GameCfg.JJ_XUNLIAN) {
+                btnMyspic.active = false;
+                statBtn.active = false;
+            } else {
+                this.pkNode.active = true;
+                //自己的信息
+                {
+                    this.head1.spriteFrame = GameData.headImg;
+                    this.name1.string = GameData.userName;
+                    this.level1.string = 'LV:' + GameData.properties[pb.GamePropertyId.Level];
+                }
+                //其他人
+                {
+                    if (GameData.Players[1]) {
 
-                    if (GameData.Players[1].icon) {
-                        this.head2.spriteFrame = GameData.Players[1].icon;
+                        if (GameData.Players[1].icon) {
+                            this.head2.spriteFrame = GameData.Players[1].icon;
+                        }
+                        this.name2.string = GameData.Players[1].nickname;
+                        GameData.Players[1].properties && (this.level2.string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1));
+                        this.pkAllRateLa2.string = "****";
                     }
-                    this.name2.string = GameData.Players[1].nickname;
-                    this.level2.string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1);
-                    this.pkAllRateLa2.string = "****";
                 }
             }
+
 
         }
 
         this.onShowGANEFUPAN();
+
         if (GameCfg.GAMEFUPAN) {
             if (GameCfg.GameType == pb.GameType.JJ_PK ||
                 GameCfg.GameType == pb.GameType.JJ_DuoKong ||
                 GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
 
-                this.onShowPKFUPAN(1)
+                if (GameData.Players[1]) {
+                    this.onShowPKFUPAN(2)
+                } else {
+                    this.onShowPKFUPAN(1)
+                }
+
             }
         }
 
@@ -349,9 +375,14 @@ export default class NewClass extends cc.Component {
                     })
                 }
                 else {
-                    PopupManager.LoadTipsBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
+                    if (GameCfg.JJ_XUNLIAN) {
                         GlobalEvent.emit(EventCfg.GAMEOVEER);
-                    })
+                    } else {
+                        PopupManager.LoadTipsBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
+                            GlobalEvent.emit(EventCfg.GAMEOVEER);
+                        })
+                    }
+
                 }
             } else {
                 if (GameCfg.GameType == pb.GameType.JJ_PK ||

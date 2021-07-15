@@ -239,8 +239,11 @@ export default class NewClass extends cc.Component {
                 return;
             }
             console.log(JSON.stringify(GameCfg.TIMETEMP));
-
-            GlobalHandle.GetGameOperations(ts);
+            let info = {
+                uid: GameData.userID,
+                ts: ts,
+            }
+            GlobalHandle.GetGameOperations(info);
         }
 
         //清空记录
