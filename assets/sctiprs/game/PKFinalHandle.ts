@@ -316,7 +316,7 @@ export default class NewClass extends cc.Component {
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
         GameCfg.enterGameCache = null;
-
+        GameCfg.RoomGameData = null;
         cc.director.loadScene('hall');
     }
 

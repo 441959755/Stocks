@@ -150,6 +150,10 @@ export default class NewClass extends cc.Component {
             operations: UpGameOpt.arrOpt,
         }
         GlobalHandle.onCmdGameOverReq(CmdGameOver);
+
+        GameCfg.RoomGameData.players[0].result.kFrom = datas.kFrom;
+        GameCfg.RoomGameData.players[0].result.kTo = datas.kTo;
+        GameCfg.RoomGameData.players[0].result.stockProfitRate = datas.stockProfitRate;
     }
 
     onShowResult() {
@@ -223,7 +227,6 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         //返回大厅
         if (name == 'closeBtn') {
-            GameCfg.GameType = null;
             this.onQuitGame();
         }
 
@@ -306,7 +309,7 @@ export default class NewClass extends cc.Component {
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
         GameCfg.enterGameCache = null;
-
+        GameCfg.RoomGameData = null;
         cc.director.loadScene('hall');
     }
 

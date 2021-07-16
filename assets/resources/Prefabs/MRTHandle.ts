@@ -76,6 +76,11 @@ export default class NewClass extends cc.Component {
             man.children[0].active = !el.gender;
 
             countLabel.string = el.cgsClearance;
+
+            if (el.cgsClearance == 0) {
+                node.active = false;
+            }
+
         });
 
     }

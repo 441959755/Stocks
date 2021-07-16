@@ -288,6 +288,7 @@ export default class NewClass extends cc.Component {
 		}
 
 		if (GameCfg.RoomGameData) {
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			GameCfg.GameSet = GameData.JJPKSet;
 			GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameCfg.RoomGameData);
 			GameData.roomId = GameCfg.RoomGameData.id;
@@ -311,8 +312,8 @@ export default class NewClass extends cc.Component {
 		GameCfg.enterGameCache = null;
 		GameCfg.data[0].data = [];
 		GameCfg.GAMEFUPANDATA = null;
-		GameData.Players = [];
-		GameCfg.RoomGameData = null;
+		//	GameData.Players = [];
+		//	GameCfg.RoomGameData = null;
 	}
 
 

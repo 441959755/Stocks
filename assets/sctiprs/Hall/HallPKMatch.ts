@@ -28,6 +28,9 @@ export default class NewClass extends cc.Component {
     callBack = null;
 
     spIndex = 0;
+
+    ecb = null;
+
     onLoad() {
         GlobalEvent.on('SHOWOTHERPLAYER', this.onShowOtherPlayer.bind(this), this);
     }
@@ -73,9 +76,25 @@ export default class NewClass extends cc.Component {
         GameData.Players[1].icon = null;
     }
 
+    onEnterChuanGuanGame() {
+        let timeout = Math.random() * 2 + 3;
+
+        this.ecb = setTimeout(() => {
+            GlobalEvent.emit('SHOWOTHERPLAYER');
+            setTimeout(() => {
+                cc.director.loadScene('game');
+            }, 1000)
+
+        }, timeout * 1000);
+    }
+
 
     onEnable() {
+        if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+            this.onEnterChuanGuanGame();
+        }
 
+        GlobalEvent.emit(EventCfg.LOADINGHIDE);
         this.player2.getChildByName('name').active = false;
         this.player2.getChildByName('lv').active = false;;
         this.player2.getChildByName('exp').active = false;
@@ -171,11 +190,16 @@ export default class NewClass extends cc.Component {
                 GameCfg.GameType = null;
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
             });
+
+            this.ecb && (clearTimeout(this.ecb));
+            this.ecb = null;
         }
     }
 
     onDestroy() {
         GlobalEvent.off('SHOWOTHERPLAYER');
+        this.ecb && (clearTimeout(this.ecb));
+        this.ecb = null;
     }
 
 

@@ -371,6 +371,7 @@ export default class NewClass extends cc.Component {
                         GameCfg.allRate = 0;
                         GameCfg.finalfund = 0;
                         GameCfg.GAMEFUPAN = false;
+                        GameCfg.RoomGameData = null;
                         cc.director.loadScene('hall');
                     })
                 }
@@ -416,6 +417,7 @@ export default class NewClass extends cc.Component {
         GameCfg.allRate = 0;
         GameCfg.finalfund = 0;
         GameCfg.GAMEFUPAN = false;
+        GameCfg.RoomGameData = null;
         cc.director.loadScene('hall');
     }
 }

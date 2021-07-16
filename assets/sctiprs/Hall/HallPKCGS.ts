@@ -6,6 +6,7 @@ import GlobalHandle from "../global/GlobalHandle";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import PopupManager from "../Utils/PopupManager";
+import ComUtils from "../Utils/ComUtils";
 
 
 const { ccclass, property } = cc._decorator;
@@ -79,15 +80,7 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.OPENMATCHPK);
             GameData.Players[1] = info.players[0].gd;
 
-            let timeout = Math.random() * 2 + 3;
 
-            setTimeout(() => {
-                GlobalEvent.emit('SHOWOTHERPLAYER');
-                setTimeout(() => {
-                    cc.director.loadScene('game');
-                }, 1000)
-
-            }, timeout * 1000);
 
         }, this);
 
@@ -142,6 +135,7 @@ export default class NewClass extends cc.Component {
                 return;
             }
 
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
             GameCfg.GameSet = GameData.JJPKSet;
 
@@ -285,10 +279,10 @@ export default class NewClass extends cc.Component {
 
             let awards = GameData.cgState.awards[index];
 
-            if (awards.gotten) {
+            if (awards && awards.gotten) {
                 box.children[2].active = true;
             }
-            else if (awards.awarded) {
+            else if (awards && awards.awarded) {
                 box.children[0].active = true;
             } else {
                 box.children[1].active = true;
@@ -302,9 +296,9 @@ export default class NewClass extends cc.Component {
 
                 cgs_jdt.active = false;
                 lifesLabel.string = '';
-                if (GameData.cgState.lifes) {
-                    lifesLabel.string = '生命：' + GameData.cgState.lifes;
-                }
+                // if (GameData.cgState.lifes) {
+                lifesLabel.string = '生命：' + stages.Stages[index].Lifes;
+                // }
                 progress.progress = 0;
                 peopleLabel.string = '在线（' + this.confdata.people[index] + '人）'
 
@@ -373,6 +367,14 @@ export default class NewClass extends cc.Component {
     onUpShowTimeCount() {
         if (this.confdata.status == 0) {
             console.log('闯关赛还未开始');
+            GameData.cgState = {};
+            GameData.cgState.stage = -1;
+            GameData.cgState.awards = [];
+
+            //   let strTime = ComUtils.formatTime(this.confdata.from)
+
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '闯关赛还未开始');
+            this.node.active = false;
         }
         else if (this.confdata.status == 1) {
             console.log('进行中ing');
@@ -400,6 +402,14 @@ export default class NewClass extends cc.Component {
         }
         else if (this.confdata.status == 2) {
             console.log('已结束');
+            GameData.cgState = {};
+            GameData.cgState.stage = -1;
+            GameData.cgState.awards = [];
+
+            //  let strTime = ComUtils.formatTime(this.confdata.from)
+
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '闯关赛已结束');
+            this.node.active = false;
         }
 
         let stages = JSON.parse(this.confdata.conf);

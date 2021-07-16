@@ -120,6 +120,10 @@ export namespace pb {
         Rep_Hall_MobileBind = 3036,
         Req_Hall_ResetGameCounter = 3037,
         Rep_Hall_ResetGameCounter = 3038,
+        Req_Hall_GetLevelRanking = 3039,
+        Rep_Hall_GetLevelRanking = 3040,
+        Req_Hall_GetFameRanking = 3041,
+        Rep_Hall_GetFameRanking = 3042,
         Req_Hall_Logout = 3999,
         Rep_Hall_Logout = 4000,
         Req_Game_Login = 4001,
@@ -192,8 +196,8 @@ export namespace pb {
         S2S_OrderCancel = 10007,
         S2S_Sync_Cgds = 10009,
         S2S_Set_CgdsTitle = 10011,
-        S2S_Set_CgdsLogo = 100013,
-        S2S_Set_CgdsUrl = 100015,
+        S2S_Set_CgdsLogo = 10013,
+        S2S_Set_CgdsUrl = 10015,
         S2S_Set_CgdsConf = 10017,
         S2S_Set_CgdsAward = 10019,
         S2S_Open_Cgds = 10021,
@@ -633,6 +637,7 @@ export namespace pb {
         UnlockQhxl = 21,
         UnlockTjdxl = 22,
         UnlockZbxl = 23,
+        Tester = 27,
         VipExpiration = 28,
         RMB = 29,
         Max = 30
@@ -6527,6 +6532,12 @@ export namespace pb {
 
         /** RankingItem zsjcCount */
         zsjcCount?: (number|null);
+
+        /** RankingItem level */
+        level?: (number|null);
+
+        /** RankingItem fame */
+        fame?: (number|null);
     }
 
     /** Represents a RankingItem. */
@@ -6567,6 +6578,12 @@ export namespace pb {
 
         /** RankingItem zsjcCount. */
         public zsjcCount: number;
+
+        /** RankingItem level. */
+        public level: number;
+
+        /** RankingItem fame. */
+        public fame: number;
 
         /**
          * Creates a new RankingItem instance using the specified properties.
@@ -11686,6 +11703,9 @@ export namespace pb {
 
         /** CmdQueryAiStockList total */
         total?: (number|null);
+
+        /** CmdQueryAiStockList codes */
+        codes?: (number[]|null);
     }
 
     /** Represents a CmdQueryAiStockList. */
@@ -11705,6 +11725,9 @@ export namespace pb {
 
         /** CmdQueryAiStockList total. */
         public total: number;
+
+        /** CmdQueryAiStockList codes. */
+        public codes: number[];
 
         /**
          * Creates a new CmdQueryAiStockList instance using the specified properties.
@@ -11806,6 +11829,9 @@ export namespace pb {
 
         /** AiStockItem curAskPrice */
         curAskPrice?: (number|null);
+
+        /** AiStockItem todaySignal */
+        todaySignal?: (number|null);
     }
 
     /** Represents an AiStockItem. */
@@ -11843,6 +11869,9 @@ export namespace pb {
 
         /** AiStockItem curAskPrice. */
         public curAskPrice: number;
+
+        /** AiStockItem todaySignal. */
+        public todaySignal: number;
 
         /**
          * Creates a new AiStockItem instance using the specified properties.

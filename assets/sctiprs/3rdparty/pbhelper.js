@@ -323,8 +323,9 @@ PBHelper.prototype = {
             if (data.game == pb.GameType.JJ_PK || data.game == pb.GameType.JJ_DuoKong) {
                 let message = this.onRoomGameDataMessage(data.data);
                 console.log('自己进入房间' + JSON.stringify(message));
-                GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
                 GameCfg.RoomGameData = message;
+                GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
+
             }
         }
         // 其他玩家进入房间：SyncRoomEnter
@@ -428,12 +429,16 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Sync_S2C_GameCg_GD) {
             let JjGame = pb.JjGame;
             let data = JjGame.decode(new Uint8Array(buff));
-            //  console.log('闯关赛游戏数据' + JSON.stringify(data));
+            //  console.log('同步闯关赛游戏数据' + JSON.stringify(data));
             GlobalEvent.emit(EventCfg.GETCGSDATA, data);
         }
+        else if (id == pb.MessageId.Sync_S2C_GameCg) {
+            let CgState = pb.CgState;
+            let data = CgState.decode(new Uint8Array(buff));
+            GameData.cgState = data;
 
+        }
     }
-
 }
 
 module.exports = PBHelper;

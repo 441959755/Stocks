@@ -101,6 +101,7 @@ export default class NewClass extends cc.Component {
 
         if (info.players[1].gd && info.quotes) {
             GameData.Players[1] = info.players[1].gd;
+            this.matchPK.active = true;
             GlobalEvent.emit('SHOWOTHERPLAYER');
             this.onRoomGameStatus();
         }
