@@ -40,16 +40,23 @@ export default class NewClass extends cc.Component {
 
     selfRank = 0;
 
-    start() {
-
+    onLoad() {
+        GlobalEvent.on(EventCfg.LEVELCHANGE, () => {
+            let userLevel = this.player1.getChildByName('userLevel').getComponent(cc.Label);
+            userLevel.string = 'LV: ' + GameData.properties[pb.GamePropertyId.Level];
+        }, this);
+        GlobalEvent.on(EventCfg.EXPCHANGE, () => {
+            let userExp = this.player1.getChildByName('userExp').getComponent(cc.Label);
+            userExp.string = 'EXP: ' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
+        }, this);
     }
 
     onEnable() {
         if (GameCfg.GAMEFUPAN) {
             return;
         }
-        GlobalEvent.emit(EventCfg.CLEARINTERVAL);
 
+        GlobalEvent.emit(EventCfg.CLEARINTERVAL);
 
         let player = GameCfg.RoomGameData.players[0];
         GameCfg.RoomGameData.players.unshift(JSON.parse(JSON.stringify(player)));
@@ -118,12 +125,23 @@ export default class NewClass extends cc.Component {
             if (GameData.Players[1].icon) {
                 userHead.spriteFrame = GameData.Players[1].icon;
             }
+            let ex;
+            let stages = JSON.parse(GameData.CGSConfData.conf);
             if (this.selfRank == 1) {
                 loseSp.active = true;
+                ex = GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Exp] + stages.Win[1].v;
             }
             else if (this.selfRank == 2) {
-
                 winSp.active = true;
+                ex = (GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Exp] + stages.Lose[1].v);
+            }
+
+            if (ex >= GameCfgText.levelInfoCfg[GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level]]) {
+                ex -= GameCfgText.levelInfoCfg[GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level]];
+                userExp.string = 'EXP: ' + ex + '/' + GameCfgText.levelInfoCfg[GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level] + 1]
+                userLevel.string = 'LV: ' + (GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level] + 1);
+            } else {
+                userExp.string = 'EXP: ' + ex + '/' + GameCfgText.levelInfoCfg[GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level]]
             }
         }
 
@@ -177,17 +195,18 @@ export default class NewClass extends cc.Component {
             this.otherResultLabel[4].node.color = cc.Color.GREEN;
 
             this.otherResultLabel[0].string = '-' + stages.Lose[0].v;
-            this.otherResultLabel[1].string = '-' + stages.Lose[1].v;
+            this.otherResultLabel[1].string = '+' + stages.Lose[1].v;
             this.otherResultLabel[2].string = '' + stages.Lose[2].v;
             this.otherResultLabel[3].string = '-' + 1;
-            this.otherResultLabel[4].string = "-" + 0;
+            this.otherResultLabel[4].string = "-" + 1;
             this.otherResultLabel[5].string = ComUtils.changeTwoDecimal(GameCfg.RoomGameData.players[1].result.userProfitRate) + '%'
+
         } else {
             this.selfResultLabel[0].string = '-' + stages.Lose[0].v;
-            this.selfResultLabel[1].string = '-' + stages.Lose[1].v;
+            this.selfResultLabel[1].string = '+' + stages.Lose[1].v;
             this.selfResultLabel[2].string = '' + stages.Lose[2].v;
             this.selfResultLabel[3].string = '-' + 1;
-            this.selfResultLabel[4].string = "-" + 0;
+            this.selfResultLabel[4].string = "-" + 1;
             this.selfResultLabel[5].string = ComUtils.changeTwoDecimal(GameCfg.allRate) + '%';
 
             this.otherResultLabel[0].string = '+' + stages.Win[0].v;
@@ -316,6 +335,8 @@ export default class NewClass extends cc.Component {
     onDestroy() {
         UpGameOpt.clearGameOpt();
         LoadUtils.releaseRes('Prefabs/enterXLGame');
+        GlobalEvent.off(EventCfg.LEVELCHANGE);
+        GlobalEvent.off(EventCfg.EXPCHANGE);
     }
 
 }

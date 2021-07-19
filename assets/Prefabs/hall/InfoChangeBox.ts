@@ -67,13 +67,11 @@ export default class NewClass extends cc.Component {
 
     initLocation(items) {
         let nodes = this.content.children;
-
         for (let index = 0; index < nodes.length; index++) {
             let str = nodes[index].children[0].children[0].getComponent(cc.Label).string;
             if (str == items[0]) {
                 nodes[index].children[0].children[1].active = true;
                 let arr = nodes[index].children;
-                //  if (items[1]) {
                 for (let t = 1; t < arr.length; t++) {
                     let str = arr[t].children[0].getComponent(cc.Label).string;
                     if (str == items[1]) {
@@ -83,8 +81,6 @@ export default class NewClass extends cc.Component {
                     }
                     arr[t].active = false;
                 }
-                //  }
-
             } else {
                 nodes[index].children[0].children[1].active = false;
             }
@@ -114,52 +110,46 @@ export default class NewClass extends cc.Component {
             this.content3.active = false;
             this.layer.active = false;
         }
+
         else if (name == 'btnSubmit') {
             this.onChangeUsetName();
+        }
+
+        else if (name == 'node') {
+            this.selectLocation(event.target, data);
         }
 
         else if (index == 1 || index == 2) {
             this.onChangeUserGender(index);
         }
 
-        else if (name == 'node') {
-            this.selectLocation(event.target);
-        }
+
 
     }
 
-    selectLocation(node) {
+    selectLocation(node, da?) {
+        da = parseInt(da);
         let nodes = node.parent.children;
-
         let str = this.location.split(' ');
-
-
-        if (str[0] != '' && str.length == 1) {
-            if (node.children[0].getComponent(cc.Label).string == this.location) {
-                nodes.forEach((element, index) => {
-                    if (index != 0 && element.active) {
-                        element.active = false;
-                    }
-                    else if (index != 0 && !element.active) {
-                        element.active = true;
-                    }
-
-                });
-                // let nodes1 = this.content.children;
-                // for (let index = 0; index < nodes1.length; index++) {
-                //     let str1 = nodes1[index].children[0].children[0].getComponent(cc.Label).string;
-                //     if (str1 == str[0]) {
-                //         this.location = '';
-                //     }
-                // }
-                nodes.forEach(element => {
+        if (da == 1) {
+            this.initLocation(str);
+            nodes.forEach((element, index) => {
+                if (index != 0 && element.active) {
+                    element.active = false;
+                }
+                else if (index != 0 && !element.active) {
                     element.active = true;
-                });
-                return;
-            }
-            this.location += ' ' + node.children[0].getComponent(cc.Label).string;
+                }
+            });
+
+            str[0] = node.children[0].getComponent(cc.Label).string;
+            this.location = str[0];
             node.children[1].active = true;
 
+        } else {
+            str[1] = node.children[0].getComponent(cc.Label).string;
+            node.children[1].active = true;
+            this.location += (' ' + str[1]);
             this.content1.active = false;
             this.content2.active = false;
             this.content3.active = false;
@@ -175,28 +165,8 @@ export default class NewClass extends cc.Component {
             nodes.forEach(element => {
                 element.active = true;
             });
+
         }
-        else if (str[0] == '') {
-            this.location = node.children[0].getComponent(cc.Label).string;
-            node.children[1].active = true;
-
-            nodes.forEach(element => {
-                element.active = true;
-            });
-        } else {
-            nodes.forEach((element, index) => {
-                if (index != 0 && element.active) {
-                    element.active = false;
-                }
-                else if (index != 0 && !element.active) {
-                    element.active = true;
-                }
-
-            });
-        }
-
-        let items = this.location.split(' ');
-        this.initLocation(items);
     }
 
     onChangeUserGender(index) {

@@ -69,6 +69,10 @@ export default {
 
 	GETCGSDATA: 'GETCGSDATA',//获取闯关赛数据
 
+	OPENCJDZ: 'OPENCJDZ',  //创建对战
+
+	OPENROOM: 'OPENROOM',//进入房间
+
 	//game
 	ADDFILLCOLOR: 'ADDFILLCOLOR',
 

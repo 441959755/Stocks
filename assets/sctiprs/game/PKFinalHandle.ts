@@ -39,6 +39,17 @@ export default class NewClass extends cc.Component {
 
     EnterGameLayer: cc.Node = null;
 
+    onLoad() {
+        GlobalEvent.on(EventCfg.LEVELCHANGE, () => {
+            let userLevel = this.player1.getChildByName('userLevel').getComponent(cc.Label);
+            userLevel.string = 'LV: ' + GameData.properties[pb.GamePropertyId.Level];
+        }, this);
+        GlobalEvent.on(EventCfg.EXPCHANGE, () => {
+            let userExp = this.player1.getChildByName('userExp').getComponent(cc.Label);
+            userExp.string = 'EXP: ' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
+        }, this);
+    }
+
     onShow() {
         GlobalEvent.emit(EventCfg.CLEARINTERVAL);
 
@@ -79,8 +90,8 @@ export default class NewClass extends cc.Component {
             let taopao = this.player1.getChildByName('jj_toapao');
 
             userName.string = this.gameResult.players[0].gd.nickname;
-            userLevel.string = 'LV: ' + this.gameResult.players[0].gd.properties[pb.GamePropertyId.Level];
-            userExp.string = 'EXP: ' + this.gameResult.players[0].gd.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
+            userLevel.string = 'LV: ' + GameData.properties[pb.GamePropertyId.Level];
+            userExp.string = 'EXP: ' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
 
             userHead.spriteFrame = GameData.headImg;
 
@@ -137,14 +148,15 @@ export default class NewClass extends cc.Component {
             if (GameData.Players[1].icon) {
                 userHead.spriteFrame = GameData.Players[1].icon;
             }
-
-
+            let stages = GameCfgText.gameTextCfg.pk;
+            let ex;
             //消极
             if (userProfitRate2 == -999 && this.gameResult.players[0].ops.items.length == 0) {
                 loseSp.active = true;
                 winSp.active = false;
                 xj.active = true;
                 this.onResultAward(3, this.otherResultLabel, userProfitRate2)
+                ex = stages.lose[1].v;
             }
             //逃跑
             else if (this.gameResult.players[1].giveup) {
@@ -152,20 +164,32 @@ export default class NewClass extends cc.Component {
                 winSp.active = false;
                 taopao.active = true;
                 this.onResultAward(4, this.otherResultLabel, userProfitRate2)
-
+                ex = stages.lose[1].v;
             }
             else if (userProfitRate1 < userProfitRate2) {
                 loseSp.active = false;
                 winSp.active = true;
                 this.onResultAward(1, this.otherResultLabel, userProfitRate2)
-
+                ex = stages.win[1].v;
             }
             else if (userProfitRate1 > userProfitRate2) {
                 loseSp.active = true;
                 winSp.active = false;
                 this.onResultAward(2, this.otherResultLabel, userProfitRate2)
-
+                ex = stages.lose[1].v;
             }
+
+
+            ex = this.gameResult.players[1].gd.properties[pb.GamePropertyId.Exp] + ex;
+            if (ex >= GameCfgText.levelInfoCfg[this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level]]) {
+                ex -= GameCfgText.levelInfoCfg[this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level]];
+                userExp.string = 'EXP: ' + ex + '/' + GameCfgText.levelInfoCfg[this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level] + 1];
+                userLevel.string = 'LV: ' + (this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level] + 1);
+            }
+            else {
+                userExp.string = 'EXP: ' + ex + '/' + GameCfgText.levelInfoCfg[this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level]];
+            }
+
         }
 
     }
@@ -202,6 +226,7 @@ export default class NewClass extends cc.Component {
                 }
                 else if (e.i == pb.GamePropertyId.Exp) {
                     arr[1].string = '+ ' + e.v;
+
                 }
                 else if (e.i == pb.GamePropertyId.Fame) {
                     arr[2].string = "" + e.v;
@@ -323,6 +348,8 @@ export default class NewClass extends cc.Component {
     onDestroy() {
         UpGameOpt.clearGameOpt();
         LoadUtils.releaseRes('Prefabs/enterXLGame');
+        GlobalEvent.off(EventCfg.LEVELCHANGE);
+        GlobalEvent.off(EventCfg.EXPCHANGE);
     }
 
 }

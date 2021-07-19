@@ -223,7 +223,7 @@ PBHelper.prototype = {
 
 
     selectBlackData(id, buff) {
-        console.log('id:' + id + '跟新数据');
+
         if (id == pb.MessageId.Rep_Game_Login) {
             let data = this.onCmdGameLoginReplyConvertToData(buff);
             return data;
@@ -243,6 +243,7 @@ PBHelper.prototype = {
                 GameData.properties[decode.items[i].id] = decode.items[i].newValue;
                 console.log('id:' + decode.items[i].id + '   ' + 'value:' + decode.items[i].newValue);
             }
+            console.log('更新属性:' + decode);
 
             GameData.properties = GameData.properties;
 
@@ -385,7 +386,7 @@ PBHelper.prototype = {
 
             let RoomGameData = pb.RoomGameData;
 
-            let result = RoomGameData.decode(data1.result);
+            let result = RoomGameData.decode(new Uint8Array(data1.result));
             console.log('游戏结果' + JSON.stringify(result));
             GameCfg.RoomGameData = result;
 
@@ -437,6 +438,13 @@ PBHelper.prototype = {
             let data = CgState.decode(new Uint8Array(buff));
             GameData.cgState = data;
 
+        }
+        //创建房间应答
+        else if (id == pb.MessageId.Rep_Room_Create) {
+            let CmdRoomCreateReply = pb.CmdRoomCreateReply;
+            let data = CmdRoomCreateReply.decode(new Uint8Array(buff));
+
+            return data;
         }
     }
 }

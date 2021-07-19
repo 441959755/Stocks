@@ -2,6 +2,7 @@
 import { pb } from "../../protos/proto";
 import LLWSDK from "../../sctiprs/common/sdk/LLWSDK";
 import GameData from "../../sctiprs/GameData";
+import GameCfgText from "../../sctiprs/GameText";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 const { ccclass, property } = cc._decorator;
@@ -35,6 +36,15 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Label)
     diamond: cc.Label = null;
+
+    @property(cc.Label)
+    exp: cc.Label = null;
+
+    @property(cc.Label)
+    level: cc.Label = null;
+
+    @property(cc.ProgressBar)
+    progress: cc.ProgressBar = null;
 
     onLoad() {
         GlobalEvent.on(EventCfg.GOLDCHANGE, () => {
@@ -83,6 +93,11 @@ export default class NewClass extends cc.Component {
         let str1 = GameData.gender == 1 ? '男' : '女';
         this.gender.string = str1;
         this.diqu.string = GameData.location;
+
+        this.level.string = 'LV: ' + GameData.properties[pb.GamePropertyId.Level];
+        this.exp.string = GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
+        this.progress.progress = GameData.properties[pb.GamePropertyId.Exp] / GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
+
         let str;
         if (GameData.properties[pb.GamePropertyId.Fame] <= 99) {
             str = '股市小白';

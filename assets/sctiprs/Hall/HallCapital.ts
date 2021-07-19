@@ -30,7 +30,7 @@ export default class NewClass extends cc.Component {
 
 
     start() {
-
+        //  this.node.zIndex = 99;
         this.goldLabel.string = GameData.properties[pb.GamePropertyId.Gold];
         this.diamondLabel.string = GameData.properties[pb.GamePropertyId.Diamond];
 

@@ -184,10 +184,15 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.OPENCHUANGUAN);
 
 		}
-
+		//点击竞技
 		else if (name == 'toggle1') {
 			let index = parseInt(name.slice(-1));
 			this.changeToggle(index);
+		}
+
+		//点击创建对战
+		else if (name == 'main_jj_cjdz') {
+			GlobalEvent.emit(EventCfg.OPENCJDZ);
 		}
 
 	}

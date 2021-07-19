@@ -3,6 +3,7 @@ import EventCfg from "../Utils/EventCfg";
 import GameCfgText from "../GameText";
 import GameCfg from "../game/GameCfg";
 import GameData from "../GameData";
+import GlobalHandle from "../global/GlobalHandle";
 
 const { ccclass, property } = cc._decorator;
 
@@ -15,6 +16,12 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     chuangGuan: cc.Node = null;
 
+    @property(cc.Node)
+    cjdz: cc.Node = null;
+
+    @property(cc.Node)
+    RoomNode: cc.Node = null;
+
 
     onLoad() {
         //匹配PK
@@ -22,6 +29,12 @@ export default class NewClass extends cc.Component {
 
         //闯关
         GlobalEvent.on(EventCfg.OPENCHUANGUAN, () => { this.chuangGuan.active = true; }, this);
+
+        //房间
+        GlobalEvent.on(EventCfg.OPENROOM, () => { this.RoomNode.active = true }, this);
+
+        //创建对战
+        GlobalEvent.on(EventCfg.OPENCJDZ, () => { this.cjdz.active = true }, this);
 
         //自己进入房间的消息
         GlobalEvent.on(EventCfg.RoomGameDataSelf, this.onSelfEnterRoomGameData.bind(this), this);
@@ -112,6 +125,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.RoomGameDataSelf);
         GlobalEvent.off(EventCfg.RoomGameDataOther);
         GlobalEvent.off(EventCfg.OPENCHUANGUAN);
+        GlobalEvent.off(EventCfg.OPENCJDZ);
+        GlobalEvent.off(EventCfg.OPENROOM);
 
     }
 
