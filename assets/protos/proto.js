@@ -118,17 +118,17 @@ $root.pb = (function () {
      * @property {number} Sync_S2C_GameCg=1008 Sync_S2C_GameCg value
      * @property {number} Sync_S2C_GameMncg=1010 Sync_S2C_GameMncg value
      * @property {number} Sync_S2C_GameCgds=1012 Sync_S2C_GameCgds value
-     * @property {number} Sync_S2C_Broadcast=1014 Sync_S2C_Broadcast value
+     * @property {number} Sync_S2C_FirstLoginToday=1014 Sync_S2C_FirstLoginToday value
      * @property {number} Sync_S2C_GameCg_GD=1016 Sync_S2C_GameCg_GD value
      * @property {number} Sync_S2C_GameTimes=1018 Sync_S2C_GameTimes value
      * @property {number} Sync_S2C_StockOrderResult=1020 Sync_S2C_StockOrderResult value
      * @property {number} Sync_S2C_MutipleLogin=1022 Sync_S2C_MutipleLogin value
      * @property {number} Sync_S2C_TaskProgress=1024 Sync_S2C_TaskProgress value
      * @property {number} Sync_S2C_ActivityConf=1026 Sync_S2C_ActivityConf value
-     * @property {number} Sync_S2C_SystemMsg=1028 Sync_S2C_SystemMsg value
-     * @property {number} Sync_S2C_FirstLoginToday=1030 Sync_S2C_FirstLoginToday value
+     * @property {number} Sync_S2C_Broadcast=1100 Sync_S2C_Broadcast value
+     * @property {number} Sync_S2C_Message=1102 Sync_S2C_Message value
      * @property {number} Sync_C2S_GameHeart=1200 Sync_C2S_GameHeart value
-     * @property {number} Sync_Email=1300 Sync_Email value
+     * @property {number} Sync_C2S_Message=1202 Sync_C2S_Message value
      * @property {number} Req_QuoteSubscribe=2001 Req_QuoteSubscribe value
      * @property {number} Rep_QuoteSubscribe=2002 Rep_QuoteSubscribe value
      * @property {number} Req_QuoteQuery=2003 Req_QuoteQuery value
@@ -284,17 +284,17 @@ $root.pb = (function () {
         values[valuesById[1008] = "Sync_S2C_GameCg"] = 1008;
         values[valuesById[1010] = "Sync_S2C_GameMncg"] = 1010;
         values[valuesById[1012] = "Sync_S2C_GameCgds"] = 1012;
-        values[valuesById[1014] = "Sync_S2C_Broadcast"] = 1014;
+        values[valuesById[1014] = "Sync_S2C_FirstLoginToday"] = 1014;
         values[valuesById[1016] = "Sync_S2C_GameCg_GD"] = 1016;
         values[valuesById[1018] = "Sync_S2C_GameTimes"] = 1018;
         values[valuesById[1020] = "Sync_S2C_StockOrderResult"] = 1020;
         values[valuesById[1022] = "Sync_S2C_MutipleLogin"] = 1022;
         values[valuesById[1024] = "Sync_S2C_TaskProgress"] = 1024;
         values[valuesById[1026] = "Sync_S2C_ActivityConf"] = 1026;
-        values[valuesById[1028] = "Sync_S2C_SystemMsg"] = 1028;
-        values[valuesById[1030] = "Sync_S2C_FirstLoginToday"] = 1030;
+        values[valuesById[1100] = "Sync_S2C_Broadcast"] = 1100;
+        values[valuesById[1102] = "Sync_S2C_Message"] = 1102;
         values[valuesById[1200] = "Sync_C2S_GameHeart"] = 1200;
-        values[valuesById[1300] = "Sync_Email"] = 1300;
+        values[valuesById[1202] = "Sync_C2S_Message"] = 1202;
         values[valuesById[2001] = "Req_QuoteSubscribe"] = 2001;
         values[valuesById[2002] = "Rep_QuoteSubscribe"] = 2002;
         values[valuesById[2003] = "Req_QuoteQuery"] = 2003;
@@ -39315,10 +39315,10 @@ $root.pb = (function () {
                     case 1022:
                     case 1024:
                     case 1026:
-                    case 1028:
-                    case 1030:
+                    case 1100:
+                    case 1102:
                     case 1200:
-                    case 1300:
+                    case 1202:
                     case 2001:
                     case 2002:
                     case 2003:
@@ -39522,7 +39522,7 @@ $root.pb = (function () {
                 case 1012:
                     message.id = 1012;
                     break;
-                case "Sync_S2C_Broadcast":
+                case "Sync_S2C_FirstLoginToday":
                 case 1014:
                     message.id = 1014;
                     break;
@@ -39550,21 +39550,21 @@ $root.pb = (function () {
                 case 1026:
                     message.id = 1026;
                     break;
-                case "Sync_S2C_SystemMsg":
-                case 1028:
-                    message.id = 1028;
+                case "Sync_S2C_Broadcast":
+                case 1100:
+                    message.id = 1100;
                     break;
-                case "Sync_S2C_FirstLoginToday":
-                case 1030:
-                    message.id = 1030;
+                case "Sync_S2C_Message":
+                case 1102:
+                    message.id = 1102;
                     break;
                 case "Sync_C2S_GameHeart":
                 case 1200:
                     message.id = 1200;
                     break;
-                case "Sync_Email":
-                case 1300:
-                    message.id = 1300;
+                case "Sync_C2S_Message":
+                case 1202:
+                    message.id = 1202;
                     break;
                 case "Req_QuoteSubscribe":
                 case 2001:
@@ -41200,10 +41200,10 @@ $root.pb = (function () {
                     case 1022:
                     case 1024:
                     case 1026:
-                    case 1028:
-                    case 1030:
+                    case 1100:
+                    case 1102:
                     case 1200:
-                    case 1300:
+                    case 1202:
                     case 2001:
                     case 2002:
                     case 2003:
@@ -41414,7 +41414,7 @@ $root.pb = (function () {
                 case 1012:
                     message.id = 1012;
                     break;
-                case "Sync_S2C_Broadcast":
+                case "Sync_S2C_FirstLoginToday":
                 case 1014:
                     message.id = 1014;
                     break;
@@ -41442,21 +41442,21 @@ $root.pb = (function () {
                 case 1026:
                     message.id = 1026;
                     break;
-                case "Sync_S2C_SystemMsg":
-                case 1028:
-                    message.id = 1028;
+                case "Sync_S2C_Broadcast":
+                case 1100:
+                    message.id = 1100;
                     break;
-                case "Sync_S2C_FirstLoginToday":
-                case 1030:
-                    message.id = 1030;
+                case "Sync_S2C_Message":
+                case 1102:
+                    message.id = 1102;
                     break;
                 case "Sync_C2S_GameHeart":
                 case 1200:
                     message.id = 1200;
                     break;
-                case "Sync_Email":
-                case 1300:
-                    message.id = 1300;
+                case "Sync_C2S_Message":
+                case 1202:
+                    message.id = 1202;
                     break;
                 case "Req_QuoteSubscribe":
                 case 2001:

@@ -48,9 +48,11 @@ export default class NewClass extends cc.Component {
     }
 
 
-
     // 同步房间游戏状态
     onRoomGameStatus(data?) {
+        if (this.RoomNode.active) {
+            return;
+        }
         setTimeout(() => {
             cc.director.loadScene('game');
         }, 800)
@@ -64,6 +66,7 @@ export default class NewClass extends cc.Component {
     }
 
     onSelfEnterRoomGameData(info) {
+
         GameCfg.GameType = info.game;
         let code = info.code + '';
         if (code.length >= 7) {
@@ -118,6 +121,7 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit('SHOWOTHERPLAYER');
             this.onRoomGameStatus();
         }
+
     }
 
     onDestroy() {

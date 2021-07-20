@@ -345,6 +345,8 @@ export default class GlobalHandle {
 
     }
 
+
+
     //离开房间：CmdRoomLeave
     public static onReqRoomLeave(call?) {
         if (GameData.userID) {

@@ -9,6 +9,7 @@ import GlobalHandle from '../global/GlobalHandle';
 import StrategyAIData from '../game/StrategyAIData';
 import GameCfgText from '../GameText';
 import GameData from '../GameData';
+import LoadUtils from '../Utils/LoadUtils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -92,6 +93,8 @@ export default class NewClass extends cc.Component {
 	QHSetPre: cc.Prefab = null;
 
 	QHSetNode: cc.Node = null;
+
+	InviteBox: cc.Node = null;
 
 	onLoad() {
 		ComUtils.onLoadNode();
@@ -253,8 +256,27 @@ export default class NewClass extends cc.Component {
 
 		}, this);
 
+		GlobalEvent.on(EventCfg.INVITEMESSAGE, this.onShowInviteBox.bind(this), this);
+
 	}
 
+	onShowInviteBox(data) {
+		console.log('邀请信息：' + JSON.stringify(data));
+
+		if (!this.InviteBox) {
+			LoadUtils.loadRes('Prefabs/inviteBox', (res) => {
+				this.InviteBox = cc.instantiate(res);
+				this.node.addChild(this.InviteBox);
+				let headle = this.InviteBox.getComponent('InviteBox');
+				headle.onInviteShow(data);
+			})
+		}
+		else {
+			let headle = this.InviteBox.getComponent('InviteBox');
+			headle.onInviteShow(data);
+		}
+
+	}
 
 
 	start() {

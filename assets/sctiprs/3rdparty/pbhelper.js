@@ -341,7 +341,7 @@ PBHelper.prototype = {
             let SyncRoomLeave = pb.SyncRoomLeave;
             let data = SyncRoomLeave.decode(new Uint8Array(buff));
             console.log('玩家离开房间' + JSON.stringify(data));
-
+            GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }
 
         //  获取背包列表应答：Backbag
@@ -355,6 +355,7 @@ PBHelper.prototype = {
             let RoomPlayerStatus = pb.RoomPlayerStatus;
             let data = RoomPlayerStatus.decode(new Uint8Array(buff));
             console.log('玩家准备就绪' + JSON.stringify(data));
+            GlobalEvent.emit(EventCfg.ROOMOLAYERSTATUS, data);
 
         }
         //// 同步房间游戏状态
@@ -446,6 +447,20 @@ PBHelper.prototype = {
 
             return data;
         }
+        //系统广播：Notice
+        //服务器发到客户端的消息（包括邀请或聊天消息）：Notice
+        else if (id == pb.MessageId.Sync_S2C_Message ||
+            id == pb.MessageId.Sync_S2C_Broadcast) {
+            let Notice = pb.Notice;
+            let data = Notice.decode(new Uint8Array(buff));
+            console.log('服务器发到客户端的消息');
+            if (data.type == pb.MessageType.RoomInvite) {
+                GlobalEvent.emit(EventCfg.INVITEMESSAGE, data);
+            }
+
+        }
+
+
     }
 }
 
