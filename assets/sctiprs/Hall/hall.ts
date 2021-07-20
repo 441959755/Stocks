@@ -253,6 +253,8 @@ export default class NewClass extends cc.Component {
 
 		}, this);
 
+		GlobalEvent.on(EventCfg.INVITEMESSAGE, () => { }, this);
+
 	}
 
 
@@ -294,6 +296,8 @@ export default class NewClass extends cc.Component {
 			GameData.roomId = GameCfg.RoomGameData.id;
 			GameCfg.GAMEFRTD = true;
 		}
+
+
 	}
 
 
@@ -370,7 +374,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.OPENQHLAYER);
 		GlobalEvent.off(EventCfg.OPENHELPLAYER);
 		GlobalEvent.off(EventCfg.OPENSETLAYER);
-
+		GlobalEvent.off(EventCfg.INVITEMESSAGE);
 		ComUtils.onDestory();
 	}
 

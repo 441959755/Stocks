@@ -127,7 +127,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENCHUANGUAN);
         GlobalEvent.off(EventCfg.OPENCJDZ);
         GlobalEvent.off(EventCfg.OPENROOM);
-
     }
 
 

@@ -287,5 +287,7 @@ export default class GameData {
 
     public static JJCapital = 0;  //报名费
 
+    public static messageQueue = [];//消息列队
+
 
 }

@@ -73,6 +73,8 @@ export default {
 
 	OPENROOM: 'OPENROOM',//进入房间
 
+	INVITEMESSAGE: 'INVITEMESSAGE', //邀请
+
 	//game
 	ADDFILLCOLOR: 'ADDFILLCOLOR',
 

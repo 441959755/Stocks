@@ -446,6 +446,18 @@ PBHelper.prototype = {
 
             return data;
         }
+
+        //服务器发到客户端的消息（包括邀请或聊天消息）：Notice
+        else if (id == pb.MessageId.Sync_S2C_Message) {
+            let Notice = pb.Notice;
+            let data = Notice.decode(new Uint8Array(buff));
+
+            if (data.type == pb.MessageType.RoomInvite) {
+                GameData.messageQueue.push(data);
+                GlobalEvent.emit(EventCfg.INVITEMESSAGE);
+            }
+
+        }
     }
 }
 

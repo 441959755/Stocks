@@ -78,19 +78,19 @@ enum MessageId {
 	Sync_S2C_GameCg = 1008;					// 同步闯关赛状态：CgState
 	Sync_S2C_GameMncg = 1010;				// 同步模拟炒股状态：MncgState
 	Sync_S2C_GameCgds = 1012;				// 同步炒股大赛状态：CgdsState
-	Sync_S2C_Broadcast = 1014;				// 系统广播：Notice
+	Sync_S2C_FirstLoginToday = 1014;		// 当日首次登录会收到：空
 	Sync_S2C_GameCg_GD = 1016;				// 同步闯关赛游戏数据：JjGame
 	Sync_S2C_GameTimes = 1018;				// 同步当日游戏次数数据：TodayGameTimes
 	Sync_S2C_StockOrderResult = 1020;		// 同步股票委托处理结果：StockOrderResult
 	Sync_S2C_MutipleLogin = 1022;			// 同步多个客户端同时登录：无
 	Sync_S2C_TaskProgress = 1024;			// 同步任务进度及奖励：TaskItem
 	Sync_S2C_ActivityConf = 1026;			// 同步当前活动配置：ActivityConf
-	Sync_S2C_SystemMsg = 1028;				// 管理员消息：Notice
-	Sync_S2C_FirstLoginToday = 1030;		// 当日首次登录会收到：空
+
+	Sync_S2C_Broadcast = 1100;				// 系统广播：Notice
+	Sync_S2C_Message = 1102;				// 服务器发到客户端的消息（包括邀请或聊天消息）：Notice
 	
 	Sync_C2S_GameHeart = 1200;				// 心跳
-	
-	Sync_Email = 1300;						// 客户端之间或服务器发送给客户端的消息
+	Sync_C2S_Message = 1202;				// 客户端发到服务器的消息（包括邀请或聊天消息）：Notice
 
 
 	// 行情相关
