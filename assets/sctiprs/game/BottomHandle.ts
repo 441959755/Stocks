@@ -665,6 +665,8 @@ export default class NewClass extends cc.Component {
 			if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 				PopupManager.LoadTipsBox('tipsBox', '您的操作回合数已经用完，请等候其他用户操作结束');
 				GameCfg.GAMEWAIT = true;
+
+				GlobalEvent.emit(EventCfg.GAMEWAIT);
 			}
 			else {
 				GlobalEvent.emit(EventCfg.GAMEOVEER);

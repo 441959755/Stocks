@@ -83,6 +83,10 @@ export default class NewClass extends cc.Component {
                 }
             } else {
                 nodes[index].children[0].children[1].active = false;
+                let arr = nodes[index].children;
+                for (let t = 1; t < arr.length; t++) {
+                    arr[t].active = false;
+                }
             }
         }
     }

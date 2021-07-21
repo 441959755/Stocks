@@ -22,6 +22,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     RoomNode: cc.Node = null;
 
+    @property(cc.Node)
+    addRoom: cc.Node = null;
+
 
     onLoad() {
         //匹配PK
@@ -35,6 +38,8 @@ export default class NewClass extends cc.Component {
 
         //创建对战
         GlobalEvent.on(EventCfg.OPENCJDZ, () => { this.cjdz.active = true }, this);
+
+        GlobalEvent.on(EventCfg.OPENJRDZ, () => { this.addRoom.active = true }, this);
 
         //自己进入房间的消息
         GlobalEvent.on(EventCfg.RoomGameDataSelf, this.onSelfEnterRoomGameData.bind(this), this);
@@ -50,12 +55,9 @@ export default class NewClass extends cc.Component {
 
     // 同步房间游戏状态
     onRoomGameStatus(data?) {
-        if (this.RoomNode.active) {
-            return;
-        }
         setTimeout(() => {
             cc.director.loadScene('game');
-        }, 800)
+        }, 500)
     }
 
     onOtherEnterRoomGameData(info) {
@@ -67,7 +69,10 @@ export default class NewClass extends cc.Component {
 
     onSelfEnterRoomGameData(info) {
 
+        info.id && (GameData.roomId = info.id)
         GameCfg.GameType = info.game;
+        GameCfg.GameSet = GameData.JJPKSet;
+
         let code = info.code + '';
         if (code.length >= 7) {
             code = code.slice(1);
@@ -117,9 +122,23 @@ export default class NewClass extends cc.Component {
 
         if (info.players[1].gd && info.quotes) {
             GameData.Players[1] = info.players[1].gd;
-            this.matchPK.active = true;
-            GlobalEvent.emit('SHOWOTHERPLAYER');
-            this.onRoomGameStatus();
+
+            if (GameData.RoomType == 2) {
+                if (info.players[0].gd.uid == GameData.userID) {
+                    GameData.Players[0] = info.players[0].gd;
+                    GameData.Players[1] = info.players[1].gd;
+                }
+                else if (info.players[1].gd.uid == GameData.userID) {
+                    GameData.Players[0] = info.players[1].gd;
+                    GameData.Players[1] = info.players[0].gd;
+                }
+                GlobalEvent.emit(EventCfg.OPENROOM);
+            }
+            else {
+                this.matchPK.active = true;
+                GlobalEvent.emit('SHOWOTHERPLAYER');
+            }
+
         }
 
     }
@@ -131,7 +150,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENCHUANGUAN);
         GlobalEvent.off(EventCfg.OPENCJDZ);
         GlobalEvent.off(EventCfg.OPENROOM);
-
+        GlobalEvent.off(EventCfg.OPENJRDZ);
     }
 
 

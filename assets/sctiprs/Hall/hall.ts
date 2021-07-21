@@ -261,6 +261,11 @@ export default class NewClass extends cc.Component {
 	}
 
 	onShowInviteBox(data) {
+		if (data.sender) {
+			if (data.sender == GameData.userID) {
+				return;
+			}
+		}
 		console.log('邀请信息：' + JSON.stringify(data));
 
 		if (!this.InviteBox) {
@@ -309,12 +314,18 @@ export default class NewClass extends cc.Component {
 			}
 		}
 
+		//断线重连 或游戏后进入房间
 		if (GameCfg.RoomGameData) {
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			GameCfg.GameSet = GameData.JJPKSet;
 			GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameCfg.RoomGameData);
 			GameData.roomId = GameCfg.RoomGameData.id;
 			GameCfg.GAMEFRTD = true;
+			if (!GameData.RoomType) {
+				setTimeout(() => {
+					cc.director.loadScene('game');
+				}, 800)
+			}
 		}
 	}
 

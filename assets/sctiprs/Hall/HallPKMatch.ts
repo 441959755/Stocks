@@ -30,8 +30,12 @@ export default class NewClass extends cc.Component {
 
     ecb = null;
 
+    enterRoom = false;
+
     onLoad() {
         GlobalEvent.on('SHOWOTHERPLAYER', this.onShowOtherPlayer.bind(this), this);
+
+        GlobalEvent.on(EventCfg.RoomGameStatus, () => { this.enterRoom = true }, this);
     }
 
     onShowOtherPlayer() {
@@ -155,6 +159,7 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
 
         if (name == 'blackbtn') {
+            if (this.enterRoom) { return }
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GlobalHandle.onReqRoomLeave(() => {
                 this.node.active = false;
@@ -169,6 +174,7 @@ export default class NewClass extends cc.Component {
 
     onDestroy() {
         GlobalEvent.off('SHOWOTHERPLAYER');
+        GlobalEvent.off(EventCfg.RoomGameStatus);
         this.ecb && (clearTimeout(this.ecb));
         this.ecb = null;
     }

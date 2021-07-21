@@ -195,6 +195,12 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.OPENCJDZ);
 		}
 
+		//加入对战
+		else if (name == 'main_jj_jrdz') {
+			GlobalEvent.emit(EventCfg.OPENJRDZ);
+
+		}
+
 	}
 
 	onDestroy() {

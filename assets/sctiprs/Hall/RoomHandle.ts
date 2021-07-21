@@ -22,7 +22,20 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     jj_zxyq: cc.Node = null;
 
+    @property(cc.Node)
+    jj_fxyq: cc.Node = null;
+
+    @property(cc.Node)
+    kaishiBtn: cc.Node = null;
+
+
+
     cb = null;
+
+    @property(cc.Animation)
+    enterGameAnim: cc.Animation = null;
+
+    enterRoom = false;
 
     onLoad() {
         //自己进入房间
@@ -34,15 +47,94 @@ export default class NewClass extends cc.Component {
 
         //同步房间游戏状态
         GlobalEvent.on(EventCfg.RoomGameStatus, this.onRoomGameStatus.bind(this), this);
+
+        //玩家离开房间
+        GlobalEvent.on(EventCfg.ROOMLEAVE, this.RoomLeave.bind(this), this);
+
+        GlobalEvent.on(EventCfg.RoomGameStatus, () => { this.enterRoom = true }, this);
+    }
+
+    onDestroy() {
+        GlobalEvent.off(EventCfg.RoomGameDataSelf);
+        GlobalEvent.off(EventCfg.RoomGameDataOther);
+        GlobalEvent.off(EventCfg.RoomGameStatus);
+        GlobalEvent.off(EventCfg.ROOMLEAVE);
+        GlobalEvent.off(EventCfg.RoomGameStatus);
+    }
+
+    RoomLeave(data) {
+        //其他玩家离开
+        if (data.uid && data.uid != GameData.userID) {
+            this.jj_fxyq.active = true;
+            this.jj_zxyq.active = true;
+
+            this.kaishiBtn.active = true;
+            this.kaishiBtn.getComponent(cc.Button).interactable = false;
+            this.kaishiBtn.getComponent(cc.Button).enableAutoGrayEffect = true;
+
+            let name = this.player[1].getChildByName('name').getComponent(cc.Label);
+            let lv = this.player[1].getChildByName('lv').getComponent(cc.Label);
+            let exp = this.player[1].getChildByName('exp').getComponent(cc.Label);
+            let read = this.player[1].getChildByName('read').getComponent(cc.Label);
+            let head = this.player[1].getChildByName('head').getComponent(cc.Sprite);
+
+            name.string = '';
+            lv.string = '';
+            exp.string = '';
+            read.string = '等待加入';
+            head.spriteFrame = null;
+        }
+        //房間解散
+        else {
+            GameData.Players = [];
+            GameData.Players.length = 0;
+            GameData.RoomType = 0;
+            GameData.roomId = 0;
+            this.node.active = false;
+            GameCfg.GameType = null;
+        }
     }
 
     onRoomGameStatus(data) {
+        console.log('游戏状态' + JSON.stringify(data));
 
+        this.enterGameAnim && (this.enterGameAnim.play());
+
+        setTimeout(() => {
+            cc.director.loadScene('game');
+        }, 800)
+    }
+
+    onEnable() {
+        this.roomid.string = '房间ID：' + GameData.roomId;
+        this.jj_fxyq.active = true;
+        this.jj_zxyq.active = true;
+
+        if (GameData.RoomType == 2) {
+            this.kaishiBtn.active = false;
+
+            let info = {
+                id: GameData.roomId,
+                uid: GameData.userID,
+                ready: true,
+            }
+            let RoomPlayerStatus = pb.RoomPlayerStatus;
+            let message = RoomPlayerStatus.create(info);
+            let buff = RoomPlayerStatus.encode(message).finish();
+
+            socket.send(pb.MessageId.Req_Room_Ready, buff, (res) => {
+                console.log('玩家状态' + JSON.stringify(res));
+            })
+            console.log('进入游戏');
+        }
+
+        this.kaishiBtn.getComponent(cc.Button).interactable = false;
+        this.kaishiBtn.getComponent(cc.Button).enableAutoGrayEffect = true;
+
+        this.onShow();
     }
 
     onShow() {
-
-
         {
             let name = this.player[0].getChildByName('name').getComponent(cc.Label);
             let lv = this.player[0].getChildByName('lv').getComponent(cc.Label);
@@ -59,9 +151,28 @@ export default class NewClass extends cc.Component {
                 this.onLoadHead(GameData.Players[0], head);
 
             }
-
         }
+        {
+            let name = this.player[1].getChildByName('name').getComponent(cc.Label);
+            let lv = this.player[1].getChildByName('lv').getComponent(cc.Label);
+            let exp = this.player[1].getChildByName('exp').getComponent(cc.Label);
+            let read = this.player[1].getChildByName('read').getComponent(cc.Label);
+            let head = this.player[1].getChildByName('head').getComponent(cc.Sprite);
+            read.string = '等待加入';
+            if (GameData.Players.length > 1) {
+                name.string = GameData.Players[1].nickname;
+                lv.string = 'LV: ' + GameData.Players[1].properties[pb.GamePropertyId.Level];
+                exp.string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + '/' +
+                    GameCfgText.gameTextCfg.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
+                read.string = '等待开始';
+                this.onLoadHead(GameData.Players[1], head);
+                this.jj_fxyq.active = false;
+                this.jj_zxyq.active = false;
 
+                this.kaishiBtn.getComponent(cc.Button).interactable = true;
+                this.kaishiBtn.getComponent(cc.Button).enableAutoGrayEffect = false;
+            }
+        }
     }
 
     onLoadHead(ob, head) {
@@ -83,8 +194,13 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
 
         if (name == 'blackbtn') {
+            if (this.enterRoom) { return }
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GlobalHandle.onReqRoomLeave(() => {
+                GameData.Players = [];
+                GameData.Players.length = 0;
+                GameData.RoomType = 0;
+                GameData.roomId = 0;
                 this.node.active = false;
                 GameCfg.GameType = null;
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
@@ -131,7 +247,9 @@ export default class NewClass extends cc.Component {
                     timeLabel.string = ComUtils.onNumChangeTime(count);
                 }
             }, 1000);
-
+        }
+        else if (name == 'jj_ksdz') {
+            GlobalHandle.onCmdGameStartReq();
         }
     }
 

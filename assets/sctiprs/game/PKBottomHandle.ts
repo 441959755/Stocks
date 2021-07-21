@@ -1,4 +1,5 @@
 import { pb } from "../../protos/proto";
+import GameData from "../GameData";
 import GlobalHandle from "../global/GlobalHandle";
 import UpGameOpt from "../global/UpGameOpt";
 import ComUtils from "../Utils/ComUtils";
@@ -45,8 +46,24 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     pcb1: cc.Node = null;
 
+    @property(cc.Node)
+    wait: cc.Node = null;
+
+    @property(cc.Label)
+    waitName: cc.Label = null;
+
+    @property(cc.Label)
+    waitCodeTime: cc.Label = null;
+
+    @property(cc.Label)
+    waitTime: cc.Label = null;
+
+    @property(cc.Label)
+    waitLabel: cc.Label = null;
+
     onLoad() {
         GlobalEvent.on(EventCfg.CUTGAMEFUPAN, (status) => {
+            this.wait.active = false;
             if (status) {
                 this.cutNode.active = true;
                 this.status = status;
@@ -67,6 +84,17 @@ export default class NewClass extends cc.Component {
             this.cb1 = null;
         }, this);
 
+        GlobalEvent.on(EventCfg.GAMEWAIT, this.onGameWaitShow.bind(this), this);
+
+    }
+
+    onGameWaitShow() {
+        this.wait.active = true;
+        this.waitName.string = GameCfg.data[0].name + '  ' + GameCfg.data[0].code;
+        let gpData = GameCfg.data[0].data;
+        let kFrom = gpData[GameData.huizhidatas - 1].day;
+        let kTo = gpData[GameCfg.huizhidatas - 1].day;
+        this.waitCodeTime.string = ComUtils.formatTime(kFrom) + '--' + ComUtils.formatTime(kTo);
     }
 
     onDestroy() {
@@ -143,6 +171,7 @@ export default class NewClass extends cc.Component {
 
                         if (num <= 180) {
                             timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
+                            this.waitTime.string = '倒计时：' + ComUtils.onNumChangeTime(num);
                         }
 
                         num--;
@@ -161,6 +190,7 @@ export default class NewClass extends cc.Component {
 
                         if (num <= 180) {
                             timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
+                            this.waitTime.string = '倒计时：' + ComUtils.onNumChangeTime(num);
                         }
 
                         num--;

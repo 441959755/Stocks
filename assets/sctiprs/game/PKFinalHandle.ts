@@ -53,6 +53,15 @@ export default class NewClass extends cc.Component {
     onShow() {
         GlobalEvent.emit(EventCfg.CLEARINTERVAL);
 
+        if (GameCfg.RoomGameData.players[1].gd.uid == GameData.userID) {
+            let item = GameCfg.RoomGameData.players[1];
+            let item1 = GameCfg.RoomGameData.players[0];
+            GameCfg.RoomGameData.players[1] = item1;
+            GameCfg.RoomGameData.players[0] = item;
+        }
+
+        this.gameResult = GameCfg.RoomGameData;
+
         let gpData = GameCfg.data[0].data;
         this.codeLabel.string = '股票名称：' + GameCfg.data[0].name + '    ' + GameCfg.data[0].code;
         this.codeTimeLabel.string = '训练时段：' + ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
@@ -126,8 +135,8 @@ export default class NewClass extends cc.Component {
                 loseSp.active = true;
                 winSp.active = false;
                 this.onResultAward(2, this.selfResultLabel, userProfitRate1);
-
             }
+
         }
 
         {
@@ -341,7 +350,9 @@ export default class NewClass extends cc.Component {
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
         GameCfg.enterGameCache = null;
-        GameCfg.RoomGameData = null;
+        if (!GameData.RoomType) {
+            GameCfg.RoomGameData = null;
+        }
         cc.director.loadScene('hall');
     }
 

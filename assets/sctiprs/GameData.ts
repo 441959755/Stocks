@@ -287,7 +287,7 @@ export default class GameData {
 
     public static JJCapital = 0;  //报名费
 
-    public static
+    public static RoomType = 0;  //2邀请
 
 
 }

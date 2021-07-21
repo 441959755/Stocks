@@ -31,6 +31,9 @@ export default class NewClass extends cc.Component {
 
     inCall = null;
 
+    @property(cc.ScrollView)
+    scroll: cc.ScrollView = null;
+
     //  StageRankData = null;
 
     onLoad() {
@@ -361,6 +364,11 @@ export default class NewClass extends cc.Component {
             });
         })
 
+        let pec = 0;
+        if (GameData.cgState.stage > 1) {
+            pec = (GameData.cgState.stage - 1) / 10;
+        }
+        this.scroll.scrollToPercentVertical(pec, 0.1);
     }
 
     //跟新时间 次数
@@ -397,7 +405,6 @@ export default class NewClass extends cc.Component {
 
                 }, 60 * 1000)
 
-
             }
         }
         else if (this.confdata.status == 2) {
@@ -413,7 +420,7 @@ export default class NewClass extends cc.Component {
         }
 
         let stages = JSON.parse(this.confdata.conf);
-        this.countLabel.string = '(今日次数：' + GameData.todayGameCount[pb.GameType.JJ_ChuangGuan] + '/' + stages.Times + ')';
+        this.countLabel.string = '(今日次数：' + (stages.Times - GameData.todayGameCount[pb.GameType.JJ_ChuangGuan]) + '/' + stages.Times + ')';
     }
 
 

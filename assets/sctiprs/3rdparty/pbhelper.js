@@ -63,9 +63,7 @@ PBHelper.prototype = {
     //游戏开始
     onCmdGameStartConvertToBuff(data) {
         let CmdGameStart = pb.CmdGameStart;
-        let message = CmdGameStart.create({
-            game: data.game,
-        })
+        let message = CmdGameStart.create(data)
         let buff = CmdGameStart.encode(message).finish();
         return buff;
     },
@@ -324,7 +322,7 @@ PBHelper.prototype = {
             if (data.game == pb.GameType.JJ_PK || data.game == pb.GameType.JJ_DuoKong) {
                 let message = this.onRoomGameDataMessage(data.data);
                 console.log('自己进入房间' + JSON.stringify(message));
-                GameCfg.RoomGameData = message;
+                //  GameCfg.RoomGameData = message;
                 GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
 
             }
@@ -341,6 +339,7 @@ PBHelper.prototype = {
             let SyncRoomLeave = pb.SyncRoomLeave;
             let data = SyncRoomLeave.decode(new Uint8Array(buff));
             console.log('玩家离开房间' + JSON.stringify(data));
+            GameData.RoomType = 0;
             GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }
 
@@ -388,6 +387,7 @@ PBHelper.prototype = {
             let RoomGameData = pb.RoomGameData;
 
             let result = RoomGameData.decode(new Uint8Array(data1.result));
+
             console.log('游戏结果' + JSON.stringify(result));
             GameCfg.RoomGameData = result;
 
@@ -459,7 +459,10 @@ PBHelper.prototype = {
             }
 
         }
+        // 准备就绪应答（无）
+        else if (id == pb.MessageId.Rep_Room_Ready) {
 
+        }
 
     }
 }

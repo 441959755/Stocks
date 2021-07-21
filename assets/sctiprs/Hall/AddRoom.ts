@@ -25,11 +25,12 @@ export default class NewClass extends cc.Component {
         //点击加入对战
         else if (name == 'jj_jrdz') {
             let str = this.roomidLabel.string;
-            if (str.length < 3 || str.length > 3) {
+            if (str.length < 4 || str.length > 4) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间ID有误！请重新输入');
             }
             else {
 
+                this.onEnterRoom(str);
             }
 
         }
@@ -42,30 +43,11 @@ export default class NewClass extends cc.Component {
             str += id + '';
             this.roomidLabel.string = str;
 
-            if (str.length == 3) {
-                //TODO进入房间
+            // if (str.length == 3) {
 
-                let arr = ComUtils.getJJXunXian();
-                let data = {
-                    id: parseInt(str),
-                    uid: GameData.userID,
-                    junXian: arr,
-                }
+            //     this.onEnterRoom(str);
 
-                socket.send(pb.MessageId.Req_Room_Enter, PB.onReqRoomEnterBuff(data), (res) => {
-                    console.log(JSON.stringify(res));
-                    str = '';
-                    this.roomidLabel.string = str;
-                    if (res.err) {
-
-
-                    } else {
-                        GameData.roomId = res.id;
-
-                    }
-                })
-
-            }
+            // }
         }
 
         //清除
@@ -82,5 +64,30 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    // update (dt) {}
+    onEnterRoom(roomid) {
+        let arr = ComUtils.getJJXunXian();
+        let data = {
+            id: parseInt(roomid),
+            uid: GameData.userID,
+            junXian: arr,
+        }
+
+        socket.send(pb.MessageId.Req_Room_Enter, PB.onReqRoomEnterBuff(data), (res) => {
+            console.log('进入房间11' + JSON.stringify(res));
+            let str = '';
+            this.roomidLabel.string = str;
+            if (res.err) {
+                GameData.RoomType = 0;
+
+            } else {
+                GameData.roomId = res.id;
+                this.node.active = false;
+                GameData.RoomType = 2;
+
+            }
+        })
+
+        GameData.RoomType = 2;
+    }
+
 }

@@ -12,7 +12,7 @@ export default class GlobalHandle {
     private static curTotal = 0;
 
     //游戏开始发送游戏类型
-    public static onCmdGameStartReq(cb) {
+    public static onCmdGameStartReq(cb?) {
         let info = {
             game: GameCfg.GameType,
         }

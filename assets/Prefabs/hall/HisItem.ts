@@ -90,6 +90,7 @@ export default class NewClass extends cc.Component {
         }
         else if (this.itemData.gType == pb.GameType.JJ_ChuangGuan) {
             this.modeLabel.string = '闯  关赛';
+            this.gameSet1 = GameData.JJPKSet;
         }
         else if (this.itemData.gType == pb.GameType.JJ_QiHuo) {
             this.modeLabel.string = '期货大战';

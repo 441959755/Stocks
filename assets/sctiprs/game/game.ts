@@ -56,7 +56,7 @@ export default class NewClass extends cc.Component {
                 this.pkFinalLayer.active = true;
                 if (message) {
                     let handle = this.pkFinalLayer.getComponent('PKFinalHandle');
-                    handle.gameResult = message;
+                    //  handle.gameResult = message;
                     handle.onShow();
                 }
             }

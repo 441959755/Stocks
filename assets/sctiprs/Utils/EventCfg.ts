@@ -73,6 +73,8 @@ export default {
 
 	OPENROOM: 'OPENROOM',//进入房间
 
+	OPENJRDZ: 'OPENJRDZ',//加入对战
+
 	INVITEMESSAGE: 'INVITEMESSAGE', //邀请消息
 
 	ROOMOLAYERSTATUS: 'ROOMOLAYERSTATUS',//玩家准备就绪
@@ -148,4 +150,6 @@ export default {
 	OPENOTHERINFOBOX: 'OPENOTHERINFOBOX',//其他玩家信息框
 
 	CLEARINTERVAL: 'CLEARINTERVAL',  //竞技结束计时
+
+	GAMEWAIT: 'GAMEWAIT',//游戏等待
 };

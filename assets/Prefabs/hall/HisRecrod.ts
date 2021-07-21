@@ -88,7 +88,7 @@ export default class NewClass extends cc.Component {
 
                 info.results.forEach((el, index) => {
                     this.HisData.push(el);
-                    if (el.gType == pb.GameType.JJ_PK || el.gType == pb.GameType.JJ_DuoKong) {
+                    if (el.gType == pb.GameType.JJ_PK || el.gType == pb.GameType.JJ_DuoKong || el.gType == pb.GameType.JJ_ChuangGuan) {
                         let node = cc.instantiate(this.item);
                         this.content.addChild(node);
                         let nodeHandle = node.getComponent('HisItem');

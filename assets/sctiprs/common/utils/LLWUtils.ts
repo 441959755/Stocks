@@ -1,3 +1,5 @@
+import LLWConfig from "../config/LLWConfig";
+import PlatDefine from "../config/PlatDefine";
 
 
 export default class LLWUtils {
@@ -16,11 +18,16 @@ export default class LLWUtils {
     }
 
     static getUUID() {
-        // let _uuid = cc.sys.localStorage.getItem('_uuid');
         let _uuid;
-        if (!_uuid) {
+        if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WEB) {
             _uuid = new Date().getTime() + '';
-            //     cc.sys.localStorage.setItem('_uuid', _uuid);
+        }
+        else {
+            _uuid = cc.sys.localStorage.getItem('_uuid');
+            if (!_uuid) {
+                _uuid = new Date().getTime() + '';
+                cc.sys.localStorage.setItem('_uuid', _uuid);
+            }
         }
         return _uuid;
     }
