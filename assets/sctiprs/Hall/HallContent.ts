@@ -198,7 +198,11 @@ export default class NewClass extends cc.Component {
 		//加入对战
 		else if (name == 'main_jj_jrdz') {
 			GlobalEvent.emit(EventCfg.OPENJRDZ);
+		}
 
+		//智能选股
+		else if (name == 'main_sp_znxg') {
+			GlobalEvent.emit(EventCfg.OPENZNXG);
 		}
 
 	}

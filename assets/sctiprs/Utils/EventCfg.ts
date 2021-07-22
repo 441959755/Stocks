@@ -81,6 +81,8 @@ export default {
 
 	ROOMLEAVE: 'ROOMLEAVE',//玩家离开房间
 
+	OPENZNXG: 'OPENZNXG',//打开智能选股
+
 	//game
 	ADDFILLCOLOR: 'ADDFILLCOLOR',
 

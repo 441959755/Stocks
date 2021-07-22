@@ -468,6 +468,13 @@ PBHelper.prototype = {
 
         }
 
+        //查询AI选股的股票列表响应：
+        else if (id == pb.MessageId.Rep_QueryAiStockList) {
+            let CmdQueryAiStockListReply = pb.CmdQueryAiStockListReply;
+            let data = CmdQueryAiStockListReply.decode(new Uint8Array(buff));
+            return data;
+        }
+
     }
 }
 
