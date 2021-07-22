@@ -289,5 +289,7 @@ export default class GameData {
 
     public static RoomType = 0;  //2邀请
 
+    public static selfEnterRoomData = null;
+
 
 }

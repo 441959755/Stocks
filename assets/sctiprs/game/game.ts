@@ -37,8 +37,8 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     startGameNode: cc.Node = null;
 
-    @property(cc.Node)
-    otherPlayerInfo: cc.Node = null;
+    // @property(cc.Node)
+    // otherPlayerInfo: cc.Node = null;
 
     @property(cc.Node)
     CGSFinalLayer: cc.Node = null;
@@ -91,9 +91,9 @@ export default class NewClass extends cc.Component {
 
         this.setColor();
 
-        GlobalEvent.on(EventCfg.OPENOTHERINFOBOX, () => {
-            this.otherPlayerInfo.active = true;
-        }, this);
+        // GlobalEvent.on(EventCfg.OPENOTHERINFOBOX, () => {
+        //     this.otherPlayerInfo.active = true;
+        // }, this);
     }
 
     start() {
@@ -115,7 +115,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
         ComUtils.onDestory();
-        GlobalEvent.off(EventCfg.OPENOTHERINFOBOX);
+        //  GlobalEvent.off(EventCfg.OPENOTHERINFOBOX);
         PopupManager.delPopupNode();
         GameCfg.GAMEFUPAN = false;
         //  GameCfg.GAMEFUPANDATA = null;

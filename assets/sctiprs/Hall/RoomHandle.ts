@@ -6,6 +6,7 @@ import GlobalHandle from "../global/GlobalHandle";
 import ComUtils from "../Utils/ComUtils";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
+import PopupManager from "../Utils/PopupManager";
 
 
 const { ccclass, property } = cc._decorator;
@@ -26,9 +27,10 @@ export default class NewClass extends cc.Component {
     jj_fxyq: cc.Node = null;
 
     @property(cc.Node)
+    jj_zb: cc.Node = null;
+
+    @property(cc.Node)
     kaishiBtn: cc.Node = null;
-
-
 
     cb = null;
 
@@ -36,6 +38,8 @@ export default class NewClass extends cc.Component {
     enterGameAnim: cc.Animation = null;
 
     enterRoom = false;
+
+    zbFlag = false;
 
     onLoad() {
         //自己进入房间
@@ -47,6 +51,12 @@ export default class NewClass extends cc.Component {
 
         //同步房间游戏状态
         GlobalEvent.on(EventCfg.RoomGameStatus, this.onRoomGameStatus.bind(this), this);
+
+        GlobalEvent.on(EventCfg.ROOMOLAYERSTATUS, () => {
+            this.zbFlag = true;
+            let read = this.player[1].getChildByName('read').getComponent(cc.Label);
+            read.string = '等待开始';
+        }, this);
 
         //玩家离开房间
         GlobalEvent.on(EventCfg.ROOMLEAVE, this.RoomLeave.bind(this), this);
@@ -60,6 +70,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.RoomGameStatus);
         GlobalEvent.off(EventCfg.ROOMLEAVE);
         GlobalEvent.off(EventCfg.RoomGameStatus);
+        GlobalEvent.off(EventCfg.ROOMOLAYERSTATUS);
     }
 
     RoomLeave(data) {
@@ -112,20 +123,9 @@ export default class NewClass extends cc.Component {
 
         if (GameData.RoomType == 2) {
             this.kaishiBtn.active = false;
+            this.jj_zb.active = true;
 
-            let info = {
-                id: GameData.roomId,
-                uid: GameData.userID,
-                ready: true,
-            }
-            let RoomPlayerStatus = pb.RoomPlayerStatus;
-            let message = RoomPlayerStatus.create(info);
-            let buff = RoomPlayerStatus.encode(message).finish();
 
-            socket.send(pb.MessageId.Req_Room_Ready, buff, (res) => {
-                console.log('玩家状态' + JSON.stringify(res));
-            })
-            console.log('进入游戏');
         }
 
         this.kaishiBtn.getComponent(cc.Button).interactable = false;
@@ -164,13 +164,19 @@ export default class NewClass extends cc.Component {
                 lv.string = 'LV: ' + GameData.Players[1].properties[pb.GamePropertyId.Level];
                 exp.string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + '/' +
                     GameCfgText.gameTextCfg.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
-                read.string = '等待开始';
+                read.string = '等待准备';
                 this.onLoadHead(GameData.Players[1], head);
                 this.jj_fxyq.active = false;
                 this.jj_zxyq.active = false;
 
                 this.kaishiBtn.getComponent(cc.Button).interactable = true;
                 this.kaishiBtn.getComponent(cc.Button).enableAutoGrayEffect = false;
+            } else {
+                name.string = '';
+                lv.string = '';
+                exp.string = '';
+                read.string = '等待加入';
+                head.spriteFrame = null;
             }
         }
     }
@@ -203,6 +209,7 @@ export default class NewClass extends cc.Component {
                 GameData.roomId = 0;
                 this.node.active = false;
                 GameCfg.GameType = null;
+                this.zbFlag = false;
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
             });
         }
@@ -249,7 +256,39 @@ export default class NewClass extends cc.Component {
             }, 1000);
         }
         else if (name == 'jj_ksdz') {
+            if (!this.zbFlag) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '玩家还没准备');
+                return;
+            }
             GlobalHandle.onCmdGameStartReq();
+        }
+
+        else if (name == 'player2') {
+
+            if (GameData.Players.length > 1) {
+                //   GlobalEvent.emit(EventCfg.OPENOTHERINFOBOX);
+                PopupManager.LoadOtherPlayerInfoBox('otherPlayerInfo');
+            }
+
+        }
+
+        else if (name == 'jj_zb') {
+            let info = {
+                id: GameData.roomId,
+                uid: GameData.userID,
+                ready: true,
+            }
+            let RoomPlayerStatus = pb.RoomPlayerStatus;
+            let message = RoomPlayerStatus.create(info);
+            let buff = RoomPlayerStatus.encode(message).finish();
+
+            socket.send(pb.MessageId.Req_Room_Ready, buff, (res) => {
+                console.log('玩家状态' + JSON.stringify(res));
+            })
+            this.jj_zb.active = false;
+            let read = this.player[1].getChildByName('read').getComponent(cc.Label);
+            read.string = '等待开始';
+            console.log('进入游戏');
         }
     }
 

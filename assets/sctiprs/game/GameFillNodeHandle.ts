@@ -12,6 +12,12 @@ export default class NewClass extends cc.Component {
     graphics: cc.Graphics = null;
 
     onLoad() {
+
+        this.graphics.clear();
+        this.graphics.lineWidth = 2;
+        GameCfg.fill = [];
+        GameCfg.fill.length = 0;
+
         GlobalEvent.on(EventCfg.FILLNODEISSHOW, (flag) => {
             this.node.active = flag;
         }, this);

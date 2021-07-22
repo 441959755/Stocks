@@ -409,6 +409,11 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.OPENSTATLAYER);
         }
 
+        else if (name == 'otherPlayerNode') {
+            PopupManager.LoadOtherPlayerInfoBox('otherPlayerInfo');
+        }
+
+
     }
 
     onBlackHAll() {

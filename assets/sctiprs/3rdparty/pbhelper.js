@@ -323,6 +323,7 @@ PBHelper.prototype = {
                 let message = this.onRoomGameDataMessage(data.data);
                 console.log('自己进入房间' + JSON.stringify(message));
                 //  GameCfg.RoomGameData = message;
+                GameData.selfEnterRoomData = message;
                 GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
 
             }
@@ -339,7 +340,10 @@ PBHelper.prototype = {
             let SyncRoomLeave = pb.SyncRoomLeave;
             let data = SyncRoomLeave.decode(new Uint8Array(buff));
             console.log('玩家离开房间' + JSON.stringify(data));
-            GameData.RoomType = 0;
+            if (data.uid == GameData.userID) {
+                GameData.RoomType = 0;
+                GameData.selfEnterRoomData = null;
+            }
             GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }
 

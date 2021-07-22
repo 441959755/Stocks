@@ -190,6 +190,7 @@ export default class NewClass extends cc.Component {
 				}
 			} else if (index == 1) {
 				la.string = GameData.DXSet.search;
+				//	la.string = '随机选股';
 			} else if (index == 2) {
 				la.string = GameData.DXSet.year;
 			} else if (index == 3) {
@@ -600,7 +601,7 @@ export default class NewClass extends cc.Component {
 
 		} else {
 			let dex = -1;
-			let arrStr = GameData.DXSet.search.split(' ');
+			let arrStr = (GameData.DXSet.search + '').split(' ');
 			//	data.code = arrStr[0];
 			items = GameCfgText.getGPItemInfo(arrStr[0])
 			data.code = items[0];

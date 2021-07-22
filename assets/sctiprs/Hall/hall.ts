@@ -315,11 +315,11 @@ export default class NewClass extends cc.Component {
 		}
 
 		//断线重连 或游戏后进入房间
-		if (GameCfg.RoomGameData) {
+		if (GameData.selfEnterRoomData) {
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			GameCfg.GameSet = GameData.JJPKSet;
-			GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameCfg.RoomGameData);
-			GameData.roomId = GameCfg.RoomGameData.id;
+			GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameData.selfEnterRoomData);
+			GameData.roomId = GameData.selfEnterRoomData.id;
 			GameCfg.GAMEFRTD = true;
 			if (!GameData.RoomType) {
 				setTimeout(() => {
@@ -405,6 +405,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.OPENSETLAYER);
 
 		ComUtils.onDestory();
+		GameData.selfEnterRoomData = null;
 	}
 
 	onCmdGameStart(data, info1) {

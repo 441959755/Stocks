@@ -73,12 +73,13 @@ export default class NewClass extends cc.Component {
         }
 
         socket.send(pb.MessageId.Req_Room_Enter, PB.onReqRoomEnterBuff(data), (res) => {
+
             console.log('进入房间11' + JSON.stringify(res));
             let str = '';
             this.roomidLabel.string = str;
             if (res.err) {
                 GameData.RoomType = 0;
-
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您输入的房间号有误，请重新输入。');
             } else {
                 GameData.roomId = res.id;
                 this.node.active = false;

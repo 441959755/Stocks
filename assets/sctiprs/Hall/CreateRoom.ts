@@ -77,7 +77,7 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
                 return;
             }
-
+            GameData.RoomType = 1;
             GameData.roomId = res.id;
             this.node.active = false;
             GlobalEvent.emit(EventCfg.OPENROOM);

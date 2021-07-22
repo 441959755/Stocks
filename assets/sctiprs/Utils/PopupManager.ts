@@ -13,7 +13,31 @@ export default class PopupManager {
 
     private static OtherPlayerHisBox = null;
 
+    private static otherPlayerInfoBox = null;
+
     private static urls = [];
+
+    //其他玩家信息框
+    public static LoadOtherPlayerInfoBox(name, call?) {
+
+        if (!this.otherPlayerInfoBox && !this.flag) {
+            this.flag = true;
+
+            LoadUtils.loadRes('Prefabs/' + name, (pre) => {
+                let node = cc.instantiate(pre);
+                cc.find('Canvas').addChild(node);
+                // 进场动画
+                ActionUtils.openBox(node);
+                this.otherPlayerInfoBox = node;
+            })
+            setTimeout(() => {
+                this.flag = false;
+            }, 1000);
+
+        } else if (this.otherPlayerInfoBox) {
+            this.otherPlayerInfoBox.active = true;
+        }
+    }
 
     //选择加载的Prefa
     public static LoadTipsBox(name, text, call?) {
@@ -29,7 +53,7 @@ export default class PopupManager {
                 this.tipsBox = node;
                 this.tipsBox.emit('contentText', { text: text, call: call });
             })
-
+            this.urls.push('Prefabs/' + name);
             setTimeout(() => {
                 this.flag = false;
             }, 1000);
@@ -121,6 +145,7 @@ export default class PopupManager {
         this.urls.forEach(el => {
             LoadUtils.releaseRes(el);
         })
+
         this.urls = [];
         this.tipsBox && (this.tipsBox.destroy());
         this.tipsBox = null;
@@ -131,6 +156,9 @@ export default class PopupManager {
         this.stageRankBox = null;
         this.OtherPlayerHisBox && (this.OtherPlayerHisBox.destroy());
         this.OtherPlayerHisBox = null;
+
+        this.otherPlayerInfoBox && (this.otherPlayerInfoBox.destroy());
+        this.otherPlayerInfoBox = null;
     }
 
 }

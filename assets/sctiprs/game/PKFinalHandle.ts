@@ -80,11 +80,11 @@ export default class NewClass extends cc.Component {
         //   {"gd":{"uid":207361,"nickname":"新手","icon":"icon/default.jpg","properties":["0","0","0","0","4","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],"counters":[{"win":52,"lose":99},{"game":"JJ_PK","win":95,"lose":57},{"game":"JJ_DuoKong","win":68,"lose":94},{"game":"ShuangMang","win":80,"lose":32},{"game":"DingXiang","win":63,"lose":58},{"game":"FenShi","win":5,"lose":83},{"game":"QiHuo","win":27,"lose":19},{"game":"GeGuJingChai","win":11,"lose":6},{"game":"DaPanJingChai","win":14,"lose":41},{"game":"JJ_ChuangGuan","win":97,"lose":79},{"game":"MoNiChaoGu","win":74,"lose":39},{"game":"TiaoJianDan","win":59,"lose":2},{"game":"ChaoGuDaSai","win":65,"lose":3},{"win":52,"lose":74},{"win":59,"lose":63},{"game":"JJ_QiHuo","win":30,"lose":70},{"game":"TiaoZhan","win":83,"lose":9},{"game":"ZhiBiao","win":8,"lose":8},{"win":81,"lose":71},{"win":69,"lose":6},{"win":5,"lose":99},{"win":30,"lose":49},{"win":58,"lose":66},{"win":34,"lose":95},{"win":84,"lose":74},{"win":37,"lose":57},{"win":27,"lose":40},{"win":39,"lose":87},{"win":32,"lose":13},{"win":43,"lose":49}]},"ops":{"items":[{"opId":"Ask","kOffset":141},{"opId":"Bid","kOffset":247},{"opId":"Ask","kOffset":252},{"opId":"Bid","kOffset":253},{"opId":"Ask","kOffset":254},{"opId":"Bid_Force","kOffset":255}]},"result":{"uid":207361,"gType":"JJ_PK","quotesCode":603316,"kType":"Day","kFrom":"20170619","kTo":"20180703","stockProfitRate":-36.36363636363636,"userProfitRate":-29.923098190489473,"userCapital":"500","userProfit":"-149","ts":"1625031004","rank":2,"refId":"1278"},"curPos":"254"}]}
 
         let userProfitRate1 = this.gameResult.players[0].result.userProfitRate || 0;
-        if (this.gameResult.players[0].giveup || userProfitRate1 == 0 && !this.gameResult.players[0].ops.itmes) {
+        if ((this.gameResult.players[0].giveup || userProfitRate1 == 0) && !this.gameResult.players[0].ops.itmes) {
             userProfitRate1 = -999;
         }
         let userProfitRate2 = this.gameResult.players[1].result.userProfitRate || 0;
-        if (this.gameResult.players[1].giveup || userProfitRate2 == 0 && !this.gameResult.players[1].ops.itmes) {
+        if ((this.gameResult.players[1].giveup || userProfitRate2 == 0) && !this.gameResult.players[1].ops.itmes) {
             userProfitRate2 = -999;
         }
         {
@@ -337,11 +337,13 @@ export default class NewClass extends cc.Component {
             // GlobalEvent.emit(EventCfg.PKFUPAN, 2);
         }
         else if (name == 'otheruserInfo') {
-            GlobalEvent.emit(EventCfg.OPENOTHERINFOBOX);
+            //  GlobalEvent.emit(EventCfg.OPENOTHERINFOBOX);
+
         }
     }
 
     onQuitGame() {
+        GameCfg.fill = [];
         GameCfg.data[0].data = [];
         GameCfg.huizhidatas = 0;
         GameCfg.allRate = 0;
