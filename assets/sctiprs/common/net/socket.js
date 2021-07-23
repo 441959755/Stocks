@@ -33,6 +33,7 @@ Socket.prototype = {
 				GameData.location = info.data.location || '中国';
 				GameData.GameCounters = info.data.counters;
 				GameData.todayGameCount = info.data.todayTimes;
+				info.data.aiStockList && (GameData.AIStockList = info.data.aiStockList);
 
 				if (cc.director.getScene().name == 'Login') {
 					cc.director.loadScene('hall');

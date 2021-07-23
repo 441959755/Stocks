@@ -437,7 +437,7 @@ export default class NewClass extends cc.Component {
 			let data1 = {
 				uid: GameData.userID,
 				g_type: GameCfg.GameType,
-				//	from: parseInt(data.getTime() / 1000 + ''),
+				//from: parseInt(data.getTime() / 1000 + ''),
 				to: parseInt(new Date().getTime() / 1000 + ''),
 				pageSize: 100,
 			};

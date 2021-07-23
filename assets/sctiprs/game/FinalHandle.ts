@@ -106,7 +106,7 @@ export default class NewClass extends cc.Component {
             let datas = {
                 uid: GameData.userID,
                 gType: GameCfg.GameType,
-                quotes_code: GameCfg.data[0].code,
+                quotes_code: parseInt(GameCfg.data[0].code),
                 kType: GameCfg.data[0].ktype,
                 kFrom: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
 

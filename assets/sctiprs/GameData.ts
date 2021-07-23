@@ -291,5 +291,7 @@ export default class GameData {
 
     public static selfEnterRoomData = null;
 
+    public static AIStockList = [];  // 智能选股收藏股票列表
+
 
 }

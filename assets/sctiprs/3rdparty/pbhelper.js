@@ -86,10 +86,11 @@ PBHelper.prototype = {
 
     //游戏结束上传数据
     onCmdGameOverConvertToBuff(datas) {
+
         let CmdGameOver = pb.CmdGameOver;
 
-
-        let message = CmdGameOver.create(datas)
+        let message = CmdGameOver.create({ result: datas.result, operations: datas.operations })
+        console.log(message);
 
         let buff = CmdGameOver.encode(message).finish();
 
@@ -467,11 +468,16 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Rep_Room_Ready) {
 
         }
-
         //查询AI选股的股票列表响应：
         else if (id == pb.MessageId.Rep_QueryAiStockList) {
             let CmdQueryAiStockListReply = pb.CmdQueryAiStockListReply;
             let data = CmdQueryAiStockListReply.decode(new Uint8Array(buff));
+            return data;
+        }
+        //股票的买卖信号
+        else if (id == pb.MessageId.Rep_QueryAiSignal) {
+            let CmdQueryAiSignalReply = pb.CmdQueryAiSignalReply;
+            let data = CmdQueryAiSignalReply.decode(new Uint8Array(buff));
             return data;
         }
 
