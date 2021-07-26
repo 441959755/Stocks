@@ -2,6 +2,7 @@
 
 import { pb } from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
@@ -68,6 +69,7 @@ export default class NewClass extends cc.Component {
         })
     }
 
+
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'shanchuBtn') {
@@ -91,11 +93,13 @@ export default class NewClass extends cc.Component {
                 GameData.AIStockList.splice(index, 1);
             }
 
-
             GlobalEvent.emit('collectListUpdate');
 
         }
+        else if (name == 'item2') {
+            GlobalEvent.emit(EventCfg.OPENZNDRAW, this._curData.code);
+        }
 
     }
-}
+
 }

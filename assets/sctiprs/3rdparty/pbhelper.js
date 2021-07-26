@@ -71,15 +71,7 @@ PBHelper.prototype = {
     //查询行情
     onCmdQuoteQueryConvertToBuff(data) {
         let CmdQuoteQuery = pb.CmdQuoteQuery;
-        let message = CmdQuoteQuery.create({
-            ktype: data.ktype,
-            code: data.code,
-            from: data.from,
-            total: data.total,
-            to: data.to,
-            kstyle: data.kstyle,
-        })
-
+        let message = CmdQuoteQuery.create(data)
         let buff = CmdQuoteQuery.encode(message).finish();
         return buff;
     },

@@ -1,6 +1,6 @@
-import GameCfg from "../../../sctiprs/game/GameCfg";
+import { pb } from "../../protos/proto";
+import GameCfg from "../../sctiprs/game/GameCfg";
 
-import { pb } from '../../../protos/proto';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -16,6 +16,9 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Node)
     ZBNode: cc.Node = null;
+
+    @property(cc.Node)
+    ZNXG: cc.Node = null;
 
     onEnable() {
         this.SMNode.active = false;
@@ -35,6 +38,10 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.ZBNode.active = true
         }
+        else if (GameCfg.GameType == 'ZNXG') {
+            this.ZNXG.active = true;
+        }
+
 
     }
 

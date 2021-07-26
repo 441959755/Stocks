@@ -1,4 +1,5 @@
 import { pb } from "../../../protos/proto";
+import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -58,7 +59,7 @@ export default class NewClass extends cc.Component {
             let tsUpdated = this.AIStockList[this.AIStockList.length - 1].tsUpdated;
             let data = {
                 tsUpdateFrom: tsUpdated,
-                total: 30,
+                total: 20,
             }
             this.getAIStockList(data);
         }, this);
@@ -67,7 +68,7 @@ export default class NewClass extends cc.Component {
             console.log('scroll-to-bottom');
             let data = {
                 rankFrom: this.AIProfitCount + 1,
-                total: 30,
+                total: 20,
             }
             this.getAIProfitList(data);
         }, this);
@@ -76,7 +77,7 @@ export default class NewClass extends cc.Component {
             let node = cc.instantiate(this.preItem2);
             this.content2.addChild(node);
             let handle = node.getComponent('ZnxgItem2');
-            handle.onShow(data, GameData.AIStockList.length);
+            handle.onShow(data, GameData.AIStockList.length - 1);
         }, this);
     }
 
@@ -88,7 +89,7 @@ export default class NewClass extends cc.Component {
         let data = {
             //    rankFrom: 1,
             tsUpdateFrom: parseInt(new Date().getTime() / 1000 + ''),
-            total: 30,
+            total: 20,
         }
         this.getAIStockList(data);
     }
@@ -118,7 +119,7 @@ export default class NewClass extends cc.Component {
                 this.tipsNode.active = true;
                 let data = {
                     rankFrom: 1,
-                    total: 30,
+                    total: 20,
                 }
                 this.getAIProfitList(data);
             }
@@ -150,6 +151,15 @@ export default class NewClass extends cc.Component {
 
         if (name == 'blackbtn') {
             this.node.active = false;
+        }
+
+        else if (name == 'sp_topbtn_help') {
+            GameCfg.GameType = 'ZNXG';
+            GlobalEvent.emit(EventCfg.OPENHELPLAYER);
+        }
+
+        else if (name == 'sp_topbtn_zhengu') {
+            GlobalEvent.emit(EventCfg.OPENZGLAYER);
         }
     }
 

@@ -83,6 +83,10 @@ export default {
 
 	OPENZNXG: 'OPENZNXG',//打开智能选股
 
+	OPENZGLAYER: 'OPENZGLAYER',//诊股
+
+	OPENZNDRAW: 'OPENZNDRAW',
+
 	//game
 	ADDFILLCOLOR: 'ADDFILLCOLOR',
 

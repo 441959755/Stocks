@@ -72,5 +72,9 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit('shouCangAdd', this._curData);
 
         }
+        else if (name == 'item') {
+            GlobalEvent.emit(EventCfg.OPENZNDRAW, this._curData.code);
+        }
+
     }
 }

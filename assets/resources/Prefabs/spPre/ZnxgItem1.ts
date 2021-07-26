@@ -5,6 +5,9 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -13,7 +16,10 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     label: cc.Label[] = [];
 
+    _curData = null;
+
     onShow(data, index) {
+        this._curData = data;
         index += 1;
         this.label[0].string = index;
         this.label[1].string = data.code;
@@ -34,6 +40,7 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         if (name == 'item1') {
 
+            GlobalEvent.emit(EventCfg.OPENZNDRAW, this._curData.code);
         }
 
     }

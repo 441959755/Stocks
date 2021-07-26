@@ -72,9 +72,6 @@ export default class NewClass extends cc.Component {
 
 	SMMonthlyLayer: cc.Node = null;
 
-	@property(cc.Prefab)
-	helpPre: cc.Prefab = null;
-
 	helpLayer: cc.Node = null;
 
 	@property(cc.Prefab)
@@ -247,13 +244,18 @@ export default class NewClass extends cc.Component {
 
 		//打开帮助
 		GlobalEvent.on(EventCfg.OPENHELPLAYER, () => {
-
 			if (!this.helpLayer) {
-				this.helpLayer = cc.instantiate(this.helpPre);
-				this.node.addChild(this.helpLayer, 66);
+				GlobalEvent.emit(EventCfg.LOADINGSHOW);
+				LoadUtils.loadRes('Prefabs/helpLayer', (pre) => {
+					this.helpLayer = cc.instantiate(pre);
+					this.node.addChild(this.helpLayer);
+					this.helpLayer.active = true;
+					GlobalEvent.emit(EventCfg.LOADINGHIDE);
+				})
 			}
-			this.helpLayer.active = true;
-
+			else {
+				this.helpLayer.active = true;
+			}
 		}, this);
 
 		GlobalEvent.on(EventCfg.INVITEMESSAGE, this.onShowInviteBox.bind(this), this);
@@ -267,7 +269,6 @@ export default class NewClass extends cc.Component {
 			}
 		}
 		console.log('邀请信息：' + JSON.stringify(data));
-
 		if (!this.InviteBox) {
 			LoadUtils.loadRes('Prefabs/inviteBox', (res) => {
 				this.InviteBox = cc.instantiate(res);
@@ -280,7 +281,6 @@ export default class NewClass extends cc.Component {
 			let headle = this.InviteBox.getComponent('InviteBox');
 			headle.onInviteShow(data);
 		}
-
 	}
 
 
