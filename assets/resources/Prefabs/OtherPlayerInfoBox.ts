@@ -185,9 +185,8 @@ export default class NewClass extends cc.Component {
             })
 
             this.ygzNode.active = true;
-            this.wgzNode.active = false;;
+            this.wgzNode.active = false;
         }
 
     }
-
 }

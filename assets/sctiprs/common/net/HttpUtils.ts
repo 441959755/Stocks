@@ -21,9 +21,9 @@ export default {
             if (xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 300)) {
                 console.log("http res(" + xhr.responseText.length + "):" + xhr.responseText);
                 try {
-                    var ret = JSON.parse(xhr.responseText);
+                    //  var ret = JSON.parse(xhr.responseText);
                     if (handler !== null) {
-                        handler(ret);
+                        handler(xhr.responseText);
                     }
                 } catch (e) {
                     console.log("err:" + e);

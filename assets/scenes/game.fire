@@ -210,7 +210,7 @@
       "array": [
         0,
         0,
-        394.27159671979985,
+        539.5255291009731,
         0,
         0,
         0,
@@ -17586,7 +17586,7 @@
   {
     "__type__": "cc.Node",
     "_name": "box",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 2
     },
@@ -35741,7 +35741,7 @@
   {
     "__type__": "cc.Node",
     "_name": "tipsBox",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 2
     },

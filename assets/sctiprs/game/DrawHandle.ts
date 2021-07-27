@@ -199,14 +199,14 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit('hideTips');
             this.Horizontal1.active = false;
             this.vertical1.active = false;
-        })
+        }, this)
 
         //取消
         this.node.on('touchcancel', (event) => {
             GlobalEvent.emit('hideTips');
             this.Horizontal1.active = false;
             this.vertical1.active = false;
-        })
+        }, this)
 
 
         this.node.on('touchmove', (event) => {
