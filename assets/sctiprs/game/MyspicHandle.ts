@@ -69,7 +69,7 @@ export default class NewClass extends cc.Component {
         this.bottomValue = viewData[0].low;
         this.topValue = 0;
 
-        for (let i = cc.ext.beg_end[0]; i < cc.ext.beg_end[1]; i++) {
+        for (let i = GameCfg.beg_end[0]; i < GameCfg.beg_end[1]; i++) {
             if (viewData[i] && viewData[i].low) {
                 this.topValue = Math.max(this.topValue, viewData[i].high);
                 this.bottomValue = Math.min(this.bottomValue, viewData[i].low);
@@ -77,7 +77,7 @@ export default class NewClass extends cc.Component {
         }
 
         this.disValue = this.topValue - this.bottomValue;
-        for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
+        for (let index = GameCfg.beg_end[0]; index < GameCfg.beg_end[1]; index++) {
             if (viewData[index]) {
                 this.onDrawMyspic(viewData[index], index);
             }
@@ -88,9 +88,9 @@ export default class NewClass extends cc.Component {
 
         let initY = 0;
         let drawBox = this.node.height;
-        let some = index - cc.ext.beg_end[0];
-        let startX = some == 0 ? 10 : 10 + (some * cc.ext.hz_width);
-        let endX = 10 + ((some + 1) * cc.ext.hz_width);
+        let some = index - GameCfg.beg_end[0];
+        let startX = some == 0 ? 10 : 10 + (some * GameCfg.hz_width);
+        let endX = 10 + ((some + 1) * GameCfg.hz_width);
         //根据区间价格决定坐标
         let openY = (el.open - this.bottomValue) / this.disValue * drawBox + initY;
         let closeY = (el.close - this.bottomValue) / this.disValue * drawBox + initY;

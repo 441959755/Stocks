@@ -20,7 +20,6 @@ cc.Class({
 
 	init() {
 		window.global = window;
-		cc.ext = {};
 
 		let PBHelper = require('pbhelper');
 

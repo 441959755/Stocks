@@ -4,7 +4,7 @@ import DrawUtils from "../Utils/DrawUtils";
 import GameCfg from "./GameCfg";
 import { pb } from '../../protos/proto';
 import DrawData from "./DrawData";
-import ComUtils from "../Utils/ComUtils";
+//import ComUtils from "../Utils/ComUtils";
 
 const { ccclass, property } = cc._decorator;
 
@@ -128,27 +128,27 @@ export default class NewClass extends cc.Component {
             this.initData();
             this.initDrawBg();
             //   GlobalEvent.emit('onDraw');
-            this.updataLabel(cc.ext.beg_end[1] - 1);
+            this.updataLabel(GameCfg.beg_end[1] - 1);
         }, this);
 
 
         //每回合的绘制
         GlobalEvent.on('roundNUmber', () => {
             GameCfg.huizhidatas += 1;
-            if (10 + (cc.ext.beg_end[1] - cc.ext.beg_end[0] + 1) * cc.ext.hz_width < this.drawBordWidth) {
-                cc.ext.beg_end[1] += 1;
+            if (10 + (GameCfg.beg_end[1] - GameCfg.beg_end[0] + 1) * GameCfg.hz_width < this.drawBordWidth) {
+                GameCfg.beg_end[1] += 1;
             } else {
                 if (GameCfg.huizhidatas >= GameCfg.data[0].data.length) {
                     GameCfg.huizhidatas = GameCfg.data[0].data.length;
                     return;
                 }
 
-                cc.ext.beg_end[0] += GameCfg.huizhidatas - cc.ext.beg_end[1];
-                cc.ext.beg_end[1] = GameCfg.huizhidatas;
+                GameCfg.beg_end[0] += GameCfg.huizhidatas - GameCfg.beg_end[1];
+                GameCfg.beg_end[1] = GameCfg.huizhidatas;
             }
             this.initDrawBg();
             GlobalEvent.emit('onDraw');
-            this.updataLabel(cc.ext.beg_end[1] - 1);
+            this.updataLabel(GameCfg.beg_end[1] - 1);
         }, this);
 
         let calDisY = 0;
@@ -179,17 +179,17 @@ export default class NewClass extends cc.Component {
             var pos = new cc.Vec2(event.getLocationX(), event.getLocationY());
 
             let localPos = this.node.children[0].convertToNodeSpaceAR(pos);
-            this.vertical1.x = Math.floor((localPos.x - 10) / cc.ext.hz_width) * cc.ext.hz_width + 10 + cc.ext.hz_width / 2;
+            this.vertical1.x = Math.floor((localPos.x - 10) / GameCfg.hz_width) * GameCfg.hz_width + 10 + GameCfg.hz_width / 2;
             this.Horizontal1.y = localPos.y;
 
-            let index = cc.ext.beg_end[0] + (Math.floor((localPos.x - 10) / cc.ext.hz_width));
+            let index = GameCfg.beg_end[0] + (Math.floor((localPos.x - 10) / GameCfg.hz_width));
 
-            if (index >= cc.ext.beg_end[1]) {
-                this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
-                index = cc.ext.beg_end[1] - 1;
+            if (index >= GameCfg.beg_end[1]) {
+                this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) + 10 - GameCfg.hz_width / 2;
+                index = GameCfg.beg_end[1] - 1;
             }
-            else if (index <= cc.ext.beg_end[0]) {
-                this.vertical1.x = 10 + cc.ext.hz_width / 2;
+            else if (index <= GameCfg.beg_end[0]) {
+                this.vertical1.x = 10 + GameCfg.hz_width / 2;
             }
             this.updataLabel(index);
         }, this);
@@ -218,22 +218,22 @@ export default class NewClass extends cc.Component {
             if (Math.abs(calDisX) > Math.abs(calDisY)) {
                 calDisY = 0;
 
-                if (Math.abs(calDisX) >= (cc.ext.hz_width / 2)) {
+                if (Math.abs(calDisX) >= (GameCfg.hz_width / 2)) {
                     if (!this.timer) {
                         this.timer = setTimeout(() => {
 
-                            let count = Math.ceil(Math.abs(calDisX) / cc.ext.hz_width);
+                            let count = Math.ceil(Math.abs(calDisX) / GameCfg.hz_width);
                             this.onMoveLeftOrRight(count, calDisX, calDisY);
 
-                            //  if (cc.ext.beg_end[1] - cc.ext.beg_end[0] < count) {
-                            let index = cc.ext.beg_end[0] + (Math.floor((localPos.x - 10) / cc.ext.hz_width));
-                            this.vertical1.x = Math.floor((localPos.x - 10) / cc.ext.hz_width) * cc.ext.hz_width + 10 + cc.ext.hz_width / 2;
-                            if (index >= cc.ext.beg_end[1]) {
-                                this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
-                                index = cc.ext.beg_end[1] - 1;
+                            //  if (GameCfg.beg_end[1] - GameCfg.beg_end[0] < count) {
+                            let index = GameCfg.beg_end[0] + (Math.floor((localPos.x - 10) / GameCfg.hz_width));
+                            this.vertical1.x = Math.floor((localPos.x - 10) / GameCfg.hz_width) * GameCfg.hz_width + 10 + GameCfg.hz_width / 2;
+                            if (index >= GameCfg.beg_end[1]) {
+                                this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) + 10 - GameCfg.hz_width / 2;
+                                index = GameCfg.beg_end[1] - 1;
                             }
-                            else if (index <= cc.ext.beg_end[0]) {
-                                this.vertical1.x = 10 + cc.ext.hz_width / 2;
+                            else if (index <= GameCfg.beg_end[0]) {
+                                this.vertical1.x = 10 + GameCfg.hz_width / 2;
                             }
                             //  }
 
@@ -254,10 +254,10 @@ export default class NewClass extends cc.Component {
                     if (!this.timer) {
 
                         this.timer = setTimeout(() => {
-                            let preNUm = parseInt(this.drawBordWidth / cc.ext.hz_width + '');
+                            let preNUm = parseInt(this.drawBordWidth / GameCfg.hz_width + '');
                             let hz_width = 0;
                             let w = (parseInt(Math.ceil(Math.abs(calDisY) / 2) + ''));
-                            //  hz_width = calDisY > 0 ? cc.ext.hz_width + w : cc.ext.hz_width - w;
+                            //  hz_width = calDisY > 0 ? GameCfg.hz_width + w : GameCfg.hz_width - w;
                             num = calDisY > 0 ? preNUm - w : preNUm + w;
                             if (num <= minCount) {
                                 num = minCount
@@ -275,50 +275,50 @@ export default class NewClass extends cc.Component {
 
                             if (calDisY > 0) {
                                 if (num > GameCfg.huizhidatas) {
-                                    cc.ext.beg_end[0] = 0;
-                                    cc.ext.beg_end[1] = GameCfg.huizhidatas;
+                                    GameCfg.beg_end[0] = 0;
+                                    GameCfg.beg_end[1] = GameCfg.huizhidatas;
                                 } else {
-                                    let count = cc.ext.beg_end[1] - cc.ext.beg_end[0] - num;
+                                    let count = GameCfg.beg_end[1] - GameCfg.beg_end[0] - num;
 
-                                    cc.ext.beg_end[0] += parseInt(count / 2 + '');
+                                    GameCfg.beg_end[0] += parseInt(count / 2 + '');
 
-                                    cc.ext.beg_end[1] -= (count - parseInt(count / 2 + ''));
+                                    GameCfg.beg_end[1] -= (count - parseInt(count / 2 + ''));
 
                                 }
                             } else {
                                 if (num < GameCfg.huizhidatas) {
-                                    let count = num - (cc.ext.beg_end[1] - cc.ext.beg_end[0]);
-                                    if (cc.ext.beg_end[1] == GameCfg.huizhidatas) {
-                                        cc.ext.beg_end[0] -= parseInt(count + '');
-                                    } else if (cc.ext.beg_end[1] == 0) {
-                                        cc.ext.beg_end[1] -= parseInt(count + '');
+                                    let count = num - (GameCfg.beg_end[1] - GameCfg.beg_end[0]);
+                                    if (GameCfg.beg_end[1] == GameCfg.huizhidatas) {
+                                        GameCfg.beg_end[0] -= parseInt(count + '');
+                                    } else if (GameCfg.beg_end[1] == 0) {
+                                        GameCfg.beg_end[1] -= parseInt(count + '');
                                     } else {
-                                        cc.ext.beg_end[0] -= parseInt(count / 2 + '');
-                                        cc.ext.beg_end[1] += (count - parseInt(count / 2 + ''));
+                                        GameCfg.beg_end[0] -= parseInt(count / 2 + '');
+                                        GameCfg.beg_end[1] += (count - parseInt(count / 2 + ''));
                                     }
 
-                                    if (cc.ext.beg_end[0] < 0) {
-                                        cc.ext.beg_end[0] = 0;
+                                    if (GameCfg.beg_end[0] < 0) {
+                                        GameCfg.beg_end[0] = 0;
                                     }
-                                    if (cc.ext.beg_end[1] > GameCfg.huizhidatas) {
-                                        cc.ext.beg_end[1] = GameCfg.huizhidatas
+                                    if (GameCfg.beg_end[1] > GameCfg.huizhidatas) {
+                                        GameCfg.beg_end[1] = GameCfg.huizhidatas
                                     }
                                 } else {
-                                    cc.ext.beg_end[0] = 0;
-                                    cc.ext.beg_end[1] = GameCfg.huizhidatas;
+                                    GameCfg.beg_end[0] = 0;
+                                    GameCfg.beg_end[1] = GameCfg.huizhidatas;
                                 }
                             }
 
-                            cc.ext.hz_width = this.drawBordWidth / (num);
+                            GameCfg.hz_width = this.drawBordWidth / (num);
 
 
                             this.Horizontal1.y = localPos.y;
-                            let index = cc.ext.beg_end[0] + (Math.floor((localPos.x - 10) / cc.ext.hz_width));
-                            if (index >= cc.ext.beg_end[1]) {
-                                this.vertical1.x = cc.ext.hz_width * (cc.ext.beg_end[1] - cc.ext.beg_end[0]) + 10 - cc.ext.hz_width / 2;
-                                index = cc.ext.beg_end[1] - 1;
-                            } else if (index <= cc.ext.beg_end[0]) {
-                                this.vertical1.x = 10 + cc.ext.hz_width / 2;
+                            let index = GameCfg.beg_end[0] + (Math.floor((localPos.x - 10) / GameCfg.hz_width));
+                            if (index >= GameCfg.beg_end[1]) {
+                                this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) + 10 - GameCfg.hz_width / 2;
+                                index = GameCfg.beg_end[1] - 1;
+                            } else if (index <= GameCfg.beg_end[0]) {
+                                this.vertical1.x = 10 + GameCfg.hz_width / 2;
                             }
                             this.updataLabel(index);
                             calDisY = 0;
@@ -342,32 +342,32 @@ export default class NewClass extends cc.Component {
 
     //跳转到标签买卖点
     noticeDrawMove(index) {
-        if (index >= cc.ext.beg_end[0] && index < cc.ext.beg_end[1]) {
+        if (index >= GameCfg.beg_end[0] && index < GameCfg.beg_end[1]) {
 
         }
         else {
 
-            if (index < cc.ext.beg_end[0]) {
-                let count = cc.ext.beg_end[0] + parseInt((cc.ext.beg_end[1] - cc.ext.beg_end[0]) / 2 + '') - index;
+            if (index < GameCfg.beg_end[0]) {
+                let count = GameCfg.beg_end[0] + parseInt((GameCfg.beg_end[1] - GameCfg.beg_end[0]) / 2 + '') - index;
                 // let count = mid - index;
-                if (cc.ext.beg_end[0] - count < 0) {
-                    cc.ext.beg_end[1] -= (cc.ext.beg_end[0] - count) - count;
-                    cc.ext.beg_end[0] = 0;
+                if (GameCfg.beg_end[0] - count < 0) {
+                    GameCfg.beg_end[1] -= (GameCfg.beg_end[0] - count) - count;
+                    GameCfg.beg_end[0] = 0;
 
                 } else {
 
-                    cc.ext.beg_end[0] -= count;
-                    cc.ext.beg_end[1] -= count;
+                    GameCfg.beg_end[0] -= count;
+                    GameCfg.beg_end[1] -= count;
                 }
             } else {
-                let count = index - cc.ext.beg_end[0] + parseInt((cc.ext.beg_end[1] - cc.ext.beg_end[0]) / 2 + '');
+                let count = index - GameCfg.beg_end[0] + parseInt((GameCfg.beg_end[1] - GameCfg.beg_end[0]) / 2 + '');
                 // let count = index - mid;
-                if (cc.ext.beg_end[1] + count > GameCfg.huizhidatas) {
-                    cc.ext.beg_end[0] += (count - (cc.ext.beg_end[1] + count - GameCfg.huizhidatas));
-                    cc.ext.beg_end[1] = GameCfg.huizhidatas;
+                if (GameCfg.beg_end[1] + count > GameCfg.huizhidatas) {
+                    GameCfg.beg_end[0] += (count - (GameCfg.beg_end[1] + count - GameCfg.huizhidatas));
+                    GameCfg.beg_end[1] = GameCfg.huizhidatas;
                 } else {
-                    cc.ext.beg_end[0] += count;
-                    cc.ext.beg_end[1] += count;
+                    GameCfg.beg_end[0] += count;
+                    GameCfg.beg_end[1] += count;
                 }
 
             }
@@ -376,43 +376,43 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit('onDraw');
         }
 
-        let x = 10 + ((index - cc.ext.beg_end[0])) * cc.ext.hz_width + cc.ext.hz_width / 2;
+        let x = 10 + ((index - GameCfg.beg_end[0])) * GameCfg.hz_width + GameCfg.hz_width / 2;
         this.vertical1.x = x;
         this.vertical1.active = true;
     }
 
     onMoveLeftOrRight(count, calDisX, calDisY) {
         if (calDisX > 0) {
-            if (cc.ext.beg_end[0] == 0) {
+            if (GameCfg.beg_end[0] == 0) {
                 clearTimeout(this.timer);
                 this.timer = null;
                 calDisX = 0;
                 calDisY = 0;
                 return;
             }
-            if (cc.ext.beg_end[0] - count >= 0) {
-                cc.ext.beg_end[1] -= count;
-                cc.ext.beg_end[0] -= count;
+            if (GameCfg.beg_end[0] - count >= 0) {
+                GameCfg.beg_end[1] -= count;
+                GameCfg.beg_end[0] -= count;
             } else {
-                count = cc.ext.beg_end[0];
-                cc.ext.beg_end[0] -= count;
-                cc.ext.beg_end[1] -= count;
+                count = GameCfg.beg_end[0];
+                GameCfg.beg_end[0] -= count;
+                GameCfg.beg_end[1] -= count;
             }
         } else {
-            if (GameCfg.huizhidatas == cc.ext.beg_end[1]) {
+            if (GameCfg.huizhidatas == GameCfg.beg_end[1]) {
                 clearTimeout(this.timer);
                 this.timer = null;
                 calDisX = 0;
                 calDisY = 0;
                 return;
             }
-            if (cc.ext.beg_end[1] + count < GameCfg.huizhidatas) {
-                cc.ext.beg_end[0] += count;
-                cc.ext.beg_end[1] += count;
+            if (GameCfg.beg_end[1] + count < GameCfg.huizhidatas) {
+                GameCfg.beg_end[0] += count;
+                GameCfg.beg_end[1] += count;
             } else {
-                count = GameCfg.huizhidatas - cc.ext.beg_end[1];
-                cc.ext.beg_end[0] += count;
-                cc.ext.beg_end[1] += count;
+                count = GameCfg.huizhidatas - GameCfg.beg_end[1];
+                GameCfg.beg_end[0] += count;
+                GameCfg.beg_end[1] += count;
             }
         }
         this.initDrawBg();
@@ -421,7 +421,7 @@ export default class NewClass extends cc.Component {
 
     //跟新label
     updataLabel(index) {
-        if (index < 0 || cc.ext.beg_end[1] > GameCfg.huizhidatas) {
+        if (index < 0 || GameCfg.beg_end[1] > GameCfg.huizhidatas) {
             return
         }
         this.setMALabelInfo(index);
@@ -495,16 +495,16 @@ export default class NewClass extends cc.Component {
 
     //绘制初始
     initDrawBg() {
-        if (!cc.ext.beg_end[0]) {
-            cc.ext.beg_end[0] = 0;
+        if (!GameCfg.beg_end[0]) {
+            GameCfg.beg_end[0] = 0;
         }
-        if (cc.ext.beg_end[0] < 0 || cc.ext.beg_end[1] > GameCfg.huizhidatas) {
+        if (GameCfg.beg_end[0] < 0 || GameCfg.beg_end[1] > GameCfg.huizhidatas) {
             return;
         }
 
         let viweData = GameCfg.data[0].data;
-        if (!viweData || !viweData[cc.ext.beg_end[0]] || !viweData[cc.ext.beg_end[1] - 1]) {
-            console.log('行情数据为空' + cc.ext.beg_end[0] + cc.ext.beg_end[1]);
+        if (!viweData || !viweData[GameCfg.beg_end[0]] || !viweData[GameCfg.beg_end[1] - 1]) {
+            console.log('行情数据为空' + GameCfg.beg_end[0] + GameCfg.beg_end[1]);
             return;
         }
 
@@ -518,10 +518,10 @@ export default class NewClass extends cc.Component {
         this.drawBOLL.lineWidth = 2;
         this.drawEXPMA.lineWidth = 2;
 
-        this.bottomValue = viweData[cc.ext.beg_end[0]].low;
+        this.bottomValue = viweData[GameCfg.beg_end[0]].low;
         this.topValue = 0;
 
-        for (let i = cc.ext.beg_end[0]; i < cc.ext.beg_end[1]; i++) {
+        for (let i = GameCfg.beg_end[0]; i < GameCfg.beg_end[1]; i++) {
             this.topValue = Math.max(this.topValue, viweData[i].high);     //最高价
             this.bottomValue = Math.min(this.bottomValue, viweData[i].low); //最低价
         }
@@ -535,7 +535,7 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
 
-        for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
+        for (let index = GameCfg.beg_end[0]; index < GameCfg.beg_end[1]; index++) {
 
             this.onDrawCandle(viweData[index], index);
 
@@ -557,8 +557,8 @@ export default class NewClass extends cc.Component {
         }
         let drawBox = this.drawBOLL.node.height;
         if (index >= 20) {
-            let prex = 10 + ((index - 1 - cc.ext.beg_end[0])) * cc.ext.hz_width + cc.ext.hz_width / 2;
-            let x = 10 + ((index - cc.ext.beg_end[0])) * cc.ext.hz_width + cc.ext.hz_width / 2;
+            let prex = 10 + ((index - 1 - GameCfg.beg_end[0])) * GameCfg.hz_width + GameCfg.hz_width / 2;
+            let x = 10 + ((index - GameCfg.beg_end[0])) * GameCfg.hz_width + GameCfg.hz_width / 2;
             for (let j = 0; j < 3; j++) {
                 let prey = (this.BollList[index - 1][j] - this.bottomValue) / this.disValue * drawBox;
                 let y = (this.BollList[index][j] - this.bottomValue) / this.disValue * drawBox;
@@ -596,10 +596,10 @@ export default class NewClass extends cc.Component {
             if (index >= GameCfg.MAs[i]) {
                 //平均的位置
                 let preMAY = (this.MaList[index - 1][i] - this.bottomValue) / this.disValue * drawBox + initY;
-                let preMAX = 10 + ((index - 1 - cc.ext.beg_end[0]) * cc.ext.hz_width) + cc.ext.hz_width / 2;
+                let preMAX = 10 + ((index - 1 - GameCfg.beg_end[0]) * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
                 let MAY = (this.MaList[index][i] - this.bottomValue) / this.disValue * drawBox + initY;
-                let MAX = 10 + ((index - cc.ext.beg_end[0]) * cc.ext.hz_width) + cc.ext.hz_width / 2;
+                let MAX = 10 + ((index - GameCfg.beg_end[0]) * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
                 this.drawMA.strokeColor = GameCfg.MAColor[i];
                 this.drawLine(this.drawMA, preMAX, preMAY, MAX, MAY, i);
@@ -612,10 +612,10 @@ export default class NewClass extends cc.Component {
         let drawBox = this.drawEXPMA.node.height;
         if (index > 0) {
             let prey1 = (this.EXPMA1[index - 1] - this.bottomValue) / this.disValue * drawBox;
-            let prex = 10 + ((index - 1 - cc.ext.beg_end[0]) * cc.ext.hz_width) + cc.ext.hz_width / 2;
+            let prex = 10 + ((index - 1 - GameCfg.beg_end[0]) * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
             let y1 = (this.EXPMA1[index] - this.bottomValue) / this.disValue * drawBox;
-            let x = 10 + ((index - cc.ext.beg_end[0]) * cc.ext.hz_width) + cc.ext.hz_width / 2;
+            let x = 10 + ((index - GameCfg.beg_end[0]) * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
             let prey2 = (this.EXPMA2[index - 1] - this.bottomValue) / this.disValue * drawBox;
             let y2 = (this.EXPMA2[index] - this.bottomValue) / this.disValue * drawBox;
@@ -639,9 +639,9 @@ export default class NewClass extends cc.Component {
 
         let initY = 0;
         let drawBox = this.drawBg.node.height;
-        let some = index - cc.ext.beg_end[0];
-        let startX = some == 0 ? 10 : 10 + (some * cc.ext.hz_width);
-        let endX = 10 + ((some + 1) * cc.ext.hz_width);
+        let some = index - GameCfg.beg_end[0];
+        let startX = some == 0 ? 10 : 10 + (some * GameCfg.hz_width);
+        let endX = 10 + ((some + 1) * GameCfg.hz_width);
         //根据区间价格决定坐标
         let openValue = (el.open - this.bottomValue);
         let openY = openValue / this.disValue * drawBox + initY;
@@ -847,11 +847,11 @@ export default class NewClass extends cc.Component {
     }
 
     setDrawing() {
-        let num = parseInt(this.drawBordWidth / cc.ext.hz_width + '');
-        cc.ext.beg_end[1] = GameCfg.huizhidatas;
-        cc.ext.beg_end[0] = cc.ext.beg_end[1] - num;
-        if (cc.ext.beg_end[0] <= 0) {
-            cc.ext.beg_end[0] = 0;
+        let num = parseInt(this.drawBordWidth / GameCfg.hz_width + '');
+        GameCfg.beg_end[1] = GameCfg.huizhidatas;
+        GameCfg.beg_end[0] = GameCfg.beg_end[1] - num;
+        if (GameCfg.beg_end[0] <= 0) {
+            GameCfg.beg_end[0] = 0;
         }
         this.initDrawBg();
         GlobalEvent.emit('onDraw');

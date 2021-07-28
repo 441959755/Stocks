@@ -29,25 +29,25 @@ export default class NewClass extends cc.Component {
             this.graphics.clear();
             this.graphics.lineWidth = 2;
             data.forEach(el => {
-                if (el.start >= cc.ext.beg_end[1]) {
+                if (el.start >= GameCfg.beg_end[1]) {
                     return;
                 }
 
-                let some = (el.start) - cc.ext.beg_end[0];
-                let startX = some == 0 ? 10 : 10 + (some * cc.ext.hz_width);
-                if (el.start < cc.ext.beg_end[0]) {
+                let some = (el.start) - GameCfg.beg_end[0];
+                let startX = some == 0 ? 10 : 10 + (some * GameCfg.hz_width);
+                if (el.start < GameCfg.beg_end[0]) {
                     startX = 10;
                 }
 
                 let endX;
                 if (el.end) {
-                    if (el.end > cc.ext.beg_end[1] - 1) {
-                        endX = 10 + ((cc.ext.beg_end[1] - cc.ext.beg_end[0] - 1) * cc.ext.hz_width) + cc.ext.hz_width;
+                    if (el.end > GameCfg.beg_end[1] - 1) {
+                        endX = 10 + ((GameCfg.beg_end[1] - GameCfg.beg_end[0] - 1) * GameCfg.hz_width) + GameCfg.hz_width;
                     } else {
-                        endX = 10 + ((el.end - cc.ext.beg_end[0]) * cc.ext.hz_width) + cc.ext.hz_width;
+                        endX = 10 + ((el.end - GameCfg.beg_end[0]) * GameCfg.hz_width) + GameCfg.hz_width;
                     }
                 } else {
-                    endX = 10 + ((cc.ext.beg_end[1] - cc.ext.beg_end[0]) * cc.ext.hz_width);
+                    endX = 10 + ((GameCfg.beg_end[1] - GameCfg.beg_end[0]) * GameCfg.hz_width);
                 }
                 let width = endX - startX - 1;
                 let color;

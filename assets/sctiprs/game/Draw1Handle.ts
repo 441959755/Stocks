@@ -168,7 +168,7 @@ export default class NewClass extends cc.Component {
             }
 
             this.setLabelValue();
-            this.updataLabel(cc.ext.beg_end[1] - 1);
+            this.updataLabel(GameCfg.beg_end[1] - 1);
         }, this);
 
         GlobalEvent.on('onDraw', this.onDraw.bind(this), this);
@@ -336,15 +336,15 @@ export default class NewClass extends cc.Component {
     }
 
     onDraw() {
-        if (!cc.ext.beg_end[0]) {
-            cc.ext.beg_end[0] = 0;
+        if (!GameCfg.beg_end[0]) {
+            GameCfg.beg_end[0] = 0;
         }
-        if (cc.ext.beg_end[0] < 0 || cc.ext.beg_end[1] > GameCfg.huizhidatas) {
+        if (GameCfg.beg_end[0] < 0 || GameCfg.beg_end[1] > GameCfg.huizhidatas) {
             return;
         }
 
         let viweData = GameCfg.data[0].data;
-        if (!viweData || !viweData[cc.ext.beg_end[0]] || !viweData[cc.ext.beg_end[1] - 1]) {
+        if (!viweData || !viweData[GameCfg.beg_end[0]] || !viweData[GameCfg.beg_end[1] - 1]) {
             console.log('行情数据为空');
             return;
         }
@@ -354,44 +354,44 @@ export default class NewClass extends cc.Component {
         this.drawCcl.clear();
         this.drawPCM.clear();
         this.drawVol.clear();
-        this.minDIF = this.DIFList[cc.ext.beg_end[0]];
-        this.maxDIF = this.DIFList[cc.ext.beg_end[0]];
+        this.minDIF = this.DIFList[GameCfg.beg_end[0]];
+        this.maxDIF = this.DIFList[GameCfg.beg_end[0]];
 
-        this.minDEA = this.DEAList[cc.ext.beg_end[0]];
-        this.maxDEA = this.DEAList[cc.ext.beg_end[0]];
+        this.minDEA = this.DEAList[GameCfg.beg_end[0]];
+        this.maxDEA = this.DEAList[GameCfg.beg_end[0]];
 
-        this.maxMACD = this.MACDList[cc.ext.beg_end[0]];
-        this.minMACD = this.MACDList[cc.ext.beg_end[0]];
+        this.maxMACD = this.MACDList[GameCfg.beg_end[0]];
+        this.minMACD = this.MACDList[GameCfg.beg_end[0]];
 
-        this.minK = this.Klist[cc.ext.beg_end[0]];
-        this.maxK = this.Klist[cc.ext.beg_end[0]];
+        this.minK = this.Klist[GameCfg.beg_end[0]];
+        this.maxK = this.Klist[GameCfg.beg_end[0]];
 
-        this.minD = this.Dlist[cc.ext.beg_end[0]];
-        this.maxD = this.Dlist[cc.ext.beg_end[0]];
+        this.minD = this.Dlist[GameCfg.beg_end[0]];
+        this.maxD = this.Dlist[GameCfg.beg_end[0]];
 
-        this.minJ = this.jList[cc.ext.beg_end[0]];
-        this.maxJ = this.jList[cc.ext.beg_end[0]];
+        this.minJ = this.jList[GameCfg.beg_end[0]];
+        this.maxJ = this.jList[GameCfg.beg_end[0]];
 
-        this.minRs6 = this.Rs6[cc.ext.beg_end[0]];
-        this.maxRs6 = this.Rs6[cc.ext.beg_end[0]];
+        this.minRs6 = this.Rs6[GameCfg.beg_end[0]];
+        this.maxRs6 = this.Rs6[GameCfg.beg_end[0]];
 
-        this.maxRs12 = this.Rs12[cc.ext.beg_end[0]];
-        this.minRs12 = this.Rs12[cc.ext.beg_end[0]];
+        this.maxRs12 = this.Rs12[GameCfg.beg_end[0]];
+        this.minRs12 = this.Rs12[GameCfg.beg_end[0]];
 
-        this.maxRs24 = this.Rs24[cc.ext.beg_end[0]];
-        this.minRs24 = this.Rs24[cc.ext.beg_end[0]];
+        this.maxRs24 = this.Rs24[GameCfg.beg_end[0]];
+        this.minRs24 = this.Rs24[GameCfg.beg_end[0]];
 
 
         if (viweData.length <= 0) { return }
         this.topVol = 0;
         this.bottomVol = viweData[0].value;
 
-        if (GameCfg.GameType == pb.GameType.QiHuo && GameCfg.data[0].data[cc.ext.beg_end[0]]) {
-            this.maxCcl = GameCfg.data[0].data[cc.ext.beg_end[0]].ccl_hold;
-            this.minCcl = GameCfg.data[0].data[cc.ext.beg_end[0]].ccl_hold;
+        if (GameCfg.GameType == pb.GameType.QiHuo && GameCfg.data[0].data[GameCfg.beg_end[0]]) {
+            this.maxCcl = GameCfg.data[0].data[GameCfg.beg_end[0]].ccl_hold;
+            this.minCcl = GameCfg.data[0].data[GameCfg.beg_end[0]].ccl_hold;
         }
 
-        for (let index = cc.ext.beg_end[0]; index < cc.ext.beg_end[1]; index++) {
+        for (let index = GameCfg.beg_end[0]; index < GameCfg.beg_end[1]; index++) {
 
             this.minDIF = Math.min(this.minDIF, this.DIFList[index]);
             this.maxDIF = Math.max(this.maxDIF, this.DIFList[index]);
@@ -443,7 +443,7 @@ export default class NewClass extends cc.Component {
         this.drawKDJ.lineWidth = 2;
         this.drawCcl.lineWidth = 2;
         this.drawRSI.lineWidth = 2;
-        for (let i = cc.ext.beg_end[0]; i < cc.ext.beg_end[1]; i++) {
+        for (let i = GameCfg.beg_end[0]; i < GameCfg.beg_end[1]; i++) {
             this.onDrawMACD(i);
             this.onDrawKDJ(i);
             this.onDrawRSI(i);
@@ -485,7 +485,7 @@ export default class NewClass extends cc.Component {
     }
 
     onDrawKDJ(index) {
-        let some = index - cc.ext.beg_end[0];
+        let some = index - GameCfg.beg_end[0];
 
         if (index <= 0) {
             return
@@ -494,9 +494,9 @@ export default class NewClass extends cc.Component {
 
         let bgheight = this.drawKDJ.node.height;
 
-        let x = 10 + (some * cc.ext.hz_width) + cc.ext.hz_width / 2;
+        let x = 10 + (some * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
-        let preX = 10 + ((some - 1) * cc.ext.hz_width) + cc.ext.hz_width / 2;
+        let preX = 10 + ((some - 1) * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
         let kY = this.Klist[index] / this.maxK * bgheight;
 
@@ -529,16 +529,16 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GameType != pb.GameType.QiHuo) {
             return;
         }
-        let some = index - cc.ext.beg_end[0];
+        let some = index - GameCfg.beg_end[0];
 
         if (index <= 0) {
             return
         }
         let bgheight = this.drawCcl.node.height;
 
-        let x = 10 + (some * cc.ext.hz_width) + cc.ext.hz_width / 2;
+        let x = 10 + (some * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
-        let preX = 10 + ((some - 1) * cc.ext.hz_width) + cc.ext.hz_width / 2;
+        let preX = 10 + ((some - 1) * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
         let y = GameCfg.data[0].data[index].ccl_hold / this.maxCcl * bgheight;
 
@@ -551,7 +551,7 @@ export default class NewClass extends cc.Component {
     }
 
     onDrawRSI(index) {
-        let some = index - cc.ext.beg_end[0];
+        let some = index - GameCfg.beg_end[0];
 
         if (index <= 0) {
             return
@@ -559,8 +559,8 @@ export default class NewClass extends cc.Component {
         this.maxRs6 = 120;
 
         let bgHeight = this.drawRSI.node.height;
-        let RSIX = 10 + (some * cc.ext.hz_width) + cc.ext.hz_width / 2;
-        let preRSIX = 10 + ((some - 1) * cc.ext.hz_width) + cc.ext.hz_width / 2;
+        let RSIX = 10 + (some * GameCfg.hz_width) + GameCfg.hz_width / 2;
+        let preRSIX = 10 + ((some - 1) * GameCfg.hz_width) + GameCfg.hz_width / 2;
         //RSI6
         if (index >= 6) {
 
@@ -595,7 +595,7 @@ export default class NewClass extends cc.Component {
     }
 
     onDrawMACD(index) {
-        let some = index - cc.ext.beg_end[0];
+        let some = index - GameCfg.beg_end[0];
 
         if (index <= 0) {
             return
@@ -610,8 +610,8 @@ export default class NewClass extends cc.Component {
 
         predifY = this.DIFList[index - 1] / this.maxMACD * bgHeight / 2;//+ bgHeight / 2;
 
-        let difx = 10 + (some * cc.ext.hz_width) + cc.ext.hz_width / 2;
-        let preX = 10 + ((some - 1) * cc.ext.hz_width) + cc.ext.hz_width / 2;
+        let difx = 10 + (some * GameCfg.hz_width) + GameCfg.hz_width / 2;
+        let preX = 10 + ((some - 1) * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
         if (some > 0) {
             this.drawMACD.strokeColor = GameCfg.DIF_LINE_COL;
@@ -635,7 +635,7 @@ export default class NewClass extends cc.Component {
 
         //MACD
         //MACD线的宽度
-        this.drawMACD.lineWidth = cc.ext.hz_width / 3;
+        this.drawMACD.lineWidth = GameCfg.hz_width / 3;
         if (this.drawMACD.lineWidth < 3) {
             this.drawMACD.lineWidth = 3;
         } else if (this.drawMACD.lineWidth > 6) {
@@ -658,15 +658,15 @@ export default class NewClass extends cc.Component {
     //成交量绘制
     onDrawVol(el, index) {
 
-        let some = index - cc.ext.beg_end[0];
+        let some = index - GameCfg.beg_end[0];
 
         let initY = 0;
         let drawBox = 150;
         let disVol = this.topVol - this.bottomVol;
 
-        let startX = some == 0 ? 10 : 10 + (some * cc.ext.hz_width);
+        let startX = some == 0 ? 10 : 10 + (some * GameCfg.hz_width);
         // // console.log('startX='+startX);
-        let endX = 10 + ((some + 1) * cc.ext.hz_width);
+        let endX = 10 + ((some + 1) * GameCfg.hz_width);
 
         let hight = el.value * (150 / this.topVol);
 
@@ -684,7 +684,7 @@ export default class NewClass extends cc.Component {
             if (index >= GameCfg.VOLGraph[i]) {
 
                 let preY = this.VolList[index - 1][i] * (150 / this.topVol);
-                let preX = 10 + ((some - 1) * cc.ext.hz_width) + width / 2
+                let preX = 10 + ((some - 1) * GameCfg.hz_width) + width / 2
 
                 //平均的位置
                 let VOlPointY = this.VolList[index][i] * (150 / this.topVol);

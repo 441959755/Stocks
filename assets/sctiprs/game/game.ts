@@ -211,16 +211,16 @@ export default class NewClass extends cc.Component {
 
 
     initData() {
-        cc.ext.beg_end = [];
+        GameCfg.beg_end = [];
 
-        cc.ext.beg_end[1] = GameCfg.huizhidatas;
-        cc.ext.beg_end[0] = 0;
+        GameCfg.beg_end[1] = GameCfg.huizhidatas;
+        GameCfg.beg_end[0] = 0;
 
         if (GameCfg.huizhidatas > 100) {
-            cc.ext.beg_end[0] = cc.ext.beg_end[1] - 100;
+            GameCfg.beg_end[0] = GameCfg.beg_end[1] - 100;
         }
-        if (cc.ext.beg_end[0] < 0) {
-            cc.ext.beg_end[0] = 0;
+        if (GameCfg.beg_end[0] < 0) {
+            GameCfg.beg_end[0] = 0;
         }
 
         let mixWidth = 6;
@@ -228,12 +228,12 @@ export default class NewClass extends cc.Component {
 
         let drawWidth = cc.winSize.width - 180 - this.poritLa.width - 25;
 
-        cc.ext.hz_width = drawWidth / (cc.ext.beg_end[1] - cc.ext.beg_end[0]);
+        GameCfg.hz_width = drawWidth / (GameCfg.beg_end[1] - GameCfg.beg_end[0]);
 
-        if (cc.ext.hz_width > maxWidth) {
-            cc.ext.hz_width = maxWidth;
-        } else if (cc.ext.hz_width < mixWidth) {
-            cc.ext.hz_width = mixWidth;
+        if (GameCfg.hz_width > maxWidth) {
+            GameCfg.hz_width = maxWidth;
+        } else if (GameCfg.hz_width < mixWidth) {
+            GameCfg.hz_width = mixWidth;
         }
 
         GameCfg.MAs = [];

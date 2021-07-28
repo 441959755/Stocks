@@ -3,6 +3,10 @@ export default {
 
     GameSet: null,   //游戏设置
 
+    hz_width: 10,    //绘制宽度
+
+    beg_end: [0, 100],       //开始到结束
+
     MAs: [],         //设置均线日  
 
     BOLL: [20],
@@ -17,6 +21,8 @@ export default {
 
     EXPMA: [12, 50],
 
+    K_D_J_Line: [],
+
     HZ_white: cc.Color.WHITE,
 
     // MAGraph: [5, 10, 20, 30, 60, 120],   //价格均线
@@ -26,8 +32,6 @@ export default {
     BOLLColor: [cc.Color.WHITE, cc.Color.YELLOW, cc.Color.RED],
 
     tipsDealColor: [],
-
-    K_D_J_Line: [],
 
     RSI_COLOR: [],
 

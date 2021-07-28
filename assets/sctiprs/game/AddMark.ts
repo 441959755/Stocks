@@ -108,7 +108,7 @@ export default class NewClass extends cc.Component {
         if (this.status == 1) {
             this.mark1Nodes.forEach((el, i) => {
                 if (el && el.node) {
-                    if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
+                    if (i >= GameCfg.beg_end[0] && i < GameCfg.beg_end[1]) {
                         el.node.active = true;
                     }
                 }
@@ -117,7 +117,7 @@ export default class NewClass extends cc.Component {
         else if (this.status == 2) {
             this.mark2Nodes.forEach((el, i) => {
                 if (el && el.node) {
-                    if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
+                    if (i >= GameCfg.beg_end[0] && i < GameCfg.beg_end[1]) {
                         el.node.active = true;
                     }
                 }
@@ -126,14 +126,14 @@ export default class NewClass extends cc.Component {
 
             this.mark1Nodes.forEach((el, i) => {
                 if (el && el.node) {
-                    if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
+                    if (i >= GameCfg.beg_end[0] && i < GameCfg.beg_end[1]) {
                         el.node.active = true;
                     }
                 }
             })
             this.mark2Nodes.forEach((el, i) => {
                 if (el && el.node) {
-                    if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
+                    if (i >= GameCfg.beg_end[0] && i < GameCfg.beg_end[1]) {
                         el.node.active = true;
                     }
                 }
@@ -206,7 +206,7 @@ export default class NewClass extends cc.Component {
 
         this.markNodes.forEach((el, i) => {
             if (el && el.node) {
-                if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
+                if (i < GameCfg.beg_end[0] || i >= GameCfg.beg_end[1]) {
                     el.node.active = false;
 
                 }
@@ -215,7 +215,7 @@ export default class NewClass extends cc.Component {
 
         this.bmarkNodes.forEach((el, i) => {
             if (el && el.node) {
-                if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
+                if (i < GameCfg.beg_end[0] || i >= GameCfg.beg_end[1]) {
                     el.node.active = false;
 
                 }
@@ -224,7 +224,7 @@ export default class NewClass extends cc.Component {
 
         this.AIMarkNodes.forEach((el, index) => {
             if (el && el.node) {
-                if (index < cc.ext.beg_end[0] || index >= cc.ext.beg_end[1]) {
+                if (index < GameCfg.beg_end[0] || index >= GameCfg.beg_end[1]) {
                     el.node.active = false;
                 }
             }
@@ -232,7 +232,7 @@ export default class NewClass extends cc.Component {
 
         this.startNode.forEach((el, index) => {
             if (el && el.node) {
-                if (index < cc.ext.beg_end[0] || index >= cc.ext.beg_end[1]) {
+                if (index < GameCfg.beg_end[0] || index >= GameCfg.beg_end[1]) {
                     el.node.active = false;
                 }
             }
@@ -241,7 +241,7 @@ export default class NewClass extends cc.Component {
         if (this.status == 1) {
             this.mark1Nodes.forEach((el, i) => {
                 if (el && el.node) {
-                    if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
+                    if (i < GameCfg.beg_end[0] || i >= GameCfg.beg_end[1]) {
                         el.node.active = false;
                     }
                 }
@@ -250,7 +250,7 @@ export default class NewClass extends cc.Component {
         else if (this.status == 2) {
             this.mark2Nodes.forEach((el, i) => {
                 if (el && el.node) {
-                    if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
+                    if (i < GameCfg.beg_end[0] || i >= GameCfg.beg_end[1]) {
                         el.node.active = false;
                     }
                 }
@@ -258,14 +258,14 @@ export default class NewClass extends cc.Component {
         } else if (this.status == 3) {
             this.mark1Nodes.forEach((el, i) => {
                 if (el && el.node) {
-                    if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
+                    if (i < GameCfg.beg_end[0] || i >= GameCfg.beg_end[1]) {
                         el.node.active = false;
                     }
                 }
             })
             this.mark2Nodes.forEach((el, i) => {
                 if (el && el.node) {
-                    if (i < cc.ext.beg_end[0] || i >= cc.ext.beg_end[1]) {
+                    if (i < GameCfg.beg_end[0] || i >= GameCfg.beg_end[1]) {
                         el.node.active = false;
                     }
                 }
@@ -279,7 +279,7 @@ export default class NewClass extends cc.Component {
         this.currPint = posInfo;
         this.onMarkRangeShowOrHide();
         //放大
-        this.currScale = cc.ext.hz_width / 15;
+        this.currScale = GameCfg.hz_width / 15;
 
         if (this.currScale <= 0.7) {
             this.currScale = 0.7;
@@ -507,7 +507,7 @@ export default class NewClass extends cc.Component {
         this.markNodes.forEach((el, i) => {
             if (el && el.node) {
                 //   
-                if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
+                if (i >= GameCfg.beg_end[0] && i < GameCfg.beg_end[1]) {
                     el.node.active = true;
 
                 }
@@ -517,7 +517,7 @@ export default class NewClass extends cc.Component {
         this.bmarkNodes.forEach((el, i) => {
             if (el && el.node) {
                 //   
-                if (i >= cc.ext.beg_end[0] && i < cc.ext.beg_end[1]) {
+                if (i >= GameCfg.beg_end[0] && i < GameCfg.beg_end[1]) {
                     el.node.active = true;
 
                 }
@@ -526,7 +526,7 @@ export default class NewClass extends cc.Component {
 
         this.AIMarkNodes.forEach((el, index) => {
             if (el && el.node) {
-                if (index >= cc.ext.beg_end[0] && index < cc.ext.beg_end[1]) {
+                if (index >= GameCfg.beg_end[0] && index < GameCfg.beg_end[1]) {
                     el.node.active = true;
                 }
             }
@@ -534,7 +534,7 @@ export default class NewClass extends cc.Component {
 
         this.startNode.forEach((el, index) => {
             if (el && el.node) {
-                if (index >= cc.ext.beg_end[0] && index < cc.ext.beg_end[1]) {
+                if (index >= GameCfg.beg_end[0] && index < GameCfg.beg_end[1]) {
                     el.node.active = true;
                 }
             }

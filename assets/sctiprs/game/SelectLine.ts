@@ -91,7 +91,7 @@ export default class NewClass extends cc.Component {
 
     onDrawEvetn(data) {
         GameCfg.data[0].data = data;
-        cc.ext.hz_width = 15;
+        GameCfg.hz_width = 15;
         GlobalEvent.emit('onQHDraw');
     }
 
@@ -99,8 +99,8 @@ export default class NewClass extends cc.Component {
         if (GameCfg.huizhidatas < this.huizhidatas) {
             return;
         }
-        this.beg = JSON.parse(JSON.stringify(cc.ext.beg_end[0]));
-        this.end = JSON.parse(JSON.stringify(cc.ext.beg_end[1]));
+        this.beg = JSON.parse(JSON.stringify(GameCfg.beg_end[0]));
+        this.end = JSON.parse(JSON.stringify(GameCfg.beg_end[1]));
         this.huizhidatas = JSON.parse(JSON.stringify(GameCfg.huizhidatas));
     }
 
@@ -246,8 +246,8 @@ export default class NewClass extends cc.Component {
             //         }
             //     }
             // }
-            // cc.ext.beg_end[0] = 0;
-            // cc.ext.beg_end[1] = GameCfg.data[0].data.length;
+            // GameCfg.beg_end[0] = 0;
+            // GameCfg.beg_end[1] = GameCfg.data[0].data.length;
             // GameCfg.huizhidatas = GameCfg.data[0].data.length;
             // this.onDrawEvetn(GameCfg.data[0].data);
         });
@@ -384,8 +384,8 @@ export default class NewClass extends cc.Component {
     }
 
     onGoBlackGame() {
-        cc.ext.beg_end[0] = this.beg;
-        cc.ext.beg_end[1] = this.end;
+        GameCfg.beg_end[0] = this.beg;
+        GameCfg.beg_end[1] = this.end;
         GameCfg.huizhidatas = this.huizhidatas;
         this.onDrawEvetn(this.qhData.data);
         GlobalEvent.emit('HIDEBOTTOMNODE', true);
@@ -428,8 +428,8 @@ export default class NewClass extends cc.Component {
             dataArr = dataArr.slice(dataArr.length - 51);
         }
 
-        cc.ext.beg_end[0] = 0;
-        cc.ext.beg_end[1] = dataArr.length;
+        GameCfg.beg_end[0] = 0;
+        GameCfg.beg_end[1] = dataArr.length;
         GameCfg.huizhidatas = dataArr.length;
 
         this.onDrawEvetn(dataArr);

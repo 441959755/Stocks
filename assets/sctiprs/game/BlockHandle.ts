@@ -44,10 +44,10 @@ export default class NewClass extends cc.Component {
             index = GameCfg.huizhidatas;
         }
 
-        let some = index - cc.ext.beg_end[0];
+        let some = index - GameCfg.beg_end[0];
         if (some < 0) { return }
 
-        let startX = some == 0 ? 10 : 10 + (some * cc.ext.hz_width);
+        let startX = some == 0 ? 10 : 10 + (some * GameCfg.hz_width);
 
         let node;
 
@@ -102,7 +102,7 @@ export default class NewClass extends cc.Component {
     onBlockRangeHide() {
         this.blockNods.forEach((el, i) => {
             if (el && el[0]) {
-                if (el[1] < cc.ext.beg_end[0] || el[1] >= cc.ext.beg_end[1]) {
+                if (el[1] < GameCfg.beg_end[0] || el[1] >= GameCfg.beg_end[1]) {
                     el[0].active = false;
                 }
             }
