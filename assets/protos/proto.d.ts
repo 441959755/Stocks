@@ -62,6 +62,7 @@ export namespace pb {
         Sync_S2C_MutipleLogin = 1022,
         Sync_S2C_TaskProgress = 1024,
         Sync_S2C_ActivityConf = 1026,
+        Sync_S2C_GameCgdsItem = 1028,
         Sync_S2C_Broadcast = 1100,
         Sync_S2C_Message = 1102,
         Sync_C2S_GameHeart = 1200,
@@ -1561,6 +1562,9 @@ export namespace pb {
 
         /** MncgState positionList */
         positionList?: (pb.IStockPositionList|null);
+
+        /** MncgState stockList */
+        stockList?: (number[]|null);
     }
 
     /** Represents a MncgState. */
@@ -1580,6 +1584,9 @@ export namespace pb {
 
         /** MncgState positionList. */
         public positionList?: (pb.IStockPositionList|null);
+
+        /** MncgState stockList. */
+        public stockList: number[];
 
         /**
          * Creates a new MncgState instance using the specified properties.
@@ -1838,6 +1845,102 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a CgdsStockListItem. */
+    interface ICgdsStockListItem {
+
+        /** CgdsStockListItem id */
+        id?: (number|null);
+
+        /** CgdsStockListItem stockList */
+        stockList?: (number[]|null);
+    }
+
+    /** Represents a CgdsStockListItem. */
+    class CgdsStockListItem implements ICgdsStockListItem {
+
+        /**
+         * Constructs a new CgdsStockListItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICgdsStockListItem);
+
+        /** CgdsStockListItem id. */
+        public id: number;
+
+        /** CgdsStockListItem stockList. */
+        public stockList: number[];
+
+        /**
+         * Creates a new CgdsStockListItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CgdsStockListItem instance
+         */
+        public static create(properties?: pb.ICgdsStockListItem): pb.CgdsStockListItem;
+
+        /**
+         * Encodes the specified CgdsStockListItem message. Does not implicitly {@link pb.CgdsStockListItem.verify|verify} messages.
+         * @param message CgdsStockListItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICgdsStockListItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CgdsStockListItem message, length delimited. Does not implicitly {@link pb.CgdsStockListItem.verify|verify} messages.
+         * @param message CgdsStockListItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICgdsStockListItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CgdsStockListItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CgdsStockListItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CgdsStockListItem;
+
+        /**
+         * Decodes a CgdsStockListItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CgdsStockListItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CgdsStockListItem;
+
+        /**
+         * Verifies a CgdsStockListItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CgdsStockListItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CgdsStockListItem
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CgdsStockListItem;
+
+        /**
+         * Creates a plain object from a CgdsStockListItem message. Also converts values to other types if specified.
+         * @param message CgdsStockListItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CgdsStockListItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CgdsStockListItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a ZsjcState. */
     interface IZsjcState {
 
@@ -2080,6 +2183,9 @@ export namespace pb {
 
         /** GameData aiStockList */
         aiStockList?: (number[]|null);
+
+        /** GameData cgdsStockList */
+        cgdsStockList?: (pb.ICgdsStockListItem[]|null);
     }
 
     /** Represents a GameData. */
@@ -2144,6 +2250,9 @@ export namespace pb {
 
         /** GameData aiStockList. */
         public aiStockList: number[];
+
+        /** GameData cgdsStockList. */
+        public cgdsStockList: pb.ICgdsStockListItem[];
 
         /**
          * Creates a new GameData instance using the specified properties.
@@ -6277,6 +6386,9 @@ export namespace pb {
 
         /** Notice ts */
         ts?: (number|Long|null);
+
+        /** Notice node */
+        node?: (number|null);
     }
 
     /** Represents a Notice. */
@@ -6302,6 +6414,9 @@ export namespace pb {
 
         /** Notice ts. */
         public ts: (number|Long);
+
+        /** Notice node. */
+        public node: number;
 
         /**
          * Creates a new Notice instance using the specified properties.
@@ -8261,6 +8376,9 @@ export namespace pb {
         /** CmdMncgEditStock code */
         code?: (number|null);
 
+        /** CmdMncgEditStock id */
+        id?: (number|null);
+
         /** CmdMncgEditStock isAiStock */
         isAiStock?: (boolean|null);
     }
@@ -8279,6 +8397,9 @@ export namespace pb {
 
         /** CmdMncgEditStock code. */
         public code: number;
+
+        /** CmdMncgEditStock id. */
+        public id: number;
 
         /** CmdMncgEditStock isAiStock. */
         public isAiStock: boolean;
@@ -12606,6 +12727,15 @@ export namespace pb {
 
         /** AdClicked from */
         from?: (pb.AppFrom|null);
+
+        /** AdClicked gold */
+        gold?: (number|null);
+
+        /** AdClicked diamond */
+        diamond?: (number|null);
+
+        /** AdClicked coupon */
+        coupon?: (number|null);
     }
 
     /** Represents an AdClicked. */
@@ -12634,6 +12764,15 @@ export namespace pb {
 
         /** AdClicked from. */
         public from: pb.AppFrom;
+
+        /** AdClicked gold. */
+        public gold: number;
+
+        /** AdClicked diamond. */
+        public diamond: number;
+
+        /** AdClicked coupon. */
+        public coupon: number;
 
         /**
          * Creates a new AdClicked instance using the specified properties.

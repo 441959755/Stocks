@@ -125,6 +125,7 @@ $root.pb = (function () {
      * @property {number} Sync_S2C_MutipleLogin=1022 Sync_S2C_MutipleLogin value
      * @property {number} Sync_S2C_TaskProgress=1024 Sync_S2C_TaskProgress value
      * @property {number} Sync_S2C_ActivityConf=1026 Sync_S2C_ActivityConf value
+     * @property {number} Sync_S2C_GameCgdsItem=1028 Sync_S2C_GameCgdsItem value
      * @property {number} Sync_S2C_Broadcast=1100 Sync_S2C_Broadcast value
      * @property {number} Sync_S2C_Message=1102 Sync_S2C_Message value
      * @property {number} Sync_C2S_GameHeart=1200 Sync_C2S_GameHeart value
@@ -291,6 +292,7 @@ $root.pb = (function () {
         values[valuesById[1022] = "Sync_S2C_MutipleLogin"] = 1022;
         values[valuesById[1024] = "Sync_S2C_TaskProgress"] = 1024;
         values[valuesById[1026] = "Sync_S2C_ActivityConf"] = 1026;
+        values[valuesById[1028] = "Sync_S2C_GameCgdsItem"] = 1028;
         values[valuesById[1100] = "Sync_S2C_Broadcast"] = 1100;
         values[valuesById[1102] = "Sync_S2C_Message"] = 1102;
         values[valuesById[1200] = "Sync_C2S_GameHeart"] = 1200;
@@ -3724,6 +3726,7 @@ $root.pb = (function () {
          * @property {number|null} [account] MncgState account
          * @property {pb.IStockOrderList|null} [orderList] MncgState orderList
          * @property {pb.IStockPositionList|null} [positionList] MncgState positionList
+         * @property {Array.<number>|null} [stockList] MncgState stockList
          */
 
         /**
@@ -3735,6 +3738,7 @@ $root.pb = (function () {
          * @param {pb.IMncgState=} [properties] Properties to set
          */
         function MncgState(properties) {
+            this.stockList = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3766,6 +3770,14 @@ $root.pb = (function () {
         MncgState.prototype.positionList = null;
 
         /**
+         * MncgState stockList.
+         * @member {Array.<number>} stockList
+         * @memberof pb.MncgState
+         * @instance
+         */
+        MncgState.prototype.stockList = $util.emptyArray;
+
+        /**
          * Creates a new MncgState instance using the specified properties.
          * @function create
          * @memberof pb.MncgState
@@ -3795,6 +3807,12 @@ $root.pb = (function () {
                 $root.pb.StockOrderList.encode(message.orderList, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             if (message.positionList != null && Object.hasOwnProperty.call(message, "positionList"))
                 $root.pb.StockPositionList.encode(message.positionList, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.stockList != null && message.stockList.length) {
+                writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                for (var i = 0; i < message.stockList.length; ++i)
+                    writer.int32(message.stockList[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
@@ -3837,6 +3855,16 @@ $root.pb = (function () {
                         break;
                     case 3:
                         message.positionList = $root.pb.StockPositionList.decode(reader, reader.uint32());
+                        break;
+                    case 4:
+                        if (!(message.stockList && message.stockList.length))
+                            message.stockList = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.stockList.push(reader.int32());
+                        } else
+                            message.stockList.push(reader.int32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -3886,6 +3914,13 @@ $root.pb = (function () {
                 if (error)
                     return "positionList." + error;
             }
+            if (message.stockList != null && message.hasOwnProperty("stockList")) {
+                if (!Array.isArray(message.stockList))
+                    return "stockList: array expected";
+                for (var i = 0; i < message.stockList.length; ++i)
+                    if (!$util.isInteger(message.stockList[i]))
+                        return "stockList: integer[] expected";
+            }
             return null;
         };
 
@@ -3913,6 +3948,13 @@ $root.pb = (function () {
                     throw TypeError(".pb.MncgState.positionList: object expected");
                 message.positionList = $root.pb.StockPositionList.fromObject(object.positionList);
             }
+            if (object.stockList) {
+                if (!Array.isArray(object.stockList))
+                    throw TypeError(".pb.MncgState.stockList: array expected");
+                message.stockList = [];
+                for (var i = 0; i < object.stockList.length; ++i)
+                    message.stockList[i] = object.stockList[i] | 0;
+            }
             return message;
         };
 
@@ -3929,6 +3971,8 @@ $root.pb = (function () {
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.stockList = [];
             if (options.defaults) {
                 object.account = 0;
                 object.orderList = null;
@@ -3940,6 +3984,11 @@ $root.pb = (function () {
                 object.orderList = $root.pb.StockOrderList.toObject(message.orderList, options);
             if (message.positionList != null && message.hasOwnProperty("positionList"))
                 object.positionList = $root.pb.StockPositionList.toObject(message.positionList, options);
+            if (message.stockList && message.stockList.length) {
+                object.stockList = [];
+                for (var j = 0; j < message.stockList.length; ++j)
+                    object.stockList[j] = message.stockList[j];
+            }
             return object;
         };
 
@@ -4378,6 +4427,240 @@ $root.pb = (function () {
         };
 
         return CgdsState;
+    })();
+
+    pb.CgdsStockListItem = (function () {
+
+        /**
+         * Properties of a CgdsStockListItem.
+         * @memberof pb
+         * @interface ICgdsStockListItem
+         * @property {number|null} [id] CgdsStockListItem id
+         * @property {Array.<number>|null} [stockList] CgdsStockListItem stockList
+         */
+
+        /**
+         * Constructs a new CgdsStockListItem.
+         * @memberof pb
+         * @classdesc Represents a CgdsStockListItem.
+         * @implements ICgdsStockListItem
+         * @constructor
+         * @param {pb.ICgdsStockListItem=} [properties] Properties to set
+         */
+        function CgdsStockListItem(properties) {
+            this.stockList = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CgdsStockListItem id.
+         * @member {number} id
+         * @memberof pb.CgdsStockListItem
+         * @instance
+         */
+        CgdsStockListItem.prototype.id = 0;
+
+        /**
+         * CgdsStockListItem stockList.
+         * @member {Array.<number>} stockList
+         * @memberof pb.CgdsStockListItem
+         * @instance
+         */
+        CgdsStockListItem.prototype.stockList = $util.emptyArray;
+
+        /**
+         * Creates a new CgdsStockListItem instance using the specified properties.
+         * @function create
+         * @memberof pb.CgdsStockListItem
+         * @static
+         * @param {pb.ICgdsStockListItem=} [properties] Properties to set
+         * @returns {pb.CgdsStockListItem} CgdsStockListItem instance
+         */
+        CgdsStockListItem.create = function create(properties) {
+            return new CgdsStockListItem(properties);
+        };
+
+        /**
+         * Encodes the specified CgdsStockListItem message. Does not implicitly {@link pb.CgdsStockListItem.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CgdsStockListItem
+         * @static
+         * @param {pb.ICgdsStockListItem} message CgdsStockListItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CgdsStockListItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
+            if (message.stockList != null && message.stockList.length) {
+                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                for (var i = 0; i < message.stockList.length; ++i)
+                    writer.int32(message.stockList[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CgdsStockListItem message, length delimited. Does not implicitly {@link pb.CgdsStockListItem.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CgdsStockListItem
+         * @static
+         * @param {pb.ICgdsStockListItem} message CgdsStockListItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CgdsStockListItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CgdsStockListItem message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CgdsStockListItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CgdsStockListItem} CgdsStockListItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CgdsStockListItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CgdsStockListItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                    case 1:
+                        message.id = reader.int32();
+                        break;
+                    case 2:
+                        if (!(message.stockList && message.stockList.length))
+                            message.stockList = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.stockList.push(reader.int32());
+                        } else
+                            message.stockList.push(reader.int32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CgdsStockListItem message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CgdsStockListItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CgdsStockListItem} CgdsStockListItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CgdsStockListItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CgdsStockListItem message.
+         * @function verify
+         * @memberof pb.CgdsStockListItem
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CgdsStockListItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.stockList != null && message.hasOwnProperty("stockList")) {
+                if (!Array.isArray(message.stockList))
+                    return "stockList: array expected";
+                for (var i = 0; i < message.stockList.length; ++i)
+                    if (!$util.isInteger(message.stockList[i]))
+                        return "stockList: integer[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates a CgdsStockListItem message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CgdsStockListItem
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CgdsStockListItem} CgdsStockListItem
+         */
+        CgdsStockListItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CgdsStockListItem)
+                return object;
+            var message = new $root.pb.CgdsStockListItem();
+            if (object.id != null)
+                message.id = object.id | 0;
+            if (object.stockList) {
+                if (!Array.isArray(object.stockList))
+                    throw TypeError(".pb.CgdsStockListItem.stockList: array expected");
+                message.stockList = [];
+                for (var i = 0; i < object.stockList.length; ++i)
+                    message.stockList[i] = object.stockList[i] | 0;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CgdsStockListItem message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CgdsStockListItem
+         * @static
+         * @param {pb.CgdsStockListItem} message CgdsStockListItem
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CgdsStockListItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.stockList = [];
+            if (options.defaults)
+                object.id = 0;
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.stockList && message.stockList.length) {
+                object.stockList = [];
+                for (var j = 0; j < message.stockList.length; ++j)
+                    object.stockList[j] = message.stockList[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this CgdsStockListItem to JSON.
+         * @function toJSON
+         * @memberof pb.CgdsStockListItem
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CgdsStockListItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CgdsStockListItem;
     })();
 
     pb.ZsjcState = (function () {
@@ -4864,6 +5147,7 @@ $root.pb = (function () {
          * @property {number|null} [week] GameData week
          * @property {string|null} [mobile] GameData mobile
          * @property {Array.<number>|null} [aiStockList] GameData aiStockList
+         * @property {Array.<pb.ICgdsStockListItem>|null} [cgdsStockList] GameData cgdsStockList
          */
 
         /**
@@ -4881,6 +5165,7 @@ $root.pb = (function () {
             this.stockList = [];
             this.favorList = [];
             this.aiStockList = [];
+            this.cgdsStockList = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -5032,6 +5317,14 @@ $root.pb = (function () {
         GameData.prototype.aiStockList = $util.emptyArray;
 
         /**
+         * GameData cgdsStockList.
+         * @member {Array.<pb.ICgdsStockListItem>} cgdsStockList
+         * @memberof pb.GameData
+         * @instance
+         */
+        GameData.prototype.cgdsStockList = $util.emptyArray;
+
+        /**
          * Creates a new GameData instance using the specified properties.
          * @function create
          * @memberof pb.GameData
@@ -5112,6 +5405,9 @@ $root.pb = (function () {
                     writer.int32(message.aiStockList[i]);
                 writer.ldelim();
             }
+            if (message.cgdsStockList != null && message.cgdsStockList.length)
+                for (var i = 0; i < message.cgdsStockList.length; ++i)
+                    $root.pb.CgdsStockListItem.encode(message.cgdsStockList[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
             return writer;
         };
 
@@ -5237,6 +5533,11 @@ $root.pb = (function () {
                         } else
                             message.aiStockList.push(reader.int32());
                         break;
+                    case 19:
+                        if (!(message.cgdsStockList && message.cgdsStockList.length))
+                            message.cgdsStockList = [];
+                        message.cgdsStockList.push($root.pb.CgdsStockListItem.decode(reader, reader.uint32()));
+                        break;
                     default:
                         reader.skipType(tag & 7);
                         break;
@@ -5360,6 +5661,15 @@ $root.pb = (function () {
                     if (!$util.isInteger(message.aiStockList[i]))
                         return "aiStockList: integer[] expected";
             }
+            if (message.cgdsStockList != null && message.hasOwnProperty("cgdsStockList")) {
+                if (!Array.isArray(message.cgdsStockList))
+                    return "cgdsStockList: array expected";
+                for (var i = 0; i < message.cgdsStockList.length; ++i) {
+                    var error = $root.pb.CgdsStockListItem.verify(message.cgdsStockList[i]);
+                    if (error)
+                        return "cgdsStockList." + error;
+                }
+            }
             return null;
         };
 
@@ -5470,6 +5780,16 @@ $root.pb = (function () {
                 for (var i = 0; i < object.aiStockList.length; ++i)
                     message.aiStockList[i] = object.aiStockList[i] | 0;
             }
+            if (object.cgdsStockList) {
+                if (!Array.isArray(object.cgdsStockList))
+                    throw TypeError(".pb.GameData.cgdsStockList: array expected");
+                message.cgdsStockList = [];
+                for (var i = 0; i < object.cgdsStockList.length; ++i) {
+                    if (typeof object.cgdsStockList[i] !== "object")
+                        throw TypeError(".pb.GameData.cgdsStockList: object expected");
+                    message.cgdsStockList[i] = $root.pb.CgdsStockListItem.fromObject(object.cgdsStockList[i]);
+                }
+            }
             return message;
         };
 
@@ -5493,6 +5813,7 @@ $root.pb = (function () {
                 object.stockList = [];
                 object.favorList = [];
                 object.aiStockList = [];
+                object.cgdsStockList = [];
             }
             if (options.defaults) {
                 object.uid = 0;
@@ -5571,6 +5892,11 @@ $root.pb = (function () {
                 object.aiStockList = [];
                 for (var j = 0; j < message.aiStockList.length; ++j)
                     object.aiStockList[j] = message.aiStockList[j];
+            }
+            if (message.cgdsStockList && message.cgdsStockList.length) {
+                object.cgdsStockList = [];
+                for (var j = 0; j < message.cgdsStockList.length; ++j)
+                    object.cgdsStockList[j] = $root.pb.CgdsStockListItem.toObject(message.cgdsStockList[j], options);
             }
             return object;
         };
@@ -16975,6 +17301,7 @@ $root.pb = (function () {
          * @property {pb.MessageType|null} [type] Notice type
          * @property {string|null} [text] Notice text
          * @property {number|Long|null} [ts] Notice ts
+         * @property {number|null} [node] Notice node
          */
 
         /**
@@ -17033,6 +17360,14 @@ $root.pb = (function () {
         Notice.prototype.ts = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
+         * Notice node.
+         * @member {number} node
+         * @memberof pb.Notice
+         * @instance
+         */
+        Notice.prototype.node = 0;
+
+        /**
          * Creates a new Notice instance using the specified properties.
          * @function create
          * @memberof pb.Notice
@@ -17066,6 +17401,8 @@ $root.pb = (function () {
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.text);
             if (message.ts != null && Object.hasOwnProperty.call(message, "ts"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int64(message.ts);
+            if (message.node != null && Object.hasOwnProperty.call(message, "node"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.node);
             return writer;
         };
 
@@ -17114,6 +17451,9 @@ $root.pb = (function () {
                         break;
                     case 5:
                         message.ts = reader.int64();
+                        break;
+                    case 6:
+                        message.node = reader.int32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -17174,6 +17514,9 @@ $root.pb = (function () {
             if (message.ts != null && message.hasOwnProperty("ts"))
                 if (!$util.isInteger(message.ts) && !(message.ts && $util.isInteger(message.ts.low) && $util.isInteger(message.ts.high)))
                     return "ts: integer|Long expected";
+            if (message.node != null && message.hasOwnProperty("node"))
+                if (!$util.isInteger(message.node))
+                    return "node: integer expected";
             return null;
         };
 
@@ -17230,6 +17573,8 @@ $root.pb = (function () {
                     message.ts = object.ts;
                 else if (typeof object.ts === "object")
                     message.ts = new $util.LongBits(object.ts.low >>> 0, object.ts.high >>> 0).toNumber();
+            if (object.node != null)
+                message.node = object.node | 0;
             return message;
         };
 
@@ -17256,6 +17601,7 @@ $root.pb = (function () {
                     object.ts = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.ts = options.longs === String ? "0" : 0;
+                object.node = 0;
             }
             if (message.sender != null && message.hasOwnProperty("sender"))
                 object.sender = message.sender;
@@ -17270,6 +17616,8 @@ $root.pb = (function () {
                     object.ts = options.longs === String ? String(message.ts) : message.ts;
                 else
                     object.ts = options.longs === String ? $util.Long.prototype.toString.call(message.ts) : options.longs === Number ? new $util.LongBits(message.ts.low >>> 0, message.ts.high >>> 0).toNumber() : message.ts;
+            if (message.node != null && message.hasOwnProperty("node"))
+                object.node = message.node;
             return object;
         };
 
@@ -22288,6 +22636,7 @@ $root.pb = (function () {
          * @interface ICmdMncgEditStock
          * @property {boolean|null} [removed] CmdMncgEditStock removed
          * @property {number|null} [code] CmdMncgEditStock code
+         * @property {number|null} [id] CmdMncgEditStock id
          * @property {boolean|null} [isAiStock] CmdMncgEditStock isAiStock
          */
 
@@ -22321,6 +22670,14 @@ $root.pb = (function () {
          * @instance
          */
         CmdMncgEditStock.prototype.code = 0;
+
+        /**
+         * CmdMncgEditStock id.
+         * @member {number} id
+         * @memberof pb.CmdMncgEditStock
+         * @instance
+         */
+        CmdMncgEditStock.prototype.id = 0;
 
         /**
          * CmdMncgEditStock isAiStock.
@@ -22358,8 +22715,10 @@ $root.pb = (function () {
                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.removed);
             if (message.code != null && Object.hasOwnProperty.call(message, "code"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.code);
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.id);
             if (message.isAiStock != null && Object.hasOwnProperty.call(message, "isAiStock"))
-                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isAiStock);
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.isAiStock);
             return writer;
         };
 
@@ -22401,6 +22760,9 @@ $root.pb = (function () {
                         message.code = reader.int32();
                         break;
                     case 3:
+                        message.id = reader.int32();
+                        break;
+                    case 4:
                         message.isAiStock = reader.bool();
                         break;
                     default:
@@ -22444,6 +22806,9 @@ $root.pb = (function () {
             if (message.code != null && message.hasOwnProperty("code"))
                 if (!$util.isInteger(message.code))
                     return "code: integer expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
             if (message.isAiStock != null && message.hasOwnProperty("isAiStock"))
                 if (typeof message.isAiStock !== "boolean")
                     return "isAiStock: boolean expected";
@@ -22466,6 +22831,8 @@ $root.pb = (function () {
                 message.removed = Boolean(object.removed);
             if (object.code != null)
                 message.code = object.code | 0;
+            if (object.id != null)
+                message.id = object.id | 0;
             if (object.isAiStock != null)
                 message.isAiStock = Boolean(object.isAiStock);
             return message;
@@ -22487,12 +22854,15 @@ $root.pb = (function () {
             if (options.defaults) {
                 object.removed = false;
                 object.code = 0;
+                object.id = 0;
                 object.isAiStock = false;
             }
             if (message.removed != null && message.hasOwnProperty("removed"))
                 object.removed = message.removed;
             if (message.code != null && message.hasOwnProperty("code"))
                 object.code = message.code;
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
             if (message.isAiStock != null && message.hasOwnProperty("isAiStock"))
                 object.isAiStock = message.isAiStock;
             return object;
@@ -33584,6 +33954,9 @@ $root.pb = (function () {
          * @property {string|null} [title] AdClicked title
          * @property {number|null} [uid] AdClicked uid
          * @property {pb.AppFrom|null} [from] AdClicked from
+         * @property {number|null} [gold] AdClicked gold
+         * @property {number|null} [diamond] AdClicked diamond
+         * @property {number|null} [coupon] AdClicked coupon
          */
 
         /**
@@ -33650,6 +34023,30 @@ $root.pb = (function () {
         AdClicked.prototype.from = 0;
 
         /**
+         * AdClicked gold.
+         * @member {number} gold
+         * @memberof pb.AdClicked
+         * @instance
+         */
+        AdClicked.prototype.gold = 0;
+
+        /**
+         * AdClicked diamond.
+         * @member {number} diamond
+         * @memberof pb.AdClicked
+         * @instance
+         */
+        AdClicked.prototype.diamond = 0;
+
+        /**
+         * AdClicked coupon.
+         * @member {number} coupon
+         * @memberof pb.AdClicked
+         * @instance
+         */
+        AdClicked.prototype.coupon = 0;
+
+        /**
          * Creates a new AdClicked instance using the specified properties.
          * @function create
          * @memberof pb.AdClicked
@@ -33685,6 +34082,12 @@ $root.pb = (function () {
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.uid);
             if (message.from != null && Object.hasOwnProperty.call(message, "from"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.from);
+            if (message.gold != null && Object.hasOwnProperty.call(message, "gold"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.gold);
+            if (message.diamond != null && Object.hasOwnProperty.call(message, "diamond"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.diamond);
+            if (message.coupon != null && Object.hasOwnProperty.call(message, "coupon"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.coupon);
             return writer;
         };
 
@@ -33736,6 +34139,15 @@ $root.pb = (function () {
                         break;
                     case 6:
                         message.from = reader.int32();
+                        break;
+                    case 7:
+                        message.gold = reader.int32();
+                        break;
+                    case 8:
+                        message.diamond = reader.int32();
+                        break;
+                    case 9:
+                        message.coupon = reader.int32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -33818,6 +34230,15 @@ $root.pb = (function () {
                     case 10000:
                         break;
                 }
+            if (message.gold != null && message.hasOwnProperty("gold"))
+                if (!$util.isInteger(message.gold))
+                    return "gold: integer expected";
+            if (message.diamond != null && message.hasOwnProperty("diamond"))
+                if (!$util.isInteger(message.diamond))
+                    return "diamond: integer expected";
+            if (message.coupon != null && message.hasOwnProperty("coupon"))
+                if (!$util.isInteger(message.coupon))
+                    return "coupon: integer expected";
             return null;
         };
 
@@ -33945,6 +34366,12 @@ $root.pb = (function () {
                     message.from = 10000;
                     break;
             }
+            if (object.gold != null)
+                message.gold = object.gold | 0;
+            if (object.diamond != null)
+                message.diamond = object.diamond | 0;
+            if (object.coupon != null)
+                message.coupon = object.coupon | 0;
             return message;
         };
 
@@ -33968,6 +34395,9 @@ $root.pb = (function () {
                 object.title = "";
                 object.uid = 0;
                 object.from = options.enums === String ? "Android_000" : 0;
+                object.gold = 0;
+                object.diamond = 0;
+                object.coupon = 0;
             }
             if (message.id != null && message.hasOwnProperty("id"))
                 object.id = message.id;
@@ -33981,6 +34411,12 @@ $root.pb = (function () {
                 object.uid = message.uid;
             if (message.from != null && message.hasOwnProperty("from"))
                 object.from = options.enums === String ? $root.pb.AppFrom[message.from] : message.from;
+            if (message.gold != null && message.hasOwnProperty("gold"))
+                object.gold = message.gold;
+            if (message.diamond != null && message.hasOwnProperty("diamond"))
+                object.diamond = message.diamond;
+            if (message.coupon != null && message.hasOwnProperty("coupon"))
+                object.coupon = message.coupon;
             return object;
         };
 
@@ -39315,6 +39751,7 @@ $root.pb = (function () {
                     case 1022:
                     case 1024:
                     case 1026:
+                    case 1028:
                     case 1100:
                     case 1102:
                     case 1200:
@@ -39549,6 +39986,10 @@ $root.pb = (function () {
                 case "Sync_S2C_ActivityConf":
                 case 1026:
                     message.id = 1026;
+                    break;
+                case "Sync_S2C_GameCgdsItem":
+                case 1028:
+                    message.id = 1028;
                     break;
                 case "Sync_S2C_Broadcast":
                 case 1100:
@@ -41200,6 +41641,7 @@ $root.pb = (function () {
                     case 1022:
                     case 1024:
                     case 1026:
+                    case 1028:
                     case 1100:
                     case 1102:
                     case 1200:
@@ -41441,6 +41883,10 @@ $root.pb = (function () {
                 case "Sync_S2C_ActivityConf":
                 case 1026:
                     message.id = 1026;
+                    break;
+                case "Sync_S2C_GameCgdsItem":
+                case 1028:
+                    message.id = 1028;
                     break;
                 case "Sync_S2C_Broadcast":
                 case 1100:

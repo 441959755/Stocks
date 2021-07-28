@@ -225,7 +225,7 @@ PBHelper.prototype = {
             let data = Quotes.decode(new Uint8Array(buff));
             return data;
         }
-
+        //同步玩家游戏属性
         else if (id == pb.MessageId.Sync_S2C_GameProperty) {
             let GameProperties = pb.GameProperties;
             let decode = GameProperties.decode(new Uint8Array(buff));
@@ -389,9 +389,7 @@ PBHelper.prototype = {
             GameCfg.RoomGameData = result;
 
             setTimeout(() => { GlobalEvent.emit(EventCfg.GAMEOVEER, result); }, 1000);
-
         }
-
         //离开房间应答
         else if (id == pb.MessageId.Rep_Room_Leave) {
             let CmdRoomLeaveReply = pb.CmdRoomLeaveReply;
@@ -471,6 +469,32 @@ PBHelper.prototype = {
             let CmdQueryAiSignalReply = pb.CmdQueryAiSignalReply;
             let data = CmdQueryAiSignalReply.decode(new Uint8Array(buff));
             return data;
+        }
+        //同步模拟炒股状态
+        else if (id == pb.MessageId.Sync_S2C_GameMncg) {
+            let MncgState = pb.MncgState;
+            let data = MncgState.decode(new Uint8Array(buff));
+            console.log('同步模拟炒股状态' + JSON.stringify(data));
+
+        }
+        //同步所有炒股大赛状态
+        else if (id == pb.MessageId.Sync_S2C_GameCgds) {
+            let CgdsState = pb.CgdsState;
+            let data = CgdsState.decode(new Uint8Array(buff));
+            console.log('同步所有炒股大赛状态' + JSON.stringify(data));
+
+        }
+        //同步一条炒股大赛状态
+        else if (id == pb.MessageId.Sync_S2C_GameCgdsItem) {
+            let CgdsStateItem = pb.CgdsStateItem;
+            let data = CgdsStateItem.decode(new Uint8Array(buff));
+            console.log('同步一条炒股大赛状态' + JSON.stringify(data));
+        }
+        //   同步实时行情
+        else if (id == pb.MessageId.Sync_S2C_QuoteItem) {
+            let GameProperties = pb.GameProperties;
+            let data = GameProperties.decode(new Uint8Array(buff));
+            console.log('同步实时行情' + JSON.stringify(data));
         }
 
     }

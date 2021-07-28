@@ -242,7 +242,7 @@ export default class NewClass extends cc.Component {
                             calDisY = 0;
                             clearTimeout(this.timer);
                             this.timer = null;
-                        }, 10)
+                        }, 20)
                     }
                 }
             }
@@ -254,11 +254,11 @@ export default class NewClass extends cc.Component {
                     if (!this.timer) {
 
                         this.timer = setTimeout(() => {
-                            let preNUm = parseInt(this.drawBordWidth / GameCfg.hz_width + '');
+                            let preNum = parseInt(this.drawBordWidth / GameCfg.hz_width + '');
                             let hz_width = 0;
                             let w = (parseInt(Math.ceil(Math.abs(calDisY) / 2) + ''));
                             //  hz_width = calDisY > 0 ? GameCfg.hz_width + w : GameCfg.hz_width - w;
-                            num = calDisY > 0 ? preNUm - w : preNUm + w;
+                            num = calDisY > 0 ? preNum - w : preNum + w;
                             if (num <= minCount) {
                                 num = minCount
                             }
@@ -288,14 +288,9 @@ export default class NewClass extends cc.Component {
                             } else {
                                 if (num < GameCfg.huizhidatas) {
                                     let count = num - (GameCfg.beg_end[1] - GameCfg.beg_end[0]);
-                                    if (GameCfg.beg_end[1] == GameCfg.huizhidatas) {
-                                        GameCfg.beg_end[0] -= parseInt(count + '');
-                                    } else if (GameCfg.beg_end[1] == 0) {
-                                        GameCfg.beg_end[1] -= parseInt(count + '');
-                                    } else {
-                                        GameCfg.beg_end[0] -= parseInt(count / 2 + '');
-                                        GameCfg.beg_end[1] += (count - parseInt(count / 2 + ''));
-                                    }
+
+                                    GameCfg.beg_end[0] -= parseInt(count / 2 + '');
+                                    GameCfg.beg_end[1] += (count - parseInt(count / 2 + ''));
 
                                     if (GameCfg.beg_end[0] < 0) {
                                         GameCfg.beg_end[0] = 0;
@@ -327,7 +322,7 @@ export default class NewClass extends cc.Component {
                             GlobalEvent.emit('onDraw');
                             clearTimeout(this.timer);
                             this.timer = null;
-                        }, 10);
+                        }, 20);
                     }
                 }
             }
@@ -383,36 +378,18 @@ export default class NewClass extends cc.Component {
 
     onMoveLeftOrRight(count, calDisX, calDisY) {
         if (calDisX > 0) {
-            if (GameCfg.beg_end[0] == 0) {
-                clearTimeout(this.timer);
-                this.timer = null;
-                calDisX = 0;
-                calDisY = 0;
-                return;
+            GameCfg.beg_end[1] -= count;
+            GameCfg.beg_end[0] -= count;
+
+            if (GameCfg.beg_end[0] < 0) {
+                GameCfg.beg_end[0] = 0;
             }
-            if (GameCfg.beg_end[0] - count >= 0) {
-                GameCfg.beg_end[1] -= count;
-                GameCfg.beg_end[0] -= count;
-            } else {
-                count = GameCfg.beg_end[0];
-                GameCfg.beg_end[0] -= count;
-                GameCfg.beg_end[1] -= count;
-            }
+
         } else {
-            if (GameCfg.huizhidatas == GameCfg.beg_end[1]) {
-                clearTimeout(this.timer);
-                this.timer = null;
-                calDisX = 0;
-                calDisY = 0;
-                return;
-            }
-            if (GameCfg.beg_end[1] + count < GameCfg.huizhidatas) {
-                GameCfg.beg_end[0] += count;
-                GameCfg.beg_end[1] += count;
-            } else {
-                count = GameCfg.huizhidatas - GameCfg.beg_end[1];
-                GameCfg.beg_end[0] += count;
-                GameCfg.beg_end[1] += count;
+            GameCfg.beg_end[0] += count;
+            GameCfg.beg_end[1] += count;
+            if (GameCfg.beg_end[1] > GameCfg.huizhidatas) {
+                GameCfg.beg_end[1] = GameCfg.huizhidatas;
             }
         }
         this.initDrawBg();

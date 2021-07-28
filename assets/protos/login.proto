@@ -91,6 +91,9 @@ message AdClicked {
 	string title = 4;	// 广告标题
 	int32 uid = 5;		// uid（可为0）
 	AppFrom from = 6;	// 渠道
+	int32 gold = 7;		// 赠送金币
+	int32 diamond = 8;	// 赠送钻石
+	int32 coupon = 9;	// 赠送点券
 }
 
 // 注册

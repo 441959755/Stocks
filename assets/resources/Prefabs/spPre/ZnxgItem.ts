@@ -36,6 +36,13 @@ export default class NewClass extends cc.Component {
             this.label[5].string = '建议买入';
         }
 
+        if (data.todaySignal && data.todaySignal > 0) {
+            this.label[5].string = '建议卖出';
+        }
+
+        if (data.todaySignal && data.todaySignal > 0) {
+            this.label[5].string = '建议观望';
+        }
 
         this.yiShouCangIsShow();
     }

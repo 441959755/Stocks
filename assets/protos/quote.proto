@@ -173,6 +173,8 @@ message CmdQueryAiSignalReply {
 }
 
 
+
+
 // GRPC
 service QuotesService {
   rpc QuotesQuery (CmdQuoteQuery) returns (Quotes) {}

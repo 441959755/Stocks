@@ -176,12 +176,12 @@ export default class NewClass extends cc.Component {
 
             res.items.forEach((el, index) => {
                 this.AIStockList.push(el);
-                if (el.todaySignal < 0) {
-                    let node = cc.instantiate(this.preItem);
-                    this.content.addChild(node);
-                    let handle = node.getComponent('ZnxgItem');
-                    handle.onShow(el, index + this.AIStockCount);
-                }
+                //   if (el.todaySignal < 0) {
+                let node = cc.instantiate(this.preItem);
+                this.content.addChild(node);
+                let handle = node.getComponent('ZnxgItem');
+                handle.onShow(el, index + this.AIStockCount);
+                //  }
             });
             this.AIStockCount += data.total;
 

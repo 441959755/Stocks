@@ -126,6 +126,7 @@ export default class NewClass extends cc.Component {
 
 
     setColor() {
+
         //黑底
         if (GameCfg.GameSet.isBW) {
             GameCfg.MAColor[0] = new cc.Color().fromHEX('#ffffff');

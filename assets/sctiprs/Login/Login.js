@@ -14,10 +14,6 @@ import LLLog from '../common/utils/LLLog'
 cc.Class({
 	extends: cc.Component,
 
-	properties: {
-
-	},
-
 	init() {
 		window.global = window;
 
