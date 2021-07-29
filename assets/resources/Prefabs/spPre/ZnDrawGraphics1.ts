@@ -1,3 +1,4 @@
+import { pb } from "../../../protos/proto";
 import DrawData from "../../../sctiprs/game/DrawData";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import DrawUtils from "../../../sctiprs/Utils/DrawUtils";
@@ -92,14 +93,12 @@ export default class NewClass extends cc.Component {
     minRs24 = 0;
 
     viweData = null;
+    ktype = null;
 
     onLoad() {
-        GlobalEvent.on('onDraw', (arr) => {
-            if (!arr || arr.length == 0) { return };
-
-            this.viweData = arr;
-            this.initData()
-            // this.initDrawBg();
+        GlobalEvent.on('onDrawGrap', (arr, ktype) => {
+            arr && (this.viweData = arr)
+            ktype && (this.ktype = ktype)
             this.onDraw();
         }, this);
     }
@@ -124,13 +123,13 @@ export default class NewClass extends cc.Component {
     }
 
     onDraw() {
-
+        this.initData()
         let viweData = this.viweData;
         this.drawRSI.clear();
         this.drawKDJ.clear();
         this.drawMACD.clear();
-        // this.drawCcl.clear();
-        // this.drawPCM.clear();
+
+        this.drawPCM.clear();
         this.drawVol.clear();
         this.minDIF = this.DIFList[GameCfg.beg_end[0]];
         this.maxDIF = this.DIFList[GameCfg.beg_end[0]];
@@ -161,7 +160,6 @@ export default class NewClass extends cc.Component {
 
         this.topVol = 0;
         this.bottomVol = viweData[0].value;
-
 
         for (let index = GameCfg.beg_end[0]; index < GameCfg.beg_end[1]; index++) {
 
@@ -198,17 +196,14 @@ export default class NewClass extends cc.Component {
                 this.maxRs24 = Math.max(this.maxRs24, this.Rs24[index]);
             }
 
-            if (GameCfg.data[0].data[index] && GameCfg.data[0].data[index].ccl_hold) {
-                this.maxCcl = Math.max(GameCfg.data[0].data[index].ccl_hold, this.maxCcl);
-                this.minCcl = Math.min(GameCfg.data[0].data[index].ccl_hold, this.minCcl);
-            }
+
 
             this.topVol = Math.max(this.topVol, viweData[index].value);
             this.bottomVol = Math.min(this.bottomVol, viweData[index].value);
 
         }
         //   this.setLabelValue();
-        //   this.drawPCM.lineWidth = 2;
+        this.drawPCM.lineWidth = 2;
         this.drawVol.lineWidth = 2;
         this.drawMACD.lineWidth = 2;
         this.drawKDJ.lineWidth = 2;
@@ -368,42 +363,67 @@ export default class NewClass extends cc.Component {
     }
 
     onDrawVol(el, index) {
+
         let some = index - GameCfg.beg_end[0];
 
-        let initY = 0;
-        let drawBox = 150;
-        let disVol = this.topVol - this.bottomVol;
+        if (this.ktype == pb.KType.Min) {
+            let x = (some * 1.2);
+            let y = el.value * (150 / this.topVol);
 
-        let startX = some == 0 ? 10 : 10 + (some * GameCfg.hz_width);
-        // // console.log('startX='+startX);
-        let endX = 10 + ((some + 1) * GameCfg.hz_width);
+            if (index == 0) {
+                if (el.open < el.close) {
+                    this.drawVol.strokeColor = cc.Color.RED;
+                }
+                else if (el.open == el.close) {
+                    this.drawVol.strokeColor = cc.Color.WHITE;
+                }
+                else if (el.open > el.close) {
+                    this.drawVol.strokeColor = cc.Color.GREEN;
+                }
+            }
+            else {
+                if (this.viweData[index - 1].close < el.close) {
+                    this.drawVol.strokeColor = cc.Color.RED;
+                }
+                else if (this.viweData[index - 1].close == el.close) {
+                    this.drawVol.strokeColor = cc.Color.WHITE;
+                }
+                else if (this.viweData[index - 1].close > el.close) {
+                    this.drawVol.strokeColor = cc.Color.GREEN;
+                }
+            }
 
-        let hight = el.value * (150 / this.topVol);
-
-        let width = endX - startX;
-
-        this.drawRect(this.drawVol, startX, 0, width, hight, el.open > el.close);
-
-        //均量线 白
-        if (!this.VolList[index]) {
-            return;
+            this.drawVol.lineWidth = 1.2;
+            DrawUtils.drawLine(this.drawVol, x, 0, x, y);
         }
+        else {
 
-        //每段数据绘制
-        for (let i = 0; i < GameCfg.VOLGraph.length; i++) {
-            if (index >= GameCfg.VOLGraph[i]) {
+            let startX = (some * GameCfg.hz_width);
+            // // console.log('startX='+startX);
+            let endX = ((some + 1) * GameCfg.hz_width);
+            let hight = el.value * (150 / this.topVol);
+            let width = endX - startX;
+            this.drawRect(this.drawVol, startX, 0, width, hight, el.open > el.close);
 
-                let preY = this.VolList[index - 1][i] * (150 / this.topVol);
-                let preX = 10 + ((some - 1) * GameCfg.hz_width) + width / 2
+            //均量线 白
+            if (!this.VolList[index]) {
+                return;
+            }
+            //每段数据绘制
+            for (let i = 0; i < GameCfg.VOLGraph.length; i++) {
+                if (index >= GameCfg.VOLGraph[i]) {
+                    let preY = this.VolList[index - 1][i] * (150 / this.topVol);
+                    let preX = ((some - 1) * GameCfg.hz_width) + width / 2
+                    //平均的位置
+                    let VOlPointY = this.VolList[index][i] * (150 / this.topVol);
+                    let VOlPointX = startX + width / 2;
 
-                //平均的位置
-                let VOlPointY = this.VolList[index][i] * (150 / this.topVol);
-                let VOlPointX = startX + width / 2;
-
-                this.drawPCM.strokeColor = GameCfg.VOLColor[i];
-                DrawUtils.drawLine(this.drawPCM, preX, preY, VOlPointX, VOlPointY);
+                    this.drawPCM.strokeColor = GameCfg.VOLColor[i];
+                    DrawUtils.drawLine(this.drawPCM, preX, preY, VOlPointX, VOlPointY);
+                }
             }
         }
+
     }
 
     //画框
@@ -429,8 +449,7 @@ export default class NewClass extends cc.Component {
     }
 
     onDisable() {
-        GlobalEvent.off('onDraw');
+        GlobalEvent.off('onDrawGrap');
     }
 
-    // update (dt) {}
 }

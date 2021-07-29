@@ -60,6 +60,7 @@ export default class NewClass extends cc.Component {
         let num = 90;
 
         this.node.on('touchmove', (event) => {
+
             calDisY += event.getDelta().y;
             calDisX += event.getDelta().x;
 
@@ -76,52 +77,44 @@ export default class NewClass extends cc.Component {
                         let count = Math.ceil(Math.abs(calDisX) / GameCfg.hz_width);
 
                         if (calDisX > 0) {
-                            GameCfg.beg_end[1] -= count;
-                            GameCfg.beg_end[0] -= count;
-
-                            if (GameCfg.beg_end[0] < 0) {
-                                GameCfg.beg_end[0] = 0;
+                            if (GameCfg.beg_end[0] == 0) {
+                                clearTimeout(this.timer);
+                                this.timer = null;
+                                calDisX = 0;
+                                calDisY = 0;
+                                return;
                             }
-
+                            if (GameCfg.beg_end[0] - count >= 0) {
+                                GameCfg.beg_end[1] -= count;
+                                GameCfg.beg_end[0] -= count;
+                            } else {
+                                count = GameCfg.beg_end[0];
+                                GameCfg.beg_end[0] -= count;
+                                GameCfg.beg_end[1] -= count;
+                            }
                         } else {
-                            GameCfg.beg_end[0] += count;
-                            GameCfg.beg_end[1] += count;
-                            if (GameCfg.beg_end[1] > GameCfg.huizhidatas) {
-                                GameCfg.beg_end[1] = GameCfg.huizhidatas;
+                            if (GameCfg.huizhidatas == GameCfg.beg_end[1]) {
+                                clearTimeout(this.timer);
+                                this.timer = null;
+                                calDisX = 0;
+                                calDisY = 0;
+                                return;
+                            }
+                            if (GameCfg.beg_end[1] + count < GameCfg.huizhidatas) {
+                                GameCfg.beg_end[0] += count;
+                                GameCfg.beg_end[1] += count;
+                            } else {
+                                count = GameCfg.huizhidatas - GameCfg.beg_end[1];
+                                GameCfg.beg_end[0] += count;
+                                GameCfg.beg_end[1] += count;
                             }
                         }
 
-                        if (calDisX > 0) {
-                            GameCfg.beg_end[1] -= count;
-                            GameCfg.beg_end[0] -= count;
-
-                            if (GameCfg.beg_end[0] < 0) {
-                                GameCfg.beg_end[0] = 0;
-                            }
-
-                        } else {
-                            GameCfg.beg_end[0] += count;
-                            GameCfg.beg_end[1] += count;
-                            if (GameCfg.beg_end[1] > GameCfg.huizhidatas) {
-                                GameCfg.beg_end[1] = GameCfg.huizhidatas;
-                            }
-                        }
-
-                        let index = GameCfg.beg_end[0] + (Math.floor(localPos.x / GameCfg.hz_width));
-                        this.vertical1.x = Math.floor(localPos.x / GameCfg.hz_width) * GameCfg.hz_width + GameCfg.hz_width / 2;
-
-                        if (index >= GameCfg.beg_end[1]) {
-                            this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) - GameCfg.hz_width / 2;
-                            index = GameCfg.beg_end[1] - 1;
-                        }
-                        else if (index <= GameCfg.beg_end[0]) {
-                            this.vertical1.x = GameCfg.hz_width / 2;
-                        }
-                        GlobalEvent.emit('onClickPosUpdateLabel', index);
                         calDisX = 0;
                         calDisY = 0;
                         clearTimeout(this.timer);
                         this.timer = null;
+                        GlobalEvent.emit('onDrawGrap')
                     }, 20)
                 }
             }
@@ -176,23 +169,28 @@ export default class NewClass extends cc.Component {
                         }
                         GameCfg.hz_width = this.node.width / (num);
 
-                        this.Horizontal1.y = localPos.y;
-                        let index = GameCfg.beg_end[0] + (Math.floor((localPos.x) / GameCfg.hz_width));
-                        if (index >= GameCfg.beg_end[1]) {
-                            this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) - GameCfg.hz_width / 2;
-                            index = GameCfg.beg_end[1] - 1;
-                        } else if (index <= GameCfg.beg_end[0]) {
-                            this.vertical1.x = GameCfg.hz_width / 2;
-                        }
-                        GlobalEvent.emit('onClickPosUpdateLabel', index);
                         calDisY = 0;
                         calDisX = 0;
                         clearTimeout(this.timer);
                         this.timer = null;
-
+                        GlobalEvent.emit('onDrawGrap');
                     }, 20)
                 }
             }
+
+            this.Horizontal1.y = localPos.y;
+            let index = GameCfg.beg_end[0] + (Math.floor(localPos.x / GameCfg.hz_width));
+            this.vertical1.x = Math.floor(localPos.x / GameCfg.hz_width) * GameCfg.hz_width + GameCfg.hz_width / 2;
+
+            if (index >= GameCfg.beg_end[1]) {
+                this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) - GameCfg.hz_width / 2;
+                index = GameCfg.beg_end[1] - 1;
+            }
+            else if (index < GameCfg.beg_end[0]) {
+                this.vertical1.x = GameCfg.hz_width / 2;
+            }
+
+            GlobalEvent.emit('onClickPosUpdateLabel', index);
         }, this);
 
     }
@@ -207,12 +205,10 @@ export default class NewClass extends cc.Component {
         this.timer = null;
     }
 
-
     onDestroy() {
         this.node.off('touchstart');
         this.node.off('touchend');
         this.node.off('touchcancel');
         this.node.off('touchmove');
-
     }
 }

@@ -153,7 +153,7 @@ export default class NewClass extends cc.Component {
 
             GameCfg.DIF_LINE_COL = cc.Color.WHITE;
             GameCfg.DEA_LINE_COL = new cc.Color().fromHEX('#f0dc05');
-            //  GameCfg.MACD_COL[0] = cc.Color.WHITE;
+
             GameCfg.MACD_COL[0] = new cc.Color().fromHEX('#f11111');
             GameCfg.MACD_COL[1] = new cc.Color().fromHEX('#0fee1e');
 
@@ -161,7 +161,6 @@ export default class NewClass extends cc.Component {
             GameCfg.RSI_COLOR[1] = new cc.Color().fromHEX('#f0dc05');
             GameCfg.RSI_COLOR[2] = new cc.Color().fromHEX('#d85cfc');
 
-            // GameCfg.CCL_COL = new cc.Color().fromHEX('#808080');
             GameCfg.CCL_COL = cc.Color.WHITE;
 
             GameCfg.EXPMA_COL[0] = new cc.Color().fromHEX('#ffffff');

@@ -28,4 +28,16 @@ export default class DrawUtils {
         }
         ctx.stroke();
     }
+
+    //其他 分时的
+    public static drawMinLineFill(ctx, x, y, tx, ty) {
+        ctx.strokeColor = new cc.Color().fromHEX('#64C8FF11');
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, y);
+        ctx.lineTo(tx + 1.2, ty);
+        ctx.lineTo(tx + 1.2, 0);
+        ctx.lineTo(x, 0);
+        ctx.fillColor = new cc.Color().fromHEX('#64C8FF11');
+        ctx.stroke();
+    }
 }

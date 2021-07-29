@@ -27,6 +27,7 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.znDraw = cc.instantiate(pre);
                 this.node.addChild(this.znDraw);
+                this.znDraw.setPosition(0, 0);
                 let handle = this.znDraw.getComponent('ZnDraw');
                 handle.onShow(code);
                 this.znDraw.active = true;

@@ -1,3 +1,4 @@
+import { pb } from "../../../protos/proto";
 import DrawData from "../../../sctiprs/game/DrawData";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import DrawUtils from "../../../sctiprs/Utils/DrawUtils";
@@ -41,19 +42,30 @@ export default class NewClass extends cc.Component {
     sign = false;
 
     MaList = [];
+    MinMaList = [];
+
+    ktype = null;
+
+    prePointX = null;
+
+    prePointY = null;
+
+    prePoint1Y = null;
 
     onLoad() {
-        GlobalEvent.on('onDraw', (arr) => {
-            if (!arr || arr.length == 0) { return };
-            this.viewData = arr;
-            this.MaList = DrawData.MaList;
+        GlobalEvent.on('onDrawGrap', (arr, ktype) => {
+            ktype && (this.ktype = ktype)
+            arr && (this.viewData = arr)
             this.initDrawBg();
         }, this);
     }
 
     initDrawBg() {
+        this.MaList = DrawData.MaList;
+        this.MinMaList = DrawData.MinMaList;
         this.drawBg.clear();
         this.drawMA.clear();
+
         this.drawBg.lineWidth = 2;
         this.drawMA.lineWidth = 2;
 
@@ -79,7 +91,6 @@ export default class NewClass extends cc.Component {
 
             this.onDrawMA(index);
         }
-
     }
 
     //绘制蜡烛线 曲线 、宝塔线
@@ -90,75 +101,100 @@ export default class NewClass extends cc.Component {
             lowPos: null,
             index: index,
         }
-
-        let initY = 0;
         let drawBox = this.drawBg.node.height;
-        let some = index - GameCfg.beg_end[0];
-        let startX = some == 0 ? 10 : 10 + (some * GameCfg.hz_width);
-        let endX = 10 + ((some + 1) * GameCfg.hz_width);
+        let some = index - (GameCfg.beg_end[0]);
+        let startX = (some * GameCfg.hz_width);
+        let endX = ((some + 1) * GameCfg.hz_width);
         //根据区间价格决定坐标
         let openValue = (el.open - this.bottomValue);
-        let openY = openValue / this.disValue * drawBox + initY;
+        let openY = openValue / this.disValue * drawBox;
         let closeValue = (el.close - this.bottomValue)
-        let closeY = closeValue / this.disValue * drawBox + initY;
+        let closeY = closeValue / this.disValue * drawBox;
 
-        let maxY, minY;
-        //判断颜色
-        // let hz_color;
-        //没涨没跌
-        let lowPrice, highPrice;
-        if (el.open == el.close) {
-            this.drawBg.strokeColor = GameCfg.HZ_white;
-            this.drawLine(this.drawBg, startX + 2, openY, endX, openY);
-            lowPrice = el.open;
-            highPrice = el.open;
+        if (this.ktype == pb.KType.Min) {
+            if (index == 0) {
+                this.prePointX = (some * 1.2);
+                this.prePointY = (el.close - this.bottomValue) / this.disValue * drawBox;
+                this.prePoint1Y = this.prePointY;
+            }
+            else {
+                let x = (some * 1.2);
+                let y = (el.close - this.bottomValue) / this.disValue * drawBox;
+                this.drawBg.lineWidth = 1.2;
+                DrawUtils.drawMinLineFill(this.drawBg, this.prePointX, this.prePointY, x, y);
+                this.drawBg.lineWidth = 1.2;
+                this.drawBg.strokeColor = cc.Color.WHITE;
+                this.drawLine(this.drawBg, this.prePointX, this.prePointY, x, y);
+                this.prePointX = x;
+                this.prePointY = y;
+
+                let y1 = (this.MinMaList[index] - this.bottomValue) / this.disValue * drawBox;
+
+                this.drawMA.strokeColor = new cc.Color().fromHEX('#e94343');
+                this.drawLine(this.drawMA, this.prePointX, this.prePoint1Y, x, y1);
+                this.prePoint1Y = y1;
+            }
         }
-        //跌了
         else {
-            let hy, by;
-            if (el.open > el.close) {
-                lowPrice = el.close;
-                highPrice = el.open;
-                hy = openY;
-                by = closeY;
-
-            }
-            //涨了
-            else if (el.open < el.close) {
+            //判断颜色
+            // let hz_color;
+            //没涨没跌
+            let lowPrice, highPrice;
+            if (el.open == el.close) {
+                this.drawBg.strokeColor = GameCfg.HZ_white;
+                this.drawLine(this.drawBg, startX + 2, openY, endX, openY);
                 lowPrice = el.open;
-                highPrice = el.close;
-                hy = closeY;
-                by = openY;
-
+                highPrice = el.open;
             }
-            let flag = el.open > el.close;
+            //跌了
+            else {
+                let hy, by;
+                if (el.open > el.close) {
+                    lowPrice = el.close;
+                    highPrice = el.open;
+                    hy = openY;
+                    by = closeY;
 
-            this.sign = this.getRaisingLimit(index);
-            this.drawRect(this.drawBg, startX, by, endX - startX, hy - by, flag);
+                }
+                //涨了
+                else if (el.open < el.close) {
+                    lowPrice = el.open;
+                    highPrice = el.close;
+                    hy = closeY;
+                    by = openY;
 
-        }
+                }
+                let flag = el.open > el.close;
+                this.sign = this.getRaisingLimit(index);
+                this.drawRect(this.drawBg, startX, by, endX - startX, hy - by, flag);
+            }
 
-
-        //画最高价、
-        if (el.high >= highPrice) {
-            let highY = (el.high - this.bottomValue) / this.disValue * drawBox + initY;
-            let highX = startX + (endX - startX) / 2 - 2.5;
-            let hy = openY > closeY ? openY : closeY;
-            this.drawLine(this.drawBg, highX, highY, highX, hy);
-            posInfo.highPos = cc.v2(highX, highY);
-        }
-        //画最低
-        if (el.low <= lowPrice) {
-            let lowY = (el.low - this.bottomValue) / this.disValue * drawBox + initY;
-            let lowX = startX + (endX - startX) / 2 - 2.5;
-            let hy = openY < closeY ? openY : closeY;
-            this.drawLine(this.drawBg, lowX, lowY, lowX, hy);
-            posInfo.lowPos = cc.v2(lowX, lowY);
+            //画最高价、
+            if (el.high >= highPrice) {
+                let highY = (el.high - this.bottomValue) / this.disValue * drawBox;
+                let highX = startX + (endX - startX) / 2 - 2.5;
+                let hy = openY > closeY ? openY : closeY;
+                this.drawLine(this.drawBg, highX, highY, highX, hy);
+                posInfo.highPos = cc.v2(highX, highY);
+            }
+            //画最低
+            if (el.low <= lowPrice) {
+                let lowY = (el.low - this.bottomValue) / this.disValue * drawBox;
+                let lowX = startX + (endX - startX) / 2 - 2.5;
+                let hy = openY < closeY ? openY : closeY;
+                this.drawLine(this.drawBg, lowX, lowY, lowX, hy);
+                posInfo.lowPos = cc.v2(lowX, lowY);
+            }
         }
 
     }
 
     onDrawMA(index) {
+
+        if (this.ktype == pb.KType.Min) {
+            return;
+        }
+
         if (!this.MaList[index]) {
             return;
         }
@@ -213,11 +249,11 @@ export default class NewClass extends cc.Component {
             }
             ctx.strokeColor = col;
 
-
             if (GameCfg.GameSet.line != '宝塔线' && !this.sign) {
                 col = null;
             }
         }
+
         DrawUtils.drawRect(ctx, x, y, w - 5, h, col);
 
     }
@@ -229,6 +265,6 @@ export default class NewClass extends cc.Component {
     }
 
     onDisable() {
-        GlobalEvent.off('onDraw');
+        GlobalEvent.off('onDrawGrap');
     }
 }

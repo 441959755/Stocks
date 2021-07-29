@@ -6,6 +6,8 @@ import GameCfg from "./GameCfg";
 
 export default class DrawData {
 
+    public static MinMaList = null;
+
     public static MaList = null;
 
     public static BollList = null;
@@ -154,7 +156,7 @@ export default class DrawData {
             console.log('DrawData  initData  data is null' + data);
             return;
         }
-
+        this.MinMaList = [];
         this.MaList = [];
         this.BollList = [];
         this.VolList = [];
@@ -237,6 +239,15 @@ export default class DrawData {
                     }
                 } else {
                     this.MaList.push(null);
+                }
+
+                //minMA
+                {
+                    let sun = 0
+                    for (let q = 0; q <= index; q++) {
+                        sun += data[q].close;
+                    }
+                    this.MinMaList[index] = sun / (index + 1);
                 }
 
                 //boll

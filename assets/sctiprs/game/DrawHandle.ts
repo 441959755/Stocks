@@ -378,18 +378,36 @@ export default class NewClass extends cc.Component {
 
     onMoveLeftOrRight(count, calDisX, calDisY) {
         if (calDisX > 0) {
-            GameCfg.beg_end[1] -= count;
-            GameCfg.beg_end[0] -= count;
-
-            if (GameCfg.beg_end[0] < 0) {
-                GameCfg.beg_end[0] = 0;
+            if (GameCfg.beg_end[0] == 0) {
+                clearTimeout(this.timer);
+                this.timer = null;
+                calDisX = 0;
+                calDisY = 0;
+                return;
             }
-
+            if (GameCfg.beg_end[0] - count >= 0) {
+                GameCfg.beg_end[1] -= count;
+                GameCfg.beg_end[0] -= count;
+            } else {
+                count = GameCfg.beg_end[0];
+                GameCfg.beg_end[0] -= count;
+                GameCfg.beg_end[1] -= count;
+            }
         } else {
-            GameCfg.beg_end[0] += count;
-            GameCfg.beg_end[1] += count;
-            if (GameCfg.beg_end[1] > GameCfg.huizhidatas) {
-                GameCfg.beg_end[1] = GameCfg.huizhidatas;
+            if (GameCfg.huizhidatas == GameCfg.beg_end[1]) {
+                clearTimeout(this.timer);
+                this.timer = null;
+                calDisX = 0;
+                calDisY = 0;
+                return;
+            }
+            if (GameCfg.beg_end[1] + count < GameCfg.huizhidatas) {
+                GameCfg.beg_end[0] += count;
+                GameCfg.beg_end[1] += count;
+            } else {
+                count = GameCfg.huizhidatas - GameCfg.beg_end[1];
+                GameCfg.beg_end[0] += count;
+                GameCfg.beg_end[1] += count;
             }
         }
         this.initDrawBg();

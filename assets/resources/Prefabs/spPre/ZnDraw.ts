@@ -36,15 +36,29 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     uLabel: cc.Label = null;
 
+    @property(cc.Node)
+    drawBox: cc.Node = null;
+
+    @property([cc.Node])
+    BGrap: cc.Node[] = [];
+
+    @property(cc.Node)
+    content: cc.Node = null;
+
+    @property(cc.Node)
+    mask: cc.Node = null;
+
     onLoad() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.getGPDataDay();
+
 
         GlobalEvent.on('onClickPosUpdateLabel', (index) => {
+            if (index < GameCfg.beg_end[0] || index >= GameCfg.beg_end[1]) { return }
             let time, kp, sp, zg, zd, cjl, cje;
             let arr = [];
             if (this.ktype == pb.KType.Min) {
-                let t = new Date(this.gpDataMin[index].timestamp * 1000);
+                let tt = this.gpDataMin[index].timestamp;
+                let t = new Date(this.gpDataMin[index].day * 1000);
                 let h = t.getHours();
                 let m = t.getMinutes();
                 let h1 = h >= 10 ? h : '0' + h;
@@ -68,7 +82,7 @@ export default class NewClass extends cc.Component {
             sp = arr[index].close;
             zg = arr[index].high;
             zd = arr[index].low;
-            cjl = arr[index].voiume;
+            cjl = arr[index].volume;
             cje = arr[index].amount;
 
             this.uLabel.string = time + '    ' + '开盘 ' + kp + '    ' + '收盘 ' + sp + '    ' + '最高 ' + zg + '    ' + '最低 ' + zd + '    ' + '成交量 ' + cjl + '    ' + '成交额 ' + cje;
@@ -76,8 +90,14 @@ export default class NewClass extends cc.Component {
     }
 
     onShow(code) {
+        this.mask.active = false;
+        this.BGrap[0].active = true;
+        this.BGrap[1].active = true;
+        this.BGrap[2].active = false;
+        this.BGrap[3].active = false;
+        this.BGrap[4].active = false;
         this.code = code;
-
+        this.getGPDataDay();
         this.initData();
 
         //订阅
@@ -86,6 +106,44 @@ export default class NewClass extends cc.Component {
 
     initData() {
         GameCfg.GameSet = GameData.JJPKSet;
+
+        GameCfg.MAColor[0] = new cc.Color().fromHEX('#ffffff');
+        GameCfg.MAColor[1] = new cc.Color().fromHEX('#ebeb12');
+
+        GameCfg.MAColor[2] = new cc.Color().fromHEX('#e814ed');
+        GameCfg.MAColor[3] = new cc.Color().fromHEX('#14ed14');
+        GameCfg.MAColor[4] = new cc.Color().fromHEX('#1c9ce6');
+        GameCfg.MAColor[5] = new cc.Color().fromHEX('#d47026');
+
+        GameCfg.BOLLColor[0] = cc.Color.WHITE;
+        GameCfg.BOLLColor[1] = new cc.Color().fromHEX('#f0dc05');
+        GameCfg.BOLLColor[2] = new cc.Color().fromHEX('#d85cfc');
+
+        GameCfg.VOLColor[0] = new cc.Color().fromHEX('#ffffff');
+        GameCfg.VOLColor[1] = new cc.Color().fromHEX('#ebeb12');
+
+        GameCfg.tipsDealColor[0] = new cc.Color().fromHEX('#02230c');
+        GameCfg.tipsDealColor[1] = new cc.Color().fromHEX('#2d0202');
+
+        GameCfg.K_D_J_Line[0] = cc.Color.WHITE;
+        GameCfg.K_D_J_Line[1] = new cc.Color().fromHEX('#f0dc05');
+        GameCfg.K_D_J_Line[2] = new cc.Color().fromHEX('#d85cfc');
+
+        GameCfg.DIF_LINE_COL = cc.Color.WHITE;
+        GameCfg.DEA_LINE_COL = new cc.Color().fromHEX('#f0dc05');
+
+        GameCfg.MACD_COL[0] = new cc.Color().fromHEX('#f11111');
+        GameCfg.MACD_COL[1] = new cc.Color().fromHEX('#0fee1e');
+
+        GameCfg.RSI_COLOR[0] = cc.Color.WHITE;
+        GameCfg.RSI_COLOR[1] = new cc.Color().fromHEX('#f0dc05');
+        GameCfg.RSI_COLOR[2] = new cc.Color().fromHEX('#d85cfc');
+
+        GameCfg.CCL_COL = cc.Color.WHITE;
+
+        GameCfg.EXPMA_COL[0] = new cc.Color().fromHEX('#ffffff');
+        GameCfg.EXPMA_COL[1] = new cc.Color().fromHEX('#ebeb12');
+
         let j = 0;
         for (let i = 1; i <= 6; i++) {
             if (GameCfg.GameSet['isMA' + i]) {
@@ -235,7 +293,6 @@ export default class NewClass extends cc.Component {
         this.cLabel[10].string = ComUtils.changeTwoDecimal(hs) + '%';
         this.cLabel[11].string = ComUtils.changeTwoDecimal(data.amount / 10000) + '万';
 
-
         if (zf < 0) {
             this.cLabel[2].node.color = cc.Color.GREEN;
             this.cLabel[3].node.color = cc.Color.GREEN;
@@ -244,7 +301,6 @@ export default class NewClass extends cc.Component {
             this.cLabel[2].node.color = cc.Color.RED;
             this.cLabel[3].node.color = cc.Color.RED;
         }
-
         this.onDraw();
     }
 
@@ -253,22 +309,77 @@ export default class NewClass extends cc.Component {
             if (el.isChecked) {
                 let arr = [];
                 if (index == 0) {
+                    this.ktype = pb.KType.Min;
                     arr = this.gpDataMin;
+                    arr.forEach(el => {
+                        el.close = el.price;
+                    })
                 }
                 else if (index == 1 || index == 2) {
+                    this.ktype = pb.KType.Day;
                     arr = this.gpDataDay;
                 }
-
                 else if (index == 3) {
+                    this.ktype = pb.KType.Day7;
                     arr = this.gpDataDay7;
                 }
                 else if (index == 4) {
                     arr = this.gpDataMonth;
                 }
-                GlobalEvent.emit('onClickPosUpdateLabel', arr.length - 1);
-                DrawData.initData(arr);
-                GlobalEvent.emit('onDraw', arr);
+                GameCfg.huizhidatas = arr.length;
+                GameData.huizhidatas = arr.length;
+                GameCfg.beg_end = [];
 
+                GameCfg.beg_end[1] = GameCfg.huizhidatas;
+                GameCfg.beg_end[0] = 0;
+                if (GameCfg.huizhidatas > 100) {
+                    GameCfg.beg_end[0] = GameCfg.beg_end[1] - 100;
+                }
+                if (GameCfg.beg_end[0] < 0) {
+                    GameCfg.beg_end[0] = 0;
+                }
+
+                if (this.ktype == pb.KType.Min) {
+                    GameCfg.beg_end[0] = 0;
+                }
+
+                let mixWidth = 6;
+                let maxWidth = 70;
+
+                let drawWidth = this.drawBox.width;
+
+                GameCfg.hz_width = drawWidth / (GameCfg.beg_end[1] - GameCfg.beg_end[0]);
+
+                if (GameCfg.hz_width > maxWidth) {
+                    GameCfg.hz_width = maxWidth;
+                } else if (GameCfg.hz_width < mixWidth) {
+                    GameCfg.hz_width = mixWidth;
+                }
+
+                let arr1 = [];
+                arr.forEach((el, index) => {
+                    if (this.ktype == pb.KType.Min) {
+                        for (let q = 0; q < index; q++) {
+                            el.volume -= arr[q].volume;
+                        }
+                    }
+                    let data = {
+                        day: el.timestamp,
+                        open: el.open || 0,
+                        close: el.price || 0,
+                        high: el.high || 0,
+                        low: el.low || 0,
+                        price: el.amount || 0,
+                        value: el.volume || 0,
+                    }
+                    arr1.push(data);
+                })
+                if (!arr1 || arr1.length == 0) {
+                    return;
+                }
+                GlobalEvent.emit('onClickPosUpdateLabel', arr1.length - 1);
+                DrawData.initData(arr1);
+                GlobalEvent.emit('onDrawGrap', arr1, this.ktype);
             }
         })
     }
@@ -337,7 +448,13 @@ export default class NewClass extends cc.Component {
 
 
     onDisable() {
+        this.gpDataMin = null;  //分时数据
 
+        this.gpDataDay = null  //日k数据
+
+        this.gpDataDay7 = null  //周k数据
+
+        this.gpDataMonth = null //月k数据
     }
 
     onBtnClick(event, data) {
@@ -345,8 +462,41 @@ export default class NewClass extends cc.Component {
         if (name == 'blackbtn') {
             this.node.active = false;
         }
-        else if (name == '') {
+        else if (name == 'btnSlecet') {
+            if (this.ktype == pb.KType.Min) { return }
+            this.content.active = true;
+            event.target.getChildByName('nodeClick').active = true;
+        }
+        else if (name == 'nodeClick') {
+            event.target.active = false;
+            this.content.active = false;
+        }
+        else if (name == 'BtnCPM') {
+            this.mask.active = false;
+            this.BGrap[0].active = true;
+            this.BGrap[1].active = true;
+            this.BGrap[2].active = false;
+            this.BGrap[3].active = false;
+            this.BGrap[4].active = false;
 
+        }
+        else if (name == 'BtnMACD') {
+            this.mask.active = true;
+            this.BGrap[2].active = true;
+            this.BGrap[3].active = false;
+            this.BGrap[4].active = false;
+        }
+        else if (name == 'BtnKDJ') {
+            this.mask.active = true;
+            this.BGrap[2].active = false;
+            this.BGrap[3].active = true;
+            this.BGrap[4].active = false;
+        }
+        else if (name == 'BtnRSI') {
+            this.mask.active = true;
+            this.BGrap[2].active = false;
+            this.BGrap[3].active = false;
+            this.BGrap[4].active = true;
         }
 
     }
