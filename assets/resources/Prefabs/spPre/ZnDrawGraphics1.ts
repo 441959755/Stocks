@@ -95,7 +95,7 @@ export default class NewClass extends cc.Component {
     viweData = null;
     ktype = null;
 
-    onLoad() {
+    onEnable() {
         GlobalEvent.on('onDrawGrap', (arr, ktype) => {
             arr && (this.viweData = arr)
             ktype && (this.ktype = ktype)
@@ -367,7 +367,8 @@ export default class NewClass extends cc.Component {
         let some = index - GameCfg.beg_end[0];
 
         if (this.ktype == pb.KType.Min) {
-            let x = (some * 1.2);
+            let width = this.node.width / 240;
+            let x = (some * width);
             let y = el.value * (150 / this.topVol);
 
             if (index == 0) {
@@ -393,7 +394,7 @@ export default class NewClass extends cc.Component {
                 }
             }
 
-            this.drawVol.lineWidth = 1.2;
+            this.drawVol.lineWidth = width;
             DrawUtils.drawLine(this.drawVol, x, 0, x, y);
         }
         else {
@@ -449,6 +450,11 @@ export default class NewClass extends cc.Component {
     }
 
     onDisable() {
+        this.drawRSI.clear();
+        this.drawKDJ.clear();
+        this.drawMACD.clear();
+        this.drawPCM.clear();
+        this.drawVol.clear();
         GlobalEvent.off('onDrawGrap');
     }
 

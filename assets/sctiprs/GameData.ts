@@ -293,5 +293,8 @@ export default class GameData {
 
     public static AIStockList = [];  // 智能选股收藏股票列表
 
+    public static selfStockList = [];  // 自能选股收藏股票列表
+
+
 
 }

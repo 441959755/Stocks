@@ -194,12 +194,15 @@ export default class NewClass extends cc.Component {
 
 
     start() {
-        this.onAddMard({ type: 1, index: GameData.huizhidatas });
-        if (!GameCfg.GAMEFUPAN) {
+        if (GameCfg.GameType) {
+            this.onAddMard({ type: 1, index: GameData.huizhidatas });
+            if (!GameCfg.GAMEFUPAN) {
+            }
+            else {
+                this.onMarkAllShow();
+            }
         }
-        else {
-            this.onMarkAllShow();
-        }
+
     }
 
     onMarkRangeShowOrHide() {

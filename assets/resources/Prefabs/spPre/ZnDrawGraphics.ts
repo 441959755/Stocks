@@ -2,6 +2,7 @@ import { pb } from "../../../protos/proto";
 import DrawData from "../../../sctiprs/game/DrawData";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import DrawUtils from "../../../sctiprs/Utils/DrawUtils";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
 
@@ -52,7 +53,7 @@ export default class NewClass extends cc.Component {
 
     prePoint1Y = null;
 
-    onLoad() {
+    onEnable() {
         GlobalEvent.on('onDrawGrap', (arr, ktype) => {
             ktype && (this.ktype = ktype)
             arr && (this.viewData = arr)
@@ -112,17 +113,18 @@ export default class NewClass extends cc.Component {
         let closeY = closeValue / this.disValue * drawBox;
 
         if (this.ktype == pb.KType.Min) {
+            let width = this.node.width / 240;
             if (index == 0) {
-                this.prePointX = (some * 1.2);
+                this.prePointX = (some * width);
                 this.prePointY = (el.close - this.bottomValue) / this.disValue * drawBox;
                 this.prePoint1Y = this.prePointY;
             }
             else {
-                let x = (some * 1.2);
+                let x = ((some + 1) * width);
                 let y = (el.close - this.bottomValue) / this.disValue * drawBox;
-                this.drawBg.lineWidth = 1.2;
+                this.drawBg.lineWidth = width;
                 DrawUtils.drawMinLineFill(this.drawBg, this.prePointX, this.prePointY, x, y);
-                this.drawBg.lineWidth = 1.2;
+                this.drawBg.lineWidth = width;
                 this.drawBg.strokeColor = cc.Color.WHITE;
                 this.drawLine(this.drawBg, this.prePointX, this.prePointY, x, y);
                 this.prePointX = x;
@@ -185,6 +187,7 @@ export default class NewClass extends cc.Component {
                 this.drawLine(this.drawBg, lowX, lowY, lowX, hy);
                 posInfo.lowPos = cc.v2(lowX, lowY);
             }
+            GlobalEvent.emit(EventCfg.ONMARKUPDATE, posInfo);
         }
 
     }
@@ -265,6 +268,8 @@ export default class NewClass extends cc.Component {
     }
 
     onDisable() {
+        this.drawBg.clear();
+        this.drawMA.clear();
         GlobalEvent.off('onDrawGrap');
     }
 }

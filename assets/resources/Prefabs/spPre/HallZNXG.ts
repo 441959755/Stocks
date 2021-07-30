@@ -127,10 +127,10 @@ export default class NewClass extends cc.Component {
         //我的收藏
         else if (name == 'toggle3') {
             this.scrollview2.node.active = true;
-            if (this.collectList.length == 0) {
-                this.tipsNode.active = true;
-                this.getCollectList();
-            }
+            //  if (this.collectList.length == 0) {
+            this.tipsNode.active = true;
+            this.getCollectList();
+            // }
             // else if (GameData.AIStockList.length > this.collectList.length) {
             //     for (let i = this.collectList.length - 1; i < GameData.AIStockList.length - 1; i++) {
             //         let node = cc.instantiate(this.preItem2);
@@ -240,12 +240,13 @@ export default class NewClass extends cc.Component {
             console.log('查询AI选股的股票列表' + JSON.stringify(res));
 
             res.items.forEach((el, index) => {
-                let node = cc.instantiate(this.preItem2);
-                this.content2.addChild(node);
-                let handle = node.getComponent('ZnxgItem2');
+                if (!this.content2.children[index]) {
+                    this.content2.children[index] = cc.instantiate(this.preItem2);
+                    this.content2.addChild(this.content2.children[index]);
+                }
+                let handle = this.content2.children[index].getComponent('ZnxgItem2');
                 handle.onShow(el, index);
             });
-
         })
 
         this.tipsNode.active = false;

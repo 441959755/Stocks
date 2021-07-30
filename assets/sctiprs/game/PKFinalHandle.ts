@@ -299,9 +299,9 @@ export default class NewClass extends cc.Component {
             if (!this.EnterGameLayer) {
                 GlobalEvent.emit(EventCfg.LOADINGSHOW);
                 LoadUtils.loadRes('Prefabs/enterXLGame', (pre) => {
+                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
                     this.EnterGameLayer = cc.instantiate(pre);
                     this.node.addChild(this.EnterGameLayer);
-                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 })
             }
             else {

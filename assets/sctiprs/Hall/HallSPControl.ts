@@ -10,17 +10,22 @@ export default class NewClass extends cc.Component {
 
     znxgNode: cc.Node = null;
 
+    myxgNode: cc.Node = null;
+
     zgNode: cc.Node = null;
 
     znDraw: cc.Node = null;
+
+
 
     onLoad() {
         GlobalEvent.on(EventCfg.OPENZNXG, this.onLoadZNXGLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZGLAYER, this.openZGLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZNDRAW, this.openZNDraw.bind(this), this);
+        GlobalEvent.on(EventCfg.OPENMYXG, this.openMyxgLayer.bind(this), this);
     }
 
-    openZNDraw(code) {
+    openZNDraw(code, str) {
         if (!this.znDraw) {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes('Prefabs/spPre/znDrawLayer', (pre) => {
@@ -29,13 +34,13 @@ export default class NewClass extends cc.Component {
                 this.node.addChild(this.znDraw);
                 this.znDraw.setPosition(0, 0);
                 let handle = this.znDraw.getComponent('ZnDraw');
-                handle.onShow(code);
+                handle.onShow(code, str);
                 this.znDraw.active = true;
             })
         }
         else {
             let handle = this.znDraw.getComponent('ZnDraw');
-            handle.onShow(code);
+            handle.onShow(code, str);
             this.znDraw.active = true;
         }
 
@@ -53,6 +58,21 @@ export default class NewClass extends cc.Component {
         }
         else {
             this.znxgNode.active = true;
+        }
+    }
+
+    openMyxgLayer() {
+        if (!this.myxgNode) {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            LoadUtils.loadRes('Prefabs/spPre/myxgLayer', (pre) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                this.myxgNode = cc.instantiate(pre);
+                this.node.addChild(this.myxgNode);
+                this.myxgNode.active = true;
+            })
+        }
+        else {
+            this.myxgNode.active = true;
         }
     }
 
@@ -77,6 +97,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENZNXG);
         GlobalEvent.off(EventCfg.OPENZGLAYER);
         GlobalEvent.off(EventCfg.OPENZNDRAW);
+        GlobalEvent.off(EventCfg.OPENMYXG);
         LoadUtils.releaseRes('Prefabs/spPre/znDrawLayer');
         LoadUtils.releaseRes('Prefabs/spPre/znxgLayer');
         LoadUtils.releaseRes('Prefabs/spPre/zgLayer');

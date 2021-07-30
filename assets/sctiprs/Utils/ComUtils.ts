@@ -340,6 +340,16 @@ export default class ComUtils {
 		return arr;
 	}
 
+	public static numberConvertUnit(number) {
+		let str = number;
+		if (number >= 100000000) {
+			str = this.changeTwoDecimal(number / 100000000) + '亿';
+		}
+		else if (number >= 10000) {
+			str = this.changeTwoDecimal(number / 10000) + '万';
+		}
+		return str;
 
+	}
 
 }

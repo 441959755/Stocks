@@ -83,6 +83,8 @@ export default {
 
 	OPENZNXG: 'OPENZNXG',//打开智能选股
 
+	OPENMYXG: 'OPENMYXG',//模拟选股
+
 	OPENZGLAYER: 'OPENZGLAYER',//诊股
 
 	OPENZNDRAW: 'OPENZNDRAW',

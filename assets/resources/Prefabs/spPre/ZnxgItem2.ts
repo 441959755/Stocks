@@ -97,7 +97,7 @@ export default class NewClass extends cc.Component {
 
         }
         else if (name == 'item2') {
-            GlobalEvent.emit(EventCfg.OPENZNDRAW, this._curData.code);
+            GlobalEvent.emit(EventCfg.OPENZNDRAW, this._curData.code, this.label[7].string);
         }
 
     }

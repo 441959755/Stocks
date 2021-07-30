@@ -145,7 +145,6 @@ export default class PopupManager {
         this.urls.forEach(el => {
             LoadUtils.releaseRes(el);
         })
-
         this.urls = [];
         this.tipsBox && (this.tipsBox.destroy());
         this.tipsBox = null;

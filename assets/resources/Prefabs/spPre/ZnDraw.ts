@@ -8,6 +8,7 @@ import ComUtils from "../../../sctiprs/Utils/ComUtils";
 //import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import LoadUtils from "../../../sctiprs/Utils/LoadUtils";
 
 
 const { ccclass, property } = cc._decorator;
@@ -48,17 +49,38 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     mask: cc.Node = null;
 
+    @property(cc.Node)
+    addMark: cc.Node = null;
+
+    yearEarnings = null;
+
+    latestEarnings = null;
+
+    @property(cc.Node)
+    laNode: cc.Node = null;
+
+    AISignal = '';
+
+    @property(cc.Node)
+    ziXunBtn: cc.Node = null;
+
+    @property(cc.Node)
+    yiShouCang: cc.Node = null;
+
+    EnterGameLayer: cc.Node = null;
+
     onLoad() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
-
         GlobalEvent.on('onClickPosUpdateLabel', (index) => {
+
             if (index < GameCfg.beg_end[0] || index >= GameCfg.beg_end[1]) { return }
             let time, kp, sp, zg, zd, cjl, cje;
             let arr = [];
             if (this.ktype == pb.KType.Min) {
+                index = this.gpDataMin.length - 1;
                 let tt = this.gpDataMin[index].timestamp;
-                let t = new Date(this.gpDataMin[index].day * 1000);
+                let t = new Date(this.gpDataMin[index].timestamp * 1000);
                 let h = t.getHours();
                 let m = t.getMinutes();
                 let h1 = h >= 10 ? h : '0' + h;
@@ -67,29 +89,34 @@ export default class NewClass extends cc.Component {
                 arr = this.gpDataMin;
             }
             else if (this.ktype == pb.KType.Day) {
-                time = ComUtils.getTimestamp(this.gpDataDay[index].timestamp);
+                time = ComUtils.formatTime(this.gpDataDay[index].timestamp);
                 arr = this.gpDataDay;
             }
             else if (this.ktype == pb.KType.Day7) {
-                time = ComUtils.getTimestamp(this.gpDataDay7[index].timestamp);
+                time = ComUtils.formatTime(this.gpDataDay7[index].timestamp);
                 arr = this.gpDataDay7;
             }
             else {
-                time = ComUtils.getTimestamp(this.gpDataMonth[index].timestamp);
+
+                time = ComUtils.formatTime(this.gpDataMonth[index].timestamp);
                 arr = this.gpDataMonth;
             }
             kp = arr[index].open;
             sp = arr[index].close;
             zg = arr[index].high;
             zd = arr[index].low;
-            cjl = arr[index].volume;
-            cje = arr[index].amount;
+
+            cjl = ComUtils.numberConvertUnit(parseInt(arr[index].volume / 100 + '')) + '手';;
+            cje = ComUtils.numberConvertUnit(arr[index].amount);
 
             this.uLabel.string = time + '    ' + '开盘 ' + kp + '    ' + '收盘 ' + sp + '    ' + '最高 ' + zg + '    ' + '最低 ' + zd + '    ' + '成交量 ' + cjl + '    ' + '成交额 ' + cje;
         }, this);
     }
 
-    onShow(code) {
+    onShow(code, str) {
+        this.laNode.active = false;
+        this.AISignal = str;
+        this.addMark.active = false;
         this.mask.active = false;
         this.BGrap[0].active = true;
         this.BGrap[1].active = true;
@@ -102,6 +129,64 @@ export default class NewClass extends cc.Component {
 
         //订阅
         this.CmdQuoteSubscribe();
+
+        //查询AI操作
+        this.onQueryAISignal();
+
+        if (GameData.AIStockList.indexOf(code) == -1) {
+            this.ziXunBtn.active = false;
+        }
+        else {
+            this.ziXunBtn.active = true;
+        }
+    }
+
+    onQueryAISignal() {
+        let me = {
+            code: this.code,
+        }
+        let CmdQueryAiSignal = pb.CmdQueryAiSignal;
+        let message1 = CmdQueryAiSignal.create(me);
+        let buff1 = CmdQueryAiSignal.encode(message1).finish();
+        socket.send(pb.MessageId.Req_QueryAiSignal, buff1, (res) => {
+            console.log('AI买卖信号：' + JSON.stringify(res));
+            let arr = [];
+            let price;
+            let signals = res.signals;
+            signals.forEach((el, index) => {
+                for (let i = 0; i < this.gpDataDay.length; i++) {
+                    if (el.ts == this.gpDataDay[i].timestamp) {
+                        //买
+                        if (el.flag == -1) {
+                            GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: i + 1 });
+                        }
+                        else if (el.flag == 1) {
+                            GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: i + 1 });
+                        }
+                    }
+                }
+
+                if (index % 2 != 0) {
+                    let rate = (el.price - price) / price * 100;
+                    arr.push(rate);
+                }
+                else {
+                    price = el.price;
+                }
+
+            });
+
+            let num = 0;
+            arr.forEach(el => {
+                num += el;
+            })
+            let label1 = this.laNode.getChildByName('label1').getComponent(cc.Label);
+            let label2 = this.laNode.getChildByName('label2').getComponent(cc.Label);
+            let label3 = this.laNode.getChildByName('label3').getComponent(cc.Label);
+            label1.string = '近一年收益：' + ComUtils.changeTwoDecimal(num) + '%';
+            label2.string = '最近的收益：' + ComUtils.changeTwoDecimal(arr[arr.length - 1]) + '%';
+            label3.string = '今日决策：' + this.AISignal;
+        });
     }
 
     initData() {
@@ -281,7 +366,8 @@ export default class NewClass extends cc.Component {
 
         let zf1 = (data.high - data.low) / preData.close * 100;
         this.cLabel[6].string = ComUtils.changeTwoDecimal(zf1) + '%';
-        this.cLabel[7].string = parseInt(data.volume / 100 + '') + '手';
+        this.cLabel[7].string = ComUtils.numberConvertUnit(parseInt(data.volume / 100 + '')) + '手';
+
 
         this.cLabel[8].string = ComUtils.changeTwoDecimal(data.low);
         this.cLabel[9].string = ComUtils.changeTwoDecimal(preData.close);
@@ -291,7 +377,7 @@ export default class NewClass extends cc.Component {
             hs = 1
         }
         this.cLabel[10].string = ComUtils.changeTwoDecimal(hs) + '%';
-        this.cLabel[11].string = ComUtils.changeTwoDecimal(data.amount / 10000) + '万';
+        this.cLabel[11].string = ComUtils.numberConvertUnit(data.amount);
 
         if (zf < 0) {
             this.cLabel[2].node.color = cc.Color.GREEN;
@@ -341,6 +427,7 @@ export default class NewClass extends cc.Component {
 
                 if (this.ktype == pb.KType.Min) {
                     GameCfg.beg_end[0] = 0;
+
                 }
 
                 let mixWidth = 6;
@@ -399,6 +486,8 @@ export default class NewClass extends cc.Component {
     onToggleClick(event, data) {
         let name = event.node.name;
         if (name == 'toggle1') {
+            this.addMark.active = false;
+            this.laNode.active = false;
             if (!this.gpDataMin) {
                 this.getGPDataMin();
             }
@@ -408,6 +497,10 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'toggle2') {
+            this.addMark.active = true;
+            this.laNode.active = true;
+            //  GlobalEvent.emit(EventCfg.GAMEFUPAN);
+            GameCfg.GAMEFUPAN = true;
             if (!this.gpDataDay) {
 
                 this.getGPDataDay();
@@ -418,6 +511,8 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'toggle3') {
+            this.addMark.active = false;
+            this.laNode.active = false;
             if (!this.gpDataDay) {
                 this.ktype = pb.KType.Day;
                 this.getGPDataDay();
@@ -428,6 +523,8 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'toggle4') {
+            this.addMark.active = false;
+            this.laNode.active = false;
             if (!this.gpDataDay7) {
                 this.getHttpGPData('wk');
             }
@@ -437,6 +534,8 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'toggle5') {
+            this.addMark.active = false;
+            this.laNode.active = false;
             if (!this.gpDataMonth) {
                 this.getHttpGPData('mk');
             }
@@ -449,12 +548,10 @@ export default class NewClass extends cc.Component {
 
     onDisable() {
         this.gpDataMin = null;  //分时数据
-
         this.gpDataDay = null  //日k数据
-
         this.gpDataDay7 = null  //周k数据
-
         this.gpDataMonth = null //月k数据
+        GameCfg.GAMEFUPAN = null;
     }
 
     onBtnClick(event, data) {
@@ -498,7 +595,69 @@ export default class NewClass extends cc.Component {
             this.BGrap[3].active = false;
             this.BGrap[4].active = true;
         }
+        //点击模以
+        else if (name == 'sp_btn_moni') {
 
+
+        }
+
+        else if (name == 'sp_btn_xunlian') {
+            if (!this.EnterGameLayer) {
+                GlobalEvent.emit(EventCfg.LOADINGSHOW);
+                LoadUtils.loadRes('Prefabs/enterXLGame', (pre) => {
+                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                    this.EnterGameLayer = cc.instantiate(pre);
+                    this.node.addChild(this.EnterGameLayer);
+                    let handle = this.EnterGameLayer.getComponent('EnterXLGame');
+                    let items = GameCfgText.getGPPKItemInfo(this.code);
+                    handle.onShow(this.code, items[1], ComUtils.fromatTime1(this.gpDataDay[0].timestamp))
+                })
+            }
+            else {
+                this.EnterGameLayer.active = true;
+                let handle = this.EnterGameLayer.getComponent('EnterXLGame');
+                let items = GameCfgText.getGPPKItemInfo(this.code);
+                handle.onShow(this.code, items[1], ComUtils.fromatTime1(this.gpDataDay[0].timestamp))
+            }
+
+        }
+
+        else if (name == 'sp_btn_shoucang') {
+            let info = {
+                removed: false,
+                code: this.code,
+                isAiStock: true,
+            }
+
+            let CmdMncgEditStock = pb.CmdMncgEditStock;
+            let message = CmdMncgEditStock.create(info);
+            let buff = CmdMncgEditStock.encode(message).finish();
+
+            socket.send(pb.MessageId.Req_EditAiStockList, buff, (res) => {
+
+            })
+            GameData.AIStockList.push(this.code);
+            this.yiShouCang.active = true;
+        }
+
+        else if (name == 'sp_mncg_zixuan2') {
+            if (GameData.selfStockList.indexOf(this.code) != -1) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '该股票已添加');
+                return;
+            }
+            let info = {
+                removed: false,
+                code: this.code,
+                isAiStock: false,
+            }
+            let CmdMncgEditStock = pb.CmdMncgEditStock;
+            let message = CmdMncgEditStock.create(info);
+            let buff = CmdMncgEditStock.encode(message).finish();
+            socket.send(pb.MessageId.Req_Game_MncgEditStockList, buff, (res) => {
+
+            })
+            GameData.selfStockList.push(this.code);
+        }
     }
 
     onDestroy() {

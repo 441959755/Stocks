@@ -1,3 +1,4 @@
+import { pb } from "../../../protos/proto";
 import GameCfgText from "../../../sctiprs/GameText";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -30,7 +31,7 @@ export default class NewClass extends cc.Component {
             this.zgHisData.forEach(el => {
                 let node = cc.instantiate(this.item);
                 this.content.addChild(node);
-
+                node.setPosition(0, 0);
                 let codeInfo = GameCfgText.getGPPKItemInfo(el);
 
                 let label = node.getComponent(cc.Label);
@@ -108,8 +109,47 @@ export default class NewClass extends cc.Component {
                     let node = cc.instantiate(this.item);
                     this.content.addChild(node);
                     let label = node.getComponent(cc.Label);
-                    label.string = info[0] + ' ' + info[1];
+                    let str = info[0].slice(1);
+                    label.string = str + ' ' + info[1];
                 }
+                let me = {
+                    code: info[0],
+                }
+                let CmdQueryAiSignal = pb.CmdQueryAiSignal;
+                let message1 = CmdQueryAiSignal.create(me);
+                let buff1 = CmdQueryAiSignal.encode(message1).finish();
+                socket.send(pb.MessageId.Req_QueryAiSignal, buff1, (res) => {
+
+                    console.log('股票的买卖信号' + JSON.stringify(res));
+
+                    let flag = 0;
+                    if (res.signals) {
+                        for (let i = res.signals.length - 1; i >= 0; i--) {
+                            if (res.signals[i].flag == 1) {
+                                flag = 1;
+                                break;
+                            }
+                            else if (res.signals[i].flag == -1) {
+                                flag = -1;
+                                break;
+                            }
+                        }
+                    }
+                    let str1 = '';
+                    if (flag < 0) {
+                        str1 = '建议买入';
+                    }
+                    else if (flag == 0) {
+                        str1 = '建议观望';
+                    }
+                    else {
+                        str1 = '建议卖出';
+                    }
+
+                    GlobalEvent.emit(EventCfg.OPENZNDRAW, info[0], str1);
+
+                })
+
             }
             else {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '输入的股票有误');

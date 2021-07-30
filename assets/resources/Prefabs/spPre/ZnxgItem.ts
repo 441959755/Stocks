@@ -40,7 +40,7 @@ export default class NewClass extends cc.Component {
             this.label[5].string = '建议卖出';
         }
 
-        if (data.todaySignal && data.todaySignal > 0) {
+        if (data.todaySignal && data.todaySignal == 0) {
             this.label[5].string = '建议观望';
         }
 
@@ -80,7 +80,7 @@ export default class NewClass extends cc.Component {
 
         }
         else if (name == 'item') {
-            GlobalEvent.emit(EventCfg.OPENZNDRAW, this._curData.code);
+            GlobalEvent.emit(EventCfg.OPENZNDRAW, this._curData.code, this.label[5].string);
         }
 
     }
