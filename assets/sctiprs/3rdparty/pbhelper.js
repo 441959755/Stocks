@@ -96,7 +96,6 @@ PBHelper.prototype = {
         console.log(JSON.stringify(data));
         let CmdQueryGameResult = pb.CmdQueryGameResult;
         let message = CmdQueryGameResult.create(data)
-
         let buff = CmdQueryGameResult.encode(message).finish();
         return buff;
     },
@@ -475,7 +474,7 @@ PBHelper.prototype = {
             let MncgState = pb.MncgState;
             let data = MncgState.decode(new Uint8Array(buff));
             console.log('同步模拟炒股状态' + JSON.stringify(data));
-
+            GameData.mncgDataList = data;
         }
         //同步所有炒股大赛状态
         else if (id == pb.MessageId.Sync_S2C_GameCgds) {

@@ -73,13 +73,11 @@ cc.Class({
 					global.socket = socket;
 				}
 			} else {
-				console.log('login err');
 				GlobalEvent.emit(EventCfg.LOADINGHIDE);
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');
 			}
 		})
 	},
-
 
 	initData() {
 		let SMSet = cc.sys.localStorage.getItem('SMSET');
@@ -342,7 +340,6 @@ cc.Class({
 		}
 
 	},
-
 
 	onDestroy() {
 		GameCfgText.releaseRes();

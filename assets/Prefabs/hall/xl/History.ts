@@ -112,7 +112,9 @@ export default class NewClass extends cc.Component {
         let it = 1;
 
         for (let i = datas.length - 1; i >= 0; i--) {
-            if (TIMETEMP.indexOf(datas[i].ts) != -1 && datas[i].gType == GameCfg.GameType) {
+            let index = TIMETEMP.indexOf(datas[i].ts);
+
+            if ((TIMETEMP.indexOf(datas[i].ts) != -1) && (datas[i].gType == GameCfg.GameType)) {
                 let node = cc.instantiate(this.historyItem);
                 let nodes = node.children;
                 this.content.addChild(node);
@@ -232,7 +234,7 @@ export default class NewClass extends cc.Component {
         else if (name == 'btnFuPan') {
             let nodes = event.target.parent.children;
             preNodes = nodes;
-            let ts = nodes[8].getComponent(cc.Label).string;
+            let ts = parseInt(nodes[8].getComponent(cc.Label).string);
 
             if (GameCfg.TIMETEMP.length <= 0) {
                 console.log('数据没保存');

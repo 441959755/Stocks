@@ -252,7 +252,7 @@ export default class NewClass extends cc.Component {
                         let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
                         if (this.gpData[index].close > max) {
                             //B
-                            this._str = '1）金叉后，即MA1在MA2之上（MA1 > MA2）;\n  2) 且MA1趋势向上（MA1(n) > MA1(n - 1) ）；\n 3）此时若股价上涨有效站上MA1时（即close > MA1 ）, 且股价反转上日K线（即close > 上日K线实体高价）；\n则可算短线买入信号“B”！'
+                            this._str = '1）均线金叉后，且短周期均线趋势还在向上; \n 2）此时若股价再次上涨有效站上短周期均线, 且股价反转突破昨日K线时；则可作短线买入信号“B”！'
 
                             if (this.curState != 'B') {
                                 this.onCreateTipsItem('短线转向买点');
@@ -272,8 +272,7 @@ export default class NewClass extends cc.Component {
                     let max = Math.min(this.gpData[index - 1].close, this.gpData[index - 1].open);
                     if (this.gpData[index].close < max) {
                         //S
-                        this._str = '1) 当MA1趋势转向下（MA1(n) <=  MA1(n-1)）；\n 2) 此时若股价有效跌破MA1线时（即close < MA1）, 且股价跌破上日K线（即close < 上日K线实体低价）；\n 则可算短线卖出信号S。'
-
+                        this._str = '1）当短周期均线趋势转平向下时，\n 2）此时若股价有效跌破短周期均线,且股价反转跌破昨日K线实体低价时； 则可作短线卖出信号“S”！'
 
                         if (this.curState != 'S') {
                             this.onCreateTipsItem('短线转向卖点')
@@ -293,7 +292,7 @@ export default class NewClass extends cc.Component {
                 if (this.gpData[index].close > min) {
                     //  if (this.gpData[index].low > this.gpData[index - 1].low) {
                     //B
-                    this._str = '1）下跌过程中(MA1<MA2)，当股价下跌远离MA1过大时（超过-10%时，即(MA1-close)/MA1>= 0.10）；\n  2）此时接下来K线若股价收盘价超过上日K线实体低价（MIN（上日K线开盘价，上日K线收盘价），最低价高于上日Ｋ线最低价（ｌｏｗ>上日K线Low）则股价会做超跌反弹；\n  短线可做买入信号“B”。'
+                    this._str = '1）下跌过程中，当股价下跌远离短周期均线过大时（超过-10%时）\n  2）接下来K线若股价不再创新低，且收盘价超过昨日K线实体低价时； 则股价会做超跌反弹，短线可作买入信号“B”。'
 
                     if (this.curState != 'B') {
                         this.onCreateTipsItem('乖离过大买点')
@@ -313,7 +312,7 @@ export default class NewClass extends cc.Component {
                 let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
                 if (this.gpData[index].close < max) {
                     //s
-                    this._str = '1）上涨过程中(MA1>MA2)，当股价上涨远离MA1过大时（超过10%，即(close-MA1)/MA1>= 0.10）；\n  2）此时后若股价收盘价跌破上日K线实体高价（阳线收盘价，阴线开盘价），则股价会做超买回落；\n短线可做卖出信号“S”'
+                    this._str = '1）上涨过程中，当股价上涨远离短周期均线过大时（超过10%时） 2）接下来K线若股价不再创新高，且收盘价跌破昨日K线实体高价时；则股价会做超买回落，短线可作卖出信号“S”。'
 
                     if (this.curState != 'S') {
                         this.onCreateTipsItem('乖离过大卖点')
@@ -336,7 +335,7 @@ export default class NewClass extends cc.Component {
                     let b = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
                     if (this.gpData[index].close > b) {
                         //
-                        this._str = '1）股价上穿均线： 当均线转平向上，若股价从均线下方上穿均线时，则此时可作为短线买入信号“B”，买入个股！'
+                        this._str = '当均线走平向上，若股价从均线下方上穿均线时，则此时可作为短线买入信号“B”。'
                         str = '上穿MA' + GameCfg.MAs[this.MAIndex] + '均线';
 
                         if (this.curState != 'B') {
@@ -355,7 +354,7 @@ export default class NewClass extends cc.Component {
             if (this.gpData[index - 1].close > this.maList[index - 1][this.MAIndex]) {
                 if (this.gpData[index].close < this.maList[index][this.MAIndex]) {
 
-                    this._str = '1）股价下穿均线： 股价之前在均线之上运行，当收盘股价下穿均线时，则此时可作为短线卖出信号“S”，卖出个股！'
+                    this._str = '股价之前在均线上方运行，但收盘股价下穿均线，则此时可作为短线卖出信号“S”。'
                     str = '下穿MA' + GameCfg.MAs[this.MAIndex] + '均线';
                     //S
 
@@ -376,7 +375,7 @@ export default class NewClass extends cc.Component {
                 if (this.maList[index][this.MAIndex1] >= this.maList[index - 1][this.MAIndex1] && this.maList[index][this.MAIndex2] >= this.maList[index - 1][this.MAIndex2]) {
                     if (this.JXState == 0) {
                         this.JXState = 1;
-                        this._str = '1）短期均线上穿中长期均线：当中长期均线趋势转平或向上时，此时若短期均线上穿中长期均线，则可作为短线买入信号“B”，买入个股！'
+                        this._str = '当中长期均线趋势转平向上时，此时若短期均线上穿中长期均线，则可作为短线买入信号“B”，买入个股！'
 
                         if (this.curState != 'B') {
                             this.onCreateTipsItem('均线金叉')
@@ -391,7 +390,7 @@ export default class NewClass extends cc.Component {
                             //    if (this.gpData[index].close > max) {
                             this.JXState = 1;
                             //B
-                            this._str = '1）短期均线上穿中长期均线：当中长期均线趋势转平或向上时，此时若短期均线上穿中长期均线，则可作为短线买入信号“B”，买入个股！'
+                            this._str = '当中长期均线趋势转平向上时，此时若短期均线上穿中长期均线，则可作为短线买入信号“B”，买入个股！'
 
                             if (this.curState != 'B') {
                                 this.onCreateTipsItem('均线金叉')
@@ -411,7 +410,7 @@ export default class NewClass extends cc.Component {
                 if (this.maList[index][this.MAIndex1] < this.maList[index][this.MAIndex2]) {
                     this.JXState = 2;
                     //S
-                    this._str = '1）短期均线下穿中长期均线： 当短期均线从上方下穿中长期均线时，可作为短线卖出信号“S”，卖出个股！'
+                    this._str = '当短期均线从上方下穿中长期均线时，可作为短线卖出信号“S”，卖出个股!'
 
                     if (this.curState != 'S') {
                         this.onCreateTipsItem('均线死叉')
@@ -431,7 +430,7 @@ export default class NewClass extends cc.Component {
             //1) MACD 金叉
             if (this.difList[index - 1] <= this.deaList[index - 1]) {
                 if (this.difList[index] > this.deaList[index]) {
-                    this._str = '1）MACD 金叉：之前DIF线一直在DEA线之下运行，但当个股收盘时，DIF（白线）上穿DEA(黄线），即为MACD金叉，可作为短线买入信号“B”；'
+                    this._str = '当个股收盘时，DIF（白线）从下向上穿越DEA(黄线），即为MACD金叉；可作为短线买入信号“B”。'
 
                     if (this.curState != 'B') {
                         this.onCreateTipsItem('MACD 金叉');
@@ -445,7 +444,7 @@ export default class NewClass extends cc.Component {
             //2) MACD 死叉
             if (this.difList[index - 1] >= this.deaList[index - 1]) {
                 if (this.difList[index] < this.deaList[index]) {
-                    this._str = '1）MACD死叉：之前DIF线一直在DEA线之上运行，但当个股收盘时，DIF（白线）下穿DEA(黄线），即为MACD死叉，可作为短线卖出信号“S”'
+                    this._str = '当个股收盘时，DIF（白线）从上往下穿越DEA(黄线），即为MACD死叉； 可作为短线卖出信号“S”。'
 
                     if (this.curState != 'S') {
                         this.onCreateTipsItem('MACD 死叉');
@@ -462,7 +461,7 @@ export default class NewClass extends cc.Component {
             if (this.difList[index - 1] < 0) {
                 if (this.difList[index] > 0) {
 
-                    this._str = '１） DIF白线从下向上穿越0轴：当DIF（白线）从下方向上穿越MACD的0轴时，代表由弱转强，可作为短线买入信号“B”，买入个股！'
+                    this._str = '当DIF（白线）从下向上穿越MACD的0轴时，代表由弱转强，可作为短线买入信号“B”。'
                     if (this.curState != 'B') {
                         this.onCreateTipsItem('DIF向上穿越0轴');
 
@@ -477,7 +476,7 @@ export default class NewClass extends cc.Component {
             if (this.difList[index - 1] > 0) {
                 if (this.difList[index] < 0) {
 
-                    this._str = '２） DIF白线从上向下穿越0轴：当DIF（白线）从0轴之上向下穿越0轴时，代表由强转弱，可作为短线卖出信号“S”，卖出个股！'
+                    this._str = '当DIF（白线）从上往下穿越MACD的0轴时，代表由强转弱，可作为短线卖出信号“S”。'
 
                     if (this.curState != 'S') {
                         this.onCreateTipsItem('DIF向下穿越0轴');
@@ -529,7 +528,7 @@ export default class NewClass extends cc.Component {
 
             if (this.FlagDing1 && this.FlagDing2) {
                 if (this.macdH2 > this.macdH1 && this.DIF2 <= this.DIF1) {
-                    this._str = '1） MACD 顶背离： 上涨过程中，当股价一波高于一波，而对应的DIF（白线）的波峰却没有新高，反而逐渐变低了，即为股价的ＭＡＣＤ顶背离现象，预示着股价将要回落下跌，短线可做为卖出信号“S”。'
+                    this._str = '上涨过程中，当股价一波高过一波，而对应的DIF（白线）的波峰却没有新高，反而逐渐变低了，即为股价的ＭＡＣＤ顶背离现象，预示着股价将要回落下跌，短线可做为卖出信号“S”。'
                     this.macdH1 = this.macdH2;
                     this.macdH2 = 0;
                     this.FlagDing1 = false;
@@ -625,7 +624,7 @@ export default class NewClass extends cc.Component {
                     this.DIF4 = 0;
                     this.DIF3 = this.DIF4;
                     //5）MACD底背离
-                    this._str = '１） MACD底背离： 下跌过程中，当股价一波低于一波，而对应的DIF（白线）的波谷却没有新低，反而逐渐高起来了，即为股价的ＭＡＣＤ底背离现象，预示着股价将要反弹上涨，短线可做为买入信号“B”；'
+                    this._str = '下跌过程中，当股价一波低于一波，而对应的DIF（白线）的波谷却没有新低，反而逐渐高起来了，即为股价的ＭＡＣＤ底背离现象，预示着股价将要反弹上涨，短线可做为买入信号“B”；'
                     if (this.curState != 'B') {
                         this.onCreateTipsItem('MACD底背离');
                         this.curState = 'B';
@@ -672,7 +671,7 @@ export default class NewClass extends cc.Component {
                             if (this.difList[index] > this.difList[index - 1]) {
                                 //B
                                 this.MACDState = 1;
-                                this._str = '１） MACD绿柱最低值转向： 下跌过程中，当股价连续下跌，其对应的MACD绿柱达到最长（即最低值），此后绿柱转向缩小时，预示着股价阶段性底部将到，短线会有反弹上涨机会，当绿柱缩小到DIF白线内时，可做为短线买入信号“Ｂ”；但是若绿柱再次放大时，注意止损“S”！'
+                                this._str = '当股价连续下跌，其对应的MACD绿柱达到最长，此后绿柱转向缩小时，预示着股价阶段性底部将到，短线会有反弹上涨机会，当绿柱缩小到DIF白线内时，此时可做为短线买入信号“Ｂ”。\n 绿柱再次放大（止损）：当绿柱再次放大时，股价跌破前面低点，可作短线止损卖出信号“S”！'
 
                                 if (this.curState != 'B') {
                                     this.onCreateTipsItem('绿柱最低值转向');
@@ -730,7 +729,7 @@ export default class NewClass extends cc.Component {
                             if (this.macdList[index] <= this.difList[index] || this.deaList[index] <= 0) {
                                 //s
                                 this.MACDState = 2;
-                                this._str = '1） MACD红柱最高值转向：股价上涨过程中，对应的MACD红柱逐渐变长，当达到最长（即最高值），此后柱子转向开始缩小时，预示着股价阶段性顶部已到，短线会有回落下跌，可做短线卖出信号“Ｓ”；但是股价很多时候只是短暂回调，因此当红柱再次放大时，可“B"信号再次买进个股！'
+                                this._str = '股价上涨过程中，对应的MACD红柱逐渐变长，当达到最长，此后红柱转向缩小时，预示着股价阶段性顶部将到，短线会有回落下跌，此时可做短线卖出信号“Ｓ”。'
 
 
                                 if (this.curState != 'S') {
@@ -743,7 +742,7 @@ export default class NewClass extends cc.Component {
                         } else if (this.deaList[index] <= 0) {
                             if (this.macdList[index] < this.macdList[index - 1]) {
                                 this.MACDState = 2;
-                                this._str = '1） MACD红柱最高值转向：股价上涨过程中，对应的MACD红柱逐渐变长，当达到最长（即最高值），此后柱子转向开始缩小时，预示着股价阶段性顶部已到，短线会有回落下跌，可做短线卖出信号“Ｓ”；但是股价很多时候只是短暂回调，因此当红柱再次放大时，可“B"信号再次买进个股！'
+                                this._str = '股价上涨过程中，对应的MACD红柱逐渐变长，当达到最长，此后红柱转向缩小时，预示着股价阶段性顶部将到，短线会有回落下跌，此时可做短线卖出信号“Ｓ”。'
 
 
                                 if (this.curState != 'S') {
@@ -769,7 +768,7 @@ export default class NewClass extends cc.Component {
                         if (this.gpData[index].close >= max) {
                             if (this.macdList[index] >= 0.04) {
                                 this.MACDState = 1;
-                                this._str = '1） MACD红柱最高值转向：股价上涨过程中，对应的MACD红柱逐渐变长，当达到最长（即最高值），此后柱子转向开始缩小时，预示着股价阶段性顶部已到，短线会有回落下跌，可做短线卖出信号“Ｓ”；但是股价很多时候只是短暂回调，因此当红柱再次放大时，可“B"信号再次买进个股！'
+                                this._str = 'MACD红柱时，股价很多时候只是短暂回调，因此当红柱再次放大时，股价向上突破时，短线可作“B"信号，再次买入个股！'
                                 if (this.curState != 'B') {
                                     this.onCreateTipsItem('红柱再次放大');
                                     this.curState = 'B';
@@ -786,15 +785,17 @@ export default class NewClass extends cc.Component {
             if (this.MACDState != 2) {
                 if (this.macdList[index - 1] > 0) {
                     if (this.macdList[index] < 0) {
-                        this.MACDState = 2;
-                        this._str = '1） MACD红柱最高值转向：股价上涨过程中，对应的MACD红柱逐渐变长，当达到最长（即最高值），此后柱子转向开始缩小时，预示着股价阶段性顶部已到，短线会有回落下跌，可做短线卖出信号“Ｓ”；但是股价很多时候只是短暂回调，因此当红柱再次放大时，可“B"信号再次买进个股！'
+                        if (Math.abs(this.macdList[index]) >= 0.04) {
+                            this.MACDState = 2;
+                            this._str = '1） MACD红柱最高值转向：股价上涨过程中，对应的MACD红柱逐渐变长，当达到最长（即最高值），此后柱子转向开始缩小时，预示着股价阶段性顶部已到，短线会有回落下跌，可做短线卖出信号“Ｓ”；但是股价很多时候只是短暂回调，因此当红柱再次放大时，可“B"信号再次买进个股！'
 
 
-                        if (this.curState != 'S') {
-                            this.onCreateTipsItem('红柱最高值转向');
-                            this.curState = 'S';
-                            StrategyAIData.onSellFunc();
-                            return;
+                            if (this.curState != 'S') {
+                                this.onCreateTipsItem('红柱最高值转向');
+                                this.curState = 'S';
+                                StrategyAIData.onSellFunc();
+                                return;
+                            }
                         }
                     }
                 }
@@ -813,7 +814,7 @@ export default class NewClass extends cc.Component {
                         if (this.KList[index] > this.DList[index]) {
                             //2）KDJ低位金叉
                             if (this.KList[index] < 30) {
-                                this._str = 'ＫＤＪ金叉：当K线（白线）从下向上穿越D线（黄线）并形成向上突破即为ＫＤＪ金叉；Ｋ值在30以下的为低位金叉，Ｋ值在7０之上的为高位金叉；可作为短线买入信号"B".'
+                                this._str = '当K线（白线）从下向上穿越D线（黄线）并形成向上突破，即为ＫＤＪ金叉；其中，Ｋ值在30以下的为低位金叉，Ｋ值在7０之上的为高位金叉；可作为短线买入信号"B".'
 
                                 if (this.curState != 'B') {
                                     this.onCreateTipsItem('KDJ低位金叉');
@@ -824,7 +825,7 @@ export default class NewClass extends cc.Component {
                             }
                             //3）KDJ中位金叉
                             else if (this.KList[index] <= 70 && this.KList[index] >= 30) {
-                                this._str = 'ＫＤＪ金叉：当K线（白线）从下向上穿越D线（黄线）并形成向上突破即为ＫＤＪ金叉；Ｋ值在30以下的为低位金叉，Ｋ值在7０之上的为高位金叉；可作为短线买入信号"B".'
+                                this._str = '当K线（白线）从下向上穿越D线（黄线）并形成向上突破，即为ＫＤＪ金叉；其中，Ｋ值在30以下的为低位金叉，Ｋ值在7０之上的为高位金叉；可作为短线买入信号"B".'
 
                                 if (this.curState != 'B') {
                                     this.onCreateTipsItem('KDJ中位金叉');
@@ -835,7 +836,7 @@ export default class NewClass extends cc.Component {
                             }
                             //4）KDJ高位金叉
                             else if (this.KList[index] > 70) {
-                                this._str = 'ＫＤＪ金叉：当K线（白线）从下向上穿越D线（黄线）并形成向上突破即为ＫＤＪ金叉；Ｋ值在30以下的为低位金叉，Ｋ值在7０之上的为高位金叉；可作为短线买入信号"B".'
+                                this._str = '当K线（白线）从下向上穿越D线（黄线）并形成向上突破，即为ＫＤＪ金叉；其中，Ｋ值在30以下的为低位金叉，Ｋ值在7０之上的为高位金叉；可作为短线买入信号"B".'
 
                                 if (this.curState != 'B') {
                                     this.onCreateTipsItem('KDJ高位金叉');
@@ -855,7 +856,7 @@ export default class NewClass extends cc.Component {
                     //2）KDJ高位死叉
                     if (this.KList[index] < this.DList[index]) {
                         if (this.KList[index] >= 70) {
-                            this._str = 'ＫＤＪ死叉：当K线从上向下穿越D线并形成向下突破即为ＫＤＪ死叉；Ｋ值在70以上的为高位死叉，Ｋ值在30之下的为低位死叉；可作为短线卖出信号"Ｓ" .'
+                            this._str = '当K线从上向下穿越D线并形成向下突破，即为ＫＤＪ死叉； 其中，Ｋ值在70以上的为高位死叉，Ｋ值在30之下的为低位死叉；可作为短线卖出信号"Ｓ".'
 
                             if (this.curState != 'S') {
                                 this.onCreateTipsItem('KDJ高位死叉');
@@ -866,7 +867,7 @@ export default class NewClass extends cc.Component {
                         }
                         //3）KDJ中位死叉
                         else if (this.KList[index] <= 70 && this.KList[index] > 30) {
-                            this._str = 'ＫＤＪ死叉：当K线从上向下穿越D线并形成向下突破即为ＫＤＪ死叉；Ｋ值在70以上的为高位死叉，Ｋ值在30之下的为低位死叉；可作为短线卖出信号"Ｓ" .'
+                            this._str = '当K线从上向下穿越D线并形成向下突破，即为ＫＤＪ死叉； 其中，Ｋ值在70以上的为高位死叉，Ｋ值在30之下的为低位死叉；可作为短线卖出信号"Ｓ".'
 
                             if (this.curState != 'S') {
                                 this.onCreateTipsItem('KDJ中位死叉');
@@ -877,7 +878,7 @@ export default class NewClass extends cc.Component {
                         }
                         //4) KDJ低位死叉
                         else if (this.KList[index] <= 30) {
-                            this._str = 'ＫＤＪ死叉：当K线从上向下穿越D线并形成向下突破即为ＫＤＪ死叉；Ｋ值在70以上的为高位死叉，Ｋ值在30之下的为低位死叉；可作为短线卖出信号"Ｓ" .'
+                            this._str = '当K线从上向下穿越D线并形成向下突破，即为ＫＤＪ死叉； 其中，Ｋ值在70以上的为高位死叉，Ｋ值在30之下的为低位死叉；可作为短线卖出信号"Ｓ".'
 
                             if (this.curState != 'S') {
                                 this.onCreateTipsItem('KDJ低位死叉');
@@ -899,7 +900,7 @@ export default class NewClass extends cc.Component {
             let max = Math.max(this.gpData[index - 1].close, this.gpData[index - 1].open);
             if (this.gpData[index].close < max && this.gpData[index].high <= this.gpData[index - 1].high && this.KDJCS) {
                 //s
-                this._str = '1） KDJ 超买： 当J值>=100时, 且连续3天以上，为KDJ超买区间，股价至少会形成短期头部，可作为短线卖出信号“Ｓ”。'
+                this._str = '当J值>=100时, 且连续3天以上，为KDJ超买现象，股价至少会形成短期头部，可作为短线卖出信号“Ｓ”。'
                 this.KDJCS = false;
                 if (this.curState != 'S') {
 
@@ -919,7 +920,7 @@ export default class NewClass extends cc.Component {
             let min = Math.min(this.gpData[index - 1].close, this.gpData[index - 1].open);
             if (this.gpData[index].close > min && this.gpData[index].low >= this.gpData[index - 1].low && this.KDJCB) {
                 //B
-                this._str = '１） KDJ 超卖当J值<=0时, 且连续3天以上，为KDJ超卖区间，股价至少会形成短期底部，可作为短线买入信号“Ｂ”；'
+                this._str = '当J值<=0时, 且连续3天以上，为KDJ超卖现象，股价至少会形成短期底部，可作为短线买入信号“Ｂ”。'
                 this.KDJCB = false;
                 if (this.curState != 'B') {
 
@@ -982,8 +983,9 @@ export default class NewClass extends cc.Component {
 
             if (this.kdjH2 && this.kdjflag1 && this.kdjflag2) {
 
-                if (this.d2 >= this.d1 && this.k2 < this.k1 && this.j2 < this.j1) {
+                if (this.k2 < this.k1 && this.j2 < this.j1) {
                     //5）KDJ顶背离
+                    this.kdjflag1 = false;
                     this.FlagDing = true;
                     this.FlagDi = false;
                     this.kdjl1 = 0;
@@ -1002,7 +1004,7 @@ export default class NewClass extends cc.Component {
                     this.k2 = 0;
                     this.j1 = this.j2;
                     this.j2 = 0;
-                    this._str = '1） KDJ 顶背离： 上涨过程中，当股价一波高于一波，而对应的D值的波峰却没有新高，反而逐渐变低，即为股价的KDJ顶背离，预示着股价将要回调下跌，可做短线卖出信号“Ｓ”。'
+                    this._str = '上涨过程中，当股价一波高于一波，而对应的D值的波峰却没有新高，反而逐渐变低，即为股价的KDJ顶背离，预示着股价将要回调下跌，可做短线卖出信号“Ｓ”。'
 
                     if (this.curState != 'S') {
                         this.onCreateTipsItem('KDJ顶背离');
@@ -1092,7 +1094,7 @@ export default class NewClass extends cc.Component {
             }
 
             if (this.kdjl2 && this.kdjflag3 && this.kdjflag4) {
-                if (this.kdjl1 > this.kdjl2 && this.d4 >= this.d3 && this.k4 > this.k3 && this.j4 > this.j3) {
+                if (this.k4 > this.k3 && this.j4 > this.j3) {
 
                     this.kdjflag3 = false
                     this.kdjflag4 = false;
@@ -1116,7 +1118,7 @@ export default class NewClass extends cc.Component {
                     this.j3 = this.j4;
                     this.j4 = 0;
                     //6）KDJ底背离
-                    this._str = '１） KDJ底背离：下跌过程中，当股价一波低于一波，而对应的D值（黄线）的波谷却没有新低，反而逐渐变高，即为股价的KDJ底背离，预示着价将有反弹上涨机会，可做短线买入信号“Ｂ”；'
+                    this._str = '下跌过程中，当股价一波低于一波，而对应的D值（黄线）的波谷却没有新低，反而逐渐变高，即为股价的KDJ底背离，预示着股价将有反弹上涨机会，可做短线买入信号“Ｂ”；'
                     if (this.curState != 'B') {
                         this.onCreateTipsItem('KDJ底背离');
                         this.curState = 'B';
@@ -1149,6 +1151,7 @@ export default class NewClass extends cc.Component {
                     this.j3 = this.j4;
                     this.j4 = 0;
                 }
+                this.kdjflag1 = false;
             }
 
         }
@@ -1246,7 +1249,7 @@ export default class NewClass extends cc.Component {
                 if (this.gpData[index - 1].low < this.BollList[index - 1][0] && this.gpData[index].close > this.BollList[index][0]) {
                     if (this.gpData[index].close > this.gpData[index - 1].close && this.gpData[index].low > this.gpData[index - 1].low) {
                         //B
-                        this._str = '股价突破中轨：当BOLL通道趋势有转平向上时，当股价从下向上突破中轨时，可做短线买入信号Ｂ；'
+                        this._str = '当BOLL通道趋势有转平向上时，当股价从下向上突破中轨时，可做短线买入信号Ｂ；；'
 
                         if (this.curState != 'B') {
 
@@ -1264,7 +1267,7 @@ export default class NewClass extends cc.Component {
             if (this.gpData[index - 1].close >= this.BollList[index - 1][0]) {
                 if (this.gpData[index].close < this.BollList[index][0]) {
                     //s
-                    this._str = '股价跌破中轨：当BOLL通道趋势有转平向下时，此时股价从上向下跌破中轨，可做短线卖出信号Ｓ。'
+                    this._str = '当BOLL通道趋势有转平向下时，此时股价从上向下跌破中轨，可做短线卖出信号Ｓ。'
 
                     if (this.curState != 'S') {
                         this.preBollInfo = 2;
@@ -1284,7 +1287,7 @@ export default class NewClass extends cc.Component {
                     let max = Math.max(this.gpData[index - 1].open, this.gpData[index - 1].close);
                     if (this.gpData[index].close < max) {
                         //s
-                        this._str = '1）股价触碰上轨：股价由下向上突破上轨，但没有效站稳上轨时；或股价远离上轨后，转向回落时；可作为短线卖出信号“S”，止赢个股！'
+                        this._str = '股价由下向上突破上轨，但没有效站稳上轨时；或股价远离上轨后，转向回落时；可作为短线卖出信号“S”，止赢个股！'
 
                         if (this.curState != 'S') {
                             this.preBollInfo = 3;
@@ -1297,7 +1300,7 @@ export default class NewClass extends cc.Component {
                     else if (this.BollList[index][0] <= this.BollList[index - 1][0]) {
                         if (this.BollList[index][1] <= this.BollList[index - 1][1] || this.BollList[index][2] <= this.BollList[index - 1][2]) {
                             //s
-                            this._str = '1）股价触碰上轨：股价由下向上突破上轨，但没有效站稳上轨时；或股价远离上轨后，转向回落时；可作为短线卖出信号“S”，止赢个股！'
+                            this._str = '股价由下向上突破上轨，但没有效站稳上轨时；或股价远离上轨后，转向回落时；可作为短线卖出信号“S”，止赢个股！'
 
                             if (this.curState != 'S') {
                                 this.preBollInfo = 3;
@@ -1316,7 +1319,7 @@ export default class NewClass extends cc.Component {
             if (this.BollState == 1) {
                 if (this.gpData[index].close > this.BollList[index][1]) {
                     //B
-                    this._str = '１） 爆发性突破上轨： 布林带喇叭开口情形下，当价格沿BOLL上轨突破运行时，可做短线买入信号“B”；该情况下一般为爆发性单边上涨行情，坚定持股，直至价格脱离上轨区域，股价跌破中轨时，再做卖出信号“S”；'
+                    this._str = '布林带喇叭开口情形下，当价格沿BOLL上轨突破运行时，可做短线买入信号“B”；该情况下一般为爆发性单边上涨行情，坚定持股，直至价格脱离上轨区域，股价跌破中轨时，再做卖出信号“S”；'
 
                     if (this.curState != 'B') {
                         this.preBollInfo = 4;
@@ -1327,6 +1330,18 @@ export default class NewClass extends cc.Component {
                     }
                 }
             }
+
+            if (this.preBollInfo == 4 && this.gpData[index].close < this.BollList[index][1]) {
+                this._str = '布林带喇叭开口情形下，当价格沿BOLL上轨突破运行时，可做短线买入信号“B”；该情况下一般为爆发性单边上涨行情，坚定持股，直至价格脱离上轨区域，股价跌破中轨时，再做卖出信号“S”；'
+
+                if (this.curState != 's') {
+                    this.preBollInfo = 0;
+                    this.onCreateTipsItem('股价止损');
+                    this.curState = 's';
+                    StrategyAIData.onSellFunc();
+                    return;
+                }
+            }
         }
 
         if (GameCfg.GameSet.strategy == '经典用法' || GameCfg.GameSet.strategy == '上下轨间震荡') {
@@ -1335,7 +1350,7 @@ export default class NewClass extends cc.Component {
                 if (this.gpData[index - 1].close >= this.BollList[index - 1][2]) {
                     if (this.gpData[index].close < this.BollList[index][2]) {
                         //s
-                        this._str = '1） 爆发性跌破下轨： 喇叭开口情形下，当价格沿BOLL下轨跌破时，可做短线卖出信号“Ｓ”； 该情况下一般为爆发性单边杀跌行情，持币观望！'
+                        this._str = '布林带喇叭开口情形下，当价格沿BOLL下轨跌破时，可做短线卖出信号“Ｓ”；该情况下一般为爆发性单边杀跌行情，持币观望！'
 
                         if (this.curState != 'S') {
                             this.preBollInfo = 5;
@@ -1510,7 +1525,7 @@ export default class NewClass extends cc.Component {
                 if (this.EXPMA2[index] >= this.EXPMA2[index - 1] && this.EXPMA1[index] >= this.EXPMA1[index - 1]) {
                     if (this.EXPMA1[index] > this.EXPMA2[index]) {
                         //B
-                        this._str = '1）当黄色EXP2均线走平转向上趋势时；2）此时若白色EXP1均线金叉黄色EXP2均线时；可做买入信号"B"， 短线买入个股！'
+                        this._str = '白色EXP1均线上穿黄色EXP2均线(EXP2均线走平和向上趋势)；可做短线买入信号"B"。'
 
                         if (this.curState != 'B') {
 

@@ -5,7 +5,6 @@ import GameCfg from '../game/GameCfg';
 import { pb } from '../../protos/proto';
 
 import GameCfgText from '../GameText';
-import HttpUtils from '../common/net/HttpUtils';
 import ComUtils from '../Utils/ComUtils';
 
 const { ccclass, property } = cc._decorator;
@@ -1022,6 +1021,7 @@ export default class NewClass extends cc.Component {
 		GameCfg.enterGameCache = data;
 
 		GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, data);
+
 
 	}
 

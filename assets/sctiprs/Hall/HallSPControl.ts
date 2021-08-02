@@ -17,7 +17,6 @@ export default class NewClass extends cc.Component {
     znDraw: cc.Node = null;
 
 
-
     onLoad() {
         GlobalEvent.on(EventCfg.OPENZNXG, this.onLoadZNXGLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZGLAYER, this.openZGLayer.bind(this), this);
@@ -92,7 +91,6 @@ export default class NewClass extends cc.Component {
     }
 
 
-
     onDestroy() {
         GlobalEvent.off(EventCfg.OPENZNXG);
         GlobalEvent.off(EventCfg.OPENZGLAYER);
@@ -101,6 +99,7 @@ export default class NewClass extends cc.Component {
         LoadUtils.releaseRes('Prefabs/spPre/znDrawLayer');
         LoadUtils.releaseRes('Prefabs/spPre/znxgLayer');
         LoadUtils.releaseRes('Prefabs/spPre/zgLayer');
+        LoadUtils.releaseRes('Prefabs/spPre/myxgLayer');
     }
 
 

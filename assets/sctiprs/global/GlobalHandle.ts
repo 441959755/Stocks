@@ -25,7 +25,7 @@ export default class GlobalHandle {
 
     //游戏结束
     public static onCmdGameOverReq(datas) {
-        console.log(datas);
+        console.log('上传游戏数据' + JSON.stringify(datas));
         socket.send(pb.MessageId.Req_Game_Over, PB.onCmdGameOverConvertToBuff(datas), (info) => {
             console.log('GameOverInfo' + JSON.stringify(info));
         })

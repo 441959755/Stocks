@@ -295,6 +295,8 @@ export default class GameData {
 
     public static selfStockList = [];  // 自能选股收藏股票列表
 
+    public static mncgDataList = null;  //模拟闯关数据
+
 
 
 }

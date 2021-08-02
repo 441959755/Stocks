@@ -1,5 +1,4 @@
 //import ActionUtils from "../Utils/ActionUtils";
-import ActionUtils from "../../../sctiprs/Utils/ActionUtils";
 import GlobalEvent from '../../../sctiprs/Utils/GlobalEvent';
 import EventCfg from '../../../sctiprs/Utils/EventCfg';
 
@@ -79,9 +78,7 @@ export default class NewClass extends cc.Component {
 
     doty = [];
 
-
     onLoad() {
-
         this.monthBg.on('touchstart', (event) => {
             let datas = this.yieldInfo.results;
             if (datas.length <= 0) {
@@ -160,8 +157,9 @@ export default class NewClass extends cc.Component {
             pos1 = parseInt(this.vertical1.x / w + '');
             this.vertical1.x = (pos1) * w;
         }
-        if (this.pos != pos1) {
+        if (!this.daysData[pos1]) { return }
 
+        if (this.pos != pos1) {
             this.tipsNode.active = true;
             if (pos1 <= 10 || pos1 >= 25) {
                 this.tipsNode.scaleX = 1;
@@ -225,11 +223,14 @@ export default class NewClass extends cc.Component {
         let currCount = 0, currCvs = 0;    //这天的训练次数 收益曲线
 
         for (let i = 0; i < datas.length; i++) {
+            let data1 = new Date(datas[i].ts * 1000);
+            let month1 = data1.getMonth() + 1;
+            if (month1 != month) {
+                continue;
+            }
 
             zongjinge += datas[i].userProfit;
             zonglilv += datas[i].userProfitRate;
-
-            let data1 = new Date(datas[i].ts * 1000);
 
             let day1 = data1.getDate();
             if (!xlCount[day1]) {
