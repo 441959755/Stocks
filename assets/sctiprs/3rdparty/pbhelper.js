@@ -335,6 +335,8 @@ PBHelper.prototype = {
             if (data.uid == GameData.userID) {
                 GameData.RoomType = 0;
                 GameData.selfEnterRoomData = null;
+                GameData.roomId = 0;
+                GameData.roomHostID = 0;
             }
             GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }

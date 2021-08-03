@@ -89,7 +89,7 @@ export default class NewClass extends cc.Component {
             this.gameSet1 = GameData.JJPKSet;
         }
         else if (this.itemData.gType == pb.GameType.JJ_ChuangGuan) {
-            this.modeLabel.string = '闯  关赛';
+            this.modeLabel.string = '闯 关 赛';
         }
         else if (this.itemData.gType == pb.GameType.JJ_QiHuo) {
             this.modeLabel.string = '期货大战';
@@ -189,8 +189,6 @@ export default class NewClass extends cc.Component {
                 }
                 this.onGamenterStart(true);
             });
-
-
         }
     }
 
@@ -223,7 +221,7 @@ export default class NewClass extends cc.Component {
         }
 
         GameCfg.enterGameCache = cache;
-
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         EnterGameControl.onClearPreGameDataEnter(cache, flag);
     }
 

@@ -79,6 +79,7 @@ export default class NewClass extends cc.Component {
             }
             GameData.RoomType = 1;
             GameData.roomId = res.id;
+            GameData.roomHostID = GameData.userID;
             this.node.active = false;
             GlobalEvent.emit(EventCfg.OPENROOM);
 

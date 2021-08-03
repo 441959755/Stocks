@@ -6,7 +6,7 @@ import GlobalHandle from "../global/GlobalHandle";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import PopupManager from "../Utils/PopupManager";
-import ComUtils from "../Utils/ComUtils";
+import { LocationPoint } from "../global/LocationPoint";
 
 
 const { ccclass, property } = cc._decorator;
@@ -109,6 +109,7 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         if (name == 'blackbtn') {
             this.node.active = false;
+            GameData.locationLayer = LocationPoint.HALL;
         }
         //点击查看更多
         else if (name == 'cgs_ckgd') {
@@ -447,6 +448,7 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             // GlobalEvent.emit(EventCfg.OPENCGSLVRANK, res);
             //  this.StageRankData = res;
+            GameData.locationLayer = LocationPoint.JJ_ChuangGuanOtherHis;
             PopupManager.loadStageRank('cgsLvRank', res);
 
         })

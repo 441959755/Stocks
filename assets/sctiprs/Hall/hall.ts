@@ -9,6 +9,7 @@ import GlobalHandle from '../global/GlobalHandle';
 import StrategyAIData from '../game/StrategyAIData';
 import GameData from '../GameData';
 import LoadUtils from '../Utils/LoadUtils';
+import { LocationPoint } from '../global/LocationPoint';
 
 const { ccclass, property } = cc._decorator;
 
@@ -290,6 +291,11 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(EventCfg.INVITEMESSAGE, this.onShowInviteBox.bind(this), this);
 
+		GlobalEvent.on(EventCfg.ROOMLEAVE, (data) => {
+			if (data.uid == GameData.userID) {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
+			}
+		}, this);
 	}
 
 
@@ -311,7 +317,7 @@ export default class NewClass extends cc.Component {
 		else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 			event = { target: { name: 'toggle1' } }
 		}
-		else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+		else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis) {
 			event = { target: { name: 'toggle1' } }
 		}
 
@@ -336,6 +342,16 @@ export default class NewClass extends cc.Component {
 				}, 800)
 			}
 		}
+
+		//房间已解散
+		if (GameData.roomId === 0) {
+			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
+		}
+		//进入房间
+		else if (GameData.roomId) {
+			GlobalEvent.emit(EventCfg.OPENROOM);
+		}
+
 	}
 
 
@@ -489,7 +505,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.OPENQHLAYER);
 		GlobalEvent.off(EventCfg.OPENHELPLAYER);
 		GlobalEvent.off(EventCfg.OPENSETLAYER);
-
+		GlobalEvent.off(EventCfg.ROOMLEAVE);
 		ComUtils.onDestory();
 		GameData.selfEnterRoomData = null;
 	}
