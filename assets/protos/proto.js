@@ -188,6 +188,8 @@ $root.pb = (function () {
      * @property {number} Rep_Hall_GetLevelRanking=3040 Rep_Hall_GetLevelRanking value
      * @property {number} Req_Hall_GetFameRanking=3041 Req_Hall_GetFameRanking value
      * @property {number} Rep_Hall_GetFameRanking=3042 Rep_Hall_GetFameRanking value
+     * @property {number} Req_Hall_GetFameRankingWeekly=3043 Req_Hall_GetFameRankingWeekly value
+     * @property {number} Rep_Hall_GetFameRankingWeekly=3044 Rep_Hall_GetFameRankingWeekly value
      * @property {number} Req_Hall_Logout=3999 Req_Hall_Logout value
      * @property {number} Rep_Hall_Logout=4000 Rep_Hall_Logout value
      * @property {number} Req_Game_Login=4001 Req_Game_Login value
@@ -355,6 +357,8 @@ $root.pb = (function () {
         values[valuesById[3040] = "Rep_Hall_GetLevelRanking"] = 3040;
         values[valuesById[3041] = "Req_Hall_GetFameRanking"] = 3041;
         values[valuesById[3042] = "Rep_Hall_GetFameRanking"] = 3042;
+        values[valuesById[3043] = "Req_Hall_GetFameRankingWeekly"] = 3043;
+        values[valuesById[3044] = "Rep_Hall_GetFameRankingWeekly"] = 3044;
         values[valuesById[3999] = "Req_Hall_Logout"] = 3999;
         values[valuesById[4000] = "Rep_Hall_Logout"] = 4000;
         values[valuesById[4001] = "Req_Game_Login"] = 4001;
@@ -20812,6 +20816,7 @@ $root.pb = (function () {
          * @property {number|Long|null} [ts] StockOrder ts
          * @property {number|null} [id] StockOrder id
          * @property {number|null} [node] StockOrder node
+         * @property {number|null} [cost] StockOrder cost
          */
 
         /**
@@ -20910,6 +20915,14 @@ $root.pb = (function () {
         StockOrder.prototype.node = 0;
 
         /**
+         * StockOrder cost.
+         * @member {number} cost
+         * @memberof pb.StockOrder
+         * @instance
+         */
+        StockOrder.prototype.cost = 0;
+
+        /**
          * Creates a new StockOrder instance using the specified properties.
          * @function create
          * @memberof pb.StockOrder
@@ -20953,6 +20966,8 @@ $root.pb = (function () {
                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.id);
             if (message.node != null && Object.hasOwnProperty.call(message, "node"))
                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.node);
+            if (message.cost != null && Object.hasOwnProperty.call(message, "cost"))
+                writer.uint32(/* id 11, wireType 1 =*/89).double(message.cost);
             return writer;
         };
 
@@ -21016,6 +21031,9 @@ $root.pb = (function () {
                         break;
                     case 10:
                         message.node = reader.int32();
+                        break;
+                    case 11:
+                        message.cost = reader.double();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -21101,6 +21119,9 @@ $root.pb = (function () {
             if (message.node != null && message.hasOwnProperty("node"))
                 if (!$util.isInteger(message.node))
                     return "node: integer expected";
+            if (message.cost != null && message.hasOwnProperty("cost"))
+                if (typeof message.cost !== "number")
+                    return "cost: number expected";
             return null;
         };
 
@@ -21202,6 +21223,8 @@ $root.pb = (function () {
                 message.id = object.id | 0;
             if (object.node != null)
                 message.node = object.node | 0;
+            if (object.cost != null)
+                message.cost = Number(object.cost);
             return message;
         };
 
@@ -21237,6 +21260,7 @@ $root.pb = (function () {
                     object.ts = options.longs === String ? "0" : 0;
                 object.id = 0;
                 object.node = 0;
+                object.cost = 0;
             }
             if (message.orderId != null && message.hasOwnProperty("orderId"))
                 if (typeof message.orderId === "number")
@@ -21264,6 +21288,8 @@ $root.pb = (function () {
                 object.id = message.id;
             if (message.node != null && message.hasOwnProperty("node"))
                 object.node = message.node;
+            if (message.cost != null && message.hasOwnProperty("cost"))
+                object.cost = options.json && !isFinite(message.cost) ? String(message.cost) : message.cost;
             return object;
         };
 
@@ -39814,6 +39840,8 @@ $root.pb = (function () {
                     case 3040:
                     case 3041:
                     case 3042:
+                    case 3043:
+                    case 3044:
                     case 3999:
                     case 4000:
                     case 4001:
@@ -40238,6 +40266,14 @@ $root.pb = (function () {
                 case "Rep_Hall_GetFameRanking":
                 case 3042:
                     message.id = 3042;
+                    break;
+                case "Req_Hall_GetFameRankingWeekly":
+                case 3043:
+                    message.id = 3043;
+                    break;
+                case "Rep_Hall_GetFameRankingWeekly":
+                case 3044:
+                    message.id = 3044;
                     break;
                 case "Req_Hall_Logout":
                 case 3999:
@@ -41704,6 +41740,8 @@ $root.pb = (function () {
                     case 3040:
                     case 3041:
                     case 3042:
+                    case 3043:
+                    case 3044:
                     case 3999:
                     case 4000:
                     case 4001:
@@ -42135,6 +42173,14 @@ $root.pb = (function () {
                 case "Rep_Hall_GetFameRanking":
                 case 3042:
                     message.id = 3042;
+                    break;
+                case "Req_Hall_GetFameRankingWeekly":
+                case 3043:
+                    message.id = 3043;
+                    break;
+                case "Rep_Hall_GetFameRankingWeekly":
+                case 3044:
+                    message.id = 3044;
                     break;
                 case "Req_Hall_Logout":
                 case 3999:

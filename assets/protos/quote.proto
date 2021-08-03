@@ -71,7 +71,7 @@ message QuoteItem {
 	double amount = 6;      // 成交额
 	uint64 count = 7;		// 成交笔数
 	double open = 8;        // 开盘价
-	double close = 9;       // 收盘价
+	double close = 9;       // 收盘价（意义说明：对于日K为当日收盘价，对于分时为昨日收盘价）
 	double high = 10;       // 最高价
 	double low = 11;        // 最低价
 

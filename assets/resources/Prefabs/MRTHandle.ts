@@ -21,8 +21,10 @@ export default class NewClass extends cc.Component {
     initShow() {
 
         this.MRTData.forEach((el, index) => {
+
             let node = cc.instantiate(this.item);
             this.content.addChild(node);
+            node.setPosition(0, 0);
 
             let RankNode = node.getChildByName('node');
             let nodes = RankNode.children;
@@ -51,16 +53,6 @@ export default class NewClass extends cc.Component {
 
             let countLabel = node.getChildByName('label').getComponent(cc.Label);
 
-            if (!el.icon || el.icon == 'default_icon' || el.icon == 'default.jpg') {
-
-            }
-            else {
-                ComUtils.onLoadHead(el.icon, (res) => {
-                    let texture = new cc.SpriteFrame(res);
-                    head.spriteFrame = texture;
-                })
-            }
-
             if (el.nickname) {
                 username.string = el.nickname;
             } else {
@@ -79,6 +71,16 @@ export default class NewClass extends cc.Component {
 
             if (el.cgsClearance == 0) {
                 node.active = false;
+            }
+
+            if (!el.icon || el.icon == 'default_icon' || el.icon == 'default.jpg') {
+
+            }
+            else {
+                ComUtils.onLoadHead(el.icon, (res) => {
+                    let texture = new cc.SpriteFrame(res);
+                    head.spriteFrame = texture;
+                })
             }
 
         });

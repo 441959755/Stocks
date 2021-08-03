@@ -16,12 +16,30 @@ export default class NewClass extends cc.Component {
 
     znDraw: cc.Node = null;
 
+    zxgpBox: cc.Node = null;
+
 
     onLoad() {
         GlobalEvent.on(EventCfg.OPENZNXG, this.onLoadZNXGLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZGLAYER, this.openZGLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZNDRAW, this.openZNDraw.bind(this), this);
         GlobalEvent.on(EventCfg.OPENMYXG, this.openMyxgLayer.bind(this), this);
+        GlobalEvent.on(EventCfg.OPENADDZXGPBOX, this.openAddZxgpBox.bind(this), this);
+    }
+
+    openAddZxgpBox() {
+        if (this.zxgpBox) {
+            this.zxgpBox.active = true;
+        }
+        else {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            LoadUtils.loadRes('Prefabs/spPre/addZXGPBox', (pre) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                this.zxgpBox = cc.instantiate(pre);
+                this.node.addChild(this.zxgpBox);
+                this.zxgpBox.active = true;
+            })
+        }
     }
 
     openZNDraw(code, str) {
@@ -96,10 +114,12 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENZGLAYER);
         GlobalEvent.off(EventCfg.OPENZNDRAW);
         GlobalEvent.off(EventCfg.OPENMYXG);
+        GlobalEvent.off(EventCfg.OPENADDZXGPBOX);
         LoadUtils.releaseRes('Prefabs/spPre/znDrawLayer');
         LoadUtils.releaseRes('Prefabs/spPre/znxgLayer');
         LoadUtils.releaseRes('Prefabs/spPre/zgLayer');
         LoadUtils.releaseRes('Prefabs/spPre/myxgLayer');
+        LoadUtils.releaseRes('Prefabs/spPre/addZXGPBox');
     }
 
 

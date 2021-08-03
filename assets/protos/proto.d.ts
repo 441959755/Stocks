@@ -125,6 +125,8 @@ export namespace pb {
         Rep_Hall_GetLevelRanking = 3040,
         Req_Hall_GetFameRanking = 3041,
         Rep_Hall_GetFameRanking = 3042,
+        Req_Hall_GetFameRankingWeekly = 3043,
+        Rep_Hall_GetFameRankingWeekly = 3044,
         Req_Hall_Logout = 3999,
         Rep_Hall_Logout = 4000,
         Req_Game_Login = 4001,
@@ -7679,6 +7681,9 @@ export namespace pb {
 
         /** StockOrder node */
         node?: (number|null);
+
+        /** StockOrder cost */
+        cost?: (number|null);
     }
 
     /** Represents a StockOrder. */
@@ -7719,6 +7724,9 @@ export namespace pb {
 
         /** StockOrder node. */
         public node: number;
+
+        /** StockOrder cost. */
+        public cost: number;
 
         /**
          * Creates a new StockOrder instance using the specified properties.

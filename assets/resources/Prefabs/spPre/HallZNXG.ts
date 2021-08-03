@@ -231,6 +231,7 @@ export default class NewClass extends cc.Component {
         let info = {
             codes: this.collectList,
         }
+
         let CmdQueryAiStockList = pb.CmdQueryAiStockList;
         let message = CmdQueryAiStockList.create(info);
         let buff = CmdQueryAiStockList.encode(message).finish();
@@ -240,12 +241,15 @@ export default class NewClass extends cc.Component {
             console.log('查询AI选股的股票列表' + JSON.stringify(res));
 
             res.items.forEach((el, index) => {
+                console.log(this.content2.children[index]);
                 if (!this.content2.children[index]) {
-                    this.content2.children[index] = cc.instantiate(this.preItem2);
-                    this.content2.addChild(this.content2.children[index]);
+                    let node = cc.instantiate(this.preItem2);
+                    this.content2.addChild(node);
                 }
+
                 let handle = this.content2.children[index].getComponent('ZnxgItem2');
                 handle.onShow(el, index);
+
             });
         })
 

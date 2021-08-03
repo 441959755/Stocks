@@ -662,6 +662,7 @@ message StockOrder {
 	int64 ts = 8;		// 成交时间戳
 	int32 id = 9;		// 炒股大赛ID
 	int32 node = 10;	// 订单所在的节点
+	double cost = 11;	// 买入均价（针对卖出订单）
 }
 message StockOrderList {
 	repeated StockOrder items = 1;	// 订单列表

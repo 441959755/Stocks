@@ -129,13 +129,7 @@ PBHelper.prototype = {
 
     onAdClickedConvertTpBuff(data) {
         let AdClicked = pb.AdClicked;
-        let message = AdClicked.create({
-            uid: data.uid,
-            pos: data.pos,
-            url: data.url,
-            from: data.from,
-        })
-
+        let message = AdClicked.create(data)
         let buff = AdClicked.encode(message).finish();
         return buff;
     },
@@ -143,24 +137,16 @@ PBHelper.prototype = {
     // 查询期货行情
     onCmdQuoteQueryFutureConverToBuff(data) {
         let CmdQuoteQueryFuture = pb.CmdQuoteQueryFuture;
-        let message = CmdQuoteQueryFuture.create({
-            ktype: data.ktype,
-            code: data.code,
-            from: data.from,
-            total: data.total,
-            to: data.to,
-        })
+        let message = CmdQuoteQueryFuture.create(data)
         let buff = CmdQuoteQueryFuture.encode(message).finish();
         return buff;
     },
 
     // 查询游戏操作步骤
     onCmdGetGameOperations(data) {
+        console.log('游戏操作步骤数据' + JSON.stringify(data));
         let CmdGetGameOperations = pb.CmdGetGameOperations;
-        let message = CmdGetGameOperations.create({
-            uid: data.uid,
-            ts: data.ts,
-        })
+        let message = CmdGetGameOperations.create(data)
         let buff = CmdGetGameOperations.encode(message).finish();
 
         return buff;
@@ -208,7 +194,6 @@ PBHelper.prototype = {
         let message = CmdResetGameCounter.create(data);
         let buff = CmdResetGameCounter.encode(message).finish();
         return buff;
-
     },
 
 
@@ -497,7 +482,10 @@ PBHelper.prototype = {
             let data = GameProperties.decode(new Uint8Array(buff));
             console.log('同步实时行情' + JSON.stringify(data));
         }
+        //关注/删除股票应答：无
+        else if (id == pb.MessageId.Rep_Game_MncgEditStockList) {
 
+        }
     }
 }
 

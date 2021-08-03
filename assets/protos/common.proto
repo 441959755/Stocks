@@ -156,6 +156,8 @@ enum MessageId {
 	Rep_Hall_GetLevelRanking = 3040;		// 查询等级排行应答：RankingList
 	Req_Hall_GetFameRanking = 3041;			// 查询威望排行：无包体
 	Rep_Hall_GetFameRanking = 3042;			// 查询威望排行应答：RankingList
+	Req_Hall_GetFameRankingWeekly = 3043;	// 查询威望周排行：无包体
+	Rep_Hall_GetFameRankingWeekly = 3044;	// 查询威望周排行应答：RankingList
 
 	Req_Hall_Logout = 3999;					// 登出：无
 	Rep_Hall_Logout = 4000;					// 登出应答：无（发送请求成功后会自动断开tcp长连接）

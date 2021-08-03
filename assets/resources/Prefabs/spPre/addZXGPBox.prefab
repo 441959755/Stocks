@@ -106,7 +106,7 @@
     "_prefab": {
       "__id__": 5
     },
-    "_opacity": 180,
+    "_opacity": 200,
     "_color": {
       "__type__": "cc.Color",
       "r": 0,
@@ -1312,7 +1312,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 600,
+      "width": 598,
       "height": 60
     },
     "_anchorPoint": {
@@ -1324,7 +1324,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -300,
+        -298,
         30,
         0,
         0,
@@ -1567,7 +1567,7 @@
     "_useOriginalSize": false,
     "_string": "",
     "returnType": 0,
-    "maxLength": 8,
+    "maxLength": 40,
     "_tabIndex": 0,
     "editingDidBegan": [],
     "textChanged": [],
@@ -1654,7 +1654,9 @@
       "__id__": 1
     },
     "_enabled": true,
-    "editBox": null,
+    "editBox": {
+      "__id__": 41
+    },
     "_id": ""
   },
   {
