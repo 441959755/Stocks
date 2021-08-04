@@ -353,7 +353,13 @@ export default class NewClass extends cc.Component {
             code = (code + '').slice(1);
         }
 
-        this.cLabel[0].string = items[1];
+        if (items) {
+            this.cLabel[0].string = items[1];
+        }
+        else {
+            console.log('当前配置上没有');
+        }
+
         this.cLabel[1].string = code;
 
         this.cLabel[2].string = data.price;
@@ -372,11 +378,16 @@ export default class NewClass extends cc.Component {
         this.cLabel[8].string = ComUtils.changeTwoDecimal(data.low);
         this.cLabel[9].string = ComUtils.changeTwoDecimal(preData.close);
 
-        let hs = data.volume / items[4] * 100;
-        if (items[4] == 0) {
-            hs = 1
+        if (items) {
+            let hs = data.volume / items[4] * 100;
+            if (!items || items[4] == 0) {
+                hs = 1
+            }
+            this.cLabel[10].string = ComUtils.changeTwoDecimal(hs) + '%';
+        } else {
+            this.cLabel[10].string = 1 + '';
         }
-        this.cLabel[10].string = ComUtils.changeTwoDecimal(hs) + '%';
+
         this.cLabel[11].string = ComUtils.numberConvertUnit(data.amount);
 
         if (zf < 0) {
@@ -427,7 +438,6 @@ export default class NewClass extends cc.Component {
 
                 if (this.ktype == pb.KType.Min) {
                     GameCfg.beg_end[0] = 0;
-
                 }
 
                 let mixWidth = 6;
@@ -598,7 +608,7 @@ export default class NewClass extends cc.Component {
         //点击模以
         else if (name == 'sp_btn_moni') {
 
-
+            GlobalEvent.emit(EventCfg.OPENMYXG);
         }
 
         else if (name == 'sp_btn_xunlian') {

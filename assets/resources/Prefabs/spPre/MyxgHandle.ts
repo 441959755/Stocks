@@ -24,6 +24,18 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     item2: cc.Node = null;
 
+    @property(cc.Label)
+    zzcLa: cc.Label = null;
+
+    @property(cc.Label)
+    kczcLa: cc.Label = null;
+
+    @property(cc.Label)
+    cczcLa: cc.Label = null;
+
+    @property(cc.Label)
+    wtzcLa: cc.Label = null;
+
 
     start() {
 
@@ -58,6 +70,23 @@ export default class NewClass extends cc.Component {
             this.tipsNode.active = true;
         }
 
+    }
+
+    onEnable() {
+        this.onUpdateMycgData();
+    }
+
+    //资产数据
+    onUpdateMycgData() {
+        if (!GameData.mncgDataList) {
+            this.zzcLa.string = '0';
+            this.kczcLa.string = '0';
+            this.cczcLa.string = '0';
+            this.wtzcLa.string = '0';
+        }
+        else {
+            //TODO
+        }
 
     }
 
@@ -71,7 +100,7 @@ export default class NewClass extends cc.Component {
 
         //记录
         else if (name == 'sp_topbtn_jyjl') {
-
+            GlobalEvent.emit(EventCfg.OPENMYHISLAYER);
         }
 
         //添加自选
@@ -91,10 +120,8 @@ export default class NewClass extends cc.Component {
 
         //越换资产
         else if (name == 'sp_mncg_dhzc') {
-
+            GlobalEvent.emit(EventCfg.OPENDHZCLLAYER);
         }
-
-
 
     }
 

@@ -127,14 +127,15 @@ export default class NewClass extends cc.Component {
                 this.drawBg.lineWidth = width;
                 this.drawBg.strokeColor = cc.Color.WHITE;
                 this.drawLine(this.drawBg, this.prePointX, this.prePointY, x, y);
-                this.prePointX = x;
-                this.prePointY = y;
+
 
                 let y1 = (this.MinMaList[index] - this.bottomValue) / this.disValue * drawBox;
 
                 this.drawMA.strokeColor = new cc.Color().fromHEX('#e94343');
                 this.drawLine(this.drawMA, this.prePointX, this.prePoint1Y, x, y1);
                 this.prePoint1Y = y1;
+                this.prePointX = x;
+                this.prePointY = y;
             }
         }
         else {

@@ -79,6 +79,21 @@ export default class NewClass extends cc.Component {
             let handle = node.getComponent('ZnxgItem2');
             handle.onShow(data, GameData.AIStockList.length - 1);
         }, this);
+
+        GlobalEvent.on(EventCfg.SELECTBK, this.onShowSelectBk.bind(this), this);
+
+    }
+
+    onShowSelectBk() {
+        let i = 0;
+        let nodes = this.content.children;
+        nodes.forEach((el, index) => {
+            if (index > 0) {
+                let handle = el.getComponent('ZnxgItem');
+                //TODO
+
+            }
+        })
     }
 
     onDestroy() {
@@ -160,6 +175,10 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'sp_topbtn_zhengu') {
             GlobalEvent.emit(EventCfg.OPENZGLAYER);
+        }
+
+        else if (name == 'bkBtn') {
+            GlobalEvent.emit(EventCfg.OPENBKBOX);
         }
     }
 
@@ -251,6 +270,8 @@ export default class NewClass extends cc.Component {
                 handle.onShow(el, index);
 
             });
+
+            this.onShowSelectBk();
         })
 
         this.tipsNode.active = false;

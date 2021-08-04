@@ -281,6 +281,17 @@ export default class GameData {
         cc.sys.localStorage.setItem('TJADCOUNT' + str, val);
     }
 
+    private static _selectBk = [];
+
+    public static get SelectBk() {
+        return this._selectBk;
+    }
+
+    public static set SelectBk(val) {
+        this._selectBk = val;
+        cc.sys.localStorage.setItem('SELECTBK', JSON.stringify(val));
+    }
+
     public static CGSConfData = null;
 
     public static CGSSAVELEVEL = 0;
@@ -297,7 +308,7 @@ export default class GameData {
 
     public static mncgDataList = null;  //模拟闯关数据
 
-    public static roomHostID = null;    //房主ID
+    // public static roomHostID = null;    //房主ID
 
     public static locationLayer = null; //等位页面
 

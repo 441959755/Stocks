@@ -26,8 +26,7 @@ export default class NewClass extends cc.Component {
 
     onShow(data, index) {
         this._curData = data;
-        index += 1;
-        this.label[0].string = index;
+        this.label[0].string = this.node.getSiblingIndex() + '';
         this.label[1].string = data.code;
         this.label[2].string = data.name;
         this.label[3].string = data.industry;
@@ -45,6 +44,10 @@ export default class NewClass extends cc.Component {
         }
 
         this.yiShouCangIsShow();
+    }
+
+    setIndex(index) {
+        this.label[0].string = index + '';
     }
 
     yiShouCangIsShow() {

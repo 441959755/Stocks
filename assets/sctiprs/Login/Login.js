@@ -339,6 +339,17 @@ cc.Class({
 			cc.sys.localStorage.removeItem('TJADCOUNT' + str1);
 		}
 
+		{
+			let SelectBk = cc.sys.localStorage.getItem('SELECTBK');
+			if (!SelectBk) {
+				GameData.SelectBk = [1, 1, 1, 1, 1, 1];
+			}
+			else {
+				GameData.SelectBk = JSON.parse(SelectBk);
+				//	GameData.SelectBk = SelectBk;
+			}
+		}
+
 	},
 
 	onDestroy() {

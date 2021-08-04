@@ -218,7 +218,7 @@ PBHelper.prototype = {
                 GameData.properties[decode.items[i].id] = decode.items[i].newValue;
                 console.log('id:' + decode.items[i].id + '   ' + 'value:' + decode.items[i].newValue);
             }
-            console.log('更新属性:' + decode);
+            console.log('更新属性:' + JSON.stringify(decode));
 
             GameData.properties = GameData.properties;
 
@@ -321,7 +321,7 @@ PBHelper.prototype = {
                 GameData.RoomType = 0;
                 GameData.selfEnterRoomData = null;
                 GameData.roomId = 0;
-                GameData.roomHostID = 0;
+             //   GameData.roomHostID = 0;
             }
             GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }
@@ -478,13 +478,26 @@ PBHelper.prototype = {
         }
         //   同步实时行情
         else if (id == pb.MessageId.Sync_S2C_QuoteItem) {
-            let GameProperties = pb.GameProperties;
-            let data = GameProperties.decode(new Uint8Array(buff));
+            let QuoteItem = pb.QuoteItem;
+            let data = QuoteItem.decode(new Uint8Array(buff));
             console.log('同步实时行情' + JSON.stringify(data));
         }
         //关注/删除股票应答：无
         else if (id == pb.MessageId.Rep_Game_MncgEditStockList) {
 
+        }
+        //	// 金币和资产互相兑换应答
+        else if (id == pb.MessageId.Rep_Game_MncgExchange) {
+            let CmdMncgExchangeReply = pb.CmdMncgExchangeReply;
+            let data = CmdMncgExchangeReply.decode(new Uint8Array(buff));
+
+            return data;
+        }
+        // 查询交易记录应
+        else if (id == pb.MessageId.Rep_Game_OrderQuery) {
+            let StockOrderList = pb.StockOrderList;
+            let data = StockOrderList.decode(new Uint8Array(buff));
+            return data;
         }
     }
 }
