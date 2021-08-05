@@ -369,7 +369,11 @@ export default class NewClass extends cc.Component {
         if (GameData.cgState.stage > 1) {
             pec = (GameData.cgState.stage - 1) / 10;
         }
-        this.scroll.scrollToPercentVertical(pec, 0.1);
+
+        setTimeout(() => {
+            this.scroll.scrollToPercentVertical(pec, 0.1);
+        }, 300);
+
     }
 
     //跟新时间 次数

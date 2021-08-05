@@ -40,38 +40,48 @@ export default class NewClass extends cc.Component {
             });
         }
 
-        // this.editBox.node.on('editing-did-ended', (edit) => {
-        //     let str = edit.string;
-        //     if (str == '') { return }
-        //     else {
-        //         let datas = GameCfgText.stockList;
-        //         let flag = false, tt = [];
-        //         for (let i = 0; i < datas.length; i++) {
-        //             let arr1 = datas[i].split('|');
-        //             let str1 = arr1[0];
-        //             if (arr1[0].length >= 7) {
-        //                 str1 = arr1[0].slice(1);
-        //             }
-        //             if (tt.length >= 100) {
-        //                 break;
-        //             }
-        //             if (str1.indexOf(str) != -1) {
-        //                 tt.push(datas[i]);
-        //                 flag = true;
-        //             } else if (arr1[1].indexOf(str) != -1) {
-        //                 tt.push(datas[i]);
-        //                 flag = true;
-        //             }
-        //         }
-        //         if (!flag) {
-        //             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '没有找查到您要的股票.');
-        //         }
-        //         else {
+        this.editBox.node.on('editing-did-ended', (edit) => {
+            let str = edit.string;
+            if (str == '') { return }
+            else {
+                let datas = GameCfgText.stockList;
+                let flag = false, tt = [];
+                for (let i = 0; i < datas.length; i++) {
+                    let arr1 = datas[i].split('|');
+                    let str1 = arr1[0];
+                    if (arr1[0].length >= 7) {
+                        str1 = arr1[0].slice(1);
+                    }
+                    if (tt.length >= 100) {
+                        break;
+                    }
+                    if (str1.indexOf(str) != -1) {
+                        tt.push(datas[i]);
+                        flag = true;
+                    } else if (arr1[1].indexOf(str) != -1) {
+                        tt.push(datas[i]);
+                        flag = true;
+                    }
+                }
+                if (!flag) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '没有找查到您要的股票.');
+                }
+                else {
 
-        //         }
-        //     }
-        // })
+                    let items = tt[0].split('|');
+                    let code = items[0] + '';
+                    if (code.length >= 7) {
+                        code = code.slice(1);
+                    }
+                    this.editBox.string = code + ' ' + items[1];
+                }
+            }
+        })
 
+    }
+
+    onEnable() {
+        this.editBox.string = '';
     }
 
     onBtnClick(event, data) {
@@ -150,6 +160,7 @@ export default class NewClass extends cc.Component {
 
                 })
 
+                this.node.active = false;
             }
             else {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '输入的股票有误');

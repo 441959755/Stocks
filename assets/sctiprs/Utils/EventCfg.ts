@@ -170,4 +170,8 @@ export default {
 	CLEARINTERVAL: 'CLEARINTERVAL',  //竞技结束计时
 
 	GAMEWAIT: 'GAMEWAIT',//游戏等待
+
+	SYNCQUOTEITEM: 'SYNCQUOTEITEM',//同步实时行情
+
+	CMDQUOTITEM: 'CMDQUOTITEM',//查询多个单条行情
 };

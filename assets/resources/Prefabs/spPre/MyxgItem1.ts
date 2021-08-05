@@ -1,28 +1,28 @@
+// Learn TypeScript:
+//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
+// Learn Attribute:
+//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
+// Learn life-cycle callbacks:
+//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-const { ccclass, property } = cc._decorator;
+const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
 
-    @property([cc.Label])
-    labs: cc.Label[] = [];
+    @property(cc.Label)
+    label: cc.Label = null;
 
-    onLoad() {
+    @property
+    text: string = 'hello';
+
+    // LIFE-CYCLE CALLBACKS:
+
+    // onLoad () {}
+
+    start () {
 
     }
 
-    onShow(data) {
-
-
-    }
-
-    onBtnClick(event, data) {
-        let name = event.target.name;
-        //看信号买卖
-        if (name == 'item') {
-
-
-
-        }
-    }
+    // update (dt) {}
 }

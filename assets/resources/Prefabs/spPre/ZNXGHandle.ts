@@ -91,6 +91,12 @@ export default class NewClass extends cc.Component {
             if (index > 0) {
                 let handle = el.getComponent('ZnxgItem');
                 //TODO
+                //GameData.SelectBk
+                let flag = this.getBKISShow(handle._curData.code);
+                if (flag) { i++ }
+                el.active = flag;
+
+                handle.setIndex(i);
 
             }
         })
@@ -259,22 +265,57 @@ export default class NewClass extends cc.Component {
 
             console.log('查询AI选股的股票列表' + JSON.stringify(res));
 
+            let tt = 0;
             res.items.forEach((el, index) => {
-                console.log(this.content2.children[index]);
+
                 if (!this.content2.children[index]) {
                     let node = cc.instantiate(this.preItem2);
                     this.content2.addChild(node);
                 }
-
                 let handle = this.content2.children[index].getComponent('ZnxgItem2');
-                handle.onShow(el, index);
+                let flag = this.getBKISShow(el.code);
+                if (flag) { tt++ }
+                this.content2.children[index].active = flag;
+
+                handle.onShow(el, tt);
 
             });
-
-            this.onShowSelectBk();
         })
 
         this.tipsNode.active = false;
+    }
+
+    getBKISShow(code) {
+        code = code + ''
+        if (code.length >= 7) {
+            code = code.slice(1);
+        }
+
+        if (GameData.SelectBk[0]) {
+            return true;
+        }
+
+        else if (code.slice(0, 3) == '002' || code.slice(0, 3) == '003') {
+            return GameData.SelectBk[3];
+        }
+
+        else if (code.slice(0, 3) == '300') {
+            return GameData.SelectBk[4];
+        }
+
+        else if (code.slice(0, 3) == '688') {
+            return GameData.SelectBk[4];
+        }
+
+        else if (code.slice(0, 2) == '60' || code.slice(0, 2) == '688') {
+            return GameData.SelectBk[1];
+        }
+
+        else if (code.slice(0, 2) == '00' || code.slice(0, 2) == '30') {
+            return GameData.SelectBk[2];
+        }
+
+        return false;
     }
 
 }

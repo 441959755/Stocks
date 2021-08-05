@@ -37,56 +37,37 @@ export default class NewClass extends cc.Component {
     wtzcLa: cc.Label = null;
 
 
-    start() {
 
+
+    onEnable() {
         if (GameData.selfStockList.length > 0) {
-            // this.tipsNode.active = false;
-            // let info = {
-            //     codes: GameData.selfStockList,
-            // }
-
-            // let CmdQueryAiStockList = pb.CmdQueryAiStockList;
-            // let message = CmdQueryAiStockList.create(info);
-            // let buff = CmdQueryAiStockList.encode(message).finish();
-
-            // socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
-
-            //     console.log('查询模拟选股的股票列表' + JSON.stringify(res));
-
-            //     res.items.forEach((el, index) => {
-
-            //         if (!this.content1.children[index]) {
-            //             let node = cc.instantiate(this.item1);
-            //             this.content1.addChild(node);
-            //         }
-
-            //         let handle = this.content1.children[index].getComponent('MyxgItem1');
-            //         handle.onShow(el);
-            //     });
-            // })
-
+            //  if (this.content1.children.length < GameData.selfStockList.length) {
+            GameData.selfStockList.forEach((el, index) => {
+                if (!this.content1.children[index]) {
+                    let node = cc.instantiate(this.item1);
+                    this.content1.addChild(node);
+                }
+                let handle = this.content1.children[index].getComponent('MyxgItem');
+                handle.onShow(el);
+            })
+            //  }
         }
         else {
             this.tipsNode.active = true;
         }
-
-    }
-
-    onEnable() {
         this.onUpdateMycgData();
     }
 
+
+
     //资产数据
     onUpdateMycgData() {
-        if (!GameData.mncgDataList) {
-            this.zzcLa.string = '0';
-            this.kczcLa.string = '0';
-            this.cczcLa.string = '0';
-            this.wtzcLa.string = '0';
-        }
-        else {
-            //TODO
-        }
+
+        this.zzcLa.string = '0';
+        this.kczcLa.string = GameData.mncgDataList.account || 0;
+        //TODO
+        this.cczcLa.string = '0';
+        this.wtzcLa.string = '0';
 
     }
 

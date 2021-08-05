@@ -1,5 +1,5 @@
 import { pb } from "../../../protos/proto";
-import HttpUtils from "../../../sctiprs/common/net/HttpUtils";
+import HttpMgr from "../../../sctiprs/common/net/HttpMgr";
 import DrawData from "../../../sctiprs/game/DrawData";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
@@ -74,10 +74,14 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on('onClickPosUpdateLabel', (index) => {
 
+
             if (index < GameCfg.beg_end[0] || index >= GameCfg.beg_end[1]) { return }
             let time, kp, sp, zg, zd, cjl, cje;
             let arr = [];
             if (this.ktype == pb.KType.Min) {
+                if (this.gpDataMin.length <= 0 || !this.gpDataMin[index]) {
+                    return;
+                }
                 index = this.gpDataMin.length - 1;
                 let tt = this.gpDataMin[index].timestamp;
                 let t = new Date(this.gpDataMin[index].timestamp * 1000);
@@ -89,15 +93,23 @@ export default class NewClass extends cc.Component {
                 arr = this.gpDataMin;
             }
             else if (this.ktype == pb.KType.Day) {
+                if (this.gpDataDay.length <= 0 || !this.gpDataDay[index]) {
+                    return;
+                }
                 time = ComUtils.formatTime(this.gpDataDay[index].timestamp);
                 arr = this.gpDataDay;
             }
             else if (this.ktype == pb.KType.Day7) {
+                if (this.gpDataDay7.length <= 0 || !this.gpDataDay7[index]) {
+                    return;
+                }
                 time = ComUtils.formatTime(this.gpDataDay7[index].timestamp);
                 arr = this.gpDataDay7;
             }
             else {
-
+                if (this.gpDataMonth.length <= 0 || !this.gpDataMonth[index]) {
+                    return;
+                }
                 time = ComUtils.formatTime(this.gpDataMonth[index].timestamp);
                 arr = this.gpDataMonth;
             }
@@ -111,7 +123,20 @@ export default class NewClass extends cc.Component {
 
             this.uLabel.string = time + '    ' + '开盘 ' + kp + '    ' + '收盘 ' + sp + '    ' + '最高 ' + zg + '    ' + '最低 ' + zd + '    ' + '成交量 ' + cjl + '    ' + '成交额 ' + cje;
         }, this);
+
+        GlobalEvent.on(EventCfg.SYNCQUOTEITEM, (data) => {
+
+
+
+            this.gpDataMin.push(data);
+            if (this.ktype == pb.KType.Min) {
+                this.onDraw();
+            }
+
+        }, this);
     }
+
+
 
     onShow(code, str) {
         this.laNode.active = false;
@@ -128,7 +153,7 @@ export default class NewClass extends cc.Component {
         this.initData();
 
         //订阅
-        this.CmdQuoteSubscribe();
+        this.CmdQuoteSubscribe(true);
 
         //查询AI操作
         this.onQueryAISignal();
@@ -148,6 +173,7 @@ export default class NewClass extends cc.Component {
         let CmdQueryAiSignal = pb.CmdQueryAiSignal;
         let message1 = CmdQueryAiSignal.create(me);
         let buff1 = CmdQueryAiSignal.encode(message1).finish();
+
         socket.send(pb.MessageId.Req_QueryAiSignal, buff1, (res) => {
             console.log('AI买卖信号：' + JSON.stringify(res));
             let arr = [];
@@ -180,11 +206,16 @@ export default class NewClass extends cc.Component {
             arr.forEach(el => {
                 num += el;
             })
+
+            let num1 = 0;
+            if (arr[arr.length - 1]) {
+                num1 = arr[arr.length - 1];
+            }
             let label1 = this.laNode.getChildByName('label1').getComponent(cc.Label);
             let label2 = this.laNode.getChildByName('label2').getComponent(cc.Label);
             let label3 = this.laNode.getChildByName('label3').getComponent(cc.Label);
             label1.string = '近一年收益：' + ComUtils.changeTwoDecimal(num) + '%';
-            label2.string = '最近的收益：' + ComUtils.changeTwoDecimal(arr[arr.length - 1]) + '%';
+            label2.string = '最近的收益：' + ComUtils.changeTwoDecimal(num1) + '%';
             label3.string = '今日决策：' + this.AISignal;
         });
     }
@@ -268,7 +299,7 @@ export default class NewClass extends cc.Component {
     }
 
     getHttpGPData(type) {
-        let url = 'http://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js';//?TYPE=mk&rtntype=5&authorityType=fa&id=6000111
+
         let code;
         code = this.code;
         if ((code + '').length >= 7) {
@@ -287,11 +318,12 @@ export default class NewClass extends cc.Component {
             id: code
         }
 
-        HttpUtils.sendRequest(url, data, (res) => {
-            res = res.replace('(', '');
-            res = res.replace(')', '');
-            //  console.log('日k：' + res);
-            res = JSON.parse(res);
+        HttpMgr.getInstance().getGPData(data, (res) => {
+
+            if (res.length > 200) {
+                res = res.slice(res.length - 200, res.length);
+            }
+
             if (type == 'mk') {
                 this.gpDataMonth = res;
             }
@@ -302,11 +334,19 @@ export default class NewClass extends cc.Component {
                 this.gpDataDay = res;
             }
         })
+
+        // HttpUtils.sendRequest(url, data, (res) => {
+        //     res = res.replace('(', '');
+        //     res = res.replace(')', '');
+        //     //  console.log('日k：' + res);
+        //     res = JSON.parse(res);
+
+        // })
     }
 
-    CmdQuoteSubscribe() {
+    CmdQuoteSubscribe(flag) {
         let info = {
-            items: [{ code: this.code, flag: true }]
+            items: [{ code: this.code + '', flag: flag }]
         }
         console.log('订阅：' + JSON.stringify(info));
         let CmdQuoteSubscribe = pb.CmdQuoteSubscribe;
@@ -423,6 +463,7 @@ export default class NewClass extends cc.Component {
                 else if (index == 4) {
                     arr = this.gpDataMonth;
                 }
+
                 GameCfg.huizhidatas = arr.length;
                 GameData.huizhidatas = arr.length;
                 GameCfg.beg_end = [];
@@ -537,6 +578,7 @@ export default class NewClass extends cc.Component {
             this.laNode.active = false;
             if (!this.gpDataDay7) {
                 this.getHttpGPData('wk');
+                this.onDraw();
             }
             else {
                 this.onDraw();
@@ -548,6 +590,7 @@ export default class NewClass extends cc.Component {
             this.laNode.active = false;
             if (!this.gpDataMonth) {
                 this.getHttpGPData('mk');
+                this.onDraw();
             }
             else {
                 this.onDraw();
@@ -562,6 +605,7 @@ export default class NewClass extends cc.Component {
         this.gpDataDay7 = null  //周k数据
         this.gpDataMonth = null //月k数据
         GameCfg.GAMEFUPAN = null;
+        this.CmdQuoteSubscribe(false);
     }
 
     onBtnClick(event, data) {
@@ -672,5 +716,6 @@ export default class NewClass extends cc.Component {
 
     onDestroy() {
         GlobalEvent.off('onClickPosUpdateLabel');
+        GlobalEvent.off(EventCfg.SYNCQUOTEITEM);
     }
 }

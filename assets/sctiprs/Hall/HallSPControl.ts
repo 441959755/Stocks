@@ -102,7 +102,7 @@ export default class NewClass extends cc.Component {
             LoadUtils.loadRes('Prefabs/spPre/znDrawLayer', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.znDraw = cc.instantiate(pre);
-                this.node.addChild(this.znDraw);
+                this.node.addChild(this.znDraw, 20);
                 this.znDraw.setPosition(0, 0);
                 let handle = this.znDraw.getComponent('ZnDraw');
                 handle.onShow(code, str);

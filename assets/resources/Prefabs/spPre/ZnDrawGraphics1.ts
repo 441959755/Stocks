@@ -123,6 +123,16 @@ export default class NewClass extends cc.Component {
     }
 
     onDraw() {
+        if (GameCfg.beg_end[1] < 0 || GameCfg.beg_end[0] > GameCfg.beg_end[1]) {
+            console.log(' GameCfg.beg_end[0]:' + GameCfg.beg_end[0]);
+            console.log(' GameCfg.beg_end[1]:' + GameCfg.beg_end[1]);
+            return;
+        }
+        if (GameCfg.beg_end[0] < 0 || GameCfg.beg_end[1] > this.viweData.length) {
+            console.log(' GameCfg.beg_end[0]:' + GameCfg.beg_end[0]);
+            console.log(' GameCfg.beg_end[1]:' + GameCfg.beg_end[1]);
+            return;
+        }
         this.initData()
         let viweData = this.viweData;
         this.drawRSI.clear();

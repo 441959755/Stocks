@@ -62,6 +62,17 @@ export default class NewClass extends cc.Component {
     }
 
     initDrawBg() {
+        if (GameCfg.beg_end[1] < 0 || GameCfg.beg_end[0] > GameCfg.beg_end[1]) {
+            console.log(' GameCfg.beg_end[0]:' + GameCfg.beg_end[0]);
+            console.log(' GameCfg.beg_end[1]:' + GameCfg.beg_end[1]);
+            return;
+        }
+        if (GameCfg.beg_end[0] < 0 || GameCfg.beg_end[1] > this.viewData.length) {
+            console.log(' GameCfg.beg_end[0]:' + GameCfg.beg_end[0]);
+            console.log(' GameCfg.beg_end[1]:' + GameCfg.beg_end[1]);
+            return;
+        }
+
         this.MaList = DrawData.MaList;
         this.MinMaList = DrawData.MinMaList;
         this.drawBg.clear();

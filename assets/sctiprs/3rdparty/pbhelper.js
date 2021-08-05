@@ -73,6 +73,7 @@ PBHelper.prototype = {
         let CmdQuoteQuery = pb.CmdQuoteQuery;
         let message = CmdQuoteQuery.create(data)
         let buff = CmdQuoteQuery.encode(message).finish();
+
         return buff;
     },
 
@@ -207,6 +208,11 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Rep_QuoteQuery) {
             let Quotes = pb.Quotes;
             let data = Quotes.decode(new Uint8Array(buff));
+
+            if (data.items.length == 1) {
+                GlobalEvent.emit(EventCfg.CMDQUOTITEM, data);
+            }
+
             return data;
         }
         //同步玩家游戏属性
@@ -321,7 +327,7 @@ PBHelper.prototype = {
                 GameData.RoomType = 0;
                 GameData.selfEnterRoomData = null;
                 GameData.roomId = 0;
-             //   GameData.roomHostID = 0;
+                //   GameData.roomHostID = 0;
             }
             GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }
@@ -481,6 +487,7 @@ PBHelper.prototype = {
             let QuoteItem = pb.QuoteItem;
             let data = QuoteItem.decode(new Uint8Array(buff));
             console.log('同步实时行情' + JSON.stringify(data));
+            GlobalEvent.emit(EventCfg.SYNCQUOTEITEM, data);
         }
         //关注/删除股票应答：无
         else if (id == pb.MessageId.Rep_Game_MncgEditStockList) {
@@ -498,6 +505,12 @@ PBHelper.prototype = {
             let StockOrderList = pb.StockOrderList;
             let data = StockOrderList.decode(new Uint8Array(buff));
             return data;
+        }
+
+        else if (id == pb.MessageId.Rep_QuoteSubscribe) {
+            // let StockOrderList = pb.StockOrderList;
+            // let data = StockOrderList.decode(new Uint8Array(buff));
+            // return data;
         }
     }
 }
