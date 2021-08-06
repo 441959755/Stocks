@@ -115,6 +115,14 @@ export default class NewClass extends cc.Component {
         this.getAIStockList(data);
     }
 
+    onEnable() {
+        GameCfg.GameType = 'ZNXG';
+    }
+
+    onDisable() {
+        GameCfg.GameType = null;
+    }
+
     onBtnToggle(event, data) {
         let name = event.node.name;
 
@@ -175,7 +183,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'sp_topbtn_help') {
-            GameCfg.GameType = 'ZNXG';
+
             GlobalEvent.emit(EventCfg.OPENHELPLAYER);
         }
 

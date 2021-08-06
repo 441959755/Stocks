@@ -45,7 +45,7 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == 'ZNXG') {
             this.ZNXG.active = true;
         }
-        else if (GameCfg.GameType == 'MYXG') {
+        else if (GameCfg.GameType == 'MNXG') {
             this.MYXGNode.active = true;
         }
 

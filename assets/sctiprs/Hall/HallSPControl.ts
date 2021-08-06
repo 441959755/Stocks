@@ -24,6 +24,10 @@ export default class NewClass extends cc.Component {
 
     bkBox: cc.Node = null;
 
+    buyBox: cc.Node = null;
+
+    sellBox: cc.Node = null;
+
 
     onLoad() {
         GlobalEvent.on(EventCfg.OPENZNXG, this.onLoadZNXGLayer.bind(this), this);
@@ -34,6 +38,41 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENDHZCLLAYER, this.openDhzcLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENMYHISLAYER, this.openMyHisLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENBKBOX, this.openBKBox.bind(this), this);
+
+        GlobalEvent.on(EventCfg.OPENBUYBOX, this.openBuyBox.bind(this), this);
+
+        GlobalEvent.on(EventCfg.OPENSELLBOX, this.openSellBox.bind(this), this);
+    }
+
+    openSellBox() {
+        if (this.sellBox) {
+            this.sellBox.active = true;
+        }
+        else {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            LoadUtils.loadRes('Prefabs/spPre/sellBox', (pre) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                this.sellBox = cc.instantiate(pre);
+                this.node.addChild(this.sellBox);
+                this.sellBox.active = true;
+            })
+        }
+
+    }
+
+    openBuyBox() {
+        if (this.buyBox) {
+            this.buyBox.active = true;
+        }
+        else {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            LoadUtils.loadRes('Prefabs/spPre/buyBox', (pre) => {
+                GlobalEvent.enit(EventCfg.LOADINGHIDE);
+                this.buyBox = cc.instantiate(pre);
+                this.node.addChild(this.buyBox);
+                this.buyBox.active = true;
+            })
+        }
     }
 
     openBKBox() {
@@ -57,7 +96,7 @@ export default class NewClass extends cc.Component {
         }
         else {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/myHis', (pre) => {
+            LoadUtils.loadRes('Prefabs/spPre/mnHis', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.myhisNode = cc.instantiate(pre);
                 this.node.addChild(this.myhisNode);
@@ -138,7 +177,7 @@ export default class NewClass extends cc.Component {
         })
         if (!this.myxgNode) {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/myxgLayer', (pre) => {
+            LoadUtils.loadRes('Prefabs/spPre/mnxgLayer', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.myxgNode = cc.instantiate(pre);
                 this.node.addChild(this.myxgNode);
@@ -175,14 +214,18 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENDHZCLLAYER);
         GlobalEvent.off(EventCfg.OPENMYHISLAYER);
         GlobalEvent.off(EventCfg.OPENBKBOX);
+        GlobalEvent.off(EventCfg.OPENBUYBOX);
+        GlobalEvent.off(EventCfg.OPENSELLBOX);
         LoadUtils.releaseRes('Prefabs/spPre/znDrawLayer');
         LoadUtils.releaseRes('Prefabs/spPre/znxgLayer');
         LoadUtils.releaseRes('Prefabs/spPre/zgLayer');
-        LoadUtils.releaseRes('Prefabs/spPre/myxgLayer');
+        LoadUtils.releaseRes('Prefabs/spPre/mnxgLayer');
         LoadUtils.releaseRes('Prefabs/spPre/addZXGPBox');
         LoadUtils.releaseRes('Prefabs/spPre/dhzcLayer');
-        LoadUtils.releaseRes('Prefabs/spPre/myHis');
+        LoadUtils.releaseRes('Prefabs/spPre/mnHis');
         LoadUtils.releaseRes('Prefabs/spPre/selectBkBox');
+        LoadUtils.releaseRes('Prefabs/spPre/buyBox');
+        LoadUtils.releaseRes('Prefabs/spPre/sellBox');
     }
 
 }

@@ -99,9 +99,11 @@ export default class NewClass extends cc.Component {
             GameData.selfStockList.push(items[0]);
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '添加成功');
             this.editBox.string = '';
+
+            GlobalEvent.emit(EventCfg.ADDZXGP);
+
         }
 
     }
-
 
 }

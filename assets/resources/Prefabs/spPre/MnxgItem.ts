@@ -15,11 +15,8 @@ export default class NewClass extends cc.Component {
 
     _code = null;
 
-    onLoad() {
-
-    }
-
     onEnable() {
+        //进来获取的第一条行情
         GlobalEvent.on(EventCfg.CMDQUOTITEM, (info) => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             if (!info.items || info.items.length <= 0) {
@@ -29,9 +26,17 @@ export default class NewClass extends cc.Component {
             if (info.items[0].code == this._code) {
                 this.setLabel(info.items[0]);
             }
-
         })
 
+        //订阅时时行情
+        GlobalEvent.on(EventCfg.SYNCQUOTEITEM, (data) => {
+            if (data.code == this._code) {
+                this.setLabel(data);
+            }
+        }, this);
+
+        //订阅
+        this.CmdQuoteSubscribe(true);
 
     }
 
@@ -40,7 +45,6 @@ export default class NewClass extends cc.Component {
         if (data) {
             this._code = data;
         }
-
 
         //获取行情
         {
@@ -55,7 +59,6 @@ export default class NewClass extends cc.Component {
 
         //订阅
         this.CmdQuoteSubscribe(true);
-
     }
 
     setLabel(info) {
@@ -73,7 +76,7 @@ export default class NewClass extends cc.Component {
         }
         this.labs[0].string = code;
 
-        this.labs[2].string = info.price;
+        this.labs[2].string = ComUtils.changeTwoDecimal(info.price);
 
         let zd = info.price - info.close;
         if (zd < 0) {
@@ -87,22 +90,24 @@ export default class NewClass extends cc.Component {
             this.labs[5].node.color = cc.Color.RED;
         }
 
-        this.labs[3].string = zd + '';
+        this.labs[3].string = ComUtils.changeTwoDecimal(zd) + '';
         let zdf = zd / info.close * 100;
         this.labs[4].string = ComUtils.changeTwoDecimal(zdf) + '%';
-        this.labs[5].string = info.open;
-        this.labs[6].string = info.close;
-        this.labs[7].string = info.high;
-        this.labs[8].string = info.low;
+        this.labs[5].string = ComUtils.changeTwoDecimal(info.open);
+        this.labs[6].string = ComUtils.changeTwoDecimal(info.close);
+        this.labs[7].string = ComUtils.changeTwoDecimal(info.high);
+        this.labs[8].string = ComUtils.changeTwoDecimal(info.low);
     }
 
 
     onDisable() {
         this.CmdQuoteSubscribe(false);
         GlobalEvent.off(EventCfg.CMDQUOTITEM);
+        GlobalEvent.off(EventCfg.SYNCQUOTEITEM);
     }
 
     CmdQuoteSubscribe(flag) {
+        if (!this._code) { return }
         let info = {
             items: [{ code: this._code + '', flag: flag }],
         }

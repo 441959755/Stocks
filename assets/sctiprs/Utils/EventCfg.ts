@@ -174,4 +174,11 @@ export default {
 	SYNCQUOTEITEM: 'SYNCQUOTEITEM',//同步实时行情
 
 	CMDQUOTITEM: 'CMDQUOTITEM',//查询多个单条行情
+
+	ADDZXGP: 'ADDZXGP',//自选股票
+
+	OPENBUYBOX: 'OPENBUYBOX',//打开买入选择框
+
+	OPENSELLBOX: 'OPENSELLBOX',//打开卖出选择框
+
 };
