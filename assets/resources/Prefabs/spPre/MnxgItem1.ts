@@ -79,7 +79,7 @@ export default class NewClass extends cc.Component {
         } else {
             this.labels[9].node.color = cc.Color.GREEN;
         }
-        this.labels[9].string = sy + '';
+        this.labels[9].string = ComUtils.changeTwoDecimal(sy) + '';
     }
 
     onShow(code, data) {

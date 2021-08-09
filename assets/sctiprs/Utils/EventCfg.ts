@@ -181,4 +181,8 @@ export default {
 
 	OPENSELLBOX: 'OPENSELLBOX',//打开卖出选择框
 
+	CHANGEMNCGACCOUNT: 'CHANGEMNCGACCOUNT',//改变模拟炒股资产
+
+
+
 };

@@ -79,7 +79,7 @@ export default class NewClass extends cc.Component {
         let shen = 1399001;
         let lu = '1';
         this.onShow();
-
+        GlobalEvent.on(EventCfg.CHANGEMNCGACCOUNT, this.onUpdateMycgData.bind(this), this);
         this.onUpdateMycgData();
 
         //进来获取的第一条行情
@@ -181,6 +181,7 @@ export default class NewClass extends cc.Component {
         //订阅
         this.CmdQuoteSubscribe(false);
         GameCfg.GameType = null;
+        GlobalEvent.off(EventCfg.CHANGEMNCGACCOUNT);
     }
 
 
@@ -188,12 +189,35 @@ export default class NewClass extends cc.Component {
     //资产数据
     onUpdateMycgData() {
 
-        this.zzcLa.string = '0';
         this.kczcLa.string = GameData.mncgDataList.account || 0;
-        //TODO
-        this.cczcLa.string = '0';
-        this.wtzcLa.string = '0';
+        let wt, cc;
+        if (GameData.mncgDataList.orderList.items) {
+            GameData.mncgDataList.orderList.items.forEach(el => {
+                if (el.state == pb.OrderState.Init) {
+                    wt += el.volume * el.price;
+                }
 
+            });
+            this.wtzcLa.string = ComUtils.changeTwoDecimal(wt);
+        }
+        else {
+            this.wtzcLa.string = '0';
+        }
+        if (GameData.mncgDataList.positionList.items) {
+            GameData.mncgDataList.positionList.items.forEach(el => {
+
+                cc += (el.volume * el.priceCost);
+
+            });
+            this.cczcLa.string = ComUtils.changeTwoDecimal(cc);
+        }
+        else {
+            this.cczcLa.string = '0';
+        }
+
+        let zzc = (GameData.mncgDataList.account || 0) + cc + wt;
+
+        this.zzcLa.string = ComUtils.changeTwoDecimal(zzc);
     }
 
 

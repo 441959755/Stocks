@@ -44,33 +44,42 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENSELLBOX, this.openSellBox.bind(this), this);
     }
 
-    openSellBox() {
+    openSellBox(data) {
         if (this.sellBox) {
             this.sellBox.active = true;
+            let handle = this.sellBox.getComponent('SellBox');
+            handle.onShow(data);
         }
         else {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes('Prefabs/spPre/sellBox', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.sellBox = cc.instantiate(pre);
-                this.node.addChild(this.sellBox);
+                this.node.addChild(this.sellBox, 21);
                 this.sellBox.active = true;
+                let handle = this.sellBox.getComponent('SellBox');
+                handle.onShow(data);
             })
         }
 
     }
 
-    openBuyBox() {
+    openBuyBox(data) {
+
         if (this.buyBox) {
             this.buyBox.active = true;
+            let handle = this.buyBox.getComponent('BuyBox');
+            handle.onShow(data);
         }
         else {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes('Prefabs/spPre/buyBox', (pre) => {
-                GlobalEvent.enit(EventCfg.LOADINGHIDE);
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.buyBox = cc.instantiate(pre);
-                this.node.addChild(this.buyBox);
+                this.node.addChild(this.buyBox, 21);
                 this.buyBox.active = true;
+                let handle = this.buyBox.getComponent('BuyBox');
+                handle.onShow(data);
             })
         }
     }

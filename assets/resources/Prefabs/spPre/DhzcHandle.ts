@@ -161,15 +161,16 @@ export default class NewClass extends cc.Component {
                     console.log('兑换应答' + JSON.stringify(res));
                     this.curGold -= this.dhzc;
                     this.zc_syLa.string = this.curGold;
+
                     GameData.mncgDataList.account = res.account;
 
                     let day = new Date().toLocaleDateString();
                     cc.sys.localStorage.setItem('DHZJ' + day, this.curGold);
-                    this.zc_sdLa.string = '';
+                    this.jb_kyLa.string = '';
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换成功！');
 
-                    // GameData.mncgDataList.account += (this.dhzc * 10);
                     this.jb_kyLa.string = GameData.mncgDataList.account;
+                    GlobalEvent.emit(EventCfg.CHANGEMNCGACCOUNT);
                 }
                 else {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.result);
@@ -198,6 +199,7 @@ export default class NewClass extends cc.Component {
                     this.jb_kyLa.string = GameData.mncgDataList.account;
                     this.jb_sdLa.string = '';
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换成功！');
+                    GlobalEvent.emit(EventCfg.CHANGEMNCGACCOUNT);
                 }
                 else {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.result);

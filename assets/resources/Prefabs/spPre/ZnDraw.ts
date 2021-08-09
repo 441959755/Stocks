@@ -18,6 +18,8 @@ export default class NewClass extends cc.Component {
 
     code = null;
 
+    name = null;
+
     gpDataMin = null;  //分时数据
 
     gpDataDay = null  //日k数据
@@ -162,7 +164,6 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
-
         //找到更新买1...卖1...label跟新
         this.box3.children.forEach(el => {
             if (el.name == 't_label') {
@@ -528,6 +529,7 @@ export default class NewClass extends cc.Component {
 
         if (items) {
             this.cLabel[0].string = items[1];
+            this.name = items[1];
         }
         else {
             console.log('当前配置上没有');
@@ -838,18 +840,26 @@ export default class NewClass extends cc.Component {
 
             })
             GameData.selfStockList.push(this.code);
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '股票添加成功！');
         }
 
         //模拟点击买入
         else if (name == 'sp_btn_mairu') {
             let data = {
                 code: this.code,
+                price: this.gpDataMin[this.gpDataMin.length - 1].price,
+                name: this.name,
             }
-            GlobalEvent.emit(EventCfg.OPENBUYBOX);
+            GlobalEvent.emit(EventCfg.OPENBUYBOX, data);
         }
         //模拟点击卖出
         else if (name == 'sp_btn_maichu') {
-            GlobalEvent.emit(EventCfg.OPENSELLBOX);
+            let data = {
+                code: this.code,
+                price: this.gpDataMin[this.gpDataMin.length - 1].price,
+                name: this.name,
+            }
+            GlobalEvent.emit(EventCfg.OPENSELLBOX, data);
         }
     }
 

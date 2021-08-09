@@ -468,6 +468,8 @@ PBHelper.prototype = {
             let data = MncgState.decode(new Uint8Array(buff));
             console.log('同步模拟炒股状态' + JSON.stringify(data));
             GameData.mncgDataList = data;
+
+            GlobalEvent.emit(EventCfg.CHANGEMNCGACCOUNT);
         }
         //同步所有炒股大赛状态
         else if (id == pb.MessageId.Sync_S2C_GameCgds) {
@@ -511,6 +513,12 @@ PBHelper.prototype = {
             // let StockOrderList = pb.StockOrderList;
             // let data = StockOrderList.decode(new Uint8Array(buff));
             // return data;
+        }
+
+        else if (id === pb.MessageId.Rep_Game_Order) {
+            let CmdStockOrderReply = pb.CmdStockOrderReply;
+            let data = CmdStockOrderReply.decode(new Uint8Array(buff));
+            return data;
         }
     }
 }

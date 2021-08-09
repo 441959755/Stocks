@@ -116,12 +116,7 @@ export default class ComUtils {
 			} else {
 				time = year + '/' + month + '/' + day;
 			}
-
-
 		}
-		//	} else {
-		//time = ((time + '').replace(/-/g, '/'));
-		//	}
 		return time;
 
 	}
@@ -303,6 +298,7 @@ export default class ComUtils {
 
 	//保留2位小数
 	public static changeTwoDecimal(num) {
+		if (!num) { return 0 };
 
 		return (parseInt(num * 100 + '') / 100).toFixed(2);
 	}
@@ -350,6 +346,21 @@ export default class ComUtils {
 		}
 		return str;
 
+	}
+
+	/**
+	 * 判断是否是当天
+	 * @param str \ 时间戳
+	 * @returns   true 当天  反之
+	 */
+	public static isToday(str) {
+		if (new Date(str).toDateString() === new Date().toDateString()) {
+			//今天
+			return true;
+		} else if (new Date(str) < new Date()) {
+			//之前
+			return false;
+		}
 	}
 
 }
