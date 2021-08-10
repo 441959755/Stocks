@@ -27,6 +27,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Button)
     mrxdBtn: cc.Button = null;
 
+    @property(cc.Node)
+    btnSelecet: cc.Node = null;
+
     curData = null;
 
     kyzc = null;
@@ -36,10 +39,18 @@ export default class NewClass extends cc.Component {
     cursl = null;
 
     onShow(data) {
-        this.curData = data;
-        this.nameLabel.string = this.curData.name;
-        this.codeLabel.string = this.curData.code;
-        this.priceLabel.string = ComUtils.changeTwoDecimal(this.curData.price);
+
+        if (!data) {
+            this.btnSelecet.active = true;
+            this.priceLabel.string = '0';
+        }
+        else {
+            this.curData = data;
+            this.nameLabel.string = this.curData.name;
+            this.codeLabel.string = this.curData.code;
+            this.priceLabel.string = ComUtils.changeTwoDecimal(this.curData.price) + '';
+        }
+
         this.mrslLabel.string = '0';
 
         this.kyzc = GameData.mncgDataList.account;
@@ -62,8 +73,6 @@ export default class NewClass extends cc.Component {
             this.mrxdBtn.interactable = true;
             this.mrxdBtn.enableAutoGrayEffect = false;
         }
-
-
     }
 
     onBtnClick(event) {
@@ -78,7 +87,7 @@ export default class NewClass extends cc.Component {
                 return;
             }
             this.curData.price -= 0.01;
-            this.priceLabel.string = ComUtils.changeTwoDecimal(this.curData.price);
+            this.priceLabel.string = ComUtils.changeTwoDecimal(this.curData.price) + '';
         }
 
         else if (name == 'sp_znxg_add') {
@@ -87,7 +96,7 @@ export default class NewClass extends cc.Component {
                 return;
             }
             this.curData.price += 0.01;
-            this.priceLabel.string = ComUtils.changeTwoDecimal(this.curData.price);
+            this.priceLabel.string = ComUtils.changeTwoDecimal(this.curData.price) + '';
         }
 
         //买入数量
@@ -200,7 +209,7 @@ export default class NewClass extends cc.Component {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '买入下单成功!');
                 }
                 else {
-
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.result.err);
                 }
             })
 
@@ -208,9 +217,4 @@ export default class NewClass extends cc.Component {
 
     }
 
-    onToggleClick(event) {
-        let name = event.node.name;
-    }
-
-    // update (dt) {}
 }

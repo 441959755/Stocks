@@ -208,7 +208,11 @@ export default class NewClass extends cc.Component {
 		}
 		//模拟炒股
 		else if (name == 'main_sp_mncg') {
-			GlobalEvent.emit(EventCfg.OPENMYXG);
+			GlobalEvent.emit(EventCfg.OPENMNXG);
+		}
+
+		else if (name == 'main_sp_cgds') {
+			GlobalEvent.emit(EventCfg.OPENCGDS);
 		}
 
 	}

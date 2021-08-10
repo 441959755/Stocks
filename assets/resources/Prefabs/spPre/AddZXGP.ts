@@ -1,9 +1,3 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import { pb } from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
@@ -76,7 +70,7 @@ export default class NewClass extends cc.Component {
                 code = (code + '').slice(1);
             }
 
-            if (GameData.selfStockList.indexOf(items) != -1) {
+            if (GameData.selfStockList.indexOf(items[0]) != -1) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '已添加，请重新输入');
                 this.editBox.string = '';
                 return;

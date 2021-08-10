@@ -42,15 +42,6 @@ export default class NewClass extends cc.Component {
     }
 
     setLabel(info) {
-        let items = GameCfgText.getGPPKItemInfo(this._code);
-        if (items) {
-            this.labels[1].string = items[1];
-        }
-        let code = this._code + '';
-        if (code.length >= 7) {
-            code = code.slice(1);
-        }
-        this.labels[0].string = code;
 
         this.labels[2].string = info.price;
 
@@ -71,8 +62,8 @@ export default class NewClass extends cc.Component {
         let zdf = zd / info.close * 100;
         this.labels[6].string = ComUtils.changeTwoDecimal(zdf) + '%';
 
-        this.labels[7].string = ComUtils.changeTwoDecimal(info.high);
-        this.labels[8].string = ComUtils.changeTwoDecimal(info.low);
+        this.labels[7].string = ComUtils.changeTwoDecimal(info.high) + '';
+        this.labels[8].string = ComUtils.changeTwoDecimal(info.low) + '';
         let sy = (info.price - this._curData.priceCost) * this._curData.priceCost;
         if (sy > 0) {
             this.labels[9].node.color = cc.Color.RED;
@@ -100,6 +91,16 @@ export default class NewClass extends cc.Component {
 
         //订阅
         this.CmdQuoteSubscribe(true);
+
+        let items = GameCfgText.getGPPKItemInfo(this._code);
+        if (items) {
+            this.labels[1].string = items[1];
+        }
+        let code = this._code + '';
+        if (code.length >= 7) {
+            code = code.slice(1);
+        }
+        this.labels[0].string = code;
     }
 
     CmdQuoteSubscribe(flag) {

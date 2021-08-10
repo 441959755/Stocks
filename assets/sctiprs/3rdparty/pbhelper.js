@@ -520,6 +520,34 @@ PBHelper.prototype = {
             let data = CmdStockOrderReply.decode(new Uint8Array(buff));
             return data;
         }
+        //获取炒股大赛列表应答
+        else if (id == pb.MessageId.Rep_Game_CgdsList) {
+            let CgdsList = pb.CgdsList;
+            return CgdsList.decode(new Uint8Array(buff));
+        }
+        //报名炒股大赛应答
+        else if (id == pb.MessageId.Rep_Game_CgdsReg) {
+            let CmdCgdsRegReply = pb.CmdCgdsRegReply;
+            return CmdCgdsRegReply.decode(new Uint8Array(buff));
+        }
+        //获取炒股大赛排行榜
+        else if (id == pb.MessageId.Rep_Game_CgdsRanking) {
+            let RankingList = pb.RankingList;
+            return RankingList.decode(new Uint8Array(buff));
+        }
+        //同步所有炒股大赛状态
+        else if (id == pb.MessageId.Sync_S2C_GameCgds) {
+            let CgdsState = pb.CgdsState;
+            GameData.cgdsStateList = CgdsState.decode(new Uint8Array(buff)).items;
+            console.log('同步所有炒股大赛状态' + JSON.stringify(GameData.cgdsStateList));
+        }
+
+        //同步一条炒股大赛状态
+        else if (id == pb.MessageId.Sync_S2C_GameCgdsItem) {
+            let CgdsStateItem = pb.CgdsStateItem;
+            let data = CgdsStateItem.decode(new Uint8Array(buff));
+            console.log('同步一条炒股大赛状态' + JSON.stringify(data));
+        }
     }
 }
 

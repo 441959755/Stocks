@@ -38,4 +38,6 @@ export default class NewClass extends cc.Component {
             this.labels[7].string = '卖出';
         }
     }
+
+
 }

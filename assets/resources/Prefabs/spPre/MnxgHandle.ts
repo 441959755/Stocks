@@ -75,7 +75,7 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-        GameCfg.GameType = 'MNXG';
+        GameCfg.GameType = pb.GameType.MoNiChaoGu;
         let shen = 1399001;
         let lu = '1';
         this.onShow();
@@ -190,7 +190,7 @@ export default class NewClass extends cc.Component {
     onUpdateMycgData() {
 
         this.kczcLa.string = GameData.mncgDataList.account || 0;
-        let wt, cc;
+        let wt = 0, cc = 0;
         if (GameData.mncgDataList.orderList.items) {
             GameData.mncgDataList.orderList.items.forEach(el => {
                 if (el.state == pb.OrderState.Init) {
@@ -198,7 +198,7 @@ export default class NewClass extends cc.Component {
                 }
 
             });
-            this.wtzcLa.string = ComUtils.changeTwoDecimal(wt);
+            this.wtzcLa.string = ComUtils.changeTwoDecimal(wt) + '';
         }
         else {
             this.wtzcLa.string = '0';
@@ -209,7 +209,7 @@ export default class NewClass extends cc.Component {
                 cc += (el.volume * el.priceCost);
 
             });
-            this.cczcLa.string = ComUtils.changeTwoDecimal(cc);
+            this.cczcLa.string = ComUtils.changeTwoDecimal(cc) + '';
         }
         else {
             this.cczcLa.string = '0';
@@ -217,7 +217,7 @@ export default class NewClass extends cc.Component {
 
         let zzc = (GameData.mncgDataList.account || 0) + cc + wt;
 
-        this.zzcLa.string = ComUtils.changeTwoDecimal(zzc);
+        this.zzcLa.string = ComUtils.changeTwoDecimal(zzc) + '';
     }
 
 
@@ -230,7 +230,7 @@ export default class NewClass extends cc.Component {
 
         //记录
         else if (name == 'sp_topbtn_jyjl') {
-            GlobalEvent.emit(EventCfg.OPENMYHISLAYER);
+            GlobalEvent.emit(EventCfg.OPENMNHISLAYER);
         }
 
         //添加自选
@@ -253,6 +253,18 @@ export default class NewClass extends cc.Component {
         //越换资产
         else if (name == 'sp_mncg_dhzc') {
             GlobalEvent.emit(EventCfg.OPENDHZCLLAYER);
+        }
+
+        else if (name == 'sp_topbtn_mr') {
+            GlobalEvent.emit(EventCfg.OPENBUYBOX);
+        }
+
+        else if (name == 'sp_topbtn_mc') {
+            GlobalEvent.emit(EventCfg.OPENSELLBOX);
+        }
+
+        else if (name == 'sp_topbtn_cd') {
+            GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
         }
 
     }

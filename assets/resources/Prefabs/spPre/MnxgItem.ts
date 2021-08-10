@@ -15,6 +15,8 @@ export default class NewClass extends cc.Component {
 
     _code = null;
 
+    items = null;
+
     onEnable() {
         //进来获取的第一条行情
         GlobalEvent.on(EventCfg.CMDQUOTITEM, (info) => {
@@ -55,18 +57,15 @@ export default class NewClass extends cc.Component {
                 total: 1,
             }
             socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
+            console.log('info:' + JSON.stringify(info1));
         }
 
         //订阅
         this.CmdQuoteSubscribe(true);
-    }
+        this.items = GameCfgText.getGPPKItemInfo(this._code);
 
-    setLabel(info) {
-        console.log(info);
-        let items = GameCfgText.getGPPKItemInfo(this._code);
-
-        if (items) {
-            this.labs[1].string = items[1];
+        if (this.items) {
+            this.labs[1].string = this.items[1];
         }
 
         let code = this._code + '';
@@ -75,8 +74,11 @@ export default class NewClass extends cc.Component {
             code = code.slice(1);
         }
         this.labs[0].string = code;
+    }
 
-        this.labs[2].string = ComUtils.changeTwoDecimal(info.price);
+    setLabel(info) {
+
+        this.labs[2].string = ComUtils.changeTwoDecimal(info.price) + '';
 
         let zd = info.price - info.close;
         if (zd < 0) {
@@ -93,10 +95,10 @@ export default class NewClass extends cc.Component {
         this.labs[3].string = ComUtils.changeTwoDecimal(zd) + '';
         let zdf = zd / info.close * 100;
         this.labs[4].string = ComUtils.changeTwoDecimal(zdf) + '%';
-        this.labs[5].string = ComUtils.changeTwoDecimal(info.open);
-        this.labs[6].string = ComUtils.changeTwoDecimal(info.close);
-        this.labs[7].string = ComUtils.changeTwoDecimal(info.high);
-        this.labs[8].string = ComUtils.changeTwoDecimal(info.low);
+        this.labs[5].string = ComUtils.changeTwoDecimal(info.open) + '';
+        this.labs[6].string = ComUtils.changeTwoDecimal(info.close) + '';
+        this.labs[7].string = ComUtils.changeTwoDecimal(info.high) + '';
+        this.labs[8].string = ComUtils.changeTwoDecimal(info.low) + '';
     }
 
 
@@ -127,6 +129,12 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         //看信号买卖
         if (name == 'item') {
+
+            if (this.items[3] != 0) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '该股票已退市');
+                return;
+            }
+
             GlobalEvent.emit(EventCfg.OPENZNDRAW, this._code);
         }
         //删除

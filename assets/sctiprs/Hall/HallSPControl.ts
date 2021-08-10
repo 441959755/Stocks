@@ -28,20 +28,81 @@ export default class NewClass extends cc.Component {
 
     sellBox: cc.Node = null;
 
+    mncd: cc.Node = null;
+
+    cgds: cc.Node = null;;
+
+    cgdsph: cc.Node = null;
+
 
     onLoad() {
         GlobalEvent.on(EventCfg.OPENZNXG, this.onLoadZNXGLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZGLAYER, this.openZGLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZNDRAW, this.openZNDraw.bind(this), this);
-        GlobalEvent.on(EventCfg.OPENMYXG, this.openMyxgLayer.bind(this), this);
+        GlobalEvent.on(EventCfg.OPENMNXG, this.openMnxgLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENADDZXGPBOX, this.openAddZxgpBox.bind(this), this);
         GlobalEvent.on(EventCfg.OPENDHZCLLAYER, this.openDhzcLayer.bind(this), this);
-        GlobalEvent.on(EventCfg.OPENMYHISLAYER, this.openMyHisLayer.bind(this), this);
+        GlobalEvent.on(EventCfg.OPENMNHISLAYER, this.openMnHisLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENBKBOX, this.openBKBox.bind(this), this);
 
         GlobalEvent.on(EventCfg.OPENBUYBOX, this.openBuyBox.bind(this), this);
 
         GlobalEvent.on(EventCfg.OPENSELLBOX, this.openSellBox.bind(this), this);
+        GlobalEvent.on(EventCfg.OPENMNCDLAYER, this.openMnCDLayer.bind(this), this);
+
+        GlobalEvent.on(EventCfg.OPENCGDS, this.openCgdsLayer.bind(this), this);
+
+        GlobalEvent.on(EventCfg.OPENCGDSPH, this.openCgdsph.bind(this), this);
+    }
+
+    openCgdsph(id) {
+        if (this.cgdsph) {
+            this.cgdsph.active = true;
+            let handle = this.cgdsph.getComponent('ChaoGuRanking');
+            handle.onShow(id);
+        }
+        else {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            LoadUtils.loadRes('Prefabs/spPre/chaoGuRanking', (pre) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                this.cgdsph = cc.instantiate(pre);
+                this.node.addChild(this.cgdsph);
+                this.cgdsph.active = true;
+                let handle = this.cgdsph.getComponent('ChaoGuRanking');
+                handle.onShow(id);
+            })
+        }
+
+    }
+
+    openCgdsLayer() {
+        if (this.cgds) {
+            this.cgds.active = true;
+        }
+        else {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            LoadUtils.loadRes('Prefabs/spPre/chaoGuDaSai', (pre) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                this.cgds = cc.instantiate(pre);
+                this.node.addChild(this.cgds);
+                this.cgds.active = true;
+            })
+        }
+    }
+
+    openMnCDLayer() {
+        if (this.mncd) {
+            this.mncd.active = true;
+        }
+        else {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            LoadUtils.loadRes('Prefabs/spPre/mncd', (pre) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                this.mncd = cc.instantiate(pre);
+                this.node.addChild(this.mncd);
+                this.mncd.active = true;
+            })
+        }
     }
 
     openSellBox(data) {
@@ -99,7 +160,7 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    openMyHisLayer() {
+    openMnHisLayer() {
         if (this.myhisNode) {
             this.myhisNode.active = true;
         }
@@ -180,7 +241,7 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    openMyxgLayer() {
+    openMnxgLayer() {
         this.node.children.forEach(el => {
             el.active = false;
         })
@@ -218,13 +279,16 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENZNXG);
         GlobalEvent.off(EventCfg.OPENZGLAYER);
         GlobalEvent.off(EventCfg.OPENZNDRAW);
-        GlobalEvent.off(EventCfg.OPENMYXG);
+        GlobalEvent.off(EventCfg.OPENMNXG);
         GlobalEvent.off(EventCfg.OPENADDZXGPBOX);
         GlobalEvent.off(EventCfg.OPENDHZCLLAYER);
-        GlobalEvent.off(EventCfg.OPENMYHISLAYER);
+        GlobalEvent.off(EventCfg.OPENMNHISLAYER);
         GlobalEvent.off(EventCfg.OPENBKBOX);
         GlobalEvent.off(EventCfg.OPENBUYBOX);
         GlobalEvent.off(EventCfg.OPENSELLBOX);
+        GlobalEvent.off(EventCfg.OPENMNCDLAYER);
+        GlobalEvent.off(EventCfg.OPENCGDS);
+        GlobalEvent.off(EventCfg.OPENCGDSPH);
         LoadUtils.releaseRes('Prefabs/spPre/znDrawLayer');
         LoadUtils.releaseRes('Prefabs/spPre/znxgLayer');
         LoadUtils.releaseRes('Prefabs/spPre/zgLayer');
@@ -235,6 +299,9 @@ export default class NewClass extends cc.Component {
         LoadUtils.releaseRes('Prefabs/spPre/selectBkBox');
         LoadUtils.releaseRes('Prefabs/spPre/buyBox');
         LoadUtils.releaseRes('Prefabs/spPre/sellBox');
+        LoadUtils.releaseRes('Prefabs/spPre/mncd');
+        LoadUtils.releaseRes('Prefabs/spPre/chaoGuDaSai');
+        LoadUtils.releaseRes('Prefabs/spPre/chaoGuRanking');
     }
 
 }

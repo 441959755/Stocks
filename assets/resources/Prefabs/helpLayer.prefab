@@ -27,20 +27,20 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 50
-      },
-      {
-        "__id__": 51
-      },
-      {
-        "__id__": 52
-      },
-      {
         "__id__": 53
+      },
+      {
+        "__id__": 54
+      },
+      {
+        "__id__": 55
+      },
+      {
+        "__id__": 56
       }
     ],
     "_prefab": {
-      "__id__": 54
+      "__id__": 57
     },
     "_opacity": 255,
     "_color": {
@@ -244,11 +244,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 48
+        "__id__": 51
       }
     ],
     "_prefab": {
-      "__id__": 49
+      "__id__": 52
     },
     "_opacity": 255,
     "_color": {
@@ -938,14 +938,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 45
+        "__id__": 48
       },
       {
-        "__id__": 46
+        "__id__": 49
       }
     ],
     "_prefab": {
-      "__id__": 47
+      "__id__": 50
     },
     "_opacity": 255,
     "_color": {
@@ -1019,12 +1019,15 @@
       },
       {
         "__id__": 41
+      },
+      {
+        "__id__": 44
       }
     ],
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 44
+      "__id__": 47
     },
     "_opacity": 255,
     "_color": {
@@ -1610,7 +1613,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "MY",
+    "_name": "MN",
     "_objFlags": 0,
     "_parent": {
       "__id__": 25
@@ -1713,6 +1716,113 @@
       "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "7dLXWx3KlBGocxxLl+uxjg",
+    "sync": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "CGDS",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 25
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 45
+      }
+    ],
+    "_prefab": {
+      "__id__": 46
+    },
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 128,
+      "g": 128,
+      "b": 128,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 1280,
+      "height": 246.84
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 1
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        -0.829,
+        299.702,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 44
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_useOriginalSize": false,
+    "_string": "给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、",
+    "_N$string": "给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、给帮组说明、",
+    "_fontSize": 24,
+    "_lineHeight": 34,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_batchAsBitmap": false,
+    "_styleFlags": 0,
+    "_underlineHeight": 0,
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 3,
+    "_N$cacheMode": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
+    },
+    "fileId": "6439gvwo9JaaGr8paDRBW+",
     "sync": false
   },
   {
@@ -1926,8 +2036,11 @@
     "ZNXG": {
       "__id__": 38
     },
-    "MYXGNode": {
+    "MNXGNode": {
       "__id__": 41
+    },
+    "CGDSNode": {
+      "__id__": 44
     },
     "_id": ""
   },

@@ -18,7 +18,7 @@ export default class NewClass extends cc.Component {
     onShow(data, index) {
 
         this._curData = data;
-        this.label[0].string = index + 1;
+        this.label[0].string = index;
         this.label[1].string = this._curData.code;
         this.label[2].string = this._curData.name;
         this.label[3].string = this._curData.lastAskPrice;

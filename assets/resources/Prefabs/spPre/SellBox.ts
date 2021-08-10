@@ -37,17 +37,16 @@ export default class NewClass extends cc.Component {
         this.curData = data;
         this.codeLabal.string = this.curData.code;
         this.nameLabel.string = this.curData.name;
-        //  this.priceLabel.string = this.curData.price;
+
         this.mcjgLabel.string = this.curData.price;
         this.mcslLabel.string = '0';
-        //  let tmp = a?.val?.name || '';
-        // GameData.mncgDataList.positionList.items
+
         let items = GameData.mncgDataList.positionList.items || [];
 
         if (items.length > 0) {
             items.forEach(el => {
                 if (el.code == this.curData.code) {
-                    this.curSl = el.volume;
+                    this.curSl = el.volumeFree;
                 }
             });
         }
@@ -65,9 +64,6 @@ export default class NewClass extends cc.Component {
 
     }
 
-    start() {
-
-    }
 
     onBtnClick(event, data) {
         let name = event.target.name;
@@ -82,7 +78,7 @@ export default class NewClass extends cc.Component {
                 return;
             }
             this.curData.price -= 0.01;
-            this.mcjgLabel.string = ComUtils.changeTwoDecimal(this.curData.price);
+            this.mcjgLabel.string = ComUtils.changeTwoDecimal(this.curData.price) + '';
         }
         //加
         else if (name == 'sp_znxg_add') {
@@ -91,7 +87,7 @@ export default class NewClass extends cc.Component {
                 return;
             }
             this.curData.price += 0.01;
-            this.mcjgLabel.string = ComUtils.changeTwoDecimal(this.curData.price);
+            this.mcjgLabel.string = ComUtils.changeTwoDecimal(this.curData.price) + '';
         }
 
         else if (name == 'sp_znxg_sub1') {
@@ -134,32 +130,32 @@ export default class NewClass extends cc.Component {
             this.mcslLabel.string = this.curSellCount + '';
         }
         //1/2
-        else if (name == 'sp_znxg_qc1') {
+        else if (name == 'sp_znxg_fc1') {
             if (!this.curSl) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '没有持仓数量!');
                 return;
             }
-            this.curSellCount = this.curSl / 2;
+            this.curSellCount = Math.ceil(this.curSl / 2 / 100) * 100;
             this.mcslLabel.string = this.curSellCount + '';
 
         }
         //1/3
-        else if (name == 'sp_znxg_qc2') {
+        else if (name == 'sp_znxg_fc2') {
             if (!this.curSl) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '没有持仓数量!');
                 return;
             }
-            this.curSellCount = this.curSl / 3;
+            this.curSellCount = Math.ceil(this.curSl / 3 / 100) * 100;
             this.mcslLabel.string = this.curSellCount + '';
 
         }
         //1/4
-        else if (name == 'sp_znxg_qc3') {
+        else if (name == 'sp_znxg_fc3') {
             if (!this.curSl) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '没有持仓数量!');
                 return;
             }
-            this.curSellCount = this.curSl / 4;
+            this.curSellCount = Math.ceil(this.curSl / 4 / 100) * 100;
             this.mcslLabel.string = this.curSellCount + '';
 
         }
@@ -188,7 +184,7 @@ export default class NewClass extends cc.Component {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '卖出下单成功!');
                 }
                 else {
-
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.result.err);
                 }
             })
 
@@ -196,9 +192,4 @@ export default class NewClass extends cc.Component {
 
     }
 
-    onToggleClick(event, data) {
-        let name = event.node.name;
-    }
-
-    // update (dt) {}
 }

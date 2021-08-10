@@ -308,6 +308,8 @@ export default class GameData {
 
     public static mncgDataList = null;  //模拟闯关数据
 
+    public static cgdsStateList = [];  //炒股大赛状态;
+
     // public static roomHostID = null;    //房主ID
 
     public static locationLayer = null; //等位页面

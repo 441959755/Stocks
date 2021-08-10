@@ -542,16 +542,16 @@ export default class NewClass extends cc.Component {
         let zfl = (data.close - preData.close) / preData.close * 100;
         this.cLabel[3].string = ComUtils.changeTwoDecimal(zf) + '    ' + ComUtils.changeTwoDecimal(zfl) + '%';
 
-        this.cLabel[4].string = ComUtils.changeTwoDecimal(data.high);
-        this.cLabel[5].string = ComUtils.changeTwoDecimal(data.open);
+        this.cLabel[4].string = ComUtils.changeTwoDecimal(data.high) + '';
+        this.cLabel[5].string = ComUtils.changeTwoDecimal(data.open) + '';
 
         let zf1 = (data.high - data.low) / preData.close * 100;
         this.cLabel[6].string = ComUtils.changeTwoDecimal(zf1) + '%';
         this.cLabel[7].string = ComUtils.numberConvertUnit(parseInt(data.volume / 100 + '')) + '手';
 
 
-        this.cLabel[8].string = ComUtils.changeTwoDecimal(data.low);
-        this.cLabel[9].string = ComUtils.changeTwoDecimal(preData.close);
+        this.cLabel[8].string = ComUtils.changeTwoDecimal(data.low) + '';
+        this.cLabel[9].string = ComUtils.changeTwoDecimal(preData.close) + '';
 
         if (items) {
             let hs = data.volume / items[4] * 100;
@@ -781,7 +781,7 @@ export default class NewClass extends cc.Component {
         }
         //点击模以
         else if (name == 'sp_btn_moni') {
-            GlobalEvent.emit(EventCfg.OPENMYXG);
+            GlobalEvent.emit(EventCfg.OPENMNXG);
         }
 
         else if (name == 'sp_btn_xunlian') {

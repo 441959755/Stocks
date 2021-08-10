@@ -21,14 +21,18 @@ export default class NewClass extends cc.Component {
     ZNXG: cc.Node = null;
 
     @property(cc.Node)
-    MYXGNode: cc.Node = null;
+    MNXGNode: cc.Node = null;
+
+    @property(cc.Node)
+    CGDSNode: cc.Node = null;
 
     onEnable() {
         this.SMNode.active = false;
         this.DXNode.active = false;
         this.QHNode.active = false;
         this.ZBNode.active = false;
-        this.MYXGNode.active = false;
+        this.MNXGNode.active = false;
+        this.CGDSNode.active = false;
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             this.SMNode.active = true;
@@ -45,8 +49,11 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == 'ZNXG') {
             this.ZNXG.active = true;
         }
-        else if (GameCfg.GameType == 'MNXG') {
-            this.MYXGNode.active = true;
+        else if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+            this.MNXGNode.active = true;
+        }
+        else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+            this.CGDSNode.active = true;
         }
 
     }

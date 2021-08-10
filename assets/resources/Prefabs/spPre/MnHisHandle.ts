@@ -55,7 +55,7 @@ export default class NewClass extends cc.Component {
         let info = {
             uid: GameData.userID,
             to: time,
-            pageSize: 100,
+            pageSize: 200,
         }
 
         let CmdQueryStockOrder = pb.CmdQueryStockOrder;
@@ -93,7 +93,7 @@ export default class NewClass extends cc.Component {
             //历史记录
             else {
                 let item = cc.instantiate(this.item3);
-                this.contents[3].addChild(item);
+                this.contents[2].addChild(item);
                 let handle = item.getComponent('MnHisItem2');
                 handle.onShow(el);
             }

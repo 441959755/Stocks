@@ -144,16 +144,7 @@ export default class ComUtils {
 			let day = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
 			time = year + '' + month + '' + day;
 		}
-		// } else {
 
-		// 	// let ye = time.getFullYear();
-		// 	// let mon = time.getMonth() + 1 >= 10 ? time.getMonth() + 1 : '0' + (time.getMonth() + 1);
-
-		// 	// let da = time.getDate() >= 10 ? time.getDate() : '0' + (time.getDate());
-
-		// 	// time = ye + '' + mon + '' + da;
-		// 	time = ((time + '').replace(/-/g, ''));
-		// }
 		return time;
 	}
 
