@@ -2232,13 +2232,15 @@
     "_id": ""
   },
   {
-    "__type__": "ec69ehYXFlBkpvzKcqCzjex",
+    "__type__": "fdc60dimltDobXHbxo0Uso8",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 7
     },
     "_enabled": true,
+    "label": null,
+    "text": "hello",
     "_id": ""
   },
   {
