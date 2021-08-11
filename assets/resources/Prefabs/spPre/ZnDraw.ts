@@ -467,7 +467,7 @@ export default class NewClass extends cc.Component {
     getHttpGPData(type) {
 
         let code;
-        code = this.code;
+        code = this.code + '';
         if ((code + '').length >= 7) {
             code = (code + '').slice(1);
         }
