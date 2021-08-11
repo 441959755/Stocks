@@ -227,7 +227,12 @@ export default class NewClass extends cc.Component {
 
     //资产数据
     onUpdateMycgData() {
-        let data;
+        let data = {
+            account: 100000,
+            orderList: null,
+            positionList: null,
+        };
+
         if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
             data = GameData.mncgDataList;
         }
@@ -240,7 +245,7 @@ export default class NewClass extends cc.Component {
             })
         }
 
-        this.kczcLa.string = data.account || 0;
+        this.kczcLa.string = (data.account || 0) + '';
         let wt = 0, cc = 0;
         if (data.orderList && data.orderList.items) {
             data.orderList.items.forEach(el => {
