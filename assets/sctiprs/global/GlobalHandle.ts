@@ -296,21 +296,7 @@ export default class GlobalHandle {
             console.log(JSON.stringify(info));
             if (!info.err) {
                 if (info && info.items) {
-                    // let arr = [];
-                    // info.items.forEach(el => {
-                    //     arr.push(el.kOffset);
-                    // });
 
-                    // arr = Array.from(new Set(arr));
-
-                    // arr.forEach(e => {
-                    //     for (let i = 0; i < info.items.length; i++) {
-                    //         if (info.items[i].kOffset == e) {
-                    //             UpGameOpt.addOpt(info.items[i])
-                    //             break;
-                    //         }
-                    //     }
-                    // })
                     UpGameOpt.player1Opt = info.items;
 
                     if (cb) {

@@ -71,6 +71,9 @@ export default class NewClass extends cc.Component {
     mn_b_node: cc.Node = null;
 
     @property(cc.Node)
+    cg_b_node: cc.Node = null;
+
+    @property(cc.Node)
     box3: cc.Node = null;
 
     @property(cc.Node)
@@ -98,7 +101,6 @@ export default class NewClass extends cc.Component {
     d_labelv = [];
 
     onLoad() {
-
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         //更新选择label信息
         GlobalEvent.on('onClickPosUpdateLabel', (index) => {
@@ -187,9 +189,30 @@ export default class NewClass extends cc.Component {
     //不同模式UI样式
     onUIShow() {
         //模拟选股
-        if (GameCfg.GameType == 'MNXG') {
+        if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+            this.zn_b_node.active = false;
+            this.mn_b_node.active = false;
+            this.cg_b_node.active = true;
+            this.addMark.active = false;
+            this.laNode.active = false;
+            this.mnLaNode.active = true;
+            this.toggles[1].node.active = false;
+            if (this.toggles[0].isChecked) {
+                this.box3.active = true;
+                this.t_grap_node.width = this.now_width;
+                this.d_grap_node.width = this.now_width;
+            }
+            else {
+                this.box3.active = false;
+                this.t_grap_node.width = this.ori_width;
+                this.d_grap_node.width = this.ori_width;
+            }
+        }
+        else if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+            this.toggles[1].node.active = true;
             this.mn_b_node.active = true;
             this.zn_b_node.active = false;
+            this.cg_b_node.active = false;
             if (this.toggles[0].isChecked) {
                 this.box3.active = true;
                 this.t_grap_node.width = this.now_width;
@@ -215,8 +238,11 @@ export default class NewClass extends cc.Component {
         }
         //智能选股
         else if (GameCfg.GameType == 'ZNXG') {
+            this.toggles[1].node.active = true;
+            this.cg_b_node.active = false;
             this.zn_b_node.active = true;
             this.mn_b_node.active = false;
+            //   this.yiShouCang.active = false;
             if (this.toggles[1].isChecked) {
                 this.laNode.active = true;
                 this.mnLaNode.active = false;
@@ -291,6 +317,15 @@ export default class NewClass extends cc.Component {
         }
         else {
             this.ziXunBtn.active = true;
+        }
+
+        if (GameCfg.GameType == 'ZNXG') {
+            if (GameData.AIStockList.indexOf(parseInt(this.code)) != -1) {
+                this.yiShouCang.active = true;
+            }
+            else {
+                this.yiShouCang.active = false;
+            }
         }
     }
 
@@ -465,14 +500,6 @@ export default class NewClass extends cc.Component {
                 this.gpDataDay = res;
             }
         })
-
-        // HttpUtils.sendRequest(url, data, (res) => {
-        //     res = res.replace('(', '');
-        //     res = res.replace(')', '');
-        //     //  console.log('日k：' + res);
-        //     res = JSON.parse(res);
-
-        // })
     }
 
     //订阅股票  获取时时数据
@@ -686,8 +713,8 @@ export default class NewClass extends cc.Component {
         else if (name == 'toggle2') {
 
             GameCfg.GAMEFUPAN = true;
-            if (!this.gpDataDay) {
 
+            if (!this.gpDataDay) {
                 this.getGPDataDay();
             }
             else {
@@ -820,6 +847,9 @@ export default class NewClass extends cc.Component {
 
             })
             GameData.AIStockList.push(this.code);
+
+            GlobalEvent.emit('UpdateShouCang');
+
             this.yiShouCang.active = true;
         }
 

@@ -2,7 +2,7 @@ import { pb } from "../../../protos/proto";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
-
+declare const async: any;
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -17,10 +17,13 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     tipsNode: cc.Node = null;
 
-    onShow(id) {
+    _curData = null;
+
+    onShow(data) {
+        this._curData = data;
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         let info = {
-            id: id,
+            id: data.id,
         }
 
         let CmdCgdsRanking = pb.CmdCgdsRanking;
@@ -30,11 +33,25 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_Game_CgdsRanking, buff, (res) => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             console.log('炒股大赛排行榜' + JSON.stringify(res));
-            this.createItem(res);
+            this.createItem(res.Items);
         })
     }
 
-    createItem(res) {
+    createItem(items) {
+        if (!items || items.length <= 0) {
+            return;
+        }
+        let index = 0;
+        async.eachLimit(items, 1, (el, cb) => {
+            let node = cc.instantiate(this.item);
+            this.content.addChild(node);
+            let handle = node.getComponent('ChaoGuRankingItem');
+            index++;
+            handle.onShow(el, index, this._curData);
+
+            setTimeout(cb, 0);
+        })
+
 
     }
 
@@ -43,5 +60,9 @@ export default class NewClass extends cc.Component {
         if (name == 'blackbtn') {
             this.node.active = false;
         }
+    }
+
+    onDisable() {
+        this.content.removeAllChildren();
     }
 }

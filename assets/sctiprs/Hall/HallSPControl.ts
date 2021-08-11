@@ -34,7 +34,6 @@ export default class NewClass extends cc.Component {
 
     cgdsph: cc.Node = null;
 
-
     onLoad() {
         GlobalEvent.on(EventCfg.OPENZNXG, this.onLoadZNXGLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZGLAYER, this.openZGLayer.bind(this), this);
@@ -66,7 +65,7 @@ export default class NewClass extends cc.Component {
             LoadUtils.loadRes('Prefabs/spPre/chaoGuRanking', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.cgdsph = cc.instantiate(pre);
-                this.node.addChild(this.cgdsph);
+                this.node.addChild(this.cgdsph, 30);
                 this.cgdsph.active = true;
                 let handle = this.cgdsph.getComponent('ChaoGuRanking');
                 handle.onShow(id);
@@ -160,17 +159,21 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    openMnHisLayer() {
+    openMnHisLayer(id) {
         if (this.myhisNode) {
             this.myhisNode.active = true;
+            let handle = this.myhisNode.getComponent('MnHisHandle');
+            handle.onShow(id);
         }
         else {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes('Prefabs/spPre/mnHis', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.myhisNode = cc.instantiate(pre);
-                this.node.addChild(this.myhisNode);
+                this.node.addChild(this.myhisNode, 30);
                 this.myhisNode.active = true;
+                let handle = this.myhisNode.getComponent('MnHisHandle');
+                handle.onShow(id);
             })
         }
     }
@@ -241,7 +244,7 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    openMnxgLayer() {
+    openMnxgLayer(info) {
         this.node.children.forEach(el => {
             el.active = false;
         })
@@ -252,10 +255,14 @@ export default class NewClass extends cc.Component {
                 this.myxgNode = cc.instantiate(pre);
                 this.node.addChild(this.myxgNode);
                 this.myxgNode.active = true;
+                let handle = this.myxgNode.getComponent('MnxgHandle');
+                handle.onShow(info);
             })
         }
         else {
             this.myxgNode.active = true;
+            let handle = this.myxgNode.getComponent('MnxgHandle');
+            handle.onShow(info);
         }
     }
 

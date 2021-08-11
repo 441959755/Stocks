@@ -23,12 +23,13 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             console.log('炒股大赛' + JSON.stringify(res));
             let flag = false;
-            res.items.forEach(el => {
-                if (el && (!el.status)) {
-                    flag = true
-                }
 
-            });
+            for (let i = 0; i < res.items.length; i++) {
+                if (res.items[i] && res.items[i].status != 2) {
+                    flag = true;
+                    break;
+                }
+            }
 
             if (!flag) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '炒股大赛未开始');

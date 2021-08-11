@@ -120,11 +120,11 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'sp_cgds_sjph2') {
-            GlobalEvent.emit(EventCfg.OPENCGDSPH, this._curData.id);
+            GlobalEvent.emit(EventCfg.OPENCGDSPH, this._curData);
         }
 
         else if (name == 'sp_cgds_ljcj2') {
-
+            GlobalEvent.emit(EventCfg.OPENMNXG, this._curData);
         }
     }
 

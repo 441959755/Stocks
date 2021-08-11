@@ -49,16 +49,38 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     lNode: cc.Node = null;
 
+    @property(cc.Node)
+    dhzc: cc.Node = null;
+
+    @property(cc.Label)
+    title: cc.Label = null;
+
     _flag = true;
 
-    onLoad() {
-        GlobalEvent.on(EventCfg.ADDZXGP, this.onShow.bind(this), this);
+    @property(cc.Node)
+    sp_topbtn_phb: cc.Node = null;
+
+    onEnable() {
+        GlobalEvent.on(EventCfg.ADDZXGP, this.onAddZx.bind(this), this);
+
+        //跟新资产数据
+        GlobalEvent.on(EventCfg.CHANGEMNCGACCOUNT, this.onUpdateMycgData.bind(this), this);
     }
 
-    onShow() {
-        if (GameData.selfStockList.length > 0) {
-            //  if (this.content1.children.length < GameData.selfStockList.length) {
-            GameData.selfStockList.forEach((el, index) => {
+    onAddZx() {
+        let arr = [];
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+            arr = GameData.selfStockList;
+        }
+        else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+            GameData.cgdsStockList.forEach(el => {
+                if (el.id == GameData.SpStockData.id) {
+                    arr = el.stockList;
+                }
+            })
+        }
+        if (arr.length > 0) {
+            arr.forEach((el, index) => {
                 if (!this.content1.children[index]) {
                     let node = cc.instantiate(this.item1);
                     this.content1.addChild(node);
@@ -66,7 +88,6 @@ export default class NewClass extends cc.Component {
                 let handle = this.content1.children[index].getComponent('MnxgItem');
                 handle.onShow(el);
             })
-            //  }
             this.tipsNode.active = false;
         }
         else {
@@ -74,12 +95,30 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    onEnable() {
-        GameCfg.GameType = pb.GameType.MoNiChaoGu;
+    onShow(data?) {
+
+        if (data) {
+
+            GameData.SpStockData = data;
+            GameCfg.GameType = pb.GameType.ChaoGuDaSai;
+            this.dhzc.active = false;
+            this.title.string = data.title;
+            this.sp_topbtn_phb.active = true;
+        }
+        else {
+            GameCfg.GameType = pb.GameType.MoNiChaoGu;
+            this.dhzc.active = true;
+            this.title.string = '模拟炒股';
+            this.sp_topbtn_phb.active = false;
+        }
+
         let shen = 1399001;
         let lu = '1';
-        this.onShow();
-        GlobalEvent.on(EventCfg.CHANGEMNCGACCOUNT, this.onUpdateMycgData.bind(this), this);
+        this.onAddZx();
+
+
+
+        //初始资产数据
         this.onUpdateMycgData();
 
         //进来获取的第一条行情
@@ -95,8 +134,8 @@ export default class NewClass extends cc.Component {
             else if (info.items[0].code == lu) {
                 this.onUpdateSLLabel(info.items[0], this.lNode);
             }
-
         })
+
 
         //订阅时时行情
         GlobalEvent.on(EventCfg.SYNCQUOTEITEM, (data) => {
@@ -169,30 +208,42 @@ export default class NewClass extends cc.Component {
 
             socket.send(pb.MessageId.Req_QuoteSubscribe, buff, info => {
                 console.log('订阅：' + JSON.stringify(info));
-
             })
         }
-
     }
 
     onDisable() {
+        GlobalEvent.off(EventCfg.ADDZXGP);
         GlobalEvent.off(EventCfg.SYNCQUOTEITEM);
         GlobalEvent.off(EventCfg.CMDQUOTITEM);
         //订阅
         this.CmdQuoteSubscribe(false);
         GameCfg.GameType = null;
         GlobalEvent.off(EventCfg.CHANGEMNCGACCOUNT);
-    }
+        GameData.SpStockData = null;
 
+    }
 
 
     //资产数据
     onUpdateMycgData() {
+        let data;
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+            data = GameData.mncgDataList;
+        }
+        else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+            //  data = GameData.cgdsStateList;
+            GameData.cgdsStateList.forEach(el => {
+                if (el.id == GameData.SpStockData.id) {
+                    data = el.state;
+                }
+            })
+        }
 
-        this.kczcLa.string = GameData.mncgDataList.account || 0;
+        this.kczcLa.string = data.account || 0;
         let wt = 0, cc = 0;
-        if (GameData.mncgDataList.orderList.items) {
-            GameData.mncgDataList.orderList.items.forEach(el => {
+        if (data.orderList && data.orderList.items) {
+            data.orderList.items.forEach(el => {
                 if (el.state == pb.OrderState.Init) {
                     wt += el.volume * el.price;
                 }
@@ -203,8 +254,8 @@ export default class NewClass extends cc.Component {
         else {
             this.wtzcLa.string = '0';
         }
-        if (GameData.mncgDataList.positionList.items) {
-            GameData.mncgDataList.positionList.items.forEach(el => {
+        if (data.positionList && data.positionList.items) {
+            data.positionList.items.forEach(el => {
 
                 cc += (el.volume * el.priceCost);
 
@@ -215,7 +266,7 @@ export default class NewClass extends cc.Component {
             this.cczcLa.string = '0';
         }
 
-        let zzc = (GameData.mncgDataList.account || 0) + cc + wt;
+        let zzc = (data.account || 0) + cc + wt;
 
         this.zzcLa.string = ComUtils.changeTwoDecimal(zzc) + '';
     }
@@ -230,7 +281,8 @@ export default class NewClass extends cc.Component {
 
         //记录
         else if (name == 'sp_topbtn_jyjl') {
-            GlobalEvent.emit(EventCfg.OPENMNHISLAYER);
+
+            GlobalEvent.emit(EventCfg.OPENMNHISLAYER, GameData.userID);
         }
 
         //添加自选
@@ -240,7 +292,6 @@ export default class NewClass extends cc.Component {
 
         //帮组
         else if (name == 'sp_topbtn_help') {
-
             GlobalEvent.emit(EventCfg.OPENHELPLAYER);
         }
 
@@ -267,6 +318,10 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
         }
 
+        else if (name == 'sp_topbtn_phb') {
+            GlobalEvent.emit(EventCfg.OPENCGDSPH, GameData.SpStockData);
+        }
+
     }
 
 
@@ -277,17 +332,29 @@ export default class NewClass extends cc.Component {
             this.scorllNode.active = true;
             this.scorllNode1.active = false;
         }
+
         else if (name == 'toggle2') {
             this.scorllNode.active = false;
             this.scorllNode1.active = true;
-            if (GameData.mncgDataList.positionList.items.length > 0) {
 
-                GameData.mncgDataList.positionList.items.forEach((el, index) => {
+            let arr = [];
+            if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+                arr = GameData.mncgDataList.positionList.items;
+            }
+            else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+                GameData.cgdsStateList.forEach(el => {
+                    if (el.id == GameData.SpStockData.id) {
+                        arr = el.state.positionList.items;
+                    }
+                })
+            }
+
+            if (arr.length > 0) {
+                arr.forEach((el, index) => {
                     if (!this.content2.children[index]) {
                         let node = cc.instantiate(this.item2);
                         this.content2.addChild(node);
                     }
-
                     let handle = this.content2.children[index].getComponent('MnxgItem1');
                     handle.onShow(el.code, el);
                 });
@@ -298,7 +365,4 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    onDestroy() {
-        GlobalEvent.off(EventCfg.ADDZXGP);
-    }
 }

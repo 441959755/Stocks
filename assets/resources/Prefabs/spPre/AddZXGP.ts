@@ -1,5 +1,6 @@
 
 import { pb } from "../../../protos/proto";
+import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
@@ -69,18 +70,41 @@ export default class NewClass extends cc.Component {
             if ((code + '').length >= 7) {
                 code = (code + '').slice(1);
             }
+            let info;
+            if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+                if (GameData.selfStockList.indexOf(items[0]) != -1) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '已添加，请重新输入');
+                    this.editBox.string = '';
+                    return;
+                }
 
-            if (GameData.selfStockList.indexOf(items[0]) != -1) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '已添加，请重新输入');
-                this.editBox.string = '';
-                return;
+                info = {
+                    removed: false,
+                    code: items[0],
+                    id: 0,
+                    isAiStock: false,
+                }
             }
+            else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+                let arr;
+                GameData.cgdsStockList.forEach(el => {
+                    if (el.id == GameData.SpStockData.id) {
+                        arr = el.stockList;
+                    }
+                })
+                if (arr.indexOf(parseInt(items[0])) != -1) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '已添加，请重新输入');
+                    this.editBox.string = '';
+                    return;
+                }
 
-            let info = {
-                removed: false,
-                code: items[0],
-                id: 0,
-                isAiStock: false,
+                info = {
+                    removed: false,
+                    code: items[0],
+                    id: GameData.SpStockData.id || 0,
+                    isAiStock: false,
+                }
+
             }
 
             let CmdMncgEditStock = pb.CmdMncgEditStock;
@@ -90,7 +114,18 @@ export default class NewClass extends cc.Component {
             socket.send(pb.MessageId.Req_Game_MncgEditStockList, buff, (res) => {
 
             })
-            GameData.selfStockList.push(items[0]);
+
+            if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+                GameData.selfStockList.push(parseInt(items[0]));
+            }
+            else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+                GameData.cgdsStockList.forEach(el => {
+                    if (el.id == GameData.SpStockData.id) {
+                        el.stockList.push(parseInt(items[0]));
+                    }
+                })
+            }
+
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '添加成功');
             this.editBox.string = '';
 

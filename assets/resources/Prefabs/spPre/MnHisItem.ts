@@ -1,5 +1,6 @@
 import { pb } from "../../../protos/proto";
 import GameCfgText from "../../../sctiprs/GameText";
+import ComUtils from "../../../sctiprs/Utils/ComUtils";
 
 const { ccclass, property } = cc._decorator;
 
@@ -26,15 +27,14 @@ export default class NewClass extends cc.Component {
         this.labels[2].string = new Date(time).toLocaleDateString();
         this.labels[3].string = new Date(time).toLocaleTimeString();
 
-        this.labels[4].string = data.price;
-        this.labels[5].string = data.volume;
+        this.labels[4].string = ComUtils.changeTwoDecimal(data.price) + '';
+        this.labels[5].string = ComUtils.changeTwoDecimal(data.volume) + '';
         //  this.labels[6].string = data.volume;
-
-        this.labels[6].string = data.price * data.volume + '';
-        if (data.type == pb.OrderType.AskLimit) {
+        this.labels[6].string = ComUtils.changeTwoDecimal(data.price * data.volume) + '';
+        if (data.type == pb.OrderType.AskLimit || data.type == pb.OrderType.AskMarket) {
             this.labels[7].string = '买入';
         }
-        if (data.type == pb.OrderType.BidLimit) {
+        if (data.type == pb.OrderType.BidLimit || data.type == pb.OrderType.BidMarket) {
             this.labels[7].string = '卖出';
         }
     }

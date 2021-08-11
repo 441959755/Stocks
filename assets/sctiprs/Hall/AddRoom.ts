@@ -42,12 +42,6 @@ export default class NewClass extends cc.Component {
 
             str += id + '';
             this.roomidLabel.string = str;
-
-            // if (str.length == 3) {
-
-            //     this.onEnterRoom(str);
-
-            // }
         }
 
         //清除
@@ -65,7 +59,9 @@ export default class NewClass extends cc.Component {
     }
 
     onEnterRoom(roomid) {
+
         let arr = ComUtils.getJJXunXian();
+
         let data = {
             id: parseInt(roomid),
             uid: GameData.userID,

@@ -1,9 +1,3 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import { pb } from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
@@ -43,12 +37,12 @@ export default class NewClass extends cc.Component {
         this.labs[5].string = data.volume;
         //  this.labels[6].string = data.volume;
 
-        this.labs[6].string = data.price * data.volume + '';
+        //    this.labs[6].string = data.price * data.volume + '';
         if (data.type == pb.OrderType.AskLimit) {
-            this.labs[7].string = '买入';
+            this.labs[6].string = '买入';
         }
         if (data.type == pb.OrderType.BidLimit) {
-            this.labs[7].string = '卖出';
+            this.labs[6].string = '卖出';
         }
 
     }
@@ -56,13 +50,18 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'sp_btn_chedan') {
-
+            let id = 0
+            if (GameData.SpStockData && GameData.SpStockData.id) {
+                id = GameData.SpStockData.id;
+            }
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             let info = {
                 orderId: this._curData.orderId,
                 type: this._curData.type,
                 code: this._curData.code,
                 uid: GameData.userID,
+                id: id,
+                node: this._curData.node,
             }
 
             let CmdStockOrderCancel = pb.CmdStockOrderCancel;
@@ -72,8 +71,13 @@ export default class NewClass extends cc.Component {
             socket.send(pb.MessageId.Req_Game_OrderCancel, buff, (res) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 console.log('删除委托记录' + JSON.stringify(res));
+                if (res.err) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
+                }
+                else {
+                    this.node.destroy();
+                }
 
-                this.node.destroy();
             })
         }
     }

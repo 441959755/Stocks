@@ -34,13 +34,10 @@ export default class NewClass extends cc.Component {
 
     hisList = null;
 
-    today
+    today = null;
 
-    onLoad() {
+    onShow(id) {
 
-    }
-
-    onEnable() {
         this.viewNode.forEach(el => {
             el.active = false;
         })
@@ -53,9 +50,10 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         let time = parseInt(new Date().getTime() / 1000 + '');
         let info = {
-            uid: GameData.userID,
+            uid: id,
             to: time,
             pageSize: 200,
+            id: GameData.SpStockData.id || 0,
         }
 
         let CmdQueryStockOrder = pb.CmdQueryStockOrder;
@@ -70,6 +68,7 @@ export default class NewClass extends cc.Component {
             this.createItem();
         })
     }
+
 
     createItem() {
         async.eachLimit(this.hisList, 1, (el, cb) => {
@@ -108,7 +107,6 @@ export default class NewClass extends cc.Component {
         })
     }
 
-
     onToggleClick(event, data) {
         //    let name = event.node.name;
         this.viewNode.forEach(el => {
@@ -117,8 +115,6 @@ export default class NewClass extends cc.Component {
         this.toggles.forEach((el, index) => {
             if (el.isChecked) {
                 this.viewNode[index].active = true;
-
-
             }
         })
     }

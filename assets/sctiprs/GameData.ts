@@ -306,6 +306,8 @@ export default class GameData {
 
     public static selfStockList = [];  // 自能选股收藏股票列表
 
+    public static cgdsStockList = [];   // 炒股大赛收藏股票列表
+
     public static mncgDataList = null;  //模拟闯关数据
 
     public static cgdsStateList = [];  //炒股大赛状态;
@@ -313,5 +315,7 @@ export default class GameData {
     // public static roomHostID = null;    //房主ID
 
     public static locationLayer = null; //等位页面
+
+    public static SpStockData;  //实盘炒股ID 数据
 
 }

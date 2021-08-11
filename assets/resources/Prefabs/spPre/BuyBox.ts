@@ -1,4 +1,5 @@
 import { pb } from "../../../protos/proto";
+import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
@@ -53,7 +54,16 @@ export default class NewClass extends cc.Component {
 
         this.mrslLabel.string = '0';
 
-        this.kyzc = GameData.mncgDataList.account;
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+            this.kyzc = GameData.mncgDataList.account;
+        }
+        else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+            GameData.cgdsStateList.forEach(el => {
+                if (el.id == GameData.SpStockData.id) {
+                    this.kyzc = el.state.account;
+                }
+            })
+        }
 
         if (!this.kyzc) {
             this.kmgsLabel.string = '0';
@@ -196,6 +206,7 @@ export default class NewClass extends cc.Component {
                 volume: this.cursl,
                 uid: GameData.userID,
                 amount: this.curData.price * this.cursl,
+                id: GameData.SpStockData.id || 0,
             }
             let CmdStockOrder = pb.CmdStockOrder;
             let message = CmdStockOrder.create(info);
@@ -204,7 +215,6 @@ export default class NewClass extends cc.Component {
             socket.send(pb.MessageId.Req_Game_Order, buff, (res) => {
                 console.log('买入下单应答:' + JSON.stringify(res));
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
                 if (res.orderId) {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '买入下单成功!');
                 }

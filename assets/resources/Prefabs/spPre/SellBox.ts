@@ -170,6 +170,7 @@ export default class NewClass extends cc.Component {
                 volume: this.curSellCount,
                 uid: GameData.userID,
                 amount: this.curData.price * this.curSellCount,
+                id: GameData.SpStockData.id || 0,
             }
 
             let CmdStockOrder = pb.CmdStockOrder;

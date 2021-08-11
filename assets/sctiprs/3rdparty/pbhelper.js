@@ -118,16 +118,6 @@ PBHelper.prototype = {
         return buff;
     },
 
-    // onCmdUploadIconConvertToBuff(data) {
-    //     let CmdUploadIcon = pb.PlayerInfo;
-    //     let message = CmdUploadIcon.create({
-    //         uid: data.uid,
-    //         icon: data.icon,
-    //     })
-    //     let buff = CmdUploadIcon.encode(message).finish();
-    //     return buff;
-    // },
-
     onAdClickedConvertTpBuff(data) {
         let AdClicked = pb.AdClicked;
         let message = AdClicked.create(data)
@@ -246,7 +236,8 @@ PBHelper.prototype = {
             || id == pb.MessageId.Rep_Game_SmxlReset
             || id == pb.MessageId.Rep_Hall_ResetGameCounter
             || id == pb.MessageId.Rep_Hall_GetItem
-            || id == pb.MessageId.Rep_Game_CgsGetStageAward) {
+            || id == pb.MessageId.Rep_Game_CgsGetStageAward
+            || id == pb.MessageId.Rep_Game_OrderCancel) {
             let ErrorInfo = pb.ErrorInfo;
             let data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
@@ -471,19 +462,7 @@ PBHelper.prototype = {
 
             GlobalEvent.emit(EventCfg.CHANGEMNCGACCOUNT);
         }
-        //同步所有炒股大赛状态
-        else if (id == pb.MessageId.Sync_S2C_GameCgds) {
-            let CgdsState = pb.CgdsState;
-            let data = CgdsState.decode(new Uint8Array(buff));
-            console.log('同步所有炒股大赛状态' + JSON.stringify(data));
 
-        }
-        //同步一条炒股大赛状态
-        else if (id == pb.MessageId.Sync_S2C_GameCgdsItem) {
-            let CgdsStateItem = pb.CgdsStateItem;
-            let data = CgdsStateItem.decode(new Uint8Array(buff));
-            console.log('同步一条炒股大赛状态' + JSON.stringify(data));
-        }
         //   同步实时行情
         else if (id == pb.MessageId.Sync_S2C_QuoteItem) {
             let QuoteItem = pb.QuoteItem;
@@ -547,6 +526,15 @@ PBHelper.prototype = {
             let CgdsStateItem = pb.CgdsStateItem;
             let data = CgdsStateItem.decode(new Uint8Array(buff));
             console.log('同步一条炒股大赛状态' + JSON.stringify(data));
+
+            for (let i = 0; i < GameData.cgdsStateList.length; i++) {
+                if (GameData.cgdsStateList[i].id == data.id) {
+                    GameData.cgdsStateList[i] = data;
+                    break;
+                }
+            }
+
+            GlobalEvent.emit(EventCfg.CHANGEMNCGACCOUNT);
         }
     }
 }

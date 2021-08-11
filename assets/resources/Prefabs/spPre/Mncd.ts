@@ -21,11 +21,16 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        let id = 0
+        if (GameData.SpStockData && GameData.SpStockData.id) {
+            id = GameData.SpStockData.id;
+        }
         let time = parseInt(new Date().getTime() / 1000 + '');
         let info = {
             uid: GameData.userID,
             to: time,
             pageSize: 200,
+            id: id,
         }
 
         let CmdQueryStockOrder = pb.CmdQueryStockOrder;

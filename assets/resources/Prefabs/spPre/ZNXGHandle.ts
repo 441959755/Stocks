@@ -80,6 +80,8 @@ export default class NewClass extends cc.Component {
             handle.onShow(data, GameData.AIStockList.length - 1);
         }, this);
 
+
+
         GlobalEvent.on(EventCfg.SELECTBK, this.onShowSelectBk.bind(this), this);
 
     }
@@ -90,8 +92,7 @@ export default class NewClass extends cc.Component {
         nodes.forEach((el, index) => {
             if (index > 0) {
                 let handle = el.getComponent('ZnxgItem');
-                //TODO
-                //GameData.SelectBk
+
                 let flag = this.getBKISShow(handle._curData.code);
                 if (flag) { i++ }
                 el.active = flag;
@@ -116,11 +117,13 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
+        GlobalEvent.on('UpdateShouCang', this.getCollectList.bind(this), this);
         GameCfg.GameType = 'ZNXG';
     }
 
     onDisable() {
         GameCfg.GameType = null;
+        GlobalEvent.off('UpdateShouCang');
     }
 
     onBtnToggle(event, data) {

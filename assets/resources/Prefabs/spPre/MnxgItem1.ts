@@ -73,7 +73,7 @@ export default class NewClass extends cc.Component {
         this.labels[9].string = ComUtils.changeTwoDecimal(sy) + '';
     }
 
-    onShow(code, data) {
+    onShow(code, data: any) {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         this._code = code;
         this._curData = data;
@@ -96,7 +96,7 @@ export default class NewClass extends cc.Component {
         if (items) {
             this.labels[1].string = items[1];
         }
-        let code = this._code + '';
+        code = this._code + '';
         if (code.length >= 7) {
             code = code.slice(1);
         }

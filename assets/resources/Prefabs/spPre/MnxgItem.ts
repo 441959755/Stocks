@@ -1,4 +1,5 @@
 import { pb } from "../../../protos/proto";
+import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
@@ -139,10 +140,12 @@ export default class NewClass extends cc.Component {
         }
         //删除
         else if (name == 'sp_btn_shanchu') {
+
             let info = {
                 removed: true,
                 code: this._code,
                 isAiStock: false,
+                id: GameData.SpStockData.id || 0,
             }
             let CmdMncgEditStock = pb.CmdMncgEditStock;
             let message = CmdMncgEditStock.create(info);
@@ -150,8 +153,20 @@ export default class NewClass extends cc.Component {
             socket.send(pb.MessageId.Req_Game_MncgEditStockList, buff, (res) => {
 
             })
-            let index = GameData.selfStockList.indexOf(this._code);
-            GameData.selfStockList.splice(index, 1);
+            if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+                let index = GameData.selfStockList.indexOf(this._code);
+                GameData.selfStockList.splice(index, 1);
+            }
+            else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+                GameData.cgdsStockList.forEach(el => {
+                    if (el.id == GameData.SpStockData.id) {
+                        // arr = el.stockList;
+                        let index = el.stockList.indexOf(this._code);
+                        el.stockList.splice(index, 1);
+                    }
+                })
+            }
+
             this.node.active = false;
             this.node.destroy();
         }
