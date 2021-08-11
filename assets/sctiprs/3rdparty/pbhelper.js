@@ -73,6 +73,7 @@ PBHelper.prototype = {
         let CmdQuoteQuery = pb.CmdQuoteQuery;
         let message = CmdQuoteQuery.create(data)
         let buff = CmdQuoteQuery.encode(message).finish();
+
         return buff;
     },
 
@@ -96,7 +97,6 @@ PBHelper.prototype = {
         console.log(JSON.stringify(data));
         let CmdQueryGameResult = pb.CmdQueryGameResult;
         let message = CmdQueryGameResult.create(data)
-
         let buff = CmdQueryGameResult.encode(message).finish();
         return buff;
     },
@@ -118,25 +118,9 @@ PBHelper.prototype = {
         return buff;
     },
 
-    // onCmdUploadIconConvertToBuff(data) {
-    //     let CmdUploadIcon = pb.PlayerInfo;
-    //     let message = CmdUploadIcon.create({
-    //         uid: data.uid,
-    //         icon: data.icon,
-    //     })
-    //     let buff = CmdUploadIcon.encode(message).finish();
-    //     return buff;
-    // },
-
     onAdClickedConvertTpBuff(data) {
         let AdClicked = pb.AdClicked;
-        let message = AdClicked.create({
-            uid: data.uid,
-            pos: data.pos,
-            url: data.url,
-            from: data.from,
-        })
-
+        let message = AdClicked.create(data)
         let buff = AdClicked.encode(message).finish();
         return buff;
     },
@@ -144,24 +128,16 @@ PBHelper.prototype = {
     // 查询期货行情
     onCmdQuoteQueryFutureConverToBuff(data) {
         let CmdQuoteQueryFuture = pb.CmdQuoteQueryFuture;
-        let message = CmdQuoteQueryFuture.create({
-            ktype: data.ktype,
-            code: data.code,
-            from: data.from,
-            total: data.total,
-            to: data.to,
-        })
+        let message = CmdQuoteQueryFuture.create(data)
         let buff = CmdQuoteQueryFuture.encode(message).finish();
         return buff;
     },
 
     // 查询游戏操作步骤
     onCmdGetGameOperations(data) {
+        console.log('游戏操作步骤数据' + JSON.stringify(data));
         let CmdGetGameOperations = pb.CmdGetGameOperations;
-        let message = CmdGetGameOperations.create({
-            uid: data.uid,
-            ts: data.ts,
-        })
+        let message = CmdGetGameOperations.create(data)
         let buff = CmdGetGameOperations.encode(message).finish();
 
         return buff;
@@ -209,7 +185,6 @@ PBHelper.prototype = {
         let message = CmdResetGameCounter.create(data);
         let buff = CmdResetGameCounter.encode(message).finish();
         return buff;
-
     },
 
 
@@ -223,6 +198,11 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Rep_QuoteQuery) {
             let Quotes = pb.Quotes;
             let data = Quotes.decode(new Uint8Array(buff));
+
+            if (data.items.length == 1) {
+                GlobalEvent.emit(EventCfg.CMDQUOTITEM, data);
+            }
+
             return data;
         }
         //同步玩家游戏属性
@@ -234,7 +214,7 @@ PBHelper.prototype = {
                 GameData.properties[decode.items[i].id] = decode.items[i].newValue;
                 console.log('id:' + decode.items[i].id + '   ' + 'value:' + decode.items[i].newValue);
             }
-            console.log('更新属性:' + decode);
+            console.log('更新属性:' + JSON.stringify(decode));
 
             GameData.properties = GameData.properties;
 
@@ -256,7 +236,8 @@ PBHelper.prototype = {
             || id == pb.MessageId.Rep_Game_SmxlReset
             || id == pb.MessageId.Rep_Hall_ResetGameCounter
             || id == pb.MessageId.Rep_Hall_GetItem
-            || id == pb.MessageId.Rep_Game_CgsGetStageAward) {
+            || id == pb.MessageId.Rep_Game_CgsGetStageAward
+            || id == pb.MessageId.Rep_Game_OrderCancel) {
             let ErrorInfo = pb.ErrorInfo;
             let data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
@@ -336,6 +317,8 @@ PBHelper.prototype = {
             if (data.uid == GameData.userID) {
                 GameData.RoomType = 0;
                 GameData.selfEnterRoomData = null;
+                GameData.roomId = 0;
+                //   GameData.roomHostID = 0;
             }
             GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }
@@ -475,28 +458,84 @@ PBHelper.prototype = {
             let MncgState = pb.MncgState;
             let data = MncgState.decode(new Uint8Array(buff));
             console.log('同步模拟炒股状态' + JSON.stringify(data));
+            GameData.mncgDataList = data;
 
+            GlobalEvent.emit(EventCfg.CHANGEMNCGACCOUNT);
+        }
+
+        //   同步实时行情
+        else if (id == pb.MessageId.Sync_S2C_QuoteItem) {
+            let QuoteItem = pb.QuoteItem;
+            let data = QuoteItem.decode(new Uint8Array(buff));
+            console.log('同步实时行情' + JSON.stringify(data));
+            GlobalEvent.emit(EventCfg.SYNCQUOTEITEM, data);
+        }
+        //关注/删除股票应答：无
+        else if (id == pb.MessageId.Rep_Game_MncgEditStockList) {
+
+        }
+        //	// 金币和资产互相兑换应答
+        else if (id == pb.MessageId.Rep_Game_MncgExchange) {
+            let CmdMncgExchangeReply = pb.CmdMncgExchangeReply;
+            let data = CmdMncgExchangeReply.decode(new Uint8Array(buff));
+
+            return data;
+        }
+        // 查询交易记录应
+        else if (id == pb.MessageId.Rep_Game_OrderQuery) {
+            let StockOrderList = pb.StockOrderList;
+            let data = StockOrderList.decode(new Uint8Array(buff));
+            return data;
+        }
+
+        else if (id == pb.MessageId.Rep_QuoteSubscribe) {
+            // let StockOrderList = pb.StockOrderList;
+            // let data = StockOrderList.decode(new Uint8Array(buff));
+            // return data;
+        }
+
+        else if (id === pb.MessageId.Rep_Game_Order) {
+            let CmdStockOrderReply = pb.CmdStockOrderReply;
+            let data = CmdStockOrderReply.decode(new Uint8Array(buff));
+            return data;
+        }
+        //获取炒股大赛列表应答
+        else if (id == pb.MessageId.Rep_Game_CgdsList) {
+            let CgdsList = pb.CgdsList;
+            return CgdsList.decode(new Uint8Array(buff));
+        }
+        //报名炒股大赛应答
+        else if (id == pb.MessageId.Rep_Game_CgdsReg) {
+            let CmdCgdsRegReply = pb.CmdCgdsRegReply;
+            return CmdCgdsRegReply.decode(new Uint8Array(buff));
+        }
+        //获取炒股大赛排行榜
+        else if (id == pb.MessageId.Rep_Game_CgdsRanking) {
+            let RankingList = pb.RankingList;
+            return RankingList.decode(new Uint8Array(buff));
         }
         //同步所有炒股大赛状态
         else if (id == pb.MessageId.Sync_S2C_GameCgds) {
             let CgdsState = pb.CgdsState;
-            let data = CgdsState.decode(new Uint8Array(buff));
-            console.log('同步所有炒股大赛状态' + JSON.stringify(data));
-
+            GameData.cgdsStateList = CgdsState.decode(new Uint8Array(buff)).items;
+            console.log('同步所有炒股大赛状态' + JSON.stringify(GameData.cgdsStateList));
         }
+
         //同步一条炒股大赛状态
         else if (id == pb.MessageId.Sync_S2C_GameCgdsItem) {
             let CgdsStateItem = pb.CgdsStateItem;
             let data = CgdsStateItem.decode(new Uint8Array(buff));
             console.log('同步一条炒股大赛状态' + JSON.stringify(data));
-        }
-        //   同步实时行情
-        else if (id == pb.MessageId.Sync_S2C_QuoteItem) {
-            let GameProperties = pb.GameProperties;
-            let data = GameProperties.decode(new Uint8Array(buff));
-            console.log('同步实时行情' + JSON.stringify(data));
-        }
 
+            for (let i = 0; i < GameData.cgdsStateList.length; i++) {
+                if (GameData.cgdsStateList[i].id == data.id) {
+                    GameData.cgdsStateList[i] = data;
+                    break;
+                }
+            }
+
+            GlobalEvent.emit(EventCfg.CHANGEMNCGACCOUNT);
+        }
     }
 }
 

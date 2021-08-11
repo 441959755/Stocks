@@ -73,13 +73,11 @@ cc.Class({
 					global.socket = socket;
 				}
 			} else {
-				console.log('login err');
 				GlobalEvent.emit(EventCfg.LOADINGHIDE);
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');
 			}
 		})
 	},
-
 
 	initData() {
 		let SMSet = cc.sys.localStorage.getItem('SMSET');
@@ -341,8 +339,18 @@ cc.Class({
 			cc.sys.localStorage.removeItem('TJADCOUNT' + str1);
 		}
 
-	},
+		{
+			let SelectBk = cc.sys.localStorage.getItem('SELECTBK');
+			if (!SelectBk) {
+				GameData.SelectBk = [1, 1, 1, 1, 1, 1];
+			}
+			else {
+				GameData.SelectBk = JSON.parse(SelectBk);
+				//	GameData.SelectBk = SelectBk;
+			}
+		}
 
+	},
 
 	onDestroy() {
 		GameCfgText.releaseRes();

@@ -106,7 +106,7 @@ export default class NewClass extends cc.Component {
             let datas = {
                 uid: GameData.userID,
                 gType: GameCfg.GameType,
-                quotes_code: parseInt(GameCfg.data[0].code),
+                quotesCode: parseInt(GameCfg.data[0].code),
                 kType: GameCfg.data[0].ktype,
                 kFrom: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
 
@@ -126,17 +126,19 @@ export default class NewClass extends cc.Component {
             } else {
                 datas.userCapital = GameCfg.ziChan;
             }
-            console.log('GameCfg.finalfund' + GameCfg.finalfund + '-' + 'GameCfg.ziChan' + GameCfg.ziChan + '=' + (GameCfg.finalfund - GameCfg.ziChan));
+            // console.log('GameCfg.finalfund' + GameCfg.finalfund + '-' + 'GameCfg.ziChan' + GameCfg.ziChan + '=' + (GameCfg.finalfund - GameCfg.ziChan));
 
             datas.rank = datas.userProfitRate >= datas.stockProfitRate ? 1 : 2;
 
             datas.refId = 0;
             let CmdGameOver;
+            this.saveHoistoryInfo(parseInt(datas.ts + ''));
             if (GameCfg.GameType != pb.GameType.ShuangMang) {
-                this.saveHoistoryInfo(parseInt(datas.ts + ''));
                 CmdGameOver = {
                     result: datas,
-                    operations: UpGameOpt.arrOpt,
+                    operations: {
+                        items: UpGameOpt.arrOpt,
+                    }
                 }
             } else {
                 CmdGameOver = {

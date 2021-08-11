@@ -163,7 +163,7 @@ export default class NewClass extends cc.Component {
                 timeLabel.node.active = true;
                 if (GameCfg.data[0].tsGameFrom && GameCfg.data[0].tsGameCur) {
                     let num = GameCfg.data[0].tsGameCur - GameCfg.data[0].tsGameFrom;
-                    num = 3 * 60 - num;
+                    num = 3 * 60 - num - 8;
                     this.cb1 = setInterval(() => {
                         if (num <= 0) {
                             clearInterval(this.cb1);
@@ -179,7 +179,7 @@ export default class NewClass extends cc.Component {
                     }, 1000)
                 }
                 else {
-                    let num = 3 * 60 + 3;
+                    let num = 3 * 60 + 2;
                     this.cb1 = setInterval(() => {
                         if (num <= 0) {
                             if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.JJ_XUNLIAN) {
@@ -188,7 +188,7 @@ export default class NewClass extends cc.Component {
                             clearInterval(this.cb1);
                         }
 
-                        if (num <= 180) {
+                        if (num <= 179) {
                             timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
                             this.waitTime.string = '倒计时：' + ComUtils.onNumChangeTime(num);
                         }

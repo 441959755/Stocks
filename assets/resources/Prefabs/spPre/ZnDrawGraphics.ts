@@ -62,6 +62,17 @@ export default class NewClass extends cc.Component {
     }
 
     initDrawBg() {
+        if (GameCfg.beg_end[1] < 0 || GameCfg.beg_end[0] > GameCfg.beg_end[1]) {
+            console.log(' GameCfg.beg_end[0]:' + GameCfg.beg_end[0]);
+            console.log(' GameCfg.beg_end[1]:' + GameCfg.beg_end[1]);
+            return;
+        }
+        if (GameCfg.beg_end[0] < 0 || GameCfg.beg_end[1] > this.viewData.length) {
+            console.log(' GameCfg.beg_end[0]:' + GameCfg.beg_end[0]);
+            console.log(' GameCfg.beg_end[1]:' + GameCfg.beg_end[1]);
+            return;
+        }
+
         this.MaList = DrawData.MaList;
         this.MinMaList = DrawData.MinMaList;
         this.drawBg.clear();
@@ -127,14 +138,15 @@ export default class NewClass extends cc.Component {
                 this.drawBg.lineWidth = width;
                 this.drawBg.strokeColor = cc.Color.WHITE;
                 this.drawLine(this.drawBg, this.prePointX, this.prePointY, x, y);
-                this.prePointX = x;
-                this.prePointY = y;
+
 
                 let y1 = (this.MinMaList[index] - this.bottomValue) / this.disValue * drawBox;
 
                 this.drawMA.strokeColor = new cc.Color().fromHEX('#e94343');
                 this.drawLine(this.drawMA, this.prePointX, this.prePoint1Y, x, y1);
                 this.prePoint1Y = y1;
+                this.prePointX = x;
+                this.prePointY = y;
             }
         }
         else {

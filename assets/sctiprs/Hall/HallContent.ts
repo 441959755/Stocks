@@ -5,6 +5,7 @@ import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import LoadUtils from '../Utils/LoadUtils';
 import EnterGameControl from '../global/EnterGameControl';
+import { LocationPoint } from '../global/LocationPoint';
 
 const { ccclass, property } = cc._decorator;
 
@@ -57,11 +58,11 @@ export default class NewClass extends cc.Component {
 		//设置用户头像
 		this.setHeadImg();
 
-		if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+		if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis) {
 			this.onBtnClick({ target: { name: 'main_jj_cgs' } }, null);
 		}
-	}
 
+	}
 
 
 	setHeadImg() {
@@ -179,6 +180,7 @@ export default class NewClass extends cc.Component {
 		}
 		//打开闯关赛
 		else if (name == 'main_jj_cgs') {
+
 			GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
 			GameCfg.GameSet = GameData.JJPKSet;
 			GlobalEvent.emit(EventCfg.OPENCHUANGUAN);
@@ -203,6 +205,14 @@ export default class NewClass extends cc.Component {
 		//智能选股
 		else if (name == 'main_sp_znxg') {
 			GlobalEvent.emit(EventCfg.OPENZNXG);
+		}
+		//模拟炒股
+		else if (name == 'main_sp_mncg') {
+			GlobalEvent.emit(EventCfg.OPENMNXG);
+		}
+
+		else if (name == 'main_sp_cgds') {
+			GlobalEvent.emit(EventCfg.OPENCGDS);
 		}
 
 	}

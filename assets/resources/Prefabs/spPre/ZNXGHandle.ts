@@ -79,6 +79,28 @@ export default class NewClass extends cc.Component {
             let handle = node.getComponent('ZnxgItem2');
             handle.onShow(data, GameData.AIStockList.length - 1);
         }, this);
+
+
+
+        GlobalEvent.on(EventCfg.SELECTBK, this.onShowSelectBk.bind(this), this);
+
+    }
+
+    onShowSelectBk() {
+        let i = 0;
+        let nodes = this.content.children;
+        nodes.forEach((el, index) => {
+            if (index > 0) {
+                let handle = el.getComponent('ZnxgItem');
+
+                let flag = this.getBKISShow(handle._curData.code);
+                if (flag) { i++ }
+                el.active = flag;
+
+                handle.setIndex(i);
+
+            }
+        })
     }
 
     onDestroy() {
@@ -92,6 +114,16 @@ export default class NewClass extends cc.Component {
             total: 20,
         }
         this.getAIStockList(data);
+    }
+
+    onEnable() {
+        GlobalEvent.on('UpdateShouCang', this.getCollectList.bind(this), this);
+        GameCfg.GameType = 'ZNXG';
+    }
+
+    onDisable() {
+        GameCfg.GameType = null;
+        GlobalEvent.off('UpdateShouCang');
     }
 
     onBtnToggle(event, data) {
@@ -154,12 +186,16 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'sp_topbtn_help') {
-            GameCfg.GameType = 'ZNXG';
+
             GlobalEvent.emit(EventCfg.OPENHELPLAYER);
         }
 
         else if (name == 'sp_topbtn_zhengu') {
             GlobalEvent.emit(EventCfg.OPENZGLAYER);
+        }
+
+        else if (name == 'bkBtn') {
+            GlobalEvent.emit(EventCfg.OPENBKBOX);
         }
     }
 
@@ -231,6 +267,7 @@ export default class NewClass extends cc.Component {
         let info = {
             codes: this.collectList,
         }
+
         let CmdQueryAiStockList = pb.CmdQueryAiStockList;
         let message = CmdQueryAiStockList.create(info);
         let buff = CmdQueryAiStockList.encode(message).finish();
@@ -239,17 +276,57 @@ export default class NewClass extends cc.Component {
 
             console.log('查询AI选股的股票列表' + JSON.stringify(res));
 
+            let tt = 0;
             res.items.forEach((el, index) => {
+
                 if (!this.content2.children[index]) {
-                    this.content2.children[index] = cc.instantiate(this.preItem2);
-                    this.content2.addChild(this.content2.children[index]);
+                    let node = cc.instantiate(this.preItem2);
+                    this.content2.addChild(node);
                 }
                 let handle = this.content2.children[index].getComponent('ZnxgItem2');
-                handle.onShow(el, index);
+                let flag = this.getBKISShow(el.code);
+                if (flag) { tt++ }
+                this.content2.children[index].active = flag;
+
+                handle.onShow(el, tt);
+
             });
         })
 
         this.tipsNode.active = false;
+    }
+
+    getBKISShow(code) {
+        code = code + ''
+        if (code.length >= 7) {
+            code = code.slice(1);
+        }
+
+        if (GameData.SelectBk[0]) {
+            return true;
+        }
+
+        else if (code.slice(0, 3) == '002' || code.slice(0, 3) == '003') {
+            return GameData.SelectBk[3];
+        }
+
+        else if (code.slice(0, 3) == '300') {
+            return GameData.SelectBk[4];
+        }
+
+        else if (code.slice(0, 3) == '688') {
+            return GameData.SelectBk[4];
+        }
+
+        else if (code.slice(0, 2) == '60' || code.slice(0, 2) == '688') {
+            return GameData.SelectBk[1];
+        }
+
+        else if (code.slice(0, 2) == '00' || code.slice(0, 2) == '30') {
+            return GameData.SelectBk[2];
+        }
+
+        return false;
     }
 
 }

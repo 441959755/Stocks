@@ -7,9 +7,9 @@ import ComUtils from '../Utils/ComUtils';
 
 import GlobalHandle from '../global/GlobalHandle';
 import StrategyAIData from '../game/StrategyAIData';
-import GameCfgText from '../GameText';
 import GameData from '../GameData';
 import LoadUtils from '../Utils/LoadUtils';
+import { LocationPoint } from '../global/LocationPoint';
 
 const { ccclass, property } = cc._decorator;
 
@@ -128,6 +128,32 @@ export default class NewClass extends cc.Component {
 			EventCfg.OPENHISTORYLAYER,
 			() => {
 				GlobalEvent.emit(EventCfg.LOADINGSHOW);
+				if (GameCfg.GameType == pb.GameType.ShuangMang) {
+					if (this.SMhistoryLayer) {
+						this.SMhistoryLayer.active = true;
+						return;
+					}
+				}
+				else if (GameCfg.GameType == pb.GameType.QiHuo) {
+					if (this.QHhistoryLayer) {
+						this.QHhistoryLayer.active = true;
+						return;
+					}
+				}
+
+				else if (GameCfg.GameType == pb.GameType.DingXiang) {
+					if (this.otherhistoryLayer) {
+						this.otherhistoryLayer.active = true;
+						return;
+					}
+				}
+
+				else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+					if (this.ZBhistoryLayer) {
+						this.ZBhistoryLayer.active = true;
+						return;
+					}
+				}
 				//SM的要获取服务器消息
 				this.acquireSMhistoryInfo(info => {
 					this.openhistoryLayer && this.openhistoryLayer(info);
@@ -195,6 +221,11 @@ export default class NewClass extends cc.Component {
 			EventCfg.OPENYIELDLAYER,
 			() => {
 				GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
+				if (this.SMYieldLayer) {
+					this.SMYieldLayer.active = true;
+					return;
+				}
 				this.acquireSMhistoryInfo(info => {
 					this.openYieldLaye && this.openYieldLaye(info);
 				});
@@ -260,27 +291,11 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(EventCfg.INVITEMESSAGE, this.onShowInviteBox.bind(this), this);
 
-	}
-
-	onShowInviteBox(data) {
-		if (data.sender) {
-			if (data.sender == GameData.userID) {
-				return;
+		GlobalEvent.on(EventCfg.ROOMLEAVE, (data) => {
+			if (data.uid == GameData.userID) {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
 			}
-		}
-		console.log('邀请信息：' + JSON.stringify(data));
-		if (!this.InviteBox) {
-			LoadUtils.loadRes('Prefabs/inviteBox', (res) => {
-				this.InviteBox = cc.instantiate(res);
-				this.node.addChild(this.InviteBox);
-				let headle = this.InviteBox.getComponent('InviteBox');
-				headle.onInviteShow(data);
-			})
-		}
-		else {
-			let headle = this.InviteBox.getComponent('InviteBox');
-			headle.onInviteShow(data);
-		}
+		}, this);
 	}
 
 
@@ -302,7 +317,7 @@ export default class NewClass extends cc.Component {
 		else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 			event = { target: { name: 'toggle1' } }
 		}
-		else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+		else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis) {
 			event = { target: { name: 'toggle1' } }
 		}
 
@@ -327,6 +342,16 @@ export default class NewClass extends cc.Component {
 				}, 800)
 			}
 		}
+
+		//房间已解散
+		if (GameData.roomId === 0) {
+			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
+		}
+		//进入房间
+		else if (GameData.roomId) {
+			GlobalEvent.emit(EventCfg.OPENROOM);
+		}
+
 	}
 
 
@@ -338,17 +363,35 @@ export default class NewClass extends cc.Component {
 		GameCfg.allRate = 0;
 		GameCfg.blockHistoy = [];
 		GameCfg.finalfund = 0;
-		//GameCfg.GameType = null;
 
 		GameCfg.GAMEFUPAN = false;
 		StrategyAIData.onClearData();
 		GameCfg.enterGameCache = null;
 		GameCfg.data[0].data = [];
 		GameCfg.GAMEFUPANDATA = null;
-		//	GameData.Players = [];
-		//	GameCfg.RoomGameData = null;
 	}
 
+	//邀请框
+	onShowInviteBox(data) {
+		if (data.sender) {
+			if (data.sender == GameData.userID) {
+				return;
+			}
+		}
+		console.log('邀请信息：' + JSON.stringify(data));
+		if (!this.InviteBox) {
+			LoadUtils.loadRes('Prefabs/inviteBox', (res) => {
+				this.InviteBox = cc.instantiate(res);
+				this.node.addChild(this.InviteBox);
+				let headle = this.InviteBox.getComponent('InviteBox');
+				headle.onInviteShow(data);
+			})
+		}
+		else {
+			let headle = this.InviteBox.getComponent('InviteBox');
+			headle.onInviteShow(data);
+		}
+	}
 
 	openYieldLaye(info) {
 		if (!this.SMYieldLayer) {
@@ -391,6 +434,65 @@ export default class NewClass extends cc.Component {
 		}
 	}
 
+	//获取历史记录
+	acquireSMhistoryInfo(callBack) {
+
+
+		let data = new Date();
+		data.setDate(1);
+		data.setHours(0);
+		data.setSeconds(0);
+		data.setMinutes(0);
+
+		if (socket) {
+			let data1 = {
+				uid: GameData.userID,
+				gType: GameCfg.GameType,
+				//from: parseInt(data.getTime() / 1000 + ''),
+				to: parseInt(new Date().getTime() / 1000 + ''),
+				pageSize: 100,
+			};
+
+			socket.send(pb.MessageId.Req_Game_QueryGameResult, PB.onCmdQueryGameResultConvertToBuff(data1), info => {
+				callBack && callBack(info);
+			});
+		}
+	}
+
+	//训练股票进入游戏
+	onCmdQuoteQuery(data) {
+
+		let info1 = data;
+
+		data = { game: GameCfg.GameType };
+
+		GameCfg.data[0].data = [];
+
+		GameCfg.enterGameCache = info1;
+		//游戏开始
+		GlobalHandle.onCmdGameStartReq(() => {
+			//游戏行情获取
+			GlobalHandle.onCmdGameStartQuoteQuery(info1, () => {
+
+				cc.director.loadScene('game');
+			})
+
+		});
+	}
+
+	//期货进入游戏
+	onCmdQHGameStart(data) {
+		GameCfg.data[0].data = [];
+		//游戏开始
+		GlobalHandle.onCmdGameStartReq(() => {
+			//游戏行情获取
+			GlobalHandle.onCmdGameStartQuoteQueryQH(data, () => {
+				cc.director.loadScene('game');
+			});
+		})
+
+	}
+
 	protected onDestroy() {
 		GlobalEvent.off(EventCfg.OPENSMLAYER);
 		GlobalEvent.off(EventCfg.OPENZBLAYER);
@@ -403,65 +505,10 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.OPENQHLAYER);
 		GlobalEvent.off(EventCfg.OPENHELPLAYER);
 		GlobalEvent.off(EventCfg.OPENSETLAYER);
-
+		GlobalEvent.off(EventCfg.ROOMLEAVE);
 		ComUtils.onDestory();
 		GameData.selfEnterRoomData = null;
 	}
-
-	onCmdGameStart(data, info1) {
-		GameCfg.data[0].data = [];
-
-		GameCfg.enterGameCache = info1;
-
-		GlobalHandle.onCmdGameStartReq(() => {
-			GlobalHandle.onCmdGameStartQuoteQuery(info1, () => {
-				cc.director.loadScene('game');
-			})
-
-		});
-
-	}
-
-	onCmdQuoteQuery(data) {
-		this.onCmdGameStart({ game: GameCfg.GameType }, data);
-	}
-
-	acquireSMhistoryInfo(callBack) {
-		let data = new Date();
-		data.setDate(1);
-		data.setHours(0);
-		data.setSeconds(0);
-		data.setMinutes(0);
-
-		if (socket) {
-			let data1 = {
-				uid: GameData.userID,
-				g_type: GameCfg.GameType,
-				//from: parseInt(data.getTime() / 1000 + ''),
-				to: parseInt(new Date().getTime() / 1000 + ''),
-				pageSize: 100,
-			};
-
-			socket.send(pb.MessageId.Req_Game_QueryGameResult, PB.onCmdQueryGameResultConvertToBuff(data1), info => {
-				callBack && callBack(info);
-			});
-		}
-	}
-
-	//
-	onCmdQHGameStart(data) {
-
-		GameCfg.data[0].data = [];
-
-		//socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(inf), res => {
-		GlobalHandle.onCmdGameStartReq(() => {
-			GlobalHandle.onCmdGameStartQuoteQueryQH(data, () => {
-				cc.director.loadScene('game');
-			});
-		})
-	}
-
-
 
 
 
