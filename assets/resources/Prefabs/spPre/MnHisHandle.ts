@@ -48,12 +48,16 @@ export default class NewClass extends cc.Component {
         })
 
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        let id1 = 0
+        if (GameData.SpStockData && GameData.SpStockData.id) {
+            id1 = GameData.SpStockData.id;
+        }
         let time = parseInt(new Date().getTime() / 1000 + '');
         let info = {
             uid: id,
             to: time,
             pageSize: 200,
-            id: GameData.SpStockData.id || 0,
+            id: id1,
         }
 
         let CmdQueryStockOrder = pb.CmdQueryStockOrder;

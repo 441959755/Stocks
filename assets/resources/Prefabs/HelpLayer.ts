@@ -31,6 +31,7 @@ export default class NewClass extends cc.Component {
         this.DXNode.active = false;
         this.QHNode.active = false;
         this.ZBNode.active = false;
+        this.ZNXG.active = false;
         this.MNXGNode.active = false;
         this.CGDSNode.active = false;
 
@@ -63,7 +64,6 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         if (name == 'blackbtn') {
             this.node.active = false;
-
         }
     }
 }

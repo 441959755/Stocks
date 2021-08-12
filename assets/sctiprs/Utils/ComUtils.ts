@@ -289,8 +289,8 @@ export default class ComUtils {
 
 	//保留2位小数
 	public static changeTwoDecimal(num) {
-		if (!num) { return 0 };
 
+		if (!num) { return 0 };
 		return (parseInt(num * 100 + '') / 100).toFixed(2);
 	}
 

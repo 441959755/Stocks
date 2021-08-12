@@ -349,7 +349,9 @@ export default class NewClass extends cc.Component {
             else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
                 GameData.cgdsStateList.forEach(el => {
                     if (el.id == GameData.SpStockData.id) {
-                        arr = el.state.positionList.items;
+                        if (el.state.positionList && el.state.positionList.items) {
+                            arr = el.state.positionList.items;
+                        }
                     }
                 })
             }

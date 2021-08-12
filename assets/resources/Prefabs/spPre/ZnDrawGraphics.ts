@@ -91,11 +91,11 @@ export default class NewClass extends cc.Component {
         }
 
         this.disValue = this.topValue - this.bottomValue;
-        this.part1.string = this.topValue.toFixed(2) + '';
-        this.part2.string = (this.bottomValue + this.disValue / 4 * 3).toFixed(2);
+        this.part5.string = this.topValue.toFixed(2) + '';
+        this.part4.string = (this.bottomValue + this.disValue / 4 * 3).toFixed(2);
         this.part3.string = (this.bottomValue + this.disValue / 4 * 2).toFixed(2);
-        this.part4.string = (this.bottomValue + this.disValue / 4 * 1).toFixed(2);
-        this.part5.string = this.bottomValue.toFixed(2);
+        this.part2.string = (this.bottomValue + this.disValue / 4 * 1).toFixed(2);
+        this.part1.string = this.bottomValue.toFixed(2);
 
         for (let index = GameCfg.beg_end[0]; index < GameCfg.beg_end[1]; index++) {
 
@@ -133,9 +133,9 @@ export default class NewClass extends cc.Component {
             else {
                 let x = ((some + 1) * width);
                 let y = (el.close - this.bottomValue) / this.disValue * drawBox;
-                this.drawBg.lineWidth = width;
+                //   this.drawBg.lineWidth = width;
                 DrawUtils.drawMinLineFill(this.drawBg, this.prePointX, this.prePointY, x, y);
-                this.drawBg.lineWidth = width;
+                //    this.drawBg.lineWidth = width;
                 this.drawBg.strokeColor = cc.Color.WHITE;
                 this.drawLine(this.drawBg, this.prePointX, this.prePointY, x, y);
 

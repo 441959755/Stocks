@@ -75,10 +75,11 @@ export default class HttpMgr {
         let url = 'http://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js';
 
         HttpUtils.sendRequest(url, info, (res) => {
-            // res = res.replace('(', '');
-            // res = res.replace(')', '');
+            res = res.replace('(', '');
+            res = res.replace(')', '');
 
-            // res = JSON.parse(res);
+            res = JSON.parse(res);
+            console.log('data.length + :' + JSON.stringify(res));
             let data = [];
             res.data.forEach(el => {
                 let arr = el.split(',');
@@ -94,7 +95,8 @@ export default class HttpMgr {
                 data.push(da);
             });
 
-            console.log(data.length + ':' + JSON.stringify(data));
+            console.log('data.length + :' + JSON.stringify(data));
+
             call && call(data);
 
         })

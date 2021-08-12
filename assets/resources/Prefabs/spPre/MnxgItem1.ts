@@ -43,9 +43,9 @@ export default class NewClass extends cc.Component {
 
     setLabel(info) {
 
-        this.labels[2].string = info.price;
+        this.labels[2].string = ComUtils.changeTwoDecimal(info.price) + '';
 
-        this.labels[3].string = this._curData.priceCost;
+        this.labels[3].string = ComUtils.changeTwoDecimal(this._curData.priceCost) + '';
         this.labels[4].string = this._curData.volume;
 
         let zd = info.price - info.close;

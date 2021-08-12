@@ -199,6 +199,11 @@ export default class NewClass extends cc.Component {
             }
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
+            let id = 0
+            if (GameData.SpStockData && GameData.SpStockData.id) {
+                id = GameData.SpStockData.id;
+            }
+
             let info = {
                 code: this.curData.code,
                 type: pb.OrderType.AskLimit,
@@ -206,7 +211,7 @@ export default class NewClass extends cc.Component {
                 volume: this.cursl,
                 uid: GameData.userID,
                 amount: this.curData.price * this.cursl,
-                id: GameData.SpStockData.id || 0,
+                id: id,
             }
             let CmdStockOrder = pb.CmdStockOrder;
             let message = CmdStockOrder.create(info);

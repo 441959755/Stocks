@@ -19,14 +19,11 @@ export default class NewClass extends cc.Component {
     ktype = null;
 
     onLoad() {
-        GlobalEvent.on('onDrawGrap', (arr, ktype) => {
-            if (ktype) {
-                this.ktype = ktype;
-            }
 
-        }, this);
         this.node.on('touchstart', (event) => {
+
             if (this.ktype == pb.KType.Min) { return }
+
             this.vertical1.active = true;
             this.Horizontal1.active = true;
 
@@ -219,6 +216,6 @@ export default class NewClass extends cc.Component {
         this.node.off('touchend');
         this.node.off('touchcancel');
         this.node.off('touchmove');
-        GlobalEvent.off('onDrawGrap');
+        // GlobalEvent.off('onDrawGrap');
     }
 }

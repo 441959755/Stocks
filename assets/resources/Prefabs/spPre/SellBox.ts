@@ -162,7 +162,10 @@ export default class NewClass extends cc.Component {
         //卖出下单
         else if (name == 'sp_znxg_mrxd') {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
+            let id = 0;
+            if (GameData.SpStockData && GameData.SpStockData.id) {
+                id = GameData.SpStockData.id;
+            }
             let info = {
                 code: this.curData.code,
                 type: pb.OrderType.BidLimit,
@@ -170,7 +173,7 @@ export default class NewClass extends cc.Component {
                 volume: this.curSellCount,
                 uid: GameData.userID,
                 amount: this.curData.price * this.curSellCount,
-                id: GameData.SpStockData.id || 0,
+                id: id,
             }
 
             let CmdStockOrder = pb.CmdStockOrder;

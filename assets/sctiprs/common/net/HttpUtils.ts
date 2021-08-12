@@ -19,7 +19,7 @@ export default {
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 300)) {
-                console.log("http res(" + xhr.responseText.length + "):" + xhr.responseText);
+                // console.log("http res(" + xhr.responseText.length + "):" + xhr.responseText);
                 try {
                     //  var ret = JSON.parse(xhr.responseText);
                     if (handler !== null) {

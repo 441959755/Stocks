@@ -70,20 +70,21 @@ export default class NewClass extends cc.Component {
         else {
             this.cjs[0].active = true;
             this.cjs[1].active = false;
-            if (data.status == 1) {
+            //已报名
+            if (data.status == 1 && !flagbm) {
                 this.cjs[0].active = false;
                 this.cjs[1].active = true;
+
+            }
+            //有比赛 未报名
+            else if (data.status == 1 && flagbm) {
+                this.bms[0].active = true;
+                this.bms[1].active = false;
             }
             this.ksjs[0].active = true;
             this.ksjs[1].active = false;
             this.phs[1].active = true;
             this.phs[0].active = false;
-        }
-
-
-        if (!flagbm) {
-            this.bms[0].active = true;
-            this.bms[1].active = false;
         }
     }
 

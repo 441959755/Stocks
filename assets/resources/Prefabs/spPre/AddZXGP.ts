@@ -86,7 +86,7 @@ export default class NewClass extends cc.Component {
                 }
             }
             else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
-                let arr;
+                let arr = [];
                 GameData.cgdsStockList.forEach(el => {
                     if (el.id == GameData.SpStockData.id) {
                         arr = el.stockList;
@@ -119,11 +119,16 @@ export default class NewClass extends cc.Component {
                 GameData.selfStockList.push(parseInt(items[0]));
             }
             else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
-                GameData.cgdsStockList.forEach(el => {
-                    if (el.id == GameData.SpStockData.id) {
-                        el.stockList.push(parseInt(items[0]));
+                // GameData.cgdsStockList.forEach(el => {
+                //     if (el.id == GameData.SpStockData.id) {
+                //         el.stockList.push(parseInt(items[0]));
+                //     }
+                // })
+                for (let i = 0; i < GameData.cgdsStockList.length; i++) {
+                    if (GameData.cgdsStockList[i].id == GameData.SpStockData.id) {
+                        GameData.cgdsStockList[i].stockList.push(parseInt(items[0]));
                     }
-                })
+                }
             }
 
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '添加成功');
