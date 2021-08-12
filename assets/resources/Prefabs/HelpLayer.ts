@@ -27,6 +27,7 @@ export default class NewClass extends cc.Component {
     CGDSNode: cc.Node = null;
 
     onEnable() {
+
         this.SMNode.active = false;
         this.DXNode.active = false;
         this.QHNode.active = false;
@@ -61,7 +62,9 @@ export default class NewClass extends cc.Component {
 
 
     onBtnClick(event, data) {
+
         let name = event.target.name;
+
         if (name == 'blackbtn') {
             this.node.active = false;
         }

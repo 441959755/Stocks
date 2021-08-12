@@ -466,6 +466,10 @@ export default class NewClass extends cc.Component {
         // res1{"items":[{"code":600000,"name":"浦发银行","industry":"银行","tsUpdated":"1616140800","profitRanking":2110,"profitRate":-2.11,"lastAskPrice":10.88,"lastBidPrice":10.65,"todaySignal":-0.41}]}
         socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
             console.log('res1' + JSON.stringify(res));
+
+            if (!res.items || res.items.length == 0) {
+                return;
+            }
             let label3 = this.laNode.getChildByName('label3').getComponent(cc.Label);
             if (res.items[0].todaySignal < 0) {
                 label3.string = '今日决策：' + '推荐买入';

@@ -2,7 +2,6 @@ import { pb } from "../../protos/proto";
 import GameCfg from "../../sctiprs/game/GameCfg";
 import GameData from "../../sctiprs/GameData";
 import EnterGameControl from "../../sctiprs/global/EnterGameControl";
-import GlobalHandle from "../../sctiprs/global/GlobalHandle";
 import ComUtils from "../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";

@@ -6996,7 +6996,7 @@
       "width": 1314,
       "height": 80
     },
-    "_resize": 1,
+    "_resize": 0,
     "_N$layoutType": 2,
     "_N$cellSize": {
       "__type__": "cc.Size",

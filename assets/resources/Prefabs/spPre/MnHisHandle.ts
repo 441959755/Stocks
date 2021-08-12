@@ -112,7 +112,6 @@ export default class NewClass extends cc.Component {
     }
 
     onToggleClick(event, data) {
-        //    let name = event.node.name;
         this.viewNode.forEach(el => {
             el.active = false;
         })

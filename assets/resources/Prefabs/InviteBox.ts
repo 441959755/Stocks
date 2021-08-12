@@ -11,7 +11,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     layout: cc.Node = null;
 
-
     onInviteShow(data) {
         let node = cc.instantiate(this.item);
 
@@ -22,9 +21,4 @@ export default class NewClass extends cc.Component {
         headle.onInit(data);
     }
 
-    start() {
-
-    }
-
-    // update (dt) {}
 }
