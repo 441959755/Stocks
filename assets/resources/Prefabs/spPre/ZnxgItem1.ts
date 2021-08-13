@@ -24,11 +24,11 @@ export default class NewClass extends cc.Component {
         this._curData = data;
         index += 1;
         this.label[0].string = index;
-        this.label[1].string = data.code;
-        this.label[2].string = data.name;
-        this.label[3].string = data.lastAskPrice;
-        this.label[4].string = data.lastBidPrice;
-        this.label[5].string = data.profitRate + '%';
+        this.label[1].string = data.code || '--';
+        this.label[2].string = data.name || '--';
+        this.label[3].string = data.lastAskPrice || '--';
+        this.label[4].string = data.lastBidPrice || '--';
+        this.label[5].string = (data.profitRate || '--') + '%';
 
         if (data.lastBidPrice > 0) {
             this.label[4].node.color = cc.Color.RED;

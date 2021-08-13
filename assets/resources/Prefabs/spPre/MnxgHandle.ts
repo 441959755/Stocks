@@ -221,7 +221,8 @@ export default class NewClass extends cc.Component {
         GameCfg.GameType = null;
         GlobalEvent.off(EventCfg.CHANGEMNCGACCOUNT);
         GameData.SpStockData = null;
-
+        this.content1.removeAllChildren();
+        this.content2.removeAllChildren();
     }
 
 

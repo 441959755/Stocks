@@ -140,13 +140,18 @@ export default class NewClass extends cc.Component {
         }
         //删除
         else if (name == 'sp_btn_shanchu') {
+            let id = 0;
+            if (GameData.SpStockData && GameData.SpStockData.id) {
+                id = GameData.SpStockData.id;
+            }
 
             let info = {
                 removed: true,
                 code: this._code,
                 isAiStock: false,
-                id: GameData.SpStockData.id || 0,
+                id: id,
             }
+
             let CmdMncgEditStock = pb.CmdMncgEditStock;
             let message = CmdMncgEditStock.create(info);
             let buff = CmdMncgEditStock.encode(message).finish();

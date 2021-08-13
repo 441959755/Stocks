@@ -18,10 +18,8 @@ export default class WebSDK {
 
     }
 
-    login(call) {
-
-        let uuid = LLWUtils.getUUID();
-
+    login(call, uid?) {
+        let uuid = uid || LLWUtils.getUUID();
         let loginInfo = {
             account: uuid,
             type: pb.LoginType.WebTest,

@@ -1,13 +1,8 @@
 import GameData from "../GameData";
-import LLWSDK from "../common/sdk/LLWSDK";
-
 import Socket from "../common/net/socket";
 import GameCfg from "../game/GameCfg";
-
 import GameCfgText from '../GameText';
 import ComUtils from '../Utils/ComUtils';
-import GlobalEvent from '../Utils/GlobalEvent';
-import EventCfg from '../Utils/EventCfg';
 import AudioUtils from '../Utils/AudioUtils';
 import LLLog from '../common/utils/LLLog'
 
@@ -22,6 +17,8 @@ cc.Class({
 		let pbhelper = new PBHelper();
 
 		global.PB = pbhelper;
+
+		global.socket = Socket;
 	},
 
 	onLoad() {
@@ -55,28 +52,6 @@ cc.Class({
 				t.stopPropagation();
 			}
 		}
-	},
-
-	start() {
-		this.initData();
-		// 接DSK
-		let llwSDK = LLWSDK.getSDK()
-		global.llwSDK = llwSDK;
-		llwSDK.login((decoded) => {
-			GlobalEvent.emit(EventCfg.LOADINGSHOW);
-			console.log(decoded.token + decoded.uid + decoded.gameAddr);
-			if (decoded) {
-				decoded.token && (GameData.token = decoded.token);
-				decoded.uid && (GameData.userID = decoded.uid);
-				if (decoded.gameAddr) {
-					let socket = Socket(decoded.gameAddr);
-					global.socket = socket;
-				}
-			} else {
-				GlobalEvent.emit(EventCfg.LOADINGHIDE);
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');
-			}
-		})
 	},
 
 	initData() {

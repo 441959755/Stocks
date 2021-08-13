@@ -321,7 +321,7 @@ export default class GlobalHandle {
         socket.send(pb.MessageId.Req_Room_Enter, PB.onReqRoomEnterBuff(data), (res) => {
             console.log(JSON.stringify(res));
             if (res.err) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err.err);
                 call && (call());
             } else {
                 GameData.roomId = res.id;
@@ -376,6 +376,136 @@ export default class GlobalHandle {
         })
 
 
+    }
+
+    /**
+     * 
+     * @param code 错误码
+     * @returns 错误提示
+     */
+    public static getErrorCodeByCode(code) {
+        let str = '';
+        switch (code) {
+            case pb.ErrorCode.CS_OK:
+
+                break;
+            case pb.ErrorCode.CS_UNKNOW:
+                str = '未知错误'
+                break;
+
+            case pb.ErrorCode.CS_SERVER_ERROR:
+                str = '服务器内部错误'
+                break;
+
+            case pb.ErrorCode.CS_INVALID_PARAMETER:
+                str = '无效参数'
+                break;
+
+            case pb.ErrorCode.CS_INVALID_ACCOUNT:
+                str = '无效账号'
+                break;
+
+            case pb.ErrorCode.CS_INVALID_PASSWORD:
+                str = '无效密码'
+                break;
+
+            case pb.ErrorCode.CS_TIMEOUT:
+                str = '执行超时'
+                break;
+
+            case pb.ErrorCode.CS_CHECK_FAILURE:
+                str = '条件检查失败'
+                break;
+            case pb.ErrorCode.CS_CHECK_FAILURE_CAPITAL:
+                str = '资金账户检查失败'
+                break;
+
+            case pb.ErrorCode.CS_CHECK_FAILURE_STOCK:
+                str = '股票账户检查失败'
+                break;
+
+            case pb.ErrorCode.CS_CHECK_FAILURE_ORDER:
+                str = '无效的订单号'
+                break;
+
+            case pb.ErrorCode.CS_NO_TRADING_TIME:
+                str = '非交易时间'
+                break;
+
+            case pb.ErrorCode.CS_NO_REGISTRY_TIME:
+                str = '非报名时间'
+                break;
+
+            case pb.ErrorCode.CS_NO_REGISTRY:
+                str = '没有报名'
+                break;
+
+            case pb.ErrorCode.CS_ALREADY_REGISTRY:
+                str = '已经报名'
+                break;
+
+            case pb.ErrorCode.CS_CHECK_FAILURE_CGDS_ID:
+                str = '无效的炒股大赛ID'
+                break;
+
+            case pb.ErrorCode.CS_CHECK_FAILURE_TIME:
+                str = '在比赛时间范围外'
+                break;
+
+            case pb.ErrorCode.CS_CHECK_FAILURE_PROPERTY:
+                str = '玩家属性检查失败'
+                break;
+
+            case pb.ErrorCode.CS_CHECK_FAILURE_TOKEN:
+                str = '无效的token'
+                break;
+
+            case pb.ErrorCode.CS_ALREADY_UNLOCK:
+                str = '已经解锁'
+                break;
+
+            case pb.ErrorCode.CS_CHECK_PHONE_UNREGISTRY:
+                str = '手机号未注册'
+                break;
+
+            case pb.ErrorCode.CS_CHECK_PHONE_UNBOUND:
+                str = '手机号未绑定'
+                break;
+
+            case pb.ErrorCode.CS_CHECK_ACCOUNT_FORBIDDEN:
+                str = '账号已被禁用'
+                break;
+
+            case pb.ErrorCode.CS_INVALID_SMSCODE:
+                str = '无效的短信验证码'
+                break;
+
+            case pb.ErrorCode.CS_CHECK_FAILURE_ONCE:
+                str = '已经参加过活动'
+                break;
+
+            case pb.ErrorCode.CS_PAYMENT_FAILURE:
+                str = '支付失败'
+                break;
+
+            case pb.ErrorCode.CS_ROOM_INVALID:
+                str = '无效的房间ID'
+                break;
+
+            case pb.ErrorCode.CS_ROOM_FULL:
+                str = '房间已满'
+                break;
+
+            case pb.ErrorCode.CS_ROOM_FAIL_CHECKIN:
+                str = '进入房间条件不满足'
+                break;
+
+            case pb.ErrorCode.CS_ROOM_NOT_READY:
+                str = '玩家没有准备好'
+                break;
+        }
+
+        return str;
     }
 
 }

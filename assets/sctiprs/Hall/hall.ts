@@ -15,17 +15,6 @@ const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
-	@property(cc.Node)
-	shuangmangLayer: cc.Node = null;
-
-	@property(cc.Node)
-	zhibiaoLayer: cc.Node = null;
-
-	@property(cc.Node)
-	DXLayer: cc.Node = null;
-
-	@property(cc.Node)
-	QHLayer: cc.Node = null;
 
 	@property(cc.Prefab)
 	SMhistoryPre: cc.Prefab = null;
@@ -342,7 +331,6 @@ export default class NewClass extends cc.Component {
 				}, 800)
 			}
 		}
-
 		//房间已解散
 		if (GameData.roomId === 0) {
 			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');

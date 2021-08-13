@@ -19,12 +19,12 @@ export default class NewClass extends cc.Component {
 
         this._curData = data;
         this.label[0].string = index;
-        this.label[1].string = this._curData.code;
-        this.label[2].string = this._curData.name;
-        this.label[3].string = this._curData.lastAskPrice;
-        this.label[4].string = this._curData.lastBidPrice;
-        this.label[5].string = this._curData.curAskPrice;
-        this.label[6].string = this._curData.profitRate;
+        this.label[1].string = this._curData.code || '--';
+        this.label[2].string = this._curData.name || '--';
+        this.label[3].string = this._curData.lastAskPrice || '--';
+        this.label[4].string = this._curData.lastBidPrice || '--';
+        this.label[5].string = this._curData.curAskPrice || '--';
+        this.label[6].string = this._curData.profitRate || '--';
         if (this._curData.todaySignal > 0) {
             this.label[7].string = '建议买入';
         }

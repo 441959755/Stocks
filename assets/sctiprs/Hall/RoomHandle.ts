@@ -45,6 +45,7 @@ export default class NewClass extends cc.Component {
     zbFlag = false;
 
     onLoad() {
+
         //自己进入房间
         GlobalEvent.on(EventCfg.RoomGameDataSelf, this.onShow.bind(this), this);
 
@@ -130,6 +131,8 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
+        this.enterRoom = false;
+
         this.qxzbBtn.active = false;
         this.jj_zb.active = false;
         this.roomid.string = '房间ID：' + GameData.roomId;
@@ -307,6 +310,7 @@ export default class NewClass extends cc.Component {
 
             this.qxzbBtn.active = true;
         }
+
         else if (name == 'jj_qxzb') {
 
             let info = {

@@ -82,8 +82,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     d_grap_node: cc.Node = null;
 
-    //  AISignal = '';
-
     @property(cc.Node)
     ziXunBtn: cc.Node = null;
 
@@ -114,6 +112,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on('onClickPosUpdateLabel', (index) => {
 
             if (index < GameCfg.beg_end[0] || index >= GameCfg.beg_end[1]) { return }
+
             let time, kp, sp, zg, zd, cjl, cje;
             let arr = [];
             if (this.ktype == pb.KType.Min) {
@@ -208,6 +207,9 @@ export default class NewClass extends cc.Component {
             this.addMark.active = false;
             this.laNode.active = false;
             this.mnLaNode.active = true;
+            if (this.toggles[1].isChecked) {
+                this.toggles[0].isChecked = true;
+            }
             this.toggles[1].node.active = false;
             if (this.toggles[0].isChecked) {
                 this.box3.active = true;
@@ -307,9 +309,9 @@ export default class NewClass extends cc.Component {
         let cjl = 0, mrj = 0, zj = 0, zd = 0, sy = 0;
 
         if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
-            if (!GameData.mncgDataList.state) { }
-            else if (GameData.mncgDataList.state.positionList && GameData.mncgDataList.state.positionList.items) {
-                GameData.mncgDataList.state.positionList.items.forEach(el => {
+
+            if (GameData.mncgDataList.positionList && GameData.mncgDataList.positionList.items) {
+                GameData.mncgDataList.positionList.items.forEach(el => {
                     if (el.code == this.code) {
                         cjl = el.volume;
                         mrj = el.priceCost;
@@ -465,7 +467,7 @@ export default class NewClass extends cc.Component {
         let buff = CmdQueryAiStockList.encode(message).finish();
         // res1{"items":[{"code":600000,"name":"浦发银行","industry":"银行","tsUpdated":"1616140800","profitRanking":2110,"profitRate":-2.11,"lastAskPrice":10.88,"lastBidPrice":10.65,"todaySignal":-0.41}]}
         socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
-            console.log('res1' + JSON.stringify(res));
+            // console.log('res1' + JSON.stringify(res));
 
             if (!res.items || res.items.length == 0) {
                 return;
@@ -622,7 +624,6 @@ export default class NewClass extends cc.Component {
 
         socket.send(pb.MessageId.Req_QuoteSubscribe, buff, info => {
             console.log('订阅：' + JSON.stringify(info));
-
         })
     }
 
@@ -684,7 +685,6 @@ export default class NewClass extends cc.Component {
         let zf1 = (data.high - data.low) / preData.close * 100;
         this.cLabel[6].string = ComUtils.changeTwoDecimal(zf1) + '%';
         this.cLabel[7].string = ComUtils.numberConvertUnit(parseInt(data.volume / 100 + '')) + '手';
-
 
         this.cLabel[8].string = ComUtils.changeTwoDecimal(data.low) + '';
         this.cLabel[9].string = ComUtils.changeTwoDecimal(preData.close) + '';

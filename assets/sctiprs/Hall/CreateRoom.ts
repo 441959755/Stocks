@@ -1,6 +1,7 @@
 import { pb } from "../../protos/proto";
 import GameCfg from "../game/GameCfg";
 import GameData from "../GameData";
+import GlobalHandle from "../global/GlobalHandle";
 import ComUtils from "../Utils/ComUtils";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
@@ -74,7 +75,7 @@ export default class NewClass extends cc.Component {
             console.log('创建房间应答' + JSON.stringify(res));
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             if (res && res.err) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err.err);
                 return;
             }
             GameData.RoomType = 1;
