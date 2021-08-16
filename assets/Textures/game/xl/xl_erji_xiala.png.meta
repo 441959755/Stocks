@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "fc8f98f2-c6b1-43ef-97c0-1dcf58a6f0aa",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "xl_erji_xiala": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "2c747619-1909-4fca-9daf-7455253cc38d",
+      "importer": "sprite-frame",
       "rawTextureUuid": "fc8f98f2-c6b1-43ef-97c0-1dcf58a6f0aa",
       "trimType": "auto",
       "trimThreshold": 1,

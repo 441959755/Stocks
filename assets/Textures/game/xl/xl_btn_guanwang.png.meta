@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "416b7e01-a96c-487b-98b1-4e23dc4cb1fd",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "xl_btn_guanwang": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "2c80dacf-dca0-4e66-962a-f257ad96b7c6",
+      "importer": "sprite-frame",
       "rawTextureUuid": "416b7e01-a96c-487b-98b1-4e23dc4cb1fd",
       "trimType": "auto",
       "trimThreshold": 1,

@@ -10,6 +10,7 @@ import StrategyAIData from '../game/StrategyAIData';
 import GameData from '../GameData';
 import LoadUtils from '../Utils/LoadUtils';
 import { LocationPoint } from '../global/LocationPoint';
+import PopupManager from '../Utils/PopupManager';
 
 const { ccclass, property } = cc._decorator;
 
@@ -83,34 +84,7 @@ export default class NewClass extends cc.Component {
 	InviteBox: cc.Node = null;
 
 	onLoad() {
-		ComUtils.onLoadNode();
-		ComUtils.onEvent();
-		//打开双盲
-		GlobalEvent.on(
-			EventCfg.OPENSMLAYER,
-			() => {
-				this.shuangmangLayer.active = true;
-			},
-			this
-		);
-
-		//打开指标
-		GlobalEvent.on(
-			EventCfg.OPENZBLAYER,
-			() => {
-				this.zhibiaoLayer.active = true;
-			},
-			this
-		);
-
-		//打开定向
-		GlobalEvent.on(
-			EventCfg.OPENDXLAYER,
-			() => {
-				this.DXLayer.active = true;
-			},
-			this
-		);
+		PopupManager.init();
 
 		//打开历史记录
 		GlobalEvent.on(
@@ -482,7 +456,6 @@ export default class NewClass extends cc.Component {
 	}
 
 	protected onDestroy() {
-		GlobalEvent.off(EventCfg.OPENSMLAYER);
 		GlobalEvent.off(EventCfg.OPENZBLAYER);
 		GlobalEvent.off(EventCfg.OPENDXLAYER);
 		GlobalEvent.off(EventCfg.OPENHISTORYLAYER);
@@ -494,7 +467,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.OPENHELPLAYER);
 		GlobalEvent.off(EventCfg.OPENSETLAYER);
 		GlobalEvent.off(EventCfg.ROOMLEAVE);
-		ComUtils.onDestory();
+		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
 	}
 

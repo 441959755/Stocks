@@ -2,9 +2,9 @@ import GameData from "../GameData";
 import Socket from "../common/net/socket";
 import GameCfg from "../game/GameCfg";
 import GameCfgText from '../GameText';
-import ComUtils from '../Utils/ComUtils';
 import AudioUtils from '../Utils/AudioUtils';
 import LLLog from '../common/utils/LLLog'
+import PopupManager from '../Utils/PopupManager';
 
 cc.Class({
 	extends: cc.Component,
@@ -23,9 +23,11 @@ cc.Class({
 
 	onLoad() {
 		this.init();
+		AudioUtils.getAudioVolume();
 		AudioUtils.loadAudios('audios');
-		ComUtils.onLoadNode();
-		ComUtils.onEvent();
+
+		PopupManager.init();
+
 		//游戏配置
 		GameCfgText.getOtherCfg();
 
@@ -40,9 +42,7 @@ cc.Class({
 
 		cc.Button.prototype._onTouchEnded = function (t) {
 			if (this.interactable && this.enabledInHierarchy) {
-
 				AudioUtils.playEffect("click", false);
-
 				if (this._pressed) {
 					cc.Component.EventHandler.emitEvents(this.clickEvents, t);
 					this.node.emit("click", this);
@@ -52,6 +52,10 @@ cc.Class({
 				t.stopPropagation();
 			}
 		}
+	},
+
+	start() {
+		this.initData();
 	},
 
 	initData() {
@@ -329,6 +333,6 @@ cc.Class({
 
 	onDestroy() {
 		GameCfgText.releaseRes();
-		ComUtils.onDestory();
+		PopupManager.delPopupNode();
 	}
 });

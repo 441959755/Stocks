@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "7f82a3c6-8025-4c00-a412-b3cd75e60ce2",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "main_banner_zxlb2": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "28233931-bee3-412e-a4e4-f9e2d14ad445",
+      "importer": "sprite-frame",
       "rawTextureUuid": "7f82a3c6-8025-4c00-a412-b3cd75e60ce2",
       "trimType": "auto",
       "trimThreshold": 1,

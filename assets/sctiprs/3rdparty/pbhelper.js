@@ -16,9 +16,8 @@ PBHelper.prototype = {
     //登入信息转BUff
     onCmdLoginConvertToBuff(data) {
         let Login = pb.CmdLogin;
-        console.log('message' + JSON.stringify(data));
+        console.log('登入信息' + JSON.stringify(data));
         let message = Login.create({ account: data.account, type: data.type, from: data.from, pwd: data.pwd });
-
         let buff = Login.encode(message).finish();
         return buff;
     },
@@ -28,7 +27,7 @@ PBHelper.prototype = {
         let CmdLoginReply = pb.CmdLoginReply;
         let decoded = CmdLoginReply.decode(new Uint8Array(buff));
         // let decoded = CmdLoginReply.decode(buff);
-        console.log('onCmdLoginConvertToData:' + JSON.stringify(decoded));
+        console.log('登人返回信息:' + JSON.stringify(decoded));
 
         if (decoded.err && decoded.err.code == -1) {
             console.log('登入错误:' + decoded.err.err);
@@ -45,9 +44,9 @@ PBHelper.prototype = {
             uid: GameData.userID,
             token: GameData.token,
         })
-        console.log('游戏登入信息' + JSON.stringify(message));
+
         let buff = CmdGameLogin.encode(message).finish();
-        console.log('onCmdGameLoginConvertToBuff' + buff);
+        console.log('游戏登入信息' + buff);
 
         return buff;
     },
@@ -56,7 +55,7 @@ PBHelper.prototype = {
     onCmdGameLoginReplyConvertToData(buff) {
         let CmdGameLoginReply = pb.CmdGameLoginReply;
         let decoded = CmdGameLoginReply.decode(new Uint8Array(buff));
-        console.log(' onCmdGameLoginReplyConvertToData:' + JSON.stringify(decoded));
+        console.log(' 游戏登入返回信息:' + JSON.stringify(decoded));
         return decoded;
     },
 

@@ -1,7 +1,5 @@
 
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
-import EventCfg from "../../../sctiprs/Utils/EventCfg";
-import ActionUtils from "../../../sctiprs/Utils/ActionUtils";
 import GameData from '../../../sctiprs/GameData';
 const { ccclass, property } = cc._decorator;
 
@@ -23,35 +21,18 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     scroll: cc.Node = null;
 
-    @property(cc.Prefab)
-    preNode: cc.Prefab = null;
+    @property(cc.Node)
+    preNode: cc.Node = null;
 
-    @property([cc.Node])
-    content: cc.Node[] = [];
+    @property(cc.Node)
+    content: cc.Node = null;;
 
     _Lid = 0;
 
+    UIScrollControl = null;
+
     protected onLoad() {
-        // GlobalEvent.on('ItemValue', (data) => {
-        //     this.MaDates[this._Lid].string = data;
-        //     this.scroll.active = false;
-        // }, this);
-
-        this.content.forEach(el => {
-            el.removeAllChildren();
-        })
-
-        // 
-
-        //  if (this.content[this._Lid].children.length <= 0) {
-        for (let i = 1; i <= 240; i++) {
-            let node = cc.instantiate(this.preNode);
-            this.content[0].addChild(node);
-            node.getComponent(cc.Label).string = i + '';
-        }
-        //   }
-
-
+        this.content.removeAllChildren();
     }
 
     protected onDisable() {
@@ -60,7 +41,7 @@ export default class NewClass extends cc.Component {
 
     start() {
         this.scroll.active = false;
-
+        this.UIScrollControl = this.scroll.getComponent('UIScrollControl');
     }
 
     protected onEnable() {
@@ -69,8 +50,6 @@ export default class NewClass extends cc.Component {
             this.scroll.active = false;
         }, this);
         this.initToggle();
-        ActionUtils.openLayer(this.node);
-
     }
 
     //默认的选项
@@ -93,7 +72,6 @@ export default class NewClass extends cc.Component {
         this.MaDates[3].string = data.MA4Date;
         this.MaDates[4].string = data.MA5Date;
         this.MaDates[5].string = data.MA6Date;
-
     }
 
     //保存设置的数据
@@ -126,7 +104,6 @@ export default class NewClass extends cc.Component {
             this.node.active = false;
         } else if (name == 'saveSetBtn') {
             //保存选择的数据
-
             this.SaveToggle();
             this.node.active = false;
 
@@ -139,6 +116,7 @@ export default class NewClass extends cc.Component {
             } else {
                 this.scroll.y = parnet.y + parnet.height / 2 + this.scroll.height;
             }
+            let arr = [];
             let index = 1, max = 30;
             if (this._Lid == 0) {
                 index = 1;
@@ -154,23 +132,23 @@ export default class NewClass extends cc.Component {
             } else if (this._Lid == 5) {
                 index = 120; max = 240;
             }
+            for (let i = index; i <= max; i++) {
+                arr.push(i);
 
-            this.scroll.getComponent(cc.ScrollView).content = this.content[0];
-            this.content[0].active = true;
+            }
 
-            this.content[0].children.forEach((el, t) => {
-                if (t >= (index - 1) && t <= (max - 1)) {
-                    el.active = true;
-                } else {
-                    el.active = false;
-                }
+            this.content.active = true;
+
+            this.UIScrollControl.initControl(this.preNode, arr.length, this.preNode.getContentSize(), 0, (node, _index) => {
+                let label = node.getComponent(cc.Label);
+                label.string = arr[_index];
+                console.log(this.content.children.length);
             })
+
 
         } else if (name == 'viewMask') {
             this.scroll.active = false;
-            this.content.forEach(el => {
-                el.active = false;
-            })
+            this.content.active = false;
         }
     }
 

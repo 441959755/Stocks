@@ -1,12 +1,10 @@
-import GlobalEvent from "../Utils/GlobalEvent";
-import EventCfg from "../Utils/EventCfg";
-
-import GameCfg from "../game/GameCfg";
-import GameData from "../GameData";
-import { pb } from '../../protos/proto';
-
-import GameCfgText from '../GameText';
-import GlobalHandle from "../global/GlobalHandle";
+import { pb } from "../../../protos/proto";
+import GameCfg from "../../../sctiprs/game/GameCfg";
+import GameData from "../../../sctiprs/GameData";
+import GameCfgText from "../../../sctiprs/GameText";
+import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
 
@@ -26,6 +24,7 @@ export default class NewClass extends cc.Component {
     CZBtn: cc.Node = null;
 
     onLoad() {
+
         //更新当前金币属性
         GlobalEvent.on(EventCfg.SMINITFUND, () => {
             this.curla.string = GameData.SmxlState.gold;
@@ -38,13 +37,10 @@ export default class NewClass extends cc.Component {
                 this.CZBtn.active = true;
             }
         }, this);
+
     }
 
     protected onEnable() {
-
-        //  GlobalEvent.emit(EventCfg.SHOWOTHERNODE, this);
-        GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
         this.toggle1.isChecked = GameData.SMSet.isFC;
 
         this.initLa.string = GameData.SmxlState.goldInit;
@@ -134,6 +130,7 @@ export default class NewClass extends cc.Component {
     }
 
     smStartGameSet() {
+
         GameCfgText.getGPSMByRandom()
 
         console.log('给的数据:' + JSON.stringify(GameCfg.enterGameCache));

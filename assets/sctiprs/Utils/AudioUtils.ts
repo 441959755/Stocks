@@ -8,6 +8,14 @@ export default class AudioUtils {
 
 	public static effectVolume = 0;
 
+	public static getAudioVolume() {
+		let musicVolume = cc.sys.localStorage.getItem('MUSICVOLUME');
+		this.musicVolume = musicVolume ? parseFloat(musicVolume) : 1;
+
+		let effectVolume = cc.sys.localStorage.getItem('EFFECTVOLUME');
+		this.effectVolume = effectVolume ? parseFloat(effectVolume) : 1;
+	}
+
 	/**加载资源
 	 *  url 地址
 	 */
@@ -17,12 +25,6 @@ export default class AudioUtils {
 				this.AudioMaps.set(element.name, element);
 			});
 		});
-
-		let musicVolume = cc.sys.localStorage.getItem('MUSICVOLUME');
-		this.musicVolume = musicVolume ? parseFloat(musicVolume) : 1;
-
-		let effectVolume = cc.sys.localStorage.getItem('EFFECTVOLUME');
-		this.effectVolume = effectVolume ? parseFloat(effectVolume) : 1;
 	}
 
 	/**

@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "73009268-2b8c-41c3-bf45-73a4dde30157",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "sp_btn_maichu": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "92c4b633-3357-430a-9ce2-a9019e2a04d0",
+      "importer": "sprite-frame",
       "rawTextureUuid": "73009268-2b8c-41c3-bf45-73a4dde30157",
       "trimType": "auto",
       "trimThreshold": 1,

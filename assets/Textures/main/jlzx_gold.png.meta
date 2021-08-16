@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "ceafd133-2cdd-4420-bace-9f82b760a2ac",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "jlzx_gold": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "472e19b2-0b18-41e2-8113-e43f833e9b7d",
+      "importer": "sprite-frame",
       "rawTextureUuid": "ceafd133-2cdd-4420-bace-9f82b760a2ac",
       "trimType": "auto",
       "trimThreshold": 1,

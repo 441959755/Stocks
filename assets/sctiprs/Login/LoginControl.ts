@@ -48,6 +48,11 @@ export default class NewClass extends cc.Component {
         else {
             //其他平台登入TODO
         }
+
+        cc.director.preloadScene('Login', () => {
+            console.log('Login 场 景 加 载 完 成');
+        })
+
     }
 
     onShowNode(node) {

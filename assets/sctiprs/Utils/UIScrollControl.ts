@@ -1,6 +1,6 @@
 
 
-declare const async: any;
+
 const { ccclass, property } = cc._decorator;
 
 /**
@@ -47,16 +47,18 @@ export default class NewClass extends cc.Component {
     private refreshCallBack: Function
 
     /**
-  * 初始化控制
-  * @param _temp_node 克隆对象
-  * @param _total_count 成员总数
-  * @param _size Item水平或竖直方向的距离
-  * @param _dir 滑动方向
-  * @param callBack 刷新回调
-  */
+    * 初始化控制
+    * @param _temp_node 克隆对象
+    * @param _total_count 成员总数
+    * @param _size Item水平或竖直方向的距离
+    * @param _dir 滑动方向
+    * @param callBack 刷新回调
+    */
     initControl(_temp_node: cc.Node, _total_count: number, _size: cc.Size, _dir: ScrollDirEnum, callBack: Function): void {
 
-
+        if (callBack) {
+            this.refreshCallBack = callBack
+        }
 
         if (this.is_start == false) {
             this.scroll_rect = this.node.getComponent(cc.ScrollView);
@@ -65,29 +67,29 @@ export default class NewClass extends cc.Component {
                 return;
             }
 
-            // this.scroll_rect.content.parent.setAnchorPoint(cc.v2(0.5, 0.5))
-            // let _mask_widget: cc.Widget = this.scroll_rect.content.parent.getComponent(cc.Widget)
+            this.scroll_rect.content.parent.setAnchorPoint(cc.v2(0.5, 0.5))
+            let _mask_widget: cc.Widget = this.scroll_rect.content.parent.getComponent(cc.Widget)
 
-            // if (_mask_widget == null) {
-            //     _mask_widget = this.scroll_rect.content.parent.addComponent(cc.Widget)
-            // }
+            if (_mask_widget == null) {
+                _mask_widget = this.scroll_rect.content.parent.addComponent(cc.Widget)
+            }
 
-            // //上下左右对齐边界
-            // _mask_widget.isAlignLeft = true
-            // _mask_widget.left = 0
+            //上下左右对齐边界
+            _mask_widget.isAlignLeft = true
+            _mask_widget.left = 0
 
-            // _mask_widget.isAlignRight = true
-            // _mask_widget.right = 0
+            _mask_widget.isAlignRight = true
+            _mask_widget.right = 0
 
-            // _mask_widget.isAlignTop = true
-            // _mask_widget.top = 0
+            _mask_widget.isAlignTop = true
+            _mask_widget.top = 0
 
-            // _mask_widget.isAlignBottom = true
-            // _mask_widget.bottom = 0
+            _mask_widget.isAlignBottom = true
+            _mask_widget.bottom = 0
 
-            // this._show_area_size = new cc.Size(this.scroll_rect.node.getContentSize())
-            // this.scroll_rect.content.setContentSize(this._show_area_size)
-            // this.start_content_size = this.scroll_rect.content.getContentSize();
+            this._show_area_size = new cc.Size(this.scroll_rect.node.getContentSize())
+            this.scroll_rect.content.setContentSize(this._show_area_size)
+            this.start_content_size = this.scroll_rect.content.getContentSize();
         }
 
         if (_temp_node == null) {
@@ -95,9 +97,9 @@ export default class NewClass extends cc.Component {
             return
         }
 
-        // this.scroll_rect.content.setContentSize(this.start_content_size)
+        this.scroll_rect.content.setContentSize(this.start_content_size)
 
-        this.clear()
+        // this.clear()
 
         this.total_count = _total_count
         this.dir = _dir as ScrollDirEnum
@@ -145,6 +147,7 @@ export default class NewClass extends cc.Component {
         this.maxIdx = 0
 
         this.initShowAreaItems(_temp_node)
+
     }
 
     private clear() {
@@ -152,8 +155,11 @@ export default class NewClass extends cc.Component {
         this.all_child_list = []
     }
 
+    /**初始化可见的item */
     private initShowAreaItems(_temp_node: cc.Node) {
+
         for (let i = 0; i < this.total_show_item_count; i++) {
+            //cc.log(" i = " + i)
             let curPos: cc.Vec2 = cc.v2(0, 0)
             let node: cc.Node = cc.instantiate(_temp_node)
             this.scroll_rect.content.addChild(node)
@@ -256,19 +262,10 @@ export default class NewClass extends cc.Component {
      * @param _index 
      * @param nodeIndex 
      */
-
     private onRefresh(node: cc.Node, _index: number, nodeIndex: number) {
         //cc.log("--------------- _index = " + _index)
         if (this.refreshCallBack != null) {
             this.refreshCallBack(node, _index, nodeIndex)
         }
     }
-
-    addItem(list) {
-
-        async.eachLimit(list, 1, (el, cb) => {
-            setTimeout(cb, 0);
-        })
-    }
-
 }
