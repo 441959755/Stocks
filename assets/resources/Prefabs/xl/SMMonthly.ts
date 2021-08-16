@@ -1,8 +1,6 @@
-//import ActionUtils from "../Utils/ActionUtils";
-import ActionUtils from "../../../sctiprs/Utils/ActionUtils";
-import GlobalEvent from '../../../sctiprs/Utils/GlobalEvent';
-import EventCfg from '../../../sctiprs/Utils/EventCfg';
-import GameData from '../../../sctiprs/GameData';
+import { pb } from "../../../protos/proto";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
 
@@ -20,13 +18,16 @@ export default class NewClass extends cc.Component {
 
 
     start() {
-
+        //请求获取跟新数据
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        socket.send(pb.MessageId.Req_Game_SmxlReport, null, info => {
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            console.log('月报数据：' + JSON.stringify(info));
+            this.monthlyInfo = info;
+            this.onShow();
+        });
     }
 
-    protected onEnable() {
-        ActionUtils.openLayer(this.node);
-        GlobalEvent.emit(EventCfg.LOADINGHIDE);
-    }
 
     onShow() {
         if (!this.monthlyInfo) {
@@ -42,13 +43,6 @@ export default class NewClass extends cc.Component {
             month = 12;
         }
 
-        //  {"capitalInit":"100000","capitalFinal":"80000",
-        // "profitRate":0.800000011920929,"winCount":3,
-        // "winCode":600000,"winRate":0.699999988079071,
-        // "loseCount":2,"loseCode":600001,"loseRate":-0.7599999904632568,
-        // "count":5,"rankCaptial":0.20999999344348907,"rankRate":0.550000011920929}
-        // this.labels[0].string = GameData.userName;
-        // this.labels[1].string = '的训练记录(' + year + '年' + month + '月)';
         this.monthlyInfo.capitalInit && (this.labels[2].string = this.monthlyInfo.capitalInit);
         this.monthlyInfo.capitalFinal && (this.labels[3].string = this.monthlyInfo.capitalFinal);
         if (this.monthlyInfo.profitRate) {

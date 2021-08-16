@@ -142,7 +142,6 @@ export default class NewClass extends cc.Component {
             this.UIScrollControl.initControl(this.preNode, arr.length, this.preNode.getContentSize(), 0, (node, _index) => {
                 let label = node.getComponent(cc.Label);
                 label.string = arr[_index];
-                console.log(this.content.children.length);
             })
 
 

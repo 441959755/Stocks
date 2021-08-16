@@ -125,76 +125,8 @@ export default class NewClass extends cc.Component {
 			this
 		);
 
-		//打开设置
-		GlobalEvent.on(
-			EventCfg.OPENSETLAYER,
-			() => {
-				if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-					if (!this.ZBSetLayer) {
-						this.ZBSetLayer = cc.instantiate(this.ZBSetPre);
-						this.node.addChild(this.ZBSetLayer, 30);
-					}
-					this.ZBSetLayer.active = true;
-				} else if (GameCfg.GameType == pb.GameType.ShuangMang) {
-					if (!this.SMSetLayer) {
-						this.SMSetLayer = cc.instantiate(this.SMSetPre);
-						this.node.addChild(this.SMSetLayer, 30);
-					}
-					this.SMSetLayer.active = true;
-				} else if (GameCfg.GameType == pb.GameType.DingXiang) {
-					if (!this.DXSetLayer) {
-						this.DXSetLayer = cc.instantiate(this.DXSetPre);
-						this.node.addChild(this.DXSetLayer, 30);
-					}
-					this.DXSetLayer.active = true;
-				} else if (GameCfg.GameType == pb.GameType.QiHuo) {
-					if (!this.QHSetNode) {
-						this.QHSetNode = cc.instantiate(this.QHSetPre);
-						this.node.addChild(this.QHSetNode, 30);
-					}
-					this.QHSetNode.active = true;
-				}
-			},
-			this
-		);
 
-		//打开月报
-		GlobalEvent.on(
-			EventCfg.OPENMONTHLAYER,
-			() => {
-				socket.send(pb.MessageId.Req_Game_SmxlReport, null, info => {
-					console.log('OPENMONTHLAYER' + JSON.stringify(info));
 
-					if (!this.SMMonthlyLayer) {
-						this.SMMonthlyLayer = cc.instantiate(this.SMMothlyPre);
-						this.node.addChild(this.SMMonthlyLayer, 30);
-					}
-					this.SMMonthlyLayer.active = true;
-
-					this.SMMonthlyLayer.getComponent('SMMonthly').monthlyInfo = info;
-					this.SMMonthlyLayer.getComponent('SMMonthly').onShow();
-				});
-
-			},
-			this
-		);
-
-		//打开曲线图
-		GlobalEvent.on(
-			EventCfg.OPENYIELDLAYER,
-			() => {
-				GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
-				if (this.SMYieldLayer) {
-					this.SMYieldLayer.active = true;
-					return;
-				}
-				this.acquireSMhistoryInfo(info => {
-					this.openYieldLaye && this.openYieldLaye(info);
-				});
-			},
-			this
-		);
 
 		//查询行情
 		GlobalEvent.on(EventCfg.onCmdQuoteQuery, this.onCmdQuoteQuery.bind(this), this);
@@ -221,15 +153,6 @@ export default class NewClass extends cc.Component {
 					this.node.addChild(this.SMResetNode);
 				}
 				this.SMResetNode.active = true;
-			},
-			this
-		);
-
-		//打開期货
-		GlobalEvent.on(
-			EventCfg.OPENQHLAYER,
-			() => {
-				this.QHLayer.active = true;
 			},
 			this
 		);

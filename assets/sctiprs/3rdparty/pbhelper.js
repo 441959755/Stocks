@@ -104,7 +104,7 @@ PBHelper.prototype = {
     onCmdQueryGameResultReplyConvertToData(buff) {
         let CmdQueryGameResultReply = pb.CmdQueryGameResultReply;
         let decode = CmdQueryGameResultReply.decode(new Uint8Array(buff));
-        console.log('查询游戏结果应答' + JSON.stringify(decode));
+
         return decode;
     },
 

@@ -35,6 +35,10 @@ export default class NewClass extends cc.Component {
 
     monthNode: cc.Node = null;
 
+    yieldNode: cc.Node = null;  //曲线图
+
+    helpNode: cc.Node = null;  //帮组
+
     onLoad() {
         GlobalEvent.on(EventCfg.OPENSMLAYER, this.openSMLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZBLAYER, this.openZBLayer.bind(this), this);
@@ -43,6 +47,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENSETLAYER, this.openSetLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENHISTORYLAYER, this.openHisLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENMONTHLAYER, this.openMonthLayer.bind(this), this);
+        GlobalEvent.on(EventCfg.OPENYIELDLAYER, this.openYieldLayer.bind(this), this);
     }
 
     onDestroy() {
@@ -51,6 +56,10 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENDXLAYER);
         GlobalEvent.off(EventCfg.OPENQHLAYER);
         GlobalEvent.off(EventCfg.OPENSETLAYER);
+        GlobalEvent.off(EventCfg.OPENHISTORYLAYER);
+        GlobalEvent.off(EventCfg.OPENMONTHLAYER);
+        GlobalEvent.off(EventCfg.OPENYIELDLAYER);
+        GlobalEvent.off(EventCfg.OPENHELPLAYER);
         LoadUtils.releaseRes('Prefabs/xl/ZBSetLayer');
         LoadUtils.releaseRes('Prefabs/xl/SMSetLayer');
         LoadUtils.releaseRes('Prefabs/xl/DXSetLayer');
@@ -63,21 +72,24 @@ export default class NewClass extends cc.Component {
         LoadUtils.releaseRes('Prefabs/xl/SMHisLayer');
         LoadUtils.releaseRes('Prefabs/xl/DXHisLayer');
         LoadUtils.releaseRes('Prefabs/xl/QHHisLayer');
+        LoadUtils.releaseRes('Prefabs/xl/SMMonthlyLayer');
     }
+
+    /**
+     * 曲线图
+     */
+    openYieldLayer() {
+        this.openNode(this.yieldNode, 'Prefabs/xl/SMYieldCurve', 10, (node) => { this.yieldNode = node });
+    }
+
 
     /**
      * 月报
      */
     openMonthLayer() {
-        if (!this.monthNode) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/xl/SMMonthlyLayer', pre => {
-                this.monthNode = cc.instantiate(pre);
-                this.node.addChild(this.monthNode, 10);
-
-            })
-        }
+        this.openNode(this.monthNode, 'Prefabs/xl/SMMonthlyLayer', 10, (node) => { this.monthNode = node });
     }
+
 
     /**
      * 历史记录
@@ -85,19 +97,24 @@ export default class NewClass extends cc.Component {
     openHisLayer() {
         switch (GameCfg.GameType) {
             case pb.GameType.ZhiBiao:
-                this.openNode(this.ZBHisNode, 'Prefabs/xl/ZBHisLayer', 11);
+                this.openNode(this.ZBHisNode, 'Prefabs/xl/ZBHisLayer', 11, (node) => { this.ZBHisNode = node });
                 break;
             case pb.GameType.ShuangMang:
-                this.openNode(this.SMHisNode, 'Prefabs/xl/SMHisLayer', 11);
+                this.openNode(this.SMHisNode, 'Prefabs/xl/SMHisLayer', 11, (node) => {
+                    this.SMHisNode = node;
+                });
                 break;
             case pb.GameType.DingXiang:
-                this.openNode(this.DXHisNode, 'Prefabs/xl/DXHisLayer', 11);
+                this.openNode(this.DXHisNode, 'Prefabs/xl/DXHisLayer', 11, (node) => {
+                    this.DXHisNode = node;
+                });
                 break;
             case pb.GameType.QiHuo:
-                this.openNode(this.QHHisNode, 'Prefabs/xl/QHHisLayer', 11);
+                this.openNode(this.QHHisNode, 'Prefabs/xl/QHHisLayer', 11, (node) => {
+                    this.QHHisNode = node;
+                });
                 break;
         }
-
     }
 
     /**
@@ -106,16 +123,16 @@ export default class NewClass extends cc.Component {
     openSetLayer() {
         switch (GameCfg.GameType) {
             case pb.GameType.ZhiBiao:
-                this.openNode(this.ZBSetNode, 'Prefabs/xl/ZBSetLayer', 10);
+                this.openNode(this.ZBSetNode, 'Prefabs/xl/ZBSetLayer', 10, (node) => { this.ZBSetNode = node });
                 break;
             case pb.GameType.ShuangMang:
-                this.openNode(this.SMSetNode, 'Prefabs/xl/SMSetLayer', 10);
+                this.openNode(this.SMSetNode, 'Prefabs/xl/SMSetLayer', 10, (node) => { this.SMSetNode = node });
                 break;
             case pb.GameType.DingXiang:
-                this.openNode(this.DXSetNode, 'Prefabs/xl/DXSetLayer', 10);
+                this.openNode(this.DXSetNode, 'Prefabs/xl/DXSetLayer', 10, (node) => { this.DXSetNode = node });
                 break;
             case pb.GameType.QiHuo:
-                this.openNode(this.QHSetNode, 'Prefabs/xl/QHSetLayer', 10);
+                this.openNode(this.QHSetNode, 'Prefabs/xl/QHSetLayer', 10, (node) => { this.QHSetNode = node });
                 break;
         }
     }
@@ -124,76 +141,32 @@ export default class NewClass extends cc.Component {
      * 双盲
      */
     openSMLayer() {
-        if (this.SMNode) {
-            this.SMNode.active = true;
-        }
-        else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/xl/shuangmangLayer', pre => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.SMNode = cc.instantiate(pre);
-                this.node.addChild(this.SMNode, 2);
-                this.node.active = true;
-            })
-        }
+        this.openNode(this.SMNode, 'Prefabs/xl/shuangmangLayer', 2, (node) => { this.SMNode = node });
     }
 
     /**
      * 指标
      */
     openZBLayer() {
-        if (!this.ZBNode) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/xl/zhibiaoLayer', pre => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.ZBNode = cc.instantiate(pre);
-                this.node.addChild(this.ZBNode, 3);
-                this.ZBNode.active = true;
-            })
-        }
-        else {
-            this.ZBNode.active = true;
-        }
+        this.openNode(this.ZBNode, 'Prefabs/xl/zhibiaoLayer', 3, (node) => { this.ZBNode = node });
     }
 
     /**
      * 定向
      */
     openDXLayer() {
-        if (!this.DXNode) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/xl/DXLayer', pre => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.DXNode = cc.instantiate(pre);
-                this.node.addChild(this.DXNode, 4);
-                this.DXNode.active = true;
-            })
-        }
-        else {
-            this.DXNode.active = false;
-        }
+        this.openNode(this.DXNode, 'Prefabs/xl/DXLayer', 3, (node) => { this.DXNode = node });
     }
 
     /**
      * 期货
      */
     openQHLayer() {
-        if (!this.QHNode) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/xl/qiHuoLayer', pre => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.QHNode = cc.instantiate(pre);
-                this.node.addChild(this.QHNode, 5);
-                this.QHNode.active = true;
-            })
-        }
-        else {
-            this.QHNode.active = true;
-        }
+        this.openNode(this.QHNode, 'Prefabs/xl/qiHuoLayer', 3, (node) => { this.QHNode = node });
 
     }
 
-    openNode(node, url, zIndex) {
+    openNode(node, url, zIndex, call?) {
         if (!node) {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes(url, pre => {
@@ -201,6 +174,7 @@ export default class NewClass extends cc.Component {
                 node = cc.instantiate(pre);
                 this.node.addChild(node, zIndex);
                 node.active = true;
+                call(node);
             })
         }
         else {

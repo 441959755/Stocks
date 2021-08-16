@@ -1,5 +1,4 @@
 
-//import ActionUtils from "../../../sctiprs/Utils/ActionUtils";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import EventCfg from '../../../sctiprs/Utils/EventCfg';
 import GameCfg from "../../../sctiprs/game/GameCfg";
@@ -7,7 +6,9 @@ import { pb } from '../../../protos/proto';
 import GameCfgText from '../../../sctiprs/GameText';
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import GameData from "../../../sctiprs/GameData";
+
 let preNodes = []
+
 const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
@@ -15,19 +16,42 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     historyItem: cc.Node = null;
 
-    // historyType = null;
-
     historyInfo = null;
 
     @property(cc.Node)
     content: cc.Node = null;
-
 
     @property(cc.Label)
     label: cc.Label = null;
 
     @property(cc.Label)
     title: cc.Label = null;
+
+    start() {
+        if (!this.historyInfo) {
+            let data = new Date();
+            data.setDate(1);
+            data.setHours(0);
+            data.setSeconds(0);
+            data.setMinutes(0);
+
+            let inf = {
+                uid: GameData.userID,
+                gType: GameCfg.GameType,
+                to: parseInt(new Date().getTime() / 1000 + ''),
+                pageSize: 100,
+            }
+            let CmdQueryGameResult = pb.CmdQueryGameResult;
+            let message = CmdQueryGameResult.create(inf)
+            let buff = CmdQueryGameResult.encode(message).finish();
+
+            socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, (info) => {
+                console.log('查询游戏结果应答' + JSON.stringify(info));
+                this.historyInfo = info;
+                this.onShow();
+            })
+        }
+    }
 
     onEnable() {
         GlobalEvent.on(EventCfg.HISTORYOPTDATA, () => {
@@ -212,7 +236,6 @@ export default class NewClass extends cc.Component {
             }
         }
         else if (GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.QiHuo) {
-
             this.label.string = (sumrate).toFixed(2) + '%';
             if (sumrate > 0) {
                 this.label.node.color = cc.Color.RED;
