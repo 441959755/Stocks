@@ -64,8 +64,8 @@ export default class PopupManager {
             this.tipsText.getComponent('TipsTextHandle').textData = content;
             this.tipsText.getComponent('TipsTextHandle').onShow();
         }
-
     }
+
 
     /**
      * 
@@ -93,7 +93,6 @@ export default class PopupManager {
             this.tipsBox.emit('contentText', { text: text, call: call });
         }
     }
-
 
     public static delPopupNode() {
         GlobalEvent.off(EventCfg.LOADINGHIDE);

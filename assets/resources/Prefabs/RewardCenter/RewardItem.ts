@@ -77,10 +77,6 @@ export default class NewClass extends cc.Component {
         this.tipsLabel.string = this.itemData.memo;
     }
 
-    start() {
-
-    }
-
     getItemRewaed() {
 
         if (!this.LQFALG) {
@@ -103,8 +99,6 @@ export default class NewClass extends cc.Component {
 
             })
         }
-
-
     }
 
     onBtnClick(event, data) {
@@ -112,7 +106,6 @@ export default class NewClass extends cc.Component {
         if (name == 'btn_lingqu') {
             this.getItemRewaed();
         }
-
     }
 
 }

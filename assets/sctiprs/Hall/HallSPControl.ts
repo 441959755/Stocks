@@ -43,14 +43,10 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENDHZCLLAYER, this.openDhzcLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENMNHISLAYER, this.openMnHisLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENBKBOX, this.openBKBox.bind(this), this);
-
         GlobalEvent.on(EventCfg.OPENBUYBOX, this.openBuyBox.bind(this), this);
-
         GlobalEvent.on(EventCfg.OPENSELLBOX, this.openSellBox.bind(this), this);
         GlobalEvent.on(EventCfg.OPENMNCDLAYER, this.openMnCDLayer.bind(this), this);
-
         GlobalEvent.on(EventCfg.OPENCGDS, this.openCgdsLayer.bind(this), this);
-
         GlobalEvent.on(EventCfg.OPENCGDSPH, this.openCgdsph.bind(this), this);
     }
 
@@ -121,7 +117,6 @@ export default class NewClass extends cc.Component {
                 handle.onShow(data);
             })
         }
-
     }
 
     openBuyBox(data) {

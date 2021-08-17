@@ -10,11 +10,7 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     rewardCenterBtn: cc.Node = null;
 
-
-
     rewardCenterData = null;
-
-
 
     onLoad() {
         this.rewardCenterBtn.active = false;
@@ -35,34 +31,12 @@ export default class NewClass extends cc.Component {
         })
     }
 
-    start() {
-
-    }
-
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'rewardCentertBtn') {
-            //    / this.onOpenRewardCenterLayer();
             GlobalEvent.emit(EventCfg.OPENREWARDCENTERLAYER, this.rewardCenterData);
         }
 
     }
-
-    // onOpenRewardCenterLayer() {
-    //     if (!this.rewardCenterNode) {
-    //         this.rewardCenterNode = cc.instantiate(this.rewardCenterPre);
-    //         this.node.addChild(this.rewardCenterNode);
-    //     }
-    //     this.rewardCenterNode.active = true;
-    //     let handle = this.rewardCenterNode.getComponent('RewardCenter');
-    //     if (handle) {
-    //         handle.rewardData = this.rewardCenterData;
-    //         handle.onShow();
-    //     } else {
-    //         console.log('HallRightCenter onOpenRewardCenterLayer handle is null');
-    //     }
-
-    // }
-
 
 }
