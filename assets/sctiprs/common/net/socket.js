@@ -193,8 +193,6 @@ function Socket(host) {
 	this.reconnectCount = 0;
 	this._preData = null;
 
-	// this.preData = null;
-	//  this.notification = new cc.EventTarget();
 }
 
 var socket = null;

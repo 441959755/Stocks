@@ -2,7 +2,6 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
 import { pb } from '../../protos/proto';
-import ComUtils from '../Utils/ComUtils';
 import PopupManager from "../Utils/PopupManager";
 import GameData from "../GameData";
 import UpGameOpt from "../global/UpGameOpt";
@@ -15,9 +14,6 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Node)
     finalLayer: cc.Node = null;  //结算界面
-
-    // @property(cc.Node)
-    // helpLayer: cc.Node = null;   //帮助界面
 
     @property(cc.Node)
     statLayer: cc.Node = null;  //统计界面
@@ -47,8 +43,7 @@ export default class NewClass extends cc.Component {
     LxFinalLayer: cc.Node = null;
 
     onLoad() {
-        ComUtils.onLoadNode();
-        ComUtils.onEvent();
+        PopupManager.init();
         //游戏结算
         GlobalEvent.on(EventCfg.GAMEOVEER, (message) => {
             if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
@@ -114,7 +109,6 @@ export default class NewClass extends cc.Component {
         //  GameCfg.RoomGameData = null;
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
-        ComUtils.onDestory();
         //  GlobalEvent.off(EventCfg.OPENOTHERINFOBOX);
         PopupManager.delPopupNode();
         GameCfg.GAMEFUPAN = false;

@@ -39,6 +39,8 @@ export default class NewClass extends cc.Component {
 
     helpNode: cc.Node = null;  //帮组
 
+    smResetNode: cc.Node = null;  //sm重置
+
     onLoad() {
         GlobalEvent.on(EventCfg.OPENSMLAYER, this.openSMLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZBLAYER, this.openZBLayer.bind(this), this);
@@ -48,6 +50,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENHISTORYLAYER, this.openHisLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENMONTHLAYER, this.openMonthLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENYIELDLAYER, this.openYieldLayer.bind(this), this);
+        GlobalEvent.on(EventCfg.OPENSMRESETMONEYLAYER, this.openSmResetLayer.bind(this), this);
     }
 
     onDestroy() {
@@ -60,6 +63,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENMONTHLAYER);
         GlobalEvent.off(EventCfg.OPENYIELDLAYER);
         GlobalEvent.off(EventCfg.OPENHELPLAYER);
+        GlobalEvent.off(EventCfg.OPENSMRESETMONEYLAYER);
         LoadUtils.releaseRes('Prefabs/xl/ZBSetLayer');
         LoadUtils.releaseRes('Prefabs/xl/SMSetLayer');
         LoadUtils.releaseRes('Prefabs/xl/DXSetLayer');
@@ -73,6 +77,14 @@ export default class NewClass extends cc.Component {
         LoadUtils.releaseRes('Prefabs/xl/DXHisLayer');
         LoadUtils.releaseRes('Prefabs/xl/QHHisLayer');
         LoadUtils.releaseRes('Prefabs/xl/SMMonthlyLayer');
+        LoadUtils.releaseRes('Prefabs/xl/SMResetMoney');
+    }
+
+    /**
+     * 双盲重置金币
+     */
+    openSmResetLayer() {
+        this.openNode(this.smResetNode, 'Prefabs/xl/SMResetMoney', 10, (node) => { this.smResetNode = node });
     }
 
     /**
@@ -97,20 +109,20 @@ export default class NewClass extends cc.Component {
     openHisLayer() {
         switch (GameCfg.GameType) {
             case pb.GameType.ZhiBiao:
-                this.openNode(this.ZBHisNode, 'Prefabs/xl/ZBHisLayer', 11, (node) => { this.ZBHisNode = node });
+                this.openNode(this.ZBHisNode, 'Prefabs/xl/ZBHistoryLayer', 11, (node) => { this.ZBHisNode = node });
                 break;
             case pb.GameType.ShuangMang:
-                this.openNode(this.SMHisNode, 'Prefabs/xl/SMHisLayer', 11, (node) => {
+                this.openNode(this.SMHisNode, 'Prefabs/xl/HistoryLayerSM', 11, (node) => {
                     this.SMHisNode = node;
                 });
                 break;
             case pb.GameType.DingXiang:
-                this.openNode(this.DXHisNode, 'Prefabs/xl/DXHisLayer', 11, (node) => {
+                this.openNode(this.DXHisNode, 'Prefabs/xl/DXHistoryLayer', 11, (node) => {
                     this.DXHisNode = node;
                 });
                 break;
             case pb.GameType.QiHuo:
-                this.openNode(this.QHHisNode, 'Prefabs/xl/QHHisLayer', 11, (node) => {
+                this.openNode(this.QHHisNode, 'Prefabs/xl/QHHistoryLayer', 11, (node) => {
                     this.QHHisNode = node;
                 });
                 break;

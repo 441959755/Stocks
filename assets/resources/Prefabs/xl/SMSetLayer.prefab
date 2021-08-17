@@ -14,7 +14,7 @@
   {
     "__type__": "cc.Node",
     "_name": "SMSetLayer",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": null,
     "_children": [
       {
@@ -272,7 +272,7 @@
       "ctor": "Float64Array",
       "array": [
         217.019,
-        -339.826,
+        763.012,
         0,
         0,
         0,
@@ -426,9 +426,7 @@
     "root": {
       "__id__": 6
     },
-    "asset": {
-      "__uuid__": "86de14b4-d538-48b0-bb1c-8f8faae90c4f"
-    },
+    "asset": null,
     "fileId": "c3glM5co1PL5sKw6yfeB26",
     "sync": false
   },

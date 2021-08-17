@@ -4,6 +4,8 @@ import EventCfg from '../../../sctiprs/Utils/EventCfg';
 
 import DrawUtils from '../../../sctiprs/Utils/DrawUtils';
 import GameData from '../../../sctiprs/GameData';
+import GameCfg from '../../../sctiprs/game/GameCfg';
+import { pb } from '../../../protos/proto';
 
 const { ccclass, property } = cc._decorator;
 
@@ -129,6 +131,33 @@ export default class NewClass extends cc.Component {
 
     }
 
+    start() {
+        if (!this.yieldInfo) {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            let data = new Date();
+            data.setDate(1);
+            data.setHours(0);
+            data.setSeconds(0);
+            data.setMinutes(0);
+
+            let inf = {
+                uid: GameData.userID,
+                gType: GameCfg.GameType,
+                to: parseInt(new Date().getTime() / 1000 + ''),
+                pageSize: 200,
+            }
+            let CmdQueryGameResult = pb.CmdQueryGameResult;
+            let message = CmdQueryGameResult.create(inf)
+            let buff = CmdQueryGameResult.encode(message).finish();
+
+            socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, (info) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                console.log('曲线数据' + JSON.stringify(info));
+                this.yieldInfo = info;
+                this.onShow();
+            })
+        }
+    }
 
     onDisable() {
         if (this.cb) {

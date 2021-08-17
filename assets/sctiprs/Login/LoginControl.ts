@@ -36,7 +36,6 @@ export default class NewClass extends cc.Component {
     zcToggle: cc.Toggle = null;  //
 
     start() {
-
         //web 本地测试
         if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WEB) {
             this.tipsLabel.string = '会员登入';
@@ -48,11 +47,6 @@ export default class NewClass extends cc.Component {
         else {
             //其他平台登入TODO
         }
-
-        cc.director.preloadScene('Login', () => {
-            console.log('Login 场 景 加 载 完 成');
-        })
-
     }
 
     onShowNode(node) {

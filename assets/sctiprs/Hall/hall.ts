@@ -1,10 +1,7 @@
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
 import GameCfg from '../game/GameCfg';
-
 import { pb } from '../../protos/proto';
-import ComUtils from '../Utils/ComUtils';
-
 import GlobalHandle from '../global/GlobalHandle';
 import StrategyAIData from '../game/StrategyAIData';
 import GameData from '../GameData';
@@ -17,173 +14,118 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
-	@property(cc.Prefab)
-	SMhistoryPre: cc.Prefab = null;
-
-	SMhistoryLayer: cc.Node = null;
-
-	@property(cc.Prefab)
-	QHhistoryPre: cc.Prefab = null;
-
-	QHhistoryLayer: cc.Node = null;
-
-	@property(cc.Prefab)
-	ZBhistoryPre: cc.Prefab = null;
-
-	ZBhistoryLayer: cc.Node = null;
-
-	@property(cc.Prefab)
-	otherhistoryPre: cc.Prefab = null;
-
-	otherhistoryLayer: cc.Node = null;
-
-	@property(cc.Prefab)
-	ZBSetPre: cc.Prefab = null;
-
-	ZBSetLayer: cc.Node = null;
-
-	@property(cc.Prefab)
-	SMSetPre: cc.Prefab = null;
-
-	SMSetLayer: cc.Node = null;
-
-	@property(cc.Prefab)
-	DXSetPre: cc.Prefab = null;
-
-	DXSetLayer: cc.Node = null;
-
-	@property(cc.Prefab)
-	SMYieldPre: cc.Prefab = null;
-
-	SMYieldLayer: cc.Node = null;
-
-	@property(cc.Prefab)
-	SMMothlyPre: cc.Prefab = null;
-
-	SMMonthlyLayer: cc.Node = null;
-
 	helpLayer: cc.Node = null;
-
-	@property(cc.Prefab)
-	playerInfo: cc.Prefab = null;
 
 	playerInfoLayer: cc.Node = null;
 
 	tipsTextNode: cc.Node = null;
 
-	@property(cc.Prefab)
-	SMResetPre: cc.Prefab = null;
-
-	SMResetNode: cc.Node = null;
-
-	@property(cc.Prefab)
-	QHSetPre: cc.Prefab = null;
-
-	QHSetNode: cc.Node = null;
-
 	InviteBox: cc.Node = null;
 
+	rewardCenterNode: cc.Node = null;
+
 	onLoad() {
+
 		PopupManager.init();
-
-		//打开历史记录
-		GlobalEvent.on(
-			EventCfg.OPENHISTORYLAYER,
-			() => {
-				GlobalEvent.emit(EventCfg.LOADINGSHOW);
-				if (GameCfg.GameType == pb.GameType.ShuangMang) {
-					if (this.SMhistoryLayer) {
-						this.SMhistoryLayer.active = true;
-						return;
-					}
-				}
-				else if (GameCfg.GameType == pb.GameType.QiHuo) {
-					if (this.QHhistoryLayer) {
-						this.QHhistoryLayer.active = true;
-						return;
-					}
-				}
-
-				else if (GameCfg.GameType == pb.GameType.DingXiang) {
-					if (this.otherhistoryLayer) {
-						this.otherhistoryLayer.active = true;
-						return;
-					}
-				}
-
-				else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-					if (this.ZBhistoryLayer) {
-						this.ZBhistoryLayer.active = true;
-						return;
-					}
-				}
-				//SM的要获取服务器消息
-				this.acquireSMhistoryInfo(info => {
-					this.openhistoryLayer && this.openhistoryLayer(info);
-				});
-			},
-			this
-		);
-
-
-
 
 		//查询行情
 		GlobalEvent.on(EventCfg.onCmdQuoteQuery, this.onCmdQuoteQuery.bind(this), this);
 
-		//打开个人中心
-		GlobalEvent.on(
-			EventCfg.OPENPLAYERINFO,
-			() => {
-				if (!this.playerInfoLayer) {
-					this.playerInfoLayer = cc.instantiate(this.playerInfo);
-					this.node.addChild(this.playerInfoLayer);
-				}
-				this.playerInfoLayer.active = true;
-			},
-			this
-		);
-
-		//打开双盲重置金币页面
-		GlobalEvent.on(
-			EventCfg.OPENSMRESETMONEYLAYER,
-			() => {
-				if (!this.SMResetNode) {
-					this.SMResetNode = cc.instantiate(this.SMResetPre);
-					this.node.addChild(this.SMResetNode);
-				}
-				this.SMResetNode.active = true;
-			},
-			this
-		);
-
 		GlobalEvent.on(EventCfg.CmdQuoteQueryFuture, this.onCmdQHGameStart.bind(this), this);
-
-		//打开帮助
-		GlobalEvent.on(EventCfg.OPENHELPLAYER, () => {
-			if (!this.helpLayer) {
-				GlobalEvent.emit(EventCfg.LOADINGSHOW);
-				LoadUtils.loadRes('Prefabs/helpLayer', (pre) => {
-					this.helpLayer = cc.instantiate(pre);
-					this.node.addChild(this.helpLayer);
-					this.helpLayer.active = true;
-					GlobalEvent.emit(EventCfg.LOADINGHIDE);
-				})
-			}
-			else {
-				this.helpLayer.active = true;
-			}
-		}, this);
 
 		GlobalEvent.on(EventCfg.INVITEMESSAGE, this.onShowInviteBox.bind(this), this);
 
-		GlobalEvent.on(EventCfg.ROOMLEAVE, (data) => {
-			if (data.uid == GameData.userID) {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
-			}
-		}, this);
+		GlobalEvent.on(EventCfg.ROOMLEAVE, this.onRoomLeave.bind(this), this);
+
+		//打开帮助
+		GlobalEvent.on(EventCfg.OPENHELPLAYER, this.openHelpLayer.bind(this), this);
+
+		//打开个人中心
+		GlobalEvent.on(EventCfg.OPENPLAYERINFO, this.openPlayerInfoLayer.bind(this), this);
+
+		GlobalEvent.on(EventCfg.OPENREWARDCENTERLAYER, this.openRewardCenterLayer.bind(this), this);
 	}
 
+	protected onDestroy() {
+		GlobalEvent.off(EventCfg.onCmdQuoteQuery);
+		GlobalEvent.off(EventCfg.OPENPLAYERINFO);
+		GlobalEvent.off(EventCfg.OPENHELPLAYER);
+		GlobalEvent.off(EventCfg.ROOMLEAVE);
+		GlobalEvent.off(EventCfg.INVITEMESSAGE);
+		GlobalEvent.off(EventCfg.CmdQuoteQueryFuture);
+		GlobalEvent.off(EventCfg.OPENREWARDCENTERLAYER);
+		LoadUtils.releaseRes('Prefabs/playeInfo/playerInfoLayer');
+		LoadUtils.releaseRes('Prefabs/helpLayer');
+		LoadUtils.releaseRes('Prefabs/inviteBox');
+		LoadUtils.releaseRes('Prefabs/RewardCenter/rewardCenter');
+		PopupManager.delPopupNode();
+		GameData.selfEnterRoomData = null;
+	}
+
+	/**
+	 * 奖励中心
+	 */
+	openRewardCenterLayer(data) {
+		if (this.rewardCenterNode) {
+			this.rewardCenterNode.active = true;
+			let handle = this.rewardCenterNode.getComponent('RewardCenter');
+			if (handle) {
+				handle.rewardData = data;
+				handle.onShow();
+			}
+		}
+		else {
+			GlobalEvent.emti(EventCfg.LOADINGSHOW);
+			LoadUtils.loadRes('Prefabs/RewardCenter/rewardCenter', pre => {
+				GlobalEvent.emit(EventCfg.LOADINGHIDE);
+				this.rewardCenterNode = cc.instantiate(pre);
+				this.node.addChild(this.rewardCenterNode);
+				this.rewardCenterNode.active = true;
+				let handle = this.rewardCenterNode.getComponent('RewardCenter');
+				if (handle) {
+					handle.rewardData = data;
+					handle.onShow();
+				}
+			})
+		}
+	}
+	//打开个人中心
+	openPlayerInfoLayer() {
+		if (!this.playerInfoLayer) {
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+			LoadUtils.loadRes('Prefabs/playeInfo/playerInfoLayer', pre => {
+				GlobalEvent.emit(EventCfg.LOADINGHIDE);
+				this.playerInfoLayer = cc.instantiate(pre);
+				this.node.addChild(this.playerInfoLayer);
+				this.playerInfoLayer.active = true;
+			})
+		}
+		else {
+			this.playerInfoLayer.active = true;
+		}
+	}
+
+	openHelpLayer() {
+		if (!this.helpLayer) {
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+			LoadUtils.loadRes('Prefabs/helpLayer', pre => {
+				GlobalEvent.emit(EventCfg.LOADINGHIDE);
+				this.helpLayer = cc.instantiate(pre);
+				this.node.addChild(this.helpLayer);
+				this.helpLayer.active = true;
+			})
+		}
+		else {
+			this.helpLayer.active = true;
+		}
+	}
+
+	//离开房间
+	onRoomLeave(data) {
+		if (data.uid == GameData.userID) {
+			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
+		}
+	}
 
 	start() {
 		//回到进入游戏的界面
@@ -236,7 +178,6 @@ export default class NewClass extends cc.Component {
 		else if (GameData.roomId) {
 			GlobalEvent.emit(EventCfg.OPENROOM);
 		}
-
 	}
 
 
@@ -248,7 +189,6 @@ export default class NewClass extends cc.Component {
 		GameCfg.allRate = 0;
 		GameCfg.blockHistoy = [];
 		GameCfg.finalfund = 0;
-
 		GameCfg.GAMEFUPAN = false;
 		StrategyAIData.onClearData();
 		GameCfg.enterGameCache = null;
@@ -278,71 +218,6 @@ export default class NewClass extends cc.Component {
 		}
 	}
 
-	openYieldLaye(info) {
-		if (!this.SMYieldLayer) {
-			this.SMYieldLayer = cc.instantiate(this.SMYieldPre);
-			this.node.addChild(this.SMYieldLayer);
-		}
-		this.SMYieldLayer.active = true;
-		this.SMYieldLayer.getComponent('SMYieldCurve').yieldInfo = info;
-		this.SMYieldLayer.getComponent('SMYieldCurve').onShow();
-	}
-
-	openhistoryLayer(info) {
-		let pre, node;
-		if (GameCfg.GameType == pb.GameType.QiHuo) {
-			pre = this.QHhistoryPre;
-			node = this.QHhistoryLayer;
-		}
-		else if (GameCfg.GameType == pb.GameType.ShuangMang) {
-			pre = this.SMhistoryPre;
-			node = this.SMhistoryLayer;
-		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
-			pre = this.otherhistoryPre;
-			node = this.otherhistoryLayer;
-		}
-		else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-			pre = this.ZBhistoryPre;
-			node = this.ZBhistoryLayer;
-		}
-
-		if (!node) {
-			node = cc.instantiate(pre);
-			this.node.addChild(node, 40);
-		}
-		node.active = true;
-
-		node.getComponent('History').historyInfo = info;
-		node.getComponent('History').onShow();
-		if (this.SMYieldLayer) {
-			node.zIndex = this.SMYieldLayer.zIndex + 1;
-		}
-	}
-
-	//获取历史记录
-	acquireSMhistoryInfo(callBack) {
-
-
-		let data = new Date();
-		data.setDate(1);
-		data.setHours(0);
-		data.setSeconds(0);
-		data.setMinutes(0);
-
-		if (socket) {
-			let data1 = {
-				uid: GameData.userID,
-				gType: GameCfg.GameType,
-				//from: parseInt(data.getTime() / 1000 + ''),
-				to: parseInt(new Date().getTime() / 1000 + ''),
-				pageSize: 100,
-			};
-
-			socket.send(pb.MessageId.Req_Game_QueryGameResult, PB.onCmdQueryGameResultConvertToBuff(data1), info => {
-				callBack && callBack(info);
-			});
-		}
-	}
 
 	//训练股票进入游戏
 	onCmdQuoteQuery(data) {
@@ -375,60 +250,8 @@ export default class NewClass extends cc.Component {
 				cc.director.loadScene('game');
 			});
 		})
-
-	}
-
-	protected onDestroy() {
-		GlobalEvent.off(EventCfg.OPENZBLAYER);
-		GlobalEvent.off(EventCfg.OPENDXLAYER);
-		GlobalEvent.off(EventCfg.OPENHISTORYLAYER);
-		GlobalEvent.off(EventCfg.OPENMONTHLAYER);
-		GlobalEvent.off(EventCfg.OPENYIELDLAYER);
-		GlobalEvent.off(EventCfg.onCmdQuoteQuery);
-		GlobalEvent.off(EventCfg.OPENPLAYERINFO);
-		GlobalEvent.off(EventCfg.OPENQHLAYER);
-		GlobalEvent.off(EventCfg.OPENHELPLAYER);
-		GlobalEvent.off(EventCfg.OPENSETLAYER);
-		GlobalEvent.off(EventCfg.ROOMLEAVE);
-		PopupManager.delPopupNode();
-		GameData.selfEnterRoomData = null;
 	}
 
 
 
-	// resetSize(cav) {
-	//     let frameSize = cc.view.getFrameSize();
-	//     let designSize = cc.view.getDesignResolutionSize();
-
-	//     if (frameSize.width / frameSize.height > designSize.width / designSize.height) {
-	//         cav.width = designSize.height * frameSize.width / frameSize.height;
-	//         cav.height = designSize.height;
-	//         cav.getComponent(cc.Canvas).designResolution = cc.size(cav.width, cav.height);
-	//     } else {
-	//         cav.width = designSize.width;
-	//         cav.height = designSize.width * frameSize.height / frameSize.width;
-	//         cav.getComponent(cc.Canvas).designResolution = cc.size(cav.width, cav.height);
-	//     }
-	//     this.fitScreen(cav, designSize);
-	// }
-
-	// /**
-	//  * 背景适配
-	//  * @param canvasnode
-	//  * @param designSize
-	//  */
-	// fitScreen(canvasnode, designSize) {
-	//     let scaleW = canvasnode.width / designSize.width;
-	//     let scaleH = canvasnode.height / designSize.height;
-
-	//     let bgNode = canvasnode.getChildByName('bg');
-	//     let bgScale = canvasnode.height / bgNode.height;
-	//     bgNode.width *= bgScale;
-	//     bgNode.height *= bgScale;
-	//     if (scaleW > scaleH) {
-	//         bgScale = canvasnode.width / bgNode.width;
-	//         bgNode.width *= bgScale;
-	//         bgNode.height *= bgScale;
-	//     }
-	// }
 }

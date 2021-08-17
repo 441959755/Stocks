@@ -52,6 +52,10 @@ cc.Class({
 				t.stopPropagation();
 			}
 		}
+
+		cc.director.preloadScene('hall', () => {
+			console.log('hall 场 景 加 载 完 成');
+		})
 	},
 
 	start() {

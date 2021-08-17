@@ -27,8 +27,12 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     title: cc.Label = null;
 
+    @property(cc.Node)
+    scrollNode: cc.Node = null;
+
     start() {
         if (!this.historyInfo) {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             let data = new Date();
             data.setDate(1);
             data.setHours(0);
@@ -39,14 +43,15 @@ export default class NewClass extends cc.Component {
                 uid: GameData.userID,
                 gType: GameCfg.GameType,
                 to: parseInt(new Date().getTime() / 1000 + ''),
-                pageSize: 100,
+                pageSize: 200,
             }
             let CmdQueryGameResult = pb.CmdQueryGameResult;
             let message = CmdQueryGameResult.create(inf)
             let buff = CmdQueryGameResult.encode(message).finish();
 
             socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, (info) => {
-                console.log('查询游戏结果应答' + JSON.stringify(info));
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                console.log('sm历史数据' + JSON.stringify(info));
                 this.historyInfo = info;
                 this.onShow();
             })
@@ -135,72 +140,67 @@ export default class NewClass extends cc.Component {
         let sumrate = 0;
         let it = 1;
 
-        for (let i = datas.length - 1; i >= 0; i--) {
-            let index = TIMETEMP.indexOf(datas[i].ts);
-
-            if ((TIMETEMP.indexOf(datas[i].ts) != -1) && (datas[i].gType == GameCfg.GameType)) {
-                let node = cc.instantiate(this.historyItem);
+        let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
+        UIScrollControl.initControl(this.historyItem, datas.length, this.historyItem.getContentSize(), 0, (node, index) => {
+            if ((TIMETEMP.indexOf(datas[index].ts) != -1) && (datas[index].gType == GameCfg.GameType)) {
                 let nodes = node.children;
                 this.content.addChild(node);
-                node.setPosition(cc.v2(0, 0));
                 nodes[0].getComponent(cc.Label).string = (it++) + '';
-                datas[i].quotesCode += '';
-                if (datas[i].quotesCode.length >= 7) {
-                    datas[i].quotesCode = datas[i].quotesCode.slice(1);
+                datas[index].quotesCode += '';
+                if (datas[index].quotesCode.length >= 7) {
+                    datas[index].quotesCode = datas[index].quotesCode.slice(1);
                 }
-
                 if (GameCfg.GameType == pb.GameType.QiHuo) {
-                    items = GameCfgText.getQHItemInfo(datas[i].quotesCode);
-                    //  nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
+                    items = GameCfgText.getQHItemInfo(datas[index].quotesCode);
+
                     nodes[1].getComponent(cc.Label).string = items[2] + items[3];
                     items && (nodes[2].getComponent(cc.Label).string = items[1])
                 } else {
-                    items = GameCfgText.getGPItemInfo(datas[i].quotesCode);
-                    nodes[1].getComponent(cc.Label).string = datas[i].quotesCode;
+                    items = GameCfgText.getGPItemInfo(datas[index].quotesCode);
+                    nodes[1].getComponent(cc.Label).string = datas[index].quotesCode;
                     items && (nodes[2].getComponent(cc.Label).string = items[1])
                 }
-                nodes[3].getComponent(cc.Label).string = datas[i].kFrom;			// 行情起始日期YYYYMMDD或时间HHMMSS
-                nodes[4].getComponent(cc.Label).string = datas[i].kTo;
+                nodes[3].getComponent(cc.Label).string = datas[index].kFrom;			// 行情起始日期YYYYMMDD或时间HHMMSS
+                nodes[4].getComponent(cc.Label).string = datas[index].kTo;
 
-                nodes[5].getComponent(cc.Label).string = datas[i].stockProfitRate.toFixed(2) + '%';
-                if (datas[i].stockProfitRate > 0) {
+                nodes[5].getComponent(cc.Label).string = datas[index].stockProfitRate.toFixed(2) + '%';
+                if (datas[index].stockProfitRate > 0) {
                     nodes[5].color = cc.Color.RED;
-                } else if (datas[i].stockProfitRate < 0) {
+                } else if (datas[index].stockProfitRate < 0) {
                     nodes[5].color = cc.Color.GREEN;
                 } else {
                     nodes[5].color = cc.Color.WHITE;
                 }
-                nodes[6].getComponent(cc.Label).string = datas[i].userProfitRate.toFixed(2) + '%';
-                if (datas[i].userProfitRate > 0) {
+                nodes[6].getComponent(cc.Label).string = datas[index].userProfitRate.toFixed(2) + '%';
+                if (datas[index].userProfitRate > 0) {
                     nodes[6].color = cc.Color.RED;
-                } else if (datas[i].userProfitRate < 0) {
+                } else if (datas[index].userProfitRate < 0) {
                     nodes[6].color = cc.Color.GREEN;
                 } else {
                     nodes[6].color = cc.Color.WHITE;
                 }
-                nodes[7].getComponent(cc.Label).string = datas[i].userProfit;
-                if (datas[i].userProfit > 0) {
+                nodes[7].getComponent(cc.Label).string = datas[index].userProfit;
+                if (datas[index].userProfit > 0) {
                     nodes[7].color = cc.Color.RED;
-                } else if (datas[i].userProfit < 0) {
+                } else if (datas[index].userProfit < 0) {
                     nodes[7].color = cc.Color.GREEN;
                 } else {
                     nodes[7].color = cc.Color.WHITE;
                 }
                 if (GameCfg.GameType != pb.GameType.ShuangMang) {
-                    nodes[8].getComponent(cc.Label).string = datas[i].ts;
-                    nodes[9].getComponent(cc.Label).string = datas[i].kStartup;
-                    nodes[10].getComponent(cc.Label).string = datas[i].kStop;
+                    nodes[8].getComponent(cc.Label).string = datas[index].ts;
+                    nodes[9].getComponent(cc.Label).string = datas[index].kStartup;
+                    nodes[10].getComponent(cc.Label).string = datas[index].kStop;
                 }
 
                 if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                    let GameSet = cc.sys.localStorage.getItem(datas[i].ts + 'set');
+                    let GameSet = cc.sys.localStorage.getItem(datas[index].ts + 'set');
                     if (GameSet) {
                         GameSet = JSON.parse(GameSet);
                         nodes[12].getComponent(cc.Label).string = GameSet.select + ' ' + GameSet.strategy;
                     }
 
-
-                    let AIrate = cc.sys.localStorage.getItem(datas[i].ts + 'AIRATE');
+                    let AIrate = cc.sys.localStorage.getItem(datas[index].ts + 'AIRATE');
 
                     if (AIrate) {
                         nodes[11].getComponent(cc.Label).string = parseFloat(AIrate).toFixed(2) + '%';
@@ -217,12 +217,11 @@ export default class NewClass extends cc.Component {
 
                 }
 
-                sumEar += datas[i].userProfit;
+                sumEar += datas[index].userProfit;
 
-                sumrate += datas[i].userProfitRate;
+                sumrate += datas[index].userProfitRate;
             }
-
-        }
+        })
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             // this.title.string = '双盲训练';

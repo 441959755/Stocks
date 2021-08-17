@@ -159,12 +159,16 @@ export default class NewClass extends cc.Component {
     private initShowAreaItems(_temp_node: cc.Node) {
 
         for (let i = 0; i < this.total_show_item_count; i++) {
-            //cc.log(" i = " + i)
+
             let curPos: cc.Vec2 = cc.v2(0, 0)
-            let node: cc.Node = cc.instantiate(_temp_node)
-            this.scroll_rect.content.addChild(node)
-            node.active = true
-            node.opacity = 255
+            let node: cc.Node = this.scroll_rect.content.children[i];
+
+            if (!node) {
+                node = cc.instantiate(_temp_node)
+                this.scroll_rect.content.addChild(node)
+                node.active = true
+                node.opacity = 255
+            }
 
             if (this.dir == ScrollDirEnum.Vertical) {
                 curPos.y = -this.distance / 2 - this.distance * i
@@ -234,7 +238,7 @@ export default class NewClass extends cc.Component {
      */
     refreshItem(_index: number, _node_index: number, node: cc.Node) {
         if (_index < 0 || _index >= this.total_count) {
-            cc.log("索引越界, _index = " + _index + ", this.total_count = " + this.total_count)
+            // cc.log("索引越界, _index = " + _index + ", this.total_count = " + this.total_count)
             return;
         }
 
