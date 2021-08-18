@@ -1,6 +1,6 @@
 import { pb } from "../../protos/proto";
 import GameData from "../GameData";
-import GlobalHandle from "../global/GlobalHandle";
+
 import UpGameOpt from "../global/UpGameOpt";
 import ComUtils from "../Utils/ComUtils";
 import EventCfg from "../Utils/EventCfg";

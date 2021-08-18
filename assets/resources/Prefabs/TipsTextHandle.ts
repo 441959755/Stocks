@@ -7,12 +7,13 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     label: cc.Label = null;
 
-    textData = '';
+    textData = null;
 
     callOut = null;
 
     onShow() {
-        this.label.string = this.textData;
+        console.log('this.textData ' + this.textData);
+        this.label.string = this.textData || '';
         if (!this.callOut) {
             this.callOut = setTimeout(() => {
                 cc.tween(this.node)

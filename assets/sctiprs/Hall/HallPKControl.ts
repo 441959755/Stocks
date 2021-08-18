@@ -47,7 +47,7 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on(EventCfg.OPENMRTLAYER, this.openMrtLayer.bind(this), this);
 
-        GlobalEvent.on(EventCfg.OPENOTHERPLAYERINFO, this.openOtherPlayerInfoLayer.bind(this), this);
+
         //自己进入房间的消息
         GlobalEvent.on(EventCfg.RoomGameDataSelf, this.onSelfEnterRoomGameData.bind(this), this);
         //其他玩家进入房间
@@ -57,13 +57,6 @@ export default class NewClass extends cc.Component {
 
         GameData.Players = [];
         GameData.Players.length = 0;
-    }
-
-    openOtherPlayerInfoLayer() {
-        this.openNode(this.otherPlayerInfo, 'Prefabs/otherPlayerInfo', 10, (node) => {
-            this.otherPlayerInfo = node;
-            ActionUtils.openBox(node);
-        });
     }
 
     openMrtLayer(data) {

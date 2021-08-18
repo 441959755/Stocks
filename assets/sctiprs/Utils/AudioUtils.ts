@@ -1,5 +1,4 @@
 import LoadUtils from './LoadUtils';
-import LocalStorageUtils from './LocalStorageUtils';
 
 export default class AudioUtils {
 	private static AudioMaps: Map<string, cc.AudioClip> = new Map();

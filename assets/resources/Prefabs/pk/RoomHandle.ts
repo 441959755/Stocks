@@ -245,7 +245,7 @@ export default class NewClass extends cc.Component {
                 sender: GameData.userID,
                 receiver: GameData.roomId,
                 type: pb.MessageType.RoomInvite,
-                text: GameData.userName + '邀请您来一局' + str,
+                text: GameData.userName + ',' + str + ',' + GameData.roomId,
                 ts: parseInt(new Date().getTime() / 1000 + ''),
             }
             let Notice = pb.Notice;
@@ -307,7 +307,8 @@ export default class NewClass extends cc.Component {
             this.jj_zb.active = false;
             let read = this.player[1].getChildByName('read').getComponent(cc.Label);
             read.string = '等待开始';
-
+            let read1 = this.player[0].getChildByName('read').getComponent(cc.Label);
+            read1.string = '等待开始';
             this.qxzbBtn.active = true;
         }
 
@@ -328,6 +329,8 @@ export default class NewClass extends cc.Component {
             })
             let read = this.player[1].getChildByName('read').getComponent(cc.Label);
             read.string = '等待准备';
+            let read1 = this.player[0].getChildByName('read').getComponent(cc.Label);
+            read1.string = '等待准备';
             this.qxzbBtn.active = false;
             this.jj_zb.active = true;
         }

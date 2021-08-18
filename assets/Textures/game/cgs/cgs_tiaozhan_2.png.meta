@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "97f48ba8-6cd1-45fb-b309-d5e8c2573b87",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "cgs_tiaozhan_2": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "8ac80919-11be-42bb-b8aa-6c83739ef632",
-      "importer": "sprite-frame",
       "rawTextureUuid": "97f48ba8-6cd1-45fb-b309-d5e8c2573b87",
       "trimType": "auto",
       "trimThreshold": 1,

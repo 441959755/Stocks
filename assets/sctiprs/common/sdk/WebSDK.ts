@@ -14,10 +14,6 @@ export default class WebSDK {
         return this._instance;
     }
 
-    init() {
-
-    }
-
     login(call, uid?) {
         let uuid = uid || LLWUtils.getUUID();
         let loginInfo = {

@@ -106,14 +106,13 @@ export default class NewClass extends cc.Component {
     protected onDestroy() {
         GameCfg.GAMEFRTD = false;
         GameCfg.GAMEWAIT = false;
-        //  GameCfg.RoomGameData = null;
+
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
-        //  GlobalEvent.off(EventCfg.OPENOTHERINFOBOX);
+
         PopupManager.delPopupNode();
         GameCfg.GAMEFUPAN = false;
-        //  GameCfg.GAMEFUPANDATA = null;
-        //    GameData.Players = [];
+
         GameData.CGSConfData = null;
         UpGameOpt.clearGameOpt();
     }

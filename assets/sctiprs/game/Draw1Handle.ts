@@ -1,5 +1,5 @@
 import GlobalEvent from "../Utils/GlobalEvent";
-import EventCfg from "../Utils/EventCfg";
+
 import DrawUtils from "../Utils/DrawUtils";
 
 import GameCfg from "./GameCfg";

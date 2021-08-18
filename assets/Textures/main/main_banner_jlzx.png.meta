@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "8054840c-ff51-4f21-8cda-7be4893d086b",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "main_banner_jlzx": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "034a2a60-d049-4493-bc3f-f0c58d86be3f",
-      "importer": "sprite-frame",
       "rawTextureUuid": "8054840c-ff51-4f21-8cda-7be4893d086b",
       "trimType": "auto",
       "trimThreshold": 1,

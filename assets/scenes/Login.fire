@@ -177,7 +177,7 @@
       "array": [
         0,
         0,
-        523.079343885801,
+        524.8113946933698,
         0,
         0,
         0,
@@ -754,8 +754,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "会员登入",
     "_N$string": "会员登入",
     "_fontSize": 24,
@@ -849,8 +848,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "社交账号登入",
     "_N$string": "社交账号登入",
     "_fontSize": 24,
@@ -1330,7 +1328,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -1537,8 +1535,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "手机号：",
     "_N$string": "手机号：",
     "_fontSize": 24,
@@ -1632,8 +1629,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "登入密码：",
     "_N$string": "登入密码：",
     "_fontSize": 24,
@@ -1905,8 +1901,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "忘记密码",
     "_N$string": "忘记密码",
     "_fontSize": 24,
@@ -2260,8 +2255,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 20,
@@ -2385,8 +2379,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "请输入手机号",
     "_N$string": "请输入手机号",
     "_fontSize": 20,
@@ -2440,6 +2433,7 @@
       "__id__": 43
     },
     "_enabled": true,
+    "_useOriginalSize": true,
     "_string": "",
     "returnType": 0,
     "maxLength": 24,
@@ -2607,8 +2601,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 20,
@@ -2732,8 +2725,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "请输入密码",
     "_N$string": "请输入密码",
     "_fontSize": 20,
@@ -2787,6 +2779,7 @@
       "__id__": 51
     },
     "_enabled": true,
+    "_useOriginalSize": true,
     "_string": "",
     "returnType": 0,
     "maxLength": 24,
@@ -2954,8 +2947,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "还没账号？",
     "_N$string": "还没账号？",
     "_fontSize": 24,
@@ -3049,8 +3041,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "立即注册",
     "_N$string": "立即注册",
     "_fontSize": 24,
@@ -3144,8 +3135,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "（送2500金币）",
     "_N$string": "（送2500金币）",
     "_fontSize": 24,
@@ -3988,8 +3978,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "444",
     "_N$string": "444",
     "_fontSize": 20,
@@ -4113,8 +4102,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "请输入手机号",
     "_N$string": "请输入手机号",
     "_fontSize": 20,
@@ -4168,6 +4156,7 @@
       "__id__": 80
     },
     "_enabled": true,
+    "_useOriginalSize": true,
     "_string": "444",
     "returnType": 0,
     "maxLength": 20,
@@ -4335,8 +4324,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 20,
@@ -4460,8 +4448,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "请输入密码",
     "_N$string": "请输入密码",
     "_fontSize": 20,
@@ -4515,6 +4502,7 @@
       "__id__": 88
     },
     "_enabled": true,
+    "_useOriginalSize": true,
     "_string": "",
     "returnType": 0,
     "maxLength": 20,
@@ -4610,8 +4598,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "手机号：",
     "_N$string": "手机号：",
     "_fontSize": 24,
@@ -4705,8 +4692,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "登入密码：",
     "_N$string": "登入密码：",
     "_fontSize": 24,
@@ -4800,8 +4786,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "验证码：",
     "_N$string": "验证码：",
     "_fontSize": 24,
@@ -4967,8 +4952,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 20,
@@ -5092,8 +5076,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "请输入验证码",
     "_N$string": "请输入验证码",
     "_fontSize": 20,
@@ -5147,6 +5130,7 @@
       "__id__": 102
     },
     "_enabled": true,
+    "_useOriginalSize": true,
     "_string": "",
     "returnType": 0,
     "maxLength": 8,
@@ -5336,8 +5320,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "获取验证码",
     "_N$string": "获取验证码",
     "_fontSize": 24,
@@ -5503,8 +5486,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "我已知晓并同意遵守本软件",
     "_N$string": "我已知晓并同意遵守本软件",
     "_fontSize": 24,
@@ -5598,8 +5580,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "用户协议",
     "_N$string": "用户协议",
     "_fontSize": 24,
@@ -6708,8 +6689,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 20,
@@ -6833,8 +6813,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "请输入手机号",
     "_N$string": "请输入手机号",
     "_fontSize": 20,
@@ -6888,6 +6867,7 @@
       "__id__": 138
     },
     "_enabled": true,
+    "_useOriginalSize": true,
     "_string": "",
     "returnType": 0,
     "maxLength": 20,
@@ -7055,8 +7035,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 20,
@@ -7180,8 +7159,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "请输入密码",
     "_N$string": "请输入密码",
     "_fontSize": 20,
@@ -7235,6 +7213,7 @@
       "__id__": 146
     },
     "_enabled": true,
+    "_useOriginalSize": true,
     "_string": "",
     "returnType": 0,
     "maxLength": 20,
@@ -7330,8 +7309,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "手机号：",
     "_N$string": "手机号：",
     "_fontSize": 24,
@@ -7425,8 +7403,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "登入密码：",
     "_N$string": "登入密码：",
     "_fontSize": 24,
@@ -7520,8 +7497,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "验证码：",
     "_N$string": "验证码：",
     "_fontSize": 24,
@@ -7687,8 +7663,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 20,
@@ -7812,8 +7787,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "请输入验证码",
     "_N$string": "请输入验证码",
     "_fontSize": 20,
@@ -7867,6 +7841,7 @@
       "__id__": 160
     },
     "_enabled": true,
+    "_useOriginalSize": true,
     "_string": "",
     "returnType": 0,
     "maxLength": 8,
@@ -8056,8 +8031,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "获取验证码",
     "_N$string": "获取验证码",
     "_fontSize": 24,
@@ -8382,8 +8356,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 40,
@@ -8614,8 +8587,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "同顺丰到付的放大12232伟大时代1哈哈哈回复哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈·1哈哈哈哈哈哈哈哈轰炸哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈ahahah",
     "_N$string": "同顺丰到付的放大12232伟大时代1哈哈哈回复哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈·1哈哈哈哈哈哈哈哈轰炸哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈ahahah",
     "_fontSize": 24,
@@ -8709,8 +8681,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "特此公告！",
     "_N$string": "特此公告！",
     "_fontSize": 24,
@@ -8804,8 +8775,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "炒股达人团队",
     "_N$string": "炒股达人团队",
     "_fontSize": 24,
@@ -8899,8 +8869,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "炒股达人团队",
     "_N$string": "炒股达人团队",
     "_fontSize": 24,

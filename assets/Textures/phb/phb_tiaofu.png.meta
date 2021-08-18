@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "3e0837bb-7fbe-4a89-bfeb-fa53ebd01706",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "phb_tiaofu": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "43f146d8-0f66-41d8-95a2-3412b4950e8f",
-      "importer": "sprite-frame",
       "rawTextureUuid": "3e0837bb-7fbe-4a89-bfeb-fa53ebd01706",
       "trimType": "auto",
       "trimThreshold": 1,

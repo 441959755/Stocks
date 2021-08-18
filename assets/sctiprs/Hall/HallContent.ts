@@ -215,6 +215,20 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.OPENCGDS);
 		}
 
+		//大盘竞猜
+		else if (name == 'main_sp_dpjc') {
+			GameCfg.GameType = pb.GameType.DaPanJingChai;
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+			cc.director.loadScene('guess');
+		}
+
+		//个股竞猜
+		else if (name == 'main_sp_ggjc') {
+			GameCfg.GameType == pb.GameType.GeGuJingChai;
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+			cc.director.loadScene('guess');
+		}
+
 	}
 
 	onDestroy() {

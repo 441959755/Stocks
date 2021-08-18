@@ -11,9 +11,7 @@ export default class PopupManager {
 
     private static tipsText: cc.Node = null;
 
-    private static urls = [];
-
-    private static nodes = [];
+    private static otherPlayerInfo: cc.Node = null;
 
     public static init() {
         GlobalEvent.on(EventCfg.LOADINGSHOW, this.loadloading.bind(this), this);
@@ -22,6 +20,23 @@ export default class PopupManager {
         GlobalEvent.on(EventCfg.TIPSTEXTSHOW, this.LoadTipsText.bind(this), this);
         GlobalEvent.on(EventCfg.TIPSTEXTHIDE, () => { this.tipsText && (this.tipsText.active = false) }, this);
 
+        GlobalEvent.on(EventCfg.OPENOTHERPLAYERINFO, this.openOtherPlayerInfoLayer.bind(this), this);
+
+    }
+
+    public static openOtherPlayerInfoLayer() {
+        if (!this.otherPlayerInfo) {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            LoadUtils.loadRes('Prefabs/otherPlayerInfo', pre => {
+                this.otherPlayerInfo = cc.instantiate(pre);
+                cc.find('Canvas').addChild(this.otherPlayerInfo);
+                this.otherPlayerInfo.active = true;
+                ActionUtils.openBox(this.otherPlayerInfo);
+            })
+        }
+        else {
+            ActionUtils.openBox(this.otherPlayerInfo);
+        }
     }
 
     /**
@@ -33,8 +48,6 @@ export default class PopupManager {
                 this.loading = cc.instantiate(pre);
                 cc.find('Canvas').addChild(this.loading, 99);
                 this.loading.active = true;
-                this.urls.push('Prefabs/loading');
-                this.nodes.push(this.loading);
             })
         }
         else {
@@ -55,8 +68,7 @@ export default class PopupManager {
                 this.tipsText.active = true;
                 this.tipsText.getComponent('TipsTextHandle').textData = content;
                 this.tipsText.getComponent('TipsTextHandle').onShow();
-                this.urls.push('Prefabs/tipsText');
-                this.nodes.push(this.tipsText);
+
             })
         }
         else {
@@ -85,8 +97,7 @@ export default class PopupManager {
 
                 this.tipsBox = node;
                 this.tipsBox.emit('contentText', { text: text, call: call });
-                this.urls.push('Prefabs/' + name);
-                this.nodes.push(this.tipsBox);
+
             })
         } else if (this.tipsBox) {
             this.tipsBox.active = true;
@@ -95,21 +106,20 @@ export default class PopupManager {
     }
 
     public static delPopupNode() {
+        this.tipsBox = null;
+        this.tipsText = null;
+        this.loading = null;
+        this.otherPlayerInfo = null;
+
         GlobalEvent.off(EventCfg.LOADINGHIDE);
         GlobalEvent.off(EventCfg.LOADINGSHOW);
         GlobalEvent.off(EventCfg.TIPSTEXTSHOW);
         GlobalEvent.off(EventCfg.TIPSTEXTHIDE);
-        this.urls.forEach(el => {
-            LoadUtils.releaseRes(el);
-        })
-
-        this.nodes.forEach(el => {
-            el = null;
-        })
-
-        this.nodes.length = 0;
-        this.nodes = [];
-
+        GlobalEvent.off(EventCfg.OPENOTHERPLAYERINFO);
+        LoadUtils.releaseRes('Prefabs/tipsBox');
+        LoadUtils.releaseRes('Prefabs/tipsText');
+        LoadUtils.releaseRes('Prefabs/loading');
+        LoadUtils.releaseRes('Prefabs/otherPlayerInfo');
     }
 
 }

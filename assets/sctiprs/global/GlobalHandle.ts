@@ -72,7 +72,7 @@ export default class GlobalHandle {
                 GameCfg.data[0].data.push(data);
             });
 
-            if (info1.kstyle == pb.KStyle.Wave) {
+            if (info1.kstyle == pb.KStyle.Wave || info1.kstyle == pb.KStyle.Up || info1.kstyle == pb.KStyle.Down) {
                 cb && (cb());
                 if (!GameCfg.GAMEFUPAN) {
                     GameCfg.huizhidatas = info.items.length - 100;

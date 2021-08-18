@@ -374,19 +374,14 @@ export default class NewClass extends cc.Component {
         }
         else if (name == 'lx_jsbt_xl') {
             GameCfg.huizhidatas = GameData.huizhidatas;
-
             GameCfg.allRate = 0;
-
             GameCfg.finalfund = 0;
             GameCfg.fill = [];
             GameCfg.blockHistoy = [];
             GameCfg.mark = [];
             GameCfg.notice = [];
             GameCfg.GAMEFUPAN = false;
-            //   GameCfg.history.huizhidatas = 0;
             GameCfg.history.allRate = 0;
-
-            //   GameCfg.ziChan = 100000;
             GlobalEvent.emit(EventCfg.LEVELCHANGE);
             cc.director.loadScene('game');
         }

@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "590555d1-24c6-48ad-b8bc-9e5dd210d5c9",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "smxl_syqxcolor2": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "83ce6aa3-4f5e-484e-a29d-56215865cd86",
-      "importer": "sprite-frame",
       "rawTextureUuid": "590555d1-24c6-48ad-b8bc-9e5dd210d5c9",
       "trimType": "auto",
       "trimThreshold": 1,

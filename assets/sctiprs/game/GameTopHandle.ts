@@ -56,6 +56,8 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     pkAllRateLa2: cc.Label = null;
 
+
+
     // @property(cc.Label)
     // pkCurRatela2: cc.Label = null;
 
@@ -311,7 +313,7 @@ export default class NewClass extends cc.Component {
                         }
                         this.name2.string = GameData.Players[1].nickname;
                         GameData.Players[1].properties && (this.level2.string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1));
-                        this.pkAllRateLa2.string = "****";
+                        // this.pkAllRateLa2.string = "****";
                     }
                 }
             }
@@ -390,6 +392,7 @@ export default class NewClass extends cc.Component {
                     GameCfg.GameType == pb.GameType.JJ_DuoKong ||
                     GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
                     if (GameCfg.GAMEFUPANDATA) {
+                        GameCfg.GameType = null;
                         this.onBlackHAll();
                     }
                     else {
@@ -410,14 +413,14 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'otherPlayerNode') {
-            PopupManager.LoadOtherPlayerInfoBox('otherPlayerInfo');
+            GlobalEvent.emit(EventCfg.OPENOTHERPLAYERINFO);
         }
 
 
     }
 
     onBlackHAll() {
-        GameCfg.GameType = null;
+
         GameCfg.huizhidatas = 0;
         GameCfg.allRate = 0;
         GameCfg.finalfund = 0;

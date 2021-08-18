@@ -9,8 +9,6 @@ function PBHelper() {
 
 }
 
-//let window = global || window;
-
 PBHelper.prototype = {
 
     //登入信息转BUff
@@ -243,10 +241,8 @@ PBHelper.prototype = {
         }
 
         else if (id == pb.MessageId.Rep_Game_QueryGameResult) {
-
             let data = this.onCmdQueryGameResultReplyConvertToData(buff);
             return data;
-
         }
 
         else if (id == pb.MessageId.Rep_Game_SmxlReport) {

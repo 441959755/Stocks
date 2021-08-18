@@ -2,7 +2,6 @@ import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import LoadUtils from "../Utils/LoadUtils";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass

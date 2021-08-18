@@ -1,11 +1,3 @@
-// import GlobalEvent from "../Utils/GlobalEvent";
-// import EventCfg from "../Utils/EventCfg";
-// import GameCfg from "../game/GameCfg";
-// import GameData from '../../sctiprs/GameData';
-// import GameCfgText from '../GameText';
-// import ComUtils from '../Utils/ComUtils';
-// import { pb } from '../../protos/proto';
-// import LLWConfig from "../common/config/LLWConfig";
 
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";

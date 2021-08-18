@@ -42,7 +42,7 @@ export default class NewClass extends cc.Component {
             this.onShowNode(this.dlNode);
             setTimeout(() => {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '当前为测试版本，输入任意账号即可');
-            }, 300)
+            }, 500)
         }
         else {
             //其他平台登入TODO

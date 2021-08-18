@@ -195,6 +195,11 @@ export default {
 
 	OPENMNCDLAYER: 'OPENMNCDLAYER',//打开模拟撤单
 
+	//guess 竞猜
+	OPENDPGUESSHIS: 'OPENDPGUESSHIS',//大盘竞猜记录
+
+	OPENDPGUESSRANK: 'OPENDPGUESSRANK', //大盘竞猜排行
+
 
 
 };

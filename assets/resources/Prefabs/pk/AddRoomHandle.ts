@@ -26,6 +26,7 @@ export default class NewClass extends cc.Component {
         else if (name == 'jj_jrdz') {
             let str = this.roomidLabel.string;
             if (str.length < 4 || str.length > 4) {
+                this.roomidLabel.string = '';
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间ID有误！请重新输入');
             }
             else {
@@ -75,6 +76,7 @@ export default class NewClass extends cc.Component {
             this.roomidLabel.string = str;
             if (res.err) {
                 GameData.RoomType = 0;
+                this.roomidLabel.string = '';
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您输入的房间ID有误，请重新输入。');
             } else {
                 GameData.roomId = res.id;
@@ -86,5 +88,10 @@ export default class NewClass extends cc.Component {
 
         GameData.RoomType = 2;
     }
+
+    onDisable() {
+        this.roomidLabel.string = '';
+    }
+
 
 }

@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "b25e28ac-01dd-45d6-b721-dd85dd874d25",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "xl_zhibiao_bg": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "f07652a6-ff46-48dd-9d46-2b65a585bd8f",
-      "importer": "sprite-frame",
       "rawTextureUuid": "b25e28ac-01dd-45d6-b721-dd85dd874d25",
       "trimType": "auto",
       "trimThreshold": 1,

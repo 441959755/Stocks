@@ -617,9 +617,9 @@ export default class NewClass extends cc.Component {
 			data.kstyle = pb.KStyle.Random;
 		} else if (GameData.DXSet.market == '震荡行情') {
 			data.kstyle = pb.KStyle.Wave;
-		} else if (GameData.DXSet.market == '单边向上行情') {
+		} else if (GameData.DXSet.market == '单边上涨') {
 			data.kstyle = pb.KStyle.Up;
-		} else if (GameData.DXSet.market == '单边向下行情') {
+		} else if (GameData.DXSet.market == '单边下跌') {
 			data.kstyle = pb.KStyle.Down;
 		}
 

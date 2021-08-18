@@ -20,26 +20,27 @@ export default class NewClass extends cc.Component {
 
 	tipsTextNode: cc.Node = null;
 
+	broadcast: cc.Node = null; //广播
+
 	InviteBox: cc.Node = null;
 
 	rewardCenterNode: cc.Node = null;
 
+
+
 	onLoad() {
 
 		PopupManager.init();
-
 		//查询行情
 		GlobalEvent.on(EventCfg.onCmdQuoteQuery, this.onCmdQuoteQuery.bind(this), this);
 
 		GlobalEvent.on(EventCfg.CmdQuoteQueryFuture, this.onCmdQHGameStart.bind(this), this);
 
-		GlobalEvent.on(EventCfg.INVITEMESSAGE, this.onShowInviteBox.bind(this), this);
+		GlobalEvent.on(EventCfg.INVITEMESSAGE, this.openBroadcast.bind(this), this);
 
 		GlobalEvent.on(EventCfg.ROOMLEAVE, this.onRoomLeave.bind(this), this);
-
 		//打开帮助
 		GlobalEvent.on(EventCfg.OPENHELPLAYER, this.openHelpLayer.bind(this), this);
-
 		//打开个人中心
 		GlobalEvent.on(EventCfg.OPENPLAYERINFO, this.openPlayerInfoLayer.bind(this), this);
 
@@ -54,6 +55,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.INVITEMESSAGE);
 		GlobalEvent.off(EventCfg.CmdQuoteQueryFuture);
 		GlobalEvent.off(EventCfg.OPENREWARDCENTERLAYER);
+		LoadUtils.releaseRes('Prefabs/broadcast');
 		LoadUtils.releaseRes('Prefabs/playeInfo/playerInfoLayer');
 		LoadUtils.releaseRes('Prefabs/helpLayer');
 		LoadUtils.releaseRes('Prefabs/inviteBox');
@@ -75,7 +77,7 @@ export default class NewClass extends cc.Component {
 			}
 		}
 		else {
-			GlobalEvent.emti(EventCfg.LOADINGSHOW);
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			LoadUtils.loadRes('Prefabs/RewardCenter/rewardCenter', pre => {
 				GlobalEvent.emit(EventCfg.LOADINGHIDE);
 				this.rewardCenterNode = cc.instantiate(pre);
@@ -104,7 +106,7 @@ export default class NewClass extends cc.Component {
 			this.playerInfoLayer.active = true;
 		}
 	}
-
+	//帮组
 	openHelpLayer() {
 		if (!this.helpLayer) {
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
@@ -178,6 +180,10 @@ export default class NewClass extends cc.Component {
 		else if (GameData.roomId) {
 			GlobalEvent.emit(EventCfg.OPENROOM);
 		}
+
+		cc.director.preloadScene('game', () => {
+			console.log('game 加载完成');
+		})
 	}
 
 
@@ -196,14 +202,34 @@ export default class NewClass extends cc.Component {
 		GameCfg.GAMEFUPANDATA = null;
 	}
 
-	//邀请框
-	onShowInviteBox(data) {
+	openBroadcast(data) {
+		//不包括自己
 		if (data.sender) {
 			if (data.sender == GameData.userID) {
 				return;
 			}
 		}
 		console.log('邀请信息：' + JSON.stringify(data));
+		if (!this.broadcast) {
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+			LoadUtils.loadRes('Prefabs/broadcast', pre => {
+				GlobalEvent.emit(EventCfg.LOADINGHIDE);
+				this.broadcast = cc.instantiate(pre);
+				this.node.addChild(this.broadcast, 98);
+				let handle = this.broadcast.getComponent('Broadcast');
+				handle.onShow(data);
+			})
+		}
+		else {
+			this.broadcast.active = true;
+			let handle = this.broadcast.getComponent('Broadcast');
+			handle.onShow(data);
+		}
+	}
+
+	//邀请框
+	onShowInviteBox(data) {
+
 		if (!this.InviteBox) {
 			LoadUtils.loadRes('Prefabs/inviteBox', (res) => {
 				this.InviteBox = cc.instantiate(res);
@@ -251,7 +277,5 @@ export default class NewClass extends cc.Component {
 			});
 		})
 	}
-
-
 
 }

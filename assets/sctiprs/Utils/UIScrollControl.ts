@@ -1,8 +1,6 @@
 
 
-
 const { ccclass, property } = cc._decorator;
-
 /**
  * 滑动方向枚举
  */

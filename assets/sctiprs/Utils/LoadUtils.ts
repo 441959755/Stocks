@@ -20,7 +20,7 @@ export default class LoadUtils {
 
     public static loadRes(url, call?) {
         // cc.loader.loadRes(url, (err, pre) => {
-        cc.resources.load(url, (err, pre) => {
+        cc.loader.loadRes(url, (err, pre) => {
             if (err) {
                 console.log('LoadUtils err');
                 return;
@@ -30,15 +30,15 @@ export default class LoadUtils {
     }
 
     public static releaseRes(url, type?) {
-        cc.resources.release(url);
+        cc.loader.release(url);
     }
 
     public static releaseAsset(ins) {
-        cc.assetManager.releaseAsset(ins);
+        cc.loader.releaseAsset(ins);
     }
 
     public static loadResDir(url, call?) {
-        cc.resources.loadDir(url, (com, total, item) => {
+        cc.loader.loadResDir(url, (com, total, item) => {
             //call&&(call(com/total,false))
         }, (err, res) => {
             if (err) {
@@ -51,7 +51,7 @@ export default class LoadUtils {
 
 
     public static load(url, call?) {
-        cc.assetManager.loadRemote(url, (err, res) => {
+        cc.loader.load(url, (err, res) => {
             if (err) {
                 console.log('LoadUtils load err');
                 return;

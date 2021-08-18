@@ -2,8 +2,8 @@
 import LoadUtils from "../sctiprs/Utils/LoadUtils";
 import ComUtils from '../sctiprs/Utils/ComUtils';
 import GameCfg from "./game/GameCfg";
-import { pb } from '../protos/proto';
 import GameData from "./GameData";
+import { pb } from "../protos/proto";
 
 export default class GameCfgText {
 

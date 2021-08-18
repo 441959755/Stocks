@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "fab48052-0fcb-4f8d-8023-d7d700cc2736",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "xl_shijian_bgcolor2": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "846b0fbd-a737-4ec4-8eac-0f1a4f301694",
-      "importer": "sprite-frame",
       "rawTextureUuid": "fab48052-0fcb-4f8d-8023-d7d700cc2736",
       "trimType": "auto",
       "trimThreshold": 1,
