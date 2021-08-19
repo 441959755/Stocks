@@ -14,7 +14,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     diamondLabel: cc.Label = null;
 
-
     onLoad() {
         GlobalEvent.on(EventCfg.GOLDCHANGE, () => { this.goldLabel.string = GameData.properties[pb.GamePropertyId.Gold] }, this);
 
@@ -30,10 +29,8 @@ export default class NewClass extends cc.Component {
 
 
     start() {
-        //  this.node.zIndex = 99;
         this.goldLabel.string = GameData.properties[pb.GamePropertyId.Gold];
         this.diamondLabel.string = GameData.properties[pb.GamePropertyId.Diamond];
-
     }
 
     onBtnClck(event, data) {

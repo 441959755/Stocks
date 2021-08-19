@@ -313,7 +313,7 @@ PBHelper.prototype = {
                 GameData.RoomType = 0;
                 GameData.selfEnterRoomData = null;
                 GameData.roomId = 0;
-                //   GameData.roomHostID = 0;
+                GameData.JJCapital = 0;
             }
             GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }
@@ -411,7 +411,6 @@ PBHelper.prototype = {
             let CgState = pb.CgState;
             let data = CgState.decode(new Uint8Array(buff));
             GameData.cgState = data;
-
         }
         //创建房间应答
         else if (id == pb.MessageId.Rep_Room_Create) {

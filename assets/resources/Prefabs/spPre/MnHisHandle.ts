@@ -5,7 +5,6 @@ import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
-declare const async: any;
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -36,11 +35,21 @@ export default class NewClass extends cc.Component {
 
     today = null;
 
+    @property(cc.Node)
+    scrollNode: cc.Node = null;
+
+    @property(cc.Node)
+    scrollNode1: cc.Node = null;
+
+    @property(cc.Node)
+    scrollNode2: cc.Node = null;
+
     onShow(id) {
 
         this.viewNode.forEach(el => {
             el.active = false;
         })
+
         this.toggles.forEach((el, index) => {
             if (el.isChecked) {
                 this.viewNode[index].active = true;
@@ -75,41 +84,39 @@ export default class NewClass extends cc.Component {
 
 
     createItem() {
-        async.eachLimit(this.hisList, 1, (el, cb) => {
+
+        let jtcj = [], jtwt = [], lsjl = [];
+        this.hisList.forEach(el => {
             if (ComUtils.isToday(el.orderId * 1000)) {
                 //今天成交
                 if (el.state == pb.OrderState.Done) {
-                    let item = cc.instantiate(this.item1);
-                    this.contents[0].addChild(item);
-                    let handle = item.getComponent('MnHisItem');
-                    handle.onShow(el);
+                    jtcj.push(el);
+                    this.onCreateItem(this.scrollNode, jtcj, this.item1, 'MnHisItem');
+
                 }
                 //今天委托
                 else if (el.state == pb.OrderState.Init) {
-                    let item = cc.instantiate(this.item2);
-                    this.contents[1].addChild(item);
-                    let handle = item.getComponent('MnHisItem1');
-                    handle.onShow(el);
+                    jtwt.push(el);
+                    this.onCreateItem(this.scrollNode1, jtwt, this.item2, 'MnHisItem1');
 
                 }
             }
             //历史记录
             else {
-                let item = cc.instantiate(this.item3);
-                this.contents[2].addChild(item);
-                let handle = item.getComponent('MnHisItem2');
-                handle.onShow(el);
+                lsjl.push(el);
+                this.onCreateItem(this.scrollNode2, lsjl, this.item3, 'MnHisItem2');
             }
+        });
+    }
 
-            setTimeout(cb, 0);
+    onCreateItem(scrollNode, arr, item, str) {
+        let UIScrollControl = scrollNode.getComponent('UIScrollControl');
+        UIScrollControl.initControl(item, arr.length, item.getContentSize(), 0, (node, index) => {
+            let handle = node.getComponent(str);
+            handle.onShow(arr[index]);
         })
     }
 
-    onDisable() {
-        this.contents.forEach(el => {
-            el.removeAllChildren();
-        })
-    }
 
     onToggleClick(event, data) {
         this.viewNode.forEach(el => {
@@ -128,6 +135,5 @@ export default class NewClass extends cc.Component {
             this.node.active = false;
         }
     }
-
 
 }

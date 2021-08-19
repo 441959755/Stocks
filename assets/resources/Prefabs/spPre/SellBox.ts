@@ -64,6 +64,9 @@ export default class NewClass extends cc.Component {
 
     }
 
+    onEnable() {
+        this.curSellCount = 0;
+    }
 
     onBtnClick(event, data) {
         let name = event.target.name;

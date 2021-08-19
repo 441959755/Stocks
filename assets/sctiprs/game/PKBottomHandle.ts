@@ -188,10 +188,10 @@ export default class NewClass extends cc.Component {
                             clearInterval(this.cb1);
                         }
 
-                        if (num <= 179) {
-                            timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
-                            this.waitTime.string = '倒计时：' + ComUtils.onNumChangeTime(num);
-                        }
+                        //  if (num <= 179) {
+                        timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
+                        this.waitTime.string = '倒计时：' + ComUtils.onNumChangeTime(num);
+                        //   }
 
                         num--;
                     }, 1000)

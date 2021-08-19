@@ -32,23 +32,27 @@ export default class NewClass extends cc.Component {
 	girlNode: cc.Node = null;
 
 	protected onLoad() {
-		GlobalEvent.on(EventCfg.BLACKGOTOLAYER, (event) => {
-			this.onBtnClick(event, null);
-		}, this);
+		//回到进入游戏的界面
+		GlobalEvent.on(EventCfg.BLACKGOTOLAYER, this.onBtnClick.bind(this), this);
 
-		GlobalEvent.on(EventCfg.GENDERCHANGE, () => {
-			if (GameData.gender == 1) {
-				this.girlNode.active = false;
-			} else {
-				this.girlNode.active = true;
-			}
-		}, this);
+		//性别更改
+		GlobalEvent.on(EventCfg.GENDERCHANGE, this.setUserGender.bind(this), this);
 
-		GlobalEvent.on(EventCfg.HEADIMGCHANGE, () => {
-			this.userHead.spriteFrame = GameData.headImg;
-		}, this);
+		//头像更改
+		GlobalEvent.on(EventCfg.HEADIMGCHANGE, this.setUserHead.bind(this), this);
 
+	}
 
+	setUserHead() {
+		this.userHead.spriteFrame = GameData.headImg;
+	}
+
+	setUserGender() {
+		if (GameData.gender == 1) {
+			this.girlNode.active = false;
+		} else {
+			this.girlNode.active = true;
+		}
 	}
 
 	start() {
@@ -61,7 +65,6 @@ export default class NewClass extends cc.Component {
 		if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis) {
 			this.onBtnClick({ target: { name: 'main_jj_cgs' } }, null);
 		}
-
 	}
 
 
@@ -85,18 +88,12 @@ export default class NewClass extends cc.Component {
 	}
 
 	setUserInfo() {
-		// this.userExp.string = GameData.properties[1] + '/' + GameData.maxExp;
 		this.userLevel.string = 'LV:' + (GameData.properties[pb.GamePropertyId.Level] || 1) + '';
-		//  this.gold.string = GameData.properties[0] || 0 + '';
-		//  this.brick.string = GameData.properties[4] || 0 + '';
+
 		this.UserName.string = GameData.userName || GameData.userID;
 
-		if (GameData.gender == 1) {
-			this.girlNode.active = false;
-		} else {
-			this.girlNode.active = true;
-		}
-		//    this.progr.progress = GameData.properties[1] / GameData.maxExp;
+		this.setUserGender();
+
 	}
 
 	initToggle() {

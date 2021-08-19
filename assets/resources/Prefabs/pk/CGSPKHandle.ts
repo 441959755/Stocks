@@ -50,8 +50,7 @@ export default class NewClass extends cc.Component {
             GameCfg.data[0].data = [];
             GameCfg.data[0].circulate = items[4];
 
-            GameData.huizhidatas = info.tsQuoteStart + 1;
-            GameCfg.huizhidatas = info.tsQuoteStart + 1;
+
 
             info.quotes && (info.quotes.items.forEach((el, index) => {
                 //   if (index != 0) {
@@ -79,6 +78,8 @@ export default class NewClass extends cc.Component {
 
             })
             )
+            GameData.huizhidatas = info.tsQuoteStart;
+            GameCfg.huizhidatas = info.tsQuoteStart;
 
             GlobalEvent.emit(EventCfg.OPENMATCHPK);
             GameData.Players[1] = info.players[0].gd;
@@ -99,11 +100,11 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
         if (this.confdata) {
+
             this.onUpShowTimeCount();
             this.onUpContent();
         }
     }
-
 
     onBtnClick(event, data) {
         let name = event.target.name;
@@ -229,20 +230,23 @@ export default class NewClass extends cc.Component {
                 name.string = data[index].nickname || data[index].uid;
                 lv.string = data[index].cgsClearance;
             }
-
         })
     }
 
     onUpContent() {
-        if (!GameData.CGSSAVELEVEL) {
-            GameData.CGSSAVELEVEL = GameData.cgState.stage;
+        if (GameData.CGSSAVELEVEL == null) {
+            GameData.CGSSAVELEVEL = GameData.cgState.stage || 0;
         }
-        if (GameData.cgState.stage > GameData.CGSSAVELEVEL) {
+
+        else if (GameData.cgState.stage > GameData.CGSSAVELEVEL) {
             PopupManager.LoadTipsBox('tipsBox', '闯关成功')
         }
         else if (GameData.cgState.stage < GameData.CGSSAVELEVEL) {
             PopupManager.LoadTipsBox('tipsBox', '闯关失败')
         }
+
+
+
         let items = this.content.children;
         let stages = JSON.parse(this.confdata.conf);
         items.forEach((el, index) => {
@@ -319,11 +323,18 @@ export default class NewClass extends cc.Component {
                     lifesLabel.string = '生命：' + GameData.cgState.lifes;
                 }
                 if (GameData.cgState.progress) {
-                    progress.progress = GameData.cgState.progress / stages.Stages[index].Progress;
+                    //  progress.progress = GameData.cgState.progress / stages.Stages[index].Progress;
+                    if (GameData.cgState.progress == stages.Stages[index].Progress) {
+                        progress.progress = 1;
+                    }
+                    else {
+                        let lines = progress.node.getChildByName('node').children;
+                        let bar = progress.node.getChildByName('bar');
+                        bar.width = lines[GameData.cgState.progress - 1].x;
+                    }
                 }
                 else {
                     progress.progress = 0;
-
                 }
                 peopleLabel.string = '在线（' + this.confdata.people[index] + '人）'
 
@@ -378,19 +389,18 @@ export default class NewClass extends cc.Component {
 
     //跟新时间 次数
     onUpShowTimeCount() {
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         if (this.confdata.status == 0) {
             console.log('闯关赛还未开始');
             GameData.cgState = {};
             GameData.cgState.stage = -1;
             GameData.cgState.awards = [];
-
-            //   let strTime = ComUtils.formatTime(this.confdata.from)
-
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '闯关赛还未开始');
             this.node.active = false;
         }
         else if (this.confdata.status == 1) {
-            console.log('进行中ing');
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
             let curTime = parseInt(new Date().getTime() / 1000 + '');
             curTime = this.confdata.to - curTime;
 
@@ -419,7 +429,7 @@ export default class NewClass extends cc.Component {
             GameData.cgState.awards = [];
 
             //  let strTime = ComUtils.formatTime(this.confdata.from)
-
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '闯关赛已结束');
             this.node.active = false;
         }
@@ -428,14 +438,10 @@ export default class NewClass extends cc.Component {
         this.countLabel.string = '(今日次数：' + (stages.Times - GameData.todayGameCount[pb.GameType.JJ_ChuangGuan]) + '/' + stages.Times + ')';
     }
 
-
     onDisable() {
         this.inCall && (clearInterval(this.inCall));
         this.inCall = null;
     }
-
-
-
 
     //查询闯关赛排行榜
     reqGameCgsGetSeasonRank(id, stage) {
@@ -451,14 +457,6 @@ export default class NewClass extends cc.Component {
             console.log('闯关赛排行榜' + JSON.stringify(res));
         })
     }
-
-
-    reqGameCgsGetStageAward() {
-        socket.send(pb.MessageId.Req_Game_CgsGetStageAward, buff, (res) => {
-            console.log('领取闯关赛奖励' + JSON.stringify(res));
-        })
-    }
-
 
 
     timeStamp(second_time) {

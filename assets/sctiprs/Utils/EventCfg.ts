@@ -7,7 +7,6 @@ export default {
 	OPENQHLAYER: 'OPENQHLAYER',//slqh
 
 	OPENDXLAYER: 'OPENDXLAYER', //打开训练定向界面
-
 	//pk
 	OPENMATCHPK: 'OPENMATCHPK',    //pk匹配
 
@@ -50,10 +49,6 @@ export default {
 	MABOLLSWITCH: 'MABOLLSWITCH',
 
 	OPENHELPLAYER: 'OPENHELPLAYER',//打开帮助截面
-
-	// HIDEOTHERNODE:'HIDEOTHERNODE',
-
-	//  SHOWOTHERNODE: 'SHOWOTHERNODE',
 
 	SMINITFUND: 'SMINITFUND', //双盲初始游戏金币
 
@@ -160,8 +155,6 @@ export default {
 	CLICKFCBTN: 'CLICKFCBTN',//点击选择分仓
 
 	SETMARKCOLOR: 'SETMARKCOLOR',    //标签颜色
-
-
 
 	RoomGameDataSelf: 'RoomGameDataSelf',  //自己进入房间
 

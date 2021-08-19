@@ -10,17 +10,11 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
-    AIStockList = null;
+    AIStockList = [];
 
-    AIStockCount = 0;
-
-    AIProfitList = null;
-
-    AIProfitCount = 0;
+    AIProfitList = [];
 
     collectList = [];
-
-    collectCount = 0;
 
     @property(cc.ScrollView)
     scrollview: cc.ScrollView = null;
@@ -54,36 +48,7 @@ export default class NewClass extends cc.Component {
 
 
     onLoad() {
-        this.scrollview.node.on('scroll-to-bottom', () => {
-            console.log('scroll-to-bottom');
-            let tsUpdated = this.AIStockList[this.AIStockList.length - 1].tsUpdated;
-            let data = {
-                tsUpdateFrom: tsUpdated,
-                total: 20,
-            }
-            this.getAIStockList(data);
-        }, this);
-
-        this.scrollview1.node.on('scroll-to-bottom', () => {
-            console.log('scroll-to-bottom');
-            let data = {
-                rankFrom: this.AIProfitCount + 1,
-                total: 20,
-            }
-            this.getAIProfitList(data);
-        }, this);
-
-        GlobalEvent.on('shouCangAdd', (data) => {
-            let node = cc.instantiate(this.preItem2);
-            this.content2.addChild(node);
-            let handle = node.getComponent('ZnxgItem2');
-            handle.onShow(data, GameData.AIStockList.length - 1);
-        }, this);
-
-
-
         GlobalEvent.on(EventCfg.SELECTBK, this.onShowSelectBk.bind(this), this);
-
     }
 
     onShowSelectBk() {
@@ -105,13 +70,14 @@ export default class NewClass extends cc.Component {
 
     onDestroy() {
         GlobalEvent.off('shouCangAdd');
+        GlobalEvent.off(EventCfg.SELECTBK);
     }
 
     start() {
         let data = {
             //    rankFrom: 1,
             tsUpdateFrom: parseInt(new Date().getTime() / 1000 + ''),
-            total: 20,
+            total: 100,
         }
         this.getAIStockList(data);
     }
@@ -147,11 +113,11 @@ export default class NewClass extends cc.Component {
         //Ai收益排行
         else if (name == 'toggle2') {
             this.scrollview1.node.active = true;
-            if (this.AIProfitCount == 0) {
+            if (this.AIProfitList.length == 0) {
                 this.tipsNode.active = true;
                 let data = {
                     rankFrom: 1,
-                    total: 20,
+                    total: 100,
                 }
                 this.getAIProfitList(data);
             }
@@ -159,22 +125,9 @@ export default class NewClass extends cc.Component {
         //我的收藏
         else if (name == 'toggle3') {
             this.scrollview2.node.active = true;
-            //  if (this.collectList.length == 0) {
             this.tipsNode.active = true;
             this.getCollectList();
-            // }
-            // else if (GameData.AIStockList.length > this.collectList.length) {
-            //     for (let i = this.collectList.length - 1; i < GameData.AIStockList.length - 1; i++) {
-            //         let node = cc.instantiate(this.preItem2);
-            //         this.content2.addChild(node);
-            //         let handle = node.getComponent('ZnxgItem2');
-            //         handle.onShow(GameData.AIStockList[i], i);
-            //     }
 
-            //     this.collectList = JSON.parse(JSON.stringify(GameData.AIStockList));
-
-            //     this.collectCount = this.collectList.length;
-            // }
         }
     }
 
@@ -208,23 +161,16 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             this.AIStockList = [];
+            this.AIStockList = res.items;
             console.log('查询AI选股的股票列表' + JSON.stringify(res));
-
-            res.items.forEach((el, index) => {
-                this.AIStockList.push(el);
-                //   if (el.todaySignal < 0) {
-                let node = cc.instantiate(this.preItem);
-                this.content.addChild(node);
+            let UIScrollControl = this.scrollview.getComponent('UIScrollControl');
+            UIScrollControl.initControl(this.preItem, res.items.length, this.preItem.getContentSize(), 0, (node, index) => {
                 let handle = node.getComponent('ZnxgItem');
-                handle.onShow(el, index + this.AIStockCount);
-                //  }
-            });
-            this.AIStockCount += data.total;
+                handle.onShow(res.items[index], index);
+            })
 
-            if (this.AIStockList.length > 0) {
-                this.tipsNode.active = false;
-            }
         })
+        this.tipsNode.active = false;
     }
 
     //AI收益信号
@@ -236,23 +182,17 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             this.AIProfitList = [];
+            this.AIProfitList = res.items;
             console.log('查询AI收益列表' + JSON.stringify(res));
 
-            res.items.forEach((el, index) => {
-                this.AIProfitList.push(el);
-                // if (el.todaySignal < 0) {
-                let node = cc.instantiate(this.preItem1);
-                this.content1.addChild(node);
+            let UIScrollControl = this.scrollview1.getComponent('UIScrollControl');
+            UIScrollControl.initControl(this.preItem1, res.items.length, this.preItem1.getContentSize(), 0, (node, index) => {
                 let handle = node.getComponent('ZnxgItem1');
-                handle.onShow(el, index + this.AIProfitCount);
-                //   }
-            });
+                handle.onShow(res.items[index], index);
+            })
 
-            this.AIProfitCount += data.total;
-            if (this.AIProfitList.length > 0) {
-                this.tipsNode.active = false;
-            }
         })
+        this.tipsNode.active = false;
     }
 
     //收藏
@@ -261,8 +201,6 @@ export default class NewClass extends cc.Component {
             return;
         }
         this.collectList = JSON.parse(JSON.stringify(GameData.AIStockList));
-
-        this.collectCount = this.collectList.length;
 
         let info = {
             codes: this.collectList,
@@ -273,24 +211,19 @@ export default class NewClass extends cc.Component {
         let buff = CmdQueryAiStockList.encode(message).finish();
 
         socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
-
-            console.log('查询AI选股的股票列表' + JSON.stringify(res));
-
             let tt = 0;
-            res.items.forEach((el, index) => {
-
-                if (!this.content2.children[index]) {
-                    let node = cc.instantiate(this.preItem2);
-                    this.content2.addChild(node);
-                }
+            console.log('查询AI选股的股票列表' + JSON.stringify(res));
+            let UIScrollControl = this.scrollview2.getComponent('UIScrollControl');
+            UIScrollControl.initControl(this.preItem2, res.items.length, this.preItem2.getContentSize(), 0, (node, index) => {
                 let handle = this.content2.children[index].getComponent('ZnxgItem2');
-                let flag = this.getBKISShow(el.code);
+                let flag = this.getBKISShow(res.items[index].code);
                 if (flag) { tt++ }
                 this.content2.children[index].active = flag;
 
-                handle.onShow(el, tt);
+                handle.onShow(res.items[index], tt);
 
-            });
+            })
+
         })
 
         this.tipsNode.active = false;

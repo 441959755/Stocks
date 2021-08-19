@@ -210,7 +210,7 @@
       "array": [
         0,
         0,
-        524.8113946933698,
+        525.6774200971543,
         0,
         0,
         0,
@@ -57068,7 +57068,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1162.27,
+      "width": 1011.74,
       "height": 150
     },
     "_anchorPoint": {
@@ -57130,7 +57130,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 359.79,
+      "width": 353.93,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -57142,7 +57142,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -531.135,
+        -455.87,
         0,
         0,
         0,
@@ -57181,8 +57181,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "股票名称：  小只好     4000123",
-    "_N$string": "股票名称：  小只好     4000123",
+    "_string": "股票名称：                               ",
+    "_N$string": "股票名称：                               ",
     "_fontSize": 26,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -57224,7 +57224,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 401.78,
+      "width": 317.81,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -57236,7 +57236,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -121.34499999999997,
+        -51.94,
         0,
         0,
         0,
@@ -57275,8 +57275,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "训练时段：1111111111--1111111111",
-    "_N$string": "训练时段：1111111111--1111111111",
+    "_string": "训练时段：                          ",
+    "_N$string": "训练时段：                          ",
     "_fontSize": 26,
     "_lineHeight": 26,
     "_enableWrapText": true,
@@ -57325,7 +57325,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200.7,
+      "width": 140,
       "height": 150
     },
     "_anchorPoint": {
@@ -57337,7 +57337,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        430.78499999999997,
+        385.87,
         0,
         0,
         0,
@@ -57399,7 +57399,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -100.35,
+        -70,
         0,
         0,
         0,
@@ -57481,7 +57481,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 60.7,
+      "width": 0,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -57493,7 +57493,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        39.650000000000006,
+        70,
         0,
         0,
         0,
@@ -57532,8 +57532,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "-16%",
-    "_N$string": "-16%",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 26,
     "_lineHeight": 26,
     "_enableWrapText": true,
@@ -57560,7 +57560,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 200.7,
+      "width": 140,
       "height": 150
     },
     "_resize": 1,
@@ -57592,7 +57592,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 1162.27,
+      "width": 1011.74,
       "height": 150
     },
     "_resize": 1,
@@ -57873,7 +57873,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 74.72,
+      "width": 0,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -57924,8 +57924,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "95.5.%",
-    "_N$string": "95.5.%",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
@@ -58185,7 +58185,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 40.04,
+      "width": 0,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -58236,8 +58236,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "123",
-    "_N$string": "123",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -58513,7 +58513,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 74.72,
+      "width": 0,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -58564,8 +58564,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "95.5.%",
-    "_N$string": "95.5.%",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
@@ -58825,7 +58825,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 37.35,
+      "width": 0,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -58876,8 +58876,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "1次",
-    "_N$string": "1次",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
@@ -59153,7 +59153,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 74.72,
+      "width": 0,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -59204,8 +59204,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "95.5.%",
-    "_N$string": "95.5.%",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
@@ -59465,7 +59465,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 37.35,
+      "width": 0,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -59516,8 +59516,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "1次",
-    "_N$string": "1次",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
@@ -59793,7 +59793,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 74.72,
+      "width": 0,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -59844,8 +59844,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "95.5.%",
-    "_N$string": "95.5.%",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
@@ -60011,7 +60011,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 37.35,
+      "width": 0,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -60062,8 +60062,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "1次",
-    "_N$string": "1次",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,

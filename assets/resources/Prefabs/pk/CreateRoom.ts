@@ -2,6 +2,7 @@
 import { pb } from "../../../protos/proto";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
+import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -16,6 +17,22 @@ export default class NewClass extends cc.Component {
 
     @property([cc.Toggle])
     setToggle: cc.Toggle[] = [];
+
+    onEnable() {
+        this.setToggle.forEach((el, index) => {
+            if (el.isChecked) {
+                if (index == 0) {
+                    GameData.JJCapital = 1000;
+                }
+                else if (index == 1) {
+                    GameData.JJCapital = 2500;
+                }
+                else if (index == 2) {
+                    GameData.JJCapital = 5000;
+                }
+            }
+        })
+    }
 
     onBtnClick(event, data) {
         let name = event.target.name;
@@ -44,7 +61,7 @@ export default class NewClass extends cc.Component {
             }
 
             if (set == 0) {
-                GameData.JJCapital = 1500;
+                GameData.JJCapital = 1000;
             }
             else if (set == 1) {
                 GameData.JJCapital = 2500;
@@ -74,7 +91,9 @@ export default class NewClass extends cc.Component {
             console.log('创建房间应答' + JSON.stringify(res));
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             if (res && res.err) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err.err);
+
+                let err = GlobalHandle.getErrorCodeByCode(res.err.code);
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, err);
                 return;
             }
             GameData.RoomType = 1;

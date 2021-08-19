@@ -28,7 +28,9 @@ export default class NewClass extends cc.Component {
 
     //查询闯关赛关卡排行
     reqGameCgsGetStageRank(id, stage) {
+
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         let data = {
             id: id,
             stage: stage,
@@ -55,8 +57,9 @@ export default class NewClass extends cc.Component {
 
         let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
         UIScrollControl.initControl(this.item, this.curData.Items.length, this.item.getContentSize(), 0, (node, index) => {
+            node.active = true;
             let handle = node.getComponent('CgsLvRankItem');
-            handle.el = this.curData.Items(index);
+            handle.el = this.curData.Items[index];
             handle.initShow(index);
         })
     }

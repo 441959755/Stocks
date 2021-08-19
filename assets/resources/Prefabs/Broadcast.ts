@@ -43,10 +43,11 @@ export default class NewClass extends cc.Component {
         this.nameLabel.string = arr[0];
         this.GameTypeLabel.string = arr[1];
         this.roomIdLabel.string = arr[2];
+        GameData.JJCapital = arr[3];
         this.curData = data;
         this.cb = setTimeout(() => {
             this.node.active = false;
-        }, 3000);
+        }, 5000);
     }
 
     onBtnClick(event, data) {

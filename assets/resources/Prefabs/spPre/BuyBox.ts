@@ -85,6 +85,10 @@ export default class NewClass extends cc.Component {
         }
     }
 
+    onEnable() {
+        this.cursl = 0;
+    }
+
     onBtnClick(event) {
         let name = event.target.name;
         if (name == 'closeBtn') {

@@ -88,7 +88,6 @@ export default class GlobalHandle {
             GameData.huizhidatas = info.items.length;
             //   }
 
-
             info1.kstyle = pb.KStyle.Random;
 
             socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {

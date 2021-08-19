@@ -158,16 +158,20 @@ export default class NewClass extends cc.Component {
             } else if (code.indexOf('300') != -1) {
                 info1.code = '1399006';
             }
+            let le = GameCfg.data[0].data.length;
+            let time = GameCfg.data[0].data[le - 1].day.replace(/-/g, '');
+            console.log(time + '   ' + le);
 
-            console.log(JSON.stringify(info1));
             let infoPre = {
                 ktype: info1.ktype,
-                kstyle: info1.kstyle,
                 code: info1.code,
                 form: 0,
-                total: 100,
-                to: info1.from,
+                total: le,
+                to: time,
             }
+
+            console.log(JSON.stringify(infoPre));
+
             socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(infoPre), info => {
                 if (!info.items || info.items.length <= 0) {
                     console.log('获取的行情为空');
@@ -193,33 +197,9 @@ export default class NewClass extends cc.Component {
                         Rate: (el.volume / GameCfg.data[0].circulate) * 100
                     };
 
-
                     this.myspicData.push(data);
                 });
-                socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), (res) => {
-                    console.log('指数' + res.items.length);
-                    res.items.forEach(el => {
-                        //  let date = new Date(el.timestamp);
-                        let ye = (el.timestamp + '').slice(0, 4);
-                        let mon = (el.timestamp + '').slice(4, 6);
-                        let da = (el.timestamp + '').slice(6);
-                        let fromDate = ye + '/' + mon + '/' + da;
-                        let data = {
-                            day: fromDate || 0,
-                            open: el.open || 0,
-                            close: el.price || 0,
-                            high: el.high || 0,
-                            low: el.low || 0,
-                            price: el.amount || 0,
-                            value: el.volume || 0,
-                            Rate: el.volume / GameCfg.data[0].circulate * 100,
-                        }
-
-                        this.myspicData.push(data);
-                    });
-                    this.onDraw();
-
-                })
+                this.onDraw();
             })
         }
     }

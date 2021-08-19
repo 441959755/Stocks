@@ -256,6 +256,7 @@ export default class NewClass extends cc.Component {
 
         //复盘
         else if (name == 'pk_jsbt_qd') {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.fill = [];
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
@@ -269,8 +270,9 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 2);
             GlobalEvent.emit(EventCfg.GAMEFUPANOPT, GameCfg.RoomGameData.players[1].ops.items)
 
-            this.node.active = false;
             GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 3);
+            this.node.active = false;
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         }
         //训练该股
         else if (name == 'pk_jsbt_xl') {
@@ -288,6 +290,7 @@ export default class NewClass extends cc.Component {
         }
         //zj复盘
         else if (name == 'Btn_fupan_self') {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.fill = [];
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
@@ -299,9 +302,11 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.GAMEFUPANOPT, UpGameOpt.arrOpt)
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
             //  GlobalEvent.emit(EventCfg.PKFUPAN, 1);
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         }
         //tr复盘
         else if (name == 'Btn_fupan_other') {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.fill = [];
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
@@ -312,11 +317,9 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.GAMEFUPANOPT, GameCfg.RoomGameData.players[1].ops.items)
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
-            //   GlobalEvent.emit(EventCfg.PKFUPAN, 2);
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         }
-        else if (name == 'otheruserInfo') {
-            // GlobalEvent.emit(EventCfg.OPENOTHERINFOBOX);
-        }
+
     }
 
     onQuitGame() {

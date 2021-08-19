@@ -141,6 +141,8 @@ export default class NewClass extends cc.Component {
         eventHandler.handler = "OnScroll";
         this.scroll_rect.scrollEvents.push(eventHandler);
 
+        // this.scroll_rect.node.on('scrolling', this.OnScroll.bind(this), this);
+
         this.is_start == true
         this.maxIdx = 0
 
@@ -175,7 +177,7 @@ export default class NewClass extends cc.Component {
                 curPos.x = this.distance / 2 + this.distance * i
             }
 
-            node.name = `cell_${i}`
+            // node.name = `cell_${i}`
             node.setAnchorPoint(cc.v2(0.5, 0.5))
             node.setPosition(curPos)
 

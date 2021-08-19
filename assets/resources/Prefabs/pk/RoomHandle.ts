@@ -245,7 +245,7 @@ export default class NewClass extends cc.Component {
                 sender: GameData.userID,
                 receiver: GameData.roomId,
                 type: pb.MessageType.RoomInvite,
-                text: GameData.userName + ',' + str + ',' + GameData.roomId,
+                text: GameData.userName + ',' + str + ',' + GameData.roomId + ',' + GameData.JJCapital,
                 ts: parseInt(new Date().getTime() / 1000 + ''),
             }
             let Notice = pb.Notice;

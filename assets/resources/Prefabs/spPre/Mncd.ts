@@ -2,7 +2,7 @@ import { pb } from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
-declare const async: any;
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -18,6 +18,9 @@ export default class NewClass extends cc.Component {
     content: cc.Node = null;
 
     hisList = null;
+
+    @property(cc.Node)
+    scrollNode: cc.Node = null;
 
     onEnable() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
@@ -51,14 +54,10 @@ export default class NewClass extends cc.Component {
     }
 
     createItem() {
-        async.eachLimit(this.hisList, 1, (el, cb) => {
-            if (el.state == pb.OrderState.Init) {
-                let item = cc.instantiate(this.item);
-                this.content.addChild(item);
-                let handle = item.getComponent('MncdItem');
-                handle.onShow(el);
-            }
-            setTimeout(cb, 0);
+        let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
+        UIScrollControl.initControl(this.item, this.hisList.length, this.item.getContentSize(), 0, (node, index) => {
+            let handle = node.getComponent('MncdItem');
+            handle.onShow(this.hisList[index]);
         })
     }
 

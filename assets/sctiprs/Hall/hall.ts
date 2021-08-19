@@ -26,8 +26,6 @@ export default class NewClass extends cc.Component {
 
 	rewardCenterNode: cc.Node = null;
 
-
-
 	onLoad() {
 
 		PopupManager.init();
@@ -172,10 +170,16 @@ export default class NewClass extends cc.Component {
 				}, 800)
 			}
 		}
-		//房间已解散
+
+		//房间已解散  ,给出提示
 		if (GameData.roomId === 0) {
-			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+			setTimeout(() => {
+				GlobalEvent.emit(EventCfg.LOADINGHIDE);
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
+			}, 200)
 		}
+
 		//进入房间
 		else if (GameData.roomId) {
 			GlobalEvent.emit(EventCfg.OPENROOM);

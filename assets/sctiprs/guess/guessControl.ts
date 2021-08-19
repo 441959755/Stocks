@@ -34,8 +34,6 @@ export default class NewClass extends cc.Component {
     }
 
 
-
-
     onDestroy() {
         PopupManager.delPopupNode();
         GlobalEvent.off(EventCfg.OPENHELPLAYER);

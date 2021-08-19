@@ -67,11 +67,12 @@ export default class NewClass extends cc.Component {
     }
 
     onLoadHead() {
+        let head = this.player2.getChildByName('head');
+        head.getComponent(cc.Sprite).spriteFrame = null;
         if (GameData.Players[1].icon) {
             ComUtils.onLoadHead(GameData.Players[1].icon, (res) => {
                 let texture = new cc.SpriteFrame(res);
                 GameData.Players[1].icon = texture;
-                let head = this.player2.getChildByName('head');
                 head.getComponent(cc.Sprite).spriteFrame = GameData.Players[1].icon;
             })
         }

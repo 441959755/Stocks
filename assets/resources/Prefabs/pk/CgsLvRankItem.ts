@@ -42,8 +42,6 @@ export default class NewClass extends cc.Component {
 
         let countLabel = this.node.getChildByName('label').getComponent(cc.Label);
 
-
-
         if (!this.el.icon || this.el.icon == 'default_icon' || this.el.icon == 'default.jpg') {
 
         }

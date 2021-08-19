@@ -107,30 +107,6 @@ export default class NewClass extends cc.Component {
                 winSp.active = true;
                 this.onResultAward(1, this.selfResultLabel, this.gameResult.players[0].result.userProfitRate);
             }
-            //162640313111
-            // this.onResultAward(3, this.selfResultLabel, userProfitRate1);
-
-            // }
-            // //逃跑
-            // else if (this.gameResult.players[0].giveup) {
-
-            //     loseSp.active = true;
-            //     winSp.active = false;
-            //     taopao.active = true;
-            //     this.onResultAward(4, this.selfResultLabel, userProfitRate1);
-
-            // }
-            // else if (userProfitRate1 > userProfitRate2) {
-            //     loseSp.active = false;
-            //     winSp.active = true;
-            //     this.onResultAward(1, this.selfResultLabel, userProfitRate1);
-
-            // }
-            // else if (userProfitRate1 < userProfitRate2) {
-            //     loseSp.active = true;
-            //     winSp.active = false;
-            //     this.onResultAward(2, this.selfResultLabel, userProfitRate1);
-            // }
 
         }
 
@@ -154,34 +130,7 @@ export default class NewClass extends cc.Component {
             }
             let stages = GameCfgText.gameTextCfg.pk;
             let ex;
-            // //消极
-            // if (userProfitRate2 == -999 && this.gameResult.players[0].ops.items.length == 0) {
-            //     loseSp.active = true;
-            //     winSp.active = false;
-            //     xj.active = true;
-            //     this.onResultAward(3, this.otherResultLabel, userProfitRate2)
-            //     ex = stages.lose[1].v;
-            // }
-            // //逃跑
-            // else if (this.gameResult.players[1].giveup) {
-            //     loseSp.active = true;
-            //     winSp.active = false;
-            //     taopao.active = true;
-            //     this.onResultAward(4, this.otherResultLabel, userProfitRate2)
-            //     ex = stages.lose[1].v;
-            // }
-            // else if (userProfitRate1 < userProfitRate2) {
-            //     loseSp.active = false;
-            //     winSp.active = true;
-            //     this.onResultAward(1, this.otherResultLabel, userProfitRate2)
-            //     ex = stages.win[1].v;
-            // }
-            // else if (userProfitRate1 > userProfitRate2) {
-            //     loseSp.active = true;
-            //     winSp.active = false;
-            //     this.onResultAward(2, otherResultLabel userProfitRate2)
-            //     ex = stages.lose[1].v;
-            // }
+
             if (this.gameResult.players[1].result.rank == 2) {
                 loseSp.active = true;
                 winSp.active = false;
@@ -222,7 +171,11 @@ export default class NewClass extends cc.Component {
             let ArrWin = GameCfgText.gameTextCfg.pk.win;
             ArrWin.forEach(e => {
                 if (e.i == pb.GamePropertyId.Gold) {
+
                     arr[0].string = '+ ' + e.v;
+                    if (GameData.JJCapital) {
+                        arr[0].string = '+' + GameData.JJCapital * 2;
+                    }
                 }
                 else if (e.i == pb.GamePropertyId.Exp) {
                     arr[1].string = '+ ' + e.v;
@@ -240,6 +193,9 @@ export default class NewClass extends cc.Component {
             Arrlose.forEach(e => {
                 if (e.i == pb.GamePropertyId.Gold) {
                     arr[0].string = '+ ' + e.v;
+                    if (GameData.JJCapital) {
+                        arr[0].string = '-' + GameData.JJCapital * 2;
+                    }
                 }
                 else if (e.i == pb.GamePropertyId.Exp) {
                     arr[1].string = '+ ' + e.v;
@@ -328,7 +284,6 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[0].ops.items)
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
-            //GlobalEvent.emit(EventCfg.PKFUPAN, 1);
         }
         //tr复盘
         else if (name == 'Btn_fupan_other') {
@@ -342,10 +297,6 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[1].ops.items)
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
-            // GlobalEvent.emit(EventCfg.PKFUPAN, 2);
-        }
-        else if (name == 'otheruserInfo') {
-            //  GlobalEvent.emit(EventCfg.OPENOTHERINFOBOX);
 
         }
     }

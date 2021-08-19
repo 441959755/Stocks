@@ -80,14 +80,12 @@ export default class NewClass extends cc.Component {
             })
         }
         if (arr.length > 0) {
-            arr.forEach((el, index) => {
-                if (!this.content1.children[index]) {
-                    let node = cc.instantiate(this.item1);
-                    this.content1.addChild(node);
-                }
-                let handle = this.content1.children[index].getComponent('MnxgItem');
-                handle.onShow(el);
+            let UIScrollControl = this.scorllNode.getComponent('UIScrollControl');
+            UIScrollControl.initControl(this.item1, arr.length, this.item1.getContentSize(), 0, (node, index) => {
+                let handle = node.getComponent('MnxgItem');
+                handle.onShow(arr[index]);
             })
+
             this.tipsNode.active = false;
         }
         else {
@@ -221,8 +219,8 @@ export default class NewClass extends cc.Component {
         GameCfg.GameType = null;
         GlobalEvent.off(EventCfg.CHANGEMNCGACCOUNT);
         GameData.SpStockData = null;
-        this.content1.removeAllChildren();
-        this.content2.removeAllChildren();
+        // this.content1.removeAllChildren();
+        // this.content2.removeAllChildren();
     }
 
 
@@ -276,7 +274,6 @@ export default class NewClass extends cc.Component {
 
         this.zzcLa.string = ComUtils.changeTwoDecimal(zzc) + '';
     }
-
 
 
     onBtnClick(event, data) {
@@ -358,14 +355,12 @@ export default class NewClass extends cc.Component {
             }
 
             if (arr.length > 0) {
-                arr.forEach((el, index) => {
-                    if (!this.content2.children[index]) {
-                        let node = cc.instantiate(this.item2);
-                        this.content2.addChild(node);
-                    }
-                    let handle = this.content2.children[index].getComponent('MnxgItem1');
-                    handle.onShow(el.code, el);
-                });
+                let UIScrollControl = this.scorllNode1.getComponent('UIScrollControl');
+                UIScrollControl.initControl(this.item2, arr.length, this.item2.getContentSize(), 0, (node, index) => {
+                    let handle = node.getComponent('MnxgItem1');
+                    handle.onShow(arr[index].code, arr[index]);
+                })
+
                 this.tipsNode.active = false;
             } else {
                 this.tipsNode.active = true;

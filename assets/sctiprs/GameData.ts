@@ -294,7 +294,7 @@ export default class GameData {
 
     public static CGSConfData = null;
 
-    public static CGSSAVELEVEL = 0;
+    public static CGSSAVELEVEL = null;
 
     public static JJCapital = 0;  //报名费
 
