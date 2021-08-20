@@ -39,7 +39,7 @@ export default class NewClass extends cc.Component {
         }, this);
 
         //订阅
-        this.CmdQuoteSubscribe(true);
+        //   this.CmdQuoteSubscribe(true);
 
     }
 
@@ -62,7 +62,7 @@ export default class NewClass extends cc.Component {
         }
 
         //订阅
-        this.CmdQuoteSubscribe(true);
+        // this.CmdQuoteSubscribe(true);
         this.items = GameCfgText.getGPPKItemInfo(this._code);
 
         if (this.items) {
@@ -104,27 +104,26 @@ export default class NewClass extends cc.Component {
 
 
     onDisable() {
-        this.CmdQuoteSubscribe(false);
+        // this.CmdQuoteSubscribe(false);
         GlobalEvent.off(EventCfg.CMDQUOTITEM);
         GlobalEvent.off(EventCfg.SYNCQUOTEITEM);
     }
 
-    CmdQuoteSubscribe(flag) {
-        if (!this._code) { return }
-        let info = {
-            items: [{ code: this._code + '', flag: flag }],
-        }
+    // CmdQuoteSubscribe(flag) {
+    //     if (!this._code) { return }
+    //     let info = {
+    //         items: [{ code: this._code + '', flag: flag }],
+    //     }
 
-        console.log('订阅：' + JSON.stringify(info));
-        let CmdQuoteSubscribe = pb.CmdQuoteSubscribe;
-        let message = CmdQuoteSubscribe.create(info);
-        let buff = CmdQuoteSubscribe.encode(message).finish();
+    //     console.log('订阅：' + JSON.stringify(info));
+    //     let CmdQuoteSubscribe = pb.CmdQuoteSubscribe;
+    //     let message = CmdQuoteSubscribe.create(info);
+    //     let buff = CmdQuoteSubscribe.encode(message).finish();
 
-        socket.send(pb.MessageId.Req_QuoteSubscribe, buff, info => {
-            console.log('订阅：' + JSON.stringify(info));
-
-        })
-    }
+    //     socket.send(pb.MessageId.Req_QuoteSubscribe, buff, info => {
+    //         console.log('订阅：' + JSON.stringify(info));
+    //     })
+    // }
 
     onBtnClick(event, data) {
         let name = event.target.name;

@@ -33,9 +33,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     startGameNode: cc.Node = null;
 
-    // @property(cc.Node)
-    // otherPlayerInfo: cc.Node = null;
-
     @property(cc.Node)
     CGSFinalLayer: cc.Node = null;
 
@@ -86,9 +83,6 @@ export default class NewClass extends cc.Component {
 
         this.setColor();
 
-        // GlobalEvent.on(EventCfg.OPENOTHERINFOBOX, () => {
-        //     this.otherPlayerInfo.active = true;
-        // }, this);
     }
 
     start() {

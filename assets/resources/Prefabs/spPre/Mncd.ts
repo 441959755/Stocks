@@ -1,4 +1,5 @@
 import { pb } from "../../../protos/proto";
+import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -28,25 +29,49 @@ export default class NewClass extends cc.Component {
         if (GameData.SpStockData && GameData.SpStockData.id) {
             id = GameData.SpStockData.id;
         }
-        let time = parseInt(new Date().getTime() / 1000 + '');
-        let info = {
-            uid: GameData.userID,
-            to: time,
-            pageSize: 200,
-            id: id,
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+            this.hisList = GameData.mncgDataList.orderList.items;
+        }
+        else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+            GameData.cgdsStateList.forEach(el => {
+                if (el.id == GameData.SpStockData.id) {
+                    if (el.state.orderList && el.state.orderList.items) {
+                        this.hisList = el.state.orderList.items;
+                    }
+                }
+            })
         }
 
-        let CmdQueryStockOrder = pb.CmdQueryStockOrder;
-        let message = CmdQueryStockOrder.create(info);
-        let buff = CmdQueryStockOrder.encode(message).finish();
+        // let time = parseInt(new Date().getTime() / 1000 + '');
+        // let info = {
+        //     uid: GameData.userID,
+        //     to: time,
+        //     pageSize: 200,
+        //     id: id,
+        // }
 
-        socket.send(pb.MessageId.Req_Game_OrderQuery, buff, (res) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            console.log('查询交易记录' + JSON.stringify(res));
-            this.hisList = res.items;
+        // let CmdQueryStockOrder = pb.CmdQueryStockOrder;
+        // let message = CmdQueryStockOrder.create(info);
+        // let buff = CmdQueryStockOrder.encode(message).finish();
 
+        // socket.send(pb.MessageId.Req_Game_OrderQuery, buff, (res) => {
+        //     console.log('查询交易记录' + JSON.stringify(res));
+
+        //     this.hisList = [];
+        //     res.items.forEach(element => {
+        //         if (element.state == pb.OrderState.Init) {
+        //             this.hisList.push(element);
+        //         }
+
+        //     });
+        //     // if (res.state == pb.OrderState.Init) {
+        //     //     this.hisList = res.items;
+        setTimeout(() => {
             this.createItem();
-        })
+        }, 300)
+
+        //     // }
+        // })
     }
 
     onDisable() {
@@ -59,6 +84,7 @@ export default class NewClass extends cc.Component {
             let handle = node.getComponent('MncdItem');
             handle.onShow(this.hisList[index]);
         })
+        GlobalEvent.emit(EventCfg.LOADINGHIDE);
     }
 
     onBtnClick(event, data) {

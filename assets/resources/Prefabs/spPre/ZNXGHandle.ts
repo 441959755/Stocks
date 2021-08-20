@@ -77,7 +77,7 @@ export default class NewClass extends cc.Component {
         let data = {
             //    rankFrom: 1,
             tsUpdateFrom: parseInt(new Date().getTime() / 1000 + ''),
-            total: 100,
+            total: 200,
         }
         this.getAIStockList(data);
     }
@@ -161,12 +161,22 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             this.AIStockList = [];
-            this.AIStockList = res.items;
+            //this.AIStockList = res.items;
             console.log('查询AI选股的股票列表' + JSON.stringify(res));
+            let time = new Date().getTime() / 1000;
+
+            res.items.forEach(el => {
+                if (el.todaySignal < 0 && (time - el.tsUpdated) <= 48 * 60 * 60) {
+                    this.AIStockList.push(el);
+                }
+
+            });
+
+
             let UIScrollControl = this.scrollview.getComponent('UIScrollControl');
-            UIScrollControl.initControl(this.preItem, res.items.length, this.preItem.getContentSize(), 0, (node, index) => {
+            UIScrollControl.initControl(this.preItem, this.AIStockList.length, this.preItem.getContentSize(), 0, (node, index) => {
                 let handle = node.getComponent('ZnxgItem');
-                handle.onShow(res.items[index], index);
+                handle.onShow(this.AIStockList[index], index);
             })
 
         })

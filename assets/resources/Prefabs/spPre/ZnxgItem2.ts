@@ -16,10 +16,13 @@ export default class NewClass extends cc.Component {
     _curData = null;
 
     onShow(data, index) {
-
+        let code = data.code + '';
+        if (code.length >= 7) {
+            code = code.slice(1);
+        }
         this._curData = data;
         this.label[0].string = index;
-        this.label[1].string = this._curData.code || '--';
+        this.label[1].string = code || '--';
         this.label[2].string = this._curData.name || '--';
         this.label[3].string = this._curData.lastAskPrice || '--';
         this.label[4].string = this._curData.lastBidPrice || '--';

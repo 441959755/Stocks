@@ -207,7 +207,7 @@ export default class NewClass extends cc.Component {
             if (GameData.SpStockData && GameData.SpStockData.id) {
                 id = GameData.SpStockData.id;
             }
-
+            this.curData.price = ComUtils.changeTwoDecimal(this.curData.price);
             let info = {
                 code: this.curData.code,
                 type: pb.OrderType.AskLimit,

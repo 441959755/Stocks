@@ -161,7 +161,10 @@ export default class NewClass extends cc.Component {
 		if (GameData.selfEnterRoomData) {
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			GameCfg.GameSet = GameData.JJPKSet;
+
 			GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameData.selfEnterRoomData);
+			GlobalHandle.RoomGameDataSelf(GameData.selfEnterRoomData);
+
 			GameData.roomId = GameData.selfEnterRoomData.id;
 			GameCfg.GAMEFRTD = true;
 			if (!GameData.RoomType) {

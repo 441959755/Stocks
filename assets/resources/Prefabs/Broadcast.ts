@@ -50,7 +50,7 @@ export default class NewClass extends cc.Component {
         }, 5000);
     }
 
-    onBtnClick(event, data) {
+    onBtnClick(event, curData) {
         let name = event.target.name;
         if (name == 'main_gg_join') {
             let arr = ComUtils.getJJXunXian();

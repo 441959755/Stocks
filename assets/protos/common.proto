@@ -158,7 +158,15 @@ enum MessageId {
 	Rep_Hall_GetFameRanking = 3042;			// 查询威望排行应答：RankingList
 	Req_Hall_GetFameRankingWeekly = 3043;	// 查询威望周排行：无包体
 	Rep_Hall_GetFameRankingWeekly = 3044;	// 查询威望周排行应答：RankingList
+	Req_Hall_GetActivityLogs = 3045;		// 查询参与过的活动：无包体
+	Rep_Hall_GetActivityLogs = 3046;		// 查询参与过的活动：ActivityLogs
+	Req_Hall_GetDailyAdAward = 3047;		// 领取每日看广告奖励：无包体
+	Rep_Hall_GetDailyAdAward = 3048;		// 领取每日看广告奖励应答：无
+	Req_Hall_Get7Award = 3049;				// 领取7次奖励：CmdGetDailyAward
+	Rep_Hall_Get7Award = 3050;				// 领取7次奖励应答：无
 
+	Req_Hall_Unregistry = 3997;				// 注销账号
+	Rep_Hall_Unregistry = 3998;				// 注销账号应答：ErrorInfo（注销成功后会自动断开tcp长连接）
 	Req_Hall_Logout = 3999;					// 登出：无
 	Rep_Hall_Logout = 4000;					// 登出应答：无（发送请求成功后会自动断开tcp长连接）
 

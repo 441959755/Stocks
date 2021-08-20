@@ -107,7 +107,9 @@ export default class NewClass extends cc.Component {
                 winSp.active = true;
                 this.onResultAward(1, this.selfResultLabel, this.gameResult.players[0].result.userProfitRate);
             }
-
+            else {
+                this.onResultAward(3, this.selfResultLabel, this.gameResult.players[0].result.userProfitRate);
+            }
         }
 
         {
@@ -144,6 +146,10 @@ export default class NewClass extends cc.Component {
                 ex = stages.win[1].v;
                 this.onResultAward(1, this.otherResultLabel, this.gameResult.players[1].result.userProfitRate);
             }
+            else {
+                ex = stages.draw[1].v;
+                this.onResultAward(3, this.otherResultLabel, this.gameResult.players[1].result.userProfitRate);
+            }
 
 
             ex = this.gameResult.players[1].gd.properties[pb.GamePropertyId.Exp] + ex;
@@ -166,8 +172,8 @@ export default class NewClass extends cc.Component {
     }
 
     onResultAward(status, arr, Rate) {
+        //胜利
         if (status == 1) {
-
             let ArrWin = GameCfgText.gameTextCfg.pk.win;
             ArrWin.forEach(e => {
                 if (e.i == pb.GamePropertyId.Gold) {
@@ -188,7 +194,8 @@ export default class NewClass extends cc.Component {
             });
 
         }
-        else if (status == 2 || status == 3 || status == 4) {
+        //失败
+        else if (status == 2) {
             let Arrlose = GameCfgText.gameTextCfg.pk.lose;
             Arrlose.forEach(e => {
                 if (e.i == pb.GamePropertyId.Gold) {
@@ -207,7 +214,27 @@ export default class NewClass extends cc.Component {
                 }
             });
         }
-        if (status == 2 || status == 1) {
+        //平局
+        else if (status == 3) {
+            let Arrlose = GameCfgText.gameTextCfg.pk.draw;
+            Arrlose.forEach(e => {
+                if (e.i == pb.GamePropertyId.Gold) {
+                    arr[0].string = '+ ' + e.v;
+                    if (GameData.JJCapital) {
+                        arr[0].string = '-' + GameData.JJCapital * 2;
+                    }
+                }
+                else if (e.i == pb.GamePropertyId.Exp) {
+                    arr[1].string = '+ ' + e.v;
+
+                }
+                else if (e.i == pb.GamePropertyId.Fame) {
+                    arr[2].string = "" + e.v;
+                    arr[2].node.color = cc.Color.GREEN;
+                }
+            });
+        }
+        if (status == 2 || status == 1 || status == 3) {
             if (Rate > 0) {
                 arr[3].node.color = cc.Color.RED;
             } else {

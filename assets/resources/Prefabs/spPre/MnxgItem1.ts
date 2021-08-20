@@ -35,10 +35,11 @@ export default class NewClass extends cc.Component {
             if (data.code == this._code) {
                 this.setLabel(data);
             }
+            // GlobalEvent.emit(EventCfg.UPDATESPZICHAN)
         }, this);
 
         //订阅
-        this.CmdQuoteSubscribe(true);
+        // this.CmdQuoteSubscribe(true);
     }
 
     setLabel(info) {
@@ -90,7 +91,7 @@ export default class NewClass extends cc.Component {
         }
 
         //订阅
-        this.CmdQuoteSubscribe(true);
+        //    this.CmdQuoteSubscribe(true);
 
         let items = GameCfgText.getGPPKItemInfo(this._code);
         if (items) {
@@ -103,25 +104,25 @@ export default class NewClass extends cc.Component {
         this.labels[0].string = code;
     }
 
-    CmdQuoteSubscribe(flag) {
-        if (!this._code) { return }
-        let info = {
-            items: [{ code: this._code + '', flag: flag }],
-        }
+    // CmdQuoteSubscribe(flag) {
+    //     if (!this._code) { return }
+    //     let info = {
+    //         items: [{ code: this._code + '', flag: flag }],
+    //     }
 
-        console.log('订阅：' + JSON.stringify(info));
-        let CmdQuoteSubscribe = pb.CmdQuoteSubscribe;
-        let message = CmdQuoteSubscribe.create(info);
-        let buff = CmdQuoteSubscribe.encode(message).finish();
+    //     console.log('订阅：' + JSON.stringify(info));
+    //     let CmdQuoteSubscribe = pb.CmdQuoteSubscribe;
+    //     let message = CmdQuoteSubscribe.create(info);
+    //     let buff = CmdQuoteSubscribe.encode(message).finish();
 
-        socket.send(pb.MessageId.Req_QuoteSubscribe, buff, info => {
-            console.log('订阅：' + JSON.stringify(info));
+    //     socket.send(pb.MessageId.Req_QuoteSubscribe, buff, info => {
+    //         console.log('订阅：' + JSON.stringify(info));
 
-        })
-    }
+    //     })
+    // }
 
     onDisable() {
-        this.CmdQuoteSubscribe(false);
+        // this.CmdQuoteSubscribe(false);
         GlobalEvent.off(EventCfg.CMDQUOTITEM);
         GlobalEvent.off(EventCfg.SYNCQUOTEITEM);
     }

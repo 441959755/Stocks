@@ -38,6 +38,9 @@ export default class NewClass extends cc.Component {
 
     onShow(code, name, from) {
         this.code = code;
+        if (code.length >= 7) {
+            code = code.slice(1);
+        }
         this.from = from;
         this.xlname.string = '前往定向训练场训练该股票';
         this.codename.string = code + '     ' + name;
@@ -69,7 +72,6 @@ export default class NewClass extends cc.Component {
                     to: 0,
                 }
 
-
             }
             else {
                 data = {
@@ -77,7 +79,7 @@ export default class NewClass extends cc.Component {
                     kstyle: pb.KStyle.Random,
                     from: this.from,
                     code: this.code,
-                    total: 150,
+                    total: 150 + 1,
                     to: 0,
                 }
 

@@ -97,7 +97,7 @@ export default class NewClass extends cc.Component {
                 xj.active = true;
                 loseSp.active = true;
             }
-            else if (GameCfg.allRate < GameCfg.RoomGameData.players[1].result.userProfitRate) {
+            else if (GameCfg.allRate <= GameCfg.RoomGameData.players[1].result.userProfitRate) {
                 this.selfRank = 2;
                 loseSp.active = true;
             }

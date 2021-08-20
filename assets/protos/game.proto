@@ -137,8 +137,8 @@ enum GameOperationId {
 	Hold = 4;					// 持有
 	Bid_Force = 5;				// 强制卖出
 	Ask_Force = 6;				// 强制买入
-	Long = 8;					// 买空
-	Short = 9;					// 卖空
+	Short = 8;					// 卖空
+	Long = 9;					// 买空
 
 	END = 150;					// 回合结束
 }
@@ -279,6 +279,8 @@ message GameData {
 	string mobile = 17;								// 绑定手机号
 	repeated int32 ai_stock_list = 18;				// 智能选股收藏股票列表
 	repeated CgdsStockListItem cgds_stock_list = 19;// 参与中的所有炒股大赛的关注股票列表
+	int32 today_adtimes = 20;						// 每日点击广告次数
+	repeated int32 award7 = 21;						// 7次奖励：7个日期，格式YYYYMMDD
 }
 
 
@@ -387,6 +389,7 @@ message CmdStudyProgress {
 // 领取日常任务奖励
 message CmdGetDailyAward {
 	int32 index = 1;	// 任务下标
+	bool ad_clicked = 2;// 是否在观看广告后领取
 }
 // 更新日常任务进度
 message CmdDailyTaskProgress {
@@ -442,6 +445,7 @@ message CmdGetSmxlReportReply {
 	int32 count = 10;			// 总共游戏次数
 	float rank_captial = 11;	// 资本金击败百分比
 	float rank_rate = 12;		// 盈利率击败百分比
+	int32 ts = 13;				// 月报时间：格式YYYYMM
 }
 
 
@@ -821,6 +825,7 @@ message CmdShopOrderReply {
 	ErrorInfo result = 1;	// 结果
 	int64 order_id = 2;		// 订单ID
 	string wx_xml = 3;		// 微信支付参数
+	PaymentType pay_type= 4;// 支付方式：微信支付、苹果支付
 }
 message CmdShopOrderQuery {
 	int32 uid = 1;			// 玩家ID
@@ -847,4 +852,7 @@ message ActivityItem {
 }
 message ActivityConf {
 	repeated ActivityItem items = 1;
+}
+message ActivityLogs {
+	repeated int32 ids = 1;
 }

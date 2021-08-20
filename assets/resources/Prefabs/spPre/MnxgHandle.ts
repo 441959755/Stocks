@@ -60,7 +60,10 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     sp_topbtn_phb: cc.Node = null;
 
+    // _curArr = [];
+
     onEnable() {
+
         GlobalEvent.on(EventCfg.ADDZXGP, this.onAddZx.bind(this), this);
 
         //跟新资产数据
@@ -91,6 +94,8 @@ export default class NewClass extends cc.Component {
         else {
             this.tipsNode.active = true;
         }
+
+        this.CmdQuoteSubscribe(true);
     }
 
     onShow(data?) {
@@ -113,8 +118,6 @@ export default class NewClass extends cc.Component {
         let shen = 1399001;
         let lu = '1';
         this.onAddZx();
-
-
 
         //初始资产数据
         this.onUpdateMycgData();
@@ -143,6 +146,8 @@ export default class NewClass extends cc.Component {
             else if (data.code == lu) {
                 this.onUpdateSLLabel(data, this.lNode);
             }
+
+            //   else if ()
 
         }, this);
 
@@ -193,11 +198,46 @@ export default class NewClass extends cc.Component {
 
 
     CmdQuoteSubscribe(flag) {
+        let arr1, arr2;
+
+        arr1 = [];
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+            arr1 = GameData.selfStockList;
+        }
+        else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+            GameData.cgdsStockList.forEach(el => {
+                if (el.id == GameData.SpStockData.id) {
+                    arr1 = el.stockList;
+                }
+            })
+        }
+
+        arr2 = [];
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+            arr2 = GameData.mncgDataList.positionList.items;
+        }
+        else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+            GameData.cgdsStateList.forEach(el => {
+                if (el.id == GameData.SpStockData.id) {
+                    if (el.state.positionList && el.state.positionList.items) {
+                        arr2 = el.state.positionList.items;
+                    }
+                }
+            })
+        }
+
+        let arr = arr1.concat(arr2);
         {
             let info = {
                 items: [{ code: '1399001', flag: flag },
                 { code: '1', flag: flag }],
             }
+
+            arr.forEach(el => {
+                info.items.push({ code: el, flag })
+            });
+
+            console.log('arr' + JSON.stringify(arr));
 
             console.log('订阅：' + JSON.stringify(info));
             let CmdQuoteSubscribe = pb.CmdQuoteSubscribe;
@@ -235,8 +275,8 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
             data = GameData.mncgDataList;
         }
+
         else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
-            //  data = GameData.cgdsStateList;
             GameData.cgdsStateList.forEach(el => {
                 if (el.id == GameData.SpStockData.id) {
                     data = el.state;
@@ -244,7 +284,7 @@ export default class NewClass extends cc.Component {
             })
         }
 
-        this.kczcLa.string = (data.account || 0) + '';
+        this.kczcLa.string = parseInt(data.account + '') + '';
         let wt = 0, cc = 0;
         if (data.orderList && data.orderList.items) {
             data.orderList.items.forEach(el => {
@@ -253,7 +293,7 @@ export default class NewClass extends cc.Component {
                 }
 
             });
-            this.wtzcLa.string = ComUtils.changeTwoDecimal(wt) + '';
+            this.wtzcLa.string = parseInt(wt + '') + '';
         }
         else {
             this.wtzcLa.string = '0';
@@ -264,7 +304,7 @@ export default class NewClass extends cc.Component {
                 cc += (el.volume * el.priceCost);
 
             });
-            this.cczcLa.string = ComUtils.changeTwoDecimal(cc) + '';
+            this.cczcLa.string = parseInt(cc + '') + '';
         }
         else {
             this.cczcLa.string = '0';
@@ -272,7 +312,7 @@ export default class NewClass extends cc.Component {
 
         let zzc = (data.account || 0) + cc + wt;
 
-        this.zzcLa.string = ComUtils.changeTwoDecimal(zzc) + '';
+        this.zzcLa.string = parseInt(zzc + '') + '';
     }
 
 

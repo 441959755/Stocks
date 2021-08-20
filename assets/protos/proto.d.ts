@@ -127,6 +127,14 @@ export namespace pb {
         Rep_Hall_GetFameRanking = 3042,
         Req_Hall_GetFameRankingWeekly = 3043,
         Rep_Hall_GetFameRankingWeekly = 3044,
+        Req_Hall_GetActivityLogs = 3045,
+        Rep_Hall_GetActivityLogs = 3046,
+        Req_Hall_GetDailyAdAward = 3047,
+        Rep_Hall_GetDailyAdAward = 3048,
+        Req_Hall_Get7Award = 3049,
+        Rep_Hall_Get7Award = 3050,
+        Req_Hall_Unregistry = 3997,
+        Rep_Hall_Unregistry = 3998,
         Req_Hall_Logout = 3999,
         Rep_Hall_Logout = 4000,
         Req_Game_Login = 4001,
@@ -217,10 +225,10 @@ export namespace pb {
     interface IMessageHead {
 
         /** MessageHead messageId */
-        messageId?: (number | null);
+        messageId?: (number|null);
 
         /** MessageHead messageLen */
-        messageLen?: (number | null);
+        messageLen?: (number|null);
     }
 
     /** Represents a MessageHead. */
@@ -269,7 +277,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.MessageHead;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.MessageHead;
 
         /**
          * Decodes a MessageHead message from the specified reader or buffer, length delimited.
@@ -278,14 +286,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.MessageHead;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.MessageHead;
 
         /**
          * Verifies a MessageHead message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a MessageHead message from a plain object. Also converts values to their respective internal types.
@@ -313,10 +321,10 @@ export namespace pb {
     interface IErrorInfo {
 
         /** ErrorInfo code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** ErrorInfo err */
-        err?: (string | null);
+        err?: (string|null);
     }
 
     /** Represents an ErrorInfo. */
@@ -365,7 +373,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.ErrorInfo;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ErrorInfo;
 
         /**
          * Decodes an ErrorInfo message from the specified reader or buffer, length delimited.
@@ -374,14 +382,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.ErrorInfo;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ErrorInfo;
 
         /**
          * Verifies an ErrorInfo message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an ErrorInfo message from a plain object. Also converts values to their respective internal types.
@@ -449,7 +457,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.VoidRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.VoidRequest;
 
         /**
          * Decodes a VoidRequest message from the specified reader or buffer, length delimited.
@@ -458,14 +466,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.VoidRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.VoidRequest;
 
         /**
          * Verifies a VoidRequest message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a VoidRequest message from a plain object. Also converts values to their respective internal types.
@@ -533,7 +541,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.VoidReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.VoidReply;
 
         /**
          * Decodes a VoidReply message from the specified reader or buffer, length delimited.
@@ -542,14 +550,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.VoidReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.VoidReply;
 
         /**
          * Verifies a VoidReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a VoidReply message from a plain object. Also converts values to their respective internal types.
@@ -672,8 +680,8 @@ export namespace pb {
         Hold = 4,
         Bid_Force = 5,
         Ask_Force = 6,
-        Long = 8,
-        Short = 9,
+        Short = 8,
+        Long = 9,
         END = 150
     }
 
@@ -717,13 +725,13 @@ export namespace pb {
     interface IBackbagGrid {
 
         /** BackbagGrid properties */
-        properties?: (string | null);
+        properties?: (string|null);
 
         /** BackbagGrid ts */
-        ts?: (number | Long | null);
+        ts?: (number|Long|null);
 
         /** BackbagGrid memo */
-        memo?: (string | null);
+        memo?: (string|null);
     }
 
     /** Represents a BackbagGrid. */
@@ -739,7 +747,7 @@ export namespace pb {
         public properties: string;
 
         /** BackbagGrid ts. */
-        public ts: (number | Long);
+        public ts: (number|Long);
 
         /** BackbagGrid memo. */
         public memo: string;
@@ -775,7 +783,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.BackbagGrid;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.BackbagGrid;
 
         /**
          * Decodes a BackbagGrid message from the specified reader or buffer, length delimited.
@@ -784,14 +792,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.BackbagGrid;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.BackbagGrid;
 
         /**
          * Verifies a BackbagGrid message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a BackbagGrid message from a plain object. Also converts values to their respective internal types.
@@ -819,7 +827,7 @@ export namespace pb {
     interface IBackbag {
 
         /** Backbag grids */
-        grids?: (pb.IBackbagGrid[] | null);
+        grids?: (pb.IBackbagGrid[]|null);
     }
 
     /** Represents a Backbag. */
@@ -865,7 +873,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.Backbag;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.Backbag;
 
         /**
          * Decodes a Backbag message from the specified reader or buffer, length delimited.
@@ -874,14 +882,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.Backbag;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.Backbag;
 
         /**
          * Verifies a Backbag message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a Backbag message from a plain object. Also converts values to their respective internal types.
@@ -909,13 +917,13 @@ export namespace pb {
     interface IGameCounter {
 
         /** GameCounter game */
-        game?: (pb.GameType | null);
+        game?: (pb.GameType|null);
 
         /** GameCounter win */
-        win?: (number | null);
+        win?: (number|null);
 
         /** GameCounter lose */
-        lose?: (number | null);
+        lose?: (number|null);
     }
 
     /** Represents a GameCounter. */
@@ -967,7 +975,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.GameCounter;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.GameCounter;
 
         /**
          * Decodes a GameCounter message from the specified reader or buffer, length delimited.
@@ -976,14 +984,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.GameCounter;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.GameCounter;
 
         /**
          * Verifies a GameCounter message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a GameCounter message from a plain object. Also converts values to their respective internal types.
@@ -1011,7 +1019,7 @@ export namespace pb {
     interface IGameCounters {
 
         /** GameCounters items */
-        items?: (pb.IGameCounter[] | null);
+        items?: (pb.IGameCounter[]|null);
     }
 
     /** Represents a GameCounters. */
@@ -1057,7 +1065,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.GameCounters;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.GameCounters;
 
         /**
          * Decodes a GameCounters message from the specified reader or buffer, length delimited.
@@ -1066,14 +1074,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.GameCounters;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.GameCounters;
 
         /**
          * Verifies a GameCounters message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a GameCounters message from a plain object. Also converts values to their respective internal types.
@@ -1101,7 +1109,7 @@ export namespace pb {
     interface ITodayGameTimes {
 
         /** TodayGameTimes counter */
-        counter?: (number[] | null);
+        counter?: (number[]|null);
     }
 
     /** Represents a TodayGameTimes. */
@@ -1147,7 +1155,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.TodayGameTimes;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.TodayGameTimes;
 
         /**
          * Decodes a TodayGameTimes message from the specified reader or buffer, length delimited.
@@ -1156,14 +1164,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.TodayGameTimes;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.TodayGameTimes;
 
         /**
          * Verifies a TodayGameTimes message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a TodayGameTimes message from a plain object. Also converts values to their respective internal types.
@@ -1191,28 +1199,28 @@ export namespace pb {
     interface ISmxlState {
 
         /** SmxlState resetTs */
-        resetTs?: (number | Long | null);
+        resetTs?: (number|Long|null);
 
         /** SmxlState resetCounter */
-        resetCounter?: (number | null);
+        resetCounter?: (number|null);
 
         /** SmxlState resetTsPremonth */
-        resetTsPremonth?: (number | Long | null);
+        resetTsPremonth?: (number|Long|null);
 
         /** SmxlState lastMonthReportTs */
-        lastMonthReportTs?: (number | Long | null);
+        lastMonthReportTs?: (number|Long|null);
 
         /** SmxlState goldInit */
-        goldInit?: (number | Long | null);
+        goldInit?: (number|Long|null);
 
         /** SmxlState gold */
-        gold?: (number | Long | null);
+        gold?: (number|Long|null);
 
         /** SmxlState todayTs */
-        todayTs?: (number | Long | null);
+        todayTs?: (number|Long|null);
 
         /** SmxlState todayTimes */
-        todayTimes?: (number | null);
+        todayTimes?: (number|null);
     }
 
     /** Represents a SmxlState. */
@@ -1225,25 +1233,25 @@ export namespace pb {
         constructor(properties?: pb.ISmxlState);
 
         /** SmxlState resetTs. */
-        public resetTs: (number | Long);
+        public resetTs: (number|Long);
 
         /** SmxlState resetCounter. */
         public resetCounter: number;
 
         /** SmxlState resetTsPremonth. */
-        public resetTsPremonth: (number | Long);
+        public resetTsPremonth: (number|Long);
 
         /** SmxlState lastMonthReportTs. */
-        public lastMonthReportTs: (number | Long);
+        public lastMonthReportTs: (number|Long);
 
         /** SmxlState goldInit. */
-        public goldInit: (number | Long);
+        public goldInit: (number|Long);
 
         /** SmxlState gold. */
-        public gold: (number | Long);
+        public gold: (number|Long);
 
         /** SmxlState todayTs. */
-        public todayTs: (number | Long);
+        public todayTs: (number|Long);
 
         /** SmxlState todayTimes. */
         public todayTimes: number;
@@ -1279,7 +1287,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.SmxlState;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.SmxlState;
 
         /**
          * Decodes a SmxlState message from the specified reader or buffer, length delimited.
@@ -1288,14 +1296,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.SmxlState;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.SmxlState;
 
         /**
          * Verifies a SmxlState message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a SmxlState message from a plain object. Also converts values to their respective internal types.
@@ -1323,13 +1331,13 @@ export namespace pb {
     interface ICgLogAward {
 
         /** CgLogAward stage */
-        stage?: (number | null);
+        stage?: (number|null);
 
         /** CgLogAward awarded */
-        awarded?: (boolean | null);
+        awarded?: (boolean|null);
 
         /** CgLogAward gotten */
-        gotten?: (boolean | null);
+        gotten?: (boolean|null);
     }
 
     /** Represents a CgLogAward. */
@@ -1381,7 +1389,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CgLogAward;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CgLogAward;
 
         /**
          * Decodes a CgLogAward message from the specified reader or buffer, length delimited.
@@ -1390,14 +1398,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CgLogAward;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CgLogAward;
 
         /**
          * Verifies a CgLogAward message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CgLogAward message from a plain object. Also converts values to their respective internal types.
@@ -1425,28 +1433,28 @@ export namespace pb {
     interface ICgState {
 
         /** CgState seasonId */
-        seasonId?: (number | Long | null);
+        seasonId?: (number|Long|null);
 
         /** CgState stage */
-        stage?: (number | null);
+        stage?: (number|null);
 
         /** CgState progress */
-        progress?: (number | null);
+        progress?: (number|null);
 
         /** CgState lifes */
-        lifes?: (number | null);
+        lifes?: (number|null);
 
         /** CgState win */
-        win?: (number | null);
+        win?: (number|null);
 
         /** CgState lose */
-        lose?: (number | null);
+        lose?: (number|null);
 
         /** CgState clearance */
-        clearance?: (boolean | null);
+        clearance?: (boolean|null);
 
         /** CgState awards */
-        awards?: (pb.ICgLogAward[] | null);
+        awards?: (pb.ICgLogAward[]|null);
     }
 
     /** Represents a CgState. */
@@ -1459,7 +1467,7 @@ export namespace pb {
         constructor(properties?: pb.ICgState);
 
         /** CgState seasonId. */
-        public seasonId: (number | Long);
+        public seasonId: (number|Long);
 
         /** CgState stage. */
         public stage: number;
@@ -1513,7 +1521,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CgState;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CgState;
 
         /**
          * Decodes a CgState message from the specified reader or buffer, length delimited.
@@ -1522,14 +1530,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CgState;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CgState;
 
         /**
          * Verifies a CgState message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CgState message from a plain object. Also converts values to their respective internal types.
@@ -1557,16 +1565,16 @@ export namespace pb {
     interface IMncgState {
 
         /** MncgState account */
-        account?: (number | null);
+        account?: (number|null);
 
         /** MncgState orderList */
-        orderList?: (pb.IStockOrderList | null);
+        orderList?: (pb.IStockOrderList|null);
 
         /** MncgState positionList */
-        positionList?: (pb.IStockPositionList | null);
+        positionList?: (pb.IStockPositionList|null);
 
         /** MncgState stockList */
-        stockList?: (number[] | null);
+        stockList?: (number[]|null);
     }
 
     /** Represents a MncgState. */
@@ -1582,10 +1590,10 @@ export namespace pb {
         public account: number;
 
         /** MncgState orderList. */
-        public orderList?: (pb.IStockOrderList | null);
+        public orderList?: (pb.IStockOrderList|null);
 
         /** MncgState positionList. */
-        public positionList?: (pb.IStockPositionList | null);
+        public positionList?: (pb.IStockPositionList|null);
 
         /** MncgState stockList. */
         public stockList: number[];
@@ -1621,7 +1629,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.MncgState;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.MncgState;
 
         /**
          * Decodes a MncgState message from the specified reader or buffer, length delimited.
@@ -1630,14 +1638,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.MncgState;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.MncgState;
 
         /**
          * Verifies a MncgState message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a MncgState message from a plain object. Also converts values to their respective internal types.
@@ -1665,10 +1673,10 @@ export namespace pb {
     interface ICgdsStateItem {
 
         /** CgdsStateItem id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** CgdsStateItem state */
-        state?: (pb.IMncgState | null);
+        state?: (pb.IMncgState|null);
     }
 
     /** Represents a CgdsStateItem. */
@@ -1684,7 +1692,7 @@ export namespace pb {
         public id: number;
 
         /** CgdsStateItem state. */
-        public state?: (pb.IMncgState | null);
+        public state?: (pb.IMncgState|null);
 
         /**
          * Creates a new CgdsStateItem instance using the specified properties.
@@ -1717,7 +1725,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CgdsStateItem;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CgdsStateItem;
 
         /**
          * Decodes a CgdsStateItem message from the specified reader or buffer, length delimited.
@@ -1726,14 +1734,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CgdsStateItem;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CgdsStateItem;
 
         /**
          * Verifies a CgdsStateItem message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CgdsStateItem message from a plain object. Also converts values to their respective internal types.
@@ -1761,7 +1769,7 @@ export namespace pb {
     interface ICgdsState {
 
         /** CgdsState items */
-        items?: (pb.ICgdsStateItem[] | null);
+        items?: (pb.ICgdsStateItem[]|null);
     }
 
     /** Represents a CgdsState. */
@@ -1807,7 +1815,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CgdsState;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CgdsState;
 
         /**
          * Decodes a CgdsState message from the specified reader or buffer, length delimited.
@@ -1816,14 +1824,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CgdsState;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CgdsState;
 
         /**
          * Verifies a CgdsState message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CgdsState message from a plain object. Also converts values to their respective internal types.
@@ -1851,10 +1859,10 @@ export namespace pb {
     interface ICgdsStockListItem {
 
         /** CgdsStockListItem id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** CgdsStockListItem stockList */
-        stockList?: (number[] | null);
+        stockList?: (number[]|null);
     }
 
     /** Represents a CgdsStockListItem. */
@@ -1903,7 +1911,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CgdsStockListItem;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CgdsStockListItem;
 
         /**
          * Decodes a CgdsStockListItem message from the specified reader or buffer, length delimited.
@@ -1912,14 +1920,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CgdsStockListItem;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CgdsStockListItem;
 
         /**
          * Verifies a CgdsStockListItem message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CgdsStockListItem message from a plain object. Also converts values to their respective internal types.
@@ -1947,7 +1955,7 @@ export namespace pb {
     interface IZsjcState {
 
         /** ZsjcState items */
-        items?: (pb.IZsjcGameData[] | null);
+        items?: (pb.IZsjcGameData[]|null);
     }
 
     /** Represents a ZsjcState. */
@@ -1993,7 +2001,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.ZsjcState;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ZsjcState;
 
         /**
          * Decodes a ZsjcState message from the specified reader or buffer, length delimited.
@@ -2002,14 +2010,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.ZsjcState;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ZsjcState;
 
         /**
          * Verifies a ZsjcState message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a ZsjcState message from a plain object. Also converts values to their respective internal types.
@@ -2037,10 +2045,10 @@ export namespace pb {
     interface ITasks {
 
         /** Tasks study */
-        study?: (pb.ITaskItem[] | null);
+        study?: (pb.ITaskItem[]|null);
 
         /** Tasks daily */
-        daily?: (pb.ITaskItem[] | null);
+        daily?: (pb.ITaskItem[]|null);
     }
 
     /** Represents a Tasks. */
@@ -2089,7 +2097,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.Tasks;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.Tasks;
 
         /**
          * Decodes a Tasks message from the specified reader or buffer, length delimited.
@@ -2098,14 +2106,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.Tasks;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.Tasks;
 
         /**
          * Verifies a Tasks message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a Tasks message from a plain object. Also converts values to their respective internal types.
@@ -2133,61 +2141,67 @@ export namespace pb {
     interface IGameData {
 
         /** GameData uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** GameData nickname */
-        nickname?: (string | null);
+        nickname?: (string|null);
 
         /** GameData icon */
-        icon?: (string | null);
+        icon?: (string|null);
 
         /** GameData properties */
-        properties?: ((number | Long)[] | null);
+        properties?: ((number|Long)[]|null);
 
         /** GameData counters */
-        counters?: (pb.IGameCounter[] | null);
+        counters?: (pb.IGameCounter[]|null);
 
         /** GameData smlxState */
-        smlxState?: (pb.ISmxlState | null);
+        smlxState?: (pb.ISmxlState|null);
 
         /** GameData cgState */
-        cgState?: (pb.ICgState | null);
+        cgState?: (pb.ICgState|null);
 
         /** GameData today */
-        today?: (number | Long | null);
+        today?: (number|Long|null);
 
         /** GameData todayTimes */
-        todayTimes?: (number[] | null);
+        todayTimes?: (number[]|null);
 
         /** GameData stockList */
-        stockList?: (number[] | null);
+        stockList?: (number[]|null);
 
         /** GameData zsjcState */
-        zsjcState?: (pb.IZsjcState | null);
+        zsjcState?: (pb.IZsjcState|null);
 
         /** GameData location */
-        location?: (string | null);
+        location?: (string|null);
 
         /** GameData gender */
-        gender?: (string | null);
+        gender?: (string|null);
 
         /** GameData favorList */
-        favorList?: (number[] | null);
+        favorList?: (number[]|null);
 
         /** GameData tasks */
-        tasks?: (pb.ITasks | null);
+        tasks?: (pb.ITasks|null);
 
         /** GameData week */
-        week?: (number | null);
+        week?: (number|null);
 
         /** GameData mobile */
-        mobile?: (string | null);
+        mobile?: (string|null);
 
         /** GameData aiStockList */
-        aiStockList?: (number[] | null);
+        aiStockList?: (number[]|null);
 
         /** GameData cgdsStockList */
-        cgdsStockList?: (pb.ICgdsStockListItem[] | null);
+        cgdsStockList?: (pb.ICgdsStockListItem[]|null);
+
+        /** GameData todayAdtimes */
+        todayAdtimes?: (number|null);
+
+        /** GameData award7 */
+        award7?: (number[]|null);
     }
 
     /** Represents a GameData. */
@@ -2209,19 +2223,19 @@ export namespace pb {
         public icon: string;
 
         /** GameData properties. */
-        public properties: (number | Long)[];
+        public properties: (number|Long)[];
 
         /** GameData counters. */
         public counters: pb.IGameCounter[];
 
         /** GameData smlxState. */
-        public smlxState?: (pb.ISmxlState | null);
+        public smlxState?: (pb.ISmxlState|null);
 
         /** GameData cgState. */
-        public cgState?: (pb.ICgState | null);
+        public cgState?: (pb.ICgState|null);
 
         /** GameData today. */
-        public today: (number | Long);
+        public today: (number|Long);
 
         /** GameData todayTimes. */
         public todayTimes: number[];
@@ -2230,7 +2244,7 @@ export namespace pb {
         public stockList: number[];
 
         /** GameData zsjcState. */
-        public zsjcState?: (pb.IZsjcState | null);
+        public zsjcState?: (pb.IZsjcState|null);
 
         /** GameData location. */
         public location: string;
@@ -2242,7 +2256,7 @@ export namespace pb {
         public favorList: number[];
 
         /** GameData tasks. */
-        public tasks?: (pb.ITasks | null);
+        public tasks?: (pb.ITasks|null);
 
         /** GameData week. */
         public week: number;
@@ -2255,6 +2269,12 @@ export namespace pb {
 
         /** GameData cgdsStockList. */
         public cgdsStockList: pb.ICgdsStockListItem[];
+
+        /** GameData todayAdtimes. */
+        public todayAdtimes: number;
+
+        /** GameData award7. */
+        public award7: number[];
 
         /**
          * Creates a new GameData instance using the specified properties.
@@ -2287,7 +2307,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.GameData;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.GameData;
 
         /**
          * Decodes a GameData message from the specified reader or buffer, length delimited.
@@ -2296,14 +2316,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.GameData;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.GameData;
 
         /**
          * Verifies a GameData message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a GameData message from a plain object. Also converts values to their respective internal types.
@@ -2331,13 +2351,13 @@ export namespace pb {
     interface IGamePropertyItem {
 
         /** GamePropertyItem id */
-        id?: (pb.GamePropertyId | null);
+        id?: (pb.GamePropertyId|null);
 
         /** GamePropertyItem oldValue */
-        oldValue?: (number | Long | null);
+        oldValue?: (number|Long|null);
 
         /** GamePropertyItem newValue */
-        newValue?: (number | Long | null);
+        newValue?: (number|Long|null);
     }
 
     /** Represents a GamePropertyItem. */
@@ -2353,10 +2373,10 @@ export namespace pb {
         public id: pb.GamePropertyId;
 
         /** GamePropertyItem oldValue. */
-        public oldValue: (number | Long);
+        public oldValue: (number|Long);
 
         /** GamePropertyItem newValue. */
-        public newValue: (number | Long);
+        public newValue: (number|Long);
 
         /**
          * Creates a new GamePropertyItem instance using the specified properties.
@@ -2389,7 +2409,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.GamePropertyItem;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.GamePropertyItem;
 
         /**
          * Decodes a GamePropertyItem message from the specified reader or buffer, length delimited.
@@ -2398,14 +2418,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.GamePropertyItem;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.GamePropertyItem;
 
         /**
          * Verifies a GamePropertyItem message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a GamePropertyItem message from a plain object. Also converts values to their respective internal types.
@@ -2433,7 +2453,7 @@ export namespace pb {
     interface IGameProperties {
 
         /** GameProperties items */
-        items?: (pb.IGamePropertyItem[] | null);
+        items?: (pb.IGamePropertyItem[]|null);
     }
 
     /** Represents a GameProperties. */
@@ -2479,7 +2499,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.GameProperties;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.GameProperties;
 
         /**
          * Decodes a GameProperties message from the specified reader or buffer, length delimited.
@@ -2488,14 +2508,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.GameProperties;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.GameProperties;
 
         /**
          * Verifies a GameProperties message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a GameProperties message from a plain object. Also converts values to their respective internal types.
@@ -2523,28 +2543,28 @@ export namespace pb {
     interface IGameOperationItem {
 
         /** GameOperationItem opId */
-        opId?: (pb.GameOperationId | null);
+        opId?: (pb.GameOperationId|null);
 
         /** GameOperationItem code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** GameOperationItem kType */
-        kType?: (pb.KType | null);
+        kType?: (pb.KType|null);
 
         /** GameOperationItem kTs */
-        kTs?: (number | Long | null);
+        kTs?: (number|Long|null);
 
         /** GameOperationItem kOffset */
-        kOffset?: (number | null);
+        kOffset?: (number|null);
 
         /** GameOperationItem price */
-        price?: (number | null);
+        price?: (number|null);
 
         /** GameOperationItem volume */
-        volume?: (number | Long | null);
+        volume?: (number|Long|null);
 
         /** GameOperationItem opTs */
-        opTs?: (number | Long | null);
+        opTs?: (number|Long|null);
     }
 
     /** Represents a GameOperationItem. */
@@ -2566,7 +2586,7 @@ export namespace pb {
         public kType: pb.KType;
 
         /** GameOperationItem kTs. */
-        public kTs: (number | Long);
+        public kTs: (number|Long);
 
         /** GameOperationItem kOffset. */
         public kOffset: number;
@@ -2575,10 +2595,10 @@ export namespace pb {
         public price: number;
 
         /** GameOperationItem volume. */
-        public volume: (number | Long);
+        public volume: (number|Long);
 
         /** GameOperationItem opTs. */
-        public opTs: (number | Long);
+        public opTs: (number|Long);
 
         /**
          * Creates a new GameOperationItem instance using the specified properties.
@@ -2611,7 +2631,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.GameOperationItem;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.GameOperationItem;
 
         /**
          * Decodes a GameOperationItem message from the specified reader or buffer, length delimited.
@@ -2620,14 +2640,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.GameOperationItem;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.GameOperationItem;
 
         /**
          * Verifies a GameOperationItem message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a GameOperationItem message from a plain object. Also converts values to their respective internal types.
@@ -2655,10 +2675,10 @@ export namespace pb {
     interface IGameOperations {
 
         /** GameOperations items */
-        items?: (pb.IGameOperationItem[] | null);
+        items?: (pb.IGameOperationItem[]|null);
 
         /** GameOperations junXian */
-        junXian?: (number[] | null);
+        junXian?: (number[]|null);
     }
 
     /** Represents a GameOperations. */
@@ -2707,7 +2727,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.GameOperations;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.GameOperations;
 
         /**
          * Decodes a GameOperations message from the specified reader or buffer, length delimited.
@@ -2716,14 +2736,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.GameOperations;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.GameOperations;
 
         /**
          * Verifies a GameOperations message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a GameOperations message from a plain object. Also converts values to their respective internal types.
@@ -2751,49 +2771,49 @@ export namespace pb {
     interface IGameResult {
 
         /** GameResult uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** GameResult gType */
-        gType?: (pb.GameType | null);
+        gType?: (pb.GameType|null);
 
         /** GameResult quotesCode */
-        quotesCode?: (number | null);
+        quotesCode?: (number|null);
 
         /** GameResult kType */
-        kType?: (pb.KType | null);
+        kType?: (pb.KType|null);
 
         /** GameResult kFrom */
-        kFrom?: (number | Long | null);
+        kFrom?: (number|Long|null);
 
         /** GameResult kTo */
-        kTo?: (number | Long | null);
+        kTo?: (number|Long|null);
 
         /** GameResult stockProfitRate */
-        stockProfitRate?: (number | null);
+        stockProfitRate?: (number|null);
 
         /** GameResult userProfitRate */
-        userProfitRate?: (number | null);
+        userProfitRate?: (number|null);
 
         /** GameResult userCapital */
-        userCapital?: (number | Long | null);
+        userCapital?: (number|Long|null);
 
         /** GameResult userProfit */
-        userProfit?: (number | Long | null);
+        userProfit?: (number|Long|null);
 
         /** GameResult ts */
-        ts?: (number | Long | null);
+        ts?: (number|Long|null);
 
         /** GameResult rank */
-        rank?: (number | null);
+        rank?: (number|null);
 
         /** GameResult refId */
-        refId?: (number | Long | null);
+        refId?: (number|Long|null);
 
         /** GameResult kStartup */
-        kStartup?: (number | Long | null);
+        kStartup?: (number|Long|null);
 
         /** GameResult kStop */
-        kStop?: (number | Long | null);
+        kStop?: (number|Long|null);
     }
 
     /** Represents a GameResult. */
@@ -2818,10 +2838,10 @@ export namespace pb {
         public kType: pb.KType;
 
         /** GameResult kFrom. */
-        public kFrom: (number | Long);
+        public kFrom: (number|Long);
 
         /** GameResult kTo. */
-        public kTo: (number | Long);
+        public kTo: (number|Long);
 
         /** GameResult stockProfitRate. */
         public stockProfitRate: number;
@@ -2830,25 +2850,25 @@ export namespace pb {
         public userProfitRate: number;
 
         /** GameResult userCapital. */
-        public userCapital: (number | Long);
+        public userCapital: (number|Long);
 
         /** GameResult userProfit. */
-        public userProfit: (number | Long);
+        public userProfit: (number|Long);
 
         /** GameResult ts. */
-        public ts: (number | Long);
+        public ts: (number|Long);
 
         /** GameResult rank. */
         public rank: number;
 
         /** GameResult refId. */
-        public refId: (number | Long);
+        public refId: (number|Long);
 
         /** GameResult kStartup. */
-        public kStartup: (number | Long);
+        public kStartup: (number|Long);
 
         /** GameResult kStop. */
-        public kStop: (number | Long);
+        public kStop: (number|Long);
 
         /**
          * Creates a new GameResult instance using the specified properties.
@@ -2881,7 +2901,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.GameResult;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.GameResult;
 
         /**
          * Decodes a GameResult message from the specified reader or buffer, length delimited.
@@ -2890,14 +2910,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.GameResult;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.GameResult;
 
         /**
          * Verifies a GameResult message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a GameResult message from a plain object. Also converts values to their respective internal types.
@@ -2925,10 +2945,10 @@ export namespace pb {
     interface ICmdGameLogin {
 
         /** CmdGameLogin uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdGameLogin token */
-        token?: (string | null);
+        token?: (string|null);
     }
 
     /** Represents a CmdGameLogin. */
@@ -2977,7 +2997,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGameLogin;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGameLogin;
 
         /**
          * Decodes a CmdGameLogin message from the specified reader or buffer, length delimited.
@@ -2986,14 +3006,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGameLogin;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGameLogin;
 
         /**
          * Verifies a CmdGameLogin message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGameLogin message from a plain object. Also converts values to their respective internal types.
@@ -3021,10 +3041,10 @@ export namespace pb {
     interface ICmdGameLoginReply {
 
         /** CmdGameLoginReply result */
-        result?: (pb.IErrorInfo | null);
+        result?: (pb.IErrorInfo|null);
 
         /** CmdGameLoginReply data */
-        data?: (pb.IGameData | null);
+        data?: (pb.IGameData|null);
     }
 
     /** Represents a CmdGameLoginReply. */
@@ -3037,10 +3057,10 @@ export namespace pb {
         constructor(properties?: pb.ICmdGameLoginReply);
 
         /** CmdGameLoginReply result. */
-        public result?: (pb.IErrorInfo | null);
+        public result?: (pb.IErrorInfo|null);
 
         /** CmdGameLoginReply data. */
-        public data?: (pb.IGameData | null);
+        public data?: (pb.IGameData|null);
 
         /**
          * Creates a new CmdGameLoginReply instance using the specified properties.
@@ -3073,7 +3093,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGameLoginReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGameLoginReply;
 
         /**
          * Decodes a CmdGameLoginReply message from the specified reader or buffer, length delimited.
@@ -3082,14 +3102,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGameLoginReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGameLoginReply;
 
         /**
          * Verifies a CmdGameLoginReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGameLoginReply message from a plain object. Also converts values to their respective internal types.
@@ -3117,10 +3137,10 @@ export namespace pb {
     interface ICmdUploadIcon {
 
         /** CmdUploadIcon uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdUploadIcon icon */
-        icon?: (Uint8Array | null);
+        icon?: (Uint8Array|null);
     }
 
     /** Represents a CmdUploadIcon. */
@@ -3169,7 +3189,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdUploadIcon;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdUploadIcon;
 
         /**
          * Decodes a CmdUploadIcon message from the specified reader or buffer, length delimited.
@@ -3178,14 +3198,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdUploadIcon;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdUploadIcon;
 
         /**
          * Verifies a CmdUploadIcon message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdUploadIcon message from a plain object. Also converts values to their respective internal types.
@@ -3213,25 +3233,25 @@ export namespace pb {
     interface IPlayerInfo {
 
         /** PlayerInfo uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** PlayerInfo nick */
-        nick?: (string | null);
+        nick?: (string|null);
 
         /** PlayerInfo icon */
-        icon?: (string | null);
+        icon?: (string|null);
 
         /** PlayerInfo gender */
-        gender?: (string | null);
+        gender?: (string|null);
 
         /** PlayerInfo location */
-        location?: (string | null);
+        location?: (string|null);
 
         /** PlayerInfo properties */
-        properties?: ((number | Long)[] | null);
+        properties?: ((number|Long)[]|null);
 
         /** PlayerInfo counters */
-        counters?: (pb.IGameCounter[] | null);
+        counters?: (pb.IGameCounter[]|null);
     }
 
     /** Represents a PlayerInfo. */
@@ -3259,7 +3279,7 @@ export namespace pb {
         public location: string;
 
         /** PlayerInfo properties. */
-        public properties: (number | Long)[];
+        public properties: (number|Long)[];
 
         /** PlayerInfo counters. */
         public counters: pb.IGameCounter[];
@@ -3295,7 +3315,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.PlayerInfo;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.PlayerInfo;
 
         /**
          * Decodes a PlayerInfo message from the specified reader or buffer, length delimited.
@@ -3304,14 +3324,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.PlayerInfo;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.PlayerInfo;
 
         /**
          * Verifies a PlayerInfo message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a PlayerInfo message from a plain object. Also converts values to their respective internal types.
@@ -3339,10 +3359,10 @@ export namespace pb {
     interface ICmdEditFavorList {
 
         /** CmdEditFavorList removed */
-        removed?: (boolean | null);
+        removed?: (boolean|null);
 
         /** CmdEditFavorList uid */
-        uid?: (number | null);
+        uid?: (number|null);
     }
 
     /** Represents a CmdEditFavorList. */
@@ -3391,7 +3411,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdEditFavorList;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdEditFavorList;
 
         /**
          * Decodes a CmdEditFavorList message from the specified reader or buffer, length delimited.
@@ -3400,14 +3420,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdEditFavorList;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdEditFavorList;
 
         /**
          * Verifies a CmdEditFavorList message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdEditFavorList message from a plain object. Also converts values to their respective internal types.
@@ -3435,7 +3455,7 @@ export namespace pb {
     interface ICmdGetItem {
 
         /** CmdGetItem ts */
-        ts?: (number | Long | null);
+        ts?: (number|Long|null);
     }
 
     /** Represents a CmdGetItem. */
@@ -3448,7 +3468,7 @@ export namespace pb {
         constructor(properties?: pb.ICmdGetItem);
 
         /** CmdGetItem ts. */
-        public ts: (number | Long);
+        public ts: (number|Long);
 
         /**
          * Creates a new CmdGetItem instance using the specified properties.
@@ -3481,7 +3501,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGetItem;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetItem;
 
         /**
          * Decodes a CmdGetItem message from the specified reader or buffer, length delimited.
@@ -3490,14 +3510,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGetItem;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetItem;
 
         /**
          * Verifies a CmdGetItem message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGetItem message from a plain object. Also converts values to their respective internal types.
@@ -3525,7 +3545,7 @@ export namespace pb {
     interface ICmdResetGameCounter {
 
         /** CmdResetGameCounter game */
-        game?: (pb.GameType | null);
+        game?: (pb.GameType|null);
     }
 
     /** Represents a CmdResetGameCounter. */
@@ -3571,7 +3591,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdResetGameCounter;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdResetGameCounter;
 
         /**
          * Decodes a CmdResetGameCounter message from the specified reader or buffer, length delimited.
@@ -3580,14 +3600,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdResetGameCounter;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdResetGameCounter;
 
         /**
          * Verifies a CmdResetGameCounter message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdResetGameCounter message from a plain object. Also converts values to their respective internal types.
@@ -3615,16 +3635,16 @@ export namespace pb {
     interface ITaskItem {
 
         /** TaskItem taskId */
-        taskId?: (number | null);
+        taskId?: (number|null);
 
         /** TaskItem progress */
-        progress?: (number | null);
+        progress?: (number|null);
 
         /** TaskItem award */
-        award?: (number | null);
+        award?: (number|null);
 
         /** TaskItem got */
-        got?: (number | null);
+        got?: (number|null);
     }
 
     /** Represents a TaskItem. */
@@ -3679,7 +3699,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.TaskItem;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.TaskItem;
 
         /**
          * Decodes a TaskItem message from the specified reader or buffer, length delimited.
@@ -3688,14 +3708,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.TaskItem;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.TaskItem;
 
         /**
          * Verifies a TaskItem message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a TaskItem message from a plain object. Also converts values to their respective internal types.
@@ -3723,13 +3743,13 @@ export namespace pb {
     interface ICmdStudyProgress {
 
         /** CmdStudyProgress index */
-        index?: (number | null);
+        index?: (number|null);
 
         /** CmdStudyProgress progress */
-        progress?: (number | null);
+        progress?: (number|null);
 
         /** CmdStudyProgress award */
-        award?: (number | null);
+        award?: (number|null);
     }
 
     /** Represents a CmdStudyProgress. */
@@ -3781,7 +3801,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdStudyProgress;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdStudyProgress;
 
         /**
          * Decodes a CmdStudyProgress message from the specified reader or buffer, length delimited.
@@ -3790,14 +3810,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdStudyProgress;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdStudyProgress;
 
         /**
          * Verifies a CmdStudyProgress message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdStudyProgress message from a plain object. Also converts values to their respective internal types.
@@ -3825,7 +3845,10 @@ export namespace pb {
     interface ICmdGetDailyAward {
 
         /** CmdGetDailyAward index */
-        index?: (number | null);
+        index?: (number|null);
+
+        /** CmdGetDailyAward adClicked */
+        adClicked?: (boolean|null);
     }
 
     /** Represents a CmdGetDailyAward. */
@@ -3839,6 +3862,9 @@ export namespace pb {
 
         /** CmdGetDailyAward index. */
         public index: number;
+
+        /** CmdGetDailyAward adClicked. */
+        public adClicked: boolean;
 
         /**
          * Creates a new CmdGetDailyAward instance using the specified properties.
@@ -3871,7 +3897,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGetDailyAward;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetDailyAward;
 
         /**
          * Decodes a CmdGetDailyAward message from the specified reader or buffer, length delimited.
@@ -3880,14 +3906,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGetDailyAward;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetDailyAward;
 
         /**
          * Verifies a CmdGetDailyAward message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGetDailyAward message from a plain object. Also converts values to their respective internal types.
@@ -3915,10 +3941,10 @@ export namespace pb {
     interface ICmdDailyTaskProgress {
 
         /** CmdDailyTaskProgress uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdDailyTaskProgress taskId */
-        taskId?: (number | null);
+        taskId?: (number|null);
     }
 
     /** Represents a CmdDailyTaskProgress. */
@@ -3967,7 +3993,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdDailyTaskProgress;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdDailyTaskProgress;
 
         /**
          * Decodes a CmdDailyTaskProgress message from the specified reader or buffer, length delimited.
@@ -3976,14 +4002,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdDailyTaskProgress;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdDailyTaskProgress;
 
         /**
          * Verifies a CmdDailyTaskProgress message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdDailyTaskProgress message from a plain object. Also converts values to their respective internal types.
@@ -4011,10 +4037,10 @@ export namespace pb {
     interface ICmdGameStart {
 
         /** CmdGameStart game */
-        game?: (pb.GameType | null);
+        game?: (pb.GameType|null);
 
         /** CmdGameStart isJunxian */
-        isJunxian?: (boolean | null);
+        isJunxian?: (boolean|null);
     }
 
     /** Represents a CmdGameStart. */
@@ -4063,7 +4089,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGameStart;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGameStart;
 
         /**
          * Decodes a CmdGameStart message from the specified reader or buffer, length delimited.
@@ -4072,14 +4098,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGameStart;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGameStart;
 
         /**
          * Verifies a CmdGameStart message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGameStart message from a plain object. Also converts values to their respective internal types.
@@ -4107,10 +4133,10 @@ export namespace pb {
     interface ICmdGameOver {
 
         /** CmdGameOver result */
-        result?: (pb.IGameResult | null);
+        result?: (pb.IGameResult|null);
 
         /** CmdGameOver operations */
-        operations?: (pb.IGameOperations | null);
+        operations?: (pb.IGameOperations|null);
     }
 
     /** Represents a CmdGameOver. */
@@ -4123,10 +4149,10 @@ export namespace pb {
         constructor(properties?: pb.ICmdGameOver);
 
         /** CmdGameOver result. */
-        public result?: (pb.IGameResult | null);
+        public result?: (pb.IGameResult|null);
 
         /** CmdGameOver operations. */
-        public operations?: (pb.IGameOperations | null);
+        public operations?: (pb.IGameOperations|null);
 
         /**
          * Creates a new CmdGameOver instance using the specified properties.
@@ -4159,7 +4185,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGameOver;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGameOver;
 
         /**
          * Decodes a CmdGameOver message from the specified reader or buffer, length delimited.
@@ -4168,14 +4194,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGameOver;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGameOver;
 
         /**
          * Verifies a CmdGameOver message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGameOver message from a plain object. Also converts values to their respective internal types.
@@ -4203,22 +4229,22 @@ export namespace pb {
     interface ICmdQueryGameResult {
 
         /** CmdQueryGameResult uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdQueryGameResult gType */
-        gType?: (pb.GameType | null);
+        gType?: (pb.GameType|null);
 
         /** CmdQueryGameResult from */
-        from?: (number | Long | null);
+        from?: (number|Long|null);
 
         /** CmdQueryGameResult to */
-        to?: (number | Long | null);
+        to?: (number|Long|null);
 
         /** CmdQueryGameResult pageSize */
-        pageSize?: (number | null);
+        pageSize?: (number|null);
 
         /** CmdQueryGameResult ts */
-        ts?: (number | null);
+        ts?: (number|null);
     }
 
     /** Represents a CmdQueryGameResult. */
@@ -4237,10 +4263,10 @@ export namespace pb {
         public gType: pb.GameType;
 
         /** CmdQueryGameResult from. */
-        public from: (number | Long);
+        public from: (number|Long);
 
         /** CmdQueryGameResult to. */
-        public to: (number | Long);
+        public to: (number|Long);
 
         /** CmdQueryGameResult pageSize. */
         public pageSize: number;
@@ -4279,7 +4305,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdQueryGameResult;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQueryGameResult;
 
         /**
          * Decodes a CmdQueryGameResult message from the specified reader or buffer, length delimited.
@@ -4288,14 +4314,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdQueryGameResult;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQueryGameResult;
 
         /**
          * Verifies a CmdQueryGameResult message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdQueryGameResult message from a plain object. Also converts values to their respective internal types.
@@ -4323,7 +4349,7 @@ export namespace pb {
     interface ICmdQueryGameResultReply {
 
         /** CmdQueryGameResultReply results */
-        results?: (pb.IGameResult[] | null);
+        results?: (pb.IGameResult[]|null);
     }
 
     /** Represents a CmdQueryGameResultReply. */
@@ -4369,7 +4395,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdQueryGameResultReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQueryGameResultReply;
 
         /**
          * Decodes a CmdQueryGameResultReply message from the specified reader or buffer, length delimited.
@@ -4378,14 +4404,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdQueryGameResultReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQueryGameResultReply;
 
         /**
          * Verifies a CmdQueryGameResultReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdQueryGameResultReply message from a plain object. Also converts values to their respective internal types.
@@ -4413,10 +4439,10 @@ export namespace pb {
     interface ICmdGetGameOperations {
 
         /** CmdGetGameOperations uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdGetGameOperations ts */
-        ts?: (number | Long | null);
+        ts?: (number|Long|null);
     }
 
     /** Represents a CmdGetGameOperations. */
@@ -4432,7 +4458,7 @@ export namespace pb {
         public uid: number;
 
         /** CmdGetGameOperations ts. */
-        public ts: (number | Long);
+        public ts: (number|Long);
 
         /**
          * Creates a new CmdGetGameOperations instance using the specified properties.
@@ -4465,7 +4491,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGetGameOperations;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetGameOperations;
 
         /**
          * Decodes a CmdGetGameOperations message from the specified reader or buffer, length delimited.
@@ -4474,14 +4500,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGetGameOperations;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetGameOperations;
 
         /**
          * Verifies a CmdGetGameOperations message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGetGameOperations message from a plain object. Also converts values to their respective internal types.
@@ -4509,7 +4535,7 @@ export namespace pb {
     interface ICmdUnlockGame {
 
         /** CmdUnlockGame gType */
-        gType?: (pb.GameType | null);
+        gType?: (pb.GameType|null);
     }
 
     /** Represents a CmdUnlockGame. */
@@ -4555,7 +4581,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdUnlockGame;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdUnlockGame;
 
         /**
          * Decodes a CmdUnlockGame message from the specified reader or buffer, length delimited.
@@ -4564,14 +4590,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdUnlockGame;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdUnlockGame;
 
         /**
          * Verifies a CmdUnlockGame message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdUnlockGame message from a plain object. Also converts values to their respective internal types.
@@ -4599,40 +4625,43 @@ export namespace pb {
     interface ICmdGetSmxlReportReply {
 
         /** CmdGetSmxlReportReply capitalInit */
-        capitalInit?: (number | Long | null);
+        capitalInit?: (number|Long|null);
 
         /** CmdGetSmxlReportReply capitalFinal */
-        capitalFinal?: (number | Long | null);
+        capitalFinal?: (number|Long|null);
 
         /** CmdGetSmxlReportReply profitRate */
-        profitRate?: (number | null);
+        profitRate?: (number|null);
 
         /** CmdGetSmxlReportReply winCount */
-        winCount?: (number | null);
+        winCount?: (number|null);
 
         /** CmdGetSmxlReportReply winCode */
-        winCode?: (number | null);
+        winCode?: (number|null);
 
         /** CmdGetSmxlReportReply winRate */
-        winRate?: (number | null);
+        winRate?: (number|null);
 
         /** CmdGetSmxlReportReply loseCount */
-        loseCount?: (number | null);
+        loseCount?: (number|null);
 
         /** CmdGetSmxlReportReply loseCode */
-        loseCode?: (number | null);
+        loseCode?: (number|null);
 
         /** CmdGetSmxlReportReply loseRate */
-        loseRate?: (number | null);
+        loseRate?: (number|null);
 
         /** CmdGetSmxlReportReply count */
-        count?: (number | null);
+        count?: (number|null);
 
         /** CmdGetSmxlReportReply rankCaptial */
-        rankCaptial?: (number | null);
+        rankCaptial?: (number|null);
 
         /** CmdGetSmxlReportReply rankRate */
-        rankRate?: (number | null);
+        rankRate?: (number|null);
+
+        /** CmdGetSmxlReportReply ts */
+        ts?: (number|null);
     }
 
     /** Represents a CmdGetSmxlReportReply. */
@@ -4645,10 +4674,10 @@ export namespace pb {
         constructor(properties?: pb.ICmdGetSmxlReportReply);
 
         /** CmdGetSmxlReportReply capitalInit. */
-        public capitalInit: (number | Long);
+        public capitalInit: (number|Long);
 
         /** CmdGetSmxlReportReply capitalFinal. */
-        public capitalFinal: (number | Long);
+        public capitalFinal: (number|Long);
 
         /** CmdGetSmxlReportReply profitRate. */
         public profitRate: number;
@@ -4679,6 +4708,9 @@ export namespace pb {
 
         /** CmdGetSmxlReportReply rankRate. */
         public rankRate: number;
+
+        /** CmdGetSmxlReportReply ts. */
+        public ts: number;
 
         /**
          * Creates a new CmdGetSmxlReportReply instance using the specified properties.
@@ -4711,7 +4743,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGetSmxlReportReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetSmxlReportReply;
 
         /**
          * Decodes a CmdGetSmxlReportReply message from the specified reader or buffer, length delimited.
@@ -4720,14 +4752,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGetSmxlReportReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetSmxlReportReply;
 
         /**
          * Verifies a CmdGetSmxlReportReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGetSmxlReportReply message from a plain object. Also converts values to their respective internal types.
@@ -4755,22 +4787,22 @@ export namespace pb {
     interface ICmdRoomCreate {
 
         /** CmdRoomCreate game */
-        game?: (pb.GameType | null);
+        game?: (pb.GameType|null);
 
         /** CmdRoomCreate uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdRoomCreate node */
-        node?: (number | null);
+        node?: (number|null);
 
         /** CmdRoomCreate capital */
-        capital?: (number | null);
+        capital?: (number|null);
 
         /** CmdRoomCreate pwd */
-        pwd?: (string | null);
+        pwd?: (string|null);
 
         /** CmdRoomCreate junXian */
-        junXian?: (number[] | null);
+        junXian?: (number[]|null);
     }
 
     /** Represents a CmdRoomCreate. */
@@ -4831,7 +4863,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdRoomCreate;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRoomCreate;
 
         /**
          * Decodes a CmdRoomCreate message from the specified reader or buffer, length delimited.
@@ -4840,14 +4872,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdRoomCreate;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRoomCreate;
 
         /**
          * Verifies a CmdRoomCreate message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdRoomCreate message from a plain object. Also converts values to their respective internal types.
@@ -4875,10 +4907,10 @@ export namespace pb {
     interface ICmdRoomCreateReply {
 
         /** CmdRoomCreateReply err */
-        err?: (pb.IErrorInfo | null);
+        err?: (pb.IErrorInfo|null);
 
         /** CmdRoomCreateReply id */
-        id?: (number | null);
+        id?: (number|null);
     }
 
     /** Represents a CmdRoomCreateReply. */
@@ -4891,7 +4923,7 @@ export namespace pb {
         constructor(properties?: pb.ICmdRoomCreateReply);
 
         /** CmdRoomCreateReply err. */
-        public err?: (pb.IErrorInfo | null);
+        public err?: (pb.IErrorInfo|null);
 
         /** CmdRoomCreateReply id. */
         public id: number;
@@ -4927,7 +4959,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdRoomCreateReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRoomCreateReply;
 
         /**
          * Decodes a CmdRoomCreateReply message from the specified reader or buffer, length delimited.
@@ -4936,14 +4968,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdRoomCreateReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRoomCreateReply;
 
         /**
          * Verifies a CmdRoomCreateReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdRoomCreateReply message from a plain object. Also converts values to their respective internal types.
@@ -4971,22 +5003,22 @@ export namespace pb {
     interface ICmdRoomEnter {
 
         /** CmdRoomEnter id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** CmdRoomEnter game */
-        game?: (pb.GameType | null);
+        game?: (pb.GameType|null);
 
         /** CmdRoomEnter uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdRoomEnter node */
-        node?: (number | null);
+        node?: (number|null);
 
         /** CmdRoomEnter pwd */
-        pwd?: (string | null);
+        pwd?: (string|null);
 
         /** CmdRoomEnter junXian */
-        junXian?: (number[] | null);
+        junXian?: (number[]|null);
     }
 
     /** Represents a CmdRoomEnter. */
@@ -5047,7 +5079,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdRoomEnter;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRoomEnter;
 
         /**
          * Decodes a CmdRoomEnter message from the specified reader or buffer, length delimited.
@@ -5056,14 +5088,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdRoomEnter;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRoomEnter;
 
         /**
          * Verifies a CmdRoomEnter message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdRoomEnter message from a plain object. Also converts values to their respective internal types.
@@ -5091,13 +5123,13 @@ export namespace pb {
     interface ICmdRoomEnterReply {
 
         /** CmdRoomEnterReply err */
-        err?: (pb.IErrorInfo | null);
+        err?: (pb.IErrorInfo|null);
 
         /** CmdRoomEnterReply id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** CmdRoomEnterReply node */
-        node?: (number | null);
+        node?: (number|null);
     }
 
     /** Represents a CmdRoomEnterReply. */
@@ -5110,7 +5142,7 @@ export namespace pb {
         constructor(properties?: pb.ICmdRoomEnterReply);
 
         /** CmdRoomEnterReply err. */
-        public err?: (pb.IErrorInfo | null);
+        public err?: (pb.IErrorInfo|null);
 
         /** CmdRoomEnterReply id. */
         public id: number;
@@ -5149,7 +5181,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdRoomEnterReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRoomEnterReply;
 
         /**
          * Decodes a CmdRoomEnterReply message from the specified reader or buffer, length delimited.
@@ -5158,14 +5190,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdRoomEnterReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRoomEnterReply;
 
         /**
          * Verifies a CmdRoomEnterReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdRoomEnterReply message from a plain object. Also converts values to their respective internal types.
@@ -5193,10 +5225,10 @@ export namespace pb {
     interface ICmdRoomLeave {
 
         /** CmdRoomLeave id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** CmdRoomLeave uid */
-        uid?: (number | null);
+        uid?: (number|null);
     }
 
     /** Represents a CmdRoomLeave. */
@@ -5245,7 +5277,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdRoomLeave;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRoomLeave;
 
         /**
          * Decodes a CmdRoomLeave message from the specified reader or buffer, length delimited.
@@ -5254,14 +5286,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdRoomLeave;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRoomLeave;
 
         /**
          * Verifies a CmdRoomLeave message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdRoomLeave message from a plain object. Also converts values to their respective internal types.
@@ -5289,7 +5321,7 @@ export namespace pb {
     interface ICmdRoomLeaveReply {
 
         /** CmdRoomLeaveReply err */
-        err?: (pb.IErrorInfo | null);
+        err?: (pb.IErrorInfo|null);
     }
 
     /** Represents a CmdRoomLeaveReply. */
@@ -5302,7 +5334,7 @@ export namespace pb {
         constructor(properties?: pb.ICmdRoomLeaveReply);
 
         /** CmdRoomLeaveReply err. */
-        public err?: (pb.IErrorInfo | null);
+        public err?: (pb.IErrorInfo|null);
 
         /**
          * Creates a new CmdRoomLeaveReply instance using the specified properties.
@@ -5335,7 +5367,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdRoomLeaveReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRoomLeaveReply;
 
         /**
          * Decodes a CmdRoomLeaveReply message from the specified reader or buffer, length delimited.
@@ -5344,14 +5376,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdRoomLeaveReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRoomLeaveReply;
 
         /**
          * Verifies a CmdRoomLeaveReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdRoomLeaveReply message from a plain object. Also converts values to their respective internal types.
@@ -5379,13 +5411,13 @@ export namespace pb {
     interface ISyncRoomEnter {
 
         /** SyncRoomEnter id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** SyncRoomEnter game */
-        game?: (pb.GameType | null);
+        game?: (pb.GameType|null);
 
         /** SyncRoomEnter player */
-        player?: (pb.IGameData | null);
+        player?: (pb.IGameData|null);
     }
 
     /** Represents a SyncRoomEnter. */
@@ -5404,7 +5436,7 @@ export namespace pb {
         public game: pb.GameType;
 
         /** SyncRoomEnter player. */
-        public player?: (pb.IGameData | null);
+        public player?: (pb.IGameData|null);
 
         /**
          * Creates a new SyncRoomEnter instance using the specified properties.
@@ -5437,7 +5469,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.SyncRoomEnter;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.SyncRoomEnter;
 
         /**
          * Decodes a SyncRoomEnter message from the specified reader or buffer, length delimited.
@@ -5446,14 +5478,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.SyncRoomEnter;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.SyncRoomEnter;
 
         /**
          * Verifies a SyncRoomEnter message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a SyncRoomEnter message from a plain object. Also converts values to their respective internal types.
@@ -5481,13 +5513,13 @@ export namespace pb {
     interface ISyncRoomLeave {
 
         /** SyncRoomLeave id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** SyncRoomLeave game */
-        game?: (pb.GameType | null);
+        game?: (pb.GameType|null);
 
         /** SyncRoomLeave uid */
-        uid?: (number | null);
+        uid?: (number|null);
     }
 
     /** Represents a SyncRoomLeave. */
@@ -5539,7 +5571,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.SyncRoomLeave;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.SyncRoomLeave;
 
         /**
          * Decodes a SyncRoomLeave message from the specified reader or buffer, length delimited.
@@ -5548,14 +5580,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.SyncRoomLeave;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.SyncRoomLeave;
 
         /**
          * Verifies a SyncRoomLeave message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a SyncRoomLeave message from a plain object. Also converts values to their respective internal types.
@@ -5583,13 +5615,13 @@ export namespace pb {
     interface IRoomPlayerStatus {
 
         /** RoomPlayerStatus id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** RoomPlayerStatus uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** RoomPlayerStatus ready */
-        ready?: (boolean | null);
+        ready?: (boolean|null);
     }
 
     /** Represents a RoomPlayerStatus. */
@@ -5641,7 +5673,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.RoomPlayerStatus;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomPlayerStatus;
 
         /**
          * Decodes a RoomPlayerStatus message from the specified reader or buffer, length delimited.
@@ -5650,14 +5682,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.RoomPlayerStatus;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomPlayerStatus;
 
         /**
          * Verifies a RoomPlayerStatus message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a RoomPlayerStatus message from a plain object. Also converts values to their respective internal types.
@@ -5685,10 +5717,10 @@ export namespace pb {
     interface IRoomGameStatus {
 
         /** RoomGameStatus id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** RoomGameStatus status */
-        status?: (number | null);
+        status?: (number|null);
     }
 
     /** Represents a RoomGameStatus. */
@@ -5737,7 +5769,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.RoomGameStatus;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomGameStatus;
 
         /**
          * Decodes a RoomGameStatus message from the specified reader or buffer, length delimited.
@@ -5746,14 +5778,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.RoomGameStatus;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomGameStatus;
 
         /**
          * Verifies a RoomGameStatus message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a RoomGameStatus message from a plain object. Also converts values to their respective internal types.
@@ -5781,13 +5813,13 @@ export namespace pb {
     interface IRoomGameOp {
 
         /** RoomGameOp id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** RoomGameOp uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** RoomGameOp ops */
-        ops?: (Uint8Array | null);
+        ops?: (Uint8Array|null);
     }
 
     /** Represents a RoomGameOp. */
@@ -5839,7 +5871,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.RoomGameOp;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomGameOp;
 
         /**
          * Decodes a RoomGameOp message from the specified reader or buffer, length delimited.
@@ -5848,14 +5880,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.RoomGameOp;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomGameOp;
 
         /**
          * Verifies a RoomGameOp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a RoomGameOp message from a plain object. Also converts values to their respective internal types.
@@ -5883,10 +5915,10 @@ export namespace pb {
     interface IRoomGameResult {
 
         /** RoomGameResult id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** RoomGameResult result */
-        result?: (Uint8Array | null);
+        result?: (Uint8Array|null);
     }
 
     /** Represents a RoomGameResult. */
@@ -5935,7 +5967,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.RoomGameResult;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomGameResult;
 
         /**
          * Decodes a RoomGameResult message from the specified reader or buffer, length delimited.
@@ -5944,14 +5976,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.RoomGameResult;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomGameResult;
 
         /**
          * Verifies a RoomGameResult message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a RoomGameResult message from a plain object. Also converts values to their respective internal types.
@@ -5979,13 +6011,13 @@ export namespace pb {
     interface IRoomData {
 
         /** RoomData id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** RoomData game */
-        game?: (pb.GameType | null);
+        game?: (pb.GameType|null);
 
         /** RoomData data */
-        data?: (Uint8Array | null);
+        data?: (Uint8Array|null);
     }
 
     /** Represents a RoomData. */
@@ -6037,7 +6069,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.RoomData;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomData;
 
         /**
          * Decodes a RoomData message from the specified reader or buffer, length delimited.
@@ -6046,14 +6078,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.RoomData;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomData;
 
         /**
          * Verifies a RoomData message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a RoomData message from a plain object. Also converts values to their respective internal types.
@@ -6081,25 +6113,25 @@ export namespace pb {
     interface IRoomPlayer {
 
         /** RoomPlayer gd */
-        gd?: (pb.IGameData | null);
+        gd?: (pb.IGameData|null);
 
         /** RoomPlayer ready */
-        ready?: (boolean | null);
+        ready?: (boolean|null);
 
         /** RoomPlayer giveup */
-        giveup?: (boolean | null);
+        giveup?: (boolean|null);
 
         /** RoomPlayer ops */
-        ops?: (pb.IGameOperations | null);
+        ops?: (pb.IGameOperations|null);
 
         /** RoomPlayer result */
-        result?: (pb.IGameResult | null);
+        result?: (pb.IGameResult|null);
 
         /** RoomPlayer curPos */
-        curPos?: (number | Long | null);
+        curPos?: (number|Long|null);
 
         /** RoomPlayer junXian */
-        junXian?: (number[] | null);
+        junXian?: (number[]|null);
     }
 
     /** Represents a RoomPlayer. */
@@ -6112,7 +6144,7 @@ export namespace pb {
         constructor(properties?: pb.IRoomPlayer);
 
         /** RoomPlayer gd. */
-        public gd?: (pb.IGameData | null);
+        public gd?: (pb.IGameData|null);
 
         /** RoomPlayer ready. */
         public ready: boolean;
@@ -6121,13 +6153,13 @@ export namespace pb {
         public giveup: boolean;
 
         /** RoomPlayer ops. */
-        public ops?: (pb.IGameOperations | null);
+        public ops?: (pb.IGameOperations|null);
 
         /** RoomPlayer result. */
-        public result?: (pb.IGameResult | null);
+        public result?: (pb.IGameResult|null);
 
         /** RoomPlayer curPos. */
-        public curPos: (number | Long);
+        public curPos: (number|Long);
 
         /** RoomPlayer junXian. */
         public junXian: number[];
@@ -6163,7 +6195,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.RoomPlayer;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomPlayer;
 
         /**
          * Decodes a RoomPlayer message from the specified reader or buffer, length delimited.
@@ -6172,14 +6204,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.RoomPlayer;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomPlayer;
 
         /**
          * Verifies a RoomPlayer message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a RoomPlayer message from a plain object. Also converts values to their respective internal types.
@@ -6207,46 +6239,46 @@ export namespace pb {
     interface IRoomGameData {
 
         /** RoomGameData id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** RoomGameData game */
-        game?: (pb.GameType | null);
+        game?: (pb.GameType|null);
 
         /** RoomGameData status */
-        status?: (number | null);
+        status?: (number|null);
 
         /** RoomGameData capital */
-        capital?: (number | null);
+        capital?: (number|null);
 
         /** RoomGameData code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** RoomGameData ktype */
-        ktype?: (pb.KType | null);
+        ktype?: (pb.KType|null);
 
         /** RoomGameData tsQuoteFrom */
-        tsQuoteFrom?: (number | Long | null);
+        tsQuoteFrom?: (number|Long|null);
 
         /** RoomGameData tsQuoteTo */
-        tsQuoteTo?: (number | Long | null);
+        tsQuoteTo?: (number|Long|null);
 
         /** RoomGameData tsQuoteStart */
-        tsQuoteStart?: (number | Long | null);
+        tsQuoteStart?: (number|Long|null);
 
         /** RoomGameData players */
-        players?: (pb.IRoomPlayer[] | null);
+        players?: (pb.IRoomPlayer[]|null);
 
         /** RoomGameData tsGameFrom */
-        tsGameFrom?: (number | Long | null);
+        tsGameFrom?: (number|Long|null);
 
         /** RoomGameData tsGameCur */
-        tsGameCur?: (number | Long | null);
+        tsGameCur?: (number|Long|null);
 
         /** RoomGameData quotes */
-        quotes?: (pb.IQuotes | null);
+        quotes?: (pb.IQuotes|null);
 
         /** RoomGameData quotesFuture */
-        quotesFuture?: (pb.IQuotesFuture | null);
+        quotesFuture?: (pb.IQuotesFuture|null);
     }
 
     /** Represents a RoomGameData. */
@@ -6277,28 +6309,28 @@ export namespace pb {
         public ktype: pb.KType;
 
         /** RoomGameData tsQuoteFrom. */
-        public tsQuoteFrom: (number | Long);
+        public tsQuoteFrom: (number|Long);
 
         /** RoomGameData tsQuoteTo. */
-        public tsQuoteTo: (number | Long);
+        public tsQuoteTo: (number|Long);
 
         /** RoomGameData tsQuoteStart. */
-        public tsQuoteStart: (number | Long);
+        public tsQuoteStart: (number|Long);
 
         /** RoomGameData players. */
         public players: pb.IRoomPlayer[];
 
         /** RoomGameData tsGameFrom. */
-        public tsGameFrom: (number | Long);
+        public tsGameFrom: (number|Long);
 
         /** RoomGameData tsGameCur. */
-        public tsGameCur: (number | Long);
+        public tsGameCur: (number|Long);
 
         /** RoomGameData quotes. */
-        public quotes?: (pb.IQuotes | null);
+        public quotes?: (pb.IQuotes|null);
 
         /** RoomGameData quotesFuture. */
-        public quotesFuture?: (pb.IQuotesFuture | null);
+        public quotesFuture?: (pb.IQuotesFuture|null);
 
         /**
          * Creates a new RoomGameData instance using the specified properties.
@@ -6331,7 +6363,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.RoomGameData;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomGameData;
 
         /**
          * Decodes a RoomGameData message from the specified reader or buffer, length delimited.
@@ -6340,14 +6372,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.RoomGameData;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomGameData;
 
         /**
          * Verifies a RoomGameData message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a RoomGameData message from a plain object. Also converts values to their respective internal types.
@@ -6375,22 +6407,22 @@ export namespace pb {
     interface INotice {
 
         /** Notice sender */
-        sender?: (number | null);
+        sender?: (number|null);
 
         /** Notice receiver */
-        receiver?: (number | null);
+        receiver?: (number|null);
 
         /** Notice type */
-        type?: (pb.MessageType | null);
+        type?: (pb.MessageType|null);
 
         /** Notice text */
-        text?: (string | null);
+        text?: (string|null);
 
         /** Notice ts */
-        ts?: (number | Long | null);
+        ts?: (number|Long|null);
 
         /** Notice node */
-        node?: (number | null);
+        node?: (number|null);
     }
 
     /** Represents a Notice. */
@@ -6415,7 +6447,7 @@ export namespace pb {
         public text: string;
 
         /** Notice ts. */
-        public ts: (number | Long);
+        public ts: (number|Long);
 
         /** Notice node. */
         public node: number;
@@ -6451,7 +6483,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.Notice;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.Notice;
 
         /**
          * Decodes a Notice message from the specified reader or buffer, length delimited.
@@ -6460,14 +6492,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.Notice;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.Notice;
 
         /**
          * Verifies a Notice message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a Notice message from a plain object. Also converts values to their respective internal types.
@@ -6495,25 +6527,25 @@ export namespace pb {
     interface ICgsConf {
 
         /** CgsConf id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** CgsConf from */
-        from?: (number | Long | null);
+        from?: (number|Long|null);
 
         /** CgsConf to */
-        to?: (number | Long | null);
+        to?: (number|Long|null);
 
         /** CgsConf conf */
-        conf?: (string | null);
+        conf?: (string|null);
 
         /** CgsConf award */
-        award?: (string | null);
+        award?: (string|null);
 
         /** CgsConf status */
-        status?: (number | null);
+        status?: (number|null);
 
         /** CgsConf people */
-        people?: (number[] | null);
+        people?: (number[]|null);
     }
 
     /** Represents a CgsConf. */
@@ -6529,10 +6561,10 @@ export namespace pb {
         public id: number;
 
         /** CgsConf from. */
-        public from: (number | Long);
+        public from: (number|Long);
 
         /** CgsConf to. */
-        public to: (number | Long);
+        public to: (number|Long);
 
         /** CgsConf conf. */
         public conf: string;
@@ -6577,7 +6609,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CgsConf;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CgsConf;
 
         /**
          * Decodes a CgsConf message from the specified reader or buffer, length delimited.
@@ -6586,14 +6618,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CgsConf;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CgsConf;
 
         /**
          * Verifies a CgsConf message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CgsConf message from a plain object. Also converts values to their respective internal types.
@@ -6621,40 +6653,40 @@ export namespace pb {
     interface IRankingItem {
 
         /** RankingItem uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** RankingItem nickname */
-        nickname?: (string | null);
+        nickname?: (string|null);
 
         /** RankingItem icon */
-        icon?: (string | null);
+        icon?: (string|null);
 
         /** RankingItem gender */
-        gender?: (string | null);
+        gender?: (string|null);
 
         /** RankingItem location */
-        location?: (string | null);
+        location?: (string|null);
 
         /** RankingItem cgsClearance */
-        cgsClearance?: (number | null);
+        cgsClearance?: (number|null);
 
         /** RankingItem cgsNetwin */
-        cgsNetwin?: (number | null);
+        cgsNetwin?: (number|null);
 
         /** RankingItem cgsProgress */
-        cgsProgress?: (number | null);
+        cgsProgress?: (number|null);
 
         /** RankingItem cgdsAccount */
-        cgdsAccount?: (number | null);
+        cgdsAccount?: (number|null);
 
         /** RankingItem zsjcCount */
-        zsjcCount?: (number | null);
+        zsjcCount?: (number|null);
 
         /** RankingItem level */
-        level?: (number | null);
+        level?: (number|null);
 
         /** RankingItem fame */
-        fame?: (number | null);
+        fame?: (number|null);
     }
 
     /** Represents a RankingItem. */
@@ -6733,7 +6765,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.RankingItem;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RankingItem;
 
         /**
          * Decodes a RankingItem message from the specified reader or buffer, length delimited.
@@ -6742,14 +6774,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.RankingItem;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RankingItem;
 
         /**
          * Verifies a RankingItem message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a RankingItem message from a plain object. Also converts values to their respective internal types.
@@ -6777,10 +6809,10 @@ export namespace pb {
     interface IRankingList {
 
         /** RankingList id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** RankingList Items */
-        Items?: (pb.IRankingItem[] | null);
+        Items?: (pb.IRankingItem[]|null);
     }
 
     /** Represents a RankingList. */
@@ -6829,7 +6861,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.RankingList;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RankingList;
 
         /**
          * Decodes a RankingList message from the specified reader or buffer, length delimited.
@@ -6838,14 +6870,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.RankingList;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RankingList;
 
         /**
          * Verifies a RankingList message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a RankingList message from a plain object. Also converts values to their respective internal types.
@@ -6873,10 +6905,10 @@ export namespace pb {
     interface ICmdCgsRanking {
 
         /** CmdCgsRanking id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** CmdCgsRanking stage */
-        stage?: (number | null);
+        stage?: (number|null);
     }
 
     /** Represents a CmdCgsRanking. */
@@ -6925,7 +6957,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdCgsRanking;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdCgsRanking;
 
         /**
          * Decodes a CmdCgsRanking message from the specified reader or buffer, length delimited.
@@ -6934,14 +6966,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdCgsRanking;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdCgsRanking;
 
         /**
          * Verifies a CmdCgsRanking message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdCgsRanking message from a plain object. Also converts values to their respective internal types.
@@ -6969,13 +7001,13 @@ export namespace pb {
     interface IJjPlayer {
 
         /** JjPlayer gd */
-        gd?: (pb.IGameData | null);
+        gd?: (pb.IGameData|null);
 
         /** JjPlayer ops */
-        ops?: (pb.IGameOperations | null);
+        ops?: (pb.IGameOperations|null);
 
         /** JjPlayer result */
-        result?: (pb.IGameResult | null);
+        result?: (pb.IGameResult|null);
     }
 
     /** Represents a JjPlayer. */
@@ -6988,13 +7020,13 @@ export namespace pb {
         constructor(properties?: pb.IJjPlayer);
 
         /** JjPlayer gd. */
-        public gd?: (pb.IGameData | null);
+        public gd?: (pb.IGameData|null);
 
         /** JjPlayer ops. */
-        public ops?: (pb.IGameOperations | null);
+        public ops?: (pb.IGameOperations|null);
 
         /** JjPlayer result. */
-        public result?: (pb.IGameResult | null);
+        public result?: (pb.IGameResult|null);
 
         /**
          * Creates a new JjPlayer instance using the specified properties.
@@ -7027,7 +7059,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.JjPlayer;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.JjPlayer;
 
         /**
          * Decodes a JjPlayer message from the specified reader or buffer, length delimited.
@@ -7036,14 +7068,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.JjPlayer;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.JjPlayer;
 
         /**
          * Verifies a JjPlayer message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a JjPlayer message from a plain object. Also converts values to their respective internal types.
@@ -7071,31 +7103,31 @@ export namespace pb {
     interface IJjGame {
 
         /** JjGame code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** JjGame ktype */
-        ktype?: (pb.KType | null);
+        ktype?: (pb.KType|null);
 
         /** JjGame tsQuoteFrom */
-        tsQuoteFrom?: (number | Long | null);
+        tsQuoteFrom?: (number|Long|null);
 
         /** JjGame tsQuoteTo */
-        tsQuoteTo?: (number | Long | null);
+        tsQuoteTo?: (number|Long|null);
 
         /** JjGame tsQuoteStart */
-        tsQuoteStart?: (number | Long | null);
+        tsQuoteStart?: (number|Long|null);
 
         /** JjGame quotes */
-        quotes?: (pb.IQuotes | null);
+        quotes?: (pb.IQuotes|null);
 
         /** JjGame quotesFuture */
-        quotesFuture?: (pb.IQuotesFuture | null);
+        quotesFuture?: (pb.IQuotesFuture|null);
 
         /** JjGame players */
-        players?: (pb.IJjPlayer[] | null);
+        players?: (pb.IJjPlayer[]|null);
 
         /** JjGame capital */
-        capital?: (number | null);
+        capital?: (number|null);
     }
 
     /** Represents a JjGame. */
@@ -7114,19 +7146,19 @@ export namespace pb {
         public ktype: pb.KType;
 
         /** JjGame tsQuoteFrom. */
-        public tsQuoteFrom: (number | Long);
+        public tsQuoteFrom: (number|Long);
 
         /** JjGame tsQuoteTo. */
-        public tsQuoteTo: (number | Long);
+        public tsQuoteTo: (number|Long);
 
         /** JjGame tsQuoteStart. */
-        public tsQuoteStart: (number | Long);
+        public tsQuoteStart: (number|Long);
 
         /** JjGame quotes. */
-        public quotes?: (pb.IQuotes | null);
+        public quotes?: (pb.IQuotes|null);
 
         /** JjGame quotesFuture. */
-        public quotesFuture?: (pb.IQuotesFuture | null);
+        public quotesFuture?: (pb.IQuotesFuture|null);
 
         /** JjGame players. */
         public players: pb.IJjPlayer[];
@@ -7165,7 +7197,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.JjGame;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.JjGame;
 
         /**
          * Decodes a JjGame message from the specified reader or buffer, length delimited.
@@ -7174,14 +7206,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.JjGame;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.JjGame;
 
         /**
          * Verifies a JjGame message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a JjGame message from a plain object. Also converts values to their respective internal types.
@@ -7209,10 +7241,10 @@ export namespace pb {
     interface ICmdCgsGetStageAward {
 
         /** CmdCgsGetStageAward id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** CmdCgsGetStageAward stage */
-        stage?: (number | null);
+        stage?: (number|null);
     }
 
     /** Represents a CmdCgsGetStageAward. */
@@ -7261,7 +7293,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdCgsGetStageAward;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdCgsGetStageAward;
 
         /**
          * Decodes a CmdCgsGetStageAward message from the specified reader or buffer, length delimited.
@@ -7270,14 +7302,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdCgsGetStageAward;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdCgsGetStageAward;
 
         /**
          * Verifies a CmdCgsGetStageAward message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdCgsGetStageAward message from a plain object. Also converts values to their respective internal types.
@@ -7305,25 +7337,25 @@ export namespace pb {
     interface ICmdStockOrder {
 
         /** CmdStockOrder code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** CmdStockOrder type */
-        type?: (pb.OrderType | null);
+        type?: (pb.OrderType|null);
 
         /** CmdStockOrder price */
-        price?: (number | null);
+        price?: (number|null);
 
         /** CmdStockOrder volume */
-        volume?: (number | null);
+        volume?: (number|null);
 
         /** CmdStockOrder amount */
-        amount?: (number | null);
+        amount?: (number|null);
 
         /** CmdStockOrder uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdStockOrder id */
-        id?: (number | null);
+        id?: (number|null);
     }
 
     /** Represents a CmdStockOrder. */
@@ -7387,7 +7419,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdStockOrder;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdStockOrder;
 
         /**
          * Decodes a CmdStockOrder message from the specified reader or buffer, length delimited.
@@ -7396,14 +7428,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdStockOrder;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdStockOrder;
 
         /**
          * Verifies a CmdStockOrder message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdStockOrder message from a plain object. Also converts values to their respective internal types.
@@ -7431,13 +7463,13 @@ export namespace pb {
     interface ICmdStockOrderReply {
 
         /** CmdStockOrderReply orderId */
-        orderId?: (number | Long | null);
+        orderId?: (number|Long|null);
 
         /** CmdStockOrderReply node */
-        node?: (number | null);
+        node?: (number|null);
 
         /** CmdStockOrderReply result */
-        result?: (pb.IErrorInfo | null);
+        result?: (pb.IErrorInfo|null);
     }
 
     /** Represents a CmdStockOrderReply. */
@@ -7450,13 +7482,13 @@ export namespace pb {
         constructor(properties?: pb.ICmdStockOrderReply);
 
         /** CmdStockOrderReply orderId. */
-        public orderId: (number | Long);
+        public orderId: (number|Long);
 
         /** CmdStockOrderReply node. */
         public node: number;
 
         /** CmdStockOrderReply result. */
-        public result?: (pb.IErrorInfo | null);
+        public result?: (pb.IErrorInfo|null);
 
         /**
          * Creates a new CmdStockOrderReply instance using the specified properties.
@@ -7489,7 +7521,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdStockOrderReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdStockOrderReply;
 
         /**
          * Decodes a CmdStockOrderReply message from the specified reader or buffer, length delimited.
@@ -7498,14 +7530,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdStockOrderReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdStockOrderReply;
 
         /**
          * Verifies a CmdStockOrderReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdStockOrderReply message from a plain object. Also converts values to their respective internal types.
@@ -7533,22 +7565,22 @@ export namespace pb {
     interface ICmdStockOrderCancel {
 
         /** CmdStockOrderCancel orderId */
-        orderId?: (number | Long | null);
+        orderId?: (number|Long|null);
 
         /** CmdStockOrderCancel type */
-        type?: (pb.OrderType | null);
+        type?: (pb.OrderType|null);
 
         /** CmdStockOrderCancel code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** CmdStockOrderCancel uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdStockOrderCancel id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** CmdStockOrderCancel node */
-        node?: (number | null);
+        node?: (number|null);
     }
 
     /** Represents a CmdStockOrderCancel. */
@@ -7561,7 +7593,7 @@ export namespace pb {
         constructor(properties?: pb.ICmdStockOrderCancel);
 
         /** CmdStockOrderCancel orderId. */
-        public orderId: (number | Long);
+        public orderId: (number|Long);
 
         /** CmdStockOrderCancel type. */
         public type: pb.OrderType;
@@ -7609,7 +7641,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdStockOrderCancel;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdStockOrderCancel;
 
         /**
          * Decodes a CmdStockOrderCancel message from the specified reader or buffer, length delimited.
@@ -7618,14 +7650,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdStockOrderCancel;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdStockOrderCancel;
 
         /**
          * Verifies a CmdStockOrderCancel message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdStockOrderCancel message from a plain object. Also converts values to their respective internal types.
@@ -7653,37 +7685,37 @@ export namespace pb {
     interface IStockOrder {
 
         /** StockOrder orderId */
-        orderId?: (number | Long | null);
+        orderId?: (number|Long|null);
 
         /** StockOrder code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** StockOrder type */
-        type?: (pb.OrderType | null);
+        type?: (pb.OrderType|null);
 
         /** StockOrder state */
-        state?: (pb.OrderState | null);
+        state?: (pb.OrderState|null);
 
         /** StockOrder price */
-        price?: (number | null);
+        price?: (number|null);
 
         /** StockOrder volume */
-        volume?: (number | null);
+        volume?: (number|null);
 
         /** StockOrder uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** StockOrder ts */
-        ts?: (number | Long | null);
+        ts?: (number|Long|null);
 
         /** StockOrder id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** StockOrder node */
-        node?: (number | null);
+        node?: (number|null);
 
         /** StockOrder cost */
-        cost?: (number | null);
+        cost?: (number|null);
     }
 
     /** Represents a StockOrder. */
@@ -7696,7 +7728,7 @@ export namespace pb {
         constructor(properties?: pb.IStockOrder);
 
         /** StockOrder orderId. */
-        public orderId: (number | Long);
+        public orderId: (number|Long);
 
         /** StockOrder code. */
         public code: number;
@@ -7717,7 +7749,7 @@ export namespace pb {
         public uid: number;
 
         /** StockOrder ts. */
-        public ts: (number | Long);
+        public ts: (number|Long);
 
         /** StockOrder id. */
         public id: number;
@@ -7759,7 +7791,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.StockOrder;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.StockOrder;
 
         /**
          * Decodes a StockOrder message from the specified reader or buffer, length delimited.
@@ -7768,14 +7800,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.StockOrder;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.StockOrder;
 
         /**
          * Verifies a StockOrder message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a StockOrder message from a plain object. Also converts values to their respective internal types.
@@ -7803,7 +7835,7 @@ export namespace pb {
     interface IStockOrderList {
 
         /** StockOrderList items */
-        items?: (pb.IStockOrder[] | null);
+        items?: (pb.IStockOrder[]|null);
     }
 
     /** Represents a StockOrderList. */
@@ -7849,7 +7881,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.StockOrderList;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.StockOrderList;
 
         /**
          * Decodes a StockOrderList message from the specified reader or buffer, length delimited.
@@ -7858,14 +7890,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.StockOrderList;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.StockOrderList;
 
         /**
          * Verifies a StockOrderList message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a StockOrderList message from a plain object. Also converts values to their respective internal types.
@@ -7893,10 +7925,10 @@ export namespace pb {
     interface IStockOrderResult {
 
         /** StockOrderResult result */
-        result?: (pb.IErrorInfo | null);
+        result?: (pb.IErrorInfo|null);
 
         /** StockOrderResult order */
-        order?: (pb.IStockOrder | null);
+        order?: (pb.IStockOrder|null);
     }
 
     /** Represents a StockOrderResult. */
@@ -7909,10 +7941,10 @@ export namespace pb {
         constructor(properties?: pb.IStockOrderResult);
 
         /** StockOrderResult result. */
-        public result?: (pb.IErrorInfo | null);
+        public result?: (pb.IErrorInfo|null);
 
         /** StockOrderResult order. */
-        public order?: (pb.IStockOrder | null);
+        public order?: (pb.IStockOrder|null);
 
         /**
          * Creates a new StockOrderResult instance using the specified properties.
@@ -7945,7 +7977,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.StockOrderResult;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.StockOrderResult;
 
         /**
          * Decodes a StockOrderResult message from the specified reader or buffer, length delimited.
@@ -7954,14 +7986,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.StockOrderResult;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.StockOrderResult;
 
         /**
          * Verifies a StockOrderResult message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a StockOrderResult message from a plain object. Also converts values to their respective internal types.
@@ -7989,16 +8021,16 @@ export namespace pb {
     interface IStockPosition {
 
         /** StockPosition code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** StockPosition volumeFree */
-        volumeFree?: (number | null);
+        volumeFree?: (number|null);
 
         /** StockPosition volume */
-        volume?: (number | null);
+        volume?: (number|null);
 
         /** StockPosition priceCost */
-        priceCost?: (number | null);
+        priceCost?: (number|null);
     }
 
     /** Represents a StockPosition. */
@@ -8053,7 +8085,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.StockPosition;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.StockPosition;
 
         /**
          * Decodes a StockPosition message from the specified reader or buffer, length delimited.
@@ -8062,14 +8094,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.StockPosition;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.StockPosition;
 
         /**
          * Verifies a StockPosition message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a StockPosition message from a plain object. Also converts values to their respective internal types.
@@ -8097,7 +8129,7 @@ export namespace pb {
     interface IStockPositionList {
 
         /** StockPositionList items */
-        items?: (pb.IStockPosition[] | null);
+        items?: (pb.IStockPosition[]|null);
     }
 
     /** Represents a StockPositionList. */
@@ -8143,7 +8175,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.StockPositionList;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.StockPositionList;
 
         /**
          * Decodes a StockPositionList message from the specified reader or buffer, length delimited.
@@ -8152,14 +8184,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.StockPositionList;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.StockPositionList;
 
         /**
          * Verifies a StockPositionList message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a StockPositionList message from a plain object. Also converts values to their respective internal types.
@@ -8187,10 +8219,10 @@ export namespace pb {
     interface ICmdMncgExchange {
 
         /** CmdMncgExchange direction */
-        direction?: (pb.ExchangeDirection | null);
+        direction?: (pb.ExchangeDirection|null);
 
         /** CmdMncgExchange amount */
-        amount?: (number | Long | null);
+        amount?: (number|Long|null);
     }
 
     /** Represents a CmdMncgExchange. */
@@ -8206,7 +8238,7 @@ export namespace pb {
         public direction: pb.ExchangeDirection;
 
         /** CmdMncgExchange amount. */
-        public amount: (number | Long);
+        public amount: (number|Long);
 
         /**
          * Creates a new CmdMncgExchange instance using the specified properties.
@@ -8239,7 +8271,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdMncgExchange;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdMncgExchange;
 
         /**
          * Decodes a CmdMncgExchange message from the specified reader or buffer, length delimited.
@@ -8248,14 +8280,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdMncgExchange;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdMncgExchange;
 
         /**
          * Verifies a CmdMncgExchange message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdMncgExchange message from a plain object. Also converts values to their respective internal types.
@@ -8283,10 +8315,10 @@ export namespace pb {
     interface ICmdMncgExchangeReply {
 
         /** CmdMncgExchangeReply result */
-        result?: (pb.IErrorInfo | null);
+        result?: (pb.IErrorInfo|null);
 
         /** CmdMncgExchangeReply account */
-        account?: (number | null);
+        account?: (number|null);
     }
 
     /** Represents a CmdMncgExchangeReply. */
@@ -8299,7 +8331,7 @@ export namespace pb {
         constructor(properties?: pb.ICmdMncgExchangeReply);
 
         /** CmdMncgExchangeReply result. */
-        public result?: (pb.IErrorInfo | null);
+        public result?: (pb.IErrorInfo|null);
 
         /** CmdMncgExchangeReply account. */
         public account: number;
@@ -8335,7 +8367,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdMncgExchangeReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdMncgExchangeReply;
 
         /**
          * Decodes a CmdMncgExchangeReply message from the specified reader or buffer, length delimited.
@@ -8344,14 +8376,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdMncgExchangeReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdMncgExchangeReply;
 
         /**
          * Verifies a CmdMncgExchangeReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdMncgExchangeReply message from a plain object. Also converts values to their respective internal types.
@@ -8379,16 +8411,16 @@ export namespace pb {
     interface ICmdMncgEditStock {
 
         /** CmdMncgEditStock removed */
-        removed?: (boolean | null);
+        removed?: (boolean|null);
 
         /** CmdMncgEditStock code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** CmdMncgEditStock id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** CmdMncgEditStock isAiStock */
-        isAiStock?: (boolean | null);
+        isAiStock?: (boolean|null);
     }
 
     /** Represents a CmdMncgEditStock. */
@@ -8443,7 +8475,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdMncgEditStock;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdMncgEditStock;
 
         /**
          * Decodes a CmdMncgEditStock message from the specified reader or buffer, length delimited.
@@ -8452,14 +8484,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdMncgEditStock;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdMncgEditStock;
 
         /**
          * Verifies a CmdMncgEditStock message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdMncgEditStock message from a plain object. Also converts values to their respective internal types.
@@ -8487,22 +8519,22 @@ export namespace pb {
     interface ICmdQueryStockOrder {
 
         /** CmdQueryStockOrder uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdQueryStockOrder from */
-        from?: (number | Long | null);
+        from?: (number|Long|null);
 
         /** CmdQueryStockOrder to */
-        to?: (number | Long | null);
+        to?: (number|Long|null);
 
         /** CmdQueryStockOrder pageSize */
-        pageSize?: (number | null);
+        pageSize?: (number|null);
 
         /** CmdQueryStockOrder orderId */
-        orderId?: (number | Long | null);
+        orderId?: (number|Long|null);
 
         /** CmdQueryStockOrder id */
-        id?: (number | null);
+        id?: (number|null);
     }
 
     /** Represents a CmdQueryStockOrder. */
@@ -8518,16 +8550,16 @@ export namespace pb {
         public uid: number;
 
         /** CmdQueryStockOrder from. */
-        public from: (number | Long);
+        public from: (number|Long);
 
         /** CmdQueryStockOrder to. */
-        public to: (number | Long);
+        public to: (number|Long);
 
         /** CmdQueryStockOrder pageSize. */
         public pageSize: number;
 
         /** CmdQueryStockOrder orderId. */
-        public orderId: (number | Long);
+        public orderId: (number|Long);
 
         /** CmdQueryStockOrder id. */
         public id: number;
@@ -8563,7 +8595,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdQueryStockOrder;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQueryStockOrder;
 
         /**
          * Decodes a CmdQueryStockOrder message from the specified reader or buffer, length delimited.
@@ -8572,14 +8604,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdQueryStockOrder;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQueryStockOrder;
 
         /**
          * Verifies a CmdQueryStockOrder message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdQueryStockOrder message from a plain object. Also converts values to their respective internal types.
@@ -8607,34 +8639,34 @@ export namespace pb {
     interface ICgdsConf {
 
         /** CgdsConf id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** CgdsConf regTo */
-        regTo?: (number | Long | null);
+        regTo?: (number|Long|null);
 
         /** CgdsConf from */
-        from?: (number | Long | null);
+        from?: (number|Long|null);
 
         /** CgdsConf to */
-        to?: (number | Long | null);
+        to?: (number|Long|null);
 
         /** CgdsConf conf */
-        conf?: (string | null);
+        conf?: (string|null);
 
         /** CgdsConf award */
-        award?: (string | null);
+        award?: (string|null);
 
         /** CgdsConf status */
-        status?: (number | null);
+        status?: (number|null);
 
         /** CgdsConf title */
-        title?: (string | null);
+        title?: (string|null);
 
         /** CgdsConf logo */
-        logo?: (string | null);
+        logo?: (string|null);
 
         /** CgdsConf url */
-        url?: (string | null);
+        url?: (string|null);
     }
 
     /** Represents a CgdsConf. */
@@ -8650,13 +8682,13 @@ export namespace pb {
         public id: number;
 
         /** CgdsConf regTo. */
-        public regTo: (number | Long);
+        public regTo: (number|Long);
 
         /** CgdsConf from. */
-        public from: (number | Long);
+        public from: (number|Long);
 
         /** CgdsConf to. */
-        public to: (number | Long);
+        public to: (number|Long);
 
         /** CgdsConf conf. */
         public conf: string;
@@ -8707,7 +8739,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CgdsConf;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CgdsConf;
 
         /**
          * Decodes a CgdsConf message from the specified reader or buffer, length delimited.
@@ -8716,14 +8748,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CgdsConf;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CgdsConf;
 
         /**
          * Verifies a CgdsConf message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CgdsConf message from a plain object. Also converts values to their respective internal types.
@@ -8751,7 +8783,7 @@ export namespace pb {
     interface ICgdsList {
 
         /** CgdsList items */
-        items?: (pb.ICgdsConf[] | null);
+        items?: (pb.ICgdsConf[]|null);
     }
 
     /** Represents a CgdsList. */
@@ -8797,7 +8829,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CgdsList;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CgdsList;
 
         /**
          * Decodes a CgdsList message from the specified reader or buffer, length delimited.
@@ -8806,14 +8838,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CgdsList;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CgdsList;
 
         /**
          * Verifies a CgdsList message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CgdsList message from a plain object. Also converts values to their respective internal types.
@@ -8841,7 +8873,7 @@ export namespace pb {
     interface ICmdCgdsReg {
 
         /** CmdCgdsReg id */
-        id?: (number | null);
+        id?: (number|null);
     }
 
     /** Represents a CmdCgdsReg. */
@@ -8887,7 +8919,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdCgdsReg;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdCgdsReg;
 
         /**
          * Decodes a CmdCgdsReg message from the specified reader or buffer, length delimited.
@@ -8896,14 +8928,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdCgdsReg;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdCgdsReg;
 
         /**
          * Verifies a CmdCgdsReg message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdCgdsReg message from a plain object. Also converts values to their respective internal types.
@@ -8931,10 +8963,10 @@ export namespace pb {
     interface ICmdCgdsRegReply {
 
         /** CmdCgdsRegReply result */
-        result?: (pb.IErrorInfo | null);
+        result?: (pb.IErrorInfo|null);
 
         /** CmdCgdsRegReply cgdsStateItem */
-        cgdsStateItem?: (pb.ICgdsStateItem | null);
+        cgdsStateItem?: (pb.ICgdsStateItem|null);
     }
 
     /** Represents a CmdCgdsRegReply. */
@@ -8947,10 +8979,10 @@ export namespace pb {
         constructor(properties?: pb.ICmdCgdsRegReply);
 
         /** CmdCgdsRegReply result. */
-        public result?: (pb.IErrorInfo | null);
+        public result?: (pb.IErrorInfo|null);
 
         /** CmdCgdsRegReply cgdsStateItem. */
-        public cgdsStateItem?: (pb.ICgdsStateItem | null);
+        public cgdsStateItem?: (pb.ICgdsStateItem|null);
 
         /**
          * Creates a new CmdCgdsRegReply instance using the specified properties.
@@ -8983,7 +9015,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdCgdsRegReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdCgdsRegReply;
 
         /**
          * Decodes a CmdCgdsRegReply message from the specified reader or buffer, length delimited.
@@ -8992,14 +9024,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdCgdsRegReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdCgdsRegReply;
 
         /**
          * Verifies a CmdCgdsRegReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdCgdsRegReply message from a plain object. Also converts values to their respective internal types.
@@ -9027,7 +9059,7 @@ export namespace pb {
     interface ICmdCgdsRanking {
 
         /** CmdCgdsRanking id */
-        id?: (number | null);
+        id?: (number|null);
     }
 
     /** Represents a CmdCgdsRanking. */
@@ -9073,7 +9105,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdCgdsRanking;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdCgdsRanking;
 
         /**
          * Decodes a CmdCgdsRanking message from the specified reader or buffer, length delimited.
@@ -9082,14 +9114,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdCgdsRanking;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdCgdsRanking;
 
         /**
          * Verifies a CmdCgdsRanking message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdCgdsRanking message from a plain object. Also converts values to their respective internal types.
@@ -9133,13 +9165,13 @@ export namespace pb {
     interface IZsjcOption {
 
         /** ZsjcOption ts */
-        ts?: (number | Long | null);
+        ts?: (number|Long|null);
 
         /** ZsjcOption pt */
-        pt?: (pb.PriceType | null);
+        pt?: (pb.PriceType|null);
 
         /** ZsjcOption money */
-        money?: (number | null);
+        money?: (number|null);
     }
 
     /** Represents a ZsjcOption. */
@@ -9152,7 +9184,7 @@ export namespace pb {
         constructor(properties?: pb.IZsjcOption);
 
         /** ZsjcOption ts. */
-        public ts: (number | Long);
+        public ts: (number|Long);
 
         /** ZsjcOption pt. */
         public pt: pb.PriceType;
@@ -9191,7 +9223,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.ZsjcOption;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ZsjcOption;
 
         /**
          * Decodes a ZsjcOption message from the specified reader or buffer, length delimited.
@@ -9200,14 +9232,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.ZsjcOption;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ZsjcOption;
 
         /**
          * Verifies a ZsjcOption message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a ZsjcOption message from a plain object. Also converts values to their respective internal types.
@@ -9235,22 +9267,22 @@ export namespace pb {
     interface IZsjcGameData {
 
         /** ZsjcGameData gameType */
-        gameType?: (pb.ZsjcGameType | null);
+        gameType?: (pb.ZsjcGameType|null);
 
         /** ZsjcGameData code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** ZsjcGameData tsSettling */
-        tsSettling?: (number | Long | null);
+        tsSettling?: (number|Long|null);
 
         /** ZsjcGameData settled */
-        settled?: (boolean | null);
+        settled?: (boolean|null);
 
         /** ZsjcGameData first */
-        first?: (pb.IZsjcOption | null);
+        first?: (pb.IZsjcOption|null);
 
         /** ZsjcGameData second */
-        second?: (pb.IZsjcOption | null);
+        second?: (pb.IZsjcOption|null);
     }
 
     /** Represents a ZsjcGameData. */
@@ -9269,16 +9301,16 @@ export namespace pb {
         public code: number;
 
         /** ZsjcGameData tsSettling. */
-        public tsSettling: (number | Long);
+        public tsSettling: (number|Long);
 
         /** ZsjcGameData settled. */
         public settled: boolean;
 
         /** ZsjcGameData first. */
-        public first?: (pb.IZsjcOption | null);
+        public first?: (pb.IZsjcOption|null);
 
         /** ZsjcGameData second. */
-        public second?: (pb.IZsjcOption | null);
+        public second?: (pb.IZsjcOption|null);
 
         /**
          * Creates a new ZsjcGameData instance using the specified properties.
@@ -9311,7 +9343,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.ZsjcGameData;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ZsjcGameData;
 
         /**
          * Decodes a ZsjcGameData message from the specified reader or buffer, length delimited.
@@ -9320,14 +9352,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.ZsjcGameData;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ZsjcGameData;
 
         /**
          * Verifies a ZsjcGameData message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a ZsjcGameData message from a plain object. Also converts values to their respective internal types.
@@ -9355,7 +9387,7 @@ export namespace pb {
     interface IZsjcGameList {
 
         /** ZsjcGameList items */
-        items?: (pb.IZsjcGameData[] | null);
+        items?: (pb.IZsjcGameData[]|null);
     }
 
     /** Represents a ZsjcGameList. */
@@ -9401,7 +9433,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.ZsjcGameList;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ZsjcGameList;
 
         /**
          * Decodes a ZsjcGameList message from the specified reader or buffer, length delimited.
@@ -9410,14 +9442,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.ZsjcGameList;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ZsjcGameList;
 
         /**
          * Verifies a ZsjcGameList message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a ZsjcGameList message from a plain object. Also converts values to their respective internal types.
@@ -9445,25 +9477,25 @@ export namespace pb {
     interface ICmdBet {
 
         /** CmdBet uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdBet money */
-        money?: (number | null);
+        money?: (number|null);
 
         /** CmdBet gameIndex */
-        gameIndex?: (number | null);
+        gameIndex?: (number|null);
 
         /** CmdBet betting */
-        betting?: (number | null);
+        betting?: (number|null);
 
         /** CmdBet nickname */
-        nickname?: (string | null);
+        nickname?: (string|null);
 
         /** CmdBet icon */
-        icon?: (string | null);
+        icon?: (string|null);
 
         /** CmdBet gender */
-        gender?: (string | null);
+        gender?: (string|null);
     }
 
     /** Represents a CmdBet. */
@@ -9527,7 +9559,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdBet;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdBet;
 
         /**
          * Decodes a CmdBet message from the specified reader or buffer, length delimited.
@@ -9536,14 +9568,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdBet;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdBet;
 
         /**
          * Verifies a CmdBet message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdBet message from a plain object. Also converts values to their respective internal types.
@@ -9571,7 +9603,7 @@ export namespace pb {
     interface ICmdGetWeeklyAward {
 
         /** CmdGetWeeklyAward code */
-        code?: (string | null);
+        code?: (string|null);
     }
 
     /** Represents a CmdGetWeeklyAward. */
@@ -9617,7 +9649,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGetWeeklyAward;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetWeeklyAward;
 
         /**
          * Decodes a CmdGetWeeklyAward message from the specified reader or buffer, length delimited.
@@ -9626,14 +9658,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGetWeeklyAward;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetWeeklyAward;
 
         /**
          * Verifies a CmdGetWeeklyAward message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGetWeeklyAward message from a plain object. Also converts values to their respective internal types.
@@ -9661,10 +9693,10 @@ export namespace pb {
     interface ICmdGetWeeklyAwardReply {
 
         /** CmdGetWeeklyAwardReply result */
-        result?: (pb.IErrorInfo | null);
+        result?: (pb.IErrorInfo|null);
 
         /** CmdGetWeeklyAwardReply award */
-        award?: (pb.IGameProperties | null);
+        award?: (pb.IGameProperties|null);
     }
 
     /** Represents a CmdGetWeeklyAwardReply. */
@@ -9677,10 +9709,10 @@ export namespace pb {
         constructor(properties?: pb.ICmdGetWeeklyAwardReply);
 
         /** CmdGetWeeklyAwardReply result. */
-        public result?: (pb.IErrorInfo | null);
+        public result?: (pb.IErrorInfo|null);
 
         /** CmdGetWeeklyAwardReply award. */
-        public award?: (pb.IGameProperties | null);
+        public award?: (pb.IGameProperties|null);
 
         /**
          * Creates a new CmdGetWeeklyAwardReply instance using the specified properties.
@@ -9713,7 +9745,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGetWeeklyAwardReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetWeeklyAwardReply;
 
         /**
          * Decodes a CmdGetWeeklyAwardReply message from the specified reader or buffer, length delimited.
@@ -9722,14 +9754,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGetWeeklyAwardReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetWeeklyAwardReply;
 
         /**
          * Verifies a CmdGetWeeklyAwardReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGetWeeklyAwardReply message from a plain object. Also converts values to their respective internal types.
@@ -9757,19 +9789,19 @@ export namespace pb {
     interface ICmdQueryEventLog {
 
         /** CmdQueryEventLog eventId */
-        eventId?: (pb.EventId | null);
+        eventId?: (pb.EventId|null);
 
         /** CmdQueryEventLog uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdQueryEventLog from */
-        from?: (number | Long | null);
+        from?: (number|Long|null);
 
         /** CmdQueryEventLog to */
-        to?: (number | Long | null);
+        to?: (number|Long|null);
 
         /** CmdQueryEventLog total */
-        total?: (number | null);
+        total?: (number|null);
     }
 
     /** Represents a CmdQueryEventLog. */
@@ -9788,10 +9820,10 @@ export namespace pb {
         public uid: number;
 
         /** CmdQueryEventLog from. */
-        public from: (number | Long);
+        public from: (number|Long);
 
         /** CmdQueryEventLog to. */
-        public to: (number | Long);
+        public to: (number|Long);
 
         /** CmdQueryEventLog total. */
         public total: number;
@@ -9827,7 +9859,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdQueryEventLog;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQueryEventLog;
 
         /**
          * Decodes a CmdQueryEventLog message from the specified reader or buffer, length delimited.
@@ -9836,14 +9868,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdQueryEventLog;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQueryEventLog;
 
         /**
          * Verifies a CmdQueryEventLog message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdQueryEventLog message from a plain object. Also converts values to their respective internal types.
@@ -9871,16 +9903,16 @@ export namespace pb {
     interface IEventLog {
 
         /** EventLog eventId */
-        eventId?: (pb.EventId | null);
+        eventId?: (pb.EventId|null);
 
         /** EventLog uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** EventLog ts */
-        ts?: (number | Long | null);
+        ts?: (number|Long|null);
 
         /** EventLog log */
-        log?: (string | null);
+        log?: (string|null);
     }
 
     /** Represents an EventLog. */
@@ -9899,7 +9931,7 @@ export namespace pb {
         public uid: number;
 
         /** EventLog ts. */
-        public ts: (number | Long);
+        public ts: (number|Long);
 
         /** EventLog log. */
         public log: string;
@@ -9935,7 +9967,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.EventLog;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.EventLog;
 
         /**
          * Decodes an EventLog message from the specified reader or buffer, length delimited.
@@ -9944,14 +9976,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.EventLog;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.EventLog;
 
         /**
          * Verifies an EventLog message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an EventLog message from a plain object. Also converts values to their respective internal types.
@@ -9979,7 +10011,7 @@ export namespace pb {
     interface IEvents {
 
         /** Events items */
-        items?: (pb.IEventLog[] | null);
+        items?: (pb.IEventLog[]|null);
     }
 
     /** Represents an Events. */
@@ -10025,7 +10057,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.Events;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.Events;
 
         /**
          * Decodes an Events message from the specified reader or buffer, length delimited.
@@ -10034,14 +10066,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.Events;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.Events;
 
         /**
          * Verifies an Events message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an Events message from a plain object. Also converts values to their respective internal types.
@@ -10069,16 +10101,16 @@ export namespace pb {
     interface IItemOrder {
 
         /** ItemOrder itemId */
-        itemId?: (number | null);
+        itemId?: (number|null);
 
         /** ItemOrder activityId */
-        activityId?: (number | null);
+        activityId?: (number|null);
 
         /** ItemOrder count */
-        count?: (number | null);
+        count?: (number|null);
 
         /** ItemOrder from */
-        from?: (pb.AppFrom | null);
+        from?: (pb.AppFrom|null);
     }
 
     /** Represents an ItemOrder. */
@@ -10133,7 +10165,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.ItemOrder;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ItemOrder;
 
         /**
          * Decodes an ItemOrder message from the specified reader or buffer, length delimited.
@@ -10142,14 +10174,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.ItemOrder;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ItemOrder;
 
         /**
          * Verifies an ItemOrder message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an ItemOrder message from a plain object. Also converts values to their respective internal types.
@@ -10177,13 +10209,16 @@ export namespace pb {
     interface ICmdShopOrderReply {
 
         /** CmdShopOrderReply result */
-        result?: (pb.IErrorInfo | null);
+        result?: (pb.IErrorInfo|null);
 
         /** CmdShopOrderReply orderId */
-        orderId?: (number | Long | null);
+        orderId?: (number|Long|null);
 
         /** CmdShopOrderReply wxXml */
-        wxXml?: (string | null);
+        wxXml?: (string|null);
+
+        /** CmdShopOrderReply payType */
+        payType?: (pb.PaymentType|null);
     }
 
     /** Represents a CmdShopOrderReply. */
@@ -10196,13 +10231,16 @@ export namespace pb {
         constructor(properties?: pb.ICmdShopOrderReply);
 
         /** CmdShopOrderReply result. */
-        public result?: (pb.IErrorInfo | null);
+        public result?: (pb.IErrorInfo|null);
 
         /** CmdShopOrderReply orderId. */
-        public orderId: (number | Long);
+        public orderId: (number|Long);
 
         /** CmdShopOrderReply wxXml. */
         public wxXml: string;
+
+        /** CmdShopOrderReply payType. */
+        public payType: pb.PaymentType;
 
         /**
          * Creates a new CmdShopOrderReply instance using the specified properties.
@@ -10235,7 +10273,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdShopOrderReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdShopOrderReply;
 
         /**
          * Decodes a CmdShopOrderReply message from the specified reader or buffer, length delimited.
@@ -10244,14 +10282,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdShopOrderReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdShopOrderReply;
 
         /**
          * Verifies a CmdShopOrderReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdShopOrderReply message from a plain object. Also converts values to their respective internal types.
@@ -10279,16 +10317,16 @@ export namespace pb {
     interface ICmdShopOrderQuery {
 
         /** CmdShopOrderQuery uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdShopOrderQuery orderId */
-        orderId?: (number | Long | null);
+        orderId?: (number|Long|null);
 
         /** CmdShopOrderQuery from */
-        from?: (pb.AppFrom | null);
+        from?: (pb.AppFrom|null);
 
         /** CmdShopOrderQuery wxResult */
-        wxResult?: (string | null);
+        wxResult?: (string|null);
     }
 
     /** Represents a CmdShopOrderQuery. */
@@ -10304,7 +10342,7 @@ export namespace pb {
         public uid: number;
 
         /** CmdShopOrderQuery orderId. */
-        public orderId: (number | Long);
+        public orderId: (number|Long);
 
         /** CmdShopOrderQuery from. */
         public from: pb.AppFrom;
@@ -10343,7 +10381,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdShopOrderQuery;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdShopOrderQuery;
 
         /**
          * Decodes a CmdShopOrderQuery message from the specified reader or buffer, length delimited.
@@ -10352,14 +10390,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdShopOrderQuery;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdShopOrderQuery;
 
         /**
          * Verifies a CmdShopOrderQuery message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdShopOrderQuery message from a plain object. Also converts values to their respective internal types.
@@ -10387,10 +10425,10 @@ export namespace pb {
     interface ICmdMobileBind {
 
         /** CmdMobileBind mobile */
-        mobile?: (string | null);
+        mobile?: (string|null);
 
         /** CmdMobileBind smsCode */
-        smsCode?: (string | null);
+        smsCode?: (string|null);
     }
 
     /** Represents a CmdMobileBind. */
@@ -10439,7 +10477,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdMobileBind;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdMobileBind;
 
         /**
          * Decodes a CmdMobileBind message from the specified reader or buffer, length delimited.
@@ -10448,14 +10486,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdMobileBind;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdMobileBind;
 
         /**
          * Verifies a CmdMobileBind message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdMobileBind message from a plain object. Also converts values to their respective internal types.
@@ -10483,25 +10521,25 @@ export namespace pb {
     interface IActivityItem {
 
         /** ActivityItem id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** ActivityItem title */
-        title?: (string | null);
+        title?: (string|null);
 
         /** ActivityItem icon */
-        icon?: (string | null);
+        icon?: (string|null);
 
         /** ActivityItem image */
-        image?: (string | null);
+        image?: (string|null);
 
         /** ActivityItem from */
-        from?: (number | Long | null);
+        from?: (number|Long|null);
 
         /** ActivityItem to */
-        to?: (number | Long | null);
+        to?: (number|Long|null);
 
         /** ActivityItem itemId */
-        itemId?: (number | null);
+        itemId?: (number|null);
     }
 
     /** Represents an ActivityItem. */
@@ -10526,10 +10564,10 @@ export namespace pb {
         public image: string;
 
         /** ActivityItem from. */
-        public from: (number | Long);
+        public from: (number|Long);
 
         /** ActivityItem to. */
-        public to: (number | Long);
+        public to: (number|Long);
 
         /** ActivityItem itemId. */
         public itemId: number;
@@ -10565,7 +10603,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.ActivityItem;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ActivityItem;
 
         /**
          * Decodes an ActivityItem message from the specified reader or buffer, length delimited.
@@ -10574,14 +10612,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.ActivityItem;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ActivityItem;
 
         /**
          * Verifies an ActivityItem message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an ActivityItem message from a plain object. Also converts values to their respective internal types.
@@ -10609,7 +10647,7 @@ export namespace pb {
     interface IActivityConf {
 
         /** ActivityConf items */
-        items?: (pb.IActivityItem[] | null);
+        items?: (pb.IActivityItem[]|null);
     }
 
     /** Represents an ActivityConf. */
@@ -10655,7 +10693,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.ActivityConf;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ActivityConf;
 
         /**
          * Decodes an ActivityConf message from the specified reader or buffer, length delimited.
@@ -10664,14 +10702,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.ActivityConf;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ActivityConf;
 
         /**
          * Verifies an ActivityConf message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an ActivityConf message from a plain object. Also converts values to their respective internal types.
@@ -10690,6 +10728,96 @@ export namespace pb {
 
         /**
          * Converts this ActivityConf to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an ActivityLogs. */
+    interface IActivityLogs {
+
+        /** ActivityLogs ids */
+        ids?: (number[]|null);
+    }
+
+    /** Represents an ActivityLogs. */
+    class ActivityLogs implements IActivityLogs {
+
+        /**
+         * Constructs a new ActivityLogs.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IActivityLogs);
+
+        /** ActivityLogs ids. */
+        public ids: number[];
+
+        /**
+         * Creates a new ActivityLogs instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ActivityLogs instance
+         */
+        public static create(properties?: pb.IActivityLogs): pb.ActivityLogs;
+
+        /**
+         * Encodes the specified ActivityLogs message. Does not implicitly {@link pb.ActivityLogs.verify|verify} messages.
+         * @param message ActivityLogs message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IActivityLogs, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ActivityLogs message, length delimited. Does not implicitly {@link pb.ActivityLogs.verify|verify} messages.
+         * @param message ActivityLogs message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IActivityLogs, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an ActivityLogs message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ActivityLogs
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ActivityLogs;
+
+        /**
+         * Decodes an ActivityLogs message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ActivityLogs
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ActivityLogs;
+
+        /**
+         * Verifies an ActivityLogs message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an ActivityLogs message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ActivityLogs
+         */
+        public static fromObject(object: { [k: string]: any }): pb.ActivityLogs;
+
+        /**
+         * Creates a plain object from an ActivityLogs message. Also converts values to other types if specified.
+         * @param message ActivityLogs
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.ActivityLogs, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ActivityLogs to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -10721,22 +10849,22 @@ export namespace pb {
     interface ICmdQuoteQuery {
 
         /** CmdQuoteQuery ktype */
-        ktype?: (pb.KType | null);
+        ktype?: (pb.KType|null);
 
         /** CmdQuoteQuery code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** CmdQuoteQuery from */
-        from?: (number | Long | null);
+        from?: (number|Long|null);
 
         /** CmdQuoteQuery total */
-        total?: (number | null);
+        total?: (number|null);
 
         /** CmdQuoteQuery to */
-        to?: (number | Long | null);
+        to?: (number|Long|null);
 
         /** CmdQuoteQuery kstyle */
-        kstyle?: (pb.KStyle | null);
+        kstyle?: (pb.KStyle|null);
     }
 
     /** Represents a CmdQuoteQuery. */
@@ -10755,13 +10883,13 @@ export namespace pb {
         public code: number;
 
         /** CmdQuoteQuery from. */
-        public from: (number | Long);
+        public from: (number|Long);
 
         /** CmdQuoteQuery total. */
         public total: number;
 
         /** CmdQuoteQuery to. */
-        public to: (number | Long);
+        public to: (number|Long);
 
         /** CmdQuoteQuery kstyle. */
         public kstyle: pb.KStyle;
@@ -10797,7 +10925,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdQuoteQuery;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQuoteQuery;
 
         /**
          * Decodes a CmdQuoteQuery message from the specified reader or buffer, length delimited.
@@ -10806,14 +10934,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdQuoteQuery;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQuoteQuery;
 
         /**
          * Verifies a CmdQuoteQuery message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdQuoteQuery message from a plain object. Also converts values to their respective internal types.
@@ -10841,49 +10969,49 @@ export namespace pb {
     interface IQuoteItem {
 
         /** QuoteItem code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** QuoteItem ktype */
-        ktype?: (pb.KType | null);
+        ktype?: (pb.KType|null);
 
         /** QuoteItem timestamp */
-        timestamp?: (number | Long | null);
+        timestamp?: (number|Long|null);
 
         /** QuoteItem price */
-        price?: (number | null);
+        price?: (number|null);
 
         /** QuoteItem volume */
-        volume?: (number | Long | null);
+        volume?: (number|Long|null);
 
         /** QuoteItem amount */
-        amount?: (number | null);
+        amount?: (number|null);
 
         /** QuoteItem count */
-        count?: (number | Long | null);
+        count?: (number|Long|null);
 
         /** QuoteItem open */
-        open?: (number | null);
+        open?: (number|null);
 
         /** QuoteItem close */
-        close?: (number | null);
+        close?: (number|null);
 
         /** QuoteItem high */
-        high?: (number | null);
+        high?: (number|null);
 
         /** QuoteItem low */
-        low?: (number | null);
+        low?: (number|null);
 
         /** QuoteItem ask5Price */
-        ask5Price?: (number[] | null);
+        ask5Price?: (number[]|null);
 
         /** QuoteItem ask5Volume */
-        ask5Volume?: ((number | Long)[] | null);
+        ask5Volume?: ((number|Long)[]|null);
 
         /** QuoteItem bid5Price */
-        bid5Price?: (number[] | null);
+        bid5Price?: (number[]|null);
 
         /** QuoteItem bid5Volume */
-        bid5Volume?: ((number | Long)[] | null);
+        bid5Volume?: ((number|Long)[]|null);
     }
 
     /** Represents a QuoteItem. */
@@ -10902,19 +11030,19 @@ export namespace pb {
         public ktype: pb.KType;
 
         /** QuoteItem timestamp. */
-        public timestamp: (number | Long);
+        public timestamp: (number|Long);
 
         /** QuoteItem price. */
         public price: number;
 
         /** QuoteItem volume. */
-        public volume: (number | Long);
+        public volume: (number|Long);
 
         /** QuoteItem amount. */
         public amount: number;
 
         /** QuoteItem count. */
-        public count: (number | Long);
+        public count: (number|Long);
 
         /** QuoteItem open. */
         public open: number;
@@ -10932,13 +11060,13 @@ export namespace pb {
         public ask5Price: number[];
 
         /** QuoteItem ask5Volume. */
-        public ask5Volume: (number | Long)[];
+        public ask5Volume: (number|Long)[];
 
         /** QuoteItem bid5Price. */
         public bid5Price: number[];
 
         /** QuoteItem bid5Volume. */
-        public bid5Volume: (number | Long)[];
+        public bid5Volume: (number|Long)[];
 
         /**
          * Creates a new QuoteItem instance using the specified properties.
@@ -10971,7 +11099,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.QuoteItem;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.QuoteItem;
 
         /**
          * Decodes a QuoteItem message from the specified reader or buffer, length delimited.
@@ -10980,14 +11108,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.QuoteItem;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.QuoteItem;
 
         /**
          * Verifies a QuoteItem message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a QuoteItem message from a plain object. Also converts values to their respective internal types.
@@ -11015,7 +11143,7 @@ export namespace pb {
     interface IQuotes {
 
         /** Quotes items */
-        items?: (pb.IQuoteItem[] | null);
+        items?: (pb.IQuoteItem[]|null);
     }
 
     /** Represents a Quotes. */
@@ -11061,7 +11189,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.Quotes;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.Quotes;
 
         /**
          * Decodes a Quotes message from the specified reader or buffer, length delimited.
@@ -11070,14 +11198,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.Quotes;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.Quotes;
 
         /**
          * Verifies a Quotes message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a Quotes message from a plain object. Also converts values to their respective internal types.
@@ -11105,10 +11233,10 @@ export namespace pb {
     interface IQuoteSubscribeItem {
 
         /** QuoteSubscribeItem code */
-        code?: (string | null);
+        code?: (string|null);
 
         /** QuoteSubscribeItem flag */
-        flag?: (boolean | null);
+        flag?: (boolean|null);
     }
 
     /** Represents a QuoteSubscribeItem. */
@@ -11157,7 +11285,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.QuoteSubscribeItem;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.QuoteSubscribeItem;
 
         /**
          * Decodes a QuoteSubscribeItem message from the specified reader or buffer, length delimited.
@@ -11166,14 +11294,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.QuoteSubscribeItem;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.QuoteSubscribeItem;
 
         /**
          * Verifies a QuoteSubscribeItem message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a QuoteSubscribeItem message from a plain object. Also converts values to their respective internal types.
@@ -11201,7 +11329,7 @@ export namespace pb {
     interface ICmdQuoteSubscribe {
 
         /** CmdQuoteSubscribe items */
-        items?: (pb.IQuoteSubscribeItem[] | null);
+        items?: (pb.IQuoteSubscribeItem[]|null);
     }
 
     /** Represents a CmdQuoteSubscribe. */
@@ -11247,7 +11375,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdQuoteSubscribe;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQuoteSubscribe;
 
         /**
          * Decodes a CmdQuoteSubscribe message from the specified reader or buffer, length delimited.
@@ -11256,14 +11384,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdQuoteSubscribe;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQuoteSubscribe;
 
         /**
          * Verifies a CmdQuoteSubscribe message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdQuoteSubscribe message from a plain object. Also converts values to their respective internal types.
@@ -11291,10 +11419,10 @@ export namespace pb {
     interface ICmdTradingDay {
 
         /** CmdTradingDay date */
-        date?: (number | null);
+        date?: (number|null);
 
         /** CmdTradingDay n */
-        n?: (number | null);
+        n?: (number|null);
     }
 
     /** Represents a CmdTradingDay. */
@@ -11343,7 +11471,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdTradingDay;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdTradingDay;
 
         /**
          * Decodes a CmdTradingDay message from the specified reader or buffer, length delimited.
@@ -11352,14 +11480,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdTradingDay;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdTradingDay;
 
         /**
          * Verifies a CmdTradingDay message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdTradingDay message from a plain object. Also converts values to their respective internal types.
@@ -11387,10 +11515,10 @@ export namespace pb {
     interface ICmdTradingDayReply {
 
         /** CmdTradingDayReply isTradingDay */
-        isTradingDay?: (boolean | null);
+        isTradingDay?: (boolean|null);
 
         /** CmdTradingDayReply days */
-        days?: (number[] | null);
+        days?: (number[]|null);
     }
 
     /** Represents a CmdTradingDayReply. */
@@ -11439,7 +11567,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdTradingDayReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdTradingDayReply;
 
         /**
          * Decodes a CmdTradingDayReply message from the specified reader or buffer, length delimited.
@@ -11448,14 +11576,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdTradingDayReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdTradingDayReply;
 
         /**
          * Verifies a CmdTradingDayReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdTradingDayReply message from a plain object. Also converts values to their respective internal types.
@@ -11483,19 +11611,19 @@ export namespace pb {
     interface ICmdQuoteQueryFuture {
 
         /** CmdQuoteQueryFuture ktype */
-        ktype?: (pb.KType | null);
+        ktype?: (pb.KType|null);
 
         /** CmdQuoteQueryFuture code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** CmdQuoteQueryFuture from */
-        from?: (number | Long | null);
+        from?: (number|Long|null);
 
         /** CmdQuoteQueryFuture total */
-        total?: (number | null);
+        total?: (number|null);
 
         /** CmdQuoteQueryFuture to */
-        to?: (number | Long | null);
+        to?: (number|Long|null);
     }
 
     /** Represents a CmdQuoteQueryFuture. */
@@ -11514,13 +11642,13 @@ export namespace pb {
         public code: number;
 
         /** CmdQuoteQueryFuture from. */
-        public from: (number | Long);
+        public from: (number|Long);
 
         /** CmdQuoteQueryFuture total. */
         public total: number;
 
         /** CmdQuoteQueryFuture to. */
-        public to: (number | Long);
+        public to: (number|Long);
 
         /**
          * Creates a new CmdQuoteQueryFuture instance using the specified properties.
@@ -11553,7 +11681,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdQuoteQueryFuture;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQuoteQueryFuture;
 
         /**
          * Decodes a CmdQuoteQueryFuture message from the specified reader or buffer, length delimited.
@@ -11562,14 +11690,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdQuoteQueryFuture;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQuoteQueryFuture;
 
         /**
          * Verifies a CmdQuoteQueryFuture message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdQuoteQueryFuture message from a plain object. Also converts values to their respective internal types.
@@ -11597,31 +11725,31 @@ export namespace pb {
     interface IQuoteItemFuture {
 
         /** QuoteItemFuture code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** QuoteItemFuture ktype */
-        ktype?: (pb.KType | null);
+        ktype?: (pb.KType|null);
 
         /** QuoteItemFuture timestamp */
-        timestamp?: (number | Long | null);
+        timestamp?: (number|Long|null);
 
         /** QuoteItemFuture open */
-        open?: (number | null);
+        open?: (number|null);
 
         /** QuoteItemFuture close */
-        close?: (number | null);
+        close?: (number|null);
 
         /** QuoteItemFuture high */
-        high?: (number | null);
+        high?: (number|null);
 
         /** QuoteItemFuture low */
-        low?: (number | null);
+        low?: (number|null);
 
         /** QuoteItemFuture volume */
-        volume?: (number | Long | null);
+        volume?: (number|Long|null);
 
         /** QuoteItemFuture cclHold */
-        cclHold?: (number | Long | null);
+        cclHold?: (number|Long|null);
     }
 
     /** Represents a QuoteItemFuture. */
@@ -11640,7 +11768,7 @@ export namespace pb {
         public ktype: pb.KType;
 
         /** QuoteItemFuture timestamp. */
-        public timestamp: (number | Long);
+        public timestamp: (number|Long);
 
         /** QuoteItemFuture open. */
         public open: number;
@@ -11655,10 +11783,10 @@ export namespace pb {
         public low: number;
 
         /** QuoteItemFuture volume. */
-        public volume: (number | Long);
+        public volume: (number|Long);
 
         /** QuoteItemFuture cclHold. */
-        public cclHold: (number | Long);
+        public cclHold: (number|Long);
 
         /**
          * Creates a new QuoteItemFuture instance using the specified properties.
@@ -11691,7 +11819,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.QuoteItemFuture;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.QuoteItemFuture;
 
         /**
          * Decodes a QuoteItemFuture message from the specified reader or buffer, length delimited.
@@ -11700,14 +11828,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.QuoteItemFuture;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.QuoteItemFuture;
 
         /**
          * Verifies a QuoteItemFuture message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a QuoteItemFuture message from a plain object. Also converts values to their respective internal types.
@@ -11735,7 +11863,7 @@ export namespace pb {
     interface IQuotesFuture {
 
         /** QuotesFuture items */
-        items?: (pb.IQuoteItemFuture[] | null);
+        items?: (pb.IQuoteItemFuture[]|null);
     }
 
     /** Represents a QuotesFuture. */
@@ -11781,7 +11909,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.QuotesFuture;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.QuotesFuture;
 
         /**
          * Decodes a QuotesFuture message from the specified reader or buffer, length delimited.
@@ -11790,14 +11918,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.QuotesFuture;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.QuotesFuture;
 
         /**
          * Verifies a QuotesFuture message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a QuotesFuture message from a plain object. Also converts values to their respective internal types.
@@ -11825,16 +11953,16 @@ export namespace pb {
     interface ICmdQueryAiStockList {
 
         /** CmdQueryAiStockList rankFrom */
-        rankFrom?: (number | null);
+        rankFrom?: (number|null);
 
         /** CmdQueryAiStockList tsUpdateFrom */
-        tsUpdateFrom?: (number | Long | null);
+        tsUpdateFrom?: (number|Long|null);
 
         /** CmdQueryAiStockList total */
-        total?: (number | null);
+        total?: (number|null);
 
         /** CmdQueryAiStockList codes */
-        codes?: (number[] | null);
+        codes?: (number[]|null);
     }
 
     /** Represents a CmdQueryAiStockList. */
@@ -11850,7 +11978,7 @@ export namespace pb {
         public rankFrom: number;
 
         /** CmdQueryAiStockList tsUpdateFrom. */
-        public tsUpdateFrom: (number | Long);
+        public tsUpdateFrom: (number|Long);
 
         /** CmdQueryAiStockList total. */
         public total: number;
@@ -11889,7 +12017,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdQueryAiStockList;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQueryAiStockList;
 
         /**
          * Decodes a CmdQueryAiStockList message from the specified reader or buffer, length delimited.
@@ -11898,14 +12026,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdQueryAiStockList;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQueryAiStockList;
 
         /**
          * Verifies a CmdQueryAiStockList message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdQueryAiStockList message from a plain object. Also converts values to their respective internal types.
@@ -11933,34 +12061,34 @@ export namespace pb {
     interface IAiStockItem {
 
         /** AiStockItem code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** AiStockItem name */
-        name?: (string | null);
+        name?: (string|null);
 
         /** AiStockItem industry */
-        industry?: (string | null);
+        industry?: (string|null);
 
         /** AiStockItem tsUpdated */
-        tsUpdated?: (number | Long | null);
+        tsUpdated?: (number|Long|null);
 
         /** AiStockItem profitRanking */
-        profitRanking?: (number | null);
+        profitRanking?: (number|null);
 
         /** AiStockItem profitRate */
-        profitRate?: (number | null);
+        profitRate?: (number|null);
 
         /** AiStockItem lastAskPrice */
-        lastAskPrice?: (number | null);
+        lastAskPrice?: (number|null);
 
         /** AiStockItem lastBidPrice */
-        lastBidPrice?: (number | null);
+        lastBidPrice?: (number|null);
 
         /** AiStockItem curAskPrice */
-        curAskPrice?: (number | null);
+        curAskPrice?: (number|null);
 
         /** AiStockItem todaySignal */
-        todaySignal?: (number | null);
+        todaySignal?: (number|null);
     }
 
     /** Represents an AiStockItem. */
@@ -11982,7 +12110,7 @@ export namespace pb {
         public industry: string;
 
         /** AiStockItem tsUpdated. */
-        public tsUpdated: (number | Long);
+        public tsUpdated: (number|Long);
 
         /** AiStockItem profitRanking. */
         public profitRanking: number;
@@ -12033,7 +12161,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.AiStockItem;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.AiStockItem;
 
         /**
          * Decodes an AiStockItem message from the specified reader or buffer, length delimited.
@@ -12042,14 +12170,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.AiStockItem;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.AiStockItem;
 
         /**
          * Verifies an AiStockItem message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an AiStockItem message from a plain object. Also converts values to their respective internal types.
@@ -12077,7 +12205,7 @@ export namespace pb {
     interface ICmdQueryAiStockListReply {
 
         /** CmdQueryAiStockListReply items */
-        items?: (pb.IAiStockItem[] | null);
+        items?: (pb.IAiStockItem[]|null);
     }
 
     /** Represents a CmdQueryAiStockListReply. */
@@ -12123,7 +12251,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdQueryAiStockListReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQueryAiStockListReply;
 
         /**
          * Decodes a CmdQueryAiStockListReply message from the specified reader or buffer, length delimited.
@@ -12132,14 +12260,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdQueryAiStockListReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQueryAiStockListReply;
 
         /**
          * Verifies a CmdQueryAiStockListReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdQueryAiStockListReply message from a plain object. Also converts values to their respective internal types.
@@ -12167,7 +12295,7 @@ export namespace pb {
     interface ICmdQueryAiSignal {
 
         /** CmdQueryAiSignal code */
-        code?: (number | null);
+        code?: (number|null);
     }
 
     /** Represents a CmdQueryAiSignal. */
@@ -12213,7 +12341,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdQueryAiSignal;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQueryAiSignal;
 
         /**
          * Decodes a CmdQueryAiSignal message from the specified reader or buffer, length delimited.
@@ -12222,14 +12350,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdQueryAiSignal;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQueryAiSignal;
 
         /**
          * Verifies a CmdQueryAiSignal message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdQueryAiSignal message from a plain object. Also converts values to their respective internal types.
@@ -12257,19 +12385,19 @@ export namespace pb {
     interface IAiSignalItem {
 
         /** AiSignalItem ts */
-        ts?: (number | Long | null);
+        ts?: (number|Long|null);
 
         /** AiSignalItem flag */
-        flag?: (number | null);
+        flag?: (number|null);
 
         /** AiSignalItem price */
-        price?: (number | null);
+        price?: (number|null);
 
         /** AiSignalItem ma10 */
-        ma10?: (number | null);
+        ma10?: (number|null);
 
         /** AiSignalItem ma30 */
-        ma30?: (number | null);
+        ma30?: (number|null);
     }
 
     /** Represents an AiSignalItem. */
@@ -12282,7 +12410,7 @@ export namespace pb {
         constructor(properties?: pb.IAiSignalItem);
 
         /** AiSignalItem ts. */
-        public ts: (number | Long);
+        public ts: (number|Long);
 
         /** AiSignalItem flag. */
         public flag: number;
@@ -12327,7 +12455,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.AiSignalItem;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.AiSignalItem;
 
         /**
          * Decodes an AiSignalItem message from the specified reader or buffer, length delimited.
@@ -12336,14 +12464,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.AiSignalItem;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.AiSignalItem;
 
         /**
          * Verifies an AiSignalItem message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an AiSignalItem message from a plain object. Also converts values to their respective internal types.
@@ -12371,13 +12499,13 @@ export namespace pb {
     interface ICmdQueryAiSignalReply {
 
         /** CmdQueryAiSignalReply code */
-        code?: (number | null);
+        code?: (number|null);
 
         /** CmdQueryAiSignalReply industry */
-        industry?: (string | null);
+        industry?: (string|null);
 
         /** CmdQueryAiSignalReply signals */
-        signals?: (pb.IAiSignalItem[] | null);
+        signals?: (pb.IAiSignalItem[]|null);
     }
 
     /** Represents a CmdQueryAiSignalReply. */
@@ -12429,7 +12557,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdQueryAiSignalReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdQueryAiSignalReply;
 
         /**
          * Decodes a CmdQueryAiSignalReply message from the specified reader or buffer, length delimited.
@@ -12438,14 +12566,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdQueryAiSignalReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdQueryAiSignalReply;
 
         /**
          * Verifies a CmdQueryAiSignalReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdQueryAiSignalReply message from a plain object. Also converts values to their respective internal types.
@@ -12581,42 +12709,42 @@ export namespace pb {
          * @param error Error, if any
          * @param [response] Quotes
          */
-        type QuotesQueryCallback = (error: (Error | null), response?: pb.Quotes) => void;
+        type QuotesQueryCallback = (error: (Error|null), response?: pb.Quotes) => void;
 
         /**
          * Callback as used by {@link pb.QuotesService#quotesSubscribe}.
          * @param error Error, if any
          * @param [response] ErrorInfo
          */
-        type QuotesSubscribeCallback = (error: (Error | null), response?: pb.ErrorInfo) => void;
+        type QuotesSubscribeCallback = (error: (Error|null), response?: pb.ErrorInfo) => void;
 
         /**
          * Callback as used by {@link pb.QuotesService#isTradingDay}.
          * @param error Error, if any
          * @param [response] CmdTradingDayReply
          */
-        type IsTradingDayCallback = (error: (Error | null), response?: pb.CmdTradingDayReply) => void;
+        type IsTradingDayCallback = (error: (Error|null), response?: pb.CmdTradingDayReply) => void;
 
         /**
          * Callback as used by {@link pb.QuotesService#queryTradingDay}.
          * @param error Error, if any
          * @param [response] CmdTradingDayReply
          */
-        type QueryTradingDayCallback = (error: (Error | null), response?: pb.CmdTradingDayReply) => void;
+        type QueryTradingDayCallback = (error: (Error|null), response?: pb.CmdTradingDayReply) => void;
 
         /**
          * Callback as used by {@link pb.QuotesService#queryAiStockList}.
          * @param error Error, if any
          * @param [response] CmdQueryAiStockListReply
          */
-        type QueryAiStockListCallback = (error: (Error | null), response?: pb.CmdQueryAiStockListReply) => void;
+        type QueryAiStockListCallback = (error: (Error|null), response?: pb.CmdQueryAiStockListReply) => void;
 
         /**
          * Callback as used by {@link pb.QuotesService#queryAiSignal}.
          * @param error Error, if any
          * @param [response] CmdQueryAiSignalReply
          */
-        type QueryAiSignalCallback = (error: (Error | null), response?: pb.CmdQueryAiSignalReply) => void;
+        type QueryAiSignalCallback = (error: (Error|null), response?: pb.CmdQueryAiSignalReply) => void;
     }
 
     /** Represents a QuotesFutureService */
@@ -12661,7 +12789,7 @@ export namespace pb {
          * @param error Error, if any
          * @param [response] QuotesFuture
          */
-        type QuotesQueryCallback = (error: (Error | null), response?: pb.QuotesFuture) => void;
+        type QuotesQueryCallback = (error: (Error|null), response?: pb.QuotesFuture) => void;
     }
 
     /** AppFrom enum. */
@@ -12719,31 +12847,31 @@ export namespace pb {
     interface IAdClicked {
 
         /** AdClicked id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** AdClicked pos */
-        pos?: (number | null);
+        pos?: (number|null);
 
         /** AdClicked url */
-        url?: (string | null);
+        url?: (string|null);
 
         /** AdClicked title */
-        title?: (string | null);
+        title?: (string|null);
 
         /** AdClicked uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** AdClicked from */
-        from?: (pb.AppFrom | null);
+        from?: (pb.AppFrom|null);
 
         /** AdClicked gold */
-        gold?: (number | null);
+        gold?: (number|null);
 
         /** AdClicked diamond */
-        diamond?: (number | null);
+        diamond?: (number|null);
 
         /** AdClicked coupon */
-        coupon?: (number | null);
+        coupon?: (number|null);
     }
 
     /** Represents an AdClicked. */
@@ -12813,7 +12941,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.AdClicked;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.AdClicked;
 
         /**
          * Decodes an AdClicked message from the specified reader or buffer, length delimited.
@@ -12822,14 +12950,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.AdClicked;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.AdClicked;
 
         /**
          * Verifies an AdClicked message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates an AdClicked message from a plain object. Also converts values to their respective internal types.
@@ -12857,19 +12985,19 @@ export namespace pb {
     interface ICmdRegistry {
 
         /** CmdRegistry account */
-        account?: (string | null);
+        account?: (string|null);
 
         /** CmdRegistry type */
-        type?: (pb.LoginType | null);
+        type?: (pb.LoginType|null);
 
         /** CmdRegistry pwd */
-        pwd?: (string | null);
+        pwd?: (string|null);
 
         /** CmdRegistry smsCode */
-        smsCode?: (string | null);
+        smsCode?: (string|null);
 
         /** CmdRegistry from */
-        from?: (pb.AppFrom | null);
+        from?: (pb.AppFrom|null);
     }
 
     /** Represents a CmdRegistry. */
@@ -12927,7 +13055,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdRegistry;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRegistry;
 
         /**
          * Decodes a CmdRegistry message from the specified reader or buffer, length delimited.
@@ -12936,14 +13064,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdRegistry;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRegistry;
 
         /**
          * Verifies a CmdRegistry message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdRegistry message from a plain object. Also converts values to their respective internal types.
@@ -12971,16 +13099,16 @@ export namespace pb {
     interface ICmdLogin {
 
         /** CmdLogin account */
-        account?: (string | null);
+        account?: (string|null);
 
         /** CmdLogin type */
-        type?: (pb.LoginType | null);
+        type?: (pb.LoginType|null);
 
         /** CmdLogin pwd */
-        pwd?: (string | null);
+        pwd?: (string|null);
 
         /** CmdLogin from */
-        from?: (pb.AppFrom | null);
+        from?: (pb.AppFrom|null);
     }
 
     /** Represents a CmdLogin. */
@@ -13035,7 +13163,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdLogin;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdLogin;
 
         /**
          * Decodes a CmdLogin message from the specified reader or buffer, length delimited.
@@ -13044,14 +13172,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdLogin;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdLogin;
 
         /**
          * Verifies a CmdLogin message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdLogin message from a plain object. Also converts values to their respective internal types.
@@ -13079,16 +13207,16 @@ export namespace pb {
     interface ICmdLoginReply {
 
         /** CmdLoginReply err */
-        err?: (pb.IErrorInfo | null);
+        err?: (pb.IErrorInfo|null);
 
         /** CmdLoginReply uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdLoginReply token */
-        token?: (string | null);
+        token?: (string|null);
 
         /** CmdLoginReply gameAddr */
-        gameAddr?: (string | null);
+        gameAddr?: (string|null);
     }
 
     /** Represents a CmdLoginReply. */
@@ -13101,7 +13229,7 @@ export namespace pb {
         constructor(properties?: pb.ICmdLoginReply);
 
         /** CmdLoginReply err. */
-        public err?: (pb.IErrorInfo | null);
+        public err?: (pb.IErrorInfo|null);
 
         /** CmdLoginReply uid. */
         public uid: number;
@@ -13143,7 +13271,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdLoginReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdLoginReply;
 
         /**
          * Decodes a CmdLoginReply message from the specified reader or buffer, length delimited.
@@ -13152,14 +13280,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdLoginReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdLoginReply;
 
         /**
          * Verifies a CmdLoginReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdLoginReply message from a plain object. Also converts values to their respective internal types.
@@ -13187,7 +13315,7 @@ export namespace pb {
     interface ICmdGetCaptcha {
 
         /** CmdGetCaptcha account */
-        account?: (string | null);
+        account?: (string|null);
     }
 
     /** Represents a CmdGetCaptcha. */
@@ -13233,7 +13361,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGetCaptcha;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetCaptcha;
 
         /**
          * Decodes a CmdGetCaptcha message from the specified reader or buffer, length delimited.
@@ -13242,14 +13370,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGetCaptcha;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetCaptcha;
 
         /**
          * Verifies a CmdGetCaptcha message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGetCaptcha message from a plain object. Also converts values to their respective internal types.
@@ -13277,7 +13405,7 @@ export namespace pb {
     interface ICmdGetCaptchaReply {
 
         /** CmdGetCaptchaReply captcha */
-        captcha?: (Uint8Array | null);
+        captcha?: (Uint8Array|null);
     }
 
     /** Represents a CmdGetCaptchaReply. */
@@ -13323,7 +13451,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGetCaptchaReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetCaptchaReply;
 
         /**
          * Decodes a CmdGetCaptchaReply message from the specified reader or buffer, length delimited.
@@ -13332,14 +13460,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGetCaptchaReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetCaptchaReply;
 
         /**
          * Verifies a CmdGetCaptchaReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGetCaptchaReply message from a plain object. Also converts values to their respective internal types.
@@ -13367,10 +13495,10 @@ export namespace pb {
     interface ICmdGetSms {
 
         /** CmdGetSms account */
-        account?: (string | null);
+        account?: (string|null);
 
         /** CmdGetSms captcha */
-        captcha?: (string | null);
+        captcha?: (string|null);
     }
 
     /** Represents a CmdGetSms. */
@@ -13419,7 +13547,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGetSms;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetSms;
 
         /**
          * Decodes a CmdGetSms message from the specified reader or buffer, length delimited.
@@ -13428,14 +13556,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGetSms;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetSms;
 
         /**
          * Verifies a CmdGetSms message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGetSms message from a plain object. Also converts values to their respective internal types.
@@ -13463,13 +13591,13 @@ export namespace pb {
     interface ICmdResetPwd {
 
         /** CmdResetPwd account */
-        account?: (string | null);
+        account?: (string|null);
 
         /** CmdResetPwd pwd */
-        pwd?: (string | null);
+        pwd?: (string|null);
 
         /** CmdResetPwd captcha */
-        captcha?: (string | null);
+        captcha?: (string|null);
     }
 
     /** Represents a CmdResetPwd. */
@@ -13521,7 +13649,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdResetPwd;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdResetPwd;
 
         /**
          * Decodes a CmdResetPwd message from the specified reader or buffer, length delimited.
@@ -13530,14 +13658,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdResetPwd;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdResetPwd;
 
         /**
          * Verifies a CmdResetPwd message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdResetPwd message from a plain object. Also converts values to their respective internal types.
@@ -13565,10 +13693,10 @@ export namespace pb {
     interface ICmdPay {
 
         /** CmdPay uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdPay orderId */
-        orderId?: (number | Long | null);
+        orderId?: (number|Long|null);
     }
 
     /** Represents a CmdPay. */
@@ -13584,7 +13712,7 @@ export namespace pb {
         public uid: number;
 
         /** CmdPay orderId. */
-        public orderId: (number | Long);
+        public orderId: (number|Long);
 
         /**
          * Creates a new CmdPay instance using the specified properties.
@@ -13617,7 +13745,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdPay;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdPay;
 
         /**
          * Decodes a CmdPay message from the specified reader or buffer, length delimited.
@@ -13626,14 +13754,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdPay;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdPay;
 
         /**
          * Verifies a CmdPay message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdPay message from a plain object. Also converts values to their respective internal types.
@@ -13755,35 +13883,35 @@ export namespace pb {
          * @param error Error, if any
          * @param [response] ErrorInfo
          */
-        type RegistryCallback = (error: (Error | null), response?: pb.ErrorInfo) => void;
+        type RegistryCallback = (error: (Error|null), response?: pb.ErrorInfo) => void;
 
         /**
          * Callback as used by {@link pb.LoginService#login}.
          * @param error Error, if any
          * @param [response] CmdLoginReply
          */
-        type LoginCallback = (error: (Error | null), response?: pb.CmdLoginReply) => void;
+        type LoginCallback = (error: (Error|null), response?: pb.CmdLoginReply) => void;
 
         /**
          * Callback as used by {@link pb.LoginService#getCaptcha}.
          * @param error Error, if any
          * @param [response] CmdGetCaptchaReply
          */
-        type GetCaptchaCallback = (error: (Error | null), response?: pb.CmdGetCaptchaReply) => void;
+        type GetCaptchaCallback = (error: (Error|null), response?: pb.CmdGetCaptchaReply) => void;
 
         /**
          * Callback as used by {@link pb.LoginService#getSms}.
          * @param error Error, if any
          * @param [response] ErrorInfo
          */
-        type GetSmsCallback = (error: (Error | null), response?: pb.ErrorInfo) => void;
+        type GetSmsCallback = (error: (Error|null), response?: pb.ErrorInfo) => void;
 
         /**
          * Callback as used by {@link pb.LoginService#resetPwd}.
          * @param error Error, if any
          * @param [response] ErrorInfo
          */
-        type ResetPwdCallback = (error: (Error | null), response?: pb.ErrorInfo) => void;
+        type ResetPwdCallback = (error: (Error|null), response?: pb.ErrorInfo) => void;
     }
 
     /** SyncAct enum. */
@@ -13803,7 +13931,7 @@ export namespace pb {
     interface ICmdNewUidReply {
 
         /** CmdNewUidReply uid */
-        uid?: (number | null);
+        uid?: (number|null);
     }
 
     /** Represents a CmdNewUidReply. */
@@ -13849,7 +13977,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdNewUidReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdNewUidReply;
 
         /**
          * Decodes a CmdNewUidReply message from the specified reader or buffer, length delimited.
@@ -13858,14 +13986,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdNewUidReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdNewUidReply;
 
         /**
          * Verifies a CmdNewUidReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdNewUidReply message from a plain object. Also converts values to their respective internal types.
@@ -13893,7 +14021,7 @@ export namespace pb {
     interface ICmdNewRoomIdReply {
 
         /** CmdNewRoomIdReply id */
-        id?: (number | null);
+        id?: (number|null);
     }
 
     /** Represents a CmdNewRoomIdReply. */
@@ -13939,7 +14067,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdNewRoomIdReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdNewRoomIdReply;
 
         /**
          * Decodes a CmdNewRoomIdReply message from the specified reader or buffer, length delimited.
@@ -13948,14 +14076,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdNewRoomIdReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdNewRoomIdReply;
 
         /**
          * Verifies a CmdNewRoomIdReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdNewRoomIdReply message from a plain object. Also converts values to their respective internal types.
@@ -13983,7 +14111,7 @@ export namespace pb {
     interface ICmdGateAddr {
 
         /** CmdGateAddr uid */
-        uid?: (number | null);
+        uid?: (number|null);
     }
 
     /** Represents a CmdGateAddr. */
@@ -14029,7 +14157,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGateAddr;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGateAddr;
 
         /**
          * Decodes a CmdGateAddr message from the specified reader or buffer, length delimited.
@@ -14038,14 +14166,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGateAddr;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGateAddr;
 
         /**
          * Verifies a CmdGateAddr message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGateAddr message from a plain object. Also converts values to their respective internal types.
@@ -14073,10 +14201,10 @@ export namespace pb {
     interface ICmdGateAddrReply {
 
         /** CmdGateAddrReply uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdGateAddrReply addr */
-        addr?: (string | null);
+        addr?: (string|null);
     }
 
     /** Represents a CmdGateAddrReply. */
@@ -14125,7 +14253,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGateAddrReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGateAddrReply;
 
         /**
          * Decodes a CmdGateAddrReply message from the specified reader or buffer, length delimited.
@@ -14134,14 +14262,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGateAddrReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGateAddrReply;
 
         /**
          * Verifies a CmdGateAddrReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGateAddrReply message from a plain object. Also converts values to their respective internal types.
@@ -14169,16 +14297,16 @@ export namespace pb {
     interface ICmdUserLogin {
 
         /** CmdUserLogin uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdUserLogin type */
-        type?: (pb.LoginType | null);
+        type?: (pb.LoginType|null);
 
         /** CmdUserLogin from */
-        from?: (pb.AppFrom | null);
+        from?: (pb.AppFrom|null);
 
         /** CmdUserLogin ip */
-        ip?: (string | null);
+        ip?: (string|null);
     }
 
     /** Represents a CmdUserLogin. */
@@ -14233,7 +14361,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdUserLogin;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdUserLogin;
 
         /**
          * Decodes a CmdUserLogin message from the specified reader or buffer, length delimited.
@@ -14242,14 +14370,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdUserLogin;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdUserLogin;
 
         /**
          * Verifies a CmdUserLogin message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdUserLogin message from a plain object. Also converts values to their respective internal types.
@@ -14277,13 +14405,13 @@ export namespace pb {
     interface ICmdUserLoginReply {
 
         /** CmdUserLoginReply uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdUserLoginReply token */
-        token?: (string | null);
+        token?: (string|null);
 
         /** CmdUserLoginReply addr */
-        addr?: (string | null);
+        addr?: (string|null);
     }
 
     /** Represents a CmdUserLoginReply. */
@@ -14335,7 +14463,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdUserLoginReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdUserLoginReply;
 
         /**
          * Decodes a CmdUserLoginReply message from the specified reader or buffer, length delimited.
@@ -14344,14 +14472,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdUserLoginReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdUserLoginReply;
 
         /**
          * Verifies a CmdUserLoginReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdUserLoginReply message from a plain object. Also converts values to their respective internal types.
@@ -14379,10 +14507,10 @@ export namespace pb {
     interface ICmdUserGameLogin {
 
         /** CmdUserGameLogin uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdUserGameLogin nodeId */
-        nodeId?: (number | null);
+        nodeId?: (number|null);
     }
 
     /** Represents a CmdUserGameLogin. */
@@ -14431,7 +14559,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdUserGameLogin;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdUserGameLogin;
 
         /**
          * Decodes a CmdUserGameLogin message from the specified reader or buffer, length delimited.
@@ -14440,14 +14568,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdUserGameLogin;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdUserGameLogin;
 
         /**
          * Verifies a CmdUserGameLogin message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdUserGameLogin message from a plain object. Also converts values to their respective internal types.
@@ -14475,7 +14603,7 @@ export namespace pb {
     interface ICmdUserGameLogout {
 
         /** CmdUserGameLogout uid */
-        uid?: (number | null);
+        uid?: (number|null);
     }
 
     /** Represents a CmdUserGameLogout. */
@@ -14521,7 +14649,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdUserGameLogout;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdUserGameLogout;
 
         /**
          * Decodes a CmdUserGameLogout message from the specified reader or buffer, length delimited.
@@ -14530,14 +14658,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdUserGameLogout;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdUserGameLogout;
 
         /**
          * Verifies a CmdUserGameLogout message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdUserGameLogout message from a plain object. Also converts values to their respective internal types.
@@ -14565,7 +14693,7 @@ export namespace pb {
     interface ICmdUserGameData {
 
         /** CmdUserGameData uid */
-        uid?: (number | null);
+        uid?: (number|null);
     }
 
     /** Represents a CmdUserGameData. */
@@ -14611,7 +14739,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdUserGameData;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdUserGameData;
 
         /**
          * Decodes a CmdUserGameData message from the specified reader or buffer, length delimited.
@@ -14620,14 +14748,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdUserGameData;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdUserGameData;
 
         /**
          * Verifies a CmdUserGameData message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdUserGameData message from a plain object. Also converts values to their respective internal types.
@@ -14655,13 +14783,13 @@ export namespace pb {
     interface ICmdUserGameDataReply {
 
         /** CmdUserGameDataReply gd */
-        gd?: (pb.IGameData | null);
+        gd?: (pb.IGameData|null);
 
         /** CmdUserGameDataReply roomId */
-        roomId?: (number | null);
+        roomId?: (number|null);
 
         /** CmdUserGameDataReply roomAtNode */
-        roomAtNode?: (number | null);
+        roomAtNode?: (number|null);
     }
 
     /** Represents a CmdUserGameDataReply. */
@@ -14674,7 +14802,7 @@ export namespace pb {
         constructor(properties?: pb.ICmdUserGameDataReply);
 
         /** CmdUserGameDataReply gd. */
-        public gd?: (pb.IGameData | null);
+        public gd?: (pb.IGameData|null);
 
         /** CmdUserGameDataReply roomId. */
         public roomId: number;
@@ -14713,7 +14841,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdUserGameDataReply;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdUserGameDataReply;
 
         /**
          * Decodes a CmdUserGameDataReply message from the specified reader or buffer, length delimited.
@@ -14722,14 +14850,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdUserGameDataReply;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdUserGameDataReply;
 
         /**
          * Verifies a CmdUserGameDataReply message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdUserGameDataReply message from a plain object. Also converts values to their respective internal types.
@@ -14757,16 +14885,16 @@ export namespace pb {
     interface ICmdGameProperties {
 
         /** CmdGameProperties uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** CmdGameProperties properties */
-        properties?: (pb.IGamePropertyItem[] | null);
+        properties?: (pb.IGamePropertyItem[]|null);
 
         /** CmdGameProperties memo */
-        memo?: (string | null);
+        memo?: (string|null);
 
         /** CmdGameProperties backbag */
-        backbag?: (boolean | null);
+        backbag?: (boolean|null);
     }
 
     /** Represents a CmdGameProperties. */
@@ -14821,7 +14949,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdGameProperties;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGameProperties;
 
         /**
          * Decodes a CmdGameProperties message from the specified reader or buffer, length delimited.
@@ -14830,14 +14958,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdGameProperties;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGameProperties;
 
         /**
          * Verifies a CmdGameProperties message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdGameProperties message from a plain object. Also converts values to their respective internal types.
@@ -14865,10 +14993,10 @@ export namespace pb {
     interface IServerCmd {
 
         /** ServerCmd id */
-        id?: (pb.ServerCmdId | null);
+        id?: (pb.ServerCmdId|null);
 
         /** ServerCmd parameters */
-        parameters?: (Uint8Array | null);
+        parameters?: (Uint8Array|null);
     }
 
     /** Represents a ServerCmd. */
@@ -14917,7 +15045,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.ServerCmd;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ServerCmd;
 
         /**
          * Decodes a ServerCmd message from the specified reader or buffer, length delimited.
@@ -14926,14 +15054,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.ServerCmd;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ServerCmd;
 
         /**
          * Verifies a ServerCmd message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a ServerCmd message from a plain object. Also converts values to their respective internal types.
@@ -14961,10 +15089,10 @@ export namespace pb {
     interface IMessage {
 
         /** Message id */
-        id?: (pb.MessageId | null);
+        id?: (pb.MessageId|null);
 
         /** Message buf */
-        buf?: (Uint8Array | null);
+        buf?: (Uint8Array|null);
     }
 
     /** Represents a Message. */
@@ -15013,7 +15141,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.Message;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.Message;
 
         /**
          * Decodes a Message message from the specified reader or buffer, length delimited.
@@ -15022,14 +15150,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.Message;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.Message;
 
         /**
          * Verifies a Message message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a Message message from a plain object. Also converts values to their respective internal types.
@@ -15057,22 +15185,22 @@ export namespace pb {
     interface IRoom {
 
         /** Room act */
-        act?: (pb.SyncAct | null);
+        act?: (pb.SyncAct|null);
 
         /** Room id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** Room game */
-        game?: (pb.GameType | null);
+        game?: (pb.GameType|null);
 
         /** Room max */
-        max?: (number | null);
+        max?: (number|null);
 
         /** Room cur */
-        cur?: (number | null);
+        cur?: (number|null);
 
         /** Room node */
-        node?: (number | null);
+        node?: (number|null);
     }
 
     /** Represents a Room. */
@@ -15133,7 +15261,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.Room;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.Room;
 
         /**
          * Decodes a Room message from the specified reader or buffer, length delimited.
@@ -15142,14 +15270,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.Room;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.Room;
 
         /**
          * Verifies a Room message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a Room message from a plain object. Also converts values to their respective internal types.
@@ -15177,7 +15305,7 @@ export namespace pb {
     interface IRoomList {
 
         /** RoomList items */
-        items?: (pb.IRoom[] | null);
+        items?: (pb.IRoom[]|null);
     }
 
     /** Represents a RoomList. */
@@ -15223,7 +15351,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.RoomList;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RoomList;
 
         /**
          * Decodes a RoomList message from the specified reader or buffer, length delimited.
@@ -15232,14 +15360,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.RoomList;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RoomList;
 
         /**
          * Verifies a RoomList message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a RoomList message from a plain object. Also converts values to their respective internal types.
@@ -15267,10 +15395,10 @@ export namespace pb {
     interface IPlayerNode {
 
         /** PlayerNode uid */
-        uid?: (number | null);
+        uid?: (number|null);
 
         /** PlayerNode nodeId */
-        nodeId?: (number | null);
+        nodeId?: (number|null);
     }
 
     /** Represents a PlayerNode. */
@@ -15319,7 +15447,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.PlayerNode;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.PlayerNode;
 
         /**
          * Decodes a PlayerNode message from the specified reader or buffer, length delimited.
@@ -15328,14 +15456,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.PlayerNode;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.PlayerNode;
 
         /**
          * Verifies a PlayerNode message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a PlayerNode message from a plain object. Also converts values to their respective internal types.
@@ -15363,13 +15491,13 @@ export namespace pb {
     interface IBroadcastMsg {
 
         /** BroadcastMsg id */
-        id?: (pb.MessageId | null);
+        id?: (pb.MessageId|null);
 
         /** BroadcastMsg buf */
-        buf?: (Uint8Array | null);
+        buf?: (Uint8Array|null);
 
         /** BroadcastMsg uids */
-        uids?: (number[] | null);
+        uids?: (number[]|null);
     }
 
     /** Represents a BroadcastMsg. */
@@ -15421,7 +15549,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.BroadcastMsg;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.BroadcastMsg;
 
         /**
          * Decodes a BroadcastMsg message from the specified reader or buffer, length delimited.
@@ -15430,14 +15558,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.BroadcastMsg;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.BroadcastMsg;
 
         /**
          * Verifies a BroadcastMsg message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a BroadcastMsg message from a plain object. Also converts values to their respective internal types.
@@ -15465,10 +15593,10 @@ export namespace pb {
     interface ICmdCgsConf {
 
         /** CmdCgsConf id */
-        id?: (number | null);
+        id?: (number|null);
 
         /** CmdCgsConf awardJson */
-        awardJson?: (string | null);
+        awardJson?: (string|null);
     }
 
     /** Represents a CmdCgsConf. */
@@ -15517,7 +15645,7 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader | Uint8Array), length?: number): pb.CmdCgsConf;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdCgsConf;
 
         /**
          * Decodes a CmdCgsConf message from the specified reader or buffer, length delimited.
@@ -15526,14 +15654,14 @@ export namespace pb {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader | Uint8Array)): pb.CmdCgsConf;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdCgsConf;
 
         /**
          * Verifies a CmdCgsConf message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
-        public static verify(message: { [k: string]: any }): (string | null);
+        public static verify(message: { [k: string]: any }): (string|null);
 
         /**
          * Creates a CmdCgsConf message from a plain object. Also converts values to their respective internal types.
@@ -15711,63 +15839,63 @@ export namespace pb {
          * @param error Error, if any
          * @param [response] CmdNewUidReply
          */
-        type NewUidCallback = (error: (Error | null), response?: pb.CmdNewUidReply) => void;
+        type NewUidCallback = (error: (Error|null), response?: pb.CmdNewUidReply) => void;
 
         /**
          * Callback as used by {@link pb.MasterService#getGateAddr}.
          * @param error Error, if any
          * @param [response] CmdGateAddrReply
          */
-        type GetGateAddrCallback = (error: (Error | null), response?: pb.CmdGateAddrReply) => void;
+        type GetGateAddrCallback = (error: (Error|null), response?: pb.CmdGateAddrReply) => void;
 
         /**
          * Callback as used by {@link pb.MasterService#userLogin}.
          * @param error Error, if any
          * @param [response] CmdUserLoginReply
          */
-        type UserLoginCallback = (error: (Error | null), response?: pb.CmdUserLoginReply) => void;
+        type UserLoginCallback = (error: (Error|null), response?: pb.CmdUserLoginReply) => void;
 
         /**
          * Callback as used by {@link pb.MasterService#userGameLogin}.
          * @param error Error, if any
          * @param [response] VoidReply
          */
-        type UserGameLoginCallback = (error: (Error | null), response?: pb.VoidReply) => void;
+        type UserGameLoginCallback = (error: (Error|null), response?: pb.VoidReply) => void;
 
         /**
          * Callback as used by {@link pb.MasterService#userGameLogout}.
          * @param error Error, if any
          * @param [response] VoidReply
          */
-        type UserGameLogoutCallback = (error: (Error | null), response?: pb.VoidReply) => void;
+        type UserGameLogoutCallback = (error: (Error|null), response?: pb.VoidReply) => void;
 
         /**
          * Callback as used by {@link pb.MasterService#newRoomId}.
          * @param error Error, if any
          * @param [response] CmdNewRoomIdReply
          */
-        type NewRoomIdCallback = (error: (Error | null), response?: pb.CmdNewRoomIdReply) => void;
+        type NewRoomIdCallback = (error: (Error|null), response?: pb.CmdNewRoomIdReply) => void;
 
         /**
          * Callback as used by {@link pb.MasterService#syncRooms}.
          * @param error Error, if any
          * @param [response] VoidReply
          */
-        type SyncRoomsCallback = (error: (Error | null), response?: pb.VoidReply) => void;
+        type SyncRoomsCallback = (error: (Error|null), response?: pb.VoidReply) => void;
 
         /**
          * Callback as used by {@link pb.MasterService#enterRoom}.
          * @param error Error, if any
          * @param [response] CmdRoomEnterReply
          */
-        type EnterRoomCallback = (error: (Error | null), response?: pb.CmdRoomEnterReply) => void;
+        type EnterRoomCallback = (error: (Error|null), response?: pb.CmdRoomEnterReply) => void;
 
         /**
          * Callback as used by {@link pb.MasterService#heartBeat}.
          * @param error Error, if any
          * @param [response] VoidReply
          */
-        type HeartBeatCallback = (error: (Error | null), response?: pb.VoidReply) => void;
+        type HeartBeatCallback = (error: (Error|null), response?: pb.VoidReply) => void;
     }
 
     /** Represents a GameService */
@@ -15994,97 +16122,97 @@ export namespace pb {
          * @param error Error, if any
          * @param [response] CmdUserGameDataReply
          */
-        type GetGameDataCallback = (error: (Error | null), response?: pb.CmdUserGameDataReply) => void;
+        type GetGameDataCallback = (error: (Error|null), response?: pb.CmdUserGameDataReply) => void;
 
         /**
          * Callback as used by {@link pb.GameService#addGameProperties}.
          * @param error Error, if any
          * @param [response] ErrorInfo
          */
-        type AddGamePropertiesCallback = (error: (Error | null), response?: pb.ErrorInfo) => void;
+        type AddGamePropertiesCallback = (error: (Error|null), response?: pb.ErrorInfo) => void;
 
         /**
          * Callback as used by {@link pb.GameService#resetGameProperties}.
          * @param error Error, if any
          * @param [response] ErrorInfo
          */
-        type ResetGamePropertiesCallback = (error: (Error | null), response?: pb.ErrorInfo) => void;
+        type ResetGamePropertiesCallback = (error: (Error|null), response?: pb.ErrorInfo) => void;
 
         /**
          * Callback as used by {@link pb.GameService#openCgs}.
          * @param error Error, if any
          * @param [response] ErrorInfo
          */
-        type OpenCgsCallback = (error: (Error | null), response?: pb.ErrorInfo) => void;
+        type OpenCgsCallback = (error: (Error|null), response?: pb.ErrorInfo) => void;
 
         /**
          * Callback as used by {@link pb.GameService#closeCgs}.
          * @param error Error, if any
          * @param [response] ErrorInfo
          */
-        type CloseCgsCallback = (error: (Error | null), response?: pb.ErrorInfo) => void;
+        type CloseCgsCallback = (error: (Error|null), response?: pb.ErrorInfo) => void;
 
         /**
          * Callback as used by {@link pb.GameService#setCgsAward}.
          * @param error Error, if any
          * @param [response] ErrorInfo
          */
-        type SetCgsAwardCallback = (error: (Error | null), response?: pb.ErrorInfo) => void;
+        type SetCgsAwardCallback = (error: (Error|null), response?: pb.ErrorInfo) => void;
 
         /**
          * Callback as used by {@link pb.GameService#execute}.
          * @param error Error, if any
          * @param [response] ErrorInfo
          */
-        type ExecuteCallback = (error: (Error | null), response?: pb.ErrorInfo) => void;
+        type ExecuteCallback = (error: (Error|null), response?: pb.ErrorInfo) => void;
 
         /**
          * Callback as used by {@link pb.GameService#process}.
          * @param error Error, if any
          * @param [response] Message
          */
-        type ProcessCallback = (error: (Error | null), response?: pb.Message) => void;
+        type ProcessCallback = (error: (Error|null), response?: pb.Message) => void;
 
         /**
          * Callback as used by {@link pb.GameService#sendMessage}.
          * @param error Error, if any
          * @param [response] VoidReply
          */
-        type SendMessageCallback = (error: (Error | null), response?: pb.VoidReply) => void;
+        type SendMessageCallback = (error: (Error|null), response?: pb.VoidReply) => void;
 
         /**
          * Callback as used by {@link pb.GameService#syncRooms}.
          * @param error Error, if any
          * @param [response] RoomList
          */
-        type SyncRoomsCallback = (error: (Error | null), response?: pb.RoomList) => void;
+        type SyncRoomsCallback = (error: (Error|null), response?: pb.RoomList) => void;
 
         /**
          * Callback as used by {@link pb.GameService#forwardRoomMsg}.
          * @param error Error, if any
          * @param [response] Message
          */
-        type ForwardRoomMsgCallback = (error: (Error | null), response?: pb.Message) => void;
+        type ForwardRoomMsgCallback = (error: (Error|null), response?: pb.Message) => void;
 
         /**
          * Callback as used by {@link pb.GameService#createRoom}.
          * @param error Error, if any
          * @param [response] CmdRoomCreateReply
          */
-        type CreateRoomCallback = (error: (Error | null), response?: pb.CmdRoomCreateReply) => void;
+        type CreateRoomCallback = (error: (Error|null), response?: pb.CmdRoomCreateReply) => void;
 
         /**
          * Callback as used by {@link pb.GameService#enterRoom}.
          * @param error Error, if any
          * @param [response] CmdRoomEnterReply
          */
-        type EnterRoomCallback = (error: (Error | null), response?: pb.CmdRoomEnterReply) => void;
+        type EnterRoomCallback = (error: (Error|null), response?: pb.CmdRoomEnterReply) => void;
 
         /**
          * Callback as used by {@link pb.GameService#leaveRoom}.
          * @param error Error, if any
          * @param [response] CmdRoomLeaveReply
          */
-        type LeaveRoomCallback = (error: (Error | null), response?: pb.CmdRoomLeaveReply) => void;
+        type LeaveRoomCallback = (error: (Error|null), response?: pb.CmdRoomLeaveReply) => void;
     }
 }

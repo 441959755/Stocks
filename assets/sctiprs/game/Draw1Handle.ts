@@ -1,9 +1,6 @@
 import GlobalEvent from "../Utils/GlobalEvent";
-
 import DrawUtils from "../Utils/DrawUtils";
-
 import GameCfg from "./GameCfg";
-
 import DrawData from "./DrawData";
 import { pb } from "../../protos/proto";
 
@@ -32,8 +29,6 @@ export default class NewClass extends cc.Component {
     drawCcl: cc.Graphics = null;
 
     VolList = [];            //均量线
-
-    // huizhidatas = null;
 
     DIFList = [];
 
@@ -183,7 +178,6 @@ export default class NewClass extends cc.Component {
 
     //计算数据
     initData() {
-
         this.DIFList = DrawData.DIFList;
         this.DEAList = DrawData.DEAList;
         this.MACDList = DrawData.MACDList;

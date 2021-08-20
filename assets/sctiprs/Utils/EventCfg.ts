@@ -193,6 +193,8 @@ export default {
 
 	OPENDPGUESSRANK: 'OPENDPGUESSRANK', //大盘竞猜排行
 
+	UPDATESPZICHAN: 'UPDATESPZHICHAN',//更新资产
+
 
 
 };

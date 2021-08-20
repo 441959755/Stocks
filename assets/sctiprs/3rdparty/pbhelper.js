@@ -4,6 +4,7 @@ import GameCfg from '../game/GameCfg';
 import GameData from '../GameData';
 import EventCfg from '../Utils/EventCfg';
 import GlobalEvent from '../Utils/GlobalEvent';
+import GlobalHandle from '../global/GlobalHandle';
 
 function PBHelper() {
 
@@ -294,7 +295,7 @@ PBHelper.prototype = {
                 //  GameCfg.RoomGameData = message;
                 GameData.selfEnterRoomData = message;
                 GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
-
+                GlobalHandle.RoomGameDataSelf(message);
             }
         }
         // 其他玩家进入房间：SyncRoomEnter

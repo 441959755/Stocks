@@ -80,6 +80,7 @@ export default class NewClass extends cc.Component {
     }
 
     onEnterChuanGuanGame() {
+
         let timeout = Math.random() * 2 + 3;
 
         this.ecb = setTimeout(() => {

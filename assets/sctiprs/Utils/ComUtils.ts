@@ -53,6 +53,24 @@ export default class ComUtils {
 
 	/**
 	 * 
+	 * @param time 时间戳
+	 * return 时：分：秒
+	 */
+	public static getSFMTamp(time1) {
+		let time = new Date(parseInt(time1) * 1000);
+		let hours, minute, second;
+		hours = time.getHours(),
+			minute = time.getMinutes(),
+			second = time.getSeconds();
+
+		if (hours < 10) { hours = '0' + hours; }
+		if (minute < 10) { minute = '0' + minute; }
+		if (second < 10) { second = '0' + second; }
+		return hours + ':' + minute + ':' + second;
+	}
+
+	/**
+	 * 
 	 * @param time 
 	 * return yymmdd   200010101
 	 */
@@ -148,6 +166,8 @@ export default class ComUtils {
 		return t;
 
 	}
+
+
 
 	//保存缓存
 	public static saveHistory(code) {
@@ -258,12 +278,13 @@ export default class ComUtils {
 	}
 
 	public static numberConvertUnit(number) {
-		let str = number;
+		let str;
+		str = parseInt(number);
 		if (number >= 100000000) {
-			str = this.changeTwoDecimal(number / 100000000) + '亿';
+			str = parseInt(this.changeTwoDecimal(number / 100000000) + '') + '亿';
 		}
 		else if (number >= 10000) {
-			str = this.changeTwoDecimal(number / 10000) + '万';
+			str = parseInt(this.changeTwoDecimal(number / 10000) + '') + '万';
 		}
 		return str;
 
