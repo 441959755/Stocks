@@ -256,7 +256,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.CMDQUOTITEM);
         //订阅
         this.CmdQuoteSubscribe(false);
-        GameCfg.GameType = null;
+        //  GameCfg.GameType = null;
         GlobalEvent.off(EventCfg.CHANGEMNCGACCOUNT);
         GameData.SpStockData = null;
         // this.content1.removeAllChildren();
@@ -319,6 +319,7 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'blackbtn') {
+            GameCfg.GameType = null;
             this.node.active = false;
         }
 

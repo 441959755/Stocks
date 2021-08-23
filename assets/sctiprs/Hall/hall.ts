@@ -193,9 +193,9 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.OPENROOM);
 		}
 
-		// cc.director.preloadScene('game', () => {
-		// 	console.log('game 加载完成');
-		// })
+		cc.director.preloadScene('game', () => {
+			console.log('game 加载完成');
+		})
 	}
 
 

@@ -78,14 +78,14 @@ export default class NewClass extends cc.Component {
 
     //加载结算页
     onLoadFinalLayer() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        if (GameCfg.GameType == pb.GameType.ShuangMang ||
 
+        if (GameCfg.GameType == pb.GameType.ShuangMang ||
             GameCfg.GameType == pb.GameType.ZhiBiao ||
             GameCfg.GameType == pb.GameType.DingXiang ||
             GameCfg.GameType == pb.GameType.QiHuo ||
             GameCfg.GameType == pb.GameType.TiaoJianDan ||
             GameCfg.GameType == pb.GameType.FenShi) {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.openNode(this.node, this.finalLayer, 'Prefabs/game/finalLayer', 20, (node) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.finalLayer = node;
@@ -94,6 +94,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.openNode(this.node, this.CGSFinalLayer, 'Prefabs/game/CGSFinalLayer', 20, (node) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.CGSFinalLayer = node;
@@ -103,6 +104,7 @@ export default class NewClass extends cc.Component {
 
         else if (GameCfg.GameType == pb.GameType.JJ_DuoKong ||
             GameCfg.GameType == pb.GameType.JJ_PK) {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.openNode(this.node, this.pkFinalLayer, 'Prefabs/game/PKFinalLayer', 20, (node) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.pkFinalLayer = node;
@@ -111,6 +113,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (GameCfg.JJ_XUNLIAN) {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.openNode(this.node, this.LxFinalLayer, 'Prefabs/game/lxFinalLayer', 20, (node) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.LxFinalLayer = node;

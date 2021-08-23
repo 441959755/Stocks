@@ -88,7 +88,7 @@ export default class NewClass extends cc.Component {
     }
 
     onDisable() {
-        GameCfg.GameType = null;
+
         GlobalEvent.off('UpdateShouCang');
     }
 
@@ -135,6 +135,7 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
 
         if (name == 'blackbtn') {
+            GameCfg.GameType = null;
             this.node.active = false;
         }
 
