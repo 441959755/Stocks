@@ -197,7 +197,8 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.OPENROOM);
             }
             else {
-                this.matchPK.active = true;
+                //  this.matchPK.active = true;
+                this.openMatchPk();
                 GlobalEvent.emit('SHOWOTHERPLAYER');
             }
         }

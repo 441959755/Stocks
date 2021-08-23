@@ -44,9 +44,7 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(EventCfg.OPENREWARDCENTERLAYER, this.openRewardCenterLayer.bind(this), this);
 
-		cc.director.preloadScene('game', () => {
-			console.log('game 加载完成');
-		})
+
 	}
 
 	protected onDestroy() {
@@ -170,9 +168,10 @@ export default class NewClass extends cc.Component {
 
 			GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameData.selfEnterRoomData);
 			GameData.roomId = GameData.selfEnterRoomData.id;
-			GameCfg.GAMEFRTD = true;
 
 			if (!GameData.RoomType) {
+				GameCfg.GAMEFRTD = true;
+
 				setTimeout(() => {
 					cc.director.loadScene('game');
 				}, 800)
@@ -193,6 +192,10 @@ export default class NewClass extends cc.Component {
 		else if (GameData.roomId) {
 			GlobalEvent.emit(EventCfg.OPENROOM);
 		}
+
+		// cc.director.preloadScene('game', () => {
+		// 	console.log('game 加载完成');
+		// })
 	}
 
 
