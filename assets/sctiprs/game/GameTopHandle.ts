@@ -8,7 +8,6 @@ import GameData from '../GameData';
 import GlobalHandle from "../global/GlobalHandle";
 import ComUtils from "../Utils/ComUtils";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -32,9 +31,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     pkfupan1: cc.Node = null;
 
-    // @property(cc.Node)
-    // pkfupan2: cc.Node = null;
-
     @property(cc.Node)
     pkNode: cc.Node = null;
 
@@ -55,11 +51,6 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Label)
     pkAllRateLa2: cc.Label = null;
-
-
-
-    // @property(cc.Label)
-    // pkCurRatela2: cc.Label = null;
 
     @property(cc.Sprite)
     head2: cc.Sprite = null;
@@ -367,6 +358,7 @@ export default class NewClass extends cc.Component {
                     else {
                         str = '您正在比赛中，现在退出会被认定为逃跑用户，请确认在退出';
                     }
+
                     PopupManager.LoadTipsBox('tipsBox', str, () => {
                         GlobalHandle.onReqRoomLeave();
                         GameCfg.huizhidatas = 0;
@@ -420,7 +412,6 @@ export default class NewClass extends cc.Component {
     }
 
     onBlackHAll() {
-
         GameCfg.huizhidatas = 0;
         GameCfg.allRate = 0;
         GameCfg.finalfund = 0;

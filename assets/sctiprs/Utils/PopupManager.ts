@@ -64,7 +64,7 @@ export default class PopupManager {
             LoadUtils.loadRes('Prefabs/tipsText', pre => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.tipsText = cc.instantiate(pre);
-                cc.find('Canvas').addChild(this.tipsText, 98);
+                cc.find('Canvas').addChild(this.tipsText, 99);
                 this.tipsText.active = true;
                 this.tipsText.getComponent('TipsTextHandle').textData = content;
                 this.tipsText.getComponent('TipsTextHandle').onShow();

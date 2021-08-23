@@ -144,7 +144,7 @@ export default class NewClass extends cc.Component {
         UIScrollControl.initControl(this.historyItem, datas.length, this.historyItem.getContentSize(), 0, (node, index) => {
             if ((TIMETEMP.indexOf(datas[index].ts) != -1) && (datas[index].gType == GameCfg.GameType)) {
                 let nodes = node.children;
-                this.content.addChild(node);
+                //   this.content.addChild(node);
                 nodes[0].getComponent(cc.Label).string = (it++) + '';
                 datas[index].quotesCode += '';
                 if (datas[index].quotesCode.length >= 7) {

@@ -128,7 +128,7 @@ export default class NewClass extends cc.Component {
 
             GlobalHandle.GetGameOperations(info, () => {
                 UpGameOpt.ChanagekOffset(UpGameOpt.player1Opt);
-                this.onGamenterStart();
+                this.onGamenterStart(true);
             });
 
         }
@@ -156,7 +156,7 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    onGamenterStart() {
+    onGamenterStart(flag?) {
         let data = { code: this.itemData.quotesCode }
         let items;
         if (GameCfg.GameType == pb.GameType.QiHuo) {
@@ -172,9 +172,7 @@ export default class NewClass extends cc.Component {
         GameCfg.data[0].circulate = items[4];
 
         GameCfg.allRate = 0;
-
-        let ts = this.itemData.ts;
-
+        //   let ts = this.itemData.ts;
         let cache = {
             ktype: pb.KType.Day,
             kstyle: pb.KStyle.Random,
@@ -186,7 +184,7 @@ export default class NewClass extends cc.Component {
 
         GameCfg.enterGameCache = cache;
 
-        EnterGameControl.onClearPreGameDataEnter(cache);
+        EnterGameControl.onClearPreGameDataEnter(cache, flag);
     }
 
 }

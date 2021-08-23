@@ -1,13 +1,13 @@
 
-import GameData from "../GameData";
+import DrawData from "../../../sctiprs/game/DrawData";
+import GameCfg from "../../../sctiprs/game/GameCfg";
+import StrategyAIData from "../../../sctiprs/game/StrategyAIData";
+import GameData from "../../../sctiprs/GameData";
+import UpGameOpt from "../../../sctiprs/global/UpGameOpt";
+import ComUtils from "../../../sctiprs/Utils/ComUtils";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
-import UpGameOpt from "../global/UpGameOpt";
-import ComUtils from "../Utils/ComUtils";
-import EventCfg from "../Utils/EventCfg";
-import GlobalEvent from "../Utils/GlobalEvent";
-import DrawData from "./DrawData";
-import GameCfg from "./GameCfg";
-import StrategyAIData from "./StrategyAIData";
 
 const { ccclass, property } = cc._decorator;
 

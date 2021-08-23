@@ -160,7 +160,6 @@ export default class NewClass extends cc.Component {
 				// }
 			}
 		});
-
 	}
 
 	onEnable() {
@@ -373,6 +372,11 @@ export default class NewClass extends cc.Component {
 		if (this._tid == 1) {
 
 			if (GameData.QHSet.JYS == '随机') {
+				if (nodes.length == 0) {
+					let node = cc.instantiate(this.preItem);
+					content.addChild(node);
+					node.x = 0;
+				}
 				nodes = content.children;
 				nodes.forEach((el, index) => {
 					if (index == 0) {
@@ -381,12 +385,14 @@ export default class NewClass extends cc.Component {
 						el.active = false;
 					}
 				});
-			} else if (GameData.QHSet.JYS == '大连商品') {
+			}
+			else if (GameData.QHSet.JYS == '大连商品') {
 				if (nodes.length < this.DCArr.type.length) {
 					let tt = this.DCArr.type.length - nodes.length
 					for (let i = 0; i < tt; i++) {
 						let node = cc.instantiate(this.preItem);
 						content.addChild(node);
+						node.x = 0;
 					}
 				}
 				nodes = content.children;
@@ -398,12 +404,14 @@ export default class NewClass extends cc.Component {
 						el.getComponent(cc.Label).string = this.DCArr.type[index];
 					}
 				})
-			} else if (GameData.QHSet.JYS == '上海商品') {
+			}
+			else if (GameData.QHSet.JYS == '上海商品') {
 				if (nodes.length < this.SCArr.type.length) {
 					let tt = this.SCArr.type.length - nodes.length;
 					for (let i = 0; i < tt; i++) {
 						let node = cc.instantiate(this.preItem);
 						content.addChild(node);
+						node.x = 0;
 					}
 				}
 				nodes = content.children;
@@ -415,12 +423,14 @@ export default class NewClass extends cc.Component {
 						el.getComponent(cc.Label).string = this.SCArr.type[index];
 					}
 				})
-			} else if (GameData.QHSet.JYS == '郑州商品') {
+			}
+			else if (GameData.QHSet.JYS == '郑州商品') {
 				if (nodes.length < this.ZCArr.type.length) {
 					let tt = this.ZCArr.type.length - nodes.length;
 					for (let i = 0; i < tt; i++) {
 						let node = cc.instantiate(this.preItem);
 						content.addChild(node);
+						node.x = 0;
 					}
 				}
 				nodes = content.children;
@@ -432,12 +442,14 @@ export default class NewClass extends cc.Component {
 						el.getComponent(cc.Label).string = this.ZCArr.type[index];
 					}
 				})
-			} else if (GameData.QHSet.JYS == '中金所') {
+			}
+			else if (GameData.QHSet.JYS == '中金所') {
 				if (nodes.length < this.XJArr.type.length) {
 					let tt = this.XJArr.type.length - nodes.length;
 					for (let i = 0; i < tt; i++) {
 						let node = cc.instantiate(this.preItem);
 						content.addChild(node);
+						node.x = 0;
 					}
 				}
 				nodes = content.children;
@@ -493,6 +505,7 @@ export default class NewClass extends cc.Component {
 					for (let i = 0; i < tt; i++) {
 						let node = cc.instantiate(this.preItem);
 						content.addChild(node);
+						node.x = 0;
 					}
 				}
 				nodes = content.children;

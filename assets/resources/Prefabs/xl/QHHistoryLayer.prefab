@@ -404,8 +404,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "1",
     "_N$string": "1",
     "_fontSize": 24,
@@ -512,8 +511,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "kkk",
     "_N$string": "kkk",
     "_fontSize": 24,
@@ -620,8 +618,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "云龙股票",
     "_N$string": "云龙股票",
     "_fontSize": 24,
@@ -728,8 +725,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "2014.02.01",
     "_N$string": "2014.02.01",
     "_fontSize": 24,
@@ -836,8 +832,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "2014.09.17",
     "_N$string": "2014.09.17",
     "_fontSize": 24,
@@ -944,8 +939,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "-7.77%",
     "_N$string": "-7.77%",
     "_fontSize": 24,
@@ -1052,8 +1046,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "0.00%",
     "_N$string": "0.00%",
     "_fontSize": 24,
@@ -1160,8 +1153,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "0",
     "_N$string": "0",
     "_fontSize": 24,
@@ -1268,8 +1260,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "0",
     "_N$string": "0",
     "_fontSize": 24,
@@ -1376,8 +1367,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "0",
     "_N$string": "0",
     "_fontSize": 24,
@@ -1484,8 +1474,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "0",
     "_N$string": "0",
     "_fontSize": 24,
@@ -1566,7 +1555,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -2263,7 +2252,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -2451,8 +2440,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "历史记录",
     "_N$string": "历史记录",
     "_fontSize": 30,
@@ -2935,8 +2923,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "序号",
     "_N$string": "序号",
     "_fontSize": 28,
@@ -3043,8 +3030,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "合约号",
     "_N$string": "合约号",
     "_fontSize": 28,
@@ -3151,8 +3137,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "品种名称",
     "_N$string": "品种名称",
     "_fontSize": 28,
@@ -3259,8 +3244,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "起始时间",
     "_N$string": "起始时间",
     "_fontSize": 28,
@@ -3367,8 +3351,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "结束时间",
     "_N$string": "结束时间",
     "_fontSize": 28,
@@ -3475,8 +3458,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "同期涨幅",
     "_N$string": "同期涨幅",
     "_fontSize": 28,
@@ -3583,8 +3565,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "训练收益",
     "_N$string": "训练收益",
     "_fontSize": 28,
@@ -3691,8 +3672,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "资金收益",
     "_N$string": "资金收益",
     "_fontSize": 28,
@@ -3799,8 +3779,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "复盘",
     "_N$string": "复盘",
     "_fontSize": 28,
@@ -4497,7 +4476,7 @@
     "_id": ""
   },
   {
-    "__type__": "a51b1/3xo9F8a0vKQ5T47I7",
+    "__type__": "eece3rAn5NLWqXRaNMe05Bg",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -4594,8 +4573,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "总收益:",
     "_N$string": "总收益:",
     "_fontSize": 30,
@@ -4702,8 +4680,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "0",
     "_N$string": "0",
     "_fontSize": 30,
@@ -4784,7 +4761,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -5130,7 +5107,9 @@
     "title": {
       "__id__": 62
     },
-    "scrollNode": null,
+    "scrollNode": {
+      "__id__": 111
+    },
     "_id": ""
   },
   {

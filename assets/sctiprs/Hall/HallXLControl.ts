@@ -77,14 +77,15 @@ export default class NewClass extends cc.Component {
         LoadUtils.releaseRes('Prefabs/xl/DXHisLayer');
         LoadUtils.releaseRes('Prefabs/xl/QHHisLayer');
         LoadUtils.releaseRes('Prefabs/xl/SMMonthlyLayer');
-        LoadUtils.releaseRes('Prefabs/xl/SMResetMoney');
+        LoadUtils.releaseRes('Prefabs/xl/SMResetLayer');
+        LoadUtils.releaseRes('Prefabs/xl/SMYieldCurve');
     }
 
     /**
      * 双盲重置金币
      */
     openSmResetLayer() {
-        this.openNode(this.smResetNode, 'Prefabs/xl/SMResetMoney', 10, (node) => { this.smResetNode = node });
+        this.openNode(this.smResetNode, 'Prefabs/xl/SMResetLayer', 10, (node) => { this.smResetNode = node });
     }
 
     /**

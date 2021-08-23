@@ -312,10 +312,10 @@ export default class GameData {
 
     public static cgdsStateList = [];  //炒股大赛状态;
 
-    // public static roomHostID = null;    //房主ID
-
     public static locationLayer = null; //等位页面
 
     public static SpStockData;  //实盘炒股ID 数据
+
+    public static isToAGame = false; //是否再来一局
 
 }

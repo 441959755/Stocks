@@ -1,13 +1,15 @@
-import { pb } from "../../protos/proto";
-import GameData from "../GameData";
-import ComUtils from "../Utils/ComUtils";
-import GameCfg from "./GameCfg";
-import StrategyAIData from "./StrategyAIData";
-import GameCfgText from "../GameText";
-import UpGameOpt from "../global/UpGameOpt";
-import GlobalEvent from "../Utils/GlobalEvent";
-import EventCfg from "../Utils/EventCfg";
-import LoadUtils from '../Utils/LoadUtils'
+
+import { pb } from "../../../protos/proto";
+import GameCfg from "../../../sctiprs/game/GameCfg";
+import StrategyAIData from "../../../sctiprs/game/StrategyAIData";
+import GameData from "../../../sctiprs/GameData";
+import GameCfgText from "../../../sctiprs/GameText";
+import UpGameOpt from "../../../sctiprs/global/UpGameOpt";
+import ComUtils from "../../../sctiprs/Utils/ComUtils";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import LoadUtils from "../../../sctiprs/Utils/LoadUtils";
+
 
 const { ccclass, property } = cc._decorator;
 
@@ -264,6 +266,9 @@ export default class NewClass extends cc.Component {
 
         //再来一局
         else if (name == 'pk_jsbt_zlyj') {
+            if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+                GameData.isToAGame = true;
+            }
             this.onQuitGame();
         }
 
@@ -338,6 +343,7 @@ export default class NewClass extends cc.Component {
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
         GameCfg.enterGameCache = null;
+
         if (!GameData.RoomType) {
             GameCfg.RoomGameData = null;
         }

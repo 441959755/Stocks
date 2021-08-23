@@ -5,15 +5,13 @@ import { pb } from '../../protos/proto';
 import PopupManager from "../Utils/PopupManager";
 import GameData from "../GameData";
 import UpGameOpt from "../global/UpGameOpt";
+import LoadUtils from "../Utils/LoadUtils";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 
 export default class NewClass extends cc.Component {
-
-    @property(cc.Node)
-    finalLayer: cc.Node = null;  //结算界面
 
     @property(cc.Node)
     statLayer: cc.Node = null;  //统计界面
@@ -28,15 +26,11 @@ export default class NewClass extends cc.Component {
     poritLa: cc.Node = null;
 
     @property(cc.Node)
-    pkFinalLayer: cc.Node = null;
-
-    @property(cc.Node)
     startGameNode: cc.Node = null;
 
-    @property(cc.Node)
+    finalLayer: cc.Node = null;  //结算界面
     CGSFinalLayer: cc.Node = null;
-
-    @property(cc.Node)
+    pkFinalLayer: cc.Node = null;
     LxFinalLayer: cc.Node = null;
 
     onLoad() {
@@ -44,11 +38,9 @@ export default class NewClass extends cc.Component {
         //游戏结算
         GlobalEvent.on(EventCfg.GAMEOVEER, (message) => {
             if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-                PopupManager.delPopupNode();
                 this.pkFinalLayer.active = true;
                 if (message) {
                     let handle = this.pkFinalLayer.getComponent('PKFinalHandle');
-                    //  handle.gameResult = message;
                     handle.onShow();
                 }
             }
@@ -69,7 +61,6 @@ export default class NewClass extends cc.Component {
             }
         }, this)
 
-
         GlobalEvent.on(EventCfg.OPENSTATLAYER, () => {
             this.statLayer.active = true;
         }, this);
@@ -85,8 +76,51 @@ export default class NewClass extends cc.Component {
 
     }
 
-    start() {
+    //加载结算页
+    onLoadFinalLayer() {
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        if (GameCfg.GameType == pb.GameType.ShuangMang ||
 
+            GameCfg.GameType == pb.GameType.ZhiBiao ||
+            GameCfg.GameType == pb.GameType.DingXiang ||
+            GameCfg.GameType == pb.GameType.QiHuo ||
+            GameCfg.GameType == pb.GameType.TiaoJianDan ||
+            GameCfg.GameType == pb.GameType.FenShi) {
+            LoadUtils.openNode(this.node, this.finalLayer, 'Prefabs/game/finalLayer', 20, (node) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                this.finalLayer = node;
+                this.finalLayer.active = false;
+            })
+        }
+
+        else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
+            LoadUtils.openNode(this.node, this.CGSFinalLayer, 'Prefabs/game/CGSFinalLayer', 20, (node) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                this.CGSFinalLayer = node;
+                this.CGSFinalLayer.active = false;
+            })
+        }
+
+        else if (GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+            GameCfg.GameType == pb.GameType.JJ_PK) {
+            LoadUtils.openNode(this.node, this.pkFinalLayer, 'Prefabs/game/PKFinalLayer', 20, (node) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                this.pkFinalLayer = node;
+                this.pkFinalLayer.active = false;
+            })
+        }
+
+        else if (GameCfg.JJ_XUNLIAN) {
+            LoadUtils.openNode(this.node, this.LxFinalLayer, 'Prefabs/game/lxFinalLayer', 20, (node) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                this.LxFinalLayer = node;
+                this.LxFinalLayer.active = false;
+            })
+        }
+    }
+
+
+    start() {
         //游戏开始动画
         if (!GameCfg.GAMEFUPAN) {
             if ((GameCfg.GameType == pb.GameType.JJ_PK ||
@@ -95,6 +129,7 @@ export default class NewClass extends cc.Component {
                 this.startGameNode.active = true;
             }
         }
+        this.onLoadFinalLayer();
     }
 
     protected onDestroy() {
@@ -109,11 +144,17 @@ export default class NewClass extends cc.Component {
 
         GameData.CGSConfData = null;
         UpGameOpt.clearGameOpt();
+        this.pkFinalLayer = null;
+        this.finalLayer = null;
+        this.CGSFinalLayer = null;
+        this.LxFinalLayer = null;
+        LoadUtils.releaseRes('Prefabs/game/PKFinalLayer');
+        LoadUtils.releaseRes('Prefabs/game/lxFinalLayer');
+        LoadUtils.releaseRes('Prefabs/game/CGSFinalLayer');
+        LoadUtils.releaseRes('Prefabs/game/finalLayer');
     }
 
-
     setColor() {
-
         //黑底
         if (GameCfg.GameSet.isBW) {
             GameCfg.MAColor[0] = new cc.Color().fromHEX('#ffffff');
@@ -195,7 +236,6 @@ export default class NewClass extends cc.Component {
         }
 
     }
-
 
     initData() {
         GameCfg.beg_end = [];
@@ -314,5 +354,9 @@ export default class NewClass extends cc.Component {
             GameCfg.VOLGraph = GameCfg.GameSet.VOL;
         }
     }
+
+
+
+
 
 }

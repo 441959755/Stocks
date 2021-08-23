@@ -43,6 +43,10 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on(EventCfg.OPENPLAYERINFO, this.openPlayerInfoLayer.bind(this), this);
 
 		GlobalEvent.on(EventCfg.OPENREWARDCENTERLAYER, this.openRewardCenterLayer.bind(this), this);
+
+		cc.director.preloadScene('game', () => {
+			console.log('game 加载完成');
+		})
 	}
 
 	protected onDestroy() {
@@ -89,6 +93,7 @@ export default class NewClass extends cc.Component {
 			})
 		}
 	}
+
 	//打开个人中心
 	openPlayerInfoLayer() {
 		if (!this.playerInfoLayer) {
@@ -104,6 +109,7 @@ export default class NewClass extends cc.Component {
 			this.playerInfoLayer.active = true;
 		}
 	}
+
 	//帮组
 	openHelpLayer() {
 		if (!this.helpLayer) {
@@ -163,10 +169,9 @@ export default class NewClass extends cc.Component {
 			GameCfg.GameSet = GameData.JJPKSet;
 
 			GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameData.selfEnterRoomData);
-			GlobalHandle.RoomGameDataSelf(GameData.selfEnterRoomData);
-
 			GameData.roomId = GameData.selfEnterRoomData.id;
 			GameCfg.GAMEFRTD = true;
+
 			if (!GameData.RoomType) {
 				setTimeout(() => {
 					cc.director.loadScene('game');
@@ -175,7 +180,8 @@ export default class NewClass extends cc.Component {
 		}
 
 		//房间已解散  ,给出提示
-		if (GameData.roomId === 0) {
+		if (GameData.RoomType && !GameData.roomId) {
+			GameData.RoomType = 0;
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			setTimeout(() => {
 				GlobalEvent.emit(EventCfg.LOADINGHIDE);
@@ -187,10 +193,6 @@ export default class NewClass extends cc.Component {
 		else if (GameData.roomId) {
 			GlobalEvent.emit(EventCfg.OPENROOM);
 		}
-
-		cc.director.preloadScene('game', () => {
-			console.log('game 加载完成');
-		})
 	}
 
 

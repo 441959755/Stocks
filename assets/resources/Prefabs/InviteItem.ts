@@ -2,7 +2,6 @@ import { pb } from "../../protos/proto";
 import GameData from "../../sctiprs/GameData";
 import ComUtils from "../../sctiprs/Utils/ComUtils";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -74,7 +73,6 @@ export default class NewClass extends cc.Component {
         this.cb && (clearInterval(this.cb))
         this.cb = null;
         this.node.destroy();
-
     }
 
 

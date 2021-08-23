@@ -282,7 +282,6 @@ export default class GameCfgText {
         let items = this.stockList[le].split('|');
         data.code = items[0];
 
-
         let start = items[2], end = items[3], sc;
         if (end == 0) {
             sc = new Date().getTime() - 24 * 60 * 60 * 1000 * 300;
@@ -296,7 +295,6 @@ export default class GameCfgText {
             sc = d.getTime() - 24 * 60 * 60 * 1000 * data.total;
         }
 
-
         let year = start.slice(0, 4);
         let month = start.slice(4, 6);
         let day = start.slice(6);
@@ -308,11 +306,12 @@ export default class GameCfgText {
 
         if (sc <= 0) {
             this.getGPSMByRandom();
+            return;
 
         }
         else if (sc < t) {
             this.getGPSMByRandom();
-
+            return;
         }
         else {
             //随机的时间戳

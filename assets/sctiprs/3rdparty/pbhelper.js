@@ -295,7 +295,6 @@ PBHelper.prototype = {
                 //  GameCfg.RoomGameData = message;
                 GameData.selfEnterRoomData = message;
                 GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
-                GlobalHandle.RoomGameDataSelf(message);
             }
         }
         // 其他玩家进入房间：SyncRoomEnter
@@ -311,10 +310,12 @@ PBHelper.prototype = {
             let data = SyncRoomLeave.decode(new Uint8Array(buff));
             console.log('玩家离开房间' + JSON.stringify(data));
             if (data.uid == GameData.userID) {
-                GameData.RoomType = 0;
-                GameData.selfEnterRoomData = null;
+                //   GameData.selfEnterRoomData = null;
                 GameData.roomId = 0;
                 GameData.JJCapital = 0;
+            }
+            else {
+                GameData.Players[1] = null;
             }
             GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }

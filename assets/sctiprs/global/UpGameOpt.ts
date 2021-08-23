@@ -35,7 +35,7 @@ export default class UpGameOpt {
         }
 
         if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-            el.kOffset -= 1;
+            el && (el.kOffset -= 1)
         }
 
         console.log('操作' + JSON.stringify(el));

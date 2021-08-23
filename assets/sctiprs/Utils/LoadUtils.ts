@@ -60,6 +60,21 @@ export default class LoadUtils {
         })
     }
 
-
-
+    /**
+     * 
+     * @param parNode 父节点
+     * @param node  当前加载节点
+     * @param url  地址
+     * @param zIndex 
+     * @param call 回调
+     */
+    public static openNode(parNode, node, url, zIndex, call?) {
+        if (!node) {
+            LoadUtils.loadRes(url, pre => {
+                node = cc.instantiate(pre);
+                parNode.addChild(node, zIndex);
+                call(node);
+            })
+        }
+    }
 }

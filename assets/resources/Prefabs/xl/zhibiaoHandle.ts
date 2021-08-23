@@ -479,9 +479,9 @@ export default class NewClass extends cc.Component {
                 GameData.ZBSet.ZLine = str;
             }
         } else if (name == 'startZBBtn') {
-            if (!GameData.properties[pb.GamePropertyId.UnlockDxxl] && !GameData.properties[pb.GamePropertyId.Vip] && !LLWConfig.ISLOG) {
+            // if (!GameData.properties[pb.GamePropertyId.UnlockDxxl] && !GameData.properties[pb.GamePropertyId.Vip] && !LLWConfig.ISLOG) {
 
-            }
+            // }
 
             GameCfg.GameType = pb.GameType.ZhiBiao;
             GameCfg.GameSet = GameData.ZBSet;
@@ -515,6 +515,7 @@ export default class NewClass extends cc.Component {
             total: parseInt(GameData.ZBSet.KLine) + 1,  // K线条数
             to: 0,           //	// 结束时间戳（0表示忽略该参数；格式同from）
         }
+
         let items
 
         if (GameData.ZBSet.ZLine == '周线') {

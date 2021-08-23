@@ -6,7 +6,6 @@ import GameData from "../GameData";
 import LLWConfig from "../common/config/LLWConfig";
 import DrawData from "../game/DrawData";
 import UpGameOpt from "./UpGameOpt";
-import GameCfgText from "../GameText";
 
 export default class GlobalHandle {
 
@@ -18,7 +17,15 @@ export default class GlobalHandle {
             game: GameCfg.GameType,
         }
         socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(info), res => {
+
             console.log(JSON.stringify(res));
+
+            if (res.err) {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                let err = GlobalHandle.getErrorCodeByCode(res.code);
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, err);
+                return;
+            }
             cb && (cb(res));
         })
 
@@ -333,6 +340,7 @@ export default class GlobalHandle {
 
     //离开房间：CmdRoomLeave
     public static onReqRoomLeave(call?) {
+
         if (GameData.userID) {
             let data = {
                 id: GameData.roomId,
@@ -347,6 +355,7 @@ export default class GlobalHandle {
                 call && call(res);
             })
         }
+
         else {
             console.log('err: GameData userID is null');
             call && call();
@@ -506,80 +515,6 @@ export default class GlobalHandle {
         }
 
         return str;
-    }
-
-    public static RoomGameDataSelf(info) {
-        info.id && (GameData.roomId = info.id)
-        GameCfg.GameType = info.game;
-        GameCfg.GameSet = GameData.JJPKSet;
-
-        let code = info.code + '';
-        if (code.length >= 7) {
-            code = code.slice(1);
-        }
-        let items = GameCfgText.getGPPKItemInfo(code);
-        GameCfg.data[0].code = code;
-        GameCfg.data[0].name = items[1];
-        GameCfg.data[0].data = [];
-        GameCfg.data[0].circulate = items[4];
-        GameCfg.data[0].tsGameFrom = info.tsGameFrom;
-        GameCfg.data[0].tsGameCur = info.tsGameCur;
-
-        GameData.huizhidatas = info.tsQuoteStart + 1;
-        GameCfg.huizhidatas = info.tsQuoteStart + 1;
-
-        if (info.players[0].gd) {
-            GameData.Players[0] = info.players[0].gd;
-        }
-
-        info.quotes && (info.quotes.items.forEach((el, index) => {
-
-            let ye = (el.timestamp + '').slice(0, 4);
-            let mon = (el.timestamp + '').slice(4, 6);
-            let da = (el.timestamp + '').slice(6);
-            let fromDate = ye + '-' + mon + '-' + da;
-            //  if (fromDate != d) {
-            let data = {
-                day: fromDate || 0,
-                open: el.open || 0,
-                close: el.price || 0,
-                high: el.high || 0,
-                low: el.low || 0,
-                price: el.amount || 0,
-                value: el.volume || 0,
-                Rate: (el.volume / GameCfg.data[0].circulate) * 100
-            };
-
-            if (GameCfg.data[0].circulate == 0) {
-                data.Rate = 1;
-            }
-            GameCfg.data[0].data.push(data);
-
-        })
-
-        )
-
-        if (info.players[1].gd && info.quotes) {
-            GameData.Players[1] = info.players[1].gd;
-
-            if (GameData.RoomType) {
-                if (info.players[0].gd.uid == GameData.userID) {
-                    GameData.Players[0] = info.players[0].gd;
-                    GameData.Players[1] = info.players[1].gd;
-                }
-                else if (info.players[1].gd.uid == GameData.userID) {
-                    GameData.Players[0] = info.players[1].gd;
-                    GameData.Players[1] = info.players[0].gd;
-                }
-                GlobalEvent.emit(EventCfg.OPENROOM);
-            }
-            else {
-                GlobalEvent.emit(EventCfg.OPENMATCHPK);
-                //  this.matchPK.active = true;
-                GlobalEvent.emit('SHOWOTHERPLAYER');
-            }
-
-        }
     }
 
 }

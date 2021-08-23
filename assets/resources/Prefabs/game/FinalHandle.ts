@@ -1,19 +1,18 @@
-import GameCfg from "./GameCfg";
-import ActionUtils from "../Utils/ActionUtils";
 
-import GlobalEvent from "../Utils/GlobalEvent";
-import EventCfg from "../Utils/EventCfg";
-import GameData from "../GameData";
-import GameCfgText from '../GameText';
-import ComUtils from '../Utils/ComUtils';
+import { pb } from "../../../protos/proto";
+import DrawData from "../../../sctiprs/game/DrawData";
+import GameCfg from "../../../sctiprs/game/GameCfg";
+import StrategyAIData from "../../../sctiprs/game/StrategyAIData";
+import GameData from "../../../sctiprs/GameData";
+import GameCfgText from "../../../sctiprs/GameText";
+import EnterGameControl from "../../../sctiprs/global/EnterGameControl";
+import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
+import UpGameOpt from "../../../sctiprs/global/UpGameOpt";
+import ComUtils from "../../../sctiprs/Utils/ComUtils";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
-import { pb } from '../../protos/proto';
-import GlobalHandle from "../global/GlobalHandle";
 
-import StrategyAIData from "./StrategyAIData";
-import DrawData from "./DrawData";
-import UpGameOpt from "../global/UpGameOpt";
-import EnterGameControl from "../global/EnterGameControl";
 
 const { ccclass, property } = cc._decorator;
 
@@ -72,7 +71,6 @@ export default class NewClass extends cc.Component {
     DXXLGG: cc.Node = null;
 
     protected onEnable() {
-        ActionUtils.openLayer(this.node);
 
         let gpData = GameCfg.data[0].data;
 
@@ -126,13 +124,15 @@ export default class NewClass extends cc.Component {
             } else {
                 datas.userCapital = GameCfg.ziChan;
             }
-            // console.log('GameCfg.finalfund' + GameCfg.finalfund + '-' + 'GameCfg.ziChan' + GameCfg.ziChan + '=' + (GameCfg.finalfund - GameCfg.ziChan));
 
             datas.rank = datas.userProfitRate >= datas.stockProfitRate ? 1 : 2;
 
             datas.refId = 0;
+
             let CmdGameOver;
+
             this.saveHoistoryInfo(parseInt(datas.ts + ''));
+
             if (GameCfg.GameType != pb.GameType.ShuangMang) {
                 CmdGameOver = {
                     result: datas,
@@ -151,7 +151,6 @@ export default class NewClass extends cc.Component {
     }
 
     showContentZB() {
-
         let info = StrategyAIData.onCompareReult();
         let gpData = GameCfg.data[0].data;
         let boxs = this.contentZB.children;
@@ -256,7 +255,6 @@ export default class NewClass extends cc.Component {
             else {
                 node3.active = true;
             }
-
         }
     }
 
@@ -372,6 +370,7 @@ export default class NewClass extends cc.Component {
                 EnterGameControl.onClearPreGameDataEnter(data);
             }
         }
+
         else if (name == 'lx_jsbt_xl') {
             GameCfg.huizhidatas = GameData.huizhidatas;
             GameCfg.allRate = 0;
@@ -395,14 +394,9 @@ export default class NewClass extends cc.Component {
 
     clearGameData() {
         GameCfg.data[0].data = [];
-        GameCfg.huizhidatas = 0;
-
         GameCfg.allRate = 0;
-
         GameCfg.finalfund = 0;
-
         GameCfg.GAMEFUPAN = false;
-
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
         GameCfg.enterGameCache = null;

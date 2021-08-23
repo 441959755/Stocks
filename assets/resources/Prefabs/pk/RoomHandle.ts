@@ -124,9 +124,9 @@ export default class NewClass extends cc.Component {
 
         this.enterGameAnim && (this.enterGameAnim.play());
 
-        setTimeout(() => {
-            cc.director.loadScene('game');
-        }, 800)
+        // setTimeout(() => {
+        //     cc.director.loadScene('game');
+        // }, 800)
     }
 
     onEnable() {
@@ -255,7 +255,6 @@ export default class NewClass extends cc.Component {
             socket.send(pb.MessageId.Sync_C2S_Message, buff, (res) => {
                 console.log('在线邀请：' + JSON.stringify(res));
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
             })
 
             let count = 15;

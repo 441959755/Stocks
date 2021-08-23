@@ -20,9 +20,18 @@ export default class NewClass extends cc.Component {
         this.content.removeAllChildren();
     }
 
+
     initShow() {
+
+        let arr = [];
+        this.MRTData.forEach(el => {
+            if (el.cgsClearance) {
+                arr.push(el);
+            }
+        });
+
         let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
-        UIScrollControl.initControl(this.item, this.MRTData.length, this.item.getContentSize(), 0, (node, index) => {
+        UIScrollControl.initControl(this.item, arr.length, this.item.getContentSize(), 0, (node, index) => {
             let RankNode = node.getChildByName('node');
             let nodes = RankNode.children;
 
@@ -49,7 +58,7 @@ export default class NewClass extends cc.Component {
             let man = userNode.getChildByName('main_sex__man');
 
             let countLabel = node.getChildByName('label').getComponent(cc.Label);
-            let el = this.MRTData[index];
+            let el = arr[index];
             if (el.nickname) {
                 username.string = el.nickname;
             } else {

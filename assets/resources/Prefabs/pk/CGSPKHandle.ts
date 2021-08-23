@@ -353,7 +353,7 @@ export default class NewClass extends cc.Component {
                 peopleLabel.string = '在线（...人）'
                 taBtn.children[2].active = true;
                 //  ckBtn.children[2].active = true;
-                costLabel.node.color = cc.Color.GREEN;
+                //  costLabel.node.color = cc.Color.GREEN;
             }
 
             let CgLogAward = GameData.cgState.awards;
