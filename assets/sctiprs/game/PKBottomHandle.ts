@@ -163,8 +163,10 @@ export default class NewClass extends cc.Component {
                 timeLabel.node.active = true;
                 if (GameCfg.data[0].tsGameFrom && GameCfg.data[0].tsGameCur) {
                     let num = GameCfg.data[0].tsGameCur - GameCfg.data[0].tsGameFrom;
-                    num = 3 * 60 - num - 8;
+                    let curTimes = parseInt(new Date().getTime() / 1000 + '');
+                    let endTiems = 3 * 60 - num - 8 + curTimes;
                     this.cb1 = setInterval(() => {
+                        let num = endTiems - parseInt(new Date().getTime() / 1000 + '');
                         if (num <= 0) {
                             clearInterval(this.cb1);
                         }
@@ -179,20 +181,18 @@ export default class NewClass extends cc.Component {
                     }, 1000)
                 }
                 else {
-                    let num = 3 * 60 + 2;
+                    let curTimes = parseInt(new Date().getTime() / 1000 + '');
+                    let endTiems = 3 * 60 + 2 + curTimes;
                     this.cb1 = setInterval(() => {
+                        let num = endTiems - parseInt(new Date().getTime() / 1000 + '');
                         if (num <= 0) {
                             if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.JJ_XUNLIAN) {
                                 GlobalEvent.emit(EventCfg.GAMEOVEER);
                             }
                             clearInterval(this.cb1);
                         }
-
-                        //  if (num <= 179) {
                         timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
                         this.waitTime.string = '倒计时：' + ComUtils.onNumChangeTime(num);
-                        //   }
-
                         num--;
                     }, 1000)
                 }

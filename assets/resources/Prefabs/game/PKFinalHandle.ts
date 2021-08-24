@@ -203,7 +203,7 @@ export default class NewClass extends cc.Component {
                 if (e.i == pb.GamePropertyId.Gold) {
                     arr[0].string = '+ ' + e.v;
                     if (GameData.JJCapital) {
-                        arr[0].string = '-' + GameData.JJCapital * 2;
+                        arr[0].string = '+' + 0;
                     }
                 }
                 else if (e.i == pb.GamePropertyId.Exp) {
@@ -223,7 +223,7 @@ export default class NewClass extends cc.Component {
                 if (e.i == pb.GamePropertyId.Gold) {
                     arr[0].string = '+ ' + e.v;
                     if (GameData.JJCapital) {
-                        arr[0].string = '-' + GameData.JJCapital * 2;
+                        arr[0].string = '+' + 0;
                     }
                 }
                 else if (e.i == pb.GamePropertyId.Exp) {
@@ -343,7 +343,7 @@ export default class NewClass extends cc.Component {
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
         GameCfg.enterGameCache = null;
-
+        // GameData.JJCapital = 0;
         if (!GameData.RoomType) {
             GameCfg.RoomGameData = null;
         }

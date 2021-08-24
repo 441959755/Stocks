@@ -4,7 +4,6 @@ import GameCfg from '../game/GameCfg';
 import GameData from '../GameData';
 import EventCfg from '../Utils/EventCfg';
 import GlobalEvent from '../Utils/GlobalEvent';
-import GlobalHandle from '../global/GlobalHandle';
 
 function PBHelper() {
 
@@ -332,8 +331,8 @@ PBHelper.prototype = {
             let data = RoomPlayerStatus.decode(new Uint8Array(buff));
             console.log('玩家准备就绪' + JSON.stringify(data));
             GlobalEvent.emit(EventCfg.ROOMOLAYERSTATUS, data);
-
         }
+
         //// 同步房间游戏状态
         else if (id == pb.MessageId.Sync_Room_GameStatus) {
             let RoomGameStatus = pb.RoomGameStatus;
@@ -353,7 +352,13 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Sync_Room_GameOp) {
             let RoomGameOp = pb.RoomGameOp;
             let data = RoomGameOp.decode(new Uint8Array(buff));
-            console.log('游戏操作' + JSON.stringify(data));
+
+            let GameOperationId = pb.GameOperationId;
+            let ops = GameOperationId.decode(new Uint8Array(data.ops));
+
+
+            console.log('游戏操作' + JSON.stringify(data) + JSON.stringify(ops));
+
         }
 
         //// 游戏结果
@@ -376,13 +381,6 @@ PBHelper.prototype = {
             let data = CmdRoomLeaveReply.decode(new Uint8Array(buff));
             console.log('离开房间应答' + JSON.stringify(data));
             return data;
-        }
-
-        //// 同步房间游戏操作
-        else if (id == pb.MessageId.Sync_Room_GameOp) {
-            let RoomGameOp = pb.RoomGameOp;
-            let data = RoomGameOp.decode(new Uint8Array(buff));
-            console.log('同步房间游戏操作' + JSON.stringify(data));
         }
 
         //查询当前一轮闯关赛配置数据应答：CgsConf

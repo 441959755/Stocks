@@ -55,7 +55,7 @@ export default class NewClass extends cc.Component {
         }, this);
     }
 
-    onEnable() {
+    onShow() {
         this.flag = true;
         if (GameCfg.GAMEFUPAN) {
             return;

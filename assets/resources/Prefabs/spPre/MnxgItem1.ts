@@ -49,7 +49,7 @@ export default class NewClass extends cc.Component {
         this.labels[3].string = ComUtils.changeTwoDecimal(this._curData.priceCost) + '';
         this.labels[4].string = this._curData.volume;
 
-        let zd = info.price - info.close;
+        let zd = info.price - this._curData.priceCost;
         if (zd < 0) {
             this.labels[5].node.color = cc.Color.GREEN;
             this.labels[6].node.color = cc.Color.GREEN;
@@ -60,12 +60,12 @@ export default class NewClass extends cc.Component {
         }
 
         this.labels[5].string = ComUtils.changeTwoDecimal(zd) + '';
-        let zdf = zd / info.close * 100;
+        let zdf = zd / this._curData.priceCost * 100;
         this.labels[6].string = ComUtils.changeTwoDecimal(zdf) + '%';
 
         this.labels[7].string = ComUtils.changeTwoDecimal(info.high) + '';
         this.labels[8].string = ComUtils.changeTwoDecimal(info.low) + '';
-        let sy = (info.price - this._curData.priceCost) * this._curData.priceCost;
+        let sy = (info.price - this._curData.priceCost) * this._curData.volume;
         if (sy > 0) {
             this.labels[9].node.color = cc.Color.RED;
         } else {

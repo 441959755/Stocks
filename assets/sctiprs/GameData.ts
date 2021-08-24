@@ -318,4 +318,6 @@ export default class GameData {
 
     public static isToAGame = false; //是否再来一局
 
+    public static school = null;
+
 }

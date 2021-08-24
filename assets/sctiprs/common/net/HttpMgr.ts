@@ -86,11 +86,12 @@ export default class HttpMgr {
                 let da = {
                     timestamp: arr[0],
                     open: parseInt(arr[1]),
-                    price: parseInt(arr[2]),
+                    close: parseInt(arr[2]),
                     high: parseInt(arr[3]),
                     low: parseInt(arr[4]),
                     amount: parseInt(arr[5]),
                     volume: parseInt(arr[6]),
+
                 }
                 data.push(da);
             });

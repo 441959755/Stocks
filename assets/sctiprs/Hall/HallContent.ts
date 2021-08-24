@@ -226,6 +226,14 @@ export default class NewClass extends cc.Component {
 			cc.director.loadScene('guess');
 		}
 
+		//学习
+		else if (name == 'main_study_kxrm' || name == 'main_study_jx' ||
+			name == 'main_study_cjl' || name == 'main_study_macd' ||
+			name == 'main_study_kdj' || name == 'main_study_boll' ||
+			name == 'main_study_rsi' || name == 'main_study_expma') {
+			cc.director.loadScene('school');
+		}
+
 	}
 
 	onDestroy() {

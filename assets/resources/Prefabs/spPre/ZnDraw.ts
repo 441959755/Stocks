@@ -20,13 +20,13 @@ export default class NewClass extends cc.Component {
 
     name = null;
 
-    gpDataMin = null;  //分时数据
+    gpDataMin = [];  //分时数据
 
-    gpDataDay = null  //日k数据
+    gpDataDay = []  //日k数据
 
-    gpDataDay7 = null  //周k数据
+    gpDataDay7 = []  //周k数据
 
-    gpDataMonth = null //月k数据
+    gpDataMonth = [] //月k数据
 
     ktype = null;
 
@@ -95,6 +95,9 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Node)
     touchNode: cc.Node = null;
+
+    @property(cc.Label)
+    changeLabel: cc.Label = null;
 
     ori_width = 0;
     now_width = 0;
@@ -297,8 +300,10 @@ export default class NewClass extends cc.Component {
                     if (le > 0) {
                         this._amount = data.amount;
                         this._volume = data.volume;
-                        data.amount = (data.amount - this.gpDataMin[le - 1].amount)
-                        data.volume = (data.volume - this.gpDataMin[le - 1].volume)
+                        this.gpDataMin.forEach(el => {
+                            data.amount -= (el.amount)
+                            data.volume -= (el.volume)
+                        })
                     }
                     else if (le == 0) {
                         this._amount = data.amount;
@@ -330,6 +335,7 @@ export default class NewClass extends cc.Component {
                     this.setBoxLabel(data);
                     this.setCurLabelData();
                 }
+
 
                 this.onShowCgData();
             }
@@ -419,7 +425,7 @@ export default class NewClass extends cc.Component {
 
         this.initData();
 
-        if (GameCfg.GameType != 'MNXG') {
+        if (GameCfg.GameType != pb.GameType.MoNiChaoGu || GameCfg.GameType != pb.GameType.ChaoGuDaSai) {
             //订阅
             this.CmdQuoteSubscribe(true);
         }
@@ -462,10 +468,10 @@ export default class NewClass extends cc.Component {
                 for (let i = 0; i < this.gpDataDay.length; i++) {
                     if (el.ts == this.gpDataDay[i].timestamp) {
                         //买
-                        if (el.flag == -1) {
+                        if (el.flag < 0) {
                             GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: i + 1 });
                         }
-                        else if (el.flag == 1) {
+                        else if (el.flag > 1) {
                             GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: i + 1 });
                         }
                     }
@@ -618,6 +624,9 @@ export default class NewClass extends cc.Component {
             code += '1';
         }
         else if (code[0] == 3) {
+            code += '2';
+        }
+        else if (code[0] == 0) {
             code += '2';
         }
         let data = {
@@ -870,7 +879,7 @@ export default class NewClass extends cc.Component {
             this.BGrap[3].active = false;
             this.BGrap[4].active = false;
             this.touchNode.active = false;
-            if (!this.gpDataMin) {
+            if (!this.gpDataMin.length) {
                 this.getGPDataMin();
             }
             else {
@@ -881,8 +890,7 @@ export default class NewClass extends cc.Component {
         else if (name == 'toggle2') {
 
             GameCfg.GAMEFUPAN = true;
-
-            if (!this.gpDataDay) {
+            if (!this.gpDataDay.length) {
                 this.getGPDataDay();
             }
             else {
@@ -892,7 +900,7 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'toggle3') {
 
-            if (!this.gpDataDay) {
+            if (!this.gpDataDay.length) {
                 this.ktype = pb.KType.Day;
                 this.getGPDataDay();
             }
@@ -902,7 +910,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'toggle4') {
-            if (!this.gpDataDay7) {
+            if (!this.gpDataDay7.length) {
                 this.getHttpGPData('wk');
 
             }
@@ -912,7 +920,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'toggle5') {
-            if (!this.gpDataMonth) {
+            if (!this.gpDataMonth.length) {
                 this.getHttpGPData('mk');
 
             }
@@ -924,16 +932,19 @@ export default class NewClass extends cc.Component {
 
 
     onDisable() {
-        this.gpDataMin = null;  //分时数据
-        this.gpDataDay = null  //日k数据
-        this.gpDataDay7 = null  //周k数据
-        this.gpDataMonth = null //月k数据
+        this.gpDataMin = [];  //分时数据
+        this.gpDataDay = []  //日k数据
+        this.gpDataDay7 = []  //周k数据
+        this.gpDataMonth = [] //月k数据
         GameCfg.GAMEFUPAN = null;
         this.isSync = false;
         this._timeStamp = null;
         this._volume = 0;
         this._amount = 0;
-        this.CmdQuoteSubscribe(false);
+        if (GameCfg.GameType != pb.GameType.MoNiChaoGu || GameCfg.GameType != pb.GameType.ChaoGuDaSai) {
+            //订阅
+            this.CmdQuoteSubscribe(false);
+        }
         GlobalEvent.off(EventCfg.SYNCQUOTEITEM);
     }
 
@@ -958,6 +969,7 @@ export default class NewClass extends cc.Component {
             this.BGrap[2].active = false;
             this.BGrap[3].active = false;
             this.BGrap[4].active = false;
+            this.changeLabel.string = data;
 
         }
         else if (name == 'BtnMACD') {
@@ -965,18 +977,21 @@ export default class NewClass extends cc.Component {
             this.BGrap[2].active = true;
             this.BGrap[3].active = false;
             this.BGrap[4].active = false;
+            this.changeLabel.string = data;
         }
         else if (name == 'BtnKDJ') {
             this.mask.active = true;
             this.BGrap[2].active = false;
             this.BGrap[3].active = true;
             this.BGrap[4].active = false;
+            this.changeLabel.string = data;
         }
         else if (name == 'BtnRSI') {
             this.mask.active = true;
             this.BGrap[2].active = false;
             this.BGrap[3].active = false;
             this.BGrap[4].active = true;
+            this.changeLabel.string = data;
         }
         //点击模以
         else if (name == 'sp_btn_moni') {
@@ -992,6 +1007,7 @@ export default class NewClass extends cc.Component {
                     this.node.addChild(this.EnterGameLayer);
                     let handle = this.EnterGameLayer.getComponent('EnterXLGame');
                     let items = GameCfgText.getGPPKItemInfo(this.code);
+
                     handle.onShow(this.code, items[1], ComUtils.fromatTime1(this.gpDataDay[0].timestamp))
                 })
             }

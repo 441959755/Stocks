@@ -147,7 +147,7 @@ export default class NewClass extends cc.Component {
                 this.onUpdateSLLabel(data, this.lNode);
             }
 
-            //   else if ()
+            this.upDateAsset(data);
 
         }, this);
 
@@ -174,6 +174,31 @@ export default class NewClass extends cc.Component {
             socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
         }
 
+    }
+
+    upDateAsset(data) {
+        let arr = [], curGold = 0;
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+            arr = GameData.mncgDataList.positionList.items;
+        }
+        else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+            GameData.cgdsStateList.forEach(el => {
+                if (el.id == GameData.SpStockData.id) {
+                    if (el.state.positionList && el.state.positionList.items) {
+                        arr = el.state.positionList.items;
+                    }
+                }
+            })
+        }
+
+        arr.forEach(el => {
+            if (el.code == data.code) {
+                curGold = data.price * el.volume - el.volume * el.priceCost
+            }
+        })
+
+        this.zzcLa.string = parseInt(parseInt(this.zzcLa.string) + curGold + '') + '';
+        this.cczcLa.string = parseInt(parseInt(this.cczcLa.string) + curGold + '') + '';
     }
 
     onUpdateSLLabel(info, node) {
@@ -226,7 +251,19 @@ export default class NewClass extends cc.Component {
             })
         }
 
-        let arr = arr1.concat(arr2);
+        let arr = [];
+        arr2.forEach(el => {
+            if (el.code) {
+                arr.push(el.code + '');
+            }
+
+        });
+
+        arr1.forEach(el => {
+            arr.push(el + '');
+        });
+
+
         {
             let info = {
                 items: [{ code: '1399001', flag: flag },
@@ -235,6 +272,7 @@ export default class NewClass extends cc.Component {
 
             arr.forEach(el => {
                 info.items.push({ code: el, flag })
+
             });
 
             console.log('arr' + JSON.stringify(arr));
@@ -259,15 +297,15 @@ export default class NewClass extends cc.Component {
         //  GameCfg.GameType = null;
         GlobalEvent.off(EventCfg.CHANGEMNCGACCOUNT);
         GameData.SpStockData = null;
-        // this.content1.removeAllChildren();
-        // this.content2.removeAllChildren();
+        this.content1.removeAllChildren();
+        this.content2.removeAllChildren();
     }
 
 
     //资产数据
     onUpdateMycgData() {
         let data = {
-            account: 100000,
+            account: 0,
             orderList: null,
             positionList: null,
         };
@@ -375,6 +413,13 @@ export default class NewClass extends cc.Component {
         if (name == 'toggle1') {
             this.scorllNode.active = true;
             this.scorllNode1.active = false;
+
+            if (this.content1.children.length > 0) {
+                this.tipsNode.active = false;
+            }
+            else {
+                this.tipsNode.active = true;
+            }
         }
 
         else if (name == 'toggle2') {

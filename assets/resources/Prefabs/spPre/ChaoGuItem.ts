@@ -112,6 +112,11 @@ export default class NewClass extends cc.Component {
 
                 if (res.cgdsStateItem) {
                     GameData.cgdsStateList.push(res.cgdsStateItem);
+                    let obj = {
+                        id: res.cgdsStateItem.id,
+                        stockList: [],
+                    }
+                    GameData.cgdsStockList.push(obj);
                     this.onShow();
                 }
                 else {

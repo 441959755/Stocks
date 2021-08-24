@@ -271,7 +271,6 @@ export default class NewClass extends cc.Component {
 		GlobalHandle.onCmdGameStartReq(() => {
 			//游戏行情获取
 			GlobalHandle.onCmdGameStartQuoteQuery(info1, () => {
-
 				cc.director.loadScene('game');
 			})
 

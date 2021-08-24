@@ -82,7 +82,6 @@ export default class NewClass extends cc.Component {
         })
     }
 
-
     createItem() {
 
         let jtcj = [], jtwt = [], lsjl = [];
@@ -117,6 +116,11 @@ export default class NewClass extends cc.Component {
         })
     }
 
+    onDisable() {
+        this.contents.forEach(el => {
+            el.removeAllChildren();
+        })
+    }
 
     onToggleClick(event, data) {
         this.viewNode.forEach(el => {

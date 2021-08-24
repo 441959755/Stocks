@@ -70,7 +70,7 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     DXXLGG: cc.Node = null;
 
-    protected onEnable() {
+    protected onShow() {
 
         let gpData = GameCfg.data[0].data;
 

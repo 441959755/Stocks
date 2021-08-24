@@ -308,8 +308,6 @@ export default class NewClass extends cc.Component {
                     }
                 }
             }
-
-
         }
 
         this.onShowGANEFUPAN();
@@ -407,8 +405,6 @@ export default class NewClass extends cc.Component {
         else if (name == 'otherPlayerNode') {
             GlobalEvent.emit(EventCfg.OPENOTHERPLAYERINFO);
         }
-
-
     }
 
     onBlackHAll() {

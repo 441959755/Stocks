@@ -133,7 +133,7 @@ export default class NewClass extends cc.Component {
 
         let flag = true;
 
-        if (GameData.Players[0].favorList) {
+        if (GameData.Players[0] && GameData.Players[0].favorList) {
             let arr = GameData.Players[0].favorList;
             arr.forEach(el => {
                 if (el == GameData.Players[1].uid) {
@@ -148,7 +148,7 @@ export default class NewClass extends cc.Component {
             this.wgzNode.active = true;;
         }
 
-        if (GameData.Players[1].favorList) {
+        if (GameData.Players[1].favorList && GameData.Players[0]) {
             let arr = GameData.Players[1].favorList;
             arr.forEach(el => {
                 if (el == GameData.Players[0].uid && flag) {

@@ -1,4 +1,4 @@
-import { pb } from "../../../protos/proto";
+
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
@@ -24,20 +24,20 @@ export default class NewClass extends cc.Component {
     CZBtn: cc.Node = null;
 
     onLoad() {
-
         //更新当前金币属性
-        GlobalEvent.on(EventCfg.SMINITFUND, () => {
-            this.curla.string = GameData.SmxlState.gold;
-            this.initLa.string = GameData.SmxlState.goldInit;
-            //是否重置
-            this.CZBtn.active = false;
-            if (GameData.SmxlState.gold <= GameCfgText.smxlCfg.capital_min.value) {
-                this.CZBtn.active = true;
-            } else if (GameData.SmxlState.gold >= GameCfgText.smxlCfg.capital_max.value) {
-                this.CZBtn.active = true;
-            }
-        }, this);
+        GlobalEvent.on(EventCfg.SMINITFUND, this.updataGold.bind(this), this);
+    }
 
+    updataGold() {
+        this.curla.string = GameData.SmxlState.gold;
+        this.initLa.string = GameData.SmxlState.goldInit;
+        //是否重置
+        this.CZBtn.active = false;
+        if (GameData.SmxlState.gold <= GameCfgText.smxlCfg.capital_min.value) {
+            this.CZBtn.active = true;
+        } else if (GameData.SmxlState.gold >= GameCfgText.smxlCfg.capital_max.value) {
+            this.CZBtn.active = true;
+        }
     }
 
     protected onEnable() {
@@ -60,35 +60,24 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         //点击双盲训练
         if (name == 'startSMBtn') {
-            if (GameData.SmxlState.gold <= GameCfgText.smxlCfg.capital_min.value/* || GameData.SmxlState.gold >= GameCfgText.smxlCfg.capital_max*/) {
-                // if (GameData.ShuangMangCount <= 0) {
-                //     GlobalEvent.emit(EventCfg.OPENSMRESETMONEYLAYER);
-                //     return;
-                // } else {
+            if (GameData.SmxlState.gold <= GameCfgText.smxlCfg.capital_min.value) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的金币不足，请点击重置，免费重置金币！');
                 return;
-                // }
             }
-
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.GAMEFUPAN = false;
-            GameCfg.GameType = pb.GameType.ShuangMang;
             GameCfg.GameSet = GameData.SMSet;
             GameCfg.ziChan = GameData.SmxlState.gold;
-
             this.smStartGameSet();
-
         }
 
         //点击训练设置
         else if (name == 'setSMBtn') {
-
             GlobalEvent.emit(EventCfg.OPENSETLAYER);
         }
 
         //点击历史记录
         else if (name == 'historySMBtn') {
-
             GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
         }
 

@@ -33,8 +33,12 @@ export default class NewClass extends cc.Component {
                         edit.string = '';
                         return;
                     }
+                    let code = items[0] + '';
+                    if (code.length >= 7) {
+                        code = code.slice(1);
+                    }
 
-                    this.editBox.string = items[0] + '        ' + items[1];
+                    this.editBox.string = code + '        ' + items[1];
                     this.code = items[0];
                 }
 
@@ -124,6 +128,7 @@ export default class NewClass extends cc.Component {
                 //         el.stockList.push(parseInt(items[0]));
                 //     }
                 // })
+
                 for (let i = 0; i < GameData.cgdsStockList.length; i++) {
                     if (GameData.cgdsStockList[i].id == GameData.SpStockData.id) {
                         GameData.cgdsStockList[i].stockList.push(parseInt(items[0]));

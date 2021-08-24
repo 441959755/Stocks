@@ -4,7 +4,6 @@ import { pb } from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -28,7 +27,7 @@ export default class NewClass extends cc.Component {
         this.label[4].string = this._curData.lastBidPrice || '--';
         this.label[5].string = this._curData.curAskPrice || '--';
         this.label[6].string = this._curData.profitRate || '--';
-        if (this._curData.todaySignal > 0) {
+        if (this._curData.todaySignal < 0) {
             this.label[7].string = '建议买入';
         }
         else if (this._curData.todaySignal > 0) {
@@ -64,10 +63,10 @@ export default class NewClass extends cc.Component {
 
 
             if (flag == 1 && this._curData.todaySignal > 0) {
-                this.label[7].string = '建议持仓';
+                this.label[7].string = '建议卖出';
             }
             else if (flag == -1 && this._curData.todaySignal < 0) {
-                this.label[7].string = '建议持仓';
+                this.label[7].string = '建议买入';
             }
         })
     }

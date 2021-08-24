@@ -140,7 +140,6 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'sp_topbtn_help') {
-
             GlobalEvent.emit(EventCfg.OPENHELPLAYER);
         }
 
@@ -167,7 +166,7 @@ export default class NewClass extends cc.Component {
             let time = new Date().getTime() / 1000;
 
             res.items.forEach(el => {
-                if (el.todaySignal < 0 && (time - el.tsUpdated) <= 48 * 60 * 60) {
+                if (el.todaySignal < 0 && (time - el.tsUpdated) <= 48 * 60 * 60 && el.industry != '指数') {
                     this.AIStockList.push(el);
                 }
 
@@ -226,12 +225,8 @@ export default class NewClass extends cc.Component {
             console.log('查询AI选股的股票列表' + JSON.stringify(res));
             let UIScrollControl = this.scrollview2.getComponent('UIScrollControl');
             UIScrollControl.initControl(this.preItem2, res.items.length, this.preItem2.getContentSize(), 0, (node, index) => {
-                let handle = this.content2.children[index].getComponent('ZnxgItem2');
-                let flag = this.getBKISShow(res.items[index].code);
-                if (flag) { tt++ }
-                this.content2.children[index].active = flag;
-
-                handle.onShow(res.items[index], tt);
+                let handle = node.getComponent('ZnxgItem2');
+                handle.onShow(res.items[index], index + 1);
 
             })
 

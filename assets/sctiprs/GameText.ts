@@ -122,8 +122,9 @@ export default class GameCfgText {
     public static getGPPKItemInfo(item) {
         let index, items;
         for (let i = 0; i < this.pkStockList.length; i++) {
-            if (this.pkStockList[i].indexOf(item) != -1) {
-                items = this.pkStockList[i].split('|');
+            let arr = this.pkStockList[i].split('|');
+            if (arr[0].indexOf(item) != -1 || arr[1].indexOf(item) != -1) {
+                items = arr;
                 break;
             }
         }

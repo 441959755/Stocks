@@ -43,7 +43,6 @@ export default class NewClass extends cc.Component {
 	@property(cc.Label)
 	tipsLabel2: cc.Label = null;
 
-
 	curState = 0;
 
 	onLoad() {

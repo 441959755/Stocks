@@ -194,7 +194,7 @@ export default class NewClass extends cc.Component {
 
 
     start() {
-        if (GameCfg.GameType != 'ZNXG' && GameCfg.GameType != 'MNXG') {
+        if (GameCfg.GameType != pb.GameType.MoNiChaoGu && GameCfg.GameType != pb.GameType.ChaoGuDaSai) {
             this.onAddMard({ type: 1, index: GameData.huizhidatas });
             if (!GameCfg.GAMEFUPAN) {
             }

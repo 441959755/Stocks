@@ -48,13 +48,16 @@ export default class NewClass extends cc.Component {
                 setTimeout(() => {
                     if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
                         this.CGSFinalLayer.active = true;
+                        this.CGSFinalLayer.getComponent('CGSFinalHandle').onShow();
                     }
                     else {
                         if (GameCfg.JJ_XUNLIAN) {
                             this.LxFinalLayer.active = true;
+                            this.LxFinalLayer.getComponent('LXFinalandle').onShow();
                         }
                         else {
                             this.finalLayer.active = true;
+                            this.finalLayer.getComponent('FinalHandle').onShow();
                         }
                     }
                 }, 80)

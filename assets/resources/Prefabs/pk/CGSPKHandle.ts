@@ -234,7 +234,7 @@ export default class NewClass extends cc.Component {
     }
 
     onUpContent() {
-        if (GameData.CGSSAVELEVEL == null) {
+        if (GameData.CGSSAVELEVEL === null) {
             GameData.CGSSAVELEVEL = GameData.cgState.stage || 0;
         }
 
@@ -313,7 +313,7 @@ export default class NewClass extends cc.Component {
                 taBtn.children[0].active = true;
                 // ckBtn.children[0].active = true;
             }
-            else if (GameData.cgState && index == GameData.cgState.stage) {
+            else if (GameData.cgState && index === GameData.cgState.stage) {
                 node1.children[0].active = false;
                 node1.children[1].active = true;
                 node1.children[2].active = false;
@@ -337,6 +337,10 @@ export default class NewClass extends cc.Component {
                     progress.progress = 0;
                 }
                 peopleLabel.string = '在线（' + this.confdata.people[index] + '人）'
+                if (!index) {
+                    peopleLabel.string = '在线（...人）';
+                }
+
 
                 taBtn.children[1].active = true;
                 //   ckBtn.children[1].active = true;
