@@ -106,7 +106,7 @@ export default class GameCfgText {
         let index, items;
         for (let i = 0; i < this.stockList.length; i++) {
             items = this.stockList[i].split('|');
-            if (items[0].indexOf(item) != -1) {
+            if (items[0].indexOf(item) != -1 || items[1].indexOf(item) != -1) {
 
                 break;
             }
@@ -138,7 +138,8 @@ export default class GameCfgText {
         str = str.split(' ')[0];
         let items;
         for (let i = 0; i < this.stockList.length; i++) {
-            if (this.stockList[i].indexOf(str) != -1) {
+            let arr = this.stockList[i].split('|');
+            if (arr[0].indexOf(str) != -1 || arr[1].indexOf(str) != -1) {
                 items = this.stockList[i].split('|');
                 break;
             }

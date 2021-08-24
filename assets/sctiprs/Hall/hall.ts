@@ -26,6 +26,9 @@ export default class NewClass extends cc.Component {
 
 	rewardCenterNode: cc.Node = null;
 
+	@property(cc.Node)
+	rightbg: cc.Node = null;
+
 	onLoad() {
 
 		PopupManager.init();
@@ -99,7 +102,7 @@ export default class NewClass extends cc.Component {
 			LoadUtils.loadRes('Prefabs/playeInfo/playerInfoLayer', pre => {
 				GlobalEvent.emit(EventCfg.LOADINGHIDE);
 				this.playerInfoLayer = cc.instantiate(pre);
-				this.node.addChild(this.playerInfoLayer);
+				this.rightbg.addChild(this.playerInfoLayer);
 				this.playerInfoLayer.active = true;
 			})
 		}

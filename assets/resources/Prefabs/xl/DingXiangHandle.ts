@@ -128,15 +128,17 @@ export default class NewClass extends cc.Component {
 
 				node.getComponent(cc.Label).string = el;
 			})
-
 		}
+		GameData.DXSet.search = '随机选股';
 	}
 
 	onEnable() {
+
 		this.tipsLabel1.node.active = false;
 		this.tipsLabel2.node.active = false;
 
 		let gameCount = EnterGameControl.onCurDXIsEnterGame();
+
 		if (gameCount.status == 0) {
 			this.curState = 0;
 		} else if (gameCount.status == 1) {
@@ -361,7 +363,6 @@ export default class NewClass extends cc.Component {
 				}
 			}
 			this.getTimeByCodeName(index);
-
 		}
 	}
 
@@ -738,24 +739,4 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.emit(EventCfg.onCmdQuoteQuery, data);
 	}
-
-	//http://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js?TYPE=m30k&rtntype=5&authorityType=fa&id=3008032
-
-	// //获取周K
-
-	// getWkData() {
-	//     let url = 'http://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js';
-
-	//     let code = GameCfg.data[0].code[0] == '6' ? GameCfg.data[0].code + '1' : GameCfg.data[0].code + '2';
-
-	//     let TYPE;
-	//     if (GameData.DXSet.ZLine == '周线') {
-	//         TYPE = 'wk'
-	//     } else if (GameData.DXSet.ZLine == '30分钟K') {
-	//         TYPE = 'm30k';
-	//     } else if (GameData.DXSet.ZLine == '60分钟K') {
-	//         TYPE = 'm60k';
-	//     }
-
-	// }
 }

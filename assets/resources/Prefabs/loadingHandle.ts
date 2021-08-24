@@ -17,7 +17,7 @@ export default class NewClass extends cc.Component {
 
 		this.callBack = setTimeout(() => {
 			this.node.active = false;
-		}, 4000);
+		}, 2000);
 
 		let index = 0;
 		let arr = ['...', '..', '.'];

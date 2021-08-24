@@ -639,7 +639,9 @@ export default class NewClass extends cc.Component {
 	setLabelData() {
 		if (this.roundNumber <= 0) {
 			this.roundNumber = 0;
+			this.onGameOverClosRate();
 		}
+
 		if (!GameCfg.GAMEFUPAN) {
 			this.tipsLabel.string = '回合数：' + this.roundNumber;
 			this.tipsLabel1.string = '回合数：' + this.roundNumber;

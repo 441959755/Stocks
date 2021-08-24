@@ -22,8 +22,8 @@ export default class GlobalHandle {
 
             if (res.err) {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                let err = GlobalHandle.getErrorCodeByCode(res.code);
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, err);
+                //  let err = GlobalHandle.getErrorCodeByCode(res.code);
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
                 return;
             }
             cb && (cb(res));

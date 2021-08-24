@@ -59,6 +59,7 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
+        GlobalEvent.emit(EventCfg.LOADINGHIDE);
         GlobalEvent.on(EventCfg.HISTORYOPTDATA, () => {
 
             let nodes = preNodes;
