@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "dea641e1-9e07-49ce-a0d2-d3112ae6c02a",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 1280,
+  "height": 720,
+  "platformSettings": {},
+  "subMetas": {
+    "答题闯关": {
+      "ver": "1.0.4",
+      "uuid": "84ce8df5-3222-41b0-8e8b-ff0d7bf3a16d",
+      "rawTextureUuid": "dea641e1-9e07-49ce-a0d2-d3112ae6c02a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1280,
+      "height": 720,
+      "rawWidth": 1280,
+      "rawHeight": 720,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

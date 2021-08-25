@@ -68,6 +68,13 @@ export default class NewClass extends cc.Component {
 
         //跟新资产数据
         GlobalEvent.on(EventCfg.CHANGEMNCGACCOUNT, this.onUpdateMycgData.bind(this), this);
+
+        GlobalEvent.on(EventCfg.UPDATECCASSET, this.onUptateCCAsset.bind(this), this)
+    }
+
+    onUptateCCAsset(data) {
+        this.zzcLa.string = parseInt(parseInt(this.zzcLa.string) + data + '') + '';
+        this.cczcLa.string = parseInt(parseInt(this.cczcLa.string) + data + '') + '';
     }
 
     onAddZx() {
@@ -84,6 +91,7 @@ export default class NewClass extends cc.Component {
         }
         if (arr.length > 0) {
             let UIScrollControl = this.scorllNode.getComponent('UIScrollControl');
+            UIScrollControl.clear();
             UIScrollControl.initControl(this.item1, arr.length, this.item1.getContentSize(), 0, (node, index) => {
                 let handle = node.getComponent('MnxgItem');
                 handle.onShow(arr[index]);
@@ -147,7 +155,7 @@ export default class NewClass extends cc.Component {
                 this.onUpdateSLLabel(data, this.lNode);
             }
 
-            this.upDateAsset(data);
+            //  this.upDateAsset(data);
 
         }, this);
 
@@ -337,15 +345,18 @@ export default class NewClass extends cc.Component {
             this.wtzcLa.string = '0';
         }
         if (data.positionList && data.positionList.items) {
+
             data.positionList.items.forEach(el => {
-
                 cc += (el.volume * el.priceCost);
-
             });
+
             this.cczcLa.string = parseInt(cc + '') + '';
+
         }
         else {
+
             this.cczcLa.string = '0';
+
         }
 
         let zzc = (data.account || 0) + cc + wt;
@@ -442,6 +453,7 @@ export default class NewClass extends cc.Component {
 
             if (arr.length > 0) {
                 let UIScrollControl = this.scorllNode1.getComponent('UIScrollControl');
+                UIScrollControl.clear();
                 UIScrollControl.initControl(this.item2, arr.length, this.item2.getContentSize(), 0, (node, index) => {
                     let handle = node.getComponent('MnxgItem1');
                     handle.onShow(arr[index].code, arr[index]);

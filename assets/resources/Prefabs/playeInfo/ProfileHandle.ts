@@ -33,12 +33,6 @@ export default class NewClass extends cc.Component {
     phone: cc.Label = null;
 
     @property(cc.Label)
-    gold: cc.Label = null;
-
-    @property(cc.Label)
-    diamond: cc.Label = null;
-
-    @property(cc.Label)
     exp: cc.Label = null;
 
     @property(cc.Label)
@@ -47,14 +41,17 @@ export default class NewClass extends cc.Component {
     @property(cc.ProgressBar)
     progress: cc.ProgressBar = null;
 
-    onLoad() {
-        GlobalEvent.on(EventCfg.GOLDCHANGE, () => {
-            this.gold.string = GameData.properties[pb.GamePropertyId.Gold];
-        }, this);
+    @property(cc.Label)
+    swLabel: cc.Label = null;
 
-        GlobalEvent.on(EventCfg.DIAMONDCHANGE, () => {
-            this.diamond.string = GameData.properties[pb.GamePropertyId.Diamond];
-        }, this);
+    onLoad() {
+        // GlobalEvent.on(EventCfg.GOLDCHANGE, () => {
+        //     this.gold.string = GameData.properties[pb.GamePropertyId.Gold];
+        // }, this);
+
+        // GlobalEvent.on(EventCfg.DIAMONDCHANGE, () => {
+        //     this.diamond.string = GameData.properties[pb.GamePropertyId.Diamond];
+        // }, this);
 
         GlobalEvent.on(EventCfg.HEADIMGCHANGE, () => {
             this.headImg.spriteFrame = GameData.headImg;
@@ -86,8 +83,8 @@ export default class NewClass extends cc.Component {
 
 
     onEnable() {
-        this.gold.string = GameData.properties[pb.GamePropertyId.Gold];
-        this.diamond.string = GameData.properties[pb.GamePropertyId.Diamond];
+        // this.gold.string = GameData.properties[pb.GamePropertyId.Gold];
+        // this.diamond.string = GameData.properties[pb.GamePropertyId.Diamond];
         this.headImg.spriteFrame = GameData.headImg;
         this.userID.string = GameData.userID;
         this.userName.string = GameData.userName;
@@ -128,6 +125,8 @@ export default class NewClass extends cc.Component {
             str = '股市至尊';
         }
         this.chenghao.string = str;
+
+        this.swLabel.string = GameData.properties[pb.GamePropertyId.Fame];
     }
 
     onBtnClick(event, data) {
@@ -168,7 +167,7 @@ export default class NewClass extends cc.Component {
                         this.headImg.spriteFrame = GameData.headImg;
                     }
                 } else {
-                    console.log('图片有吴!:' + info.code + info.err);
+                    console.log('图片有误!:' + info.code + info.err);
                 }
 
             })

@@ -385,20 +385,39 @@ export default class NewClass extends cc.Component {
 
         }
 
-        label1.string = '持股量：' + ComUtils.changeTwoDecimal(cjl);
+        label1.string = '持股量：' + parseInt(cjl + '');
         label2.string = '买入均价：' + ComUtils.changeTwoDecimal(mrj);
         label3.string = '买入总价：' + ComUtils.changeTwoDecimal(zj);
         label4.string = '涨跌：' + ComUtils.changeTwoDecimal(zd);
         label5.string = '收益：' + ComUtils.changeTwoDecimal(sy);
-
     }
 
     // 更新买1...卖1...label跟新
     setBoxLabel(info) {
+        let zs = this.gpDataDay[this.gpDataDay.length - 1].close;
         this.t_label.forEach((el, index) => {
             el.string = ComUtils.changeTwoDecimal(info.ask5Price[index]);
+            if (info.ask5Price[index] > zs) {
+                el.node.color = cc.Color.RED;
+            }
+            else if (info.ask5Price[index] < zs) {
+                el.node.color = cc.Color.GREEN;
+            }
+            else {
+                el.node.color = cc.Color.WHITE;
+            }
             this.t_labelv[index].string = parseInt(info.ask5Volume[index] / 100 + '');
             this.d_label[index].string = ComUtils.changeTwoDecimal(info.bid5Price[index]);
+            if (info.bid5Price[index] > zs) {
+                this.d_label[index].node.color = cc.Color.RED;
+            }
+            else if (info.bid5Price[index] < zs) {
+                this.d_label[index].node.color = cc.Color.GREEN;
+            }
+            else {
+                this.d_label[index].node.color = cc.Color.WHITE;
+            }
+
             this.d_labelv[index].string = parseInt(info.bid5Volume[index] / 100 + '');
         })
     }
@@ -447,6 +466,11 @@ export default class NewClass extends cc.Component {
             else {
                 this.yiShouCang.active = false;
             }
+
+            setTimeout(() => {
+                this.toggles[1].isChecked = true;
+                this.onToggleClick({ node: { name: 'toggle2' } }, null);
+            }, 500)
         }
     }
 
@@ -707,8 +731,15 @@ export default class NewClass extends cc.Component {
     setCurLabelData() {
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
         let data = this.gpDataMin[this.gpDataMin.length - 1];
+        let preData;
+        if (this.gpDataDay[this.gpDataDay.length - 1].timestamp == ComUtils.getCurYearMonthDay()) {
+            preData = this.gpDataDay[this.gpDataDay.length - 2];
+        }
+        else {
+            preData = this.gpDataDay[this.gpDataDay.length - 1];
+        }
 
-        let preData = this.gpDataDay[this.gpDataDay.length - 1];
+
 
         let items = GameCfgText.getGPPKItemInfo(this.code);
         let code = this.code;
@@ -728,8 +759,8 @@ export default class NewClass extends cc.Component {
         this.cLabel[1].string = code;
 
         this.cLabel[2].string = ComUtils.changeTwoDecimal(data.price) + '';
-        let zf = data.close - preData.close;
-        let zfl = (data.close - preData.close) / preData.close * 100;
+        let zf = data.price - preData.close;
+        let zfl = (data.price - preData.close) / preData.close * 100;
         this.cLabel[3].string = ComUtils.changeTwoDecimal(zf) + '    ' + ComUtils.changeTwoDecimal(zfl) + '%';
 
         this.cLabel[4].string = ComUtils.changeTwoDecimal(data.high) + '';

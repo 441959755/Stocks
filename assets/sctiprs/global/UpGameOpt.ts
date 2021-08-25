@@ -95,6 +95,7 @@ export default class UpGameOpt {
         this.cb = null;
         this.arrOpt = [];
         this.arrOpt.length = 0;
+
     }
 
     //kOffset
@@ -102,5 +103,13 @@ export default class UpGameOpt {
         item.forEach(el => {
             el.kOffset += 1;
         });
+    }
+
+    public static UpdataOtherPlayerOpt(opt) {
+        console.log('opt:' + JSON.stringify(opt));
+        this.ChanagekOffset(opt);
+        this.player2Opt.push(opt);
+        console.log('player2Opt:' + JSON.stringify(this.player2Opt));
+
     }
 }

@@ -19,6 +19,7 @@ export default class NewClass extends cc.Component {
 
     code = null;
     from = null;
+    name = null;
 
     onEnable() {
         if (GameCfg.GameType == pb.GameType.JJ_PK ||
@@ -37,17 +38,19 @@ export default class NewClass extends cc.Component {
     }
 
     onShow(code, name, from) {
-        this.code = code;
-        if (code.length >= 7) {
-            code = code.slice(1);
+        this.code = code + '';
+
+        if (this.code.length >= 7) {
+            code = this.code.slice(1);
         }
         this.from = from;
         this.xlname.string = '前往定向训练场训练该股票';
         this.codename.string = code + '     ' + name;
+        this.name = name;
     }
 
 
-    onBtnClick(event, data) {
+    onBtnClick(event, curData) {
         let name = event.target.name;
 
         if (name == 'qxBtn') {
@@ -93,6 +96,10 @@ export default class NewClass extends cc.Component {
             GameCfg.GameSet.year = (data.from + '').slice(0, 4);
 
             GameCfg.GameSet.search = data.code;
+
+            GameCfg.data[0].name = this.name;
+
+            GameCfg.data[0].code = this.code;
 
             EnterGameControl.onClearPreGameDataEnter(data);
         }

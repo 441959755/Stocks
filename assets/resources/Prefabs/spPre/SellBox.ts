@@ -1,4 +1,5 @@
 import { pb } from "../../../protos/proto";
+import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
@@ -35,21 +36,63 @@ export default class NewClass extends cc.Component {
 
     onShow(data) {
         this.curData = data;
-        this.codeLabal.string = this.curData.code;
+        let code = this.curData.code + '';
+        if (code.length >= 7) {
+            code = code.slice(1);
+        }
+        this.codeLabal.string = code;
         this.nameLabel.string = this.curData.name;
 
         this.mcjgLabel.string = this.curData.price;
         this.mcslLabel.string = '0';
 
-        let items = GameData.mncgDataList.positionList.items || [];
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+            let items = GameData.mncgDataList.positionList.items || [];
+            if (items.length > 0) {
+                items.forEach(el => {
+                    if (el.code == this.curData.code) {
+                        this.curSl = el.volumeFree;
+                    }
+                });
+            }
 
-        if (items.length > 0) {
-            items.forEach(el => {
-                if (el.code == this.curData.code) {
-                    this.curSl = el.volumeFree;
-                }
-            });
+            if (GameData.mncgDataList.positionList && GameData.mncgDataList.positionList.items) {
+                GameData.mncgDataList.positionList.items.forEach(el => {
+                    if (el.code == this.curData.code && el.type == pb.OrderType.BidLimit) {
+                        this.node.active = false;
+                        GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
+                    }
+
+                });
+            }
+
         }
+        else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+            GameData.cgdsStateList.forEach(el => {
+                if (el.id == GameData.SpStockData.id) {
+                    let items = el.state.positionList;
+                    if (items.length > 0) {
+                        items.forEach(el => {
+                            if (el.code == this.curData.code) {
+                                this.curSl = el.volumeFree;
+                            }
+                        });
+                    }
+
+                    if (el.state.positionList && el.state.positionList.items) {
+                        el.state.positionList.items.forEach(el1 => {
+                            if (el1.code == this.curData.code && el1.type == pb.OrderType.BidLimit) {
+                                this.node.active = false;
+                                GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
+                            }
+
+                        });
+                    }
+
+                }
+            })
+        }
+
 
         if (this.curSl) {
             this.kmslLabel.string = this.curSl;

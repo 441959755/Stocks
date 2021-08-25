@@ -36,7 +36,7 @@ cc.Class({
 		//期货配置
 		GameCfgText.getQIHuoList();
 
-		//	LLLog.reConsole();
+		LLLog.reConsole();
 
 		cc.macro.ENABLE_MULTI_TOUCH = false;
 

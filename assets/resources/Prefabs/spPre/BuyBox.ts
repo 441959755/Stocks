@@ -48,7 +48,13 @@ export default class NewClass extends cc.Component {
         else {
             this.curData = data;
             this.nameLabel.string = this.curData.name;
-            this.codeLabel.string = this.curData.code;
+
+            let code = this.curData.code + '';
+            if (code.length >= 7) {
+                code = code.slice(1);
+            }
+
+            this.codeLabel.string = code;
             this.priceLabel.string = ComUtils.changeTwoDecimal(this.curData.price) + '';
         }
 
@@ -56,11 +62,32 @@ export default class NewClass extends cc.Component {
 
         if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
             this.kyzc = GameData.mncgDataList.account;
+
+            if (GameData.mncgDataList.orderList && GameData.mncgDataList.orderList.items) {
+                GameData.mncgDataList.orderList.items.forEach(el => {
+                    if (el.code == this.curData.code && el.type == pb.OrderType.AskLimit) {
+                        this.node.active = false;
+                        GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
+                    }
+
+                });
+            }
         }
+
         else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
             GameData.cgdsStateList.forEach(el => {
                 if (el.id == GameData.SpStockData.id) {
                     this.kyzc = el.state.account;
+
+                    if (el.state.orderList && el.state.orderList.items) {
+                        el.state.orderList.items.forEach(el1 => {
+                            if (el1.code == this.curData.code && el1.type == pb.OrderType.AskLimit) {
+                                this.node.active = false;
+                                GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
+                            }
+
+                        });
+                    }
                 }
             })
         }

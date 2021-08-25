@@ -36,6 +36,7 @@ export default class NewClass extends cc.Component {
     zcToggle: cc.Toggle = null;  //
 
     start() {
+        GlobalEvent.emit(EventCfg.LOADINGHIDE);
         //web 本地测试
         if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WEB) {
             this.tipsLabel.string = '会员登入';

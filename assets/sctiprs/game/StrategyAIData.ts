@@ -22,7 +22,6 @@ export default class StrategyAIData {
 
     public static hostory = [];
 
-
     //策略买入
     public static onBuyFunc() {
         this.AICount++;

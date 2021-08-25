@@ -72,36 +72,37 @@ export default class NewClass extends cc.Component {
             this.labels[9].node.color = cc.Color.GREEN;
         }
         this.labels[9].string = ComUtils.changeTwoDecimal(sy) + '';
+        GlobalEvent.emit(EventCfg.UPDATECCASSET, sy);
     }
 
     onShow(code, data: any) {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this._code = code;
-        this._curData = data;
 
-        //获取行情
-        {
-            let info1 = {
-                ktype: pb.KType.Min,
-                code: this._code,
-                to: parseInt((new Date().getTime()) / 1000 + ''),
-                total: 1,
+        if (!this._code || this._code != code) {
+
+            this._code = code;
+            this._curData = data;
+
+            //获取行情
+            {
+                let info1 = {
+                    ktype: pb.KType.Min,
+                    code: this._code,
+                    to: parseInt((new Date().getTime()) / 1000 + ''),
+                    total: 1,
+                }
+                socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
             }
-            socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
-        }
 
-        //订阅
-        //    this.CmdQuoteSubscribe(true);
-
-        let items = GameCfgText.getGPPKItemInfo(this._code);
-        if (items) {
-            this.labels[1].string = items[1];
+            let items = GameCfgText.getGPPKItemInfo(this._code);
+            if (items) {
+                this.labels[1].string = items[1];
+            }
+            code = this._code + '';
+            if (code.length >= 7) {
+                code = code.slice(1);
+            }
+            this.labels[0].string = code;
         }
-        code = this._code + '';
-        if (code.length >= 7) {
-            code = code.slice(1);
-        }
-        this.labels[0].string = code;
     }
 
     // CmdQuoteSubscribe(flag) {

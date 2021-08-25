@@ -194,7 +194,7 @@ export default class NewClass extends cc.Component {
 
 
     start() {
-        if (GameCfg.GameType != pb.GameType.MoNiChaoGu && GameCfg.GameType != pb.GameType.ChaoGuDaSai) {
+        if (GameCfg.GameType != 'ZNXG' && GameCfg.GameType != pb.GameType.MoNiChaoGu && GameCfg.GameType != pb.GameType.ChaoGuDaSai) {
             this.onAddMard({ type: 1, index: GameData.huizhidatas });
             if (!GameCfg.GAMEFUPAN) {
             }
@@ -202,7 +202,6 @@ export default class NewClass extends cc.Component {
                 this.onMarkAllShow();
             }
         }
-
     }
 
     onMarkRangeShowOrHide() {
@@ -396,6 +395,7 @@ export default class NewClass extends cc.Component {
     onAddMard(info) {
         let node, inde;
         inde = info.index - 1;
+
         if (this.status == 1) {
             if (this.mark1Nodes[inde]) { return }
             if (info.type == 2) {
@@ -410,7 +410,6 @@ export default class NewClass extends cc.Component {
                 node: node,
                 type: info.type,
             }
-
         }
         else if (this.status == 2) {
             if (this.mark2Nodes[inde]) { return }
@@ -425,6 +424,7 @@ export default class NewClass extends cc.Component {
                 type: info.type,
             }
         }
+
         else if (info.type == 1) {
             if (this.startNode[inde]) { return }
             node = cc.instantiate(this.startItem);
@@ -444,6 +444,7 @@ export default class NewClass extends cc.Component {
                 node = cc.instantiate(this.sItem);
             }
         }
+
         //策略買入 
         else if (info.type == 12) {
             if (this.AIMarkNodes[inde]) { return }
@@ -455,6 +456,7 @@ export default class NewClass extends cc.Component {
             node = cc.instantiate(this.ZSItem);
         }
 
+
         this.node.addChild(node);
         if (!this.status || this.status < 0) {
             if (info.type == 1) {
@@ -462,7 +464,6 @@ export default class NewClass extends cc.Component {
                     node: node,
                     type: info.type,
                 }
-
             }
 
             else if (info.type == 12 || info.type == 13) {
@@ -480,7 +481,6 @@ export default class NewClass extends cc.Component {
                     else if (!GameCfg.GameSet.showSign) {
                         this.AIMarkNodes[this.currPint.index].node.active = false;
                     }
-
                     this.AIMarkNodes[this.currPint.index].node.scale = this.currScale;
                     return;
                 }

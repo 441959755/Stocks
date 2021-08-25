@@ -44,37 +44,39 @@ export default class NewClass extends cc.Component {
     }
 
     onShow(data?) {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        if (data) {
-            this._code = data;
-        }
+        if ((!this._code || this._code != data) && data) {
 
-        //获取行情
-        {
-            let info1 = {
-                ktype: pb.KType.Min,
-                code: this._code,
-                to: parseInt((new Date().getTime()) / 1000 + ''),
-                total: 1,
+            if (data) {
+                this._code = data;
             }
-            socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
-            console.log('info:' + JSON.stringify(info1));
+
+            //获取行情
+            {
+                let info1 = {
+                    ktype: pb.KType.Min,
+                    code: this._code,
+                    to: parseInt((new Date().getTime()) / 1000 + ''),
+                    total: 1,
+                }
+                socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
+                console.log('info:' + JSON.stringify(info1));
+            }
+
+            //订阅
+            // this.CmdQuoteSubscribe(true);
+            this.items = GameCfgText.getGPPKItemInfo(this._code);
+
+            if (this.items) {
+                this.labs[1].string = this.items[1];
+            }
+
+            let code = this._code + '';
+
+            if (code.length >= 7) {
+                code = code.slice(1);
+            }
+            this.labs[0].string = code;
         }
-
-        //订阅
-        // this.CmdQuoteSubscribe(true);
-        this.items = GameCfgText.getGPPKItemInfo(this._code);
-
-        if (this.items) {
-            this.labs[1].string = this.items[1];
-        }
-
-        let code = this._code + '';
-
-        if (code.length >= 7) {
-            code = code.slice(1);
-        }
-        this.labs[0].string = code;
     }
 
     setLabel(info) {

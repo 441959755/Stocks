@@ -49,6 +49,8 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         GlobalEvent.on(EventCfg.SELECTBK, this.onShowSelectBk.bind(this), this);
+        //更新列表
+        GlobalEvent.on('updateCollectList', this.getCollectList.bind(this), this);
     }
 
     onShowSelectBk() {
@@ -169,7 +171,6 @@ export default class NewClass extends cc.Component {
                 if (el.todaySignal < 0 && (time - el.tsUpdated) <= 48 * 60 * 60 && el.industry != '指数') {
                     this.AIStockList.push(el);
                 }
-
             });
 
 
@@ -219,19 +220,20 @@ export default class NewClass extends cc.Component {
         let CmdQueryAiStockList = pb.CmdQueryAiStockList;
         let message = CmdQueryAiStockList.create(info);
         let buff = CmdQueryAiStockList.encode(message).finish();
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
-            let tt = 0;
+            //  this.content2.removeAllChildren();
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
             console.log('查询AI选股的股票列表' + JSON.stringify(res));
             let UIScrollControl = this.scrollview2.getComponent('UIScrollControl');
+            UIScrollControl.clear();
             UIScrollControl.initControl(this.preItem2, res.items.length, this.preItem2.getContentSize(), 0, (node, index) => {
                 let handle = node.getComponent('ZnxgItem2');
                 handle.onShow(res.items[index], index + 1);
-
             })
-
         })
-
         this.tipsNode.active = false;
     }
 

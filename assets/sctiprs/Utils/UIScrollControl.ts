@@ -105,11 +105,11 @@ export default class NewClass extends cc.Component {
         if (_dir == ScrollDirEnum.Vertical) {
             this.scroll_rect.content.setAnchorPoint(cc.v2(0.5, 1))
 
-            this.scroll_rect.content.setContentSize(cc.size(this.start_content_size.width, this.total_count * _size.height))
+            this.scroll_rect.content.setContentSize(cc.size(this.start_content_size.width, (this.total_count) * (_size.height + 10)))
 
-            this.scroll_rect.content.setPosition(cc.v2(0, -this.total_count * _size.height / 2))
+            this.scroll_rect.content.setPosition(cc.v2(0, -this.total_count * (_size.height + 10) / 2))
 
-            let _tempCount: number = Math.floor(this.start_content_size.height / _size.height)
+            let _tempCount: number = Math.floor(this.start_content_size.height / (_size.height + 10))
 
             this.total_show_item_count = _tempCount + 2
 
@@ -117,7 +117,7 @@ export default class NewClass extends cc.Component {
                 this.total_show_item_count = this.total_count
             }
 
-            this.distance = _size.height
+            this.distance = (_size.height + 10)
         }
         else if (_dir == ScrollDirEnum.Horizon) {
             this.scroll_rect.content.setAnchorPoint(cc.v2(0, 0.5))
@@ -150,7 +150,8 @@ export default class NewClass extends cc.Component {
 
     }
 
-    private clear() {
+    clear() {
+        this.scroll_rect = this.node.getComponent(cc.ScrollView);
         this.scroll_rect.content.removeAllChildren()
         this.all_child_list = []
     }

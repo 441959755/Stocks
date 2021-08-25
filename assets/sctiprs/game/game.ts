@@ -36,33 +36,10 @@ export default class NewClass extends cc.Component {
     onLoad() {
         PopupManager.init();
         //游戏结算
-        GlobalEvent.on(EventCfg.GAMEOVEER, (message) => {
-            if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-                this.pkFinalLayer.active = true;
-                if (message) {
-                    let handle = this.pkFinalLayer.getComponent('PKFinalHandle');
-                    handle.onShow();
-                }
-            }
-            else {
-                setTimeout(() => {
-                    if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
-                        this.CGSFinalLayer.active = true;
-                        this.CGSFinalLayer.getComponent('CGSFinalHandle').onShow();
-                    }
-                    else {
-                        if (GameCfg.JJ_XUNLIAN) {
-                            this.LxFinalLayer.active = true;
-                            this.LxFinalLayer.getComponent('LXFinalandle').onShow();
-                        }
-                        else {
-                            this.finalLayer.active = true;
-                            this.finalLayer.getComponent('FinalHandle').onShow();
-                        }
-                    }
-                }, 80)
-            }
-        }, this)
+        GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
+
+        //同步游戏操作 pk才有
+        GlobalEvent.on(EventCfg.UPDATEOTHERPLAYEROPT, this.updateOtherPlayerOpt.bind(this), this);
 
         GlobalEvent.on(EventCfg.OPENSTATLAYER, () => {
             this.statLayer.active = true;
@@ -144,6 +121,7 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
+        GlobalEvent.off(EventCfg.UPDATEOTHERPLAYEROPT);
 
         PopupManager.delPopupNode();
         GameCfg.GAMEFUPAN = false;
@@ -358,6 +336,41 @@ export default class NewClass extends cc.Component {
                 }
             }
             GameCfg.VOLGraph = GameCfg.GameSet.VOL;
+        }
+    }
+
+    //同步游戏操作
+    updateOtherPlayerOpt(opt) {
+        UpGameOpt.UpdataOtherPlayerOpt(opt);
+    }
+
+
+    GameOver(message) {
+
+        if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+            this.pkFinalLayer.active = true;
+            if (message) {
+                let handle = this.pkFinalLayer.getComponent('PKFinalHandle');
+                handle.onShow();
+            }
+        }
+        else {
+            setTimeout(() => {
+                if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
+                    this.CGSFinalLayer.active = true;
+                    this.CGSFinalLayer.getComponent('CGSFinalHandle').onShow();
+                }
+                else {
+                    if (GameCfg.JJ_XUNLIAN) {
+                        this.LxFinalLayer.active = true;
+                        this.LxFinalLayer.getComponent('LXFinalandle').onShow();
+                    }
+                    else {
+                        this.finalLayer.active = true;
+                        this.finalLayer.getComponent('FinalHandle').onShow();
+                    }
+                }
+            }, 80)
         }
     }
 

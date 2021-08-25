@@ -70,12 +70,25 @@ export default class NewClass extends cc.Component {
     protected onLoad() {
         //跟新盈利率
         GlobalEvent.on(EventCfg.UPDATERATE, this.UpdateRate.bind(this), this);
+        //跟新其他玩家盈利率
+        GlobalEvent.on(EventCfg.UPDATEOTHERRATE, this.UpdateOtherRate.bind(this), this);
 
         //复盘
         GlobalEvent.on(EventCfg.GAMEFUPAN, this.onShowGANEFUPAN.bind(this), this);
 
         //pk复盘
         GlobalEvent.on(EventCfg.CUTGAMEFUPAN, this.onShowPKFUPAN.bind(this), this);
+    }
+
+    UpdateOtherRate(rate) {
+        this.pkAllRateLa2.string = rate;
+
+        if (rate > 0) {
+            this.pkAllRateLa2.node.color = cc.Color.RED;
+        }
+        else {
+            this.pkAllRateLa2.node.color = cc.Color.GREEN;
+        }
     }
 
     UpdateRate(data) {
@@ -333,6 +346,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.UPDATERATE);
         GlobalEvent.off(EventCfg.GAMEFUPAN);
         GlobalEvent.off(EventCfg.CUTGAMEFUPAN);
+        GlobalEvent.off(EventCfg.UPDATEOTHERRATE);
     }
 
     //点击事件

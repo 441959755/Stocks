@@ -348,14 +348,16 @@ PBHelper.prototype = {
             console.log(' 重连上' + JSON.stringify(data));
         }
 
-        //// 游戏操作
+        ////同步 游戏操作
         else if (id == pb.MessageId.Sync_Room_GameOp) {
             let RoomGameOp = pb.RoomGameOp;
             let data = RoomGameOp.decode(new Uint8Array(buff));
 
-            let GameOperationId = pb.GameOperationId;
-            let ops = GameOperationId.decode(new Uint8Array(data.ops));
-
+            let GameOperationItem = pb.GameOperationItem;
+            let ops = GameOperationItem.decode(new Uint8Array(data.ops));
+            if (GameData.userID != data.id) {
+                GlobalEvent.emit(EventCfg.UPDATEOTHERPLAYEROPT, ops);
+            }
 
             console.log('游戏操作' + JSON.stringify(data) + JSON.stringify(ops));
 

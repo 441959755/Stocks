@@ -70,6 +70,11 @@ export default class NewClass extends cc.Component {
                 GameData.JJCapital = 5000;
             }
 
+            if (GameData.properties[pb.GamePropertyId.Gold] < GameData.JJCapital) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '创建房间所需的金币不足');
+                return;
+            }
+
             //请求创建房间
             this.reqRoomCreate();
         }

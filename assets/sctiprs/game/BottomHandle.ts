@@ -132,6 +132,9 @@ export default class NewClass extends cc.Component {
 
 	limitUP = 0;  //0没有  1涨停  2跌停
 
+	//otherPlayerRate = 0;
+
+
 	onLoad() {
 
 		this.gpData = GameCfg.data[0].data;
@@ -187,6 +190,30 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(EventCfg.GAMEFUPANOPT, this.onGameFUPANOPT.bind(this), this);
 
+		//同步其他玩家操作
+		GlobalEvent.on(EventCfg.UPDATEOTHERPLAYEROPT, this.updateOtherPlayerOpt.bind(this), this);
+
+	}
+
+	updateOtherPlayerOpt() {
+		setTimeout(() => {
+			let otherAllRate = 0, curAskPrice;
+			UpGameOpt.player2Opt.forEach(el => {
+				if (el.openId == pb.GameOperationId.Bid) {
+					let rate = (this.gpData[el.kOffset - 1].close - curAskPrice) / curAskPrice;
+					otherAllRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
+				}
+				//买入
+				else if (el.openId == pb.GameOperationId.Ask) {
+					curAskPrice = this.gpData[el.kOffset - 1].close;
+				}
+			})
+
+			if (this.roundNumber <= 0) {
+				GlobalEvent.emit(EventCfg.UPDATEOTHERRATE, otherAllRate);
+			}
+
+		}, 200)
 	}
 
 	//游戏结束结算盈利率
@@ -255,6 +282,8 @@ export default class NewClass extends cc.Component {
 
 				}
 			}
+			this._kdCount = 0;
+			this._KKCount = 0;
 		}
 		UpGameOpt.UpGameOpt(1);
 	}
@@ -461,7 +490,6 @@ export default class NewClass extends cc.Component {
 			GameCfg.huizhidatas = this.gpData.length;
 		}
 
-
 		GlobalEvent.emit('roundNUmber');
 	}
 
@@ -640,6 +668,7 @@ export default class NewClass extends cc.Component {
 		if (this.roundNumber <= 0) {
 			this.roundNumber = 0;
 			this.onGameOverClosRate();
+
 		}
 
 		if (!GameCfg.GAMEFUPAN) {
@@ -1225,6 +1254,8 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off('HIDEBOTTOMNODE');
 
 		GlobalEvent.off(EventCfg.CLICKFCBTN);
+		GlobalEvent.off(EventCfg.GAMEFUPANOPT);
+
 	}
 
 	//获取涨停板

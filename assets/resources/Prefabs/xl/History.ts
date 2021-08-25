@@ -139,89 +139,95 @@ export default class NewClass extends cc.Component {
         // "userCapital":"100000","userProfit":"800","ts":"1618454133","rank":2}]}
         let sumEar = 0;
         let sumrate = 0;
-        let it = 1;
+
+        let arr = [];
+        datas.forEach(el => {
+            if ((TIMETEMP.indexOf(el.ts) != -1) && (el.gType == GameCfg.GameType)) {
+                arr.push(el);
+            }
+        });
 
         let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
-        UIScrollControl.initControl(this.historyItem, datas.length, this.historyItem.getContentSize(), 0, (node, index) => {
-            if ((TIMETEMP.indexOf(datas[index].ts) != -1) && (datas[index].gType == GameCfg.GameType)) {
-                let nodes = node.children;
-                //   this.content.addChild(node);
-                nodes[0].getComponent(cc.Label).string = (it++) + '';
-                datas[index].quotesCode += '';
-                if (datas[index].quotesCode.length >= 7) {
-                    datas[index].quotesCode = datas[index].quotesCode.slice(1);
-                }
-                if (GameCfg.GameType == pb.GameType.QiHuo) {
-                    items = GameCfgText.getQHItemInfo(datas[index].quotesCode);
+        UIScrollControl.initControl(this.historyItem, arr.length, this.historyItem.getContentSize(), 0, (node, index) => {
 
-                    nodes[1].getComponent(cc.Label).string = items[2] + items[3];
-                    items && (nodes[2].getComponent(cc.Label).string = items[1])
-                } else {
-                    items = GameCfgText.getGPItemInfo(datas[index].quotesCode);
-                    nodes[1].getComponent(cc.Label).string = datas[index].quotesCode;
-                    items && (nodes[2].getComponent(cc.Label).string = items[1])
-                }
-                nodes[3].getComponent(cc.Label).string = datas[index].kFrom;			// 行情起始日期YYYYMMDD或时间HHMMSS
-                nodes[4].getComponent(cc.Label).string = datas[index].kTo;
-
-                nodes[5].getComponent(cc.Label).string = datas[index].stockProfitRate.toFixed(2) + '%';
-                if (datas[index].stockProfitRate > 0) {
-                    nodes[5].color = cc.Color.RED;
-                } else if (datas[index].stockProfitRate < 0) {
-                    nodes[5].color = cc.Color.GREEN;
-                } else {
-                    nodes[5].color = cc.Color.WHITE;
-                }
-                nodes[6].getComponent(cc.Label).string = datas[index].userProfitRate.toFixed(2) + '%';
-                if (datas[index].userProfitRate > 0) {
-                    nodes[6].color = cc.Color.RED;
-                } else if (datas[index].userProfitRate < 0) {
-                    nodes[6].color = cc.Color.GREEN;
-                } else {
-                    nodes[6].color = cc.Color.WHITE;
-                }
-                nodes[7].getComponent(cc.Label).string = datas[index].userProfit;
-                if (datas[index].userProfit > 0) {
-                    nodes[7].color = cc.Color.RED;
-                } else if (datas[index].userProfit < 0) {
-                    nodes[7].color = cc.Color.GREEN;
-                } else {
-                    nodes[7].color = cc.Color.WHITE;
-                }
-                if (GameCfg.GameType != pb.GameType.ShuangMang) {
-                    nodes[8].getComponent(cc.Label).string = datas[index].ts;
-                    nodes[9].getComponent(cc.Label).string = datas[index].kStartup;
-                    nodes[10].getComponent(cc.Label).string = datas[index].kStop;
-                }
-
-                if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                    let GameSet = cc.sys.localStorage.getItem(datas[index].ts + 'set');
-                    if (GameSet) {
-                        GameSet = JSON.parse(GameSet);
-                        nodes[12].getComponent(cc.Label).string = GameSet.select + ' ' + GameSet.strategy;
-                    }
-
-                    let AIrate = cc.sys.localStorage.getItem(datas[index].ts + 'AIRATE');
-
-                    if (AIrate) {
-                        nodes[11].getComponent(cc.Label).string = parseFloat(AIrate).toFixed(2) + '%';
-                        if (parseFloat(AIrate) > 0) {
-                            nodes[11].color = cc.Color.RED;
-                        }
-                        else if (parseFloat(AIrate) == 0) {
-                            nodes[11].color = cc.Color.WHITE;
-                        }
-                        else {
-                            nodes[11].color = cc.Color.GREEN;
-                        }
-                    }
-
-                }
-
-                sumEar += datas[index].userProfit;
-
-                sumrate += datas[index].userProfitRate;
+            let nodes = node.children;
+            //   this.content.addChild(node);
+            nodes[0].getComponent(cc.Label).string = (index + 1) + '';
+            arr[index].quotesCode += '';
+            if (arr[index].quotesCode.length >= 7) {
+                arr[index].quotesCode = arr[index].quotesCode.slice(1);
             }
+            if (GameCfg.GameType == pb.GameType.QiHuo) {
+                items = GameCfgText.getQHItemInfo(arr[index].quotesCode);
+
+                nodes[1].getComponent(cc.Label).string = items[2] + items[3];
+                items && (nodes[2].getComponent(cc.Label).string = items[1])
+            } else {
+                items = GameCfgText.getGPItemInfo(arr[index].quotesCode);
+                nodes[1].getComponent(cc.Label).string = arr[index].quotesCode;
+                items && (nodes[2].getComponent(cc.Label).string = items[1])
+            }
+            nodes[3].getComponent(cc.Label).string = arr[index].kFrom;			// 行情起始日期YYYYMMDD或时间HHMMSS
+            nodes[4].getComponent(cc.Label).string = arr[index].kTo;
+
+            nodes[5].getComponent(cc.Label).string = arr[index].stockProfitRate.toFixed(2) + '%';
+            if (arr[index].stockProfitRate > 0) {
+                nodes[5].color = cc.Color.RED;
+            } else if (arr[index].stockProfitRate < 0) {
+                nodes[5].color = cc.Color.GREEN;
+            } else {
+                nodes[5].color = cc.Color.WHITE;
+            }
+            nodes[6].getComponent(cc.Label).string = arr[index].userProfitRate.toFixed(2) + '%';
+            if (arr[index].userProfitRate > 0) {
+                nodes[6].color = cc.Color.RED;
+            } else if (arr[index].userProfitRate < 0) {
+                nodes[6].color = cc.Color.GREEN;
+            } else {
+                nodes[6].color = cc.Color.WHITE;
+            }
+            nodes[7].getComponent(cc.Label).string = arr[index].userProfit;
+            if (arr[index].userProfit > 0) {
+                nodes[7].color = cc.Color.RED;
+            } else if (arr[index].userProfit < 0) {
+                nodes[7].color = cc.Color.GREEN;
+            } else {
+                nodes[7].color = cc.Color.WHITE;
+            }
+            if (GameCfg.GameType != pb.GameType.ShuangMang) {
+                nodes[8].getComponent(cc.Label).string = arr[index].ts;
+                nodes[9].getComponent(cc.Label).string = arr[index].kStartup;
+                nodes[10].getComponent(cc.Label).string = arr[index].kStop;
+            }
+
+            if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                let GameSet = cc.sys.localStorage.getItem(arr[index].ts + 'set');
+                if (GameSet) {
+                    GameSet = JSON.parse(GameSet);
+                    nodes[12].getComponent(cc.Label).string = GameSet.select + ' ' + GameSet.strategy;
+                }
+
+                let AIrate = cc.sys.localStorage.getItem(arr[index].ts + 'AIRATE');
+
+                if (AIrate) {
+                    nodes[11].getComponent(cc.Label).string = parseFloat(AIrate).toFixed(2) + '%';
+                    if (parseFloat(AIrate) > 0) {
+                        nodes[11].color = cc.Color.RED;
+                    }
+                    else if (parseFloat(AIrate) == 0) {
+                        nodes[11].color = cc.Color.WHITE;
+                    }
+                    else {
+                        nodes[11].color = cc.Color.GREEN;
+                    }
+                }
+
+            }
+
+            sumEar += arr[index].userProfit;
+
+            sumrate += arr[index].userProfitRate;
+
         })
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
@@ -304,6 +310,7 @@ export default class NewClass extends cc.Component {
                 console.log(arr.length);
                 GameCfg.TIMETEMP = arr;
                 cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(arr));
+                this.label.string = '0';
             }
         }
 
