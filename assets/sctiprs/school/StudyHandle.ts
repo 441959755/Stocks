@@ -29,9 +29,17 @@ export default class NewClass extends cc.Component {
             if (GameData.studyBar >= 4) {
                 return;
             }
+
             this.flag = 0;
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameData.studyBar = parseInt(GameData.studyBar) + 1;
+
+            if (GameData.studyBar > GameData.studyHisBar) {
+                GameData.studyHisBar = GameData.studyBar;
+                GlobalEvent.emit('UPDATESCHOOLUI');
+                GlobalEvent.emit('saveStudyProgress', 0);
+            }
+
             this.node.active = false;
             GlobalEvent.emit('OPENCURSTUDYBAR');
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
@@ -42,6 +50,7 @@ export default class NewClass extends cc.Component {
             if (GameData.studyBar <= 1) {
                 return;
             }
+
             this.flag = 1;
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameData.studyBar = parseInt(GameData.studyBar) - 1;;

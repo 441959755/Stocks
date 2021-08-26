@@ -1,3 +1,4 @@
+import GlobalEvent from "../Utils/GlobalEvent";
 
 
 const { ccclass, property } = cc._decorator;
@@ -180,39 +181,53 @@ export default class NewClass extends cc.Component {
         else if (name == 'item1') {
             let rightIndex = 0;
 
-            this.pdChange(rightIndex);
+            this.pdChange(event, rightIndex);
 
         }
 
         else if (name == 'item2') {
             let rightIndex = 1;
-            this.pdChange(rightIndex);
+            this.pdChange(event, rightIndex);
         }
 
         else if (name == 'item3') {
             let rightIndex = 2;
-            this.pdChange(rightIndex);
+            this.pdChange(event, rightIndex);
         }
 
         else if (name == 'item4') {
             let rightIndex = 3;
-            this.pdChange(rightIndex);
+            this.pdChange(event, rightIndex);
 
         }
     }
 
-    pdChange(rightIndex) {
+    pdChange(event, rightIndex) {
 
         let r = this.listData[this.curCount].rightIndex;
         if (r == rightIndex) {
             this.daduiCount += 1;
             this.curCount += 1;
+            event.target.getChildByName('study_dt_gou').active = true;
         }
         else {
             this.dacuoCount += 1;
             this.curCount += 1;
+            event.target.getChildByName('study_dt_gou2').active = true;
         }
 
-        this.onShow();
+        if (this.curCount >= 10) {
+            //结算
+            GlobalEvent.emit('OPENCLOSELAYER');
+            return;
+        }
+
+
+        setTimeout(() => {
+            this.onShow();
+        }, 1000);
+
+
+
     }
 }

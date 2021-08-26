@@ -322,8 +322,12 @@ export default class GameData {
 
     public static studyBar = null;  //学习小节
 
+    public static studyHisBar = 1;  //歷史学习小节
+
     public static TaskStudy = null;  //学习任务
 
     public static TaskDaily = null;   // 日常任务
+
+
 
 }
