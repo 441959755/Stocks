@@ -35,6 +35,9 @@ Socket.prototype = {
 				info.data.aiStockList && (GameData.AIStockList = info.data.aiStockList);
 				info.data.stockList && (GameData.selfStockList = info.data.stockList);
 				info.data.cgdsStockList && (GameData.cgdsStockList = info.data.cgdsStockList);
+				info.data.tasks && (GameData.TaskStudy = info.data.tasks.study || []);
+				info.data.tasks && (GameData.TaskDaily = info.data.tasks.daily || [])
+
 				if (cc.director.getScene().name == 'Login') {
 					cc.director.loadScene('hall');
 				}

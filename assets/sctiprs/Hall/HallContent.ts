@@ -231,6 +231,7 @@ export default class NewClass extends cc.Component {
 			name == 'main_study_cjl' || name == 'main_study_macd' ||
 			name == 'main_study_kdj' || name == 'main_study_boll' ||
 			name == 'main_study_rsi' || name == 'main_study_expma') {
+			GameData.schoolProgress = data;
 			cc.director.loadScene('school');
 		}
 

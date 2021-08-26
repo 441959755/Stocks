@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "d0b5304c-25c2-4833-b754-87389f21d7eb",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 332,
+  "height": 400,
+  "platformSettings": {},
+  "subMetas": {
+    "RSI_Anli_dingBL1_600x400": {
+      "ver": "1.0.4",
+      "uuid": "8625bd79-f358-4413-94f5-5bdef4f878ae",
+      "rawTextureUuid": "d0b5304c-25c2-4833-b754-87389f21d7eb",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 332,
+      "height": 400,
+      "rawWidth": 332,
+      "rawHeight": 400,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

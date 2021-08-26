@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "65393b73-d093-43c5-b3c7-74779124beff",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 600,
+  "height": 400,
+  "platformSettings": {},
+  "subMetas": {
+    "BOLL_JQ_TSLBSZ1_600x400": {
+      "ver": "1.0.4",
+      "uuid": "2e518e13-d6e6-4c96-b26a-72186d30dc38",
+      "rawTextureUuid": "65393b73-d093-43c5-b3c7-74779124beff",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 600,
+      "height": 400,
+      "rawWidth": 600,
+      "rawHeight": 400,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

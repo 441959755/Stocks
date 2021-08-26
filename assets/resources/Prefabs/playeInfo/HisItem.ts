@@ -36,7 +36,11 @@ export default class NewClass extends cc.Component {
 
     gameSet1 = null;
 
+    flag = false;
+
+
     onHisItemRate(flag) {
+        this.flag = flag;
         this.recLabel.string = '****';
         flag && (this.recLabel.string = (this.itemData.userProfitRate).toFixed(2) + '%')
     }
@@ -45,8 +49,10 @@ export default class NewClass extends cc.Component {
         this.indexLabel.string = this.itemIndex + '';
         this.startLabel.string = ComUtils.formatTime(this.itemData.ts);
         this.rankLabel.string = this.itemData.rank;
-        // this.recLabel.string = this.itemData.userProfitRate + '%';
+
         this.recLabel.string = '****';
+        this.flag && (this.recLabel.string = (this.itemData.userProfitRate).toFixed(2) + '%')
+
         if (this.itemData.gType == pb.GameType.ShuangMang) {
             this.modeLabel.string = '双盲训练';
             this.gameSet1 = GameData.SMSet;
@@ -141,7 +147,6 @@ export default class NewClass extends cc.Component {
                 return;
             }
             //   }
-
             GameCfg.GameType = pb.GameType.DingXiang;
             GameCfg.GameSet = GameData.DXSet;
             GameCfg.GAMEFUPAN = false;

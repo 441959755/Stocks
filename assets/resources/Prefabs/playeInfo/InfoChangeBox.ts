@@ -58,7 +58,7 @@ export default class NewClass extends cc.Component {
                 this.toggle1.isChecked = true;
             } else {
                 this.toggle2.isChecked = true;
-            } s
+            }
         }, this);
 
         GlobalEvent.on('openChangeLocationLayer', () => {
@@ -227,7 +227,6 @@ export default class NewClass extends cc.Component {
         //[\u4e00-\u9fa5]为汉字的unicode编码，/i表示匹配的时候不区分大小写。
         var rx = /[a-z\d]/i, rxcn = /[\u4e00-\u9fa5]/, num = 0, chr;
 
-
         for (var i = 0, j = v.length; i < j; i++) {
 
             chr = v.charAt(i);
@@ -266,7 +265,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('openChangeUserNameLayer');
         GlobalEvent.off('openChangeGenderLayer');
         GlobalEvent.off('openChangeLocationLayer');
-
     }
 
 }

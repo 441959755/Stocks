@@ -415,12 +415,11 @@ export default class NewClass extends cc.Component {
 			this.xlzb.active = true;
 			GlobalEvent.emit(EventCfg.SETMARKCOLOR);
 		}
-
-
 	}
 
 	//游戏复盘操作
 	onGameFUPANOPT(opt) {
+
 		let pkSelf = this.node.getComponent('PKBottomHandle');
 		opt.forEach((el, index) => {
 			GameCfg.huizhidatas = el.kOffset;
@@ -667,8 +666,7 @@ export default class NewClass extends cc.Component {
 	setLabelData() {
 		if (this.roundNumber <= 0) {
 			this.roundNumber = 0;
-			this.onGameOverClosRate();
-
+			//	this.onGameOverClosRate();
 		}
 
 		if (!GameCfg.GAMEFUPAN) {
@@ -698,6 +696,10 @@ export default class NewClass extends cc.Component {
 				GameCfg.GAMEWAIT = true;
 
 				GlobalEvent.emit(EventCfg.GAMEWAIT);
+				let rate = this.onCurPositionRete(1);
+				GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
+				GlobalEvent.emit(EventCfg.UPDATERATE, [0, GameCfg.allRate]);
+
 			}
 			else {
 				GlobalEvent.emit(EventCfg.GAMEOVEER);

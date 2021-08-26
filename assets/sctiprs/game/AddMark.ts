@@ -123,7 +123,6 @@ export default class NewClass extends cc.Component {
                 }
             })
         } else if (this.status == 3) {
-
             this.mark1Nodes.forEach((el, i) => {
                 if (el && el.node) {
                     if (i >= GameCfg.beg_end[0] && i < GameCfg.beg_end[1]) {

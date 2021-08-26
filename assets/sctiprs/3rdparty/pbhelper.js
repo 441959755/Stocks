@@ -532,6 +532,19 @@ PBHelper.prototype = {
 
             GlobalEvent.emit(EventCfg.CHANGEMNCGACCOUNT);
         }
+        //保存学习任务进度应答：无
+        else if (id == pb.MessageId.Rep_Hall_SaveStudyProgress) {
+
+        }
+        //同步任务进度及奖励：TaskItem
+        else if (id == pb.MessageId.Sync_S2C_TaskProgress) {
+            let TaskItem = pb.TaskItem;
+            let data = TaskItem.decode(new Uint8Array(buff));
+
+            console.log('同步任务进度及奖励' + data);
+
+
+        }
     }
 }
 

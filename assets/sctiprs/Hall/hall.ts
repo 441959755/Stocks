@@ -256,6 +256,7 @@ export default class NewClass extends cc.Component {
 		else {
 			let headle = this.InviteBox.getComponent('InviteBox');
 			headle.onInviteShow(data);
+
 		}
 	}
 

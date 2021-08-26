@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "3490e142-a168-40f7-99b3-fcfdef16f74f",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 338,
+  "height": 400,
+  "platformSettings": {},
+  "subMetas": {
+    "RSI_Anli_chaoBuy1_600x400": {
+      "ver": "1.0.4",
+      "uuid": "9f604056-ef8c-46cc-836f-3ac99fc4ed31",
+      "rawTextureUuid": "3490e142-a168-40f7-99b3-fcfdef16f74f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 338,
+      "height": 400,
+      "rawWidth": 338,
+      "rawHeight": 400,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

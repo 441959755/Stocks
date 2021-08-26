@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "fcda2aa5-cee1-4de8-9982-2b122d50cfd0",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 180,
+  "height": 140,
+  "platformSettings": {},
+  "subMetas": {
+    "pic_MA_xiti_shangchuan": {
+      "ver": "1.0.4",
+      "uuid": "1bd6b04c-9761-4807-be1d-6825ff351edf",
+      "rawTextureUuid": "fcda2aa5-cee1-4de8-9982-2b122d50cfd0",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 180,
+      "height": 140,
+      "rawWidth": 180,
+      "rawHeight": 140,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

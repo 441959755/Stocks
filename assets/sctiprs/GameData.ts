@@ -318,6 +318,12 @@ export default class GameData {
 
     public static isToAGame = false; //是否再来一局
 
-    public static school = null;
+    public static schoolProgress = null;  //学习进度
+
+    public static studyBar = null;  //学习小节
+
+    public static TaskStudy = null;  //学习任务
+
+    public static TaskDaily = null;   // 日常任务
 
 }

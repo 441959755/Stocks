@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "9024e12c-c5c1-42c8-8245-fba6bbb54838",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 180,
+  "height": 140,
+  "platformSettings": {},
+  "subMetas": {
+    "pic_MA_xiti_sicha": {
+      "ver": "1.0.4",
+      "uuid": "926bb8e0-626f-4dec-bf6d-9039edf7af50",
+      "rawTextureUuid": "9024e12c-c5c1-42c8-8245-fba6bbb54838",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 180,
+      "height": 140,
+      "rawWidth": 180,
+      "rawHeight": 140,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
