@@ -5,6 +5,8 @@ export enum LocationPoint {
 
     HALL,
 
+    PLAYERINFOHIS,  //玩家信息历史
+
     ShuangMang,
 
     ShuangMangHis,

@@ -132,9 +132,6 @@ export default class NewClass extends cc.Component {
 
 	limitUP = 0;  //0没有  1涨停  2跌停
 
-	//otherPlayerRate = 0;
-
-
 	onLoad() {
 
 		this.gpData = GameCfg.data[0].data;
@@ -699,7 +696,7 @@ export default class NewClass extends cc.Component {
 				let rate = this.onCurPositionRete(1);
 				GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
 				GlobalEvent.emit(EventCfg.UPDATERATE, [0, GameCfg.allRate]);
-
+				UpGameOpt.UpGameOpt(1);
 			}
 			else {
 				GlobalEvent.emit(EventCfg.GAMEOVEER);
@@ -773,19 +770,19 @@ export default class NewClass extends cc.Component {
 		//点击观望
 		else if (name == 'gwBtn' || name == 'cyBtn') {
 
-			if (this.roundNumber > 0) {
-				let item = {
-					opId: null,
-					kOffset: GameCfg.huizhidatas,
-				}
-				if (name == 'gwBtn') {
-					item.opId = pb.GameOperationId.Wait;
-				}
-				else {
-					item.opId = pb.GameOperationId.Hold;
-				}
-				UpGameOpt.addOpt(item);
-			}
+			// if (this.roundNumber > 0) {
+			// 	let item = {
+			// 		opId: null,
+			// 		kOffset: GameCfg.huizhidatas,
+			// 	}
+			// 	if (name == 'gwBtn') {
+			// 		item.opId = pb.GameOperationId.Wait;
+			// 	}
+			// 	else {
+			// 		item.opId = pb.GameOperationId.Hold;
+			// 	}
+			// 	UpGameOpt.addOpt(item);
+			// }
 
 			this.setRoundNumber(name);
 		}

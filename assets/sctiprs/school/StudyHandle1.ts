@@ -9,6 +9,9 @@ export default class NewClass extends cc.Component {
     title: cc.Label = null;
 
     @property(cc.Label)
+    tipsLa: cc.Label = null;
+
+    @property(cc.Label)
     zql: cc.Label = null;
 
     @property(cc.Label)
@@ -26,6 +29,10 @@ export default class NewClass extends cc.Component {
     @property([cc.Node])
     rightNode: cc.Node[] = [];
 
+
+    @property(cc.Node)
+    layout: cc.Node = null;
+
     listData = [];
 
     curCount = 0;
@@ -41,9 +48,13 @@ export default class NewClass extends cc.Component {
 
     asset = null;
 
+    flag = false;
+
     onShow(data?, Imgs?) {
+        this.flag = false;
+        this.layout.removeAllChildren();
         if (Imgs) {
-            this.asset = Image;
+            this.asset = Imgs;
         }
 
         if (data) {
@@ -101,13 +112,15 @@ export default class NewClass extends cc.Component {
             this.zql.string = '0 ';
         }
         else {
-            let zql = parseInt(this.dacuoCount / this.curCount * 100 + '');
-            this.zql.string = zql + '';
+            let zql = parseInt(this.daduiCount / this.curCount * 100 + '');
+            this.zql.string = zql + '%';
         }
 
         this.zq.string = this.daduiCount + '';
         this.cw.string = this.dacuoCount + '';
         this.ywc.string = this.curCount + '';
+
+        this.tipsLa.string = '第' + (this.curCount + 1) + '题';
 
     }
 
@@ -116,7 +129,7 @@ export default class NewClass extends cc.Component {
 
         if (texts.length > 0) {
             texts.forEach((e, i) => {
-                if (i == 0) {
+                if (i === 0) {
                     this.pic.string = e.text;
                 }
                 else {
@@ -130,7 +143,7 @@ export default class NewClass extends cc.Component {
     onShowImg() {
         let images = this.listData[this.curCount].contents.images;
 
-        if (images.length > 4 && images < 8) {
+        if (images.length > 4 && images.length < 8) {
             images.forEach(el => {
                 if (el.fileName != 'study_dt_a' ||
                     el.fileName != 'study_dt_b' ||
@@ -151,11 +164,11 @@ export default class NewClass extends cc.Component {
                     el.fileName != 'study_dt_c' ||
                     el.fileName != 'study_dt_d') {
                     let sp = this.curNode.getChildByName('sp' + (i + 1));
-                    //    let img = new cc.Node('sprite');
-                    // let im = img.addComponent(cc.Sprite);
-                    // sp.addChild(img);
-                    let im = sp.getComponent(cc.Sprite);
-                    im.spriteFrame = this.asset.get(el.fileName);
+                    if (sp) {
+                        let im = sp.getComponent(cc.Sprite);
+                        im.spriteFrame = this.asset.get(el.fileName);
+                    }
+
                 }
             });
         }
@@ -167,13 +180,17 @@ export default class NewClass extends cc.Component {
 
 
     onDisable() {
+        this.curCount = 0;
         this.dacuoCount = 0;
         this.daduiCount = 0;
+        this.listData = [];
     }
 
 
 
     onBtnClick(event, curData) {
+        if (this.flag) { return };
+        this.flag = true;
         let name = event.target.name;
         if (name == 'btn_black') {
             this.node.active = false;
@@ -217,17 +234,15 @@ export default class NewClass extends cc.Component {
         }
 
         if (this.curCount >= 10) {
+
             //结算
-            GlobalEvent.emit('OPENCLOSELAYER');
+            GlobalEvent.emit('OPENCLOSELAYER', this.daduiCount, this.dacuoCount);
+            this.node.active = false;
             return;
         }
-
 
         setTimeout(() => {
             this.onShow();
         }, 1000);
-
-
-
     }
 }

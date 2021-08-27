@@ -2,7 +2,6 @@ import { pb } from "../../../protos/proto";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
-declare const async: any;
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -18,6 +17,9 @@ export default class NewClass extends cc.Component {
     tipsNode: cc.Node = null;
 
     _curData = null;
+
+    @property(cc.Node)
+    scorllNode: cc.Node = null;
 
     onShow(data) {
         this._curData = data;
@@ -39,19 +41,27 @@ export default class NewClass extends cc.Component {
 
     createItem(items) {
         if (!items || items.length <= 0) {
+            this.tipsNode.active = true;
             return;
         }
-        let index = 0;
-        async.eachLimit(items, 1, (el, cb) => {
-            let node = cc.instantiate(this.item);
-            this.content.addChild(node);
+        this.tipsNode.active = false;
+        // async.eachLimit(items, 1, (el, cb) => {
+        //     let node = cc.instantiate(this.item);
+        //     this.content.addChild(node);
+        //     let handle = node.getComponent('ChaoGuRankingItem');
+        //     index++;
+        //     handle.onShow(el, index, this._curData);
+
+        //     setTimeout(cb, 0);
+        // })
+
+        let UIScrollControl = this.scorllNode.getComponent('UIScrollControl');
+        UIScrollControl.clear();
+
+        UIScrollControl.initControl(this.item, items.length, this.item.getContentSize(), 0, (node, index) => {
             let handle = node.getComponent('ChaoGuRankingItem');
-            index++;
-            handle.onShow(el, index, this._curData);
-
-            setTimeout(cb, 0);
+            handle.onShow(items[index], index + 1, this._curData);
         })
-
 
     }
 

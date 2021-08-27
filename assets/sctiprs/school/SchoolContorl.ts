@@ -1,5 +1,4 @@
 import { pb } from "../../protos/proto";
-import GameCfg from "../game/GameCfg";
 import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
@@ -36,17 +35,18 @@ export default class NewClass extends cc.Component {
     closeLayer: cc.Node = null;
 
     onLoad() {
-
-        GameData.TaskStudy.forEach((el, index) => {
-            if (index + 1 == GameData.schoolProgress) {
-                if (!el.progress) {
-                    GameData.studyHisBar = 1;
+        if (GameData.studyHisBar == 1) {
+            GameData.TaskStudy.forEach((el, index) => {
+                if (index + 1 == GameData.schoolProgress) {
+                    if (!el.progress) {
+                        GameData.studyHisBar = 1;
+                    }
+                    else {
+                        GameData.studyHisBar = el.progress;
+                    }
                 }
-                else {
-                    GameData.studyHisBar = el.progress;
-                }
-            }
-        });
+            });
+        }
 
         PopupManager.init();
         GlobalEvent.on('OPENCURSTUDYBAR', this.openCurStudyBar.bind(this), this);
@@ -54,17 +54,26 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on('saveStudyProgress', this.saveStudyProgress.bind(this), this);
 
         GlobalEvent.on('OPENCLOSELAYER', this.openCloseLayer.bind(this), this);
+
+        this.init();
     }
 
 
-    openCloseLayer(data) {
+    openCloseLayer(dui, cuo) {
         this.closeLayer.active = true;
+        this.closeLayer.getComponent('StudyClose').onShow(dui, cuo);
     }
 
     openCurStudyBar(index) {
         if (!index) {
+            let his = cc.sys.localStorage.getItem('STUDY' + GameData.schoolProgress + '' + GameData.studyBar) || null;
+            if (!his) {
+                cc.sys.localStorage.setItem('STUDY' + GameData.schoolProgress + '' + GameData.studyBar, 1);
+                GlobalEvent.emit('OPENGUIDE')
+                return;
+            }
             this.studyNode.active = true;
-            this.studyNode.getComponent('StudyHandle').onShow(this.studyData1, this.assetImgs);
+            this.studyNode.getComponent('StudyHandle').onShow(this.studyData1, this.assetImgs, this.studyData2);
         }
         else {
             this.studyNode1.active = true;
@@ -72,8 +81,7 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    start() {
-
+    init() {
         if (!this.studyData1) {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             this.url = 'xy/';
@@ -85,16 +93,29 @@ export default class NewClass extends cc.Component {
     onLoadStudyData(url) {
         this.url += ('study' + GameData.schoolProgress);
 
+        let falg1 = false, falg2 = false, falg3 = false;
         LoadUtils.loadResDir(this.url, (res) => {
-            //console.log('加載：' + JSON.stringify(res[0]));
-            this.studyData1 = (res[0].json);
-            console.log(this.studyData1);
+            res.forEach(element => {
+                // this.studyData1 = res[0].json;
+                // this.studyData2 = res[1].json;
+                // this.studyData3 = res[2].json;
+                if (element.name == 'Instructions' + GameData.schoolProgress) {
+                    this.studyData1 = element.json;
+                }
+                else if (element.name == 'Instructions' + GameData.schoolProgress + 'dialogue') {
+                    this.studyData2 = element.json;
+                }
+                else if (element.name == 'Instructions' + GameData.schoolProgress + 'question') {
+                    this.studyData3 = element.json;
+                }
 
-            this.studyData2 = res[1].json;
+            });
 
-            this.studyData3 = res[2].json;
-
-            GlobalEvent.emit('UPDATESTUDYDATA', this.studyData1);
+            GlobalEvent.emit('UPDATESTUDYDATA', this.studyData1, this.studyData2);
+            falg1 = true;
+            if (falg3 && falg1 && falg2) {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            }
         })
 
         this.url1 = 'custom/' + GameData.schoolProgress;
@@ -105,6 +126,10 @@ export default class NewClass extends cc.Component {
                     this.assetImgs.set(element.name, element);
                 }
             });
+            falg2 = true;
+            if (falg3 && falg1 && falg2) {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            }
         })
 
         this.url2 = 'custom/pic';
@@ -114,7 +139,10 @@ export default class NewClass extends cc.Component {
                     this.assetImgs.set(element.name, element);
                 }
             });
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            falg3 = true;
+            if (falg3 && falg1 && falg2) {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            }
         })
     }
 

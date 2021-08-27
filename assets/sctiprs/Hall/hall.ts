@@ -155,6 +155,9 @@ export default class NewClass extends cc.Component {
 		else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis) {
 			event = { target: { name: 'toggle1' } }
 		}
+		else if (GameCfg.GameType == 'STUDY') {
+			event = { target: { name: 'toggle3' } }
+		}
 
 		if (event) {
 			GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
@@ -256,8 +259,8 @@ export default class NewClass extends cc.Component {
 		else {
 			let headle = this.InviteBox.getComponent('InviteBox');
 			headle.onInviteShow(data);
-
 		}
+
 	}
 
 

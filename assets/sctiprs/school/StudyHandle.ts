@@ -23,7 +23,6 @@ export default class NewClass extends cc.Component {
 
     flag = 0;
 
-
     onLoad() {
         this.pageView.node.on('scroll-to-right', () => {
             if (GameData.studyBar >= 4) {
@@ -60,33 +59,34 @@ export default class NewClass extends cc.Component {
         })
     }
 
-    onShow(data, Imgs) {
+    onShow(data, Imgs, data1?) {
         this.asset = Imgs;
         let pagesData = data.list[GameData.studyBar - 1].pages[0].contents;
         let pages = this.content.children;
+
         pagesData.forEach((el, index) => {
             let node = null;
             if (pages[index]) {
                 node = pages[index];
             }
             node = cc.instantiate(this.page);
-            this.pageView.addPage(node);
+            this.pageView && (this.pageView.addPage(node))
             node.setPosition(0, 0);
+            node.width = this.pageView.node.children[0].width;
             node.getComponent('page').onShowUI(el, Imgs);
-            // this.onShowUI(node, el);
         });
 
         if (this.flag) {
             this.flag = 0;
-            this.pageView.scrollToRight(0.1);
+            this.pageView && (this.pageView.scrollToPage(this.pageView.getPages().length - 1, 0.1))
         }
-
+        this.title.string = data.list[GameData.studyBar - 1].title;
     }
 
 
     onDisable() {
         // this.content.removeAllChildren();
-        this.pageView.removeAllPages();
+        this.pageView && (this.pageView.removeAllPages())
     }
 
 
@@ -96,5 +96,6 @@ export default class NewClass extends cc.Component {
         if (name == 'btn_black') {
             this.node.active = false;
         }
+
     }
 }

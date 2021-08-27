@@ -17,8 +17,6 @@
     "Mesh",
     "MotionStreak",
     "Physics",
-    "PageView",
-    "PageViewIndicator",
     "ParticleSystem",
     "RichText",
     "Renderer Texture",
@@ -30,10 +28,9 @@
     "3D Primitive",
     "3D Physics/cannon.js",
     "3D Physics/Builtin",
-    "3D Particle",
-    "SafeArea"
+    "3D Particle"
   ],
-  "last-module-event-record-time": 1629444996729,
+  "last-module-event-record-time": 1630050174692,
   "design-resolution-width": 960,
   "design-resolution-height": 640,
   "fit-width": false,
@@ -42,8 +39,8 @@
   "simulator-orientation": false,
   "use-customize-simulator": true,
   "simulator-resolution": {
-    "width": 960,
-    "height": 640
+    "height": 640,
+    "width": 960
   },
   "assets-sort-type": "name",
   "facebook": {

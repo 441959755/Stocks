@@ -184,7 +184,7 @@ export default class NewClass extends cc.Component {
 
 		}
 		//点击竞技
-		else if (name == 'toggle1') {
+		else if (name == 'toggle1' || name == 'toggle2' || name == 'toggle3') {
 			let index = parseInt(name.slice(-1));
 			this.changeToggle(index);
 		}
@@ -231,6 +231,8 @@ export default class NewClass extends cc.Component {
 			name == 'main_study_cjl' || name == 'main_study_macd' ||
 			name == 'main_study_kdj' || name == 'main_study_boll' ||
 			name == 'main_study_rsi' || name == 'main_study_expma') {
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+			GameCfg.GameType = 'STUDY';
 			GameData.schoolProgress = data;
 			cc.director.loadScene('school');
 		}

@@ -34,6 +34,8 @@ export default class NewClass extends cc.Component {
 
     _curData = null;
 
+    texture = null;
+
     onShow(info, index, data?) {
         if (!GameData.SpStockData && data) {
             GameData.SpStockData = data;
@@ -61,11 +63,16 @@ export default class NewClass extends cc.Component {
 
         }
         else {
-
-            ComUtils.onLoadHead(info.icon, (res) => {
-                let texture = new cc.SpriteFrame(res);
-                this.headImg.spriteFrame = texture;
-            })
+            if (!this.texture) {
+                ComUtils.onLoadHead(info.icon, (res) => {
+                    let texture = new cc.SpriteFrame(res);
+                    this.headImg.spriteFrame = texture;
+                    this.texture = texture;
+                })
+            }
+            else {
+                this.headImg.spriteFrame = this.texture;
+            }
         }
         this.namela.string = info.nickname;
 
