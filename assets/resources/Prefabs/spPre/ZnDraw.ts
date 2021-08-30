@@ -214,9 +214,9 @@ export default class NewClass extends cc.Component {
             this.addMark.active = false;
             this.laNode.active = false;
             this.mnLaNode.active = true;
-            if (this.toggles[1].isChecked) {
-                this.toggles[0].isChecked = true;
-            }
+            //   if (this.toggles[1].isChecked) {
+            this.toggles[0].isChecked = true;
+            // }
             this.toggles[1].node.active = false;
             if (this.toggles[0].isChecked) {
                 this.box3.active = true;
@@ -231,7 +231,7 @@ export default class NewClass extends cc.Component {
         }
         //模拟选股
         else if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
-            this.toggles[1].node.active = true;
+            //  this.toggles[1].node.active = true;
             this.mn_b_node.active = true;
             this.zn_b_node.active = false;
             this.cg_b_node.active = false;
@@ -260,7 +260,7 @@ export default class NewClass extends cc.Component {
         }
         //智能选股
         else if (GameCfg.GameType == 'ZNXG') {
-            this.toggles[1].node.active = true;
+            //  this.toggles[1].node.active = true;
             this.cg_b_node.active = false;
             this.zn_b_node.active = true;
             this.mn_b_node.active = false;
@@ -282,6 +282,8 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
+
+
         //同步行情
         GlobalEvent.on(EventCfg.SYNCQUOTEITEM, (data) => {
             if (data.code == this.code) {
@@ -481,10 +483,8 @@ export default class NewClass extends cc.Component {
 
     //每次打开显示
     onShow(code, str) {
-        setTimeout(() => {
-            this.onUIShow();
-        }, 200)
-
+        GameCfg.GAMEFUPAN = true;
+        this.addMark.getComponent('AddMark').clearMark();
         this.laNode.active = false;
         //  this.AISignal = str;
         this.addMark.active = false;
@@ -497,8 +497,6 @@ export default class NewClass extends cc.Component {
         this.BGrap[4].active = false;
         this.code = code;
 
-        this.getGPDataDay();
-
         this.initData();
 
         if (GameCfg.GameType != pb.GameType.MoNiChaoGu || GameCfg.GameType != pb.GameType.ChaoGuDaSai) {
@@ -506,8 +504,7 @@ export default class NewClass extends cc.Component {
             this.CmdQuoteSubscribe(true);
         }
 
-        //查询AI操作
-        this.onQueryAISignal();
+        this.getGPDataDay();
 
         if (GameData.AIStockList.indexOf(code) == -1) {
             this.ziXunBtn.active = false;
@@ -515,7 +512,6 @@ export default class NewClass extends cc.Component {
         else {
             this.ziXunBtn.active = true;
         }
-
         if (GameCfg.GameType == 'ZNXG') {
 
             if (GameData.AIStockList.indexOf(parseInt(this.code)) != -1) {
@@ -524,18 +520,23 @@ export default class NewClass extends cc.Component {
             else {
                 this.yiShouCang.active = false;
             }
-            this.toggles[0].isChecked = false;
-            this.toggles[2].isChecked = false;
-            this.toggles[3].isChecked = false;
-            this.toggles[4].isChecked = false;
-            this.toggles[1].isChecked = true;
+            setTimeout(() => {
+                this.toggles[1].isChecked = true;
+                this.toggles[0].isChecked = false;
+                this.toggles[2].isChecked = false;
+                this.toggles[3].isChecked = false;
+                this.toggles[4].isChecked = false;
+            }, 100);
+
         }
         else {
-            this.toggles[0].isChecked = true;
-            this.toggles[2].isChecked = false;
-            this.toggles[3].isChecked = false;
-            this.toggles[4].isChecked = false;
-            this.toggles[1].isChecked = false;
+            setTimeout(() => {
+                this.toggles[0].isChecked = true;
+                this.toggles[2].isChecked = false;
+                this.toggles[3].isChecked = false;
+                this.toggles[4].isChecked = false;
+                this.toggles[1].isChecked = false;
+            }, 100);
         }
     }
 
@@ -590,6 +591,11 @@ export default class NewClass extends cc.Component {
 
             label1.string = '近一年收益：' + ComUtils.changeTwoDecimal(num) + '%';
             label2.string = '最近的收益：' + ComUtils.changeTwoDecimal(num1) + '%';
+
+            setTimeout(() => {
+                this.setCurLabelData();
+            }, 100)
+
 
         });
 
@@ -781,8 +787,11 @@ export default class NewClass extends cc.Component {
 
                     this.gpDataMin[i].volume = this.gpDataMin[i].volume - this.gpDataMin[i - 1].volume;
                 }
+                this.onUIShow();
                 this.onShowCgData();
-                this.setCurLabelData();
+                //查询AI操作
+                this.onQueryAISignal();
+
             }
             //天
             else if (info1.ktype == pb.KType.Day) {
@@ -876,6 +885,9 @@ export default class NewClass extends cc.Component {
                     })
                 }
                 else if (index == 1 || index == 2) {
+                    if (index == 1) {
+                        this.addMark.active = true;
+                    }
                     this.ktype = pb.KType.Day;
                     arr = this.gpDataDay;
                 }
@@ -963,7 +975,7 @@ export default class NewClass extends cc.Component {
         this.onUIShow();
         this.btnSelect.active = true;
         this.touchNode.active = true;
-
+        this.addMark.active = false;
         if (name == 'toggle1') {
 
             this.btnSelect.active = false;
@@ -984,7 +996,7 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'toggle2') {
 
-            GameCfg.GAMEFUPAN = true;
+
             if (!this.gpDataDay.length) {
                 this.getGPDataDay();
             }

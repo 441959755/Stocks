@@ -71,6 +71,17 @@ export default class NewClass extends cc.Component {
 
     }
 
+    clearMark() {
+        this.node.removeAllChildren();
+        this.startNode = [];
+        this.markNodes = [];
+        this.bmarkNodes = [];
+        this.AIMarkNodes = [];
+        this.mark1Nodes = [];
+        this.mark2Nodes = [];
+
+    }
+
     onShowCutMark(status) {
 
         this.status = status;
