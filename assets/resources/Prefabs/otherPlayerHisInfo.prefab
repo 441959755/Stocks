@@ -392,7 +392,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -528,7 +528,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 165,
+      "width": 132,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -578,11 +578,10 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "xxx历史战绩",
     "_N$string": "xxx历史战绩",
-    "_fontSize": 30,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -854,8 +853,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "1",
     "_N$string": "1",
     "_fontSize": 24,
@@ -962,8 +960,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "2020-4-21",
     "_N$string": "2020-4-21",
     "_fontSize": 24,
@@ -1070,8 +1067,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "2020-4-21",
     "_N$string": "2020-4-21",
     "_fontSize": 24,
@@ -1178,8 +1174,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "排名 1",
     "_N$string": "排名 1",
     "_fontSize": 24,
@@ -1286,8 +1281,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "盈利率：25.33%",
     "_N$string": "盈利率：25.33%",
     "_fontSize": 24,
@@ -1368,7 +1362,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -1562,7 +1556,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -1969,8 +1963,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "编号",
     "_N$string": "编号",
     "_fontSize": 24,
@@ -2077,8 +2070,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "比赛时间",
     "_N$string": "比赛时间",
     "_fontSize": 24,
@@ -2185,8 +2177,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "比赛模式",
     "_N$string": "比赛模式",
     "_fontSize": 24,
@@ -2293,8 +2284,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "比赛排名",
     "_N$string": "比赛排名",
     "_fontSize": 24,
@@ -2468,8 +2458,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "战绩",
     "_N$string": "战绩",
     "_fontSize": 24,
@@ -2618,7 +2607,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -2973,8 +2962,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "复盘",
     "_N$string": "复盘",
     "_fontSize": 24,
@@ -3081,8 +3069,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "训练",
     "_N$string": "训练",
     "_fontSize": 24,
@@ -3744,8 +3731,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "暂时没有任何数据哦！",
     "_N$string": "暂时没有任何数据哦！",
     "_fontSize": 32,

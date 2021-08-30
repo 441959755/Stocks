@@ -1,5 +1,4 @@
 
-import { pb } from "../../../protos/proto";
 import GameCfgText from "../../../sctiprs/GameText";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
@@ -16,34 +15,16 @@ export default class NewClass extends cc.Component {
     _code = null;
 
     _curData = null;
-    onEnable() {
-        //进来获取的第一条行情
-        GlobalEvent.on(EventCfg.CMDQUOTITEM, (info) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            if (!info.items || info.items.length <= 0) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空');
-                return;
+    onLoad() {
+        GlobalEvent.on('UPDATEITEMDATA', (info) => {
+            if (this._code == info.code) {
+                this.setLabel(info);
             }
-            if (info.items[0].code == this._code) {
-                this.setLabel(info.items[0]);
-            }
-
-        })
-
-        //订阅时时行情
-        GlobalEvent.on(EventCfg.SYNCQUOTEITEM, (data) => {
-            if (data.code == this._code) {
-                this.setLabel(data);
-            }
-            // GlobalEvent.emit(EventCfg.UPDATESPZICHAN)
         }, this);
-
-        //订阅
-        // this.CmdQuoteSubscribe(true);
     }
 
     setLabel(info) {
-
+        if (this._code != info.code) { return };
         this.labels[2].string = ComUtils.changeTwoDecimal(info.price) + '';
 
         this.labels[3].string = ComUtils.changeTwoDecimal(this._curData.priceCost) + '';
@@ -72,7 +53,7 @@ export default class NewClass extends cc.Component {
             this.labels[9].node.color = cc.Color.GREEN;
         }
         this.labels[9].string = ComUtils.changeTwoDecimal(sy) + '';
-        GlobalEvent.emit(EventCfg.UPDATECCASSET, sy);
+        //   GlobalEvent.emit(EventCfg.UPDATECCASSET, sy);
     }
 
     onShow(code, data: any) {
@@ -81,17 +62,6 @@ export default class NewClass extends cc.Component {
 
             this._code = code;
             this._curData = data;
-
-            //获取行情
-            {
-                let info1 = {
-                    ktype: pb.KType.Min,
-                    code: this._code,
-                    to: parseInt((new Date().getTime()) / 1000 + ''),
-                    total: 1,
-                }
-                socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
-            }
 
             let items = GameCfgText.getGPPKItemInfo(this._code);
             if (items) {
@@ -105,27 +75,8 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    // CmdQuoteSubscribe(flag) {
-    //     if (!this._code) { return }
-    //     let info = {
-    //         items: [{ code: this._code + '', flag: flag }],
-    //     }
-
-    //     console.log('订阅：' + JSON.stringify(info));
-    //     let CmdQuoteSubscribe = pb.CmdQuoteSubscribe;
-    //     let message = CmdQuoteSubscribe.create(info);
-    //     let buff = CmdQuoteSubscribe.encode(message).finish();
-
-    //     socket.send(pb.MessageId.Req_QuoteSubscribe, buff, info => {
-    //         console.log('订阅：' + JSON.stringify(info));
-
-    //     })
-    // }
-
-    onDisable() {
-        // this.CmdQuoteSubscribe(false);
-        GlobalEvent.off(EventCfg.CMDQUOTITEM);
-        GlobalEvent.off(EventCfg.SYNCQUOTEITEM);
+    onDestroy() {
+        GlobalEvent.off('UPDATEITEMDATA');
     }
 
     onBtnClick(event, data) {

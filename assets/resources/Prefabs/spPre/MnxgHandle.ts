@@ -60,7 +60,7 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     sp_topbtn_phb: cc.Node = null;
 
-    // _curArr = [];
+    _curArr = [];
 
     onEnable() {
 
@@ -68,13 +68,55 @@ export default class NewClass extends cc.Component {
 
         //跟新资产数据
         GlobalEvent.on(EventCfg.CHANGEMNCGACCOUNT, this.onUpdateMycgData.bind(this), this);
-
-        GlobalEvent.on(EventCfg.UPDATECCASSET, this.onUptateCCAsset.bind(this), this)
     }
 
-    onUptateCCAsset(data) {
-        this.zzcLa.string = parseInt(parseInt(this.zzcLa.string) + data + '') + '';
-        this.cczcLa.string = parseInt(parseInt(this.cczcLa.string) + data + '') + '';
+    onUptateCCAsset(info) {
+
+        let data = {
+            account: 0,
+            orderList: null,
+            positionList: null,
+        };
+
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+            data = GameData.mncgDataList;
+        }
+        else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+            GameData.cgdsStateList.forEach(el => {
+                if (el.id == GameData.SpStockData.id) {
+                    data = el.state;
+                }
+            })
+        }
+
+        let wt = 0, cc = 0, kc = 0;
+        kc = parseInt(data.account + '');
+
+        if (data.orderList && data.orderList.items) {
+            data.orderList.items.forEach(el => {
+                if (el.state == pb.OrderState.Init) {
+                    wt += el.volume * el.price;
+                }
+
+            });
+        }
+
+        if (data.positionList && data.positionList.items) {
+
+            data.positionList.items.forEach(el => {
+                if (this._curArr[el.code]) {
+                    cc += (el.volume * this._curArr[el.code].price);
+                }
+                else {
+                    cc += (el.volume * el.priceCost);
+                }
+            });
+        }
+
+        this.cczcLa.string = parseInt(cc + '') + '';
+
+        let zzc = (kc) + cc + wt;
+        this.zzcLa.string = parseInt(zzc + '') + '';
     }
 
     onAddZx() {
@@ -90,11 +132,25 @@ export default class NewClass extends cc.Component {
             })
         }
         if (arr.length > 0) {
+
+            arr.forEach(el => {
+
+                let info1 = {
+                    ktype: pb.KType.Min,
+                    code: el,
+                    to: parseInt((new Date().getTime()) / 1000 + ''),
+                    total: 1,
+                }
+                this._curArr[el] = [];
+
+                socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
+            })
+
             let UIScrollControl = this.scorllNode.getComponent('UIScrollControl');
             UIScrollControl.clear();
             UIScrollControl.initControl(this.item1, arr.length, this.item1.getContentSize(), 0, (node, index) => {
                 let handle = node.getComponent('MnxgItem');
-                handle.onShow(arr[index]);
+                handle.onShow(arr[index], this._curArr[arr[index]]);
             })
 
             this.tipsNode.active = false;
@@ -143,7 +199,13 @@ export default class NewClass extends cc.Component {
             else if (info.items[0].code == lu) {
                 this.onUpdateSLLabel(info.items[0], this.lNode);
             }
-        })
+
+            else if (this._curArr[info.items[0].code]) {
+                this._curArr[info.items[0].code] = info.items[0];
+                GlobalEvent.emit('UPDATEITEMDATA', info.items[0]);
+                this.onUptateCCAsset(info.items[0]);
+            }
+        }, this);
 
 
         //订阅时时行情
@@ -155,7 +217,11 @@ export default class NewClass extends cc.Component {
                 this.onUpdateSLLabel(data, this.lNode);
             }
 
-            //  this.upDateAsset(data);
+            else if (this._curArr[data.code]) {
+                this._curArr[data.code] = data;
+                GlobalEvent.emit('UPDATEITEMDATA', data);
+                this.onUptateCCAsset(data);
+            }
 
         }, this);
 
@@ -305,6 +371,7 @@ export default class NewClass extends cc.Component {
         //  GameCfg.GameType = null;
         GlobalEvent.off(EventCfg.CHANGEMNCGACCOUNT);
         GameData.SpStockData = null;
+        this._curArr = [];
         this.content1.removeAllChildren();
         this.content2.removeAllChildren();
     }
@@ -452,13 +519,27 @@ export default class NewClass extends cc.Component {
             }
 
             if (arr.length > 0) {
+
+                arr.forEach(el => {
+                    let info1 = {
+                        ktype: pb.KType.Min,
+                        code: el.code,
+                        to: parseInt((new Date().getTime()) / 1000 + ''),
+                        total: 1,
+                    }
+
+                    this._curArr[el.code] = [];
+
+                    socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
+                })
+
                 let UIScrollControl = this.scorllNode1.getComponent('UIScrollControl');
                 UIScrollControl.clear();
+
                 UIScrollControl.initControl(this.item2, arr.length, this.item2.getContentSize(), 0, (node, index) => {
                     let handle = node.getComponent('MnxgItem1');
                     handle.onShow(arr[index].code, arr[index]);
                 })
-
                 this.tipsNode.active = false;
             } else {
                 this.tipsNode.active = true;

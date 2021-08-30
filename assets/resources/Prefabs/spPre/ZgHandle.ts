@@ -64,6 +64,7 @@ export default class NewClass extends cc.Component {
                     }
                 }
                 if (!flag) {
+                    edit.string = '';
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '没有找查到您要的股票.');
                 }
                 else {

@@ -1414,8 +1414,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "帮组",
-    "_N$string": "帮组",
+    "_string": "帮助",
+    "_N$string": "帮助",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,

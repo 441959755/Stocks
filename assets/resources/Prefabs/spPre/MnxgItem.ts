@@ -18,52 +18,21 @@ export default class NewClass extends cc.Component {
 
     items = null;
 
-    onEnable() {
-        //进来获取的第一条行情
-        GlobalEvent.on(EventCfg.CMDQUOTITEM, (info) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            if (!info.items || info.items.length <= 0) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空');
-                return;
-            }
-            if (info.items[0].code == this._code) {
-                this.setLabel(info.items[0]);
-            }
-        })
-
-        //订阅时时行情
-        GlobalEvent.on(EventCfg.SYNCQUOTEITEM, (data) => {
-            if (data.code == this._code) {
-                this.setLabel(data);
+    onLoad() {
+        GlobalEvent.on('UPDATEITEMDATA', (info) => {
+            if (this._code == info.code) {
+                this.setLabel(info);
             }
         }, this);
-
-        //订阅
-        //   this.CmdQuoteSubscribe(true);
-
     }
 
-    onShow(data?) {
+    onShow(data?, info?) {
         if ((!this._code || this._code != data) && data) {
 
             if (data) {
                 this._code = data;
             }
 
-            //获取行情
-            {
-                let info1 = {
-                    ktype: pb.KType.Min,
-                    code: this._code,
-                    to: parseInt((new Date().getTime()) / 1000 + ''),
-                    total: 1,
-                }
-                socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
-                console.log('info:' + JSON.stringify(info1));
-            }
-
-            //订阅
-            // this.CmdQuoteSubscribe(true);
             this.items = GameCfgText.getGPPKItemInfo(this._code);
 
             if (this.items) {
@@ -76,6 +45,8 @@ export default class NewClass extends cc.Component {
                 code = code.slice(1);
             }
             this.labs[0].string = code;
+
+            info && (this.setLabel(info));
         }
     }
 
@@ -104,28 +75,9 @@ export default class NewClass extends cc.Component {
         this.labs[8].string = ComUtils.changeTwoDecimal(info.low) + '';
     }
 
-
-    onDisable() {
-        // this.CmdQuoteSubscribe(false);
-        GlobalEvent.off(EventCfg.CMDQUOTITEM);
-        GlobalEvent.off(EventCfg.SYNCQUOTEITEM);
+    onDestroy() {
+        GlobalEvent.off('UPDATEITEMDATA');
     }
-
-    // CmdQuoteSubscribe(flag) {
-    //     if (!this._code) { return }
-    //     let info = {
-    //         items: [{ code: this._code + '', flag: flag }],
-    //     }
-
-    //     console.log('订阅：' + JSON.stringify(info));
-    //     let CmdQuoteSubscribe = pb.CmdQuoteSubscribe;
-    //     let message = CmdQuoteSubscribe.create(info);
-    //     let buff = CmdQuoteSubscribe.encode(message).finish();
-
-    //     socket.send(pb.MessageId.Req_QuoteSubscribe, buff, info => {
-    //         console.log('订阅：' + JSON.stringify(info));
-    //     })
-    // }
 
     onBtnClick(event, data) {
         let name = event.target.name;
@@ -172,7 +124,6 @@ export default class NewClass extends cc.Component {
                     }
                 })
             }
-
             this.node.active = false;
             this.node.destroy();
         }

@@ -22,7 +22,7 @@ export default class NewClass extends cc.Component {
 
         this.node.on('touchstart', (event) => {
 
-            if (this.ktype == pb.KType.Min) { return }
+            //   if (this.ktype == pb.KType.Min) { return }
 
             this.vertical1.active = true;
             this.Horizontal1.active = true;
@@ -31,15 +31,15 @@ export default class NewClass extends cc.Component {
 
             let localPos = this.node.convertToNodeSpaceAR(pos);
 
-            this.vertical1.x = Math.floor((localPos.x - 10) / GameCfg.hz_width) * GameCfg.hz_width + 10 + GameCfg.hz_width / 2;
+            this.vertical1.x = Math.floor((localPos.x) / GameCfg.hz_width) * GameCfg.hz_width + GameCfg.hz_width / 2;
             this.Horizontal1.y = localPos.y;
-            let index = GameCfg.beg_end[0] + (Math.floor((localPos.x - 10) / GameCfg.hz_width));
+            let index = GameCfg.beg_end[0] + (Math.floor((localPos.x) / GameCfg.hz_width));
             if (index >= GameCfg.beg_end[1]) {
-                this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) + 10 - GameCfg.hz_width / 2;
+                this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) - GameCfg.hz_width / 2;
                 index = GameCfg.beg_end[1] - 1;
             }
             else if (index <= GameCfg.beg_end[0]) {
-                this.vertical1.x = 10 + GameCfg.hz_width / 2;
+                this.vertical1.x = GameCfg.hz_width / 2;
             }
 
             GlobalEvent.emit('onClickPosUpdateLabel', index);
@@ -66,7 +66,7 @@ export default class NewClass extends cc.Component {
         let num = 90;
 
         this.node.on('touchmove', (event) => {
-            if (this.ktype == pb.KType.Min) { return }
+            //   if (this.ktype == pb.KType.Min) { return }
             calDisY += event.getDelta().y;
             calDisX += event.getDelta().x;
 
@@ -120,7 +120,10 @@ export default class NewClass extends cc.Component {
                         calDisY = 0;
                         clearTimeout(this.timer);
                         this.timer = null;
-                        GlobalEvent.emit('onDrawGrap')
+                        if (this.ktype != pb.KType.Min) {
+                            GlobalEvent.emit('onDrawGrap')
+                        }
+
                     }, 20)
                 }
             }
@@ -179,7 +182,9 @@ export default class NewClass extends cc.Component {
                         calDisX = 0;
                         clearTimeout(this.timer);
                         this.timer = null;
-                        GlobalEvent.emit('onDrawGrap');
+                        if (this.ktype != pb.KType.Min) {
+                            GlobalEvent.emit('onDrawGrap')
+                        }
                     }, 20)
                 }
             }

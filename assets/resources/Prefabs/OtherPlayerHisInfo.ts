@@ -39,10 +39,10 @@ export default class NewClass extends cc.Component {
     onShow() {
         GameData.Players[1] = this.playeInfo;
         if (this.playeInfo.nickname) {
-            this.playerName.string = this.playeInfo.nickname + '  历史战绩';
+            this.playerName.string = this.playeInfo.nickname + /*'  历史战绩'*/ +'';
         }
         else {
-            this.playerName.string = this.playeInfo.uid + '  历史战绩';
+            this.playerName.string = this.playeInfo.uid /*+ '  历史战绩'*/;
         }
         this.tipsNode.active = false;
         if (this.HisData.length <= 0) {

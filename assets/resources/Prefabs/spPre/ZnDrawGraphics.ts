@@ -1,6 +1,7 @@
 import { pb } from "../../../protos/proto";
 import DrawData from "../../../sctiprs/game/DrawData";
 import GameCfg from "../../../sctiprs/game/GameCfg";
+import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import DrawUtils from "../../../sctiprs/Utils/DrawUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -53,6 +54,9 @@ export default class NewClass extends cc.Component {
 
     prePoint1Y = null;
 
+    @property([cc.Label])
+    timelas: cc.Label[] = [];
+
     onEnable() {
         GlobalEvent.on('onDrawGrap', (arr, ktype) => {
             ktype && (this.ktype = ktype)
@@ -103,6 +107,29 @@ export default class NewClass extends cc.Component {
 
             this.onDrawMA(index);
         }
+
+        this.setTiemNode();
+    }
+
+    setTiemNode() {
+        if (this.ktype == pb.KType.Min) {
+            let arr = ['09:30', '10:30', '11:30/13:00', '14:00', '15:00'];
+            this.timelas.forEach((el, index) => {
+                el.string = arr[index];
+            })
+        }
+        else if (this.ktype == pb.KType.Day) {
+            let c = Math.floor((GameCfg.beg_end[1] - GameCfg.beg_end[0]) / 4);
+            let arr = [];
+            arr[0] = this.viewData[GameCfg.beg_end[0]].day;
+            arr[4] = this.viewData[GameCfg.beg_end[1] - 1].day;
+            arr[1] = this.viewData[GameCfg.beg_end[0] + c].day;
+            arr[2] = this.viewData[GameCfg.beg_end[0] + c * 2].day;
+            arr[3] = this.viewData[GameCfg.beg_end[0] + c * 3].day;
+            this.timelas.forEach((el, index) => {
+                el.string = ComUtils.formatTime(arr[index]);
+            })
+        }
     }
 
     //绘制蜡烛线 曲线 、宝塔线
@@ -124,14 +151,14 @@ export default class NewClass extends cc.Component {
         let closeY = closeValue / this.disValue * drawBox;
 
         if (this.ktype == pb.KType.Min) {
-            let width = this.node.width / 240;
+            GameCfg.hz_width = this.node.width / 240;
             if (index == 0) {
-                this.prePointX = (some * width);
+                this.prePointX = (some * GameCfg.hz_width);
                 this.prePointY = (el.close - this.bottomValue) / this.disValue * drawBox;
                 this.prePoint1Y = this.prePointY;
             }
             else {
-                let x = ((some + 1) * width);
+                let x = ((some + 1) * GameCfg.hz_width);
                 let y = (el.close - this.bottomValue) / this.disValue * drawBox;
                 //   this.drawBg.lineWidth = width;
                 DrawUtils.drawMinLineFill(this.drawBg, this.prePointX, this.prePointY, x, y);

@@ -383,8 +383,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 24,
@@ -470,7 +469,7 @@
       "ctor": "Float64Array",
       "array": [
         -473.316,
-        0,
+        -11.135,
         0,
         0,
         0,
@@ -749,8 +748,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 24,
@@ -1078,8 +1076,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 24,
@@ -1407,8 +1404,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 24,
@@ -1736,8 +1732,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 24,
@@ -2065,8 +2060,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 24,
@@ -2237,7 +2231,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -2330,8 +2324,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "领取",
     "_N$string": "领取",
     "_fontSize": 24,
@@ -2945,7 +2938,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -3204,8 +3197,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "奖励中心",
     "_N$string": "奖励中心",
     "_fontSize": 30,
@@ -3788,7 +3780,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -3881,8 +3873,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "全部领取",
     "_N$string": "全部领取",
     "_fontSize": 24,

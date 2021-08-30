@@ -57,7 +57,6 @@ export default class NewClass extends cc.Component {
             // console.log(event);
             // event.node.getComponent(cc.Toggle).isChecked = true;
             event.isChecked = true;
-
         }
 
     }

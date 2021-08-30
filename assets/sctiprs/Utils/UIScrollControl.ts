@@ -215,7 +215,7 @@ export default class NewClass extends cc.Component {
 
         if (offset < 0 || offset + this._show_area_size.height >= _max_rect_size) {
             //cc.log("无法滚动, offset = " + offset + ", offset + this._show_area_size.height >= _max_rect_size >= _max_rect_size = " + (offset + this._show_area_size.height >= _max_rect_size))
-            cc.log("无法滚动, offset = " + offset)
+            //  cc.log("无法滚动, offset = " + offset)
             return
         }
 

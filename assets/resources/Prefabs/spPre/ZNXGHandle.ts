@@ -54,19 +54,20 @@ export default class NewClass extends cc.Component {
     }
 
     onShowSelectBk() {
-        let i = 0;
-        let nodes = this.content.children;
-        nodes.forEach((el, index) => {
-            if (index > 0) {
-                let handle = el.getComponent('ZnxgItem');
 
-                let flag = this.getBKISShow(handle._curData.code);
-                if (flag) { i++ }
-                el.active = flag;
-
-                handle.setIndex(i);
-
+        let arr = [];
+        this.AIStockList.forEach((el, index) => {
+            let flag = this.getBKISShow(el.code);
+            if (flag) {
+                arr.push(el);
             }
+        })
+
+        let UIScrollControl = this.scrollview.getComponent('UIScrollControl');
+        UIScrollControl.clear();
+        UIScrollControl.initControl(this.preItem, arr.length, this.preItem.getContentSize(), 0, (node, index) => {
+            let handle = node.getComponent('ZnxgItem');
+            handle.onShow(arr[index], index);
         })
     }
 
@@ -79,19 +80,13 @@ export default class NewClass extends cc.Component {
         let data = {
             //    rankFrom: 1,
             tsUpdateFrom: parseInt(new Date().getTime() / 1000 + ''),
-            total: 200,
+            total: 250,
         }
         this.getAIStockList(data);
     }
 
     onEnable() {
-        GlobalEvent.on('UpdateShouCang', this.getCollectList.bind(this), this);
         GameCfg.GameType = 'ZNXG';
-    }
-
-    onDisable() {
-
-        GlobalEvent.off('UpdateShouCang');
     }
 
     onBtnToggle(event, data) {
@@ -104,6 +99,9 @@ export default class NewClass extends cc.Component {
         //AI买入信息
         if (name == 'toggle1') {
             this.scrollview.node.active = true;
+            this.scrollview.content.children.forEach(el => {
+                el.active = true;;
+            })
             if (this.AIStockList.length > 0) {
                 this.tipsNode.active = false;
             }
@@ -115,6 +113,9 @@ export default class NewClass extends cc.Component {
         //Ai收益排行
         else if (name == 'toggle2') {
             this.scrollview1.node.active = true;
+            this.scrollview1.content.children.forEach(el => {
+                el.active = true;;
+            })
             if (this.AIProfitList.length == 0) {
                 this.tipsNode.active = true;
                 let data = {
@@ -129,7 +130,6 @@ export default class NewClass extends cc.Component {
             this.scrollview2.node.active = true;
             this.tipsNode.active = true;
             this.getCollectList();
-
         }
     }
 
@@ -161,6 +161,7 @@ export default class NewClass extends cc.Component {
         let message = CmdQueryAiStockList.create(data);
         let buff = CmdQueryAiStockList.encode(message).finish();
         socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
+
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             this.AIStockList = [];
             //this.AIStockList = res.items;
@@ -172,7 +173,6 @@ export default class NewClass extends cc.Component {
                     this.AIStockList.push(el);
                 }
             });
-
 
             let UIScrollControl = this.scrollview.getComponent('UIScrollControl');
             UIScrollControl.initControl(this.preItem, this.AIStockList.length, this.preItem.getContentSize(), 0, (node, index) => {
@@ -223,7 +223,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
-            //  this.content2.removeAllChildren();
+
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
             console.log('查询AI选股的股票列表' + JSON.stringify(res));

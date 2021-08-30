@@ -115,7 +115,6 @@ export default class NewClass extends cc.Component {
     _amount = 0;
 
     onLoad() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         //更新选择label信息
         GlobalEvent.on('onClickPosUpdateLabel', (index) => {
 
@@ -127,7 +126,7 @@ export default class NewClass extends cc.Component {
                 if (this.gpDataMin.length <= 0 || !this.gpDataMin[index]) {
                     return;
                 }
-                index = this.gpDataMin.length - 1;
+                //  index = this.gpDataMin.length - 1;
                 let tt = this.gpDataMin[index].timestamp + '';
                 let h, m;
                 if (tt.length < 10) {
@@ -285,7 +284,6 @@ export default class NewClass extends cc.Component {
     onEnable() {
         //同步行情
         GlobalEvent.on(EventCfg.SYNCQUOTEITEM, (data) => {
-
             if (data.code == this.code) {
                 //同步时 把以前的数据清掉
                 if (!this.isSync) {
@@ -335,11 +333,70 @@ export default class NewClass extends cc.Component {
                     this.setBoxLabel(data);
                     this.setCurLabelData();
                 }
-
-
                 this.onShowCgData();
             }
         }, this);
+
+        // //进来获取的第一条行情
+        // GlobalEvent.on(EventCfg.CMDQUOTITEM, (info) => {
+        //     GlobalEvent.emit(EventCfg.LOADINGHIDE);
+        //     if (!info.items || info.items.length <= 0) {
+        //         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空');
+        //         return;
+        //     }
+        //     // {
+        //     //     "code": 600064,
+        //     //     "ktype": "Min",
+        //     //     "timestamp": "1630287720",
+        //     //     "price": 8.59,
+        //     //     "volume": "1889640",
+        //     //     "amount": 16280836,
+        //     //     "open": 8.74,
+        //     //     "close": 8.81,
+        //     //     "high": 8.74,
+        //     //     "low": 8.54
+        //     // }
+        //     console.log('获取的第一条数据：' + JSON.stringify(info));
+        //     if (info.items[0].code == this.code) {
+        //         this.cLabel[2].string = ComUtils.changeTwoDecimal(info.items[0].price) + '';
+        //         let zf = info.items[0].price - info.items[0].close;
+        //         let zfl = (info.items[0].price - info.items[0].close) / info.items[0].close * 100;
+        //         this.cLabel[3].string = ComUtils.changeTwoDecimal(zf) + '    ' + ComUtils.changeTwoDecimal(zfl) + '%';
+
+        //         this.cLabel[4].string = ComUtils.changeTwoDecimal(info.items[0].high) + '';
+        //         this.cLabel[5].string = ComUtils.changeTwoDecimal(info.items[0].open) + '';
+
+        //         let zf1 = (info.items[0].high - info.items[0].low) / info.items[0].close * 100;
+        //         this.cLabel[6].string = ComUtils.changeTwoDecimal(zf1) + '%';
+        //         this.cLabel[7].string = ComUtils.numberConvertUnit(info.items[0].volume / 100) + '手';
+
+        //         this.cLabel[8].string = ComUtils.changeTwoDecimal(info.items[0].low) + '';
+        //         this.cLabel[9].string = ComUtils.changeTwoDecimal(info.items[0].close) + '';
+
+        //         this.cLabel[11].string = ComUtils.numberConvertUnit(info.items[0].amount) + '';
+
+        //         if (zf < 0) {
+        //             this.cLabel[2].node.color = cc.Color.GREEN;
+        //             this.cLabel[3].node.color = cc.Color.GREEN;
+        //         }
+        //         else {
+        //             this.cLabel[2].node.color = cc.Color.RED;
+        //             this.cLabel[3].node.color = cc.Color.RED;
+        //         }
+        //     }
+        // })
+
+        // //获取行情
+        // {
+        //     let info1 = {
+        //         ktype: pb.KType.Min,
+        //         code: this.code,
+        //         to: parseInt((new Date().getTime()) / 1000 + ''),
+        //         total: 1,
+        //     }
+        //     socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
+        //     console.log('info:' + JSON.stringify(info1));
+        // }
 
     }
 
@@ -460,17 +517,25 @@ export default class NewClass extends cc.Component {
         }
 
         if (GameCfg.GameType == 'ZNXG') {
+
             if (GameData.AIStockList.indexOf(parseInt(this.code)) != -1) {
                 this.yiShouCang.active = true;
             }
             else {
                 this.yiShouCang.active = false;
             }
-
-            setTimeout(() => {
-                this.toggles[1].isChecked = true;
-                this.onToggleClick({ node: { name: 'toggle2' } }, null);
-            }, 500)
+            this.toggles[0].isChecked = false;
+            this.toggles[2].isChecked = false;
+            this.toggles[3].isChecked = false;
+            this.toggles[4].isChecked = false;
+            this.toggles[1].isChecked = true;
+        }
+        else {
+            this.toggles[0].isChecked = true;
+            this.toggles[2].isChecked = false;
+            this.toggles[3].isChecked = false;
+            this.toggles[4].isChecked = false;
+            this.toggles[1].isChecked = false;
         }
     }
 
@@ -740,7 +805,6 @@ export default class NewClass extends cc.Component {
         }
 
 
-
         let items = GameCfgText.getGPPKItemInfo(this.code);
         let code = this.code;
 
@@ -794,9 +858,8 @@ export default class NewClass extends cc.Component {
             this.cLabel[3].node.color = cc.Color.RED;
         }
 
-        this.toggles[0].isChecked = true;
-        this.ktype = pb.KType.Min;
-        this.touchNode.active = false;
+
+        //  this.touchNode.active = false;
         this.onDraw();
     }
 
@@ -824,7 +887,7 @@ export default class NewClass extends cc.Component {
                     this.ktype = pb.KType.Day7;
                     arr = this.gpDataMonth;
                 }
-
+                this.touchNode.getComponent('ZnxgTouch').ktype = this.ktype;
                 GameCfg.huizhidatas = arr.length;
                 GameData.huizhidatas = arr.length;
                 GameCfg.beg_end = [];
@@ -900,6 +963,7 @@ export default class NewClass extends cc.Component {
         this.onUIShow();
         this.btnSelect.active = true;
         this.touchNode.active = true;
+
         if (name == 'toggle1') {
 
             this.btnSelect.active = false;
@@ -909,7 +973,7 @@ export default class NewClass extends cc.Component {
             this.BGrap[2].active = false;
             this.BGrap[3].active = false;
             this.BGrap[4].active = false;
-            this.touchNode.active = false;
+            //  this.touchNode.active = false;
             if (!this.gpDataMin.length) {
                 this.getGPDataMin();
             }
@@ -977,6 +1041,7 @@ export default class NewClass extends cc.Component {
             this.CmdQuoteSubscribe(false);
         }
         GlobalEvent.off(EventCfg.SYNCQUOTEITEM);
+        GlobalEvent.off(EventCfg.CMDQUOTITEM);
     }
 
     onBtnClick(event, data) {
@@ -1065,8 +1130,6 @@ export default class NewClass extends cc.Component {
 
             })
             GameData.AIStockList.push(this.code);
-
-            GlobalEvent.emit('UpdateShouCang');
 
             this.yiShouCang.active = true;
         }
