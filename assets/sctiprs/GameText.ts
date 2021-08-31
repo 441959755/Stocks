@@ -27,20 +27,17 @@ export default class GameCfgText {
 
 
     public static LoadGameConf() {
-        // let str = ComUtils.getCurYearMonthDay();
-        // let flag = cc.sys.localStorage.getItem('LOADCONF' + str);
-        // //加载本地的
-        // if (flag) {
+        let str = ComUtils.getCurYearMonthDay();
+        let flag = cc.sys.localStorage.getItem('LOADCONF' + str);
+        //加载本地的
+        if (flag) {
 
-        // }
-        // //去下载
-        // else {
-        // }
+        }
+        //去下载
+        else {
 
-        // LoadUtils.load(this.url + 'app.conf', (res) => {
-        //     let conf = JSON.parse(res._nativeAsset);
-        // })
-
+        }
+        //test 测试
         //配置文件
         LoadUtils.loadRes('protos/app', (text) => {
             console.log(JSON.stringify(text));
@@ -50,7 +47,36 @@ export default class GameCfgText {
         })
 
         //属性文件
-        LoadUtils.load
+        LoadUtils.loadRes('protos/game', (text) => {
+            console.log(JSON.stringify(text));
+            let s = JSON.parse(text._nativeAsset);
+            cc.sys.localStorage.setItem('APPCONF', JSON.stringify(s));
+
+        })
+
+        //广告
+        LoadUtils.loadRes('protos/ad', (text) => {
+            console.log(JSON.stringify(text));
+            let s = JSON.parse(text._nativeAsset);
+            cc.sys.localStorage.setItem('APPCONF', JSON.stringify(s));
+
+        })
+
+        //股票列表
+        LoadUtils.loadRes('protos/stocklist', (text) => {
+            console.log(JSON.stringify(text));
+            let s = JSON.parse(text._nativeAsset);
+            cc.sys.localStorage.setItem('APPCONF', JSON.stringify(s));
+
+        })
+
+        //期货列表
+        LoadUtils.loadRes('protos/contractlist', (text) => {
+            console.log(JSON.stringify(text));
+            let s = JSON.parse(text._nativeAsset);
+            cc.sys.localStorage.setItem('APPCONF', JSON.stringify(s));
+        })
+
     }
 
     public static getStocktList() {
@@ -597,7 +623,6 @@ export default class GameCfgText {
         LoadUtils.releaseRes('protos/stocklist');
         LoadUtils.releaseRes('protos/game');
         LoadUtils.releaseRes('protos/contractlist');
-
 
     }
 

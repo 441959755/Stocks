@@ -26,7 +26,7 @@ export default class NewClass extends cc.Component {
 
 	rewardCenterNode: cc.Node = null;
 
-	ggLayer: cc.Node = null;  //公告
+	noticeLayer: cc.Node = null;  //公告
 
 	@property(cc.Node)
 	rightbg: cc.Node = null;
@@ -50,7 +50,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on(EventCfg.OPENREWARDCENTERLAYER, this.openRewardCenterLayer.bind(this), this);
 
 		//打开公告
-		GlobalEvent.on('OPENGGLAYER', this.openGGlayer.bind(this), this);
+		GlobalEvent.on('OPENNOTICELAYER', this.openNoticelayer.bind(this), this);
 
 	}
 
@@ -74,9 +74,8 @@ export default class NewClass extends cc.Component {
 	}
 
 	//打开公告
-	openGGlayer() {
-
-
+	openNoticelayer() {
+		this.openNode(this.noticeLayer, 'Prefabs/pk/CGSPK', 3, (node) => { this.noticeLayer = node });
 	}
 
 	/**

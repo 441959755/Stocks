@@ -11,7 +11,7 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         //公告
         if (name == 'main_smbt_gg1') {
-            GlobalEvent.emit('OPENGGLAYER');
+            GlobalEvent.emit('OPENNOTICELAYER');
         }
         //好友
         else if (name == 'main_smbt_hy1') {
