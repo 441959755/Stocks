@@ -25,7 +25,7 @@ export default class WebSDK {
 
         HttpMgr.getInstance().loginWeb(uuid, loginInfo, call, () => {
             console.log('onLoginCodeHttpRequest err');
-            call && call();
+            // call && call();
         })
 
     }

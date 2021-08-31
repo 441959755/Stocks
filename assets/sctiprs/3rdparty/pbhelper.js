@@ -463,7 +463,7 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Sync_S2C_QuoteItem) {
             let QuoteItem = pb.QuoteItem;
             let data = QuoteItem.decode(new Uint8Array(buff));
-            console.log('同步实时行情' + JSON.stringify(data));
+            //  console.log('同步实时行情' + JSON.stringify(data));
             GlobalEvent.emit(EventCfg.SYNCQUOTEITEM, data);
         }
         //关注/删除股票应答：无

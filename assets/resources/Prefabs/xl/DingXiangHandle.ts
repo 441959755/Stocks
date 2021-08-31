@@ -197,11 +197,16 @@ export default class NewClass extends cc.Component {
 				la.string = GameData.DXSet.month;
 				if (GameData.DXSet.year == '随机') {
 					la.string = '随机';
+				} else {
+					la.string = '1';
 				}
 			} else if (index == 4) {
 				la.string = GameData.DXSet.day;
 				if (GameData.DXSet.year == '随机') {
 					la.string = '随机';
+				}
+				else {
+					la.string = '1';
 				}
 			} else if (index == 5) {
 				la.string = GameData.DXSet.line;
@@ -515,7 +520,7 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
 				return;
 			}
-
+			console.log('1111');
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			GameCfg.GAMEFUPAN = false;
 			GameCfg.GameType = pb.GameType.DingXiang;
@@ -641,6 +646,7 @@ export default class NewClass extends cc.Component {
 			if (parseInt(seletTime) < parseInt(items[2])) {
 				if (GameData.DXSet.search == '随机选股') {
 					this.DXStartGameSet();
+					return;
 				} else {
 					GlobalEvent.emit(EventCfg.LOADINGHIDE);
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能早与股票创建时间');
@@ -651,6 +657,7 @@ export default class NewClass extends cc.Component {
 				if (parseInt(items[3]) != 0) {
 					if (GameData.DXSet.search == '随机选股') {
 						this.DXStartGameSet();
+						return;
 					} else {
 						GlobalEvent.emit(EventCfg.LOADINGHIDE);
 						GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能大与股票结束时间');

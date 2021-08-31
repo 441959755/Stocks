@@ -23,10 +23,13 @@ cc.Class({
 
 	onLoad() {
 		this.init();
+
 		AudioUtils.getAudioVolume();
 		AudioUtils.loadAudios('audios');
 
 		PopupManager.init();
+
+		GameCfgText.LoadGameConf();
 
 		//游戏配置
 		GameCfgText.getOtherCfg();

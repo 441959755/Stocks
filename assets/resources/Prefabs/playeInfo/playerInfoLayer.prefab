@@ -6130,7 +6130,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        481.054,
+        -93.548,
         0,
         0,
         0,
@@ -6394,7 +6394,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        410,
+        -164.602,
         0,
         0,
         0,
@@ -6494,14 +6494,14 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": 1,
       "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        79.645,
+        489.623,
         0,
         0,
         0,
@@ -6615,7 +6615,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -86.26,
+        146.43,
         0,
         0,
         0,

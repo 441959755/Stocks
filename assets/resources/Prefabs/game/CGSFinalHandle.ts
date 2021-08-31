@@ -170,7 +170,7 @@ export default class NewClass extends cc.Component {
         }
         let CmdGameOver = {
             result: datas,
-            operations: UpGameOpt.arrOpt,
+            operations: { items: UpGameOpt.arrOpt, }
         }
         GlobalHandle.onCmdGameOverReq(CmdGameOver);
 

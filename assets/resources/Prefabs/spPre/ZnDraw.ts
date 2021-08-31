@@ -198,11 +198,7 @@ export default class NewClass extends cc.Component {
         })
 
         this.btnSelect.active = false;
-        setTimeout(() => {
-            //保留绘制宽度
-            this.ori_width = this.t_grap_node.width;
-            this.now_width = this.t_grap_node.width - this.box3.width - 10;
-        }, 100);
+
     }
 
     //不同模式UI样式
@@ -283,7 +279,6 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
 
-
         //同步行情
         GlobalEvent.on(EventCfg.SYNCQUOTEITEM, (data) => {
             if (data.code == this.code) {
@@ -331,74 +326,13 @@ export default class NewClass extends cc.Component {
                 }
 
                 if (this.ktype == pb.KType.Min) {
-                    this.onDraw();
+                    //    this.onDraw();
                     this.setBoxLabel(data);
                     this.setCurLabelData();
                 }
                 this.onShowCgData();
             }
         }, this);
-
-        // //进来获取的第一条行情
-        // GlobalEvent.on(EventCfg.CMDQUOTITEM, (info) => {
-        //     GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        //     if (!info.items || info.items.length <= 0) {
-        //         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空');
-        //         return;
-        //     }
-        //     // {
-        //     //     "code": 600064,
-        //     //     "ktype": "Min",
-        //     //     "timestamp": "1630287720",
-        //     //     "price": 8.59,
-        //     //     "volume": "1889640",
-        //     //     "amount": 16280836,
-        //     //     "open": 8.74,
-        //     //     "close": 8.81,
-        //     //     "high": 8.74,
-        //     //     "low": 8.54
-        //     // }
-        //     console.log('获取的第一条数据：' + JSON.stringify(info));
-        //     if (info.items[0].code == this.code) {
-        //         this.cLabel[2].string = ComUtils.changeTwoDecimal(info.items[0].price) + '';
-        //         let zf = info.items[0].price - info.items[0].close;
-        //         let zfl = (info.items[0].price - info.items[0].close) / info.items[0].close * 100;
-        //         this.cLabel[3].string = ComUtils.changeTwoDecimal(zf) + '    ' + ComUtils.changeTwoDecimal(zfl) + '%';
-
-        //         this.cLabel[4].string = ComUtils.changeTwoDecimal(info.items[0].high) + '';
-        //         this.cLabel[5].string = ComUtils.changeTwoDecimal(info.items[0].open) + '';
-
-        //         let zf1 = (info.items[0].high - info.items[0].low) / info.items[0].close * 100;
-        //         this.cLabel[6].string = ComUtils.changeTwoDecimal(zf1) + '%';
-        //         this.cLabel[7].string = ComUtils.numberConvertUnit(info.items[0].volume / 100) + '手';
-
-        //         this.cLabel[8].string = ComUtils.changeTwoDecimal(info.items[0].low) + '';
-        //         this.cLabel[9].string = ComUtils.changeTwoDecimal(info.items[0].close) + '';
-
-        //         this.cLabel[11].string = ComUtils.numberConvertUnit(info.items[0].amount) + '';
-
-        //         if (zf < 0) {
-        //             this.cLabel[2].node.color = cc.Color.GREEN;
-        //             this.cLabel[3].node.color = cc.Color.GREEN;
-        //         }
-        //         else {
-        //             this.cLabel[2].node.color = cc.Color.RED;
-        //             this.cLabel[3].node.color = cc.Color.RED;
-        //         }
-        //     }
-        // })
-
-        // //获取行情
-        // {
-        //     let info1 = {
-        //         ktype: pb.KType.Min,
-        //         code: this.code,
-        //         to: parseInt((new Date().getTime()) / 1000 + ''),
-        //         total: 1,
-        //     }
-        //     socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
-        //     console.log('info:' + JSON.stringify(info1));
-        // }
 
     }
 
@@ -483,6 +417,12 @@ export default class NewClass extends cc.Component {
 
     //每次打开显示
     onShow(code, str) {
+
+        // setTimeout(() => {
+        //保留绘制宽度
+        this.ori_width = this.t_grap_node.parent.width;
+        this.now_width = this.t_grap_node.parent.width - this.box3.width - 10;
+        // }, 200);
         GameCfg.GAMEFUPAN = true;
         this.addMark.getComponent('AddMark').clearMark();
         this.laNode.active = false;
@@ -499,7 +439,9 @@ export default class NewClass extends cc.Component {
 
         this.initData();
 
-        if (GameCfg.GameType != pb.GameType.MoNiChaoGu || GameCfg.GameType != pb.GameType.ChaoGuDaSai) {
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu || GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+
+        } else {
             //订阅
             this.CmdQuoteSubscribe(true);
         }
@@ -561,7 +503,7 @@ export default class NewClass extends cc.Component {
                         if (el.flag < 0) {
                             GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: i + 1 });
                         }
-                        else if (el.flag > 1) {
+                        else if (el.flag > 0) {
                             GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: i + 1 });
                         }
                     }
@@ -592,10 +534,8 @@ export default class NewClass extends cc.Component {
             label1.string = '近一年收益：' + ComUtils.changeTwoDecimal(num) + '%';
             label2.string = '最近的收益：' + ComUtils.changeTwoDecimal(num1) + '%';
 
-            setTimeout(() => {
-                this.setCurLabelData();
-            }, 100)
 
+            this.setCurLabelData();
 
         });
 
@@ -807,10 +747,13 @@ export default class NewClass extends cc.Component {
         let data = this.gpDataMin[this.gpDataMin.length - 1];
         let preData;
         if (this.gpDataDay[this.gpDataDay.length - 1].timestamp == ComUtils.getCurYearMonthDay()) {
-            preData = this.gpDataDay[this.gpDataDay.length - 2];
+
+        }
+        if (this.gpDataDay[this.gpDataDay.length - 1].timestamp < ComUtils.getCurYearMonthDay()) {
+            preData = this.gpDataDay[this.gpDataDay.length - 1];
         }
         else {
-            preData = this.gpDataDay[this.gpDataDay.length - 1];
+            preData = this.gpDataDay[this.gpDataDay.length - 2];
         }
 
 
@@ -1048,8 +991,10 @@ export default class NewClass extends cc.Component {
         this._timeStamp = null;
         this._volume = 0;
         this._amount = 0;
-        if (GameCfg.GameType != pb.GameType.MoNiChaoGu || GameCfg.GameType != pb.GameType.ChaoGuDaSai) {
-            //订阅
+        //订阅
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu || GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+
+        } else {
             this.CmdQuoteSubscribe(false);
         }
         GlobalEvent.off(EventCfg.SYNCQUOTEITEM);

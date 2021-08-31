@@ -7,6 +7,12 @@ import { pb } from "../protos/proto";
 
 export default class GameCfgText {
 
+    public static url = 'http://test.cgdr168.com/conf/';
+
+    // public static url = 'http://login.cgdr168.com/conf/';
+
+    public static curDayIsLoad = false;  //今天是否下载
+
     public static smxlCfg = null;           //训练次数配置
 
     public static gameTextCfg = null;
@@ -18,6 +24,34 @@ export default class GameCfgText {
     public static pkStockList = null;
 
     public static qihuoList = null;          //期货配置
+
+
+    public static LoadGameConf() {
+        // let str = ComUtils.getCurYearMonthDay();
+        // let flag = cc.sys.localStorage.getItem('LOADCONF' + str);
+        // //加载本地的
+        // if (flag) {
+
+        // }
+        // //去下载
+        // else {
+        // }
+
+        // LoadUtils.load(this.url + 'app.conf', (res) => {
+        //     let conf = JSON.parse(res._nativeAsset);
+        // })
+
+        //配置文件
+        LoadUtils.loadRes('protos/app', (text) => {
+            console.log(JSON.stringify(text));
+            let s = JSON.parse(text._nativeAsset);
+            cc.sys.localStorage.setItem('APPCONF', JSON.stringify(s));
+
+        })
+
+        //属性文件
+        LoadUtils.load
+    }
 
     public static getStocktList() {
         LoadUtils.loadRes('protos/stocklist', (text) => {
@@ -563,6 +597,8 @@ export default class GameCfgText {
         LoadUtils.releaseRes('protos/stocklist');
         LoadUtils.releaseRes('protos/game');
         LoadUtils.releaseRes('protos/contractlist');
+
+
     }
 
 }

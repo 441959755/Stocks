@@ -239,9 +239,11 @@ export default class NewClass extends cc.Component {
         }
 
         else if (GameData.cgState.stage > GameData.CGSSAVELEVEL) {
+            GameData.CGSSAVELEVEL = GameData.cgState.stage
             PopupManager.LoadTipsBox('tipsBox', '闯关成功')
         }
         else if (GameData.cgState.stage < GameData.CGSSAVELEVEL) {
+            GameData.CGSSAVELEVEL = GameData.cgState.stage
             PopupManager.LoadTipsBox('tipsBox', '闯关失败')
         }
 

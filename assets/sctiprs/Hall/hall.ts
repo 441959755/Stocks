@@ -26,6 +26,8 @@ export default class NewClass extends cc.Component {
 
 	rewardCenterNode: cc.Node = null;
 
+	ggLayer: cc.Node = null;  //公告
+
 	@property(cc.Node)
 	rightbg: cc.Node = null;
 
@@ -47,8 +49,12 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(EventCfg.OPENREWARDCENTERLAYER, this.openRewardCenterLayer.bind(this), this);
 
+		//打开公告
+		GlobalEvent.on('OPENGGLAYER', this.openGGlayer.bind(this), this);
 
 	}
+
+
 
 	protected onDestroy() {
 		GlobalEvent.off(EventCfg.onCmdQuoteQuery);
@@ -65,6 +71,12 @@ export default class NewClass extends cc.Component {
 		LoadUtils.releaseRes('Prefabs/RewardCenter/rewardCenter');
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
+	}
+
+	//打开公告
+	openGGlayer() {
+
+
 	}
 
 	/**
@@ -294,6 +306,23 @@ export default class NewClass extends cc.Component {
 				cc.director.loadScene('game');
 			});
 		})
+	}
+
+	openNode(node, url, zIndex, call?) {
+		if (!node) {
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+			LoadUtils.loadRes(url, pre => {
+				GlobalEvent.emit(EventCfg.LOADINGHIDE);
+				node = cc.instantiate(pre);
+				this.node.addChild(node, zIndex);
+				node.active = true;
+				call(node);
+			})
+		}
+		else {
+			node.active = true;
+			call(node);
+		}
 	}
 
 }

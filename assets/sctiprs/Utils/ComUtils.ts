@@ -244,6 +244,13 @@ export default class ComUtils {
 		return (parseInt(num * 100 + '') / 100).toFixed(2);
 	}
 
+	//保留2位小数
+	public static changeTwoDecimal1(num) {
+
+		if (!num) { return 0 };
+		return num.toFixed(2);
+	}
+
 	//加载头像
 	public static onLoadHead(name, call) {
 		let url = LLWConfig.LOADHEADURL + name + '.png';

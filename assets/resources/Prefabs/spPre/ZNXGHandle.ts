@@ -77,12 +77,12 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
-        let data = {
-            //    rankFrom: 1,
-            tsUpdateFrom: parseInt(new Date().getTime() / 1000 + ''),
-            total: 250,
-        }
-        this.getAIStockList(data);
+        // let data = {
+        //     //    rankFrom: 1,
+        //     // tsUpdateFrom: parseInt(new Date().getTime() / 1000 + ''),
+        //     // total: 250,
+        // }
+        this.getAIStockList();
     }
 
     onEnable() {
@@ -124,6 +124,9 @@ export default class NewClass extends cc.Component {
                 }
                 this.getAIProfitList(data);
             }
+            else {
+                this.tipsNode.active = false;
+            }
         }
         //我的收藏
         else if (name == 'toggle3') {
@@ -155,12 +158,12 @@ export default class NewClass extends cc.Component {
     }
 
     //AI买入信号
-    getAIStockList(data) {
+    getAIStockList() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        let CmdQueryAiStockList = pb.CmdQueryAiStockList;
-        let message = CmdQueryAiStockList.create(data);
-        let buff = CmdQueryAiStockList.encode(message).finish();
-        socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
+        // let CmdQueryAiStockList = pb.CmdQueryAiStockList;
+        // let message = CmdQueryAiStockList.create(data);
+        // let buff = CmdQueryAiStockList.encode(message).finish();
+        socket.send(pb.MessageId.Req_QueryAiStockList, null, (res) => {
 
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             this.AIStockList = [];
@@ -169,7 +172,7 @@ export default class NewClass extends cc.Component {
             let time = new Date().getTime() / 1000;
 
             res.items.forEach(el => {
-                if (el.todaySignal < 0 && (time - el.tsUpdated) <= 48 * 60 * 60 && el.industry != '指数') {
+                if (el.todaySignal < 0 && /*(time - el.tsUpdated) <= 48 * 60 * 60 &&*/ el.industry != '指数') {
                     this.AIStockList.push(el);
                 }
             });

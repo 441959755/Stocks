@@ -114,6 +114,7 @@ export default class NewClass extends cc.Component {
             if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
                 let index = GameData.selfStockList.indexOf(this._code);
                 GameData.selfStockList.splice(index, 1);
+
             }
             else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
                 GameData.cgdsStockList.forEach(el => {
@@ -121,11 +122,15 @@ export default class NewClass extends cc.Component {
                         // arr = el.stockList;
                         let index = el.stockList.indexOf(this._code);
                         el.stockList.splice(index, 1);
+
                     }
                 })
             }
-            this.node.active = false;
-            this.node.destroy();
+
+            GlobalEvent.emit(EventCfg.ADDZXGP);
+
+            // this.node.active = false;
+            // this.node.destroy();
         }
     }
 }

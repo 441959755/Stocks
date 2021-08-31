@@ -47,7 +47,7 @@ export default {
     },
 
     sendXHRAB(url, data, handle, err?) {
-        let xhr = new XMLHttpRequest();
+        var xhr = cc.loader.getXMLHttpRequest();
 
         // xhr.overrideMimeType("text/plain; charset=x-user-defined");
         // xhr.responseType = "arraybuffer";

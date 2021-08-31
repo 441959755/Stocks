@@ -69,9 +69,6 @@ Socket.prototype = {
 
 		let decoded = MessageHead.decode(new Uint8Array(handleBuf));
 
-		console.log(decoded);
-
-
 		let info = PB.selectBlackData(decoded.messageId, badBuf);
 
 		var callback = this.queue[decoded.messageId];
@@ -177,6 +174,7 @@ Socket.prototype = {
 			console.log('ws onerror');
 			//  this.ws.close();
 		}
+		console.log('initSocket');
 		this.ws.onclose = this.onclose.bind(this);
 	}
 }

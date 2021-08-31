@@ -24,10 +24,10 @@ export default class NewClass extends cc.Component {
     }
 
     setLabel(info) {
-        if (this._code != info.code) { return };
-        this.labels[2].string = ComUtils.changeTwoDecimal(info.price) + '';
+        if (this._code != info.code || !info.price) { return };
+        this.labels[2].string = ComUtils.changeTwoDecimal1(info.price) + '';
 
-        this.labels[3].string = ComUtils.changeTwoDecimal(this._curData.priceCost) + '';
+        this.labels[3].string = ComUtils.changeTwoDecimal1(this._curData.priceCost) + '';
         this.labels[4].string = this._curData.volume;
 
         let zd = info.price - this._curData.priceCost;
@@ -40,23 +40,23 @@ export default class NewClass extends cc.Component {
             this.labels[6].node.color = cc.Color.RED;
         }
 
-        this.labels[5].string = ComUtils.changeTwoDecimal(zd) + '';
+        this.labels[5].string = ComUtils.changeTwoDecimal1(zd) + '';
         let zdf = zd / this._curData.priceCost * 100;
-        this.labels[6].string = ComUtils.changeTwoDecimal(zdf) + '%';
+        this.labels[6].string = ComUtils.changeTwoDecimal1(zdf) + '%';
 
-        this.labels[7].string = ComUtils.changeTwoDecimal(info.high) + '';
-        this.labels[8].string = ComUtils.changeTwoDecimal(info.low) + '';
+        this.labels[7].string = ComUtils.changeTwoDecimal1(info.high) + '';
+        this.labels[8].string = ComUtils.changeTwoDecimal1(info.low) + '';
         let sy = (info.price - this._curData.priceCost) * this._curData.volume;
         if (sy > 0) {
             this.labels[9].node.color = cc.Color.RED;
         } else {
             this.labels[9].node.color = cc.Color.GREEN;
         }
-        this.labels[9].string = ComUtils.changeTwoDecimal(sy) + '';
+        this.labels[9].string = ComUtils.changeTwoDecimal1(sy) + '';
         //   GlobalEvent.emit(EventCfg.UPDATECCASSET, sy);
     }
 
-    onShow(code, data: any) {
+    onShow(code, data: any, info) {
 
         if (!this._code || this._code != code) {
 
@@ -72,6 +72,10 @@ export default class NewClass extends cc.Component {
                 code = code.slice(1);
             }
             this.labels[0].string = code;
+        }
+
+        if (info) {
+            this.setLabel(info)
         }
     }
 
