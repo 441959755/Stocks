@@ -25,65 +25,48 @@ export default class GameCfgText {
 
     public static qihuoList = null;          //期货配置
 
+    public static appConf = null;            //公告 开关
+
+    public static adConf = null;
 
     public static LoadGameConf() {
-        let str = ComUtils.getCurYearMonthDay();
-        let flag = cc.sys.localStorage.getItem('LOADCONF' + str);
-        //加载本地的
-        if (flag) {
+        // let str = ComUtils.getCurYearMonthDay();
+        // let flag = cc.sys.localStorage.getItem('LOADCONF' + str);
+        // //加载本地的
+        // if (flag) {
 
-        }
-        //去下载
-        else {
+        // }
+        // //去下载
+        // else {
 
-        }
+        // }
         //test 测试
         //配置文件
-        LoadUtils.loadRes('protos/app', (text) => {
-            console.log(JSON.stringify(text));
-            let s = JSON.parse(text._nativeAsset);
-            cc.sys.localStorage.setItem('APPCONF', JSON.stringify(s));
+        LoadUtils.load(this.url + 'app.conf', (text) => {
 
+            this.appConf = JSON.parse(text);
         })
 
         //属性文件
-        LoadUtils.loadRes('protos/game', (text) => {
-            console.log(JSON.stringify(text));
-            let s = JSON.parse(text._nativeAsset);
-            cc.sys.localStorage.setItem('APPCONF', JSON.stringify(s));
+        LoadUtils.load(this.url + 'game.conf', (text) => {
 
+            let nati = JSON.parse(text)
+            this.levelInfoCfg = nati.level_exp;
+            this.smxlCfg = nati.smxl;
+            this.gameTextCfg = nati;
         })
 
         //广告
-        LoadUtils.loadRes('protos/ad', (text) => {
-            console.log(JSON.stringify(text));
-            let s = JSON.parse(text._nativeAsset);
-            cc.sys.localStorage.setItem('APPCONF', JSON.stringify(s));
+        LoadUtils.load(this.url + 'ad.conf', (text) => {
+            this.adConf = JSON.parse(text);
 
         })
 
-        //股票列表
-        LoadUtils.loadRes('protos/stocklist', (text) => {
-            console.log(JSON.stringify(text));
-            let s = JSON.parse(text._nativeAsset);
-            cc.sys.localStorage.setItem('APPCONF', JSON.stringify(s));
-
-        })
-
-        //期货列表
-        LoadUtils.loadRes('protos/contractlist', (text) => {
-            console.log(JSON.stringify(text));
-            let s = JSON.parse(text._nativeAsset);
-            cc.sys.localStorage.setItem('APPCONF', JSON.stringify(s));
-        })
-
-    }
-
-    public static getStocktList() {
-        LoadUtils.loadRes('protos/stocklist', (text) => {
-            this.stockList = text._nativeAsset.split('\n');
+        // //股票列表
+        LoadUtils.load(this.url + 'stocklist.dat', (text) => {
+            this.stockList = text.split('\n');
             // 股票代码|股票名称|第一个行情日期|最后一个行情日期（0为无最后行情，即股票还在上市中）|流通股数（注：请忽略该行）
-            this.pkStockList = text._nativeAsset.split('\n');
+            this.pkStockList = text.split('\n');
             let arr = [];
             for (let i = 0; i < this.stockList.length; i++) {
                 let items = this.stockList[i].split('|');
@@ -111,22 +94,12 @@ export default class GameCfgText {
                 this.stockList = arr;
             }
         })
-    }
 
-    public static getOtherCfg() {
-        LoadUtils.loadRes('protos/game', (text) => {
-            let nati = JSON.parse(text._nativeAsset)
-            this.levelInfoCfg = nati.level_exp;
-            this.smxlCfg = nati.smxl;
-            this.gameTextCfg = nati;
+        // //期货列表
+        LoadUtils.load(this.url + 'contractlist.dat', (text) => {
+            this.qihuoList = text.split('\n');
         })
-    }
 
-    public static getQIHuoList() {
-        // 合约代码|合约中文名称|合约英文名称|合约种类|所在交易所|第一个日K日期（YYYYMMDD）|最后一个日K//日期（YYYYMMDD）|第一个分时时间戳（精确到秒）|最后一个分时时间戳（精确到秒）
-        LoadUtils.loadRes('protos/contractlist', (text) => {
-            this.qihuoList = text._nativeAsset.split('\n');
-        })
     }
 
     /**

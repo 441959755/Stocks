@@ -31,14 +31,6 @@ cc.Class({
 
 		GameCfgText.LoadGameConf();
 
-		//游戏配置
-		GameCfgText.getOtherCfg();
-
-		//股票配置
-		GameCfgText.getStocktList();
-		//期货配置
-		GameCfgText.getQIHuoList();
-
 		LLLog.reConsole();
 
 		cc.macro.ENABLE_MULTI_TOUCH = false;

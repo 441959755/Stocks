@@ -184,6 +184,8 @@ export default class NewClass extends cc.Component {
                 console.log(JSON.stringify(res));
             })
 
+            GameData.gameData.favorList.push(GameCfg.RoomGameData.players[1].uid);
+
             this.ygzNode.active = true;
             this.wgzNode.active = false;
         }

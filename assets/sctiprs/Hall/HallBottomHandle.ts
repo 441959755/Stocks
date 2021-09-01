@@ -15,7 +15,7 @@ export default class NewClass extends cc.Component {
         }
         //好友
         else if (name == 'main_smbt_hy1') {
-
+            GlobalEvent.emit('OPENFRIENDLAYER');
         }
         //反馈
         else if (name == 'main_smbt_fk1') {
@@ -23,7 +23,7 @@ export default class NewClass extends cc.Component {
         }
         //任务
         else if (name == 'main_smbt_rw1') {
-
+            GlobalEvent.emit('OPENTASKLAYER');
         }
         //排行
         else if (name == 'main_smbt_ph1') {

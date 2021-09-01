@@ -28,6 +28,10 @@ export default class NewClass extends cc.Component {
 
 	noticeLayer: cc.Node = null;  //公告
 
+	friendLayer: cc.Node = null;   //好友
+
+	taskLayer: cc.Node = null;  //任务
+
 	@property(cc.Node)
 	rightbg: cc.Node = null;
 
@@ -52,8 +56,14 @@ export default class NewClass extends cc.Component {
 		//打开公告
 		GlobalEvent.on('OPENNOTICELAYER', this.openNoticelayer.bind(this), this);
 
-	}
+		//好友
+		GlobalEvent.on('OPENFRIENDLAYER', this.openFriendLayer.bind(this), this);
 
+		//任务
+		GlobalEvent.on('OPENTASKLAYER', this.openTaskLayer.bind(this), this);
+
+
+	}
 
 
 	protected onDestroy() {
@@ -69,13 +79,25 @@ export default class NewClass extends cc.Component {
 		LoadUtils.releaseRes('Prefabs/helpLayer');
 		LoadUtils.releaseRes('Prefabs/inviteBox');
 		LoadUtils.releaseRes('Prefabs/RewardCenter/rewardCenter');
+		GlobalEvent.off('OPENNOTICELAYER');
+		GlobalEvent.off('OPENFRIENDLAYER');
+		GlobalEvent.off('OPENTASKLAYER');
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
 	}
 
 	//打开公告
 	openNoticelayer() {
-		this.openNode(this.noticeLayer, 'Prefabs/pk/CGSPK', 3, (node) => { this.noticeLayer = node });
+		this.openNode(this.noticeLayer, 'Prefabs/noticeLayer', 10, (node) => { this.noticeLayer = node });
+	}
+
+	//好友
+	openFriendLayer() {
+		this.openNode(this.friendLayer, 'Prefabs/friendLayer', 10, (node) => { this.friendLayer = node });
+	}
+
+	openTaskLayer() {
+		this.openNode(this.taskLayer, 'Prefabs/taskLayer', 10, (node) => { this.taskLayer = node });
 	}
 
 	/**

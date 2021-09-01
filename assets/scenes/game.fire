@@ -198,7 +198,7 @@
       "array": [
         0,
         0,
-        532.9168512069149,
+        531.7395979236453,
         0,
         0,
         0,
@@ -384,7 +384,7 @@
   {
     "__type__": "cc.Node",
     "_name": "top",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 2
     },
@@ -1889,7 +1889,7 @@
   {
     "__type__": "cc.Node",
     "_name": "PKfupan",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 8
     },
@@ -2729,7 +2729,7 @@
   {
     "__type__": "cc.Node",
     "_name": "PKnode",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 8
     },
@@ -3220,7 +3220,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 96,
+      "width": 150,
       "height": 30.24
     },
     "_anchorPoint": {
@@ -3232,7 +3232,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        307.679,
+        326.57,
         16,
         0,
         0,
@@ -3285,7 +3285,7 @@
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
+    "_N$overflow": 2,
     "_N$cacheMode": 0,
     "_id": "5brgSQzbBC7oYv1INdaam+"
   },
@@ -3326,7 +3326,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        307.679,
+        326,
         -16.495,
         0,
         0,
@@ -3376,7 +3376,7 @@
     "_batchAsBitmap": false,
     "_styleFlags": 0,
     "_underlineHeight": 0,
-    "_N$horizontalAlign": 2,
+    "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
@@ -4704,7 +4704,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 96,
+      "width": 150,
       "height": 30.24
     },
     "_anchorPoint": {
@@ -4716,7 +4716,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -308.82,
+        -324.805,
         16,
         0,
         0,
@@ -4766,10 +4766,10 @@
     "_batchAsBitmap": false,
     "_styleFlags": 0,
     "_underlineHeight": 0,
-    "_N$horizontalAlign": 1,
+    "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
+    "_N$overflow": 2,
     "_N$cacheMode": 0,
     "_id": "7fDuPUe6xKtL3OxaZsd639"
   },
@@ -4810,7 +4810,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -309.288,
+        -325.273,
         -16.495,
         0,
         0,
@@ -6049,9 +6049,9 @@
     "_enabled": true,
     "alignMode": 1,
     "_target": null,
-    "_alignFlags": 45,
-    "_left": 200,
-    "_right": 200,
+    "_alignFlags": 5,
+    "_left": 667,
+    "_right": 667,
     "_top": 0,
     "_bottom": 0,
     "_verticalCenter": 0,
