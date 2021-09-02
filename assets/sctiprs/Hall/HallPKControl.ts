@@ -23,8 +23,6 @@ export default class NewClass extends cc.Component {
 
     cgsLvRank: cc.Node = null;
 
-    otherHis: cc.Node = null;
-
     mrtNode: cc.Node = null;
 
     otherPlayerInfo: cc.Node = null; //其他玩家信息
@@ -42,8 +40,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENJRDZ, this.openAddRoomLayer.bind(this), this);
 
         GlobalEvent.on(EventCfg.OPENCGSLVRANK, this.openCgsLvRank.bind(this), this);
-
-        GlobalEvent.on(EventCfg.OPENOTHERPLAYERHISLAYER, this.openOtherHisLayer.bind(this), this);
 
         GlobalEvent.on(EventCfg.OPENMRTLAYER, this.openMrtLayer.bind(this), this);
 
@@ -72,14 +68,6 @@ export default class NewClass extends cc.Component {
             let handle = this.mrtNode.getComponent('MRTHandle');
             handle.MRTData = data;
             handle.initShow();
-        });
-    }
-
-    openOtherHisLayer(data) {
-        this.openNode(this.otherHis, 'Prefabs/otherPlayerHisInfo', 10, (node) => {
-            this.otherHis = node;
-            this.otherHis.getComponent('OtherPlayerHisInfo').playeInfo = data;
-            this.otherHis.getComponent('OtherPlayerHisInfo').onShow();
         });
     }
 
@@ -213,7 +201,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENROOM);
         GlobalEvent.off(EventCfg.OPENJRDZ);
         GlobalEvent.off(EventCfg.OPENCGSLVRANK);
-        GlobalEvent.off(EventCfg.OPENOTHERPLAYERHISLAYER);
+
         GlobalEvent.off(EventCfg.OPENMRTLAYER);
         GlobalEvent.off(EventCfg.RoomGameStatus);
         LoadUtils.releaseRes('Prefabs/pk/matchPK');
@@ -223,7 +211,6 @@ export default class NewClass extends cc.Component {
         LoadUtils.releaseRes('Prefabs/pk/AddRoom');
         LoadUtils.releaseRes('Prefabs/pk/cgsLvRank');
         LoadUtils.releaseRes('Prefabs/pk/MRT');
-        LoadUtils.releaseRes('Prefabs/otherPlayerHisInfo');
     }
 
     openNode(node, url, zIndex, call?) {

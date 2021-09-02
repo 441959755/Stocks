@@ -312,4 +312,36 @@ export default class ComUtils {
 		}
 	}
 
+	public static getChenghaoByFame(fame) {
+		let str;
+		if (fame <= 99) {
+			str = '股市小白';
+		}
+		else if (fame <= 249) {
+			str = '股市新手';
+		}
+		else if (fame <= 499) {
+			str = '股市菜鸡';
+		}
+		else if (fame <= 999) {
+			str = '初级股民';
+		}
+		else if (fame <= 1999) {
+			str = '中级股民';
+		}
+		else if (fame <= 2999) {
+			str = '高级股民';
+		}
+		else if (fame <= 3999) {
+			str = '股市牛人';
+		}
+		else if (fame <= 4999) {
+			str = '股市大神';
+		}
+		else if (fame >= 5000) {
+			str = '股市至尊';
+		}
+		return str;
+	}
+
 }

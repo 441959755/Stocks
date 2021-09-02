@@ -34,19 +34,21 @@ export default class NewClass extends cc.Component {
     recLabel: cc.Label = null;
 
     gameSet1 = null;
+    flag = false;
 
     onHisItemRate(flag) {
         this.recLabel.string = '****';
         flag && (this.recLabel.string = (this.itemData.userProfitRate).toFixed(2) + '%')
+        this.flag = flag;
     }
 
-
     onShow() {
-        this.indexLabel.string = this.itemIndex + '';
+        this.indexLabel.string = (this.itemIndex + 1) + '';
         this.startLabel.string = ComUtils.formatTime(this.itemData.ts);
         this.rankLabel.string = this.itemData.rank;
         // this.recLabel.string = this.itemData.userProfitRate + '%';
         this.recLabel.string = '****';
+        this.flag && (this.recLabel.string = (this.itemData.userProfitRate).toFixed(2) + '%')
         if (this.itemData.gType == pb.GameType.ShuangMang) {
             this.modeLabel.string = '双盲训练';
             this.gameSet1 = GameData.SMSet;
@@ -107,13 +109,13 @@ export default class NewClass extends cc.Component {
             this.modeLabel.string = '大盘竞猜';
         }
 
-        if (GameData.Players[1].icon) {
-            ComUtils.onLoadHead(GameData.Players[1].icon, (res) => {
-                let texture = new cc.SpriteFrame(res);
-                GameData.Players[1].icon = texture;
-            })
-        }
-        GameData.Players[1].icon = null;
+        // if (GameData.Players[1].icon) {
+        //     ComUtils.onLoadHead(GameData.Players[1].icon, (res) => {
+        //         let texture = new cc.SpriteFrame(res);
+        //         GameData.Players[1].icon = texture;
+        //     })
+        // }
+        // GameData.Players[1].icon = null;
     }
 
     onBtnClick(event, data) {
@@ -146,7 +148,6 @@ export default class NewClass extends cc.Component {
                 return;
             }
             //   }
-
             GameCfg.GameType = pb.GameType.DingXiang;
             GameCfg.GameSet = GameData.DXSet;
             GameCfg.GAMEFUPAN = false;

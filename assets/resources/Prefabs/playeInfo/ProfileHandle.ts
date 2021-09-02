@@ -3,6 +3,7 @@ import { pb } from "../../../protos/proto";
 import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
+import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
@@ -96,35 +97,35 @@ export default class NewClass extends cc.Component {
         this.exp.string = GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
         this.progress.progress = GameData.properties[pb.GamePropertyId.Exp] / GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
 
-        let str;
-        if (GameData.properties[pb.GamePropertyId.Fame] <= 99) {
-            str = '股市小白';
-        }
-        else if (GameData.properties[pb.GamePropertyId.Fame] <= 249) {
-            str = '股市新手';
-        }
-        else if (GameData.properties[pb.GamePropertyId.Fame] <= 499) {
-            str = '股市菜鸡';
-        }
-        else if (GameData.properties[pb.GamePropertyId.Fame] <= 999) {
-            str = '初级股民';
-        }
-        else if (GameData.properties[pb.GamePropertyId.Fame] <= 1999) {
-            str = '中级股民';
-        }
-        else if (GameData.properties[pb.GamePropertyId.Fame] <= 2999) {
-            str = '高级股民';
-        }
-        else if (GameData.properties[pb.GamePropertyId.Fame] <= 3999) {
-            str = '股市牛人';
-        }
-        else if (GameData.properties[pb.GamePropertyId.Fame] <= 4999) {
-            str = '股市大神';
-        }
-        else if (GameData.properties[pb.GamePropertyId.Fame] >= 5000) {
-            str = '股市至尊';
-        }
-        this.chenghao.string = str;
+        // let str;
+        // if (GameData.properties[pb.GamePropertyId.Fame] <= 99) {
+        //     str = '股市小白';
+        // }
+        // else if (GameData.properties[pb.GamePropertyId.Fame] <= 249) {
+        //     str = '股市新手';
+        // }
+        // else if (GameData.properties[pb.GamePropertyId.Fame] <= 499) {
+        //     str = '股市菜鸡';
+        // }
+        // else if (GameData.properties[pb.GamePropertyId.Fame] <= 999) {
+        //     str = '初级股民';
+        // }
+        // else if (GameData.properties[pb.GamePropertyId.Fame] <= 1999) {
+        //     str = '中级股民';
+        // }
+        // else if (GameData.properties[pb.GamePropertyId.Fame] <= 2999) {
+        //     str = '高级股民';
+        // }
+        // else if (GameData.properties[pb.GamePropertyId.Fame] <= 3999) {
+        //     str = '股市牛人';
+        // }
+        // else if (GameData.properties[pb.GamePropertyId.Fame] <= 4999) {
+        //     str = '股市大神';
+        // }
+        // else if (GameData.properties[pb.GamePropertyId.Fame] >= 5000) {
+        //     str = '股市至尊';
+        // }
+        this.chenghao.string = ComUtils.getChenghaoByFame(GameData.properties[pb.GamePropertyId.Fame]);
 
         this.swLabel.string = GameData.properties[pb.GamePropertyId.Fame];
     }

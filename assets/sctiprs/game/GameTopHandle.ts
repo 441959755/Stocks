@@ -179,8 +179,8 @@ export default class NewClass extends cc.Component {
                 if (GameData.Players[1].icon) {
                     head.spriteFrame = GameData.Players[1].icon;
                 }
-                if (GameData.Players[1].nickname) {
-                    name.string = '昵称：' + GameData.Players[1].nickname;
+                if (GameData.Players[1].uid || GameData.Players[1].nickname) {
+                    name.string = '昵称：' + (GameData.Players[1].nickname || GameData.Players[1].nick);
                 } else {
                     name.string = '昵称：' + GameCfg.RoomGameData.players[status - 1].gd.nickname;
                 }

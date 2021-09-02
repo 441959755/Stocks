@@ -25,6 +25,7 @@ cc.Class({
 		this.init();
 
 		AudioUtils.getAudioVolume();
+
 		AudioUtils.loadAudios('audios');
 
 		PopupManager.init();

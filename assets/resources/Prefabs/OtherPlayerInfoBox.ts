@@ -1,19 +1,14 @@
-// import { pb } from "../../protos/proto";
-// import GameData from "../GameData";
-// import EventCfg from "../Utils/EventCfg";
-// import GlobalEvent from "../Utils/GlobalEvent";
-// import GameCfg from "./GameCfg";
+
 import { pb } from "../../protos/proto";
 import GameData from "../../sctiprs/GameData";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
-import GameCfg from "../../sctiprs/game/GameCfg";
+import ComUtils from "../../sctiprs/Utils/ComUtils";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
-
 
     @property(cc.Sprite)
     headImg: cc.Sprite = null;
@@ -57,18 +52,20 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     xhNode: cc.Node = null;
 
-    onEnable() {
+    otherInfo = null;
 
-        //this.headImg.spriteFrame = GameCfg.RoomGameData.players[1].gd.icon;
+    onShow(otherInfo) {
+        if (!otherInfo) { return }
+        this.otherInfo = otherInfo;
 
-        if (GameData.Players[1].icon) {
-            this.headImg.spriteFrame = GameData.Players[1].icon;
+        if (otherInfo.icon) {
+            this.headImg.spriteFrame = otherInfo.icon;
         }
-        this.userID.string = 'I    D：' + GameData.Players[1].uid;
+        this.userID.string = 'I    D：' + otherInfo.uid;
 
-        this.userName.string = '昵称：' + GameData.Players[1].nickname;
+        this.userName.string = '昵称：' + (otherInfo.nickname || otherInfo.nick);
 
-        if (GameData.Players[1].gender == 1) {
+        if (otherInfo.gender == 1) {
             this.gender[1].active = true;
             this.gender[0].active = false;
         }
@@ -77,54 +74,24 @@ export default class NewClass extends cc.Component {
             this.gender[0].active = true;
         }
 
-        this.diqu.string = '地区：' + GameData.Players[1].location || '中国';
+        this.diqu.string = '地区：' + otherInfo.location || '中国';
 
-        let ch = GameData.Players[1].properties[pb.GamePropertyId.Fame];
-        let str;
-        if (ch <= 99) {
-            str = '股市小白';
-        }
-        else if (ch <= 249) {
-            str = '股市新手';
-        }
-        else if (ch <= 499) {
-            str = '股市菜鸡';
-        }
-        else if (ch <= 999) {
-            str = '初级股民';
-        }
-        else if (ch <= 1999) {
-            str = '中级股民';
-        }
-        else if (ch <= 2999) {
-            str = '高级股民';
-        }
-        else if (ch <= 3999) {
-            str = '股市牛人';
-        }
-        else if (ch <= 4999) {
-            str = '股市大神';
-        }
-        else if (ch >= 5000) {
-            str = '股市至尊';
-        }
-        this.chenghao.string = str;
+        let ch = otherInfo.properties[pb.GamePropertyId.Fame];
 
-        let vip = GameData.Players[1].properties[pb.GamePropertyId.Vip];
+        this.chenghao.string = ComUtils.getChenghaoByFame(ch);
+
+        let vip = otherInfo.properties[pb.GamePropertyId.Vip];
 
         this.lock.active = !vip;
 
-        this.lv.string = 'L   V：' + GameData.Players[1].properties[pb.GamePropertyId.Level];
+        this.lv.string = 'L   V：' + otherInfo.properties[pb.GamePropertyId.Level];
 
         if (vip) {
-            this.pkDZ.string = 'p k 大战：' + GameData.Players[1].counters[pb.GameType.JJ_PK].win + '胜' + '         ' + GameData.Players[1].counters[pb.GameType.JJ_PK].lose;
+            this.pkDZ.string = 'p k 大战：' + otherInfo.counters[pb.GameType.JJ_PK].win + '胜' + '         ' + otherInfo.counters[pb.GameType.JJ_PK].lose;
 
+            this.dkDZ.string = '多空大战：' + otherInfo.counters[pb.GameType.JJ_DuoKong].win + '胜' + '         ' + otherInfo.counters[pb.GameType.JJ_DuoKong].lose;
 
-            this.dkDZ.string = '多空大战：' + GameData.Players[1].counters[pb.GameType.JJ_DuoKong].win + '胜' + '         ' + GameData.Players[1].counters[pb.GameType.JJ_DuoKong].lose;
-
-
-
-            this.cgDZ.string = '  闯关赛：' + GameData.Players[1].counters[pb.GameType.JJ_ChuangGuan].win + '胜' + '         ' + GameData.Players[1].counters[pb.GameType.JJ_ChuangGuan].lose;
+            this.cgDZ.string = '  闯关赛：' + otherInfo.counters[pb.GameType.JJ_ChuangGuan].win + '胜' + '         ' + otherInfo.counters[pb.GameType.JJ_ChuangGuan].lose;
         }
 
         this.ygzNode.active = false;
@@ -132,11 +99,11 @@ export default class NewClass extends cc.Component {
         this.xhNode.active = false;
 
         let flag = true;
+        let favorList = GameData.gameData.favorList;
+        if (favorList) {
 
-        if (GameData.Players[0] && GameData.Players[0].favorList) {
-            let arr = GameData.Players[0].favorList;
-            arr.forEach(el => {
-                if (el == GameData.Players[1].uid) {
+            favorList.forEach(el => {
+                if (el == otherInfo.uid) {
                     this.ygzNode.active = true;
                     flag = true;
                 }
@@ -148,10 +115,10 @@ export default class NewClass extends cc.Component {
             this.wgzNode.active = true;;
         }
 
-        if (GameData.Players[1].favorList && GameData.Players[0]) {
-            let arr = GameData.Players[1].favorList;
+        if (otherInfo.favorList && favorList) {
+            let arr = otherInfo.favorList;
             arr.forEach(el => {
-                if (el == GameData.Players[0].uid && flag) {
+                if (el == GameData.gameData.uid && flag) {
                     this.xhNode.active = true;
                     this.ygzNode.active = false;
                     this.wgzNode.active = false;
@@ -167,15 +134,17 @@ export default class NewClass extends cc.Component {
             this.node.active = false;
         }
         else if (name == 'phb_grxx_jhy') {
-            if (GameData.Players[1].properties[pb.GamePropertyId.Level] < 10) {
+
+            if (this.otherInfo.properties[pb.GamePropertyId.Level] < 10) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '对方等级不满10级，不能添加到关注列表');
                 return;
             }
 
             let data = {
                 removed: false,
-                uid: GameCfg.RoomGameData.players[1].uid,
+                uid: this.otherInfo.uid,
             }
+
             let CmdEditFavorList = pb.CmdEditFavorList;
             let message = CmdEditFavorList.create(data);
             let buff = CmdEditFavorList.encode(message).finish();
@@ -184,10 +153,33 @@ export default class NewClass extends cc.Component {
                 console.log(JSON.stringify(res));
             })
 
-            GameData.gameData.favorList.push(GameCfg.RoomGameData.players[1].uid);
+            GameData.gameData.favorList.push(this.otherInfo.uid);
 
             this.ygzNode.active = true;
             this.wgzNode.active = false;
+            GlobalEvent.emit('UPDATEFRIENDLIST');
+        }
+
+        else if (name == 'phb_grxx_ygz' || name == 'phb_grxx_hxgz') {
+            let data = {
+                removed: true,
+                uid: this.otherInfo.uid,
+            }
+
+            let CmdEditFavorList = pb.CmdEditFavorList;
+            let message = CmdEditFavorList.create(data);
+            let buff = CmdEditFavorList.encode(message).finish();
+
+            socket.send(pb.MessageId.Req_Hall_EditFavorList, buff, (res) => {
+                console.log(JSON.stringify(res));
+            })
+
+            let index = GameData.gameData.favorList.indexOf(this.otherInfo.uid);
+            GameData.gameData.favorList.splice(index, 1);
+            this.ygzNode.active = false;
+            this.wgzNode.active = true;
+            this.xhNode.active = false;
+            GlobalEvent.emit('UPDATEFRIENDLIST');
         }
 
     }

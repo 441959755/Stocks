@@ -59,7 +59,6 @@ export default class GameCfgText {
         //广告
         LoadUtils.load(this.url + 'ad.conf', (text) => {
             this.adConf = JSON.parse(text);
-
         })
 
         // //股票列表
@@ -593,9 +592,6 @@ export default class GameCfgText {
 
 
     public static releaseRes() {
-        LoadUtils.releaseRes('protos/stocklist');
-        LoadUtils.releaseRes('protos/game');
-        LoadUtils.releaseRes('protos/contractlist');
 
     }
 

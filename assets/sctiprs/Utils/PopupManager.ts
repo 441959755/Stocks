@@ -24,18 +24,20 @@ export default class PopupManager {
 
     }
 
-    public static openOtherPlayerInfoLayer() {
+    public static openOtherPlayerInfoLayer(info) {
         if (!this.otherPlayerInfo) {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes('Prefabs/otherPlayerInfo', pre => {
                 this.otherPlayerInfo = cc.instantiate(pre);
-                cc.find('Canvas').addChild(this.otherPlayerInfo);
+                cc.find('Canvas').addChild(this.otherPlayerInfo, 11);
                 this.otherPlayerInfo.active = true;
                 ActionUtils.openBox(this.otherPlayerInfo);
+                this.otherPlayerInfo.getComponent('OtherPlayerInfoBox').onShow(info);
             })
         }
         else {
             ActionUtils.openBox(this.otherPlayerInfo);
+            this.otherPlayerInfo.getComponent('OtherPlayerInfoBox').onShow(info);
         }
     }
 

@@ -38,13 +38,15 @@ export default class NewClass extends cc.Component {
 
     onShow() {
         GameData.Players[1] = this.playeInfo;
-        if (this.playeInfo.nickname) {
-            this.playerName.string = this.playeInfo.nickname + /*'  历史战绩'*/ +'';
+        if (this.playeInfo.nickname || this.playeInfo.nick) {
+            this.playerName.string = (this.playeInfo.nickname || this.playeInfo.nick) + /*'  历史战绩'*/ +'';
         }
         else {
             this.playerName.string = this.playeInfo.uid /*+ '  历史战绩'*/;
         }
+
         this.tipsNode.active = false;
+
         if (this.HisData.length <= 0) {
             let ts = new Date().getTime() / 1000;
             let data = {
@@ -66,6 +68,7 @@ export default class NewClass extends cc.Component {
 
         socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, info => {
 
+            console.log('其他玩家历史记录：' + JSON.stringify(info));
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
             if (info.results.length == 0) {
@@ -73,6 +76,7 @@ export default class NewClass extends cc.Component {
             }
             else {
                 let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
+                UIScrollControl.clear();
                 UIScrollControl.initControl(this.item, info.results.length, this.item.getContentSize(), 0, (node, index) => {
                     let nodehandle = node.getComponent('OtherPlayerItem');
                     nodehandle.itemData = info.results[index];

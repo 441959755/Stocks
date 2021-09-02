@@ -545,6 +545,14 @@ PBHelper.prototype = {
 
 
         }
+
+        //查询玩家资料应答
+        else if (id == pb.MessageId.Rep_Hall_QueryPlayer) {
+            let PlayerInfo = pb.PlayerInfo;
+            let data = PlayerInfo.decode(new Uint8Array(buff))
+            GlobalEvent.emit('REPPLAYERINFO', data);
+            return data;
+        }
     }
 }
 

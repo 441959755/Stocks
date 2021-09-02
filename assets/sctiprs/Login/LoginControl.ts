@@ -88,6 +88,7 @@ export default class NewClass extends cc.Component {
     loginServer(uid) {
 
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         // 接DSK
         let llwSDK = LLWSDK.getSDK()
         llwSDK.login((decoded) => {

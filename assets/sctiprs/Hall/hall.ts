@@ -32,6 +32,10 @@ export default class NewClass extends cc.Component {
 
 	taskLayer: cc.Node = null;  //任务
 
+	friendInvite: cc.Node = null;  //邀请好友
+
+	otherHis: cc.Node = null;
+
 	@property(cc.Node)
 	rightbg: cc.Node = null;
 
@@ -62,7 +66,10 @@ export default class NewClass extends cc.Component {
 		//任务
 		GlobalEvent.on('OPENTASKLAYER', this.openTaskLayer.bind(this), this);
 
+		//邀请好友
+		GlobalEvent.on('OPENFRIENDINVITE', this.openFriendInvite.bind(this), this);
 
+		GlobalEvent.on(EventCfg.OPENOTHERPLAYERHISLAYER, this.openOtherHisLayer.bind(this), this);
 	}
 
 
@@ -74,16 +81,26 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.INVITEMESSAGE);
 		GlobalEvent.off(EventCfg.CmdQuoteQueryFuture);
 		GlobalEvent.off(EventCfg.OPENREWARDCENTERLAYER);
+		GlobalEvent.off(EventCfg.OPENOTHERPLAYERHISLAYER);
+		GlobalEvent.off('OPENNOTICELAYER');
+		GlobalEvent.off('OPENFRIENDLAYER');
+		GlobalEvent.off('OPENTASKLAYER');
+		GlobalEvent.off('OPENFRIENDINVITE');
 		LoadUtils.releaseRes('Prefabs/broadcast');
 		LoadUtils.releaseRes('Prefabs/playeInfo/playerInfoLayer');
 		LoadUtils.releaseRes('Prefabs/helpLayer');
 		LoadUtils.releaseRes('Prefabs/inviteBox');
 		LoadUtils.releaseRes('Prefabs/RewardCenter/rewardCenter');
-		GlobalEvent.off('OPENNOTICELAYER');
-		GlobalEvent.off('OPENFRIENDLAYER');
-		GlobalEvent.off('OPENTASKLAYER');
+		LoadUtils.releaseRes('Prefabs/otherPlayerHisInfo');
+		LoadUtils.releaseRes('Prefabs/friendLayer');
+		LoadUtils.releaseRes('Prefabs/friendInvite');
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
+	}
+
+
+	openFriendInvite() {
+		this.openNode(this.friendInvite, 'Prefabs/friendInvite', 11, (node) => { this.friendInvite = node });
 	}
 
 	//打开公告
@@ -98,6 +115,14 @@ export default class NewClass extends cc.Component {
 
 	openTaskLayer() {
 		this.openNode(this.taskLayer, 'Prefabs/taskLayer', 10, (node) => { this.taskLayer = node });
+	}
+
+	openOtherHisLayer(data) {
+		this.openNode(this.otherHis, 'Prefabs/otherPlayerHisInfo', 11, (node) => {
+			this.otherHis = node;
+			this.otherHis.getComponent('OtherPlayerHisInfo').playeInfo = data;
+			this.otherHis.getComponent('OtherPlayerHisInfo').onShow();
+		});
 	}
 
 	/**
