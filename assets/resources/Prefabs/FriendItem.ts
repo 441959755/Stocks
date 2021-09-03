@@ -1,4 +1,5 @@
 import { pb } from "../../protos/proto";
+import GameData from "../../sctiprs/GameData";
 import ComUtils from "../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
@@ -25,14 +26,29 @@ export default class NewClass extends cc.Component {
     title: cc.Label = null;
 
     playerInfo = null;
-    headImg = null;
 
-    onShow(info, head) {
+    uid = null;
+
+    onLoad() {
+        GlobalEvent.on('REPPLAYERINFO', (info) => {
+            if (info.uid == this.uid) {
+                console.log('玩家资料应答' + JSON.stringify(info));
+                this.onShow(info);
+            }
+
+        }, this);
+    }
+
+    onDisable() {
+        GlobalEvent.off('REPPLAYERINFO');
+    }
+
+    onShow(info) {
         this.playerInfo = info;
-        this.headImg = head;
+        //  this.headImg = head;
         this.userLevel.string = info.properties[pb.GamePropertyId.Level];
         this.userName.string = info.nick;
-        this.head.spriteFrame = head;
+        // this.head.spriteFrame = head;
         this.title.string = ComUtils.getChenghaoByFame(info.properties[pb.GamePropertyId.Fame]);
 
         if (info.gender) {
@@ -40,13 +56,28 @@ export default class NewClass extends cc.Component {
         } else {
             this.sex.children[0].active = true;
         }
+
+        this.loadHeadImg(info);
+    }
+
+    //加载图片
+    loadHeadImg(obj) {
+        if (GameData.imgs[obj.icon + '']) {
+            this.head.spriteFrame = GameData.imgs[obj.icon + '']
+        }
+        else {
+            ComUtils.onLoadHead(obj.icon, (texture) => {
+                GameData.imgs[obj.icon + ''] = new cc.SpriteFrame(texture);
+                this.head.spriteFrame = GameData.imgs[obj.icon + '']
+            })
+        }
     }
 
     onBtnClick(event, data) {
         let name = event.target.name;
 
         if (name == 'item1' || name == 'item2') {
-            this.playerInfo.icon = this.headImg;
+            this.playerInfo.icon = GameData.imgs[this.playerInfo.uid + ''];
             //打开信息面板
             PopupManager.openOtherPlayerInfoLayer(this.playerInfo);
 
@@ -54,7 +85,7 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'phb_bt_tiaozhanta') {
 
-            this.playerInfo.icon = this.headImg;
+            this.playerInfo.icon = GameData.imgs[this.playerInfo.uid + ''];
             //打开历史记录
             GlobalEvent.emit(EventCfg.OPENOTHERPLAYERHISLAYER, this.playerInfo);
         }

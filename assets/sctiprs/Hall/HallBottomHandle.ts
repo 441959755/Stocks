@@ -26,7 +26,7 @@ export default class NewClass extends cc.Component {
         }
         //排行
         else if (name == 'main_smbt_ph1') {
-
+            GlobalEvent.emit('OPENRANKINGLIST');
         }
         //商城
         else if (name == 'main_smbt_sc1') {

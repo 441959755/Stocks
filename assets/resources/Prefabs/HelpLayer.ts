@@ -26,6 +26,18 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     CGDSNode: cc.Node = null;
 
+    @property(cc.Node)
+    wwzb: cc.Node = null;  //威望总榜
+
+    @property(cc.Node)
+    djph: cc.Node = null;  //等级排行
+
+    @property(cc.Node)
+    wwzb1: cc.Node = null;  //威望周榜
+
+    @property(cc.Node)
+    sjb: cc.Node = null;  //赛季榜
+
     onEnable() {
 
         this.SMNode.active = false;
@@ -48,15 +60,34 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.ZBNode.active = true
         }
+
         else if (GameCfg.GameType == 'ZNXG') {
             this.ZNXG.active = true;
         }
+
         else if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
             this.MNXGNode.active = true;
         }
         else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
             this.CGDSNode.active = true;
         }
+
+        else if (GameCfg.GameType == 'wwzb') {
+            this.wwzb.active = true;
+        }
+
+        else if (GameCfg.GameType == 'djph') {
+            this.djph.active = true;
+        }
+
+        else if (GameCfg.GameType == 'wwzb1') {
+            this.wwzb1.active = true;
+        }
+
+        else if (GameCfg.GameType == 'sjb') {
+            this.sjb.active = true;
+        }
+
 
     }
 

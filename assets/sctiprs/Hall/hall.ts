@@ -34,6 +34,8 @@ export default class NewClass extends cc.Component {
 
 	friendInvite: cc.Node = null;  //邀请好友
 
+	rankingList: cc.Node = null;  //排行榜
+
 	otherHis: cc.Node = null;
 
 	@property(cc.Node)
@@ -70,6 +72,9 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on('OPENFRIENDINVITE', this.openFriendInvite.bind(this), this);
 
 		GlobalEvent.on(EventCfg.OPENOTHERPLAYERHISLAYER, this.openOtherHisLayer.bind(this), this);
+
+		//打开排行榜
+		GlobalEvent.on('OPENRANKINGLIST', this.openRankingList.bind(this), this);
 	}
 
 
@@ -86,6 +91,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off('OPENFRIENDLAYER');
 		GlobalEvent.off('OPENTASKLAYER');
 		GlobalEvent.off('OPENFRIENDINVITE');
+		GlobalEvent.off('OPENRANKINGLIST');
 		LoadUtils.releaseRes('Prefabs/broadcast');
 		LoadUtils.releaseRes('Prefabs/playeInfo/playerInfoLayer');
 		LoadUtils.releaseRes('Prefabs/helpLayer');
@@ -96,6 +102,10 @@ export default class NewClass extends cc.Component {
 		LoadUtils.releaseRes('Prefabs/friendInvite');
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
+	}
+
+	openRankingList() {
+		this.openNode(this.rankingList, 'Prefabs/rankingList', 11, (node) => { this.rankingList = node });
 	}
 
 
@@ -176,7 +186,7 @@ export default class NewClass extends cc.Component {
 			LoadUtils.loadRes('Prefabs/helpLayer', pre => {
 				GlobalEvent.emit(EventCfg.LOADINGHIDE);
 				this.helpLayer = cc.instantiate(pre);
-				this.node.addChild(this.helpLayer);
+				this.node.addChild(this.helpLayer, 30);
 				this.helpLayer.active = true;
 			})
 		}

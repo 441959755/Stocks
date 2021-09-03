@@ -5,6 +5,8 @@ export default class GameData {
 
     public static gameData = null;
 
+    public static imgs: any = {};
+
     //Id
     private static _userID = null;
 

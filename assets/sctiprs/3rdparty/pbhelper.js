@@ -542,8 +542,16 @@ PBHelper.prototype = {
             let data = TaskItem.decode(new Uint8Array(buff));
 
             console.log('同步任务进度及奖励' + data);
+            GameData.game.tasks.daily[data.taskId] = data;
 
+            GlobalEvent.emit('UPDATETASKDATA');
 
+        }
+        //领取日常任务奖励应答
+        else if (id == pb.MessageId.Rep_Hall_GetDailyTaskAward) {
+            let ErrorInfo = pb.ErrorInfo;
+            let data = ErrorInfo.decode(new Uint8Array(buff));
+            return data;
         }
 
         //查询玩家资料应答
@@ -551,6 +559,20 @@ PBHelper.prototype = {
             let PlayerInfo = pb.PlayerInfo;
             let data = PlayerInfo.decode(new Uint8Array(buff))
             GlobalEvent.emit('REPPLAYERINFO', data);
+            return data;
+        }
+        // 查询等级排行应答：RankingList
+        //查询威望排行应答：RankingList
+        // 查询威望周排行应答：RankingList
+        // 获取炒股大赛排行榜应答
+        // 查询闯关赛排行榜应答
+        else if (id == pb.MessageId.Rep_Hall_GetFameRanking
+            || id == pb.MessageId.Rep_Hall_GetFameRankingWeekly
+            || id == pb.MessageId.Rep_Hall_GetLevelRanking
+            || id == pb.MessageId.Rep_Game_CgsGetSeasonRank
+            || id == pb.MessageId.Rep_Game_CgdsRanking) {
+            let RankingList = pb.RankingList;
+            let data = RankingList.decode(new Uint8Array(buff));
             return data;
         }
     }

@@ -76,6 +76,7 @@ export default class NewClass extends cc.Component {
 
         this.diqu.string = '地区：' + otherInfo.location || '中国';
 
+        //  if (otherInfo.properties) {
         let ch = otherInfo.properties[pb.GamePropertyId.Fame];
 
         this.chenghao.string = ComUtils.getChenghaoByFame(ch);
@@ -85,6 +86,9 @@ export default class NewClass extends cc.Component {
         this.lock.active = !vip;
 
         this.lv.string = 'L   V：' + otherInfo.properties[pb.GamePropertyId.Level];
+        // }
+
+
 
         if (vip) {
             this.pkDZ.string = 'p k 大战：' + otherInfo.counters[pb.GameType.JJ_PK].win + '胜' + '         ' + otherInfo.counters[pb.GameType.JJ_PK].lose;

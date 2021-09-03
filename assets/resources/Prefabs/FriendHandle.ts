@@ -30,28 +30,13 @@ export default class NewClass extends cc.Component {
 
     fansList = []  //粉丝列表
 
-    playerInfo: any = {};
-
-    playerHead: any = {};
-
     friendFind: cc.Node = null;
 
     onLoad() {
-        GlobalEvent.on('REPPLAYERINFO', (info) => {
-            console.log('玩家资料应答' + JSON.stringify(info));
-            this.playerInfo[info.uid + ''] = info;
-
-            if (info.uid) {
-                this.onLoadHead(info);
-            }
-
-        }, this);
-
         GlobalEvent.on('UPDATEFRIENDLIST', this.onShow.bind(this), this);
     }
 
     onDestroy() {
-        GlobalEvent.off('REPPLAYERINFO');
         GlobalEvent.off('UPDATEFRIENDLIST');
     }
 
@@ -60,13 +45,10 @@ export default class NewClass extends cc.Component {
     }
 
     onShow() {
-        this.playerInfo = {};
-        this.playerHead = {};
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.concernList = GameData.gameData.favorList || [];
 
-        this.queryPlayerInfo(this.concernList);
-        this.queryPlayerInfo(this.fansList);
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
+        this.concernList = GameData.gameData.favorList || [];
 
         this.toggles[0].isChecked = true;
         this.toggles[1].isChecked = false;
@@ -77,27 +59,13 @@ export default class NewClass extends cc.Component {
             this.tipstext.active = true;
         }
 
-        setTimeout(() => {
-            let arr = [], arr1 = [];
-            for (let el in this.playerInfo) {
-                if (el && this.playerInfo[el].uid) {
-                    this.onLoadHead(this.playerInfo[el]);
-                    arr.push(this.playerInfo[el]);
-                }
-            }
-            this.createItem(arr, this.scollNode[0], this.item1);
-            //  this.createItem(this.fansList, this.scollNode[1], this.item2);
-        }, 500);
+        this.createItem(this.concernList, this.scollNode[0], this.item1);
+
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
+        this.queryPlayerInfo(this.concernList);
     }
 
-
-    onLoadHead(res) {
-        ComUtils.onLoadHead(res.icon, (te) => {
-            let texture = new cc.SpriteFrame(te);
-            this.playerHead[res.uid + ''] = texture;
-        })
-    }
 
     queryPlayerInfo(arr) {
         if (arr.length <= 0) { return }
@@ -120,11 +88,8 @@ export default class NewClass extends cc.Component {
         UIScrollControl.clear();
 
         UIScrollControl.initControl(item, arr.length, item.getContentSize(), 0, (node, index) => {
-            // if (this.playerInfo[arr[index]]) {
             let handle = node.getComponent('FriendItem');
-            handle.onShow(arr[index], this.playerHead[arr[index].uid]);
-            // }
-
+            handle.uid = arr[index];
         })
     }
 

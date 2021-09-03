@@ -1,7 +1,8 @@
 import { pb } from "../../protos/proto";
-import PlatDefine from "../../sctiprs/common/config/PlatDefine";
+
 import GameData from "../../sctiprs/GameData";
 import GameCfgText from "../../sctiprs/GameText";
+import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
 
@@ -18,7 +19,15 @@ export default class NewClass extends cc.Component {
 
     taskDaily = null;
 
-    start() {
+    onLoad() {
+        GlobalEvent.on('UPDATETASKDATA', this.onShow.bind(this), this);
+    }
+
+    onDestroy() {
+        GlobalEvent.off('UPDATETASKDATA');
+    }
+
+    onShow() {
         this.taskConf = GameCfgText.gameTextCfg.task;
         console.log('任务配置：' + JSON.stringify(this.taskConf));
 
@@ -41,17 +50,21 @@ export default class NewClass extends cc.Component {
                     taskId = pb.TaskId.Ggjc;
                 }
 
-                let e = this.taskConf[el][this.taskDaily[taskId] || 0]
+                let e = this.taskConf[el];
 
                 let node = cc.instantiate(this.item);
+
                 this.scoll.content.addChild(node);
-                node.getComponent('TaskItem').onShow(e, this.taskDaily[taskId]);
+
+                node.getComponent('TaskItem').onShow(e, this.taskDaily[taskId], taskId);
 
             }
         }
 
+    }
 
-
+    start() {
+        this.onShow();
     }
 
     onBtnClick(event, curdata) {
