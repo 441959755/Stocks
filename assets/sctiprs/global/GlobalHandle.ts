@@ -13,6 +13,7 @@ export default class GlobalHandle {
 
     //游戏开始发送游戏类型
     public static onCmdGameStartReq(cb?) {
+
         let info = {
             game: GameCfg.GameType,
         }
@@ -301,6 +302,7 @@ export default class GlobalHandle {
 
         socket.send(pb.MessageId.Req_Game_GetGameOperation, PB.onCmdGetGameOperations(data), (info) => {
             console.log(JSON.stringify(info));
+
             if (!info.err) {
                 if (info && info.items) {
 
@@ -308,10 +310,7 @@ export default class GlobalHandle {
 
                     if (cb) {
                         cb();
-                    } else {
-                        GlobalEvent.emit(EventCfg.HISTORYOPTDATA);
                     }
-
                 }
             }
         })

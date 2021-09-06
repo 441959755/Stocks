@@ -7,6 +7,8 @@ export default {
 	OPENQHLAYER: 'OPENQHLAYER',//slqh
 
 	OPENDXLAYER: 'OPENDXLAYER', //打开训练定向界面
+
+	OPENTIAOJIANDAN: 'OPENTIAOJIANDAN',//条件单
 	//pk
 	OPENMATCHPK: 'OPENMATCHPK',    //pk匹配
 

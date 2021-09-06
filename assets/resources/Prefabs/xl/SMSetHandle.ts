@@ -1,6 +1,8 @@
 
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import GameData from '../../../sctiprs/GameData';
+import GameCfg from "../../../sctiprs/game/GameCfg";
+import { pb } from "../../../protos/proto";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -54,7 +56,15 @@ export default class NewClass extends cc.Component {
 
     //默认的选项
     initToggle() {
-        let data = GameData.SMSet;
+        let data;
+
+        if (GameCfg.GameType == pb.GameType.ShuangMang) {
+            data = GameData.SMSet;
+        }
+        else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+            data = GameData.TJDSet;
+        }
+
         this.showVol[0].isChecked = data.isShowVol;
         this.showVol[1].isChecked = !data.isShowVol;
         this.BW[0].isChecked = data.isBW;
@@ -76,7 +86,15 @@ export default class NewClass extends cc.Component {
 
     //保存设置的数据
     SaveToggle() {
-        let data = GameData.SMSet;
+        let data;
+
+        if (GameCfg.GameType == pb.GameType.ShuangMang) {
+            data = GameData.SMSet;
+        }
+        else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+            data = GameData.TJDSet;
+        }
+
         data.isShowVol = this.showVol[0].isChecked ? true : false;
         data.isBW = this.BW[0].isChecked ? true : false;
 
@@ -95,7 +113,14 @@ export default class NewClass extends cc.Component {
         data.MA5Date = parseInt(this.MaDates[4].string);
         data.MA6Date = parseInt(this.MaDates[5].string);
 
-        GameData.SMSet = data;
+        if (GameCfg.GameType == pb.GameType.ShuangMang) {
+            GameData.SMSet = data;
+        }
+
+        else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+            GameData.TJDSet = data;
+        }
+
     }
 
     onBtnClick(event, data) {

@@ -31,9 +31,10 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         GlobalEvent.on('REPPLAYERINFO', (info) => {
+
             if (info.uid == this.uid) {
                 console.log('玩家资料应答' + JSON.stringify(info));
-                this.onShow(info);
+                this.init(info);
             }
 
         }, this);
@@ -43,7 +44,9 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('REPPLAYERINFO');
     }
 
-    onShow(info) {
+    init(info) {
+        console.log('node' + this.node);
+        this.node.active = true;
         this.playerInfo = info;
         //  this.headImg = head;
         this.userLevel.string = info.properties[pb.GamePropertyId.Level];
@@ -56,8 +59,28 @@ export default class NewClass extends cc.Component {
         } else {
             this.sex.children[0].active = true;
         }
-
         this.loadHeadImg(info);
+    }
+
+    onShow(code) {
+        this.uid = code;
+        this.loadPlayerInfo(code);
+    }
+
+    loadPlayerInfo(code) {
+
+        if (GameData.playersInfo[code + '']) {
+            this.init(GameData.playersInfo[code + '']);
+            return;
+        }
+
+        let info = {
+            uid: code,
+        }
+        let playerInfo = pb.PlayerInfo;
+        let buff = playerInfo.encode(info).finish();
+        socket.send(pb.MessageId.Req_Hall_QueryPlayer, buff);
+
     }
 
     //加载图片

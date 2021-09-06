@@ -28,9 +28,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Button)
     mrxdBtn: cc.Button = null;
 
-    @property(cc.Node)
-    btnSelecet: cc.Node = null;
-
     curData = null;
 
     kyzc = null;
@@ -42,7 +39,6 @@ export default class NewClass extends cc.Component {
     onShow(data) {
 
         if (!data) {
-            this.btnSelecet.active = true;
             this.priceLabel.string = '0';
         }
         else {

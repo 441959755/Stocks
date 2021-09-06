@@ -75,6 +75,8 @@ export default class NewClass extends cc.Component {
 
 		//打开排行榜
 		GlobalEvent.on('OPENRANKINGLIST', this.openRankingList.bind(this), this);
+
+
 	}
 
 
@@ -103,6 +105,8 @@ export default class NewClass extends cc.Component {
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
 	}
+
+
 
 	openRankingList() {
 		this.openNode(this.rankingList, 'Prefabs/rankingList', 11, (node) => { this.rankingList = node });
@@ -348,7 +352,6 @@ export default class NewClass extends cc.Component {
 			GlobalHandle.onCmdGameStartQuoteQuery(info1, () => {
 				cc.director.loadScene('game');
 			})
-
 		});
 	}
 

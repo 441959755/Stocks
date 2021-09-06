@@ -1,4 +1,5 @@
 
+import GameData from "../../../sctiprs/GameData";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -42,8 +43,9 @@ export default class NewClass extends cc.Component {
 
         let countLabel = this.node.getChildByName('label').getComponent(cc.Label);
 
-        if (!this.el.icon || this.el.icon == 'default_icon' || this.el.icon == 'default.jpg') {
 
+        if (GameData.imgs[this.el.icon + '']) {
+            head.spriteFrame = GameData.imgs[this.el.icon + ''];
         }
         else {
             ComUtils.onLoadHead(this.el.icon, (res) => {

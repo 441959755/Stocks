@@ -249,19 +249,22 @@ export default class NewClass extends cc.Component {
 
         GameCfg.MAs = [];
         let j = 0;
+
         //双盲 定向   
         if (GameCfg.GameType == pb.GameType.ShuangMang ||
             GameCfg.GameType == pb.GameType.DingXiang ||
             GameCfg.GameType == pb.GameType.QiHuo ||
             GameCfg.GameType == pb.GameType.JJ_PK ||
             GameCfg.GameType == pb.GameType.JJ_DuoKong ||
-            GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+            GameCfg.GameType == pb.GameType.JJ_ChuangGuan ||
+            GameCfg.GameType == pb.GameType.TiaoJianDan) {
             for (let i = 1; i <= 6; i++) {
                 if (GameCfg.GameSet['isMA' + i]) {
                     GameCfg.MAs[j++] = parseInt(GameCfg.GameSet['MA' + i + 'Date']);
                 }
             }
         }
+
         //指标
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             if (GameCfg.GameSet.select == '均线') {
@@ -361,6 +364,7 @@ export default class NewClass extends cc.Component {
                     this.CGSFinalLayer.getComponent('CGSFinalHandle').onShow();
                 }
                 else {
+                    //
                     if (GameCfg.JJ_XUNLIAN) {
                         this.LxFinalLayer.active = true;
                         this.LxFinalLayer.getComponent('LXFinalandle').onShow();

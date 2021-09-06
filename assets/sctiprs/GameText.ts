@@ -319,7 +319,7 @@ export default class GameCfgText {
 
         let start = items[2], end = items[3], sc;
         if (end == 0) {
-            sc = new Date().getTime() - 24 * 60 * 60 * 1000 * 300;
+            sc = new Date().getTime() - 24 * 60 * 60 * 1000 * data.total;
         } else {
             let year = end.slice(0, 4);
             let month = end.slice(4, 6);

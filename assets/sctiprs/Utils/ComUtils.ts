@@ -253,7 +253,9 @@ export default class ComUtils {
 
 	//加载头像
 	public static onLoadHead(name, call) {
+
 		let url = LLWConfig.LOADHEADURL + name + '.png';
+
 		LoadUtils.load(url, (res) => {
 			call && call(res);
 		})

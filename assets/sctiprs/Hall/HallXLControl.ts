@@ -41,6 +41,9 @@ export default class NewClass extends cc.Component {
 
     smResetNode: cc.Node = null;  //sm重置
 
+    TJDNode: cc.Node = null;
+
+    TJDHisNode: cc.Node = null;
     onLoad() {
         GlobalEvent.on(EventCfg.OPENSMLAYER, this.openSMLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZBLAYER, this.openZBLayer.bind(this), this);
@@ -51,6 +54,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENMONTHLAYER, this.openMonthLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENYIELDLAYER, this.openYieldLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENSMRESETMONEYLAYER, this.openSmResetLayer.bind(this), this);
+        GlobalEvent.on(EventCfg.OPENTIAOJIANDAN, this.openTiaoJianDan.bind(this), this);
     }
 
     onDestroy() {
@@ -64,6 +68,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENYIELDLAYER);
         GlobalEvent.off(EventCfg.OPENHELPLAYER);
         GlobalEvent.off(EventCfg.OPENSMRESETMONEYLAYER);
+        GlobalEvent.off(EventCfg.OPENTIAOJIANDAN);
         LoadUtils.releaseRes('Prefabs/xl/ZBSetLayer');
         LoadUtils.releaseRes('Prefabs/xl/SMSetLayer');
         LoadUtils.releaseRes('Prefabs/xl/DXSetLayer');
@@ -79,6 +84,14 @@ export default class NewClass extends cc.Component {
         LoadUtils.releaseRes('Prefabs/xl/SMMonthlyLayer');
         LoadUtils.releaseRes('Prefabs/xl/SMResetLayer');
         LoadUtils.releaseRes('Prefabs/xl/SMYieldCurve');
+        LoadUtils.releaseRes('Prefabs/xl/tiaoJianDan');
+    }
+
+    /*
+    *打开条件单
+    */
+    openTiaoJianDan() {
+        this.openNode(this.TJDNode, 'Prefabs/xl/tiaoJianDan', 10, (node) => { this.TJDNode = node });
     }
 
     /**
@@ -127,6 +140,11 @@ export default class NewClass extends cc.Component {
                     this.QHHisNode = node;
                 });
                 break;
+            case pb.GameType.TiaoJianDan:
+                this.openNode(this.TJDHisNode, 'Prefabs/xl/TJDHistoryLayer', 11, (node) => {
+                    this.TJDHisNode = node;
+                });
+                break;
         }
     }
 
@@ -139,6 +157,8 @@ export default class NewClass extends cc.Component {
                 this.openNode(this.ZBSetNode, 'Prefabs/xl/ZBSetLayer', 10, (node) => { this.ZBSetNode = node });
                 break;
             case pb.GameType.ShuangMang:
+
+            case pb.GameType.TiaoJianDan:
                 this.openNode(this.SMSetNode, 'Prefabs/xl/SMSetLayer', 10, (node) => { this.SMSetNode = node });
                 break;
             case pb.GameType.DingXiang:
@@ -194,7 +214,5 @@ export default class NewClass extends cc.Component {
             node.active = true;
         }
     }
-
-
 
 }

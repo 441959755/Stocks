@@ -389,7 +389,6 @@ export default class NewClass extends cc.Component {
                             GlobalEvent.emit(EventCfg.GAMEOVEER);
                         })
                     }
-
                 }
             } else {
                 if (GameCfg.GameType == pb.GameType.JJ_PK ||

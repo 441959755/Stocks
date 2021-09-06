@@ -38,6 +38,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     sjb: cc.Node = null;  //赛季榜
 
+    @property(cc.Node)
+    tjd: cc.Node = null;  //条件单
+
     onEnable() {
 
         this.SMNode.active = false;
@@ -47,6 +50,7 @@ export default class NewClass extends cc.Component {
         this.ZNXG.active = false;
         this.MNXGNode.active = false;
         this.CGDSNode.active = false;
+        this.tjd.active = false;
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             this.SMNode.active = true;
@@ -68,6 +72,7 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
             this.MNXGNode.active = true;
         }
+
         else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
             this.CGDSNode.active = true;
         }
@@ -88,6 +93,9 @@ export default class NewClass extends cc.Component {
             this.sjb.active = true;
         }
 
+        else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+            this.tjd.active = true;
+        }
 
     }
 

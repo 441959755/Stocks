@@ -40,7 +40,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('UPDATEFRIENDLIST');
     }
 
-    onEnable() {
+    start() {
         this.onShow();
     }
 
@@ -63,23 +63,8 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
-        this.queryPlayerInfo(this.concernList);
     }
 
-
-    queryPlayerInfo(arr) {
-        if (arr.length <= 0) { return }
-        arr.forEach(el => {
-            let info = {
-                uid: el,
-            }
-
-            let playerInfo = pb.PlayerInfo;
-
-            let buff = playerInfo.encode(info).finish();
-            socket.send(pb.MessageId.Req_Hall_QueryPlayer, buff)
-        })
-    }
 
     createItem(arr, scoll, item) {
         if (arr.length <= 0) { return }
@@ -89,7 +74,7 @@ export default class NewClass extends cc.Component {
 
         UIScrollControl.initControl(item, arr.length, item.getContentSize(), 0, (node, index) => {
             let handle = node.getComponent('FriendItem');
-            handle.uid = arr[index];
+            handle.onShow(arr[index]);
         })
     }
 

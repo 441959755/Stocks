@@ -5,7 +5,9 @@ export default class GameData {
 
     public static gameData = null;
 
-    public static imgs: any = {};
+    public static imgs: any = {};  //本地缓存的图片
+
+    public static playersInfo: any = {};   //本地缓存玩家信息
 
     //Id
     private static _userID = null;
@@ -172,6 +174,18 @@ export default class GameData {
         this._DXSet = val;
         cc.sys.localStorage.setItem('DXSET', JSON.stringify(val));
     }
+
+    private static _TJDSet;
+
+    public static get TJDSet() {
+        return this._TJDSet;
+    }
+
+    public static set TJDSet(val) {
+        this._TJDSet = val;
+        cc.sys.localStorage.setItem('TJDSET', JSON.stringify(val));
+    }
+
 
     private static _properties = [];
     //// 金币

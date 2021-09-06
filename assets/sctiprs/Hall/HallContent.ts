@@ -126,27 +126,36 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.OPENSMLAYER);
 			GameCfg.GameType = pb.GameType.ShuangMang;
 		}
+
 		//指标
 		else if (name == 'main_xl_zbxl') {
 			GlobalEvent.emit(EventCfg.OPENZBLAYER);
 			GameCfg.GameType = pb.GameType.ZhiBiao;
 		}
+
 		//定向
 		else if (name == 'main_xl_dxxl') {
 			GlobalEvent.emit(EventCfg.OPENDXLAYER);
 			GameCfg.GameType = pb.GameType.DingXiang;
 		}
+
 		//期货
 		else if (name == 'main_xl_qhxl') {
 			GlobalEvent.emit(EventCfg.OPENQHLAYER);
 			GameCfg.GameType = pb.GameType.QiHuo;
 		}
+
 		//分时
 		else if (name == 'main_xl_fsxl') {
+
 		}
+
 		//条件
 		else if (name == 'main_xl_tjdxl') {
+			GameCfg.GameType = pb.GameType.TiaoJianDan;
+			GlobalEvent.emit(EventCfg.OPENTIAOJIANDAN);
 		}
+
 		//打开个人中心
 		else if (name == 'userinfobg') {
 			GlobalEvent.emit(EventCfg.OPENPLAYERINFO);
@@ -175,6 +184,7 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
 			}
 		}
+
 		//打开闯关赛
 		else if (name == 'main_jj_cgs') {
 
@@ -203,6 +213,7 @@ export default class NewClass extends cc.Component {
 		else if (name == 'main_sp_znxg') {
 			GlobalEvent.emit(EventCfg.OPENZNXG);
 		}
+
 		//模拟炒股
 		else if (name == 'main_sp_mncg') {
 			GlobalEvent.emit(EventCfg.OPENMNXG);

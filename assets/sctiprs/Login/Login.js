@@ -240,11 +240,44 @@ cc.Class({
 					day: '随机',
 					KLine: 120,
 					ZLine: '日线',
+
 				}
 				GameData.QHSet = QHSet;
 			} else {
 				GameData.QHSet = JSON.parse(QHSet);
 			}
+		}
+
+		//条件单
+		{
+			let TJDSet = cc.sys.localStorage.getItem('TJDSET');
+			if (!TJDSet) {
+				TJDSet = {
+					isShowVol: true,
+					isBW: true,
+					isMA1: true,
+					MA1Date: 5,
+					isMA2: true,
+					MA2Date: 10,
+					isMA3: true,
+					MA3Date: 20,
+					isMA4: true,
+					MA4Date: 30,
+					isMA5: true,
+					MA5Date: 60,
+					isMA6: true,
+					MA6Date: 120,
+					isFC: true,
+					KLine: 150,
+					ZLine: '日线',
+					KSpeed: 0.2,
+					line: 'K线',
+				}
+				GameData.TJDSet = TJDSet;
+			} else {
+				GameData.TJDSet = JSON.parse(TJDSet);
+			}
+
 		}
 
 		//选择的股票信息

@@ -200,6 +200,8 @@ export default class NewClass extends cc.Component {
 				}
 			}
 		} else {
+			this.tipsLabel1.node.active = false;
+			this.tipsLabel2.node.active = false;
 			this.curState = 0;
 		}
 	}

@@ -7,8 +7,6 @@ import GameCfgText from '../../../sctiprs/GameText';
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import GameData from "../../../sctiprs/GameData";
 
-let preNodes = []
-
 const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
@@ -60,60 +58,7 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        GlobalEvent.on(EventCfg.HISTORYOPTDATA, () => {
-
-            let nodes = preNodes;
-
-            let ts = nodes[8].getComponent(cc.Label).string;
-            let data = {
-                code: nodes[2].getComponent(cc.Label).string,
-            }
-
-            let dex = -1, items;
-            if (GameCfg.GameType == pb.GameType.QiHuo) {
-                items = GameCfgText.getQHItemInfo(data.code);
-            } else {
-                items = GameCfgText.getGPItemInfo(data.code);
-            }
-
-            data.code = items[0];
-            GameCfg.data[0].data = [];
-            GameCfg.data[0].name = items[1];
-            GameCfg.data[0].code = items[0];
-            GameCfg.data[0].circulate = items[4];
-            GameCfg.GAMEFUPAN = true;
-
-            GameCfg.allRate = 0;
-            GameCfg.huizhidatas = parseInt(nodes[10].getComponent(cc.Label).string) + 1;
-            GameData.huizhidatas = parseInt(nodes[9].getComponent(cc.Label).string) + 1;
-
-            let cache = cc.sys.localStorage.getItem(ts + 'cache');
-            if (!cache) {
-                console.log('没有保存此记录');
-                return;
-            }
-            GameCfg.GameSet = JSON.parse(cc.sys.localStorage.getItem(ts + 'set'));
-
-            console.log(JSON.parse(cache));
-            GameCfg.enterGameCache = JSON.parse(cache);
-            GameCfg.historyType = GameCfg.GameType;
-            if (GameCfg.GameType == pb.GameType.QiHuo) {
-                GlobalHandle.onCmdGameStartQuoteQueryQH(GameCfg.enterGameCache, () => {
-                    cc.director.loadScene('game');
-                });
-            } else {
-                GlobalHandle.onCmdGameStartQuoteQuery(GameCfg.enterGameCache, () => {
-                    cc.director.loadScene('game');
-                })
-            }
-
-        }, this);
     }
-
-    onDisable() {
-        GlobalEvent.off(EventCfg.HISTORYOPTDATA);
-    }
-
 
     onShow() {
         this.content.removeAllChildren();
@@ -142,14 +87,17 @@ export default class NewClass extends cc.Component {
 
         let arr = [];
         datas.forEach(el => {
-            if ((TIMETEMP.indexOf(el.ts) != -1) && (el.gType == GameCfg.GameType)) {
+
+            let cache = cc.sys.localStorage.getItem(el.ts + 'cache');
+
+            if ((TIMETEMP.indexOf(el.ts) != -1) && (el.gType == GameCfg.GameType) && (cache)) {
                 arr.push(el);
             }
         });
 
         let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
         UIScrollControl.initControl(this.historyItem, arr.length, this.historyItem.getContentSize(), 0, (node, index) => {
-
+            node.getComponent('HistoryItem').onshow(arr[index]);
             let nodes = node.children;
             //   this.content.addChild(node);
             nodes[0].getComponent(cc.Label).string = (index + 1) + '';
@@ -258,23 +206,6 @@ export default class NewClass extends cc.Component {
         if (name == 'blackbtn') {
             this.node.active = false;
             GameCfg.historyType = null;
-        }
-        //点击复盘
-        else if (name == 'btnFuPan') {
-            let nodes = event.target.parent.children;
-            preNodes = nodes;
-            let ts = parseInt(nodes[8].getComponent(cc.Label).string);
-
-            if (GameCfg.TIMETEMP.length <= 0) {
-                console.log('数据没保存');
-                return;
-            }
-            console.log(JSON.stringify(GameCfg.TIMETEMP));
-            let info = {
-                uid: GameData.userID,
-                ts: ts,
-            }
-            GlobalHandle.GetGameOperations(info);
         }
 
         //清空记录
