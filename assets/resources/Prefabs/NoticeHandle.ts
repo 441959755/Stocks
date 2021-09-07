@@ -26,8 +26,7 @@ export default class NewClass extends cc.Component {
     onEnable() {
 
         if (GameCfgText.appConf) {
-            console.log('游戏公告：' + GameCfgText.appConf.maintain);
-
+            // console.log('游戏公告：' + GameCfgText.appConf.maintain);
             if (LLWConfig.PLATTYPE == PlatDefine.PLAT_IOS) {
                 this.notice = GameCfgText.appConf.maintain.noticeIos;
             }
@@ -51,7 +50,6 @@ export default class NewClass extends cc.Component {
         this.time.string = this.notice.publishtime;
 
     }
-
 
 
     onBtnClick(event, curData) {

@@ -51,6 +51,10 @@ export default class NewClass extends cc.Component {
         this.MNXGNode.active = false;
         this.CGDSNode.active = false;
         this.tjd.active = false;
+        this.wwzb.active = false;
+        this.wwzb1.active = false;
+        this.djph.active = false;
+        this.sjb.active = false;
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             this.SMNode.active = true;

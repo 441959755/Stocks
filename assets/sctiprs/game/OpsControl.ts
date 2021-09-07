@@ -12,21 +12,37 @@ export default class NewClass extends cc.Component {
 
     opsControl: cc.Node = null;
     url = null;
-
+    url1 = null;
     taiticBox: cc.Node = null;
+
+    finalLayer: cc.Node = null;
 
     onLoad() {
         this.onLoadOpsControl();
 
         GlobalEvent.on('OPENTAITICBOX', this.openTaiticBox.bind(this), this);
+        GlobalEvent.on('OPENFINALLAYER', this.openFinalLayer.bind(this), this);
 
     }
 
-    //打开策略设置
-    openTaiticBox(type) {
+    //打开结算页
+    openFinalLayer() {
+        if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+            this.url = 'Prefabs/game/TjdFinalLayer';
+        }
+
+        LoadUtils.openNode(this.node, this.finalLayer, this.url, 20, (node) => {
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            this.finalLayer = node;
+            this.finalLayer.active = true;
+        })
+    }
+
+    //打开策略设置  、买入、卖出、止损
+    openTaiticBox(type, zhichan, call, obj) {
         this.openNode(this.taiticBox, 'Prefabs/game/taiticBox', 10, (node) => {
             this.taiticBox = node;
-            node.getComponent('TaiticBox').onShow(type);
+            node.getComponent('TaiticBox').onShow(type, zhichan, call, obj);
         });
     }
 
@@ -52,12 +68,12 @@ export default class NewClass extends cc.Component {
                 node = cc.instantiate(pre);
                 this.node.addChild(node, zIndex);
                 node.active = true;
-                call(node);
+                call && (call(node))
             })
         }
         else {
             node.active = true;
-            call(node);
+            call && (call(node));
         }
     }
 

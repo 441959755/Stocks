@@ -29,6 +29,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     playerName: cc.Label = null;
 
+    @property(cc.Toggle)
+    toggle: cc.Toggle = null;
+
     onToggleClick(event) {
         this.content.children.forEach(el => {
             let handle = el.getComponent('OtherPlayerItem');
@@ -75,11 +78,18 @@ export default class NewClass extends cc.Component {
                 this.tipsNode.active = true;
             }
             else {
+                let arr = [];
+                info.results.forEach(el => {
+                    if (el.gType == pb.GameType.JJ_PK || el.gType == pb.GameType.JJ_DuoKong) {
+                        arr.push(el);
+                    }
+                });
+
                 let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
                 UIScrollControl.clear();
-                UIScrollControl.initControl(this.item, info.results.length, this.item.getContentSize(), 0, (node, index) => {
+                UIScrollControl.initControl(this.item, arr.length, this.item.getContentSize(), 0, (node, index) => {
                     let nodehandle = node.getComponent('OtherPlayerItem');
-                    nodehandle.itemData = info.results[index];
+                    nodehandle.itemData = arr[index];
                     nodehandle.itemIndex = index;
                     nodehandle.onShow();
                 })
@@ -92,5 +102,9 @@ export default class NewClass extends cc.Component {
         if (name == 'closeBtn') {
             this.node.active = false;
         }
+    }
+
+    onDisable() {
+        this.toggle.isChecked = false;
     }
 }

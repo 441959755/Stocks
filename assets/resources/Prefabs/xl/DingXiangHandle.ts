@@ -106,6 +106,7 @@ export default class NewClass extends cc.Component {
 							}
 							let node = cc.instantiate(this.item);
 							this.content.addChild(node);
+							node.setPosition(0, 0);
 							node.getComponent(cc.Label).string = str + '  ' + arr[1];
 						}
 

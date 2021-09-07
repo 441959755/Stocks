@@ -109,7 +109,7 @@ export default class NewClass extends cc.Component {
 
 
 	openRankingList() {
-		this.openNode(this.rankingList, 'Prefabs/rankingList', 11, (node) => { this.rankingList = node });
+		this.openNode(this.rankingList, 'Prefabs/rankingList', 10, (node) => { this.rankingList = node });
 	}
 
 
@@ -132,7 +132,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	openOtherHisLayer(data) {
-		this.openNode(this.otherHis, 'Prefabs/otherPlayerHisInfo', 11, (node) => {
+		this.openNode(this.otherHis, 'Prefabs/otherPlayerHisInfo', 12, (node) => {
 			this.otherHis = node;
 			this.otherHis.getComponent('OtherPlayerHisInfo').playeInfo = data;
 			this.otherHis.getComponent('OtherPlayerHisInfo').onShow();

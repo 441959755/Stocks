@@ -541,8 +541,8 @@ PBHelper.prototype = {
             let TaskItem = pb.TaskItem;
             let data = TaskItem.decode(new Uint8Array(buff));
 
-            console.log('同步任务进度及奖励' + data);
-            GameData.game.tasks.daily[data.taskId] = data;
+            console.log('同步任务进度及奖励' + JSON.stringify(data));
+            GameData.gameData.tasks.daily[data.taskId] = data;
 
             GlobalEvent.emit('UPDATETASKDATA');
 

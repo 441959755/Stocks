@@ -190,10 +190,10 @@ export default class NewClass extends cc.Component {
                 GameCfg.GameType = 'wwzb';
             }
             else if (dt == 2) {
-                GameCfg.GameType == 'djph';
+                GameCfg.GameType = 'djph';
             }
             else if (dt == 3) {
-                GameCfg.GameType == 'wwzb1';
+                GameCfg.GameType = 'wwzb1';
             }
             else if (dt == 4) {
                 GameCfg.GameType = 'sjb';

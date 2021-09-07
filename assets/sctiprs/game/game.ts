@@ -29,9 +29,8 @@ export default class NewClass extends cc.Component {
     startGameNode: cc.Node = null;
 
     finalLayer: cc.Node = null;  //结算界面
-    CGSFinalLayer: cc.Node = null;
-    pkFinalLayer: cc.Node = null;
-    LxFinalLayer: cc.Node = null;
+
+    url = null;
 
     onLoad() {
         PopupManager.init();
@@ -59,47 +58,37 @@ export default class NewClass extends cc.Component {
     //加载结算页
     onLoadFinalLayer() {
 
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         if (GameCfg.GameType == pb.GameType.ShuangMang ||
             GameCfg.GameType == pb.GameType.ZhiBiao ||
             GameCfg.GameType == pb.GameType.DingXiang ||
             GameCfg.GameType == pb.GameType.QiHuo ||
-            GameCfg.GameType == pb.GameType.TiaoJianDan ||
             GameCfg.GameType == pb.GameType.FenShi) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.openNode(this.node, this.finalLayer, 'Prefabs/game/finalLayer', 20, (node) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.finalLayer = node;
-                this.finalLayer.active = false;
-            })
+            this.url = 'Prefabs/game/finalLayer';
+        }
+
+        else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+            this.url = 'Prefabs/game/TjdFinalLayer';
         }
 
         else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.openNode(this.node, this.CGSFinalLayer, 'Prefabs/game/CGSFinalLayer', 20, (node) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.CGSFinalLayer = node;
-                this.CGSFinalLayer.active = false;
-            })
+            this.url = 'Prefabs/game/CGSFinalLayer';
         }
 
         else if (GameCfg.GameType == pb.GameType.JJ_DuoKong ||
             GameCfg.GameType == pb.GameType.JJ_PK) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.openNode(this.node, this.pkFinalLayer, 'Prefabs/game/PKFinalLayer', 20, (node) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.pkFinalLayer = node;
-                this.pkFinalLayer.active = false;
-            })
+            this.url = 'Prefabs/game/PKFinalLayer';
         }
 
         else if (GameCfg.JJ_XUNLIAN) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.openNode(this.node, this.LxFinalLayer, 'Prefabs/game/lxFinalLayer', 20, (node) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.LxFinalLayer = node;
-                this.LxFinalLayer.active = false;
-            })
+            this.url = 'Prefabs/game/lxFinalLayer';
+
         }
+        LoadUtils.openNode(this.node, this.finalLayer, this.url, 20, (node) => {
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            this.finalLayer = node;
+            this.finalLayer.active = false;
+        })
     }
 
 
@@ -128,14 +117,11 @@ export default class NewClass extends cc.Component {
 
         GameData.CGSConfData = null;
         UpGameOpt.clearGameOpt();
-        this.pkFinalLayer = null;
+
         this.finalLayer = null;
-        this.CGSFinalLayer = null;
-        this.LxFinalLayer = null;
-        LoadUtils.releaseRes('Prefabs/game/PKFinalLayer');
-        LoadUtils.releaseRes('Prefabs/game/lxFinalLayer');
-        LoadUtils.releaseRes('Prefabs/game/CGSFinalLayer');
-        LoadUtils.releaseRes('Prefabs/game/finalLayer');
+
+        LoadUtils.releaseRes(this.url);
+
     }
 
     setColor() {
@@ -350,27 +336,31 @@ export default class NewClass extends cc.Component {
 
     GameOver(message) {
 
+        this.finalLayer.active = true;
+
         if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-            this.pkFinalLayer.active = true;
+
             if (message) {
-                let handle = this.pkFinalLayer.getComponent('PKFinalHandle');
+                let handle = this.finalLayer.getComponent('PKFinalHandle');
                 handle.onShow();
             }
         }
+
         else {
             setTimeout(() => {
+
                 if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
-                    this.CGSFinalLayer.active = true;
-                    this.CGSFinalLayer.getComponent('CGSFinalHandle').onShow();
+
+                    this.finalLayer.getComponent('CGSFinalHandle').onShow();
                 }
                 else {
-                    //
+
                     if (GameCfg.JJ_XUNLIAN) {
-                        this.LxFinalLayer.active = true;
-                        this.LxFinalLayer.getComponent('LXFinalandle').onShow();
+
+                        this.finalLayer.getComponent('LXFinalandle').onShow();
                     }
                     else {
-                        this.finalLayer.active = true;
+
                         this.finalLayer.getComponent('FinalHandle').onShow();
                     }
                 }

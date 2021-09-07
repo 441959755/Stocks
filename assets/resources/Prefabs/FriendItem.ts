@@ -68,7 +68,6 @@ export default class NewClass extends cc.Component {
     }
 
     loadPlayerInfo(code) {
-
         if (GameData.playersInfo[code + '']) {
             this.init(GameData.playersInfo[code + '']);
             return;
@@ -80,7 +79,6 @@ export default class NewClass extends cc.Component {
         let playerInfo = pb.PlayerInfo;
         let buff = playerInfo.encode(info).finish();
         socket.send(pb.MessageId.Req_Hall_QueryPlayer, buff);
-
     }
 
     //加载图片

@@ -211,9 +211,11 @@ export default class NewClass extends cc.Component {
 
     //收藏
     getCollectList() {
+
         if (GameData.AIStockList.length == 0) {
             return;
         }
+
         this.collectList = JSON.parse(JSON.stringify(GameData.AIStockList));
 
         let info = {
@@ -228,13 +230,16 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
 
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
             console.log('查询AI选股的股票列表' + JSON.stringify(res));
+
             let UIScrollControl = this.scrollview2.getComponent('UIScrollControl');
             UIScrollControl.clear();
+
             UIScrollControl.initControl(this.preItem2, res.items.length, this.preItem2.getContentSize(), 0, (node, index) => {
+
                 let handle = node.getComponent('ZnxgItem2');
                 handle.onShow(res.items[index], index + 1);
+
             })
         })
         this.tipsNode.active = false;
