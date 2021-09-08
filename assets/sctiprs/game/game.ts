@@ -53,6 +53,8 @@ export default class NewClass extends cc.Component {
 
         this.setColor();
 
+        cc.director.preloadScene('hall');
+
     }
 
     //加载结算页

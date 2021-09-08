@@ -1,5 +1,6 @@
 import { pb } from "../../protos/proto";
 import GameCfg from "../../sctiprs/game/GameCfg";
+import StrategyAIData from "../../sctiprs/game/StrategyAIData";
 import GameData from "../../sctiprs/GameData";
 import EnterGameControl from "../../sctiprs/global/EnterGameControl";
 import ComUtils from "../../sctiprs/Utils/ComUtils";
@@ -18,7 +19,7 @@ export default class NewClass extends cc.Component {
     codename: cc.Label = null;
 
     code = null;
-    from = null;
+    gpList = null;
     name = null;
 
     onEnable() {
@@ -37,13 +38,13 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    onShow(code, name, from) {
+    onShow(code, name, list) {
         this.code = code + '';
 
         if (this.code.length >= 7) {
             code = this.code.slice(1);
         }
-        this.from = from;
+        this.gpList = list;
         this.xlname.string = '前往定向训练场训练该股票';
         this.codename.string = code + '     ' + name;
         this.name = name;
@@ -64,8 +65,11 @@ export default class NewClass extends cc.Component {
             }
             let data;
             if (GameCfg.GameType == pb.GameType.JJ_PK ||
+
                 GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+
                 GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+
                 data = {
                     ktype: pb.KType.Day,
                     kstyle: pb.KStyle.Random,
@@ -75,33 +79,83 @@ export default class NewClass extends cc.Component {
                     to: 0,
                 }
 
+                GameCfg.enterGameCache = data;
+
+                GameCfg.GameType = pb.GameType.DingXiang;
+
+                GameCfg.GameSet = GameData.DXSet;
+
+                GameCfg.GameSet.year = (data.from + '').slice(0, 4);
+
+                GameCfg.GameSet.search = data.code;
+
+                GameCfg.data[0].name = this.name;
+
+                GameCfg.data[0].code = this.code;
+
+                EnterGameControl.onClearPreGameDataEnter(data);
             }
+
             else {
+                GameCfg.GameType = pb.GameType.DingXiang;
+
+                GameCfg.GameSet = GameData.DXSet;
+
+                GameCfg.data[0].name = this.name;
+
+                GameCfg.data[0].code = this.code;
+
+                this.gpList.forEach((el, index) => {
+
+                    let data = {
+                        day: el.timestamp + '',
+                        open: el.open || 0,
+                        close: el.price || 0,
+                        high: el.high || 0,
+                        low: el.low || 0,
+                        price: el.amount || 0,
+                        value: el.volume || 0,
+                        Rate: (el.volume / GameCfg.data[0].circulate) * 100,
+                    }
+                    if (GameCfg.data[0].circulate == 0) {
+                        data.Rate = 1;
+                    }
+                    GameCfg.data[0].data.push(data);
+                })
+
                 data = {
                     ktype: pb.KType.Day,
                     kstyle: pb.KStyle.Random,
-                    from: this.from,
+                    from: this.gpList[0].timestamp,
                     code: this.code,
-                    total: 150 + 1,
+                    total: 150,
                     to: 0,
                 }
 
+                if (this.gpList.length > 100) {
+                    GameCfg.huizhidatas = this.gpList.length - 100;
+                    GameData.huizhidatas = this.gpList.length - 100;
+                }
+                else {
+                    GameCfg.huizhidatas = parseInt(this.gpList.length / 2 + '');
+                    GameData.huizhidatas = parseInt(this.gpList.length / 2 + '');
+                }
+
+
+                GameCfg.enterGameCache = data;
+
+                GameCfg.allRate = 0;
+                GameCfg.finalfund = 0;
+                GameCfg.fill = [];
+                GameCfg.blockHistoy = [];
+                GameCfg.mark = [];
+                GameCfg.notice = [];
+                GameCfg.history.allRate = 0;
+                StrategyAIData.onClearData();
+                cc.director.loadScene('game');
+
             }
-            GameCfg.enterGameCache = data;
 
-            GameCfg.GameType = pb.GameType.DingXiang;
-
-            GameCfg.GameSet = GameData.DXSet;
-
-            GameCfg.GameSet.year = (data.from + '').slice(0, 4);
-
-            GameCfg.GameSet.search = data.code;
-
-            GameCfg.data[0].name = this.name;
-
-            GameCfg.data[0].code = this.code;
-
-            EnterGameControl.onClearPreGameDataEnter(data);
         }
     }
 

@@ -5364,8 +5364,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "资金曲线",
-    "_N$string": "资金曲线",
+    "_string": "收益曲线",
+    "_N$string": "收益曲线",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,

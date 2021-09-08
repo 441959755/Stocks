@@ -62,8 +62,13 @@ export default class NewClass extends cc.Component {
 		//设置用户头像
 		this.setHeadImg();
 
-		if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis) {
+		if (!GameCfg.JJ_XUNLIAN && (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis)) {
 			this.onBtnClick({ target: { name: 'main_jj_cgs' } }, null);
+		}
+
+		//
+		if (GameCfg.JJ_XUNLIAN) {
+			GameCfg.JJ_XUNLIAN = false;
 		}
 	}
 

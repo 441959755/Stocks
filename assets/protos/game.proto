@@ -294,7 +294,6 @@ message GameProperties {
 	repeated GamePropertyItem items = 1;
 }
 
-
 // 游戏操作步骤
 message GameOperationItem {
 	GameOperationId op_id = 1;	// 操作Id

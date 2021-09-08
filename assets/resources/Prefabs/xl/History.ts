@@ -4,7 +4,6 @@ import EventCfg from '../../../sctiprs/Utils/EventCfg';
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import { pb } from '../../../protos/proto';
 import GameCfgText from '../../../sctiprs/GameText';
-import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import GameData from "../../../sctiprs/GameData";
 
 const { ccclass, property } = cc._decorator;
@@ -56,13 +55,8 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    onEnable() {
-        GlobalEvent.emit(EventCfg.LOADINGHIDE);
-    }
-
     onShow() {
         this.content.removeAllChildren();
-        GlobalEvent.emit(EventCfg.LOADINGHIDE);
         //   if (this.historyType == 'SM') {
         let datas = this.historyInfo.results;
         // console.log(JSON.stringify(datas));
@@ -97,7 +91,7 @@ export default class NewClass extends cc.Component {
 
         let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
         UIScrollControl.initControl(this.historyItem, arr.length, this.historyItem.getContentSize(), 0, (node, index) => {
-            node.getComponent('HistoryItem').onshow(arr[index]);
+            node.getComponent('HistoryItem').onShow(arr[index]);
             let nodes = node.children;
             //   this.content.addChild(node);
             nodes[0].getComponent(cc.Label).string = (index + 1) + '';
@@ -234,7 +228,6 @@ export default class NewClass extends cc.Component {
 
                             arr.splice(arr.indexOf(datas[i].ts), 1);
                         }
-
                     }
                 }
                 cc.sys.localStorage.removeItem('TIMETEMP');

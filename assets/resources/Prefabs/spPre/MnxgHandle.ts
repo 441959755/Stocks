@@ -400,7 +400,9 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
             GameData.cgdsStateList.forEach(el => {
                 if (el.id == GameData.SpStockData.id) {
-                    data = el.state;
+                    if (el.state) {
+                        data = el.state;
+                    }
                 }
             })
         }
@@ -412,7 +414,6 @@ export default class NewClass extends cc.Component {
                 if (el.state == pb.OrderState.Init) {
                     wt += el.volume * el.price;
                 }
-
             });
             this.wtzcLa.string = parseInt(wt + '') + '';
         }
@@ -519,7 +520,7 @@ export default class NewClass extends cc.Component {
             else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
                 GameData.cgdsStateList.forEach(el => {
                     if (el.id == GameData.SpStockData.id) {
-                        if (el.state.positionList && el.state.positionList.items) {
+                        if (el.state && el.state.positionList && el.state.positionList.items) {
                             arr = el.state.positionList.items;
                         }
                     }

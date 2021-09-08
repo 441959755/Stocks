@@ -1,7 +1,6 @@
 
 import GlobalEvent from '../../../sctiprs/Utils/GlobalEvent';
 import EventCfg from '../../../sctiprs/Utils/EventCfg';
-
 import DrawUtils from '../../../sctiprs/Utils/DrawUtils';
 import GameData from '../../../sctiprs/GameData';
 import GameCfg from '../../../sctiprs/game/GameCfg';
@@ -113,7 +112,6 @@ export default class NewClass extends cc.Component {
 
         }, this);
 
-
         this.monthBg.on('touchcancel', (event) => {
             //   this.tipsNode.active = false;
             this.Horizontal1.active = false;
@@ -126,13 +124,13 @@ export default class NewClass extends cc.Component {
             this.cb = setTimeout(() => {
                 this.tipsNode.active = false;
             }, 1500);
-
         }, this);
 
     }
 
     start() {
         if (!this.yieldInfo) {
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             let data = new Date();
             data.setDate(1);
@@ -146,6 +144,7 @@ export default class NewClass extends cc.Component {
                 to: parseInt(new Date().getTime() / 1000 + ''),
                 pageSize: 200,
             }
+
             let CmdQueryGameResult = pb.CmdQueryGameResult;
             let message = CmdQueryGameResult.create(inf)
             let buff = CmdQueryGameResult.encode(message).finish();
@@ -213,13 +212,12 @@ export default class NewClass extends cc.Component {
     }
 
     protected onEnable() {
+        GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
         this.Horizontal1.active = false;
         this.vertical1.active = false;
         this.tipsNode.active = false;
         this.tipsNode.zIndex = 99;
-
-        GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        //    ActionUtils.openLayer(this.node);
 
         this.typeToggle[0].node.children[1].active = true;
         this.typeToggle[1].node.children[1].active = false;
@@ -244,8 +242,6 @@ export default class NewClass extends cc.Component {
 
         //  this.labels[0].string = datas[datas.length - 1].userCapital;
 
-
-
         let zongjinge = 0, zonglilv = 0;
 
         let xlCount = [], xlcvs = [];    //月的训练次数 收益曲线
@@ -269,23 +265,20 @@ export default class NewClass extends cc.Component {
             }
 
 
-            if (xlcvs[day1]) {
-                xlcvs[day1] += datas[i].userProfit;
-            } else {
-                if (!datas[i].userProfit) {
-                    xlcvs[day1] = xlcvs[day1 - 1];
-                } else {
-                    xlcvs[day1] = (datas[i].userProfit + datas[i].userCapital);
-                }
+            // if (xlcvs[day1]) {
+            xlcvs[day1] += datas[i].userProfit;
+            // } else {
+            //     if (!datas[i].userProfit) {
+            //         xlcvs[day1] = xlcvs[day1 - 1];
+            //     } else {
+            //         xlcvs[day1] = (datas[i].userProfit + datas[i].userCapital);
+            //     }
 
-                if (!this.userCapital) {
-                    this.userCapital = datas[i].userCapital;
-                }
-            }
+            // if (!this.userCapital) {
+            //     this.userCapital = datas[i].userCapital;
+            // }
+            //  }
 
-            //时间、次数、初始资金、最终资金、收益
-            // for (let t = 1; t <= day; t++) {
-            //     if (day1 == t) {
             if (this.daysData[day1 - 1]) {
                 this.daysData[day1 - 1].count++;
                 this.daysData[day1 - 1].endMoney += datas[i].userProfit;
@@ -330,7 +323,7 @@ export default class NewClass extends cc.Component {
 
         this.draw_line_day();
 
-        this.labels[1].string = datas[0].userCapital;
+        this.labels[1].string = GameData.SmxlState.gold_init;
         this.labels[3].string = zongjinge + '';
         if (zongjinge < 0) {
             this.labels[3].node.color = cc.Color.GREEN;
@@ -344,6 +337,7 @@ export default class NewClass extends cc.Component {
     }
 
     draw_line_month(xlCount, xlcvs) {
+        // console.log(JSON.stringify(xlcvs));
         this.doty = [];
         if (xlCount.length <= 0) { return };
         let date = new Date();
@@ -480,8 +474,6 @@ export default class NewClass extends cc.Component {
                 el.string = 50000 + maxValue / 5 * index + '';
             })
         }
-
-
 
 
         let w = this.draw.node.width / 25;

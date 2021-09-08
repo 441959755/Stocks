@@ -64,7 +64,6 @@ export default class EnterGameControl {
             GameCfg.mark = [];
             GameCfg.notice = [];
             GameCfg.history.allRate = 0;
-            GlobalEvent.emit(EventCfg.LEVELCHANGE);
             StrategyAIData.onClearData();
             cc.director.loadScene('game');
         }

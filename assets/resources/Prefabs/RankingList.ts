@@ -152,6 +152,7 @@ export default class NewClass extends cc.Component {
             }
         });
 
+
         if (!this.curSwitch) {
             this.toggles[3].node.active = false;
         }
@@ -160,6 +161,11 @@ export default class NewClass extends cc.Component {
         }
         // 0表示关闭，1表示打开炒股大赛排行，2表示打开闯关排行
         if (this.curSwitch == 2) {
+
+            if (!GameData.gameData.cgState) {
+                this.toggles[3].node.active = false;
+            }
+
             // 查询当前一轮闯关赛配置数据
             socket.send(pb.MessageId.Req_Game_CgsGetConf, null, (res) => {
                 console.log('闯关赛配置1' + JSON.stringify(res));

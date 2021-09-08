@@ -162,10 +162,15 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'btn_tz') {
+
             GameCfg.JJ_XUNLIAN = true;
+
             GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
+
             GameCfg.GameSet = GameData.JJPKSet;
+
             GameCfg.GAMEFUPAN = false;
+
             GameCfg.huizhidatas = this.itemData.kStartup;
             GameData.huizhidatas = this.itemData.kStartup;
             GameCfg.GameSet.year = (this.itemData.kFrom + '').slice(0, 4);
@@ -174,13 +179,15 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPANDATA = this.itemData;
 
             let ts = this.itemData.ts;
+
             let info = {
                 uid: GameData.Players[1].uid,
                 ts: ts,
             }
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GlobalHandle.GetGameOperations(info, () => {
-                // UpGameOpt.ChanagekOffset(UpGameOpt.player1Opt);
+
                 GameCfg.RoomGameData = {
                     players: [{ gd: {} }, {
                         gd: GameData.Players[1],
@@ -188,7 +195,9 @@ export default class NewClass extends cc.Component {
                         result: this.itemData
                     }],
                 }
+
                 this.onGamenterStart(true);
+
             });
         }
     }

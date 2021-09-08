@@ -224,7 +224,7 @@ export default class NewClass extends cc.Component {
 		else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 			event = { target: { name: 'toggle1' } }
 		}
-		else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis) {
+		else if (!GameCfg.JJ_XUNLIAN && (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis)) {
 			event = { target: { name: 'toggle1' } }
 		}
 		else if (GameCfg.GameType == 'STUDY') {

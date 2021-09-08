@@ -2414,8 +2414,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "Enter text here...",
-    "_N$string": "Enter text here...",
+    "_string": "输入股票代码",
+    "_N$string": "输入股票代码",
     "_fontSize": 20,
     "_lineHeight": 25,
     "_enableWrapText": false,

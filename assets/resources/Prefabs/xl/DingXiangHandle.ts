@@ -163,6 +163,8 @@ export default class NewClass extends cc.Component {
 			this.curState = 3;
 		}
 
+		this.curState = 0;
+
 		GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		this.onShow();
 	}

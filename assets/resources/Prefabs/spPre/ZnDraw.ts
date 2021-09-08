@@ -1052,23 +1052,37 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'sp_btn_xunlian') {
+
+
+
             if (!this.EnterGameLayer) {
+
                 GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
                 LoadUtils.loadRes('Prefabs/enterXLGame', (pre) => {
+
                     GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
                     this.EnterGameLayer = cc.instantiate(pre);
+
                     this.node.addChild(this.EnterGameLayer);
+
                     let handle = this.EnterGameLayer.getComponent('EnterXLGame');
+
                     let items = GameCfgText.getGPPKItemInfo(this.code);
 
-                    handle.onShow(this.code, items[1], ComUtils.fromatTime1(this.gpDataDay[0].timestamp))
+                    handle.onShow(this.code, items[1], this.gpDataDay)
                 })
             }
             else {
+
                 this.EnterGameLayer.active = true;
+
                 let handle = this.EnterGameLayer.getComponent('EnterXLGame');
+
                 let items = GameCfgText.getGPPKItemInfo(this.code);
-                handle.onShow(this.code, items[1], ComUtils.fromatTime1(this.gpDataDay[0].timestamp))
+
+                handle.onShow(this.code, items[1], this.gpDataDay)
             }
         }
 

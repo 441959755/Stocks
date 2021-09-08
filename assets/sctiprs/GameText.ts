@@ -4,6 +4,7 @@ import ComUtils from '../sctiprs/Utils/ComUtils';
 import GameCfg from "./game/GameCfg";
 import GameData from "./GameData";
 import { pb } from "../protos/proto";
+import HttpUtils from "./common/net/HttpUtils";
 
 export default class GameCfgText {
 
@@ -42,27 +43,50 @@ export default class GameCfgText {
         // }
         //test 测试
         //配置文件
-        LoadUtils.load(this.url + 'app.conf', (text) => {
+        console.log('加载文件');
 
+        // LoadUtils.load(this.url + 'app.conf', (text) => {
+
+        //     this.appConf = JSON.parse(text);
+        //     console.log('app.conf 加载完成');
+        // })
+        HttpUtils.loadRequest(this.url + 'app.conf', null, (text) => {
+            //console.log('text' + text);
             this.appConf = JSON.parse(text);
+            //  console.log(this.appConf.maintain);
+            console.log('app.conf 加载完成');
         })
 
-        //属性文件
-        LoadUtils.load(this.url + 'game.conf', (text) => {
-
+        HttpUtils.loadRequest(this.url + 'game.conf', null, (text) => {
             let nati = JSON.parse(text)
             this.levelInfoCfg = nati.level_exp;
             this.smxlCfg = nati.smxl;
             this.gameTextCfg = nati;
+            console.log('game.conf 加载完成');
         })
+
+        HttpUtils.loadRequest(this.url + 'ad.conf', null, (text) => {
+            this.adConf = JSON.parse(text);
+            console.log('ad.conf 加载完成');
+        })
+
+        // //属性文件
+        // LoadUtils.load(this.url + 'game.conf', (text) => {
+        //     let nati = JSON.parse(text)
+        //     this.levelInfoCfg = nati.level_exp;
+        //     this.smxlCfg = nati.smxl;
+        //     this.gameTextCfg = nati;
+        //     console.log('game.conf 加载完成');
+        // })
 
         //广告
-        LoadUtils.load(this.url + 'ad.conf', (text) => {
-            this.adConf = JSON.parse(text);
-        })
+        // LoadUtils.load(this.url + 'ad.conf', (text) => {
+        //     this.adConf = JSON.parse(text);
+        //     console.log('ad.conf 加载完成');
+        // })
 
         // //股票列表
-        LoadUtils.load(this.url + 'stocklist.dat', (text) => {
+        HttpUtils.loadRequest(this.url + 'stocklist.dat', null, (text) => {
             this.stockList = text.split('\n');
             // 股票代码|股票名称|第一个行情日期|最后一个行情日期（0为无最后行情，即股票还在上市中）|流通股数（注：请忽略该行）
             this.pkStockList = text.split('\n');
@@ -92,11 +116,13 @@ export default class GameCfgText {
             if (arr && arr.length > 0) {
                 this.stockList = arr;
             }
+            console.log('股票列表 加载完成');
         })
 
         // //期货列表
-        LoadUtils.load(this.url + 'contractlist.dat', (text) => {
+        HttpUtils.loadRequest(this.url + 'contractlist.dat', null, (text) => {
             this.qihuoList = text.split('\n');
+            console.log('期货列表 加载完成');
         })
 
     }

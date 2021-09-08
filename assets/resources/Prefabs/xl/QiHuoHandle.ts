@@ -204,6 +204,7 @@ export default class NewClass extends cc.Component {
 			this.tipsLabel2.node.active = false;
 			this.curState = 0;
 		}
+		this.curState = 0;
 	}
 
 	/**
@@ -990,8 +991,8 @@ export default class NewClass extends cc.Component {
 
 			if (parseInt(start) > parseInt(year + month + day)) {
 				if (GameData.QHSet.HY == '随机') {
-
 					this.QHStartGameSet();
+					return;
 				} else {
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能早与期货创建时间');
 					GlobalEvent.emit(EventCfg.LOADINGHIDE);
@@ -1001,6 +1002,7 @@ export default class NewClass extends cc.Component {
 			} else if (parseInt(end) < parseInt(year + month + day)) {
 				if (GameData.QHSet.HY == '随机') {
 					this.QHStartGameSet();
+					return;
 				}
 				else {
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能大与期货结束时间');

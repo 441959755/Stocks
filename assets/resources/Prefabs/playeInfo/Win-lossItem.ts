@@ -13,6 +13,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     label2: cc.Label = null;
 
+    @property(cc.Button)
+    resetBtn: cc.Button = null;
+
     winNum = 0;
     loseNum = 0;
     nameStr = '';
@@ -21,6 +24,11 @@ export default class NewClass extends cc.Component {
     onShow() {
         this.label2.string = this.winNum + '  胜               ' + this.loseNum + '  负';
         this.label1.string = this.nameStr;
+
+        if (this.winNum == 0 && this.loseNum == 0) {
+            this.resetBtn.enableAutoGrayEffect = true;
+            this.resetBtn.interactable = false;
+        }
     }
 
     onBtnClick(event, data) {
@@ -34,6 +42,8 @@ export default class NewClass extends cc.Component {
                 console.log('onCmdEditInfoConvertToBuff:' + JSON.stringify(info));
                 if (!info.code) {
                     this.label2.string = 0 + '  胜              ' + 0 + '  负';
+                    this.resetBtn.enableAutoGrayEffect = true;
+                    this.resetBtn.interactable = false;
                 } else {
                     console.log('图片有误!:' + info.code + info.err);
                 }
