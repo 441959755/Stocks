@@ -129,6 +129,8 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
+
+        //获取数据
         if (!this.yieldInfo) {
 
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
@@ -212,8 +214,6 @@ export default class NewClass extends cc.Component {
     }
 
     protected onEnable() {
-        GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
         this.Horizontal1.active = false;
         this.vertical1.active = false;
         this.tipsNode.active = false;
@@ -240,12 +240,9 @@ export default class NewClass extends cc.Component {
 
         this.timeLabel.string = '统计时段:' + year + '/' + month + '/' + 1 + '--' + year + '/' + month + '/' + d;
 
-        //  this.labels[0].string = datas[datas.length - 1].userCapital;
-
         let zongjinge = 0, zonglilv = 0;
 
         let xlCount = [], xlcvs = [];    //月的训练次数 收益曲线
-        let currCount = 0, currCvs = 0;    //这天的训练次数 收益曲线
 
         for (let i = 0; i < datas.length; i++) {
             let data1 = new Date(datas[i].ts * 1000);
@@ -254,30 +251,21 @@ export default class NewClass extends cc.Component {
                 continue;
             }
 
-            zongjinge += datas[i].userProfit;
-            zonglilv += datas[i].userProfitRate;
+            zongjinge += (datas[i].userProfit || 0);
+
+            zonglilv += (datas[i].userProfitRate || 0);
 
             let day1 = data1.getDate();
+
             if (!xlCount[day1]) {
                 xlCount[day1] = 1;
             } else {
                 xlCount[day1] += 1;
             }
-
-
-            // if (xlcvs[day1]) {
-            xlcvs[day1] += datas[i].userProfit;
-            // } else {
-            //     if (!datas[i].userProfit) {
-            //         xlcvs[day1] = xlcvs[day1 - 1];
-            //     } else {
-            //         xlcvs[day1] = (datas[i].userProfit + datas[i].userCapital);
-            //     }
-
-            // if (!this.userCapital) {
-            //     this.userCapital = datas[i].userCapital;
-            // }
-            //  }
+            if (!xlcvs[day1]) {
+                xlcvs[day1] = 0;
+            }
+            xlcvs[day1] += (datas[i].userProfit || 0);
 
             if (this.daysData[day1 - 1]) {
                 this.daysData[day1 - 1].count++;
@@ -296,6 +284,7 @@ export default class NewClass extends cc.Component {
 
         }
 
+        //没有赋值 赋值
         for (let j = 0; j < day; j++) {
             let info = {
                 time: null,
@@ -310,7 +299,7 @@ export default class NewClass extends cc.Component {
                 info.rate = 0;
                 info.count = 0;
                 if (j == 0) {
-                    info.user_capital = this.userCapital;
+                    info.user_capital = GameData.SmxlState.goldInit;
                 } else {
                     info.user_capital = this.daysData[j - 1].endMoney;
                 }
@@ -323,7 +312,7 @@ export default class NewClass extends cc.Component {
 
         this.draw_line_day();
 
-        this.labels[1].string = GameData.SmxlState.gold_init;
+        this.labels[1].string = GameData.SmxlState.goldInit;
         this.labels[3].string = zongjinge + '';
         if (zongjinge < 0) {
             this.labels[3].node.color = cc.Color.GREEN;
@@ -337,7 +326,7 @@ export default class NewClass extends cc.Component {
     }
 
     draw_line_month(xlCount, xlcvs) {
-        // console.log(JSON.stringify(xlcvs));
+        console.log(JSON.stringify(xlcvs));
         this.doty = [];
         if (xlCount.length <= 0) { return };
         let date = new Date();
@@ -345,6 +334,7 @@ export default class NewClass extends cc.Component {
 
         let maxCount = 0;
         let maxMoney = 0;
+        let minMoney = (xlcvs[0] || 0);
         xlCount.forEach(el => {
             if (el) {
                 maxCount = Math.max(el, maxCount);
@@ -354,16 +344,18 @@ export default class NewClass extends cc.Component {
         xlcvs.forEach(el => {
             if (el) {
                 maxMoney = Math.max(el, maxMoney);
+                minMoney = Math.min(el, minMoney);
             }
 
         });
 
-        if (maxMoney <= 150000) {
-            maxMoney = 150000
-        } else {
-            maxMoney = Math.ceil((maxMoney - 50000) / 20000) * 20000 + 50000;
+        // maxMoney = Math.ceil((maxMoney - 50000) / 20000) * 20000;
+        // minMoney = Math.ceil((minMoney + 50000) / 20000) * 20000 - 50000;
+        if (maxMoney <= 50000) {
+            maxMoney = 50000;
         }
 
+        let tt = (Math.ceil(maxMoney - minMoney) / 1000) * 1000;
 
         maxCount = Math.ceil(maxCount / 5) * 5;
 
@@ -372,8 +364,12 @@ export default class NewClass extends cc.Component {
         })
 
         this.zhijinNode.children.forEach((el, index) => {
-            el.getComponent(cc.Label).string = maxMoney - ((maxMoney - 50000) / 5) * index + '';
+            el.getComponent(cc.Label).string = parseInt((tt / 5) * index - (tt / 5) + '') + '';
         })
+
+        minMoney = parseInt(this.zhijinNode.children[0].getComponent(cc.Label).string);
+        maxMoney = parseInt(this.zhijinNode.children[5].getComponent(cc.Label).string);
+
 
         let w = this.draw.node.width / 30;
         let h = this.draw.node.height / maxCount;
@@ -399,9 +395,12 @@ export default class NewClass extends cc.Component {
 
             }
             let y;
-            if (!xlcvs[i] || xlcvs[i] <= 50000) { y = 0 } else {
-                let c = xlcvs[i] - 50000;
-                y = c * (this.draw.node.height / (maxMoney - 50000));
+            {
+                let c = (xlcvs[i] || 0);
+                y = c * (this.draw.node.height / (maxMoney));
+                if (minMoney <= 0) {
+                    y = (c - minMoney) * (this.draw.node.height / (maxMoney - (minMoney)));
+                }
             }
 
             dot2.setPosition(cc.v2((i - 1) * w, y));

@@ -59,7 +59,7 @@ export default class GlobalHandle {
                 return;
             }
             info.items.forEach(el => {
-                //  let date = new Date(el.timestamp);
+
                 let ye = (el.timestamp + '').slice(0, 4);
                 let mon = (el.timestamp + '').slice(4, 6);
                 let da = (el.timestamp + '').slice(6);
@@ -93,14 +93,13 @@ export default class GlobalHandle {
             if (!GameCfg.GAMEFUPAN) {
                 GameCfg.huizhidatas = info.items.length;
             }
-            // if (GameCfg.GameType != pb.GameType.JJ_DuoKong && GameCfg.GameType != pb.GameType.JJ_DuoKong) {
+
             GameData.huizhidatas = info.items.length;
-            //   }
 
             info1.kstyle = pb.KStyle.Random;
 
             socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
-                //   console.log('onCmdQuoteQuery' + JSON.stringify(info));
+
                 if (!info.items || info.items.length <= 0) {
                     console.log('获取的行情为空');
                     // console.log(JSON.stringify(GameCfg.data));

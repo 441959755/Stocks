@@ -76,9 +76,7 @@ export default class NewClass extends cc.Component {
 		//打开排行榜
 		GlobalEvent.on('OPENRANKINGLIST', this.openRankingList.bind(this), this);
 
-
 	}
-
 
 	protected onDestroy() {
 		GlobalEvent.off(EventCfg.onCmdQuoteQuery);
@@ -104,8 +102,45 @@ export default class NewClass extends cc.Component {
 		LoadUtils.releaseRes('Prefabs/friendInvite');
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
+
+
 	}
 
+	gotoBlackHisLayer() {
+		//回到进入游戏的界面
+		let event;
+		if (GameCfg.GameType == pb.GameType.ShuangMang) {
+			event = { target: { name: 'main_xl_smxl' } };
+		}
+		else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+			event = { target: { name: 'main_xl_zbxl' } }
+		}
+		else if (GameCfg.GameType == pb.GameType.DingXiang) {
+			event = { target: { name: 'main_xl_dxxl' } }
+		}
+		else if (GameCfg.GameType == pb.GameType.QiHuo) {
+			event = { target: { name: 'main_xl_qhxl' } }
+		}
+		else if (GameCfg.GameType == pb.GameType.JJ_PK) {
+			event = { target: { name: 'toggle1' } }
+		}
+		else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+			event = { target: { name: 'toggle1' } }
+		}
+		else if (!GameCfg.JJ_XUNLIAN && (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis)) {
+			event = { target: { name: 'toggle1' } }
+		}
+		else if (GameCfg.GameType == 'STUDY') {
+			event = { target: { name: 'toggle3' } }
+		}
+
+		if (event) {
+			GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
+			if (GameCfg.historyType) {
+				GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
+			}
+		}
+	}
 
 
 	openRankingList() {
@@ -138,6 +173,7 @@ export default class NewClass extends cc.Component {
 			this.otherHis.getComponent('OtherPlayerHisInfo').onShow();
 		});
 	}
+
 
 	/**
 	 * 奖励中心
@@ -207,38 +243,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	start() {
-		//回到进入游戏的界面
-		let event;
-		if (GameCfg.GameType == pb.GameType.ShuangMang) {
-			event = { target: { name: 'main_xl_smxl' } };
-		} else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-			event = { target: { name: 'main_xl_zbxl' } }
-		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
-			event = { target: { name: 'main_xl_dxxl' } }
-		} else if (GameCfg.GameType == pb.GameType.QiHuo) {
-			event = { target: { name: 'main_xl_qhxl' } }
-		}
-		else if (GameCfg.GameType == pb.GameType.JJ_PK) {
-			event = { target: { name: 'toggle1' } }
-		}
-		else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-			event = { target: { name: 'toggle1' } }
-		}
-		else if (!GameCfg.JJ_XUNLIAN && (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis)) {
-			event = { target: { name: 'toggle1' } }
-		}
-		else if (GameCfg.GameType == 'STUDY') {
-			event = { target: { name: 'toggle3' } }
-		}
-
-		if (event) {
-			GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
-			if (GameCfg.historyType) {
-				GlobalEvent.emit(EventCfg.LOADINGSHOW);
-				GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
-			}
-		}
-
+		this.gotoBlackHisLayer();
 		//断线重连 或游戏后进入房间
 		if (GameData.selfEnterRoomData) {
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);

@@ -9,6 +9,9 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
+    @property(cc.Node)
+    HisLayer: cc.Node = null;
+
     DXNode: cc.Node = null;
 
     QHNode: cc.Node = null;
@@ -121,28 +124,36 @@ export default class NewClass extends cc.Component {
      * 历史记录
      */
     openHisLayer() {
+        this.HisLayer.active = true;
         switch (GameCfg.GameType) {
             case pb.GameType.ZhiBiao:
-                this.openNode(this.ZBHisNode, 'Prefabs/xl/ZBHistoryLayer', 11, (node) => { this.ZBHisNode = node });
+                this.openNode(this.ZBHisNode, 'Prefabs/xl/ZBHistoryLayer', 11, (node) => {
+                    this.ZBHisNode = node;
+                    this.HisLayer.active = false;
+                });
                 break;
             case pb.GameType.ShuangMang:
                 this.openNode(this.SMHisNode, 'Prefabs/xl/HistoryLayerSM', 11, (node) => {
                     this.SMHisNode = node;
+                    this.HisLayer.active = false;
                 });
                 break;
             case pb.GameType.DingXiang:
                 this.openNode(this.DXHisNode, 'Prefabs/xl/DXHistoryLayer', 11, (node) => {
                     this.DXHisNode = node;
+                    this.HisLayer.active = false;
                 });
                 break;
             case pb.GameType.QiHuo:
                 this.openNode(this.QHHisNode, 'Prefabs/xl/QHHistoryLayer', 11, (node) => {
                     this.QHHisNode = node;
+                    this.HisLayer.active = false;
                 });
                 break;
             case pb.GameType.TiaoJianDan:
                 this.openNode(this.TJDHisNode, 'Prefabs/xl/TJDHistoryLayer', 11, (node) => {
                     this.TJDHisNode = node;
+                    this.HisLayer.active = false;
                 });
                 break;
         }
@@ -207,11 +218,12 @@ export default class NewClass extends cc.Component {
                 node = cc.instantiate(pre);
                 this.node.addChild(node, zIndex);
                 node.active = true;
-                call(node);
+                call && (call(node));
             })
         }
         else {
             node.active = true;
+            call && (call(node));
         }
     }
 

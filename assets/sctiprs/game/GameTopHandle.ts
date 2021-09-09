@@ -223,20 +223,17 @@ export default class NewClass extends cc.Component {
 
         //切换指数
         let btnMyspic = this.rightNode.getChildByName('btnMyspic');
-
+        btnMyspic.active = false;
         //数据统计
         let statBtn = this.rightNode.getChildByName('statBtn');
         colseBtn.active = false;
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
-            btnMyspic.active = false;
             statBtn.active = false;
         }
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
-            btnMyspic.active = true;
             statBtn.active = true;
         }
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-            btnMyspic.active = false;
             statBtn.active = true;
         }
     }
@@ -254,18 +251,17 @@ export default class NewClass extends cc.Component {
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             this.GameName.string = '双盲训练';
-
             this.rightNode.active = false;
-
             let la = this.node.getChildByName('rate');
             la.x = 0;
         }
+
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.GameName.string = '指标训练';
-
             btnMyspic.active = false;
             statBtn.active = false;
         }
+
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
 
             this.GameName.string = '';
@@ -335,7 +331,6 @@ export default class NewClass extends cc.Component {
                 } else {
                     this.onShowPKFUPAN(1)
                 }
-
             }
         }
 

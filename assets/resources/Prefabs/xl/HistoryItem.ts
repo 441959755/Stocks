@@ -56,6 +56,7 @@ export default class NewClass extends cc.Component {
                 GameCfg.historyType = GameCfg.GameType;
 
                 let cache = cc.sys.localStorage.getItem(ts + 'cache');
+
                 if (!cache) {
                     console.log('没有保存此记录');
                     return;
@@ -75,6 +76,10 @@ export default class NewClass extends cc.Component {
                     });
                 } else {
                     GlobalHandle.onCmdGameStartQuoteQuery(GameCfg.enterGameCache, () => {
+
+                        //  if (GameCfg.huizhidatas > GameCfg.data[0].data.length) {
+                        GameCfg.huizhidatas = GameCfg.data[0].data.length;
+
                         cc.director.loadScene('game');
                     })
                 }

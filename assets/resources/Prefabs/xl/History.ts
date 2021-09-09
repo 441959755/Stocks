@@ -27,6 +27,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     scrollNode: cc.Node = null;
 
+    @property(cc.Node)
+    tipsNode: cc.Node = null;
+
     start() {
         if (!this.historyInfo) {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
@@ -57,9 +60,9 @@ export default class NewClass extends cc.Component {
 
     onShow() {
         this.content.removeAllChildren();
-        //   if (this.historyType == 'SM') {
+
         let datas = this.historyInfo.results;
-        // console.log(JSON.stringify(datas));
+        this.tipsNode && (this.tipsNode.active = true)
         if (datas.length <= 0) {
             return;
         }
@@ -70,12 +73,7 @@ export default class NewClass extends cc.Component {
         if (str) {
             TIMETEMP = JSON.parse(str);
         }
-        // "uid":1000145,"gType":"DingXiang","quotesCode":1002148,"kFrom":"20100921","kTo":"20101028","stockProfitRate":-2.930000066757202,"userProfitRate":7.619999885559082,"userCapital":"100000","userProfit":"7623","ts":"1623050522","rank":1
-        // {"uid":1000042,"gType":"ShuangMang","quotesCode":600000,
-        // "kType":"Day","kFrom":20100101,"kTo":20101010,
-        // "stockProfitRate":19.1200008392334,
-        // "userProfitRate":10.220000267028809,
-        // "userCapital":"100000","userProfit":"800","ts":"1618454133","rank":2}]}
+
         let sumEar = 0;
         let sumrate = 0;
 
@@ -89,11 +87,16 @@ export default class NewClass extends cc.Component {
             }
         });
 
+        if (arr.length > 0) {
+            this.tipsNode && (this.tipsNode.active = false)
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+        }
+
         let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
         UIScrollControl.initControl(this.historyItem, arr.length, this.historyItem.getContentSize(), 0, (node, index) => {
+
             node.getComponent('HistoryItem').onShow(arr[index]);
             let nodes = node.children;
-            //   this.content.addChild(node);
             nodes[0].getComponent(cc.Label).string = (index + 1) + '';
             arr[index].quotesCode += '';
             if (arr[index].quotesCode.length >= 7) {
@@ -165,7 +168,6 @@ export default class NewClass extends cc.Component {
                 }
 
             }
-
             sumEar += arr[index].userProfit;
 
             sumrate += arr[index].userProfitRate;
@@ -237,6 +239,5 @@ export default class NewClass extends cc.Component {
                 this.label.string = '0';
             }
         }
-
     }
 }

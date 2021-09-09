@@ -163,9 +163,6 @@ export default class NewClass extends cc.Component {
 			this.curState = 3;
 		}
 
-		this.curState = 0;
-
-		GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		this.onShow();
 	}
 
@@ -515,15 +512,17 @@ export default class NewClass extends cc.Component {
 			GameCfg.GameType = pb.GameType.DingXiang;
 			GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
 		} else if (name == 'startDXBtn') {
+
 			if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameTextCfg.dxxl.cost[0].v) {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
 				return;
 			}
+
 			else if (this.curState == 3) {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
 				return;
 			}
-			console.log('1111');
+
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			GameCfg.GAMEFUPAN = false;
 			GameCfg.GameType = pb.GameType.DingXiang;

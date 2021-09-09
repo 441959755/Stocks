@@ -138,6 +138,7 @@ export default class NewClass extends cc.Component {
             if (10 + (GameCfg.beg_end[1] - GameCfg.beg_end[0] + 1) * GameCfg.hz_width < this.drawBordWidth) {
                 GameCfg.beg_end[1] += 1;
             } else {
+
                 if (GameCfg.huizhidatas >= GameCfg.data[0].data.length) {
                     GameCfg.huizhidatas = GameCfg.data[0].data.length;
                     return;

@@ -364,6 +364,11 @@ export default class NewClass extends cc.Component {
 	}
 
 	onShowGAMEFUPAN() {
+
+		if (GameCfg.huizhidatas > this.gpData.length) {
+			GameCfg.huizhidatas = this.gpData.length;
+		}
+
 		this.node.children.forEach(el => {
 			el.active = false;
 		});
@@ -379,7 +384,8 @@ export default class NewClass extends cc.Component {
 			node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
 			let node1 = this.node.getChildByName('fupan1');
 			node1.active = true;
-		} else if (GameCfg.GameType == pb.GameType.DingXiang) {
+		}
+		else if (GameCfg.GameType == pb.GameType.DingXiang) {
 
 			let dxnode = this.node.getChildByName('DXInfo');
 			dxnode.active = true;
@@ -399,6 +405,7 @@ export default class NewClass extends cc.Component {
 			this.priceLabel[0].string = '盈利操作次数：' + info.yCount;
 			this.priceLabel[1].string = '亏损操作次数：' + info.sCount;
 		}
+
 		else if (GameCfg.GameType == pb.GameType.QiHuo) {
 			let node = this.node.getChildByName('fupan');
 			node.active = true;
@@ -408,6 +415,7 @@ export default class NewClass extends cc.Component {
 			node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
 
 		}
+
 		else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 			this.xlzb.active = true;
 			GlobalEvent.emit(EventCfg.SETMARKCOLOR);
