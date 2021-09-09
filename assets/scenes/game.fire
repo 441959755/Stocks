@@ -201,7 +201,7 @@
       "array": [
         0,
         0,
-        519.6152422706632,
+        521.4284829598369,
         0,
         0,
         0,
@@ -1892,7 +1892,7 @@
   {
     "__type__": "cc.Node",
     "_name": "PKfupan",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 8
     },
@@ -2732,7 +2732,7 @@
   {
     "__type__": "cc.Node",
     "_name": "PKnode",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 8
     },
@@ -6104,7 +6104,7 @@
   {
     "__type__": "cc.Node",
     "_name": "left",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 8
     },
@@ -6701,7 +6701,7 @@
   {
     "__type__": "cc.Node",
     "_name": "selectLine",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 2
     },
@@ -18401,7 +18401,7 @@
   {
     "__type__": "cc.Node",
     "_name": "box",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 2
     },
@@ -25061,7 +25061,7 @@
       "__id__": 493
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 546
@@ -25342,7 +25342,7 @@
   {
     "__type__": "cc.Node",
     "_name": "bottom",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 2
     },

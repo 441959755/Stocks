@@ -63,6 +63,7 @@ export namespace pb {
         Sync_S2C_TaskProgress = 1024,
         Sync_S2C_ActivityConf = 1026,
         Sync_S2C_GameCgdsItem = 1028,
+        Sync_S2C_GoldAwardPrompt = 1030,
         Sync_S2C_Broadcast = 1100,
         Sync_S2C_Message = 1102,
         Sync_C2S_GameHeart = 1200,
@@ -133,6 +134,8 @@ export namespace pb {
         Rep_Hall_GetDailyAdAward = 3048,
         Req_Hall_Get7Award = 3049,
         Rep_Hall_Get7Award = 3050,
+        Req_Hall_GetBrokenAward = 3051,
+        Rep_Hall_GetBrokenAward = 3052,
         Req_Hall_Unregistry = 3997,
         Rep_Hall_Unregistry = 3998,
         Req_Hall_Logout = 3999,
@@ -7245,6 +7248,9 @@ export namespace pb {
 
         /** CmdCgsGetStageAward stage */
         stage?: (number|null);
+
+        /** CmdCgsGetStageAward double */
+        double?: (boolean|null);
     }
 
     /** Represents a CmdCgsGetStageAward. */
@@ -7261,6 +7267,9 @@ export namespace pb {
 
         /** CmdCgsGetStageAward stage. */
         public stage: number;
+
+        /** CmdCgsGetStageAward double. */
+        public double: boolean;
 
         /**
          * Creates a new CmdCgsGetStageAward instance using the specified properties.
@@ -10823,6 +10832,102 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a CmdGoldAwardPrompt. */
+    interface ICmdGoldAwardPrompt {
+
+        /** CmdGoldAwardPrompt text */
+        text?: (string|null);
+
+        /** CmdGoldAwardPrompt gold */
+        gold?: (number|null);
+    }
+
+    /** Represents a CmdGoldAwardPrompt. */
+    class CmdGoldAwardPrompt implements ICmdGoldAwardPrompt {
+
+        /**
+         * Constructs a new CmdGoldAwardPrompt.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdGoldAwardPrompt);
+
+        /** CmdGoldAwardPrompt text. */
+        public text: string;
+
+        /** CmdGoldAwardPrompt gold. */
+        public gold: number;
+
+        /**
+         * Creates a new CmdGoldAwardPrompt instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdGoldAwardPrompt instance
+         */
+        public static create(properties?: pb.ICmdGoldAwardPrompt): pb.CmdGoldAwardPrompt;
+
+        /**
+         * Encodes the specified CmdGoldAwardPrompt message. Does not implicitly {@link pb.CmdGoldAwardPrompt.verify|verify} messages.
+         * @param message CmdGoldAwardPrompt message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdGoldAwardPrompt, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdGoldAwardPrompt message, length delimited. Does not implicitly {@link pb.CmdGoldAwardPrompt.verify|verify} messages.
+         * @param message CmdGoldAwardPrompt message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdGoldAwardPrompt, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdGoldAwardPrompt message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdGoldAwardPrompt
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGoldAwardPrompt;
+
+        /**
+         * Decodes a CmdGoldAwardPrompt message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdGoldAwardPrompt
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGoldAwardPrompt;
+
+        /**
+         * Verifies a CmdGoldAwardPrompt message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdGoldAwardPrompt message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdGoldAwardPrompt
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdGoldAwardPrompt;
+
+        /**
+         * Creates a plain object from a CmdGoldAwardPrompt message. Also converts values to other types if specified.
+         * @param message CmdGoldAwardPrompt
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdGoldAwardPrompt, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdGoldAwardPrompt to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** KType enum. */
     enum KType {
         KType_NULL = 0,
@@ -10865,6 +10970,9 @@ export namespace pb {
 
         /** CmdQuoteQuery kstyle */
         kstyle?: (pb.KStyle|null);
+
+        /** CmdQuoteQuery reserve */
+        reserve?: (number|null);
     }
 
     /** Represents a CmdQuoteQuery. */
@@ -10893,6 +11001,9 @@ export namespace pb {
 
         /** CmdQuoteQuery kstyle. */
         public kstyle: pb.KStyle;
+
+        /** CmdQuoteQuery reserve. */
+        public reserve: number;
 
         /**
          * Creates a new CmdQuoteQuery instance using the specified properties.
@@ -12794,7 +12905,7 @@ export namespace pb {
 
     /** AppFrom enum. */
     enum AppFrom {
-        Android_000 = 0,
+        Ios_000 = 0,
         Android_001 = 1,
         Android_201 = 201,
         Android_204 = 204,
@@ -12840,7 +12951,15 @@ export namespace pb {
         AdPosition_Exit = 3,
         AdPosition_Plugin = 4,
         AdPosition_CgdsList = 5,
-        AdPosition_AiStockList = 6
+        AdPosition_AiStockList = 6,
+        AdPosition_Qihuo = 7,
+        AdPosition_DailyAward = 8,
+        AdPosition_7Award = 9,
+        AdPosition_Dxxl = 10,
+        AdPosition_Qhxl = 11,
+        AdPosition_Tjdxl = 12,
+        AdPosition_Broker = 13,
+        AdPosition_Cg = 14
     }
 
     /** Properties of an AdClicked. */

@@ -100,7 +100,7 @@ export default class NewClass extends cc.Component {
             })
 
         }
-        else if (name == 'phb_bt_tiaozhanta') {
+        else if (name == 'phb_bt_chakan') {
 
             //打开信息面板
             this.getPlayerInfo((info) => {

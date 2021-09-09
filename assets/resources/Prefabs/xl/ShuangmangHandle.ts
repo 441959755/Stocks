@@ -104,12 +104,9 @@ export default class NewClass extends cc.Component {
         else if (name == 'sys_helpbig1') {
             GlobalEvent.emit(EventCfg.OPENHELPLAYER);
         }
-
-
     }
 
     onToggleClick(event, data) {
-        // console.log(event);
         let name = event.node._name;
         if (name == 'toggle1') {
             let data = GameData.SMSet;
@@ -124,8 +121,13 @@ export default class NewClass extends cc.Component {
 
         console.log('给的数据:' + JSON.stringify(GameCfg.enterGameCache));
 
-        GlobalEvent.emit(EventCfg.onCmdQuoteQuery, GameCfg.enterGameCache);
-
+        GameData.huizhidatas = GameCfg.enterGameCache.reserve;
+        GameCfg.huizhidatas = GameCfg.enterGameCache.reserve;
+        GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
+            GameData.huizhidatas = GameCfg.data[0].data.length - 150;
+            GameCfg.huizhidatas = GameCfg.data[0].data.length - 150;
+            cc.director.loadScene('game');
+        });
     }
 
     onDestroy() {

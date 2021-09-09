@@ -4,6 +4,7 @@ import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
 import EnterGameControl from "../../../sctiprs/global/EnterGameControl";
+import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -571,21 +572,27 @@ export default class NewClass extends cc.Component {
 	}
 
 	DXStartGameSet() {
+
 		let data = {
 			ktype: null,
 			kstyle: null,
 			code: null,
 			from: null,
-			total: parseInt(GameData.DXSet.KLine) + 1,
-			to: 0
+			total: parseInt(GameData.DXSet.KLine) + 100,
+			to: 0,
+			reserve: 100,
 		};
+
 		let items;
-		//   console.log(JSON.stringify(GameCfgText.stockList));
+
 		if (GameData.DXSet.search == '随机选股' || GameData.DXSet.search == '') {
+
 			if (GameData.DXSet.year == '随机') {
+
 				let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
 
 				items = GameCfgText.stockList[le].split('|');
+
 				data.code = items[0];
 			}
 			else {
@@ -600,6 +607,7 @@ export default class NewClass extends cc.Component {
 				} else {
 					d = GameData.DXSet.day;
 				}
+
 				let seletTime = GameData.DXSet.year + '' + m + '' + d;
 				items = GameCfgText.getItemsByTime(seletTime);
 				data.code = items[0];
@@ -608,7 +616,7 @@ export default class NewClass extends cc.Component {
 		} else {
 			let dex = -1;
 			let arrStr = (GameData.DXSet.search + '').split(' ');
-			//	data.code = arrStr[0];
+
 			items = GameCfgText.getGPItemInfo(arrStr[0])
 			data.code = items[0];
 
@@ -697,7 +705,7 @@ export default class NewClass extends cc.Component {
 			let day = start.slice(6);
 
 			let d = new Date(year + '-' + month + '-' + day);
-			///console.log(d);
+
 			let t;
 			if (GameData.DXSet.ZLine == '周线') {
 				t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 7;
@@ -736,7 +744,6 @@ export default class NewClass extends cc.Component {
 
 		if (GameData.DXSet.ZLine == '日线') {
 			data.ktype = pb.KType.Day;
-
 		} else if (GameData.DXSet.ZLine == '周线') {
 			data.ktype = pb.KType.Day7;
 		} else if (GameData.DXSet.ZLine == '30分钟K') {
@@ -744,8 +751,13 @@ export default class NewClass extends cc.Component {
 		} else if (GameData.DXSet.ZLine == '60分钟K') {
 			data.ktype = pb.KType.Min;
 		}
+
 		GameCfg.enterGameCache = data;
 
-		GlobalEvent.emit(EventCfg.onCmdQuoteQuery, data);
+		GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
+			GameData.huizhidatas = GameCfg.data[0].data.length - GameData.DXSet.KLine;
+			GameCfg.huizhidatas = GameCfg.data[0].data.length - GameData.DXSet.KLine;
+			cc.director.loadScene('game');
+		});
 	}
 }

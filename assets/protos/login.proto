@@ -26,7 +26,7 @@ import "common.proto";
 // App渠道
 enum AppFrom {
     // 炒股达人
-    Android_000 = 0;   		// 安卓0渠道
+    Ios_000 = 0;   			// 苹果0渠道或安卓内部测试
     Android_001 = 1;   		// 安卓001渠道
     Android_201 = 201; 		// 安卓201渠道
     Android_204 = 204; 		// 安卓204渠道
@@ -80,8 +80,15 @@ enum AdPosition {
 	AdPosition_Plugin = 4;			// 插屏
 	AdPosition_CgdsList = 5;		// 炒股大赛列表
 	AdPosition_AiStockList = 6;		// Ai股票列表
+	AdPosition_Qihuo = 7;			// 期货页
+	AdPosition_DailyAward = 8;		// 每日看广告领取奖励
+	AdPosition_7Award = 9;			// 7天奖励
+	AdPosition_Dxxl = 10;			// 定向训练
+	AdPosition_Qhxl = 11;			// 期货训练
+	AdPosition_Tjdxl = 12;			// 条件单训练
+	AdPosition_Broker = 13;			// 破产补助
+	AdPosition_Cg = 14;				// 闯关双倍奖励
 }
-
 
 // 广告统计
 message AdClicked {
@@ -104,7 +111,7 @@ message CmdRegistry {
 	string sms_code = 4;// 手机验证码
 	AppFrom from = 5; 	// App渠道
 }
-// 返回类型：ErrorInfo
+// 返回类型：CmdLoginReply
 
 // 登录参数
 message CmdLogin {

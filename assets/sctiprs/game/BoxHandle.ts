@@ -251,7 +251,7 @@ export default class NewClass extends cc.Component {
         this.CCLBtn.active = false;
         this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
         //双盲
-        if (GameCfg.GameType == pb.GameType.ShuangMang) {
+        if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.JJ_XUNLIAN) {
 
             this.setBoxfalg('ma');
             this.setBoxfalg('CPM');

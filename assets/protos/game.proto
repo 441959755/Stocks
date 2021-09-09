@@ -294,6 +294,7 @@ message GameProperties {
 	repeated GamePropertyItem items = 1;
 }
 
+
 // 游戏操作步骤
 message GameOperationItem {
 	GameOperationId op_id = 1;	// 操作Id
@@ -627,6 +628,7 @@ message JjGame {
 message CmdCgsGetStageAward {
 	int32 id = 1;	// 当前这一轮闯关赛的时间编码：YYYYMMDD
 	int32 stage = 2;// 关卡序号
+	bool double = 3;// 是否看广告获得双倍奖励
 }
 
 
@@ -854,4 +856,10 @@ message ActivityConf {
 }
 message ActivityLogs {
 	repeated int32 ids = 1;
+}
+
+// 金币奖励通知
+message CmdGoldAwardPrompt {
+	string text = 1;	// 提示文本
+	int32 gold = 2;		// 金币数量
 }

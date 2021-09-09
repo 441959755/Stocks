@@ -27,6 +27,7 @@ export default class NewClass extends cc.Component {
     flag = false;
 
     cb = null;
+
     onShow(data?) {
 
         data && (this.dataArr.push(data))
@@ -85,10 +86,6 @@ export default class NewClass extends cc.Component {
             this.onShow();
             this.node.active = true;
         }
-
-
-
     }
-
 
 }

@@ -335,8 +335,9 @@ export default class GameCfgText {
             kstyle: pb.KStyle.Random,
             code: null,
             from: null,
-            total: 150 + 1,
+            total: 250,
             to: 0,
+            reserve: 100,
         }
 
         let le = parseInt(Math.random() * this.stockList.length + '');
@@ -401,14 +402,17 @@ export default class GameCfgText {
 
     //随机DX一只股票
     public static getGPDXByRandom(cb?) {
+
         let data = {
             ktype: GameCfg.enterGameCache.ktype,
             kstyle: GameCfg.enterGameCache.kstyle,
             code: null,
             from: null,
-            total: parseInt(GameData.DXSet.KLine) + 1,
-            to: 0
+            total: parseInt(GameData.DXSet.KLine) + 1 + 100,
+            to: 0,
+            reserve: 100,
         };
+
         let items;
 
         let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
@@ -467,7 +471,6 @@ export default class GameCfgText {
 
         GameCfg.data[0].code = items[0];
 
-        //  data.ktype = GameCfg.enterGameCache;
         GameCfg.data[0].data = [];
         GameCfg.data[0].name = items[1];
 
@@ -475,8 +478,6 @@ export default class GameCfgText {
         GameCfg.enterGameCache = data;
 
         console.log('给的数据:' + JSON.stringify(data));
-
-
     }
 
     //随机QH一只期货

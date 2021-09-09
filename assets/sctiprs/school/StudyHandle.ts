@@ -42,7 +42,6 @@ export default class NewClass extends cc.Component {
             this.node.active = false;
             GlobalEvent.emit('OPENCURSTUDYBAR');
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
         })
 
         this.pageView.node.on('scroll-to-left', () => {
@@ -78,7 +77,7 @@ export default class NewClass extends cc.Component {
 
         if (this.flag) {
             this.flag = 0;
-            this.pageView && (this.pageView.scrollToPage(this.pageView.getPages().length - 1, 0.1))
+            this.pageView && (this.pageView.scrollToPage(this.pageView.getPages().length - 1, 0.01))
         }
         this.title.string = data.list[GameData.studyBar - 1].title;
     }

@@ -40,7 +40,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('UPDATEFRIENDLIST');
     }
 
-    start() {
+    onEnable() {
         this.onShow();
     }
 
@@ -57,6 +57,9 @@ export default class NewClass extends cc.Component {
 
         if (this.concernList.length <= 0) {
             this.tipstext.active = true;
+        }
+        else {
+            this.tipstext.active = false;
         }
 
         this.createItem(this.concernList, this.scollNode[0], this.item1);

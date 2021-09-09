@@ -35,18 +35,18 @@ export default class NewClass extends cc.Component {
     closeLayer: cc.Node = null;
 
     onLoad() {
-        if (GameData.studyHisBar == 1) {
-            GameData.TaskStudy.forEach((el, index) => {
-                if (index + 1 == GameData.schoolProgress) {
-                    if (!el.progress) {
-                        GameData.studyHisBar = 1;
-                    }
-                    else {
-                        GameData.studyHisBar = el.progress;
-                    }
+        //  if (GameData.studyHisBar == 1) {
+        GameData.TaskStudy.forEach((el, index) => {
+            if (index + 1 == GameData.schoolProgress) {
+                if (!el.progress) {
+                    GameData.studyHisBar = 1;
                 }
-            });
-        }
+                else {
+                    GameData.studyHisBar = el.progress;
+                }
+            }
+        });
+        // }
 
         PopupManager.init();
         GlobalEvent.on('OPENCURSTUDYBAR', this.openCurStudyBar.bind(this), this);
@@ -96,9 +96,6 @@ export default class NewClass extends cc.Component {
         let falg1 = false, falg2 = false, falg3 = false;
         LoadUtils.loadResDir(this.url, (res) => {
             res.forEach(element => {
-                // this.studyData1 = res[0].json;
-                // this.studyData2 = res[1].json;
-                // this.studyData3 = res[2].json;
                 if (element.name == 'Instructions' + GameData.schoolProgress) {
                     this.studyData1 = element.json;
                 }
@@ -168,7 +165,7 @@ export default class NewClass extends cc.Component {
             progress: GameData.studyHisBar,
             award: award,
         }
-
+        GameData.TaskStudy[data.index] = data;
         let CmdStudyProgress = pb.CmdStudyProgress;
         let message = CmdStudyProgress.create(data);
         let buff = CmdStudyProgress.encode(message).finish();

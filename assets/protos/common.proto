@@ -86,6 +86,7 @@ enum MessageId {
 	Sync_S2C_TaskProgress = 1024;			// 同步任务进度及奖励：TaskItem
 	Sync_S2C_ActivityConf = 1026;			// 同步当前活动配置：ActivityConf
 	Sync_S2C_GameCgdsItem = 1028;			// 同步一条炒股大赛状态：CgdsStateItem
+	Sync_S2C_GoldAwardPrompt = 1030;		// 同步金币奖励提示，客户端播放动画：CmdGoldAwardPrompt
 
 	Sync_S2C_Broadcast = 1100;				// 系统广播：Notice
 	Sync_S2C_Message = 1102;				// 服务器发到客户端的消息（包括邀请或聊天消息）：Notice
@@ -141,7 +142,7 @@ enum MessageId {
 	Req_Hall_UnlockGame = 3025;				// 解锁游戏：CmdUnlockGame
 	Rep_Hall_UnlockGame = 3026;				// 解锁游戏应答：ErrorInfo
 	Req_Hall_GetWeeklyAward = 3027;			// 领取每周豪礼：CmdGetWeeklyAward
-	Rep_Hall_GetWeeklyAward = 3028;			// 领取每周豪礼应答：ErrorInfo
+	Rep_Hall_GetWeeklyAward = 3028;			// 领取每周豪礼应答：CmdGetWeeklyAwardReply
 	Req_Hall_QueryEventLog = 3029;			// 查询事件：CmdQueryEventLog
 	Rep_Hall_QueryEventLog = 3030;			// 查询事件应答：Events
 	Req_Hall_ShopOrder = 3031;				// 商城下购买订单：ItemOrder
@@ -164,6 +165,8 @@ enum MessageId {
 	Rep_Hall_GetDailyAdAward = 3048;		// 领取每日看广告奖励应答：无
 	Req_Hall_Get7Award = 3049;				// 领取7次奖励：CmdGetDailyAward
 	Rep_Hall_Get7Award = 3050;				// 领取7次奖励应答：无
+	Req_Hall_GetBrokenAward = 3051;			// 领取破产奖励：无
+	Rep_Hall_GetBrokenAward = 3052;			// 领取破产奖励应答：无
 
 	Req_Hall_Unregistry = 3997;				// 注销账号
 	Rep_Hall_Unregistry = 3998;				// 注销账号应答：ErrorInfo（注销成功后会自动断开tcp长连接）

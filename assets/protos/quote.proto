@@ -60,6 +60,7 @@ message CmdQuoteQuery {
     int32 total = 4;   	// K线条数（0表示忽略该参数；如果total和to都不为0，则优先使用条数作为查询条件；一次性查询最大条数为2000条）
 	int64 to = 5;      	// 结束时间戳（0表示忽略该参数；格式同from）
 	KStyle kstyle = 6;	// 行情样式（如：单边向下、震荡）
+	int32 reserve = 7;	// 行情预留根数，针对from往前偏移根数，然后读取total指定的根数返回
 }
 message QuoteItem {
 	uint32 code = 1;        // 股票代码

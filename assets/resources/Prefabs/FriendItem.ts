@@ -62,10 +62,12 @@ export default class NewClass extends cc.Component {
         this.loadHeadImg(info);
     }
 
+
     onShow(code) {
         this.uid = code;
         this.loadPlayerInfo(code);
     }
+
 
     loadPlayerInfo(code) {
         if (GameData.playersInfo[code + '']) {

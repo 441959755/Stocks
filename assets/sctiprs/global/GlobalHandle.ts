@@ -11,9 +11,17 @@ export default class GlobalHandle {
 
     private static curTotal = 0;
 
+    public static enterGameSetout(data, call) {
+        GameCfg.data[0].data = [];
+        //游戏开始
+        this.onCmdGameStartReq(() => {
+            //游戏行情获取
+            this.onCmdGameStartQuoteQuery(data, call)
+        });
+    }
+
     //游戏开始发送游戏类型
     public static onCmdGameStartReq(cb?) {
-
         let info = {
             game: GameCfg.GameType,
         }
@@ -23,10 +31,10 @@ export default class GlobalHandle {
 
             if (res.err) {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                //  let err = GlobalHandle.getErrorCodeByCode(res.code);
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
                 return;
             }
+
             cb && (cb(res));
         })
 
@@ -42,15 +50,9 @@ export default class GlobalHandle {
 
     //获取行情
     public static onCmdGameStartQuoteQuery(info1, cb) {
-        let infoPre = {
-            ktype: info1.ktype,
-            kstyle: info1.kstyle,
-            code: info1.code,
-            form: 0,
-            total: 100 + 6,
-            to: info1.from,
-        }
-        socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(infoPre), info => {
+
+        socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
+
             if (!info.items || info.items.length <= 0) {
                 console.log('获取的行情为空');
                 // console.log(JSON.stringify(GameCfg.data));
@@ -58,88 +60,39 @@ export default class GlobalHandle {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 return;
             }
-            info.items.forEach(el => {
 
-                let ye = (el.timestamp + '').slice(0, 4);
-                let mon = (el.timestamp + '').slice(4, 6);
-                let da = (el.timestamp + '').slice(6);
-                let fromDate = ye + '-' + mon + '-' + da;
-                let data = {
-                    day: fromDate || 0,
-                    open: el.open || 0,
-                    close: el.price || 0,
-                    high: el.high || 0,
-                    low: el.low || 0,
-                    price: el.amount || 0,
-                    value: el.volume || 0,
-                    Rate: (el.volume / GameCfg.data[0].circulate) * 100
-                };
+            info.items.forEach((el, index) => {
+                if (index != 0) {
 
-                if (GameCfg.data[0].circulate == 0) {
-                    data.Rate = 1;
-                }
-                GameCfg.data[0].data.push(data);
-            });
+                    let ye = (el.timestamp + '').slice(0, 4);
+                    let mon = (el.timestamp + '').slice(4, 6);
+                    let da = (el.timestamp + '').slice(6);
+                    let fromDate = ye + '-' + mon + '-' + da;
+                    //  if (fromDate != d) {
+                    let data = {
+                        day: fromDate || 0,
+                        open: el.open || 0,
+                        close: el.price || 0,
+                        high: el.high || 0,
+                        low: el.low || 0,
+                        price: el.amount || 0,
+                        value: el.volume || 0,
+                        Rate: (el.volume / GameCfg.data[0].circulate) * 100
+                    };
 
-            if (info1.kstyle == pb.KStyle.Wave || info1.kstyle == pb.KStyle.Up || info1.kstyle == pb.KStyle.Down) {
-                cb && (cb());
-                if (!GameCfg.GAMEFUPAN) {
-                    GameCfg.huizhidatas = info.items.length - 100;
-                }
-                GameData.huizhidatas = info.items.length - 100;
-                return;
-            }
-
-            if (!GameCfg.GAMEFUPAN) {
-                GameCfg.huizhidatas = info.items.length;
-            }
-
-            GameData.huizhidatas = info.items.length;
-
-            info1.kstyle = pb.KStyle.Random;
-
-            socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
-
-                if (!info.items || info.items.length <= 0) {
-                    console.log('获取的行情为空');
-                    // console.log(JSON.stringify(GameCfg.data));
-                    GameCfg.GAMEFUPAN = false;
-                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                    return;
-                }
-
-                //  let d = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
-                info.items.forEach((el, index) => {
-                    if (index != 0) {
-                        //  let date = new Date(el.timestamp);
-                        let ye = (el.timestamp + '').slice(0, 4);
-                        let mon = (el.timestamp + '').slice(4, 6);
-                        let da = (el.timestamp + '').slice(6);
-                        let fromDate = ye + '-' + mon + '-' + da;
-                        //  if (fromDate != d) {
-                        let data = {
-                            day: fromDate || 0,
-                            open: el.open || 0,
-                            close: el.price || 0,
-                            high: el.high || 0,
-                            low: el.low || 0,
-                            price: el.amount || 0,
-                            value: el.volume || 0,
-                            Rate: (el.volume / GameCfg.data[0].circulate) * 100
-                        };
-
-                        if (GameCfg.data[0].circulate == 0) {
-                            data.Rate = 1;
-                        }
-                        GameCfg.data[0].data.push(data);
+                    if (GameCfg.data[0].circulate == 0) {
+                        data.Rate = 1;
                     }
-                });
-                // console.log(JSON.stringify(GameCfg.data[0].data));
-                // console.log(JSON.stringify(GameCfg.data[0].data.length));
-                cb && (cb());
+                    GameCfg.data[0].data.push(data);
+                }
             });
 
+            console.log('获取的行情' + JSON.stringify(info));
+            console.log(info.items.length);
+
+            cb && (cb());
         });
+
     }
 
     public static onCmdGameStartQuoteQueryQH(data, cb?) {

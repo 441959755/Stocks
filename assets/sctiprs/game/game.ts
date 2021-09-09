@@ -107,6 +107,7 @@ export default class NewClass extends cc.Component {
     }
 
     protected onDestroy() {
+
         GameCfg.GAMEFRTD = false;
         GameCfg.GAMEWAIT = false;
 

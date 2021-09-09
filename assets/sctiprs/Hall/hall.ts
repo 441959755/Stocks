@@ -44,8 +44,8 @@ export default class NewClass extends cc.Component {
 	onLoad() {
 
 		PopupManager.init();
-		//查询行情
-		GlobalEvent.on(EventCfg.onCmdQuoteQuery, this.onCmdQuoteQuery.bind(this), this);
+		// //查询行情
+		// GlobalEvent.on(EventCfg.onCmdQuoteQuery, this.onCmdQuoteQuery.bind(this), this);
 
 		GlobalEvent.on(EventCfg.CmdQuoteQueryFuture, this.onCmdQHGameStart.bind(this), this);
 
@@ -79,7 +79,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	protected onDestroy() {
-		GlobalEvent.off(EventCfg.onCmdQuoteQuery);
+		//	GlobalEvent.off(EventCfg.onCmdQuoteQuery);
 		GlobalEvent.off(EventCfg.OPENPLAYERINFO);
 		GlobalEvent.off(EventCfg.OPENHELPLAYER);
 		GlobalEvent.off(EventCfg.ROOMLEAVE);
@@ -305,6 +305,11 @@ export default class NewClass extends cc.Component {
 			}
 		}
 		console.log('邀请信息：' + JSON.stringify(data));
+
+		if (data.text.length <= 1) {
+			return;
+		}
+
 		if (!this.broadcast) {
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			LoadUtils.loadRes('Prefabs/broadcast', pre => {
@@ -340,25 +345,23 @@ export default class NewClass extends cc.Component {
 
 	}
 
+	// //训练股票进入游戏
+	// onCmdQuoteQuery(data) {
 
-	//训练股票进入游戏
-	onCmdQuoteQuery(data) {
+	// 	let info1 = data;
 
-		let info1 = data;
+	// 	data = { game: GameCfg.GameType };
 
-		data = { game: GameCfg.GameType };
 
-		GameCfg.data[0].data = [];
-
-		GameCfg.enterGameCache = info1;
-		//游戏开始
-		GlobalHandle.onCmdGameStartReq(() => {
-			//游戏行情获取
-			GlobalHandle.onCmdGameStartQuoteQuery(info1, () => {
-				cc.director.loadScene('game');
-			})
-		});
-	}
+	// 	//	GameCfg.enterGameCache = info1;
+	// 	//游戏开始
+	// 	GlobalHandle.onCmdGameStartReq(() => {
+	// 		//游戏行情获取
+	// 		GlobalHandle.onCmdGameStartQuoteQuery(info1, () => {
+	// 			cc.director.loadScene('game');
+	// 		})
+	// 	});
+	// }
 
 	//期货进入游戏
 	onCmdQHGameStart(data) {
