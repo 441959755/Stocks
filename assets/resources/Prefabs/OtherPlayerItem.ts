@@ -205,6 +205,7 @@ export default class NewClass extends cc.Component {
     onGamenterStart(flag?) {
         let data = { code: this.itemData.quotesCode }
         let items;
+
         if (GameCfg.GameType == pb.GameType.QiHuo) {
             items = GameCfgText.getQHItemInfo(data.code);
         } else {
@@ -219,15 +220,14 @@ export default class NewClass extends cc.Component {
 
         GameCfg.allRate = 0;
 
-        let ts = this.itemData.ts;
-
         let cache = {
             ktype: pb.KType.Day,
             kstyle: pb.KStyle.Random,
             code: this.itemData.quotesCode,
             from: this.itemData.kFrom,
-            total: 150 + 1,
+            total: 250,
             to: 0,
+            reserve: 100,
         }
 
         GameCfg.enterGameCache = cache;

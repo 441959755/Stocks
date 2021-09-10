@@ -1280,6 +1280,5 @@ export default class NewClass extends cc.Component {
 		}
 
 		GlobalEvent.emit(EventCfg.RAISINGLIMIT, this.limitUP);
-
 	}
 }

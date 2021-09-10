@@ -177,14 +177,15 @@ export default class NewClass extends cc.Component {
         GameCfg.data[0].circulate = items[4];
 
         GameCfg.allRate = 0;
-        //   let ts = this.itemData.ts;
+
         let cache = {
             ktype: pb.KType.Day,
             kstyle: pb.KStyle.Random,
             code: this.itemData.quotesCode,
             from: this.itemData.kFrom,
-            total: 150 + 1,
+            total: 250,
             to: 0,
+            reserve: 100,
         }
 
         GameCfg.enterGameCache = cache;

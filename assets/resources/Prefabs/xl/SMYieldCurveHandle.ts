@@ -240,88 +240,101 @@ export default class NewClass extends cc.Component {
 
         this.timeLabel.string = '统计时段:' + year + '/' + month + '/' + 1 + '--' + year + '/' + month + '/' + d;
 
-        let zongjinge = 0, zonglilv = 0;
-
         let xlCount = [], xlcvs = [];    //月的训练次数 收益曲线
 
+        let arr = [];
+
         for (let i = 0; i < datas.length; i++) {
+
             let data1 = new Date(datas[i].ts * 1000);
+
             let month1 = data1.getMonth() + 1;
+
             if (month1 != month) {
                 continue;
             }
 
-            zongjinge += (datas[i].userProfit || 0);
-
-            zonglilv += (datas[i].userProfitRate || 0);
-
             let day1 = data1.getDate();
+
+            if (!arr[day1]) {
+                arr[day1] = [];
+            }
+
+            arr[day1].push(datas[i]);
+
 
             if (!xlCount[day1]) {
                 xlCount[day1] = 1;
             } else {
                 xlCount[day1] += 1;
             }
-            if (!xlcvs[day1]) {
-                xlcvs[day1] = 0;
-            }
-            xlcvs[day1] += (datas[i].userProfit || 0);
-
-            if (this.daysData[day1 - 1]) {
-                this.daysData[day1 - 1].count++;
-                this.daysData[day1 - 1].endMoney += datas[i].userProfit;
-                this.daysData[day1 - 1].rate += datas[i].userProfitRate;
-            } else {
-                let info = {
-                    time: year + '.' + month + '.' + day1,
-                    count: 1,
-                    user_capital: datas[i].userCapital,
-                    endMoney: (datas[i].userProfit + datas[i].userCapital),
-                    rate: datas[i].userProfitRate
-                };
-                this.daysData[day1 - 1] = info;
-            }
 
         }
 
-        //没有赋值 赋值
-        for (let j = 0; j < day; j++) {
-            let info = {
-                time: null,
-                count: null,
-                user_capital: null,
-                endMoney: null,
-                rate: null,
+        console.log(arr.length);
+
+        for (let tt = 1; tt < arr.length; tt++) {
+
+            this.daysData[tt - 1] = {
+                time: year + '.' + month + '.' + (tt),
+                count: 0,
+                user_capital: 0,
+                endMoney: 0,
+                rate: 0,
             }
 
-            if (!this.daysData[j]) {
-                info.time = year + '.' + month + '.' + (j + 1);
-                info.rate = 0;
-                info.count = 0;
-                if (j == 0) {
-                    info.user_capital = GameData.SmxlState.goldInit;
-                } else {
-                    info.user_capital = this.daysData[j - 1].endMoney;
+            if (arr[tt]) {
+                arr[tt].forEach((el) => {
+                    this.daysData[tt - 1].count++;
+                    xlcvs[tt] += (el.userProfit || 0);
+                })
+                xlcvs[tt + 1] = xlcvs[tt];
+
+            }
+            else {
+
+                if (tt == 1) {
+                    xlcvs[tt] = GameData.SmxlState.goldInit;
+                    xlcvs[tt + 1] = xlcvs[tt];
+
                 }
-                info.endMoney = info.user_capital;
-                this.daysData[j] = info;
+                else {
+                    xlcvs[tt] = xlcvs[tt - 1];
+                    xlcvs[tt + 1] = xlcvs[tt];
+
+                }
+
             }
+
+            if (tt == 1) {
+                this.daysData[tt - 1].user_capital = xlcvs[tt]
+            }
+            else {
+                this.daysData[tt - 1].user_capital = xlcvs[tt - 1]
+            }
+
+            this.daysData[tt - 1].endMoney = xlcvs[tt];
         }
+
+        console.log(' xlcvs:' + JSON.stringify(xlcvs));
 
         this.draw_line_month(xlCount, xlcvs);
 
         this.draw_line_day();
 
+        // label  
         this.labels[1].string = GameData.SmxlState.goldInit;
-        this.labels[3].string = zongjinge + '';
-        if (zongjinge < 0) {
+        this.labels[3].string = GameData.SmxlState.gold - GameData.SmxlState.goldInit + '';
+
+        if (GameData.SmxlState.gold - GameData.SmxlState.goldInit < 0) {
             this.labels[3].node.color = cc.Color.GREEN;
             this.labels[2].node.color = cc.Color.GREEN;
-        } else if (zongjinge == 0) {
+        } else if (GameData.SmxlState.gold - GameData.SmxlState.goldInit >= 0) {
             this.labels[3].node.color = cc.Color.RED;
             this.labels[2].node.color = cc.Color.RED;
         }
-        this.labels[2].string = (zongjinge / datas[0].userCapital * 100).toFixed(2) + '%';
+
+        this.labels[2].string = ((GameData.SmxlState.gold - GameData.SmxlState.goldInit) / GameData.SmxlState.goldInit * 100).toFixed(2) + '%';
         this.labels[0].string = GameData.SmxlState.gold;
     }
 
@@ -334,7 +347,8 @@ export default class NewClass extends cc.Component {
 
         let maxCount = 0;
         let maxMoney = 0;
-        let minMoney = (xlcvs[0] || 0);
+        let minMoney = xlcvs[1];
+
         xlCount.forEach(el => {
             if (el) {
                 maxCount = Math.max(el, maxCount);
@@ -346,16 +360,14 @@ export default class NewClass extends cc.Component {
                 maxMoney = Math.max(el, maxMoney);
                 minMoney = Math.min(el, minMoney);
             }
-
         });
 
-        // maxMoney = Math.ceil((maxMoney - 50000) / 20000) * 20000;
-        // minMoney = Math.ceil((minMoney + 50000) / 20000) * 20000 - 50000;
-        if (maxMoney <= 50000) {
-            maxMoney = 50000;
-        }
+        minMoney = parseInt((minMoney) / 1000 + '') * 1000;
 
-        let tt = (Math.ceil(maxMoney - minMoney) / 1000) * 1000;
+        maxMoney = Math.ceil((maxMoney - minMoney) / 20000) * 20000 + minMoney;
+        if (minMoney == maxMoney) {
+            maxMoney = (minMoney || 10000) * 6;
+        }
 
         maxCount = Math.ceil(maxCount / 5) * 5;
 
@@ -364,10 +376,15 @@ export default class NewClass extends cc.Component {
         })
 
         this.zhijinNode.children.forEach((el, index) => {
-            el.getComponent(cc.Label).string = parseInt((tt / 5) * index - (tt / 5) + '') + '';
+            // if (index == 0) {
+            //     el.getComponent(cc.Label).string = minMoney + '';
+            // }
+            // else {
+            el.getComponent(cc.Label).string = parseInt(((maxMoney - minMoney) / 5) + '') * index + minMoney + '';
+            //  }
+
         })
 
-        minMoney = parseInt(this.zhijinNode.children[0].getComponent(cc.Label).string);
         maxMoney = parseInt(this.zhijinNode.children[5].getComponent(cc.Label).string);
 
 
@@ -387,6 +404,7 @@ export default class NewClass extends cc.Component {
             this.draw.node.addChild(dot2);
             dot2.zIndex = 6;
             if (!xlcvs[i]) {
+
                 if (i == 0) {
                     xlcvs[i] = this.userCapital;
                 } else {
@@ -397,10 +415,8 @@ export default class NewClass extends cc.Component {
             let y;
             {
                 let c = (xlcvs[i] || 0);
-                y = c * (this.draw.node.height / (maxMoney));
-                if (minMoney <= 0) {
-                    y = (c - minMoney) * (this.draw.node.height / (maxMoney - (minMoney)));
-                }
+                y = (c - minMoney) * (this.draw.node.height / (maxMoney - minMoney));
+
             }
 
             dot2.setPosition(cc.v2((i - 1) * w, y));

@@ -8,7 +8,6 @@ import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -39,20 +38,12 @@ export default class NewClass extends cc.Component {
 
     selfRank = 0;
 
-    start() {
-
-    }
-
     onShow() {
         if (GameCfg.GAMEFUPAN) {
             return;
         }
 
         GlobalEvent.emit(EventCfg.CLEARINTERVAL);
-
-        // let player = GameCfg.RoomGameData.players[0];
-        // GameCfg.RoomGameData.players.unshift(JSON.parse(JSON.stringify(player)));
-
 
         let gpData = GameCfg.data[0].data;
         this.codeLabel.string = '股票名称：' + GameCfg.data[0].name + '    ' + GameCfg.data[0].code;
@@ -73,18 +64,12 @@ export default class NewClass extends cc.Component {
 
         {
             let userName = this.player1.getChildByName('username').getComponent(cc.Label);
-            // let userLevel = this.player1.getChildByName('userLevel').getComponent(cc.Label);
-            // let userExp = this.player1.getChildByName('userExp').getComponent(cc.Label);
+
             let userHead = this.player1.getChildByName('userHead').getComponent(cc.Sprite);
             let winSp = this.player1.getChildByName('jj_js_win');
             let loseSp = this.player1.getChildByName('jj_js_lose');
 
-            // let xj = this.player1.getChildByName('jj_xj');
-            // let taopao = this.player1.getChildByName('jj_toapao');
-
             userName.string = GameData.userName;
-            // userLevel.string = 'LV: ' + GameData.properties[pb.GamePropertyId.Level];
-            // userExp.string = 'EXP: ' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
 
             userHead.spriteFrame = GameData.headImg;
 
@@ -105,29 +90,23 @@ export default class NewClass extends cc.Component {
 
         {
             let userName = this.player2.getChildByName('username').getComponent(cc.Label);
-            // let userLevel = this.player2.getChildByName('userLevel').getComponent(cc.Label);
-            // let userExp = this.player2.getChildByName('userExp').getComponent(cc.Label);
+
             let userHead = this.player2.getChildByName('userHead').getComponent(cc.Sprite);
             let winSp = this.player2.getChildByName('jj_js_win');
             let loseSp = this.player2.getChildByName('jj_js_lose');
 
-            // let xj = this.player2.getChildByName('jj_xj');
-            // let taopao = this.player2.getChildByName('jj_toapao');
-
-            //  userName.string = GameCfg.RoomGameData.players[1].gd.nickname;
-            // userLevel.string = 'LV: ' + GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level];
-            // userExp.string = 'EXP: ' + GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level]]
-
-            if (GameData.Players[1].nickname) {
-                userName.string = GameData.Players[1].nickname;
+            if (GameData.Players[1].nickname || GameData.Players[1].nick) {
+                userName.string = GameData.Players[1].nickname || GameData.Players[1].nick;
             }
 
             if (GameData.Players[1].icon) {
                 userHead.spriteFrame = GameData.Players[1].icon;
             }
+
             if (this.selfRank == 1) {
                 loseSp.active = true;
             }
+
             else if (this.selfRank == 2) {
 
                 winSp.active = true;

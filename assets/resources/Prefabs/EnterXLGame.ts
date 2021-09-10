@@ -75,8 +75,9 @@ export default class NewClass extends cc.Component {
                     kstyle: pb.KStyle.Random,
                     from: GameCfg.RoomGameData.players[0].result.kFrom,
                     code: GameCfg.RoomGameData.players[0].result.quotesCode,
-                    total: 150,
+                    total: 250,
                     to: 0,
+                    reserve: 100,
                 }
 
                 GameCfg.enterGameCache = data;
@@ -128,8 +129,9 @@ export default class NewClass extends cc.Component {
                     kstyle: pb.KStyle.Random,
                     from: this.gpList[0].timestamp,
                     code: this.code,
-                    total: 150,
+                    total: 250,
                     to: 0,
+                    reserve: 100,
                 }
 
                 if (this.gpList.length > 100) {
@@ -140,7 +142,6 @@ export default class NewClass extends cc.Component {
                     GameCfg.huizhidatas = parseInt(this.gpList.length / 2 + '');
                     GameData.huizhidatas = parseInt(this.gpList.length / 2 + '');
                 }
-
 
                 GameCfg.enterGameCache = data;
 

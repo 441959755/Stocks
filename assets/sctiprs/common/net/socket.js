@@ -1,4 +1,4 @@
-//import GameCfg from '../../game/GameCfg';
+
 import {
 	pb
 } from '../../../protos/proto';
@@ -135,14 +135,17 @@ Socket.prototype = {
 		}
 	},
 
-	onclose() {
+	onclose(falg) {
 		console.log('连接断开');
 		this.heartbeat && (clearInterval(this.heartbeat))
 		this.heartbeat = null;
 		this.reconnectBeat && (clearInterval(this.reconnectBeat))
 		this.reconnectBeat = null;
 		this.ws = null;
-		this.reconnect();
+
+		if (!falg) {
+			this.reconnect();
+		}
 	},
 
 	reconnect() {
@@ -200,8 +203,6 @@ function Socket(host) {
 var socket = null;
 
 module.exports = function (host) {
-	if (!socket) {
-		socket = new Socket(host);
-	}
+	socket = new Socket(host);
 	return socket;
 }

@@ -1,4 +1,7 @@
 import { pb } from "../../protos/proto";
+import GameData from "../../sctiprs/GameData";
+import EventCfg from "../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 
 
 const { ccclass, property } = cc._decorator;
@@ -32,8 +35,20 @@ export default class NewClass extends cc.Component {
 
         let e, i = 0;
         for (let t = 0; t < data.length; t++) {
-            if (data[t].progress >= task.progress) {
-                if (!task.got) {
+
+            //未完成
+            if (data[t].progress > task.progress) {
+
+                e = data[t];
+                this.btnGet.interactable = false;
+                this.btnGet.enableAutoGrayEffect = true;
+                i = t;
+                break;
+
+            }
+            else {
+                //以完成  未领取
+                if (task.got < task.award) {
                     e = data[t];
                     this.btnGet.interactable = true;
                     this.btnGet.enableAutoGrayEffect = false;
@@ -41,13 +56,7 @@ export default class NewClass extends cc.Component {
                     break;
                 }
             }
-            else {
-                e = data[t];
-                this.btnGet.interactable = false;
-                this.btnGet.enableAutoGrayEffect = true;
-                i = t;
-                break;
-            }
+
         }
 
         if (!e) {
@@ -89,6 +98,15 @@ export default class NewClass extends cc.Component {
 
             socket.send(pb.MessageId.Req_Hall_GetDailyTaskAward, buff, (info) => {
                 console.log('任务进度' + JSON.stringify(info));
+                if (info.err) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, info.err);
+                    return;
+                }
+                this.btnGet.interactable = false;
+                this.btnGet.enableAutoGrayEffect = true;
+
+                GameData.gameData.tasks.daily[this._index].award += parseInt(this.rewardLabel.string);
+                GlobalEvent.emit('UPDATETASKDATA');
             });
 
         }

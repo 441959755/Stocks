@@ -1326,10 +1326,12 @@
   },
   {
     "__type__": "cc.ClickEvent",
-    "target": null,
+    "target": {
+      "__id__": 6
+    },
     "component": "",
-    "_componentId": "",
-    "handler": "",
+    "_componentId": "86a3519WNxPJIVewlsjoDAo",
+    "handler": "onBtnClick",
     "customEventData": ""
   },
   {

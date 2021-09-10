@@ -27,8 +27,9 @@ export default class NewClass extends cc.Component {
 
     //打开结算页
     openFinalLayer() {
+
         if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
-            this.url = 'Prefabs/game/TjdFinalLayer';
+            this.url1 = 'Prefabs/game/TjdFinalLayer';
         }
 
         LoadUtils.openNode(this.node, this.finalLayer, this.url, 20, (node) => {
@@ -47,14 +48,20 @@ export default class NewClass extends cc.Component {
     }
 
     onLoadOpsControl() {
+        //条件单
         if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
             this.url = 'Prefabs/game/tjdcontrol';
+        }
+        //双盲
+        else if (GameCfg.GameType == pb.GameType.ShuangMang) {
+            this.url = 'Prefabs/game/smControl';
         }
         this.openNode(this.openNode, this.url, 1);
     }
 
     onDestroy() {
         LoadUtils.releaseRes(this.url);
+        LoadUtils.releaseRes(this.url1);
         LoadUtils.releaseRes('Prefabs/game/taiticBox');
         GlobalEvent.off('OPENTAITICBOX');
     }

@@ -70,6 +70,7 @@ export default class NewClass extends cc.Component {
     protected onLoad() {
         //跟新盈利率
         GlobalEvent.on(EventCfg.UPDATERATE, this.UpdateRate.bind(this), this);
+
         //跟新其他玩家盈利率
         GlobalEvent.on(EventCfg.UPDATEOTHERRATE, this.UpdateOtherRate.bind(this), this);
 
@@ -82,7 +83,6 @@ export default class NewClass extends cc.Component {
 
     UpdateOtherRate(rate) {
         this.pkAllRateLa2.string = rate;
-
         if (rate > 0) {
             this.pkAllRateLa2.node.color = cc.Color.RED;
         }
@@ -139,7 +139,6 @@ export default class NewClass extends cc.Component {
             let userProfitRate1;
 
             userProfitRate1 = GameCfg.RoomGameData.players[0].result.userProfitRate || 0;
-
 
             let userProfitRate2 = GameCfg.RoomGameData.players[1].result.userProfitRate || 0;
 

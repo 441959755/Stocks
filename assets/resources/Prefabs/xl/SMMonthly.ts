@@ -37,7 +37,7 @@ export default class NewClass extends cc.Component {
         let date = new Date();
         let year = date.getFullYear();
         let month = date.getMonth();
-        //    let day = date.getDate();
+
         if (month == 0) {
             year -= 1;
             month = 12;

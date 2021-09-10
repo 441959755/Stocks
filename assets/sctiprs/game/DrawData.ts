@@ -678,13 +678,18 @@ export default class DrawData {
         let gpData = GameCfg.data[0].data;
 
         for (let i = 0; i < opts.length; i++) {
-            if (gpData[opts[i].kOffset].close < gpData[opts[i + 1].kOffset].close) {
-                data.yCount++;
+
+            if (opts[i + 1] && gpData[opts[i + 1].kOffset] && gpData[opts[i].kOffset]) {
+
+                if (gpData[opts[i].kOffset].close < gpData[opts[i + 1].kOffset].close) {
+                    data.yCount++;
+                }
+                else if (gpData[opts[i].kOffset].close > gpData[opts[i + 1].kOffset].close) {
+                    data.sCount++;
+                }
+                ++i;
             }
-            else if (gpData[opts[i].kOffset].close > gpData[opts[i + 1].kOffset].close) {
-                data.sCount++;
-            }
-            ++i;
+
         }
 
         return data;

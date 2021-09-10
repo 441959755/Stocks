@@ -18,7 +18,10 @@ cc.Class({
 
 		global.PB = pbhelper;
 
+		//	global.socket = null;
+
 		global.socket = Socket;
+
 	},
 
 	onLoad() {

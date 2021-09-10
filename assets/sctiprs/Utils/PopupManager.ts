@@ -13,6 +13,8 @@ export default class PopupManager {
 
     private static otherPlayerInfo: cc.Node = null;
 
+    private static protocol: cc.Node = null;
+
     public static init() {
         GlobalEvent.on(EventCfg.LOADINGSHOW, this.loadloading.bind(this), this);
         GlobalEvent.on(EventCfg.LOADINGHIDE, () => { this.loading && (this.loading.active = false) }, this);
@@ -21,6 +23,27 @@ export default class PopupManager {
         GlobalEvent.on(EventCfg.TIPSTEXTHIDE, () => { this.tipsText && (this.tipsText.active = false) }, this);
 
         GlobalEvent.on(EventCfg.OPENOTHERPLAYERINFO, this.openOtherPlayerInfoLayer.bind(this), this);
+
+        GlobalEvent.on('openProtocol', this.openProtocol.bind(this), this);
+    }
+
+    public static openProtocol(str, url) {
+        if (this.protocol) {
+            this.protocol.active = true;
+
+            this.protocol.getComponent('Protocol').onShow(str, url);
+        }
+        else {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            LoadUtils.loadRes('Prefabs/playeInfo/protocol', pre => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                this.protocol = cc.instantiate(pre);
+                cc.find('Canvas').addChild(this.protocol, 30);
+                this.protocol.active = true;
+
+                this.protocol.getComponent('Protocol').onShow(str, url);
+            })
+        }
 
     }
 
@@ -124,6 +147,8 @@ export default class PopupManager {
         LoadUtils.releaseRes('Prefabs/tipsText');
         LoadUtils.releaseRes('Prefabs/loading');
         LoadUtils.releaseRes('Prefabs/otherPlayerInfo');
+        GlobalEvent.off('openProtocol');
+        LoadUtils.releaseRes('Prefabs/playeInfo/protocol');
     }
 
 }

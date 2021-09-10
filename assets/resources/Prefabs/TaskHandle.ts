@@ -28,6 +28,7 @@ export default class NewClass extends cc.Component {
     }
 
     onShow() {
+        this.scoll.content.removeAllChildren();
         this.taskConf = GameCfgText.gameTextCfg.task;
         console.log('任务配置：' + JSON.stringify(this.taskConf));
 
@@ -35,6 +36,7 @@ export default class NewClass extends cc.Component {
         console.log('任务进度：' + JSON.stringify(this.taskDaily));
 
         for (var el in this.taskConf) {
+
             if (el != 'study') {
                 let taskId = 0;
                 if (el == 'pk') {

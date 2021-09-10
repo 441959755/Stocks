@@ -246,7 +246,8 @@ export default class NewClass extends cc.Component {
             GameCfg.GameType == pb.GameType.JJ_PK ||
             GameCfg.GameType == pb.GameType.JJ_DuoKong ||
             GameCfg.GameType == pb.GameType.JJ_ChuangGuan ||
-            GameCfg.GameType == pb.GameType.TiaoJianDan) {
+            GameCfg.GameType == pb.GameType.TiaoJianDan ||
+            GameCfg.JJ_XUNLIAN) {
             for (let i = 1; i <= 6; i++) {
                 if (GameCfg.GameSet['isMA' + i]) {
                     GameCfg.MAs[j++] = parseInt(GameCfg.GameSet['MA' + i + 'Date']);

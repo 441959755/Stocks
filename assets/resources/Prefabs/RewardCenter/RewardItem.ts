@@ -62,7 +62,7 @@ export default class NewClass extends cc.Component {
             }
             else if (el.v && el.i == pb.GamePropertyId.Coupon) {
                 this.itemNodes.children[4].active = true;
-                this.vipLa.string = el.v;
+                this.tickLa.string = el.v;
             }
             else if (el.v && el.i == pb.GamePropertyId.Exp) {
                 this.itemNodes.children[3].active = true;
@@ -70,7 +70,7 @@ export default class NewClass extends cc.Component {
             }
             else if (el.v && el.i == pb.GamePropertyId.Fame) {
                 this.itemNodes.children[2].active = true;
-                this.tickLa.string = el.v;
+                this.vipLa.string = el.v;
             }
 
         });
@@ -92,13 +92,12 @@ export default class NewClass extends cc.Component {
             socket.send(pb.MessageId.Req_Hall_GetItem, buff, (info) => {
                 console.log('getRewardCenter:' + JSON.stringify(info));
 
-                this.LQFALG = true;
-                this.yiLingQu.active = this.LQFALG;
-
-                this.lingQu.active = false;
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
             })
+            this.LQFALG = true;
+            this.yiLingQu.active = this.LQFALG;
+            this.lingQu.active = false;
         }
     }
 
