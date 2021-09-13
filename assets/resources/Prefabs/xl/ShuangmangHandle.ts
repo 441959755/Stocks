@@ -124,8 +124,8 @@ export default class NewClass extends cc.Component {
         GameData.huizhidatas = GameCfg.enterGameCache.reserve;
         GameCfg.huizhidatas = GameCfg.enterGameCache.reserve;
         GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
-            GameData.huizhidatas = GameCfg.data[0].data.length - 150;
-            GameCfg.huizhidatas = GameCfg.data[0].data.length - 150;
+            GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100) - 1;
+            GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100) - 1;
             cc.director.loadScene('game');
         });
     }

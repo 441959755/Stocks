@@ -622,7 +622,7 @@ export default class NewClass extends cc.Component {
 			}
 			if (GameCfg.GameSet.year == '随机') {
 				sT.getComponent(cc.Label).string = '起始时间：' + '????';
-				et.getComponent(cc.Label).string = '结束时间:' + '????';
+				et.getComponent(cc.Label).string = '结束时间: ' + '????';
 			} else {
 				sT.getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
 				et.getComponent(cc.Label).string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
@@ -650,7 +650,7 @@ export default class NewClass extends cc.Component {
 
 			if (GameCfg.GameSet.year == '随机') {
 				this.timeLabel[0].string = '起始时间：' + '????';
-				this.timeLabel[1].string = '结束时间:' + '????';
+				this.timeLabel[1].string = '结束时间: ' + '????';
 			} else {
 				this.timeLabel[0].string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
 				this.timeLabel[1].string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');

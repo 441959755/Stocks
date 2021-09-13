@@ -388,9 +388,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 30,
-      "g": 30,
-      "b": 30,
+      "r": 249,
+      "g": 250,
+      "b": 250,
       "a": 255
     },
     "_contentSize": {
@@ -448,9 +448,9 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "961fa207-93d7-4e98-81f3-d5fe5a0c503d"
     },
-    "_type": 0,
+    "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
@@ -624,7 +624,7 @@
         1,
         1.5,
         1.5,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -843,11 +843,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "重置资金",
     "_N$string": "重置资金",
     "_fontSize": 28,
@@ -1239,11 +1238,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "    使用                  重置您的训练资金，重置后，您的\n双盲训练资金变回最初的100000资金。",
     "_N$string": "    使用                  重置您的训练资金，重置后，您的\n双盲训练资金变回最初的100000资金。",
     "_fontSize": 24,
@@ -1350,8 +1348,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "1000金币",
     "_N$string": "1000金币",
     "_fontSize": 24,
@@ -1455,11 +1452,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "VIP可享受免费重置",
     "_N$string": "VIP可享受免费重置",
     "_fontSize": 30,
@@ -1540,7 +1536,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -1757,11 +1753,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "1000金币",
     "_N$string": "1000金币",
     "_fontSize": 30,

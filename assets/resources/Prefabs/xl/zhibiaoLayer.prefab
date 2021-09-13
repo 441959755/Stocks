@@ -391,9 +391,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 30,
-      "g": 30,
-      "b": 30,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -451,9 +451,9 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "961fa207-93d7-4e98-81f3-d5fe5a0c503d"
     },
-    "_type": 0,
+    "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
@@ -919,7 +919,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -1215,7 +1215,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -1550,7 +1550,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -1885,7 +1885,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -2277,9 +2277,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 30,
-      "g": 30,
-      "b": 30,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -2337,9 +2337,9 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "961fa207-93d7-4e98-81f3-d5fe5a0c503d"
     },
-    "_type": 0,
+    "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
@@ -3178,7 +3178,7 @@
       "ctor": "Float64Array",
       "array": [
         -7.430000000000007,
-        -43.189,
+        -43.18900000000001,
         0,
         0,
         0,
@@ -3212,7 +3212,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -3247,8 +3247,8 @@
     "_alignFlags": 45,
     "_left": 12.570000000000007,
     "_right": 27.429999999999993,
-    "_top": 46.769,
-    "_bottom": -39.609,
+    "_top": 46.769000000000005,
+    "_bottom": -39.608999999999995,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -3472,7 +3472,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -3579,7 +3579,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -3686,7 +3686,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -3793,7 +3793,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -3900,7 +3900,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -4007,7 +4007,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -4618,7 +4618,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -4998,7 +4998,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -5378,7 +5378,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -5793,7 +5793,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -6173,7 +6173,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -6553,7 +6553,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -7304,7 +7304,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -7411,7 +7411,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,
@@ -7794,7 +7794,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
     "_useOriginalSize": true,

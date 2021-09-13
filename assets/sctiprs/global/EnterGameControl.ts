@@ -65,6 +65,7 @@ export default class EnterGameControl {
             GameCfg.notice = [];
             GameCfg.history.allRate = 0;
             StrategyAIData.onClearData();
+
             cc.director.loadScene('game');
         }
 

@@ -11,13 +11,21 @@ export default class GlobalHandle {
 
     private static curTotal = 0;
 
-    public static enterGameSetout(data, call) {
+    public static enterGameSetout(data, call, flag?) {
         GameCfg.data[0].data = [];
-        //游戏开始
-        this.onCmdGameStartReq(() => {
+
+        if (!flag) {
+            //游戏开始
+            this.onCmdGameStartReq(() => {
+                //游戏行情获取
+                this.onCmdGameStartQuoteQuery(data, call)
+            });
+        }
+        else {
             //游戏行情获取
             this.onCmdGameStartQuoteQuery(data, call)
-        });
+        }
+
     }
 
     //游戏开始发送游戏类型

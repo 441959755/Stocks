@@ -94,6 +94,7 @@ export default class NewClass extends cc.Component {
     *打开条件单
     */
     openTiaoJianDan() {
+
         this.openNode(this.TJDNode, 'Prefabs/xl/tiaoJianDan', 10, (node) => { this.TJDNode = node });
     }
 
@@ -124,36 +125,36 @@ export default class NewClass extends cc.Component {
      * 历史记录
      */
     openHisLayer() {
-        this.HisLayer.active = true;
+
         switch (GameCfg.GameType) {
             case pb.GameType.ZhiBiao:
                 this.openNode(this.ZBHisNode, 'Prefabs/xl/ZBHistoryLayer', 11, (node) => {
                     this.ZBHisNode = node;
-                    this.HisLayer.active = false;
+
                 });
                 break;
             case pb.GameType.ShuangMang:
                 this.openNode(this.SMHisNode, 'Prefabs/xl/HistoryLayerSM', 11, (node) => {
                     this.SMHisNode = node;
-                    this.HisLayer.active = false;
+
                 });
                 break;
             case pb.GameType.DingXiang:
                 this.openNode(this.DXHisNode, 'Prefabs/xl/DXHistoryLayer', 11, (node) => {
                     this.DXHisNode = node;
-                    this.HisLayer.active = false;
+
                 });
                 break;
             case pb.GameType.QiHuo:
                 this.openNode(this.QHHisNode, 'Prefabs/xl/QHHistoryLayer', 11, (node) => {
                     this.QHHisNode = node;
-                    this.HisLayer.active = false;
+
                 });
                 break;
             case pb.GameType.TiaoJianDan:
                 this.openNode(this.TJDHisNode, 'Prefabs/xl/TJDHistoryLayer', 11, (node) => {
                     this.TJDHisNode = node;
-                    this.HisLayer.active = false;
+
                 });
                 break;
         }
@@ -192,6 +193,7 @@ export default class NewClass extends cc.Component {
      * 指标
      */
     openZBLayer() {
+
         this.openNode(this.ZBNode, 'Prefabs/xl/zhibiaoLayer', 3, (node) => { this.ZBNode = node });
     }
 
@@ -199,6 +201,7 @@ export default class NewClass extends cc.Component {
      * 定向
      */
     openDXLayer() {
+
         this.openNode(this.DXNode, 'Prefabs/xl/DXLayer', 3, (node) => { this.DXNode = node });
     }
 
@@ -207,10 +210,10 @@ export default class NewClass extends cc.Component {
      */
     openQHLayer() {
         this.openNode(this.QHNode, 'Prefabs/xl/qiHuoLayer', 3, (node) => { this.QHNode = node });
-
     }
 
     openNode(node, url, zIndex, call?) {
+        this.HisLayer.active = true;
         if (!node) {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes(url, pre => {
@@ -219,11 +222,13 @@ export default class NewClass extends cc.Component {
                 this.node.addChild(node, zIndex);
                 node.active = true;
                 call && (call(node));
+                this.HisLayer.active = false;
             })
         }
         else {
             node.active = true;
             call && (call(node));
+            this.HisLayer.active = false;
         }
     }
 

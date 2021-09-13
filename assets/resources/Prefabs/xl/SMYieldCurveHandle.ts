@@ -226,6 +226,7 @@ export default class NewClass extends cc.Component {
     onShow() {
         let datas = this.yieldInfo.results;
         if (datas.length <= 0) {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您还没有训练数据！');
             return;
         }
         this.QXNodes[0].active = true;

@@ -14,7 +14,7 @@
   {
     "__type__": "cc.Node",
     "_name": "ZBSetLayer",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": null,
     "_children": [
       {
@@ -109,7 +109,7 @@
     "_prefab": {
       "__id__": 5
     },
-    "_opacity": 160,
+    "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
       "r": 3,
@@ -306,11 +306,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "123",
     "_N$string": "123",
     "_fontSize": 28,
@@ -424,9 +423,11 @@
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 6
+      "__id__": 1
     },
-    "asset": null,
+    "asset": {
+      "__uuid__": "5f563225-dca7-4c84-8d11-ee2264ff0373"
+    },
     "fileId": "ebdATz+ClJx4o2cqC5UBWK",
     "sync": false
   },
@@ -595,9 +596,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 30,
-      "g": 30,
-      "b": 30,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -655,9 +656,9 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "961fa207-93d7-4e98-81f3-d5fe5a0c503d"
     },
-    "_type": 0,
+    "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
@@ -938,7 +939,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -1123,11 +1124,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "训练设置",
     "_N$string": "训练设置",
     "_fontSize": 30,
@@ -1287,9 +1287,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 30,
-      "g": 30,
-      "b": 30,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -1361,9 +1361,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 30,
-      "g": 30,
-      "b": 30,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -1552,7 +1552,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -1571,7 +1571,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Background",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 36
     },
@@ -1710,11 +1710,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "均线(MA)",
     "_N$string": "均线(MA)",
     "_fontSize": 24,
@@ -1788,7 +1787,7 @@
   {
     "__type__": "cc.Node",
     "_name": "checkmark",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 36
     },
@@ -1927,11 +1926,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "均线(MA)",
     "_N$string": "均线(MA)",
     "_fontSize": 24,
@@ -2144,7 +2142,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -2163,7 +2161,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Background",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 51
     },
@@ -2302,11 +2300,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "成交量",
     "_N$string": "成交量",
     "_fontSize": 24,
@@ -2380,7 +2377,7 @@
   {
     "__type__": "cc.Node",
     "_name": "checkmark",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 51
     },
@@ -2519,11 +2516,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "成交量",
     "_N$string": "成交量",
     "_fontSize": 24,
@@ -2736,7 +2732,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -2755,7 +2751,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Background",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 66
     },
@@ -2894,11 +2890,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "MACD",
     "_N$string": "MACD",
     "_fontSize": 24,
@@ -2972,7 +2967,7 @@
   {
     "__type__": "cc.Node",
     "_name": "checkmark",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 66
     },
@@ -3111,11 +3106,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "MACD",
     "_N$string": "MACD",
     "_fontSize": 24,
@@ -3328,7 +3322,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -3347,7 +3341,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Background",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 81
     },
@@ -3486,11 +3480,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "BOLL",
     "_N$string": "BOLL",
     "_fontSize": 24,
@@ -3564,7 +3557,7 @@
   {
     "__type__": "cc.Node",
     "_name": "checkmark",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 81
     },
@@ -3703,11 +3696,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "BOLL",
     "_N$string": "BOLL",
     "_fontSize": 24,
@@ -3920,7 +3912,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -3939,7 +3931,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Background",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 96
     },
@@ -4078,11 +4070,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "K D J",
     "_N$string": "K D J",
     "_fontSize": 24,
@@ -4156,7 +4147,7 @@
   {
     "__type__": "cc.Node",
     "_name": "checkmark",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 96
     },
@@ -4295,11 +4286,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "K D J",
     "_N$string": "K D J",
     "_fontSize": 24,
@@ -4512,7 +4502,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -4531,7 +4521,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Background",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 111
     },
@@ -4670,11 +4660,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "R S I  ",
     "_N$string": "R S I  ",
     "_fontSize": 24,
@@ -4748,7 +4737,7 @@
   {
     "__type__": "cc.Node",
     "_name": "checkmark",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 111
     },
@@ -4887,11 +4876,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "R S I",
     "_N$string": "R S I",
     "_fontSize": 24,
@@ -5104,7 +5092,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -5123,7 +5111,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Background",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 126
     },
@@ -5262,11 +5250,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "EXPMA",
     "_N$string": "EXPMA",
     "_fontSize": 24,
@@ -5340,7 +5327,7 @@
   {
     "__type__": "cc.Node",
     "_name": "checkmark",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 126
     },
@@ -5479,11 +5466,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "EXPMA",
     "_N$string": "EXPMA",
     "_fontSize": 24,
@@ -5715,7 +5701,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Background",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 141
     },
@@ -5820,7 +5806,7 @@
   {
     "__type__": "cc.Node",
     "_name": "checkmark",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 141
     },
@@ -6254,9 +6240,9 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "961fa207-93d7-4e98-81f3-d5fe5a0c503d"
     },
-    "_type": 0,
+    "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
@@ -6510,11 +6496,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "股价穿越均线训练策略：",
     "_N$string": "股价穿越均线训练策略：",
     "_fontSize": 24,
@@ -6725,11 +6710,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日均线",
     "_N$string": "日均线",
     "_fontSize": 24,
@@ -6810,7 +6794,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -7025,11 +7009,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -7220,11 +7203,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "短期均线使用：",
     "_N$string": "短期均线使用：",
     "_fontSize": 24,
@@ -7435,11 +7417,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日均线",
     "_N$string": "日均线",
     "_fontSize": 24,
@@ -7520,7 +7501,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -7735,11 +7716,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -7930,11 +7910,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "中期均线使用：",
     "_N$string": "中期均线使用：",
     "_fontSize": 24,
@@ -8145,11 +8124,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日均线",
     "_N$string": "日均线",
     "_fontSize": 24,
@@ -8230,7 +8208,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -8445,11 +8423,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -8637,11 +8614,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "止损额：",
     "_N$string": "止损额：",
     "_fontSize": 24,
@@ -8829,7 +8805,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -9044,11 +9020,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "-8%",
     "_N$string": "-8%",
     "_fontSize": 28,
@@ -9163,11 +9138,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "均线交叉训练策略：",
     "_N$string": "均线交叉训练策略：",
     "_fontSize": 24,
@@ -11993,11 +11967,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "成交量均线设置：",
     "_N$string": "成交量均线设置：",
     "_fontSize": 24,
@@ -12208,11 +12181,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日移动均线",
     "_N$string": "日移动均线",
     "_fontSize": 24,
@@ -12293,7 +12265,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -12508,11 +12480,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 28,
@@ -12807,11 +12778,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日移动均线",
     "_N$string": "日移动均线",
     "_fontSize": 24,
@@ -12892,7 +12862,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -13107,11 +13077,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -14698,11 +14667,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "MACD指标参数调整：",
     "_N$string": "MACD指标参数调整：",
     "_fontSize": 24,
@@ -14913,11 +14881,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日快移动平均",
     "_N$string": "日快移动平均",
     "_fontSize": 24,
@@ -15213,11 +15180,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -15512,11 +15478,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日慢移动平均",
     "_N$string": "日慢移动平均",
     "_fontSize": 24,
@@ -15812,11 +15777,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -16111,11 +16075,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日移动平均",
     "_N$string": "日移动平均",
     "_fontSize": 24,
@@ -16411,11 +16374,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -18616,11 +18578,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "BOLL指标参数调整：",
     "_N$string": "BOLL指标参数调整：",
     "_fontSize": 24,
@@ -18831,11 +18792,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日布林线",
     "_N$string": "日布林线",
     "_fontSize": 24,
@@ -19131,11 +19091,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -20096,11 +20055,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "KDJ指标参数调整：天数：",
     "_N$string": "KDJ指标参数调整：天数：",
     "_fontSize": 24,
@@ -20311,11 +20269,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "天",
     "_N$string": "天",
     "_fontSize": 24,
@@ -20611,11 +20568,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -21582,11 +21538,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "RSI指标参数调整：",
     "_N$string": "RSI指标参数调整：",
     "_fontSize": 24,
@@ -21797,11 +21752,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日RSI[相对强弱]",
     "_N$string": "日RSI[相对强弱]",
     "_fontSize": 24,
@@ -22097,11 +22051,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -22396,11 +22349,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日RSI[相对强弱]",
     "_N$string": "日RSI[相对强弱]",
     "_fontSize": 24,
@@ -22696,11 +22648,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -22995,11 +22946,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日RSI[相对强弱]",
     "_N$string": "日RSI[相对强弱]",
     "_fontSize": 24,
@@ -23295,11 +23245,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -25503,11 +25452,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "EXPMA指标参数调整：",
     "_N$string": "EXPMA指标参数调整：",
     "_fontSize": 24,
@@ -25718,11 +25666,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日指数平均线",
     "_N$string": "日指数平均线",
     "_fontSize": 24,
@@ -26018,11 +25965,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -26317,11 +26263,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "日指数平均线",
     "_N$string": "日指数平均线",
     "_fontSize": 24,
@@ -26617,11 +26562,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
     "_fontSize": 24,
@@ -28132,11 +28076,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "始终显示成交量",
     "_N$string": "始终显示成交量",
     "_fontSize": 24,
@@ -28240,11 +28183,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "显示风格",
     "_N$string": "显示风格",
     "_fontSize": 24,
@@ -28425,11 +28367,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "开",
     "_N$string": "开",
     "_fontSize": 32,
@@ -28905,11 +28846,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "关",
     "_N$string": "关",
     "_fontSize": 32,
@@ -29499,11 +29439,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "黑底",
     "_N$string": "黑底",
     "_fontSize": 32,
@@ -29979,11 +29918,10 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "白底",
     "_N$string": "白底",
     "_fontSize": 32,
@@ -30480,7 +30418,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -30666,9 +30604,9 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "961fa207-93d7-4e98-81f3-d5fe5a0c503d"
     },
-    "_type": 0,
+    "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {

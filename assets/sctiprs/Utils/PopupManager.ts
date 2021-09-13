@@ -145,7 +145,7 @@ export default class PopupManager {
         GlobalEvent.off(EventCfg.OPENOTHERPLAYERINFO);
         LoadUtils.releaseRes('Prefabs/tipsBox');
         LoadUtils.releaseRes('Prefabs/tipsText');
-        LoadUtils.releaseRes('Prefabs/loading');
+        //   LoadUtils.releaseRes('Prefabs/loading');
         LoadUtils.releaseRes('Prefabs/otherPlayerInfo');
         GlobalEvent.off('openProtocol');
         LoadUtils.releaseRes('Prefabs/playeInfo/protocol');
