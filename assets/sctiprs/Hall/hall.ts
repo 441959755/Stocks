@@ -99,8 +99,6 @@ export default class NewClass extends cc.Component {
 		LoadUtils.releaseRes('Prefabs/friendInvite');
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
-
-
 	}
 
 	gotoBlackHisLayer() {

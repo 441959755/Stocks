@@ -5,6 +5,10 @@ export default class LoadUtils {
         cc.director.loadScene(str);
     }
 
+    public static preLoadScene(str, call?) {
+        cc.director.preloadScene(str, call);
+    }
+
     public static addPersistRootNode(str) {
         cc.game.addPersistRootNode(str);
     }

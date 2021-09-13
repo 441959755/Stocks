@@ -114,12 +114,7 @@ export default class GlobalHandle {
             total: 50,
             to: data.from,
         }
-        if (!GameCfg.GAMEFUPAN) {
-            GameCfg.huizhidatas = preData.total;
-        }
-        GameData.huizhidatas = preData.total;
 
-        //	GameData.huizhidatas = preData.total - 1;
         if (GameData.QHSet.ZLine == '15分钟K') {
             preData.total *= 3;
         } else if (GameData.QHSet.ZLine == '30分钟K') {
@@ -128,7 +123,6 @@ export default class GlobalHandle {
             preData.total *= 12;
         }
 
-        //	data.total -= 50;
         socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(preData), info => {
             //console.log(JSON.stringify(info));
             if (!info.items || info.items.length <= 0) {
@@ -165,7 +159,7 @@ export default class GlobalHandle {
     public static getQHHangQing(data, cb?) {
         let qhHQ = GameCfg.data[0].data;
         socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(data), info => {
-            //console.log(JSON.stringify(info));
+
             if (!info.items || info.items.length <= 0) {
                 console.log('获取的行情为空');
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空' + JSON.stringify(data));
@@ -174,9 +168,7 @@ export default class GlobalHandle {
                 return;
             }
             info.items.forEach((el, index) => {
-                // {"code":2000042,"ktype":"Day","timestamp":"1577235900","open":3112,"close":3116,"high":3120,"low":3112,"volume":"15032"},
-                //[{"code":2000113,"ktype":"Day","timestamp":"20171103","open":610.2,"close":607.4,"high":610.6,"low":606.6,"volume":"178060","cclHold":"442454"},
-                //	if (el.timestamp != GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day) {
+
                 if (index != 0) {
                     let data1 = {
                         day: el.timestamp + '',
@@ -190,10 +182,7 @@ export default class GlobalHandle {
                     qhHQ.push(data1);
                 }
 
-                //	}
             });
-            // console.log(JSON.stringify(GameCfg.data[0].data.length));
-            // console.log(JSON.stringify(GameCfg.data[0].data));
 
             if (this.curTotal > 0) {
                 if (this.curTotal >= 2000) {
@@ -227,7 +216,7 @@ export default class GlobalHandle {
                     qhHQ = DrawData.dataChange(qhHQ[qhHQ.length - 1].day, t, qhHQ);
                 }
                 GameCfg.data[0].data = qhHQ;
-                //	GameCfg.enterGameCache.from1 = GameCfg.data[0].data[0].day;
+
                 cb && (cb());
             }
 
