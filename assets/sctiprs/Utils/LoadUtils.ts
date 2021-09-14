@@ -58,6 +58,8 @@ export default class LoadUtils {
         cc.loader.load(url, (err, res) => {
             if (err) {
                 console.log('LoadUtils load err');
+
+                call && (call());
                 return;
             }
             call && (call(res));

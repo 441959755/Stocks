@@ -201,7 +201,7 @@
       "array": [
         0,
         0,
-        521.4284829598369,
+        525.0008377504477,
         0,
         0,
         0,
@@ -3274,8 +3274,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "你好啊，",
-    "_N$string": "你好啊，",
+    "_string": "111",
+    "_N$string": "111",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,
@@ -3285,7 +3285,7 @@
     "_batchAsBitmap": false,
     "_styleFlags": 0,
     "_underlineHeight": 0,
-    "_N$horizontalAlign": 1,
+    "_N$horizontalAlign": 2,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 2,
@@ -3317,7 +3317,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
+      "width": 36.48,
       "height": 30.24
     },
     "_anchorPoint": {
@@ -3368,8 +3368,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "",
-    "_N$string": "",
+    "_string": "111",
+    "_N$string": "111",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,

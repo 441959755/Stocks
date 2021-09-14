@@ -309,13 +309,10 @@ PBHelper.prototype = {
             let data = SyncRoomLeave.decode(new Uint8Array(buff));
             console.log('玩家离开房间' + JSON.stringify(data));
             if (data.uid == GameData.userID) {
-                //   GameData.selfEnterRoomData = null;
                 GameData.roomId = 0;
                 GameData.JJCapital = 0;
             }
-            else {
-                GameData.Players[1] = null;
-            }
+
             GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }
 

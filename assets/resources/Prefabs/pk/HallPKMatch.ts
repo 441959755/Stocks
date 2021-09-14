@@ -40,9 +40,11 @@ export default class NewClass extends cc.Component {
     }
 
     onShowOtherPlayer() {
-        this.onLoadHead();
+
         this.callBack && (clearInterval(this.callBack));
         this.callBack = null;
+
+        this.onLoadHead();
 
         let name = this.player2.getChildByName('name');
         let lv = this.player2.getChildByName('lv');
@@ -58,25 +60,39 @@ export default class NewClass extends cc.Component {
 
         exp.getComponent(cc.Label).string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + ' /' + GameCfgText.gameTextCfg.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
 
-        // 进入游戏动画
-        this.onEnterGameAnim();
     }
 
     onEnterGameAnim() {
+
+        this.enterGameAnim.on('finished', () => {
+            console.log('enterGameAnim');
+            cc.director.loadScene('game');
+        }, this);
+
         this.enterGameAnim && (this.enterGameAnim.play());
     }
 
     onLoadHead() {
         let head = this.player2.getChildByName('head');
+
         head.getComponent(cc.Sprite).spriteFrame = null;
 
         if (GameData.Players[1].icon) {
+
             ComUtils.onLoadHead(GameData.Players[1].icon, (res) => {
-                let texture = new cc.SpriteFrame(res);
-                GameData.Players[1].icon = texture;
-                head.getComponent(cc.Sprite).spriteFrame = GameData.Players[1].icon;
+                this.callBack && (clearInterval(this.callBack));
+                this.callBack = null;
+                if (res) {
+                    let texture = new cc.SpriteFrame(res);
+                    GameData.Players[1].icon = texture;
+                    head.getComponent(cc.Sprite).spriteFrame = texture;
+                }
+
+                // 进入游戏动画
+                this.onEnterGameAnim();
             })
         }
+
         GameData.Players[1].icon = null;
     }
 
@@ -95,11 +111,13 @@ export default class NewClass extends cc.Component {
 
 
     onEnable() {
+
         if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
             this.onEnterChuanGuanGame();
         }
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
         this.player2.getChildByName('name').active = false;
         this.player2.getChildByName('lv').active = false;;
         this.player2.getChildByName('exp').active = false;
@@ -125,31 +143,42 @@ export default class NewClass extends cc.Component {
         else {
             let arr = ComUtils.getJJXunXian();
 
-            GlobalHandle.onReqRoomEnter(arr, (flag) => {
-                if (flag) {
+            let data = {
+                game: GameCfg.GameType,
+                uid: GameData.userID,
+                junXian: arr,
+            }
+
+            //进入房间请求
+            socket.send(pb.MessageId.Req_Room_Enter, PB.onReqRoomEnterBuff(data), (res) => {
+                console.log(JSON.stringify(res));
+                if (res.err) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err.err);
+                    this.node.active = false;
+                } else {
+                    GameData.roomId = res.id;
                     this.onSlideShow();
                 }
-                else {
-                    this.node.active = false;
-                }
-            });
+            })
         }
 
     }
 
+    //寻找对手动画
     onSlideShow() {
-
         let sp = this.player2.getChildByName('head').getComponent(cc.Sprite);
 
         this.spIndex = 0;
 
-        this.callBack = setInterval(() => {
-            if (this.spIndex >= this.tx.length) {
-                this.spIndex = 0;
-            }
-            sp.spriteFrame = this.tx[this.spIndex++];
-        }, 100);
+        if (!this.callBack) {
 
+            this.callBack = setInterval(() => {
+                if (this.spIndex >= this.tx.length) {
+                    this.spIndex = 0;
+                }
+                sp.spriteFrame = this.tx[this.spIndex++];
+            }, 100);
+        }
     }
 
     onDisable() {

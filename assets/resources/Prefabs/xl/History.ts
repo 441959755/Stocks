@@ -168,11 +168,15 @@ export default class NewClass extends cc.Component {
                 }
 
             }
-            sumEar += arr[index].userProfit;
-
-            sumrate += arr[index].userProfitRate;
 
         })
+
+        arr.forEach(el => {
+            sumEar += el.userProfit;
+
+            sumrate += el.userProfitRate;
+        })
+
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             // this.title.string = '双盲训练';

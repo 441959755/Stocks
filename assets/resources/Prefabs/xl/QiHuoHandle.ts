@@ -1036,8 +1036,8 @@ export default class NewClass extends cc.Component {
 		GameCfg.enterGameCache = data;
 
 		GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, data, () => {
-			GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50);
-			GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50);
+			GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50) - 1;
+			GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50) - 1;
 			cc.director.loadScene('game');
 		});
 

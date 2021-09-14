@@ -132,6 +132,7 @@ export default class NewClass extends cc.Component {
 
 	limitUP = 0;  //0没有  1涨停  2跌停
 
+
 	onLoad() {
 
 		this.gpData = GameCfg.data[0].data;
@@ -193,21 +194,27 @@ export default class NewClass extends cc.Component {
 	}
 
 	updateOtherPlayerOpt() {
+
 		setTimeout(() => {
+
 			let otherAllRate = 0, curAskPrice;
+
 			UpGameOpt.player2Opt.forEach(el => {
-				if (el.openId == pb.GameOperationId.Bid) {
+
+				if (el.opId == pb.GameOperationId.Bid) {
+
 					let rate = (this.gpData[el.kOffset - 1].close - curAskPrice) / curAskPrice;
-					otherAllRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
+
+					otherAllRate = (otherAllRate + 1) * (rate + 1) - 1;
 				}
 				//买入
-				else if (el.openId == pb.GameOperationId.Ask) {
+				else if (el.opId == pb.GameOperationId.Ask) {
 					curAskPrice = this.gpData[el.kOffset - 1].close;
 				}
 			})
 
 			if (this.roundNumber <= 0) {
-				GlobalEvent.emit(EventCfg.UPDATEOTHERRATE, otherAllRate);
+				GlobalEvent.emit(EventCfg.UPDATEOTHERRATE, ComUtils.changeTwoDecimal(otherAllRate * 100));
 			}
 
 		}, 200)
@@ -268,7 +275,7 @@ export default class NewClass extends cc.Component {
 						}
 						else {
 							item = {
-								opId: pb.GameOperationId.Long,
+								opId: pb.GameOperationId.Ask,
 								volume: 1,
 								kOffset: GameCfg.huizhidatas,
 							}
@@ -426,8 +433,11 @@ export default class NewClass extends cc.Component {
 	onGameFUPANOPT(opt) {
 
 		let pkSelf = this.node.getComponent('PKBottomHandle');
+
 		opt.forEach((el, index) => {
+
 			GameCfg.huizhidatas = el.kOffset;
+			
 			this.onSetMrCount();
 			if (GameCfg.GameType == pb.GameType.DingXiang ||
 				GameCfg.GameType == pb.GameType.ZhiBiao ||
@@ -697,12 +707,16 @@ export default class NewClass extends cc.Component {
 			//pk
 			if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 				PopupManager.LoadTipsBox('tipsBox', '您的操作回合数已经用完，请等候其他用户操作结束');
-				GameCfg.GAMEWAIT = true;
 
+				GameCfg.GAMEWAIT = true;
 				GlobalEvent.emit(EventCfg.GAMEWAIT);
+
 				let rate = this.onCurPositionRete(1);
+
 				GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
+
 				GlobalEvent.emit(EventCfg.UPDATERATE, [0, GameCfg.allRate]);
+
 				UpGameOpt.UpGameOpt(1);
 			}
 			else {
@@ -776,20 +790,6 @@ export default class NewClass extends cc.Component {
 		}
 		//点击观望
 		else if (name == 'gwBtn' || name == 'cyBtn') {
-
-			// if (this.roundNumber > 0) {
-			// 	let item = {
-			// 		opId: null,
-			// 		kOffset: GameCfg.huizhidatas,
-			// 	}
-			// 	if (name == 'gwBtn') {
-			// 		item.opId = pb.GameOperationId.Wait;
-			// 	}
-			// 	else {
-			// 		item.opId = pb.GameOperationId.Hold;
-			// 	}
-			// 	UpGameOpt.addOpt(item);
-			// }
 
 			this.setRoundNumber(name);
 		}
@@ -1089,6 +1089,9 @@ export default class NewClass extends cc.Component {
 		let curClose = parseFloat(data[GameCfg.huizhidatas - num].close);
 
 		let preClose = this.onjunjia();
+		if (!preClose) {
+			return 0;
+		}
 		let prezl = 0;
 		this.curMrCount.forEach((el) => {
 			prezl += el;

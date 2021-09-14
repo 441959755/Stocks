@@ -46,6 +46,7 @@ export default class NewClass extends cc.Component {
             let userLevel = this.player1.getChildByName('userLevel').getComponent(cc.Label);
             userLevel.string = 'LV: ' + GameData.properties[pb.GamePropertyId.Level];
         }, this);
+
         GlobalEvent.on(EventCfg.EXPCHANGE, () => {
             let userExp = this.player1.getChildByName('userExp').getComponent(cc.Label);
             userExp.string = 'EXP: ' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
@@ -94,6 +95,7 @@ export default class NewClass extends cc.Component {
             userHead.spriteFrame = GameData.headImg;
 
             UpGameOpt.ChanagekOffset(this.gameResult.players[0].ops.items);
+
             UpGameOpt.ChanagekOffset(this.gameResult.players[1].ops.items);
 
             //消极
@@ -130,8 +132,10 @@ export default class NewClass extends cc.Component {
             userExp.string = 'EXP: ' + this.gameResult.players[1].gd.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level]];
 
             if (GameData.Players[1].icon) {
+
                 userHead.spriteFrame = GameData.Players[1].icon;
             }
+
             let stages = GameCfgText.gameTextCfg.pk;
             let ex;
 
@@ -334,9 +338,8 @@ export default class NewClass extends cc.Component {
     }
 
     onQuitGame() {
+
         GameCfg.fill = [];
-        GameCfg.data[0].data = [];
-        GameCfg.huizhidatas = 0;
         GameCfg.allRate = 0;
         GameCfg.finalfund = 0;
         GameCfg.GAMEFUPAN = false;

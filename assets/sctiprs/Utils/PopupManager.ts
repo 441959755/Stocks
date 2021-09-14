@@ -57,7 +57,6 @@ export default class PopupManager {
                 this.otherPlayerInfo.active = true;
                 ActionUtils.openBox(this.otherPlayerInfo);
                 this.otherPlayerInfo.getComponent('OtherPlayerInfoBox').onShow(info);
-
             })
         }
         else {

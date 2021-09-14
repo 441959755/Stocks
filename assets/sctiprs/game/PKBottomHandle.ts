@@ -90,10 +90,15 @@ export default class NewClass extends cc.Component {
 
     onGameWaitShow() {
         this.wait.active = true;
+
         this.waitName.string = GameCfg.data[0].name + '  ' + GameCfg.data[0].code;
+
         let gpData = GameCfg.data[0].data;
+
         let kFrom = gpData[GameData.huizhidatas - 1].day;
+
         let kTo = gpData[GameCfg.huizhidatas - 1].day;
+
         this.waitCodeTime.string = ComUtils.formatTime(kFrom) + '--' + ComUtils.formatTime(kTo);
     }
 
@@ -201,6 +206,7 @@ export default class NewClass extends cc.Component {
     }
 
     onBtnClick(event, data) {
+
         let name = event.target.name;
 
         //切换标签

@@ -65,9 +65,12 @@ export default class NewClass extends cc.Component {
         else {
             if (!this.texture) {
                 ComUtils.onLoadHead(info.icon, (res) => {
-                    let texture = new cc.SpriteFrame(res);
-                    this.headImg.spriteFrame = texture;
-                    this.texture = texture;
+                    if (res) {
+                        let texture = new cc.SpriteFrame(res);
+                        this.headImg.spriteFrame = texture;
+                        this.texture = texture;
+                    }
+
                 })
             }
             else {

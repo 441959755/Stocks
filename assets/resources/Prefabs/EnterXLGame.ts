@@ -28,13 +28,18 @@ export default class NewClass extends cc.Component {
             GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
             this.xlname.string = '前往定向训练场训练该股票';
             let code = GameCfg.data[0].code + '';
+            this.name = GameCfg.data[0].name;
+            this.code = code;
+
             if (code.length >= 7) {
                 code = code.slice(1);
             }
-            let gpData = GameCfg.data[0].data;
-            let time = ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
 
-            this.codename.string = code + '     ' + time;
+            // let gpData = GameCfg.data[0].data;
+            // let time = ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
+
+            this.codename.string = code + '     ' + this.name;
+
         }
     }
 
@@ -89,10 +94,14 @@ export default class NewClass extends cc.Component {
                 GameCfg.GameSet.year = (data.from + '').slice(0, 4);
 
                 GameCfg.GameSet.search = data.code;
-
+                GameCfg.data[0].data = [];
                 GameCfg.data[0].name = this.name;
 
                 GameCfg.data[0].code = this.code;
+
+                GameCfg.huizhidatas = 100;
+
+                GameData.huizhidatas = 100;
 
                 EnterGameControl.onClearPreGameDataEnter(data);
             }

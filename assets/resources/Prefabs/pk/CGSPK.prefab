@@ -47860,7 +47860,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 120,
+      "width": 168,
       "height": 30.24
     },
     "_anchorPoint": {
@@ -47911,8 +47911,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "本轮时间：",
-    "_N$string": "本轮时间：",
+    "_string": "本轮结束时间：",
+    "_N$string": "本轮结束时间：",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,

@@ -111,22 +111,27 @@ export default class NewClass extends cc.Component {
 
     // 同步房间游戏状态
     onRoomGameStatus(data?) {
-        setTimeout(() => {
-            cc.director.loadScene('game');
-        }, 500)
+        console.log('进入房间');
+        // setTimeout(() => {
+        //     cc.director.loadScene('game');
+        // }, 2000)
     }
 
     onOtherEnterRoomGameData(info) {
-
+        console.log('其他玩家进入房间：' + JSON.stringify(info));
         GameData.Players[1] = info.player;
 
         GlobalEvent.emit('SHOWOTHERPLAYER');
     }
 
     onSelfEnterRoomGameData(info) {
+
         info.id && (GameData.roomId = info.id)
+
         GameCfg.GameType = info.game;
+
         GameCfg.GameSet = GameData.JJPKSet;
+
         let code = info.code + '';
         if (code.length >= 7) {
             code = code.slice(1);
@@ -142,8 +147,20 @@ export default class NewClass extends cc.Component {
         GameData.huizhidatas = info.tsQuoteStart + 1;
         GameCfg.huizhidatas = info.tsQuoteStart + 1;
 
-        if (info.players[0].gd) {
+        if (info.players[0].gd.uid == GameData.userID) {
             GameData.Players[0] = info.players[0].gd;
+
+            if (info.players[1].gd) {
+                GameData.Players[1] = info.players[1].gd;
+            }
+        }
+
+        else if (info.players[1].gd.uid == GameData.userID) {
+            GameData.Players[0] = info.players[1].gd;
+
+            if (info.players[1].gd) {
+                GameData.Players[1] = info.players[0].gd;
+            }
         }
 
         info.quotes && (info.quotes.items.forEach((el, index) => {
@@ -170,10 +187,11 @@ export default class NewClass extends cc.Component {
             GameCfg.data[0].data.push(data);
         })
         )
+
         if (info.players[1].gd && info.quotes) {
-            GameData.Players[1] = info.players[1].gd;
 
             if (GameData.RoomType) {
+
                 if (info.players[0].gd.uid == GameData.userID) {
                     GameData.Players[0] = info.players[0].gd;
                     GameData.Players[1] = info.players[1].gd;
@@ -182,11 +200,13 @@ export default class NewClass extends cc.Component {
                     GameData.Players[0] = info.players[1].gd;
                     GameData.Players[1] = info.players[0].gd;
                 }
+
                 GlobalEvent.emit(EventCfg.OPENROOM);
+
             }
             else {
-                //  this.matchPK.active = true;
                 this.openMatchPk();
+
                 GlobalEvent.emit('SHOWOTHERPLAYER');
             }
         }

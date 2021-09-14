@@ -366,13 +366,21 @@ export default class NewClass extends cc.Component {
                     }
 
                     PopupManager.LoadTipsBox('tipsBox', str, () => {
+
                         GlobalHandle.onReqRoomLeave();
                         GameCfg.huizhidatas = 0;
                         GameCfg.allRate = 0;
                         GameCfg.finalfund = 0;
                         GameCfg.GAMEFUPAN = false;
                         GameCfg.RoomGameData = null;
+
+                        if (!GameData.RoomType) {
+                            GameData.selfEnterRoomData = null;
+                            GameData.roomId = null;
+                        }
+
                         cc.director.loadScene('hall');
+
                     })
                 }
                 else {
@@ -410,7 +418,9 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'otherPlayerNode') {
-            GlobalEvent.emit(EventCfg.OPENOTHERPLAYERINFO);
+            console.log(GameData.Players[1]);
+
+            GlobalEvent.emit(EventCfg.OPENOTHERPLAYERINFO, GameData.Players[1]);
         }
     }
 

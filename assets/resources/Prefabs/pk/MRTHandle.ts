@@ -31,65 +31,33 @@ export default class NewClass extends cc.Component {
         });
 
         let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
+
         UIScrollControl.initControl(this.item, arr.length, this.item.getContentSize(), 0, (node, index) => {
-            let RankNode = node.getChildByName('node');
-            let nodes = RankNode.children;
 
-            nodes.forEach(el => {
-                el.active = false;
-            })
+            let handle = node.getComponent('MRTItem');
+            handle.onShow(arr[index], index);
+            // let nodes = RankNode.children;
 
-            if (index <= 2) {
-                nodes[index].active = true;
-            }
-            else {
-                nodes[3].active = true;
-                nodes[3].getComponent(cc.Label).string = (index + 1);
-            }
 
-            let userNode = node.getChildByName('userinfobg');
+            // if (el.cgsClearance == 0) {
+            //     node.active = false;
+            // }
 
-            let head = userNode.getChildByName('main_txk').getComponent(cc.Sprite);
+            // if (!el.icon || el.icon == 'default_icon' || el.icon == 'default.jpg') {
 
-            let username = userNode.getChildByName('username').getComponent(cc.Label);
+            // }
+            // else {
 
-            let userlv = userNode.getChildByName('userLv').getComponent(cc.Label);
-
-            let man = userNode.getChildByName('main_sex__man');
-
-            let countLabel = node.getChildByName('label').getComponent(cc.Label);
-            let el = arr[index];
-            if (el.nickname) {
-                username.string = el.nickname;
-            } else {
-                username.string = el.uid;
-            }
-
-            if (el.level) {
-                userlv.string = 'LV: ' + el.level;
-            } else {
-                userlv.string = '';
-            }
-
-            man.children[0].active = !el.gender;
-
-            countLabel.string = el.cgsClearance;
-
-            if (el.cgsClearance == 0) {
-                node.active = false;
-            }
-
-            if (!el.icon || el.icon == 'default_icon' || el.icon == 'default.jpg') {
-
-            }
-            else {
-                ComUtils.onLoadHead(el.icon, (res) => {
-                    let texture = new cc.SpriteFrame(res);
-                    head.spriteFrame = texture;
-                })
-            }
-
+            // }
         })
+
+        // ComUtils.onLoadHead(el.icon, (res) => {
+        //     if (res) {
+        //         let texture = new cc.SpriteFrame(res);
+        //         head.spriteFrame = texture;
+        //     }
+
+        // })
     }
 
     onBtnClick(event, data) {

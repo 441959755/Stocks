@@ -70,29 +70,29 @@ export default class GlobalHandle {
             }
 
             info.items.forEach((el, index) => {
-                if (index != 0) {
+                //  if (index != 0) {
 
-                    let ye = (el.timestamp + '').slice(0, 4);
-                    let mon = (el.timestamp + '').slice(4, 6);
-                    let da = (el.timestamp + '').slice(6);
-                    let fromDate = ye + '-' + mon + '-' + da;
-                    //  if (fromDate != d) {
-                    let data = {
-                        day: fromDate || 0,
-                        open: el.open || 0,
-                        close: el.price || 0,
-                        high: el.high || 0,
-                        low: el.low || 0,
-                        price: el.amount || 0,
-                        value: el.volume || 0,
-                        Rate: (el.volume / GameCfg.data[0].circulate) * 100
-                    };
+                let ye = (el.timestamp + '').slice(0, 4);
+                let mon = (el.timestamp + '').slice(4, 6);
+                let da = (el.timestamp + '').slice(6);
+                let fromDate = ye + '-' + mon + '-' + da;
+                //  if (fromDate != d) {
+                let data = {
+                    day: fromDate || 0,
+                    open: el.open || 0,
+                    close: el.price || 0,
+                    high: el.high || 0,
+                    low: el.low || 0,
+                    price: el.amount || 0,
+                    value: el.volume || 0,
+                    Rate: (el.volume / GameCfg.data[0].circulate) * 100
+                };
 
-                    if (GameCfg.data[0].circulate == 0) {
-                        data.Rate = 1;
-                    }
-                    GameCfg.data[0].data.push(data);
+                if (GameCfg.data[0].circulate == 0) {
+                    data.Rate = 1;
                 }
+                GameCfg.data[0].data.push(data);
+                //   }
             });
 
             console.log('获取的行情' + JSON.stringify(info));
@@ -170,18 +170,18 @@ export default class GlobalHandle {
             }
             info.items.forEach((el, index) => {
 
-                if (index != 0) {
-                    let data1 = {
-                        day: el.timestamp + '',
-                        open: el.open || 0,
-                        close: el.close || 0,
-                        high: el.high || 0,
-                        low: el.low || 0,
-                        value: el.volume || 0,
-                        ccl_hold: el.cclHold || 0,
-                    };
-                    qhHQ.push(data1);
-                }
+                //    if (index != 0) {
+                let data1 = {
+                    day: el.timestamp + '',
+                    open: el.open || 0,
+                    close: el.close || 0,
+                    high: el.high || 0,
+                    low: el.low || 0,
+                    value: el.volume || 0,
+                    ccl_hold: el.cclHold || 0,
+                };
+                qhHQ.push(data1);
+                //    }
 
             });
 
@@ -269,26 +269,6 @@ export default class GlobalHandle {
         })
     }
 
-    //进入房间：CmdRoomEnter
-
-    public static onReqRoomEnter(arr, call?) {
-        let data = {
-            game: GameCfg.GameType,
-            uid: GameData.userID,
-            junXian: arr,
-        }
-        socket.send(pb.MessageId.Req_Room_Enter, PB.onReqRoomEnterBuff(data), (res) => {
-            console.log(JSON.stringify(res));
-            if (res.err) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err.err);
-                call && (call());
-            } else {
-                GameData.roomId = res.id;
-                call && call(1);
-            }
-        })
-
-    }
 
     //离开房间：CmdRoomLeave
     public static onReqRoomLeave(call?) {
@@ -317,7 +297,7 @@ export default class GlobalHandle {
 
     //上传房间游戏操作
     public static onUpRoomGameOp(ops) {
-
+        if (!ops) { return }
         let GameOperations = pb.GameOperations;
         let data1 = GameOperations.create(ops);
         let buff1 = GameOperations.encode(data1).finish();
@@ -335,7 +315,6 @@ export default class GlobalHandle {
         socket.send(pb.MessageId.Sync_Room_GameOp, buff, (res) => {
             console.log(JSON.stringify(res));
         })
-
 
     }
 

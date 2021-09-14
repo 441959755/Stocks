@@ -83,8 +83,11 @@ export default class NewClass extends cc.Component {
         }
         else {
             ComUtils.onLoadHead(obj.icon, (texture) => {
-                GameData.imgs[obj.icon + ''] = new cc.SpriteFrame(texture);
-                this.head.spriteFrame = GameData.imgs[obj.icon + '']
+                if (texture) {
+                    GameData.imgs[obj.icon + ''] = new cc.SpriteFrame(texture);
+                    this.head.spriteFrame = GameData.imgs[obj.icon + '']
+                }
+
             })
         }
     }

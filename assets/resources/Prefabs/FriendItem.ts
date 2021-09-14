@@ -34,6 +34,9 @@ export default class NewClass extends cc.Component {
 
             if (info.uid == this.uid) {
                 console.log('玩家资料应答' + JSON.stringify(info));
+
+                GameData.playersInfo[info.uid + ''] = info;
+
                 this.init(info);
             }
 
@@ -78,6 +81,7 @@ export default class NewClass extends cc.Component {
         let info = {
             uid: code,
         }
+
         let playerInfo = pb.PlayerInfo;
         let buff = playerInfo.encode(info).finish();
         socket.send(pb.MessageId.Req_Hall_QueryPlayer, buff);
@@ -90,8 +94,10 @@ export default class NewClass extends cc.Component {
         }
         else {
             ComUtils.onLoadHead(obj.icon, (texture) => {
-                GameData.imgs[obj.icon + ''] = new cc.SpriteFrame(texture);
-                this.head.spriteFrame = GameData.imgs[obj.icon + '']
+                if (texture) {
+                    GameData.imgs[obj.icon + ''] = new cc.SpriteFrame(texture);
+                    this.head.spriteFrame = GameData.imgs[obj.icon + '']
+                }
             })
         }
     }

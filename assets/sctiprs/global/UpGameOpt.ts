@@ -78,10 +78,13 @@ export default class UpGameOpt {
                 });
             }
             this.cb && (clearTimeout(this.cb));
+
             this.cb = null;
+
             GlobalHandle.onUpRoomGameOp({ items: this.arrOpt });
 
             this.arrOpt = [];
+
             this.arrOpt.length = 0;
         }
     }
@@ -95,7 +98,6 @@ export default class UpGameOpt {
         this.cb = null;
         this.arrOpt = [];
         this.arrOpt.length = 0;
-
     }
 
     //kOffset
@@ -107,9 +109,10 @@ export default class UpGameOpt {
 
     public static UpdataOtherPlayerOpt(opt) {
         console.log('opt:' + JSON.stringify(opt));
-        this.ChanagekOffset(opt);
-        this.player2Opt.push(opt);
+        //  this.ChanagekOffset(opt);
+        let obj = opt;
+        obj.kOffset += 1;
+        this.player2Opt.push(obj);
         console.log('player2Opt:' + JSON.stringify(this.player2Opt));
-
     }
 }

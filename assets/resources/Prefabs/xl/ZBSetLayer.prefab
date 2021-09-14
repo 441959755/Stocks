@@ -306,7 +306,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -1124,7 +1124,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -1710,7 +1710,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -1926,7 +1926,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -2300,7 +2300,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -2514,11 +2514,7 @@
       "__id__": 59
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "成交量",
     "_N$string": "成交量",
@@ -2890,7 +2886,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -3104,11 +3100,7 @@
       "__id__": 74
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "MACD",
     "_N$string": "MACD",
@@ -3480,7 +3472,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -3694,11 +3686,7 @@
       "__id__": 89
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "BOLL",
     "_N$string": "BOLL",
@@ -4070,7 +4058,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -4284,11 +4272,7 @@
       "__id__": 104
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "K D J",
     "_N$string": "K D J",
@@ -4660,7 +4644,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -4874,11 +4858,7 @@
       "__id__": 119
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "R S I",
     "_N$string": "R S I",
@@ -5250,7 +5230,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -5464,11 +5444,7 @@
       "__id__": 134
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "EXPMA",
     "_N$string": "EXPMA",
@@ -6496,7 +6472,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -6710,7 +6686,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -7009,7 +6985,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -7203,7 +7179,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -7417,7 +7393,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -7716,7 +7692,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -7910,7 +7886,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -8124,7 +8100,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -8423,7 +8399,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -8614,7 +8590,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -9020,7 +8996,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -9138,7 +9114,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -11965,11 +11941,7 @@
       "__id__": 320
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "成交量均线设置：",
     "_N$string": "成交量均线设置：",
@@ -12179,11 +12151,7 @@
       "__id__": 326
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "日移动均线",
     "_N$string": "日移动均线",
@@ -12478,11 +12446,7 @@
       "__id__": 334
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
@@ -12776,11 +12740,7 @@
       "__id__": 342
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "日移动均线",
     "_N$string": "日移动均线",
@@ -13075,11 +13035,7 @@
       "__id__": 350
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
@@ -14665,11 +14621,7 @@
       "__id__": 397
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "MACD指标参数调整：",
     "_N$string": "MACD指标参数调整：",
@@ -14879,11 +14831,7 @@
       "__id__": 403
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "日快移动平均",
     "_N$string": "日快移动平均",
@@ -15178,11 +15126,7 @@
       "__id__": 411
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
@@ -15476,11 +15420,7 @@
       "__id__": 419
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "日慢移动平均",
     "_N$string": "日慢移动平均",
@@ -15775,11 +15715,7 @@
       "__id__": 427
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
@@ -16073,11 +16009,7 @@
       "__id__": 435
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "日移动平均",
     "_N$string": "日移动平均",
@@ -16372,11 +16304,7 @@
       "__id__": 443
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
@@ -18576,11 +18504,7 @@
       "__id__": 509
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "BOLL指标参数调整：",
     "_N$string": "BOLL指标参数调整：",
@@ -18790,11 +18714,7 @@
       "__id__": 515
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "日布林线",
     "_N$string": "日布林线",
@@ -19089,11 +19009,7 @@
       "__id__": 523
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
@@ -20053,11 +19969,7 @@
       "__id__": 551
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "KDJ指标参数调整：天数：",
     "_N$string": "KDJ指标参数调整：天数：",
@@ -20267,11 +20179,7 @@
       "__id__": 557
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "天",
     "_N$string": "天",
@@ -20566,11 +20474,7 @@
       "__id__": 565
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
@@ -21536,11 +21440,7 @@
       "__id__": 593
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "RSI指标参数调整：",
     "_N$string": "RSI指标参数调整：",
@@ -21750,11 +21650,7 @@
       "__id__": 599
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "日RSI[相对强弱]",
     "_N$string": "日RSI[相对强弱]",
@@ -22049,11 +21945,7 @@
       "__id__": 607
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
@@ -22347,11 +22239,7 @@
       "__id__": 615
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "日RSI[相对强弱]",
     "_N$string": "日RSI[相对强弱]",
@@ -22646,11 +22534,7 @@
       "__id__": 623
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
@@ -22944,11 +22828,7 @@
       "__id__": 631
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "日RSI[相对强弱]",
     "_N$string": "日RSI[相对强弱]",
@@ -23243,11 +23123,7 @@
       "__id__": 639
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
@@ -25450,11 +25326,7 @@
       "__id__": 705
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "EXPMA指标参数调整：",
     "_N$string": "EXPMA指标参数调整：",
@@ -25664,11 +25536,7 @@
       "__id__": 711
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "日指数平均线",
     "_N$string": "日指数平均线",
@@ -25963,11 +25831,7 @@
       "__id__": 719
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
@@ -26261,11 +26125,7 @@
       "__id__": 727
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "日指数平均线",
     "_N$string": "日指数平均线",
@@ -26560,11 +26420,7 @@
       "__id__": 735
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
@@ -28074,11 +27930,7 @@
       "__id__": 781
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "始终显示成交量",
     "_N$string": "始终显示成交量",
@@ -28181,11 +28033,7 @@
       "__id__": 784
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "显示风格",
     "_N$string": "显示风格",
@@ -28365,11 +28213,7 @@
       "__id__": 788
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "开",
     "_N$string": "开",
@@ -28844,11 +28688,7 @@
       "__id__": 800
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "关",
     "_N$string": "关",
@@ -29437,11 +29277,7 @@
       "__id__": 816
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "黑底",
     "_N$string": "黑底",
@@ -29916,11 +29752,7 @@
       "__id__": 828
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
-      }
-    ],
+    "_materials": [],
     "_useOriginalSize": true,
     "_string": "白底",
     "_N$string": "白底",

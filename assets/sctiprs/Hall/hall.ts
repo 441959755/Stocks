@@ -241,10 +241,13 @@ export default class NewClass extends cc.Component {
 		this.gotoBlackHisLayer();
 		//断线重连 或游戏后进入房间
 		if (GameData.selfEnterRoomData) {
+
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
 			GameCfg.GameSet = GameData.JJPKSet;
 
 			GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameData.selfEnterRoomData);
+
 			GameData.roomId = GameData.selfEnterRoomData.id;
 
 			if (!GameData.RoomType) {
@@ -339,6 +342,7 @@ export default class NewClass extends cc.Component {
 		}
 
 	}
+
 
 
 	//期货进入游戏

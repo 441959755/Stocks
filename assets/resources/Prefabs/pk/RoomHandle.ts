@@ -206,9 +206,12 @@ export default class NewClass extends cc.Component {
         }
         else {
             ComUtils.onLoadHead(ob.icon, (res) => {
-                let texture = new cc.SpriteFrame(res);
-                ob.icon = texture;
-                head.spriteFrame = GameData.Players[1].icon;
+                if (res) {
+                    let texture = new cc.SpriteFrame(res);
+                    ob.icon = texture;
+                    head.spriteFrame = GameData.Players[1].icon;
+                }
+
             })
             ob.icon = null;
         }

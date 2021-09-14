@@ -408,7 +408,7 @@ export default class GameCfgText {
             kstyle: GameCfg.enterGameCache.kstyle,
             code: null,
             from: null,
-            total: parseInt(GameData.DXSet.KLine) + 1 + 100,
+            total: parseInt(GameData.DXSet.KLine) + 100,
             to: 0,
             reserve: 100,
         };
@@ -548,8 +548,9 @@ export default class GameCfgText {
             kstyle: 0,      // 0随机行情   1震荡行情  2单边向上行情 3单边向下行情
             code: null,       //股票代码（0表示忽略和随机）
             from: null,       //// 开始时间戳（不能为0，查询日K行情的格式为：YYYYMMDD；查询分时行情的格式为：HHMMSS）
-            total: parseInt(GameData.ZBSet.KLine) + 1,  // K线条数
+            total: parseInt(GameData.ZBSet.KLine) + 100,  // K线条数
             to: 0,           //	// 结束时间戳（0表示忽略该参数；格式同from）
+            reserve: 100,
         }
         let items;
         let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
