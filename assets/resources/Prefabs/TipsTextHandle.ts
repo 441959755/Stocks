@@ -7,13 +7,11 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     label: cc.Label = null;
 
-    textData = null;
 
     callOut = null;
 
-    onShow() {
-        console.log('this.textData ' + this.textData);
-        this.label.string = this.textData || '';
+    onShow(str) {
+        this.label.string = str;
         if (!this.callOut) {
             this.callOut = setTimeout(() => {
                 cc.tween(this.node)
@@ -31,7 +29,6 @@ export default class NewClass extends cc.Component {
 
 
     onDisable() {
-        this.textData = '';
         this.node.opacity = 255;
         this.callOut && (clearTimeout(this.callOut))
         this.callOut = null;

@@ -385,14 +385,12 @@ export default class NewClass extends cc.Component {
         }
     }
 
-
     onDestroy() {
         GameCfg.allRate = 0;
         GameCfg.finalfund = 0;
         GameCfg.GAMEFUPAN = false;
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
-        GameCfg.enterGameCache = null;
         GameCfg.RoomGameData = null;
         UpGameOpt.clearGameOpt();
     }

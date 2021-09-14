@@ -112,9 +112,9 @@
     "_opacity": 250,
     "_color": {
       "__type__": "cc.Color",
-      "r": 24,
-      "g": 24,
-      "b": 24,
+      "r": 0,
+      "g": 0,
+      "b": 0,
       "a": 255
     },
     "_contentSize": {
@@ -1124,7 +1124,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -1739,7 +1739,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -1923,7 +1923,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -2402,7 +2402,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -2996,7 +2996,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -3180,7 +3180,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -3659,7 +3659,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -4253,7 +4253,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -4437,7 +4437,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -4916,7 +4916,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -5510,7 +5510,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -5694,7 +5694,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -6173,7 +6173,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -6767,7 +6767,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -6951,7 +6951,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -7430,7 +7430,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -8156,7 +8156,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -8334,7 +8334,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -9146,7 +9146,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -9324,7 +9324,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -10136,7 +10136,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -10314,7 +10314,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -11126,7 +11126,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -12116,7 +12116,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,
@@ -13106,7 +13106,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "aa54b62e-014c-4ac0-92e4-c03cd03ec386"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_useOriginalSize": true,

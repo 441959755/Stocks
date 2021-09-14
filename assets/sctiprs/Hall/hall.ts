@@ -342,14 +342,13 @@ export default class NewClass extends cc.Component {
 
 
 	//期货进入游戏
-	onCmdQHGameStart(data) {
+	onCmdQHGameStart(data, cb) {
+
 		GameCfg.data[0].data = [];
 		//游戏开始
 		GlobalHandle.onCmdGameStartReq(() => {
 			//游戏行情获取
-			GlobalHandle.onCmdGameStartQuoteQueryQH(data, () => {
-				cc.director.loadScene('game');
-			});
+			GlobalHandle.onCmdGameStartQuoteQueryQH(data, cb);
 		})
 	}
 

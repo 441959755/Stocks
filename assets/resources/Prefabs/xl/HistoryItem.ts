@@ -21,7 +21,9 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         //点击复盘
         if (name == 'btnFuPan') {
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
             let ts = parseInt(this.infoData.ts);
 
             let info = {
@@ -76,10 +78,6 @@ export default class NewClass extends cc.Component {
                     });
                 } else {
                     GlobalHandle.onCmdGameStartQuoteQuery(GameCfg.enterGameCache, () => {
-
-                        //  if (GameCfg.huizhidatas > GameCfg.data[0].data.length) {
-                        GameCfg.huizhidatas = GameCfg.data[0].data.length;
-
                         cc.director.loadScene('game');
                     })
                 }

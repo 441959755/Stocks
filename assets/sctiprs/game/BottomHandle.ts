@@ -447,13 +447,14 @@ export default class NewClass extends cc.Component {
 				}
 			}
 			else if (GameCfg.GameType == pb.GameType.QiHuo) {
-				if (el.opId == pb.GameOperationId.Long) {
+
+				if (el.opId == pb.GameOperationId.Ask) {
 					this.onClick({ target: { name: 'qhxl_kd' } }, null);
 				}
 				else if (el.opId == pb.GameOperationId.Short) {
 					this.onClick({ target: { name: 'qhxl_kk' } }, null);
 				}
-				else if (el.opId == pb.GameOperationId.Close_Force) {
+				else if (el.opId == pb.GameOperationId.Bid_Force) {
 					this.onClick({ target: { name: 'qhxl_fs' } }, null);
 				}
 				else if (el.opId == pb.GameOperationId.Wait) {
@@ -490,8 +491,6 @@ export default class NewClass extends cc.Component {
 
 		if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) && GameCfg.GAMEFRTD) {
 			GameCfg.huizhidatas = GameCfg.RoomGameData.players[0].curPos;
-		} else {
-			GameCfg.huizhidatas = this.gpData.length;
 		}
 
 		GlobalEvent.emit('roundNUmber');
@@ -802,14 +801,16 @@ export default class NewClass extends cc.Component {
 
 		//开多
 		else if (name == 'qhxl_kd') {
+
 			if (this.roundNumber > 0) {
 				let item = {
-					opId: pb.GameOperationId.Long,
+					opId: pb.GameOperationId.Ask,
 					volume: 1,
 					kOffset: GameCfg.huizhidatas,
 				}
 				UpGameOpt.addOpt(item);
 			}
+
 			if (this._KKCount != 0) {
 
 				this.curMcCount = 3;
@@ -871,7 +872,7 @@ export default class NewClass extends cc.Component {
 		else if (name == 'qhxl_fs') {
 			if (this.roundNumber > 0) {
 				let item = {
-					opId: pb.GameOperationId.Close_Force,
+					opId: pb.GameOperationId.Bid_Force,
 					volume: 1,
 					kOffset: GameCfg.huizhidatas,
 

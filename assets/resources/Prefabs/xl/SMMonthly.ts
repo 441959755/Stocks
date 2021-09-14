@@ -16,7 +16,6 @@ export default class NewClass extends cc.Component {
     logo: cc.Node = null;
 
 
-
     start() {
         //请求获取跟新数据
         GlobalEvent.emit(EventCfg.LOADINGSHOW);

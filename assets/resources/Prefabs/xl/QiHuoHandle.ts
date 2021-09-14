@@ -771,6 +771,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	QHStartGameSet() {
+
 		let data = {
 			ktype: null,
 			kstyle: pb.KStyle.Random,
@@ -779,7 +780,9 @@ export default class NewClass extends cc.Component {
 			total: parseInt(GameData.QHSet.KLine) + 1,
 			to: 0
 		};
+
 		let jys, lxpz, hy, rom, rom1, rom2;
+
 		if (GameData.QHSet.JYS == '随机') {
 			rom = parseInt(Math.random() * 4 + '');
 			if (rom == 0) {
@@ -791,7 +794,8 @@ export default class NewClass extends cc.Component {
 			} else if (rom == 3) {
 				jys = '中金所';
 			}
-		} else {
+		}
+		else {
 			jys = GameData.QHSet.JYS;
 			if (jys == '大连商品') {
 				rom = 0;
@@ -808,34 +812,26 @@ export default class NewClass extends cc.Component {
 			if (rom == 0) {
 				rom1 = parseInt(Math.random() * this.DCArr.type.length + '');
 				lxpz = this.DCArr.type[rom1];
-				//	GameCfg.eachHand = this.DCArr.eachHand[rom1];
 			} else if (rom == 1) {
 				rom1 = parseInt(Math.random() * this.SCArr.type.length + '');
 				lxpz = this.SCArr.type[rom1];
-				//	GameCfg.eachHand = this.SCArr.eachHand[rom1];
 			} else if (rom == 2) {
 				rom1 = parseInt(Math.random() * this.ZCArr.type.length + '');
 				lxpz = this.ZCArr.type[rom1];
-				//GameCfg.eachHand = this.XJArr.eachHand[rom1];
 			} else if (rom == 3) {
 				rom1 = parseInt(Math.random() * this.XJArr.type.length + '');
 				lxpz = this.XJArr.type[rom1];
-				//	GameCfg.eachHand = this.ZCArr.eachHand[rom1];
 			}
 		} else {
 			lxpz = GameData.QHSet.LXPZ;
 			if (jys == '大连商品') {
 				rom1 = this.DCArr.type.indexOf(lxpz);
-				//	GameCfg.eachHand = this.DCArr.eachHand[rom1];
 			} else if (jys == '上海商品') {
 				rom1 = this.SCArr.type.indexOf(lxpz);
-				//	GameCfg.eachHand = this.SCArr.eachHand[rom1];
 			} else if (jys == '郑州商品') {
 				rom1 = this.ZCArr.type.indexOf(lxpz);
-				//	GameCfg.eachHand = this.XJArr.eachHand[rom1];
 			} else if (jys == '中金所') {
 				rom1 = this.XJArr.type.indexOf(lxpz);
-				//	GameCfg.eachHand = this.ZCArr.eachHand[rom1];
 			}
 		}
 
@@ -857,7 +853,7 @@ export default class NewClass extends cc.Component {
 					hy = this.SCArr.index[rom1];
 				}
 			} else if (rom == 3) {
-				//if (rom2 == 0) {
+
 				hy = this.XJArr.main[rom1];
 
 			} else if (rom == 2) {
@@ -883,11 +879,12 @@ export default class NewClass extends cc.Component {
 		data.code = items[0];
 
 		// 合约代码|合约中文名称|合约英文名称|合约种类|所在交易所|第一个日K日期（YYYYMMDD）|最后一个日K//日期（YYYYMMDD）|第一个分时时间戳（精确到秒）|最后一个分时时间戳（精确到秒）
+
 		let tim = GameCfgText.QHGetTimeByCodeName(data.code)
+
 		if (GameData.QHSet.year == '随机') {
 
 			if (GameData.QHSet.ZLine == '日线') {
-
 
 				let start = tim.start, end = tim.end, sc;
 
@@ -910,7 +907,7 @@ export default class NewClass extends cc.Component {
 					let day = start.slice(6);
 
 					let d = new Date(year + '-' + month + '-' + day);
-					///console.log(d);
+
 					let t = d.getTime() + 50 * 24 * 60 * 60 * 1000;
 
 					let s = Math.random() * (sc - t) + t;
@@ -927,6 +924,7 @@ export default class NewClass extends cc.Component {
 				}
 
 			} else {
+
 				let start = parseInt(ComUtils.getTimestamp(tim.start)), end = parseInt(ComUtils.getTimestamp(tim.end)), sc;
 
 				let tt;
@@ -952,7 +950,6 @@ export default class NewClass extends cc.Component {
 
 				let f = parseInt(Math.random() * (sc - start) + start + '');
 
-				//let f = parseInt(new Date(s * 1000).getTime() / 1000 + '');
 
 				{
 					data.from = f;
@@ -964,6 +961,7 @@ export default class NewClass extends cc.Component {
 			let start = items[5], end = items[6], sc;
 
 			start = tim.start;
+
 			end = tim.end;
 
 			let year, month, day;
@@ -992,7 +990,7 @@ export default class NewClass extends cc.Component {
 			if (parseInt(start) > parseInt(year + month + day)) {
 				if (GameData.QHSet.HY == '随机') {
 					this.QHStartGameSet();
-					return;
+
 				} else {
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能早与期货创建时间');
 					GlobalEvent.emit(EventCfg.LOADINGHIDE);
@@ -1002,7 +1000,6 @@ export default class NewClass extends cc.Component {
 			} else if (parseInt(end) < parseInt(year + month + day)) {
 				if (GameData.QHSet.HY == '随机') {
 					this.QHStartGameSet();
-					return;
 				}
 				else {
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能大与期货结束时间');
@@ -1010,6 +1007,7 @@ export default class NewClass extends cc.Component {
 				}
 				return;
 			}
+
 			if (GameData.QHSet.ZLine == '日线') {
 				data.from = year + month + day;
 			} else {
@@ -1037,8 +1035,11 @@ export default class NewClass extends cc.Component {
 		console.log(JSON.stringify(data));
 		GameCfg.enterGameCache = data;
 
-		GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, data);
-
+		GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, data, () => {
+			GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50);
+			GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50);
+			cc.director.loadScene('game');
+		});
 
 	}
 

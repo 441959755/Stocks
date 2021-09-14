@@ -104,8 +104,10 @@ export default class GlobalHandle {
     }
 
     public static onCmdGameStartQuoteQueryQH(data, cb?) {
+
         let maxLength = 2000;
         this.curTotal = 0;
+
         //先获取前面的
         let preData = {
             ktype: data.ktype,
@@ -124,7 +126,7 @@ export default class GlobalHandle {
         }
 
         socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(preData), info => {
-            //console.log(JSON.stringify(info));
+
             if (!info.items || info.items.length <= 0) {
                 console.log('获取的行情为空');
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空' + JSON.stringify(preData));
@@ -132,10 +134,9 @@ export default class GlobalHandle {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 return;
             }
-            //	if (GameData.QHSet.ZLine == '日线' || GameData.QHSet.ZLine == '5分钟K') {
+
             info.items.forEach((el) => {
-                // {"code":2000042,"ktype":"Day","timestamp":"1577235900","open":3112,"close":3116,"high":3120,"low":3112,"volume":"15032"},
-                //[{"code":2000113,"ktype":"Day","timestamp":"20171103","open":610.2,"close":607.4,"high":610.6,"low":606.6,"volume":"178060","cclHold":"442454"},
+
                 let data1 = {
                     day: el.timestamp + '',
                     open: el.open || 0,
@@ -215,7 +216,10 @@ export default class GlobalHandle {
                     }
                     qhHQ = DrawData.dataChange(qhHQ[qhHQ.length - 1].day, t, qhHQ);
                 }
+
                 GameCfg.data[0].data = qhHQ;
+                console.log(JSON.stringify('期货' + JSON.stringify(qhHQ)));
+                console.log(qhHQ.length);
 
                 cb && (cb());
             }

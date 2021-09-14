@@ -447,14 +447,19 @@ export default class NewClass extends cc.Component {
         if (!this.daysData[day - 1]) { return }
 
         this.dayLabel[0].string = this.daysData[day - 1].count;
+
         this.dayLabel[1].string = this.daysData[day - 1].endMoney - this.daysData[day - 1].user_capital + '';
+
         if (this.daysData[day - 1].endMoney - this.daysData[day - 1].user_capital < 0) {
             this.dayLabel[1].node.color = cc.Color.GREEN;
         } else {
             this.dayLabel[1].node.color = cc.Color.RED;
         }
+
         this.timeLabel1.string = '统计时段:' + year + '.' + month + '.' + day;
+
         let datas = this.yieldInfo.results;
+
         if (datas.length <= 0) {
             return;
         }
@@ -475,19 +480,28 @@ export default class NewClass extends cc.Component {
         if (!curDay || curDay.length <= 0) { return }
 
         let maxValue = 0;
+        let minMoney = 100000;
         curDay.forEach(el => {
             maxValue = Math.max((el.userCapital + el.userProfit), maxValue);
+            minMoney = Math.min((el.userCapital + el.userProfit), minMoney);
         })
 
-        maxValue = Math.ceil((maxValue - 50000) / 20000) * 20000;
+        minMoney = parseInt((minMoney) / 1000 + '') * 1000;
+        maxValue = Math.ceil((maxValue - minMoney) / 20000) * 20000 + minMoney;
+
+
+        if (minMoney == maxValue) {
+            maxValue = (minMoney || 10000) * 6;
+        }
+
         if (maxValue < 0) {
             this.dayFundLa.forEach((el, index) => {
-                el.string = 50000 + 10000 * index + '';
+                el.string = minMoney + 10000 * index + '';
             })
             maxValue = 100000;
         } else {
             this.dayFundLa.forEach((el, index) => {
-                el.string = 50000 + maxValue / 5 * index + '';
+                el.string = minMoney + maxValue / 5 * index + '';
             })
         }
 
@@ -500,7 +514,7 @@ export default class NewClass extends cc.Component {
 
         this.draw1.node.addChild(dot);
         dot.zIndex = 6;
-        let y = (curDay[0].userCapital - 50000) * (this.QXNodes[1].height / maxValue);
+        let y = (curDay[0].userCapital - minMoney) * (this.QXNodes[1].height / (maxValue - minMoney));
         if (y < 0) { y = 0 }
         dot.setPosition(0, y);
         dots.push(dot);
@@ -508,7 +522,7 @@ export default class NewClass extends cc.Component {
         curDay.forEach((el, index) => {
             let node = cc.instantiate(this.dot2);
             this.draw1.node.addChild(node);
-            let y1 = (el.userCapital + el.userProfit - 50000) * (this.QXNodes[1].height / maxValue);
+            let y1 = (el.userCapital + el.userProfit - minMoney) * (this.QXNodes[1].height / (maxValue - minMoney));
             if (y1 < 0) {
                 y1 = 0;
             }
