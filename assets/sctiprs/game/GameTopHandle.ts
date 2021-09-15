@@ -132,7 +132,20 @@ export default class NewClass extends cc.Component {
         if (status == 3) {
             this.pkNode.active = true;
             this.name1.string = GameData.userName;
-            this.name2.string = GameCfg.RoomGameData.players[1].gd.nickname;
+            if (GameData.Players[1].nickname || GameData.Players[1].nick) {
+                this.name2.string = GameData.Players[1].nickname || GameData.Players[1].nick;
+                // this.level2.string = 'LV: ' + GameData.Players[1].properties[pb.GamePropertyId.Level];
+            } else {
+                this.name2.string = GameCfg.RoomGameData.players[1].gd.nickname;
+                // this.level2.string = 'LV: ' + GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level];
+            }
+            this.level1.string = 'LV: ' + GameData.properties[pb.GamePropertyId.Level];
+            this.head1.spriteFrame = GameData.headImg;
+
+            if (GameData.Players[1].icon) {
+                this.head2.spriteFrame = GameData.Players[1].icon;
+            }
+
 
             this.box1.active = true;
             this.box2.active = true;

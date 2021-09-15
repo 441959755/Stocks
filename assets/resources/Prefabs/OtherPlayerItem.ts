@@ -237,7 +237,6 @@ export default class NewClass extends cc.Component {
             kstyle: pb.KStyle.Random,
             code: data.code,
             from: this.itemData.kFrom,
-            //  total: 255,
             to: this.itemData.kTo,
         }
 
@@ -248,9 +247,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         GlobalHandle.onCmdGameStartQuoteQuery(cache, () => {
-
-
-
             cc.director.loadScene('game');
         })
 
