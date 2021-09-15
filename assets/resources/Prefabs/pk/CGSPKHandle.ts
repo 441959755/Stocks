@@ -38,6 +38,7 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         GlobalEvent.on(EventCfg.GETCGSDATA, (info) => {
+            console.log('闯关赛数据：' + JSON.stringify(info));
             GameCfg.RoomGameData = info;
             let code = info.code + '';
             if (code.length >= 7) {
@@ -49,7 +50,6 @@ export default class NewClass extends cc.Component {
             GameCfg.data[0].name = items[1];
             GameCfg.data[0].data = [];
             GameCfg.data[0].circulate = items[4];
-
 
 
             info.quotes && (info.quotes.items.forEach((el, index) => {
@@ -78,13 +78,12 @@ export default class NewClass extends cc.Component {
 
             })
             )
-            GameData.huizhidatas = info.tsQuoteStart;
-            GameCfg.huizhidatas = info.tsQuoteStart;
+            GameData.huizhidatas = info.tsQuoteStart + 1;
+            GameCfg.huizhidatas = info.tsQuoteStart + 1;
 
             GlobalEvent.emit(EventCfg.OPENMATCHPK);
+
             GameData.Players[1] = info.players[0].gd;
-
-
 
         }, this);
 
@@ -110,6 +109,7 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         if (name == 'blackbtn') {
             this.node.active = false;
+            GameCfg.GameSet = null;
             GameData.locationLayer = LocationPoint.HALL;
         }
         //点击查看更多
@@ -144,7 +144,6 @@ export default class NewClass extends cc.Component {
             GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
             GameCfg.GameSet = GameData.JJPKSet;
 
-            // GlobalEvent.emit(EventCfg.OPENMATCHPK);
             GlobalHandle.onCmdGameStartReq(() => {
 
             })
@@ -469,21 +468,19 @@ export default class NewClass extends cc.Component {
         let time = second_time;
         if (parseInt(second_time) > 60) {
 
-            let second = parseInt(second_time) % 60;
+            var day = parseInt(((second_time / 60) / 60) / 24 + '');
+
+            second_time -= day * 60 * 60 * 24;
+
+            var hour = parseInt(second_time / 60 / 60 + '');
+
+            second_time -= hour * 60 * 60;
+
             let min = parseInt(second_time / 60 + '');
-            time = min + "分" + second + "秒";
 
-            if (min > 60) {
-                min = parseInt(second_time / 60 + '') % 60;
-                var hour = parseInt(parseInt(second_time / 60 + '') / 60 + '');
-                time = hour + "小时" + min + "分";
 
-                if (hour > 24) {
-                    hour = parseInt(parseInt(second_time / 60 + '') / 60 + '') % 24;
-                    var day = parseInt(parseInt(parseInt(second_time / 60 + '') / 60 + '') / 24 + '');
-                    time = day + "天" + hour + "小时" + min + "分";
-                }
-            }
+            time = day + '天' + hour + "小时" + min + "分";
+
         }
         else {
             time = 0 + "天" + 0 + "小时" + 1 + "分";

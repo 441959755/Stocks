@@ -40,7 +40,9 @@ export default class NewClass extends cc.Component {
     }
 
     onShow() {
+
         GameData.Players[1] = this.playeInfo;
+
         if (this.playeInfo.nickname) {
             this.playerName.string = (this.playeInfo.nickname);
         }
@@ -76,11 +78,17 @@ export default class NewClass extends cc.Component {
 
             if (info.results.length == 0) {
                 this.tipsNode.active = true;
+                let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
+                UIScrollControl.clear();
             }
             else {
                 let arr = [];
                 info.results.forEach(el => {
-                    if (el.gType == pb.GameType.JJ_PK || el.gType == pb.GameType.JJ_DuoKong) {
+                    if (el.gType == pb.GameType.JJ_ChuangGuan && GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+                        arr.push(el);
+                    }
+
+                    else if (el.gType == pb.GameType.JJ_PK || el.gType == pb.GameType.JJ_DuoKong) {
                         arr.push(el);
                     }
                 });

@@ -330,9 +330,7 @@ export default class NewClass extends cc.Component {
     }
 
     onDraw() {
-        if (!GameCfg.beg_end[0]) {
-            GameCfg.beg_end[0] = 0;
-        }
+
         if (GameCfg.beg_end[0] < 0 || GameCfg.beg_end[1] > GameCfg.huizhidatas) {
             return;
         }

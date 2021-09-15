@@ -187,6 +187,7 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, curdata) {
         let name = event.target.name;
         if (name == 'leftBtn') {
+            GameCfg.GameType = null;
             this.node.active = false;
         }
 
@@ -282,10 +283,6 @@ export default class NewClass extends cc.Component {
         }
 
 
-    }
-
-    onDisable() {
-        GameCfg.GameType = null;
     }
 
 }

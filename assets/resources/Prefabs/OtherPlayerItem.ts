@@ -123,24 +123,32 @@ export default class NewClass extends cc.Component {
         if (name == 'cgs_fupan') {
 
             GameCfg.GameSet = GameData.JJPKSet;
+
             let ts = this.itemData.ts;
+
             GameCfg.GAMEFUPAN = true;
+
             GameCfg.GameType = this.itemData.gType;
-            GameCfg.huizhidatas = this.itemData.kStop;
-            GameData.huizhidatas = this.itemData.kStartup;
+
             GameCfg.GAMEFUPANDATA = this.itemData;
+
+            GameCfg.huizhidatas = this.itemData.kStartup;
+            GameData.huizhidatas = this.itemData.kStartup;
+
             let info = {
                 uid: GameData.Players[1].uid,
                 ts: ts,
             }
+
             GlobalHandle.GetGameOperations(info, () => {
                 UpGameOpt.ChanagekOffset(UpGameOpt.player1Opt);
-                this.onGamenterStart(true);
+                this.onGamenterStart();
             });
 
         }
+
         else if (name == 'btn_xl') {
-            //   if (GameCfg.GameType == pb.GameType.JJ_PK) {
+
             let gameCount = EnterGameControl.onCurDXIsEnterGame();
 
             if (gameCount.status == 3) {
@@ -151,6 +159,7 @@ export default class NewClass extends cc.Component {
             GameCfg.GameType = pb.GameType.DingXiang;
             GameCfg.GameSet = GameData.DXSet;
             GameCfg.GAMEFUPAN = false;
+
             GameCfg.huizhidatas = this.itemData.kStartup;
             GameData.huizhidatas = this.itemData.kStartup;
 
@@ -169,11 +178,13 @@ export default class NewClass extends cc.Component {
 
             GameCfg.GameSet = GameData.JJPKSet;
 
-            GameCfg.GAMEFUPAN = false;
-
             GameCfg.huizhidatas = this.itemData.kStartup;
             GameData.huizhidatas = this.itemData.kStartup;
+
+            GameCfg.GAMEFUPAN = false;
+
             GameCfg.GameSet.year = (this.itemData.kFrom + '').slice(0, 4);
+
             GameCfg.GameSet.search = this.itemData.quotesCode;
 
             GameCfg.GAMEFUPANDATA = this.itemData;
@@ -186,6 +197,7 @@ export default class NewClass extends cc.Component {
             }
 
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
             GlobalHandle.GetGameOperations(info, () => {
 
                 GameCfg.RoomGameData = {
@@ -196,13 +208,13 @@ export default class NewClass extends cc.Component {
                     }],
                 }
 
-                this.onGamenterStart(true);
+                this.onGamenterStart();
 
             });
         }
     }
 
-    onGamenterStart(flag?) {
+    onGamenterStart() {
         let data = { code: this.itemData.quotesCode }
         let items;
 
@@ -223,16 +235,25 @@ export default class NewClass extends cc.Component {
         let cache = {
             ktype: pb.KType.Day,
             kstyle: pb.KStyle.Random,
-            code: this.itemData.quotesCode,
+            code: data.code,
             from: this.itemData.kFrom,
-            total: 250,
-            to: 0,
-            reserve: 100,
+            //  total: 255,
+            to: this.itemData.kTo,
         }
 
+        console.log('进入数据：' + JSON.stringify(cache));
+
         GameCfg.enterGameCache = cache;
+
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        EnterGameControl.onClearPreGameDataEnter(cache, flag);
+
+        GlobalHandle.onCmdGameStartQuoteQuery(cache, () => {
+
+
+
+            cc.director.loadScene('game');
+        })
+
     }
 
 }

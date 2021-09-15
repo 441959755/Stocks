@@ -19,6 +19,7 @@ export default class NewClass extends cc.Component {
         GameCfg.fill.length = 0;
 
         GlobalEvent.on(EventCfg.FILLNODEISSHOW, (flag) => {
+            this.graphics.clear();
             this.node.active = flag;
         }, this);
 
@@ -67,7 +68,6 @@ export default class NewClass extends cc.Component {
                 DrawUtils.drawRectFill(this.graphics, startX + 1, 0, width - 4, this.node.height, color);
             })
         }, this);
-
 
     }
 

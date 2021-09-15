@@ -102,10 +102,6 @@ export default class NewClass extends cc.Component {
 
         this.ecb = setTimeout(() => {
             GlobalEvent.emit('SHOWOTHERPLAYER');
-            setTimeout(() => {
-                cc.director.loadScene('game');
-            }, 1000)
-
         }, timeout * 1000);
     }
 

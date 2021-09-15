@@ -82,7 +82,7 @@ export default class NewClass extends cc.Component {
     }
 
     UpdateOtherRate(rate) {
-        this.pkAllRateLa2.string = rate;
+        this.pkAllRateLa2.string = rate + '%';
         if (rate > 0) {
             this.pkAllRateLa2.node.color = cc.Color.RED;
         }
@@ -189,10 +189,13 @@ export default class NewClass extends cc.Component {
             let r, rank;
 
             if (GameCfg.GAMEFUPANDATA) {
+
                 r = GameCfg.GAMEFUPANDATA.userProfitRate || 0.00;
                 rank = GameCfg.GAMEFUPANDATA.rank;
+
             }
             else if (GameCfg.RoomGameData) {
+
                 r = GameCfg.RoomGameData.players[status - 1].result.userProfitRate;
                 rank = GameCfg.RoomGameData.players[status - 1].result.rank;
             }
@@ -225,6 +228,8 @@ export default class NewClass extends cc.Component {
         btnMyspic.active = false;
         //数据统计
         let statBtn = this.rightNode.getChildByName('statBtn');
+        statBtn.active = false;
+
         colseBtn.active = false;
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             statBtn.active = false;
@@ -235,6 +240,7 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             statBtn.active = true;
         }
+
     }
 
     protected onEnable() {
@@ -368,7 +374,7 @@ export default class NewClass extends cc.Component {
                     PopupManager.LoadTipsBox('tipsBox', str, () => {
 
                         GlobalHandle.onReqRoomLeave();
-                        GameCfg.huizhidatas = 0;
+
                         GameCfg.allRate = 0;
                         GameCfg.finalfund = 0;
                         GameCfg.GAMEFUPAN = false;
@@ -425,7 +431,7 @@ export default class NewClass extends cc.Component {
     }
 
     onBlackHAll() {
-        GameCfg.huizhidatas = 0;
+
         GameCfg.allRate = 0;
         GameCfg.finalfund = 0;
         GameCfg.GAMEFUPAN = false;

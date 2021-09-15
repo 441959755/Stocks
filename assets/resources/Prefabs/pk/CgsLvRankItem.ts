@@ -78,6 +78,7 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'ckzjBtn') {
+            this.el.icon = GameData.imgs[this.el.icon + ''];
             GlobalEvent.emit(EventCfg.OPENOTHERPLAYERHISLAYER, this.el);
             // PopupManager.loadOtherPlayerHisInfo('otherPlayerHisInfo', this.el);
         }

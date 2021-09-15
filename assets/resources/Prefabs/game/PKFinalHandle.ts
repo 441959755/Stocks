@@ -67,7 +67,7 @@ export default class NewClass extends cc.Component {
 
         let gpData = GameCfg.data[0].data;
         this.codeLabel.string = '股票名称：' + GameCfg.data[0].name + '    ' + GameCfg.data[0].code;
-        this.codeTimeLabel.string = '训练时段：' + ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
+        this.codeTimeLabel.string = '训练时段：' + ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[gpData.length - 1].day);
 
         let rate = this.gameResult.players[0].result.stockProfitRate.toFixed(2)
         this.HasRisen && (this.HasRisen.string = rate + '%')
@@ -310,6 +310,8 @@ export default class NewClass extends cc.Component {
         }
         //zj复盘
         else if (name == 'Btn_fupan_self') {
+            GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
+
             GameCfg.fill = [];
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
@@ -319,10 +321,12 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = true;
 
             GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[0].ops.items)
+
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
         }
         //tr复盘
         else if (name == 'Btn_fupan_other') {
+            GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
             GameCfg.fill = [];
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
@@ -338,7 +342,6 @@ export default class NewClass extends cc.Component {
     }
 
     onQuitGame() {
-
         GameCfg.fill = [];
         GameCfg.allRate = 0;
         GameCfg.finalfund = 0;
@@ -346,7 +349,7 @@ export default class NewClass extends cc.Component {
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
         GameCfg.enterGameCache = null;
-        // GameData.JJCapital = 0;
+
         if (!GameData.RoomType) {
             GameCfg.RoomGameData = null;
         }

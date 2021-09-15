@@ -124,9 +124,9 @@ export default class NewClass extends cc.Component {
 
         this.enterGameAnim && (this.enterGameAnim.play());
 
-        // setTimeout(() => {
-        //     cc.director.loadScene('game');
-        // }, 800)
+        setTimeout(() => {
+            cc.director.loadScene('game');
+        }, 500)
     }
 
     onEnable() {

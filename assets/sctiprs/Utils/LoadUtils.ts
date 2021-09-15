@@ -26,7 +26,7 @@ export default class LoadUtils {
         // cc.loader.loadRes(url, (err, pre) => {
         cc.loader.loadRes(url, (err, pre) => {
             if (err) {
-                console.log('LoadUtils err');
+                console.log('LoadUtils err' + url);
                 return;
             }
             call && (call(pre));

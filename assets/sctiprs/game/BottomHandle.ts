@@ -193,24 +193,29 @@ export default class NewClass extends cc.Component {
 
 	}
 
+	//pk 其他玩家操作计算
 	updateOtherPlayerOpt() {
 
 		setTimeout(() => {
 
-			let otherAllRate = 0, curAskPrice;
+			let otherAllRate = 0, curAskPrice = 0;
 
 			UpGameOpt.player2Opt.forEach(el => {
 
-				if (el.opId == pb.GameOperationId.Bid) {
+				if (el.opId == pb.GameOperationId.Bid || el.opId == pb.GameOperationId.Long) {
 
 					let rate = (this.gpData[el.kOffset - 1].close - curAskPrice) / curAskPrice;
 
+					if (el.opId == pb.GameOperationId.Long) {
+						rate = -rate;
+					}
 					otherAllRate = (otherAllRate + 1) * (rate + 1) - 1;
 				}
 				//买入
-				else if (el.opId == pb.GameOperationId.Ask) {
+				else if (el.opId == pb.GameOperationId.Ask || el.opId == pb.GameOperationId.Short) {
 					curAskPrice = this.gpData[el.kOffset - 1].close;
 				}
+
 			})
 
 			if (this.roundNumber <= 0) {
@@ -437,7 +442,7 @@ export default class NewClass extends cc.Component {
 		opt.forEach((el, index) => {
 
 			GameCfg.huizhidatas = el.kOffset;
-			
+
 			this.onSetMrCount();
 			if (GameCfg.GameType == pb.GameType.DingXiang ||
 				GameCfg.GameType == pb.GameType.ZhiBiao ||
@@ -479,11 +484,11 @@ export default class NewClass extends cc.Component {
 					pkSelf.onBtnClick({ target: { name: 'mzBtn' } });
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: el.kOffset });
 				}
-				else if (el.opId == pb.GameOperationId.Long) {
+				else if (el.opId == pb.GameOperationId.Short) {
 					pkSelf.onBtnClick({ target: { name: 'mdBtn' } });
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: el.kOffset });
 				}
-				else if (el.opId == pb.GameOperationId.Short) {
+				else if (el.opId == pb.GameOperationId.Long) {
 					pkSelf.onBtnClick({ target: { name: 'pcBtn1' } });
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: el.kOffset });
 				}
@@ -501,6 +506,9 @@ export default class NewClass extends cc.Component {
 
 		if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) && GameCfg.GAMEFRTD) {
 			GameCfg.huizhidatas = GameCfg.RoomGameData.players[0].curPos;
+		}
+		else if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong)) {
+			GameCfg.huizhidatas = this.gpData.length;
 		}
 
 		GlobalEvent.emit('roundNUmber');
@@ -555,7 +563,6 @@ export default class NewClass extends cc.Component {
 			UpGameOpt.ChanagekOffset(GameCfg.RoomGameData.players[0].ops.items);
 
 			this.onGameFUPANOPT(GameCfg.RoomGameData.players[0].ops.items);
-
 		}
 
 		this.setLabelData();
@@ -1023,6 +1030,7 @@ export default class NewClass extends cc.Component {
 		this.getRaisingLimit(GameCfg.huizhidatas);
 
 		if ((this.roundNumber > 0 && name) || GameCfg.GAMEFUPAN) {
+
 			this.onBuyOrSell(name);
 		}
 		if (!flag) {
@@ -1173,8 +1181,8 @@ export default class NewClass extends cc.Component {
 
 				if (state == 'mcBtn1') {
 					rate = -rate;
-
 				}
+
 				GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
 			} else {
 

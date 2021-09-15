@@ -151,9 +151,11 @@ export default class NewClass extends cc.Component {
                 GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.JJ_XUNLIAN) {
 
                 this.node.getChildByName('isFC').active = false;
+
                 if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
                     this.node.getChildByName('JJ_DuoKong').active = true;
                 }
+
                 else if (GameCfg.GameType == pb.GameType.JJ_PK
                     || GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.JJ_XUNLIAN) {
                     this.node.getChildByName('isFC').active = true;
@@ -164,8 +166,10 @@ export default class NewClass extends cc.Component {
 
                 let pkNode = this.node.getChildByName('pk');
                 pkNode.active = true;
+
                 let timeLabel = pkNode.getChildByName('timeLabel').getComponent(cc.Label);
                 timeLabel.node.active = true;
+
                 if (GameCfg.data[0].tsGameFrom && GameCfg.data[0].tsGameCur) {
                     let num = GameCfg.data[0].tsGameCur - GameCfg.data[0].tsGameFrom;
                     let curTimes = parseInt(new Date().getTime() / 1000 + '');
@@ -175,7 +179,6 @@ export default class NewClass extends cc.Component {
                         if (num <= 0) {
                             clearInterval(this.cb1);
                         }
-
                         if (num <= 180) {
                             timeLabel.string = '倒计时：' + ComUtils.onNumChangeTime(num);
                             this.waitTime.string = '倒计时：' + ComUtils.onNumChangeTime(num);
@@ -251,7 +254,7 @@ export default class NewClass extends cc.Component {
             this.bself._KKCount = 1;
             if (this.bself.roundNumber > 0) {
                 let item = {
-                    opId: pb.GameOperationId.Long,
+                    opId: pb.GameOperationId.Short,
                     volume: 1,
                     kOffset: GameCfg.huizhidatas,
 
@@ -276,10 +279,9 @@ export default class NewClass extends cc.Component {
 
             if (this.bself.roundNumber > 0) {
                 let item = {
-                    opId: pb.GameOperationId.Short,
+                    opId: pb.GameOperationId.Long,
                     volume: 1,
                     kOffset: GameCfg.huizhidatas,
-
                 }
                 UpGameOpt.addOpt(item);
             }

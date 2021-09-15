@@ -68,13 +68,11 @@ export default class UpGameOpt {
 
     //上传
     public static UpGameOpt(end?) {
-        //   console.log(this.count);
+
         if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
             if (end) {
                 this.arrOpt.push({
                     opId: pb.GameOperationId.END,
-                    // volume: 1,
-                    // kOffset: 255,
                 });
             }
             this.cb && (clearTimeout(this.cb));

@@ -126,6 +126,8 @@ export default class NewClass extends cc.Component {
 
     onSelfEnterRoomGameData(info) {
 
+        console.log('进入房间：' + JSON.stringify(info));
+
         info.id && (GameData.roomId = info.id)
 
         GameCfg.GameType = info.game;
