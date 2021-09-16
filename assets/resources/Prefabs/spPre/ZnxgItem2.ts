@@ -22,7 +22,7 @@ export default class NewClass extends cc.Component {
             if (this._curData && res.items[0].code == this._curData.code) {
                 let signals = res.items[0];
                 console.log(ComUtils.fromatTime1(this._curData.tsUpdated));
-                if (ComUtils.fromatTime1(signals.timestamp) - ComUtils.fromatTime1(this._curData.tsUpdated) <= 2) {
+                if (ComUtils.fromatTime1(signals.timestamp) - ComUtils.fromatTime1(this._curData.tsUpdated) <= 1) {
                     if (this._curData.todaySignal < 0) {
                         this.label[7].string = '推荐买入';
 
@@ -61,20 +61,16 @@ export default class NewClass extends cc.Component {
         this.label[5].string = this._curData.curAskPrice || '--';
         this.label[6].string = this._curData.profitRate || '--';
         this.label[7].string = '--';
-        if (GameData.AISignal[code + '']) {
-
-            this.label[7].string = GameData.AISignal[code + ''];
-
+        if (GameData.AISignal[data.code + '']) {
+            this.label[7].string = GameData.AISignal[data.code + ''];
         }
         else {
-
             let info1 = {
                 ktype: pb.KType.Min,
                 code: parseInt(data.code),
                 to: parseInt((new Date().getTime()) / 1000 + ''),
                 total: 1,
             }
-
             socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
         }
     }

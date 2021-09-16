@@ -109,6 +109,10 @@ export default class NewClass extends cc.Component {
             socket.send(pb.MessageId.Req_Game_CgdsReg, buff, (res) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 console.log('报名结果' + JSON.stringify(res));
+                if (res.result.err) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.result.err);
+                    return;
+                }
 
                 if (res.cgdsStateItem) {
                     GameData.cgdsStateList.push(res.cgdsStateItem);

@@ -534,7 +534,7 @@ export default class NewClass extends cc.Component {
             label1.string = '近一年收益：' + ComUtils.changeTwoDecimal(num) + '%';
             label2.string = '最近的收益：' + ComUtils.changeTwoDecimal(num1) + '%';
             let label3 = this.laNode.getChildByName('label3').getComponent(cc.Label);
-            if (this.gpDataDay[this.gpDataDay.length - 1].timestamp == signals[signals.length - 1].ts) {
+            if (this.gpDataDay[this.gpDataDay.length - 1].timestamp - signals[signals.length - 1].ts <= 1) {
                 if (signals[signals.length - 1].flag < 0) {
                     label3.string = '今日决策：' + '推荐买入';
                 }
