@@ -34,7 +34,7 @@ export default class NewClass extends cc.Component {
         this.label[1].string = code || '--';
         this.label[2].string = data.name || '--';
         this.label[3].string = data.industry || '--';
-        this.label[4].string = data.curAskPrice || '--';
+        this.label[4].string = data.lastBidPrice || '--';
         if (data.todaySignal && data.todaySignal < 0) {
             this.label[5].string = '建议买入';
         }

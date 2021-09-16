@@ -777,7 +777,7 @@ export default class NewClass extends cc.Component {
 			kstyle: pb.KStyle.Random,
 			code: null,
 			from: null,
-			total: parseInt(GameData.QHSet.KLine) + 1,
+			total: parseInt(GameData.QHSet.KLine),
 			to: 0
 		};
 
@@ -1036,8 +1036,8 @@ export default class NewClass extends cc.Component {
 		GameCfg.enterGameCache = data;
 
 		GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, data, () => {
-			GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50) - 1;
-			GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50) - 1;
+			GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50);
+			GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50);
 			cc.director.loadScene('game');
 		});
 

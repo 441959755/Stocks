@@ -55,6 +55,7 @@ export default class NewClass extends cc.Component {
         }, this);
     }
 
+
     onShow() {
         this.flag = true;
         if (GameCfg.GAMEFUPAN) {
@@ -341,31 +342,6 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
-        //进游戏逃跑
-        if (!this.flag) {
-            let gpData = GameCfg.data[0].data;
-            let datas = {
-                uid: GameData.userID,
-                gType: GameCfg.GameType,
-                quotesCode: GameCfg.data[0].code,
-                kType: GameCfg.data[0].ktype,
-                kFrom: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
-                kTo: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
-                stockProfitRate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100),
-                userProfitRate: (GameCfg.allRate),
-                ts: parseInt(new Date().getTime() / 1000 + ''),
-                rank: 2,
-                refId: 0,
-                kStartup: GameData.huizhidatas - 1,
-                kStop: GameCfg.huizhidatas - 1,
-            }
-
-            let CmdGameOver = {
-                result: datas,
-                operations: UpGameOpt.arrOpt,
-            }
-            GlobalHandle.onCmdGameOverReq(CmdGameOver);
-        }
 
         UpGameOpt.clearGameOpt();
         LoadUtils.releaseRes('Prefabs/enterXLGame');

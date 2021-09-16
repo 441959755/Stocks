@@ -124,20 +124,11 @@ export default class NewClass extends cc.Component {
             pkFP.active = true;
             pkFP.children[0].getComponent(cc.Label).string = GameCfg.data[0].name + '    ' + GameCfg.data[0].code;
 
-            let kFrom, kTo, tq
+            let gpData = GameCfg.data[0].data;
+            pkFP.children[1].getComponent(cc.Label).string = ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
 
-            if (GameCfg.GAMEFUPANDATA) {
-                kFrom = GameCfg.GAMEFUPANDATA.kFrom;
-                kTo = GameCfg.GAMEFUPANDATA.kTo;
-                tq = GameCfg.GAMEFUPANDATA.stockProfitRate.toFixed(2);
-            }
-            else if (GameCfg.RoomGameData) {
-                kFrom = GameCfg.RoomGameData.players[0].result.kFrom;
-                kTo = GameCfg.RoomGameData.players[0].result.kTo;
-                tq = GameCfg.RoomGameData.players[0].result.stockProfitRate.toFixed(2);
-            }
+            let tq = ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
 
-            pkFP.children[1].getComponent(cc.Label).string = ComUtils.formatTime(kFrom) + '--' + ComUtils.formatTime(kTo)
             pkFP.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
         }
     }

@@ -276,8 +276,10 @@ export default class NewClass extends cc.Component {
             this.onQuitGame();
         }
 
+
         //复盘
         else if (name == 'pk_jsbt_qd') {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.fill = [];
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
@@ -310,6 +312,8 @@ export default class NewClass extends cc.Component {
         }
         //zj复盘
         else if (name == 'Btn_fupan_self') {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
             GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
 
             GameCfg.fill = [];
@@ -326,6 +330,9 @@ export default class NewClass extends cc.Component {
         }
         //tr复盘
         else if (name == 'Btn_fupan_other') {
+
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
             GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
             GameCfg.fill = [];
             GameCfg.fill.length = 0;

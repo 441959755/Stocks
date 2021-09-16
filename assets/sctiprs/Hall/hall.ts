@@ -34,6 +34,7 @@ export default class NewClass extends cc.Component {
 
 	friendInvite: cc.Node = null;  //邀请好友
 
+
 	rankingList: cc.Node = null;  //排行榜
 
 	otherHis: cc.Node = null;

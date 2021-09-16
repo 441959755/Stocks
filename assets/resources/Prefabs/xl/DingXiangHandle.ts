@@ -199,11 +199,13 @@ export default class NewClass extends cc.Component {
 				if (GameData.DXSet.year == '随机') {
 					la.string = '随机';
 				}
+
 			} else if (index == 4) {
 				la.string = GameData.DXSet.day;
 				if (GameData.DXSet.year == '随机') {
 					la.string = '随机';
 				}
+
 			} else if (index == 5) {
 				la.string = GameData.DXSet.line;
 			} else if (index == 6) {
@@ -750,8 +752,8 @@ export default class NewClass extends cc.Component {
 		GameCfg.enterGameCache = data;
 
 		GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
-			GameData.huizhidatas = (GameCfg.data[0].data.length - GameData.DXSet.KLine);
-			GameCfg.huizhidatas = (GameCfg.data[0].data.length - GameData.DXSet.KLine);
+			GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
+			GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
 			cc.director.loadScene('game');
 		});
 	}

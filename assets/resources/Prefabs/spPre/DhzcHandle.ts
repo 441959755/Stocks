@@ -55,15 +55,18 @@ export default class NewClass extends cc.Component {
 
                 let str = edit.string;
                 if (str == '') {
+
                     return;
                 } else {
                     if (parseInt(str) > this.curGold) {
                         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换金币不能超今日上限！');
+                        this.zc_editBox.string = '';
                         return;
                     }
 
                     if (parseInt(str) > GameData.properties[pb.GamePropertyId.Gold]) {
                         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换金币不能超可用金币数量！');
+                        this.zc_editBox.string = '';
                         return;
                     }
 
@@ -81,13 +84,16 @@ export default class NewClass extends cc.Component {
             edit => {
 
                 let str = edit.string;
-                if (str == '') {
+                if (str == '' || parseInt(str) < 10000) {
+                    this.jb_editBox.string = '';
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '每一次兑换必须都是10000以上才能兑换');
                     return;
                 } else {
 
 
                     if (parseInt(str) > GameData.mncgDataList.account) {
                         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换资产不能超可用资产数量！');
+                        this.jb_editBox.string = '';
                         return;
                     }
 
@@ -115,6 +121,8 @@ export default class NewClass extends cc.Component {
         this.zc_syLa.string = this.curGold;
 
         this.jb_kyLa.string = GameData.mncgDataList.account;
+        this.dhjb = 0;
+        this.dhzc = 0;
 
     }
 
@@ -139,6 +147,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'sp_mncg_qrdh') {
+            if (!this.dhzc) { return }
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             let info = {
                 direction: 1,
@@ -161,6 +170,8 @@ export default class NewClass extends cc.Component {
                     let day = new Date().toLocaleDateString();
                     cc.sys.localStorage.setItem('DHZJ' + day, this.curGold);
                     this.jb_kyLa.string = '';
+                    this.dhzc = 0;
+                    this.zc_editBox.string = '';
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换成功！');
 
                     this.jb_kyLa.string = GameData.mncgDataList.account;
@@ -175,6 +186,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'sp_mncg_qrdh1') {
+            if (!this.dhjb) { return }
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             let info = {
                 direction: 2,
@@ -192,6 +204,8 @@ export default class NewClass extends cc.Component {
                     GameData.mncgDataList.account = res.account;;
                     this.jb_kyLa.string = GameData.mncgDataList.account;
                     this.jb_sdLa.string = '';
+                    this.jb_editBox.string = '';
+                    this.dhjb = 0;
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换成功！');
                     GlobalEvent.emit(EventCfg.CHANGEMNCGACCOUNT);
                 }

@@ -3341,8 +3341,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "建议价格",
-    "_N$string": "建议价格",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,

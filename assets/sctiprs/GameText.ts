@@ -306,6 +306,10 @@ export default class GameCfgText {
 
     //根据时间随机先股票xx
     public static getItemsByTime(time) {
+        if (!parseInt(time)) {
+            console.log('时间有误');
+            return
+        }
 
         let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
         while (le--) {

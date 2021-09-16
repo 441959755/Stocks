@@ -44,13 +44,11 @@ export default class NewClass extends cc.Component {
     zbFlag = false;
 
     onLoad() {
-
         //自己进入房间
         GlobalEvent.on(EventCfg.RoomGameDataSelf, this.onShow.bind(this), this);
 
         //其他玩家进入房间：
         GlobalEvent.on(EventCfg.RoomGameDataOther, this.onShow.bind(this), this);
-
 
         //同步房间游戏状态
         GlobalEvent.on(EventCfg.RoomGameStatus, this.onRoomGameStatus.bind(this), this);
@@ -288,7 +286,7 @@ export default class NewClass extends cc.Component {
             if (GameData.Players.length > 1) {
                 //   GlobalEvent.emit(EventCfg.OPENOTHERINFOBOX);
                 // PopupManager.LoadOtherPlayerInfoBox('otherPlayerInfo');
-                GlobalEvent.emit(EventCfg.OPENOTHERPLAYERINFO);
+                GlobalEvent.emit(EventCfg.OPENOTHERPLAYERINFO, GameData.Players[1]);
             }
 
         }

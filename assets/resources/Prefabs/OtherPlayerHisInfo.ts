@@ -12,8 +12,6 @@ export default class NewClass extends cc.Component {
 
     playeInfo = null;
 
-    HisData = [];
-
     @property(cc.Node)
     tipsNode: cc.Node = null;
 
@@ -41,6 +39,9 @@ export default class NewClass extends cc.Component {
 
     onShow() {
 
+        let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
+        UIScrollControl.clear();
+
         GameData.Players[1] = this.playeInfo;
 
         if (this.playeInfo.nickname) {
@@ -52,16 +53,15 @@ export default class NewClass extends cc.Component {
 
         this.tipsNode.active = false;
 
-        if (this.HisData.length <= 0) {
-            let ts = new Date().getTime() / 1000;
-            let data = {
-                uid: this.playeInfo.uid,
-                to: ts,
-                pageSize: 100,
-                gType: GameCfg.GameType,
-            }
-            this.onQueryGameResult(data);
+        let ts = new Date().getTime() / 1000;
+        let data = {
+            uid: this.playeInfo.uid,
+            to: ts,
+            pageSize: 100,
+            gType: GameCfg.GameType,
         }
+        this.onQueryGameResult(data);
+
     }
 
     onQueryGameResult(data) {

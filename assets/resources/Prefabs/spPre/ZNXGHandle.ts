@@ -239,7 +239,6 @@ export default class NewClass extends cc.Component {
 
                 let handle = node.getComponent('ZnxgItem2');
                 handle.onShow(res.items[index], index + 1);
-
             })
         })
         this.tipsNode.active = false;

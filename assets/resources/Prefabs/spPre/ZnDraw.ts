@@ -533,36 +533,30 @@ export default class NewClass extends cc.Component {
 
             label1.string = '近一年收益：' + ComUtils.changeTwoDecimal(num) + '%';
             label2.string = '最近的收益：' + ComUtils.changeTwoDecimal(num1) + '%';
+            let label3 = this.laNode.getChildByName('label3').getComponent(cc.Label);
+            if (this.gpDataDay[this.gpDataDay.length - 1].timestamp == signals[signals.length - 1].ts) {
+                if (signals[signals.length - 1].flag < 0) {
+                    label3.string = '今日决策：' + '推荐买入';
+                }
+                else {
+                    label3.string = '今日决策：' + '推荐卖出';
+                }
+            }
+            else {
+                if (signals[signals.length - 1].flag < 0) {
+                    label3.string = '今日决策：' + '持股观望';
+                }
+                else {
+                    label3.string = '今日决策：' + '持币观望';
+                }
+            }
+            //   GameData.AISignal[this.code + ''] = label3.string;
 
 
             this.setCurLabelData();
 
         });
 
-        let data = {
-            codes: [this.code],
-        }
-        let CmdQueryAiStockList = pb.CmdQueryAiStockList;
-        let message = CmdQueryAiStockList.create(data);
-        let buff = CmdQueryAiStockList.encode(message).finish();
-        // res1{"items":[{"code":600000,"name":"浦发银行","industry":"银行","tsUpdated":"1616140800","profitRanking":2110,"profitRate":-2.11,"lastAskPrice":10.88,"lastBidPrice":10.65,"todaySignal":-0.41}]}
-        socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
-            // console.log('res1' + JSON.stringify(res));
-
-            if (!res.items || res.items.length == 0) {
-                return;
-            }
-            let label3 = this.laNode.getChildByName('label3').getComponent(cc.Label);
-            if (res.items[0].todaySignal < 0) {
-                label3.string = '今日决策：' + '推荐买入';
-            }
-            else if (res.items[0].todaySignal > 0) {
-                label3.string = '今日决策：' + '推荐卖出';
-            }
-            else {
-                label3.string = '今日决策：' + '推荐观望';
-            }
-        })
     }
 
     //绘制颜色初始
@@ -1101,7 +1095,7 @@ export default class NewClass extends cc.Component {
 
             })
             GameData.AIStockList.push(this.code);
-
+            GlobalEvent.emit('updateCollectList');
             this.yiShouCang.active = true;
         }
 

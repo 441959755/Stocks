@@ -2,6 +2,7 @@ import { pb } from "../../protos/proto";
 import GameCfg from "../../sctiprs/game/GameCfg";
 import StrategyAIData from "../../sctiprs/game/StrategyAIData";
 import GameData from "../../sctiprs/GameData";
+import GameCfgText from "../../sctiprs/GameText";
 import EnterGameControl from "../../sctiprs/global/EnterGameControl";
 import ComUtils from "../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
@@ -84,12 +85,22 @@ export default class NewClass extends cc.Component {
                     to: 0,
                     reserve: 100,
                 }
+                let items;
+
+                if (GameCfg.GameType == pb.GameType.QiHuo) {
+                    items = GameCfgText.getQHItemInfo(data.code);
+                } else {
+                    items = GameCfgText.getGPItemInfo(data.code);
+                }
 
                 GameCfg.enterGameCache = data;
 
                 GameCfg.GameType = pb.GameType.DingXiang;
 
                 GameCfg.GameSet = GameData.DXSet;
+
+                GameCfg.GameSet.search = data.code;
+                GameCfg.GameSet.year = data.from;
 
                 GameCfg.GameSet.year = (data.from + '').slice(0, 4);
 
@@ -98,6 +109,8 @@ export default class NewClass extends cc.Component {
                 GameCfg.data[0].name = this.name;
 
                 GameCfg.data[0].code = this.code;
+
+                GameCfg.data[0].circulate = items[4];
 
                 GameCfg.huizhidatas = 100;
 
@@ -114,6 +127,15 @@ export default class NewClass extends cc.Component {
                 GameCfg.data[0].name = this.name;
 
                 GameCfg.data[0].code = this.code;
+                let items;
+
+                if (GameCfg.GameType == pb.GameType.QiHuo) {
+                    items = GameCfgText.getQHItemInfo(this.code);
+                } else {
+                    items = GameCfgText.getGPItemInfo(this.code);
+                }
+
+                GameCfg.data[0].circulate = items[4];
 
                 this.gpList.forEach((el, index) => {
 
@@ -142,6 +164,9 @@ export default class NewClass extends cc.Component {
                     to: 0,
                     reserve: 100,
                 }
+
+                GameCfg.GameSet.search = data.code;
+                GameCfg.GameSet.year = data.from;
 
                 if (this.gpList.length > 100) {
                     GameCfg.huizhidatas = this.gpList.length - 100;

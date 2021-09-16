@@ -215,6 +215,9 @@ export default class NewClass extends cc.Component {
     }
 
     onGamenterStart() {
+
+        console.log('item data:' + JSON.stringify(this.itemData));
+
         let data = { code: this.itemData.quotesCode }
         let items;
 

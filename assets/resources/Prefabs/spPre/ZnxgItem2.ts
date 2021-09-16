@@ -2,6 +2,7 @@
 
 import { pb } from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
+import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 const { ccclass, property } = cc._decorator;
@@ -14,9 +15,38 @@ export default class NewClass extends cc.Component {
 
     _curData = null;
 
-    onShow(data, index) {
+    onLoad() {
 
-        //if (!this._curData) {
+        GlobalEvent.on(EventCfg.CMDQUOTITEM, (res) => {
+
+            if (this._curData && res.items[0].code == this._curData.code) {
+                let signals = res.items[0];
+                console.log(ComUtils.fromatTime1(this._curData.tsUpdated));
+                if (ComUtils.fromatTime1(signals.timestamp) - ComUtils.fromatTime1(this._curData.tsUpdated) <= 2) {
+                    if (this._curData.todaySignal < 0) {
+                        this.label[7].string = '推荐买入';
+
+                    }
+                    else {
+                        this.label[7].string = '推荐卖出';
+                    }
+                }
+                else {
+                    if (this._curData.todaySignal < 0) {
+                        this.label[7].string = '持股观望';
+                    }
+                    else {
+                        this.label[7].string = '持币观望';
+                    }
+                }
+
+                GameData.AISignal[this._curData.code + ''] = this.label[7].string;
+            }
+
+        }, this);
+    }
+
+    onShow(data, index) {
 
         let code = data.code + '';
         if (code.length >= 7) {
@@ -26,53 +56,27 @@ export default class NewClass extends cc.Component {
         this.label[0].string = index;
         this.label[1].string = code || '--';
         this.label[2].string = this._curData.name || '--';
-        this.label[3].string = this._curData.lastAskPrice || '--';
-        this.label[4].string = this._curData.lastBidPrice || '--';
+        this.label[3].string = this._curData.lastBidPrice || '--';
+        this.label[4].string = this._curData.lastAskPrice || '--';
         this.label[5].string = this._curData.curAskPrice || '--';
         this.label[6].string = this._curData.profitRate || '--';
-        if (this._curData.todaySignal < 0) {
-            this.label[7].string = '建议买入';
-        }
-        else if (this._curData.todaySignal > 0) {
-            this.label[7].string = '建议卖出';
+        this.label[7].string = '--';
+        if (GameData.AISignal[code + '']) {
+
+            this.label[7].string = GameData.AISignal[code + ''];
+
         }
         else {
-            this.label[7].string = '建议观望';
+
+            let info1 = {
+                ktype: pb.KType.Min,
+                code: parseInt(data.code),
+                to: parseInt((new Date().getTime()) / 1000 + ''),
+                total: 1,
+            }
+
+            socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
         }
-
-        // let me = {
-        //     code: data,
-        // }
-        // let CmdQueryAiSignal = pb.CmdQueryAiSignal;
-        // let message1 = CmdQueryAiSignal.create(me);
-        // let buff1 = CmdQueryAiSignal.encode(message1).finish();
-
-        // socket.send(pb.MessageId.Req_QueryAiSignal, buff1, (res) => {
-        //     console.log('股票的买卖信号' + JSON.stringify(res));
-        //     let flag = 0;
-        //     if (res.signals) {
-        //         for (let i = res.signals.length - 1; i >= 0; i--) {
-        //             if (res.signals[i].flag == 1) {
-        //                 flag = 1;
-        //                 break;
-        //             }
-        //             else if (res.signals[i].flag == -1) {
-        //                 flag = -1;
-        //                 break;
-        //             }
-        //         }
-        //     }
-
-        //     if (flag == 1 && this._curData.todaySignal > 0) {
-        //         this.label[7].string = '建议卖出';
-        //     }
-        //     else if (flag == -1 && this._curData.todaySignal < 0) {
-        //         this.label[7].string = '建议买入';
-        //     }
-        // })
-
-        //  }
-
     }
 
 
@@ -106,6 +110,10 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.OPENZNDRAW, this._curData.code, this.label[7].string);
         }
 
+    }
+
+    onDestroy() {
+        GlobalEvent.off(EventCfg.CMDQUOTITEM)
     }
 
 }

@@ -16472,7 +16472,7 @@
     "component": "",
     "_componentId": "21bbcn85FJC2pQCc3Qa6bk7",
     "handler": "onBtnClick",
-    "customEventData": "CPM"
+    "customEventData": "成交量"
   },
   {
     "__type__": "cc.PrefabInfo",

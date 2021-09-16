@@ -84,7 +84,12 @@ export default class NewClass extends cc.Component {
 
 	saleData = [];
 
-	rateItem = null;
+	rateItem = {
+		rate: null,
+		start: null,
+		end: null,
+		state: null,
+	};
 
 	isFlag = false;
 	@property(cc.Label)
@@ -640,7 +645,7 @@ export default class NewClass extends cc.Component {
 				sT.getComponent(cc.Label).string = '起始时间：' + '????';
 				et.getComponent(cc.Label).string = '结束时间: ' + '????';
 			} else {
-				sT.getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
+				sT.getComponent(cc.Label).string = this.gpData[GameData.huizhidatas - 1].day.replace(/-/g, '/');
 				et.getComponent(cc.Label).string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
 			}
 		}
@@ -668,7 +673,7 @@ export default class NewClass extends cc.Component {
 				this.timeLabel[0].string = '起始时间：' + '????';
 				this.timeLabel[1].string = '结束时间: ' + '????';
 			} else {
-				this.timeLabel[0].string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
+				this.timeLabel[0].string = this.gpData[GameData.huizhidatas - 1].day.replace(/-/g, '/');
 				this.timeLabel[1].string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
 			}
 
@@ -1230,8 +1235,11 @@ export default class NewClass extends cc.Component {
 				GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
 				GameCfg.fill[GameCfg.fill.length - 1].end = GameCfg.huizhidatas - 1;
 			} else {
-				GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
-				//GameCfg.fill[GameCfg.fill.length - 1].end = GameCfg.huizhidatas - 1;
+
+				if (GameCfg.fill[GameCfg.fill.length - 1]) {
+					GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
+				}
+
 			}
 
 			GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);

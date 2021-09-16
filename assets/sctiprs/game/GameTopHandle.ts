@@ -134,10 +134,10 @@ export default class NewClass extends cc.Component {
             this.name1.string = GameData.userName;
             if (GameData.Players[1].nickname || GameData.Players[1].nick) {
                 this.name2.string = GameData.Players[1].nickname || GameData.Players[1].nick;
-                // this.level2.string = 'LV: ' + GameData.Players[1].properties[pb.GamePropertyId.Level];
+                this.level2.string = 'LV: ' + GameData.Players[1].properties[pb.GamePropertyId.Level];
             } else {
                 this.name2.string = GameCfg.RoomGameData.players[1].gd.nickname;
-                // this.level2.string = 'LV: ' + GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level];
+                this.level2.string = 'LV: ' + GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level];
             }
             this.level1.string = 'LV: ' + GameData.properties[pb.GamePropertyId.Level];
             this.head1.spriteFrame = GameData.headImg;
@@ -398,6 +398,8 @@ export default class NewClass extends cc.Component {
                             GameData.roomId = null;
                         }
 
+                        this.roomLeave();
+
                         cc.director.loadScene('hall');
 
                     })
@@ -453,4 +455,34 @@ export default class NewClass extends cc.Component {
         }
         cc.director.loadScene('hall');
     }
+
+    //进游戏逃跑
+    roomLeave() {
+        if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+            let gpData = GameCfg.data[0].data;
+            let datas = {
+                uid: GameData.userID,
+                gType: GameCfg.GameType,
+                quotesCode: GameCfg.data[0].code,
+                kType: GameCfg.data[0].ktype,
+                kFrom: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
+                kTo: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
+                stockProfitRate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100),
+                userProfitRate: (GameCfg.allRate),
+                ts: parseInt(new Date().getTime() / 1000 + ''),
+                rank: 2,
+                refId: 0,
+                kStartup: GameData.huizhidatas - 1,
+                kStop: GameCfg.huizhidatas - 1,
+            }
+
+            let CmdGameOver = {
+                result: datas,
+            }
+            GlobalHandle.onCmdGameOverReq(CmdGameOver);
+        }
+
+    }
+
+
 }

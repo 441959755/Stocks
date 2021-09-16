@@ -9,6 +9,8 @@ export default class GameData {
 
     public static playersInfo: any = {};   //本地缓存玩家信息
 
+    public static AISignal: any = {};
+
     //Id
     private static _userID = null;
 

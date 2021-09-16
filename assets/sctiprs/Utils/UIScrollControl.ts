@@ -107,7 +107,7 @@ export default class NewClass extends cc.Component {
 
             this.scroll_rect.content.setContentSize(cc.size(this.start_content_size.width, (this.total_count) * (_size.height + 10)))
 
-            this.scroll_rect.content.setPosition(cc.v2(0, -this.total_count * (_size.height + 10) / 2))
+            //  this.scroll_rect.content.setPosition(cc.v2(0, -this.total_count * (_size.height + 10) / 2))
 
             let _tempCount: number = Math.floor(this.start_content_size.height / (_size.height + 10))
 
@@ -135,13 +135,13 @@ export default class NewClass extends cc.Component {
             this.distance = _size.width
         }
 
-        let eventHandler = new cc.Component.EventHandler();
-        eventHandler.target = this.node;
-        eventHandler.component = "UIScrollControl";
-        eventHandler.handler = "OnScroll";
-        this.scroll_rect.scrollEvents.push(eventHandler);
+        // let eventHandler = new cc.Component.EventHandler();
+        // eventHandler.target = this.node;
+        // eventHandler.component = "UIScrollControl";
+        // eventHandler.handler = "OnScroll";
+        // this.scroll_rect.scrollEvents.push(eventHandler);
 
-        // this.scroll_rect.node.on('scrolling', this.OnScroll.bind(this), this);
+        this.scroll_rect.node.on('scrolling', this.OnScroll.bind(this), this);
 
         this.is_start == true
         this.maxIdx = 0

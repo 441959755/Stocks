@@ -7362,7 +7362,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53.39,
+      "width": 48,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -7413,8 +7413,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "2010",
-    "_N$string": "2010",
+    "_string": "随机",
+    "_N$string": "随机",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -7742,7 +7742,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 26.7,
+      "width": 48,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -7793,8 +7793,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "01",
-    "_N$string": "01",
+    "_string": "随机",
+    "_N$string": "随机",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -8122,7 +8122,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 26.7,
+      "width": 48,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -8173,8 +8173,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "01",
-    "_N$string": "01",
+    "_string": "随机",
+    "_N$string": "随机",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,

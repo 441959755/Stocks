@@ -127,6 +127,7 @@ PBHelper.prototype = {
         let CmdQuoteQueryFuture = pb.CmdQuoteQueryFuture;
         let message = CmdQuoteQueryFuture.create(data)
         let buff = CmdQuoteQueryFuture.encode(message).finish();
+
         return buff;
     },
 
@@ -444,6 +445,7 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Rep_QueryAiSignal) {
             let CmdQueryAiSignalReply = pb.CmdQueryAiSignalReply;
             let data = CmdQueryAiSignalReply.decode(new Uint8Array(buff));
+
             return data;
         }
         //同步模拟炒股状态
