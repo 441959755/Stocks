@@ -135,7 +135,7 @@ Socket.prototype = {
 		}
 	},
 
-	onclose(falg) {
+	onclose() {
 		console.log('连接断开');
 		this.heartbeat && (clearInterval(this.heartbeat))
 		this.heartbeat = null;
@@ -143,7 +143,7 @@ Socket.prototype = {
 		this.reconnectBeat = null;
 		this.ws = null;
 
-		if (!falg) {
+		if (!this.flag) {
 			this.reconnect();
 		}
 	},
@@ -170,6 +170,7 @@ Socket.prototype = {
 
 
 	initSocket() {
+		this.flag = false;
 		this.ws = new WebSocket(this.host);
 		this.ws.binaryType = 'arraybuffer';
 		//this.ws.responseType = "arraybuffer"

@@ -386,12 +386,14 @@ export default class NewClass extends cc.Component {
 
                     PopupManager.LoadTipsBox('tipsBox', str, () => {
 
-                        GlobalHandle.onReqRoomLeave();
-
                         GameCfg.allRate = 0;
                         GameCfg.finalfund = 0;
                         GameCfg.GAMEFUPAN = false;
                         GameCfg.RoomGameData = null;
+
+                        if (!GameCfg.GAMEWAIT) {
+                            GlobalHandle.onReqRoomLeave();
+                        }
 
                         if (!GameData.RoomType) {
                             GameData.selfEnterRoomData = null;

@@ -51,8 +51,8 @@ export default class NewClass extends cc.Component {
         //// 同步房间游戏状态
         GlobalEvent.on(EventCfg.RoomGameStatus, this.onRoomGameStatus.bind(this), this);
 
-        GameData.Players = [];
-        GameData.Players.length = 0;
+        // GameData.Players = [];
+        // GameData.Players.length = 0;
     }
 
     onEnable() {

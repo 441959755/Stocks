@@ -222,15 +222,11 @@ export default class NewClass extends cc.Component {
             if (this.enterRoom) { return }
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GlobalHandle.onReqRoomLeave(() => {
-                GameData.Players = [];
-                GameData.Players.length = 0;
-                GameData.RoomType = 0;
-                GameData.roomId = 0;
-                this.node.active = false;
-                GameCfg.GameType = null;
-                this.zbFlag = false;
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
             });
+            this.node.active = false;
+            GameCfg.GameType = null;
+            this.zbFlag = false;
         }
 
         //点击在线邀请

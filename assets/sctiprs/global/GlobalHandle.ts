@@ -286,6 +286,11 @@ export default class GlobalHandle {
                 console.log('onReqRoomLeave' + JSON.stringify(res));
                 call && call(res);
             })
+
+            GameData.Players = [];
+            GameData.Players.length = 0;
+            GameData.RoomType = 0;
+            GameData.roomId = 0;
         }
 
         else {
