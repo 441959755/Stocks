@@ -85,13 +85,12 @@ export default class HttpMgr {
                 let arr = el.split(',');
                 let da = {
                     timestamp: arr[0],
-                    open: parseInt(arr[1]),
-                    price: parseInt(arr[2]),
-                    high: parseInt(arr[3]),
-                    low: parseInt(arr[4]),
+                    open: parseFloat(arr[1]),
+                    price: parseFloat(arr[2]),
+                    high: parseFloat(arr[3]),
+                    low: parseFloat(arr[4]),
                     amount: parseInt(arr[5]),
                     volume: parseInt(arr[6]),
-
                 }
                 data.push(da);
             });

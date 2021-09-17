@@ -134,7 +134,8 @@ export default class NewClass extends cc.Component {
                 }
             })
         }
-
+        let UIScrollControl = this.scorllNode.getComponent('UIScrollControl');
+        UIScrollControl.clear();
         if (arr.length > 0) {
 
             arr.forEach(el => {
@@ -149,8 +150,7 @@ export default class NewClass extends cc.Component {
                 socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
             })
 
-            let UIScrollControl = this.scorllNode.getComponent('UIScrollControl');
-            UIScrollControl.clear();
+
             UIScrollControl.initControl(this.item1, arr.length, this.item1.getContentSize(), 0, (node, index) => {
                 let handle = node.getComponent('MnxgItem');
                 handle.onShow(arr[index], this._curArr[arr[index] + '']);
@@ -159,6 +159,7 @@ export default class NewClass extends cc.Component {
             this.tipsNode.active = false;
         }
         else {
+
             this.tipsNode.active = true;
         }
 

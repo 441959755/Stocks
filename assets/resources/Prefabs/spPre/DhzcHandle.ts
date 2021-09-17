@@ -172,6 +172,7 @@ export default class NewClass extends cc.Component {
                     this.jb_kyLa.string = '';
                     this.dhzc = 0;
                     this.zc_editBox.string = '';
+                    this.zc_sdLa.string = '';
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换成功！');
 
                     this.jb_kyLa.string = GameData.mncgDataList.account;

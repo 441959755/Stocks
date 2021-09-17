@@ -17,7 +17,10 @@ export default class NewClass extends cc.Component {
     yiShouCang: cc.Node = null;
 
     onLoad() {
+
         GlobalEvent.on('collectListUpdate', this.yiShouCangIsShow.bind(this), this);
+        //更新列表
+        GlobalEvent.on('updateCollectList', this.yiShouCangIsShow.bind(this), this);
     }
 
     onDestroy() {

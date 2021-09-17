@@ -21,14 +21,14 @@ export default class NewClass extends cc.Component {
 
             if (this._curData && res.items[0].code == this._curData.code) {
                 let signals = res.items[0];
-                console.log(ComUtils.fromatTime1(this._curData.tsUpdated));
+                // console.log(ComUtils.fromatTime1(this._curData.tsUpdated));
                 if (ComUtils.fromatTime1(signals.timestamp) - ComUtils.fromatTime1(this._curData.tsUpdated) <= 1) {
                     if (this._curData.todaySignal < 0) {
-                        this.label[7].string = '推荐买入';
+                        this.label[7].string = '建议买入';
 
                     }
                     else {
-                        this.label[7].string = '推荐卖出';
+                        this.label[7].string = '建议卖出';
                     }
                 }
                 else {

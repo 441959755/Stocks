@@ -111,6 +111,7 @@ export default class NewClass extends cc.Component {
             socket.send(pb.MessageId.Req_Game_MncgEditStockList, buff, (res) => {
 
             })
+
             if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
                 let index = GameData.selfStockList.indexOf(this._code);
                 GameData.selfStockList.splice(index, 1);
@@ -119,18 +120,14 @@ export default class NewClass extends cc.Component {
             else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
                 GameData.cgdsStockList.forEach(el => {
                     if (el.id == GameData.SpStockData.id) {
-                        // arr = el.stockList;
                         let index = el.stockList.indexOf(this._code);
                         el.stockList.splice(index, 1);
-
                     }
                 })
             }
 
             GlobalEvent.emit(EventCfg.ADDZXGP);
 
-            // this.node.active = false;
-            // this.node.destroy();
         }
     }
 }

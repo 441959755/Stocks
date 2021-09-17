@@ -5,7 +5,6 @@ import GameData from "../../sctiprs/GameData";
 import GameCfgText from "../../sctiprs/GameText";
 import EnterGameControl from "../../sctiprs/global/EnterGameControl";
 import GlobalHandle from "../../sctiprs/global/GlobalHandle";
-import ComUtils from "../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 
@@ -70,6 +69,7 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
                 return;
             }
+
             let data;
             if (GameCfg.GameType == pb.GameType.JJ_PK ||
 
@@ -187,8 +187,10 @@ export default class NewClass extends cc.Component {
                 GameCfg.notice = [];
                 GameCfg.history.allRate = 0;
                 StrategyAIData.onClearData();
-                GlobalHandle.onCmdGameStartReq();
-                cc.director.loadScene('game');
+                GlobalHandle.onCmdGameStartReq(() => {
+                    cc.director.loadScene('game');
+                });
+
 
             }
 

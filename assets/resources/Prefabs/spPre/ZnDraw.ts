@@ -121,6 +121,7 @@ export default class NewClass extends cc.Component {
             if (index < GameCfg.beg_end[0] || index >= GameCfg.beg_end[1]) { return }
 
             let time, kp, sp, zg, zd, cjl, cje;
+
             let arr = [];
             if (this.ktype == pb.KType.Min) {
                 if (this.gpDataMin.length <= 0 || !this.gpDataMin[index]) {
@@ -198,7 +199,6 @@ export default class NewClass extends cc.Component {
         })
 
         this.btnSelect.active = false;
-
     }
 
     //不同模式UI样式
@@ -462,6 +462,7 @@ export default class NewClass extends cc.Component {
             else {
                 this.yiShouCang.active = false;
             }
+
             setTimeout(() => {
                 this.toggles[1].isChecked = true;
                 this.toggles[0].isChecked = false;
@@ -536,10 +537,10 @@ export default class NewClass extends cc.Component {
             let label3 = this.laNode.getChildByName('label3').getComponent(cc.Label);
             if (this.gpDataDay[this.gpDataDay.length - 1].timestamp - signals[signals.length - 1].ts <= 1) {
                 if (signals[signals.length - 1].flag < 0) {
-                    label3.string = '今日决策：' + '推荐买入';
+                    label3.string = '今日决策：' + '建议买入';
                 }
                 else {
-                    label3.string = '今日决策：' + '推荐卖出';
+                    label3.string = '今日决策：' + '建议卖出';
                 }
             }
             else {
