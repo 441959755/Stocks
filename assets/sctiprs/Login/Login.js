@@ -18,8 +18,6 @@ cc.Class({
 
 		global.PB = pbhelper;
 
-		//	global.socket = null;
-
 		global.socket = Socket;
 
 	},
@@ -63,6 +61,9 @@ cc.Class({
 	},
 
 	initData() {
+		let account = cc.sys.localStorage.getItem('account');
+
+
 		let SMSet = cc.sys.localStorage.getItem('SMSET');
 		if (!SMSet) {
 			SMSet = {

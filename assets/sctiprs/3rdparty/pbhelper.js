@@ -44,7 +44,6 @@ PBHelper.prototype = {
         })
 
         let buff = CmdGameLogin.encode(message).finish();
-        console.log('游戏登入信息' + buff);
 
         return buff;
     },

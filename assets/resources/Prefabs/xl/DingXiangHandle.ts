@@ -524,7 +524,7 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			GameCfg.GAMEFUPAN = false;
 			GameCfg.GameType = pb.GameType.DingXiang;
-			GameCfg.GameSet = GameData.DXSet;
+			GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
 			GameCfg.ziChan = 100000;
 			this.DXStartGameSet();
 		} else if (name == 'blackbtn') {

@@ -3,7 +3,6 @@ import EventCfg from '../Utils/EventCfg';
 import GameCfg from '../game/GameCfg';
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
-import LoadUtils from '../Utils/LoadUtils';
 import EnterGameControl from '../global/EnterGameControl';
 import { LocationPoint } from '../global/LocationPoint';
 
@@ -60,37 +59,37 @@ export default class NewClass extends cc.Component {
 		//设置用户信息
 		this.setUserInfo();
 		//设置用户头像
-		this.setHeadImg();
+		this.setUserHead();
+		//	this.setHeadImg();
 
 		if (!GameCfg.JJ_XUNLIAN && (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis)) {
 			this.onBtnClick({ target: { name: 'main_jj_cgs' } }, null);
 		}
 
-		//
 		if (GameCfg.JJ_XUNLIAN) {
 			GameCfg.JJ_XUNLIAN = false;
 		}
 	}
 
 
-	setHeadImg() {
-		let headUrl = GameData.headimgurl;
-		if (headUrl) {
-			if (headUrl.indexOf('.jpg') != -1) {
-				LoadUtils.load(headUrl, texture => {
-					let spriteFrame = new cc.SpriteFrame(texture);
-					this.userHead.spriteFrame = spriteFrame;
-					GameData.headImg = spriteFrame;
-				});
-			} else {
-				LoadUtils.load({ url: headUrl, type: 'png' }, texture => {
-					let spriteFrame = new cc.SpriteFrame(texture);
-					this.userHead.spriteFrame = spriteFrame;
-					GameData.headImg = spriteFrame;
-				});
-			}
-		}
-	}
+	// setHeadImg() {
+	// 	let headUrl = GameData.headimgurl;
+	// 	if (headUrl) {
+	// 		if (headUrl.indexOf('.jpg') != -1) {
+	// 			LoadUtils.load(headUrl, texture => {
+	// 				let spriteFrame = new cc.SpriteFrame(texture);
+	// 				this.userHead.spriteFrame = spriteFrame;
+	// 				GameData.headImg = spriteFrame;
+	// 			});
+	// 		} else {
+	// 			LoadUtils.load({ url: headUrl, type: 'png' }, texture => {
+	// 				let spriteFrame = new cc.SpriteFrame(texture);
+	// 				this.userHead.spriteFrame = spriteFrame;
+	// 				GameData.headImg = spriteFrame;
+	// 			});
+	// 		}
+	// 	}
+	// }
 
 	setUserInfo() {
 		this.userLevel.string = 'LV:' + (GameData.properties[pb.GamePropertyId.Level] || 1) + '';

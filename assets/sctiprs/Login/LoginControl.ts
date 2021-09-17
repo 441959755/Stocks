@@ -47,6 +47,7 @@ export default class NewClass extends cc.Component {
         }
         else {
             //其他平台登入TODO
+
         }
     }
 

@@ -4,6 +4,7 @@ import StrategyAIData from "../../sctiprs/game/StrategyAIData";
 import GameData from "../../sctiprs/GameData";
 import GameCfgText from "../../sctiprs/GameText";
 import EnterGameControl from "../../sctiprs/global/EnterGameControl";
+import GlobalHandle from "../../sctiprs/global/GlobalHandle";
 import ComUtils from "../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
@@ -97,7 +98,7 @@ export default class NewClass extends cc.Component {
 
                 GameCfg.GameType = pb.GameType.DingXiang;
 
-                GameCfg.GameSet = GameData.DXSet;
+                GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
 
                 GameCfg.GameSet.search = data.code;
                 GameCfg.GameSet.year = data.from;
@@ -122,8 +123,7 @@ export default class NewClass extends cc.Component {
             else {
                 GameCfg.GameType = pb.GameType.DingXiang;
 
-                GameCfg.GameSet = GameData.DXSet;
-
+                GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
                 GameCfg.data[0].name = this.name;
 
                 GameCfg.data[0].code = this.code;
@@ -187,6 +187,7 @@ export default class NewClass extends cc.Component {
                 GameCfg.notice = [];
                 GameCfg.history.allRate = 0;
                 StrategyAIData.onClearData();
+                GlobalHandle.onCmdGameStartReq();
                 cc.director.loadScene('game');
 
             }

@@ -11,6 +11,28 @@ export default class GameData {
 
     public static AISignal: any = {};
 
+    private static _account = null;
+
+    public static get account() {
+        return this._account;
+    }
+
+    public static set account(val) {
+        this._account = val;
+        cc.sys.localStorage.setItem('account', JSON.stringify(val));
+    }
+
+    private static _password = null;
+
+    public static get password() {
+        return this._password;
+    }
+
+    public static set password(val) {
+        this._password = val;
+        cc.sys.localStorage.setItem('password', JSON.stringify(val));
+    }
+
     //Id
     private static _userID = null;
 

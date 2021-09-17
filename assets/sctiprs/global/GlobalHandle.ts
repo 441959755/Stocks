@@ -30,9 +30,18 @@ export default class GlobalHandle {
 
     //游戏开始发送游戏类型
     public static onCmdGameStartReq(cb?) {
+
         let info = {
             game: GameCfg.GameType,
+            isJunxian: false,
         }
+
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            if (GameCfg.GameSet.select == '均线') {
+                info.isJunxian = true;
+            }
+        }
+
         socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(info), res => {
 
             console.log(JSON.stringify(res));

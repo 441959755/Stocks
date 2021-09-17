@@ -368,14 +368,16 @@ export default class NewClass extends cc.Component {
                 GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
                 GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
                 cc.director.loadScene('game');
-            }, 1);
+            });
         }
 
         else if (name == 'lx_jsbt_xl') {
             GlobalEvent.emit(EventCfg.LEVELCHANGE);
-            GameData.huizhidatas = GameCfg.data[0].data.length - GameCfg.GameSet.KLine;
-            GameCfg.huizhidatas = GameCfg.data[0].data.length - GameCfg.GameSet.KLine;
-            cc.director.loadScene('game');
+            GlobalHandle.onCmdGameStartReq(() => {
+                GameData.huizhidatas = GameCfg.data[0].data.length - GameCfg.GameSet.KLine;
+                GameCfg.huizhidatas = GameCfg.data[0].data.length - GameCfg.GameSet.KLine;
+                cc.director.loadScene('game');
+            });
         }
         //复盘
         else if (name == 'lx_jsbt_qd') {

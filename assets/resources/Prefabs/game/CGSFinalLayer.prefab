@@ -58,8 +58,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
-        0,
+        667,
+        375,
         0,
         0,
         0,
@@ -485,7 +485,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 150,
+      "width": 120,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -497,7 +497,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        128.547,
+        105.575,
         0,
         0,
         0,
@@ -536,8 +536,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "闯关赛结算",
-    "_N$string": "闯关赛结算",
+    "_string": "比赛结果",
+    "_N$string": "比赛结果",
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,

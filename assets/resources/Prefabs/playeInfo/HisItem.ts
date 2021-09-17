@@ -139,16 +139,16 @@ export default class NewClass extends cc.Component {
 
         }
         else if (name == 'btn_xl') {
-            //   if (GameCfg.GameType == pb.GameType.JJ_PK) {
+
             let gameCount = EnterGameControl.onCurDXIsEnterGame();
 
             if (gameCount.status == 3) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
                 return;
             }
-            //   }
+
             GameCfg.GameType = pb.GameType.DingXiang;
-            GameCfg.GameSet = GameData.DXSet;
+            GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
             GameCfg.GAMEFUPAN = false;
             GameCfg.huizhidatas = this.itemData.kStartup;
             GameData.huizhidatas = this.itemData.kStartup;
@@ -193,7 +193,7 @@ export default class NewClass extends cc.Component {
         // EnterGameControl.onClearPreGameDataEnter(cache, flag);
         GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
             cc.director.loadScene('game');
-        }, 1);
+        }, flag);
     }
 
 }

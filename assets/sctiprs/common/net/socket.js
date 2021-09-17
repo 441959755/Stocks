@@ -6,7 +6,7 @@ import GameData from '../../GameData';
 import GameCfgText from '../../GameText';
 import GlobalEvent from '../../Utils/GlobalEvent';
 import EventCfg from '../../Utils/EventCfg';
-
+import ComUtils from '../../Utils/ComUtils';
 
 let MessageHead = pb.MessageHead;
 
@@ -19,7 +19,7 @@ Socket.prototype = {
 		this.reconnectCount = 0;
 		GlobalEvent.emit(EventCfg.TIPSTEXTHIDE);
 		socket.send(pb.MessageId.Req_Game_Login, PB.onCmdGameLoginConvertToBuff(), (info) => {
-
+			console.log('登入成功：' + JSON.stringify(info));
 			if (info && info.data) {
 				GameData.userID = info.data.uid;
 				GameData.userName = info.data.nickname;
@@ -41,6 +41,10 @@ Socket.prototype = {
 				GameData.gameData = info.data;
 
 				if (cc.director.getScene().name == 'Login') {
+					ComUtils.onLoadHead(info.data.icon, (texture) => {
+						GameData.imgs[info.data.icon.icon + ''] = new cc.SpriteFrame(texture);
+						GameData.headImg = GameData.imgs[info.data.icon.icon + ''];
+					})
 					cc.director.loadScene('hall');
 				}
 
