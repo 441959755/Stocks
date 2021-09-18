@@ -150,6 +150,7 @@ export default class NewClass extends cc.Component {
             GameCfg.GameType = pb.GameType.DingXiang;
             GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
             GameCfg.GAMEFUPAN = false;
+
             GameCfg.huizhidatas = this.itemData.kStartup;
             GameData.huizhidatas = this.itemData.kStartup;
 

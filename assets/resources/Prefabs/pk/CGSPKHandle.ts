@@ -38,8 +38,11 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         GlobalEvent.on(EventCfg.GETCGSDATA, (info) => {
+
             console.log('闯关赛数据：' + JSON.stringify(info));
+
             GameCfg.RoomGameData = info;
+
             let code = info.code + '';
             if (code.length >= 7) {
                 code = code.slice(1);
@@ -51,10 +54,8 @@ export default class NewClass extends cc.Component {
             GameCfg.data[0].data = [];
             GameCfg.data[0].circulate = items[4];
 
-
             info.quotes && (info.quotes.items.forEach((el, index) => {
-                //   if (index != 0) {
-                //  let date = new Date(el.timestamp);
+
                 let ye = (el.timestamp + '').slice(0, 4);
                 let mon = (el.timestamp + '').slice(4, 6);
                 let da = (el.timestamp + '').slice(6);
@@ -80,10 +81,8 @@ export default class NewClass extends cc.Component {
             )
             GameData.huizhidatas = info.tsQuoteStart + 1;
             GameCfg.huizhidatas = info.tsQuoteStart + 1;
-
-            GlobalEvent.emit(EventCfg.OPENMATCHPK);
-
             GameData.Players[1] = info.players[0].gd;
+            GlobalEvent.emit('SHOWOTHERPLAYER');
 
         }, this);
 
@@ -143,10 +142,8 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
             GameCfg.GameSet = GameData.JJPKSet;
+            GlobalEvent.emit(EventCfg.OPENMATCHPK);
 
-            GlobalHandle.onCmdGameStartReq(() => {
-
-            })
         }
 
         //领取奖励
@@ -212,7 +209,6 @@ export default class NewClass extends cc.Component {
             console.log('闯关赛通关排行' + JSON.stringify(res));
             this.ClearanceRank = res;
             this.onShowClearanceRank();
-
         })
     }
 

@@ -65,12 +65,18 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.CLEARINTERVAL);
 
         let player = GameCfg.RoomGameData.players[0];
-        GameCfg.RoomGameData.players.unshift(JSON.parse(JSON.stringify(player)));
+        console.log(player);
+
+        GameCfg.RoomGameData.players.unshift(player);
 
         let gpData = GameCfg.data[0].data;
+
         this.codeLabel.string = '股票名称：' + GameCfg.data[0].name + '    ' + GameCfg.data[0].code;
+
         this.codeTimeLabel.string = '训练时段：' + ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
+
         GameCfg.allRate = (GameCfg.allRate * 100);
+
         let rate = ComUtils.changeTwoDecimal((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100)
 
         this.HasRisen && (this.HasRisen.string = rate + '%')

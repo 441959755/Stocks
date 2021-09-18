@@ -40,8 +40,11 @@ export default class UpGameOpt {
         }
 
         console.log('操作' + JSON.stringify(el));
+
         this.arrOpt.push(el);
-        //  this.count++;
+
+        this.player1Opt.push(el);
+
         if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
             this.cb && (clearTimeout(this.cb));
             this.cb = null;
@@ -107,8 +110,6 @@ export default class UpGameOpt {
     }
 
     public static UpdataOtherPlayerOpt(opt) {
-        console.log('opt:' + JSON.stringify(opt));
-        //  this.ChanagekOffset(opt);
         let obj = opt;
         obj.kOffset += 1;
         this.player2Opt.push(obj);

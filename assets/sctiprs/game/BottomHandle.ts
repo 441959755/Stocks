@@ -692,13 +692,12 @@ export default class NewClass extends cc.Component {
 	setLabelData() {
 		if (this.roundNumber <= 0) {
 			this.roundNumber = 0;
-			//	this.onGameOverClosRate();
 		}
 
 		if (!GameCfg.GAMEFUPAN) {
 			this.tipsLabel.string = '回合数：' + this.roundNumber;
 			this.tipsLabel1.string = '回合数：' + this.roundNumber;
-			//    if (!GameCfg.GAMEFUPAN) {
+
 			this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
 			if (GameCfg.huizhidatas < this.gpData.length) {
 				this.moneyLabel[0].string = '总资产    ：' + parseInt(this.ziChan + this.keMcCount * this.gpData[GameCfg.huizhidatas].close + '');
@@ -721,9 +720,33 @@ export default class NewClass extends cc.Component {
 				PopupManager.LoadTipsBox('tipsBox', '您的操作回合数已经用完，请等候其他用户操作结束');
 
 				GameCfg.GAMEWAIT = true;
+
 				GlobalEvent.emit(EventCfg.GAMEWAIT);
 
 				let rate = this.onCurPositionRete(1);
+
+				if (UpGameOpt.player1Opt[UpGameOpt.player1Opt.length - 1].opId == pb.GameOperationId.Short) {
+					rate = -rate;
+
+					let item = {
+						opId: pb.GameOperationId.Long,
+						volume: 1,
+						kOffset: GameCfg.huizhidatas,
+
+					}
+					UpGameOpt.addOpt(item);
+				}
+				else if (UpGameOpt.player1Opt[UpGameOpt.player1Opt.length - 1].opId == pb.GameOperationId.Ask) {
+					let item = {
+						opId: pb.GameOperationId.Bid,
+						volume: 1,
+						kOffset: GameCfg.huizhidatas,
+
+					}
+					UpGameOpt.addOpt(item);
+				}
+
+
 
 				GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
 

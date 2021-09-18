@@ -101,7 +101,11 @@ export default class NewClass extends cc.Component {
         let timeout = Math.random() * 2 + 3;
 
         this.ecb = setTimeout(() => {
-            GlobalEvent.emit('SHOWOTHERPLAYER');
+
+            GlobalHandle.onCmdGameStartReq(() => {
+
+            })
+
         }, timeout * 1000);
     }
 

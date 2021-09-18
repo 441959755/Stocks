@@ -940,7 +940,6 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'toggle2') {
 
-
             if (!this.gpDataDay.length) {
                 this.getGPDataDay();
             }
@@ -1130,9 +1129,17 @@ export default class NewClass extends cc.Component {
 
         //模拟点击买入
         else if (name == 'sp_btn_mairu') {
+            let price;
+            if (this.gpDataMin[this.gpDataMin.length - 1]) {
+                price = this.gpDataMin[this.gpDataMin.length - 1].price;
+            }
+
+            if (!price) {
+                price = this.gpDataDay[this.gpDataDay.length - 1].price;
+            }
             let data = {
                 code: this.code,
-                price: this.gpDataMin[this.gpDataMin.length - 1].price,
+                price: price,
                 name: this.name,
             }
             GlobalEvent.emit(EventCfg.OPENBUYBOX, data);
@@ -1140,9 +1147,17 @@ export default class NewClass extends cc.Component {
 
         //模拟点击卖出
         else if (name == 'sp_btn_maichu') {
+            let price;
+            if (this.gpDataMin[this.gpDataMin.length - 1]) {
+                price = this.gpDataMin[this.gpDataMin.length - 1].price;
+            }
+
+            if (!price) {
+                price = this.gpDataDay[this.gpDataDay.length - 1].price;
+            }
             let data = {
                 code: this.code,
-                price: this.gpDataMin[this.gpDataMin.length - 1].price,
+                price: price,
                 name: this.name,
             }
             GlobalEvent.emit(EventCfg.OPENSELLBOX, data);

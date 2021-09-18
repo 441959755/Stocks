@@ -155,7 +155,7 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
                 return;
             }
-            //   }
+
             GameCfg.GameType = pb.GameType.DingXiang;
             GameCfg.GameSet = GameData.DXSet;
             GameCfg.GAMEFUPAN = false;
