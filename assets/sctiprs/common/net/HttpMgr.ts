@@ -87,6 +87,7 @@ export default class HttpMgr {
                     timestamp: arr[0],
                     open: parseFloat(arr[1]),
                     price: parseFloat(arr[2]),
+                    close: parseFloat(arr[2]),
                     high: parseFloat(arr[3]),
                     low: parseFloat(arr[4]),
                     amount: parseInt(arr[5]),

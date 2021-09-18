@@ -201,7 +201,7 @@
       "array": [
         0,
         0,
-        523.079343885801,
+        513.7831024420524,
         0,
         0,
         0,
@@ -3274,8 +3274,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "111",
-    "_N$string": "111",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,
@@ -3368,8 +3368,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "111",
-    "_N$string": "111",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,

@@ -59,24 +59,21 @@ export default class NewClass extends cc.Component {
             la.string = index;
         }
         //{"uid":722703,"nickname":"方新侠","icon":"default_icon","cgdsAccount":100000}
-        if (!info.icon || info.icon == 'default_icon' || info.icon == 'default.jpg') {
 
+        if (GameData.imgs[info.icon + '']) {
+            this.headImg.spriteFrame = GameData.imgs[info.icon + ''];
         }
         else {
-            if (!this.texture) {
-                ComUtils.onLoadHead(info.icon, (res) => {
-                    if (res) {
-                        let texture = new cc.SpriteFrame(res);
-                        this.headImg.spriteFrame = texture;
-                        this.texture = texture;
-                    }
+            ComUtils.onLoadHead(info.icon, (res) => {
+                if (res) {
+                    let texture = new cc.SpriteFrame(res);
+                    this.headImg.spriteFrame = texture;
+                    GameData.imgs[info.icon + ''] = texture;
+                }
 
-                })
-            }
-            else {
-                this.headImg.spriteFrame = this.texture;
-            }
+            })
         }
+
         this.namela.string = info.nickname;
 
         this.level.string = 'lv:' + info.level;

@@ -501,7 +501,7 @@ export default class NewClass extends cc.Component {
             maxValue = 100000;
         } else {
             this.dayFundLa.forEach((el, index) => {
-                el.string = minMoney + maxValue / 5 * index + '';
+                el.string = parseInt(((maxValue - minMoney) / 5) + '') * index + minMoney + '';
             })
         }
 
@@ -535,14 +535,6 @@ export default class NewClass extends cc.Component {
 
             DrawUtils.drawLine(this.draw1, dots[index].x, dots[index].y, dots[index + 1].x, dots[index + 1].y);
         })
-
-        //  acquireSMhistoryInfo{"results":[{"uid":1000105,"gType":"ShuangMang",
-        //         "quotesCode": 1300752, "kType": "Day", "kFrom": "20190404", "kTo": "20190404",
-        //             "ts": "1621782827", "rank": 1
-        //     },{
-        //         "uid": 1000105, "gType": "ShuangMang", "quotesCode": 1002839, "kType": "Day",
-        //             "kFrom": "20180822", "kTo": "20181029", "stockProfitRate": 2.7899999618530273, "userProfitRate": 3.700000047683716, "userProfit": "3699", "ts": "1622445051", "rank": 1
-        // }]}
 
     }
 

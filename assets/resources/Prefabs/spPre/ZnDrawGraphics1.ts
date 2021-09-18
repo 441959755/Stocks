@@ -101,6 +101,15 @@ export default class NewClass extends cc.Component {
             ktype && (this.ktype = ktype)
             this.onDraw();
         }, this);
+
+        GlobalEvent.on('clearGraphics', () => {
+            this.drawRSI.clear();
+            this.drawKDJ.clear();
+            this.drawMACD.clear();
+
+            this.drawPCM.clear();
+            this.drawVol.clear();
+        }, this)
     }
 
     start() {
@@ -466,6 +475,7 @@ export default class NewClass extends cc.Component {
         this.drawPCM.clear();
         this.drawVol.clear();
         GlobalEvent.off('onDrawGrap');
+        GlobalEvent.off('clearGraphics');
     }
 
 }

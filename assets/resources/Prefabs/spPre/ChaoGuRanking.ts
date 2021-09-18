@@ -45,15 +45,6 @@ export default class NewClass extends cc.Component {
             return;
         }
         this.tipsNode.active = false;
-        // async.eachLimit(items, 1, (el, cb) => {
-        //     let node = cc.instantiate(this.item);
-        //     this.content.addChild(node);
-        //     let handle = node.getComponent('ChaoGuRankingItem');
-        //     index++;
-        //     handle.onShow(el, index, this._curData);
-
-        //     setTimeout(cb, 0);
-        // })
 
         let UIScrollControl = this.scorllNode.getComponent('UIScrollControl');
         UIScrollControl.clear();

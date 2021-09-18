@@ -212,9 +212,7 @@ export default class NewClass extends cc.Component {
                 this.znDraw.setPosition(0, 0);
                 let handle = this.znDraw.getComponent('ZnDraw');
                 this.znDraw.active = true;
-                setTimeout(() => {
-                    handle.onShow(code, str);
-                }, 100)
+                handle.onShow(code, str);
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
             })
         }

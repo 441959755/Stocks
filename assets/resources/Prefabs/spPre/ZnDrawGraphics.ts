@@ -63,6 +63,11 @@ export default class NewClass extends cc.Component {
             arr && (this.viewData = arr)
             this.initDrawBg();
         }, this);
+
+        GlobalEvent.on('clearGraphics', () => {
+            this.drawBg.clear();
+            this.drawMA.clear();
+        }, this)
     }
 
     initDrawBg() {
@@ -310,5 +315,6 @@ export default class NewClass extends cc.Component {
         this.drawBg.clear();
         this.drawMA.clear();
         GlobalEvent.off('onDrawGrap');
+        GlobalEvent.off('clearGraphics');
     }
 }
