@@ -98,16 +98,7 @@ export default {
     loadRequest: function (path, data, handler, err?) {
         var xhr = cc.loader.getXMLHttpRequest();
         xhr.timeout = 5000;
-        // var str = "?";
-        // for (var k in data) {
-        //     if (str != "?") {
-        //         str += "&";
-        //     }
-        //     str += k + "=" + data[k];
-        // }
 
-        // var requestURL = path + encodeURI(str).replace(/\+/g,"%2B");
-        //  var requestURL = path + encodeURI(str);
         console.log("RequestURL:" + path);
         xhr.open("GET", path, true);
 

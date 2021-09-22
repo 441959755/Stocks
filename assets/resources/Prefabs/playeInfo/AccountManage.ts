@@ -14,9 +14,11 @@ export default class NewClass extends cc.Component {
         //注销
         if (name == 'grzx_zxzh') {
             socket.send(pb.MessageId.Req_Hall_Logout, null, (info) => {
+
             })
+
             socket.flag = true;
-            socket.ws.close();
+
             cc.director.loadScene('Login');
 
             // socket.send(pb.MessageId.Req_Hall_Unregistry, null, (info) => {

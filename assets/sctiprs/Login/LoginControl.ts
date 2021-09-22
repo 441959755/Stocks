@@ -1,10 +1,10 @@
 
 import LLWConfig from "../common/config/LLWConfig";
 import PlatDefine from "../common/config/PlatDefine";
-import LLWSDK from "../common/sdk/LLWSDK";
 import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
+
 
 const { ccclass, property } = cc._decorator;
 
@@ -36,6 +36,8 @@ export default class NewClass extends cc.Component {
     zcToggle: cc.Toggle = null;  //
 
     start() {
+
+
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
         //web 本地测试
         if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WEB) {
@@ -78,20 +80,20 @@ export default class NewClass extends cc.Component {
             console.log('登入账号：' + uid);
             this.loginServer(uid);
         }
-
-        //点击注册
-        else if (name == 'login_zc') {
-
+        //qq登入
+        else if (name == 'login_qqdl') {
+            gg.wechat.qqLogin();
         }
-
+        //微信登入
+        else if (name == 'login_wxdl') {
+            gg.wechat.login();
+        }
     }
 
     loginServer(uid) {
 
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
-        // 接DSK
-        let llwSDK = LLWSDK.getSDK()
         llwSDK.login((decoded) => {
             console.log(decoded.token + decoded.uid + decoded.gameAddr);
             if (decoded) {

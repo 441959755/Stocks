@@ -15,14 +15,14 @@
   "inlineSpriteFrames_native": true,
   "mergeStartScene": false,
   "optimizeHotUpdate": false,
-  "md5Cache": true,
+  "md5Cache": false,
   "encryptJs": false,
   "xxteaKey": "0ae7197f-d936-4e",
   "zipCompressJs": true,
   "fb-instant-games": {},
   "android": {
     "REMOTE_SERVER_ROOT": "",
-    "packageName": "org.cocos2d.demo"
+    "packageName": "com.jujing.stock"
   },
   "ios": {
     "REMOTE_SERVER_ROOT": "",
@@ -41,7 +41,7 @@
     "width": 1280
   },
   "android-instant": {
-    "REMOTE_SERVER_ROOT": "",
+    "REMOTE_SERVER_ROOT": "http://192.168.100.188:7456/preview-android-instant/",
     "host": "",
     "packageName": "org.cocos2d.demo",
     "pathPattern": "",
@@ -53,5 +53,6 @@
   "mainCompressionType": "none",
   "mainIsRemote": false,
   "nativeMd5Cache": true,
-  "agreements": {}
+  "agreements": {},
+  "includeAnySDK": false
 }
