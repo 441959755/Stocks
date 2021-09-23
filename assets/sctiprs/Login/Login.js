@@ -6,7 +6,7 @@ import AudioUtils from '../Utils/AudioUtils';
 import LLLog from '../common/utils/LLLog'
 import PopupManager from '../Utils/PopupManager';
 import LLWSDK from "../common/sdk/LLWSDK";
-import WeChatModule from '../common/sdk/WeChatModule';
+import WeChatModule from '../common/sdk/WeChatModule1';
 
 cc.Class({
 	extends: cc.Component,

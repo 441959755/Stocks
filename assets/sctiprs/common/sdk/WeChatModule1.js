@@ -1,12 +1,13 @@
 //import HttpUtils from "../net/HttpUtils";
 
-const wxClassPath = "org/cocos2dx/javascript/WeChatModule";
+const wxClassPath = "org/cocos2dx/javascript/AppActivity";
 
 const KeyRefreshToken = 'plaza_refresh_token';
 
 const appId = "wx2f88189155732f56";
 
-const appSecret = "9b1174a6fb93bd7a831338f8e21db0db";
+const appSecret = "1b9333210af08f2e53575726d93fd21b";
+
 const WxAccessUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";
 const WxRefreshUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
 
@@ -63,6 +64,7 @@ var WeChatModule = cc.Class({
         // } else if (gg.isIOS === true) {
         //     jsb.reflection.callStaticMethod("WeChatModule", "loginWx");
         // }
+        //  return true;
     },
 
     shareImageWx: function (imgPath, type) {
@@ -128,16 +130,16 @@ var WeChatModule = cc.Class({
         }
 
         //检查是否安装微信
-        // if (this.isInstallWx() === false) {
-        //     err && err(('微信登录失败，请检查是否安装微信'));
-        //     return false;
-        // }
+        if (this.isInstallWx() === false) {
+            err && err(('微信登录失败，请检查是否安装微信'));
+            return false;
+        }
 
         // if (gg.isWindows) {
         //     gg.fun.createDialog('WechatLoginView', '', false);
         //     return true;
         // } else {
-        return this.loginWx();
+        this.loginWx();
         // }
     },
 
