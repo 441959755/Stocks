@@ -131,6 +131,7 @@ $root.pb = (function () {
      * @property {number} Sync_S2C_Message=1102 Sync_S2C_Message value
      * @property {number} Sync_C2S_GameHeart=1200 Sync_C2S_GameHeart value
      * @property {number} Sync_C2S_Message=1202 Sync_C2S_Message value
+     * @property {number} Sync_C2S_PaymentOk=1204 Sync_C2S_PaymentOk value
      * @property {number} Req_QuoteSubscribe=2001 Req_QuoteSubscribe value
      * @property {number} Rep_QuoteSubscribe=2002 Rep_QuoteSubscribe value
      * @property {number} Req_QuoteQuery=2003 Req_QuoteQuery value
@@ -285,6 +286,7 @@ $root.pb = (function () {
      * @property {number} S2S_Sync_ZsjcState=10030 S2S_Sync_ZsjcState value
      * @property {number} S2S_Update_DailyTaskProgress=10032 S2S_Update_DailyTaskProgress value
      * @property {number} S2S_Sync_Pay=10034 S2S_Sync_Pay value
+     * @property {number} S2S_Sync_PaymentQuery=10036 S2S_Sync_PaymentQuery value
      */
     pb.MessageId = (function () {
         var valuesById = {}, values = Object.create(valuesById);
@@ -311,6 +313,7 @@ $root.pb = (function () {
         values[valuesById[1102] = "Sync_S2C_Message"] = 1102;
         values[valuesById[1200] = "Sync_C2S_GameHeart"] = 1200;
         values[valuesById[1202] = "Sync_C2S_Message"] = 1202;
+        values[valuesById[1204] = "Sync_C2S_PaymentOk"] = 1204;
         values[valuesById[2001] = "Req_QuoteSubscribe"] = 2001;
         values[valuesById[2002] = "Rep_QuoteSubscribe"] = 2002;
         values[valuesById[2003] = "Req_QuoteQuery"] = 2003;
@@ -465,6 +468,7 @@ $root.pb = (function () {
         values[valuesById[10030] = "S2S_Sync_ZsjcState"] = 10030;
         values[valuesById[10032] = "S2S_Update_DailyTaskProgress"] = 10032;
         values[valuesById[10034] = "S2S_Sync_Pay"] = 10034;
+        values[valuesById[10036] = "S2S_Sync_PaymentQuery"] = 10036;
         return values;
     })();
 
@@ -31559,6 +31563,7 @@ $root.pb = (function () {
          * @property {number|Long|null} [from] CmdQuoteQueryFuture from
          * @property {number|null} [total] CmdQuoteQueryFuture total
          * @property {number|Long|null} [to] CmdQuoteQueryFuture to
+         * @property {number|null} [reserve] CmdQuoteQueryFuture reserve
          */
 
         /**
@@ -31617,6 +31622,14 @@ $root.pb = (function () {
         CmdQuoteQueryFuture.prototype.to = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
 
         /**
+         * CmdQuoteQueryFuture reserve.
+         * @member {number} reserve
+         * @memberof pb.CmdQuoteQueryFuture
+         * @instance
+         */
+        CmdQuoteQueryFuture.prototype.reserve = 0;
+
+        /**
          * Creates a new CmdQuoteQueryFuture instance using the specified properties.
          * @function create
          * @memberof pb.CmdQuoteQueryFuture
@@ -31650,6 +31663,8 @@ $root.pb = (function () {
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.total);
             if (message.to != null && Object.hasOwnProperty.call(message, "to"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int64(message.to);
+            if (message.reserve != null && Object.hasOwnProperty.call(message, "reserve"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.reserve);
             return writer;
         };
 
@@ -31698,6 +31713,9 @@ $root.pb = (function () {
                         break;
                     case 5:
                         message.to = reader.int64();
+                        break;
+                    case 6:
+                        message.reserve = reader.int32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -31762,6 +31780,9 @@ $root.pb = (function () {
             if (message.to != null && message.hasOwnProperty("to"))
                 if (!$util.isInteger(message.to) && !(message.to && $util.isInteger(message.to.low) && $util.isInteger(message.to.high)))
                     return "to: integer|Long expected";
+            if (message.reserve != null && message.hasOwnProperty("reserve"))
+                if (!$util.isInteger(message.reserve))
+                    return "reserve: integer expected";
             return null;
         };
 
@@ -31841,6 +31862,8 @@ $root.pb = (function () {
                     message.to = object.to;
                 else if (typeof object.to === "object")
                     message.to = new $util.LongBits(object.to.low >>> 0, object.to.high >>> 0).toNumber();
+            if (object.reserve != null)
+                message.reserve = object.reserve | 0;
             return message;
         };
 
@@ -31871,6 +31894,7 @@ $root.pb = (function () {
                     object.to = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.to = options.longs === String ? "0" : 0;
+                object.reserve = 0;
             }
             if (message.ktype != null && message.hasOwnProperty("ktype"))
                 object.ktype = options.enums === String ? $root.pb.KType[message.ktype] : message.ktype;
@@ -31888,6 +31912,8 @@ $root.pb = (function () {
                     object.to = options.longs === String ? String(message.to) : message.to;
                 else
                     object.to = options.longs === String ? $util.Long.prototype.toString.call(message.to) : options.longs === Number ? new $util.LongBits(message.to.low >>> 0, message.to.high >>> 0).toNumber() : message.to;
+            if (message.reserve != null && message.hasOwnProperty("reserve"))
+                object.reserve = message.reserve;
             return object;
         };
 
@@ -32881,6 +32907,8 @@ $root.pb = (function () {
          * @property {number|null} [lastBidPrice] AiStockItem lastBidPrice
          * @property {number|null} [curAskPrice] AiStockItem curAskPrice
          * @property {number|null} [todaySignal] AiStockItem todaySignal
+         * @property {number|Long|null} [curAskTs] AiStockItem curAskTs
+         * @property {number|Long|null} [lastBidTs] AiStockItem lastBidTs
          */
 
         /**
@@ -32979,6 +33007,22 @@ $root.pb = (function () {
         AiStockItem.prototype.todaySignal = 0;
 
         /**
+         * AiStockItem curAskTs.
+         * @member {number|Long} curAskTs
+         * @memberof pb.AiStockItem
+         * @instance
+         */
+        AiStockItem.prototype.curAskTs = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
+         * AiStockItem lastBidTs.
+         * @member {number|Long} lastBidTs
+         * @memberof pb.AiStockItem
+         * @instance
+         */
+        AiStockItem.prototype.lastBidTs = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
+
+        /**
          * Creates a new AiStockItem instance using the specified properties.
          * @function create
          * @memberof pb.AiStockItem
@@ -33022,6 +33066,10 @@ $root.pb = (function () {
                 writer.uint32(/* id 9, wireType 1 =*/73).double(message.curAskPrice);
             if (message.todaySignal != null && Object.hasOwnProperty.call(message, "todaySignal"))
                 writer.uint32(/* id 10, wireType 1 =*/81).double(message.todaySignal);
+            if (message.curAskTs != null && Object.hasOwnProperty.call(message, "curAskTs"))
+                writer.uint32(/* id 11, wireType 0 =*/88).int64(message.curAskTs);
+            if (message.lastBidTs != null && Object.hasOwnProperty.call(message, "lastBidTs"))
+                writer.uint32(/* id 12, wireType 0 =*/96).int64(message.lastBidTs);
             return writer;
         };
 
@@ -33085,6 +33133,12 @@ $root.pb = (function () {
                         break;
                     case 10:
                         message.todaySignal = reader.double();
+                        break;
+                    case 11:
+                        message.curAskTs = reader.int64();
+                        break;
+                    case 12:
+                        message.lastBidTs = reader.int64();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -33151,6 +33205,12 @@ $root.pb = (function () {
             if (message.todaySignal != null && message.hasOwnProperty("todaySignal"))
                 if (typeof message.todaySignal !== "number")
                     return "todaySignal: number expected";
+            if (message.curAskTs != null && message.hasOwnProperty("curAskTs"))
+                if (!$util.isInteger(message.curAskTs) && !(message.curAskTs && $util.isInteger(message.curAskTs.low) && $util.isInteger(message.curAskTs.high)))
+                    return "curAskTs: integer|Long expected";
+            if (message.lastBidTs != null && message.hasOwnProperty("lastBidTs"))
+                if (!$util.isInteger(message.lastBidTs) && !(message.lastBidTs && $util.isInteger(message.lastBidTs.low) && $util.isInteger(message.lastBidTs.high)))
+                    return "lastBidTs: integer|Long expected";
             return null;
         };
 
@@ -33193,6 +33253,24 @@ $root.pb = (function () {
                 message.curAskPrice = Number(object.curAskPrice);
             if (object.todaySignal != null)
                 message.todaySignal = Number(object.todaySignal);
+            if (object.curAskTs != null)
+                if ($util.Long)
+                    (message.curAskTs = $util.Long.fromValue(object.curAskTs)).unsigned = false;
+                else if (typeof object.curAskTs === "string")
+                    message.curAskTs = parseInt(object.curAskTs, 10);
+                else if (typeof object.curAskTs === "number")
+                    message.curAskTs = object.curAskTs;
+                else if (typeof object.curAskTs === "object")
+                    message.curAskTs = new $util.LongBits(object.curAskTs.low >>> 0, object.curAskTs.high >>> 0).toNumber();
+            if (object.lastBidTs != null)
+                if ($util.Long)
+                    (message.lastBidTs = $util.Long.fromValue(object.lastBidTs)).unsigned = false;
+                else if (typeof object.lastBidTs === "string")
+                    message.lastBidTs = parseInt(object.lastBidTs, 10);
+                else if (typeof object.lastBidTs === "number")
+                    message.lastBidTs = object.lastBidTs;
+                else if (typeof object.lastBidTs === "object")
+                    message.lastBidTs = new $util.LongBits(object.lastBidTs.low >>> 0, object.lastBidTs.high >>> 0).toNumber();
             return message;
         };
 
@@ -33224,6 +33302,16 @@ $root.pb = (function () {
                 object.lastBidPrice = 0;
                 object.curAskPrice = 0;
                 object.todaySignal = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.curAskTs = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.curAskTs = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.lastBidTs = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.lastBidTs = options.longs === String ? "0" : 0;
             }
             if (message.code != null && message.hasOwnProperty("code"))
                 object.code = message.code;
@@ -33248,6 +33336,16 @@ $root.pb = (function () {
                 object.curAskPrice = options.json && !isFinite(message.curAskPrice) ? String(message.curAskPrice) : message.curAskPrice;
             if (message.todaySignal != null && message.hasOwnProperty("todaySignal"))
                 object.todaySignal = options.json && !isFinite(message.todaySignal) ? String(message.todaySignal) : message.todaySignal;
+            if (message.curAskTs != null && message.hasOwnProperty("curAskTs"))
+                if (typeof message.curAskTs === "number")
+                    object.curAskTs = options.longs === String ? String(message.curAskTs) : message.curAskTs;
+                else
+                    object.curAskTs = options.longs === String ? $util.Long.prototype.toString.call(message.curAskTs) : options.longs === Number ? new $util.LongBits(message.curAskTs.low >>> 0, message.curAskTs.high >>> 0).toNumber() : message.curAskTs;
+            if (message.lastBidTs != null && message.hasOwnProperty("lastBidTs"))
+                if (typeof message.lastBidTs === "number")
+                    object.lastBidTs = options.longs === String ? String(message.lastBidTs) : message.lastBidTs;
+                else
+                    object.lastBidTs = options.longs === String ? $util.Long.prototype.toString.call(message.lastBidTs) : options.longs === Number ? new $util.LongBits(message.lastBidTs.low >>> 0, message.lastBidTs.high >>> 0).toNumber() : message.lastBidTs;
             return object;
         };
 
@@ -34506,6 +34604,24 @@ $root.pb = (function () {
     })();
 
     /**
+     * Platform enum.
+     * @name pb.Platform
+     * @enum {number}
+     * @property {number} Platform_Null=0 Platform_Null value
+     * @property {number} Platform_Andriod=1 Platform_Andriod value
+     * @property {number} Platform_Apple=2 Platform_Apple value
+     * @property {number} Platform_WeChatMinProgram=3 Platform_WeChatMinProgram value
+     */
+    pb.Platform = (function () {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Platform_Null"] = 0;
+        values[valuesById[1] = "Platform_Andriod"] = 1;
+        values[valuesById[2] = "Platform_Apple"] = 2;
+        values[valuesById[3] = "Platform_WeChatMinProgram"] = 3;
+        return values;
+    })();
+
+    /**
      * AppFrom enum.
      * @name pb.AppFrom
      * @enum {number}
@@ -35132,6 +35248,7 @@ $root.pb = (function () {
          * @property {string|null} [pwd] CmdRegistry pwd
          * @property {string|null} [smsCode] CmdRegistry smsCode
          * @property {pb.AppFrom|null} [from] CmdRegistry from
+         * @property {boolean|null} [websocket] CmdRegistry websocket
          */
 
         /**
@@ -35190,6 +35307,14 @@ $root.pb = (function () {
         CmdRegistry.prototype.from = 0;
 
         /**
+         * CmdRegistry websocket.
+         * @member {boolean} websocket
+         * @memberof pb.CmdRegistry
+         * @instance
+         */
+        CmdRegistry.prototype.websocket = false;
+
+        /**
          * Creates a new CmdRegistry instance using the specified properties.
          * @function create
          * @memberof pb.CmdRegistry
@@ -35223,6 +35348,8 @@ $root.pb = (function () {
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.smsCode);
             if (message.from != null && Object.hasOwnProperty.call(message, "from"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.from);
+            if (message.websocket != null && Object.hasOwnProperty.call(message, "websocket"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.websocket);
             return writer;
         };
 
@@ -35271,6 +35398,9 @@ $root.pb = (function () {
                         break;
                     case 5:
                         message.from = reader.int32();
+                        break;
+                    case 6:
+                        message.websocket = reader.bool();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -35360,6 +35490,9 @@ $root.pb = (function () {
                     case 10000:
                         break;
                 }
+            if (message.websocket != null && message.hasOwnProperty("websocket"))
+                if (typeof message.websocket !== "boolean")
+                    return "websocket: boolean expected";
             return null;
         };
 
@@ -35513,6 +35646,8 @@ $root.pb = (function () {
                     message.from = 10000;
                     break;
             }
+            if (object.websocket != null)
+                message.websocket = Boolean(object.websocket);
             return message;
         };
 
@@ -35535,6 +35670,7 @@ $root.pb = (function () {
                 object.pwd = "";
                 object.smsCode = "";
                 object.from = options.enums === String ? "Ios_000" : 0;
+                object.websocket = false;
             }
             if (message.account != null && message.hasOwnProperty("account"))
                 object.account = message.account;
@@ -35546,6 +35682,8 @@ $root.pb = (function () {
                 object.smsCode = message.smsCode;
             if (message.from != null && message.hasOwnProperty("from"))
                 object.from = options.enums === String ? $root.pb.AppFrom[message.from] : message.from;
+            if (message.websocket != null && message.hasOwnProperty("websocket"))
+                object.websocket = message.websocket;
             return object;
         };
 
@@ -35573,6 +35711,7 @@ $root.pb = (function () {
          * @property {pb.LoginType|null} [type] CmdLogin type
          * @property {string|null} [pwd] CmdLogin pwd
          * @property {pb.AppFrom|null} [from] CmdLogin from
+         * @property {boolean|null} [websocket] CmdLogin websocket
          */
 
         /**
@@ -35623,6 +35762,14 @@ $root.pb = (function () {
         CmdLogin.prototype.from = 0;
 
         /**
+         * CmdLogin websocket.
+         * @member {boolean} websocket
+         * @memberof pb.CmdLogin
+         * @instance
+         */
+        CmdLogin.prototype.websocket = false;
+
+        /**
          * Creates a new CmdLogin instance using the specified properties.
          * @function create
          * @memberof pb.CmdLogin
@@ -35654,6 +35801,8 @@ $root.pb = (function () {
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pwd);
             if (message.from != null && Object.hasOwnProperty.call(message, "from"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.from);
+            if (message.websocket != null && Object.hasOwnProperty.call(message, "websocket"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.websocket);
             return writer;
         };
 
@@ -35699,6 +35848,9 @@ $root.pb = (function () {
                         break;
                     case 4:
                         message.from = reader.int32();
+                        break;
+                    case 5:
+                        message.websocket = reader.bool();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -35785,6 +35937,9 @@ $root.pb = (function () {
                     case 10000:
                         break;
                 }
+            if (message.websocket != null && message.hasOwnProperty("websocket"))
+                if (typeof message.websocket !== "boolean")
+                    return "websocket: boolean expected";
             return null;
         };
 
@@ -35936,6 +36091,8 @@ $root.pb = (function () {
                     message.from = 10000;
                     break;
             }
+            if (object.websocket != null)
+                message.websocket = Boolean(object.websocket);
             return message;
         };
 
@@ -35957,6 +36114,7 @@ $root.pb = (function () {
                 object.type = options.enums === String ? "LoginType_NULL" : 0;
                 object.pwd = "";
                 object.from = options.enums === String ? "Ios_000" : 0;
+                object.websocket = false;
             }
             if (message.account != null && message.hasOwnProperty("account"))
                 object.account = message.account;
@@ -35966,6 +36124,8 @@ $root.pb = (function () {
                 object.pwd = message.pwd;
             if (message.from != null && message.hasOwnProperty("from"))
                 object.from = options.enums === String ? $root.pb.AppFrom[message.from] : message.from;
+            if (message.websocket != null && message.hasOwnProperty("websocket"))
+                object.websocket = message.websocket;
             return object;
         };
 
@@ -40444,6 +40604,7 @@ $root.pb = (function () {
                     case 1102:
                     case 1200:
                     case 1202:
+                    case 1204:
                     case 2001:
                     case 2002:
                     case 2003:
@@ -40598,6 +40759,7 @@ $root.pb = (function () {
                     case 10030:
                     case 10032:
                     case 10034:
+                    case 10036:
                         break;
                 }
             if (message.buf != null && message.hasOwnProperty("buf"))
@@ -40710,6 +40872,10 @@ $root.pb = (function () {
                 case "Sync_C2S_Message":
                 case 1202:
                     message.id = 1202;
+                    break;
+                case "Sync_C2S_PaymentOk":
+                case 1204:
+                    message.id = 1204;
                     break;
                 case "Req_QuoteSubscribe":
                 case 2001:
@@ -41326,6 +41492,10 @@ $root.pb = (function () {
                 case "S2S_Sync_Pay":
                 case 10034:
                     message.id = 10034;
+                    break;
+                case "S2S_Sync_PaymentQuery":
+                case 10036:
+                    message.id = 10036;
                     break;
             }
             if (object.buf != null)
@@ -42399,6 +42569,7 @@ $root.pb = (function () {
                     case 1102:
                     case 1200:
                     case 1202:
+                    case 1204:
                     case 2001:
                     case 2002:
                     case 2003:
@@ -42553,6 +42724,7 @@ $root.pb = (function () {
                     case 10030:
                     case 10032:
                     case 10034:
+                    case 10036:
                         break;
                 }
             if (message.buf != null && message.hasOwnProperty("buf"))
@@ -42672,6 +42844,10 @@ $root.pb = (function () {
                 case "Sync_C2S_Message":
                 case 1202:
                     message.id = 1202;
+                    break;
+                case "Sync_C2S_PaymentOk":
+                case 1204:
+                    message.id = 1204;
                     break;
                 case "Req_QuoteSubscribe":
                 case 2001:
@@ -43288,6 +43464,10 @@ $root.pb = (function () {
                 case "S2S_Sync_Pay":
                 case 10034:
                     message.id = 10034;
+                    break;
+                case "S2S_Sync_PaymentQuery":
+                case 10036:
+                    message.id = 10036;
                     break;
             }
             if (object.buf != null)

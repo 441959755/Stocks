@@ -91,9 +91,10 @@ export default class PopupManager {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.tipsText = cc.instantiate(pre);
                 cc.find('Canvas').addChild(this.tipsText, 99);
-                this.tipsText.active = true;
 
-                this.tipsText.getComponent('TipsTextHandle').onShow(content);
+                this.tipsText && (this.tipsText.active = true)
+
+                this.tipsText && (this.tipsText.getComponent('TipsTextHandle').onShow(content))
 
             })
         }

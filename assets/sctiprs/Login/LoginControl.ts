@@ -86,7 +86,7 @@ export default class NewClass extends cc.Component {
         }
         //微信登入
         else if (name == 'login_wxdl') {
-            gg.wechat.login();
+            gg.wechat.login(this.loginResultCallback.bind(this));
         }
     }
 
@@ -94,18 +94,20 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
-        llwSDK.login((decoded) => {
-            console.log(decoded.token + decoded.uid + decoded.gameAddr);
-            if (decoded) {
-                decoded.token && (GameData.token = decoded.token);
-                decoded.uid && (GameData.userID = decoded.uid);
-                if (decoded.gameAddr) {
-                    socket = socket(decoded.gameAddr);
-                }
-            } else {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');
+        llwSDK.login(this.loginResultCallback.bind(this), uid);
+    }
+
+    loginResultCallback(decoded) {
+        console.log(decoded.token + decoded.uid + decoded.gameAddr);
+        if (decoded) {
+            decoded.token && (GameData.token = decoded.token);
+            decoded.uid && (GameData.userID = decoded.uid);
+            if (decoded.gameAddr) {
+                socket = socket(decoded.gameAddr);
             }
-        }, uid);
+        } else {
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');
+        }
     }
 }

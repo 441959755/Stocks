@@ -93,6 +93,7 @@ enum MessageId {
 	
 	Sync_C2S_GameHeart = 1200;				// 心跳
 	Sync_C2S_Message = 1202;				// 客户端发到服务器的消息（包括邀请或聊天消息）：Notice
+	Sync_C2S_PaymentOk = 1204;				// 客户端同步给服务器，支付成功：消息体无
 
 
 	// 行情相关
@@ -191,8 +192,8 @@ enum MessageId {
 	Req_Game_SmxlReset = 4013;				// 重置双盲训练：空
 	Rep_Game_SmxlReset = 4014;				// 重置双盲训练应答：ErrorInfo
 	// 闯关赛相关
-	Req_Game_CgsGetConf = 4015;				// 查询当前一轮闯关赛配置数据：无包体
-	Rep_Game_CgsGetConf = 4016;				// 查询当前一轮闯关赛配置数据应答：CgsConf
+	Req_Game_CgsGetConf = 4015;				// 查询某轮闯关赛配置数据：CgsConf（只需填写id：闯关赛每轮的ID，0表示当前一期，-1表示上一轮，-2表示将来一轮）
+	Rep_Game_CgsGetConf = 4016;				// 查询某轮闯关赛配置数据应答：CgsConf
 	Req_Game_CgsGetClearanceRank = 4017;	// 查询闯关赛通关排行：无包体
 	Rep_Game_CgsGetClearanceRank = 4018;	// 查询闯关赛通关排行应答：RankingList
 	Req_Game_CgsGetStageRank = 4019;		// 查询闯关赛关卡排行：CmdCgsRanking
@@ -268,6 +269,7 @@ enum MessageId {
 	S2S_Sync_ZsjcState = 10030;				// 同步指数竞猜的游戏状态
 	S2S_Update_DailyTaskProgress = 10032;	// 同步日常任务进度：CmdDailyProgress
 	S2S_Sync_Pay = 10034;					// 支付成功回调处理：CmdPay
+	S2S_Sync_PaymentQuery = 10036;			// 支付状态查询：CmdPay
 }
 
 message MessageHead {

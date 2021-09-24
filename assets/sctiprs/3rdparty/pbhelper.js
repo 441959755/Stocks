@@ -15,7 +15,7 @@ PBHelper.prototype = {
     onCmdLoginConvertToBuff(data) {
         let Login = pb.CmdLogin;
         console.log('登入信息' + JSON.stringify(data));
-        let message = Login.create({ account: data.account, type: data.type, from: data.from, pwd: data.pwd });
+        let message = Login.create({ account: data.account, type: data.type, from: data.from, pwd: data.pwd, websocket: true });
         let buff = Login.encode(message).finish();
         return buff;
     },

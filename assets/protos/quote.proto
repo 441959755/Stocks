@@ -60,7 +60,7 @@ message CmdQuoteQuery {
     int32 total = 4;   	// K线条数（0表示忽略该参数；如果total和to都不为0，则优先使用条数作为查询条件；一次性查询最大条数为2000条）
 	int64 to = 5;      	// 结束时间戳（0表示忽略该参数；格式同from）
 	KStyle kstyle = 6;	// 行情样式（如：单边向下、震荡）
-	int32 reserve = 7;	// 行情预留根数，针对from往前偏移根数，然后读取total指定的根数返回
+	int32 reserve = 7;	// 行情预留根数，针对from往前偏移根数，然后读取total指定的根数返回（针对非today的分时、日K和周K有效）
 }
 message QuoteItem {
 	uint32 code = 1;        // 股票代码
@@ -113,6 +113,7 @@ message CmdQuoteQueryFuture {
 	int64 from = 3;    	// 开始时间戳（不能为0，查询日K行情的格式为：YYYYMMDD，查询分时行情的格式为：时间戳，精确到秒）
     int32 total = 4;   	// K线条数（0表示忽略该参数；如果total和to都不为0，则优先使用条数作为查询条件；一次性查询最大条数为2000条）
 	int64 to = 5;      	// 结束时间戳（0表示忽略该参数；格式同from）
+	int32 reserve = 6;	// 行情预留根数，针对from往前偏移根数，然后读取total指定的根数返回（针对5分钟、日K和周K有效）
 }
 message QuoteItemFuture {
 	uint32 code = 1;        // 合约代码
@@ -152,6 +153,8 @@ message AiStockItem {
 	double last_bid_price = 8;	// 最近一次建议卖出价格(要么没有，要么买卖价成对出现)
 	double cur_ask_price = 9;	// 当前建议买入价格
 	double today_signal = 10;	// 今日信号
+	int64 cur_ask_ts = 11;		// 当前买入信号时间
+	int64 last_bid_ts = 12;		// 最近一次建议卖出信号时间
 }
 message CmdQueryAiStockListReply {
 	repeated AiStockItem items = 2;

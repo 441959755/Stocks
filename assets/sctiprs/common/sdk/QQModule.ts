@@ -1,4 +1,3 @@
-//import HttpUtils from "../net/HttpUtils";
 import HttpMgr from '../net/HttpMgr';
 import { pb } from "../../../protos/proto";
 
@@ -6,110 +5,99 @@ const wxClassPath = "org/cocos2dx/javascript/AppActivity";
 
 const KeyRefreshToken = 'plaza_refresh_token';
 
-const appId = "wx2f88189155732f56";
+const appId = "1105791492";
 
-const appSecret = "1b9333210af08f2e53575726d93fd21b";
+const appSecret = "FbT8AXU17ggHMy8E";
 
-const WxAccessUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";
-const WxRefreshUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
+// const WxAccessUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";
 
+// const WxRefreshUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
 
-var WeChatModule = cc.Class({
-    name: "WeChatModlue",
+export default class QQModule {
 
-    properties: {
-        appId: '',
-        appSecret: '',
-        Callback: null,
-    },
+    Callback = null;
 
-    //构造函数
-    ctor: function () {
-        console.log(`[WeChatModule][ctor]---构造函数`);
-        this.initWx();
-    },
+    constructor() {
+        console.log('QQModule--构造函数');
+        this.initQQ();
+    }
 
     //判断是否安装微信
-    isInstallWx: function () {
+    isInstallQQ() {
         if (cc.sys.os === cc.sys.OS_ANDROID) {
             return jsb.reflection.callStaticMethod(
                 wxClassPath,
-                "isInstallWx",
+                "isInstallQQ",
                 "()Z");
         } else if (cc.sys.os === cc.sys.OS_IOS) {
-            return jsb.reflection.callStaticMethod("WeChatModule", "isInstallWx");
+            return jsb.reflection.callStaticMethod("WeChatModule", "isInstallQQ", null);
         }
         // return true;
-    },
+    }
 
-    //初始化接口 需要传入appId和secret
-    initWx: function () {
-        this.appId = appId;
-        this.appSecret = appSecret;
+    initQQ() {
         if (cc.sys.os === cc.sys.OS_ANDROID) {
             return jsb.reflection.callStaticMethod(
                 wxClassPath,
-                "initWx",
+                "initQQ",
                 "(Ljava/lang/String;Ljava/lang/String;)V", appId, appSecret);
         } else if (cc.sys.os === cc.sys.OS_IOS) {
-            return jsb.reflection.callStaticMethod("WeChatModule", "initWx:andSecret:", appId, appSecret);
+            return jsb.reflection.callStaticMethod("WeChatModule", "initQQ:andSecret:", appId, appSecret);
         }
-        // return true;
-    },
+    }
 
-    loginWx: function () {
+    loginQQ() {
 
         if (cc.sys.os === cc.sys.OS_ANDROID) {
 
             jsb.reflection.callStaticMethod(
                 wxClassPath,
-                "loginWx",
+                "loginQQ",
                 "()V");
 
         } else if (cc.sys.os === cc.sys.OS_IOS) {
 
-            jsb.reflection.callStaticMethod("WeChatModule", "loginWx");
+            jsb.reflection.callStaticMethod("WeChatModule", "loginQQ", null);
 
         }
         //  return true;
-    },
+    }
 
-    shareImageWx: function (imgPath, type) {
+    shareImageQQ(imgPath, type) {
         if (cc.sys.os === cc.sys.OS_ANDROID) {
             jsb.reflection.callStaticMethod(
                 wxClassPath,
-                "shareImageWx",
+                "shareImageQQ",
                 "(Ljava/lang/String;I)V", imgPath, type);
         } else if (cc.sys.os === cc.sys.OS_IOS) {
-            jsb.reflection.callStaticMethod("WeChatModule", "shareImageWx:andType:", imgPath, type);
+            jsb.reflection.callStaticMethod("WeChatModule", "shareImageQQ:andType:", imgPath, type);
         }
-    },
+    }
 
-    shareTextWx: function (text, type) {
+    shareTextQQ(text, type) {
         if (cc.sys.os === cc.sys.OS_ANDROID) {
             jsb.reflection.callStaticMethod(
                 wxClassPath,
-                "shareTextWx",
+                "shareTextQQ",
                 "(Ljava/lang/String;I)V", text, type);
         } else if (cc.sys.os === cc.sys.OS_IOS) {
-            jsb.reflection.callStaticMethod("WeChatModule", "shareTextWx:andType:", text, type);
+            jsb.reflection.callStaticMethod("WeChatModule", "shareTextQQ:andType:", text, type);
         }
-    },
+    }
 
-    shareUrlWx: function (url, title, desc, type) {
+    shareUrlQQ(url, title, desc, type) {
         if (cc.sys.os === cc.sys.OS_ANDROID) {
             jsb.reflection.callStaticMethod(
                 wxClassPath,
-                "shareUrlWx",
+                "shareUrlQQ",
                 "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V", url, title, desc, type);
         } else if (cc.sys.os === cc.sys.OS_IOS) {
-            jsb.reflection.callStaticMethod("WeChatModule", "shareUrlWx:andTitle:andDesc:andType:", url, title, desc, type);
+            jsb.reflection.callStaticMethod("WeChatModule", "shareUrlQQ:andTitle:andDesc:andType:", url, title, desc, type);
         }
-    },
+    }
 
     //微信登录
-    login: function (Callback) {
-
+    login(Callback, err?) {
         this.Callback = Callback;
         console.log('微信登录');
         let strToken = cc.sys.localStorage.getItem(KeyRefreshToken);
@@ -118,7 +106,7 @@ var WeChatModule = cc.Class({
             let token = JSON.parse(strToken);
             let appid = token.appid;
             let refresh_token = token.refresh_token;
-            let kUrl = `${WxRefreshUrl}?appid=${appid}&grant_type=refresh_token&refresh_token=${refresh_token}`;
+            let kUrl = `${111}?appid=${appid}&grant_type=refresh_token&refresh_token=${refresh_token}`;
             console.log('kUrl' + kUrl);
             this.Callback && (this.Callback(refresh_token));
             // HttpUtils.loadRequest(kUrl, null, (result) => {
@@ -140,7 +128,7 @@ var WeChatModule = cc.Class({
         }
 
         //检查是否安装微信
-        if (this.isInstallWx() === false) {
+        if (this.isInstallQQ() === false) {
             err && err(('微信登录失败，请检查是否安装微信'));
             return false;
         }
@@ -149,15 +137,15 @@ var WeChatModule = cc.Class({
         //     gg.fun.createDialog('WechatLoginView', '', false);
         //     return true;
         // } else {
-        this.loginWx();
+        this.loginQQ();
         // }
-    },
+    }
 
-    onWxLoginResultCallback: function (result, codeMsg) {
+    onQQLoginResultCallback(result, codeMsg) {
         console.log('result' + result + '    ' + 'codeMsg' + codeMsg);
 
         if (result === false) {
-            let msg = {};
+            let msg;
             msg.ret = false;
             msg.msg = '微信登录失败，' + codeMsg;
             cc.director.emit("WxLoginCallback", msg);
@@ -165,7 +153,7 @@ var WeChatModule = cc.Class({
         }
 
         var self = this;
-        let kUrl = `${WxAccessUrl}?appid=${this.appId}&secret=${this.appSecret}&code=${codeMsg}&grant_type=authorization_code`;
+        let kUrl = `${111}?appid=${appId}&secret=${appSecret}&code=${codeMsg}&grant_type=authorization_code`;
         console.log('kUrl' + kUrl);
         console.log('pb' + pb);
         let loginInfo = {
@@ -190,23 +178,22 @@ var WeChatModule = cc.Class({
         //     cc.sys.localStorage.setItem(KeyRefreshToken, JSON.stringify(token));
 
         // });
-    },
+    }
 
-    onWxShareResultCallback: function (result, msg) {
+    onQQShareResultCallback(result, msg) {
 
-    },
+    }
 
-    onWxPayResultCallback: function (result, msg) {
+    onQQPayResultCallback(result, msg) {
 
-    },
+    }
 
-    onWindowLoginCallback: function (code) {
-        this.onWxLoginResultCallback(true, code);
-    },
+    onWindowLoginCallback(code) {
+        this.onQQLoginResultCallback(true, code);
+    }
 
-    resetWx: function () {
+    resetWx() {
         cc.sys.localStorage.removeItem(KeyRefreshToken);
-    },
-});
+    }
+}
 
-module.exports = WeChatModule;

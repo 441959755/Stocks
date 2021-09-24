@@ -23,6 +23,16 @@ import "common.proto";
 
 
 
+
+
+// App平台
+enum Platform {
+    Platform_Null = 0;  				// 无
+	Platform_Andriod = 1; 				// 安卓
+	Platform_Apple = 2;					// 苹果
+	Platform_WeChatMinProgram = 3;		// 微信小程序
+}
+
 // App渠道
 enum AppFrom {
     // 炒股达人
@@ -110,6 +120,7 @@ message CmdRegistry {
 	string pwd = 3;     // 玩家密码
 	string sms_code = 4;// 手机验证码
 	AppFrom from = 5; 	// App渠道
+	bool websocket = 6;	// 是否为websocket（默认返回TCP连接地址，是则返回websocket连接地址）
 }
 // 返回类型：CmdLoginReply
 
@@ -119,6 +130,7 @@ message CmdLogin {
 	LoginType type = 2; // 登录类型
 	string pwd = 3;     // 玩家密码
 	AppFrom from = 4; 	// App渠道
+	bool websocket = 5;	// 是否为websocket（默认返回TCP连接地址，是则返回websocket连接地址）
 }
 // 登录响应
 message CmdLoginReply {

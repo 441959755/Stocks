@@ -68,6 +68,7 @@ export namespace pb {
         Sync_S2C_Message = 1102,
         Sync_C2S_GameHeart = 1200,
         Sync_C2S_Message = 1202,
+        Sync_C2S_PaymentOk = 1204,
         Req_QuoteSubscribe = 2001,
         Rep_QuoteSubscribe = 2002,
         Req_QuoteQuery = 2003,
@@ -221,7 +222,8 @@ export namespace pb {
         S2S_Sync_ZsjcBetting = 10028,
         S2S_Sync_ZsjcState = 10030,
         S2S_Update_DailyTaskProgress = 10032,
-        S2S_Sync_Pay = 10034
+        S2S_Sync_Pay = 10034,
+        S2S_Sync_PaymentQuery = 10036
     }
 
     /** Properties of a MessageHead. */
@@ -11735,6 +11737,9 @@ export namespace pb {
 
         /** CmdQuoteQueryFuture to */
         to?: (number|Long|null);
+
+        /** CmdQuoteQueryFuture reserve */
+        reserve?: (number|null);
     }
 
     /** Represents a CmdQuoteQueryFuture. */
@@ -11760,6 +11765,9 @@ export namespace pb {
 
         /** CmdQuoteQueryFuture to. */
         public to: (number|Long);
+
+        /** CmdQuoteQueryFuture reserve. */
+        public reserve: number;
 
         /**
          * Creates a new CmdQuoteQueryFuture instance using the specified properties.
@@ -12200,6 +12208,12 @@ export namespace pb {
 
         /** AiStockItem todaySignal */
         todaySignal?: (number|null);
+
+        /** AiStockItem curAskTs */
+        curAskTs?: (number|Long|null);
+
+        /** AiStockItem lastBidTs */
+        lastBidTs?: (number|Long|null);
     }
 
     /** Represents an AiStockItem. */
@@ -12240,6 +12254,12 @@ export namespace pb {
 
         /** AiStockItem todaySignal. */
         public todaySignal: number;
+
+        /** AiStockItem curAskTs. */
+        public curAskTs: (number|Long);
+
+        /** AiStockItem lastBidTs. */
+        public lastBidTs: (number|Long);
 
         /**
          * Creates a new AiStockItem instance using the specified properties.
@@ -12903,6 +12923,14 @@ export namespace pb {
         type QuotesQueryCallback = (error: (Error|null), response?: pb.QuotesFuture) => void;
     }
 
+    /** Platform enum. */
+    enum Platform {
+        Platform_Null = 0,
+        Platform_Andriod = 1,
+        Platform_Apple = 2,
+        Platform_WeChatMinProgram = 3
+    }
+
     /** AppFrom enum. */
     enum AppFrom {
         Ios_000 = 0,
@@ -13117,6 +13145,9 @@ export namespace pb {
 
         /** CmdRegistry from */
         from?: (pb.AppFrom|null);
+
+        /** CmdRegistry websocket */
+        websocket?: (boolean|null);
     }
 
     /** Represents a CmdRegistry. */
@@ -13142,6 +13173,9 @@ export namespace pb {
 
         /** CmdRegistry from. */
         public from: pb.AppFrom;
+
+        /** CmdRegistry websocket. */
+        public websocket: boolean;
 
         /**
          * Creates a new CmdRegistry instance using the specified properties.
@@ -13228,6 +13262,9 @@ export namespace pb {
 
         /** CmdLogin from */
         from?: (pb.AppFrom|null);
+
+        /** CmdLogin websocket */
+        websocket?: (boolean|null);
     }
 
     /** Represents a CmdLogin. */
@@ -13250,6 +13287,9 @@ export namespace pb {
 
         /** CmdLogin from. */
         public from: pb.AppFrom;
+
+        /** CmdLogin websocket. */
+        public websocket: boolean;
 
         /**
          * Creates a new CmdLogin instance using the specified properties.
