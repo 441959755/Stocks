@@ -9,7 +9,7 @@ const appId = "1105791492";
 
 const appSecret = "FbT8AXU17ggHMy8E";
 
-// const WxAccessUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";
+const WxAccessUrl = "https://graph.qq.com/user/get_user_info?access_token=";
 
 // const WxRefreshUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
 
@@ -60,7 +60,7 @@ export default class QQModule {
             jsb.reflection.callStaticMethod("WeChatModule", "loginQQ", null);
 
         }
-        //  return true;
+
     }
 
     shareImageQQ(imgPath, type) {
@@ -96,7 +96,7 @@ export default class QQModule {
         }
     }
 
-    //微信登录
+    //QQ登录
     login(Callback, err?) {
         this.Callback = Callback;
         console.log('微信登录');
@@ -142,43 +142,38 @@ export default class QQModule {
     }
 
     onQQLoginResultCallback(result, codeMsg) {
-        console.log('result' + result + '    ' + 'codeMsg' + codeMsg);
 
-        if (result === false) {
-            let msg;
-            msg.ret = false;
-            msg.msg = '微信登录失败，' + codeMsg;
-            cc.director.emit("WxLoginCallback", msg);
-            return;
-        }
+        console.log('QQ登录返回' + result + '    ' + 'codeMsg' + codeMsg);
 
-        var self = this;
-        let kUrl = `${111}?appid=${appId}&secret=${appSecret}&code=${codeMsg}&grant_type=authorization_code`;
-        console.log('kUrl' + kUrl);
-        console.log('pb' + pb);
-        let loginInfo = {
-            account: codeMsg,
-            type: pb.LoginType.WeChat,
-            from: pb.AppFrom.Test,
-            // pwd: ''
-        };
+        //   this.getUserInfo();
+        // let loginInfo = {
+        //     account: codeMsg,
+        //     type: pb.LoginType.WeChat,
+        //     from: pb.AppFrom.Test,
+        //     // pwd: ''
+        // };
 
-        HttpMgr.getInstance().loginWeb(null, loginInfo, this.Callback, () => {
-            console.log('onLoginCodeHttpRequest err');
-            // call && call();
-        })
-        // HttpUtils.loadRequest(kUrl, null, (result) => {
-        //     let msg;
-        //     msg.ret = true;
-        //     msg.access_token = result.access_token;
-        //     msg.openid = result.openid;
-        //     let token;
-        //     token.refresh_token = result.refresh_token;
-        //     token.appid = appId;
-        //     cc.sys.localStorage.setItem(KeyRefreshToken, JSON.stringify(token));
+        // HttpMgr.getInstance().loginWeb(null, loginInfo, this.Callback, () => {
+        //     console.log('onLoginCodeHttpRequest err');
+        //     // call && call();
+        // })
 
-        // });
     }
+
+    getUserInfo() {
+        // if (cc.sys.os === cc.sys.OS_ANDROID) {
+        //     return jsb.reflection.callStaticMethod(
+        //         wxClassPath,
+        //         "getUserInfo",
+        //         "(Ljava/lang/String;Ljava/lang/String;)V");
+        // } else if (cc.sys.os === cc.sys.OS_IOS) {
+        //     return jsb.reflection.callStaticMethod("WeChatModule", "initQQ:andSecret:", null);
+        // }
+    }
+
+    // onQQUserInfoCallback(result, codeMsg) {
+    //     console.log('用户信息：' + result + codeMsg);
+    // }
 
     onQQShareResultCallback(result, msg) {
 

@@ -1,4 +1,4 @@
-//import HttpUtils from "../net/HttpUtils";
+import HttpUtils from "../net/HttpUtils";
 import HttpMgr from '../net/HttpMgr';
 import { pb } from "../../../protos/proto";
 
@@ -71,7 +71,7 @@ var WeChatModule = cc.Class({
             jsb.reflection.callStaticMethod("WeChatModule", "loginWx");
 
         }
-        //  return true;
+
     },
 
     shareImageWx: function (imgPath, type) {
@@ -118,39 +118,43 @@ var WeChatModule = cc.Class({
             let token = JSON.parse(strToken);
             let appid = token.appid;
             let refresh_token = token.refresh_token;
+
             let kUrl = `${WxRefreshUrl}?appid=${appid}&grant_type=refresh_token&refresh_token=${refresh_token}`;
+
             console.log('kUrl' + kUrl);
-            this.Callback && (this.Callback(refresh_token));
-            // HttpUtils.loadRequest(kUrl, null, (result) => {
-            //     let msg;
-            //     msg.ret = true;
-            //     msg.access_token = result.access_token;
-            //     msg.openid = result.openid;
-            //     let token;
-            //     token.refresh_token = result.refresh_token;
-            //     token.appid = appid;
-            //     cc.sys.localStorage.setItem(KeyRefreshToken, JSON.stringify(token));
-            //     call && (call(msg));
-            // }, (err) => {
-            //     this.resetWx();
-            //     this.loginWx();
-            //     return;
-            // })
-            return true;
-        }
 
-        //检查是否安装微信
-        if (this.isInstallWx() === false) {
-            err && err(('微信登录失败，请检查是否安装微信'));
-            return false;
-        }
+            HttpUtils.loadRequest(kUrl, null, (result) => {
+                let msg;
 
-        // if (gg.isWindows) {
-        //     gg.fun.createDialog('WechatLoginView', '', false);
-        //     return true;
-        // } else {
-        this.loginWx();
-        // }
+                msg.ret = true;
+
+                msg.access_token = result.access_token;
+
+                msg.openid = result.openid;
+
+                let token;
+
+                token.refresh_token = result.refresh_token;
+
+                token.appid = appid;
+
+                cc.sys.localStorage.setItem(KeyRefreshToken, JSON.stringify(token));
+
+                this.Callback && (this.Callback(result.access_token));
+
+            }, (err) => {
+                this.resetWx();
+                this.loginWx();
+            })
+        }
+        else {
+            //检查是否安装微信
+            if (this.isInstallWx() === false) {
+                err && err(('微信登录失败，请检查是否安装微信'));
+                return false;
+            }
+            this.loginWx();
+        }
     },
 
     onWxLoginResultCallback: function (result, codeMsg) {
@@ -164,10 +168,8 @@ var WeChatModule = cc.Class({
             return;
         }
 
-        var self = this;
-        let kUrl = `${WxAccessUrl}?appid=${this.appId}&secret=${this.appSecret}&code=${codeMsg}&grant_type=authorization_code`;
+        this.kUrl = `${WxAccessUrl}?appid=${this.appId}&secret=${this.appSecret}&code=${codeMsg}&grant_type=authorization_code`;
         console.log('kUrl' + kUrl);
-        console.log('pb' + pb);
         let loginInfo = {
             account: codeMsg,
             type: pb.LoginType.WeChat,
@@ -179,17 +181,21 @@ var WeChatModule = cc.Class({
             console.log('onLoginCodeHttpRequest err');
             // call && call();
         })
-        // HttpUtils.loadRequest(kUrl, null, (result) => {
-        //     let msg;
-        //     msg.ret = true;
-        //     msg.access_token = result.access_token;
-        //     msg.openid = result.openid;
-        //     let token;
-        //     token.refresh_token = result.refresh_token;
-        //     token.appid = appId;
-        //     cc.sys.localStorage.setItem(KeyRefreshToken, JSON.stringify(token));
 
-        // });
+    },
+
+    getUserInfo(Callback) {
+        HttpUtils.loadRequest(kUrl, null, (result) => {
+            let msg;
+            msg.ret = true;
+            msg.access_token = result.access_token;
+            msg.openid = result.openid;
+            let token;
+            token.refresh_token = result.refresh_token;
+            token.appid = appId;
+            cc.sys.localStorage.setItem(KeyRefreshToken, JSON.stringify(token));
+            Callback && (Callback(result));
+        });
     },
 
     onWxShareResultCallback: function (result, msg) {

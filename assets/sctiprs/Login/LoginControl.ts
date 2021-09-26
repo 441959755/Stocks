@@ -1,6 +1,7 @@
 
 import LLWConfig from "../common/config/LLWConfig";
 import PlatDefine from "../common/config/PlatDefine";
+import LLWSDK from "../common/sdk/LLWSDK";
 import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
@@ -82,11 +83,23 @@ export default class NewClass extends cc.Component {
         }
         //qq登入
         else if (name == 'login_qqdl') {
-            gg.wechat.qqLogin();
+            if (llwSDK.isInstallQq) {
+                llwSDK.callQqLoginToJava();
+            }
+            else {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '检查是否安QQ');
+            }
+
         }
         //微信登入
         else if (name == 'login_wxdl') {
-            gg.wechat.login(this.loginResultCallback.bind(this));
+            if (llwSDK.isInstallWeixin) {
+                llwSDK.callWeixinLoginToJava();
+            }
+            else {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '检查是否安装微信');
+            }
+
         }
     }
 
