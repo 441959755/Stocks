@@ -86,7 +86,7 @@ export default class NewClass extends cc.Component {
         else if (name == 'login_qqdl') {
             if (llwSDK.isInstallQq) {
 
-                llwSDK.callQqLoginToJava();
+                llwSDK.callQqLoginToJava(this.loginResultCallback.bind(this));
             }
             else {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '检查是否安QQ');

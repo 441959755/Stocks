@@ -1,8 +1,13 @@
+import { pb } from "../../../protos/proto";
+import HttpMgr from "../net/HttpMgr";
 
-const wxClassPath = "com/jujing/stock/wxapi/WeChatModule";
+const wxClassPath = 'org/cocos2dx/javascript/AppActivity';
 
 const WxAccessUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";
 const WxRefreshUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
+
+const QQAccessUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";
+const QQRefreshUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
 
 const APP_ID = "wx2f88189155732f56";
 const SECRET = "1b9333210af08f2e53575726d93fd21b";
@@ -15,7 +20,11 @@ export default class AndroidSDK {
 
     static WeChatModule = null;
 
+    loginPlat = null;
+
     className = 'org/cocos2dx/javascript/AppActivity';
+
+    callback = null;
 
     static getInstance() {
 
@@ -27,12 +36,10 @@ export default class AndroidSDK {
 
     //判断是否安装微信
     isInstallWx() {
-
         return jsb.reflection.callStaticMethod(
             wxClassPath,
             "isInstallWx",
             "()Z");
-
     }
 
     loginWx() {
@@ -100,28 +107,24 @@ export default class AndroidSDK {
         //检查是否安装微信
         if (this.isInstallWx() === false) {
             console.log('微信登录失败，请检查是否安装微信');
-            return false;
         }
 
-        // if (gg.isWindows) {
-        //     gg.fun.createDialog('WechatLoginView', '', false);
-        //     return true;
-        // } else {
         return this.loginWx();
-        // }
+
     }
 
     onWxLoginResultCallback(result, codeMsg) {
-        if (result === false) {
-            let msg;
-            msg.ret = false;
-            msg.msg = '微信登录失败，' + codeMsg;
-            cc.director.emit("WxLoginCallback", msg);
-            return;
-        }
+        console.log('微信登录，' + result)
+        // if (result === false) {
+        //     let msg;
+        //     msg.ret = false;
+        //     msg.msg = '微信登录失败，' + codeMsg;
+        //     cc.director.emit("WxLoginCallback", msg);
+        //     return;
+        // }
 
-        var self = this;
-        let kUrl = `${WxAccessUrl}?appid=${1}&secret=${1}&code=${codeMsg}&grant_type=authorization_code`;
+        // var self = this;
+        // let kUrl = `${WxAccessUrl}?appid=${1}&secret=${1}&code=${codeMsg}&grant_type=authorization_code`;
         // http.get({ url: kUrl, timeout: 10000 }, function (err, result) {
         //     if (err || result.errcode) {
         //         self.resetWx();
@@ -162,7 +165,8 @@ export default class AndroidSDK {
     }
 
     // --调用java QQ登录接口
-    callQqLoginToJava() {
+    callQqLoginToJava(call) {
+        this.callback = call;
         console.log("js准备调用java callQqLoginToJava:")
         var funcName = "loginInQq"
         var sigs = "()V"
@@ -306,10 +310,25 @@ export default class AndroidSDK {
     loginCallbackQQ(data) {
         console.log("登录回调:" + data)
         // ret":0,"openid":"89D78D1C3B890199821B91C223182057","access_token":"FBEFAE1F56A199EBB13E638E74D25D57","pay_token":"B52443D58A0DE62B6E2A059A164299AC","expires_in":7776000,"pf":"desktop_m_qq-10000144-android-2002-","pfkey":"31d18413f7306978f30a23756f0cc7ca","msg":"","login_cost":87,"query_authority_cost":0,"authority_cost":0,"expires_time":1640494638472,"AppId":"1105791492","Secret":"FbT8AXU17ggHMy8E"}
-
+        this.loginPlat = pb.LoginType.QQ;
+        this.loginServer(data.access_token);
     }
 
+    loginServer(token) {
 
+        let loginInfo = {
+            account: token,
+            type: this.loginPlat,
+            //from: pb.AppFrom.WeChatMinProgram,
+            // type: pb.LoginType.WeChat,
+            from: pb.AppFrom.Test,
+            pwd: ''
+        };
+
+        HttpMgr.getInstance().loginWeb(token, loginInfo, this.callback, () => {
+            console.log('onLoginCodeHttpRequest err');
+        })
+    }
 
     uploadImgCallbcak(texture) {
 
