@@ -1,5 +1,6 @@
-
-
+const WxAccessUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";
+const WxRefreshUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
+const KeyRefreshToken = 'plaza_refresh_token';
 export default class IOSSDK {
 
     static _instance = null;
@@ -23,45 +24,122 @@ export default class IOSSDK {
         return 0
     }
 
-    // 调用oc 微信登录接口
-    callWeixinLoginToOc() {
-        var funcName = "loginInWx"
-        jsb.reflection.callStaticMethod(this.className, funcName, null)
+    //判断是否安装微信
+    isInstallWx() {
+        return jsb.reflection.callStaticMethod("WeChatModule", "isInstallWx", null);
     }
 
-    // 调用oc 微信分享接口 shareType 1分享文字   2分享截图
-    // sessionOrFriendCircle 1分享给好友   2分享到朋友圈
-    callWeixinShareToOc(title, content, imagePath, url, shareType, sessionOrFriendCircle) {
-        if (typeof (shareType) != "number" || shareType == 1) {
-            shareType = 1;
-            imagePath = "pic path"
-        }
+    loginWx() {
 
+        jsb.reflection.callStaticMethod("WeChatModule", "loginWx", null);
 
-        var funcName = "shareToWxSession:"
-        if (typeof (sessionOrFriendCircle) != "number" || sessionOrFriendCircle == 2) {
-            funcName = "shareToWxFriendCircle:"
-        }
-        funcName = funcName + "Content:ImagePath:Url:ShareType:"
-
-        jsb.reflection.callStaticMethod(this.className, funcName,
-            title, content, imagePath, url, shareType)
     }
 
+    shareImageWx(imgPath, type) {
 
-    // 检查是否安装微信
-    isInstallWeixin() {
-        var funcName = "isInstallweixn"
-        var ret = jsb.reflection.callStaticMethod(this.className, funcName, null)
-        if (ret) {
-            if (ret == "true") {
-                return true
-            }
-        }
-        return false
+        jsb.reflection.callStaticMethod("WeChatModule", "shareImageWx:andType:", imgPath, type);
+
     }
 
+    shareTextWx(text, type) {
 
+        jsb.reflection.callStaticMethod("WeChatModule", "shareTextWx:andType:", text, type);
+
+    }
+
+    shareUrlWx(url, title, desc, type) {
+        jsb.reflection.callStaticMethod("WeChatModule", "shareUrlWx:andTitle:andDesc:andType:", url, title, desc, type);
+    }
+
+    //微信登录
+    login() {
+        let strToken = cc.sys.localStorage.getItem(KeyRefreshToken);
+        var self = this;
+        if (strToken) {
+            let token = JSON.parse(strToken);
+            let appid = token.appid;
+            let refresh_token = token.refresh_token;
+            let kUrl = `${WxRefreshUrl}?appid=${appid}&grant_type=refresh_token&refresh_token=${refresh_token}`;
+            // http.get({ url: kUrl, timeout: 10000 }, function (err, result) {
+            //     if (err || result.errcode) {
+            //         self.resetWx();
+            //         self.loginWx();
+            //         return;
+            //     }
+            //     let msg = {};
+            //     msg.ret = true;
+            //     msg.access_token = result.access_token;
+            //     msg.openid = result.openid;
+            //     let token = {};
+            //     token.refresh_token = result.refresh_token;
+            //     token.appid = appid;
+            //     cc.sys.localStorage.setItem(KeyRefreshToken, JSON.stringify(token));
+            //     cc.director.emit("WxLoginCallback", msg);
+            // }.bind(self));
+            // return true;
+        }
+
+        //检查是否安装微信
+        if (this.isInstallWx() === false) {
+            console.log('微信登录失败，请检查是否安装微信');
+            return false;
+        }
+
+        // if (gg.isWindows) {
+        //     gg.fun.createDialog('WechatLoginView', '', false);
+        //     return true;
+        // } else {
+        return this.loginWx();
+        // }
+    }
+
+    onWxLoginResultCallback(result, codeMsg) {
+        if (result === false) {
+            let msg;
+            msg.ret = false;
+            msg.msg = '微信登录失败，' + codeMsg;
+            cc.director.emit("WxLoginCallback", msg);
+            return;
+        }
+        let kUrl = `${WxAccessUrl}?appid=${this.appId}&secret=${this.appSecret}&code=${codeMsg}&grant_type=authorization_code`;
+        // http.get({ url: kUrl, timeout: 10000 }, function (err, result) {
+        //     if (err || result.errcode) {
+        //         self.resetWx();
+        //         let msg = {};
+        //         msg.ret = false;
+        //         msg.msg = '微信登录失败,请稍后重试';
+        //         cc.director.emit("WxLoginCallback", msg);
+        //         return;
+        //     }
+        //     let msg = {};
+        //     msg.ret = true;
+        //     msg.access_token = result.access_token;
+        //     msg.openid = result.openid;
+        //     let token = {};
+        //     token.refresh_token = result.refresh_token;
+        //     token.appid = self.appid;
+        //     cc.sys.localStorage.setItem(KeyRefreshToken, JSON.stringify(token));
+        //     cc.director.emit("WxLoginCallback", msg);
+        // });
+    }
+
+    onWxShareResultCallback(result, msg) {
+
+    }
+
+    onWxPayResultCallback(result, msg) {
+
+    }
+
+    onWindowLoginCallback(appId, appSecret, code) {
+        // this.appId = appId;
+        // this.appSecret = appSecret;
+        this.onWxLoginResultCallback(true, code);
+    }
+
+    resetWx() {
+        cc.sys.localStorage.removeItem(KeyRefreshToken);
+    }
     //调用oc qq登录接口
     callQqLoginToOc() {
         var funcName = "loginInQq"
@@ -211,40 +289,4 @@ export default class IOSSDK {
         jsb.reflection.callStaticMethod(this.className, funcName, null)
     }
 
-}
-
-//登录系统回调接口
-window.loginCallback = function (data) {
-    promptText("登录回调:" + data)
-}
-
-//扫描回调
-window.scamCallback = function (data) {
-    promptText("扫描回调:" + data)
-}
-
-window.createQRcodeCallback = function (data) {
-    promptText("二维码回调:" + data)
-}
-
-window.uploadImgCallbcak = function (texture) {
-
-}
-
-window.statusBarOrientationChanged = function () {
-    var frameSize = cc.view.getFrameSize()
-
-    if (direct == 1)//竖屏
-    {
-        cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT)
-        if (frameSize.width > frameSize.height) {
-            cc.view.setFrameSize(frameSize.height, frameSize.width);
-        }
-    }
-    else {
-        cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE)
-        if (frameSize.height > frameSize.width) {
-            cc.view.setFrameSize(frameSize.height, frameSize.width);
-        }
-    }
 }

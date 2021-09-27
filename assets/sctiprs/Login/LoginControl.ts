@@ -65,6 +65,7 @@ export default class NewClass extends cc.Component {
 
     onBtnclick(event, data) {
         let name = event.target.name;
+
         //忘记密码
         if (name == 'btnwjmm') {
             this.tipsLabel.string = '忘记密码';
@@ -84,6 +85,7 @@ export default class NewClass extends cc.Component {
         //qq登入
         else if (name == 'login_qqdl') {
             if (llwSDK.isInstallQq) {
+
                 llwSDK.callQqLoginToJava();
             }
             else {
@@ -93,13 +95,7 @@ export default class NewClass extends cc.Component {
         }
         //微信登入
         else if (name == 'login_wxdl') {
-            if (llwSDK.isInstallWeixin) {
-                llwSDK.callWeixinLoginToJava();
-            }
-            else {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '检查是否安装微信');
-            }
-
+            llwSDK.login();
         }
     }
 

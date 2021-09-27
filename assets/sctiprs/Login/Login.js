@@ -6,6 +6,7 @@ import AudioUtils from '../Utils/AudioUtils';
 import LLLog from '../common/utils/LLLog'
 import PopupManager from '../Utils/PopupManager';
 import LLWSDK from "../common/sdk/LLWSDK";
+import CallModule from '../common/sdk/CallModule1';
 
 cc.Class({
 	extends: cc.Component,
@@ -22,6 +23,12 @@ cc.Class({
 		global.socket = Socket;
 		// 接DSK
 		global.llwSDK = LLWSDK.getSDK();
+
+		global.CallModule = CallModule;
+
+		window.gg = {};
+
+		gg.wechat = LLWSDK.getSDK();
 
 	},
 

@@ -15,11 +15,11 @@ export default class WebSDK {
     }
 
     login(call, uid?) {
-        let uuid = uid || LLWUtils.getUUID();
-        //uuid = '081Bywll2uxrO74gprml2PQKcn1Bywl5';
+        // let uuid = uid || LLWUtils.getUUID();
+        let uuid = 'ooCB-vzwiiiPUPx6SJpZ5sTQJiB0';
         let loginInfo = {
             account: uuid,
-            type: pb.LoginType.WebTest,
+            type: pb.LoginType.QQ,
             from: pb.AppFrom.WeChatMinProgram,
             // type: pb.LoginType.WeChat,
             // from: pb.AppFrom.Test,
