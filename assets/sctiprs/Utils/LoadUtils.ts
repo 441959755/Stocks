@@ -66,6 +66,12 @@ export default class LoadUtils {
         })
     }
 
+    public static loadHead(obj, call) {
+        cc.loader.load(obj, function (err, tex) {
+            call && (call(tex));
+        });
+    }
+
     /**
      * 
      * @param parNode 父节点

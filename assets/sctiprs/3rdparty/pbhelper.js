@@ -228,8 +228,11 @@ PBHelper.prototype = {
 
         else if (id == pb.MessageId.Rep_Game_Start
             || id == pb.MessageId.Rep_Game_Over
-            || id == pb.MessageId.Rep_Game_EditNick
-            || id == pb.MessageId.Rep_Game_UploadIcon
+            || id == pb.MessageId.Rep_Hall_EditIcon
+            || id == pb.MessageId.Rep_Hall_EditNick
+            || id == pb.MessageId.Rep_Hall_EditLocation
+            || id == pb.MessageId.Rep_Hall_EditGender
+            || id == pb.MessageId.Rep_Hall_UploadIcon
             || id == pb.MessageId.Rep_Game_SmxlReset
             || id == pb.MessageId.Rep_Hall_ResetGameCounter
             || id == pb.MessageId.Rep_Hall_GetItem

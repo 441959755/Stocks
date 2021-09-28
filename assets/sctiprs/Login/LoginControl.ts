@@ -5,6 +5,7 @@ import LLWSDK from "../common/sdk/LLWSDK";
 import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
+import LoadUtils from "../Utils/LoadUtils";
 
 
 const { ccclass, property } = cc._decorator;
@@ -95,7 +96,7 @@ export default class NewClass extends cc.Component {
         }
         //微信登入
         else if (name == 'login_wxdl') {
-            llwSDK.login();
+            llwSDK.login(this.loginResultCallback.bind(this));
         }
     }
 

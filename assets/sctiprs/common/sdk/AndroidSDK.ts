@@ -1,5 +1,10 @@
 import { pb } from "../../../protos/proto";
+import GameData from "../../GameData";
+import EventCfg from "../../Utils/EventCfg";
+import GlobalEvent from "../../Utils/GlobalEvent";
+import LoadUtils from "../../Utils/LoadUtils";
 import HttpMgr from "../net/HttpMgr";
+import HttpUtils from "../net/HttpUtils";
 
 const wxClassPath = 'org/cocos2dx/javascript/AppActivity';
 
@@ -9,22 +14,33 @@ const WxRefreshUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
 const QQAccessUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";
 const QQRefreshUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
 
-const APP_ID = "wx2f88189155732f56";
-const SECRET = "1b9333210af08f2e53575726d93fd21b";
-
 const KeyRefreshToken = 'plaza_refresh_token';
 
+const QQRefreshToken = 'QQRefreshToken';
+
 export default class AndroidSDK {
+
+    appId = "wx2f88189155732f56";
+
+    // appSecret = "1b9333210af08f2e53575726d93fd21b";
+
+    appSecret = "9b1174a6fb93bd7a831338f8e21db0db";
 
     static _instance = null;
 
     static WeChatModule = null;
 
-    loginPlat = null;
+    public loginPlat = null;
 
     className = 'org/cocos2dx/javascript/AppActivity';
 
     callback = null;
+
+    WXtoken = {
+        access_token: null,
+        refresh_token: null,
+        openid: null,
+    };
 
     static getInstance() {
 
@@ -43,6 +59,7 @@ export default class AndroidSDK {
     }
 
     loginWx() {
+        console.log('js微信登录');
         jsb.reflection.callStaticMethod(
             wxClassPath,
             "loginWx",
@@ -77,73 +94,83 @@ export default class AndroidSDK {
     }
 
     //微信登录
-    login() {
+    login(call) {
+        this.callback = call;
+        this.loginPlat = pb.LoginType.WeChat;
+
         let strToken = cc.sys.localStorage.getItem(KeyRefreshToken);
 
         if (strToken) {
             let token = JSON.parse(strToken);
-            let appid = token.appid;
+            let appid = this.appId;
             let refresh_token = token.refresh_token;
             let kUrl = `${WxRefreshUrl}?appid=${appid}&grant_type=refresh_token&refresh_token=${refresh_token}`;
-            // http.get({ url: kUrl, timeout: 10000 }, function (err, result) {
-            //     if (err || result.errcode) {
-            //         self.resetWx();
-            //         self.loginWx();
-            //         return;
-            //     }
-            //     let msg = {};
-            //     msg.ret = true;
-            //     msg.access_token = result.access_token;
-            //     msg.openid = result.openid;
-            //     let token = {};
-            //     token.refresh_token = result.refresh_token;
-            //     token.appid = appid;
-            //     cc.sys.localStorage.setItem(KeyRefreshToken, JSON.stringify(token));
-            //     cc.director.emit("WxLoginCallback", msg);
-            // }.bind(self));
-            // return true;
+
+            HttpUtils.loadRequest(kUrl, null, (result) => {
+                console.log('微信登录refresh_token，' + result);
+                result = JSON.parse(result);
+
+                if (result.errcode) {
+                    this.resetWx();
+                    this.loginWx();
+                    return;
+                }
+
+                this.WXtoken.access_token = result.access_token;
+                this.WXtoken.refresh_token = result.refresh_token;
+                this.WXtoken.openid = result.openid;
+
+                cc.sys.localStorage.setItem(KeyRefreshToken, JSON.stringify(this.WXtoken));
+                this.getUserInfo();
+            })
         }
+        else {
+            //检查是否安装微信
 
-        //检查是否安装微信
-        if (this.isInstallWx() === false) {
-            console.log('微信登录失败，请检查是否安装微信');
+            if (this.isInstallWx()) {
+                console.log('微信登录失败，请检查是否安装微信');
+            }
+
+
+            this.loginWx();
         }
-
-        return this.loginWx();
-
     }
 
     onWxLoginResultCallback(result, codeMsg) {
-        console.log('微信登录，' + result)
-        // if (result === false) {
-        //     let msg;
-        //     msg.ret = false;
-        //     msg.msg = '微信登录失败，' + codeMsg;
-        //     cc.director.emit("WxLoginCallback", msg);
-        //     return;
-        // }
+        console.log('微信登录，' + result + '   ' + codeMsg);
+        // 微信登录，true   051QV0100o0RuM1HqS200U2S5D1QV01T
+        if (result === false) {
+            let msg = {
+                ret: false,
+                msg: '微信登录失败，' + codeMsg,
+            };
 
-        // var self = this;
-        // let kUrl = `${WxAccessUrl}?appid=${1}&secret=${1}&code=${codeMsg}&grant_type=authorization_code`;
-        // http.get({ url: kUrl, timeout: 10000 }, function (err, result) {
-        //     if (err || result.errcode) {
-        //         self.resetWx();
-        //         let msg = {};
-        //         msg.ret = false;
-        //         msg.msg = '微信登录失败,请稍后重试';
-        //         cc.director.emit("WxLoginCallback", msg);
-        //         return;
-        //     }
-        //     let msg = {};
-        //     msg.ret = true;
-        //     msg.access_token = result.access_token;
-        //     msg.openid = result.openid;
-        //     let token = {};
-        //     token.refresh_token = result.refresh_token;
-        //     token.appid = self.appid;
-        //     cc.sys.localStorage.setItem(KeyRefreshToken, JSON.stringify(token));
-        //     cc.director.emit("WxLoginCallback", msg);
-        // });
+            //  cc.director.emit("WxLoginCallback", msg);
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '微信登录失败');
+            return;
+        }
+
+        let kUrl = `${WxAccessUrl}?appid=${this.appId}&secret=${this.appSecret}&code=${codeMsg}&grant_type=authorization_code`;
+
+        HttpUtils.loadRequest(kUrl, null, (result) => {
+            console.log('微信登录authorization_code，' + result);
+            result = JSON.parse(result);
+
+            if (result.errcode) {
+                this.resetWx();
+                this.loginWx();
+                return;
+            }
+
+            this.WXtoken.access_token = result.access_token;
+            this.WXtoken.refresh_token = result.refresh_token;
+            this.WXtoken.openid = result.openid;
+
+            cc.sys.localStorage.setItem(KeyRefreshToken, JSON.stringify(this.WXtoken));
+
+            this.getUserInfo();
+
+        })
     }
 
     onWxShareResultCallback(result, msg) {
@@ -165,13 +192,25 @@ export default class AndroidSDK {
     }
 
     // --调用java QQ登录接口
-    callQqLoginToJava(call) {
+    callQqLoginToJava(call?) {
         this.callback = call;
-        console.log("js准备调用java callQqLoginToJava:")
-        var funcName = "loginInQq"
-        var sigs = "()V"
-        var ret = jsb.reflection.callStaticMethod(this.className, funcName, sigs)
-        return ret
+        let RefreshToken = cc.sys.localStorage.getItem(QQRefreshToken);
+
+        if (RefreshToken) {
+
+            let access_token = JSON.parse(RefreshToken).access_token;
+
+            this.loginServer(access_token);
+        }
+        else {
+            this.loginPlat = pb.LoginType.QQ;
+
+            console.log("js准备调用java callQqLoginToJava:")
+            var funcName = "loginInQq"
+            var sigs = "()V"
+            var ret = jsb.reflection.callStaticMethod(this.className, funcName, sigs)
+            return ret
+        }
     }
 
     // 调用java qq分享接口 shareType 1分享文字   2分享截图
@@ -258,31 +297,6 @@ export default class AndroidSDK {
         jsb.reflection.callStaticMethod(this.className, funcName, sigs, str)
     }
 
-    // //调用振动
-    // vibratez(aSecond) {
-    //     console.log("js准备调用java vibratez:")
-    //     var funcName = "vibratez"
-    //     var sigs = "(I)I"
-    //     var ret = jsb.reflection.callStaticMethod(this.className, funcName, sigs, aSecond);
-    //     console.log("调用结果:", ret)
-    //     return ret
-    // }
-
-    // //屏幕装换
-    // setScreenDirection(direct) {
-    //     var funcName = "setScreenDirection"
-    //     var sigs = "(I)I"
-    //     var succ = jsb.reflection.callStaticMethod(this.className, funcName, sigs, direct);
-    //     if (succ == 1) {
-    //         return true
-    //     }
-    // }
-    // //二维码扫描
-    // scanQRCode() {
-    //     var funcName = "scanQRCode"
-    //     var sigs = "()V"
-    //     var ret = jsb.reflection.callStaticMethod(this.className, funcName, sigs)
-    // }
 
     uploadImg() {
         var funcName = "uploadImg"
@@ -311,8 +325,21 @@ export default class AndroidSDK {
         console.log("登录回调:" + data)
         // ret":0,"openid":"89D78D1C3B890199821B91C223182057","access_token":"FBEFAE1F56A199EBB13E638E74D25D57","pay_token":"B52443D58A0DE62B6E2A059A164299AC","expires_in":7776000,"pf":"desktop_m_qq-10000144-android-2002-","pfkey":"31d18413f7306978f30a23756f0cc7ca","msg":"","login_cost":87,"query_authority_cost":0,"authority_cost":0,"expires_time":1640494638472,"AppId":"1105791492","Secret":"FbT8AXU17ggHMy8E"}
         this.loginPlat = pb.LoginType.QQ;
-        this.loginServer(data.access_token);
+
+        cc.sys.localStorage.setItem(QQRefreshToken, data);
+
+        data = JSON.parse(data);
+
+        this.getQQInfo();
     }
+
+    getQQInfo() {
+        let userInfoString = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "getQQInfo", "()Ljava/lang/String;");
+        console.log('getQQInfo' + userInfoString);
+
+    }
+
+
 
     loginServer(token) {
 
@@ -351,6 +378,49 @@ export default class AndroidSDK {
     //         }
     //     }
     // }
+
+    getUserInfo(obj?) {
+        let url;
+        if (this.loginPlat == pb.LoginType.QQ) {
+            let QQInfo = cc.sys.localStorage.getItem('QQInfo');
+            if (!QQInfo) {
+                url = 'https://graph.qq.com/user/get_user_info?access_token=' + obj.access_token
+                    + 'oauth_consumer_key=12345&openid=' + obj.openid;
+            }
+        }
+        else if (this.loginPlat == pb.LoginType.WeChat) {
+            let WeChatInfo = cc.sys.localStorage.getItem('WeChatInfo');
+            if (!WeChatInfo) {
+                url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' + this.WXtoken.
+                    access_token + '&openid=' + this.WXtoken.openid;
+            }
+        }
+
+        if (url) {
+            HttpUtils.loadRequest(url, null, (result) => {
+                console.log('wx getUserInfo 11' + result);
+
+                result = JSON.parse(result);
+
+                GameData.userName = result.nickname;
+
+                GameData.gender = result.sex || result.gender;
+
+                let headUrl = result.headimgurl || result.figureurl_1;
+
+                let obj = { url: headUrl + '?file=a.png', type: 'png' };
+                LoadUtils.loadHead(obj, (img) => {
+                    GameData.headImg = new cc.SpriteFrame(img);
+                })
+
+                this.loginServer(this.WXtoken.access_token);
+            })
+        }
+        else {
+            this.loginServer(this.WXtoken.access_token);
+        }
+
+    }
 
 }
 

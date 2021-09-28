@@ -22,13 +22,18 @@ Socket.prototype = {
 			console.log('登入成功：' + JSON.stringify(info));
 			if (info && info.data) {
 				GameData.userID = info.data.uid;
-				GameData.userName = info.data.nickname;
+				if (!GameData.userName) {
+					GameData.userName = info.data.nickname;
+				}
+				if (!GameData.gender) {
+					GameData.gender = info.data.gender;
+				}
 
 				GameData.properties = info.data.properties;
 				GameData.SmxlState = info.data.smlxState;
 				GameData.cgState = info.data.cgState;
 				GameCfgText.levelInfoCfg && (GameData.maxExp = GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]])
-				GameData.gender = info.data.gender;
+
 				GameData.location = info.data.location || '中国';
 				GameData.GameCounters = info.data.counters;
 				GameData.todayGameCount = info.data.todayTimes;
@@ -41,10 +46,14 @@ Socket.prototype = {
 				GameData.gameData = info.data;
 
 				if (cc.director.getScene().name == 'Login') {
-					ComUtils.onLoadHead(info.data.icon, (texture) => {
-						GameData.imgs[info.data.icon.icon + ''] = new cc.SpriteFrame(texture);
-						GameData.headImg = GameData.imgs[info.data.icon.icon + ''];
-					})
+
+					if (!GameData.headImg) {
+						ComUtils.onLoadHead(info.data.icon, (texture) => {
+							GameData.imgs[info.data.icon.icon + ''] = new cc.SpriteFrame(texture);
+							GameData.headImg = GameData.imgs[info.data.icon.icon + ''];
+						})
+					}
+
 					cc.director.loadScene('hall');
 				}
 

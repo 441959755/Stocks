@@ -5,6 +5,7 @@ import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import EnterGameControl from '../global/EnterGameControl';
 import { LocationPoint } from '../global/LocationPoint';
+import LLWSDK from '../common/sdk/LLWSDK';
 
 const { ccclass, property } = cc._decorator;
 
@@ -69,8 +70,58 @@ export default class NewClass extends cc.Component {
 		if (GameCfg.JJ_XUNLIAN) {
 			GameCfg.JJ_XUNLIAN = false;
 		}
+
+		//
+		this.upLoadUserInfo();
 	}
 
+	upLoadUserInfo() {
+		let WeChatInfo;
+		if (!llwSDK.loginPlat) { return }
+		if (llwSDK.loginPlat == pb.LoginType.QQ) {
+			WeChatInfo = cc.sys.localStorage.getItem('QQInfo');
+			cc.sys.localStorage.setItem('QQInfo', 1);
+
+		}
+		else if (llwSDK.loginPlat == pb.LoginType.WeChat) {
+			WeChatInfo = cc.sys.localStorage.getItem('WeChatInfo');
+			cc.sys.localStorage.setItem('WeChatInfo', 1);
+		}
+
+		if (!WeChatInfo) {
+
+			{
+				let data = {
+					uid: GameData.userID,
+					nick: GameData.userName,
+				}
+				socket.send(pb.MessageId.Req_Hall_EditNick, PB.onCmdEditInfoConvertToBuff(data), (info) => {
+					console.log('GameData.userName:');
+				})
+			}
+
+			{
+				let data = {
+					uid: GameData.userID,
+					gender: GameData.gender,
+				}
+				socket.send(pb.MessageId.Req_Hall_EditGender, PB.onCmdEditInfoConvertToBuff(data), (info) => {
+					console.log('GameData.gender:');
+				})
+			}
+
+			{
+
+				let data = {
+					uid: GameData.userID,
+					icon: GameData.headImg,
+				}
+				socket.send(pb.MessageId.Req_Hall_EditIcon, PB.onCmdEditInfoConvertToBuff(data), (info) => {
+					console.log('GameData.headImg:' + JSON.stringify(info));
+				})
+			}
+		}
+	}
 
 	// setHeadImg() {
 	// 	let headUrl = GameData.headimgurl;

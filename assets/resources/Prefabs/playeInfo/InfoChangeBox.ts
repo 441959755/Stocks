@@ -213,7 +213,6 @@ export default class NewClass extends cc.Component {
             } else {
                 console.log(info.code + info.err);
             }
-
         })
     }
 
