@@ -15,8 +15,8 @@ export default class WebSDK {
     }
 
     login(call, uid?) {
-        // let uuid = uid || LLWUtils.getUUID();
-        let uuid = 'ooCB-vzwiiiPUPx6SJpZ5sTQJiB0';
+        let uuid = uid || LLWUtils.getUUID();
+        // let uuid = 'ooCB-vzwiiiPUPx6SJpZ5sTQJiB0';
         let loginInfo = {
             account: uuid,
             type: pb.LoginType.QQ,

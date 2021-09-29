@@ -49,7 +49,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -61,7 +61,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        667,
+        640,
         375,
         0,
         0,
@@ -116,7 +116,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -280,8 +280,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 800,
-      "height": 400
+      "width": 690,
+      "height": 390
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -347,7 +347,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 800,
+      "width": 690,
       "height": 70
     },
     "_anchorPoint": {
@@ -360,7 +360,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        165,
+        160,
         0,
         0,
         0,
@@ -493,8 +493,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -381.555,
-        168.889,
+        -324.642,
+        159.889,
         0,
         0,
         0,
@@ -591,8 +591,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 800,
-      "height": 400
+      "width": 690,
+      "height": 390
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -740,8 +740,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        333.724,
-        167.402,
+        283.502,
+        160.402,
         0,
         0,
         0,
@@ -1135,8 +1135,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -193.179,
-        62.758,
+        -175.926,
+        63,
         0,
         0,
         0,
@@ -2623,7 +2623,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -193,
+        -175.926,
         -50,
         0,
         0,

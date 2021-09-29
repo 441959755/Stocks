@@ -52,7 +52,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -64,7 +64,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        667,
+        640,
         375,
         0,
         0,
@@ -119,7 +119,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -465,7 +465,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -536,7 +536,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 100
     },
     "_anchorPoint": {
@@ -603,7 +603,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 100
     },
     "_anchorPoint": {
@@ -759,7 +759,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -567,
+        -540,
         0,
         0,
         0,
@@ -1070,9 +1070,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 247,
-      "g": 247,
-      "b": 243,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -1294,7 +1294,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1314,
+      "width": 1260,
       "height": 630
     },
     "_anchorPoint": {
@@ -1380,7 +1380,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -546.5,
+        -519.5,
         0,
         0,
         0,
@@ -6286,7 +6286,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1064,
-      "height": 610
+      "height": 630
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -6297,8 +6297,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        104.503,
-        20.994,
+        98,
+        0,
         0,
         0,
         0,
@@ -11941,7 +11941,11 @@
       "__id__": 320
     },
     "_enabled": true,
-    "_materials": [],
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
     "_useOriginalSize": true,
     "_string": "成交量均线设置：",
     "_N$string": "成交量均线设置：",
@@ -12151,7 +12155,11 @@
       "__id__": 326
     },
     "_enabled": true,
-    "_materials": [],
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
     "_useOriginalSize": true,
     "_string": "日移动均线",
     "_N$string": "日移动均线",
@@ -12446,7 +12454,11 @@
       "__id__": 334
     },
     "_enabled": true,
-    "_materials": [],
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",
@@ -12740,7 +12752,11 @@
       "__id__": 342
     },
     "_enabled": true,
-    "_materials": [],
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
     "_useOriginalSize": true,
     "_string": "日移动均线",
     "_N$string": "日移动均线",
@@ -13035,7 +13051,11 @@
       "__id__": 350
     },
     "_enabled": true,
-    "_materials": [],
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
     "_useOriginalSize": true,
     "_string": "30",
     "_N$string": "30",

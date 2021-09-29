@@ -49,7 +49,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -61,7 +61,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        667,
+        640,
         375,
         0,
         0,
@@ -116,7 +116,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -257,7 +257,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -331,7 +331,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 100
     },
     "_anchorPoint": {
@@ -417,7 +417,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -592,
+        -565,
         0,
         0,
         0,
@@ -747,7 +747,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        95.437,
+        107.433,
         0,
         0,
         0,
@@ -911,7 +911,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        467,
+        440,
         -10,
         0,
         0,
@@ -2791,7 +2791,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1314,
+      "width": 1260,
       "height": 630
     },
     "_anchorPoint": {
@@ -2886,7 +2886,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -587.726,
+        -526.345,
         58.621,
         0,
         0,
@@ -2938,9 +2938,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 178,
+      "g": 178,
+      "b": 178,
       "a": 255
     },
     "_contentSize": {
@@ -3002,9 +3002,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 128,
-      "g": 128,
-      "b": 128,
+      "r": 127,
+      "g": 127,
+      "b": 127,
       "a": 255
     },
     "_contentSize": {
@@ -3021,7 +3021,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        158.211,
+        178,
         0,
         0,
         0,
@@ -3131,7 +3131,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        552.612,
+        650.458,
         0,
         0,
         0,
@@ -3350,9 +3350,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 251,
-      "g": 251,
-      "b": 249,
+      "r": 178,
+      "g": 178,
+      "b": 178,
       "a": 255
     },
     "_contentSize": {
@@ -3369,7 +3369,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        258.403,
+        349.326,
         187.8,
         0,
         0,
@@ -3414,9 +3414,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 128,
-      "g": 128,
-      "b": 128,
+      "r": 127,
+      "g": 127,
+      "b": 127,
       "a": 255
     },
     "_contentSize": {
@@ -3568,14 +3568,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 178,
+      "g": 178,
+      "b": 178,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 120,
+      "width": 160.01,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -3632,9 +3632,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 128,
-      "g": 128,
-      "b": 128,
+      "r": 127,
+      "g": 127,
+      "b": 127,
       "a": 255
     },
     "_contentSize": {
@@ -3651,7 +3651,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        118.241,
+        178,
         0,
         0,
         0,
@@ -3733,8 +3733,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "训练股票：",
-    "_N$string": "训练股票：",
+    "_string": "训  练  股  票：",
+    "_N$string": "训  练  股  票：",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -3786,14 +3786,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 178,
+      "g": 178,
+      "b": 178,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 120,
+      "width": 160.01,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -3850,9 +3850,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 128,
-      "g": 128,
-      "b": 128,
+      "r": 127,
+      "g": 127,
+      "b": 127,
       "a": 255
     },
     "_contentSize": {
@@ -3869,7 +3869,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        118.241,
+        178,
         0,
         0,
         0,
@@ -3951,8 +3951,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "开始训练：",
-    "_N$string": "开始训练：",
+    "_string": "开  始  训  练：",
+    "_N$string": "开  始  训  练：",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -4004,14 +4004,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 178,
+      "g": 178,
+      "b": 178,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 114.67,
+      "width": 161.34,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -4068,9 +4068,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 128,
-      "g": 128,
-      "b": 128,
+      "r": 127,
+      "g": 127,
+      "b": 127,
       "a": 255
     },
     "_contentSize": {
@@ -4087,7 +4087,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        118.241,
+        178,
         0,
         0,
         0,
@@ -4169,8 +4169,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "k 线数量：",
-    "_N$string": "k 线数量：",
+    "_string": "k    线  数  量：",
+    "_N$string": "k    线  数  量：",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -4222,14 +4222,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 178,
+      "g": 178,
+      "b": 178,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 120,
+      "width": 160.01,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -4312,8 +4312,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        118.241,
-        -2.388,
+        178,
+        -2,
         0,
         0,
         0,
@@ -4668,8 +4668,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "分仓训练：",
-    "_N$string": "分仓训练：",
+    "_string": "分  仓  训  练：",
+    "_N$string": "分  仓  训  练：",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,

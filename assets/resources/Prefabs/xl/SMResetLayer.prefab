@@ -49,7 +49,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -61,7 +61,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        667,
+        640,
         375,
         0,
         0,
@@ -116,7 +116,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -257,8 +257,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 650,
-      "height": 450
+      "width": 690,
+      "height": 390
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -328,7 +328,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 644,
+      "width": 684,
       "height": 80
     },
     "_anchorPoint": {
@@ -341,7 +341,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        182,
+        152,
         0,
         0,
         0,
@@ -395,7 +395,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 644,
+      "width": 684,
       "height": 80
     },
     "_anchorPoint": {
@@ -548,7 +548,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -302,
+        -322,
         0,
         0,
         0,
@@ -615,7 +615,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        579.545,
+        596.34,
         0,
         0,
         0,
@@ -983,8 +983,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 650,
-      "height": 350
+      "width": 690,
+      "height": 310
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -996,7 +996,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -50,
+        -40,
         0,
         0,
         0,
@@ -1051,8 +1051,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 630,
-      "height": 340
+      "width": 670,
+      "height": 300
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1398,9 +1398,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 225,
-      "g": 219,
-      "b": 219,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -1848,7 +1848,7 @@
     "_alignFlags": 45,
     "_left": 0,
     "_right": 0,
-    "_top": 100,
+    "_top": 80,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,

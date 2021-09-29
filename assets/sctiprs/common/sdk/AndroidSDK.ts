@@ -410,6 +410,7 @@ export default class AndroidSDK {
 
                 let obj = { url: headUrl + '?file=a.png', type: 'png' };
                 LoadUtils.loadHead(obj, (img) => {
+                    GameData.headimgurl = img;
                     GameData.headImg = new cc.SpriteFrame(img);
                 })
 

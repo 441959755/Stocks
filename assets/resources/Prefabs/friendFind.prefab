@@ -49,7 +49,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -61,7 +61,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        667,
+        640,
         375,
         0,
         0,
@@ -116,7 +116,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -266,8 +266,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 700,
-      "height": 400
+      "width": 690,
+      "height": 390
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -340,7 +340,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 700,
+      "width": 690,
       "height": 80
     },
     "_anchorPoint": {
@@ -353,7 +353,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        160,
+        155,
         0,
         0,
         0,
@@ -404,7 +404,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 144,
+      "width": 168,
       "height": 30.24
     },
     "_anchorPoint": {
@@ -416,7 +416,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -339.653,
+        -332.932,
         0,
         0,
         0,
@@ -457,7 +457,7 @@
     "_useOriginalSize": false,
     "_string": "查找添加好友",
     "_N$string": "查找添加好友",
-    "_fontSize": 24,
+    "_fontSize": 28,
     "_lineHeight": 24,
     "_enableWrapText": true,
     "_N$file": null,
@@ -514,8 +514,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
-      "height": 50
+      "width": 40,
+      "height": 40
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -526,7 +526,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        303.059,
+        296.338,
         -0.839,
         0,
         0,
@@ -973,7 +973,7 @@
     "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
-    "_fontSize": 20,
+    "_fontSize": 24,
     "_lineHeight": 25,
     "_enableWrapText": false,
     "_N$file": null,
@@ -1110,7 +1110,7 @@
     "_useOriginalSize": true,
     "_string": "请输入用户ID找查关注用户",
     "_N$string": "请输入用户ID找查关注用户",
-    "_fontSize": 20,
+    "_fontSize": 24,
     "_lineHeight": 25,
     "_enableWrapText": false,
     "_N$file": null,
@@ -1602,8 +1602,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 700,
-      "height": 400
+      "width": 690,
+      "height": 390
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",

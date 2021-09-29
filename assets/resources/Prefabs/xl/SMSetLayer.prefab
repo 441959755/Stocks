@@ -52,7 +52,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -64,7 +64,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        667,
+        640,
         375,
         0,
         0,
@@ -119,7 +119,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -465,7 +465,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -536,7 +536,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 100
     },
     "_anchorPoint": {
@@ -622,7 +622,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -592,
+        -565,
         0,
         0,
         0,
@@ -1159,7 +1159,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 640
     },
     "_anchorPoint": {
@@ -1245,7 +1245,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1314,
+      "width": 1260,
       "height": 630
     },
     "_anchorPoint": {
@@ -1302,9 +1302,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 229,
-      "g": 229,
-      "b": 229,
+      "r": 204,
+      "g": 204,
+      "b": 204,
       "a": 255
     },
     "_contentSize": {
@@ -1321,7 +1321,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -580,
+        -528.814,
         230.584,
         0,
         0,
@@ -1409,9 +1409,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 229,
-      "g": 229,
-      "b": 229,
+      "r": 204,
+      "g": 204,
+      "b": 204,
       "a": 255
     },
     "_contentSize": {
@@ -1428,7 +1428,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -580,
+        -528.814,
         128.717,
         0,
         0,
@@ -1548,7 +1548,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -224.154,
+        -172.968,
         225.15,
         0,
         0,
@@ -2620,7 +2620,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -224,
+        -172.814,
         128.662,
         0,
         0,
@@ -3697,7 +3697,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        226.132,
+        277.318,
         46.276,
         0,
         0,
@@ -4806,9 +4806,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 253,
-      "g": 233,
-      "b": 1,
+      "r": 235,
+      "g": 235,
+      "b": 18,
       "a": 255
     },
     "_contentSize": {
@@ -5796,9 +5796,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 252,
-      "g": 3,
-      "b": 242,
+      "r": 232,
+      "g": 20,
+      "b": 232,
       "a": 255
     },
     "_contentSize": {
@@ -6786,9 +6786,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 1,
-      "g": 250,
-      "b": 81,
+      "r": 20,
+      "g": 237,
+      "b": 20,
       "a": 255
     },
     "_contentSize": {
@@ -7776,9 +7776,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 136,
-      "g": 132,
-      "b": 214,
+      "r": 28,
+      "g": 156,
+      "b": 230,
       "a": 255
     },
     "_contentSize": {
@@ -8766,9 +8766,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 248,
-      "g": 136,
-      "b": 72,
+      "r": 212,
+      "g": 112,
+      "b": 38,
       "a": 255
     },
     "_contentSize": {
@@ -10318,7 +10318,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -513,
+        -461.814,
         -220,
         0,
         0,

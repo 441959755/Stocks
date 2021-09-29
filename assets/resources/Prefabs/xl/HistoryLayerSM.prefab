@@ -52,7 +52,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -64,7 +64,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        667,
+        640,
         375,
         0,
         0,
@@ -119,7 +119,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -338,9 +338,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 204,
+      "g": 204,
+      "b": 204,
       "a": 255
     },
     "_contentSize": {
@@ -445,9 +445,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 204,
+      "g": 204,
+      "b": 204,
       "a": 255
     },
     "_contentSize": {
@@ -552,9 +552,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 204,
+      "g": 204,
+      "b": 204,
       "a": 255
     },
     "_contentSize": {
@@ -659,9 +659,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 153,
+      "g": 153,
+      "b": 153,
       "a": 255
     },
     "_contentSize": {
@@ -766,9 +766,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 153,
+      "g": 153,
+      "b": 153,
       "a": 255
     },
     "_contentSize": {
@@ -1261,7 +1261,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 750
     },
     "_anchorPoint": {
@@ -1332,7 +1332,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 100
     },
     "_anchorPoint": {
@@ -1399,7 +1399,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 100
     },
     "_anchorPoint": {
@@ -1555,7 +1555,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -567,
+        -540,
         0,
         0,
         0,
@@ -2066,7 +2066,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
+      "width": 1280,
       "height": 650
     },
     "_anchorPoint": {
@@ -2137,7 +2137,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1314,
+      "width": 1260,
       "height": 60
     },
     "_anchorPoint": {
@@ -2204,7 +2204,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1314,
+      "width": 1260,
       "height": 60
     },
     "_anchorPoint": {
@@ -2420,14 +2420,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 249,
-      "g": 249,
-      "b": 243,
+      "r": 229,
+      "g": 229,
+      "b": 229,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 56,
+      "width": 48,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -2480,7 +2480,7 @@
     "_useOriginalSize": true,
     "_string": "序号",
     "_N$string": "序号",
-    "_fontSize": 28,
+    "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -2527,14 +2527,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 249,
-      "g": 249,
-      "b": 243,
+      "r": 229,
+      "g": 229,
+      "b": 229,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 112,
+      "width": 96,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -2587,7 +2587,7 @@
     "_useOriginalSize": true,
     "_string": "股票代码",
     "_N$string": "股票代码",
-    "_fontSize": 28,
+    "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -2634,14 +2634,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 249,
-      "g": 249,
-      "b": 243,
+      "r": 229,
+      "g": 229,
+      "b": 229,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 112,
+      "width": 96,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -2694,7 +2694,7 @@
     "_useOriginalSize": true,
     "_string": "股票名称",
     "_N$string": "股票名称",
-    "_fontSize": 28,
+    "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -2741,14 +2741,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 249,
-      "g": 249,
-      "b": 243,
+      "r": 229,
+      "g": 229,
+      "b": 229,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 112,
+      "width": 96,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -2801,7 +2801,7 @@
     "_useOriginalSize": true,
     "_string": "起始时间",
     "_N$string": "起始时间",
-    "_fontSize": 28,
+    "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -2848,14 +2848,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 249,
-      "g": 249,
-      "b": 243,
+      "r": 229,
+      "g": 229,
+      "b": 229,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 112,
+      "width": 96,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -2908,7 +2908,7 @@
     "_useOriginalSize": true,
     "_string": "结束时间",
     "_N$string": "结束时间",
-    "_fontSize": 28,
+    "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -2955,14 +2955,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 249,
-      "g": 249,
-      "b": 243,
+      "r": 229,
+      "g": 229,
+      "b": 229,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 112,
+      "width": 96,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -3015,7 +3015,7 @@
     "_useOriginalSize": true,
     "_string": "同期涨幅",
     "_N$string": "同期涨幅",
-    "_fontSize": 28,
+    "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -3062,14 +3062,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 249,
-      "g": 249,
-      "b": 243,
+      "r": 229,
+      "g": 229,
+      "b": 229,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 112,
+      "width": 96,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -3122,7 +3122,7 @@
     "_useOriginalSize": true,
     "_string": "个股收益",
     "_N$string": "个股收益",
-    "_fontSize": 28,
+    "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -3169,14 +3169,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 249,
-      "g": 249,
-      "b": 243,
+      "r": 229,
+      "g": 229,
+      "b": 229,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 112,
+      "width": 96,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -3229,7 +3229,7 @@
     "_useOriginalSize": true,
     "_string": "资金收益",
     "_N$string": "资金收益",
-    "_fontSize": 28,
+    "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
     "_N$file": null,
@@ -3263,7 +3263,7 @@
     "node": {
       "__id__": 61
     },
-    "_enabled": true,
+    "_enabled": false,
     "_layoutSize": {
       "__type__": "cc.Size",
       "width": 1270,
@@ -3377,7 +3377,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1314,
+      "width": 1260,
       "height": 560
     },
     "_anchorPoint": {
@@ -3444,7 +3444,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1314,
+      "width": 1260,
       "height": 560
     },
     "_anchorPoint": {
@@ -3588,7 +3588,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1294,
+      "width": 1240,
       "height": 450
     },
     "_anchorPoint": {
@@ -3889,9 +3889,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 203,
-      "g": 196,
-      "b": 80,
+      "r": 178,
+      "g": 178,
+      "b": 178,
       "a": 255
     },
     "_contentSize": {

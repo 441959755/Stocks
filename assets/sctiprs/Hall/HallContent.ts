@@ -6,6 +6,10 @@ import GameData from '../GameData';
 import EnterGameControl from '../global/EnterGameControl';
 import { LocationPoint } from '../global/LocationPoint';
 import LLWSDK from '../common/sdk/LLWSDK';
+import LoadUtils from '../Utils/LoadUtils';
+import HttpUtils from '../common/net/HttpUtils';
+import Base64String from '../Utils/Base64String';
+
 
 const { ccclass, property } = cc._decorator;
 
@@ -30,6 +34,7 @@ export default class NewClass extends cc.Component {
 
 	@property(cc.Node)
 	girlNode: cc.Node = null;
+
 
 	protected onLoad() {
 		//回到进入游戏的界面
@@ -56,6 +61,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	start() {
+
 		this.initToggle();
 		//设置用户信息
 		this.setUserInfo();
@@ -81,8 +87,8 @@ export default class NewClass extends cc.Component {
 		if (llwSDK.loginPlat == pb.LoginType.QQ) {
 			WeChatInfo = cc.sys.localStorage.getItem('QQInfo');
 			cc.sys.localStorage.setItem('QQInfo', 1);
-
 		}
+
 		else if (llwSDK.loginPlat == pb.LoginType.WeChat) {
 			WeChatInfo = cc.sys.localStorage.getItem('WeChatInfo');
 			cc.sys.localStorage.setItem('WeChatInfo', 1);
@@ -112,13 +118,36 @@ export default class NewClass extends cc.Component {
 
 			{
 
-				let data = {
-					uid: GameData.userID,
-					icon: GameData.headImg,
+
+				if (jsb) {
+					let str = jsb.fileUtils.getStringFromFile(GameData.headImg._texture.nativeUrl);
+
+					console.log(str);
+					// var ch, st, re = [];
+					// for (var i = 0; i < str.length; i++) {
+					// 	ch = str.charCodeAt(i);
+					// 	st = [];
+					// 	do {
+					// 		st.push(ch & 0xFF);
+					// 		ch = ch >> 8;
+					// 	} while (ch);
+					// 	re = re.concat(st.reverse());
+					// }
+
+					let data = {
+						uid: GameData.userID,
+						icon: str,
+					}
+
+					let CmdUploadIcon = pb.CmdUploadIcon;
+					let message = CmdUploadIcon.create(data);
+					let buff = CmdUploadIcon.encode(message).finish();
+
+					socket.send(pb.MessageId.Req_Hall_UploadIcon, buff, (info) => {
+						console.log('GameData.headImg:' + JSON.stringify(info));
+					})
 				}
-				socket.send(pb.MessageId.Req_Hall_EditIcon, PB.onCmdEditInfoConvertToBuff(data), (info) => {
-					console.log('GameData.headImg:' + JSON.stringify(info));
-				})
+
 			}
 		}
 	}
