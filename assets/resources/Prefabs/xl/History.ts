@@ -30,7 +30,7 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     tipsNode: cc.Node = null;
 
-    start() {
+    onEnable() {
         if (!this.historyInfo) {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             let data = new Date();
@@ -45,6 +45,7 @@ export default class NewClass extends cc.Component {
                 to: parseInt(new Date().getTime() / 1000 + ''),
                 pageSize: 200,
             }
+
             let CmdQueryGameResult = pb.CmdQueryGameResult;
             let message = CmdQueryGameResult.create(inf)
             let buff = CmdQueryGameResult.encode(message).finish();

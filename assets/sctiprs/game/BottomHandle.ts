@@ -140,12 +140,6 @@ export default class NewClass extends cc.Component {
 
 	onLoad() {
 
-		this.gpData = GameCfg.data[0].data;
-
-		if (this.gpData.length <= 0) {
-			return;
-		}
-
 		GlobalEvent.on(
 			EventCfg.GAMEOVEER,
 			() => {
@@ -519,7 +513,13 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.emit('roundNUmber');
 	}
 
-	protected start() {
+	onEnable() {
+		this.gpData = GameCfg.data[0].data;
+
+		if (this.gpData.length <= 0) {
+			return;
+		}
+
 		this.ziChan = JSON.parse(JSON.stringify(GameCfg.ziChan));
 		this.onSetMrCount();
 		//分仓

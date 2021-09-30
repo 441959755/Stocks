@@ -12,12 +12,6 @@ export default class NewClass extends cc.Component {
     graphics: cc.Graphics = null;
 
     onLoad() {
-
-        this.graphics.clear();
-        this.graphics.lineWidth = 2;
-        GameCfg.fill = [];
-        GameCfg.fill.length = 0;
-
         GlobalEvent.on(EventCfg.FILLNODEISSHOW, (flag) => {
             this.graphics.clear();
             this.node.active = flag;
@@ -70,6 +64,14 @@ export default class NewClass extends cc.Component {
             })
         }, this);
 
+    }
+
+
+    onEnable() {
+        this.graphics.clear();
+        this.graphics.lineWidth = 2;
+        GameCfg.fill = [];
+        GameCfg.fill.length = 0;
     }
 
     protected onDestroy() {

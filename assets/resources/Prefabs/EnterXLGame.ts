@@ -188,7 +188,7 @@ export default class NewClass extends cc.Component {
                 GameCfg.history.allRate = 0;
                 StrategyAIData.onClearData();
                 GlobalHandle.onCmdGameStartReq(() => {
-                    cc.director.loadScene('game');
+                    GlobalEvent.emit('LOADGAME');
                 });
 
 

@@ -4,8 +4,6 @@ import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 
-
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass

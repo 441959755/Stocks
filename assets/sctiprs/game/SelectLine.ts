@@ -32,18 +32,23 @@ export default class NewClass extends cc.Component {
     to = null;
 
     onLoad() {
+
         if (GameCfg.GameSet.ZKine == '5分钟K') {
             this._selectID = 0;
         }
+
         else if (GameCfg.GameSet.ZLine == '15分钟K') {
             this._selectID = 1;
         }
+
         else if (GameCfg.GameSet.ZLine == '30分钟K') {
             this._selectID = 2;
         }
+
         else if (GameCfg.GameSet.ZLine == '60分钟K') {
             this._selectID = 3;
         }
+
         else if (GameCfg.GameSet.ZLine == '日线') {
             this._selectID = 4;
         }
@@ -64,12 +69,11 @@ export default class NewClass extends cc.Component {
         }, this);
     }
 
-    start() {
-        let str = JSON.stringify(GameCfg.data[0])
-        this.qhData = JSON.parse(str);
-    }
 
     onEnable() {
+        let str = JSON.stringify(GameCfg.data[0])
+        this.qhData = JSON.parse(str);
+
         this.hideAllNode();
         let nodes = this.AllNode[this._selectID].children;
         this.AllNode[this._selectID].color = cc.Color.RED;

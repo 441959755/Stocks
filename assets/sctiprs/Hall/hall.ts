@@ -18,8 +18,6 @@ export default class NewClass extends cc.Component {
 
 	playerInfoLayer: cc.Node = null;
 
-	tipsTextNode: cc.Node = null;
-
 	broadcast: cc.Node = null; //广播
 
 	InviteBox: cc.Node = null;
@@ -34,7 +32,6 @@ export default class NewClass extends cc.Component {
 
 	friendInvite: cc.Node = null;  //邀请好友
 
-
 	rankingList: cc.Node = null;  //排行榜
 
 	otherHis: cc.Node = null;
@@ -42,8 +39,9 @@ export default class NewClass extends cc.Component {
 	@property(cc.Node)
 	rightbg: cc.Node = null;
 
-	onLoad() {
+	gameLayer: cc.Node = null;
 
+	onLoad() {
 		PopupManager.init();
 
 		GlobalEvent.on(EventCfg.CmdQuoteQueryFuture, this.onCmdQHGameStart.bind(this), this);
@@ -75,6 +73,8 @@ export default class NewClass extends cc.Component {
 		//打开排行榜
 		GlobalEvent.on('OPENRANKINGLIST', this.openRankingList.bind(this), this);
 
+		GlobalEvent.on('LOADGAME', this.onLoadGame.bind(this), this);
+
 	}
 
 	protected onDestroy() {
@@ -90,6 +90,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off('OPENTASKLAYER');
 		GlobalEvent.off('OPENFRIENDINVITE');
 		GlobalEvent.off('OPENRANKINGLIST');
+		GlobalEvent.off('LOADGAME');
 		LoadUtils.releaseRes('Prefabs/broadcast');
 		LoadUtils.releaseRes('Prefabs/playeInfo/playerInfoLayer');
 		LoadUtils.releaseRes('Prefabs/helpLayer');
@@ -98,46 +99,10 @@ export default class NewClass extends cc.Component {
 		LoadUtils.releaseRes('Prefabs/otherPlayerHisInfo');
 		LoadUtils.releaseRes('Prefabs/friendLayer');
 		LoadUtils.releaseRes('Prefabs/friendInvite');
+		LoadUtils.releaseRes('Prefabs/game/gameLayer');
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
 	}
-
-	gotoBlackHisLayer() {
-		//回到进入游戏的界面
-		let event;
-		if (GameCfg.GameType == pb.GameType.ShuangMang) {
-			event = { target: { name: 'main_xl_smxl' } };
-		}
-		else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-			event = { target: { name: 'main_xl_zbxl' } }
-		}
-		else if (GameCfg.GameType == pb.GameType.DingXiang) {
-			event = { target: { name: 'main_xl_dxxl' } }
-		}
-		else if (GameCfg.GameType == pb.GameType.QiHuo) {
-			event = { target: { name: 'main_xl_qhxl' } }
-		}
-		else if (GameCfg.GameType == pb.GameType.JJ_PK) {
-			event = { target: { name: 'toggle1' } }
-		}
-		else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-			event = { target: { name: 'toggle1' } }
-		}
-		else if (!GameCfg.JJ_XUNLIAN && (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis)) {
-			event = { target: { name: 'toggle1' } }
-		}
-		else if (GameCfg.GameType == 'STUDY') {
-			event = { target: { name: 'toggle3' } }
-		}
-
-		if (event) {
-			GlobalEvent.emit(EventCfg.BLACKGOTOLAYER, event);
-			if (GameCfg.historyType) {
-				GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
-			}
-		}
-	}
-
 
 	openRankingList() {
 		this.openNode(this.rankingList, 'Prefabs/rankingList', 10, (node) => { this.rankingList = node });
@@ -175,28 +140,17 @@ export default class NewClass extends cc.Component {
 	 * 奖励中心
 	 */
 	openRewardCenterLayer(data) {
-		if (this.rewardCenterNode) {
+		this.openNode(this.rewardCenterNode, 'Prefabs/RewardCenter/rewardCenter', 12, (node) => {
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+			this.rewardCenterNode = node;
+			this.node.addChild(this.rewardCenterNode);
 			this.rewardCenterNode.active = true;
 			let handle = this.rewardCenterNode.getComponent('RewardCenter');
 			if (handle) {
 				handle.rewardData = data;
 				handle.onShow();
 			}
-		}
-		else {
-			GlobalEvent.emit(EventCfg.LOADINGSHOW);
-			LoadUtils.loadRes('Prefabs/RewardCenter/rewardCenter', pre => {
-				GlobalEvent.emit(EventCfg.LOADINGHIDE);
-				this.rewardCenterNode = cc.instantiate(pre);
-				this.node.addChild(this.rewardCenterNode);
-				this.rewardCenterNode.active = true;
-				let handle = this.rewardCenterNode.getComponent('RewardCenter');
-				if (handle) {
-					handle.rewardData = data;
-					handle.onShow();
-				}
-			})
-		}
+		});
 	}
 
 	//打开个人中心
@@ -239,7 +193,6 @@ export default class NewClass extends cc.Component {
 	}
 
 	start() {
-		this.gotoBlackHisLayer();
 		//断线重连 或游戏后进入房间
 		if (GameData.selfEnterRoomData) {
 
@@ -255,7 +208,7 @@ export default class NewClass extends cc.Component {
 				GameCfg.GAMEFRTD = true;
 
 				setTimeout(() => {
-					cc.director.loadScene('game');
+					GlobalEvent.emit('LOADGAME');
 				}, 800)
 			}
 		}
@@ -275,9 +228,6 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.OPENROOM);
 		}
 
-		cc.director.preloadScene('game', () => {
-			console.log('game 加载完成');
-		})
 	}
 
 	onEnable() {
@@ -316,7 +266,6 @@ export default class NewClass extends cc.Component {
 				this.node.addChild(this.broadcast, 98);
 				let handle = this.broadcast.getComponent('Broadcast');
 				handle.onShow(data);
-
 			})
 		}
 		else {
@@ -328,7 +277,6 @@ export default class NewClass extends cc.Component {
 
 	//邀请框
 	onShowInviteBox(data) {
-
 		if (!this.InviteBox) {
 			LoadUtils.loadRes('Prefabs/inviteBox', (res) => {
 				this.InviteBox = cc.instantiate(res);
@@ -341,20 +289,29 @@ export default class NewClass extends cc.Component {
 			let headle = this.InviteBox.getComponent('InviteBox');
 			headle.onInviteShow(data);
 		}
-
 	}
 
+	//加载游戏进入
+	onLoadGame() {
+
+		this.openNode(this.gameLayer, 'Prefabs/game/gameLayer', 50, (node) => {
+			this.gameLayer = node;
+		});
+
+	}
 
 
 	//期货进入游戏
 	onCmdQHGameStart(data, cb) {
 
 		GameCfg.data[0].data = [];
+
 		//游戏开始
 		GlobalHandle.onCmdGameStartReq(() => {
 			//游戏行情获取
 			GlobalHandle.onCmdGameStartQuoteQueryQH(data, cb);
 		})
+
 	}
 
 	openNode(node, url, zIndex, call?) {

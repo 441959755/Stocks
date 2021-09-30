@@ -66,7 +66,7 @@ export default class EnterGameControl {
             GameCfg.history.allRate = 0;
             StrategyAIData.onClearData();
 
-            cc.director.loadScene('game');
+            GlobalEvent.emit('LOADGAME');
         }
 
         if (flag) {

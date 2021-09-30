@@ -9,9 +9,6 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
-    @property(cc.Node)
-    HisLayer: cc.Node = null;
-
     DXNode: cc.Node = null;
 
     QHNode: cc.Node = null;
@@ -88,14 +85,6 @@ export default class NewClass extends cc.Component {
         LoadUtils.releaseRes('Prefabs/xl/SMResetLayer');
         LoadUtils.releaseRes('Prefabs/xl/SMYieldCurve');
         LoadUtils.releaseRes('Prefabs/xl/tiaoJianDan');
-    }
-
-    /*
-    *打开条件单
-    */
-    openTiaoJianDan() {
-
-        this.openNode(this.TJDNode, 'Prefabs/xl/tiaoJianDan', 10, (node) => { this.TJDNode = node });
     }
 
     /**
@@ -212,8 +201,14 @@ export default class NewClass extends cc.Component {
         this.openNode(this.QHNode, 'Prefabs/xl/qiHuoLayer', 3, (node) => { this.QHNode = node });
     }
 
+    /*
+  *打开条件单
+  */
+    openTiaoJianDan() {
+        this.openNode(this.TJDNode, 'Prefabs/xl/tiaoJianDan', 10, (node) => { this.TJDNode = node });
+    }
+
     openNode(node, url, zIndex, call?) {
-        this.HisLayer.active = true;
         if (!node) {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes(url, pre => {
@@ -222,13 +217,11 @@ export default class NewClass extends cc.Component {
                 this.node.addChild(node, zIndex);
                 node.active = true;
                 call && (call(node));
-                this.HisLayer.active = false;
             })
         }
         else {
             node.active = true;
             call && (call(node));
-            this.HisLayer.active = false;
         }
     }
 

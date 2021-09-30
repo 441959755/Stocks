@@ -59,9 +59,6 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-
-
-
     }
 
     initMALa() {
@@ -113,7 +110,7 @@ export default class NewClass extends cc.Component {
 
     }
 
-    start() {
+    onEnable() {
         if (GameCfg.GameSet.isBW) {
             this.node.color = cc.Color.BLACK;
             //  this.mask.color=cc.Color.BLACK;

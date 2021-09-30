@@ -29,14 +29,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.CREATEBLOCK, this.createBlock.bind(this), this);
     }
 
-    start() {
-        // if (GameCfg.GAMEFUPAN) {
-        //     let data = GameCfg.blockHistoy;
-        //     data.forEach(el => {
-        //         this.createBlock(el[1], el[0]);
-        //     });
-        // }
-    }
 
     //创建方块
     createBlock(type, index?) {

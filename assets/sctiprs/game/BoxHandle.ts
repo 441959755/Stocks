@@ -60,7 +60,7 @@ export default class NewClass extends cc.Component {
     tipsTitle: cc.Node = null;
 
     onLoad() {
-        //  let la1 = this.tipsText[0].node.parent.getChildByName('tips').children[7].getComponent(cc.Label);
+
         GlobalEvent.on('updataLabel', (inde) => {
 
             let datas = GameCfg.data[0].data;
@@ -230,8 +230,6 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-        this.setBGColor();
-
         GlobalEvent.on('setBoxfalg', this.setBoxfalg.bind(this), this);
 
         GlobalEvent.on(EventCfg.SET_DRAW_SIZE, (flag) => {
@@ -243,16 +241,28 @@ export default class NewClass extends cc.Component {
             }
 
         }, this);
+
+        this.rightBox = this.node.getChildByName('rightBox');
+        this.tipsBox = this.node.getChildByName('tipsBox');
+
+        this.tipsBox.children.forEach(el => {
+            this.tipsText.push(el.getComponent(cc.Label));
+        })
+
+        this.rZoom = this.node.getChildByName('rZoomBtn').getComponent(cc.Toggle);
+        this.rightBox.active = true;
     }
 
-    start() {
+    ononEnable() {
+
+        this.setBGColor();
+
         this.rZoom.isChecked = false;
         this.cclNode.active = false;
         this.CCLBtn.active = false;
         this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
         //双盲
         if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.JJ_XUNLIAN) {
-
             this.setBoxfalg('ma');
             this.setBoxfalg('CPM');
         }
@@ -338,12 +348,6 @@ export default class NewClass extends cc.Component {
             this.selcetContent.parent.color = cc.Color.WHITE;
 
         }
-        this.tipsBox.children.forEach(el => {
-            this.tipsText.push(el.getComponent(cc.Label));
-        })
-
-        this.rZoom = this.node.getChildByName('rZoomBtn').getComponent(cc.Toggle);
-        this.rightBox.active = true;
     }
 
     protected onDestroy() {

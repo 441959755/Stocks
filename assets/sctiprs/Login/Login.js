@@ -9,6 +9,7 @@ import LLWSDK from "../common/sdk/LLWSDK";
 import CallModule from '../common/sdk/CallModule1';
 
 cc.Class({
+
 	extends: cc.Component,
 
 	init() {
@@ -29,7 +30,6 @@ cc.Class({
 		window.gg = {};
 
 		gg.wechat = LLWSDK.getSDK();
-
 	},
 
 	onLoad() {
@@ -63,7 +63,6 @@ cc.Class({
 		cc.director.preloadScene('hall', () => {
 			console.log('hall 场 景 加 载 完 成');
 		})
-
 	},
 
 	start() {
@@ -71,9 +70,6 @@ cc.Class({
 	},
 
 	initData() {
-		let account = cc.sys.localStorage.getItem('account');
-
-
 		let SMSet = cc.sys.localStorage.getItem('SMSET');
 		if (!SMSet) {
 			SMSet = {

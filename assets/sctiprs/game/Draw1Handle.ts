@@ -192,7 +192,7 @@ export default class NewClass extends cc.Component {
         this.VolList = DrawData.VolList;
     }
 
-    protected start() {
+    protected onEnable() {
         this.drawMACD && (this.drawMACD.node.active = false)
         this.drawKDJ && (this.drawKDJ.node.active = false)
         this.drawRSI && (this.drawRSI.node.active = false)

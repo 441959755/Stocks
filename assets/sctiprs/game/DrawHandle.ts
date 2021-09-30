@@ -331,7 +331,7 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-        this.initData();
+
 
         GlobalEvent.on(EventCfg.NOTICEDRAWMOVW, this.noticeDrawMove.bind(this), this);
 
@@ -783,7 +783,9 @@ export default class NewClass extends cc.Component {
     }
 
     //成交量绘制
-    start() {
+    onEnable() {
+        this.initData();
+
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             if (GameCfg.GameSet.select != '均线') {
                 this.drawMA.node.active = false;

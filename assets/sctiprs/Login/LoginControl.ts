@@ -1,12 +1,9 @@
 
 import LLWConfig from "../common/config/LLWConfig";
 import PlatDefine from "../common/config/PlatDefine";
-import LLWSDK from "../common/sdk/LLWSDK";
 import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
-import LoadUtils from "../Utils/LoadUtils";
-
 
 const { ccclass, property } = cc._decorator;
 
@@ -39,8 +36,8 @@ export default class NewClass extends cc.Component {
 
     start() {
 
-
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
         //web 本地测试
         if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WEB) {
             this.tipsLabel.string = '会员登入';
@@ -51,7 +48,6 @@ export default class NewClass extends cc.Component {
         }
         else {
             //其他平台登入TODO
-
         }
     }
 
@@ -65,6 +61,7 @@ export default class NewClass extends cc.Component {
 
 
     onBtnclick(event, data) {
+
         let name = event.target.name;
 
         //忘记密码
@@ -79,9 +76,7 @@ export default class NewClass extends cc.Component {
         }
         //点击登入
         else if (name == 'login_dl') {
-            let uid = this.account.string;
-            console.log('登入账号：' + uid);
-            this.loginServer(uid);
+            this.loginServer();
         }
         //qq登入
         else if (name == 'login_qqdl') {
@@ -96,17 +91,20 @@ export default class NewClass extends cc.Component {
         }
         //微信登入
         else if (name == 'login_wxdl') {
-            llwSDK.login(this.loginResultCallback.bind(this));
+            llwSDK.loginWX1(this.loginResultCallback.bind(this));
         }
     }
 
-    loginServer(uid) {
-
+    //获取token
+    loginServer() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
-        llwSDK.login(this.loginResultCallback.bind(this), uid);
+        let uid = this.account.string;
+        let pw = this.password.string;
+        console.log('登入账号：' + uid);
+        llwSDK.login(this.loginResultCallback.bind(this), uid, pw);
     }
 
+    //登入游戏
     loginResultCallback(decoded) {
         console.log(decoded.token + decoded.uid + decoded.gameAddr);
         if (decoded) {

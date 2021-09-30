@@ -133,7 +133,7 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    start() {
+    onEnable() {
         if (GameCfg.GAMEFUPAN) {
             this.onGameFUPANSHOW();
         } else {

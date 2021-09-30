@@ -21,10 +21,13 @@ Socket.prototype = {
 		socket.send(pb.MessageId.Req_Game_Login, PB.onCmdGameLoginConvertToBuff(), (info) => {
 			console.log('登入成功：' + JSON.stringify(info));
 			if (info && info.data) {
+
 				GameData.userID = info.data.uid;
+
 				if (!GameData.userName) {
 					GameData.userName = info.data.nickname;
 				}
+
 				if (!GameData.gender) {
 					GameData.gender = info.data.gender;
 				}
@@ -35,8 +38,11 @@ Socket.prototype = {
 				GameCfgText.levelInfoCfg && (GameData.maxExp = GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]])
 
 				GameData.location = info.data.location || '中国';
+
 				GameData.GameCounters = info.data.counters;
+
 				GameData.todayGameCount = info.data.todayTimes;
+
 				info.data.aiStockList && (GameData.AIStockList = info.data.aiStockList);
 				info.data.stockList && (GameData.selfStockList = info.data.stockList);
 				info.data.cgdsStockList && (GameData.cgdsStockList = info.data.cgdsStockList);

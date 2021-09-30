@@ -754,7 +754,8 @@ export default class NewClass extends cc.Component {
 		GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
 			GameData.huizhidatas = GameCfg.data[0].data.length - (GameData.DXSet.KLine);
 			GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameData.DXSet.KLine);
-			cc.director.loadScene('game');
+			GlobalEvent.emit('LOADGAME');
+
 		});
 	}
 }

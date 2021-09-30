@@ -80,6 +80,7 @@ export default class NewClass extends cc.Component {
     doty = [];
 
     onLoad() {
+
         this.monthBg.on('touchstart', (event) => {
             let datas = this.yieldInfo.results;
             if (datas.length <= 0) {
@@ -128,36 +129,37 @@ export default class NewClass extends cc.Component {
 
     }
 
-    start() {
+    onEnable() {
 
-        //获取数据
-        if (!this.yieldInfo) {
+        this.Horizontal1.active = false;
+        this.vertical1.active = false;
+        this.tipsNode.active = false;
+        this.tipsNode.zIndex = 99;
+        this.onToggleClick(null, 1);
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        let data = new Date();
+        data.setDate(1);
+        data.setHours(0);
+        data.setSeconds(0);
+        data.setMinutes(0);
 
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            let data = new Date();
-            data.setDate(1);
-            data.setHours(0);
-            data.setSeconds(0);
-            data.setMinutes(0);
-
-            let inf = {
-                uid: GameData.userID,
-                gType: GameCfg.GameType,
-                to: parseInt(new Date().getTime() / 1000 + ''),
-                pageSize: 200,
-            }
-
-            let CmdQueryGameResult = pb.CmdQueryGameResult;
-            let message = CmdQueryGameResult.create(inf)
-            let buff = CmdQueryGameResult.encode(message).finish();
-
-            socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, (info) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                console.log('曲线数据' + JSON.stringify(info));
-                this.yieldInfo = info;
-                this.onShow();
-            })
+        let inf = {
+            uid: GameData.userID,
+            gType: GameCfg.GameType,
+            to: parseInt(new Date().getTime() / 1000 + ''),
+            pageSize: 200,
         }
+
+        let CmdQueryGameResult = pb.CmdQueryGameResult;
+        let message = CmdQueryGameResult.create(inf)
+        let buff = CmdQueryGameResult.encode(message).finish();
+
+        socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, (info) => {
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            console.log('曲线数据' + JSON.stringify(info));
+            this.yieldInfo = info;
+            this.onShow();
+        })
     }
 
     onDisable() {
@@ -213,15 +215,6 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    protected onEnable() {
-        this.Horizontal1.active = false;
-        this.vertical1.active = false;
-        this.tipsNode.active = false;
-        this.tipsNode.zIndex = 99;
-
-        this.typeToggle[0].node.children[1].active = true;
-        this.typeToggle[1].node.children[1].active = false;
-    }
 
     onShow() {
         let datas = this.yieldInfo.results;

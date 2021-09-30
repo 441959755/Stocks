@@ -51,7 +51,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.MYSPICCLICK);
     }
 
-    start() {
+    onEnable() {
         if (!GameCfg.GAMEFUPAN) {
             this.getMyspic();
         }

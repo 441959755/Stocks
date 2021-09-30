@@ -5,11 +5,6 @@ import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import EnterGameControl from '../global/EnterGameControl';
 import { LocationPoint } from '../global/LocationPoint';
-import LLWSDK from '../common/sdk/LLWSDK';
-import LoadUtils from '../Utils/LoadUtils';
-import HttpUtils from '../common/net/HttpUtils';
-import Base64String from '../Utils/Base64String';
-
 
 const { ccclass, property } = cc._decorator;
 
@@ -109,7 +104,7 @@ export default class NewClass extends cc.Component {
 			{
 				let data = {
 					uid: GameData.userID,
-					gender: GameData.gender,
+					gender: GameData.gender + '',
 				}
 				socket.send(pb.MessageId.Req_Hall_EditGender, PB.onCmdEditInfoConvertToBuff(data), (info) => {
 					console.log('GameData.gender:');
@@ -117,26 +112,10 @@ export default class NewClass extends cc.Component {
 			}
 
 			{
-
-
 				if (jsb) {
-					let str = jsb.fileUtils.getStringFromFile(GameData.headImg._texture.nativeUrl);
-
-					console.log(str);
-					// var ch, st, re = [];
-					// for (var i = 0; i < str.length; i++) {
-					// 	ch = str.charCodeAt(i);
-					// 	st = [];
-					// 	do {
-					// 		st.push(ch & 0xFF);
-					// 		ch = ch >> 8;
-					// 	} while (ch);
-					// 	re = re.concat(st.reverse());
-					// }
-
 					let data = {
 						uid: GameData.userID,
-						icon: str,
+						icon: new Uint8Array(GameData.headimgurl),
 					}
 
 					let CmdUploadIcon = pb.CmdUploadIcon;
@@ -147,29 +126,10 @@ export default class NewClass extends cc.Component {
 						console.log('GameData.headImg:' + JSON.stringify(info));
 					})
 				}
-
 			}
 		}
 	}
 
-	// setHeadImg() {
-	// 	let headUrl = GameData.headimgurl;
-	// 	if (headUrl) {
-	// 		if (headUrl.indexOf('.jpg') != -1) {
-	// 			LoadUtils.load(headUrl, texture => {
-	// 				let spriteFrame = new cc.SpriteFrame(texture);
-	// 				this.userHead.spriteFrame = spriteFrame;
-	// 				GameData.headImg = spriteFrame;
-	// 			});
-	// 		} else {
-	// 			LoadUtils.load({ url: headUrl, type: 'png' }, texture => {
-	// 				let spriteFrame = new cc.SpriteFrame(texture);
-	// 				this.userHead.spriteFrame = spriteFrame;
-	// 				GameData.headImg = spriteFrame;
-	// 			});
-	// 		}
-	// 	}
-	// }
 
 	setUserInfo() {
 		this.userLevel.string = 'LV:' + (GameData.properties[pb.GamePropertyId.Level] || 1) + '';

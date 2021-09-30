@@ -66,7 +66,7 @@ export default class NewClass extends cc.Component {
 
         this.enterGameAnim.on('finished', () => {
             console.log('enterGameAnim');
-            cc.director.loadScene('game');
+            GlobalEvent.emit('LOADGAME');
         }, this);
 
         this.enterGameAnim && (this.enterGameAnim.play());

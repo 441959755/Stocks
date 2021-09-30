@@ -2,7 +2,6 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import PopupManager from "../Utils/PopupManager";
 import GameCfg from "./GameCfg";
-
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import GlobalHandle from "../global/GlobalHandle";
@@ -68,6 +67,7 @@ export default class NewClass extends cc.Component {
     box2: cc.Node = null;
 
     protected onLoad() {
+
         //跟新盈利率
         GlobalEvent.on(EventCfg.UPDATERATE, this.UpdateRate.bind(this), this);
 
@@ -369,6 +369,7 @@ export default class NewClass extends cc.Component {
         if (name == 'helpBtn') {
             GlobalEvent.emit(EventCfg.HELPSHOW);
         }
+
         //点击终止
         else if (name == 'backBtn' || name == 'closeBtn' || name == 'sys_back') {
             if (!GameCfg.GAMEFUPAN) {
@@ -401,9 +402,6 @@ export default class NewClass extends cc.Component {
                         }
 
                         this.roomLeave();
-
-                        cc.director.loadScene('hall');
-
                     })
                 }
                 else {
@@ -452,14 +450,17 @@ export default class NewClass extends cc.Component {
         GameCfg.allRate = 0;
         GameCfg.finalfund = 0;
         GameCfg.GAMEFUPAN = false;
+
         if (!GameData.RoomType) {
             GameCfg.RoomGameData = null;
         }
-        cc.director.loadScene('hall');
+
+        GlobalEvent.emit(EventCfg.LEAVEGAME);
     }
 
     //进游戏逃跑
     roomLeave() {
+
         if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
             let gpData = GameCfg.data[0].data;
             let datas = {
@@ -481,8 +482,12 @@ export default class NewClass extends cc.Component {
             let CmdGameOver = {
                 result: datas,
             }
+
             GlobalHandle.onCmdGameOverReq(CmdGameOver);
         }
+
+        //离开游戏
+        GlobalEvent.emit(EventCfg.LEAVEGAME);
 
     }
 

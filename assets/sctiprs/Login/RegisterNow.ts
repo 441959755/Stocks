@@ -4,8 +4,6 @@ import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 
-
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -45,7 +43,6 @@ export default class NewClass extends cc.Component {
                 this.phoneNumber.string = '';
                 return;
             }
-
         }, this);
 
         this.password.node.on('editing-did-ended', edit => {
@@ -68,9 +65,7 @@ export default class NewClass extends cc.Component {
             else {
                 this.ac = str;
             }
-
         }, this);
-
     }
 
     onEnable() {

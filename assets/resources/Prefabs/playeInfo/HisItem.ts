@@ -193,7 +193,7 @@ export default class NewClass extends cc.Component {
 
         // EnterGameControl.onClearPreGameDataEnter(cache, flag);
         GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
-            cc.director.loadScene('game');
+            GlobalEvent.emit('LOADGAME');
         }, flag);
     }
 

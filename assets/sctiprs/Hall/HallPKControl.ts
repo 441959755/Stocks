@@ -113,7 +113,7 @@ export default class NewClass extends cc.Component {
     onRoomGameStatus(data?) {
         console.log('进入房间');
         // setTimeout(() => {
-        //     cc.director.loadScene('game');
+        //     GlobalEvent.emit('LOADGAME');
         // }, 2000)
     }
 

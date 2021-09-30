@@ -27,6 +27,7 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         this.content.getComponent(cc.Layout).verticalDirection = cc.Layout.VerticalDirection.BOTTOM_TO_TOP;
+
         GlobalEvent.on(EventCfg.SLGEVENTNOTICE, () => {
             if (GameCfg.GameSet.jx_notice) {
                 if (DrawData.MaList && DrawData.MaList.length > 0) {

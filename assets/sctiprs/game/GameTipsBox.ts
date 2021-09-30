@@ -31,7 +31,7 @@ export default class NewClass extends cc.Component {
 
 
 
-    start() {
+    onEnable() {
         this.selectBox.active = false;
 
         this.leftinoty.x = -cc.winSize.width / 2 - this.leftinoty.width / 2;

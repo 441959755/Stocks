@@ -250,7 +250,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         GlobalHandle.onCmdGameStartQuoteQuery(cache, () => {
-            cc.director.loadScene('game');
+            GlobalEvent.emit('LOADGAME');
         })
 
     }

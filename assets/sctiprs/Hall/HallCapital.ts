@@ -35,10 +35,11 @@ export default class NewClass extends cc.Component {
 
     onBtnClck(event, data) {
         let name = event.target.name;
+
         if (name == 'btnGold') {
             console.log('点击金币')
-
         }
+
         else if (name == 'btnDia') {
             console.log('点击钻石');
 

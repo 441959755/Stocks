@@ -367,7 +367,7 @@ export default class NewClass extends cc.Component {
             GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
                 GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
                 GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
-                cc.director.loadScene('game');
+                GlobalEvent.emit('LOADGAME');
             });
         }
 
@@ -376,7 +376,7 @@ export default class NewClass extends cc.Component {
             GlobalHandle.onCmdGameStartReq(() => {
                 GameData.huizhidatas = GameCfg.data[0].data.length - GameCfg.GameSet.KLine;
                 GameCfg.huizhidatas = GameCfg.data[0].data.length - GameCfg.GameSet.KLine;
-                cc.director.loadScene('game');
+                GlobalEvent.emit('LOADGAME');
             });
         }
         //复盘

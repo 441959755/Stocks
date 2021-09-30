@@ -1038,7 +1038,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, data, () => {
 			GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50);
 			GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50);
-			cc.director.loadScene('game');
+			GlobalEvent.emit('LOADGAME');
 		});
 
 	}

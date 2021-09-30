@@ -188,7 +188,7 @@ export default class NewClass extends cc.Component {
 
             GameCfg.huizhidatas = GameData.huizhidatas
 
-            cc.director.loadScene('game');
+            GlobalEvent.emit('LOADGAME');
         }
 
         //复盘

@@ -2,7 +2,6 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
 import { pb } from '../../protos/proto';
-import PopupManager from "../Utils/PopupManager";
 import GameData from "../GameData";
 import UpGameOpt from "../global/UpGameOpt";
 import LoadUtils from "../Utils/LoadUtils";
@@ -32,10 +31,12 @@ export default class NewClass extends cc.Component {
 
     url = null;
 
+
     onLoad() {
-        PopupManager.init();
         //游戏结算
         GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
+
+        GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
 
         //同步游戏操作 pk才有
         GlobalEvent.on(EventCfg.UPDATEOTHERPLAYEROPT, this.updateOtherPlayerOpt.bind(this), this);
@@ -52,14 +53,25 @@ export default class NewClass extends cc.Component {
         this.initData();
 
         this.setColor();
+    }
 
-        cc.director.preloadScene('hall');
+    start() {
+        this.onLoadFinalLayer();
+    }
 
+    onEnable() {
+        //游戏开始动画
+        if (!GameCfg.GAMEFUPAN) {
+            if ((GameCfg.GameType == pb.GameType.JJ_PK ||
+                GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+                GameCfg.GameType == pb.GameType.JJ_ChuangGuan) && !GameCfg.GAMEFRTD) {
+                this.startGameNode.active = true;
+            }
+        }
     }
 
     //加载结算页
     onLoadFinalLayer() {
-
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         if (GameCfg.GameType == pb.GameType.ShuangMang ||
             GameCfg.GameType == pb.GameType.ZhiBiao ||
@@ -93,22 +105,7 @@ export default class NewClass extends cc.Component {
         })
     }
 
-
-    start() {
-        //游戏开始动画
-        if (!GameCfg.GAMEFUPAN) {
-            if ((GameCfg.GameType == pb.GameType.JJ_PK ||
-                GameCfg.GameType == pb.GameType.JJ_DuoKong ||
-                GameCfg.GameType == pb.GameType.JJ_ChuangGuan) && !GameCfg.GAMEFRTD) {
-                this.startGameNode.active = true;
-            }
-        }
-
-        this.onLoadFinalLayer();
-    }
-
     protected onDestroy() {
-
         GameCfg.GAMEFRTD = false;
         GameCfg.GAMEWAIT = false;
 
@@ -116,16 +113,15 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
         GlobalEvent.off(EventCfg.UPDATEOTHERPLAYEROPT);
 
-        PopupManager.delPopupNode();
         GameCfg.GAMEFUPAN = false;
 
         GameData.CGSConfData = null;
+
         UpGameOpt.clearGameOpt();
 
         this.finalLayer = null;
 
         LoadUtils.releaseRes(this.url);
-
     }
 
     setColor() {
@@ -167,7 +163,6 @@ export default class NewClass extends cc.Component {
 
             GameCfg.EXPMA_COL[0] = new cc.Color().fromHEX('#ffffff');
             GameCfg.EXPMA_COL[1] = new cc.Color().fromHEX('#ebeb12');
-
         }
         //百地
         else {
@@ -208,7 +203,6 @@ export default class NewClass extends cc.Component {
             GameCfg.EXPMA_COL[0] = new cc.Color().fromHEX('#03004c');
             GameCfg.EXPMA_COL[1] = new cc.Color().fromHEX('#f39800');
         }
-
     }
 
     initData() {
@@ -336,9 +330,10 @@ export default class NewClass extends cc.Component {
     //同步游戏操作
     updateOtherPlayerOpt(opt) {
         UpGameOpt.UpdataOtherPlayerOpt(opt);
+
     }
 
-
+    //游戏结束
     GameOver(message) {
 
         this.finalLayer.active = true;
@@ -350,7 +345,6 @@ export default class NewClass extends cc.Component {
                 handle.onShow();
             }
         }
-
         else {
             setTimeout(() => {
 
@@ -373,8 +367,7 @@ export default class NewClass extends cc.Component {
         }
     }
 
-
-
-
-
+    leaveGame() {
+        this.node.active = false;
+    }
 }

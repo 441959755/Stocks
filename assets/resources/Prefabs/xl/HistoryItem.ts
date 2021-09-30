@@ -74,11 +74,11 @@ export default class NewClass extends cc.Component {
 
                 if (GameCfg.GameType == pb.GameType.QiHuo) {
                     GlobalHandle.onCmdGameStartQuoteQueryQH(GameCfg.enterGameCache, () => {
-                        cc.director.loadScene('game');
+                        GlobalEvent.emit('LOADGAME');
                     });
                 } else {
                     GlobalHandle.onCmdGameStartQuoteQuery(GameCfg.enterGameCache, () => {
-                        cc.director.loadScene('game');
+                        GlobalEvent.emit('LOADGAME');
                     })
                 }
             });
