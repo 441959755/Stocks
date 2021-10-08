@@ -361,21 +361,23 @@ export default class AndroidSDK {
         console.log("登录回调:" + result);
         // let userInfoString = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "getQQInfo", "()Ljava/lang/String;");
         // console.log('getQQInfo' + userInfoString);
-        result = JSON.parse(result);
 
-        GameData.userName = result.nickname;
+        setTimeout(() => {
+            result = JSON.parse(result);
 
-        GameData.gender = result.sex || result.gender;
+            GameData.userName = result.nickname;
 
-        let headUrl = result.headimgurl || result.figureurl_1;
+            GameData.gender = result.sex || result.gender;
 
-        LoadImg.downloadRemoteImageAndSave(headUrl, (tex, sp) => {
-            console.log('downloadRemoteImageAndSave' + sp + ' ' + tex);
-            GameData.headimgurl = tex;
-            GameData.headImg = sp;
-            this.loginServer(this.access_token);
-        }, null);
+            let headUrl = result.headimgurl || result.figureurl_1;
 
+            LoadImg.downloadRemoteImageAndSave(headUrl, (tex, sp) => {
+                console.log('downloadRemoteImageAndSave' + sp + ' ' + tex);
+                GameData.headimgurl = tex;
+                GameData.headImg = sp;
+                this.loginServer(this.access_token);
+            }, null);
+        }, 1000);
     }
 
 
