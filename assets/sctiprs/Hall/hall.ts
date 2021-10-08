@@ -41,6 +41,8 @@ export default class NewClass extends cc.Component {
 
 	gameLayer: cc.Node = null;
 
+	isLoading = false;
+
 	onLoad() {
 		PopupManager.init();
 
@@ -288,8 +290,8 @@ export default class NewClass extends cc.Component {
 
 	//离开游戏
 	leaveGame() {
-		this.gameLayer.active = false;
 		this.gameLayer.destroy();
+		LoadUtils.releaseRes('Prefabs/game/gameLayer');
 		this.gameLayer = null;
 
 		GameCfg.fill = [];
@@ -317,6 +319,12 @@ export default class NewClass extends cc.Component {
 	}
 
 	openNode(node, url, zIndex, call?) {
+		if (!this.isLoading) {
+			this.isLoading = true;
+		}
+		else {
+			return;
+		}
 		if (!node) {
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			LoadUtils.loadRes(url, pre => {
@@ -325,12 +333,15 @@ export default class NewClass extends cc.Component {
 				this.node.addChild(node, zIndex);
 				node.active = true;
 				call(node);
+				this.isLoading = false;
 			})
 		}
 		else {
 			node.active = true;
+			this.isLoading = false;
 			call(node);
 		}
+
 	}
 
 }

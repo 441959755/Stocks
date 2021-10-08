@@ -480,6 +480,7 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
+        GlobalEvent.off('roundNUmber');
         GlobalEvent.off(EventCfg.MABOLLSWITCH);
         this.node.off('touchstart');
         this.node.off('touchend');
