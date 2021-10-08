@@ -777,8 +777,9 @@ export default class NewClass extends cc.Component {
 			kstyle: pb.KStyle.Random,
 			code: null,
 			from: null,
-			total: parseInt(GameData.QHSet.KLine),
-			to: 0
+			total: parseInt(GameData.QHSet.KLine) + 100,
+			to: 0,
+			reserve: 100,
 		};
 
 		let jys, lxpz, hy, rom, rom1, rom2;
@@ -984,7 +985,6 @@ export default class NewClass extends cc.Component {
 				} else {
 					day = GameData.QHSet.day;
 				}
-
 			}
 
 			if (parseInt(start) > parseInt(year + month + day)) {
@@ -994,7 +994,6 @@ export default class NewClass extends cc.Component {
 				} else {
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能早与期货创建时间');
 					GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
 				}
 				return;
 			} else if (parseInt(end) < parseInt(year + month + day)) {
@@ -1036,8 +1035,8 @@ export default class NewClass extends cc.Component {
 		GameCfg.enterGameCache = data;
 
 		GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, data, () => {
-			GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50);
-			GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 50);
+			GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
+			GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
 			GlobalEvent.emit('LOADGAME');
 		});
 

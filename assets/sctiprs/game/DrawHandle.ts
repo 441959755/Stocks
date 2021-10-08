@@ -784,6 +784,7 @@ export default class NewClass extends cc.Component {
 
     //成交量绘制
     onEnable() {
+
         this.initData();
 
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {

@@ -755,7 +755,6 @@ export default class NewClass extends cc.Component {
 			GameData.huizhidatas = GameCfg.data[0].data.length - (GameData.DXSet.KLine);
 			GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameData.DXSet.KLine);
 			GlobalEvent.emit('LOADGAME');
-
 		});
 	}
 }

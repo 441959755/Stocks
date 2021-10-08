@@ -5,7 +5,6 @@ import GameCfg from "../../../sctiprs/game/GameCfg";
 import StrategyAIData from "../../../sctiprs/game/StrategyAIData";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
-import EnterGameControl from "../../../sctiprs/global/EnterGameControl";
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import UpGameOpt from "../../../sctiprs/global/UpGameOpt";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
@@ -104,7 +103,7 @@ export default class NewClass extends cc.Component {
                 uid: GameData.userID,
                 gType: GameCfg.GameType,
                 quotesCode: parseInt(GameCfg.data[0].code),
-                kType: GameCfg.data[0].ktype,
+                kType: GameCfg.enterGameCache.ktype,
                 kFrom: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
 
                 kTo: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
@@ -130,7 +129,7 @@ export default class NewClass extends cc.Component {
 
             let CmdGameOver;
 
-            this.saveHoistoryInfo(parseInt(datas.ts + ''));
+            this.saveHoistoryInfo(datas.ts);
 
             if (GameCfg.GameType != pb.GameType.ShuangMang) {
                 CmdGameOver = {
@@ -322,33 +321,36 @@ export default class NewClass extends cc.Component {
     }
 
     saveHoistoryInfo(ts) {
-        GameCfg.TIMETEMP.push(ts);
-        cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
+        // GameCfg.TIMETEMP.push(ts);
+        // cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
 
-        let cache = JSON.stringify(GameCfg.enterGameCache);
-        cc.sys.localStorage.setItem(ts + 'cache', cache);
+        // let cache = JSON.stringify(GameCfg.enterGameCache);
+        // cc.sys.localStorage.setItem(ts + 'cache', cache);
 
-        cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
+        //cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
 
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             let AiRate = StrategyAIData.profitrate * 100;
             cc.sys.localStorage.setItem(ts + 'AIRATE', AiRate);
         }
+
     }
 
     onBtnClick(event, data) {
         let name = event.target.name;
         //返回大厅
         if (name == 'closeBtn') {
-            cc.director.loadScene('hall');
+            GlobalEvent.emit(EventCfg.LEAVEGAME);
         }
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
 
-            if (GameCfg.GameType == pb.GameType.QiHuo) {
-                cc.director.loadScene('hall');
-                return;
-            }
+            GlobalEvent.emit(EventCfg.LEAVEGAME);
+
+            // if (GameCfg.GameType == pb.GameType.QiHuo) {
+            //     GlobalEvent.emit(EventCfg.LEAVEGAME);
+            //     return;
+            // }
 
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
@@ -364,7 +366,13 @@ export default class NewClass extends cc.Component {
                 GameCfgText.getGPZBByRandom();
             }
 
+            else if (GameCfg.GameType == pb.GameType.QiHuo) {
+                GameCfgText.getQHQHByRandom();
+            }
+
+
             GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
+
                 GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
                 GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
                 GlobalEvent.emit('LOADGAME');
@@ -373,9 +381,12 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'lx_jsbt_xl') {
             GlobalEvent.emit(EventCfg.LEVELCHANGE);
+
+            GlobalEvent.emit(EventCfg.LEAVEGAME);
+
             GlobalHandle.onCmdGameStartReq(() => {
-                GameData.huizhidatas = GameCfg.data[0].data.length - GameCfg.GameSet.KLine;
-                GameCfg.huizhidatas = GameCfg.data[0].data.length - GameCfg.GameSet.KLine;
+                GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
+                GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
                 GlobalEvent.emit('LOADGAME');
             });
         }
@@ -396,4 +407,5 @@ export default class NewClass extends cc.Component {
         GameCfg.RoomGameData = null;
         UpGameOpt.clearGameOpt();
     }
+
 }

@@ -75,7 +75,7 @@ export default {
         allRate: 0,       //总利率
     },
 
-    TIMETEMP: [],   //玩的记录时间戳
+    // TIMETEMP: [],   //玩的记录时间戳
 
     mark: [], //标签信息
 

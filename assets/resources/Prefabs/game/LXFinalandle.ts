@@ -221,7 +221,7 @@ export default class NewClass extends cc.Component {
         StrategyAIData.onClearData();
         GameCfg.enterGameCache = null;
         GameCfg.RoomGameData = null;
-        cc.director.loadScene('hall');
+        GlobalEvent.emit(EventCfg.LEAVEGAME);
     }
 
 

@@ -57,18 +57,29 @@ export default class NewClass extends cc.Component {
 
                 GameCfg.historyType = GameCfg.GameType;
 
-                let cache = cc.sys.localStorage.getItem(ts + 'cache');
 
-                if (!cache) {
-                    console.log('没有保存此记录');
-                    return;
+                if (this.infoData.gType == pb.GameType.ShuangMang) {
+                    GameCfg.GameSet = GameData.SMSet;
+                }
+                else if (this.infoData.gType == pb.GameType.ZhiBiao) {
+                    GameCfg.GameSet = GameData.ZBSet;
+                }
+                else if (this.infoData.gType == pb.GameType.QiHuo) {
+                    GameCfg.GameSet = GameData.QHSet;
+                }
+                else if (this.infoData.gType == pb.GameType.DingXiang) {
+                    GameCfg.GameSet = GameData.DXSet;
                 }
 
-                GameCfg.GameSet = JSON.parse(cc.sys.localStorage.getItem(ts + 'set'));
-
-                console.log(JSON.parse(cache));
-
-                GameCfg.enterGameCache = JSON.parse(cache);
+                GameCfg.enterGameCache = {
+                    ktype: this.infoData.kType,
+                    kstyle: pb.KStyle.Random,
+                    code: this.infoData.quotesCode,
+                    from: this.infoData.kFrom + '',
+                    total: this.infoData.kStop - this.infoData.kStartup + 100,
+                    //   to: this.infoData.kTo + '',
+                    reserve: 100,
+                };
 
                 GameCfg.historyType = GameCfg.GameType;
 

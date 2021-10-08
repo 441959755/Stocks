@@ -17,8 +17,15 @@ export default class GlobalHandle {
         if (!flag) {
             //游戏开始
             this.onCmdGameStartReq(() => {
-                //游戏行情获取
-                this.onCmdGameStartQuoteQuery(data, call)
+
+                if (GameCfg.GameType == pb.GameType.QiHuo) {
+                    this.onCmdGameStartQuoteQueryQH(data, call)
+                }
+                else {
+                    //游戏行情获取
+                    this.onCmdGameStartQuoteQuery(data, call)
+                }
+
             });
         }
         else {
@@ -114,27 +121,25 @@ export default class GlobalHandle {
 
     public static onCmdGameStartQuoteQueryQH(data, cb?) {
 
-        let maxLength = 2000;
-        this.curTotal = 0;
 
         //先获取前面的
-        let preData = {
-            ktype: data.ktype,
-            code: data.code,
-            from: 0,
-            total: 50,
-            to: data.from,
-        }
+        // let preData = {
+        //     ktype: data.ktype,
+        //     code: data.code,
+        //     from: 0,
+        //     total: 100,
+        //     to: data.from,
+        // }
 
-        if (GameData.QHSet.ZLine == '15分钟K') {
-            preData.total *= 3;
-        } else if (GameData.QHSet.ZLine == '30分钟K') {
-            preData.total *= 6;
-        } else if (GameData.QHSet.ZLine == '60分钟K') {
-            preData.total *= 12;
-        }
+        // if (GameData.QHSet.ZLine == '15分钟K') {
+        //     preData.total *= 3;
+        // } else if (GameData.QHSet.ZLine == '30分钟K') {
+        //     preData.total *= 6;
+        // } else if (GameData.QHSet.ZLine == '60分钟K') {
+        //     preData.total *= 12;
+        // }
 
-        socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(preData), info => {
+        socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(data), info => {
 
             if (!info.items || info.items.length <= 0) {
                 console.log('获取的行情为空');
@@ -158,83 +163,109 @@ export default class GlobalHandle {
                 GameCfg.data[0].data.push(data1);
             });
 
-            if (data.total > maxLength) {
-                this.curTotal = data.total - maxLength;
-                data.total = maxLength;
+            // if (data.total > maxLength) {
+            //     this.curTotal = data.total - maxLength;
+            //     data.total = maxLength;
+            // }
+            // this.getQHHangQing(data, cb);
+            let qhHQ = GameCfg.data[0].data;
+            if (GameData.QHSet.ZLine == '5分钟K') {
+                DrawData.arrMin5 = qhHQ;
+            } else if (GameData.QHSet.ZLine == '日线') {
+                DrawData.arrDay = qhHQ;
             }
-            this.getQHHangQing(data, cb);
-        })
-    }
-
-    public static getQHHangQing(data, cb?) {
-        let qhHQ = GameCfg.data[0].data;
-        socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(data), info => {
-
-            if (!info.items || info.items.length <= 0) {
-                console.log('获取的行情为空');
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空' + JSON.stringify(data));
-                GameCfg.GAMEFUPAN = false;
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                return;
-            }
-            info.items.forEach((el, index) => {
-
-                //    if (index != 0) {
-                let data1 = {
-                    day: el.timestamp + '',
-                    open: el.open || 0,
-                    close: el.close || 0,
-                    high: el.high || 0,
-                    low: el.low || 0,
-                    value: el.volume || 0,
-                    ccl_hold: el.cclHold || 0,
-                };
-                qhHQ.push(data1);
-                //    }
-
-            });
-
-            if (this.curTotal > 0) {
-                if (this.curTotal >= 2000) {
-                    this.curTotal -= 2000;
-                    data.total = 2000;
-                } else {
-                    data.total = this.curTotal;
-                    this.curTotal = 0;
-                }
-                GameCfg.data[0].data = qhHQ;
-                data.from = qhHQ[qhHQ.length - 1].day;
-                this.getQHHangQing(data);
-            } else {
-                if (GameData.QHSet.ZLine == '5分钟K') {
+            else {
+                let t
+                if (GameData.QHSet.ZLine == '15分钟K') {
+                    t = 3;
                     DrawData.arrMin5 = qhHQ;
-                } else if (GameData.QHSet.ZLine == '日线') {
-                    DrawData.arrDay = qhHQ;
+                } else if (GameData.QHSet.ZLine == '30分钟K') {
+                    t = 6;
+                    DrawData.arrMin5 = qhHQ;
+                } else if (GameData.QHSet.ZLine == '60分钟K') {
+                    t = 12;
+                    DrawData.arrMin5 = qhHQ;
                 }
-                else {
-                    let t
-                    if (GameData.QHSet.ZLine == '15分钟K') {
-                        t = 3;
-                        DrawData.arrMin5 = qhHQ;
-                    } else if (GameData.QHSet.ZLine == '30分钟K') {
-                        t = 6;
-                        DrawData.arrMin5 = qhHQ;
-                    } else if (GameData.QHSet.ZLine == '60分钟K') {
-                        t = 12;
-                        DrawData.arrMin5 = qhHQ;
-                    }
-                    qhHQ = DrawData.dataChange(qhHQ[qhHQ.length - 1].day, t, qhHQ);
-                }
-
-                GameCfg.data[0].data = qhHQ;
-                console.log(JSON.stringify('期货' + JSON.stringify(qhHQ)));
-                console.log(qhHQ.length);
-
-                cb && (cb());
+                qhHQ = DrawData.dataChange(qhHQ[qhHQ.length - 1].day, t, qhHQ);
             }
 
+            GameCfg.data[0].data = qhHQ;
+            console.log(JSON.stringify('期货' + JSON.stringify(qhHQ)));
+            console.log(qhHQ.length);
+
+            cb && (cb());
         })
     }
+
+    // public static getQHHangQing(data, cb?) {
+
+    //     socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(data), info => {
+
+    //         if (!info.items || info.items.length <= 0) {
+    //             console.log('获取的行情为空');
+    //             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空' + JSON.stringify(data));
+    //             GameCfg.GAMEFUPAN = false;
+    //             GlobalEvent.emit(EventCfg.LOADINGHIDE);
+    //             return;
+    //         }
+    //         info.items.forEach((el, index) => {
+
+    //             //    if (index != 0) {
+    //             let data1 = {
+    //                 day: el.timestamp + '',
+    //                 open: el.open || 0,
+    //                 close: el.close || 0,
+    //                 high: el.high || 0,
+    //                 low: el.low || 0,
+    //                 value: el.volume || 0,
+    //                 ccl_hold: el.cclHold || 0,
+    //             };
+    //             qhHQ.push(data1);
+    //             //    }
+
+    //         });
+
+    //         if (this.curTotal > 0) {
+    //             if (this.curTotal >= 2000) {
+    //                 this.curTotal -= 2000;
+    //                 data.total = 2000;
+    //             } else {
+    //                 data.total = this.curTotal;
+    //                 this.curTotal = 0;
+    //             }
+    //             GameCfg.data[0].data = qhHQ;
+    //             data.from = qhHQ[qhHQ.length - 1].day;
+    //             this.getQHHangQing(data);
+    //         } else {
+    //             if (GameData.QHSet.ZLine == '5分钟K') {
+    //                 DrawData.arrMin5 = qhHQ;
+    //             } else if (GameData.QHSet.ZLine == '日线') {
+    //                 DrawData.arrDay = qhHQ;
+    //             }
+    //             else {
+    //                 let t
+    //                 if (GameData.QHSet.ZLine == '15分钟K') {
+    //                     t = 3;
+    //                     DrawData.arrMin5 = qhHQ;
+    //                 } else if (GameData.QHSet.ZLine == '30分钟K') {
+    //                     t = 6;
+    //                     DrawData.arrMin5 = qhHQ;
+    //                 } else if (GameData.QHSet.ZLine == '60分钟K') {
+    //                     t = 12;
+    //                     DrawData.arrMin5 = qhHQ;
+    //                 }
+    //                 qhHQ = DrawData.dataChange(qhHQ[qhHQ.length - 1].day, t, qhHQ);
+    //             }
+
+    //             GameCfg.data[0].data = qhHQ;
+    //             console.log(JSON.stringify('期货' + JSON.stringify(qhHQ)));
+    //             console.log(qhHQ.length);
+
+    //             cb && (cb());
+    //         }
+
+    //     })
+    // }
 
     public static onGameResetSMCapital() {
 

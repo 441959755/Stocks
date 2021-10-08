@@ -524,6 +524,7 @@ export default class NewClass extends cc.Component {
 		this.onSetMrCount();
 		//分仓
 		if (GameCfg.GameSet.isFC) {
+
 			this.mcBtn.node.x = -266;
 			this.tipsmc.node.active = true;
 			this.tipsmr.node.active = true;
@@ -537,6 +538,7 @@ export default class NewClass extends cc.Component {
 		}
 		//不分仓
 		else {
+
 			this.tipsmr.node.active = false;
 			this.tipsmc.node.active = false;
 			this.mrBtn.node.active = true;
@@ -649,7 +651,8 @@ export default class NewClass extends cc.Component {
 				et.getComponent(cc.Label).string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
 			}
 		}
-
+		console.log('数据长度' + this.gpData.length);
+		console.log(GameCfg.huizhidatas);
 		this.roundNumber = this.gpData.length - GameCfg.huizhidatas;
 
 		this.tipsLabel.string = '回合数：' + this.roundNumber;
@@ -745,8 +748,6 @@ export default class NewClass extends cc.Component {
 					}
 					UpGameOpt.addOpt(item);
 				}
-
-
 
 				GameCfg.allRate = (GameCfg.allRate + 1) * (rate + 1) - 1;
 

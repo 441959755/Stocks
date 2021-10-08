@@ -37,6 +37,8 @@ export default class AndroidSDK {
 
     callback = null;
 
+    access_token = null;
+
     WXtoken = {
         access_token: null,
         refresh_token: null,
@@ -349,14 +351,32 @@ export default class AndroidSDK {
 
         data = JSON.parse(data);
 
-        this.getUserInfo(data);
+        this.access_token = data.access_token;
+
+        //  this.getUserInfo(data);
+
     }
 
-    // getQQInfo() {
-    //     let userInfoString = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "getQQInfo", "()Ljava/lang/String;");
-    //     console.log('getQQInfo' + userInfoString);
+    getQQInfo(result) {
+        console.log("登录回调:" + result);
+        // let userInfoString = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "getQQInfo", "()Ljava/lang/String;");
+        // console.log('getQQInfo' + userInfoString);
+        result = JSON.parse(result);
 
-    // }
+        GameData.userName = result.nickname;
+
+        GameData.gender = result.sex || result.gender;
+
+        let headUrl = result.headimgurl || result.figureurl_1;
+
+        LoadImg.downloadRemoteImageAndSave(headUrl, (tex, sp) => {
+            console.log('downloadRemoteImageAndSave' + sp + ' ' + tex);
+            GameData.headimgurl = tex;
+            GameData.headImg = sp;
+            this.loginServer(this.access_token);
+        }, null);
+
+    }
 
 
 
@@ -416,32 +436,33 @@ export default class AndroidSDK {
                 url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' + obj.
                     access_token + '&openid=' + obj.openid;
             }
-        }
 
-        if (url) {
-            HttpUtils.loadRequest(url, null, (result) => {
-                console.log('wx getUserInfo 11' + result);
 
-                result = JSON.parse(result);
+            if (url) {
+                HttpUtils.loadRequest(url, null, (result) => {
+                    console.log('wx getUserInfo 11' + result);
 
-                GameData.userName = result.nickname;
+                    result = JSON.parse(result);
 
-                GameData.gender = result.sex || result.gender;
+                    GameData.userName = result.nickname;
 
-                let headUrl = result.headimgurl || result.figureurl_1;
+                    GameData.gender = result.sex || result.gender;
 
-                LoadImg.downloadRemoteImageAndSave(headUrl, (tex, sp) => {
-                    console.log('downloadRemoteImageAndSave' + sp + ' ' + tex);
-                    GameData.headimgurl = tex;
-                    GameData.headImg = sp;
-                    this.loginServer(obj.access_token);
-                }, null);
+                    let headUrl = result.headimgurl || result.figureurl_1;
 
-            })
-        }
-        else {
+                    LoadImg.downloadRemoteImageAndSave(headUrl, (tex, sp) => {
+                        console.log('downloadRemoteImageAndSave' + sp + ' ' + tex);
+                        GameData.headimgurl = tex;
+                        GameData.headImg = sp;
+                        this.loginServer(obj.access_token);
+                    }, null);
 
-            this.loginServer(obj.access_token);
+                })
+            }
+            else {
+
+                this.loginServer(obj.access_token);
+            }
         }
 
     }

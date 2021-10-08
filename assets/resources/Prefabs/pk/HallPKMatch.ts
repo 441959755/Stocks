@@ -40,7 +40,6 @@ export default class NewClass extends cc.Component {
     }
 
     onShowOtherPlayer() {
-
         this.callBack && (clearInterval(this.callBack));
         this.callBack = null;
 
@@ -67,6 +66,11 @@ export default class NewClass extends cc.Component {
         this.enterGameAnim.on('finished', () => {
             console.log('enterGameAnim');
             GlobalEvent.emit('LOADGAME');
+
+            setTimeout(() => {
+                this.node.active = false;
+            }, 2000);
+
         }, this);
 
         this.enterGameAnim && (this.enterGameAnim.play());

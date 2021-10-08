@@ -486,12 +486,13 @@ export default class GameCfgText {
 
     //随机QH一只期货
     public static getQHQHByRandom(cb?) {
+
         let data = {
-            ktype: null,
+            ktype: GameCfg.enterGameCache.ktype,
             kstyle: pb.KStyle.Random,
             code: null,
             from: null,
-            total: parseInt(GameData.QHSet.KLine) + 1,
+            total: parseInt(GameData.QHSet.KLine),
             to: 0
         };
         let rom = parseInt(Math.random() * this.qihuoList.length + '');

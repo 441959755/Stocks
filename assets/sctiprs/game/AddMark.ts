@@ -214,6 +214,7 @@ export default class NewClass extends cc.Component {
         }
     }
 
+
     onMarkRangeShowOrHide() {
 
         this.markNodes.forEach((el, i) => {

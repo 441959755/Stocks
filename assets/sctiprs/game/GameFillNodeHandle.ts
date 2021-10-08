@@ -66,7 +66,6 @@ export default class NewClass extends cc.Component {
 
     }
 
-
     onEnable() {
         this.graphics.clear();
         this.graphics.lineWidth = 2;
@@ -77,6 +76,5 @@ export default class NewClass extends cc.Component {
     protected onDestroy() {
         GlobalEvent.off(EventCfg.ADDFILLCOLOR);
         GlobalEvent.off(EventCfg.FILLNODEISSHOW);
-
     }
 }

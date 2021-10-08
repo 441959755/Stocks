@@ -270,10 +270,12 @@ export default class NewClass extends cc.Component {
 
         //再来一局
         else if (name == 'pk_jsbt_zlyj') {
-            if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-                GameData.isToAGame = true;
-            }
+
             this.onQuitGame();
+            if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+
+                GlobalEvent.emit(EventCfg.OPENMATCHPK);
+            }
         }
 
 
@@ -360,7 +362,7 @@ export default class NewClass extends cc.Component {
         if (!GameData.RoomType) {
             GameCfg.RoomGameData = null;
         }
-        cc.director.loadScene('hall');
+        GlobalEvent.emit(EventCfg.LEAVEGAME);
     }
 
     onDestroy() {

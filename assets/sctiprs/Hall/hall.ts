@@ -75,6 +75,8 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on('LOADGAME', this.onLoadGame.bind(this), this);
 
+		GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
+
 	}
 
 	protected onDestroy() {
@@ -187,7 +189,8 @@ export default class NewClass extends cc.Component {
 
 	//离开房间
 	onRoomLeave(data) {
-		if (data.uid == GameData.userID) {
+		//玩家对战房间解散提示
+		if (data.uid == GameData.userID && GameData.RoomType) {
 			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
 		}
 	}
@@ -228,21 +231,6 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.OPENROOM);
 		}
 
-	}
-
-	onEnable() {
-		GameCfg.fill = [];
-		GameCfg.mark = [];
-		GameCfg.notice = [];
-		GameCfg.huizhidatas = 0;
-		GameCfg.allRate = 0;
-		GameCfg.blockHistoy = [];
-		GameCfg.finalfund = 0;
-		GameCfg.GAMEFUPAN = false;
-		StrategyAIData.onClearData();
-		GameCfg.enterGameCache = null;
-		GameCfg.data[0].data = [];
-		GameCfg.GAMEFUPANDATA = null;
 	}
 
 	openBroadcast(data) {
@@ -293,11 +281,26 @@ export default class NewClass extends cc.Component {
 
 	//加载游戏进入
 	onLoadGame() {
-
 		this.openNode(this.gameLayer, 'Prefabs/game/gameLayer', 50, (node) => {
 			this.gameLayer = node;
 		});
+	}
 
+	//离开游戏
+	leaveGame() {
+		this.gameLayer.active = false;
+		this.gameLayer.destroy();
+		this.gameLayer = null;
+
+		GameCfg.fill = [];
+		GameCfg.mark = [];
+		GameCfg.notice = [];
+		GameCfg.allRate = 0;
+		GameCfg.blockHistoy = [];
+		GameCfg.finalfund = 0;
+		GameCfg.GAMEFUPAN = false;
+		StrategyAIData.onClearData();
+		GameCfg.GAMEFUPANDATA = null;
 	}
 
 
@@ -305,7 +308,6 @@ export default class NewClass extends cc.Component {
 	onCmdQHGameStart(data, cb) {
 
 		GameCfg.data[0].data = [];
-
 		//游戏开始
 		GlobalHandle.onCmdGameStartReq(() => {
 			//游戏行情获取

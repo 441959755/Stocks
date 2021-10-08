@@ -192,36 +192,36 @@ cc.Class({
 			GameData.ZBSet = JSON.parse(ZBSet);
 		}
 
-		{
-			let str = cc.sys.localStorage.getItem('TIMETEMP');
-			if (str) {
-				GameCfg.TIMETEMP = JSON.parse(str);
-				//上个月的数据清除
-				if (GameCfg.TIMETEMP.length > 0) {
-					var data = new Date(); //本月
-					data.setDate(1);
-					data.setHours(0);
-					data.setSeconds(0);
-					data.setMinutes(0);
+		// {
+		// 	let str = cc.sys.localStorage.getItem('TIMETEMP');
+		// 	if (str) {
+		// 		GameCfg.TIMETEMP = JSON.parse(str);
+		// 		//上个月的数据清除
+		// 		if (GameCfg.TIMETEMP.length > 0) {
+		// 			var data = new Date(); //本月
+		// 			data.setDate(1);
+		// 			data.setHours(0);
+		// 			data.setSeconds(0);
+		// 			data.setMinutes(0);
 
-					let time = data.getTime() / 1000;
-					let arr = [];
-					GameCfg.TIMETEMP.forEach(el => {
-						if (el <= time) {
+		// 			let time = data.getTime() / 1000;
+		// 			let arr = [];
+		// 			GameCfg.TIMETEMP.forEach(el => {
+		// 				if (el <= time) {
 
-							cc.sys.localStorage.removeItem(el + 'cache');
-						} else {
-							arr.push(el);
-						}
-					})
+		// 					cc.sys.localStorage.removeItem(el + 'cache');
+		// 				} else {
+		// 					arr.push(el);
+		// 				}
+		// 			})
 
-					GameCfg.TIMETEMP = arr;
-					cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP))
-				} else {
-					console.log('in login' + '还没缓存数据');
-				}
-			}
-		}
+		// 			GameCfg.TIMETEMP = arr;
+		// 			cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP))
+		// 		} else {
+		// 			console.log('in login' + '还没缓存数据');
+		// 		}
+		// 	}
+		// }
 
 		//期货设置
 		{

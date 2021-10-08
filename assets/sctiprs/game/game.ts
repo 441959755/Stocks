@@ -36,8 +36,6 @@ export default class NewClass extends cc.Component {
         //游戏结算
         GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
 
-        GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
-
         //同步游戏操作 pk才有
         GlobalEvent.on(EventCfg.UPDATEOTHERPLAYEROPT, this.updateOtherPlayerOpt.bind(this), this);
 
@@ -55,10 +53,6 @@ export default class NewClass extends cc.Component {
         this.setColor();
     }
 
-    start() {
-        this.onLoadFinalLayer();
-    }
-
     onEnable() {
         //游戏开始动画
         if (!GameCfg.GAMEFUPAN) {
@@ -68,6 +62,8 @@ export default class NewClass extends cc.Component {
                 this.startGameNode.active = true;
             }
         }
+
+        this.onLoadFinalLayer();
     }
 
     //加载结算页
@@ -106,22 +102,18 @@ export default class NewClass extends cc.Component {
     }
 
     protected onDestroy() {
-        GameCfg.GAMEFRTD = false;
-        GameCfg.GAMEWAIT = false;
-
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
         GlobalEvent.off(EventCfg.UPDATEOTHERPLAYEROPT);
-
+        this.finalLayer = null;
+        LoadUtils.releaseRes(this.url);
         GameCfg.GAMEFUPAN = false;
 
         GameData.CGSConfData = null;
 
         UpGameOpt.clearGameOpt();
 
-        this.finalLayer = null;
-
-        LoadUtils.releaseRes(this.url);
+        GameCfg.GAMEWAIT = false;
     }
 
     setColor() {
@@ -367,7 +359,5 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    leaveGame() {
-        this.node.active = false;
-    }
+
 }

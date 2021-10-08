@@ -31,32 +31,32 @@ export default class NewClass extends cc.Component {
     tipsNode: cc.Node = null;
 
     onEnable() {
-        if (!this.historyInfo) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            let data = new Date();
-            data.setDate(1);
-            data.setHours(0);
-            data.setSeconds(0);
-            data.setMinutes(0);
+        //   if (!this.historyInfo) {
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        let data = new Date();
+        data.setDate(1);
+        data.setHours(0);
+        data.setSeconds(0);
+        data.setMinutes(0);
 
-            let inf = {
-                uid: GameData.userID,
-                gType: GameCfg.GameType,
-                to: parseInt(new Date().getTime() / 1000 + ''),
-                pageSize: 200,
-            }
-
-            let CmdQueryGameResult = pb.CmdQueryGameResult;
-            let message = CmdQueryGameResult.create(inf)
-            let buff = CmdQueryGameResult.encode(message).finish();
-
-            socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, (info) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                console.log('sm历史数据' + JSON.stringify(info));
-                this.historyInfo = info;
-                this.onShow();
-            })
+        let inf = {
+            uid: GameData.userID,
+            gType: GameCfg.GameType,
+            to: parseInt(new Date().getTime() / 1000 + ''),
+            pageSize: 200,
         }
+
+        let CmdQueryGameResult = pb.CmdQueryGameResult;
+        let message = CmdQueryGameResult.create(inf)
+        let buff = CmdQueryGameResult.encode(message).finish();
+
+        socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, (info) => {
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            console.log('sm历史数据' + JSON.stringify(info));
+            this.historyInfo = info;
+            this.onShow();
+        })
+        //    }
     }
 
     onShow() {
@@ -69,23 +69,36 @@ export default class NewClass extends cc.Component {
         }
 
         let selectName, items;
-        let str = cc.sys.localStorage.getItem('TIMETEMP');
-        let TIMETEMP = [];
+        let str = cc.sys.localStorage.getItem('CLEARTS');
+        let da = new Date();
+        da.setDate(1);
+        da.setHours(0);
+        da.setSeconds(0);
+        da.setMinutes(0);
+        let str1 = parseInt(da.getTime() / 1000 + '');
+
+        let TIMETEMP = 0;
+
         if (str) {
-            TIMETEMP = JSON.parse(str);
+            str = JSON.parse(str);
+            TIMETEMP = str > str1 ? str : str1;
+        }
+        else {
+            TIMETEMP = str1;
         }
 
         let sumEar = 0;
         let sumrate = 0;
 
         let arr = [];
+
         datas.forEach(el => {
+            // let cache = cc.sys.localStorage.getItem(el.ts + 'cache');
 
-            let cache = cc.sys.localStorage.getItem(el.ts + 'cache');
-
-            if ((TIMETEMP.indexOf(el.ts) != -1) && (el.gType == GameCfg.GameType) && (cache)) {
+            if ((el.ts > TIMETEMP) && (el.gType == GameCfg.GameType)) {
                 arr.push(el);
             }
+
         });
 
         if (arr.length > 0) {
@@ -100,8 +113,9 @@ export default class NewClass extends cc.Component {
             let nodes = node.children;
             nodes[0].getComponent(cc.Label).string = (index + 1) + '';
             arr[index].quotesCode += '';
+            let codes;
             if (arr[index].quotesCode.length >= 7) {
-                arr[index].quotesCode = arr[index].quotesCode.slice(1);
+                codes = arr[index].quotesCode.slice(1);
             }
             if (GameCfg.GameType == pb.GameType.QiHuo) {
                 items = GameCfgText.getQHItemInfo(arr[index].quotesCode);
@@ -110,7 +124,7 @@ export default class NewClass extends cc.Component {
                 items && (nodes[2].getComponent(cc.Label).string = items[1])
             } else {
                 items = GameCfgText.getGPItemInfo(arr[index].quotesCode);
-                nodes[1].getComponent(cc.Label).string = arr[index].quotesCode;
+                nodes[1].getComponent(cc.Label).string = codes || arr[index].quotesCode;
                 items && (nodes[2].getComponent(cc.Label).string = items[1])
             }
             nodes[3].getComponent(cc.Label).string = arr[index].kFrom;			// 行情起始日期YYYYMMDD或时间HHMMSS
@@ -218,31 +232,35 @@ export default class NewClass extends cc.Component {
                 return;
             }
 
-            let str = cc.sys.localStorage.getItem('TIMETEMP');
-            let TIMETEMP, arr = [];
-            if (str) {
-                TIMETEMP = JSON.parse(str);
-                arr = JSON.parse(str);
-                console.log(arr.length);
+            let ts = parseInt(new Date().getTime() / 1000 + '')
 
-                for (let i = datas.length - 1; i >= 0; i--) {
+            cc.sys.localStorage.setItem('CLEARTS', ts);
 
-                    if (TIMETEMP.length > 0) {
+            // let str = cc.sys.localStorage.getItem('TIMETEMP');
+            // let TIMETEMP, arr = [];
+            // if (str) {
+            //     TIMETEMP = JSON.parse(str);
+            //     arr = JSON.parse(str);
+            //     console.log(arr.length);
 
-                        if (TIMETEMP.indexOf(datas[i].ts) != -1) {
+            //     for (let i = datas.length - 1; i >= 0; i--) {
 
-                            cc.sys.localStorage.removeItem(datas[i].ts + 'cache');
+            //         if (TIMETEMP.length > 0) {
 
-                            arr.splice(arr.indexOf(datas[i].ts), 1);
-                        }
-                    }
-                }
-                cc.sys.localStorage.removeItem('TIMETEMP');
-                console.log(arr.length);
-                GameCfg.TIMETEMP = arr;
-                cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(arr));
-                this.label.string = '0';
-            }
+            //             if (TIMETEMP.indexOf(datas[i].ts) != -1) {
+
+            //                 cc.sys.localStorage.removeItem(datas[i].ts + 'cache');
+
+            //                 arr.splice(arr.indexOf(datas[i].ts), 1);
+            //             }
+            //         }
+            //     }
+            //     cc.sys.localStorage.removeItem('TIMETEMP');
+            //     console.log(arr.length);
+            //     GameCfg.TIMETEMP = arr;
+            //     cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(arr));
+            //     this.label.string = '0';
+            // }
         }
     }
 }
