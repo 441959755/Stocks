@@ -43,6 +43,12 @@ export default class NewClass extends cc.Component {
 
 	isLoading = false;
 
+	finalLayer = []; //结算界面
+
+	index = 0;
+
+	url = null;
+
 	onLoad() {
 		PopupManager.init();
 
@@ -79,9 +85,10 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
 
+
 	}
 
-	protected onDestroy() {
+	onDestroy() {
 		GlobalEvent.off(EventCfg.OPENPLAYERINFO);
 		GlobalEvent.off(EventCfg.OPENHELPLAYER);
 		GlobalEvent.off(EventCfg.ROOMLEAVE);
@@ -104,8 +111,10 @@ export default class NewClass extends cc.Component {
 		LoadUtils.releaseRes('Prefabs/friendLayer');
 		LoadUtils.releaseRes('Prefabs/friendInvite');
 		LoadUtils.releaseRes('Prefabs/game/gameLayer');
+		GlobalEvent.off(EventCfg.GAMEOVEER);
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
+		LoadUtils.releaseRes(this.url);
 	}
 
 	openRankingList() {
@@ -138,7 +147,6 @@ export default class NewClass extends cc.Component {
 			this.otherHis.getComponent('OtherPlayerHisInfo').onShow();
 		});
 	}
-
 
 	/**
 	 * 奖励中心
@@ -283,17 +291,64 @@ export default class NewClass extends cc.Component {
 
 	//加载游戏进入
 	onLoadGame() {
+		//游戏结算
+		GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
+
 		this.openNode(this.gameLayer, 'Prefabs/game/gameLayer', 50, (node) => {
 			this.gameLayer = node;
+			this.onLoadFinalLayer();
 		});
 	}
+
+	//加载结算页
+	onLoadFinalLayer() {
+
+		GlobalEvent.emit(EventCfg.LOADINGSHOW);
+		if (GameCfg.GameType == pb.GameType.ShuangMang ||
+			GameCfg.GameType == pb.GameType.ZhiBiao ||
+			GameCfg.GameType == pb.GameType.DingXiang ||
+			GameCfg.GameType == pb.GameType.QiHuo ||
+			GameCfg.GameType == pb.GameType.FenShi) {
+			this.url = 'Prefabs/game/finalLayer';
+			this.index = 0;
+		}
+
+		else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+			this.url = 'Prefabs/game/TjdFinalLayer';
+			this.index = 1;
+		}
+
+		else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
+			this.url = 'Prefabs/game/CGSFinalLayer';
+			this.index = 2;
+		}
+
+		else if (GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+			GameCfg.GameType == pb.GameType.JJ_PK) {
+			this.url = 'Prefabs/game/PKFinalLayer';
+			this.index = 3;
+		}
+
+		else if (GameCfg.JJ_XUNLIAN) {
+			this.url = 'Prefabs/game/lxFinalLayer';
+			this.index = 4;
+		}
+
+		this.openNode(this.finalLayer[this.index], this.url, 51, (node) => {
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+			this.finalLayer[this.index] = node;
+			this.finalLayer[this.index].active = false;
+		})
+
+	}
+
 
 	//离开游戏
 	leaveGame() {
 		this.gameLayer.destroy();
 		LoadUtils.releaseRes('Prefabs/game/gameLayer');
 		this.gameLayer = null;
-
+		this.finalLayer[this.index].active = false;
 		GameCfg.fill = [];
 		GameCfg.mark = [];
 		GameCfg.notice = [];
@@ -303,6 +358,40 @@ export default class NewClass extends cc.Component {
 		GameCfg.GAMEFUPAN = false;
 		StrategyAIData.onClearData();
 		GameCfg.GAMEFUPANDATA = null;
+	}
+
+	//游戏结束
+	GameOver(message) {
+
+		this.finalLayer[this.index].active = true;
+
+		if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+
+			if (message) {
+				let handle = this.finalLayer[this.index].getComponent('PKFinalHandle');
+				handle.onShow();
+			}
+		}
+		else {
+			setTimeout(() => {
+
+				if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
+
+					this.finalLayer[this.index].getComponent('CGSFinalHandle').onShow();
+				}
+				else {
+
+					if (GameCfg.JJ_XUNLIAN) {
+
+						this.finalLayer[this.index].getComponent('LXFinalandle').onShow();
+					}
+					else {
+
+						this.finalLayer[this.index].getComponent('FinalHandle').onShow();
+					}
+				}
+			}, 80)
+		}
 	}
 
 
@@ -332,8 +421,9 @@ export default class NewClass extends cc.Component {
 				node = cc.instantiate(pre);
 				this.node.addChild(node, zIndex);
 				node.active = true;
-				call(node);
 				this.isLoading = false;
+				call(node);
+
 			})
 		}
 		else {

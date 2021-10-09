@@ -492,8 +492,9 @@ export default class GameCfgText {
             kstyle: pb.KStyle.Random,
             code: null,
             from: null,
-            total: parseInt(GameData.QHSet.KLine),
-            to: 0
+            total: parseInt(GameData.QHSet.KLine) + 100,
+            to: 0,
+            reserve: 100,
         };
         let rom = parseInt(Math.random() * this.qihuoList.length + '');
         let items = this.qihuoList[rom].split('|');

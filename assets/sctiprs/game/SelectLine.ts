@@ -56,7 +56,6 @@ export default class NewClass extends cc.Component {
         this._preSelectID = this._selectID;
 
         GlobalEvent.on(EventCfg.GAMEOVEER, () => {
-            // this.node.active = false;
 
             if (this.qhData && this.qhData.data.length > 0) {
                 GameCfg.data[0].data = this.qhData.data;
@@ -382,10 +381,6 @@ export default class NewClass extends cc.Component {
         this._preSelectID = id;
     }
 
-
-    onDestroy() {
-        //  GlobalEvent.off(EventCfg.GAMEOVEER);
-    }
 
     onGoBlackGame() {
         GameCfg.beg_end[0] = this.beg;

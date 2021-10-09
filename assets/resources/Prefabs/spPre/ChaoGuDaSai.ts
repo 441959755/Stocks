@@ -3,7 +3,6 @@ import GameCfg from "../../../sctiprs/game/GameCfg";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -16,7 +15,6 @@ export default class NewClass extends cc.Component {
     content: cc.Node = null;
 
     onEnable() {
-
         GameCfg.GameType = pb.GameType.ChaoGuDaSai;
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         socket.send(pb.MessageId.Req_Game_CgdsList, null, (res) => {
@@ -62,9 +60,11 @@ export default class NewClass extends cc.Component {
         }
     }
 
+
     onDisable() {
         GameCfg.GameType = null;
         this.content.removeAllChildren();
     }
+
 
 }

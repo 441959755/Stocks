@@ -160,22 +160,11 @@ export default class NewClass extends cc.Component {
 				// }
 			}
 		});
+
+		GlobalEvent.on(EventCfg.GMAECOUNTERSCHANGE, this.onGameCountSow.bind(this), this);
 	}
 
-	onEnable() {
-
-		GlobalEvent.emit(EventCfg.LOADINGHIDE);
-		GameCfg.GameType = pb.GameType.QiHuo;
-		let setDatas = GameData.QHSet;
-		this.box[0].getChildByName('label').getComponent(cc.Label).string = setDatas.JYS;
-		this.box[1].getChildByName('label').getComponent(cc.Label).string = setDatas.LXPZ;
-		this.box[2].getChildByName('label').getComponent(cc.Label).string = setDatas.HY;
-		this.box[3].getChildByName('label').getComponent(cc.Label).string = setDatas.year;
-		this.box[4].getChildByName('label').getComponent(cc.Label).string = setDatas.month;
-		this.box[5].getChildByName('label').getComponent(cc.Label).string = setDatas.day;
-		this.box[6].getChildByName('label').getComponent(cc.Label).string = setDatas.KLine;
-		this.box[7].getChildByName('label').getComponent(cc.Label).string = setDatas.ZLine;
-
+	onGameCountSow() {
 		if (!GameData.properties[pb.GamePropertyId.UnlockQhxl] && !GameData.properties[pb.GamePropertyId.Vip]) {
 			this.tipsLabel1.node.active = true;
 			this.tipsLabel2.node.active = true;
@@ -205,6 +194,27 @@ export default class NewClass extends cc.Component {
 			this.curState = 0;
 		}
 		this.curState = 0;
+	}
+
+	onDestroy() {
+		GlobalEvent.off(EventCfg.GMAECOUNTERSCHANGE);
+	}
+
+	onEnable() {
+
+		GlobalEvent.emit(EventCfg.LOADINGHIDE);
+		GameCfg.GameType = pb.GameType.QiHuo;
+		let setDatas = GameData.QHSet;
+		this.box[0].getChildByName('label').getComponent(cc.Label).string = setDatas.JYS;
+		this.box[1].getChildByName('label').getComponent(cc.Label).string = setDatas.LXPZ;
+		this.box[2].getChildByName('label').getComponent(cc.Label).string = setDatas.HY;
+		this.box[3].getChildByName('label').getComponent(cc.Label).string = setDatas.year;
+		this.box[4].getChildByName('label').getComponent(cc.Label).string = setDatas.month;
+		this.box[5].getChildByName('label').getComponent(cc.Label).string = setDatas.day;
+		this.box[6].getChildByName('label').getComponent(cc.Label).string = setDatas.KLine;
+		this.box[7].getChildByName('label').getComponent(cc.Label).string = setDatas.ZLine;
+
+		this.onGameCountSow();
 	}
 
 	/**

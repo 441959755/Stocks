@@ -28,7 +28,7 @@ export default class NewClass extends cc.Component {
     @property(cc.EditBox)
     account: cc.EditBox = null;  //账号输入框
 
-    @property(cc.Node)
+    @property(cc.EditBox)
     password: cc.EditBox = null;  //密码
 
     @property(cc.Toggle)

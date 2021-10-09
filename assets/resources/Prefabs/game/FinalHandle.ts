@@ -350,7 +350,7 @@ export default class NewClass extends cc.Component {
             // if (GameCfg.GameType == pb.GameType.QiHuo) {
             //     GlobalEvent.emit(EventCfg.LEAVEGAME);
             //     return;
-            // }
+            // }  
 
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
@@ -372,7 +372,6 @@ export default class NewClass extends cc.Component {
 
 
             GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
-
                 GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
                 GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
                 GlobalEvent.emit('LOADGAME');

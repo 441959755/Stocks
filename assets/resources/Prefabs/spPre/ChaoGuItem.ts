@@ -34,10 +34,13 @@ export default class NewClass extends cc.Component {
     _conf = null;
 
     onShow(data?) {
+
         if (!data) {
             data = this._curData;
         }
+
         this._curData = data;
+
         this._conf = JSON.parse(data.conf);
 
         this.title.string = data.title;
@@ -54,6 +57,7 @@ export default class NewClass extends cc.Component {
                 }
             });
         }
+
         this.bms[0].active = false;
         this.bms[1].active = true;
 
@@ -67,6 +71,7 @@ export default class NewClass extends cc.Component {
             this.bms[1].active = true;
             this.bms[0].active = false;
         }
+
         else {
             this.cjs[0].active = true;
             this.cjs[1].active = false;
@@ -78,8 +83,8 @@ export default class NewClass extends cc.Component {
             }
             //有比赛 未报名
             else if (data.status == 1 && flagbm) {
-                this.bms[0].active = true;
-                this.bms[1].active = false;
+                this.bms[0].active = false;
+                this.bms[1].active = true;
             }
             this.ksjs[0].active = true;
             this.ksjs[1].active = false;

@@ -27,15 +27,10 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     startGameNode: cc.Node = null;
 
-    finalLayer: cc.Node = null;  //结算界面
-
-    url = null;
-
 
     onLoad() {
-        //游戏结算
-        GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
-
+        this.initData();
+        this.setColor();
         //同步游戏操作 pk才有
         GlobalEvent.on(EventCfg.UPDATEOTHERPLAYEROPT, this.updateOtherPlayerOpt.bind(this), this);
 
@@ -48,9 +43,6 @@ export default class NewClass extends cc.Component {
             this.selectLine.active = true;
         }
 
-        this.initData();
-
-        this.setColor();
     }
 
     onEnable() {
@@ -62,51 +54,11 @@ export default class NewClass extends cc.Component {
                 this.startGameNode.active = true;
             }
         }
-
-        this.onLoadFinalLayer();
-    }
-
-    //加载结算页
-    onLoadFinalLayer() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        if (GameCfg.GameType == pb.GameType.ShuangMang ||
-            GameCfg.GameType == pb.GameType.ZhiBiao ||
-            GameCfg.GameType == pb.GameType.DingXiang ||
-            GameCfg.GameType == pb.GameType.QiHuo ||
-            GameCfg.GameType == pb.GameType.FenShi) {
-            this.url = 'Prefabs/game/finalLayer';
-        }
-
-        else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
-            this.url = 'Prefabs/game/TjdFinalLayer';
-        }
-
-        else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
-            this.url = 'Prefabs/game/CGSFinalLayer';
-        }
-
-        else if (GameCfg.GameType == pb.GameType.JJ_DuoKong ||
-            GameCfg.GameType == pb.GameType.JJ_PK) {
-            this.url = 'Prefabs/game/PKFinalLayer';
-        }
-
-        else if (GameCfg.JJ_XUNLIAN) {
-            this.url = 'Prefabs/game/lxFinalLayer';
-
-        }
-        LoadUtils.openNode(this.node, this.finalLayer, this.url, 20, (node) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.finalLayer = node;
-            this.finalLayer.active = false;
-        })
     }
 
     protected onDestroy() {
-        GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
         GlobalEvent.off(EventCfg.UPDATEOTHERPLAYEROPT);
-        this.finalLayer = null;
-        LoadUtils.releaseRes(this.url);
         GameCfg.GAMEFUPAN = false;
 
         GameData.CGSConfData = null;
@@ -322,42 +274,6 @@ export default class NewClass extends cc.Component {
     //同步游戏操作
     updateOtherPlayerOpt(opt) {
         UpGameOpt.UpdataOtherPlayerOpt(opt);
-
     }
-
-    //游戏结束
-    GameOver(message) {
-
-        this.finalLayer.active = true;
-
-        if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-
-            if (message) {
-                let handle = this.finalLayer.getComponent('PKFinalHandle');
-                handle.onShow();
-            }
-        }
-        else {
-            setTimeout(() => {
-
-                if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
-
-                    this.finalLayer.getComponent('CGSFinalHandle').onShow();
-                }
-                else {
-
-                    if (GameCfg.JJ_XUNLIAN) {
-
-                        this.finalLayer.getComponent('LXFinalandle').onShow();
-                    }
-                    else {
-
-                        this.finalLayer.getComponent('FinalHandle').onShow();
-                    }
-                }
-            }, 80)
-        }
-    }
-
 
 }

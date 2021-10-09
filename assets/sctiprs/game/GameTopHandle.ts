@@ -409,7 +409,9 @@ export default class NewClass extends cc.Component {
                         GlobalEvent.emit(EventCfg.GAMEOVEER);
                     } else {
                         PopupManager.LoadTipsBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
+
                             GlobalEvent.emit(EventCfg.GAMEOVEER);
+
                         })
                     }
                 }

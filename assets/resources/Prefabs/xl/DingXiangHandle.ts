@@ -132,13 +132,15 @@ export default class NewClass extends cc.Component {
 			})
 		}
 		GameData.DXSet.search = '随机选股';
+
+		GlobalEvent.on(EventCfg.GMAECOUNTERSCHANGE, this.onGameCountSow.bind(this), this);
 	}
 
-	onEnable() {
+	onDestroy() {
+		GlobalEvent.off(EventCfg.GMAECOUNTERSCHANGE);
+	}
 
-		this.tipsLabel1.node.active = false;
-		this.tipsLabel2.node.active = false;
-
+	onGameCountSow() {
 		let gameCount = EnterGameControl.onCurDXIsEnterGame();
 
 		if (gameCount.status == 0) {
@@ -163,6 +165,15 @@ export default class NewClass extends cc.Component {
 			this.tipsLabel2.string = '开启VIP或解锁该功能取消次数限制';
 			this.curState = 3;
 		}
+	}
+
+
+	onEnable() {
+
+		this.tipsLabel1.node.active = false;
+		this.tipsLabel2.node.active = false;
+
+		this.onGameCountSow();
 
 		this.onShow();
 	}
