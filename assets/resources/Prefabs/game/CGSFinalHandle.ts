@@ -45,14 +45,17 @@ export default class NewClass extends cc.Component {
     flag = false;
 
     onLoad() {
+
         GlobalEvent.on(EventCfg.LEVELCHANGE, () => {
             let userLevel = this.player1.getChildByName('userLevel').getComponent(cc.Label);
             userLevel.string = 'LV: ' + GameData.properties[pb.GamePropertyId.Level];
         }, this);
+
         GlobalEvent.on(EventCfg.EXPCHANGE, () => {
             let userExp = this.player1.getChildByName('userExp').getComponent(cc.Label);
             userExp.string = 'EXP: ' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
         }, this);
+
     }
 
 
@@ -64,10 +67,11 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.emit(EventCfg.CLEARINTERVAL);
 
-        let player = GameCfg.RoomGameData.players[0];
+        let player = JSON.parse(ComUtils.stringify(GameCfg.RoomGameData.players[0]));
+
         console.log(player);
 
-        GameCfg.RoomGameData.players.unshift(player);
+        GameCfg.RoomGameData.players[1] = player;
 
         let gpData = GameCfg.data[0].data;
 
@@ -81,7 +85,7 @@ export default class NewClass extends cc.Component {
 
         this.HasRisen && (this.HasRisen.string = rate + '%')
 
-        if (parseInt(rate) < 0) {
+        if (parseInt(rate + '') < 0) {
             this.HasRisen.node.color = cc.Color.GREEN;
         } else {
             this.HasRisen.node.color = cc.Color.RED;
@@ -137,23 +141,27 @@ export default class NewClass extends cc.Component {
             if (GameData.Players[1].icon) {
                 userHead.spriteFrame = GameData.Players[1].icon;
             }
+
             let ex;
             let stages = JSON.parse(GameData.CGSConfData.conf);
+
             if (this.selfRank == 1) {
                 loseSp.active = true;
-                ex = GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Exp] + stages.Win[1].v;
+                ex = parseInt(GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Exp]) + stages.Win[1].v;
             }
             else if (this.selfRank == 2) {
                 winSp.active = true;
-                ex = (GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Exp] + stages.Lose[1].v);
+                ex = (parseInt(GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Exp]) + stages.Lose[1].v);
             }
 
             if (ex >= GameCfgText.levelInfoCfg[GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level]]) {
                 ex -= GameCfgText.levelInfoCfg[GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level]];
-                userExp.string = 'EXP: ' + ex + '/' + GameCfgText.levelInfoCfg[GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level] + 1]
-                userLevel.string = 'LV: ' + (GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level] + 1);
+                userExp.string = 'EXP: ' + ex + '/' + GameCfgText.levelInfoCfg[
+                    parseInt(GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level]) + 1]
+                userLevel.string = 'LV: ' + (parseInt(GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level]) + 1);
             } else {
-                userExp.string = 'EXP: ' + ex + '/' + GameCfgText.levelInfoCfg[GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level]]
+                userExp.string = 'EXP: ' + ex + '/' + GameCfgText.levelInfoCfg[
+                    parseInt(GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level])]
             }
         }
 
@@ -175,10 +183,12 @@ export default class NewClass extends cc.Component {
             kStop: GameCfg.huizhidatas - 1,
 
         }
+
         let CmdGameOver = {
             result: datas,
             operations: { items: UpGameOpt.arrOpt, }
         }
+
         GlobalHandle.onCmdGameOverReq(CmdGameOver);
 
         GameCfg.RoomGameData.players[0].result.kFrom = datas.kFrom;
@@ -187,7 +197,6 @@ export default class NewClass extends cc.Component {
     }
 
     onShowResult() {
-
         let stages = JSON.parse(GameData.CGSConfData.conf);
         console.log(JSON.stringify(stages));
         if (this.selfRank == 1) {
@@ -347,8 +356,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.LEAVEGAME);
     }
 
-    onDestroy() {
 
+    onDestroy() {
         UpGameOpt.clearGameOpt();
         LoadUtils.releaseRes('Prefabs/enterXLGame');
         GlobalEvent.off(EventCfg.LEVELCHANGE);

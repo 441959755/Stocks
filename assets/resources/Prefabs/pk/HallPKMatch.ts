@@ -157,7 +157,10 @@ export default class NewClass extends cc.Component {
             socket.send(pb.MessageId.Req_Room_Enter, PB.onReqRoomEnterBuff(data), (res) => {
                 console.log(JSON.stringify(res));
                 if (res.err) {
-                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err.err);
+                    //不是好友房
+                    if (!GameCfg.GAMEWAIT || !GameData.RoomType) {
+                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err.err);
+                    }
                     this.node.active = false;
                 } else {
                     GameData.roomId = res.id;

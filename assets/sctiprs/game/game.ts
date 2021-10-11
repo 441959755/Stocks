@@ -61,8 +61,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.UPDATEOTHERPLAYEROPT);
         GameCfg.GAMEFUPAN = false;
 
-        GameData.CGSConfData = null;
-
         UpGameOpt.clearGameOpt();
 
         GameCfg.GAMEWAIT = false;

@@ -49,6 +49,18 @@ export default class NewClass extends cc.Component {
         else {
             //其他平台登入TODO
         }
+
+        let acc = cc.sys.localStorage.getItem('ACCOUNT');
+
+        if (acc) {
+            this.account.string = acc;
+        }
+
+        let pass = cc.sys.localStorage.getItem('PASSWORD');
+
+        if (pass) {
+            this.password.string = pass;
+        }
     }
 
     onShowNode(node) {
@@ -100,6 +112,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         let uid = this.account.string;
         let pw = this.password.string;
+        cc.sys.localStorage.setItem('ACCOUNT', uid);
+        cc.sys.localStorage.setItem('PASSWORD', pw);
         console.log('登入账号：' + uid);
         llwSDK.login(this.loginResultCallback.bind(this), uid, pw);
     }

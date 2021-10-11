@@ -102,10 +102,13 @@ export default class NewClass extends cc.Component {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, info.err);
                     return;
                 }
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '奖励领取成功');
+
                 this.btnGet.interactable = false;
                 this.btnGet.enableAutoGrayEffect = true;
 
-                GameData.gameData.tasks.daily[this._index].award += parseInt(this.rewardLabel.string);
+                //  GameData.gameData.tasks.daily[this._index].award += parseInt(this.rewardLabel.string);
+                GameData.gameData.tasks.daily[this._index].got += parseInt(this.rewardLabel.string);
                 GlobalEvent.emit('UPDATETASKDATA');
             });
 

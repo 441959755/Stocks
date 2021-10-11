@@ -484,12 +484,11 @@ export default class NewClass extends cc.Component {
             let CmdGameOver = {
                 result: datas,
             }
-
             GlobalHandle.onCmdGameOverReq(CmdGameOver);
         }
 
         //离开游戏
-        GlobalEvent.emit(EventCfg.LEAVEGAME);
+        GlobalEvent.emit(EventCfg.LEAVEGAME, 1);
 
     }
 

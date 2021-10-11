@@ -97,8 +97,18 @@ export default class NewClass extends cc.Component {
 
 
     onEnable() {
-        if (this.confdata) {
 
+        GlobalEvent.on('UPDATEGAMEDATE', () => {
+            setTimeout(() => {
+                if (this.confdata) {
+                    this.onUpShowTimeCount();
+                    this.onUpContent();
+                }
+            }, 1000);
+
+        }, this);
+
+        if (this.confdata) {
             this.onUpShowTimeCount();
             this.onUpContent();
         }
@@ -193,6 +203,7 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         socket.send(pb.MessageId.Req_Game_CgsGetConf, null, (res) => {
+
             console.log('闯关赛配置1' + JSON.stringify(res));
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
@@ -442,6 +453,7 @@ export default class NewClass extends cc.Component {
     onDisable() {
         this.inCall && (clearInterval(this.inCall));
         this.inCall = null;
+        GlobalEvent.off('UPDATEGAMEDATE');
     }
 
     //查询闯关赛排行榜

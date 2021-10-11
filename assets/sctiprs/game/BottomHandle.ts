@@ -435,6 +435,9 @@ export default class NewClass extends cc.Component {
 
 	//游戏复盘操作
 	onGameFUPANOPT(opt) {
+		if (!opt) {
+			return;
+		}
 
 		let pkSelf = this.node.getComponent('PKBottomHandle');
 
@@ -504,7 +507,7 @@ export default class NewClass extends cc.Component {
 		}
 
 		if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) && GameCfg.GAMEFRTD) {
-			GameCfg.huizhidatas = GameCfg.RoomGameData.players[0].curPos;
+			GameCfg.huizhidatas = GameData.selfEnterRoomData.players[0].curPos;
 		}
 		else if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong)) {
 			GameCfg.huizhidatas = this.gpData.length;
@@ -567,9 +570,9 @@ export default class NewClass extends cc.Component {
 		//断线重连的情况
 		if (GameCfg.GAMEFRTD) {
 
-			UpGameOpt.ChanagekOffset(GameCfg.RoomGameData.players[0].ops.items);
+			UpGameOpt.ChanagekOffset(GameData.selfEnterRoomData.players[0].ops.items);
 
-			this.onGameFUPANOPT(GameCfg.RoomGameData.players[0].ops.items);
+			this.onGameFUPANOPT(GameData.selfEnterRoomData.players[0].ops.items);
 		}
 
 		this.setLabelData();

@@ -71,7 +71,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1280,
-      "height": 750
+      "height": 720
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -83,7 +83,7 @@
       "ctor": "Float64Array",
       "array": [
         640,
-        375,
+        360,
         0,
         0,
         0,
@@ -160,7 +160,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1280,
-      "height": 115
+      "height": 100
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -172,7 +172,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        317.5,
+        310,
         0,
         0,
         0,
@@ -6537,7 +6537,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 250,
-      "height": 115
+      "height": 100
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -6608,7 +6608,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 200,
-      "height": 115
+      "height": 100
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -10940,7 +10940,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1280,
-      "height": 499.9999999999999
+      "height": 469.9999999999999
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -20194,7 +20194,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1280,
-      "height": 750
+      "height": 720
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -27886,7 +27886,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1280,
-      "height": 115
+      "height": 100
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -27898,7 +27898,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -317.5,
+        -310,
         0,
         0,
         0,
@@ -40282,7 +40282,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1280,
-      "height": 750
+      "height": 720
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",

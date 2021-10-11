@@ -2,6 +2,8 @@
 import { pb } from "../../protos/proto";
 import GameData from "../../sctiprs/GameData";
 import ComUtils from "../../sctiprs/Utils/ComUtils";
+import EventCfg from "../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
 
@@ -64,6 +66,7 @@ export default class NewClass extends cc.Component {
                 console.log('加入房间：' + JSON.stringify(res));
                 if (res.err) {
                     GameData.RoomType = 0;
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err.err);
                 } else {
                     GameData.roomId = res.id;
                     this.node.active = false;

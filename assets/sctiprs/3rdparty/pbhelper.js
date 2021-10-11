@@ -353,14 +353,12 @@ PBHelper.prototype = {
             let RoomGameOp = pb.RoomGameOp;
             let data = RoomGameOp.decode(new Uint8Array(buff));
 
-            let GameOperationItem = pb.GameOperationItem;
+            let GameOperationItem = pb.GameOperations;
             let ops = GameOperationItem.decode(new Uint8Array(data.ops));
+
             if (GameData.userID != data.id) {
                 GlobalEvent.emit(EventCfg.UPDATEOTHERPLAYEROPT, ops);
             }
-
-            console.log('游戏操作' + JSON.stringify(data) + JSON.stringify(ops));
-
         }
 
         //// 游戏结果
@@ -406,7 +404,7 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Sync_S2C_GameCg_GD) {
             let JjGame = pb.JjGame;
             let data = JjGame.decode(new Uint8Array(buff));
-            //  console.log('同步闯关赛游戏数据' + JSON.stringify(data));
+            console.log('同步闯关赛游戏数据' + JSON.stringify(data));
             GlobalEvent.emit(EventCfg.GETCGSDATA, data);
         }
         else if (id == pb.MessageId.Sync_S2C_GameCg) {

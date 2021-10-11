@@ -253,6 +253,9 @@ export default class ComUtils {
 
 	//加载头像
 	public static onLoadHead(name, call) {
+		if (!name) {
+			name = 0;
+		}
 
 		let url = LLWConfig.LOADHEADURL + name + '.png';
 
@@ -345,5 +348,46 @@ export default class ComUtils {
 		}
 		return str;
 	}
+
+	public static getClass(o) { //判断数据类型
+		return Object.prototype.toString.call(o).slice(8, -1);
+	}
+
+	public static deepCopy(obj) {
+
+		var result, oClass = this.getClass(obj);
+
+		if (oClass == "Object") result = {}; //判断传入的如果是对象，继续遍历
+		else if (oClass == "Array") result = []; //判断传入的如果是数组，继续遍历
+		else return obj; //如果是基本数据类型就直接返回
+
+		for (var i in obj) {
+			var copy = obj[i];
+
+			if (this.getClass(copy) == "Object") result[i] = this.deepCopy(copy); //递归方法 ，如果对象继续变量obj[i],下一级还是对象，就obj[i][i]
+			else if (this.getClass(copy) == "Array") result[i] = this.deepCopy(copy); //递归方法 ，如果对象继续数组obj[i],下一级还是数组，就obj[i][i]
+			else result[i] = copy; //基本数据类型则赋值给属性
+		}
+
+		return result;
+	}
+
+	public static stringify(org) {
+		var cache = [];
+		var str = JSON.stringify(org, function (key, value) {
+			if (typeof value === 'object' && value !== null) {
+				if (cache.indexOf(value) !== -1) {
+					// Circular reference found, discard key
+					return;
+				}
+				// Store value in our collection
+				cache.push(value);
+			}
+			return value;
+		});
+		cache = null; // Enable garbage collection
+		return str;
+	}
+
 
 }

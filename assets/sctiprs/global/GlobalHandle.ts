@@ -70,6 +70,7 @@ export default class GlobalHandle {
         socket.send(pb.MessageId.Req_Game_Over, PB.onCmdGameOverConvertToBuff(datas), (info) => {
             console.log('GameOverInfo' + JSON.stringify(info));
         })
+
     }
 
     //获取行情
@@ -342,6 +343,7 @@ export default class GlobalHandle {
 
     //上传房间游戏操作
     public static onUpRoomGameOp(ops) {
+
         if (!ops) { return }
         let GameOperations = pb.GameOperations;
         let data1 = GameOperations.create(ops);

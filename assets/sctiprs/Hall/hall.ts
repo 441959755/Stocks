@@ -85,7 +85,6 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
 
-
 	}
 
 	onDestroy() {
@@ -139,6 +138,7 @@ export default class NewClass extends cc.Component {
 	openTaskLayer() {
 		this.openNode(this.taskLayer, 'Prefabs/taskLayer', 10, (node) => { this.taskLayer = node });
 	}
+
 
 	openOtherHisLayer(data) {
 		this.openNode(this.otherHis, 'Prefabs/otherPlayerHisInfo', 12, (node) => {
@@ -218,6 +218,7 @@ export default class NewClass extends cc.Component {
 			GameData.roomId = GameData.selfEnterRoomData.id;
 
 			if (!GameData.RoomType) {
+
 				GameCfg.GAMEFRTD = true;
 
 				setTimeout(() => {
@@ -235,7 +236,6 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
 			}, 200)
 		}
-
 		//进入房间
 		else if (GameData.roomId) {
 			GlobalEvent.emit(EventCfg.OPENROOM);
@@ -292,17 +292,16 @@ export default class NewClass extends cc.Component {
 	//加载游戏进入
 	onLoadGame() {
 		//游戏结算
-		GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
-
 		this.openNode(this.gameLayer, 'Prefabs/game/gameLayer', 50, (node) => {
 			this.gameLayer = node;
+			GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
 			this.onLoadFinalLayer();
 		});
 	}
 
 	//加载结算页
 	onLoadFinalLayer() {
-
+		console.log('加载结算页');
 		GlobalEvent.emit(EventCfg.LOADINGSHOW);
 		if (GameCfg.GameType == pb.GameType.ShuangMang ||
 			GameCfg.GameType == pb.GameType.ZhiBiao ||
@@ -346,7 +345,6 @@ export default class NewClass extends cc.Component {
 	//离开游戏
 	leaveGame() {
 		this.gameLayer.destroy();
-		LoadUtils.releaseRes('Prefabs/game/gameLayer');
 		this.gameLayer = null;
 		this.finalLayer[this.index].active = false;
 		GameCfg.fill = [];
@@ -358,6 +356,8 @@ export default class NewClass extends cc.Component {
 		GameCfg.GAMEFUPAN = false;
 		StrategyAIData.onClearData();
 		GameCfg.GAMEFUPANDATA = null;
+		//跟新闯关赛数据
+		GlobalEvent.emit('UPDATEGAMEDATE');
 	}
 
 	//游戏结束

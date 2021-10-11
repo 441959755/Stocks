@@ -1,5 +1,6 @@
 import { pb } from "../../protos/proto";
 import GameCfg from "../game/GameCfg";
+import GameData from "../GameData";
 import GlobalHandle from "./GlobalHandle";
 
 export default class UpGameOpt {
@@ -26,11 +27,11 @@ export default class UpGameOpt {
     public static addOpt(el) {
         if (!el) { return }
 
-        if (GameCfg.GAMEFRTD && GameCfg.RoomGameData.players[0].ops.items.length > 0) {
+        if (GameCfg.GAMEFRTD && GameData.selfEnterRoomData.players[0].ops.items.length > 0) {
 
-            let le = GameCfg.RoomGameData.players[0].ops.items.length - 1;
+            let le = GameData.selfEnterRoomData.players[0].ops.items.length - 1;
 
-            if (el.kOffset <= GameCfg.RoomGameData.players[0].ops.items[le].kOffset) {
+            if (el.kOffset <= GameData.selfEnterRoomData.players[0].ops.items[le].kOffset) {
                 return;
             }
         }
@@ -104,15 +105,28 @@ export default class UpGameOpt {
 
     //kOffset
     public static ChanagekOffset(item) {
-        item.forEach(el => {
-            el.kOffset += 1;
-        });
+        if (!item) { return }
+        if (Object.prototype.toString.call(item).slice(8, -1) == "Array") {
+            item.forEach(el => {
+                el.kOffset += 1;
+            });
+        }
+        else {
+            item.kOffset += 1;
+        }
     }
 
     public static UpdataOtherPlayerOpt(opt) {
-        let obj = opt;
-        obj.kOffset += 1;
-        this.player2Opt.push(obj);
+        if (Object.prototype.toString.call(opt.items).slice(8, -1) == "Array") {
+            opt.items.forEach(el => {
+                el.kOffset += 1;
+                this.player2Opt.push(el);
+            });
+        }
+        else {
+            opt.kOffset += 1;
+            this.player2Opt.push(opt);
+        }
         console.log('player2Opt:' + JSON.stringify(this.player2Opt));
     }
 }

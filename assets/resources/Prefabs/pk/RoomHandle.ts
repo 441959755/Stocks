@@ -73,6 +73,16 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.ROOMLEAVE, this.RoomLeave.bind(this), this);
 
         GlobalEvent.on(EventCfg.RoomGameStatus, () => { this.enterRoom = true }, this);
+
+        GlobalEvent.on(EventCfg.LEAVEGAME, (flag) => {
+
+            this.enterRoom = false;
+            //已逃跑
+            if (flag) {
+                this.node.active = false;
+            }
+
+        }, this);
     }
 
     onDestroy() {
@@ -82,6 +92,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.ROOMLEAVE);
         GlobalEvent.off(EventCfg.RoomGameStatus);
         GlobalEvent.off(EventCfg.ROOMOLAYERSTATUS);
+        GlobalEvent.off(EventCfg.LEAVEGAME);
     }
 
     RoomLeave(data) {
@@ -113,18 +124,19 @@ export default class NewClass extends cc.Component {
             GameData.RoomType = 0;
             GameData.roomId = 0;
             this.node.active = false;
-            GameCfg.GameType = null;
+            //  GameCfg.GameType = null;
         }
     }
 
     onRoomGameStatus(data) {
-        console.log('游戏状态' + JSON.stringify(data));
+        this.enterGameAnim.on('finished', () => {
+
+            console.log('enterGameAnim');
+            GlobalEvent.emit('LOADGAME');
+
+        }, this);
 
         this.enterGameAnim && (this.enterGameAnim.play());
-
-        // setTimeout(() => {
-        //     GlobalEvent.emit('LOADGAME');
-        // }, 500)
     }
 
     onEnable() {
@@ -143,6 +155,18 @@ export default class NewClass extends cc.Component {
 
         this.kaishiBtn.getComponent(cc.Button).interactable = false;
         this.kaishiBtn.getComponent(cc.Button).enableAutoGrayEffect = true;
+
+        GlobalEvent.on('UPDATEGAMEDATE', () => {
+            setTimeout(() => {
+                this.onShow();
+            }, 1000);
+            if (GameData.RoomType == 2) {
+                this.qxzbBtn.active = false;
+                this.jj_zb.active = true;
+            }
+        }, this);
+
+
 
         this.onShow();
     }
@@ -332,7 +356,6 @@ export default class NewClass extends cc.Component {
         }
     }
 
-
     onDisable() {
         let node = this.jj_zxyq.children[0];
         let timeLabel = this.jj_zxyq.children[1].getComponent(cc.Label);
@@ -341,5 +364,6 @@ export default class NewClass extends cc.Component {
         this.cb = null;
         node.active = false;
         timeLabel.string = '';
+        GlobalEvent.off('UPDATEGAMEDATE');
     }
 }
