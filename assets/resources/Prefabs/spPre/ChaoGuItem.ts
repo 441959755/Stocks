@@ -79,12 +79,19 @@ export default class NewClass extends cc.Component {
             if (data.status == 1 && !flagbm) {
                 this.cjs[0].active = false;
                 this.cjs[1].active = true;
-
             }
             //有比赛 未报名
             else if (data.status == 1 && flagbm) {
-                this.bms[0].active = false;
-                this.bms[1].active = true;
+                //是否结束报名
+                if (new Date().getTime() / 100 > data.regTo) {
+                    this.bms[0].active = false;
+                    this.bms[1].active = true;
+                }
+                else {
+                    this.bms[1].active = false;
+                    this.bms[0].active = true;
+                }
+
             }
             this.ksjs[0].active = true;
             this.ksjs[1].active = false;

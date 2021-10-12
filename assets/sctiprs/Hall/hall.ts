@@ -344,9 +344,9 @@ export default class NewClass extends cc.Component {
 
 	//离开游戏
 	leaveGame() {
-		this.gameLayer.destroy();
+		this.gameLayer && (this.gameLayer.destroy());
 		this.gameLayer = null;
-		this.finalLayer[this.index].active = false;
+		this.finalLayer[this.index] && (this.finalLayer[this.index].active = false);
 		GameCfg.fill = [];
 		GameCfg.mark = [];
 		GameCfg.notice = [];
@@ -404,7 +404,6 @@ export default class NewClass extends cc.Component {
 			//游戏行情获取
 			GlobalHandle.onCmdGameStartQuoteQueryQH(data, cb);
 		})
-
 	}
 
 	openNode(node, url, zIndex, call?) {
@@ -423,7 +422,6 @@ export default class NewClass extends cc.Component {
 				node.active = true;
 				this.isLoading = false;
 				call(node);
-
 			})
 		}
 		else {
@@ -431,7 +429,6 @@ export default class NewClass extends cc.Component {
 			this.isLoading = false;
 			call(node);
 		}
-
 	}
 
 }

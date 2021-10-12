@@ -22,8 +22,10 @@ export default class NewClass extends cc.Component {
         this.labels[1].string = code;
 
         let time = data.orderId * 1000;
-        this.labels[2].string = new Date(time).toLocaleDateString();
-        this.labels[3].string = new Date(time).toLocaleTimeString();
+        let ts = ComUtils.getYMDHMS(time);
+
+        this.labels[2].string = ts.year + '/' + ts.month + '/' + ts.date;
+        this.labels[3].string = ts.hours + ':' + ts.minute + ':' + ts.second;
 
         this.labels[4].string = ComUtils.changeTwoDecimal(data.price) + '';
 

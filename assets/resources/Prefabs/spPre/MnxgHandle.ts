@@ -138,6 +138,11 @@ export default class NewClass extends cc.Component {
         UIScrollControl.clear();
         if (arr.length > 0) {
 
+            UIScrollControl.initControl(this.item1, arr.length, this.item1.getContentSize(), 0, (node, index) => {
+                let handle = node.getComponent('MnxgItem');
+                handle.onShow(arr[index], this._curArr[arr[index] + '']);
+            })
+
             arr.forEach(el => {
                 let info1 = {
                     ktype: pb.KType.Min,
@@ -150,16 +155,9 @@ export default class NewClass extends cc.Component {
                 socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
             })
 
-
-            UIScrollControl.initControl(this.item1, arr.length, this.item1.getContentSize(), 0, (node, index) => {
-                let handle = node.getComponent('MnxgItem');
-                handle.onShow(arr[index], this._curArr[arr[index] + '']);
-            })
-
             this.tipsNode.active = false;
         }
         else {
-
             this.tipsNode.active = true;
         }
 
@@ -169,7 +167,6 @@ export default class NewClass extends cc.Component {
     onShow(data?) {
 
         if (data) {
-
             GameData.SpStockData = data;
             GameCfg.GameType = pb.GameType.ChaoGuDaSai;
             this.dhzc.active = false;
@@ -319,18 +316,18 @@ export default class NewClass extends cc.Component {
         }
 
         arr2 = [];
-        // if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
-        //     arr2 = GameData.mncgDataList.positionList.items;
-        // }
-        // else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
-        //     GameData.cgdsStateList.forEach(el => {
-        //         if (el.id == GameData.SpStockData.id) {
-        //             if (el.state.positionList && el.state.positionList.items) {
-        //                 arr2 = el.state.positionList.items;
-        //             }
-        //         }
-        //     })
-        // }
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+            arr2 = GameData.mncgDataList.positionList.items;
+        }
+        else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+            GameData.cgdsStateList.forEach(el => {
+                if (el.id == GameData.SpStockData.id) {
+                    if (el.state.positionList && el.state.positionList.items) {
+                        arr2 = el.state.positionList.items;
+                    }
+                }
+            })
+        }
         let arr = [];
         arr2.forEach(el => {
             if (el.code) {

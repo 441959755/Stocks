@@ -1,8 +1,14 @@
 
-import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
-import GameData from '../../../sctiprs/GameData';
-import GameCfg from "../../../sctiprs/game/GameCfg";
-import { pb } from "../../../protos/proto";
+// import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+// import GameData from '../../../sctiprs/GameData';
+// import GameCfg from "../../../sctiprs/game/GameCfg";
+
+import { pb } from "../../protos/proto";
+import GameCfg from "../../sctiprs/game/GameCfg";
+import GameData from "../../sctiprs/GameData";
+import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
+
+// import { pb } from "../../../protos/proto";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -38,6 +44,7 @@ export default class NewClass extends cc.Component {
     }
 
     protected onDisable() {
+
         GlobalEvent.off('ItemValue');
     }
 
@@ -58,12 +65,8 @@ export default class NewClass extends cc.Component {
     initToggle() {
         let data;
 
-        if (GameCfg.GameType == pb.GameType.ShuangMang) {
-            data = GameData.SMSet;
-        }
-        else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
-            data = GameData.TJDSet;
-        }
+
+        data = GameData.SMSet;
 
         this.showVol[0].isChecked = data.isShowVol;
         this.showVol[1].isChecked = !data.isShowVol;

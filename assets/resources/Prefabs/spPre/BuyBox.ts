@@ -57,7 +57,7 @@ export default class NewClass extends cc.Component {
         this.mrslLabel.string = '0';
 
         if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
-            this.kyzc = GameData.mncgDataList.account;
+            this.kyzc = GameData.mncgDataList.account / 2;
 
             if (GameData.mncgDataList.orderList && GameData.mncgDataList.orderList.items) {
                 GameData.mncgDataList.orderList.items.forEach(el => {
@@ -73,7 +73,7 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
             GameData.cgdsStateList.forEach(el => {
                 if (el.id == GameData.SpStockData.id) {
-                    this.kyzc = el.state.account;
+                    this.kyzc = el.state.account / 2;
 
                     if (el.state.orderList && el.state.orderList.items) {
                         el.state.orderList.items.forEach(el1 => {

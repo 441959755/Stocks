@@ -24,13 +24,17 @@ export default class NewClass extends cc.Component {
         this.labels[1].string = code;
 
         let time = data.ts * 1000;
-        this.labels[2].string = new Date(time).toLocaleDateString();
-        this.labels[3].string = new Date(time).toLocaleTimeString();
+
+        let ts = ComUtils.getYMDHMS(time);
+
+        this.labels[2].string = ts.year + '/' + ts.month + '/' + ts.date;
+        this.labels[3].string = ts.hours + ':' + ts.minute + ':' + ts.second;
 
         this.labels[4].string = ComUtils.changeTwoDecimal(data.price) + '';
         this.labels[5].string = ComUtils.changeTwoDecimal(data.volume) + '';
         //  this.labels[6].string = data.volume;
         this.labels[6].string = ComUtils.changeTwoDecimal(data.price * data.volume) + '';
+
         if (data.type == pb.OrderType.AskLimit || data.type == pb.OrderType.AskMarket) {
             this.labels[7].string = '买入';
         }
@@ -38,6 +42,5 @@ export default class NewClass extends cc.Component {
             this.labels[7].string = '卖出';
         }
     }
-
 
 }

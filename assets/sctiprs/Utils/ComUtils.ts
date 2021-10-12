@@ -168,7 +168,6 @@ export default class ComUtils {
 	}
 
 
-
 	//保存缓存
 	public static saveHistory(code) {
 
@@ -293,13 +292,12 @@ export default class ComUtils {
 		let str;
 		str = parseInt(number);
 		if (number >= 100000000) {
-			str = parseInt(this.changeTwoDecimal(number / 100000000) + '') + '亿';
+			str = (this.changeTwoDecimal(number / 100000000) + '') + '亿';
 		}
 		else if (number >= 10000) {
-			str = parseInt(this.changeTwoDecimal(number / 10000) + '') + '万';
+			str = (this.changeTwoDecimal(number / 10000) + '') + '万';
 		}
 		return str;
-
 	}
 
 	/**
@@ -389,5 +387,30 @@ export default class ComUtils {
 		return str;
 	}
 
+
+	public static getYMDHMS(time) {
+		time = new Date(time);
+		var year = time.getFullYear(),
+			month = time.getMonth() + 1,
+			date = time.getDate(),
+			hours = time.getHours(),
+			minute = time.getMinutes(),
+			second = time.getSeconds();
+
+		if (month < 10) { month = '0' + month; }
+		if (date < 10) { date = '0' + date; }
+		if (hours < 10) { hours = '0' + hours; }
+		if (minute < 10) { minute = '0' + minute; }
+		if (second < 10) { second = '0' + second; }
+
+		return {
+			year: year,
+			month: month,
+			date: date,
+			hours: hours,
+			minute: minute,
+			second: second
+		}
+	}
 
 }

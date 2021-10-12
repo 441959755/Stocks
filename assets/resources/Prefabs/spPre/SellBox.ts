@@ -43,7 +43,7 @@ export default class NewClass extends cc.Component {
         this.codeLabal.string = code;
         this.nameLabel.string = this.curData.name;
 
-        this.mcjgLabel.string = this.curData.price;
+        this.mcjgLabel.string = ComUtils.changeTwoDecimal(this.curData.price) + '';
         this.mcslLabel.string = '0';
 
         if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {

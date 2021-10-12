@@ -47,6 +47,14 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENMNCDLAYER, this.openMnCDLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENCGDS, this.openCgdsLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENCGDSPH, this.openCgdsph.bind(this), this);
+        GlobalEvent.on('LOADGAME', this.onLoadGame.bind(this), this);
+    }
+
+    onLoadGame() {
+        console.log('进入训练');
+        this.node.children.forEach(el => {
+            el.active = false;
+        })
     }
 
     openCgdsph(id) {

@@ -15,6 +15,8 @@ export default class PopupManager {
 
     private static protocol: cc.Node = null;
 
+    private static isLoading = false;
+
     public static init() {
         GlobalEvent.on(EventCfg.LOADINGSHOW, this.loadloading.bind(this), this);
         GlobalEvent.on(EventCfg.LOADINGHIDE, () => { this.loading && (this.loading.active = false) }, this);
@@ -149,6 +151,32 @@ export default class PopupManager {
         LoadUtils.releaseRes('Prefabs/otherPlayerInfo');
         GlobalEvent.off('openProtocol');
         LoadUtils.releaseRes('Prefabs/playeInfo/protocol');
+    }
+
+
+    public static openNode(prent, childen, url, zIndex, call?) {
+        if (!this.isLoading) {
+            this.isLoading = true;
+        }
+        else {
+            return;
+        }
+        if (!childen) {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            LoadUtils.loadRes(url, pre => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                childen = cc.instantiate(pre);
+                prent.addChild(childen, zIndex);
+                childen.active = true;
+                this.isLoading = false;
+                call(childen);
+            })
+        }
+        else {
+            childen.active = true;
+            this.isLoading = false;
+            call(childen);
+        }
     }
 
 }

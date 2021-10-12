@@ -19,6 +19,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     codename: cc.Label = null;
 
+    @property(cc.Label)
+    tipsLabel: cc.Label = null;
+
     code = null;
     gpList = null;
     name = null;
@@ -42,6 +45,8 @@ export default class NewClass extends cc.Component {
             this.codename.string = code + '     ' + this.name;
 
         }
+
+        this.tipsLabel.string = '训练费用：' + Math.abs(GameCfgText.gameTextCfg.dxxl.cost[0].v) + '金币（vip是0金币）';
     }
 
     onShow(code, name, list) {
@@ -122,6 +127,7 @@ export default class NewClass extends cc.Component {
             }
 
             else {
+
                 GameCfg.GameType = pb.GameType.DingXiang;
 
                 GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
@@ -138,62 +144,83 @@ export default class NewClass extends cc.Component {
 
                 GameCfg.data[0].circulate = items[4];
 
-                this.gpList.forEach((el, index) => {
+                // this.gpList.forEach((el, index) => {
 
-                    let data = {
-                        day: el.timestamp + '',
-                        open: el.open || 0,
-                        close: el.price || 0,
-                        high: el.high || 0,
-                        low: el.low || 0,
-                        price: el.amount || 0,
-                        value: el.volume || 0,
-                        Rate: (el.volume / GameCfg.data[0].circulate) * 100,
-                    }
-                    if (GameCfg.data[0].circulate == 0) {
-                        data.Rate = 1;
-                    }
-                    GameCfg.data[0].data.push(data);
-                })
+                //     let data = {
+                //         day: el.timestamp + '',
+                //         open: el.open || 0,
+                //         close: el.price || 0,
+                //         high: el.high || 0,
+                //         low: el.low || 0,
+                //         price: el.amount || 0,
+                //         value: el.volume || 0,
+                //         Rate: (el.volume / GameCfg.data[0].circulate) * 100,
+                //     }
+                //     if (GameCfg.data[0].circulate == 0) {
+                //         data.Rate = 1;
+                //     }
+                //     GameCfg.data[0].data.push(data);
+                // })
 
                 data = {
                     ktype: pb.KType.Day,
                     kstyle: pb.KStyle.Random,
-                    from: this.gpList[0].timestamp,
+                    //  from: this.gpList[0].timestamp,
                     code: this.code,
                     total: 250,
-                    to: 0,
+                    to: this.gpList[this.gpList.length - 1].timestamp,
                     reserve: 100,
                 }
+                console.log(data);
+                GameCfg.enterGameCache = data;
+
+                GameCfg.GameType = pb.GameType.DingXiang;
+
+                GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
 
                 GameCfg.GameSet.search = data.code;
                 GameCfg.GameSet.year = data.from;
 
-                if (this.gpList.length > 100) {
-                    GameCfg.huizhidatas = this.gpList.length - 100;
-                    GameData.huizhidatas = this.gpList.length - 100;
-                }
-                else {
-                    GameCfg.huizhidatas = parseInt(this.gpList.length / 2 + '');
-                    GameData.huizhidatas = parseInt(this.gpList.length / 2 + '');
-                }
+                GameCfg.GameSet.year = (data.from + '').slice(0, 4);
 
-                GameCfg.enterGameCache = data;
+                GameCfg.GameSet.search = data.code;
+                GameCfg.data[0].data = [];
+                GameCfg.data[0].name = this.name;
 
-                GameCfg.allRate = 0;
-                GameCfg.finalfund = 0;
-                GameCfg.fill = [];
-                GameCfg.blockHistoy = [];
-                GameCfg.mark = [];
-                GameCfg.notice = [];
-                GameCfg.history.allRate = 0;
-                StrategyAIData.onClearData();
-                GlobalHandle.onCmdGameStartReq(() => {
-                    GlobalEvent.emit('LOADGAME');
-                });
+                GameCfg.data[0].code = this.code;
 
+                GameCfg.data[0].circulate = items[4];
+
+                EnterGameControl.onClearPreGameDataEnter(data);
+
+                // GameCfg.GameSet.search = data.code;
+                // GameCfg.GameSet.year = data.from;
+
+                // if (this.gpList.length > 100) {
+                //     GameCfg.huizhidatas = this.gpList.length - 100;
+                //     GameData.huizhidatas = this.gpList.length - 100;
+                // }
+                // else {
+                //     GameCfg.huizhidatas = parseInt(this.gpList.length / 2 + '');
+                //     GameData.huizhidatas = parseInt(this.gpList.length / 2 + '');
+                // }
+
+                // GameCfg.enterGameCache = data;
+
+                // GameCfg.allRate = 0;
+                // GameCfg.finalfund = 0;
+                // GameCfg.fill = [];
+                // GameCfg.blockHistoy = [];
+                // GameCfg.mark = [];
+                // GameCfg.notice = [];
+                // GameCfg.history.allRate = 0;
+                // StrategyAIData.onClearData();
+                // GlobalHandle.onCmdGameStartReq(() => {
+                //     GlobalEvent.emit('LOADGAME');
+                // });
 
             }
+            this.node.active = false;
 
         }
     }

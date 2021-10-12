@@ -66,6 +66,17 @@ export default class EnterGameControl {
             GameCfg.history.allRate = 0;
             StrategyAIData.onClearData();
 
+            if (GameCfg.data[0].data.length - 100 > 0) {
+                GameCfg.huizhidatas = GameCfg.data[0].data.length - 100;
+                GameData.huizhidatas = GameCfg.data[0].data.length - 100;
+            }
+            else {
+                GameCfg.huizhidatas = GameCfg.data[0].data.length / 2;
+                GameData.huizhidatas = GameCfg.data[0].data.length / 2;
+            }
+
+            console.log(GameCfg.huizhidatas + '  ' + GameData.huizhidatas);
+
             GlobalEvent.emit('LOADGAME');
         }
 
