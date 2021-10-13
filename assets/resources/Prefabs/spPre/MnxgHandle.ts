@@ -126,16 +126,39 @@ export default class NewClass extends cc.Component {
         let arr = [];
         if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
             arr = GameData.selfStockList;
+            GameData.mncgDataList.positionList.items && (GameData.mncgDataList.positionList.items.forEach(el => {
+                if (arr.indexOf(el.code) == -1) {
+                    arr.push(el.code);
+                }
+            })
+            )
         }
+
         else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
             GameData.cgdsStockList.forEach(el => {
                 if (el.id == GameData.SpStockData.id) {
                     arr = el.stockList;
                 }
             })
+
+            GameData.cgdsStateList.forEach(el => {
+                if (el.id == GameData.SpStockData.id) {
+                    if (el.state.positionList && el.state.positionList.items) {
+                        // arr = el.state.positionList.items;
+                        el.state.positionList.items.forEach(e => {
+                            if (arr.indexOf(e.code) == -1) {
+                                arr.push(e.code);
+                            }
+                        });
+                    }
+                }
+            })
         }
+
         let UIScrollControl = this.scorllNode.getComponent('UIScrollControl');
+
         UIScrollControl.clear();
+
         if (arr.length > 0) {
 
             UIScrollControl.initControl(this.item1, arr.length, this.item1.getContentSize(), 0, (node, index) => {
@@ -182,7 +205,6 @@ export default class NewClass extends cc.Component {
 
         let shen = 1399001;
         let lu = '1';
-        this.onAddZx();
 
         //初始资产数据
         this.onUpdateMycgData();
@@ -204,6 +226,7 @@ export default class NewClass extends cc.Component {
             else if (this._curArr[info.items[0].code + '']) {
                 this._curArr[info.items[0].code + ''] = info.items[0];
                 GlobalEvent.emit('UPDATEITEMDATA', info.items[0]);
+
                 this.onUptateCCAsset(info.items[0]);
             }
 
@@ -229,8 +252,7 @@ export default class NewClass extends cc.Component {
             console.log('订阅时时行情' + JSON.stringify(this._curArr));
         }, this);
 
-        //订阅
-        this.CmdQuoteSubscribe(true);
+        this.onAddZx();
 
         //获取行情
         {
@@ -380,6 +402,7 @@ export default class NewClass extends cc.Component {
         this._curArr = {};
         this.content1.removeAllChildren();
         this.content2.removeAllChildren();
+        GlobalEvent.off('UPDATEITEMDATA');
     }
 
 

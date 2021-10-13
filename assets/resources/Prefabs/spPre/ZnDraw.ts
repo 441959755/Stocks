@@ -143,21 +143,15 @@ export default class NewClass extends cc.Component {
                 let m1 = m >= 10 ? m : '0' + m;
                 time = h1 + ':' + m1;
                 arr = this.gpDataMin;
-                let preData;
-                if (this.gpDataDay[this.gpDataDay.length - 1].timestamp < ComUtils.getCurYearMonthDay()) {
-                    preData = this.gpDataDay[this.gpDataDay.length - 1];
-                }
-                else {
-                    preData = this.gpDataDay[this.gpDataDay.length - 2];
-                }
+
 
                 kp = ComUtils.changeTwoDecimal(arr[index].open);
                 cjl = ComUtils.numberConvertUnit(parseInt(arr[index].volume / 100 + '')) + '手';
                 cje = ComUtils.numberConvertUnit(arr[index].amount);
 
                 let jg = ComUtils.changeTwoDecimal(this.gpDataMin[index].amount / this.gpDataMin[index].volume);
-                zd = ComUtils.changeTwoDecimal(arr[index].price - preData.close);
-                let zdf = ComUtils.changeTwoDecimal(zd / preData.close * 100);
+                zd = ComUtils.changeTwoDecimal(arr[index].price - arr[index].close);
+                let zdf = ComUtils.changeTwoDecimal(zd / arr[index].close * 100);
 
                 this.uLabel.string = time + '    ' + '价格： ' + (kp) + '    ' + '均价：' + jg + '    ' + '涨跌额：' + zd + '    ' + '涨跌幅：' + zdf + '%    ' + '成交量：' + cjl + '    ' + '成交额：' + cje;
                 return;
@@ -294,9 +288,11 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-        //同步行情
-        GlobalEvent.on(EventCfg.SYNCQUOTEITEM, (data) => {
 
+        GlobalEvent.on(EventCfg.SYNCQUOTEITEM, (data) => {
+            //同步行情
+            console.log('同步行情');
+            console.log('')
             if (data.code == this.code) {
                 //同步时 把以前的数据清掉
                 if (!this.isSync) {
@@ -345,6 +341,7 @@ export default class NewClass extends cc.Component {
                     this.setBoxLabel(data);
                     this.setCurLabelData();
                 }
+
                 this.onShowCgData();
             }
         }, this);
@@ -414,35 +411,35 @@ export default class NewClass extends cc.Component {
         let zs = this.gpDataDay[this.gpDataDay.length - 1].close;
         this.t_label.forEach((el, index) => {
 
-            el.string = ComUtils.changeTwoDecimal(info.ask5Price[index]);
-
-            if (info.ask5Price[index] > zs) {
-                el.node.color = cc.Color.RED;
-            }
-            else if (info.ask5Price[index] < zs) {
-                el.node.color = cc.Color.GREEN;
-            }
-            else {
-                el.node.color = cc.Color.WHITE;
-            }
-
-            this.t_labelv[index].string = parseInt(info.ask5Volume[index] / 100 + '');
-
-            this.d_label[index].string = ComUtils.changeTwoDecimal(info.bid5Price[index]);
+            this.d_label[index].string = ComUtils.changeTwoDecimal(info.ask5Price[index]);
 
             if (info.bid5Price[index] > zs) {
                 this.d_label[index].node.color = cc.Color.RED;
             }
-
             else if (info.bid5Price[index] < zs) {
                 this.d_label[index].node.color = cc.Color.GREEN;
             }
-
             else {
                 this.d_label[index].node.color = cc.Color.WHITE;
             }
 
-            this.d_labelv[index].string = parseInt(info.bid5Volume[index] / 100 + '');
+            this.d_labelv[index].string = parseInt(info.ask5Volume[index] / 100 + '');
+
+            el.string = ComUtils.changeTwoDecimal(info.bid5Price[index]);
+
+            if (info.ask5Price[index] > zs) {
+                el.node.color = cc.Color.RED;
+            }
+
+            else if (info.ask5Price[index] < zs) {
+                el.node.color = cc.Color.GREEN;
+            }
+
+            else {
+                el.node.color = cc.Color.WHITE;
+            }
+
+            this.t_labelv[index].string = parseInt(info.bid5Volume[index] / 100 + '');
         })
     }
 
@@ -662,6 +659,7 @@ export default class NewClass extends cc.Component {
 
         socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            console.log('分数据：' + JSON.stringify(info));
             if (!info.items || info.items.length <= 0) {
                 GlobalEvent.emit('clearGraphics');
             }
@@ -756,16 +754,16 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
         let data = this.gpDataMin[this.gpDataMin.length - 1] || this.gpDataDay[this.gpDataDay.length - 1];
         let preData;
-        if (this.gpDataDay[this.gpDataDay.length - 1].timestamp == ComUtils.getCurYearMonthDay()) {
+        // if (this.gpDataDay[this.gpDataDay.length - 1].timestamp == ComUtils.getCurYearMonthDay()) {
 
-        }
-        if (this.gpDataDay[this.gpDataDay.length - 1].timestamp < ComUtils.getCurYearMonthDay()) {
-            preData = this.gpDataDay[this.gpDataDay.length - 1];
-        }
-        else {
-            preData = this.gpDataDay[this.gpDataDay.length - 2];
-        }
-
+        // }
+        // if (this.gpDataDay[this.gpDataDay.length - 1].timestamp < ComUtils.getCurYearMonthDay()) {
+        //     preData = this.gpDataDay[this.gpDataDay.length - 1];
+        // }
+        // else {
+        //     preData = this.gpDataDay[this.gpDataDay.length - 2];
+        // }
+        preData = this.gpDataMin[0];
 
         let items = GameCfgText.getGPPKItemInfo(this.code);
         let code = this.code;
@@ -846,7 +844,7 @@ export default class NewClass extends cc.Component {
                     arr = this.gpDataDay7;
                 }
                 else if (index == 4) {
-                    this.ktype = pb.KType.Day7;
+                    this.ktype = 30;
                     arr = this.gpDataMonth;
                 }
                 this.touchNode.getComponent('ZnxgTouch').ktype = this.ktype;
@@ -869,16 +867,17 @@ export default class NewClass extends cc.Component {
 
                 let mixWidth = 6;
                 let maxWidth = 70;
-
                 let drawWidth = this.drawBox.width;
-
                 GameCfg.hz_width = drawWidth / (GameCfg.beg_end[1] - GameCfg.beg_end[0]);
-
                 if (GameCfg.hz_width > maxWidth) {
                     GameCfg.hz_width = maxWidth;
                 } else if (GameCfg.hz_width < mixWidth) {
                     GameCfg.hz_width = mixWidth;
                 }
+
+                // if (this.ktype == pb.KType.Min) {
+                //     GameCfg.hz_width = this.node.width / 240;
+                // }
 
                 let arr1 = [];
                 arr.forEach((el, index) => {
@@ -1079,7 +1078,10 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'sp_btn_xunlian') {
-
+            if (GameCfg.GameType == 'ZNXG') {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '非vip用户，不能跳转训练该股');
+                return;
+            }
             if (!this.EnterGameLayer) {
 
                 GlobalEvent.emit(EventCfg.LOADINGSHOW);
@@ -1153,17 +1155,14 @@ export default class NewClass extends cc.Component {
         //模拟点击买入
         else if (name == 'sp_btn_mairu') {
             let price;
-            if (this.gpDataMin[this.gpDataMin.length - 1]) {
-                price = this.gpDataMin[this.gpDataMin.length - 1].price;
-            }
 
-            if (!price) {
-                price = this.gpDataDay[this.gpDataDay.length - 1].price;
-            }
+            price = this.gpDataMin[this.gpDataMin.length - 1].price;
+
             let data = {
                 code: this.code,
                 price: price,
                 name: this.name,
+                close: this.gpDataMin[0].close
             }
             GlobalEvent.emit(EventCfg.OPENBUYBOX, data);
         }
@@ -1171,13 +1170,9 @@ export default class NewClass extends cc.Component {
         //模拟点击卖出
         else if (name == 'sp_btn_maichu') {
             let price;
-            if (this.gpDataMin[this.gpDataMin.length - 1]) {
-                price = this.gpDataMin[this.gpDataMin.length - 1].price;
-            }
 
-            if (!price) {
-                price = this.gpDataDay[this.gpDataDay.length - 1].price;
-            }
+            price = this.gpDataMin[this.gpDataMin.length - 1].price;
+
             let data = {
                 code: this.code,
                 price: price,

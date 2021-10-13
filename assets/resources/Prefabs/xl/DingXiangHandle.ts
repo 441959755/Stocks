@@ -763,8 +763,22 @@ export default class NewClass extends cc.Component {
 		GameCfg.enterGameCache = data;
 
 		GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
-			GameData.huizhidatas = GameCfg.data[0].data.length - (GameData.DXSet.KLine);
-			GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameData.DXSet.KLine);
+			GameData.huizhidatas = 0;
+			GameCfg.huizhidatas = 0;
+			let fm = data.from;
+			while (!GameData.huizhidatas) {
+
+				GameCfg.data[0].data.forEach((el, index) => {
+					if ((el.day).replace(/-/g, '') == fm) {
+						GameData.huizhidatas = index + 1;
+						GameCfg.huizhidatas = index + 1;
+					}
+				})
+
+				if (!GameData.huizhidatas) {
+					fm = (parseInt(fm) - 1) + '';
+				}
+			}
 			GlobalEvent.emit('LOADGAME');
 		});
 	}

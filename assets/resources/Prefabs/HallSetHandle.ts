@@ -3,9 +3,10 @@
 // import GameData from '../../../sctiprs/GameData';
 // import GameCfg from "../../../sctiprs/game/GameCfg";
 
-import { pb } from "../../protos/proto";
-import GameCfg from "../../sctiprs/game/GameCfg";
+// import { pb } from "../../protos/proto";
+// import GameCfg from "../../sctiprs/game/GameCfg";
 import GameData from "../../sctiprs/GameData";
+import AudioUtils from "../../sctiprs/Utils/AudioUtils";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 
 // import { pb } from "../../../protos/proto";
@@ -33,7 +34,10 @@ export default class NewClass extends cc.Component {
     preNode: cc.Node = null;
 
     @property(cc.Node)
-    content: cc.Node = null;;
+    content: cc.Node = null;
+
+    @property([cc.Toggle])
+    soundToggle: cc.Toggle[] = [];
 
     _Lid = 0;
 
@@ -65,7 +69,6 @@ export default class NewClass extends cc.Component {
     initToggle() {
         let data;
 
-
         data = GameData.SMSet;
 
         this.showVol[0].isChecked = data.isShowVol;
@@ -89,41 +92,48 @@ export default class NewClass extends cc.Component {
 
     //保存设置的数据
     SaveToggle() {
-        let data;
+        GameData.SMSet.isShowVol = this.showVol[0].isChecked ? true : false;
 
-        if (GameCfg.GameType == pb.GameType.ShuangMang) {
-            data = GameData.SMSet;
-        }
-        else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
-            data = GameData.TJDSet;
-        }
+        GameData.SMSet.isBW = this.BW[0].isChecked ? true : false;
+        GameData.SMSet.isSound = this.soundToggle[0].isChecked ? 1 : 0;
 
-        data.isShowVol = this.showVol[0].isChecked ? true : false;
-        data.isBW = this.BW[0].isChecked ? true : false;
+        GameData.SMSet.isMA1 = this.MAs[0].isChecked ? true : false;
 
-        data.isMA1 = this.MAs[0].isChecked ? true : false;
+        GameData.SMSet.isMA2 = this.MAs[1].isChecked ? true : false;
+        GameData.SMSet.isMA3 = this.MAs[2].isChecked ? true : false;
+        GameData.SMSet.isMA4 = this.MAs[3].isChecked ? true : false;
+        GameData.SMSet.isMA5 = this.MAs[4].isChecked ? true : false;
+        GameData.SMSet.isMA6 = this.MAs[5].isChecked ? true : false;
 
-        data.isMA2 = this.MAs[1].isChecked ? true : false;
-        data.isMA3 = this.MAs[2].isChecked ? true : false;
-        data.isMA4 = this.MAs[3].isChecked ? true : false;
-        data.isMA5 = this.MAs[4].isChecked ? true : false;
-        data.isMA6 = this.MAs[5].isChecked ? true : false;
+        GameData.SMSet.MA1Date = parseInt(this.MaDates[0].string);
+        GameData.SMSet.MA2Date = parseInt(this.MaDates[1].string);
+        GameData.SMSet.MA3Date = parseInt(this.MaDates[2].string);
+        GameData.SMSet.MA4Date = parseInt(this.MaDates[3].string);
+        GameData.SMSet.MA5Date = parseInt(this.MaDates[4].string);
+        GameData.SMSet.MA6Date = parseInt(this.MaDates[5].string);
 
-        data.MA1Date = parseInt(this.MaDates[0].string);
-        data.MA2Date = parseInt(this.MaDates[1].string);
-        data.MA3Date = parseInt(this.MaDates[2].string);
-        data.MA4Date = parseInt(this.MaDates[3].string);
-        data.MA5Date = parseInt(this.MaDates[4].string);
-        data.MA6Date = parseInt(this.MaDates[5].string);
+        let arr = [GameData.DXSet, GameData.ZBSet, GameData.QHSet];
 
-        if (GameCfg.GameType == pb.GameType.ShuangMang) {
-            GameData.SMSet = data;
-        }
+        arr.forEach(el => {
+            el.isShowVol = GameData.SMSet.isShowVol;
+            el.isBW = GameData.SMSet.isBW;
+            el.isSound = GameData.SMSet.isSound;
+            el.isMA1 = GameData.SMSet.isMA1;
+            el.isMA2 = GameData.SMSet.isMA2;
+            el.isMA3 = GameData.SMSet.isMA3;
+            el.isMA4 = GameData.SMSet.isMA4;
+            el.isMA5 = GameData.SMSet.isMA5;
+            el.isMA6 = GameData.SMSet.isMA6;
+            el.MA1Date = GameData.SMSet.MA1Date;
+            el.MA2Date = GameData.SMSet.MA2Date;
+            el.MA3Date = GameData.SMSet.MA3Date;
+            el.MA4Date = GameData.SMSet.MA4Date;
+            el.MA5Date = GameData.SMSet.MA5Date;
+            el.MA6Date = GameData.SMSet.MA6Date;
+        })
 
-        else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
-            GameData.TJDSet = data;
-        }
-
+        AudioUtils.setEffectsVolume(GameData.SMSet.isSound);
+        AudioUtils.setMusicVolume(GameData.SMSet.isSound);
     }
 
     onBtnClick(event, data) {

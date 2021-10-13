@@ -1225,7 +1225,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 456,
+      "width": 294,
       "height": 120
     },
     "_anchorPoint": {
@@ -1308,7 +1308,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -390,
+        -228,
         0,
         0,
         0,
@@ -1609,7 +1609,7 @@
         "__id__": 41
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 45
@@ -2304,7 +2304,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 456,
+      "width": 294,
       "height": 120
     },
     "_resize": 1,

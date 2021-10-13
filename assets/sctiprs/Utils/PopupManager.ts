@@ -87,6 +87,7 @@ export default class PopupManager {
      * 提示文本框
      */
     public static LoadTipsText(content) {
+
         if (!this.tipsText) {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes('Prefabs/tipsText', pre => {

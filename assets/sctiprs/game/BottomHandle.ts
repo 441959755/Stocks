@@ -731,7 +731,7 @@ export default class NewClass extends cc.Component {
 
 				let rate = this.onCurPositionRete(1);
 
-				if (UpGameOpt.player1Opt[UpGameOpt.player1Opt.length - 1].opId == pb.GameOperationId.Short) {
+				if (UpGameOpt.player1Opt[UpGameOpt.player1Opt.length - 1] && UpGameOpt.player1Opt[UpGameOpt.player1Opt.length - 1].opId == pb.GameOperationId.Short) {
 					rate = -rate;
 
 					let item = {
@@ -742,7 +742,7 @@ export default class NewClass extends cc.Component {
 					}
 					UpGameOpt.addOpt(item);
 				}
-				else if (UpGameOpt.player1Opt[UpGameOpt.player1Opt.length - 1].opId == pb.GameOperationId.Ask) {
+				else if (UpGameOpt.player1Opt[UpGameOpt.player1Opt.length - 1] && UpGameOpt.player1Opt[UpGameOpt.player1Opt.length - 1].opId == pb.GameOperationId.Ask) {
 					let item = {
 						opId: pb.GameOperationId.Bid,
 						volume: 1,

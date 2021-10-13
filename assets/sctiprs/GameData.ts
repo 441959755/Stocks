@@ -11,6 +11,7 @@ export default class GameData {
 
     public static AISignal: any = {};
 
+    //缓存账号
     private static _account = null;
 
     public static get account() {
@@ -22,6 +23,7 @@ export default class GameData {
         cc.sys.localStorage.setItem('account', JSON.stringify(val));
     }
 
+    //缓存密码
     private static _password = null;
 
     public static get password() {
@@ -68,11 +70,10 @@ export default class GameData {
         return this._brick;
     }
 
+    //  public static maxExp = null;
 
-
-    public static maxExp = null;
-
-    public static _gender = null;     //性别
+    //性别
+    public static _gender = null;
 
     public static set gender(val) {
         this._gender = val;
@@ -83,8 +84,10 @@ export default class GameData {
         return this._gender;
     }
 
-    public static headimgurl = null; //头像地址
+    //头像地址
+    public static headimgurl = null;
 
+    //头像
     public static _headImg = null;
 
     public static get headImg() {
@@ -95,6 +98,7 @@ export default class GameData {
         GlobalEvent.emit(EventCfg.HEADIMGCHANGE);
     }
 
+    //地区
     private static _location = null;
 
     public static get location() {
@@ -105,22 +109,34 @@ export default class GameData {
         GlobalEvent.emit(EventCfg.LOCALTIONCHANGE);
     }
 
+
+
+    //房间ID
     public static roomId = null;
 
     public static openid = null;
     public static sessionKey = null;
-
-    public static ShuangMang_Gold = null;
+    private static _token;
+    public static get token() {
+        return this._token;
+    }
+    public static set token(val) {
+        this._token = val;
+        cc.sys.localStorage.setItem('token', JSON.stringify(val));
+    }
 
     public static huizhidatas = null;
 
     public static Players = [];
 
-    public static GameCounters = null;  //游戏输赢次数
+    //游戏输赢次数
+    public static GameCounters = null;
 
-    public static todayGameCount = null;  //今日游戏次数
+    //今日游戏次数
+    public static todayGameCount = null;
 
-    private static _SmxlState = null;// 双盲训练状态
+    // 双盲训练状态
+    private static _SmxlState = null;
 
     public static get SmxlState() {
         return this._SmxlState;
@@ -132,17 +148,6 @@ export default class GameData {
     }
 
     public static cgState = null;  //闯关大赛状态
-
-    //SMset
-    private static _token;
-
-    public static get token() {
-        return this._token;
-    }
-    public static set token(val) {
-        this._token = val;
-        cc.sys.localStorage.setItem('token', JSON.stringify(val));
-    }
 
     //SMset
     private static _SMSet;
@@ -228,7 +233,6 @@ export default class GameData {
         GlobalEvent.emit(EventCfg.GOLDCHANGE);
         GlobalEvent.emit(EventCfg.LEVELCHANGE);
         GlobalEvent.emit(EventCfg.EXPCHANGE);
-
     }
 
     //保存选择的股票

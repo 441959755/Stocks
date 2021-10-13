@@ -12,7 +12,7 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, curData) {
         let name = event.target.name;
         if (name == 'xl_topbtn_xlsz') {
-            PopupManager.openNode(this.node, this.setLayer, 'Prefabs/hallSetLayer', 10, (node) => {
+            PopupManager.openNode(this.node.parent, this.setLayer, 'Prefabs/hallSetLayer', 10, (node) => {
                 this.setLayer = node;
             })
         }

@@ -57,7 +57,7 @@ export default class NewClass extends cc.Component {
         this.mrslLabel.string = '0';
 
         if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
-            this.kyzc = GameData.mncgDataList.account / 2;
+            this.kyzc = GameData.mncgDataList.account;
 
             if (GameData.mncgDataList.orderList && GameData.mncgDataList.orderList.items) {
                 GameData.mncgDataList.orderList.items.forEach(el => {
@@ -112,6 +112,41 @@ export default class NewClass extends cc.Component {
         this.cursl = 0;
     }
 
+    isZhangTing(price) {
+
+        let code = this.curData.code + '';
+        if (code.length >= 7) {
+            code = code.slice(1);
+        }
+        let p = 1.1;
+        if (code.slice(0, 2) == '30' || code.slice(0, 3) == '688') {
+            p = 1.2;
+        }
+
+        if ((this.curData.close * p) < price) {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '委托价格不能超过涨停价格！');
+            return false;
+        }
+        return true;
+    }
+
+    isDieTing(price) {
+        let code = this.curData.code + '';
+        if (code.length >= 7) {
+            code = code.slice(1);
+        }
+        let p = 0.8;
+        // if (code.slice(0, 2) == '30' || code.slice(0, 3) == '688') {
+        //     p = 1.2;
+        // }
+
+        if ((this.curData.close * p) > price) {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '委托价格不能低于跌停价格！！');
+            return false;
+        }
+        return true;
+    }
+
     onBtnClick(event) {
         let name = event.target.name;
         if (name == 'closeBtn') {
@@ -120,16 +155,20 @@ export default class NewClass extends cc.Component {
         //当前交易价格  减
         else if (name == 'sp_znxg_sub') {
             if (!this.kmsl) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足，请去兑换资产');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足');
                 return;
             }
+
+
+
+
             this.curData.price -= 0.01;
             this.priceLabel.string = ComUtils.changeTwoDecimal(this.curData.price) + '';
         }
 
         else if (name == 'sp_znxg_add') {
             if (!this.kmsl) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足，请去兑换资产');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足');
                 return;
             }
             this.curData.price += 0.01;
@@ -140,12 +179,12 @@ export default class NewClass extends cc.Component {
         else if (name == 'sp_znxg_subd') {
 
             if (!this.kmsl) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足，请去兑换资产');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足');
                 return;
             }
 
             if (this.cursl > this.kmsl) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足，请去兑换资产');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足');
                 return;
             }
 
@@ -158,12 +197,12 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'sp_znxg_addd') {
             if (!this.kmsl) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足，请去兑换资产');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足');
                 return;
             }
 
             if (this.cursl + 100 > this.kmsl) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足，请去兑换资产');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足');
                 return;
             }
 
@@ -174,7 +213,7 @@ export default class NewClass extends cc.Component {
         //全仓
         else if (name == 'sp_znxg_qc') {
             if (!this.kmsl) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足，请去兑换资产');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足');
                 return;
             }
             this.cursl = this.kmsl;
@@ -183,7 +222,7 @@ export default class NewClass extends cc.Component {
         //1/2
         else if (name == 'sp_znxg_fc1') {
             if (!this.kmsl) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足，请去兑换资产');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足');
                 return;
             }
             if (!this.kmsl) { return };
@@ -195,7 +234,7 @@ export default class NewClass extends cc.Component {
         //1/3
         else if (name == 'sp_znxg_fc2') {
             if (!this.kmsl) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足，请去兑换资产');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足');
                 return;
             }
             if (!this.kmsl) { return };
@@ -206,7 +245,7 @@ export default class NewClass extends cc.Component {
         //1/4
         else if (name == 'sp_znxg_fc3') {
             if (!this.kmsl) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足，请去兑换资产');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足');
                 return;
             }
             if (!this.kmsl) { return };
@@ -216,8 +255,11 @@ export default class NewClass extends cc.Component {
         }
         //买入下单
         else if (name == 'sp_znxg_mrxd') {
+
+            this.curData.price = parseFloat(this.priceLabel.string);
+
             if (!this.kmsl) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足，请去兑换资产');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足');
                 return;
             }
             if (!this.cursl) {
@@ -231,6 +273,12 @@ export default class NewClass extends cc.Component {
                 id = GameData.SpStockData.id;
             }
             this.curData.price = ComUtils.changeTwoDecimal(this.curData.price);
+
+            if (!this.isZhangTing(this.curData.price)) {
+                return;
+            }
+
+
             let info = {
                 code: this.curData.code,
                 type: pb.OrderType.AskLimit,
@@ -249,6 +297,7 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 if (res.orderId) {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '买入下单成功!');
+                    this.node.active = false;
                 }
                 else {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.result.err);

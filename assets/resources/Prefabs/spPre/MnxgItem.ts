@@ -75,10 +75,6 @@ export default class NewClass extends cc.Component {
         this.labs[8].string = ComUtils.changeTwoDecimal(info.low) + '';
     }
 
-    onDestroy() {
-        GlobalEvent.off('UPDATEITEMDATA');
-    }
-
     onBtnClick(event, data) {
         let name = event.target.name;
         //看信号买卖

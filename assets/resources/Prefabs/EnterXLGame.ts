@@ -56,9 +56,21 @@ export default class NewClass extends cc.Component {
             code = this.code.slice(1);
         }
         this.gpList = list;
+
         this.xlname.string = '前往定向训练场训练该股票';
         this.codename.string = code + '     ' + name;
         this.name = name;
+
+        if (GameCfg.GameType == 'ZNXG') {
+            this.tipsLabel.string = '非vip用户，不能跳转训练该股';
+        } else {
+            if (GameData.properties[pb.GamePropertyId.Vip]) {
+                this.tipsLabel.string = 'vip用户0金币';
+            }
+            else {
+                this.tipsLabel.string = '500金币';
+            }
+        }
     }
 
 
@@ -69,6 +81,9 @@ export default class NewClass extends cc.Component {
             this.node.active = false;
         }
         else if (name == 'qdBtn') {
+
+
+
             GlobalEvent.emit(EventCfg.LEAVEGAME);
             let gameCount = EnterGameControl.onCurDXIsEnterGame();
             if (gameCount.status == 3) {
@@ -218,7 +233,6 @@ export default class NewClass extends cc.Component {
                 // GlobalHandle.onCmdGameStartReq(() => {
                 //     GlobalEvent.emit('LOADGAME');
                 // });
-
             }
             this.node.active = false;
 

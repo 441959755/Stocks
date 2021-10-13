@@ -1,5 +1,6 @@
 export default {
-    GameType: null,     //双盲 1  指标 2
+
+    GameType: null,     //双盲  指标 
 
     GameSet: null,   //游戏设置
 

@@ -188,6 +188,18 @@ cc.Class({
 				EXPMA: [12, 50],
 				isShowVol: true,
 				isBW: true,
+				isMA1: true,
+				MA1Date: 5,
+				isMA2: true,
+				MA2Date: 10,
+				isMA3: true,
+				MA3Date: 20,
+				isMA4: true,
+				MA4Date: 30,
+				isMA5: true,
+				MA5Date: 60,
+				isMA6: true,
+				MA6Date: 120,
 			}
 			GameData.ZBSet = ZBSet;
 		} else {

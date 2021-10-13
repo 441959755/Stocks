@@ -207,12 +207,18 @@ export default class NewClass extends cc.Component {
         }
         //卖出下单
         else if (name == 'sp_znxg_mrxd') {
+            this.curData.price = parseFloat(this.mcjgLabel.string);
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             let id = 0;
             if (GameData.SpStockData && GameData.SpStockData.id) {
                 id = GameData.SpStockData.id;
             }
             this.curData.price = ComUtils.changeTwoDecimal(this.curData.price);
+
+            if (!this.isDieTing(this.curData.price)) {
+                return;
+            }
+
             let info = {
                 code: this.curData.code,
                 type: pb.OrderType.BidLimit,
@@ -228,11 +234,16 @@ export default class NewClass extends cc.Component {
             let buff = CmdStockOrder.encode(message).finish();
 
             socket.send(pb.MessageId.Req_Game_Order, buff, (res) => {
+
                 console.log('卖出下单应答:' + JSON.stringify(res));
+
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
                 if (res.orderId) {
+
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '卖出下单成功!');
+
+                    this.node.active = false;
                 }
                 else {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.result.err);
@@ -241,6 +252,23 @@ export default class NewClass extends cc.Component {
 
         }
 
+    }
+
+    isDieTing(price) {
+        let code = this.curData.code + '';
+        if (code.length >= 7) {
+            code = code.slice(1);
+        }
+        let p = 0.8;
+        // if (code.slice(0, 2) == '30' || code.slice(0, 3) == '688') {
+        //     p = 1.2;
+        // }
+
+        if ((this.curData.close * p) > price) {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '委托价格不能低于跌停价格！！');
+            return false;
+        }
+        return true;
     }
 
 }

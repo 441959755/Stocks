@@ -35,7 +35,7 @@ Socket.prototype = {
 				GameData.properties = info.data.properties;
 				GameData.SmxlState = info.data.smlxState;
 				GameData.cgState = info.data.cgState;
-				GameCfgText.levelInfoCfg && (GameData.maxExp = GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]])
+				// GameCfgText.levelInfoCfg && (GameData.maxExp = GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]])
 
 				GameData.location = info.data.location || '中国';
 

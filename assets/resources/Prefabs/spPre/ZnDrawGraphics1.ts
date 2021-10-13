@@ -251,8 +251,8 @@ export default class NewClass extends cc.Component {
 
         predifY = this.DIFList[index - 1] / this.maxMACD * bgHeight / 2;//+ bgHeight / 2;
 
-        let difx = 10 + (some * GameCfg.hz_width) + GameCfg.hz_width / 2;
-        let preX = 10 + ((some - 1) * GameCfg.hz_width) + GameCfg.hz_width / 2;
+        let difx = (some * GameCfg.hz_width) + GameCfg.hz_width / 2;
+        let preX = ((some - 1) * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
         if (some > 0) {
             this.drawMACD.strokeColor = GameCfg.DIF_LINE_COL;
@@ -306,9 +306,9 @@ export default class NewClass extends cc.Component {
 
         let bgheight = this.drawKDJ.node.height;
 
-        let x = 10 + (some * GameCfg.hz_width) + GameCfg.hz_width / 2;
+        let x = (some * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
-        let preX = 10 + ((some - 1) * GameCfg.hz_width) + GameCfg.hz_width / 2;
+        let preX = ((some - 1) * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
         let kY = this.Klist[index] / this.maxK * bgheight;
 
@@ -346,8 +346,8 @@ export default class NewClass extends cc.Component {
         this.maxRs6 = 120;
 
         let bgHeight = this.drawRSI.node.height;
-        let RSIX = 10 + (some * GameCfg.hz_width) + GameCfg.hz_width / 2;
-        let preRSIX = 10 + ((some - 1) * GameCfg.hz_width) + GameCfg.hz_width / 2;
+        let RSIX = (some * GameCfg.hz_width) + GameCfg.hz_width / 2;
+        let preRSIX = ((some - 1) * GameCfg.hz_width) + GameCfg.hz_width / 2;
         //RSI6
         if (index >= 6) {
 

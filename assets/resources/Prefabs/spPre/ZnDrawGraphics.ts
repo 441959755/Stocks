@@ -120,20 +120,55 @@ export default class NewClass extends cc.Component {
         if (this.ktype == pb.KType.Min) {
             let arr = ['09:30', '10:30', '11:30/13:00', '14:00', '15:00'];
             this.timelas.forEach((el, index) => {
+                el.node.active = true;
                 el.string = arr[index];
             })
         }
-        else if (this.ktype == pb.KType.Day) {
-            let c = Math.floor((GameCfg.beg_end[1] - GameCfg.beg_end[0]) / 4);
+        else {
+            let c
+            let num = parseInt(this.node.width / GameCfg.hz_width + '');
+            if (GameCfg.beg_end[1] - GameCfg.beg_end[0] < num - 1) {
+                let t = GameCfg.beg_end[1] - GameCfg.beg_end[0];
+                c = Math.floor((num) / 4);
+                this.timelas[4].node.active = false;
+                if (t < c * 3) {
+                    this.timelas[3].node.active = false;
+                }
+                else {
+                    this.timelas[3].node.active = true;
+                }
+                if (t < c * 2) {
+                    this.timelas[2].node.active = false;
+                }
+                else {
+                    this.timelas[2].node.active = true;
+                }
+                if (t < c * 1) {
+                    this.timelas[1].node.active = false;
+                }
+                else {
+                    this.timelas[1].node.active = true;
+                }
+            }
+            else {
+                c = Math.floor((GameCfg.beg_end[1] - GameCfg.beg_end[0]) / 4);
+                this.timelas.forEach((el, index) => {
+                    el.node.active = true;
+                })
+            }
             let arr = [];
             arr[0] = this.viewData[GameCfg.beg_end[0]].day;
-            arr[4] = this.viewData[GameCfg.beg_end[1] - 1].day;
-            arr[1] = this.viewData[GameCfg.beg_end[0] + c].day;
-            arr[2] = this.viewData[GameCfg.beg_end[0] + c * 2].day;
-            arr[3] = this.viewData[GameCfg.beg_end[0] + c * 3].day;
+            this.viewData[GameCfg.beg_end[1] - 1] && (arr[4] = this.viewData[GameCfg.beg_end[1] - 1].day);
+            this.viewData[GameCfg.beg_end[0] + c] && (arr[1] = this.viewData[GameCfg.beg_end[0] + c].day);
+            this.viewData[GameCfg.beg_end[0] + c * 2] && (arr[2] = this.viewData[GameCfg.beg_end[0] + c * 2].day);
+            if (this.viewData[GameCfg.beg_end[0] + c * 3]) {
+                arr[3] = this.viewData[GameCfg.beg_end[0] + c * 3].day;
+            }
+
             this.timelas.forEach((el, index) => {
                 el.string = ComUtils.formatTime(arr[index]);
             })
+
         }
     }
 
@@ -252,10 +287,10 @@ export default class NewClass extends cc.Component {
             if (index >= GameCfg.MAs[i]) {
                 //平均的位置
                 let preMAY = (this.MaList[index - 1][i] - this.bottomValue) / this.disValue * drawBox + initY;
-                let preMAX = 10 + ((index - 1 - GameCfg.beg_end[0]) * GameCfg.hz_width) + GameCfg.hz_width / 2;
+                let preMAX = ((index - 1 - GameCfg.beg_end[0]) * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
                 let MAY = (this.MaList[index][i] - this.bottomValue) / this.disValue * drawBox + initY;
-                let MAX = 10 + ((index - GameCfg.beg_end[0]) * GameCfg.hz_width) + GameCfg.hz_width / 2;
+                let MAX = ((index - GameCfg.beg_end[0]) * GameCfg.hz_width) + GameCfg.hz_width / 2;
 
                 this.drawMA.strokeColor = GameCfg.MAColor[i];
                 this.drawLine(this.drawMA, preMAX, preMAY, MAX, MAY, i);

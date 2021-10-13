@@ -150,7 +150,7 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'sp_znxg_addd') {
             if (this.mrCount + 100 > this.kmCount) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足，请去兑换资产');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您的资产不足');
                 return;
             }
 
