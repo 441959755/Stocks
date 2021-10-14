@@ -191,6 +191,9 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
+
+
+
         //找到更新买1...卖1...label跟新
         this.box3.children.forEach(el => {
             if (el.name == 't_label') {
@@ -352,13 +355,10 @@ export default class NewClass extends cc.Component {
     onShowCgData() {
 
         let price;
-        if (this.gpDataMin[this.gpDataMin.length - 1]) {
-            price = this.gpDataMin[this.gpDataMin.length - 1].price;
-        }
+        if (!this.gpDataMin[this.gpDataMin.length - 1]) { return }
+        price = this.gpDataMin[this.gpDataMin.length - 1].price;
 
-        if (!price) {
-            price = this.gpDataDay[this.gpDataDay.length - 1].price;
-        }
+
 
         let label1 = this.mnLaNode.children[0].getComponent(cc.Label);
         let label2 = this.mnLaNode.children[1].getComponent(cc.Label);
@@ -384,7 +384,7 @@ export default class NewClass extends cc.Component {
         }
         else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
             GameData.cgdsStateList.forEach(el => {
-                if (el.state.positionList.items) {
+                if (el.state.positionList && el.state.positionList.items) {
                     el.state.positionList.items.forEach(element => {
                         if (element.code == this.code) {
                             cjl = element.volume;
@@ -445,6 +445,7 @@ export default class NewClass extends cc.Component {
 
     //每次打开显示
     onShow(code, str) {
+
         //保留绘制宽度
         this.ori_width = this.t_grap_node.parent.width;
         this.now_width = this.t_grap_node.parent.width - this.box3.width - 10;
@@ -517,9 +518,14 @@ export default class NewClass extends cc.Component {
 
         socket.send(pb.MessageId.Req_QueryAiSignal, buff1, (res) => {
             console.log('AI买卖信号：' + JSON.stringify(res));
+            let label3 = this.laNode.getChildByName('label3').getComponent(cc.Label);
+            let label1 = this.laNode.getChildByName('label1').getComponent(cc.Label);
+            let label2 = this.laNode.getChildByName('label2').getComponent(cc.Label);
             let arr = [];
             let price;
             let signals = res.signals;
+
+
             signals.forEach((el, index) => {
                 for (let i = 0; i < this.gpDataDay.length; i++) {
                     if (el.ts == this.gpDataDay[i].timestamp) {
@@ -552,28 +558,33 @@ export default class NewClass extends cc.Component {
                 num1 = arr[arr.length - 1];
             }
 
-            let label1 = this.laNode.getChildByName('label1').getComponent(cc.Label);
-            let label2 = this.laNode.getChildByName('label2').getComponent(cc.Label);
-
-            label1.string = '近一年收益：' + ComUtils.changeTwoDecimal(num) + '%';
-            label2.string = '最近的收益：' + ComUtils.changeTwoDecimal(num1) + '%';
-            let label3 = this.laNode.getChildByName('label3').getComponent(cc.Label);
-            if (this.gpDataDay[this.gpDataDay.length - 1].timestamp - signals[signals.length - 1].ts <= 1) {
-                if (signals[signals.length - 1].flag < 0) {
-                    label3.string = '今日决策：' + '建议买入';
-                }
-                else {
-                    label3.string = '今日决策：' + '建议卖出';
-                }
+            if (signals.length <= 0) {
+                label1.string = '近一年收益：0.00%';
+                label2.string = '最近的收益：0.00%';
+                label3.string = '今日决策：' + '持币观望';
             }
             else {
-                if (signals[signals.length - 1].flag < 0) {
-                    label3.string = '今日决策：' + '持股观望';
+                label1.string = '近一年收益：' + ComUtils.changeTwoDecimal(num) + '%';
+                label2.string = '最近的收益：' + ComUtils.changeTwoDecimal(num1) + '%';
+
+                if (this.gpDataDay[this.gpDataDay.length - 1].timestamp - signals[signals.length - 1].ts <= 1) {
+                    if (signals[signals.length - 1].flag < 0) {
+                        label3.string = '今日决策：' + '建议买入';
+                    }
+                    else {
+                        label3.string = '今日决策：' + '建议卖出';
+                    }
                 }
                 else {
-                    label3.string = '今日决策：' + '持币观望';
+                    if (signals[signals.length - 1].flag < 0) {
+                        label3.string = '今日决策：' + '持股观望';
+                    }
+                    else {
+                        label3.string = '今日决策：' + '持币观望';
+                    }
                 }
             }
+
             this.onDraw();
         });
     }
@@ -1079,8 +1090,10 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'sp_btn_xunlian') {
             if (GameCfg.GameType == 'ZNXG') {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '非vip用户，不能跳转训练该股');
-                return;
+                if (new Date().getTime() / 1000 > GameData.properties[pb.GamePropertyId.VipExpiration]) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '非vip用户，不能跳转训练该股');
+                    return;
+                }
             }
             if (!this.EnterGameLayer) {
 

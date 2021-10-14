@@ -25,7 +25,7 @@ export default class EnterGameControl {
         }
 
         //没解锁 不是VIP
-        if (!GameData.properties[pb.GamePropertyId.UnlockDxxl] && !GameData.properties[pb.GamePropertyId.Vip]) {
+        if (!GameData.properties[pb.GamePropertyId.UnlockDxxl] && new Date().getTime() / 1000 > GameData.properties[pb.GamePropertyId.VipExpiration]) {
 
             let curCount = GameCfgText.gameTextCfg.dxxl.free - GameData.todayGameCount[pb.GameType.DingXiang];
             //还有免费次数

@@ -714,6 +714,6 @@ export default class NewClass extends cc.Component {
             ctx.strokeColor = col;
             col = null;
         }
-        DrawUtils.drawRect(ctx, x, y, w - 5, h, col);
+        DrawUtils.drawRect(ctx, x + 2, y, w - 2, h, col);
     }
 }

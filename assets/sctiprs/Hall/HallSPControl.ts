@@ -211,8 +211,9 @@ export default class NewClass extends cc.Component {
     }
 
     openZNDraw(code, str) {
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         if (!this.znDraw) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
             LoadUtils.loadRes('Prefabs/spPre/znDrawLayer', (pre) => {
 
                 this.znDraw = cc.instantiate(pre);
@@ -220,14 +221,21 @@ export default class NewClass extends cc.Component {
                 this.znDraw.setPosition(0, 0);
                 let handle = this.znDraw.getComponent('ZnDraw');
                 this.znDraw.active = true;
-                handle.onShow(code, str);
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                setTimeout(() => {
+                    handle.onShow(code, str);
+                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                }, 200)
+
             })
         }
         else {
             let handle = this.znDraw.getComponent('ZnDraw');
             this.znDraw.active = true;
-            handle.onShow(code, str);
+            setTimeout(() => {
+                handle.onShow(code, str);
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            }, 200)
+
         }
 
     }

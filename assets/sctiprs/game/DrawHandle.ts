@@ -233,7 +233,7 @@ export default class NewClass extends cc.Component {
                             this.vertical1.x = Math.floor((localPos.x - 10) / GameCfg.hz_width) * GameCfg.hz_width + 10 + GameCfg.hz_width / 2;
 
                             if (index >= GameCfg.beg_end[1]) {
-                                this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) + 10 - GameCfg.hz_width / 2;
+                                this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) + 10 + GameCfg.hz_width / 2;
                                 index = GameCfg.beg_end[1] - 1;
                             }
                             else if (index <= GameCfg.beg_end[0]) {
@@ -313,7 +313,7 @@ export default class NewClass extends cc.Component {
                             this.Horizontal1.y = localPos.y;
                             let index = GameCfg.beg_end[0] + (Math.floor((localPos.x - 10) / GameCfg.hz_width));
                             if (index >= GameCfg.beg_end[1]) {
-                                this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) + 10 - GameCfg.hz_width / 2;
+                                this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) + 10 + GameCfg.hz_width / 2;
                                 index = GameCfg.beg_end[1] - 1;
                             } else if (index <= GameCfg.beg_end[0]) {
                                 this.vertical1.x = 10 + GameCfg.hz_width / 2;
@@ -730,7 +730,7 @@ export default class NewClass extends cc.Component {
             let lowPrice, highPrice;
             if (el.open == el.close) {
                 this.drawBg.strokeColor = GameCfg.HZ_white;
-                this.drawLine(this.drawBg, startX + 2, openY, endX, openY);
+                this.drawLine(this.drawBg, startX + 2, openY, endX - 2, openY);
                 lowPrice = el.open;
                 highPrice = el.open;
             }
@@ -755,7 +755,7 @@ export default class NewClass extends cc.Component {
                 let flag = el.open > el.close;
 
                 this.sign = this.getRaisingLimit(index);
-                this.drawRect(this.drawBg, startX, by, endX - startX, hy - by, flag);
+                this.drawRect(this.drawBg, startX, by, GameCfg.hz_width, hy - by, flag);
 
             }
 
@@ -763,7 +763,7 @@ export default class NewClass extends cc.Component {
             //画最高价、
             if (el.high >= highPrice) {
                 let highY = (el.high - this.bottomValue) / this.disValue * drawBox + initY;
-                let highX = startX + (endX - startX) / 2 - 2.5;
+                let highX = startX + (GameCfg.hz_width) / 2;
                 let hy = openY > closeY ? openY : closeY;
                 this.drawLine(this.drawBg, highX, highY, highX, hy);
                 posInfo.highPos = cc.v2(highX, highY);
@@ -771,7 +771,7 @@ export default class NewClass extends cc.Component {
             //画最低
             if (el.low <= lowPrice) {
                 let lowY = (el.low - this.bottomValue) / this.disValue * drawBox + initY;
-                let lowX = startX + (endX - startX) / 2 - 2.5;
+                let lowX = startX + (GameCfg.hz_width) / 2;
                 let hy = openY < closeY ? openY : closeY;
                 this.drawLine(this.drawBg, lowX, lowY, lowX, hy);
                 posInfo.lowPos = cc.v2(lowX, lowY);
@@ -838,7 +838,7 @@ export default class NewClass extends cc.Component {
                 col = null;
             }
         }
-        DrawUtils.drawRect(ctx, x, y, w - 5, h, col);
+        DrawUtils.drawRect(ctx, x + 2, y, w - 2, h, col);
 
     }
 

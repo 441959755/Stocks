@@ -133,7 +133,7 @@ export default class NewClass extends cc.Component {
         })
 
         AudioUtils.setEffectsVolume(GameData.SMSet.isSound);
-        AudioUtils.setMusicVolume(GameData.SMSet.isSound);
+        // AudioUtils.setMusicVolume(GameData.SMSet.isSound);
     }
 
     onBtnClick(event, data) {

@@ -42,7 +42,7 @@ export default class NewClass extends cc.Component {
             }
             let diamond = cost || 50;
 
-            if (GameData.properties[pb.GamePropertyId.Vip] || GameData.properties[pb.GamePropertyId.Diamond] >= diamond) {
+            if (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration] || GameData.properties[pb.GamePropertyId.Diamond] >= diamond) {
                 GlobalEvent.emit(EventCfg.LOADINGSHOW);
                 let data = {
                     game: this.GameType,

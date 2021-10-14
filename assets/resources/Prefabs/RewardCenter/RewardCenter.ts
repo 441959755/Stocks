@@ -1,3 +1,4 @@
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
 
 const { ccclass, property } = cc._decorator;
@@ -14,9 +15,10 @@ export default class NewClass extends cc.Component {
     rewardData = null;
 
     onLoad() {
-        this.content.removeAllChildren();
+        GlobalEvent.on('getRewardCenter', () => {
+            this.content.removeAllChildren();
+        }, this);
     }
-
 
     onShow() {
         if (this.rewardData.length == 0) {
@@ -43,9 +45,7 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'btn_qlingqu') {
-
             let nodes = this.content.children;
-
             nodes.forEach((el) => {
                 let handle = el.getComponent('RewardItem');
                 if (handle) {
@@ -54,12 +54,13 @@ export default class NewClass extends cc.Component {
             })
 
         }
-
         else if (name == 'closeBtn') {
             this.node.active = false;
         }
-
     }
 
-    // update (dt) {}
+    onDestroy() {
+        GlobalEvent.off('getRewardCenter');
+    }
+
 }

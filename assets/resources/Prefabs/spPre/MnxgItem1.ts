@@ -79,10 +79,6 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    onDestroy() {
-        GlobalEvent.off('UPDATEITEMDATA');
-    }
-
     onBtnClick(event, data) {
         let name = event.target.name;
         //看信号买卖

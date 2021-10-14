@@ -14,12 +14,11 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         this.rewardCenterBtn.active = false;
-        //获取奖励中心的消息
-        this.getRewardCenter();
-
+        GlobalEvent.on('getRewardCenter', this.getRewardCenter.bind(this), this);
     }
 
-    getRewardCenter() {
+    getRewardCenter(call?) {
+
         socket.send(pb.MessageId.Req_Hall_BackBag, null, (info) => {
             console.log('getRewardCenter:' + JSON.stringify(info));
             if (info && info.grids) {
@@ -28,15 +27,23 @@ export default class NewClass extends cc.Component {
                     this.rewardCenterData = info.grids;
                 }
             }
+            call && (call);
         })
     }
 
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'rewardCentertBtn') {
-            GlobalEvent.emit(EventCfg.OPENREWARDCENTERLAYER, this.rewardCenterData);
-        }
 
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
+            GlobalEvent.emit(EventCfg.OPENREWARDCENTERLAYER, this.rewardCenterData);
+
+        }
+    }
+
+    onDestroy() {
+        GlobalEvent.off('getRewardCenter');
     }
 
 }

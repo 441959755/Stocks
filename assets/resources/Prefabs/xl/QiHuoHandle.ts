@@ -165,7 +165,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	onGameCountSow() {
-		if (!GameData.properties[pb.GamePropertyId.UnlockQhxl] && !GameData.properties[pb.GamePropertyId.Vip]) {
+		if (!GameData.properties[pb.GamePropertyId.UnlockQhxl] && (new Date().getTime() / 1000 > GameData.properties[pb.GamePropertyId.VipExpiration])) {
 			this.tipsLabel1.node.active = true;
 			this.tipsLabel2.node.active = true;
 			this.curCount = GameCfgText.gameTextCfg.qhxl.free - GameData.todayGameCount[pb.GameType.QiHuo];

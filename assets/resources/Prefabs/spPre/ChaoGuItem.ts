@@ -83,7 +83,7 @@ export default class NewClass extends cc.Component {
             //有比赛 未报名
             else if (data.status == 1 && flagbm) {
                 //是否结束报名
-                if (new Date().getTime() / 100 > data.regTo) {
+                if (new Date().getTime() / 1000 > data.regTo) {
                     this.bms[0].active = false;
                     this.bms[1].active = true;
                 }

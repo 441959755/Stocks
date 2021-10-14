@@ -155,7 +155,6 @@ export default class NewClass extends cc.Component {
 		this.openNode(this.rewardCenterNode, 'Prefabs/RewardCenter/rewardCenter', 12, (node) => {
 			GlobalEvent.emit(EventCfg.LOADINGHIDE);
 			this.rewardCenterNode = node;
-			this.node.addChild(this.rewardCenterNode);
 			this.rewardCenterNode.active = true;
 			let handle = this.rewardCenterNode.getComponent('RewardCenter');
 			if (handle) {
@@ -358,6 +357,12 @@ export default class NewClass extends cc.Component {
 		GameCfg.GAMEFUPANDATA = null;
 		//跟新闯关赛数据
 		GlobalEvent.emit('UPDATEGAMEDATE');
+
+		setTimeout(() => {
+			//跟新获取的奖励消息
+			GlobalEvent.emit('getRewardCenter');
+		}, 1000);
+
 	}
 
 	//游戏结束

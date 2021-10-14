@@ -46,7 +46,12 @@ export default class NewClass extends cc.Component {
 
         }
 
-        this.tipsLabel.string = '训练费用：' + Math.abs(GameCfgText.gameTextCfg.dxxl.cost[0].v) + '金币（vip是0金币）';
+        if (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]) {
+            this.tipsLabel.string = 'vip用户0金币';
+        }
+        else {
+            this.tipsLabel.string = '500金币';
+        }
     }
 
     onShow(code, name, list) {
@@ -61,16 +66,16 @@ export default class NewClass extends cc.Component {
         this.codename.string = code + '     ' + name;
         this.name = name;
 
-        if (GameCfg.GameType == 'ZNXG') {
-            this.tipsLabel.string = '非vip用户，不能跳转训练该股';
-        } else {
-            if (GameData.properties[pb.GamePropertyId.Vip]) {
-                this.tipsLabel.string = 'vip用户0金币';
-            }
-            else {
-                this.tipsLabel.string = '500金币';
-            }
+        // if (GameCfg.GameType == 'ZNXG') {
+        //     this.tipsLabel.string = '非vip用户，不能跳转训练该股';
+        // } else {
+        if (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]) {
+            this.tipsLabel.string = 'vip用户0金币';
         }
+        else {
+            this.tipsLabel.string = '500金币';
+        }
+        // }
     }
 
 

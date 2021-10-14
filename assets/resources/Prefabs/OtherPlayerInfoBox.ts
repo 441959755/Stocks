@@ -34,14 +34,14 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     lock: cc.Node = null;
 
-    @property(cc.Label)
-    pkDZ: cc.Label = null;
+    @property([cc.Label])
+    pkDZ: cc.Label[] = [];
 
-    @property(cc.Label)
-    dkDZ: cc.Label = null;
+    @property([cc.Label])
+    dkDZ: cc.Label[] = [];
 
-    @property(cc.Label)
-    cgDZ: cc.Label = null;
+    @property([cc.Label])
+    cgDZ: cc.Label[] = [];
 
     @property(cc.Node)
     ygzNode: cc.Node = null;
@@ -80,8 +80,8 @@ export default class NewClass extends cc.Component {
         let ch = otherInfo.properties[pb.GamePropertyId.Fame];
 
         this.chenghao.string = ComUtils.getChenghaoByFame(ch);
-
-        let vip = otherInfo.properties[pb.GamePropertyId.Vip];
+        // new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]
+        let vip = new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration];
 
         this.lock.active = !vip;
 
@@ -91,11 +91,14 @@ export default class NewClass extends cc.Component {
 
 
         if (vip) {
-            this.pkDZ.string = 'p k 大战：' + otherInfo.counters[pb.GameType.JJ_PK].win + '胜' + '         ' + otherInfo.counters[pb.GameType.JJ_PK].lose;
+            this.pkDZ[0].string = otherInfo.counters[pb.GameType.JJ_PK].win + '胜';
+            this.pkDZ[1].string = otherInfo.counters[pb.GameType.JJ_PK].lose + '负';
 
-            this.dkDZ.string = '多空大战：' + otherInfo.counters[pb.GameType.JJ_DuoKong].win + '胜' + '         ' + otherInfo.counters[pb.GameType.JJ_DuoKong].lose;
+            this.dkDZ[0].string = otherInfo.counters[pb.GameType.JJ_DuoKong].win + '胜';
+            this.dkDZ[1].string = otherInfo.counters[pb.GameType.JJ_DuoKong].lose + '负';
 
-            this.cgDZ.string = '  闯关赛：' + otherInfo.counters[pb.GameType.JJ_ChuangGuan].win + '胜' + '         ' + otherInfo.counters[pb.GameType.JJ_ChuangGuan].lose;
+            this.cgDZ[0].string = otherInfo.counters[pb.GameType.JJ_ChuangGuan].win + '胜';
+            this.cgDZ[1].string = otherInfo.counters[pb.GameType.JJ_ChuangGuan].lose + '负';
         }
 
         this.ygzNode.active = false;

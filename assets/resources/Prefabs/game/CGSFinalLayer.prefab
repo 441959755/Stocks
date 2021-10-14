@@ -8277,7 +8277,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 140,
+      "width": 200,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -8332,7 +8332,7 @@
     "_N$string": "userName",
     "_fontSize": 24,
     "_lineHeight": 26,
-    "_enableWrapText": true,
+    "_enableWrapText": false,
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
@@ -9294,7 +9294,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 140,
+      "width": 200,
       "height": 32.76
     },
     "_anchorPoint": {
@@ -9345,11 +9345,11 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "111",
-    "_N$string": "111",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 26,
-    "_enableWrapText": true,
+    "_enableWrapText": false,
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
