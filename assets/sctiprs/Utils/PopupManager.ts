@@ -55,7 +55,7 @@ export default class PopupManager {
             LoadUtils.loadRes('Prefabs/otherPlayerInfo', pre => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.otherPlayerInfo = cc.instantiate(pre);
-                cc.find('Canvas').addChild(this.otherPlayerInfo, 11);
+                cc.find('Canvas').addChild(this.otherPlayerInfo, 60);
                 this.otherPlayerInfo.active = true;
                 ActionUtils.openBox(this.otherPlayerInfo);
                 this.otherPlayerInfo.getComponent('OtherPlayerInfoBox').onShow(info);

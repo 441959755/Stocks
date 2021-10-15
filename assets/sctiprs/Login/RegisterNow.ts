@@ -6,6 +6,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
 
+//注测账号
 @ccclass
 export default class NewClass extends cc.Component {
 

@@ -766,18 +766,28 @@ export default class NewClass extends cc.Component {
 			GameData.huizhidatas = 0;
 			GameCfg.huizhidatas = 0;
 			let fm = data.from;
-			while (!GameData.huizhidatas) {
+			if (GameData.DXSet.market == '随机行情') {
+				while (!GameData.huizhidatas) {
 
-				GameCfg.data[0].data.forEach((el, index) => {
-					if ((el.day).replace(/-/g, '') == fm) {
-						GameData.huizhidatas = index + 1;
-						GameCfg.huizhidatas = index + 1;
+					GameCfg.data[0].data.forEach((el, index) => {
+						if ((el.day).replace(/-/g, '') == fm) {
+							GameData.huizhidatas = index + 1;
+							GameCfg.huizhidatas = index + 1;
+						}
+					})
+
+					if (!GameData.huizhidatas) {
+						fm = (parseInt(fm) - 1) + '';
 					}
-				})
-
-				if (!GameData.huizhidatas) {
-					fm = (parseInt(fm) - 1) + '';
 				}
+			}
+			else {
+				GameData.huizhidatas = GameCfg.data[0].data.length - 100;
+				GameCfg.huizhidatas = GameCfg.data[0].data.length - 100;
+			}
+			if (GameData.huizhidatas <= 0) {
+				GameData.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
+				GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
 			}
 			GlobalEvent.emit('LOADGAME');
 		});

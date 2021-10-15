@@ -65,13 +65,12 @@ export default class NewClass extends cc.Component {
 
                 });
             }
-
         }
         else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
             GameData.cgdsStateList.forEach(el => {
                 if (el.id == GameData.SpStockData.id) {
-                    let items = el.state.positionList;
-                    if (items.length > 0) {
+                    let items = el.state.positionList.items;
+                    if (items && items.length > 0) {
                         items.forEach(el => {
                             if (el.code == this.curData.code) {
                                 this.curSl = el.volumeFree;

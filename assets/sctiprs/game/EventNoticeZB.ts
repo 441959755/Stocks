@@ -193,6 +193,10 @@ export default class NewClass extends cc.Component {
                 el.active = true;
             })
         }, this);
+
+    }
+
+    onEnable() {
         this.initData();
     }
 

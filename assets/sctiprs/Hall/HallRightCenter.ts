@@ -21,12 +21,15 @@ export default class NewClass extends cc.Component {
 
         socket.send(pb.MessageId.Req_Hall_BackBag, null, (info) => {
             console.log('getRewardCenter:' + JSON.stringify(info));
-            if (info && info.grids) {
-                if (info.grids.length > 0) {
-                    this.rewardCenterBtn.active = true;
-                    this.rewardCenterData = info.grids;
-                }
+
+            if (info && info.grids.length > 0) {
+                this.rewardCenterBtn.active = true;
             }
+            else {
+                this.rewardCenterBtn.active = false;
+            }
+            this.rewardCenterData = info.grids || [];
+
             call && (call);
         })
     }

@@ -6,6 +6,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
 
+//重置密码
 @ccclass
 export default class NewClass extends cc.Component {
 
@@ -20,7 +21,6 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Label)
     authCodeLabel: cc.Label = null;
-
 
     pNum = null;
 

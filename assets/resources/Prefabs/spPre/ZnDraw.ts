@@ -191,9 +191,6 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
-
-
-
         //找到更新买1...卖1...label跟新
         this.box3.children.forEach(el => {
             if (el.name == 't_label') {
@@ -349,6 +346,35 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
+        //保留绘制宽度
+        this.ori_width = this.t_grap_node.parent.width;
+        this.now_width = this.t_grap_node.parent.width - this.box3.width - 10;
+
+        if (GameCfg.GameType == 'ZNXG') {
+            if (GameData.AIStockList.indexOf(parseInt(this.code)) != -1) {
+                this.yiShouCang.active = true;
+                this.ziXunBtn.active = true;
+            }
+            else {
+                this.yiShouCang.active = false;
+                this.ziXunBtn.active = false;
+            }
+            this.toggles[1].isChecked = true;
+            this.toggles[0].isChecked = false;
+            this.toggles[2].isChecked = false;
+            this.toggles[3].isChecked = false;
+            this.toggles[4].isChecked = false;
+            this.btnSelect.active = true;
+        }
+        else {
+            this.toggles[0].isChecked = true;
+            this.toggles[2].isChecked = false;
+            this.toggles[3].isChecked = false;
+            this.toggles[4].isChecked = false;
+            this.toggles[1].isChecked = false;
+            this.btnSelect.active = false;
+        }
+
     }
 
     //当前持股数据
@@ -446,9 +472,7 @@ export default class NewClass extends cc.Component {
     //每次打开显示
     onShow(code, str) {
 
-        //保留绘制宽度
-        this.ori_width = this.t_grap_node.parent.width;
-        this.now_width = this.t_grap_node.parent.width - this.box3.width - 10;
+
 
         GameCfg.GAMEFUPAN = true;
 
@@ -477,31 +501,6 @@ export default class NewClass extends cc.Component {
             this.CmdQuoteSubscribe(true);
         }
 
-
-        if (GameCfg.GameType == 'ZNXG') {
-            if (GameData.AIStockList.indexOf(parseInt(this.code)) != -1) {
-                this.yiShouCang.active = true;
-                this.ziXunBtn.active = true;
-            }
-            else {
-                this.yiShouCang.active = false;
-                this.ziXunBtn.active = false;
-            }
-            this.toggles[1].isChecked = true;
-            this.toggles[0].isChecked = false;
-            this.toggles[2].isChecked = false;
-            this.toggles[3].isChecked = false;
-            this.toggles[4].isChecked = false;
-            this.btnSelect.active = true;
-        }
-        else {
-            this.toggles[0].isChecked = true;
-            this.toggles[2].isChecked = false;
-            this.toggles[3].isChecked = false;
-            this.toggles[4].isChecked = false;
-            this.toggles[1].isChecked = false;
-            this.btnSelect.active = false;
-        }
         this.getGPDataDay();
     }
 

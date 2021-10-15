@@ -67,7 +67,6 @@ export default class NewClass extends cc.Component {
             }, 3000);
 
         }, this);
-
     }
 
 

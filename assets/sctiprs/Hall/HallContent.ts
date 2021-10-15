@@ -41,6 +41,10 @@ export default class NewClass extends cc.Component {
 		//头像更改
 		GlobalEvent.on(EventCfg.HEADIMGCHANGE, this.setUserHead.bind(this), this);
 
+		GlobalEvent.on(EventCfg.NAMECHANGE, this.setUserInfo.bind(this), this);
+
+		GlobalEvent.on(EventCfg.LEVELCHANGE, this.setUserInfo.bind(this), this);
+
 	}
 
 	setUserHead() {
@@ -298,6 +302,8 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.BLACKGOTOLAYER);
 		GlobalEvent.off(EventCfg.GENDERCHANGE);
 		GlobalEvent.off(EventCfg.HEADIMGCHANGE);
+		GlobalEvent.off(EventCfg.NAMECHANGE);
+		GlobalEvent.off(EventCfg.LEVELCHANGE)
 	}
 
 }

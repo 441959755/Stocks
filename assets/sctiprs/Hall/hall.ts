@@ -84,7 +84,6 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on('LOADGAME', this.onLoadGame.bind(this), this);
 
 		GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
-
 	}
 
 	onDestroy() {
