@@ -54,10 +54,14 @@ export default class NewClass extends cc.Component {
 
     otherInfo = null;
 
+    @property(cc.SpriteFrame)
+    defaultImg: cc.SpriteFrame = null;
+
     onShow(otherInfo) {
+
         if (!otherInfo) { return }
         this.otherInfo = otherInfo;
-
+        this.headImg.spriteFrame = this.defaultImg;
         if (otherInfo.icon) {
             this.headImg.spriteFrame = otherInfo.icon;
         }

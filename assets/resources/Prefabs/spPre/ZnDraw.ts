@@ -10,7 +10,6 @@ import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import LoadUtils from "../../../sctiprs/Utils/LoadUtils";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -516,6 +515,7 @@ export default class NewClass extends cc.Component {
         let buff1 = CmdQueryAiSignal.encode(message1).finish();
 
         socket.send(pb.MessageId.Req_QueryAiSignal, buff1, (res) => {
+
             console.log('AI买卖信号：' + JSON.stringify(res));
             let label3 = this.laNode.getChildByName('label3').getComponent(cc.Label);
             let label1 = this.laNode.getChildByName('label1').getComponent(cc.Label);
@@ -675,12 +675,14 @@ export default class NewClass extends cc.Component {
             }
 
             this.gpDataMin = info.items;
-            this._amount = this.gpDataMin[this.gpDataMin.length - 1].amount;
-            this._volume = this.gpDataMin[this.gpDataMin.length - 1].volume;
-            for (let i = this.gpDataMin.length - 1; i >= 1; i--) {
-                this.gpDataMin[i].amount = this.gpDataMin[i].amount - this.gpDataMin[i - 1].amount;
+            if (this.gpDataMin[this.gpDataMin.length - 1]) {
+                this._amount = this.gpDataMin[this.gpDataMin.length - 1].amount;
+                this._volume = this.gpDataMin[this.gpDataMin.length - 1].volume;
+                for (let i = this.gpDataMin.length - 1; i >= 1; i--) {
+                    this.gpDataMin[i].amount = this.gpDataMin[i].amount - this.gpDataMin[i - 1].amount;
 
-                this.gpDataMin[i].volume = this.gpDataMin[i].volume - this.gpDataMin[i - 1].volume;
+                    this.gpDataMin[i].volume = this.gpDataMin[i].volume - this.gpDataMin[i - 1].volume;
+                }
             }
 
             this.onUIShow();
@@ -762,6 +764,7 @@ export default class NewClass extends cc.Component {
     //设置label数据
     setCurLabelData() {
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
+        if (!this.gpDataMin[this.gpDataMin.length - 1]) { return }
         let data = this.gpDataMin[this.gpDataMin.length - 1] || this.gpDataDay[this.gpDataDay.length - 1];
         let preData;
         // if (this.gpDataDay[this.gpDataDay.length - 1].timestamp == ComUtils.getCurYearMonthDay()) {

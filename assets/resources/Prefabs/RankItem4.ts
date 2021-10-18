@@ -87,7 +87,9 @@ export default class NewClass extends cc.Component {
                     GameData.imgs[obj.icon + ''] = new cc.SpriteFrame(texture);
                     this.head.spriteFrame = GameData.imgs[obj.icon + '']
                 }
-
+                else {
+                    GameData.imgs[obj.icon + ''] = this.defaultImg;
+                }
             })
         }
     }

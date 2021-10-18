@@ -47,10 +47,10 @@ export default class NewClass extends cc.Component {
         }
 
         if (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]) {
-            this.tipsLabel.string = 'vip用户0金币';
+            this.tipsLabel.string = '0';
         }
         else {
-            this.tipsLabel.string = '500金币';
+            this.tipsLabel.string = '500';
         }
     }
 
@@ -66,16 +66,13 @@ export default class NewClass extends cc.Component {
         this.codename.string = code + '     ' + name;
         this.name = name;
 
-        // if (GameCfg.GameType == 'ZNXG') {
-        //     this.tipsLabel.string = '非vip用户，不能跳转训练该股';
-        // } else {
         if (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]) {
-            this.tipsLabel.string = 'vip用户0金币';
+            this.tipsLabel.string = '0';
         }
         else {
-            this.tipsLabel.string = '500金币';
+            this.tipsLabel.string = '500';
         }
-        // }
+
     }
 
 
@@ -87,8 +84,6 @@ export default class NewClass extends cc.Component {
         }
         else if (name == 'qdBtn') {
 
-
-
             GlobalEvent.emit(EventCfg.LEAVEGAME);
             let gameCount = EnterGameControl.onCurDXIsEnterGame();
             if (gameCount.status == 3) {
@@ -97,6 +92,7 @@ export default class NewClass extends cc.Component {
             }
 
             let data;
+            //pk进入训练
             if (GameCfg.GameType == pb.GameType.JJ_PK ||
 
                 GameCfg.GameType == pb.GameType.JJ_DuoKong ||
@@ -132,20 +128,30 @@ export default class NewClass extends cc.Component {
                 GameCfg.GameSet.year = (data.from + '').slice(0, 4);
 
                 GameCfg.GameSet.search = data.code;
-                GameCfg.data[0].data = [];
+                //   GameCfg.data[0].data = [];
                 GameCfg.data[0].name = this.name;
 
                 GameCfg.data[0].code = this.code;
 
                 GameCfg.data[0].circulate = items[4];
 
-                GameCfg.huizhidatas = 100;
+                GameCfg.huizhidatas = 106;
 
-                GameData.huizhidatas = 100;
+                GameData.huizhidatas = 106;
 
-                EnterGameControl.onClearPreGameDataEnter(data);
+                GameCfg.allRate = 0;
+                GameCfg.finalfund = 0;
+                GameCfg.fill = [];
+                GameCfg.blockHistoy = [];
+                GameCfg.mark = [];
+                GameCfg.notice = [];
+                GameCfg.history.allRate = 0;
+                StrategyAIData.onClearData();
+                GlobalEvent.emit('LOADGAME');
             }
 
+
+            //sp进入训练
             else {
 
                 GameCfg.GameType = pb.GameType.DingXiang;
@@ -163,24 +169,6 @@ export default class NewClass extends cc.Component {
                 }
 
                 GameCfg.data[0].circulate = items[4];
-
-                // this.gpList.forEach((el, index) => {
-
-                //     let data = {
-                //         day: el.timestamp + '',
-                //         open: el.open || 0,
-                //         close: el.price || 0,
-                //         high: el.high || 0,
-                //         low: el.low || 0,
-                //         price: el.amount || 0,
-                //         value: el.volume || 0,
-                //         Rate: (el.volume / GameCfg.data[0].circulate) * 100,
-                //     }
-                //     if (GameCfg.data[0].circulate == 0) {
-                //         data.Rate = 1;
-                //     }
-                //     GameCfg.data[0].data.push(data);
-                // })
 
                 data = {
                     ktype: pb.KType.Day,
@@ -213,31 +201,6 @@ export default class NewClass extends cc.Component {
 
                 EnterGameControl.onClearPreGameDataEnter(data);
 
-                // GameCfg.GameSet.search = data.code;
-                // GameCfg.GameSet.year = data.from;
-
-                // if (this.gpList.length > 100) {
-                //     GameCfg.huizhidatas = this.gpList.length - 100;
-                //     GameData.huizhidatas = this.gpList.length - 100;
-                // }
-                // else {
-                //     GameCfg.huizhidatas = parseInt(this.gpList.length / 2 + '');
-                //     GameData.huizhidatas = parseInt(this.gpList.length / 2 + '');
-                // }
-
-                // GameCfg.enterGameCache = data;
-
-                // GameCfg.allRate = 0;
-                // GameCfg.finalfund = 0;
-                // GameCfg.fill = [];
-                // GameCfg.blockHistoy = [];
-                // GameCfg.mark = [];
-                // GameCfg.notice = [];
-                // GameCfg.history.allRate = 0;
-                // StrategyAIData.onClearData();
-                // GlobalHandle.onCmdGameStartReq(() => {
-                //     GlobalEvent.emit('LOADGAME');
-                // });
             }
             this.node.active = false;
 

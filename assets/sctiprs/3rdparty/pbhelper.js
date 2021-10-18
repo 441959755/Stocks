@@ -445,7 +445,7 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Rep_QueryAiSignal) {
             let CmdQueryAiSignalReply = pb.CmdQueryAiSignalReply;
             let data = CmdQueryAiSignalReply.decode(new Uint8Array(buff));
-
+            GlobalEvent.emit('AISIGNAL', data);
             return data;
         }
         //同步模拟炒股状态

@@ -16,33 +16,54 @@ export default class NewClass extends cc.Component {
     _curData = null;
 
     onLoad() {
+        let tp;
+        GlobalEvent.on(EventCfg.CMDQUOTITEM, (res1) => {
 
-        GlobalEvent.on(EventCfg.CMDQUOTITEM, (res) => {
+            if (this._curData && res1.items[0].code == this._curData.code) {
 
-            if (this._curData && res.items[0].code == this._curData.code) {
-                let signals = res.items[0];
-                // console.log(ComUtils.fromatTime1(this._curData.tsUpdated));
-                if (ComUtils.fromatTime1(signals.timestamp) - ComUtils.fromatTime1(this._curData.tsUpdated) <= 1) {
-                    if (this._curData.todaySignal < 0) {
-                        this.label[7].string = '建议买入';
+                tp = ComUtils.fromatTime1(res1.items[0].timestamp);
 
-                    }
-                    else {
-                        this.label[7].string = '建议卖出';
-                    }
+                let me = {
+                    code: this._curData.code,
+                }
+
+                let CmdQueryAiSignal = pb.CmdQueryAiSignal;
+                let message1 = CmdQueryAiSignal.create(me);
+                let buff1 = CmdQueryAiSignal.encode(message1).finish();
+
+                socket.send(pb.MessageId.Req_QueryAiSignal, buff1)
+            }
+        }, this);
+
+        GlobalEvent.on('AISIGNAL', (res) => {
+            if (this._curData && res.code == this._curData.code) {
+                console.log('获取AI操作：' + JSON.stringify(res));
+                let signals = res.signals;
+                if (signals.length <= 0) {
+                    this.label[7].string = '持币观望';
                 }
                 else {
-                    if (this._curData.todaySignal < 0) {
-                        this.label[7].string = '持股观望';
+                    if (parseInt(tp) - signals[signals.length - 1].ts <= 1) {
+                        if (signals[signals.length - 1].flag < 0) {
+                            this.label[7].string = '建议买入';
+
+                        }
+                        else {
+                            this.label[7].string = '建议卖出';
+                        }
                     }
                     else {
-                        this.label[7].string = '持币观望';
+                        if (signals[signals.length - 1].flag < 0) {
+                            this.label[7].string = '持股观望';
+                        }
+                        else {
+                            this.label[7].string = '持币观望';
+                        }
                     }
                 }
 
                 GameData.AISignal[this._curData.code + ''] = this.label[7].string;
             }
-
         }, this);
     }
 
@@ -65,10 +86,20 @@ export default class NewClass extends cc.Component {
             this.label[7].string = GameData.AISignal[data.code + ''];
         }
         else {
+            var d = new Date();
+            let h = d.getHours();
+            let m = d.getMinutes();
+            let t;
+            //   if (h < 15 || (h > 15 && h < 16 && m < 30)) {
+            t = parseInt((d.getTime() - 24 * 60 * 60 * 1000) / 1000 + '');
+            // }
+            // else {
+            //     t = parseInt(d.getTime() / 1000 + '');
+            // }
             let info1 = {
                 ktype: pb.KType.Min,
                 code: parseInt(data.code),
-                to: parseInt((new Date().getTime()) / 1000 + ''),
+                to: t,
                 total: 1,
             }
             socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1));
@@ -109,7 +140,8 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
-        GlobalEvent.off(EventCfg.CMDQUOTITEM)
+        GlobalEvent.off(EventCfg.CMDQUOTITEM);
+        GlobalEvent.off('AISIGNAL');
     }
 
 }

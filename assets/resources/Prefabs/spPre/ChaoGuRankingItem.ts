@@ -70,7 +70,6 @@ export default class NewClass extends cc.Component {
                     this.headImg.spriteFrame = texture;
                     GameData.imgs[info.icon + ''] = texture;
                 }
-
             })
         }
 

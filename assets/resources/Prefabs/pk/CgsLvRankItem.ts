@@ -12,9 +12,11 @@ export default class NewClass extends cc.Component {
 
     el = null;
 
+    @property(cc.SpriteFrame)
+    defaultImg: cc.SpriteFrame = null;
 
-
-    initShow(index) {
+    initShow(index, el) {
+        this.el = el;
 
         let RankNode = this.node.getChildByName('node');
         let nodes = RankNode.children;
@@ -43,35 +45,42 @@ export default class NewClass extends cc.Component {
 
         let countLabel = this.node.getChildByName('label').getComponent(cc.Label);
 
+        head.spriteFrame = this.defaultImg;
 
-        if (GameData.imgs[this.el.icon + '']) {
-            head.spriteFrame = GameData.imgs[this.el.icon + ''];
+        if (GameData.imgs[el.icon + '']) {
+
+            head.spriteFrame = GameData.imgs[el.icon + ''];
         }
         else {
-            ComUtils.onLoadHead(this.el.icon, (res) => {
+            ComUtils.onLoadHead(el.icon, (res) => {
                 if (res) {
                     let texture = new cc.SpriteFrame(res);
+
+                    GameData.imgs[el.icon + ''] = texture;
+
                     head.spriteFrame = texture;
                 }
-
+                else {
+                    GameData.imgs[el.icon + ''] = this.defaultImg;
+                }
             })
         }
 
-        if (this.el.nickname) {
-            username.string = this.el.nickname;
+        if (el.nickname) {
+            username.string = el.nickname;
         } else {
-            username.string = this.el.uid;
+            username.string = el.uid;
         }
 
-        if (this.el.level) {
-            userlv.string = 'LV: ' + this.el.level;
+        if (el.level) {
+            userlv.string = 'LV: ' + el.level;
         } else {
             userlv.string = '';
         }
 
-        man.children[0].active = !this.el.gender;
+        man.children[0].active = !el.gender;
 
-        countLabel.string = this.el.cgsProgress;
+        countLabel.string = el.cgsProgress;
     }
 
 

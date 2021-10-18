@@ -3,6 +3,7 @@ import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -25,7 +26,7 @@ export default class NewClass extends cc.Component {
 
     onShow() {
         this.label2.string = this.winNum + '  胜               ' + this.loseNum + '  负';
-        this.label1.string = this.nameStr;
+        this.label1.string = this.nameStr + ':';
 
         if (this.winNum == 0 && this.loseNum == 0) {
             this.resetBtn.enableAutoGrayEffect = true;
@@ -43,22 +44,26 @@ export default class NewClass extends cc.Component {
             let diamond = cost || 50;
 
             if (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration] || GameData.properties[pb.GamePropertyId.Diamond] >= diamond) {
-                GlobalEvent.emit(EventCfg.LOADINGSHOW);
-                let data = {
-                    game: this.GameType,
-                }
 
-                socket.send(pb.MessageId.Req_Hall_ResetGameCounter, PB.onResetGameCounter(data), (info) => {
-                    console.log('onCmdEditInfoConvertToBuff:' + JSON.stringify(info));
-                    if (!info.code) {
-                        this.label2.string = 0 + '  胜              ' + 0 + '  负';
-                        this.resetBtn.enableAutoGrayEffect = true;
-                        this.resetBtn.interactable = false;
-                    } else {
-                        console.log('图片有误!:' + info.code + info.err);
+                PopupManager.LoadTipsBox('tipsBox', '重置 ' + this.nameStr + ' 战绩,\n 战绩将清零,重新开始统计', () => {
+                    GlobalEvent.emit(EventCfg.LOADINGSHOW);
+                    let data = {
+                        game: this.GameType,
                     }
-                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
+                    socket.send(pb.MessageId.Req_Hall_ResetGameCounter, PB.onResetGameCounter(data), (info) => {
+                        console.log('onCmdEditInfoConvertToBuff:' + JSON.stringify(info));
+                        if (!info.code) {
+                            this.label2.string = 0 + '  胜              ' + 0 + '  负';
+                            this.resetBtn.enableAutoGrayEffect = true;
+                            this.resetBtn.interactable = false;
+                        } else {
+                            console.log('图片有误!:' + info.code + info.err);
+                        }
+                        GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                    })
                 })
+
             }
             else {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, 'VIP用户或钻石大于' + diamond + '才能重置');

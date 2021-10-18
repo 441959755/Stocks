@@ -69,7 +69,9 @@ export default class NewClass extends cc.Component {
         this.userName.string = obj.nickname || '';
 
         this.head.spriteFrame = this.defaultImg;
+
         this.loadHeadImg(obj);
+
         //  GameData.imgs[obj.icon + ''] && (this.head.spriteFrame = GameData.imgs[obj.icon + ''])
 
         this.sex.children[0].active = !parseInt(obj.gender);
@@ -87,7 +89,9 @@ export default class NewClass extends cc.Component {
                     GameData.imgs[obj.icon + ''] = new cc.SpriteFrame(texture);
                     this.head.spriteFrame = GameData.imgs[obj.icon + '']
                 }
-
+                else {
+                    GameData.imgs[obj.icon + ''] = this.defaultImg;
+                }
             })
         }
     }

@@ -59,8 +59,8 @@ export default class NewClass extends cc.Component {
         UIScrollControl.initControl(this.item, this.curData.Items.length, this.item.getContentSize(), 0, (node, index) => {
             node.active = true;
             let handle = node.getComponent('CgsLvRankItem');
-            handle.el = this.curData.Items[index];
-            handle.initShow(index);
+            //  handle.el = this.curData.Items[index];
+            handle.initShow(index, this.curData.Items[index]);
         })
     }
 

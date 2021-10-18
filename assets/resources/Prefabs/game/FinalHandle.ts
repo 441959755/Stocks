@@ -315,7 +315,7 @@ export default class NewClass extends cc.Component {
             if (parseInt(all) > 0) {
                 this.qhxl_zhuan.active = true;
             } else if (parseInt(all) < 0) {
-                this.qhxl_kui.active = false;
+                this.qhxl_kui.active = true;
             }
         }
     }
@@ -347,11 +347,6 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.LEAVEGAME);
 
-            // if (GameCfg.GameType == pb.GameType.QiHuo) {
-            //     GlobalEvent.emit(EventCfg.LEAVEGAME);
-            //     return;
-            // }  
-
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
             if (GameCfg.GameType == pb.GameType.ShuangMang) {
@@ -370,10 +365,16 @@ export default class NewClass extends cc.Component {
                 GameCfgText.getQHQHByRandom();
             }
 
-
             GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
+
                 GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
                 GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
+
+                if (GameCfg.data[0].data.length - GameData.huizhidatas < 100) {
+                    GameData.huizhidatas = GameCfg.data[0].data.length - 100;
+                    GameCfg.huizhidatas = GameCfg.data[0].data.length - 100;
+                }
+
                 GlobalEvent.emit('LOADGAME');
             });
         }
@@ -401,6 +402,12 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = true;
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
         }
+    }
+
+
+    onDisable() {
+        this.qhxl_zhuan.active = false;
+        this.qhxl_kui.active = false;
     }
 
     onDestroy() {

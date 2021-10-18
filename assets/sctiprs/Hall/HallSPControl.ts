@@ -172,7 +172,7 @@ export default class NewClass extends cc.Component {
             LoadUtils.loadRes('Prefabs/spPre/mnHis', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.myhisNode = cc.instantiate(pre);
-                this.node.addChild(this.myhisNode, 30);
+                this.node.addChild(this.myhisNode, 31);
                 this.myhisNode.active = true;
                 let handle = this.myhisNode.getComponent('MnHisHandle');
                 handle.onShow(id);

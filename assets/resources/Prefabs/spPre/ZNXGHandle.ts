@@ -222,6 +222,8 @@ export default class NewClass extends cc.Component {
             codes: this.collectList,
         }
 
+        console.log(JSON.stringify(info));
+
         let CmdQueryAiStockList = pb.CmdQueryAiStockList;
         let message = CmdQueryAiStockList.create(info);
         let buff = CmdQueryAiStockList.encode(message).finish();

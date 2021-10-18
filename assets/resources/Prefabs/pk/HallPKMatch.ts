@@ -191,6 +191,7 @@ export default class NewClass extends cc.Component {
     onDisable() {
         this.callBack && (clearInterval(this.callBack));
         this.callBack = null;
+        this.enterRoom = false;
     }
 
     onBtnClick(event, data) {
