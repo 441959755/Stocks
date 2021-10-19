@@ -648,8 +648,8 @@ export default class NewClass extends cc.Component {
 				name.getComponent(cc.Label).string = GameCfg.data[0].name + ' ' + code;
 			}
 			if (GameCfg.GameSet.year == '随机') {
-				sT.getComponent(cc.Label).string = '起始时间：' + '????';
-				et.getComponent(cc.Label).string = '结束时间: ' + '????';
+				sT.getComponent(cc.Label).string = '起始时间：' + '????.??.??';
+				et.getComponent(cc.Label).string = '结束时间: ' + '????.??.??';
 			} else {
 				sT.getComponent(cc.Label).string = this.gpData[GameData.huizhidatas - 1].day.replace(/-/g, '/');
 				et.getComponent(cc.Label).string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
@@ -677,8 +677,8 @@ export default class NewClass extends cc.Component {
 			}
 
 			if (GameCfg.GameSet.year == '随机') {
-				this.timeLabel[0].string = '起始时间：' + '????';
-				this.timeLabel[1].string = '结束时间: ' + '????';
+				this.timeLabel[0].string = '起始时间：' + '????.??.??';
+				this.timeLabel[1].string = '结束时间: ' + '????.??.??';
 			} else {
 				this.timeLabel[0].string = this.gpData[GameData.huizhidatas - 1].day.replace(/-/g, '/');
 				this.timeLabel[1].string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');

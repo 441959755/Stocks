@@ -2,6 +2,7 @@ import { pb } from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 
 const { ccclass, property } = cc._decorator;
@@ -19,9 +20,10 @@ export default class NewClass extends cc.Component {
 
     uid = null;
 
-    onLoad() {
-        GlobalEvent.on('REPPLAYERINFO', (info) => {
 
+    onLoad() {
+
+        GlobalEvent.on('REPPLAYERINFO', (info) => {
             if (info.uid == this.uid) {
 
                 console.log('玩家资料应答' + JSON.stringify(info));
@@ -122,4 +124,20 @@ export default class NewClass extends cc.Component {
             })
         }
     }
+
+    onBtnClick(event, curdata) {
+        let name = event.target.name;
+        if (name == 'userinfobg') {
+            //打开信息面板
+            let info = GameData.playersInfo[this.uid + '']
+
+            if (GameData.imgs[this.uid + ''] && info) {
+                info.icon = GameData.imgs[this.uid + ''];
+                PopupManager.openOtherPlayerInfoLayer(info);
+            }
+
+        }
+
+    }
+
 }

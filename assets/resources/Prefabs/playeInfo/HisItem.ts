@@ -123,8 +123,8 @@ export default class NewClass extends cc.Component {
             let ts = this.itemData.ts;
             GameCfg.GAMEFUPAN = true;
             GameCfg.GameType = this.itemData.gType;
-            GameCfg.huizhidatas = this.itemData.kStop;
-            GameData.huizhidatas = this.itemData.kStartup;
+            GameCfg.huizhidatas = this.itemData.kStop + 1;
+            GameData.huizhidatas = this.itemData.kStartup + 1;
             GameCfg.GAMEFUPANDATA = this.itemData;
 
             let info = {
@@ -185,9 +185,9 @@ export default class NewClass extends cc.Component {
             kstyle: pb.KStyle.Random,
             code: this.itemData.quotesCode,
             from: this.itemData.kFrom,
-            total: 255,
+            total: 256,
             to: 0,
-            reserve: 100,
+            reserve: 106,
         }
 
         GameCfg.enterGameCache = cache;

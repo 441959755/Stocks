@@ -144,7 +144,6 @@ export default class NewClass extends cc.Component {
             }
             GameData.studyBar = curData;
             GlobalEvent.emit('OPENCURSTUDYBAR');
-
         }
 
         else if (name == 'study_dtcg') {

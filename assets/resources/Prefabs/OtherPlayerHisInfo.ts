@@ -38,10 +38,6 @@ export default class NewClass extends cc.Component {
     }
 
     onShow() {
-
-        let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
-        UIScrollControl.clear();
-
         GameData.Players[1] = this.playeInfo;
 
         if (this.playeInfo.nickname) {
@@ -68,7 +64,9 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         let CmdQueryGameResult = pb.CmdQueryGameResult;
+
         let message = CmdQueryGameResult.create(data)
+
         let buff = CmdQueryGameResult.encode(message).finish();
 
         socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, info => {
@@ -76,30 +74,32 @@ export default class NewClass extends cc.Component {
             console.log('其他玩家历史记录：' + JSON.stringify(info));
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
+            let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
+            UIScrollControl.clear();
+
             if (info.results.length == 0) {
                 this.tipsNode.active = true;
-                let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
-                UIScrollControl.clear();
             }
             else {
                 let arr = [];
                 info.results.forEach(el => {
-                    if (el.gType == pb.GameType.JJ_ChuangGuan && GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
-                        arr.push(el);
-                    }
+                    // if (el.gType == pb.GameType.JJ_ChuangGuan && GameCfg.GameType == pb.GameType.//JJ_ChuangGuan) {
+                    //     arr.push(el);
+                    // }
 
-                    else if (el.gType == pb.GameType.JJ_PK || el.gType == pb.GameType.JJ_DuoKong) {
+                    if (el.gType == pb.GameType.JJ_ChuangGuan || el.gType == pb.GameType.JJ_PK || el.gType == pb.GameType.JJ_DuoKong) {
                         arr.push(el);
                     }
                 });
 
                 let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
                 UIScrollControl.clear();
+
                 UIScrollControl.initControl(this.item, arr.length, this.item.getContentSize(), 0, (node, index) => {
                     let nodehandle = node.getComponent('OtherPlayerItem');
                     nodehandle.itemData = arr[index];
                     nodehandle.itemIndex = index;
-                    nodehandle.onShow();
+                    nodehandle.onShow(this.playeInfo);
                 })
             }
         });

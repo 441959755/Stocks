@@ -1,9 +1,10 @@
 
+import { pb } from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
-//import PopupManager from "../../../sctiprs/Utils/PopupManager";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -91,5 +92,26 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.OPENOTHERPLAYERHISLAYER, this.el);
             // PopupManager.loadOtherPlayerHisInfo('otherPlayerHisInfo', this.el);
         }
+        else if (name == 'userinfobg') {
+            //打开信息面板
+            this.getPlayerInfo((info) => {
+                info.icon = GameData.imgs[this.el.icon + ''];
+                PopupManager.openOtherPlayerInfoLayer(info);
+            })
+        }
+    }
+
+    getPlayerInfo(call) {
+        let info = {
+            uid: this.el.uid,
+        }
+
+        let playerInfo = pb.PlayerInfo;
+        let buff = playerInfo.encode(info).finish();
+        socket.send(pb.MessageId.Req_Hall_QueryPlayer, buff, res => {
+            if (res.uid) {
+                call && (call(res));
+            }
+        })
     }
 }

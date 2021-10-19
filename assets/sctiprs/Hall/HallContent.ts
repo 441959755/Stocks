@@ -78,6 +78,10 @@ export default class NewClass extends cc.Component {
 
 		//
 		this.upLoadUserInfo();
+
+		if (GameCfg.GameType == 'STUDY') {
+			this.changeToggle(3);
+		}
 	}
 
 	upLoadUserInfo() {

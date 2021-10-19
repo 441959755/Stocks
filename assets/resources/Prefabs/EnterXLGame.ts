@@ -187,9 +187,9 @@ export default class NewClass extends cc.Component {
                 GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
 
                 GameCfg.GameSet.search = data.code;
-                GameCfg.GameSet.year = data.from;
+                // GameCfg.GameSet.year = data.from;
 
-                GameCfg.GameSet.year = (data.from + '').slice(0, 4);
+                // GameCfg.GameSet.year = (data.from + '').slice(0, 4);
 
                 GameCfg.GameSet.search = data.code;
                 GameCfg.data[0].data = [];

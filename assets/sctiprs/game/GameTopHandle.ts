@@ -324,7 +324,7 @@ export default class NewClass extends cc.Component {
                 //其他人
                 {
                     if (GameData.Players[1]) {
-
+                        this.head2.spriteFrame = null;
                         if (GameData.Players[1].icon) {
                             this.head2.spriteFrame = GameData.Players[1].icon;
                         }

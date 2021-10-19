@@ -36,19 +36,26 @@ export default class NewClass extends cc.Component {
     gameSet1 = null;
     flag = false;
 
+    playeInfo = null;
+
     onHisItemRate(flag) {
         this.recLabel.string = '****';
         flag && (this.recLabel.string = (this.itemData.userProfitRate).toFixed(2) + '%')
         this.flag = flag;
     }
 
-    onShow() {
+    onShow(playeInfo?) {
+
+        playeInfo && (this.playeInfo = playeInfo);
+
         this.indexLabel.string = (this.itemIndex + 1) + '';
         this.startLabel.string = ComUtils.formatTime(this.itemData.ts);
         this.rankLabel.string = this.itemData.rank;
         // this.recLabel.string = this.itemData.userProfitRate + '%';
         this.recLabel.string = '****';
+
         this.flag && (this.recLabel.string = (this.itemData.userProfitRate).toFixed(2) + '%')
+
         if (this.itemData.gType == pb.GameType.ShuangMang) {
             this.modeLabel.string = '双盲训练';
             this.gameSet1 = GameData.SMSet;
@@ -132,11 +139,11 @@ export default class NewClass extends cc.Component {
 
             GameCfg.GAMEFUPANDATA = this.itemData;
 
-            GameCfg.huizhidatas = this.itemData.kStartup;
-            GameData.huizhidatas = this.itemData.kStartup;
+            GameCfg.huizhidatas = this.itemData.kStop + 1;
+            GameData.huizhidatas = this.itemData.kStartup + 1;
 
             let info = {
-                uid: GameData.Players[1].uid,
+                uid: this.playeInfo.uid || GameData.Players[1].uid,
                 ts: ts,
             }
 
@@ -192,7 +199,7 @@ export default class NewClass extends cc.Component {
             let ts = this.itemData.ts;
 
             let info = {
-                uid: GameData.Players[1].uid,
+                uid: this.playeInfo.uid || GameData.Players[1].uid,
                 ts: ts,
             }
 
@@ -202,7 +209,7 @@ export default class NewClass extends cc.Component {
 
                 GameCfg.RoomGameData = {
                     players: [{ gd: {} }, {
-                        gd: GameData.Players[1],
+                        gd: this.playeInfo || GameData.Players[1],
                         ops: { items: UpGameOpt.player1Opt },
                         result: this.itemData
                     }],
@@ -240,7 +247,8 @@ export default class NewClass extends cc.Component {
             kstyle: pb.KStyle.Random,
             code: data.code,
             from: this.itemData.kFrom,
-            to: this.itemData.kTo,
+            total: 256,
+            reserve: 106,
         }
 
         console.log('进入数据：' + JSON.stringify(cache));
