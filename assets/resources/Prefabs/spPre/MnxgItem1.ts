@@ -32,12 +32,12 @@ export default class NewClass extends cc.Component {
 
         let zd = info.price - this._curData.priceCost;
         if (zd < 0) {
-            this.labels[5].node.color = cc.Color.GREEN;
-            this.labels[6].node.color = cc.Color.GREEN;
+            this.labels[5].node.color = new cc.Color().fromHEX('#31a633');
+            this.labels[6].node.color = new cc.Color().fromHEX('#31a633');
         }
         else {
-            this.labels[5].node.color = cc.Color.RED;
-            this.labels[6].node.color = cc.Color.RED;
+            this.labels[5].node.color = new cc.Color().fromHEX('#e94343');
+            this.labels[6].node.color = new cc.Color().fromHEX('#e94343');
         }
 
         this.labels[5].string = ComUtils.changeTwoDecimal1(zd) + '';
@@ -48,9 +48,9 @@ export default class NewClass extends cc.Component {
         this.labels[8].string = ComUtils.changeTwoDecimal1(info.low) + '';
         let sy = (info.price - this._curData.priceCost) * this._curData.volume;
         if (sy > 0) {
-            this.labels[9].node.color = cc.Color.RED;
+            this.labels[9].node.color = new cc.Color().fromHEX('#e94343');
         } else {
-            this.labels[9].node.color = cc.Color.GREEN;
+            this.labels[9].node.color = new cc.Color().fromHEX('#31a633');
         }
         this.labels[9].string = ComUtils.changeTwoDecimal1(sy) + '';
         //   GlobalEvent.emit(EventCfg.UPDATECCASSET, sy);

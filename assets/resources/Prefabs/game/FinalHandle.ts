@@ -174,9 +174,9 @@ export default class NewClass extends cc.Component {
             let rate = ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100).toFixed(2)
             la && (la.string = rate + '%')
             if (parseInt(rate) < 0) {
-                la.node.color = cc.Color.GREEN;
+                la.node.color = new cc.Color().fromHEX('#31a633');
             } else {
-                la.node.color = cc.Color.RED;
+                la.node.color = new cc.Color().fromHEX('#e94343');
             }
 
         }
@@ -205,9 +205,9 @@ export default class NewClass extends cc.Component {
             la.string = (StrategyAIData.profitrate * 100).toFixed(2) + '%';
 
             if (StrategyAIData.profitrate < 0) {
-                la.node.color = cc.Color.GREEN;
+                la.node.color = new cc.Color().fromHEX('#31a633');
             } else {
-                la.node.color = cc.Color.RED;
+                la.node.color = new cc.Color().fromHEX('#e94343');
             }
 
             let la1 = boxs[5].getChildByName('richText1').getComponent(cc.Label);
@@ -218,9 +218,9 @@ export default class NewClass extends cc.Component {
             let la = boxs[6].getChildByName('richText').getComponent(cc.Label);
             la.string = (GameCfg.allRate * 100).toFixed(2) + '%';
             if (GameCfg.allRate < 0) {
-                la.node.color = cc.Color.GREEN;
+                la.node.color = new cc.Color().fromHEX('#31a633');
             } else {
-                la.node.color = cc.Color.RED;
+                la.node.color = new cc.Color().fromHEX('#e94343');
             }
 
             let la1 = boxs[6].getChildByName('richText1').getComponent(cc.Label);
@@ -273,9 +273,9 @@ export default class NewClass extends cc.Component {
 
         this.riseLabel.string = tq + '%';
         if (parseFloat(tq) > 0) {
-            this.riseLabel.node.color = cc.Color.RED;
+            this.riseLabel.node.color = new cc.Color().fromHEX('#e94343');
         } else if (parseFloat(tq) < 0) {
-            this.riseLabel.node.color = cc.Color.GREEN;
+            this.riseLabel.node.color = new cc.Color().fromHEX('#31a633');
         } else {
             this.riseLabel.node.color = cc.Color.WHITE;
         }
@@ -286,9 +286,9 @@ export default class NewClass extends cc.Component {
         this.AllRise.string = all + '%';
 
         if (parseFloat(all) > 0) {
-            this.AllRise.node.color = cc.Color.RED;
+            this.AllRise.node.color = new cc.Color().fromHEX('#e94343');
         } else if (parseFloat(all) < 0) {
-            this.AllRise.node.color = cc.Color.GREEN;
+            this.AllRise.node.color = new cc.Color().fromHEX('#31a633');
         } else {
             this.AllRise.node.color = cc.Color.WHITE;
         }
@@ -297,7 +297,7 @@ export default class NewClass extends cc.Component {
 
         this.yingCont.string = info.yCount + '次';
         if (info.yCount > 0) {
-            this.yingCont.node.color = cc.Color.RED;
+            this.yingCont.node.color = new cc.Color().fromHEX('#e94343');
         } else {
             this.yingCont.node.color = cc.Color.WHITE;
         }
@@ -305,7 +305,7 @@ export default class NewClass extends cc.Component {
         this.kunCount.string = info.sCount + '次';
 
         if (info.sCount > 0) {
-            this.kunCount.node.color = cc.Color.GREEN;
+            this.kunCount.node.color = new cc.Color().fromHEX('#31a633');
         } else {
             this.kunCount.node.color = cc.Color.WHITE;
         }

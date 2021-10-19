@@ -47,9 +47,9 @@ export default class NewClass extends cc.Component {
         if (this.monthlyInfo.profitRate) {
             this.labels[4].string = ((this.monthlyInfo.capitalFinal - this.monthlyInfo.capitalInit) / this.monthlyInfo.capitalInit * 100).toFixed(2) + '%';
             if ((this.monthlyInfo.capitalFinal - this.monthlyInfo.capitalInit) / this.monthlyInfo.capitalInit > 0) {
-                this.labels[4].node.color = cc.Color.RED;
+                this.labels[4].node.color = new cc.Color().fromHEX('#e94343');
             } else {
-                this.labels[4].node.color = cc.Color.GREEN;
+                this.labels[4].node.color = new cc.Color().fromHEX('#31a633');
             }
         }
 
@@ -65,9 +65,9 @@ export default class NewClass extends cc.Component {
         if (this.monthlyInfo.winRate) {
             this.labels[8].string = this.monthlyInfo.winRate.toFixed(2) + '%';
             if (this.monthlyInfo.winRate > 0) {
-                this.labels[8].node.color = cc.Color.RED;
+                this.labels[8].node.color = new cc.Color().fromHEX('#e94343');
             } else {
-                this.labels[8].node.color = cc.Color.GREEN;
+                this.labels[8].node.color = new cc.Color().fromHEX('#31a633');
             }
 
         }
@@ -83,9 +83,9 @@ export default class NewClass extends cc.Component {
         if (this.monthlyInfo.loseRate) {
             this.labels[11].string = (this.monthlyInfo.loseRate).toFixed(2) + '%';
             if (this.monthlyInfo.loseRate > 0) {
-                this.labels[11].node.color = cc.Color.RED;
+                this.labels[11].node.color = new cc.Color().fromHEX('#e94343');
             } else {
-                this.labels[11].node.color = cc.Color.GREEN;
+                this.labels[11].node.color = new cc.Color().fromHEX('#31a633');
             }
         }
 

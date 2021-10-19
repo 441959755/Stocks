@@ -72,9 +72,9 @@ export default class NewClass extends cc.Component {
         let rate = this.gameResult.players[0].result.stockProfitRate.toFixed(2)
         this.HasRisen && (this.HasRisen.string = rate + '%')
         if (parseInt(rate) < 0) {
-            this.HasRisen.node.color = cc.Color.GREEN;
+            this.HasRisen.node.color = new cc.Color().fromHEX('#31a633');
         } else {
-            this.HasRisen.node.color = cc.Color.RED;
+            this.HasRisen.node.color = new cc.Color().fromHEX('#e94343');
         }
 
         {
@@ -91,7 +91,8 @@ export default class NewClass extends cc.Component {
             userName.string = this.gameResult.players[0].gd.nickname;
             userLevel.string = 'LV: ' + GameData.properties[pb.GamePropertyId.Level];
             userExp.string = 'EXP: ' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
-
+            loseSp.active = false;
+            winSp.active = false;
             userHead.spriteFrame = GameData.headImg;
 
             UpGameOpt.ChanagekOffset(this.gameResult.players[0].ops.items);
@@ -130,6 +131,8 @@ export default class NewClass extends cc.Component {
             userName.string = this.gameResult.players[1].gd.nickname;
             userLevel.string = 'LV: ' + this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level];
             userExp.string = 'EXP: ' + this.gameResult.players[1].gd.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level]];
+            loseSp.active = false;
+            winSp.active = false;
 
             if (GameData.Players[1].icon) {
 
@@ -194,7 +197,7 @@ export default class NewClass extends cc.Component {
                 }
                 else if (e.i == pb.GamePropertyId.Fame) {
                     arr[2].string = "+ " + e.v;
-                    arr[2].node.color = cc.Color.RED;
+                    arr[2].node.color = new cc.Color().fromHEX('#e94343');
                 }
 
             });
@@ -216,7 +219,7 @@ export default class NewClass extends cc.Component {
                 }
                 else if (e.i == pb.GamePropertyId.Fame) {
                     arr[2].string = "" + e.v;
-                    arr[2].node.color = cc.Color.GREEN;
+                    arr[2].node.color = new cc.Color().fromHEX('#31a633');
                 }
             });
         }
@@ -236,15 +239,15 @@ export default class NewClass extends cc.Component {
                 }
                 else if (e.i == pb.GamePropertyId.Fame) {
                     arr[2].string = "" + e.v;
-                    arr[2].node.color = cc.Color.GREEN;
+                    arr[2].node.color = new cc.Color().fromHEX('#31a633');
                 }
             });
         }
         if (status == 2 || status == 1 || status == 3) {
             if (Rate > 0) {
-                arr[3].node.color = cc.Color.RED;
+                arr[3].node.color = new cc.Color().fromHEX('#e94343');
             } else {
-                arr[3].node.color = cc.Color.GREEN;
+                arr[3].node.color = new cc.Color().fromHEX('#31a633');
             }
             // arr[3].string = Rate.toFixed(2) + "%";
 
@@ -252,7 +255,7 @@ export default class NewClass extends cc.Component {
 
         }
         else {
-            arr[3].node.color = cc.Color.GREEN;
+            arr[3].node.color = new cc.Color().fromHEX('#31a633');
             if (status == 3) {
                 arr[3].string = '消极';
             } else {

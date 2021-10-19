@@ -140,6 +140,7 @@ export default class NewClass extends cc.Component {
         // this.content.getComponent(cc.Layout).verticalDirection = cc.Layout.VerticalDirection.BOTTOM_TO_TOP;
         GlobalEvent.on(EventCfg.SLGEVENTNOTICE, () => {
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                this.initData();
                 if (GameCfg.GameSet.select == '均线') {
                     this.testMaEvent();
                 } else if (GameCfg.GameSet.select == 'MACD') {
@@ -196,10 +197,6 @@ export default class NewClass extends cc.Component {
 
     }
 
-    onEnable() {
-        this.initData();
-    }
-
     onDestroy() {
         GlobalEvent.off(EventCfg.SLGEVENTNOTICE);
         GlobalEvent.off('clickTipsInfoPos');
@@ -229,16 +226,14 @@ export default class NewClass extends cc.Component {
 
         this.VOlList = DrawData.VolList;
 
-        //TODO this.textInfo.push();
     }
 
     start() {
-        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.MAIndex = GameCfg.MAs.indexOf(GameCfg.GameSet.MA[0]);
             this.MAIndex1 = GameCfg.MAs.indexOf(GameCfg.GameSet.MA[1]);
             this.MAIndex2 = GameCfg.MAs.indexOf(GameCfg.GameSet.MA[2]);
-
         }
 
     }
@@ -264,7 +259,6 @@ export default class NewClass extends cc.Component {
                                 StrategyAIData.onBuyFunc();
                                 return;
                             }
-
                         }
                     }
                 }

@@ -56,14 +56,14 @@ export default class NewClass extends cc.Component {
 
         let zd = info.price - info.close;
         if (zd < 0) {
-            this.labs[3].node.color = cc.Color.GREEN;
-            this.labs[4].node.color = cc.Color.GREEN;
-            this.labs[5].node.color = cc.Color.GREEN;
+            this.labs[3].node.color = new cc.Color().fromHEX('#31a633');
+            this.labs[4].node.color = new cc.Color().fromHEX('#31a633');
+            this.labs[5].node.color = new cc.Color().fromHEX('#31a633');
         }
         else {
-            this.labs[3].node.color = cc.Color.RED;
-            this.labs[4].node.color = cc.Color.RED;
-            this.labs[5].node.color = cc.Color.RED;
+            this.labs[3].node.color = new cc.Color().fromHEX('#e94343');
+            this.labs[4].node.color = new cc.Color().fromHEX('#e94343');
+            this.labs[5].node.color = new cc.Color().fromHEX('#e94343');
         }
 
         this.labs[3].string = ComUtils.changeTwoDecimal(zd) + '';

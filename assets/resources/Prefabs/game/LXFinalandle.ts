@@ -57,9 +57,9 @@ export default class NewClass extends cc.Component {
         this.HasRisen && (this.HasRisen.string = rate + '%')
 
         if (parseInt(rate) < 0) {
-            this.HasRisen.node.color = cc.Color.GREEN;
+            this.HasRisen.node.color = new cc.Color().fromHEX('#31a633');
         } else {
-            this.HasRisen.node.color = cc.Color.RED;
+            this.HasRisen.node.color = new cc.Color().fromHEX('#e94343');
         }
 
         {
@@ -124,21 +124,21 @@ export default class NewClass extends cc.Component {
         this.selfResultLabel[2].string = ComUtils.changeTwoDecimal(GameCfg.allRate) + '%';
 
         if (info.sCount > 0) {
-            this.selfResultLabel[1].node.color = cc.Color.GREEN;
+            this.selfResultLabel[1].node.color = new cc.Color().fromHEX('#31a633');
         } else {
             this.selfResultLabel[1].node.color = cc.Color.WHITE;
         }
 
         if (info.yCount > 0) {
-            this.selfResultLabel[0].node.color = cc.Color.RED;
+            this.selfResultLabel[0].node.color = new cc.Color().fromHEX('#e94343');
         } else {
             this.selfResultLabel[0].node.color = cc.Color.WHITE;
         }
 
         if (GameCfg.allRate > 0) {
-            this.selfResultLabel[2].node.color = cc.Color.RED;
+            this.selfResultLabel[2].node.color = new cc.Color().fromHEX('#e94343');
         } else {
-            this.selfResultLabel[2].node.color = cc.Color.GREEN;
+            this.selfResultLabel[2].node.color = new cc.Color().fromHEX('#31a633');
         }
 
         let info1 = DrawData.getWinLosCountByOps(UpGameOpt.player1Opt);
@@ -148,21 +148,21 @@ export default class NewClass extends cc.Component {
         this.otherResultLabel[2].string = ComUtils.changeTwoDecimal(GameCfg.RoomGameData.players[1].result.userProfitRate) + '%';
 
         if (info1.sCount > 0) {
-            this.otherResultLabel[1].node.color = cc.Color.GREEN;
+            this.otherResultLabel[1].node.color = new cc.Color().fromHEX('#31a633');
         } else {
             this.otherResultLabel[1].node.color = cc.Color.WHITE;
         }
 
         if (info1.yCount > 0) {
-            this.otherResultLabel[0].node.color = cc.Color.RED;
+            this.otherResultLabel[0].node.color = new cc.Color().fromHEX('#e94343');
         } else {
             this.otherResultLabel[0].node.color = cc.Color.WHITE;
         }
 
         if (GameCfg.RoomGameData.players[1].result.userProfitRate > 0) {
-            this.otherResultLabel[2].node.color = cc.Color.RED;
+            this.otherResultLabel[2].node.color = new cc.Color().fromHEX('#e94343');
         } else {
-            this.otherResultLabel[2].node.color = cc.Color.GREEN;
+            this.otherResultLabel[2].node.color = new cc.Color().fromHEX('#31a633');
         }
 
     }

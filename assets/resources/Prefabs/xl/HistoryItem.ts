@@ -76,7 +76,7 @@ export default class NewClass extends cc.Component {
                     kstyle: pb.KStyle.Random,
                     code: this.infoData.quotesCode,
                     from: this.infoData.kFrom + '',
-                    total: this.infoData.kStop - this.infoData.kStartup + 100,
+                    total: this.infoData.kStop - this.infoData.kStartup + 100 + 5,
                     //   to: this.infoData.kTo + '',
                     reserve: 100,
                 };

@@ -36155,7 +36155,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1280,
-      "height": 115
+      "height": 100
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -36228,7 +36228,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 930,
+      "width": 900,
       "height": 150
     },
     "_anchorPoint": {
@@ -36240,7 +36240,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -8.567,
         0,
         0,
         0,
@@ -36307,7 +36307,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -315,
+        -300,
         0,
         0,
         0,
@@ -37608,7 +37608,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        365,
+        350,
         0,
         0,
         0,
@@ -37761,7 +37761,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 930,
+      "width": 900,
       "height": 150
     },
     "_resize": 1,
@@ -37776,7 +37776,7 @@
     "_N$paddingRight": 0,
     "_N$paddingTop": 0,
     "_N$paddingBottom": 0,
-    "_N$spacingX": 40,
+    "_N$spacingX": 25,
     "_N$spacingY": 0,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0,
@@ -39461,7 +39461,7 @@
   {
     "__type__": "cc.Node",
     "_name": "fupan1",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 759
     },
@@ -39574,7 +39574,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -485,
+        -519.1590000000001,
         13.966,
         0,
         0,
@@ -39642,7 +39642,7 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 8,
-    "_left": 80,
+    "_left": 45.84099999999995,
     "_right": 0,
     "_top": 0,
     "_bottom": 0,
@@ -39796,7 +39796,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        501.87800000000004,
+        520,
         10.055,
         0,
         0,
@@ -39865,7 +39865,7 @@
     "_target": null,
     "_alignFlags": 32,
     "_left": 0,
-    "_right": 63.12199999999996,
+    "_right": 45,
     "_top": 0,
     "_bottom": 0,
     "_verticalCenter": 0,

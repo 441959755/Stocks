@@ -77,7 +77,7 @@ export default class NewClass extends cc.Component {
                     }
                 }
                 if (!flag) {
-                    this._tipsLa.color = cc.Color.RED;
+                    this._tipsLa.color = new cc.Color().fromHEX('#e94343');
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '没有找查到您要的股票.');
                     edit.string = '';
                 } else {

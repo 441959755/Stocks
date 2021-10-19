@@ -28,9 +28,9 @@ export default {
 
     // MAGraph: [5, 10, 20, 30, 60, 120],   //价格均线
 
-    MAColor: [cc.Color.WHITE, cc.Color.YELLOW, cc.Color.RED, cc.Color.BLUE, cc.Color.GREEN, cc.Color.ORANGE],
+    MAColor: [cc.Color.WHITE, cc.Color.YELLOW, new cc.Color().fromHEX('#e94343'), cc.Color.BLUE, new cc.Color().fromHEX('#31a633'), cc.Color.ORANGE],
 
-    BOLLColor: [cc.Color.WHITE, cc.Color.YELLOW, cc.Color.RED],
+    BOLLColor: [cc.Color.WHITE, cc.Color.YELLOW, new cc.Color().fromHEX('#e94343')],
 
     tipsDealColor: [],
 

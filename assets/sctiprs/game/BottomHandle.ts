@@ -450,11 +450,12 @@ export default class NewClass extends cc.Component {
 				GameCfg.GameType == pb.GameType.ZhiBiao ||
 				GameCfg.GameType == pb.GameType.JJ_PK ||
 				GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
-				if (el.opId == pb.GameOperationId.Ask) {
+				console.log(parseInt(el.opId));
+				if (el.opId == pb.GameOperationId.Ask || el.opId == 'Ask') {
 					this._type = 1;
 					this.onClickCfBtn(el.volume);
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: el.kOffset });
-				} else if (el.opId == pb.GameOperationId.Bid) {
+				} else if (el.opId == pb.GameOperationId.Bid || el.opId == 'Bid') {
 					this._type = 2;
 					this.onClickCfBtn(el.volume);
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: el.kOffset });

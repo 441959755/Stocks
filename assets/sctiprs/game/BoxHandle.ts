@@ -118,7 +118,7 @@ export default class NewClass extends cc.Component {
                 if (zf < 0) {
                     this.zfLa.node.color = new cc.Color().fromHEX('#76B87E');
                 } else {
-                    this.zfLa.node.color = cc.Color.RED;
+                    this.zfLa.node.color = new cc.Color().fromHEX('#e94343');
                 }
 
                 this.zfLa.string = zf.toFixed(2) + '%';
@@ -152,12 +152,12 @@ export default class NewClass extends cc.Component {
                         this.tipsTitle.children[10].active = true;
 
                         this.tipsText[index].string = parseInt(el * 10000 + '') / 100 + '%';
-                        this.tipsText[index].node.color = cc.Color.GREEN;
+                        this.tipsText[index].node.color = new cc.Color().fromHEX('#31a633');
                     } else {
                         this.tipsText[index].node.active = true;
                         this.tipsTitle.children[10].active = true;
                         this.tipsText[index].string = parseInt(el * 10000 + '') / 100 + '%';
-                        this.tipsText[index].node.color = cc.Color.RED;
+                        this.tipsText[index].node.color = new cc.Color().fromHEX('#e94343');
                     }
                 }
                 else if (index == 11) {
@@ -186,7 +186,7 @@ export default class NewClass extends cc.Component {
                         if (el < 0) {
                             this.tipsText[index].node.color = new cc.Color().fromHEX('#76B87E');
                         } else {
-                            this.tipsText[index].node.color = cc.Color.RED;
+                            this.tipsText[index].node.color = new cc.Color().fromHEX('#e94343');
                         }
                         if (index == 9) {
                             el += '%';
@@ -377,7 +377,7 @@ export default class NewClass extends cc.Component {
 
     setBoxfalg(data) {
         let node = this.rightBox.getChildByName(data);
-        node && (node.color = new cc.Color().fromHEX('#fd4432'))
+        node && (node.color = new cc.Color().fromHEX('#cccccc'))
         if (data == 'ma' || data == 'boll') {
             if (data == 'ma') {
                 this.ma = true;
@@ -461,7 +461,7 @@ export default class NewClass extends cc.Component {
         //是否一直显示
         if (GameCfg.GameSet.isShowVol && !flagData.ccl) {
             flagData.cpm = true;
-            this.rightBox.getChildByName('CPM').color = new cc.Color().fromHEX('#fd4432');
+            this.rightBox.getChildByName('CPM').color = new cc.Color().fromHEX('#cccccc');
         }
         GlobalEvent.emit('on_off', flagData);
     }

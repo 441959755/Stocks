@@ -80,20 +80,19 @@ export default class GlobalHandle {
 
             if (!info.items || info.items.length <= 0) {
                 console.log('获取的行情为空');
-                // console.log(JSON.stringify(GameCfg.data));
+
                 GameCfg.GAMEFUPAN = false;
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 return;
             }
 
             info.items.forEach((el, index) => {
-                //  if (index != 0) {
 
                 let ye = (el.timestamp + '').slice(0, 4);
                 let mon = (el.timestamp + '').slice(4, 6);
                 let da = (el.timestamp + '').slice(6);
                 let fromDate = ye + '-' + mon + '-' + da;
-                //  if (fromDate != d) {
+
                 let data = {
                     day: fromDate || 0,
                     open: el.open || 0,

@@ -99,7 +99,7 @@ export default class NewClass extends cc.Component {
         }
 
         if (zql < 60) {
-            this.zqlLa.node.color = cc.Color.GREEN;
+            this.zqlLa.node.color = new cc.Color().fromHEX('#31a633');
         }
         else {
             this.zqlLa.node.color = new cc.Color().fromHEX('#e84848');

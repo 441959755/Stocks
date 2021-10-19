@@ -59,7 +59,7 @@ export default class NewClass extends cc.Component {
                 this.profitLas[0].string = data.maxDay + '';
                 this.profitLas[1].string = (data.maxRate * 100).toFixed(2) + '%';
                 if (data.maxRate > 0) {
-                    this.profitLas[1].node.color = cc.Color.RED;
+                    this.profitLas[1].node.color = new cc.Color().fromHEX('#e94343');
                 } else {
                     this.profitLas[1].node.color = cc.Color.WHITE;
                 }
@@ -69,7 +69,7 @@ export default class NewClass extends cc.Component {
                 this.lossLas[1].string = ((data.minRate) * 100).toFixed(2) + '%';
 
                 if (data.minRate != 0) {
-                    this.lossLas[1].node.color = cc.Color.GREEN;
+                    this.lossLas[1].node.color = new cc.Color().fromHEX('#31a633');
                 } else {
                     this.lossLas[1].node.color = cc.Color.WHITE;
                 }

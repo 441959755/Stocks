@@ -75,7 +75,7 @@ export default class NewClass extends cc.Component {
 
         this.hideAllNode();
         let nodes = this.AllNode[this._selectID].children;
-        this.AllNode[this._selectID].color = cc.Color.RED;
+        this.AllNode[this._selectID].color = new cc.Color().fromHEX('#e94343');
         nodes.forEach(e => {
             e.active = true;
         })
@@ -265,7 +265,7 @@ export default class NewClass extends cc.Component {
                 return;
             }
             let nodes = this.AllNode[0].children;
-            this.AllNode[0].color = cc.Color.RED;
+            this.AllNode[0].color = new cc.Color().fromHEX('#e94343');
             GameCfg.selectZline = pb.KType.Min5;
             nodes[0].active = true;
 
@@ -276,7 +276,7 @@ export default class NewClass extends cc.Component {
                 return;
             }
             let nodes = this.AllNode[1].children;
-            this.AllNode[1].color = cc.Color.RED;
+            this.AllNode[1].color = new cc.Color().fromHEX('#e94343');
             nodes[0].active = true;
             GameCfg.selectZline = pb.KType.Min5;
             this.onBlackDrawLine(1);
@@ -287,7 +287,7 @@ export default class NewClass extends cc.Component {
                 return;
             }
             let nodes = this.AllNode[2].children;
-            this.AllNode[2].color = cc.Color.RED;
+            this.AllNode[2].color = new cc.Color().fromHEX('#e94343');
             nodes[0].active = true;
             GameCfg.selectZline = pb.KType.Min5;
             this.onBlackDrawLine(2);
@@ -298,7 +298,7 @@ export default class NewClass extends cc.Component {
                 return;
             }
             let nodes = this.AllNode[3].children;
-            this.AllNode[3].color = cc.Color.RED;
+            this.AllNode[3].color = new cc.Color().fromHEX('#e94343');
             nodes[0].active = true;
             GameCfg.selectZline = pb.KType.Min5;
             this.onBlackDrawLine(3);
@@ -309,7 +309,7 @@ export default class NewClass extends cc.Component {
                 return;
             }
             let nodes = this.AllNode[4].children;
-            this.AllNode[4].color = cc.Color.RED;
+            this.AllNode[4].color = new cc.Color().fromHEX('#e94343');
             nodes[0].active = true;
             GameCfg.selectZline = pb.KType.Day;
             this.onBlackDrawLine(4);
@@ -320,7 +320,7 @@ export default class NewClass extends cc.Component {
                 return;
             }
             let nodes = this.AllNode[5].children;
-            this.AllNode[5].color = cc.Color.RED;
+            this.AllNode[5].color = new cc.Color().fromHEX('#e94343');
             nodes[0].active = true;
             GameCfg.selectZline = pb.KType.Day7;
             this.onBlackDrawLine(5);

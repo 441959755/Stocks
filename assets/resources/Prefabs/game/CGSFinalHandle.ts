@@ -61,6 +61,7 @@ export default class NewClass extends cc.Component {
 
     onShow() {
         this.flag = true;
+
         if (GameCfg.GAMEFUPAN) {
             return;
         }
@@ -86,9 +87,9 @@ export default class NewClass extends cc.Component {
         this.HasRisen && (this.HasRisen.string = rate + '%')
 
         if (parseInt(rate + '') < 0) {
-            this.HasRisen.node.color = cc.Color.GREEN;
+            this.HasRisen.node.color = new cc.Color().fromHEX('#31a633');
         } else {
-            this.HasRisen.node.color = cc.Color.RED;
+            this.HasRisen.node.color = new cc.Color().fromHEX('#e94343');
         }
 
         {
@@ -108,12 +109,16 @@ export default class NewClass extends cc.Component {
 
             userHead.spriteFrame = GameData.headImg;
 
-            if (GameCfg.allRate == 0 && UpGameOpt.arrOpt.length == 0) {
-                this.selfRank = 2;
-                xj.active = true;
-                loseSp.active = true;
-            }
-            else if (GameCfg.allRate <= GameCfg.RoomGameData.players[1].result.userProfitRate) {
+            loseSp.active = false;
+            winSp.active = false;
+
+            // if (GameCfg.allRate == 0 && UpGameOpt.arrOpt.length == 0) {
+            //     this.selfRank = 2;
+            //     //    xj.active = true;
+            //     loseSp.active = true;
+            // }
+            // else
+            if (GameCfg.allRate <= GameCfg.RoomGameData.players[1].result.userProfitRate) {
                 this.selfRank = 2;
                 loseSp.active = true;
             }
@@ -141,7 +146,8 @@ export default class NewClass extends cc.Component {
             if (GameData.Players[1].icon) {
                 userHead.spriteFrame = GameData.Players[1].icon;
             }
-
+            loseSp.active = false;
+            winSp.active = false;
             let ex;
             let stages = JSON.parse(GameData.CGSConfData.conf);
 
@@ -207,13 +213,13 @@ export default class NewClass extends cc.Component {
             this.selfResultLabel[4].string = "+" + 0;
             this.selfResultLabel[5].string = ComUtils.changeTwoDecimal(GameCfg.allRate) + '%';
 
-            this.selfResultLabel[2].node.color = cc.Color.RED;
-            this.selfResultLabel[3].node.color = cc.Color.RED;
-            this.selfResultLabel[4].node.color = cc.Color.RED;
+            this.selfResultLabel[2].node.color = new cc.Color().fromHEX('#e94343');
+            this.selfResultLabel[3].node.color = new cc.Color().fromHEX('#e94343');
+            this.selfResultLabel[4].node.color = new cc.Color().fromHEX('#e94343');
 
-            this.otherResultLabel[2].node.color = cc.Color.GREEN;
-            this.otherResultLabel[3].node.color = cc.Color.GREEN;
-            this.otherResultLabel[4].node.color = cc.Color.GREEN;
+            this.otherResultLabel[2].node.color = new cc.Color().fromHEX('#31a633');
+            this.otherResultLabel[3].node.color = new cc.Color().fromHEX('#31a633');
+            this.otherResultLabel[4].node.color = new cc.Color().fromHEX('#31a633');
 
             this.otherResultLabel[0].string = '-' + stages.Lose[0].v;
             this.otherResultLabel[1].string = '+' + stages.Lose[1].v;
@@ -237,26 +243,26 @@ export default class NewClass extends cc.Component {
             this.otherResultLabel[4].string = "+" + 0;
             this.otherResultLabel[5].string = ComUtils.changeTwoDecimal(GameCfg.RoomGameData.players[1].result.userProfitRate) + '%'
 
-            this.selfResultLabel[2].node.color = cc.Color.GREEN;
-            this.selfResultLabel[3].node.color = cc.Color.GREEN;
-            this.selfResultLabel[4].node.color = cc.Color.GREEN;
+            this.selfResultLabel[2].node.color = new cc.Color().fromHEX('#31a633');
+            this.selfResultLabel[3].node.color = new cc.Color().fromHEX('#31a633');
+            this.selfResultLabel[4].node.color = new cc.Color().fromHEX('#31a633');
 
-            this.otherResultLabel[2].node.color = cc.Color.RED;
-            this.otherResultLabel[3].node.color = cc.Color.RED;
-            this.otherResultLabel[4].node.color = cc.Color.RED;
+            this.otherResultLabel[2].node.color = new cc.Color().fromHEX('#e94343');
+            this.otherResultLabel[3].node.color = new cc.Color().fromHEX('#e94343');
+            this.otherResultLabel[4].node.color = new cc.Color().fromHEX('#e94343');
         }
 
         if (GameCfg.allRate > 0) {
-            this.selfResultLabel[5].node.color = cc.Color.RED;
+            this.selfResultLabel[5].node.color = new cc.Color().fromHEX('#e94343');
         } else {
-            this.selfResultLabel[5].node.color = cc.Color.GREEN;
+            this.selfResultLabel[5].node.color = new cc.Color().fromHEX('#31a633');
         }
 
         if (GameCfg.RoomGameData.players[1].result.userProfitRate > 0) {
-            this.otherResultLabel[5].node.color = cc.Color.RED;
+            this.otherResultLabel[5].node.color = new cc.Color().fromHEX('#e94343');
         }
         else {
-            this.otherResultLabel[5].node.color = cc.Color.GREEN;
+            this.otherResultLabel[5].node.color = new cc.Color().fromHEX('#31a633');
         }
 
         GameCfg.RoomGameData.players[0].result.userProfitRate = GameCfg.allRate;
@@ -316,7 +322,7 @@ export default class NewClass extends cc.Component {
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
 
-            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, -1);
+            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 1);
             this.node.active = false;
             GameCfg.GAMEFUPAN = true;
 
@@ -332,7 +338,7 @@ export default class NewClass extends cc.Component {
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
 
-            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, -2);
+            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 2);
             this.node.active = false;
             GameCfg.GAMEFUPAN = true;
 

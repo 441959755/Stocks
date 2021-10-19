@@ -574,9 +574,11 @@ export default class NewClass extends cc.Component {
         DrawData.initData(data);
 
         this.MaList = DrawData.MaList;
+
         this.BollList = DrawData.BollList;
 
         this.EXPMA1 = DrawData.EXPMA1;
+
         this.EXPMA2 = DrawData.EXPMA2;
 
         this.btx = DrawData.btx;

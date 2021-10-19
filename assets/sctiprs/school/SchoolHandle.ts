@@ -139,7 +139,7 @@ export default class NewClass extends cc.Component {
             curData = parseInt(curData);
 
             if (curData > GameData.studyHisBar) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '请先学习前一张');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '请先学习前一章');
                 return;
             }
             GameData.studyBar = curData;

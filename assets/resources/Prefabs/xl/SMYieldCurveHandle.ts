@@ -167,6 +167,8 @@ export default class NewClass extends cc.Component {
             clearTimeout(this.cb);
             this.cb = null;
         }
+        this.draw.clear();
+        this.draw1.clear();
     }
 
     tipsBoxShow(event) {
@@ -321,11 +323,11 @@ export default class NewClass extends cc.Component {
         this.labels[3].string = GameData.SmxlState.gold - GameData.SmxlState.goldInit + '';
 
         if (GameData.SmxlState.gold - GameData.SmxlState.goldInit < 0) {
-            this.labels[3].node.color = cc.Color.GREEN;
-            this.labels[2].node.color = cc.Color.GREEN;
+            this.labels[3].node.color = new cc.Color().fromHEX('#31a633');
+            this.labels[2].node.color = new cc.Color().fromHEX('#31a633');
         } else if (GameData.SmxlState.gold - GameData.SmxlState.goldInit >= 0) {
-            this.labels[3].node.color = cc.Color.RED;
-            this.labels[2].node.color = cc.Color.RED;
+            this.labels[3].node.color = new cc.Color().fromHEX('#e94343');
+            this.labels[2].node.color = new cc.Color().fromHEX('#e94343');
         }
 
         this.labels[2].string = ((GameData.SmxlState.gold - GameData.SmxlState.goldInit) / GameData.SmxlState.goldInit * 100).toFixed(2) + '%';
@@ -444,9 +446,9 @@ export default class NewClass extends cc.Component {
         this.dayLabel[1].string = this.daysData[day - 1].endMoney - this.daysData[day - 1].user_capital + '';
 
         if (this.daysData[day - 1].endMoney - this.daysData[day - 1].user_capital < 0) {
-            this.dayLabel[1].node.color = cc.Color.GREEN;
+            this.dayLabel[1].node.color = new cc.Color().fromHEX('#31a633');
         } else {
-            this.dayLabel[1].node.color = cc.Color.RED;
+            this.dayLabel[1].node.color = new cc.Color().fromHEX('#e94343');
         }
 
         this.timeLabel1.string = '统计时段:' + year + '.' + month + '.' + day;

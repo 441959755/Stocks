@@ -84,26 +84,26 @@ export default class NewClass extends cc.Component {
     UpdateOtherRate(rate) {
         this.pkAllRateLa2.string = rate + '%';
         if (rate > 0) {
-            this.pkAllRateLa2.node.color = cc.Color.RED;
+            this.pkAllRateLa2.node.color = new cc.Color().fromHEX('#e94343');
         }
         else {
-            this.pkAllRateLa2.node.color = cc.Color.GREEN;
+            this.pkAllRateLa2.node.color = new cc.Color().fromHEX('#31a633');
         }
     }
 
     UpdateRate(data) {
         if (data.length >= 2) {
             if (data[1] > 0) {
-                this.ALlRateLabel.node.color = cc.Color.RED;
+                this.ALlRateLabel.node.color = new cc.Color().fromHEX('#e94343');
                 this.currRateLabel.node.color = cc.Color.WHITE;
 
-                this.pkAllRateLa1.node.color = cc.Color.RED;
+                this.pkAllRateLa1.node.color = new cc.Color().fromHEX('#e94343');
                 this.pkCurRatela1.node.color = cc.Color.WHITE;
             } else {
-                this.ALlRateLabel.node.color = cc.Color.GREEN;
+                this.ALlRateLabel.node.color = new cc.Color().fromHEX('#31a633');
                 this.currRateLabel.node.color = cc.Color.WHITE;
 
-                this.pkAllRateLa1.node.color = cc.Color.GREEN;
+                this.pkAllRateLa1.node.color = new cc.Color().fromHEX('#31a633');
                 this.pkCurRatela1.node.color = cc.Color.WHITE;
             }
             data[1] && (this.ALlRateLabel.string = (parseInt(data[1] * 10000 + '') / 100).toFixed(2) + '%');
@@ -112,13 +112,13 @@ export default class NewClass extends cc.Component {
             this.pkCurRatela1.string = '0.00%';
         } else {
             if (data[0] >= 0) {
-                this.currRateLabel.node.color = cc.Color.RED;
+                this.currRateLabel.node.color = new cc.Color().fromHEX('#e94343');
 
-                this.pkCurRatela1.node.color = cc.Color.RED;
+                this.pkCurRatela1.node.color = new cc.Color().fromHEX('#e94343');
             } else {
-                this.currRateLabel.node.color = cc.Color.GREEN;
+                this.currRateLabel.node.color = new cc.Color().fromHEX('#31a633');
 
-                this.pkCurRatela1.node.color = cc.Color.GREEN;
+                this.pkCurRatela1.node.color = new cc.Color().fromHEX('#31a633');
             }
             data[0] && (this.currRateLabel.string = (parseInt(data[0] * 10000 + '') / 100).toFixed(2) + '%');
             data[0] && (this.pkCurRatela1.string = (parseInt(data[0] * 10000 + '') / 100).toFixed(2) + '%');
@@ -160,16 +160,16 @@ export default class NewClass extends cc.Component {
             this.pkAllRateLa2.string = ComUtils.changeTwoDecimal(userProfitRate2) + '%';
 
             if (userProfitRate1 > 0) {
-                this.pkAllRateLa1.node.color = cc.Color.RED;
+                this.pkAllRateLa1.node.color = new cc.Color().fromHEX('#e94343');
             } else {
-                this.pkAllRateLa1.node.color = cc.Color.GREEN;
+                this.pkAllRateLa1.node.color = new cc.Color().fromHEX('#31a633');
             }
 
             if (userProfitRate2 > 0) {
-                this.pkAllRateLa2.node.color = cc.Color.RED;
+                this.pkAllRateLa2.node.color = new cc.Color().fromHEX('#e94343');
             }
             else {
-                this.pkAllRateLa2.node.color = cc.Color.GREEN;
+                this.pkAllRateLa2.node.color = new cc.Color().fromHEX('#31a633');
             }
         }
         else {
@@ -214,10 +214,10 @@ export default class NewClass extends cc.Component {
             }
 
             if (r > 0) {
-                rate.node.color = cc.Color.RED;
+                rate.node.color = new cc.Color().fromHEX('#e94343');
             }
             else {
-                rate.node.color = cc.Color.GREEN;
+                rate.node.color = new cc.Color().fromHEX('#31a633');
             }
 
             rate.string = ComUtils.changeTwoDecimal(r) + '%';
@@ -295,7 +295,7 @@ export default class NewClass extends cc.Component {
             btnMyspic.active = false;
             statBtn.active = false;
 
-            this.node.height = 80;
+            this.node.height = 70;
             let la = this.node.getChildByName('rate');
             la.x = 0;
         }
@@ -303,7 +303,6 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.JJ_PK
             || GameCfg.GameType == pb.GameType.JJ_DuoKong
             || GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
-
 
             this.GameName.string = '';
 

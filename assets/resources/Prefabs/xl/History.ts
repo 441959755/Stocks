@@ -132,25 +132,25 @@ export default class NewClass extends cc.Component {
 
             nodes[5].getComponent(cc.Label).string = arr[index].stockProfitRate.toFixed(2) + '%';
             if (arr[index].stockProfitRate > 0) {
-                nodes[5].color = cc.Color.RED;
+                nodes[5].color = new cc.Color().fromHEX('#e94343');
             } else if (arr[index].stockProfitRate < 0) {
-                nodes[5].color = cc.Color.GREEN;
+                nodes[5].color = new cc.Color().fromHEX('#31a633');
             } else {
                 nodes[5].color = cc.Color.WHITE;
             }
             nodes[6].getComponent(cc.Label).string = arr[index].userProfitRate.toFixed(2) + '%';
             if (arr[index].userProfitRate > 0) {
-                nodes[6].color = cc.Color.RED;
+                nodes[6].color = new cc.Color().fromHEX('#e94343');
             } else if (arr[index].userProfitRate < 0) {
-                nodes[6].color = cc.Color.GREEN;
+                nodes[6].color = new cc.Color().fromHEX('#31a633');
             } else {
                 nodes[6].color = cc.Color.WHITE;
             }
             nodes[7].getComponent(cc.Label).string = arr[index].userProfit;
             if (arr[index].userProfit > 0) {
-                nodes[7].color = cc.Color.RED;
+                nodes[7].color = new cc.Color().fromHEX('#e94343');
             } else if (arr[index].userProfit < 0) {
-                nodes[7].color = cc.Color.GREEN;
+                nodes[7].color = new cc.Color().fromHEX('#31a633');
             } else {
                 nodes[7].color = cc.Color.WHITE;
             }
@@ -172,13 +172,13 @@ export default class NewClass extends cc.Component {
                 if (AIrate) {
                     nodes[11].getComponent(cc.Label).string = parseFloat(AIrate).toFixed(2) + '%';
                     if (parseFloat(AIrate) > 0) {
-                        nodes[11].color = cc.Color.RED;
+                        nodes[11].color = new cc.Color().fromHEX('#e94343');
                     }
                     else if (parseFloat(AIrate) == 0) {
                         nodes[11].color = cc.Color.WHITE;
                     }
                     else {
-                        nodes[11].color = cc.Color.GREEN;
+                        nodes[11].color = new cc.Color().fromHEX('#31a633');
                     }
                 }
 
@@ -197,9 +197,9 @@ export default class NewClass extends cc.Component {
             // this.title.string = '双盲训练';
             this.label.string = sumEar + '';
             if (sumEar > 0) {
-                this.label.node.color = cc.Color.RED;
+                this.label.node.color = new cc.Color().fromHEX('#e94343');
             } else if (sumEar < 0) {
-                this.label.node.color = cc.Color.GREEN;
+                this.label.node.color = new cc.Color().fromHEX('#31a633');
             } else {
                 this.label.node.color = cc.Color.WHITE;
             }
@@ -207,9 +207,9 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.QiHuo) {
             this.label.string = (sumrate).toFixed(2) + '%';
             if (sumrate > 0) {
-                this.label.node.color = cc.Color.RED;
+                this.label.node.color = new cc.Color().fromHEX('#e94343');
             } else if (sumrate < 0) {
-                this.label.node.color = cc.Color.GREEN;
+                this.label.node.color = new cc.Color().fromHEX('#31a633');
             } else {
                 this.label.node.color = cc.Color.WHITE;
             }

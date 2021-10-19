@@ -392,24 +392,24 @@ export default class NewClass extends cc.Component {
 
             if (index == 0) {
                 if (el.open < el.close) {
-                    this.drawVol.strokeColor = cc.Color.RED;
+                    this.drawVol.strokeColor = new cc.Color().fromHEX('#e94343');
                 }
                 else if (el.open == el.close) {
                     this.drawVol.strokeColor = cc.Color.WHITE;
                 }
                 else if (el.open > el.close) {
-                    this.drawVol.strokeColor = cc.Color.GREEN;
+                    this.drawVol.strokeColor = new cc.Color().fromHEX('#31a633');
                 }
             }
             else {
                 if (this.viweData[index - 1].close < el.close) {
-                    this.drawVol.strokeColor = cc.Color.RED;
+                    this.drawVol.strokeColor = new cc.Color().fromHEX('#e94343');
                 }
                 else if (this.viweData[index - 1].close == el.close) {
                     this.drawVol.strokeColor = cc.Color.WHITE;
                 }
                 else if (this.viweData[index - 1].close > el.close) {
-                    this.drawVol.strokeColor = cc.Color.GREEN;
+                    this.drawVol.strokeColor = new cc.Color().fromHEX('#31a633');
                 }
             }
 

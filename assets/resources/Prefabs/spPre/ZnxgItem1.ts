@@ -35,11 +35,11 @@ export default class NewClass extends cc.Component {
         this.label[5].string = (data.profitRate || '--') + '%';
 
         if (data.lastBidPrice > 0) {
-            this.label[4].node.color = cc.Color.RED;
+            this.label[4].node.color = new cc.Color().fromHEX('#e94343');
         }
 
         if (data.profitRate > 0) {
-            this.label[5].node.color = cc.Color.RED;
+            this.label[5].node.color = new cc.Color().fromHEX('#e94343');
         }
 
         if (data.todaySignal && data.todaySignal < 0) {

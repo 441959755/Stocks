@@ -439,10 +439,10 @@ export default class NewClass extends cc.Component {
             this.d_label[index].string = ComUtils.changeTwoDecimal(info.ask5Price[index]);
 
             if (info.bid5Price[index] > zs) {
-                this.d_label[index].node.color = cc.Color.RED;
+                this.d_label[index].node.color = new cc.Color().fromHEX('#e94343');
             }
             else if (info.bid5Price[index] < zs) {
-                this.d_label[index].node.color = cc.Color.GREEN;
+                this.d_label[index].node.color = new cc.Color().fromHEX('#31a633');
             }
             else {
                 this.d_label[index].node.color = cc.Color.WHITE;
@@ -453,11 +453,11 @@ export default class NewClass extends cc.Component {
             el.string = ComUtils.changeTwoDecimal(info.bid5Price[index]);
 
             if (info.ask5Price[index] > zs) {
-                el.node.color = cc.Color.RED;
+                el.node.color = new cc.Color().fromHEX('#e94343');
             }
 
             else if (info.ask5Price[index] < zs) {
-                el.node.color = cc.Color.GREEN;
+                el.node.color = new cc.Color().fromHEX('#31a633');
             }
 
             else {
@@ -823,12 +823,12 @@ export default class NewClass extends cc.Component {
         this.cLabel[11].string = ComUtils.numberConvertUnit(this._amount) + '';
 
         if (zf < 0) {
-            this.cLabel[2].node.color = cc.Color.GREEN;
-            this.cLabel[3].node.color = cc.Color.GREEN;
+            this.cLabel[2].node.color = new cc.Color().fromHEX('#31a633');
+            this.cLabel[3].node.color = new cc.Color().fromHEX('#31a633');
         }
         else {
-            this.cLabel[2].node.color = cc.Color.RED;
-            this.cLabel[3].node.color = cc.Color.RED;
+            this.cLabel[2].node.color = new cc.Color().fromHEX('#e94343');
+            this.cLabel[3].node.color = new cc.Color().fromHEX('#e94343');
         }
 
     }

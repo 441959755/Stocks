@@ -2,7 +2,6 @@ import { pb } from "../../../protos/proto";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -21,8 +20,6 @@ export default class NewClass extends cc.Component {
     onLoad() {
 
         this.node.on('touchstart', (event) => {
-
-            //   if (this.ktype == pb.KType.Min) { return }
 
             this.vertical1.active = true;
             this.Horizontal1.active = true;
@@ -165,15 +162,18 @@ export default class NewClass extends cc.Component {
                             }
                             else {
                                 if (num < GameCfg.huizhidatas) {
-                                    let count = num - (GameCfg.beg_end[1] - GameCfg.beg_end[0]);
-                                    GameCfg.beg_end[0] -= parseInt(count / 2 + '');
-                                    GameCfg.beg_end[1] += (count - parseInt(count / 2 + ''));
 
-                                    if (GameCfg.beg_end[0] < 0) {
-                                        GameCfg.beg_end[0] = 0;
+                                    let count = num - (GameCfg.beg_end[1] - GameCfg.beg_end[0]);
+
+                                    if (GameCfg.beg_end[0] - parseInt(count / 2 + '') >= 0 && GameCfg.beg_end[1] + (count - parseInt(count / 2 + '')) <= GameCfg.huizhidatas) {
+                                        GameCfg.beg_end[0] -= parseInt(count / 2 + '');
+                                        GameCfg.beg_end[1] += (count - parseInt(count / 2 + ''));
                                     }
-                                    if (GameCfg.beg_end[1] > GameCfg.huizhidatas) {
-                                        GameCfg.beg_end[1] = GameCfg.huizhidatas
+                                    else if (GameCfg.beg_end[0] - count >= 0) {
+                                        GameCfg.beg_end[0] -= count;
+                                    }
+                                    else if (GameCfg.beg_end[1] + count <= GameCfg.huizhidatas) {
+                                        GameCfg.beg_end[1] += count;
                                     }
                                 }
                             }

@@ -310,12 +310,12 @@ export default class NewClass extends cc.Component {
         let zdf = zd / info.close * 100;
 
         if (zd > 0) {
-            label1.node.color = cc.Color.RED;
-            label2.node.color = cc.Color.RED;
+            label1.node.color = new cc.Color().fromHEX('#e94343');
+            label2.node.color = new cc.Color().fromHEX('#e94343');
         }
         else {
-            label1.node.color = cc.Color.GREEN;
-            label2.node.color = cc.Color.GREEN;
+            label1.node.color = new cc.Color().fromHEX('#31a633');
+            label2.node.color = new cc.Color().fromHEX('#31a633');
         }
 
         label2.string = ComUtils.changeTwoDecimal(zd) + '  ' + ComUtils.changeTwoDecimal(zdf) + '%';

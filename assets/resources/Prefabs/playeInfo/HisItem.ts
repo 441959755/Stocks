@@ -163,6 +163,7 @@ export default class NewClass extends cc.Component {
     }
 
     onGamenterStart(flag?) {
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         let data = { code: this.itemData.quotesCode }
         let items;
         if (GameCfg.GameType == pb.GameType.QiHuo) {
@@ -184,7 +185,7 @@ export default class NewClass extends cc.Component {
             kstyle: pb.KStyle.Random,
             code: this.itemData.quotesCode,
             from: this.itemData.kFrom,
-            total: 250,
+            total: 255,
             to: 0,
             reserve: 100,
         }

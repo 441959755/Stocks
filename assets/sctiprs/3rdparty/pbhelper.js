@@ -404,7 +404,6 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Sync_S2C_GameCg_GD) {
             let JjGame = pb.JjGame;
             let data = JjGame.decode(new Uint8Array(buff));
-            console.log('同步闯关赛游戏数据' + JSON.stringify(data));
             GlobalEvent.emit(EventCfg.GETCGSDATA, data);
         }
         else if (id == pb.MessageId.Sync_S2C_GameCg) {

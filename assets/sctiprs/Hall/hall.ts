@@ -420,12 +420,12 @@ export default class NewClass extends cc.Component {
 		if (!node) {
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			LoadUtils.loadRes(url, pre => {
-				GlobalEvent.emit(EventCfg.LOADINGHIDE);
 				node = cc.instantiate(pre);
 				this.node.addChild(node, zIndex);
 				node.active = true;
 				this.isLoading = false;
 				call(node);
+				GlobalEvent.emit(EventCfg.LOADINGHIDE);
 			})
 		}
 		else {
@@ -434,5 +434,6 @@ export default class NewClass extends cc.Component {
 			call(node);
 		}
 	}
+
 
 }
