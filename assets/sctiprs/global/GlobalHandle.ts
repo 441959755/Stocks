@@ -342,8 +342,8 @@ export default class GlobalHandle {
 
     //上传房间游戏操作
     public static onUpRoomGameOp(ops) {
-
         if (!ops) { return }
+
         let GameOperations = pb.GameOperations;
         let data1 = GameOperations.create(ops);
         let buff1 = GameOperations.encode(data1).finish();
@@ -359,7 +359,7 @@ export default class GlobalHandle {
         let buff = RoomGameOp.encode(message).finish();
 
         socket.send(pb.MessageId.Sync_Room_GameOp, buff, (res) => {
-            console.log(JSON.stringify(res));
+            console.log('上传房间游戏操作' + JSON.stringify(res));
         })
 
     }

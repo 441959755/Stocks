@@ -21,6 +21,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     scrollNode: cc.Node = null;
 
+    @property(cc.Toggle)
+    toggle: cc.Toggle = null;
+
     onToggleClick(event) {
         this.content.children.forEach(el => {
             let handle = el.getComponent('HisItem');
@@ -28,7 +31,7 @@ export default class NewClass extends cc.Component {
         })
     }
 
-    start() {
+    onEnable() {
         this.tipsNode.active = false;
         let ts = new Date().getTime() / 1000;
         let data = {
@@ -40,7 +43,9 @@ export default class NewClass extends cc.Component {
     }
 
     onQueryGameResult(data) {
+
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         socket.send(pb.MessageId.Req_Game_QueryGameResult, PB.onCmdQueryGameResultConvertToBuff(data), info => {
             console.log(JSON.stringify(info.results));
             if (info.results.length == 0) {
@@ -48,12 +53,17 @@ export default class NewClass extends cc.Component {
             }
             else {
                 let arr = this.onScelectData(info.results);
+
                 let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
+
+                UIScrollControl.clear();
+
                 UIScrollControl.initControl(this.item, arr.length, this.item.getContentSize(), 0, (node, index) => {
                     let nodeHandle = node.getComponent('HisItem');
                     nodeHandle.itemData = arr[index];
                     nodeHandle.itemIndex = index + 1;
                     nodeHandle.onShow();
+                    nodeHandle.onHisItemRate(this.toggle.isChecked);
                 })
             }
 
@@ -130,6 +140,5 @@ export default class NewClass extends cc.Component {
         });
         return arr;
     }
-
 
 }

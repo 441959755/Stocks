@@ -19,10 +19,13 @@ export default class NewClass extends cc.Component {
     items = null;
 
     onLoad() {
+
         GlobalEvent.on('UPDATEITEMDATA', (info) => {
+
             if (this._code == info.code) {
                 this.setLabel(info);
             }
+
         }, this);
     }
 

@@ -23,7 +23,9 @@ export default class NewClass extends cc.Component {
 
     onShow(data) {
         this._curData = data;
+
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         let info = {
             id: data.id,
         }
@@ -35,7 +37,14 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_Game_CgdsRanking, buff, (res) => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             console.log('炒股大赛排行榜' + JSON.stringify(res));
-            this.createItem(res.Items);
+            let arr = [];
+            let capital = JSON.parse(this._curData.conf).capital;
+            res.Items.forEach(el => {
+                if ((el.cgdsAccount - capital) / capital * 100 > 0) {
+                    arr.push(el);
+                }
+            });
+            this.createItem(arr);
         })
     }
 

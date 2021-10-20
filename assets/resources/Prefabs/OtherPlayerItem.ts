@@ -148,7 +148,11 @@ export default class NewClass extends cc.Component {
             }
 
             GlobalHandle.GetGameOperations(info, () => {
-                UpGameOpt.ChanagekOffset(UpGameOpt.player1Opt);
+
+                if (GameCfg.GameType != pb.GameType.JJ_ChuangGuan) {
+                    UpGameOpt.ChanagekOffset(UpGameOpt.player1Opt);
+                }
+
                 this.onGamenterStart();
             });
 

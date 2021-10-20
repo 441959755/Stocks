@@ -286,94 +286,70 @@ export default class NewClass extends cc.Component {
         }
     }
 
+    onSyncQuotation(data) {
+        if (!this.node.active) { return }
+        //同步行情
+        console.log('同步行情');
+        if (data.code == this.code) {
+            //同步时 把以前的数据清掉
+            if (!this.isSync) {
+                this.isSync = true;
+                this.gpDataMin = [];
+                this.gpDataMin.length = 0;
+            }
+            else if (!this._timeStamp) {
+                this._timeStamp = (data.timestamp + '').slice(2, 4);
+
+                let le = this.gpDataMin.length;
+                if (le > 0) {
+                    this._amount = data.amount;
+                    this._volume = data.volume;
+                    this.gpDataMin.forEach(el => {
+                        data.amount -= (el.amount)
+                        data.volume -= (el.volume)
+                    })
+                }
+                else if (le == 0) {
+                    this._amount = data.amount;
+                    this._volume = data.volume;
+                }
+
+                this.gpDataMin.push(data);
+            }
+            else if (this._timeStamp == ((data.timestamp + '').slice(2, 4))) {
+                let le = this.gpDataMin.length;
+                data.amount = (data.amount - this._amount)
+                data.volume = (data.volume - this._volume)
+                this.gpDataMin[le - 1] = data;
+
+            }
+            else if (this._timeStamp != ((data.timestamp + '').slice(2, 4))) {
+                this._timeStamp = (data.timestamp + '').slice(2, 4);
+                let a = data.amount;
+                let v = data.volume;
+                data.amount = (data.amount - this._amount)
+                data.volume = (data.volume - this._volume)
+                this.gpDataMin.push(data);
+                this._amount = a;
+                this._volume = v;
+            }
+
+            if (this.ktype == pb.KType.Min) {
+                this.setBoxLabel(data);
+                this.setCurLabelData();
+            }
+            this.onShowCgData();
+        }
+    }
+
+
     onEnable() {
 
-        GlobalEvent.on(EventCfg.SYNCQUOTEITEM, (data) => {
-            //同步行情
-            console.log('同步行情');
-            console.log('')
-            if (data.code == this.code) {
-                //同步时 把以前的数据清掉
-                if (!this.isSync) {
-                    this.isSync = true;
-                    this.gpDataMin = [];
-                    this.gpDataMin.length = 0;
-                }
-                else if (!this._timeStamp) {
-                    this._timeStamp = (data.timestamp + '').slice(2, 4);
-
-                    let le = this.gpDataMin.length;
-                    if (le > 0) {
-                        this._amount = data.amount;
-                        this._volume = data.volume;
-                        this.gpDataMin.forEach(el => {
-                            data.amount -= (el.amount)
-                            data.volume -= (el.volume)
-                        })
-                    }
-                    else if (le == 0) {
-                        this._amount = data.amount;
-                        this._volume = data.volume;
-                    }
-
-                    this.gpDataMin.push(data);
-                }
-                else if (this._timeStamp == ((data.timestamp + '').slice(2, 4))) {
-                    let le = this.gpDataMin.length;
-                    data.amount = (data.amount - this._amount)
-                    data.volume = (data.volume - this._volume)
-                    this.gpDataMin[le - 1] = data;
-
-                }
-                else if (this._timeStamp != ((data.timestamp + '').slice(2, 4))) {
-                    this._timeStamp = (data.timestamp + '').slice(2, 4);
-                    let a = data.amount;
-                    let v = data.volume;
-                    data.amount = (data.amount - this._amount)
-                    data.volume = (data.volume - this._volume)
-                    this.gpDataMin.push(data);
-                    this._amount = a;
-                    this._volume = v;
-                }
-
-                if (this.ktype == pb.KType.Min) {
-                    this.setBoxLabel(data);
-                    this.setCurLabelData();
-                }
-
-                this.onShowCgData();
-            }
-        }, this);
+        GlobalEvent.on(EventCfg.SYNCQUOTEITEM, this.onSyncQuotation.bind(this), this);
 
         //保留绘制宽度
         this.ori_width = this.t_grap_node.parent.width;
         this.now_width = this.t_grap_node.parent.width - this.box3.width - 10;
-
-        if (GameCfg.GameType == 'ZNXG') {
-            if (GameData.AIStockList.indexOf(parseInt(this.code)) != -1) {
-                this.yiShouCang.active = true;
-                this.ziXunBtn.active = true;
-            }
-            else {
-                this.yiShouCang.active = false;
-                this.ziXunBtn.active = false;
-            }
-            this.toggles[1].isChecked = true;
-            this.toggles[0].isChecked = false;
-            this.toggles[2].isChecked = false;
-            this.toggles[3].isChecked = false;
-            this.toggles[4].isChecked = false;
-            this.btnSelect.active = true;
-        }
-        else {
-            this.toggles[0].isChecked = true;
-            this.toggles[2].isChecked = false;
-            this.toggles[3].isChecked = false;
-            this.toggles[4].isChecked = false;
-            this.toggles[1].isChecked = false;
-            this.btnSelect.active = false;
-        }
-
     }
 
     //当前持股数据
@@ -471,8 +447,6 @@ export default class NewClass extends cc.Component {
     //每次打开显示
     onShow(code, str) {
 
-
-
         GameCfg.GAMEFUPAN = true;
 
         this.addMark.getComponent('AddMark').clearMark();
@@ -491,6 +465,7 @@ export default class NewClass extends cc.Component {
 
         this.code = code;
 
+
         this.initData();
 
         if (GameCfg.GameType == pb.GameType.MoNiChaoGu || GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
@@ -501,6 +476,33 @@ export default class NewClass extends cc.Component {
         }
 
         this.getGPDataDay();
+
+
+        if (GameCfg.GameType == 'ZNXG') {
+
+            if (GameData.AIStockList.indexOf(parseInt(this.code)) != -1) {
+                this.yiShouCang.active = true;
+                this.ziXunBtn.active = true;
+            }
+            else {
+                this.yiShouCang.active = false;
+                this.ziXunBtn.active = false;
+            }
+            this.toggles[1].isChecked = true;
+            this.toggles[0].isChecked = false;
+            this.toggles[2].isChecked = false;
+            this.toggles[3].isChecked = false;
+            this.toggles[4].isChecked = false;
+            this.btnSelect.active = true;
+        }
+        else {
+            this.toggles[0].isChecked = true;
+            this.toggles[2].isChecked = false;
+            this.toggles[3].isChecked = false;
+            this.toggles[4].isChecked = false;
+            this.toggles[1].isChecked = false;
+            this.btnSelect.active = false;
+        }
     }
 
     //获取AI买卖操作
@@ -523,7 +525,6 @@ export default class NewClass extends cc.Component {
             let arr = [];
             let price;
             let signals = res.signals;
-
 
             signals.forEach((el, index) => {
                 for (let i = 0; i < this.gpDataDay.length; i++) {
@@ -767,15 +768,7 @@ export default class NewClass extends cc.Component {
         if (!this.gpDataMin[this.gpDataMin.length - 1]) { return }
         let data = this.gpDataMin[this.gpDataMin.length - 1] || this.gpDataDay[this.gpDataDay.length - 1];
         let preData;
-        // if (this.gpDataDay[this.gpDataDay.length - 1].timestamp == ComUtils.getCurYearMonthDay()) {
 
-        // }
-        // if (this.gpDataDay[this.gpDataDay.length - 1].timestamp < ComUtils.getCurYearMonthDay()) {
-        //     preData = this.gpDataDay[this.gpDataDay.length - 1];
-        // }
-        // else {
-        //     preData = this.gpDataDay[this.gpDataDay.length - 2];
-        // }
         preData = this.gpDataMin[0];
 
         let items = GameCfgText.getGPPKItemInfo(this.code);
@@ -830,7 +823,6 @@ export default class NewClass extends cc.Component {
             this.cLabel[2].node.color = new cc.Color().fromHEX('#e94343');
             this.cLabel[3].node.color = new cc.Color().fromHEX('#e94343');
         }
-
     }
 
     //绘制
@@ -1028,9 +1020,6 @@ export default class NewClass extends cc.Component {
             this.CmdQuoteSubscribe(false);
         }
 
-        GlobalEvent.off(EventCfg.SYNCQUOTEITEM);
-        GlobalEvent.off(EventCfg.CMDQUOTITEM);
-
         //找到更新买1...卖1...label跟新
         this.box3.children.forEach(el => {
             if (el.name == 't_label' || el.name == 't_label1' || el.name == 'd_label' || el.name == 'd_label1') {
@@ -1038,6 +1027,7 @@ export default class NewClass extends cc.Component {
                 el.getComponent(cc.Label).string = '0.00';
             }
         })
+
     }
 
     onBtnClick(event, data) {

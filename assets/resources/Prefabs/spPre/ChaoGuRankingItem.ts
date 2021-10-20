@@ -91,7 +91,10 @@ export default class NewClass extends cc.Component {
         this.account.string = info.cgdsAccount;
 
         let capital = JSON.parse(data.conf).capital;
-        this.rate.string = ComUtils.changeTwoDecimal((info.cgdsAccount - capital) / capital * 100) + '%';
+        let r = ComUtils.changeTwoDecimal((info.cgdsAccount - capital) / capital * 100);
+        this.rate.string = r + '%';
+
+
 
         let aw = 0;
         let t = JSON.parse(data.award)[0][index - 1];
@@ -106,7 +109,8 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'ckzjBtn') {
-            GlobalEvent.emit(EventCfg.OPENMNHISLAYER, this._curData.uid);
+            GlobalEvent.emit(EventCfg.OPENCGDSHISLAYER, this._curData.uid);
+
         }
 
     }

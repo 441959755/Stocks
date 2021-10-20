@@ -11,6 +11,8 @@ export default class NewClass extends cc.Component {
 
     myxgNode: cc.Node = null;
 
+    cgdsNode: cc.Node = null;
+
     zgNode: cc.Node = null;
 
     znDraw: cc.Node = null;
@@ -20,6 +22,8 @@ export default class NewClass extends cc.Component {
     dhzcNode: cc.Node = null;
 
     myhisNode: cc.Node = null;
+
+    cgdshisNode: cc.Node = null;
 
     bkBox: cc.Node = null;
 
@@ -38,9 +42,13 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENZGLAYER, this.openZGLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZNDRAW, this.openZNDraw.bind(this), this);
         GlobalEvent.on(EventCfg.OPENMNXG, this.openMnxgLayer.bind(this), this);
+        GlobalEvent.on(EventCfg.OPENCGDSLAYER, this.openCGDSLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENADDZXGPBOX, this.openAddZxgpBox.bind(this), this);
         GlobalEvent.on(EventCfg.OPENDHZCLLAYER, this.openDhzcLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENMNHISLAYER, this.openMnHisLayer.bind(this), this);
+
+        GlobalEvent.on(EventCfg.OPENCGDSHISLAYER, this.openCGDSHisLayer.bind(this), this);
+
         GlobalEvent.on(EventCfg.OPENBKBOX, this.openBKBox.bind(this), this);
         GlobalEvent.on(EventCfg.OPENBUYBOX, this.openBuyBox.bind(this), this);
         GlobalEvent.on(EventCfg.OPENSELLBOX, this.openSellBox.bind(this), this);
@@ -86,7 +94,7 @@ export default class NewClass extends cc.Component {
             LoadUtils.loadRes('Prefabs/spPre/chaoGuDaSai', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.cgds = cc.instantiate(pre);
-                this.node.addChild(this.cgds);
+                this.node.addChild(this.cgds, 10);
                 this.cgds.active = true;
             })
         }
@@ -155,7 +163,7 @@ export default class NewClass extends cc.Component {
             LoadUtils.loadRes('Prefabs/spPre/selectBkBox', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.bkBox = cc.instantiate(pre);
-                this.node.addChild(this.bkBox);
+                this.node.addChild(this.bkBox, 20);
                 this.bkBox.active = true;
             })
         }
@@ -180,6 +188,25 @@ export default class NewClass extends cc.Component {
         }
     }
 
+    openCGDSHisLayer(id) {
+        if (this.cgdshisNode) {
+            this.cgdshisNode.active = true;
+            let handle = this.cgdshisNode.getComponent('CGDSHis');
+            handle.onShow(id);
+        }
+        else {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            LoadUtils.loadRes('Prefabs/spPre/cgdsHis', (pre) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                this.cgdshisNode = cc.instantiate(pre);
+                this.node.addChild(this.cgdshisNode, 31);
+                this.cgdshisNode.active = true;
+                let handle = this.cgdshisNode.getComponent('CGDSHis');
+                handle.onShow(id);
+            })
+        }
+    }
+
     openDhzcLayer() {
         if (this.dhzcNode) {
             this.dhzcNode.active = true;
@@ -189,7 +216,7 @@ export default class NewClass extends cc.Component {
             LoadUtils.loadRes('Prefabs/spPre/dhzcLayer', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.dhzcNode = cc.instantiate(pre);
-                this.node.addChild(this.dhzcNode);
+                this.node.addChild(this.dhzcNode, 20);
                 this.dhzcNode.active = true;
             })
         }
@@ -204,7 +231,7 @@ export default class NewClass extends cc.Component {
             LoadUtils.loadRes('Prefabs/spPre/addZXGPBox', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.zxgpBox = cc.instantiate(pre);
-                this.node.addChild(this.zxgpBox);
+                this.node.addChild(this.zxgpBox, 20);
                 this.zxgpBox.active = true;
             })
         }
@@ -244,7 +271,7 @@ export default class NewClass extends cc.Component {
             LoadUtils.loadRes('Prefabs/spPre/znxgLayer', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.znxgNode = cc.instantiate(pre);
-                this.node.addChild(this.znxgNode);
+                this.node.addChild(this.znxgNode, 10);
                 this.znxgNode.active = true;
             })
         }
@@ -262,7 +289,7 @@ export default class NewClass extends cc.Component {
             LoadUtils.loadRes('Prefabs/spPre/mnxgLayer', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.myxgNode = cc.instantiate(pre);
-                this.node.addChild(this.myxgNode);
+                this.node.addChild(this.myxgNode, 10);
                 this.myxgNode.active = true;
                 let handle = this.myxgNode.getComponent('MnxgHandle');
                 handle.onShow(info);
@@ -275,13 +302,35 @@ export default class NewClass extends cc.Component {
         }
     }
 
+    openCGDSLayer(info) {
+        this.node.children.forEach(el => {
+            el.active = false;
+        })
+        if (!this.cgdsNode) {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            LoadUtils.loadRes('Prefabs/spPre/cgdsLayer', (pre) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                this.cgdsNode = cc.instantiate(pre);
+                this.node.addChild(this.cgdsNode, 10);
+                this.cgdsNode.active = true;
+                let handle = this.cgdsNode.getComponent('CGDSLayer');
+                handle.onShow(info);
+            })
+        }
+        else {
+            this.cgdsNode.active = true;
+            let handle = this.cgdsNode.getComponent('CGDSLayer');
+            handle.onShow(info);
+        }
+    }
+
     openZGLayer() {
         if (!this.zgNode) {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes('Prefabs/spPre/zgLayer', (pre) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.zgNode = cc.instantiate(pre);
-                this.node.addChild(this.zgNode);
+                this.node.addChild(this.zgNode, 21);
                 this.zgNode.active = true;
             })
         }
@@ -296,6 +345,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENZGLAYER);
         GlobalEvent.off(EventCfg.OPENZNDRAW);
         GlobalEvent.off(EventCfg.OPENMNXG);
+        GlobalEvent.off(EventCfg.OPENCGDSLAYER);
         GlobalEvent.off(EventCfg.OPENADDZXGPBOX);
         GlobalEvent.off(EventCfg.OPENDHZCLLAYER);
         GlobalEvent.off(EventCfg.OPENMNHISLAYER);
@@ -318,6 +368,7 @@ export default class NewClass extends cc.Component {
         LoadUtils.releaseRes('Prefabs/spPre/mncd');
         LoadUtils.releaseRes('Prefabs/spPre/chaoGuDaSai');
         LoadUtils.releaseRes('Prefabs/spPre/chaoGuRanking');
+        LoadUtils.releaseRes('Prefabs/spPre/cgdsLayer');
     }
 
 }

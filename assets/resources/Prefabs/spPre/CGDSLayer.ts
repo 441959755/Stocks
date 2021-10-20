@@ -67,25 +67,27 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
 
-        //添加删除
         GlobalEvent.on(EventCfg.ADDZXGP, this.onAddZx.bind(this), this);
 
         //跟新资产数据
         GlobalEvent.on(EventCfg.CHANGEMNCGACCOUNT, this.onUpdateMycgData.bind(this), this);
-
     }
 
     onUptateCCAsset(info) {
-
         let data = {
             account: 0,
             orderList: null,
             positionList: null,
         };
 
-        data = GameData.mncgDataList;
+        GameData.cgdsStateList.forEach(el => {
+            if (el.id == GameData.SpStockData.id) {
+                data = el.state;
+            }
+        })
 
         let wt = 0, cc = 0, kc = 0;
+
         kc = parseInt(data.account + '');
 
         if (data.orderList && data.orderList.items) {
@@ -117,10 +119,13 @@ export default class NewClass extends cc.Component {
     }
 
     onAddZx() {
-
         let arr = [];
 
-        arr = GameData.selfStockList;
+        GameData.cgdsStockList.forEach(el => {
+            if (el.id == GameData.SpStockData.id) {
+                arr = el.stockList;
+            }
+        })
 
         let UIScrollControl = this.scorllNode.getComponent('UIScrollControl');
 
@@ -144,11 +149,14 @@ export default class NewClass extends cc.Component {
 
     onShow(data?) {
 
-        GameCfg.GameType = pb.GameType.MoNiChaoGu;
-        this.dhzc.active = true;
-        this.title.string = '模拟炒股';
-        this.sp_topbtn_phb.active = false;
+        GameData.SpStockData = data;
+        GameCfg.GameType = pb.GameType.ChaoGuDaSai;
+        this.dhzc.active = false;
+        this.title.string = data.title;
+        this.sp_topbtn_phb.active = true;
+
         this.tipsNode.active = false;
+
         let shen = 1399001;
 
         let lu = '1';
@@ -163,12 +171,12 @@ export default class NewClass extends cc.Component {
             else if (data.code == lu) {
                 this.onUpdateSLLabel(data, this.lNode);
             }
+
             else {
                 this._curArr[data.code + ''] = data;
                 GlobalEvent.emit('UPDATEITEMDATA', data);
                 this.onUptateCCAsset(data);
             }
-
 
         }, this);
 
@@ -176,13 +184,20 @@ export default class NewClass extends cc.Component {
 
         //初始资产数据
         this.onUpdateMycgData();
-
     }
 
     upDateAsset(data) {
         let arr = [], curGold = 0;
 
-        arr = GameData.mncgDataList.positionList.items;
+
+        GameData.cgdsStateList.forEach(el => {
+            if (el.id == GameData.SpStockData.id) {
+                if (el.state.positionList && el.state.positionList.items) {
+                    arr = el.state.positionList.items;
+                }
+            }
+        })
+
 
         arr.forEach(el => {
             if (el.code == data.code) {
@@ -195,14 +210,11 @@ export default class NewClass extends cc.Component {
     }
 
     onUpdateSLLabel(info, node) {
-
         let label1 = node.getChildByName('label1').getComponent(cc.Label);
         let label2 = node.getChildByName('label2').getComponent(cc.Label);
 
         label1.string = ComUtils.changeTwoDecimal(info.price);
-
         let zd = info.price - info.close;
-
         let zdf = zd / info.close * 100;
 
         if (zd > 0) {
@@ -225,11 +237,22 @@ export default class NewClass extends cc.Component {
 
         arr1 = [];
 
-        arr1 = GameData.selfStockList;
+        GameData.cgdsStockList.forEach(el => {
+            if (el.id == GameData.SpStockData.id) {
+                arr1 = el.stockList;
+            }
+        })
 
         arr2 = [];
 
-        arr2 = GameData.mncgDataList.positionList.items;
+        GameData.cgdsStateList.forEach(el => {
+            if (el.id == GameData.SpStockData.id) {
+                if (el.state.positionList && el.state.positionList.items) {
+                    arr2 = el.state.positionList.items;
+                }
+            }
+        })
+
 
         let arr = [];
 
@@ -278,14 +301,16 @@ export default class NewClass extends cc.Component {
             positionList: null,
         };
 
-        data = GameData.mncgDataList;
-
+        GameData.cgdsStateList.forEach(el => {
+            if (el.id == GameData.SpStockData.id) {
+                if (el.state) {
+                    data = el.state;
+                }
+            }
+        })
         this.onShowScorll2();
-
         this.kczcLa.string = parseInt(data.account + '') + '';
-
         let wt = 0, cc = 0;
-
         if (data.orderList && data.orderList.items) {
             data.orderList.items.forEach(el => {
                 if (el.state == pb.OrderState.Init) {
@@ -300,14 +325,16 @@ export default class NewClass extends cc.Component {
         if (data.positionList && data.positionList.items) {
 
             data.positionList.items.forEach(el => {
-
                 cc += (el.volume * el.priceCost);
             });
 
             this.cczcLa.string = parseInt(cc + '') + '';
+
         }
         else {
+
             this.cczcLa.string = '0';
+
         }
 
         let zzc = parseInt(data.account + '') + parseInt(cc + '') + parseInt(wt + '');
@@ -342,7 +369,9 @@ export default class NewClass extends cc.Component {
 
         //记录
         else if (name == 'sp_topbtn_jyjl') {
-            GlobalEvent.emit(EventCfg.OPENMNHISLAYER, GameData.userID);
+
+            //  GlobalEvent.emit(EventCfg.OPENMNHISLAYER, GameData.userID);
+            GlobalEvent.emit(EventCfg.OPENCGDSHISLAYER, GameData.userID);
         }
 
         //添加自选
@@ -403,6 +432,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'toggle2') {
+
             this.scorllNode.active = false;
             this.scorllNode1.active = true;
             this.onShowScorll2();
@@ -418,9 +448,16 @@ export default class NewClass extends cc.Component {
 
     onShowScorll2() {
         let arr = [];
-        arr = GameData.mncgDataList.positionList.items;
+        GameData.cgdsStateList.forEach(el => {
+            if (el.id == GameData.SpStockData.id) {
+                if (el.state && el.state.positionList && el.state.positionList.items) {
+                    arr = el.state.positionList.items;
+                }
+            }
+        })
 
         if (arr.length > 0) {
+
             let UIScrollControl = this.scorllNode1.getComponent('UIScrollControl');
 
             UIScrollControl.clear();
@@ -429,7 +466,6 @@ export default class NewClass extends cc.Component {
                 let handle = node.getComponent('MnxgItem1');
                 handle.onShow(arr[index].code, arr[index], this._curArr[arr[index].code + '']);
             })
-
         }
     }
 

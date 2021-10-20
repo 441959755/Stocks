@@ -4211,7 +4211,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "4c7cbMBUlVCtYtaa0gfns4n",
+    "_componentId": "721b63RoKNBrKtQLTEjctqP",
     "handler": "onBtnClick",
     "customEventData": ""
   },
@@ -4926,7 +4926,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "4c7cbMBUlVCtYtaa0gfns4n",
+    "_componentId": "721b63RoKNBrKtQLTEjctqP",
     "handler": "onToggleClick",
     "customEventData": ""
   },
@@ -5308,7 +5308,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "4c7cbMBUlVCtYtaa0gfns4n",
+    "_componentId": "721b63RoKNBrKtQLTEjctqP",
     "handler": "onToggleClick",
     "customEventData": ""
   },
@@ -5690,7 +5690,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "4c7cbMBUlVCtYtaa0gfns4n",
+    "_componentId": "721b63RoKNBrKtQLTEjctqP",
     "handler": "onToggleClick",
     "customEventData": ""
   },
@@ -9718,11 +9718,37 @@
       "__id__": 1
     },
     "_enabled": true,
-    "item1": null,
-    "item2": null,
-    "item3": null,
-    "scrollNode": [],
-    "toggles": [],
+    "item1": {
+      "__id__": 7
+    },
+    "item2": {
+      "__id__": 36
+    },
+    "item3": {
+      "__id__": 71
+    },
+    "scrollNode": [
+      {
+        "__id__": 191
+      },
+      {
+        "__id__": 227
+      },
+      {
+        "__id__": 260
+      }
+    ],
+    "toggles": [
+      {
+        "__id__": 129
+      },
+      {
+        "__id__": 139
+      },
+      {
+        "__id__": 149
+      }
+    ],
     "_id": ""
   },
   {

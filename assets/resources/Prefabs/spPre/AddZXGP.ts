@@ -108,7 +108,6 @@ export default class NewClass extends cc.Component {
                     id: GameData.SpStockData.id || 0,
                     isAiStock: false,
                 }
-
             }
 
             let CmdMncgEditStock = pb.CmdMncgEditStock;
@@ -116,6 +115,7 @@ export default class NewClass extends cc.Component {
             let buff = CmdMncgEditStock.encode(message).finish();
 
             socket.send(pb.MessageId.Req_Game_MncgEditStockList, buff, (res) => {
+                console.log('添加选股' + JSON.stringify(res));
 
             })
 
@@ -123,15 +123,20 @@ export default class NewClass extends cc.Component {
                 GameData.selfStockList.push(parseInt(items[0]));
             }
             else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
-                // GameData.cgdsStockList.forEach(el => {
-                //     if (el.id == GameData.SpStockData.id) {
-                //         el.stockList.push(parseInt(items[0]));
-                //     }
-                // })
 
-                for (let i = 0; i < GameData.cgdsStockList.length; i++) {
-                    if (GameData.cgdsStockList[i].id == GameData.SpStockData.id) {
-                        GameData.cgdsStockList[i].stockList.push(parseInt(items[0]));
+                if (GameData.cgdsStockList.length <= 0) {
+                    GameData.cgdsStockList.push(
+                        {
+                            id: GameData.SpStockData.id,
+                            stockList: [parseInt(items[0])],
+                        }
+                    )
+                }
+                else {
+                    for (let i = 0; i < GameData.cgdsStockList.length; i++) {
+                        if (GameData.cgdsStockList[i].id == GameData.SpStockData.id) {
+                            GameData.cgdsStockList[i].stockList.push(parseInt(items[0]));
+                        }
                     }
                 }
             }

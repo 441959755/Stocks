@@ -527,7 +527,7 @@ PBHelper.prototype = {
                     break;
                 }
             }
-
+            
             GlobalEvent.emit(EventCfg.CHANGEMNCGACCOUNT);
         }
         //保存学习任务进度应答：无

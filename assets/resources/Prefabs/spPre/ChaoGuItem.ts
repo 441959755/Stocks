@@ -146,7 +146,9 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'sp_cgds_ljcj2') {
-            GlobalEvent.emit(EventCfg.OPENMNXG, this._curData);
+            // GlobalEvent.emit(EventCfg.OPENMNXG, this._curData);
+            GlobalEvent.emit(EventCfg.OPENCGDSLAYER, this._curData);
+
         }
     }
 
