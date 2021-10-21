@@ -47,6 +47,10 @@ export default class NewClass extends cc.Component {
     onShow(data) {
 
         this.wtcdBtn.active = false;
+        this.AllBtnNode.forEach(el => {
+            el.interactable = true;
+            el.enableAutoGrayEffect = false;
+        })
 
         if (!data) {
             this.priceLabel.string = '0';
@@ -82,7 +86,7 @@ export default class NewClass extends cc.Component {
                         })
                         this.wtcdBtn.active = true;
 
-                        //this.mrslLabel.string=
+                        this.mrslLabel.string = el.volume
                         // this.node.active = false;
                         // GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
 
@@ -108,6 +112,7 @@ export default class NewClass extends cc.Component {
                                     el.enableAutoGrayEffect = true;
                                 })
                                 this.wtcdBtn.active = true;
+                                this.mrslLabel.string = el1.volume;
                             }
 
                         });
