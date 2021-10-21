@@ -165,7 +165,7 @@ export default class NewClass extends cc.Component {
             }
             else {
                 this._curArr[data.code + ''] = data;
-                GlobalEvent.emit('UPDATEITEMDATA', data);
+                //        GlobalEvent.emit('UPDATEITEMDATA', data);
                 this.onUptateCCAsset(data);
             }
 
@@ -328,7 +328,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.CMDQUOTITEM);
         GlobalEvent.off(EventCfg.CHANGEMNCGACCOUNT);
         GameData.SpStockData = null;
-        GlobalEvent.off('UPDATEITEMDATA');
+        //GlobalEvent.off('UPDATEITEMDATA');
     }
 
 
@@ -418,7 +418,14 @@ export default class NewClass extends cc.Component {
 
     onShowScorll2() {
         let arr = [];
-        arr = GameData.mncgDataList.positionList.items;
+        // arr = GameData.mncgDataList.positionList.items;
+        GameData.mncgDataList.positionList.items.forEach(e => {
+
+            if (e.volume) {
+                arr.push(e);
+            }
+
+        });
 
         if (arr.length > 0) {
             let UIScrollControl = this.scorllNode1.getComponent('UIScrollControl');

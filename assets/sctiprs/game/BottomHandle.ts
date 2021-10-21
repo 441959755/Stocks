@@ -154,6 +154,7 @@ export default class NewClass extends cc.Component {
 				this.curMcCount = 0;
 
 				this.buyData = [];
+
 				StrategyAIData.onSellFunc();
 			},
 			this

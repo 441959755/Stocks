@@ -16,7 +16,7 @@ export default class NewClass extends cc.Component {
 
     _curData = null;
     onLoad() {
-        GlobalEvent.on('UPDATEITEMDATA', (info) => {
+        GlobalEvent.on(EventCfg.SYNCQUOTEITEM, (info) => {
             if (this._code == info.code) {
                 this.setLabel(info);
             }
@@ -25,9 +25,9 @@ export default class NewClass extends cc.Component {
 
     setLabel(info) {
         if (this._code != info.code || !info.price) { return };
-        this.labels[2].string = ComUtils.changeTwoDecimal1(info.price) + '';
+        this.labels[2].string = ComUtils.changeTwoDecimal(info.price) + '';
 
-        this.labels[3].string = ComUtils.changeTwoDecimal1(this._curData.priceCost) + '';
+        this.labels[3].string = ComUtils.changeTwoDecimal(this._curData.priceCost) + '';
         this.labels[4].string = this._curData.volume;
 
         let zd = info.price - this._curData.priceCost;
@@ -40,19 +40,19 @@ export default class NewClass extends cc.Component {
             this.labels[6].node.color = new cc.Color().fromHEX('#e94343');
         }
 
-        this.labels[5].string = ComUtils.changeTwoDecimal1(zd) + '';
+        this.labels[5].string = ComUtils.changeTwoDecimal(zd) + '';
         let zdf = zd / this._curData.priceCost * 100;
-        this.labels[6].string = ComUtils.changeTwoDecimal1(zdf) + '%';
+        this.labels[6].string = ComUtils.changeTwoDecimal(zdf) + '%';
 
-        this.labels[7].string = ComUtils.changeTwoDecimal1(info.high) + '';
-        this.labels[8].string = ComUtils.changeTwoDecimal1(info.low) + '';
+        this.labels[7].string = ComUtils.changeTwoDecimal(info.high) + '';
+        this.labels[8].string = ComUtils.changeTwoDecimal(info.low) + '';
         let sy = (info.price - this._curData.priceCost) * this._curData.volume;
         if (sy > 0) {
             this.labels[9].node.color = new cc.Color().fromHEX('#e94343');
         } else {
             this.labels[9].node.color = new cc.Color().fromHEX('#31a633');
         }
-        this.labels[9].string = ComUtils.changeTwoDecimal1(sy) + '';
+        this.labels[9].string = ComUtils.changeTwoDecimal(sy) + '';
         //   GlobalEvent.emit(EventCfg.UPDATECCASSET, sy);
     }
 

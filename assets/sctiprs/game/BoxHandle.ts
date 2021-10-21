@@ -62,7 +62,6 @@ export default class NewClass extends cc.Component {
     onLoad() {
 
         GlobalEvent.on('updataLabel', (inde) => {
-
             let datas = GameCfg.data[0].data;
             let info = [];
             if (datas[inde]) {
@@ -130,7 +129,6 @@ export default class NewClass extends cc.Component {
 
 
             info.forEach((el, index) => {
-
                 //本轮收益
                 if (index == 10) {
                     let la = this.tipsTitle.children[10].getComponent(cc.Label);
@@ -312,6 +310,7 @@ export default class NewClass extends cc.Component {
             }, 100);
 
         }
+
         else if (GameCfg.GameType == pb.GameType.QiHuo) {
             this.setBoxfalg('ma');
             this.setBoxfalg('CPM');
@@ -322,6 +321,10 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.JJ_PK ||
             GameCfg.GameType == pb.GameType.JJ_DuoKong ||
             GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+            this.setBoxfalg('ma');
+            this.setBoxfalg('CPM');
+        }
+        else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
             this.setBoxfalg('ma');
             this.setBoxfalg('CPM');
         }
@@ -359,7 +362,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('setBoxfalg');
         GlobalEvent.off(EventCfg.SET_DRAW_SIZE);
     }
-
 
     onBtnSlecet(event, data) {
         let name = event.target.name;

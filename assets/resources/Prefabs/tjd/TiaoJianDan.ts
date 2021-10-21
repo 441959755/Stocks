@@ -2,9 +2,9 @@ import { pb } from "../../../protos/proto";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
+import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
-
 
 const { ccclass, property } = cc._decorator;
 
@@ -32,8 +32,8 @@ export default class NewClass extends cc.Component {
 
     _type = 0;
 
-    start() {
-        console.log(GameCfgText.gameTextCfg);
+    onLoad() {
+        GlobalEvent.on(EventCfg.GMAECOUNTERSCHANGE, this.initCount.bind(this), this);
     }
 
     initCount() {
@@ -71,6 +71,7 @@ export default class NewClass extends cc.Component {
     onEnable() {
 
         this.initCount();
+
         this.boxs[0].getComponentInChildren(cc.Label).string = GameData.TJDSet.line;
         this.boxs[1].getComponentInChildren(cc.Label).string = GameData.TJDSet.KLine;
         this.toggles.forEach(el => {
@@ -85,7 +86,6 @@ export default class NewClass extends cc.Component {
         else if (GameData.TJDSet.KSpeed == 1) {
             this.toggles[2].isChecked = true;
         }
-
     }
 
 
@@ -129,6 +129,10 @@ export default class NewClass extends cc.Component {
                 GameData.TJDSet.KLine = event.target.getComponent(cc.Label).string;
                 this.boxs[this._type].getComponentInChildren(cc.Label).string = GameData.TJDSet.KLine;
             }
+
+            this.downBoxs.forEach(el => {
+                el.active = false;
+            })
         }
 
         else if (name == 'startTJDBtn') {
@@ -161,14 +165,16 @@ export default class NewClass extends cc.Component {
         })
 
         GameData.TJDSet = GameData.TJDSet;
-
     }
 
     TJDStartGameSet() {
+
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         GameCfg.GAMEFUPAN = false;
 
         GameCfg.GameSet = GameData.TJDSet;
+
         GameCfg.ziChan = 100000;
 
         let data = {
@@ -176,8 +182,9 @@ export default class NewClass extends cc.Component {
             kstyle: pb.KStyle.Random,
             code: null,
             from: null,
-            total: GameData.TJDSet.KLine,
+            total: parseInt(GameData.TJDSet.KLine) + 50,
             to: 0,
+            reserve: 50,
         }
 
         let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
@@ -244,9 +251,17 @@ export default class NewClass extends cc.Component {
 
             console.log('条件单：' + JSON.stringify(data));
 
-            GlobalEvent.emit(EventCfg.onCmdQuoteQuery, data);
+            GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
+                GameData.huizhidatas = 50;
+                GameCfg.huizhidatas = 50;
+                GlobalEvent.emit(EventCfg.OPENTJDGAME);
+            })
         }
 
+    }
+
+    onDestroy() {
+        GlobalEvent.off(EventCfg.GMAECOUNTERSCHANGE);
     }
 
 }

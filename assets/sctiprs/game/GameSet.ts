@@ -26,16 +26,10 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     laNode: cc.Node = null;    //刻度
 
-    // @property([cc.Node])
-
-
     onLoad() {
-        //设置刻度label位置
-        // GlobalEvent.on('labelPoint', (rx) => {
-        //     this.laNode.x = rx;
-        // }, this);
 
         GlobalEvent.on('setDrawing', (falg) => {
+
             if (falg) {
                 this.node.width = this.node.width + 164;
             } else {
@@ -104,10 +98,8 @@ export default class NewClass extends cc.Component {
                 this.MALabel[5].node.active = false;
             }
         }
-        // if (MAla.length > 0) {
-        GlobalEvent.emit(EventCfg.SETMALABEL, MAla);
-        //  }
 
+        GlobalEvent.emit(EventCfg.SETMALABEL, MAla);
     }
 
     onEnable() {
@@ -167,12 +159,7 @@ export default class NewClass extends cc.Component {
 
     }
 
-    // onEnable() {
-
-    // }
-
     onDestroy() {
-        //  GlobalEvent.off('labelPoint');
         GlobalEvent.off('setDrawing');
         GlobalEvent.off(EventCfg.SET_DRAW_SIZE);
     }

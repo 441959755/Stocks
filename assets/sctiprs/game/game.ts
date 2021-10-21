@@ -5,6 +5,7 @@ import { pb } from '../../protos/proto';
 import GameData from "../GameData";
 import UpGameOpt from "../global/UpGameOpt";
 import LoadUtils from "../Utils/LoadUtils";
+import DrawData from "./DrawData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -54,6 +55,11 @@ export default class NewClass extends cc.Component {
                 this.startGameNode.active = true;
             }
         }
+
+        //绘制的数据
+        let data = GameCfg.data[0].data;
+
+        DrawData.initData(data);
     }
 
     protected onDestroy() {

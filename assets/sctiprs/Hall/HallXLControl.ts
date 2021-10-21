@@ -41,9 +41,12 @@ export default class NewClass extends cc.Component {
 
     smResetNode: cc.Node = null;  //sm重置
 
-    TJDNode: cc.Node = null;
+    TJDNode: cc.Node = null;     //tjd选择界面
 
-    TJDHisNode: cc.Node = null;
+    TJDHisNode: cc.Node = null;   //条件单历史记录
+
+    TJDGame: cc.Node = null;    //条件单游戏界面
+
     onLoad() {
         GlobalEvent.on(EventCfg.OPENSMLAYER, this.openSMLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZBLAYER, this.openZBLayer.bind(this), this);
@@ -55,6 +58,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENYIELDLAYER, this.openYieldLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENSMRESETMONEYLAYER, this.openSmResetLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENTIAOJIANDAN, this.openTiaoJianDan.bind(this), this);
+        GlobalEvent.on(EventCfg.OPENTJDGAME, this.openTJDGame.bind(this), this);
     }
 
     onDestroy() {
@@ -69,6 +73,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENHELPLAYER);
         GlobalEvent.off(EventCfg.OPENSMRESETMONEYLAYER);
         GlobalEvent.off(EventCfg.OPENTIAOJIANDAN);
+        GlobalEvent.off(EventCfg.OPENTJDGAME);
         LoadUtils.releaseRes('Prefabs/xl/ZBSetLayer');
         LoadUtils.releaseRes('Prefabs/xl/SMSetLayer');
         LoadUtils.releaseRes('Prefabs/xl/DXSetLayer');
@@ -84,7 +89,8 @@ export default class NewClass extends cc.Component {
         LoadUtils.releaseRes('Prefabs/xl/SMMonthlyLayer');
         LoadUtils.releaseRes('Prefabs/xl/SMResetLayer');
         LoadUtils.releaseRes('Prefabs/xl/SMYieldCurve');
-        LoadUtils.releaseRes('Prefabs/xl/tiaoJianDan');
+        LoadUtils.releaseRes('Prefabs/tjd/tiaoJianDan');
+        LoadUtils.releaseRes('Prefabs/tjd/tjdGame');
     }
 
     /**
@@ -141,9 +147,8 @@ export default class NewClass extends cc.Component {
                 });
                 break;
             case pb.GameType.TiaoJianDan:
-                this.openNode(this.TJDHisNode, 'Prefabs/xl/TJDHistoryLayer', 11, (node) => {
+                this.openNode(this.TJDHisNode, 'Prefabs/tjd/TJDHistoryLayer', 11, (node) => {
                     this.TJDHisNode = node;
-
                 });
                 break;
         }
@@ -205,7 +210,14 @@ export default class NewClass extends cc.Component {
   *打开条件单
   */
     openTiaoJianDan() {
-        this.openNode(this.TJDNode, 'Prefabs/xl/tiaoJianDan', 10, (node) => { this.TJDNode = node });
+        this.openNode(this.TJDNode, 'Prefabs/tjd/tiaoJianDan', 10, (node) => { this.TJDNode = node });
+    }
+
+    /*
+*打开条件单游戏
+*/
+    openTJDGame() {
+        this.openNode(this.TJDGame, 'Prefabs/tjd/tjdGame', 20, (node) => { this.TJDGame = node });
     }
 
     openNode(node, url, zIndex, call?) {

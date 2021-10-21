@@ -206,6 +206,12 @@ export default class NewClass extends cc.Component {
         }
         //卖出下单
         else if (name == 'sp_znxg_mrxd') {
+
+            if (!this.curSellCount) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '卖出下单数量不能为0');
+                return;
+            }
+
             this.curData.price = parseFloat(this.mcjgLabel.string);
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             let id = 0;

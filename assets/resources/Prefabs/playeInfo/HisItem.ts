@@ -155,8 +155,8 @@ export default class NewClass extends cc.Component {
             GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
             GameCfg.GAMEFUPAN = false;
 
-            GameCfg.huizhidatas = this.itemData.kStartup;
-            GameData.huizhidatas = this.itemData.kStartup;
+            GameCfg.huizhidatas = this.itemData.kStartup + 1;
+            GameData.huizhidatas = this.itemData.kStartup + 1;
 
             GameCfg.GameSet.year = (this.itemData.kFrom + '').slice(0, 4);
 

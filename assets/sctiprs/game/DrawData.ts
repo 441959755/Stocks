@@ -60,7 +60,6 @@ export default class DrawData {
     public static btx = [];
 
 
-
     public static dataChange(time, type, arr) {
 
         time = ComUtils.getTimestamp(time);
@@ -152,6 +151,7 @@ export default class DrawData {
     }
 
     public static initData(data) {
+
         if (data.length <= 0) {
             console.log('DrawData  initData  data is null' + data);
             return;
@@ -489,7 +489,6 @@ export default class DrawData {
         } catch (e) {
             console.log('数据有问题' + e);
         }
-
 
     }
 

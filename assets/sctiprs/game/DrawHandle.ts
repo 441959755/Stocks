@@ -568,10 +568,6 @@ export default class NewClass extends cc.Component {
 
 
     initData() {
-        //绘制的数据
-        let data = GameCfg.data[0].data;
-
-        DrawData.initData(data);
 
         this.MaList = DrawData.MaList;
 

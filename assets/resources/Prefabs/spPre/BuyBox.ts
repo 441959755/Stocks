@@ -36,7 +36,17 @@ export default class NewClass extends cc.Component {
 
     cursl = null;
 
+    @property([cc.Button])
+    AllBtnNode: cc.Button[] = [];
+
+    @property(cc.Node)
+    wtcdBtn: cc.Node = null;
+
+
+
     onShow(data) {
+
+        this.wtcdBtn.active = false;
 
         if (!data) {
             this.priceLabel.string = '0';
@@ -57,13 +67,25 @@ export default class NewClass extends cc.Component {
         this.mrslLabel.string = '0';
 
         if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+
             this.kyzc = GameData.mncgDataList.account;
 
             if (GameData.mncgDataList.orderList && GameData.mncgDataList.orderList.items) {
+
                 GameData.mncgDataList.orderList.items.forEach(el => {
+
                     if (el.code == this.curData.code && el.type == pb.OrderType.AskLimit) {
-                        this.node.active = false;
-                        GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
+
+                        this.AllBtnNode.forEach(el => {
+                            el.interactable = false;
+                            el.enableAutoGrayEffect = true;
+                        })
+                        this.wtcdBtn.active = true;
+
+                        //this.mrslLabel.string=
+                        // this.node.active = false;
+                        // GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
+
                     }
 
                 });
@@ -78,8 +100,14 @@ export default class NewClass extends cc.Component {
                     if (el.state.orderList && el.state.orderList.items) {
                         el.state.orderList.items.forEach(el1 => {
                             if (el1.code == this.curData.code && el1.type == pb.OrderType.AskLimit) {
-                                this.node.active = false;
-                                GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
+                                // this.node.active = false;
+                                // GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
+
+                                this.AllBtnNode.forEach(el => {
+                                    el.interactable = false;
+                                    el.enableAutoGrayEffect = true;
+                                })
+                                this.wtcdBtn.active = true;
                             }
 
                         });
@@ -301,6 +329,48 @@ export default class NewClass extends cc.Component {
                 }
                 else {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.result.err);
+                }
+            })
+
+        }
+
+        else if (name == 'xl_btn_cxwt') {
+            let id = 0
+            if (GameData.SpStockData && GameData.SpStockData.id) {
+                id = GameData.SpStockData.id;
+            }
+
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
+            let info = {
+                orderId: this.curData.orderId,
+                type: this.curData.type,
+                code: this.curData.code,
+                uid: GameData.userID,
+                id: id,
+                node: this.curData.node,
+            }
+
+            if (info.type == pb.OrderType.AskLimit) {
+                info.type = pb.OrderType.AskLimit_Cancel;
+            }
+            else if (info.type == pb.OrderType.BidLimit) {
+                info.type = pb.OrderType.BidLimit_Cancel;
+            }
+            console.log(JSON.stringify(info));
+
+            let CmdStockOrderCancel = pb.CmdStockOrderCancel;
+            let message = CmdStockOrderCancel.create(info);
+            let buff = CmdStockOrderCancel.encode(message).finish();
+
+            socket.send(pb.MessageId.Req_Game_OrderCancel, buff, (res) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                console.log('删除委托记录' + JSON.stringify(res));
+                if (res.err) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
+                }
+                else {
+                    this.node.active = false;
                 }
             })
 

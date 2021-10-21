@@ -128,8 +128,9 @@ export default class NewClass extends cc.Component {
     bottomVol = 0;  //最低成交量
 
     onLoad() {
-        //  this.Mask.active = false;
+
         GlobalEvent.on('on_off', (flagData) => {
+
             this.drawMACD.node.active = flagData.macd;
 
             this.MACDLabels.forEach(el => {
@@ -137,11 +138,13 @@ export default class NewClass extends cc.Component {
             })
 
             this.drawKDJ.node.active = flagData.kdj;
+
             this.KDJLabels.forEach(el => {
                 el.node.active = flagData.kdj;
             })
 
             this.drawRSI.node.active = flagData.rsi;
+
             this.RSILabels.forEach(el => {
                 el.node.active = flagData.rsi;
             })
@@ -151,9 +154,11 @@ export default class NewClass extends cc.Component {
             this.drawVol.node.active = flagData.cpm;
 
             this.drawCcl.node.active = flagData.ccl;
+
             this.cclLabel.node.active = flagData.ccl;
 
             this.voltext.active = true;
+
             if (flagData.macd || flagData.kdj || flagData.rsi || flagData.ccl) {
                 this.Mask.active = true;
                 this.voltext.active = false;
@@ -163,7 +168,9 @@ export default class NewClass extends cc.Component {
             }
 
             this.setLabelValue();
+
             this.updataLabel(GameCfg.beg_end[1] - 1);
+
         }, this);
 
         GlobalEvent.on('onDraw', this.onDraw.bind(this), this);
@@ -233,6 +240,7 @@ export default class NewClass extends cc.Component {
         }
 
         let arr1 = ['KDJ(' + GameCfg.KDJ[0] + ',' + GameCfg.KDJ[1] + ',' + GameCfg.KDJ[2] + ') K', 'D', 'J'];
+
         if (this.Klist[index]) {
             this.KDJLabels[0].string = arr1[0] + ': ' + this.Klist[index].toFixed(2);
         }
@@ -246,6 +254,7 @@ export default class NewClass extends cc.Component {
         }
 
         let arr2 = ['RSI(' + GameCfg.RSI[0] + ',' + GameCfg.RSI[1] + ',' + GameCfg.RSI[2] + ') RSI1', 'RSI2', 'RSI3'];
+
         if (this.Rs6[index]) {
             this.RSILabels[0].string = arr2[0] + ': ' + this.Rs6[index].toFixed(2);
         }
@@ -257,6 +266,7 @@ export default class NewClass extends cc.Component {
         if (this.Rs24[index]) {
             this.RSILabels[2].string = arr2[2] + ': ' + this.Rs24[index].toFixed(2);
         }
+
         if (GameCfg.GameType == pb.GameType.QiHuo) {
             if (GameCfg.data[0].data[index]) {
                 this.cclLabel.string = 'CCL:' + GameCfg.data[0].data[index].ccl_hold;
@@ -336,10 +346,12 @@ export default class NewClass extends cc.Component {
         }
 
         let viweData = GameCfg.data[0].data;
+        if (viweData.length <= 0) { return }
         if (!viweData || !viweData[GameCfg.beg_end[0]] || !viweData[GameCfg.beg_end[1] - 1]) {
             console.log('行情数据为空');
             return;
         }
+
         this.drawRSI.clear();
         this.drawKDJ.clear();
         this.drawMACD.clear();
@@ -374,7 +386,6 @@ export default class NewClass extends cc.Component {
         this.minRs24 = this.Rs24[GameCfg.beg_end[0]];
 
 
-        if (viweData.length <= 0) { return }
         this.topVol = 0;
         this.bottomVol = viweData[0].value;
 
@@ -427,6 +438,7 @@ export default class NewClass extends cc.Component {
             this.bottomVol = Math.min(this.bottomVol, viweData[index].value);
 
         }
+
         this.setLabelValue();
 
         this.drawPCM.lineWidth = 2;
@@ -441,9 +453,7 @@ export default class NewClass extends cc.Component {
             this.onDrawRSI(i);
             this.onDrawCCL(i);
             this.onDrawVol(viweData[i], i);
-
         }
-
     }
 
     onShow() {
@@ -539,7 +549,6 @@ export default class NewClass extends cc.Component {
         this.drawCcl.strokeColor = GameCfg.CCL_COL;
 
         DrawUtils.drawLine(this.drawCcl, preX, preY, x, y);
-
     }
 
     onDrawRSI(index) {
@@ -561,6 +570,7 @@ export default class NewClass extends cc.Component {
             let preRSI6Y = this.Rs6[index - 1] / this.maxRs6 * bgHeight;
 
             this.drawRSI.strokeColor = GameCfg.RSI_COLOR[0];
+
             DrawUtils.drawLine(this.drawRSI, preRSIX, preRSI6Y + 10, RSIX, RSI6Y + 10);
 
         }
@@ -568,9 +578,11 @@ export default class NewClass extends cc.Component {
         if (index >= 12) {
 
             let RSI12Y = this.Rs12[index] / this.maxRs6 * bgHeight;
+
             let preRSI12Y = this.Rs12[index - 1] / this.maxRs6 * bgHeight;
 
             this.drawRSI.strokeColor = GameCfg.RSI_COLOR[1];
+
             DrawUtils.drawLine(this.drawRSI, preRSIX, preRSI12Y + 10, RSIX, RSI12Y + 10);
 
         }
@@ -688,13 +700,6 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    protected onDestroy() {
-        GlobalEvent.off('onDraw');
-        GlobalEvent.off('updataLabel');
-        GlobalEvent.off('on_off');
-        GlobalEvent.off('onQHDraw');
-    }
-
     //画框
     drawRect(ctx, x, y, w, h, flag?) {
         let col;
@@ -715,5 +720,12 @@ export default class NewClass extends cc.Component {
             col = null;
         }
         DrawUtils.drawRect(ctx, x + 2, y, w - 2, h, col);
+    }
+
+    protected onDestroy() {
+        GlobalEvent.off('onDraw');
+        GlobalEvent.off('updataLabel');
+        GlobalEvent.off('on_off');
+        GlobalEvent.off('onQHDraw');
     }
 }

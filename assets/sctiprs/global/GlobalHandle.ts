@@ -9,7 +9,7 @@ import UpGameOpt from "./UpGameOpt";
 
 export default class GlobalHandle {
 
-    private static curTotal = 0;
+    // private static curTotal = 0;
 
     public static enterGameSetout(data, call, flag?) {
         GameCfg.data[0].data = [];
@@ -66,6 +66,7 @@ export default class GlobalHandle {
 
     //游戏结束
     public static onCmdGameOverReq(datas) {
+
         console.log('上传游戏数据' + JSON.stringify(datas));
         socket.send(pb.MessageId.Req_Game_Over, PB.onCmdGameOverConvertToBuff(datas), (info) => {
             console.log('GameOverInfo' + JSON.stringify(info));
@@ -79,6 +80,7 @@ export default class GlobalHandle {
         socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
 
             if (!info.items || info.items.length <= 0) {
+
                 console.log('获取的行情为空');
 
                 GameCfg.GAMEFUPAN = false;
@@ -120,7 +122,6 @@ export default class GlobalHandle {
     }
 
     public static onCmdGameStartQuoteQueryQH(data, cb?) {
-
 
         //先获取前面的
         // let preData = {
@@ -294,7 +295,7 @@ export default class GlobalHandle {
     public static GetGameOperations(data, cb?) {
 
         socket.send(pb.MessageId.Req_Game_GetGameOperation, PB.onCmdGetGameOperations(data), (info) => {
-            console.log(JSON.stringify(info));
+            console.log('操作步骤' + JSON.stringify(info));
 
             if (!info.err) {
                 if (info && info.items) {
@@ -323,7 +324,7 @@ export default class GlobalHandle {
             let bufff = CmdRoomLeave.encode(message).finish();
 
             socket.send(pb.MessageId.Req_Room_Leave, bufff, (res) => {
-                console.log('onReqRoomLeave' + JSON.stringify(res));
+                console.log('离开房间：' + JSON.stringify(res));
                 call && call(res);
             })
 
@@ -342,6 +343,7 @@ export default class GlobalHandle {
 
     //上传房间游戏操作
     public static onUpRoomGameOp(ops) {
+
         if (!ops) { return }
 
         let GameOperations = pb.GameOperations;

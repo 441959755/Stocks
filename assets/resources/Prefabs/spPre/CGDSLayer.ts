@@ -174,7 +174,7 @@ export default class NewClass extends cc.Component {
 
             else {
                 this._curArr[data.code + ''] = data;
-                GlobalEvent.emit('UPDATEITEMDATA', data);
+                // GlobalEvent.emit('UPDATEITEMDATA', data);
                 this.onUptateCCAsset(data);
             }
 
@@ -355,7 +355,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.CMDQUOTITEM);
         GlobalEvent.off(EventCfg.CHANGEMNCGACCOUNT);
         GameData.SpStockData = null;
-        GlobalEvent.off('UPDATEITEMDATA');
+        //  GlobalEvent.off('UPDATEITEMDATA');
     }
 
 
@@ -451,7 +451,14 @@ export default class NewClass extends cc.Component {
         GameData.cgdsStateList.forEach(el => {
             if (el.id == GameData.SpStockData.id) {
                 if (el.state && el.state.positionList && el.state.positionList.items) {
-                    arr = el.state.positionList.items;
+                    //  arr = el.state.positionList.items;
+                    el.state.positionList.items.forEach(e => {
+
+                        if (e.volume) {
+                            arr.push(e);
+                        }
+
+                    });
                 }
             }
         })

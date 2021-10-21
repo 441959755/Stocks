@@ -42,9 +42,9 @@ export default class NewClass extends cc.Component {
         if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WEB) {
             this.tipsLabel.string = '会员登入';
             this.onShowNode(this.dlNode);
-            setTimeout(() => {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '当前为测试版本，输入任意账号即可');
-            }, 500)
+            // setTimeout(() => {
+            //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '当前为测试版本，输入任意账号即可');
+            // }, 500)
         }
         else {
             //其他平台登入TODO

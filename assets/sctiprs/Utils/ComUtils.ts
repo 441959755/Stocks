@@ -240,12 +240,11 @@ export default class ComUtils {
 	public static changeTwoDecimal(num) {
 
 		if (!num) { return 0 };
-		return (parseInt(num * 100 + '') / 100).toFixed(2);
+		return num.toFixed(2);
 	}
 
 	//保留2位小数
 	public static changeTwoDecimal1(num) {
-
 		if (!num) { return 0 };
 		return num.toFixed(2);
 	}

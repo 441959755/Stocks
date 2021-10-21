@@ -37,13 +37,16 @@ export default class NewClass extends cc.Component {
 
         this.labs[4].string = data.price;
         this.labs[5].string = data.volume;
-        //  this.labels[6].string = data.volume;
 
+        //  this.labels[6].string = data.volume;
         //    this.labs[6].string = data.price * data.volume + '';
-        if (data.type == pb.OrderType.AskLimit) {
+
+        if (data.type == pb.OrderType.AskLimit || data.type == pb.OrderType.AskMarket || data.type == pb.OrderType.AskLimit_Cancel) {
             this.labs[6].string = '买入';
         }
-        if (data.type == pb.OrderType.BidLimit) {
+
+        if (data.type == pb.OrderType.BidLimit || data.type == pb.OrderType.BidMarket ||
+            data.type == pb.OrderType.BidLimit_Cancel) {
             this.labs[6].string = '卖出';
         }
 
@@ -60,6 +63,7 @@ export default class NewClass extends cc.Component {
             }
 
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
             let info = {
                 orderId: this._curData.orderId,
                 type: this._curData.type,

@@ -49,8 +49,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
-      "height": 750
+      "width": 1280,
+      "height": 720
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -61,8 +61,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        667,
-        375,
+        640,
+        360,
         0,
         0,
         0,
@@ -116,8 +116,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1334,
-      "height": 750
+      "width": 1280,
+      "height": 720
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2376,8 +2376,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "买出数量：",
-    "_N$string": "买出数量：",
+    "_string": "卖出数量：",
+    "_N$string": "卖出数量：",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,

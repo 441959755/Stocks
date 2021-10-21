@@ -354,12 +354,11 @@ export default class NewClass extends cc.Component {
 
     //当前持股数据
     onShowCgData() {
-
         let price;
+
         if (!this.gpDataMin[this.gpDataMin.length - 1]) { return }
+
         price = this.gpDataMin[this.gpDataMin.length - 1].price;
-
-
 
         let label1 = this.mnLaNode.children[0].getComponent(cc.Label);
         let label2 = this.mnLaNode.children[1].getComponent(cc.Label);

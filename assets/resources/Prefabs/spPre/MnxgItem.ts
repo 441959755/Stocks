@@ -20,7 +20,7 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
 
-        GlobalEvent.on('UPDATEITEMDATA', (info) => {
+        GlobalEvent.on(EventCfg.SYNCQUOTEITEM, (info) => {
 
             if (this._code == info.code) {
                 this.setLabel(info);
