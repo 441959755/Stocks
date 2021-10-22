@@ -163,10 +163,15 @@ export default class NewClass extends cc.Component {
     }
 
     onDisable() {
+
+        this.draw.node.removeAllChildren();
+        this.draw1.node.removeAllChildren();
+
         if (this.cb) {
             clearTimeout(this.cb);
             this.cb = null;
         }
+
         this.draw.clear();
         this.draw1.clear();
     }

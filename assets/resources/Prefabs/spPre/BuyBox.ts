@@ -43,7 +43,6 @@ export default class NewClass extends cc.Component {
     wtcdBtn: cc.Node = null;
 
 
-
     onShow(data) {
 
         this.wtcdBtn.active = false;
@@ -97,12 +96,17 @@ export default class NewClass extends cc.Component {
         }
 
         else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+
             GameData.cgdsStateList.forEach(el => {
+
                 if (el.id == GameData.SpStockData.id) {
-                    this.kyzc = el.state.account / 2;
+
+                    this.kyzc = el.state.account;
 
                     if (el.state.orderList && el.state.orderList.items) {
+
                         el.state.orderList.items.forEach(el1 => {
+
                             if (el1.code == this.curData.code && el1.type == pb.OrderType.AskLimit) {
                                 // this.node.active = false;
                                 // GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
@@ -111,6 +115,7 @@ export default class NewClass extends cc.Component {
                                     el.interactable = false;
                                     el.enableAutoGrayEffect = true;
                                 })
+
                                 this.wtcdBtn.active = true;
                                 this.mrslLabel.string = el1.volume;
                             }

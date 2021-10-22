@@ -1101,8 +1101,10 @@ export default class NewClass extends cc.Component {
 
 	//买入的均价
 	onjunjia() {
+
 		let data = this.gpData;
 		let mrZE = 0, mrZL = 0;
+
 		if (this.curMrCount.length == 0) {
 			return 0;
 		}
@@ -1112,12 +1114,12 @@ export default class NewClass extends cc.Component {
 			if (index == 0 && this.curMrPJPrice != 0) {
 				mrZE += (el * this.curMrPJPrice);
 			} else {
-				//console.log()
 				if (data[this.buyData[index]]) {
 					mrZE += (el * data[this.buyData[index]].close);
 				}
 			}
 		})
+
 		return mrZE / mrZL;
 	}
 

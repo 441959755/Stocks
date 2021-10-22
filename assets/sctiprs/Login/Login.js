@@ -1,6 +1,5 @@
 import GameData from "../GameData";
 import Socket from "../common/net/socket";
-import GameCfg from "../game/GameCfg";
 import GameCfgText from '../GameText';
 import AudioUtils from '../Utils/AudioUtils';
 import LLLog from '../common/utils/LLLog'
