@@ -1,4 +1,6 @@
 import GameCfg from "../../../sctiprs/game/GameCfg";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
 
 const { ccclass, property } = cc._decorator;
@@ -74,12 +76,12 @@ export default class NewClass extends cc.Component {
         //减价格
         else if (name == 'sp_znxg_sub') {
             if (parseFloat(this.editBox.string) <= 0) { return };
-            this.editBox.string = (parseFloat(this.editBox.string) - 0.01) + '';
+            this.editBox.string = (parseFloat(this.editBox.string) - 0.01).toFixed(2) + '';
         }
 
         //加买入价
         else if (name == 'sp_znxg_add') {
-            this.editBox.string = (parseFloat(this.editBox.string) + 0.01) + '';
+            this.editBox.string = (parseFloat(this.editBox.string) + 0.01).toFixed(2) + '';
         }
 
         //买入数量
@@ -94,12 +96,17 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'sp_znxg_mrxd') {
+
+            if (parseInt(this.mcCount.string) <= 0 || parseFloat(this.editBox.string) <= 0) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '交易价格、数量不能小于等于0')
+                return
+            }
+
             let slg = {
                 price: parseFloat(this.editBox.string),
                 count: parseInt(this.mcCount.string),
             }
-            this.callBack && (this.callBack(slg));
-            this.node.active = false;
+            this.callBack && (this.callBack(slg, this.node));
         }
 
         else if (name == 'sp_znxg_qc') {
