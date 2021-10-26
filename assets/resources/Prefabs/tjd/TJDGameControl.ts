@@ -81,7 +81,7 @@ export default class NewClass extends cc.Component {
     onShowGameFuPan() {
         this.ingNode.active = false;
         this.fupanNode.active = true;
-
+        this.fupanNode.getComponent('TJDFUPAN').onShow();
     }
 
     onEnable() {
@@ -235,6 +235,7 @@ export default class NewClass extends cc.Component {
 
     //自动执行
     setAutoExecute() {
+
         this.autoCallback = setInterval(() => {
 
             let type = 0;
@@ -348,15 +349,17 @@ export default class NewClass extends cc.Component {
 
                 rate = this.onCurPositionRete();
 
-                if (!GameCfg.fill[GameCfg.fill.length - 1].end) {
+                if (this.chigushuliang == 0) {
                     this.rateItem.end = GameCfg.huizhidatas - 1;
                     GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
                     GameCfg.fill[GameCfg.fill.length - 1].end = this.rateItem.end;
                 }
                 else {
+                    this.rateItem.end = GameCfg.huizhidatas - 1;
+                    GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
+                    GameCfg.fill[GameCfg.fill.length - 1].end = this.rateItem.end;
 
                     let start = GameCfg.huizhidatas;
-
                     this.rateItem = {
                         rate: rate,
                         start: start,
@@ -377,6 +380,14 @@ export default class NewClass extends cc.Component {
 
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '条件单止损成功');
             }
+            else {
+
+                let rate = this.onCurPositionRete();
+
+                GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
+
+                GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
+            }
 
             let curClose = parseFloat(this.viweData[GameCfg.huizhidatas - 1].close);
             this.zongzhichan = parseInt(this.chigushuliang * curClose + this.keyongzhichan + '');
@@ -393,6 +404,7 @@ export default class NewClass extends cc.Component {
                 this.setLabelData();
                 //绘制下回合的走势线
                 GlobalEvent.emit('roundNUmber');
+
                 if (type) {
                     clearInterval(this.autoCallback);
                     this.autoCallback = null;

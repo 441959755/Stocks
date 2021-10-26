@@ -1,3 +1,4 @@
+
 import GameData from "../GameData";
 import Socket from "../common/net/socket";
 import GameCfgText from '../GameText';
@@ -300,6 +301,25 @@ cc.Class({
 				GameData.TJDSet = TJDSet;
 			} else {
 				GameData.TJDSet = JSON.parse(TJDSet);
+			}
+
+		}
+
+		//分时
+		{
+			let FSSet = cc.sys.localStorage.getItem('FSSET');
+			if (!FSSet) {
+
+				FSSet = {
+					isShowVol: true,
+					isBW: true,
+					KLine: 150,
+					KSpeed: 0.2,
+					isAuto: false,
+				}
+				GameData.FSSet = FSSet;
+			} else {
+				GameData.FSSet = JSON.parse(FSSet);
 			}
 
 		}

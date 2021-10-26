@@ -75,7 +75,7 @@ export default class NewClass extends cc.Component {
         }
 
         //总盈利率
-        let all = (GameCfg.allRate * 100).toFixed(2);
+        let all = ((zhichan - 100000) / 100000 * 100).toFixed(2);
 
         this.labels[0].string = all + '%';
         if (parseFloat(all) > 0) {
@@ -162,6 +162,19 @@ export default class NewClass extends cc.Component {
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
 
+            if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameTextCfg.tjdxl.cost[0].v) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+                return;
+            }
+            else if (this.curState == 3) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
+                return;
+            }
+
+            GameCfg.GAMEFUPAN = false;
+            this.node.active = false;
+            this.node.parent.parent.active = false;
+            GlobalEvent.emit('TOAGAME');
         }
 
     }

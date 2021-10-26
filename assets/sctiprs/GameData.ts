@@ -215,6 +215,16 @@ export default class GameData {
         cc.sys.localStorage.setItem('TJDSET', JSON.stringify(val));
     }
 
+    private static _FSSet;
+
+    public static get FSSet() {
+        return this._FSSet;
+    }
+
+    public static set FSSet(val) {
+        this._FSSet = val;
+        cc.sys.localStorage.setItem('FSSET', JSON.stringify(val));
+    }
 
     private static _properties = [];
     //// 金币

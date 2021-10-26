@@ -199,7 +199,8 @@ export default class NewClass extends cc.Component {
 
 		//分时
 		else if (name == 'main_xl_fsxl') {
-
+			GameCfg.GameType = pb.GameType.FenShi;
+			GlobalEvent.emit(EventCfg.OPENFENSHI);
 		}
 
 		//条件

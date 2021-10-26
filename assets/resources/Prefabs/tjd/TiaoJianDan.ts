@@ -69,7 +69,7 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-
+        GlobalEvent.on('TOAGAME', this.TJDStartGameSet.bind(this), this);
         this.initCount();
 
         this.boxs[0].getComponentInChildren(cc.Label).string = GameData.TJDSet.line;
@@ -136,14 +136,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'startTJDBtn') {
-            if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameTextCfg.tjdxl.cost[0].v) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
-                return;
-            }
-            else if (this.curState == 3) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
-                return;
-            }
+
             this.TJDStartGameSet();
         }
     }
@@ -168,6 +161,14 @@ export default class NewClass extends cc.Component {
     }
 
     TJDStartGameSet() {
+        if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameTextCfg.tjdxl.cost[0].v) {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+            return;
+        }
+        else if (this.curState == 3) {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
+            return;
+        }
 
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
@@ -262,6 +263,11 @@ export default class NewClass extends cc.Component {
 
     onDestroy() {
         GlobalEvent.off(EventCfg.GMAECOUNTERSCHANGE);
+
+    }
+
+    onDisable() {
+        GlobalEvent.off('TOAGAME');
     }
 
 }

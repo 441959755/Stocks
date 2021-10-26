@@ -47,6 +47,10 @@ export default class NewClass extends cc.Component {
 
     TJDGame: cc.Node = null;    //条件单游戏界面
 
+    fenshi: cc.Node = null;
+
+    fenShiGame: cc.Node = null;
+
     onLoad() {
         GlobalEvent.on(EventCfg.OPENSMLAYER, this.openSMLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZBLAYER, this.openZBLayer.bind(this), this);
@@ -58,7 +62,9 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENYIELDLAYER, this.openYieldLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENSMRESETMONEYLAYER, this.openSmResetLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENTIAOJIANDAN, this.openTiaoJianDan.bind(this), this);
+        GlobalEvent.on(EventCfg.OPENFENSHI, this.openFenShi.bind(this), this);
         GlobalEvent.on(EventCfg.OPENTJDGAME, this.openTJDGame.bind(this), this);
+        GlobalEvent.on(EventCfg.OPENGAMEFENSHI, this.openGameFenShi.bind(this), this);
     }
 
     onDestroy() {
@@ -74,6 +80,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENSMRESETMONEYLAYER);
         GlobalEvent.off(EventCfg.OPENTIAOJIANDAN);
         GlobalEvent.off(EventCfg.OPENTJDGAME);
+        GlobalEvent.off(EventCfg.OPENFENSHI);
         LoadUtils.releaseRes('Prefabs/xl/ZBSetLayer');
         LoadUtils.releaseRes('Prefabs/xl/SMSetLayer');
         LoadUtils.releaseRes('Prefabs/xl/DXSetLayer');
@@ -91,6 +98,7 @@ export default class NewClass extends cc.Component {
         LoadUtils.releaseRes('Prefabs/xl/SMYieldCurve');
         LoadUtils.releaseRes('Prefabs/tjd/tiaoJianDan');
         LoadUtils.releaseRes('Prefabs/tjd/tjdGame');
+        LoadUtils.releaseRes('Prefabs/fsxl/fenshi');
     }
 
     /**
@@ -213,11 +221,19 @@ export default class NewClass extends cc.Component {
         this.openNode(this.TJDNode, 'Prefabs/tjd/tiaoJianDan', 10, (node) => { this.TJDNode = node });
     }
 
+    openFenShi() {
+        this.openNode(this.fenshi, 'Prefabs/fsxl/fenshi', 10, (node) => { this.fenshi = node });
+    }
+
     /*
 *打开条件单游戏
 */
     openTJDGame() {
         this.openNode(this.TJDGame, 'Prefabs/tjd/tjdGame', 20, (node) => { this.TJDGame = node });
+    }
+
+    openGameFenShi() {
+        this.openNode(this.fenShiGame, 'Prefabs/fsxl/GameFenShi', 20, (node) => { this.fenShiGame = node });
     }
 
     openNode(node, url, zIndex, call?) {

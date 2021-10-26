@@ -203,6 +203,9 @@ export default class GameCfgText {
                 break;
             }
         }
+        if (!items) {
+            return;
+        }
 
         let data = {
             start: null,
@@ -220,6 +223,39 @@ export default class GameCfgText {
             y = sc.y;
             m = sc.m >= 10 ? sc.m : '0' + sc.m;
             d = sc.d >= 10 ? sc.d : '0' + sc.d;
+            data.end = y + '' + m + '' + d;
+        } else {
+            data.end = items[3];
+        }
+        return data;
+    }
+
+    public static getTimeByCodeName1(str) {
+        str = str.split(' ')[0];
+        let items;
+        for (let i = 0; i < this.stockList.length; i++) {
+            let arr = this.stockList[i].split('|');
+            if (arr[0].indexOf(str) != -1 || arr[1].indexOf(str) != -1) {
+                items = this.stockList[i].split('|');
+                break;
+            }
+        }
+        if (!items) {
+            return;
+        }
+
+        let data = {
+            start: null,
+            end: null,
+        };
+        data.start = items[2];
+        if (items[3] == 0) {
+            // data.end = ComUtils.getCurYearMonthDay();
+            let f = new Date();
+            let y = f.getFullYear() + '';
+            let m = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+            let d = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
+
             data.end = y + '' + m + '' + d;
         } else {
             data.end = items[3];
@@ -323,6 +359,23 @@ export default class GameCfgText {
                 //  if (items[3] == 0) {
                 return items;
                 // } else 
+            }
+
+            if (le <= 0) {
+                le = GameCfgText.stockList.length - 1;
+            }
+        }
+    }
+
+    //根据时间随机先股票分时
+    public static getItemsByTime1() {
+
+        let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
+        while (le--) {
+            let items = GameCfgText.stockList[le].split('|');
+            let str;
+            if (items[3] == 0) {
+                return items;
             }
 
             if (le <= 0) {
