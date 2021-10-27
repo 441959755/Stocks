@@ -94,6 +94,8 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
 
+        GlobalEvent.on('TOAGAME', this.onStartGame.bind(this), this);
+
         this.editbox.string = '随机选股';
         let f = new Date(new Date().getTime() - 1 * 24 * 60 * 60 * 1000);
         let y = f.getFullYear() + '';
@@ -264,7 +266,6 @@ export default class NewClass extends cc.Component {
                 el.active = false;
             })
         }
-
     }
 
     //检查条件是否满足
@@ -282,35 +283,57 @@ export default class NewClass extends cc.Component {
 
     onToggleClick(event, curData) {
 
-        this.toggles[0].isChecked = false;
-        this.toggles[1].isChecked = false;
-        this.toggles[2].isChecked = false;
-        this.toggles[3].isChecked = true;
-
         if (curData == 1) {
             GameData.FSSet.KSpeed = 0.2;
+            this.toggles[3].isChecked = true;
+            GameData.FSSet.isAuto = true;
+            this.toggles[2].isChecked = false;
+            this.toggles[1].isChecked = false;
+            this.toggles[0].isChecked = true;
         }
 
         else if (curData == 2) {
             GameData.FSSet.KSpeed = 0.5;
+            this.toggles[3].isChecked = true;
+            GameData.FSSet.isAuto = true;
+            this.toggles[0].isChecked = false;
+            this.toggles[2].isChecked = false;
+            this.toggles[1].isChecked = true;
         }
 
         else if (curData == 3) {
             GameData.FSSet.KSpeed = 1;
+            this.toggles[3].isChecked = true;
+            GameData.FSSet.isAuto = true;
+            this.toggles[1].isChecked = false;
+            this.toggles[0].isChecked = false;
+            this.toggles[2].isChecked = true;
         }
-        else {
-            if (GameData.FSSet.KSpeed == 0.2) {
-                this.toggles[0].isChecked = true;
+        //自动
+        else if (curData == 4) {
+            if (this.toggles[3].isChecked) {
+                GameData.FSSet.isAuto = true;
+                if (GameData.FSSet.KSpeed == 0.2) {
+                    this.toggles[0].isChecked = true;
+                }
+                else if (GameData.FSSet.KSpeed == 0.5) {
+                    this.toggles[1].isChecked = true;
+                }
+                else if (GameData.FSSet.KSpeed == 1) {
+                    this.toggles[2].isChecked = true;
+                }
             }
-            else if (GameData.FSSet.KSpeed == 0.5) {
-                this.toggles[1].isChecked = true;
-            }
-            else if (GameData.FSSet.KSpeed == 1) {
-                this.toggles[2].isChecked = true;
-            }
-        }
+            else {
+                this.toggles[3].isChecked = false;
+                this.toggles[2].isChecked = false;
+                this.toggles[1].isChecked = false;
+                this.toggles[0].isChecked = false;
 
+                GameData.FSSet.isAuto = false;
+            }
+        }
     }
+
 
     onStartGame() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
@@ -326,7 +349,7 @@ export default class NewClass extends cc.Component {
         let from, to, code;
         let time = curDate.getTime() - (hour) * 60 * 60 * 1000;
         from = parseInt(new Date(time).getTime() / 1000 + '');
-        to = parseInt(curDate.getTime() / 1000 + '');
+        to = parseInt(new Date(time + 23 * 60 * 60 * 1000).getTime() / 1000 + '');
 
         let items;
         if (this.editbox.string == '随机选股') {
@@ -344,11 +367,43 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
             GameCfg.GameSet = GameData.FSSet;
             console.log('分数据：' + JSON.stringify(info));
-            GameData.huizhidatas = 1;
+            GameData.huizhidatas = 0;
             GameCfg.huizhidatas = 1;
+
+            let items = info.items;
+            for (let i = items.length - 1; i >= 1; i--) {
+                items[i].amount = items[i].amount - items[i - 1].amount;
+                items[i].volume = items[i].volume - items[i - 1].volume;
+            }
+
+            let arr = [];
+
+            items.forEach(el => {
+                let data = {
+                    day: el.timestamp,
+                    open: el.open || 0,
+                    close: el.price || 0,
+                    high: el.high || 0,
+                    low: el.low || 0,
+                    price: el.amount || 0,
+                    value: el.volume || 0,
+                    zs: el.close || 0,     //临时加的
+                }
+                arr.push(data);
+            });
+
+            GameCfg.data[0].data = arr;
+            GameCfg.data[0].name = items[1];
+            GameCfg.data[0].code = items[0];
+
+
             GlobalEvent.emit(EventCfg.OPENGAMEFENSHI);
         })
 
+    }
+
+    onDisable() {
+        GlobalEvent.off('TOAGAME');
     }
 
 }

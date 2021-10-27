@@ -41,6 +41,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     tjd: cc.Node = null;  //条件单
 
+    @property(cc.Node)
+    fs: cc.Node = null;  //分时
+
     onEnable() {
 
         this.SMNode.active = false;
@@ -55,16 +58,20 @@ export default class NewClass extends cc.Component {
         this.wwzb1.active = false;
         this.djph.active = false;
         this.sjb.active = false;
+        this.fs.active = false;
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             this.SMNode.active = true;
         }
+
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
             this.DXNode.active = true;
         }
+
         else if (GameCfg.GameType == pb.GameType.QiHuo) {
             this.QHNode.active = true;
         }
+
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.ZBNode.active = true
         }
@@ -99,6 +106,10 @@ export default class NewClass extends cc.Component {
 
         else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
             this.tjd.active = true;
+        }
+
+        else if (GameCfg.GameType == pb.GameType.FenShi) {
+            this.fs.active = true;
         }
 
     }
