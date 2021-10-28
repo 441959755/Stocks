@@ -1,6 +1,8 @@
 import DrawData from "../../../sctiprs/game/DrawData";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import DrawUtils from "../../../sctiprs/Utils/DrawUtils";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
 
 const { ccclass, property } = cc._decorator;
@@ -49,22 +51,35 @@ export default class NewClass extends cc.Component {
 
     VolList = null;
 
+    autoCallback = null;
+
     onEnable() {
+
+        GlobalEvent.on(EventCfg.ADDFILLCOLOR, this.drawFillColor.bind(this), this);
         this.viewData = GameCfg.data[0].data;
         DrawData.initData(this.viewData);
 
         this.MaList = DrawData.MaList;
         this.MinMaList = DrawData.MinMaList;
         this.VolList = DrawData.VolList;
-        this.draw1.clear();
 
-        this.drawMA.clear();
-        this.drawPCM.clear();
-        this.drawVol.clear();
-        this.draw1.lineWidth = 2;
+
+        this.draw1.lineWidth = 0;
         this.drawMA.lineWidth = 2;
         this.drawPCM.lineWidth = 2;
         this.drawVol.lineWidth = 2;
+        this.initDrawBg();
+        this.autoCallback = null;
+
+    }
+
+    drawFillColor() {
+
+        GameCfg.huizhidatas += 1;
+        GameCfg.beg_end[1] = GameCfg.huizhidatas;
+        if (GameCfg.huizhidatas >= GameCfg.data[0].data.length) {
+            GameCfg.huizhidatas = GameCfg.data[0].data.length;
+        }
         this.initDrawBg();
     }
 
@@ -80,29 +95,41 @@ export default class NewClass extends cc.Component {
             console.log(' GameCfg.beg_end[1]:' + GameCfg.beg_end[1]);
             return;
         }
-
+        this.draw1.clear();
+        this.drawMA.clear();
+        this.drawPCM.clear();
+        this.drawVol.clear();
         let viewData = this.viewData;
-        this.bottomValue = viewData[GameCfg.beg_end[0]].low;
+        this.bottomValue = viewData[0].low;
         this.topValue = 0;
 
         this.topVol = 0;
 
-        this.bottomVol = viewData[0].zs;
+        let zs = viewData[0].zs;
 
         for (let i = 0; i < viewData.length; i++) {
             this.topValue = Math.max(this.topValue, viewData[i].high);
-            //    this.bottomValue = Math.min(this.bottomValue, viewData[i].low);
+            this.bottomValue = Math.min(this.bottomValue, viewData[i].low);
+
             this.topVol = Math.max(this.topVol, viewData[i].value);
             this.bottomVol = Math.min(this.bottomVol, viewData[i].value);
         }
 
-        this.disValue = this.topValue - this.bottomValue;
 
-        this.labels[4].string = this.topValue.toFixed(2) + '';
-        this.labels[3].string = (this.bottomValue + this.disValue / 2).toFixed(2);
-        this.labels[2].string = (this.bottomValue).toFixed(2);
-        this.labels[1].string = (this.bottomValue - this.disValue / 2).toFixed(2);
-        this.labels[0].string = (this.bottomValue - this.disValue).toFixed(2);
+        this.disValue = Math.abs(this.topValue - zs) > Math.abs(zs - this.bottomValue) ? Math.abs(this.topValue - zs) :
+            Math.abs(zs - this.bottomValue);
+
+        this.labels[4].string = (zs + this.disValue).toFixed(2) + '';
+        this.labels[3].string = (zs + this.disValue / 2).toFixed(2);
+        this.labels[2].string = (zs).toFixed(2);
+        this.labels[1].string = (zs - this.disValue / 2).toFixed(2);
+        this.labels[0].string = (zs - this.disValue).toFixed(2);
+
+        this.labels[5].string = ((parseFloat(this.labels[0].string) - zs) / zs * 100).toFixed(2) + '%';
+        this.labels[6].string = ((parseFloat(this.labels[1].string) - zs) / zs * 100).toFixed(2) + '%';
+        this.labels[7].string = ((parseFloat(this.labels[2].string) - zs) / zs * 100).toFixed(2) + '%';
+        this.labels[8].string = ((parseFloat(this.labels[3].string) - zs) / zs * 100).toFixed(2) + '%';
+        this.labels[9].string = ((parseFloat(this.labels[4].string) - zs) / zs * 100).toFixed(2) + '%';
 
         this.bottomValue = parseFloat(this.labels[0].string)
         this.disValue = this.topValue - this.bottomValue;
@@ -118,8 +145,8 @@ export default class NewClass extends cc.Component {
 
         let drawBox = this.draw1.node.height;
         let some = index - (GameCfg.beg_end[0]);
-        let startX = (some * GameCfg.hz_width);
-        let endX = ((some + 1) * GameCfg.hz_width);
+        // let startX = (some * GameCfg.hz_width);
+        // let endX = ((some + 1) * GameCfg.hz_width);
         //根据区间价格决定坐标
         let openValue = (el.open - this.bottomValue);
         let openY = openValue / this.disValue * drawBox;
@@ -139,8 +166,8 @@ export default class NewClass extends cc.Component {
             //   this.drawBg.lineWidth = width;
             DrawUtils.drawMinLineFill(this.draw1, this.prePointX, this.prePointY, x, y);
             //    this.drawBg.lineWidth = width;
-            this.draw1.strokeColor = cc.Color.WHITE;
-            this.drawLine(this.draw1, this.prePointX, this.prePointY, x, y);
+            this.drawMA.strokeColor = cc.Color.WHITE;
+            this.drawLine(this.drawMA, this.prePointX, this.prePointY, x, y);
 
 
             let y1 = (this.MinMaList[index] - this.bottomValue) / this.disValue * drawBox;
@@ -165,7 +192,7 @@ export default class NewClass extends cc.Component {
 
         let some = index - GameCfg.beg_end[0];
 
-        let x = (some * width);
+        let x = (some * width) + width / 2;
 
         let y = el.value * (this.drawVol.node.height / this.topVol);
 
@@ -221,5 +248,8 @@ export default class NewClass extends cc.Component {
 
     }
 
+    onDisable() {
+        GlobalEvent.off(EventCfg.ADDFILLCOLOR);
+    }
 
 }

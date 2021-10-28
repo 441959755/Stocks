@@ -87,6 +87,7 @@ export default class NewClass extends cc.Component {
         this.drawBg.clear();
         this.drawMA.clear();
 
+        //  
         this.drawBg.lineWidth = 2;
         this.drawMA.lineWidth = 2;
 
@@ -191,6 +192,7 @@ export default class NewClass extends cc.Component {
         let closeY = closeValue / this.disValue * drawBox;
 
         if (this.ktype == pb.KType.Min) {
+            this.drawBg.lineWidth = 0;
             GameCfg.hz_width = this.node.width / 240;
             if (index == 0) {
                 this.prePointX = (some * GameCfg.hz_width);
@@ -203,8 +205,8 @@ export default class NewClass extends cc.Component {
                 //   this.drawBg.lineWidth = width;
                 DrawUtils.drawMinLineFill(this.drawBg, this.prePointX, this.prePointY, x, y);
                 //    this.drawBg.lineWidth = width;
-                this.drawBg.strokeColor = cc.Color.WHITE;
-                this.drawLine(this.drawBg, this.prePointX, this.prePointY, x, y);
+                this.drawMA.strokeColor = cc.Color.WHITE;
+                this.drawLine(this.drawMA, this.prePointX, this.prePointY, x, y);
 
 
                 let y1 = (this.MinMaList[index] - this.bottomValue) / this.disValue * drawBox;
@@ -217,6 +219,7 @@ export default class NewClass extends cc.Component {
             }
         }
         else {
+
             //判断颜色
             // let hz_color;
             //没涨没跌
@@ -280,6 +283,7 @@ export default class NewClass extends cc.Component {
         if (!this.MaList[index]) {
             return;
         }
+
         let drawBox = this.drawMA.node.height, initY = 0, madata = 0;
         //每段数据绘制
         for (let i = 0; i < GameCfg.MAs.length; i++) {

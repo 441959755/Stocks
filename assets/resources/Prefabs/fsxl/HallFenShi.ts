@@ -351,10 +351,10 @@ export default class NewClass extends cc.Component {
         from = parseInt(new Date(time).getTime() / 1000 + '');
         to = parseInt(new Date(time + 23 * 60 * 60 * 1000).getTime() / 1000 + '');
 
-        let items;
+        let items1;
         if (this.editbox.string == '随机选股') {
-            items = GameCfgText.getItemsByTime1();
-            code = items[0];
+            items1 = GameCfgText.getItemsByTime1();
+            code = items1[0];
         }
 
         let info1 = {
@@ -367,7 +367,7 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
             GameCfg.GameSet = GameData.FSSet;
             console.log('分数据：' + JSON.stringify(info));
-            GameData.huizhidatas = 0;
+            GameData.huizhidatas = 1;
             GameCfg.huizhidatas = 1;
 
             let items = info.items;
@@ -393,8 +393,8 @@ export default class NewClass extends cc.Component {
             });
 
             GameCfg.data[0].data = arr;
-            GameCfg.data[0].name = items[1];
-            GameCfg.data[0].code = items[0];
+            GameCfg.data[0].name = items1[1];
+            GameCfg.data[0].code = items1[0];
 
 
             GlobalEvent.emit(EventCfg.OPENGAMEFENSHI);

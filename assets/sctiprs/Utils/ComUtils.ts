@@ -70,6 +70,24 @@ export default class ComUtils {
 	}
 
 	/**
+ * 
+ * @param time 时间戳
+ * return 时：分：秒
+ */
+	public static getSFMTamp1(time1) {
+		let time = new Date(parseInt(time1) * 1000);
+		let hours, minute, second;
+		hours = time.getHours(),
+			minute = time.getMinutes();
+		//	second = time.getSeconds();
+
+		if (hours < 10) { hours = '0' + hours; }
+		if (minute < 10) { minute = '0' + minute; }
+		//	if (second < 10) { second = '0' + second; }
+		return hours + ':' + minute;
+	}
+
+	/**
 	 * 
 	 * @param time 
 	 * return yymmdd   200010101

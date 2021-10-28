@@ -31,13 +31,16 @@ export default class DrawUtils {
 
     //其他 分时的
     public static drawMinLineFill(ctx, x, y, tx, ty) {
-        ctx.strokeColor = new cc.Color().fromHEX('#64C8FF11');
+        //  ctx.strokeColor = new cc.Color().fromHEX('#64C8FF');
         ctx.moveTo(x, 0);
         ctx.lineTo(x, y);
         ctx.lineTo(tx, ty);
         ctx.lineTo(tx, 0);
         ctx.lineTo(x, 0);
-        ctx.fillColor = new cc.Color().fromHEX('#64C8FF11');
+        ctx.fillColor = new cc.Color().fromHEX('#64C8FF');
+        ctx.fillColor.a = 60;
+
+        ctx.fill();
         ctx.stroke();
     }
 }

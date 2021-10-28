@@ -5,6 +5,8 @@ import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
 
 const { ccclass, property } = cc._decorator;
@@ -40,6 +42,8 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     labels: cc.Label[] = [];
 
+
+
     onShow(allLv) {
 
         let gpData = GameCfg.data[0].data;
@@ -74,7 +78,7 @@ export default class NewClass extends cc.Component {
         //
         //总盈利率
 
-        this.labels[0].string = allLv + '%';
+        this.labels[0].string = (allLv * 100).toFixed(2) + '%';
         if (parseFloat(allLv) > 0) {
             this.labels[0].node.color = new cc.Color().fromHEX('#e94343');
         } else if (parseFloat(allLv) < 0) {
@@ -108,7 +112,7 @@ export default class NewClass extends cc.Component {
                 uid: GameData.userID,
                 gType: GameCfg.GameType,
                 quotesCode: parseInt(GameCfg.data[0].code),
-                kType: GameCfg.enterGameCache.ktype,
+                kType: pb.KType.Min,
                 kFrom: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
 
                 kTo: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
@@ -137,16 +141,15 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
 
         if (name == 'closeBtn') {
-            this.node.parent.active = false;
+            this.node.parent.parent.active = false;
         }
 
-        // //复盘
-        // else if (name == 'lx_jsbt_qd') {
-        //     this.node.active = false;
-        //     GameCfg.GAMEFUPAN = true;
-        //     GlobalEvent.emit(EventCfg.GAMEFUPAN);
-
-        // }
+        //复盘
+        else if (name == 'lx_jsbt_qd') {
+            this.node.active = false;
+            GameCfg.GAMEFUPAN = true;
+            GlobalEvent.emit(EventCfg.GAMEFUPAN);
+        }
 
         //再来一局
         if (name == 'lx_jsbt_zlyj') {
@@ -163,6 +166,7 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = false;
             this.node.active = false;
             this.node.parent.parent.active = false;
+
             GlobalEvent.emit('TOAGAME');
         }
 
