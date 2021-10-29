@@ -1032,7 +1032,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        348.65,
+        385.10799999999995,
         -3.212,
         0,
         0,
@@ -1101,7 +1101,7 @@
     "_target": null,
     "_alignFlags": 32,
     "_left": 0,
-    "_right": 200,
+    "_right": 163.54200000000003,
     "_top": 0,
     "_bottom": 0,
     "_verticalCenter": 0,
@@ -1339,7 +1339,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 940,
-      "height": 630
+      "height": 610
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1351,7 +1351,7 @@
       "ctor": "Float64Array",
       "array": [
         155,
-        0,
+        4.25,
         0,
         0,
         0,
@@ -1410,7 +1410,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 940,
-      "height": 630
+      "height": 610
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1520,7 +1520,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        305,
+        295,
         0,
         0,
         0,
@@ -45281,7 +45281,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 300,
-      "height": 630
+      "height": 620
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -45293,7 +45293,7 @@
       "ctor": "Float64Array",
       "array": [
         -478.508,
-        0,
+        3.25,
         0,
         0,
         0,
@@ -45367,7 +45367,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        285,
+        280,
         0,
         0,
         0,
@@ -45734,7 +45734,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        135,
+        130,
         0,
         0,
         0,
@@ -47490,7 +47490,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -95,
+        -100,
         0,
         0,
         0,
@@ -47794,7 +47794,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 300,
-      "height": 105
+      "height": 90
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -47806,7 +47806,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -262.5,
+        -260,
         0,
         0,
         0,
@@ -48157,7 +48157,7 @@
     "_layoutSize": {
       "__type__": "cc.Size",
       "width": 300,
-      "height": 630
+      "height": 620
     },
     "_resize": 0,
     "_N$layoutType": 2,

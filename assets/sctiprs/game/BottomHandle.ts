@@ -450,7 +450,8 @@ export default class NewClass extends cc.Component {
 			if (GameCfg.GameType == pb.GameType.DingXiang ||
 				GameCfg.GameType == pb.GameType.ZhiBiao ||
 				GameCfg.GameType == pb.GameType.JJ_PK ||
-				GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+				GameCfg.GameType == pb.GameType.JJ_ChuangGuan ||
+				GameCfg.GameType == pb.GameType.TiaoJianDan) {
 				console.log(parseInt(el.opId));
 				if (el.opId == pb.GameOperationId.Ask || el.opId == 'Ask') {
 					this._type = 1;

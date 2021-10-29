@@ -36,12 +36,24 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
 
+        this.fupanNode.active = false;
+        this.findLayer.active = false;
+        this.tipsBox.active = false;
+        this.huiheshu = 0;
+        this.rateItem = null;
+        this.mrPrice = 0;
+        this.curlv = 0.00;
+        this.alllv = 0.00;
+        GameCfg.GAMEFUPAN = false;
+        GameCfg.fill = [];
+
         GlobalEvent.on(EventCfg.GAMEFUPAN, () => {
             this.fupanNode.active = true;
+            this.fupanNode.getComponent('FSFinal').onShow(this.alllv);
         }, this);
 
         GlobalEvent.on('onClickPosUpdateLabel', (index) => {
-            if (!index) { return };
+            if (index <= 0) { return };
 
             if (index <= 120) {
                 this.tipsBox.x = this.node.width / 2 - 10 - this.tipsBox.width / 2;
@@ -119,10 +131,11 @@ export default class NewClass extends cc.Component {
                 GameCfg.fill[GameCfg.fill.length - 1].rate = this.curlv;
                 GameCfg.fill[GameCfg.fill.length - 1].end = GameCfg.huizhidatas - 1;
             }
+            this.getAllLv();
             if (!GameCfg.GameSet.isAuto) {
                 GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
             }
-            this.getAllLv();
+
             this.setLabelData();
         }
 

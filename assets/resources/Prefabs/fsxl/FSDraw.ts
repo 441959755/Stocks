@@ -28,6 +28,9 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     labels: cc.Label[] = [];
 
+    @property(cc.Label)
+    vol: cc.Label = null;
+
     viewData = null;
 
     MaList = null;
@@ -77,9 +80,11 @@ export default class NewClass extends cc.Component {
 
         GameCfg.huizhidatas += 1;
         GameCfg.beg_end[1] = GameCfg.huizhidatas;
+
         if (GameCfg.huizhidatas >= GameCfg.data[0].data.length) {
             GameCfg.huizhidatas = GameCfg.data[0].data.length;
         }
+        this.vol.string = GameCfg.data[0].data[GameCfg.huizhidatas - 1].value;
         this.initDrawBg();
     }
 

@@ -44,7 +44,7 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     labels: cc.Label[] = [];
 
-    onShow(zhichan) {
+    onShow(all, zhichan) {
         let gpData = GameCfg.data[0].data;
         //用户信息
         this.headSp.spriteFrame = GameData.headImg;
@@ -74,8 +74,8 @@ export default class NewClass extends cc.Component {
             this.tqzf.node.color = new cc.Color().fromHEX('#e94343');
         }
 
-        //总盈利率
-        let all = ((zhichan - 100000) / 100000 * 100).toFixed(2);
+        // //总盈利率
+        // let all = ((zhichan - 100000) / 100000 * 100).toFixed(2);
 
         this.labels[0].string = all + '%';
         if (parseFloat(all) > 0) {
@@ -87,6 +87,7 @@ export default class NewClass extends cc.Component {
         }
 
         let info = DrawData.getBukoCount();
+
         this.labels[1].string = info.yCount + '次';
 
         if (info.yCount > 0) {
@@ -122,9 +123,9 @@ export default class NewClass extends cc.Component {
 
                 kTo: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
                 stockProfitRate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100),
-                userProfitRate: (GameCfg.allRate * 100),
-                userCapital: GameCfg.ziChan,
-                userProfit: (GameCfg.finalfund - GameCfg.ziChan),
+                userProfitRate: parseFloat(all),
+                userCapital: zhichan,
+                userProfit: (zhichan - 100000),
                 ts: parseInt(new Date().getTime() / 1000 + ''),
                 rank: 0,
                 refId: 0,
@@ -149,7 +150,7 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
 
         if (name == 'closeBtn') {
-            this.node.parent.active = false;
+            this.node.parent.parent.active = false;
         }
 
         //复盘
@@ -162,14 +163,14 @@ export default class NewClass extends cc.Component {
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
 
-            if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameTextCfg.tjdxl.cost[0].v) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
-                return;
-            }
-            else if (this.curState == 3) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
-                return;
-            }
+            // if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameTextCfg.tjdxl.cost[0].v) {
+            //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+            //     return;
+            // }
+            // else if (this.curState == 3) {
+            //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
+            //     return;
+            // }
 
             GameCfg.GAMEFUPAN = false;
             this.node.active = false;

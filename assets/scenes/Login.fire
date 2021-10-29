@@ -177,7 +177,7 @@
       "array": [
         0,
         0,
-        356.80246635918877,
+        525.0008377504477,
         0,
         0,
         0,
@@ -2499,27 +2499,27 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 187,
-      "g": 187,
-      "b": 187,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 198,
-      "height": 40
+      "width": 120,
+      "height": 31.5
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 1
+      "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
         -98,
-        20,
+        0,
         0,
         0,
         0,
@@ -2571,7 +2571,7 @@
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 1,
+    "_N$overflow": 0,
     "_N$cacheMode": 0,
     "_id": "4d4ODf+qVIoZjEYT+eOiAr"
   },
@@ -2587,9 +2587,9 @@
     "_target": null,
     "_alignFlags": 45,
     "_left": 2,
-    "_right": 0,
-    "_top": 0,
-    "_bottom": 0,
+    "_right": 78,
+    "_top": 4.25,
+    "_bottom": 4.25,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -2845,27 +2845,27 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 187,
-      "g": 187,
-      "b": 187,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 198,
-      "height": 40
+      "width": 100,
+      "height": 31.5
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 1
+      "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
         -98,
-        20,
+        0,
         0,
         0,
         0,
@@ -2917,7 +2917,7 @@
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 1,
+    "_N$overflow": 0,
     "_N$cacheMode": 0,
     "_id": "66eHwPM5FO26QvogFXLN4M"
   },
@@ -2933,9 +2933,9 @@
     "_target": null,
     "_alignFlags": 45,
     "_left": 2,
-    "_right": 0,
-    "_top": 0,
-    "_bottom": 0,
+    "_right": 98,
+    "_top": 4.25,
+    "_bottom": 4.25,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,

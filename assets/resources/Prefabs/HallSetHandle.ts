@@ -112,7 +112,7 @@ export default class NewClass extends cc.Component {
         GameData.SMSet.MA5Date = parseInt(this.MaDates[4].string);
         GameData.SMSet.MA6Date = parseInt(this.MaDates[5].string);
 
-        let arr = [GameData.DXSet, GameData.ZBSet, GameData.QHSet];
+        let arr = [GameData.DXSet, GameData.ZBSet, GameData.QHSet, GameData.FSSet, GameData.TJDSet];
 
         arr.forEach(el => {
             el.isShowVol = GameData.SMSet.isShowVol;

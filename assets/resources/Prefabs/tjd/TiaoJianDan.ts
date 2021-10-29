@@ -183,9 +183,9 @@ export default class NewClass extends cc.Component {
             kstyle: pb.KStyle.Random,
             code: null,
             from: null,
-            total: parseInt(GameData.TJDSet.KLine) + 50,
+            total: parseInt(GameData.TJDSet.KLine) + 100,
             to: 0,
-            reserve: 50,
+            reserve: 100,
         }
 
         let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
@@ -253,8 +253,8 @@ export default class NewClass extends cc.Component {
             console.log('条件单：' + JSON.stringify(data));
 
             GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
-                GameData.huizhidatas = 50;
-                GameCfg.huizhidatas = 50;
+                GameData.huizhidatas = 100;
+                GameCfg.huizhidatas = 100;
                 GlobalEvent.emit(EventCfg.OPENTJDGAME);
             })
         }

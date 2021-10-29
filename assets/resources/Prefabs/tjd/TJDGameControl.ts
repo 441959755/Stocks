@@ -74,6 +74,8 @@ export default class NewClass extends cc.Component {
 
     stopdata = [];
 
+    allRate = null;
+
     onDisable() {
         GlobalEvent.off(EventCfg.GAMEFUPAN);
     }
@@ -81,7 +83,7 @@ export default class NewClass extends cc.Component {
     onShowGameFuPan() {
         this.ingNode.active = false;
         this.fupanNode.active = true;
-        this.fupanNode.getComponent('TJDFUPAN').onShow();
+        this.fupanNode.getComponent('TJDFUPAN').onShow(this.allRate);
     }
 
     onEnable() {
@@ -91,6 +93,8 @@ export default class NewClass extends cc.Component {
         this.autoCallback = null;
         GameCfg.fill = [];
         this.buydata = [];
+        this.stopdata = [];
+        this.selldata = [];
         this.buySlg = null;
         this.sellSlg = null;
         this.stopSlg = null;
@@ -101,6 +105,11 @@ export default class NewClass extends cc.Component {
         this.chigushuliang = 0;
 
         this.viweData = GameCfg.data[0].data;
+
+        GameCfg.GAMEFUPAN = false;
+        this.rateItem = null;
+        this.finalNode.active = false;
+        this.fupanNode.active = false;
 
         if (GameCfg.GAMEFUPAN) {
             this.onShowGameFuPan();
@@ -131,6 +140,7 @@ export default class NewClass extends cc.Component {
                     clearInterval(this.autoCallback);
                     this.autoCallback = null;
                     if (this.chigushuliang > 0) {
+                        GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
                         let item = {
                             opId: pb.GameOperationId.Bid,
                             volume: 1,
@@ -150,7 +160,9 @@ export default class NewClass extends cc.Component {
                         }
                     }
                     this.finalNode.active = true;
-                    this.finalNode.getComponent('TJDFInalLayer').onShow(this.zongzhichan);
+                    let all = ((this.zongzhichan - 100000) / 100000 * 100).toFixed(2);
+                    this.allRate = all;
+                    this.finalNode.getComponent('TJDFInalLayer').onShow(all, this.zongzhichan);
                 })
             }
 
@@ -241,6 +253,8 @@ export default class NewClass extends cc.Component {
             let type = 0;
             if (this.buySlg && this.keyongzhichan >= this.buySlg.price * this.buySlg.count && (this.buySlg.price >= this.viweData[GameCfg.huizhidatas].low || this.buySlg.price <= this.viweData[GameCfg.huizhidatas].high)) {
 
+                GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
+
                 let item = {
                     opId: pb.GameOperationId.Ask,
                     volume: 1,
@@ -293,6 +307,8 @@ export default class NewClass extends cc.Component {
 
             else if (this.sellSlg && this.chigushuliang >= this.sellSlg.count && (this.sellSlg.price >= this.viweData[GameCfg.huizhidatas].low || this.sellSlg.price <= this.viweData[GameCfg.huizhidatas].high)) {
 
+                GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
+
                 let item = {
                     opId: pb.GameOperationId.Bid,
                     volume: 1,
@@ -336,6 +352,8 @@ export default class NewClass extends cc.Component {
             }
 
             else if (this.stopSlg && this.chigushuliang >= this.stopSlg.count && (this.stopSlg.price >= this.viweData[GameCfg.huizhidatas].low || this.stopSlg.price <= this.viweData[GameCfg.huizhidatas].high)) {
+
+                GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
 
                 let item = {
                     opId: pb.GameOperationId.Bid,
@@ -417,19 +435,25 @@ export default class NewClass extends cc.Component {
                 clearInterval(this.autoCallback);
                 this.autoCallback = null;
                 if (this.chigushuliang > 0) {
+
+                    GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
+
                     let item = {
                         opId: pb.GameOperationId.Bid,
                         volume: 1,
                         kOffset: GameCfg.huizhidatas,
                     }
                     UpGameOpt.addOpt(item);
-                    let rate = this.onCurPositionRete();
+                    let rate = this.onCurPositionRete1();
                     if (!GameCfg.fill[GameCfg.fill.length - 1].end) {
+
                         this.rateItem.end = GameCfg.huizhidatas - 1;
+
                         GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
+
                         GameCfg.fill[GameCfg.fill.length - 1].end = this.rateItem.end;
 
-                        this.keyongzhichan += (this.viweData[GameCfg.huizhidatas].close * this.chigushuliang);
+                        this.keyongzhichan += (this.viweData[GameCfg.huizhidatas - 1].close * this.chigushuliang);
                         this.chigushuliang = 0;
 
                         GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
@@ -439,7 +463,10 @@ export default class NewClass extends cc.Component {
 
                 // GlobalEvent.emit(EventCfg.GAMEOVEER);
                 this.finalNode.active = true;
-                this.finalNode.getComponent('TJDFInalLayer').onShow(this.zongzhichan);
+                //总盈利率
+                let all = ((this.zongzhichan - 100000) / 100000 * 100).toFixed(2);
+                this.allRate = all;
+                this.finalNode.getComponent('TJDFInalLayer').onShow(all, this.zongzhichan);
             }
 
         }, GameCfg.GameSet.KSpeed * 1000);
@@ -479,6 +506,23 @@ export default class NewClass extends cc.Component {
         if (!this.viweData[GameCfg.huizhidatas]) { return 0 }
 
         let curClose = parseFloat(this.viweData[GameCfg.huizhidatas].close);
+
+        let preClose = this.onjunjia();
+
+        if (!preClose) {
+            return 0;
+        }
+
+        let rate = (curClose - preClose) / preClose * 100;
+
+        return rate;
+    }
+
+    onCurPositionRete1() {
+
+        if (!this.viweData[GameCfg.huizhidatas - 1]) { return 0 }
+
+        let curClose = parseFloat(this.viweData[GameCfg.huizhidatas - 1].close);
 
         let preClose = this.onjunjia();
 

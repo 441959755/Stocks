@@ -31,7 +31,6 @@ export default class NewClass extends cc.Component {
     tipsNode: cc.Node = null;
 
     onEnable() {
-        //   if (!this.historyInfo) {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         let data = new Date();
         data.setDate(1);
@@ -52,15 +51,13 @@ export default class NewClass extends cc.Component {
 
         socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, (info) => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            console.log('sm历史数据' + JSON.stringify(info));
+            console.log('历史数据' + JSON.stringify(info));
             this.historyInfo = info;
             this.onShow();
         })
-        //    }
     }
 
     onShow() {
-        this.content.removeAllChildren();
 
         let datas = this.historyInfo.results;
         this.tipsNode && (this.tipsNode.active = true)
@@ -107,6 +104,8 @@ export default class NewClass extends cc.Component {
         }
 
         let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
+        UIScrollControl.clear();
+
         UIScrollControl.initControl(this.historyItem, arr.length, this.historyItem.getContentSize(), 0, (node, index) => {
 
             node.getComponent('HistoryItem').onShow(arr[index]);

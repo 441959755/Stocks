@@ -49,7 +49,7 @@ export default class NewClass extends cc.Component {
             }
 
             let items = GameCfgText.getGPPKItemInfo(code);
-            GameCfg.data[0].code = code;
+            GameCfg.data[0].code = info.code;
             GameCfg.data[0].name = items[1];
             GameCfg.data[0].data = [];
             GameCfg.data[0].circulate = items[4];
@@ -454,6 +454,7 @@ export default class NewClass extends cc.Component {
         this.inCall && (clearInterval(this.inCall));
         this.inCall = null;
         GlobalEvent.off('UPDATEGAMEDATE');
+        GameData.Players[1] = null;
     }
 
     //查询闯关赛排行榜

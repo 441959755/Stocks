@@ -3,7 +3,6 @@ import GameCfg from "../game/GameCfg";
 import StrategyAIData from "../game/StrategyAIData";
 import GameData from "../GameData";
 import GameCfgText from "../GameText";
-import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import GlobalHandle from "./GlobalHandle";
 
@@ -34,6 +33,64 @@ export default class EnterGameControl {
             }
             else {
                 curCount = GameCfgText.gameTextCfg.dxxl.ad + curCount;
+                //还有看广告次数
+
+                if (curCount > 0) {
+                    data.status = 2;
+                }
+
+                //什么都没有了
+                else {
+                    data.status = 3;
+                }
+            }
+
+            data.count = curCount;
+        }
+
+        return data;
+    }
+
+    //当前定向是否可以进入游戏   
+    public static onCurIsEnterGame() {
+        let data = {
+            status: 0,
+            count: 0,
+        }
+
+        let Unlock, free, todayCount, adCount;
+
+        if (GameCfg.GameType == pb.GameType.QiHuo) {
+            Unlock = GameData.properties[pb.GamePropertyId.UnlockQhxl]
+            free = GameCfgText.gameTextCfg.qhxl.free;
+            todayCount = GameData.todayGameCount[pb.GameType.QiHuo];
+            adCount = GameCfgText.gameTextCfg.qhxl.ad;
+        }
+
+        else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+            Unlock = GameData.properties[pb.GamePropertyId.UnlockTjdxl]
+            free = GameCfgText.gameTextCfg.tjdxl.free;
+            todayCount = GameData.todayGameCount[pb.GameType.TiaoJianDan];
+            adCount = GameCfgText.gameTextCfg.tjdxl.ad;
+        }
+
+        else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            Unlock = GameData.properties[pb.GamePropertyId.UnlockZbxl]
+            free = GameCfgText.gameTextCfg.zbxl.free;
+            todayCount = GameData.todayGameCount[pb.GameType.ZhiBiao];
+            adCount = GameCfgText.gameTextCfg.zbxl.ad;
+        }
+
+        //没解锁 不是VIP
+        if (!Unlock && new Date().getTime() / 1000 > GameData.properties[pb.GamePropertyId.VipExpiration]) {
+
+            let curCount = free - todayCount;
+            //还有免费次数
+            if (curCount > 0) {
+                data.status = 1;
+            }
+            else {
+                curCount = adCount + curCount;
                 //还有看广告次数
 
                 if (curCount > 0) {

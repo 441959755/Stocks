@@ -92,6 +92,7 @@ export default class NewClass extends cc.Component {
 
 			],
 		};
+
 		GameCfgText.qihuoList.forEach(el => {
 			let items = el.split('|');
 			if (items[4] == 'DC') {

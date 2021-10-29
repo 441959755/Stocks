@@ -71,6 +71,10 @@ export default class NewClass extends cc.Component {
                     GameCfg.GameSet = GameData.DXSet;
                 }
 
+                else if (this.infoData.gType == pb.GameType.TiaoJianDan) {
+                    GameCfg.GameSet = GameData.TJDSet;
+                }
+
                 GameCfg.enterGameCache = {
                     ktype: this.infoData.kType,
                     kstyle: pb.KStyle.Random,

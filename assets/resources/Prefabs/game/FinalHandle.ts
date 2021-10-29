@@ -68,6 +68,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     DXXLGG: cc.Node = null;
 
+    @property([cc.Node])
+    boxs: cc.Node[] = [];
+
     protected onShow() {
 
         let gpData = GameCfg.data[0].data;
@@ -95,6 +98,22 @@ export default class NewClass extends cc.Component {
         } else {
             this.content.active = true;
             this.showContent();
+
+            if (GameCfg.GameType == pb.GameType.ShuangMang) {
+                this.boxs[0].active = true;
+                this.boxs[1].active = true;
+                this.boxs[2].active = true;
+                this.boxs[0].children[1].getComponent(cc.Label).string = GameData.SmxlState.gold;
+                this.boxs[1].children[1].getComponent(cc.Label).string = parseInt(GameData.SmxlState.gold * (GameCfg.allRate) + '') + '';
+                this.boxs[2].children[1].getComponent(cc.Label).string = parseInt(GameData.SmxlState.gold + GameData.SmxlState.gold * (GameCfg.allRate) + '') + '';
+            }
+            else {
+                this.boxs[0].active = false;
+                this.boxs[1].active = false;
+                this.boxs[2].active = false;
+            }
+
+
         }
 
         //复盘中不保存记录

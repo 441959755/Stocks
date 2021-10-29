@@ -22,6 +22,7 @@ export default class NewClass extends cc.Component {
     }
 
     onShow(index) {
+
         this.callBack && (clearTimeout(this.callBack));
         this.callBack = null;
         this.labels[0].string = ComUtils.getSFMTamp1(GameCfg.data[0].data[index].day);
