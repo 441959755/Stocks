@@ -52,7 +52,8 @@ export default class NewClass extends cc.Component {
                 GameCfg.GAMEFUPAN = true;
                 GameCfg.allRate = 0;
 
-                GameCfg.huizhidatas = this.infoData.kStop + 1;
+                GameCfg.huizhidatas = this.infoData.kStop;
+
                 GameData.huizhidatas = this.infoData.kStartup + 1;
 
                 GameCfg.historyType = GameCfg.GameType;

@@ -29,6 +29,9 @@ export default class NewClass extends cc.Component {
 
     uid = null;
 
+    @property(cc.SpriteFrame)
+    defaultImg: cc.SpriteFrame = null;
+
     onLoad() {
         GlobalEvent.on('REPPLAYERINFO', (info) => {
 
@@ -89,6 +92,7 @@ export default class NewClass extends cc.Component {
 
     //加载图片
     loadHeadImg(obj) {
+        this.head.spriteFrame = this.defaultImg;
         if (GameData.imgs[obj.icon + '']) {
             this.head.spriteFrame = GameData.imgs[obj.icon + '']
         }
@@ -97,6 +101,10 @@ export default class NewClass extends cc.Component {
                 if (texture) {
                     GameData.imgs[obj.icon + ''] = new cc.SpriteFrame(texture);
                     this.head.spriteFrame = GameData.imgs[obj.icon + '']
+                }
+                else {
+                    GameData.imgs[obj.icon + ''] = this.defaultImg;
+                    this.head.spriteFrame = this.defaultImg;
                 }
             })
         }

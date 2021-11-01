@@ -281,6 +281,8 @@ message GameData {
 	repeated CgdsStockListItem cgds_stock_list = 19;// 参与中的所有炒股大赛的关注股票列表
 	int32 today_adtimes = 20;						// 每日点击广告次数
 	repeated int32 award7 = 21;						// 7次奖励：7个日期，格式YYYYMMDD
+	bool is_edited_nick = 22;						// 是否修改过昵称
+	bool is_edited_icon = 23;						// 是否修改过头像
 }
 
 
@@ -593,10 +595,11 @@ message RankingItem {
 	int32 cgs_clearance = 6;// 闯关赛的登顶次数
 	int32 cgs_netwin = 7;	// 闯关赛的净胜
 	int32 cgs_progress = 8;	// 闯关赛的关卡进度
-	int32 cgds_account = 9;	// 炒股大赛资金账户余额
+	int32 cgds_account = 9;	// 炒股大赛资金账户余额（空仓资产）
 	int32 zsjc_count = 10;	// 指数竞猜：猜对次数
 	int32 level = 11;		// 等级
 	int32 fame = 12;		// 威望
+	int32 cgds_capital = 13;// 炒股大赛的总资产
 }
 message RankingList {
 	int32 id = 1;					// 当前这一轮闯关赛的时间编码：YYYYMMDD

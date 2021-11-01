@@ -30,17 +30,17 @@
     "_active": true,
     "_components": [
       {
+        "__id__": 135
+      },
+      {
         "__id__": 136
       },
       {
         "__id__": 137
-      },
-      {
-        "__id__": 138
       }
     ],
     "_prefab": {
-      "__id__": 139
+      "__id__": 138
     },
     "_opacity": 255,
     "_color": {
@@ -1756,11 +1756,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 134
+        "__id__": 133
       }
     ],
     "_prefab": {
-      "__id__": 135
+      "__id__": 134
     },
     "_opacity": 255,
     "_color": {
@@ -2559,13 +2559,10 @@
     "_components": [
       {
         "__id__": 131
-      },
-      {
-        "__id__": 132
       }
     ],
     "_prefab": {
-      "__id__": 133
+      "__id__": 132
     },
     "_opacity": 255,
     "_color": {
@@ -2802,7 +2799,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1274,
+      "width": 1240,
       "height": 460
     },
     "_anchorPoint": {
@@ -2862,20 +2859,20 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1274,
+      "width": 1240,
       "height": 44
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
-      "y": 1
+      "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
         0,
-        227.869,
+        0,
         0,
         0,
         0,
@@ -4825,38 +4822,6 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.Layout",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 69
-    },
-    "_enabled": false,
-    "_layoutSize": {
-      "__type__": "cc.Size",
-      "width": 1280,
-      "height": 620
-    },
-    "_resize": 2,
-    "_N$layoutType": 1,
-    "_N$cellSize": {
-      "__type__": "cc.Size",
-      "width": 40,
-      "height": 40
-    },
-    "_N$startAxis": 0,
-    "_N$paddingLeft": 10,
-    "_N$paddingRight": 10,
-    "_N$paddingTop": 0,
-    "_N$paddingBottom": 0,
-    "_N$spacingX": 10,
-    "_N$spacingY": 0,
-    "_N$verticalDirection": 1,
-    "_N$horizontalDirection": 0,
-    "_N$affectedByScale": false,
     "_id": ""
   },
   {

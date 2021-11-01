@@ -31,6 +31,7 @@ export default class NewClass extends cc.Component {
     tipsNode: cc.Node = null;
 
     onEnable() {
+
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         let data = new Date();
         data.setDate(1);
@@ -51,11 +52,25 @@ export default class NewClass extends cc.Component {
 
         socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, (info) => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
+            // if (this.historyInfo) {
+            //     if (this.historyInfo.results.length != info.results.length) {
             console.log('历史数据' + JSON.stringify(info));
             this.historyInfo = info;
             this.onShow();
+            //     }
+            //     else {
+            //         console.log('....');
+            //     }
+            // }
+            // else {
+            //     console.log('历史数据' + JSON.stringify(info));
+            //     this.historyInfo = info;
+            //     this.onShow();
+            // }
         })
     }
+
 
     onShow() {
 
@@ -90,7 +105,6 @@ export default class NewClass extends cc.Component {
         let arr = [];
 
         datas.forEach(el => {
-            // let cache = cc.sys.localStorage.getItem(el.ts + 'cache');
 
             if ((el.ts > TIMETEMP) && (el.gType == GameCfg.GameType)) {
                 arr.push(el);

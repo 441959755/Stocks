@@ -96,7 +96,6 @@ export default class NewClass extends cc.Component {
         }
 
         this.scroll_rect.content.setContentSize(this.start_content_size)
-
         // this.clear()
 
         this.total_count = _total_count
@@ -134,12 +133,6 @@ export default class NewClass extends cc.Component {
 
             this.distance = _size.width
         }
-
-        // let eventHandler = new cc.Component.EventHandler();
-        // eventHandler.target = this.node;
-        // eventHandler.component = "UIScrollControl";
-        // eventHandler.handler = "OnScroll";
-        // this.scroll_rect.scrollEvents.push(eventHandler);
 
         this.scroll_rect.node.on('scrolling', this.OnScroll.bind(this), this);
 
@@ -213,15 +206,13 @@ export default class NewClass extends cc.Component {
         //最大高度，超过该高度，不刷新
         let _max_rect_size: number = this.total_count * this.distance
 
-        if (offset < 0 || offset + this._show_area_size.height >= _max_rect_size) {
-            //cc.log("无法滚动, offset = " + offset + ", offset + this._show_area_size.height >= _max_rect_size >= _max_rect_size = " + (offset + this._show_area_size.height >= _max_rect_size))
-            //  cc.log("无法滚动, offset = " + offset)
-            return
-        }
+        // if (offset < 0 || offset + this._show_area_size.height >= _max_rect_size) {
+        //     return
+        // }
 
         let _index: number = 0 //从0开始
         let _min_index: number = Math.floor(offset / this.distance);
-
+        //  console.log(_min_index);
         //miniIdx到maxIdx都会刷新
         for (let i = 0; i < this.total_show_item_count; i++) {
             let node: cc.Node = this.all_child_list[i];

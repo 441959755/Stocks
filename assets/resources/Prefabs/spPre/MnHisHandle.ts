@@ -57,6 +57,7 @@ export default class NewClass extends cc.Component {
         })
 
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         let id1 = 0
         if (GameData.SpStockData && GameData.SpStockData.id) {
             id1 = GameData.SpStockData.id;
@@ -90,22 +91,21 @@ export default class NewClass extends cc.Component {
                 //今天成交
                 if (el.state == pb.OrderState.Done) {
                     jtcj.push(el);
-                    this.onCreateItem(this.scrollNode, jtcj, this.item1, 'MnHisItem');
-
                 }
                 //今天委托
                 else if (el.state == pb.OrderState.Init) {
                     jtwt.push(el);
-                    this.onCreateItem(this.scrollNode1, jtwt, this.item2, 'MnHisItem1');
-
                 }
             }
             //历史记录
             else {
                 lsjl.push(el);
-                this.onCreateItem(this.scrollNode2, lsjl, this.item3, 'MnHisItem2');
             }
         });
+
+        this.onCreateItem(this.scrollNode, jtcj, this.item1, 'MnHisItem');
+        this.onCreateItem(this.scrollNode1, jtwt, this.item2, 'MnHisItem1');
+        this.onCreateItem(this.scrollNode2, lsjl, this.item3, 'MnHisItem2');
     }
 
     onCreateItem(scrollNode, arr, item, str) {
