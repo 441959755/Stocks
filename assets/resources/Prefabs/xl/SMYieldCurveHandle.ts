@@ -287,6 +287,9 @@ export default class NewClass extends cc.Component {
             if (arr[tt]) {
                 arr[tt].forEach((el) => {
                     this.daysData[tt - 1].count++;
+                    if (!xlcvs[tt]) {
+                        xlcvs[tt] = 0;
+                    }
                     xlcvs[tt] += (el.userProfit || 0);
                 })
                 xlcvs[tt + 1] = xlcvs[tt];
@@ -383,7 +386,6 @@ export default class NewClass extends cc.Component {
             // else {
             el.getComponent(cc.Label).string = parseInt(((maxMoney - minMoney) / 5) + '') * index + minMoney + '';
             //  }
-
         })
 
         maxMoney = parseInt(this.zhijinNode.children[5].getComponent(cc.Label).string);
@@ -421,6 +423,7 @@ export default class NewClass extends cc.Component {
             }
 
             dot2.setPosition(cc.v2((i - 1) * w, y));
+
             this.doty.push(y);
 
             if (i >= 2) {

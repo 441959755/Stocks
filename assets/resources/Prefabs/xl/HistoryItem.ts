@@ -52,10 +52,6 @@ export default class NewClass extends cc.Component {
                 GameCfg.GAMEFUPAN = true;
                 GameCfg.allRate = 0;
 
-                GameCfg.huizhidatas = this.infoData.kStop;
-
-                GameData.huizhidatas = this.infoData.kStartup + 1;
-
                 GameCfg.historyType = GameCfg.GameType;
 
 
@@ -86,19 +82,42 @@ export default class NewClass extends cc.Component {
                     reserve: 100,
                 };
 
+                console.log(JSON.stringify(GameCfg.enterGameCache));
                 GameCfg.historyType = GameCfg.GameType;
 
                 if (GameCfg.GameType == pb.GameType.QiHuo) {
                     GlobalHandle.onCmdGameStartQuoteQueryQH(GameCfg.enterGameCache, () => {
-                        GlobalEvent.emit('LOADGAME');
+                        this.loadGame();
                     });
                 } else {
                     GlobalHandle.onCmdGameStartQuoteQuery(GameCfg.enterGameCache, () => {
-                        GlobalEvent.emit('LOADGAME');
+                        this.loadGame();
                     })
                 }
             });
+        }
+    }
 
+    loadGame() {
+        GameData.huizhidatas = 0;
+        GameCfg.huizhidatas = 0;
+
+        while (true) {
+            GameCfg.data[0].data.forEach((el, index) => {
+
+                if ((el.day).replace(/-/g, '') == this.infoData.kTo) {
+                    GameCfg.huizhidatas = index + 1;
+                }
+
+                if ((el.day).replace(/-/g, '') == this.infoData.kFrom) {
+                    GameData.huizhidatas = index + 1;
+                }
+            })
+
+            if (GameData.huizhidatas && GameCfg.huizhidatas) {
+                GlobalEvent.emit('LOADGAME');
+                break;
+            }
         }
     }
 }

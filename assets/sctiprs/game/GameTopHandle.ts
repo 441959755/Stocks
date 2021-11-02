@@ -67,7 +67,6 @@ export default class NewClass extends cc.Component {
     box2: cc.Node = null;
 
     protected onLoad() {
-
         //跟新盈利率
         GlobalEvent.on(EventCfg.UPDATERATE, this.UpdateRate.bind(this), this);
 
@@ -79,6 +78,7 @@ export default class NewClass extends cc.Component {
 
         //pk复盘
         GlobalEvent.on(EventCfg.CUTGAMEFUPAN, this.onShowPKFUPAN.bind(this), this);
+
     }
 
     UpdateOtherRate(rate) {

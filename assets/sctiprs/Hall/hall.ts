@@ -116,26 +116,41 @@ export default class NewClass extends cc.Component {
 	}
 
 	openRankingList() {
-		this.openNode(this.rankingList, 'Prefabs/rankingList', 10, (node) => { this.rankingList = node });
+		this.openNode(this.rankingList, 'Prefabs/rankingList', 10, (node) => {
+			this.rankingList = node;
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+		});
 	}
 
 
 	openFriendInvite() {
-		this.openNode(this.friendInvite, 'Prefabs/friendInvite', 11, (node) => { this.friendInvite = node });
+		this.openNode(this.friendInvite, 'Prefabs/friendInvite', 11, (node) => {
+			this.friendInvite = node;
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+		});
 	}
 
 	//打开公告
 	openNoticelayer() {
-		this.openNode(this.noticeLayer, 'Prefabs/noticeLayer', 10, (node) => { this.noticeLayer = node });
+		this.openNode(this.noticeLayer, 'Prefabs/noticeLayer', 10, (node) => {
+			this.noticeLayer = node;
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+		});
 	}
 
 	//好友
 	openFriendLayer() {
-		this.openNode(this.friendLayer, 'Prefabs/friendLayer', 10, (node) => { this.friendLayer = node });
+		this.openNode(this.friendLayer, 'Prefabs/friendLayer', 10, (node) => {
+			this.friendLayer = node;
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+		});
 	}
 
 	openTaskLayer() {
-		this.openNode(this.taskLayer, 'Prefabs/taskLayer', 10, (node) => { this.taskLayer = node });
+		this.openNode(this.taskLayer, 'Prefabs/taskLayer', 10, (node) => {
+			this.taskLayer = node;
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+		});
 	}
 
 
@@ -144,6 +159,7 @@ export default class NewClass extends cc.Component {
 			this.otherHis = node;
 			this.otherHis.getComponent('OtherPlayerHisInfo').playeInfo = data;
 			this.otherHis.getComponent('OtherPlayerHisInfo').onShow();
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		});
 	}
 
@@ -295,6 +311,7 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
 			this.onLoadFinalLayer();
 		});
+
 	}
 
 	//加载结算页
@@ -342,8 +359,7 @@ export default class NewClass extends cc.Component {
 
 	//离开游戏
 	leaveGame() {
-		this.gameLayer && (this.gameLayer.destroy());
-		this.gameLayer = null;
+		this.gameLayer.active = false;
 		this.finalLayer[this.index] && (this.finalLayer[this.index].active = false);
 		GameCfg.fill = [];
 		GameCfg.mark = [];
@@ -361,7 +377,6 @@ export default class NewClass extends cc.Component {
 			//跟新获取的奖励消息
 			GlobalEvent.emit('getRewardCenter');
 		}, 1000);
-
 	}
 
 	//游戏结束
@@ -425,7 +440,6 @@ export default class NewClass extends cc.Component {
 				node.active = true;
 				this.isLoading = false;
 				call(node);
-				GlobalEvent.emit(EventCfg.LOADINGHIDE);
 			})
 		}
 		else {

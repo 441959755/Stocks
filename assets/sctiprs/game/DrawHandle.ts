@@ -141,15 +141,17 @@ export default class NewClass extends cc.Component {
                 GameCfg.huizhidatas = GameCfg.data[0].data.length;
             }
 
-            //   GameCfg.beg_end[0] += 1;
             GameCfg.beg_end[1] = GameCfg.huizhidatas;
+
             GameCfg.beg_end[0] = GameCfg.beg_end[1] - parseInt(this.drawBordWidth / GameCfg.hz_width + '');
             if (GameCfg.beg_end[0] < 0) {
                 GameCfg.beg_end[0] = 0;
             }
 
             this.initDrawBg();
+
             GlobalEvent.emit('onDraw');
+
             this.updataLabel(GameCfg.beg_end[1] - 1);
         }, this);
 

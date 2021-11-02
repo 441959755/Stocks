@@ -111,6 +111,7 @@ export default class DrawData {
         return arr1;
     }
 
+
     //
     public static getTimeSlotData(to, total, arr) {
         let newArr = [];

@@ -11,6 +11,7 @@ const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
+
 	DCArr = null; //大连商品交易所
 	SCArr = null; //上海期货交易所
 	ZCArr = null; //郑州商品交易所
@@ -94,23 +95,39 @@ export default class NewClass extends cc.Component {
 		};
 
 		GameCfgText.qihuoList.forEach(el => {
+
 			let items = el.split('|');
+
 			if (items[4] == 'DC') {
+
 				let str = items[1].slice(-items.length, -2);
+
 				if (this.DCArr.type.indexOf(str) == -1) {
+
 					this.DCArr.type.push(str);
+
 				} else {
+
 					let t = this.DCArr.type.indexOf(str);
+
 					if (!this.DCArr.main[t]) {
+
 						this.DCArr.main[t] = items[1];
+
 					} else {
+
 						this.DCArr.index[t] = items[1];
+
 					}
 				}
 				if (!this.DCArr.main[this.DCArr.type.length - 1]) {
+
 					this.DCArr.main.push(items[1]);
+
 				} else {
+
 					this.DCArr.index.push(items[1]);
+
 				}
 			}
 			else if (items[4] == 'SC') {
@@ -162,7 +179,43 @@ export default class NewClass extends cc.Component {
 			}
 		});
 
+		//更新次数
 		GlobalEvent.on(EventCfg.GMAECOUNTERSCHANGE, this.onGameCountSow.bind(this), this);
+
+		//检测年更新
+		this.checkYearTime();
+	}
+
+	checkYearTime() {
+		let f = new Date();
+
+		let y = f.getFullYear() + '';
+		let m = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+		let d = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
+		let downBox = this.downBox[3];
+		let content = cc.find('New ScrollView/view/content', downBox);
+
+		let tt = 0;
+
+		for (let i = content.children.length - 1; i >= 0; i--) {
+
+			let el = content.children[i];
+			if (i == 0) {
+				el.getComponent(cc.Label).string = '随机';
+				el.color = cc.Color.WHITE;
+				el.getComponent(cc.Button).interactable = true;
+				el.getComponent(cc.Button).enableAutoGrayEffect = false;
+			}
+			else {
+				el.getComponent(cc.Label).string = parseInt(y) - tt + '';
+				el.color = cc.Color.WHITE;
+				el.getComponent(cc.Button).interactable = true;
+				el.getComponent(cc.Button).enableAutoGrayEffect = false;
+				tt++;
+			}
+
+
+		}
 	}
 
 	onGameCountSow() {
@@ -202,7 +255,6 @@ export default class NewClass extends cc.Component {
 	}
 
 	onEnable() {
-
 		GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		GameCfg.GameType = pb.GameType.QiHuo;
 		let setDatas = GameData.QHSet;
@@ -233,7 +285,7 @@ export default class NewClass extends cc.Component {
 			let y = f.getFullYear() + '';
 			let m = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
 			let d = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
-			let sc = ComUtils.GetPreMonthDay(y + '-' + m + '-' + d, 2);
+			let sc = ComUtils.GetPreMonthDay(y + '-' + m + '-' + d, 3);
 			y = sc.y;
 			m = sc.m;
 			d = sc.d;
@@ -280,13 +332,36 @@ export default class NewClass extends cc.Component {
 
 		} else {
 			let date = GameCfgText.QHGetTimeByCodeName(GameData.QHSet.HY);
+
 			let ly = date.start.slice(0, 4);
 			let lm = date.start.slice(4, 6);
 			let ld = date.start.slice(6);
 
+
+			let d = new Date(ly + '-' + lm + '-' + ld);
+
+			let lt = d.getTime() + 24 * 60 * 60 * 1000 * 100;
+
+			let lda = new Date(lt);
+			ly = lda.getFullYear();
+			lm = lda.getMonth() + 1 >= 10 ? lda.getMonth() + 1 : '0' + (lda.getMonth() + 1);
+			ld = lda.getDate() >= 10 ? lda.getDate() : '0' + (lda.getDate());
+
+
 			let cy = date.end.slice(0, 4);
 			let cm = date.end.slice(4, 6);
 			let cd = date.end.slice(6);
+
+
+			let cdd = new Date(cy + '-' + cm + '-' + cd);
+
+			let ct = cdd.getTime() - 24 * 60 * 60 * 1000 * 100;
+
+			let cda = new Date(ct);
+			cy = cda.getFullYear();
+			cm = cda.getMonth() + 1 >= 10 ? cda.getMonth() + 1 : '0' + (cda.getMonth() + 1);
+			cd = cda.getDate() >= 10 ? cda.getDate() : '0' + (cda.getDate());
+
 			let min, max;
 			if (index == 3) {
 				min = ly;
@@ -333,46 +408,6 @@ export default class NewClass extends cc.Component {
 					el.getComponent(cc.Button).enableAutoGrayEffect = false;
 				}
 			})
-
-			// let downBox1 = this.downBox[7];
-			// let content1 = cc.find('New ScrollView/view/content', downBox1);
-			// if (index == 2) {
-			// 	content1.children.forEach(el => {
-			// 		let str = el.getComponent(cc.Label).string;
-			// 		if (str == '随机') {
-
-			// 		} else if (str == '日线') {
-			// 			this.box[7].getChildByName('label').getComponent(cc.Label).string = '5分钟K';
-			// 			GameData.QHSet.ZLine = '5分钟K';
-			// 			el.color = new cc.Color().fromHEX('#a0a0a0');
-			// 			el.getComponent(cc.Button).interactable = false;
-			// 			el.getComponent(cc.Button).enableAutoGrayEffect = true;
-			// 		} else {
-			// 			el.color = cc.Color.WHITE;
-			// 			el.getComponent(cc.Button).interactable = true;
-			// 			el.getComponent(cc.Button).enableAutoGrayEffect = false;
-			// 		}
-			// 	})
-			// } else {
-
-			// 	content1.children.forEach(el => {
-			// 		let str = el.getComponent(cc.Label).string;
-			// 		// if (str == '随机') {
-
-			// 		// } else if (str == '日线') {
-			// 		// 	this.box[7].getChildByName('label').getComponent(cc.Label).string = '5分钟K';
-			// 		// 	GameData.QHSet.ZLine = '5分钟K';
-			// 		// 	el.color = new cc.Color().fromHEX('#a0a0a0');
-			// 		// 	el.getComponent(cc.Button).interactable = false;
-			// 		// 	el.getComponent(cc.Button).enableAutoGrayEffect = true;
-			// 		// } else {
-			// 		el.color = cc.Color.WHITE;
-			// 		el.getComponent(cc.Button).interactable = true;
-			// 		el.getComponent(cc.Button).enableAutoGrayEffect = false;
-			// 		//	}
-			// 	})
-			// }
-
 		}
 
 	}
@@ -662,12 +697,18 @@ export default class NewClass extends cc.Component {
 					this.box[2].getChildByName('label').getComponent(cc.Label).string = this.ZCArr.main[t];
 					GameData.QHSet.HY = this.ZCArr.main[t];
 				}
-				this.onAutoSetTime();
+				//	this.onAutoSetTime();
+				this.box[3].getChildByName('label').getComponent(cc.Label).string = '随机';
+				this.box[4].getChildByName('label').getComponent(cc.Label).string = '随机';
+				this.box[5].getChildByName('label').getComponent(cc.Label).string = '随机';
 				this.getQHTimeByCodeName(this._tid);
 
 			} else if (this._tid == 2) {
 				GameData.QHSet.HY = str;
-				this.onAutoSetTime();
+				//	this.onAutoSetTime();
+				this.box[3].getChildByName('label').getComponent(cc.Label).string = '随机';
+				this.box[4].getChildByName('label').getComponent(cc.Label).string = '随机';
+				this.box[5].getChildByName('label').getComponent(cc.Label).string = '随机';
 				this.getQHTimeByCodeName(this._tid);
 
 			} else if (this._tid == 3 || this._tid == 4 || this._tid == 5) {
@@ -695,21 +736,21 @@ export default class NewClass extends cc.Component {
 								this.box[4].getChildByName('label').getComponent(cc.Label).string = lm;
 								this.box[5].getChildByName('label').getComponent(cc.Label).string = ld;
 							} else if (GameData.QHSet.year == cy) {
-								GameData.QHSet.month = '4';
-								GameData.QHSet.day = '5';
-								this.box[4].getChildByName('label').getComponent(cc.Label).string = '4';
-								this.box[5].getChildByName('label').getComponent(cc.Label).string = '5';
+								GameData.QHSet.month = '1';
+								GameData.QHSet.day = '1';
+								this.box[4].getChildByName('label').getComponent(cc.Label).string = '1';
+								this.box[5].getChildByName('label').getComponent(cc.Label).string = '1';
 							} else {
-								GameData.QHSet.month = '9';
+								GameData.QHSet.month = '1';
 								GameData.QHSet.day = '10';
-								this.box[4].getChildByName('label').getComponent(cc.Label).string = '9';
+								this.box[4].getChildByName('label').getComponent(cc.Label).string = '1';
 								this.box[5].getChildByName('label').getComponent(cc.Label).string = '10';
 							}
 
 						} else {
-							GameData.QHSet.month = '4';
+							GameData.QHSet.month = '1';
 							GameData.QHSet.day = '5';
-							this.box[4].getChildByName('label').getComponent(cc.Label).string = '4';
+							this.box[4].getChildByName('label').getComponent(cc.Label).string = '1';
 							this.box[5].getChildByName('label').getComponent(cc.Label).string = '5';
 						}
 

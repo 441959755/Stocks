@@ -85,7 +85,9 @@ export default class NewClass extends cc.Component {
         else if (name == 'qdBtn') {
 
             GlobalEvent.emit(EventCfg.LEAVEGAME);
+
             let gameCount = EnterGameControl.onCurDXIsEnterGame();
+
             if (gameCount.status == 3) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
                 return;
@@ -138,7 +140,7 @@ export default class NewClass extends cc.Component {
                 GameCfg.huizhidatas = 106;
 
                 GameData.huizhidatas = 106;
-
+                GameCfg.GAMEFUPAN = false;
                 GameCfg.allRate = 0;
                 GameCfg.finalfund = 0;
                 GameCfg.fill = [];
@@ -146,10 +148,11 @@ export default class NewClass extends cc.Component {
                 GameCfg.mark = [];
                 GameCfg.notice = [];
                 GameCfg.history.allRate = 0;
+
                 StrategyAIData.onClearData();
+
                 GlobalEvent.emit('LOADGAME');
             }
-
 
             //sp进入训练
             else {

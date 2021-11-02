@@ -8,6 +8,32 @@ import PlatDefine from '../common/config/PlatDefine';
 
 export default class ComUtils {
 
+	private static VIPTimeCall = [];
+
+	//获取vip结束时间
+	public static getVIPDisTime(call) {
+		this.VIPTimeCall.push(call);
+		let obj = {
+			day: null,
+			hours: null,
+			minute: null,
+		}
+		setInterval(() => {
+
+			let dis = GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000;
+			let f = new Date(parseInt(dis + '') * 1000);
+
+			obj.day = f.getDate();
+			obj.hours = f.getHours();
+			obj.minute = f.getMinutes();
+
+			this.VIPTimeCall.forEach(el => {
+				el && (el(obj));
+			})
+
+		}, 60 * 1000);
+	}
+
 	public static BitmapToByte(img) {
 		// let buf = null;
 		// let ms = new MemoryStream();
