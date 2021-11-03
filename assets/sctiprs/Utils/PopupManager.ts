@@ -2,6 +2,7 @@ import LoadUtils from "./LoadUtils";
 import ActionUtils from "./ActionUtils";
 import GlobalEvent from "./GlobalEvent";
 import EventCfg from "./EventCfg";
+import GameCfgText from "../GameText";
 
 export default class PopupManager {
 
@@ -178,6 +179,27 @@ export default class PopupManager {
             this.isLoading = false;
             call(childen);
         }
+    }
+
+    public static autoPop() {
+
+        //当前配置
+        GameCfgText.appConf.pop.forEach(el => {
+            if (!el.switch) {
+                if (el.id == 1) {
+                    GlobalEvent.emit('OPENNOTICELAYER');
+                }
+
+                if (el.id == 2) {
+                    GlobalEvent.emit('OPENRANKINGLIST');
+                }
+
+                if (el.id == 3) {
+
+                }
+            }
+        });
+
     }
 
 }

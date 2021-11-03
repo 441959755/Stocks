@@ -16,7 +16,8 @@ export default class NewClass extends cc.Component {
     @property(cc.SpriteFrame)
     defaultImg: cc.SpriteFrame = null;
 
-    initShow(index, el) {
+    initShow(index, el, stage) {
+
         this.el = el;
 
         let RankNode = this.node.getChildByName('node');
@@ -76,12 +77,12 @@ export default class NewClass extends cc.Component {
         if (el.level) {
             userlv.string = 'LV: ' + el.level;
         } else {
-            userlv.string = '';
+            userlv.string = 'LV:';
         }
 
         man.children[0].active = !el.gender;
-
-        countLabel.string = el.cgsProgress;
+        let sta = JSON.parse(GameData.CGSConfData.conf);
+        countLabel.string = parseInt(el.cgsProgress / sta.Stages[stage].Progress * 100 + '') + '%';
     }
 
 

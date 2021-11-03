@@ -29,6 +29,10 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.CREATEBLOCK, this.createBlock.bind(this), this);
     }
 
+    onEnable() {
+        this.node.removeAllChildren();
+    }
+
 
     //创建方块
     createBlock(type, index?) {
@@ -76,9 +80,14 @@ export default class NewClass extends cc.Component {
 
         this.blockNods[index - 1] = [node, index - 1];
 
-        //   if (!GameCfg.GAMEFUPAN) {
+
         GameCfg.blockHistoy.push([index - 1, type]);
-        //   }
+
+    }
+
+    onDisable() {
+        GameCfg.blockHistoy = [];
+        this.blockNods = [];
     }
 
     //跟新方块的位置

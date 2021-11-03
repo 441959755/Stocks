@@ -5,6 +5,7 @@ import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import EnterGameControl from '../global/EnterGameControl';
 import { LocationPoint } from '../global/LocationPoint';
+import GameCfgText from '../GameText';
 
 const { ccclass, property } = cc._decorator;
 
@@ -175,38 +176,68 @@ export default class NewClass extends cc.Component {
 		let name = event.target.name;
 		//双盲
 		if (name == 'main_xl_smxl') {
-			GlobalEvent.emit(EventCfg.OPENSMLAYER);
-			GameCfg.GameType = pb.GameType.ShuangMang;
+			if (!GameCfgText.getSwitchModule(1)) {
+				GlobalEvent.emit(EventCfg.OPENSMLAYER);
+				GameCfg.GameType = pb.GameType.ShuangMang;
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 		}
 
 		//指标
 		else if (name == 'main_xl_zbxl') {
-			GlobalEvent.emit(EventCfg.OPENZBLAYER);
-			GameCfg.GameType = pb.GameType.ZhiBiao;
+			if (!GameCfgText.getSwitchModule(4)) {
+				GlobalEvent.emit(EventCfg.OPENZBLAYER);
+				GameCfg.GameType = pb.GameType.ZhiBiao;
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 		}
 
 		//定向
 		else if (name == 'main_xl_dxxl') {
-			GlobalEvent.emit(EventCfg.OPENDXLAYER);
-			GameCfg.GameType = pb.GameType.DingXiang;
+			if (!GameCfgText.getSwitchModule(2)) {
+				GlobalEvent.emit(EventCfg.OPENDXLAYER);
+				GameCfg.GameType = pb.GameType.DingXiang;
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 		}
 
 		//期货
 		else if (name == 'main_xl_qhxl') {
-			GlobalEvent.emit(EventCfg.OPENQHLAYER);
-			GameCfg.GameType = pb.GameType.QiHuo;
+			if (!GameCfgText.getSwitchModule(3)) {
+				GlobalEvent.emit(EventCfg.OPENQHLAYER);
+				GameCfg.GameType = pb.GameType.QiHuo;
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 		}
 
 		//分时
 		else if (name == 'main_xl_fsxl') {
-			GameCfg.GameType = pb.GameType.FenShi;
-			GlobalEvent.emit(EventCfg.OPENFENSHI);
+			if (!GameCfgText.getSwitchModule(6)) {
+				GameCfg.GameType = pb.GameType.FenShi;
+				GlobalEvent.emit(EventCfg.OPENFENSHI);
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 		}
 
 		//条件
 		else if (name == 'main_xl_tjdxl') {
-			GameCfg.GameType = pb.GameType.TiaoJianDan;
-			GlobalEvent.emit(EventCfg.OPENTIAOJIANDAN);
+			if (!GameCfgText.getSwitchModule(5)) {
+				GameCfg.GameType = pb.GameType.TiaoJianDan;
+				GlobalEvent.emit(EventCfg.OPENTIAOJIANDAN);
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 		}
 
 		//打开个人中心
@@ -216,34 +247,48 @@ export default class NewClass extends cc.Component {
 
 		//pk
 		else if (name == 'main_jj_pkdz') {
-			if (EnterGameControl.onCurPKEnterGame()) {
-				GameCfg.GameType = pb.GameType.JJ_PK;
-				GameCfg.GameSet = GameData.JJPKSet;
-				GlobalEvent.emit(EventCfg.OPENMATCHPK);
+			if (!GameCfgText.getSwitchModule(7)) {
+				if (EnterGameControl.onCurPKEnterGame()) {
+					GameCfg.GameType = pb.GameType.JJ_PK;
+					GameCfg.GameSet = GameData.JJPKSet;
+					GlobalEvent.emit(EventCfg.OPENMATCHPK);
+				}
+				else {
+					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
+				}
+
 			}
 			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
 			}
-
 		}
 
 		else if (name == 'main_jj_dkdz') {
-			if (EnterGameControl.onCurPKEnterGame()) {
-				GameCfg.GameType = pb.GameType.JJ_DuoKong;
-				GameCfg.GameSet = GameData.JJPKSet;
-				GlobalEvent.emit(EventCfg.OPENMATCHPK);
+			if (!GameCfgText.getSwitchModule(8)) {
+				if (EnterGameControl.onCurPKEnterGame()) {
+					GameCfg.GameType = pb.GameType.JJ_DuoKong;
+					GameCfg.GameSet = GameData.JJPKSet;
+					GlobalEvent.emit(EventCfg.OPENMATCHPK);
+				}
+				else {
+					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
+				}
 			}
 			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
 			}
 		}
 
 		//打开闯关赛
 		else if (name == 'main_jj_cgs') {
-
-			GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
-			GameCfg.GameSet = GameData.JJPKSet;
-			GlobalEvent.emit(EventCfg.OPENCHUANGUAN);
+			if (!GameCfgText.getSwitchModule(9)) {
+				GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
+				GameCfg.GameSet = GameData.JJPKSet;
+				GlobalEvent.emit(EventCfg.OPENCHUANGUAN);
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 
 		}
 		//点击竞技
@@ -254,40 +299,75 @@ export default class NewClass extends cc.Component {
 
 		//点击创建对战
 		else if (name == 'main_jj_cjdz') {
-			GlobalEvent.emit(EventCfg.OPENCJDZ);
+			if (!GameCfgText.getSwitchModule(10)) {
+				GlobalEvent.emit(EventCfg.OPENCJDZ);
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 		}
 
 		//加入对战
 		else if (name == 'main_jj_jrdz') {
-			GlobalEvent.emit(EventCfg.OPENJRDZ);
+			if (!GameCfgText.getSwitchModule(11)) {
+				GlobalEvent.emit(EventCfg.OPENJRDZ);
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 		}
 
 		//智能选股
 		else if (name == 'main_sp_znxg') {
-			GlobalEvent.emit(EventCfg.OPENZNXG);
+			if (!GameCfgText.getSwitchModule(13)) {
+				GlobalEvent.emit(EventCfg.OPENZNXG);
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 		}
 
 		//模拟炒股
 		else if (name == 'main_sp_mncg') {
-			GlobalEvent.emit(EventCfg.OPENMNXG);
+			if (!GameCfgText.getSwitchModule(14)) {
+				GlobalEvent.emit(EventCfg.OPENMNXG);
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 		}
 
 		else if (name == 'main_sp_cgds') {
-			GlobalEvent.emit(EventCfg.OPENCGDS);
+			if (!GameCfgText.getSwitchModule(15)) {
+				GlobalEvent.emit(EventCfg.OPENCGDS);
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 		}
 
 		//大盘竞猜
 		else if (name == 'main_sp_dpjc') {
-			GameCfg.GameType = pb.GameType.DaPanJingChai;
-			GlobalEvent.emit(EventCfg.LOADINGSHOW);
-			cc.director.loadScene('guess');
+			if (!GameCfgText.getSwitchModule(16)) {
+				GameCfg.GameType = pb.GameType.DaPanJingChai;
+				GlobalEvent.emit(EventCfg.LOADINGSHOW);
+				cc.director.loadScene('guess');
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 		}
 
 		//个股竞猜
 		else if (name == 'main_sp_ggjc') {
-			GameCfg.GameType == pb.GameType.GeGuJingChai;
-			GlobalEvent.emit(EventCfg.LOADINGSHOW);
-			cc.director.loadScene('guess');
+			if (!GameCfgText.getSwitchModule(16)) {
+				GameCfg.GameType == pb.GameType.GeGuJingChai;
+				GlobalEvent.emit(EventCfg.LOADINGSHOW);
+				cc.director.loadScene('guess');
+			}
+			else {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+			}
 		}
 
 		//学习

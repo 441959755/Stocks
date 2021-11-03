@@ -35,6 +35,7 @@ export default class NewClass extends cc.Component {
             id: id,
             stage: stage,
         }
+
         let CmdCgsRanking = pb.CmdCgsRanking;
         let message = CmdCgsRanking.create(data);
         let buff = CmdCgsRanking.encode(message).finish();
@@ -46,11 +47,11 @@ export default class NewClass extends cc.Component {
             GameData.locationLayer = LocationPoint.JJ_ChuangGuanOtherHis;
 
             this.curData = res;
-            this.initShow();
+            this.initShow(stage);
         })
     }
 
-    initShow() {
+    initShow(stage) {
         this.content.children.forEach(el => {
             el.active = false;
         })
@@ -60,7 +61,7 @@ export default class NewClass extends cc.Component {
             node.active = true;
             let handle = node.getComponent('CgsLvRankItem');
             //  handle.el = this.curData.Items[index];
-            handle.initShow(index, this.curData.Items[index]);
+            handle.initShow(index, this.curData.Items[index], stage);
         })
     }
 

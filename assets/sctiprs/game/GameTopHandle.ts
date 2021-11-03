@@ -91,6 +91,19 @@ export default class NewClass extends cc.Component {
         }
     }
 
+    onDisable() {
+        this.currRateLabel.node.color = cc.Color.WHITE;
+        this.pkCurRatela1.node.color = cc.Color.WHITE;
+        this.ALlRateLabel.node.color = cc.Color.WHITE;
+        this.pkAllRateLa1.node.color = cc.Color.WHITE;
+        this.currRateLabel.string = '0.00%';
+        this.pkCurRatela1.string = '0.00%';
+        this.ALlRateLabel.string = '0.00%';
+        this.pkAllRateLa1.string = '0.00%';
+        this.pkfupan1.active = false;
+        this.pkNode.active = false;
+    }
+
     UpdateRate(data) {
         if (data.length >= 2) {
             if (data[1] > 0) {
@@ -266,7 +279,7 @@ export default class NewClass extends cc.Component {
 
         //数据统计
         let statBtn = this.rightNode.getChildByName('statBtn');
-
+        this.node.height = 100;
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             this.GameName.string = '双盲训练';
             this.rightNode.active = false;
@@ -405,8 +418,11 @@ export default class NewClass extends cc.Component {
                 }
                 else {
                     if (GameCfg.JJ_XUNLIAN) {
+
                         GlobalEvent.emit(EventCfg.GAMEOVEER);
+
                     } else {
+
                         PopupManager.LoadTipsBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
 
                             GlobalEvent.emit(EventCfg.GAMEOVEER);

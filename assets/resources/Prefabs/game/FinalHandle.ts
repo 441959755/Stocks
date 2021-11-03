@@ -436,7 +436,6 @@ export default class NewClass extends cc.Component {
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
         GameCfg.RoomGameData = null;
-        UpGameOpt.clearGameOpt();
     }
 
 }

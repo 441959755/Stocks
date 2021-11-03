@@ -448,8 +448,6 @@ export default class NewClass extends cc.Component {
 
         GameCfg.GAMEFUPAN = true;
 
-        this.addMark.getComponent('AddMark').clearMark();
-
         this.laNode.active = false;
 
         this.addMark.active = false;

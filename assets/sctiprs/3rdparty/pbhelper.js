@@ -292,10 +292,13 @@ PBHelper.prototype = {
             let data = this.onSyncRoomEnterSelfMessage(buff);
 
             if (data.game == pb.GameType.JJ_PK || data.game == pb.GameType.JJ_DuoKong) {
+
                 let message = this.onRoomGameDataMessage(data.data);
+
                 console.log('自己进入房间' + JSON.stringify(message));
-                //  GameCfg.RoomGameData = message;
+
                 GameData.selfEnterRoomData = message;
+
                 GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
             }
         }
@@ -311,6 +314,7 @@ PBHelper.prototype = {
             let SyncRoomLeave = pb.SyncRoomLeave;
             let data = SyncRoomLeave.decode(new Uint8Array(buff));
             console.log('玩家离开房间' + JSON.stringify(data));
+
             if (data.uid == GameData.userID) {
                 GameData.roomId = 0;
                 GameData.JJCapital = 0;
@@ -425,9 +429,8 @@ PBHelper.prototype = {
             let Notice = pb.Notice;
             let data = Notice.decode(new Uint8Array(buff));
             console.log('服务器发到客户端的消息');
-            if (data.type == pb.MessageType.RoomInvite) {
-                GlobalEvent.emit(EventCfg.INVITEMESSAGE, data);
-            }
+
+            GlobalEvent.emit(EventCfg.INVITEMESSAGE, data);
 
         }
         // 准备就绪应答（无）
@@ -527,7 +530,7 @@ PBHelper.prototype = {
                     break;
                 }
             }
-            
+
             GlobalEvent.emit(EventCfg.CHANGEMNCGACCOUNT);
         }
         //保存学习任务进度应答：无

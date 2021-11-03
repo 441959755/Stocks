@@ -8,6 +8,7 @@ import GameData from '../GameData';
 import LoadUtils from '../Utils/LoadUtils';
 import { LocationPoint } from '../global/LocationPoint';
 import PopupManager from '../Utils/PopupManager';
+import UpGameOpt from '../global/UpGameOpt';
 
 const { ccclass, property } = cc._decorator;
 
@@ -40,8 +41,6 @@ export default class NewClass extends cc.Component {
 	rightbg: cc.Node = null;
 
 	gameLayer: cc.Node = null;
-
-	isLoading = false;
 
 	finalLayer = []; //结算界面
 
@@ -84,6 +83,12 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on('LOADGAME', this.onLoadGame.bind(this), this);
 
 		GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
+	}
+
+	onEnable() {
+
+		//自动弹窗
+		PopupManager.autoPop();
 	}
 
 	onDestroy() {
@@ -264,27 +269,44 @@ export default class NewClass extends cc.Component {
 				return;
 			}
 		}
+
+		if (GameData.roomId) { return }
+
 		console.log('邀请信息：' + JSON.stringify(data));
 
 		if (data.text.length <= 1) {
 			return;
 		}
 
-		if (!this.broadcast) {
-			GlobalEvent.emit(EventCfg.LOADINGSHOW);
-			LoadUtils.loadRes('Prefabs/broadcast', pre => {
-				GlobalEvent.emit(EventCfg.LOADINGHIDE);
-				this.broadcast = cc.instantiate(pre);
-				this.node.addChild(this.broadcast, 98);
-				let handle = this.broadcast.getComponent('Broadcast');
-				handle.onShow(data);
-			})
+		let arr = data.text.split(',');
+
+		if (data.type == pb.MessageType.RoomInvite) {
+			if (arr[3] != 0) {
+				if (!this.broadcast) {
+					GlobalEvent.emit(EventCfg.LOADINGSHOW);
+					LoadUtils.loadRes('Prefabs/broadcast', pre => {
+						GlobalEvent.emit(EventCfg.LOADINGHIDE);
+						this.broadcast = cc.instantiate(pre);
+						this.node.addChild(this.broadcast, 98);
+						let handle = this.broadcast.getComponent('Broadcast');
+						handle.onShow(data);
+					})
+				}
+				else {
+					this.broadcast.active = true;
+					let handle = this.broadcast.getComponent('Broadcast');
+					handle.onShow(data);
+				}
+			}
+			else {
+				this.onShowInviteBox(data);
+			}
 		}
-		else {
-			this.broadcast.active = true;
-			let handle = this.broadcast.getComponent('Broadcast');
-			handle.onShow(data);
+		else if (data.type == pb.MessageType.SystemNotice) {
+
+
 		}
+
 	}
 
 	//邀请框
@@ -311,7 +333,6 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
 			this.onLoadFinalLayer();
 		});
-
 	}
 
 	//加载结算页
@@ -359,17 +380,29 @@ export default class NewClass extends cc.Component {
 
 	//离开游戏
 	leaveGame() {
+		UpGameOpt.clearGameOpt();
 		this.gameLayer.active = false;
+
 		this.finalLayer[this.index] && (this.finalLayer[this.index].active = false);
+
 		GameCfg.fill = [];
+
 		GameCfg.mark = [];
+
 		GameCfg.notice = [];
+
 		GameCfg.allRate = 0;
+
 		GameCfg.blockHistoy = [];
+
 		GameCfg.finalfund = 0;
+
 		GameCfg.GAMEFUPAN = false;
+
 		StrategyAIData.onClearData();
+
 		GameCfg.GAMEFUPANDATA = null;
+
 		//跟新闯关赛数据
 		GlobalEvent.emit('UPDATEGAMEDATE');
 
@@ -426,25 +459,20 @@ export default class NewClass extends cc.Component {
 	}
 
 	openNode(node, url, zIndex, call?) {
-		if (!this.isLoading) {
-			this.isLoading = true;
-		}
-		else {
-			return;
-		}
+
 		if (!node) {
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			LoadUtils.loadRes(url, pre => {
 				node = cc.instantiate(pre);
 				this.node.addChild(node, zIndex);
 				node.active = true;
-				this.isLoading = false;
+
 				call(node);
 			})
 		}
 		else {
 			node.active = true;
-			this.isLoading = false;
+
 			call(node);
 		}
 	}

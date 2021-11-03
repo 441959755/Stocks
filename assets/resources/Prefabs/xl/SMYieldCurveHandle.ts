@@ -274,6 +274,7 @@ export default class NewClass extends cc.Component {
 
         console.log(arr.length);
 
+
         for (let tt = 1; tt < arr.length; tt++) {
 
             this.daysData[tt - 1] = {
@@ -283,41 +284,70 @@ export default class NewClass extends cc.Component {
                 endMoney: 0,
                 rate: 0,
             }
-
             if (arr[tt]) {
-                arr[tt].forEach((el) => {
-                    this.daysData[tt - 1].count++;
-                    if (!xlcvs[tt]) {
-                        xlcvs[tt] = 0;
-                    }
-                    xlcvs[tt] += (el.userProfit || 0);
-                })
-                xlcvs[tt + 1] = xlcvs[tt];
-
+                this.daysData[tt - 1].count = arr[tt].length;
             }
             else {
-
-                if (tt == 1) {
-                    xlcvs[tt] = GameData.SmxlState.goldInit;
-                    xlcvs[tt + 1] = xlcvs[tt];
-
-                }
-                else {
-                    xlcvs[tt] = xlcvs[tt - 1];
-                    xlcvs[tt + 1] = xlcvs[tt];
-
-                }
-
+                this.daysData[tt - 1].count = 0;
             }
 
             if (tt == 1) {
-                this.daysData[tt - 1].user_capital = xlcvs[tt]
+                this.daysData[tt - 1].user_capital = GameData.SmxlState.goldInit;
+                if (!arr[tt]) {
+                    this.daysData[tt - 1].endMoney = GameData.SmxlState.goldInit;
+                }
+                else {
+                    this.daysData[tt - 1].endMoney = arr[tt][0].userCapital + (arr[tt][0].userProfit || 0);
+                }
             }
             else {
-                this.daysData[tt - 1].user_capital = xlcvs[tt - 1]
-            }
 
-            this.daysData[tt - 1].endMoney = xlcvs[tt];
+                this.daysData[tt - 1].user_capital = this.daysData[tt - 2].user_capital;
+
+                if (!arr[tt]) {
+                    this.daysData[tt - 1].endMoney = this.daysData[tt - 2].endMoney;
+                }
+                else {
+                    this.daysData[tt - 1].endMoney = arr[tt][0].userCapital + (arr[tt][0].userProfit || 0);
+                }
+            }
+            xlcvs[tt] = this.daysData[tt - 1].endMoney;
+
+
+
+
+            // if (arr[tt]) {
+            //     arr[tt].forEach((el) => {
+            //         this.daysData[tt - 1].count++;
+            //         if (!xlcvs[tt]) {
+            //             xlcvs[tt] = 0;
+            //         }
+            //         xlcvs[tt] += (el.userProfit || 0);
+            //     })
+            //     xlcvs[tt + 1] = xlcvs[tt];
+
+            // }
+            // else {
+
+            //     if (tt == 1) {
+            //         xlcvs[tt] = GameData.SmxlState.goldInit;
+            //         xlcvs[tt + 1] = xlcvs[tt];
+            //     }
+            //     else {
+            //         xlcvs[tt] = xlcvs[tt - 1];
+            //         xlcvs[tt + 1] = xlcvs[tt];
+            //     }
+
+            // }
+
+            // if (tt == 1) {
+            //     this.daysData[tt - 1].user_capital = xlcvs[tt]
+            // }
+            // else {
+            //     this.daysData[tt - 1].user_capital = xlcvs[tt - 1]
+            // }
+
+            // this.daysData[tt - 1].endMoney = xlcvs[tt];
         }
 
         console.log(' xlcvs:' + JSON.stringify(xlcvs));
@@ -380,12 +410,8 @@ export default class NewClass extends cc.Component {
         })
 
         this.zhijinNode.children.forEach((el, index) => {
-            // if (index == 0) {
-            //     el.getComponent(cc.Label).string = minMoney + '';
-            // }
-            // else {
+
             el.getComponent(cc.Label).string = parseInt(((maxMoney - minMoney) / 5) + '') * index + minMoney + '';
-            //  }
         })
 
         maxMoney = parseInt(this.zhijinNode.children[5].getComponent(cc.Label).string);

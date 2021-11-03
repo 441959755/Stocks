@@ -30,23 +30,19 @@ export default class NewClass extends cc.Component {
 
 
     onLoad() {
-        this.initData();
-        this.setColor();
         //同步游戏操作 pk才有
         GlobalEvent.on(EventCfg.UPDATEOTHERPLAYEROPT, this.updateOtherPlayerOpt.bind(this), this);
 
         GlobalEvent.on(EventCfg.OPENSTATLAYER, () => {
             this.statLayer.active = true;
         }, this);
-
-
-        if (GameCfg.GameType == pb.GameType.QiHuo) {
-            this.selectLine.active = true;
-        }
-
     }
 
     onEnable() {
+
+        this.initData();
+        this.setColor();
+
         //游戏开始动画
         if (!GameCfg.GAMEFUPAN) {
             if ((GameCfg.GameType == pb.GameType.JJ_PK ||
@@ -60,15 +56,19 @@ export default class NewClass extends cc.Component {
         let data = GameCfg.data[0].data;
 
         DrawData.initData(data);
+
+        if (GameCfg.GameType == pb.GameType.QiHuo) {
+            this.selectLine.active = true;
+        }
+        else {
+            this.selectLine.active = false;
+        }
     }
 
     protected onDestroy() {
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
         GlobalEvent.off(EventCfg.UPDATEOTHERPLAYEROPT);
         GameCfg.GAMEFUPAN = false;
-
-        UpGameOpt.clearGameOpt();
-
         GameCfg.GAMEWAIT = false;
     }
 

@@ -7,6 +7,9 @@ import LLLog from '../common/utils/LLLog'
 import PopupManager from '../Utils/PopupManager';
 import LLWSDK from "../common/sdk/LLWSDK";
 import CallModule from '../common/sdk/CallModule1';
+import GlobalEvent from "../Utils/GlobalEvent";
+import EventCfg from "../Utils/EventCfg";
+import LoadUtils from "../Utils/LoadUtils";
 
 cc.Class({
 
@@ -65,6 +68,7 @@ cc.Class({
 		})
 
 		//	window.dispatchEvent(new cc.Event.EventCustom('resize', true))
+		GlobalEvent.on('OPENNOTICELAYER', this.openNoticeKayer.bind(this), this);
 	},
 
 	start() {
@@ -408,8 +412,21 @@ cc.Class({
 
 	},
 
+	//停服通知
+	openNoticeKayer() {
+		GlobalEvent.emit(EventCfg.LOADINGSHOW);
+		LoadUtils.loadRes('Prefabs/stopNoticeLayer', pre => {
+			let node = cc.instantiate(pre);
+			this.node.addChild(node, 99);
+			node.active = true;
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+		})
+	},
+
+
 	onDestroy() {
 		GameCfgText.releaseRes();
 		PopupManager.delPopupNode();
+		LoadUtils.releaseRes('Prefabs/stopNoticeLayer');
 	}
 });

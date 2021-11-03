@@ -76,7 +76,7 @@ export default class NewClass extends cc.Component {
 
     allRate = null;
 
-    onDisable() {
+    onDestroy() {
         GlobalEvent.off(EventCfg.GAMEFUPAN);
     }
 
@@ -86,8 +86,12 @@ export default class NewClass extends cc.Component {
         this.fupanNode.getComponent('TJDFUPAN').onShow(this.allRate);
     }
 
-    onEnable() {
+    onLoad() {
         GlobalEvent.on(EventCfg.GAMEFUPAN, this.onShowGameFuPan.bind(this), this);
+    }
+
+    onEnable() {
+
 
         this.autoCallback && (clearInterval(this.autoCallback));
         this.autoCallback = null;

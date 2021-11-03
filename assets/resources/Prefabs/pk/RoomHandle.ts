@@ -256,27 +256,7 @@ export default class NewClass extends cc.Component {
         //点击在线邀请
         else if (name == 'jj_zxyq') {
 
-            let str;
-            if (GameCfg.GameType == pb.GameType.JJ_PK) {
-                str = 'PK大战';
-            } else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-                str = '多空大战';
-            }
-            let info = {
-                sender: GameData.userID,
-                receiver: GameData.roomId,
-                type: pb.MessageType.RoomInvite,
-                text: GameData.userName + ',' + str + ',' + GameData.roomId + ',' + GameData.JJCapital,
-                ts: parseInt(new Date().getTime() / 1000 + ''),
-            }
-            let Notice = pb.Notice;
-            let message = Notice.create(info);
-            let buff = Notice.encode(message).finish();
-
-            socket.send(pb.MessageId.Sync_C2S_Message, buff, (res) => {
-                console.log('在线邀请：' + JSON.stringify(res));
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            })
+            GlobalHandle.onLineInvite();
 
             let count = 15;
             let node = event.target.children[0];

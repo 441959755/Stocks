@@ -52,23 +52,23 @@ export default class NewClass extends cc.Component {
 
         arr.P.forEach(el => {
 
-            if (el.v && el.i == pb.GamePropertyId.Gold) {
+            if (el.v > 0 && el.i == pb.GamePropertyId.Gold) {
                 this.itemNodes.children[0].active = true;
                 this.goldLa.string = el.v;
             }
-            else if (el.v && el.i == pb.GamePropertyId.Diamond) {
+            else if (el.v > 0 && el.i == pb.GamePropertyId.Diamond) {
                 this.itemNodes.children[1].active = true;
                 this.diaLa.string = el.v;
             }
-            else if (el.v && el.i == pb.GamePropertyId.Coupon) {
+            else if (el.v > 0 && el.i == pb.GamePropertyId.Coupon) {
                 this.itemNodes.children[4].active = true;
                 this.tickLa.string = el.v;
             }
-            else if (el.v && el.i == pb.GamePropertyId.Exp) {
+            else if (el.v > 0 && el.i == pb.GamePropertyId.Exp) {
                 this.itemNodes.children[3].active = true;
                 this.expLa.string = el.v;
             }
-            else if (el.v && el.i == pb.GamePropertyId.Fame) {
+            else if (el.v > 0 && el.i == pb.GamePropertyId.Fame) {
                 this.itemNodes.children[2].active = true;
                 this.vipLa.string = el.v;
             }

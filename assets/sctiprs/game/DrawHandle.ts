@@ -783,9 +783,19 @@ export default class NewClass extends cc.Component {
 
     }
 
+    onDisable() {
+        this.drawBg.clear();
+        this.drawMA.clear();
+        this.drawBOLL.clear();
+        this.drawEXPMA.clear();
+    }
+
     //成交量绘制
     onEnable() {
-
+        this.drawBg.clear();
+        this.drawMA.clear();
+        this.drawBOLL.clear();
+        this.drawEXPMA.clear();
         this.initData();
 
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {

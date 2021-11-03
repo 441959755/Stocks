@@ -251,6 +251,15 @@ export default class NewClass extends cc.Component {
         this.rightBox.active = true;
     }
 
+    onDisable() {
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            this.rZoom.node.active = true;
+            this.rightBox.active = true;
+            this.selcetContent.parent.active = true;
+            GlobalEvent.emit('setDrawing', false);
+        }
+    }
+
     onEnable() {
 
         this.setBGColor();
@@ -259,6 +268,7 @@ export default class NewClass extends cc.Component {
         this.cclNode.active = false;
         this.CCLBtn.active = false;
         this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
+
         //双盲
         if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.JJ_XUNLIAN) {
             this.setBoxfalg('ma');
@@ -361,6 +371,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('hideTips');
         GlobalEvent.off('setBoxfalg');
         GlobalEvent.off(EventCfg.SET_DRAW_SIZE);
+
     }
 
     onBtnSlecet(event, data) {

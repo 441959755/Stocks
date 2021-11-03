@@ -519,6 +519,40 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.emit('roundNUmber');
 	}
 
+	onDisable() {
+		this.node.getChildByName('JJ_DuoKong').active = false;
+		this.node.getChildByName('qh').active = false;
+		this.node.getChildByName('fupan').active = false;
+		this.node.getChildByName('ZBInfo').active = false;
+		this.node.getChildByName('DXInfo').active = false;
+		this.node.getChildByName('xlzb').active = false;
+		this.node.getChildByName('pk').active = false;
+		this.node.getChildByName('wait').active = false;
+		this.node.getChildByName('fupan1').active = false;
+		this.curMcCount = 0;
+		this.curMrCount = [];
+		this.limitUP = 0;
+		this.curMrPJPrice = 0;
+		this._KKCount = 0;
+		this._kdCount = 0;
+		this.roundNumber = 150;
+		this._keMcCount = 0;
+		this._keMrCount = null;
+		this.flag = false;
+		this._type = 0;
+		this.ziChan = 0;
+		this.buyData = [];
+		this.saleData = [];
+		this.rateItem = {
+			rate: null,
+			start: null,
+			end: null,
+			state: null,
+		};
+		this.isFlag = false;
+
+	}
+
 	onEnable() {
 		this.gpData = GameCfg.data[0].data;
 
@@ -530,7 +564,7 @@ export default class NewClass extends cc.Component {
 		this.onSetMrCount();
 		//分仓
 		if (GameCfg.GameSet.isFC) {
-
+			this, this.mcBtn.node.parent.active = true;
 			this.mcBtn.node.x = -266;
 			this.tipsmc.node.active = true;
 			this.tipsmr.node.active = true;
@@ -544,7 +578,7 @@ export default class NewClass extends cc.Component {
 		}
 		//不分仓
 		else {
-
+			this, this.mcBtn.node.parent.active = true;
 			this.tipsmr.node.active = false;
 			this.tipsmc.node.active = false;
 			this.mrBtn.node.active = true;

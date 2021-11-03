@@ -12,6 +12,7 @@ export default class NewClass extends cc.Component {
     layout: cc.Node = null;
 
     onInviteShow(data) {
+
         let node = cc.instantiate(this.item);
 
         this.layout.addChild(node);

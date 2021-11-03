@@ -50,7 +50,6 @@ Socket.prototype = {
 				info.data.tasks && (GameData.TaskDaily = info.data.tasks.daily || [])
 
 				GameData.gameData = info.data;
-
 				if (cc.director.getScene().name == 'Login') {
 
 					if (!GameData.headImg) {

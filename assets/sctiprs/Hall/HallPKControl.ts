@@ -5,6 +5,8 @@ import GameCfg from "../game/GameCfg";
 import GameData from "../GameData";
 import LoadUtils from "../Utils/LoadUtils";
 import ActionUtils from "../Utils/ActionUtils";
+import { pb } from "../../protos/proto";
+import GlobalHandle from "../global/GlobalHandle";
 
 const { ccclass, property } = cc._decorator;
 
@@ -124,7 +126,16 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit('SHOWOTHERPLAYER');
     }
 
+
+
     onSelfEnterRoomGameData(info) {
+
+        //不是好友pk
+        if (!GameData.JJCapital) {
+
+            GlobalHandle.onLineInvite();
+
+        }
 
         console.log('进入房间：' + JSON.stringify(info));
 
@@ -251,6 +262,5 @@ export default class NewClass extends cc.Component {
             call(node);
         }
     }
-
 
 }

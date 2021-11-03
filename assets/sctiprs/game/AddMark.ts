@@ -49,12 +49,7 @@ export default class NewClass extends cc.Component {
 
     status = 0;
 
-
-
     onLoad() {
-
-        this.node.removeAllChildren();
-
         GlobalEvent.on(EventCfg.ONADDMARK, this.onAddMard.bind(this), this);
 
         GlobalEvent.on(EventCfg.GAMEFUPAN, this.onMarkAllShow.bind(this), this);
@@ -71,16 +66,17 @@ export default class NewClass extends cc.Component {
 
     }
 
-    clearMark() {
-        this.node.removeAllChildren();
+    onDisable() {
+
         this.startNode = [];
         this.markNodes = [];
         this.bmarkNodes = [];
         this.AIMarkNodes = [];
         this.mark1Nodes = [];
         this.mark2Nodes = [];
-
     }
+
+
 
     onShowCutMark(status) {
 
@@ -204,6 +200,7 @@ export default class NewClass extends cc.Component {
 
 
     onEnable() {
+        this.node.removeAllChildren();
         if (GameCfg.GameType != 'ZNXG' && GameCfg.GameType != pb.GameType.MoNiChaoGu && GameCfg.GameType != pb.GameType.ChaoGuDaSai) {
             this.onAddMard({ type: 1, index: GameData.huizhidatas });
             if (!GameCfg.GAMEFUPAN) {

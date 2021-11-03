@@ -56,16 +56,17 @@ export default class NewClass extends cc.Component {
 
     autoCallback = null;
 
-    onEnable() {
-
+    onLoad() {
         GlobalEvent.on(EventCfg.ADDFILLCOLOR, this.drawFillColor.bind(this), this);
+    }
+
+    onEnable() {
         this.viewData = GameCfg.data[0].data;
         DrawData.initData(this.viewData);
 
         this.MaList = DrawData.MaList;
         this.MinMaList = DrawData.MinMaList;
         this.VolList = DrawData.VolList;
-
 
         this.draw1.lineWidth = 0;
         this.drawMA.lineWidth = 2;
@@ -77,7 +78,6 @@ export default class NewClass extends cc.Component {
     }
 
     drawFillColor() {
-
         GameCfg.huizhidatas += 1;
         GameCfg.beg_end[1] = GameCfg.huizhidatas;
 
@@ -253,7 +253,7 @@ export default class NewClass extends cc.Component {
 
     }
 
-    onDisable() {
+    onDestroy() {
         GlobalEvent.off(EventCfg.ADDFILLCOLOR);
     }
 

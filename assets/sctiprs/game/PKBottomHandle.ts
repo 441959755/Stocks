@@ -111,7 +111,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.CLEARINTERVAL);
     }
 
-
     onGameFUPANSHOW() {
         if (GameCfg.GameType == pb.GameType.JJ_PK ||
             GameCfg.GameType == pb.GameType.JJ_DuoKong ||

@@ -1,6 +1,9 @@
 import { pb } from "../../protos/proto";
+import GameCfg from "../../sctiprs/game/GameCfg";
 import GameData from "../../sctiprs/GameData";
-import ComUtils from "../../sctiprs/Utils/ComUtils";
+import EnterGameControl from "../../sctiprs/global/EnterGameControl";
+import EventCfg from "../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
 
@@ -19,7 +22,7 @@ export default class NewClass extends cc.Component {
 
     onInit(data) {
         this.itemData = data;
-        let times = 8;
+        let times = 4;
         this.cb = setInterval(() => {
             if (times <= 0) {
                 clearInterval(this.cb);
@@ -32,8 +35,9 @@ export default class NewClass extends cc.Component {
             }
 
         }, 1000);
-
-        this.messLabel.string = data.text;
+        let arr = data.text.split(',');
+        // this.messLabel.string = data.text;
+        this.messLabel.string = '有人邀请您参加' + arr[1] + '是否接受';
     }
 
     onBtnClick(event, data) {
@@ -41,24 +45,27 @@ export default class NewClass extends cc.Component {
 
         if (name == 'qdBtn') {
 
-            let arr = ComUtils.getJJXunXian();
-            let data = {
-                id: this.itemData.receiver,
-                uid: GameData.userID,
-                junXian: arr,
-            }
-
-            socket.send(pb.MessageId.Req_Room_Enter, PB.onReqRoomEnterBuff(data), (res) => {
-                console.log(JSON.stringify(res));
-                if (res.err) {
-                    GameData.RoomType = 0;
-                } else {
-                    GameData.roomId = res.id;
-                    this.node.destroy();
+            let arr = this.itemData.text.split(',');
+            if (arr[1] == 'PK大战') {
+                if (EnterGameControl.onCurPKEnterGame()) {
+                    GameCfg.GameType = pb.GameType.JJ_PK;
+                    GameCfg.GameSet = GameData.JJPKSet;
+                    GlobalEvent.emit(EventCfg.OPENMATCHPK);
                 }
-            })
-
-            GameData.RoomType = 2;
+                else {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
+                }
+            }
+            else {
+                if (EnterGameControl.onCurPKEnterGame()) {
+                    GameCfg.GameType = pb.GameType.JJ_DuoKong;
+                    GameCfg.GameSet = GameData.JJPKSet;
+                    GlobalEvent.emit(EventCfg.OPENMATCHPK);
+                }
+                else {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
+                }
+            }
 
         }
 

@@ -373,7 +373,6 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
-        UpGameOpt.clearGameOpt();
         LoadUtils.releaseRes('Prefabs/enterXLGame');
         GlobalEvent.off(EventCfg.LEVELCHANGE);
         GlobalEvent.off(EventCfg.EXPCHANGE);

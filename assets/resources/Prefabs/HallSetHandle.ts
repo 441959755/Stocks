@@ -95,6 +95,7 @@ export default class NewClass extends cc.Component {
         GameData.SMSet.isShowVol = this.showVol[0].isChecked ? true : false;
 
         GameData.SMSet.isBW = this.BW[0].isChecked ? true : false;
+
         GameData.SMSet.isSound = this.soundToggle[0].isChecked ? 1 : 0;
 
         GameData.SMSet.isMA1 = this.MAs[0].isChecked ? true : false;
@@ -112,7 +113,7 @@ export default class NewClass extends cc.Component {
         GameData.SMSet.MA5Date = parseInt(this.MaDates[4].string);
         GameData.SMSet.MA6Date = parseInt(this.MaDates[5].string);
 
-        let arr = [GameData.DXSet, GameData.ZBSet, GameData.QHSet, GameData.FSSet, GameData.TJDSet];
+        let arr = [GameData.DXSet, GameData.ZBSet, GameData.QHSet, GameData.FSSet, GameData.TJDSet, GameData.SMSet];
 
         arr.forEach(el => {
             el.isShowVol = GameData.SMSet.isShowVol;

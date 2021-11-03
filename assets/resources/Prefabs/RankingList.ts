@@ -119,7 +119,6 @@ export default class NewClass extends cc.Component {
         })
     }
 
-
     //创建item
     onCreateItem(arr, scoll, item, td) {
         let UIScrollControl = scoll.getComponent('UIScrollControl');
@@ -152,13 +151,14 @@ export default class NewClass extends cc.Component {
             }
         });
 
-
         if (!this.curSwitch) {
             this.toggles[3].node.active = false;
         }
+
         else if (this.curSwitch) {
             this.toggles[3].node.active = true;
         }
+
         // 0表示关闭，1表示打开炒股大赛排行，2表示打开闯关排行
         if (this.curSwitch == 2) {
 

@@ -34,19 +34,7 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     tipsBox: cc.Node = null;
 
-    onEnable() {
-
-        this.fupanNode.active = false;
-        this.findLayer.active = false;
-        this.tipsBox.active = false;
-        this.huiheshu = 0;
-        this.rateItem = null;
-        this.mrPrice = 0;
-        this.curlv = 0.00;
-        this.alllv = 0.00;
-        GameCfg.GAMEFUPAN = false;
-        GameCfg.fill = [];
-
+    onLoad() {
         GlobalEvent.on(EventCfg.GAMEFUPAN, () => {
             this.fupanNode.active = true;
             this.fupanNode.getComponent('FSFinal').onShow(this.alllv);
@@ -66,6 +54,19 @@ export default class NewClass extends cc.Component {
             this.tipsBox.getComponent('FSTipsBox').onShow(index);
 
         }, this);
+    }
+
+    onEnable() {
+        this.fupanNode.active = false;
+        this.findLayer.active = false;
+        this.tipsBox.active = false;
+        this.huiheshu = 0;
+        this.rateItem = null;
+        this.mrPrice = 0;
+        this.curlv = 0.00;
+        this.alllv = 0.00;
+        GameCfg.GAMEFUPAN = false;
+        GameCfg.fill = [];
 
         this.viewData = GameCfg.data[0].data;
         this.setLabelData();
@@ -84,7 +85,7 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    onDisable() {
+    onDestroy() {
         GlobalEvent.off(EventCfg.GAMEFUPAN);
         GlobalEvent.off('onClickPosUpdateLabel');
     }

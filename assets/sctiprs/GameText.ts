@@ -1,10 +1,12 @@
 
-import LoadUtils from "../sctiprs/Utils/LoadUtils";
 import ComUtils from '../sctiprs/Utils/ComUtils';
 import GameCfg from "./game/GameCfg";
 import GameData from "./GameData";
 import { pb } from "../protos/proto";
 import HttpUtils from "./common/net/HttpUtils";
+import GlobalEvent from './Utils/GlobalEvent';
+import LLWConfig from './common/config/LLWConfig';
+import PlatDefine from './common/config/PlatDefine';
 
 export default class GameCfgText {
 
@@ -54,6 +56,18 @@ export default class GameCfgText {
             //console.log('text' + text);
             this.appConf = JSON.parse(text);
             //  console.log(this.appConf.maintain);
+            //IOS
+            if (LLWConfig.PLATTYPE == PlatDefine.PLAT_IOS) {
+                if (this.appConf.maintain.stopIos) {
+                    GlobalEvent.emit('OPENNOTICELAYER');
+                }
+            }
+            else {
+                if (this.appConf.maintain.stop) {
+                    GlobalEvent.emit('OPENNOTICELAYER');
+                }
+            }
+
             console.log('app.conf 加载完成');
         })
 
@@ -680,6 +694,30 @@ export default class GameCfgText {
 
     public static releaseRes() {
 
+    }
+
+    public static getSwitchModule(id) {
+        let flag = false;
+        this.appConf.module.forEach(el => {
+            if (el.id == id) {
+                if (el.switch) {
+                    flag = true;
+                }
+            }
+        });
+        return flag;
+    }
+
+    public static getSwitchPop(id) {
+        let flag = false;
+        this.appConf.pop.forEach(el => {
+            if (el.id == id) {
+                if (el.switch) {
+                    flag = true;
+                }
+            }
+        });
+        return flag;
     }
 
 }
