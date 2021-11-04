@@ -201,6 +201,7 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
         this.node.removeAllChildren();
+        this.status = 0;
         if (GameCfg.GameType != 'ZNXG' && GameCfg.GameType != pb.GameType.MoNiChaoGu && GameCfg.GameType != pb.GameType.ChaoGuDaSai) {
             this.onAddMard({ type: 1, index: GameData.huizhidatas });
             if (!GameCfg.GAMEFUPAN) {
@@ -412,8 +413,8 @@ export default class NewClass extends cc.Component {
             else if (info.type == 3) {
                 node = cc.instantiate(this.Zs);
             }
-            node.children[0].active = false;
-            node.children[2].active = false;
+            node && (node.children[0].active = false)
+            node && (node.children[2].active = false)
             this.mark1Nodes[inde] = {
                 node: node,
                 type: info.type,

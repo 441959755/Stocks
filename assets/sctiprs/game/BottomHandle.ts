@@ -527,6 +527,7 @@ export default class NewClass extends cc.Component {
 		this.node.getChildByName('DXInfo').active = false;
 		this.node.getChildByName('xlzb').active = false;
 		this.node.getChildByName('pk').active = false;
+		this.node.getChildByName('pk').getChildByName('FUPAN').active = false;
 		this.node.getChildByName('wait').active = false;
 		this.node.getChildByName('fupan1').active = false;
 		this.curMcCount = 0;
@@ -550,7 +551,6 @@ export default class NewClass extends cc.Component {
 			state: null,
 		};
 		this.isFlag = false;
-
 	}
 
 	onEnable() {
@@ -742,7 +742,7 @@ export default class NewClass extends cc.Component {
 			this.tipsLabel1.string = '回合数：' + this.roundNumber;
 
 			this.moneyLabel[1].string = '可用资产：' + parseInt(this.ziChan + '');
-			if (GameCfg.huizhidatas < this.gpData.length) {
+			if (GameCfg.huizhidatas < this.gpData.length && this.gpData[GameCfg.huizhidatas]) {
 				this.moneyLabel[0].string = '总资产    ：' + parseInt(this.ziChan + this.keMcCount * this.gpData[GameCfg.huizhidatas].close + '');
 			}
 

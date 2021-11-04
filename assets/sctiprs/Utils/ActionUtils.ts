@@ -4,9 +4,9 @@ export default class ActionUtils {
     public static openBox(node, call?) {
         let bg = node.getChildByName('bg');
         node.active = true;
-        bg.y += cc.winSize.height;
+        bg.y = cc.winSize.height;
         cc.tween(bg)
-            .to(0.2, {position: cc.v2(0, bg.y - cc.winSize.height)})
+            .to(0.2, { position: cc.v2(0, bg.y - cc.winSize.height) })
             .call(() => {
                 call && call();
             })
@@ -17,20 +17,20 @@ export default class ActionUtils {
     public static closeBox(node, call?) {
         let bg = node.getChildByName('bg');
         cc.tween(bg)
-            .to(0.2, {position: cc.v2(0, bg.y + cc.winSize.height)})
+            .to(0.2, { position: cc.v2(0, bg.y + cc.winSize.height) })
             .call(() => {
                 call && call()
             })
             .start();
     }
 
-    public static openLayer(node){
-        let bg=node.getChildByName('bg');
-        bg.y=1000;
+    public static openLayer(node) {
+        let bg = node.getChildByName('bg');
+        bg.y = 1000;
         cc.tween(bg)
-            .to(0.2,{position:cc.v2(0,0)})
-            .to(0.1,{scaleY:0.9})
-            .to(0.1,{scaleY:1})
+            .to(0.2, { position: cc.v2(0, 0) })
+            .to(0.1, { scaleY: 0.9 })
+            .to(0.1, { scaleY: 1 })
             .start();
     }
 }

@@ -5,24 +5,40 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
 
+    @property(cc.Node)
+    viewNode: cc.Node = null;
+
+    @property(cc.Node)
+    barNode: cc.Node = null;
+
     @property(cc.Label)
-    label: cc.Label = null;
+    contentLabel: cc.Label = null;
 
-    @property
-    text: string = 'hello';
+    callback = null;
 
-    // LIFE-CYCLE CALLBACKS:
+    onShowSysBroadcast(text) {
 
-    // onLoad () {}
+        this.contentLabel.string = text;
 
-    start () {
+        let width = this.viewNode.width;
+
+        this.barNode.x = width / 2 + 30;
+
+        this.callback = setInterval(() => {
+
+            if (this.barNode.x <= -(width / 2 + 30) - this.contentLabel.node.width) {
+                clearInterval(this.callback);
+                this.callback = null;
+                this.node.active = false;
+            }
+
+            this.barNode.x -= 1;
+        }, 50);
 
     }
-
-    // update (dt) {}
 }

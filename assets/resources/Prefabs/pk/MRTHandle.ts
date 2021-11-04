@@ -36,28 +36,10 @@ export default class NewClass extends cc.Component {
 
             let handle = node.getComponent('MRTItem');
             handle.onShow(arr[index], index);
-            // let nodes = RankNode.children;
 
-
-            // if (el.cgsClearance == 0) {
-            //     node.active = false;
-            // }
-
-            // if (!el.icon || el.icon == 'default_icon' || el.icon == 'default.jpg') {
-
-            // }
-            // else {
-
-            // }
         })
 
-        // ComUtils.onLoadHead(el.icon, (res) => {
-        //     if (res) {
-        //         let texture = new cc.SpriteFrame(res);
-        //         head.spriteFrame = texture;
-        //     }
 
-        // })
     }
 
     onBtnClick(event, data) {

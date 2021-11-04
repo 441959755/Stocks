@@ -137,8 +137,11 @@ export default class NewClass extends cc.Component {
         else if (name == 'tzBtn') {
 
             let stage = parseInt(data) - 1;
+
             let stages = JSON.parse(this.confdata.conf);
+
             let gold = stages.Stages[stage].Cost[0].v;
+
             if (GameData.properties[pb.GamePropertyId.Gold] < Math.abs(gold)) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
                 return;
@@ -248,7 +251,7 @@ export default class NewClass extends cc.Component {
             GameData.CGSSAVELEVEL = GameData.cgState.stage
             PopupManager.LoadTipsBox('tipsBox', '闯关成功')
         }
-        else if (GameData.cgState.stage < GameData.CGSSAVELEVEL) {
+        else if ((GameData.cgState.stage || 0) < GameData.CGSSAVELEVEL) {
             GameData.CGSSAVELEVEL = GameData.cgState.stage
             PopupManager.LoadTipsBox('tipsBox', '闯关失败')
         }
@@ -266,6 +269,7 @@ export default class NewClass extends cc.Component {
             let node5 = el.getChildByName('node5');
 
             let box = node4.getChildByName('box');
+
             box.children.forEach(el => {
                 el.active = false;
             })
@@ -275,6 +279,7 @@ export default class NewClass extends cc.Component {
             let cgs_jdt = node3.getChildByName('cgs_jdt');
             let progress = node3.getChildByName('progress').getComponent(cc.ProgressBar);
             let label2 = node3.getChildByName('label2').getComponent(cc.Label);
+
             label2.node.active = false;
 
             let awardLabel = node4.getChildByName('label2').getComponent(cc.Label);
@@ -304,7 +309,6 @@ export default class NewClass extends cc.Component {
                 box.children[1].active = true;
             }
 
-
             if (GameData.cgState && index > GameData.cgState.stage) {
                 node1.children[1].active = false;
                 node1.children[2].active = false;
@@ -312,11 +316,13 @@ export default class NewClass extends cc.Component {
 
                 cgs_jdt.active = false;
                 lifesLabel.string = '';
-                // if (GameData.cgState.lifes) {
-                lifesLabel.string = '生命：' + stages.Stages[index].Lifes;
-                // }
+                if (GameData.cgState.lifes) {
+                    lifesLabel.string = '生命：' + stages.Stages[index].Lifes;
+                }
+                else {
+                    lifesLabel.string = '生命：' + 0;
+                }
                 progress.progress = 0;
-                peopleLabel.string = '在线（' + this.confdata.people[index] + '人）'
 
                 taBtn.children[0].active = true;
                 // ckBtn.children[0].active = true;
@@ -327,9 +333,14 @@ export default class NewClass extends cc.Component {
                 node1.children[2].active = false;
                 cgs_jdt.active = false;
                 lifesLabel.string = '';
+
                 if (GameData.cgState.lifes) {
                     lifesLabel.string = '生命：' + GameData.cgState.lifes;
                 }
+                else {
+                    lifesLabel.string = '生命：' + 0;
+                }
+
                 if (GameData.cgState.progress) {
                     //  progress.progress = GameData.cgState.progress / stages.Stages[index].Progress;
                     if (GameData.cgState.progress == stages.Stages[index].Progress) {
@@ -344,11 +355,6 @@ export default class NewClass extends cc.Component {
                 else {
                     progress.progress = 0;
                 }
-                peopleLabel.string = '在线（' + this.confdata.people[index] + '人）'
-                if (!index) {
-                    peopleLabel.string = '在线（...人）';
-                }
-
 
                 taBtn.children[1].active = true;
                 //   ckBtn.children[1].active = true;
@@ -356,16 +362,22 @@ export default class NewClass extends cc.Component {
                 costLabel.node.color = cc.Color.WHITE;
             }
             else if (GameData.cgState && index < GameData.cgState.stage) {
+
                 node1.children[0].active = false;
                 node1.children[1].active = false;
                 node1.children[2].active = true;
 
                 cgs_jdt.active = true;
+
                 lifesLabel.string = '';
-                peopleLabel.string = '在线（...人）'
+
                 taBtn.children[2].active = true;
                 //  ckBtn.children[2].active = true;
                 //  costLabel.node.color =  new cc.Color().fromHEX('#31a633');
+            }
+            peopleLabel.string = '在线（' + this.confdata.people[index] + '人）'
+            if (!index) {
+                peopleLabel.string = '在线（...人）';
             }
 
             let CgLogAward = GameData.cgState.awards;
@@ -382,7 +394,6 @@ export default class NewClass extends cc.Component {
                             awardLabel.node.color = cc.Color.YELLOW;
                         }
                     }
-
                 }
 
             });

@@ -16,11 +16,56 @@ export default class NewClass extends cc.Component {
     @property(cc.SpriteFrame)
     defaultImg: cc.SpriteFrame = null;
 
+    onLoad() {
+        GlobalEvent.on('REPPLAYERINFO', (info) => {
+
+            if (this.el && info.uid == this.el.uid) {
+
+                console.log('玩家资料应答' + JSON.stringify(info));
+
+                GameData.playersInfo[info.uid + ''] = info;
+
+                //  this.loadHeadImg(info);
+                let userNode = this.node.getChildByName('userinfobg');
+                let username = userNode.getChildByName('username').getComponent(cc.Label);
+                let userlv = userNode.getChildByName('userLv').getComponent(cc.Label);
+                let man = userNode.getChildByName('main_sex__man');
+                username.string = GameData.playersInfo[this.el.uid + ''].nick;
+                userlv.string = 'LV: ' + GameData.playersInfo[this.el.uid + ''].properties[pb.GamePropertyId.Level];
+                man.children[0].active = !GameData.playersInfo[this.el.uid + ''].gender;
+            }
+        }, this);
+    }
+
+    loadPlayerInfo(code) {
+        let userNode = this.node.getChildByName('userinfobg');
+        if (GameData.playersInfo[code + '']) {
+            let username = userNode.getChildByName('username').getComponent(cc.Label);
+
+            let userlv = userNode.getChildByName('userLv').getComponent(cc.Label);
+
+            let man = userNode.getChildByName('main_sex__man');
+            username.string = GameData.playersInfo[code + ''].nick;
+            userlv.string = 'LV: ' + GameData.playersInfo[code + ''].properties[pb.GamePropertyId.Level];
+            man.children[0].active = !GameData.playersInfo[code + ''].gender;
+            return;
+        }
+
+
+        let info = {
+            uid: code,
+        }
+        let playerInfo = pb.PlayerInfo;
+        let buff = playerInfo.encode(info).finish();
+        socket.send(pb.MessageId.Req_Hall_QueryPlayer, buff);
+    }
+
     initShow(index, el, stage) {
 
         this.el = el;
 
         let RankNode = this.node.getChildByName('node');
+
         let nodes = RankNode.children;
 
         nodes.forEach(el => {
@@ -81,6 +126,9 @@ export default class NewClass extends cc.Component {
         }
 
         man.children[0].active = !el.gender;
+
+        this.loadPlayerInfo(el.uid);
+
         let sta = JSON.parse(GameData.CGSConfData.conf);
         countLabel.string = parseInt(el.cgsProgress / sta.Stages[stage].Progress * 100 + '') + '%';
     }

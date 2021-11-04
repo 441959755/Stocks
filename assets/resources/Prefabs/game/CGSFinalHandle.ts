@@ -356,6 +356,7 @@ export default class NewClass extends cc.Component {
     }
 
     onQuitGame() {
+
         GameCfg.data[0].data = [];
         GameCfg.huizhidatas = 0;
         GameCfg.allRate = 0;

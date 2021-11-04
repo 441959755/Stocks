@@ -45,7 +45,10 @@ export default class NewClass extends cc.Component {
 
         if (name == 'qdBtn') {
 
+            GlobalEvent.emit(EventCfg.LEAVEGAME);
+
             let arr = this.itemData.text.split(',');
+
             if (arr[1] == 'PK大战') {
                 if (EnterGameControl.onCurPKEnterGame()) {
                     GameCfg.GameType = pb.GameType.JJ_PK;

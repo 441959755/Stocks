@@ -20,10 +20,14 @@ export default class NewClass extends cc.Component {
 
     uid = null;
 
+    @property(cc.SpriteFrame)
+    defaultImg: cc.SpriteFrame = null;
+
 
     onLoad() {
 
         GlobalEvent.on('REPPLAYERINFO', (info) => {
+
             if (info.uid == this.uid) {
 
                 console.log('玩家资料应答' + JSON.stringify(info));
@@ -50,6 +54,7 @@ export default class NewClass extends cc.Component {
         }
 
         let RankNode = this.node.getChildByName('node');
+
         let nodes = RankNode.children;
 
         nodes.forEach(el => {
@@ -76,11 +81,13 @@ export default class NewClass extends cc.Component {
 
         let countLabel = this.node.getChildByName('label').getComponent(cc.Label);
 
-        this.head.spriteFrame = null;
-        this.man.children[0].active = !el.gender;
-        this.username.string = '';
-        this.userlv.string = '';
+        this.head.spriteFrame = this.defaultImg;
 
+        this.man.children[0].active = !el.gender;
+
+        this.username.string = '';
+
+        this.userlv.string = '';
 
         countLabel.string = el.cgsClearance;
 
@@ -120,7 +127,9 @@ export default class NewClass extends cc.Component {
                     GameData.imgs[obj.icon + ''] = new cc.SpriteFrame(texture);
                     this.head.spriteFrame = GameData.imgs[obj.icon + '']
                 }
-
+                else {
+                    GameData.imgs[obj.icon + ''] = this.defaultImg;
+                }
             })
         }
     }
@@ -131,8 +140,8 @@ export default class NewClass extends cc.Component {
             //打开信息面板
             let info = GameData.playersInfo[this.uid + '']
 
-            if (GameData.imgs[this.uid + ''] && info) {
-                info.icon = GameData.imgs[this.uid + ''];
+            if (info) {
+                info.icon = GameData.imgs[info.icon + '']
                 PopupManager.openOtherPlayerInfoLayer(info);
             }
 

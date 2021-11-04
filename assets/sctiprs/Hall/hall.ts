@@ -35,6 +35,8 @@ export default class NewClass extends cc.Component {
 
 	rankingList: cc.Node = null;  //排行榜
 
+	sysBroadcast: cc.Node = null;  //xt
+
 	otherHis: cc.Node = null;
 
 	@property(cc.Node)
@@ -83,10 +85,11 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on('LOADGAME', this.onLoadGame.bind(this), this);
 
 		GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
+
+		GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
 	}
 
 	onEnable() {
-
 		//自动弹窗
 		PopupManager.autoPop();
 	}
@@ -114,6 +117,7 @@ export default class NewClass extends cc.Component {
 		LoadUtils.releaseRes('Prefabs/friendLayer');
 		LoadUtils.releaseRes('Prefabs/friendInvite');
 		LoadUtils.releaseRes('Prefabs/game/gameLayer');
+		LoadUtils.releaseRes('Prefabs/sysBroadcast');
 		GlobalEvent.off(EventCfg.GAMEOVEER);
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
@@ -281,6 +285,7 @@ export default class NewClass extends cc.Component {
 		let arr = data.text.split(',');
 
 		if (data.type == pb.MessageType.RoomInvite) {
+
 			if (arr[3] != 0) {
 				if (!this.broadcast) {
 					GlobalEvent.emit(EventCfg.LOADINGSHOW);
@@ -304,7 +309,12 @@ export default class NewClass extends cc.Component {
 		}
 		else if (data.type == pb.MessageType.SystemNotice) {
 
-
+			this.openNode(this.sysBroadcast, 'Prefabs/sysBroadcast', 99, (node) => {
+				GlobalEvent.emit(EventCfg.LOADINGHIDE);
+				this.sysBroadcast = node;
+				this.sysBroadcast.active = true;
+				this.sysBroadcast.getComponent('SysBroadcast').onShowSysBroadcast(data.text);
+			});
 		}
 
 	}
@@ -314,7 +324,7 @@ export default class NewClass extends cc.Component {
 		if (!this.InviteBox) {
 			LoadUtils.loadRes('Prefabs/inviteBox', (res) => {
 				this.InviteBox = cc.instantiate(res);
-				this.node.addChild(this.InviteBox);
+				this.node.addChild(this.InviteBox, 98);
 				let headle = this.InviteBox.getComponent('InviteBox');
 				headle.onInviteShow(data);
 			})
@@ -330,7 +340,6 @@ export default class NewClass extends cc.Component {
 		//游戏结算
 		this.openNode(this.gameLayer, 'Prefabs/game/gameLayer', 50, (node) => {
 			this.gameLayer = node;
-			GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
 			this.onLoadFinalLayer();
 		});
 	}
@@ -380,8 +389,10 @@ export default class NewClass extends cc.Component {
 
 	//离开游戏
 	leaveGame() {
+		GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
 		UpGameOpt.clearGameOpt();
-		this.gameLayer.active = false;
+
+		this.gameLayer && (this.gameLayer.active = false)
 
 		this.finalLayer[this.index] && (this.finalLayer[this.index].active = false);
 
@@ -466,7 +477,6 @@ export default class NewClass extends cc.Component {
 				node = cc.instantiate(pre);
 				this.node.addChild(node, zIndex);
 				node.active = true;
-
 				call(node);
 			})
 		}
@@ -477,5 +487,5 @@ export default class NewClass extends cc.Component {
 		}
 	}
 
-
 }
+

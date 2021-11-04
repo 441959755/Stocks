@@ -84,6 +84,7 @@ export default class GlobalHandle {
                 console.log('获取的行情为空');
 
                 GameCfg.GAMEFUPAN = false;
+
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 return;
             }
@@ -144,7 +145,7 @@ export default class GlobalHandle {
 
             if (!info.items || info.items.length <= 0) {
                 console.log('获取的行情为空');
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空' + JSON.stringify(preData));
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空' + JSON.stringify(data));
                 GameCfg.GAMEFUPAN = false;
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 return;

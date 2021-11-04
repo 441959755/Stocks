@@ -35,10 +35,12 @@ export default class NewClass extends cc.Component {
     onLoad() {
         GlobalEvent.on('REPPLAYERINFO', (info) => {
 
+            GameData.playersInfo[info.uid + ''] = info;
+
             if (info.uid == this.uid) {
+
                 console.log('玩家资料应答' + JSON.stringify(info));
 
-                GameData.playersInfo[info.uid + ''] = info;
 
                 this.init(info);
             }
@@ -51,13 +53,16 @@ export default class NewClass extends cc.Component {
     }
 
     init(info) {
-        console.log('node' + this.node);
+
         this.node.active = true;
+
         this.playerInfo = info;
-        //  this.headImg = head;
+
         this.userLevel.string = info.properties[pb.GamePropertyId.Level];
+
         this.userName.string = info.nick;
-        // this.head.spriteFrame = head;
+
+
         this.title.string = ComUtils.getChenghaoByFame(info.properties[pb.GamePropertyId.Fame]);
 
         if (info.gender) {
@@ -71,11 +76,15 @@ export default class NewClass extends cc.Component {
 
     onShow(code) {
         this.uid = code;
+        this.userLevel.string = '';
+        this.userName.string = '';
+        this.head.spriteFrame = this.defaultImg;
         this.loadPlayerInfo(code);
     }
 
 
     loadPlayerInfo(code) {
+
         if (GameData.playersInfo[code + '']) {
             this.init(GameData.playersInfo[code + '']);
             return;

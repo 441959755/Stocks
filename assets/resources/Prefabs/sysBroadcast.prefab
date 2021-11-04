@@ -265,7 +265,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        348.53,
+        -348.53,
         0,
         0,
         0,
@@ -317,7 +317,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
+      "width": 244.71,
       "height": 25.2
     },
     "_anchorPoint": {
@@ -368,8 +368,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "",
-    "_N$string": "",
+    "_string": "hahahahhahahahhahahahh",
+    "_N$string": "hahahahhahahahhahahahh",
     "_fontSize": 20,
     "_lineHeight": 20,
     "_enableWrapText": true,
@@ -603,8 +603,15 @@
       "__id__": 1
     },
     "_enabled": true,
-    "label": null,
-    "text": "hello",
+    "viewNode": {
+      "__id__": 3
+    },
+    "barNode": {
+      "__id__": 4
+    },
+    "contentLabel": {
+      "__id__": 6
+    },
     "_id": ""
   },
   {

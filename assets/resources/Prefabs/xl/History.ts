@@ -31,7 +31,6 @@ export default class NewClass extends cc.Component {
     tipsNode: cc.Node = null;
 
     onEnable() {
-
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         let data = new Date();
         data.setDate(1);
@@ -51,23 +50,20 @@ export default class NewClass extends cc.Component {
         let buff = CmdQueryGameResult.encode(message).finish();
 
         socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, (info) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
-            // if (this.historyInfo) {
-            //     if (this.historyInfo.results.length != info.results.length) {
-            console.log('历史数据' + JSON.stringify(info));
-            this.historyInfo = info;
-            this.onShow();
-            //     }
-            //     else {
-            //         console.log('....');
-            //     }
-            // }
-            // else {
-            //     console.log('历史数据' + JSON.stringify(info));
-            //     this.historyInfo = info;
-            //     this.onShow();
-            // }
+            if (this.historyInfo) {
+                if (this.historyInfo.results.length != info.results.length) {
+                    console.log('历史数据' + JSON.stringify(info));
+                    this.historyInfo = info;
+                    this.onShow();
+                }
+            }
+            else {
+                this.historyInfo = info;
+                this.onShow();
+            }
+
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
     }
 
@@ -105,11 +101,9 @@ export default class NewClass extends cc.Component {
         let arr = [];
 
         datas.forEach(el => {
-
             if ((el.ts > TIMETEMP) && (el.gType == GameCfg.GameType)) {
                 arr.push(el);
             }
-
         });
 
         if (arr.length > 0) {
@@ -121,82 +115,7 @@ export default class NewClass extends cc.Component {
         UIScrollControl.clear();
 
         UIScrollControl.initControl(this.historyItem, arr.length, this.historyItem.getContentSize(), 0, (node, index) => {
-
-            node.getComponent('HistoryItem').onShow(arr[index]);
-            let nodes = node.children;
-            nodes[0].getComponent(cc.Label).string = (index + 1) + '';
-            arr[index].quotesCode += '';
-            let codes;
-            if (arr[index].quotesCode.length >= 7) {
-                codes = arr[index].quotesCode.slice(1);
-            }
-            if (GameCfg.GameType == pb.GameType.QiHuo) {
-                items = GameCfgText.getQHItemInfo(arr[index].quotesCode);
-
-                nodes[1].getComponent(cc.Label).string = items[2] + items[3];
-                items && (nodes[2].getComponent(cc.Label).string = items[1])
-            } else {
-                items = GameCfgText.getGPItemInfo(arr[index].quotesCode);
-                nodes[1].getComponent(cc.Label).string = codes || arr[index].quotesCode;
-                items && (nodes[2].getComponent(cc.Label).string = items[1])
-            }
-            nodes[3].getComponent(cc.Label).string = arr[index].kFrom;			// 行情起始日期YYYYMMDD或时间HHMMSS
-            nodes[4].getComponent(cc.Label).string = arr[index].kTo;
-
-            nodes[5].getComponent(cc.Label).string = arr[index].stockProfitRate.toFixed(2) + '%';
-            if (arr[index].stockProfitRate > 0) {
-                nodes[5].color = new cc.Color().fromHEX('#e94343');
-            } else if (arr[index].stockProfitRate < 0) {
-                nodes[5].color = new cc.Color().fromHEX('#31a633');
-            } else {
-                nodes[5].color = cc.Color.WHITE;
-            }
-            nodes[6].getComponent(cc.Label).string = arr[index].userProfitRate.toFixed(2) + '%';
-            if (arr[index].userProfitRate > 0) {
-                nodes[6].color = new cc.Color().fromHEX('#e94343');
-            } else if (arr[index].userProfitRate < 0) {
-                nodes[6].color = new cc.Color().fromHEX('#31a633');
-            } else {
-                nodes[6].color = cc.Color.WHITE;
-            }
-            nodes[7].getComponent(cc.Label).string = arr[index].userProfit;
-            if (arr[index].userProfit > 0) {
-                nodes[7].color = new cc.Color().fromHEX('#e94343');
-            } else if (arr[index].userProfit < 0) {
-                nodes[7].color = new cc.Color().fromHEX('#31a633');
-            } else {
-                nodes[7].color = cc.Color.WHITE;
-            }
-            if (GameCfg.GameType != pb.GameType.ShuangMang) {
-                nodes[8].getComponent(cc.Label).string = arr[index].ts;
-                nodes[9].getComponent(cc.Label).string = arr[index].kStartup;
-                nodes[10].getComponent(cc.Label).string = arr[index].kStop;
-            }
-
-            if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                let GameSet = cc.sys.localStorage.getItem(arr[index].ts + 'set');
-                if (GameSet) {
-                    GameSet = JSON.parse(GameSet);
-                    nodes[12].getComponent(cc.Label).string = GameSet.select + ' ' + GameSet.strategy;
-                }
-
-                let AIrate = cc.sys.localStorage.getItem(arr[index].ts + 'AIRATE');
-
-                if (AIrate) {
-                    nodes[11].getComponent(cc.Label).string = parseFloat(AIrate).toFixed(2) + '%';
-                    if (parseFloat(AIrate) > 0) {
-                        nodes[11].color = new cc.Color().fromHEX('#e94343');
-                    }
-                    else if (parseFloat(AIrate) == 0) {
-                        nodes[11].color = cc.Color.WHITE;
-                    }
-                    else {
-                        nodes[11].color = new cc.Color().fromHEX('#31a633');
-                    }
-                }
-
-            }
-
+            node.getComponent('HistoryItem').onShow(arr[index], index);
         })
 
         arr.forEach(el => {

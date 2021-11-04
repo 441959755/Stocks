@@ -13,8 +13,110 @@ export default class NewClass extends cc.Component {
 
     infoData = null;
 
-    onShow(info) {
+    @property([cc.Label])
+    labels: cc.Label[] = [];
+
+    onShow(info, index?) {
         this.infoData = info;
+        this.labels[0].string = (index + 1) + '';
+        info.quotesCode += '';
+        let codes = info.quotesCode + '', items;
+
+        if (codes.length >= 7) {
+            codes = info.quotesCode.slice(1);
+        }
+        this.labels[1].string = codes;
+
+        if (GameCfg.GameType == pb.GameType.QiHuo) {
+            items = GameCfgText.getQHItemInfo(info.quotesCode);
+            this.labels[1].string = items[2] + items[3];
+        }
+        else {
+            items = GameCfgText.getGPItemInfo(info.quotesCode);
+        }
+
+        this.labels[2].string = items[1];
+        this.labels[3].string = info.kFrom;
+        this.labels[4].string = info.kTo;
+        this.labels[5].string = info.stockProfitRate.toFixed(2) + '%';
+
+        if (info.stockProfitRate > 0) {
+            this.labels[5].node.color = new cc.Color().fromHEX('#e94343');
+        }
+        else if (info.stockProfitRate < 0) {
+            this.labels[5].node.color = new cc.Color().fromHEX('#31a633');
+        }
+        else {
+            this.labels[5].node.color = cc.Color.WHITE;
+        }
+
+        this.labels[6].string = info.userProfitRate.toFixed(2) + '%';
+        if (info.userProfitRate > 0) {
+            this.labels[6].node.color = new cc.Color().fromHEX('#e94343');
+        } else if (info.userProfitRate < 0) {
+            this.labels[6].node.color = new cc.Color().fromHEX('#31a633');
+        } else {
+            this.labels[6].node.color = cc.Color.WHITE;
+        }
+
+        this.labels[7].string = info.userProfit;
+        if (info.userProfit > 0) {
+            this.labels[7].node.color = new cc.Color().fromHEX('#e94343');
+        } else if (info.userProfit < 0) {
+            this.labels[7].node.color = new cc.Color().fromHEX('#31a633');
+        } else {
+            this.labels[7].node.color = cc.Color.WHITE;
+        }
+
+        if (GameCfg.GameType != pb.GameType.ShuangMang) {
+            this.labels[8].string = info.ts;
+            this.labels[9].string = info.kStartup;
+            this.labels[10].string = info.kStop;
+        }
+
+
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            this.labels[11].string = '0';
+            this.labels[12].string = '0';
+            if (!GameData.zhibiaoHisSet[info.ts + '']) {
+                let GameSet = cc.sys.localStorage.getItem(info.ts + 'set');
+                if (GameSet) {
+                    GameData.zhibiaoHisSet[info.ts + ''] = JSON.parse(GameSet);
+                    this.labels[12].string = GameData.zhibiaoHisSet[info.ts + ''].select + ' ' + GameData.zhibiaoHisSet[info.ts + ''].strategy;
+                }
+
+            }
+            else {
+                this.labels[12].string = GameData.zhibiaoHisSet[info.ts + ''].select + ' ' + GameData.zhibiaoHisSet[info.ts + ''].strategy;
+            }
+
+
+            if (!GameData.zhibiaoHisSet[info.ts + 'AIRATE']) {
+                let aiRate = cc.sys.localStorage.getItem(info.ts + 'AIRATE') || 0;
+                if (aiRate) {
+                    GameData.zhibiaoHisSet[info.ts + 'AIRATE'] = aiRate;
+                    this.labels[11].string = parseFloat(GameData.zhibiaoHisSet[info.ts + 'AIRATE']).toFixed(2) + '%';
+                }
+            }
+            else {
+                this.labels[11].string = parseFloat(GameData.zhibiaoHisSet[info.ts + 'AIRATE']).toFixed(2) + '%';
+            }
+
+
+            if (parseFloat(GameData.zhibiaoHisSet[info.ts + 'AIRATE']) > 0) {
+                this.labels[11].node.color = new cc.Color().fromHEX('#e94343');
+            }
+
+            else if (parseFloat(GameData.zhibiaoHisSet[info.ts + 'AIRATE']) < 0) {
+                this.labels[11].node.color = new cc.Color().fromHEX('#31a633');
+            }
+            else {
+                this.labels[11].node.color = cc.Color.WHITE;
+            }
+
+        }
+
+
     }
 
     onBtnClick(event, curdata) {

@@ -128,8 +128,8 @@ export default class EnterGameControl {
                 GameData.huizhidatas = GameCfg.data[0].data.length - 100;
             }
             else {
-                GameCfg.huizhidatas = GameCfg.data[0].data.length / 2;
-                GameData.huizhidatas = GameCfg.data[0].data.length / 2;
+                GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
+                GameData.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
             }
 
             console.log(GameCfg.huizhidatas + '  ' + GameData.huizhidatas);

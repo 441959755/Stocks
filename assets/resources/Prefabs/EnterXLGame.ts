@@ -182,7 +182,8 @@ export default class NewClass extends cc.Component {
                     to: this.gpList[this.gpList.length - 1].timestamp,
                     reserve: 100,
                 }
-                console.log(data);
+
+
                 GameCfg.enterGameCache = data;
 
                 GameCfg.GameType = pb.GameType.DingXiang;

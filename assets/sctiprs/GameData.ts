@@ -9,6 +9,9 @@ export default class GameData {
 
     public static playersInfo: any = {};   //本地缓存玩家信息
 
+    public static zhibiaoHisSet: any = {};
+
+
     public static AISignal: any = {};
 
     //缓存账号

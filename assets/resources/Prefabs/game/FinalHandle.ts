@@ -346,9 +346,11 @@ export default class NewClass extends cc.Component {
         // let cache = JSON.stringify(GameCfg.enterGameCache);
         // cc.sys.localStorage.setItem(ts + 'cache', cache);
 
-        //cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
+
 
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+
+            cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
             let AiRate = StrategyAIData.profitrate * 100;
             cc.sys.localStorage.setItem(ts + 'AIRATE', AiRate);
         }

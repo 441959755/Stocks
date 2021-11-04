@@ -102,6 +102,8 @@ export default class NewClass extends cc.Component {
         this.pkAllRateLa1.string = '0.00%';
         this.pkfupan1.active = false;
         this.pkNode.active = false;
+        this.box1.active = false;
+        this.box2.active = false;
     }
 
     UpdateRate(data) {

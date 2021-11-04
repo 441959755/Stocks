@@ -301,15 +301,14 @@ export default class NewClass extends cc.Component {
                 }
             }
             else {
-
-                this.daysData[tt - 1].user_capital = this.daysData[tt - 2].user_capital;
-
                 if (!arr[tt]) {
                     this.daysData[tt - 1].endMoney = this.daysData[tt - 2].endMoney;
                 }
                 else {
                     this.daysData[tt - 1].endMoney = arr[tt][0].userCapital + (arr[tt][0].userProfit || 0);
                 }
+
+                this.daysData[tt - 1].user_capital = this.daysData[tt - 2].endMoney
             }
             xlcvs[tt] = this.daysData[tt - 1].endMoney;
 
