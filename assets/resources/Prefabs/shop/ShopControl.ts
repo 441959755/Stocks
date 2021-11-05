@@ -198,7 +198,7 @@ export default class NewClass extends cc.Component {
     onBankPrice(index) {
         //砖石商城
         if (this._curType == 0) {
-
+            this.Orders(index, this.goldCfg[index].id);
         }
         //金币商城
         else if (this._curType == 1) {
@@ -228,6 +228,7 @@ export default class NewClass extends cc.Component {
     }
 
 
+
     Orders(index, id) {
         let obj = {
             itemId: id,
@@ -242,8 +243,15 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_Hall_ShopOrder, buff, (res) => {
             console.log('商城下购买应答' + JSON.stringify(res));
             if (!res.err) {
-                this.succeed.active = true;
-                this.succeed.getComponent('ShopSucced').onShow(this._curType, index);
+
+                if (this._curType) {
+                    this.succeed.active = true;
+                    this.succeed.getComponent('ShopSucced').onShow(this._curType, index);
+                }
+
+                else {
+
+                }
 
             }
             else {
