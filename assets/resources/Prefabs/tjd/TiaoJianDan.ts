@@ -40,18 +40,18 @@ export default class NewClass extends cc.Component {
         if (!GameData.properties[pb.GamePropertyId.UnlockTjdxl] && !GameData.properties[pb.GamePropertyId.Vip]) {
             this.tipsLabel1.node.active = true;
             this.tipsLabel2.node.active = true;
-            this.curCount = GameCfgText.gameTextCfg.tjdxl.free - GameData.todayGameCount[pb.GameType.TiaoJianDan];
+            this.curCount = GameCfgText.gameConf.tjdxl.free - GameData.todayGameCount[pb.GameType.TiaoJianDan];
 
             if (this.curCount > 0) {
                 this.tipsLabel1.string = '今日剩余次数：' + this.curCount + '次';
-                this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameTextCfg.tjdxl.cost[0].v) + '金币';
+                this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.tjdxl.cost[0].v) + '金币';
                 this.curState = 1;
             }
             else {
-                this.curCount = GameCfgText.gameTextCfg.tjdxl.ad + this.curCount;
+                this.curCount = GameCfgText.gameConf.tjdxl.ad + this.curCount;
                 if (this.curCount > 0) {
                     this.tipsLabel1.string = '今日看视频获取次数：' + this.curCount + '次';
-                    this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameTextCfg.tjdxl.cost[0].v) + '金币';
+                    this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.tjdxl.cost[0].v) + '金币';
                     this.curState = 2;
                 }
                 else {
@@ -161,7 +161,7 @@ export default class NewClass extends cc.Component {
     }
 
     TJDStartGameSet() {
-        if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameTextCfg.tjdxl.cost[0].v) {
+        if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameConf.tjdxl.cost[0].v) {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
             return;
         }

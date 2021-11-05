@@ -183,7 +183,7 @@ export default class NewClass extends cc.Component {
                 name.string = GameData.Players[0].nickname;
                 lv.string = 'LV: ' + GameData.Players[0].properties[pb.GamePropertyId.Level];
                 exp.string = '经验值：' + GameData.Players[0].properties[pb.GamePropertyId.Exp] + '/' +
-                    GameCfgText.gameTextCfg.level_exp[(GameData.Players[0].properties[pb.GamePropertyId.Level] || 1)];
+                    GameCfgText.gameConf.level_exp[(GameData.Players[0].properties[pb.GamePropertyId.Level] || 1)];
                 read.string = '等待加入';
                 this.onLoadHead(GameData.Players[0], head);
 
@@ -203,7 +203,7 @@ export default class NewClass extends cc.Component {
                 name.string = GameData.Players[1].nickname;
                 lv.string = 'LV: ' + GameData.Players[1].properties[pb.GamePropertyId.Level];
                 exp.string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + '/' +
-                    GameCfgText.gameTextCfg.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
+                    GameCfgText.gameConf.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
                 read.string = '等待准备';
                 this.onLoadHead(GameData.Players[1], head);
                 this.jj_fxyq.active = false;

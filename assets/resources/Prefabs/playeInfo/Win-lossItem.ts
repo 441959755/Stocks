@@ -38,8 +38,8 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         if (name == 'playerInfo_btn_cz') {
             let cost;
-            if (GameCfgText.gameTextCfg.counter_reset_cost) {
-                cost = Math.abs(GameCfgText.gameTextCfg.counter_reset_cost[0].v);
+            if (GameCfgText.gameConf.counter_reset_cost) {
+                cost = Math.abs(GameCfgText.gameConf.counter_reset_cost[0].v);
             }
             let diamond = cost || 50;
 

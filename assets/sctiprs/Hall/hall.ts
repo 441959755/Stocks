@@ -39,6 +39,8 @@ export default class NewClass extends cc.Component {
 
 	otherHis: cc.Node = null;
 
+	shopLayer: cc.Node = null;  //商城
+
 	@property(cc.Node)
 	rightbg: cc.Node = null;
 
@@ -87,6 +89,9 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
 
 		GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
+
+		//打开商城
+		GlobalEvent.on('OPENSHOPLAYER', this.openShopLayer.bind(this), this);
 	}
 
 	onEnable() {
@@ -118,10 +123,19 @@ export default class NewClass extends cc.Component {
 		LoadUtils.releaseRes('Prefabs/friendInvite');
 		LoadUtils.releaseRes('Prefabs/game/gameLayer');
 		LoadUtils.releaseRes('Prefabs/sysBroadcast');
+		LoadUtils.releaseRes('Prefabs/shop/shop');
 		GlobalEvent.off(EventCfg.GAMEOVEER);
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
 		LoadUtils.releaseRes(this.url);
+	}
+
+	//打开商城
+	openShopLayer() {
+		this.openNode(this.shopLayer, 'Prefabs/shop/shop', 88, (node) => {
+			this.shopLayer = node;
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+		});
 	}
 
 	openRankingList() {

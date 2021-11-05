@@ -9,7 +9,7 @@ import GlobalHandle from "./GlobalHandle";
 export default class EnterGameControl {
 
     public static onCurPKEnterGame() {
-        let kjb = GameCfgText.gameTextCfg.pk.cost[0].v;
+        let kjb = GameCfgText.gameConf.pk.cost[0].v;
         if (GameData.properties[pb.GamePropertyId.Gold] >= Math.abs(kjb)) {
             return true;
         }
@@ -26,13 +26,13 @@ export default class EnterGameControl {
         //没解锁 不是VIP
         if (!GameData.properties[pb.GamePropertyId.UnlockDxxl] && new Date().getTime() / 1000 > GameData.properties[pb.GamePropertyId.VipExpiration]) {
 
-            let curCount = GameCfgText.gameTextCfg.dxxl.free - GameData.todayGameCount[pb.GameType.DingXiang];
+            let curCount = GameCfgText.gameConf.dxxl.free - GameData.todayGameCount[pb.GameType.DingXiang];
             //还有免费次数
             if (curCount > 0) {
                 data.status = 1;
             }
             else {
-                curCount = GameCfgText.gameTextCfg.dxxl.ad + curCount;
+                curCount = GameCfgText.gameConf.dxxl.ad + curCount;
                 //还有看广告次数
 
                 if (curCount > 0) {
@@ -62,23 +62,23 @@ export default class EnterGameControl {
 
         if (GameCfg.GameType == pb.GameType.QiHuo) {
             Unlock = GameData.properties[pb.GamePropertyId.UnlockQhxl]
-            free = GameCfgText.gameTextCfg.qhxl.free;
+            free = GameCfgText.gameConf.qhxl.free;
             todayCount = GameData.todayGameCount[pb.GameType.QiHuo];
-            adCount = GameCfgText.gameTextCfg.qhxl.ad;
+            adCount = GameCfgText.gameConf.qhxl.ad;
         }
 
         else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
             Unlock = GameData.properties[pb.GamePropertyId.UnlockTjdxl]
-            free = GameCfgText.gameTextCfg.tjdxl.free;
+            free = GameCfgText.gameConf.tjdxl.free;
             todayCount = GameData.todayGameCount[pb.GameType.TiaoJianDan];
-            adCount = GameCfgText.gameTextCfg.tjdxl.ad;
+            adCount = GameCfgText.gameConf.tjdxl.ad;
         }
 
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             Unlock = GameData.properties[pb.GamePropertyId.UnlockZbxl]
-            free = GameCfgText.gameTextCfg.zbxl.free;
+            free = GameCfgText.gameConf.zbxl.free;
             todayCount = GameData.todayGameCount[pb.GameType.ZhiBiao];
-            adCount = GameCfgText.gameTextCfg.zbxl.ad;
+            adCount = GameCfgText.gameConf.zbxl.ad;
         }
 
         //没解锁 不是VIP

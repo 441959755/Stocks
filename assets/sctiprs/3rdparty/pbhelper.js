@@ -27,10 +27,11 @@ PBHelper.prototype = {
         // let decoded = CmdLoginReply.decode(buff);
         console.log('登人返回信息:' + JSON.stringify(decoded));
 
-        if (decoded.err && decoded.err.code == -1) {
-            console.log('登入错误:' + decoded.err.err);
+        if (decoded.err.err) {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, decoded.err.err);
             return;
         }
+
         return decoded;
 
     },
@@ -237,7 +238,8 @@ PBHelper.prototype = {
             || id == pb.MessageId.Rep_Hall_ResetGameCounter
             || id == pb.MessageId.Rep_Hall_GetItem
             || id == pb.MessageId.Rep_Game_CgsGetStageAward
-            || id == pb.MessageId.Rep_Game_OrderCancel) {
+            || id == pb.MessageId.Rep_Game_OrderCancel
+            || id == pb.MessageId.Rep_Hall_MobileBind) {
             let ErrorInfo = pb.ErrorInfo;
             let data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
@@ -574,6 +576,12 @@ PBHelper.prototype = {
             || id == pb.MessageId.Rep_Game_CgdsRanking) {
             let RankingList = pb.RankingList;
             let data = RankingList.decode(new Uint8Array(buff));
+            return data;
+        }
+        // 商城下购买应答
+        else if (id == pb.MessageId.Rep_Hall_ShopOrder) {
+            let CmdShopOrderReply = pb.CmdShopOrderReply;
+            let data = CmdShopOrderReply.decode(new Uint8Array(buff));
             return data;
         }
     }

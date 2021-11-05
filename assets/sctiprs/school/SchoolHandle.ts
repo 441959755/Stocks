@@ -99,15 +99,15 @@ export default class NewClass extends cc.Component {
         }
         else {
             this.hisResultLa && (this.hisResultLa.string = '最佳成绩  ')
-            if (GameData.TaskStudy[GameData.schoolProgress - 1].award == GameCfgText.gameTextCfg.task.study[0].gold) {
+            if (GameData.TaskStudy[GameData.schoolProgress - 1].award == GameCfgText.gameConf.task.study[0].gold) {
 
                 this.hisResultLa && (this.hisResultLa.node.children[0].active = true)
             }
-            else if (GameData.TaskStudy[GameData.schoolProgress - 1].award == GameCfgText.gameTextCfg.task.study[1].gold) {
+            else if (GameData.TaskStudy[GameData.schoolProgress - 1].award == GameCfgText.gameConf.task.study[1].gold) {
                 this.hisResultLa && (this.hisResultLa.node.children[0].active = true)
                 this.hisResultLa && (this.hisResultLa.node.children[1].active = true)
             }
-            else if (GameData.TaskStudy[GameData.schoolProgress - 1].award == GameCfgText.gameTextCfg.task.study[2].gold) {
+            else if (GameData.TaskStudy[GameData.schoolProgress - 1].award == GameCfgText.gameConf.task.study[2].gold) {
                 this.hisResultLa && (this.hisResultLa.node.children[0].active = true)
                 this.hisResultLa && (this.hisResultLa.node.children[1].active = true)
                 this.hisResultLa && (this.hisResultLa.node.children[2].active = true)

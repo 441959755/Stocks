@@ -29,7 +29,7 @@ export default class NewClass extends cc.Component {
 
     onShow() {
         this.scoll.content.removeAllChildren();
-        this.taskConf = GameCfgText.gameTextCfg.task;
+        this.taskConf = GameCfgText.gameConf.task;
         console.log('任务配置：' + JSON.stringify(this.taskConf));
 
         this.taskDaily = GameData.gameData.tasks.daily;

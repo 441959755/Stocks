@@ -78,7 +78,7 @@ export default class NewClass extends cc.Component {
         else if (zql >= 60 && zql < 80) {
             this.stars[0].active = true;
             if (!this.falg) {
-                this.award = GameCfgText.gameTextCfg.task.study[0].gold;
+                this.award = GameCfgText.gameConf.task.study[0].gold;
             }
         }
         else if (zql >= 80 && zql < 100) {
@@ -86,7 +86,7 @@ export default class NewClass extends cc.Component {
             this.stars[1].active = true;
 
             if (!this.falg) {
-                this.award = GameCfgText.gameTextCfg.task.study[1].gold;
+                this.award = GameCfgText.gameConf.task.study[1].gold;
             }
         }
         else if (zql >= 100) {
@@ -94,7 +94,7 @@ export default class NewClass extends cc.Component {
             this.stars[1].active = true;
             this.stars[2].active = true;
             if (!this.falg) {
-                this.award = GameCfgText.gameTextCfg.task.study[2].gold;
+                this.award = GameCfgText.gameConf.task.study[2].gold;
             }
         }
 

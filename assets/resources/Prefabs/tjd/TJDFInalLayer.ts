@@ -163,7 +163,7 @@ export default class NewClass extends cc.Component {
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
 
-            // if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameTextCfg.tjdxl.cost[0].v) {
+            // if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameConf.tjdxl.cost[0].v) {
             //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
             //     return;
             // }

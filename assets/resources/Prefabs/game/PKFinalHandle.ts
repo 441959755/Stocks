@@ -143,7 +143,7 @@ export default class NewClass extends cc.Component {
                 userHead.spriteFrame = GameData.Players[1].icon;
             }
 
-            let stages = GameCfgText.gameTextCfg.pk;
+            let stages = GameCfgText.gameConf.pk;
             let ex;
 
             if (this.gameResult.players[1].result.rank == 2) {
@@ -187,7 +187,7 @@ export default class NewClass extends cc.Component {
     onResultAward(status, arr, Rate) {
         //胜利
         if (status == 1) {
-            let ArrWin = GameCfgText.gameTextCfg.pk.win;
+            let ArrWin = GameCfgText.gameConf.pk.win;
             ArrWin.forEach(e => {
                 if (e.i == pb.GamePropertyId.Gold) {
 
@@ -209,7 +209,7 @@ export default class NewClass extends cc.Component {
         }
         //失败
         else if (status == 2) {
-            let Arrlose = GameCfgText.gameTextCfg.pk.lose;
+            let Arrlose = GameCfgText.gameConf.pk.lose;
             Arrlose.forEach(e => {
                 if (e.i == pb.GamePropertyId.Gold) {
                     arr[0].string = '+ ' + e.v;
@@ -229,7 +229,7 @@ export default class NewClass extends cc.Component {
         }
         //平局
         else if (status == 3) {
-            let Arrlose = GameCfgText.gameTextCfg.pk.draw;
+            let Arrlose = GameCfgText.gameConf.pk.draw;
             Arrlose.forEach(e => {
                 if (e.i == pb.GamePropertyId.Gold) {
                     arr[0].string = '+ ' + e.v;

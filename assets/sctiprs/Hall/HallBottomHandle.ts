@@ -41,7 +41,7 @@ export default class NewClass extends cc.Component {
 
         //商城
         else if (name == 'main_smbt_sc1') {
-
+            GlobalEvent.emit('OPENSHOPLAYER');
         }
     }
 

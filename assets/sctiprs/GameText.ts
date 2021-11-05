@@ -18,8 +18,6 @@ export default class GameCfgText {
 
     public static smxlCfg = null;           //训练次数配置
 
-    public static gameTextCfg = null;
-
     public static levelInfoCfg = null;     //等级经验配置
 
     public static stockList = null;          //股票配置
@@ -31,6 +29,8 @@ export default class GameCfgText {
     public static appConf = null;            //公告 开关
 
     public static adConf = null;
+
+    public static gameConf = null;
 
     public static LoadGameConf() {
         // let str = ComUtils.getCurYearMonthDay();
@@ -73,9 +73,10 @@ export default class GameCfgText {
 
         HttpUtils.loadRequest(this.url + 'game.conf', null, (text) => {
             let nati = JSON.parse(text)
+
             this.levelInfoCfg = nati.level_exp;
             this.smxlCfg = nati.smxl;
-            this.gameTextCfg = nati;
+            this.gameConf = nati;
             console.log('game.conf 加载完成');
         })
 

@@ -57,7 +57,7 @@ export default class NewClass extends cc.Component {
 
         lv.getComponent(cc.Label).string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1);
 
-        exp.getComponent(cc.Label).string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + ' /' + GameCfgText.gameTextCfg.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
+        exp.getComponent(cc.Label).string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + ' /' + GameCfgText.gameConf.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
 
     }
 
@@ -138,7 +138,7 @@ export default class NewClass extends cc.Component {
 
             lv.getComponent(cc.Label).string = 'LV：' + (GameData.properties[pb.GamePropertyId.Level] || 1) + '';
 
-            exp.getComponent(cc.Label).string = '经验值：' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.gameTextCfg.level_exp[(GameData.properties[pb.GamePropertyId.Level] || 1)];
+            exp.getComponent(cc.Label).string = '经验值：' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.gameConf.level_exp[(GameData.properties[pb.GamePropertyId.Level] || 1)];
         }
 
         if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
