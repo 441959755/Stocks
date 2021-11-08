@@ -10,6 +10,8 @@ export default class NewClass extends cc.Component {
 
     index = null;
 
+    type = null;
+
     @property(cc.Sprite)
     depImg: cc.Sprite = null;
 
@@ -31,6 +33,7 @@ export default class NewClass extends cc.Component {
     onShow(type, index, callback) {
         this.Callback = callback;
         this.index = index;
+        this.type = type;
         let cfg;
 
         this.depImg.spriteFrame = this.sp[type];

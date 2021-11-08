@@ -92,8 +92,8 @@ export default class NewClass extends cc.Component {
         }
         //qq登入
         else if (name == 'login_qqdl') {
-            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '第三方插件没打包进来');
-            return;
+            // GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '第三方插件没打包进来');
+            // return;
             if (llwSDK.isInstallQq) {
 
                 llwSDK.callQqLoginToJava(this.loginResultCallback.bind(this));
@@ -105,8 +105,8 @@ export default class NewClass extends cc.Component {
         }
         //微信登入
         else if (name == 'login_wxdl') {
-            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '第三方插件没打包进来');
-            return;
+            // GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '第三方插件没打包进来');
+            // return;
             llwSDK.loginWX1(this.loginResultCallback.bind(this));
         }
     }

@@ -21,6 +21,7 @@ const QQRefreshToken = 'QQRefreshToken';
 
 export default class AndroidSDK {
 
+
     appId = "wx2f88189155732f56";
 
     // appSecret = "1b9333210af08f2e53575726d93fd21b";
@@ -58,8 +59,8 @@ export default class AndroidSDK {
         if (id && pw) {
             let loginInfo = {
                 account: id,
-                type: pb.LoginType.WebTest,
-                from: pb.AppFrom.Test,
+                type: pb.LoginType.AppTest,
+                from: pb.AppFrom.Android_001,
                 // type: pb.LoginType.WeChat,
                 // from: pb.AppFrom.Test,
                 pwd: pw
@@ -154,7 +155,6 @@ export default class AndroidSDK {
             if (this.isInstallWx()) {
                 console.log('微信登录失败，请检查是否安装微信');
             }
-
 
             this.loginWx();
         }
@@ -315,7 +315,9 @@ export default class AndroidSDK {
     copyborad(str) {
         var funcName = "copyToClipboard"
         var sigs = "(Ljava/lang/String;)V"
-        jsb.reflection.callStaticMethod(this.className, funcName, sigs, str)
+        setTimeout(() =>
+            jsb.reflection.callStaticMethod(this.className, funcName, sigs, str)
+            , 100);
     }
 
 

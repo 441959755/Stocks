@@ -1,4 +1,5 @@
 import { pb } from "../../../protos/proto";
+import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
@@ -51,6 +52,9 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Node)
     succeed: cc.Node = null;
+
+    @property(cc.Node)
+    selcect: cc.Node = null;
 
     _curType = 0;
 
@@ -148,6 +152,10 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'bank_leftbt_jkf') {
             console.log('添加客服');
+            if (llwSDK) {
+                llwSDK.copyborad('ylcwy888');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '微信号已复制');
+            }
         }
 
         //绑定手机号码
@@ -186,7 +194,6 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'bank_block') {
-
             let index = parseInt(curdata);
             this.depict.active = true;
             this.depict.getComponent('Shopdepict').onShow(this._curType, index, this.onBankPrice.bind(this));
@@ -198,7 +205,9 @@ export default class NewClass extends cc.Component {
     onBankPrice(index) {
         //砖石商城
         if (this._curType == 0) {
-            this.Orders(index, this.goldCfg[index].id);
+            this.selcect.active = true;
+            this.selcect.getComponent('ShopSelect').onShow(index, this.diamondCfg[index].id, this.Orders.bind(this));
+            //  this.Orders(index, this.diamondCfg[index].id);
         }
         //金币商城
         else if (this._curType == 1) {
@@ -230,11 +239,14 @@ export default class NewClass extends cc.Component {
 
 
     Orders(index, id) {
+
         let obj = {
             itemId: id,
             count: 1,
-            from: pb.AppFrom.WeChatMinProgram
+            from: pb.AppFrom.Android_001
         }
+
+        console.log(JSON.stringify(obj));
 
         let ItemOrder = pb.ItemOrder;
         let message = ItemOrder.create(obj);
@@ -250,9 +262,31 @@ export default class NewClass extends cc.Component {
                 }
 
                 else {
+                    // { "result": { }, "orderId": "20211108095453344", "wxXml": "<xml>\n\t<appid>wx2f88189155732f56</appid>\n\t<nonce_str>8lkxygFE</nonce_str>\n\t<package>Sign=WXPay</package>\n\t<partnerid>1434220902</partnerid>\n\t<prepayid>wx08095453853690c04651fcb5f8e26d0000</prepayid>\n\t<timestamp>1636336493</timestamp>\n\t<sign>46a411f32aaa32ad7b31b93b8582cb06</sign>\n</xml>", "payType": "WechatPay" }
+                    let wxXml = res.wxXml, xmlDoc;
+                    let orderId = res.orderId;
+                    console.log(wxXml);
+                    if (window.DOMParser) {
+                        let parser = new DOMParser();
+                        xmlDoc = parser.parseFromString(wxXml, "text/xml");
+                    }
+                    else // Internet Explorer
+                    {
+                        xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+                        xmlDoc.async = false;
+                        xmlDoc.loadXML(wxXml);
+                    }
+
+                    let appid, nonce_str, partnerid, prepayid, timestamp, sign
+                    appid = xmlDoc.getElementsByTagName("appid")[0].childNodes[0].nodeValue;
+                    nonce_str = xmlDoc.getElementsByTagName("nonce_str")[0].childNodes[0].nodeValue;
+                    partnerid = xmlDoc.getElementsByTagName("partnerid")[0].childNodes[0].nodeValue;
+                    prepayid = xmlDoc.getElementsByTagName("prepayid")[0].childNodes[0].nodeValue;
+                    timestamp = xmlDoc.getElementsByTagName("timestamp")[0].childNodes[0].nodeValue;
+                    sign = xmlDoc.getElementsByTagName("sign")[0].childNodes[0].nodeValue;
+
 
                 }
-
             }
             else {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);

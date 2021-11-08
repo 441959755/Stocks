@@ -238,6 +238,7 @@ export default class IOSSDK {
         return 1
     }
 
+
     // 调用ios 复制功能 
     copyborad(str) {
         var funcName = "copyToClipboard:"
@@ -288,5 +289,6 @@ export default class IOSSDK {
         var funcName = "scanQRCode"
         jsb.reflection.callStaticMethod(this.className, funcName, null)
     }
+
 
 }
