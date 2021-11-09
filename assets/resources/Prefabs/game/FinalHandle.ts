@@ -276,19 +276,21 @@ export default class NewClass extends cc.Component {
     }
 
     showContent() {
+
         let gpData = GameCfg.data[0].data;
         this.nameLabel.string = GameCfg.data[0].name;
         let code = GameCfg.data[0].code;
+
         if (code.length >= 7 && GameCfg.GameType != pb.GameType.QiHuo) {
             code = code.slice(1);
         }
+
         this.maLabel.string = code;
 
         this.timeLabel.string = ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
 
         //同期涨幅
         let tq = ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
-
 
         this.riseLabel.string = tq + '%';
         if (parseFloat(tq) > 0) {
@@ -315,6 +317,7 @@ export default class NewClass extends cc.Component {
         let info = DrawData.getBukoCount();
 
         this.yingCont.string = info.yCount + '次';
+
         if (info.yCount > 0) {
             this.yingCont.node.color = new cc.Color().fromHEX('#e94343');
         } else {
@@ -331,9 +334,9 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GameType == pb.GameType.QiHuo) {
             this.nameTipsLabel.string = '品种合约';
             this.maLabel.string = '';
-            if (parseInt(all) > 0) {
+            if (parseFloat(all) > 0) {
                 this.qhxl_zhuan.active = true;
-            } else if (parseInt(all) < 0) {
+            } else if (parseFloat(all) < 0) {
                 this.qhxl_kui.active = true;
             }
         }

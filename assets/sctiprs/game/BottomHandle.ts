@@ -664,6 +664,23 @@ export default class NewClass extends cc.Component {
 			dxnode.active = false;
 			this.node.getChildByName('qh').active = true;
 			this.node.getChildByName('isFC').active = false;
+			this.kdNode.active = true;
+
+			this.kdNode.children.forEach(el => {
+				el.active = false;
+			})
+			this.kdNode.children[0].active = true;
+
+			this.fsNode.children.forEach(el => {
+				el.active = false;
+			})
+			this.fsNode.children[0].active = true;
+
+			this.kkNode.children.forEach(el => {
+				el.active = false;
+			})
+			this.kkNode.children[0].active = true;
+
 		}
 		else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 			this.tipsLabel.node.active = true;

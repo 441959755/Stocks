@@ -251,14 +251,7 @@ export default class NewClass extends cc.Component {
         this.rightBox.active = true;
     }
 
-    onDisable() {
-        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-            this.rZoom.node.active = true;
-            this.rightBox.active = true;
-            this.selcetContent.parent.active = true;
-            GlobalEvent.emit('setDrawing', false);
-        }
-    }
+
 
     onEnable() {
 
@@ -496,8 +489,10 @@ export default class NewClass extends cc.Component {
         } else if (data == 'rZoomBtn') {
             ;
             if (this.rZoom.isChecked) {
+
                 this.rZoom.node.children[0].active = false;
                 this.rightBox.x = cc.winSize.width / 2 + this.rightBox.width / 2;
+
             } else {
                 this.rZoom.node.children[0].active = true;
                 this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
@@ -505,5 +500,19 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit('setDrawing', this.rZoom.isChecked);
 
         }
+    }
+
+    onDisable() {
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            this.selcetContent.parent.active = true;
+            GlobalEvent.emit('setDrawing', false);
+        }
+
+        else if (this.rZoom.isChecked) {
+            GlobalEvent.emit('setDrawing', false);
+        }
+        this.rZoom.node.active = true;
+        this.rZoom.node.children[0].active = true;
+        this.rightBox.active = true;
     }
 }

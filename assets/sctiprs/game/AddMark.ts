@@ -67,7 +67,6 @@ export default class NewClass extends cc.Component {
     }
 
     onDisable() {
-
         this.startNode = [];
         this.markNodes = [];
         this.bmarkNodes = [];
