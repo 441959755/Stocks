@@ -239,7 +239,8 @@ PBHelper.prototype = {
             || id == pb.MessageId.Rep_Hall_GetItem
             || id == pb.MessageId.Rep_Game_CgsGetStageAward
             || id == pb.MessageId.Rep_Game_OrderCancel
-            || id == pb.MessageId.Rep_Hall_MobileBind) {
+            || id == pb.MessageId.Rep_Hall_MobileBind
+            || id == pb.MessageId.Rep_Hall_UnlockGame) {
             let ErrorInfo = pb.ErrorInfo;
             let data = ErrorInfo.decode(new Uint8Array(buff));
             return data;

@@ -41,6 +41,8 @@ export default class NewClass extends cc.Component {
 
 	shopLayer: cc.Node = null;  //商城
 
+	unlockBox: cc.Node = null;  //解锁框
+
 	@property(cc.Node)
 	rightbg: cc.Node = null;
 
@@ -53,6 +55,7 @@ export default class NewClass extends cc.Component {
 	url = null;
 
 	onLoad() {
+
 		PopupManager.init();
 
 		GlobalEvent.on(EventCfg.CmdQuoteQueryFuture, this.onCmdQHGameStart.bind(this), this);
@@ -92,6 +95,8 @@ export default class NewClass extends cc.Component {
 
 		//打开商城
 		GlobalEvent.on('OPENSHOPLAYER', this.openShopLayer.bind(this), this);
+
+		GlobalEvent.on('OPENUNLOCKBOX', this.openUnlockBox.bind(this), this);
 	}
 
 	onEnable() {
@@ -107,12 +112,17 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.CmdQuoteQueryFuture);
 		GlobalEvent.off(EventCfg.OPENREWARDCENTERLAYER);
 		GlobalEvent.off(EventCfg.OPENOTHERPLAYERHISLAYER);
+		GlobalEvent.off(EventCfg.GAMEOVEER);
+
 		GlobalEvent.off('OPENNOTICELAYER');
 		GlobalEvent.off('OPENFRIENDLAYER');
 		GlobalEvent.off('OPENTASKLAYER');
 		GlobalEvent.off('OPENFRIENDINVITE');
 		GlobalEvent.off('OPENRANKINGLIST');
 		GlobalEvent.off('LOADGAME');
+		GlobalEvent.off('OPENSHOPLAYER');
+		GlobalEvent.off('OPENUNLOCKBOX');
+
 		LoadUtils.releaseRes('Prefabs/broadcast');
 		LoadUtils.releaseRes('Prefabs/playeInfo/playerInfoLayer');
 		LoadUtils.releaseRes('Prefabs/helpLayer');
@@ -124,16 +134,30 @@ export default class NewClass extends cc.Component {
 		LoadUtils.releaseRes('Prefabs/game/gameLayer');
 		LoadUtils.releaseRes('Prefabs/sysBroadcast');
 		LoadUtils.releaseRes('Prefabs/shop/shop');
-		GlobalEvent.off(EventCfg.GAMEOVEER);
+		LoadUtils.releaseRes(this.url);
+
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
-		LoadUtils.releaseRes(this.url);
+
+	}
+
+	//打开解锁框
+	openUnlockBox() {
+
+		this.openNode(this.unlockBox, 'Prefabs/unlockBox', 22, (node) => {
+			this.unlockBox = node;
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+		});
+
 	}
 
 	//打开商城
-	openShopLayer() {
+	openShopLayer(type) {
 		this.openNode(this.shopLayer, 'Prefabs/shop/shop', 88, (node) => {
 			this.shopLayer = node;
+			if (type) {
+				this.shopLayer.getComponent('ShopControl').onShow(type);
+			}
 			GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		});
 	}

@@ -152,28 +152,29 @@ export default class NewClass extends cc.Component {
 
     //更改头像
     onChangeIcon() {
-        LLWSDK.getSDK().chooseImage((img) => {
-            if (!img) { return };
-            let data = {
-                uid: GameData.userID,
-                icon: img,
-            }
-            console.log('img' + img);
-            socket.send(pb.MessageId.Req_Hall_EditIcon, PB.onCmdEditInfoConvertToBuff(data), (info) => {
-                console.log('onCmdEditInfoConvertToBuff:' + JSON.stringify(info));
-                if (!info.code) {
 
-                    GameData.headImg = new cc.SpriteFrame(img);
-                    if (GameData.headImg) {
-                        this.headImg.spriteFrame = GameData.headImg;
-                    }
-                } else {
-                    console.log('图片有误!:' + info.code + info.err);
-                }
+        // LLWSDK.getSDK().chooseImage((img) => {
+        //     if (!img) { return };
+        //     let data = {
+        //         uid: GameData.userID,
+        //         icon: img,
+        //     }
+        //     console.log('img' + img);
+        //     socket.send(pb.MessageId.Req_Hall_EditIcon, PB.onCmdEditInfoConvertToBuff(data), (info) => {
+        //         console.log('onCmdEditInfoConvertToBuff:' + JSON.stringify(info));
+        //         if (!info.code) {
 
-            })
+        //             GameData.headImg = new cc.SpriteFrame(img);
+        //             if (GameData.headImg) {
+        //                 this.headImg.spriteFrame = GameData.headImg;
+        //             }
+        //         } else {
+        //             console.log('图片有误!:' + info.code + info.err);
+        //         }
 
-        })
+        //     })
+
+        // })
 
     }
 }

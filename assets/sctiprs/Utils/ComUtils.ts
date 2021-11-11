@@ -8,16 +8,29 @@ import PlatDefine from '../common/config/PlatDefine';
 
 export default class ComUtils {
 
-	private static VIPTimeCall = [];
+
+	public static VIPTimeCall = [];
 
 	//获取vip结束时间
 	public static getVIPDisTime(call) {
-		this.VIPTimeCall.push(call);
+
 		let obj = {
 			day: null,
 			hours: null,
 			minute: null,
 		}
+
+		this.VIPTimeCall.push(call);
+
+		let dis = GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000;
+		let f = new Date(parseInt(dis + '') * 1000);
+
+		obj.day = f.getDate();
+		obj.hours = f.getHours();
+		obj.minute = f.getMinutes();
+
+		call(obj);
+
 		setInterval(() => {
 
 			let dis = GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000;

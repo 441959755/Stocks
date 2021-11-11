@@ -527,8 +527,10 @@ export default class NewClass extends cc.Component {
 				return;
 			}
 
-			else if (this.curState == 3) {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
+			else if (this.curState == 2 || this.curState == 3) {
+				// GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
+				// return;
+				GlobalEvent.emit("OPENUNLOCKBOX");
 				return;
 			}
 

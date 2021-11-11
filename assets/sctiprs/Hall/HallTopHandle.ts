@@ -43,9 +43,7 @@ export default class NewClass extends cc.Component {
 
         //vip说明
         else if (name == 'main_tb_vip') {
-            PopupManager.openNode(this.node.parent, this.vipExplain, 'Prefabs/vipExplain', 10, (node) => {
-                this.vipExplain = node;
-            })
+            PopupManager.loadVipExplain();
         }
 
     }

@@ -16,6 +16,8 @@ export default class PopupManager {
 
     private static protocol: cc.Node = null;
 
+    private static vipExplain: cc.Node = null;
+
     private static isLoading = false;
 
     public static init() {
@@ -134,6 +136,21 @@ export default class PopupManager {
             this.tipsBox.active = true;
             this.tipsBox.emit('contentText', { text: text, call: call });
         }
+    }
+
+    //
+    public static loadVipExplain() {
+        if (this.vipExplain) {
+            this.vipExplain.active = true;
+        }
+        else {
+            LoadUtils.loadRes('Prefabs/vipExplain', (pre) => {
+                let node = cc.instantiate(pre);
+                cc.find('Canvas').addChild(node, 50);
+                this.vipExplain = node;
+            })
+        }
+
     }
 
     public static delPopupNode() {

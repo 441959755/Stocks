@@ -40,8 +40,11 @@ export default class NewClass extends cc.Component {
 
         //web 本地测试
         if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WEB) {
+
             this.tipsLabel.string = '会员登入';
+
             this.onShowNode(this.dlNode);
+
             // setTimeout(() => {
             //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '当前为测试版本，输入任意账号即可');
             // }, 500)
@@ -95,7 +98,6 @@ export default class NewClass extends cc.Component {
             // GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '第三方插件没打包进来');
             // return;
             if (llwSDK.isInstallQq) {
-
                 llwSDK.callQqLoginToJava(this.loginResultCallback.bind(this));
             }
             else {

@@ -38,11 +38,12 @@ export default class NewClass extends cc.Component {
 
         if (name == 'btnGold') {
             console.log('点击金币')
+            GlobalEvent.emit('OPENSHOPLAYER', 2)
         }
 
         else if (name == 'btnDia') {
             console.log('点击钻石');
-
+            GlobalEvent.emit('OPENSHOPLAYER', 1)
         }
 
     }

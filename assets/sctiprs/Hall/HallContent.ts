@@ -106,7 +106,7 @@ export default class NewClass extends cc.Component {
 					nick: GameData.userName,
 				}
 				socket.send(pb.MessageId.Req_Hall_EditNick, PB.onCmdEditInfoConvertToBuff(data), (info) => {
-					console.log('GameData.userName:');
+					console.log('GameData.userName:' + JSON.stringify(info));
 				})
 			}
 
@@ -116,7 +116,7 @@ export default class NewClass extends cc.Component {
 					gender: GameData.gender + '',
 				}
 				socket.send(pb.MessageId.Req_Hall_EditGender, PB.onCmdEditInfoConvertToBuff(data), (info) => {
-					console.log('GameData.gender:');
+					console.log('GameData.gender:' + JSON.stringify(info));
 				})
 			}
 

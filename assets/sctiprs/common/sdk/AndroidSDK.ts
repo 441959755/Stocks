@@ -3,7 +3,6 @@ import GameData from "../../GameData";
 import EventCfg from "../../Utils/EventCfg";
 import GlobalEvent from "../../Utils/GlobalEvent";
 import LoadImg from "../../Utils/LoadImg";
-import LoadUtils from "../../Utils/LoadUtils";
 import HttpMgr from "../net/HttpMgr";
 import HttpUtils from "../net/HttpUtils";
 
@@ -24,7 +23,6 @@ export default class AndroidSDK {
 
     appId = "wx2f88189155732f56";
 
-    // appSecret = "1b9333210af08f2e53575726d93fd21b";
 
     appSecret = "9b1174a6fb93bd7a831338f8e21db0db";
 
@@ -83,6 +81,7 @@ export default class AndroidSDK {
 
     loginWx() {
         console.log('js微信登录');
+
         jsb.reflection.callStaticMethod(
             wxClassPath,
             "loginWx",
@@ -199,7 +198,7 @@ export default class AndroidSDK {
     }
 
     onWxPayResultCallback(result, msg) {
-
+        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, msg);
     }
 
     onWindowLoginCallback(appId, appSecret, code) {
@@ -217,21 +216,21 @@ export default class AndroidSDK {
         this.callback = call;
         let RefreshToken = cc.sys.localStorage.getItem(QQRefreshToken);
 
-        if (RefreshToken) {
+        // if (RefreshToken) {
 
-            let access_token = JSON.parse(RefreshToken).access_token;
+        //     let access_token = JSON.parse(RefreshToken).access_token;
 
-            this.loginServer(access_token);
-        }
-        else {
-            this.loginPlat = pb.LoginType.QQ;
+        //     this.loginServer(access_token);
+        // }
+        // else {
+        this.loginPlat = pb.LoginType.QQ;
 
-            console.log("js准备调用java callQqLoginToJava:")
-            var funcName = "loginInQq"
-            var sigs = "()V"
-            var ret = jsb.reflection.callStaticMethod(this.className, funcName, sigs)
-            return ret
-        }
+        console.log("js准备调用java callQqLoginToJava:")
+        var funcName = "loginInQq"
+        var sigs = "()V"
+        var ret = jsb.reflection.callStaticMethod(this.className, funcName, sigs)
+        return ret
+        //}
     }
 
     // 调用java qq分享接口 shareType 1分享文字   2分享截图
@@ -441,7 +440,6 @@ export default class AndroidSDK {
                     access_token + '&openid=' + obj.openid;
             }
 
-
             if (url) {
                 HttpUtils.loadRequest(url, null, (result) => {
                     console.log('wx getUserInfo 11' + result);
@@ -468,6 +466,17 @@ export default class AndroidSDK {
                 this.loginServer(obj.access_token);
             }
         }
+
+    }
+
+
+    callWXPayToJava(appid, partnerid, prepayid, nonce_str, timestamp, sign) {
+
+        var funcName = "payWx"
+
+        var sigs = "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+        console.log(appid + nonce_str + partnerid + prepayid + timestamp + sign);
+        jsb.reflection.callStaticMethod(this.className, funcName, sigs, appid, partnerid, prepayid, nonce_str, timestamp, sign)
 
     }
 
