@@ -3,6 +3,7 @@ import { pb } from "../../../protos/proto";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
+import EnterGameControl from "../../../sctiprs/global/EnterGameControl";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -37,6 +38,8 @@ export default class NewClass extends cc.Component {
 
 	@property(cc.Label)
 	tipsLabel2: cc.Label = null;
+
+	adSucceed = 0;
 
 	onLoad() {
 		this.DCArr = {
@@ -219,35 +222,40 @@ export default class NewClass extends cc.Component {
 	}
 
 	onGameCountSow() {
-		if (!GameData.properties[pb.GamePropertyId.UnlockQhxl] && (new Date().getTime() / 1000 > GameData.properties[pb.GamePropertyId.VipExpiration])) {
-			this.tipsLabel1.node.active = true;
-			this.tipsLabel2.node.active = true;
-			this.curCount = GameCfgText.gameConf.qhxl.free - GameData.todayGameCount[pb.GameType.QiHuo];
-			if (this.curCount > 0) {
-				this.tipsLabel1.string = '今日剩余次数：' + this.curCount + '次';
-				this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.qhxl.cost[0].v) + '金币';
-				this.curState = 1;
-			}
-			else {
+		let gameCount = EnterGameControl.onCurIsEnterGame();
+		this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.qhxl.cost[0].v) + '金币';
 
-				this.curCount = GameCfgText.gameConf.qhxl.ad + this.curCount;
-				if (this.curCount > 0) {
-					this.tipsLabel1.string = '今日看视频获取次数：' + this.curCount + '次';
-					this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.qhxl.cost[0].v) + '金币';
-					this.curState = 2;
-				}
-				else {
-					this.tipsLabel1.string = '今日次数已用完';
-					this.tipsLabel2.string = '开启VIP或解锁该功能取消次数限制';
-					this.curState = 3;
-				}
-			}
-		} else {
+		if (gameCount.status == 0) {
+			this.curState = 0;
 			this.tipsLabel1.node.active = false;
 			this.tipsLabel2.node.active = false;
-			this.curState = 0;
 		}
-		this.curState = 0;
+
+		else if (gameCount.status == 1) {
+			this.tipsLabel1.node.active = true;
+			this.tipsLabel2.node.active = true;
+			this.tipsLabel1.string = '今日剩余次数：' + gameCount.count + '次';
+			this.curState = 1;
+		}
+
+		else if (gameCount.status == 2) {
+			this.tipsLabel1.node.active = true;
+			this.tipsLabel2.node.active = true;
+			let count = cc.sys.localStorage.getItem('ADSUCCEED' + GameCfg.GameType);
+			if (count) {
+				this.adSucceed = parseInt(count);
+			}
+			this.tipsLabel1.string = '今日剩余次数：' + this.adSucceed + '次';
+			this.curState = 2;
+		}
+
+		else if (gameCount.status == 3) {
+			this.tipsLabel1.node.active = true;
+			this.tipsLabel2.node.active = true;
+			this.tipsLabel1.string = '今日次数已用完';
+			this.tipsLabel2.string = '开启VIP或解锁该功能取消次数限制';
+			this.curState = 3;
+		}
 	}
 
 	onDestroy() {
@@ -800,10 +808,16 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
 				return;
 			}
-			else if (this.curState == 3) {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
+
+			else if ((this.curState == 2 || this.curState == 3) && !this.adSucceed) {
+				// GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
+				// return;
+				GlobalEvent.emit("OPENUNLOCKBOX");
 				return;
 			}
+			cc.sys.localStorage.setItem('ADSUCCEED' + GameCfg.GameType, 0);
+
+			this.onGameCountSow();
 
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			GameCfg.GAMEFUPAN = false;

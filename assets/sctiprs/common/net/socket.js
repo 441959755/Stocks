@@ -224,4 +224,4 @@ var socket = null;
 module.exports = function (host) {
 	socket = new Socket(host);
 	return socket;
-}
+};

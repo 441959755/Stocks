@@ -7,6 +7,7 @@ import GameCfgText from "../../../sctiprs/GameText";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import { pb } from "../../../protos/proto";
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
+import EnterGameControl from "../../../sctiprs/global/EnterGameControl";
 
 const { ccclass, property } = cc._decorator;
 
@@ -46,6 +47,8 @@ export default class NewClass extends cc.Component {
 
     @property(cc.EditBox)
     edit: cc.EditBox = null;
+
+    adSucceed = 0;
 
     protected onLoad() {
         this._tipsLa = this.edit.node.getChildByName('tipslabel');
@@ -122,14 +125,11 @@ export default class NewClass extends cc.Component {
             })
 
         }
-
-
     }
 
 
 
     onEnable() {
-
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
         // GameCfg.GameType = pb.GameType.ZhiBiao;
@@ -484,9 +484,16 @@ export default class NewClass extends cc.Component {
                 GameData.ZBSet.ZLine = str;
             }
         } else if (name == 'startZBBtn') {
-            // if (!GameData.properties[pb.GamePropertyId.UnlockDxxl] && !GameData.properties[pb.GamePropertyId.Vip] && !LLWConfig.ISLOG) {
 
-            // }
+            let Unlock = (GameData.properties[pb.GamePropertyId.UnlockZbxl]) || (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]);
+
+            if (!Unlock && GameData.ZBSet.select != '均线') {
+
+                GlobalEvent.emit("OPENUNLOCKBOX");
+
+                return;
+
+            }
 
             GameCfg.GameType = pb.GameType.ZhiBiao;
             GameCfg.GameSet = GameData.ZBSet;
@@ -494,6 +501,7 @@ export default class NewClass extends cc.Component {
             GameCfg.ziChan = 100000;
 
             this.zhibiaoStartGameSet();
+
         } else if (name == 'setZBBtn') {
             GlobalEvent.emit(EventCfg.OPENSETLAYER);
         } else if (name == 'historyZBBtn') {

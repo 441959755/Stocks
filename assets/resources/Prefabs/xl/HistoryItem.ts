@@ -19,7 +19,9 @@ export default class NewClass extends cc.Component {
     onShow(info, index?) {
         this.infoData = info;
         this.labels[0].string = (index + 1) + '';
+
         info.quotesCode += '';
+
         let codes = info.quotesCode + '', items;
 
         if (codes.length >= 7) {

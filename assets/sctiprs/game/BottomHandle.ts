@@ -384,8 +384,10 @@ export default class NewClass extends cc.Component {
 		this.node.children.forEach(el => {
 			el.active = false;
 		});
+
 		let node = this.node.getChildByName('fupan1');
 		node.active = true;
+
 		if (GameCfg.GameType == pb.GameType.ShuangMang) {
 			let node = this.node.getChildByName('fupan');
 			node.active = true;
@@ -397,8 +399,8 @@ export default class NewClass extends cc.Component {
 			let node1 = this.node.getChildByName('fupan1');
 			node1.active = true;
 		}
-		else if (GameCfg.GameType == pb.GameType.DingXiang) {
 
+		else if (GameCfg.GameType == pb.GameType.DingXiang) {
 			let dxnode = this.node.getChildByName('DXInfo');
 			dxnode.active = true;
 			dxnode.x = 0;
@@ -409,11 +411,9 @@ export default class NewClass extends cc.Component {
 			this.gpName.string = GameCfg.data[0].name + ' ' + code;
 			this.timeLabel[0].string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
 			this.timeLabel[1].string = ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day);
-
 			this.moneyLabel[0].string = '总资产    ：' + GameCfg.ziChan;
 			this.moneyLabel[1].string = '可用资产：' + GameCfg.finalfund;
 			let info = DrawData.getBukoCount();
-
 			this.priceLabel[0].string = '盈利操作次数：' + info.yCount;
 			this.priceLabel[1].string = '亏损操作次数：' + info.sCount;
 		}
@@ -425,7 +425,6 @@ export default class NewClass extends cc.Component {
 			node.children[1].getComponent(cc.Label).string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day)
 			let tq = ((this.gpData[GameCfg.huizhidatas - 1].close - this.gpData[GameData.huizhidatas - 1].close) / this.gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
 			node.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
-
 		}
 
 		else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
@@ -452,7 +451,6 @@ export default class NewClass extends cc.Component {
 				GameCfg.GameType == pb.GameType.JJ_PK ||
 				GameCfg.GameType == pb.GameType.JJ_ChuangGuan ||
 				GameCfg.GameType == pb.GameType.TiaoJianDan) {
-				console.log(parseInt(el.opId));
 				if (el.opId == pb.GameOperationId.Ask || el.opId == 'Ask') {
 					this._type = 1;
 					this.onClickCfBtn(el.volume);
@@ -1250,6 +1248,7 @@ export default class NewClass extends cc.Component {
 
 		}
 
+
 		//卖出
 		else if (state == 'mcBtn' || state == 'mcBtn1') {
 
@@ -1348,8 +1347,9 @@ export default class NewClass extends cc.Component {
 
 			GlobalEvent.emit(EventCfg.UPDATERATE, [rate]);
 
-			GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
-
+			if (GameCfg.fill[GameCfg.fill.length - 1]) {
+				GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
+			}
 			GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
 		}
 	}

@@ -307,6 +307,7 @@ export default class NewClass extends cc.Component {
         }
         //训练该股
         else if (name == 'pk_jsbt_xl') {
+
             if (!this.EnterGameLayer) {
                 GlobalEvent.emit(EventCfg.LOADINGSHOW);
                 LoadUtils.loadRes('Prefabs/enterXLGame', (pre) => {

@@ -6,7 +6,6 @@ import GlobalHandle from '../global/GlobalHandle';
 import StrategyAIData from '../game/StrategyAIData';
 import GameData from '../GameData';
 import LoadUtils from '../Utils/LoadUtils';
-import { LocationPoint } from '../global/LocationPoint';
 import PopupManager from '../Utils/PopupManager';
 import UpGameOpt from '../global/UpGameOpt';
 
@@ -53,6 +52,8 @@ export default class NewClass extends cc.Component {
 	index = 0;
 
 	url = null;
+
+	isLoading = false;
 
 	onLoad() {
 
@@ -301,7 +302,6 @@ export default class NewClass extends cc.Component {
 		else if (GameData.roomId) {
 			GlobalEvent.emit(EventCfg.OPENROOM);
 		}
-
 	}
 
 	openBroadcast(data) {
@@ -346,12 +346,12 @@ export default class NewClass extends cc.Component {
 			}
 		}
 		else if (data.type == pb.MessageType.SystemNotice) {
-
+			GameData.SysBroadcastList.push(data);
 			this.openNode(this.sysBroadcast, 'Prefabs/sysBroadcast', 99, (node) => {
 				GlobalEvent.emit(EventCfg.LOADINGHIDE);
 				this.sysBroadcast = node;
 				this.sysBroadcast.active = true;
-				this.sysBroadcast.getComponent('SysBroadcast').onShowSysBroadcast(data.text);
+				this.sysBroadcast.getComponent('SysBroadcast').onShowSysBroadcast(data);
 			});
 		}
 
@@ -428,6 +428,7 @@ export default class NewClass extends cc.Component {
 	//离开游戏
 	leaveGame() {
 		GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
+
 		UpGameOpt.clearGameOpt();
 
 		this.gameLayer && (this.gameLayer.active = false)
@@ -508,19 +509,25 @@ export default class NewClass extends cc.Component {
 	}
 
 	openNode(node, url, zIndex, call?) {
-
+		if (!this.isLoading) {
+			this.isLoading = true;
+		}
+		else {
+			return;
+		}
 		if (!node) {
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			LoadUtils.loadRes(url, pre => {
 				node = cc.instantiate(pre);
 				this.node.addChild(node, zIndex);
 				node.active = true;
+				this.isLoading = false;
 				call(node);
 			})
 		}
 		else {
 			node.active = true;
-
+			this.isLoading = false;
 			call(node);
 		}
 	}

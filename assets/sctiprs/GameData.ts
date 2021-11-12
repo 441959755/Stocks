@@ -14,6 +14,8 @@ export default class GameData {
 
     public static AISignal: any = {};
 
+
+
     //缓存账号
     private static _account = null;
 
@@ -387,6 +389,6 @@ export default class GameData {
 
     public static TaskDaily = null;   // 日常任务
 
-
+    public static SysBroadcastList = [];//系统广播消息
 
 }

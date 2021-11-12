@@ -480,5 +480,42 @@ export default class AndroidSDK {
 
     }
 
+    //获取选择图片
+    pickImage(type, needClip, clipSize, callback) {
+
+        if (needClip == undefined) {
+            needClip = false;
+        }
+        var clipX = 0, clipY = 0;
+
+        if (clipSize) {
+            clipX = 150;
+            clipY = 150;
+        }
+
+        var dict = {
+            needClip: needClip,
+            clipX: clipX,
+            clipY: clipY,
+        }
+
+        var methodName = 'pickImage';
+        let sigs = "(Ljava/lang/String;)v"
+
+        if (type == 1) {
+            methodName = 'useSystemAlbum';
+        }
+        else if (type == 2) {
+            methodName = 'useSystemCamera';
+        }
+
+        var ret = jsb.reflection.callStaticMethod(this.className, methodName, sigs, JSON.stringify(dict));
+
+        if (ret) {
+            callback && (callback(ret));
+        }
+
+    }
+
 }
 

@@ -46,6 +46,8 @@ export default class NewClass extends cc.Component {
 
 	curState = 0;
 
+	adSucceed = 0;
+
 	onLoad() {
 		this._tipsLa = this.edit.node.getChildByName('tipslabel');
 		this.edit.node.on(
@@ -141,24 +143,36 @@ export default class NewClass extends cc.Component {
 	}
 
 	onGameCountSow() {
+
 		let gameCount = EnterGameControl.onCurDXIsEnterGame();
+
+		this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.dxxl.cost[0].v) + '金币';
 
 		if (gameCount.status == 0) {
 			this.curState = 0;
-		} else if (gameCount.status == 1) {
+			this.tipsLabel1.node.active = false;
+			this.tipsLabel2.node.active = false;
+		}
+
+		else if (gameCount.status == 1) {
 			this.tipsLabel1.node.active = true;
 			this.tipsLabel2.node.active = true;
 			this.tipsLabel1.string = '今日剩余次数：' + gameCount.count + '次';
-			this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.dxxl.cost[0].v) + '金币';
 			this.curState = 1;
 		}
+
 		else if (gameCount.status == 2) {
 			this.tipsLabel1.node.active = true;
 			this.tipsLabel2.node.active = true;
-			this.tipsLabel1.string = '今日看视频获取次数：' + gameCount.count + '次';
-			this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.dxxl.cost[0].v) + '金币';
+			let count = cc.sys.localStorage.getItem('ADSUCCEED' + GameCfg.GameType);
+			if (count) {
+				this.adSucceed = parseInt(count);
+			}
+			this.tipsLabel1.string = '今日剩余次数：' + this.adSucceed + '次';
 			this.curState = 2;
-		} else if (gameCount.status == 3) {
+		}
+
+		else if (gameCount.status == 3) {
 			this.tipsLabel1.node.active = true;
 			this.tipsLabel2.node.active = true;
 			this.tipsLabel1.string = '今日次数已用完';
@@ -518,7 +532,6 @@ export default class NewClass extends cc.Component {
 		} else if (name == 'setDXBtnDX') {
 			GlobalEvent.emit(EventCfg.OPENSETLAYER);
 		} else if (name == 'historyDXBtn') {
-			GameCfg.GameType = pb.GameType.DingXiang;
 			GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
 		} else if (name == 'startDXBtn') {
 
@@ -527,18 +540,25 @@ export default class NewClass extends cc.Component {
 				return;
 			}
 
-			else if (this.curState == 2 || this.curState == 3) {
+			else if ((this.curState == 2 || this.curState == 3) && !this.adSucceed) {
 				// GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
 				// return;
 				GlobalEvent.emit("OPENUNLOCKBOX");
 				return;
 			}
 
+			cc.sys.localStorage.setItem('ADSUCCEED' + GameCfg.GameType, 0);
+
+			this.onGameCountSow();
+
 			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
 			GameCfg.GAMEFUPAN = false;
-			GameCfg.GameType = pb.GameType.DingXiang;
+
 			GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
+
 			GameCfg.ziChan = 100000;
+
 			this.DXStartGameSet();
 		} else if (name == 'blackbtn') {
 			this.node.active = false;

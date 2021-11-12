@@ -18,6 +18,7 @@ export default class EnterGameControl {
 
     //当前定向是否可以进入游戏   
     public static onCurDXIsEnterGame() {
+
         let data = {
             status: 0,
             count: 0,
@@ -79,6 +80,13 @@ export default class EnterGameControl {
             free = GameCfgText.gameConf.zbxl.free;
             todayCount = GameData.todayGameCount[pb.GameType.ZhiBiao];
             adCount = GameCfgText.gameConf.zbxl.ad;
+        }
+
+        else if (GameCfg.GameType == pb.GameType.DingXiang) {
+            Unlock = GameData.properties[pb.GamePropertyId.UnlockDxxl]
+            free = GameCfgText.gameConf.dxxl.free;
+            todayCount = GameData.todayGameCount[pb.GameType.DingXiang];
+            adCount = GameCfgText.gameConf.dxxl.ad;
         }
 
         //没解锁 不是VIP

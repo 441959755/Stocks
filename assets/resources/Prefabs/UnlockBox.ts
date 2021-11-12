@@ -2,6 +2,7 @@ import { pb } from "../../protos/proto";
 import GameCfg from "../../sctiprs/game/GameCfg";
 import GameData from "../../sctiprs/GameData";
 import GameCfgText from "../../sctiprs/GameText";
+import EnterGameControl from "../../sctiprs/global/EnterGameControl";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 import PopupManager from "../../sctiprs/Utils/PopupManager";
@@ -32,12 +33,18 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     ad: cc.Node = null;
 
+    @property(cc.Label)
+    adLabel: cc.Label = null;
+
+    @property(cc.Button)
+    adButton: cc.Button = null;
+
     lockPrice = 0;
 
-    adCount = 0;
+    adCount = null;
 
     onEnable() {
-
+        this.addCountBtn.node.active = true;
         if (GameCfg.GameType == pb.GameType.DingXiang) {
             this.lockPrice = Math.abs(GameCfgText.gameConf.dxxl.unlock[0].v);
         }
@@ -48,6 +55,7 @@ export default class NewClass extends cc.Component {
 
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.lockPrice = Math.abs(GameCfgText.gameConf.qhxl.unlock[0].v);
+            this.addCountBtn.node.active = false;
         }
 
         this.content2.string = this.lockPrice + '钻石可解锁30天免费不限次数训练（VIP用户可以直接解锁）';
@@ -55,15 +63,20 @@ export default class NewClass extends cc.Component {
         this.tips.string = '-' + this.lockPrice;
 
         this.unlock.active = true;
+
         this.ad.active = false;
+
+        this.adCount = EnterGameControl.onCurIsEnterGame();
     }
 
 
     onBtnClick(event, curdata) {
         let name = event.target.name;
+
         if (name == 'sys_close') {
             this.node.active = false;
         }
+
         //解锁
         else if (name == 'sys_tck_js') {
             if (GameData.properties[pb.GamePropertyId.Diamond] >= this.lockPrice) {
@@ -77,17 +90,14 @@ export default class NewClass extends cc.Component {
                 let buff = CmdUnlockGame.encode(message).finish();
 
                 socket.send(pb.MessageId.Req_Hall_UnlockGame, buff, (res) => {
-
                     console.log('解锁' + JSON.stringify(res));
-
+                    this.node.active = false;
+                    GlobalEvent.emit(EventCfg.GMAECOUNTERSCHANGE);
                 });
-
-
             }
             else {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '钻石不足');
             }
-
         }
 
         //开通vip
@@ -98,16 +108,34 @@ export default class NewClass extends cc.Component {
             PopupManager.loadVipExplain();
         }
 
+        //增加次数
         else if (name == 'sys_tck_zjcs') {
             this.ad.active = true;
             this.unlock.active = false;
             this.adShow();
         }
 
+        else if (name == 'sys_tck_spzjcs') {
+            this.node.active = false;
+            this.ADSucceed();
+        }
     }
 
     adShow() {
+        if (this.adCount.status == 2) {
+            this.adButton.interactable = true;
+            this.adButton.enableAutoGrayEffect = false;
+            this.adLabel.string = '今天剩余可领取的额外次数：' + this.adCount.count;
+        }
+        else {
+            this.adButton.interactable = false;
+            this.adButton.enableAutoGrayEffect = true;
+        }
+    }
 
+    ADSucceed() {
+        cc.sys.localStorage.setItem('ADSUCCEED' + GameCfg.GameType, 1);
+        GlobalEvent.emit(EventCfg.GMAECOUNTERSCHANGE);
     }
 
 }

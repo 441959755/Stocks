@@ -176,7 +176,7 @@ export default class NewClass extends cc.Component {
             la && (la.string = GameCfg.data[0].name)
 
             let la1 = boxs[0].getChildByName('label2').getComponent(cc.Label);
-            let code = GameCfg.data[0].code;
+            let code = GameCfg.data[0].code + '';
             if (code.length >= 7) {
                 code = code.slice(1);
             }
@@ -279,7 +279,7 @@ export default class NewClass extends cc.Component {
 
         let gpData = GameCfg.data[0].data;
         this.nameLabel.string = GameCfg.data[0].name;
-        let code = GameCfg.data[0].code;
+        let code = GameCfg.data[0].code + '';
 
         if (code.length >= 7 && GameCfg.GameType != pb.GameType.QiHuo) {
             code = code.slice(1);
@@ -349,15 +349,12 @@ export default class NewClass extends cc.Component {
         // let cache = JSON.stringify(GameCfg.enterGameCache);
         // cc.sys.localStorage.setItem(ts + 'cache', cache);
 
-
-
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 
             cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
             let AiRate = StrategyAIData.profitrate * 100;
             cc.sys.localStorage.setItem(ts + 'AIRATE', AiRate);
         }
-
     }
 
     onBtnClick(event, data) {
@@ -416,7 +413,6 @@ export default class NewClass extends cc.Component {
                 GameCfg.GameSet.year = gpData[GameData.huizhidatas - 1].day;
 
                 GlobalEvent.emit('LOADGAME');
-
 
             });
         }

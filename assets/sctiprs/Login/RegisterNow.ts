@@ -128,6 +128,7 @@ export default class NewClass extends cc.Component {
             }
 
             let url = 'http://test.chaogugame.com/r';
+
             let CmdRegistry = pb.CmdRegistry;
             let message = CmdRegistry.create(data1);
             let buff = CmdRegistry.encode(message).finish();

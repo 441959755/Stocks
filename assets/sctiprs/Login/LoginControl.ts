@@ -1,6 +1,7 @@
 
 import LLWConfig from "../common/config/LLWConfig";
 import PlatDefine from "../common/config/PlatDefine";
+import LLWSDK from "../common/sdk/LLWSDK";
 import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
@@ -91,25 +92,24 @@ export default class NewClass extends cc.Component {
         }
         //点击登入
         else if (name == 'login_dl') {
+            if (this.password.string == '' || this.account.string == '') {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '账号或密码不能为空');
+                return;
+            }
             this.loginServer();
         }
         //qq登入
         else if (name == 'login_qqdl') {
-            // GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '第三方插件没打包进来');
-            // return;
-            if (llwSDK.isInstallQq) {
-                llwSDK.callQqLoginToJava(this.loginResultCallback.bind(this));
+            if (LLWSDK.getSDK().isInstallQq) {
+                LLWSDK.getSDK().callQqLoginToJava(this.loginResultCallback.bind(this));
             }
             else {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '检查是否安QQ');
             }
-
         }
         //微信登入
         else if (name == 'login_wxdl') {
-            // GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '第三方插件没打包进来');
-            // return;
-            llwSDK.loginWX1(this.loginResultCallback.bind(this));
+            LLWSDK.getSDK().loginWX1(this.loginResultCallback.bind(this));
         }
     }
 
@@ -121,12 +121,14 @@ export default class NewClass extends cc.Component {
         cc.sys.localStorage.setItem('ACCOUNT', uid);
         cc.sys.localStorage.setItem('PASSWORD', pw);
         console.log('登入账号：' + uid);
-        llwSDK.login(this.loginResultCallback.bind(this), uid, pw);
+        LLWSDK.getSDK().login(this.loginResultCallback.bind(this), uid, pw);
     }
 
     //登入游戏
     loginResultCallback(decoded) {
+
         console.log(decoded.token + decoded.uid + decoded.gameAddr);
+
         if (decoded) {
             decoded.token && (GameData.token = decoded.token);
             decoded.uid && (GameData.userID = decoded.uid);

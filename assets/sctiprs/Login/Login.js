@@ -1,6 +1,5 @@
 
 import GameData from "../GameData";
-import Socket from "../common/net/socket";
 import GameCfgText from '../GameText';
 import AudioUtils from '../Utils/AudioUtils';
 import LLLog from '../common/utils/LLLog'
@@ -10,6 +9,7 @@ import CallModule from '../common/sdk/CallModule1';
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import LoadUtils from "../Utils/LoadUtils";
+import Socket from "../common/net/socket";
 
 cc.Class({
 
@@ -36,6 +36,7 @@ cc.Class({
 	},
 
 	onLoad() {
+
 		this.init();
 
 		AudioUtils.getAudioVolume();
@@ -67,7 +68,6 @@ cc.Class({
 			console.log('hall 场 景 加 载 完 成');
 		})
 
-		//	window.dispatchEvent(new cc.Event.EventCustom('resize', true))
 		GlobalEvent.on('OPENNOTICELAYER', this.openNoticeKayer.bind(this), this);
 	},
 
@@ -422,7 +422,6 @@ cc.Class({
 			GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		})
 	},
-
 
 	onDestroy() {
 		GameCfgText.releaseRes();

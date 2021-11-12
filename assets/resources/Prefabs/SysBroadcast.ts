@@ -1,9 +1,5 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
+import GameData from "../../sctiprs/GameData";
+
 
 const { ccclass, property } = cc._decorator;
 
@@ -23,22 +19,36 @@ export default class NewClass extends cc.Component {
 
     onShowSysBroadcast(text) {
 
-        this.contentLabel.string = text;
+        if (!this.callback) {
+            this.onShowActive();
+        }
+    }
+
+    onShowActive() {
+
+        this.contentLabel.string = GameData.SysBroadcastList[0];
 
         let width = this.viewNode.width;
 
-        this.barNode.x = width / 2 + 30;
+        this.barNode.x = 0;
 
         this.callback = setInterval(() => {
 
             if (this.barNode.x <= -(width / 2 + 30) - this.contentLabel.node.width) {
                 clearInterval(this.callback);
                 this.callback = null;
-                this.node.active = false;
+                GameData.SysBroadcastList.shift();
+
+                if (GameData.SysBroadcastList.length <= 0) {
+                    this.node.active = false;
+                }
+                else {
+                    this.onShowActive();
+                }
             }
 
             this.barNode.x -= 1;
-        }, 50);
 
+        }, 10);
     }
 }

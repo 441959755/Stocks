@@ -507,7 +507,7 @@ export default class NewClass extends cc.Component {
 
         if (!curDay || curDay.length <= 0) { return }
 
-        let maxValue = 0;
+        let maxValue = curDay[0].userCapital;
         let minMoney = 100000;
         curDay.forEach(el => {
             maxValue = Math.max((el.userCapital + el.userProfit), maxValue);
@@ -515,6 +515,7 @@ export default class NewClass extends cc.Component {
         })
 
         minMoney = parseInt((minMoney) / 1000 + '') * 1000;
+
         maxValue = Math.ceil((maxValue - minMoney) / 20000) * 20000 + minMoney;
 
 

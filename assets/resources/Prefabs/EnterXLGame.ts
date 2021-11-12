@@ -105,7 +105,7 @@ export default class NewClass extends cc.Component {
                     ktype: pb.KType.Day,
                     kstyle: pb.KStyle.Random,
                     from: GameCfg.RoomGameData.players[0].result.kFrom,
-                    code: GameCfg.RoomGameData.players[0].result.quotesCode,
+                    code: this.code,
                     total: 250,
                     to: 0,
                     reserve: 100,
