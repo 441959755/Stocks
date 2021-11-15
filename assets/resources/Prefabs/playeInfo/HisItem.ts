@@ -189,8 +189,8 @@ export default class NewClass extends cc.Component {
             kstyle: pb.KStyle.Random,
             code: this.itemData.quotesCode,
             from: this.itemData.kFrom,
-            total: 256,
-            to: 0,
+            total: this.itemData.kStop + 1,
+            reserve: this.itemData.kStartup + 1,
         }
 
         GameCfg.enterGameCache = cache;

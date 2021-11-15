@@ -9,6 +9,7 @@ import StrategyAIData from './StrategyAIData';
 import PopupManager from '../Utils/PopupManager';
 import UpGameOpt from '../global/UpGameOpt';
 import LoadUtils from '../Utils/LoadUtils';
+import GameCfgText from '../GameText';
 
 const { ccclass, property } = cc._decorator;
 @ccclass
@@ -404,11 +405,11 @@ export default class NewClass extends cc.Component {
 			let dxnode = this.node.getChildByName('DXInfo');
 			dxnode.active = true;
 			dxnode.x = 0;
-			let code = GameCfg.data[0].code;
+			let code = GameCfg.data[0].code + '';
 			if (code.length >= 7) {
 				code = code.slice(1);
 			}
-			this.gpName.string = GameCfg.data[0].name + ' ' + code;
+			this.gpName.string = GameCfgText.getGPPKItemInfo(GameCfg.data[0].code)[1] + ' ' + code;
 			this.timeLabel[0].string = ComUtils.formatTime(this.gpData[GameData.huizhidatas - 1].day);
 			this.timeLabel[1].string = ComUtils.formatTime(this.gpData[GameCfg.huizhidatas - 1].day);
 			this.moneyLabel[0].string = '总资产    ：' + GameCfg.ziChan;
@@ -510,7 +511,7 @@ export default class NewClass extends cc.Component {
 		if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) && GameCfg.GAMEFRTD) {
 			GameCfg.huizhidatas = GameData.selfEnterRoomData.players[0].curPos;
 		}
-		else if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong)) {
+		else if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong || GameCfg.GameType == pb.GameType.JJ_ChuangGuan)) {
 			GameCfg.huizhidatas = this.gpData.length;
 		}
 
@@ -692,7 +693,7 @@ export default class NewClass extends cc.Component {
 			if (GameCfg.GameSet.search == '随机选股') {
 				name.getComponent(cc.Label).string = '股票名称：' + '???? ' + ' ' + ' ???? ';
 			} else {
-				let code = GameCfg.data[0].code;
+				let code = GameCfg.data[0].code + '';
 				if (code.length >= 7) {
 					code = code.slice(1);
 				}
@@ -716,7 +717,8 @@ export default class NewClass extends cc.Component {
 		if (GameCfg.GAMEFUPAN) {
 			this.onShowGAMEFUPAN();
 		} else {
-			let code = GameCfg.data[0].code;
+
+			let code = GameCfg.data[0].code + '';
 			if (code.length >= 7) {
 				code = code.slice(1);
 			}

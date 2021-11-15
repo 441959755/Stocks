@@ -100,8 +100,8 @@ export default class NewClass extends cc.Component {
                     }
 
 
-                    info.push((datas[inde].Rate).toFixed(2) + '%');
-                    this.hsLa.string = (datas[inde].Rate).toFixed(2) + '%';
+                    info.push((datas[inde].Rate || 0.00).toFixed(2) + '%');
+                    this.hsLa.string = (datas[inde].Rate || 0.00).toFixed(2) + '%';
                 }
 
                 let zd = 0.00, zf = 0.00;

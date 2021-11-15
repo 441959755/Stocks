@@ -121,7 +121,7 @@ export default class NewClass extends cc.Component {
             let datas = {
                 uid: GameData.userID,
                 gType: GameCfg.GameType,
-                quotesCode: parseInt(GameCfg.data[0].code),
+                quotesCode: gpData[0].code || parseInt(GameCfg.data[0].code),
                 kType: GameCfg.enterGameCache.ktype,
                 kFrom: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
 
@@ -350,7 +350,6 @@ export default class NewClass extends cc.Component {
         // cc.sys.localStorage.setItem(ts + 'cache', cache);
 
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-
             cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
             let AiRate = StrategyAIData.profitrate * 100;
             cc.sys.localStorage.setItem(ts + 'AIRATE', AiRate);

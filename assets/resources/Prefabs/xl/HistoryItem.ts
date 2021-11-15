@@ -158,7 +158,6 @@ export default class NewClass extends cc.Component {
 
                 GameCfg.historyType = GameCfg.GameType;
 
-
                 if (this.infoData.gType == pb.GameType.ShuangMang) {
                     GameCfg.GameSet = GameData.SMSet;
                 }
@@ -170,6 +169,7 @@ export default class NewClass extends cc.Component {
                 }
                 else if (this.infoData.gType == pb.GameType.DingXiang) {
                     GameCfg.GameSet = GameData.DXSet;
+
                 }
 
                 else if (this.infoData.gType == pb.GameType.TiaoJianDan) {
@@ -181,47 +181,39 @@ export default class NewClass extends cc.Component {
                     kstyle: pb.KStyle.Random,
                     code: this.infoData.quotesCode,
                     from: this.infoData.kFrom + '',
-                    total: this.infoData.kStop - this.infoData.kStartup + 100 + 5,
+                    total: this.infoData.kStop + 1,
                     //   to: this.infoData.kTo + '',
-                    reserve: 100,
+                    reserve: this.infoData.kStartup + 1,
                 };
 
                 console.log(JSON.stringify(GameCfg.enterGameCache));
                 GameCfg.historyType = GameCfg.GameType;
 
                 if (GameCfg.GameType == pb.GameType.QiHuo) {
-                    GlobalHandle.onCmdGameStartQuoteQueryQH(GameCfg.enterGameCache, () => {
-                        this.loadGame();
-                    });
+                    GlobalHandle.onCmdGameStartQuoteQueryQH(GameCfg.enterGameCache, this.loadGame.bind(this));
                 } else {
-                    GlobalHandle.onCmdGameStartQuoteQuery(GameCfg.enterGameCache, () => {
-                        this.loadGame();
-                    })
+                    GlobalHandle.onCmdGameStartQuoteQuery(GameCfg.enterGameCache, this.loadGame.bind(this))
                 }
             });
         }
     }
 
     loadGame() {
-        GameData.huizhidatas = 0;
-        GameCfg.huizhidatas = 0;
+        // while (true) {
+        //     GameCfg.data[0].data.forEach((el, index) => {
+        //         if ((el.day).replace(/-/g, '') == this.infoData.kTo) {
+        //             GameCfg.huizhidatas = index + 1;
+        //         }
 
-        while (true) {
-            GameCfg.data[0].data.forEach((el, index) => {
-
-                if ((el.day).replace(/-/g, '') == this.infoData.kTo) {
-                    GameCfg.huizhidatas = index + 1;
-                }
-
-                if ((el.day).replace(/-/g, '') == this.infoData.kFrom) {
-                    GameData.huizhidatas = index + 1;
-                }
-            })
-
-            if (GameData.huizhidatas && GameCfg.huizhidatas) {
-                GlobalEvent.emit('LOADGAME');
-                break;
-            }
+        //         if ((el.day).replace(/-/g, '') == this.infoData.kFrom) {
+        //             GameData.huizhidatas = index + 1;
+        //         }
+        //     })
+        // }
+        GameData.huizhidatas = this.infoData.kStartup + 1;
+        GameCfg.huizhidatas = this.infoData.kStop + 1;
+        if (GameData.huizhidatas && GameCfg.huizhidatas) {
+            GlobalEvent.emit('LOADGAME');
         }
     }
 }

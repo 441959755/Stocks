@@ -66,6 +66,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     box2: cc.Node = null;
 
+    @property(cc.Label)
+    label5: cc.Label = null;
+
     protected onLoad() {
         //跟新盈利率
         GlobalEvent.on(EventCfg.UPDATERATE, this.UpdateRate.bind(this), this);
@@ -104,6 +107,7 @@ export default class NewClass extends cc.Component {
         this.pkNode.active = false;
         this.box1.active = false;
         this.box2.active = false;
+        this.label5.string = '';
     }
 
     UpdateRate(data) {

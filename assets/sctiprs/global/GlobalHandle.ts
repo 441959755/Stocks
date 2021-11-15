@@ -6,6 +6,7 @@ import GameData from "../GameData";
 import LLWConfig from "../common/config/LLWConfig";
 import DrawData from "../game/DrawData";
 import UpGameOpt from "./UpGameOpt";
+import GameCfgText from "../GameText";
 
 export default class GlobalHandle {
 
@@ -89,6 +90,10 @@ export default class GlobalHandle {
                 return;
             }
 
+            info.items[0].code && (GameCfg.data[0].code = info.items[0].code,
+                info.items[0].name = GameCfgText.getGPItemInfo(info.items[0].code)[1]);
+
+
             info.items.forEach((el, index) => {
 
                 let ye = (el.timestamp + '').slice(0, 4);
@@ -113,6 +118,7 @@ export default class GlobalHandle {
                 GameCfg.data[0].data.push(data);
                 //   }
             });
+
 
             console.log('获取的行情' + JSON.stringify(info));
             console.log(info.items.length);

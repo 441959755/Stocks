@@ -75,6 +75,9 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     dayFundLa: cc.Label[] = [];
 
+    @property([cc.Label])
+    ladayCount: cc.Label[] = [];
+
     cb = null;
 
     doty = [];
@@ -229,6 +232,7 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您还没有训练数据！');
             return;
         }
+
         this.QXNodes[0].active = true;
         this.QXNodes[1].active = false;
         this.userCapital = 0;
@@ -272,10 +276,7 @@ export default class NewClass extends cc.Component {
 
         }
 
-        console.log(arr.length);
-
-
-        for (let tt = 1; tt < arr.length; tt++) {
+        for (let tt = arr.length - 1; tt >= 1; tt--) {
 
             this.daysData[tt - 1] = {
                 time: year + '.' + month + '.' + (tt),
@@ -286,75 +287,22 @@ export default class NewClass extends cc.Component {
             }
             if (arr[tt]) {
                 this.daysData[tt - 1].count = arr[tt].length;
+
+                this.daysData[tt - 1].user_capital = arr[tt][arr[tt].length - 1].userCapital;
+                this.daysData[tt - 1].endMoney = arr[tt][0].userCapital + (arr[tt][0].userProfit || 0);
             }
             else {
                 this.daysData[tt - 1].count = 0;
+
+                if (this.daysData[tt].endMoney || this.daysData[tt].user_capital) {
+                    this.daysData[tt - 1].user_capital = this.daysData[tt].userCapital;
+                    this.daysData[tt - 1].endMoney = this.daysData[tt].userCapital;
+                }
             }
 
-            if (tt == 1) {
-                this.daysData[tt - 1].user_capital = GameData.SmxlState.goldInit;
-                if (!arr[tt]) {
-                    this.daysData[tt - 1].endMoney = GameData.SmxlState.goldInit;
-                }
-                else {
-                    this.daysData[tt - 1].endMoney = arr[tt][0].userCapital + (arr[tt][0].userProfit || 0);
-                }
-            }
-            else {
-                if (!arr[tt]) {
-                    this.daysData[tt - 1].endMoney = this.daysData[tt - 2].endMoney;
-                }
-                else {
-                    this.daysData[tt - 1].endMoney = arr[tt][0].userCapital + (arr[tt][0].userProfit || 0);
-                }
-
-                this.daysData[tt - 1].user_capital = this.daysData[tt - 2].endMoney
-            }
             xlcvs[tt] = this.daysData[tt - 1].endMoney;
 
-
-
-
-            // if (arr[tt]) {
-            //     arr[tt].forEach((el) => {
-            //         this.daysData[tt - 1].count++;
-            //         if (!xlcvs[tt]) {
-            //             xlcvs[tt] = 0;
-            //         }
-            //         xlcvs[tt] += (el.userProfit || 0);
-            //     })
-            //     xlcvs[tt + 1] = xlcvs[tt];
-
-            // }
-            // else {
-
-            //     if (tt == 1) {
-            //         xlcvs[tt] = GameData.SmxlState.goldInit;
-            //         xlcvs[tt + 1] = xlcvs[tt];
-            //     }
-            //     else {
-            //         xlcvs[tt] = xlcvs[tt - 1];
-            //         xlcvs[tt + 1] = xlcvs[tt];
-            //     }
-
-            // }
-
-            // if (tt == 1) {
-            //     this.daysData[tt - 1].user_capital = xlcvs[tt]
-            // }
-            // else {
-            //     this.daysData[tt - 1].user_capital = xlcvs[tt - 1]
-            // }
-
-            // this.daysData[tt - 1].endMoney = xlcvs[tt];
         }
-
-        console.log(' xlcvs:' + JSON.stringify(xlcvs));
-
-        this.draw_line_month(xlCount, xlcvs);
-
-        this.draw_line_day();
-
         // label  
         this.labels[1].string = GameData.SmxlState.goldInit;
         this.labels[3].string = GameData.SmxlState.gold - GameData.SmxlState.goldInit + '';
@@ -369,6 +317,13 @@ export default class NewClass extends cc.Component {
 
         this.labels[2].string = ((GameData.SmxlState.gold - GameData.SmxlState.goldInit) / GameData.SmxlState.goldInit * 100).toFixed(2) + '%';
         this.labels[0].string = GameData.SmxlState.gold;
+
+        console.log(' xlcvs:' + JSON.stringify(xlcvs));
+
+        this.draw_line_month(xlCount, xlcvs);
+
+        this.draw_line_day();
+
     }
 
     draw_line_month(xlCount, xlcvs) {
@@ -496,7 +451,9 @@ export default class NewClass extends cc.Component {
         for (let i = 0; i < datas.length; i++) {
             let data1 = new Date(datas[i].ts * 1000);
             let day1 = data1.getDate();
-            if (day1 == day) {
+            let year1 = data1.getFullYear();
+            let month1 = data1.getMonth() + 1;
+            if (day1 == day && year == year1 && month1 == month) {
                 curDay.push(datas[i]);
             }
         }
@@ -508,7 +465,7 @@ export default class NewClass extends cc.Component {
         if (!curDay || curDay.length <= 0) { return }
 
         let maxValue = curDay[0].userCapital;
-        let minMoney = 100000;
+        let minMoney = curDay[0].userCapital;
         curDay.forEach(el => {
             maxValue = Math.max((el.userCapital + el.userProfit), maxValue);
             minMoney = Math.min((el.userCapital + el.userProfit), minMoney);
@@ -534,8 +491,20 @@ export default class NewClass extends cc.Component {
             })
         }
 
-
         let w = this.draw.node.width / 25;
+        if (this.daysData[day - 1].count > 25) {
+            let c = Math.ceil((this.daysData[day - 1].count) / 5);
+            w = this.draw.node.width / (c * 5);
+
+            this.ladayCount[0].string = '0';
+            this.ladayCount[1].string = (c * 1) + '';
+            this.ladayCount[2].string = (c * 2) + '';
+            this.ladayCount[3].string = (c * 3) + '';
+            this.ladayCount[4].string = (c * 4) + '';
+            this.ladayCount[5].string = (c * 5) + '';
+        }
+
+
         //   let h = this.draw.node.height / 5;
         let dots = [];
 
