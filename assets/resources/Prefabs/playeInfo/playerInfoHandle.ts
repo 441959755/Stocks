@@ -1,4 +1,5 @@
 
+import { pb } from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -26,22 +27,39 @@ export default class NewClass extends cc.Component {
     @property(cc.Toggle)
     toggle1: cc.Toggle = null;
 
+    @property(cc.Sprite)
+    vipImg: cc.Sprite = null;
+
     onLoad() {
-        GlobalEvent.on(EventCfg.HEADIMGCHANGE, () => {
+        GlobalEvent.on(EventCfg.HEADIMGCHANGE, this.setUserInfo.bind(this), this);
+
+        GlobalEvent.on(EventCfg.VIPCHANGE, this.setUserInfo.bind(this), this);
+    }
+
+    start() {
+        this.setUserInfo();
+    }
+
+    setUserInfo() {
+        if (GameData.headImg) {
             this.headImg.spriteFrame = GameData.headImg;
-        }, this);
+        }
+        if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+            this.vipImg.enabled = true;
+        }
+        else {
+            this.vipImg.enabled = false;
+        }
     }
 
 
     onDestroy() {
         GlobalEvent.off(EventCfg.HEADIMGCHANGE);
+        GlobalEvent.off(EventCfg.VIPCHANGE);
     }
 
 
     onEnable() {
-        if (GameData.headImg) {
-            this.headImg.spriteFrame = GameData.headImg;
-        }
         this.layers.forEach((el, index) => {
             if (index == 0) {
                 el.active = true;
@@ -51,7 +69,6 @@ export default class NewClass extends cc.Component {
         })
 
         this.toggle1.isChecked = true;
-
     }
 
     onToggleClick(event, data) {
@@ -71,7 +88,5 @@ export default class NewClass extends cc.Component {
         if (name == 'closeBtn') {
             this.node.active = false;
         }
-
     }
-
 }

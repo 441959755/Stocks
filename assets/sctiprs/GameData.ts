@@ -248,6 +248,7 @@ export default class GameData {
         GlobalEvent.emit(EventCfg.GOLDCHANGE);
         GlobalEvent.emit(EventCfg.LEVELCHANGE);
         GlobalEvent.emit(EventCfg.EXPCHANGE);
+        GlobalEvent.emit(EventCfg.VIPCHANGE);
     }
 
     //保存选择的股票

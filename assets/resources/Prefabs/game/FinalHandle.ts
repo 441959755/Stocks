@@ -5,6 +5,7 @@ import GameCfg from "../../../sctiprs/game/GameCfg";
 import StrategyAIData from "../../../sctiprs/game/StrategyAIData";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
+import EnterGameControl from "../../../sctiprs/global/EnterGameControl";
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import UpGameOpt from "../../../sctiprs/global/UpGameOpt";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
@@ -71,6 +72,9 @@ export default class NewClass extends cc.Component {
     @property([cc.Node])
     boxs: cc.Node[] = [];
 
+    @property(cc.Node)
+    vipNode: cc.Node = null;
+
     protected onShow() {
 
         let gpData = GameCfg.data[0].data;
@@ -89,6 +93,13 @@ export default class NewClass extends cc.Component {
         this.expLabel.string = 'EXP:' + GameData.properties[pb.GamePropertyId.Exp] + '/' + max_exp;
         this.userName.string = GameData.userName;
 
+        if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+            this.vipNode.active = true;
+        }
+        else {
+            this.vipNode.active = false;
+        }
+
         this.contentZB.active = false;
         this.content.active = false;
         //对局数据
@@ -103,17 +114,16 @@ export default class NewClass extends cc.Component {
                 this.boxs[0].active = true;
                 this.boxs[1].active = true;
                 this.boxs[2].active = true;
+
                 this.boxs[0].children[1].getComponent(cc.Label).string = GameData.SmxlState.gold;
-                this.boxs[1].children[1].getComponent(cc.Label).string = parseInt(GameData.SmxlState.gold * (GameCfg.allRate) + '') + '';
-                this.boxs[2].children[1].getComponent(cc.Label).string = parseInt(GameData.SmxlState.gold + GameData.SmxlState.gold * (GameCfg.allRate) + '') + '';
+                this.boxs[1].children[1].getComponent(cc.Label).string = (GameCfg.finalfund - GameCfg.ziChan) + ''
+                this.boxs[2].children[1].getComponent(cc.Label).string = GameCfg.finalfund + '';
             }
             else {
                 this.boxs[0].active = false;
                 this.boxs[1].active = false;
                 this.boxs[2].active = false;
             }
-
-
         }
 
         //复盘中不保存记录
@@ -343,11 +353,6 @@ export default class NewClass extends cc.Component {
     }
 
     saveHoistoryInfo(ts) {
-        // GameCfg.TIMETEMP.push(ts);
-        // cc.sys.localStorage.setItem('TIMETEMP', JSON.stringify(GameCfg.TIMETEMP));
-
-        // let cache = JSON.stringify(GameCfg.enterGameCache);
-        // cc.sys.localStorage.setItem(ts + 'cache', cache);
 
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             cc.sys.localStorage.setItem(ts + 'set', JSON.stringify(GameCfg.GameSet));
@@ -366,6 +371,10 @@ export default class NewClass extends cc.Component {
         else if (name == 'lx_jsbt_zlyj') {
 
             GlobalEvent.emit(EventCfg.LEAVEGAME);
+
+            if (!this.gotoGame()) {
+                return;
+            }
 
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
@@ -404,15 +413,17 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.LEAVEGAME);
 
+            if (!this.gotoGame()) {
+                return;
+            }
+
             GlobalHandle.onCmdGameStartReq(() => {
                 GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
                 GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
                 let gpData = GameCfg.data[0].data;
                 GameCfg.GameSet.search = GameCfg.data[0].code;
                 GameCfg.GameSet.year = gpData[GameData.huizhidatas - 1].day;
-
                 GlobalEvent.emit('LOADGAME');
-
             });
         }
         //复盘
@@ -436,6 +447,40 @@ export default class NewClass extends cc.Component {
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
         GameCfg.RoomGameData = null;
+    }
+
+    gotoGame() {
+        if (GameData.properties[pb.GamePropertyId.Gold] < 500) {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+            return false;
+        }
+
+        let gameCount = EnterGameControl.onCurDXIsEnterGame();
+
+        let curState, adSucceed;
+        if (gameCount.status == 0) {
+            curState = 0;
+        }
+        else if (gameCount.status == 1) {
+            curState = 1;
+        }
+        else if (gameCount.status == 2) {
+            let count = cc.sys.localStorage.getItem('ADSUCCEED' + GameCfg.GameType);
+            if (count) {
+                adSucceed = parseInt(count);
+            }
+            curState = 2;
+        }
+        else {
+            curState = 3;
+        }
+
+        if ((curState == 2 || curState == 3) && !adSucceed) {
+            GlobalEvent.emit("OPENUNLOCKBOX");
+            return false;
+        }
+
+        return true;
     }
 
 }

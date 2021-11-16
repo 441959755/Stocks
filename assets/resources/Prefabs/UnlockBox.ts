@@ -22,6 +22,9 @@ export default class NewClass extends cc.Component {
     addCountBtn: cc.Button = null;
 
     @property(cc.Label)
+    content1: cc.Label = null;
+
+    @property(cc.Label)
     content2: cc.Label = null;
 
     @property(cc.Label)
@@ -45,6 +48,8 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
         this.addCountBtn.node.active = true;
+        this.content1.node.active = true;
+
         if (GameCfg.GameType == pb.GameType.DingXiang) {
             this.lockPrice = Math.abs(GameCfgText.gameConf.dxxl.unlock[0].v);
         }
@@ -56,9 +61,15 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.lockPrice = Math.abs(GameCfgText.gameConf.qhxl.unlock[0].v);
             this.addCountBtn.node.active = false;
+            this.content1.node.active = false;
         }
 
-        this.content2.string = this.lockPrice + '钻石可解锁30天免费不限次数训练（VIP用户可以直接解锁）';
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            this.content2.string = '您尚未解锁“指标训练”所有指标的训练权限，' + this.lockPrice + '钻石可解锁30天免费不限次数训练（VIP用户可以直接解锁）';
+        }
+        else {
+            this.content2.string = this.lockPrice + '钻石可解锁30天免费不限次数训练（VIP用户可以直接解锁）';
+        }
 
         this.tips.string = '-' + this.lockPrice;
 
@@ -71,6 +82,7 @@ export default class NewClass extends cc.Component {
 
 
     onBtnClick(event, curdata) {
+
         let name = event.target.name;
 
         if (name == 'sys_close') {
@@ -130,6 +142,7 @@ export default class NewClass extends cc.Component {
         else {
             this.adButton.interactable = false;
             this.adButton.enableAutoGrayEffect = true;
+            this.adLabel.string = '今天剩余可领取的额外次数：' + 0;
         }
     }
 

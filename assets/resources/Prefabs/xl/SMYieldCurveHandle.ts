@@ -273,10 +273,9 @@ export default class NewClass extends cc.Component {
             } else {
                 xlCount[day1] += 1;
             }
-
         }
 
-        for (let tt = arr.length - 1; tt >= 1; tt--) {
+        for (let tt = day; tt >= 1; tt--) {
 
             this.daysData[tt - 1] = {
                 time: year + '.' + month + '.' + (tt),
@@ -295,8 +294,12 @@ export default class NewClass extends cc.Component {
                 this.daysData[tt - 1].count = 0;
 
                 if (this.daysData[tt].endMoney || this.daysData[tt].user_capital) {
-                    this.daysData[tt - 1].user_capital = this.daysData[tt].userCapital;
-                    this.daysData[tt - 1].endMoney = this.daysData[tt].userCapital;
+                    this.daysData[tt - 1].user_capital = this.daysData[tt].user_capital;
+                    this.daysData[tt - 1].endMoney = this.daysData[tt].user_capital;
+                }
+                else {
+                    this.daysData[tt - 1].user_capital = GameData.SmxlState.gold;
+                    this.daysData[tt - 1].endMoney = GameData.SmxlState.gold;
                 }
             }
 

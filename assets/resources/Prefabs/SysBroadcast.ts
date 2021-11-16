@@ -25,7 +25,6 @@ export default class NewClass extends cc.Component {
     }
 
     onShowActive() {
-
         this.contentLabel.string = GameData.SysBroadcastList[0];
 
         let width = this.viewNode.width;
@@ -47,7 +46,7 @@ export default class NewClass extends cc.Component {
                 }
             }
 
-            this.barNode.x -= 1;
+            this.barNode.x -= 1.5;
 
         }, 10);
     }

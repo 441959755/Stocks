@@ -1112,15 +1112,28 @@ export default class NewClass extends cc.Component {
 			let fm = data.from;
 			while (!GameData.huizhidatas) {
 
-				GameCfg.data[0].data.forEach((el, index) => {
-					if ((el.day).replace(/-/g, '') == fm) {
-						GameData.huizhidatas = index + 1;
-						GameCfg.huizhidatas = index + 1;
+				if (GameData.QHSet.year == '随机') {
+					if (GameCfg.data[0].data.length > 100) {
+						GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
+						GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
 					}
-				})
+					else {
+						GameData.huizhidatas = GameCfg.data[0].data.length - 50;
+						GameCfg.huizhidatas = GameCfg.data[0].data.length - 50;
+					}
 
-				if (!GameData.huizhidatas) {
-					fm = (parseInt(fm) - 1) + '';
+				}
+				else {
+					GameCfg.data[0].data.forEach((el, index) => {
+						if ((el.day).replace(/-/g, '') == fm) {
+							GameData.huizhidatas = index + 1;
+							GameCfg.huizhidatas = index + 1;
+						}
+					})
+
+					if (!GameData.huizhidatas) {
+						fm = (parseInt(fm) - 1) + '';
+					}
 				}
 			}
 
@@ -1129,23 +1142,5 @@ export default class NewClass extends cc.Component {
 
 	}
 
-	//http://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js?TYPE=m30k&rtntype=5&authorityType=fa&id=3008032
 
-	// //获取周K
-
-	// getWkData() {
-	//     let url = 'http://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js';
-
-	//     let code = GameCfg.data[0].code[0] == '6' ? GameCfg.data[0].code + '1' : GameCfg.data[0].code + '2';
-
-	//     let TYPE;
-	//     if (GameData.DXSet.ZLine == '周线') {
-	//         TYPE = 'wk'
-	//     } else if (GameData.DXSet.ZLine == '30分钟K') {
-	//         TYPE = 'm30k';
-	//     } else if (GameData.DXSet.ZLine == '60分钟K') {
-	//         TYPE = 'm60k';
-	//     }
-	//"ktype":10,"kstyle":null,"code":"2000001","from":"20141201","total":200,"to":0
-	// }
 }

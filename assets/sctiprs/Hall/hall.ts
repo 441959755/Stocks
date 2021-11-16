@@ -139,7 +139,6 @@ export default class NewClass extends cc.Component {
 
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
-
 	}
 
 	//打开解锁框
@@ -170,7 +169,6 @@ export default class NewClass extends cc.Component {
 		});
 	}
 
-
 	openFriendInvite() {
 		this.openNode(this.friendInvite, 'Prefabs/friendInvite', 11, (node) => {
 			this.friendInvite = node;
@@ -200,7 +198,6 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		});
 	}
-
 
 	openOtherHisLayer(data) {
 		this.openNode(this.otherHis, 'Prefabs/otherPlayerHisInfo', 12, (node) => {
@@ -351,10 +348,9 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit(EventCfg.LOADINGHIDE);
 				this.sysBroadcast = node;
 				this.sysBroadcast.active = true;
-				this.sysBroadcast.getComponent('SysBroadcast').onShowSysBroadcast(data);
+				this.sysBroadcast.getComponent('SysBroadcast').onShowSysBroadcast(data.text);
 			});
 		}
-
 	}
 
 	//邀请框
@@ -384,7 +380,7 @@ export default class NewClass extends cc.Component {
 
 	//加载结算页
 	onLoadFinalLayer() {
-		console.log('加载结算页');
+
 		GlobalEvent.emit(EventCfg.LOADINGSHOW);
 		if (GameCfg.GameType == pb.GameType.ShuangMang ||
 			GameCfg.GameType == pb.GameType.ZhiBiao ||
@@ -421,7 +417,6 @@ export default class NewClass extends cc.Component {
 			this.finalLayer[this.index] = node;
 			this.finalLayer[this.index].active = false;
 		})
-
 	}
 
 
@@ -448,6 +443,7 @@ export default class NewClass extends cc.Component {
 		GameCfg.finalfund = 0;
 
 		GameCfg.GAMEFUPAN = false;
+		GameCfg.GAMEWAIT = false;
 
 		StrategyAIData.onClearData();
 
@@ -465,31 +461,35 @@ export default class NewClass extends cc.Component {
 	//游戏结束
 	GameOver(message) {
 
-		this.finalLayer[this.index].active = true;
 
 		if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 
 			if (message) {
 				let handle = this.finalLayer[this.index].getComponent('PKFinalHandle');
 				handle.onShow();
+
+				this.finalLayer[this.index].active = true;
 			}
 		}
 		else {
 			setTimeout(() => {
-
 				if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
 
 					this.finalLayer[this.index].getComponent('CGSFinalHandle').onShow();
+
+					this.finalLayer[this.index].active = true;
 				}
 				else {
-
 					if (GameCfg.JJ_XUNLIAN) {
 
 						this.finalLayer[this.index].getComponent('LXFinalandle').onShow();
+
+						this.finalLayer[this.index].active = true;
 					}
 					else {
-
 						this.finalLayer[this.index].getComponent('FinalHandle').onShow();
+
+						this.finalLayer[this.index].active = true;
 					}
 				}
 			}, 80)

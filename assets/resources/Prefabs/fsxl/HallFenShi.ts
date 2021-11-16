@@ -145,15 +145,21 @@ export default class NewClass extends cc.Component {
         let d1 = f1.getDate() >= 10 ? f1.getDate() : '0' + f1.getDate();
 
         this.contents[1].children.forEach((el, index) => {
-            el.getComponent(cc.Label).string = parseInt(y) - index + '';
-            el.color = cc.Color.WHITE;
-            el.getComponent(cc.Button).interactable = true;
-            el.getComponent(cc.Button).enableAutoGrayEffect = false;
-            if (el.getComponent(cc.Label).string < y1 || el.getComponent(cc.Label).string > y) {
-                el.color = new cc.Color().fromHEX('#a0a0a0');
-                el.getComponent(cc.Button).interactable = false;
-                el.getComponent(cc.Button).enableAutoGrayEffect = true;
+            if (index == 0) {
+                el.getComponent(cc.Label).string = '随机';
             }
+            else {
+                el.getComponent(cc.Label).string = parseInt(y) - (index - 1) + '';
+                el.color = cc.Color.WHITE;
+                el.getComponent(cc.Button).interactable = true;
+                el.getComponent(cc.Button).enableAutoGrayEffect = false;
+                if ((el.getComponent(cc.Label).string < y1 || el.getComponent(cc.Label).string > y) && index != 0) {
+                    el.color = new cc.Color().fromHEX('#a0a0a0');
+                    el.getComponent(cc.Button).interactable = false;
+                    el.getComponent(cc.Button).enableAutoGrayEffect = true;
+                }
+            }
+
         })
 
         let yt = y1 + m1;
@@ -163,6 +169,7 @@ export default class NewClass extends cc.Component {
         this.contents[2].children.forEach((el, index) => {
 
             if (this.boxsLa[0].string == '随机') {
+                this.boxsLa[1].string = '--';
                 el.color = new cc.Color().fromHEX('#a0a0a0');
                 el.getComponent(cc.Button).interactable = false;
                 el.getComponent(cc.Button).enableAutoGrayEffect = true;
@@ -194,6 +201,7 @@ export default class NewClass extends cc.Component {
                 el.color = new cc.Color().fromHEX('#a0a0a0');
                 el.getComponent(cc.Button).interactable = false;
                 el.getComponent(cc.Button).enableAutoGrayEffect = true;
+                this.boxsLa[2].string = '--';
             } else {
                 el.color = cc.Color.WHITE;
                 el.getComponent(cc.Button).interactable = true;
@@ -341,15 +349,20 @@ export default class NewClass extends cc.Component {
 
         let tDate = this.boxsLa[0].string + this.boxsLa[1].string + this.boxsLa[2].string;
 
-        let ts = ComUtils.getTimestamp(tDate);
-
-        let curDate = new Date(ts * 1000);
-        let hour = curDate.getHours();
-
         let from, to, code;
-        let time = curDate.getTime() - (hour) * 60 * 60 * 1000;
-        from = parseInt(new Date(time).getTime() / 1000 + '');
-        to = parseInt(new Date(time + 23 * 60 * 60 * 1000).getTime() / 1000 + '');
+
+        if (this.boxsLa[0].string == '随机') {
+            let day = parseInt(Math.random() * 14 + '');
+            from = parseInt((new Date().getTime() - (day * 24) * 60 * 60 * 1000) / 1000 + '');
+        }
+        else {
+            let ts = ComUtils.getTimestamp(tDate);
+
+            let curDate = new Date(ts * 1000);
+            let hour = curDate.getHours();
+            let time = curDate.getTime() - (hour) * 60 * 60 * 1000;
+            from = parseInt(new Date(time).getTime() / 1000 + '');
+        }
 
         let items1;
         if (this.editbox.string == '随机选股') {
@@ -360,11 +373,18 @@ export default class NewClass extends cc.Component {
         let info1 = {
             ktype: ktype,
             code: code,
-            to: to,
             from: from,
+            total: 240,
         }
 
         socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
+
+            if (info.items.length <= 0) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '行情为空');
+                return;
+            }
+
+
             GameCfg.GameSet = GameData.FSSet;
             console.log('分数据：' + JSON.stringify(info));
             GameData.huizhidatas = 1;

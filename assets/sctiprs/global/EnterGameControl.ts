@@ -98,6 +98,7 @@ export default class EnterGameControl {
                 data.status = 1;
             }
             else {
+
                 curCount = adCount + curCount;
                 //还有看广告次数
 

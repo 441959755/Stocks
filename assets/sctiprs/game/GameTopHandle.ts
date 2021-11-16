@@ -69,6 +69,15 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     label5: cc.Label = null;
 
+    @property(cc.Node)
+    vipImg1: cc.Node = null;
+
+    @property(cc.Node)
+    vipImg2: cc.Node = null;
+
+    @property(cc.Node)
+    vipImg3: cc.Node = null;
+
     protected onLoad() {
         //跟新盈利率
         GlobalEvent.on(EventCfg.UPDATERATE, this.UpdateRate.bind(this), this);
@@ -81,7 +90,6 @@ export default class NewClass extends cc.Component {
 
         //pk复盘
         GlobalEvent.on(EventCfg.CUTGAMEFUPAN, this.onShowPKFUPAN.bind(this), this);
-
     }
 
     UpdateOtherRate(rate) {
@@ -205,6 +213,13 @@ export default class NewClass extends cc.Component {
             if (status == 1) {
                 head.spriteFrame = GameData.headImg;
                 name.string = '昵称：' + GameData.userName;
+
+                if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+                    this.vipImg3.active = true;
+                }
+                else {
+                    this.vipImg3.active = false;
+                }
             }
             else {
                 if (GameData.Players[1].icon) {
@@ -212,9 +227,17 @@ export default class NewClass extends cc.Component {
                 }
                 if (GameData.Players[1].uid || GameData.Players[1].nickname) {
                     name.string = '昵称：' + (GameData.Players[1].nickname || GameData.Players[1].nick);
+
+                    if (GameData.Players[1].properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+                        this.vipImg3.active = true;
+                    }
+                    else {
+                        this.vipImg3.active = false;
+                    }
                 } else {
                     name.string = '昵称：' + GameCfg.RoomGameData.players[status - 1].gd.nickname;
                 }
+
 
             }
 
@@ -276,6 +299,7 @@ export default class NewClass extends cc.Component {
     }
 
     protected onEnable() {
+
         this.pkNode.active = false;
         //z中止训练
         let colseBtn = this.rightNode.getChildByName('closeBtn');
@@ -339,6 +363,13 @@ export default class NewClass extends cc.Component {
                     this.head1.spriteFrame = GameData.headImg;
                     this.name1.string = GameData.userName;
                     this.level1.string = 'LV:' + GameData.properties[pb.GamePropertyId.Level];
+
+                    if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+                        this.vipImg1.active = true;
+                    }
+                    else {
+                        this.vipImg1.active = false;
+                    }
                 }
                 //其他人
                 {
@@ -350,6 +381,13 @@ export default class NewClass extends cc.Component {
                         this.name2.string = GameData.Players[1].nickname;
                         GameData.Players[1].properties && (this.level2.string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1));
                         // this.pkAllRateLa2.string = "****";
+
+                        if (GameData.Players[1].properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+                            this.vipImg2.active = true;
+                        }
+                        else {
+                            this.vipImg2.active = false;
+                        }
                     }
                 }
             }

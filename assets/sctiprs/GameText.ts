@@ -33,25 +33,7 @@ export default class GameCfgText {
     public static gameConf = null;
 
     public static LoadGameConf() {
-        // let str = ComUtils.getCurYearMonthDay();
-        // let flag = cc.sys.localStorage.getItem('LOADCONF' + str);
-        // //加载本地的
-        // if (flag) {
 
-        // }
-        // //去下载
-        // else {
-
-        // }
-        //test 测试
-        //配置文件
-        console.log('加载文件');
-
-        // LoadUtils.load(this.url + 'app.conf', (text) => {
-
-        //     this.appConf = JSON.parse(text);
-        //     console.log('app.conf 加载完成');
-        // })
         HttpUtils.loadRequest(this.url + 'app.conf', null, (text) => {
             //console.log('text' + text);
             this.appConf = JSON.parse(text);
@@ -429,6 +411,10 @@ export default class GameCfgText {
             sc = d.getTime() - 24 * 60 * 60 * 1000 * data.total;
         }
 
+        if (parseInt(start) < 20100101) {
+            start = '20100101';
+        }
+
         let year = start.slice(0, 4);
         let month = start.slice(4, 6);
         let day = start.slice(6);
@@ -511,6 +497,11 @@ export default class GameCfgText {
             sc = d.getTime() - data.total * 24 * 60 * 60 * 1000;
 
         }
+
+        if (parseInt(start) < 20100101) {
+            start = '20100101';
+        }
+
         let year = start.slice(0, 4);
         let month = start.slice(4, 6);
         let day = start.slice(6);
@@ -626,7 +617,9 @@ export default class GameCfgText {
             to: 0,           //	// 结束时间戳（0表示忽略该参数；格式同from）
             reserve: 100,
         }
+
         let items;
+
         let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
         items = GameCfgText.stockList[le].split('|');
         data.code = items[0];
@@ -650,14 +643,20 @@ export default class GameCfgText {
                 sc = d.getTime() - data.total * 24 * 60 * 60 * 1000;
             }
         }
+
+        if (parseInt(start) < 20100101) {
+            start = '20100101';
+        }
+
         let year = start.slice(0, 4);
         let month = start.slice(4, 6);
         let day = start.slice(6);
 
 
         let d = new Date(year + '-' + month + '-' + day);
-        ///console.log(d); 
+
         let t;
+
         if (GameData.ZBSet.ZLine == '周线') {
             t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 7;
         }

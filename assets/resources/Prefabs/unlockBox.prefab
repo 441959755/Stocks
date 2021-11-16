@@ -253,7 +253,7 @@
         "__id__": 43
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 48
@@ -1921,7 +1921,7 @@
         "__id__": 68
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 73
@@ -2889,6 +2889,9 @@
     },
     "addCountBtn": {
       "__id__": 38
+    },
+    "content1": {
+      "__id__": 11
     },
     "content2": {
       "__id__": 14

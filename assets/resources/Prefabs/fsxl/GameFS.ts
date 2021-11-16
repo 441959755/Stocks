@@ -57,6 +57,7 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
+        GlobalEvent.emit(EventCfg.LOADINGHIDE);
         this.fupanNode.active = false;
         this.findLayer.active = false;
         this.tipsBox.active = false;
@@ -138,6 +139,8 @@ export default class NewClass extends cc.Component {
             }
 
             this.setLabelData();
+
+            this.mrPrice = 0;
         }
 
         //买入
@@ -179,6 +182,7 @@ export default class NewClass extends cc.Component {
 
 
     getCurLv(num?) {
+        if (!this.mrPrice) { return 0 }
         if (!num) { num = 0 }
         if (this.viewData[GameCfg.huizhidatas - num]) {
             let curClose = parseFloat(this.viewData[GameCfg.huizhidatas - num].close);

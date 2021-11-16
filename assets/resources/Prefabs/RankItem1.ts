@@ -46,6 +46,7 @@ export default class NewClass extends cc.Component {
         this.fame.string = obj.fame || 0;
 
         let nodes = this.pm.node.children;
+
         nodes.forEach(el => {
             el.active = false;
         })
@@ -120,6 +121,7 @@ export default class NewClass extends cc.Component {
     }
 
     getPlayerInfo(call) {
+
         let info = {
             uid: this._info.uid,
         }
@@ -130,5 +132,6 @@ export default class NewClass extends cc.Component {
                 call && (call(res));
             }
         })
+
     }
 }

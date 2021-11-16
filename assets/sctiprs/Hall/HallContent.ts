@@ -31,6 +31,8 @@ export default class NewClass extends cc.Component {
 	@property(cc.Node)
 	girlNode: cc.Node = null;
 
+	@property(cc.Node)
+	vipImg: cc.Node = null;
 
 	protected onLoad() {
 		//回到进入游戏的界面
@@ -42,9 +44,14 @@ export default class NewClass extends cc.Component {
 		//头像更改
 		GlobalEvent.on(EventCfg.HEADIMGCHANGE, this.setUserHead.bind(this), this);
 
+		//名字更改
 		GlobalEvent.on(EventCfg.NAMECHANGE, this.setUserInfo.bind(this), this);
 
+		//等级更改
 		GlobalEvent.on(EventCfg.LEVELCHANGE, this.setUserInfo.bind(this), this);
+
+		//vip
+		GlobalEvent.on(EventCfg.VIPCHANGE, this.setUserInfo.bind(this), this);
 
 	}
 
@@ -147,6 +154,12 @@ export default class NewClass extends cc.Component {
 
 		this.setUserGender();
 
+		if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+			this.vipImg.active = true;
+		}
+		else {
+			this.vipImg.active = false;
+		}
 	}
 
 	initToggle() {

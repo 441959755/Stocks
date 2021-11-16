@@ -57,6 +57,9 @@ export default class NewClass extends cc.Component {
 
     _curType = 0;
 
+    @property(cc.Node)
+    vipNode: cc.Node = null;
+
     onLoad() {
         GlobalEvent.on(EventCfg.GOLDCHANGE, this.initPlayerInfo.bind(this), this);
         GlobalEvent.on(EventCfg.DIAMONDCHANGE, this.initPlayerInfo.bind(this), this);
@@ -64,6 +67,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.HEADIMGCHANGE, this.initPlayerInfo.bind(this), this);
         GlobalEvent.on(EventCfg.LEVELCHANGE, this.initPlayerInfo.bind(this), this);
         GlobalEvent.on(EventCfg.NAMECHANGE, this.initPlayerInfo.bind(this), this);
+        GlobalEvent.on(EventCfg.VIPCHANGE, this.initPlayerInfo.bind(this), this);
 
         this.editBox.node.on('editing-did-ended', edit => {
             let str = parseInt(edit.string);
@@ -85,6 +89,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.HEADIMGCHANGE);
         GlobalEvent.off(EventCfg.LEVELCHANGE);
         GlobalEvent.off(EventCfg.NAMECHANGE);
+        GlobalEvent.off(EventCfg.VIPCHANGE);
     }
 
     start() {
@@ -161,6 +166,14 @@ export default class NewClass extends cc.Component {
         this.infoLabels[3].string = '钻石：' + GameData.properties[pb.GamePropertyId.Diamond];
         this.infoLabels[5].string = '奖券：' + GameData.properties[pb.GamePropertyId.Coupon];
         this.headImg.spriteFrame = GameData.headImg;
+
+        if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+            this.vipNode.active = true;
+        }
+        else {
+            this.vipNode.active = false;
+        }
+
     }
 
 

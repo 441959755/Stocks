@@ -19,7 +19,7 @@ export default class NewClass extends cc.Component {
 
 
     start() {
-        if (GameData.properties[pb.GamePropertyId.Vip]) {
+        if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
             ComUtils.getVIPDisTime(this.getVIPDisTime.bind(this));
         }
         else {

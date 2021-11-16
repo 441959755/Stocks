@@ -102,9 +102,12 @@ export default class NewClass extends cc.Component {
         this.waitCodeTime.string = ComUtils.formatTime(kFrom) + '--' + ComUtils.formatTime(kTo);
     }
 
-    onDestroy() {
+    onDisable() {
         this.cb1 && (clearInterval(this.cb1));
         this.cb1 = null;
+    }
+
+    onDestroy() {
         GlobalEvent.off(EventCfg.CUTGAMEFUPAN);
         GlobalEvent.off(EventCfg.GAMEFUPAN);
         GlobalEvent.off(EventCfg.RAISINGLIMIT);
@@ -159,7 +162,8 @@ export default class NewClass extends cc.Component {
 
                 let timeLabel = pkNode.getChildByName('timeLabel').getComponent(cc.Label);
                 timeLabel.node.active = true;
-
+                timeLabel.string = '';
+                this.waitTime.string = '';
                 if (GameCfg.data[0].tsGameFrom && GameCfg.data[0].tsGameCur) {
                     let num = GameCfg.data[0].tsGameCur - GameCfg.data[0].tsGameFrom;
                     let curTimes = parseInt(new Date().getTime() / 1000 + '');

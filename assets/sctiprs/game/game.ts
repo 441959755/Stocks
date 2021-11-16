@@ -68,8 +68,6 @@ export default class NewClass extends cc.Component {
     protected onDestroy() {
         GlobalEvent.off(EventCfg.OPENSTATLAYER);
         GlobalEvent.off(EventCfg.UPDATEOTHERPLAYEROPT);
-        GameCfg.GAMEFUPAN = false;
-        GameCfg.GAMEWAIT = false;
     }
 
     setColor() {
@@ -274,6 +272,7 @@ export default class NewClass extends cc.Component {
             GameCfg.VOLGraph = GameCfg.GameSet.VOL;
         }
     }
+
 
     //同步游戏操作
     updateOtherPlayerOpt(opt) {
