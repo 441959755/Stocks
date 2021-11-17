@@ -71,6 +71,7 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(EventCfg.OPENREWARDCENTERLAYER, this.openRewardCenterLayer.bind(this), this);
 
+
 		//打开公告
 		GlobalEvent.on('OPENNOTICELAYER', this.openNoticelayer.bind(this), this);
 
@@ -461,15 +462,13 @@ export default class NewClass extends cc.Component {
 	//游戏结束
 	GameOver(message) {
 
-
 		if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 
 			if (message) {
 				let handle = this.finalLayer[this.index].getComponent('PKFinalHandle');
 				handle.onShow();
-
-				this.finalLayer[this.index].active = true;
 			}
+			this.finalLayer[this.index].active = true;
 		}
 		else {
 			setTimeout(() => {

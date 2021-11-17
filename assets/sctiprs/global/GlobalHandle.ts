@@ -87,6 +87,7 @@ export default class GlobalHandle {
                 GameCfg.GAMEFUPAN = false;
 
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
                 return;
             }
 
@@ -115,8 +116,9 @@ export default class GlobalHandle {
                 if (GameCfg.data[0].circulate == 0) {
                     data.Rate = 1;
                 }
+
                 GameCfg.data[0].data.push(data);
-                //   }
+
             });
 
 

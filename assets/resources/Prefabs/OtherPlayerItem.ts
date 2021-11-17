@@ -129,6 +129,8 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         if (name == 'cgs_fupan') {
 
+            GameData.Players[1] = this.playeInfo;
+
             GameCfg.GameSet = GameData.JJPKSet;
 
             let ts = this.itemData.ts;
@@ -182,7 +184,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'btn_tz') {
-
+            GameData.Players[1] = this.playeInfo;
             GameCfg.JJ_XUNLIAN = true;
 
             GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
@@ -212,11 +214,13 @@ export default class NewClass extends cc.Component {
             GlobalHandle.GetGameOperations(info, () => {
 
                 GameCfg.RoomGameData = {
-                    players: [{ gd: {} }, {
-                        gd: this.playeInfo || GameData.Players[1],
-                        ops: { items: UpGameOpt.player1Opt },
-                        result: this.itemData
-                    }],
+                    players: [
+                        { gd: {} },
+                        {
+                            gd: this.playeInfo || GameData.Players[1],
+                            ops: { items: UpGameOpt.player1Opt },
+                            result: this.itemData
+                        }],
                 }
 
                 this.onGamenterStart();

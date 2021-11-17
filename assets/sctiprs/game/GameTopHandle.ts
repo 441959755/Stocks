@@ -228,12 +228,12 @@ export default class NewClass extends cc.Component {
                 if (GameData.Players[1].uid || GameData.Players[1].nickname) {
                     name.string = '昵称：' + (GameData.Players[1].nickname || GameData.Players[1].nick);
 
-                    if (GameData.Players[1].properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
-                        this.vipImg3.active = true;
-                    }
-                    else {
-                        this.vipImg3.active = false;
-                    }
+                    // if (GameData.Players[1].properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+                    //     this.vipImg3.active = true;
+                    // }
+                    // else {
+                    this.vipImg3.active = false;
+                    //   }
                 } else {
                     name.string = '昵称：' + GameCfg.RoomGameData.players[status - 1].gd.nickname;
                 }
@@ -382,12 +382,12 @@ export default class NewClass extends cc.Component {
                         GameData.Players[1].properties && (this.level2.string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1));
                         // this.pkAllRateLa2.string = "****";
 
-                        if (GameData.Players[1].properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
-                            this.vipImg2.active = true;
-                        }
-                        else {
-                            this.vipImg2.active = false;
-                        }
+                        // if (GameData.Players[1].properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+                        //     this.vipImg2.active = true;
+                        // }
+                        // else {
+                        this.vipImg2.active = false;
+                        //   }
                     }
                 }
             }

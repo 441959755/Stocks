@@ -116,8 +116,8 @@ export default class NewClass extends cc.Component {
                 this.boxs[2].active = true;
 
                 this.boxs[0].children[1].getComponent(cc.Label).string = GameData.SmxlState.gold;
-                this.boxs[1].children[1].getComponent(cc.Label).string = (GameCfg.finalfund - GameCfg.ziChan) + ''
-                this.boxs[2].children[1].getComponent(cc.Label).string = GameCfg.finalfund + '';
+                this.boxs[1].children[1].getComponent(cc.Label).string = parseInt((GameCfg.finalfund - GameCfg.ziChan) + '') + ''
+                this.boxs[2].children[1].getComponent(cc.Label).string = parseInt(GameCfg.finalfund + '') + '';
             }
             else {
                 this.boxs[0].active = false;

@@ -34,6 +34,11 @@ export default class GameCfgText {
 
     public static LoadGameConf() {
 
+        if (this.appConf && this.gameConf && this.adConf && this.stockList && this.qihuoList) {
+            GlobalEvent.emit('OPENADHIDE');
+            return
+        }
+
         HttpUtils.loadRequest(this.url + 'app.conf', null, (text) => {
             //console.log('text' + text);
             this.appConf = JSON.parse(text);
@@ -65,6 +70,7 @@ export default class GameCfgText {
         HttpUtils.loadRequest(this.url + 'ad.conf', null, (text) => {
             this.adConf = JSON.parse(text);
             console.log('ad.conf 加载完成');
+            GlobalEvent.emit('OPENADSHOW');
         })
 
         // //属性文件

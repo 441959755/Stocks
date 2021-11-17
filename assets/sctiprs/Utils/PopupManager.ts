@@ -18,6 +18,8 @@ export default class PopupManager {
 
     private static vipExplain: cc.Node = null;
 
+    private static exitBox: cc.Node = null;
+
     private static isLoading = false;
 
     public static init() {
@@ -30,6 +32,18 @@ export default class PopupManager {
         GlobalEvent.on(EventCfg.OPENOTHERPLAYERINFO, this.openOtherPlayerInfoLayer.bind(this), this);
 
         GlobalEvent.on('openProtocol', this.openProtocol.bind(this), this);
+
+        if (cc.sys.os === cc.sys.OS_ANDROID) {
+            cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        }
+    }
+
+    public static onKeyDown(event) {
+        switch (event.keyCode) {
+            case cc.macro.KEY.back://而非cc.KEY.back:
+                this.openNode(cc.find('Canvas'), this.exitBox, 'Prefabs/exitBox', 100, null);
+                break;
+        }
     }
 
     public static openProtocol(str, url) {
@@ -170,6 +184,8 @@ export default class PopupManager {
         LoadUtils.releaseRes('Prefabs/otherPlayerInfo');
         GlobalEvent.off('openProtocol');
         LoadUtils.releaseRes('Prefabs/playeInfo/protocol');
+        LoadUtils.releaseRes('Prefabs/exitBox');
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     }
 
 

@@ -51,9 +51,11 @@ export default class NewClass extends cc.Component {
 
             if (arr[1] == 'PK大战') {
                 if (EnterGameControl.onCurPKEnterGame()) {
+                    this.node.active = false;
                     GameCfg.GameType = pb.GameType.JJ_PK;
                     GameCfg.GameSet = GameData.JJPKSet;
                     GlobalEvent.emit(EventCfg.OPENMATCHPK);
+
                 }
                 else {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
@@ -61,9 +63,11 @@ export default class NewClass extends cc.Component {
             }
             else {
                 if (EnterGameControl.onCurPKEnterGame()) {
+                    this.node.active = false;
                     GameCfg.GameType = pb.GameType.JJ_DuoKong;
                     GameCfg.GameSet = GameData.JJPKSet;
                     GlobalEvent.emit(EventCfg.OPENMATCHPK);
+
                 }
                 else {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');

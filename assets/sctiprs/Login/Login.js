@@ -45,8 +45,6 @@ cc.Class({
 
 		PopupManager.init();
 
-		GameCfgText.LoadGameConf();
-
 		LLLog.reConsole();
 
 		cc.macro.ENABLE_MULTI_TOUCH = false;
@@ -72,6 +70,7 @@ cc.Class({
 	},
 
 	start() {
+		GameCfgText.LoadGameConf();
 		this.initData();
 	},
 

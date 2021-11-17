@@ -86,7 +86,7 @@ export default class NewClass extends cc.Component {
 
         this.codeTimeLabel.string = '训练时段：' + ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
 
-        GameCfg.allRate = (GameCfg.allRate * 100);
+        //   GameCfg.allRate = (GameCfg.allRate * 100);
 
         let rate = ComUtils.changeTwoDecimal((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100)
 
@@ -124,11 +124,11 @@ export default class NewClass extends cc.Component {
             //     loseSp.active = true;
             // }
             // else
-            if (GameCfg.allRate <= GameCfg.RoomGameData.players[1].result.userProfitRate) {
+            if (GameCfg.allRate * 100 <= GameCfg.RoomGameData.players[1].result.userProfitRate) {
                 this.selfRank = 2;
                 loseSp.active = true;
             }
-            else if (GameCfg.allRate > GameCfg.RoomGameData.players[1].result.userProfitRate) {
+            else if (GameCfg.allRate * 100 > GameCfg.RoomGameData.players[1].result.userProfitRate) {
                 this.selfRank = 1;
                 winSp.active = true;
             }
@@ -187,7 +187,7 @@ export default class NewClass extends cc.Component {
             kFrom: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
             kTo: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
             stockProfitRate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100),
-            userProfitRate: (GameCfg.allRate),
+            userProfitRate: (GameCfg.allRate * 100),
             ts: parseInt(new Date().getTime() / 1000 + ''),
             rank: this.selfRank,
             refId: 0,
@@ -217,7 +217,7 @@ export default class NewClass extends cc.Component {
             this.selfResultLabel[2].string = '+' + stages.Win[2].v;
             this.selfResultLabel[3].string = '+' + 1;
             this.selfResultLabel[4].string = "+" + 0;
-            this.selfResultLabel[5].string = ComUtils.changeTwoDecimal(GameCfg.allRate) + '%';
+            this.selfResultLabel[5].string = ComUtils.changeTwoDecimal(GameCfg.allRate * 100) + '%';
 
             this.selfResultLabel[2].node.color = new cc.Color().fromHEX('#e94343');
             this.selfResultLabel[3].node.color = new cc.Color().fromHEX('#e94343');
@@ -240,7 +240,7 @@ export default class NewClass extends cc.Component {
             this.selfResultLabel[2].string = '' + stages.Lose[2].v;
             this.selfResultLabel[3].string = '-' + 1;
             this.selfResultLabel[4].string = "-" + 1;
-            this.selfResultLabel[5].string = ComUtils.changeTwoDecimal(GameCfg.allRate) + '%';
+            this.selfResultLabel[5].string = ComUtils.changeTwoDecimal(GameCfg.allRate * 100) + '%';
 
             this.otherResultLabel[0].string = '+' + stages.Win[0].v;
             this.otherResultLabel[1].string = '+' + stages.Win[1].v;
@@ -271,7 +271,7 @@ export default class NewClass extends cc.Component {
             this.otherResultLabel[5].node.color = new cc.Color().fromHEX('#31a633');
         }
 
-        GameCfg.RoomGameData.players[0].result.userProfitRate = GameCfg.allRate;
+        GameCfg.RoomGameData.players[0].result.userProfitRate = GameCfg.allRate * 100;
         GameCfg.RoomGameData.players[0].result.rank = this.selfRank;
     }
 

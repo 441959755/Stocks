@@ -25,7 +25,6 @@ export default class NewClass extends cc.Component {
 
                 GameData.playersInfo[info.uid + ''] = info;
 
-                //  this.loadHeadImg(info);
                 let userNode = this.node.getChildByName('userinfobg');
                 let username = userNode.getChildByName('username').getComponent(cc.Label);
                 let userlv = userNode.getChildByName('userLv').getComponent(cc.Label);
@@ -137,8 +136,8 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'ckzjBtn') {
-            this.el.icon = GameData.imgs[this.el.icon + ''];
-            GlobalEvent.emit(EventCfg.OPENOTHERPLAYERHISLAYER, this.el);
+            GameData.playersInfo[this.el.uid + ''].icon = GameData.imgs[this.el.icon + ''];
+            GlobalEvent.emit(EventCfg.OPENOTHERPLAYERHISLAYER, GameData.playersInfo[this.el.uid + '']);
             // PopupManager.loadOtherPlayerHisInfo('otherPlayerHisInfo', this.el);
         }
         else if (name == 'userinfobg') {

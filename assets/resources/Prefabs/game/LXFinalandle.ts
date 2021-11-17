@@ -1,4 +1,5 @@
 
+import { pb } from "../../../protos/proto";
 import DrawData from "../../../sctiprs/game/DrawData";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import StrategyAIData from "../../../sctiprs/game/StrategyAIData";
@@ -38,7 +39,15 @@ export default class NewClass extends cc.Component {
 
     selfRank = 0;
 
+    @property(cc.Node)
+    vipImg: cc.Node = null;
+
+    @property(cc.Node)
+    vipImg1: cc.Node = null;
+
+
     onShow() {
+
         if (GameCfg.GAMEFUPAN) {
             return;
         }
@@ -46,6 +55,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.CLEARINTERVAL);
 
         let gpData = GameCfg.data[0].data;
+
         let code = GameCfg.data[0].code;
 
         if (code.length >= 7) {
@@ -56,8 +66,7 @@ export default class NewClass extends cc.Component {
 
         this.codeTimeLabel.string = '训练时段：' + ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
 
-        GameCfg.allRate = (GameCfg.allRate * 100);
-        GameCfg.RoomGameData.players[0].result = { userProfitRate: GameCfg.allRate };
+        GameCfg.RoomGameData.players[0].result = { userProfitRate: GameCfg.allRate * 100 };
 
         let rate = ComUtils.changeTwoDecimal((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100)
 
@@ -73,25 +82,36 @@ export default class NewClass extends cc.Component {
             let userName = this.player1.getChildByName('username').getComponent(cc.Label);
 
             let userHead = this.player1.getChildByName('userHead').getComponent(cc.Sprite);
+
             let winSp = this.player1.getChildByName('jj_js_win');
+
             let loseSp = this.player1.getChildByName('jj_js_lose');
 
             userName.string = GameData.userName;
 
             userHead.spriteFrame = GameData.headImg;
+            loseSp.active = false;
+            winSp.active = false;
 
             if (GameCfg.allRate == 0 && UpGameOpt.arrOpt.length == 0) {
                 this.selfRank = 2;
                 //  xj.active = true;
                 loseSp.active = true;
             }
-            else if (GameCfg.allRate < GameCfg.RoomGameData.players[1].result.userProfitRate) {
+            else if (GameCfg.allRate * 100 < GameCfg.RoomGameData.players[1].result.userProfitRate) {
                 this.selfRank = 2;
                 loseSp.active = true;
             }
-            else if (GameCfg.allRate > GameCfg.RoomGameData.players[1].result.userProfitRate) {
+            else if (GameCfg.allRate * 100 > GameCfg.RoomGameData.players[1].result.userProfitRate) {
                 this.selfRank = 1;
                 winSp.active = true;
+            }
+
+            if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+                this.vipImg.active = true;
+            }
+            else {
+                this.vipImg.active = false;
             }
         }
 
@@ -101,7 +121,8 @@ export default class NewClass extends cc.Component {
             let userHead = this.player2.getChildByName('userHead').getComponent(cc.Sprite);
             let winSp = this.player2.getChildByName('jj_js_win');
             let loseSp = this.player2.getChildByName('jj_js_lose');
-
+            loseSp.active = false;
+            winSp.active = false;
             if (GameData.Players[1].nickname || GameData.Players[1].nick) {
                 userName.string = GameData.Players[1].nickname || GameData.Players[1].nick;
             }
@@ -118,6 +139,13 @@ export default class NewClass extends cc.Component {
 
                 winSp.active = true;
             }
+
+            // if (GameData.Players[1].properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+            //     this.vipImg1.active = true;
+            // }
+            // else {
+            this.vipImg1.active = false;
+            //}
         }
 
         this.onShowResult();
@@ -128,7 +156,7 @@ export default class NewClass extends cc.Component {
         let info = DrawData.getBukoCount();
         this.selfResultLabel[0].string = info.yCount + '次';
         this.selfResultLabel[1].string = info.sCount + '次';
-        this.selfResultLabel[2].string = ComUtils.changeTwoDecimal(GameCfg.allRate) + '%';
+        this.selfResultLabel[2].string = ComUtils.changeTwoDecimal(GameCfg.allRate * 100) + '%';
 
         if (info.sCount > 0) {
             this.selfResultLabel[1].node.color = new cc.Color().fromHEX('#31a633');
