@@ -102,10 +102,7 @@ export default class NewClass extends cc.Component {
         this.waitCodeTime.string = ComUtils.formatTime(kFrom) + '--' + ComUtils.formatTime(kTo);
     }
 
-    onDisable() {
-        this.cb1 && (clearInterval(this.cb1));
-        this.cb1 = null;
-    }
+
 
     onDestroy() {
         GlobalEvent.off(EventCfg.CUTGAMEFUPAN);
@@ -348,6 +345,23 @@ export default class NewClass extends cc.Component {
 
     }
 
+    onDisable() {
+        this.cb1 && (clearInterval(this.cb1));
+        this.cb1 = null;
+        this.gwBtn.node.active = true;
+        this.cyBtn.node.active = false;
+        this.mzStatusNode[0].active = true;
+        this.mzStatusNode[0].children[0].active = false;
+        this.mzStatusNode[1].active = false;
+        this.mzStatusNode[2].active = false;
+        this.mzStatusNode[2].children[0].active = false;
+        this.mdStatusNode[0].active = true;
+        this.mdStatusNode[0].children[0].active = false;
+        this.mdStatusNode[1].active = false;
+        this.mdStatusNode[2].active = false;
+        this.mdStatusNode[2].children[0].active = false;
+
+    }
 
 
 

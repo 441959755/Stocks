@@ -562,7 +562,6 @@ export default class NewClass extends cc.Component {
                 data.code = items[0];
             }
 
-
         } else {
             let arrStr = GameData.ZBSet.search.split(' ');
             items = GameCfgText.getGPItemInfo(arrStr[0]);

@@ -438,18 +438,16 @@ export default class NewClass extends cc.Component {
     onDisable() {
         this.qhxl_zhuan.active = false;
         this.qhxl_kui.active = false;
-    }
-
-    onDestroy() {
         GameCfg.allRate = 0;
         GameCfg.finalfund = 0;
-        GameCfg.GAMEFUPAN = false;
+        //  GameCfg.GAMEFUPAN = false;
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
         GameCfg.RoomGameData = null;
     }
 
     gotoGame() {
+
         if (GameData.properties[pb.GamePropertyId.Gold] < 500) {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
             return false;

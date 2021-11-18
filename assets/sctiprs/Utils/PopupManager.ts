@@ -33,9 +33,9 @@ export default class PopupManager {
 
         GlobalEvent.on('openProtocol', this.openProtocol.bind(this), this);
 
-        if (cc.sys.os === cc.sys.OS_ANDROID) {
-            cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-        }
+        // if (cc.sys.os === cc.sys.OS_ANDROID) {
+        //     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        // }
     }
 
     public static onKeyDown(event) {
@@ -63,7 +63,6 @@ export default class PopupManager {
                 this.protocol.getComponent('Protocol').onShow(str, url);
             })
         }
-
     }
 
     public static openOtherPlayerInfoLayer(info) {
@@ -185,7 +184,7 @@ export default class PopupManager {
         GlobalEvent.off('openProtocol');
         LoadUtils.releaseRes('Prefabs/playeInfo/protocol');
         LoadUtils.releaseRes('Prefabs/exitBox');
-        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        // cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     }
 
 

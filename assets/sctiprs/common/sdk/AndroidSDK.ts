@@ -377,7 +377,7 @@ export default class AndroidSDK {
                 GameData.headimgurl = tex;
                 GameData.headImg = sp;
                 this.loginServer(this.access_token);
-            }, null);
+            }, true);
         }, 1000);
     }
 
@@ -457,7 +457,7 @@ export default class AndroidSDK {
                         GameData.headimgurl = tex;
                         GameData.headImg = sp;
                         this.loginServer(obj.access_token);
-                    }, null);
+                    }, true);
 
                 })
             }

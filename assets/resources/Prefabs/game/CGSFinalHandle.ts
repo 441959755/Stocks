@@ -60,11 +60,11 @@ export default class NewClass extends cc.Component {
 
 
     onShow() {
-        this.flag = true;
 
-        if (GameCfg.GAMEFUPAN) {
+        if (GameCfg.GAMEFUPAN || this.flag) {
             return;
         }
+        this.flag = true;
 
         GlobalEvent.emit(EventCfg.CLEARINTERVAL);
 
@@ -84,7 +84,7 @@ export default class NewClass extends cc.Component {
 
         this.codeLabel.string = '股票名称：' + GameCfg.data[0].name + '    ' + code;
 
-        this.codeTimeLabel.string = '训练时段：' + ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
+        this.codeTimeLabel.string = '比赛时段：' + ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
 
         //   GameCfg.allRate = (GameCfg.allRate * 100);
 
@@ -154,7 +154,9 @@ export default class NewClass extends cc.Component {
             }
             loseSp.active = false;
             winSp.active = false;
+
             let ex;
+
             let stages = JSON.parse(GameData.CGSConfData.conf);
 
             if (this.selfRank == 1) {
@@ -312,6 +314,7 @@ export default class NewClass extends cc.Component {
             if (!this.EnterGameLayer) {
                 GlobalEvent.emit(EventCfg.LOADINGSHOW);
                 LoadUtils.loadRes('Prefabs/enterXLGame', (pre) => {
+                    this.flag = false;
                     this.EnterGameLayer = cc.instantiate(pre);
                     this.node.addChild(this.EnterGameLayer);
                     GlobalEvent.emit(EventCfg.LOADINGHIDE);
@@ -356,7 +359,7 @@ export default class NewClass extends cc.Component {
     }
 
     onQuitGame() {
-
+        this.flag = false;
         GameCfg.data[0].data = [];
         GameCfg.huizhidatas = 0;
         GameCfg.allRate = 0;

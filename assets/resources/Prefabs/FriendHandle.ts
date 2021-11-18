@@ -36,26 +36,63 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on('UPDATEFRIENDLIST', this.onShow.bind(this), this);
     }
 
+
     onDestroy() {
         GlobalEvent.off('UPDATEFRIENDLIST');
+        GlobalEvent.off('REPPLAYERINFO');
     }
 
     onEnable() {
-        this.onShow();
-    }
 
-    onShow() {
+        GlobalEvent.on('REPPLAYERINFO', (info) => {
+            GameData.playersInfo[info.uid + ''] = info;
+        }, this);
 
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         this.concernList = GameData.gameData.favorList || [];
 
+        this.concernList.forEach(el => {
+            this.loadPlayerInfo(el);
+        })
+
+        this.onShow();
+    }
+
+    loadPlayerInfo(code) {
+
+        if (GameData.playersInfo[code + '']) {
+
+        }
+        else {
+
+            let info = {
+                uid: code,
+            }
+
+            let playerInfo = pb.PlayerInfo;
+
+            let buff = playerInfo.encode(info).finish();
+
+            socket.send(pb.MessageId.Req_Hall_QueryPlayer, buff);
+        }
+
+    }
+
+    onShow() {
+        this.concernList = GameData.gameData.favorList || [];
+
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         this.toggles[0].isChecked = true;
+
         this.toggles[1].isChecked = false;
+
         this.scollNode[0].active = true;
+
         this.scollNode[1].active = false;
 
         if (this.concernList.length <= 0) {
+
             this.tipstext.active = true;
         }
         else {
@@ -70,10 +107,11 @@ export default class NewClass extends cc.Component {
 
 
     createItem(arr, scoll, item) {
-        if (arr.length <= 0) { return }
-        let UIScrollControl = scoll.getComponent('UIScrollControl');
 
+        let UIScrollControl = scoll.getComponent('UIScrollControl');
         UIScrollControl.clear();
+
+        if (arr.length <= 0) { return }
 
         UIScrollControl.initControl(item, arr.length, item.getContentSize(), 0, (node, index) => {
             let handle = node.getComponent('FriendItem');

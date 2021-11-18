@@ -141,6 +141,7 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
 
         if (name == 'closeBtn') {
+            GlobalEvent.emit(EventCfg.LEAVEGAME);
             this.node.parent.parent.active = false;
         }
 
@@ -162,7 +163,7 @@ export default class NewClass extends cc.Component {
             //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
             //     return;
             // }
-
+            GlobalEvent.emit(EventCfg.LEAVEGAME);
             GameCfg.GAMEFUPAN = false;
             this.node.active = false;
             this.node.parent.parent.active = false;

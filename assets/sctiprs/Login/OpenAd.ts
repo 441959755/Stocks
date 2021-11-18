@@ -19,6 +19,8 @@ export default class NewClass extends cc.Component {
 
     id = 0;
 
+    version = 0;
+
     onLoad() {
         GlobalEvent.on('OPENADSHOW', this.initAD.bind(this), this);
         GlobalEvent.on('OPENADHIDE', () => {
@@ -28,6 +30,13 @@ export default class NewClass extends cc.Component {
 
     initAD() {
         this.id = GameCfgText.adConf.launch[0].id;
+        let version = cc.sys.localStorage.getItem('LAUNCHAD');
+        if (!version) {
+            cc.sys.localStorage.setItem('LAUNCHAD', GameCfgText.adConf.launch[0].version);
+            version = GameCfgText.adConf.launch[0].version;
+        }
+        this.version = version;
+
         LoadImg.downloadRemoteImageAndSave(GameCfgText.adConf.launch[0].img, (flag, sp) => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             this.img.spriteFrame = sp;
@@ -46,11 +55,15 @@ export default class NewClass extends cc.Component {
 
             }, 1000);
 
-        }, null)
+        }, this.version == GameCfgText.adConf.launch[0].version)
     }
 
     start() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
+        if (!window.jsb) {
+            this.node.active = false;
+        }
     }
 
 

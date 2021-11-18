@@ -10,12 +10,20 @@ export default class NewClass extends cc.Component {
     imgAd: cc.Sprite = null;
 
     id = null;
+    version = 0;
 
     start() {
+
         this.id = GameCfgText.adConf.main[0].id;
+        let version = cc.sys.localStorage.getItem('LAUNCHAD');
+        if (!version) {
+            cc.sys.localStorage.setItem('LAUNCHAD', GameCfgText.adConf.launch[0].version);
+            version = GameCfgText.adConf.launch[0].version;
+        }
+        this.version = version;
         LoadImg.downloadRemoteImageAndSave(GameCfgText.adConf.main[0].img, (flag, sp) => {
             this.imgAd.spriteFrame = sp;
-        }, null)
+        }, this.version == GameCfgText.adConf.launch[0].version)
     }
 
 

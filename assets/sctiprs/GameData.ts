@@ -160,11 +160,11 @@ export default class GameData {
     public static get SMSet() {
         return this._SMSet;
     }
+
     public static set SMSet(val) {
         this._SMSet = val;
         cc.sys.localStorage.setItem('SMSET', JSON.stringify(val));
     }
-
 
     //SMset
     private static _JJPKSet;

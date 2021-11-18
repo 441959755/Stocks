@@ -436,6 +436,7 @@ export default class NewClass extends cc.Component {
 
 	//游戏复盘操作
 	onGameFUPANOPT(opt) {
+
 		if (!opt) {
 			return;
 		}
@@ -550,6 +551,8 @@ export default class NewClass extends cc.Component {
 			state: null,
 		};
 		this.isFlag = false;
+		this.zhangting.active = false;
+		this.dieting.active = false;
 	}
 
 	onEnable() {

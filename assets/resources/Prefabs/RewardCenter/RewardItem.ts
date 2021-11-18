@@ -31,6 +31,9 @@ export default class NewClass extends cc.Component {
     diaLa: cc.Label = null;
 
     @property(cc.Label)
+    fameLa: cc.Label = null;
+
+    @property(cc.Label)
     vipLa: cc.Label = null;
 
     @property(cc.Label)
@@ -70,7 +73,11 @@ export default class NewClass extends cc.Component {
             }
             else if (el.v > 0 && el.i == pb.GamePropertyId.Fame) {
                 this.itemNodes.children[2].active = true;
-                this.vipLa.string = el.v;
+                this.fameLa.string = el.v;
+            }
+            else if (el.v > 0 && el.i == pb.GamePropertyId.Vip) {
+                this.itemNodes.children[5].active = true;
+                this.vipLa.string = el.v + '天';
             }
 
         });

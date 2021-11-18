@@ -88,6 +88,10 @@ export default class NewClass extends cc.Component {
         this.MaDates[3].string = data.MA4Date;
         this.MaDates[4].string = data.MA5Date;
         this.MaDates[5].string = data.MA6Date;
+
+        this.soundToggle[0].isChecked = data.isSound;
+        this.soundToggle[1].isChecked = !data.isSound;
+        // AudioUtils.setEffectsVolume(data.isSound);
     }
 
     //保存设置的数据
@@ -113,7 +117,7 @@ export default class NewClass extends cc.Component {
         GameData.SMSet.MA5Date = parseInt(this.MaDates[4].string);
         GameData.SMSet.MA6Date = parseInt(this.MaDates[5].string);
 
-        let arr = [GameData.DXSet, GameData.ZBSet, GameData.QHSet, GameData.FSSet, GameData.TJDSet, GameData.SMSet];
+        let arr = [GameData.DXSet, GameData.ZBSet, GameData.QHSet, GameData.FSSet, GameData.TJDSet, GameData.SMSet, GameData.JJPKSet];
 
         arr.forEach(el => {
             el.isShowVol = GameData.SMSet.isShowVol;
@@ -132,7 +136,7 @@ export default class NewClass extends cc.Component {
             el.MA5Date = GameData.SMSet.MA5Date;
             el.MA6Date = GameData.SMSet.MA6Date;
         })
-
+        GameData.SMSet = GameData.SMSet;
         AudioUtils.setEffectsVolume(GameData.SMSet.isSound);
         // AudioUtils.setMusicVolume(GameData.SMSet.isSound);
     }

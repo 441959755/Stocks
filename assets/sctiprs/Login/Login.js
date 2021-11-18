@@ -409,6 +409,28 @@ cc.Class({
 			}
 		}
 
+		let arr = [GameData.DXSet, GameData.ZBSet, GameData.QHSet, GameData.FSSet, GameData.TJDSet, GameData.SMSet, GameData.JJPKSet];
+
+		arr.forEach(el => {
+			el.isShowVol = GameData.SMSet.isShowVol;
+			el.isBW = GameData.SMSet.isBW;
+			el.isSound = GameData.SMSet.isSound;
+			el.isMA1 = GameData.SMSet.isMA1;
+			el.isMA2 = GameData.SMSet.isMA2;
+			el.isMA3 = GameData.SMSet.isMA3;
+			el.isMA4 = GameData.SMSet.isMA4;
+			el.isMA5 = GameData.SMSet.isMA5;
+			el.isMA6 = GameData.SMSet.isMA6;
+			el.MA1Date = GameData.SMSet.MA1Date;
+			el.MA2Date = GameData.SMSet.MA2Date;
+			el.MA3Date = GameData.SMSet.MA3Date;
+			el.MA4Date = GameData.SMSet.MA4Date;
+			el.MA5Date = GameData.SMSet.MA5Date;
+			el.MA6Date = GameData.SMSet.MA6Date;
+		})
+
+		AudioUtils.setEffectsVolume(GameData.SMSet.isSound);
+
 	},
 
 	//停服通知

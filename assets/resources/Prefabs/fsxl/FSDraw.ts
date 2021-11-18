@@ -1,3 +1,4 @@
+import { pb } from "../../../protos/proto";
 import DrawData from "../../../sctiprs/game/DrawData";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import DrawUtils from "../../../sctiprs/Utils/DrawUtils";
@@ -74,10 +75,10 @@ export default class NewClass extends cc.Component {
         this.drawVol.lineWidth = 2;
         this.initDrawBg();
         this.autoCallback = null;
-
     }
 
     drawFillColor() {
+        if (GameCfg.GameType != pb.GameType.FenShi) { return }
         GameCfg.huizhidatas += 1;
         GameCfg.beg_end[1] = GameCfg.huizhidatas;
 
@@ -183,7 +184,6 @@ export default class NewClass extends cc.Component {
             this.prePointX = x;
             this.prePointY = y;
         }
-
     }
 
     //画线
@@ -225,8 +225,8 @@ export default class NewClass extends cc.Component {
         }
 
         this.drawVol.lineWidth = width;
-        DrawUtils.drawLine(this.drawVol, x, 0, x, y);
 
+        DrawUtils.drawLine(this.drawVol, x, 0, x, y);
 
         let startX = (some * GameCfg.hz_width);
         let endX = ((some + 1) * GameCfg.hz_width);
@@ -250,7 +250,6 @@ export default class NewClass extends cc.Component {
                 DrawUtils.drawLine(this.drawPCM, preX, preY, VOlPointX, VOlPointY);
             }
         }
-
     }
 
     onDestroy() {

@@ -13,13 +13,20 @@ export default class NewClass extends cc.Component {
 
     id = null;
 
+    version = 0;
 
     start() {
         this.id = GameCfgText.adConf.exit[0].id;
+        let version = cc.sys.localStorage.getItem('LAUNCHAD');
+        if (!version) {
+            cc.sys.localStorage.setItem('LAUNCHAD', GameCfgText.adConf.launch[0].version);
+            version = GameCfgText.adConf.launch[0].version;
+        }
+        this.version = version;
         LoadImg.downloadRemoteImageAndSave(GameCfgText.adConf.exit[0].img, (flag, sp) => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             this.img.spriteFrame = sp;
-        }, null)
+        }, this.version == GameCfgText.adConf.launch[0].versionl)
     }
 
     onBtnClick(event, curdata) {

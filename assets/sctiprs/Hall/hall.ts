@@ -8,6 +8,7 @@ import GameData from '../GameData';
 import LoadUtils from '../Utils/LoadUtils';
 import PopupManager from '../Utils/PopupManager';
 import UpGameOpt from '../global/UpGameOpt';
+import ComUtils from '../Utils/ComUtils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -137,7 +138,7 @@ export default class NewClass extends cc.Component {
 		LoadUtils.releaseRes('Prefabs/sysBroadcast');
 		LoadUtils.releaseRes('Prefabs/shop/shop');
 		LoadUtils.releaseRes(this.url);
-
+		ComUtils.onDestory();
 		PopupManager.delPopupNode();
 		GameData.selfEnterRoomData = null;
 	}
@@ -320,7 +321,7 @@ export default class NewClass extends cc.Component {
 
 		let arr = data.text.split(',');
 
-		if (data.type == pb.MessageType.RoomInvite) {
+		if (data.type == pb.MessageType.RoomInvite && !GameCfg.GameType) {
 
 			if (arr[3] != 0) {
 				if (!this.broadcast) {
@@ -383,6 +384,7 @@ export default class NewClass extends cc.Component {
 	onLoadFinalLayer() {
 
 		GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
 		if (GameCfg.GameType == pb.GameType.ShuangMang ||
 			GameCfg.GameType == pb.GameType.ZhiBiao ||
 			GameCfg.GameType == pb.GameType.DingXiang ||
@@ -420,7 +422,6 @@ export default class NewClass extends cc.Component {
 		})
 	}
 
-
 	//离开游戏
 	leaveGame() {
 		GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
@@ -439,12 +440,18 @@ export default class NewClass extends cc.Component {
 
 		GameCfg.allRate = 0;
 
+		GameCfg.beg_end[0] = 0;
+		GameCfg.beg_end[1] = 0;
+
 		GameCfg.blockHistoy = [];
 
 		GameCfg.finalfund = 0;
 
 		GameCfg.GAMEFUPAN = false;
+
 		GameCfg.GAMEWAIT = false;
+
+		GameCfg.JJ_XUNLIAN = false;
 
 		StrategyAIData.onClearData();
 

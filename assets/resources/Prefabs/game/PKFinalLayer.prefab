@@ -2632,8 +2632,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "训练时段：                          ",
-    "_N$string": "训练时段：                          ",
+    "_string": "比赛时段：                          ",
+    "_N$string": "比赛时段：                          ",
     "_fontSize": 26,
     "_lineHeight": 26,
     "_enableWrapText": true,

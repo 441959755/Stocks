@@ -34,23 +34,12 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         GlobalEvent.on('REPPLAYERINFO', (info) => {
-
-            GameData.playersInfo[info.uid + ''] = info;
-
             if (info.uid == this.uid) {
-
-                console.log('玩家资料应答' + JSON.stringify(info));
-
-
                 this.init(info);
             }
-
         }, this);
     }
 
-    onDisable() {
-        GlobalEvent.off('REPPLAYERINFO');
-    }
 
     init(info) {
 
@@ -61,7 +50,6 @@ export default class NewClass extends cc.Component {
         this.userLevel.string = info.properties[pb.GamePropertyId.Level];
 
         this.userName.string = info.nick;
-
 
         this.title.string = ComUtils.getChenghaoByFame(info.properties[pb.GamePropertyId.Fame]);
 
@@ -79,41 +67,27 @@ export default class NewClass extends cc.Component {
         this.userLevel.string = '';
         this.userName.string = '';
         this.head.spriteFrame = this.defaultImg;
-        this.loadPlayerInfo(code);
-    }
-
-
-    loadPlayerInfo(code) {
 
         if (GameData.playersInfo[code + '']) {
             this.init(GameData.playersInfo[code + '']);
-            return;
         }
 
-        let info = {
-            uid: code,
-        }
-
-        let playerInfo = pb.PlayerInfo;
-        let buff = playerInfo.encode(info).finish();
-        socket.send(pb.MessageId.Req_Hall_QueryPlayer, buff);
     }
 
     //加载图片
     loadHeadImg(obj) {
         this.head.spriteFrame = this.defaultImg;
-        if (GameData.imgs[obj.icon + '']) {
-            this.head.spriteFrame = GameData.imgs[obj.icon + '']
+        if (GameData.imgs[obj.uid + '']) {
+            this.head.spriteFrame = GameData.imgs[obj.uid + '']
         }
         else {
-            ComUtils.onLoadHead(obj.icon, (texture) => {
+            ComUtils.onLoadHead(obj.uid, (texture) => {
                 if (texture) {
-                    GameData.imgs[obj.icon + ''] = new cc.SpriteFrame(texture);
-                    this.head.spriteFrame = GameData.imgs[obj.icon + '']
+                    GameData.imgs[obj.uid + ''] = new cc.SpriteFrame(texture);
+                    this.head.spriteFrame = GameData.imgs[obj.uid + '']
                 }
                 else {
-                    GameData.imgs[obj.icon + ''] = this.defaultImg;
-                    this.head.spriteFrame = this.defaultImg;
+                    GameData.imgs[obj.uid + ''] = this.defaultImg;
                 }
             })
         }

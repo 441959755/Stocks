@@ -1,3 +1,4 @@
+import { pb } from "../../../protos/proto";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -36,8 +37,10 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         GlobalEvent.on(EventCfg.GAMEFUPAN, () => {
-            this.fupanNode.active = true;
-            this.fupanNode.getComponent('FSFinal').onShow(this.alllv);
+            if (GameCfg.GameType == pb.GameType.FenShi) {
+                this.fupanNode.active = true;
+                this.fupanNode.getComponent('FSFinal').onShow(this.alllv);
+            }
         }, this);
 
         GlobalEvent.on('onClickPosUpdateLabel', (index) => {
@@ -72,16 +75,20 @@ export default class NewClass extends cc.Component {
         this.viewData = GameCfg.data[0].data;
         this.setLabelData();
 
-        if (GameCfg.GameSet.isAuto) {
+        if (GameCfg.GameSet.isAuto && !this.autoCallback) {
+
             this.autoCallback = setInterval(() => {
 
                 this.curlv = this.getCurLv();
+
                 if (GameCfg.fill[GameCfg.fill.length - 1] && !GameCfg.fill[GameCfg.fill.length - 1].end) {
                     GameCfg.fill[GameCfg.fill.length - 1].rate = this.curlv;
                 }
 
                 GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
+
                 this.setLabelData();
+
             }, GameCfg.GameSet.KSpeed * 1000);
         }
     }
@@ -172,7 +179,10 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'xl_btn_guanwang') {
             this.curlv = this.getCurLv();
-            GameCfg.fill[GameCfg.fill.length - 1].rate = this.curlv;
+            if (GameCfg.fill[GameCfg.fill.length - 1]) {
+                GameCfg.fill[GameCfg.fill.length - 1].rate = this.curlv;
+            }
+
             if (!GameCfg.GameSet.isAuto) {
                 GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
             }
@@ -191,6 +201,7 @@ export default class NewClass extends cc.Component {
     }
 
     getAllLv() {
+        if (!this.mrPrice) { return 0 }
         if (this.viewData[GameCfg.huizhidatas - 1]) {
             let curClose = parseFloat(this.viewData[GameCfg.huizhidatas - 1].close);
             let rate = (curClose - this.mrPrice) / this.mrPrice;
@@ -248,6 +259,11 @@ export default class NewClass extends cc.Component {
                 this.labdes[1].node.color = new cc.Color().fromHEX('#e94343');
             }
         }
+    }
+
+    onDisable() {
+        this.autoCallback && (clearInterval(this.autoCallback));
+        this.autoCallback = null;
     }
 
 }

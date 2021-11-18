@@ -9,6 +9,7 @@ import PlatDefine from '../common/config/PlatDefine';
 export default class ComUtils {
 
 
+	public static call = null;
 	public static VIPTimeCall = [];
 
 	//获取vip结束时间
@@ -31,20 +32,30 @@ export default class ComUtils {
 
 		call(obj);
 
-		setInterval(() => {
+		if (!this.call) {
+			this.call = setInterval(() => {
 
-			let dis = GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000;
-			let f = new Date(parseInt(dis + '') * 1000);
+				let dis = GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000;
+				let f = new Date(parseInt(dis + '') * 1000);
 
-			obj.day = f.getDate();
-			obj.hours = f.getHours();
-			obj.minute = f.getMinutes();
+				obj.day = f.getDate();
+				obj.hours = f.getHours();
+				obj.minute = f.getMinutes();
 
-			this.VIPTimeCall.forEach(el => {
-				el && (el(obj));
-			})
+				this.VIPTimeCall.forEach(el => {
+					el && (el(obj));
+				})
 
-		}, 60 * 1000);
+			}, 60 * 1000);
+		}
+
+	}
+
+	public static onDestory() {
+		this.call && (clearInterval(this.call))
+		this.call = null;
+		this.VIPTimeCall = [];
+		this.VIPTimeCall.length = 0;
 	}
 
 	public static BitmapToByte(img) {

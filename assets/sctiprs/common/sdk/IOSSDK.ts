@@ -402,7 +402,7 @@ export default class IOSSDK {
                         GameData.headimgurl = tex;
                         GameData.headImg = sp;
                         this.loginServer(obj.access_token);
-                    }, null);
+                    }, true);
 
                 })
             }

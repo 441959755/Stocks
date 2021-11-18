@@ -416,7 +416,6 @@ export default class NewClass extends cc.Component {
             GameCfg.data[0].name = items1[1];
             GameCfg.data[0].code = items1[0];
 
-
             GlobalEvent.emit(EventCfg.OPENGAMEFENSHI);
         })
 

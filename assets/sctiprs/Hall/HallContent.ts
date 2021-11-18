@@ -80,10 +80,6 @@ export default class NewClass extends cc.Component {
 			this.onBtnClick({ target: { name: 'main_jj_cgs' } }, null);
 		}
 
-		if (GameCfg.JJ_XUNLIAN) {
-			GameCfg.JJ_XUNLIAN = false;
-		}
-
 		//
 		this.upLoadUserInfo();
 

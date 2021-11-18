@@ -13,11 +13,14 @@ export default {
 
     // 下载远程图片
     downloadRemoteImageAndSave(url, callback, caller) {
+
         console.log('url' + url);
         let self = this;
         if (url == null || url == "") {
             return;
         }
+
+        if (!window.jsb) { return }
 
         let dirpath = jsb.fileUtils.getWritablePath() + 'customRes/';
 
@@ -32,7 +35,7 @@ export default {
         }
 
 
-        if (jsb.fileUtils.isFileExist(filepath)) {
+        if (jsb.fileUtils.isFileExist(filepath) && caller) {
             console.log('   // 图片存在，直接加载' + filepath);
             this.loadImage(filepath, callback, null);
             return;
