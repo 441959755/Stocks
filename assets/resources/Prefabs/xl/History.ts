@@ -31,7 +31,7 @@ export default class NewClass extends cc.Component {
     tipsNode: cc.Node = null;
 
     onEnable() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         let data = new Date();
         data.setDate(1);
         data.setHours(0);
@@ -51,17 +51,17 @@ export default class NewClass extends cc.Component {
 
         socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, (info) => {
 
-            if (this.historyInfo) {
-                if (this.historyInfo.results.length != info.results.length) {
-                    console.log('历史数据' + JSON.stringify(info));
-                    this.historyInfo = info;
-                    this.onShow();
-                }
-            }
-            else {
-                this.historyInfo = info;
-                this.onShow();
-            }
+            // if (this.historyInfo) {
+            //     if (this.historyInfo.results.length != info.results.length) {
+            console.log('历史数据' + JSON.stringify(info));
+            this.historyInfo = info;
+            this.onShow();
+            //     }
+            // }
+            // else {
+            //     this.historyInfo = info;
+            //     this.onShow();
+            // }
 
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
@@ -167,7 +167,8 @@ export default class NewClass extends cc.Component {
             let ts = parseInt(new Date().getTime() / 1000 + '')
 
             cc.sys.localStorage.setItem('CLEARTS', ts);
-
+            this.label.string = 0.00 + '%';
+            this.label.node.color = cc.Color.WHITE;
             // let str = cc.sys.localStorage.getItem('TIMETEMP');
             // let TIMETEMP, arr = [];
             // if (str) {

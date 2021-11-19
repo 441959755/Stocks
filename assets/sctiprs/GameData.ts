@@ -11,10 +11,7 @@ export default class GameData {
 
     public static zhibiaoHisSet: any = {};
 
-
     public static AISignal: any = {};
-
-
 
     //缓存账号
     private static _account = null;
@@ -282,8 +279,6 @@ export default class GameData {
     public static get ZBHistoryInfo() {
         return this._ZBHistoryInfo;
     }
-
-
 
     //双盲的次数
     /**

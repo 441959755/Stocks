@@ -149,11 +149,30 @@ export default class NewClass extends cc.Component {
                 ts: ts,
             }
 
-            GlobalHandle.GetGameOperations(info, () => {
+            GlobalHandle.GetGameOperations(info, (junXian) => {
 
                 if (GameCfg.GameType != pb.GameType.JJ_ChuangGuan) {
                     UpGameOpt.ChanagekOffset(UpGameOpt.player1Opt);
                 }
+
+                GameCfg.GameSet.isMA1 = !!junXian[0];
+                GameCfg.GameSet.MA1Date = junXian[0];
+
+                GameCfg.GameSet.isMA2 = !!junXian[1];
+                GameCfg.GameSet.MA2Date = junXian[1];
+
+                GameCfg.GameSet.isMA3 = !!junXian[2];
+                GameCfg.GameSet.MA3Date = junXian[2];
+
+                GameCfg.GameSet.isMA4 = !!junXian[3];
+                GameCfg.GameSet.MA4Date = junXian[3];
+
+                GameCfg.GameSet.isMA5 = !!junXian[4];
+                GameCfg.GameSet.MA5Date = junXian[4];
+
+                GameCfg.GameSet.isMA6 = !!junXian[5];
+                GameCfg.GameSet.MA6Date = junXian[5];
+
 
                 this.onGamenterStart();
             });
@@ -256,7 +275,7 @@ export default class NewClass extends cc.Component {
             code: data.code,
             from: this.itemData.kFrom,
             total: 256,
-            reserve: 106,
+            reserve: 0,
         }
 
         console.log('进入数据：' + JSON.stringify(cache));

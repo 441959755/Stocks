@@ -72,7 +72,6 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(EventCfg.OPENREWARDCENTERLAYER, this.openRewardCenterLayer.bind(this), this);
 
-
 		//打开公告
 		GlobalEvent.on('OPENNOTICELAYER', this.openNoticelayer.bind(this), this);
 
@@ -100,6 +99,43 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on('OPENSHOPLAYER', this.openShopLayer.bind(this), this);
 
 		GlobalEvent.on('OPENUNLOCKBOX', this.openUnlockBox.bind(this), this);
+	}
+
+	start() {
+		//断线重连 或游戏后进入房间
+		if (GameData.selfEnterRoomData) {
+
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
+			GameCfg.GameSet = GameData.JJPKSet;
+
+			GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameData.selfEnterRoomData);
+
+			GameData.roomId = GameData.selfEnterRoomData.id;
+
+			if (!GameData.RoomType) {
+
+				GameCfg.GAMEFRTD = true;
+
+				setTimeout(() => {
+					GlobalEvent.emit('LOADGAME');
+				}, 800)
+			}
+		}
+
+		//房间已解散  ,给出提示
+		if (GameData.RoomType && !GameData.roomId) {
+			GameData.RoomType = 0;
+			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+			setTimeout(() => {
+				GlobalEvent.emit(EventCfg.LOADINGHIDE);
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
+			}, 200)
+		}
+		//进入房间
+		else if (GameData.roomId) {
+			GlobalEvent.emit(EventCfg.OPENROOM);
+		}
 	}
 
 	onEnable() {
@@ -145,12 +181,10 @@ export default class NewClass extends cc.Component {
 
 	//打开解锁框
 	openUnlockBox() {
-
 		this.openNode(this.unlockBox, 'Prefabs/unlockBox', 22, (node) => {
 			this.unlockBox = node;
 			GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		});
-
 	}
 
 	//打开商城
@@ -266,43 +300,6 @@ export default class NewClass extends cc.Component {
 		}
 	}
 
-	start() {
-		//断线重连 或游戏后进入房间
-		if (GameData.selfEnterRoomData) {
-
-			GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
-			GameCfg.GameSet = GameData.JJPKSet;
-
-			GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameData.selfEnterRoomData);
-
-			GameData.roomId = GameData.selfEnterRoomData.id;
-
-			if (!GameData.RoomType) {
-
-				GameCfg.GAMEFRTD = true;
-
-				setTimeout(() => {
-					GlobalEvent.emit('LOADGAME');
-				}, 800)
-			}
-		}
-
-		//房间已解散  ,给出提示
-		if (GameData.RoomType && !GameData.roomId) {
-			GameData.RoomType = 0;
-			GlobalEvent.emit(EventCfg.LOADINGSHOW);
-			setTimeout(() => {
-				GlobalEvent.emit(EventCfg.LOADINGHIDE);
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
-			}, 200)
-		}
-		//进入房间
-		else if (GameData.roomId) {
-			GlobalEvent.emit(EventCfg.OPENROOM);
-		}
-	}
-
 	openBroadcast(data) {
 		//不包括自己
 		if (data.sender) {
@@ -345,7 +342,7 @@ export default class NewClass extends cc.Component {
 			}
 		}
 		else if (data.type == pb.MessageType.SystemNotice) {
-			GameData.SysBroadcastList.push(data);
+			GameData.SysBroadcastList.push(data.text);
 			this.openNode(this.sysBroadcast, 'Prefabs/sysBroadcast', 99, (node) => {
 				GlobalEvent.emit(EventCfg.LOADINGHIDE);
 				this.sysBroadcast = node;
@@ -354,6 +351,7 @@ export default class NewClass extends cc.Component {
 			});
 		}
 	}
+
 
 	//邀请框
 	onShowInviteBox(data) {
@@ -366,6 +364,8 @@ export default class NewClass extends cc.Component {
 			})
 		}
 		else {
+			this.InviteBox.active = true;
+
 			let headle = this.InviteBox.getComponent('InviteBox');
 			headle.onInviteShow(data);
 		}
@@ -373,6 +373,8 @@ export default class NewClass extends cc.Component {
 
 	//加载游戏进入
 	onLoadGame() {
+		this.broadcast && (this.broadcast.active = false);
+		this.InviteBox && (this.InviteBox.active = false);
 		//游戏结算
 		this.openNode(this.gameLayer, 'Prefabs/game/gameLayer', 50, (node) => {
 			this.gameLayer = node;
@@ -449,7 +451,8 @@ export default class NewClass extends cc.Component {
 
 		GameCfg.GAMEFUPAN = false;
 
-		GameCfg.GAMEWAIT = false;
+
+		false;
 
 		GameCfg.JJ_XUNLIAN = false;
 

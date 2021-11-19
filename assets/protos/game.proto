@@ -104,7 +104,7 @@ enum GamePropertyId {
 
 	Tester = 27;			// 内部测试人员
 	VipExpiration = 28;		// VIP截止日期的时间戳
-	RMB = 29;				// 充值的人民币
+	RMB = 29;				// 充值的人民币，或给玩家发红包
 
 	Max = 30;				// 最大属性
 }
@@ -121,8 +121,9 @@ enum TaskId {
 	Dk = 1;			// 多空任务
 	Zsjc = 2;		// 指数竞猜任务
 	Ggjc = 3;		// 个股竞猜任务
+	Cg = 4;			// 闯关赛任务
 
-	MaxDailyTaskId = 4;	// 日常任务最大下标（不包括最大ID，小于等于最大ID）
+	MaxDailyTaskId = 5;	// 日常任务最大下标（不包括最大ID，小于等于最大ID）
 	MaxStudyTaskId = 8;	// 学习任务最大下标（不包括最大ID，小于等于最大ID）
 }
 
@@ -307,6 +308,7 @@ message GameOperationItem {
 	double price = 6;			// 操作参数：买入或卖出价格
 	int64 volume = 7;			// 操作参数：买入或卖出量
 	int64 op_ts = 8;			// 操作参数：操作时间戳
+	double vol_fraction = 9;	// 操作参数：分仓数交易
 }
 message GameOperations {
 	repeated GameOperationItem items = 1;	// 操作集合

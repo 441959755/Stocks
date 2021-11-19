@@ -57,9 +57,11 @@ export default class NewClass extends cc.Component {
 
             this.tipsLabel.string = data.str;
             this.tipsLabel.node.parent.active = true;
+
             if (this.timeCall) {
                 clearTimeout(this.timeCall);
             }
+
             this.timeCall = setTimeout(() => {
                 this.tipsLabel.node.parent.active = false;
                 clearTimeout(this.timeCall);
@@ -909,6 +911,13 @@ export default class NewClass extends cc.Component {
         // if (!GameCfg.GAMEFUPAN && GameCfg.GameType != pb.GameType.ShuangMang) {
         //     GameCfg.notice.push([id, GameCfg.huizhidatas - 1]);
         // }
+    }
+
+
+    onDisable() {
+        this.content.removeAllChildren();
+        this.timeCall = null;
+        this._idd = 0;
     }
 
     //检测均线策略

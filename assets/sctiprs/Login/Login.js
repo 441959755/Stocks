@@ -70,8 +70,8 @@ cc.Class({
 	},
 
 	start() {
-		GameCfgText.LoadGameConf();
 		this.initData();
+		GameCfgText.LoadGameConf();
 	},
 
 	initData() {
@@ -409,6 +409,7 @@ cc.Class({
 			}
 		}
 
+
 		let arr = [GameData.DXSet, GameData.ZBSet, GameData.QHSet, GameData.FSSet, GameData.TJDSet, GameData.SMSet, GameData.JJPKSet];
 
 		arr.forEach(el => {
@@ -431,6 +432,9 @@ cc.Class({
 
 		AudioUtils.setEffectsVolume(GameData.SMSet.isSound);
 
+		GameData.headimgurl = null;
+
+		GameData.headImg = null;
 	},
 
 	//停服通知

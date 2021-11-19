@@ -32,6 +32,7 @@ export default class NewClass extends cc.Component {
 
 
     onEnable() {
+
         this.selectBox.active = false;
 
         this.leftinoty.x = -cc.winSize.width / 2 - this.leftinoty.width / 2;
@@ -50,7 +51,15 @@ export default class NewClass extends cc.Component {
             this.lZoom.node.active = false;
             this.lZoom.isChecked = false;
         }
+        else {
+            this.lZoom.node.active = true;
+            this.lZoom.isChecked = false;
+            this.lZoom.node.children[0].active = true;
+            this.leftinoty.x = -cc.winSize.width / 2 - this.leftinoty.width / 2 - 10;
+        }
+
     }
+
 
     onBtnClick(event, data) {
         let name = event.target.name;
@@ -58,12 +67,11 @@ export default class NewClass extends cc.Component {
         if (data == 'lZoomBtn') {
             if (this.lZoom.isChecked) {
                 this.lZoom.node.children[0].active = false;
-                this.leftinoty.x = -cc.winSize.width / 2 + this.leftinoty.width / 2;
+                this.leftinoty.x = -cc.winSize.width / 2 + this.leftinoty.width / 2 + 10;
 
             } else {
                 this.lZoom.node.children[0].active = true;
-                this.leftinoty.x = -cc.winSize.width / 2 - this.leftinoty.width / 2;
-
+                this.leftinoty.x = -cc.winSize.width / 2 - this.leftinoty.width / 2 - 10;
             }
             GlobalEvent.emit(EventCfg.SET_DRAW_SIZE, this.lZoom.isChecked);
         }
@@ -91,4 +99,5 @@ export default class NewClass extends cc.Component {
             this.selectBox.active = false;
         }
     }
+
 }

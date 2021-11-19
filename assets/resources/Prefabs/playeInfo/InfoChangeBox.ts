@@ -243,7 +243,7 @@ export default class NewClass extends cc.Component {
         if (flag != 3) {
             if (num > 12) {
                 // console.log(" * 长度最多为6个汉字或12个字母数字！")
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '昵称长度最多为6个汉字或12个字母数字！');
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '昵称长度最多为8个汉字或8个字母数字！');
                 return false;
             }
             else if (num < 1) {

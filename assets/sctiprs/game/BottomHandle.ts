@@ -138,7 +138,6 @@ export default class NewClass extends cc.Component {
 
 	limitUP = 0;  //0没有  1涨停  2跌停
 
-
 	onLoad() {
 
 		GlobalEvent.on(
@@ -299,6 +298,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	onClickCfBtn(percent) {
+
 		//	if (GameCfg.huizhidatas > this.gpData.length) { return }
 		if (!this.gpData[GameCfg.huizhidatas - 1]) { return }
 		//买入
@@ -331,7 +331,7 @@ export default class NewClass extends cc.Component {
 					opId: pb.GameOperationId.Ask,
 					volume: percent,
 					kOffset: GameCfg.huizhidatas,
-
+					volFraction: percent,
 				}
 				UpGameOpt.addOpt(item);
 			}
@@ -367,7 +367,7 @@ export default class NewClass extends cc.Component {
 					opId: pb.GameOperationId.Bid,
 					volume: percent,
 					kOffset: GameCfg.huizhidatas,
-
+					volFraction: percent,
 				}
 				UpGameOpt.addOpt(item);
 			}
@@ -455,11 +455,11 @@ export default class NewClass extends cc.Component {
 				GameCfg.GameType == pb.GameType.TiaoJianDan) {
 				if (el.opId == pb.GameOperationId.Ask || el.opId == 'Ask') {
 					this._type = 1;
-					this.onClickCfBtn(el.volume);
+					this.onClickCfBtn(el.volFraction || el.volume);
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: el.kOffset });
 				} else if (el.opId == pb.GameOperationId.Bid || el.opId == 'Bid') {
 					this._type = 2;
-					this.onClickCfBtn(el.volume);
+					this.onClickCfBtn(el.volFraction || el.volume);
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: el.kOffset });
 				}
 				else {
@@ -556,6 +556,8 @@ export default class NewClass extends cc.Component {
 	}
 
 	onEnable() {
+		this.zhangting.active = false;
+		this.dieting.active = false;
 		this.gpData = GameCfg.data[0].data;
 
 		if (this.gpData.length <= 0) {
@@ -804,7 +806,6 @@ export default class NewClass extends cc.Component {
 						opId: pb.GameOperationId.Bid,
 						volume: 1,
 						kOffset: GameCfg.huizhidatas,
-
 					}
 					UpGameOpt.addOpt(item);
 				}
@@ -1122,6 +1123,7 @@ export default class NewClass extends cc.Component {
 
 			this.onBuyOrSell(name);
 		}
+
 		if (!flag) {
 			this.roundNumber -= 1;
 			this.setLabelData();

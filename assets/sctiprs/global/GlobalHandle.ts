@@ -243,7 +243,7 @@ export default class GlobalHandle {
                     UpGameOpt.player1Opt = info.items;
 
                     if (cb) {
-                        cb();
+                        cb(info.junXian);
                     }
                 }
             }

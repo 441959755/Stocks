@@ -38,7 +38,6 @@ export default class NewClass extends cc.Component {
 
     flag = false;
 
-
     onHisItemRate(flag) {
         this.flag = flag;
         this.recLabel.string = '****';
@@ -118,6 +117,7 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'cgs_fupan') {
+
             GameCfg.GameSet = GameData.JJPKSet;
             GameCfg.GameSet = this.gameSet1;
             let ts = this.itemData.ts;
@@ -131,7 +131,7 @@ export default class NewClass extends cc.Component {
                 uid: GameData.userID,
                 ts: ts,
             }
-
+            GameData.Players[1] = null;
             GlobalHandle.GetGameOperations(info, () => {
 
                 if (GameCfg.GameType != pb.GameType.JJ_ChuangGuan) {
@@ -164,9 +164,11 @@ export default class NewClass extends cc.Component {
 
             this.onGamenterStart();
         }
+
     }
 
     onGamenterStart(flag?) {
+
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         let data = { code: this.itemData.quotesCode }
         let items;
@@ -189,8 +191,8 @@ export default class NewClass extends cc.Component {
             kstyle: pb.KStyle.Random,
             code: this.itemData.quotesCode,
             from: this.itemData.kFrom,
-            total: this.itemData.kStop + 1,
-            reserve: this.itemData.kStartup + 1,
+            total: 256,
+            reserve: 0,
         }
 
         GameCfg.enterGameCache = cache;

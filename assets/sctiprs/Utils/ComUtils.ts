@@ -336,20 +336,44 @@ export default class ComUtils {
 		if (smArr.isMA1 && arr.indexOf(smArr.MA1Date) == -1) {
 			arr.push(smArr.MA1Date);
 		}
+		else {
+			arr.push(0);
+		}
+
 		if (smArr.isMA2 && arr.indexOf(smArr.MA2Date) == -1) {
 			arr.push(smArr.MA2Date);
 		}
+		else {
+			arr.push(0);
+		}
+
 		if (smArr.isMA3 && arr.indexOf(smArr.MA3Date) == -1) {
 			arr.push(smArr.MA3Date);
 		}
+		else {
+			arr.push(0);
+		}
+
 		if (smArr.isMA4 && arr.indexOf(smArr.MA4Date) == -1) {
 			arr.push(smArr.MA4Date);
 		}
+		else {
+			arr.push(0);
+		}
+
 		if (smArr.isMA5 && arr.indexOf(smArr.MA5Date) == -1) {
 			arr.push(smArr.MA5Date);
 		}
+		else {
+			arr.push(0);
+		}
+
 		if (smArr.isMA6 && arr.indexOf(smArr.MA6Date) == -1) {
 			arr.push(smArr.MA6Date);
+		}
+
+		else {
+			arr.push(0);
 		}
 		arr = Array.from(new Set(arr));
 		return arr;

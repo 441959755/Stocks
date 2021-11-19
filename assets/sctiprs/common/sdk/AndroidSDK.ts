@@ -64,9 +64,8 @@ export default class AndroidSDK {
                 pwd: pw
             };
 
-            HttpMgr.getInstance().loginWeb(id, loginInfo, call, () => {
-                console.log('onLoginCodeHttpRequest err');
-                // call && call();
+            HttpMgr.getInstance().loginWeb(id, loginInfo, call, (err) => {
+                console.log('onLoginCodeHttpRequest err' + err);
             })
         }
     }
@@ -160,6 +159,7 @@ export default class AndroidSDK {
     }
 
     onWxLoginResultCallback(result, codeMsg) {
+
         console.log('微信登录，' + result + '   ' + codeMsg);
         if (result === false) {
             let msg = {
@@ -191,6 +191,7 @@ export default class AndroidSDK {
 
             this.getUserInfo(result);
         })
+
     }
 
     onWxShareResultCallback(result, msg) {
@@ -213,24 +214,30 @@ export default class AndroidSDK {
 
     // --调用java QQ登录接口
     callQqLoginToJava(call?) {
+
         this.callback = call;
+
         let RefreshToken = cc.sys.localStorage.getItem(QQRefreshToken);
 
-        // if (RefreshToken) {
+        if (RefreshToken) {
 
-        //     let access_token = JSON.parse(RefreshToken).access_token;
+            let access_token = JSON.parse(RefreshToken).access_token;
 
-        //     this.loginServer(access_token);
-        // }
-        // else {
-        this.loginPlat = pb.LoginType.QQ;
+            this.loginPlat = pb.LoginType.QQ;
 
-        console.log("js准备调用java callQqLoginToJava:")
-        var funcName = "loginInQq"
-        var sigs = "()V"
-        var ret = jsb.reflection.callStaticMethod(this.className, funcName, sigs)
-        return ret
-        //}
+            console.log(JSON.stringify(access_token));
+            this.loginServer(access_token);
+            console.log(access_token);
+        }
+        else {
+            this.loginPlat = pb.LoginType.QQ;
+
+            console.log("js准备调用java callQqLoginToJava:")
+            var funcName = "loginInQq"
+            var sigs = "()V"
+            var ret = jsb.reflection.callStaticMethod(this.className, funcName, sigs)
+            return ret
+        }
     }
 
     // 调用java qq分享接口 shareType 1分享文字   2分享截图
@@ -442,6 +449,7 @@ export default class AndroidSDK {
 
             if (url) {
                 HttpUtils.loadRequest(url, null, (result) => {
+
                     console.log('wx getUserInfo 11' + result);
 
                     result = JSON.parse(result);

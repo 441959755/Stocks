@@ -418,8 +418,8 @@ export default class NewClass extends cc.Component {
             }
 
             GlobalHandle.onCmdGameStartReq(() => {
-                GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
-                GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
+                // GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
+                GameCfg.huizhidatas = GameData.huizhidatas;
                 let gpData = GameCfg.data[0].data;
                 GameCfg.GameSet.search = GameCfg.data[0].code;
                 GameCfg.GameSet.year = gpData[GameData.huizhidatas - 1].day;

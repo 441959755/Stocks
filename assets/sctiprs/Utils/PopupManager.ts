@@ -124,7 +124,6 @@ export default class PopupManager {
         }
     }
 
-
     /**
      * 
      * @param name 
@@ -157,7 +156,9 @@ export default class PopupManager {
             this.vipExplain.active = true;
         }
         else {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes('Prefabs/vipExplain', (pre) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 let node = cc.instantiate(pre);
                 cc.find('Canvas').addChild(node, 50);
                 this.vipExplain = node;
@@ -171,7 +172,7 @@ export default class PopupManager {
         this.tipsText = null;
         this.loading = null;
         this.otherPlayerInfo = null;
-
+        GlobalEvent.off('openProtocol');
         GlobalEvent.off(EventCfg.LOADINGHIDE);
         GlobalEvent.off(EventCfg.LOADINGSHOW);
         GlobalEvent.off(EventCfg.TIPSTEXTSHOW);
@@ -181,7 +182,6 @@ export default class PopupManager {
         LoadUtils.releaseRes('Prefabs/tipsText');
         //   LoadUtils.releaseRes('Prefabs/loading');
         LoadUtils.releaseRes('Prefabs/otherPlayerInfo');
-        GlobalEvent.off('openProtocol');
         LoadUtils.releaseRes('Prefabs/playeInfo/protocol');
         LoadUtils.releaseRes('Prefabs/exitBox');
         // cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -217,6 +217,7 @@ export default class PopupManager {
 
         //当前配置
         GameCfgText.appConf.pop.forEach(el => {
+
             if (!el.switch) {
                 if (el.id == 1) {
                     GlobalEvent.emit('OPENNOTICELAYER');

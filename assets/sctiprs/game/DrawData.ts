@@ -144,11 +144,13 @@ export default class DrawData {
     }
 
     public static reseleData() {
+
         if (GameCfg.GameSet.ZLine == '5分钟K' || GameCfg.GameSet.ZLine == '15分钟K' || GameCfg.GameSet.ZLine == '30分钟K' || GameCfg.GameSet.ZLine == '60分钟K') {
             this.arrDay = [];
         } else {
             this.arrMin5 = [];
         }
+
     }
 
     public static initData(data) {

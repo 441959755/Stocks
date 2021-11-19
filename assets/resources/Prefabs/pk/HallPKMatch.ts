@@ -145,6 +145,7 @@ export default class NewClass extends cc.Component {
             this.onSlideShow();
         }
         else {
+
             let arr = ComUtils.getJJXunXian();
 
             let data = {

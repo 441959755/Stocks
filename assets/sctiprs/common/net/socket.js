@@ -24,17 +24,16 @@ Socket.prototype = {
 
 				GameData.userID = info.data.uid;
 
-				if (!GameData.userName) {
-					GameData.userName = info.data.nickname;
-				}
+				GameData.userName = info.data.nickname || info.data.uid;
 
-				if (!GameData.gender) {
-					GameData.gender = info.data.gender;
-				}
+				GameData.gender = info.data.gender || 0;
 
 				GameData.properties = info.data.properties;
+
 				GameData.SmxlState = info.data.smlxState;
+
 				GameData.cgState = info.data.cgState;
+
 				// GameCfgText.levelInfoCfg && (GameData.maxExp = GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]])
 
 				GameData.location = info.data.location || '中国';
@@ -50,6 +49,7 @@ Socket.prototype = {
 				info.data.tasks && (GameData.TaskDaily = info.data.tasks.daily || [])
 
 				GameData.gameData = info.data;
+
 				if (cc.director.getScene().name == 'Login') {
 
 					if (!GameData.headImg) {

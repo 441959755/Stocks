@@ -22,6 +22,7 @@ export default class NewClass extends cc.Component {
     version = 0;
 
     onLoad() {
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         GlobalEvent.on('OPENADSHOW', this.initAD.bind(this), this);
         GlobalEvent.on('OPENADHIDE', () => {
             this.node.active = false;
@@ -39,33 +40,41 @@ export default class NewClass extends cc.Component {
 
         LoadImg.downloadRemoteImageAndSave(GameCfgText.adConf.launch[0].img, (flag, sp) => {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.img.spriteFrame = sp;
-            let count = 3;
 
-            this.timeLa.string = '跳过' + count;
+            if (!sp) {
 
-            this.call = setInterval(() => {
-                count--;
-                this.timeLa.string = '跳过' + count;
-                if (count < 0) {
-                    this.node.active = false;
-                    clearInterval(this.call);
-                    this.call = null;
-                }
+                this.node.active = false;
+                clearInterval(this.call);
+                this.call = null;
+            }
+            else {
+                this.img.spriteFrame = sp;
 
-            }, 1000);
+                let count = 4;
+
+                this.timeLa.string = '跳过' + (count - 1);
+
+                this.call = setInterval(() => {
+                    count--;
+                    this.timeLa.string = '跳过' + count;
+                    if (count < 0) {
+                        this.node.active = false;
+                        clearInterval(this.call);
+                        this.call = null;
+                    }
+
+                }, 1000);
+            }
 
         }, this.version == GameCfgText.adConf.launch[0].version)
     }
 
     start() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         if (!window.jsb) {
             this.node.active = false;
         }
     }
-
 
     onBtnClick(event, curdata) {
         let name = event.target.name;

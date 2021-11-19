@@ -16,11 +16,12 @@ export default {
 
         console.log('url' + url);
         let self = this;
-        if (url == null || url == "") {
+
+        if (url == null || url == "" || !window.jsb) {
+            callback(caller, null);
             return;
         }
 
-        if (!window.jsb) { return }
 
         let dirpath = jsb.fileUtils.getWritablePath() + 'customRes/';
 

@@ -30,42 +30,15 @@ export default class HttpMgr {
 
 
         HttpUtils.sendXHRAB(url, buff1, (buff) => {
-            // console.log(buff);
 
-            // let decoded = buff.split(',');
-            // let addr = decoded[4].slice(0, decoded[4].length - 1);
-            // let t = addr.indexOf(':')
-            // addr = addr.slice(t + 1);
-            // let info = {
-            //     uid: parseInt(decoded[2].split(':')[1]),
-            //     token: (decoded[3].split(':')[1]).replace(/"/g, ''),
-            //     gameAddr: addr.replace(/"/g, ''),
-            // }
-            // console.log(info);
-            //  if (window.wx) {
-
-            // let stringToUint8Array = function (str) {
-            //     var arr = [];
-            //     for (var i = 0, j = str.length; i < j; ++i) {
-            //         arr.push(str.charCodeAt(i));
-            //     }
-
-            //     var tmpUint8Array = new Uint8Array(arr);
-            //     return tmpUint8Array
-            // }
-
-            // let arr = stringToUint8Array(buff);
-            // console.log(arr);
-            // decoded = JSON.stringify(buff);
-            // decoded = JSON.parse(decoded);
-
-            //  decoded = PB.onCmdLoginConvertToData(arr);
-            // } else {
             let decoded = PB.onCmdLoginConvertToData(buff);
-            // }
+
             console.log(decoded);
+
             if (decoded) {
+
                 call && (call(decoded));
+
             }
 
         }, err);

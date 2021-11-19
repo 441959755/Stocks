@@ -232,12 +232,11 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on(EventCfg.SET_DRAW_SIZE, (flag) => {
             this.lZoom = flag;
-            if (flag) {
-                this.selcetContent.parent.x += 206;
-            } else {
-                this.selcetContent.parent.x -= 206;
-            }
-
+            // if (flag) {
+            //     this.selcetContent.parent.x += 206;
+            // } else {
+            //     this.selcetContent.parent.x -= 206;
+            // }
         }, this);
 
         this.rightBox = this.node.getChildByName('rightBox');

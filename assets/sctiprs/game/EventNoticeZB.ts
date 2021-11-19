@@ -139,6 +139,7 @@ export default class NewClass extends cc.Component {
         //   this.content.removeAllChildren();
         // this.content.getComponent(cc.Layout).verticalDirection = cc.Layout.VerticalDirection.BOTTOM_TO_TOP;
         GlobalEvent.on(EventCfg.SLGEVENTNOTICE, () => {
+
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                 this.initData();
                 if (GameCfg.GameSet.select == '均线') {
@@ -197,6 +198,126 @@ export default class NewClass extends cc.Component {
 
     }
 
+    onDisable() {
+        this.content.removeAllChildren();
+        this.timeCall = null;
+
+        this.gpData = null;
+
+        this.maList = null;
+
+        this.difList = null;
+
+        this.deaList = null;
+
+        this.macdList = null;
+
+        this.JXState = 0;
+
+        this.MACDState = 0;
+
+        this.MACDMIN = 0;
+
+        this.MACDMAX = 0;
+
+        this.KList = null;
+        this.DList = null;
+        this.JList = null;
+
+        this.BollList = null;
+
+        this.disMin = 0;
+        this.disMax = 0;
+
+        this.kdis = 0;
+        this.sdis = 0;
+
+        this.BollState = 0;
+
+        this.BOllFlag = 0;
+
+        this.EXPMA1 = null;
+        this.EXPMA2 = null;
+
+        this.RSI1 = null;
+        this.RSI2 = null;
+        this.RSI3 = null;
+
+        this.RSIState = 0;
+
+        this.VOlList = null;
+
+        this.textInfo = [];
+
+        this.curState = 'S';
+
+        this._str = null;
+
+        this.RSIRecord = null;
+
+        this.macdH1 = 0;
+        this.macdH2 = 0;
+        this.macdL1 = null;
+        this.macdL2 = null;
+
+        this.FlagDing1 = false;
+        this.FlagDing2 = false;
+        this.FlagDing3 = false;
+        this.FlagDing4 = false;
+        this.DIF1 = 0;
+        this.DIF2 = 0;
+
+        this.DIF3 = 0;
+        this.DIF4 = 0;
+        this.FlagDing = false;
+        this.FlagDi = false;
+
+        this.kdjH1 = 0;
+        this.kdjH2 = 0;
+        this.kdjl1 = 0;
+        this.kdjl2 = 0;
+        this.kdjflag1 = false;
+        this.kdjflag2 = false;
+
+        this.kdjflag3 = false;
+        this.kdjflag4 = false;
+
+        this.d3 = 0;
+        this.d4 = 0;
+        this.k3 = 0;
+        this.k4 = 0;
+        this.j3 = 0;
+        this.j4 = 0;
+
+        this.d2 = 0;
+        this.d1 = 0;
+        this.k1 = 0;
+        this.k2 = 0;
+        this.j1 = 0;
+        this.j2 = 0;
+
+        this.highVol = 0;
+        this.volhk = 0;
+        this.RSICB = false;
+        this.RSICS = false;
+
+        this.KDJCS = false;
+        this.KDJCB = false;
+
+        this.preBollInfo = null;
+
+        this.MAIndex = 0;
+
+        this.MAIndex1 = 0;
+
+        this.MAIndex2 = 0;
+
+        this.EXPSTART = false;
+
+        this.EXPEND = false;
+
+    }
+
     onDestroy() {
         GlobalEvent.off(EventCfg.SLGEVENTNOTICE);
         GlobalEvent.off('clickTipsInfoPos');
@@ -240,6 +361,7 @@ export default class NewClass extends cc.Component {
 
 
     testMaEvent() {
+
         let index = GameCfg.huizhidatas - 1;
 
         if (GameCfg.GameSet.strategy == '组合训练') {
