@@ -42,7 +42,6 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
             if (!sp) {
-
                 this.node.active = false;
                 clearInterval(this.call);
                 this.call = null;
@@ -70,7 +69,6 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
-
         if (!window.jsb) {
             this.node.active = false;
         }
@@ -94,6 +92,4 @@ export default class NewClass extends cc.Component {
         this.call && (clearInterval(this.call));
         this.call = null;
     }
-
-
 }

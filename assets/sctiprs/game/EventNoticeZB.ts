@@ -162,7 +162,7 @@ export default class NewClass extends cc.Component {
                     this.testVOLEvetnt();
                 }
             }
-        })
+        }, this);
 
         GlobalEvent.on('clickTipsInfoPos', (data) => {
             if (GameCfg.GameType != pb.GameType.ZhiBiao) {

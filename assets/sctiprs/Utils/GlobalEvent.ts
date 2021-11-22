@@ -1,5 +1,6 @@
 
 let GlobalEvent;
-GlobalEvent= GlobalEvent||new cc.EventTarget();
+
+GlobalEvent = GlobalEvent || new cc.EventTarget();
 
 export default GlobalEvent;

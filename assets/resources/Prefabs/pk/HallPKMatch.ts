@@ -33,6 +33,10 @@ export default class NewClass extends cc.Component {
 
     enterRoom = false;
 
+    @property(cc.Node)
+    vipNode: cc.Node = null;
+
+
     onLoad() {
         GlobalEvent.on('SHOWOTHERPLAYER', this.onShowOtherPlayer.bind(this), this);
 
@@ -139,6 +143,13 @@ export default class NewClass extends cc.Component {
             lv.getComponent(cc.Label).string = 'LV：' + (GameData.properties[pb.GamePropertyId.Level] || 1) + '';
 
             exp.getComponent(cc.Label).string = '经验值：' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.gameConf.level_exp[(GameData.properties[pb.GamePropertyId.Level] || 1)];
+
+            if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+                this.vipNode.active = true;
+            }
+            else {
+                this.vipNode.active = false;
+            }
         }
 
         if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
@@ -193,6 +204,8 @@ export default class NewClass extends cc.Component {
         this.callBack && (clearInterval(this.callBack));
         this.callBack = null;
         this.enterRoom = false;
+        this.ecb && (clearTimeout(this.ecb));
+        this.ecb = null;
     }
 
     onBtnClick(event, data) {
@@ -215,8 +228,6 @@ export default class NewClass extends cc.Component {
     onDestroy() {
         GlobalEvent.off('SHOWOTHERPLAYER');
         GlobalEvent.off(EventCfg.RoomGameStatus);
-        this.ecb && (clearTimeout(this.ecb));
-        this.ecb = null;
     }
 
 

@@ -48852,7 +48852,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 886.7,
+      "width": 926.71,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -48903,8 +48903,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "您的操作训练对比：相似度高：        次，相似度一般：         次，相似度低：        次",
-    "_N$string": "您的操作训练对比：相似度高：        次，相似度一般：         次，相似度低：        次",
+    "_string": "您的操作训练对比：相似度高：          次，相似度一般：           次，相似度低：          次",
+    "_N$string": "您的操作训练对比：相似度高：          次，相似度一般：           次，相似度低：          次",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -48971,7 +48971,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -137.813,
+        -125.594,
         0,
         0,
         0,
@@ -49078,7 +49078,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        120.592,
+        132.811,
         0,
         0,
         0,
@@ -49185,7 +49185,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        350.391,
+        372.22,
         0,
         0,
         0,

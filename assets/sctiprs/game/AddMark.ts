@@ -75,8 +75,6 @@ export default class NewClass extends cc.Component {
         this.mark2Nodes = [];
     }
 
-
-
     onShowCutMark(status) {
 
         this.status = status;
@@ -147,6 +145,7 @@ export default class NewClass extends cc.Component {
     }
 
 
+
     setMarkColor() {
         let info = StrategyAIData.onCompareReult();
         this.markNodes;
@@ -197,9 +196,10 @@ export default class NewClass extends cc.Component {
 
     }
 
-
     onEnable() {
+
         this.node.removeAllChildren();
+
         this.status = 0;
         if (GameCfg.GameType != 'ZNXG' && GameCfg.GameType != pb.GameType.MoNiChaoGu && GameCfg.GameType != pb.GameType.ChaoGuDaSai) {
             this.onAddMard({ type: 1, index: GameData.huizhidatas });

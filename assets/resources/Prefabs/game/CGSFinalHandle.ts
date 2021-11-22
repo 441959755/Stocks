@@ -44,8 +44,10 @@ export default class NewClass extends cc.Component {
 
     flag = false;
 
-    onLoad() {
+    @property(cc.Node)
+    vipNode: cc.Node = null;
 
+    onLoad() {
         GlobalEvent.on(EventCfg.LEVELCHANGE, () => {
             let userLevel = this.player1.getChildByName('userLevel').getComponent(cc.Label);
             userLevel.string = 'LV: ' + GameData.properties[pb.GamePropertyId.Level];
@@ -55,15 +57,14 @@ export default class NewClass extends cc.Component {
             let userExp = this.player1.getChildByName('userExp').getComponent(cc.Label);
             userExp.string = 'EXP: ' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
         }, this);
-
     }
-
 
     onShow() {
 
         if (GameCfg.GAMEFUPAN || this.flag) {
             return;
         }
+
         this.flag = true;
 
         GlobalEvent.emit(EventCfg.CLEARINTERVAL);
@@ -131,6 +132,13 @@ export default class NewClass extends cc.Component {
             else if (GameCfg.allRate * 100 > GameCfg.RoomGameData.players[1].result.userProfitRate) {
                 this.selfRank = 1;
                 winSp.active = true;
+            }
+
+            if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+                this.vipNode.active = true;
+            }
+            else {
+                this.vipNode.active = false;
             }
         }
 
@@ -371,7 +379,6 @@ export default class NewClass extends cc.Component {
         GameCfg.RoomGameData = null;
         GlobalEvent.emit(EventCfg.LEAVEGAME);
     }
-
 
     onDestroy() {
         LoadUtils.releaseRes('Prefabs/enterXLGame');

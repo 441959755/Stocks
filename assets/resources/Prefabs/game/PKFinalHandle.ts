@@ -41,6 +41,9 @@ export default class NewClass extends cc.Component {
 
     EnterGameLayer: cc.Node = null;
 
+    @property(cc.Node)
+    vipNode: cc.Node = null;
+
     onLoad() {
         GlobalEvent.on(EventCfg.LEVELCHANGE, () => {
             let userLevel = this.player1.getChildByName('userLevel').getComponent(cc.Label);
@@ -102,6 +105,13 @@ export default class NewClass extends cc.Component {
             UpGameOpt.ChanagekOffset(this.gameResult.players[0].ops.items);
 
             UpGameOpt.ChanagekOffset(this.gameResult.players[1].ops.items);
+
+            if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+                this.vipNode.active = true;
+            }
+            else {
+                this.vipNode.active = false;
+            }
 
             //消极
             // if (userProfitRate1 == -999 && this.gameResult.players[0].ops.items.length == 0) {
