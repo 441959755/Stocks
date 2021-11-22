@@ -556,8 +556,10 @@ export default class NewClass extends cc.Component {
 	}
 
 	onEnable() {
+
 		this.zhangting.active = false;
 		this.dieting.active = false;
+
 		this.gpData = GameCfg.data[0].data;
 
 		if (this.gpData.length <= 0) {
@@ -1377,8 +1379,11 @@ export default class NewClass extends cc.Component {
 
 	//获取涨停板
 	getRaisingLimit(number) {
+
 		this.zhangting.active = false;
+
 		this.dieting.active = false;
+
 		this.limitUP = 0;
 
 		this.limitUP = DrawData.getRaisingLimit(number, true);

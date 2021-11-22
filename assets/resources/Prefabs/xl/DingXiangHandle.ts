@@ -788,7 +788,7 @@ export default class NewClass extends cc.Component {
 			GameData.huizhidatas = 0;
 			GameCfg.huizhidatas = 0;
 			let fm = data.from;
-			if (GameData.DXSet.market == '随机行情') {
+			if (GameData.DXSet.market == '随机行情' && GameData.DXSet.year != '随机') {
 				while (!GameData.huizhidatas) {
 
 					GameCfg.data[0].data.forEach((el, index) => {

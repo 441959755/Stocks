@@ -604,7 +604,9 @@ export default class DrawData {
         }
 
         let limitUP = 0;
+
         let code = GameCfg.data[0].code + '';
+
         if (code.length >= 7) {
             code = code.slice(1);
         }
