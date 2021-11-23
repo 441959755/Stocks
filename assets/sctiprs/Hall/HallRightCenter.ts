@@ -15,6 +15,15 @@ export default class NewClass extends cc.Component {
     onLoad() {
         this.rewardCenterBtn.active = false;
         GlobalEvent.on('getRewardCenter', this.getRewardCenter.bind(this), this);
+        GlobalEvent.on('REWARDITEM', (count) => {
+            console.log(count);
+            if (count > 0) {
+                this.rewardCenterBtn.active = true;
+            }
+            else {
+                this.rewardCenterBtn.active = false;
+            }
+        }, this);
     }
 
     getRewardCenter(call?) {
@@ -47,6 +56,7 @@ export default class NewClass extends cc.Component {
 
     onDestroy() {
         GlobalEvent.off('getRewardCenter');
+        GlobalEvent.off('REWARDITEM');
     }
 
 }

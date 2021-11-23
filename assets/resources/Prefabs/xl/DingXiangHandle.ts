@@ -305,9 +305,17 @@ export default class NewClass extends cc.Component {
 			})
 		} else {
 			let date = GameCfgText.getTimeByCodeName(GameData.DXSet.search);
+			if (parseInt(date.start) < 20100101) {
+				date.start = '20100101';
+			}
 			let ly = date.start.slice(0, 4);
 			let lm = date.start.slice(4, 6);
 			let ld = date.start.slice(6);
+			let dd = ComUtils.GetAddDay(ly + '-' + lm + ' - ' + ld, 200);
+			console.log(JSON.stringify(dd));
+			ly = dd.y + '';
+			lm = dd.m + '';
+			ld = dd.d + '';
 
 			let cy = date.end.slice(0, 4);
 			let cm = date.end.slice(4, 6);
@@ -442,10 +450,11 @@ export default class NewClass extends cc.Component {
 						let ly = date.start.slice(0, 4);
 						let lm = date.start.slice(4, 6);
 						let ld = date.start.slice(6);
-
-						// let cy = date.end.slice(0, 4);
-						// let cm = date.end.slice(4, 6);
-						// let cd = date.end.slice(6);
+						let dd = ComUtils.GetAddDay(ly + '-' + lm + '-' + ld, 200);
+						console.log(JSON.stringify(dd));
+						ly = dd.y + '';
+						lm = dd.m + '';
+						ld = dd.d + '';
 						let st;
 						st = GameData.DXSet.year;
 						if (GameData.DXSet.month.length == 1) {
@@ -683,6 +692,7 @@ export default class NewClass extends cc.Component {
 			}
 
 			let seletTime = GameData.DXSet.year + '' + GameData.DXSet.month + '' + GameData.DXSet.day;
+
 			if (parseInt(seletTime) < parseInt(items[2])) {
 				if (GameData.DXSet.search == '随机选股') {
 					this.DXStartGameSet();
@@ -730,6 +740,11 @@ export default class NewClass extends cc.Component {
 					sc = d.getTime() - data.total * 24 * 60 * 60 * 1000;
 				}
 			}
+
+			if (parseInt(start) < 20100101) {
+				start = '20100101';
+			}
+
 			let year = start.slice(0, 4);
 			let month = start.slice(4, 6);
 			let day = start.slice(6);
@@ -738,9 +753,9 @@ export default class NewClass extends cc.Component {
 
 			let t;
 			if (GameData.DXSet.ZLine == '周线') {
-				t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 7;
+				t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 7 * 2;
 			} else {
-				t = d.getTime() + 24 * 60 * 60 * 1000 * 100;
+				t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 2;
 			}
 
 			if (sc < t && GameData.DXSet.year == '随机' && GameData.DXSet.search == '随机选股') {
@@ -804,10 +819,10 @@ export default class NewClass extends cc.Component {
 				}
 			}
 			else {
-				GameData.huizhidatas = GameCfg.data[0].data.length - 100;
-				GameCfg.huizhidatas = GameCfg.data[0].data.length - 100;
+				GameData.huizhidatas = 100;
+				GameCfg.huizhidatas = 100;
 			}
-			if (GameData.huizhidatas <= 0) {
+			if (GameData.huizhidatas >= GameCfg.data[0].data.length) {
 				GameData.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
 				GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
 			}

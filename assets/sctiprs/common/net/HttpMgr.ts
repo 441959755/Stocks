@@ -77,5 +77,4 @@ export default class HttpMgr {
 
     }
 
-
 }

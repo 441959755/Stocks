@@ -56,7 +56,18 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on(EventCfg.ONMARKUPDATE, this.onMarkUpdate.bind(this), this);
 
-        GlobalEvent.on(EventCfg.ADDMARKHIDEORSHOW, (flag) => { this.node.active = flag }, this);
+        GlobalEvent.on(EventCfg.ADDMARKHIDEORSHOW, (flag) => {
+            if (GameCfg.GameType == pb.GameType.QiHuo) {
+                if (flag) {
+                    this.node.opacity = 255
+                }
+                else {
+                    this.node.opacity = 0
+                }
+
+            }
+            this.node.active = flag
+        }, this);
 
         GlobalEvent.on(EventCfg.SETMARKCOLOR, this.setMarkColor.bind(this), this);
 
@@ -73,6 +84,7 @@ export default class NewClass extends cc.Component {
         this.AIMarkNodes = [];
         this.mark1Nodes = [];
         this.mark2Nodes = [];
+        this.node.opacity = 255;
     }
 
     onShowCutMark(status) {
@@ -143,7 +155,6 @@ export default class NewClass extends cc.Component {
             })
         }
     }
-
 
 
     setMarkColor() {

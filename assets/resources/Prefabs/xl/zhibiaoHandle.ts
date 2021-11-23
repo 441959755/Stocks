@@ -127,8 +127,6 @@ export default class NewClass extends cc.Component {
         }
     }
 
-
-
     onEnable() {
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
@@ -520,6 +518,7 @@ export default class NewClass extends cc.Component {
     }
 
     zhibiaoStartGameSet() {
+
         let data = {
             ktype: null,    //4 30分钟  5  60分钟  10  日   11周
             kstyle: 0,      // 0随机行情   1震荡行情  2单边向上行情 3单边向下行情
@@ -609,19 +608,23 @@ export default class NewClass extends cc.Component {
                     sc = d.getTime() - data.total * 24 * 60 * 60 * 1000;
                 }
             }
+
+            if (parseInt(start) < 20100101) {
+                start = '20100101';
+            }
+
             let year = start.slice(0, 4);
             let month = start.slice(4, 6);
             let day = start.slice(6);
-
 
             let d = new Date(year + '-' + month + '-' + day);
             ///console.log(d); 
             let t;
             if (GameData.ZBSet.ZLine == '周线') {
-                t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 7;
+                t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 7 * 2;
             }
             else {
-                t = d.getTime() + 24 * 60 * 60 * 1000 * 100;
+                t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 2;
             }
 
             if (sc < t && GameData.ZBSet.year == '随机' && GameData.ZBSet.search == '随机选股') {

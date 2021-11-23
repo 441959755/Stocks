@@ -23,8 +23,6 @@ export default class NewClass extends cc.Component {
 
     huizhidatas = 0;
 
-    //    saveTime = null;
-
     beg = 0;
 
     end = 0;
@@ -59,8 +57,8 @@ export default class NewClass extends cc.Component {
 
             if (this.qhData && this.qhData.data.length > 0) {
                 GameCfg.data[0].data = this.qhData.data;
-
             }
+
             if (this._selectID != this._preSelectID) {
                 GameCfg.huizhidatas = this.huizhidatas;
             }
@@ -70,6 +68,7 @@ export default class NewClass extends cc.Component {
 
 
     onEnable() {
+
         let str = JSON.stringify(GameCfg.data[0])
         this.qhData = JSON.parse(str);
 
@@ -79,6 +78,7 @@ export default class NewClass extends cc.Component {
         nodes.forEach(e => {
             e.active = true;
         })
+
     }
 
     hideAllNode() {

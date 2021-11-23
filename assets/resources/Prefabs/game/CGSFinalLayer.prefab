@@ -1489,7 +1489,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 74.67,
+      "width": 96,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1540,8 +1540,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "复    盘",
-    "_N$string": "复    盘",
+    "_string": "竞技复盘",
+    "_N$string": "竞技复盘",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -2638,8 +2638,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "训练时段：1111111111--1111111111",
-    "_N$string": "训练时段：1111111111--1111111111",
+    "_string": "比赛时段：1111111111--1111111111",
+    "_N$string": "比赛时段：1111111111--1111111111",
     "_fontSize": 26,
     "_lineHeight": 26,
     "_enableWrapText": true,

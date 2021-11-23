@@ -244,19 +244,19 @@ export default class NewClass extends cc.Component {
                 this.box3.active = true;
                 this.t_grap_node.width = this.now_width;
                 this.d_grap_node.width = this.now_width;
-                this.addMark.active = false;
+                this.addMark.opacity = 0;
                 this.laNode.active = false;
                 this.mnLaNode.active = true;
             }
             else {
                 if (this.toggles[1].isChecked) {
-                    this.addMark.active = true;
+                    this.addMark.opacity = 255;
                     this.laNode.active = true;
                     this.mnLaNode.active = false;
                 } else {
                     this.laNode.active = false;
                     this.mnLaNode.active = true;
-                    this.addMark.active = false;
+                    this.addMark.opacity = 0;
                 }
                 this.box3.active = false;
                 this.t_grap_node.width = this.ori_width;
@@ -273,10 +273,10 @@ export default class NewClass extends cc.Component {
             if (this.toggles[1].isChecked) {
                 this.laNode.active = true;
                 this.mnLaNode.active = false;
-                this.addMark.active = true;
+                this.addMark.opacity = 255;
             }
             else {
-                this.addMark.active = false;
+                this.addMark.opacity = 0;
                 this.laNode.active = false;
                 this.mnLaNode.active = false;
             }
@@ -449,8 +449,8 @@ export default class NewClass extends cc.Component {
         GameCfg.GAMEFUPAN = true;
 
         this.laNode.active = false;
-
-        this.addMark.active = false;
+        this.addMark.active = true;
+        this.addMark.opacity = 0;
 
         this.mask.active = false;
 
@@ -836,7 +836,7 @@ export default class NewClass extends cc.Component {
                 }
                 else if (index == 1 || index == 2) {
                     if (index == 1) {
-                        this.addMark.active = true;
+                        this.addMark.opacity = 255;
                     }
                     this.ktype = pb.KType.Day;
                     arr = this.gpDataDay;
@@ -938,7 +938,7 @@ export default class NewClass extends cc.Component {
         this.onUIShow();
         this.btnSelect.active = true;
         this.touchNode.active = true;
-        this.addMark.active = false;
+        this.addMark.opacity = 0;
         if (name == 'toggle1') {
 
             this.btnSelect.active = false;
@@ -1009,7 +1009,8 @@ export default class NewClass extends cc.Component {
         this._timeStamp = null;
         this._volume = 0;
         this._amount = 0;
-
+        this.addMark.opacity = 255;
+        this.addMark.active = false;
         //订阅
         if (GameCfg.GameType == pb.GameType.MoNiChaoGu || GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
 

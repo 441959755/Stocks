@@ -1013,10 +1013,7 @@ export default class NewClass extends cc.Component {
 
 				start = start + 50 * tt * 60;
 
-
-
 				let f = parseInt(Math.random() * (sc - start) + start + '');
-
 
 				{
 					data.from = f;
@@ -1083,14 +1080,15 @@ export default class NewClass extends cc.Component {
 
 		if (GameData.QHSet.ZLine == '日线') {
 			data.ktype = pb.KType.Day;
-		} else {
+		}
+		else {
 			data.ktype = pb.KType.Min5;
 			if (GameData.QHSet.ZLine == '60分钟K') {
-				data.total *= 12;
+				data.ktype = pb.KType.Min60;
 			} else if (GameData.QHSet.ZLine == '30分钟K') {
-				data.total *= 6;
+				data.ktype = pb.KType.Min30;
 			} else if (GameData.QHSet.ZLine == '15分钟K') {
-				data.total *= 3;
+				data.ktype = pb.KType.Min15;
 			}
 		}
 
@@ -1101,12 +1099,7 @@ export default class NewClass extends cc.Component {
 		GameCfg.enterGameCache = data;
 
 		GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, data, () => {
-			// GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
-			// GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
-			// if (GameData.huizhidatas <= 0) {
-			// 	GameData.huizhidatas = GameCfg.data[0].data.length - 50;
-			// 	GameCfg.huizhidatas = GameCfg.data[0].data.length - 50;
-			// }
+
 			GameData.huizhidatas = 0;
 			GameCfg.huizhidatas = 0;
 			let fm = data.from;
@@ -1118,10 +1111,9 @@ export default class NewClass extends cc.Component {
 						GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
 					}
 					else {
-						GameData.huizhidatas = GameCfg.data[0].data.length - 50;
-						GameCfg.huizhidatas = GameCfg.data[0].data.length - 50;
+						GameData.huizhidatas = 100;
+						GameCfg.huizhidatas = 100;
 					}
-
 				}
 				else {
 					GameCfg.data[0].data.forEach((el, index) => {

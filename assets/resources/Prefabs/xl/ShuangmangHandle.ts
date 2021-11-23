@@ -116,13 +116,14 @@ export default class NewClass extends cc.Component {
     }
 
     smStartGameSet() {
-
         GameCfgText.getGPSMByRandom()
 
         console.log('给的数据:' + JSON.stringify(GameCfg.enterGameCache));
 
         GameData.huizhidatas = GameCfg.enterGameCache.reserve;
+
         GameCfg.huizhidatas = GameCfg.enterGameCache.reserve;
+
         GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
             GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
             GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
@@ -131,8 +132,8 @@ export default class NewClass extends cc.Component {
                 GameCfg.huizhidatas = GameCfg.data[0].data.length - 50;
             }
             GlobalEvent.emit('LOADGAME');
-
         });
+
     }
 
     onDestroy() {

@@ -136,6 +136,8 @@ export default class NewClass extends cc.Component {
 		else if (GameData.roomId) {
 			GlobalEvent.emit(EventCfg.OPENROOM);
 		}
+
+		GlobalEvent.emit('getRewardCenter');
 	}
 
 	onEnable() {
@@ -352,7 +354,6 @@ export default class NewClass extends cc.Component {
 		}
 	}
 
-
 	//邀请框
 	onShowInviteBox(data) {
 		if (!this.InviteBox) {
@@ -451,8 +452,7 @@ export default class NewClass extends cc.Component {
 
 		GameCfg.GAMEFUPAN = false;
 
-
-		false;
+		GameCfg.GAMEWAIT = false;
 
 		GameCfg.JJ_XUNLIAN = false;
 

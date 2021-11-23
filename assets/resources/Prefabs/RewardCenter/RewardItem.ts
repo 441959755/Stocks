@@ -98,9 +98,9 @@ export default class NewClass extends cc.Component {
 
             socket.send(pb.MessageId.Req_Hall_GetItem, buff, (info) => {
                 console.log('getRewardCenter:' + JSON.stringify(info));
-
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '领取成功');
+                this.node.destroy();
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
             })
             this.LQFALG = true;
             this.yiLingQu.active = this.LQFALG;

@@ -442,7 +442,6 @@ export default class NewClass extends cc.Component {
         GameCfg.finalfund = 0;
         //  GameCfg.GAMEFUPAN = false;
         GameCfg.history.allRate = 0;
-        StrategyAIData.onClearData();
         GameCfg.RoomGameData = null;
     }
 

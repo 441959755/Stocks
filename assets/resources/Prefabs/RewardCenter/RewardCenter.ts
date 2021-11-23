@@ -52,10 +52,10 @@ export default class NewClass extends cc.Component {
                     handle.getItemRewaed();
                 }
             })
-
         }
         else if (name == 'closeBtn') {
             this.node.active = false;
+            GlobalEvent.emit('REWARDITEM', this.content.children.length);
         }
     }
 

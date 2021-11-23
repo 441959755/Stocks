@@ -418,7 +418,7 @@ export default class GameCfgText {
         }
 
         if (parseInt(start) < 20100101) {
-            start = '20100101';
+            start = '20100601';
         }
 
         let year = start.slice(0, 4);
@@ -433,7 +433,6 @@ export default class GameCfgText {
         if (sc <= 0) {
             this.getGPSMByRandom();
             return;
-
         }
         else if (sc < t) {
             this.getGPSMByRandom();
@@ -516,7 +515,7 @@ export default class GameCfgText {
 
         let t;
 
-        t = d.getTime() + 24 * 60 * 60 * 1000 * 100;
+        t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 2;
 
 
         if (sc < t && GameData.DXSet.year == '随机' && GameData.DXSet.search == '随机选股') {
@@ -664,10 +663,10 @@ export default class GameCfgText {
         let t;
 
         if (GameData.ZBSet.ZLine == '周线') {
-            t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 7;
+            t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 7 * 2;
         }
         else {
-            t = d.getTime() + 24 * 60 * 60 * 1000 * 100;
+            t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 2;
         }
 
         if (sc < t && GameData.ZBSet.year == '随机' && GameData.ZBSet.search == '随机选股') {

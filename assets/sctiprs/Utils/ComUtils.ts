@@ -183,6 +183,30 @@ export default class ComUtils {
 	 *{param:DateTime} date 输入日期(YYYY-MM-DD)
 	 *{param:number } monthNum 月数
 	 */
+	public static GetAddDay(date, dayNum) {
+		var dateArr = date.split('-');
+		var year = dateArr[0]; //获取当前日期的年份
+		var month = dateArr[1]; //获取当前日期的月份
+		var day = dateArr[2]; //获取当前日期的日
+		let day1 = new Date(year, month, day);
+		let days = day1.getTime(); //获取当前日期中月的天数
+
+		let f = new Date(days + 24 * 60 * 60 * 100 * dayNum);
+
+		let year2 = f.getFullYear();
+
+		let month2 = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
+
+		let day2 = f.getDate() >= 10 ? f.getDate() : '0' + (f.getDate());
+
+		let data = {
+			y: year2,
+			m: month2,
+			d: day2,
+		}
+		return data;
+	}
+
 	public static GetPreMonthDay(date, monthNum) {
 		var dateArr = date.split('-');
 		var year = dateArr[0]; //获取当前日期的年份
@@ -203,11 +227,7 @@ export default class ComUtils {
 		if (day2 > days2) {
 			day2 = days2;
 		}
-		// let month3
-		// if (month2 < 10) {
-		// 	month3 = '0' + month2;
-		// }
-		//var t2 = year2 + '-' + month2 + '-' + day2;
+
 		let data = {
 			y: year2,
 			m: month2,
@@ -215,6 +235,9 @@ export default class ComUtils {
 		}
 		return data;
 	}
+
+
+
 
 	//获取时间戳
 	public static getTimestamp(time) {

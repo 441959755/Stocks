@@ -600,7 +600,7 @@ export default class DrawData {
     public static getRaisingLimit(index, flag?) {
 
         if (GameCfg.GameType == pb.GameType.QiHuo) {
-            return;
+            return 0;
         }
 
         let limitUP = 0;

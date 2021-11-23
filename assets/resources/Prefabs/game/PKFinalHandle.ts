@@ -74,7 +74,7 @@ export default class NewClass extends cc.Component {
             code = code.slice(1);
         }
         this.codeLabel.string = '股票名称：' + GameCfg.data[0].name + '    ' + code;
-        this.codeTimeLabel.string = '训练时段：' + ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[gpData.length - 1].day);
+        this.codeTimeLabel.string = '比赛时段:' + ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[gpData.length - 1].day);
 
         let rate = this.gameResult.players[0].result.stockProfitRate.toFixed(2)
         this.HasRisen && (this.HasRisen.string = rate + '%')

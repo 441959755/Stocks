@@ -293,7 +293,7 @@ export default class NewClass extends cc.Component {
             else {
                 this.daysData[tt - 1].count = 0;
 
-                if (this.daysData[tt].endMoney || this.daysData[tt].user_capital) {
+                if (this.daysData[tt - 1].endMoney || this.daysData[tt - 1].user_capital) {
                     this.daysData[tt - 1].user_capital = this.daysData[tt].user_capital;
                     this.daysData[tt - 1].endMoney = this.daysData[tt].user_capital;
                 }

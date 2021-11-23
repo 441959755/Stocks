@@ -184,7 +184,7 @@ export default class NewClass extends cc.Component {
                     code: this.infoData.quotesCode,
                     from: this.infoData.kFrom + '',
                     total: this.infoData.kStop + 1,
-                    //   to: this.infoData.kTo + '',
+                    to: 0,
                     reserve: this.infoData.kStartup + 1,
                 };
 
