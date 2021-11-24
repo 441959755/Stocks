@@ -64,6 +64,8 @@ export namespace pb {
         Sync_S2C_ActivityConf = 1026,
         Sync_S2C_GameCgdsItem = 1028,
         Sync_S2C_GoldAwardPrompt = 1030,
+        Sync_S2C_UnregistryAccount = 1032,
+        Sync_S2C_CgdsConf = 1034,
         Sync_S2C_Broadcast = 1100,
         Sync_S2C_Message = 1102,
         Sync_C2S_GameHeart = 1200,
@@ -672,8 +674,7 @@ export namespace pb {
         Dk = 1,
         Zsjc = 2,
         Ggjc = 3,
-        Cg = 4,
-        MaxDailyTaskId = 5,
+        MaxDailyTaskId = 4,
         MaxStudyTaskId = 8
     }
 
@@ -4249,6 +4250,96 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a CmdGameOverReply. */
+    interface ICmdGameOverReply {
+
+        /** CmdGameOverReply ts */
+        ts?: (number|Long|null);
+    }
+
+    /** Represents a CmdGameOverReply. */
+    class CmdGameOverReply implements ICmdGameOverReply {
+
+        /**
+         * Constructs a new CmdGameOverReply.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdGameOverReply);
+
+        /** CmdGameOverReply ts. */
+        public ts: (number|Long);
+
+        /**
+         * Creates a new CmdGameOverReply instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdGameOverReply instance
+         */
+        public static create(properties?: pb.ICmdGameOverReply): pb.CmdGameOverReply;
+
+        /**
+         * Encodes the specified CmdGameOverReply message. Does not implicitly {@link pb.CmdGameOverReply.verify|verify} messages.
+         * @param message CmdGameOverReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdGameOverReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdGameOverReply message, length delimited. Does not implicitly {@link pb.CmdGameOverReply.verify|verify} messages.
+         * @param message CmdGameOverReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdGameOverReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdGameOverReply message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdGameOverReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGameOverReply;
+
+        /**
+         * Decodes a CmdGameOverReply message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdGameOverReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGameOverReply;
+
+        /**
+         * Verifies a CmdGameOverReply message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdGameOverReply message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdGameOverReply
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdGameOverReply;
+
+        /**
+         * Creates a plain object from a CmdGameOverReply message. Also converts values to other types if specified.
+         * @param message CmdGameOverReply
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdGameOverReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdGameOverReply to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a CmdQueryGameResult. */
     interface ICmdQueryGameResult {
 
@@ -4268,7 +4359,7 @@ export namespace pb {
         pageSize?: (number|null);
 
         /** CmdQueryGameResult ts */
-        ts?: (number|null);
+        ts?: (number|Long|null);
     }
 
     /** Represents a CmdQueryGameResult. */
@@ -4296,7 +4387,7 @@ export namespace pb {
         public pageSize: number;
 
         /** CmdQueryGameResult ts. */
-        public ts: number;
+        public ts: (number|Long);
 
         /**
          * Creates a new CmdQueryGameResult instance using the specified properties.
@@ -12240,6 +12331,9 @@ export namespace pb {
 
         /** AiStockItem lastBidTs */
         lastBidTs?: (number|Long|null);
+
+        /** AiStockItem lastAskTs */
+        lastAskTs?: (number|Long|null);
     }
 
     /** Represents an AiStockItem. */
@@ -12286,6 +12380,9 @@ export namespace pb {
 
         /** AiStockItem lastBidTs. */
         public lastBidTs: (number|Long);
+
+        /** AiStockItem lastAskTs. */
+        public lastAskTs: (number|Long);
 
         /**
          * Creates a new AiStockItem instance using the specified properties.

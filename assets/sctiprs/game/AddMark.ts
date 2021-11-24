@@ -66,7 +66,10 @@ export default class NewClass extends cc.Component {
                 }
 
             }
-            this.node.active = flag
+            else {
+                this.node.active = flag
+            }
+
         }, this);
 
         GlobalEvent.on(EventCfg.SETMARKCOLOR, this.setMarkColor.bind(this), this);

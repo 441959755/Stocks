@@ -36,8 +36,8 @@ enum Platform {
 // App渠道
 enum AppFrom {
     // 炒股达人
-    Ios_000 = 0;   			// 苹果0渠道或安卓内部测试
-    Android_001 = 1;   		// 安卓001渠道
+    Ios_000 = 0;   			// 苹果0渠道（企业网站下载的苹果）
+    Android_001 = 1;   		// 安卓001渠道（企业网站下载的安卓）
     Android_201 = 201; 		// 安卓201渠道
     Android_204 = 204; 		// 安卓204渠道
     Android_205 = 205; 		// 安卓205渠道
@@ -61,7 +61,7 @@ enum AppFrom {
 	WebsiteAndriod= 4999;   // 企业网站下载的安卓
 	WebsiteIos    = 6666;   // 企业网站下载的苹果
 	IosAppleStore = 6667;	// 苹果商店下载的App
-	Ipad          = 6668;   // Ipad
+	Ipad          = 6668;   // 苹果商店下载的App
 
 	WeChatMinProgram = 8888;// 微信小程序
 

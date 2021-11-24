@@ -75,11 +75,16 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     vipNode: cc.Node = null;
 
+    flag = false;
+
     protected onShow() {
+
 
         let gpData = GameCfg.data[0].data;
 
-        if (!gpData || gpData.length <= 0) { return }
+        if (!gpData || gpData.length <= 0 || this.flag) { return }
+
+        this.flag = true;
 
         this.DXXLGG.active = false;
         if (GameCfg.GameType == pb.GameType.DingXiang) {
@@ -134,7 +139,6 @@ export default class NewClass extends cc.Component {
                 quotesCode: gpData[0].code || parseInt(GameCfg.data[0].code),
                 kType: GameCfg.enterGameCache.ktype,
                 kFrom: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
-
                 kTo: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
                 stockProfitRate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100),
                 userProfitRate: (GameCfg.allRate * 100),
@@ -150,6 +154,10 @@ export default class NewClass extends cc.Component {
                 datas.userCapital = GameData.SmxlState.gold;
             } else {
                 datas.userCapital = GameCfg.ziChan;
+            }
+
+            if (GameCfg.GameType == pb.GameType.QiHuo) {
+                datas.kFrom = GameCfg.enterGameCache.from;
             }
 
             datas.rank = datas.userProfitRate >= datas.stockProfitRate ? 1 : 2;
@@ -365,11 +373,12 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         //返回大厅
         if (name == 'closeBtn') {
+            this.flag = false;
             GlobalEvent.emit(EventCfg.LEAVEGAME);
         }
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
-
+            this.flag = false;
             GlobalEvent.emit(EventCfg.LEAVEGAME);
 
             if (!this.gotoGame()) {
@@ -409,6 +418,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'lx_jsbt_xl') {
+            this.flag = false;
             GlobalEvent.emit(EventCfg.LEVELCHANGE);
 
             GlobalEvent.emit(EventCfg.LEAVEGAME);
@@ -443,6 +453,7 @@ export default class NewClass extends cc.Component {
         //  GameCfg.GAMEFUPAN = false;
         GameCfg.history.allRate = 0;
         GameCfg.RoomGameData = null;
+
     }
 
     gotoGame() {

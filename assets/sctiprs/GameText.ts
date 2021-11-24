@@ -305,6 +305,7 @@ export default class GameCfgText {
 */
     public static QHGetTimeByCodeName(str) {
         let index = -1;
+
         for (let i = 0; i < this.qihuoList.length; i++) {
             if (this.qihuoList[i].indexOf(str) != -1) {
                 index = i;
@@ -330,6 +331,7 @@ export default class GameCfgText {
                 let d = now.getDate();
                 data.start = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
             }
+
             if (ComUtils.getTimestamp(items[6]) < parseInt(items[8])) {
                 data.end = items[6];
             } else {
@@ -339,6 +341,7 @@ export default class GameCfgText {
                 let d = now.getDate();
                 data.end = y + "" + (m < 10 ? "0" + m : m) + "" + (d < 10 ? "0" + d : d);
             }
+
             return data;
         }
     }
@@ -589,12 +592,18 @@ export default class GameCfgText {
 
             let d = new Date(year + '-' + month + '-' + day);
             ///console.log(d);
-            let t = d.getTime() + 50 * 24 * 60 * 60 * 1000;
+            let t = d.getTime() + 100 * 24 * 60 * 60 * 1000;
 
             let s = Math.random() * (sc - t) + t;
 
             f = new Date(s);
         }
+
+        if (sc <= f.getTime()) {
+            this.getQHQHByRandom(cb);
+            return;
+        }
+
         {
             let ye = f.getFullYear();
             let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);

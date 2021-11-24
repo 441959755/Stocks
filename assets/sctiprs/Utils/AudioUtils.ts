@@ -112,6 +112,12 @@ export default class AudioUtils {
 	 * @param {Object} val设置音效大小
 	 */
 	public static setEffectsVolume(val) {
+		if (!val) {
+			val = false;
+		}
+		else {
+			val = 1;
+		}
 		this.effectVolume = val;
 		cc.audioEngine.setEffectsVolume(val);
 		cc.sys.localStorage.setItem('EFFECTVOLUME', val);

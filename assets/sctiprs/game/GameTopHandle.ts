@@ -295,7 +295,6 @@ export default class NewClass extends cc.Component {
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             statBtn.active = true;
         }
-
     }
 
     protected onEnable() {
@@ -310,12 +309,14 @@ export default class NewClass extends cc.Component {
         //数据统计
         let statBtn = this.rightNode.getChildByName('statBtn');
         this.node.height = 100;
+
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             this.GameName.string = '双盲训练';
             this.rightNode.active = false;
             let la = this.node.getChildByName('rate');
             la.x = 0;
         }
+
 
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.GameName.string = '指标训练';

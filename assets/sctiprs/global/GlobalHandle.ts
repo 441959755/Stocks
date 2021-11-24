@@ -139,13 +139,16 @@ export default class GlobalHandle {
             data.total *= 12;
             data.ktype = pb.KType.Min5;
             data.from = ComUtils.getTimestamp(data.from);
+            data.reserve *= 12;
         } else if (data.ktype == pb.KType.Min30) {
             data.total *= 6;
             data.ktype = pb.KType.Min5;
+            data.reserve *= 6;
             data.from = ComUtils.getTimestamp(data.from);
         } else if (data.ktype == pb.KType.Min15) {
             data.total *= 3;
             data.ktype = pb.KType.Min5;
+            data.reserve *= 3;
             data.from = ComUtils.getTimestamp(data.from);
         }
 
@@ -162,6 +165,7 @@ export default class GlobalHandle {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '获取的行情为空' + JSON.stringify(data));
                 GameCfg.GAMEFUPAN = false;
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
                 return;
             }
 
@@ -179,15 +183,19 @@ export default class GlobalHandle {
                 GameCfg.data[0].data.push(data1);
             });
 
-            if (GameCfg.data[0].data.length < count) {
+            if (count > 2000 && info.items.length == 2000) {
+
                 let data1 = data;
+
                 data1.reserve = 0;
+
                 data1.from = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
 
                 this.getRemainData(count - 2000, data1, cb, da.ktype);
             }
             else {
                 let qhHQ = GameCfg.data[0].data;
+
                 if (da.ktype == pb.KType.Min5) {
                     DrawData.arrMin5 = qhHQ;
                 } else if (da.ktype == pb.KType.Day) {
@@ -221,11 +229,13 @@ export default class GlobalHandle {
 
     public static getRemainData(count, data1, cb, type) {
 
+        count += 1;
+
         if (count > 2000) {
             data1.total = 2000;
         }
         else {
-            data1.total = count + 1;
+            data1.total = count;
         }
         socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(data1), info => {
 
@@ -237,8 +247,11 @@ export default class GlobalHandle {
                 return;
             }
 
+            let from = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
+
             info.items.forEach((el, index) => {
-                if (index != 0) {
+
+                if (from != el.timestamp) {
                     let data1 = {
                         day: el.timestamp + '',
                         open: el.open || 0,
@@ -253,13 +266,15 @@ export default class GlobalHandle {
 
             });
 
-            if (GameCfg.data[0].data.length < count) {
+            count -= info.items.length;
+
+            if (count > 0) {
 
                 let data = data1;
 
                 data.from = GameCfg.data[0].data[GameCfg.data[0].data.length - 1].day;
 
-                this.getRemainData(count - 2000, data, cb, type);
+                this.getRemainData(count, data, cb, type);
             }
             else {
 

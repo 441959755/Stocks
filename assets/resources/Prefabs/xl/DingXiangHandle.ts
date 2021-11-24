@@ -48,6 +48,9 @@ export default class NewClass extends cc.Component {
 
 	adSucceed = 0;
 
+	@property(cc.Node)
+	mfxlBtn: cc.Node = null;
+
 	onLoad() {
 		this._tipsLa = this.edit.node.getChildByName('tipslabel');
 		this.edit.node.on(
@@ -183,6 +186,9 @@ export default class NewClass extends cc.Component {
 
 
 	onEnable() {
+		let Unlock = (GameData.properties[pb.GamePropertyId.UnlockDxxl]) || (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]);
+
+		this.mfxlBtn.active = !Unlock;
 
 		this.tipsLabel1.node.active = false;
 		this.tipsLabel2.node.active = false;
@@ -576,6 +582,10 @@ export default class NewClass extends cc.Component {
 
 		else if (name == 'sys_helpbig1') {
 			GlobalEvent.emit(EventCfg.OPENHELPLAYER);
+		}
+
+		else if (name == 'mfxlBtn') {
+			GlobalEvent.emit("OPENUNLOCKBOX", true);
 		}
 	}
 

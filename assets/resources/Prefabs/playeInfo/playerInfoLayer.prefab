@@ -4727,7 +4727,7 @@
         "__id__": 121
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 124
@@ -18407,7 +18407,7 @@
     "_useOriginalSize": true,
     "_string": "",
     "returnType": 0,
-    "maxLength": 8,
+    "maxLength": 12,
     "_tabIndex": 0,
     "editingDidBegan": [],
     "textChanged": [],
@@ -18514,8 +18514,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "提示:不超过18个字节，中文不超过6个",
-    "_N$string": "提示:不超过18个字节，中文不超过6个",
+    "_string": "提示:不超过12个字节，中文不超过6个",
+    "_N$string": "提示:不超过12个字节，中文不超过6个",
     "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": true,

@@ -70,14 +70,13 @@ export default class DrawData {
             console.log('arr is null');
             return arr1;
         }
-        //  if (type == 1) {
+
         t = type;
-        //  }
 
         for (let index = arr.length - 1; index >= 0;) {
             if (index - t + 1 >= 0) {
                 let el = arr[index];
-                if (parseInt(ComUtils.fromatTime1(el.day)) <= parseInt(ComUtils.fromatTime1(time))) {
+                if (parseInt(ComUtils.getTimestamp(el.day + '')) <= parseInt(ComUtils.getTimestamp(time + ''))) {
                     let day = el.day;
                     let open = arr[index].open;
                     let close = el.close;

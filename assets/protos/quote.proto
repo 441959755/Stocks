@@ -40,7 +40,7 @@ enum KType {
 
 	Day  = 10;  // 日K（时间格式：YYYYMMDD
 	Day7 = 11;  // 周K
-	Day30=12;   //月k
+	Day30 = 12; // 月K
 }
 
 // 行情K线波形
@@ -156,6 +156,7 @@ message AiStockItem {
 	double today_signal = 10;	// 今日信号
 	int64 cur_ask_ts = 11;		// 当前买入信号时间
 	int64 last_bid_ts = 12;		// 最近一次建议卖出信号时间
+	int64 last_ask_ts = 13;		// 最近一次建议买入信号时间
 }
 message CmdQueryAiStockListReply {
 	repeated AiStockItem items = 2;

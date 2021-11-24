@@ -29,30 +29,17 @@ export default class NewClass extends cc.Component {
 
     to = null;
 
+    onDisable() {
+        this._selectID = 0;
+        this._preSelectID = 0;
+        this.qhData = null;
+        this.huizhidatas = 0;
+        this.beg = 0;
+        this.end = 0;
+        this.to = null;
+    }
+
     onLoad() {
-
-        if (GameCfg.GameSet.ZKine == '5分钟K') {
-            this._selectID = 0;
-        }
-
-        else if (GameCfg.GameSet.ZLine == '15分钟K') {
-            this._selectID = 1;
-        }
-
-        else if (GameCfg.GameSet.ZLine == '30分钟K') {
-            this._selectID = 2;
-        }
-
-        else if (GameCfg.GameSet.ZLine == '60分钟K') {
-            this._selectID = 3;
-        }
-
-        else if (GameCfg.GameSet.ZLine == '日线') {
-            this._selectID = 4;
-        }
-
-        this._preSelectID = this._selectID;
-
         GlobalEvent.on(EventCfg.GAMEOVEER, () => {
 
             if (this.qhData && this.qhData.data.length > 0) {
@@ -68,7 +55,27 @@ export default class NewClass extends cc.Component {
 
 
     onEnable() {
+        if (GameCfg.enterGameCache.ktype == pb.KType.Min5) {
+            this._selectID = 0;
+        }
 
+        else if (GameCfg.enterGameCache.ktype == pb.KType.Min15) {
+            this._selectID = 1;
+        }
+
+        else if (GameCfg.enterGameCache.ktype == pb.KType.Min30) {
+            this._selectID = 2;
+        }
+
+        else if (GameCfg.enterGameCache.ktype == pb.KType.Min60) {
+            this._selectID = 3;
+        }
+
+        else if (GameCfg.enterGameCache.ktype == pb.KType.Day) {
+            this._selectID = 4;
+        }
+
+        this._preSelectID = this._selectID;
         let str = JSON.stringify(GameCfg.data[0])
         this.qhData = JSON.parse(str);
 
@@ -113,14 +120,14 @@ export default class NewClass extends cc.Component {
 
         let tt = this.huizhidatas - 1;
 
-        //   this.saveTime = this.qhData.data[tt].day;
         if (GameCfg.GAMEFUPAN) {
             tt = GameCfg.huizhidatas - 1;
-            //    this.saveTime = this.qhData.data[tt].day;
         }
 
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         let time;
+
         if ((this.qhData.data[tt].day + '').length < 10) {
             time = this.qhData.data[tt].day + '';
             let year = time.slice(0, 4);
@@ -130,53 +137,43 @@ export default class NewClass extends cc.Component {
         } else {
             time = this.qhData.data[tt].day;
         }
+
         let ktype, code, from, total, to;
+
         code = this.qhData.code;
-        total = 40;
+
+        total = 100;
+
         to = time;
+
         let t = 0;
+
         if (type <= 3) {
             ktype = pb.KType.Min5;
-            //  GameCfg.GameSet.ktype = pb.KType.Min5;
-            // if (type == 0) {
-            //     from = time - 40 * 60 * 5;
-            // } else if (type == 1) {
-            //     from = time - 40 * 60 * 15;
-            //     // total *= 3;
-            //     t = 3;
-            // } else if (type == 2) {
-            //     from = time - 40 * 60 * 30;
 
-            //     t = 6;
-            //     total *= 6;
-            // } else if (type == 3) {
-            //     from = time - 40 * 60 * 60;
-            //     total *= 12;
-            //     t = 12;
-            // }
-            total *= 40;
+            total *= 12;
+
             to += 24 * 60 * 60;
+
         } else if (type == 4) {
+
             ktype = pb.KType.Day;
-            //  GameCfg.GameSet.ktype = pb.KType.Day;
-            let f = new Date((time - 40 * 24 * 60 * 60) * 1000);
-            let ye = f.getFullYear();
-            let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
 
-            let da = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
-            from = ye + '' + mon + '' + da;
             to = ComUtils.fromatTime1(to);
-        } else if (type == 5) {
-            ktype = pb.KType.Day7;
-            //  GameCfg.GameSet.ktype = pb.KType.Day7;
-            let f = new Date((time - 40 * 24 * 60 * 60 * 7) * 1000);
-            let ye = f.getFullYear();
-            let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
 
-            let da = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
-            from = ye + '' + mon + '' + da;
+            if (DrawDatas.arrDay.length > 0 && DrawDatas.arrDay[DrawDatas.arrDay.length - 1].day == to) {
+                this.onChanageType(id);
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                return;
+            }
+
+        } else if (type == 5) {
+
+            ktype = pb.KType.Day7;
+
             to = ComUtils.fromatTime1(to);
         }
+
         let data = {
             ktype: ktype,
             code: code,
@@ -184,14 +181,17 @@ export default class NewClass extends cc.Component {
             total: total,
             to: to,
         }
+
         this.to = to;
         console.log(JSON.stringify(data));
         socket.send(pb.MessageId.Req_QuoteQueryFuture, PB.onCmdQuoteQueryFutureConverToBuff(data), info => {
+
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
             GameCfg.data[0].data = [];
-            //  console.log(info.items.length);
+
             info.items.forEach(el => {
-                // {"code":2000042,"ktype":"Day","timestamp":"1577235900","open":3112,"close":3116,"high":3120,"low":3112,"volume":"15032"},
+
                 let data = {
                     day: el.timestamp,
                     open: el.open,
@@ -210,50 +210,6 @@ export default class NewClass extends cc.Component {
                 DrawDatas.arrDay = GameCfg.data[0].data;
             }
             this.onChanageType(id);
-            // if (type == 4 || type == 0) {
-
-            // }
-            //  else {
-            //     for (let index = 0; index < info.items.length;) {
-            //         if (index + t - 1 < info.items.length) {
-            //             let el = info.items[index];
-            //             let day = el.timestamp;
-            //             let open = el.open;
-            //             let close = info.items[index + t - 1].close;
-
-            //             let high = 0, low = el.low, volume = 0;
-            //             for (let i = 0; i < t; i++) {
-            //                 if (info.items[index + i].high >= high) {
-            //                     high = info.items[index + i].high;
-            //                 }
-
-            //                 if (info.items[index + i].low <= low) {
-            //                     low = info.items[index + i].low;
-            //                 }
-
-            //                 volume += info.items[index + i].volume;
-
-            //             }
-            //             let data = {
-            //                 day: day,
-            //                 open: open,
-            //                 close: close,
-            //                 high: high,
-            //                 low: low,
-            //                 value: volume,
-            //                 ccl_hold: el.cclHold,
-            //             }
-            //             GameCfg.data[0].data.push(data);
-            //             index += t;
-            //         } else {
-            //             break;
-            //         }
-            //     }
-            // }
-            // GameCfg.beg_end[0] = 0;
-            // GameCfg.beg_end[1] = GameCfg.data[0].data.length;
-            // GameCfg.huizhidatas = GameCfg.data[0].data.length;
-            // this.onDrawEvetn(GameCfg.data[0].data);
         });
 
     }
@@ -262,9 +218,11 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         this.hideAllNode()
         if (name == 'btn5min') {
+
             if (this.AllNode[0].children[0].active == true) {
                 return;
             }
+
             let nodes = this.AllNode[0].children;
             this.AllNode[0].color = new cc.Color().fromHEX('#e94343');
             GameCfg.selectZline = pb.KType.Min5;
@@ -331,29 +289,28 @@ export default class NewClass extends cc.Component {
 
     onBlackDrawLine(id) {
 
-        if (GameCfg.GameSet.ZLine == '5分钟K' || GameCfg.GameSet.ZLine == '15分钟K' || GameCfg.GameSet.ZLine == '30分钟K' || GameCfg.GameSet.ZLine == '60分钟K') {
+        if (GameCfg.enterGameCache.ktype == pb.KType.Min5 ||
+            GameCfg.enterGameCache.ktype == pb.KType.Min15 ||
+            GameCfg.enterGameCache.ktype == pb.KType.Min30 ||
+            GameCfg.enterGameCache.ktype == pb.KType.Min60) {
+
             if (this._selectID == id) {
                 this.onGoBlackGame();
             } else {
+
                 if (this._preSelectID == this._selectID) {
                     this.onSaveData();
                 }
 
                 if (id >= 4) {
-                    if (DrawData.arrDay.length <= 0) {
-
-                        this.onGetData(4, id);
-                    } else {
-
-                        this.onChanageType(id);
-                    }
+                    this.onGetData(4, id);
                 }
                 else {
-
                     this.onChanageType(id);
                 }
+
             }
-        } else if (GameData.QHSet.ZLine == '日线') {
+        } else if (GameCfg.enterGameCache.ktype == pb.KType.Day) {
             if (this._selectID == id) {
 
                 this.onGoBlackGame();
@@ -363,17 +320,9 @@ export default class NewClass extends cc.Component {
                 }
 
                 if (id < 4) {
-
-                    if (DrawData.arrMin5.length <= 0) {
-
-                        this.onGetData(0, id);
-                    } else {
-
-                        this.onChanageType(id);
-                    }
+                    this.onGetData(0, id);
                 }
                 else {
-
                     this.onChanageType(id);
                 }
             }
@@ -384,13 +333,22 @@ export default class NewClass extends cc.Component {
 
 
     onGoBlackGame() {
+
         GameCfg.beg_end[0] = this.beg;
         GameCfg.beg_end[1] = this.end;
+
         GameCfg.huizhidatas = this.huizhidatas;
-        this.onDrawEvetn(this.qhData.data);
-        GlobalEvent.emit('HIDEBOTTOMNODE', true);
-        GlobalEvent.emit(EventCfg.ADDMARKHIDEORSHOW, true);
+
+
         GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
+
+        this.onDrawEvetn(this.qhData.data);
+
+        GlobalEvent.emit('HIDEBOTTOMNODE', true);
+
+        GlobalEvent.emit(EventCfg.ADDMARKHIDEORSHOW, true);
+
+
     }
 
     onChanageType(id) {

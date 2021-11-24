@@ -714,9 +714,15 @@ export default class NewClass extends cc.Component {
 				et.getComponent(cc.Label).string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
 			}
 		}
-		console.log('数据长度' + this.gpData.length);
-		console.log(GameCfg.huizhidatas);
+
 		this.roundNumber = this.gpData.length - GameCfg.huizhidatas;
+
+		if (GameCfg.GameType == pb.GameType.QiHuo || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.ZhiBiao) {
+			if (this.roundNumber > GameCfg.enterGameCache.total - GameCfg.enterGameCache.reserve) {
+				this.roundNumber = GameCfg.enterGameCache.total - GameCfg.enterGameCache.reserve
+			}
+		}
+
 
 		this.tipsLabel.string = '回合数：' + this.roundNumber;
 		this.tipsLabel1.string = '回合数：' + this.roundNumber;

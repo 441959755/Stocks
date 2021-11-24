@@ -42,6 +42,8 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     tickLa: cc.Label = null;
 
+    flag = true;
+
     onShow() {
         this.yiLingQu.active = this.LQFALG;
         //var reg = /\\|\//g;
@@ -98,8 +100,9 @@ export default class NewClass extends cc.Component {
 
             socket.send(pb.MessageId.Req_Hall_GetItem, buff, (info) => {
                 console.log('getRewardCenter:' + JSON.stringify(info));
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '领取成功');
-                this.node.destroy();
+                //   GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '领取成功');
+
+                this.flag = false;
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
             })
             this.LQFALG = true;
@@ -112,6 +115,12 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         if (name == 'btn_lingqu') {
             this.getItemRewaed();
+        }
+    }
+
+    onDisable() {
+        if (!this.flag) {
+            this.node.destroy();
         }
     }
 

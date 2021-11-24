@@ -182,9 +182,10 @@ export default class NewClass extends cc.Component {
 	}
 
 	//打开解锁框
-	openUnlockBox() {
+	openUnlockBox(falg) {
 		this.openNode(this.unlockBox, 'Prefabs/unlockBox', 22, (node) => {
 			this.unlockBox = node;
+			this.unlockBox.getComponent('UnlockBox').oninit(falg);
 			GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		});
 	}
@@ -501,7 +502,7 @@ export default class NewClass extends cc.Component {
 						this.finalLayer[this.index].active = true;
 					}
 				}
-			}, 80)
+			}, 50)
 		}
 	}
 

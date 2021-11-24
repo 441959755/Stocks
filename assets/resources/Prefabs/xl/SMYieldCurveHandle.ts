@@ -275,6 +275,7 @@ export default class NewClass extends cc.Component {
             }
         }
 
+
         for (let tt = day; tt >= 1; tt--) {
 
             this.daysData[tt - 1] = {
@@ -284,28 +285,31 @@ export default class NewClass extends cc.Component {
                 endMoney: 0,
                 rate: 0,
             }
-            if (arr[tt]) {
+
+            if (arr[tt] && arr[tt].length > 0) {
                 this.daysData[tt - 1].count = arr[tt].length;
 
                 this.daysData[tt - 1].user_capital = arr[tt][arr[tt].length - 1].userCapital;
                 this.daysData[tt - 1].endMoney = arr[tt][0].userCapital + (arr[tt][0].userProfit || 0);
             }
             else {
-                this.daysData[tt - 1].count = 0;
 
-                if (this.daysData[tt - 1].endMoney || this.daysData[tt - 1].user_capital) {
-                    this.daysData[tt - 1].user_capital = this.daysData[tt].user_capital;
-                    this.daysData[tt - 1].endMoney = this.daysData[tt].user_capital;
-                }
-                else {
+                if (tt == day) {
                     this.daysData[tt - 1].user_capital = GameData.SmxlState.gold;
                     this.daysData[tt - 1].endMoney = GameData.SmxlState.gold;
                 }
+                else {
+                    this.daysData[tt - 1].user_capital = this.daysData[tt].user_capital
+                    this.daysData[tt - 1].endMoney = this.daysData[tt].user_capital
+                }
+
+                this.daysData[tt - 1].count = 0;
             }
 
             xlcvs[tt] = this.daysData[tt - 1].endMoney;
 
         }
+
         // label  
         this.labels[1].string = GameData.SmxlState.goldInit;
         this.labels[3].string = GameData.SmxlState.gold - GameData.SmxlState.goldInit + '';

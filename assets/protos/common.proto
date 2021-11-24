@@ -87,6 +87,8 @@ enum MessageId {
 	Sync_S2C_ActivityConf = 1026;			// 同步当前活动配置：ActivityConf
 	Sync_S2C_GameCgdsItem = 1028;			// 同步一条炒股大赛状态：CgdsStateItem
 	Sync_S2C_GoldAwardPrompt = 1030;		// 同步金币奖励提示，客户端播放动画：CmdGoldAwardPrompt
+	Sync_S2C_UnregistryAccount = 1032;		// 同步管理员封号提示：无
+	Sync_S2C_CgdsConf = 1034;				// 同步炒股大赛配置：CgdsConf
 
 	Sync_S2C_Broadcast = 1100;				// 系统广播：Notice
 	Sync_S2C_Message = 1102;				// 服务器发到客户端的消息（包括邀请或聊天消息）：Notice
@@ -181,7 +183,7 @@ enum MessageId {
 	Req_Game_Start = 4003;					// 开始游戏：CmdGameStart
 	Rep_Game_Start = 4004;					// 开始游戏应答：ErrorInfo
 	Req_Game_Over = 4005;					// 結束游戏：CmdGameOver
-	Rep_Game_Over = 4006;					// 結束游戏应答：无
+	Rep_Game_Over = 4006;					// 結束游戏应答：CmdGameOverReply
 	Req_Game_QueryGameResult = 4007;		// 查询游戏结果：CmdQueryGameResult
 	Rep_Game_QueryGameResult = 4008;		// 查询游戏结果应答：CmdQueryGameResultReply
 	Req_Game_GetGameOperation = 4009;		// 查询游戏操作步骤：CmdGetGameOperations
@@ -223,7 +225,7 @@ enum MessageId {
 	Rep_Game_CgdsRanking = 4040;			// 获取炒股大赛排行榜应答：RankingList
 	// 竞猜相关
 	Req_Game_ZsjcBettingList = 4041;		// 指数竞猜列表：无
-	Rep_Game_ZsjcBettingList = 4042;		// 指数竞猜列表应答：IndexBettingList
+	Rep_Game_ZsjcBettingList = 4042;		// 指数竞猜列表应答：ZsjcGameList
 	Req_Game_ZsjcBet = 4043;				// 指数竞猜下注：CmdBet
 	Rep_Game_ZsjcBet = 4044;				// 指数竞猜下注应答：ErrorInfo
 	Req_Game_ZsjcRanking = 4045;			// 指数竞猜排行榜：无
@@ -289,6 +291,4 @@ message VoidRequest {
 // 空响应
 message VoidReply {
 }
-
-
 

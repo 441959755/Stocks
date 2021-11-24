@@ -33,6 +33,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     item: cc.Node = null;
 
+    @property(cc.Node)
+    mfxlBtn: cc.Node = null;
+
 
 
     tips = [
@@ -128,6 +131,9 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
+        let Unlock = (GameData.properties[pb.GamePropertyId.UnlockZbxl]) || (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]);
+
+        this.mfxlBtn.active = !Unlock;
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
         // GameCfg.GameType = pb.GameType.ZhiBiao;
@@ -515,6 +521,11 @@ export default class NewClass extends cc.Component {
             GameCfg.GameType = null;
             this.node.active = false;
         }
+
+        else if (name == 'mfxlBtn') {
+            GlobalEvent.emit("OPENUNLOCKBOX", true);
+        }
+
     }
 
     zhibiaoStartGameSet() {

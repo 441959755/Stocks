@@ -121,9 +121,9 @@ enum TaskId {
 	Dk = 1;			// 多空任务
 	Zsjc = 2;		// 指数竞猜任务
 	Ggjc = 3;		// 个股竞猜任务
-	Cg = 4;			// 闯关赛任务
+	//Cg = 4;			// 闯关赛任务
 
-	MaxDailyTaskId = 5;	// 日常任务最大下标（不包括最大ID，小于等于最大ID）
+	MaxDailyTaskId = 4;	// 日常任务最大下标（不包括最大ID，小于等于最大ID）
 	MaxStudyTaskId = 8;	// 学习任务最大下标（不包括最大ID，小于等于最大ID）
 }
 
@@ -413,6 +413,9 @@ message CmdGameOver {
 	GameResult result = 1;			// 游戏结果
 	GameOperations operations = 2;	// 游戏操作步骤集合
 }
+message CmdGameOverReply {
+	int64 ts = 1;			// 游戏时间戳（查询一条游戏结果的时候填写）
+}
 // 查询游戏结果
 message CmdQueryGameResult {
 	int32 uid = 1;			// 玩家ID（必填）
@@ -420,7 +423,7 @@ message CmdQueryGameResult {
 	int64 from = 3;			// 游戏起始时间戳（查询一段时间）
 	int64 to = 4;			// 游戏结束时间戳（查询一段时间）
 	int32 page_size = 5;	// 每页记录条数
-	int32 ts = 6;			// 游戏时间戳（查询一条游戏结果的时候填写）
+	int64 ts = 6;			// 游戏时间戳（查询一条游戏结果的时候填写）
 }
 // 查询游戏结果应答
 message CmdQueryGameResultReply {

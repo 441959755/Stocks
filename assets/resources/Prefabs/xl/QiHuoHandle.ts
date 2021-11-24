@@ -41,6 +41,9 @@ export default class NewClass extends cc.Component {
 
 	adSucceed = 0;
 
+	@property(cc.Node)
+	mfxlBtn: cc.Node = null;
+
 	onLoad() {
 		this.DCArr = {
 			name: '大连商品',
@@ -263,6 +266,9 @@ export default class NewClass extends cc.Component {
 	}
 
 	onEnable() {
+		let Unlock = (GameData.properties[pb.GamePropertyId.UnlockQhxl]) || (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]);
+		this.mfxlBtn.active = !Unlock;
+
 		GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		GameCfg.GameType = pb.GameType.QiHuo;
 		let setDatas = GameData.QHSet;
@@ -735,6 +741,12 @@ export default class NewClass extends cc.Component {
 							let lm = date.start.slice(4, 6);
 							let ld = date.start.slice(6);
 
+							let obj = ComUtils.GetAddDay(ly + '-' + lm + '-' + ld, 100);
+
+							ly = obj.y;
+							lm = obj.m;
+							ld = obj.d;
+
 							let cy = date.end.slice(0, 4);
 							let cm = date.end.slice(4, 6);
 							let cd = date.end.slice(6);
@@ -810,8 +822,7 @@ export default class NewClass extends cc.Component {
 			}
 
 			else if ((this.curState == 2 || this.curState == 3) && !this.adSucceed) {
-				// GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
-				// return;
+
 				GlobalEvent.emit("OPENUNLOCKBOX");
 				return;
 			}
@@ -833,6 +844,10 @@ export default class NewClass extends cc.Component {
 
 		else if (name == 'sys_helpbig1') {
 			GlobalEvent.emit(EventCfg.OPENHELPLAYER);
+		}
+
+		else if (name == 'mfxlBtn') {
+			GlobalEvent.emit("OPENUNLOCKBOX", true);
 		}
 	}
 
@@ -940,9 +955,11 @@ export default class NewClass extends cc.Component {
 
 
 		items = GameCfgText.getQHItemInfo(hy);
-		if (!items) {
+		if (!items || items[7] == 0) {
+			this.QHStartGameSet();
 			return;
 		}
+
 		data.code = items[0];
 
 		// 合约代码|合约中文名称|合约英文名称|合约种类|所在交易所|第一个日K日期（YYYYMMDD）|最后一个日K//日期（YYYYMMDD）|第一个分时时间戳（精确到秒）|最后一个分时时间戳（精确到秒）
@@ -975,7 +992,7 @@ export default class NewClass extends cc.Component {
 
 					let d = new Date(year + '-' + month + '-' + day);
 
-					let t = d.getTime() + 50 * 24 * 60 * 60 * 1000;
+					let t = d.getTime() + 100 * 24 * 60 * 60 * 1000;
 
 					let s = Math.random() * (sc - t) + t;
 
@@ -1011,7 +1028,7 @@ export default class NewClass extends cc.Component {
 					sc = end - data.total * tt * 60;
 				}
 
-				start = start + 50 * tt * 60;
+				start = start + 100 * tt * 60;
 
 				let f = parseInt(Math.random() * (sc - start) + start + '');
 
@@ -1029,7 +1046,9 @@ export default class NewClass extends cc.Component {
 			end = tim.end;
 
 			let year, month, day;
+
 			year = GameData.QHSet.year;
+
 			if (GameData.QHSet.month == '随机') {
 				month = '01';
 			} else {
@@ -1062,6 +1081,7 @@ export default class NewClass extends cc.Component {
 			} else if (parseInt(end) < parseInt(year + month + day)) {
 				if (GameData.QHSet.HY == '随机') {
 					this.QHStartGameSet();
+
 				}
 				else {
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能大与期货结束时间');
@@ -1111,8 +1131,8 @@ export default class NewClass extends cc.Component {
 						GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
 					}
 					else {
-						GameData.huizhidatas = 100;
-						GameCfg.huizhidatas = 100;
+						GameData.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
+						GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
 					}
 				}
 				else {

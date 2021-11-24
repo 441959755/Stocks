@@ -46,6 +46,13 @@ export default class NewClass extends cc.Component {
 
     adCount = null;
 
+    oninit(falg) {
+        if (falg) {
+            this.addCountBtn.node.active = false;
+            this.content1.node.active = false;
+        }
+    }
+
     onEnable() {
         this.addCountBtn.node.active = true;
         this.content1.node.active = true;

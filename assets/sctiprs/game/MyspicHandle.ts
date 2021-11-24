@@ -45,6 +45,10 @@ export default class NewClass extends cc.Component {
         }, this);
     }
 
+    onDisable() {
+        this.draw.clear();
+    }
+
 
     onDestroy() {
         GlobalEvent.off('onDraw');

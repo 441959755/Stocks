@@ -98,6 +98,7 @@ cc.Class({
 				isMA6: true,
 				MA6Date: 120,
 				isFC: false,
+				isSound: true,
 
 			}
 			GameData.SMSet = SMSet;

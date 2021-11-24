@@ -41,13 +41,14 @@ export default class NewClass extends cc.Component {
         this.zbNode.active = false;
         this.userHead.spriteFrame = GameData.headImg;
 
-        this.userLe.string = 'LV:' + GameData.properties[2];
+        this.userLe.string = 'LV:' + GameData.properties[pb.GamePropertyId.Level];
 
-        let max_exp = GameCfgText.levelInfoCfg[GameData.properties[2]];
+        let max_exp = GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
 
-        this.userExp.string = 'EXP:' + GameData.properties[1] + '/' + max_exp;
+        this.userExp.string = 'EXP:' + GameData.properties[pb.GamePropertyId.Exp] + '/' + max_exp;
 
         this.userName.string = GameData.userName;
+
         let data = DrawData.getBukoCount();
 
         if (GameCfg.GameType == pb.GameType.DingXiang) {
