@@ -66,7 +66,8 @@ export default class NewClass extends cc.Component {
             }
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.GAMEFUPAN = false;
-            GameCfg.GameSet = GameData.SMSet;
+            GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.SMSet));
+            //      GameCfg.GameSet = GameData.SMSet;
             GameCfg.ziChan = GameData.SmxlState.gold;
             this.smStartGameSet();
         }

@@ -23,7 +23,9 @@ export default class NewClass extends cc.Component {
                 return;
             }
             this.graphics.clear();
+
             this.graphics.lineWidth = 2;
+
             data.forEach(el => {
                 if (!el || !el.start) { return }
                 if (el.start >= GameCfg.beg_end[1]) {
@@ -63,8 +65,8 @@ export default class NewClass extends cc.Component {
                 this.graphics.strokeColor = color;
                 DrawUtils.drawRectFill(this.graphics, startX + 1, 0, width - 4, this.node.height, color);
             })
-        }, this);
 
+        }, this);
     }
 
     onEnable() {

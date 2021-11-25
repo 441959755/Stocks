@@ -38,6 +38,7 @@ export default class StrategyAIData {
             end: null,
             rate: null,
         }
+
         this.hostory.push(item);
     }
 

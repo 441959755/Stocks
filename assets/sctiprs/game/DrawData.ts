@@ -514,6 +514,7 @@ export default class DrawData {
         for (let i = 0; i < datas.length; i++) {
 
             if (!datas[i].rate) { continue }
+
             if (datas[i].rate >= 0) {
                 data.yCount++;
                 let t = Math.max(data.maxRate, datas[i].rate);
@@ -521,7 +522,6 @@ export default class DrawData {
                     maxIndex = i;
                     data.maxRate = datas[i].rate;
                 }
-
             } else {
                 data.sCount++;
                 let t = Math.min(data.minRate, datas[i].rate);

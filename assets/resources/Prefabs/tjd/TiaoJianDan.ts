@@ -173,8 +173,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         GameCfg.GAMEFUPAN = false;
-
-        GameCfg.GameSet = GameData.TJDSet;
+        GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.TJDSet));
+        // GameCfg.GameSet = GameData.TJDSet;
 
         GameCfg.ziChan = 100000;
 

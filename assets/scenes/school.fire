@@ -183,7 +183,7 @@
       "array": [
         0,
         0,
-        521.5502677822441,
+        525.0008377504477,
         0,
         0,
         0,
@@ -1778,7 +1778,7 @@
       "__id__": 36
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 38
@@ -3289,7 +3289,7 @@
       "__id__": 70
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 72
@@ -3383,7 +3383,7 @@
       "__id__": 70
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 74
@@ -3477,7 +3477,7 @@
       "__id__": 70
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 76
@@ -3967,7 +3967,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        0,
+        -17.219,
         0,
         0,
         0,
@@ -4223,7 +4223,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        0,
+        -17.219,
         0,
         0,
         0,
@@ -4576,7 +4576,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        0,
+        -17.219,
         0,
         0,
         0,
@@ -5063,7 +5063,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 288,
+      "width": 0,
       "height": 30.24
     },
     "_anchorPoint": {
@@ -5114,8 +5114,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "答题获得三星才能获取奖励",
-    "_N$string": "答题获得三星才能获取奖励",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,

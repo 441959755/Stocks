@@ -14,7 +14,9 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         this.rewardCenterBtn.active = false;
+
         GlobalEvent.on('getRewardCenter', this.getRewardCenter.bind(this), this);
+
         GlobalEvent.on('REWARDITEM', (count) => {
             console.log(count);
             if (count > 0) {

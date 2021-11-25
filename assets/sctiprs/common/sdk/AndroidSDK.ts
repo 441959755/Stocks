@@ -57,7 +57,7 @@ export default class AndroidSDK {
         if (id && pw) {
             let loginInfo = {
                 account: id,
-                type: pb.LoginType.AppTest,
+                type: pb.LoginType.MobilePhoneId,
                 from: pb.AppFrom.Android_001,
                 // type: pb.LoginType.WeChat,
                 // from: pb.AppFrom.Test,

@@ -38,8 +38,9 @@ export default class NewClass extends cc.Component {
     onLoad() {
         GlobalEvent.on(EventCfg.GAMEFUPAN, () => {
             if (GameCfg.GameType == pb.GameType.FenShi) {
+                this.fupanNode.getComponent('FuPan').onShow(this.alllv);
                 this.fupanNode.active = true;
-                this.fupanNode.getComponent('FSFinal').onShow(this.alllv);
+
             }
         }, this);
 

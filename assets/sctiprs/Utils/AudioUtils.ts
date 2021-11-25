@@ -113,7 +113,7 @@ export default class AudioUtils {
 	 */
 	public static setEffectsVolume(val) {
 		if (!val) {
-			val = false;
+			val = 0;
 		}
 		else {
 			val = 1;

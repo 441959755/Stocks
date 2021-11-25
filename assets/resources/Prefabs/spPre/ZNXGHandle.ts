@@ -213,6 +213,8 @@ export default class NewClass extends cc.Component {
     getCollectList() {
 
         if (GameData.AIStockList.length == 0) {
+            let UIScrollControl = this.scrollview2.getComponent('UIScrollControl');
+            UIScrollControl.clear();
             return;
         }
 

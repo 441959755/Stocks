@@ -26,7 +26,7 @@ export default class NewClass extends cc.Component {
 
     myspicData = [];
 
-
+    flag = false;
     onLoad() {
 
         if (GameCfg.GameType != pb.GameType.DingXiang) {
@@ -36,19 +36,18 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on('onDraw', this.onDraw.bind(this), this);
 
-        let flag = false;
+        this.flag = false;
 
-        this.draw.node.active = flag;
+        this.draw.node.active = this.flag;
         GlobalEvent.on(EventCfg.MYSPICCLICK, () => {
-            flag = !flag;
-            this.draw.node.active = flag;
+            this.flag = !this.flag;
+            this.draw.node.active = this.flag;
         }, this);
     }
 
     onDisable() {
         this.draw.clear();
     }
-
 
     onDestroy() {
         GlobalEvent.off('onDraw');
@@ -58,6 +57,10 @@ export default class NewClass extends cc.Component {
     onEnable() {
         if (!GameCfg.GAMEFUPAN) {
             this.getMyspic();
+        }
+        else {
+            this.flag = false;
+            this.draw.node.active = this.flag;
         }
     }
 

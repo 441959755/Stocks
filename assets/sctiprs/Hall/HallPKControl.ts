@@ -142,8 +142,8 @@ export default class NewClass extends cc.Component {
         info.id && (GameData.roomId = info.id)
 
         GameCfg.GameType = info.game;
-
-        GameCfg.GameSet = GameData.JJPKSet;
+        GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.JJPKSet));
+        //   GameCfg.GameSet = GameData.JJPKSet;
 
         let code = info.code + '';
         if (code.length >= 7) {
@@ -250,11 +250,11 @@ export default class NewClass extends cc.Component {
         if (!node) {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes(url, pre => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 node = cc.instantiate(pre);
                 this.node.addChild(node, zIndex);
                 node.active = true;
                 call(node);
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
             })
         }
         else {

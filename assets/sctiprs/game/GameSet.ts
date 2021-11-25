@@ -53,6 +53,21 @@ export default class NewClass extends cc.Component {
         //     }
         // }, this);
 
+        GlobalEvent.on('initMALA', () => {
+            let MAla = [];
+            this.MALabel.forEach(el => {
+                el.node.active = false;
+            })
+
+            GameCfg.MAs.forEach((el, index) => {
+                if (el) {
+                    this.MALabel[index].node.active = true;
+                    MAla.push(this.MALabel[index])
+                }
+            })
+            GlobalEvent.emit(EventCfg.SETMALABEL, MAla);
+        }, this);
+
     }
 
     initMALa() {
@@ -68,31 +83,37 @@ export default class NewClass extends cc.Component {
 
         } else {
             if (GameCfg.GameSet.isMA1) {
+                this.MALabel[0].node.active = true;
                 MAla.push(this.MALabel[0])
             } else {
                 this.MALabel[0].node.active = false;
             }
             if (GameCfg.GameSet.isMA2) {
+                this.MALabel[1].node.active = true;
                 MAla.push(this.MALabel[1])
             } else {
                 this.MALabel[1].node.active = false;
             }
             if (GameCfg.GameSet.isMA3) {
+                this.MALabel[2].node.active = true;
                 MAla.push(this.MALabel[2])
             } else {
                 this.MALabel[2].node.active = false;
             }
             if (GameCfg.GameSet.isMA4) {
+                this.MALabel[3].node.active = true;
                 MAla.push(this.MALabel[3])
             } else {
                 this.MALabel[3].node.active = false;
             }
             if (GameCfg.GameSet.isMA5) {
+                this.MALabel[4].node.active = true;
                 MAla.push(this.MALabel[4])
             } else {
                 this.MALabel[4].node.active = false;
             }
             if (GameCfg.GameSet.isMA6) {
+                this.MALabel[5].node.active = true;
                 MAla.push(this.MALabel[5])
             } else {
                 this.MALabel[5].node.active = false;
@@ -161,6 +182,7 @@ export default class NewClass extends cc.Component {
 
     onDestroy() {
         GlobalEvent.off('setDrawing');
+        GlobalEvent.off('initMALA');
         //   GlobalEvent.off(EventCfg.SET_DRAW_SIZE);
     }
 

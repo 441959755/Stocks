@@ -155,7 +155,7 @@ export default class NewClass extends cc.Component {
 
 				this.buyData = [];
 
-				StrategyAIData.onSellFunc();
+				//	StrategyAIData.onSellFunc();
 			},
 			this
 		);
@@ -453,6 +453,10 @@ export default class NewClass extends cc.Component {
 				GameCfg.GameType == pb.GameType.JJ_PK ||
 				GameCfg.GameType == pb.GameType.JJ_ChuangGuan ||
 				GameCfg.GameType == pb.GameType.TiaoJianDan) {
+
+				if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+					el.volFraction = 1;
+				}
 				if (el.opId == pb.GameOperationId.Ask || el.opId == 'Ask') {
 					this._type = 1;
 					this.onClickCfBtn(el.volFraction || el.volume);
@@ -512,6 +516,7 @@ export default class NewClass extends cc.Component {
 		if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) && GameCfg.GAMEFRTD) {
 			GameCfg.huizhidatas = GameData.selfEnterRoomData.players[0].curPos;
 		}
+
 		else if ((GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong || GameCfg.GameType == pb.GameType.JJ_ChuangGuan)) {
 			GameCfg.huizhidatas = this.gpData.length;
 		}

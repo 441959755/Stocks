@@ -384,8 +384,8 @@ export default class NewClass extends cc.Component {
                 return;
             }
 
-
-            GameCfg.GameSet = GameData.FSSet;
+            GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.FSSet));
+            //     GameCfg.GameSet = GameData.FSSet;
             console.log('分数据：' + JSON.stringify(info));
             GameData.huizhidatas = 1;
             GameCfg.huizhidatas = 1;

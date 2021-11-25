@@ -136,6 +136,7 @@ export default class NewClass extends cc.Component {
             el.MA5Date = GameData.SMSet.MA5Date;
             el.MA6Date = GameData.SMSet.MA6Date;
         })
+
         GameData.SMSet = GameData.SMSet;
         AudioUtils.setEffectsVolume(GameData.SMSet.isSound);
         // AudioUtils.setMusicVolume(GameData.SMSet.isSound);

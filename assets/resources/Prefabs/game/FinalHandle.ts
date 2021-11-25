@@ -79,7 +79,6 @@ export default class NewClass extends cc.Component {
 
     protected onShow() {
 
-
         let gpData = GameCfg.data[0].data;
 
         if (!gpData || gpData.length <= 0 || this.flag) { return }
@@ -165,14 +164,13 @@ export default class NewClass extends cc.Component {
             datas.refId = 0;
 
             let CmdGameOver;
-
-            this.saveHoistoryInfo(datas.ts);
-
+            let arr = ComUtils.getJJXunXian();
             if (GameCfg.GameType != pb.GameType.ShuangMang) {
                 CmdGameOver = {
                     result: datas,
                     operations: {
                         items: UpGameOpt.arrOpt,
+                        junXian: arr,
                     }
                 }
             } else {
@@ -181,7 +179,7 @@ export default class NewClass extends cc.Component {
                 }
 
             }
-            GlobalHandle.onCmdGameOverReq(CmdGameOver);
+            GlobalHandle.onCmdGameOverReq(CmdGameOver, this.saveHoistoryInfo.bind(this));
         }
     }
 
@@ -373,6 +371,7 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         //返回大厅
         if (name == 'closeBtn') {
+            this.leavaGame();
             this.flag = false;
             GlobalEvent.emit(EventCfg.LEAVEGAME);
         }
@@ -384,7 +383,7 @@ export default class NewClass extends cc.Component {
             if (!this.gotoGame()) {
                 return;
             }
-
+            this.leavaGame();
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
             if (GameCfg.GameType == pb.GameType.ShuangMang) {
@@ -426,7 +425,7 @@ export default class NewClass extends cc.Component {
             if (!this.gotoGame()) {
                 return;
             }
-
+            this.leavaGame();
             GlobalHandle.onCmdGameStartReq(() => {
                 // GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
                 GameCfg.huizhidatas = GameData.huizhidatas;
@@ -444,8 +443,7 @@ export default class NewClass extends cc.Component {
         }
     }
 
-
-    onDisable() {
+    leavaGame() {
         this.qhxl_zhuan.active = false;
         this.qhxl_kui.active = false;
         GameCfg.allRate = 0;
@@ -453,7 +451,6 @@ export default class NewClass extends cc.Component {
         //  GameCfg.GAMEFUPAN = false;
         GameCfg.history.allRate = 0;
         GameCfg.RoomGameData = null;
-
     }
 
     gotoGame() {

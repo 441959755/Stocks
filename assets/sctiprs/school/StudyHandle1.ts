@@ -1,3 +1,4 @@
+import GameData from "../GameData";
 import GlobalEvent from "../Utils/GlobalEvent";
 
 
@@ -49,6 +50,41 @@ export default class NewClass extends cc.Component {
     asset = null;
 
     flag = false;
+
+    onEnable() {
+
+        if (GameData.schoolProgress == 1) {
+            this.title.string = 'K线入门';
+        }
+        else if (GameData.schoolProgress == 2) {
+            this.title.string = '均线MA';
+        }
+
+        else if (GameData.schoolProgress == 3) {
+            this.title.string = '成交量';
+        }
+
+        else if (GameData.schoolProgress == 4) {
+            this.title.string = 'MACD';
+        }
+
+        else if (GameData.schoolProgress == 5) {
+            this.title.string = 'KDJ';
+        }
+
+        else if (GameData.schoolProgress == 6) {
+            this.title.string = 'BOLL';
+        }
+
+        else if (GameData.schoolProgress == 7) {
+            this.title.string = 'RSI';
+        }
+
+        else if (GameData.schoolProgress == 8) {
+            this.title.string = 'EXPMA';
+        }
+
+    }
 
     onShow(data?, Imgs?) {
         this.flag = false;

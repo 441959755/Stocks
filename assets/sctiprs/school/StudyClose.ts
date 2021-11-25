@@ -51,16 +51,19 @@ export default class NewClass extends cc.Component {
     onShow(dui, cuo) {
         this.award = 0;
         GameData.TaskStudy.forEach((el, index) => {
+
             if (index + 1 == GameData.schoolProgress) {
+
                 if (el.award) {
                     this.falg = true;
                 }
                 else {
                     this.falg = false;
                 }
-            }
-        });
 
+            }
+
+        });
 
         this.stars.forEach(el => {
             el.active = false;
@@ -105,17 +108,24 @@ export default class NewClass extends cc.Component {
             this.zqlLa.node.color = new cc.Color().fromHEX('#e84848');
         }
 
-
         this.awardLa.string = this.award + '金币';
+
         if (this.award > 0) {
             this.awardLa.node.color = new cc.Color().fromHEX('#e84848');
         }
         else {
             this.awardLa.node.color = cc.Color.WHITE;
         }
-        GameData.TaskStudy[GameData.schoolProgress - 1].award = this.award;
-        GlobalEvent.emit('saveStudyProgress', this.award);
-        GlobalEvent.emit('UPDATESCHOOLUI');
+
+        if (this.award > GameData.TaskStudy[GameData.schoolProgress - 1].award) {
+
+            GameData.TaskStudy[GameData.schoolProgress - 1].award = this.award;
+
+            GlobalEvent.emit('saveStudyProgress', this.award);
+
+            GlobalEvent.emit('UPDATESCHOOLUI');
+        }
+
     }
 
 

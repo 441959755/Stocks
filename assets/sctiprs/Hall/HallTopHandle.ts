@@ -1,6 +1,8 @@
 import { pb } from "../../protos/proto";
 import GameData from "../GameData";
 import ComUtils from "../Utils/ComUtils";
+import EventCfg from "../Utils/EventCfg";
+import GlobalEvent from "../Utils/GlobalEvent";
 import LoadUtils from "../Utils/LoadUtils";
 import PopupManager from "../Utils/PopupManager";
 
@@ -17,8 +19,18 @@ export default class NewClass extends cc.Component {
 
     vipExplain: cc.Node = null;
 
+    onLoad() {
+        //vip
+        GlobalEvent.on(EventCfg.VIPCHANGE, this.setVIPstatus.bind(this), this);
+    }
+
 
     start() {
+        this.setVIPstatus();
+    }
+
+
+    setVIPstatus() {
         if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
             ComUtils.getVIPDisTime(this.getVIPDisTime.bind(this));
         }
@@ -26,6 +38,7 @@ export default class NewClass extends cc.Component {
             this.vipTimeLabel.string = 'VIP';
         }
     }
+
 
     getVIPDisTime(obj) {
         this.vipTimeLabel.string = obj.day + '天' + obj.hours + '时';

@@ -1,5 +1,6 @@
 
 import { pb } from "../../../protos/proto";
+import DrawData from "../../../sctiprs/game/DrawData";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import StrategyAIData from "../../../sctiprs/game/StrategyAIData";
 import GameData from "../../../sctiprs/GameData";
@@ -148,7 +149,7 @@ export default class NewClass extends cc.Component {
             loseSp.active = false;
             winSp.active = false;
 
-            if (GameData.Players[1].icon) {
+            if (GameData.Players[1] && GameData.Players[1].icon) {
 
                 userHead.spriteFrame = GameData.Players[1].icon;
             }
@@ -298,6 +299,18 @@ export default class NewClass extends cc.Component {
 
         //复盘
         else if (name == 'pk_jsbt_qd') {
+
+            let j = 0;
+            GameCfg.MAs = [];
+            this.gameResult.players[0].junXian.forEach(el => {
+                if (el) {
+                    GameCfg.MAs[j++] = el;
+                }
+            });
+
+            DrawData.initData(GameCfg.data[0].data);
+            GlobalEvent.emit('initMALA');
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.fill = [];
             GameCfg.fill.length = 0;
@@ -332,6 +345,20 @@ export default class NewClass extends cc.Component {
         }
         //zj复盘
         else if (name == 'Btn_fupan_self') {
+
+            let j = 0;
+
+            GameCfg.MAs = [];
+
+            this.gameResult.players[0].junXian.forEach(el => {
+                if (el) {
+                    GameCfg.MAs[j++] = el;
+                }
+            });
+
+            DrawData.initData(GameCfg.data[0].data);
+            GlobalEvent.emit('initMALA');
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
             GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
@@ -351,9 +378,26 @@ export default class NewClass extends cc.Component {
         //tr复盘
         else if (name == 'Btn_fupan_other') {
 
+            if (!this.gameResult.players[1].junXian || this.gameResult.players[1].junXian.length <= 0) {
+                this.gameResult.players[1].junXian = [5, 10, 20, 30, 60, 120];
+            }
+
+            let j = 0;
+            GameCfg.MAs = [];
+            this.gameResult.players[1].junXian.forEach(el => {
+                if (el) {
+                    GameCfg.MAs[j++] = el;
+                }
+            });
+
+            DrawData.initData(GameCfg.data[0].data);
+
+            GlobalEvent.emit('initMALA');
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
             GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
+
             GameCfg.fill = [];
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;

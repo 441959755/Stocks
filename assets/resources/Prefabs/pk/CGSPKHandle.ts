@@ -154,7 +154,8 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
-            GameCfg.GameSet = GameData.JJPKSet;
+            GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.JJPKSet));
+            //   GameCfg.GameSet = GameData.JJPKSet;
             GlobalEvent.emit(EventCfg.OPENMATCHPK);
 
         }

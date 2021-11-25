@@ -131,7 +131,7 @@ export default class NewClass extends cc.Component {
 
             GameData.Players[1] = this.playeInfo;
 
-            GameCfg.GameSet = GameData.JJPKSet;
+            GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.JJPKSet));
 
             let ts = this.itemData.ts;
 
@@ -150,6 +150,7 @@ export default class NewClass extends cc.Component {
             }
 
             GlobalHandle.GetGameOperations(info, (junXian) => {
+                console.log(JSON.stringify(junXian));
 
                 if (GameCfg.GameType != pb.GameType.JJ_ChuangGuan) {
                     UpGameOpt.ChanagekOffset(UpGameOpt.player1Opt);
@@ -189,7 +190,8 @@ export default class NewClass extends cc.Component {
             }
 
             GameCfg.GameType = pb.GameType.DingXiang;
-            GameCfg.GameSet = GameData.DXSet;
+            GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
+            //  GameCfg.GameSet = GameData.DXSet;
             GameCfg.GAMEFUPAN = false;
 
             GameCfg.huizhidatas = this.itemData.kStartup + 1;
@@ -207,8 +209,8 @@ export default class NewClass extends cc.Component {
             GameCfg.JJ_XUNLIAN = true;
 
             GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
-
-            GameCfg.GameSet = GameData.JJPKSet;
+            GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.JJPKSet));
+            // GameCfg.GameSet = GameData.JJPKSet;
 
             GameCfg.huizhidatas = this.itemData.kStartup + 1;
             GameData.huizhidatas = this.itemData.kStartup + 1;
@@ -230,7 +232,7 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
-            GlobalHandle.GetGameOperations(info, () => {
+            GlobalHandle.GetGameOperations(info, (junXian) => {
 
                 GameCfg.RoomGameData = {
                     players: [
@@ -238,7 +240,8 @@ export default class NewClass extends cc.Component {
                         {
                             gd: this.playeInfo || GameData.Players[1],
                             ops: { items: UpGameOpt.player1Opt },
-                            result: this.itemData
+                            result: this.itemData,
+                            junXian: junXian,
                         }],
                 }
 

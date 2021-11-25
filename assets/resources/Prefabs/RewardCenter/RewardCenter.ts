@@ -54,8 +54,13 @@ export default class NewClass extends cc.Component {
             })
         }
         else if (name == 'closeBtn') {
+
             this.node.active = false;
-            GlobalEvent.emit('REWARDITEM', this.content.children.length);
+
+            setTimeout(() => {
+                GlobalEvent.emit('REWARDITEM', this.content.children.length);
+            }, 100);
+
         }
     }
 

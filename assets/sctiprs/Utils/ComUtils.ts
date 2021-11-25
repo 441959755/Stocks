@@ -24,11 +24,19 @@ export default class ComUtils {
 		this.VIPTimeCall.push(call);
 
 		let dis = GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000;
-		let f = new Date(parseInt(dis + '') * 1000);
 
-		obj.day = f.getDate();
-		obj.hours = f.getHours();
-		obj.minute = f.getMinutes();
+		//	let f = new Date(dis * 1000);
+
+		obj.day = parseInt(dis / (60 * 60 * 24) + '');
+
+
+		dis = dis - obj.day * (60 * 60 * 24);
+
+		obj.hours = parseInt(dis / (60 * 60) + '');
+
+		dis = dis - obj.hours * (60 * 60);
+
+		obj.minute = parseInt(dis / (60) + '');
 
 		call(obj);
 
@@ -36,11 +44,15 @@ export default class ComUtils {
 			this.call = setInterval(() => {
 
 				let dis = GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000;
-				let f = new Date(parseInt(dis + '') * 1000);
+				obj.day = parseInt(dis / (60 * 60 * 24) + '');
 
-				obj.day = f.getDate();
-				obj.hours = f.getHours();
-				obj.minute = f.getMinutes();
+				dis = dis - obj.day * (60 * 60 * 24);
+
+				obj.hours = parseInt(dis / (60 * 60) + '');
+
+				dis = dis - obj.hours * (60 * 60);
+
+				obj.minute = parseInt(dis / (60) + '');
 
 				this.VIPTimeCall.forEach(el => {
 					el && (el(obj));
@@ -355,7 +367,10 @@ export default class ComUtils {
 
 	public static getJJXunXian() {
 		let arr = [];
-		let smArr = GameData.JJPKSet;
+		let smArr;
+
+		smArr = GameData.JJPKSet;
+
 		if (smArr.isMA1 && arr.indexOf(smArr.MA1Date) == -1) {
 			arr.push(smArr.MA1Date);
 		}

@@ -500,7 +500,8 @@ export default class NewClass extends cc.Component {
             }
 
             GameCfg.GameType = pb.GameType.ZhiBiao;
-            GameCfg.GameSet = GameData.ZBSet;
+            GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.ZBSet));
+            //      GameCfg.GameSet = GameData.ZBSet;
             GameCfg.GAMEFUPAN = false;
             GameCfg.ziChan = 100000;
 

@@ -161,21 +161,26 @@ export default class NewClass extends cc.Component {
                 GameCfg.historyType = GameCfg.GameType;
 
                 if (this.infoData.gType == pb.GameType.ShuangMang) {
-                    GameCfg.GameSet = GameData.SMSet;
+                    GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.SMSet));
+                    //    GameCfg.GameSet = GameData.SMSet;
                 }
                 else if (this.infoData.gType == pb.GameType.ZhiBiao) {
-                    GameCfg.GameSet = GameData.ZBSet;
+                    GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.ZBSet));
+                    //  GameCfg.GameSet = GameData.ZBSet;
                 }
                 else if (this.infoData.gType == pb.GameType.QiHuo) {
-                    GameCfg.GameSet = GameData.QHSet;
+                    GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.QHSet));
+                    //   GameCfg.GameSet = GameData.QHSet;
                 }
                 else if (this.infoData.gType == pb.GameType.DingXiang) {
-                    GameCfg.GameSet = GameData.DXSet;
+                    GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
+                    //   GameCfg.GameSet = GameData.DXSet;
 
                 }
 
                 else if (this.infoData.gType == pb.GameType.TiaoJianDan) {
-                    GameCfg.GameSet = GameData.TJDSet;
+                    GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.TJDSet));
+                    //  GameCfg.GameSet = GameData.TJDSet;
                 }
 
                 GameCfg.enterGameCache = {

@@ -401,8 +401,6 @@ message CmdDailyTaskProgress {
 	int32 task_id = 2;	// 任务Id
 }
 
-
-
 // 开始游戏
 message CmdGameStart {
 	GameType game    = 1;	// 游戏类型

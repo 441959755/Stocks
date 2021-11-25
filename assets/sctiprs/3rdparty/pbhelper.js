@@ -228,7 +228,6 @@ PBHelper.prototype = {
         }
 
         else if (id == pb.MessageId.Rep_Game_Start
-            || id == pb.MessageId.Rep_Game_Over
             || id == pb.MessageId.Rep_Hall_EditIcon
             || id == pb.MessageId.Rep_Hall_EditNick
             || id == pb.MessageId.Rep_Hall_EditLocation
@@ -583,6 +582,12 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Rep_Hall_ShopOrder) {
             let CmdShopOrderReply = pb.CmdShopOrderReply;
             let data = CmdShopOrderReply.decode(new Uint8Array(buff));
+            return data;
+        }
+
+        else if (id == pb.MessageId.Rep_Game_Over) {
+            let CmdGameOverReply = pb.CmdGameOverReply;
+            let data = CmdGameOverReply.decode(new Uint8Array(buff));
             return data;
         }
     }

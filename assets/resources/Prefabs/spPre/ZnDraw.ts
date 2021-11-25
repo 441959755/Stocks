@@ -588,7 +588,8 @@ export default class NewClass extends cc.Component {
 
     //绘制颜色初始
     initData() {
-        GameCfg.GameSet = GameData.JJPKSet;
+        GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.JJPKSet));
+        //  GameCfg.GameSet = GameData.JJPKSet;
 
         GameCfg.MAColor[0] = new cc.Color().fromHEX('#ffffff');
         GameCfg.MAColor[1] = new cc.Color().fromHEX('#ebeb12');

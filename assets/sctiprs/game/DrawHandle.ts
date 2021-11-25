@@ -100,7 +100,6 @@ export default class NewClass extends cc.Component {
 
             //跟新label
             this.updataLabel(GameCfg.huizhidatas - 1);
-
         }, this);
 
         //ma boll pcm
@@ -338,6 +337,9 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.NOTICEDRAWMOVW, this.noticeDrawMove.bind(this), this);
 
         // GlobalEvent.on(EventCfg.RAISINGLIMIT, this.getRaisingLimit.bind(this), this);
+        GlobalEvent.on('initMALA', () => {
+            this.initData();
+        }, this);
     }
 
     //跳转到标签买卖点
@@ -445,7 +447,6 @@ export default class NewClass extends cc.Component {
                     } else {
                         el.string = 'MA' + GameCfg.MAs[t] + ': ' + this.MaList[index][t].toFixed(2);
                     }
-
                 }
             })
         }

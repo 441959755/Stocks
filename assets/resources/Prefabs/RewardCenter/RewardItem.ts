@@ -101,7 +101,6 @@ export default class NewClass extends cc.Component {
             socket.send(pb.MessageId.Req_Hall_GetItem, buff, (info) => {
                 console.log('getRewardCenter:' + JSON.stringify(info));
                 //   GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '领取成功');
-
                 this.flag = false;
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
             })

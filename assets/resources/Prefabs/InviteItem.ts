@@ -53,7 +53,7 @@ export default class NewClass extends cc.Component {
                 if (EnterGameControl.onCurPKEnterGame()) {
                     this.node.active = false;
                     GameCfg.GameType = pb.GameType.JJ_PK;
-                    GameCfg.GameSet = GameData.JJPKSet;
+                    GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.JJPKSet));
                     GlobalEvent.emit(EventCfg.OPENMATCHPK);
 
                 }
@@ -65,7 +65,7 @@ export default class NewClass extends cc.Component {
                 if (EnterGameControl.onCurPKEnterGame()) {
                     this.node.active = false;
                     GameCfg.GameType = pb.GameType.JJ_DuoKong;
-                    GameCfg.GameSet = GameData.JJPKSet;
+                    GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.JJPKSet));
                     GlobalEvent.emit(EventCfg.OPENMATCHPK);
 
                 }

@@ -49,6 +49,7 @@ export default class NewClass extends cc.Component {
         // }
 
         PopupManager.init();
+
         GlobalEvent.on('OPENCURSTUDYBAR', this.openCurStudyBar.bind(this), this);
 
         GlobalEvent.on('saveStudyProgress', this.saveStudyProgress.bind(this), this);
@@ -165,6 +166,7 @@ export default class NewClass extends cc.Component {
             progress: GameData.studyHisBar,
             award: award,
         }
+
         GameData.TaskStudy[data.index] = data;
         let CmdStudyProgress = pb.CmdStudyProgress;
         let message = CmdStudyProgress.create(data);

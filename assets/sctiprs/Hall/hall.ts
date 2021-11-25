@@ -473,6 +473,8 @@ export default class NewClass extends cc.Component {
 	//游戏结束
 	GameOver(message) {
 
+		if (!this.gameLayer || !this.gameLayer.active) { return }
+
 		if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
 
 			if (message) {
