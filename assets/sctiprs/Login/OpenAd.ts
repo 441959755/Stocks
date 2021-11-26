@@ -23,10 +23,14 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         GlobalEvent.on('OPENADSHOW', this.initAD.bind(this), this);
+
         GlobalEvent.on('OPENADHIDE', () => {
             this.node.active = false;
         }, this);
+
+        GameCfgText.LoadGameConf();
     }
 
     initAD() {
@@ -39,6 +43,7 @@ export default class NewClass extends cc.Component {
         this.version = version;
 
         LoadImg.downloadRemoteImageAndSave(GameCfgText.adConf.launch[0].img, (flag, sp) => {
+
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
             if (!sp) {

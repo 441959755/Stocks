@@ -205,7 +205,9 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'btn_tz') {
+
             GameData.Players[1] = this.playeInfo;
+
             GameCfg.JJ_XUNLIAN = true;
 
             GameCfg.GameType = pb.GameType.JJ_ChuangGuan;

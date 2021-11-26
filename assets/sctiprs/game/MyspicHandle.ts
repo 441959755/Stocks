@@ -29,20 +29,23 @@ export default class NewClass extends cc.Component {
     flag = false;
     onLoad() {
 
+        GlobalEvent.on(EventCfg.MYSPICCLICK, () => {
+            this.flag = !this.flag;
+            this.draw.node.active = this.flag;
+        }, this);
+
+        GlobalEvent.on('onDraw', this.onDraw.bind(this), this);
+
         if (GameCfg.GameType != pb.GameType.DingXiang) {
             this.draw.node.active = false;
             return;
         }
 
-        GlobalEvent.on('onDraw', this.onDraw.bind(this), this);
 
         this.flag = false;
 
         this.draw.node.active = this.flag;
-        GlobalEvent.on(EventCfg.MYSPICCLICK, () => {
-            this.flag = !this.flag;
-            this.draw.node.active = this.flag;
-        }, this);
+
     }
 
     onDisable() {

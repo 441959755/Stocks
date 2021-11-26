@@ -15,11 +15,15 @@ export default class NewClass extends cc.Component {
 
         let node = cc.instantiate(this.item);
 
-        this.layout.addChild(node);
+        if (node) {
 
-        let headle = node.getComponent('InviteItem');
+            this.layout.addChild(node);
 
-        headle.onInit(data);
+            let headle = node.getComponent('InviteItem');
+            headle.number = 2;
+            headle.onInit(data);
+        }
+
     }
 
 }

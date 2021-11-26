@@ -6,6 +6,7 @@ import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import GlobalHandle from "../global/GlobalHandle";
 import ComUtils from "../Utils/ComUtils";
+import UpGameOpt from "../global/UpGameOpt";
 
 const { ccclass, property } = cc._decorator;
 
@@ -308,6 +309,7 @@ export default class NewClass extends cc.Component {
 
         //数据统计
         let statBtn = this.rightNode.getChildByName('statBtn');
+
         this.node.height = 100;
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
@@ -319,13 +321,14 @@ export default class NewClass extends cc.Component {
 
 
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            this.rightNode.active = true;
             this.GameName.string = '指标训练';
             btnMyspic.active = false;
             statBtn.active = false;
         }
 
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
-
+            this.rightNode.active = true;
             this.GameName.string = '';
             if (!GameCfg.JJ_XUNLIAN) {
                 this.GameName.string = '定向训练';
@@ -523,8 +526,10 @@ export default class NewClass extends cc.Component {
     //进游戏逃跑
     roomLeave() {
 
-        if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+        if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
+
             let gpData = GameCfg.data[0].data;
+            let arr = ComUtils.getJJXunXian();
             let datas = {
                 uid: GameData.userID,
                 gType: GameCfg.GameType,
@@ -543,8 +548,13 @@ export default class NewClass extends cc.Component {
 
             let CmdGameOver = {
                 result: datas,
+                operations: {
+                    items: UpGameOpt.arrOpt,
+                    junXian: arr,
+                }
             }
-            GlobalHandle.onCmdGameOverReq(CmdGameOver);
+
+            GlobalHandle.onCmdGameOverReq(CmdGameOver, null);
         }
 
         //离开游戏

@@ -59,7 +59,6 @@ export default {
             }
         };
 
-
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -68,7 +67,7 @@ export default {
                     saveFile(xhr.response);
                 } else {
                     console.log('xhr.response is null');
-                    // saveFile(null);
+                    //   saveFile(null);
                 }
             }
         }.bind(this);

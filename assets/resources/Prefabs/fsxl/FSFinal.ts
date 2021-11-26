@@ -42,9 +42,17 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     labels: cc.Label[] = [];
 
-
+    @property(cc.Node)
+    vipNode: cc.Node = null;
 
     onShow(allLv) {
+
+        if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+            this.vipNode.active = true;
+        }
+        else {
+            this.vipNode.active = false;
+        }
 
         let gpData = GameCfg.data[0].data;
         //用户信息

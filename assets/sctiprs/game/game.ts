@@ -273,7 +273,6 @@ export default class NewClass extends cc.Component {
         }
     }
 
-
     //同步游戏操作
     updateOtherPlayerOpt(opt) {
         UpGameOpt.UpdataOtherPlayerOpt(opt);

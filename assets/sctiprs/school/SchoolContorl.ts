@@ -159,12 +159,12 @@ export default class NewClass extends cc.Component {
     }
 
     //保存学习任务进度
-    saveStudyProgress(award) {
+    saveStudyProgress(obj) {
 
         let data = {
             index: GameData.schoolProgress - 1,
-            progress: GameData.studyHisBar,
-            award: award,
+            progress: obj.par,
+            award: obj.award,
         }
 
         GameData.TaskStudy[data.index] = data;

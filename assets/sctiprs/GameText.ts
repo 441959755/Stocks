@@ -7,6 +7,7 @@ import HttpUtils from "./common/net/HttpUtils";
 import GlobalEvent from './Utils/GlobalEvent';
 import LLWConfig from './common/config/LLWConfig';
 import PlatDefine from './common/config/PlatDefine';
+import EventCfg from './Utils/EventCfg';
 
 export default class GameCfgText {
 

@@ -56,6 +56,14 @@ export default class NewClass extends cc.Component {
 
 	isLoading = false;
 
+	firstBox = null;
+
+	gobrokeBox = null;
+
+	goldchange = false;
+
+	Matchfalg = false;
+
 	onLoad() {
 
 		PopupManager.init();
@@ -65,8 +73,10 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on(EventCfg.INVITEMESSAGE, this.openBroadcast.bind(this), this);
 
 		GlobalEvent.on(EventCfg.ROOMLEAVE, this.onRoomLeave.bind(this), this);
+
 		//打开帮助
 		GlobalEvent.on(EventCfg.OPENHELPLAYER, this.openHelpLayer.bind(this), this);
+
 		//打开个人中心
 		GlobalEvent.on(EventCfg.OPENPLAYERINFO, this.openPlayerInfoLayer.bind(this), this);
 
@@ -99,6 +109,21 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on('OPENSHOPLAYER', this.openShopLayer.bind(this), this);
 
 		GlobalEvent.on('OPENUNLOCKBOX', this.openUnlockBox.bind(this), this);
+
+		GlobalEvent.on(EventCfg.GOLDCHANGE, () => {
+			this.goldchange = true;
+		}, this);
+
+
+		//匹配界面不弹窗邀请框
+		GlobalEvent.on('HALLPKMATCH', (flag) => {
+			this.Matchfalg = flag;
+			if (flag) {
+				this.broadcast && (this.broadcast.active = false);
+				this.InviteBox && (this.InviteBox.active = false);
+			}
+		}, this);
+
 	}
 
 	start() {
@@ -143,6 +168,11 @@ export default class NewClass extends cc.Component {
 	onEnable() {
 		//自动弹窗
 		PopupManager.autoPop();
+
+		if (GameData.firstGame) {
+			GameData.firstGame = false;
+			this.showFirstBox();
+		}
 	}
 
 	onDestroy() {
@@ -154,7 +184,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.OPENREWARDCENTERLAYER);
 		GlobalEvent.off(EventCfg.OPENOTHERPLAYERHISLAYER);
 		GlobalEvent.off(EventCfg.GAMEOVEER);
-
+		GlobalEvent.off(EventCfg.GOLDCHANGE);
 		GlobalEvent.off('OPENNOTICELAYER');
 		GlobalEvent.off('OPENFRIENDLAYER');
 		GlobalEvent.off('OPENTASKLAYER');
@@ -186,6 +216,20 @@ export default class NewClass extends cc.Component {
 		this.openNode(this.unlockBox, 'Prefabs/unlockBox', 22, (node) => {
 			this.unlockBox = node;
 			this.unlockBox.getComponent('UnlockBox').oninit(falg);
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+		});
+	}
+
+	showFirstBox() {
+		this.openNode(this.firstBox, 'Prefabs/pop/firstBox', 99, (node) => {
+			this.firstBox = node;
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+		});
+	}
+
+	onShowGobroke() {
+		this.openNode(this.gobrokeBox, 'Prefabs/pop/gobrokeBox', 48, (node) => {
+			this.gobrokeBox = node;
 			GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		});
 	}
@@ -321,7 +365,7 @@ export default class NewClass extends cc.Component {
 
 		let arr = data.text.split(',');
 
-		if (data.type == pb.MessageType.RoomInvite && !GameCfg.GameType) {
+		if (data.type == pb.MessageType.RoomInvite && (!this.gameLayer || !this.gameLayer.active) && !this.Matchfalg) {
 
 			if (arr[3] != 0) {
 				if (!this.broadcast) {
@@ -445,6 +489,7 @@ export default class NewClass extends cc.Component {
 		GameCfg.allRate = 0;
 
 		GameCfg.beg_end[0] = 0;
+
 		GameCfg.beg_end[1] = 0;
 
 		GameCfg.blockHistoy = [];
@@ -467,7 +512,13 @@ export default class NewClass extends cc.Component {
 		setTimeout(() => {
 			//跟新获取的奖励消息
 			GlobalEvent.emit('getRewardCenter');
-		}, 1000);
+
+			if (GameData.properties[pb.GamePropertyId.Gold] < 1000 && this.goldchange) {
+				this.onShowGobroke();
+			}
+
+			this.goldchange = false;
+		}, 500);
 	}
 
 	//游戏结束

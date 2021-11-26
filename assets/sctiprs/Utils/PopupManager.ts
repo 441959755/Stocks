@@ -18,11 +18,12 @@ export default class PopupManager {
 
     private static vipExplain: cc.Node = null;
 
-    private static exitBox: cc.Node = null;
+    // private static exitBox: cc.Node = null;
 
     private static isLoading = false;
 
     public static init() {
+
         GlobalEvent.on(EventCfg.LOADINGSHOW, this.loadloading.bind(this), this);
         GlobalEvent.on(EventCfg.LOADINGHIDE, () => { this.loading && (this.loading.active = false) }, this);
 
@@ -38,48 +39,50 @@ export default class PopupManager {
         // }
     }
 
-    public static onKeyDown(event) {
-        switch (event.keyCode) {
-            case cc.macro.KEY.back://而非cc.KEY.back:
-                this.openNode(cc.find('Canvas'), this.exitBox, 'Prefabs/exitBox', 100, null);
-                break;
-        }
-    }
+    // public static onKeyDown(event) {
+    //     switch (event.keyCode) {
+    //         case cc.macro.KEY.back://而非cc.KEY.back:
+    //             this.openNode(cc.find('Canvas'), this.exitBox, 'Prefabs/exitBox', 100, null);
+    //             break;
+    //     }
+    // }
 
+    //协议
     public static openProtocol(str, url) {
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         if (this.protocol) {
             this.protocol.active = true;
-
             this.protocol.getComponent('Protocol').onShow(str, url);
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         }
         else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes('Prefabs/playeInfo/protocol', pre => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.protocol = cc.instantiate(pre);
                 cc.find('Canvas').addChild(this.protocol, 30);
                 this.protocol.active = true;
-
                 this.protocol.getComponent('Protocol').onShow(str, url);
             })
         }
     }
 
+    //其他玩家信息
     public static openOtherPlayerInfoLayer(info) {
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         if (!this.otherPlayerInfo) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes('Prefabs/otherPlayerInfo', pre => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.otherPlayerInfo = cc.instantiate(pre);
                 cc.find('Canvas').addChild(this.otherPlayerInfo, 60);
                 this.otherPlayerInfo.active = true;
                 ActionUtils.openBox(this.otherPlayerInfo);
                 this.otherPlayerInfo.getComponent('OtherPlayerInfoBox').onShow(info);
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
             })
         }
         else {
             ActionUtils.openBox(this.otherPlayerInfo);
             this.otherPlayerInfo.getComponent('OtherPlayerInfoBox').onShow(info);
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         }
     }
 
@@ -103,24 +106,20 @@ export default class PopupManager {
      * 提示文本框
      */
     public static LoadTipsText(content) {
-
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         if (!this.tipsText) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes('Prefabs/tipsText', pre => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 this.tipsText = cc.instantiate(pre);
                 cc.find('Canvas').addChild(this.tipsText, 99);
-
                 this.tipsText && (this.tipsText.active = true)
-
                 this.tipsText && (this.tipsText.getComponent('TipsTextHandle').onShow(content))
-
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
             })
         }
         else {
             this.tipsText.active = true;
-
             this.tipsText.getComponent('TipsTextHandle').onShow(content);
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         }
     }
 
@@ -142,7 +141,6 @@ export default class PopupManager {
 
                 this.tipsBox = node;
                 this.tipsBox.emit('contentText', { text: text, call: call });
-
             })
         } else if (this.tipsBox) {
             this.tipsBox.active = true;
@@ -152,19 +150,19 @@ export default class PopupManager {
 
     //
     public static loadVipExplain() {
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         if (this.vipExplain) {
             this.vipExplain.active = true;
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         }
         else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
             LoadUtils.loadRes('Prefabs/vipExplain', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 let node = cc.instantiate(pre);
                 cc.find('Canvas').addChild(node, 50);
                 this.vipExplain = node;
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
             })
         }
-
     }
 
     public static delPopupNode() {
@@ -172,6 +170,7 @@ export default class PopupManager {
         this.tipsText = null;
         this.loading = null;
         this.otherPlayerInfo = null;
+        this.protocol = null;
         GlobalEvent.off('openProtocol');
         GlobalEvent.off(EventCfg.LOADINGHIDE);
         GlobalEvent.off(EventCfg.LOADINGSHOW);
@@ -183,7 +182,7 @@ export default class PopupManager {
         //   LoadUtils.releaseRes('Prefabs/loading');
         LoadUtils.releaseRes('Prefabs/otherPlayerInfo');
         LoadUtils.releaseRes('Prefabs/playeInfo/protocol');
-        LoadUtils.releaseRes('Prefabs/exitBox');
+        //  LoadUtils.releaseRes('Prefabs/exitBox');
         // cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     }
 

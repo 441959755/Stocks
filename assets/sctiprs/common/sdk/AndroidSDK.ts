@@ -54,6 +54,7 @@ export default class AndroidSDK {
 
     //账号登入
     login(call, id, pw?) {
+
         if (id && pw) {
             let loginInfo = {
                 account: id,
@@ -483,6 +484,7 @@ export default class AndroidSDK {
         var funcName = "payWx"
 
         var sigs = "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+
         console.log(appid + nonce_str + partnerid + prepayid + timestamp + sign);
         jsb.reflection.callStaticMethod(this.className, funcName, sigs, appid, partnerid, prepayid, nonce_str, timestamp, sign)
 

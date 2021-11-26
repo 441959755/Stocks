@@ -128,12 +128,21 @@ export default class NewClass extends cc.Component {
             })
 
         }
+
+        GlobalEvent.on(EventCfg.GMAECOUNTERSCHANGE, this.onGameCountSow.bind(this), this);
+    }
+
+    onGameCountSow() {
+        let gameCount = EnterGameControl.onCurIsEnterGame();
+
+        this.mfxlBtn.active = true;
+        if (gameCount.status == 0) {
+
+            this.mfxlBtn.active = false;
+        }
     }
 
     onEnable() {
-        let Unlock = (GameData.properties[pb.GamePropertyId.UnlockZbxl]) || (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]);
-
-        this.mfxlBtn.active = !Unlock;
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
         // GameCfg.GameType = pb.GameType.ZhiBiao;
@@ -166,6 +175,11 @@ export default class NewClass extends cc.Component {
 
         this.toggle.isChecked = GameData.ZBSet.showSign;
         this.onCreatStrategy(GameData.ZBSet.select);
+        this.onGameCountSow();
+    }
+
+    onDestroy() {
+        GlobalEvent.off(EventCfg.GMAECOUNTERSCHANGE);
     }
 
     onBtnBoxSelectClick(event, data) {

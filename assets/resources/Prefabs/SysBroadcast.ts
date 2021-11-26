@@ -9,9 +9,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     viewNode: cc.Node = null;
 
-    @property(cc.Node)
-    barNode: cc.Node = null;
-
     @property(cc.Label)
     contentLabel: cc.Label = null;
 
@@ -27,15 +24,24 @@ export default class NewClass extends cc.Component {
     onShowActive() {
         this.contentLabel.string = GameData.SysBroadcastList[0];
 
+        this.contentLabel.node.height = 42;
+
         let width = this.viewNode.width;
 
-        this.barNode.x = 0;
+        this.contentLabel.node.x = 0;
+
+        this.contentLabel.node.y = 0;
 
         this.callback = setInterval(() => {
 
-            if (this.barNode.x <= -(width / 2 + 30) - this.contentLabel.node.width) {
+            this.contentLabel.node.y = 0;
+
+            if (this.contentLabel.node.x <= -(width / 2 + 30) - this.contentLabel.node.width) {
+
                 clearInterval(this.callback);
+
                 this.callback = null;
+
                 GameData.SysBroadcastList.shift();
 
                 if (GameData.SysBroadcastList.length <= 0) {
@@ -46,7 +52,7 @@ export default class NewClass extends cc.Component {
                 }
             }
 
-            this.barNode.x -= 1.5;
+            this.contentLabel.node.x -= 1.6;
 
         }, 10);
     }

@@ -227,11 +227,12 @@ export default class NewClass extends cc.Component {
 	onGameCountSow() {
 		let gameCount = EnterGameControl.onCurIsEnterGame();
 		this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.qhxl.cost[0].v) + '金币';
-
+		this.mfxlBtn.active = true;
 		if (gameCount.status == 0) {
 			this.curState = 0;
 			this.tipsLabel1.node.active = false;
 			this.tipsLabel2.node.active = false;
+			this.mfxlBtn.active = false;
 		}
 
 		else if (gameCount.status == 1) {
@@ -266,8 +267,6 @@ export default class NewClass extends cc.Component {
 	}
 
 	onEnable() {
-		let Unlock = (GameData.properties[pb.GamePropertyId.UnlockQhxl]) || (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]);
-		this.mfxlBtn.active = !Unlock;
 
 		GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		GameCfg.GameType = pb.GameType.QiHuo;

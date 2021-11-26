@@ -3,6 +3,8 @@ import EventCfg from "./Utils/EventCfg";
 
 export default class GameData {
 
+    public static firstGame = false;
+
     public static gameData = null;
 
     public static imgs: any = {};  //本地缓存的图片
@@ -246,6 +248,7 @@ export default class GameData {
         GlobalEvent.emit(EventCfg.LEVELCHANGE);
         GlobalEvent.emit(EventCfg.EXPCHANGE);
         GlobalEvent.emit(EventCfg.VIPCHANGE);
+
     }
 
     //保存选择的股票

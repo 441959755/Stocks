@@ -562,8 +562,7 @@ export default class NewClass extends cc.Component {
 
 	onEnable() {
 
-		this.zhangting.active = false;
-		this.dieting.active = false;
+
 
 		this.gpData = GameCfg.data[0].data;
 
@@ -722,12 +721,11 @@ export default class NewClass extends cc.Component {
 
 		this.roundNumber = this.gpData.length - GameCfg.huizhidatas;
 
-		if (GameCfg.GameType == pb.GameType.QiHuo || GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.ZhiBiao) {
+		if (GameCfg.GameType == pb.GameType.QiHuo || GameCfg.GameType == pb.GameType.ZhiBiao) {
 			if (this.roundNumber > GameCfg.enterGameCache.total - GameCfg.enterGameCache.reserve) {
 				this.roundNumber = GameCfg.enterGameCache.total - GameCfg.enterGameCache.reserve
 			}
 		}
-
 
 		this.tipsLabel.string = '回合数：' + this.roundNumber;
 		this.tipsLabel1.string = '回合数：' + this.roundNumber;
@@ -764,6 +762,9 @@ export default class NewClass extends cc.Component {
 				this.gpData[GameCfg.huizhidatas - 1] && (this.priceLabel[1].string = '当前价格：' + this.gpData[GameCfg.huizhidatas - 1].close);
 			}
 		}
+
+		this.zhangting.active = false;
+		this.dieting.active = false;
 	}
 
 	//回合数
@@ -1404,7 +1405,6 @@ export default class NewClass extends cc.Component {
 		else if (this.limitUP == 2) {
 			this.dieting.active = true;
 		}
-
 		GlobalEvent.emit(EventCfg.RAISINGLIMIT, this.limitUP);
 	}
 }

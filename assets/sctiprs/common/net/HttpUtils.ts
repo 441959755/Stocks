@@ -1,3 +1,5 @@
+import EventCfg from "../../Utils/EventCfg";
+import GlobalEvent from "../../Utils/GlobalEvent";
 
 export default {
 
@@ -35,10 +37,12 @@ export default {
         };
 
         xhr.ontimeout = function (ret) {
+
             err && (err(ret))
         }
 
         xhr.onerror = function (ret) {
+
             err && (err(ret));
         }
 
@@ -120,10 +124,12 @@ export default {
         };
 
         xhr.ontimeout = function (ret) {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '连接超时，请检查网络，重新登入')
             err && (err(ret))
         }
 
         xhr.onerror = function (ret) {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '连接超时，请检查网络，重新登入')
             err && (err(ret));
         }
 

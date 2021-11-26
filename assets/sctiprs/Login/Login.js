@@ -71,7 +71,6 @@ cc.Class({
 
 	start() {
 		this.initData();
-		GameCfgText.LoadGameConf();
 	},
 
 	initData() {

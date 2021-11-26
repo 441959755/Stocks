@@ -94,23 +94,24 @@ export default class NewClass extends cc.Component {
             el.string = this.studyData.list[index].title;
         })
 
-        if (!GameData.TaskStudy[GameData.schoolProgress - 1].award) {
+        if (!GameData.TaskStudy[GameData.schoolProgress - 1].progress) {
             this.hisResultLa && (this.hisResultLa.string = '最佳成绩  无')
         }
         else {
             this.hisResultLa && (this.hisResultLa.string = '最佳成绩  ')
-            if (GameData.TaskStudy[GameData.schoolProgress - 1].award == GameCfgText.gameConf.task.study[0].gold) {
 
-                this.hisResultLa && (this.hisResultLa.node.children[0].active = true)
-            }
-            else if (GameData.TaskStudy[GameData.schoolProgress - 1].award == GameCfgText.gameConf.task.study[1].gold) {
-                this.hisResultLa && (this.hisResultLa.node.children[0].active = true)
-                this.hisResultLa && (this.hisResultLa.node.children[1].active = true)
-            }
-            else if (GameData.TaskStudy[GameData.schoolProgress - 1].award == GameCfgText.gameConf.task.study[2].gold) {
+            if (GameData.TaskStudy[GameData.schoolProgress - 1].progress >= GameCfgText.gameConf.task.study[2].progress) {
                 this.hisResultLa && (this.hisResultLa.node.children[0].active = true)
                 this.hisResultLa && (this.hisResultLa.node.children[1].active = true)
                 this.hisResultLa && (this.hisResultLa.node.children[2].active = true)
+            }
+            else if (GameData.TaskStudy[GameData.schoolProgress - 1].progress >= GameCfgText.gameConf.task.study[1].progress) {
+                this.hisResultLa && (this.hisResultLa.node.children[0].active = true)
+                this.hisResultLa && (this.hisResultLa.node.children[1].active = true)
+            }
+            else if (GameData.TaskStudy[GameData.schoolProgress - 1].progress >= GameCfgText.gameConf.task.study[0].progress) {
+
+                this.hisResultLa && (this.hisResultLa.node.children[0].active = true)
             }
         }
 

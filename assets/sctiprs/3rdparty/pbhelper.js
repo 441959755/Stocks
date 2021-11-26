@@ -28,6 +28,7 @@ PBHelper.prototype = {
         console.log('登人返回信息:' + JSON.stringify(decoded));
 
         if (decoded.err.err) {
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, decoded.err.err);
             return;
         }
@@ -215,7 +216,6 @@ PBHelper.prototype = {
             console.log('更新属性:' + JSON.stringify(decode));
 
             GameData.properties = GameData.properties;
-
         }
 
         // 同步输赢计数器：GameCounters
@@ -225,6 +225,11 @@ PBHelper.prototype = {
             console.log('同步输赢计数器：GameCounters' + JSON.stringify(decode));
             GameData.GameCounters = decode.items;
             GlobalEvent.emit(EventCfg.GMAECOUNTERSCHANGE);
+        }
+
+        //当日首次登录会收到
+        else if (id == pb.MessageId.Sync_S2C_FirstLoginToday) {
+            GameData.firstGame = true;
         }
 
         else if (id == pb.MessageId.Rep_Game_Start
@@ -578,6 +583,7 @@ PBHelper.prototype = {
             let data = RankingList.decode(new Uint8Array(buff));
             return data;
         }
+
         // 商城下购买应答
         else if (id == pb.MessageId.Rep_Hall_ShopOrder) {
             let CmdShopOrderReply = pb.CmdShopOrderReply;
@@ -589,6 +595,18 @@ PBHelper.prototype = {
             let CmdGameOverReply = pb.CmdGameOverReply;
             let data = CmdGameOverReply.decode(new Uint8Array(buff));
             return data;
+        }
+
+        //领取破产奖励应答
+        else if (id == pb.MessageId.Rep_Hall_GetBrokenAward) {
+            console.log('领取破产奖励应答' + id);
+            return null;
+        }
+
+        else if (id == pb.MessageId.Sync_S2C_GoldAwardPrompt) {
+            let CmdGoldAwardPrompt = pb.CmdGoldAwardPrompt;
+            let data = CmdGoldAwardPrompt.decode(new Uint8Array(buff));
+            GlobalEvent.emit('CmdGoldAwardPrompt', data);
         }
     }
 }

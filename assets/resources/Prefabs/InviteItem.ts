@@ -16,13 +16,18 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     timeLabel: cc.Label = null;
 
+    number = 1;
+
     cb = null;
 
     itemData = null;
 
     onInit(data) {
+
         this.itemData = data;
+
         let times = 4;
+
         this.cb = setInterval(() => {
             if (times <= 0) {
                 clearInterval(this.cb);
@@ -35,12 +40,15 @@ export default class NewClass extends cc.Component {
             }
 
         }, 1000);
+
         let arr = data.text.split(',');
-        // this.messLabel.string = data.text;
+
         this.messLabel.string = '有人邀请您参加' + arr[1] + '是否接受';
+
     }
 
     onBtnClick(event, data) {
+
         let name = event.target.name;
 
         if (name == 'qdBtn') {
@@ -78,7 +86,6 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'qxBtn') {
             this.node.active = false;
-
         }
 
     }
@@ -86,7 +93,10 @@ export default class NewClass extends cc.Component {
     onDisable() {
         this.cb && (clearInterval(this.cb))
         this.cb = null;
-        this.node.destroy();
+        if (this.number == 2) {
+            this.node.destroy();
+        }
+
     }
 
 

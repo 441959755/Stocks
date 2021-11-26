@@ -98,6 +98,28 @@ export default class NewClass extends cc.Component {
 
         //解锁
         else if (name == 'sys_tck_js') {
+
+            if (GameCfg.GameType == pb.GameType.DingXiang) {
+                if (GameData.properties[pb.GamePropertyId.UnlockDxxl]) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '已经解锁!')
+                    return;
+                }
+            }
+
+            else if (GameCfg.GameType == pb.GameType.QiHuo) {
+                if (GameData.properties[pb.GamePropertyId.UnlockQhxl]) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '已经解锁!')
+                    return;
+                }
+            }
+
+            else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                if (GameData.properties[pb.GamePropertyId.UnlockZbxl]) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '已经解锁!')
+                    return;
+                }
+            }
+
             if (GameData.properties[pb.GamePropertyId.Diamond] >= this.lockPrice) {
 
                 let obj = {

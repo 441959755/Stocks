@@ -120,6 +120,8 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
 
+        GlobalEvent.emit('HALLPKMATCH', true);
+
         if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
             this.onEnterChuanGuanGame();
         }
@@ -201,6 +203,7 @@ export default class NewClass extends cc.Component {
     }
 
     onDisable() {
+        GlobalEvent.emit('HALLPKMATCH', false);
         this.callBack && (clearInterval(this.callBack));
         this.callBack = null;
         this.enterRoom = false;

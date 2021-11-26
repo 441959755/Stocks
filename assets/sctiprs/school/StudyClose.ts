@@ -49,21 +49,13 @@ export default class NewClass extends cc.Component {
     }
 
     onShow(dui, cuo) {
+
+        if (this.falg) {
+            return;
+        }
+        this.falg = true;
         this.award = 0;
-        GameData.TaskStudy.forEach((el, index) => {
 
-            if (index + 1 == GameData.schoolProgress) {
-
-                if (el.award) {
-                    this.falg = true;
-                }
-                else {
-                    this.falg = false;
-                }
-
-            }
-
-        });
 
         this.stars.forEach(el => {
             el.active = false;
@@ -74,31 +66,31 @@ export default class NewClass extends cc.Component {
 
         let zql = (dui / 10) * 100;
         this.zqlLa.string = zql + '%';
-
+        let par = 0
         if (zql < 60) {
 
         }
         else if (zql >= 60 && zql < 80) {
             this.stars[0].active = true;
-            if (!this.falg) {
-                this.award = GameCfgText.gameConf.task.study[0].gold;
-            }
+
+            this.award = GameCfgText.gameConf.task.study[0].gold;
+            par = GameCfgText.gameConf.task.study[0].progress;
+
         }
         else if (zql >= 80 && zql < 100) {
             this.stars[0].active = true;
             this.stars[1].active = true;
 
-            if (!this.falg) {
-                this.award = GameCfgText.gameConf.task.study[1].gold;
-            }
+            this.award = GameCfgText.gameConf.task.study[1].gold + GameCfgText.gameConf.task.study[0].gold;
+            par = GameCfgText.gameConf.task.study[1].progress;
         }
         else if (zql >= 100) {
             this.stars[0].active = true;
             this.stars[1].active = true;
             this.stars[2].active = true;
-            if (!this.falg) {
-                this.award = GameCfgText.gameConf.task.study[2].gold;
-            }
+
+            this.award = GameCfgText.gameConf.task.study[2].gold + GameCfgText.gameConf.task.study[1].gold + GameCfgText.gameConf.task.study[0].gold;
+            par = GameCfgText.gameConf.task.study[2].progress;
         }
 
         if (zql < 60) {
@@ -108,7 +100,7 @@ export default class NewClass extends cc.Component {
             this.zqlLa.node.color = new cc.Color().fromHEX('#e84848');
         }
 
-        this.awardLa.string = this.award + '金币';
+
 
         if (this.award > 0) {
             this.awardLa.node.color = new cc.Color().fromHEX('#e84848');
@@ -117,14 +109,41 @@ export default class NewClass extends cc.Component {
             this.awardLa.node.color = cc.Color.WHITE;
         }
 
-        if (this.award > GameData.TaskStudy[GameData.schoolProgress - 1].award) {
+        if (par > GameData.TaskStudy[GameData.schoolProgress - 1].progress) {
 
-            GameData.TaskStudy[GameData.schoolProgress - 1].award = this.award;
+            if (GameData.TaskStudy[GameData.schoolProgress - 1].progress == GameCfgText.gameConf.task.study[0].progress) {
+                this.award -= GameCfgText.gameConf.task.study[0].award;
+            }
 
-            GlobalEvent.emit('saveStudyProgress', this.award);
+            else if (GameData.TaskStudy[GameData.schoolProgress - 1].progress == GameCfgText.gameConf.task.study[1].progress) {
+                this.award -= (GameCfgText.gameConf.task.study[1].gold + GameCfgText.gameConf.task.study[0].gold);
+            }
 
-            GlobalEvent.emit('UPDATESCHOOLUI');
+            else if (GameData.TaskStudy[GameData.schoolProgress - 1].progress == GameCfgText.gameConf.task.study[2].progress) {
+                this.award -= (GameCfgText.gameConf.task.study[2].gold + GameCfgText.gameConf.task.study[1].gold + GameCfgText.gameConf.task.study[0].gold);
+            }
         }
+        else {
+            this.award = 0;
+        }
+
+        this.awardLa.string = this.award + '金币';
+
+        if (par > (GameData.TaskStudy[GameData.schoolProgress - 1].progress || 0)) {
+            GameData.TaskStudy[GameData.schoolProgress - 1].progress = par;
+            GlobalEvent.emit('UPDATESCHOOLUI');
+
+            let obj = {
+                award: this.award,
+                par: par,
+            }
+
+            console.log(JSON.stringify(obj));
+
+            GlobalEvent.emit('saveStudyProgress', obj);
+        }
+
+
 
     }
 
@@ -140,6 +159,9 @@ export default class NewClass extends cc.Component {
             this.node.active = false;
             GlobalEvent.emit('OPENCURSTUDYBAR', 1);
         }
+    }
 
+    onDisable() {
+        this.falg = false;
     }
 }

@@ -177,8 +177,8 @@ export default class NewClass extends cc.Component {
                 CmdGameOver = {
                     result: datas,
                 }
-
             }
+
             GlobalHandle.onCmdGameOverReq(CmdGameOver, this.saveHoistoryInfo.bind(this));
         }
     }
@@ -486,6 +486,10 @@ export default class NewClass extends cc.Component {
         }
 
         return true;
+    }
+
+    onDisable() {
+        this.flag = false;
     }
 
 }

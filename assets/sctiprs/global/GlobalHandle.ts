@@ -34,7 +34,6 @@ export default class GlobalHandle {
             //游戏行情获取
             this.onCmdGameStartQuoteQuery(data, call)
         }
-
     }
 
     //游戏开始发送游戏类型

@@ -150,11 +150,12 @@ export default class NewClass extends cc.Component {
 		let gameCount = EnterGameControl.onCurDXIsEnterGame();
 
 		this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.dxxl.cost[0].v) + '金币';
-
+		this.mfxlBtn.active = true;
 		if (gameCount.status == 0) {
 			this.curState = 0;
 			this.tipsLabel1.node.active = false;
 			this.tipsLabel2.node.active = false;
+			this.mfxlBtn.active = false;
 		}
 
 		else if (gameCount.status == 1) {
@@ -186,9 +187,6 @@ export default class NewClass extends cc.Component {
 
 
 	onEnable() {
-		let Unlock = (GameData.properties[pb.GamePropertyId.UnlockDxxl]) || (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]);
-
-		this.mfxlBtn.active = !Unlock;
 
 		this.tipsLabel1.node.active = false;
 		this.tipsLabel2.node.active = false;
@@ -810,10 +808,17 @@ export default class NewClass extends cc.Component {
 		GameCfg.enterGameCache = data;
 
 		GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
+
 			GameData.huizhidatas = 0;
 			GameCfg.huizhidatas = 0;
 			let fm = data.from;
-			if (GameData.DXSet.market == '随机行情' && GameData.DXSet.year != '随机') {
+
+			if (GameData.DXSet.market == '震荡行情' || GameData.DXSet.market == '单边上涨' || GameData.DXSet.market == '单边下跌') {
+				GameData.huizhidatas = GameCfg.data[0].data.length - (100);
+				GameCfg.huizhidatas = GameCfg.data[0].data.length - (100);
+			}
+
+			else if (GameData.DXSet.market == '随机行情' && GameData.DXSet.year != '随机') {
 				while (!GameData.huizhidatas) {
 
 					GameCfg.data[0].data.forEach((el, index) => {

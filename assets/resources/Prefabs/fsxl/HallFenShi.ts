@@ -351,7 +351,7 @@ export default class NewClass extends cc.Component {
 
         let from, to, code;
 
-        if (this.boxsLa[0].string == '随机') {
+        if (this.boxsLa[0].string == '随机' || this.boxsLa[1].string == '--' || this.boxsLa[2].string == '--') {
             let day = parseInt(Math.random() * 14 + '');
             from = parseInt((new Date().getTime() - (day * 24) * 60 * 60 * 1000) / 1000 + '');
         }
@@ -367,6 +367,12 @@ export default class NewClass extends cc.Component {
         let items1;
         if (this.editbox.string == '随机选股') {
             items1 = GameCfgText.getItemsByTime1();
+            code = items1[0];
+        }
+        else {
+            // items1 = GameCfgText.getItemsByTime1();
+            // code = items1[0];
+            items1 = GameCfgText.getGPItemInfo(GameData.FSSet.search);
             code = items1[0];
         }
 
