@@ -221,6 +221,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	showFirstBox() {
+		return;
 		this.openNode(this.firstBox, 'Prefabs/pop/firstBox', 99, (node) => {
 			this.firstBox = node;
 			GlobalEvent.emit(EventCfg.LOADINGHIDE);
@@ -410,6 +411,7 @@ export default class NewClass extends cc.Component {
 			})
 		}
 		else {
+
 			this.InviteBox.active = true;
 
 			let headle = this.InviteBox.getComponent('InviteBox');
@@ -472,6 +474,11 @@ export default class NewClass extends cc.Component {
 
 	//离开游戏
 	leaveGame() {
+
+		GameCfg.beg_end[0] = 0;
+
+		GameCfg.beg_end[1] = 0;
+
 		GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
 
 		UpGameOpt.clearGameOpt();
@@ -487,10 +494,6 @@ export default class NewClass extends cc.Component {
 		GameCfg.notice = [];
 
 		GameCfg.allRate = 0;
-
-		GameCfg.beg_end[0] = 0;
-
-		GameCfg.beg_end[1] = 0;
 
 		GameCfg.blockHistoy = [];
 
@@ -558,7 +561,6 @@ export default class NewClass extends cc.Component {
 			}, 50)
 		}
 	}
-
 
 	//期货进入游戏
 	onCmdQHGameStart(data, cb) {

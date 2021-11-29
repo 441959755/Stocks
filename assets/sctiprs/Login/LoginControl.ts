@@ -1,6 +1,4 @@
 
-import LLWConfig from "../common/config/LLWConfig";
-import PlatDefine from "../common/config/PlatDefine";
 import LLWSDK from "../common/sdk/LLWSDK";
 import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
@@ -39,20 +37,9 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
-        //web 本地测试
-        if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WEB) {
+        this.tipsLabel.string = '会员登入';
 
-            this.tipsLabel.string = '会员登入';
-
-            this.onShowNode(this.dlNode);
-
-            // setTimeout(() => {
-            //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '当前为测试版本，输入任意账号即可');
-            // }, 500)
-        }
-        else {
-            //其他平台登入TODO
-        }
+        this.onShowNode(this.dlNode);
 
         let acc = cc.sys.localStorage.getItem('ACCOUNT');
 
@@ -85,11 +72,13 @@ export default class NewClass extends cc.Component {
             this.tipsLabel.string = '忘记密码';
             this.onShowNode(this.zhNode);
         }
+
         //注册账号
         else if (name == 'btnzc') {
             this.tipsLabel.string = '注册账号';
             this.onShowNode(this.zcNode);
         }
+
         //点击登入
         else if (name == 'login_dl') {
             if (this.password.string == '' || this.account.string == '') {
@@ -98,6 +87,7 @@ export default class NewClass extends cc.Component {
             }
             this.loginServer();
         }
+
         //qq登入
         else if (name == 'login_qqdl') {
             if (LLWSDK.getSDK().isInstallQq) {
@@ -107,6 +97,7 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '检查是否安QQ');
             }
         }
+
         //微信登入
         else if (name == 'login_wxdl') {
             LLWSDK.getSDK().loginWX1(this.loginResultCallback.bind(this));

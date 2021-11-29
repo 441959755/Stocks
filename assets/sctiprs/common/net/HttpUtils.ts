@@ -104,6 +104,7 @@ export default {
         xhr.timeout = 5000;
 
         console.log("RequestURL:" + path);
+
         xhr.open("GET", path, true);
 
         xhr.onreadystatechange = function () {
@@ -124,12 +125,12 @@ export default {
         };
 
         xhr.ontimeout = function (ret) {
-            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '连接超时，请检查网络，重新登入')
+            //  
             err && (err(ret))
         }
 
         xhr.onerror = function (ret) {
-            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '连接超时，请检查网络，重新登入')
+            //  GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '连接超时，请检查网络，重新登入')
             err && (err(ret));
         }
 

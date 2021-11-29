@@ -86,6 +86,7 @@ export default class NewClass extends cc.Component {
         this.flag = true;
 
         this.DXXLGG.active = false;
+
         if (GameCfg.GameType == pb.GameType.DingXiang) {
             this.DXXLGG.active = true;
         }
@@ -115,13 +116,14 @@ export default class NewClass extends cc.Component {
             this.showContent();
 
             if (GameCfg.GameType == pb.GameType.ShuangMang) {
+
                 this.boxs[0].active = true;
                 this.boxs[1].active = true;
                 this.boxs[2].active = true;
 
                 this.boxs[0].children[1].getComponent(cc.Label).string = GameData.SmxlState.gold;
                 this.boxs[1].children[1].getComponent(cc.Label).string = parseInt((GameCfg.finalfund - GameCfg.ziChan) + '') + ''
-                this.boxs[2].children[1].getComponent(cc.Label).string = parseInt(GameCfg.finalfund + '') + '';
+                this.boxs[2].children[1].getComponent(cc.Label).string = GameData.SmxlState.gold + parseInt((GameCfg.finalfund - GameCfg.ziChan) + '') + '';
             }
             else {
                 this.boxs[0].active = false;
@@ -383,6 +385,7 @@ export default class NewClass extends cc.Component {
             if (!this.gotoGame()) {
                 return;
             }
+
             this.leavaGame();
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
@@ -455,12 +458,16 @@ export default class NewClass extends cc.Component {
 
     gotoGame() {
 
+        if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.FenShi) {
+            return true;
+        }
+
         if (GameData.properties[pb.GamePropertyId.Gold] < 500) {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
             return false;
         }
 
-        let gameCount = EnterGameControl.onCurDXIsEnterGame();
+        let gameCount = EnterGameControl.onCurIsEnterGame();
 
         let curState, adSucceed;
         if (gameCount.status == 0) {
@@ -470,7 +477,9 @@ export default class NewClass extends cc.Component {
             curState = 1;
         }
         else if (gameCount.status == 2) {
-            let count = cc.sys.localStorage.getItem('ADSUCCEED' + GameCfg.GameType);
+
+            let time = new Date().toLocaleDateString();
+            let count = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + GameCfg.GameType);
             if (count) {
                 adSucceed = parseInt(count);
             }

@@ -82,6 +82,7 @@ export default class NewClass extends cc.Component {
                         //  break;
                     }
                 }
+
                 if (!flag) {
                     this._tipsLa.color = new cc.Color().fromHEX('#e94343');
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '没有找查到您要的股票.');
@@ -112,6 +113,7 @@ export default class NewClass extends cc.Component {
                     edit.string = '';
                 }
             }
+
         }, this);
 
         if (GameData.ZBHistoryInfo.length > 0) {
@@ -323,7 +325,9 @@ export default class NewClass extends cc.Component {
     }
 
     onCreatStrategy(str) {
+
         let downBox = this.downBoxs[1];
+
         let content = cc.find('New ScrollView/view/content', downBox);
 
         let nodes = content.children;

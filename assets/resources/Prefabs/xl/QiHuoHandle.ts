@@ -225,9 +225,13 @@ export default class NewClass extends cc.Component {
 	}
 
 	onGameCountSow() {
+
 		let gameCount = EnterGameControl.onCurIsEnterGame();
+
 		this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.qhxl.cost[0].v) + '金币';
+
 		this.mfxlBtn.active = true;
+
 		if (gameCount.status == 0) {
 			this.curState = 0;
 			this.tipsLabel1.node.active = false;
@@ -245,7 +249,10 @@ export default class NewClass extends cc.Component {
 		else if (gameCount.status == 2) {
 			this.tipsLabel1.node.active = true;
 			this.tipsLabel2.node.active = true;
-			let count = cc.sys.localStorage.getItem('ADSUCCEED' + GameCfg.GameType);
+
+			let time = new Date().toLocaleDateString();
+			let count = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + GameCfg.GameType);
+
 			if (count) {
 				this.adSucceed = parseInt(count);
 			}
@@ -821,11 +828,13 @@ export default class NewClass extends cc.Component {
 			}
 
 			else if ((this.curState == 2 || this.curState == 3) && !this.adSucceed) {
-
 				GlobalEvent.emit("OPENUNLOCKBOX");
 				return;
 			}
-			cc.sys.localStorage.setItem('ADSUCCEED' + GameCfg.GameType, 0);
+
+			let time = new Date().toLocaleDateString();
+
+			cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
 
 			this.onGameCountSow();
 

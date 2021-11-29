@@ -171,6 +171,7 @@ export default class PopupManager {
         this.loading = null;
         this.otherPlayerInfo = null;
         this.protocol = null;
+        this.vipExplain = null;
         GlobalEvent.off('openProtocol');
         GlobalEvent.off(EventCfg.LOADINGHIDE);
         GlobalEvent.off(EventCfg.LOADINGSHOW);
@@ -182,8 +183,8 @@ export default class PopupManager {
         //   LoadUtils.releaseRes('Prefabs/loading');
         LoadUtils.releaseRes('Prefabs/otherPlayerInfo');
         LoadUtils.releaseRes('Prefabs/playeInfo/protocol');
-        //  LoadUtils.releaseRes('Prefabs/exitBox');
-        // cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        LoadUtils.releaseRes('Prefabs/vipExplain');
+
     }
 
 

@@ -108,7 +108,7 @@ export default class NewClass extends cc.Component {
      * 闯关
      */
     openChuangGuan() {
-        this.openNode(this.chuangGuan, 'Prefabs/pk/CGSPK', 3, (node) => { this.chuangGuan = node });
+        this.openNode(this.chuangGuan, 'Prefabs/pk/CGSPK', 2, (node) => { this.chuangGuan = node });
     }
 
     // 同步房间游戏状态

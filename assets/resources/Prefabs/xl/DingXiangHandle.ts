@@ -168,7 +168,9 @@ export default class NewClass extends cc.Component {
 		else if (gameCount.status == 2) {
 			this.tipsLabel1.node.active = true;
 			this.tipsLabel2.node.active = true;
-			let count = cc.sys.localStorage.getItem('ADSUCCEED' + GameCfg.GameType);
+
+			let time = new Date().toLocaleDateString();
+			let count = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + GameCfg.GameType);
 			if (count) {
 				this.adSucceed = parseInt(count);
 			}
@@ -559,8 +561,8 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit("OPENUNLOCKBOX");
 				return;
 			}
-
-			cc.sys.localStorage.setItem('ADSUCCEED' + GameCfg.GameType, 0);
+			let time = new Date().toLocaleDateString();
+			cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
 
 			this.onGameCountSow();
 

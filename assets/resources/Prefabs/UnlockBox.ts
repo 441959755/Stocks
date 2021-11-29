@@ -176,7 +176,8 @@ export default class NewClass extends cc.Component {
     }
 
     ADSucceed() {
-        cc.sys.localStorage.setItem('ADSUCCEED' + GameCfg.GameType, 1);
+        let time = new Date().toLocaleDateString();
+        cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
         GlobalEvent.emit(EventCfg.GMAECOUNTERSCHANGE);
     }
 

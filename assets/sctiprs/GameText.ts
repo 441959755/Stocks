@@ -40,11 +40,11 @@ export default class GameCfgText {
             return
         }
 
-        HttpUtils.loadRequest(this.url + 'app.conf', null, (text) => {
-            //console.log('text' + text);
+        let callback1 = (text) => {
+            cc.sys.localStorage.setItem('APPCONF', text);
+
             this.appConf = JSON.parse(text);
-            //  console.log(this.appConf.maintain);
-            //IOS
+
             if (LLWConfig.PLATTYPE == PlatDefine.PLAT_IOS) {
                 if (this.appConf.maintain.stopIos) {
                     GlobalEvent.emit('OPENNOTICELAYER');
@@ -57,22 +57,62 @@ export default class GameCfgText {
             }
 
             console.log('app.conf 加载完成');
-        })
+        }
 
-        HttpUtils.loadRequest(this.url + 'game.conf', null, (text) => {
+        let err1 = () => {
+            let text = cc.sys.localStorage.getItem('APPCONF');
+            if (!text) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '连接超时，请检查网络，重新登入')
+            }
+            else {
+                callback1(text);
+            }
+        }
+
+        HttpUtils.loadRequest(this.url + 'app.conf', null, callback1.bind(this), err1.bind(this));
+
+
+        let callback2 = (text) => {
+            cc.sys.localStorage.setItem('GAMECONF', text);
             let nati = JSON.parse(text)
 
             this.levelInfoCfg = nati.level_exp;
             this.smxlCfg = nati.smxl;
             this.gameConf = nati;
             console.log('game.conf 加载完成');
-        })
+        }
 
-        HttpUtils.loadRequest(this.url + 'ad.conf', null, (text) => {
+        let err2 = () => {
+            let text = cc.sys.localStorage.getItem('GAMECONF');
+            if (!text) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '连接超时，请检查网络，重新登入')
+            }
+            else {
+                callback2(text);
+            }
+        }
+
+        HttpUtils.loadRequest(this.url + 'game.conf', null, callback2.bind(this), err2.bind(this));
+
+
+        let callback3 = (text) => {
+            cc.sys.localStorage.setItem('ADCONF', text);
             this.adConf = JSON.parse(text);
             console.log('ad.conf 加载完成');
             GlobalEvent.emit('OPENADSHOW');
-        })
+        }
+
+        let err3 = () => {
+            let text = cc.sys.localStorage.getItem('ADCONF');
+            if (!text) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '连接超时，请检查网络，重新登入')
+            }
+            else {
+                callback3(text);
+            }
+        }
+
+        HttpUtils.loadRequest(this.url + 'ad.conf', null, callback3.bind(this), err3.bind(this));
 
         // //属性文件
         // LoadUtils.load(this.url + 'game.conf', (text) => {
@@ -89,8 +129,8 @@ export default class GameCfgText {
         //     console.log('ad.conf 加载完成');
         // })
 
-        // //股票列表
-        HttpUtils.loadRequest(this.url + 'stocklist.dat', null, (text) => {
+        let callback4 = (text) => {
+            cc.sys.localStorage.setItem('STOCKLISTDAT', text);
             this.stockList = text.split('\n');
             // 股票代码|股票名称|第一个行情日期|最后一个行情日期（0为无最后行情，即股票还在上市中）|流通股数（注：请忽略该行）
             this.pkStockList = text.split('\n');
@@ -100,9 +140,6 @@ export default class GameCfgText {
 
                 let code = items[0] + '';
 
-                // if (code >= 1000000) {
-                //     code = parseInt(code) - 1000000;
-                // }
                 if (code.length >= 7) {
                     code = code.slice(1, 7);
                 }
@@ -121,13 +158,39 @@ export default class GameCfgText {
                 this.stockList = arr;
             }
             console.log('股票列表 加载完成');
-        })
+        }
 
-        // //期货列表
-        HttpUtils.loadRequest(this.url + 'contractlist.dat', null, (text) => {
+        let err4 = () => {
+            let text = cc.sys.localStorage.getItem('STOCKLISTDAT');
+            if (!text) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '连接超时，请检查网络，重新登入')
+            }
+            else {
+                callback4(text);
+            }
+        }
+
+        // //股票列表
+        HttpUtils.loadRequest(this.url + 'stocklist.dat', null, callback4.bind(this), err4.bind(this));
+
+        let callback5 = (text) => {
+            cc.sys.localStorage.setItem('CONTRACTLISTDAT', text);
             this.qihuoList = text.split('\n');
             console.log('期货列表 加载完成');
-        })
+        }
+
+        let err5 = () => {
+            let text = cc.sys.localStorage.getItem('CONTRACTLISTDAT');
+            if (!text) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '连接超时，请检查网络，重新登入')
+            }
+            else {
+                callback5(text);
+            }
+        }
+
+        // //期货列表
+        HttpUtils.loadRequest(this.url + 'contractlist.dat', null, callback5.bind(this), err5.bind(this));
 
     }
 

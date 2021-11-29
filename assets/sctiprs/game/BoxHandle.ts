@@ -248,9 +248,16 @@ export default class NewClass extends cc.Component {
 
         this.rZoom = this.node.getChildByName('rZoomBtn').getComponent(cc.Toggle);
         this.rightBox.active = true;
+
+
+        cc.game.on(cc.game.EVENT_SHOW, () => {
+            if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                setTimeout(() => {
+                    GlobalEvent.emit('setDrawing', true);
+                }, 100);
+            }
+        }, this);
     }
-
-
 
     onEnable() {
 
@@ -279,6 +286,7 @@ export default class NewClass extends cc.Component {
             this.rightBox.active = false;
             this.selcetContent.parent.active = false;
             this.rZoom.isChecked = true;
+
             if (GameCfg.GameSet.select == '均线') {
                 this.setBoxfalg('ma');
                 this.setBoxfalg('CPM');
@@ -332,7 +340,6 @@ export default class NewClass extends cc.Component {
         }
     }
 
-
     setBGColor() {
         this.rightBox = this.node.getChildByName('rightBox');
         this.tipsBox = this.node.getChildByName('tipsBox');
@@ -363,6 +370,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('hideTips');
         GlobalEvent.off('setBoxfalg');
         GlobalEvent.off(EventCfg.SET_DRAW_SIZE);
+        cc.game.off(cc.game.EVENT_SHOW);
+
 
     }
 
@@ -510,6 +519,7 @@ export default class NewClass extends cc.Component {
         else if (this.rZoom.isChecked) {
             GlobalEvent.emit('setDrawing', false);
         }
+
         this.rZoom.node.active = true;
         this.rZoom.node.children[0].active = true;
         this.rightBox.active = true;

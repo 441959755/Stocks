@@ -19,10 +19,7 @@ export default class IOSSDK {
 
     appId = "wx2f88189155732f56";
 
-
     appSecret = "9b1174a6fb93bd7a831338f8e21db0db";
-
-    static _instance = null;
 
     static WeChatModule = null;
 
@@ -415,7 +412,6 @@ export default class IOSSDK {
     }
 
     callWXPayToJava(appid, partnerid, prepayid, nonce_str, timestamp, sign) {
-
 
         var funcName = "payWx:appid:partnerid:prepayid:nonce_str:timestamp:sign:"
 

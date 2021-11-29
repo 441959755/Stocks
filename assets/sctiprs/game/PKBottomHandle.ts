@@ -112,11 +112,11 @@ export default class NewClass extends cc.Component {
     }
 
     onGameFUPANSHOW() {
+        let pkNode = this.node.getChildByName('pk');
+
         if (GameCfg.GameType == pb.GameType.JJ_PK ||
             GameCfg.GameType == pb.GameType.JJ_DuoKong ||
             GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
-
-            let pkNode = this.node.getChildByName('pk');
             pkNode.active = true;
             pkNode.getChildByName('timeLabel').active = false;
             let pkFP = pkNode.getChildByName('FUPAN');
@@ -129,6 +129,9 @@ export default class NewClass extends cc.Component {
             let tq = ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
 
             pkFP.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
+        }
+        else {
+            pkNode.active = false;
         }
     }
 
@@ -319,33 +322,38 @@ export default class NewClass extends cc.Component {
     //获取涨停板
     getRaisingLimit(limitUP) {
 
-        this.mzb.active = false;
-        this.mdb.active = false;
-        this.pcb.active = false;
-        this.pcb1.active = false;
-        //涨
-        if (limitUP == 1) {
-            this.mzb.active = true;
-            if (this.bself._KKCount) {
-                // this.pcb.active = true;
-                this.pcb1.active = true;
+        if (GameCfg.GameType == pb.GameType.JJ_PK ||
+            GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+            GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.JJ_XUNLIAN) {
+
+            this.mzb.active = false;
+            this.mdb.active = false;
+            this.pcb.active = false;
+            this.pcb1.active = false;
+            //涨
+            if (limitUP == 1) {
+                this.mzb.active = true;
+                if (this.bself._KKCount) {
+                    // this.pcb.active = true;
+                    this.pcb1.active = true;
+                }
             }
+            //跌
+            else if (limitUP == 2) {
+                this.mdb.active = true;
+                if (this.bself._KKCount) {
 
-        }
-        //跌
-        else if (limitUP == 2) {
-            this.mdb.active = true;
-            if (this.bself._KKCount) {
-
-            } else {
-                this.pcb.active = true;
-                //  this.pcb1.active = true;
+                } else {
+                    this.pcb.active = true;
+                    //  this.pcb1.active = true;
+                }
             }
         }
 
     }
 
     onDisable() {
+        this.node.getChildByName('pk').getChildByName('FUPAN').active = false;
         this.cb1 && (clearInterval(this.cb1));
         this.cb1 = null;
         this.gwBtn.node.active = true;
@@ -360,6 +368,11 @@ export default class NewClass extends cc.Component {
         this.mdStatusNode[1].active = false;
         this.mdStatusNode[2].active = false;
         this.mdStatusNode[2].children[0].active = false;
+
+        this.mzb.active = false;
+        this.mdb.active = false;
+        this.pcb.active = false;
+        this.pcb1.active = false;
 
     }
 

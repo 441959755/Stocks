@@ -332,8 +332,6 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-
-
         GlobalEvent.on(EventCfg.NOTICEDRAWMOVW, this.noticeDrawMove.bind(this), this);
 
         // GlobalEvent.on(EventCfg.RAISINGLIMIT, this.getRaisingLimit.bind(this), this);

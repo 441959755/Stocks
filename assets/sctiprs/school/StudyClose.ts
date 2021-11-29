@@ -73,7 +73,7 @@ export default class NewClass extends cc.Component {
         else if (zql >= 60 && zql < 80) {
             this.stars[0].active = true;
 
-            this.award = GameCfgText.gameConf.task.study[0].gold;
+            this.award = parseInt(GameCfgText.gameConf.task.study[0].gold);
             par = GameCfgText.gameConf.task.study[0].progress;
 
         }
@@ -81,7 +81,7 @@ export default class NewClass extends cc.Component {
             this.stars[0].active = true;
             this.stars[1].active = true;
 
-            this.award = GameCfgText.gameConf.task.study[1].gold + GameCfgText.gameConf.task.study[0].gold;
+            this.award = parseInt(GameCfgText.gameConf.task.study[1].gold) + parseInt(GameCfgText.gameConf.task.study[0].gold);
             par = GameCfgText.gameConf.task.study[1].progress;
         }
         else if (zql >= 100) {
@@ -89,7 +89,7 @@ export default class NewClass extends cc.Component {
             this.stars[1].active = true;
             this.stars[2].active = true;
 
-            this.award = GameCfgText.gameConf.task.study[2].gold + GameCfgText.gameConf.task.study[1].gold + GameCfgText.gameConf.task.study[0].gold;
+            this.award = parseInt(GameCfgText.gameConf.task.study[2].gold) + parseInt(GameCfgText.gameConf.task.study[1].gold) + parseInt(GameCfgText.gameConf.task.study[0].gold);
             par = GameCfgText.gameConf.task.study[2].progress;
         }
 
@@ -142,8 +142,6 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit('saveStudyProgress', obj);
         }
-
-
 
     }
 

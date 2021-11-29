@@ -5,7 +5,6 @@ import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
 import DrawData from './DrawData';
 import GameData from '../GameData';
-import StrategyAIData from './StrategyAIData';
 import PopupManager from '../Utils/PopupManager';
 import UpGameOpt from '../global/UpGameOpt';
 import LoadUtils from '../Utils/LoadUtils';
@@ -535,6 +534,8 @@ export default class NewClass extends cc.Component {
 		this.node.getChildByName('pk').getChildByName('FUPAN').active = false;
 		this.node.getChildByName('wait').active = false;
 		this.node.getChildByName('fupan1').active = false;
+		this.zhangting.active = false;
+		this.dieting.active = false;
 		this.curMcCount = 0;
 		this.curMrCount = [];
 		this.limitUP = 0;
@@ -556,8 +557,6 @@ export default class NewClass extends cc.Component {
 			state: null,
 		};
 		this.isFlag = false;
-		this.zhangting.active = false;
-		this.dieting.active = false;
 	}
 
 	onEnable() {
@@ -733,6 +732,9 @@ export default class NewClass extends cc.Component {
 		if (GameCfg.GAMEFUPAN) {
 			this.onShowGAMEFUPAN();
 		} else {
+
+			let node = this.node.getChildByName('fupan1');
+			node.active = false;
 
 			let code = GameCfg.data[0].code + '';
 			if (code.length >= 7) {
@@ -1399,12 +1401,19 @@ export default class NewClass extends cc.Component {
 		this.limitUP = 0;
 
 		this.limitUP = DrawData.getRaisingLimit(number, true);
+
 		if (this.limitUP == 1) {
 			this.zhangting.active = true;
 		}
 		else if (this.limitUP == 2) {
 			this.dieting.active = true;
 		}
+
+		else {
+			this.zhangting.active = false;
+			this.dieting.active = false;
+		}
+
 		GlobalEvent.emit(EventCfg.RAISINGLIMIT, this.limitUP);
 	}
 }
