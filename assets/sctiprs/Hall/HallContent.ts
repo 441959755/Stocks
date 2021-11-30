@@ -6,6 +6,7 @@ import GameData from '../GameData';
 import EnterGameControl from '../global/EnterGameControl';
 import { LocationPoint } from '../global/LocationPoint';
 import GameCfgText from '../GameText';
+import LoadUtils from '../Utils/LoadUtils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -399,5 +400,4 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.NAMECHANGE);
 		GlobalEvent.off(EventCfg.LEVELCHANGE)
 	}
-
 }
