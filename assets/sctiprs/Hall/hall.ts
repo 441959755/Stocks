@@ -43,6 +43,10 @@ export default class NewClass extends cc.Component {
 
 	unlockBox: cc.Node = null;  //解锁框
 
+	weeklyHaoLi:cc.Node=null;   //每周豪礼
+
+	signIn:cc.Node=null;        //7天奖励
+
 	@property(cc.Node)
 	rightbg: cc.Node = null;
 
@@ -67,8 +71,6 @@ export default class NewClass extends cc.Component {
 	onLoad() {
 
 		PopupManager.init();
-
-		GlobalEvent.on(EventCfg.CmdQuoteQueryFuture, this.onCmdQHGameStart.bind(this), this);
 
 		GlobalEvent.on(EventCfg.INVITEMESSAGE, this.openBroadcast.bind(this), this);
 
@@ -110,10 +112,15 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on('OPENUNLOCKBOX', this.openUnlockBox.bind(this), this);
 
+		//打开每周豪礼
+		GlobalEvent.on('OPENWEEKLYHAOLI',this.openWeeklyHaoLi.bind(this),this);
+
+		//打开7天奖励
+		GlobalEvent.on('OPENSIGNIN',this.openSignIn.bind(this),this);
+
 		GlobalEvent.on(EventCfg.GOLDCHANGE, () => {
 			this.goldchange = true;
 		}, this);
-
 
 		//匹配界面不弹窗邀请框
 		GlobalEvent.on('HALLPKMATCH', (flag) => {
@@ -180,7 +187,6 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.OPENHELPLAYER);
 		GlobalEvent.off(EventCfg.ROOMLEAVE);
 		GlobalEvent.off(EventCfg.INVITEMESSAGE);
-		GlobalEvent.off(EventCfg.CmdQuoteQueryFuture);
 		GlobalEvent.off(EventCfg.OPENREWARDCENTERLAYER);
 		GlobalEvent.off(EventCfg.OPENOTHERPLAYERHISLAYER);
 		GlobalEvent.off(EventCfg.GAMEOVEER);
@@ -193,6 +199,8 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off('LOADGAME');
 		GlobalEvent.off('OPENSHOPLAYER');
 		GlobalEvent.off('OPENUNLOCKBOX');
+		GlobalEvent.off('OPENWEEKLYHAOLI');
+		GlobalEvent.off('OPENSIGNIN');
 
 		LoadUtils.releaseRes('Prefabs/broadcast');
 		LoadUtils.releaseRes('Prefabs/playeInfo/playerInfoLayer');
@@ -205,6 +213,8 @@ export default class NewClass extends cc.Component {
 		LoadUtils.releaseRes('Prefabs/game/gameLayer');
 		LoadUtils.releaseRes('Prefabs/sysBroadcast');
 		LoadUtils.releaseRes('Prefabs/shop/shop');
+		LoadUtils.releaseRes('Prefabs/fl/weeklyHaoLI');
+		LoadUtils.releaseRes('Prefabs/fl/signIn');
 		LoadUtils.releaseRes(this.url);
 		ComUtils.onDestory();
 		PopupManager.delPopupNode();
@@ -220,6 +230,7 @@ export default class NewClass extends cc.Component {
 		});
 	}
 
+	//首次登入弹框
 	showFirstBox() {
 		return;
 		this.openNode(this.firstBox, 'Prefabs/pop/firstBox', 99, (node) => {
@@ -266,6 +277,20 @@ export default class NewClass extends cc.Component {
 			this.noticeLayer = node;
 			GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		});
+	}
+
+	openWeeklyHaoLi(){
+		this.openNode(this.weeklyHaoLi,'Prefabs/fl/weeklyHaoLI',10,(node)=>{
+			this.weeklyHaoLi=node;
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+		})
+	}
+
+	openSignIn(){
+		this.openNode(this.signIn,'Prefabs/fl/signIn',10,(node)=>{
+			this.signIn=node;
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
+		})
 	}
 
 	//好友
@@ -466,9 +491,9 @@ export default class NewClass extends cc.Component {
 		}
 
 		this.openNode(this.finalLayer[this.index], this.url, 51, (node) => {
-			GlobalEvent.emit(EventCfg.LOADINGHIDE);
 			this.finalLayer[this.index] = node;
 			this.finalLayer[this.index].active = false;
+			GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		})
 	}
 
@@ -516,6 +541,7 @@ export default class NewClass extends cc.Component {
 			//跟新获取的奖励消息
 			GlobalEvent.emit('getRewardCenter');
 
+			//破产补助
 			if (GameData.properties[pb.GamePropertyId.Gold] < 1000 && this.goldchange) {
 				this.onShowGobroke();
 			}
@@ -562,17 +588,6 @@ export default class NewClass extends cc.Component {
 		}
 	}
 
-	//期货进入游戏
-	onCmdQHGameStart(data, cb) {
-
-		GameCfg.data[0].data = [];
-		//游戏开始
-		GlobalHandle.onCmdGameStartReq(() => {
-			//游戏行情获取
-			GlobalHandle.onCmdGameStartQuoteQueryQH(data, cb);
-		})
-	}
-
 	openNode(node, url, zIndex, call?) {
 		if (!this.isLoading) {
 			this.isLoading = true;
@@ -580,8 +595,8 @@ export default class NewClass extends cc.Component {
 		else {
 			return;
 		}
+		GlobalEvent.emit(EventCfg.LOADINGSHOW);
 		if (!node) {
-			GlobalEvent.emit(EventCfg.LOADINGSHOW);
 			LoadUtils.loadRes(url, pre => {
 				node = cc.instantiate(pre);
 				this.node.addChild(node, zIndex);

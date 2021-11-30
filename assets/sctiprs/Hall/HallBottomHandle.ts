@@ -1,4 +1,5 @@
 import GlobalEvent from "../Utils/GlobalEvent";
+import EventCfg from "../Utils/EventCfg";
 
 const { ccclass, property } = cc._decorator;
 
@@ -22,7 +23,7 @@ export default class NewClass extends cc.Component {
 
         //反馈
         else if (name == 'main_smbt_fk1') {
-
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW,'敬请期待！');
         }
 
         //任务

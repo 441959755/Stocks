@@ -15,11 +15,9 @@ export default class NewClass extends cc.Component {
     diamondLabel: cc.Label = null;
 
     onLoad() {
-        GlobalEvent.on(EventCfg.GOLDCHANGE, () => { this.goldLabel.string = GameData.properties[pb.GamePropertyId.Gold] }, this);
+        GlobalEvent.on(EventCfg.GOLDCHANGE, this.initData.bind(this), this);
 
-        GlobalEvent.on(EventCfg.DIAMONDCHANGE, () => {
-            this.diamondLabel.string = GameData.properties[pb.GamePropertyId.Diamond];
-        }, this);
+        GlobalEvent.on(EventCfg.DIAMONDCHANGE, this.initData.bind(this), this);
     }
 
     onDestroy() {
@@ -27,8 +25,11 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.DIAMONDCHANGE);
     }
 
-
     start() {
+        this.initData();
+    }
+
+    initData() {
         this.goldLabel.string = GameData.properties[pb.GamePropertyId.Gold];
         this.diamondLabel.string = GameData.properties[pb.GamePropertyId.Diamond];
     }
@@ -37,12 +38,10 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
 
         if (name == 'btnGold') {
-            console.log('点击金币')
             GlobalEvent.emit('OPENSHOPLAYER', 2)
         }
 
         else if (name == 'btnDia') {
-            console.log('点击钻石');
             GlobalEvent.emit('OPENSHOPLAYER', 1)
         }
 

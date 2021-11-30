@@ -4,8 +4,6 @@ import GameCfgText from "../GameText";
 import GameCfg from "../game/GameCfg";
 import GameData from "../GameData";
 import LoadUtils from "../Utils/LoadUtils";
-import ActionUtils from "../Utils/ActionUtils";
-import { pb } from "../../protos/proto";
 import GlobalHandle from "../global/GlobalHandle";
 
 const { ccclass, property } = cc._decorator;
@@ -26,8 +24,6 @@ export default class NewClass extends cc.Component {
     cgsLvRank: cc.Node = null;
 
     mrtNode: cc.Node = null;
-
-    otherPlayerInfo: cc.Node = null; //其他玩家信息
 
     onLoad() {
         //匹配PK
@@ -50,11 +46,9 @@ export default class NewClass extends cc.Component {
 
         //其他玩家进入房间
         GlobalEvent.on(EventCfg.RoomGameDataOther, this.onOtherEnterRoomGameData.bind(this), this);
+
         //// 同步房间游戏状态
         GlobalEvent.on(EventCfg.RoomGameStatus, this.onRoomGameStatus.bind(this), this);
-
-        // GameData.Players = [];
-        // GameData.Players.length = 0;
     }
 
     onEnable() {

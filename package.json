@@ -1,10 +1,10 @@
 {
   "name": "creator_linewar",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "async": "^3.2.1",
+    "moment": "^2.29.1",
     "protobufjs": "^6.10.2"
   },
   "devDependencies": {},
@@ -20,5 +20,6 @@
   "bugs": {
     "url": "https://github.com/441959755/Stocks/issues"
   },
-  "homepage": "https://github.com/441959755/Stocks#readme"
+  "homepage": "https://github.com/441959755/Stocks#readme",
+  "description": ""
 }

@@ -1,5 +1,4 @@
-
-import { pb } from '../../protos/proto';
+import {pb} from '../../protos/proto';
 import GameCfg from '../game/GameCfg';
 import GameData from '../GameData';
 import EventCfg from '../Utils/EventCfg';
@@ -15,7 +14,13 @@ PBHelper.prototype = {
     onCmdLoginConvertToBuff(data) {
         let Login = pb.CmdLogin;
         console.log('登入信息' + JSON.stringify(data));
-        let message = Login.create({ account: data.account, type: data.type, from: data.from, pwd: data.pwd, websocket: true });
+        let message = Login.create({
+            account: data.account,
+            type: data.type,
+            from: data.from,
+            pwd: data.pwd,
+            websocket: true
+        });
         let buff = Login.encode(message).finish();
         return buff;
     },
@@ -80,12 +85,10 @@ PBHelper.prototype = {
 
         let CmdGameOver = pb.CmdGameOver;
 
-        let message = CmdGameOver.create({ result: datas.result, operations: datas.operations })
+        let message = CmdGameOver.create({result: datas.result, operations: datas.operations})
         console.log(message);
 
         let buff = CmdGameOver.encode(message).finish();
-
-        // let decode = CmdGameOver.decode(new Uint8Array(buff));
 
         return buff;
     },
@@ -192,9 +195,7 @@ PBHelper.prototype = {
         if (id == pb.MessageId.Rep_Game_Login) {
             let data = this.onCmdGameLoginReplyConvertToData(buff);
             return data;
-        }
-
-        else if (id == pb.MessageId.Rep_QuoteQuery) {
+        } else if (id == pb.MessageId.Rep_QuoteQuery) {
             let Quotes = pb.Quotes;
             let data = Quotes.decode(new Uint8Array(buff));
 
@@ -230,9 +231,7 @@ PBHelper.prototype = {
         //当日首次登录会收到
         else if (id == pb.MessageId.Sync_S2C_FirstLoginToday) {
             GameData.firstGame = true;
-        }
-
-        else if (id == pb.MessageId.Rep_Game_Start
+        } else if (id == pb.MessageId.Rep_Game_Start
             || id == pb.MessageId.Rep_Hall_EditIcon
             || id == pb.MessageId.Rep_Hall_EditNick
             || id == pb.MessageId.Rep_Hall_EditLocation
@@ -248,14 +247,10 @@ PBHelper.prototype = {
             let ErrorInfo = pb.ErrorInfo;
             let data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
-        }
-
-        else if (id == pb.MessageId.Rep_Game_QueryGameResult) {
+        } else if (id == pb.MessageId.Rep_Game_QueryGameResult) {
             let data = this.onCmdQueryGameResultReplyConvertToData(buff);
             return data;
-        }
-
-        else if (id == pb.MessageId.Rep_Game_SmxlReport) {
+        } else if (id == pb.MessageId.Rep_Game_SmxlReport) {
             let CmdGetSmxlReportReply = pb.CmdGetSmxlReportReply;
             let data = CmdGetSmxlReportReply.decode(new Uint8Array(buff));
             return data;
@@ -282,8 +277,7 @@ PBHelper.prototype = {
             console.log('当日游戏次数计数器:' + JSON.stringify(data));
             GameData.todayGameCount = data.counter;
 
-        }
-        else if (id == pb.MessageId.Rep_Game_GetGameOperation) {
+        } else if (id == pb.MessageId.Rep_Game_GetGameOperation) {
             let data = this.onCmdGetGameOperationsReply(buff);
             return data;
         }
@@ -384,7 +378,9 @@ PBHelper.prototype = {
             console.log('游戏结果' + JSON.stringify(result));
             GameCfg.RoomGameData = result;
 
-            setTimeout(() => { GlobalEvent.emit(EventCfg.GAMEOVEER, result); }, 1000);
+            setTimeout(() => {
+                GlobalEvent.emit(EventCfg.GAMEOVEER, result);
+            }, 1000);
         }
         //离开房间应答
         else if (id == pb.MessageId.Rep_Room_Leave) {
@@ -401,8 +397,8 @@ PBHelper.prototype = {
             return data;
         }
 
-        //查询闯关赛通关排行应答：RankingList
-        //  查询闯关赛关卡排行应答：RankingList
+            //查询闯关赛通关排行应答：RankingList
+            //  查询闯关赛关卡排行应答：RankingList
         //  查询闯关赛排行榜应答：RankingList
         else if (id == pb.MessageId.Rep_Game_CgsGetClearanceRank ||
             id == pb.MessageId.Rep_Game_CgsGetStageRank ||
@@ -416,8 +412,7 @@ PBHelper.prototype = {
             let JjGame = pb.JjGame;
             let data = JjGame.decode(new Uint8Array(buff));
             GlobalEvent.emit(EventCfg.GETCGSDATA, data);
-        }
-        else if (id == pb.MessageId.Sync_S2C_GameCg) {
+        } else if (id == pb.MessageId.Sync_S2C_GameCg) {
             let CgState = pb.CgState;
             let data = CgState.decode(new Uint8Array(buff));
             GameData.cgState = data;
@@ -429,7 +424,7 @@ PBHelper.prototype = {
 
             return data;
         }
-        //系统广播：Notice
+            //系统广播：Notice
         //服务器发到客户端的消息（包括邀请或聊天消息）：Notice
         else if (id == pb.MessageId.Sync_S2C_Message ||
             id == pb.MessageId.Sync_S2C_Broadcast) {
@@ -490,15 +485,11 @@ PBHelper.prototype = {
             let StockOrderList = pb.StockOrderList;
             let data = StockOrderList.decode(new Uint8Array(buff));
             return data;
-        }
-
-        else if (id == pb.MessageId.Rep_QuoteSubscribe) {
+        } else if (id == pb.MessageId.Rep_QuoteSubscribe) {
             // let StockOrderList = pb.StockOrderList;
             // let data = StockOrderList.decode(new Uint8Array(buff));
             // return data;
-        }
-
-        else if (id === pb.MessageId.Rep_Game_Order) {
+        } else if (id === pb.MessageId.Rep_Game_Order) {
             let CmdStockOrderReply = pb.CmdStockOrderReply;
             let data = CmdStockOrderReply.decode(new Uint8Array(buff));
             return data;
@@ -569,10 +560,10 @@ PBHelper.prototype = {
             GlobalEvent.emit('REPPLAYERINFO', data);
             return data;
         }
-        // 查询等级排行应答：RankingList
-        //查询威望排行应答：RankingList
-        // 查询威望周排行应答：RankingList
-        // 获取炒股大赛排行榜应答
+            // 查询等级排行应答：RankingList
+            //查询威望排行应答：RankingList
+            // 查询威望周排行应答：RankingList
+            // 获取炒股大赛排行榜应答
         // 查询闯关赛排行榜应答
         else if (id == pb.MessageId.Rep_Hall_GetFameRanking
             || id == pb.MessageId.Rep_Hall_GetFameRankingWeekly
@@ -589,9 +580,7 @@ PBHelper.prototype = {
             let CmdShopOrderReply = pb.CmdShopOrderReply;
             let data = CmdShopOrderReply.decode(new Uint8Array(buff));
             return data;
-        }
-
-        else if (id == pb.MessageId.Rep_Game_Over) {
+        } else if (id == pb.MessageId.Rep_Game_Over) {
             let CmdGameOverReply = pb.CmdGameOverReply;
             let data = CmdGameOverReply.decode(new Uint8Array(buff));
             return data;
@@ -601,12 +590,23 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Rep_Hall_GetBrokenAward) {
             console.log('领取破产奖励应答' + id);
             return null;
-        }
-
-        else if (id == pb.MessageId.Sync_S2C_GoldAwardPrompt) {
+        } else if (id == pb.MessageId.Sync_S2C_GoldAwardPrompt) {
             let CmdGoldAwardPrompt = pb.CmdGoldAwardPrompt;
             let data = CmdGoldAwardPrompt.decode(new Uint8Array(buff));
             GlobalEvent.emit('CmdGoldAwardPrompt', data);
+        }
+
+// 领取每周豪礼
+        else if (id == pb.MessageId.Rep_Hall_GetWeeklyAward) {
+            let CmdGetWeeklyAwardReply=pb.CmdGetWeeklyAwardReply;
+            let data=CmdGetWeeklyAwardReply.decode(new Uint8Array(buff));
+            return  data;
+        }
+
+        else if (id == pb.MessageId.Rep_Hall_QueryEventLog) {
+            let Events=pb.Events;
+            let data=Events.decode(new Uint8Array(buff));
+            return  data;
         }
     }
 }

@@ -1,5 +1,6 @@
 import GameCfgText from "../GameText";
 import LoadImg from "../Utils/LoadImg";
+import Game = cc.Game;
 
 const { ccclass, property } = cc._decorator;
 
@@ -10,12 +11,19 @@ export default class NewClass extends cc.Component {
     imgAd: cc.Sprite = null;
 
     id = null;
+
     version = 0;
 
     start() {
 
+        if(!GameCfgText.adConf){
+            return;
+        }
+
         this.id = GameCfgText.adConf.main[0].id;
+
         let version = cc.sys.localStorage.getItem('LAUNCHAD');
+
         if (!version) {
             cc.sys.localStorage.setItem('LAUNCHAD', GameCfgText.adConf.launch[0].version);
             version = GameCfgText.adConf.launch[0].version;

@@ -7,6 +7,7 @@ import EnterGameControl from "../../../sctiprs/global/EnterGameControl";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 
 const { ccclass, property } = cc._decorator;
 
@@ -1126,40 +1127,44 @@ export default class NewClass extends cc.Component {
 		console.log(JSON.stringify(data));
 		GameCfg.enterGameCache = data;
 
-		GlobalEvent.emit(EventCfg.CmdQuoteQueryFuture, data, () => {
+		//游戏开始
+		GlobalHandle.onCmdGameStartReq(() => {
+			//游戏行情获取
+			GlobalHandle.onCmdGameStartQuoteQueryQH(data,this.onEnterGame.bind(this));
+		})
+	}
 
-			GameData.huizhidatas = 0;
-			GameCfg.huizhidatas = 0;
-			let fm = data.from;
-			while (!GameData.huizhidatas) {
+	onEnterGame(){
+		GameData.huizhidatas = 0;
+		GameCfg.huizhidatas = 0;
+		let fm = GameCfg.enterGameCache.from;
+		while (!GameData.huizhidatas) {
 
-				if (GameData.QHSet.year == '随机') {
-					if (GameCfg.data[0].data.length > 100) {
-						GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
-						GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
-					}
-					else {
-						GameData.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
-						GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
-					}
+			if (GameData.QHSet.year == '随机') {
+				if (GameCfg.data[0].data.length > 100) {
+					GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
+					GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
 				}
 				else {
-					GameCfg.data[0].data.forEach((el, index) => {
-						if ((el.day).replace(/-/g, '') == fm) {
-							GameData.huizhidatas = index + 1;
-							GameCfg.huizhidatas = index + 1;
-						}
-					})
-
-					if (!GameData.huizhidatas) {
-						fm = (parseInt(fm) - 1) + '';
-					}
+					GameData.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
+					GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
 				}
 			}
+			else {
+				GameCfg.data[0].data.forEach((el, index) => {
+					if ((el.day).replace(/-/g, '') == fm) {
+						GameData.huizhidatas = index + 1;
+						GameCfg.huizhidatas = index + 1;
+					}
+				})
 
-			GlobalEvent.emit('LOADGAME');
-		});
+				if (!GameData.huizhidatas) {
+					fm = (parseInt(fm) - 1) + '';
+				}
+			}
+		}
 
+		GlobalEvent.emit('LOADGAME');
 	}
 
 

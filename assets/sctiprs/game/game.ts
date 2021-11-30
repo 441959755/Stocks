@@ -43,6 +43,11 @@ export default class NewClass extends cc.Component {
         this.initData();
         this.setColor();
 
+        //绘制的数据
+        let data = GameCfg.data[0].data;
+
+        DrawData.initData(data);
+
         //游戏开始动画
         if (!GameCfg.GAMEFUPAN) {
             if ((GameCfg.GameType == pb.GameType.JJ_PK ||
@@ -50,12 +55,10 @@ export default class NewClass extends cc.Component {
                 GameCfg.GameType == pb.GameType.JJ_ChuangGuan) && !GameCfg.GAMEFRTD) {
                 this.startGameNode.active = true;
             }
+            else{
+                this.startGameNode.active=false;
+            }
         }
-
-        //绘制的数据
-        let data = GameCfg.data[0].data;
-
-        DrawData.initData(data);
 
         if (GameCfg.GameType == pb.GameType.QiHuo) {
             this.selectLine.active = true;

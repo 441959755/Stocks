@@ -4,14 +4,13 @@ import GameCfg from '../game/GameCfg';
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import EnterGameControl from '../global/EnterGameControl';
-import { LocationPoint } from '../global/LocationPoint';
 import GameCfgText from '../GameText';
-import LoadUtils from '../Utils/LoadUtils';
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
+
 	@property([cc.Toggle])
 	toggles: cc.Toggle[] = [];
 
@@ -35,7 +34,7 @@ export default class NewClass extends cc.Component {
 	@property(cc.Node)
 	vipImg: cc.Node = null;
 
-	protected onLoad() {
+	 onLoad() {
 		//回到进入游戏的界面
 		GlobalEvent.on(EventCfg.BLACKGOTOLAYER, this.onBtnClick.bind(this), this);
 
@@ -75,13 +74,7 @@ export default class NewClass extends cc.Component {
 		this.setUserInfo();
 		//设置用户头像
 		this.setUserHead();
-		//	this.setHeadImg();
 
-		if (!GameCfg.JJ_XUNLIAN && (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameData.locationLayer == LocationPoint.JJ_ChuangGuanOtherHis)) {
-			this.onBtnClick({ target: { name: 'main_jj_cgs' } }, null);
-		}
-
-		//
 		this.upLoadUserInfo();
 
 		if (GameCfg.GameType == 'STUDY') {
@@ -391,6 +384,20 @@ export default class NewClass extends cc.Component {
 			cc.director.loadScene('school');
 		}
 
+		//免费砖石
+		else if(name=='main_fl_mfzs'){
+			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW,'暂未开放！');
+		}
+
+		//每周豪礼
+		else if(name=='main_fl_mzhl'){
+			GlobalEvent.emit('OPENWEEKLYHAOLI');
+		}
+
+		//7日奖励
+		else if(name=='main_fl_7day'){
+			GlobalEvent.emit('OPENSIGNIN');
+		}
 	}
 
 	onDestroy() {
