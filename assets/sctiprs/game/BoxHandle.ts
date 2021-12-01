@@ -266,7 +266,13 @@ export default class NewClass extends cc.Component {
         this.rZoom.isChecked = false;
         this.cclNode.active = false;
         this.CCLBtn.active = false;
+        this.rZoom.node.active = true;
+        this.rZoom.node.children[0].active = true;
+        this.rightBox.active = true;
         this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
+        this.selcetContent.parent.active = true;
+        this.selcetContent.active=false;
+        this.tipsLabel.string = '成交量';
 
         //双盲
         if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.JJ_XUNLIAN) {
@@ -320,7 +326,7 @@ export default class NewClass extends cc.Component {
             }, 100);
 
         }
-
+        //期货
         else if (GameCfg.GameType == pb.GameType.QiHuo) {
             this.setBoxfalg('ma');
             this.setBoxfalg('CPM');
@@ -328,12 +334,14 @@ export default class NewClass extends cc.Component {
             this.cclNode.active = true;
             this.CCLBtn.active = true;
         }
+        //pk
         else if (GameCfg.GameType == pb.GameType.JJ_PK ||
             GameCfg.GameType == pb.GameType.JJ_DuoKong ||
             GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
             this.setBoxfalg('ma');
             this.setBoxfalg('CPM');
         }
+        //条件单
         else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
             this.setBoxfalg('ma');
             this.setBoxfalg('CPM');
@@ -370,9 +378,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('hideTips');
         GlobalEvent.off('setBoxfalg');
         GlobalEvent.off(EventCfg.SET_DRAW_SIZE);
-        cc.game.off(cc.game.EVENT_SHOW);
-
-
+     //   cc.game.off(cc.game.EVENT_SHOW);
     }
 
     onBtnSlecet(event, data) {
@@ -510,18 +516,4 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    onDisable() {
-        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-            this.selcetContent.parent.active = true;
-            GlobalEvent.emit('setDrawing', false);
-        }
-
-        else if (this.rZoom.isChecked) {
-            GlobalEvent.emit('setDrawing', false);
-        }
-
-        this.rZoom.node.active = true;
-        this.rZoom.node.children[0].active = true;
-        this.rightBox.active = true;
-    }
 }

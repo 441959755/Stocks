@@ -221,6 +221,7 @@ export default class PopupManager {
             if (!el.switch) {
                 if (el.id == 1) {
                     GlobalEvent.emit('OPENNOTICELAYER');
+
                 }
 
                 if (el.id == 2) {
@@ -231,6 +232,8 @@ export default class PopupManager {
 
                 }
             }
+
+            el.id=null;
         });
 
     }

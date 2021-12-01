@@ -124,6 +124,7 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
+
         if (GameCfg.GameSet.isBW) {
             this.node.color = cc.Color.BLACK;
             //  this.mask.color=cc.Color.BLACK;

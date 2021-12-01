@@ -102,9 +102,11 @@ export default class NewClass extends cc.Component {
     // 获取炒股大赛排行榜
     getCgdsRanking() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         let data = {
             id: GameData.gameData.cgdsStockList[0].id,
         }
+
         let CmdCgdsRanking = pb.CmdCgdsRanking;
         let message = CmdCgdsRanking.create(data);
         let buff = CmdCgdsRanking.encode(message).finish();
@@ -174,14 +176,18 @@ export default class NewClass extends cc.Component {
                 this.to = res.to;
             })
         }
+        else{
+            this.toggles[3].node.active = false;
+            return;
+            socket.send(pb.MessageId.Req_Game_CgdsList, null, (res) => {
+                console.log('炒股大赛' + JSON.stringify(res));
+                this.awardList = JSON.parse(res.items[0].award || '[]');
+                this.from = res.items[0].from;
+                this.to = res.items[0].to;
+            })
+        }
 
-        socket.send(pb.MessageId.Req_Game_CgdsList, null, (res) => {
-            console.log('炒股大赛' + JSON.stringify(res));
-            this.awardList = JSON.parse(res.items[0].award || '[]');
-            this.from = res.items[0].from;
-            this.to = res.items[0].to;
-        })
-
+        
     }
 
     onBtnClick(event, curdata) {

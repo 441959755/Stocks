@@ -608,6 +608,11 @@ PBHelper.prototype = {
             let data=Events.decode(new Uint8Array(buff));
             return  data;
         }
+
+        else if(id==pb.MessageId.Rep_Hall_Get7Award){
+            //领取7次奖励应答
+            return  null;
+        }
     }
 }
 

@@ -11,11 +11,12 @@ const WxRefreshUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
 const KeyRefreshToken = 'plaza_refresh_token';
 
 const QQRefreshToken = 'QQRefreshToken';
+
 export default class IOSSDK {
 
     static _instance = null;
 
-    className = 'jsAndOCFun';
+    className = 'WXPay';
 
     appId = "wx2f88189155732f56";
 
@@ -48,8 +49,8 @@ export default class IOSSDK {
         if (id && pw) {
             let loginInfo = {
                 account: id,
-                type: pb.LoginType.AppTest,
-                from: pb.AppFrom.Android_001,
+                type: pb.LoginType.MobilePhoneId,
+                from: pb.AppFrom.IosAppleStore,
                 // type: pb.LoginType.WeChat,
                 // from: pb.AppFrom.Test,
                 pwd: pw
@@ -69,7 +70,7 @@ export default class IOSSDK {
             type: this.loginPlat,
             //from: pb.AppFrom.WeChatMinProgram,
             // type: pb.LoginType.WeChat,
-            from: pb.AppFrom.Test,
+            from: pb.AppFrom.IosAppleStore,
             pwd: ''
         };
 

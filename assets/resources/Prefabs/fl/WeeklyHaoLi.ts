@@ -11,8 +11,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     haoli: cc.Node = null;
 
-    @property(cc.Node)
-    help: cc.Node = null;
 
     @property(cc.EditBox)
     editBox: cc.EditBox = null;
@@ -25,10 +23,11 @@ export default class NewClass extends cc.Component {
 
     start() {
         this.haoli.active = true;
-        this.help.active = false;
     }
 
     onEnable() {
+
+        this.content.removeAllChildren();
 
         let data = {
             eventId: pb.EventId.EventId_WeeklyAward,
@@ -40,8 +39,6 @@ export default class NewClass extends cc.Component {
         let CmdQueryEventLog = pb.CmdQueryEventLog;
         let message = CmdQueryEventLog.create(data);
         let buff = CmdQueryEventLog.encode(message).finish();
-
-        console.log(JSON.stringify(data));
 
         socket.send(pb.MessageId.Req_Hall_QueryEventLog, buff, (info) => {
             console.log('每周豪礼：' + JSON.stringify(info));
@@ -69,12 +66,7 @@ export default class NewClass extends cc.Component {
             case 'sys_close':
                 this.node.active = false;
                 break;
-            case 'fl_topbtn_help':
-                this.help.active = true;
-                break;
-            case  'help_close':
-                this.help.active = false;
-                break;
+
             case  'duihuan':
                 if (this.editBox.string.length <= 0) {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换码不能为空');
@@ -96,13 +88,16 @@ export default class NewClass extends cc.Component {
                         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, info.result.err);
                     } else {
                         let award = info.result.award;
-                        let gold = 0, diamond = 0;
+                        let gold = 0, diamond = 0,coupon=0;
 
                         award.items.forEach(el => {
                             if (el.id == pb.GamePropertyId.Gold) {
                                 gold += el.newValue;
                             } else if (el.id == pb.GamePropertyId.Diamond) {
                                 diamond += el.newValue;
+                            }
+                            else if(el.id==pb.GamePropertyId.Coupon){
+                                coupon+= el.newValue;
                             }
                         })
 
@@ -113,6 +108,9 @@ export default class NewClass extends cc.Component {
                         }
                         if (diamond) {
                             str += ('' + diamond + '钻石');
+                        }
+                        if(coupon){
+                            str += ('' + coupon + '奖券');
                         }
                         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, str);
                     }

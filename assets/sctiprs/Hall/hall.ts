@@ -165,6 +165,7 @@ export default class NewClass extends cc.Component {
 			}, 200)
 		}
 		//进入房间
+
 		else if (GameData.roomId) {
 			GlobalEvent.emit(EventCfg.OPENROOM);
 		}
