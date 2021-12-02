@@ -4,6 +4,7 @@ import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import LoadUtils from "../Utils/LoadUtils";
 import PopupManager from "../Utils/PopupManager";
+import ComUtils from "../Utils/ComUtils";
 
 
 const { ccclass, property } = cc._decorator;
@@ -57,6 +58,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on('OPENCLOSELAYER', this.openCloseLayer.bind(this), this);
 
         this.init();
+
+        ComUtils.resetSize(this.node);
     }
 
 

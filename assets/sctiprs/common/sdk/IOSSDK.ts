@@ -414,8 +414,8 @@ export default class IOSSDK {
 
     callWXPayToJava(appid, partnerid, prepayid, nonce_str, timestamp, sign) {
 
-        var funcName = "payWx:appid:partnerid:prepayid:nonce_str:timestamp:sign:"
-
+        //var funcName = "payWx:appid:partnerid:prepayid:nonce_str:timestamp:sign:"
+        var funcName = "payWxWithappid:partnerid:prepayid:nonce_str:timestamp:sign:"
         var ret = jsb.reflection.callStaticMethod(this.className, funcName, appid,
             partnerid, prepayid, nonce_str, timestamp, sign)
 

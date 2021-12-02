@@ -1,7 +1,7 @@
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import {pb} from "../../../protos/proto";
-import * as moment from 'moment';
+// import * as moment from 'moment';
 
 const {ccclass, property} = cc._decorator;
 
@@ -29,10 +29,11 @@ export default class NewClass extends cc.Component {
 
         this.content.removeAllChildren();
 
+        let curTime=new Date().getTime()/1000;
         let data = {
             eventId: pb.EventId.EventId_WeeklyAward,
-           from: parseInt(moment().subtract(7, 'days').format('X')),
-            to:parseInt(moment().format('X')),
+           from: curTime-7*24*60*60,
+            to:curTime,
             total: 100,
         }
 

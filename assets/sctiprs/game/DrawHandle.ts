@@ -807,7 +807,6 @@ export default class NewClass extends cc.Component {
         }
 
         this.onShow();
-
     }
 
     //画线

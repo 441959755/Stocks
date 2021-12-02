@@ -130,7 +130,8 @@ export default class NewClass extends cc.Component {
 				this.InviteBox && (this.InviteBox.active = false);
 			}
 		}, this);
-
+		
+		ComUtils.resetSize(this.node);
 	}
 
 	start() {

@@ -1,8 +1,9 @@
 import {pb} from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
-import * as moment from 'moment';
+// import * as moment from 'moment';
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import ComUtils from "../../../sctiprs/Utils/ComUtils";
 
 const {ccclass, property} = cc._decorator;
 
@@ -26,12 +27,16 @@ export default class NewClass extends cc.Component {
 
     onShow() {
 
+        let ymd=ComUtils.fromatTime1(new Date().getTime()/1000);
+
         let flag=true;
+
         this.award7.forEach(el=>{
-            if(el==moment().format('YYYY MM DD').replace(/\s/g, "")){
+            if(el==ymd){
                 flag=false;
             }
         })
+
         this.getAward=flag;
 
         this.btnfl.interactable=this.getAward;
@@ -75,7 +80,7 @@ export default class NewClass extends cc.Component {
                 console.log('领取7次奖励：' + JSON.stringify(info));
             })
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW,'成功领取！');
-            this.award7.push(moment().format('YYYY MM DD').replace(/\s/g, ""));
+            this.award7.push(ComUtils.fromatTime1(new Date().getTime()/1000));
             this.onShow();
         }
     }

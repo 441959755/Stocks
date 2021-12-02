@@ -55,8 +55,6 @@ export default class EnterGameControl {
     //当前定向是否可以进入游戏   
     public static onCurIsEnterGame() {
 
-
-
         let data = {
             status: 0,
             count: 0,

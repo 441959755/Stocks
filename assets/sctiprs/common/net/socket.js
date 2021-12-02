@@ -1,9 +1,6 @@
 
-import {
-	pb
-} from '../../../protos/proto';
+import {pb} from '../../../protos/proto';
 import GameData from '../../GameData';
-import GameCfgText from '../../GameText';
 import GlobalEvent from '../../Utils/GlobalEvent';
 import EventCfg from '../../Utils/EventCfg';
 import ComUtils from '../../Utils/ComUtils';
@@ -116,6 +113,7 @@ Socket.prototype = {
 				messageId: actionCode,
 				messageLen: le + 10,
 			})
+
 			this.queue[++actionCode] = callback;
 			// message.buff;
 			let buff = MessageHead.encode(message).finish();
@@ -173,7 +171,7 @@ Socket.prototype = {
 				console.log('断线连接中...');
 				self.initSocket();
 
-				if (self.reconnectCount >= 3) {
+				if (self.reconnectCount >= 2) {
 					self.onShowTips();
 				}
 				self.reconnectCount++;

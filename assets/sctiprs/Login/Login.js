@@ -10,6 +10,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import LoadUtils from "../Utils/LoadUtils";
 import Socket from "../common/net/socket";
+import ComUtils from "../Utils/ComUtils";
 
 cc.Class({
 
@@ -67,6 +68,8 @@ cc.Class({
 		})
 
 		GlobalEvent.on('OPENNOTICELAYER', this.openNoticeKayer.bind(this), this);
+
+		ComUtils.resetSize(this.node);
 	},
 
 	start() {

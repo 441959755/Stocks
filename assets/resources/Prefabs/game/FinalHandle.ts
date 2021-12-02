@@ -379,7 +379,9 @@ export default class NewClass extends cc.Component {
         }
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
+
             this.flag = false;
+
             GlobalEvent.emit(EventCfg.LEAVEGAME);
 
             if (!this.gotoGame()) {
@@ -387,6 +389,7 @@ export default class NewClass extends cc.Component {
             }
 
             this.leavaGame();
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
             if (GameCfg.GameType == pb.GameType.ShuangMang) {

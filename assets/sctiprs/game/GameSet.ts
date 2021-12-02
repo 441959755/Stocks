@@ -43,16 +43,6 @@ export default class NewClass extends cc.Component {
 
         }, this)
 
-        // GlobalEvent.on(EventCfg.SET_DRAW_SIZE, (falg) => {
-        //     if (falg) {
-        //         this.node.width -= 206;
-        //         this.node.x += 206;
-        //     } else {
-        //         this.node.width += 206;
-        //         this.node.x -= 206;
-        //     }
-        // }, this);
-
         GlobalEvent.on('initMALA', () => {
             let MAla = [];
             this.MALabel.forEach(el => {
@@ -124,6 +114,7 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
+        
 
         if (GameCfg.GameSet.isBW) {
             this.node.color = cc.Color.BLACK;
@@ -182,7 +173,6 @@ export default class NewClass extends cc.Component {
     onDestroy() {
         GlobalEvent.off('setDrawing');
         GlobalEvent.off('initMALA');
-        //   GlobalEvent.off(EventCfg.SET_DRAW_SIZE);
     }
 
 

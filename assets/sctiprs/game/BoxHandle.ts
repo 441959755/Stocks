@@ -1,11 +1,12 @@
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
-import { pb } from "../../protos/proto";
+import {pb} from "../../protos/proto";
 import ComUtils from '../Utils/ComUtils';
 import DrawData from "./DrawData";
+import Game = cc.Game;
 
-const { ccclass, property } = cc._decorator;
+const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -59,6 +60,8 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     tipsTitle: cc.Node = null;
 
+    flag = false;
+
     onLoad() {
 
         GlobalEvent.on('updataLabel', (inde) => {
@@ -94,8 +97,7 @@ export default class NewClass extends cc.Component {
                 } else {
                     if (datas[inde].price >= 100000000) {
                         info.push(((datas[inde].price) / 100000000).toFixed(2) + '亿');
-                    }
-                    else {
+                    } else {
                         info.push(((datas[inde].price) / 10000).toFixed(2) + '万');
                     }
 
@@ -135,8 +137,7 @@ export default class NewClass extends cc.Component {
                     let state = DrawData.getCurrentState(inde);
                     if (state == 1) {
                         la.string = '本轮多单收益:';
-                    }
-                    else if (state == 2) {
+                    } else if (state == 2) {
                         la.string = '本轮空单收益:';
                     } else {
                         la.string = '本 轮 收 益 :';
@@ -144,8 +145,7 @@ export default class NewClass extends cc.Component {
                     if (el === null) {
                         this.tipsText[index].node.active = false;
                         this.tipsTitle.children[10].active = false;
-                    }
-                    else if (el < 0) {
+                    } else if (el < 0) {
                         this.tipsText[index].node.active = true;
                         this.tipsTitle.children[10].active = true;
 
@@ -157,19 +157,16 @@ export default class NewClass extends cc.Component {
                         this.tipsText[index].string = parseInt(el * 10000 + '') / 100 + '%';
                         this.tipsText[index].node.color = new cc.Color().fromHEX('#e94343');
                     }
-                }
-                else if (index == 11) {
+                } else if (index == 11) {
                     if (el === null) {
                         this.tipsText[index].node.active = false;
                         this.tipsTitle.children[11].active = false;
-                    }
-                    else {
+                    } else {
                         this.tipsText[index].node.active = true;
                         this.tipsTitle.children[11].active = true;
                         this.tipsText[index].string = el;
                     }
-                }
-                else {
+                } else {
                     //黑背景
                     if (GameCfg.GameSet.isBW) {
                         if (index >= 5 && index < 8) {
@@ -249,14 +246,21 @@ export default class NewClass extends cc.Component {
         this.rZoom = this.node.getChildByName('rZoomBtn').getComponent(cc.Toggle);
         this.rightBox.active = true;
 
+        // cc.game.on(cc.game.EVENT_SHOW, () => {
+        //     if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+        //         setTimeout(() => {
+        //             if( this.rightBox.x >=cc.winSize.width / 2 + this.rightBox.width / 2){
+        //
+        //             }
+        //             else{
+        //                GlobalEvent.emit('setDrawing', true);
+        //            }
+        //
+        //         }, 100);
+        //     }
+        // }, this);
 
-        cc.game.on(cc.game.EVENT_SHOW, () => {
-            if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                setTimeout(() => {
-                    GlobalEvent.emit('setDrawing', true);
-                }, 100);
-            }
-        }, this);
+        // GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
     }
 
     onEnable() {
@@ -269,9 +273,9 @@ export default class NewClass extends cc.Component {
         this.rZoom.node.active = true;
         this.rZoom.node.children[0].active = true;
         this.rightBox.active = true;
-        this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
+       // this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
         this.selcetContent.parent.active = true;
-        this.selcetContent.active=false;
+        this.selcetContent.active = false;
         this.tipsLabel.string = '成交量';
 
         //双盲
@@ -296,34 +300,44 @@ export default class NewClass extends cc.Component {
             if (GameCfg.GameSet.select == '均线') {
                 this.setBoxfalg('ma');
                 this.setBoxfalg('CPM');
-            }
-            else if (GameCfg.GameSet.select == 'MACD') {
+            } else if (GameCfg.GameSet.select == 'MACD') {
                 this.setBoxfalg('ma');
                 this.setBoxfalg('MACD');
             } else if (GameCfg.GameSet.select == 'BOLL') {
                 this.setBoxfalg('boll');
                 this.setBoxfalg('CPM');
-            }
-            else if (GameCfg.GameSet.select == 'KDJ') {
+            } else if (GameCfg.GameSet.select == 'KDJ') {
                 this.setBoxfalg('ma');
                 this.setBoxfalg('KDJ');
-            }
-            else if (GameCfg.GameSet.select == 'EXPMA') {
+            } else if (GameCfg.GameSet.select == 'EXPMA') {
                 this.setBoxfalg('EXPMA');
                 this.setBoxfalg('CPM');
-            }
-            else if (GameCfg.GameSet.select == 'RSI') {
+            } else if (GameCfg.GameSet.select == 'RSI') {
                 this.setBoxfalg('ma');
                 this.setBoxfalg('RSI');
-            }
-            else if (GameCfg.GameSet.select == '成交量') {
+            } else if (GameCfg.GameSet.select == '成交量') {
                 this.setBoxfalg('ma');
                 this.setBoxfalg('CPM');
             }
 
-            setTimeout(() => {
-                GlobalEvent.emit('setDrawing', true);
-            }, 100);
+            if(!this.flag){
+                this.flag=true;
+                setTimeout(() => {
+                    this.rZoom.node.children[0].active = false;
+                    this.rZoom.node.children[1].active = true;
+                    this.rightBox.x = cc.winSize.width / 2 + this.rightBox.width / 2;
+                    GlobalEvent.emit('setDrawing', true);
+                }, 100);
+            }
+
+          else  if(this.rightBox.x == cc.winSize.width / 2 - this.rightBox.width / 2){
+                setTimeout(() => {
+                    this.rZoom.node.children[0].active = false;
+                    this.rZoom.node.children[1].active = true;
+                    this.rightBox.x = cc.winSize.width / 2 + this.rightBox.width / 2;
+                    GlobalEvent.emit('setDrawing', true);
+                }, 100);
+            }
 
         }
         //期货
@@ -378,7 +392,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('hideTips');
         GlobalEvent.off('setBoxfalg');
         GlobalEvent.off(EventCfg.SET_DRAW_SIZE);
-     //   cc.game.off(cc.game.EVENT_SHOW);
+        //GlobalEvent.off(EventCfg.LEAVEGAME);
+           cc.game.off(cc.game.EVENT_SHOW);
     }
 
     onBtnSlecet(event, data) {
@@ -386,8 +401,7 @@ export default class NewClass extends cc.Component {
         if (name == 'btnSlecet') {
             this.selcetContent.active = !this.selcetContent.active;
             //   this.touchNode.active = this.selcetContent.active;
-        }
-        else if (data == 'CPM' || data == 'MACD' || data == 'KDJ' || data == 'RSI' || data == 'CCL') {
+        } else if (data == 'CPM' || data == 'MACD' || data == 'KDJ' || data == 'RSI' || data == 'CCL') {
             let str = event.target.getComponent(cc.Label).string;
             this.tipsLabel.string = str;
             this.selcetContent.active = false;
@@ -502,18 +516,45 @@ export default class NewClass extends cc.Component {
             }
         } else if (data == 'rZoomBtn') {
             ;
-            if (this.rZoom.isChecked) {
-
-                this.rZoom.node.children[0].active = false;
-                this.rightBox.x = cc.winSize.width / 2 + this.rightBox.width / 2;
-
-            } else {
+            if (this.rightBox.x == cc.winSize.width / 2 + this.rightBox.width / 2) {
                 this.rZoom.node.children[0].active = true;
+                this.rZoom.node.children[1].active = false;
                 this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
+                GlobalEvent.emit('setDrawing', false);
+            } else {
+                this.rZoom.node.children[0].active = false;
+                this.rZoom.node.children[1].active = true;
+                this.rightBox.x = cc.winSize.width / 2 + this.rightBox.width / 2;
+                GlobalEvent.emit('setDrawing', true);
             }
-            GlobalEvent.emit('setDrawing', this.rZoom.isChecked);
+            // if (this.rZoom.isChecked) {
+            //
+            //     this.rZoom.node.children[0].active = false;
+            //     this.rightBox.x = cc.winSize.width / 2 + this.rightBox.width / 2;
+            //
+            // } else {
+            //     this.rZoom.node.children[0].active = true;
+            //     this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
+            // }
+         //   GlobalEvent.emit('setDrawing', this.rZoom.isChecked);
 
         }
     }
 
+    onDisable () {
+        // if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+        //     this.selcetContent.parent.active = true;
+        //     GlobalEvent.emit('setDrawing', false);
+        // }
+         if (this.rightBox.x == cc.winSize.width / 2 + this.rightBox.width / 2) {
+             this.rZoom.node.children[0].active = true;
+             this.rZoom.node.children[1].active = false;
+             this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
+            GlobalEvent.emit('setDrawing', false);
+        }
+
+        this.rZoom.node.active = true;
+        this.rZoom.node.children[0].active = true;
+        this.rightBox.active = true;
+    }
 }
