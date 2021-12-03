@@ -246,21 +246,12 @@ export default class NewClass extends cc.Component {
         this.rZoom = this.node.getChildByName('rZoomBtn').getComponent(cc.Toggle);
         this.rightBox.active = true;
 
-        // cc.game.on(cc.game.EVENT_SHOW, () => {
-        //     if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-        //         setTimeout(() => {
-        //             if( this.rightBox.x >=cc.winSize.width / 2 + this.rightBox.width / 2){
-        //
-        //             }
-        //             else{
-        //                GlobalEvent.emit('setDrawing', true);
-        //            }
-        //
-        //         }, 100);
-        //     }
-        // }, this);
-
-        // GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
+        GlobalEvent.on('boxSlecetPos',(pos)=>{
+            console.log(pos);
+             pos=this.node.convertToNodeSpaceAR(pos);
+            console.log(pos);
+            this.selcetContent.parent.y=pos.y-16;
+        },this);
     }
 
     onEnable() {
@@ -393,7 +384,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('setBoxfalg');
         GlobalEvent.off(EventCfg.SET_DRAW_SIZE);
         //GlobalEvent.off(EventCfg.LEAVEGAME);
-           cc.game.off(cc.game.EVENT_SHOW);
+
+        GlobalEvent.off('boxSlecetPos');
     }
 
     onBtnSlecet(event, data) {

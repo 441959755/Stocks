@@ -11,8 +11,8 @@ export default class NewClass extends cc.Component {
     @property([cc.Node])
     masks: cc.Node[] = [];
 
-    @property(cc.Node)
-    linesNode: cc.Node = null;
+    @property([cc.Node])
+    linesNode: cc.Node[] = [];
 
     @property(cc.Node)
     HNode: cc.Node = null;
@@ -123,7 +123,7 @@ export default class NewClass extends cc.Component {
 
                 el && (el.color = cc.Color.BLACK);
             })
-            this.linesNode.children.forEach(el => {
+            this.linesNode.forEach(el => {
                 if (el) {
 
                     el.color = cc.Color.WHITE;
@@ -147,7 +147,7 @@ export default class NewClass extends cc.Component {
             this.masks.forEach(el => {
                 el && (el.color = cc.Color.WHITE)
             })
-            this.linesNode.children.forEach(el => {
+            this.linesNode.forEach(el => {
                 if (el) {
                     el.color = cc.Color.BLACK;
                     if (el.children.length > 0) {

@@ -166,11 +166,9 @@ export default class NewClass extends cc.Component {
             this.setDrawing();
         }, this);
 
-        // GlobalEvent.on(EventCfg.SET_DRAW_SIZE, (falg) => {
-        //     this.drawBordWidth = falg ? (this.drawBordWidth - 206) : (this.drawBordWidth + 206);
-        //     //  this.drawBordWidth = this.drawBg.node.width - this.part1.node.width - 15;
-        //     this.setDrawing();
-        // }, this);
+        GlobalEvent.on(EventCfg.SET_DRAW_SIZE, () => {
+            this.setDrawing();
+        }, this);
 
 
         //开始
@@ -491,6 +489,8 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('on_off');
         GlobalEvent.off(EventCfg.SETMALABEL);
         GlobalEvent.off(EventCfg.NOTICEDRAWMOVW);
+        GlobalEvent.off(EventCfg.SET_DRAW_SIZE);
+
     }
 
     //绘制初始

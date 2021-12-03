@@ -603,7 +603,6 @@ export default class NewClass extends cc.Component {
 
             this.drawRSI.strokeColor = GameCfg.RSI_COLOR[2];
             DrawUtils.drawLine(this.drawRSI, preRSIX, preRSI24Y + 10, RSIX, RSI24Y + 10);
-
         }
     }
 
@@ -673,15 +672,13 @@ export default class NewClass extends cc.Component {
 
         let some = index - GameCfg.beg_end[0];
 
-        let initY = 0;
-        let drawBox = 150;
         let disVol = this.topVol - this.bottomVol;
 
         let startX = some == 0 ? 10 : 10 + (some * GameCfg.hz_width);
-        // // console.log('startX='+startX);
+
         let endX = 10 + ((some + 1) * GameCfg.hz_width);
 
-        let hight = el.value * (150 / this.topVol);
+        let hight = el.value * ( this.drawVol.node.height / this.topVol);
 
         let width = endX - startX;
 
@@ -696,11 +693,11 @@ export default class NewClass extends cc.Component {
         for (let i = 0; i < GameCfg.VOLGraph.length; i++) {
             if (index >= GameCfg.VOLGraph[i]) {
 
-                let preY = this.VolList[index - 1][i] * (150 / this.topVol);
+                let preY = this.VolList[index - 1][i] * ( this.drawPCM.node.height / this.topVol);
                 let preX = 10 + ((some - 1) * GameCfg.hz_width) + width / 2
 
                 //平均的位置
-                let VOlPointY = this.VolList[index][i] * (150 / this.topVol);
+                let VOlPointY = this.VolList[index][i] * ( this.drawPCM.node.height / this.topVol);
                 let VOlPointX = startX + width / 2;
 
                 this.drawPCM.strokeColor = GameCfg.VOLColor[i];

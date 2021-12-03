@@ -85,7 +85,7 @@ export default class NewClass extends cc.Component {
         if (GameCfg.huizhidatas >= GameCfg.data[0].data.length) {
             GameCfg.huizhidatas = GameCfg.data[0].data.length;
         }
-        this.vol.string = GameCfg.data[0].data[GameCfg.huizhidatas - 1].value;
+        this.vol.string ='VOL(5,10)'+ GameCfg.data[0].data[GameCfg.huizhidatas - 1].value;
         this.initDrawBg();
     }
 

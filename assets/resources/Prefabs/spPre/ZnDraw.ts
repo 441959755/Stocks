@@ -98,6 +98,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     changeLabel: cc.Label = null;
 
+    @property(cc.Node)
+    drawcopy:cc.Node=null;
+
     ori_width = 0;
     now_width = 0;
 
@@ -191,22 +194,26 @@ export default class NewClass extends cc.Component {
 
     start() {
         //找到更新买1...卖1...label跟新
-        this.box3.children.forEach(el => {
-            if (el.name == 't_label') {
-                this.t_label.push(el.getComponent(cc.Label));
+        this.box3.children.forEach(e => {
+            if(e.name=='node2'||e.name=='node3'){
+                e.children.forEach(el=>{
+                    if (el.name == 't_label') {
+                        this.t_label.push(el.getComponent(cc.Label));
 
-            }
+                    }
 
-            else if (el.name == 't_label1') {
-                this.t_labelv.push(el.getComponent(cc.Label));
-            }
+                    else if (el.name == 't_label1') {
+                        this.t_labelv.push(el.getComponent(cc.Label));
+                    }
 
-            else if (el.name == 'd_label') {
-                this.d_label.push(el.getComponent(cc.Label));
-            }
+                    else if (el.name == 'd_label') {
+                        this.d_label.push(el.getComponent(cc.Label));
+                    }
 
-            else if (el.name == 'd_label1') {
-                this.d_labelv.push(el.getComponent(cc.Label));
+                    else if (el.name == 'd_label1') {
+                        this.d_labelv.push(el.getComponent(cc.Label));
+                    }
+                })
             }
         })
     }
@@ -342,14 +349,13 @@ export default class NewClass extends cc.Component {
         }
     }
 
-
     onEnable() {
 
-        GlobalEvent.on(EventCfg.SYNCQUOTEITEM, this.onSyncQuotation.bind(this), this);
-
         //保留绘制宽度
-        this.ori_width = this.t_grap_node.parent.width;
-        this.now_width = this.t_grap_node.parent.width - this.box3.width - 10;
+        this.ori_width = this.drawcopy.width;
+        this.now_width = this.drawcopy.width - this.box3.width - 10;
+
+        GlobalEvent.on(EventCfg.SYNCQUOTEITEM, this.onSyncQuotation.bind(this), this);
     }
 
     //当前持股数据
@@ -1020,10 +1026,14 @@ export default class NewClass extends cc.Component {
         }
 
         //找到更新买1...卖1...label跟新
-        this.box3.children.forEach(el => {
-            if (el.name == 't_label' || el.name == 't_label1' || el.name == 'd_label' || el.name == 'd_label1') {
-                el.color = cc.Color.WHITE;
-                el.getComponent(cc.Label).string = '0.00';
+        this.box3.children.forEach(e => {
+            if (e.name == 'node2' || e.name == 'node3') {
+                e.children.forEach(el => {
+                    if (el.name == 't_label' || el.name == 't_label1' || el.name == 'd_label' || el.name == 'd_label1') {
+                        el.color = cc.Color.WHITE;
+                        el.getComponent(cc.Label).string = '0.00';
+                    }
+                })
             }
         })
 
