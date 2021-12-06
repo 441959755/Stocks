@@ -77,7 +77,9 @@ cc.Class({
 	},
 
 	initData() {
+
 		let SMSet = cc.sys.localStorage.getItem('SMSET');
+
 		if (!SMSet) {
 			SMSet = {
 				KLine: '150',
@@ -101,7 +103,6 @@ cc.Class({
 				MA6Date: 120,
 				isFC: false,
 				isSound: true,
-
 			}
 			GameData.SMSet = SMSet;
 		} else {
@@ -336,7 +337,6 @@ cc.Class({
 			GameData.DXHistoryInfo = [];
 		} else {
 			GameData.DXHistoryInfo = JSON.parse(DXHistoryInfo);
-
 		}
 
 		let QHHistoryInfo = cc.sys.localStorage.getItem('QHHISTORYINFO');

@@ -10,12 +10,20 @@ let MessageHead = pb.MessageHead;
 Socket.prototype = {
 	connected(event) {
 		let self = this;
-		console.log('connected');
+
 		self.reconnectBeat && (clearInterval(self.reconnectBeat))
 		self.reconnectBeat = null;
 		this.reconnectCount = 0;
 		GlobalEvent.emit(EventCfg.TIPSTEXTHIDE);
-		socket.send(pb.MessageId.Req_Game_Login, PB.onCmdGameLoginConvertToBuff(), (info) => {
+
+		let CmdGameLogin = pb.CmdGameLogin;
+		let message = CmdGameLogin.create({
+			uid: GameData.userID,
+			token: GameData.token,
+		})
+		let buff = CmdGameLogin.encode(message).finish();
+
+		socket.send(pb.MessageId.Req_Game_Login,buff, (info) => {
 			console.log('登入成功：' + JSON.stringify(info));
 			if (info && info.data) {
 

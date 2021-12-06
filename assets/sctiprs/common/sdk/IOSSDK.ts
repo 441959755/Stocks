@@ -58,7 +58,6 @@ export default class IOSSDK {
 
             HttpMgr.getInstance().loginWeb(id, loginInfo, call, () => {
                 console.log('onLoginCodeHttpRequest err');
-                // call && call();
             })
         }
     }
@@ -450,13 +449,11 @@ export default class IOSSDK {
             methodName = 'useSystemCamera';
         }
 
-
         var ret = jsb.reflection.callStaticMethod(this.className, methodName, JSON.stringify(dict));
 
         if (ret) {
             callback && (callback(ret));
         }
-
     }
 
 }

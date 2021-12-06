@@ -10,67 +10,6 @@ function PBHelper() {
 
 PBHelper.prototype = {
 
-    //登入信息转BUff
-    onCmdLoginConvertToBuff(data) {
-        let Login = pb.CmdLogin;
-        console.log('登入信息' + JSON.stringify(data));
-        let message = Login.create({
-            account: data.account,
-            type: data.type,
-            from: data.from,
-            pwd: data.pwd,
-            websocket: true
-        });
-        let buff = Login.encode(message).finish();
-        return buff;
-    },
-
-    //登人返回信息
-    onCmdLoginConvertToData(buff) {
-        let CmdLoginReply = pb.CmdLoginReply;
-        let decoded = CmdLoginReply.decode(new Uint8Array(buff));
-        // let decoded = CmdLoginReply.decode(buff);
-        console.log('登人返回信息:' + JSON.stringify(decoded));
-
-        if (decoded.err.err) {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, decoded.err.err);
-            return;
-        }
-
-        return decoded;
-
-    },
-
-    //游戏登入信息
-    onCmdGameLoginConvertToBuff() {
-        let CmdGameLogin = pb.CmdGameLogin;
-        let message = CmdGameLogin.create({
-            uid: GameData.userID,
-            token: GameData.token,
-        })
-
-        let buff = CmdGameLogin.encode(message).finish();
-
-        return buff;
-    },
-
-    //游戏登入返回信息
-    onCmdGameLoginReplyConvertToData(buff) {
-        let CmdGameLoginReply = pb.CmdGameLoginReply;
-        let decoded = CmdGameLoginReply.decode(new Uint8Array(buff));
-        console.log(' 游戏登入返回信息:' + JSON.stringify(decoded));
-        return decoded;
-    },
-
-    //游戏开始
-    onCmdGameStartConvertToBuff(data) {
-        let CmdGameStart = pb.CmdGameStart;
-        let message = CmdGameStart.create(data)
-        let buff = CmdGameStart.encode(message).finish();
-        return buff;
-    },
-
     //查询行情
     onCmdQuoteQueryConvertToBuff(data) {
         let CmdQuoteQuery = pb.CmdQuoteQuery;
@@ -80,37 +19,6 @@ PBHelper.prototype = {
         return buff;
     },
 
-    //游戏结束上传数据
-    onCmdGameOverConvertToBuff(datas) {
-
-        let CmdGameOver = pb.CmdGameOver;
-
-        let message = CmdGameOver.create({result: datas.result, operations: datas.operations})
-        console.log(message);
-
-        let buff = CmdGameOver.encode(message).finish();
-
-        return buff;
-    },
-
-    //查询游戏结果
-    onCmdQueryGameResultConvertToBuff(data) {
-        console.log(JSON.stringify(data));
-        let CmdQueryGameResult = pb.CmdQueryGameResult;
-        let message = CmdQueryGameResult.create(data)
-        let buff = CmdQueryGameResult.encode(message).finish();
-        return buff;
-    },
-
-    //查询游戏结果应答
-    onCmdQueryGameResultReplyConvertToData(buff) {
-        let CmdQueryGameResultReply = pb.CmdQueryGameResultReply;
-        let decode = CmdQueryGameResultReply.decode(new Uint8Array(buff));
-
-        return decode;
-    },
-
-
     //修改玩家信息
     onCmdEditInfoConvertToBuff(data) {
         let CmdEditNick = pb.PlayerInfo;
@@ -119,12 +27,6 @@ PBHelper.prototype = {
         return buff;
     },
 
-    onAdClickedConvertTpBuff(data) {
-        let AdClicked = pb.AdClicked;
-        let message = AdClicked.create(data)
-        let buff = AdClicked.encode(message).finish();
-        return buff;
-    },
 
     // 查询期货行情
     onCmdQuoteQueryFutureConverToBuff(data) {
@@ -135,25 +37,6 @@ PBHelper.prototype = {
         return buff;
     },
 
-    // 查询游戏操作步骤
-    onCmdGetGameOperations(data) {
-        console.log('游戏操作步骤数据' + JSON.stringify(data));
-        let CmdGetGameOperations = pb.CmdGetGameOperations;
-        let message = CmdGetGameOperations.create(data)
-        let buff = CmdGetGameOperations.encode(message).finish();
-
-        return buff;
-    },
-
-    // 查询游戏操作步骤应答
-    onCmdGetGameOperationsReply(buff) {
-        let GameOperations = pb.GameOperations;
-        let decode = GameOperations.decode(new Uint8Array(buff));
-        console.log('查询游戏操作步骤应答' + JSON.stringify(decode));
-        return decode;
-
-    },
-
     onReqRoomEnterBuff(data) {
         let CmdRoomEnter = pb.CmdRoomEnter;
         let message = CmdRoomEnter.create(data);
@@ -161,39 +44,13 @@ PBHelper.prototype = {
         return buff;
     },
 
-    onRepRoomEnterMessage(buff) {
-        let CmdRoomEnterReply = pb.CmdRoomEnterReply;
-        let decode = CmdRoomEnterReply.decode(new Uint8Array(buff));
-        return decode;
-    },
-
-    //自己进入房间（客户端收到自己进入房间的消息，将玩家拉入房间）：
-    onSyncRoomEnterSelfMessage(buff) {
-        let RoomData = pb.RoomData;
-        let decode = RoomData.decode(new Uint8Array(buff));
-        return decode;
-    },
-
-    //房间数据
-    onRoomGameDataMessage(buff) {
-        let RoomGameData = pb.RoomGameData;
-        let decode = RoomGameData.decode(new Uint8Array(buff));
-        return decode;
-    },
-
-    //重置游戏胜负统计：CmdResetGameCounter
-    onResetGameCounter(data) {
-        let CmdResetGameCounter = pb.CmdResetGameCounter;
-        let message = CmdResetGameCounter.create(data);
-        let buff = CmdResetGameCounter.encode(message).finish();
-        return buff;
-    },
-
-
     selectBlackData(id, buff) {
 
         if (id == pb.MessageId.Rep_Game_Login) {
-            let data = this.onCmdGameLoginReplyConvertToData(buff);
+
+            let CmdGameLoginReply = pb.CmdGameLoginReply;
+            let data = CmdGameLoginReply.decode(new Uint8Array(buff));
+
             return data;
         } else if (id == pb.MessageId.Rep_QuoteQuery) {
             let Quotes = pb.Quotes;
@@ -247,10 +104,17 @@ PBHelper.prototype = {
             let ErrorInfo = pb.ErrorInfo;
             let data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
-        } else if (id == pb.MessageId.Rep_Game_QueryGameResult) {
-            let data = this.onCmdQueryGameResultReplyConvertToData(buff);
+        }
+
+        else if (id == pb.MessageId.Rep_Game_QueryGameResult) {
+
+            let CmdQueryGameResultReply = pb.CmdQueryGameResultReply;
+            let data = CmdQueryGameResultReply.decode(new Uint8Array(buff));
             return data;
-        } else if (id == pb.MessageId.Rep_Game_SmxlReport) {
+
+        }
+
+        else if (id == pb.MessageId.Rep_Game_SmxlReport) {
             let CmdGetSmxlReportReply = pb.CmdGetSmxlReportReply;
             let data = CmdGetSmxlReportReply.decode(new Uint8Array(buff));
             return data;
@@ -278,23 +142,29 @@ PBHelper.prototype = {
             GameData.todayGameCount = data.counter;
 
         } else if (id == pb.MessageId.Rep_Game_GetGameOperation) {
-            let data = this.onCmdGetGameOperationsReply(buff);
+
+            let GameOperations = pb.GameOperations;
+            let data = GameOperations.decode(new Uint8Array(buff));
+
             return data;
         }
 
         //进入房间应答
         else if (id == pb.MessageId.Rep_Room_Enter) {
-            let data = this.onRepRoomEnterMessage(buff);
+            let CmdRoomEnterReply = pb.CmdRoomEnterReply;
+            let data = CmdRoomEnterReply.decode(new Uint8Array(buff));
             return data;
         }
 
         //自己进入房间（客户端收到自己进入房间的消息，将玩家拉入房间）
         else if (id == pb.MessageId.Sync_Room_Enter_Self) {
-            let data = this.onSyncRoomEnterSelfMessage(buff);
+            let RoomData = pb.RoomData;
+            let data = RoomData.decode(new Uint8Array(buff));
 
             if (data.game == pb.GameType.JJ_PK || data.game == pb.GameType.JJ_DuoKong) {
 
-                let message = this.onRoomGameDataMessage(data.data);
+                let RoomGameData = pb.RoomGameData;
+                let message = RoomGameData.decode(new Uint8Array(buff));
 
                 console.log('自己进入房间' + JSON.stringify(message));
 

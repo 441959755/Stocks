@@ -50,7 +50,11 @@ export default class GlobalHandle {
             }
         }
 
-        socket.send(pb.MessageId.Req_Game_Start, PB.onCmdGameStartConvertToBuff(info), res => {
+        let CmdGameStart = pb.CmdGameStart;
+        let message = CmdGameStart.create(info)
+        let buff = CmdGameStart.encode(message).finish();
+
+        socket.send(pb.MessageId.Req_Game_Start, buff, res => {
 
             console.log(JSON.stringify(res));
 
@@ -67,9 +71,13 @@ export default class GlobalHandle {
 
     //游戏结束
     public static onCmdGameOverReq(datas, cb) {
-
         console.log('上传游戏数据' + JSON.stringify(datas));
-        socket.send(pb.MessageId.Req_Game_Over, PB.onCmdGameOverConvertToBuff(datas), (info) => {
+
+        let CmdGameOver = pb.CmdGameOver;
+        let message = CmdGameOver.create(datas);
+        let buff = CmdGameOver.encode(message).finish();
+
+        socket.send(pb.MessageId.Req_Game_Over,buff, (info) => {
             cb && (cb(info.ts));
             console.log('GameOverInfo' + JSON.stringify(info));
         })
@@ -327,7 +335,11 @@ export default class GlobalHandle {
             from: LLWConfig.PLATTYPE,
         }
 
-        socket.send(messageId, PB.onAdClickedConvertTpBuff(data), (info) => {
+        let AdClicked = pb.AdClicked;
+        let message = AdClicked.create(data)
+        let buff = AdClicked.encode(message).finish();
+
+        socket.send(messageId, buff, (info) => {
             console.log('onGameResetCount' + JSON.stringify(info));
 
             // callBack && (callBack(info));
@@ -338,7 +350,11 @@ export default class GlobalHandle {
     // 查询游戏操作步骤
     public static GetGameOperations(data, cb?) {
 
-        socket.send(pb.MessageId.Req_Game_GetGameOperation, PB.onCmdGetGameOperations(data), (info) => {
+        let CmdGetGameOperations = pb.CmdGetGameOperations;
+        let message = CmdGetGameOperations.create(data)
+        let buff = CmdGetGameOperations.encode(message).finish();
+
+        socket.send(pb.MessageId.Req_Game_GetGameOperation,buff, (info) => {
             console.log('操作步骤' + JSON.stringify(info));
 
             if (!info.err) {

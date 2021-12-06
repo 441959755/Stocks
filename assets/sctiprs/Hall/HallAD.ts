@@ -28,6 +28,7 @@ export default class NewClass extends cc.Component {
             cc.sys.localStorage.setItem('LAUNCHAD', GameCfgText.adConf.launch[0].version);
             version = GameCfgText.adConf.launch[0].version;
         }
+
         this.version = version;
         LoadImg.downloadRemoteImageAndSave(GameCfgText.adConf.main[0].img, (flag, sp) => {
             this.imgAd.spriteFrame = sp;

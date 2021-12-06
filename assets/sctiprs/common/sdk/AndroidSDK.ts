@@ -20,9 +20,7 @@ const QQRefreshToken = 'QQRefreshToken';
 
 export default class AndroidSDK {
 
-
     appId = "wx2f88189155732f56";
-
 
     appSecret = "9b1174a6fb93bd7a831338f8e21db0db";
 
@@ -60,8 +58,6 @@ export default class AndroidSDK {
                 account: id,
                 type: pb.LoginType.MobilePhoneId,
                 from: pb.AppFrom.Android_001,
-                // type: pb.LoginType.WeChat,
-                // from: pb.AppFrom.Test,
                 pwd: pw
             };
 
@@ -80,7 +76,6 @@ export default class AndroidSDK {
     }
 
     loginWx() {
-        console.log('js微信登录');
 
         jsb.reflection.callStaticMethod(
             wxClassPath,
@@ -327,7 +322,6 @@ export default class AndroidSDK {
             , 100);
     }
 
-
     uploadImg() {
         var funcName = "uploadImg"
         var sigs = "()V"
@@ -388,8 +382,6 @@ export default class AndroidSDK {
             }, true);
         }, 1000);
     }
-
-
 
     loginServer(token) {
 
@@ -496,6 +488,7 @@ export default class AndroidSDK {
         if (needClip == undefined) {
             needClip = false;
         }
+
         var clipX = 0, clipY = 0;
 
         if (clipSize) {
@@ -515,11 +508,14 @@ export default class AndroidSDK {
         if (type == 1) {
             methodName = 'useSystemAlbum';
         }
+
         else if (type == 2) {
             methodName = 'useSystemCamera';
         }
 
         var ret = jsb.reflection.callStaticMethod(this.className, methodName, sigs, JSON.stringify(dict));
+
+        console.log("androidTakePhotoret:",ret)
 
         if (ret) {
             callback && (callback(ret));

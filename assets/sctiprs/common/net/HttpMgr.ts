@@ -1,5 +1,6 @@
 
 import HttpUtils from "./HttpUtils";
+import {pb} from "../../../protos/proto";
 
 
 export default class HttpMgr {
@@ -24,21 +25,20 @@ export default class HttpMgr {
         //let url = 'http://121.9.210.218:8080/l';
         let url = 'http://test.chaogugame.com/l';
 
-        let buff1 = PB.onCmdLoginConvertToBuff(data);
+        data.websocket= true
+        let CmdLogin = pb.CmdLogin;
+        let message = CmdLogin.create(data);
+        let buff1 = CmdLogin.encode(message).finish();
 
         buff1 = buff1.buffer.slice(buff1.byteOffset, buff1.byteLength + buff1.byteOffset);
 
-
         HttpUtils.sendXHRAB(url, buff1, (buff) => {
 
-            let decoded = PB.onCmdLoginConvertToData(buff);
-
-            console.log(decoded);
+            let CmdLoginReply = pb.CmdLoginReply;
+            let decoded = CmdLoginReply.decode(new Uint8Array(buff));
 
             if (decoded) {
-
                 call && (call(decoded));
-
             }
 
         }, err);

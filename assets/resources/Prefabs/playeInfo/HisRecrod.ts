@@ -45,8 +45,11 @@ export default class NewClass extends cc.Component {
     onQueryGameResult(data) {
 
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        let CmdQueryGameResult = pb.CmdQueryGameResult;
+        let message = CmdQueryGameResult.create(data)
+        let buff = CmdQueryGameResult.encode(message).finish();
 
-        socket.send(pb.MessageId.Req_Game_QueryGameResult, PB.onCmdQueryGameResultConvertToBuff(data), info => {
+        socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, info => {
             console.log(JSON.stringify(info.results));
             if (info.results.length == 0) {
                 this.tipsNode.active = true;

@@ -8,7 +8,9 @@ import IOSSDK from "./IOSSDK";
 export default class LLWSDK {
 
     static getSDK() {
+
         switch (LLWConfig.PLATTYPE) {
+
             case PlatDefine.PLAT_WEB:
                 let webSDK = WebSDK.getInstance();
                 return webSDK;

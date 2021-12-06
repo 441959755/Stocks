@@ -13,9 +13,6 @@ export default class NewClass extends cc.Component {
     tipsLabel: cc.Label = null;
 
     @property(cc.Node)
-    notice: cc.Node = null;  //通知内容节点
-
-    @property(cc.Node)
     dlNode: cc.Node = null;  //登入节点
 
     @property(cc.Node)
@@ -55,13 +52,11 @@ export default class NewClass extends cc.Component {
     }
 
     onShowNode(node) {
-        this.notice.active = false;
         this.dlNode.active = false;
         this.zhNode.active = false;
         this.zcNode.active = false;
         node.active = true;
     }
-
 
     onBtnclick(event, data) {
 
@@ -111,12 +106,17 @@ export default class NewClass extends cc.Component {
         let pw = this.password.string;
         cc.sys.localStorage.setItem('ACCOUNT', uid);
         cc.sys.localStorage.setItem('PASSWORD', pw);
-        console.log('登入账号：' + uid);
         LLWSDK.getSDK().login(this.loginResultCallback.bind(this), uid, pw);
     }
 
     //登入游戏
     loginResultCallback(decoded) {
+
+        if (decoded.err.err) {
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, decoded.err.err);
+            return;
+        }
 
         console.log(decoded.token + decoded.uid + decoded.gameAddr);
 

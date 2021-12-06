@@ -177,11 +177,6 @@ export default class NewClass extends cc.Component {
 
         let url = 'http://test.chaogugame.com/sms';
 
-        // 获取短信验证码
-        // message CmdGetSms {
-        // 	string account = 1; // 玩家账号：手机号
-        // 	string captcha = 2; // 图形码（区分机器人还是人类的图灵测试）
-        // }
         let data = {
             account: this.pNum,
         }

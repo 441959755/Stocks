@@ -41,6 +41,7 @@ export default class NewClass extends cc.Component {
             if (GameCfgText.gameConf.counter_reset_cost) {
                 cost = Math.abs(GameCfgText.gameConf.counter_reset_cost[0].v);
             }
+
             let diamond = cost || 50;
 
             if (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration] || GameData.properties[pb.GamePropertyId.Diamond] >= diamond) {
@@ -51,7 +52,11 @@ export default class NewClass extends cc.Component {
                         game: this.GameType,
                     }
 
-                    socket.send(pb.MessageId.Req_Hall_ResetGameCounter, PB.onResetGameCounter(data), (info) => {
+                    let CmdResetGameCounter = pb.CmdResetGameCounter;
+                    let message = CmdResetGameCounter.create(data);
+                    let buff = CmdResetGameCounter.encode(message).finish();
+
+                    socket.send(pb.MessageId.Req_Hall_ResetGameCounter, buff, (info) => {
                         console.log('onCmdEditInfoConvertToBuff:' + JSON.stringify(info));
                         if (!info.code) {
                             this.label2.string = 0 + '  胜              ' + 0 + '  负';
