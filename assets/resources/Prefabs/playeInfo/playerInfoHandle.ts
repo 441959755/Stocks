@@ -3,6 +3,7 @@ import { pb } from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -30,10 +31,14 @@ export default class NewClass extends cc.Component {
     @property(cc.Sprite)
     vipImg: cc.Sprite = null;
 
+    defHeadLayer:cc.Node=null;
+
     onLoad() {
         GlobalEvent.on(EventCfg.HEADIMGCHANGE, this.setUserInfo.bind(this), this);
 
         GlobalEvent.on(EventCfg.VIPCHANGE, this.setUserInfo.bind(this), this);
+
+        GlobalEvent.on('openDefHeadLayer',this.openDefHeadLayer.bind(this),this);
     }
 
     start() {
@@ -52,12 +57,11 @@ export default class NewClass extends cc.Component {
         }
     }
 
-
     onDestroy() {
         GlobalEvent.off(EventCfg.HEADIMGCHANGE);
         GlobalEvent.off(EventCfg.VIPCHANGE);
+        GlobalEvent.off('openDefHeadLayer');
     }
-
 
     onEnable() {
         this.layers.forEach((el, index) => {
@@ -67,7 +71,6 @@ export default class NewClass extends cc.Component {
                 el.active = false;
             }
         })
-
         this.toggle1.isChecked = true;
     }
 
@@ -88,5 +91,9 @@ export default class NewClass extends cc.Component {
         if (name == 'closeBtn') {
             this.node.active = false;
         }
+    }
+
+    openDefHeadLayer(){
+        PopupManager.openNode(this.node,this.defHeadLayer,'Prefabs/playeInfo/defHead',10);
     }
 }

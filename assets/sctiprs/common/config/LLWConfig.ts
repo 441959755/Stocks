@@ -3,8 +3,8 @@ import PlatDefine from "./PlatDefine";
 const CHANNELID = '';
 const VERSION = 0;
 const GAMEID = 0;
-const PLATTYPE = PlatDefine.PLAT_IOS;
-//const PLATTYPE = PlatDefine.PLAT_ANDROID;
+//const PLATTYPE = PlatDefine.PLAT_IOS;
+const PLATTYPE = PlatDefine.PLAT_ANDROID;
 const LOADHEADURL = 'http://test.chaogugame.com/icon/';
 //const LOADHEADURL = 'https://www.cgdr168.com/icon/';
 

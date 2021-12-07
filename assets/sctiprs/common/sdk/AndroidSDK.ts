@@ -1,4 +1,4 @@
-import { pb } from "../../../protos/proto";
+import {pb} from "../../../protos/proto";
 import GameData from "../../GameData";
 import EventCfg from "../../Utils/EventCfg";
 import GlobalEvent from "../../Utils/GlobalEvent";
@@ -29,6 +29,8 @@ export default class AndroidSDK {
     static WeChatModule = null;
 
     public loginPlat = null;
+
+     photoCallback=null;
 
     className = 'org/cocos2dx/javascript/AppActivity';
 
@@ -142,8 +144,7 @@ export default class AndroidSDK {
                 this.loginServer(result.access_token);
 
             })
-        }
-        else {
+        } else {
             //检查是否安装微信
 
             if (this.isInstallWx()) {
@@ -224,8 +225,7 @@ export default class AndroidSDK {
             console.log(JSON.stringify(access_token));
             this.loginServer(access_token);
             console.log(access_token);
-        }
-        else {
+        } else {
             this.loginPlat = pb.LoginType.QQ;
 
             console.log("js准备调用java callQqLoginToJava:")
@@ -308,7 +308,7 @@ export default class AndroidSDK {
     //调用java 打开Url
     openUrl(url) {
         var funcName = "openUrl"
-        var args = { url }
+        var args = {url}
         var sigs = "(Ljava/lang/String;)V"
         jsb.reflection.callStaticMethod(this.className, funcName, sigs, url)
     }
@@ -318,7 +318,7 @@ export default class AndroidSDK {
         var funcName = "copyToClipboard"
         var sigs = "(Ljava/lang/String;)V"
         setTimeout(() =>
-            jsb.reflection.callStaticMethod(this.className, funcName, sigs, str)
+                jsb.reflection.callStaticMethod(this.className, funcName, sigs, str)
             , 100);
     }
 
@@ -430,14 +430,12 @@ export default class AndroidSDK {
                 url = 'https://graph.qq.com/user/get_user_info?access_token=' + obj.access_token
                     + 'oauth_consumer_key=1105791492&openid=' + obj.openid;
             }
-        }
-        else if (this.loginPlat == pb.LoginType.WeChat) {
+        } else if (this.loginPlat == pb.LoginType.WeChat) {
 
             let WeChatInfo = cc.sys.localStorage.getItem('WeChatInfo');
 
             if (!WeChatInfo) {
-                url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' + obj.
-                    access_token + '&openid=' + obj.openid;
+                url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' + obj.access_token + '&openid=' + obj.openid;
             }
 
             if (url) {
@@ -461,8 +459,7 @@ export default class AndroidSDK {
                     }, true);
 
                 })
-            }
-            else {
+            } else {
 
                 this.loginServer(obj.access_token);
             }
@@ -483,44 +480,37 @@ export default class AndroidSDK {
     }
 
     //获取选择图片
-    pickImage(type, needClip, clipSize, callback) {
-
-        if (needClip == undefined) {
-            needClip = false;
-        }
-
-        var clipX = 0, clipY = 0;
-
-        if (clipSize) {
-            clipX = 150;
-            clipY = 150;
-        }
-
-        var dict = {
-            needClip: needClip,
-            clipX: clipX,
-            clipY: clipY,
-        }
-
-        var methodName = 'pickImage';
-        let sigs = "(Ljava/lang/String;)v"
-
+    pickImage(type,call) {
+        this.photoCallback=call;
+        let tmpPath = jsb.fileUtils.getWritablePath() + 'tmpPhoto.jpg';
         if (type == 1) {
-            methodName = 'useSystemAlbum';
+            jsb.reflection.callStaticMethod(
+                'org/cocos2dx/javascript/DeviceModule',
+                "selectPhoto",
+                "(Ljava/lang/String;)V",
+                tmpPath);
+        } else if (type == 2) {
+            jsb.reflection.callStaticMethod('org/cocos2dx/javascript/AvatarManager', 'openCamera', '(Ljava/lang/String;)V', 'yourKey')
         }
+    }
 
-        else if (type == 2) {
-            methodName = 'useSystemCamera';
+    //选择相册回调
+    selectPhotoCallback(result, path) {
+        if (result) {
+            //先释放原来的同名图片
+            cc.loader.load(path, (err, tex) => {
+                if(err){
+                    cc.error(err);
+                }else {
+                    console.log('选择相册回调'+tex);
+                  //  var spriteFrame = new cc.SpriteFrame(tex);
+
+                    this.photoCallback&&this.photoCallback(tex);
+                }
+            });
+        } else {
+            console.log('选择相册失败');
         }
-
-        var ret = jsb.reflection.callStaticMethod(this.className, methodName, sigs, JSON.stringify(dict));
-
-        console.log("androidTakePhotoret:",ret)
-
-        if (ret) {
-            callback && (callback(ret));
-        }
-
     }
 
 }

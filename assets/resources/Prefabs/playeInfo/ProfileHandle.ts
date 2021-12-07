@@ -135,7 +135,8 @@ export default class NewClass extends cc.Component {
         if (name == 'btnicon') {
             let index = parseInt(data);
             if (index == 0) {
-                this.onChangeIcon();
+              //  this.onChangeIcon();
+                GlobalEvent.emit('openDefHeadLayer');
             }
 
             else if (index == 1) {
@@ -151,7 +152,8 @@ export default class NewClass extends cc.Component {
     }
 
     //更改头像
-    onChangeIcon() {
+  //  onChangeIcon() {
+
 
         // LLWSDK.getSDK().chooseImage((img) => {
         //     if (!img) { return };
@@ -176,5 +178,5 @@ export default class NewClass extends cc.Component {
 
         // })
 
-    }
+   // }
 }

@@ -203,13 +203,13 @@ export default class PopupManager {
                 prent.addChild(childen, zIndex);
                 childen.active = true;
                 this.isLoading = false;
-                call(childen);
+               call&& call(childen);
             })
         }
         else {
             childen.active = true;
             this.isLoading = false;
-            call(childen);
+           call&& call(childen);
         }
     }
 
