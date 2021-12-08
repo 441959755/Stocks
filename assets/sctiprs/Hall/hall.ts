@@ -2,7 +2,6 @@ import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
 import GameCfg from '../game/GameCfg';
 import { pb } from '../../protos/proto';
-import GlobalHandle from '../global/GlobalHandle';
 import StrategyAIData from '../game/StrategyAIData';
 import GameData from '../GameData';
 import LoadUtils from '../Utils/LoadUtils';
@@ -497,6 +496,7 @@ export default class NewClass extends cc.Component {
 			this.finalLayer[this.index].active = false;
 			GlobalEvent.emit(EventCfg.LOADINGHIDE);
 		})
+
 	}
 
 	//离开游戏
@@ -591,13 +591,16 @@ export default class NewClass extends cc.Component {
 	}
 
 	openNode(node, url, zIndex, call?) {
+
 		if (!this.isLoading) {
 			this.isLoading = true;
 		}
 		else {
 			return;
 		}
+
 		GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
 		if (!node) {
 			LoadUtils.loadRes(url, pre => {
 				node = cc.instantiate(pre);
@@ -607,11 +610,13 @@ export default class NewClass extends cc.Component {
 				call(node);
 			})
 		}
+
 		else {
 			node.active = true;
 			this.isLoading = false;
 			call(node);
 		}
+
 	}
 
 }

@@ -83,9 +83,13 @@ export default class NewClass extends cc.Component {
 	}
 
 	upLoadUserInfo() {
+
 		let WeChatInfo;
+
 		if (!llwSDK.loginPlat) { return }
+
 		if (llwSDK.loginPlat == pb.LoginType.QQ) {
+
 			WeChatInfo = cc.sys.localStorage.getItem('QQInfo');
 			cc.sys.localStorage.setItem('QQInfo', 1);
 		}
@@ -123,7 +127,6 @@ export default class NewClass extends cc.Component {
 						uid: GameData.userID,
 						icon: new Uint8Array(GameData.headimgurl),
 					}
-
 					let CmdUploadIcon = pb.CmdUploadIcon;
 					let message = CmdUploadIcon.create(data);
 					let buff = CmdUploadIcon.encode(message).finish();
@@ -135,7 +138,6 @@ export default class NewClass extends cc.Component {
 			}
 		}
 	}
-
 
 	setUserInfo() {
 		this.userLevel.string = 'LV:' + (GameData.properties[pb.GamePropertyId.Level] || 1) + '';

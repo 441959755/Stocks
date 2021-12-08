@@ -481,22 +481,28 @@ export default class AndroidSDK {
 
     //获取选择图片
     pickImage(type,call) {
-        this.photoCallback=call;
-        let tmpPath = jsb.fileUtils.getWritablePath() + 'tmpPhoto.jpg';
+        //  this.photoCallback=call;
+        // this.photoCallback&&(this.photoCallback(null));
+
+        //
+        // let tmpPath = jsb.fileUtils.getWritablePath() + 'tmpPhoto.jpg';
+        //
         if (type == 1) {
-            jsb.reflection.callStaticMethod(
-                'org/cocos2dx/javascript/DeviceModule',
-                "selectPhoto",
-                "(Ljava/lang/String;)V",
-                tmpPath);
+            jsb.reflection.callStaticMethod('org/cocos2dx/javascript/AvatarManager', 'openGallery', '(Ljava/lang/String;)V', 'yourKey')
+            // jsb.reflection.callStaticMethod(
+            //     'org/cocos2dx/javascript/DeviceModule',
+            //     "selectPhoto",
+            //     "(Ljava/lang/String;)V",
+            //     tmpPath);
         } else if (type == 2) {
             jsb.reflection.callStaticMethod('org/cocos2dx/javascript/AvatarManager', 'openCamera', '(Ljava/lang/String;)V', 'yourKey')
+          //  jsb.reflection.callStaticMethod('org/cocos2dx/javascript/AvatarManager', 'openCamera', '(Ljava/lang/String;)V', 'yourKey')
         }
     }
 
     //选择相册回调
-    selectPhotoCallback(result, path) {
-        if (result) {
+    selectPhotoCallback(path) {
+
             //先释放原来的同名图片
             cc.loader.load(path, (err, tex) => {
                 if(err){
@@ -505,12 +511,10 @@ export default class AndroidSDK {
                     console.log('选择相册回调'+tex);
                   //  var spriteFrame = new cc.SpriteFrame(tex);
 
-                    this.photoCallback&&this.photoCallback(tex);
+                    this.photoCallback&&(this.photoCallback(tex));
                 }
             });
-        } else {
-            console.log('选择相册失败');
-        }
+
     }
 
 }

@@ -9,7 +9,7 @@ import CallModule from '../common/sdk/CallModule1';
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import LoadUtils from "../Utils/LoadUtils";
-import Socket from "../common/net/socket";
+
 import ComUtils from "../Utils/ComUtils";
 
 cc.Class({
@@ -25,7 +25,6 @@ cc.Class({
 
 		global.PB = pbhelper;
 
-		global.socket = Socket;
 		// 接DSK
 		global.llwSDK = LLWSDK.getSDK();
 

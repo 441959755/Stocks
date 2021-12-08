@@ -13,6 +13,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Sprite)
     headImg: cc.Sprite = null;
 
+    @property(cc.SpriteFrame)
+    test:cc.SpriteFrame=null;
+
      onLoad() {
         GlobalEvent.on(EventCfg.HEADIMGCHANGE, () => {
             this.headImg.spriteFrame = GameData.headImg;
@@ -31,7 +34,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'grzx_xc') {
-            LLWSDK.getSDK().pickImage(1,this.photoHead.bind(this),this);
+            LLWSDK.getSDK().pickImage(1,this.photoHead.bind(this));
         }
 
         else if(name=='grzx_xj'){
@@ -40,13 +43,25 @@ export default class NewClass extends cc.Component {
     }
 
     photoHead(tex){
-         let sp = new cc.SpriteFrame(tex);
 
-         sp.setRect(cc.rect(tex.width-175,tex.height-175,175,175));
+       tex=  this.test.getTexture();
+         // if(!tex){
+         //     tex=GameData.headImg;
+         // }
+        // console.log('选择相册回调'+tex);
+        //  let sp = new cc.SpriteFrame(tex);
+
+         if(tex.width<250){
+
+         }
+         else{
+             tex.setRect(cc.rect(tex.width-250,tex.height-250,250,250));
+         }
+
 
         let data = {
             uid: GameData.userID,
-            icon: new Uint8Array(tex),
+            icon:new Uint8Array(tex),
         }
 
         let CmdUploadIcon = pb.CmdUploadIcon;
@@ -55,14 +70,14 @@ export default class NewClass extends cc.Component {
 
         socket.send(pb.MessageId.Req_Hall_UploadIcon, buff, (info) => {
             if(info.err){
-
+                console.log('GameData.headImg:'+info.err);
             }
             else{
                 console.log('GameData.headImg:' + JSON.stringify(info));
-                this.headImg.spriteFrame =sp;
-                console.log('选择相册回调'+JSON.stringify(sp));
-            }
 
+                console.log('选择相册回调'+JSON.stringify(tex));
+            }
+            this.headImg.spriteFrame =tex;
         })
 
 

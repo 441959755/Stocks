@@ -1,10 +1,9 @@
-
-import { pb } from "../../../protos/proto";
+import {pb} from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
-const { ccclass, property } = cc._decorator;
+const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -79,15 +78,21 @@ export default class NewClass extends cc.Component {
                 nodes[index].children[0].children[1].active = true;
                 let arr = nodes[index].children;
                 for (let t = 1; t < arr.length; t++) {
+
                     let str = arr[t].children[0].getComponent(cc.Label).string;
+
                     if (str == items[1]) {
+
                         arr[t].children[1].active = true;
                     } else {
+
                         arr[t].children[1].active = false;
                     }
-                    arr[t].active = false;
+
+                        arr[t].active = false;
+
                 }
-            } else {
+            } else  {
                 nodes[index].children[0].children[1].active = false;
                 let arr = nodes[index].children;
                 for (let t = 1; t < arr.length; t++) {
@@ -96,6 +101,7 @@ export default class NewClass extends cc.Component {
             }
         }
     }
+
     onBtnClick(event, data) {
         let name = event.target.name;
         let index = parseInt(data);
@@ -104,28 +110,26 @@ export default class NewClass extends cc.Component {
             this.content2.active = false;
             this.content3.active = false;
             this.layer.active = false;
-        }
-
-        else if (name == 'btnSubmit') {
+        } else if (name == 'btnSubmit') {
             this.onChangeUsetName();
-        }
-
-        else if (name == 'node') {
+        } else if (name == 'node') {
             this.selectLocation(event.target, data);
-        }
-
-        else if (index == 1 || index == 2) {
+        } else if (index == 1 || index == 2) {
             this.onChangeUserGender(index);
         }
 
     }
 
     selectLocation(node, da?) {
+
         da = parseInt(da);
+
         let nodes = node.parent.children;
+
         let str = this.location.split(' ');
+
         if (da == 1) {
-            this.initLocation(str);
+
             nodes.forEach((element, index) => {
                 if (index != 0 && element.active) {
                     element.active = false;
@@ -135,11 +139,20 @@ export default class NewClass extends cc.Component {
                 }
             });
 
+            let nodes1 = this.content.children;
+            for (let index = 0; index < nodes1.length; index++) {
+                let arr = nodes1[index].children;
+                for (let t = 0; t < arr.length; t++) {
+                    arr[t].children[1].active = false;
+                }
+            }
+
             str[0] = node.children[0].getComponent(cc.Label).string;
             this.location = str[0];
             node.children[1].active = true;
 
         } else {
+
             str[1] = node.children[0].getComponent(cc.Label).string;
             node.children[1].active = true;
             this.location += (' ' + str[1]);
@@ -245,15 +258,13 @@ export default class NewClass extends cc.Component {
                 // console.log(" * 长度最多为6个汉字或12个字母数字！")
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '昵称长度最多为6个汉字或12个字母数字！');
                 return false;
-            }
-            else if (num < 1) {
+            } else if (num < 1) {
 
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '输入的昵称不能为空！');
                 return false;
             }
             return true;
-        }
-        else {
+        } else {
 
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '输入的昵称不能包含特殊符号！');
             return false;

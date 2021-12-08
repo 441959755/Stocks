@@ -34,7 +34,9 @@ export default class NewClass extends cc.Component {
     }
 
     initAD() {
+
         this.id = GameCfgText.adConf.launch[0].id;
+
         let version = cc.sys.localStorage.getItem('LAUNCHAD');
         if (!version) {
             cc.sys.localStorage.setItem('LAUNCHAD', GameCfgText.adConf.launch[0].version);

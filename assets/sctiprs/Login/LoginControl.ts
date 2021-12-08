@@ -3,6 +3,7 @@ import LLWSDK from "../common/sdk/LLWSDK";
 import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
+import Socket from "../common/net/Socket";
 
 const { ccclass, property } = cc._decorator;
 
@@ -123,9 +124,11 @@ export default class NewClass extends cc.Component {
         if (decoded) {
             decoded.token && (GameData.token = decoded.token);
             decoded.uid && (GameData.userID = decoded.uid);
+
             if (decoded.gameAddr) {
-                socket = socket(decoded.gameAddr);
+                global.socket =new Socket(decoded.gameAddr);
             }
+
         } else {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');
