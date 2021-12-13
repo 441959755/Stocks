@@ -108,12 +108,11 @@ export default class GameData {
     public static get location() {
         return this._location;
     }
+
     public static set location(val) {
         this._location = val;
         GlobalEvent.emit(EventCfg.LOCALTIONCHANGE);
     }
-
-
 
     //房间ID
     public static roomId = null;
@@ -314,7 +313,6 @@ export default class GameData {
         let str = new Date().toLocaleDateString();
         cc.sys.localStorage.setItem('DINGXIANGADCOUNT' + str, val);
     }
-
 
     private static _QHADCount;
 

@@ -44,7 +44,6 @@ export default class NewClass extends cc.Component {
         else if (name == 'btnDia') {
             GlobalEvent.emit('OPENSHOPLAYER', 1)
         }
-
     }
 
 }

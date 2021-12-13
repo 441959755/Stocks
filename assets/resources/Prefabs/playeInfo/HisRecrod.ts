@@ -3,6 +3,7 @@ import { pb } from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import List from "../../../sctiprs/Utils/List";
 
 const { ccclass, property } = cc._decorator;
 
@@ -24,6 +25,11 @@ export default class NewClass extends cc.Component {
     @property(cc.Toggle)
     toggle: cc.Toggle = null;
 
+    @property(List)
+    listV: List = null;
+
+    arr=null;
+
     onToggleClick(event) {
         this.content.children.forEach(el => {
             let handle = el.getComponent('HisItem');
@@ -31,7 +37,7 @@ export default class NewClass extends cc.Component {
         })
     }
 
-    onEnable() {
+    start() {
         this.tipsNode.active = false;
         let ts = new Date().getTime() / 1000;
         let data = {
@@ -55,24 +61,31 @@ export default class NewClass extends cc.Component {
                 this.tipsNode.active = true;
             }
             else {
-                let arr = this.onScelectData(info.results);
+                this.arr = this.onScelectData(info.results);
 
-                let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
+                if(this.arr.length<=0){
+                    this.tipsNode.active=true;
+                }
+                else{
+                    this.tipsNode.active=false;
+                }
 
-                UIScrollControl.clear();
-
-                UIScrollControl.initControl(this.item, arr.length, this.item.getContentSize(), 0, (node, index) => {
-                    let nodeHandle = node.getComponent('HisItem');
-                    nodeHandle.itemData = arr[index];
-                    nodeHandle.itemIndex = index + 1;
-                    nodeHandle.onShow();
-                    nodeHandle.onHisItemRate(this.toggle.isChecked);
-                })
+                this.listV.numItems = this.arr.length;
+                console.log(this.listV.numItems);
             }
-
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
         });
 
+    }
+
+    onListRender(item: cc.Node, idx: number) {
+        console.log(idx);
+        let nodeHandle = item.getComponent('HisItem');
+        nodeHandle.itemData =this.arr[idx];
+        nodeHandle.itemIndex = idx + 1;
+        nodeHandle.onShow();
+        nodeHandle.onHisItemRate(this.toggle.isChecked);
     }
 
     onScelectData(data) {

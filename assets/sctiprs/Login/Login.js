@@ -9,7 +9,6 @@ import CallModule from '../common/sdk/CallModule1';
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import LoadUtils from "../Utils/LoadUtils";
-
 import ComUtils from "../Utils/ComUtils";
 
 cc.Class({
@@ -62,9 +61,7 @@ cc.Class({
 			}
 		}
 
-		cc.director.preloadScene('hall', () => {
-			console.log('hall 场 景 加 载 完 成');
-		})
+		cc.director.preloadScene('hall');
 
 		GlobalEvent.on('OPENNOTICELAYER', this.openNoticeKayer.bind(this), this);
 

@@ -13,7 +13,6 @@ export default {
 
     // 下载远程图片
     downloadRemoteImageAndSave(url, callback, caller) {
-
         console.log('url' + url);
         let self = this;
 
@@ -22,11 +21,9 @@ export default {
             return;
         }
 
-
         let dirpath = jsb.fileUtils.getWritablePath() + 'customRes/';
 
         let formatedFilename = this.convertPathRemoveDirectory(url);
-
 
         let filepath = dirpath + formatedFilename;
 
@@ -34,7 +31,6 @@ export default {
             console.log('防止有的网址不带图片后缀' + filepath);
             filepath += '.png';
         }
-
 
         if (jsb.fileUtils.isFileExist(filepath) && caller) {
             console.log('   // 图片存在，直接加载' + filepath);
@@ -79,7 +75,6 @@ export default {
     }
     ,
 
-
     // 将网址中的"/"转换成"__"
     convertPathRemoveDirectory(path) {
         if (path == null) {
@@ -100,7 +95,6 @@ export default {
 
         return path.substr(index);
     },
-
 
     isValidCommonSuffix(s) {
         if (typeof s !== "string" || s == "" || s == "unknown") {

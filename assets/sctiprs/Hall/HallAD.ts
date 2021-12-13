@@ -1,6 +1,5 @@
 import GameCfgText from "../GameText";
 import LoadImg from "../Utils/LoadImg";
-import Game = cc.Game;
 
 const { ccclass, property } = cc._decorator;
 
@@ -35,7 +34,6 @@ export default class NewClass extends cc.Component {
         }, this.version == GameCfgText.adConf.launch[0].version)
     }
 
-
     onBtnClick(event, curdata) {
         let name = event.target.name;
 
@@ -49,6 +47,5 @@ export default class NewClass extends cc.Component {
             cc.sys.openURL(url);
         }
     }
-
 
 }

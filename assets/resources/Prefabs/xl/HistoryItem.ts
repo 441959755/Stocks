@@ -76,7 +76,6 @@ export default class NewClass extends cc.Component {
             this.labels[10].string = info.kStop;
         }
 
-
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.labels[11].string = '0';
             this.labels[12].string = '0';
@@ -86,12 +85,10 @@ export default class NewClass extends cc.Component {
                     GameData.zhibiaoHisSet[info.ts + ''] = JSON.parse(GameSet);
                     this.labels[12].string = GameData.zhibiaoHisSet[info.ts + ''].select + ' ' + GameData.zhibiaoHisSet[info.ts + ''].strategy;
                 }
-
             }
             else {
                 this.labels[12].string = GameData.zhibiaoHisSet[info.ts + ''].select + ' ' + GameData.zhibiaoHisSet[info.ts + ''].strategy;
             }
-
 
             if (!GameData.zhibiaoHisSet[info.ts + 'AIRATE']) {
                 let aiRate = cc.sys.localStorage.getItem(info.ts + 'AIRATE') || 0;
@@ -117,7 +114,6 @@ export default class NewClass extends cc.Component {
             }
 
         }
-
 
     }
 

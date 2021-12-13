@@ -10,13 +10,11 @@ export default class NewClass extends cc.Component {
     @property(cc.WebView)
     webview: cc.WebView = null;
 
-
     onShow(title, url) {
         this.title.string = title;
 
         this.webview.url = url;
     }
-
 
     onBtnClick(event, curdata) {
         let name = event.target.name;

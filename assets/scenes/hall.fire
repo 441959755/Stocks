@@ -201,7 +201,7 @@
       "array": [
         0,
         0,
-        526.5434455009387,
+        525.0008377504477,
         0,
         0,
         0,
@@ -11715,7 +11715,7 @@
         "__id__": 266
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 270
@@ -14021,8 +14021,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "9999",
-    "_N$string": "9999",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,
@@ -14649,8 +14649,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "9999",
-    "_N$string": "9999",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,

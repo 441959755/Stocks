@@ -1,12 +1,11 @@
-
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import EventCfg from '../../../sctiprs/Utils/EventCfg';
 import GameCfg from "../../../sctiprs/game/GameCfg";
-import { pb } from '../../../protos/proto';
-import GameCfgText from '../../../sctiprs/GameText';
+import {pb} from '../../../protos/proto';
 import GameData from "../../../sctiprs/GameData";
+import List from '../../../sctiprs/Utils/List';
+const {ccclass, property} = cc._decorator;
 
-const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
@@ -30,8 +29,12 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     tipsNode: cc.Node = null;
 
-    onEnable() {
+    @property(List)
+    listV: List = null;
 
+    arr = [];
+
+    onEnable() {
         let data = new Date();
         data.setDate(1);
         data.setHours(0);
@@ -51,22 +54,15 @@ export default class NewClass extends cc.Component {
 
         socket.send(pb.MessageId.Req_Game_QueryGameResult, buff, (info) => {
 
-            // if (this.historyInfo) {
-            //     if (this.historyInfo.results.length != info.results.length) {
             console.log('历史数据' + JSON.stringify(info));
+
             this.historyInfo = info;
+
             this.onShow();
-            //     }
-            // }
-            // else {
-            //     this.historyInfo = info;
-            //     this.onShow();
-            // }
 
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
     }
-
 
     onShow() {
 
@@ -76,8 +72,7 @@ export default class NewClass extends cc.Component {
             return;
         }
 
-        let selectName, items;
-        let str = cc.sys.localStorage.getItem('CLEARTS');
+        let str = cc.sys.localStorage.getItem('CLEARTS'+GameCfg.GameType);
         let da = new Date();
         da.setDate(1);
         da.setHours(0);
@@ -90,40 +85,37 @@ export default class NewClass extends cc.Component {
         if (str) {
             str = JSON.parse(str);
             TIMETEMP = str > str1 ? str : str1;
-        }
-        else {
+        } else {
             TIMETEMP = str1;
         }
 
-        let sumEar = 0;
-        let sumrate = 0;
-
-        let arr = [];
+        this.arr = [];
 
         datas.forEach(el => {
             if ((el.ts > TIMETEMP) && (el.gType == GameCfg.GameType)) {
-                arr.push(el);
+                this.arr.push(el);
             }
         });
 
-        if (arr.length > 0) {
+        this.listV.numItems = this.arr.length;
+
+        this.onShowCount();
+    }
+
+    onShowCount(){
+
+        if (this.arr.length > 0) {
             this.tipsNode && (this.tipsNode.active = false)
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
         }
 
-        let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
-        UIScrollControl.clear();
+        let sumEar = 0;
+        let sumRate = 0;
 
-        UIScrollControl.initControl(this.historyItem, arr.length, this.historyItem.getContentSize(), 0, (node, index) => {
-            node.getComponent('HistoryItem').onShow(arr[index], index);
-        })
-
-        arr.forEach(el => {
+        this.arr.forEach(el => {
             sumEar += el.userProfit;
-
-            sumrate += el.userProfitRate;
+            sumRate += el.userProfitRate;
         })
-
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             // this.title.string = '双盲训练';
@@ -136,16 +128,22 @@ export default class NewClass extends cc.Component {
                 this.label.node.color = cc.Color.WHITE;
             }
         }
+
         else if (GameCfg.GameType == pb.GameType.DingXiang || GameCfg.GameType == pb.GameType.QiHuo) {
-            this.label.string = (sumrate).toFixed(2) + '%';
-            if (sumrate > 0) {
+            this.label.string = (sumRate).toFixed(2) + '%';
+            if (sumRate > 0) {
                 this.label.node.color = new cc.Color().fromHEX('#e94343');
-            } else if (sumrate < 0) {
+            } else if (sumRate < 0) {
                 this.label.node.color = new cc.Color().fromHEX('#31a633');
             } else {
                 this.label.node.color = cc.Color.WHITE;
             }
         }
+    }
+
+    onListRender(item: cc.Node, idx: number) {
+        let handle=item.getComponent('HistoryItem');
+        handle.onShow(this.arr[idx],idx);
     }
 
     onBtnClick(event, data) {
@@ -157,18 +155,26 @@ export default class NewClass extends cc.Component {
 
         //清空记录
         else if (name == 'xl_lsjl_qkjl') {
+
             this.content.removeAllChildren();
-            let datas = this.historyInfo.results;
+
+            this.arr=[];
+
+            let datas = this.arr;
 
             if (datas.length <= 0) {
-                return;
+                this.tipsNode.active=true;
             }
+
+            this.listV.numItems = this.arr.length;
 
             let ts = parseInt(new Date().getTime() / 1000 + '')
 
-            cc.sys.localStorage.setItem('CLEARTS', ts);
+            cc.sys.localStorage.setItem('CLEARTS'+GameCfg.GameType, ts);
+
             this.label.string = 0.00 + '%';
             this.label.node.color = cc.Color.WHITE;
+
             // let str = cc.sys.localStorage.getItem('TIMETEMP');
             // let TIMETEMP, arr = [];
             // if (str) {

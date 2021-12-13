@@ -11,6 +11,7 @@ const LOADHEADURL = 'http://test.chaogugame.com/icon/';
 const ISLOG = false;
 
 export default class LLWConfig {
+
     static get CHANNELID() {
         return CHANNELID;
     }
