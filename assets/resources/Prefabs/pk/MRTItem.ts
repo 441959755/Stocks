@@ -136,7 +136,7 @@ export default class NewClass extends cc.Component {
 
     onBtnClick(event, curdata) {
         let name = event.target.name;
-        if (name == 'userinfobg') {
+        if (name == 'item') {
             //打开信息面板
             let info = GameData.playersInfo[this.uid + '']
 

@@ -452,7 +452,6 @@ export default class NewClass extends cc.Component {
             GameData.cgState.stage = -1;
             GameData.cgState.awards = [];
 
-            //  let strTime = ComUtils.formatTime(this.confdata.from)
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '闯关赛已结束');
             this.node.active = false;

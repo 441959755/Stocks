@@ -37,7 +37,7 @@ export default class NewClass extends cc.Component {
         })
     }
 
-    start() {
+    onEnable() {
         this.tipsNode.active = false;
         let ts = new Date().getTime() / 1000;
         let data = {
@@ -71,16 +71,13 @@ export default class NewClass extends cc.Component {
                 }
 
                 this.listV.numItems = this.arr.length;
-                console.log(this.listV.numItems);
             }
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
         });
-
     }
 
     onListRender(item: cc.Node, idx: number) {
-        console.log(idx);
         let nodeHandle = item.getComponent('HisItem');
         nodeHandle.itemData =this.arr[idx];
         nodeHandle.itemIndex = idx + 1;

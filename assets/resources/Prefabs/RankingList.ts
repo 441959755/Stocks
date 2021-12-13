@@ -2,9 +2,9 @@ import { pb } from "../../protos/proto";
 import GameCfg from "../../sctiprs/game/GameCfg";
 import GameData from "../../sctiprs/GameData";
 import GameCfgText from "../../sctiprs/GameText";
-import ComUtils from "../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
+import List from "../../sctiprs/Utils/List";
 
 const { ccclass, property } = cc._decorator;
 
@@ -23,6 +23,18 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     tipsLabel = null;
 
+    @property(List)
+    listV1: List = null;
+
+    @property(List)
+    listV2: List = null;
+
+    @property(List)
+    listV3: List = null;
+
+    @property(List)
+    listV4: List = null;
+
     rankList1 = null;
 
     rankList2 = null;
@@ -30,8 +42,6 @@ export default class NewClass extends cc.Component {
     rankList3 = null;
 
     rankList4 = null;
-
-    headObj: any = {};
 
     curSwitch = 0;
 
@@ -43,14 +53,10 @@ export default class NewClass extends cc.Component {
     onLoad() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         socket.send(pb.MessageId.Req_Hall_GetFameRanking, null, (info) => {
-
             console.log('查询威望排行应答' + JSON.stringify(info));
             this.rankList1 = info.Items;
-
-            this.onCreateItem(this.rankList1, this.scollNodes[0], this.items[0], 1);
-
+            this.listV1.numItems =   this.rankList1.length;
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
         });
     }
 
@@ -58,12 +64,10 @@ export default class NewClass extends cc.Component {
     getLevelRanking() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         socket.send(pb.MessageId.Req_Hall_GetLevelRanking, null, (info) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
             console.log('查询等级排行应答' + JSON.stringify(info));
-
             this.rankList2 = info.Items;
-
-            this.onCreateItem(this.rankList2, this.scollNodes[1], this.items[1], 2);
+            this.listV2.numItems =   this.rankList2.length;
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
     }
 
@@ -71,11 +75,10 @@ export default class NewClass extends cc.Component {
     getFameRankingWeekly() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         socket.send(pb.MessageId.Req_Hall_GetFameRankingWeekly, null, (info) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
             console.log('查询威望周排行' + JSON.stringify(info));
             this.rankList3 = info.Items;
-
-            this.onCreateItem(this.rankList3, this.scollNodes[2], this.items[2], 3);
+            this.listV3.numItems =   this.rankList3.length;
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
     }
 
@@ -90,12 +93,10 @@ export default class NewClass extends cc.Component {
         let buff = CmdCgsRanking.encode(message).finish();
 
         socket.send(pb.MessageId.Req_Game_CgsGetSeasonRank, buff, (info) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
             console.log('闯关赛排行榜' + JSON.stringify(info));
-
             this.rankList4 = info.Items;
-
-            this.onCreateItem(this.rankList4, this.scollNodes[3], this.items[3], 4);
+            this.listV4.numItems =   this.rankList4.length;
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
     }
 
@@ -112,23 +113,30 @@ export default class NewClass extends cc.Component {
         let buff = CmdCgdsRanking.encode(message).finish();
 
         socket.send(pb.MessageId.Req_Game_CgsGetSeasonRank, buff, (info) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
             console.log('闯关赛排行榜' + JSON.stringify(info));
-
             this.rankList4 = info.Items;
-
-            this.onCreateItem(this.rankList4, this.scollNodes[3], this.items[3], 4);
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
     }
 
-    //创建item
-    onCreateItem(arr, scoll, item, td) {
-        let UIScrollControl = scoll.getComponent('UIScrollControl');
-        UIScrollControl.clear();
-        UIScrollControl.initControl(item, arr.length, item.getContentSize(), 0, (node, index) => {
-            let handle = node.getComponent('RankItem' + td);
-            handle.onShow(arr[index], index);
-        })
+    onListRender1(item: cc.Node, idx: number) {
+        let handle = item.getComponent('RankItem' + 1);
+        handle.onShow( this.rankList1[idx], idx);
+    }
+
+    onListRender2(item: cc.Node, idx: number) {
+        let handle = item.getComponent('RankItem' + 2);
+        handle.onShow( this.rankList2[idx], idx);
+    }
+
+    onListRender3(item: cc.Node, idx: number) {
+        let handle = item.getComponent('RankItem' + 3);
+        handle.onShow( this.rankList3[idx], idx);
+    }
+
+    onListRender4(item: cc.Node, idx: number) {
+        let handle = item.getComponent('RankItem' + 4);
+        handle.onShow( this.rankList4[idx], idx);
     }
 
     start() {
@@ -229,10 +237,9 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'toggle2') {
+
             if (!this.rankList2) {
-
                 this.getLevelRanking();
-
             }
 
             this.scollNodes[1].active = true;

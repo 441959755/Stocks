@@ -79,8 +79,6 @@ export default class NewClass extends cc.Component {
             }
             this.headImg.spriteFrame =tex;
         })
-
-
     }
 
      onDestroy() {

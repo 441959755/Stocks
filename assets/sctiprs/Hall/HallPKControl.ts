@@ -59,12 +59,14 @@ export default class NewClass extends cc.Component {
     }
 
     openMrtLayer(data) {
+
         this.openNode(this.mrtNode, 'Prefabs/pk/MRT', 10, (node) => {
             this.mrtNode = node;
             let handle = this.mrtNode.getComponent('MRTHandle');
             handle.MRTData = data;
             handle.initShow();
         });
+
     }
 
     openCgsLvRank(id, stage) {

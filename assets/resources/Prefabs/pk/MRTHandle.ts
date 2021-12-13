@@ -1,6 +1,7 @@
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
+import List from "../../../sctiprs/Utils/List";
 
-const { ccclass, property } = cc._decorator;
+const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -16,30 +17,30 @@ export default class NewClass extends cc.Component {
 
     MRTData = null;
 
+    @property(List)
+    listV: List = null;
+
+    arr = null;
+
     onLoad() {
         this.content.removeAllChildren();
     }
 
-
     initShow() {
-
-        let arr = [];
+        this.arr = [];
         this.MRTData.forEach(el => {
             if (el.cgsClearance) {
-                arr.push(el);
+                this.arr.push(el);
             }
         });
 
-        let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
+        this.listV.numItems = this.arr.length;
 
-        UIScrollControl.initControl(this.item, arr.length, this.item.getContentSize(), 0, (node, index) => {
+    }
 
-            let handle = node.getComponent('MRTItem');
-            handle.onShow(arr[index], index);
-
-        })
-
-
+    onListRender(item: cc.Node, idx: number) {
+        let handle = item.getComponent('MRTItem');
+        handle.onShow(this.arr[idx], idx);
     }
 
     onBtnClick(event, data) {
