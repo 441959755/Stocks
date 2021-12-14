@@ -232,7 +232,6 @@ export default class NewClass extends cc.Component {
             this.depict.getComponent('Shopdepict').onShow(this._curType, index, this.onBankPrice.bind(this));
         }
 
-
     }
 
     onBankPrice(index) {
@@ -268,7 +267,6 @@ export default class NewClass extends cc.Component {
             }
         }
     }
-
 
 
     Orders(index, id) {

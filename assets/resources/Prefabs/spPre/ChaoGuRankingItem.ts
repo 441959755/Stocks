@@ -87,33 +87,25 @@ export default class NewClass extends cc.Component {
             this.gender[1].active = true;
         }
 
-
         this.account.string = info.cgdsAccount;
 
         let capital = JSON.parse(data.conf).capital;
         let r = ComUtils.changeTwoDecimal((info.cgdsAccount - capital) / capital * 100);
         this.rate.string = r + '%';
 
-
-
         let aw = 0;
         let t = JSON.parse(data.award)[0][index - 1];
         if (t && t.v) {
             aw = t.v;
         }
-
         this.reward.string = aw + '';
-
     }
 
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'ckzjBtn') {
             GlobalEvent.emit(EventCfg.OPENCGDSHISLAYER, this._curData.uid);
-
         }
-
     }
-
 
 }

@@ -1,12 +1,11 @@
-import { pb } from "../../../protos/proto";
+import {pb} from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
-import { LocationPoint } from "../../../sctiprs/global/LocationPoint";
+import {LocationPoint} from "../../../sctiprs/global/LocationPoint";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import List from "../../../sctiprs/Utils/List";
 
-
-
-const { ccclass, property } = cc._decorator;
+const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -19,9 +18,10 @@ export default class NewClass extends cc.Component {
 
     curData = null;
 
-    @property(cc.Node)
-    scrollNode: cc.Node = null;
+    @property(List)
+    listV: List = null;
 
+    stage=null;
     onLoad() {
         this.content.removeAllChildren();
     }
@@ -30,7 +30,7 @@ export default class NewClass extends cc.Component {
     reqGameCgsGetStageRank(id, stage) {
 
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
+        this.stage=stage;
         let data = {
             id: id,
             stage: stage,
@@ -41,30 +41,20 @@ export default class NewClass extends cc.Component {
         let buff = CmdCgsRanking.encode(message).finish();
 
         socket.send(pb.MessageId.Req_Game_CgsGetStageRank, buff, (res) => {
-
             console.log('闯关赛关卡排行' + JSON.stringify(res));
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             GameData.locationLayer = LocationPoint.JJ_ChuangGuanOtherHis;
 
             this.curData = res;
-            this.initShow(stage);
+            this.listV.numItems = this.curData.Items.length;
         })
     }
 
-    initShow(stage) {
-        this.content.children.forEach(el => {
-            el.active = false;
-        })
+    onListRender(item: cc.Node, idx: number) {
+        let handle = item.getComponent('CgsLvRankItem');
 
-        let UIScrollControl = this.scrollNode.getComponent('UIScrollControl');
-        UIScrollControl.initControl(this.item, this.curData.Items.length, this.item.getContentSize(), 0, (node, index) => {
-            node.active = true;
-            let handle = node.getComponent('CgsLvRankItem');
-            //  handle.el = this.curData.Items[index];
-            handle.initShow(index, this.curData.Items[index], stage);
-        })
+        handle.initShow(idx, this.curData.Items[idx],  this.stage);
     }
-
 
     onBtnClick(event, data) {
         let name = event.target.name;
@@ -72,6 +62,5 @@ export default class NewClass extends cc.Component {
             this.node.active = false;
         }
     }
-
 
 }
