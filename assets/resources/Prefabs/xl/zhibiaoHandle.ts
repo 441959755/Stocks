@@ -37,7 +37,6 @@ export default class NewClass extends cc.Component {
     mfxlBtn: cc.Node = null;
 
 
-
     tips = [
         ['股价穿越均线', '均线交叉', '组合训练'],
         ['MACD金叉', '0轴穿越', '柱最大值转向', 'MACD背离', '经典用法'],
@@ -135,11 +134,12 @@ export default class NewClass extends cc.Component {
     }
 
     onGameCountSow() {
+
         let gameCount = EnterGameControl.onCurIsEnterGame();
 
         this.mfxlBtn.active = true;
-        if (gameCount.status == 0) {
 
+        if (gameCount.status == 0) {
             this.mfxlBtn.active = false;
         }
     }
@@ -147,7 +147,7 @@ export default class NewClass extends cc.Component {
     onEnable() {
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        // GameCfg.GameType = pb.GameType.ZhiBiao;
+         GameCfg.GameType = pb.GameType.ZhiBiao;
 
         this.boxs.forEach((el, index) => {
             let la = el.getChildByName('label').getComponent(cc.Label);

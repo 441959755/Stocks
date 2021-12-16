@@ -1,6 +1,5 @@
 import {pb} from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
-// import * as moment from 'moment';
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
@@ -37,6 +36,10 @@ export default class NewClass extends cc.Component {
             }
         })
 
+        if(this.award7.length>=7){
+            flag=false;
+        }
+
         this.getAward=flag;
 
         this.btnfl.interactable=this.getAward;
@@ -59,7 +62,6 @@ export default class NewClass extends cc.Component {
         })
     }
 
-
     onBtnClick(event, curdata) {
         let name = event.target.name;
         if (name == 'sys_close') {
@@ -79,6 +81,7 @@ export default class NewClass extends cc.Component {
             socket.send(pb.MessageId.Req_Hall_Get7Award, buff, (info) => {
                 console.log('领取7次奖励：' + JSON.stringify(info));
             })
+
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW,'成功领取！');
             this.award7.push(ComUtils.fromatTime1(new Date().getTime()/1000));
             this.onShow();

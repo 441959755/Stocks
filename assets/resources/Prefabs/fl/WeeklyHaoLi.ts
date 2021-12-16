@@ -11,7 +11,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     haoli: cc.Node = null;
 
-
     @property(cc.EditBox)
     editBox: cc.EditBox = null;
 

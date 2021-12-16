@@ -4,6 +4,7 @@ import GameData from "../../../sctiprs/GameData";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import List from "../../../sctiprs/Utils/List";
 
 const { ccclass, property } = cc._decorator;
 
@@ -65,14 +66,22 @@ export default class NewClass extends cc.Component {
     @property([cc.Toggle])
     toggle: cc.Toggle[] = [];
 
-    onEnable() {
+    positionList=[];
 
+    selfStockList=[];
+
+    @property(List)
+    listV: List = null;
+
+    @property(List)
+    listV1: List = null;
+
+    onEnable() {
         //添加删除
         GlobalEvent.on(EventCfg.ADDZXGP, this.onAddZx.bind(this), this);
 
         //跟新资产数据
         GlobalEvent.on(EventCfg.CHANGEMNCGACCOUNT, this.onUpdateMycgData.bind(this), this);
-
     }
 
     onUptateCCAsset(info) {
@@ -116,32 +125,6 @@ export default class NewClass extends cc.Component {
         this.zzcLa.string = parseInt(zzc + '') + '';
     }
 
-    onAddZx() {
-
-        let arr = [];
-
-        arr = GameData.selfStockList;
-
-        let UIScrollControl = this.scorllNode.getComponent('UIScrollControl');
-
-        UIScrollControl.clear();
-
-        if (arr.length > 0) {
-
-            UIScrollControl.initControl(this.item1, arr.length, this.item1.getContentSize(), 0, (node, index) => {
-                let handle = node.getComponent('MnxgItem');
-                handle.onShow(arr[index], this._curArr[arr[index] + '']);
-            })
-
-            this.tipsNode.active = false;
-        }
-        else {
-            this.tipsNode.active = true;
-        }
-
-        this.CmdQuoteSubscribe(true);
-    }
-
     onShow(data?) {
 
         GameCfg.GameType = pb.GameType.MoNiChaoGu;
@@ -168,7 +151,6 @@ export default class NewClass extends cc.Component {
                 //        GlobalEvent.emit('UPDATEITEMDATA', data);
                 this.onUptateCCAsset(data);
             }
-
 
         }, this);
 
@@ -217,7 +199,6 @@ export default class NewClass extends cc.Component {
 
         label2.string = ComUtils.changeTwoDecimal(zd) + '  ' + ComUtils.changeTwoDecimal(zdf) + '%';
     }
-
 
     CmdQuoteSubscribe(flag) {
 
@@ -328,9 +309,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.CMDQUOTITEM);
         GlobalEvent.off(EventCfg.CHANGEMNCGACCOUNT);
         GameData.SpStockData = null;
-        //GlobalEvent.off('UPDATEITEMDATA');
     }
-
 
     onBtnClick(event, data) {
         let name = event.target.name;
@@ -390,10 +369,8 @@ export default class NewClass extends cc.Component {
         let name = event.node.name;
 
         if (name == 'toggle1') {
-
             this.scorllNode.active = true;
             this.scorllNode1.active = false;
-
             if (this.content1.children.length > 0) {
                 this.tipsNode.active = false;
             }
@@ -417,27 +394,39 @@ export default class NewClass extends cc.Component {
     }
 
     onShowScorll2() {
-        let arr = [];
-        // arr = GameData.mncgDataList.positionList.items;
+        this.positionList=[];
         GameData.mncgDataList.positionList.items.forEach(e => {
-
             if (e.volume) {
-                arr.push(e);
+                this.positionList.push(e);
             }
-
         });
+        this.listV1.numItems=this.positionList.length;
+    }
 
-        if (arr.length > 0) {
-            let UIScrollControl = this.scorllNode1.getComponent('UIScrollControl');
+    onListRender1(item: cc.Node, idx: number) {
+        let handle = item.getComponent('MnxgItem1');
+        handle.onShow( this.positionList[idx].code, this.positionList[idx], this._curArr[this.positionList[idx].code + '']);
+    }
 
-            UIScrollControl.clear();
+    onAddZx() {
 
-            UIScrollControl.initControl(this.item2, arr.length, this.item2.getContentSize(), 0, (node, index) => {
-                let handle = node.getComponent('MnxgItem1');
-                handle.onShow(arr[index].code, arr[index], this._curArr[arr[index].code + '']);
-            })
+        this.selfStockList = GameData.selfStockList;
 
+        if (this.selfStockList.length > 0) {
+            this.listV.numItems=this.selfStockList.length;
+            this.tipsNode.active = false;
         }
+
+        else {
+            this.tipsNode.active = true;
+        }
+
+        this.CmdQuoteSubscribe(true);
+    }
+
+    onListRender(item: cc.Node, idx: number) {
+        let handle = item.getComponent('MnxgItem');
+        handle.onShow( this.selfStockList[idx], this._curArr[ this.selfStockList[idx] + '']);
     }
 
 }

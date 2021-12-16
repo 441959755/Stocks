@@ -102,6 +102,10 @@ export default class NewClass extends cc.Component {
             }
         });
 
+        if(this.jtcj.length<=0){
+            this.tipsNode.active=true;
+        }
+
         this.listV.numItems=this.jtcj.length;
         this.listV1.numItems=this.jtwt.length;
         this.listV2.numItems=this.lsjl.length;

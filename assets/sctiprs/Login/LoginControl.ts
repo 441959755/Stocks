@@ -126,7 +126,7 @@ export default class NewClass extends cc.Component {
             decoded.uid && (GameData.userID = decoded.uid);
 
             if (decoded.gameAddr) {
-                global.socket =new Socket(decoded.gameAddr);
+                window.socket =new Socket(decoded.gameAddr);
             }
 
         } else {

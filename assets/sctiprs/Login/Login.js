@@ -16,18 +16,17 @@ cc.Class({
 	extends: cc.Component,
 
 	init() {
-		window.global = window;
 
 		let PBHelper = require('pbhelper');
 
 		let pbhelper = new PBHelper();
 
-		global.PB = pbhelper;
+		window.PB = pbhelper;
 
 		// 接DSK
-		global.llwSDK = LLWSDK.getSDK();
+		window.llwSDK = LLWSDK.getSDK();
 
-		global.CallModule = CallModule;
+		window.CallModule = CallModule;
 
 		window.gg = {};
 

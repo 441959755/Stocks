@@ -98,6 +98,7 @@ export default class EnterGameControl {
             if (curCount > 0) {
                 data.status = 1;
             }
+
             else {
 
                 curCount = adCount + curCount;

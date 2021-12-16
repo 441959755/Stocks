@@ -79,7 +79,6 @@ export default class NewClass extends cc.Component {
         this.pw = null;
     }
 
-
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'btnAuthcode') {
@@ -194,7 +193,6 @@ export default class NewClass extends cc.Component {
         }, 1000);
 
     }
-
 
     //是否为手机号
     isPhoneNumber(tel) {
