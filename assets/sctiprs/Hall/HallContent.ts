@@ -181,6 +181,7 @@ export default class NewClass extends cc.Component {
 		let name = event.target.name;
 		//双盲
 		if (name == 'main_xl_smxl') {
+			//开关
 			if (!GameCfgText.getSwitchModule(1)) {
 				GlobalEvent.emit(EventCfg.OPENSMLAYER);
 				GameCfg.GameType = pb.GameType.ShuangMang;

@@ -53,7 +53,6 @@ export default class LoadUtils {
         })
     }
 
-
     public static load(url, call?) {
         cc.loader.load(url, (err, res) => {
             if (err) {

@@ -63,8 +63,6 @@ export default class NewClass extends cc.Component {
 
 	gobrokeBox = null;
 
-	goldchange = false;
-
 	Matchfalg = false;
 
 	onLoad() {
@@ -116,10 +114,6 @@ export default class NewClass extends cc.Component {
 
 		//打开7天奖励
 		GlobalEvent.on('OPENSIGNIN',this.openSignIn.bind(this),this);
-
-		GlobalEvent.on(EventCfg.GOLDCHANGE, () => {
-			this.goldchange = true;
-		}, this);
 
 		//匹配界面不弹窗邀请框
 		GlobalEvent.on('HALLPKMATCH', (flag) => {
@@ -191,7 +185,6 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.OPENREWARDCENTERLAYER);
 		GlobalEvent.off(EventCfg.OPENOTHERPLAYERHISLAYER);
 		GlobalEvent.off(EventCfg.GAMEOVEER);
-		GlobalEvent.off(EventCfg.GOLDCHANGE);
 		GlobalEvent.off('OPENNOTICELAYER');
 		GlobalEvent.off('OPENFRIENDLAYER');
 		GlobalEvent.off('OPENTASKLAYER');
@@ -544,11 +537,10 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit('getRewardCenter');
 
 			//破产补助
-			if (GameData.properties[pb.GamePropertyId.Gold] < 1000 && this.goldchange) {
+			if (GameData.properties[pb.GamePropertyId.Gold] < 1000 ) {
 				this.onShowGobroke();
 			}
 
-			this.goldchange = false;
 		}, 500);
 	}
 

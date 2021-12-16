@@ -101,11 +101,11 @@ export default class NewClass extends cc.Component {
         }
 
         this.disValue = this.topValue - this.bottomValue;
-        this.part5.string = this.topValue.toFixed(2) + '';
-        this.part4.string = (this.bottomValue + this.disValue / 4 * 3).toFixed(2);
+        this.part1.string = this.topValue.toFixed(2) + '';
+        this.part2.string = (this.bottomValue + this.disValue / 4 * 3).toFixed(2);
         this.part3.string = (this.bottomValue + this.disValue / 4 * 2).toFixed(2);
-        this.part2.string = (this.bottomValue + this.disValue / 4 * 1).toFixed(2);
-        this.part1.string = this.bottomValue.toFixed(2);
+        this.part4.string = (this.bottomValue + this.disValue / 4 * 1).toFixed(2);
+        this.part5.string = this.bottomValue.toFixed(2);
 
         for (let index = GameCfg.beg_end[0]; index < GameCfg.beg_end[1]; index++) {
 
@@ -169,7 +169,6 @@ export default class NewClass extends cc.Component {
             this.timelas.forEach((el, index) => {
                 el.string = ComUtils.formatTime(arr[index]);
             })
-
         }
     }
 

@@ -468,13 +468,19 @@ export default class GameCfgText {
         }
 
         let le = parseInt(Math.random() * this.stockList.length + '');
+
         let items = this.stockList[le].split('|');
+
         data.code = items[0];
 
         let start = items[2], end = items[3], sc;
+
         if (end == 0) {
+
             sc = new Date().getTime() - 24 * 60 * 60 * 1000 * data.total;
+
         } else {
+
             let year = end.slice(0, 4);
             let month = end.slice(4, 6);
             let day = end.slice(6);
@@ -517,7 +523,6 @@ export default class GameCfgText {
                 let da = f.getDate() >= 10 ? f.getDate() : '0' + (f.getDate());
 
                 data.from = ye + '' + mon + '' + da;
-                console.log(data.from);
             }
 
             GameCfg.data[0].data = [];
@@ -529,6 +534,7 @@ export default class GameCfgText {
             GameCfg.enterGameCache = data;
         }
     }
+
 
     //随机DX一只股票
     public static getGPDXByRandom(cb?) {
@@ -548,6 +554,7 @@ export default class GameCfgText {
         let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
 
         items = GameCfgText.stockList[le].split('|');
+
         data.code = items[0];
         // data.kstyle = pb.KStyle.Random;
 
@@ -584,7 +591,6 @@ export default class GameCfgText {
 
         t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 2;
 
-
         if (sc < t && GameData.DXSet.year == '随机' && GameData.DXSet.search == '随机选股') {
             this.getGPDXByRandom();
             return;
@@ -602,7 +608,6 @@ export default class GameCfgText {
 
             data.from = ye + '' + mon + '' + da;
         }
-
 
         GameCfg.data[0].code = items[0];
 
@@ -627,13 +632,17 @@ export default class GameCfgText {
             to: 0,
             reserve: 100,
         };
+
         let rom = parseInt(Math.random() * this.qihuoList.length + '');
+
         let items = this.qihuoList[rom].split('|');
+
         data.code = items[0];
 
-        // if (!GameCfg.enterGameCache) {
         let tim = GameCfgText.QHGetTimeByCodeName(data.code)
+
         data.ktype = pb.KType.Day;
+
         let start = tim.start, end = tim.end, sc;
 
         if (end == 0) {

@@ -62,25 +62,13 @@ export default class NewClass extends cc.Component {
 
     onShow(id) {
 
-        this.viewNode.forEach(el => {
-            el.active = false;
-        })
-
-        this.toggles.forEach((el, index) => {
-            if (el.isChecked) {
-                this.viewNode[index].active = true;
-                if(this.contents[index].children.length<=0){
-                    this.tipsNode.active=true;
-                }
-            }
-        })
-
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         let id1 = 0
         if (GameData.SpStockData && GameData.SpStockData.id) {
             id1 = GameData.SpStockData.id;
         }
+
         let time = parseInt(new Date().getTime() / 1000 + '');
         let info = {
             uid: id,
@@ -102,6 +90,10 @@ export default class NewClass extends cc.Component {
     }
 
     createItem() {
+        this.jtcj=[];
+        this.lsjl=[];
+        this.jtwt=[];
+
         this.hisList.forEach(el => {
             if (ComUtils.isToday(el.orderId * 1000)) {
                 //今天成交
@@ -119,13 +111,25 @@ export default class NewClass extends cc.Component {
             }
         });
 
-        if(this.jtcj.length<=0){
-            this.tipsNode.active=true;
-        }
-
         this.listV.numItems=this.jtcj.length;
         this.listV1.numItems=this.jtwt.length;
         this.listV2.numItems=this.lsjl.length;
+
+        this.viewNode.forEach(el => {
+            el.active = false;
+        })
+
+        this.toggles.forEach((el, index) => {
+            if (el.isChecked) {
+                this.viewNode[index].active = true;
+                if(this.contents[index].children.length<=0){
+                    this.tipsNode.active=true;
+                }
+                else{
+                    this.tipsNode.active=false;
+                }
+            }
+        })
     }
 
     onListRender(item: cc.Node, idx: number) {
@@ -143,29 +147,20 @@ export default class NewClass extends cc.Component {
         handle.onShow(  this.lsjl[idx]);
     }
 
-    onCreateItem(scrollNode, arr, item, str) {
-        let UIScrollControl = scrollNode.getComponent('UIScrollControl');
-        UIScrollControl.initControl(item, arr.length, item.getContentSize(), 0, (node, index) => {
-            let handle = node.getComponent(str);
-            handle.onShow(arr[index]);
-        })
-    }
-
-    onDisable() {
-        this.contents.forEach(el => {
-            el.removeAllChildren();
-        })
-    }
-
     onToggleClick(event, data) {
+
         this.viewNode.forEach(el => {
             el.active = false;
         })
+
         this.toggles.forEach((el, index) => {
             if (el.isChecked) {
                 this.viewNode[index].active = true;
                 if(this.contents[index].children.length<=0){
                     this.tipsNode.active=true;
+                }
+                else{
+                    this.tipsNode.active=false;
                 }
             }
         })
