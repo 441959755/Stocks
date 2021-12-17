@@ -435,7 +435,6 @@ export default class NewClass extends cc.Component {
 
 	//游戏复盘操作
 	onGameFUPANOPT(opt) {
-
 		if (!opt) {
 			return;
 		}
@@ -504,7 +503,6 @@ export default class NewClass extends cc.Component {
 					pkSelf.onBtnClick({ target: { name: 'pcBtn' } });
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: el.kOffset });
 				}
-
 			}
 		})
 
@@ -560,8 +558,6 @@ export default class NewClass extends cc.Component {
 	}
 
 	onEnable() {
-
-
 
 		this.gpData = GameCfg.data[0].data;
 
@@ -904,6 +900,17 @@ export default class NewClass extends cc.Component {
 		//点击观望
 		else if (name == 'gwBtn' || name == 'cyBtn') {
 
+			if(GameCfg.GameType==pb.GameType.ZhiBiao||GameCfg.GameType==pb.GameType.DingXiang){
+				if (this.roundNumber > 0) {
+					let item = {
+						opId: pb.GameOperationId.Wait,
+						volume: 1,
+						kOffset: GameCfg.huizhidatas,
+					}
+					UpGameOpt.addOpt(item);
+				}
+			}
+
 			this.setRoundNumber(name);
 		}
 		else if (name == 'xl_fupan_pre') {
@@ -1136,7 +1143,6 @@ export default class NewClass extends cc.Component {
 		this.getRaisingLimit(GameCfg.huizhidatas);
 
 		if ((this.roundNumber > 0 && name) || GameCfg.GAMEFUPAN) {
-
 			this.onBuyOrSell(name);
 		}
 
@@ -1151,26 +1157,25 @@ export default class NewClass extends cc.Component {
 
 		//事件通知
 		GlobalEvent.emit(EventCfg.SLGEVENTNOTICE);
-
 		//
 		DrawData.reseleData();
 
 		this.priceLabel[0].string = '买入均价：' + this.onjunjia().toFixed(2);
 	}
 
-	onsetCurMrCount(mc) {
-		let num = 0;
-		this.curMrCount.forEach(el => {
-			num += el;
-		})
-		num -= mc;
-		if (num <= 0) {
-			this.curMrCount = [];
-		} else {
-			this.curMrCount = [];
-			this.curMrCount.push(num);
-		}
-	}
+	// onsetCurMrCount(mc) {
+	// 	let num = 0;
+	// 	this.curMrCount.forEach(el => {
+	// 		num += el;
+	// 	})
+	// 	num -= mc;
+	// 	if (num <= 0) {
+	// 		this.curMrCount = [];
+	// 	} else {
+	// 		this.curMrCount = [];
+	// 		this.curMrCount.push(num);
+	// 	}
+	// }
 
 	//买入的均价
 	onjunjia() {

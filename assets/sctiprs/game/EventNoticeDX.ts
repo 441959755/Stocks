@@ -4,6 +4,7 @@ import EventCfg from '../Utils/EventCfg';
 import GameCfg from './GameCfg';
 import { pb } from '../../protos/proto';
 import DrawData from './DrawData';
+import List from "../Utils/List";
 
 const { ccclass, property } = cc._decorator;
 
@@ -13,64 +14,44 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     content: cc.Node = null;
 
-    @property(cc.Prefab)
-    itemNotice: cc.Prefab = null;
-
-    @property(cc.Label)
-    tipsLabel: cc.Label = null;
-
-    timeCall = null;
-
     _idd = 0;
 
-    // LIFE-CYCLE CALLBACKS:
+    arr=[];
+
+    @property(List)
+    listV: List = null;
 
     onLoad() {
-        this.content.getComponent(cc.Layout).verticalDirection = cc.Layout.VerticalDirection.BOTTOM_TO_TOP;
-
         GlobalEvent.on(EventCfg.SLGEVENTNOTICE, () => {
-            if (GameCfg.GameSet.jx_notice) {
-                if (DrawData.MaList && DrawData.MaList.length > 0) {
-                    this.testMaEvent();
+            if(GameCfg.GameType==pb.GameType.DingXiang){
+                if (GameCfg.GameSet.jx_notice) {
+                    if (DrawData.MaList && DrawData.MaList.length > 0) {
+                        this.testMaEvent();
+                    }
+                }
+
+                if (GameCfg.GameSet.k_notice) {
+                    this.testKFrom();
                 }
             }
-
-            if (GameCfg.GameSet.k_notice) {
-                this.testKFrom();
-            }
-
         }, this);
 
         GlobalEvent.on(EventCfg.UPDATERATE, (data) => {
-            if (GameCfg.GameSet.StopCheck_notice) {
-                this.testStopCheck(data[0]);
+            if(GameCfg.GameType==pb.GameType.DingXiang) {
+                if (GameCfg.GameSet.StopCheck_notice) {
+                    this.testStopCheck(data[0]);
+                }
             }
         }, this);
 
-
-        GlobalEvent.on('clickTipsInfoPos', (data) => {
-            if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                return
+        GlobalEvent.on(EventCfg.LEAVEGAME,()=>{
+            if(GameCfg.GameType==pb.GameType.DingXiang) {
+                this.arr.length = 0;
+                this.listV.numItems = this.arr.length;
+                this._idd = 0;
             }
-            let locPos = this.content.parent.parent.convertToNodeSpaceAR(data.pos);
-            this.tipsLabel.node.parent.y = locPos.y;
-
-            this.tipsLabel.string = data.str;
-            this.tipsLabel.node.parent.active = true;
-
-            if (this.timeCall) {
-                clearTimeout(this.timeCall);
-            }
-
-            this.timeCall = setTimeout(() => {
-                this.tipsLabel.node.parent.active = false;
-                clearTimeout(this.timeCall);
-                this.timeCall = null;
-            }, 3000);
-
-        }, this);
+        },this);
     }
-
 
     testKFrom() {
 
@@ -818,40 +799,41 @@ export default class NewClass extends cc.Component {
         }
         let str;
         if (id == 1) {
-            str = '曙光初现';
 
+            str = '曙光初现';
             GlobalEvent.emit(EventCfg.CREATEBLOCK, 1);
 
-
         } else if (id == 2) {
-            str = '旭日东升';
 
+            str = '旭日东升';
             GlobalEvent.emit(EventCfg.CREATEBLOCK, 2);
 
         } else if (id == 3) {
-            str = '红三兵';
 
+            str = '红三兵';
             GlobalEvent.emit(EventCfg.CREATEBLOCK, 3);
 
         } else if (id == 4) {
-            str = '看涨吞没';
 
+            str = '看涨吞没';
             GlobalEvent.emit(EventCfg.CREATEBLOCK, 4);
 
         } else if (id == 5) {
-            str = '三只乌鸦';
 
+            str = '三只乌鸦';
             GlobalEvent.emit(EventCfg.CREATEBLOCK, 5);
 
         } else if (id == 6) {
-            str = '看跌吞没';
 
+            str = '看跌吞没';
             GlobalEvent.emit(EventCfg.CREATEBLOCK, 6);
 
         } else if (id == 7) {
+
             str = '乌云盖顶';
             GlobalEvent.emit(EventCfg.CREATEBLOCK, 7);
         } else if (id == 8) {
+
             str = '倾盆大雨';
             GlobalEvent.emit(EventCfg.CREATEBLOCK, 8);
         }
@@ -898,32 +880,24 @@ export default class NewClass extends cc.Component {
             str = '亏损大于10%';
         }
 
+        let obj={
+            str:str,
+            index:index,
+        }
 
-        let node = cc.instantiate(this.itemNotice);
-        this.content.addChild(node);
-
-        let itemHandle = node.getComponent('ItemNotice')
-        itemHandle.text = str;
-
-        index && (itemHandle.Pindex = index)
-        itemHandle.onShow();
-
-        // if (!GameCfg.GAMEFUPAN && GameCfg.GameType != pb.GameType.ShuangMang) {
-        //     GameCfg.notice.push([id, GameCfg.huizhidatas - 1]);
-        // }
+        this.arr.push(obj);
+        this.listV.numItems=this.arr.length;
     }
 
-
-    onDisable() {
-        this.content.removeAllChildren();
-        this.timeCall = null;
-        this._idd = 0;
+    onListRender(item: cc.Node, idx: number) {
+        let itemHandle = item.getComponent('ItemNotice')
+        itemHandle.text = this.arr[idx].str;
+        itemHandle.Pindex = this.arr[idx].index;
+        itemHandle.onShow();
     }
 
     //检测均线策略
     testMaEvent() {
-
-        //let flag = false;
 
         let malist = DrawData.MaList;
         let index = GameCfg.huizhidatas - 1;
@@ -940,14 +914,12 @@ export default class NewClass extends cc.Component {
                     if (malist[index][ma60] >= malist[index][ma120]) {
                         //todo  生成事件栏
                         //MA60上穿MA120
-                        //    this.onCreateTipsItem('MA60上穿MA120');
                         this.onCreateTipsItem(16);
 
                     }
                 } else if (malist[index - 1][ma60] > malist[index - 1][ma120]) {
                     if (malist[index][ma60] <= malist[index][ma120]) {
                         //MA60下穿MA120
-                        // this.onCreateTipsItem('MA60下穿MA120');
                         this.onCreateTipsItem(22);
                     }
                 }
@@ -966,7 +938,6 @@ export default class NewClass extends cc.Component {
                     if (malist[index][ma30] >= malist[index][ma60]) {
                         //todo  生成事件栏
                         //MA30上穿MA60
-                        //  this.onCreateTipsItem('MA30上穿MA60');
                         this.onCreateTipsItem(15);
 
                     }
@@ -978,7 +949,6 @@ export default class NewClass extends cc.Component {
                     }
                 }
             }
-
         }
 
         if (GameCfg.MAs.indexOf(10) != -1 && GameCfg.MAs.indexOf(30) != -1) {
@@ -989,7 +959,6 @@ export default class NewClass extends cc.Component {
                     if (malist[index][ma10] >= malist[index][ma30]) {
                         //todo  生成事件栏
                         //MA10上穿MA30
-                        //  this.onCreateTipsItem('MA10上穿MA30');
                         this.onCreateTipsItem(14);
 
                     }
@@ -1001,7 +970,6 @@ export default class NewClass extends cc.Component {
                     }
                 }
             }
-
         }
 
         if (GameCfg.MAs.indexOf(10) != -1 && GameCfg.MAs.indexOf(20) != -1) {
@@ -1012,7 +980,6 @@ export default class NewClass extends cc.Component {
                     if (malist[index][ma10] >= malist[index][ma20]) {
                         //todo  生成事件栏
                         //MA10上穿MA20
-                        // this.onCreateTipsItem('MA10上穿MA20');
                         this.onCreateTipsItem(13);
 
                     }
@@ -1020,7 +987,6 @@ export default class NewClass extends cc.Component {
                     if (malist[index][ma10] <= malist[index][ma20]) {
                         //todo  生成事件栏
                         //MA10下穿MA20
-                        //  this.onCreateTipsItem('MA10下穿MA20');
                         this.onCreateTipsItem(19);
 
                     }
@@ -1037,7 +1003,6 @@ export default class NewClass extends cc.Component {
                     if (malist[index][ma5] >= malist[index][ma20]) {
                         //todo  生成事件栏
                         //MA5上穿MA20
-                        // this.onCreateTipsItem('MA5上穿MA20');
                         this.onCreateTipsItem(12);
 
                     }
@@ -1045,7 +1010,6 @@ export default class NewClass extends cc.Component {
                     if (malist[index][ma5] <= malist[index][ma20]) {
                         //todo  生成事件栏
                         //MA5下穿MA20
-                        // this.onCreateTipsItem('MA5下穿MA20');
                         this.onCreateTipsItem(18);
 
                     }
@@ -1063,7 +1027,6 @@ export default class NewClass extends cc.Component {
                     if (malist[index][ma5] >= malist[index][ma10]) {
                         //todo  生成事件栏
                         //MA5上穿MA10
-                        //   this.onCreateTipsItem('MA5上穿MA10');
                         this.onCreateTipsItem(11);
 
                     }
@@ -1071,7 +1034,6 @@ export default class NewClass extends cc.Component {
                     if (malist[index][ma5] <= malist[index][ma10]) {
                         //todo  生成事件栏
                         //MA5下穿MA10
-                        // this.onCreateTipsItem('MA5下穿MA10');
                         this.onCreateTipsItem(17);
 
                     }
@@ -1084,7 +1046,7 @@ export default class NewClass extends cc.Component {
     onDestroy() {
         GlobalEvent.off(EventCfg.SLGEVENTNOTICE);
         GlobalEvent.off(EventCfg.UPDATERATE);
-        GlobalEvent.off('clickTipsInfoPos');
+        GlobalEvent.off(EventCfg.LEAVEGAME);
     }
 
 }

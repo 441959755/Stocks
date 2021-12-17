@@ -4,6 +4,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import DrawData from "./DrawData";
 import GameCfg from "./GameCfg";
 import StrategyAIData from "./StrategyAIData";
+import List from "../Utils/List";
 
 const { ccclass, property } = cc._decorator;
 
@@ -12,12 +13,6 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Node)
     content: cc.Node = null;
-
-    @property(cc.Prefab)
-    itemNotice: cc.Prefab = null;
-
-    @property(cc.Label)
-    tipsLabel: cc.Label = null;
 
     timeCall = null;
 
@@ -135,11 +130,14 @@ export default class NewClass extends cc.Component {
 
     EXPEND = false;
 
-    onLoad() {
-        //   this.content.removeAllChildren();
-        // this.content.getComponent(cc.Layout).verticalDirection = cc.Layout.VerticalDirection.BOTTOM_TO_TOP;
-        GlobalEvent.on(EventCfg.SLGEVENTNOTICE, () => {
+    arr=[];
 
+    @property(List)
+    listV: List = null;
+
+    onLoad() {
+
+        GlobalEvent.on(EventCfg.SLGEVENTNOTICE, () => {
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
                 this.initData();
                 if (GameCfg.GameSet.select == '均线') {
@@ -164,42 +162,13 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-        GlobalEvent.on('clickTipsInfoPos', (data) => {
-            if (GameCfg.GameType != pb.GameType.ZhiBiao) {
-                return
-            }
-            let locPos = this.content.parent.parent.convertToNodeSpaceAR(data.pos);
-            this.tipsLabel.node.parent.y = locPos.y;
-            let str = '';
-            for (let i = 0; i < this.textInfo.length; i++) {
-                if (data.str == this.textInfo[i].name) {
-                    str = this.textInfo[i].info;
-                    break;
-                }
-            }
-            this.tipsLabel.string = data.str;
-            this.tipsLabel.node.parent.active = true;
-            if (this.timeCall) {
-                clearTimeout(this.timeCall);
-            }
-            this.timeCall = setTimeout(() => {
-                this.tipsLabel.node.parent.active = false;
-                clearTimeout(this.timeCall);
-                this.timeCall = null;
-            }, 3000);
-
-        }, this);
-
-        GlobalEvent.on(EventCfg.GAMEFUPAN, () => {
-            this.content.children.forEach(el => {
-                el.active = true;
-            })
-        }, this);
+        GlobalEvent.on(EventCfg.LEAVEGAME,this.onHide.bind(this),this);
 
     }
 
-    onDisable() {
-        this.content.removeAllChildren();
+    onHide() {
+        this.arr.length = 0;
+        this.listV.numItems = this.arr.length;
         this.timeCall = null;
 
         this.gpData = null;
@@ -320,8 +289,7 @@ export default class NewClass extends cc.Component {
 
     onDestroy() {
         GlobalEvent.off(EventCfg.SLGEVENTNOTICE);
-        GlobalEvent.off('clickTipsInfoPos');
-        GlobalEvent.off(EventCfg.GAMEFUPAN);
+        GlobalEvent.off(EventCfg.LEAVEGAME);
     }
 
     initData() {
@@ -346,19 +314,15 @@ export default class NewClass extends cc.Component {
         this.RSI3 = DrawData.Rs24;
 
         this.VOlList = DrawData.VolList;
-
     }
 
     start() {
-
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.MAIndex = GameCfg.MAs.indexOf(GameCfg.GameSet.MA[0]);
             this.MAIndex1 = GameCfg.MAs.indexOf(GameCfg.GameSet.MA[1]);
             this.MAIndex2 = GameCfg.MAs.indexOf(GameCfg.GameSet.MA[2]);
         }
-
     }
-
 
     testMaEvent() {
 
@@ -682,11 +646,6 @@ export default class NewClass extends cc.Component {
                 }
             }
 
-            // if (this.difList[index] <= this.difList[index - 1]) {
-
-
-            // }
-
             if (this.difList[index] < this.deaList[index] && this.difList[index] < 0) {
                 this.macdH1 = 0;
                 this.macdH2 = 0;
@@ -767,11 +726,7 @@ export default class NewClass extends cc.Component {
                 }
             }
 
-            // if (this.difList[index] >= this.difList[index - 1]) {
 
-
-
-            // }
         }
 
 
@@ -2049,22 +2004,32 @@ export default class NewClass extends cc.Component {
 
     onCreateTipsItem(str) {
         let index = GameCfg.huizhidatas - 1;
-        let node = cc.instantiate(this.itemNotice);
-        this.content.addChild(node);
-        let itemHandle = node.getComponent('ItemNotice')
+
+        let obj={
+            str:str,
+            _str:this._str,
+            index:index,
+        }
+
+        this.arr.push(obj);
+        this.listV.numItems=this.arr.length;
 
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 
-            node.active = GameCfg.GameSet.showSign;
+            this.content.active = GameCfg.GameSet.showSign;
             if (GameCfg.GAMEFUPAN) {
-                node.active = true;
+                this.content.active = true;
             }
         }
-        itemHandle._zbStr = this._str;
-        itemHandle.text = str;
-        index && (itemHandle.Pindex = index)
-        itemHandle.onShow();
+
     }
 
+    onListRender(item: cc.Node, idx: number) {
+        let itemHandle = item.getComponent('ItemNotice')
+        itemHandle._zbStr =this.arr[idx]._str;
+        itemHandle.text = this.arr[idx].str;
+        itemHandle.Pindex = this.arr[idx].index;
+        itemHandle.onShow();
+    }
 
 }

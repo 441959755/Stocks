@@ -1,7 +1,8 @@
-import { pb } from "../../protos/proto";
-import GameCfg from "../../sctiprs/game/GameCfg";
-import EventCfg from "../../sctiprs/Utils/EventCfg";
-import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
+
+import {pb} from "../../protos/proto";
+import EventCfg from "../Utils/EventCfg";
+import GlobalEvent from "../Utils/GlobalEvent";
+import GameCfg from "./GameCfg";
 
 const { ccclass, property } = cc._decorator;
 
@@ -11,7 +12,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     label: cc.Label = null;
 
-    @property
+    @property(cc.Node)
+    tipsNode:cc.Node=null;
+
     text: string = '';
 
     infoCfg = null;
@@ -19,6 +22,8 @@ export default class NewClass extends cc.Component {
     Pindex = null;
 
     _zbStr = null;
+
+    timeCall=null;
 
     onShow() {
         this.label.string = this.text;
@@ -78,19 +83,37 @@ export default class NewClass extends cc.Component {
     }
 
     onBtnClick(event, data) {
+
         let name = event.target.name;
-        if (name == 'itemNotice') {
-            let pos = this.node.convertToWorldSpaceAR(cc.v2(0, 0));
 
+        if (name == 'itemBtn') {
+            let label=this.tipsNode.getComponentInChildren(cc.Label);
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                GlobalEvent.emit('clickTipsInfoPos', { pos: pos, str: this._zbStr });
+                label.string=this._zbStr;
             } else {
-                GlobalEvent.emit('clickTipsInfoPos', { pos: pos, str: this.infoCfg });
+                label.string=this.infoCfg;
             }
-
+            this.tipsNode.active=true;
             if (this.Pindex && GameCfg.GAMEFUPAN) {
                 GlobalEvent.emit(EventCfg.NOTICEDRAWMOVW, this.Pindex)
             }
+
+            if (this.timeCall) {
+                return;
+            }
+
+            this.timeCall = setTimeout(() => {
+                this.tipsNode.active = false;
+                clearTimeout(this.timeCall);
+                this.timeCall = null;
+            }, 3000);
+        }
+    }
+
+    protected onDestroy() {
+        if (this.timeCall) {
+            clearTimeout(this.timeCall);
+            this.timeCall=null;
         }
     }
 }

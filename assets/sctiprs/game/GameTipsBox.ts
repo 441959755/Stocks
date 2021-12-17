@@ -2,6 +2,7 @@ import GameCfg from "./GameCfg";
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
 import { pb } from "../../protos/proto";
+import Game = cc.Game;
 
 const { ccclass, property } = cc._decorator;
 
@@ -17,6 +18,12 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     selectBox: cc.Node = null;
 
+    @property(cc.Node)
+    scroll_zb:cc.Node=null;
+
+    @property(cc.Node)
+    scroll_dx:cc.Node=null;
+
 
     onLoad() {
         GlobalEvent.on(EventCfg.OPENSELECTBOX, (point) => {
@@ -30,8 +37,16 @@ export default class NewClass extends cc.Component {
     }
 
 
-
     onEnable() {
+
+        if(GameCfg.GameType==pb.GameType.DingXiang){
+            this.scroll_dx.active=true;
+            this.scroll_zb.active=false;
+        }
+        else if(GameCfg.GameType==pb.GameType.ZhiBiao){
+            this.scroll_dx.active=false;
+            this.scroll_zb.active=true;
+        }
 
         this.selectBox.active = false;
 
@@ -57,7 +72,7 @@ export default class NewClass extends cc.Component {
             this.lZoom.node.children[0].active = true;
             this.leftinoty.x = -cc.winSize.width / 2 - this.leftinoty.width / 2 - 10;
         }
-
+        this.leftinoty.active=false;
     }
 
 
@@ -68,10 +83,12 @@ export default class NewClass extends cc.Component {
             if (this.lZoom.isChecked) {
                 this.lZoom.node.children[0].active = false;
                 this.leftinoty.x = -cc.winSize.width / 2 + this.leftinoty.width / 2 + 10;
+                this.leftinoty.active=true;
 
             } else {
                 this.lZoom.node.children[0].active = true;
                 this.leftinoty.x = -cc.winSize.width / 2 - this.leftinoty.width / 2 - 10;
+                this.leftinoty.active=false;
             }
             GlobalEvent.emit(EventCfg.SET_DRAW_SIZE, this.lZoom.isChecked);
         }

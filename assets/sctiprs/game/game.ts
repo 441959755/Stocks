@@ -2,9 +2,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameCfg from "./GameCfg";
 import { pb } from '../../protos/proto';
-import GameData from "../GameData";
 import UpGameOpt from "../global/UpGameOpt";
-import LoadUtils from "../Utils/LoadUtils";
 import DrawData from "./DrawData";
 
 const { ccclass, property } = cc._decorator;

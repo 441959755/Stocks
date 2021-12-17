@@ -112,6 +112,7 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
+
         GlobalEvent.off(EventCfg.ONMARKUPDATE);
 
         GlobalEvent.off(EventCfg.CREATEBLOCK)
