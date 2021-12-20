@@ -4,7 +4,6 @@ import StrategyAIData from "../../sctiprs/game/StrategyAIData";
 import GameData from "../../sctiprs/GameData";
 import GameCfgText from "../../sctiprs/GameText";
 import EnterGameControl from "../../sctiprs/global/EnterGameControl";
-import GlobalHandle from "../../sctiprs/global/GlobalHandle";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 

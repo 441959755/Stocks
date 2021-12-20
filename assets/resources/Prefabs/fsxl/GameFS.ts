@@ -40,7 +40,6 @@ export default class NewClass extends cc.Component {
             if (GameCfg.GameType == pb.GameType.FenShi) {
                 this.fupanNode.getComponent('FuPan').onShow(this.alllv);
                 this.fupanNode.active = true;
-
             }
         }, this);
 
@@ -99,15 +98,13 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('onClickPosUpdateLabel');
     }
 
-
     onBtnClick(event, curData) {
         let name = event.target.name;
         if (name == 'sys_back') {
             if (GameCfg.GAMEFUPAN) {
-
                 GameCfg.GAMEFUPAN=false;
                 this.node.parent.active = false;
-
+                GlobalEvent.emit(EventCfg.LEAVEGAME);
             }
             else {
                 PopupManager.LoadTipsBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
@@ -212,7 +209,6 @@ export default class NewClass extends cc.Component {
             this.alllv = (this.alllv + 1) * (rate + 1) - 1;
         }
     }
-
 
     setLabelData() {
         this.labdes[0].string = (this.alllv * 100).toFixed(2) + '%';

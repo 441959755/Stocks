@@ -1,4 +1,4 @@
-import { pb } from "../../../protos/proto";
+   import { pb } from "../../../protos/proto";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import UpGameOpt from "../../../sctiprs/global/UpGameOpt";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";

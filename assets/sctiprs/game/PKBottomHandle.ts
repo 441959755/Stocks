@@ -7,7 +7,6 @@ import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import GameCfg from "./GameCfg";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -68,7 +67,6 @@ export default class NewClass extends cc.Component {
                 this.cutNode.active = true;
                 this.status = status;
                 if (status == 3) {
-                    // fupan1
                     this.node.getChildByName('fupan1').active = false;
                 }
             }
@@ -85,7 +83,6 @@ export default class NewClass extends cc.Component {
         }, this);
 
         GlobalEvent.on(EventCfg.GAMEWAIT, this.onGameWaitShow.bind(this), this);
-
     }
 
     onGameWaitShow() {
@@ -101,8 +98,6 @@ export default class NewClass extends cc.Component {
 
         this.waitCodeTime.string = ComUtils.formatTime(kFrom) + '--' + ComUtils.formatTime(kTo);
     }
-
-
 
     onDestroy() {
         GlobalEvent.off(EventCfg.CUTGAMEFUPAN);
@@ -373,9 +368,6 @@ export default class NewClass extends cc.Component {
         this.mdb.active = false;
         this.pcb.active = false;
         this.pcb1.active = false;
-
     }
-
-
 
 }

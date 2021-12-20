@@ -149,6 +149,7 @@ export default class NewClass extends cc.Component {
 			}
 		}
 
+
 		//房间已解散  ,给出提示
 		if (GameData.RoomType && !GameData.roomId) {
 			GameData.RoomType = 0;
