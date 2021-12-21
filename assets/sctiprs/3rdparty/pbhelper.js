@@ -249,7 +249,7 @@ PBHelper.prototype = {
             GameCfg.RoomGameData = result;
 
             setTimeout(() => {
-                GlobalEvent.emit(EventCfg.GAMEOVEER, result);
+                GlobalEvent.emit(EventCfg.GAMEOVEER);
             }, 1000);
         }
         //离开房间应答

@@ -11,7 +11,7 @@ export default class UpGameOpt {
 
     public static arrOpt = [];
 
-    private static time = 2;
+    private static time = 1;
 
     private static toCount = 10;
 

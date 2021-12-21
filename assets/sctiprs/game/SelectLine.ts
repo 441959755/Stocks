@@ -40,19 +40,20 @@ export default class NewClass extends cc.Component {
     }
 
     onLoad() {
-        GlobalEvent.on(EventCfg.GAMEOVEER, () => {
 
+        GlobalEvent.on('recover',()=>{
             if (this.qhData && this.qhData.data.length > 0) {
                 GameCfg.data[0].data = this.qhData.data;
             }
-
-            if (this._selectID != this._preSelectID) {
+            if(this.huizhidatas){
                 GameCfg.huizhidatas = this.huizhidatas;
             }
-
-        }, this);
+        },this);
     }
 
+    protected onDestroy() {
+        GlobalEvent.off('recover');
+    }
 
     onEnable() {
         if (GameCfg.enterGameCache.ktype == pb.KType.Min5) {
@@ -339,7 +340,6 @@ export default class NewClass extends cc.Component {
 
         GameCfg.huizhidatas = this.huizhidatas;
 
-
         GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
 
         this.onDrawEvetn(this.qhData.data);
@@ -348,18 +348,12 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.emit(EventCfg.ADDMARKHIDEORSHOW, true);
 
-
     }
 
     onChanageType(id) {
         let le;
         let dataArr = [];
-        // if (this.huizhidatas >= DrawDatas.arrMin5.length) {
-        //     le = DrawDatas.arrMin5.length - 1;
 
-        // } else {
-        //     le = this.huizhidatas;
-        // }
         let to = this.qhData.data[this.huizhidatas - 1].day;
         if (id == 0) {
             //  dataArr = DrawDatas.dataChange(this.qhData.data[le].day, 1, DrawDatas.arrMin5);

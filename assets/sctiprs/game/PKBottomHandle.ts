@@ -83,6 +83,31 @@ export default class NewClass extends cc.Component {
         }, this);
 
         GlobalEvent.on(EventCfg.GAMEWAIT, this.onGameWaitShow.bind(this), this);
+        
+        GlobalEvent.on(EventCfg.GAMEOVEER,()=>{
+            if(GameCfg.GameType==pb.GameType.JJ_DuoKong){
+                let le=UpGameOpt.player1Opt.length;
+                if(le>0){
+                    if(UpGameOpt.player1Opt[le-1].opId==pb.GameOperationId.Ask) {
+                        let item = {
+                            opId: pb.GameOperationId.Bid,
+                            volume: 1,
+                            kOffset: GameCfg.huizhidatas,
+                        }
+                        UpGameOpt.addOpt(item);
+                    }
+                    else if(UpGameOpt.player1Opt[le-1].opId==pb.GameOperationId.Short){
+                        let item = {
+                            opId: pb.GameOperationId.Long,
+                            volume: 1,
+                            kOffset: GameCfg.huizhidatas,
+                        }
+                        UpGameOpt.addOpt(item);
+                    }
+                    UpGameOpt.UpGameOpt(1);
+                }
+            }
+        },this);
     }
 
     onGameWaitShow() {

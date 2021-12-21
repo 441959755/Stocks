@@ -238,8 +238,6 @@ export default class NewClass extends cc.Component {
                 } else {
                     name.string = '昵称：' + GameCfg.RoomGameData.players[status - 1].gd.nickname;
                 }
-
-
             }
 
             let r, rank;
@@ -248,7 +246,6 @@ export default class NewClass extends cc.Component {
 
                 r = GameCfg.GAMEFUPANDATA.userProfitRate || 0.00;
                 rank = GameCfg.GAMEFUPANDATA.rank;
-
             }
             else if (GameCfg.RoomGameData) {
 
@@ -318,7 +315,6 @@ export default class NewClass extends cc.Component {
             let la = this.node.getChildByName('rate');
             la.x = 0;
         }
-
 
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.rightNode.active = true;
@@ -447,6 +443,8 @@ export default class NewClass extends cc.Component {
 
                     PopupManager.LoadTipsBox('tipsBox', str, () => {
 
+                        GlobalEvent.emit(EventCfg.GAMEOVEER,1);
+
                         GameCfg.allRate = 0;
                         GameCfg.finalfund = 0;
                         GameCfg.GAMEFUPAN = false;
@@ -473,6 +471,7 @@ export default class NewClass extends cc.Component {
 
                         PopupManager.LoadTipsBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
 
+                            GlobalEvent.emit('recover');
                             GlobalEvent.emit(EventCfg.GAMEOVEER);
 
                         })

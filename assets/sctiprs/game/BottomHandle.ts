@@ -142,7 +142,10 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.on(
 			EventCfg.GAMEOVEER,
 			() => {
-				this.onGameOverClosRate()
+
+				if(GameCfg.GameType!=pb.GameType.JJ_DuoKong){
+					this.onGameOverClosRate()
+				}
 
 				GameCfg.finalfund = this.ziChan;
 
@@ -154,7 +157,6 @@ export default class NewClass extends cc.Component {
 
 				this.buyData = [];
 
-				//	StrategyAIData.onSellFunc();
 			},
 			this
 		);
