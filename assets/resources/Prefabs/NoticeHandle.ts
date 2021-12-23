@@ -3,6 +3,7 @@ import PlatDefine from "../../sctiprs/common/config/PlatDefine";
 import GameCfgText from "../../sctiprs/GameText";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
+import PopupManager from "../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -60,5 +61,10 @@ export default class NewClass extends cc.Component {
             this.node.active = false;
         }
 
+    }
+
+    onDisable() {
+        //
+        PopupManager.arrPop.remove(1);
     }
 }

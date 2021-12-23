@@ -1,6 +1,8 @@
 import { pb } from "../../protos/proto";
+import ActionUtils from "../Utils/ActionUtils";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
+import PopupManager from "../Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -11,6 +13,8 @@ export default class NewClass extends cc.Component {
     rewardCenterBtn: cc.Node = null;
 
     rewardCenterData = null;
+
+    rewardCenterNode = null;
 
     onLoad() {
         this.rewardCenterBtn.active = false;
@@ -48,11 +52,15 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'rewardCentertBtn') {
-
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
-            GlobalEvent.emit(EventCfg.OPENREWARDCENTERLAYER, this.rewardCenterData);
-
+            PopupManager.openNode(cc.find('Canvas'), this.rewardCenterNode, 'Prefabs/RewardCenter/rewardCenter', 12, (node) => {
+                ActionUtils.openBox(node);
+                this.rewardCenterNode = node;
+                let handle = this.rewardCenterNode.getComponent('RewardCenter');
+                if (handle) {
+                    handle.rewardData = this.rewardCenterData;
+                    handle.onShow();
+                }
+            })
         }
     }
 

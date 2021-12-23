@@ -1,15 +1,16 @@
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
 import GameCfg from '../game/GameCfg';
-import {pb} from '../../protos/proto';
+import { pb } from '../../protos/proto';
 import StrategyAIData from '../game/StrategyAIData';
 import GameData from '../GameData';
 import LoadUtils from '../Utils/LoadUtils';
 import PopupManager from '../Utils/PopupManager';
 import UpGameOpt from '../global/UpGameOpt';
 import ComUtils from '../Utils/ComUtils';
+import GlobalHandle from '../global/GlobalHandle';
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -79,8 +80,6 @@ export default class NewClass extends cc.Component {
         //打开个人中心
         GlobalEvent.on(EventCfg.OPENPLAYERINFO, this.openPlayerInfoLayer.bind(this), this);
 
-        GlobalEvent.on(EventCfg.OPENREWARDCENTERLAYER, this.openRewardCenterLayer.bind(this), this);
-
         //打开公告
         GlobalEvent.on('OPENNOTICELAYER', this.openNoticelayer.bind(this), this);
 
@@ -135,7 +134,7 @@ export default class NewClass extends cc.Component {
 
             GameCfg.GameSet = GameData.JJPKSet;
 
-            GameCfg.GameType=pb.GameType.JJ_PK;
+            GameCfg.GameType = pb.GameType.JJ_PK;
 
             GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameData.selfEnterRoomData);
 
@@ -172,7 +171,8 @@ export default class NewClass extends cc.Component {
 
     onEnable() {
         //自动弹窗
-        PopupManager.autoPop();
+
+        GlobalHandle.getActivity(PopupManager.FirstAutoPop);
 
         if (GameData.firstGame) {
             GameData.firstGame = false;
@@ -185,7 +185,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENHELPLAYER);
         GlobalEvent.off(EventCfg.ROOMLEAVE);
         GlobalEvent.off(EventCfg.INVITEMESSAGE);
-        GlobalEvent.off(EventCfg.OPENREWARDCENTERLAYER);
         GlobalEvent.off(EventCfg.OPENOTHERPLAYERHISLAYER);
         GlobalEvent.off(EventCfg.GAMEOVEER);
         GlobalEvent.off('OPENNOTICELAYER');
@@ -314,21 +313,6 @@ export default class NewClass extends cc.Component {
         });
     }
 
-    /**
-     * 奖励中心
-     */
-    openRewardCenterLayer(data) {
-        this.openNode(this.rewardCenterNode, 'Prefabs/RewardCenter/rewardCenter', 12, (node) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.rewardCenterNode = node;
-            this.rewardCenterNode.active = true;
-            let handle = this.rewardCenterNode.getComponent('RewardCenter');
-            if (handle) {
-                handle.rewardData = data;
-                handle.onShow();
-            }
-        });
-    }
 
     //打开个人中心
     openPlayerInfoLayer() {
@@ -520,7 +504,7 @@ export default class NewClass extends cc.Component {
 
         GameCfg.GAMEFUPANDATA = null;
 
-        GameCfg.RoomGameData=null;
+        GameCfg.RoomGameData = null;
 
         //跟新闯关赛数据
         GlobalEvent.emit('UPDATEGAMEDATE');
@@ -540,7 +524,7 @@ export default class NewClass extends cc.Component {
     //游戏结束
     GameOver(flag) {
 
-        if (!this.gameLayer || !this.gameLayer.active||flag) {
+        if (!this.gameLayer || !this.gameLayer.active || flag) {
             return
         }
 

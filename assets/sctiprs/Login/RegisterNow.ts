@@ -87,7 +87,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'btnzc') {
-            GlobalEvent.emit('openProtocol', '用户协议', 'http://www.cgdr168.com/user/decription1000.html');
+            GlobalEvent.emit('EventCfg.OPENPROTOCOL', '用户协议', 'http://www.cgdr168.com/user/decription1000.html');
         }
 
         else if (name == 'zccloseBtn') {

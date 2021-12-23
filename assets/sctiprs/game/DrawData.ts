@@ -496,6 +496,7 @@ export default class DrawData {
 
     //获取输赢次数
     public static getBukoCount() {
+        
 
         let datas = GameCfg.fill;
 
@@ -506,6 +507,10 @@ export default class DrawData {
             maxRate: 0,
             minDay: 0,
             maxDay: 0,
+        }
+        
+        if(!datas){
+            return data;
         }
 
         let minIndex = -1;

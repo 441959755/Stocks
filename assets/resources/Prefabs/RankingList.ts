@@ -5,6 +5,7 @@ import GameCfgText from "../../sctiprs/GameText";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 import List from "../../sctiprs/Utils/List";
+import PopupManager from "../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -55,7 +56,7 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_Hall_GetFameRanking, null, (info) => {
             console.log('查询威望排行应答' + JSON.stringify(info));
             this.rankList1 = info.Items;
-            this.listV1.numItems =   this.rankList1.length;
+            this.listV1.numItems = this.rankList1.length;
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
         });
     }
@@ -66,7 +67,7 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_Hall_GetLevelRanking, null, (info) => {
             console.log('查询等级排行应答' + JSON.stringify(info));
             this.rankList2 = info.Items;
-            this.listV2.numItems =   this.rankList2.length;
+            this.listV2.numItems = this.rankList2.length;
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
     }
@@ -77,7 +78,7 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_Hall_GetFameRankingWeekly, null, (info) => {
             console.log('查询威望周排行' + JSON.stringify(info));
             this.rankList3 = info.Items;
-            this.listV3.numItems =   this.rankList3.length;
+            this.listV3.numItems = this.rankList3.length;
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
     }
@@ -95,7 +96,7 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_Game_CgsGetSeasonRank, buff, (info) => {
             console.log('闯关赛排行榜' + JSON.stringify(info));
             this.rankList4 = info.Items;
-            this.listV4.numItems =   this.rankList4.length;
+            this.listV4.numItems = this.rankList4.length;
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
     }
@@ -121,22 +122,22 @@ export default class NewClass extends cc.Component {
 
     onListRender1(item: cc.Node, idx: number) {
         let handle = item.getComponent('RankItem' + 1);
-        handle.onShow( this.rankList1[idx], idx);
+        handle.onShow(this.rankList1[idx], idx);
     }
 
     onListRender2(item: cc.Node, idx: number) {
         let handle = item.getComponent('RankItem' + 2);
-        handle.onShow( this.rankList2[idx], idx);
+        handle.onShow(this.rankList2[idx], idx);
     }
 
     onListRender3(item: cc.Node, idx: number) {
         let handle = item.getComponent('RankItem' + 3);
-        handle.onShow( this.rankList3[idx], idx);
+        handle.onShow(this.rankList3[idx], idx);
     }
 
     onListRender4(item: cc.Node, idx: number) {
         let handle = item.getComponent('RankItem' + 4);
-        handle.onShow( this.rankList4[idx], idx);
+        handle.onShow(this.rankList4[idx], idx);
     }
 
     start() {
@@ -184,7 +185,7 @@ export default class NewClass extends cc.Component {
                 this.to = res.to;
             })
         }
-        else{
+        else {
             this.toggles[3].node.active = false;
             return;
             socket.send(pb.MessageId.Req_Game_CgdsList, null, (res) => {
@@ -195,7 +196,7 @@ export default class NewClass extends cc.Component {
             })
         }
 
-        
+
     }
 
     onBtnClick(event, curdata) {
@@ -296,6 +297,10 @@ export default class NewClass extends cc.Component {
         }
 
 
+    }
+
+    onDisable() {
+        PopupManager.arrPop.remove(2);
     }
 
 }

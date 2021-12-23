@@ -221,6 +221,15 @@ export default class NewClass extends cc.Component {
 
         this.collectList = JSON.parse(JSON.stringify(GameData.AIStockList));
 
+        if(this.collectList.length<=0){
+            this.listV2.numItems=this.collectList.length;
+            this.tipsNode.active = true;
+            return;
+        }
+        else{
+            this.tipsNode.active = false;
+        }
+
         let info = {
             codes: this.collectList,
         }
@@ -240,7 +249,6 @@ export default class NewClass extends cc.Component {
             this.listV2.numItems=this.collectList.length;
         })
 
-        this.tipsNode.active = false;
     }
 
     onListRender2(item: cc.Node, idx: number) {
@@ -249,6 +257,7 @@ export default class NewClass extends cc.Component {
     }
 
     getBKISShow(code) {
+
         code = code + ''
         if (code.length >= 7) {
             code = code.slice(1);

@@ -56,7 +56,7 @@ export default class NewClass extends cc.Component {
             this.dealLas[0].string = (data.yCount + data.sCount) + '';
             this.dealLas[1].string = data.yCount + '';
             this.dealLas[2].string = data.sCount + '';
-            if (data.maxRate != 0) {
+         ///   if (data.maxRate != 0) {
                 this.profitLas[0].string = data.maxDay + '';
                 this.profitLas[1].string = (data.maxRate * 100).toFixed(2) + '%';
                 if (data.maxRate > 0) {
@@ -64,8 +64,8 @@ export default class NewClass extends cc.Component {
                 } else {
                     this.profitLas[1].node.color = cc.Color.WHITE;
                 }
-            }
-            if (data.minRate != 0) {
+          //  }
+         //   if (data.minRate != 0) {
                 this.lossLas[0].string = data.minDay + '';
                 this.lossLas[1].string = ((data.minRate) * 100).toFixed(2) + '%';
 
@@ -74,7 +74,7 @@ export default class NewClass extends cc.Component {
                 } else {
                     this.lossLas[1].node.color = cc.Color.WHITE;
                 }
-            }
+          //  }
         }
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             let info = StrategyAIData.onCompareReult();

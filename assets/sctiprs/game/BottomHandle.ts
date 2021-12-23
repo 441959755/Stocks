@@ -143,7 +143,7 @@ export default class NewClass extends cc.Component {
 			EventCfg.GAMEOVEER,
 			() => {
 
-				if(GameCfg.GameType!=pb.GameType.JJ_DuoKong){
+				if (GameCfg.GameType != pb.GameType.JJ_DuoKong) {
 					this.onGameOverClosRate()
 				}
 
@@ -317,9 +317,11 @@ export default class NewClass extends cc.Component {
 				if (this.keMrCount < 100) {
 					this.mrBtn.interactable = false;
 					this.mrBtn.enableAutoGrayEffect = true;
+
 				}
 				this.mcBtn.interactable = true;
 				this.mcBtn.enableAutoGrayEffect = false;
+
 			}
 			else {
 				this.mrBtn.node.active = false;
@@ -352,9 +354,11 @@ export default class NewClass extends cc.Component {
 				if (this.keMcCount <= 0) {
 					this.mcBtn.interactable = false;
 					this.mcBtn.enableAutoGrayEffect = true;
+
 				}
 				this.mrBtn.interactable = true;
 				this.mrBtn.enableAutoGrayEffect = false;
+
 			}
 			else {
 				this.mrBtn.node.active = true;
@@ -524,6 +528,15 @@ export default class NewClass extends cc.Component {
 	}
 
 	onDisable() {
+		if (this.mcBtn) {
+			this.mcBtn.interactable = true;
+			this.mcBtn.enableAutoGrayEffect = false;
+		}
+
+		if (this.mrBtn) {
+			this.mrBtn.interactable = true;
+			this.mrBtn.enableAutoGrayEffect = false;
+		}
 		this.node.getChildByName('JJ_DuoKong').active = false;
 		this.node.getChildByName('qh').active = false;
 		this.node.getChildByName('fupan').active = false;
@@ -557,6 +570,8 @@ export default class NewClass extends cc.Component {
 			state: null,
 		};
 		this.isFlag = false;
+
+
 	}
 
 	onEnable() {
@@ -655,7 +670,6 @@ export default class NewClass extends cc.Component {
 			this.tipsLabel1.node.active = false;
 			dxnode.active = true;
 			if (!GameCfg.GameSet.isFC || GameCfg.GAMEFUPAN) {
-				dxnode.x = 0;
 				dxnode.children[2].active = false;
 				dxnode.children[1].active = false;
 				dxnode.getComponent(cc.Layout).spacingX = 100;
@@ -664,6 +678,7 @@ export default class NewClass extends cc.Component {
 				dxnode.children[1].active = true;
 				this.tipsLabel.node.active = false;
 				this.tipsLabel1.node.active = true;
+				dxnode.getComponent(cc.Layout).spacingX = 10;
 			}
 		} else if (GameCfg.GameType == pb.GameType.QiHuo) {
 			this.tipsLabel.node.active = true;
@@ -902,7 +917,7 @@ export default class NewClass extends cc.Component {
 		//点击观望
 		else if (name == 'gwBtn' || name == 'cyBtn') {
 
-			if(GameCfg.GameType==pb.GameType.ZhiBiao||GameCfg.GameType==pb.GameType.DingXiang){
+			if (GameCfg.GameType == pb.GameType.ZhiBiao || GameCfg.GameType == pb.GameType.DingXiang) {
 				if (this.roundNumber > 0) {
 					let item = {
 						opId: pb.GameOperationId.Wait,
@@ -1165,19 +1180,6 @@ export default class NewClass extends cc.Component {
 		this.priceLabel[0].string = '买入均价：' + this.onjunjia().toFixed(2);
 	}
 
-	// onsetCurMrCount(mc) {
-	// 	let num = 0;
-	// 	this.curMrCount.forEach(el => {
-	// 		num += el;
-	// 	})
-	// 	num -= mc;
-	// 	if (num <= 0) {
-	// 		this.curMrCount = [];
-	// 	} else {
-	// 		this.curMrCount = [];
-	// 		this.curMrCount.push(num);
-	// 	}
-	// }
 
 	//买入的均价
 	onjunjia() {
@@ -1414,11 +1416,6 @@ export default class NewClass extends cc.Component {
 		}
 		else if (this.limitUP == 2) {
 			this.dieting.active = true;
-		}
-
-		else {
-			this.zhangting.active = false;
-			this.dieting.active = false;
 		}
 
 		GlobalEvent.emit(EventCfg.RAISINGLIMIT, this.limitUP);

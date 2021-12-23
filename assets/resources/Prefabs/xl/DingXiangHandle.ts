@@ -53,6 +53,7 @@ export default class NewClass extends cc.Component {
 
 	onLoad() {
 		this._tipsLa = this.edit.node.getChildByName('tipslabel');
+
 		this.edit.node.on(
 			'editing-did-ended',
 			edit => {
@@ -81,11 +82,11 @@ export default class NewClass extends cc.Component {
 						if (str1.indexOf(str) != -1) {
 							tt.push(datas[i]);
 							flag = true;
-							//  break;
+
 						} else if (arr1[1].indexOf(str) != -1) {
 							tt.push(datas[i]);
 							flag = true;
-							//  break;
+
 						}
 					}
 					if (!flag) {
@@ -98,8 +99,7 @@ export default class NewClass extends cc.Component {
 						this.setProId = 1;
 						this._tipsLa.color = new cc.Color().fromHEX('#BBBBBB');
 						this._tipsLa.active = false;
-						// let item = cc.find('downBox/New ScrollView/view/content/item', this.downBoxs[1]);
-						// let content = cc.find('downBox/New ScrollView/view/content', this.downBoxs[1]);
+
 						for (let i = 0; i < tt.length; i++) {
 							let arr = tt[i].split('|');
 							let str = arr[0];
@@ -186,7 +186,6 @@ export default class NewClass extends cc.Component {
 			this.curState = 3;
 		}
 	}
-
 
 	onEnable() {
 
@@ -688,6 +687,7 @@ export default class NewClass extends cc.Component {
 		}
 
 		if (GameData.DXSet.year != '随机') {
+
 			if (GameData.DXSet.month == '随机') {
 				GameData.DXSet.month = '01';
 			}

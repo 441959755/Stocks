@@ -1,4 +1,4 @@
-import { pb } from "../../protos/proto";
+import {pb} from "../../protos/proto";
 import GameData from "../GameData";
 
 import UpGameOpt from "../global/UpGameOpt";
@@ -7,7 +7,7 @@ import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import GameCfg from "./GameCfg";
 
-const { ccclass, property } = cc._decorator;
+const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -83,20 +83,19 @@ export default class NewClass extends cc.Component {
         }, this);
 
         GlobalEvent.on(EventCfg.GAMEWAIT, this.onGameWaitShow.bind(this), this);
-        
-        GlobalEvent.on(EventCfg.GAMEOVEER,()=>{
-            if(GameCfg.GameType==pb.GameType.JJ_DuoKong){
-                let le=UpGameOpt.player1Opt.length;
-                if(le>0){
-                    if(UpGameOpt.player1Opt[le-1].opId==pb.GameOperationId.Ask) {
+
+        GlobalEvent.on(EventCfg.GAMEOVEER, () => {
+            if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+                let le = UpGameOpt.player1Opt.length;
+                if (le > 0) {
+                    if (UpGameOpt.player1Opt[le - 1].opId == pb.GameOperationId.Ask) {
                         let item = {
                             opId: pb.GameOperationId.Bid,
                             volume: 1,
                             kOffset: GameCfg.huizhidatas,
                         }
                         UpGameOpt.addOpt(item);
-                    }
-                    else if(UpGameOpt.player1Opt[le-1].opId==pb.GameOperationId.Short){
+                    } else if (UpGameOpt.player1Opt[le - 1].opId == pb.GameOperationId.Short) {
                         let item = {
                             opId: pb.GameOperationId.Long,
                             volume: 1,
@@ -107,7 +106,8 @@ export default class NewClass extends cc.Component {
                     UpGameOpt.UpGameOpt(1);
                 }
             }
-        },this);
+        }, this);
+
     }
 
     onGameWaitShow() {
@@ -149,27 +149,24 @@ export default class NewClass extends cc.Component {
             let tq = ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
 
             pkFP.children[2].getComponent(cc.Label).string = '同期涨幅:' + tq + '%';
-        }
-        else {
+        } else {
             pkNode.active = false;
         }
     }
 
     onEnable() {
-        if (GameCfg.GAMEFUPAN) {
-            this.onGameFUPANSHOW();
-        } else {
-            if (GameCfg.GameType == pb.GameType.JJ_PK ||
-                GameCfg.GameType == pb.GameType.JJ_DuoKong ||
-                GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.JJ_XUNLIAN) {
+        if (GameCfg.GameType == pb.GameType.JJ_PK ||
+            GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+            GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.JJ_XUNLIAN) {
+            if (GameCfg.GAMEFUPAN) {
+                this.onGameFUPANSHOW();
+            } else {
 
                 this.node.getChildByName('isFC').active = false;
 
                 if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
                     this.node.getChildByName('JJ_DuoKong').active = true;
-                }
-
-                else if (GameCfg.GameType == pb.GameType.JJ_PK
+                } else if (GameCfg.GameType == pb.GameType.JJ_PK
                     || GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.JJ_XUNLIAN) {
                     this.node.getChildByName('isFC').active = true;
                 }
@@ -201,8 +198,7 @@ export default class NewClass extends cc.Component {
                         num--;
 
                     }, 1000)
-                }
-                else {
+                } else {
                     let curTimes = parseInt(new Date().getTime() / 1000 + '');
                     let endTiems = 3 * 60 + 2 + curTimes;
                     this.cb1 = setInterval(() => {
@@ -233,8 +229,7 @@ export default class NewClass extends cc.Component {
                 this.status = 1;
             }
             GlobalEvent.emit(EventCfg.PKFUPAN, this.status);
-        }
-        else if (name == 'mzBtn') {
+        } else if (name == 'mzBtn') {
             this.mzStatusNode[0].active = false;
             this.mzStatusNode[1].active = true;
             this.mzStatusNode[2].active = false;
@@ -254,8 +249,7 @@ export default class NewClass extends cc.Component {
                 UpGameOpt.addOpt(item);
             }
             this.bself.setRoundNumber('mrBtn')
-        }
-        else if (name == 'mdBtn') {
+        } else if (name == 'mdBtn') {
             this.mdStatusNode[0].active = false;
             this.mdStatusNode[1].active = true;
             this.mdStatusNode[2].active = false;
@@ -276,8 +270,7 @@ export default class NewClass extends cc.Component {
                 UpGameOpt.addOpt(item);
             }
             this.bself.setRoundNumber('mrBtn1')
-        }
-        else if (name == 'pcBtn1') {
+        } else if (name == 'pcBtn1') {
             this.mdStatusNode[1].active = false;
             this.mdStatusNode[0].active = true;
             this.mdStatusNode[2].active = false;
@@ -300,8 +293,7 @@ export default class NewClass extends cc.Component {
                 UpGameOpt.addOpt(item);
             }
             this.bself.setRoundNumber('mcBtn1', 1)
-        }
-        else if (name == 'pcBtn') {
+        } else if (name == 'pcBtn') {
             this.mdStatusNode[1].active = false;
             this.mdStatusNode[0].active = true;
             this.mdStatusNode[2].active = false;
@@ -323,17 +315,13 @@ export default class NewClass extends cc.Component {
                 UpGameOpt.addOpt(item);
             }
             this.bself.setRoundNumber('mcBtn', 1)
-        }
-        else if (name == 'dkdz_mz2') {
+        } else if (name == 'dkdz_mz2') {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '涨停板不能买涨！')
-        }
-        else if (name == 'dkdz_md2') {
+        } else if (name == 'dkdz_md2') {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '跌停板不能买跌！')
-        }
-        else if (name == 'dkdz_pc1') {
+        } else if (name == 'dkdz_pc1') {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '涨停板不能买跌中平仓!')
-        }
-        else if (name == 'dkdz_pc2') {
+        } else if (name == 'dkdz_pc2') {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '跌停板不能买涨中平仓！')
         }
 

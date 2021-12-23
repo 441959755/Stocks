@@ -376,9 +376,9 @@ export default class NewClass extends cc.Component {
                 //  ckBtn.children[2].active = true;
                 //  costLabel.node.color =  new cc.Color().fromHEX('#31a633');
             }
-            peopleLabel.string = '在线（' + this.confdata.people[index] + '人）'
+            peopleLabel.string = '本关英雄（' + this.confdata.people[index] + '人）'
             if (!index) {
-                peopleLabel.string = '在线（...人）';
+                peopleLabel.string = '本关英雄（...人）';
             }
 
             let CgLogAward = GameData.cgState.awards;

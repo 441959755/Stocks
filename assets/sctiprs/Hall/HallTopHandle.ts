@@ -1,5 +1,6 @@
 import { pb } from "../../protos/proto";
 import GameData from "../GameData";
+import ActionUtils from "../Utils/ActionUtils";
 import ComUtils from "../Utils/ComUtils";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
@@ -18,6 +19,8 @@ export default class NewClass extends cc.Component {
     setLayer: cc.Node = null;
 
     vipExplain: cc.Node = null;
+
+    serice: cc.Node = null;
 
     onLoad() {
         //vip
@@ -39,7 +42,6 @@ export default class NewClass extends cc.Component {
         }
     }
 
-
     getVIPDisTime(obj) {
         this.vipTimeLabel.string = obj.day + '天' + obj.hours + '时';
     }
@@ -50,6 +52,7 @@ export default class NewClass extends cc.Component {
         //设置
         if (name == 'xl_topbtn_xlsz') {
             PopupManager.openNode(this.node.parent, this.setLayer, 'Prefabs/hallSetLayer', 10, (node) => {
+                ActionUtils.openBox(node);
                 this.setLayer = node;
             })
         }
@@ -59,11 +62,14 @@ export default class NewClass extends cc.Component {
             PopupManager.loadVipExplain();
         }
 
-    }
+        else if (name == 'main_tb_qq') {
+            PopupManager.openNode(this.node.parent, this.serice, 'Prefabs/sericeBox', 11, (node) => {
+                ActionUtils.openBox(node);
+                this.serice = node;
+            })
 
-    onDestroy() {
-        LoadUtils.releaseRes('Prefabs/hallSetLayer');
-        LoadUtils.releaseRes('Prefabs/vipExplain');
+        }
+
     }
 
 }

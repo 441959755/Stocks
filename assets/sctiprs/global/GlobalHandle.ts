@@ -11,7 +11,7 @@ import ComUtils from "../Utils/ComUtils";
 
 export default class GlobalHandle {
 
-    // private static curTotal = 0;
+    public static Activitys = null;
 
     public static enterGameSetout(data, call, flag?) {
         GameCfg.data[0].data = [];
@@ -77,7 +77,7 @@ export default class GlobalHandle {
         let message = CmdGameOver.create(datas);
         let buff = CmdGameOver.encode(message).finish();
 
-        socket.send(pb.MessageId.Req_Game_Over,buff, (info) => {
+        socket.send(pb.MessageId.Req_Game_Over, buff, (info) => {
             cb && (cb(info.ts));
             console.log('GameOverInfo' + JSON.stringify(info));
         })
@@ -234,7 +234,6 @@ export default class GlobalHandle {
     }
 
 
-
     public static getRemainData(count, data1, cb, type) {
 
         count += 1;
@@ -354,7 +353,7 @@ export default class GlobalHandle {
         let message = CmdGetGameOperations.create(data)
         let buff = CmdGetGameOperations.encode(message).finish();
 
-        socket.send(pb.MessageId.Req_Game_GetGameOperation,buff, (info) => {
+        socket.send(pb.MessageId.Req_Game_GetGameOperation, buff, (info) => {
             console.log('操作步骤' + JSON.stringify(info));
 
             if (!info.err) {
@@ -580,6 +579,18 @@ export default class GlobalHandle {
             console.log('在线邀请：' + JSON.stringify(res));
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
+    }
+
+    // 查询参与过的活动
+    public static getActivity(call?) {
+
+        if (!this.Activitys) {
+            socket.send(pb.MessageId.Req_Hall_GetActivityLogs, null, (res) => {
+                this.Activitys = res.ids;
+                console.log('查询参与过的活动' + JSON.stringify(res));
+                call && (call())
+            })
+        }
     }
 
 }

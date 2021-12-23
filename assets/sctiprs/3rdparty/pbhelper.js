@@ -1,4 +1,4 @@
-import {pb} from '../../protos/proto';
+import { pb } from '../../protos/proto';
 import GameCfg from '../game/GameCfg';
 import GameData from '../GameData';
 import EventCfg from '../Utils/EventCfg';
@@ -267,8 +267,8 @@ PBHelper.prototype = {
             return data;
         }
 
-            //查询闯关赛通关排行应答：RankingList
-            //  查询闯关赛关卡排行应答：RankingList
+        //查询闯关赛通关排行应答：RankingList
+        //  查询闯关赛关卡排行应答：RankingList
         //  查询闯关赛排行榜应答：RankingList
         else if (id == pb.MessageId.Rep_Game_CgsGetClearanceRank ||
             id == pb.MessageId.Rep_Game_CgsGetStageRank ||
@@ -294,7 +294,7 @@ PBHelper.prototype = {
 
             return data;
         }
-            //系统广播：Notice
+        //系统广播：Notice
         //服务器发到客户端的消息（包括邀请或聊天消息）：Notice
         else if (id == pb.MessageId.Sync_S2C_Message ||
             id == pb.MessageId.Sync_S2C_Broadcast) {
@@ -430,10 +430,10 @@ PBHelper.prototype = {
             GlobalEvent.emit('REPPLAYERINFO', data);
             return data;
         }
-            // 查询等级排行应答：RankingList
-            //查询威望排行应答：RankingList
-            // 查询威望周排行应答：RankingList
-            // 获取炒股大赛排行榜应答
+        // 查询等级排行应答：RankingList
+        //查询威望排行应答：RankingList
+        // 查询威望周排行应答：RankingList
+        // 获取炒股大赛排行榜应答
         // 查询闯关赛排行榜应答
         else if (id == pb.MessageId.Rep_Hall_GetFameRanking
             || id == pb.MessageId.Rep_Hall_GetFameRankingWeekly
@@ -466,22 +466,29 @@ PBHelper.prototype = {
             GlobalEvent.emit('CmdGoldAwardPrompt', data);
         }
 
-// 领取每周豪礼
+        // 领取每周豪礼
         else if (id == pb.MessageId.Rep_Hall_GetWeeklyAward) {
-            let CmdGetWeeklyAwardReply=pb.CmdGetWeeklyAwardReply;
-            let data=CmdGetWeeklyAwardReply.decode(new Uint8Array(buff));
-            return  data;
+            let CmdGetWeeklyAwardReply = pb.CmdGetWeeklyAwardReply;
+            let data = CmdGetWeeklyAwardReply.decode(new Uint8Array(buff));
+            return data;
         }
 
         else if (id == pb.MessageId.Rep_Hall_QueryEventLog) {
-            let Events=pb.Events;
-            let data=Events.decode(new Uint8Array(buff));
-            return  data;
+            let Events = pb.Events;
+            let data = Events.decode(new Uint8Array(buff));
+            return data;
         }
 
-        else if(id==pb.MessageId.Rep_Hall_Get7Award){
+        else if (id == pb.MessageId.Rep_Hall_Get7Award) {
             //领取7次奖励应答
-            return  null;
+            return null;
+        }
+
+        //查询参与过的活动
+        else if (id == pb.MessageId.Rep_Hall_GetActivityLogs) {
+            let ActivityLogs = pb.ActivityLogs;
+            let data = ActivityLogs.decode(new Uint8Array(buff));
+            return data;
         }
     }
 }
