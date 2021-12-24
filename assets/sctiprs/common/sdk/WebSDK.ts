@@ -1,5 +1,6 @@
 
 import { pb } from "../../../protos/proto";
+import LLWConfig from "../config/LLWConfig";
 import HttpMgr from "../net/HttpMgr";
 import LLWUtils from "../utils/LLWUtils";
 
@@ -20,7 +21,7 @@ export default class WebSDK {
         let loginInfo = {
             account: uuid,
             type: pb.LoginType.QQ,
-            from: pb.AppFrom.WeChatMinProgram,
+            from: LLWConfig.FROM,
             // type: pb.LoginType.WeChat,
             // from: pb.AppFrom.Test,
             pwd: ''
@@ -37,7 +38,7 @@ export default class WebSDK {
         console.log('webSDK is chooseImage null');
     }
 
-    copyborad(str){
+    copyborad(str) {
         let input = str;
         const el = document.createElement('textarea');
         el.value = input;
@@ -60,7 +61,7 @@ export default class WebSDK {
         let success = false;
         try {
             success = document.execCommand('copy');
-        } catch (err) {}
+        } catch (err) { }
 
         document.body.removeChild(el);
 

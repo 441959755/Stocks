@@ -1,4 +1,5 @@
 import { pb } from "../../../protos/proto";
+import LLWConfig from "../../../sctiprs/common/config/LLWConfig";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
@@ -273,7 +274,8 @@ export default class NewClass extends cc.Component {
         let obj = {
             itemId: id,
             count: 1,
-            from: pb.AppFrom.Android_001
+            // from: pb.AppFrom.Android_001
+            from: LLWConfig.FROM,
         }
 
         console.log(JSON.stringify(obj));

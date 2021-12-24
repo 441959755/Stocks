@@ -1,4 +1,5 @@
 import { pb } from "../../protos/proto";
+import LLWConfig from "../common/config/LLWConfig";
 import HttpUtils from "../common/net/HttpUtils";
 import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
@@ -124,7 +125,8 @@ export default class NewClass extends cc.Component {
                 type: pb.LoginType.MobilePhoneId,
                 pwd: this.pw,
                 smsCode: this.ac,
-                from: pb.AppFrom.Test,
+                //   from: pb.AppFrom.Test,
+                from: LLWConfig.FROM,
             }
 
             let url = 'http://test.chaogugame.com/r';

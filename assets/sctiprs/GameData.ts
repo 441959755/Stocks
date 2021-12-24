@@ -3,6 +3,8 @@ import EventCfg from "./Utils/EventCfg";
 
 export default class GameData {
 
+    public static ActivityConf = null;
+
     public static firstGame = false;
 
     public static gameData = null;

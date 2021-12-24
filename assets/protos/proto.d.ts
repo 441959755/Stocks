@@ -13080,6 +13080,7 @@ export namespace pb {
         IosAppleStore = 6667,
         Ipad = 6668,
         WeChatMinProgram = 8888,
+        Website3th = 9999,
         Test = 10000
     }
 

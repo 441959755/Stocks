@@ -490,6 +490,14 @@ PBHelper.prototype = {
             let data = ActivityLogs.decode(new Uint8Array(buff));
             return data;
         }
+
+        else if (id == pb.MessageId.Sync_S2C_ActivityConf) {
+            let ActivityConf = pb.ActivityConf;
+            let data = ActivityConf.decode(new Uint8Array(buff));
+            console.log('活动配置' + JSON.stringify(data));
+            GameData.ActivityConf = data.items;
+            return;
+        }
     }
 }
 

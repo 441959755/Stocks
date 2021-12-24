@@ -11,8 +11,6 @@ export default class PopupManager {
 
     private static nodes: any = {};
 
-    private static arrstr = [];
-
     private static isLoading = false;
 
     public static arrPop: PopupList = null;
@@ -150,6 +148,7 @@ export default class PopupManager {
 
         for (let key in this.nodes) {
             this.nodes[key] = null;
+            LoadUtils.releaseRes(key);
         }
 
         GlobalEvent.off(EventCfg.OPENPROTOCOL);
@@ -158,10 +157,6 @@ export default class PopupManager {
         GlobalEvent.off(EventCfg.TIPSTEXTSHOW);
         GlobalEvent.off(EventCfg.TIPSTEXTHIDE);
         GlobalEvent.off(EventCfg.OPENOTHERPLAYERINFO);
-
-        this.arrstr.forEach(el => {
-            LoadUtils.releaseRes(el);
-        })
 
         this.arrPop.clear();
         this.arrPop = null;
@@ -179,7 +174,7 @@ export default class PopupManager {
 
         if (!childen) {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            this.arrstr.push(url);
+
             LoadUtils.loadRes(url, pre => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 childen = cc.instantiate(pre);
@@ -219,12 +214,16 @@ export default class PopupManager {
                         }
                     }
                     else {
+                        //  if (el.id != 7) {
                         this.arrPop.append(el.id);
+                        // }
+
                     }
                 }
 
                 el.id = null;
             });
+
 
             //弹出的
             this.arrPop.autoPop(() => {
@@ -235,9 +234,8 @@ export default class PopupManager {
                         GlobalEvent.emit('OPENNOTICELAYER');
                         break;
                     case 2:
-                        GlobalEvent.emit('OPENNOTICELAYER');
+                        GlobalEvent.emit('OPENRANKINGLIST');
                         break;
-
                     case 3:
                         this.openCgdsNotice();
                         break
@@ -245,7 +243,15 @@ export default class PopupManager {
                         this.openCgsNotice();
                         break;
                     case 5:
+                        this.openNewPackage();
+                        break;
 
+                    case 6:
+                        this.open7DayVIP();
+                        break;
+
+                    case 7:
+                        this.openactiveTheme();
                         break;
 
                     default:

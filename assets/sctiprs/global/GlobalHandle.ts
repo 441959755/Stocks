@@ -8,6 +8,7 @@ import DrawData from "../game/DrawData";
 import UpGameOpt from "./UpGameOpt";
 import GameCfgText from "../GameText";
 import ComUtils from "../Utils/ComUtils";
+import PopupManager from "../Utils/PopupManager";
 
 export default class GlobalHandle {
 
@@ -582,13 +583,13 @@ export default class GlobalHandle {
     }
 
     // 查询参与过的活动
-    public static getActivity(call?) {
+    public static getActivity() {
 
         if (!this.Activitys) {
             socket.send(pb.MessageId.Req_Hall_GetActivityLogs, null, (res) => {
                 this.Activitys = res.ids;
                 console.log('查询参与过的活动' + JSON.stringify(res));
-                call && (call())
+                PopupManager.FirstAutoPop();
             })
         }
     }

@@ -1,8 +1,9 @@
-import {pb} from "../../../protos/proto";
+import { pb } from "../../../protos/proto";
 import GameData from "../../GameData";
 import EventCfg from "../../Utils/EventCfg";
 import GlobalEvent from "../../Utils/GlobalEvent";
 import LoadImg from "../../Utils/LoadImg";
+import LLWConfig from "../config/LLWConfig";
 import HttpMgr from "../net/HttpMgr";
 import HttpUtils from "../net/HttpUtils";
 
@@ -30,7 +31,7 @@ export default class AndroidSDK {
 
     public loginPlat = null;
 
-     photoCallback=null;
+    photoCallback = null;
 
     className = 'org/cocos2dx/javascript/AppActivity';
 
@@ -59,7 +60,8 @@ export default class AndroidSDK {
             let loginInfo = {
                 account: id,
                 type: pb.LoginType.MobilePhoneId,
-                from: pb.AppFrom.Android_001,
+                //  from: pb.AppFrom.Android_001,
+                from: LLWConfig.FROM,
                 pwd: pw
             };
 
@@ -308,7 +310,7 @@ export default class AndroidSDK {
     //调用java 打开Url
     openUrl(url) {
         var funcName = "openUrl"
-        var args = {url}
+        var args = { url }
         var sigs = "(Ljava/lang/String;)V"
         jsb.reflection.callStaticMethod(this.className, funcName, sigs, url)
     }
@@ -318,7 +320,7 @@ export default class AndroidSDK {
         var funcName = "copyToClipboard"
         var sigs = "(Ljava/lang/String;)V"
         setTimeout(() =>
-                jsb.reflection.callStaticMethod(this.className, funcName, sigs, str)
+            jsb.reflection.callStaticMethod(this.className, funcName, sigs, str)
             , 100);
     }
 
@@ -390,7 +392,8 @@ export default class AndroidSDK {
             type: this.loginPlat,
             //from: pb.AppFrom.WeChatMinProgram,
             // type: pb.LoginType.WeChat,
-            from: pb.AppFrom.Test,
+            // from: pb.AppFrom.Test,
+            from: LLWConfig.FROM,
             pwd: ''
         };
 
@@ -480,7 +483,7 @@ export default class AndroidSDK {
     }
 
     //获取选择图片
-    pickImage(type,call) {
+    pickImage(type, call) {
         //  this.photoCallback=call;
         // this.photoCallback&&(this.photoCallback(null));
 
@@ -496,24 +499,24 @@ export default class AndroidSDK {
             //     tmpPath);
         } else if (type == 2) {
             jsb.reflection.callStaticMethod('org/cocos2dx/javascript/AvatarManager', 'openCamera', '(Ljava/lang/String;)V', 'yourKey')
-          //  jsb.reflection.callStaticMethod('org/cocos2dx/javascript/AvatarManager', 'openCamera', '(Ljava/lang/String;)V', 'yourKey')
+            //  jsb.reflection.callStaticMethod('org/cocos2dx/javascript/AvatarManager', 'openCamera', '(Ljava/lang/String;)V', 'yourKey')
         }
     }
 
     //选择相册回调
     selectPhotoCallback(path) {
 
-            //先释放原来的同名图片
-            cc.loader.load(path, (err, tex) => {
-                if(err){
-                    cc.error(err);
-                }else {
-                    console.log('选择相册回调'+tex);
-                  //  var spriteFrame = new cc.SpriteFrame(tex);
+        //先释放原来的同名图片
+        cc.loader.load(path, (err, tex) => {
+            if (err) {
+                cc.error(err);
+            } else {
+                console.log('选择相册回调' + tex);
+                //  var spriteFrame = new cc.SpriteFrame(tex);
 
-                    this.photoCallback&&(this.photoCallback(tex));
-                }
-            });
+                this.photoCallback && (this.photoCallback(tex));
+            }
+        });
 
     }
 

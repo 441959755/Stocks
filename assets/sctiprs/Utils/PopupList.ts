@@ -7,6 +7,10 @@ export default class PopupList {
 
     backcall = null;
 
+    constructor() {
+
+    }
+
     append(el) {
         this.dataSouce[this.listSize++] = el;
     }
@@ -93,7 +97,11 @@ export default class PopupList {
     }
 
     autoPop(call?) {
-        this.backcall = call;
+
+        if (call) {
+            this.backcall = call;
+        }
+
         this.backcall && (this.backcall());
     }
 

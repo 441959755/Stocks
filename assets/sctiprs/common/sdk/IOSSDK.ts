@@ -3,6 +3,7 @@ import GameData from "../../GameData";
 import EventCfg from "../../Utils/EventCfg";
 import GlobalEvent from "../../Utils/GlobalEvent";
 import LoadImg from "../../Utils/LoadImg";
+import LLWConfig from "../config/LLWConfig";
 import HttpMgr from "../net/HttpMgr";
 import HttpUtils from "../net/HttpUtils";
 
@@ -46,13 +47,14 @@ export default class IOSSDK {
 
     //账号登入
     login(call, id, pw?) {
+
         if (id && pw) {
             let loginInfo = {
                 account: id,
                 type: pb.LoginType.MobilePhoneId,
-                from: pb.AppFrom.IosAppleStore,
+                // from: pb.AppFrom.IosAppleStore,
                 // type: pb.LoginType.WeChat,
-                // from: pb.AppFrom.Test,
+                from: LLWConfig.FROM,
                 pwd: pw
             };
 
@@ -69,7 +71,7 @@ export default class IOSSDK {
             type: this.loginPlat,
             //from: pb.AppFrom.WeChatMinProgram,
             // type: pb.LoginType.WeChat,
-            from: pb.AppFrom.IosAppleStore,
+            from: LLWConfig.FROM,
             pwd: ''
         };
 

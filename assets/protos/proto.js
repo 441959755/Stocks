@@ -27576,6 +27576,7 @@ $root.pb = (function () {
                     case 6667:
                     case 6668:
                     case 8888:
+                    case 9999:
                     case 10000:
                         break;
                 }
@@ -27696,6 +27697,10 @@ $root.pb = (function () {
                 case "WeChatMinProgram":
                 case 8888:
                     message.from = 8888;
+                    break;
+                case "Website3th":
+                case 9999:
+                    message.from = 9999;
                     break;
                 case "Test":
                 case 10000:
@@ -28251,6 +28256,7 @@ $root.pb = (function () {
                     case 6667:
                     case 6668:
                     case 8888:
+                    case 9999:
                     case 10000:
                         break;
                 }
@@ -28379,6 +28385,10 @@ $root.pb = (function () {
                 case "WeChatMinProgram":
                 case 8888:
                     message.from = 8888;
+                    break;
+                case "Website3th":
+                case 9999:
+                    message.from = 9999;
                     break;
                 case "Test":
                 case 10000:
@@ -35034,6 +35044,7 @@ $root.pb = (function () {
      * @property {number} IosAppleStore=6667 IosAppleStore value
      * @property {number} Ipad=6668 Ipad value
      * @property {number} WeChatMinProgram=8888 WeChatMinProgram value
+     * @property {number} Website3th=9999 Website3th value
      * @property {number} Test=10000 Test value
      */
     pb.AppFrom = (function () {
@@ -35062,6 +35073,7 @@ $root.pb = (function () {
         values[valuesById[6667] = "IosAppleStore"] = 6667;
         values[valuesById[6668] = "Ipad"] = 6668;
         values[valuesById[8888] = "WeChatMinProgram"] = 8888;
+        values[valuesById[9999] = "Website3th"] = 9999;
         values[valuesById[10000] = "Test"] = 10000;
         return values;
     })();
@@ -35415,6 +35427,7 @@ $root.pb = (function () {
                     case 6667:
                     case 6668:
                     case 8888:
+                    case 9999:
                     case 10000:
                         break;
                 }
@@ -35548,6 +35561,10 @@ $root.pb = (function () {
                 case "WeChatMinProgram":
                 case 8888:
                     message.from = 8888;
+                    break;
+                case "Website3th":
+                case 9999:
+                    message.from = 9999;
                     break;
                 case "Test":
                 case 10000:
@@ -35872,6 +35889,7 @@ $root.pb = (function () {
                     case 6667:
                     case 6668:
                     case 8888:
+                    case 9999:
                     case 10000:
                         break;
                 }
@@ -36025,6 +36043,10 @@ $root.pb = (function () {
                 case "WeChatMinProgram":
                 case 8888:
                     message.from = 8888;
+                    break;
+                case "Website3th":
+                case 9999:
+                    message.from = 9999;
                     break;
                 case "Test":
                 case 10000:
@@ -36319,6 +36341,7 @@ $root.pb = (function () {
                     case 6667:
                     case 6668:
                     case 8888:
+                    case 9999:
                     case 10000:
                         break;
                 }
@@ -36470,6 +36493,10 @@ $root.pb = (function () {
                 case "WeChatMinProgram":
                 case 8888:
                     message.from = 8888;
+                    break;
+                case "Website3th":
+                case 9999:
+                    message.from = 9999;
                     break;
                 case "Test":
                 case 10000:
@@ -39053,6 +39080,7 @@ $root.pb = (function () {
                     case 6667:
                     case 6668:
                     case 8888:
+                    case 9999:
                     case 10000:
                         break;
                 }
@@ -39202,6 +39230,10 @@ $root.pb = (function () {
                 case "WeChatMinProgram":
                 case 8888:
                     message.from = 8888;
+                    break;
+                case "Website3th":
+                case 9999:
+                    message.from = 9999;
                     break;
                 case "Test":
                 case 10000:

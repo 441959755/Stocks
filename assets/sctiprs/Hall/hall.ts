@@ -127,6 +127,9 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
+
+        GlobalHandle.getActivity();
+
         //断线重连 或游戏后进入房间
         if (GameData.selfEnterRoomData) {
 
@@ -167,12 +170,12 @@ export default class NewClass extends cc.Component {
         }
 
         GlobalEvent.emit('getRewardCenter');
+
+        this.onShow();
     }
 
-    onEnable() {
-        //自动弹窗
+    onShow() {
 
-        GlobalHandle.getActivity(PopupManager.FirstAutoPop);
 
         if (GameData.firstGame) {
             GameData.firstGame = false;

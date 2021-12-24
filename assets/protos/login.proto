@@ -65,6 +65,7 @@ enum AppFrom {
 
 	WeChatMinProgram = 8888;// 微信小程序
 
+	Website3th = 9999;		// 第三方网站
 	Test = 10000;			// 测试
 }
 
