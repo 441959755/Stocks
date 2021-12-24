@@ -286,7 +286,7 @@ export default class NewClass extends cc.Component {
 
         socket.send(pb.MessageId.Req_Hall_ShopOrder, buff, (res) => {
             console.log('商城下购买应答' + JSON.stringify(res));
-            if (!res.err) {
+            if (!res.result.err) {
 
                 if (this._curType) {
                     this.succeed.active = true;

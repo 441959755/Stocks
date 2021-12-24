@@ -1,12 +1,10 @@
 import { pb } from "../../../protos/proto";
 import LLWConfig from "../../../sctiprs/common/config/LLWConfig";
 import GameData from "../../../sctiprs/GameData";
-import GameCfgText from "../../../sctiprs/GameText";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import LoadUtils from "../../../sctiprs/Utils/LoadUtils";
 import PopupManager from "../../../sctiprs/Utils/PopupManager";
-
 
 const { ccclass, property } = cc._decorator;
 
@@ -143,6 +141,5 @@ export default class NewClass extends cc.Component {
     onDisable() {
         PopupManager.arrPop.remove(7);
     }
-
 
 }

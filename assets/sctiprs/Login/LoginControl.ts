@@ -81,7 +81,10 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '账号或密码不能为空');
                 return;
             }
-            this.loginServer();
+            else {
+                this.loginServer();
+            }
+
         }
 
         //qq登入
@@ -126,7 +129,7 @@ export default class NewClass extends cc.Component {
             decoded.uid && (GameData.userID = decoded.uid);
 
             if (decoded.gameAddr) {
-                window.socket =new Socket(decoded.gameAddr);
+                window.socket = new Socket(decoded.gameAddr);
             }
 
         } else {
