@@ -1,3 +1,4 @@
+import LLWConfig from "../../../sctiprs/common/config/LLWConfig";
 import GameCfgText from "../../../sctiprs/GameText";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -24,15 +25,20 @@ export default class NewClass extends cc.Component {
     btnSp: cc.SpriteFrame = null;
 
 
-    onLoad() {
-        let bgurl = 'http://www.cgdr168.com/img/activity/cgds_bg.png';
-        let btnUrl = 'http://www.cgdr168.com/img/activity/cgds_btn.png'
+    protected start(): void {
+
+        let bgurl = LLWConfig.LOADIMGURL + 'img/activity/cgds_bg.png';
+        let btnUrl = LLWConfig.LOADIMGURL + 'img/activity/cgds_btn.png'
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         LoadUtils.load(bgurl, (sp) => {
             this.bgSp = new cc.SpriteFrame(sp);
             if (this.bgSp && this.btnSp) {
                 this.onShow();
+            }
+            else {
+                this.node.active = false;
+
             }
 
         })
@@ -41,6 +47,9 @@ export default class NewClass extends cc.Component {
             this.btnSp = new cc.SpriteFrame(sp);
             if (this.bgSp && this.btnSp) {
                 this.onShow();
+            }
+            else {
+                this.node.active = false;
             }
         })
     }

@@ -7,8 +7,8 @@ const GAMEID = 0;
 //const PLATTYPE = PlatDefine.PLAT_ANDROID;
 const PLATTYPE = PlatDefine.PLAT_WEB;
 const FROM = pb.AppFrom.Website3th;
-const LOADHEADURL = 'http://test.chaogugame.com/icon/';
-//const LOADHEADURL = 'https://www.cgdr168.com/icon/';
+const LOADIMGURL = 'http://test.cgdr168.com/';
+//const LOADIMGURL = 'https://www.cgdr168.com/';
 
 const ISLOG = false;
 
@@ -34,8 +34,8 @@ export default class LLWConfig {
         return ISLOG;
     }
 
-    static get LOADHEADURL() {
-        return LOADHEADURL;
+    static get LOADIMGURL() {
+        return LOADIMGURL;
     }
 }
 
@@ -44,6 +44,6 @@ export default class LLWConfig {
 //pbts -o proto.d.ts proto.js
 
 
-//<input id="file" type="file" class="fileToUpload" style="opacity:0;position:absolute;" onchange="handleFiles(this)"/> 
+//<input id="file" type="file" class="f s(this)"/> 
 
 

@@ -1,5 +1,6 @@
 
 import { pb } from "../../../protos/proto";
+import LLWConfig from "../../../sctiprs/common/config/LLWConfig";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
@@ -26,15 +27,19 @@ export default class NewClass extends cc.Component {
     btnSp: cc.SpriteFrame = null;
 
 
-    onLoad() {
-        let bgurl = 'http://www.cgdr168.com/img/activity/cg_bg.png';
-        let btnUrl = 'http://www.cgdr168.com/img/activity/cg_btn.png'
+    protected start(): void {
+
+        let bgurl = LLWConfig.LOADIMGURL + 'img/activity/cg_bg.png';
+        let btnUrl = LLWConfig.LOADIMGURL + 'img/activity/cg_btn.png';
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         LoadUtils.load(bgurl, (sp) => {
             this.bgSp = new cc.SpriteFrame(sp);
             if (this.bgSp && this.btnSp) {
                 this.onShow();
+            }
+            else {
+                this.node.active = false;
             }
 
         })
@@ -43,6 +48,9 @@ export default class NewClass extends cc.Component {
             this.btnSp = new cc.SpriteFrame(sp);
             if (this.bgSp && this.btnSp) {
                 this.onShow();
+            }
+            else {
+                this.node.active = false;
             }
         })
     }

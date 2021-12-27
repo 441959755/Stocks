@@ -3,6 +3,7 @@ import GameCfg from "../game/GameCfg";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import LoadUtils from "../Utils/LoadUtils";
+import PopupManager from "../Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -16,22 +17,6 @@ export default class NewClass extends cc.Component {
     SMNode: cc.Node = null;
 
     ZBNode: cc.Node = null;
-
-    ZBSetNode: cc.Node = null;
-
-    SMSetNode: cc.Node = null;
-
-    QHSetNode: cc.Node = null;
-
-    DXSetNode: cc.Node = null;
-
-    ZBHisNode: cc.Node = null;
-
-    SMHisNode: cc.Node = null;
-
-    QHHisNode: cc.Node = null;
-
-    DXHisNode: cc.Node = null;
 
     monthNode: cc.Node = null;
 
@@ -140,78 +125,51 @@ export default class NewClass extends cc.Component {
      * 历史记录
      */
     openHisLayer() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        let str = '';
         switch (GameCfg.GameType) {
             case pb.GameType.ZhiBiao:
-                this.openNode(this.ZBHisNode, 'Prefabs/xl/ZBHistoryLayer', 11, (node) => {
-
-                    this.ZBHisNode = node;
-
-                });
+                str = 'Prefabs/xl/ZBHistoryLayer';
                 break;
             case pb.GameType.ShuangMang:
-                this.openNode(this.SMHisNode, 'Prefabs/xl/HistoryLayerSM', 11, (node) => {
-
-                    this.SMHisNode = node;
-
-                });
+                str = 'Prefabs/xl/HistoryLayerSM';
                 break;
             case pb.GameType.DingXiang:
-                this.openNode(this.DXHisNode, 'Prefabs/xl/DXHistoryLayer', 11, (node) => {
-
-                    this.DXHisNode = node;
-
-                });
+                str = 'Prefabs/xl/DXHistoryLayer';
                 break;
             case pb.GameType.QiHuo:
-                this.openNode(this.QHHisNode, 'Prefabs/xl/QHHistoryLayer', 11, (node) => {
-
-                    this.QHHisNode = node;
-
-                });
+                str = 'Prefabs/xl/QHHistoryLayer';
                 break;
             case pb.GameType.TiaoJianDan:
-                this.openNode(this.TJDHisNode, 'Prefabs/tjd/TJDHistoryLayer', 11, (node) => {
-
-                    this.TJDHisNode = node;
-                });
+                str = 'Prefabs/tjd/TJDHistoryLayer';
                 break;
         }
+
+        PopupManager.openNode(this.node, null, str, 11, null);
     }
 
     /**
      * 设置
      */
     openSetLayer() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        let str = '';
         switch (GameCfg.GameType) {
             case pb.GameType.ZhiBiao:
-                this.openNode(this.ZBSetNode, 'Prefabs/xl/ZBSetLayer', 10, (node) => {
-                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                    this.ZBSetNode = node
-                });
+                str = 'Prefabs/xl/ZBSetLayer';
                 break;
             case pb.GameType.ShuangMang:
 
             case pb.GameType.TiaoJianDan:
-                this.openNode(this.SMSetNode, 'Prefabs/xl/SMSetLayer', 10, (node) => {
-                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                    this.SMSetNode = node
-                });
+                str = 'Prefabs/xl/SMSetLayer';
                 break;
             case pb.GameType.DingXiang:
-                this.openNode(this.DXSetNode, 'Prefabs/xl/DXSetLayer', 10, (node) => {
-                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                    this.DXSetNode = node
-                });
+                str = 'Prefabs/xl/DXSetLayer';
                 break;
             case pb.GameType.QiHuo:
-                this.openNode(this.QHSetNode, 'Prefabs/xl/QHSetLayer', 10, (node) => {
-                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                    this.QHSetNode = node
-                });
+                str = 'Prefabs/xl/QHSetLayer';
                 break;
         }
+
+        PopupManager.openNode(this.node, null, str, 10, null);
     }
 
     /**

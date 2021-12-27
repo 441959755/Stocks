@@ -61,6 +61,8 @@ export default class NewClass extends cc.Component {
             this.labels[6].node.color = cc.Color.WHITE;
         }
 
+        if (!this.labels[7]) { return }
+
         this.labels[7].string = info.userProfit;
         if (info.userProfit > 0) {
             this.labels[7].node.color = new cc.Color().fromHEX('#e94343');
@@ -158,25 +160,22 @@ export default class NewClass extends cc.Component {
 
                 if (this.infoData.gType == pb.GameType.ShuangMang) {
                     GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.SMSet));
-                    //    GameCfg.GameSet = GameData.SMSet;
                 }
+
                 else if (this.infoData.gType == pb.GameType.ZhiBiao) {
                     GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.ZBSet));
-                    //  GameCfg.GameSet = GameData.ZBSet;
                 }
+
                 else if (this.infoData.gType == pb.GameType.QiHuo) {
                     GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.QHSet));
-                    //   GameCfg.GameSet = GameData.QHSet;
                 }
+
                 else if (this.infoData.gType == pb.GameType.DingXiang) {
                     GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
-                    //   GameCfg.GameSet = GameData.DXSet;
-
                 }
 
                 else if (this.infoData.gType == pb.GameType.TiaoJianDan) {
                     GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.TJDSet));
-                    //  GameCfg.GameSet = GameData.TJDSet;
                 }
 
                 GameCfg.enterGameCache = {
@@ -193,7 +192,11 @@ export default class NewClass extends cc.Component {
 
                 if (GameCfg.GameType == pb.GameType.QiHuo) {
                     GlobalHandle.onCmdGameStartQuoteQueryQH(GameCfg.enterGameCache, this.loadGame.bind(this));
-                } else {
+                }
+                // else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+
+                // }
+                else {
                     GlobalHandle.onCmdGameStartQuoteQuery(GameCfg.enterGameCache, this.loadGame.bind(this))
                 }
             });
@@ -201,20 +204,13 @@ export default class NewClass extends cc.Component {
     }
 
     loadGame() {
-        // while (true) {
-        //     GameCfg.data[0].data.forEach((el, index) => {
-        //         if ((el.day).replace(/-/g, '') == this.infoData.kTo) {
-        //             GameCfg.huizhidatas = index + 1;
-        //         }
 
-        //         if ((el.day).replace(/-/g, '') == this.infoData.kFrom) {
-        //             GameData.huizhidatas = index + 1;
-        //         }
-        //     })
-        // }
         GameData.huizhidatas = this.infoData.kStartup + 1;
         GameCfg.huizhidatas = this.infoData.kStop + 1;
-        if (GameData.huizhidatas && GameCfg.huizhidatas) {
+        if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+            GlobalEvent.emit(EventCfg.OPENTJDGAME);
+        }
+        else if (GameData.huizhidatas && GameCfg.huizhidatas) {
             GlobalEvent.emit('LOADGAME');
         }
     }

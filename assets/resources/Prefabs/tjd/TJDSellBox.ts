@@ -42,7 +42,7 @@ export default class NewClass extends cc.Component {
 
         this.callBack = call;
 
-        if (!slg) {
+        if (!slg.count) {
             this.xgcl.active = false;
             this.bccl.active = true;
             this.editBox.string = data[GameCfg.huizhidatas - 1].close;

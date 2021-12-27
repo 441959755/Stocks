@@ -71,6 +71,10 @@ export default class NewClass extends cc.Component {
             this.content1.node.active = false;
         }
 
+        else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+            this.lockPrice = Math.abs(GameCfgText.gameConf.tjdxl.unlock[0].v);
+        }
+
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             this.content2.string = '您尚未解锁“指标训练”所有指标的训练权限，' + this.lockPrice + '钻石可解锁30天免费不限次数训练（VIP用户可以直接解锁）';
         }
@@ -134,6 +138,7 @@ export default class NewClass extends cc.Component {
                     console.log('解锁' + JSON.stringify(res));
                     this.node.active = false;
                     GlobalEvent.emit(EventCfg.GMAECOUNTERSCHANGE);
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '解锁成功');
                 });
             }
             else {

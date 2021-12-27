@@ -140,7 +140,7 @@ export default class NewClass extends cc.Component {
                 }
             }
 
-            GlobalHandle.onCmdGameOverReq(CmdGameOver);
+            GlobalHandle.onCmdGameOverReq(CmdGameOver, null);
         }
     }
 

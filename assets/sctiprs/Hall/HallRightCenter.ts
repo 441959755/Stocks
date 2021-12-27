@@ -1,4 +1,5 @@
 import { pb } from "../../protos/proto";
+import LLWConfig from "../common/config/LLWConfig";
 import GameData from "../GameData";
 import GameCfgText from "../GameText";
 import GlobalHandle from "../global/GlobalHandle";
@@ -138,11 +139,15 @@ export default class NewClass extends cc.Component {
                 let curTime = new Date().getTime() / 1000;
                 if (curTime < el.to && curTime >= el.from) {
 
-                    let iconUrl = 'http://www.cgdr168.com/img/activity/cgds_icon.png';
+                    let iconUrl = LLWConfig.LOADIMGURL + 'img/activity/cgds_icon.png';
                     LoadUtils.load(iconUrl, (sp) => {
                         if (sp) {
                             this.cgdsBtn.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(sp);
                             this.cgdsBtn.active = true;
+                        }
+                        else {
+                            this.cgdsBtn.active = false;
+                            flag = false;
                         }
                     })
                     flag = true;
@@ -164,11 +169,15 @@ export default class NewClass extends cc.Component {
                 let curTime = new Date().getTime() / 1000;
                 if (curTime < el.to && curTime >= el.from) {
 
-                    let iconUrl = 'http://www.cgdr168.com/img/activity/cgs_icon.png';
+                    let iconUrl = LLWConfig.LOADIMGURL + 'img/activity/cgs_icon.png';
                     LoadUtils.load(iconUrl, (sp) => {
                         if (sp) {
                             this.cgsBtn.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(sp);
                             this.cgsBtn.active = true;
+                        }
+                        else {
+                            this.cgsBtn.active = false;
+                            flag = false;
                         }
                     })
                     flag = true;
@@ -197,12 +206,16 @@ export default class NewClass extends cc.Component {
                 }
                 else if (curTime < el.to && curTime >= el.from) {
 
-                    let iconUrl = 'http://www.cgdr168.com/img/activity/' + el.id + '_icon.png';
+                    let iconUrl = LLWConfig.LOADIMGURL + 'img/activity/' + el.id + '_icon.png';
 
                     LoadUtils.load(iconUrl, (sp) => {
                         if (sp) {
                             this.otherBtn.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(sp);
                             this.otherBtn.active = true;
+                        }
+                        else {
+                            this.otherBtn.active = false;
+                            flag = false;
                         }
                     })
                     flag = true;
@@ -260,6 +273,15 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'main_banner_viptyk') {
             PopupManager.open7DayVIP();
+        }
+
+        else if (name == 'main_banner_cgs') {
+            PopupManager.openCgsNotice();
+        }
+
+        else if (name == 'main_banner_other') {
+            PopupManager.openactiveTheme();
+
         }
     }
 

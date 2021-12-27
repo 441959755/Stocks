@@ -1,5 +1,6 @@
-   import { pb } from "../../../protos/proto";
+import { pb } from "../../../protos/proto";
 import GameCfg from "../../../sctiprs/game/GameCfg";
+import GameData from "../../../sctiprs/GameData";
 import UpGameOpt from "../../../sctiprs/global/UpGameOpt";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -83,7 +84,7 @@ export default class NewClass extends cc.Component {
     onShowGameFuPan() {
         this.ingNode.active = false;
         this.fupanNode.active = true;
-        this.fupanNode.getComponent('TJDFUPAN').onShow(this.allRate);
+        this.fupanNode.getComponent('TJDFUPAN').onShow(this.allRate || 0.00);
     }
 
     onLoad() {
@@ -91,17 +92,24 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-
-
         this.autoCallback && (clearInterval(this.autoCallback));
         this.autoCallback = null;
         GameCfg.fill = [];
         this.buydata = [];
         this.stopdata = [];
         this.selldata = [];
-        this.buySlg = null;
-        this.sellSlg = null;
-        this.stopSlg = null;
+        this.buySlg = {
+            price: 0,
+            count: 0,
+        };
+        this.sellSlg = {
+            price: 0,
+            count: 0,
+        };
+        this.stopSlg = {
+            price: 0,
+            count: 0,
+        };
         this.zongzhichan = 100000;
         this.keyongzhichan = 100000;
         this.junjia = 0;
@@ -110,13 +118,15 @@ export default class NewClass extends cc.Component {
 
         this.viweData = GameCfg.data[0].data;
 
-        GameCfg.GAMEFUPAN = false;
         this.rateItem = null;
         this.finalNode.active = false;
         this.fupanNode.active = false;
 
         if (GameCfg.GAMEFUPAN) {
             this.onShowGameFuPan();
+
+            let opt = UpGameOpt.player1Opt;
+            this.onGameFUPANOPT(opt);
             return;
         }
 
@@ -169,7 +179,6 @@ export default class NewClass extends cc.Component {
                     this.finalNode.getComponent('TJDFInalLayer').onShow(all, this.zongzhichan);
                 })
             }
-
         }
 
         else if (name == 'xl_btn_mairu') {
@@ -234,6 +243,8 @@ export default class NewClass extends cc.Component {
             this.klabels[2].string = this.viweData[GameCfg.huizhidatas - 1].high;
             this.klabels[3].string = this.viweData[GameCfg.huizhidatas - 1].low;
 
+            if (!this.junjia) this.junjia = 0.00;
+
             this.klabels[4].string = this.junjia.toFixed(2) + '';
             this.klabels[5].string = this.chigushuliang + '';
             this.klabels[6].string = this.zongzhichan + '';
@@ -249,166 +260,214 @@ export default class NewClass extends cc.Component {
         let data = this.viweData;
     }
 
+    AskOpt() {
+
+        GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
+
+        this.buydata.push(this.buySlg);
+
+        let sign = 1;
+        let rate = 0;
+
+        if (this.onjunjia() > this.viweData[GameCfg.huizhidatas].close) {
+            rate = -1;
+        }
+        else {
+            rate = 1;
+        }
+
+        let start = GameCfg.huizhidatas;
+
+        this.rateItem = {
+            rate: rate,
+            start: start,
+            end: null,
+            state: sign,
+        };
+
+        if (GameCfg.fill.length > 0 && GameCfg.fill[GameCfg.fill.length - 1].end) {
+            GameCfg.fill.push(this.rateItem);
+        } else if (GameCfg.fill.length == 0) {
+            GameCfg.fill.push(this.rateItem);
+        } else {
+            GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
+        }
+        GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
+
+        this.chigushuliang += this.buySlg.count;
+
+        this.keyongzhichan = this.keyongzhichan - this.buySlg.price * this.buySlg.count;
+
+        this.buySlg = {
+            price: 0,
+            count: 0,
+        };
+        this.sellSlg = {
+            price: 0,
+            count: 0,
+        };
+        this.stopSlg = {
+            price: 0,
+            count: 0,
+        };
+    }
+
+    BidOpt() {
+        GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
+        let rate = 0;
+
+        rate = this.onCurPositionRete();
+
+        if (!GameCfg.fill[GameCfg.fill.length - 1].end) {
+            this.rateItem.end = GameCfg.huizhidatas - 1;
+            GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
+            GameCfg.fill[GameCfg.fill.length - 1].end = this.rateItem.end;
+        }
+        else {
+
+            let start = GameCfg.huizhidatas;
+
+            this.rateItem = {
+                rate: rate,
+                start: start,
+                end: null,
+                state: false,
+            };
+            GameCfg.fill.push(this.rateItem);
+        }
+
+        this.selldata.push(this.sellSlg);
+        this.chigushuliang -= this.sellSlg.count;
+
+        if (this.chigushuliang > 0) {
+            this.rateItem = {
+                rate: 0,
+                start: GameCfg.huizhidatas,
+                end: null,
+                state: 1,
+            };
+            GameCfg.fill.push(this.rateItem);
+        }
+
+        this.keyongzhichan = this.keyongzhichan + this.sellSlg.price * this.sellSlg.count;
+        GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
+        this.buySlg = {
+            price: 0,
+            count: 0,
+        };
+        this.sellSlg = {
+            price: 0,
+            count: 0,
+        };
+        this.stopSlg = {
+            price: 0,
+            count: 0,
+        };
+    }
+
+    StopOpt() {
+        GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
+        let rate = 0;
+
+        rate = this.onCurPositionRete();
+
+        if (this.chigushuliang == 0) {
+            this.rateItem.end = GameCfg.huizhidatas - 1;
+            GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
+            GameCfg.fill[GameCfg.fill.length - 1].end = this.rateItem.end;
+        }
+        else {
+            this.rateItem.end = GameCfg.huizhidatas - 1;
+            GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
+            GameCfg.fill[GameCfg.fill.length - 1].end = this.rateItem.end;
+
+            let start = GameCfg.huizhidatas;
+            this.rateItem = {
+                rate: rate,
+                start: start,
+                end: null,
+                state: false,
+            };
+            GameCfg.fill.push(this.rateItem);
+        }
+
+        this.stopdata.push(this.stopSlg);
+        this.chigushuliang -= this.stopSlg.count;
+        this.keyongzhichan += (this.stopSlg.price * this.stopSlg.count);
+        GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
+        this.buySlg = {
+            price: 0,
+            count: 0,
+        };
+        this.sellSlg = {
+            price: 0,
+            count: 0,
+        };
+        this.stopSlg = {
+            price: 0,
+            count: 0,
+        };
+    }
+
     //自动执行
     setAutoExecute() {
 
         this.autoCallback = setInterval(() => {
 
             let type = 0;
-            if (this.buySlg && this.keyongzhichan >= this.buySlg.price * this.buySlg.count && (this.buySlg.price >= this.viweData[GameCfg.huizhidatas].low || this.buySlg.price <= this.viweData[GameCfg.huizhidatas].high)) {
 
-                GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
-
+            if (this.buySlg && this.keyongzhichan >= this.buySlg.price * this.buySlg.count && (this.buySlg.price >= this.viweData[GameCfg.huizhidatas].low && this.buySlg.price <= this.viweData[GameCfg.huizhidatas].high)) {
                 let item = {
                     opId: pb.GameOperationId.Ask,
-                    volume: 1,
+                    volume: this.buySlg.count,
                     kOffset: GameCfg.huizhidatas,
                 }
 
                 UpGameOpt.addOpt(item);
-
                 type = 1;
-                this.buydata.push(this.buySlg);
+                this.AskOpt();
 
-                let sign = 1;
-                let rate = 0;
-
-                if (this.onjunjia() > this.viweData[GameCfg.huizhidatas].close) {
-                    rate = -1;
-                }
-                else {
-                    rate = 1;
-                }
-
-                let start = GameCfg.huizhidatas;
-
-                this.rateItem = {
-                    rate: rate,
-                    start: start,
-                    end: null,
-                    state: sign,
-                };
-
-                if (GameCfg.fill.length > 0 && GameCfg.fill[GameCfg.fill.length - 1].end) {
-                    GameCfg.fill.push(this.rateItem);
-                } else if (GameCfg.fill.length == 0) {
-                    GameCfg.fill.push(this.rateItem);
-                } else {
-                    GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
-                }
-                GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
-
-                this.chigushuliang += this.buySlg.count;
-
-                this.keyongzhichan = this.keyongzhichan - this.buySlg.price * this.buySlg.count;
-
-                this.buySlg = null;
-                this.sellSlg = null;
-                this.stopSlg = null;
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '条件单买入成功');
 
             }
 
-            else if (this.sellSlg && this.chigushuliang >= this.sellSlg.count && (this.sellSlg.price >= this.viweData[GameCfg.huizhidatas].low || this.sellSlg.price <= this.viweData[GameCfg.huizhidatas].high)) {
-
-                GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
+            else if (this.sellSlg && this.chigushuliang >= this.sellSlg.count && (this.sellSlg.price >= this.viweData[GameCfg.huizhidatas].low && this.sellSlg.price <= this.viweData[GameCfg.huizhidatas].high)) {
 
                 let item = {
                     opId: pb.GameOperationId.Bid,
-                    volume: 1,
+                    volume: this.sellSlg.count,
                     kOffset: GameCfg.huizhidatas,
 
                 }
                 UpGameOpt.addOpt(item);
 
                 type = 2;
-                let rate = 0;
-
-                rate = this.onCurPositionRete();
-
-                if (!GameCfg.fill[GameCfg.fill.length - 1].end) {
-                    this.rateItem.end = GameCfg.huizhidatas - 1;
-                    GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
-                    GameCfg.fill[GameCfg.fill.length - 1].end = this.rateItem.end;
-                }
-                else {
-
-                    let start = GameCfg.huizhidatas;
-
-                    this.rateItem = {
-                        rate: rate,
-                        start: start,
-                        end: null,
-                        state: false,
-                    };
-                    GameCfg.fill.push(this.rateItem);
-                }
-
-                this.selldata.push(this.sellSlg);
-                this.chigushuliang -= this.sellSlg.count;
-                this.keyongzhichan = this.keyongzhichan + this.sellSlg.price * this.sellSlg.count;
-                GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
-                this.buySlg = null;
-                this.sellSlg = null;
-                this.stopSlg = null;
+                this.BidOpt();
 
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '条件单买出成功');
             }
 
-            else if (this.stopSlg && this.chigushuliang >= this.stopSlg.count && (this.stopSlg.price >= this.viweData[GameCfg.huizhidatas].low || this.stopSlg.price <= this.viweData[GameCfg.huizhidatas].high)) {
-
-                GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
-
+            else if (this.stopSlg && this.chigushuliang >= this.stopSlg.count && (this.stopSlg.price >= this.viweData[GameCfg.huizhidatas].low && this.stopSlg.price <= this.viweData[GameCfg.huizhidatas].high)) {
                 let item = {
                     opId: pb.GameOperationId.Bid,
-                    volume: 1,
+                    volume: this.sellSlg.count,
                     kOffset: GameCfg.huizhidatas,
                 }
                 UpGameOpt.addOpt(item);
 
                 type = 3;
-                let rate = 0;
-
-                rate = this.onCurPositionRete();
-
-                if (this.chigushuliang == 0) {
-                    this.rateItem.end = GameCfg.huizhidatas - 1;
-                    GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
-                    GameCfg.fill[GameCfg.fill.length - 1].end = this.rateItem.end;
-                }
-                else {
-                    this.rateItem.end = GameCfg.huizhidatas - 1;
-                    GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
-                    GameCfg.fill[GameCfg.fill.length - 1].end = this.rateItem.end;
-
-                    let start = GameCfg.huizhidatas;
-                    this.rateItem = {
-                        rate: rate,
-                        start: start,
-                        end: null,
-                        state: false,
-                    };
-                    GameCfg.fill.push(this.rateItem);
-                }
-
-                this.stopdata.push(this.stopSlg);
-                this.chigushuliang -= this.stopSlg.count;
-                this.keyongzhichan += (this.stopSlg.price * this.stopSlg.count);
-                GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
-
-                this.buySlg = null;
-                this.sellSlg = null;
-                this.stopSlg = null;
-
+                this.StopOpt();
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '条件单止损成功');
             }
+
             else {
 
                 let rate = this.onCurPositionRete();
+                if (GameCfg.fill[GameCfg.fill.length - 1]) {
+                    GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
 
-                GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
-
-                GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
+                    GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
+                }
             }
 
             let curClose = parseFloat(this.viweData[GameCfg.huizhidatas - 1].close);
@@ -432,7 +491,6 @@ export default class NewClass extends cc.Component {
                     this.autoCallback = null;
                     this.zxNode[1].active = false;
                 }
-
             }
             //结束
             else {
@@ -444,10 +502,11 @@ export default class NewClass extends cc.Component {
 
                     let item = {
                         opId: pb.GameOperationId.Bid,
-                        volume: 1,
+                        volume: this.chigushuliang,
                         kOffset: GameCfg.huizhidatas,
                     }
                     UpGameOpt.addOpt(item);
+
                     let rate = this.onCurPositionRete1();
                     if (!GameCfg.fill[GameCfg.fill.length - 1].end) {
 
@@ -477,6 +536,11 @@ export default class NewClass extends cc.Component {
     }
 
     onjunjia() {
+
+        if (!this.buySlg) {
+            this.junjia = 0;
+            return this.junjia;
+        }
 
         if (!this.junjia) {
             this.junjia = this.buySlg.price;
@@ -537,5 +601,27 @@ export default class NewClass extends cc.Component {
         let rate = (curClose - preClose) / preClose * 100;
 
         return rate;
+    }
+
+    onGameFUPANOPT(opt) {
+        if (!opt) {
+            return;
+        }
+
+        opt.forEach((el, index) => {
+
+            GameCfg.huizhidatas = el.kOffset;
+            if (el.opId == pb.GameOperationId.Ask || el.opId == 'Ask') {
+                this.buySlg.count = el.volume;
+                this.AskOpt();
+            }
+
+            else if (el.opId == pb.GameOperationId.Bid || el.opId == 'Bid') {
+                this.sellSlg.count = el.volume;
+                this.BidOpt();
+            }
+        })
+
+        GameCfg.huizhidatas = this.viweData.length;
     }
 }

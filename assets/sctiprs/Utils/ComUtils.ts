@@ -358,7 +358,7 @@ export default class ComUtils {
 			name = 0;
 		}
 
-		let url = LLWConfig.LOADHEADURL + name + '.png';
+		let url = LLWConfig.LOADIMGURL + 'icon/' + name + '.png';
 
 		LoadUtils.load(url, (res) => {
 			call && call(res);
@@ -542,7 +542,7 @@ export default class ComUtils {
 		}
 	}
 
-	public static resetSize(cav){
+	public static resetSize(cav) {
 		//cc.view.setDesignResolutionSize(1280,720, cc.ResolutionPolicy.EXACT_FIT );
 		let frameSize = cc.view.getFrameSize();
 		let designSize = cc.view.getDesignResolutionSize();

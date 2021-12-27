@@ -42,15 +42,20 @@ export default class NewClass extends cc.Component {
             return;
         }
         else {
-            let bgurl = 'http://www.cgdr168.com/img/activity/' + this.itemData.id + '_bg.png';
-            let btnUrl = 'http://www.cgdr168.com/img/activity/' + this.itemData.id + '_btn.png';
+            let bgurl = LLWConfig.LOADIMGURL + '/img/activity/' + this.itemData.id + '_bg.png';
+            let btnUrl = LLWConfig.LOADIMGURL + '/img/activity/' + this.itemData.id + '_btn.png';
 
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
             LoadUtils.load(bgurl, (sp) => {
+
                 this.bgSp = new cc.SpriteFrame(sp);
                 if (this.bgSp && this.btnSp) {
                     this.onShow();
+                }
+                else {
+                    this.node.active = false;
+                    return;
                 }
 
             })
@@ -60,6 +65,10 @@ export default class NewClass extends cc.Component {
                 if (this.bgSp && this.btnSp) {
                     this.onShow();
                 }
+                else {
+                    this.node.active = false;
+                    return;
+                }
             })
         }
     }
@@ -67,7 +76,14 @@ export default class NewClass extends cc.Component {
     onShow() {
         this.bg.spriteFrame = this.bgSp;
         this.btn.spriteFrame = this.btnSp;
-        //this.tips.string = GameCfgText.appConf.pop[2].text;
+        // let from = moment.unix(this.itemData.from).utc();
+        // let to = moment.unix(this.itemData.to).utc();
+        let from = new Date(this.itemData.from * 1000);
+        let to = new Date(this.itemData.to * 1000);
+        let fromTime = from.getFullYear() + '年' + (from.getMonth() + 1) + '月' + from.getDate() + '日';
+        let toTime = to.getFullYear() + '年' + (to.getMonth() + 1) + '月' + to.getDate() + '日';
+
+        this.tips.string = fromTime + ' -- ' + toTime;
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
     }
 
