@@ -76,8 +76,6 @@ export default class GameData {
         return this._brick;
     }
 
-    //  public static maxExp = null;
-
     //性别
     public static _gender = null;
 

@@ -123,10 +123,11 @@ export default class NewClass extends cc.Component {
         this.fupanNode.active = false;
 
         if (GameCfg.GAMEFUPAN) {
-            this.onShowGameFuPan();
 
             let opt = UpGameOpt.player1Opt;
             this.onGameFUPANOPT(opt);
+
+            this.onShowGameFuPan();
             return;
         }
 
@@ -416,11 +417,12 @@ export default class NewClass extends cc.Component {
 
             let type = 0;
 
-            if (this.buySlg && this.keyongzhichan >= this.buySlg.price * this.buySlg.count && (this.buySlg.price >= this.viweData[GameCfg.huizhidatas].low && this.buySlg.price <= this.viweData[GameCfg.huizhidatas].high)) {
+            if (this.buySlg && this.keyongzhichan >= this.buySlg.price * this.buySlg.count && (this.buySlg.price >= this.viweData[GameCfg.huizhidatas - 1].low && this.buySlg.price <= this.viweData[GameCfg.huizhidatas - 1].high)) {
                 let item = {
                     opId: pb.GameOperationId.Ask,
                     volume: this.buySlg.count,
                     kOffset: GameCfg.huizhidatas,
+                    price: this.buySlg.price,
                 }
 
                 UpGameOpt.addOpt(item);
@@ -431,14 +433,15 @@ export default class NewClass extends cc.Component {
 
             }
 
-            else if (this.sellSlg && this.chigushuliang >= this.sellSlg.count && (this.sellSlg.price >= this.viweData[GameCfg.huizhidatas].low && this.sellSlg.price <= this.viweData[GameCfg.huizhidatas].high)) {
+            else if (this.sellSlg && this.chigushuliang >= this.sellSlg.count && (this.sellSlg.price >= this.viweData[GameCfg.huizhidatas - 1].low && this.sellSlg.price <= this.viweData[GameCfg.huizhidatas - 1].high)) {
 
                 let item = {
                     opId: pb.GameOperationId.Bid,
                     volume: this.sellSlg.count,
                     kOffset: GameCfg.huizhidatas,
-
+                    price: this.sellSlg.price,
                 }
+
                 UpGameOpt.addOpt(item);
 
                 type = 2;
@@ -447,11 +450,12 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '条件单买出成功');
             }
 
-            else if (this.stopSlg && this.chigushuliang >= this.stopSlg.count && (this.stopSlg.price >= this.viweData[GameCfg.huizhidatas].low && this.stopSlg.price <= this.viweData[GameCfg.huizhidatas].high)) {
+            else if (this.stopSlg && this.chigushuliang >= this.stopSlg.count && (this.stopSlg.price >= this.viweData[GameCfg.huizhidatas - 1].low && this.stopSlg.price <= this.viweData[GameCfg.huizhidatas - 1].high)) {
                 let item = {
                     opId: pb.GameOperationId.Bid,
                     volume: this.sellSlg.count,
                     kOffset: GameCfg.huizhidatas,
+                    price: this.viweData[GameCfg.huizhidatas].close,
                 }
                 UpGameOpt.addOpt(item);
 
@@ -473,13 +477,11 @@ export default class NewClass extends cc.Component {
             let curClose = parseFloat(this.viweData[GameCfg.huizhidatas - 1].close);
             this.zongzhichan = parseInt(this.chigushuliang * curClose + this.keyongzhichan + '');
 
-
             if (this.chigushuliang > 0) {
                 this.mcNode[1].active = false;
                 this.zsNode[1].active = false;
             }
 
-            //
             if (this.huiheshu > 0) {
                 this.huiheshu -= 1;
                 this.setLabelData();
@@ -604,6 +606,7 @@ export default class NewClass extends cc.Component {
     }
 
     onGameFUPANOPT(opt) {
+
         if (!opt) {
             return;
         }
@@ -613,15 +616,22 @@ export default class NewClass extends cc.Component {
             GameCfg.huizhidatas = el.kOffset;
             if (el.opId == pb.GameOperationId.Ask || el.opId == 'Ask') {
                 this.buySlg.count = el.volume;
+                this.buySlg.price = el.price;
                 this.AskOpt();
             }
 
             else if (el.opId == pb.GameOperationId.Bid || el.opId == 'Bid') {
                 this.sellSlg.count = el.volume;
+                this.sellSlg.price = el.price;
                 this.BidOpt();
             }
         })
 
         GameCfg.huizhidatas = this.viweData.length;
+        GlobalEvent.emit('roundNUmber');
+
+        let all = ((this.zongzhichan - 100000) / 100000 * 100).toFixed(2);
+        this.allRate = all;
+        this.finalNode.getComponent('TJDFInalLayer').onShow(all, this.zongzhichan);
     }
 }

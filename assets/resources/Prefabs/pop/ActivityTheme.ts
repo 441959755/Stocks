@@ -48,27 +48,26 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
             LoadUtils.load(bgurl, (sp) => {
-
+                if (!sp) {
+                    this.node.active = false;
+                    return;
+                }
                 this.bgSp = new cc.SpriteFrame(sp);
                 if (this.bgSp && this.btnSp) {
                     this.onShow();
                 }
-                else {
-                    this.node.active = false;
-                    return;
-                }
-
             })
 
             LoadUtils.load(btnUrl, (sp) => {
+                if (!sp) {
+                    this.node.active = false;
+                    return;
+                }
                 this.btnSp = new cc.SpriteFrame(sp);
                 if (this.bgSp && this.btnSp) {
                     this.onShow();
                 }
-                else {
-                    this.node.active = false;
-                    return;
-                }
+
             })
         }
     }
@@ -76,8 +75,6 @@ export default class NewClass extends cc.Component {
     onShow() {
         this.bg.spriteFrame = this.bgSp;
         this.btn.spriteFrame = this.btnSp;
-        // let from = moment.unix(this.itemData.from).utc();
-        // let to = moment.unix(this.itemData.to).utc();
         let from = new Date(this.itemData.from * 1000);
         let to = new Date(this.itemData.to * 1000);
         let fromTime = from.getFullYear() + '年' + (from.getMonth() + 1) + '月' + from.getDate() + '日';
@@ -95,8 +92,6 @@ export default class NewClass extends cc.Component {
                 this.node.active = false;
                 break;
             case 'btnActive':
-                //this.node.active = false;
-                //  GlobalEvent.emit(EventCfg.OPENCGDS);
                 this.shopVip(this.itemData.id);
                 break;
             default:

@@ -26,11 +26,12 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     eTimeLa: cc.Label = null;
 
-
     onShow(rate) {
 
         let gpData = GameCfg.data[0].data;
         this.zLabel.string = rate + '%';
+        this.setLabelColor(this.zLabel, rate);
+
         this.nameLa.string = GameCfg.data[0].name;
 
         let tqzf = ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100).toFixed(2);
@@ -39,5 +40,17 @@ export default class NewClass extends cc.Component {
         this.sTimeLa.string = ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day);
         this.eTimeLa.string = ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
 
+    }
+
+    setLabelColor(label, rate) {
+        if (rate > 0) {
+            label.node.color = new cc.Color().fromHEX('#e94343');
+        }
+        else if (rate == 0) {
+            label.node.color = cc.Color.WHITE;
+        }
+        else {
+            label.node.color = new cc.Color().fromHEX('#31a633');
+        }
     }
 }

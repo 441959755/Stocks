@@ -15,7 +15,7 @@ export default class NewClass extends cc.Component {
 
     start() {
 
-        if(!GameCfgText.adConf){
+        if (!GameCfgText.adConf) {
             return;
         }
 

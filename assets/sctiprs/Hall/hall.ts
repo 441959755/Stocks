@@ -15,37 +15,12 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
-    helpLayer: cc.Node = null;
-
-    playerInfoLayer: cc.Node = null;
 
     broadcast: cc.Node = null; //广播
 
     InviteBox: cc.Node = null;
 
-    rewardCenterNode: cc.Node = null;
-
-    noticeLayer: cc.Node = null;  //公告
-
-    friendLayer: cc.Node = null;   //好友
-
-    taskLayer: cc.Node = null;  //任务
-
-    friendInvite: cc.Node = null;  //邀请好友
-
-    rankingList: cc.Node = null;  //排行榜
-
     sysBroadcast: cc.Node = null;  //xt
-
-    otherHis: cc.Node = null;
-
-    shopLayer: cc.Node = null;  //商城
-
-    unlockBox: cc.Node = null;  //解锁框
-
-    weeklyHaoLi: cc.Node = null;   //每周豪礼
-
-    signIn: cc.Node = null;        //7天奖励
 
     @property(cc.Node)
     rightbg: cc.Node = null;
@@ -153,7 +128,6 @@ export default class NewClass extends cc.Component {
             }
         }
 
-
         //房间已解散  ,给出提示
         if (GameData.RoomType && !GameData.roomId) {
             GameData.RoomType = 0;
@@ -175,8 +149,6 @@ export default class NewClass extends cc.Component {
     }
 
     onShow() {
-
-
         if (GameData.firstGame) {
             GameData.firstGame = false;
             this.showFirstBox();
@@ -200,21 +172,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('OPENUNLOCKBOX');
         GlobalEvent.off('OPENWEEKLYHAOLI');
         GlobalEvent.off('OPENSIGNIN');
-
-        LoadUtils.releaseRes('Prefabs/broadcast');
-        LoadUtils.releaseRes('Prefabs/playeInfo/playerInfoLayer');
-        LoadUtils.releaseRes('Prefabs/helpLayer');
-        LoadUtils.releaseRes('Prefabs/inviteBox');
-        LoadUtils.releaseRes('Prefabs/RewardCenter/rewardCenter');
-        LoadUtils.releaseRes('Prefabs/otherPlayerHisInfo');
-        LoadUtils.releaseRes('Prefabs/friendLayer');
-        LoadUtils.releaseRes('Prefabs/friendInvite');
-        LoadUtils.releaseRes('Prefabs/game/gameLayer');
-        LoadUtils.releaseRes('Prefabs/sysBroadcast');
-        LoadUtils.releaseRes('Prefabs/shop/shop');
-        LoadUtils.releaseRes('Prefabs/fl/weeklyHaoLI');
-        LoadUtils.releaseRes('Prefabs/fl/signIn');
-        LoadUtils.releaseRes(this.url);
         ComUtils.onDestory();
         PopupManager.delPopupNode();
         GameData.selfEnterRoomData = null;
@@ -222,129 +179,77 @@ export default class NewClass extends cc.Component {
 
     //打开解锁框
     openUnlockBox(falg) {
-        this.openNode(this.unlockBox, 'Prefabs/unlockBox', 22, (node) => {
-            this.unlockBox = node;
-            this.unlockBox.getComponent('UnlockBox').oninit(falg);
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+        PopupManager.openNode(this.node, null, 'Prefabs/unlockBox', 22, (node) => {
+            node.getComponent('UnlockBox').oninit(falg);
         });
     }
 
     //首次登入弹框
     showFirstBox() {
         return;
-        this.openNode(this.firstBox, 'Prefabs/pop/firstBox', 99, (node) => {
-            this.firstBox = node;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        });
+        // this.openNode(this.firstBox, 'Prefabs/pop/firstBox', 99, (node) => {
+        //     this.firstBox = node;
+        //     GlobalEvent.emit(EventCfg.LOADINGHIDE);
+        // });
     }
 
     onShowGobroke() {
-        this.openNode(this.gobrokeBox, 'Prefabs/pop/gobrokeBox', 48, (node) => {
-            this.gobrokeBox = node;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/pop/gobrokeBox', 48, null);
     }
 
     //打开商城
     openShopLayer(type) {
-        this.openNode(this.shopLayer, 'Prefabs/shop/shop', 88, (node) => {
-            this.shopLayer = node;
-            if (type) {
-                this.shopLayer.getComponent('ShopControl').onShow(type);
-            }
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/shop/shop', 88, (node) => {
+            type && (node.getComponent('ShopControl').onShow(type));
+        })
     }
 
     openRankingList() {
-        this.openNode(this.rankingList, 'Prefabs/rankingList', 10, (node) => {
-            this.rankingList = node;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/rankingList', 10, null);
     }
 
     openFriendInvite() {
-        this.openNode(this.friendInvite, 'Prefabs/friendInvite', 11, (node) => {
-            this.friendInvite = node;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/friendInvite', 11, null);
     }
 
     //打开公告
     openNoticelayer() {
-        this.openNode(this.noticeLayer, 'Prefabs/noticeLayer', 10, (node) => {
-            this.noticeLayer = node;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/noticeLayer', 10, null);
     }
 
     openWeeklyHaoLi() {
-        this.openNode(this.weeklyHaoLi, 'Prefabs/fl/weeklyHaoLI', 10, (node) => {
-            this.weeklyHaoLi = node;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        })
+        PopupManager.openNode(this.node, null, 'Prefabs/fl/weeklyHaoLI', 10, null);
     }
 
     openSignIn() {
-        this.openNode(this.signIn, 'Prefabs/fl/signIn', 10, (node) => {
-            this.signIn = node;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        })
+        PopupManager.openNode(this.node, null, 'Prefabs/fl/signIn', 10, null);
     }
 
     //好友
     openFriendLayer() {
-        this.openNode(this.friendLayer, 'Prefabs/friendLayer', 10, (node) => {
-            this.friendLayer = node;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/friendLayer', 10, null);
     }
 
     openTaskLayer() {
-        this.openNode(this.taskLayer, 'Prefabs/taskLayer', 10, (node) => {
-            this.taskLayer = node;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/taskLayer', 10, null);
     }
 
     openOtherHisLayer(data) {
-        this.openNode(this.otherHis, 'Prefabs/otherPlayerHisInfo', 12, (node) => {
-            this.otherHis = node;
-            this.otherHis.getComponent('OtherPlayerHisInfo').playeInfo = data;
-            this.otherHis.getComponent('OtherPlayerHisInfo').onShow();
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/otherPlayerHisInfo', 12, (node) => {
+            node.getComponent('OtherPlayerHisInfo').playeInfo = data;
+            node.getComponent('OtherPlayerHisInfo').onShow();
+        })
     }
 
 
     //打开个人中心
     openPlayerInfoLayer() {
-        if (!this.playerInfoLayer) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/playeInfo/playerInfoLayer', pre => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.playerInfoLayer = cc.instantiate(pre);
-                this.rightbg.addChild(this.playerInfoLayer);
-                this.playerInfoLayer.active = true;
-            })
-        } else {
-            this.playerInfoLayer.active = true;
-        }
+        PopupManager.openNode(this.rightbg, null, 'Prefabs/playeInfo/playerInfoLayer', 5, null);
     }
 
     //帮组
     openHelpLayer() {
-        if (!this.helpLayer) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/helpLayer', pre => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.helpLayer = cc.instantiate(pre);
-                this.node.addChild(this.helpLayer, 30);
-                this.helpLayer.active = true;
-            })
-        } else {
-            this.helpLayer.active = true;
-        }
+        PopupManager.openNode(this.node, null, 'Prefabs/helpLayer', 30, null);
     }
 
     //离开房间
@@ -378,61 +283,43 @@ export default class NewClass extends cc.Component {
         if (data.type == pb.MessageType.RoomInvite && (!this.gameLayer || !this.gameLayer.active) && !this.Matchfalg) {
 
             if (arr[3] != 0) {
-                if (!this.broadcast) {
-                    GlobalEvent.emit(EventCfg.LOADINGSHOW);
-                    LoadUtils.loadRes('Prefabs/broadcast', pre => {
-                        GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                        this.broadcast = cc.instantiate(pre);
-                        this.node.addChild(this.broadcast, 98);
-                        let handle = this.broadcast.getComponent('Broadcast');
-                        handle.onShow(data);
-                    })
-                } else {
-                    this.broadcast.active = true;
+                PopupManager.openNode(this.node, this.broadcast, 'Prefabs/broadcast', 98, (node) => {
+                    this.broadcast = node;
                     let handle = this.broadcast.getComponent('Broadcast');
                     handle.onShow(data);
-                }
+                })
             } else {
                 this.onShowInviteBox(data);
             }
         } else if (data.type == pb.MessageType.SystemNotice) {
             GameData.SysBroadcastList.push(data.text);
-            this.openNode(this.sysBroadcast, 'Prefabs/sysBroadcast', 99, (node) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            PopupManager.openNode(this.node, this.sysBroadcast, 'Prefabs/sysBroadcast', 99, (node) => {
                 this.sysBroadcast = node;
-                this.sysBroadcast.active = true;
                 this.sysBroadcast.getComponent('SysBroadcast').onShowSysBroadcast(data.text);
-            });
+            })
         }
     }
 
     //邀请框
     onShowInviteBox(data) {
-        if (!this.InviteBox) {
-            LoadUtils.loadRes('Prefabs/inviteBox', (res) => {
-                this.InviteBox = cc.instantiate(res);
-                this.node.addChild(this.InviteBox, 98);
-                let headle = this.InviteBox.getComponent('InviteBox');
-                headle.onInviteShow(data);
-            })
-        } else {
 
-            this.InviteBox.active = true;
-
+        PopupManager.openNode(this.node, this.InviteBox, 'Prefabs/inviteBox', 98, (node) => {
+            this.InviteBox = node;
             let headle = this.InviteBox.getComponent('InviteBox');
             headle.onInviteShow(data);
-        }
+        })
     }
+
 
     //加载游戏进入
     onLoadGame() {
         this.broadcast && (this.broadcast.active = false);
         this.InviteBox && (this.InviteBox.active = false);
-        //游戏结算
-        this.openNode(this.gameLayer, 'Prefabs/game/gameLayer', 50, (node) => {
+
+        PopupManager.openNode(this.node, this.gameLayer, 'Prefabs/game/gameLayer', 50, (node) => {
             this.gameLayer = node;
             this.onLoadFinalLayer();
-        });
+        })
     }
 
     //加载结算页
@@ -462,10 +349,9 @@ export default class NewClass extends cc.Component {
             this.index = 4;
         }
 
-        this.openNode(this.finalLayer[this.index], this.url, 51, (node) => {
+        PopupManager.openNode(this.node, this.finalLayer[this.index], this.url, 51, (node) => {
             this.finalLayer[this.index] = node;
             this.finalLayer[this.index].active = false;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
 
     }
@@ -560,31 +446,5 @@ export default class NewClass extends cc.Component {
         }, 50)
 
     }
-
-    openNode(node, url, zIndex, call?) {
-
-        if (!this.isLoading) {
-            this.isLoading = true;
-        } else {
-            return;
-        }
-
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
-        if (!node) {
-            LoadUtils.loadRes(url, pre => {
-                node = cc.instantiate(pre);
-                this.node.addChild(node, zIndex);
-                node.active = true;
-                this.isLoading = false;
-                call(node);
-            })
-        } else {
-            node.active = true;
-            this.isLoading = false;
-            call(node);
-        }
-    }
-
 }
 

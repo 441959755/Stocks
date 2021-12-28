@@ -44,6 +44,9 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     labels: cc.Label[] = [];
 
+    @property(cc.Node)
+    vipNode: cc.Node = null;
+
     onShow(all, zhichan) {
         let gpData = GameCfg.data[0].data;
         //用户信息
@@ -52,6 +55,13 @@ export default class NewClass extends cc.Component {
         let max_exp = GameCfgText.levelInfoCfg[GameData.properties[pb.GamePropertyId.Level]];
         this.expLa.string = 'EXP:' + GameData.properties[pb.GamePropertyId.Exp] + '/' + max_exp;
         this.nameLa.string = GameData.userName;
+
+        if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+            this.vipNode.active = true;
+        }
+        else {
+            this.vipNode.active = false;
+        }
 
         //sys
         this.gpName.string = GameCfg.data[0].name;
@@ -162,16 +172,6 @@ export default class NewClass extends cc.Component {
 
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
-
-            // if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameConf.tjdxl.cost[0].v) {
-            //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
-            //     return;
-            // }
-            // else if (this.curState == 3) {
-            //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
-            //     return;
-            // }
-
             GameCfg.GAMEFUPAN = false;
             this.node.active = false;
             this.node.parent.parent.active = false;

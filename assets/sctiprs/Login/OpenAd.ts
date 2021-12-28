@@ -75,12 +75,6 @@ export default class NewClass extends cc.Component {
         }, this.version == GameCfgText.adConf.launch[0].version)
     }
 
-    start() {
-        if (!window.jsb) {
-            this.node.active = false;
-        }
-    }
-
     onBtnClick(event, curdata) {
         let name = event.target.name;
         if (name == 'ADimg') {

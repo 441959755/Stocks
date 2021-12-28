@@ -437,18 +437,11 @@ cc.Class({
 
 	//停服通知
 	openNoticeKayer() {
-		GlobalEvent.emit(EventCfg.LOADINGSHOW);
-		LoadUtils.loadRes('Prefabs/stopNoticeLayer', pre => {
-			let node = cc.instantiate(pre);
-			this.node.addChild(node, 99);
-			node.active = true;
-			GlobalEvent.emit(EventCfg.LOADINGHIDE);
-		})
+		PopupManager.openNode(this.node, null, 'Prefabs/stopNoticeLayer', 99, null);
 	},
 
 	onDestroy() {
 		GameCfgText.releaseRes();
 		PopupManager.delPopupNode();
-		LoadUtils.releaseRes('Prefabs/stopNoticeLayer');
 	}
 });
