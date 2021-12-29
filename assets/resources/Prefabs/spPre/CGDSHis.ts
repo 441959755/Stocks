@@ -34,17 +34,18 @@ export default class NewClass extends cc.Component {
     @property(List)
     listV2: List = null;
 
-    jtcj = [];
+    dqcc = [];
 
-    jtwt = [];
+    lscc = [];
 
-    lsjl = [];
+    cjjl = [];
 
     @property(cc.Node)
-    tipsNode:cc.Node=null;
+    tipsNode: cc.Node = null;
 
     onShow(id) {
-        this.tipsNode.active=false;
+
+        this.tipsNode.active = false;
         this.scrollNode.forEach(el => {
             el.node.active = false;
         })
@@ -52,8 +53,8 @@ export default class NewClass extends cc.Component {
         this.toggles.forEach((el, index) => {
             if (el.isChecked) {
                 this.scrollNode[index].node.active = true;
-                if(this.scrollNode[index].content.children.length<=0){
-                    this.tipsNode.active=true;
+                if (this.scrollNode[index].content.children.length <= 0) {
+                    this.tipsNode.active = true;
                 }
             }
         })
@@ -82,49 +83,61 @@ export default class NewClass extends cc.Component {
             this.hisList = res.items;
             this.createItem();
         })
+
+
+        GameData.cgdsStateList.forEach(el => {
+            if (el.id == id) {
+
+                this.dqcc = el.state.positionList.items;
+            }
+        })
+
+        if (this.dqcc.length > 0) {
+
+            this.tipsNode.active = true;
+            this.listV.numItems = this.dqcc.length;
+        }
     }
 
+
+
     createItem() {
-        this.hisList.forEach(el => {
-            if (ComUtils.isToday(el.orderId * 1000)) {
-                //今天成交
-                if (el.state == pb.OrderState.Done) {
-                    this.jtcj.push(el);
-                }
-                //今天委托
-                else if (el.state == pb.OrderState.Init) {
-                    this.jtwt.push(el);
-                }
-            }
-            //历史记录
-            else {
-                this.lsjl.push(el);
-            }
-        });
+        // this.hisList.forEach(el => {
+        //     if (ComUtils.isToday(el.orderId * 1000)) {
+        //         //今天成交
+        //         if (el.state == pb.OrderState.Done) {
+        //             this.jtcj.push(el);
+        //         }
+        //         //今天委托
+        //         else if (el.state == pb.OrderState.Init) {
+        //             this.jtwt.push(el);
+        //         }
+        //     }
+        //     //历史记录
+        //     else {
+        //         this.lsjl.push(el);
+        //     }
+        // });
 
-        if(this.jtcj.length<=0){
-            this.tipsNode.active=true;
-        }
 
-        this.listV.numItems=this.jtcj.length;
-        this.listV1.numItems=this.jtwt.length;
-        this.listV2.numItems=this.lsjl.length;
+        // this.listV1.numItems = this.jtwt.length;
+        // this.listV2.numItems = this.lsjl.length;
     }
 
     onListRender(item: cc.Node, idx: number) {
-        let handle = item.getComponent('MnHisItem');
-        handle.onShow(this.jtcj[idx]);
+        let handle = item.getComponent('CGDSHisItem');
+        handle.onShow(this.dqcc[idx]);
     }
 
-    onListRender1(item: cc.Node, idx: number) {
-        let handle = item.getComponent('MnHisItem1');
-        handle.onShow(this.jtwt[idx]);
-    }
+    // onListRender1(item: cc.Node, idx: number) {
+    //     let handle = item.getComponent('MnHisItem1');
+    //     handle.onShow(this.jtwt[idx]);
+    // }
 
-    onListRender2(item: cc.Node, idx: number) {
-        let handle = item.getComponent('MnHisItem2');
-        handle.onShow(  this.lsjl[idx]);
-    }
+    // onListRender2(item: cc.Node, idx: number) {
+    //     let handle = item.getComponent('MnHisItem2');
+    //     handle.onShow(this.lsjl[idx]);
+    // }
 
     onToggleClick(event, data) {
         this.scrollNode.forEach(el => {
@@ -133,8 +146,11 @@ export default class NewClass extends cc.Component {
         this.toggles.forEach((el, index) => {
             if (el.isChecked) {
                 this.scrollNode[index].node.active = true;
-                if(this.scrollNode[index].content.children.length<=0){
-                    this.tipsNode.active=true;
+                if (this.scrollNode[index].content.children.length <= 0) {
+                    this.tipsNode.active = true;
+                }
+                else {
+                    this.tipsNode.active = false;
                 }
             }
         })

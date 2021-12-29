@@ -66,9 +66,9 @@ export default class NewClass extends cc.Component {
     @property([cc.Toggle])
     toggle: cc.Toggle[] = [];
 
-    positionList=[];
+    positionList = [];
 
-    selfStockList=[];
+    selfStockList = [];
 
     @property(List)
     listV: List = null;
@@ -232,7 +232,7 @@ export default class NewClass extends cc.Component {
             }
 
             arr.forEach(el => {
-                info.items.push({ code: el, flag })
+                info.items.push({ code: el, flag: flag })
             });
 
             console.log('arr' + JSON.stringify(arr));
@@ -394,18 +394,18 @@ export default class NewClass extends cc.Component {
     }
 
     onShowScorll2() {
-        this.positionList=[];
+        this.positionList = [];
         GameData.mncgDataList.positionList.items.forEach(e => {
             if (e.volume) {
                 this.positionList.push(e);
             }
         });
-        this.listV1.numItems=this.positionList.length;
+        this.listV1.numItems = this.positionList.length;
     }
 
     onListRender1(item: cc.Node, idx: number) {
         let handle = item.getComponent('MnxgItem1');
-        handle.onShow( this.positionList[idx].code, this.positionList[idx], this._curArr[this.positionList[idx].code + '']);
+        handle.onShow(this.positionList[idx].code, this.positionList[idx], this._curArr[this.positionList[idx].code + '']);
     }
 
     onAddZx() {
@@ -413,7 +413,7 @@ export default class NewClass extends cc.Component {
         this.selfStockList = GameData.selfStockList;
 
         if (this.selfStockList.length > 0) {
-            this.listV.numItems=this.selfStockList.length;
+            this.listV.numItems = this.selfStockList.length;
             this.tipsNode.active = false;
         }
 
@@ -426,7 +426,7 @@ export default class NewClass extends cc.Component {
 
     onListRender(item: cc.Node, idx: number) {
         let handle = item.getComponent('MnxgItem');
-        handle.onShow( this.selfStockList[idx], this._curArr[ this.selfStockList[idx] + '']);
+        handle.onShow(this.selfStockList[idx], this._curArr[this.selfStockList[idx] + '']);
     }
 
 }

@@ -19,7 +19,7 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     content: cc.Node = null;
 
-    hisList = null;
+    hisList = [];
 
     @property(cc.Node)
     scrollNode: cc.Node = null;
@@ -48,11 +48,11 @@ export default class NewClass extends cc.Component {
             })
         }
 
-        if(this.hisList.length<=0){
-            this.tipsNode.active=true;
+        if (this.hisList.length <= 0) {
+            this.tipsNode.active = true;
         }
 
-        this.listV.numItems=this.hisList.length;
+        this.listV.numItems = this.hisList.length;
     }
 
     onListRender(item: cc.Node, idx: number) {
