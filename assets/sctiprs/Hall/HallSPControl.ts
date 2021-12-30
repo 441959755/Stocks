@@ -1,6 +1,7 @@
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import LoadUtils from "../Utils/LoadUtils";
+import PopupManager from "../Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -22,8 +23,6 @@ export default class NewClass extends cc.Component {
     dhzcNode: cc.Node = null;
 
     myhisNode: cc.Node = null;
-
-    cgdshisNode: cc.Node = null;
 
     bkBox: cc.Node = null;
 
@@ -188,23 +187,11 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    openCGDSHisLayer(id) {
-        if (this.cgdshisNode) {
-            this.cgdshisNode.active = true;
-            let handle = this.cgdshisNode.getComponent('CGDSHis');
-            handle.onShow(id);
-        }
-        else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/cgdsHis', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.cgdshisNode = cc.instantiate(pre);
-                this.node.addChild(this.cgdshisNode, 31);
-                this.cgdshisNode.active = true;
-                let handle = this.cgdshisNode.getComponent('CGDSHis');
-                handle.onShow(id);
-            })
-        }
+    openCGDSHisLayer(arr) {
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/cgdsHis', 31, (node) => {
+            let handle = node.getComponent('CGDSHis');
+            handle.onShow(arr);
+        })
     }
 
     openDhzcLayer() {

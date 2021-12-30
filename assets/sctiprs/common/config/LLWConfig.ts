@@ -4,9 +4,10 @@ import PlatDefine from "./PlatDefine";
 const VERSION = 0;
 const GAMEID = 0;
 //const PLATTYPE = PlatDefine.PLAT_IOS;
-//const PLATTYPE = PlatDefine.PLAT_ANDROID;
-const PLATTYPE = PlatDefine.PLAT_WEB;
-const FROM = pb.AppFrom.Website3th;
+const PLATTYPE = PlatDefine.PLAT_ANDROID;
+//const PLATTYPE = PlatDefine.PLAT_WEB;
+//const FROM = pb.AppFrom.Website3th;
+const FROM = pb.AppFrom.Android_001;
 const LOADIMGURL = 'http://test.cgdr168.com/';
 //const LOADIMGURL = 'https://www.cgdr168.com/';
 

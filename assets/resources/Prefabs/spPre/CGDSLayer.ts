@@ -371,7 +371,7 @@ export default class NewClass extends cc.Component {
         else if (name == 'sp_topbtn_jyjl') {
 
             //  GlobalEvent.emit(EventCfg.OPENMNHISLAYER, GameData.userID);
-            GlobalEvent.emit(EventCfg.OPENCGDSHISLAYER, GameData.userID);
+            GlobalEvent.emit(EventCfg.OPENCGDSHISLAYER, this._curArr);
         }
 
         //添加自选

@@ -161,6 +161,7 @@ export default class NewClass extends cc.Component {
 
         if (name == 'closeBtn') {
             this.node.parent.parent.active = false;
+            UpGameOpt.clearGameOpt();
         }
 
         //复盘
@@ -175,7 +176,9 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = false;
             this.node.active = false;
             this.node.parent.parent.active = false;
+            UpGameOpt.clearGameOpt();
             GlobalEvent.emit('TOAGAME');
+
         }
 
     }

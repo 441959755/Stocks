@@ -1,5 +1,4 @@
 {
-  "start-scene": "1558e10d-bc37-42a5-9a07-556ec49d580d",
   "group-list": [
     "default"
   ],
@@ -14,13 +13,12 @@
     "DragonBones",
     "Geom Utils",
     "Intersection",
-    "Label Effect",
     "Mesh",
     "MotionStreak",
     "Physics",
     "ParticleSystem",
     "RichText",
-    "Slider",
+    "Renderer Texture",
     "Spine Skeleton",
     "StudioComponent",
     "TiledMap",
@@ -31,10 +29,10 @@
     "3D Physics/Builtin",
     "3D Particle"
   ],
-  "last-module-event-record-time": 1640057319893,
+  "last-module-event-record-time": 1640848727170,
   "design-resolution-width": 1280,
   "design-resolution-height": 720,
-  "fit-width": true,
+  "fit-width": false,
   "fit-height": true,
   "use-project-simulator-setting": false,
   "simulator-orientation": false,
@@ -54,9 +52,6 @@
       "enable": false
     }
   },
-  "migrate-history": [
-    "cloud-function"
-  ],
-  "preview-port": 7456,
-  "clear-simulator-cache": true
+  "migrate-history": [],
+  "start-scene": "1558e10d-bc37-42a5-9a07-556ec49d580d"
 }

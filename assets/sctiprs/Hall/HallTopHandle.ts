@@ -16,12 +16,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     vipTimeLabel: cc.Label = null;
 
-    setLayer: cc.Node = null;
-
-    vipExplain: cc.Node = null;
-
-    serice: cc.Node = null;
-
     onLoad() {
         //vip
         GlobalEvent.on(EventCfg.VIPCHANGE, this.setVIPstatus.bind(this), this);
@@ -51,10 +45,11 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         //设置
         if (name == 'xl_topbtn_xlsz') {
-            PopupManager.openNode(this.node.parent, this.setLayer, 'Prefabs/hallSetLayer', 10, (node) => {
+
+            PopupManager.openNode(this.node.parent, null, 'Prefabs/hallSetLayer', 11, (node) => {
                 ActionUtils.openBox(node);
-                this.setLayer = node;
             })
+
         }
 
         //vip说明
@@ -63,9 +58,8 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'main_tb_qq') {
-            PopupManager.openNode(this.node.parent, this.serice, 'Prefabs/sericeBox', 11, (node) => {
+            PopupManager.openNode(this.node.parent, null, 'Prefabs/sericeBox', 11, (node) => {
                 ActionUtils.openBox(node);
-                this.serice = node;
             })
 
         }

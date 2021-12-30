@@ -173,9 +173,9 @@ export default class NewClass extends cc.Component {
         // 0表示关闭，1表示打开炒股大赛排行，2表示打开闯关排行
         if (this.curSwitch == 2) {
 
-            if (!GameData.gameData.cgState) {
-                this.toggles[3].node.active = false;
-            }
+            // if (!GameData.gameData.cgState) {
+            //     this.toggles[3].node.active = false;
+            // }
 
             // 查询当前一轮闯关赛配置数据
             socket.send(pb.MessageId.Req_Game_CgsGetConf, null, (res) => {
@@ -186,8 +186,11 @@ export default class NewClass extends cc.Component {
             })
         }
         else {
-            this.toggles[3].node.active = false;
-            return;
+            if (this.curSwitch == 0) {
+                this.toggles[3].node.active = false;
+                return;
+            }
+
             socket.send(pb.MessageId.Req_Game_CgdsList, null, (res) => {
                 console.log('炒股大赛' + JSON.stringify(res));
                 this.awardList = JSON.parse(res.items[0].award || '[]');

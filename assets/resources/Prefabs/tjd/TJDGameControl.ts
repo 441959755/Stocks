@@ -122,14 +122,7 @@ export default class NewClass extends cc.Component {
         this.finalNode.active = false;
         this.fupanNode.active = false;
 
-        if (GameCfg.GAMEFUPAN) {
 
-            let opt = UpGameOpt.player1Opt;
-            this.onGameFUPANOPT(opt);
-
-            this.onShowGameFuPan();
-            return;
-        }
 
         this.ingNode.active = true;
         this.fupanNode.active = false;
@@ -139,6 +132,15 @@ export default class NewClass extends cc.Component {
         this.zxNode[1].active = false;
 
         this.setLabelData();
+
+        if (GameCfg.GAMEFUPAN) {
+
+            let opt = UpGameOpt.player1Opt;
+            this.onGameFUPANOPT(opt);
+
+            this.onShowGameFuPan();
+            return;
+        }
     }
 
 
@@ -158,8 +160,9 @@ export default class NewClass extends cc.Component {
                         GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: GameCfg.huizhidatas });
                         let item = {
                             opId: pb.GameOperationId.Bid,
-                            volume: 1,
+                            volume: this.chigushuliang,
                             kOffset: GameCfg.huizhidatas,
+                            price: this.viweData[GameCfg.huizhidatas].close,
                         }
                         UpGameOpt.addOpt(item);
                         let rate = this.onCurPositionRete();
@@ -175,9 +178,9 @@ export default class NewClass extends cc.Component {
                         }
                     }
                     this.finalNode.active = true;
-                    let all = ((this.zongzhichan - 100000) / 100000 * 100).toFixed(2);
+                    let all = ((this.keyongzhichan - 100000) / 100000 * 100).toFixed(2);
                     this.allRate = all;
-                    this.finalNode.getComponent('TJDFInalLayer').onShow(all, this.zongzhichan);
+                    this.finalNode.getComponent('TJDFInalLayer').onShow(all, this.keyongzhichan);
                 })
             }
         }
@@ -286,13 +289,21 @@ export default class NewClass extends cc.Component {
             state: sign,
         };
 
+
         if (GameCfg.fill.length > 0 && GameCfg.fill[GameCfg.fill.length - 1].end) {
+
             GameCfg.fill.push(this.rateItem);
+
         } else if (GameCfg.fill.length == 0) {
+
             GameCfg.fill.push(this.rateItem);
+
         } else {
+
             GameCfg.fill[GameCfg.fill.length - 1].rate = rate;
+
         }
+
         GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
 
         this.chigushuliang += this.buySlg.count;
@@ -338,6 +349,7 @@ export default class NewClass extends cc.Component {
         }
 
         this.selldata.push(this.sellSlg);
+
         this.chigushuliang -= this.sellSlg.count;
 
         if (this.chigushuliang > 0) {
@@ -351,7 +363,9 @@ export default class NewClass extends cc.Component {
         }
 
         this.keyongzhichan = this.keyongzhichan + this.sellSlg.price * this.sellSlg.count;
+
         GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
+
         this.buySlg = {
             price: 0,
             count: 0,
@@ -524,14 +538,15 @@ export default class NewClass extends cc.Component {
                         GlobalEvent.emit(EventCfg.ADDFILLCOLOR, GameCfg.fill);
                     }
 
+
                 }
 
                 // GlobalEvent.emit(EventCfg.GAMEOVEER);
                 this.finalNode.active = true;
                 //总盈利率
-                let all = ((this.zongzhichan - 100000) / 100000 * 100).toFixed(2);
+                let all = ((this.keyongzhichan - 100000) / 100000 * 100).toFixed(2);
                 this.allRate = all;
-                this.finalNode.getComponent('TJDFInalLayer').onShow(all, this.zongzhichan);
+                this.finalNode.getComponent('TJDFInalLayer').onShow(all, this.keyongzhichan);
             }
 
         }, GameCfg.GameSet.KSpeed * 1000);
@@ -627,11 +642,13 @@ export default class NewClass extends cc.Component {
             }
         })
 
-        GameCfg.huizhidatas = this.viweData.length;
+        //   GameCfg.huizhidatas = this.viweData.length;
         GlobalEvent.emit('roundNUmber');
 
-        let all = ((this.zongzhichan - 100000) / 100000 * 100).toFixed(2);
+        let all = ((this.keyongzhichan - 100000) / 100000 * 100).toFixed(2);
+
         this.allRate = all;
-        this.finalNode.getComponent('TJDFInalLayer').onShow(all, this.zongzhichan);
+
+        this.finalNode.getComponent('TJDFInalLayer').onShow(all, this.keyongzhichan);
     }
 }

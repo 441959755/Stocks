@@ -43,7 +43,10 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     tipsNode: cc.Node = null;
 
-    onShow(id) {
+    onShow(arr) {
+        this.dqcc = [];
+        this.cjjl = [];
+        this.lscc = [];
 
         this.tipsNode.active = false;
         this.scrollNode.forEach(el => {
@@ -67,9 +70,9 @@ export default class NewClass extends cc.Component {
         let time = parseInt(new Date().getTime() / 1000 + '');
 
         let info = {
-            uid: id,
+            uid: GameData.userID,
             to: time,
-            pageSize: 200,
+            pageSize: 2000,
             id: id1,
         }
 
@@ -78,50 +81,106 @@ export default class NewClass extends cc.Component {
         let buff = CmdQueryStockOrder.encode(message).finish();
 
         socket.send(pb.MessageId.Req_Game_OrderQuery, buff, (res) => {
+
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             console.log('炒股大赛查询交易记录' + JSON.stringify(res));
             this.hisList = res.items;
             this.createItem();
         })
 
+        let items = [];
 
         GameData.cgdsStateList.forEach(el => {
-            if (el.id == id) {
-
-                this.dqcc = el.state.positionList.items;
+            if (el.id == id1) {
+                items = el.state.positionList.items;
             }
         })
 
-        if (this.dqcc.length > 0) {
+        if (items.length > 0) {
 
-            this.tipsNode.active = true;
-            this.listV.numItems = this.dqcc.length;
+            items.forEach(el => {
+                this.dqcc.push({ item: el, price: arr[el.code].price })
+            })
+
+            this.tipsNode.active = false;
         }
     }
 
 
 
     createItem() {
-        // this.hisList.forEach(el => {
-        //     if (ComUtils.isToday(el.orderId * 1000)) {
-        //         //今天成交
-        //         if (el.state == pb.OrderState.Done) {
-        //             this.jtcj.push(el);
-        //         }
-        //         //今天委托
-        //         else if (el.state == pb.OrderState.Init) {
-        //             this.jtwt.push(el);
-        //         }
-        //     }
-        //     //历史记录
-        //     else {
-        //         this.lsjl.push(el);
-        //     }
-        // });
 
+        if (this.dqcc.length > 0) {
+            this.listV.numItems = this.dqcc.length;
+        }
 
-        // this.listV1.numItems = this.jtwt.length;
-        // this.listV2.numItems = this.lsjl.length;
+        let arrs = {
+            code: null,
+            for: null,
+            end: null,
+            input: 0,
+            income: 0,
+            bidPrice: 0,
+            askPrice: 0,
+        };
+
+        let obj: any = {};
+
+        this.hisList.forEach(el => {
+
+            if (el.state == pb.OrderState.Done) {
+
+                this.cjjl.push(el);
+
+                if (obj[el.code + '']) {
+
+                    if (el.type == pb.OrderType.AskLimit || el.type == pb.OrderType.AskMarket) {
+                        obj[el.code + ''].input += el.volume;
+                        obj[el.code + ''].bidPrice += el.volume * el.price;
+                    }
+
+                    else if (el.type == pb.OrderType.BidLimit || el.type == pb.OrderType.BidMarket || el.type == pb.OrderType.BidMarket_Auto) {
+                        obj[el.code + ''].income += el.volume;
+                        obj[el.code + ''].askPrice += el.volume * el.price;
+                    }
+
+                    if (obj[el.code + ''].form > el.ts) {
+                        obj[el.code + ''].form = el.ts;
+                    }
+
+                    else if (obj[el.code + ''].end < el.ts) {
+                        obj[el.code + ''].end = el.ts;
+                    }
+                }
+
+                else {
+                    obj[el.code + ''] = arrs;
+                    obj[el.code + ''].code = el.code;
+                    obj[el.code + ''].form = el.ts;
+                    obj[el.code + ''].end = el.ts;
+                    if (el.type == pb.OrderType.AskLimit || el.type == pb.OrderType.AskMarket) {
+                        obj[el.code + ''].input = el.volume;
+                        obj[el.code + ''].bidPrice = el.volume * el.price;
+                    }
+
+                    else if (el.type == pb.OrderType.BidLimit || el.type == pb.OrderType.BidMarket || el.type == pb.OrderType.BidMarket_Auto) {
+                        obj[el.code + ''].income = el.volume;
+                        obj[el.code + ''].askPrice = el.volume * el.price;
+                    }
+                }
+            }
+
+        });
+
+        for (let k in obj) {
+
+            if (obj[k].input - obj[k].income == 0) {
+                this.lscc.push(obj[k]);
+            }
+        }
+
+        this.listV2.numItems = this.cjjl.length;
+        this.listV1.numItems = this.lscc.length;
     }
 
     onListRender(item: cc.Node, idx: number) {
@@ -129,15 +188,15 @@ export default class NewClass extends cc.Component {
         handle.onShow(this.dqcc[idx]);
     }
 
-    // onListRender1(item: cc.Node, idx: number) {
-    //     let handle = item.getComponent('MnHisItem1');
-    //     handle.onShow(this.jtwt[idx]);
-    // }
+    onListRender1(item: cc.Node, idx: number) {
+        let handle = item.getComponent('CGDSHisItem1');
+        handle.onShow(this.lscc[idx]);
+    }
 
-    // onListRender2(item: cc.Node, idx: number) {
-    //     let handle = item.getComponent('MnHisItem2');
-    //     handle.onShow(this.lsjl[idx]);
-    // }
+    onListRender2(item: cc.Node, idx: number) {
+        let handle = item.getComponent('CGDSHisItem2');
+        handle.onShow(this.cjjl[idx]);
+    }
 
     onToggleClick(event, data) {
         this.scrollNode.forEach(el => {
