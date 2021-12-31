@@ -91,6 +91,11 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.GAMEFUPAN, this.onShowGameFuPan.bind(this), this);
     }
 
+    protected onDisable(): void {
+        this.autoCallback && (clearInterval(this.autoCallback));
+        this.autoCallback = null;
+    }
+
     onEnable() {
         this.autoCallback && (clearInterval(this.autoCallback));
         this.autoCallback = null;
@@ -122,8 +127,6 @@ export default class NewClass extends cc.Component {
         this.finalNode.active = false;
         this.fupanNode.active = false;
 
-
-
         this.ingNode.active = true;
         this.fupanNode.active = false;
         this.mrNode[1].active = false;
@@ -149,9 +152,11 @@ export default class NewClass extends cc.Component {
 
         //返回
         if (name == 'sys_back') {
+
             if (GameCfg.GAMEFUPAN) {
                 this.node.parent.active = false;
             }
+
             else {
                 PopupManager.LoadTipsBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
                     clearInterval(this.autoCallback);

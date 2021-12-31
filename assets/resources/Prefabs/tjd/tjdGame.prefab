@@ -36853,7 +36853,7 @@
         "__id__": 1005
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 1153
@@ -40938,8 +40938,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "单次最大亏损：",
-    "_N$string": "单次最大亏损：",
+    "_string": "单次最大盈利：",
+    "_N$string": "单次最大盈利：",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -41596,8 +41596,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "单次最大盈利：",
-    "_N$string": "单次最大盈利：",
+    "_string": "单次最大亏损：",
+    "_N$string": "单次最大亏损：",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,

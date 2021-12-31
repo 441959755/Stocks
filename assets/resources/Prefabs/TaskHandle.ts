@@ -51,15 +51,20 @@ export default class NewClass extends cc.Component {
                 else if (el == 'ggjc') {
                     taskId = pb.TaskId.Ggjc;
                 }
+                else if (el == 'cg') {
+                    taskId = 4;
+                }
 
-                let e = this.taskConf[el];
+                //todo
+                if (el != 'ggjc') {
+                    let e = this.taskConf[el];
 
-                let node = cc.instantiate(this.item);
+                    let node = cc.instantiate(this.item);
 
-                this.scoll.content.addChild(node);
+                    this.scoll.content.addChild(node);
 
-                node.getComponent('TaskItem').onShow(e, this.taskDaily[taskId], taskId);
-
+                    node.getComponent('TaskItem').onShow(e, this.taskDaily[taskId], taskId);
+                }
             }
         }
 

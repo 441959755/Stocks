@@ -102,24 +102,24 @@ export default class NewClass extends cc.Component {
 
         if (info.yCount > 0) {
             this.labels[1].node.color = new cc.Color().fromHEX('#e94343');
+            this.labels[4].string = info.maxRate.toFixed(2) + '%';
         }
         else {
             this.labels[1].node.color = cc.Color.WHITE;
+            this.labels[4].string = 0.00 + '%';
         }
 
         this.labels[2].string = info.sCount + '次';
         if (info.sCount > 0) {
             this.labels[2].node.color = new cc.Color().fromHEX('#31a633');
+            this.labels[5].string = info.minRate.toFixed(2) + '%';
         }
         else {
             this.labels[2].node.color = cc.Color.WHITE;
+            this.labels[5].string = 0.00 + '%';
         }
 
         this.labels[3].string = zhichan + '';
-
-        this.labels[4].string = info.minRate.toFixed(2) + '%';
-
-        this.labels[5].string = info.maxRate.toFixed(2) + '%';
 
         if (!GameCfg.GAMEFUPAN) {
 

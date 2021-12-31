@@ -1,6 +1,7 @@
 
 import HttpUtils from "./HttpUtils";
-import {pb} from "../../../protos/proto";
+import { pb } from "../../../protos/proto";
+import LLWConfig from "../config/LLWConfig";
 
 
 export default class HttpMgr {
@@ -19,13 +20,11 @@ export default class HttpMgr {
         return url;
     }
 
-
     loginWeb(openId, data, call, err) {
-        // let url = 'http://192.168.100.198:80/l';
-        //let url = 'http://121.9.210.218:8080/l';
-        let url = 'http://test.chaogugame.com/l';
 
-        data.websocket= true
+        let url = LLWConfig.LOADIMGURL + 'l';
+
+        data.websocket = true
         let CmdLogin = pb.CmdLogin;
         let message = CmdLogin.create(data);
         let buff1 = CmdLogin.encode(message).finish();

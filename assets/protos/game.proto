@@ -121,7 +121,7 @@ enum TaskId {
 	Dk = 1;			// 多空任务
 	Zsjc = 2;		// 指数竞猜任务
 	Ggjc = 3;		// 个股竞猜任务
-	//Cg = 4;			// 闯关赛任务
+	Cg = 4;			// 闯关赛任务
 
 	MaxDailyTaskId = 4;	// 日常任务最大下标（不包括最大ID，小于等于最大ID）
 	MaxStudyTaskId = 8;	// 学习任务最大下标（不包括最大ID，小于等于最大ID）

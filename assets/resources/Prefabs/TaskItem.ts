@@ -27,6 +27,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Button)
     btnGet: cc.Button = null;
 
+    @property(cc.Label)
+    biliLabel: cc.Label = null;
+
     _index = null;
 
     onShow(data, task, id) {
@@ -37,7 +40,7 @@ export default class NewClass extends cc.Component {
         for (let t = 0; t < data.length; t++) {
 
             //未完成
-            if (data[t].progress > task.progress) {
+            if (data[t].progress > (task.progress || 0)) {
 
                 e = data[t];
                 this.btnGet.interactable = false;
@@ -72,6 +75,8 @@ export default class NewClass extends cc.Component {
         let progress = task.progress || 0;
 
         let jd = progress / e.progress;
+
+        this.biliLabel.string = progress + '/' + e.progress;
 
         this.progress.progress = jd;
 
