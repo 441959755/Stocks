@@ -1,5 +1,6 @@
 import { pb } from "../../protos/proto";
 import LLWConfig from "../../sctiprs/common/config/LLWConfig";
+import LLWSDK from "../../sctiprs/common/sdk/LLWSDK";
 import GameData from "../../sctiprs/GameData";
 import GameCfgText from "../../sctiprs/GameText";
 import ComUtils from "../../sctiprs/Utils/ComUtils";
@@ -108,9 +109,9 @@ export default class NewClass extends cc.Component {
                 timestamp = xmlDoc.getElementsByTagName("timestamp")[0].childNodes[0].nodeValue + '';
                 sign = xmlDoc.getElementsByTagName("sign")[0].childNodes[0].nodeValue + '';
 
-                if (llwSDK) {
-                    llwSDK.callWXPayToJava(appid, partnerid, prepayid, nonce_str, timestamp, sign);
-                }
+
+                LLWSDK.getSDK().callWXPayToJava(appid, partnerid, prepayid, nonce_str, timestamp, sign);
+
             }
             else {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);

@@ -55,22 +55,13 @@ export default class NewClass extends cc.Component {
         //打开个人中心
         GlobalEvent.on(EventCfg.OPENPLAYERINFO, this.openPlayerInfoLayer.bind(this), this);
 
-        //打开公告
-        GlobalEvent.on('OPENNOTICELAYER', this.openNoticelayer.bind(this), this);
-
-        //好友
-        GlobalEvent.on('OPENFRIENDLAYER', this.openFriendLayer.bind(this), this);
-
-        //任务
-        GlobalEvent.on('OPENTASKLAYER', this.openTaskLayer.bind(this), this);
 
         //邀请好友
         GlobalEvent.on('OPENFRIENDINVITE', this.openFriendInvite.bind(this), this);
 
         GlobalEvent.on(EventCfg.OPENOTHERPLAYERHISLAYER, this.openOtherHisLayer.bind(this), this);
 
-        //打开排行榜
-        GlobalEvent.on('OPENRANKINGLIST', this.openRankingList.bind(this), this);
+
 
         GlobalEvent.on('LOADGAME', this.onLoadGame.bind(this), this);
 
@@ -78,8 +69,7 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
 
-        //打开商城
-        GlobalEvent.on('OPENSHOPLAYER', this.openShopLayer.bind(this), this);
+
 
         GlobalEvent.on('OPENUNLOCKBOX', this.openUnlockBox.bind(this), this);
 
@@ -162,13 +152,11 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.INVITEMESSAGE);
         GlobalEvent.off(EventCfg.OPENOTHERPLAYERHISLAYER);
         GlobalEvent.off(EventCfg.GAMEOVEER);
-        GlobalEvent.off('OPENNOTICELAYER');
-        GlobalEvent.off('OPENFRIENDLAYER');
-        GlobalEvent.off('OPENTASKLAYER');
+
         GlobalEvent.off('OPENFRIENDINVITE');
-        GlobalEvent.off('OPENRANKINGLIST');
+
         GlobalEvent.off('LOADGAME');
-        GlobalEvent.off('OPENSHOPLAYER');
+
         GlobalEvent.off('OPENUNLOCKBOX');
         GlobalEvent.off('OPENWEEKLYHAOLI');
         GlobalEvent.off('OPENSIGNIN');
@@ -197,25 +185,15 @@ export default class NewClass extends cc.Component {
         PopupManager.openNode(this.node, null, 'Prefabs/pop/gobrokeBox', 48, null);
     }
 
-    //打开商城
-    openShopLayer(type) {
-        PopupManager.openNode(this.node, null, 'Prefabs/shop/shop', 88, (node) => {
-            type && (node.getComponent('ShopControl').onShow(type));
-        })
-    }
 
-    openRankingList() {
-        PopupManager.openNode(this.node, null, 'Prefabs/rankingList', 10, null);
-    }
+
+
 
     openFriendInvite() {
         PopupManager.openNode(this.node, null, 'Prefabs/friendInvite', 11, null);
     }
 
-    //打开公告
-    openNoticelayer() {
-        PopupManager.openNode(this.node, null, 'Prefabs/noticeLayer', 10, null);
-    }
+
 
     openWeeklyHaoLi() {
         PopupManager.openNode(this.node, null, 'Prefabs/fl/weeklyHaoLI', 10, null);
@@ -225,14 +203,6 @@ export default class NewClass extends cc.Component {
         PopupManager.openNode(this.node, null, 'Prefabs/fl/signIn', 10, null);
     }
 
-    //好友
-    openFriendLayer() {
-        PopupManager.openNode(this.node, null, 'Prefabs/friendLayer', 10, null);
-    }
-
-    openTaskLayer() {
-        PopupManager.openNode(this.node, null, 'Prefabs/taskLayer', 10, null);
-    }
 
     openOtherHisLayer(data) {
         PopupManager.openNode(this.node, null, 'Prefabs/otherPlayerHisInfo', 12, (node) => {

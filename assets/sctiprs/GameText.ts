@@ -783,7 +783,7 @@ export default class GameCfgText {
 
     }
 
-    public static getSwitchModule(id) {
+    public static getSwitchModule(id, cb?) {
         let flag = false;
         this.appConf.module.forEach(el => {
             if (el.id == id) {
@@ -792,7 +792,12 @@ export default class GameCfgText {
                 }
             }
         });
-        return flag;
+        if (cb && !flag) {
+            cb();
+        }
+        else {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
+        }
     }
 
     public static getSwitchPop(id) {

@@ -1,5 +1,6 @@
 import { pb } from "../../../protos/proto";
 import LLWConfig from "../../../sctiprs/common/config/LLWConfig";
+import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
@@ -185,10 +186,10 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'bank_leftbt_jkf') {
             console.log('添加客服');
-            if (llwSDK) {
-                llwSDK.copyborad('ylcwy888');
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '微信号已复制');
-            }
+
+            LLWSDK.getSDK().copyborad('ylcwy888');
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '微信号已复制');
+
         }
 
         //绑定手机号码
@@ -317,10 +318,7 @@ export default class NewClass extends cc.Component {
                     timestamp = xmlDoc.getElementsByTagName("timestamp")[0].childNodes[0].nodeValue + '';
                     sign = xmlDoc.getElementsByTagName("sign")[0].childNodes[0].nodeValue + '';
 
-                    if (llwSDK) {
-
-                        llwSDK.callWXPayToJava(appid, partnerid, prepayid, nonce_str, timestamp, sign);
-                    }
+                    LLWSDK.getSDK().callWXPayToJava(appid, partnerid, prepayid, nonce_str, timestamp, sign);
 
                 }
             }

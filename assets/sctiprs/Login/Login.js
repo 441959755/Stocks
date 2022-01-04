@@ -7,9 +7,6 @@ import PopupManager from '../Utils/PopupManager';
 import LLWSDK from "../common/sdk/LLWSDK";
 import CallModule from '../common/sdk/CallModule1';
 import GlobalEvent from "../Utils/GlobalEvent";
-import EventCfg from "../Utils/EventCfg";
-import LoadUtils from "../Utils/LoadUtils";
-import ComUtils from "../Utils/ComUtils";
 
 cc.Class({
 
@@ -22,9 +19,6 @@ cc.Class({
 		let pbhelper = new PBHelper();
 
 		window.PB = pbhelper;
-
-		// 接DSK
-		window.llwSDK = LLWSDK.getSDK();
 
 		window.CallModule = CallModule;
 
@@ -63,8 +57,6 @@ cc.Class({
 		cc.director.preloadScene('hall');
 
 		GlobalEvent.on('OPENNOTICELAYER', this.openNoticeKayer.bind(this), this);
-
-		ComUtils.resetSize(this.node);
 	},
 
 	start() {
@@ -323,7 +315,6 @@ cc.Class({
 			} else {
 				GameData.FSSet = JSON.parse(FSSet);
 			}
-
 		}
 
 		//选择的股票信息
@@ -380,8 +371,8 @@ cc.Class({
 			cc.sys.localStorage.removeItem('QHADCOUNT' + str1);
 		}
 
-		//获取TJ今天看广告的次数
-		{
+
+		{//获取TJ今天看广告的次数
 			let str = new Date().toLocaleDateString();
 			let ADCount = cc.sys.localStorage.getItem('TJADCOUNT' + str);
 			if (!ADCount) {
@@ -397,6 +388,7 @@ cc.Class({
 		}
 
 		{
+			//选择板块
 			let SelectBk = cc.sys.localStorage.getItem('SELECTBK');
 			if (!SelectBk) {
 				GameData.SelectBk = [1, 1, 1, 1, 1, 1];
@@ -441,6 +433,7 @@ cc.Class({
 	},
 
 	onDestroy() {
+		GlobalEvent.off('OPENNOTICELAYER');
 		GameCfgText.releaseRes();
 		PopupManager.delPopupNode();
 	}

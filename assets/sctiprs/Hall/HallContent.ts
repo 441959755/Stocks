@@ -5,6 +5,7 @@ import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import EnterGameControl from '../global/EnterGameControl';
 import GameCfgText from '../GameText';
+import LLWSDK from '../common/sdk/LLWSDK';
 
 const { ccclass, property } = cc._decorator;
 
@@ -34,7 +35,7 @@ export default class NewClass extends cc.Component {
 	@property(cc.Node)
 	vipImg: cc.Node = null;
 
-	 onLoad() {
+	onLoad() {
 		//回到进入游戏的界面
 		GlobalEvent.on(EventCfg.BLACKGOTOLAYER, this.onBtnClick.bind(this), this);
 
@@ -86,15 +87,15 @@ export default class NewClass extends cc.Component {
 
 		let WeChatInfo;
 
-		if (!llwSDK.loginPlat) { return }
+		if (!LLWSDK.getSDK().loginPlat) { return }
 
-		if (llwSDK.loginPlat == pb.LoginType.QQ) {
+		if (LLWSDK.getSDK().loginPlat == pb.LoginType.QQ) {
 
 			WeChatInfo = cc.sys.localStorage.getItem('QQInfo');
 			cc.sys.localStorage.setItem('QQInfo', 1);
 		}
 
-		else if (llwSDK.loginPlat == pb.LoginType.WeChat) {
+		else if (LLWSDK.getSDK().loginPlat == pb.LoginType.WeChat) {
 			WeChatInfo = cc.sys.localStorage.getItem('WeChatInfo');
 			cc.sys.localStorage.setItem('WeChatInfo', 1);
 		}
@@ -172,7 +173,6 @@ export default class NewClass extends cc.Component {
 		this.initToggle();
 	}
 
-
 	onToggleClick(event, data) {
 		this.initToggle();
 	}
@@ -182,69 +182,51 @@ export default class NewClass extends cc.Component {
 		//双盲
 		if (name == 'main_xl_smxl') {
 			//开关
-			if (!GameCfgText.getSwitchModule(1)) {
+			GameCfgText.getSwitchModule(1, () => {
 				GlobalEvent.emit(EventCfg.OPENSMLAYER);
 				GameCfg.GameType = pb.GameType.ShuangMang;
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		//指标
 		else if (name == 'main_xl_zbxl') {
-			if (!GameCfgText.getSwitchModule(4)) {
-
+			GameCfgText.getSwitchModule(4, () => {
 				GlobalEvent.emit(EventCfg.OPENZBLAYER);
 				GameCfg.GameType = pb.GameType.ZhiBiao;
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		//定向
 		else if (name == 'main_xl_dxxl') {
-			if (!GameCfgText.getSwitchModule(2)) {
+			GameCfgText.getSwitchModule(2, () => {
 				GlobalEvent.emit(EventCfg.OPENDXLAYER);
 				GameCfg.GameType = pb.GameType.DingXiang;
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		//期货
 		else if (name == 'main_xl_qhxl') {
-			if (!GameCfgText.getSwitchModule(3)) {
+			GameCfgText.getSwitchModule(3, () => {
 				GlobalEvent.emit(EventCfg.OPENQHLAYER);
 				GameCfg.GameType = pb.GameType.QiHuo;
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
+
 		}
 
 		//分时
 		else if (name == 'main_xl_fsxl') {
-			if (!GameCfgText.getSwitchModule(6)) {
+			GameCfgText.getSwitchModule(6, () => {
 				GameCfg.GameType = pb.GameType.FenShi;
 				GlobalEvent.emit(EventCfg.OPENFENSHI);
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		//条件
 		else if (name == 'main_xl_tjdxl') {
-			if (!GameCfgText.getSwitchModule(5)) {
+			GameCfgText.getSwitchModule(5, () => {
 				GameCfg.GameType = pb.GameType.TiaoJianDan;
 				GlobalEvent.emit(EventCfg.OPENTIAOJIANDAN);
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		//打开个人中心
@@ -254,7 +236,7 @@ export default class NewClass extends cc.Component {
 
 		//pk
 		else if (name == 'main_jj_pkdz') {
-			if (!GameCfgText.getSwitchModule(7)) {
+			GameCfgText.getSwitchModule(7, () => {
 				if (EnterGameControl.onCurPKEnterGame()) {
 					GameCfg.GameType = pb.GameType.JJ_PK;
 					GameCfg.GameSet = GameData.JJPKSet;
@@ -263,15 +245,11 @@ export default class NewClass extends cc.Component {
 				else {
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
 				}
-
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		else if (name == 'main_jj_dkdz') {
-			if (!GameCfgText.getSwitchModule(8)) {
+			GameCfgText.getSwitchModule(8, () => {
 				if (EnterGameControl.onCurPKEnterGame()) {
 					GameCfg.GameType = pb.GameType.JJ_DuoKong;
 					GameCfg.GameSet = GameData.JJPKSet;
@@ -280,24 +258,18 @@ export default class NewClass extends cc.Component {
 				else {
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
 				}
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		//打开闯关赛
 		else if (name == 'main_jj_cgs') {
-			if (!GameCfgText.getSwitchModule(9)) {
+			GameCfgText.getSwitchModule(9, () => {
 				GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
 				GameCfg.GameSet = GameData.JJPKSet;
 				GlobalEvent.emit(EventCfg.OPENCHUANGUAN);
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
-
+			})
 		}
+
 		//点击竞技
 		else if (name == 'toggle1' || name == 'toggle2' || name == 'toggle3') {
 			let index = parseInt(name.slice(-1));
@@ -306,75 +278,54 @@ export default class NewClass extends cc.Component {
 
 		//点击创建对战
 		else if (name == 'main_jj_cjdz') {
-			if (!GameCfgText.getSwitchModule(10)) {
+			GameCfgText.getSwitchModule(10, () => {
 				GlobalEvent.emit(EventCfg.OPENCJDZ);
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		//加入对战
 		else if (name == 'main_jj_jrdz') {
-			if (!GameCfgText.getSwitchModule(11)) {
+			GameCfgText.getSwitchModule(11, () => {
 				GlobalEvent.emit(EventCfg.OPENJRDZ);
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		//智能选股
 		else if (name == 'main_sp_znxg') {
-			if (!GameCfgText.getSwitchModule(13)) {
+			GameCfgText.getSwitchModule(13, () => {
 				GlobalEvent.emit(EventCfg.OPENZNXG);
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		//模拟炒股
 		else if (name == 'main_sp_mncg') {
-			if (!GameCfgText.getSwitchModule(14)) {
+			GameCfgText.getSwitchModule(14, () => {
 				GlobalEvent.emit(EventCfg.OPENMNXG);
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		else if (name == 'main_sp_cgds') {
-			if (!GameCfgText.getSwitchModule(15)) {
+			GameCfgText.getSwitchModule(15, () => {
 				GlobalEvent.emit(EventCfg.OPENCGDS);
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		//大盘竞猜
 		else if (name == 'main_sp_dpjc') {
-			if (!GameCfgText.getSwitchModule(16)) {
+			GameCfgText.getSwitchModule(16, () => {
 				GameCfg.GameType = pb.GameType.DaPanJingChai;
 				GlobalEvent.emit(EventCfg.LOADINGSHOW);
 				cc.director.loadScene('guess');
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		//个股竞猜
 		else if (name == 'main_sp_ggjc') {
-			if (!GameCfgText.getSwitchModule(16)) {
+			GameCfgText.getSwitchModule(16, () => {
 				GameCfg.GameType == pb.GameType.GeGuJingChai;
 				GlobalEvent.emit(EventCfg.LOADINGSHOW);
 				cc.director.loadScene('guess');
-			}
-			else {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, "该功能暂未开放，敬请期待");
-			}
+			})
 		}
 
 		//学习
@@ -389,20 +340,21 @@ export default class NewClass extends cc.Component {
 		}
 
 		//免费砖石
-		else if(name=='main_fl_mfzs'){
-			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW,'暂未开放！');
+		else if (name == 'main_fl_mfzs') {
+			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '暂未开放！');
 		}
 
 		//每周豪礼
-		else if(name=='main_fl_mzhl'){
+		else if (name == 'main_fl_mzhl') {
 			GlobalEvent.emit('OPENWEEKLYHAOLI');
 		}
 
 		//7日奖励
-		else if(name=='main_fl_7day'){
+		else if (name == 'main_fl_7day') {
 			GlobalEvent.emit('OPENSIGNIN');
 		}
 	}
+
 
 	onDestroy() {
 		GlobalEvent.off(EventCfg.BLACKGOTOLAYER);
