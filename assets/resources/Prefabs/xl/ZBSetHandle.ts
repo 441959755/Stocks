@@ -107,7 +107,6 @@ export default class NewClass extends cc.Component {
                 }
             })
             GameData.ZBSet = datas;
-            console.log(JSON.stringify(GameData.ZBSet));
             this.node.active = false;
         } else if (name == 'selectBtn') {
             this._index = parseInt(data);
@@ -180,6 +179,7 @@ export default class NewClass extends cc.Component {
                     end = 250;
                 }
             }
+
             let content = cc.find('New ScrollView/view/content', this.childs);
             let scorll = cc.find('New ScrollView', this.childs);
             let UIScrollControl = scorll.getComponent('UIScrollControl');

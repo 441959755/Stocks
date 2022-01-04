@@ -13,6 +13,7 @@ const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
+
 	@property([cc.Node])
 	boxs: cc.Node[] = [];
 
@@ -139,6 +140,8 @@ export default class NewClass extends cc.Component {
 		GameData.DXSet.search = '随机选股';
 
 		GlobalEvent.on(EventCfg.GMAECOUNTERSCHANGE, this.onGameCountSow.bind(this), this);
+
+
 	}
 
 	onDestroy() {

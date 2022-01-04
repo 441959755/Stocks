@@ -3,6 +3,7 @@ import GameData from '../../GameData';
 import { pb } from "../../../protos/proto";
 
 export default class WechatSDK {
+
     static _instance = null;
 
     videoAd = null;
@@ -27,7 +28,9 @@ export default class WechatSDK {
                             self.getUserInfo1(code, null, call);
                         } else {
                             console.log("没有授权下一步是wx.createUserInfoButton")
+
                             let systemInfo = wx.getSystemInfoSync()
+
                             let button = wx.createUserInfoButton({
 
                                 type: "image",
@@ -213,5 +216,15 @@ export default class WechatSDK {
         })
     }
 
+    //客服消息
+    openCustomerServiceConversation() {
+        wx.openCustomerServiceConversation({
+            // sessionFrom: '',
+            // showMessageCard: true,
+            // sendMessageTitle: '',
+            // sendMessagePath: '',
+            // sendMessageImg: '',
+        })
+    }
 
 }

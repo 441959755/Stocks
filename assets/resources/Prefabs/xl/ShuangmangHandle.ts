@@ -42,18 +42,7 @@ export default class NewClass extends cc.Component {
 
     protected onEnable() {
         this.toggle1.isChecked = GameData.SMSet.isFC;
-
-        this.initLa.string = GameData.SmxlState.goldInit;
-
-        this.curla.string = GameData.SmxlState.gold;
-
-        //是否重置
-        this.CZBtn.active = false;
-        if (GameData.SmxlState.gold <= GameCfgText.smxlCfg.capital_min.value) {
-            this.CZBtn.active = true;
-        } else if (GameData.SmxlState.gold >= GameCfgText.smxlCfg.capital_max.value) {
-            this.CZBtn.active = true;
-        }
+        this.updataGold();
     }
 
 
@@ -69,10 +58,6 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
-            GameCfg.GAMEFUPAN = false;
-            GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.SMSet));
-            //      GameCfg.GameSet = GameData.SMSet;
-            GameCfg.ziChan = GameData.SmxlState.gold;
             this.smStartGameSet();
         }
 
@@ -118,9 +103,14 @@ export default class NewClass extends cc.Component {
             data.isFC = this.toggle1.isChecked;
             GameData.SMSet = data;
         }
+
     }
 
     smStartGameSet() {
+        GameCfg.GAMEFUPAN = false;
+        GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.SMSet));
+        GameCfg.ziChan = GameData.SmxlState.gold;
+
         GameCfgText.getGPSMByRandom()
 
         console.log('给的数据:' + JSON.stringify(GameCfg.enterGameCache));
@@ -130,6 +120,7 @@ export default class NewClass extends cc.Component {
         GameCfg.huizhidatas = GameCfg.enterGameCache.reserve;
 
         GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
+
             GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
             GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
 
@@ -140,7 +131,6 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit('LOADGAME');
         });
-
     }
 
     onDestroy() {

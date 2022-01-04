@@ -147,7 +147,7 @@ export default class NewClass extends cc.Component {
     onEnable() {
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
-         GameCfg.GameType = pb.GameType.ZhiBiao;
+        GameCfg.GameType = pb.GameType.ZhiBiao;
 
         this.boxs.forEach((el, index) => {
             let la = el.getChildByName('label').getComponent(cc.Label);
