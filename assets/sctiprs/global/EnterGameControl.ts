@@ -1,4 +1,5 @@
 import { pb } from "../../protos/proto";
+
 import GameCfg from "../game/GameCfg";
 import StrategyAIData from "../game/StrategyAIData";
 import GameData from "../GameData";
@@ -17,38 +18,58 @@ export default class EnterGameControl {
     }
 
     //当前定向是否可以进入游戏   
-    public static onCurDXIsEnterGame() {
-
+    public static onCurWXIsEnterGame() {
         let data = {
             status: 0,
             count: 0,
         }
-
-        //没解锁 不是VIP
-        if (!GameData.properties[pb.GamePropertyId.UnlockDxxl] && new Date().getTime() / 1000 > GameData.properties[pb.GamePropertyId.VipExpiration]) {
-
-            let curCount = GameCfgText.gameConf.dxxl.free - GameData.todayGameCount[pb.GameType.DingXiang];
-            //还有免费次数
-            if (curCount > 0) {
-                data.status = 1;
-            }
-            else {
-                curCount = GameCfgText.gameConf.dxxl.ad + curCount;
-                //还有看广告次数
-
-                if (curCount > 0) {
-                    data.status = 2;
-                }
-
-                //什么都没有了
-                else {
-                    data.status = 3;
-                }
-            }
-
-            data.count = curCount;
+        let free, adcount, todayCount;
+        if (GameCfg.GameType == pb.GameType.ShuangMang) {
+            free = 5;
+            adcount = 5;
+            todayCount = GameData.todayGameCount[pb.GameType.ShuangMang];
         }
 
+        else if (GameCfg.GameType == pb.GameType.DingXiang) {
+            free = 0;
+            adcount = 5;
+            todayCount = GameData.todayGameCount[pb.GameType.DingXiang];
+        }
+
+        else if (GameCfg.GameType == pb.GameType.QiHuo) {
+            free = 0;
+            adcount = 5;
+            todayCount = GameData.todayGameCount[pb.GameType.QiHuo];
+        }
+
+        else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            free = 0;
+            adcount = 5;
+            todayCount = GameData.todayGameCount[pb.GameType.ZhiBiao];
+        }
+
+        let curCount = free - todayCount;
+        //还有免费次数
+        if (curCount > 0) {
+            data.status = 1;
+        }
+
+        else {
+
+            curCount = adcount + curCount;
+            //还有看广告次数
+
+            if (curCount > 0) {
+                data.status = 2;
+            }
+
+            //什么都没有了
+            else {
+                data.status = 3;
+            }
+        }
+
+        data.count = curCount;
         return data;
     }
 

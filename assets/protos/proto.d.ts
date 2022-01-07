@@ -139,6 +139,8 @@ export namespace pb {
         Rep_Hall_Get7Award = 3050,
         Req_Hall_GetBrokenAward = 3051,
         Rep_Hall_GetBrokenAward = 3052,
+        Req_Hall_Exchange = 3053,
+        Rep_Hall_Exchange = 3054,
         Req_Hall_Unregistry = 3997,
         Rep_Hall_Unregistry = 3998,
         Req_Hall_Logout = 3999,
@@ -189,6 +191,10 @@ export namespace pb {
         Rep_Game_ZsjcBet = 4044,
         Req_Game_ZsjcRanking = 4045,
         Rep_Game_ZsjcRanking = 4046,
+        Req_Game_ZsjcPlayerBettingList = 4047,
+        Rep_Game_ZsjcPlayerBettingList = 4048,
+        Req_Game_ZsjcBettingResultList = 4049,
+        Rep_Game_ZsjcBettingResultList = 4050,
         Req_Room_Create = 5003,
         Rep_Room_Create = 5004,
         Req_Room_Enter = 5005,
@@ -655,6 +661,7 @@ export namespace pb {
         UnlockQhxl = 21,
         UnlockTjdxl = 22,
         UnlockZbxl = 23,
+        K = 26,
         Tester = 27,
         VipExpiration = 28,
         RMB = 29,
@@ -674,7 +681,8 @@ export namespace pb {
         Dk = 1,
         Zsjc = 2,
         Ggjc = 3,
-        MaxDailyTaskId = 4,
+        Cg = 4,
+        MaxDailyTaskId = 5,
         MaxStudyTaskId = 8
     }
 
@@ -698,6 +706,13 @@ export namespace pb {
         Win = 1,
         Lost = 2,
         Giveup = -1
+    }
+
+    /** ExchangeType enum. */
+    enum ExchangeType {
+        ExchangeType_NULL = 0,
+        ExchangeType_K2Coupon = 1,
+        ExchangeType_K2Capital = 2
     }
 
     /** ExchangeDirection enum. */
@@ -2215,6 +2230,9 @@ export namespace pb {
 
         /** GameData isEditedIcon */
         isEditedIcon?: (boolean|null);
+
+        /** GameData cgdsStockListLast */
+        cgdsStockListLast?: (number[]|null);
     }
 
     /** Represents a GameData. */
@@ -2294,6 +2312,9 @@ export namespace pb {
 
         /** GameData isEditedIcon. */
         public isEditedIcon: boolean;
+
+        /** GameData cgdsStockListLast. */
+        public cgdsStockListLast: number[];
 
         /**
          * Creates a new GameData instance using the specified properties.
@@ -6805,6 +6826,12 @@ export namespace pb {
 
         /** RankingItem cgdsCapital */
         cgdsCapital?: (number|null);
+
+        /** RankingItem zsjcBettingItem */
+        zsjcBettingItem?: (number|null);
+
+        /** RankingItem zsjcBettingAmount */
+        zsjcBettingAmount?: (number|null);
     }
 
     /** Represents a RankingItem. */
@@ -6854,6 +6881,12 @@ export namespace pb {
 
         /** RankingItem cgdsCapital. */
         public cgdsCapital: number;
+
+        /** RankingItem zsjcBettingItem. */
+        public zsjcBettingItem: number;
+
+        /** RankingItem zsjcBettingAmount. */
+        public zsjcBettingAmount: number;
 
         /**
          * Creates a new RankingItem instance using the specified properties.
@@ -9726,6 +9759,546 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a CmdZsjcPlayerBettingList. */
+    interface ICmdZsjcPlayerBettingList {
+
+        /** CmdZsjcPlayerBettingList code */
+        code?: (number|null);
+
+        /** CmdZsjcPlayerBettingList gametype */
+        gametype?: (number|null);
+    }
+
+    /** Represents a CmdZsjcPlayerBettingList. */
+    class CmdZsjcPlayerBettingList implements ICmdZsjcPlayerBettingList {
+
+        /**
+         * Constructs a new CmdZsjcPlayerBettingList.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdZsjcPlayerBettingList);
+
+        /** CmdZsjcPlayerBettingList code. */
+        public code: number;
+
+        /** CmdZsjcPlayerBettingList gametype. */
+        public gametype: number;
+
+        /**
+         * Creates a new CmdZsjcPlayerBettingList instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdZsjcPlayerBettingList instance
+         */
+        public static create(properties?: pb.ICmdZsjcPlayerBettingList): pb.CmdZsjcPlayerBettingList;
+
+        /**
+         * Encodes the specified CmdZsjcPlayerBettingList message. Does not implicitly {@link pb.CmdZsjcPlayerBettingList.verify|verify} messages.
+         * @param message CmdZsjcPlayerBettingList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdZsjcPlayerBettingList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdZsjcPlayerBettingList message, length delimited. Does not implicitly {@link pb.CmdZsjcPlayerBettingList.verify|verify} messages.
+         * @param message CmdZsjcPlayerBettingList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdZsjcPlayerBettingList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdZsjcPlayerBettingList message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdZsjcPlayerBettingList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdZsjcPlayerBettingList;
+
+        /**
+         * Decodes a CmdZsjcPlayerBettingList message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdZsjcPlayerBettingList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdZsjcPlayerBettingList;
+
+        /**
+         * Verifies a CmdZsjcPlayerBettingList message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdZsjcPlayerBettingList message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdZsjcPlayerBettingList
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdZsjcPlayerBettingList;
+
+        /**
+         * Creates a plain object from a CmdZsjcPlayerBettingList message. Also converts values to other types if specified.
+         * @param message CmdZsjcPlayerBettingList
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdZsjcPlayerBettingList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdZsjcPlayerBettingList to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ZsjcPlayerBettingList. */
+    interface IZsjcPlayerBettingList {
+
+        /** ZsjcPlayerBettingList code */
+        code?: (number|null);
+
+        /** ZsjcPlayerBettingList gametype */
+        gametype?: (number|null);
+
+        /** ZsjcPlayerBettingList Items */
+        Items?: (pb.IRankingItem[]|null);
+    }
+
+    /** Represents a ZsjcPlayerBettingList. */
+    class ZsjcPlayerBettingList implements IZsjcPlayerBettingList {
+
+        /**
+         * Constructs a new ZsjcPlayerBettingList.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IZsjcPlayerBettingList);
+
+        /** ZsjcPlayerBettingList code. */
+        public code: number;
+
+        /** ZsjcPlayerBettingList gametype. */
+        public gametype: number;
+
+        /** ZsjcPlayerBettingList Items. */
+        public Items: pb.IRankingItem[];
+
+        /**
+         * Creates a new ZsjcPlayerBettingList instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ZsjcPlayerBettingList instance
+         */
+        public static create(properties?: pb.IZsjcPlayerBettingList): pb.ZsjcPlayerBettingList;
+
+        /**
+         * Encodes the specified ZsjcPlayerBettingList message. Does not implicitly {@link pb.ZsjcPlayerBettingList.verify|verify} messages.
+         * @param message ZsjcPlayerBettingList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IZsjcPlayerBettingList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ZsjcPlayerBettingList message, length delimited. Does not implicitly {@link pb.ZsjcPlayerBettingList.verify|verify} messages.
+         * @param message ZsjcPlayerBettingList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IZsjcPlayerBettingList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ZsjcPlayerBettingList message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ZsjcPlayerBettingList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ZsjcPlayerBettingList;
+
+        /**
+         * Decodes a ZsjcPlayerBettingList message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ZsjcPlayerBettingList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ZsjcPlayerBettingList;
+
+        /**
+         * Verifies a ZsjcPlayerBettingList message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ZsjcPlayerBettingList message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ZsjcPlayerBettingList
+         */
+        public static fromObject(object: { [k: string]: any }): pb.ZsjcPlayerBettingList;
+
+        /**
+         * Creates a plain object from a ZsjcPlayerBettingList message. Also converts values to other types if specified.
+         * @param message ZsjcPlayerBettingList
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.ZsjcPlayerBettingList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ZsjcPlayerBettingList to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdZsjcBettingResultList. */
+    interface ICmdZsjcBettingResultList {
+
+        /** CmdZsjcBettingResultList uid */
+        uid?: (number|null);
+
+        /** CmdZsjcBettingResultList code */
+        code?: (number|null);
+
+        /** CmdZsjcBettingResultList gametype */
+        gametype?: (number|null);
+
+        /** CmdZsjcBettingResultList from */
+        from?: (number|Long|null);
+
+        /** CmdZsjcBettingResultList to */
+        to?: (number|Long|null);
+
+        /** CmdZsjcBettingResultList total */
+        total?: (number|null);
+    }
+
+    /** Represents a CmdZsjcBettingResultList. */
+    class CmdZsjcBettingResultList implements ICmdZsjcBettingResultList {
+
+        /**
+         * Constructs a new CmdZsjcBettingResultList.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdZsjcBettingResultList);
+
+        /** CmdZsjcBettingResultList uid. */
+        public uid: number;
+
+        /** CmdZsjcBettingResultList code. */
+        public code: number;
+
+        /** CmdZsjcBettingResultList gametype. */
+        public gametype: number;
+
+        /** CmdZsjcBettingResultList from. */
+        public from: (number|Long);
+
+        /** CmdZsjcBettingResultList to. */
+        public to: (number|Long);
+
+        /** CmdZsjcBettingResultList total. */
+        public total: number;
+
+        /**
+         * Creates a new CmdZsjcBettingResultList instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdZsjcBettingResultList instance
+         */
+        public static create(properties?: pb.ICmdZsjcBettingResultList): pb.CmdZsjcBettingResultList;
+
+        /**
+         * Encodes the specified CmdZsjcBettingResultList message. Does not implicitly {@link pb.CmdZsjcBettingResultList.verify|verify} messages.
+         * @param message CmdZsjcBettingResultList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdZsjcBettingResultList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdZsjcBettingResultList message, length delimited. Does not implicitly {@link pb.CmdZsjcBettingResultList.verify|verify} messages.
+         * @param message CmdZsjcBettingResultList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdZsjcBettingResultList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdZsjcBettingResultList message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdZsjcBettingResultList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdZsjcBettingResultList;
+
+        /**
+         * Decodes a CmdZsjcBettingResultList message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdZsjcBettingResultList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdZsjcBettingResultList;
+
+        /**
+         * Verifies a CmdZsjcBettingResultList message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdZsjcBettingResultList message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdZsjcBettingResultList
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdZsjcBettingResultList;
+
+        /**
+         * Creates a plain object from a CmdZsjcBettingResultList message. Also converts values to other types if specified.
+         * @param message CmdZsjcBettingResultList
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdZsjcBettingResultList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdZsjcBettingResultList to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ZsjcBettingResultItem. */
+    interface IZsjcBettingResultItem {
+
+        /** ZsjcBettingResultItem uid */
+        uid?: (number|null);
+
+        /** ZsjcBettingResultItem code */
+        code?: (number|null);
+
+        /** ZsjcBettingResultItem gametype */
+        gametype?: (number|null);
+
+        /** ZsjcBettingResultItem betting */
+        betting?: (number|null);
+
+        /** ZsjcBettingResultItem money */
+        money?: (number|null);
+
+        /** ZsjcBettingResultItem bonus */
+        bonus?: (number|null);
+
+        /** ZsjcBettingResultItem tsBetting */
+        tsBetting?: (number|Long|null);
+
+        /** ZsjcBettingResultItem tsSettling */
+        tsSettling?: (number|Long|null);
+    }
+
+    /** Represents a ZsjcBettingResultItem. */
+    class ZsjcBettingResultItem implements IZsjcBettingResultItem {
+
+        /**
+         * Constructs a new ZsjcBettingResultItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IZsjcBettingResultItem);
+
+        /** ZsjcBettingResultItem uid. */
+        public uid: number;
+
+        /** ZsjcBettingResultItem code. */
+        public code: number;
+
+        /** ZsjcBettingResultItem gametype. */
+        public gametype: number;
+
+        /** ZsjcBettingResultItem betting. */
+        public betting: number;
+
+        /** ZsjcBettingResultItem money. */
+        public money: number;
+
+        /** ZsjcBettingResultItem bonus. */
+        public bonus: number;
+
+        /** ZsjcBettingResultItem tsBetting. */
+        public tsBetting: (number|Long);
+
+        /** ZsjcBettingResultItem tsSettling. */
+        public tsSettling: (number|Long);
+
+        /**
+         * Creates a new ZsjcBettingResultItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ZsjcBettingResultItem instance
+         */
+        public static create(properties?: pb.IZsjcBettingResultItem): pb.ZsjcBettingResultItem;
+
+        /**
+         * Encodes the specified ZsjcBettingResultItem message. Does not implicitly {@link pb.ZsjcBettingResultItem.verify|verify} messages.
+         * @param message ZsjcBettingResultItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IZsjcBettingResultItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ZsjcBettingResultItem message, length delimited. Does not implicitly {@link pb.ZsjcBettingResultItem.verify|verify} messages.
+         * @param message ZsjcBettingResultItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IZsjcBettingResultItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ZsjcBettingResultItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ZsjcBettingResultItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ZsjcBettingResultItem;
+
+        /**
+         * Decodes a ZsjcBettingResultItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ZsjcBettingResultItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ZsjcBettingResultItem;
+
+        /**
+         * Verifies a ZsjcBettingResultItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ZsjcBettingResultItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ZsjcBettingResultItem
+         */
+        public static fromObject(object: { [k: string]: any }): pb.ZsjcBettingResultItem;
+
+        /**
+         * Creates a plain object from a ZsjcBettingResultItem message. Also converts values to other types if specified.
+         * @param message ZsjcBettingResultItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.ZsjcBettingResultItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ZsjcBettingResultItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ZsjcBettingResult. */
+    interface IZsjcBettingResult {
+
+        /** ZsjcBettingResult Items */
+        Items?: (pb.IZsjcBettingResultItem[]|null);
+    }
+
+    /** Represents a ZsjcBettingResult. */
+    class ZsjcBettingResult implements IZsjcBettingResult {
+
+        /**
+         * Constructs a new ZsjcBettingResult.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IZsjcBettingResult);
+
+        /** ZsjcBettingResult Items. */
+        public Items: pb.IZsjcBettingResultItem[];
+
+        /**
+         * Creates a new ZsjcBettingResult instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ZsjcBettingResult instance
+         */
+        public static create(properties?: pb.IZsjcBettingResult): pb.ZsjcBettingResult;
+
+        /**
+         * Encodes the specified ZsjcBettingResult message. Does not implicitly {@link pb.ZsjcBettingResult.verify|verify} messages.
+         * @param message ZsjcBettingResult message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IZsjcBettingResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ZsjcBettingResult message, length delimited. Does not implicitly {@link pb.ZsjcBettingResult.verify|verify} messages.
+         * @param message ZsjcBettingResult message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IZsjcBettingResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ZsjcBettingResult message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ZsjcBettingResult
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ZsjcBettingResult;
+
+        /**
+         * Decodes a ZsjcBettingResult message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ZsjcBettingResult
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ZsjcBettingResult;
+
+        /**
+         * Verifies a ZsjcBettingResult message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ZsjcBettingResult message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ZsjcBettingResult
+         */
+        public static fromObject(object: { [k: string]: any }): pb.ZsjcBettingResult;
+
+        /**
+         * Creates a plain object from a ZsjcBettingResult message. Also converts values to other types if specified.
+         * @param message ZsjcBettingResult
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.ZsjcBettingResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ZsjcBettingResult to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a CmdGetWeeklyAward. */
     interface ICmdGetWeeklyAward {
 
@@ -11041,6 +11614,108 @@ export namespace pb {
 
         /**
          * Converts this CmdGoldAwardPrompt to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdExchange. */
+    interface ICmdExchange {
+
+        /** CmdExchange type */
+        type?: (pb.ExchangeType|null);
+
+        /** CmdExchange amount */
+        amount?: (number|Long|null);
+
+        /** CmdExchange uid */
+        uid?: (number|Long|null);
+    }
+
+    /** Represents a CmdExchange. */
+    class CmdExchange implements ICmdExchange {
+
+        /**
+         * Constructs a new CmdExchange.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdExchange);
+
+        /** CmdExchange type. */
+        public type: pb.ExchangeType;
+
+        /** CmdExchange amount. */
+        public amount: (number|Long);
+
+        /** CmdExchange uid. */
+        public uid: (number|Long);
+
+        /**
+         * Creates a new CmdExchange instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdExchange instance
+         */
+        public static create(properties?: pb.ICmdExchange): pb.CmdExchange;
+
+        /**
+         * Encodes the specified CmdExchange message. Does not implicitly {@link pb.CmdExchange.verify|verify} messages.
+         * @param message CmdExchange message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdExchange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdExchange message, length delimited. Does not implicitly {@link pb.CmdExchange.verify|verify} messages.
+         * @param message CmdExchange message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdExchange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdExchange message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdExchange
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdExchange;
+
+        /**
+         * Decodes a CmdExchange message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdExchange
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdExchange;
+
+        /**
+         * Verifies a CmdExchange message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdExchange message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdExchange
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdExchange;
+
+        /**
+         * Creates a plain object from a CmdExchange message. Also converts values to other types if specified.
+         * @param message CmdExchange
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdExchange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdExchange to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -13272,6 +13947,9 @@ export namespace pb {
 
         /** CmdRegistry websocket */
         websocket?: (boolean|null);
+
+        /** CmdRegistry unionId */
+        unionId?: (string|null);
     }
 
     /** Represents a CmdRegistry. */
@@ -13300,6 +13978,9 @@ export namespace pb {
 
         /** CmdRegistry websocket. */
         public websocket: boolean;
+
+        /** CmdRegistry unionId. */
+        public unionId: string;
 
         /**
          * Creates a new CmdRegistry instance using the specified properties.
@@ -13389,6 +14070,9 @@ export namespace pb {
 
         /** CmdLogin websocket */
         websocket?: (boolean|null);
+
+        /** CmdLogin unionId */
+        unionId?: (string|null);
     }
 
     /** Represents a CmdLogin. */
@@ -13414,6 +14098,9 @@ export namespace pb {
 
         /** CmdLogin websocket. */
         public websocket: boolean;
+
+        /** CmdLogin unionId. */
+        public unionId: string;
 
         /**
          * Creates a new CmdLogin instance using the specified properties.

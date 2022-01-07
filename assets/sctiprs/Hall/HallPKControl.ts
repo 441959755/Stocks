@@ -5,25 +5,12 @@ import GameCfg from "../game/GameCfg";
 import GameData from "../GameData";
 import LoadUtils from "../Utils/LoadUtils";
 import GlobalHandle from "../global/GlobalHandle";
+import PopupManager from "../Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
-
-    matchPK: cc.Node = null;
-
-    chuangGuan: cc.Node = null;
-
-    cjdz: cc.Node = null;// 创建对战
-
-    RoomNode: cc.Node = null;
-
-    addRoom: cc.Node = null;
-
-    cgsLvRank: cc.Node = null;
-
-    mrtNode: cc.Node = null;
 
     onLoad() {
         //匹配PK
@@ -59,37 +46,33 @@ export default class NewClass extends cc.Component {
     }
 
     openMrtLayer(data) {
-
-        this.openNode(this.mrtNode, 'Prefabs/pk/MRT', 10, (node) => {
-            this.mrtNode = node;
-            let handle = this.mrtNode.getComponent('MRTHandle');
+        PopupManager.openNode(this.node, null, 'Prefabs/pk/MRT', 10, (node) => {
+            let handle = node.getComponent('MRTHandle');
             handle.MRTData = data;
             handle.initShow();
-        });
-
+        })
     }
 
     openCgsLvRank(id, stage) {
-        this.openNode(this.cgsLvRank, 'Prefabs/pk/cgsLvRank', 10, (node) => {
-            this.cgsLvRank = node;
-            let handle = this.cgsLvRank.getComponent('CgsLvRank');
+        PopupManager.openNode(this.node, null, 'Prefabs/pk/cgsLvRank', 10, (node) => {
+            let handle = node.getComponent('CgsLvRank');
             handle.reqGameCgsGetStageRank(id, stage);
-        });
+        })
     }
 
     openAddRoomLayer() {
-        this.openNode(this.addRoom, 'Prefabs/pk/AddRoom', 3, (node) => { this.addRoom = node });
+        PopupManager.openNode(this.node, null, 'Prefabs/pk/AddRoom', 3, null);
     }
 
     openCjdzLayer() {
-        this.openNode(this.cjdz, 'Prefabs/pk/creatorRoom', 3, (node) => { this.cjdz = node });
+        PopupManager.openNode(this.node, null, 'Prefabs/pk/creatorRoom', 3, null);
     }
 
     /**
      * 
      */
     openRoom() {
-        this.openNode(this.RoomNode, 'Prefabs/pk/Room', 3, (node) => { this.RoomNode = node });
+        PopupManager.openNode(this.node, null, 'Prefabs/pk/Room', 3, null);
     }
 
     /**
@@ -97,14 +80,14 @@ export default class NewClass extends cc.Component {
      * 打开匹配PK
      */
     openMatchPk() {
-        this.openNode(this.matchPK, 'Prefabs/pk/matchPK', 3, (node) => { this.matchPK = node });
+        PopupManager.openNode(this.node, null, 'Prefabs/pk/matchPK', 3, null);
     }
 
     /**
      * 闯关
      */
     openChuangGuan() {
-        this.openNode(this.chuangGuan, 'Prefabs/pk/CGSPK', 2, (node) => { this.chuangGuan = node });
+        PopupManager.openNode(this.node, null, 'Prefabs/pk/CGSPK', 2, null);
     }
 
     // 同步房间游戏状态
@@ -122,15 +105,12 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit('SHOWOTHERPLAYER');
     }
 
-
-
     onSelfEnterRoomGameData(info) {
 
         //不是好友pk
         if (!GameData.JJCapital) {
 
             GlobalHandle.onLineInvite();
-
         }
 
         console.log('进入房间：' + JSON.stringify(info));
@@ -240,23 +220,6 @@ export default class NewClass extends cc.Component {
         LoadUtils.releaseRes('Prefabs/pk/AddRoom');
         LoadUtils.releaseRes('Prefabs/pk/cgsLvRank');
         LoadUtils.releaseRes('Prefabs/pk/MRT');
-    }
-
-    openNode(node, url, zIndex, call?) {
-        if (!node) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes(url, pre => {
-                node = cc.instantiate(pre);
-                this.node.addChild(node, zIndex);
-                node.active = true;
-                call(node);
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            })
-        }
-        else {
-            node.active = true;
-            call(node);
-        }
     }
 
 }

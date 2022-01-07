@@ -102,6 +102,7 @@ enum GamePropertyId {
 	UnlockTjdxl = 22;		// 条件单训练解锁标志
 	UnlockZbxl = 23;		// 指标训练解锁标志
 
+	K = 26;					// K币（小程序）
 	Tester = 27;			// 内部测试人员
 	VipExpiration = 28;		// VIP截止日期的时间戳
 	RMB = 29;				// 充值的人民币，或给玩家发红包
@@ -123,7 +124,7 @@ enum TaskId {
 	Ggjc = 3;		// 个股竞猜任务
 	Cg = 4;			// 闯关赛任务
 
-	MaxDailyTaskId = 4;	// 日常任务最大下标（不包括最大ID，小于等于最大ID）
+	MaxDailyTaskId = 5;	// 日常任务最大下标（不包括最大ID，小于等于最大ID）
 	MaxStudyTaskId = 8;	// 学习任务最大下标（不包括最大ID，小于等于最大ID）
 }
 
@@ -151,7 +152,12 @@ enum GamePkResult {
 	Giveup = -1;	// 放弃
 }
 
-
+// 资产兑换类型
+enum ExchangeType {
+	ExchangeType_NULL = 0;		// 空
+	ExchangeType_K2Coupon = 1;	// K币->点券
+	ExchangeType_K2Capital = 2;	// K币->模拟炒股币
+}
 // 资产兑换方向
 enum ExchangeDirection {
 	ExchangeDirection_NULL = 0;	// 空
@@ -284,6 +290,7 @@ message GameData {
 	repeated int32 award7 = 21;						// 7次奖励：7个日期，格式YYYYMMDD
 	bool is_edited_nick = 22;						// 是否修改过昵称
 	bool is_edited_icon = 23;						// 是否修改过头像
+	repeated int32 cgds_stock_list_last = 24;		// 参与的最近一期炒股大赛股票列表
 }
 
 
@@ -400,6 +407,8 @@ message CmdDailyTaskProgress {
 	int32 uid    = 1;	// 玩家ID
 	int32 task_id = 2;	// 任务Id
 }
+
+
 
 // 开始游戏
 message CmdGameStart {
@@ -603,6 +612,8 @@ message RankingItem {
 	int32 level = 11;		// 等级
 	int32 fame = 12;		// 威望
 	int32 cgds_capital = 13;// 炒股大赛的总资产
+	int32 zsjc_betting_item = 14;	// 下注项
+	int32 zsjc_betting_amount = 15;	// 下注额
 }
 message RankingList {
 	int32 id = 1;					// 当前这一轮闯关赛的时间编码：YYYYMMDD
@@ -790,7 +801,40 @@ message CmdBet {
 	string icon = 6;		// 头像
 	string gender = 7;		// 性别
 }
-
+// 获取玩家下注列表
+message CmdZsjcPlayerBettingList {
+	int32 code = 1;				// 股票代码
+	int32 gametype = 2;			// 游戏类型：开盘竞猜、当日竞猜、收盘竞猜
+}
+// 玩家下注列表
+message ZsjcPlayerBettingList {
+	int32 code = 1;					// 股票代码
+	int32 gametype = 2;				// 游戏类型：开盘竞猜、当日竞猜、收盘竞猜
+	repeated RankingItem Items = 3;	// 下注列表
+}
+// 获取玩家下注记录请求
+message CmdZsjcBettingResultList {
+	int32 uid = 1;			// uid
+	int32 code = 2;			// 股票代码
+	int32 gametype = 3;		// 游戏类型：开盘竞猜、当日竞猜、收盘竞猜
+	int64 from = 4;			// 游戏起始时间戳（查询一段时间）
+	int64 to = 5;			// 游戏结束时间戳（查询一段时间）
+	int32 total = 6;		// 总记录条数
+}
+// 获取玩家下注记录
+message ZsjcBettingResultItem {
+	int32 uid = 1;			// uid
+	int32 code = 2;			// 股票代码
+	int32 gametype = 3;		// 游戏类型：开盘竞猜、当日竞猜、收盘竞猜
+	int32 betting = 4;		// 下注项
+	int32 money = 5;		// 下注金额
+	int32 bonus = 6;		// 奖励
+	int64 ts_betting = 8;	// 下注时间戳
+	int64 ts_settling = 7;	// 结算时间戳
+}
+message ZsjcBettingResult {
+	repeated ZsjcBettingResultItem Items = 1;	// 记录集
+}
 
 
 // 领取每周豪礼
@@ -868,4 +912,11 @@ message ActivityLogs {
 message CmdGoldAwardPrompt {
 	string text = 1;	// 提示文本
 	int32 gold = 2;		// 金币数量
+}
+
+// 兑换
+message CmdExchange {
+	ExchangeType type = 1;	// 兑换类型
+	int64 amount = 2;		// 兑换数目
+	int64 uid = 3;			// 目标UID
 }

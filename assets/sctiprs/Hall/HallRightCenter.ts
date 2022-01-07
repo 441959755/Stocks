@@ -1,5 +1,6 @@
 import { pb } from "../../protos/proto";
 import LLWConfig from "../common/config/LLWConfig";
+import PlatDefine from "../common/config/PlatDefine";
 import GameData from "../GameData";
 import GameCfgText from "../GameText";
 import GlobalHandle from "../global/GlobalHandle";
@@ -58,13 +59,19 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
-        setTimeout(() => {
-            this.setXSBtnShowOrHide();
-            this.setVip7BtnShowOrHide();
-            this.setCgdsBtnShowOrHide();
-            this.setCgsBtnShowOrHide();
-            this.setOtherBtnShowOrHide();
-        }, 200);
+        if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
+            return;
+        }
+        else {
+            setTimeout(() => {
+                this.setXSBtnShowOrHide();
+                this.setVip7BtnShowOrHide();
+                this.setCgdsBtnShowOrHide();
+                this.setCgsBtnShowOrHide();
+                this.setOtherBtnShowOrHide();
+            }, 200);
+        }
+
     }
 
     setXSBtnShowOrHide() {

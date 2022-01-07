@@ -1,12 +1,15 @@
 import HttpMgr from "../net/HttpMgr";
 import GameData from '../../GameData';
 import { pb } from "../../../protos/proto";
+import LoadImg from "../../Utils/LoadImg";
 
 export default class WechatSDK {
 
     static _instance = null;
 
     videoAd = null;
+
+    loginPlat = pb.LoginType.WeChat_MiniProg;
 
     static getInstance() {
         if (!this._instance) {
@@ -18,7 +21,6 @@ export default class WechatSDK {
     //用户登入
     login(call) {
         let self = this;
-        if (!wx) { return }
         wx.login({
             success(res) {
                 let code = res.code;
@@ -35,7 +37,7 @@ export default class WechatSDK {
 
                                 type: "image",
 
-                                image: "res/raw-assets/cf/cf584a31-da7b-4c32-b1b6-a19fb1d7d605.6ee22.png",
+                                image: "res/raw-assets/7f/7f8bd040-1a9b-45af-9dc8-0f40da27b5e6.png",
                                 style: {
                                     left: systemInfo.screenWidth * 0.5 - 88,
                                     top: systemInfo.screenHeight * 0.7,
@@ -67,54 +69,29 @@ export default class WechatSDK {
         this.ADInit();
     }
 
-    ADInit() {
-        this.videoAd = wx.createRewardedVideoAd({
-            adUnitId: 'adunit-2b80486c280a9b33'
-        })
-    }
-
-    showVideoAd(callback?) {
-        if (this.videoAd) {
-            this.videoAd.onLoad(() => {
-                console.log('激励视频 广告加载成功')
-            })
-
-            this.videoAd.show().then(() => {
-                console.log('激励视频 广告显示');
-            })
-
-            this.videoAd.onError(err => {
-                console.log(err)
-            })
-
-            this.videoAd.onClose(res => {
-                // 用户点击了【关闭广告】按钮
-                // 小于 2.1.0 的基础库版本，res 是一个 undefined
-                if (res && res.isEnded || res === undefined) {
-                    // 正常播放结束，可以下发游戏奖励
-                    callback(1);
-                }
-                else {
-                    // 播放中途退出，不下发游戏奖励
-                    callback(0);
-                }
-            })
-        }
-    }
 
     //获取用户信息
     getUserInfo1(code, btn, call) {
+
         let self = this;
         wx.getUserInfo({
             success(res) {
+
                 const webUserInfo = res.userInfo;
-                console.log(webUserInfo);
+                console.log('用户信息' + JSON.stringify(webUserInfo));
                 GameData.userName = webUserInfo.nickName;
                 GameData.gender = webUserInfo.gender;
                 GameData.headimgurl = webUserInfo.avatarUrl;
 
-                btn && (btn.destroy())
-                self.onLoginCodeHttpRequest(code, call);
+                LoadImg.downloadRemoteImageAndSave(GameData.headimgurl, (tex, sp) => {
+                    GameData.headimgurl = tex;
+                    GameData.headImg = sp;
+
+                    btn && (btn.destroy())
+                    self.onLoginCodeHttpRequest(code, call);
+                }, true)
+
+
             }
         })
     }
@@ -128,8 +105,6 @@ export default class WechatSDK {
             from: pb.AppFrom.WeChatMinProgram,
             pwd: ''
         };
-
-        console.log('loginInfo' + loginInfo);
 
         // let data = PB.onCmdLoginConvertToBuff(loginInfo);
 
@@ -165,6 +140,41 @@ export default class WechatSDK {
         HttpMgr.getInstance().loginWeb(code, loginInfo, call, () => {
             console.log('onLoginCodeHttpRequest err');
         })
+    }
+
+    ADInit() {
+        this.videoAd = wx.createRewardedVideoAd({
+            adUnitId: 'adunit-2b80486c280a9b33'
+        })
+
+        this.videoAd.onLoad(() => {
+            console.log('激励视频 广告加载成功')
+        })
+
+        this.videoAd.onError(err => {
+            console.log(err)
+        })
+    }
+
+    showVideoAd(callback?) {
+        if (this.videoAd) {
+            this.videoAd.show().then(() => {
+                console.log('激励视频 广告显示');
+            })
+
+            this.videoAd.onClose(res => {
+                // 用户点击了【关闭广告】按钮
+                // 小于 2.1.0 的基础库版本，res 是一个 undefined
+                if (res && res.isEnded || res === undefined) {
+                    // 正常播放结束，可以下发游戏奖励
+                    callback(1);
+                }
+                else {
+                    // 播放中途退出，不下发游戏奖励
+                    callback(0);
+                }
+            })
+        }
     }
 
     chooseImage(call) {

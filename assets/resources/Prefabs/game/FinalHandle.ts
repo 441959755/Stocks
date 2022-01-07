@@ -1,5 +1,6 @@
 
 import { pb } from "../../../protos/proto";
+import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 import DrawData from "../../../sctiprs/game/DrawData";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import StrategyAIData from "../../../sctiprs/game/StrategyAIData";
@@ -390,6 +391,9 @@ export default class NewClass extends cc.Component {
 
             this.leavaGame();
 
+            let time = new Date().toLocaleDateString();
+            cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
             if (GameCfg.GameType == pb.GameType.ShuangMang) {
@@ -461,24 +465,23 @@ export default class NewClass extends cc.Component {
 
     gotoGame() {
 
-        if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.FenShi) {
-            return true;
-        }
+        // if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.FenShi) {
+        //     return true;
+        // }
 
-        if (GameData.properties[pb.GamePropertyId.Gold] < 500) {
-            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
-            return false;
-        }
+        // if (GameData.properties[pb.GamePropertyId.Gold] < 500) {
+        //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+        //     return false;
+        // }
 
-        let gameCount = EnterGameControl.onCurIsEnterGame();
+        let gameCount = EnterGameControl.onCurWXIsEnterGame();
 
         let curState, adSucceed;
-        if (gameCount.status == 0) {
-            curState = 0;
-        }
-        else if (gameCount.status == 1) {
+
+        if (gameCount.status == 1) {
             curState = 1;
         }
+
         else if (gameCount.status == 2) {
 
             let time = new Date().toLocaleDateString();
@@ -488,12 +491,26 @@ export default class NewClass extends cc.Component {
             }
             curState = 2;
         }
+
         else {
             curState = 3;
         }
 
-        if ((curState == 2 || curState == 3) && !adSucceed) {
-            GlobalEvent.emit("OPENUNLOCKBOX");
+        if (curState == 2 && !adSucceed) {
+
+            LLWSDK.getSDK().showVideoAd((flag) => {
+                if (flag) {
+                    let time = new Date().toLocaleDateString();
+                    cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+                }
+                else {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才有奖励哦！');
+                }
+            })
+            return false;
+        }
+
+        else if (curState == 3) {
             return false;
         }
 

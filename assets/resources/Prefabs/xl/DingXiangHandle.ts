@@ -1,5 +1,6 @@
 
 import { pb } from "../../../protos/proto";
+import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
@@ -53,6 +54,7 @@ export default class NewClass extends cc.Component {
 	mfxlBtn: cc.Node = null;
 
 	onLoad() {
+
 		this._tipsLa = this.edit.node.getChildByName('tipslabel');
 
 		this.edit.node.on(
@@ -150,43 +152,33 @@ export default class NewClass extends cc.Component {
 
 	onGameCountSow() {
 
-		let gameCount = EnterGameControl.onCurDXIsEnterGame();
+		let gameCount = EnterGameControl.onCurWXIsEnterGame();
 
-		this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.dxxl.cost[0].v) + '金币';
-		this.mfxlBtn.active = true;
-		if (gameCount.status == 0) {
-			this.curState = 0;
-			this.tipsLabel1.node.active = false;
-			this.tipsLabel2.node.active = false;
-			this.mfxlBtn.active = false;
-		}
-
-		else if (gameCount.status == 1) {
-			this.tipsLabel1.node.active = true;
-			this.tipsLabel2.node.active = true;
+		// this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.dxxl.cost[0].v) + '金币';
+		// this.mfxlBtn.active = true;
+		// if (gameCount.status == 0) {
+		// 	this.curState = 0;
+		// 	this.tipsLabel1.node.active = false;
+		// 	this.tipsLabel2.node.active = false;
+		// 	this.mfxlBtn.active = false;
+		// }
+		this.tipsLabel1.node.active = true;
+		this.curState = gameCount.status;
+		if (gameCount.status == 1) {
 			this.tipsLabel1.string = '今日剩余次数：' + gameCount.count + '次';
-			this.curState = 1;
 		}
 
 		else if (gameCount.status == 2) {
-			this.tipsLabel1.node.active = true;
-			this.tipsLabel2.node.active = true;
-
 			let time = new Date().toLocaleDateString();
 			let count = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + GameCfg.GameType);
 			if (count) {
 				this.adSucceed = parseInt(count);
 			}
 			this.tipsLabel1.string = '今日剩余次数：' + this.adSucceed + '次';
-			this.curState = 2;
 		}
 
 		else if (gameCount.status == 3) {
-			this.tipsLabel1.node.active = true;
-			this.tipsLabel2.node.active = true;
 			this.tipsLabel1.string = '今日次数已用完';
-			this.tipsLabel2.string = '开启VIP或解锁该功能取消次数限制';
-			this.curState = 3;
 		}
 	}
 
@@ -552,17 +544,36 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
 		} else if (name == 'startDXBtn') {
 
-			if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameConf.dxxl.cost[0].v) {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+			// if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameConf.dxxl.cost[0].v) {
+			// 	GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+			// 	return;
+			// }
+
+			// else if ((this.curState == 2 || this.curState == 3) && !this.adSucceed) {
+			// 	// GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
+			// 	// return;
+			// 	GlobalEvent.emit("OPENUNLOCKBOX");
+			// 	return;
+			// }
+
+			if (this.curState == 2 && !this.adSucceed) {
+
+				LLWSDK.getSDK().showVideoAd((flag) => {
+					if (flag) {
+						let time = new Date().toLocaleDateString();
+						cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+					}
+					else {
+						GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才有奖励哦！');
+					}
+				})
 				return;
 			}
 
-			else if ((this.curState == 2 || this.curState == 3) && !this.adSucceed) {
-				// GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
-				// return;
-				GlobalEvent.emit("OPENUNLOCKBOX");
-				return;
+			else if (this.curState == 3) {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
 			}
+
 			let time = new Date().toLocaleDateString();
 			cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
 

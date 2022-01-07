@@ -1,3 +1,5 @@
+import LLWConfig from "../common/config/LLWConfig";
+import PlatDefine from "../common/config/PlatDefine";
 import GameCfgText from "../GameText";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
@@ -22,7 +24,6 @@ export default class NewClass extends cc.Component {
     version = 0;
 
     onLoad() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         GlobalEvent.on('OPENADSHOW', this.initAD.bind(this), this);
 
@@ -30,10 +31,14 @@ export default class NewClass extends cc.Component {
             this.node.active = false;
         }, this);
 
-        GameCfgText.LoadGameConf();
+
     }
 
     initAD() {
+
+        if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
+            return;
+        }
 
         this.id = GameCfgText.adConf.launch[0].id;
 

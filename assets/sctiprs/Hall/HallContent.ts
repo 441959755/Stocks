@@ -89,15 +89,10 @@ export default class NewClass extends cc.Component {
 
 		if (!LLWSDK.getSDK().loginPlat) { return }
 
-		if (LLWSDK.getSDK().loginPlat == pb.LoginType.QQ) {
+		if (LLWSDK.getSDK().loginPlat == pb.LoginType.QQ || LLWSDK.getSDK().loginPlat == pb.LoginType.WeChat || LLWSDK.getSDK().loginPlat == pb.LoginType.WeChat_MiniProg) {
 
 			WeChatInfo = cc.sys.localStorage.getItem('QQInfo');
-			cc.sys.localStorage.setItem('QQInfo', 1);
-		}
-
-		else if (LLWSDK.getSDK().loginPlat == pb.LoginType.WeChat) {
-			WeChatInfo = cc.sys.localStorage.getItem('WeChatInfo');
-			cc.sys.localStorage.setItem('WeChatInfo', 1);
+			cc.sys.localStorage.setItem('fristInfo', 1);
 		}
 
 		if (!WeChatInfo) {
@@ -123,19 +118,18 @@ export default class NewClass extends cc.Component {
 			}
 
 			{
-				if (jsb) {
-					let data = {
-						uid: GameData.userID,
-						icon: new Uint8Array(GameData.headimgurl),
-					}
-					let CmdUploadIcon = pb.CmdUploadIcon;
-					let message = CmdUploadIcon.create(data);
-					let buff = CmdUploadIcon.encode(message).finish();
-
-					socket.send(pb.MessageId.Req_Hall_UploadIcon, buff, (info) => {
-						console.log('GameData.headImg:' + JSON.stringify(info));
-					})
+				let data = {
+					uid: GameData.userID,
+					icon: new Uint8Array(GameData.headimgurl),
 				}
+				let CmdUploadIcon = pb.CmdUploadIcon;
+				let message = CmdUploadIcon.create(data);
+				let buff = CmdUploadIcon.encode(message).finish();
+
+				socket.send(pb.MessageId.Req_Hall_UploadIcon, buff, (info) => {
+					console.log('GameData.headImg:' + JSON.stringify(info));
+				})
+
 			}
 		}
 	}
@@ -237,37 +231,57 @@ export default class NewClass extends cc.Component {
 		//pk
 		else if (name == 'main_jj_pkdz') {
 			GameCfgText.getSwitchModule(7, () => {
-				if (EnterGameControl.onCurPKEnterGame()) {
-					GameCfg.GameType = pb.GameType.JJ_PK;
-					GameCfg.GameSet = GameData.JJPKSet;
-					GlobalEvent.emit(EventCfg.OPENMATCHPK);
-				}
-				else {
-					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
-				}
+				//	if (EnterGameControl.onCurPKEnterGame()) {
+				LLWSDK.getSDK().showVideoAd((flag) => {
+					if (flag) {
+						GameCfg.GameType = pb.GameType.JJ_PK;
+						GameCfg.GameSet = GameData.JJPKSet;
+						GlobalEvent.emit(EventCfg.OPENMATCHPK);
+					}
+					else {
+						GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '请观看完整视频哦！');
+					}
+
+				})
+
+
+				// }
+				// else {
+				// 	GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
+				// }
 			})
 		}
 
 		else if (name == 'main_jj_dkdz') {
 			GameCfgText.getSwitchModule(8, () => {
-				if (EnterGameControl.onCurPKEnterGame()) {
-					GameCfg.GameType = pb.GameType.JJ_DuoKong;
-					GameCfg.GameSet = GameData.JJPKSet;
-					GlobalEvent.emit(EventCfg.OPENMATCHPK);
-				}
-				else {
-					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
-				}
+				//s	if (EnterGameControl.onCurPKEnterGame()) {
+				LLWSDK.getSDK().showVideoAd((flag) => {
+					if (flag) {
+						GameCfg.GameType = pb.GameType.JJ_DuoKong;
+						GameCfg.GameSet = GameData.JJPKSet;
+						GlobalEvent.emit(EventCfg.OPENMATCHPK);
+					}
+					else {
+						GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '请观看完整视频哦！');
+					}
+				})
+
+				// }
+				// else {
+				// 	GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
+				// }
 			})
 		}
 
 		//打开闯关赛
 		else if (name == 'main_jj_cgs') {
-			GameCfgText.getSwitchModule(9, () => {
-				GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
-				GameCfg.GameSet = GameData.JJPKSet;
-				GlobalEvent.emit(EventCfg.OPENCHUANGUAN);
-			})
+			// GameCfgText.getSwitchModule(9, () => {
+			// 	GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
+			// 	GameCfg.GameSet = GameData.JJPKSet;
+			// 	GlobalEvent.emit(EventCfg.OPENCHUANGUAN);
+			// })
+
+			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '小程序不能打开闯关赛功能，请前往完整APP体验');
 		}
 
 		//点击竞技

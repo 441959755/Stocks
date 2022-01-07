@@ -59,13 +59,13 @@ export default class NewClass extends cc.Component {
                     return;
                 } else {
                     if (parseInt(str) > this.curGold) {
-                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换金币不能超今日上限！');
+                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换K币不能超今日上限！');
                         this.zc_editBox.string = '';
                         return;
                     }
 
-                    if (parseInt(str) > GameData.properties[pb.GamePropertyId.Gold]) {
-                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换金币不能超可用金币数量！');
+                    if (parseInt(str) > GameData.properties[pb.GamePropertyId.K]) {
+                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换K币不能超可用k币数量！');
                         this.zc_editBox.string = '';
                         return;
                     }
@@ -107,7 +107,7 @@ export default class NewClass extends cc.Component {
         );
 
         GlobalEvent.on(EventCfg.GOLDCHANGE, () => {
-            this.zc_kyLa.string = GameData.properties[pb.GamePropertyId.Gold];
+            this.zc_kyLa.string = GameData.properties[pb.GamePropertyId.K];
         }, this);
     }
 
@@ -116,7 +116,7 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-        this.zc_kyLa.string = GameData.properties[pb.GamePropertyId.Gold];
+        this.zc_kyLa.string = GameData.properties[pb.GamePropertyId.K];
 
         this.zc_syLa.string = this.curGold;
 

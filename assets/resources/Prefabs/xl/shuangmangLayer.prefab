@@ -27,17 +27,17 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 136
+        "__id__": 139
       },
       {
-        "__id__": 137
+        "__id__": 140
       },
       {
-        "__id__": 138
+        "__id__": 141
       }
     ],
     "_prefab": {
-      "__id__": 139
+      "__id__": 142
     },
     "_opacity": 255,
     "_color": {
@@ -241,11 +241,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 134
+        "__id__": 137
       }
     ],
     "_prefab": {
-      "__id__": 135
+      "__id__": 138
     },
     "_opacity": 255,
     "_color": {
@@ -899,7 +899,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 588,
+      "width": 284,
       "height": 120
     },
     "_anchorPoint": {
@@ -982,7 +982,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -522,
+        -218,
         0,
         0,
         0,
@@ -1618,7 +1618,7 @@
         "__id__": 41
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 45
@@ -1652,7 +1652,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -370,
+        -218,
         0,
         0,
         0,
@@ -1987,7 +1987,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -218,
+        -66,
         0,
         0,
         0,
@@ -2288,7 +2288,7 @@
         "__id__": 59
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 63
@@ -2648,7 +2648,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 588,
+      "width": 284,
       "height": 120
     },
     "_resize": 1,
@@ -2772,14 +2772,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 131
+        "__id__": 134
       },
       {
-        "__id__": 132
+        "__id__": 135
       }
     ],
     "_prefab": {
-      "__id__": 133
+      "__id__": 136
     },
     "_opacity": 255,
     "_color": {
@@ -4905,11 +4905,15 @@
     "_parent": {
       "__id__": 73
     },
-    "_children": [],
-    "_active": false,
+    "_children": [
+      {
+        "__id__": 130
+      }
+    ],
+    "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 130
+      "__id__": 133
     },
     "_opacity": 255,
     "_color": {
@@ -4957,6 +4961,113 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "_id": ""
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "tipsLabel1",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 129
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 131
+      }
+    ],
+    "_prefab": {
+      "__id__": 132
+    },
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 204,
+      "g": 204,
+      "b": 204,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 181.35,
+      "height": 50.4
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 1,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        611.025,
+        -206.412,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 130
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_useOriginalSize": true,
+    "_string": "今日剩余次数：3",
+    "_N$string": "今日剩余次数：3",
+    "_fontSize": 24,
+    "_lineHeight": 40,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_batchAsBitmap": false,
+    "_styleFlags": 0,
+    "_underlineHeight": 0,
+    "_N$horizontalAlign": 1,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0,
+    "_N$cacheMode": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "ff8759dc-c877-4a98-8dca-8ed033e3ba15"
+    },
+    "fileId": "9aeiG+f0dJ+KsTXjlqidwW",
+    "sync": false
   },
   {
     "__type__": "cc.PrefabInfo",

@@ -170,6 +170,8 @@ enum MessageId {
 	Rep_Hall_Get7Award = 3050;				// 领取7次奖励应答：无
 	Req_Hall_GetBrokenAward = 3051;			// 领取破产奖励：无
 	Rep_Hall_GetBrokenAward = 3052;			// 领取破产奖励应答：无
+	Req_Hall_Exchange = 3053;				// 兑换：CmdExchange
+	Rep_Hall_Exchange = 3054;				// 兑换应答：ErrorInfo
 
 	Req_Hall_Unregistry = 3997;				// 注销账号
 	Rep_Hall_Unregistry = 3998;				// 注销账号应答：ErrorInfo（注销成功后会自动断开tcp长连接）
@@ -230,6 +232,10 @@ enum MessageId {
 	Rep_Game_ZsjcBet = 4044;				// 指数竞猜下注应答：ErrorInfo
 	Req_Game_ZsjcRanking = 4045;			// 指数竞猜排行榜：无
 	Rep_Game_ZsjcRanking = 4046;			// 指数竞猜排行榜应答：RankingList
+	Req_Game_ZsjcPlayerBettingList = 4047;	// 指数竞猜玩家下注列表：CmdZsjcPlayerBettingList
+	Rep_Game_ZsjcPlayerBettingList = 4048;	// 指数竞猜玩家下注列表应答：ZsjcPlayerBettingList
+	Req_Game_ZsjcBettingResultList = 4049;	// 指数竞猜记录：CmdZsjcBettingResultList
+	Rep_Game_ZsjcBettingResultList = 4050;	// 指数竞猜记录应答：ZsjcBettingResult
 	// 房间相关
 	Req_Room_Create = 5003;					// 创建房间：CmdRoomCreate
 	Rep_Room_Create = 5004;					// 创建房间应答：CmdRoomCreateReply

@@ -8,6 +8,7 @@ import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import { pb } from "../../../protos/proto";
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import EnterGameControl from "../../../sctiprs/global/EnterGameControl";
+import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 
 const { ccclass, property } = cc._decorator;
 
@@ -36,6 +37,12 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     mfxlBtn: cc.Node = null;
 
+    @property(cc.Label)
+    tipsLabel: cc.Label = null;
+
+    curState = 0;
+
+    adSucceed = 0;
 
     tips = [
         ['股价穿越均线', '均线交叉', '组合训练'],
@@ -49,8 +56,6 @@ export default class NewClass extends cc.Component {
 
     @property(cc.EditBox)
     edit: cc.EditBox = null;
-
-    adSucceed = 0;
 
     protected onLoad() {
         this._tipsLa = this.edit.node.getChildByName('tipslabel');
@@ -134,14 +139,29 @@ export default class NewClass extends cc.Component {
     }
 
     onGameCountSow() {
-
-        let gameCount = EnterGameControl.onCurIsEnterGame();
-
-        this.mfxlBtn.active = true;
-
-        if (gameCount.status == 0) {
-            this.mfxlBtn.active = false;
+        let gameCount = EnterGameControl.onCurWXIsEnterGame();
+        this.tipsLabel.node.active = true;
+        this.curState = gameCount.status;
+        if (gameCount.status == 1) {
+            this.tipsLabel.string = '今日免费剩余次数：' + gameCount.count + '次';
         }
+
+        else if (gameCount.status == 2) {
+            let time = new Date().toLocaleDateString();
+            let count = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + GameCfg.GameType);
+
+            if (count) {
+                this.adSucceed = parseInt(count);
+            }
+
+            this.tipsLabel.string = '今日剩余次数：' + gameCount.count + '次';
+        }
+
+        else if (gameCount.status == 3) {
+            this.tipsLabel.string = '今日次数已用完,请点击在线客服,体验完整版APP';
+            this.curState = 3;
+        }
+
     }
 
     onEnable() {
@@ -303,6 +323,7 @@ export default class NewClass extends cc.Component {
                     max = day;
                 }
             }
+
             content.children.forEach(el => {
                 let str = el.getComponent(cc.Label).string;
                 if (str == '随机') {
@@ -507,14 +528,28 @@ export default class NewClass extends cc.Component {
             }
         } else if (name == 'startZBBtn') {
 
-            let Unlock = (GameData.properties[pb.GamePropertyId.UnlockZbxl]) || (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]);
+            if (this.curState == 2 && !this.adSucceed) {
 
-            if (!Unlock && GameData.ZBSet.select != '均线') {
-
-                GlobalEvent.emit("OPENUNLOCKBOX");
-
+                LLWSDK.getSDK().showVideoAd((flag) => {
+                    if (flag) {
+                        let time = new Date().toLocaleDateString();
+                        cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+                    }
+                    else {
+                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才有奖励哦！');
+                    }
+                })
                 return;
+            }
 
+            else if (this.curState == 3) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
+            }
+
+            if (this.curState == 2) {
+                let time = new Date().toLocaleDateString();
+                cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
+                this.adSucceed = 0;
             }
 
             GameCfg.GameType = pb.GameType.ZhiBiao;

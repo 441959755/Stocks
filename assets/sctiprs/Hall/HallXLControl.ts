@@ -10,32 +10,6 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
-    DXNode: cc.Node = null;
-
-    QHNode: cc.Node = null;
-
-    SMNode: cc.Node = null;
-
-    ZBNode: cc.Node = null;
-
-    monthNode: cc.Node = null;
-
-    yieldNode: cc.Node = null;  //曲线图
-
-    helpNode: cc.Node = null;  //帮组
-
-    smResetNode: cc.Node = null;  //sm重置
-
-    TJDNode: cc.Node = null;     //tjd选择界面
-
-    TJDHisNode: cc.Node = null;   //条件单历史记录
-
-    TJDGame: cc.Node = null;    //条件单游戏界面
-
-    fenshi: cc.Node = null;
-
-    fenShiGame: cc.Node = null;
-
     onLoad() {
         GlobalEvent.on(EventCfg.OPENSMLAYER, this.openSMLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZBLAYER, this.openZBLayer.bind(this), this);
@@ -90,22 +64,14 @@ export default class NewClass extends cc.Component {
      * 双盲重置金币
      */
     openSmResetLayer() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.openNode(this.smResetNode, 'Prefabs/xl/SMResetLayer', 10, (node) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.smResetNode = node
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/xl/SMResetLayer', 10, null);
     }
 
     /**
      * 曲线图
      */
     openYieldLayer() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.openNode(this.yieldNode, 'Prefabs/xl/SMYieldCurve', 10, (node) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.yieldNode = node
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/xl/SMYieldCurve', 10, null);
     }
 
 
@@ -113,13 +79,8 @@ export default class NewClass extends cc.Component {
      * 月报
      */
     openMonthLayer() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.openNode(this.monthNode, 'Prefabs/xl/SMMonthlyLayer', 10, (node) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.monthNode = node
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/xl/SMMonthlyLayer', 10, null);
     }
-
 
     /**
      * 历史记录
@@ -176,97 +137,50 @@ export default class NewClass extends cc.Component {
      * 双盲
      */
     openSMLayer() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.openNode(this.SMNode, 'Prefabs/xl/shuangmangLayer', 2, (node) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.SMNode = node
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/xl/shuangmangLayer', 2, null);
     }
 
     /**
      * 指标
      */
     openZBLayer() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.openNode(this.ZBNode, 'Prefabs/xl/zhibiaoLayer', 3, (node) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.ZBNode = node
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/xl/zhibiaoLayer', 3, null);
     }
 
     /**
      * 定向
      */
     openDXLayer() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.openNode(this.DXNode, 'Prefabs/xl/DXLayer', 3, (node) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.DXNode = node
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/xl/DXLayer', 3, null);
     }
 
     /**
      * 期货
      */
     openQHLayer() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.openNode(this.QHNode, 'Prefabs/xl/qiHuoLayer', 3, (node) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.QHNode = node
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/xl/qiHuoLayer', 3, null);
     }
 
     /*
   *打开条件单
   */
     openTiaoJianDan() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.openNode(this.TJDNode, 'Prefabs/tjd/tiaoJianDan', 10, (node) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.TJDNode = node
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/tjd/tiaoJianDan', 10, null);
     }
 
     openFenShi() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.openNode(this.fenshi, 'Prefabs/fsxl/fenshi', 10, (node) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.fenshi = node
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/fsxl/fenshi', 10, null);
     }
 
     /*
-*打开条件单游戏
-*/
+    *打开条件单游戏
+    */
     openTJDGame() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.openNode(this.TJDGame, 'Prefabs/tjd/tjdGame', 20, (node) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.TJDGame = node
-        });
+        PopupManager.openNode(this.node, null, 'Prefabs/tjd/tjdGame', 20, null);
     }
 
     openGameFenShi() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.openNode(this.fenShiGame, 'Prefabs/fsxl/GameFenShi', 20, (node) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            this.fenShiGame = node
-        });
-    }
-
-    openNode(node, url, zIndex, call?) {
-        if (!node) {
-            LoadUtils.loadRes(url, pre => {
-                node = cc.instantiate(pre);
-                this.node.addChild(node, zIndex);
-                node.active = true;
-                call && (call(node));
-            })
-        }
-        else {
-            node.active = true;
-            call && (call(node));
-        }
+        PopupManager.openNode(this.node, null, 'Prefabs/fsxl/GameFenShi', 20, null);
     }
 
 }

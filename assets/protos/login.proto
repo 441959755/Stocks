@@ -116,22 +116,24 @@ message AdClicked {
 
 // 注册
 message CmdRegistry {
-	string account = 1; // 玩家账号：手机号、微信登录的Code
+	string account = 1; // 玩家账号：手机号、QQ或微信登录的OpenID
 	LoginType type = 2; // 登录类型
 	string pwd = 3;     // 玩家密码
 	string sms_code = 4;// 手机验证码
 	AppFrom from = 5; 	// App渠道
 	bool websocket = 6;	// 是否为websocket（默认返回TCP连接地址，是则返回websocket连接地址）
+	string union_id = 7;// 微信平台的UnionID（通过微信平台登录时需要填写）
 }
 // 返回类型：CmdLoginReply
 
 // 登录参数
 message CmdLogin {
-	string account = 1; // 玩家账号：手机号、微信登录的Code
+	string account = 1; // 玩家账号：手机号、QQ或微信登录的OpenID
 	LoginType type = 2; // 登录类型
 	string pwd = 3;     // 玩家密码
 	AppFrom from = 4; 	// App渠道
 	bool websocket = 5;	// 是否为websocket（默认返回TCP连接地址，是则返回websocket连接地址）
+	string union_id = 6;// 微信平台的UnionID（通过微信平台登录时需要填写）
 }
 // 登录响应
 message CmdLoginReply {

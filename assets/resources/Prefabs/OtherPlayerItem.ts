@@ -182,7 +182,7 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'btn_xl') {
 
-            let gameCount = EnterGameControl.onCurDXIsEnterGame();
+            let gameCount = EnterGameControl.onCurIsEnterGame();
 
             if (gameCount.status == 3) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');

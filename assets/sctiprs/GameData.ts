@@ -247,6 +247,7 @@ export default class GameData {
         GlobalEvent.emit(EventCfg.LEVELCHANGE);
         GlobalEvent.emit(EventCfg.EXPCHANGE);
         GlobalEvent.emit(EventCfg.VIPCHANGE);
+        GlobalEvent.emit(EventCfg.KCOINCHANGE);
 
     }
 

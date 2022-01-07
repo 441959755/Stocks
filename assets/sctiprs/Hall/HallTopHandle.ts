@@ -1,10 +1,11 @@
 import { pb } from "../../protos/proto";
+import LLWConfig from "../common/config/LLWConfig";
+import PlatDefine from "../common/config/PlatDefine";
 import GameData from "../GameData";
 import ActionUtils from "../Utils/ActionUtils";
 import ComUtils from "../Utils/ComUtils";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
-import LoadUtils from "../Utils/LoadUtils";
 import PopupManager from "../Utils/PopupManager";
 
 
@@ -58,6 +59,13 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'main_tb_qq') {
+            let str = '';
+            if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
+                str = 'Prefabs/sericeBox1';
+            }
+            else {
+                str = 'Prefabs/sericeBox';
+            }
             PopupManager.openNode(this.node.parent, null, 'Prefabs/sericeBox', 11, (node) => {
                 ActionUtils.openBox(node);
             })

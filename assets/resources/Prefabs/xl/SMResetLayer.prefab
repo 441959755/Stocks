@@ -50,7 +50,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1280,
-      "height": 750
+      "height": 720
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -62,7 +62,7 @@
       "ctor": "Float64Array",
       "array": [
         640,
-        375,
+        360,
         0,
         0,
         0,
@@ -117,7 +117,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1280,
-      "height": 750
+      "height": 720
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -622,8 +622,8 @@
         0,
         0,
         1,
-        1.5,
-        1.5,
+        1,
+        1,
         1
       ]
     },
@@ -656,7 +656,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "f158ee19-bba1-4be7-b541-1afbf690af2c"
+      "__uuid__": "1228e6c9-9e5c-4ae8-9a1d-280c2dbcc3ba"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -1191,7 +1191,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 554.7,
+      "width": 488.06,
       "height": 90.4
     },
     "_anchorPoint": {
@@ -1204,7 +1204,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        105.682,
+        65.071,
         0,
         0,
         0,
@@ -1242,8 +1242,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "    使用                  重置您的训练资金，重置后，您的\n双盲训练资金变回最初的100000资金。",
-    "_N$string": "    使用                  重置您的训练资金，重置后，您的\n双盲训练资金变回最初的100000资金。",
+    "_string": "    您的训练资金低于1000金币，重置后，您的\n双盲训练资金变回最初的100000资金。",
+    "_N$string": "    您的训练资金低于1000金币，重置后，您的\n双盲训练资金变回最初的100000资金。",
     "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -1279,7 +1279,7 @@
       "__id__": 27
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 32
@@ -1311,7 +1311,7 @@
       "ctor": "Float64Array",
       "array": [
         -196.945,
-        125.296,
+        85.531,
         0,
         0,
         0,
@@ -1386,7 +1386,7 @@
       "__id__": 27
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 35
@@ -1687,7 +1687,7 @@
       "__id__": 27
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 43

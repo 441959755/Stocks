@@ -5,6 +5,8 @@ import EventCfg from "./EventCfg";
 import GameCfgText from "../GameText";
 import PopupList from "./PopupList";
 import GlobalHandle from "../global/GlobalHandle";
+import LLWConfig from "../common/config/LLWConfig";
+import PlatDefine from "../common/config/PlatDefine";
 
 
 export default class PopupManager {
@@ -178,10 +180,16 @@ export default class PopupManager {
         }
 
         if (!childen) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            if (this.nodes['Prefabs/loading']) {
+                GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            }
 
             LoadUtils.loadRes(url, pre => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
+                if (this.nodes['Prefabs/loading']) {
+                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                }
+
                 childen = cc.instantiate(pre);
                 prent.addChild(childen, zIndex);
                 childen.active = true;
@@ -199,6 +207,10 @@ export default class PopupManager {
 
     //首次登入弹窗
     public static FirstAutoPop() {
+
+        if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
+            return;
+        }
 
         let t = new Date();
         //清前一天的

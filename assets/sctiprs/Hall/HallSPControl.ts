@@ -65,126 +65,44 @@ export default class NewClass extends cc.Component {
     }
 
     openCgdsph(id) {
-        if (this.cgdsph) {
-            this.cgdsph.active = true;
-            let handle = this.cgdsph.getComponent('ChaoGuRanking');
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/chaoGuRanking', 30, (node) => {
+            let handle = node.getComponent('ChaoGuRanking');
             handle.onShow(id);
-        }
-        else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/chaoGuRanking', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.cgdsph = cc.instantiate(pre);
-                this.node.addChild(this.cgdsph, 30);
-                this.cgdsph.active = true;
-                let handle = this.cgdsph.getComponent('ChaoGuRanking');
-                handle.onShow(id);
-            })
-        }
+        })
 
     }
 
     openCgdsLayer() {
-        if (this.cgds) {
-            this.cgds.active = true;
-        }
-        else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/chaoGuDaSai', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.cgds = cc.instantiate(pre);
-                this.node.addChild(this.cgds, 10);
-                this.cgds.active = true;
-            })
-        }
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/chaoGuDaSai', 10, null);
     }
 
     openMnCDLayer() {
-        if (this.mncd) {
-            this.mncd.active = true;
-        }
-        else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/mncd', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.mncd = cc.instantiate(pre);
-                this.node.addChild(this.mncd, 22);
-                this.mncd.active = true;
-            })
-        }
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/mncd', 22, null);
     }
 
     openSellBox(data) {
-        if (this.sellBox) {
-            this.sellBox.active = true;
-            let handle = this.sellBox.getComponent('SellBox');
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/sellBox', 21, (node) => {
+            let handle = node.getComponent('SellBox');
             handle.onShow(data);
-        }
-        else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/sellBox', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.sellBox = cc.instantiate(pre);
-                this.node.addChild(this.sellBox, 21);
-                this.sellBox.active = true;
-                let handle = this.sellBox.getComponent('SellBox');
-                handle.onShow(data);
-            })
-        }
+        })
     }
 
     openBuyBox(data) {
-
-        if (this.buyBox) {
-            this.buyBox.active = true;
-            let handle = this.buyBox.getComponent('BuyBox');
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/buyBox', 21, (node) => {
+            let handle = node.getComponent('BuyBox');
             handle.onShow(data);
-        }
-        else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/buyBox', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.buyBox = cc.instantiate(pre);
-                this.node.addChild(this.buyBox, 21);
-                this.buyBox.active = true;
-                let handle = this.buyBox.getComponent('BuyBox');
-                handle.onShow(data);
-            })
-        }
+        })
     }
 
     openBKBox() {
-        if (this.bkBox) {
-            this.bkBox.active = true;
-        }
-        else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/selectBkBox', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.bkBox = cc.instantiate(pre);
-                this.node.addChild(this.bkBox, 20);
-                this.bkBox.active = true;
-            })
-        }
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/selectBkBox', 20, null);
     }
 
     openMnHisLayer(id) {
-        if (this.myhisNode) {
-            this.myhisNode.active = true;
-            let handle = this.myhisNode.getComponent('MnHisHandle');
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/mnHis', 31, (node) => {
+            let handle = node.getComponent('MnHisHandle');
             handle.onShow(id);
-        }
-        else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/mnHis', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.myhisNode = cc.instantiate(pre);
-                this.node.addChild(this.myhisNode, 31);
-                this.myhisNode.active = true;
-                let handle = this.myhisNode.getComponent('MnHisHandle');
-                handle.onShow(id);
-            })
-        }
+        })
     }
 
     openCGDSHisLayer(arr) {
@@ -195,76 +113,50 @@ export default class NewClass extends cc.Component {
     }
 
     openDhzcLayer() {
-        if (this.dhzcNode) {
-            this.dhzcNode.active = true;
-        }
-        else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/dhzcLayer', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.dhzcNode = cc.instantiate(pre);
-                this.node.addChild(this.dhzcNode, 20);
-                this.dhzcNode.active = true;
-            })
-        }
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/dhzcLayer', 20, null);
     }
 
     openAddZxgpBox() {
-        if (this.zxgpBox) {
-            this.zxgpBox.active = true;
-        }
-        else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/addZXGPBox', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.zxgpBox = cc.instantiate(pre);
-                this.node.addChild(this.zxgpBox, 20);
-                this.zxgpBox.active = true;
-            })
-        }
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/addZXGPBox', 20, null);
     }
 
     openZNDraw(code, str) {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        if (!this.znDraw) {
-            LoadUtils.loadRes('Prefabs/spPre/znDrawLayer', (pre) => {
-                this.znDraw = cc.instantiate(pre);
-                this.node.addChild(this.znDraw, 20);
-                this.znDraw.setPosition(0, 0);
-                let handle = this.znDraw.getComponent('ZnDraw');
+        // GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        // if (!this.znDraw) {
+        //     LoadUtils.loadRes('Prefabs/spPre/znDrawLayer', (pre) => {
+        //         this.znDraw = cc.instantiate(pre);
+        //         this.node.addChild(this.znDraw, 20);
+        //         this.znDraw.setPosition(0, 0);
+        //         let handle = this.znDraw.getComponent('ZnDraw');
 
-                setTimeout(() => {
-                    this.znDraw.active = false;
-                    this.znDraw.active = true;
-                    handle.onShow(code, str);
-                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                }, 300)
+        //         setTimeout(() => {
+        //             this.znDraw.active = false;
+        //             this.znDraw.active = true;
+        //             handle.onShow(code, str);
+        //             GlobalEvent.emit(EventCfg.LOADINGHIDE);
+        //         }, 300)
 
-            })
-        }
-        else {
-            let handle = this.znDraw.getComponent('ZnDraw');
-            this.znDraw.active = true;
+        //     })
+        // }
+        // else {
+        //     let handle = this.znDraw.getComponent('ZnDraw');
+        //     this.znDraw.active = true;
+        //     handle.onShow(code, str);
+        //     GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
+        // }
+
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/znDrawLayer', 20, (node) => {
+            let handle = node.getComponent('ZnDraw');
+            node.active = true;
             handle.onShow(code, str);
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
-        }
+        })
 
     }
 
     onLoadZNXGLayer() {
-        if (!this.znxgNode) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/znxgLayer', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.znxgNode = cc.instantiate(pre);
-                this.node.addChild(this.znxgNode, 10);
-                this.znxgNode.active = true;
-            })
-        }
-        else {
-            this.znxgNode.active = true;
-        }
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/znxgLayer', 10, null);
     }
 
     openMnxgLayer(info) {
@@ -287,6 +179,7 @@ export default class NewClass extends cc.Component {
             let handle = this.myxgNode.getComponent('MnxgHandle');
             handle.onShow(info);
         }
+
     }
 
     openCGDSLayer(info) {

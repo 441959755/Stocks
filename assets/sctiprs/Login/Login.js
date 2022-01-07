@@ -57,6 +57,8 @@ cc.Class({
 		cc.director.preloadScene('hall');
 
 		GlobalEvent.on('OPENNOTICELAYER', this.openNoticeKayer.bind(this), this);
+
+		GameCfgText.LoadGameConf();
 	},
 
 	start() {

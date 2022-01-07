@@ -8,6 +8,7 @@ import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
+import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 
 const { ccclass, property } = cc._decorator;
 
@@ -221,36 +222,20 @@ export default class NewClass extends cc.Component {
 				tt++;
 			}
 
-
 		}
 	}
 
 	onGameCountSow() {
 
-		let gameCount = EnterGameControl.onCurIsEnterGame();
+		let gameCount = EnterGameControl.onCurWXIsEnterGame();
 
-		this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.qhxl.cost[0].v) + '金币';
-
-		this.mfxlBtn.active = true;
-
-		if (gameCount.status == 0) {
-			this.curState = 0;
-			this.tipsLabel1.node.active = false;
-			this.tipsLabel2.node.active = false;
-			this.mfxlBtn.active = false;
-		}
-
-		else if (gameCount.status == 1) {
-			this.tipsLabel1.node.active = true;
-			this.tipsLabel2.node.active = true;
-			this.tipsLabel1.string = '今日剩余次数：' + gameCount.count + '次';
-			this.curState = 1;
+		this.curState = gameCount.status;
+		this.tipsLabel1.node.active = true;
+		if (gameCount.status == 1) {
+			this.tipsLabel1.string = '今日免费剩余次数：' + gameCount.count + '次';
 		}
 
 		else if (gameCount.status == 2) {
-			this.tipsLabel1.node.active = true;
-			this.tipsLabel2.node.active = true;
-
 			let time = new Date().toLocaleDateString();
 			let count = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + GameCfg.GameType);
 
@@ -258,15 +243,10 @@ export default class NewClass extends cc.Component {
 				this.adSucceed = parseInt(count);
 			}
 			this.tipsLabel1.string = '今日剩余次数：' + this.adSucceed + '次';
-			this.curState = 2;
 		}
 
 		else if (gameCount.status == 3) {
-			this.tipsLabel1.node.active = true;
-			this.tipsLabel2.node.active = true;
-			this.tipsLabel1.string = '今日次数已用完';
-			this.tipsLabel2.string = '开启VIP或解锁该功能取消次数限制';
-			this.curState = 3;
+			this.tipsLabel1.string = '今日次数已用完,请点击在线客服,体验完整版APP';
 		}
 	}
 
@@ -659,7 +639,6 @@ export default class NewClass extends cc.Component {
 					st += GameData.QHSet.day;
 				}
 
-
 				if (parseInt(st) < parseInt(date.start) || parseInt(st) > parseInt(date.end)) {
 					GameData.QHSet.year = ly;
 					GameData.QHSet.month = lm;
@@ -823,14 +802,22 @@ export default class NewClass extends cc.Component {
 		}
 		else if (name == 'startQHBtn') {
 
-			if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameConf.qhxl.cost[0].v) {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+			if (this.curState == 2 && !this.adSucceed) {
+
+				LLWSDK.getSDK().showVideoAd((flag) => {
+					if (flag) {
+						let time = new Date().toLocaleDateString();
+						cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+					}
+					else {
+						GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才有奖励哦！');
+					}
+				})
 				return;
 			}
 
-			else if ((this.curState == 2 || this.curState == 3) && !this.adSucceed) {
-				GlobalEvent.emit("OPENUNLOCKBOX");
-				return;
+			else if (this.curState == 3) {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
 			}
 
 			let time = new Date().toLocaleDateString();
@@ -1130,11 +1117,11 @@ export default class NewClass extends cc.Component {
 		//游戏开始
 		GlobalHandle.onCmdGameStartReq(() => {
 			//游戏行情获取
-			GlobalHandle.onCmdGameStartQuoteQueryQH(data,this.onEnterGame.bind(this));
+			GlobalHandle.onCmdGameStartQuoteQueryQH(data, this.onEnterGame.bind(this));
 		})
 	}
 
-	onEnterGame(){
+	onEnterGame() {
 		GameData.huizhidatas = 0;
 		GameCfg.huizhidatas = 0;
 		let fm = GameCfg.enterGameCache.from;

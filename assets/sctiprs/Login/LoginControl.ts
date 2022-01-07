@@ -4,6 +4,8 @@ import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import Socket from "../common/net/Socket";
+import LLWConfig from "../common/config/LLWConfig";
+import PlatDefine from "../common/config/PlatDefine";
 
 const { ccclass, property } = cc._decorator;
 
@@ -35,21 +37,30 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
-        this.tipsLabel.string = '会员登入';
 
-        this.onShowNode(this.dlNode);
+        //微信小程序
+        if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
+            console.log('微信小程序');
+            LLWSDK.getSDK().login(this.loginResultCallback.bind(this));
+        }
+        else {
+            this.tipsLabel.string = '会员登入';
 
-        let acc = cc.sys.localStorage.getItem('ACCOUNT');
+            this.onShowNode(this.dlNode);
 
-        if (acc) {
-            this.account.string = acc;
+            let acc = cc.sys.localStorage.getItem('ACCOUNT');
+
+            if (acc) {
+                this.account.string = acc;
+            }
+
+            let pass = cc.sys.localStorage.getItem('PASSWORD');
+
+            if (pass) {
+                this.password.string = pass;
+            }
         }
 
-        let pass = cc.sys.localStorage.getItem('PASSWORD');
-
-        if (pass) {
-            this.password.string = pass;
-        }
     }
 
     onShowNode(node) {
@@ -121,13 +132,12 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, decoded.err.err);
             return;
         }
-
         console.log(decoded.token + decoded.uid + decoded.gameAddr);
 
         if (decoded) {
+
             decoded.token && (GameData.token = decoded.token);
             decoded.uid && (GameData.userID = decoded.uid);
-
             if (decoded.gameAddr) {
                 window.socket = new Socket(decoded.gameAddr);
             }

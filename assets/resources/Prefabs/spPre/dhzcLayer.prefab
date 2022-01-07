@@ -50,7 +50,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1280,
-      "height": 750
+      "height": 720
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -62,7 +62,7 @@
       "ctor": "Float64Array",
       "array": [
         640,
-        375,
+        360,
         0,
         0,
         0,
@@ -120,7 +120,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1280,
-      "height": 750
+      "height": 720
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -283,7 +283,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        325,
+        310,
         0,
         0,
         0,
@@ -1005,7 +1005,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1280,
-      "height": 650
+      "height": 620
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1078,7 +1078,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 302,
+      "width": 151,
       "height": 61
     },
     "_anchorPoint": {
@@ -1161,7 +1161,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -75.5,
+        0,
         3,
         0,
         0,
@@ -1516,7 +1516,7 @@
         "__id__": 43
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 46
@@ -1905,7 +1905,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 302,
+      "width": 151,
       "height": 61
     },
     "_resize": 1,
@@ -1979,7 +1979,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1260,
-      "height": 630
+      "height": 600
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2077,7 +2077,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        275,
+        260,
         0,
         0,
         0,
@@ -2128,7 +2128,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 270.06,
+      "width": 262.07,
       "height": 30.24
     },
     "_anchorPoint": {
@@ -2179,8 +2179,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "兑换比例：1金币=10资产",
-    "_N$string": "兑换比例：1金币=10资产",
+    "_string": "兑换比例：1K币=10资产",
+    "_N$string": "兑换比例：1K币=10资产",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,
@@ -2235,7 +2235,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 168,
+      "width": 160.01,
       "height": 30.24
     },
     "_anchorPoint": {
@@ -2286,8 +2286,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "可用金币数量：",
-    "_N$string": "可用金币数量：",
+    "_string": "可用K币数量：",
+    "_N$string": "可用K币数量：",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,
@@ -2449,7 +2449,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 240,
+      "width": 232.01,
       "height": 30.24
     },
     "_anchorPoint": {
@@ -2500,8 +2500,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "今日剩余可兑换金币：",
-    "_N$string": "今日剩余可兑换金币：",
+    "_string": "今日剩余可兑换K币：",
+    "_N$string": "今日剩余可兑换K币：",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,
@@ -2794,7 +2794,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        185,
+        170,
         0,
         0,
         0,
@@ -3426,8 +3426,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "点击输入金币数量",
-    "_N$string": "点击输入金币数量",
+    "_string": "点击输入K币数量",
+    "_N$string": "点击输入K币数量",
     "_fontSize": 24,
     "_lineHeight": 25,
     "_enableWrapText": false,
@@ -3680,7 +3680,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        95,
+        80,
         0,
         0,
         0,

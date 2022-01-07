@@ -55,6 +55,7 @@ export default {
                     console.log('Err :data is null');
                 }
             };
+
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
@@ -79,7 +80,7 @@ export default {
                 if (tex && tex.height != 0) {
 
                     let spriteFrame = new cc.SpriteFrame(tex);
-                    callback(caller, spriteFrame);
+                    callback(tex, spriteFrame);
                 } else {
                     callback(caller, null);
                 }
