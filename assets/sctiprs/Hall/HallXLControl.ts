@@ -137,7 +137,7 @@ export default class NewClass extends cc.Component {
      * 双盲
      */
     openSMLayer() {
-        PopupManager.openNode(this.node, null, 'Prefabs/xl/shuangmangLayer', 2, null);
+        PopupManager.openNode(this.node, null, 'Prefabs/xl/shuangmangLayer', 3, null);
     }
 
     /**

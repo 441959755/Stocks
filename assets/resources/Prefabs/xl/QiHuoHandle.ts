@@ -242,7 +242,7 @@ export default class NewClass extends cc.Component {
 			if (count) {
 				this.adSucceed = parseInt(count);
 			}
-			this.tipsLabel1.string = '今日剩余次数：' + this.adSucceed + '次';
+			this.tipsLabel1.string = '今日剩余次数：' + gameCount.count + '次';
 		}
 
 		else if (gameCount.status == 3) {
@@ -802,12 +802,19 @@ export default class NewClass extends cc.Component {
 		}
 		else if (name == 'startQHBtn') {
 
-			if (this.curState == 2 && !this.adSucceed) {
+			if (this.curState == 2) {
 
 				LLWSDK.getSDK().showVideoAd((flag) => {
 					if (flag) {
-						let time = new Date().toLocaleDateString();
-						cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+						// let time = new Date().toLocaleDateString();
+						// cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+						GlobalEvent.emit(EventCfg.LOADINGSHOW);
+						GameCfg.GAMEFUPAN = false;
+						GameCfg.GameSet = GameData.QHSet;
+						GameCfg.GameType = pb.GameType.QiHuo;
+						GameCfg.ziChan = 100000;
+						this.QHStartGameSet();
+						this.onGameCountSow();
 					}
 					else {
 						GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才有奖励哦！');
@@ -819,19 +826,20 @@ export default class NewClass extends cc.Component {
 			else if (this.curState == 3) {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
 			}
+			else {
+				// let time = new Date().toLocaleDateString();
 
-			let time = new Date().toLocaleDateString();
+				// cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
+				GlobalEvent.emit(EventCfg.LOADINGSHOW);
+				GameCfg.GAMEFUPAN = false;
+				GameCfg.GameSet = GameData.QHSet;
+				GameCfg.GameType = pb.GameType.QiHuo;
+				GameCfg.ziChan = 100000;
+				this.QHStartGameSet();
+				this.onGameCountSow();
+			}
 
-			cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
 
-			this.onGameCountSow();
-
-			GlobalEvent.emit(EventCfg.LOADINGSHOW);
-			GameCfg.GAMEFUPAN = false;
-			GameCfg.GameSet = GameData.QHSet;
-			GameCfg.GameType = pb.GameType.QiHuo;
-			GameCfg.ziChan = 100000;
-			this.QHStartGameSet();
 		}
 		else if (name == 'blackbtn') {
 			this.node.active = false;

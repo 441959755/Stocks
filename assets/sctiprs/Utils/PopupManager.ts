@@ -180,27 +180,27 @@ export default class PopupManager {
         }
 
         if (!childen) {
+
             if (this.nodes['Prefabs/loading']) {
                 GlobalEvent.emit(EventCfg.LOADINGSHOW);
             }
 
             LoadUtils.loadRes(url, pre => {
-
                 if (this.nodes['Prefabs/loading']) {
                     GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 }
-
+                this.isLoading = false;
                 childen = cc.instantiate(pre);
                 prent.addChild(childen, zIndex);
                 childen.active = true;
                 this.nodes[url] = childen;
-                this.isLoading = false;
+
                 call && call(childen);
             })
         }
         else {
-            childen.active = true;
             this.isLoading = false;
+            childen.active = true;
             call && call(childen);
         }
     }

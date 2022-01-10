@@ -76,15 +76,11 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     vipNode: cc.Node = null;
 
-    flag = false;
-
-    protected onShow() {
+    onShow() {
 
         let gpData = GameCfg.data[0].data;
 
-        if (!gpData || gpData.length <= 0 || this.flag) { return }
-
-        this.flag = true;
+        if (!gpData || gpData.length <= 0) { return }
 
         this.DXXLGG.active = false;
 
@@ -375,13 +371,10 @@ export default class NewClass extends cc.Component {
         //返回大厅
         if (name == 'closeBtn') {
             this.leavaGame();
-            this.flag = false;
             GlobalEvent.emit(EventCfg.LEAVEGAME);
         }
         //再来一局
         else if (name == 'lx_jsbt_zlyj') {
-
-            this.flag = false;
 
             GlobalEvent.emit(EventCfg.LEAVEGAME);
 
@@ -389,45 +382,11 @@ export default class NewClass extends cc.Component {
                 return;
             }
 
-            this.leavaGame();
-
-            let time = new Date().toLocaleDateString();
-            cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
-
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
-            if (GameCfg.GameType == pb.GameType.ShuangMang) {
-                GameCfgText.getGPSMByRandom();
-            }
-
-            else if (GameCfg.GameType == pb.GameType.DingXiang) {
-                GameCfgText.getGPDXByRandom();
-            }
-
-            else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                GameCfgText.getGPZBByRandom();
-            }
-
-            else if (GameCfg.GameType == pb.GameType.QiHuo) {
-                GameCfgText.getQHQHByRandom();
-            }
-
-            GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
-
-                GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
-                GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
-
-                if (GameCfg.data[0].data.length - GameData.huizhidatas < 100) {
-                    GameData.huizhidatas = GameCfg.data[0].data.length - 100;
-                    GameCfg.huizhidatas = GameCfg.data[0].data.length - 100;
-                }
-
-                GlobalEvent.emit('LOADGAME');
-            });
+            this.restartGame();
         }
 
         else if (name == 'lx_jsbt_xl') {
-            this.flag = false;
+
             GlobalEvent.emit(EventCfg.LEVELCHANGE);
 
             GlobalEvent.emit(EventCfg.LEAVEGAME);
@@ -451,6 +410,44 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = true;
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
         }
+    }
+
+    restartGame() {
+        this.leavaGame();
+
+        let time = new Date().toLocaleDateString();
+        cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
+
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
+        if (GameCfg.GameType == pb.GameType.ShuangMang) {
+            GameCfgText.getGPSMByRandom();
+        }
+
+        else if (GameCfg.GameType == pb.GameType.DingXiang) {
+            GameCfgText.getGPDXByRandom();
+        }
+
+        else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            GameCfgText.getGPZBByRandom();
+        }
+
+        else if (GameCfg.GameType == pb.GameType.QiHuo) {
+            GameCfgText.getQHQHByRandom();
+        }
+
+        GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
+
+            GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
+            GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
+
+            if (GameCfg.data[0].data.length - GameData.huizhidatas < 100) {
+                GameData.huizhidatas = GameCfg.data[0].data.length - 100;
+                GameCfg.huizhidatas = GameCfg.data[0].data.length - 100;
+            }
+
+            GlobalEvent.emit('LOADGAME');
+        });
     }
 
     leavaGame() {
@@ -515,10 +512,6 @@ export default class NewClass extends cc.Component {
         }
 
         return true;
-    }
-
-    onDisable() {
-        this.flag = false;
     }
 
 }

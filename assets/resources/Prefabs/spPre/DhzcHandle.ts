@@ -147,27 +147,34 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'sp_mncg_qrdh') {
+
             if (!this.dhzc) { return }
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
             let info = {
-                direction: 1,
+                type: pb.ExchangeType.ExchangeType_K2Capital,
                 amount: this.dhzc,
             }
 
-            let CmdMncgExchange = pb.CmdMncgExchange;
-            let message = CmdMncgExchange.create(info);
-            let buff = CmdMncgExchange.encode(message).finish();
+            let CmdExchange = pb.CmdExchange;
+            let message = CmdExchange.create(info);
+            let buff = CmdExchange.encode(message).finish();
 
-            socket.send(pb.MessageId.Req_Game_MncgExchange, buff, (res) => {
+            socket.send(pb.MessageId.Req_Hall_Exchange, buff, (res) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                if (res.account) {
-                    console.log('兑换应答' + JSON.stringify(res));
+                console.log('兑换应答' + JSON.stringify(res));
+                if (res.err) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
+                }
+                else {
                     this.curGold -= this.dhzc;
                     this.zc_syLa.string = this.curGold;
 
-                    GameData.mncgDataList.account = res.account;
+                    GameData.mncgDataList.account += parseInt(this.zc_sdLa.string);
 
                     let day = new Date().toLocaleDateString();
+
                     cc.sys.localStorage.setItem('DHZJ' + day, this.curGold);
                     this.jb_kyLa.string = '';
                     this.dhzc = 0;
@@ -177,9 +184,7 @@ export default class NewClass extends cc.Component {
 
                     this.jb_kyLa.string = GameData.mncgDataList.account;
                     GlobalEvent.emit(EventCfg.CHANGEMNCGACCOUNT);
-                }
-                else {
-                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.result);
+
                 }
 
             })

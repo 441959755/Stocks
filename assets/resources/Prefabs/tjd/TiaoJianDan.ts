@@ -180,16 +180,16 @@ export default class NewClass extends cc.Component {
     }
 
     TJDStartGameSet() {
-        if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameConf.tjdxl.cost[0].v) {
-            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
-            return;
-        }
-        else if ((this.curState == 2 || this.curState == 3) && !this.adSucceed) {
-            // GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
-            // return;
-            GlobalEvent.emit("OPENUNLOCKBOX");
-            return;
-        }
+        // if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameConf.tjdxl.cost[0].v) {
+        //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+        //     return;
+        // }
+        // else if ((this.curState == 2 || this.curState == 3) && !this.adSucceed) {
+        //     // GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
+        //     // return;
+        //     GlobalEvent.emit("OPENUNLOCKBOX");
+        //     return;
+        // }
 
         let time = new Date().toLocaleDateString();
         cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);

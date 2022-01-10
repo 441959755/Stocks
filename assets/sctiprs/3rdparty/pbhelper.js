@@ -100,7 +100,8 @@ PBHelper.prototype = {
             || id == pb.MessageId.Rep_Game_CgsGetStageAward
             || id == pb.MessageId.Rep_Game_OrderCancel
             || id == pb.MessageId.Rep_Hall_MobileBind
-            || id == pb.MessageId.Rep_Hall_UnlockGame) {
+            || id == pb.MessageId.Rep_Hall_UnlockGame
+            || id == pb.MessageId.Rep_Hall_Exchange) {
             let ErrorInfo = pb.ErrorInfo;
             let data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
@@ -140,6 +141,7 @@ PBHelper.prototype = {
             let data = TodayGameTimes.decode(new Uint8Array(buff));
             console.log('当日游戏次数计数器:' + JSON.stringify(data));
             GameData.todayGameCount = data.counter;
+            GlobalEvent.emit(EventCfg.GMAECOUNTERSCHANGE);
 
         } else if (id == pb.MessageId.Rep_Game_GetGameOperation) {
 

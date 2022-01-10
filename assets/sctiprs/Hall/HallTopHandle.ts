@@ -46,7 +46,6 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         //设置
         if (name == 'xl_topbtn_xlsz') {
-
             PopupManager.openNode(this.node.parent, null, 'Prefabs/hallSetLayer', 11, (node) => {
                 ActionUtils.openBox(node);
             })
@@ -66,10 +65,22 @@ export default class NewClass extends cc.Component {
             else {
                 str = 'Prefabs/sericeBox';
             }
-            PopupManager.openNode(this.node.parent, null, 'Prefabs/sericeBox', 11, (node) => {
+
+            PopupManager.openNode(this.node.parent, null, str, 11, (node) => {
                 ActionUtils.openBox(node);
             })
+        }
 
+        else if (name == 'main_smbt_gg1') {
+            PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/noticeLayer', 10, (node) => {
+                ActionUtils.openBox(node);
+            });
+        }
+
+        else if (name == 'main_topbt_fl') {
+            PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/welfare', 11, (node) => {
+                ActionUtils.openBox(node);
+            });
         }
 
     }

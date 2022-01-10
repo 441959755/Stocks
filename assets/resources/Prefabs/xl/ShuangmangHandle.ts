@@ -35,24 +35,11 @@ export default class NewClass extends cc.Component {
     onLoad() {
         //更新当前金币属性
         GlobalEvent.on(EventCfg.SMINITFUND, this.updataGold.bind(this), this);
+
+        GlobalEvent.on(EventCfg.GMAECOUNTERSCHANGE, this.onGameCountShow.bind(this), this);
     }
 
-    updataGold() {
-        this.curla.string = GameData.SmxlState.gold;
-        this.initLa.string = GameData.SmxlState.goldInit;
-        //是否重置
-        this.CZBtn.active = false;
-        if (GameData.SmxlState.gold <= GameCfgText.smxlCfg.capital_min.value) {
-            this.CZBtn.active = true;
-        } else if (GameData.SmxlState.gold >= GameCfgText.smxlCfg.capital_max.value) {
-            this.CZBtn.active = true;
-        }
-    }
-
-    protected onEnable() {
-        this.toggle1.isChecked = GameData.SMSet.isFC;
-        this.updataGold();
-
+    onGameCountShow() {
         let gameCount = EnterGameControl.onCurWXIsEnterGame();
         this.tipsLabel.node.active = true;
         this.curState = gameCount.status;
@@ -75,7 +62,24 @@ export default class NewClass extends cc.Component {
             this.tipsLabel.string = '今日次数已用完,请点击在线客服,体验完整版APP';
             this.curState = 3;
         }
+    }
 
+    updataGold() {
+        this.curla.string = GameData.SmxlState.gold;
+        this.initLa.string = GameData.SmxlState.goldInit;
+        //是否重置
+        this.CZBtn.active = false;
+        if (GameData.SmxlState.gold <= GameCfgText.smxlCfg.capital_min.value) {
+            this.CZBtn.active = true;
+        } else if (GameData.SmxlState.gold >= GameCfgText.smxlCfg.capital_max.value) {
+            this.CZBtn.active = true;
+        }
+    }
+
+    protected onEnable() {
+        this.toggle1.isChecked = GameData.SMSet.isFC;
+        this.updataGold();
+        this.onGameCountShow();
     }
 
 
@@ -84,12 +88,22 @@ export default class NewClass extends cc.Component {
         //点击双盲训练
         if (name == 'startSMBtn') {
 
-            if (this.curState == 2 && !this.adSucceed) {
+            if (this.curState == 2) {
 
                 LLWSDK.getSDK().showVideoAd((flag) => {
                     if (flag) {
-                        let time = new Date().toLocaleDateString();
-                        cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+                        // let time = new Date().toLocaleDateString();
+                        // cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+                        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
+                        this.smStartGameSet();
+                        this.onGameCountShow();
+                        // if (this.curState == 2) {
+                        //     let time = new Date().toLocaleDateString();
+                        //     cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
+                        //     this.adSucceed = 0;
+                        // }
+
                     }
                     else {
                         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才有奖励哦！');
@@ -102,15 +116,14 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
             }
 
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            else {
+                GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
-            this.smStartGameSet();
-
-            if (this.curState == 2) {
-                let time = new Date().toLocaleDateString();
-                cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
-                this.adSucceed = 0;
+                this.smStartGameSet();
+                this.onGameCountShow();
             }
+
+
         }
 
         //点击训练设置
@@ -187,6 +200,7 @@ export default class NewClass extends cc.Component {
 
     onDestroy() {
         GlobalEvent.off(EventCfg.SMINITFUND);
+        GlobalEvent.off(EventCfg.GMAECOUNTERSCHANGE);
     }
 
     //点击广告重置

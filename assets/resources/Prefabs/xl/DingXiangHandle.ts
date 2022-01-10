@@ -139,9 +139,10 @@ export default class NewClass extends cc.Component {
 				node.getComponent(cc.Label).string = el;
 			})
 		}
+
 		GameData.DXSet.search = '随机选股';
 
-		GlobalEvent.on(EventCfg.GMAECOUNTERSCHANGE, this.onGameCountSow.bind(this), this);
+		GlobalEvent.on(EventCfg.GMAECOUNTERSCHANGE, this.onGameCountShow.bind(this), this);
 
 
 	}
@@ -150,7 +151,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.GMAECOUNTERSCHANGE);
 	}
 
-	onGameCountSow() {
+	onGameCountShow() {
 
 		let gameCount = EnterGameControl.onCurWXIsEnterGame();
 
@@ -174,11 +175,11 @@ export default class NewClass extends cc.Component {
 			if (count) {
 				this.adSucceed = parseInt(count);
 			}
-			this.tipsLabel1.string = '今日剩余次数：' + this.adSucceed + '次';
+			this.tipsLabel1.string = '今日剩余次数：' + gameCount.count + '次';
 		}
 
 		else if (gameCount.status == 3) {
-			this.tipsLabel1.string = '今日次数已用完';
+			this.tipsLabel1.string = '今日次数已用完,请点击在线客服,体验完整版APP';
 		}
 	}
 
@@ -187,7 +188,7 @@ export default class NewClass extends cc.Component {
 		this.tipsLabel1.node.active = false;
 		this.tipsLabel2.node.active = false;
 
-		this.onGameCountSow();
+		this.onGameCountShow();
 
 		this.onShow();
 	}
@@ -260,6 +261,7 @@ export default class NewClass extends cc.Component {
 		let day = this.boxs[4].getChildByName('label').getComponent(cc.Label).string;
 		let downBox = this.downBoxs[index];
 		let content = cc.find('New ScrollView/view/content', downBox);
+
 		if (GameData.DXSet.search == '随机选股') {
 
 			//	let sc = new Date().getTime();
@@ -556,12 +558,25 @@ export default class NewClass extends cc.Component {
 			// 	return;
 			// }
 
-			if (this.curState == 2 && !this.adSucceed) {
+			if (this.curState == 2) {
 
 				LLWSDK.getSDK().showVideoAd((flag) => {
 					if (flag) {
-						let time = new Date().toLocaleDateString();
-						cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+						// let time = new Date().toLocaleDateString();
+						// cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+
+
+
+						GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
+						GameCfg.GAMEFUPAN = false;
+
+						GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
+
+						GameCfg.ziChan = 100000;
+
+						this.DXStartGameSet();
+						this.onGameCountShow();
 					}
 					else {
 						GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才有奖励哦！');
@@ -574,20 +589,24 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
 			}
 
-			let time = new Date().toLocaleDateString();
-			cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
+			else {
+				// let time = new Date().toLocaleDateString();
+				// cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
 
-			this.onGameCountSow();
 
-			GlobalEvent.emit(EventCfg.LOADINGSHOW);
+				GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
-			GameCfg.GAMEFUPAN = false;
+				GameCfg.GAMEFUPAN = false;
 
-			GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
+				GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
 
-			GameCfg.ziChan = 100000;
+				GameCfg.ziChan = 100000;
 
-			this.DXStartGameSet();
+				this.DXStartGameSet();
+				this.onGameCountShow();
+			}
+
+
 		} else if (name == 'blackbtn') {
 			this.node.active = false;
 			GameCfg.GameType = null;

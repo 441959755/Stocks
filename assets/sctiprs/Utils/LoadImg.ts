@@ -76,11 +76,12 @@ export default {
 
         }
         else {
-            cc.loader.load(url, function (err, tex) {
+            cc.loader.load({ url, type: 'jpg' }, function (err, tex) {
                 if (tex && tex.height != 0) {
 
                     let spriteFrame = new cc.SpriteFrame(tex);
                     callback(tex, spriteFrame);
+
                 } else {
                     callback(caller, null);
                 }

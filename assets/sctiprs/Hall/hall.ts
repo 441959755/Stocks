@@ -25,9 +25,11 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     rightbg: cc.Node = null;
 
+    @property(cc.Node)
     gameLayer: cc.Node = null;
 
-    finalLayer = []; //结算界面
+    @property([cc.Node])
+    finalLayer: cc.Node[] = []; //结算界面
 
     index = 0;
 
@@ -143,6 +145,11 @@ export default class NewClass extends cc.Component {
             GameData.firstGame = false;
             this.showFirstBox();
         }
+
+        this.gameLayer.zIndex = 50;
+        this.finalLayer.forEach(el => {
+            el && (el.zIndex = 51);
+        })
     }
 
     onDestroy() {
@@ -286,43 +293,45 @@ export default class NewClass extends cc.Component {
         this.broadcast && (this.broadcast.active = false);
         this.InviteBox && (this.InviteBox.active = false);
 
-        PopupManager.openNode(this.node, this.gameLayer, 'Prefabs/game/gameLayer', 50, (node) => {
-            this.gameLayer = node;
-            this.onLoadFinalLayer();
-        })
+        // PopupManager.openNode(this.node, this.gameLayer, 'Prefabs/game/gameLayer', 50, (node) => {
+        //     this.gameLayer = node;
+        this.gameLayer.active = true;
+        ///  this.gameLayer.zIndex = 50;
+        //  this.onLoadFinalLayer();
+        //})
     }
 
     //加载结算页
     onLoadFinalLayer() {
 
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        // GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
-        if (GameCfg.GameType == pb.GameType.ShuangMang ||
-            GameCfg.GameType == pb.GameType.ZhiBiao ||
-            GameCfg.GameType == pb.GameType.DingXiang ||
-            GameCfg.GameType == pb.GameType.QiHuo ||
-            GameCfg.GameType == pb.GameType.FenShi) {
-            this.url = 'Prefabs/game/finalLayer';
-            this.index = 0;
-        } else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
-            this.url = 'Prefabs/game/TjdFinalLayer';
-            this.index = 1;
-        } else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
-            this.url = 'Prefabs/game/CGSFinalLayer';
-            this.index = 2;
-        } else if (GameCfg.GameType == pb.GameType.JJ_DuoKong ||
-            GameCfg.GameType == pb.GameType.JJ_PK) {
-            this.url = 'Prefabs/game/PKFinalLayer';
-            this.index = 3;
-        } else if (GameCfg.JJ_XUNLIAN) {
-            this.url = 'Prefabs/game/lxFinalLayer';
-            this.index = 4;
-        }
+        // if (GameCfg.GameType == pb.GameType.ShuangMang ||
+        //     GameCfg.GameType == pb.GameType.ZhiBiao ||
+        //     GameCfg.GameType == pb.GameType.DingXiang ||
+        //     GameCfg.GameType == pb.GameType.QiHuo ||
+        //     GameCfg.GameType == pb.GameType.FenShi) {
+        //     this.url = 'Prefabs/game/finalLayer';
+        //     this.index = 0;
+        // } else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+        //     this.url = 'Prefabs/game/TjdFinalLayer';
+        //     this.index = 1;
+        // } else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
+        //     this.url = 'Prefabs/game/CGSFinalLayer';
+        //     this.index = 2;
+        // } else if (GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+        //     GameCfg.GameType == pb.GameType.JJ_PK) {
+        //     this.url = 'Prefabs/game/PKFinalLayer';
+        //     this.index = 3;
+        // } else if (GameCfg.JJ_XUNLIAN) {
+        //     this.url = 'Prefabs/game/lxFinalLayer';
+        //     this.index = 4;
+        // }
 
-        PopupManager.openNode(this.node, this.finalLayer[this.index], this.url, 51, (node) => {
-            this.finalLayer[this.index] = node;
-            this.finalLayer[this.index].active = false;
-        })
+        // PopupManager.openNode(this.node, this.finalLayer[this.index], this.url, 51, (node) => {
+        //     this.finalLayer[this.index] = node;
+        //     this.finalLayer[this.index].active = false;
+        // })
 
     }
 

@@ -139,6 +139,7 @@ export default class NewClass extends cc.Component {
     }
 
     onGameCountSow() {
+
         let gameCount = EnterGameControl.onCurWXIsEnterGame();
         this.tipsLabel.node.active = true;
         this.curState = gameCount.status;
@@ -526,14 +527,23 @@ export default class NewClass extends cc.Component {
             } else if (this.setProId == 8) {
                 GameData.ZBSet.ZLine = str;
             }
+
         } else if (name == 'startZBBtn') {
 
-            if (this.curState == 2 && !this.adSucceed) {
+            if (this.curState == 2) {
 
                 LLWSDK.getSDK().showVideoAd((flag) => {
                     if (flag) {
-                        let time = new Date().toLocaleDateString();
-                        cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+                        // let time = new Date().toLocaleDateString();
+                        // cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+                        GameCfg.GameType = pb.GameType.ZhiBiao;
+                        GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.ZBSet));
+                        //      GameCfg.GameSet = GameData.ZBSet;
+                        GameCfg.GAMEFUPAN = false;
+                        GameCfg.ziChan = 100000;
+
+                        this.zhibiaoStartGameSet();
+                        this.onGameCountSow();
                     }
                     else {
                         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才有奖励哦！');
@@ -546,19 +556,24 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
             }
 
-            if (this.curState == 2) {
-                let time = new Date().toLocaleDateString();
-                cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
-                this.adSucceed = 0;
+            else {
+
+                GameCfg.GameType = pb.GameType.ZhiBiao;
+                GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.ZBSet));
+                //      GameCfg.GameSet = GameData.ZBSet;
+                GameCfg.GAMEFUPAN = false;
+                GameCfg.ziChan = 100000;
+
+                this.zhibiaoStartGameSet();
+                this.onGameCountSow();
             }
 
-            GameCfg.GameType = pb.GameType.ZhiBiao;
-            GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.ZBSet));
-            //      GameCfg.GameSet = GameData.ZBSet;
-            GameCfg.GAMEFUPAN = false;
-            GameCfg.ziChan = 100000;
+            // if (this.curState == 2) {
+            //     let time = new Date().toLocaleDateString();
+            //     cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
+            //     this.adSucceed = 0;
+            // }
 
-            this.zhibiaoStartGameSet();
 
         } else if (name == 'setZBBtn') {
             GlobalEvent.emit(EventCfg.OPENSETLAYER);

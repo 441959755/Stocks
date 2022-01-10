@@ -11,6 +11,8 @@ export default class WechatSDK {
 
     loginPlat = pb.LoginType.WeChat_MiniProg;
 
+    callback = null;
+
     static getInstance() {
         if (!this._instance) {
             this._instance = new WechatSDK();
@@ -36,7 +38,6 @@ export default class WechatSDK {
                             let button = wx.createUserInfoButton({
 
                                 type: "image",
-
                                 image: "res/raw-assets/7f/7f8bd040-1a9b-45af-9dc8-0f40da27b5e6.png",
                                 style: {
                                     left: systemInfo.screenWidth * 0.5 - 88,
@@ -84,6 +85,7 @@ export default class WechatSDK {
                 GameData.headimgurl = webUserInfo.avatarUrl;
 
                 LoadImg.downloadRemoteImageAndSave(GameData.headimgurl, (tex, sp) => {
+
                     GameData.headimgurl = tex;
                     GameData.headImg = sp;
 
@@ -154,25 +156,26 @@ export default class WechatSDK {
         this.videoAd.onError(err => {
             console.log(err)
         })
+
+        this.videoAd.onClose(res => {
+            // 用户点击了【关闭广告】按钮
+            // 小于 2.1.0 的基础库版本，res 是一个 undefined
+            if (res && res.isEnded || res === undefined) {
+                // 正常播放结束，可以下发游戏奖励
+                this.callback(1);
+            }
+            else {
+                // 播放中途退出，不下发游戏奖励
+                this.callback(0);
+            }
+        })
     }
 
     showVideoAd(callback?) {
+        this.callback = callback;
         if (this.videoAd) {
             this.videoAd.show().then(() => {
                 console.log('激励视频 广告显示');
-            })
-
-            this.videoAd.onClose(res => {
-                // 用户点击了【关闭广告】按钮
-                // 小于 2.1.0 的基础库版本，res 是一个 undefined
-                if (res && res.isEnded || res === undefined) {
-                    // 正常播放结束，可以下发游戏奖励
-                    callback(1);
-                }
-                else {
-                    // 播放中途退出，不下发游戏奖励
-                    callback(0);
-                }
             })
         }
     }

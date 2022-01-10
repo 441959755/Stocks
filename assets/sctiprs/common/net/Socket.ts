@@ -1,87 +1,86 @@
 
-import {pb} from "../../../protos/proto";
+import { pb } from "../../../protos/proto";
 import GameData from '../../GameData';
 import GlobalEvent from "../../Utils/GlobalEvent";
 import EventCfg from "../../Utils/EventCfg";
-import ComUtils from "../../Utils/ComUtils";
 
 let MessageHead = pb.MessageHead;
 
-export default class Socket{
+export default class Socket {
 
-    ws=null;
+    ws = null;
 
-    flag=false;
+    flag = false;
 
-    host='';
+    host = '';
 
-    queue=[];
+    queue = [];
 
-    reconnectBeat=null;  //断线重连
+    reconnectBeat = null;  //断线重连
 
-    reconnectCount=0;
+    reconnectCount = 0;
 
-    _preData=null;
+    _preData = null;
 
     heartbeat = null;  //心跳
 
     constructor(host) {
-        this.flag=false;
-        this.host=host;
+        this.flag = false;
+        this.host = host;
         this.reconnectCount = 0;
         this.init();
     }
 
-    init(){
-        this.ws=new WebSocket(this.host);
-        this.ws.binaryType='arraybuffer';
-        this.ws.onmessage=this.message.bind(this);
-        this.ws.onopen=this.connected.bind(this);
-        this.ws.onerror=this.onerror.bind(this);
-        this.ws.onclose=this.onclose.bind(this);
+    init() {
+        this.ws = new WebSocket(this.host);
+        this.ws.binaryType = 'arraybuffer';
+        this.ws.onmessage = this.message.bind(this);
+        this.ws.onopen = this.connected.bind(this);
+        this.ws.onerror = this.onerror.bind(this);
+        this.ws.onclose = this.onclose.bind(this);
     }
 
-    message(event){
+    message(event) {
 
-        let decode=new Uint8Array(event.data);
+        let decode = new Uint8Array(event.data);
 
-        let offect=10,handleBuf,badBuf;
+        let offect = 10, handleBuf, badBuf;
 
-        if(decode.length>=offect){
-            handleBuf=decode.slice(0,10);
-            badBuf=decode.slice(10);
+        if (decode.length >= offect) {
+            handleBuf = decode.slice(0, 10);
+            badBuf = decode.slice(10);
         }
 
-        let decoded =MessageHead.decode(new Uint8Array(handleBuf));
+        let decoded = MessageHead.decode(new Uint8Array(handleBuf));
 
         let info = PB.selectBlackData(decoded.messageId, badBuf);
 
-        let callback=this.queue[decoded.messageId];
+        let callback = this.queue[decoded.messageId];
 
-        callback&&(callback(info));
+        callback && (callback(info));
     }
 
-    connected(event){
+    connected(event) {
 
-        this.reconnectBeat&&(clearInterval(this.reconnectBeat));
-        this.reconnectBeat=null;
+        this.reconnectBeat && (clearInterval(this.reconnectBeat));
+        this.reconnectBeat = null;
         this.reconnectCount = 0;
 
-        let CmdGameLogin=pb.CmdGameLogin;
-        let message=CmdGameLogin.create({
-            uid:GameData.userID,
-            token:GameData.token,
+        let CmdGameLogin = pb.CmdGameLogin;
+        let message = CmdGameLogin.create({
+            uid: GameData.userID,
+            token: GameData.token,
         })
 
-        let buff=CmdGameLogin.encode(message).finish();
+        let buff = CmdGameLogin.encode(message).finish();
 
-        this.send(pb.MessageId.Req_Game_Login,buff,(info)=>{
+        this.send(pb.MessageId.Req_Game_Login, buff, (info) => {
             console.log('登入成功：' + JSON.stringify(info));
             if (info && info.data) {
 
                 GameData.userID = info.data.uid;
 
-                GameData.userName = info.data.nickname || info.data.uid;
+                //  GameData.userName = info.data.nickname || info.data.uid;
 
                 GameData.gender = info.data.gender || 0;
 
@@ -109,12 +108,12 @@ export default class Socket{
 
                 if (cc.director.getScene().name == 'Login') {
 
-                    if (!GameData.headImg) {
-                        ComUtils.onLoadHead(info.data.icon, (texture) => {
-                            GameData.imgs[info.data.icon.icon + ''] = new cc.SpriteFrame(texture);
-                            GameData.headImg = GameData.imgs[info.data.icon.icon + ''];
-                        })
-                    }
+                    // if (!GameData.headImg) {
+                    //     ComUtils.onLoadHead(info.data.icon, (texture) => {
+                    //         GameData.imgs[info.data.icon.icon + ''] = new cc.SpriteFrame(texture);
+                    //         GameData.headImg = GameData.imgs[info.data.icon.icon + ''];
+                    //     })
+                    // }
 
                     cc.director.loadScene('hall');
                 }
@@ -136,26 +135,26 @@ export default class Socket{
 
     }
 
-    send(actionCode,proto,callback){
+    send(actionCode, proto, callback) {
 
-        if(this.ws&&this.ws.readyState==WebSocket.OPEN){
+        if (this.ws && this.ws.readyState == WebSocket.OPEN) {
 
-            let le=proto?proto.length:0;
+            let le = proto ? proto.length : 0;
 
-            let message=MessageHead.create({
-                messageId:actionCode,
-                messageLen:le+10,
+            let message = MessageHead.create({
+                messageId: actionCode,
+                messageLen: le + 10,
             })
 
-            this.queue[++actionCode]=callback;
+            this.queue[++actionCode] = callback;
 
-            let buff=MessageHead.encode(message).finish();
+            let buff = MessageHead.encode(message).finish();
 
-            buff&&(this.ws.send(buff.buffer.slice(buff.byteOffset,buff.byteLength+buff.byteOffset)));
+            buff && (this.ws.send(buff.buffer.slice(buff.byteOffset, buff.byteLength + buff.byteOffset)));
 
-            proto&&(this.ws.send(proto.buffer.slice(proto.byteOffset,proto.byteLength+proto.byteOffset)))
+            proto && (this.ws.send(proto.buffer.slice(proto.byteOffset, proto.byteLength + proto.byteOffset)))
         }
-        else{
+        else {
             console.log("send error. readyState ");
             this._preData = {
                 actionCode: actionCode,
@@ -166,11 +165,11 @@ export default class Socket{
 
     }
 
-    onerror(){
+    onerror() {
         this.onShowTips();
     }
 
-    onclose(){
+    onclose() {
         console.log('连接断开');
 
         this.heartbeat && (clearInterval(this.heartbeat))

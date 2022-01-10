@@ -53,7 +53,6 @@ export default class NewClass extends cc.Component {
 
 		//vip
 		GlobalEvent.on(EventCfg.VIPCHANGE, this.setUserInfo.bind(this), this);
-
 	}
 
 	setUserHead() {
@@ -117,20 +116,20 @@ export default class NewClass extends cc.Component {
 				})
 			}
 
-			{
-				let data = {
-					uid: GameData.userID,
-					icon: new Uint8Array(GameData.headimgurl),
-				}
-				let CmdUploadIcon = pb.CmdUploadIcon;
-				let message = CmdUploadIcon.create(data);
-				let buff = CmdUploadIcon.encode(message).finish();
+			// {
+			// 	let data = {
+			// 		uid: GameData.userID,
+			// 		icon: new Uint8Array(GameData.headimgurl),
+			// 	}
+			// 	let CmdUploadIcon = pb.CmdUploadIcon;
+			// 	let message = CmdUploadIcon.create(data);
+			// 	let buff = CmdUploadIcon.encode(message).finish();
 
-				socket.send(pb.MessageId.Req_Hall_UploadIcon, buff, (info) => {
-					console.log('GameData.headImg:' + JSON.stringify(info));
-				})
+			// 	socket.send(pb.MessageId.Req_Hall_UploadIcon, buff, (info) => {
+			// 		console.log('GameData.headImg:' + JSON.stringify(info));
+			// 	})
 
-			}
+			// }
 		}
 	}
 
@@ -177,32 +176,36 @@ export default class NewClass extends cc.Component {
 		if (name == 'main_xl_smxl') {
 			//开关
 			GameCfgText.getSwitchModule(1, () => {
-				GlobalEvent.emit(EventCfg.OPENSMLAYER);
 				GameCfg.GameType = pb.GameType.ShuangMang;
+				GlobalEvent.emit(EventCfg.OPENSMLAYER);
+
 			})
 		}
 
 		//指标
 		else if (name == 'main_xl_zbxl') {
 			GameCfgText.getSwitchModule(4, () => {
-				GlobalEvent.emit(EventCfg.OPENZBLAYER);
 				GameCfg.GameType = pb.GameType.ZhiBiao;
+				GlobalEvent.emit(EventCfg.OPENZBLAYER);
+
 			})
 		}
 
 		//定向
 		else if (name == 'main_xl_dxxl') {
 			GameCfgText.getSwitchModule(2, () => {
-				GlobalEvent.emit(EventCfg.OPENDXLAYER);
 				GameCfg.GameType = pb.GameType.DingXiang;
+				GlobalEvent.emit(EventCfg.OPENDXLAYER);
+
 			})
 		}
 
 		//期货
 		else if (name == 'main_xl_qhxl') {
 			GameCfgText.getSwitchModule(3, () => {
-				GlobalEvent.emit(EventCfg.OPENQHLAYER);
 				GameCfg.GameType = pb.GameType.QiHuo;
+				GlobalEvent.emit(EventCfg.OPENQHLAYER);
+
 			})
 
 		}

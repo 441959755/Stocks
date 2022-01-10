@@ -3,7 +3,6 @@ import GameData from "../../sctiprs/GameData";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -19,10 +18,11 @@ export default class NewClass extends cc.Component {
     coupon: cc.Label = null;
 
     protected onLoad(): void {
+
         this.editbox1.node.on(
             'editing-did-ended',
             edit => {
-                let str = edit.String;
+                let str = edit.string;
                 if (str == '') {
                     return;
                 }
@@ -51,6 +51,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'main_fl_tjdhsq') {
+
             if (this.editbox.string == '') {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '请输入用户ID!');
                 return;
@@ -58,10 +59,27 @@ export default class NewClass extends cc.Component {
 
             if (this.editbox1.string == '') {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '请输入要兑换的K币!');
+                return;
             }
 
+            let data = {
+                type: pb.ExchangeType.ExchangeType_K2Coupon,
+                amount: parseInt(this.coupon.string),
+                uid: parseInt(this.editbox.string)
+            }
 
+            let CmdExchange = pb.CmdExchange;
+            let message = CmdExchange.create(data);
+            let buff = CmdExchange.encode(message).finish();
 
+            socket.send(pb.MessageId.Req_Hall_Exchange, buff, (res) => {
+                if (res.err) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
+                }
+                else {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换成功！');
+                }
+            })
 
         }
     }
