@@ -413,10 +413,8 @@ export default class NewClass extends cc.Component {
     }
 
     restartGame() {
-        this.leavaGame();
 
-        let time = new Date().toLocaleDateString();
-        cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
+        this.leavaGame();
 
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
@@ -480,12 +478,6 @@ export default class NewClass extends cc.Component {
         }
 
         else if (gameCount.status == 2) {
-
-            let time = new Date().toLocaleDateString();
-            let count = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + GameCfg.GameType);
-            if (count) {
-                adSucceed = parseInt(count);
-            }
             curState = 2;
         }
 
@@ -493,12 +485,11 @@ export default class NewClass extends cc.Component {
             curState = 3;
         }
 
-        if (curState == 2 && !adSucceed) {
+        if (curState == 2 && !GameData.adSucceed) {
 
             LLWSDK.getSDK().showVideoAd((flag) => {
                 if (flag) {
-                    let time = new Date().toLocaleDateString();
-                    cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+                    GameData.adSucceed += 1;
                 }
                 else {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才有奖励哦！');

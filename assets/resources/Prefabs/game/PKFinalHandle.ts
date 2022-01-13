@@ -154,14 +154,14 @@ export default class NewClass extends cc.Component {
                 userHead.spriteFrame = GameData.Players[1].icon;
             }
 
-            let stages = GameCfgText.gameConf.pk;
+            let stages = GameCfgText.gameConf.pk_wx;
             let ex;
 
             if (this.gameResult.players[1].result.rank == 2) {
                 loseSp.active = true;
                 winSp.active = false;
                 // xj.active = true;
-                ex = stages.lose[1].v;
+                ex = stages.lose[0].v;
                 this.onResultAward(2, this.otherResultLabel, this.gameResult.players[1].result.userProfitRate);
             }
             else if (this.gameResult.players[1].result.rank == 1) {
@@ -198,9 +198,10 @@ export default class NewClass extends cc.Component {
     onResultAward(status, arr, Rate) {
         //胜利
         if (status == 1) {
-            let ArrWin = GameCfgText.gameConf.pk.win;
+            let ArrWin = GameCfgText.gameConf.pk_wx.win;
+
             ArrWin.forEach(e => {
-                if (e.i == pb.GamePropertyId.Gold) {
+                if (e.i == pb.GamePropertyId.K) {
 
                     arr[0].string = '+ ' + e.v;
                     if (GameData.JJCapital) {
@@ -220,9 +221,10 @@ export default class NewClass extends cc.Component {
         }
         //失败
         else if (status == 2) {
-            let Arrlose = GameCfgText.gameConf.pk.lose;
+            let Arrlose = GameCfgText.gameConf.pk_wx.lose;
+            arr[0].string = '+' + 0;
             Arrlose.forEach(e => {
-                if (e.i == pb.GamePropertyId.Gold) {
+                if (e.i == pb.GamePropertyId.K) {
                     arr[0].string = '+ ' + e.v;
                     if (GameData.JJCapital) {
                         arr[0].string = '+' + 0;
@@ -240,9 +242,10 @@ export default class NewClass extends cc.Component {
         }
         //平局
         else if (status == 3) {
-            let Arrlose = GameCfgText.gameConf.pk.draw;
+            let Arrlose = GameCfgText.gameConf.pk_wx.draw;
+            arr[0].string = '+' + 0;
             Arrlose.forEach(e => {
-                if (e.i == pb.GamePropertyId.Gold) {
+                if (e.i == pb.GamePropertyId.K) {
                     arr[0].string = '+ ' + e.v;
                     if (GameData.JJCapital) {
                         arr[0].string = '+' + 0;

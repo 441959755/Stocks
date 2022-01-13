@@ -1,5 +1,5 @@
 import { pb } from "../../../protos/proto";
-import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -33,11 +33,13 @@ export default class NewClass extends cc.Component {
 
         //协议
         else if (name == 'grzx_yhxy') {
-            GlobalEvent.emit('EventCfg.OPENPROTOCOL', '用户协议', 'http://www.cgdr168.com/user/decription1000.html');
+            console.log('用户协议');
+            PopupManager.openProtocol('用户协议', 'http://www.cgdr168.com/user/decription1000.html');
         }
 
         else if (name == 'grzx_ysxy') {
-            GlobalEvent.emit('EventCfg.OPENPROTOCOL', '隐私协议', 'http://www.cgdr168.com/user/private1000.html');
+            console.log('隐私协议');
+            PopupManager.openProtocol('隐私协议', 'http://www.cgdr168.com/user/private1000.html')
         }
 
     }

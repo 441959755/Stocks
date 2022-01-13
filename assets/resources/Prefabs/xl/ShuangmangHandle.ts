@@ -1,5 +1,4 @@
 
-import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
@@ -7,6 +6,7 @@ import EnterGameControl from "../../../sctiprs/global/EnterGameControl";
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -30,8 +30,6 @@ export default class NewClass extends cc.Component {
 
     curState = 0;
 
-    adSucceed = 0;
-
     onLoad() {
         //更新当前金币属性
         GlobalEvent.on(EventCfg.SMINITFUND, this.updataGold.bind(this), this);
@@ -48,14 +46,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (gameCount.status == 2) {
-            let time = new Date().toLocaleDateString();
-            let count = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + GameCfg.GameType);
-
-            if (count) {
-                this.adSucceed = parseInt(count);
-            }
-
-            this.tipsLabel.string = '今日剩余次数：' + gameCount.count + '次';
+            this.tipsLabel.string = '今日免费剩余次数：' + GameData.adSucceed + '次';
         }
 
         else if (gameCount.status == 3) {
@@ -82,33 +73,21 @@ export default class NewClass extends cc.Component {
         this.onGameCountShow();
     }
 
-
     onClick(event, curstData) {
         let name = event.target.name;
         //点击双盲训练
         if (name == 'startSMBtn') {
 
-            if (this.curState == 2) {
+            if (this.curState == 2 && !GameData.adSucceed) {
 
-                LLWSDK.getSDK().showVideoAd((flag) => {
-                    if (flag) {
-                        // let time = new Date().toLocaleDateString();
-                        // cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+                let self = this;
+                PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
+                    node.getComponent('UnlockBox').callback = () => {
                         GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
-                        this.smStartGameSet();
-                        this.onGameCountShow();
-                        // if (this.curState == 2) {
-                        //     let time = new Date().toLocaleDateString();
-                        //     cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);
-                        //     this.adSucceed = 0;
-                        // }
-
+                        self.onGameCountShow();
                     }
-                    else {
-                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才有奖励哦！');
-                    }
-                })
+                });
+
                 return;
             }
 
@@ -118,11 +97,9 @@ export default class NewClass extends cc.Component {
 
             else {
                 GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
                 this.smStartGameSet();
                 this.onGameCountShow();
             }
-
 
         }
 
@@ -168,7 +145,6 @@ export default class NewClass extends cc.Component {
             data.isFC = this.toggle1.isChecked;
             GameData.SMSet = data;
         }
-
     }
 
     smStartGameSet() {

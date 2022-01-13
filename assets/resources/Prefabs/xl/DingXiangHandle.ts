@@ -9,6 +9,7 @@ import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -170,12 +171,7 @@ export default class NewClass extends cc.Component {
 		}
 
 		else if (gameCount.status == 2) {
-			let time = new Date().toLocaleDateString();
-			let count = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + GameCfg.GameType);
-			if (count) {
-				this.adSucceed = parseInt(count);
-			}
-			this.tipsLabel1.string = '今日剩余次数：' + gameCount.count + '次';
+			this.tipsLabel1.string = '今日剩余次数：' + GameData.adSucceed + '次';
 		}
 
 		else if (gameCount.status == 3) {
@@ -558,30 +554,16 @@ export default class NewClass extends cc.Component {
 			// 	return;
 			// }
 
-			if (this.curState == 2) {
+			if (this.curState == 2 && !GameData.adSucceed) {
+				let self = this;
 
-				LLWSDK.getSDK().showVideoAd((flag) => {
-					if (flag) {
-						// let time = new Date().toLocaleDateString();
-						// cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
-
-
-
+				PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
+					node.getComponent('UnlockBox').callback = () => {
 						GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
-						GameCfg.GAMEFUPAN = false;
-
-						GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
-
-						GameCfg.ziChan = 100000;
-
-						this.DXStartGameSet();
-						this.onGameCountShow();
+						self.onGameCountShow();
 					}
-					else {
-						GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才有奖励哦！');
-					}
-				})
+				});
+
 				return;
 			}
 
@@ -616,9 +598,9 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.OPENHELPLAYER);
 		}
 
-		else if (name == 'mfxlBtn') {
-			GlobalEvent.emit("OPENUNLOCKBOX", true);
-		}
+		// else if (name == 'mfxlBtn') {
+		// 	GlobalEvent.emit("OPENUNLOCKBOX", true);
+		// }
 	}
 
 	onToggleClick() {
@@ -653,6 +635,12 @@ export default class NewClass extends cc.Component {
 	}
 
 	DXStartGameSet() {
+
+		GameCfg.GAMEFUPAN = false;
+
+		GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.DXSet));
+
+		GameCfg.ziChan = 100000;
 
 		let data = {
 			ktype: null,

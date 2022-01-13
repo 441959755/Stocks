@@ -155,9 +155,9 @@ export default class NewClass extends cc.Component {
             this.TJDStartGameSet();
         }
 
-        else if (name == 'mfxlBtn') {
-            GlobalEvent.emit("OPENUNLOCKBOX", true);
-        }
+        // else if (name == 'mfxlBtn') {
+        //     GlobalEvent.emit("OPENUNLOCKBOX", true);
+        // }
     }
 
     onToggleClick(event, curdata) {

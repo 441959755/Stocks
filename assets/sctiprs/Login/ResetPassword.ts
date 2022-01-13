@@ -3,6 +3,7 @@ import HttpUtils from "../common/net/HttpUtils";
 import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
+import PopupManager from "../Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -86,7 +87,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'btnzc') {
-            GlobalEvent.emit('EventCfg.OPENPROTOCOL', '用户协议', 'http://www.cgdr168.com/user/decription1000.html');
+            PopupManager.openProtocol('用户协议', 'http://www.cgdr168.com/user/decription1000.html');
         }
 
         else if (name == 'closeBtn') {

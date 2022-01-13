@@ -387,8 +387,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "开通训练",
-    "_N$string": "开通训练",
+    "_string": "更多次数——k币通过挑战PK大战获得",
+    "_N$string": "更多次数——k币通过挑战PK大战获得",
     "_fontSize": 24,
     "_lineHeight": 30,
     "_enableWrapText": true,
@@ -443,8 +443,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 500,
-      "height": 30.240000000000002
+      "width": 51.36,
+      "height": 30.24
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -456,7 +456,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        65.189,
+        -139.99,
         0,
         0,
         0,
@@ -494,8 +494,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "您今日的训练次数已经用完",
-    "_N$string": "您今日的训练次数已经用完",
+    "_string": "+1次",
+    "_N$string": "+1次",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,
@@ -508,7 +508,7 @@
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 3,
+    "_N$overflow": 0,
     "_N$cacheMode": 0,
     "_id": ""
   },
@@ -550,8 +550,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 500,
-      "height": 67.8
+      "width": 550,
+      "height": 37.8
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -601,9 +601,9 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "60钻石可解锁30天免费不限次数训练（VIP用户可以直接解锁）",
-    "_N$string": "60钻石可解锁30天免费不限次数训练（VIP用户可以直接解锁）",
-    "_fontSize": 24,
+    "_string": "您可以通过观看激励视频获取更多挑战次数",
+    "_N$string": "您可以通过观看激励视频获取更多挑战次数",
+    "_fontSize": 28,
     "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
@@ -638,7 +638,7 @@
       "__id__": 6
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 17
@@ -774,7 +774,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 558,
+      "width": 146,
       "height": 100
     },
     "_anchorPoint": {
@@ -826,7 +826,7 @@
         "__id__": 24
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 27
@@ -1234,7 +1234,7 @@
       "__id__": 19
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 32
@@ -1268,7 +1268,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -103,
         0,
         0,
         0,
@@ -1462,8 +1462,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        206,
         0,
+        16.341,
         0,
         0,
         0,
@@ -1624,7 +1624,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 558,
+      "width": 146,
       "height": 100
     },
     "_resize": 1,
@@ -1699,7 +1699,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        262.238,
+        272.513,
         140.749,
         0,
         0,

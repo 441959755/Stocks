@@ -27,8 +27,6 @@ export default class PopupManager {
 
         GlobalEvent.on(EventCfg.OPENOTHERPLAYERINFO, this.openOtherPlayerInfoLayer.bind(this), this);
 
-        GlobalEvent.on(EventCfg.OPENPROTOCOL, this.openProtocol.bind(this), this);
-
         // if (cc.sys.os === cc.sys.OS_ANDROID) {
         //     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         // }
@@ -153,7 +151,6 @@ export default class PopupManager {
             LoadUtils.releaseRes(key);
         }
 
-        GlobalEvent.off(EventCfg.OPENPROTOCOL);
         GlobalEvent.off(EventCfg.LOADINGHIDE);
         GlobalEvent.off(EventCfg.LOADINGSHOW);
         GlobalEvent.off(EventCfg.TIPSTEXTSHOW);

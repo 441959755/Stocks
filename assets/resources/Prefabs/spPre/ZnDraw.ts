@@ -99,7 +99,7 @@ export default class NewClass extends cc.Component {
     changeLabel: cc.Label = null;
 
     @property(cc.Node)
-    drawcopy:cc.Node=null;
+    drawcopy: cc.Node = null;
 
     ori_width = 0;
     now_width = 0;
@@ -117,6 +117,7 @@ export default class NewClass extends cc.Component {
     _amount = 0;
 
     onLoad() {
+
         //更新选择label信息
         GlobalEvent.on('onClickPosUpdateLabel', (index) => {
 
@@ -189,14 +190,13 @@ export default class NewClass extends cc.Component {
 
             this.uLabel.string = time + '    ' + '开盘：' + (kp) + '    ' + '收盘：' + sp + '    ' + '最高：' + zg + '    ' + '最低：' + zd + '    ' + '成交量：' + cjl + '    ' + '成交额：' + cje;
         }, this);
-
     }
 
     start() {
         //找到更新买1...卖1...label跟新
         this.box3.children.forEach(e => {
-            if(e.name=='node2'||e.name=='node3'){
-                e.children.forEach(el=>{
+            if (e.name == 'node2' || e.name == 'node3') {
+                e.children.forEach(el => {
                     if (el.name == 't_label') {
                         this.t_label.push(el.getComponent(cc.Label));
 

@@ -120,8 +120,6 @@ export default {
 
 	OPENTJDGAME: "OPENTJDGAME",//条件单游戏
 
-	OPENPROTOCOL: 'OPENPROTOCOL',//用户协议
-
 	//game
 	ADDFILLCOLOR: 'ADDFILLCOLOR',
 

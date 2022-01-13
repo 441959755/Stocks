@@ -4,7 +4,6 @@ import GameCfg from '../game/GameCfg';
 import { pb } from '../../protos/proto';
 import StrategyAIData from '../game/StrategyAIData';
 import GameData from '../GameData';
-import LoadUtils from '../Utils/LoadUtils';
 import PopupManager from '../Utils/PopupManager';
 import UpGameOpt from '../global/UpGameOpt';
 import ComUtils from '../Utils/ComUtils';
@@ -33,7 +32,7 @@ export default class NewClass extends cc.Component {
 
     index = 0;
 
-    url = null;
+    // url = null;
 
     isLoading = false;
 
@@ -57,12 +56,10 @@ export default class NewClass extends cc.Component {
         //打开个人中心
         GlobalEvent.on(EventCfg.OPENPLAYERINFO, this.openPlayerInfoLayer.bind(this), this);
 
-
         //邀请好友
         GlobalEvent.on('OPENFRIENDINVITE', this.openFriendInvite.bind(this), this);
 
         GlobalEvent.on(EventCfg.OPENOTHERPLAYERHISLAYER, this.openOtherHisLayer.bind(this), this);
-
 
 
         GlobalEvent.on('LOADGAME', this.onLoadGame.bind(this), this);
@@ -70,10 +67,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
 
         GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
-
-
-
-        GlobalEvent.on('OPENUNLOCKBOX', this.openUnlockBox.bind(this), this);
 
         //打开每周豪礼
         GlobalEvent.on('OPENWEEKLYHAOLI', this.openWeeklyHaoLi.bind(this), this);
@@ -153,6 +146,7 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
+
         GlobalEvent.off(EventCfg.OPENPLAYERINFO);
         GlobalEvent.off(EventCfg.OPENHELPLAYER);
         GlobalEvent.off(EventCfg.ROOMLEAVE);
@@ -164,7 +158,6 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.off('LOADGAME');
 
-        GlobalEvent.off('OPENUNLOCKBOX');
         GlobalEvent.off('OPENWEEKLYHAOLI');
         GlobalEvent.off('OPENSIGNIN');
         ComUtils.onDestory();
@@ -172,12 +165,12 @@ export default class NewClass extends cc.Component {
         GameData.selfEnterRoomData = null;
     }
 
-    //打开解锁框
-    openUnlockBox(falg) {
-        PopupManager.openNode(this.node, null, 'Prefabs/unlockBox', 22, (node) => {
-            node.getComponent('UnlockBox').oninit(falg);
-        });
-    }
+    // //打开解锁框
+    // openUnlockBox(falg) {
+    //     PopupManager.openNode(this.node, null, 'Prefabs/unlockBox', 22, (node) => {
+    //         node.getComponent('UnlockBox').oninit(falg);
+    //     });
+    // }
 
     //首次登入弹框
     showFirstBox() {
@@ -192,15 +185,9 @@ export default class NewClass extends cc.Component {
         PopupManager.openNode(this.node, null, 'Prefabs/pop/gobrokeBox', 48, null);
     }
 
-
-
-
-
     openFriendInvite() {
         PopupManager.openNode(this.node, null, 'Prefabs/friendInvite', 11, null);
     }
-
-
 
     openWeeklyHaoLi() {
         PopupManager.openNode(this.node, null, 'Prefabs/fl/weeklyHaoLI', 10, null);
@@ -297,7 +284,7 @@ export default class NewClass extends cc.Component {
         //     this.gameLayer = node;
         this.gameLayer.active = true;
         ///  this.gameLayer.zIndex = 50;
-        //  this.onLoadFinalLayer();
+        this.onLoadFinalLayer();
         //})
     }
 
@@ -306,27 +293,27 @@ export default class NewClass extends cc.Component {
 
         // GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
-        // if (GameCfg.GameType == pb.GameType.ShuangMang ||
-        //     GameCfg.GameType == pb.GameType.ZhiBiao ||
-        //     GameCfg.GameType == pb.GameType.DingXiang ||
-        //     GameCfg.GameType == pb.GameType.QiHuo ||
-        //     GameCfg.GameType == pb.GameType.FenShi) {
-        //     this.url = 'Prefabs/game/finalLayer';
-        //     this.index = 0;
-        // } else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
-        //     this.url = 'Prefabs/game/TjdFinalLayer';
-        //     this.index = 1;
-        // } else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
-        //     this.url = 'Prefabs/game/CGSFinalLayer';
-        //     this.index = 2;
-        // } else if (GameCfg.GameType == pb.GameType.JJ_DuoKong ||
-        //     GameCfg.GameType == pb.GameType.JJ_PK) {
-        //     this.url = 'Prefabs/game/PKFinalLayer';
-        //     this.index = 3;
-        // } else if (GameCfg.JJ_XUNLIAN) {
-        //     this.url = 'Prefabs/game/lxFinalLayer';
-        //     this.index = 4;
-        // }
+        if (GameCfg.GameType == pb.GameType.ShuangMang ||
+            GameCfg.GameType == pb.GameType.ZhiBiao ||
+            GameCfg.GameType == pb.GameType.DingXiang ||
+            GameCfg.GameType == pb.GameType.QiHuo ||
+            GameCfg.GameType == pb.GameType.FenShi) {
+            // this.url = 'Prefabs/game/finalLayer';
+            this.index = 0;
+        } else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+            //  this.url = 'Prefabs/game/TjdFinalLayer';
+            this.index = 1;
+        } else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
+            //  this.url = 'Prefabs/game/CGSFinalLayer';
+            this.index = 2;
+        } else if (GameCfg.GameType == pb.GameType.JJ_DuoKong ||
+            GameCfg.GameType == pb.GameType.JJ_PK) {
+            // this.url = 'Prefabs/game/PKFinalLayer';
+            this.index = 3;
+        } else if (GameCfg.JJ_XUNLIAN) {
+            //  this.url = 'Prefabs/game/lxFinalLayer';
+            this.index = 4;
+        }
 
         // PopupManager.openNode(this.node, this.finalLayer[this.index], this.url, 51, (node) => {
         //     this.finalLayer[this.index] = node;
@@ -405,12 +392,14 @@ export default class NewClass extends cc.Component {
                 }
 
                 this.finalLayer[this.index].active = true;
-            } else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
+            }
+            else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
 
                 this.finalLayer[this.index].getComponent('CGSFinalHandle').onShow();
 
                 this.finalLayer[this.index].active = true;
-            } else {
+            }
+            else {
                 if (GameCfg.JJ_XUNLIAN) {
 
                     this.finalLayer[this.index].getComponent('LXFinalandle').onShow();

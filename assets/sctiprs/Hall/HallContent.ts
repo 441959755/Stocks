@@ -6,6 +6,7 @@ import GameData from '../GameData';
 import EnterGameControl from '../global/EnterGameControl';
 import GameCfgText from '../GameText';
 import LLWSDK from '../common/sdk/LLWSDK';
+import PopupManager from '../Utils/PopupManager';
 
 const { ccclass, property } = cc._decorator;
 
@@ -234,45 +235,45 @@ export default class NewClass extends cc.Component {
 		//pk
 		else if (name == 'main_jj_pkdz') {
 			GameCfgText.getSwitchModule(7, () => {
-				//	if (EnterGameControl.onCurPKEnterGame()) {
-				LLWSDK.getSDK().showVideoAd((flag) => {
-					if (flag) {
-						GameCfg.GameType = pb.GameType.JJ_PK;
-						GameCfg.GameSet = GameData.JJPKSet;
-						GlobalEvent.emit(EventCfg.OPENMATCHPK);
-					}
-					else {
-						GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '请观看完整视频哦！');
-					}
+				GameCfg.GameType = pb.GameType.JJ_PK;
 
-				})
+				let cb = () => {
+					GlobalEvent.emit(EventCfg.LOADINGSHOW);
+					GameCfg.GameSet = GameData.JJPKSet;
+					GlobalEvent.emit(EventCfg.OPENMATCHPK);
+				}
+				if (GameData.adSucceed) {
+					cb && cb();
+				}
+				else {
+					PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
+						node.getComponent('UnlockBox').callback = cb;
+					});
+				}
 
-
-				// }
-				// else {
-				// 	GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
-				// }
 			})
 		}
 
 		else if (name == 'main_jj_dkdz') {
 			GameCfgText.getSwitchModule(8, () => {
 				//s	if (EnterGameControl.onCurPKEnterGame()) {
-				LLWSDK.getSDK().showVideoAd((flag) => {
-					if (flag) {
-						GameCfg.GameType = pb.GameType.JJ_DuoKong;
-						GameCfg.GameSet = GameData.JJPKSet;
-						GlobalEvent.emit(EventCfg.OPENMATCHPK);
-					}
-					else {
-						GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '请观看完整视频哦！');
-					}
-				})
+				// LLWSDK.getSDK().showVideoAd((flag) => {
+				// 	if (flag) {
+				GameCfg.GameType = pb.GameType.JJ_DuoKong;
 
-				// }
-				// else {
-				// 	GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您没有金币进入该游戏场');
-				// }
+				let cb = () => {
+					GlobalEvent.emit(EventCfg.LOADINGSHOW);
+					GameCfg.GameSet = GameData.JJPKSet;
+					GlobalEvent.emit(EventCfg.OPENMATCHPK);
+				}
+				if (GameData.adSucceed) {
+					cb && cb();
+				}
+				else {
+					PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
+						node.getComponent('UnlockBox').callback = cb;
+					});
+				}
 			})
 		}
 

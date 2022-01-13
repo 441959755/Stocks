@@ -2,6 +2,7 @@ import HttpMgr from "../net/HttpMgr";
 import GameData from '../../GameData';
 import { pb } from "../../../protos/proto";
 import LoadImg from "../../Utils/LoadImg";
+import GameCfgText from "../../GameText";
 
 export default class WechatSDK {
 
@@ -38,7 +39,7 @@ export default class WechatSDK {
                             let button = wx.createUserInfoButton({
 
                                 type: "image",
-                                image: "res/raw-assets/7f/7f8bd040-1a9b-45af-9dc8-0f40da27b5e6.png",
+                                image: "res/raw-assets/7f/7f8bd040-1a9b-45af-9dc8-0f40da27b5e6.92cfc.png",
                                 style: {
                                     left: systemInfo.screenWidth * 0.5 - 88,
                                     top: systemInfo.screenHeight * 0.7,
@@ -92,7 +93,6 @@ export default class WechatSDK {
                     btn && (btn.destroy())
                     self.onLoginCodeHttpRequest(code, call);
                 }, true)
-
 
             }
         })
@@ -172,12 +172,20 @@ export default class WechatSDK {
     }
 
     showVideoAd(callback?) {
-        this.callback = callback;
-        if (this.videoAd) {
-            this.videoAd.show().then(() => {
-                console.log('激励视频 广告显示');
-            })
+        console.log(GameCfgText.appConf.wechat_minprogram + '   ' + JSON.stringify(GameCfgText.appConf.wechat_minprogram));
+        if (!GameCfgText.appConf.wechat_minprogram.ad_switch) {
+            this.callback = callback;
+            this.callback(1);
         }
+        else {
+            this.callback = callback;
+            if (this.videoAd) {
+                this.videoAd.show().then(() => {
+                    console.log('激励视频 广告显示');
+                })
+            }
+        }
+
     }
 
     chooseImage(call) {

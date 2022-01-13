@@ -1,5 +1,6 @@
 import GlobalEvent from "./Utils/GlobalEvent";
 import EventCfg from "./Utils/EventCfg";
+import GameCfg from "./game/GameCfg";
 
 export default class GameData {
 
@@ -388,5 +389,28 @@ export default class GameData {
     public static TaskDaily = null;   // 日常任务
 
     public static SysBroadcastList = [];//系统广播消息
+
+    //記錄觀看視頻的次數
+    public static _adSucceed;
+
+    public static set adSucceed(val) {
+
+        if (val < 0) {
+            val = 0;
+        }
+
+        let time = new Date().toLocaleDateString();
+        cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, val);
+        this._adSucceed = val;
+    }
+
+    public static get adSucceed() {
+        let time = new Date().toLocaleDateString();
+        this._adSucceed = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + GameCfg.GameType);
+        if (this._adSucceed) {
+            return parseInt(this._adSucceed);
+        }
+        return 0;
+    }
 
 }

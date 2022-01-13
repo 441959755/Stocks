@@ -4,6 +4,7 @@ import GameCfg from "./GameCfg";
 import { pb } from '../../protos/proto';
 import UpGameOpt from "../global/UpGameOpt";
 import DrawData from "./DrawData";
+import GameData from "../GameData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -37,7 +38,7 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-
+        GameData.adSucceed -= 1;
         this.initData();
         this.setColor();
 
@@ -53,8 +54,8 @@ export default class NewClass extends cc.Component {
                 GameCfg.GameType == pb.GameType.JJ_ChuangGuan) && !GameCfg.GAMEFRTD) {
                 this.startGameNode.active = true;
             }
-            else{
-                this.startGameNode.active=false;
+            else {
+                this.startGameNode.active = false;
             }
         }
 

@@ -31,19 +31,19 @@ export default class EnterGameControl {
         }
 
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
-            free = 0;
+            free = 1;
             adcount = 5;
             todayCount = GameData.todayGameCount[pb.GameType.DingXiang];
         }
 
         else if (GameCfg.GameType == pb.GameType.QiHuo) {
-            free = 0;
+            free = 1;
             adcount = 5;
             todayCount = GameData.todayGameCount[pb.GameType.QiHuo];
         }
 
         else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-            free = 0;
+            free = 1;
             adcount = 5;
             todayCount = GameData.todayGameCount[pb.GameType.ZhiBiao];
         }

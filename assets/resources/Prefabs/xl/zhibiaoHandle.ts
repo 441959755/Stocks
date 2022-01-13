@@ -9,6 +9,7 @@ import { pb } from "../../../protos/proto";
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import EnterGameControl from "../../../sctiprs/global/EnterGameControl";
 import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -41,8 +42,6 @@ export default class NewClass extends cc.Component {
     tipsLabel: cc.Label = null;
 
     curState = 0;
-
-    adSucceed = 0;
 
     tips = [
         ['股价穿越均线', '均线交叉', '组合训练'],
@@ -148,14 +147,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (gameCount.status == 2) {
-            let time = new Date().toLocaleDateString();
-            let count = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + GameCfg.GameType);
-
-            if (count) {
-                this.adSucceed = parseInt(count);
-            }
-
-            this.tipsLabel.string = '今日剩余次数：' + gameCount.count + '次';
+            this.tipsLabel.string = '今日剩余次数：' + GameData.adSucceed + '次';
         }
 
         else if (gameCount.status == 3) {
@@ -530,25 +522,15 @@ export default class NewClass extends cc.Component {
 
         } else if (name == 'startZBBtn') {
 
-            if (this.curState == 2) {
-
-                LLWSDK.getSDK().showVideoAd((flag) => {
-                    if (flag) {
-                        // let time = new Date().toLocaleDateString();
-                        // cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
-                        GameCfg.GameType = pb.GameType.ZhiBiao;
-                        GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.ZBSet));
-                        //      GameCfg.GameSet = GameData.ZBSet;
-                        GameCfg.GAMEFUPAN = false;
-                        GameCfg.ziChan = 100000;
-
-                        this.zhibiaoStartGameSet();
-                        this.onGameCountSow();
+            if (this.curState == 2 && !GameData.adSucceed) {
+                let self = this;
+                PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
+                    node.getComponent('UnlockBox').callback = () => {
+                        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+                        self.onGameCountSow();
                     }
-                    else {
-                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才有奖励哦！');
-                    }
-                })
+                });
+
                 return;
             }
 
@@ -591,14 +573,18 @@ export default class NewClass extends cc.Component {
             this.node.active = false;
         }
 
-        else if (name == 'mfxlBtn') {
-            GlobalEvent.emit("OPENUNLOCKBOX", true);
-        }
+        // else if (name == 'mfxlBtn') {
+        //     GlobalEvent.emit("OPENUNLOCKBOX", true);
+        // }
 
     }
 
     zhibiaoStartGameSet() {
+        GameCfg.GameType = pb.GameType.ZhiBiao;
+        GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.ZBSet));
 
+        GameCfg.GAMEFUPAN = false;
+        GameCfg.ziChan = 100000;
         let data = {
             ktype: null,    //4 30分钟  5  60分钟  10  日   11周
             kstyle: 0,      // 0随机行情   1震荡行情  2单边向上行情 3单边向下行情

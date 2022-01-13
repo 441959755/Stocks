@@ -16,6 +16,7 @@ export default class NewClass extends cc.Component {
 
     zgNode: cc.Node = null;
 
+    @property(cc.Node)
     znDraw: cc.Node = null;
 
     zxgpBox: cc.Node = null;
@@ -55,6 +56,12 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENCGDS, this.openCgdsLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENCGDSPH, this.openCgdsph.bind(this), this);
         GlobalEvent.on('LOADGAME', this.onLoadGame.bind(this), this);
+    }
+
+    protected start(): void {
+        // this.znDraw.active = true;
+        this.znDraw.active = false;
+        this.znDraw.zIndex = 20;
     }
 
     onLoadGame() {
@@ -121,38 +128,15 @@ export default class NewClass extends cc.Component {
     }
 
     openZNDraw(code, str) {
-        // GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        // if (!this.znDraw) {
-        //     LoadUtils.loadRes('Prefabs/spPre/znDrawLayer', (pre) => {
-        //         this.znDraw = cc.instantiate(pre);
-        //         this.node.addChild(this.znDraw, 20);
-        //         this.znDraw.setPosition(0, 0);
-        //         let handle = this.znDraw.getComponent('ZnDraw');
-
-        //         setTimeout(() => {
-        //             this.znDraw.active = false;
-        //             this.znDraw.active = true;
-        //             handle.onShow(code, str);
-        //             GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        //         }, 300)
-
-        //     })
-        // }
-        // else {
-        //     let handle = this.znDraw.getComponent('ZnDraw');
-        //     this.znDraw.active = true;
-        //     handle.onShow(code, str);
-        //     GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
-        // }
-
-        PopupManager.openNode(this.node, null, 'Prefabs/spPre/znDrawLayer', 20, (node) => {
-            let handle = node.getComponent('ZnDraw');
-            node.active = true;
+        this.znDraw.active = true;
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        setTimeout(() => {
+            this.znDraw.active = false;
+            let handle = this.znDraw.getComponent('ZnDraw');
+            this.znDraw.active = true;
             handle.onShow(code, str);
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        })
-
+        }, 50)
     }
 
     onLoadZNXGLayer() {
