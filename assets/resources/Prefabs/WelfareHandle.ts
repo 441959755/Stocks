@@ -39,7 +39,6 @@ export default class NewClass extends cc.Component {
                 }
             }, this
         )
-
     }
 
     onBtnClick(event, curData) {
@@ -62,9 +61,14 @@ export default class NewClass extends cc.Component {
                 return;
             }
 
+            if (parseInt(this.editbox1.string) < 10) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换的K币要大于等于10');
+                return;
+            }
+
             let data = {
                 type: pb.ExchangeType.ExchangeType_K2Coupon,
-                amount: parseInt(this.coupon.string),
+                amount: parseInt(this.editbox1.string),
                 uid: parseInt(this.editbox.string)
             }
 

@@ -295,7 +295,7 @@ export default class NewClass extends cc.Component {
 			this._kdCount = 0;
 			this._KKCount = 0;
 		}
-		UpGameOpt.UpGameOpt(1);
+		//	UpGameOpt.UpGameOpt(1);
 	}
 
 	onClickCfBtn(percent) {

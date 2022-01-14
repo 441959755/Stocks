@@ -402,6 +402,8 @@ export default class GameData {
         let time = new Date().toLocaleDateString();
         cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, val);
         this._adSucceed = val;
+
+        GlobalEvent.emit('PKCount');
     }
 
     public static get adSucceed() {

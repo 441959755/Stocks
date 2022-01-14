@@ -1,6 +1,5 @@
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
-import GameData from '../GameData';
 import GameCfg from './GameCfg';
 import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
@@ -41,14 +40,14 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
 
-        GlobalEvent.on('recover',()=>{
+        GlobalEvent.on('recover', () => {
             if (this.qhData && this.qhData.data.length > 0) {
                 GameCfg.data[0].data = this.qhData.data;
             }
-            if(this.huizhidatas){
+            if (this.huizhidatas) {
                 GameCfg.huizhidatas = this.huizhidatas;
             }
-        },this);
+        }, this);
     }
 
     protected onDestroy() {

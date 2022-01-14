@@ -42,6 +42,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     tickLa: cc.Label = null;
 
+    @property(cc.Label)
+    kbi: cc.Label = null;
+
     flag = true;
 
     onShow() {
@@ -82,6 +85,11 @@ export default class NewClass extends cc.Component {
                 this.vipLa.string = el.v + '天';
             }
 
+            else if (el.v > 0 && el.i == pb.GamePropertyId.K) {
+                this.itemNodes.children[6].active = true;
+                this.kbi.string = el.v;
+            }
+
         });
 
         this.tipsLabel.string = this.itemData.memo;
@@ -97,11 +105,10 @@ export default class NewClass extends cc.Component {
             let CmdGetItem = pb.CmdGetItem;
             let message = CmdGetItem.create(data);
             let buff = CmdGetItem.encode(message).finish();
-
+            this.flag = false;
             socket.send(pb.MessageId.Req_Hall_GetItem, buff, (info) => {
                 console.log('getRewardCenter:' + JSON.stringify(info));
                 //   GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '领取成功');
-                this.flag = false;
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
             })
             this.LQFALG = true;

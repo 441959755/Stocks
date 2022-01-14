@@ -114,6 +114,7 @@ export default class PopupManager {
 
     //闯关大赛海报
     public static openCgdsNotice() {
+
         this.openNode(cc.find('Canvas'), this.nodes['Prefabs/pop/cgdsNotice'], 'Prefabs/pop/cgdsNotice', 50, (node) => {
             ActionUtils.openBox(node);
         })

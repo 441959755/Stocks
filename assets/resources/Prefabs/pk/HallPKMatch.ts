@@ -215,8 +215,11 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
 
         if (name == 'blackbtn') {
+
             if (this.enterRoom) { return }
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
             GlobalHandle.onReqRoomLeave(() => {
                 this.node.active = false;
                 GameCfg.GameType = null;

@@ -36,6 +36,12 @@ export default class NewClass extends cc.Component {
 	@property(cc.Node)
 	vipImg: cc.Node = null;
 
+	@property(cc.Label)
+	pkLabel: cc.Label = null;
+
+	@property(cc.Label)
+	dkLabel: cc.Label = null;
+
 	onLoad() {
 		//回到进入游戏的界面
 		GlobalEvent.on(EventCfg.BLACKGOTOLAYER, this.onBtnClick.bind(this), this);
@@ -54,6 +60,8 @@ export default class NewClass extends cc.Component {
 
 		//vip
 		GlobalEvent.on(EventCfg.VIPCHANGE, this.setUserInfo.bind(this), this);
+
+		GlobalEvent.on('PKCount', this.setGameCoutn.bind(this), this);
 	}
 
 	setUserHead() {
@@ -81,6 +89,17 @@ export default class NewClass extends cc.Component {
 		if (GameCfg.GameType == 'STUDY') {
 			this.changeToggle(3);
 		}
+
+		this.setGameCoutn();
+
+	}
+
+	setGameCoutn() {
+		let time = new Date().toLocaleDateString();
+		let pkCount = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + pb.GameType.JJ_PK) || 0;
+		this.pkLabel.string = '剩余次数：' + pkCount;
+		let dkCount = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + pb.GameType.JJ_DuoKong) || 0;
+		this.dkLabel.string = '剩余次数：' + dkCount;
 	}
 
 	upLoadUserInfo() {
@@ -179,7 +198,6 @@ export default class NewClass extends cc.Component {
 			GameCfgText.getSwitchModule(1, () => {
 				GameCfg.GameType = pb.GameType.ShuangMang;
 				GlobalEvent.emit(EventCfg.OPENSMLAYER);
-
 			})
 		}
 
@@ -188,7 +206,6 @@ export default class NewClass extends cc.Component {
 			GameCfgText.getSwitchModule(4, () => {
 				GameCfg.GameType = pb.GameType.ZhiBiao;
 				GlobalEvent.emit(EventCfg.OPENZBLAYER);
-
 			})
 		}
 
@@ -197,7 +214,6 @@ export default class NewClass extends cc.Component {
 			GameCfgText.getSwitchModule(2, () => {
 				GameCfg.GameType = pb.GameType.DingXiang;
 				GlobalEvent.emit(EventCfg.OPENDXLAYER);
-
 			})
 		}
 
@@ -206,7 +222,6 @@ export default class NewClass extends cc.Component {
 			GameCfgText.getSwitchModule(3, () => {
 				GameCfg.GameType = pb.GameType.QiHuo;
 				GlobalEvent.emit(EventCfg.OPENQHLAYER);
-
 			})
 
 		}
@@ -279,13 +294,12 @@ export default class NewClass extends cc.Component {
 
 		//打开闯关赛
 		else if (name == 'main_jj_cgs') {
-			// GameCfgText.getSwitchModule(9, () => {
-			// 	GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
-			// 	GameCfg.GameSet = GameData.JJPKSet;
-			// 	GlobalEvent.emit(EventCfg.OPENCHUANGUAN);
-			// })
+			GameCfgText.getSwitchModule(9, () => {
+				GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
+				GameCfg.GameSet = GameData.JJPKSet;
+				GlobalEvent.emit(EventCfg.OPENCHUANGUAN);
+			})
 
-			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '小程序不能打开闯关赛功能，请前往完整APP体验');
 		}
 
 		//点击竞技
@@ -380,5 +394,6 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.HEADIMGCHANGE);
 		GlobalEvent.off(EventCfg.NAMECHANGE);
 		GlobalEvent.off(EventCfg.LEVELCHANGE)
+		GlobalEvent.off('PKCount');
 	}
 }

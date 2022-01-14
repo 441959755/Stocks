@@ -38,6 +38,7 @@ export default class NewClass extends cc.Component {
     rewardCenterNode = null;
 
     onLoad() {
+
         this.rewardCenterBtn.active = false;
 
         GlobalEvent.on('getRewardCenter', this.getRewardCenter.bind(this), this);
@@ -59,23 +60,23 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
+
+
         if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
             return;
         }
         else {
             setTimeout(() => {
+                this.setCgdsBtnShowOrHide();
                 this.setXSBtnShowOrHide();
                 this.setVip7BtnShowOrHide();
-                this.setCgdsBtnShowOrHide();
                 this.setCgsBtnShowOrHide();
                 this.setOtherBtnShowOrHide();
             }, 200);
         }
-
     }
 
     setXSBtnShowOrHide() {
-
         //参与过的
         if (GlobalHandle.Activitys.indexOf(GameCfgText.appConf.pop[4].activity_id) >= 0) {
             this.xsBtn.active = false;
@@ -105,7 +106,6 @@ export default class NewClass extends cc.Component {
             this.xsBtn.active = flag;
             return;
         }
-
     }
 
     setVip7BtnShowOrHide() {
@@ -237,7 +237,6 @@ export default class NewClass extends cc.Component {
         return;
     }
 
-
     getRewardCenter(call?) {
 
         socket.send(pb.MessageId.Req_Hall_BackBag, null, (info) => {
@@ -254,7 +253,6 @@ export default class NewClass extends cc.Component {
             call && (call);
         })
     }
-
 
     onBtnClick(event, data) {
         let name = event.target.name;
@@ -274,7 +272,7 @@ export default class NewClass extends cc.Component {
             PopupManager.openNewPackage();
         }
 
-        else if (name == 'main_banner_sjhd') {
+        else if (name == 'main_banner_cgds') {
             PopupManager.openCgdsNotice();
         }
 
@@ -288,7 +286,6 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'main_banner_other') {
             PopupManager.openactiveTheme();
-
         }
     }
 

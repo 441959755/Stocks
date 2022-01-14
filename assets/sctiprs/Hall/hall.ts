@@ -365,6 +365,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit('UPDATEGAMEDATE');
 
         setTimeout(() => {
+
             //跟新获取的奖励消息
             GlobalEvent.emit('getRewardCenter');
 
@@ -373,7 +374,7 @@ export default class NewClass extends cc.Component {
                 this.onShowGobroke();
             }
 
-        }, 500);
+        }, 800);
     }
 
     //游戏结束

@@ -136,6 +136,9 @@ export default class NewClass extends cc.Component {
         //挑战
         else if (name == 'tzBtn') {
 
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '小程序不能打开闯关赛功能，请前往完整APP体验');
+            return;
+
             let stage = parseInt(data) - 1;
 
             let stages = JSON.parse(this.confdata.conf);

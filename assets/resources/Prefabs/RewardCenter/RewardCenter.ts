@@ -47,19 +47,19 @@ export default class NewClass extends cc.Component {
         if (name == 'btn_qlingqu') {
             let nodes = this.content.children;
             nodes.forEach((el) => {
+
                 let handle = el.getComponent('RewardItem');
+
                 if (handle) {
                     handle.getItemRewaed();
                 }
             })
         }
         else if (name == 'closeBtn') {
-
             this.node.active = false;
-
             setTimeout(() => {
                 GlobalEvent.emit('REWARDITEM', this.content.children.length);
-            }, 100);
+            }, 500);
 
         }
     }

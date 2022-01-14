@@ -67,6 +67,8 @@ export default class NewClass extends cc.Component {
             }
 
             PopupManager.openNode(this.node.parent, null, str, 11, (node) => {
+                let handle = node.getComponent('SericeBox1');
+                handle.onShow('客服');
                 ActionUtils.openBox(node);
             })
         }
