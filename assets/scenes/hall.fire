@@ -91762,7 +91762,7 @@
   {
     "__type__": "cc.Node",
     "_name": "finalLayer",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 2
     },
@@ -93315,7 +93315,7 @@
       "__id__": 2495
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 2500
@@ -93579,7 +93579,7 @@
         "__id__": 2508
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 2511
@@ -104687,7 +104687,7 @@
       "__id__": 2794
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 2816
@@ -104796,7 +104796,7 @@
         "__id__": 2819
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 2822
@@ -113167,7 +113167,7 @@
       "__id__": 3042
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 3052
@@ -113276,7 +113276,7 @@
         "__id__": 3055
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 3058

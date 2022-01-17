@@ -30,6 +30,7 @@ export default class NewClass extends cc.Component {
     onEnable() {
 
         let id = 0
+
         if (GameData.SpStockData && GameData.SpStockData.id) {
             id = GameData.SpStockData.id;
         }
@@ -50,6 +51,9 @@ export default class NewClass extends cc.Component {
 
         if (this.hisList.length <= 0) {
             this.tipsNode.active = true;
+        }
+        else {
+            this.tipsNode.active = false;
         }
 
         this.listV.numItems = this.hisList.length;

@@ -245,7 +245,7 @@ export default class NewClass extends cc.Component {
         let arr = data.text.split(',');
 
         if (data.type == pb.MessageType.RoomInvite && (!this.gameLayer || !this.gameLayer.active) && !this.Matchfalg) {
-
+            return;
             if (arr[3] != 0) {
                 PopupManager.openNode(this.node, this.broadcast, 'Prefabs/broadcast', 98, (node) => {
                     this.broadcast = node;

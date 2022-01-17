@@ -70,7 +70,7 @@ export default class NewClass extends cc.Component {
                         return;
                     }
 
-                    this.zc_sdLa.string = parseInt(str) * 10 + '';
+                    this.zc_sdLa.string = parseInt(str) * 100 + '';
 
                     this.dhzc = parseInt(str);
                 }

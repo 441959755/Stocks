@@ -35,7 +35,7 @@ export default class NewClass extends cc.Component {
         this.labs[2].string = ComUtils.formatTime(time);
         this.labs[3].string = ComUtils.getSFMTamp(time);
 
-        this.labs[4].string = data.price;
+        this.labs[4].string = (data.price).toFixed(2);
         this.labs[5].string = data.volume;
 
         //  this.labels[6].string = data.volume;

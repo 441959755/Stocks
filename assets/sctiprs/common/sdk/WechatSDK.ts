@@ -3,6 +3,7 @@ import GameData from '../../GameData';
 import { pb } from "../../../protos/proto";
 import LoadImg from "../../Utils/LoadImg";
 import GameCfgText from "../../GameText";
+import HttpUtils from "../net/HttpUtils";
 
 export default class WechatSDK {
 
@@ -85,9 +86,20 @@ export default class WechatSDK {
                 GameData.gender = webUserInfo.gender;
                 GameData.headimgurl = webUserInfo.avatarUrl;
 
+                // HttpUtils.loadRequest1(GameData.headimgurl, null, (tex) => {
+                //     console.log('图片' + (tex));
+
+                //     GameData.headimgurl = tex;
+                //     GameData.headImg = new cc.SpriteFrame();
+                //     btn && (btn.destroy())
+                //     self.onLoginCodeHttpRequest(code, call);
+                // }, (err) => {
+                //     console.log(err);
+                // })
+
                 LoadImg.downloadRemoteImageAndSave(GameData.headimgurl, (tex, sp) => {
 
-                    GameData.headimgurl = tex;
+                    GameData.headimgurl = new Uint8Array(tex);
                     GameData.headImg = sp;
 
                     btn && (btn.destroy())

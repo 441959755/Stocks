@@ -62,6 +62,11 @@ export default class NewClass extends cc.Component {
         // this.znDraw.active = true;
         this.znDraw.active = false;
         this.znDraw.zIndex = 20;
+
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/mncd', 22, (node) => {
+            node.active = false;
+        })
+
     }
 
     onLoadGame() {

@@ -19,10 +19,12 @@ export default class EnterGameControl {
 
     //当前定向是否可以进入游戏   
     public static onCurWXIsEnterGame() {
+
         let data = {
             status: 0,
             count: 0,
         }
+
         let free, adcount, todayCount;
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             free = 5;
@@ -46,6 +48,20 @@ export default class EnterGameControl {
             free = 1;
             adcount = 5;
             todayCount = GameData.todayGameCount[pb.GameType.ZhiBiao];
+        }
+
+        else if (GameCfg.GameType == pb.GameType.JJ_PK) {
+            free = 0;
+            adcount = 5;
+            todayCount = GameData.todayGameCount[pb.GameType.JJ_PK];
+            console.log(todayCount);
+        }
+
+        else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+            free = 0;
+            adcount = 5;
+            todayCount = GameData.todayGameCount[pb.GameType.JJ_DuoKong];
+            console.log(todayCount);
         }
 
         let curCount = free - todayCount;

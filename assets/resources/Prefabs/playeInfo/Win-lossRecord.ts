@@ -73,11 +73,11 @@ export default class NewClass extends cc.Component {
                     itemHeadle.GameType = pb.GameType.DingXiang
                     nodes[index].active = true;
                 }
-                else if (index == pb.GameType.FenShi) {
-                    itemHeadle.nameStr = '分时训练';
-                    itemHeadle.GameType = pb.GameType.FenShi
-                    nodes[index].active = true;
-                }
+                // else if (index == pb.GameType.FenShi) {
+                //     itemHeadle.nameStr = '分时训练';
+                //     itemHeadle.GameType = pb.GameType.FenShi
+                //     nodes[index].active = true;
+                // }
                 // else if (index == pb.GameType.ZhiBiao) {
                 //     itemHeadle.nameStr = '指标训练';
                 //     itemHeadle.GameType = pb.GameType.ZhiBiao
@@ -108,11 +108,11 @@ export default class NewClass extends cc.Component {
                     itemHeadle.GameType = pb.GameType.JJ_DuoKong
                     nodes[index].active = true;
                 }
-                else if (index == pb.GameType.JJ_ChuangGuan) {
-                    itemHeadle.nameStr = '闯  关赛';
-                    itemHeadle.GameType = pb.GameType.JJ_ChuangGuan
-                    nodes[index].active = true;
-                }
+                // else if (index == pb.GameType.JJ_ChuangGuan) {
+                //     itemHeadle.nameStr = '闯  关赛';
+                //     itemHeadle.GameType = pb.GameType.JJ_ChuangGuan
+                //     nodes[index].active = true;
+                // }
                 // else if (index == pb.GameType.JJ_QiHuo) {
                 //     itemHeadle.nameStr = '期货大战';
                 //     itemHeadle.GameType = pb.GameType.JJ_QiHuo
