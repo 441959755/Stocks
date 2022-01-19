@@ -24,10 +24,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     scrollNode: cc.Node = null;
 
-    @property(List)
-    listV: List = null;
+    onShow() {
 
-    onEnable() {
+        this.content.removeAllChildren();
 
         let id = 0
 
@@ -56,13 +55,20 @@ export default class NewClass extends cc.Component {
             this.tipsNode.active = false;
         }
 
-        this.listV.numItems = this.hisList.length;
+        this.hisList.forEach(el => {
+            let item = cc.instantiate(this.item);
+            this.content.addChild(item);
+            let handle = item.getComponent('MncdItem');
+            handle.onShow(el);
+        })
+
+
     }
 
-    onListRender(item: cc.Node, idx: number) {
-        let handle = item.getComponent('MncdItem');
-        handle.onShow(this.hisList[idx]);
-    }
+    // onListRender(item: cc.Node, idx: number) {
+    //     let handle = item.getComponent('MncdItem');
+    //     handle.onShow(this.hisList[idx]);
+    // }
 
     onBtnClick(event, data) {
         let name = event.target.name;

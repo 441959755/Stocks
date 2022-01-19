@@ -62,11 +62,6 @@ export default class NewClass extends cc.Component {
         // this.znDraw.active = true;
         this.znDraw.active = false;
         this.znDraw.zIndex = 20;
-
-        PopupManager.openNode(this.node, null, 'Prefabs/spPre/mncd', 22, (node) => {
-            node.active = false;
-        })
-
     }
 
     onLoadGame() {
@@ -81,7 +76,6 @@ export default class NewClass extends cc.Component {
             let handle = node.getComponent('ChaoGuRanking');
             handle.onShow(id);
         })
-
     }
 
     openCgdsLayer() {
@@ -89,7 +83,10 @@ export default class NewClass extends cc.Component {
     }
 
     openMnCDLayer() {
-        PopupManager.openNode(this.node, null, 'Prefabs/spPre/mncd', 22, null);
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/mncd', 22, (node) => {
+            let handle = node.getComponent('Mncd');
+            handle.onShow();
+        });
     }
 
     openSellBox(data) {

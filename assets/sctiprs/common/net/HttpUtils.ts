@@ -1,5 +1,4 @@
-import EventCfg from "../../Utils/EventCfg";
-import GlobalEvent from "../../Utils/GlobalEvent";
+
 
 export default {
 

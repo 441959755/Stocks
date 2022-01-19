@@ -409,7 +409,7 @@ export default class NewClass extends cc.Component {
 		else if (GameCfg.GameType == pb.GameType.DingXiang) {
 			let dxnode = this.node.getChildByName('DXInfo');
 			dxnode.active = true;
-			dxnode.x = 0;
+			//	dxnode.x = 0;
 			let code = GameCfg.data[0].code + '';
 			if (code.length >= 7) {
 				code = code.slice(1);
