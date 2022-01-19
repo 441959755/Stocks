@@ -5,7 +5,7 @@ import AudioUtils from '../Utils/AudioUtils';
 import LLLog from '../common/utils/LLLog'
 import PopupManager from '../Utils/PopupManager';
 import LLWSDK from "../common/sdk/LLWSDK";
-import CallModule from '../common/sdk/CallModule1';
+
 import GlobalEvent from "../Utils/GlobalEvent";
 
 cc.Class({
@@ -19,8 +19,6 @@ cc.Class({
 		let pbhelper = new PBHelper();
 
 		window.PB = pbhelper;
-
-		window.CallModule = CallModule;
 
 		window.gg = {};
 
@@ -56,7 +54,7 @@ cc.Class({
 
 		cc.director.preloadScene('hall');
 
-		GlobalEvent.on('OPENNOTICELAYER', this.openNoticeKayer.bind(this), this);
+
 	},
 
 	start() {
