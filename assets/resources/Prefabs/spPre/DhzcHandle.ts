@@ -59,18 +59,18 @@ export default class NewClass extends cc.Component {
                     return;
                 } else {
                     if (parseInt(str) > this.curGold) {
-                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换K币不能超今日上限！');
+                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换金币不能超今日上限！');
                         this.zc_editBox.string = '';
                         return;
                     }
 
-                    if (parseInt(str) > GameData.properties[pb.GamePropertyId.K]) {
-                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换K币不能超可用k币数量！');
+                    if (parseInt(str) > GameData.properties[pb.GamePropertyId.Gold]) {
+                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '兑换金币不能超可用金币数量！');
                         this.zc_editBox.string = '';
                         return;
                     }
 
-                    this.zc_sdLa.string = parseInt(str) * 100 + '';
+                    this.zc_sdLa.string = parseInt(str) * 10 + '';
 
                     this.dhzc = parseInt(str);
                 }
@@ -107,7 +107,7 @@ export default class NewClass extends cc.Component {
         );
 
         GlobalEvent.on(EventCfg.GOLDCHANGE, () => {
-            this.zc_kyLa.string = GameData.properties[pb.GamePropertyId.K];
+            this.zc_kyLa.string = GameData.properties[pb.GamePropertyId.Gold];
         }, this);
     }
 
@@ -116,7 +116,7 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-        this.zc_kyLa.string = GameData.properties[pb.GamePropertyId.K];
+        this.zc_kyLa.string = GameData.properties[pb.GamePropertyId.Gold];
 
         this.zc_syLa.string = this.curGold;
 
@@ -153,13 +153,13 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
             let info = {
-                type: pb.ExchangeType.ExchangeType_K2Capital,
+                type: pb.ExchangeDirection.Forward,
                 amount: this.dhzc,
             }
 
-            let CmdExchange = pb.CmdExchange;
-            let message = CmdExchange.create(info);
-            let buff = CmdExchange.encode(message).finish();
+            let CmdMncgExchange = pb.CmdMncgExchange;
+            let message = CmdMncgExchange.create(info);
+            let buff = CmdMncgExchange.encode(message).finish();
 
             socket.send(pb.MessageId.Req_Hall_Exchange, buff, (res) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
@@ -195,7 +195,7 @@ export default class NewClass extends cc.Component {
             if (!this.dhjb) { return }
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             let info = {
-                direction: 2,
+                direction: pb.ExchangeDirection.Reverse,
                 amount: this.dhjb,
             }
 

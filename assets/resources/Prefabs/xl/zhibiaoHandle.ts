@@ -139,21 +139,21 @@ export default class NewClass extends cc.Component {
 
     onGameCountSow() {
 
-        let gameCount = EnterGameControl.onCurWXIsEnterGame();
-        this.tipsLabel.node.active = true;
-        this.curState = gameCount.status;
-        if (gameCount.status == 1) {
-            this.tipsLabel.string = '今日免费剩余次数：' + gameCount.count + '次';
-        }
+        //     let gameCount = EnterGameControl.onCurWXIsEnterGame();
+        this.tipsLabel.node.active = false;
+        // this.curState = gameCount.status;
+        // if (gameCount.status == 1) {
+        //     this.tipsLabel.string = '今日免费剩余次数：' + gameCount.count + '次';
+        // }
 
-        else if (gameCount.status == 2) {
-            this.tipsLabel.string = '今日剩余次数：' + GameData.adSucceed + '次';
-        }
+        // else if (gameCount.status == 2) {
+        //     this.tipsLabel.string = '今日剩余次数：' + GameData.adSucceed + '次';
+        // }
 
-        else if (gameCount.status == 3) {
-            this.tipsLabel.string = '今日次数已用完,请点击在线客服,体验完整版APP';
-            this.curState = 3;
-        }
+        // else if (gameCount.status == 3) {
+        //     this.tipsLabel.string = '今日次数已用完,请点击在线客服,体验完整版APP';
+        //     this.curState = 3;
+        // }
 
     }
 
@@ -522,33 +522,38 @@ export default class NewClass extends cc.Component {
 
         } else if (name == 'startZBBtn') {
 
-            if (this.curState == 2 && !GameData.adSucceed) {
-                let self = this;
-                PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
-                    node.getComponent('UnlockBox').callback = () => {
-                        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-                        self.onGameCountSow();
-                    }
-                });
+            // if (this.curState == 2 && !GameData.adSucceed) {
+            //     let self = this;
+            //     PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
+            //         node.getComponent('UnlockBox').callback = () => {
+            //             GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            //             self.onGameCountSow();
+            //         }
+            //     });
 
+            //     return;
+            // }
+
+            // else if (this.curState == 3) {
+            //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
+            // }
+
+            // else {
+
+            if (GameData.ZBSet.select != '均线') {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '现阶段均线指标可训练，暂不开放其他指标');
                 return;
             }
 
-            else if (this.curState == 3) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
-            }
+            GameCfg.GameType = pb.GameType.ZhiBiao;
+            GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.ZBSet));
+            //      GameCfg.GameSet = GameData.ZBSet;
+            GameCfg.GAMEFUPAN = false;
+            GameCfg.ziChan = 100000;
 
-            else {
-
-                GameCfg.GameType = pb.GameType.ZhiBiao;
-                GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.ZBSet));
-                //      GameCfg.GameSet = GameData.ZBSet;
-                GameCfg.GAMEFUPAN = false;
-                GameCfg.ziChan = 100000;
-
-                this.zhibiaoStartGameSet();
-                this.onGameCountSow();
-            }
+            this.zhibiaoStartGameSet();
+            this.onGameCountSow();
+            //  }
 
             // if (this.curState == 2) {
             //     let time = new Date().toLocaleDateString();

@@ -240,7 +240,7 @@ export default class NewClass extends cc.Component {
 		}
 
 		else if (gameCount.status == 3) {
-			this.tipsLabel1.string = '今日次数已用完,请点击在线客服,体验完整版APP';
+			this.tipsLabel1.string = '今日次数已用完,请明天再来吧！';
 		}
 
 	}
@@ -811,7 +811,7 @@ export default class NewClass extends cc.Component {
 			}
 
 			else if (this.curState == 3) {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请明天再来吧！');
 			}
 			else {
 				// let time = new Date().toLocaleDateString();

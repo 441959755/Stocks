@@ -317,7 +317,7 @@ export default class NewClass extends cc.Component {
         }
 
         //总盈利率
-        let all = (GameCfg.allRate * 100).toFixed(2);
+        let all = ((GameCfg.allRate) * 100).toFixed(2);
 
         this.AllRise.string = all + '%';
 

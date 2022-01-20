@@ -1,4 +1,5 @@
 import { pb } from "../../../protos/proto";
+import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
@@ -23,12 +24,14 @@ export default class NewClass extends cc.Component {
 
         if (name == 'sys_tck_qd') {
 
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            LLWSDK.getSDK().showVideoAd(() => {
+                GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
-            socket.send(pb.MessageId.Req_Hall_GetBrokenAward, null, (res) => {
+                socket.send(pb.MessageId.Req_Hall_GetBrokenAward, null, (res) => {
 
+                })
+            });
 
-            })
         }
     }
 

@@ -1,12 +1,13 @@
 
+import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
-import EnterGameControl from "../../../sctiprs/global/EnterGameControl";
+
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
-import PopupManager from "../../../sctiprs/Utils/PopupManager";
+
 
 const { ccclass, property } = cc._decorator;
 
@@ -38,21 +39,21 @@ export default class NewClass extends cc.Component {
     }
 
     onGameCountShow() {
-        let gameCount = EnterGameControl.onCurWXIsEnterGame();
-        this.tipsLabel.node.active = true;
-        this.curState = gameCount.status;
-        if (gameCount.status == 1) {
-            this.tipsLabel.string = '今日免费剩余次数：' + gameCount.count + '次';
-        }
+        // let gameCount = EnterGameControl.onCurWXIsEnterGame();
+        this.tipsLabel.node.active = false;
+        // this.curState = gameCount.status;
+        // if (gameCount.status == 1) {
+        //     this.tipsLabel.string = '今日免费剩余次数：' + gameCount.count + '次';
+        // }
 
-        else if (gameCount.status == 2) {
-            this.tipsLabel.string = '今日免费剩余次数：' + GameData.adSucceed + '次';
-        }
+        // else if (gameCount.status == 2) {
+        //     this.tipsLabel.string = '今日免费剩余次数：' + GameData.adSucceed + '次';
+        // }
 
-        else if (gameCount.status == 3) {
-            this.tipsLabel.string = '今日次数已用完,请点击在线客服,体验完整版APP';
-            this.curState = 3;
-        }
+        // else if (gameCount.status == 3) {
+        //     this.tipsLabel.string = '今日次数已用完,请点击在线客服,体验完整版APP';
+        //     this.curState = 3;
+        // }
     }
 
     updataGold() {
@@ -78,28 +79,28 @@ export default class NewClass extends cc.Component {
         //点击双盲训练
         if (name == 'startSMBtn') {
 
-            if (this.curState == 2 && !GameData.adSucceed) {
+            // if (this.curState == 2 && !GameData.adSucceed) {
 
-                let self = this;
-                PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
-                    node.getComponent('UnlockBox').callback = () => {
-                        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-                        self.onGameCountShow();
-                    }
-                });
+            //     let self = this;
+            //     PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
+            //         node.getComponent('UnlockBox').callback = () => {
+            //             GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            //             self.onGameCountShow();
+            //         }
+            //     });
 
-                return;
-            }
+            //     return;
+            // }
 
-            else if (this.curState == 3) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
-            }
+            // else if (this.curState == 3) {
+            //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
+            // }
 
-            else {
-                GlobalEvent.emit(EventCfg.LOADINGSHOW);
-                this.smStartGameSet();
-                this.onGameCountShow();
-            }
+            // else {
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            this.smStartGameSet();
+            this.onGameCountShow();
+            // }
 
         }
 
@@ -181,6 +182,12 @@ export default class NewClass extends cc.Component {
 
     //点击广告重置
     onGameResetCount(info) {
-        GlobalHandle.onGameResetSMCapital();
+
+        LLWSDK.getSDK().showVideoAd((falg) => {
+            if (falg) {
+                GlobalHandle.onGameResetSMCapital();
+            }
+        })
+
     }
 }

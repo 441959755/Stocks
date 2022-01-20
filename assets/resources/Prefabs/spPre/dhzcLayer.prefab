@@ -1056,7 +1056,7 @@
         "__id__": 39
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 49
@@ -1078,7 +1078,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 151,
+      "width": 302,
       "height": 61
     },
     "_anchorPoint": {
@@ -1161,7 +1161,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -75.5,
         3,
         0,
         0,
@@ -1516,7 +1516,7 @@
         "__id__": 43
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 46
@@ -1905,7 +1905,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 151,
+      "width": 302,
       "height": 61
     },
     "_resize": 1,
@@ -2128,7 +2128,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 275.41,
+      "width": 270.06,
       "height": 30.24
     },
     "_anchorPoint": {
@@ -2179,8 +2179,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "兑换比例：1K币=100资产",
-    "_N$string": "兑换比例：1K币=100资产",
+    "_string": "兑换比例：1金币=10资产",
+    "_N$string": "兑换比例：1金币=10资产",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,
@@ -2235,7 +2235,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160.01,
+      "width": 168,
       "height": 30.24
     },
     "_anchorPoint": {
@@ -2286,8 +2286,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "可用K币数量：",
-    "_N$string": "可用K币数量：",
+    "_string": "可用金币数量：",
+    "_N$string": "可用金币数量：",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,
@@ -2449,7 +2449,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 232.01,
+      "width": 240,
       "height": 30.24
     },
     "_anchorPoint": {
@@ -2500,8 +2500,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "今日剩余可兑换K币：",
-    "_N$string": "今日剩余可兑换K币：",
+    "_string": "今日剩余可兑换金币：",
+    "_N$string": "今日剩余可兑换金币：",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,
@@ -3426,8 +3426,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "点击输入K币数量",
-    "_N$string": "点击输入K币数量",
+    "_string": "点击输入金币数量",
+    "_N$string": "点击输入金币数量",
     "_fontSize": 24,
     "_lineHeight": 25,
     "_enableWrapText": false,

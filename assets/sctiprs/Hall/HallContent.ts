@@ -96,10 +96,10 @@ export default class NewClass extends cc.Component {
 
 	setGameCoutn() {
 		let time = new Date().toLocaleDateString();
-		let pkCount = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + pb.GameType.JJ_PK) || 0;
-		this.pkLabel.string = '剩余次数：' + pkCount;
-		let dkCount = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + pb.GameType.JJ_DuoKong) || 0;
-		this.dkLabel.string = '剩余次数：' + dkCount;
+		//let pkCount = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + pb.GameType.JJ_PK) || 0;
+		this.pkLabel.string = '500金币';
+		//let dkCount = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + pb.GameType.JJ_DuoKong) || 0;
+		this.dkLabel.string = '500金币';
 	}
 
 	upLoadUserInfo() {
@@ -251,27 +251,26 @@ export default class NewClass extends cc.Component {
 		else if (name == 'main_jj_pkdz') {
 			GameCfgText.getSwitchModule(7, () => {
 				GameCfg.GameType = pb.GameType.JJ_PK;
-				let gameStatus = EnterGameControl.onCurWXIsEnterGame();
-				if (gameStatus.status == 3) {
-					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
-					return;
-				}
-				else {
-					let cb = () => {
-						GlobalEvent.emit(EventCfg.LOADINGSHOW);
-						GameCfg.GameSet = GameData.JJPKSet;
-						GlobalEvent.emit(EventCfg.OPENMATCHPK);
-					}
-					if (GameData.adSucceed) {
-						cb && cb();
-					}
-					else {
-						PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
-							node.getComponent('UnlockBox').callback = cb;
-						});
-					}
-
-				}
+				// let gameStatus = EnterGameControl.onCurWXIsEnterGame();
+				// if (gameStatus.status == 3) {
+				// 	GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
+				// 	return;
+				// }
+				// else {
+				// 	let cb = () => {
+				GlobalEvent.emit(EventCfg.LOADINGSHOW);
+				GameCfg.GameSet = GameData.JJPKSet;
+				GlobalEvent.emit(EventCfg.OPENMATCHPK);
+				// }
+				// 		if (GameData.adSucceed) {
+				// 	cb && cb();
+				// }
+				// else {
+				// 	PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
+				// 		node.getComponent('UnlockBox').callback = cb;
+				// 	});
+				// }
+				//}
 			})
 		}
 
@@ -281,31 +280,34 @@ export default class NewClass extends cc.Component {
 				// LLWSDK.getSDK().showVideoAd((flag) => {
 				// 	if (flag) {
 				GameCfg.GameType = pb.GameType.JJ_DuoKong;
-				let gameStatus = EnterGameControl.onCurWXIsEnterGame();
-				if (gameStatus.status == 3) {
-					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
-					return;
-				}
-				else {
-					let cb = () => {
-						GlobalEvent.emit(EventCfg.LOADINGSHOW);
-						GameCfg.GameSet = GameData.JJPKSet;
-						GlobalEvent.emit(EventCfg.OPENMATCHPK);
-					}
-					if (GameData.adSucceed) {
-						cb && cb();
-					}
-					else {
-						PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
-							node.getComponent('UnlockBox').callback = cb;
-						});
-					}
-				}
+				// let gameStatus = EnterGameControl.onCurWXIsEnterGame();
+				// if (gameStatus.status == 3) {
+				// 	GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
+				// 	return;
+				// }
+				// else {
+				// 	let cb = () => {
+				GlobalEvent.emit(EventCfg.LOADINGSHOW);
+				GameCfg.GameSet = GameData.JJPKSet;
+				GlobalEvent.emit(EventCfg.OPENMATCHPK);
+				// 	}
+				// 	if (GameData.adSucceed) {
+				// 		cb && cb();
+				// 	}
+				// 	else {
+				// 		PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
+				// 			node.getComponent('UnlockBox').callback = cb;
+				// 		});
+				// 	}
+				// }
 			})
 		}
 
 		//打开闯关赛
 		else if (name == 'main_jj_cgs') {
+
+			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '该功能正在开发中，敬请期待');
+			return;
 			GameCfgText.getSwitchModule(9, () => {
 				GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
 				GameCfg.GameSet = GameData.JJPKSet;

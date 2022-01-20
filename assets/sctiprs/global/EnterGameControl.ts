@@ -27,42 +27,46 @@ export default class EnterGameControl {
 
         let free, adcount, todayCount;
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
-            free = 5;
-            adcount = 5;
-            todayCount = GameData.todayGameCount[pb.GameType.ShuangMang];
+
+            data.status = 1;
+            data.count = 1;
+            return data;
+            // free = 5;
+            // adcount = 5;
+            // todayCount = GameData.todayGameCount[pb.GameType.ShuangMang];
         }
 
         else if (GameCfg.GameType == pb.GameType.DingXiang) {
-            free = 1;
-            adcount = 5;
+            free = 3;
+            adcount = 0;
             todayCount = GameData.todayGameCount[pb.GameType.DingXiang];
         }
 
         else if (GameCfg.GameType == pb.GameType.QiHuo) {
-            free = 1;
-            adcount = 5;
+            free = 3;
+            adcount = 0;
             todayCount = GameData.todayGameCount[pb.GameType.QiHuo];
         }
 
-        else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-            free = 1;
-            adcount = 5;
-            todayCount = GameData.todayGameCount[pb.GameType.ZhiBiao];
-        }
+        // else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+        //     free = 1;
+        //     adcount = 5;
+        //     todayCount = GameData.todayGameCount[pb.GameType.ZhiBiao];
+        // }
 
-        else if (GameCfg.GameType == pb.GameType.JJ_PK) {
-            free = 0;
-            adcount = 5;
-            todayCount = GameData.todayGameCount[pb.GameType.JJ_PK];
-            console.log(todayCount);
-        }
+        // else if (GameCfg.GameType == pb.GameType.JJ_PK) {
+        //     free = 0;
+        //     adcount = 5;
+        //     todayCount = GameData.todayGameCount[pb.GameType.JJ_PK];
+        //     console.log(todayCount);
+        // }
 
-        else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-            free = 0;
-            adcount = 5;
-            todayCount = GameData.todayGameCount[pb.GameType.JJ_DuoKong];
-            console.log(todayCount);
-        }
+        // else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+        //     free = 0;
+        //     adcount = 5;
+        //     todayCount = GameData.todayGameCount[pb.GameType.JJ_DuoKong];
+        //     console.log(todayCount);
+        // }
 
         let curCount = free - todayCount;
         //还有免费次数
