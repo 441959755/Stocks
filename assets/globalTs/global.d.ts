@@ -1,3 +1,0 @@
-
-
-//declare let gg: any;

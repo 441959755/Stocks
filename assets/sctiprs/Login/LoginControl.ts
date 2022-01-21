@@ -10,17 +10,8 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
-    @property(cc.Label)
-    tipsLabel: cc.Label = null;
-
     @property(cc.Node)
     dlNode: cc.Node = null;  //登入节点
-
-    @property(cc.Node)
-    zhNode: cc.Node = null;  //找回账号节点
-
-    @property(cc.Node)
-    zcNode: cc.Node = null;  //注册账号节点
 
     @property(cc.EditBox)
     account: cc.EditBox = null;  //账号输入框
@@ -28,16 +19,9 @@ export default class NewClass extends cc.Component {
     @property(cc.EditBox)
     password: cc.EditBox = null;  //密码
 
-    @property(cc.Toggle)
-    zcToggle: cc.Toggle = null;  //
-
     start() {
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
-        this.tipsLabel.string = '会员登入';
-
-        this.onShowNode(this.dlNode);
 
         let acc = cc.sys.localStorage.getItem('ACCOUNT');
 
@@ -50,13 +34,6 @@ export default class NewClass extends cc.Component {
         if (pass) {
             this.password.string = pass;
         }
-    }
-
-    onShowNode(node) {
-        this.dlNode.active = false;
-        this.zhNode.active = false;
-        this.zcNode.active = false;
-        node.active = true;
     }
 
     onBtnclick(event, data) {
@@ -84,7 +61,6 @@ export default class NewClass extends cc.Component {
             else {
                 this.loginServer();
             }
-
         }
 
         //qq登入
@@ -129,7 +105,7 @@ export default class NewClass extends cc.Component {
             decoded.uid && (GameData.userID = decoded.uid);
 
             if (decoded.gameAddr) {
-                window.socket = new Socket(decoded.gameAddr);
+                (<any>window).socket = new Socket(decoded.gameAddr);
             }
 
         } else {
@@ -137,4 +113,5 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');
         }
     }
+
 }

@@ -3,7 +3,6 @@ import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import LoadImg from "../Utils/LoadImg";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -22,26 +21,27 @@ export default class NewClass extends cc.Component {
     version = 0;
 
     onLoad() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
         GlobalEvent.on('OPENADSHOW', this.initAD.bind(this), this);
 
         GlobalEvent.on('OPENADHIDE', () => {
             this.node.active = false;
         }, this);
 
-        GameCfgText.LoadGameConf();
     }
 
     initAD() {
 
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         this.id = GameCfgText.adConf.launch[0].id;
 
         let version = cc.sys.localStorage.getItem('LAUNCHAD');
+
         if (!version) {
             cc.sys.localStorage.setItem('LAUNCHAD', GameCfgText.adConf.launch[0].version);
             version = GameCfgText.adConf.launch[0].version;
         }
+
         this.version = version;
 
         LoadImg.downloadRemoteImageAndSave(GameCfgText.adConf.launch[0].img, (flag, sp) => {
@@ -89,6 +89,7 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
+        GlobalEvent.off('OPENADHIDE');
         GlobalEvent.off('OPENADSHOW');
         this.call && (clearInterval(this.call));
         this.call = null;
