@@ -1,9 +1,11 @@
-import { pb } from "../../protos/proto";
-import LLWConfig from "../common/config/LLWConfig";
-import HttpUtils from "../common/net/HttpUtils";
-import GameData from "../GameData";
-import EventCfg from "../Utils/EventCfg";
-import GlobalEvent from "../Utils/GlobalEvent";
+
+import { pb } from "../../../protos/proto";
+import LLWConfig from "../../../sctiprs/common/config/LLWConfig";
+import HttpUtils from "../../../sctiprs/common/net/HttpUtils";
+import Socket from "../../../sctiprs/common/net/Socket";
+import GameData from "../../../sctiprs/GameData";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
 
@@ -35,6 +37,7 @@ export default class NewClass extends cc.Component {
     cb = null;
 
     onLoad() {
+
         this.phoneNumber.node.on('editing-did-ended', edit => {
             let str = parseInt(edit.string);
             if (this.isPhoneNumber(str)) {
@@ -93,7 +96,6 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'zccloseBtn') {
             this.node.active = false;
-            this.node.parent.children[0].active = true;
         }
 
         else if (name == 'login_zc') {
@@ -153,7 +155,7 @@ export default class NewClass extends cc.Component {
                     decoded.token && (GameData.token = decoded.token);
                     decoded.uid && (GameData.userID = decoded.uid);
                     if (decoded.gameAddr) {
-                        socket = socket(decoded.gameAddr);
+                        (<any>window).socket = new Socket(decoded.gameAddr);
                     }
                 }
 
@@ -163,7 +165,6 @@ export default class NewClass extends cc.Component {
 
         }
     }
-
 
     //获取验证码
     getAuthCode() {

@@ -1,117 +1,112 @@
-
 import LLWSDK from "../common/sdk/LLWSDK";
-import GameData from "../GameData";
-import EventCfg from "../Utils/EventCfg";
+import AudioUtils from "../Utils/AudioUtils";
 import GlobalEvent from "../Utils/GlobalEvent";
-import Socket from "../common/net/Socket";
+import PopupManager from "../Utils/PopupManager";
+import { SetConf, HisCode, AdCount, SelectBk } from "../SetConf";
+import GameData from "../GameData";
+import GameCfgText from "../GameText";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class LoginHandle extends cc.Component {
 
-    @property(cc.Node)
-    dlNode: cc.Node = null;  //登入节点
+    protected onLoad(): void {
 
-    @property(cc.EditBox)
-    account: cc.EditBox = null;  //账号输入框
+        GlobalEvent.on('OPENNOTICELAYER', this.openNoticeLayer.bind(this), this);
 
-    @property(cc.EditBox)
-    password: cc.EditBox = null;  //密码
+        PopupManager.init();
+
+        AudioUtils.getAudioVolume();
+
+        AudioUtils.loadAudios('audios');
+
+        GameCfgText.LoadGameConf();
+    }
+
+    init() {
+
+        let PBHelper = require('pbhelper');
+
+        let pbhelper = new PBHelper;
+
+        (<any>window).PB = pbhelper;
+
+        (<any>window).gg = { wechat: LLWSDK.getSDK() }
+    }
+
 
     start() {
+        this.init();
 
-        GlobalEvent.emit(EventCfg.LOADINGHIDE);
+        cc.macro.ENABLE_MULTI_TOUCH = false;
 
-        let acc = cc.sys.localStorage.getItem('ACCOUNT');
-
-        if (acc) {
-            this.account.string = acc;
+        cc.Button.prototype._onTouchEnded = function (t) {
+            if (this.interactable && this.enabledInHierarchy) {
+                AudioUtils.playEffect("click", false);
+                if (this._pressed) {
+                    cc.Component.EventHandler.emitEvents(this.clickEvents, t);
+                    this.node.emit("click", this);
+                }
+                this._pressed = !1;
+                this._updateState();
+                t.stopPropagation();
+            }
         }
 
-        let pass = cc.sys.localStorage.getItem('PASSWORD');
+        cc.director.preloadScene('hall');
 
-        if (pass) {
-            this.password.string = pass;
-        }
+        this.initData();
     }
 
-    onBtnclick(event, data) {
-
-        let name = event.target.name;
-
-        //忘记密码
-        if (name == 'btnwjmm') {
-            this.tipsLabel.string = '忘记密码';
-            this.onShowNode(this.zhNode);
-        }
-
-        //注册账号
-        else if (name == 'btnzc') {
-            this.tipsLabel.string = '注册账号';
-            this.onShowNode(this.zcNode);
-        }
-
-        //点击登入
-        else if (name == 'login_dl') {
-            if (this.password.string == '' || this.account.string == '') {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '账号或密码不能为空');
-                return;
-            }
-            else {
-                this.loginServer();
-            }
-        }
-
-        //qq登入
-        else if (name == 'login_qqdl') {
-            if (LLWSDK.getSDK().isInstallQq) {
-                LLWSDK.getSDK().callQqLoginToJava(this.loginResultCallback.bind(this));
-            }
-            else {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '检查是否安QQ');
-            }
-        }
-
-        //微信登入
-        else if (name == 'login_wxdl') {
-            LLWSDK.getSDK().loginWX1(this.loginResultCallback.bind(this));
-        }
+    openNoticeLayer() {
+        PopupManager.openNode(this.node, null, 'Prefabs/stopNoticeLayer', 99, null);
     }
 
-    //获取token
-    loginServer() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        let uid = this.account.string;
-        let pw = this.password.string;
-        cc.sys.localStorage.setItem('ACCOUNT', uid);
-        cc.sys.localStorage.setItem('PASSWORD', pw);
-        LLWSDK.getSDK().login(this.loginResultCallback.bind(this), uid, pw);
+
+    protected onDestroy(): void {
+        GlobalEvent.off('OPENNOTICELAYER');
+        GameCfgText.releaseRes();
+        PopupManager.delPopupNode();
     }
 
-    //登入游戏
-    loginResultCallback(decoded) {
+    initData() {
 
-        if (decoded.err.err) {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, decoded.err.err);
-            return;
-        }
+        GameData.SMSet = new SetConf('SMSET');
 
-        console.log(decoded.token + decoded.uid + decoded.gameAddr);
+        GameData.JJPKSet = new SetConf('JJPKSET');
 
-        if (decoded) {
-            decoded.token && (GameData.token = decoded.token);
-            decoded.uid && (GameData.userID = decoded.uid);
+        GameData.DXSet = new SetConf('DXSET');
 
-            if (decoded.gameAddr) {
-                (<any>window).socket = new Socket(decoded.gameAddr);
-            }
+        GameData.ZBSet = new SetConf('ZBSet');
 
-        } else {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');
-        }
+        GameData.QHSet = new SetConf('QHSET');
+
+        GameData.TJDSet = new SetConf('TJDSET');
+
+        GameData.FSSet = new SetConf('FSSET');
+
+        GameData.DXHistoryInfo = new HisCode('DXHISTORYINFO');
+
+        GameData.QHHistoryInfo = new HisCode('QHHISTORYINFO');
+
+        GameData.ZBHistoryInfo = new HisCode('ZBHISTORYINFO');
+
+        let str = new Date().toLocaleDateString();
+
+        GameData.DingXiangADCount = new AdCount('DINGXIANGADCOUNT' + str);
+
+        GameData.QHADCount = new AdCount('QHADCOUNT' + str);
+
+        GameData.TJADCount = new AdCount('TJADCOUNT' + str);
+
+        AudioUtils.setEffectsVolume(GameData.SMSet.isSound);
+
+        GameData.SelectBk = new SelectBk();
+
+        GameData.headimgurl = null;
+
+        GameData.headImg = null;
+
     }
-
 }

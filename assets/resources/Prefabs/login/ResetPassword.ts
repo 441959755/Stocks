@@ -1,8 +1,9 @@
-import { pb } from "../../protos/proto";
-import HttpUtils from "../common/net/HttpUtils";
-import GameData from "../GameData";
-import EventCfg from "../Utils/EventCfg";
-import GlobalEvent from "../Utils/GlobalEvent";
+
+import { pb } from "../../../protos/proto";
+import HttpUtils from "../../../sctiprs/common/net/HttpUtils";
+import GameData from "../../../sctiprs/GameData";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
 
@@ -91,7 +92,6 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'closeBtn') {
             this.node.active = false;
-            this.node.parent.children[0].active = true;
         }
 
         else if (name == 'login_qd') {
@@ -204,6 +204,4 @@ export default class NewClass extends cc.Component {
         this.cb && (clearInterval(this.cb));
         this.cb = null;
     }
-
-
 }
