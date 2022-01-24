@@ -132,7 +132,10 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, decoded.err.err);
             return;
         }
-        console.log(decoded.token + decoded.uid + decoded.gameAddr);
+        // console.log(decoded.token + decoded.uid + decoded.gameAddr);
+        if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
+            decoded.gameAddr = 'wss://www.cgdr168.com/ws';
+        }
 
         if (decoded) {
 

@@ -33,6 +33,10 @@ export default class NewClass extends cc.Component {
             });
 
         }
+
+        else if (name == 'sys_close') {
+            this.node.active = false;
+        }
     }
 
     onDestroy() {

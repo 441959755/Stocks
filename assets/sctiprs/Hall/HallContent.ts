@@ -97,9 +97,9 @@ export default class NewClass extends cc.Component {
 	setGameCoutn() {
 		let time = new Date().toLocaleDateString();
 		//let pkCount = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + pb.GameType.JJ_PK) || 0;
-		this.pkLabel.string = '500金币';
+		//	this.pkLabel.string = '500金币';
 		//let dkCount = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + pb.GameType.JJ_DuoKong) || 0;
-		this.dkLabel.string = '500金币';
+		//	this.dkLabel.string = '500金币';
 	}
 
 	upLoadUserInfo() {

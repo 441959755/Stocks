@@ -130,7 +130,8 @@ export default class NewClass extends cc.Component {
                 from: LLWConfig.FROM,
             }
 
-            let url = 'http://test.chaogugame.com/r';
+            let url = LLWConfig.LOADIMGURL + '/r';
+            //  let url = 'http://test.chaogugame.com/r';
 
             let CmdRegistry = pb.CmdRegistry;
             let message = CmdRegistry.create(data1);
@@ -177,8 +178,8 @@ export default class NewClass extends cc.Component {
         if (this.cb) {
             return;
         }
-
-        let url = 'http://test.chaogugame.com/sms';
+        let url = LLWConfig.LOADIMGURL + '/sms';
+        //    let url = 'http://test.chaogugame.com/sms';
 
         let data = {
             account: this.pNum,

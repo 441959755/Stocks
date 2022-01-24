@@ -167,7 +167,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (this.curSwitch) {
-            this.toggles[3].node.active = true;
+            this.toggles[3].node.active = false;
         }
 
         // 0表示关闭，1表示打开炒股大赛排行，2表示打开闯关排行

@@ -3,7 +3,6 @@ import HttpUtils from "./HttpUtils";
 import { pb } from "../../../protos/proto";
 import LLWConfig from "../config/LLWConfig";
 
-
 export default class HttpMgr {
 
     static _instance: HttpMgr = null;
@@ -22,7 +21,7 @@ export default class HttpMgr {
 
     loginWeb(openId, data, call, err) {
 
-        let url = LLWConfig.LOADIMGURL + 'l';
+        let url = LLWConfig.LoginURL + '/l';
 
         data.websocket = true
         let CmdLogin = pb.CmdLogin;
@@ -44,7 +43,7 @@ export default class HttpMgr {
     }
 
     getGPData(info, call?) {
-        let url = 'http://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js';
+        let url = 'https://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js';
 
         HttpUtils.sendRequest(url, info, (res) => {
             res = res.replace('(', '');

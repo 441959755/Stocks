@@ -31,10 +31,13 @@
       },
       {
         "__id__": 24
+      },
+      {
+        "__id__": 25
       }
     ],
     "_prefab": {
-      "__id__": 25
+      "__id__": 26
     },
     "_opacity": 255,
     "_color": {
@@ -783,7 +786,7 @@
     },
     "_enabled": true,
     "_useOriginalSize": true,
-    "_url": "http://www.cgdr168.com/user/private1000.html",
+    "_url": "https://www.cgdr168.com/user/private1000.html",
     "webviewEvents": [],
     "_id": ""
   },
@@ -866,6 +869,16 @@
     "webview": {
       "__id__": 20
     },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.BlockInputEvents",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
     "_id": ""
   },
   {

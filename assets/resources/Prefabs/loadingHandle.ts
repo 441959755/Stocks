@@ -15,6 +15,8 @@ export default class NewClass extends cc.Component {
 
 	protected onEnable() {
 
+		this.loading.angle = 0;
+
 		this.callBack = setTimeout(() => {
 			this.node.active = false;
 		}, 2000);
@@ -22,12 +24,12 @@ export default class NewClass extends cc.Component {
 		let index = 0;
 		let arr = ['...', '..', '.'];
 		this.callBack1 = setInterval(() => {
-			this.loading.angle += 10;
+			this.loading.angle -= 10;
 			if (index > 2) {
 				index = 0;
 			}
 			this.label.string = '正在加载中' + arr[index++];
-		}, 300);
+		}, 100);
 
 	}
 

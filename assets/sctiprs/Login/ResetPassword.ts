@@ -1,4 +1,5 @@
 import { pb } from "../../protos/proto";
+import LLWConfig from "../common/config/LLWConfig";
 import HttpUtils from "../common/net/HttpUtils";
 import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
@@ -120,7 +121,8 @@ export default class NewClass extends cc.Component {
                 captcha: this.ac,
             }
 
-            let url = 'http://test.chaogugame.com/p';
+            let url = LLWConfig.LOADIMGURL + '/p';
+            //  let url = 'http://test.chaogugame.com/p';
             let CmdResetPwd = pb.CmdResetPwd;
             let message = CmdResetPwd.create(data1);
             let buff = CmdResetPwd.encode(message).finish();
@@ -161,7 +163,8 @@ export default class NewClass extends cc.Component {
             return;
         }
 
-        let url = 'http://test.chaogugame.com/sms';
+        let url = LLWConfig.LOADIMGURL + '/sms';
+        //  let url = 'http://test.chaogugame.com/sms';
 
         // 获取短信验证码
         // message CmdGetSms {

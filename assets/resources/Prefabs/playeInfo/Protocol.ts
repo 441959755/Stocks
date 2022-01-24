@@ -1,3 +1,4 @@
+import LoadUtils from "../../../sctiprs/Utils/LoadUtils";
 
 const { ccclass, property } = cc._decorator;
 
@@ -10,10 +11,16 @@ export default class NewClass extends cc.Component {
     @property(cc.WebView)
     webview: cc.WebView = null;
 
+
+    str = ''
+
     onShow(title, url) {
         this.title.string = title;
 
-        this.webview.url = url;
+        // this.webview.url = url;
+        LoadUtils.loadRes(title, (str) => {
+            console.log(str);
+        })
     }
 
     onBtnClick(event, curdata) {

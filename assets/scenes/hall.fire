@@ -1855,7 +1855,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 402,
+      "width": 294,
       "height": 100
     },
     "_anchorPoint": {
@@ -1900,7 +1900,7 @@
       "__id__": 39
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 41
@@ -2294,7 +2294,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -54,
+        -108,
         0,
         0,
         0,
@@ -2475,7 +2475,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        54,
+        0,
         0,
         0,
         0,
@@ -2997,7 +2997,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        162,
+        108,
         0,
         0,
         0,
@@ -3150,7 +3150,7 @@
     "_target": null,
     "_alignFlags": 33,
     "_left": 580.985,
-    "_right": 248,
+    "_right": 302,
     "_top": 0,
     "_bottom": 0,
     "_verticalCenter": 0,
@@ -3175,7 +3175,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 402,
+      "width": 294,
       "height": 100
     },
     "_resize": 1,
@@ -8374,7 +8374,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 88.04,
+      "width": 184.04,
       "height": 37.8
     },
     "_anchorPoint": {
@@ -8425,8 +8425,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "500金币",
-    "_N$string": "500金币",
+    "_string": "报名费：500金币",
+    "_N$string": "报名费：500金币",
     "_fontSize": 24,
     "_lineHeight": 30,
     "_enableWrapText": true,
@@ -8653,7 +8653,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 88.04,
+      "width": 184.04,
       "height": 37.8
     },
     "_anchorPoint": {
@@ -8704,8 +8704,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "500金币",
-    "_N$string": "500金币",
+    "_string": "报名费：500金币",
+    "_N$string": "报名费：500金币",
     "_fontSize": 24,
     "_lineHeight": 30,
     "_enableWrapText": true,

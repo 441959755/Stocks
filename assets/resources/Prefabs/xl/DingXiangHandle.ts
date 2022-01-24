@@ -145,7 +145,6 @@ export default class NewClass extends cc.Component {
 
 		GlobalEvent.on(EventCfg.GMAECOUNTERSCHANGE, this.onGameCountShow.bind(this), this);
 
-
 	}
 
 	onDestroy() {
@@ -165,6 +164,8 @@ export default class NewClass extends cc.Component {
 		// 	this.mfxlBtn.active = false;
 		// }
 		this.tipsLabel1.node.active = true;
+		this.tipsLabel2.node.active = true;
+
 		this.curState = gameCount.status;
 		if (gameCount.status == 1) {
 			this.tipsLabel1.string = '今日剩余次数：' + gameCount.count + '次';
@@ -176,6 +177,7 @@ export default class NewClass extends cc.Component {
 
 		else if (gameCount.status == 3) {
 			this.tipsLabel1.string = '今日次数已用完,请明天在来吧!';
+			this.tipsLabel2.node.active = false;
 		}
 	}
 
@@ -542,10 +544,10 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
 		} else if (name == 'startDXBtn') {
 
-			// if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameConf.dxxl.cost[0].v) {
-			// 	GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
-			// 	return;
-			// }
+			if (GameData.properties[pb.GamePropertyId.Gold] < Math.abs(GameCfgText.gameConf.dxxl.cost[0].v)) {
+				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+				return;
+			}
 
 			// else if ((this.curState == 2 || this.curState == 3) && !this.adSucceed) {
 			// 	// GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');

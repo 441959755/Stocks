@@ -28,8 +28,8 @@ export default class NewClass extends cc.Component {
 
     protected start(): void {
 
-        let bgurl = LLWConfig.LOADIMGURL + 'img/activity/cgds_bg.png';
-        let btnUrl = LLWConfig.LOADIMGURL + 'img/activity/cgds_btn.png'
+        let bgurl = LLWConfig.LOADIMGURL + '/img/activity/cgds_bg.png';
+        let btnUrl = LLWConfig.LOADIMGURL + '/img/activity/cgds_btn.png'
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         LoadUtils.load(bgurl, (sp) => {

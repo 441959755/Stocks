@@ -260,4 +260,20 @@ export default class WechatSDK {
         })
     }
 
+
+    onCopyText(data, call) {
+        wx.setClipboardData({
+            data: data,
+            success(res) {
+                wx.getClipboardData({
+                    success(res) {
+                        console.log(res.data) // data
+                        call(1);
+                    }
+                })
+            }
+        })
+
+    }
+
 }

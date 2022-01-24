@@ -153,15 +153,17 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
             let info = {
-                type: pb.ExchangeDirection.Forward,
+                direction: pb.ExchangeDirection.Forward,
                 amount: this.dhzc,
             }
+
+            console.log(JSON.stringify(info));
 
             let CmdMncgExchange = pb.CmdMncgExchange;
             let message = CmdMncgExchange.create(info);
             let buff = CmdMncgExchange.encode(message).finish();
 
-            socket.send(pb.MessageId.Req_Hall_Exchange, buff, (res) => {
+            socket.send(pb.MessageId.Req_Game_MncgExchange, buff, (res) => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 console.log('兑换应答' + JSON.stringify(res));
                 if (res.err) {

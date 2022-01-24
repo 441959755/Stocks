@@ -2,6 +2,6 @@
   "appid": "wx3dafdc6d770eeb50",
   "orientation": "landscape",
   "separate_engine": true,
-  "REMOTE_SERVER_ROOT": "http://test.cgdr168.com/wechatgame",
+  "REMOTE_SERVER_ROOT": "https://www.cgdr168.com/wechatgame",
   "subContext": ""
 }
