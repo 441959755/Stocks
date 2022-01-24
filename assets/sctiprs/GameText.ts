@@ -11,9 +11,7 @@ import EventCfg from './Utils/EventCfg';
 
 export default class GameCfgText {
 
-    public static url = 'http://test.cgdr168.com/conf/';
-
-    // public static url = 'http://login.cgdr168.com/conf/';
+    public static url = LLWConfig.LOADIMGURL + 'conf/';
 
     public static curDayIsLoad = false;  //今天是否下载
 

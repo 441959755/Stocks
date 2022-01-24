@@ -91,7 +91,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'btnzc') {
-            GlobalEvent.emit('EventCfg.OPENPROTOCOL', '用户协议', 'http://www.cgdr168.com/user/decription1000.html');
+            GlobalEvent.emit('EventCfg.OPENPROTOCOL', '用户协议', LLWConfig.LOADIMGURL + 'user/decription1000.html');
         }
 
         else if (name == 'zccloseBtn') {
@@ -131,7 +131,7 @@ export default class NewClass extends cc.Component {
                 from: LLWConfig.FROM,
             }
 
-            let url = 'http://test.chaogugame.com/r';
+            let url = LLWConfig.LOADIMGURL + 'r';
 
             let CmdRegistry = pb.CmdRegistry;
             let message = CmdRegistry.create(data1);
@@ -178,7 +178,7 @@ export default class NewClass extends cc.Component {
             return;
         }
 
-        let url = 'http://test.chaogugame.com/sms';
+        let url = LLWConfig.LOADIMGURL + 'sms';
 
         let data = {
             account: this.pNum,

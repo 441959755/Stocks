@@ -354,6 +354,7 @@ export default class ComUtils {
 
 	//加载头像
 	public static onLoadHead(name, call) {
+
 		if (!name) {
 			name = 0;
 		}

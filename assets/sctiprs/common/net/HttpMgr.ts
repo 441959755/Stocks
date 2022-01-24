@@ -3,7 +3,6 @@ import HttpUtils from "./HttpUtils";
 import { pb } from "../../../protos/proto";
 import LLWConfig from "../config/LLWConfig";
 
-
 export default class HttpMgr {
 
     static _instance: HttpMgr = null;
@@ -43,6 +42,7 @@ export default class HttpMgr {
         }, err);
     }
 
+
     getGPData(info, call?) {
         let url = 'http://pdfm2.eastmoney.com/EM_UBG_PDTI_Fast/api/js';
 
@@ -73,7 +73,6 @@ export default class HttpMgr {
             call && call(data);
 
         })
-
     }
 
 }

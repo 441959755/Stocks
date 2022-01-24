@@ -1,6 +1,8 @@
 
 import { pb } from "../../../protos/proto";
+import LLWConfig from "../../../sctiprs/common/config/LLWConfig";
 import HttpUtils from "../../../sctiprs/common/net/HttpUtils";
+import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 import GameData from "../../../sctiprs/GameData";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -87,7 +89,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'btnzc') {
-            GlobalEvent.emit('EventCfg.OPENPROTOCOL', '用户协议', 'http://www.cgdr168.com/user/decription1000.html');
+            GlobalEvent.emit('EventCfg.OPENPROTOCOL', '用户协议', LLWConfig.LOADIMGURL + 'user/decription1000.html');
         }
 
         else if (name == 'closeBtn') {
@@ -119,7 +121,7 @@ export default class NewClass extends cc.Component {
                 captcha: this.ac,
             }
 
-            let url = 'http://test.chaogugame.com/p';
+            let url = LLWConfig.LOADIMGURL + 'p';
             let CmdResetPwd = pb.CmdResetPwd;
             let message = CmdResetPwd.create(data1);
             let buff = CmdResetPwd.encode(message).finish();
@@ -160,7 +162,7 @@ export default class NewClass extends cc.Component {
             return;
         }
 
-        let url = 'http://test.chaogugame.com/sms';
+        let url = LLWConfig.LOADIMGURL + 'sms';
 
         // 获取短信验证码
         // message CmdGetSms {

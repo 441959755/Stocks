@@ -1,4 +1,5 @@
 import { pb } from "../../../protos/proto";
+import LLWConfig from "../../../sctiprs/common/config/LLWConfig";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
@@ -33,11 +34,11 @@ export default class NewClass extends cc.Component {
 
         //协议
         else if (name == 'grzx_yhxy') {
-            GlobalEvent.emit('EventCfg.OPENPROTOCOL', '用户协议', 'http://www.cgdr168.com/user/decription1000.html');
+            GlobalEvent.emit('EventCfg.OPENPROTOCOL', '用户协议', LLWConfig.LOADIMGURL + 'user/decription1000.html');
         }
 
         else if (name == 'grzx_ysxy') {
-            GlobalEvent.emit('EventCfg.OPENPROTOCOL', '隐私协议', 'http://www.cgdr168.com/user/private1000.html');
+            GlobalEvent.emit('EventCfg.OPENPROTOCOL', '隐私协议', LLWConfig.LOADIMGURL + 'user/private1000.html');
         }
 
     }
