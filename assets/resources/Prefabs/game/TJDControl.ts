@@ -98,7 +98,7 @@ export default class NewClass extends cc.Component {
 
         //点击买入
         else if (name == 'xl_btn_mairu') {
-            GlobalEvent.emit('OPENTAITICBOX', 1, (info) => {
+            GlobalEvent.emit('OPENTAITICBOX', 1, (info: any) => {
                 this.mrclInfo = info;
             }, this.mrclInfo);
         }

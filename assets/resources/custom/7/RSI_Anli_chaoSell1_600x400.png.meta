@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "eacce557-a2c6-4b47-be2c-0c409e667d72",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "RSI_Anli_chaoSell1_600x400": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "e2e52b4e-3dbc-468e-979a-7dd4b20aebcb",
+      "importer": "sprite-frame",
       "rawTextureUuid": "eacce557-a2c6-4b47-be2c-0c409e667d72",
       "trimType": "auto",
       "trimThreshold": 1,

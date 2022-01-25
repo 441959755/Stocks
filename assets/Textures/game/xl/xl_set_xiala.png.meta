@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "462a260e-1d3f-45dc-84fa-369891272e71",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "xl_set_xiala": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "9c6a13eb-ef40-4a40-bf5b-6899f7913b60",
+      "importer": "sprite-frame",
       "rawTextureUuid": "462a260e-1d3f-45dc-84fa-369891272e71",
       "trimType": "auto",
       "trimThreshold": 1,

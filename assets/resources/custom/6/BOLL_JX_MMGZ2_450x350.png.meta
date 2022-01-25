@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "17dcd012-7a69-4cd6-a14b-8bbf27c46b9e",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "BOLL_JX_MMGZ2_450x350": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "9e9a332a-fa81-48a2-b83f-e8393bf5d0d7",
+      "importer": "sprite-frame",
       "rawTextureUuid": "17dcd012-7a69-4cd6-a14b-8bbf27c46b9e",
       "trimType": "auto",
       "trimThreshold": 1,

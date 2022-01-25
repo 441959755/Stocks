@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "9c9727a3-1274-4778-894f-9e13ce2e7f48",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "sp_btn_xunlian": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "0ed1bbc5-e87d-4894-9a86-4911eaacafce",
+      "importer": "sprite-frame",
       "rawTextureUuid": "9c9727a3-1274-4778-894f-9e13ce2e7f48",
       "trimType": "auto",
       "trimThreshold": 1,

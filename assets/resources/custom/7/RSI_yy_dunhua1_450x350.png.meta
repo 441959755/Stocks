@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "538bad22-69a3-42e9-bc19-68b328f109eb",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "RSI_yy_dunhua1_450x350": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "916644b2-0a0b-4789-8b9a-e37b770aa4b6",
+      "importer": "sprite-frame",
       "rawTextureUuid": "538bad22-69a3-42e9-bc19-68b328f109eb",
       "trimType": "auto",
       "trimThreshold": 1,

@@ -87,8 +87,6 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
-        GlobalEvent.off('OPENADHIDE');
-        GlobalEvent.off('OPENADSHOW');
         this.call && (clearInterval(this.call));
         this.call = null;
     }

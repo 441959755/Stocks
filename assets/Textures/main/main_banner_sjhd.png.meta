@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "cfce0666-8782-4939-8216-0c57eee1cc85",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "main_banner_sjhd": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "103853cd-74a4-41e7-bd24-f50d76ca488b",
+      "importer": "sprite-frame",
       "rawTextureUuid": "cfce0666-8782-4939-8216-0c57eee1cc85",
       "trimType": "auto",
       "trimThreshold": 1,

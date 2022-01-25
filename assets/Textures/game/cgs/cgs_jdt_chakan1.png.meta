@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "18b14296-2885-4973-9a6f-f2f4187eff00",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "cgs_jdt_chakan1": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "ed424e90-60a5-4ec5-b7a0-f716b25aea27",
+      "importer": "sprite-frame",
       "rawTextureUuid": "18b14296-2885-4973-9a6f-f2f4187eff00",
       "trimType": "auto",
       "trimThreshold": 1,

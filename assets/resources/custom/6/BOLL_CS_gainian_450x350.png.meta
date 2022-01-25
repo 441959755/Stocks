@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "12e33c66-4e30-4133-a56e-47bcf954e587",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "BOLL_CS_gainian_450x350": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "4c5c484b-fae5-467b-b978-07e140e1e063",
+      "importer": "sprite-frame",
       "rawTextureUuid": "12e33c66-4e30-4133-a56e-47bcf954e587",
       "trimType": "auto",
       "trimThreshold": 1,

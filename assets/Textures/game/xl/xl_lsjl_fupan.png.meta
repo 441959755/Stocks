@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "25047dbd-ef40-4246-8f64-34ecd5c07ba9",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "xl_lsjl_fupan": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "ebed2c02-caa1-4276-816e-b8adfaa1f47f",
+      "importer": "sprite-frame",
       "rawTextureUuid": "25047dbd-ef40-4246-8f64-34ecd5c07ba9",
       "trimType": "auto",
       "trimThreshold": 1,

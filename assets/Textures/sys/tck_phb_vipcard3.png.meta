@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "874b2f68-3848-4fb9-84f5-a74666e3610e",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "tck_phb_vipcard3": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "39d01fd6-12d4-46eb-9749-e1d5b3c16b86",
+      "importer": "sprite-frame",
       "rawTextureUuid": "874b2f68-3848-4fb9-84f5-a74666e3610e",
       "trimType": "auto",
       "trimThreshold": 1,

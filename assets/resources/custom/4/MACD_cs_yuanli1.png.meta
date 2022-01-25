@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "0c8a2065-05cb-47c9-8adf-d1fddd694f67",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "MACD_cs_yuanli1": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "c771a9b2-73be-48cf-bd0a-c311a23f6e59",
+      "importer": "sprite-frame",
       "rawTextureUuid": "0c8a2065-05cb-47c9-8adf-d1fddd694f67",
       "trimType": "auto",
       "trimThreshold": 1,

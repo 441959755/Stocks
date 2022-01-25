@@ -14,7 +14,6 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
-
     broadcast: cc.Node = null; //广播
 
     InviteBox: cc.Node = null;
@@ -31,8 +30,6 @@ export default class NewClass extends cc.Component {
     finalLayer: cc.Node[] = []; //结算界面
 
     index = 0;
-
-    // url = null;
 
     isLoading = false;
 
@@ -204,7 +201,6 @@ export default class NewClass extends cc.Component {
             node.getComponent('OtherPlayerHisInfo').onShow();
         })
     }
-
 
     //打开个人中心
     openPlayerInfoLayer() {

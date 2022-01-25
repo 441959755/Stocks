@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "3d90a5ca-4286-4a08-871e-36a8112ef0a9",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "xl_fupan_next": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "5f17d755-2728-47ed-855a-59b13c2192d6",
+      "importer": "sprite-frame",
       "rawTextureUuid": "3d90a5ca-4286-4a08-871e-36a8112ef0a9",
       "trimType": "auto",
       "trimThreshold": 1,
