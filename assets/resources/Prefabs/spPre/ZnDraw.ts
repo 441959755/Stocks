@@ -1,7 +1,7 @@
 import { pb } from "../../../protos/proto";
 import HttpMgr from "../../../sctiprs/common/net/HttpMgr";
 import DrawData from "../../../sctiprs/game/DrawData";
-import GameCfg from "../../../sctiprs/game/GameCfg";
+import GameCfg from "../../../sctiprs/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";

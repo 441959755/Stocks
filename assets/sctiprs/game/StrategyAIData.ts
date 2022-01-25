@@ -1,4 +1,4 @@
-import GameCfg from '../game/GameCfg';
+import GameCfg from '../GameCfg';
 import EventCfg from '../Utils/EventCfg';
 import GlobalEvent from '../Utils/GlobalEvent';
 

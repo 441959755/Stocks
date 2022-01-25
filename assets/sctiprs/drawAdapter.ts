@@ -1,9 +1,9 @@
 import GlobalEvent from "./Utils/GlobalEvent";
 import EventCfg from "./Utils/EventCfg";
-import GameCfg from "./game/GameCfg";
-import {pb} from "../protos/proto";
+import GameCfg from "./GameCfg";
+import { pb } from "../protos/proto";
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {

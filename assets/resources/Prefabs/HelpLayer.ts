@@ -1,5 +1,5 @@
 import { pb } from "../../protos/proto";
-import GameCfg from "../../sctiprs/game/GameCfg";
+import GameCfg from "../../sctiprs/GameCfg";
 
 const { ccclass, property } = cc._decorator;
 

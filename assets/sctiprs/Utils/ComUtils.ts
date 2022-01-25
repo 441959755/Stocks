@@ -1,6 +1,6 @@
 
 import LoadUtils from './LoadUtils';
-import GameCfg from '../game/GameCfg';
+import GameCfg from '../GameCfg';
 import { pb } from '../../protos/proto'
 import GameData from '../GameData';
 import LLWConfig from '../common/config/LLWConfig';

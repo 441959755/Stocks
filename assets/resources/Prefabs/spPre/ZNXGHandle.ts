@@ -1,5 +1,5 @@
 import { pb } from "../../../protos/proto";
-import GameCfg from "../../../sctiprs/game/GameCfg";
+import GameCfg from "../../../sctiprs/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -71,8 +71,8 @@ export default class NewClass extends cc.Component {
                 arr.push(el);
             }
         })
-        this.AIStockList=arr;
-        this.listV.numItems=this.AIStockList.length;
+        this.AIStockList = arr;
+        this.listV.numItems = this.AIStockList.length;
     }
 
     onDestroy() {
@@ -84,9 +84,9 @@ export default class NewClass extends cc.Component {
 
         this.getAIStockList();
 
-        this.scrollview.node.active=true;
-        this.scrollview1.node.active=false;
-        this.scrollview2.node.active=false;
+        this.scrollview.node.active = true;
+        this.scrollview1.node.active = false;
+        this.scrollview2.node.active = false;
 
     }
 
@@ -183,15 +183,15 @@ export default class NewClass extends cc.Component {
                 }
             });
 
-            this.listV.numItems=this.AIStockList.length;
+            this.listV.numItems = this.AIStockList.length;
         })
 
         this.tipsNode.active = false;
     }
 
     onListRender(item: cc.Node, idx: number) {
-            let handle = item.getComponent('ZnxgItem');
-           handle.onShow(this.AIStockList[idx], idx);
+        let handle = item.getComponent('ZnxgItem');
+        handle.onShow(this.AIStockList[idx], idx);
     }
 
     //AI收益信号
@@ -205,7 +205,7 @@ export default class NewClass extends cc.Component {
             this.AIProfitList = [];
             this.AIProfitList = res.items;
             console.log('查询AI收益列表' + JSON.stringify(res));
-            this.listV1.numItems=this.AIProfitList.length;
+            this.listV1.numItems = this.AIProfitList.length;
 
         })
         this.tipsNode.active = false;
@@ -213,7 +213,7 @@ export default class NewClass extends cc.Component {
 
     onListRender1(item: cc.Node, idx: number) {
         let handle = item.getComponent('ZnxgItem1');
-        handle.onShow( this.AIProfitList[idx], idx);
+        handle.onShow(this.AIProfitList[idx], idx);
     }
 
     //收藏
@@ -221,12 +221,12 @@ export default class NewClass extends cc.Component {
 
         this.collectList = JSON.parse(JSON.stringify(GameData.AIStockList));
 
-        if(this.collectList.length<=0){
-            this.listV2.numItems=this.collectList.length;
+        if (this.collectList.length <= 0) {
+            this.listV2.numItems = this.collectList.length;
             this.tipsNode.active = true;
             return;
         }
-        else{
+        else {
             this.tipsNode.active = false;
         }
 
@@ -245,15 +245,15 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             console.log('查询AI选股的股票列表' + JSON.stringify(res));
-            this.collectList=res.items;
-            this.listV2.numItems=this.collectList.length;
+            this.collectList = res.items;
+            this.listV2.numItems = this.collectList.length;
         })
 
     }
 
     onListRender2(item: cc.Node, idx: number) {
         let handle = item.getComponent('ZnxgItem2');
-        handle.onShow(  this.collectList[idx], idx + 1);
+        handle.onShow(this.collectList[idx], idx + 1);
     }
 
     getBKISShow(code) {

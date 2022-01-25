@@ -1,6 +1,6 @@
 import GlobalEvent from "../Utils/GlobalEvent";
 import DrawUtils from "../Utils/DrawUtils";
-import GameCfg from "./GameCfg";
+import GameCfg from "../GameCfg";
 import DrawData from "./DrawData";
 import { pb } from "../../protos/proto";
 
@@ -678,7 +678,7 @@ export default class NewClass extends cc.Component {
 
         let endX = 10 + ((some + 1) * GameCfg.hz_width);
 
-        let hight = el.value * ( this.drawVol.node.height / this.topVol);
+        let hight = el.value * (this.drawVol.node.height / this.topVol);
 
         let width = endX - startX;
 
@@ -693,11 +693,11 @@ export default class NewClass extends cc.Component {
         for (let i = 0; i < GameCfg.VOLGraph.length; i++) {
             if (index >= GameCfg.VOLGraph[i]) {
 
-                let preY = this.VolList[index - 1][i] * ( this.drawPCM.node.height / this.topVol);
+                let preY = this.VolList[index - 1][i] * (this.drawPCM.node.height / this.topVol);
                 let preX = 10 + ((some - 1) * GameCfg.hz_width) + width / 2
 
                 //平均的位置
-                let VOlPointY = this.VolList[index][i] * ( this.drawPCM.node.height / this.topVol);
+                let VOlPointY = this.VolList[index][i] * (this.drawPCM.node.height / this.topVol);
                 let VOlPointX = startX + width / 2;
 
                 this.drawPCM.strokeColor = GameCfg.VOLColor[i];

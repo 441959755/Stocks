@@ -1,6 +1,6 @@
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
-import GameCfg from '../game/GameCfg';
+import GameCfg from '../GameCfg';
 import { pb } from '../../protos/proto';
 import StrategyAIData from '../game/StrategyAIData';
 import GameData from '../GameData';

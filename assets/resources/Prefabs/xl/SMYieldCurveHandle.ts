@@ -3,7 +3,7 @@ import GlobalEvent from '../../../sctiprs/Utils/GlobalEvent';
 import EventCfg from '../../../sctiprs/Utils/EventCfg';
 import DrawUtils from '../../../sctiprs/Utils/DrawUtils';
 import GameData from '../../../sctiprs/GameData';
-import GameCfg from '../../../sctiprs/game/GameCfg';
+import GameCfg from '../../../sctiprs/GameCfg';
 import { pb } from '../../../protos/proto';
 
 const { ccclass, property } = cc._decorator;

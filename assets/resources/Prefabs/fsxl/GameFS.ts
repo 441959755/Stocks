@@ -1,5 +1,5 @@
 import { pb } from "../../../protos/proto";
-import GameCfg from "../../../sctiprs/game/GameCfg";
+import GameCfg from "../../../sctiprs/GameCfg";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import PopupManager from "../../../sctiprs/Utils/PopupManager";
@@ -102,7 +102,7 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         if (name == 'sys_back') {
             if (GameCfg.GAMEFUPAN) {
-                GameCfg.GAMEFUPAN=false;
+                GameCfg.GAMEFUPAN = false;
                 this.node.parent.active = false;
                 GlobalEvent.emit(EventCfg.LEAVEGAME);
             }

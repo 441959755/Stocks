@@ -1,6 +1,6 @@
 
 import { pb } from "../../../protos/proto";
-import GameCfg from "../../../sctiprs/game/GameCfg";
+import GameCfg from "../../../sctiprs/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";

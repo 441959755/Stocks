@@ -1,6 +1,6 @@
 import GlobalEvent from "./Utils/GlobalEvent";
 import EventCfg from "./Utils/EventCfg";
-import GameCfg from "./game/GameCfg";
+import GameCfg from "./GameCfg";
 
 export default class GameData {
 

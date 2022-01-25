@@ -2,7 +2,7 @@
 import { pb } from "../../../protos/proto";
 import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 import DrawData from "../../../sctiprs/game/DrawData";
-import GameCfg from "../../../sctiprs/game/GameCfg";
+import GameCfg from "../../../sctiprs/GameCfg";
 import StrategyAIData from "../../../sctiprs/game/StrategyAIData";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";

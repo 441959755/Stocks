@@ -1,7 +1,7 @@
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import PopupManager from "../Utils/PopupManager";
-import GameCfg from "./GameCfg";
+import GameCfg from "../GameCfg";
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import GlobalHandle from "../global/GlobalHandle";
@@ -443,7 +443,7 @@ export default class NewClass extends cc.Component {
 
                     PopupManager.LoadTipsBox('tipsBox', str, () => {
 
-                        GlobalEvent.emit(EventCfg.GAMEOVEER,1);
+                        GlobalEvent.emit(EventCfg.GAMEOVEER, 1);
 
                         GameCfg.allRate = 0;
                         GameCfg.finalfund = 0;

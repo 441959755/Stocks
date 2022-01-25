@@ -1,7 +1,7 @@
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
 
-import GameCfg from './GameCfg';
+import GameCfg from '../GameCfg';
 import { pb } from '../../protos/proto';
 import DrawData from './DrawData';
 import List from "../Utils/List";
@@ -16,14 +16,14 @@ export default class NewClass extends cc.Component {
 
     _idd = 0;
 
-    arr=[];
+    arr = [];
 
     @property(List)
     listV: List = null;
 
     onLoad() {
         GlobalEvent.on(EventCfg.SLGEVENTNOTICE, () => {
-            if(GameCfg.GameType==pb.GameType.DingXiang){
+            if (GameCfg.GameType == pb.GameType.DingXiang) {
                 if (GameCfg.GameSet.jx_notice) {
                     if (DrawData.MaList && DrawData.MaList.length > 0) {
                         this.testMaEvent();
@@ -37,20 +37,20 @@ export default class NewClass extends cc.Component {
         }, this);
 
         GlobalEvent.on(EventCfg.UPDATERATE, (data) => {
-            if(GameCfg.GameType==pb.GameType.DingXiang) {
+            if (GameCfg.GameType == pb.GameType.DingXiang) {
                 if (GameCfg.GameSet.StopCheck_notice) {
                     this.testStopCheck(data[0]);
                 }
             }
         }, this);
 
-        GlobalEvent.on(EventCfg.LEAVEGAME,()=>{
-            if(GameCfg.GameType==pb.GameType.DingXiang) {
+        GlobalEvent.on(EventCfg.LEAVEGAME, () => {
+            if (GameCfg.GameType == pb.GameType.DingXiang) {
                 this.arr.length = 0;
                 this.listV.numItems = this.arr.length;
                 this._idd = 0;
             }
-        },this);
+        }, this);
     }
 
     testKFrom() {
@@ -880,13 +880,13 @@ export default class NewClass extends cc.Component {
             str = '亏损大于10%';
         }
 
-        let obj={
-            str:str,
-            index:index,
+        let obj = {
+            str: str,
+            index: index,
         }
 
         this.arr.push(obj);
-        this.listV.numItems=this.arr.length;
+        this.listV.numItems = this.arr.length;
     }
 
     onListRender(item: cc.Node, idx: number) {

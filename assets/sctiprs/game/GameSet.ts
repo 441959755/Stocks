@@ -1,7 +1,7 @@
 
 const { ccclass, property } = cc._decorator;
 import GlobalEvent from "../Utils/GlobalEvent";
-import GameCfg from "./GameCfg";
+import GameCfg from "../GameCfg";
 import EventCfg from './../Utils/EventCfg';
 import { pb } from "../../protos/proto";
 

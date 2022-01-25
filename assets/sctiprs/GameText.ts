@@ -1,6 +1,6 @@
 
 import ComUtils from '../sctiprs/Utils/ComUtils';
-import GameCfg from "./game/GameCfg";
+import GameCfg from "./GameCfg";
 import GameData from "./GameData";
 import { pb } from "../protos/proto";
 import HttpUtils from "./common/net/HttpUtils";

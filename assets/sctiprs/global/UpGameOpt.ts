@@ -1,5 +1,5 @@
 import { pb } from "../../protos/proto";
-import GameCfg from "../game/GameCfg";
+import GameCfg from "../GameCfg";
 import GameData from "../GameData";
 import GlobalHandle from "./GlobalHandle";
 

@@ -1,6 +1,6 @@
 import { pb } from "../../../protos/proto";
 import DrawData from "../../../sctiprs/game/DrawData";
-import GameCfg from "../../../sctiprs/game/GameCfg";
+import GameCfg from "../../../sctiprs/GameCfg";
 
 const { ccclass, property } = cc._decorator;
 

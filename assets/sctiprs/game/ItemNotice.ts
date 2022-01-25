@@ -1,8 +1,8 @@
 
-import {pb} from "../../protos/proto";
+import { pb } from "../../protos/proto";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
-import GameCfg from "./GameCfg";
+import GameCfg from "../GameCfg";
 
 const { ccclass, property } = cc._decorator;
 
@@ -13,7 +13,7 @@ export default class NewClass extends cc.Component {
     label: cc.Label = null;
 
     @property(cc.Node)
-    tipsNode:cc.Node=null;
+    tipsNode: cc.Node = null;
 
     text: string = '';
 
@@ -23,7 +23,7 @@ export default class NewClass extends cc.Component {
 
     _zbStr = null;
 
-    timeCall=null;
+    timeCall = null;
 
     onShow() {
         this.label.string = this.text;
@@ -87,13 +87,13 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
 
         if (name == 'itemBtn') {
-            let label=this.tipsNode.getComponentInChildren(cc.Label);
+            let label = this.tipsNode.getComponentInChildren(cc.Label);
             if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-                label.string=this._zbStr;
+                label.string = this._zbStr;
             } else {
-                label.string=this.infoCfg;
+                label.string = this.infoCfg;
             }
-            this.tipsNode.active=true;
+            this.tipsNode.active = true;
             if (this.Pindex && GameCfg.GAMEFUPAN) {
                 GlobalEvent.emit(EventCfg.NOTICEDRAWMOVW, this.Pindex)
             }
@@ -113,7 +113,7 @@ export default class NewClass extends cc.Component {
     protected onDestroy() {
         if (this.timeCall) {
             clearTimeout(this.timeCall);
-            this.timeCall=null;
+            this.timeCall = null;
         }
     }
 }

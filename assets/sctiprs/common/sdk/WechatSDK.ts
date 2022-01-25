@@ -260,7 +260,6 @@ export default class WechatSDK {
         })
     }
 
-
     onCopyText(data, call) {
         wx.setClipboardData({
             data: data,
@@ -273,7 +272,16 @@ export default class WechatSDK {
                 })
             }
         })
+    }
 
+    //监听用户点击右上角菜单的「转发」按钮时触发的事件
+    onShareAppMessage() {
+        wx.onShareAppMessage(function () {
+            return {
+                title: '转发标题',
+                imageUrl: '',
+            }
+        })
     }
 
 }

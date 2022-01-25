@@ -1,10 +1,10 @@
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import EventCfg from '../../../sctiprs/Utils/EventCfg';
-import GameCfg from "../../../sctiprs/game/GameCfg";
-import {pb} from '../../../protos/proto';
+import GameCfg from "../../../sctiprs/GameCfg";
+import { pb } from '../../../protos/proto';
 import GameData from "../../../sctiprs/GameData";
 import List from '../../../sctiprs/Utils/List';
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -72,7 +72,7 @@ export default class NewClass extends cc.Component {
             return;
         }
 
-        let str = cc.sys.localStorage.getItem('CLEARTS'+GameCfg.GameType);
+        let str = cc.sys.localStorage.getItem('CLEARTS' + GameCfg.GameType);
         let da = new Date();
         da.setDate(1);
         da.setHours(0);
@@ -102,7 +102,7 @@ export default class NewClass extends cc.Component {
         this.onShowCount();
     }
 
-    onShowCount(){
+    onShowCount() {
 
         if (this.arr.length > 0) {
             this.tipsNode && (this.tipsNode.active = false)
@@ -142,8 +142,8 @@ export default class NewClass extends cc.Component {
     }
 
     onListRender(item: cc.Node, idx: number) {
-        let handle=item.getComponent('HistoryItem');
-        handle.onShow(this.arr[idx],idx);
+        let handle = item.getComponent('HistoryItem');
+        handle.onShow(this.arr[idx], idx);
     }
 
     onBtnClick(event, data) {
@@ -158,19 +158,19 @@ export default class NewClass extends cc.Component {
 
             this.content.removeAllChildren();
 
-            this.arr=[];
+            this.arr = [];
 
             let datas = this.arr;
 
             if (datas.length <= 0) {
-                this.tipsNode.active=true;
+                this.tipsNode.active = true;
             }
 
             this.listV.numItems = this.arr.length;
 
             let ts = parseInt(new Date().getTime() / 1000 + '')
 
-            cc.sys.localStorage.setItem('CLEARTS'+GameCfg.GameType, ts);
+            cc.sys.localStorage.setItem('CLEARTS' + GameCfg.GameType, ts);
 
             this.label.string = 0.00 + '%';
             this.label.node.color = cc.Color.WHITE;

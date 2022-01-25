@@ -1,6 +1,6 @@
 import { pb } from "../../../protos/proto";
 import DrawData from "../../../sctiprs/game/DrawData";
-import GameCfg from "../../../sctiprs/game/GameCfg";
+import GameCfg from "../../../sctiprs/GameCfg";
 import DrawUtils from "../../../sctiprs/Utils/DrawUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -85,7 +85,7 @@ export default class NewClass extends cc.Component {
         if (GameCfg.huizhidatas >= GameCfg.data[0].data.length) {
             GameCfg.huizhidatas = GameCfg.data[0].data.length;
         }
-        this.vol.string ='VOL(5,10)'+ GameCfg.data[0].data[GameCfg.huizhidatas - 1].value;
+        this.vol.string = 'VOL(5,10)' + GameCfg.data[0].data[GameCfg.huizhidatas - 1].value;
         this.initDrawBg();
     }
 

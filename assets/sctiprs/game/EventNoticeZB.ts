@@ -2,7 +2,7 @@ import { pb } from "../../protos/proto";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import DrawData from "./DrawData";
-import GameCfg from "./GameCfg";
+import GameCfg from "../GameCfg";
 import StrategyAIData from "./StrategyAIData";
 import List from "../Utils/List";
 
@@ -130,7 +130,7 @@ export default class NewClass extends cc.Component {
 
     EXPEND = false;
 
-    arr=[];
+    arr = [];
 
     @property(List)
     listV: List = null;
@@ -162,7 +162,7 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-        GlobalEvent.on(EventCfg.LEAVEGAME,this.onHide.bind(this),this);
+        GlobalEvent.on(EventCfg.LEAVEGAME, this.onHide.bind(this), this);
 
     }
 
@@ -2005,14 +2005,14 @@ export default class NewClass extends cc.Component {
     onCreateTipsItem(str) {
         let index = GameCfg.huizhidatas - 1;
 
-        let obj={
-            str:str,
-            _str:this._str,
-            index:index,
+        let obj = {
+            str: str,
+            _str: this._str,
+            index: index,
         }
 
         this.arr.push(obj);
-        this.listV.numItems=this.arr.length;
+        this.listV.numItems = this.arr.length;
 
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
 
@@ -2026,7 +2026,7 @@ export default class NewClass extends cc.Component {
 
     onListRender(item: cc.Node, idx: number) {
         let itemHandle = item.getComponent('ItemNotice')
-        itemHandle._zbStr =this.arr[idx]._str;
+        itemHandle._zbStr = this.arr[idx]._str;
         itemHandle.text = this.arr[idx].str;
         itemHandle.Pindex = this.arr[idx].index;
         itemHandle.onShow();

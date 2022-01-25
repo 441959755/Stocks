@@ -1,12 +1,12 @@
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
-import GameCfg from "./GameCfg";
-import {pb} from "../../protos/proto";
+import GameCfg from "../GameCfg";
+import { pb } from "../../protos/proto";
 import ComUtils from '../Utils/ComUtils';
 import DrawData from "./DrawData";
 import Game = cc.Game;
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -246,12 +246,12 @@ export default class NewClass extends cc.Component {
         this.rZoom = this.node.getChildByName('rZoomBtn').getComponent(cc.Toggle);
         this.rightBox.active = true;
 
-        GlobalEvent.on('boxSlecetPos',(pos)=>{
+        GlobalEvent.on('boxSlecetPos', (pos) => {
             console.log(pos);
-             pos=this.node.convertToNodeSpaceAR(pos);
+            pos = this.node.convertToNodeSpaceAR(pos);
             console.log(pos);
-            this.selcetContent.parent.y=pos.y-16;
-        },this);
+            this.selcetContent.parent.y = pos.y - 16;
+        }, this);
     }
 
     onEnable() {
@@ -264,7 +264,7 @@ export default class NewClass extends cc.Component {
         this.rZoom.node.active = true;
         this.rZoom.node.children[0].active = true;
         this.rightBox.active = true;
-       // this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
+        // this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
         this.selcetContent.parent.active = true;
         this.selcetContent.active = false;
         this.tipsLabel.string = '成交量';
@@ -311,8 +311,8 @@ export default class NewClass extends cc.Component {
                 this.setBoxfalg('CPM');
             }
 
-            if(!this.flag){
-                this.flag=true;
+            if (!this.flag) {
+                this.flag = true;
                 setTimeout(() => {
                     this.rZoom.node.children[0].active = false;
                     this.rZoom.node.children[1].active = true;
@@ -321,7 +321,7 @@ export default class NewClass extends cc.Component {
                 }, 100);
             }
 
-          else  if(this.rightBox.x == cc.winSize.width / 2 - this.rightBox.width / 2){
+            else if (this.rightBox.x == cc.winSize.width / 2 - this.rightBox.width / 2) {
                 setTimeout(() => {
                     this.rZoom.node.children[0].active = false;
                     this.rZoom.node.children[1].active = true;
@@ -528,20 +528,20 @@ export default class NewClass extends cc.Component {
             //     this.rZoom.node.children[0].active = true;
             //     this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
             // }
-         //   GlobalEvent.emit('setDrawing', this.rZoom.isChecked);
+            //   GlobalEvent.emit('setDrawing', this.rZoom.isChecked);
 
         }
     }
 
-    onDisable () {
+    onDisable() {
         // if (GameCfg.GameType == pb.GameType.ZhiBiao) {
         //     this.selcetContent.parent.active = true;
         //     GlobalEvent.emit('setDrawing', false);
         // }
-         if (this.rightBox.x == cc.winSize.width / 2 + this.rightBox.width / 2) {
-             this.rZoom.node.children[0].active = true;
-             this.rZoom.node.children[1].active = false;
-             this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
+        if (this.rightBox.x == cc.winSize.width / 2 + this.rightBox.width / 2) {
+            this.rZoom.node.children[0].active = true;
+            this.rZoom.node.children[1].active = false;
+            this.rightBox.x = cc.winSize.width / 2 - this.rightBox.width / 2;
             GlobalEvent.emit('setDrawing', false);
         }
 
