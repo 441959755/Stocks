@@ -16,20 +16,19 @@ export default class WebSDK {
     }
 
     login(call, uid?) {
-        let uuid = uid || LLWUtils.getUUID();
-        // let uuid = 'ooCB-vzwiiiPUPx6SJpZ5sTQJiB0';
+
+        // let uuid = uid || LLWUtils.getUUID();
+        let uuid = '13147131879';
+
         let loginInfo = {
             account: uuid,
-            type: pb.LoginType.QQ,
+            type: pb.LoginType.MobilePhoneId,
             from: LLWConfig.FROM,
-            // type: pb.LoginType.WeChat,
-            // from: pb.AppFrom.Test,
-            pwd: ''
+            pwd: '123456'
         };
 
         HttpMgr.getInstance().loginWeb(uuid, loginInfo, call, () => {
             console.log('onLoginCodeHttpRequest err');
-            // call && call();
         })
 
     }

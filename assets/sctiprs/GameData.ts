@@ -154,81 +154,21 @@ export default class GameData {
     public static cgState = null;  //闯关大赛状态
 
     //SMset
-    private static _SMSet;
-
-    public static get SMSet() {
-        return this._SMSet;
-    }
-
-    public static set SMSet(val) {
-        this._SMSet = val;
-        cc.sys.localStorage.setItem('SMSET', JSON.stringify(val));
-    }
+    public static SMSet;
 
     //SMset
-    private static _JJPKSet;
-
-    public static get JJPKSet() {
-        return this._JJPKSet;
-    }
-    public static set JJPKSet(val) {
-        this._JJPKSet = val;
-        cc.sys.localStorage.setItem('JJPKSET', JSON.stringify(val));
-    }
+    public static JJPKSet;
 
     //QHSet
-    private static _QHSet;
+    public static QHSet;
 
-    public static get QHSet() {
-        return this._QHSet;
-    }
-    public static set QHSet(val) {
-        this._QHSet = val;
-        cc.sys.localStorage.setItem('QHSET', JSON.stringify(val));
-    }
+    public static ZBSet;
 
-    private static _ZBSet;
+    public static DXSet;
 
-    public static get ZBSet() {
-        return this._ZBSet;
-    }
+    public static TJDSet;
 
-    public static set ZBSet(val) {
-        this._ZBSet = val;
-        cc.sys.localStorage.setItem('ZBSet', JSON.stringify(val));
-    }
-
-    private static _DXSet;
-
-    public static get DXSet() {
-        return this._DXSet;
-    }
-    public static set DXSet(val) {
-        this._DXSet = val;
-        cc.sys.localStorage.setItem('DXSET', JSON.stringify(val));
-    }
-
-    private static _TJDSet;
-
-    public static get TJDSet() {
-        return this._TJDSet;
-    }
-
-    public static set TJDSet(val) {
-        this._TJDSet = val;
-        cc.sys.localStorage.setItem('TJDSET', JSON.stringify(val));
-    }
-
-    private static _FSSet;
-
-    public static get FSSet() {
-        return this._FSSet;
-    }
-
-    public static set FSSet(val) {
-        this._FSSet = val;
-        cc.sys.localStorage.setItem('FSSET', JSON.stringify(val));
-    }
+    public static FSSet;
 
     private static _properties = [];
     //// 金币
@@ -252,36 +192,12 @@ export default class GameData {
     }
 
     //保存选择的股票
-    private static _DXHistoryInfo = [];
+    public static DXHistoryInfo = null;
 
-    public static set DXHistoryInfo(val) {
-        this._DXHistoryInfo = val;
-        cc.sys.localStorage.setItem('DXHISTORYINFO', JSON.stringify(val));
-    }
+    public static QHHistoryInfo = null;
 
-    public static get DXHistoryInfo() {
-        return this._DXHistoryInfo;
-    }
+    public static ZBHistoryInfo = null;
 
-    private static _QHHistoryInfo = [];
-    public static set QHHistoryInfo(val) {
-        this._QHHistoryInfo = val;
-        cc.sys.localStorage.setItem('QHHISTORYINFO', JSON.stringify(val));
-    }
-
-    public static get QHHistoryInfo() {
-        return this._QHHistoryInfo;
-    }
-
-    private static _ZBHistoryInfo = [];
-    public static set ZBHistoryInfo(val) {
-        this._ZBHistoryInfo = val;
-        cc.sys.localStorage.setItem('ZBHISTORYINFO', JSON.stringify(val));
-    }
-
-    public static get ZBHistoryInfo() {
-        return this._ZBHistoryInfo;
-    }
 
     //双盲的次数
     /**
@@ -340,16 +256,7 @@ export default class GameData {
         cc.sys.localStorage.setItem('TJADCOUNT' + str, val);
     }
 
-    private static _selectBk = [];
-
-    public static get SelectBk() {
-        return this._selectBk;
-    }
-
-    public static set SelectBk(val) {
-        this._selectBk = val;
-        cc.sys.localStorage.setItem('SELECTBK', JSON.stringify(val));
-    }
+    public static SelectBk = null;
 
     public static CGSConfData = null;
 

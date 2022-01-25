@@ -1,14 +1,16 @@
-import { pb } from "../../protos/proto";
-import LLWConfig from "../common/config/LLWConfig";
-import HttpUtils from "../common/net/HttpUtils";
-import GameData from "../GameData";
-import EventCfg from "../Utils/EventCfg";
-import GlobalEvent from "../Utils/GlobalEvent";
-import PopupManager from "../Utils/PopupManager";
+
+
+import { pb } from "../../../protos/proto";
+import LLWConfig from "../../../sctiprs/common/config/LLWConfig";
+import HttpUtils from "../../../sctiprs/common/net/HttpUtils";
+import GameData from "../../../sctiprs/GameData";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
-//注测账号
+//重置密码
 @ccclass
 export default class NewClass extends cc.Component {
 
@@ -23,9 +25,6 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Label)
     authCodeLabel: cc.Label = null;
-
-    @property(cc.Toggle)
-    toggle: cc.Toggle = null;
 
     pNum = null;
 
@@ -46,6 +45,7 @@ export default class NewClass extends cc.Component {
                 this.phoneNumber.string = '';
                 return;
             }
+
         }, this);
 
         this.password.node.on('editing-did-ended', edit => {
@@ -68,7 +68,9 @@ export default class NewClass extends cc.Component {
             else {
                 this.ac = str;
             }
+
         }, this);
+
     }
 
     onEnable() {
@@ -81,23 +83,21 @@ export default class NewClass extends cc.Component {
         this.pw = null;
     }
 
-
     onBtnClick(event, data) {
         let name = event.target.name;
-        if (name == 'btnAuthCode') {
+        if (name == 'btnAuthcode') {
             this.getAuthCode();
         }
 
         else if (name == 'btnzc') {
-            PopupManager.openProtocol('用户协议', 'http://www.cgdr168.com/user/decription1000.html')
+            PopupManager.openProtocol('用户协议', LLWConfig.LOADIMGURL + '/user/decription1000.html');
         }
 
-        else if (name == 'zccloseBtn') {
+        else if (name == 'closeBtn') {
             this.node.active = false;
-            this.node.parent.children[0].active = true;
         }
 
-        else if (name == 'login_zc') {
+        else if (name == 'login_qd') {
 
             if (!this.pNum || this.pNum.length <= 0) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '手机号不能为空');
@@ -114,50 +114,35 @@ export default class NewClass extends cc.Component {
                 return;
             }
 
-            if (!this.toggle) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '用户协议请知晓！');
-                return;
-            }
-
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
             let data1 = {
                 account: this.pNum,
-                type: pb.LoginType.MobilePhoneId,
                 pwd: this.pw,
-                smsCode: this.ac,
-                //   from: pb.AppFrom.Test,
-                from: LLWConfig.FROM,
+                captcha: this.ac,
             }
 
-            let url = LLWConfig.LOADIMGURL + '/r';
-            //  let url = 'http://test.chaogugame.com/r';
-
-            let CmdRegistry = pb.CmdRegistry;
-            let message = CmdRegistry.create(data1);
-            let buff = CmdRegistry.encode(message).finish();
+            let url = LLWConfig.LOADIMGURL + '/p';
+            //  let url = 'http://test.chaogugame.com/p';
+            let CmdResetPwd = pb.CmdResetPwd;
+            let message = CmdResetPwd.create(data1);
+            let buff = CmdResetPwd.encode(message).finish();
 
             HttpUtils.sendXHRAB(url, buff, (buf) => {
 
-                let CmdLoginReply = pb.CmdLoginReply;
-                let decoded = CmdLoginReply.decode(new Uint8Array(buf));
+                let ErrorInfo = pb.ErrorInfo;
+                let decoded = ErrorInfo.decode(new Uint8Array(buf));
 
-                if (decoded.err.err) {
-                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, decoded.err.err);
+                if (decoded.err) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, decoded.err);
                     return;
                 }
 
                 GameData.account = this.pNum;
                 GameData.password = this.pw;
-
-                //登入游戏
-                if (decoded) {
-                    decoded.token && (GameData.token = decoded.token);
-                    decoded.uid && (GameData.userID = decoded.uid);
-                    if (decoded.gameAddr) {
-                        socket = socket(decoded.gameAddr);
-                    }
-                }
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '修改成功！');
+                this.node.active = false;
+                this.node.parent.children[0].active = true;
 
             }, (err) => {
                 console.log('获取短信验证码:' + JSON.stringify(err));
@@ -178,9 +163,15 @@ export default class NewClass extends cc.Component {
         if (this.cb) {
             return;
         }
-        let url = LLWConfig.LOADIMGURL + '/sms';
-        //    let url = 'http://test.chaogugame.com/sms';
 
+        let url = LLWConfig.LOADIMGURL + '/sms';
+        //  let url = 'http://test.chaogugame.com/sms';
+
+        // 获取短信验证码
+        // message CmdGetSms {
+        // 	string account = 1; // 玩家账号：手机号
+        // 	string captcha = 2; // 图形码（区分机器人还是人类的图灵测试）
+        // }
         let data = {
             account: this.pNum,
         }
@@ -208,7 +199,6 @@ export default class NewClass extends cc.Component {
 
     }
 
-
     //是否为手机号
     isPhoneNumber(tel) {
         var reg = /^0?1[3|4|5|6|7|8][0-9]\d{8}$/;
@@ -219,6 +209,4 @@ export default class NewClass extends cc.Component {
         this.cb && (clearInterval(this.cb));
         this.cb = null;
     }
-
-
 }

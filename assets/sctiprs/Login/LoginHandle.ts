@@ -4,25 +4,12 @@ import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import Socket from "../common/net/Socket";
-import LLWConfig from "../common/config/LLWConfig";
-import PlatDefine from "../common/config/PlatDefine";
+import PopupManager from "../Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
-
-    @property(cc.Label)
-    tipsLabel: cc.Label = null;
-
-    @property(cc.Node)
-    dlNode: cc.Node = null;  //登入节点
-
-    @property(cc.Node)
-    zhNode: cc.Node = null;  //找回账号节点
-
-    @property(cc.Node)
-    zcNode: cc.Node = null;  //注册账号节点
 
     @property(cc.EditBox)
     account: cc.EditBox = null;  //账号输入框
@@ -30,44 +17,21 @@ export default class NewClass extends cc.Component {
     @property(cc.EditBox)
     password: cc.EditBox = null;  //密码
 
-    @property(cc.Toggle)
-    zcToggle: cc.Toggle = null;  //
-
     start() {
 
         GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
+        let acc = cc.sys.localStorage.getItem('ACCOUNT');
 
-        //微信小程序
-        if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
-            console.log('微信小程序');
-            LLWSDK.getSDK().login(this.loginResultCallback.bind(this));
-        }
-        else {
-            this.tipsLabel.string = '会员登入';
-
-            this.onShowNode(this.dlNode);
-
-            let acc = cc.sys.localStorage.getItem('ACCOUNT');
-
-            if (acc) {
-                this.account.string = acc;
-            }
-
-            let pass = cc.sys.localStorage.getItem('PASSWORD');
-
-            if (pass) {
-                this.password.string = pass;
-            }
+        if (acc) {
+            this.account.string = acc;
         }
 
-    }
+        let pass = cc.sys.localStorage.getItem('PASSWORD');
 
-    onShowNode(node) {
-        this.dlNode.active = false;
-        this.zhNode.active = false;
-        this.zcNode.active = false;
-        node.active = true;
+        if (pass) {
+            this.password.string = pass;
+        }
     }
 
     onBtnclick(event, data) {
@@ -76,14 +40,12 @@ export default class NewClass extends cc.Component {
 
         //忘记密码
         if (name == 'btnwjmm') {
-            this.tipsLabel.string = '忘记密码';
-            this.onShowNode(this.zhNode);
+            PopupManager.openNode(this.node.parent, null, 'Prefabs/login/reset', 10, null);
         }
 
         //注册账号
         else if (name == 'btnzc') {
-            this.tipsLabel.string = '注册账号';
-            this.onShowNode(this.zcNode);
+            PopupManager.openNode(this.node.parent, null, 'Prefabs/login/reg', 10, null);
         }
 
         //点击登入
@@ -95,7 +57,6 @@ export default class NewClass extends cc.Component {
             else {
                 this.loginServer();
             }
-
         }
 
         //qq登入
@@ -132,17 +93,15 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, decoded.err.err);
             return;
         }
-        // console.log(decoded.token + decoded.uid + decoded.gameAddr);
-        if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
-            decoded.gameAddr = 'wss://www.cgdr168.com/ws';
-        }
+
+        console.log(decoded.token + decoded.uid + decoded.gameAddr);
 
         if (decoded) {
-
             decoded.token && (GameData.token = decoded.token);
             decoded.uid && (GameData.userID = decoded.uid);
+
             if (decoded.gameAddr) {
-                window.socket = new Socket(decoded.gameAddr);
+                (<any>window).socket = new Socket(decoded.gameAddr);
             }
 
         } else {
@@ -150,4 +109,5 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');
         }
     }
+
 }
