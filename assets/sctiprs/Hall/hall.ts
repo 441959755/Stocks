@@ -18,8 +18,6 @@ export default class NewClass extends cc.Component {
 
     InviteBox: cc.Node = null;
 
-    sysBroadcast: cc.Node = null;  //xt
-
     @property(cc.Node)
     rightbg: cc.Node = null;
 
@@ -31,12 +29,7 @@ export default class NewClass extends cc.Component {
 
     index = 0;
 
-    isLoading = false;
-
-    firstBox = null;
-
-    gobrokeBox = null;
-
+    //  firstBox = null;
     Matchfalg = false;
 
     onLoad() {
@@ -50,14 +43,11 @@ export default class NewClass extends cc.Component {
         //打开帮助
         GlobalEvent.on(EventCfg.OPENHELPLAYER, this.openHelpLayer.bind(this), this);
 
-        //打开个人中心
-        GlobalEvent.on(EventCfg.OPENPLAYERINFO, this.openPlayerInfoLayer.bind(this), this);
 
         //邀请好友
         GlobalEvent.on('OPENFRIENDINVITE', this.openFriendInvite.bind(this), this);
 
         GlobalEvent.on(EventCfg.OPENOTHERPLAYERHISLAYER, this.openOtherHisLayer.bind(this), this);
-
 
         GlobalEvent.on('LOADGAME', this.onLoadGame.bind(this), this);
 
@@ -80,7 +70,6 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-        ComUtils.resetSize(this.node);
     }
 
     start() {
@@ -119,8 +108,8 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
             }, 200)
         }
-        //进入房间
 
+        //进入房间
         else if (GameData.roomId) {
             GlobalEvent.emit(EventCfg.OPENROOM);
         }
@@ -143,8 +132,6 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
-
-        GlobalEvent.off(EventCfg.OPENPLAYERINFO);
         GlobalEvent.off(EventCfg.OPENHELPLAYER);
         GlobalEvent.off(EventCfg.ROOMLEAVE);
         GlobalEvent.off(EventCfg.INVITEMESSAGE);
@@ -202,10 +189,6 @@ export default class NewClass extends cc.Component {
         })
     }
 
-    //打开个人中心
-    openPlayerInfoLayer() {
-        PopupManager.openNode(this.rightbg, null, 'Prefabs/playeInfo/playerInfoLayer', 5, null);
-    }
 
     //帮组
     openHelpLayer() {
@@ -252,10 +235,11 @@ export default class NewClass extends cc.Component {
                 this.onShowInviteBox(data);
             }
         } else if (data.type == pb.MessageType.SystemNotice) {
+
             GameData.SysBroadcastList.push(data.text);
-            PopupManager.openNode(this.node, this.sysBroadcast, 'Prefabs/sysBroadcast', 99, (node) => {
-                this.sysBroadcast = node;
-                this.sysBroadcast.getComponent('SysBroadcast').onShowSysBroadcast(data.text);
+
+            PopupManager.openNode(this.node, null, 'Prefabs/sysBroadcast', 99, (node) => {
+                node.getComponent('SysBroadcast').onShowSysBroadcast(data.text);
             })
         }
     }

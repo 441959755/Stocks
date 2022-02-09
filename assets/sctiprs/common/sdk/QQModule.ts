@@ -190,5 +190,9 @@ export default class QQModule {
     resetWx() {
         cc.sys.localStorage.removeItem(KeyRefreshToken);
     }
+
+    shareAppMessage() {
+
+    }
 }
 

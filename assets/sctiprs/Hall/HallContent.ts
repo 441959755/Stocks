@@ -6,7 +6,6 @@ import GameData from '../GameData';
 import GameCfgText from '../GameText';
 import LLWSDK from '../common/sdk/LLWSDK';
 import PopupManager from '../Utils/PopupManager';
-import EnterGameControl from '../global/EnterGameControl';
 
 const { ccclass, property } = cc._decorator;
 
@@ -43,8 +42,6 @@ export default class NewClass extends cc.Component {
 	dkLabel: cc.Label = null;
 
 	onLoad() {
-		//回到进入游戏的界面
-		GlobalEvent.on(EventCfg.BLACKGOTOLAYER, this.onBtnClick.bind(this), this);
 
 		//性别更改
 		GlobalEvent.on(EventCfg.GENDERCHANGE, this.setUserGender.bind(this), this);
@@ -91,11 +88,10 @@ export default class NewClass extends cc.Component {
 		}
 
 		this.setGameCoutn();
-
 	}
 
 	setGameCoutn() {
-		let time = new Date().toLocaleDateString();
+		//	let time = new Date().toLocaleDateString();
 		//let pkCount = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + pb.GameType.JJ_PK) || 0;
 		//	this.pkLabel.string = '500金币';
 		//let dkCount = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + pb.GameType.JJ_DuoKong) || 0;
@@ -244,7 +240,7 @@ export default class NewClass extends cc.Component {
 
 		//打开个人中心
 		else if (name == 'userinfobg') {
-			GlobalEvent.emit(EventCfg.OPENPLAYERINFO);
+			PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/playeInfo/playerInfoLayer', 5, null);
 		}
 
 		//pk
@@ -403,7 +399,6 @@ export default class NewClass extends cc.Component {
 
 
 	onDestroy() {
-		GlobalEvent.off(EventCfg.BLACKGOTOLAYER);
 		GlobalEvent.off(EventCfg.GENDERCHANGE);
 		GlobalEvent.off(EventCfg.HEADIMGCHANGE);
 		GlobalEvent.off(EventCfg.NAMECHANGE);

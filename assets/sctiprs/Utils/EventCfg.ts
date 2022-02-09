@@ -26,8 +26,6 @@ export default {
 
 	OPENYIELDLAYER: 'OPENYIELDLAYER',//收益曲线
 
-	OPENPLAYERINFO: 'OPENPLAYERINFO',//玩家信息界面
-
 	onCmdQuoteQuery: 'onCmdQuoteQuery', //查询行情
 
 	HISTORYOPTDATA: 'GETHISTORYOPTDATA',
@@ -67,8 +65,6 @@ export default {
 	OPENSMRESETMONEYLAYER: 'OPENSMRESETMONEYLAYER', //打开双盲重置金币页面
 
 	CmdQuoteQueryFuture: 'CmdQuoteQueryFuture',  //// 查询期货行情
-
-	BLACKGOTOLAYER: 'BLACKGOTOLAYER',
 
 	GMAECOUNTERSCHANGE: 'GMAECOUNTERSCHANGE',  //输赢记录重置 或改变
 

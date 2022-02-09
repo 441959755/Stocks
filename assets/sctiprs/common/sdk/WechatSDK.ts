@@ -3,7 +3,6 @@ import GameData from '../../GameData';
 import { pb } from "../../../protos/proto";
 import LoadImg from "../../Utils/LoadImg";
 import GameCfgText from "../../GameText";
-import HttpUtils from "../net/HttpUtils";
 
 export default class WechatSDK {
 
@@ -154,6 +153,8 @@ export default class WechatSDK {
         HttpMgr.getInstance().loginWeb(code, loginInfo, call, () => {
             console.log('onLoginCodeHttpRequest err');
         })
+
+        this.onShareAppMessage();
     }
 
     ADInit() {
@@ -197,7 +198,6 @@ export default class WechatSDK {
                 })
             }
         }
-
     }
 
     chooseImage(call) {
@@ -282,6 +282,14 @@ export default class WechatSDK {
                 imageUrl: '',
             }
         })
+    }
+
+
+    shareAppMessage() {
+        wx.shareAppMessage({
+
+        })
+
     }
 
 }

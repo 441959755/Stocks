@@ -520,5 +520,9 @@ export default class AndroidSDK {
 
     }
 
+    shareAppMessage() {
+
+    }
+
 }
 

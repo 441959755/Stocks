@@ -1624,7 +1624,7 @@ export default class List extends cc.Component {
                 for (let n: number = args.length - 1; n >= 0; n--) {
                     listId = args[n];
                     sub = t.multSelected.indexOf(listId);
-                      if (sub >= 0) {
+                    if (sub >= 0) {
                         t.multSelected.splice(sub, 1);
                     }
                 }

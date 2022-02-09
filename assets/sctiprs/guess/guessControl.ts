@@ -1,7 +1,6 @@
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import PopupManager from "../Utils/PopupManager";
-import ComUtils from "../Utils/ComUtils";
 
 const { ccclass, property } = cc._decorator;
 
@@ -16,7 +15,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENDPGUESSHIS, this.openDpGuessHis.bind(this), this);
         GlobalEvent.on(EventCfg.OPENDPGUESSRANK, this.openDpGuessRank.bind(this), this);
 
-        ComUtils.resetSize(this.node);
     }
 
     openHelpLayer() {

@@ -518,6 +518,7 @@ export default class ComUtils {
 
 
 	public static getYMDHMS(time) {
+
 		time = new Date(time);
 		var year = time.getFullYear(),
 			month = time.getMonth() + 1,
@@ -558,6 +559,7 @@ export default class ComUtils {
 		}
 		this.fitScreen(cav, designSize);
 	}
+
 	/**
 	 * 背景适配
 	 * @param canvasnode

@@ -40,10 +40,6 @@ class EventManager {
             else if (el.target.node.active) {
                 el.callback.call(el.target, arg, args1, args2);
             }
-
-            // else if (!el.target) {
-
-            // }
         })
     }
 

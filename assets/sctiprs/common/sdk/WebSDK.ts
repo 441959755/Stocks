@@ -71,4 +71,8 @@ export default class WebSDK {
 
         return success;
     }
+
+    shareAppMessage() {
+
+    }
 }

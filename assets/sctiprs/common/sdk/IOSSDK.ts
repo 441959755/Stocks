@@ -458,4 +458,8 @@ export default class IOSSDK {
         }
     }
 
+    shareAppMessage() {
+
+    }
+
 }

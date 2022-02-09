@@ -27,20 +27,8 @@ export default class PopupManager {
 
         GlobalEvent.on(EventCfg.OPENOTHERPLAYERINFO, this.openOtherPlayerInfoLayer.bind(this), this);
 
-        // if (cc.sys.os === cc.sys.OS_ANDROID) {
-        //     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-        // }
-
         this.arrPop = new PopupList();
     }
-
-    // public static onKeyDown(event) {
-    //     switch (event.keyCode) {
-    //         case cc.macro.KEY.back://而非cc.KEY.back:
-    //             this.openNode(cc.find('Canvas'), this.exitBox, 'Prefabs/exitBox', 100, null);
-    //             break;
-    //     }
-    // }
 
     private static loadingHide() {
         this.nodes['Prefabs/loading'] && (this.nodes['Prefabs/loading'].active = false)

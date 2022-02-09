@@ -94,6 +94,10 @@ export default class NewClass extends cc.Component {
             })
         }
 
+        else if (name == 'main_topbt_share') {
+            LLWSDK.getSDK().shareAppMessage();
+        }
+
     }
 
 }
