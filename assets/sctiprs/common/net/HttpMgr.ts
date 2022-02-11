@@ -24,6 +24,7 @@ export default class HttpMgr {
         let url = LLWConfig.LoginURL + '/l';
 
         data.websocket = true
+
         let CmdLogin = pb.CmdLogin;
         let message = CmdLogin.create(data);
         let buff1 = CmdLogin.encode(message).finish();

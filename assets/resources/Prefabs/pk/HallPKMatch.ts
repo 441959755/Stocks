@@ -166,7 +166,7 @@ export default class NewClass extends cc.Component {
                 uid: GameData.userID,
                 junXian: arr,
             }
-
+            console.log('进入房间' + JSON.stringify(data));
             //进入房间请求
             socket.send(pb.MessageId.Req_Room_Enter, PB.onReqRoomEnterBuff(data), (res) => {
                 console.log(JSON.stringify(res));

@@ -8,6 +8,8 @@ import GameData from "../GameData";
 import GameCfgText from "../GameText";
 import EventCfg from "../Utils/EventCfg";
 import ComUtils from "../Utils/ComUtils";
+import LLWConfig from "../common/config/LLWConfig";
+import PlatDefine from "../common/config/PlatDefine";
 
 const { ccclass, property } = cc._decorator;
 
@@ -53,6 +55,10 @@ export default class LoginHandle extends cc.Component {
         }
 
         console.log(decoded.token + decoded.uid + decoded.gameAddr);
+
+        if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
+            decoded.gameAddr = 'wss://www.cgdr168.com/ws';
+        }
 
         if (decoded) {
             decoded.token && (GameData.token = decoded.token);
