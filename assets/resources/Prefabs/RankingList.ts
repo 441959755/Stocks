@@ -2,8 +2,6 @@ import { pb } from "../../protos/proto";
 import GameCfg from "../../sctiprs/GameCfg";
 import GameData from "../../sctiprs/GameData";
 import GameCfgText from "../../sctiprs/GameText";
-import EventCfg from "../../sctiprs/Utils/EventCfg";
-import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 import List from "../../sctiprs/Utils/List";
 import PopupManager from "../../sctiprs/Utils/PopupManager";
 
@@ -52,40 +50,33 @@ export default class NewClass extends cc.Component {
     to = null;
 
     onLoad() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         socket.send(pb.MessageId.Req_Hall_GetFameRanking, null, (info) => {
             console.log('查询威望排行应答' + JSON.stringify(info));
             this.rankList1 = info.Items;
             this.listV1.numItems = this.rankList1.length;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         });
     }
 
     //获取等级排行
     getLevelRanking() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         socket.send(pb.MessageId.Req_Hall_GetLevelRanking, null, (info) => {
             console.log('查询等级排行应答' + JSON.stringify(info));
             this.rankList2 = info.Items;
             this.listV2.numItems = this.rankList2.length;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
     }
 
     //查询威望周排行
     getFameRankingWeekly() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         socket.send(pb.MessageId.Req_Hall_GetFameRankingWeekly, null, (info) => {
             console.log('查询威望周排行' + JSON.stringify(info));
             this.rankList3 = info.Items;
             this.listV3.numItems = this.rankList3.length;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
     }
 
     //查询闯关赛排行榜
     getCgsRanking() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         let data = {
             id: GameData.gameData.cgState.seasonId,
         }
@@ -97,14 +88,11 @@ export default class NewClass extends cc.Component {
             console.log('闯关赛排行榜' + JSON.stringify(info));
             this.rankList4 = info.Items;
             this.listV4.numItems = this.rankList4.length;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
     }
 
     // 获取炒股大赛排行榜
     getCgdsRanking() {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
         let data = {
             id: GameData.gameData.cgdsStockList[0].id,
         }
@@ -116,7 +104,7 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_Game_CgsGetSeasonRank, buff, (info) => {
             console.log('闯关赛排行榜' + JSON.stringify(info));
             this.rankList4 = info.Items;
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+
         })
     }
 
@@ -223,10 +211,9 @@ export default class NewClass extends cc.Component {
             else if (dt == 4) {
                 GameCfg.GameType = 'sjb';
             }
-            GlobalEvent.emit(EventCfg.OPENHELPLAYER);
+            PopupManager.openHelpLayer();
         }
     }
-
 
     onToggleClick(event, curdata) {
 
@@ -298,7 +285,6 @@ export default class NewClass extends cc.Component {
                 this.tipsLabel.string = '排行榜非实时数据，每个交易日12：30和15：30更新';
             }
         }
-
 
     }
 

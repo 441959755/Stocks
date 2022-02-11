@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "54cf81de-410e-4c5f-8f27-b15c73e71d72",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "vol_fenxi_qushi": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "13740dc2-f296-475f-8cf0-f2d8008a1204",
-      "importer": "sprite-frame",
       "rawTextureUuid": "54cf81de-410e-4c5f-8f27-b15c73e71d72",
       "trimType": "auto",
       "trimThreshold": 1,

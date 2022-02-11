@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "82440958-b7fc-4214-bccb-44c5c38b2c3c",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "smxl_btn_czbig": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "8e5f555b-9ff7-4f39-9fa0-7f9dfe32c89a",
-      "importer": "sprite-frame",
       "rawTextureUuid": "82440958-b7fc-4214-bccb-44c5c38b2c3c",
       "trimType": "auto",
       "trimThreshold": 1,

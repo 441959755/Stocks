@@ -10,7 +10,7 @@ import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import LoadUtils from "../../../sctiprs/Utils/LoadUtils";
-
+import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 
 const { ccclass, property } = cc._decorator;
 
@@ -412,6 +412,10 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[1].ops.items)
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
 
+        }
+
+        else if (name == 'lx_fx') {
+            LLWSDK.getSDK().screenshotShare();
         }
     }
 

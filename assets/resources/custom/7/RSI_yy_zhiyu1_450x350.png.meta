@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "7e16d57e-a3e3-4f2b-9bac-44b51e6142d2",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "RSI_yy_zhiyu1_450x350": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "00d2c89d-b56c-4fd7-81f1-2dc8dcaaf26d",
-      "importer": "sprite-frame",
       "rawTextureUuid": "7e16d57e-a3e3-4f2b-9bac-44b51e6142d2",
       "trimType": "auto",
       "trimThreshold": 1,

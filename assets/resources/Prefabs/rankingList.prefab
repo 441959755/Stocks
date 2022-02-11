@@ -8014,7 +8014,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 60,
+      "width": 93.34,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -8066,8 +8066,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "排行",
-    "_N$string": "排行",
+    "_string": "排行    ",
+    "_N$string": "排行    ",
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,

@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "3ba60b8b-1442-4612-bc9e-1a0330e8ef94",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "BOLL_JQ_jb4.1_600x400": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "d83736fa-edbc-4e29-941f-d04f7a05edce",
-      "importer": "sprite-frame",
       "rawTextureUuid": "3ba60b8b-1442-4612-bc9e-1a0330e8ef94",
       "trimType": "auto",
       "trimThreshold": 1,

@@ -2,6 +2,7 @@ import { pb } from "../../../protos/proto";
 import GameCfg from "../../../sctiprs/GameCfg";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -56,7 +57,7 @@ export default class NewClass extends cc.Component {
             this.node.active = false;
         }
         else if (name == 'sp_topbtn_help') {
-            GlobalEvent.emit(EventCfg.OPENHELPLAYER);
+            PopupManager.openHelpLayer();
         }
     }
 

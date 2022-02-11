@@ -231,7 +231,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "864kQclApMDYEPje8O5BKw",
     "sync": false
@@ -439,7 +439,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "85rjlvvP1K0rrqzXF4hN+b",
     "sync": false
@@ -481,8 +481,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+      "width": 150,
+      "height": 100
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -493,7 +493,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -540,
+        -565,
         0,
         0,
         0,
@@ -545,7 +545,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 150,
       "height": 100
     },
     "_anchorPoint": {
@@ -566,7 +566,7 @@
         1,
         1,
         1,
-        1
+        0
       ]
     },
     "_eulerAngles": {
@@ -672,7 +672,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "24nLQ034tMTKqifBt4MqM8",
     "sync": false
@@ -779,7 +779,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "cf6COhuK1FE6ZhjFkMxvXq",
     "sync": false
@@ -823,7 +823,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        103.663,
+        100,
         0,
         0,
         0,
@@ -861,7 +861,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "兑换资产",
     "_N$string": "兑换资产",
     "_fontSize": 30,
@@ -886,7 +887,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "7dY72J1iZKboT7nWiZRD7M",
     "sync": false
@@ -902,7 +903,7 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 8,
-    "_left": 100,
+    "_left": 0,
     "_right": 0,
     "_top": 0,
     "_bottom": 0,
@@ -924,7 +925,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "029cTQFllBsKwIiVbIEU1d",
     "sync": false
@@ -962,7 +963,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "226EabZfVCAbfuCXV/KkF5",
     "sync": false
@@ -1288,7 +1289,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "a303+pijZAiJ4PTy9+62+K",
     "sync": false
@@ -1395,7 +1396,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "a4NMTFmAhNjq2as+ohX9sU",
     "sync": false
@@ -1496,7 +1497,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "b1WnhrpaJJeIJ6N4Ubz4zc",
     "sync": false
@@ -1674,7 +1675,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "d103TUjulNc6KgTvsmyqTs",
     "sync": false
@@ -1777,7 +1778,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "504Uf7DrRHcq0UHF0A3pEV",
     "sync": false
@@ -1878,7 +1879,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "73Ynj/NLVCoaGf17BplL3T",
     "sync": false
@@ -1933,7 +1934,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "7aWZjzitJD9YjFWIPaQT33",
     "sync": false
@@ -2178,7 +2179,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "兑换比例：1金币=10资产",
     "_N$string": "兑换比例：1金币=10资产",
     "_fontSize": 24,
@@ -2203,7 +2205,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "14C9QvzDtHc4poBxLH9MJZ",
     "sync": false
@@ -2285,7 +2287,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "可用金币数量：",
     "_N$string": "可用金币数量：",
     "_fontSize": 24,
@@ -2310,7 +2313,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "e3o8Mzb5BKiabCoteB3qo6",
     "sync": false
@@ -2392,7 +2395,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "0",
     "_N$string": "0",
     "_fontSize": 24,
@@ -2417,7 +2421,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "511S4FisFCFpi3uoIsSWT1",
     "sync": false
@@ -2499,7 +2503,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "今日剩余可兑换金币：",
     "_N$string": "今日剩余可兑换金币：",
     "_fontSize": 24,
@@ -2524,7 +2529,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "8a5LFVlU5Hf5n+4BlWi5N4",
     "sync": false
@@ -2606,7 +2611,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "24.99999",
     "_N$string": "24.99999",
     "_fontSize": 24,
@@ -2631,7 +2637,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "dbKpVoZdNAyahgy7TeFRS9",
     "sync": false
@@ -2733,7 +2739,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "8exnF+jK5Osoa+BMF6G32o",
     "sync": false
@@ -2895,7 +2901,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "兑换数量：",
     "_N$string": "兑换数量：",
     "_fontSize": 24,
@@ -2920,7 +2927,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "70QoWvCuBE+ol2CzseIysh",
     "sync": false
@@ -3002,7 +3009,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "点击输入金币数量",
     "_N$string": "点击输入金币数量",
     "_fontSize": 24,
@@ -3027,7 +3035,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "3edSvKXxFEYIqqDJNYbfF2",
     "sync": false
@@ -3203,7 +3211,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "89X77qHBBPwqLYrDODR4af",
     "sync": false
@@ -3288,7 +3296,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -3340,7 +3349,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "64DTElqQdHdrki/Pq2Xr+r",
     "sync": false
@@ -3425,7 +3434,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "点击输入金币数量",
     "_N$string": "点击输入金币数量",
     "_fontSize": 24,
@@ -3477,7 +3487,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "faqfmlbY9Aubw70CZkQK+S",
     "sync": false
@@ -3490,7 +3500,6 @@
       "__id__": 80
     },
     "_enabled": true,
-    "_useOriginalSize": false,
     "_string": "",
     "returnType": 0,
     "maxLength": 24,
@@ -3517,7 +3526,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "2cnTTS+/RCJaAuDvBsmsba",
     "sync": false
@@ -3619,7 +3628,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "cdnBZLD2VPg5Ee0LqGl0ij",
     "sync": false
@@ -3781,7 +3790,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "兑换所得：",
     "_N$string": "兑换所得：",
     "_fontSize": 24,
@@ -3806,7 +3816,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "b6d2pVlAhJkI6f6/vtWir7",
     "sync": false
@@ -3888,7 +3898,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "资产",
     "_N$string": "资产",
     "_fontSize": 24,
@@ -3913,7 +3924,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "33RrOxTyNEBKneUGrFgtLW",
     "sync": false
@@ -3995,7 +4006,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "",
     "_N$string": "",
     "_fontSize": 40,
@@ -4020,7 +4032,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "f3aOl0GaJNy5ue1TLaVL63",
     "sync": false
@@ -4122,7 +4134,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "30Y060oktIoKOOvzBfuzKd",
     "sync": false
@@ -4178,7 +4190,7 @@
         1,
         1,
         1,
-        1
+        0
       ]
     },
     "_eulerAngles": {
@@ -4316,7 +4328,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "f8TeYDmztCV4IhlNBfu81p",
     "sync": false
@@ -4354,7 +4366,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "321sl/E7VKmrSPiMEGmXjd",
     "sync": false
@@ -4596,7 +4608,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "兑换比例：1万资产=500金币",
     "_N$string": "兑换比例：1万资产=500金币",
     "_fontSize": 24,
@@ -4621,7 +4634,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "29tIW2zc9LP4ysaFjBuiXX",
     "sync": false
@@ -4703,7 +4716,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "可用资产数量：",
     "_N$string": "可用资产数量：",
     "_fontSize": 24,
@@ -4728,7 +4742,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "a5Aw1kJ5RMDL5daXodxbii",
     "sync": false
@@ -4810,7 +4824,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "0",
     "_N$string": "0",
     "_fontSize": 24,
@@ -4835,7 +4850,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "31HDqvU/lBZ4RWfqCUrS++",
     "sync": false
@@ -4917,7 +4932,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "10000资产起兑",
     "_N$string": "10000资产起兑",
     "_fontSize": 24,
@@ -4942,7 +4958,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "161oMfxqVBh5L7qBCYnY2I",
     "sync": false
@@ -5044,7 +5060,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "79e0X29SxL9IHGmyuGXz0S",
     "sync": false
@@ -5206,7 +5222,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "兑换数量：",
     "_N$string": "兑换数量：",
     "_fontSize": 24,
@@ -5231,7 +5248,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "12jZTXvEZCLp6g1CCTPPvg",
     "sync": false
@@ -5313,7 +5330,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "点击输入金币数量",
     "_N$string": "点击输入金币数量",
     "_fontSize": 24,
@@ -5338,7 +5356,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "02xKVWZHZD66kERZ/4qzsI",
     "sync": false
@@ -5514,7 +5532,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "a7ERLwnT1FDrESiWACH7Xd",
     "sync": false
@@ -5599,7 +5617,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -5651,7 +5670,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "8d8x9ZKOZCrK/cVEdCDNCR",
     "sync": false
@@ -5736,7 +5755,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "点击输入资产数量",
     "_N$string": "点击输入资产数量",
     "_fontSize": 24,
@@ -5788,7 +5808,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "f7km+zUF1Pl535hlcHuo1O",
     "sync": false
@@ -5801,7 +5821,6 @@
       "__id__": 144
     },
     "_enabled": true,
-    "_useOriginalSize": false,
     "_string": "",
     "returnType": 0,
     "maxLength": 16,
@@ -5828,7 +5847,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "69ShSmQc9KV5ipoWjZyuPg",
     "sync": false
@@ -5930,7 +5949,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "52HN19+8ZHg6ZTq1vnCXGu",
     "sync": false
@@ -6092,7 +6111,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "兑换所得：",
     "_N$string": "兑换所得：",
     "_fontSize": 24,
@@ -6117,7 +6137,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "87+kzDlHJGF4n2XFQktTXU",
     "sync": false
@@ -6199,7 +6219,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "金币",
     "_N$string": "金币",
     "_fontSize": 24,
@@ -6224,7 +6245,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "2bsh1y5k5MBL/uNXSkSEpZ",
     "sync": false
@@ -6306,7 +6327,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "",
     "_N$string": "",
     "_fontSize": 40,
@@ -6331,7 +6353,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "0eh/fC7UFMDK6XpKRnKT3v",
     "sync": false
@@ -6433,7 +6455,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "1avcItq05EkJE3jSAOIYdT",
     "sync": false
@@ -6627,7 +6649,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "272xyb02dODqyoEPL2kDB/",
     "sync": false
@@ -6665,7 +6687,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "be6zzM3lRKj7ERUy5kjIcv",
     "sync": false
@@ -6703,7 +6725,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
     "fileId": "0dQuR+QwdNqYyOH+hT6/km",
     "sync": false
@@ -6780,9 +6802,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "584dbe0d-b225-4fd6-903b-997fb9ce4ca9"
+      "__id__": 0
     },
-    "fileId": "43zPrB+EBBjZNm0qx+RqO0",
+    "fileId": "",
     "sync": false
   }
 ]

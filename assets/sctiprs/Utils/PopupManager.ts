@@ -18,15 +18,13 @@ export default class PopupManager {
     public static arrPop: PopupList = null;
 
     public static init() {
-
-        GlobalEvent.on(EventCfg.LOADINGSHOW, this.loadloading.bind(this), this);
+        GlobalEvent.on(EventCfg.LOADINGSHOW, this.loading.bind(this), this);
         GlobalEvent.on(EventCfg.LOADINGHIDE, this.loadingHide.bind(this), this);
 
-        GlobalEvent.on(EventCfg.TIPSTEXTSHOW, this.LoadTipsText.bind(this), this);
+        GlobalEvent.on(EventCfg.TIPSTEXTSHOW, this.TipsText.bind(this), this);
         GlobalEvent.on(EventCfg.TIPSTEXTHIDE, this.tipsTextHide.bind(this), this);
 
         GlobalEvent.on(EventCfg.OPENOTHERPLAYERINFO, this.openOtherPlayerInfoLayer.bind(this), this);
-
         this.arrPop = new PopupList();
     }
 
@@ -64,14 +62,14 @@ export default class PopupManager {
     /**
      * 加载中...
      */
-    public static loadloading() {
+    public static loading() {
         this.openNode(cc.find('Canvas'), this.nodes['Prefabs/loading'], 'Prefabs/loading', 99)
     }
 
     /**
      * 提示文本框
      */
-    public static LoadTipsText(content) {
+    public static TipsText(content) {
 
         let call = (node) => {
             node && (node.getComponent('TipsTextHandle').onShow(content));
@@ -131,6 +129,13 @@ export default class PopupManager {
         this.openNode(cc.find('Canvas'), this.nodes['Prefabs/pop/activityTheme'], 'Prefabs/pop/activityTheme', 50, (node) => {
             ActionUtils.openBox(node);
         })
+    }
+
+    //打开帮助界面
+    public static openHelpLayer() {
+        PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/helpLayer', 30, (node) => {
+            ActionUtils.openBox(node);
+        });
     }
 
     public static delPopupNode() {

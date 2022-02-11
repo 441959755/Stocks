@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "94c3ddc9-8bf7-4931-83d9-334dd7d37c32",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "vol_yy_tupofl1": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "01c67470-a801-47e2-b186-d1096ce22ea2",
-      "importer": "sprite-frame",
       "rawTextureUuid": "94c3ddc9-8bf7-4931-83d9-334dd7d37c32",
       "trimType": "auto",
       "trimThreshold": 1,

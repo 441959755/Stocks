@@ -1,14 +1,11 @@
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
-import LoadUtils from "../Utils/LoadUtils";
 import PopupManager from "../Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
-
-    znxgNode: cc.Node = null;
 
     myxgNode: cc.Node = null;
 
@@ -56,12 +53,12 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENCGDS, this.openCgdsLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENCGDSPH, this.openCgdsph.bind(this), this);
         GlobalEvent.on('LOADGAME', this.onLoadGame.bind(this), this);
+        this.znDraw.active = true;
     }
 
     protected start(): void {
-        // this.znDraw.active = true;
-        this.znDraw.active = false;
         this.znDraw.zIndex = 20;
+        this.znDraw.active = false;
     }
 
     onLoadGame() {
@@ -130,15 +127,12 @@ export default class NewClass extends cc.Component {
     }
 
     openZNDraw(code, str) {
+        //  setTimeout(() => {
         this.znDraw.active = true;
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        setTimeout(() => {
-            this.znDraw.active = false;
-            let handle = this.znDraw.getComponent('ZnDraw');
-            this.znDraw.active = true;
-            handle.onShow(code, str);
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        }, 50)
+        let handle = this.znDraw.getComponent('ZnDraw');
+        handle.onShow(code, str);
+        GlobalEvent.emit(EventCfg.LOADINGHIDE);
+        //  }, 50)
     }
 
     onLoadZNXGLayer() {
@@ -149,60 +143,26 @@ export default class NewClass extends cc.Component {
         this.node.children.forEach(el => {
             el.active = false;
         })
-        if (!this.myxgNode) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/mnxgLayer', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.myxgNode = cc.instantiate(pre);
-                this.node.addChild(this.myxgNode, 10);
-                this.myxgNode.active = true;
-                let handle = this.myxgNode.getComponent('MnxgHandle');
-                handle.onShow(info);
-            })
-        }
-        else {
-            this.myxgNode.active = true;
-            let handle = this.myxgNode.getComponent('MnxgHandle');
-            handle.onShow(info);
-        }
 
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/mnxgLayer', 10, (node) => {
+            let handle = node.getComponent('MnxgHandle');
+            handle.onShow(info);
+        })
     }
 
     openCGDSLayer(info) {
         this.node.children.forEach(el => {
             el.active = false;
         })
-        if (!this.cgdsNode) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/cgdsLayer', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.cgdsNode = cc.instantiate(pre);
-                this.node.addChild(this.cgdsNode, 10);
-                this.cgdsNode.active = true;
-                let handle = this.cgdsNode.getComponent('CGDSLayer');
-                handle.onShow(info);
-            })
-        }
-        else {
-            this.cgdsNode.active = true;
-            let handle = this.cgdsNode.getComponent('CGDSLayer');
+
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/cgdsLayer', 10, (node) => {
+            let handle = node.getComponent('CGDSLayer');
             handle.onShow(info);
-        }
+        })
     }
 
     openZGLayer() {
-        if (!this.zgNode) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            LoadUtils.loadRes('Prefabs/spPre/zgLayer', (pre) => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                this.zgNode = cc.instantiate(pre);
-                this.node.addChild(this.zgNode, 21);
-                this.zgNode.active = true;
-            })
-        }
-        else {
-            this.zgNode.active = true;
-        }
+        PopupManager.openNode(this.node, null, 'Prefabs/spPre/zgLayer', 21, null);
     }
 
 
@@ -221,20 +181,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENMNCDLAYER);
         GlobalEvent.off(EventCfg.OPENCGDS);
         GlobalEvent.off(EventCfg.OPENCGDSPH);
-        LoadUtils.releaseRes('Prefabs/spPre/znDrawLayer');
-        LoadUtils.releaseRes('Prefabs/spPre/znxgLayer');
-        LoadUtils.releaseRes('Prefabs/spPre/zgLayer');
-        LoadUtils.releaseRes('Prefabs/spPre/mnxgLayer');
-        LoadUtils.releaseRes('Prefabs/spPre/addZXGPBox');
-        LoadUtils.releaseRes('Prefabs/spPre/dhzcLayer');
-        LoadUtils.releaseRes('Prefabs/spPre/mnHis');
-        LoadUtils.releaseRes('Prefabs/spPre/selectBkBox');
-        LoadUtils.releaseRes('Prefabs/spPre/buyBox');
-        LoadUtils.releaseRes('Prefabs/spPre/sellBox');
-        LoadUtils.releaseRes('Prefabs/spPre/mncd');
-        LoadUtils.releaseRes('Prefabs/spPre/chaoGuDaSai');
-        LoadUtils.releaseRes('Prefabs/spPre/chaoGuRanking');
-        LoadUtils.releaseRes('Prefabs/spPre/cgdsLayer');
     }
 
 }

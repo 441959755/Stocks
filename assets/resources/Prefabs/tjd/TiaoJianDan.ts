@@ -6,6 +6,7 @@ import EnterGameControl from "../../../sctiprs/global/EnterGameControl";
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -112,7 +113,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'sys_helpbig1') {
-            GlobalEvent.emit(EventCfg.OPENHELPLAYER);
+            PopupManager.openHelpLayer();
         }
 
         else if (name == 'setTJDBtn') {

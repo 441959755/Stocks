@@ -7,11 +7,13 @@ import { SetConf, HisCode, AdCount, SelectBk } from "../SetConf";
 import GameData from "../GameData";
 import GameCfgText from "../GameText";
 import EventCfg from "../Utils/EventCfg";
+import ComUtils from "../Utils/ComUtils";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class LoginHandle extends cc.Component {
+
 
     protected onLoad(): void {
 
@@ -24,6 +26,8 @@ export default class LoginHandle extends cc.Component {
         AudioUtils.loadAudios('audios');
 
         GameCfgText.LoadGameConf();
+
+        ComUtils.resetSize(this.node);
     }
 
     init() {
@@ -65,6 +69,7 @@ export default class LoginHandle extends cc.Component {
     }
 
     start() {
+
         cc.macro.ENABLE_MULTI_TOUCH = false;
 
         cc.Button.prototype._onTouchEnded = function (t) {
@@ -92,9 +97,9 @@ export default class LoginHandle extends cc.Component {
     }
 
     protected onDestroy(): void {
-        GlobalEvent.off('OPENNOTICELAYER');
         GameCfgText.releaseRes();
         PopupManager.delPopupNode();
+        GlobalEvent.allClear();
     }
 
     initData() {

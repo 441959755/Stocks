@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "18be9c43-bb24-4ddc-9b9d-80a19572b781",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "cgs_fupan": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "42e80349-9ce8-4895-a420-26f52cfad1d5",
-      "importer": "sprite-frame",
       "rawTextureUuid": "18be9c43-bb24-4ddc-9b9d-80a19572b781",
       "trimType": "auto",
       "trimThreshold": 1,

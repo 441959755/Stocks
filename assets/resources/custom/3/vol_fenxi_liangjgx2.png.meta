@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "6fa3c09a-45b1-47fe-bf04-e9218b75d868",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "vol_fenxi_liangjgx2": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "260b95e9-1593-409d-a1ba-cbf31008350f",
-      "importer": "sprite-frame",
       "rawTextureUuid": "6fa3c09a-45b1-47fe-bf04-e9218b75d868",
       "trimType": "auto",
       "trimThreshold": 1,

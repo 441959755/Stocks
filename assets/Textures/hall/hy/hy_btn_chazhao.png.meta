@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "d0e86e43-79d9-4a47-83f7-be80d253aa21",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "hy_btn_chazhao": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "eadbc814-6f42-44b6-8472-91e543f279ae",
-      "importer": "sprite-frame",
       "rawTextureUuid": "d0e86e43-79d9-4a47-83f7-be80d253aa21",
       "trimType": "auto",
       "trimThreshold": 1,

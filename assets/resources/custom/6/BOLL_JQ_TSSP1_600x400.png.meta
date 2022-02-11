@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "de0a395a-0709-4722-92f9-9db41674966d",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "BOLL_JQ_TSSP1_600x400": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "d7ec7147-d16c-467c-958c-a517f38bd3cf",
-      "importer": "sprite-frame",
       "rawTextureUuid": "de0a395a-0709-4722-92f9-9db41674966d",
       "trimType": "auto",
       "trimThreshold": 1,

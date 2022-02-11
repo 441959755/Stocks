@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "e5de1407-7de8-41de-b707-3507c8d51fde",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "phb_bt_chakan": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "af58073a-70c8-4d2a-a2d0-1b1bf775183a",
-      "importer": "sprite-frame",
       "rawTextureUuid": "e5de1407-7de8-41de-b707-3507c8d51fde",
       "trimType": "auto",
       "trimThreshold": 1,

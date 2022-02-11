@@ -3,6 +3,7 @@ import GameData from '../../GameData';
 import { pb } from "../../../protos/proto";
 import LoadImg from "../../Utils/LoadImg";
 import GameCfgText from "../../GameText";
+import LLWConfig from "../config/LLWConfig";
 
 export default class WechatSDK {
 
@@ -13,6 +14,7 @@ export default class WechatSDK {
     loginPlat = pb.LoginType.WeChat_MiniProg;
 
     callback = null;
+
 
     static getInstance() {
         if (!this._instance) {
@@ -27,9 +29,11 @@ export default class WechatSDK {
         wx.login({
             success(res) {
                 let code = res.code;
+
                 wx.getSetting({
                     success(res) {
                         if (res.authSetting['scope.userInfo']) {
+
                             self.getUserInfo1(code, null, call);
                         } else {
                             console.log("没有授权下一步是wx.createUserInfoButton")
@@ -278,8 +282,8 @@ export default class WechatSDK {
     onShareAppMessage() {
         wx.onShareAppMessage(function () {
             return {
-                title: '转发标题',
-                imageUrl: '',
+                title: '【K线训练馆】寓教于乐的炒股软件',
+                imageUrl: LLWConfig.LOADIMGURL + '/wechatgame/share.png',
             }
         })
     }
@@ -287,9 +291,29 @@ export default class WechatSDK {
 
     shareAppMessage() {
         wx.shareAppMessage({
-
+            imageUrl: LLWConfig.LOADIMGURL + '/wechatgame/share.png'
         })
+    }
 
+    screenshotShare() {
+        var canvas = cc.game.canvas;
+        var width = cc.winSize.width;
+        var height = cc.winSize.height;
+        canvas.toTempFilePath({
+            x: 0,
+            y: 0,
+            width: width,
+            height: height,
+            destWidth: width,
+            destHeight: height,
+            success(res) {
+                //.可以保存该截屏图片
+                console.log(res)
+                wx.shareAppMessage({
+                    imageUrl: res.tempFilePath
+                })
+            }
+        })
     }
 
 }

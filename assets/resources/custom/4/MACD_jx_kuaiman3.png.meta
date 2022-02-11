@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "552ef08d-0c4f-4165-a194-63ab68d9449e",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "MACD_jx_kuaiman3": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "6727b600-89f2-4c12-8cb4-a7c34cb7b349",
-      "importer": "sprite-frame",
       "rawTextureUuid": "552ef08d-0c4f-4165-a194-63ab68d9449e",
       "trimType": "auto",
       "trimThreshold": 1,

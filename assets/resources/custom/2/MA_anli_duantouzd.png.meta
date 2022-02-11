@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "699180f0-b860-4b91-abea-0563c71db79a",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "MA_anli_duantouzd": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "cc5baf76-5e2e-45bd-84b1-3ebf6c2cc364",
-      "importer": "sprite-frame",
       "rawTextureUuid": "699180f0-b860-4b91-abea-0563c71db79a",
       "trimType": "auto",
       "trimThreshold": 1,

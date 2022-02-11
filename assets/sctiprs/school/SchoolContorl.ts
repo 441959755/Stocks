@@ -59,6 +59,8 @@ export default class NewClass extends cc.Component {
 
         this.init();
 
+        ComUtils.resetSize(this.node);
+
     }
 
 

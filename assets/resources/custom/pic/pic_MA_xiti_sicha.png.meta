@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "9024e12c-c5c1-42c8-8245-fba6bbb54838",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "pic_MA_xiti_sicha": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "926bb8e0-626f-4dec-bf6d-9039edf7af50",
-      "importer": "sprite-frame",
       "rawTextureUuid": "9024e12c-c5c1-42c8-8245-fba6bbb54838",
       "trimType": "auto",
       "trimThreshold": 1,

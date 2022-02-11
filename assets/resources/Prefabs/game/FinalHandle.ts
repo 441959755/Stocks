@@ -410,6 +410,10 @@ export default class NewClass extends cc.Component {
             GameCfg.GAMEFUPAN = true;
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
         }
+
+        else if (name == 'lx_fx') {
+            LLWSDK.getSDK().screenshotShare();
+        }
     }
 
     restartGame() {

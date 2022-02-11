@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "65302d0c-5da6-47ab-9715-ef366dad42ea",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "grzx_add": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "028414db-4601-44aa-97ad-735fd4862d4d",
-      "importer": "sprite-frame",
       "rawTextureUuid": "65302d0c-5da6-47ab-9715-ef366dad42ea",
       "trimType": "auto",
       "trimThreshold": 1,

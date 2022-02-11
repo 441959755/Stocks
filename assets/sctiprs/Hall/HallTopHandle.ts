@@ -50,7 +50,6 @@ export default class NewClass extends cc.Component {
             PopupManager.openNode(this.node.parent, null, 'Prefabs/hallSetLayer', 11, (node) => {
                 ActionUtils.openBox(node);
             })
-
         }
 
         //vip说明

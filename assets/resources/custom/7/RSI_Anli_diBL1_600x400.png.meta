@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "acbfb86d-990b-41a0-98f4-dd6a2e893972",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "RSI_Anli_diBL1_600x400": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "4fb87bec-3c57-45ce-a99c-1d7e63f9f6f3",
-      "importer": "sprite-frame",
       "rawTextureUuid": "acbfb86d-990b-41a0-98f4-dd6a2e893972",
       "trimType": "auto",
       "trimThreshold": 1,

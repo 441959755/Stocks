@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "a3b63b32-79fd-437d-a741-30a8a3d16340",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "dhk_fgx": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "76f9e4d4-841e-45ba-9b05-32c95e5acca8",
-      "importer": "sprite-frame",
       "rawTextureUuid": "a3b63b32-79fd-437d-a741-30a8a3d16340",
       "trimType": "auto",
       "trimThreshold": 1,

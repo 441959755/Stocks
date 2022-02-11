@@ -597,7 +597,7 @@ export default class NewClass extends cc.Component {
 		}
 
 		else if (name == 'sys_helpbig1') {
-			GlobalEvent.emit(EventCfg.OPENHELPLAYER);
+			PopupManager.openHelpLayer();
 		}
 
 		// else if (name == 'mfxlBtn') {

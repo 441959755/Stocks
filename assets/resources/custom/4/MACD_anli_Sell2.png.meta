@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "d02d2de2-2fe2-4e24-b084-49f683d350a4",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "MACD_anli_Sell2": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "25e75b1e-1f77-435d-a41d-5f9edab9391f",
-      "importer": "sprite-frame",
       "rawTextureUuid": "d02d2de2-2fe2-4e24-b084-49f683d350a4",
       "trimType": "auto",
       "trimThreshold": 1,

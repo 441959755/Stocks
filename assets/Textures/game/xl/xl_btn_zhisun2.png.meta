@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "ab0fe625-8ac6-437a-a63c-0a8669384087",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "xl_btn_zhisun2": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "0181986a-6fcd-4e01-8567-bf6bfedc7320",
-      "importer": "sprite-frame",
       "rawTextureUuid": "ab0fe625-8ac6-437a-a63c-0a8669384087",
       "trimType": "auto",
       "trimThreshold": 1,

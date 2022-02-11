@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "57c9ac0b-d110-4158-98eb-b9b1ffc9f337",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "main_banner_viptyk": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "38fff945-41bb-4c2e-bd9a-14cb6031d885",
-      "importer": "sprite-frame",
       "rawTextureUuid": "57c9ac0b-d110-4158-98eb-b9b1ffc9f337",
       "trimType": "auto",
       "trimThreshold": 1,

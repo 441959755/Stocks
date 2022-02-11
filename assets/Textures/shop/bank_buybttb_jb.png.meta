@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "49ef171e-2a1c-43bc-a599-0c2c73713f2b",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "bank_buybttb_jb": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "77d03066-e78a-4c76-835e-b5d6d2d381fb",
-      "importer": "sprite-frame",
       "rawTextureUuid": "49ef171e-2a1c-43bc-a599-0c2c73713f2b",
       "trimType": "auto",
       "trimThreshold": 1,

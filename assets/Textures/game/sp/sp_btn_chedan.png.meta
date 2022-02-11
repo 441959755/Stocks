@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "ce0738c8-b38f-43c7-bd4b-b1974a89c032",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "sp_btn_chedan": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "abb9309c-fdec-4643-bf1a-ba9c53e74bbb",
-      "importer": "sprite-frame",
       "rawTextureUuid": "ce0738c8-b38f-43c7-bd4b-b1974a89c032",
       "trimType": "auto",
       "trimThreshold": 1,

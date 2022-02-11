@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "28b0088e-60d0-4e7a-8b1c-631d3ef57aa3",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "EXPMA_JQ_Sell3_600x400": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "2960fda0-8fd3-4fb6-aaa7-8fe9aba3cb74",
-      "importer": "sprite-frame",
       "rawTextureUuid": "28b0088e-60d0-4e7a-8b1c-631d3ef57aa3",
       "trimType": "auto",
       "trimThreshold": 1,

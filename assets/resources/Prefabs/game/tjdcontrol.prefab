@@ -194,7 +194,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 300,
+      "width": 150,
       "height": 115
     },
     "_anchorPoint": {
@@ -206,7 +206,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -490,
+        -565,
         0,
         0,
         0,
@@ -265,7 +265,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 150,
       "height": 115
     },
     "_anchorPoint": {
@@ -277,7 +277,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -50,
+        0,
         0,
         0,
         0,
@@ -404,7 +404,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "79Etm4uT9CwLghx/K3lZKY",
     "sync": false
@@ -524,7 +524,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "7bcWe5+htGEYjvS80CmY3c",
     "sync": false
@@ -561,14 +561,14 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": 0.5,
       "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -16.632,
+        106,
         0,
         0,
         0,
@@ -606,7 +606,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "条件单训练",
     "_N$string": "条件单训练",
     "_fontSize": 30,
@@ -631,7 +632,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "bdCapbyDBB8ZjPuACX3Reo",
     "sync": false
@@ -669,7 +670,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "111TAQYkJBg4UWhRQWD9wP",
     "sync": false
@@ -842,7 +843,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "开盘价：",
     "_N$string": "开盘价：",
     "_fontSize": 24,
@@ -894,7 +896,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "3aCZRYX25GkrGdiMF2pF2U",
     "sync": false
@@ -979,7 +981,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "0.00",
     "_N$string": "0.00",
     "_fontSize": 24,
@@ -1031,7 +1034,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "31C/ALwBtLwK/G3xo7qRhC",
     "sync": false
@@ -1116,7 +1119,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "收盘价：",
     "_N$string": "收盘价：",
     "_fontSize": 24,
@@ -1168,7 +1172,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "d4509HIKxG6KNwcuB9Vzw7",
     "sync": false
@@ -1253,7 +1257,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "0.00",
     "_N$string": "0.00",
     "_fontSize": 24,
@@ -1305,7 +1310,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "34OARFqJROh688AmjcAuVn",
     "sync": false
@@ -1390,7 +1395,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "最高价：",
     "_N$string": "最高价：",
     "_fontSize": 24,
@@ -1442,7 +1448,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "bfWGj/b/hOFIk2fAiVY4RL",
     "sync": false
@@ -1527,7 +1533,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "0.00",
     "_N$string": "0.00",
     "_fontSize": 24,
@@ -1579,7 +1586,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "de8l+6oyNFlpn1xpQZxo7j",
     "sync": false
@@ -1664,7 +1671,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "最低价：",
     "_N$string": "最低价：",
     "_fontSize": 24,
@@ -1716,7 +1724,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "a3l9YlmcZIm5i9Ufmwmkv0",
     "sync": false
@@ -1801,7 +1809,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "0.00",
     "_N$string": "0.00",
     "_fontSize": 24,
@@ -1853,7 +1862,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "58CJZFttxHiLSbeV/eqXoQ",
     "sync": false
@@ -1938,7 +1947,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "条件设置",
     "_N$string": "条件设置",
     "_fontSize": 24,
@@ -1990,7 +2000,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "5eahWTC99LTJuZJs+H2PEV",
     "sync": false
@@ -2001,7 +2011,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "68r/mDZ1JHOowTK9WgGwdj",
     "sync": false
@@ -2081,7 +2091,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "f9oJGTLZ5Om6zhzMxsvYeg",
     "sync": false
@@ -2294,7 +2304,7 @@
         1,
         1,
         1,
-        1
+        0
       ]
     },
     "_eulerAngles": {
@@ -2499,7 +2509,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "14eIvIV/9JWYGcRpM+8f5m",
     "sync": false
@@ -2626,7 +2636,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "c3XjW0ra9AArY67/TraoCi",
     "sync": false
@@ -2686,7 +2696,7 @@
         1,
         1,
         1,
-        1
+        0
       ]
     },
     "_eulerAngles": {
@@ -2753,7 +2763,7 @@
         1,
         1,
         1,
-        1
+        0
       ]
     },
     "_eulerAngles": {
@@ -2891,7 +2901,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "0dKRjg29FFgbYLJBd5BmQ8",
     "sync": false
@@ -3018,7 +3028,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "33F0fsVrFC66XU3KBI7Lzo",
     "sync": false
@@ -3078,7 +3088,7 @@
         1,
         1,
         1,
-        1
+        0
       ]
     },
     "_eulerAngles": {
@@ -3145,7 +3155,7 @@
         1,
         1,
         1,
-        1
+        0
       ]
     },
     "_eulerAngles": {
@@ -3283,7 +3293,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "97G3m+swxNG51PoZhum8W/",
     "sync": false
@@ -3410,7 +3420,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "fecgT4fRdO3bOurZ4rYAfQ",
     "sync": false
@@ -3421,7 +3431,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "c6uJRyuNlEw5lPp4yaCCGY",
     "sync": false
@@ -3588,7 +3598,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "买入均价：",
     "_N$string": "买入均价：",
     "_fontSize": 24,
@@ -3640,7 +3651,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "d5XzYSVftO2o4XghZO7uAu",
     "sync": false
@@ -3725,7 +3736,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "0.00",
     "_N$string": "0.00",
     "_fontSize": 24,
@@ -3777,7 +3789,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "33po0u0axFj7iNviRhepeH",
     "sync": false
@@ -3933,7 +3945,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "0.00",
     "_N$string": "0.00",
     "_fontSize": 24,
@@ -3985,7 +3998,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "317BKl6k5BRJ7oE2K+wFiA",
     "sync": false
@@ -4003,7 +4016,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "持股数量：",
     "_N$string": "持股数量：",
     "_fontSize": 24,
@@ -4055,7 +4069,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "56i3SpM9FOFpfvqqi4PNx6",
     "sync": false
@@ -4140,7 +4154,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "0.00",
     "_N$string": "0.00",
     "_fontSize": 24,
@@ -4192,7 +4207,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "12EhhtGLVD7ZXfGtzKs1wr",
     "sync": false
@@ -4277,7 +4292,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "    总资产：",
     "_N$string": "    总资产：",
     "_fontSize": 24,
@@ -4329,7 +4345,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "12pEnrkNNIEJfuYjNT7yTP",
     "sync": false
@@ -4414,7 +4430,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "可用资产：",
     "_N$string": "可用资产：",
     "_fontSize": 24,
@@ -4466,7 +4483,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "bblUfRV2dPDqELYkYL2/C8",
     "sync": false
@@ -4551,7 +4568,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "0.00",
     "_N$string": "0.00",
     "_fontSize": 24,
@@ -4603,7 +4621,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "5dsR1fC0ZGRo1xHpwOir7v",
     "sync": false
@@ -4614,7 +4632,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "32awaBl5FLZZT8fWZFc2Ul",
     "sync": false
@@ -4741,7 +4759,7 @@
         1,
         1,
         1,
-        1
+        0
       ]
     },
     "_eulerAngles": {
@@ -4946,7 +4964,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "daKqvvZ9pH5YywChnVxory",
     "sync": false
@@ -5073,7 +5091,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "27MRKI1SpFr4kb9XiIHKKh",
     "sync": false
@@ -5155,7 +5173,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "回合数：150",
     "_N$string": "回合数：150",
     "_fontSize": 24,
@@ -5180,7 +5199,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "5dCWPott5L55ypDNl840o0",
     "sync": false
@@ -5191,7 +5210,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "9072BLqaNF5JW+LR9uW86m",
     "sync": false
@@ -5303,7 +5322,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
     "fileId": "6dFi6hv1FDnJueaHgJKOM7",
     "sync": false
@@ -5392,9 +5411,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a7f5bf9f-8b5a-45d7-9857-0f66f47ce1e4"
+      "__id__": 0
     },
-    "fileId": "c7X8zOn65Glq5qruAezfV4",
+    "fileId": "",
     "sync": false
   }
 ]

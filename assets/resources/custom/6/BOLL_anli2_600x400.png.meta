@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "beb0c713-273b-4a75-847c-d552223e06e5",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "BOLL_anli2_600x400": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "1869d7a0-37af-42eb-8df2-388c845b48ba",
-      "importer": "sprite-frame",
       "rawTextureUuid": "beb0c713-273b-4a75-847c-d552223e06e5",
       "trimType": "auto",
       "trimThreshold": 1,

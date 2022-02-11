@@ -36,13 +36,11 @@ export default class NewClass extends cc.Component {
 
         PopupManager.init();
 
+        ComUtils.resetSize(this.node);
+
         GlobalEvent.on(EventCfg.INVITEMESSAGE, this.openBroadcast.bind(this), this);
 
         GlobalEvent.on(EventCfg.ROOMLEAVE, this.onRoomLeave.bind(this), this);
-
-        //打开帮助
-        GlobalEvent.on(EventCfg.OPENHELPLAYER, this.openHelpLayer.bind(this), this);
-
 
         //邀请好友
         GlobalEvent.on('OPENFRIENDINVITE', this.openFriendInvite.bind(this), this);
@@ -132,7 +130,7 @@ export default class NewClass extends cc.Component {
     }
 
     onDestroy() {
-        GlobalEvent.off(EventCfg.OPENHELPLAYER);
+
         GlobalEvent.off(EventCfg.ROOMLEAVE);
         GlobalEvent.off(EventCfg.INVITEMESSAGE);
         GlobalEvent.off(EventCfg.OPENOTHERPLAYERHISLAYER);
@@ -187,12 +185,6 @@ export default class NewClass extends cc.Component {
             node.getComponent('OtherPlayerHisInfo').playeInfo = data;
             node.getComponent('OtherPlayerHisInfo').onShow();
         })
-    }
-
-
-    //帮组
-    openHelpLayer() {
-        PopupManager.openNode(this.node, null, 'Prefabs/helpLayer', 30, null);
     }
 
     //离开房间

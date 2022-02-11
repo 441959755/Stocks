@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "ecd9db44-c33f-44dd-84f9-0001ded5d758",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "vol_yy_buguizel1": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "df519484-e0a7-478c-a29e-6c2bcc92b07d",
-      "importer": "sprite-frame",
       "rawTextureUuid": "ecd9db44-c33f-44dd-84f9-0001ded5d758",
       "trimType": "auto",
       "trimThreshold": 1,

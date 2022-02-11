@@ -1,8 +1,8 @@
 import { pb } from "../../protos/proto";
 import GameCfg from "../GameCfg";
+import ActionUtils from "../Utils/ActionUtils";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
-import LoadUtils from "../Utils/LoadUtils";
 import PopupManager from "../Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
@@ -35,43 +35,28 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENHISTORYLAYER);
         GlobalEvent.off(EventCfg.OPENMONTHLAYER);
         GlobalEvent.off(EventCfg.OPENYIELDLAYER);
-        GlobalEvent.off(EventCfg.OPENHELPLAYER);
         GlobalEvent.off(EventCfg.OPENSMRESETMONEYLAYER);
         GlobalEvent.off(EventCfg.OPENTIAOJIANDAN);
         GlobalEvent.off(EventCfg.OPENTJDGAME);
         GlobalEvent.off(EventCfg.OPENFENSHI);
-        LoadUtils.releaseRes('Prefabs/xl/ZBSetLayer');
-        LoadUtils.releaseRes('Prefabs/xl/SMSetLayer');
-        LoadUtils.releaseRes('Prefabs/xl/DXSetLayer');
-        LoadUtils.releaseRes('Prefabs/xl/QHSetLayer');
-        LoadUtils.releaseRes('Prefabs/xl/shuangmangLayer');
-        LoadUtils.releaseRes('Prefabs/xl/zhibiaoLayer');
-        LoadUtils.releaseRes('Prefabs/xl/DXLayer');
-        LoadUtils.releaseRes('Prefabs/xl/qiHuoLayer');
-        LoadUtils.releaseRes('Prefabs/xl/ZBHisLayer');
-        LoadUtils.releaseRes('Prefabs/xl/SMHisLayer');
-        LoadUtils.releaseRes('Prefabs/xl/DXHisLayer');
-        LoadUtils.releaseRes('Prefabs/xl/QHHisLayer');
-        LoadUtils.releaseRes('Prefabs/xl/SMMonthlyLayer');
-        LoadUtils.releaseRes('Prefabs/xl/SMResetLayer');
-        LoadUtils.releaseRes('Prefabs/xl/SMYieldCurve');
-        LoadUtils.releaseRes('Prefabs/tjd/tiaoJianDan');
-        LoadUtils.releaseRes('Prefabs/tjd/tjdGame');
-        LoadUtils.releaseRes('Prefabs/fsxl/fenshi');
     }
 
     /**
      * 双盲重置金币
      */
     openSmResetLayer() {
-        PopupManager.openNode(this.node, null, 'Prefabs/xl/SMResetLayer', 10, null);
+        PopupManager.openNode(this.node, null, 'Prefabs/xl/SMResetLayer', 10, (node) => {
+            ActionUtils.openBox(node);
+        });
     }
 
     /**
      * 曲线图
      */
     openYieldLayer() {
-        PopupManager.openNode(this.node, null, 'Prefabs/xl/SMYieldCurve', 10, null);
+        PopupManager.openNode(this.node, null, 'Prefabs/xl/SMYieldCurve', 10, (node) => {
+            ActionUtils.openBox(node);
+        });
     }
 
 
@@ -79,7 +64,9 @@ export default class NewClass extends cc.Component {
      * 月报
      */
     openMonthLayer() {
-        PopupManager.openNode(this.node, null, 'Prefabs/xl/SMMonthlyLayer', 10, null);
+        PopupManager.openNode(this.node, null, 'Prefabs/xl/SMMonthlyLayer', 10, (node) => {
+            ActionUtils.openBox(node);
+        });
     }
 
     /**
@@ -105,7 +92,9 @@ export default class NewClass extends cc.Component {
                 break;
         }
 
-        PopupManager.openNode(this.node, null, str, 11, null);
+        PopupManager.openNode(this.node, null, str, 11, (node) => {
+            ActionUtils.openBox(node);
+        });
     }
 
     /**
@@ -130,7 +119,9 @@ export default class NewClass extends cc.Component {
                 break;
         }
 
-        PopupManager.openNode(this.node, null, str, 10, null);
+        PopupManager.openNode(this.node, null, str, 10, (node) => {
+            ActionUtils.openBox(node);
+        });
     }
 
     /**

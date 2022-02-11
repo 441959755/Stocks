@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "d0b5304c-25c2-4833-b754-87389f21d7eb",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "RSI_Anli_dingBL1_600x400": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "8625bd79-f358-4413-94f5-5bdef4f878ae",
-      "importer": "sprite-frame",
       "rawTextureUuid": "d0b5304c-25c2-4833-b754-87389f21d7eb",
       "trimType": "auto",
       "trimThreshold": 1,

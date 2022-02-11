@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.4",
   "uuid": "a52d5f98-2854-4920-b3eb-2df2751b83b0",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "main_kfbt_gzh": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "ca8b935a-53af-46cc-883d-59da0502d366",
-      "importer": "sprite-frame",
       "rawTextureUuid": "a52d5f98-2854-4920-b3eb-2df2751b83b0",
       "trimType": "auto",
       "trimThreshold": 1,

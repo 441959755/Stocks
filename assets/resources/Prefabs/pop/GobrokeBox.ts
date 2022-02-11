@@ -24,12 +24,13 @@ export default class NewClass extends cc.Component {
 
         if (name == 'sys_tck_qd') {
 
-            LLWSDK.getSDK().showVideoAd(() => {
+            LLWSDK.getSDK().showVideoAd((falg) => {
                 GlobalEvent.emit(EventCfg.LOADINGSHOW);
+                if (falg) {
+                    socket.send(pb.MessageId.Req_Hall_GetBrokenAward, null, (res) => {
 
-                socket.send(pb.MessageId.Req_Hall_GetBrokenAward, null, (res) => {
-
-                })
+                    })
+                }
             });
 
         }

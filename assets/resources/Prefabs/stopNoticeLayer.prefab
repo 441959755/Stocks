@@ -218,7 +218,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
     "fileId": "67P/2jqzVL+qC8qggAc2KO",
     "sync": false
@@ -423,7 +423,7 @@
         1,
         1,
         1,
-        1
+        0
       ]
     },
     "_eulerAngles": {
@@ -522,7 +522,7 @@
       "__uuid__": "1228e6c9-9e5c-4ae8-9a1d-280c2dbcc3ba"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -541,7 +541,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
     "fileId": "346Nxt5kJCE4GZPxekdd/d",
     "sync": false
@@ -663,7 +663,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
     "fileId": "eaGF1JL/tCb4HcbdnWw1j5",
     "sync": false
@@ -745,7 +745,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "3.8.4更新公告",
     "_N$string": "3.8.4更新公告",
     "_fontSize": 28,
@@ -770,7 +771,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
     "fileId": "23j13T0/dKjramWZOitF6d",
     "sync": false
@@ -840,7 +841,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
     "fileId": "69Ps2oKLxKDqpLp6UhqKd8",
     "sync": false
@@ -1209,7 +1210,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "\\r\\n1、定向训练新增多周期查看。\\r\\n\\r\\n2、条件单训练新增多周期查看。\\r\\n\\r\\n3、分时训练新增了最新的ETF数据。\\r\\n\\r\\n4、修改了一些BUG。\\r\\n\\r\\n请关注\\r\\n客服微信号：ylcwy888\\r\\n官方交流QQ群：742826130\\r\\n微信公众号：炒股达人APP\\r\\n获取最新资讯",
     "_N$string": "\\r\\n1、定向训练新增多周期查看。\\r\\n\\r\\n2、条件单训练新增多周期查看。\\r\\n\\r\\n3、分时训练新增了最新的ETF数据。\\r\\n\\r\\n4、修改了一些BUG。\\r\\n\\r\\n请关注\\r\\n客服微信号：ylcwy888\\r\\n官方交流QQ群：742826130\\r\\n微信公众号：炒股达人APP\\r\\n获取最新资讯",
     "_fontSize": 28,
@@ -1234,7 +1236,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
     "fileId": "10JUn6+W9Mb4cUKsSYZCdT",
     "sync": false
@@ -1316,7 +1318,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "",
     "_N$string": "",
     "_fontSize": 28,
@@ -1341,7 +1344,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
     "fileId": "3aVHD2FMtH3pM/DiU+sBAx",
     "sync": false
@@ -1423,7 +1426,8 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
     "_string": "",
     "_N$string": "",
     "_fontSize": 28,
@@ -1448,7 +1452,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
     "fileId": "baaj1DhfRGeqdtR4oEMePx",
     "sync": false
@@ -1518,7 +1522,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
     "fileId": "2bv8Zz+UlLEZRWmW77l9rM",
     "sync": false
@@ -1576,7 +1580,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
     "fileId": "d4O/Zg7aRJzIaLF8bO2Cuv",
     "sync": false
@@ -1640,7 +1644,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
     "fileId": "5emjJrFqdLd4mHvwfv4lDf",
     "sync": false
@@ -1678,7 +1682,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
     "fileId": "a5VXxLU4ROo5EteBa0+fqv",
     "sync": false
@@ -1721,7 +1725,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
     "fileId": "87KOAm2otDvY6/MWoU4voi",
     "sync": false
@@ -1791,9 +1795,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e8613b9a-6606-455d-9c7d-7f30ddedbac1"
+      "__id__": 0
     },
-    "fileId": "e8N6upRX5ETofBhNdrDi8G",
+    "fileId": "",
     "sync": false
   }
 ]

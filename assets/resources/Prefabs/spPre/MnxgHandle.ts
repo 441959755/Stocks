@@ -5,6 +5,7 @@ import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import List from "../../../sctiprs/Utils/List";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -331,7 +332,7 @@ export default class NewClass extends cc.Component {
 
         //帮组
         else if (name == 'sp_topbtn_help') {
-            GlobalEvent.emit(EventCfg.OPENHELPLAYER);
+            PopupManager.openHelpLayer();
         }
 
         else if (name == 'sp_mncg_arrqh') {

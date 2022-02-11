@@ -4,6 +4,7 @@ import GameData from "../../../sctiprs/GameData";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import List from "../../../sctiprs/Utils/List";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 
 const { ccclass, property } = cc._decorator;
@@ -150,7 +151,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'sp_topbtn_help') {
-            GlobalEvent.emit(EventCfg.OPENHELPLAYER);
+            PopupManager.openHelpLayer();
         }
 
         else if (name == 'sp_topbtn_zhengu') {
