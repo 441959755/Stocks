@@ -1,5 +1,6 @@
 import { pb } from "../../protos/proto";
-import GameCfg from "../GameCfg";
+import GameCfg from "../game/GameCfg";
+
 import ActionUtils from "../Utils/ActionUtils";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";

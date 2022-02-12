@@ -1,6 +1,6 @@
 
 import ComUtils from '../sctiprs/Utils/ComUtils';
-import GameCfg from "./GameCfg";
+
 import GameData from "./GameData";
 import { pb } from "../protos/proto";
 import HttpUtils from "./common/net/HttpUtils";
@@ -8,6 +8,7 @@ import GlobalEvent from './Utils/GlobalEvent';
 import LLWConfig from './common/config/LLWConfig';
 import PlatDefine from './common/config/PlatDefine';
 import EventCfg from './Utils/EventCfg';
+import GameCfg from './game/GameCfg';
 
 export default class GameCfgText {
 

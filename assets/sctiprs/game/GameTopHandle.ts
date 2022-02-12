@@ -1,7 +1,7 @@
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import PopupManager from "../Utils/PopupManager";
-import GameCfg from "../GameCfg";
+import GameCfg from "./GameCfg";
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import GlobalHandle from "../global/GlobalHandle";

@@ -1,5 +1,4 @@
 import { pb } from "../../protos/proto";
-import GameCfg from "../GameCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import EventCfg from "../Utils/EventCfg";
 import GameData from "../GameData";
@@ -9,6 +8,7 @@ import UpGameOpt from "./UpGameOpt";
 import GameCfgText from "../GameText";
 import ComUtils from "../Utils/ComUtils";
 import PopupManager from "../Utils/PopupManager";
+import GameCfg from "../game/GameCfg";
 
 export default class GlobalHandle {
 
@@ -19,31 +19,36 @@ export default class GlobalHandle {
 
         if (!flag) {
             //游戏开始
-            this.onCmdGameStartReq(() => {
-
+            console.log('游戏开始');
+            GlobalHandle.onCmdGameStartReq(() => {
+                console.log('游戏行情获取');
                 if (GameCfg.GameType == pb.GameType.QiHuo) {
-                    this.onCmdGameStartQuoteQueryQH(data, call)
+                    GlobalHandle.onCmdGameStartQuoteQueryQH(data, call)
                 }
                 else {
                     //游戏行情获取
-                    this.onCmdGameStartQuoteQuery(data, call)
+                    GlobalHandle.onCmdGameStartQuoteQuery(data, call)
                 }
 
             });
         }
         else {
             //游戏行情获取
-            this.onCmdGameStartQuoteQuery(data, call)
+            GlobalHandle.onCmdGameStartQuoteQuery(data, call)
         }
     }
 
     //游戏开始发送游戏类型
     public static onCmdGameStartReq(cb?) {
 
+        console.log('游戏开始发送游戏类型');
+
         let info = {
             game: GameCfg.GameType,
             isJunxian: false,
         }
+
+        console.log('游戏开始发送游戏类型' + GameCfg.GameType);
 
         if (GameCfg.GameType == pb.GameType.ZhiBiao) {
             if (GameCfg.GameSet.select == '均线') {
@@ -87,7 +92,7 @@ export default class GlobalHandle {
 
     //获取行情
     public static onCmdGameStartQuoteQuery(info1, cb) {
-
+        console.log('获取的行情');
         socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {
 
             if (!info.items || info.items.length <= 0) {

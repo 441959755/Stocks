@@ -1,4 +1,4 @@
-import GameCfg from "../../../sctiprs/GameCfg";
+import GameCfg from "../../../sctiprs/game/GameCfg";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 

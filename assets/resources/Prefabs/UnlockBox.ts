@@ -1,12 +1,10 @@
-import { pb } from "../../protos/proto";
+
 import LLWSDK from "../../sctiprs/common/sdk/LLWSDK";
-import GameCfg from "../../sctiprs/GameCfg";
+import GameCfg from "../../sctiprs/game/GameCfg";
 import GameData from "../../sctiprs/GameData";
-import GameCfgText from "../../sctiprs/GameText";
-import EnterGameControl from "../../sctiprs/global/EnterGameControl";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
-import PopupManager from "../../sctiprs/Utils/PopupManager";
+
 
 const { ccclass, property } = cc._decorator;
 

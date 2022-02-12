@@ -2,7 +2,7 @@ import { pb } from "../../protos/proto";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import DrawData from "./DrawData";
-import GameCfg from "../GameCfg";
+import GameCfg from "./GameCfg";
 import StrategyAIData from "./StrategyAIData";
 import List from "../Utils/List";
 

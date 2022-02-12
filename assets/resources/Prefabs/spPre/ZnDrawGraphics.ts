@@ -1,6 +1,6 @@
 import { pb } from "../../../protos/proto";
 import DrawData from "../../../sctiprs/game/DrawData";
-import GameCfg from "../../../sctiprs/GameCfg";
+import GameCfg from "../../../sctiprs/game/GameCfg";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import DrawUtils from "../../../sctiprs/Utils/DrawUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";

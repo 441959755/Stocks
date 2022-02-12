@@ -34,6 +34,8 @@ export default class NewClass extends cc.Component {
 
     cgdsph: cc.Node = null;
 
+    flag = false;
+
     onLoad() {
         GlobalEvent.on(EventCfg.OPENZNXG, this.onLoadZNXGLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENZGLAYER, this.openZGLayer.bind(this), this);
@@ -53,7 +55,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.OPENCGDS, this.openCgdsLayer.bind(this), this);
         GlobalEvent.on(EventCfg.OPENCGDSPH, this.openCgdsph.bind(this), this);
         GlobalEvent.on('LOADGAME', this.onLoadGame.bind(this), this);
-        this.znDraw.active = true;
     }
 
     protected start(): void {
@@ -127,12 +128,24 @@ export default class NewClass extends cc.Component {
     }
 
     openZNDraw(code, str) {
-        //  setTimeout(() => {
-        this.znDraw.active = true;
-        let handle = this.znDraw.getComponent('ZnDraw');
-        handle.onShow(code, str);
-        GlobalEvent.emit(EventCfg.LOADINGHIDE);
-        //  }, 50)
+        if (!this.flag) {
+            this.flag = true;
+            this.znDraw.active = true;
+            setTimeout(() => {
+                this.znDraw.active = false;
+                this.znDraw.active = true;
+                let handle = this.znDraw.getComponent('ZnDraw');
+                handle.onShow(code, str);
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+            }, 50)
+        }
+        else {
+            this.znDraw.active = true;
+            let handle = this.znDraw.getComponent('ZnDraw');
+            handle.onShow(code, str);
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
+        }
+
     }
 
     onLoadZNXGLayer() {
@@ -167,6 +180,7 @@ export default class NewClass extends cc.Component {
 
 
     onDestroy() {
+        this.flag = false;
         GlobalEvent.off(EventCfg.OPENZNXG);
         GlobalEvent.off(EventCfg.OPENZGLAYER);
         GlobalEvent.off(EventCfg.OPENZNDRAW);

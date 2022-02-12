@@ -1,10 +1,4 @@
 
-// import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
-// import GameData from '../../../sctiprs/GameData';
-// import GameCfg from "../../../sctiprs/game/GameCfg";
-
-// import { pb } from "../../protos/proto";
-// import GameCfg from "../../sctiprs/game/GameCfg";
 import GameData from "../../sctiprs/GameData";
 import AudioUtils from "../../sctiprs/Utils/AudioUtils";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";

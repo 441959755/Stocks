@@ -1,6 +1,6 @@
 import { pb } from "../../protos/proto";
+import GameCfg from "../game/GameCfg";
 
-import GameCfg from "../GameCfg";
 import StrategyAIData from "../game/StrategyAIData";
 import GameData from "../GameData";
 import GameCfgText from "../GameText";
@@ -14,6 +14,7 @@ export default class EnterGameControl {
         if (GameData.properties[pb.GamePropertyId.Gold] >= Math.abs(kjb)) {
             return true;
         }
+
         return false;
     }
 

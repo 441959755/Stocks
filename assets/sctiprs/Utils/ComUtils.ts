@@ -1,10 +1,11 @@
 
 import LoadUtils from './LoadUtils';
-import GameCfg from '../GameCfg';
+
 import { pb } from '../../protos/proto'
 import GameData from '../GameData';
 import LLWConfig from '../common/config/LLWConfig';
 import PlatDefine from '../common/config/PlatDefine';
+import GameCfg from '../game/GameCfg';
 
 export default class ComUtils {
 
@@ -14,7 +15,6 @@ export default class ComUtils {
 
 	//获取vip结束时间
 	public static getVIPDisTime(call) {
-
 		let obj = {
 			day: null,
 			hours: null,

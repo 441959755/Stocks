@@ -1,6 +1,6 @@
 import GameData from '../GameData';
 import GameCfgText from '../GameText';
-import GameCfg from '../GameCfg';
+import GameCfg from './GameCfg';
 import DrawData from './DrawData';
 import { pb } from '../../protos/proto';
 import StrategyAIData from './StrategyAIData';

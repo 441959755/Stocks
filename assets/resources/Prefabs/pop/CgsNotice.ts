@@ -1,7 +1,7 @@
 
 import { pb } from "../../../protos/proto";
 import LLWConfig from "../../../sctiprs/common/config/LLWConfig";
-import GameCfg from "../../../sctiprs/GameCfg";
+import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";

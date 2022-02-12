@@ -31,6 +31,7 @@ export default class WechatSDK {
                 let code = res.code;
 
                 wx.getSetting({
+
                     success(res) {
                         if (res.authSetting['scope.userInfo']) {
 

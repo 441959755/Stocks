@@ -1,6 +1,6 @@
 
 import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
-import GameCfg from "../../../sctiprs/GameCfg";
+import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
 import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
@@ -72,6 +72,8 @@ export default class NewClass extends cc.Component {
         this.toggle1.isChecked = GameData.SMSet.isFC;
         this.updataGold();
         this.onGameCountShow();
+
+        console.log('游戏类型' + GameCfg.GameType);
     }
 
     onClick(event, curstData) {

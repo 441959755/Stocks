@@ -1,6 +1,6 @@
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
-import GameCfg from '../GameCfg';
+import GameCfg from './GameCfg';
 import { pb } from '../../protos/proto';
 import ComUtils from '../Utils/ComUtils';
 import DrawDatas from './DrawData';

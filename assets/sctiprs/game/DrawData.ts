@@ -1,7 +1,7 @@
 
 import { pb } from "../../protos/proto";
 import ComUtils from "../Utils/ComUtils";
-import GameCfg from "../GameCfg";
+import GameCfg from "./GameCfg";
 //计算划线的数据
 
 export default class DrawData {

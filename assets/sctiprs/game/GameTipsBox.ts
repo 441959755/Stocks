@@ -1,4 +1,4 @@
-import GameCfg from "../GameCfg";
+import GameCfg from "./GameCfg";
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
 import { pb } from "../../protos/proto";

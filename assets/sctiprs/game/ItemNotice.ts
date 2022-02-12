@@ -2,7 +2,7 @@
 import { pb } from "../../protos/proto";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
-import GameCfg from "../GameCfg";
+import GameCfg from "./GameCfg";
 
 const { ccclass, property } = cc._decorator;
 

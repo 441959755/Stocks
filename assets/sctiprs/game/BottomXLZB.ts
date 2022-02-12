@@ -1,6 +1,6 @@
 import GameData from "../GameData";
 import ComUtils from "../Utils/ComUtils";
-import GameCfg from "../GameCfg";
+import GameCfg from "./GameCfg";
 
 const { ccclass, property } = cc._decorator;
 

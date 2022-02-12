@@ -1,9 +1,10 @@
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
-import GameCfg from '../GameCfg';
+
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import StrategyAIData from './StrategyAIData';
+import GameCfg from './GameCfg';
 
 const { ccclass, property } = cc._decorator;
 
@@ -50,6 +51,7 @@ export default class NewClass extends cc.Component {
     status = 0;
 
     onLoad() {
+
         GlobalEvent.on(EventCfg.ONADDMARK, this.onAddMard.bind(this), this);
 
         GlobalEvent.on(EventCfg.GAMEFUPAN, this.onMarkAllShow.bind(this), this);

@@ -1,6 +1,5 @@
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
-import GameCfg from '../GameCfg';
 import { pb } from '../../protos/proto';
 import StrategyAIData from '../game/StrategyAIData';
 import GameData from '../GameData';
@@ -8,6 +7,8 @@ import PopupManager from '../Utils/PopupManager';
 import UpGameOpt from '../global/UpGameOpt';
 import ComUtils from '../Utils/ComUtils';
 import GlobalHandle from '../global/GlobalHandle';
+import GameCfg from '../game/GameCfg';
+
 
 const { ccclass, property } = cc._decorator;
 

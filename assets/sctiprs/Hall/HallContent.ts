@@ -1,11 +1,11 @@
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
-import GameCfg from '../GameCfg';
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import GameCfgText from '../GameText';
 import LLWSDK from '../common/sdk/LLWSDK';
 import PopupManager from '../Utils/PopupManager';
+import GameCfg from '../game/GameCfg';
 
 const { ccclass, property } = cc._decorator;
 

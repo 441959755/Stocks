@@ -1,6 +1,6 @@
 import GlobalEvent from "./Utils/GlobalEvent";
 import EventCfg from "./Utils/EventCfg";
-import GameCfg from "./GameCfg";
+import GameCfg from "./game/GameCfg";
 
 export default class GameData {
 
@@ -20,7 +20,6 @@ export default class GameData {
 
     //缓存账号
     private static _account = null;
-
     public static get account() {
         return this._account;
     }

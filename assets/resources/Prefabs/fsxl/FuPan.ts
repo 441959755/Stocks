@@ -1,4 +1,4 @@
-import GameCfg from "../../../sctiprs/GameCfg";
+import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 
 const { ccclass, property } = cc._decorator;

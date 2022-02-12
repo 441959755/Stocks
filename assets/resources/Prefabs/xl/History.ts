@@ -1,6 +1,6 @@
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import EventCfg from '../../../sctiprs/Utils/EventCfg';
-import GameCfg from "../../../sctiprs/GameCfg";
+import GameCfg from "../../../sctiprs/game/GameCfg";
 import { pb } from '../../../protos/proto';
 import GameData from "../../../sctiprs/GameData";
 import List from '../../../sctiprs/Utils/List';
