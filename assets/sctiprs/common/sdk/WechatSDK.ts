@@ -283,7 +283,7 @@ export default class WechatSDK {
     onShareAppMessage() {
         wx.onShareAppMessage(function () {
             return {
-                title: '【K线训练馆】寓教于乐的炒股软件',
+                title: '【炒股达人】寓教于乐的炒股软件',
                 imageUrl: LLWConfig.LOADIMGURL + '/wechatgame/share.png',
             }
         })
@@ -304,7 +304,7 @@ export default class WechatSDK {
         });
 
         wx.shareAppMessage({
-            title: '【K线训练馆】寓教于乐的炒股软件',
+            title: '【炒股达人】寓教于乐的炒股软件',
             imageUrl: LLWConfig.LOADIMGURL + '/wechatgame/share.png',
             query: 'shareMsg=' + '分享卡片上所带的信息'
         })

@@ -645,31 +645,31 @@ export default class NewClass extends cc.Component {
     //获取分时股票数据
     getGPDataMin() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
-        this.ktype = pb.KType.Min;
+        this.ktype = pb.KType.MinToday;
         let curDate = new Date();
         let hour = curDate.getHours();
         let minute = curDate.getMinutes();
 
-        let from, to;
-        //获取上一天的数据
-        if (hour < 9 || (hour == 9 && minute < 30)) {
-            let time = curDate.getTime() - (24 + hour) * 60 * 60 * 1000;
-            from = parseInt(new Date(time).getTime() / 1000 + '');
-            to = parseInt(new Date(time + 23 * 60 * 60 * 1000).getTime() / 1000 + '');
-            this.isSync = false;
-        }
-        else {
-            let time = curDate.getTime() - (hour) * 60 * 60 * 1000;
-            from = parseInt(new Date(time).getTime() / 1000 + '');
-            to = parseInt(curDate.getTime() / 1000 + '');
-            this.isSync = true;
-        }
+        // let from, to;
+        // //获取上一天的数据
+        // if (hour < 9 || (hour == 9 && minute < 30)) {
+        //     let time = curDate.getTime() - (24 + hour) * 60 * 60 * 1000;
+        //     from = parseInt(new Date(time).getTime() / 1000 + '');
+        //     to = parseInt(new Date(time + 23 * 60 * 60 * 1000).getTime() / 1000 + '');
+        //     this.isSync = false;
+        // }
+        // else {
+        //     let time = curDate.getTime() - (hour) * 60 * 60 * 1000;
+        //     from = parseInt(new Date(time).getTime() / 1000 + '');
+        //     to = parseInt(curDate.getTime() / 1000 + '');
+        //     this.isSync = true;
+        // }
 
         let info1 = {
             ktype: this.ktype,
             code: this.code,
-            to: to,
-            from: from,
+            // to: to,
+            // from: from,
         }
 
         socket.send(pb.MessageId.Req_QuoteQuery, PB.onCmdQuoteQueryConvertToBuff(info1), info => {

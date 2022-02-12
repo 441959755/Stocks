@@ -26,7 +26,7 @@ export default class NewClass extends cc.Component {
     }
 
     protected onEnable() {
-        ActionUtils.openLayer(this.node);
+        // ActionUtils.openLayer(this.node);
         this.layers.forEach((el, index) => {
             let data;
             if (index == 0) {

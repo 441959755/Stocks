@@ -31,7 +31,7 @@ export default class NewClass extends cc.Component {
 	@property([cc.Toggle])
 	hangqingToggle: cc.Toggle[] = [];
 
-	_tipsLa = null;
+	//_tipsLa = null;
 
 	setProId = 0;
 
@@ -56,7 +56,7 @@ export default class NewClass extends cc.Component {
 
 	onLoad() {
 
-		this._tipsLa = this.edit.node.getChildByName('tipslabel');
+		//this._tipsLa = this.edit.node.getChildByName('tipslabel');
 
 		this.edit.node.on(
 			'editing-did-ended',
@@ -94,15 +94,15 @@ export default class NewClass extends cc.Component {
 						}
 					}
 					if (!flag) {
-						this._tipsLa.color = new cc.Color().fromHEX('#e94343');
+						//	this._tipsLa.color = new cc.Color().fromHEX('#e94343');
 						GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '没有找查到您要的股票.');
 						edit.string = '';
 					} else {
 						this.content.removeAllChildren();
 						this.downBoxs[8].active = true;
 						this.setProId = 1;
-						this._tipsLa.color = new cc.Color().fromHEX('#BBBBBB');
-						this._tipsLa.active = false;
+						// this._tipsLa.color = new cc.Color().fromHEX('#BBBBBB');
+						// this._tipsLa.active = false;
 
 						for (let i = 0; i < tt.length; i++) {
 							let arr = tt[i].split('|');
@@ -141,15 +141,12 @@ export default class NewClass extends cc.Component {
 			})
 		}
 
-		GameData.DXSet.search = '随机选股';
-
+		//跟新游戏次数
 		GlobalEvent.on(EventCfg.GMAECOUNTERSCHANGE, this.onGameCountShow.bind(this), this);
 
 	}
 
-	onDestroy() {
-		GlobalEvent.off(EventCfg.GMAECOUNTERSCHANGE);
-	}
+
 
 	onGameCountShow() {
 
@@ -433,11 +430,11 @@ export default class NewClass extends cc.Component {
 					}
 				});
 			} else if (this.setProId == 1) {
-				if (str == '随机选股') {
-					this._tipsLa.active = true;
-				} else {
-					this._tipsLa.active = false;
-				}
+				// if (str == '随机选股') {
+				// 	this._tipsLa.active = true;
+				// } else {
+				// 	this._tipsLa.active = false;
+				// }
 			}
 
 			if (this.setProId == 0) {
@@ -869,5 +866,9 @@ export default class NewClass extends cc.Component {
 			}
 			GlobalEvent.emit('LOADGAME');
 		});
+	}
+
+	onDestroy() {
+		GlobalEvent.off(EventCfg.GMAECOUNTERSCHANGE);
 	}
 }
