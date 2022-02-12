@@ -415,7 +415,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'lx_fx') {
-            LLWSDK.getSDK().screenshotShare();
+            LLWSDK.getSDK().shareAppMessage();
         }
     }
 

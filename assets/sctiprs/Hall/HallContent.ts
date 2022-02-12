@@ -248,6 +248,7 @@ export default class NewClass extends cc.Component {
 			GameCfgText.getSwitchModule(7, () => {
 				if (GameData.properties[pb.GamePropertyId.Gold] < 500) {
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+					GlobalEvent.emit('onShowGobroke');
 					return;
 				}
 
@@ -280,9 +281,9 @@ export default class NewClass extends cc.Component {
 				//s	if (EnterGameControl.onCurPKEnterGame()) {
 				// LLWSDK.getSDK().showVideoAd((flag) => {
 				// 	if (flag) {
-
 				if (GameData.properties[pb.GamePropertyId.Gold] < 500) {
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+					GlobalEvent.emit('onShowGobroke');
 					return;
 				}
 				GameCfg.GameType = pb.GameType.JJ_DuoKong;
@@ -406,7 +407,6 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit('OPENSIGNIN');
 		}
 	}
-
 
 	onDestroy() {
 		GlobalEvent.off(EventCfg.GENDERCHANGE);

@@ -9,7 +9,6 @@ import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import PopupManager from "../Utils/PopupManager";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass

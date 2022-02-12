@@ -8,7 +8,7 @@ import UpGameOpt from '../global/UpGameOpt';
 import ComUtils from '../Utils/ComUtils';
 import GlobalHandle from '../global/GlobalHandle';
 import GameCfg from '../game/GameCfg';
-
+import LLWSDK from '../common/sdk/LLWSDK';
 
 const { ccclass, property } = cc._decorator;
 
@@ -34,6 +34,7 @@ export default class NewClass extends cc.Component {
     Matchfalg = false;
 
     onLoad() {
+        LLWSDK.getSDK().onShareAppMessage();
 
         PopupManager.init();
 
@@ -59,6 +60,8 @@ export default class NewClass extends cc.Component {
 
         //打开7天奖励
         GlobalEvent.on('OPENSIGNIN', this.openSignIn.bind(this), this);
+
+        GlobalEvent.on('onShowGobroke', this.onShowGobroke.bind(this), this);
 
         //匹配界面不弹窗邀请框
         GlobalEvent.on('HALLPKMATCH', (flag) => {
@@ -138,9 +141,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.GAMEOVEER);
 
         GlobalEvent.off('OPENFRIENDINVITE');
-
         GlobalEvent.off('LOADGAME');
-
         GlobalEvent.off('OPENWEEKLYHAOLI');
         GlobalEvent.off('OPENSIGNIN');
         ComUtils.onDestory();

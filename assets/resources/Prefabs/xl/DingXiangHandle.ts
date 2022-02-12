@@ -238,8 +238,8 @@ export default class NewClass extends cc.Component {
 				la.string = GameData.DXSet.ZLine;
 			}
 		});
-		this.toggle.isChecked = GameData.DXSet.isFC;
 
+		this.toggle.isChecked = GameData.DXSet.isFC;
 	}
 
 	onTipsInfo() {
@@ -546,6 +546,7 @@ export default class NewClass extends cc.Component {
 
 			if (GameData.properties[pb.GamePropertyId.Gold] < Math.abs(GameCfgText.gameConf.dxxl.cost[0].v)) {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+				GlobalEvent.emit('onShowGobroke');
 				return;
 			}
 

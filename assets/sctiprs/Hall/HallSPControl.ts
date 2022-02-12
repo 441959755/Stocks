@@ -128,13 +128,14 @@ export default class NewClass extends cc.Component {
     }
 
     openZNDraw(code, str) {
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
         if (!this.flag) {
             this.flag = true;
             this.znDraw.active = true;
             setTimeout(() => {
                 this.znDraw.active = false;
-                this.znDraw.active = true;
                 let handle = this.znDraw.getComponent('ZnDraw');
+                this.znDraw.active = true;
                 handle.onShow(code, str);
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
             }, 50)

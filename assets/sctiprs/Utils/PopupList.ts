@@ -21,7 +21,9 @@ export default class PopupList {
     }
 
     remove(el) {
+
         const index = this.dataSouce.indexOf(el);
+
         if (index >= 0) {
 
             this.dataSouce.splice(index, 1);

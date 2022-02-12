@@ -159,7 +159,7 @@ export default class WechatSDK {
             console.log('onLoginCodeHttpRequest err');
         })
 
-        this.onShareAppMessage();
+        //this.onShareAppMessage();
     }
 
     ADInit() {
@@ -291,30 +291,44 @@ export default class WechatSDK {
 
 
     shareAppMessage() {
+
+        // 显示当前页面的转发按钮
+        wx.showShareMenu({
+            success: (res) => {
+                console.log('开启被动转发成功！');
+            },
+            fail: (res) => {
+                console.log(res);
+                console.log('开启被动转发失败！');
+            }
+        });
+
         wx.shareAppMessage({
-            imageUrl: LLWConfig.LOADIMGURL + '/wechatgame/share.png'
+            title: '【K线训练馆】寓教于乐的炒股软件',
+            imageUrl: LLWConfig.LOADIMGURL + '/wechatgame/share.png',
+            query: 'shareMsg=' + '分享卡片上所带的信息'
         })
     }
 
-    screenshotShare() {
-        var canvas = cc.game.canvas;
-        var width = cc.winSize.width;
-        var height = cc.winSize.height;
-        canvas.toTempFilePath({
-            x: 0,
-            y: 0,
-            width: width,
-            height: height,
-            destWidth: width,
-            destHeight: height,
-            success(res) {
-                //.可以保存该截屏图片
-                console.log(res)
-                wx.shareAppMessage({
-                    imageUrl: res.tempFilePath
-                })
-            }
-        })
-    }
+    // screenshotShare() {
+    //     var canvas = cc.game.canvas;
+    //     var width = cc.winSize.width;
+    //     var height = cc.winSize.height;
+    //     canvas.toTempFilePath({
+    //         x: 0,
+    //         y: 0,
+    //         width: width,
+    //         height: height,
+    //         destWidth: width,
+    //         destHeight: height,
+    //         success(res) {
+    //             //.可以保存该截屏图片
+    //             console.log(res)
+    //             wx.shareAppMessage({
+    //                 imageUrl: res.tempFilePath
+    //             })
+    //         }
+    //     })
+    // }
 
 }

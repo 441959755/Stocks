@@ -1,9 +1,9 @@
-import {pb} from "../../../protos/proto";
+import { pb } from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
@@ -43,6 +43,7 @@ export default class NewClass extends cc.Component {
         this.content2.active = false;
         this.content3.active = false;
         this.layer.active = false;
+
         GlobalEvent.on('openChangeUserNameLayer', () => {
             this.layer.active = true;
             this.content1.active = true;
@@ -89,10 +90,10 @@ export default class NewClass extends cc.Component {
                         arr[t].children[1].active = false;
                     }
 
-                        arr[t].active = false;
+                    arr[t].active = false;
 
                 }
-            } else  {
+            } else {
                 nodes[index].children[0].children[1].active = false;
                 let arr = nodes[index].children;
                 for (let t = 1; t < arr.length; t++) {

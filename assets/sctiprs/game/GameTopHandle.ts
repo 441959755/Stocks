@@ -435,10 +435,10 @@ export default class NewClass extends cc.Component {
 
                     let str;
                     if (GameCfg.GAMEWAIT) {
-                        str = '您的成绩已出，现在退出无任何影响。稍后记得在奖励中心领取奖励。';
+                        str = '  您的成绩已出，现在退出无任何影响。稍后记得在奖励中心领取奖励。';
                     }
                     else {
-                        str = '您正在比赛中，现在退出会被认定为逃跑用户，请确认在退出';
+                        str = '  您正在比赛中，现在退出会被认定为逃跑用户，请确认在退出';
                     }
 
                     PopupManager.LoadTipsBox('tipsBox', str, () => {
@@ -469,7 +469,7 @@ export default class NewClass extends cc.Component {
 
                     } else {
 
-                        PopupManager.LoadTipsBox('tipsBox', '是否终止当前训练，查看训练结果？', () => {
+                        PopupManager.LoadTipsBox('tipsBox', '  是否终止当前训练，查看训练结果？', () => {
 
                             GlobalEvent.emit('recover');
                             GlobalEvent.emit(EventCfg.GAMEOVEER);

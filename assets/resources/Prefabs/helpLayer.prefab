@@ -218,7 +218,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "67P/2jqzVL+qC8qggAc2KO",
     "sync": false
@@ -423,7 +423,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -541,7 +541,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "50jebVfndEfZ+tnOEtt+64",
     "sync": false
@@ -623,8 +623,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "帮助说明",
     "_N$string": "帮助说明",
     "_fontSize": 30,
@@ -649,7 +648,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "07qEnwTUJDL639aUJY/JU0",
     "sync": false
@@ -771,7 +770,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "6aGFwfeS9DTI+5T0HBivqP",
     "sync": false
@@ -841,7 +840,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "69Ps2oKLxKDqpLp6UhqKd8",
     "sync": false
@@ -1045,7 +1044,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1200,
-      "height": 408
+      "height": 441.36
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1094,12 +1093,11 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_string": "  每月月初，系统会对双盲训练所有用户的资金进行重置，保证所有用户以同一起点开始。\n\n       资金：用以训练中买卖股票的货币。\n\n       用户可选择进行分仓训练，如果不选择分仓，则训练中买卖以全仓为标准\n\n       训练限制：当用户的当前可使用资金低于1万时，会禁止用户进行训练，用户可选择使用钻石(付费货币)进行资金的重置，以达到可继续训练的资格，VIP用户免费重置。\n\n       训练过程：允许最多用户操作150个回合进行一局的训练，一个回合=1个交易日数据，用户可以选择全部完成150个回合，也可以随时中途终止训练，并以当前成绩结算训练成果\n",
-    "_N$string": "  每月月初，系统会对双盲训练所有用户的资金进行重置，保证所有用户以同一起点开始。\n\n       资金：用以训练中买卖股票的货币。\n\n       用户可选择进行分仓训练，如果不选择分仓，则训练中买卖以全仓为标准\n\n       训练限制：当用户的当前可使用资金低于1万时，会禁止用户进行训练，用户可选择使用钻石(付费货币)进行资金的重置，以达到可继续训练的资格，VIP用户免费重置。\n\n       训练过程：允许最多用户操作150个回合进行一局的训练，一个回合=1个交易日数据，用户可以选择全部完成150个回合，也可以随时中途终止训练，并以当前成绩结算训练成果\n",
+    "_useOriginalSize": true,
+    "_string": "       每月月初，系统会对双盲训练所有用户的资金进行重置，保证所有用户以同一起点开始。\n\n       资金：用以训练中买卖股票的货币。\n\n       用户可选择进行分仓训练，如果不选择分仓，则训练中买卖以全仓为标准\n\n       训练限制：当用户的当前可使用资金低于1万时，会禁止用户进行训练，用户可选择使用钻石(付费货币)进行资金的重置，以达到可继续训练的资格，VIP用户免费重置。\n\n       训练过程：允许最多用户操作150个回合进行一局的训练，一个回合=1个交易日数据，用户可以选择全部完成150个回合，也可以随时中途终止训练，并以当前成绩结算训练成果\n",
+    "_N$string": "       每月月初，系统会对双盲训练所有用户的资金进行重置，保证所有用户以同一起点开始。\n\n       资金：用以训练中买卖股票的货币。\n\n       用户可选择进行分仓训练，如果不选择分仓，则训练中买卖以全仓为标准\n\n       训练限制：当用户的当前可使用资金低于1万时，会禁止用户进行训练，用户可选择使用钻石(付费货币)进行资金的重置，以达到可继续训练的资格，VIP用户免费重置。\n\n       训练过程：允许最多用户操作150个回合进行一局的训练，一个回合=1个交易日数据，用户可以选择全部完成150个回合，也可以随时中途终止训练，并以当前成绩结算训练成果\n",
     "_fontSize": 24,
-    "_lineHeight": 34,
+    "_lineHeight": 36,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -1120,7 +1118,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "10QvMyHeNGC4PG8coQjIZO",
     "sync": false
@@ -1153,7 +1151,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1200,
-      "height": 510
+      "height": 517.8000000000001
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1202,8 +1200,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "        暂只支持上两周的数据的日内分时训练，不支持多日的分时数据训练！\n\n       这里默认都按T+0机制来允许玩家自由买卖操作，每次买卖都是全仓操作，最终计算所有买卖的总收益！总回合数限定为240，即每分钟为1次！供玩家练习分时图的交易盘感。\n\n       支持设置为自动（0.2/0.5/1秒间隔）或手工操作，跳动到下一回合！\n\n分时图中的白线与黄线的含义：\n1）白线：即时成交价线；\n2）黄线：当日平均成本线\n\n分时线的基本技术意义：\n1）个股中白黄线的相对位置表示该股票走势的强弱。\n白线一直运行在黄线上方，说明买盘积极，股价不跌，强势！否则为弱势。\n2）基本要诀：\n与K线均线的道理一样，白线向上脱离黄线较高时通常会向下回档，向黄线靠\t近;\t而白线向下跌离黄线较远时通常会向上反弹，向黄线靠拢。",
     "_N$string": "        暂只支持上两周的数据的日内分时训练，不支持多日的分时数据训练！\n\n       这里默认都按T+0机制来允许玩家自由买卖操作，每次买卖都是全仓操作，最终计算所有买卖的总收益！总回合数限定为240，即每分钟为1次！供玩家练习分时图的交易盘感。\n\n       支持设置为自动（0.2/0.5/1秒间隔）或手工操作，跳动到下一回合！\n\n分时图中的白线与黄线的含义：\n1）白线：即时成交价线；\n2）黄线：当日平均成本线\n\n分时线的基本技术意义：\n1）个股中白黄线的相对位置表示该股票走势的强弱。\n白线一直运行在黄线上方，说明买盘积极，股价不跌，强势！否则为弱势。\n2）基本要诀：\n与K线均线的道理一样，白线向上脱离黄线较高时通常会向下回档，向黄线靠\t近;\t而白线向下跌离黄线较远时通常会向上反弹，向黄线靠拢。",
     "_fontSize": 24,
@@ -1228,7 +1225,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "80Tkf76jBKfYE3WIIopPpR",
     "sync": false
@@ -1261,7 +1258,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1200,
-      "height": 484.84
+      "height": 405.36
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1310,12 +1307,11 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_string": "       定向训练：用户可自定义多项类别，包含行情、股票、时间、训练数量、K线类型、是否分仓操作等。\n\n       行情选择：提供4种行情选择，随机行情，单边上涨行情，单边下跌行情，震荡行情\n\n       股票与时间：可指定股票指定时间进行训练，也可随机股票随机时间进行训练\n\n       K线设置：可选择K线或宝塔线进行训练，可选择日K，周K，60分钟K，30分钟K进行训练，可选择训练的交易数量\n\n       训练限制：普通用户每天限训练3次，再想训练需要激活不限次功能，300钻石(￥30)30天训练权限，或vip直接开启\n\n训练设置-历史记录，内容与双盲训练一致\n",
-    "_N$string": "       定向训练：用户可自定义多项类别，包含行情、股票、时间、训练数量、K线类型、是否分仓操作等。\n\n       行情选择：提供4种行情选择，随机行情，单边上涨行情，单边下跌行情，震荡行情\n\n       股票与时间：可指定股票指定时间进行训练，也可随机股票随机时间进行训练\n\n       K线设置：可选择K线或宝塔线进行训练，可选择日K，周K，60分钟K，30分钟K进行训练，可选择训练的交易数量\n\n       训练限制：普通用户每天限训练3次，再想训练需要激活不限次功能，300钻石(￥30)30天训练权限，或vip直接开启\n\n训练设置-历史记录，内容与双盲训练一致\n",
+    "_useOriginalSize": true,
+    "_string": "       定向训练：用户可自定义多项类别，包含行情、股票、时间、训练数量、K线类型、是否分仓操作等。\n\n       行情选择：提供4种行情选择，随机行情，单边上涨行情，单边下跌行情，震荡行情\n\n       股票与时间：可指定股票指定时间进行训练，也可随机股票随机时间进行训练\n\n       K线设置：可选择K线或宝塔线进行训练，可选择日K，周K，60分钟K，30分钟K进行训练，可选择训练的交易数量\n\n训练设置-历史记录，内容与双盲训练一致\n",
+    "_N$string": "       定向训练：用户可自定义多项类别，包含行情、股票、时间、训练数量、K线类型、是否分仓操作等。\n\n       行情选择：提供4种行情选择，随机行情，单边上涨行情，单边下跌行情，震荡行情\n\n       股票与时间：可指定股票指定时间进行训练，也可随机股票随机时间进行训练\n\n       K线设置：可选择K线或宝塔线进行训练，可选择日K，周K，60分钟K，30分钟K进行训练，可选择训练的交易数量\n\n训练设置-历史记录，内容与双盲训练一致\n",
     "_fontSize": 24,
-    "_lineHeight": 34,
+    "_lineHeight": 36,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -1336,7 +1332,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "3dbfDyxOFNlYawUd2sHLN6",
     "sync": false
@@ -1369,7 +1365,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1200,
-      "height": 416.84
+      "height": 314.84
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1418,10 +1414,9 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_string": "    期货训练，针对期货数据进行的训练。包含国内各大期货交易所数据\n\n       可对交易所，期货品种及相应合约进行设置\n\n       可针对交易的K线类别进行设置，共有5分钟K，15分钟K，30分钟K，60分钟K，日线和周线进行设置\n\n       训练限制：普通用户每天限训练3次，再想训练需要激活不限次功能，300钻石(￥30)30天训练权限，或vip直接开启\n\n训练设置-历史记录，内容与双盲训练一致\n\n",
-    "_N$string": "    期货训练，针对期货数据进行的训练。包含国内各大期货交易所数据\n\n       可对交易所，期货品种及相应合约进行设置\n\n       可针对交易的K线类别进行设置，共有5分钟K，15分钟K，30分钟K，60分钟K，日线和周线进行设置\n\n       训练限制：普通用户每天限训练3次，再想训练需要激活不限次功能，300钻石(￥30)30天训练权限，或vip直接开启\n\n训练设置-历史记录，内容与双盲训练一致\n\n",
+    "_useOriginalSize": true,
+    "_string": "       期货训练，针对期货数据进行的训练。包含国内各大期货交易所数据\n\n       可对交易所，期货品种及相应合约进行设置\n\n       可针对交易的K线类别进行设置，共有5分钟K，15分钟K，30分钟K，60分钟K，日线和周线进行设置\n\n       训练设置-历史记录，内容与双盲训练一致\n\n",
+    "_N$string": "       期货训练，针对期货数据进行的训练。包含国内各大期货交易所数据\n\n       可对交易所，期货品种及相应合约进行设置\n\n       可针对交易的K线类别进行设置，共有5分钟K，15分钟K，30分钟K，60分钟K，日线和周线进行设置\n\n       训练设置-历史记录，内容与双盲训练一致\n\n",
     "_fontSize": 24,
     "_lineHeight": 34,
     "_enableWrapText": true,
@@ -1444,7 +1439,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "d6wEptgQ5OUoNX0jXkkDiT",
     "sync": false
@@ -1477,7 +1472,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1200,
-      "height": 382.84
+      "height": 280.84
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1526,10 +1521,9 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_string": "  指标训练是针对股市各种指标的针对化训练。\n\n       可选指标：均线，成交量，MACD，KDJ，BOLL，RSI，EXPMA\n\n       可针对单一指标的单一策略进行训练，也可进行单一指标的综合训练\n\n       训练限制：普通用户只能训练均线指标，其他指标训练权限需要额外开启，600钻石(￥60)30天训练权限，或vip直接开启\n\n训练设置-历史记录，内容与双盲训练一致\n",
-    "_N$string": "  指标训练是针对股市各种指标的针对化训练。\n\n       可选指标：均线，成交量，MACD，KDJ，BOLL，RSI，EXPMA\n\n       可针对单一指标的单一策略进行训练，也可进行单一指标的综合训练\n\n       训练限制：普通用户只能训练均线指标，其他指标训练权限需要额外开启，600钻石(￥60)30天训练权限，或vip直接开启\n\n训练设置-历史记录，内容与双盲训练一致\n",
+    "_useOriginalSize": true,
+    "_string": "       指标训练是针对股市各种指标的针对化训练。\n\n       可选指标：均线，成交量，MACD，KDJ，BOLL，RSI，EXPMA\n\n       可针对单一指标的单一策略进行训练，也可进行单一指标的综合训练\n\n       训练设置-历史记录，内容与双盲训练一致\n",
+    "_N$string": "       指标训练是针对股市各种指标的针对化训练。\n\n       可选指标：均线，成交量，MACD，KDJ，BOLL，RSI，EXPMA\n\n       可针对单一指标的单一策略进行训练，也可进行单一指标的综合训练\n\n       训练设置-历史记录，内容与双盲训练一致\n",
     "_fontSize": 24,
     "_lineHeight": 34,
     "_enableWrapText": true,
@@ -1552,7 +1546,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "d0Vt6VyidJMYrZzjaOV+4t",
     "sync": false
@@ -1933,8 +1927,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "智能选股帮助",
     "_N$string": "智能选股帮助",
     "_fontSize": 24,
@@ -1959,7 +1952,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "ed/Mm1RbFN7Z4qvAKx8B7/",
     "sync": false
@@ -2044,8 +2037,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "1. 智能选股功能是AI通过A股历史数据统计分析和结合最新策略算法，计算出的个股买卖信号。",
     "_N$string": "1. 智能选股功能是AI通过A股历史数据统计分析和结合最新策略算法，计算出的个股买卖信号。",
     "_fontSize": 24,
@@ -2097,7 +2089,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "balwqkUINGgaJZXCDDmDQe",
     "sync": false
@@ -2182,8 +2174,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "2. ＡＩ买入信号列表，是每天收盘后通过AI甄选出符合条件的最新买入信号个股，供下一交易日参考。",
     "_N$string": "2. ＡＩ买入信号列表，是每天收盘后通过AI甄选出符合条件的最新买入信号个股，供下一交易日参考。",
     "_fontSize": 24,
@@ -2235,7 +2226,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "d5DivLsARN1rUZVkO96Y7m",
     "sync": false
@@ -2320,8 +2311,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "3. 诊股功能可供玩家查看相应个股的历史买（B）卖（S）信号和最新买卖信号，以及AI最近一年的收益和AI最近收益数据。其中ＡＩ收益分析：",
     "_N$string": "3. 诊股功能可供玩家查看相应个股的历史买（B）卖（S）信号和最新买卖信号，以及AI最近一年的收益和AI最近收益数据。其中ＡＩ收益分析：",
     "_fontSize": 24,
@@ -2373,7 +2363,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "66pKQA+DdCQq18lsp/YAOc",
     "sync": false
@@ -2458,8 +2448,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "AI最近收益：是指最近的一个完整B-S波段的收益；",
     "_N$string": "AI最近收益：是指最近的一个完整B-S波段的收益；",
     "_fontSize": 24,
@@ -2511,7 +2500,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "f6FtJsZlFAZKDK+lTY+C+d",
     "sync": false
@@ -2596,8 +2585,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "AI近一年收益：是指最近一年内的所有出现的B-S波段收益的总和。",
     "_N$string": "AI近一年收益：是指最近一年内的所有出现的B-S波段收益的总和。",
     "_fontSize": 24,
@@ -2649,7 +2637,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "09eTu9tulHYJFMzlNXGjqU",
     "sync": false
@@ -2734,8 +2722,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "4. 普通用户每日可查看3支分享股票，VIP用户可查看所有股票信息。",
     "_N$string": "4. 普通用户每日可查看3支分享股票，VIP用户可查看所有股票信息。",
     "_fontSize": 24,
@@ -2787,7 +2774,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "b5I6/JGphCHqgkfXioR6Hb",
     "sync": false
@@ -2872,8 +2859,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "5. 智能选股功能里所有分享代码和个股买卖信号等数据，仅供参考！ 不做玩家个股买卖和投资决策依据，风险自担！",
     "_N$string": "5. 智能选股功能里所有分享代码和个股买卖信号等数据，仅供参考！ 不做玩家个股买卖和投资决策依据，风险自担！",
     "_fontSize": 24,
@@ -2925,7 +2911,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "ddwWlliKdPa4MBw/Bnnj2u",
     "sync": false
@@ -2968,7 +2954,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "a1nTjtsJBE9L87MSo6uK49",
     "sync": false
@@ -3026,7 +3012,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "2ef4WNsi5Cx7093YU2WNiY",
     "sync": false
@@ -3090,7 +3076,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "12zXdlRtZNMpXhlQu05RCr",
     "sync": false
@@ -3128,7 +3114,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "6fsOaWd11Iz4MUh3MOGXdY",
     "sync": false
@@ -3542,8 +3528,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "智能选股帮助",
     "_N$string": "智能选股帮助",
     "_fontSize": 24,
@@ -3568,7 +3553,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "cfkbkqPw1EaJsCPQqvfLwI",
     "sync": false
@@ -3653,8 +3638,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　模拟交易是《炒股达人》推出的模拟A股实盘股票交易的一种玩法，股票数据与A股实盘实时更新，允许用户用《炒股达人》的虚拟货币直接 交易股票。",
     "_N$string": "　　模拟交易是《炒股达人》推出的模拟A股实盘股票交易的一种玩法，股票数据与A股实盘实时更新，允许用户用《炒股达人》的虚拟货币直接 交易股票。",
     "_fontSize": 24,
@@ -3706,7 +3690,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "9dwdnkvqxBppkklQJ0O+Ku",
     "sync": false
@@ -3791,8 +3775,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "关于自选股",
     "_N$string": "关于自选股",
     "_fontSize": 24,
@@ -3844,7 +3827,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "29+vCrlGxEs5QhykVWZoCi",
     "sync": false
@@ -3929,8 +3912,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "用户可选择添加按钮，搜索出股票，添加到自选股中。",
     "_N$string": "用户可选择添加按钮，搜索出股票，添加到自选股中。",
     "_fontSize": 24,
@@ -3982,7 +3964,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "d2EZNLgRRIl5ZK7oLoqkHP",
     "sync": false
@@ -4067,8 +4049,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "股票按照代码序列号排列。",
     "_N$string": "股票按照代码序列号排列。",
     "_fontSize": 24,
@@ -4120,7 +4101,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "0bfCBFlGdIyaT4feZjWAj5",
     "sync": false
@@ -4205,8 +4186,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "关于持仓股",
     "_N$string": "关于持仓股",
     "_fontSize": 24,
@@ -4258,7 +4238,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "5fg2xSQ9RLBIjfbULpuZgb",
     "sync": false
@@ -4343,8 +4323,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "用户买入某支股票后，会将该股票自动添加到持仓股列表。",
     "_N$string": "用户买入某支股票后，会将该股票自动添加到持仓股列表。",
     "_fontSize": 24,
@@ -4396,7 +4375,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "ffb6MfwGNEpIyUI9IBnu14",
     "sync": false
@@ -4481,8 +4460,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "用户将某支股票全仓卖出后，该股票会自动从持仓股列表移除。",
     "_N$string": "用户将某支股票全仓卖出后，该股票会自动从持仓股列表移除。",
     "_fontSize": 24,
@@ -4534,7 +4512,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "c05hxGFehPuattQKwecqq9",
     "sync": false
@@ -4619,8 +4597,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "PS：用户可点击股票数据，查阅股票的详细信息。",
     "_N$string": "PS：用户可点击股票数据，查阅股票的详细信息。",
     "_fontSize": 24,
@@ -4672,7 +4649,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "0b9Y0NqaBDL5TIGCXXO8YK",
     "sync": false
@@ -4757,8 +4734,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "关于资产",
     "_N$string": "关于资产",
     "_fontSize": 24,
@@ -4810,7 +4786,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "51vn0mnABEPr6uhl/Vgwnl",
     "sync": false
@@ -4895,8 +4871,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "资产与金币可以相互兑换，具体兑换比例可在兑换界面查看。",
     "_N$string": "资产与金币可以相互兑换，具体兑换比例可在兑换界面查看。",
     "_fontSize": 24,
@@ -4948,7 +4923,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "cfIMlIFKdDnppZclkgtF7+",
     "sync": false
@@ -5033,8 +5008,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "资产兑换金币最少需要10000资产起兑。",
     "_N$string": "资产兑换金币最少需要10000资产起兑。",
     "_fontSize": 24,
@@ -5086,7 +5060,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "658vyoZjVIVKSQ02+DBvUh",
     "sync": false
@@ -5171,8 +5145,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "金币兑换资产，每人每天最多允许兑换10000金币。",
     "_N$string": "金币兑换资产，每人每天最多允许兑换10000金币。",
     "_fontSize": 24,
@@ -5224,7 +5197,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "9ejtgjtSdBvKvDBycyGZHV",
     "sync": false
@@ -5309,8 +5282,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "关于交易",
     "_N$string": "关于交易",
     "_fontSize": 24,
@@ -5362,7 +5334,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "e7Ks2hkgdHVoDtVD1+XGic",
     "sync": false
@@ -5447,8 +5419,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "买入/卖出可按照市价进行，买入和卖出的股票数必须是100的整数倍。",
     "_N$string": "买入/卖出可按照市价进行，买入和卖出的股票数必须是100的整数倍。",
     "_fontSize": 24,
@@ -5500,7 +5471,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "55RYv/cGpAZZikh2oIWcts",
     "sync": false
@@ -5585,8 +5556,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "每支股票可委托1个价位买入或卖出，当天收市时，未完成的交易则15:30前会自动撤销。",
     "_N$string": "每支股票可委托1个价位买入或卖出，当天收市时，未完成的交易则15:30前会自动撤销。",
     "_fontSize": 24,
@@ -5638,7 +5608,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "37kyn7WJlHKqO884tvn+MX",
     "sync": false
@@ -5723,8 +5693,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "委托买卖时，需要交付买入需要的资产或卖出时的持股数。",
     "_N$string": "委托买卖时，需要交付买入需要的资产或卖出时的持股数。",
     "_fontSize": 24,
@@ -5776,7 +5745,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "0dw5XS9qJLFYJvOJxA9LCY",
     "sync": false
@@ -5861,8 +5830,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "卖出股票需遵循T+1规则，当天买入的股票，必须在第二个交易日才可以卖出。",
     "_N$string": "卖出股票需遵循T+1规则，当天买入的股票，必须在第二个交易日才可以卖出。",
     "_fontSize": 24,
@@ -5914,7 +5882,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "d9l3Ph/PRODYa0t37jompt",
     "sync": false
@@ -5999,8 +5967,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "市价买卖必须在股市开盘时间内进行，委托交易下单不能在15：00--20：00内进行。",
     "_N$string": "市价买卖必须在股市开盘时间内进行，委托交易下单不能在15：00--20：00内进行。",
     "_fontSize": 24,
@@ -6052,7 +6019,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "a6YXtbGlxMnokhbaIxJo4/",
     "sync": false
@@ -6095,7 +6062,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "9eR/9sULtIpb9y6tbPEiSs",
     "sync": false
@@ -6153,7 +6120,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "43+1ZqnttOMJohdaQypczm",
     "sync": false
@@ -6217,7 +6184,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "2bjDKdJnRJ+YAkt7n6Yk4f",
     "sync": false
@@ -6255,7 +6222,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "7dLXWx3KlBGocxxLl+uxjg",
     "sync": false
@@ -6672,8 +6639,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "赛事规则",
     "_N$string": "赛事规则",
     "_fontSize": 24,
@@ -6698,7 +6664,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "daiDe+ywBOW4JE0+bYoZ7R",
     "sync": false
@@ -6783,8 +6749,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　报名费用：每期不固定，由当前报名费显示决定，VIP用户免费",
     "_N$string": "　　报名费用：每期不固定，由当前报名费显示决定，VIP用户免费",
     "_fontSize": 24,
@@ -6836,7 +6801,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "460+dAebBPNJnjuBtcR/kC",
     "sync": false
@@ -6921,8 +6886,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　初始发放资产：10万",
     "_N$string": "　　初始发放资产：10万",
     "_fontSize": 24,
@@ -6974,7 +6938,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "d8FZIaZLxEp5gr93/ux8HI",
     "sync": false
@@ -7059,8 +7023,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　比赛奖励：按照排行榜显示的比赛奖励发放",
     "_N$string": "　　比赛奖励：按照排行榜显示的比赛奖励发放",
     "_fontSize": 24,
@@ -7112,7 +7075,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "a9yMwVEYpHepA3IQc4w3No",
     "sync": false
@@ -7197,8 +7160,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　交易时间：与现实大盘可交易时间一致",
     "_N$string": "　　交易时间：与现实大盘可交易时间一致",
     "_fontSize": 24,
@@ -7250,7 +7212,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "41UcpTM0dLAa5mJWqqWriy",
     "sync": false
@@ -7335,8 +7297,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　交易品种：沪深A股",
     "_N$string": "　　交易品种：沪深A股",
     "_fontSize": 24,
@@ -7388,7 +7349,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "26nosTUfhAT4g5mfxRk+rN",
     "sync": false
@@ -7473,8 +7434,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　交易限制：单股仓位不得高于50% ；涨停板价位限制买入和跌停板价位限制卖出；新股首日上市限制买入",
     "_N$string": "　　交易限制：单股仓位不得高于50% ；涨停板价位限制买入和跌停板价位限制卖出；新股首日上市限制买入",
     "_fontSize": 24,
@@ -7526,7 +7486,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "1df5QCVyFHzpFs9OQnv4ZB",
     "sync": false
@@ -7611,8 +7571,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　最终排名：按照总资产最终排序，总资产相同的以优先达到排名",
     "_N$string": "　　最终排名：按照总资产最终排序，总资产相同的以优先达到排名",
     "_fontSize": 24,
@@ -7664,7 +7623,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "e372cuYStGYbQeQ+VWwseb",
     "sync": false
@@ -7749,8 +7708,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　关于行情：模拟交易数据基本上与A股实盘行情完全一致，但因网络等延迟因素影响，最后相关数据以模拟交易实际成交数据为准",
     "_N$string": "　　关于行情：模拟交易数据基本上与A股实盘行情完全一致，但因网络等延迟因素影响，最后相关数据以模拟交易实际成交数据为准",
     "_fontSize": 24,
@@ -7802,7 +7760,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "4dg7O2vn1HBaXRzjMPn6ns",
     "sync": false
@@ -7887,8 +7845,7 @@
         "__uuid__": "432fa09c-cf03-4cff-a186-982604408a07"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　关于停牌：比赛结束时，如有股票停牌，则按照停牌价格计算市值",
     "_N$string": "　　关于停牌：比赛结束时，如有股票停牌，则按照停牌价格计算市值",
     "_fontSize": 24,
@@ -7940,7 +7897,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "07Lw6VOLhGG7PyXmBVval4",
     "sync": false
@@ -8025,8 +7982,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　关于清算：比赛结束时，如有持仓股未卖出，系统将自动按照最后一个交易日的停盘价格清算",
     "_N$string": "　　关于清算：比赛结束时，如有持仓股未卖出，系统将自动按照最后一个交易日的停盘价格清算",
     "_fontSize": 24,
@@ -8078,7 +8034,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "db3ygZl+pOuo4ZQPtii0eF",
     "sync": false
@@ -8163,8 +8119,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　关于奖励：每期比赛结束后，会根据用户排名发放奖励，奖励内容包含但不限于现金大奖、钻石、金币、VIP卡等",
     "_N$string": "　　关于奖励：每期比赛结束后，会根据用户排名发放奖励，奖励内容包含但不限于现金大奖、钻石、金币、VIP卡等",
     "_fontSize": 24,
@@ -8216,7 +8171,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "83mKij0p5ONoqLV5s9MtJc",
     "sync": false
@@ -8301,8 +8256,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　特殊情况处理：对于玩家持仓股票有进行除权/除息，或者个股配股时，玩家需在前一日自行卖出结算，否则有可能造成虚拟资金损失影响排名。",
     "_N$string": "　　特殊情况处理：对于玩家持仓股票有进行除权/除息，或者个股配股时，玩家需在前一日自行卖出结算，否则有可能造成虚拟资金损失影响排名。",
     "_fontSize": 24,
@@ -8354,7 +8308,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "0cB3BCDydLiplu2YZiS48k",
     "sync": false
@@ -8439,8 +8393,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　领奖方式：奖励将在比赛结束后3个工作日发放(放假顺延)，奖励将直接发放至奖励中心，VIP卡奖励，领取之后生效",
     "_N$string": "　　领奖方式：奖励将在比赛结束后3个工作日发放(放假顺延)，奖励将直接发放至奖励中心，VIP卡奖励，领取之后生效",
     "_fontSize": 24,
@@ -8492,7 +8445,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "7bFd1d1m1OHqIMTF1NdPnc",
     "sync": false
@@ -8577,8 +8530,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "免责声明",
     "_N$string": "免责声明",
     "_fontSize": 24,
@@ -8630,7 +8582,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "4czUCq5AlNeaubycBLXfzO",
     "sync": false
@@ -8715,8 +8667,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　1、比赛期间，若系统发生软硬件故障，导致模拟交易运行出现BUG，主办方有权停止有关操作，并对异常时间内的买卖操作进行相应处理",
     "_N$string": "　　1、比赛期间，若系统发生软硬件故障，导致模拟交易运行出现BUG，主办方有权停止有关操作，并对异常时间内的买卖操作进行相应处理",
     "_fontSize": 24,
@@ -8768,7 +8719,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "9650FS5h9EAbDz5/trL1+1",
     "sync": false
@@ -8853,8 +8804,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　2、利用产品漏洞、BUG或其他技术手段获得不正当盈利率，干扰正常排名者，将取消比赛资格",
     "_N$string": "　　2、利用产品漏洞、BUG或其他技术手段获得不正当盈利率，干扰正常排名者，将取消比赛资格",
     "_fontSize": 24,
@@ -8906,7 +8856,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "6fBitIZUtCWK1kb7Tcm8RW",
     "sync": false
@@ -8991,8 +8941,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　3、大赛产生的全部数据信息，仅供用户浏览，参考，不构成任何投资建议。投资者以此为依据进行现实大盘操作产生的后果，风险自负",
     "_N$string": "　　3、大赛产生的全部数据信息，仅供用户浏览，参考，不构成任何投资建议。投资者以此为依据进行现实大盘操作产生的后果，风险自负",
     "_fontSize": 24,
@@ -9044,7 +8993,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "96a+UqppRA64qFDKQ/+/Ie",
     "sync": false
@@ -9129,8 +9078,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　4、《炒股达人》官方拥有对本次比赛的最终解释权",
     "_N$string": "　　4、《炒股达人》官方拥有对本次比赛的最终解释权",
     "_fontSize": 24,
@@ -9182,7 +9130,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "62Lc121WFGk4nxpabO12c3",
     "sync": false
@@ -9267,8 +9215,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　5、苹果官方不是本活动赞助商，也没有以其他任何方式参与此活动，与本活动无关。",
     "_N$string": "　　5、苹果官方不是本活动赞助商，也没有以其他任何方式参与此活动，与本活动无关。",
     "_fontSize": 24,
@@ -9320,7 +9267,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "e4EqTZKoBGA7WbyUypDowb",
     "sync": false
@@ -9363,7 +9310,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "5a32xol8RAnKgcv5r4lVeh",
     "sync": false
@@ -9421,7 +9368,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "2cfKYFEYxA4LXJLRyXzC4s",
     "sync": false
@@ -9485,7 +9432,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "9bvKJbbtFEhr7MlLCwkcgC",
     "sync": false
@@ -9523,7 +9470,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "6439gvwo9JaaGr8paDRBW+",
     "sync": false
@@ -9889,8 +9836,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "威望榜说明",
     "_N$string": "威望榜说明",
     "_fontSize": 24,
@@ -9915,7 +9861,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "a6PMlPiBtPIaZlyS7GGub+",
     "sync": false
@@ -10000,8 +9946,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "威望是我们产品一项评判用户技术的主要标准，只有在和玩家对局的过程中获胜，才能获得威望，而且一旦对局失败，还会失去威望\n\nPK大战/多空大战/闯关赛\n\n对战获胜+1威望，对战失败-1威望\n\n称号等级与威望数值有关，具体如下",
     "_N$string": "威望是我们产品一项评判用户技术的主要标准，只有在和玩家对局的过程中获胜，才能获得威望，而且一旦对局失败，还会失去威望\n\nPK大战/多空大战/闯关赛\n\n对战获胜+1威望，对战失败-1威望\n\n称号等级与威望数值有关，具体如下",
     "_fontSize": 24,
@@ -10053,7 +9998,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "9flDj90GhNnL2xxrIf/n/I",
     "sync": false
@@ -10190,7 +10135,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "bbMA1ObSpDtZnlXUKCh8Ph",
     "sync": false
@@ -10233,7 +10178,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "70BhykraZGKZZrKZfh/hDu",
     "sync": false
@@ -10291,7 +10236,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "156jX7SkBLmaXnkOK/q8nB",
     "sync": false
@@ -10355,7 +10300,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "08zpIhhctPmJRhM3Z18Q6o",
     "sync": false
@@ -10395,7 +10340,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "70/QZNAINCSIULQoq9totP",
     "sync": false
@@ -10764,8 +10709,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "等级榜说明",
     "_N$string": "等级榜说明",
     "_fontSize": 24,
@@ -10790,7 +10734,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "3aKPp+TINIXb5yrioOxpsS",
     "sync": false
@@ -10872,8 +10816,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "等级是通过获得的经验进行提升，等级越高，在我们产品活跃度越高\n\n可以获得经验的板块\n\nPK大战/多空大战/闯关赛/私人对战/定向训练",
     "_N$string": "等级是通过获得的经验进行提升，等级越高，在我们产品活跃度越高\n\n可以获得经验的板块\n\nPK大战/多空大战/闯关赛/私人对战/定向训练",
     "_fontSize": 24,
@@ -10898,7 +10841,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "61QkcSR4FHbIpV8S5T1ESU",
     "sync": false
@@ -11005,7 +10948,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "07axSGT/dL5pwHuucBTS1h",
     "sync": false
@@ -11075,7 +11018,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "1fjODaltZDRbYFydOgGxaV",
     "sync": false
@@ -11133,7 +11076,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "8dAA8jcBZJtoechvYY+tMf",
     "sync": false
@@ -11197,7 +11140,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "69oppRIlBCRKgoHJzagoT3",
     "sync": false
@@ -11237,7 +11180,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "e1QsJDsg5EPZRBGVONrq8o",
     "sync": false
@@ -11600,8 +11543,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "威望周榜",
     "_N$string": "威望周榜",
     "_fontSize": 24,
@@ -11626,7 +11568,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "26XRy5TB1FWom5jEmQOB1m",
     "sync": false
@@ -11711,8 +11653,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　威望周榜会统计每周一中午12：00至下周一11：59，所有玩家获取到的威望值并进行排名，每周一12：00重置\n\n　　可以获得威望的板块\n\n　　PK大战/多空大战/闯关赛\n\n　　对战获胜+1威望，对战失败-1威望",
     "_N$string": "　　威望周榜会统计每周一中午12：00至下周一11：59，所有玩家获取到的威望值并进行排名，每周一12：00重置\n\n　　可以获得威望的板块\n\n　　PK大战/多空大战/闯关赛\n\n　　对战获胜+1威望，对战失败-1威望",
     "_fontSize": 24,
@@ -11764,7 +11705,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "4co7EGaBRH/oCRQjkSnBFX",
     "sync": false
@@ -11807,7 +11748,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "1e6RgiTMJE2ZWEHf+8tQ/U",
     "sync": false
@@ -11865,7 +11806,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "46LpD8jVFD85KgHaUBhhjn",
     "sync": false
@@ -11929,7 +11870,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "78gB6iG7xHobRJ7vj4ak/i",
     "sync": false
@@ -11967,7 +11908,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "414f06qplAp6hRnIdZ3DHL",
     "sync": false
@@ -12330,8 +12271,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "关于赛季榜",
     "_N$string": "关于赛季榜",
     "_fontSize": 24,
@@ -12356,7 +12296,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "derTRrprlFBJOiDlGBuYq4",
     "sync": false
@@ -12441,8 +12381,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　我们会不定期举行赛季活动，每个新赛季开始时，所有用户的参赛数据从零开始，到赛季结束，排名前列的用户发放奖励。\n\n关于数据\n\n　　每次赛季开始时，所有用户的该赛季初始数据为零。\n\n　　赛季结束后，所有用户的赛季数据清零。\n\n　　赛季数据清零不会影响到个人数据，只是清空赛季榜上的数据。\n\n　　赛季数据主要类别包含：威望、金币、闯关赛数据、大盘盈利率等，具体该赛季使用哪种数据，请查看该赛季榜的数据类别。\n\n　　详细的赛季活动相关内容，请查看公告，微博公告，微信公众号广播，游戏公告，官方QQ群(742826130)公告",
     "_N$string": "　　我们会不定期举行赛季活动，每个新赛季开始时，所有用户的参赛数据从零开始，到赛季结束，排名前列的用户发放奖励。\n\n关于数据\n\n　　每次赛季开始时，所有用户的该赛季初始数据为零。\n\n　　赛季结束后，所有用户的赛季数据清零。\n\n　　赛季数据清零不会影响到个人数据，只是清空赛季榜上的数据。\n\n　　赛季数据主要类别包含：威望、金币、闯关赛数据、大盘盈利率等，具体该赛季使用哪种数据，请查看该赛季榜的数据类别。\n\n　　详细的赛季活动相关内容，请查看公告，微博公告，微信公众号广播，游戏公告，官方QQ群(742826130)公告",
     "_fontSize": 24,
@@ -12494,7 +12433,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "9dfE1RKZNJ8aeD1WCIgehO",
     "sync": false
@@ -12537,7 +12476,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "5d6GgDVZtN/pe5xpyWRkkf",
     "sync": false
@@ -12595,7 +12534,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "2e7BJrLcdF75ZpD33QJwg3",
     "sync": false
@@ -12659,7 +12598,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "e4yqNyO6JLbKTRBq5+JL5Q",
     "sync": false
@@ -12697,7 +12636,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "5fdABvVYpFTJVD762xAM9R",
     "sync": false
@@ -12847,8 +12786,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "　　1、本训练不再以每日收盘价进行结算，而是由用户自行设置价格进行买卖\n\n　　2、可以设置买入、卖出和止损3个价格\n\n　　3、卖出价必须高于止损价\n\n　　4、不考虑手续费和涨停跌停等特殊情况\n\n　　5、不支持全仓直接操作，默认选择分仓操作\n\n　　6、每次条件单成交一次后，成功成交的条件单，需要重新设置才会生效\n\n　　7、只有在暂停阶段，才能修改条件单",
     "_N$string": "　　1、本训练不再以每日收盘价进行结算，而是由用户自行设置价格进行买卖\n\n　　2、可以设置买入、卖出和止损3个价格\n\n　　3、卖出价必须高于止损价\n\n　　4、不考虑手续费和涨停跌停等特殊情况\n\n　　5、不支持全仓直接操作，默认选择分仓操作\n\n　　6、每次条件单成交一次后，成功成交的条件单，需要重新设置才会生效\n\n　　7、只有在暂停阶段，才能修改条件单",
     "_fontSize": 24,
@@ -12873,7 +12811,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "ce/1M+j0lItpMcTk829Wqg",
     "sync": false
@@ -12891,8 +12829,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "条件单训练帮助",
     "_N$string": "条件单训练帮助",
     "_fontSize": 36,
@@ -12917,7 +12854,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "d7zBiBjrFNPoeIdKCQR4Mc",
     "sync": false
@@ -12928,7 +12865,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "90PGeom4tA3Zl2kUy+9fi6",
     "sync": false
@@ -12998,7 +12935,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "a5VXxLU4ROo5EteBa0+fqv",
     "sync": false
@@ -13036,7 +12973,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "87KOAm2otDvY6/MWoU4voi",
     "sync": false
@@ -13133,7 +13070,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "d907ad4c-4a13-443a-93de-de75e683073a"
     },
     "fileId": "",
     "sync": false

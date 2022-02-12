@@ -49,13 +49,18 @@ export default class NewClass extends cc.Component {
     from = null;
     to = null;
 
-    onLoad() {
+    protected onLoad(): void {
+        this.getFameRankingWeekly();
+    }
+
+    getFameRanking() {
         socket.send(pb.MessageId.Req_Hall_GetFameRanking, null, (info) => {
             console.log('查询威望排行应答' + JSON.stringify(info));
             this.rankList1 = info.Items;
             this.listV1.numItems = this.rankList1.length;
         });
     }
+
 
     //获取等级排行
     getLevelRanking() {
@@ -130,7 +135,7 @@ export default class NewClass extends cc.Component {
 
     start() {
         this.toggles.forEach((el, index) => {
-            if (index == 0) {
+            if (index == 2) {
                 el.isChecked = true;
                 this.scollNodes[index].active = true;
             }
@@ -223,6 +228,9 @@ export default class NewClass extends cc.Component {
 
         let name = event.node.name;
         if (name == 'toggle1') {
+            if (!this.rankList1) {
+                this.getFameRanking();
+            }
             this.scollNodes[0].active = true;
             this.tipsLabel.node.parent.active = false;
         }

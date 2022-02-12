@@ -6200,8 +6200,8 @@
     ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
-    "_N$transition": 3,
-    "transition": 3,
+    "_N$transition": 0,
+    "transition": 0,
     "_N$normalColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -7989,8 +7989,8 @@
     ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
-    "_N$transition": 3,
-    "transition": 3,
+    "_N$transition": 0,
+    "transition": 0,
     "_N$normalColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -8601,8 +8601,8 @@
     ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
-    "_N$transition": 3,
-    "transition": 3,
+    "_N$transition": 0,
+    "transition": 0,
     "_N$normalColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -11947,8 +11947,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "\nCopyright  2016-2021",
-    "_N$string": "\nCopyright  2016-2021",
+    "_string": "\nCopyright  2016-2023",
+    "_N$string": "\nCopyright  2016-2023",
     "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
@@ -16147,7 +16147,7 @@
         "__id__": 447
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 5544
@@ -16221,7 +16221,7 @@
         "__id__": 465
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 5540
@@ -16584,7 +16584,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {

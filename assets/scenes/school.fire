@@ -183,7 +183,7 @@
       "array": [
         0,
         0,
-        431.28065108465046,
+        430.4083227487889,
         0,
         0,
         0,
@@ -448,7 +448,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -633,8 +633,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "K 线人门",
     "_N$string": "K 线人门",
     "_fontSize": 30,
@@ -1059,8 +1058,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "知识点学习",
     "_N$string": "知识点学习",
     "_fontSize": 30,
@@ -1416,7 +1414,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -1566,8 +1564,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "知识点学习",
     "_N$string": "知识点学习",
     "_fontSize": 24,
@@ -1825,7 +1822,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -1975,8 +1972,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "知识点学习",
     "_N$string": "知识点学习",
     "_fontSize": 24,
@@ -2234,7 +2230,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -2384,8 +2380,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "知识点学习",
     "_N$string": "知识点学习",
     "_fontSize": 24,
@@ -2643,7 +2638,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -2793,8 +2788,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "知识点学习",
     "_N$string": "知识点学习",
     "_fontSize": 24,
@@ -3199,8 +3193,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "知识点考试",
     "_N$string": "知识点考试",
     "_fontSize": 30,
@@ -3586,8 +3579,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "知识点考试",
     "_N$string": "知识点考试",
     "_fontSize": 30,
@@ -3805,7 +3797,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -4171,8 +4163,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "答题成绩要求正确率超过60%",
     "_N$string": "答题成绩要求正确率超过60%",
     "_fontSize": 24,
@@ -4522,8 +4513,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "答题成绩要求正确率超过80%",
     "_N$string": "答题成绩要求正确率超过80%",
     "_fontSize": 24,
@@ -4970,8 +4960,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "答题成绩要求正确率超过100%",
     "_N$string": "答题成绩要求正确率超过100%",
     "_fontSize": 24,
@@ -5127,8 +5116,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -5608,8 +5596,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -6161,8 +6148,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "K 线人门",
     "_N$string": "K 线人门",
     "_fontSize": 30,
@@ -7404,7 +7390,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 150,
       "height": 100
     },
     "_anchorPoint": {
@@ -7416,7 +7402,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -540,
+        -565,
         0,
         0,
         0,
@@ -7478,15 +7464,15 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        13.36,
+        0,
         0,
         0,
         0,
         0,
         0,
         1,
-        1.5,
-        1.5,
+        1,
+        1,
         1
       ]
     },
@@ -7531,7 +7517,7 @@
     },
     "_fillStart": 0,
     "_fillRange": 0,
-    "_isTrimmedMode": false,
+    "_isTrimmedMode": true,
     "_atlas": null,
     "_id": "a99v7gfPdJdIMTH6/5xKw/"
   },
@@ -7572,7 +7558,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        51.101,
+        44.801,
         0,
         0,
         0,
@@ -7610,8 +7596,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "K 线人门",
     "_N$string": "K 线人门",
     "_fontSize": 30,
@@ -8217,8 +8202,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "本轮测试共10题",
     "_N$string": "本轮测试共10题",
     "_fontSize": 24,
@@ -8312,8 +8296,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "（正确率达到60%以上可领取奖励）",
     "_N$string": "（正确率达到60%以上可领取奖励）",
     "_fontSize": 24,
@@ -8476,8 +8459,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "正确率：",
     "_N$string": "正确率：",
     "_fontSize": 24,
@@ -8571,8 +8553,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -8767,8 +8748,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "正确：",
     "_N$string": "正确：",
     "_fontSize": 24,
@@ -8862,8 +8842,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -9058,8 +9037,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "错误：",
     "_N$string": "错误：",
     "_fontSize": 24,
@@ -9153,8 +9131,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -9349,8 +9326,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "已完成：",
     "_N$string": "已完成：",
     "_fontSize": 24,
@@ -9444,8 +9420,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -9977,8 +9952,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -10640,8 +10614,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -11209,8 +11182,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -11778,8 +11750,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -12490,8 +12461,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "正确率：",
     "_N$string": "正确率：",
     "_fontSize": 24,
@@ -13153,8 +13123,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "正确率：",
     "_N$string": "正确率：",
     "_fontSize": 24,
@@ -13722,8 +13691,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "正确率：",
     "_N$string": "正确率：",
     "_fontSize": 24,
@@ -14291,8 +14259,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "正确率：",
     "_N$string": "正确率：",
     "_fontSize": 24,
@@ -15106,8 +15073,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "正确率：",
     "_N$string": "正确率：",
     "_fontSize": 24,
@@ -15863,8 +15829,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "正确率：",
     "_N$string": "正确率：",
     "_fontSize": 24,
@@ -16526,8 +16491,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "正确率：",
     "_N$string": "正确率：",
     "_fontSize": 24,
@@ -17189,8 +17153,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "正确率：",
     "_N$string": "正确率：",
     "_fontSize": 24,
@@ -17645,8 +17608,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -17740,8 +17702,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "本轮测试共10题",
     "_N$string": "本轮测试共10题",
     "_fontSize": 24,
@@ -17894,7 +17855,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 150,
       "height": 100
     },
     "_anchorPoint": {
@@ -17906,7 +17867,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -540,
+        -565,
         0,
         0,
         0,
@@ -17968,15 +17929,15 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        13.36,
+        0,
         0,
         0,
         0,
         0,
         0,
         1,
-        1.5,
-        1.5,
+        1,
+        1,
         1
       ]
     },
@@ -18062,7 +18023,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        51.101,
+        45,
         0,
         0,
         0,
@@ -18100,8 +18061,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "K 线人门",
     "_N$string": "K 线人门",
     "_fontSize": 30,
@@ -18674,7 +18634,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        128.547,
+        100,
         0,
         0,
         0,
@@ -18712,8 +18672,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "练习成绩",
     "_N$string": "练习成绩",
     "_fontSize": 30,
@@ -18757,7 +18716,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 150,
       "height": 100
     },
     "_anchorPoint": {
@@ -18769,7 +18728,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -9.752,
+        0,
         0,
         0,
         0,
@@ -18959,7 +18918,7 @@
       "__uuid__": "e5c5ffdb-9bcc-430b-aa84-15a99fbc4e29"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -19209,8 +19168,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "再来一局",
     "_N$string": "再来一局",
     "_fontSize": 24,
@@ -19665,8 +19623,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "题目总数：",
     "_N$string": "题目总数：",
     "_fontSize": 24,
@@ -19760,8 +19717,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "中烟控股",
     "_N$string": "中烟控股",
     "_fontSize": 24,
@@ -19855,8 +19811,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "",
     "_N$string": "",
     "_fontSize": 24,
@@ -20051,8 +20006,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "答对题数：",
     "_N$string": "答对题数：",
     "_fontSize": 24,
@@ -20146,8 +20100,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "2014.11.11 -- 2015.06.25",
     "_N$string": "2014.11.11 -- 2015.06.25",
     "_fontSize": 24,
@@ -20342,8 +20295,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "答题正确率：",
     "_N$string": "答题正确率：",
     "_fontSize": 24,
@@ -20437,8 +20389,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "95.5.%",
     "_N$string": "95.5.%",
     "_fontSize": 24,
@@ -20639,8 +20590,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "获得星星：",
     "_N$string": "获得星星：",
     "_fontSize": 24,
@@ -21117,8 +21067,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "奖   励：",
     "_N$string": "奖   励：",
     "_fontSize": 24,
@@ -21212,8 +21161,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "95.5.%",
     "_N$string": "95.5.%",
     "_fontSize": 24,
@@ -21408,8 +21356,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "亏   损：",
     "_N$string": "亏   损：",
     "_fontSize": 24,
@@ -21503,8 +21450,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "95.5.%",
     "_N$string": "95.5.%",
     "_fontSize": 24,
@@ -21699,8 +21645,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "盈   利：",
     "_N$string": "盈   利：",
     "_fontSize": 24,
@@ -21794,8 +21739,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "95.5.%",
     "_N$string": "95.5.%",
     "_fontSize": 24,
@@ -22055,8 +21999,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "userName",
     "_N$string": "userName",
     "_fontSize": 24,
@@ -22150,8 +22093,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "LV：0",
     "_N$string": "LV：0",
     "_fontSize": 24,
@@ -22245,8 +22187,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "exp",
     "_N$string": "exp",
     "_fontSize": 24,

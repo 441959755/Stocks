@@ -31,14 +31,12 @@ export default class NewClass extends cc.Component {
     @property(cc.Sprite)
     vipImg: cc.Sprite = null;
 
-    defHeadLayer:cc.Node=null;
-
     onLoad() {
         GlobalEvent.on(EventCfg.HEADIMGCHANGE, this.setUserInfo.bind(this), this);
 
         GlobalEvent.on(EventCfg.VIPCHANGE, this.setUserInfo.bind(this), this);
 
-        GlobalEvent.on('openDefHeadLayer',this.openDefHeadLayer.bind(this),this);
+        GlobalEvent.on('openDefHeadLayer', this.openDefHeadLayer.bind(this), this);
     }
 
     start() {
@@ -93,7 +91,7 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    openDefHeadLayer(){
-        PopupManager.openNode(this.node,this.defHeadLayer,'Prefabs/playeInfo/defHead',10);
+    openDefHeadLayer() {
+        PopupManager.openNode(this.node, null, 'Prefabs/playeInfo/defHead', 10, null);
     }
 }
