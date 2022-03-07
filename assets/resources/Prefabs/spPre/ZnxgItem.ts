@@ -34,8 +34,16 @@ export default class NewClass extends cc.Component {
         }
         this._curData = data;
         this.label[0].string = index + 1 || '--';
-        this.label[1].string = code || '--';
-        this.label[2].string = data.name || '--';
+        GameData.ZNCurIndex = index + 1;
+        if (index + 1 > 3 && !GameData.vipStatus) {
+            this.label[1].string = 'VIP';
+            this.label[2].string = '******';
+        }
+        else {
+            this.label[1].string = code || '--';
+            this.label[2].string = data.name || '--';
+        }
+
         this.label[3].string = data.industry || '--';
         this.label[4].string = data.lastBidPrice || '--';
         if (data.todaySignal && data.todaySignal < 0) {
@@ -70,6 +78,12 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, data) {
         let name = event.target.name;
         if (name == 'shoucangBtn') {
+
+            if (!GameData.vipStatus) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '开启VIP或解锁该功能取限制');
+                return;
+            }
+
             let info = {
                 removed: false,
                 code: this._curData.code,

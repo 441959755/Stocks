@@ -32,6 +32,8 @@ export default class NewClass extends cc.Component {
         if (pass) {
             this.password.string = pass;
         }
+
+
     }
 
     onBtnclick(event, data) {

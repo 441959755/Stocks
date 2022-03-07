@@ -18,8 +18,9 @@ export default class EnterGameControl {
         return false;
     }
 
+
     //当前定向是否可以进入游戏   
-    public static onCurWXIsEnterGame() {
+    public static onCurWXIsEnterGame(type?) {
 
         let data = {
             status: 0,
@@ -27,7 +28,14 @@ export default class EnterGameControl {
         }
 
         let free, adcount, todayCount;
-        if (GameCfg.GameType == pb.GameType.ShuangMang) {
+        if (type) {
+
+        }
+        else {
+            type = GameCfg.GameType;
+        }
+
+        if (type == pb.GameType.ShuangMang) {
 
             data.status = 1;
             data.count = 1;
@@ -37,18 +45,17 @@ export default class EnterGameControl {
             // todayCount = GameData.todayGameCount[pb.GameType.ShuangMang];
         }
 
-        else if (GameCfg.GameType == pb.GameType.DingXiang) {
+        else if (type == pb.GameType.DingXiang) {
             free = 3;
             adcount = 0;
             todayCount = GameData.todayGameCount[pb.GameType.DingXiang];
         }
 
-        else if (GameCfg.GameType == pb.GameType.QiHuo) {
+        else if (type == pb.GameType.QiHuo) {
             free = 3;
             adcount = 0;
             todayCount = GameData.todayGameCount[pb.GameType.QiHuo];
         }
-
         // else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
         //     free = 1;
         //     adcount = 5;

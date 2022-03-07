@@ -92,7 +92,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'btnzc') {
-            PopupManager.openProtocol('用户协议', LLWConfig.LOADIMGURL + '/user/decription1000.html')
+            PopupManager.openProtocol('用户协议', LLWConfig.LoginURL + '/user/decription1000.html')
         }
 
         else if (name == 'zccloseBtn') {
@@ -132,7 +132,7 @@ export default class NewClass extends cc.Component {
                 from: LLWConfig.FROM,
             }
 
-            let url = LLWConfig.LOADIMGURL + '/r';
+            let url = LLWConfig.LoginURL + '/r';
             //  let url = 'http://test.chaogugame.com/r';
 
             let CmdRegistry = pb.CmdRegistry;
@@ -179,7 +179,7 @@ export default class NewClass extends cc.Component {
         if (this.cb) {
             return;
         }
-        let url = LLWConfig.LOADIMGURL + '/sms';
+        let url = LLWConfig.LoginURL + '/sms';
         //    let url = 'http://test.chaogugame.com/sms';
 
         let data = {

@@ -92,7 +92,7 @@ export default {
 
     eachHand: 0,    //每手
 
-    enterGameCache: null,  //进入游戏的选择
+    enterGameConf: null,  //进入游戏的选择
 
     selectZline: 0,
 

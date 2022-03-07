@@ -34,16 +34,103 @@ export default class NewClass extends cc.Component {
 
     curSellCount = 0;
 
+    @property([cc.Button])
+    AllBtnNode: cc.Button[] = [];
+
+    @property(cc.Node)
+    wtcdBtn: cc.Node = null;
+
+    cdData = null;
+
+
+    onCDShow() {
+
+
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+
+            if (GameData.mncgDataList.orderList && GameData.mncgDataList.orderList.items) {
+
+                GameData.mncgDataList.orderList.items.forEach(el => {
+
+                    if (el.code == this.curData.code && el.type == pb.OrderType.BidLimit) {
+
+                        this.AllBtnNode.forEach(el => {
+                            el.interactable = false;
+                            el.enableAutoGrayEffect = true;
+                        })
+                        this.cdData = el;
+                        this.wtcdBtn.active = true;
+
+                        this.mcslLabel.string = el.volume
+
+                        this.mcjgLabel.string = el.price.toFixed(2);
+                        // this.node.active = false;
+                        // GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
+
+                    }
+
+                });
+            }
+        }
+
+        else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+
+            GameData.cgdsStateList.forEach(el => {
+
+                if (el.id == GameData.SpStockData.id) {
+
+                    if (el.state.orderList && el.state.orderList.items) {
+
+                        el.state.orderList.items.forEach(el1 => {
+
+                            if (el1.code == this.curData.code && el1.type == pb.OrderType.BidLimit) {
+
+                                this.AllBtnNode.forEach(el => {
+                                    el.interactable = false;
+                                    el.enableAutoGrayEffect = true;
+                                })
+                                this.cdData = el;
+                                this.wtcdBtn.active = true;
+                                this.mcslLabel.string = el1.volume;
+                                this.mcjgLabel.string = el.price.toFixed(2);
+                            }
+
+                        });
+                    }
+                }
+            })
+        }
+
+        return this.wtcdBtn.active;
+    }
+
+
     onShow(data) {
+
+        this.wtcdBtn.active = false;
+
+        this.AllBtnNode.forEach(el => {
+            el.interactable = true;
+            el.enableAutoGrayEffect = false;
+        })
+
         this.curData = data;
+
+        if (this.onCDShow()) {
+            return;
+        }
+
         let code = this.curData.code + '';
+
         if (code.length >= 7) {
             code = code.slice(1);
         }
+
         this.codeLabal.string = code;
         this.nameLabel.string = this.curData.name;
 
         this.mcjgLabel.string = ComUtils.changeTwoDecimal(this.curData.price) + '';
+
         this.mcslLabel.string = '0';
 
         if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
@@ -56,15 +143,6 @@ export default class NewClass extends cc.Component {
                 });
             }
 
-            if (GameData.mncgDataList.positionList && GameData.mncgDataList.positionList.items) {
-                GameData.mncgDataList.positionList.items.forEach(el => {
-                    if (el.code == this.curData.code && el.type == pb.OrderType.BidLimit) {
-                        this.node.active = false;
-                        GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
-                    }
-
-                });
-            }
         }
         else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
             GameData.cgdsStateList.forEach(el => {
@@ -77,17 +155,6 @@ export default class NewClass extends cc.Component {
                             }
                         });
                     }
-
-                    if (el.state.positionList && el.state.positionList.items) {
-                        el.state.positionList.items.forEach(el1 => {
-                            if (el1.code == this.curData.code && el1.type == pb.OrderType.BidLimit) {
-                                this.node.active = false;
-                                GlobalEvent.emit(EventCfg.OPENMNCDLAYER);
-                            }
-
-                        });
-                    }
-
                 }
             })
         }
@@ -202,8 +269,8 @@ export default class NewClass extends cc.Component {
             }
             this.curSellCount = Math.ceil(this.curSl / 4 / 100) * 100;
             this.mcslLabel.string = this.curSellCount + '';
-
         }
+
         //卖出下单
         else if (name == 'sp_znxg_mrxd') {
 
@@ -215,9 +282,11 @@ export default class NewClass extends cc.Component {
             this.curData.price = parseFloat(this.mcjgLabel.string);
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             let id = 0;
+
             if (GameData.SpStockData && GameData.SpStockData.id) {
                 id = GameData.SpStockData.id;
             }
+
             this.curData.price = ComUtils.changeTwoDecimal(this.curData.price);
 
             if (!this.isDieTing(this.curData.price)) {
@@ -252,6 +321,50 @@ export default class NewClass extends cc.Component {
                 }
                 else {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.result.err);
+                }
+            })
+
+        }
+
+        else if (name == 'xl_btn_cxwt') {
+
+            let id = 0;
+
+            if (GameData.SpStockData && GameData.SpStockData.id) {
+                id = GameData.SpStockData.id;
+            }
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
+            let info = {
+                orderId: this.cdData.orderId,
+                type: this.cdData.type,
+                code: this.cdData.code,
+                uid: GameData.userID,
+                id: id,
+                node: this.cdData.node,
+            }
+
+            console.log(JSON.stringify(info));
+
+            if (info.type == pb.OrderType.AskLimit) {
+                info.type = pb.OrderType.AskLimit_Cancel;
+            }
+            else if (info.type == pb.OrderType.BidLimit) {
+                info.type = pb.OrderType.BidLimit_Cancel;
+            }
+
+            let CmdStockOrderCancel = pb.CmdStockOrderCancel;
+            let message = CmdStockOrderCancel.create(info);
+            let buff = CmdStockOrderCancel.encode(message).finish();
+
+            socket.send(pb.MessageId.Req_Game_OrderCancel, buff, (res) => {
+                GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                console.log('删除委托记录' + JSON.stringify(res));
+                if (res.err) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
+                }
+                else {
+                    this.node.active = false;
                 }
             })
 

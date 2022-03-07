@@ -95,12 +95,10 @@ export default class NewClass extends cc.Component {
                     GameData.Players[1].icon = texture;
                     head.getComponent(cc.Sprite).spriteFrame = texture;
                 }
-
                 // 进入游戏动画
                 this.onEnterGameAnim();
             })
         }
-
         GameData.Players[1].icon = null;
     }
 
@@ -166,9 +164,15 @@ export default class NewClass extends cc.Component {
                 uid: GameData.userID,
                 junXian: arr,
             }
+
             console.log('进入房间' + JSON.stringify(data));
+
+            let CmdRoomEnter = pb.CmdRoomEnter;
+            let message = CmdRoomEnter.create(data);
+            let buff = CmdRoomEnter.encode(message).finish();
+
             //进入房间请求
-            socket.send(pb.MessageId.Req_Room_Enter, PB.onReqRoomEnterBuff(data), (res) => {
+            socket.send(pb.MessageId.Req_Room_Enter, buff, (res) => {
                 console.log(JSON.stringify(res));
                 if (res.err) {
                     //不是好友房

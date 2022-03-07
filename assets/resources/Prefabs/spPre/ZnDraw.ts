@@ -9,6 +9,7 @@ import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import LoadUtils from "../../../sctiprs/Utils/LoadUtils";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -101,6 +102,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     drawcopy: cc.Node = null;
 
+    @property(cc.Node)
+    toggle2mask: cc.Node = null;
+
     ori_width = 0;
     now_width = 0;
 
@@ -108,8 +112,6 @@ export default class NewClass extends cc.Component {
     t_labelv = [];
     d_label = [];
     d_labelv = [];
-
-    isSync = false;
 
     _timeStamp = null;
 
@@ -190,6 +192,9 @@ export default class NewClass extends cc.Component {
 
             this.uLabel.string = time + '    ' + '开盘：' + (kp) + '    ' + '收盘：' + sp + '    ' + '最高：' + zg + '    ' + '最低：' + zd + '    ' + '成交量：' + cjl + '    ' + '成交额：' + cje;
         }, this);
+
+
+        GlobalEvent.on('selectBtn', this.selectBtn.bind(this), this);
     }
 
     start() {
@@ -299,12 +304,8 @@ export default class NewClass extends cc.Component {
         console.log('同步行情');
         if (data.code == this.code) {
             //同步时 把以前的数据清掉
-            if (!this.isSync) {
-                this.isSync = true;
-                this.gpDataMin = [];
-                this.gpDataMin.length = 0;
-            }
-            else if (!this._timeStamp) {
+
+            if (!this._timeStamp) {
                 this._timeStamp = (data.timestamp + '').slice(2, 4);
 
                 let le = this.gpDataMin.length;
@@ -345,6 +346,7 @@ export default class NewClass extends cc.Component {
                 this.setBoxLabel(data);
                 this.setCurLabelData();
             }
+
             this.onShowCgData();
         }
     }
@@ -356,6 +358,13 @@ export default class NewClass extends cc.Component {
         this.now_width = this.drawcopy.width - this.box3.width - 10;
 
         GlobalEvent.on(EventCfg.SYNCQUOTEITEM, this.onSyncQuotation.bind(this), this);
+
+        if (GameCfg.GameType == pb.GameType.MoNiChaoGu && !GameData.vipStatus) {
+            this.toggle2mask.active = true;
+        }
+        else {
+            this.toggle2mask.active = false;
+        }
     }
 
     //当前持股数据
@@ -792,6 +801,13 @@ export default class NewClass extends cc.Component {
 
         this.cLabel[1].string = code;
 
+        if (GameCfg.GameType == 'ZNXG' && !GameData.vipStatus) {
+            if (GameData.ZNCurIndex > 3) {
+                this.cLabel[0].string = 'VIP';
+                this.cLabel[1].string = '******';
+            }
+        }
+
         this.cLabel[2].string = ComUtils.changeTwoDecimal(data.price) + '';
         let zf = data.price - preData.close;
         let zfl = (data.price - preData.close) / preData.close * 100;
@@ -966,6 +982,8 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'toggle2') {
 
+
+
             if (!this.gpDataDay.length) {
                 this.getGPDataDay();
             }
@@ -1012,7 +1030,6 @@ export default class NewClass extends cc.Component {
         this.gpDataDay7 = []  //周k数据
         this.gpDataMonth = [] //月k数据
         GameCfg.GAMEFUPAN = null;
-        this.isSync = false;
         this._timeStamp = null;
         this._volume = 0;
         this._amount = 0;
@@ -1039,95 +1056,73 @@ export default class NewClass extends cc.Component {
 
     }
 
-    onBtnClick(event, data) {
-        let name = event.target.name;
-        if (name == 'blackbtn') {
-            this.node.active = false;
-        }
-        else if (name == 'btnSlecet') {
-            if (this.ktype == pb.KType.Min) { return }
-            this.content.active = true;
-            event.target.getChildByName('nodeClick').active = true;
-        }
-        else if (name == 'nodeClick') {
-            event.target.active = false;
-            this.content.active = false;
-        }
-        else if (name == 'BtnCPM') {
+    selectBtn(type) {
+        if (type == 0) {
             this.mask.active = false;
             this.BGrap[0].active = true;
             this.BGrap[1].active = true;
             this.BGrap[2].active = false;
             this.BGrap[3].active = false;
             this.BGrap[4].active = false;
-            this.changeLabel.string = data;
-
         }
-        else if (name == 'BtnMACD') {
+        else if (type == 1) {
             this.mask.active = true;
             this.BGrap[2].active = true;
             this.BGrap[3].active = false;
             this.BGrap[4].active = false;
-            this.changeLabel.string = data;
         }
-        else if (name == 'BtnKDJ') {
+
+        else if (type == 2) {
             this.mask.active = true;
             this.BGrap[2].active = false;
             this.BGrap[3].active = true;
             this.BGrap[4].active = false;
-            this.changeLabel.string = data;
         }
-        else if (name == 'BtnRSI') {
+        else if (type == 3) {
             this.mask.active = true;
             this.BGrap[2].active = false;
             this.BGrap[3].active = false;
             this.BGrap[4].active = true;
-            this.changeLabel.string = data;
         }
+    }
+
+    onBtnClick(event, data) {
+        let name = event.target.name;
+        if (name == 'blackbtn') {
+            this.node.active = false;
+        }
+
         //点击模以
         else if (name == 'sp_btn_moni') {
             GlobalEvent.emit(EventCfg.OPENMNXG);
         }
 
         else if (name == 'sp_btn_xunlian') {
+
             if (GameCfg.GameType == 'ZNXG') {
                 if (new Date().getTime() / 1000 > GameData.properties[pb.GamePropertyId.VipExpiration]) {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '非vip用户，不能跳转训练该股');
                     return;
                 }
             }
-            if (!this.EnterGameLayer) {
 
-                GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            PopupManager.openNode(this.node, null, 'Prefabs/enterXLGame', null, (node) => {
 
-                LoadUtils.loadRes('Prefabs/enterXLGame', (pre) => {
-
-                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
-                    this.EnterGameLayer = cc.instantiate(pre);
-
-                    this.node.addChild(this.EnterGameLayer);
-
-                    let handle = this.EnterGameLayer.getComponent('EnterXLGame');
-
-                    let items = GameCfgText.getGPPKItemInfo(this.code);
-
-                    handle.onShow(this.code, items[1], this.gpDataDay)
-                })
-            }
-            else {
-
-                this.EnterGameLayer.active = true;
-
-                let handle = this.EnterGameLayer.getComponent('EnterXLGame');
+                let handle = node.getComponent('EnterXLGame');
 
                 let items = GameCfgText.getGPPKItemInfo(this.code);
 
                 handle.onShow(this.code, items[1], this.gpDataDay)
-            }
+            })
         }
 
         else if (name == 'sp_btn_shoucang') {
+
+            if (!GameData.vipStatus) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '开启VIP或解锁该功能取限制');
+                return;
+            }
+
             let info = {
                 removed: false,
                 code: this.code,
@@ -1194,10 +1189,18 @@ export default class NewClass extends cc.Component {
             }
             GlobalEvent.emit(EventCfg.OPENSELLBOX, data);
         }
+
+        else if (name == 'toggle2mask') {
+            if (GameCfg.GameType == pb.GameType.MoNiChaoGu && !GameData.vipStatus) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '开启VIP或解锁该功能取限制');
+                return;
+            }
+        }
     }
 
     onDestroy() {
         GlobalEvent.off('onClickPosUpdateLabel');
+        GlobalEvent.off('selectBtn');
     }
 
 

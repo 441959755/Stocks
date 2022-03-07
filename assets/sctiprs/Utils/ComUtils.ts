@@ -358,7 +358,7 @@ export default class ComUtils {
 			name = 0;
 		}
 
-		let url = LLWConfig.LOADIMGURL + '/icon/' + name + '.png';
+		let url = LLWConfig.LoginURL + '/icon/' + name + '.png';
 
 		LoadUtils.load(url, (res) => {
 			call && call(res);

@@ -846,7 +846,7 @@ export default class NewClass extends cc.Component {
                 col = null;
             }
         }
-        DrawUtils.drawRect(ctx, x + 2, y, w - 2, h, col);
+        DrawUtils.drawRect(ctx, x + 2, y, w - 5, h, col);
 
     }
 

@@ -158,7 +158,7 @@ export default class NewClass extends cc.Component {
             return;
         }
 
-        let info1 = JSON.parse(JSON.stringify(GameCfg.enterGameCache));
+        let info1 = JSON.parse(JSON.stringify(GameCfg.enterGameConf));
         if (GameCfg.GameType == pb.GameType.DingXiang) {
             let code = info1.code + '';
             if (code.indexOf('60') != -1 || code.indexOf('688') != -1) {
@@ -234,7 +234,7 @@ export default class NewClass extends cc.Component {
             ctx.strokeColor = col;
             col = null;
         }
-        DrawUtils.drawRect(ctx, x + 3, y, w - 3, h, col);
+        DrawUtils.drawRect(ctx, x + 3, y, w - 5, h, col);
     }
 
     //画线

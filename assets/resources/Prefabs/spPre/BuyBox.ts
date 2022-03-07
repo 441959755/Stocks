@@ -42,10 +42,10 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     wtcdBtn: cc.Node = null;
 
-
     onShow(data) {
 
         this.wtcdBtn.active = false;
+
         this.AllBtnNode.forEach(el => {
             el.interactable = true;
             el.enableAutoGrayEffect = false;
@@ -335,6 +335,8 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 if (res.orderId) {
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '买入下单成功!');
+                    //   GameData.nodeMaps.set(this.curData.code, res.node);
+
                     this.node.active = false;
                 }
                 else {
@@ -345,20 +347,46 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'xl_btn_cxwt') {
-            let id = 0
+            let id = 0, hisList = [];
             if (GameData.SpStockData && GameData.SpStockData.id) {
                 id = GameData.SpStockData.id;
             }
 
+            if (GameCfg.GameType == pb.GameType.MoNiChaoGu) {
+                hisList = GameData.mncgDataList.orderList.items;
+            }
+
+            else if (GameCfg.GameType == pb.GameType.ChaoGuDaSai) {
+                GameData.cgdsStateList.forEach(el => {
+                    if (el.id == GameData.SpStockData.id) {
+                        if (el.state.orderList && el.state.orderList.items) {
+                            hisList = el.state.orderList.items;
+                        }
+                    }
+                })
+            }
+
+            console.log(JSON.stringify(hisList));
+
+            let node, type, orderId;
+
+            hisList.forEach(el => {
+                if (el.code == this.curData.code && el.type == pb.OrderType.AskLimit) {
+                    node = el.node;
+                    type = el.type;
+                    orderId = el.orderId;
+                }
+            })
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
             let info = {
-                orderId: this.curData.orderId,
-                type: this.curData.type,
+                orderId: orderId,
+                type: type,
                 code: this.curData.code,
                 uid: GameData.userID,
                 id: id,
-                node: this.curData.node,
+                node: node,
             }
 
             if (info.type == pb.OrderType.AskLimit) {
@@ -367,6 +395,7 @@ export default class NewClass extends cc.Component {
             else if (info.type == pb.OrderType.BidLimit) {
                 info.type = pb.OrderType.BidLimit_Cancel;
             }
+
             console.log(JSON.stringify(info));
 
             let CmdStockOrderCancel = pb.CmdStockOrderCancel;

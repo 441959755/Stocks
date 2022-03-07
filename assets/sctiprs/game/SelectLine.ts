@@ -55,23 +55,23 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-        if (GameCfg.enterGameCache.ktype == pb.KType.Min5) {
+        if (GameCfg.enterGameConf.ktype == pb.KType.Min5) {
             this._selectID = 0;
         }
 
-        else if (GameCfg.enterGameCache.ktype == pb.KType.Min15) {
+        else if (GameCfg.enterGameConf.ktype == pb.KType.Min15) {
             this._selectID = 1;
         }
 
-        else if (GameCfg.enterGameCache.ktype == pb.KType.Min30) {
+        else if (GameCfg.enterGameConf.ktype == pb.KType.Min30) {
             this._selectID = 2;
         }
 
-        else if (GameCfg.enterGameCache.ktype == pb.KType.Min60) {
+        else if (GameCfg.enterGameConf.ktype == pb.KType.Min60) {
             this._selectID = 3;
         }
 
-        else if (GameCfg.enterGameCache.ktype == pb.KType.Day) {
+        else if (GameCfg.enterGameConf.ktype == pb.KType.Day) {
             this._selectID = 4;
         }
 
@@ -289,10 +289,10 @@ export default class NewClass extends cc.Component {
 
     onBlackDrawLine(id) {
 
-        if (GameCfg.enterGameCache.ktype == pb.KType.Min5 ||
-            GameCfg.enterGameCache.ktype == pb.KType.Min15 ||
-            GameCfg.enterGameCache.ktype == pb.KType.Min30 ||
-            GameCfg.enterGameCache.ktype == pb.KType.Min60) {
+        if (GameCfg.enterGameConf.ktype == pb.KType.Min5 ||
+            GameCfg.enterGameConf.ktype == pb.KType.Min15 ||
+            GameCfg.enterGameConf.ktype == pb.KType.Min30 ||
+            GameCfg.enterGameConf.ktype == pb.KType.Min60) {
 
             if (this._selectID == id) {
                 this.onGoBlackGame();
@@ -310,7 +310,7 @@ export default class NewClass extends cc.Component {
                 }
 
             }
-        } else if (GameCfg.enterGameCache.ktype == pb.KType.Day) {
+        } else if (GameCfg.enterGameConf.ktype == pb.KType.Day) {
             if (this._selectID == id) {
 
                 this.onGoBlackGame();

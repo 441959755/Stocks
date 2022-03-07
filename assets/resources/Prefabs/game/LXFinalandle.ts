@@ -254,7 +254,7 @@ export default class NewClass extends cc.Component {
         GameCfg.GAMEFUPAN = false;
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
-        GameCfg.enterGameCache = null;
+        GameCfg.enterGameConf = null;
         GameCfg.RoomGameData = null;
         GlobalEvent.emit(EventCfg.LEAVEGAME);
     }

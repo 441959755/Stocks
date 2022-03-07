@@ -368,8 +368,9 @@ export default class NewClass extends cc.Component {
 	}
 
 	onBoxSelectClick(event, data) {
+		let name = event.target.name;
 		let index = parseInt(data);
-		if (data == 1 || data == 2 || data == 3 || data == 4 || data == 6 || data == 7) {
+		if (data == 1 || data == 2 || data == 3 || data == 4 || data == 6 || data == 7 || name == 'mask') {
 			if (!this.onTipsInfo()) {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, GameData.DXSet.market + '不支持自定义当前选项');
 				return;
@@ -403,6 +404,7 @@ export default class NewClass extends cc.Component {
 		let name = event.target.name;
 		if (name == 'DCnode') {
 			event.target.parent.active = false;
+
 		} else if (name == 'item') {
 			let str = event.target.getComponent(cc.Label).string;
 			this.boxs[this.setProId].getChildByName('label').getComponent(cc.Label).string = str;
@@ -608,6 +610,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	onHangQingToggleClick(event, data) {
+
 		if (data == 0) {
 			GameData.DXSet.market = '随机行情';
 		} else if (data == 1) {
@@ -626,7 +629,21 @@ export default class NewClass extends cc.Component {
 			GameData.DXSet.KLine = '100';
 			GameData.DXSet.ZLine = '日线';
 
+			this.boxs.forEach((el, index) => {
+				if (index >= 1) {
+					el.getChildByName('mask').active = true;
+				}
+			})
 			this.onShow();
+		}
+
+		else {
+
+			this.boxs.forEach((el, index) => {
+				if (index >= 1) {
+					el.getChildByName('mask').active = false;
+				}
+			})
 		}
 	}
 
@@ -828,9 +845,9 @@ export default class NewClass extends cc.Component {
 			data.ktype = pb.KType.Min;
 		}
 
-		GameCfg.enterGameCache = data;
+		GameCfg.enterGameConf = data;
 
-		GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
+		GlobalHandle.enterGameSetout(GameCfg.enterGameConf, () => {
 
 			GameData.huizhidatas = 0;
 			GameCfg.huizhidatas = 0;

@@ -11,6 +11,7 @@ import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import LoadUtils from "../../../sctiprs/Utils/LoadUtils";
 import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
+import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -60,14 +61,19 @@ export default class NewClass extends cc.Component {
     onShow() {
         GlobalEvent.emit(EventCfg.CLEARINTERVAL);
 
-        if (GameCfg.RoomGameData.players[1].gd.uid == GameData.userID) {
-            let item = GameCfg.RoomGameData.players[1];
-            let item1 = GameCfg.RoomGameData.players[0];
-            GameCfg.RoomGameData.players[1] = item1;
-            GameCfg.RoomGameData.players[0] = item;
+        PopupManager.hideTipsBox('tipsBox');
+
+
+        this.gameResult = JSON.parse(JSON.stringify(GameCfg.RoomGameData));
+
+        if (this.gameResult.players[1].gd.uid == GameData.userID) {
+            let item = this.gameResult.players[1];
+            let item1 = this.gameResult.players[0];
+            this.gameResult.players[1] = item1;
+            this.gameResult.players[0] = item;
         }
 
-        this.gameResult = GameCfg.RoomGameData;
+
 
         let gpData = GameCfg.data[0].data;
         let code = GameCfg.data[0].code;
@@ -153,25 +159,44 @@ export default class NewClass extends cc.Component {
 
                 userHead.spriteFrame = GameData.Players[1].icon;
             }
+            let stages;
+            if (GameData.RoomType > 0) {
+                stages = GameCfgText.gameConf.pk_wx;
+            }
+            else {
+                stages = GameCfgText.gameConf.pk;
+            }
 
-            let stages = GameCfgText.gameConf.pk;
             let ex;
 
             if (this.gameResult.players[1].result.rank == 2) {
                 loseSp.active = true;
                 winSp.active = false;
                 // xj.active = true;
-                ex = stages.lose[0].v;
+                stages.lose.forEach(el => {
+                    if (el.i == 3) {
+                        ex = el.v;
+                    }
+                })
                 this.onResultAward(2, this.otherResultLabel, this.gameResult.players[1].result.userProfitRate);
             }
             else if (this.gameResult.players[1].result.rank == 1) {
                 loseSp.active = false;
                 winSp.active = true;
-                ex = stages.win[1].v;
+                stages.win.forEach(el => {
+                    if (el.i == 3) {
+                        ex = el.v;
+                    }
+                })
                 this.onResultAward(1, this.otherResultLabel, this.gameResult.players[1].result.userProfitRate);
             }
             else {
-                ex = stages.draw[1].v;
+                stages.draw.forEach(el => {
+                    if (el.i == 3) {
+                        ex = el.v;
+                    }
+                })
+
                 this.onResultAward(3, this.otherResultLabel, this.gameResult.players[1].result.userProfitRate);
             }
 
@@ -196,13 +221,21 @@ export default class NewClass extends cc.Component {
     }
 
     onResultAward(status, arr, Rate) {
+        arr[0].string = '+' + 0;
+        arr[1].string = '+' + 0;
+        arr[2].string = '+' + 0;
         //胜利
         if (status == 1) {
-            let ArrWin = GameCfgText.gameConf.pk.win;
-
+            let ArrWin;
+            if (GameData.RoomType > 0) {
+                ArrWin = GameCfgText.gameConf.pk_wx.win;
+            }
+            else {
+                ArrWin = GameCfgText.gameConf.pk.win;
+            }
             ArrWin.forEach(e => {
-                if (e.i == pb.GamePropertyId.Gold) {
 
+                if (e.i == pb.GamePropertyId.Gold) {
                     arr[0].string = '+ ' + e.v;
                     if (GameData.JJCapital) {
                         arr[0].string = '+' + GameData.JJCapital * 2;
@@ -215,14 +248,20 @@ export default class NewClass extends cc.Component {
                     arr[2].string = "+ " + e.v;
                     arr[2].node.color = new cc.Color().fromHEX('#e94343');
                 }
-
             });
 
         }
         //失败
         else if (status == 2) {
-            let Arrlose = GameCfgText.gameConf.pk.lose;
-            arr[0].string = '+' + 0;
+
+            let Arrlose;
+            if (GameData.RoomType > 0) {
+                Arrlose = GameCfgText.gameConf.pk_wx.lose;
+            }
+            else {
+                Arrlose = GameCfgText.gameConf.pk.lose;
+            }
+
             Arrlose.forEach(e => {
                 if (e.i == pb.GamePropertyId.Gold) {
                     arr[0].string = '+ ' + e.v;
@@ -242,8 +281,15 @@ export default class NewClass extends cc.Component {
         }
         //平局
         else if (status == 3) {
-            let Arrlose = GameCfgText.gameConf.pk.draw;
-            arr[0].string = '+' + 0;
+
+            let Arrlose;
+            if (GameData.RoomType > 0) {
+                Arrlose = GameCfgText.gameConf.pk_wx.draw;
+            }
+            else {
+                Arrlose = GameCfgText.gameConf.pk.draw;
+            }
+
             Arrlose.forEach(e => {
                 if (e.i == pb.GamePropertyId.Gold) {
                     arr[0].string = '+ ' + e.v;
@@ -268,9 +314,7 @@ export default class NewClass extends cc.Component {
                 arr[3].node.color = new cc.Color().fromHEX('#31a633');
             }
             // arr[3].string = Rate.toFixed(2) + "%";
-
             arr[3].string = ComUtils.changeTwoDecimal(Rate) + '%';
-
         }
         else {
             arr[3].node.color = new cc.Color().fromHEX('#31a633');
@@ -294,7 +338,6 @@ export default class NewClass extends cc.Component {
 
             this.onQuitGame();
             if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-
                 GlobalEvent.emit(EventCfg.OPENMATCHPK);
             }
         }
@@ -302,6 +345,11 @@ export default class NewClass extends cc.Component {
 
         //复盘
         else if (name == 'pk_jsbt_qd') {
+
+            if (!GameData.vipStatus) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '开启VIP或解锁该功能取限制');
+                return;
+            }
 
             let j = 0;
             GameCfg.MAs = [];
@@ -411,7 +459,6 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[1].ops.items)
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
-
         }
 
         else if (name == 'lx_fx') {
@@ -426,7 +473,7 @@ export default class NewClass extends cc.Component {
         GameCfg.GAMEFUPAN = false;
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
-        GameCfg.enterGameCache = null;
+        GameCfg.enterGameConf = null;
 
         if (!GameData.RoomType) {
             GameCfg.RoomGameData = null;

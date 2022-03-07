@@ -2,7 +2,6 @@ import GlobalEvent from '../../../sctiprs/Utils/GlobalEvent';
 import ActionUtils from '../../../sctiprs/Utils/ActionUtils';
 import GameData from '../../../sctiprs/GameData';
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -150,7 +149,9 @@ export default class NewClass extends cc.Component {
 				let label = node.getComponent(cc.Label);
 				label.string = arr[_index];
 			})
-		} else if (name == 'viewMask') {
+		}
+
+		else if (name == 'viewMask') {
 			this.scroll.active = false;
 			this.content.active = false;
 		}

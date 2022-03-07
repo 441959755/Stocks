@@ -1,4 +1,5 @@
 
+import { pb } from "../../../protos/proto";
 import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
@@ -7,7 +8,6 @@ import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import PopupManager from "../../../sctiprs/Utils/PopupManager";
-
 
 const { ccclass, property } = cc._decorator;
 
@@ -57,8 +57,10 @@ export default class NewClass extends cc.Component {
     }
 
     updataGold() {
+
         this.curla.string = GameData.SmxlState.gold;
         this.initLa.string = GameData.SmxlState.goldInit;
+
         //是否重置
         this.CZBtn.active = false;
         if (GameData.SmxlState.gold <= GameCfgText.smxlCfg.capital_min.value) {
@@ -69,11 +71,10 @@ export default class NewClass extends cc.Component {
     }
 
     protected onEnable() {
+
         this.toggle1.isChecked = GameData.SMSet.isFC;
         this.updataGold();
         this.onGameCountShow();
-
-        console.log('游戏类型' + GameCfg.GameType);
     }
 
     onClick(event, curstData) {
@@ -97,11 +98,10 @@ export default class NewClass extends cc.Component {
             // else if (this.curState == 3) {
             //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请点击在线客服,体验完整版APP');
             // }
-
             // else {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
+
             this.smStartGameSet();
-            this.onGameCountShow();
             // }
 
         }
@@ -151,27 +151,42 @@ export default class NewClass extends cc.Component {
     }
 
     smStartGameSet() {
+
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         GameCfg.GAMEFUPAN = false;
         GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.SMSet));
         GameCfg.ziChan = GameData.SmxlState.gold;
 
+        GameCfg.enterGameConf = {
+            ktype: pb.KType.Day,
+            kstyle: pb.KStyle.Random,
+            code: null,
+            from: null,
+            total: 256,
+            to: 0,
+            reserve: 106,
+        }
+
         GameCfgText.getGPSMByRandom()
 
-        console.log('给的数据:' + JSON.stringify(GameCfg.enterGameCache));
+        console.log('给的数据:' + JSON.stringify(GameCfg.enterGameConf));
 
-        GameData.huizhidatas = GameCfg.enterGameCache.reserve;
+        GameData.huizhidatas = GameCfg.enterGameConf.reserve;
 
-        GameCfg.huizhidatas = GameCfg.enterGameCache.reserve;
+        GameCfg.huizhidatas = GameCfg.enterGameConf.reserve;
 
-        GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
+        GlobalHandle.enterGameSetout(GameCfg.enterGameConf, () => {
 
-            GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
-            GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
+            // GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
+            // GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
 
-            if (GameData.huizhidatas <= 0) {
-                GameData.huizhidatas = GameCfg.data[0].data.length - 50;
-                GameCfg.huizhidatas = GameCfg.data[0].data.length - 50;
-            }
+            // if (GameData.huizhidatas <= 0) {
+            //     GameData.huizhidatas = GameCfg.data[0].data.length - 50;
+            //     GameCfg.huizhidatas = GameCfg.data[0].data.length - 50;
+            // }
+
+            GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
             GlobalEvent.emit('LOADGAME');
         });
@@ -190,6 +205,5 @@ export default class NewClass extends cc.Component {
                 GlobalHandle.onGameResetSMCapital();
             }
         })
-
     }
 }

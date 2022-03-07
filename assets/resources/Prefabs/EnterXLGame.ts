@@ -64,14 +64,6 @@ export default class NewClass extends cc.Component {
         this.xlname.string = '前往定向训练场训练该股票';
         this.codename.string = code + '     ' + name;
         this.name = name;
-
-        if (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]) {
-            this.tipsLabel.string = '0';
-        }
-        else {
-            this.tipsLabel.string = '500';
-        }
-
     }
 
 
@@ -85,7 +77,7 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.LEAVEGAME);
 
-            let gameCount = EnterGameControl.onCurIsEnterGame();
+            let gameCount = EnterGameControl.onCurWXIsEnterGame(pb.GameType.DingXiang);
 
             if (gameCount.status == 3) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
@@ -117,7 +109,7 @@ export default class NewClass extends cc.Component {
                     items = GameCfgText.getGPItemInfo(data.code);
                 }
 
-                GameCfg.enterGameCache = data;
+                GameCfg.enterGameConf = data;
 
                 GameCfg.GameType = pb.GameType.DingXiang;
 
@@ -183,7 +175,7 @@ export default class NewClass extends cc.Component {
                 }
 
 
-                GameCfg.enterGameCache = data;
+                GameCfg.enterGameConf = data;
 
                 GameCfg.GameType = pb.GameType.DingXiang;
 

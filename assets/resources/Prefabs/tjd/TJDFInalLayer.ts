@@ -128,7 +128,7 @@ export default class NewClass extends cc.Component {
                 uid: GameData.userID,
                 gType: GameCfg.GameType,
                 quotesCode: parseInt(GameCfg.data[0].code),
-                kType: GameCfg.enterGameCache.ktype,
+                kType: GameCfg.enterGameConf.ktype,
                 kFrom: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
 
                 kTo: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),

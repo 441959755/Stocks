@@ -79,9 +79,15 @@ export default {
             cc.loader.load({ url, type: 'jpg' }, function (err, tex) {
                 if (tex && tex.height != 0) {
 
+                    // let canvas = document.createElement("canvas");
+                    // let ctx = canvas.getContext("2d");
+                    // var img = tex.getHtmlElementObj();
+                    // canvas.width = tex.width;
+                    // canvas.height = tex.height;
+                    // ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
                     let spriteFrame = new cc.SpriteFrame(tex);
                     callback(tex, spriteFrame);
-
                 } else {
                     callback(caller, null);
                 }
@@ -128,6 +134,28 @@ export default {
 
         return true;
     },
+
+
+    base64toBlob(base64Data, contentType) {
+        contentType = contentType || '';
+        var sliceSize = 1024;
+        var byteCharacters = atob(base64Data);
+        var bytesLength = byteCharacters.length;
+        var slicesCount = Math.ceil(bytesLength / sliceSize);
+        var byteArrays = new Array(slicesCount);
+
+        for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+            var begin = sliceIndex * sliceSize;
+            var end = Math.min(begin + sliceSize, bytesLength);
+
+            var bytes = new Array(end - begin);
+            for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
+                bytes[i] = byteCharacters[offset].charCodeAt(0);
+            }
+            byteArrays[sliceIndex] = new Uint8Array(bytes);
+        }
+        return new Blob(byteArrays, { type: contentType });
+    }
 }
 
 

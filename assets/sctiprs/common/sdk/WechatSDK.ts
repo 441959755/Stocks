@@ -4,6 +4,7 @@ import { pb } from "../../../protos/proto";
 import LoadImg from "../../Utils/LoadImg";
 import GameCfgText from "../../GameText";
 import LLWConfig from "../config/LLWConfig";
+import HttpUtils from "../net/HttpUtils";
 
 export default class WechatSDK {
 
@@ -29,7 +30,7 @@ export default class WechatSDK {
         wx.login({
             success(res) {
                 let code = res.code;
-
+                self.getQUery();
                 wx.getSetting({
 
                     success(res) {
@@ -90,22 +91,18 @@ export default class WechatSDK {
                 GameData.gender = webUserInfo.gender;
                 GameData.headimgurl = webUserInfo.avatarUrl;
 
-                // HttpUtils.loadRequest1(GameData.headimgurl, null, (tex) => {
+                // HttpUtils.toDataURL(GameData.headimgurl, (tex) => {
                 //     console.log('图片' + (tex));
-
                 //     GameData.headimgurl = tex;
-                //     GameData.headImg = new cc.SpriteFrame();
-                //     btn && (btn.destroy())
-                //     self.onLoginCodeHttpRequest(code, call);
-                // }, (err) => {
-                //     console.log(err);
+                //     // GameData.headImg = new cc.SpriteFrame(tex);
+                //     // btn && (btn.destroy())
+                //     // self.onLoginCodeHttpRequest(code, call);
                 // })
 
                 LoadImg.downloadRemoteImageAndSave(GameData.headimgurl, (tex, sp) => {
-
-                    GameData.headimgurl = new Uint8Array(tex);
+                    //   console.log('downloadRemoteImageAndSave' + sp + ' ' + tex);
+                    GameData.headimgurl = tex;
                     GameData.headImg = sp;
-
                     btn && (btn.destroy())
                     self.onLoginCodeHttpRequest(code, call);
                 }, true)
@@ -228,6 +225,7 @@ export default class WechatSDK {
                 //     }
                 // })
 
+
                 wx.getLocalImgData({
                     localId: res.localIds[0], // 图片的localID
                     success: function (res) {
@@ -281,19 +279,19 @@ export default class WechatSDK {
 
     //监听用户点击右上角菜单的「转发」按钮时触发的事件
     onShareAppMessage() {
-        wx.onShareAppMessage(function () {
+
+        // 绑定分享参数
+        wx.onShareTimeline(() => {
             return {
                 title: '【炒股达人】寓教于乐的炒股软件',
-                imageUrl: LLWConfig.LOADIMGURL + '/wechatgame/share.png',
+                imageUrl: LLWConfig.LoginURL + '/wechatgame/share.png',
+                query: 'a=1&b=2'
             }
         })
-    }
-
-
-    shareAppMessage() {
 
         // 显示当前页面的转发按钮
         wx.showShareMenu({
+            menus: ['shareAppMessage', 'shareTimeline'],
             success: (res) => {
                 console.log('开启被动转发成功！');
             },
@@ -303,12 +301,98 @@ export default class WechatSDK {
             }
         });
 
-        wx.shareAppMessage({
-            title: '【炒股达人】寓教于乐的炒股软件',
-            imageUrl: LLWConfig.LOADIMGURL + '/wechatgame/share.png',
-            query: 'shareMsg=' + '分享卡片上所带的信息'
+        wx.onShareAppMessage(function () {
+            return {
+                title: '【炒股达人】寓教于乐的炒股软件',
+                imageUrl: LLWConfig.LoginURL + '/wechatgame/share.png',
+            }
         })
     }
+
+
+    shareAppMessage(roomId?) {
+        let url, title;
+        if (roomId) {
+            url = LLWConfig.LoginURL + '/wechatgame/invite.png';
+            title = '真实历史数据，等你来战';
+
+        }
+        else {
+            url = LLWConfig.LoginURL + '/wechatgame/share.png';
+            title = '【炒股达人】寓教于乐的炒股软件';
+        }
+        wx.shareAppMessage({
+            title: title,
+            imageUrl: url,
+            query: 'key1=' + roomId + '&key2=val2',
+
+            success: (res) => {
+                // 显示当前页面的转发按钮
+                wx.showShareMenu({
+                    withShareTicket: true,
+                    menus: ['shareAppMessage', 'shareTimeline'],
+                    success: (res) => {
+                        console.log('开启被动转发成功！');
+                    },
+                    fail: (res) => {
+                        console.log(res);
+                        console.log('开启被动转发失败！');
+                    }
+                });
+            }
+        })
+    }
+
+    getQUery() {
+
+        let obj = wx.getLaunchOptionsSync();
+        console.log('获取query' + JSON.stringify(obj));
+        for (let s in obj.query) {
+            if (s == 'key1') {
+                GameData.query = obj.query[s];
+            }
+        }
+    }
+
+    onShow(cb) {
+        wx.onShow((res) => {
+            console.log('获取query' + JSON.stringify(res));
+            for (let s in res.query) {
+                if (s == 'key1') {
+                    GameData.query = res.query[s];
+                    cb && cb();
+                }
+            }
+        })
+
+    }
+
+    // authPrivateMessage(id) {
+
+    //     wx.updateShareMenu({
+    //         withShareTicket: true,
+    //         isPrivateMessage: true,
+    //         activityId: id,
+    //     })
+
+    //     wx.authPrivateMessage({
+    //         shareTicket: 'xxxxxx',
+    //         success(res) {
+    //             console.log('authPrivateMessage success', res)
+    //             // res
+    //             // {
+    //             //   errMsg: 'authPrivateMessage:ok'
+    //             //   valid: true
+    //             //   iv: 'xxxx',
+    //             //   encryptedData: 'xxxxxx'
+    //             // }
+    //         },
+    //         fail(res) {
+    //             console.log('authPrivateMessage fail', res)
+    //         }
+    //     })
+    // }
+
 
     // screenshotShare() {
     //     var canvas = cc.game.canvas;

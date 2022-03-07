@@ -40,6 +40,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.OPENTIAOJIANDAN);
         GlobalEvent.off(EventCfg.OPENTJDGAME);
         GlobalEvent.off(EventCfg.OPENFENSHI);
+        GlobalEvent.off(EventCfg.OPENGAMEFENSHI);
     }
 
     /**

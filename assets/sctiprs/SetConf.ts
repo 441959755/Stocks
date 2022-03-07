@@ -32,8 +32,8 @@ class SetConf {
     search = '随机选股';
 
     //zb
-    select = 'MACD';
-    strategy = 'MACD金叉';
+    select = '均线';
+    strategy = '股价穿越均线';
     showSign = true;
     MA = [20, 10, 30, -8];
     VOL = [5, 20];

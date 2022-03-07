@@ -164,7 +164,7 @@ export default class NewClass extends cc.Component {
         }
         else if (name == 'btn_xl') {
 
-            let gameCount = EnterGameControl.onCurIsEnterGame();
+            let gameCount = EnterGameControl.onCurWXIsEnterGame(pb.GameType.DingXiang);
 
             if (gameCount.status == 3) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完.');
@@ -215,10 +215,10 @@ export default class NewClass extends cc.Component {
             reserve: 0,
         }
 
-        GameCfg.enterGameCache = cache;
+        GameCfg.enterGameConf = cache;
 
         // EnterGameControl.onClearPreGameDataEnter(cache, flag);
-        GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
+        GlobalHandle.enterGameSetout(GameCfg.enterGameConf, () => {
             GlobalEvent.emit('LOADGAME');
         }, flag);
     }

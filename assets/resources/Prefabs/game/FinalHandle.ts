@@ -135,7 +135,7 @@ export default class NewClass extends cc.Component {
                 uid: GameData.userID,
                 gType: GameCfg.GameType,
                 quotesCode: gpData[0].code || parseInt(GameCfg.data[0].code),
-                kType: GameCfg.enterGameCache.ktype,
+                kType: GameCfg.enterGameConf.ktype,
                 kFrom: parseInt(ComUtils.fromatTime1(gpData[GameData.huizhidatas - 1].day)),
                 kTo: parseInt(ComUtils.fromatTime1(gpData[GameCfg.huizhidatas - 1].day)),
                 stockProfitRate: ((gpData[GameCfg.huizhidatas - 1].close - gpData[GameData.huizhidatas - 1].close) / gpData[GameData.huizhidatas - 1].close * 100),
@@ -155,7 +155,7 @@ export default class NewClass extends cc.Component {
             }
 
             if (GameCfg.GameType == pb.GameType.QiHuo) {
-                datas.kFrom = GameCfg.enterGameCache.from;
+                datas.kFrom = GameCfg.enterGameConf.from;
             }
 
             datas.rank = datas.userProfitRate >= datas.stockProfitRate ? 1 : 2;
@@ -438,7 +438,7 @@ export default class NewClass extends cc.Component {
             GameCfgText.getQHQHByRandom();
         }
 
-        GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
+        GlobalHandle.enterGameSetout(GameCfg.enterGameConf, () => {
 
             GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
             GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);

@@ -178,7 +178,7 @@ export default class NewClass extends cc.Component {
                     GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.TJDSet));
                 }
 
-                GameCfg.enterGameCache = {
+                GameCfg.enterGameConf = {
                     ktype: this.infoData.kType,
                     kstyle: pb.KStyle.Random,
                     code: this.infoData.quotesCode,
@@ -187,17 +187,17 @@ export default class NewClass extends cc.Component {
                     reserve: this.infoData.kStartup + 1,
                 };
 
-                console.log(JSON.stringify(GameCfg.enterGameCache));
+                console.log(JSON.stringify(GameCfg.enterGameConf));
                 GameCfg.historyType = GameCfg.GameType;
 
                 if (GameCfg.GameType == pb.GameType.QiHuo) {
-                    GlobalHandle.onCmdGameStartQuoteQueryQH(GameCfg.enterGameCache, this.loadGame.bind(this));
+                    GlobalHandle.onCmdGameStartQuoteQueryQH(GameCfg.enterGameConf, this.loadGame.bind(this));
                 }
                 // else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
 
                 // }
                 else {
-                    GlobalHandle.onCmdGameStartQuoteQuery(GameCfg.enterGameCache, this.loadGame.bind(this))
+                    GlobalHandle.onCmdGameStartQuoteQuery(GameCfg.enterGameConf, this.loadGame.bind(this))
                 }
             });
         }

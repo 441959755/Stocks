@@ -3,7 +3,6 @@ import { pb } from "../../../protos/proto";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
-import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import { LocationPoint } from "../../../sctiprs/global/LocationPoint";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
@@ -34,9 +33,8 @@ export default class NewClass extends cc.Component {
     @property(cc.ScrollView)
     scroll: cc.ScrollView = null;
 
-    //  StageRankData = null;
-
     onLoad() {
+
         GlobalEvent.on(EventCfg.GETCGSDATA, (info) => {
 
             console.log('闯关赛数据：' + JSON.stringify(info));
@@ -44,10 +42,10 @@ export default class NewClass extends cc.Component {
             GameCfg.RoomGameData = info;
 
             let code = info.code + '';
+
             if (code.length >= 7) {
                 code = code.slice(1);
             }
-
             let items = GameCfgText.getGPPKItemInfo(code);
             GameCfg.data[0].code = info.code;
             GameCfg.data[0].name = items[1];
@@ -55,7 +53,6 @@ export default class NewClass extends cc.Component {
             GameCfg.data[0].circulate = items[4];
 
             info.quotes && (info.quotes.items.forEach((el, index) => {
-
                 let ye = (el.timestamp + '').slice(0, 4);
                 let mon = (el.timestamp + '').slice(4, 6);
                 let da = (el.timestamp + '').slice(6);
@@ -79,8 +76,8 @@ export default class NewClass extends cc.Component {
 
             })
             )
-            GameData.huizhidatas = info.tsQuoteStart + 1;
-            GameCfg.huizhidatas = info.tsQuoteStart + 1;
+            GameData.huizhidatas = parseInt(info.tsQuoteStart) + 1;
+            GameCfg.huizhidatas = parseInt(info.tsQuoteStart) + 1;
             GameData.Players[1] = info.players[0].gd;
             GlobalEvent.emit('SHOWOTHERPLAYER');
 
@@ -135,9 +132,6 @@ export default class NewClass extends cc.Component {
         }
         //挑战
         else if (name == 'tzBtn') {
-
-            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '小程序不能打开闯关赛功能，请前往完整APP体验');
-            return;
 
             let stage = parseInt(data) - 1;
 
@@ -203,7 +197,6 @@ export default class NewClass extends cc.Component {
             this.onUpContent();
         })
     }
-
 
     // 查询当前一轮闯关赛配置数据
     reqGameCgsGetConf() {

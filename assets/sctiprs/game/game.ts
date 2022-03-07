@@ -67,12 +67,10 @@ export default class NewClass extends cc.Component {
         }
     }
 
-    protected onDestroy() {
-        GlobalEvent.off(EventCfg.OPENSTATLAYER);
-        GlobalEvent.off(EventCfg.UPDATEOTHERPLAYEROPT);
-    }
+
 
     setColor() {
+
         //黑底
         if (GameCfg.GameSet.isBW) {
             GameCfg.MAColor[0] = new cc.Color().fromHEX('#ffffff');
@@ -278,6 +276,11 @@ export default class NewClass extends cc.Component {
     //同步游戏操作
     updateOtherPlayerOpt(opt) {
         UpGameOpt.UpdataOtherPlayerOpt(opt);
+    }
+
+    protected onDestroy() {
+        GlobalEvent.off(EventCfg.OPENSTATLAYER);
+        GlobalEvent.off(EventCfg.UPDATEOTHERPLAYEROPT);
     }
 
 }

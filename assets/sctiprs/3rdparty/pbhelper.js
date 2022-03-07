@@ -37,13 +37,6 @@ PBHelper.prototype = {
         return buff;
     },
 
-    onReqRoomEnterBuff(data) {
-        let CmdRoomEnter = pb.CmdRoomEnter;
-        let message = CmdRoomEnter.create(data);
-        let buff = CmdRoomEnter.encode(message).finish();
-        return buff;
-    },
-
     selectBlackData(id, buff) {
 
         if (id == pb.MessageId.Rep_Game_Login) {
@@ -87,6 +80,7 @@ PBHelper.prototype = {
 
         //当日首次登录会收到
         else if (id == pb.MessageId.Sync_S2C_FirstLoginToday) {
+            console.log('首次登入');
             GameData.firstGame = true;
         } else if (id == pb.MessageId.Rep_Game_Start
             || id == pb.MessageId.Rep_Hall_EditIcon
@@ -186,12 +180,17 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Sync_Room_Leave || id == pb.MessageId.Sync_Room_Leave_Self) {
             let SyncRoomLeave = pb.SyncRoomLeave;
             let data = SyncRoomLeave.decode(new Uint8Array(buff));
-            console.log('玩家离开房间' + JSON.stringify(data));
 
             if (data.uid == GameData.userID) {
                 GameData.roomId = 0;
                 GameData.JJCapital = 0;
+                GameData.Players = [];
+                GameData.RoomType = 0;
             }
+            // else {
+            //     GameData.Players.length = 1;
+            //     GameData.Players[1] = null;
+            // }
 
             GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }
@@ -250,9 +249,9 @@ PBHelper.prototype = {
             console.log('游戏结果' + JSON.stringify(result));
             GameCfg.RoomGameData = result;
 
-            setTimeout(() => {
-                GlobalEvent.emit(EventCfg.GAMEOVEER);
-            }, 1000);
+            // setTimeout(() => {
+            GlobalEvent.emit(EventCfg.GAMEOVEER);
+            //  }, 1000);
         }
         //离开房间应答
         else if (id == pb.MessageId.Rep_Room_Leave) {
@@ -308,7 +307,9 @@ PBHelper.prototype = {
 
         }
         // 准备就绪应答（无）
-        else if (id == pb.MessageId.Rep_Room_Ready) {
+        // 领取每日看广告奖励应答：无
+        else if (id == pb.MessageId.Rep_Room_Ready ||
+            id == pb.MessageId.Rep_Hall_GetDailyAdAward) {
 
         }
         //查询AI选股的股票列表响应：

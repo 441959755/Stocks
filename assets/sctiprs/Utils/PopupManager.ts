@@ -24,8 +24,11 @@ export default class PopupManager {
         GlobalEvent.on(EventCfg.TIPSTEXTSHOW, this.TipsText.bind(this), this);
         GlobalEvent.on(EventCfg.TIPSTEXTHIDE, this.tipsTextHide.bind(this), this);
 
+
         GlobalEvent.on(EventCfg.OPENOTHERPLAYERINFO, this.openOtherPlayerInfoLayer.bind(this), this);
         this.arrPop = new PopupList();
+
+        this.openNode(cc.find('Canvas'), this.nodes['Prefabs/loading'], 'Prefabs/loading', 99)
     }
 
     private static loadingHide() {
@@ -91,6 +94,12 @@ export default class PopupManager {
         })
     }
 
+    public static hideTipsBox(name) {
+        if (this.nodes['Prefabs/' + name]) {
+            this.nodes['Prefabs/' + name].active = false;
+        }
+    }
+
     //
     public static loadVipExplain() {
         this.openNode(cc.find('Canvas'), this.nodes['Prefabs/vipExplain'], 'Prefabs/vipExplain', 50, (node) => {
@@ -153,6 +162,7 @@ export default class PopupManager {
 
         this.arrPop.clear();
         this.arrPop = null;
+        this.isLoading = false;
     }
 
 

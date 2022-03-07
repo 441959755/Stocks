@@ -421,6 +421,25 @@ export default class NewClass extends cc.Component {
 			let info = DrawData.getBukoCount();
 			this.priceLabel[0].string = '盈利操作次数：' + info.yCount;
 			this.priceLabel[1].string = '亏损操作次数：' + info.sCount;
+
+			if (!GameCfg.GameSet.isFC) {
+				dxnode.active = false;
+				let info = this.node.getChildByName('ZBInfo');
+				info.active = true;
+				let name = info.getChildByName('name');
+				let sT = info.getChildByName('startTime');
+				let et = sT.getChildByName('endTime');
+
+				let code = GameCfg.data[0].code + '';
+				if (code.length >= 7) {
+					code = code.slice(1);
+				}
+
+				name.getComponent(cc.Label).string = GameCfg.data[0].name + ' ' + code;
+
+				sT.getComponent(cc.Label).string = this.gpData[GameData.huizhidatas - 1].day.replace(/-/g, '/');
+				et.getComponent(cc.Label).string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
+			}
 		}
 
 		else if (GameCfg.GameType == pb.GameType.QiHuo) {
@@ -569,8 +588,6 @@ export default class NewClass extends cc.Component {
 			state: null,
 		};
 		this.isFlag = false;
-
-
 	}
 
 	onEnable() {
@@ -669,9 +686,34 @@ export default class NewClass extends cc.Component {
 			this.tipsLabel1.node.active = false;
 			dxnode.active = true;
 			if (!GameCfg.GameSet.isFC || GameCfg.GAMEFUPAN) {
+				this.tipsLabel.node.active = true;
+				this.tipsLabel1.node.active = false;
 				dxnode.children[2].active = false;
 				dxnode.children[1].active = false;
 				dxnode.getComponent(cc.Layout).spacingX = 100;
+				dxnode.active = false;
+				let info = this.node.getChildByName('ZBInfo');
+				info.active = true;
+				let name = info.getChildByName('name');
+				let sT = info.getChildByName('startTime');
+				let et = sT.getChildByName('endTime');
+				if (GameCfg.GameSet.search == '随机选股') {
+					name.getComponent(cc.Label).string = '股票名称：' + '???? ' + ' ' + ' ???? ';
+				} else {
+					let code = GameCfg.data[0].code + '';
+					if (code.length >= 7) {
+						code = code.slice(1);
+					}
+					name.getComponent(cc.Label).string = GameCfg.data[0].name + ' ' + code;
+				}
+				if (GameCfg.GameSet.year == '随机') {
+					sT.getComponent(cc.Label).string = '起始时间：' + '????.??.??';
+					et.getComponent(cc.Label).string = '结束时间: ' + '????.??.??';
+				} else {
+					sT.getComponent(cc.Label).string = this.gpData[GameData.huizhidatas - 1].day.replace(/-/g, '/');
+					et.getComponent(cc.Label).string = this.gpData[this.gpData.length - 1].day.replace(/-/g, '/');
+				}
+
 			} else if (GameCfg.GameSet.isFC) {
 				dxnode.children[2].active = true;
 				dxnode.children[1].active = true;
@@ -733,8 +775,8 @@ export default class NewClass extends cc.Component {
 		this.roundNumber = this.gpData.length - GameCfg.huizhidatas;
 
 		if (GameCfg.GameType == pb.GameType.QiHuo || GameCfg.GameType == pb.GameType.ZhiBiao) {
-			if (this.roundNumber > GameCfg.enterGameCache.total - GameCfg.enterGameCache.reserve) {
-				this.roundNumber = GameCfg.enterGameCache.total - GameCfg.enterGameCache.reserve
+			if (this.roundNumber > GameCfg.enterGameConf.total - GameCfg.enterGameConf.reserve) {
+				this.roundNumber = GameCfg.enterGameConf.total - GameCfg.enterGameConf.reserve
 			}
 		}
 

@@ -168,7 +168,7 @@ export default class NewClass extends cc.Component {
             } else if (this._Lid == 4) {
                 index = 10; max = 240;
             } else if (this._Lid == 5) {
-                index = 120; max = 240;
+                index = 120; max = 250;
             }
             for (let i = index; i <= max; i++) {
                 arr.push(i);

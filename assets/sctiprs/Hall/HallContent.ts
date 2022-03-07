@@ -6,6 +6,10 @@ import GameCfgText from '../GameText';
 import LLWSDK from '../common/sdk/LLWSDK';
 import PopupManager from '../Utils/PopupManager';
 import GameCfg from '../game/GameCfg';
+import LLWConfig from '../common/config/LLWConfig';
+import PlatDefine from '../common/config/PlatDefine';
+import ComUtils from '../Utils/ComUtils';
+import GlobalHandle from '../global/GlobalHandle';
 
 const { ccclass, property } = cc._decorator;
 
@@ -17,8 +21,6 @@ export default class NewClass extends cc.Component {
 
 	@property([cc.Node])
 	Layers: cc.Node[] = [];
-
-	flags = [];
 
 	@property(cc.Sprite)
 	userHead: cc.Sprite = null;
@@ -35,14 +37,15 @@ export default class NewClass extends cc.Component {
 	@property(cc.Node)
 	vipImg: cc.Node = null;
 
+	//提示
 	@property(cc.Label)
 	pkLabel: cc.Label = null;
 
+	//提示
 	@property(cc.Label)
 	dkLabel: cc.Label = null;
 
 	onLoad() {
-
 		//性别更改
 		GlobalEvent.on(EventCfg.GENDERCHANGE, this.setUserGender.bind(this), this);
 
@@ -58,7 +61,6 @@ export default class NewClass extends cc.Component {
 		//vip
 		GlobalEvent.on(EventCfg.VIPCHANGE, this.setUserInfo.bind(this), this);
 
-		GlobalEvent.on('PKCount', this.setGameCoutn.bind(this), this);
 	}
 
 	setUserHead() {
@@ -87,30 +89,30 @@ export default class NewClass extends cc.Component {
 			this.changeToggle(3);
 		}
 
-		this.setGameCoutn();
+		if (GameData.firstGame) {
+			GameData.firstGame = false;
+			setTimeout(() => {
+				this.showFirstBox();
+			}, 200);
+		}
 	}
 
-	setGameCoutn() {
-		//	let time = new Date().toLocaleDateString();
-		//let pkCount = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + pb.GameType.JJ_PK) || 0;
-		//	this.pkLabel.string = '500金币';
-		//let dkCount = cc.sys.localStorage.getItem(time + 'ADSUCCEED' + pb.GameType.JJ_DuoKong) || 0;
-		//	this.dkLabel.string = '500金币';
+	//首次登入弹框
+	showFirstBox() {
+		this.changeToggle(4);
+		PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/fl/dailyWelfare', 10, (node) => {
+			let handle = node.getComponent('DailyWelfare');
+			handle && (handle.onShow());
+		});
+
 	}
 
+	//首次上传用户信息
 	upLoadUserInfo() {
-
-		let WeChatInfo;
 
 		if (!LLWSDK.getSDK().loginPlat) { return }
 
-		if (LLWSDK.getSDK().loginPlat == pb.LoginType.QQ || LLWSDK.getSDK().loginPlat == pb.LoginType.WeChat || LLWSDK.getSDK().loginPlat == pb.LoginType.WeChat_MiniProg) {
-
-			WeChatInfo = cc.sys.localStorage.getItem('QQInfo');
-			cc.sys.localStorage.setItem('fristInfo', 1);
-		}
-
-		if (!WeChatInfo) {
+		if (GameData.gameData.is_edited_nick) {
 
 			{
 				let data = {
@@ -131,23 +133,26 @@ export default class NewClass extends cc.Component {
 					console.log('GameData.gender:' + JSON.stringify(info));
 				})
 			}
-
-			// {
-			// 	let data = {
-			// 		uid: GameData.userID,
-			// 		icon: new Uint8Array(GameData.headimgurl),
-			// 	}
-			// 	let CmdUploadIcon = pb.CmdUploadIcon;
-			// 	let message = CmdUploadIcon.create(data);
-			// 	let buff = CmdUploadIcon.encode(message).finish();
-
-			// 	socket.send(pb.MessageId.Req_Hall_UploadIcon, buff, (info) => {
-			// 		console.log('GameData.headImg:' + JSON.stringify(info));
-			// 	})
-
-			// }
 		}
+
+		// {
+		// 	let data = {
+		// 		uid: GameData.userID,
+		// 		//icon: new Uint8Array(GameData.headimgurl),
+		// 		icon: GameData.headimgurl,
+		// 	}
+		// 	let CmdUploadIcon = pb.CmdUploadIcon;
+		// 	let message = CmdUploadIcon.create(data);
+		// 	let buff = CmdUploadIcon.encode(message).finish();
+
+		// 	socket.send(pb.MessageId.Req_Hall_UploadIcon, buff, (info) => {
+		// 		console.log('GameData.headImg:' + JSON.stringify(info));
+		// 	})
+
+		// }
+
 	}
+
 
 	setUserInfo() {
 		this.userLevel.string = 'LV:' + (GameData.properties[pb.GamePropertyId.Level] || 1) + '';
@@ -166,12 +171,12 @@ export default class NewClass extends cc.Component {
 
 	initToggle() {
 		this.toggles.forEach((el, index) => {
-			this.flags[index] = el.isChecked;
 			this.Layers[index].active = el.isChecked;
 		});
 	}
 
 	changeToggle(index) {
+
 		this.toggles.forEach((el, i) => {
 			el.isChecked = false;
 			if (index == i) {
@@ -192,49 +197,66 @@ export default class NewClass extends cc.Component {
 		if (name == 'main_xl_smxl') {
 			//开关
 			GameCfgText.getSwitchModule(1, () => {
+
 				GameCfg.GameType = pb.GameType.ShuangMang;
 				GlobalEvent.emit(EventCfg.OPENSMLAYER);
+
 			})
 		}
 
 		//指标
 		else if (name == 'main_xl_zbxl') {
+
 			GameCfgText.getSwitchModule(4, () => {
+
 				GameCfg.GameType = pb.GameType.ZhiBiao;
 				GlobalEvent.emit(EventCfg.OPENZBLAYER);
+
 			})
 		}
 
 		//定向
 		else if (name == 'main_xl_dxxl') {
+
 			GameCfgText.getSwitchModule(2, () => {
+
 				GameCfg.GameType = pb.GameType.DingXiang;
 				GlobalEvent.emit(EventCfg.OPENDXLAYER);
+
 			})
 		}
 
 		//期货
 		else if (name == 'main_xl_qhxl') {
+
 			GameCfgText.getSwitchModule(3, () => {
+
 				GameCfg.GameType = pb.GameType.QiHuo;
 				GlobalEvent.emit(EventCfg.OPENQHLAYER);
+
 			})
 
 		}
 
 		//分时
 		else if (name == 'main_xl_fsxl') {
+
 			GameCfgText.getSwitchModule(6, () => {
+
 				GameCfg.GameType = pb.GameType.FenShi;
 				GlobalEvent.emit(EventCfg.OPENFENSHI);
+
 			})
 		}
 
 		//条件
 		else if (name == 'main_xl_tjdxl') {
+
 			GameCfgText.getSwitchModule(5, () => {
+
 				GameCfg.GameType = pb.GameType.TiaoJianDan;
 				GlobalEvent.emit(EventCfg.OPENTIAOJIANDAN);
+
 			})
 		}
 
@@ -312,9 +334,6 @@ export default class NewClass extends cc.Component {
 
 		//打开闯关赛
 		else if (name == 'main_jj_cgs') {
-
-			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '该功能正在开发中，敬请期待');
-			return;
 			GameCfgText.getSwitchModule(9, () => {
 				GameCfg.GameType = pb.GameType.JJ_ChuangGuan;
 				GameCfg.GameSet = GameData.JJPKSet;
@@ -331,13 +350,46 @@ export default class NewClass extends cc.Component {
 
 		//点击创建对战
 		else if (name == 'main_jj_cjdz') {
+
+			// GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '暂不开放，敬请期待！');
+			// return;
 			GameCfgText.getSwitchModule(10, () => {
-				GlobalEvent.emit(EventCfg.OPENCJDZ);
+				//	if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
+				let info = {
+					game: pb.GameType.JJ_PK,
+					uid: GameData.userID,
+					capital: 0,
+					junXian: ComUtils.getJJXunXian(),
+				}
+				let CmdRoomCreate = pb.CmdRoomCreate;
+				let message = CmdRoomCreate.create(info);
+				let buff = CmdRoomCreate.encode(message).finish();
+
+				socket.send(pb.MessageId.Req_Room_Create, buff, (res) => {
+					console.log('创建房间应答' + JSON.stringify(res));
+					GlobalEvent.emit(EventCfg.LOADINGHIDE);
+					if (res && res.err) {
+						let err = GlobalHandle.getErrorCodeByCode(res.err.code);
+						GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, err);
+						return;
+					}
+					GameData.RoomType = 1;
+					GameData.roomId = res.id;
+					GlobalEvent.emit(EventCfg.OPENROOM);
+
+				})
+
+				// }
+				// else {
+				// 	GlobalEvent.emit(EventCfg.OPENCJDZ);
+				// }
 			})
 		}
 
 		//加入对战
 		else if (name == 'main_jj_jrdz') {
+			// GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '暂不开放，敬请期待！');
+			// return;
 			GameCfgText.getSwitchModule(11, () => {
 				GlobalEvent.emit(EventCfg.OPENJRDZ);
 			})
@@ -394,17 +446,20 @@ export default class NewClass extends cc.Component {
 
 		//免费砖石
 		else if (name == 'main_fl_mfzs') {
-			GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '暂未开放！');
+			PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/fl/dailyWelfare', 10, (node) => {
+				let handle = node.getComponent('DailyWelfare');
+				handle && (handle.onShow());
+			});
 		}
 
 		//每周豪礼
 		else if (name == 'main_fl_mzhl') {
-			GlobalEvent.emit('OPENWEEKLYHAOLI');
+			PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/fl/weeklyHaoLI', 10, null);
 		}
 
 		//7日奖励
 		else if (name == 'main_fl_7day') {
-			GlobalEvent.emit('OPENSIGNIN');
+			PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/fl/signIn', 10, null);
 		}
 	}
 
@@ -413,6 +468,5 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.HEADIMGCHANGE);
 		GlobalEvent.off(EventCfg.NAMECHANGE);
 		GlobalEvent.off(EventCfg.LEVELCHANGE)
-		GlobalEvent.off('PKCount');
 	}
 }

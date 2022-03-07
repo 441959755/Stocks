@@ -273,11 +273,11 @@ export default class NewClass extends cc.Component {
             GameCfg.data[0].circulate = items[4];
             GameCfg.data[0].ktype = data.ktype;
 
-            GameCfg.enterGameCache = data;
+            GameCfg.enterGameConf = data;
 
             console.log('条件单：' + JSON.stringify(data));
 
-            GlobalHandle.enterGameSetout(GameCfg.enterGameCache, () => {
+            GlobalHandle.enterGameSetout(GameCfg.enterGameConf, () => {
                 GameData.huizhidatas = 100;
                 GameCfg.huizhidatas = 100;
                 GlobalEvent.emit(EventCfg.OPENTJDGAME);

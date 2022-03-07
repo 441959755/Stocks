@@ -1,6 +1,5 @@
 
 import ComUtils from '../sctiprs/Utils/ComUtils';
-
 import GameData from "./GameData";
 import { pb } from "../protos/proto";
 import HttpUtils from "./common/net/HttpUtils";
@@ -13,8 +12,6 @@ import GameCfg from './game/GameCfg';
 export default class GameCfgText {
 
     public static url = LLWConfig.LoginURL + '/conf/';
-
-    // public static url = 'http://login.cgdr168.com/conf/';
 
     public static curDayIsLoad = false;  //今天是否下载
 
@@ -412,7 +409,8 @@ export default class GameCfgText {
     }
 
     //根据时间随机先股票xx
-    public static getItemsByTime(time) {
+    public static getItemsByTime(time, count) {
+        count = count || 100;
         if (!parseInt(time)) {
             console.log('时间有误');
             return
@@ -532,17 +530,16 @@ export default class GameCfgText {
             GameCfg.data[0].circulate = items[4];
             GameCfg.data[0].ktype = data.ktype;
 
-            GameCfg.enterGameCache = data;
+            GameCfg.enterGameConf = data;
         }
     }
-
 
     //随机DX一只股票
     public static getGPDXByRandom(cb?) {
 
         let data = {
-            ktype: GameCfg.enterGameCache.ktype,
-            kstyle: GameCfg.enterGameCache.kstyle,
+            ktype: GameCfg.enterGameConf.ktype,
+            kstyle: GameCfg.enterGameConf.kstyle,
             code: null,
             from: null,
             total: parseInt(GameData.DXSet.KLine) + 100,
@@ -616,7 +613,7 @@ export default class GameCfgText {
         GameCfg.data[0].name = items[1];
 
         GameCfg.data[0].circulate = items[4];
-        GameCfg.enterGameCache = data;
+        GameCfg.enterGameConf = data;
 
         console.log('给的数据:' + JSON.stringify(data));
     }
@@ -625,7 +622,7 @@ export default class GameCfgText {
     public static getQHQHByRandom(cb?) {
 
         let data = {
-            ktype: GameCfg.enterGameCache.ktype,
+            ktype: GameCfg.enterGameConf.ktype,
             kstyle: pb.KStyle.Random,
             code: null,
             from: null,
@@ -686,7 +683,7 @@ export default class GameCfgText {
 
             data.from = ye + '' + mon + '' + da;
         }
-        GameCfg.enterGameCache = data;
+        GameCfg.enterGameConf = data;
 
         GameCfg.data[0].code = items[0];
         GameCfg.data[0].data = [];
@@ -697,7 +694,7 @@ export default class GameCfgText {
 
     public static getGPZBByRandom(cb?) {
         let data = {
-            ktype: GameCfg.enterGameCache.ktype,     //4 30分钟  5  60分钟  10  日   11周
+            ktype: GameCfg.enterGameConf.ktype,     //4 30分钟  5  60分钟  10  日   11周
             kstyle: 0,      // 0随机行情   1震荡行情  2单边向上行情 3单边向下行情
             code: null,       //股票代码（0表示忽略和随机）
             from: null,       //// 开始时间戳（不能为0，查询日K行情的格式为：YYYYMMDD；查询分时行情的格式为：HHMMSS）
@@ -775,7 +772,42 @@ export default class GameCfgText {
         GameCfg.data[0].code = items[0];
         GameCfg.data[0].circulate = items[4];
         console.log('给的数据:' + JSON.stringify(data));
-        GameCfg.enterGameCache = data;
+        GameCfg.enterGameConf = data;
+
+    }
+
+    public static getEnterGameConf() {
+
+        // let data = {
+        //     ktype: pb.KType.Day,
+        //     kstyle: pb.KStyle.Random,
+        //     code: null,
+        //     from: null,
+        //     total: 250,
+        //     to: 0,
+        //     reserve: 100,
+        // }
+        let gpList;
+
+        if (GameCfg.GameType == pb.GameType.QiHuo) {
+            gpList = this.qihuoList;
+        }
+        else {
+            gpList = this.stockList;
+        }
+
+        if (!GameCfg.enterGameConf.code) {
+            //没有选择时间
+            if (!GameCfg.enterGameConf.from) {
+
+            }
+            //
+            else {
+
+            }
+        }
+
+
 
     }
 

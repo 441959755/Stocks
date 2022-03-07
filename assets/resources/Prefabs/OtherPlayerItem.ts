@@ -129,6 +129,11 @@ export default class NewClass extends cc.Component {
         let name = event.target.name;
         if (name == 'cgs_fupan') {
 
+            if (!GameData.vipStatus) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '开启VIP或解锁该功能取限制');
+                return;
+            }
+
             GameData.Players[1] = this.playeInfo;
 
             GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.JJPKSet));
@@ -182,7 +187,7 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'btn_xl') {
 
-            let gameCount = EnterGameControl.onCurIsEnterGame();
+            let gameCount = EnterGameControl.onCurWXIsEnterGame();
 
             if (gameCount.status == 3) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
@@ -205,6 +210,11 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'btn_tz') {
+
+            if (!GameData.vipStatus) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '开启VIP或解锁该功能取限制');
+                return;
+            }
 
             GameData.Players[1] = this.playeInfo;
 
@@ -285,7 +295,7 @@ export default class NewClass extends cc.Component {
 
         console.log('进入数据：' + JSON.stringify(cache));
 
-        GameCfg.enterGameCache = cache;
+        GameCfg.enterGameConf = cache;
 
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 

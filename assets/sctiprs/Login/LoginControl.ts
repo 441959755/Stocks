@@ -8,7 +8,6 @@ import GameData from "../GameData";
 import GameCfgText from "../GameText";
 import EventCfg from "../Utils/EventCfg";
 import ComUtils from "../Utils/ComUtils";
-
 import LLWConfig from "../common/config/LLWConfig";
 import PlatDefine from "../common/config/PlatDefine";
 
@@ -31,6 +30,8 @@ export default class LoginHandle extends cc.Component {
         GameCfgText.LoadGameConf();
 
         ComUtils.resetSize(this.node);
+
+        //  LLWSDK.getSDK().onShow();
     }
 
     init() {
@@ -59,6 +60,7 @@ export default class LoginHandle extends cc.Component {
 
         // if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
         //     decoded.gameAddr = 'wss://www.cgdr168.com/ws';
+        //     console.log(decoded.token + decoded.uid + decoded.gameAddr);
         // }
 
         if (decoded) {
@@ -97,16 +99,17 @@ export default class LoginHandle extends cc.Component {
         this.initData();
 
         this.init();
+
+        LLWSDK.getSDK().onShareAppMessage();
     }
 
     openNoticeLayer() {
-        PopupManager.openNode(this.node, null, 'Prefabs/stopNoticeLayer', 99, null);
+        //  PopupManager.openNode(this.node, null, 'Prefabs/stopNoticeLayer', 99, null);
     }
 
     protected onDestroy(): void {
         GameCfgText.releaseRes();
         PopupManager.delPopupNode();
-        GlobalEvent.allClear();
     }
 
     initData() {
@@ -140,7 +143,7 @@ export default class LoginHandle extends cc.Component {
 
         AudioUtils.setEffectsVolume(GameData.SMSet.isSound);
 
-        GameData.SelectBk = new SelectBk();
+        GameData.SelectBk = new SelectBk().arr;
 
         GameData.headimgurl = null;
 

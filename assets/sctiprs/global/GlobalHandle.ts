@@ -15,6 +15,7 @@ export default class GlobalHandle {
     public static Activitys = null;
 
     public static enterGameSetout(data, call, flag?) {
+
         GameCfg.data[0].data = [];
 
         if (!flag) {

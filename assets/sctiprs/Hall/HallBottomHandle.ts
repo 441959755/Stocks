@@ -8,7 +8,7 @@ const { ccclass, property } = cc._decorator;
 export default class NewClass extends cc.Component {
 
     protected onLoad(): void {
-
+        //通知界面
         GlobalEvent.on('OPENNOTICELAYER', this.openNoticelayer.bind(this), this);
 
         //打开排行榜
@@ -16,7 +16,6 @@ export default class NewClass extends cc.Component {
 
         //打开商城
         GlobalEvent.on('OPENSHOPLAYER', this.openShopLayer.bind(this), this);
-
     }
 
     //打开公告
@@ -24,6 +23,7 @@ export default class NewClass extends cc.Component {
         PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/noticeLayer', 10, null);
     }
 
+    //打开排行榜
     openRankingList() {
         PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/rankingList', 10, null);
     }
@@ -35,7 +35,7 @@ export default class NewClass extends cc.Component {
         })
     }
 
-    onClick(event, data) {
+    onClick(event, customData) {
 
         let name = event.target.name;
 
@@ -75,6 +75,5 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off('OPENRANKINGLIST');
         GlobalEvent.off('OPENSHOPLAYER');
     }
-
 
 }

@@ -1,5 +1,6 @@
 
 import { pb } from "../../../protos/proto";
+import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import StrategyAIData from "../../../sctiprs/game/StrategyAIData";
 import GameData from "../../../sctiprs/GameData";
@@ -375,6 +376,10 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
         }
 
+        else if (name == 'lx_fx') {
+            LLWSDK.getSDK().shareAppMessage();
+        }
+
     }
 
     onQuitGame() {
@@ -386,7 +391,7 @@ export default class NewClass extends cc.Component {
         GameCfg.GAMEFUPAN = false;
         GameCfg.history.allRate = 0;
         StrategyAIData.onClearData();
-        GameCfg.enterGameCache = null;
+        GameCfg.enterGameConf = null;
         GameCfg.RoomGameData = null;
         GlobalEvent.emit(EventCfg.LEAVEGAME);
     }

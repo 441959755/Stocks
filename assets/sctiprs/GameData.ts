@@ -1,6 +1,7 @@
 import GlobalEvent from "./Utils/GlobalEvent";
 import EventCfg from "./Utils/EventCfg";
 import GameCfg from "./game/GameCfg";
+import { pb } from "../protos/proto";
 
 export default class GameData {
 
@@ -319,5 +320,22 @@ export default class GameData {
         }
         return 0;
     }
+
+    //获取VIp状态
+    public static get vipStatus() {
+        if (new Date().getTime() / 1000 > GameData.properties[pb.GamePropertyId.VipExpiration]) {
+            return false;
+        }
+        return true;
+    }
+
+
+    public static ZNCurIndex = null;
+
+
+    public static query = null;
+
+
+    // public static nodeMaps: Map<any, any> = new Map();
 
 }

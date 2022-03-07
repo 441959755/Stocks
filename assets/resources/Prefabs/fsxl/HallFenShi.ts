@@ -37,7 +37,8 @@ export default class NewClass extends cc.Component {
         this.editbox.node.on('editing-did-ended', (edit) => {
             let str = edit.string;
             if (str == '') {
-                this.editbox.string = '随机选股';
+                this.editbox.string = '';
+                this.editbox.placeholder = '随机选股';
                 return;
             }
             let datas = GameCfgText.stockList;
@@ -65,8 +66,8 @@ export default class NewClass extends cc.Component {
             if (!flag) {
 
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '没有找查到您要的股票.');
-                this.editbox.string = '随机选股';
-
+                this.editbox.string = '';
+                this.editbox.placeholder = '随机选股';
             } else {
 
                 this.contents[4].removeAllChildren();
@@ -97,7 +98,8 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on('TOAGAME', this.onStartGame.bind(this), this);
 
-        this.editbox.string = '随机选股';
+        //this.editbox.string = '随机选股';
+        this.editbox.placeholder = '随机选股';
         let f = new Date(new Date().getTime() - 1 * 24 * 60 * 60 * 1000);
         let y = f.getFullYear() + '';
         let m = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
@@ -285,7 +287,8 @@ export default class NewClass extends cc.Component {
         if (!times) { return }
         if (times.end < ComUtils.fromatTime1((new Date().getTime() - 14 * 24 * 60 * 60 * 1000) / 1000)) {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '没有最新能两周数据');
-            this.editbox.string = '随机选股';
+            this.editbox.string = '';
+            this.editbox.placeholder = '随机选股';
         }
     }
 
@@ -366,7 +369,7 @@ export default class NewClass extends cc.Component {
         }
 
         let items1;
-        if (this.editbox.string == '随机选股') {
+        if (this.editbox.string == '随机选股' || this.editbox.string == '') {
             items1 = GameCfgText.getItemsByTime1();
             code = items1[0];
         }

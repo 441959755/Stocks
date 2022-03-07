@@ -224,11 +224,11 @@ export default class NewClass extends cc.Component {
             this.cclLabel.node.parent.x = 10;
             this.voltext.x = 10;
         } else {
-            this.MACDLabels[0].node.parent.x = 102;
-            this.KDJLabels[0].node.parent.x = 102;
-            this.RSILabels[0].node.parent.x = 102;
-            this.cclLabel.node.parent.x = 102;
-            this.voltext.x = 102;
+            this.MACDLabels[0].node.parent.x = 190;
+            this.KDJLabels[0].node.parent.x = 190;
+            this.RSILabels[0].node.parent.x = 190;
+            this.cclLabel.node.parent.x = 190;
+            this.voltext.x = 190;
         }
     }
 
@@ -725,7 +725,7 @@ export default class NewClass extends cc.Component {
             ctx.strokeColor = col;
             col = null;
         }
-        DrawUtils.drawRect(ctx, x + 2, y, w - 2, h, col);
+        DrawUtils.drawRect(ctx, x + 2, y, w - 5, h, col);
     }
 
     protected onDestroy() {

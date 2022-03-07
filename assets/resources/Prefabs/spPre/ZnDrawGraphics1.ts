@@ -96,6 +96,7 @@ export default class NewClass extends cc.Component {
     ktype = null;
 
     onEnable() {
+
         GlobalEvent.on('onDrawGrap', (arr, ktype) => {
             arr && (this.viweData = arr)
             ktype && (this.ktype = ktype)
@@ -112,9 +113,6 @@ export default class NewClass extends cc.Component {
         }, this)
     }
 
-    start() {
-
-    }
 
     initData() {
         this.DIFList = DrawData.DIFList;

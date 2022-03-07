@@ -9,6 +9,7 @@ import ComUtils from '../Utils/ComUtils';
 import GlobalHandle from '../global/GlobalHandle';
 import GameCfg from '../game/GameCfg';
 import LLWSDK from '../common/sdk/LLWSDK';
+import LLWConfig from '../common/config/LLWConfig';
 
 const { ccclass, property } = cc._decorator;
 
@@ -34,7 +35,6 @@ export default class NewClass extends cc.Component {
     Matchfalg = false;
 
     onLoad() {
-        LLWSDK.getSDK().onShareAppMessage();
 
         PopupManager.init();
 
@@ -55,12 +55,6 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
 
-        //打开每周豪礼
-        GlobalEvent.on('OPENWEEKLYHAOLI', this.openWeeklyHaoLi.bind(this), this);
-
-        //打开7天奖励
-        GlobalEvent.on('OPENSIGNIN', this.openSignIn.bind(this), this);
-
         GlobalEvent.on('onShowGobroke', this.onShowGobroke.bind(this), this);
 
         //匹配界面不弹窗邀请框
@@ -72,6 +66,7 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
+        LLWSDK.getSDK().onShow(this.addRoom.bind(this));
     }
 
     start() {
@@ -122,15 +117,14 @@ export default class NewClass extends cc.Component {
     }
 
     onShow() {
-        if (GameData.firstGame) {
-            GameData.firstGame = false;
-            this.showFirstBox();
-        }
-
         this.gameLayer.zIndex = 50;
         this.finalLayer.forEach(el => {
             el && (el.zIndex = 51);
         })
+
+        if (GameData.query) {
+            this.addRoom();
+        }
     }
 
     onDestroy() {
@@ -142,8 +136,6 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.off('OPENFRIENDINVITE');
         GlobalEvent.off('LOADGAME');
-        GlobalEvent.off('OPENWEEKLYHAOLI');
-        GlobalEvent.off('OPENSIGNIN');
         ComUtils.onDestory();
         PopupManager.delPopupNode();
         GameData.selfEnterRoomData = null;
@@ -158,7 +150,7 @@ export default class NewClass extends cc.Component {
 
     //首次登入弹框
     showFirstBox() {
-        return;
+        //  return;
         // this.openNode(this.firstBox, 'Prefabs/pop/firstBox', 99, (node) => {
         //     this.firstBox = node;
         //     GlobalEvent.emit(EventCfg.LOADINGHIDE);
@@ -172,15 +164,6 @@ export default class NewClass extends cc.Component {
     openFriendInvite() {
         PopupManager.openNode(this.node, null, 'Prefabs/friendInvite', 11, null);
     }
-
-    openWeeklyHaoLi() {
-        PopupManager.openNode(this.node, null, 'Prefabs/fl/weeklyHaoLI', 10, null);
-    }
-
-    openSignIn() {
-        PopupManager.openNode(this.node, null, 'Prefabs/fl/signIn', 10, null);
-    }
-
 
     openOtherHisLayer(data) {
         PopupManager.openNode(this.node, null, 'Prefabs/otherPlayerHisInfo', 12, (node) => {
@@ -228,6 +211,7 @@ export default class NewClass extends cc.Component {
             } else {
                 this.onShowInviteBox(data);
             }
+
         } else if (data.type == pb.MessageType.SystemNotice) {
 
             GameData.SysBroadcastList.push(data.text);
@@ -236,6 +220,7 @@ export default class NewClass extends cc.Component {
                 node.getComponent('SysBroadcast').onShowSysBroadcast(data.text);
             })
         }
+
     }
 
     //邀请框
@@ -288,12 +273,10 @@ export default class NewClass extends cc.Component {
             //  this.url = 'Prefabs/game/lxFinalLayer';
             this.index = 4;
         }
-
         // PopupManager.openNode(this.node, this.finalLayer[this.index], this.url, 51, (node) => {
         //     this.finalLayer[this.index] = node;
         //     this.finalLayer[this.index].active = false;
         // })
-
     }
 
     //离开游戏
@@ -347,7 +330,6 @@ export default class NewClass extends cc.Component {
             if (GameData.properties[pb.GamePropertyId.Gold] < 1000) {
                 this.onShowGobroke();
             }
-
         }, 800);
     }
 
@@ -358,36 +340,67 @@ export default class NewClass extends cc.Component {
             return
         }
 
+        //  setTimeout(() => {
+        if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+            if (GameCfg.RoomGameData) {
+                let handle = this.finalLayer[this.index].getComponent('PKFinalHandle');
+                handle.onShow();
+            }
+
+            this.finalLayer[this.index].active = true;
+        }
+
+        else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
+
+            this.finalLayer[this.index].getComponent('CGSFinalHandle').onShow();
+
+            this.finalLayer[this.index].active = true;
+        }
+
+        else {
+            if (GameCfg.JJ_XUNLIAN) {
+                this.finalLayer[this.index].getComponent('LXFinalandle').onShow();
+                this.finalLayer[this.index].active = true;
+            } else {
+                this.finalLayer[this.index].getComponent('FinalHandle').onShow();
+
+                this.finalLayer[this.index].active = true;
+            }
+        }
+        //  }, 50)
+    }
+
+    addRoom() {
+
         setTimeout(() => {
-            if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+            console.log('addRoom');
+            let arr = ComUtils.getJJXunXian();
 
-                if (GameCfg.RoomGameData) {
-                    let handle = this.finalLayer[this.index].getComponent('PKFinalHandle');
-                    handle.onShow();
-                }
-
-                this.finalLayer[this.index].active = true;
+            let data = {
+                id: parseInt(GameData.query),
+                uid: GameData.userID,
+                junXian: arr,
             }
-            else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
 
-                this.finalLayer[this.index].getComponent('CGSFinalHandle').onShow();
+            let CmdRoomEnter = pb.CmdRoomEnter;
+            let message = CmdRoomEnter.create(data);
+            let buff = CmdRoomEnter.encode(message).finish();
 
-                this.finalLayer[this.index].active = true;
-            }
-            else {
-                if (GameCfg.JJ_XUNLIAN) {
+            socket.send(pb.MessageId.Req_Room_Enter, buff, (res) => {
 
-                    this.finalLayer[this.index].getComponent('LXFinalandle').onShow();
-
-                    this.finalLayer[this.index].active = true;
+                console.log('进入房间11' + JSON.stringify(res));
+                if (res.err) {
+                    GameData.RoomType = 0;
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '您输入的房间ID有误，请重新输入。');
                 } else {
-                    this.finalLayer[this.index].getComponent('FinalHandle').onShow();
-
-                    this.finalLayer[this.index].active = true;
+                    GameData.roomId = res.id;
+                    GameData.RoomType = 2;
                 }
-            }
-        }, 50)
+            })
 
+            GameData.RoomType = 2;
+            GameData.query = null;
+        }, 200);
     }
 }
 

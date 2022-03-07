@@ -146,7 +146,7 @@ export default class NewClass extends cc.Component {
                 let curTime = new Date().getTime() / 1000;
                 if (curTime < el.to && curTime >= el.from) {
 
-                    let iconUrl = LLWConfig.LOADIMGURL + '/img/activity/cgds_icon.png';
+                    let iconUrl = LLWConfig.LoginURL + '/img/activity/cgds_icon.png';
                     LoadUtils.load(iconUrl, (sp) => {
                         if (sp) {
                             this.cgdsBtn.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(sp);
@@ -176,7 +176,7 @@ export default class NewClass extends cc.Component {
                 let curTime = new Date().getTime() / 1000;
                 if (curTime < el.to && curTime >= el.from) {
 
-                    let iconUrl = LLWConfig.LOADIMGURL + '/img/activity/cgs_icon.png';
+                    let iconUrl = LLWConfig.LoginURL + '/img/activity/cgs_icon.png';
                     LoadUtils.load(iconUrl, (sp) => {
                         if (sp) {
                             this.cgsBtn.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(sp);
@@ -213,7 +213,7 @@ export default class NewClass extends cc.Component {
                 }
                 else if (curTime < el.to && curTime >= el.from) {
 
-                    let iconUrl = LLWConfig.LOADIMGURL + '/img/activity/' + el.id + '_icon.png';
+                    let iconUrl = LLWConfig.LoginURL + '/img/activity/' + el.id + '_icon.png';
 
                     LoadUtils.load(iconUrl, (sp) => {
                         if (sp) {

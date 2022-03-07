@@ -6,7 +6,6 @@ import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import List from "../../../sctiprs/Utils/List";
 import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -57,14 +56,17 @@ export default class NewClass extends cc.Component {
     @property(List)
     listV2: List = null;
 
+    @property(cc.Node)
+    toggle3mask: cc.Node = null;
+
     onLoad() {
+        //选择板块
         GlobalEvent.on(EventCfg.SELECTBK, this.onShowSelectBk.bind(this), this);
         //更新列表
         GlobalEvent.on('updateCollectList', this.getCollectList.bind(this), this);
     }
 
     onShowSelectBk() {
-
         let arr = [];
         this.AIStockList.forEach((el, index) => {
             let flag = this.getBKISShow(el.code);
@@ -76,10 +78,6 @@ export default class NewClass extends cc.Component {
         this.listV.numItems = this.AIStockList.length;
     }
 
-    onDestroy() {
-        GlobalEvent.off('shouCangAdd');
-        GlobalEvent.off(EventCfg.SELECTBK);
-    }
 
     start() {
 
@@ -92,7 +90,10 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
+
         GameCfg.GameType = 'ZNXG';
+        this.toggle3mask.active = !GameData.vipStatus;
+
     }
 
     onBtnToggle(event, data) {
@@ -104,10 +105,12 @@ export default class NewClass extends cc.Component {
 
         //AI买入信息
         if (name == 'toggle1') {
+
             this.scrollview.node.active = true;
             this.scrollview.content.children.forEach(el => {
                 el.active = true;;
             })
+
             if (this.AIStockList.length > 0) {
                 this.tipsNode.active = false;
             }
@@ -161,29 +164,24 @@ export default class NewClass extends cc.Component {
         else if (name == 'bkBtn') {
             GlobalEvent.emit(EventCfg.OPENBKBOX);
         }
+
+        else if (name == 'toggle3mask') {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '开启VIP或解锁该功能取限制');
+        }
     }
 
     //AI买入信号
     getAIStockList() {
 
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
         socket.send(pb.MessageId.Req_QueryAiStockList, null, (res) => {
-
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
             this.AIStockList = [];
-
             console.log('查询AI选股的股票列表' + JSON.stringify(res));
-
-            let time = new Date().getTime() / 1000;
-
+            // let time = new Date().getTime() / 1000;
             res.items.forEach(el => {
                 if (el.todaySignal < 0 && /*(time - el.tsUpdated) <= 48 * 60 * 60 &&*/ el.industry != '指数') {
                     this.AIStockList.push(el);
                 }
             });
-
             this.listV.numItems = this.AIStockList.length;
         })
 
@@ -197,12 +195,12 @@ export default class NewClass extends cc.Component {
 
     //AI收益信号
     getAIProfitList(data) {
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         let CmdQueryAiStockList = pb.CmdQueryAiStockList;
         let message = CmdQueryAiStockList.create(data);
         let buff = CmdQueryAiStockList.encode(message).finish();
+
         socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
             this.AIProfitList = [];
             this.AIProfitList = res.items;
             console.log('查询AI收益列表' + JSON.stringify(res));
@@ -219,7 +217,6 @@ export default class NewClass extends cc.Component {
 
     //收藏
     getCollectList() {
-
         this.collectList = JSON.parse(JSON.stringify(GameData.AIStockList));
 
         if (this.collectList.length <= 0) {
@@ -240,11 +237,9 @@ export default class NewClass extends cc.Component {
         let CmdQueryAiStockList = pb.CmdQueryAiStockList;
         let message = CmdQueryAiStockList.create(info);
         let buff = CmdQueryAiStockList.encode(message).finish();
-        GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         socket.send(pb.MessageId.Req_QueryAiStockList, buff, (res) => {
 
-            GlobalEvent.emit(EventCfg.LOADINGHIDE);
             console.log('查询AI选股的股票列表' + JSON.stringify(res));
             this.collectList = res.items;
             this.listV2.numItems = this.collectList.length;
@@ -289,6 +284,11 @@ export default class NewClass extends cc.Component {
         }
 
         return false;
+    }
+
+    onDestroy() {
+        GlobalEvent.off('shouCangAdd');
+        GlobalEvent.off(EventCfg.SELECTBK);
     }
 
 }

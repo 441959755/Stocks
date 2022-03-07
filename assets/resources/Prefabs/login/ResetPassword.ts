@@ -90,7 +90,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'btnzc') {
-            PopupManager.openProtocol('用户协议', LLWConfig.LOADIMGURL + '/user/decription1000.html');
+            PopupManager.openProtocol('用户协议', LLWConfig.LoginURL + '/user/decription1000.html');
         }
 
         else if (name == 'closeBtn') {
@@ -122,7 +122,7 @@ export default class NewClass extends cc.Component {
                 captcha: this.ac,
             }
 
-            let url = LLWConfig.LOADIMGURL + '/p';
+            let url = LLWConfig.LoginURL + '/p';
             //  let url = 'http://test.chaogugame.com/p';
             let CmdResetPwd = pb.CmdResetPwd;
             let message = CmdResetPwd.create(data1);
@@ -164,7 +164,7 @@ export default class NewClass extends cc.Component {
             return;
         }
 
-        let url = LLWConfig.LOADIMGURL + '/sms';
+        let url = LLWConfig.LoginURL + '/sms';
         //  let url = 'http://test.chaogugame.com/sms';
 
         // 获取短信验证码

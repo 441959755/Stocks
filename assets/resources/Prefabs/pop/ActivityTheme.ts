@@ -43,8 +43,8 @@ export default class NewClass extends cc.Component {
             return;
         }
         else {
-            let bgurl = LLWConfig.LOADIMGURL + '/img/activity/' + this.itemData.id + '_bg.png';
-            let btnUrl = LLWConfig.LOADIMGURL + '/img/activity/' + this.itemData.id + '_btn.png';
+            let bgurl = LLWConfig.LoginURL + '/img/activity/' + this.itemData.id + '_bg.png';
+            let btnUrl = LLWConfig.LoginURL + '/img/activity/' + this.itemData.id + '_btn.png';
 
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 

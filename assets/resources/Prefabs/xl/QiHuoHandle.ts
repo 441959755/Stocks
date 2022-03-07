@@ -266,6 +266,25 @@ export default class NewClass extends cc.Component {
 		this.box[7].getChildByName('label').getComponent(cc.Label).string = setDatas.ZLine;
 
 		this.onGameCountSow();
+		//	this.isValidClick();
+	}
+
+	isValidClick() {
+		if (GameData.QHSet.JYS == '随机') {
+			this.box[1].getChildByName('mask').active = true;
+			this.box[2].getChildByName('mask').active = true;
+		}
+		else {
+			this.box[1].getChildByName('mask').active = false;
+		}
+
+		if (GameData.QHSet.LXPZ == '随机') {
+			this.box[2].getChildByName('mask').active = true;
+		}
+		else {
+			this.box[2].getChildByName('mask').active = false;
+		}
+
 	}
 
 	/**
@@ -613,6 +632,8 @@ export default class NewClass extends cc.Component {
 			// }
 
 		}
+
+		//	this.isValidClick();
 	}
 
 	onAutoSetTime() {
@@ -1119,7 +1140,7 @@ export default class NewClass extends cc.Component {
 		GameCfg.data[0].data = [];
 		GameCfg.data[0].name = items[1] + '  ' + items[2] + items[3];
 		console.log(JSON.stringify(data));
-		GameCfg.enterGameCache = data;
+		GameCfg.enterGameConf = data;
 
 		//游戏开始
 		GlobalHandle.onCmdGameStartReq(() => {
@@ -1131,7 +1152,7 @@ export default class NewClass extends cc.Component {
 	onEnterGame() {
 		GameData.huizhidatas = 0;
 		GameCfg.huizhidatas = 0;
-		let fm = GameCfg.enterGameCache.from;
+		let fm = GameCfg.enterGameConf.from;
 		while (!GameData.huizhidatas) {
 
 			if (GameData.QHSet.year == '随机') {

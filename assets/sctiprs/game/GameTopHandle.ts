@@ -223,10 +223,10 @@ export default class NewClass extends cc.Component {
                 }
             }
             else {
-                if (GameData.Players[1].icon) {
+                if (GameData.Players[1] && GameData.Players[1].icon) {
                     head.spriteFrame = GameData.Players[1].icon;
                 }
-                if (GameData.Players[1].uid || GameData.Players[1].nickname) {
+                if (GameData.Players[1] && (GameData.Players[1].uid || GameData.Players[1].nickname)) {
                     name.string = '昵称：' + (GameData.Players[1].nickname || GameData.Players[1].nick);
 
                     // if (GameData.Players[1].properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
@@ -374,7 +374,7 @@ export default class NewClass extends cc.Component {
                 //其他人
                 {
                     if (GameData.Players[1]) {
-                        this.head2.spriteFrame = null;
+                        //   this.head2.spriteFrame = null;
                         if (GameData.Players[1].icon) {
                             this.head2.spriteFrame = GameData.Players[1].icon;
                         }
@@ -557,7 +557,7 @@ export default class NewClass extends cc.Component {
         }
 
         //离开游戏
-        GlobalEvent.emit(EventCfg.LEAVEGAME, 1);
+        GlobalEvent.emit(EventCfg.LEAVEGAME, !GameCfg.GAMEWAIT);
 
     }
 

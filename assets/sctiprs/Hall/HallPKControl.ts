@@ -73,6 +73,7 @@ export default class NewClass extends cc.Component {
      * 
      */
     openRoom() {
+        console.log('openRoom');
         PopupManager.openNode(this.node, null, 'Prefabs/pk/Room', 3, null);
     }
 
@@ -110,7 +111,6 @@ export default class NewClass extends cc.Component {
 
         //不是好友pk
         if (!GameData.JJCapital) {
-
             GlobalHandle.onLineInvite();
         }
 
@@ -131,11 +131,11 @@ export default class NewClass extends cc.Component {
         GameCfg.data[0].name = items[1];
         GameCfg.data[0].data = [];
         GameCfg.data[0].circulate = items[4];
-        GameCfg.data[0].tsGameFrom = info.tsGameFrom;
-        GameCfg.data[0].tsGameCur = info.tsGameCur;
+        GameCfg.data[0].tsGameFrom = parseInt(info.tsGameFrom);
+        GameCfg.data[0].tsGameCur = parseInt(info.tsGameCur);
 
-        GameData.huizhidatas = info.tsQuoteStart + 1;
-        GameCfg.huizhidatas = info.tsQuoteStart + 1;
+        GameData.huizhidatas = parseInt(info.tsQuoteStart) + 1;
+        GameCfg.huizhidatas = parseInt(info.tsQuoteStart) + 1;
 
         if (info.players[0].gd.uid == GameData.userID) {
             GameData.Players[0] = info.players[0].gd;
@@ -178,7 +178,11 @@ export default class NewClass extends cc.Component {
         })
         )
 
+        console.log(info.players[1].gd + '  ' + info.quotes);
+
         if (info.players[1].gd && info.quotes) {
+
+            console.log(GameData.RoomType);
 
             if (GameData.RoomType) {
 
@@ -214,13 +218,6 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.off(EventCfg.OPENMRTLAYER);
         GlobalEvent.off(EventCfg.RoomGameStatus);
-        LoadUtils.releaseRes('Prefabs/pk/matchPK');
-        LoadUtils.releaseRes('Prefabs/pk/CGSPK');
-        LoadUtils.releaseRes('Prefabs/pk/Room');
-        LoadUtils.releaseRes('Prefabs/pk/creatorRoom');
-        LoadUtils.releaseRes('Prefabs/pk/AddRoom');
-        LoadUtils.releaseRes('Prefabs/pk/cgsLvRank');
-        LoadUtils.releaseRes('Prefabs/pk/MRT');
     }
 
 }

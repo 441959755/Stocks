@@ -4,7 +4,6 @@ import GameCfg from "./GameCfg";
 import { pb } from "../../protos/proto";
 import ComUtils from '../Utils/ComUtils';
 import DrawData from "./DrawData";
-import Game = cc.Game;
 
 const { ccclass, property } = cc._decorator;
 
@@ -61,6 +60,9 @@ export default class NewClass extends cc.Component {
     tipsTitle: cc.Node = null;
 
     flag = false;
+
+    @property(cc.Node)
+    nodeClick: cc.Node = null;
 
     onLoad() {
 
@@ -360,18 +362,15 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GameSet.isBW) {
             this.rightBox.color = new cc.Color().fromHEX('#1E1E1E');
             this.tipsBox.color = new cc.Color().fromHEX('#1E1E1E');
-
-            this.selcetContent.color = new cc.Color().fromHEX('#1E1E1E');
-            this.selcetContent.parent.color = new cc.Color().fromHEX('#343434');
+            // this.selcetContent.color = new cc.Color().fromHEX('#1E1E1E');
+            // this.selcetContent.parent.color = new cc.Color().fromHEX('#343434');
         }
         //白
         else {
             this.rightBox.color = cc.Color.WHITE;
             this.tipsBox.color = cc.Color.WHITE;
-
-            this.selcetContent.color = cc.Color.WHITE;
-            this.selcetContent.parent.color = cc.Color.WHITE;
-
+            // this.selcetContent.color = cc.Color.WHITE;
+            // this.selcetContent.parent.color = cc.Color.WHITE;
         }
     }
 
@@ -390,14 +389,29 @@ export default class NewClass extends cc.Component {
 
     onBtnSlecet(event, data) {
         let name = event.target.name;
+
         if (name == 'btnSlecet') {
             this.selcetContent.active = !this.selcetContent.active;
+            this.nodeClick.active = this.selcetContent.active;
             //   this.touchNode.active = this.selcetContent.active;
-        } else if (data == 'CPM' || data == 'MACD' || data == 'KDJ' || data == 'RSI' || data == 'CCL') {
+        }
+
+        else if (data == 'CPM' || data == 'MACD' || data == 'KDJ' || data == 'RSI' || data == 'CCL') {
+            this.selcetContent.children.forEach(el => {
+                el.color = cc.Color.WHITE;
+            })
+
+            event.target.color = cc.Color.RED;
+
             let str = event.target.getComponent(cc.Label).string;
             this.tipsLabel.string = str;
             this.selcetContent.active = false;
             this.setBoxfalg(data);
+        }
+
+        else if (name == 'nodeClick') {
+            this.selcetContent.active = false;
+            this.nodeClick.active = false;
         }
     }
 
@@ -466,6 +480,7 @@ export default class NewClass extends cc.Component {
                 this.rightBox.getChildByName('KDJ').color = new cc.Color().fromHEX('#808080');
                 this.rightBox.getChildByName('RSI').color = new cc.Color().fromHEX('#808080');
             }
+
             if (data == 'EXPMA') {
                 this.ma = false;
                 this.boll = false;

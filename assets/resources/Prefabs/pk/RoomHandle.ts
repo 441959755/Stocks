@@ -1,5 +1,6 @@
 
 import { pb } from "../../../protos/proto";
+import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
@@ -43,16 +44,18 @@ export default class NewClass extends cc.Component {
 
     zbFlag = false;
 
+    huizhidatas = 106;
+
     onLoad() {
         //自己进入房间
         GlobalEvent.on(EventCfg.RoomGameDataSelf, this.onShow.bind(this), this);
-
         //其他玩家进入房间：
         GlobalEvent.on(EventCfg.RoomGameDataOther, this.onShow.bind(this), this);
 
         //同步房间游戏状态
         GlobalEvent.on(EventCfg.RoomGameStatus, this.onRoomGameStatus.bind(this), this);
 
+        //准备状态
         GlobalEvent.on(EventCfg.ROOMOLAYERSTATUS, (data) => {
             let read = this.player[1].getChildByName('read').getComponent(cc.Label);
             let read1 = this.player[0].getChildByName('read').getComponent(cc.Label);
@@ -66,22 +69,18 @@ export default class NewClass extends cc.Component {
                 read.string = '等待准备';
                 read1.string = '等待准备';
             }
-
         }, this);
 
         //玩家离开房间
         GlobalEvent.on(EventCfg.ROOMLEAVE, this.RoomLeave.bind(this), this);
 
-        GlobalEvent.on(EventCfg.RoomGameStatus, () => { this.enterRoom = true }, this);
-
+        //离开游戏
         GlobalEvent.on(EventCfg.LEAVEGAME, (flag) => {
-
             this.enterRoom = false;
             //已逃跑
             if (flag) {
                 this.node.active = false;
             }
-
         }, this);
     }
 
@@ -90,12 +89,14 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.RoomGameDataOther);
         GlobalEvent.off(EventCfg.RoomGameStatus);
         GlobalEvent.off(EventCfg.ROOMLEAVE);
-        GlobalEvent.off(EventCfg.RoomGameStatus);
         GlobalEvent.off(EventCfg.ROOMOLAYERSTATUS);
         GlobalEvent.off(EventCfg.LEAVEGAME);
     }
 
     RoomLeave(data) {
+
+        console.log('玩家离开房间' + JSON.stringify(data));
+
         //其他玩家离开
         if (data.uid && data.uid != GameData.userID) {
             this.jj_fxyq.active = true;
@@ -129,11 +130,12 @@ export default class NewClass extends cc.Component {
     }
 
     onRoomGameStatus(data) {
-        this.enterGameAnim.on('finished', () => {
+        this.enterRoom = true
 
+        this.enterGameAnim.on('finished', () => {
             console.log('enterGameAnim');
             GlobalEvent.emit('LOADGAME');
-
+            this.zbFlag = false;
         }, this);
 
         this.enterGameAnim && (this.enterGameAnim.play());
@@ -152,6 +154,10 @@ export default class NewClass extends cc.Component {
             this.kaishiBtn.active = false;
             this.jj_zb.active = true;
         }
+        else {
+            this.kaishiBtn.active = true;
+            this.jj_zb.active = false;
+        }
 
         this.kaishiBtn.getComponent(cc.Button).interactable = false;
         this.kaishiBtn.getComponent(cc.Button).enableAutoGrayEffect = true;
@@ -166,12 +172,15 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-
-
         this.onShow();
     }
 
-    onShow() {
+    onShow(info?) {
+
+        if (info && info.tsQuoteStart) {
+            this.huizhidatas = parseInt(info.tsQuoteStart) + 1;
+        }
+
         {
             let name = this.player[0].getChildByName('name').getComponent(cc.Label);
             let lv = this.player[0].getChildByName('lv').getComponent(cc.Label);
@@ -188,7 +197,7 @@ export default class NewClass extends cc.Component {
                 this.onLoadHead(GameData.Players[0], head);
 
             }
-            if (GameData.Players.length > 1) {
+            if (GameData.Players && GameData.Players[1]) {
                 read.string = '等待准备';
             }
         }
@@ -199,7 +208,7 @@ export default class NewClass extends cc.Component {
             let read = this.player[1].getChildByName('read').getComponent(cc.Label);
             let head = this.player[1].getChildByName('head').getComponent(cc.Sprite);
             read.string = '等待加入';
-            if (GameData.Players.length > 1) {
+            if (GameData.Players && GameData.Players[1]) {
                 name.string = GameData.Players[1].nickname;
                 lv.string = 'LV: ' + GameData.Players[1].properties[pb.GamePropertyId.Level];
                 exp.string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + '/' +
@@ -233,7 +242,6 @@ export default class NewClass extends cc.Component {
                     ob.icon = texture;
                     head.spriteFrame = GameData.Players[1].icon;
                 }
-
             })
             ob.icon = null;
         }
@@ -274,18 +282,22 @@ export default class NewClass extends cc.Component {
             }, 1000);
         }
         else if (name == 'jj_ksdz') {
+
             if (!this.zbFlag) {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '玩家还没准备');
                 return;
             }
+
+            if (this.huizhidatas) {
+                GameData.huizhidatas = this.huizhidatas;
+                GameCfg.huizhidatas = this.huizhidatas;
+            }
+
             GlobalHandle.onCmdGameStartReq();
         }
 
         else if (name == 'player2') {
-
             if (GameData.Players.length > 1) {
-                //   GlobalEvent.emit(EventCfg.OPENOTHERINFOBOX);
-                // PopupManager.LoadOtherPlayerInfoBox('otherPlayerInfo');
                 GlobalEvent.emit(EventCfg.OPENOTHERPLAYERINFO, GameData.Players[1]);
             }
 
@@ -334,16 +346,21 @@ export default class NewClass extends cc.Component {
             this.qxzbBtn.active = false;
             this.jj_zb.active = true;
         }
+
+        else if (name == 'jj_fxyq') {
+            LLWSDK.getSDK().shareAppMessage(GameData.roomId);
+        }
     }
 
     onDisable() {
+
         let node = this.jj_zxyq.children[0];
         let timeLabel = this.jj_zxyq.children[1].getComponent(cc.Label);
-
         this.cb && (clearInterval(this.cb))
         this.cb = null;
         node.active = false;
         timeLabel.string = '';
         GlobalEvent.off('UPDATEGAMEDATE');
+
     }
 }

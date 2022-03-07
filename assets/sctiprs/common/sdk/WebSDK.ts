@@ -15,15 +15,18 @@ export default class WebSDK {
         return this._instance;
     }
 
+
     login(call, uid?) {
 
         // let uuid = uid || LLWUtils.getUUID();
-        let uuid = '13147131879';
+        let a = Math.random() * 10;
+        let uuid = '1314713187' + a;
 
         let loginInfo = {
             account: uuid,
             type: pb.LoginType.MobilePhoneId,
-            from: LLWConfig.FROM,
+            type: pb.LoginType.AppTest,
+            // from: LLWConfig.FROM,
             pwd: '123456'
         };
 
@@ -73,6 +76,19 @@ export default class WebSDK {
     }
 
     shareAppMessage() {
+        console.log('shareAppMessage');
+    }
+
+    onShareAppMessage() {
+        console.log('onShareAppMessage');
+    }
+
+    showVideoAd(call) {
+        call && (call(1));
+    }
+
+    onShow() {
 
     }
+
 }

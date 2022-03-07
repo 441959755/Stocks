@@ -29,7 +29,8 @@ export default class NewClass extends cc.Component {
 
 
     setVIPstatus() {
-        if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+        //vip状态
+        if (GameData.vipStatus) {
             ComUtils.getVIPDisTime(this.getVIPDisTime.bind(this));
         }
         else {
@@ -41,12 +42,12 @@ export default class NewClass extends cc.Component {
         this.vipTimeLabel.string = obj.day + '天' + obj.hours + '时';
     }
 
-    onBtnClick(event, curData) {
+    onBtnClick(event, customData) {
 
         let name = event.target.name;
         //设置
         if (name == 'xl_topbtn_xlsz') {
-            PopupManager.openNode(this.node.parent, null, 'Prefabs/hallSetLayer', 11, (node) => {
+            PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/hallSetLayer', 11, (node) => {
                 ActionUtils.openBox(node);
             })
         }
@@ -96,6 +97,10 @@ export default class NewClass extends cc.Component {
             LLWSDK.getSDK().shareAppMessage();
         }
 
+    }
+
+    protected onDestroy(): void {
+        GlobalEvent.off(EventCfg.VIPCHANGE);
     }
 
 }

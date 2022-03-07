@@ -19,6 +19,9 @@ export default class NewClass extends cc.Component {
     setToggle: cc.Toggle[] = [];
 
     onEnable() {
+
+        GameData.JJCapital = 1000;
+
         this.setToggle.forEach((el, index) => {
             if (el.isChecked) {
                 if (index == 0) {
@@ -83,12 +86,14 @@ export default class NewClass extends cc.Component {
     reqRoomCreate() {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
         let arr = ComUtils.getJJXunXian();
+
         let info = {
             game: GameCfg.GameType,
             uid: GameData.userID,
             capital: GameData.JJCapital,
             junXian: arr,
         }
+
         let CmdRoomCreate = pb.CmdRoomCreate;
         let message = CmdRoomCreate.create(info);
         let buff = CmdRoomCreate.encode(message).finish();

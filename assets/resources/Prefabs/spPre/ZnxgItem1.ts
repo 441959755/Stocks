@@ -1,4 +1,5 @@
 
+import GameData from "../../../sctiprs/GameData";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
@@ -22,8 +23,16 @@ export default class NewClass extends cc.Component {
         this._curData = data;
         index += 1;
         this.label[0].string = index;
-        this.label[1].string = code || '--';
-        this.label[2].string = data.name || '--';
+        GameData.ZNCurIndex = index;
+        if (index + 1 > 3 && !GameData.vipStatus) {
+            this.label[1].string = 'VIP';
+            this.label[2].string = '******';
+        }
+        else {
+            this.label[1].string = code || '--';
+            this.label[2].string = data.name || '--';
+        }
+
         this.label[3].string = data.lastAskPrice || '--';
         this.label[4].string = data.lastBidPrice || '--';
         this.label[5].string = (data.profitRate || '--') + '%';
