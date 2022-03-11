@@ -1,7 +1,7 @@
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
 "use strict";
 
-var $protobuf = require("protobufjs/minimal");
+var $protobuf = protobuf;
 
 // Common aliases
 var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
@@ -129,6 +129,7 @@ $root.pb = (function() {
      * @property {number} Sync_S2C_GoldAwardPrompt=1030 Sync_S2C_GoldAwardPrompt value
      * @property {number} Sync_S2C_UnregistryAccount=1032 Sync_S2C_UnregistryAccount value
      * @property {number} Sync_S2C_CgdsConf=1034 Sync_S2C_CgdsConf value
+     * @property {number} Sync_S2C_RecommendStock=1036 Sync_S2C_RecommendStock value
      * @property {number} Sync_S2C_Broadcast=1100 Sync_S2C_Broadcast value
      * @property {number} Sync_S2C_Message=1102 Sync_S2C_Message value
      * @property {number} Sync_C2S_GameHeart=1200 Sync_C2S_GameHeart value
@@ -150,6 +151,8 @@ $root.pb = (function() {
      * @property {number} Rep_QueryAiSignal=2014 Rep_QueryAiSignal value
      * @property {number} Req_EditAiStockList=2015 Req_EditAiStockList value
      * @property {number} Rep_EditAiStockList=2016 Rep_EditAiStockList value
+     * @property {number} Req_RecommendStock=2017 Req_RecommendStock value
+     * @property {number} Rep_RecommendStock=2018 Rep_RecommendStock value
      * @property {number} Req_Hall_UploadIcon=3001 Req_Hall_UploadIcon value
      * @property {number} Rep_Hall_UploadIcon=3002 Rep_Hall_UploadIcon value
      * @property {number} Req_Hall_DownloadIcon=3003 Req_Hall_DownloadIcon value
@@ -319,6 +322,7 @@ $root.pb = (function() {
         values[valuesById[1030] = "Sync_S2C_GoldAwardPrompt"] = 1030;
         values[valuesById[1032] = "Sync_S2C_UnregistryAccount"] = 1032;
         values[valuesById[1034] = "Sync_S2C_CgdsConf"] = 1034;
+        values[valuesById[1036] = "Sync_S2C_RecommendStock"] = 1036;
         values[valuesById[1100] = "Sync_S2C_Broadcast"] = 1100;
         values[valuesById[1102] = "Sync_S2C_Message"] = 1102;
         values[valuesById[1200] = "Sync_C2S_GameHeart"] = 1200;
@@ -340,6 +344,8 @@ $root.pb = (function() {
         values[valuesById[2014] = "Rep_QueryAiSignal"] = 2014;
         values[valuesById[2015] = "Req_EditAiStockList"] = 2015;
         values[valuesById[2016] = "Rep_EditAiStockList"] = 2016;
+        values[valuesById[2017] = "Req_RecommendStock"] = 2017;
+        values[valuesById[2018] = "Rep_RecommendStock"] = 2018;
         values[valuesById[3001] = "Req_Hall_UploadIcon"] = 3001;
         values[valuesById[3002] = "Rep_Hall_UploadIcon"] = 3002;
         values[valuesById[3003] = "Req_Hall_DownloadIcon"] = 3003;
@@ -1357,10 +1363,12 @@ $root.pb = (function() {
      * @property {number} Level=4 Level value
      * @property {number} Fame=5 Fame value
      * @property {number} Coupon=6 Coupon value
+     * @property {number} SVip=7 SVip value
      * @property {number} UnlockDxxl=20 UnlockDxxl value
      * @property {number} UnlockQhxl=21 UnlockQhxl value
      * @property {number} UnlockTjdxl=22 UnlockTjdxl value
      * @property {number} UnlockZbxl=23 UnlockZbxl value
+     * @property {number} SVipExpiration=25 SVipExpiration value
      * @property {number} K=26 K value
      * @property {number} Tester=27 Tester value
      * @property {number} VipExpiration=28 VipExpiration value
@@ -1376,10 +1384,12 @@ $root.pb = (function() {
         values[valuesById[4] = "Level"] = 4;
         values[valuesById[5] = "Fame"] = 5;
         values[valuesById[6] = "Coupon"] = 6;
+        values[valuesById[7] = "SVip"] = 7;
         values[valuesById[20] = "UnlockDxxl"] = 20;
         values[valuesById[21] = "UnlockQhxl"] = 21;
         values[valuesById[22] = "UnlockTjdxl"] = 22;
         values[valuesById[23] = "UnlockZbxl"] = 23;
+        values[valuesById[25] = "SVipExpiration"] = 25;
         values[valuesById[26] = "K"] = 26;
         values[valuesById[27] = "Tester"] = 27;
         values[valuesById[28] = "VipExpiration"] = 28;
@@ -6308,10 +6318,12 @@ $root.pb = (function() {
                 case 4:
                 case 5:
                 case 6:
+                case 7:
                 case 20:
                 case 21:
                 case 22:
                 case 23:
+                case 25:
                 case 26:
                 case 27:
                 case 28:
@@ -6369,6 +6381,10 @@ $root.pb = (function() {
             case 6:
                 message.id = 6;
                 break;
+            case "SVip":
+            case 7:
+                message.id = 7;
+                break;
             case "UnlockDxxl":
             case 20:
                 message.id = 20;
@@ -6384,6 +6400,10 @@ $root.pb = (function() {
             case "UnlockZbxl":
             case 23:
                 message.id = 23;
+                break;
+            case "SVipExpiration":
+            case 25:
+                message.id = 25;
                 break;
             case "K":
             case 26:
@@ -18555,6 +18575,7 @@ $root.pb = (function() {
          * @property {number|null} [cgdsCapital] RankingItem cgdsCapital
          * @property {number|null} [zsjcBettingItem] RankingItem zsjcBettingItem
          * @property {number|null} [zsjcBettingAmount] RankingItem zsjcBettingAmount
+         * @property {number|Long|null} [vipExpired] RankingItem vipExpired
          */
 
         /**
@@ -18693,6 +18714,14 @@ $root.pb = (function() {
         RankingItem.prototype.zsjcBettingAmount = 0;
 
         /**
+         * RankingItem vipExpired.
+         * @member {number|Long} vipExpired
+         * @memberof pb.RankingItem
+         * @instance
+         */
+        RankingItem.prototype.vipExpired = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
          * Creates a new RankingItem instance using the specified properties.
          * @function create
          * @memberof pb.RankingItem
@@ -18746,6 +18775,8 @@ $root.pb = (function() {
                 writer.uint32(/* id 14, wireType 0 =*/112).int32(message.zsjcBettingItem);
             if (message.zsjcBettingAmount != null && Object.hasOwnProperty.call(message, "zsjcBettingAmount"))
                 writer.uint32(/* id 15, wireType 0 =*/120).int32(message.zsjcBettingAmount);
+            if (message.vipExpired != null && Object.hasOwnProperty.call(message, "vipExpired"))
+                writer.uint32(/* id 16, wireType 0 =*/128).int64(message.vipExpired);
             return writer;
         };
 
@@ -18824,6 +18855,9 @@ $root.pb = (function() {
                     break;
                 case 15:
                     message.zsjcBettingAmount = reader.int32();
+                    break;
+                case 16:
+                    message.vipExpired = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -18905,6 +18939,9 @@ $root.pb = (function() {
             if (message.zsjcBettingAmount != null && message.hasOwnProperty("zsjcBettingAmount"))
                 if (!$util.isInteger(message.zsjcBettingAmount))
                     return "zsjcBettingAmount: integer expected";
+            if (message.vipExpired != null && message.hasOwnProperty("vipExpired"))
+                if (!$util.isInteger(message.vipExpired) && !(message.vipExpired && $util.isInteger(message.vipExpired.low) && $util.isInteger(message.vipExpired.high)))
+                    return "vipExpired: integer|Long expected";
             return null;
         };
 
@@ -18950,6 +18987,15 @@ $root.pb = (function() {
                 message.zsjcBettingItem = object.zsjcBettingItem | 0;
             if (object.zsjcBettingAmount != null)
                 message.zsjcBettingAmount = object.zsjcBettingAmount | 0;
+            if (object.vipExpired != null)
+                if ($util.Long)
+                    (message.vipExpired = $util.Long.fromValue(object.vipExpired)).unsigned = false;
+                else if (typeof object.vipExpired === "string")
+                    message.vipExpired = parseInt(object.vipExpired, 10);
+                else if (typeof object.vipExpired === "number")
+                    message.vipExpired = object.vipExpired;
+                else if (typeof object.vipExpired === "object")
+                    message.vipExpired = new $util.LongBits(object.vipExpired.low >>> 0, object.vipExpired.high >>> 0).toNumber();
             return message;
         };
 
@@ -18982,6 +19028,11 @@ $root.pb = (function() {
                 object.cgdsCapital = 0;
                 object.zsjcBettingItem = 0;
                 object.zsjcBettingAmount = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.vipExpired = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.vipExpired = options.longs === String ? "0" : 0;
             }
             if (message.uid != null && message.hasOwnProperty("uid"))
                 object.uid = message.uid;
@@ -19013,6 +19064,11 @@ $root.pb = (function() {
                 object.zsjcBettingItem = message.zsjcBettingItem;
             if (message.zsjcBettingAmount != null && message.hasOwnProperty("zsjcBettingAmount"))
                 object.zsjcBettingAmount = message.zsjcBettingAmount;
+            if (message.vipExpired != null && message.hasOwnProperty("vipExpired"))
+                if (typeof message.vipExpired === "number")
+                    object.vipExpired = options.longs === String ? String(message.vipExpired) : message.vipExpired;
+                else
+                    object.vipExpired = options.longs === String ? $util.Long.prototype.toString.call(message.vipExpired) : options.longs === Number ? new $util.LongBits(message.vipExpired.low >>> 0, message.vipExpired.high >>> 0).toNumber() : message.vipExpired;
             return object;
         };
 
@@ -33674,6 +33730,722 @@ $root.pb = (function() {
         return CmdTradingDayReply;
     })();
 
+    pb.CmdRecommendStock = (function() {
+
+        /**
+         * Properties of a CmdRecommendStock.
+         * @memberof pb
+         * @interface ICmdRecommendStock
+         * @property {number|Long|null} [from] CmdRecommendStock from
+         * @property {number|null} [total] CmdRecommendStock total
+         * @property {number|Long|null} [to] CmdRecommendStock to
+         */
+
+        /**
+         * Constructs a new CmdRecommendStock.
+         * @memberof pb
+         * @classdesc Represents a CmdRecommendStock.
+         * @implements ICmdRecommendStock
+         * @constructor
+         * @param {pb.ICmdRecommendStock=} [properties] Properties to set
+         */
+        function CmdRecommendStock(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdRecommendStock from.
+         * @member {number|Long} from
+         * @memberof pb.CmdRecommendStock
+         * @instance
+         */
+        CmdRecommendStock.prototype.from = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * CmdRecommendStock total.
+         * @member {number} total
+         * @memberof pb.CmdRecommendStock
+         * @instance
+         */
+        CmdRecommendStock.prototype.total = 0;
+
+        /**
+         * CmdRecommendStock to.
+         * @member {number|Long} to
+         * @memberof pb.CmdRecommendStock
+         * @instance
+         */
+        CmdRecommendStock.prototype.to = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Creates a new CmdRecommendStock instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdRecommendStock
+         * @static
+         * @param {pb.ICmdRecommendStock=} [properties] Properties to set
+         * @returns {pb.CmdRecommendStock} CmdRecommendStock instance
+         */
+        CmdRecommendStock.create = function create(properties) {
+            return new CmdRecommendStock(properties);
+        };
+
+        /**
+         * Encodes the specified CmdRecommendStock message. Does not implicitly {@link pb.CmdRecommendStock.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdRecommendStock
+         * @static
+         * @param {pb.ICmdRecommendStock} message CmdRecommendStock message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRecommendStock.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.from);
+            if (message.total != null && Object.hasOwnProperty.call(message, "total"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.total);
+            if (message.to != null && Object.hasOwnProperty.call(message, "to"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.to);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdRecommendStock message, length delimited. Does not implicitly {@link pb.CmdRecommendStock.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdRecommendStock
+         * @static
+         * @param {pb.ICmdRecommendStock} message CmdRecommendStock message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRecommendStock.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdRecommendStock message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdRecommendStock
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdRecommendStock} CmdRecommendStock
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRecommendStock.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdRecommendStock();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.from = reader.int64();
+                    break;
+                case 2:
+                    message.total = reader.int32();
+                    break;
+                case 3:
+                    message.to = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdRecommendStock message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdRecommendStock
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdRecommendStock} CmdRecommendStock
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRecommendStock.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdRecommendStock message.
+         * @function verify
+         * @memberof pb.CmdRecommendStock
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdRecommendStock.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.from != null && message.hasOwnProperty("from"))
+                if (!$util.isInteger(message.from) && !(message.from && $util.isInteger(message.from.low) && $util.isInteger(message.from.high)))
+                    return "from: integer|Long expected";
+            if (message.total != null && message.hasOwnProperty("total"))
+                if (!$util.isInteger(message.total))
+                    return "total: integer expected";
+            if (message.to != null && message.hasOwnProperty("to"))
+                if (!$util.isInteger(message.to) && !(message.to && $util.isInteger(message.to.low) && $util.isInteger(message.to.high)))
+                    return "to: integer|Long expected";
+            return null;
+        };
+
+        /**
+         * Creates a CmdRecommendStock message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdRecommendStock
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdRecommendStock} CmdRecommendStock
+         */
+        CmdRecommendStock.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdRecommendStock)
+                return object;
+            var message = new $root.pb.CmdRecommendStock();
+            if (object.from != null)
+                if ($util.Long)
+                    (message.from = $util.Long.fromValue(object.from)).unsigned = false;
+                else if (typeof object.from === "string")
+                    message.from = parseInt(object.from, 10);
+                else if (typeof object.from === "number")
+                    message.from = object.from;
+                else if (typeof object.from === "object")
+                    message.from = new $util.LongBits(object.from.low >>> 0, object.from.high >>> 0).toNumber();
+            if (object.total != null)
+                message.total = object.total | 0;
+            if (object.to != null)
+                if ($util.Long)
+                    (message.to = $util.Long.fromValue(object.to)).unsigned = false;
+                else if (typeof object.to === "string")
+                    message.to = parseInt(object.to, 10);
+                else if (typeof object.to === "number")
+                    message.to = object.to;
+                else if (typeof object.to === "object")
+                    message.to = new $util.LongBits(object.to.low >>> 0, object.to.high >>> 0).toNumber();
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdRecommendStock message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdRecommendStock
+         * @static
+         * @param {pb.CmdRecommendStock} message CmdRecommendStock
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdRecommendStock.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.from = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.from = options.longs === String ? "0" : 0;
+                object.total = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.to = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.to = options.longs === String ? "0" : 0;
+            }
+            if (message.from != null && message.hasOwnProperty("from"))
+                if (typeof message.from === "number")
+                    object.from = options.longs === String ? String(message.from) : message.from;
+                else
+                    object.from = options.longs === String ? $util.Long.prototype.toString.call(message.from) : options.longs === Number ? new $util.LongBits(message.from.low >>> 0, message.from.high >>> 0).toNumber() : message.from;
+            if (message.total != null && message.hasOwnProperty("total"))
+                object.total = message.total;
+            if (message.to != null && message.hasOwnProperty("to"))
+                if (typeof message.to === "number")
+                    object.to = options.longs === String ? String(message.to) : message.to;
+                else
+                    object.to = options.longs === String ? $util.Long.prototype.toString.call(message.to) : options.longs === Number ? new $util.LongBits(message.to.low >>> 0, message.to.high >>> 0).toNumber() : message.to;
+            return object;
+        };
+
+        /**
+         * Converts this CmdRecommendStock to JSON.
+         * @function toJSON
+         * @memberof pb.CmdRecommendStock
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdRecommendStock.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdRecommendStock;
+    })();
+
+    pb.RecommendStockItem = (function() {
+
+        /**
+         * Properties of a RecommendStockItem.
+         * @memberof pb
+         * @interface IRecommendStockItem
+         * @property {number|Long|null} [ts] RecommendStockItem ts
+         * @property {Array.<number>|null} [codeList] RecommendStockItem codeList
+         */
+
+        /**
+         * Constructs a new RecommendStockItem.
+         * @memberof pb
+         * @classdesc Represents a RecommendStockItem.
+         * @implements IRecommendStockItem
+         * @constructor
+         * @param {pb.IRecommendStockItem=} [properties] Properties to set
+         */
+        function RecommendStockItem(properties) {
+            this.codeList = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * RecommendStockItem ts.
+         * @member {number|Long} ts
+         * @memberof pb.RecommendStockItem
+         * @instance
+         */
+        RecommendStockItem.prototype.ts = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * RecommendStockItem codeList.
+         * @member {Array.<number>} codeList
+         * @memberof pb.RecommendStockItem
+         * @instance
+         */
+        RecommendStockItem.prototype.codeList = $util.emptyArray;
+
+        /**
+         * Creates a new RecommendStockItem instance using the specified properties.
+         * @function create
+         * @memberof pb.RecommendStockItem
+         * @static
+         * @param {pb.IRecommendStockItem=} [properties] Properties to set
+         * @returns {pb.RecommendStockItem} RecommendStockItem instance
+         */
+        RecommendStockItem.create = function create(properties) {
+            return new RecommendStockItem(properties);
+        };
+
+        /**
+         * Encodes the specified RecommendStockItem message. Does not implicitly {@link pb.RecommendStockItem.verify|verify} messages.
+         * @function encode
+         * @memberof pb.RecommendStockItem
+         * @static
+         * @param {pb.IRecommendStockItem} message RecommendStockItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RecommendStockItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.ts != null && Object.hasOwnProperty.call(message, "ts"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.ts);
+            if (message.codeList != null && message.codeList.length) {
+                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                for (var i = 0; i < message.codeList.length; ++i)
+                    writer.uint32(message.codeList[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Encodes the specified RecommendStockItem message, length delimited. Does not implicitly {@link pb.RecommendStockItem.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.RecommendStockItem
+         * @static
+         * @param {pb.IRecommendStockItem} message RecommendStockItem message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RecommendStockItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a RecommendStockItem message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.RecommendStockItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.RecommendStockItem} RecommendStockItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RecommendStockItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.RecommendStockItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.ts = reader.int64();
+                    break;
+                case 2:
+                    if (!(message.codeList && message.codeList.length))
+                        message.codeList = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.codeList.push(reader.uint32());
+                    } else
+                        message.codeList.push(reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a RecommendStockItem message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.RecommendStockItem
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.RecommendStockItem} RecommendStockItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RecommendStockItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a RecommendStockItem message.
+         * @function verify
+         * @memberof pb.RecommendStockItem
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        RecommendStockItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.ts != null && message.hasOwnProperty("ts"))
+                if (!$util.isInteger(message.ts) && !(message.ts && $util.isInteger(message.ts.low) && $util.isInteger(message.ts.high)))
+                    return "ts: integer|Long expected";
+            if (message.codeList != null && message.hasOwnProperty("codeList")) {
+                if (!Array.isArray(message.codeList))
+                    return "codeList: array expected";
+                for (var i = 0; i < message.codeList.length; ++i)
+                    if (!$util.isInteger(message.codeList[i]))
+                        return "codeList: integer[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates a RecommendStockItem message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.RecommendStockItem
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.RecommendStockItem} RecommendStockItem
+         */
+        RecommendStockItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.RecommendStockItem)
+                return object;
+            var message = new $root.pb.RecommendStockItem();
+            if (object.ts != null)
+                if ($util.Long)
+                    (message.ts = $util.Long.fromValue(object.ts)).unsigned = false;
+                else if (typeof object.ts === "string")
+                    message.ts = parseInt(object.ts, 10);
+                else if (typeof object.ts === "number")
+                    message.ts = object.ts;
+                else if (typeof object.ts === "object")
+                    message.ts = new $util.LongBits(object.ts.low >>> 0, object.ts.high >>> 0).toNumber();
+            if (object.codeList) {
+                if (!Array.isArray(object.codeList))
+                    throw TypeError(".pb.RecommendStockItem.codeList: array expected");
+                message.codeList = [];
+                for (var i = 0; i < object.codeList.length; ++i)
+                    message.codeList[i] = object.codeList[i] >>> 0;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a RecommendStockItem message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.RecommendStockItem
+         * @static
+         * @param {pb.RecommendStockItem} message RecommendStockItem
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        RecommendStockItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.codeList = [];
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.ts = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.ts = options.longs === String ? "0" : 0;
+            if (message.ts != null && message.hasOwnProperty("ts"))
+                if (typeof message.ts === "number")
+                    object.ts = options.longs === String ? String(message.ts) : message.ts;
+                else
+                    object.ts = options.longs === String ? $util.Long.prototype.toString.call(message.ts) : options.longs === Number ? new $util.LongBits(message.ts.low >>> 0, message.ts.high >>> 0).toNumber() : message.ts;
+            if (message.codeList && message.codeList.length) {
+                object.codeList = [];
+                for (var j = 0; j < message.codeList.length; ++j)
+                    object.codeList[j] = message.codeList[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this RecommendStockItem to JSON.
+         * @function toJSON
+         * @memberof pb.RecommendStockItem
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        RecommendStockItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RecommendStockItem;
+    })();
+
+    pb.CmdRecommendStockReply = (function() {
+
+        /**
+         * Properties of a CmdRecommendStockReply.
+         * @memberof pb
+         * @interface ICmdRecommendStockReply
+         * @property {Array.<pb.IRecommendStockItem>|null} [items] CmdRecommendStockReply items
+         */
+
+        /**
+         * Constructs a new CmdRecommendStockReply.
+         * @memberof pb
+         * @classdesc Represents a CmdRecommendStockReply.
+         * @implements ICmdRecommendStockReply
+         * @constructor
+         * @param {pb.ICmdRecommendStockReply=} [properties] Properties to set
+         */
+        function CmdRecommendStockReply(properties) {
+            this.items = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CmdRecommendStockReply items.
+         * @member {Array.<pb.IRecommendStockItem>} items
+         * @memberof pb.CmdRecommendStockReply
+         * @instance
+         */
+        CmdRecommendStockReply.prototype.items = $util.emptyArray;
+
+        /**
+         * Creates a new CmdRecommendStockReply instance using the specified properties.
+         * @function create
+         * @memberof pb.CmdRecommendStockReply
+         * @static
+         * @param {pb.ICmdRecommendStockReply=} [properties] Properties to set
+         * @returns {pb.CmdRecommendStockReply} CmdRecommendStockReply instance
+         */
+        CmdRecommendStockReply.create = function create(properties) {
+            return new CmdRecommendStockReply(properties);
+        };
+
+        /**
+         * Encodes the specified CmdRecommendStockReply message. Does not implicitly {@link pb.CmdRecommendStockReply.verify|verify} messages.
+         * @function encode
+         * @memberof pb.CmdRecommendStockReply
+         * @static
+         * @param {pb.ICmdRecommendStockReply} message CmdRecommendStockReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRecommendStockReply.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.items != null && message.items.length)
+                for (var i = 0; i < message.items.length; ++i)
+                    $root.pb.RecommendStockItem.encode(message.items[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CmdRecommendStockReply message, length delimited. Does not implicitly {@link pb.CmdRecommendStockReply.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.CmdRecommendStockReply
+         * @static
+         * @param {pb.ICmdRecommendStockReply} message CmdRecommendStockReply message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CmdRecommendStockReply.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CmdRecommendStockReply message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.CmdRecommendStockReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.CmdRecommendStockReply} CmdRecommendStockReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRecommendStockReply.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.CmdRecommendStockReply();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.items && message.items.length))
+                        message.items = [];
+                    message.items.push($root.pb.RecommendStockItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CmdRecommendStockReply message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.CmdRecommendStockReply
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.CmdRecommendStockReply} CmdRecommendStockReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CmdRecommendStockReply.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CmdRecommendStockReply message.
+         * @function verify
+         * @memberof pb.CmdRecommendStockReply
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CmdRecommendStockReply.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.items != null && message.hasOwnProperty("items")) {
+                if (!Array.isArray(message.items))
+                    return "items: array expected";
+                for (var i = 0; i < message.items.length; ++i) {
+                    var error = $root.pb.RecommendStockItem.verify(message.items[i]);
+                    if (error)
+                        return "items." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a CmdRecommendStockReply message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.CmdRecommendStockReply
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.CmdRecommendStockReply} CmdRecommendStockReply
+         */
+        CmdRecommendStockReply.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.CmdRecommendStockReply)
+                return object;
+            var message = new $root.pb.CmdRecommendStockReply();
+            if (object.items) {
+                if (!Array.isArray(object.items))
+                    throw TypeError(".pb.CmdRecommendStockReply.items: array expected");
+                message.items = [];
+                for (var i = 0; i < object.items.length; ++i) {
+                    if (typeof object.items[i] !== "object")
+                        throw TypeError(".pb.CmdRecommendStockReply.items: object expected");
+                    message.items[i] = $root.pb.RecommendStockItem.fromObject(object.items[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CmdRecommendStockReply message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.CmdRecommendStockReply
+         * @static
+         * @param {pb.CmdRecommendStockReply} message CmdRecommendStockReply
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CmdRecommendStockReply.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.items = [];
+            if (message.items && message.items.length) {
+                object.items = [];
+                for (var j = 0; j < message.items.length; ++j)
+                    object.items[j] = $root.pb.RecommendStockItem.toObject(message.items[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this CmdRecommendStockReply to JSON.
+         * @function toJSON
+         * @memberof pb.CmdRecommendStockReply
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CmdRecommendStockReply.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CmdRecommendStockReply;
+    })();
+
     pb.CmdQuoteQueryFuture = (function() {
 
         /**
@@ -42836,6 +43608,7 @@ $root.pb = (function() {
                 case 1030:
                 case 1032:
                 case 1034:
+                case 1036:
                 case 1100:
                 case 1102:
                 case 1200:
@@ -42857,6 +43630,8 @@ $root.pb = (function() {
                 case 2014:
                 case 2015:
                 case 2016:
+                case 2017:
+                case 2018:
                 case 3001:
                 case 3002:
                 case 3003:
@@ -43107,6 +43882,10 @@ $root.pb = (function() {
             case 1034:
                 message.id = 1034;
                 break;
+            case "Sync_S2C_RecommendStock":
+            case 1036:
+                message.id = 1036;
+                break;
             case "Sync_S2C_Broadcast":
             case 1100:
                 message.id = 1100;
@@ -43190,6 +43969,14 @@ $root.pb = (function() {
             case "Rep_EditAiStockList":
             case 2016:
                 message.id = 2016;
+                break;
+            case "Req_RecommendStock":
+            case 2017:
+                message.id = 2017;
+                break;
+            case "Rep_RecommendStock":
+            case 2018:
+                message.id = 2018;
                 break;
             case "Req_Hall_UploadIcon":
             case 3001:
@@ -44841,6 +45628,7 @@ $root.pb = (function() {
                 case 1030:
                 case 1032:
                 case 1034:
+                case 1036:
                 case 1100:
                 case 1102:
                 case 1200:
@@ -44862,6 +45650,8 @@ $root.pb = (function() {
                 case 2014:
                 case 2015:
                 case 2016:
+                case 2017:
+                case 2018:
                 case 3001:
                 case 3002:
                 case 3003:
@@ -45119,6 +45909,10 @@ $root.pb = (function() {
             case 1034:
                 message.id = 1034;
                 break;
+            case "Sync_S2C_RecommendStock":
+            case 1036:
+                message.id = 1036;
+                break;
             case "Sync_S2C_Broadcast":
             case 1100:
                 message.id = 1100;
@@ -45202,6 +45996,14 @@ $root.pb = (function() {
             case "Rep_EditAiStockList":
             case 2016:
                 message.id = 2016;
+                break;
+            case "Req_RecommendStock":
+            case 2017:
+                message.id = 2017;
+                break;
+            case "Rep_RecommendStock":
+            case 2018:
+                message.id = 2018;
                 break;
             case "Req_Hall_UploadIcon":
             case 3001:

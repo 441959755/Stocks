@@ -206,7 +206,6 @@ export default class NewClass extends cc.Component {
 
             console.log('闯关赛配置1' + JSON.stringify(res));
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
-
             this.confdata = res;
             GameData.CGSConfData = res;
             this.onUpShowTimeCount();
@@ -240,20 +239,20 @@ export default class NewClass extends cc.Component {
     }
 
     onUpContent() {
+
         if (GameData.CGSSAVELEVEL === null) {
             GameData.CGSSAVELEVEL = GameData.cgState.stage || 0;
         }
 
         else if (GameData.cgState.stage > GameData.CGSSAVELEVEL) {
             GameData.CGSSAVELEVEL = GameData.cgState.stage
-            PopupManager.LoadTipsBox('tipsBox', '闯关成功')
+            PopupManager.cgsTipsBox('恭喜您，闯关成功')
         }
+
         else if ((GameData.cgState.stage || 0) < GameData.CGSSAVELEVEL) {
             GameData.CGSSAVELEVEL = GameData.cgState.stage
-            PopupManager.LoadTipsBox('tipsBox', '闯关失败')
+            PopupManager.cgsTipsBox('很遗憾，闯关失败')
         }
-
-
 
         let items = this.content.children;
         let stages = JSON.parse(this.confdata.conf);
@@ -306,19 +305,20 @@ export default class NewClass extends cc.Component {
                 box.children[1].active = true;
             }
 
+            lifesLabel.string = '生命：' + stages.Stages[index].Lifes;
+
             if (GameData.cgState && index > GameData.cgState.stage) {
                 node1.children[1].active = false;
                 node1.children[2].active = false;
                 node1.children[0].active = true;
 
                 cgs_jdt.active = false;
-                lifesLabel.string = '';
-                if (GameData.cgState.lifes) {
-                    lifesLabel.string = '生命：' + stages.Stages[index].Lifes;
-                }
-                else {
-                    lifesLabel.string = '生命：' + 0;
-                }
+                // if (GameData.cgState.lifes) {
+
+                // }
+                // else {
+                //     lifesLabel.string = '生命：' + 0;
+                // }
                 progress.progress = 0;
 
                 taBtn.children[0].active = true;
@@ -329,14 +329,13 @@ export default class NewClass extends cc.Component {
                 node1.children[1].active = true;
                 node1.children[2].active = false;
                 cgs_jdt.active = false;
-                lifesLabel.string = '';
 
-                if (GameData.cgState.lifes) {
-                    lifesLabel.string = '生命：' + GameData.cgState.lifes;
-                }
-                else {
-                    lifesLabel.string = '生命：' + 0;
-                }
+                // if (GameData.cgState.lifes) {
+                lifesLabel.string = '生命：' + GameData.cgState.lifes;
+                // }
+                // else {
+                //     lifesLabel.string = '生命：' + 0;
+                // }
 
                 if (GameData.cgState.progress) {
                     //  progress.progress = GameData.cgState.progress / stages.Stages[index].Progress;
@@ -363,10 +362,8 @@ export default class NewClass extends cc.Component {
                 node1.children[0].active = false;
                 node1.children[1].active = false;
                 node1.children[2].active = true;
-
-                cgs_jdt.active = true;
-
                 lifesLabel.string = '';
+                cgs_jdt.active = true;
 
                 taBtn.children[2].active = true;
                 //  ckBtn.children[2].active = true;

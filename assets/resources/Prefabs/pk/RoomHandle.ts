@@ -49,8 +49,10 @@ export default class NewClass extends cc.Component {
     onLoad() {
         //自己进入房间
         GlobalEvent.on(EventCfg.RoomGameDataSelf, this.onShow.bind(this), this);
+
         //其他玩家进入房间：
         GlobalEvent.on(EventCfg.RoomGameDataOther, this.onShow.bind(this), this);
+
 
         //同步房间游戏状态
         GlobalEvent.on(EventCfg.RoomGameStatus, this.onRoomGameStatus.bind(this), this);
@@ -94,7 +96,6 @@ export default class NewClass extends cc.Component {
     }
 
     RoomLeave(data) {
-
         console.log('玩家离开房间' + JSON.stringify(data));
 
         //其他玩家离开
@@ -130,15 +131,16 @@ export default class NewClass extends cc.Component {
     }
 
     onRoomGameStatus(data) {
-        this.enterRoom = true
+        if (data.status == 2 && this.node.active) {
+            this.enterRoom = true
+            this.enterGameAnim.on('finished', () => {
+                console.log('enterGameAnim');
+                GlobalEvent.emit('LOADGAME');
+                this.zbFlag = false;
+            }, this);
 
-        this.enterGameAnim.on('finished', () => {
-            console.log('enterGameAnim');
-            GlobalEvent.emit('LOADGAME');
-            this.zbFlag = false;
-        }, this);
-
-        this.enterGameAnim && (this.enterGameAnim.play());
+            this.enterGameAnim && (this.enterGameAnim.play());
+        }
     }
 
     onEnable() {
@@ -175,6 +177,7 @@ export default class NewClass extends cc.Component {
         this.onShow();
     }
 
+
     onShow(info?) {
 
         if (info && info.tsQuoteStart) {
@@ -201,6 +204,7 @@ export default class NewClass extends cc.Component {
                 read.string = '等待准备';
             }
         }
+
         {
             let name = this.player[1].getChildByName('name').getComponent(cc.Label);
             let lv = this.player[1].getChildByName('lv').getComponent(cc.Label);
@@ -300,7 +304,6 @@ export default class NewClass extends cc.Component {
             if (GameData.Players.length > 1) {
                 GlobalEvent.emit(EventCfg.OPENOTHERPLAYERINFO, GameData.Players[1]);
             }
-
         }
 
         else if (name == 'jj_zb') {
@@ -353,7 +356,6 @@ export default class NewClass extends cc.Component {
     }
 
     onDisable() {
-
         let node = this.jj_zxyq.children[0];
         let timeLabel = this.jj_zxyq.children[1].getComponent(cc.Label);
         this.cb && (clearInterval(this.cb))
@@ -361,6 +363,5 @@ export default class NewClass extends cc.Component {
         node.active = false;
         timeLabel.string = '';
         GlobalEvent.off('UPDATEGAMEDATE');
-
     }
 }

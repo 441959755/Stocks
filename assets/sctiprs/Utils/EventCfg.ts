@@ -213,4 +213,6 @@ export default {
 
 	LEAVEGAME: "LEAVEGAME",//离开游戏
 
+	RoomGameDataing: 'RoomGameDataing',
+
 };

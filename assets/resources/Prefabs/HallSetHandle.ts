@@ -133,7 +133,7 @@ export default class NewClass extends cc.Component {
 
         GameData.SMSet = GameData.SMSet;
         AudioUtils.setEffectsVolume(GameData.SMSet.isSound);
-        // AudioUtils.setMusicVolume(GameData.SMSet.isSound);
+        cc.sys.localStorage.setItem('SMSET', JSON.stringify(GameData.SMSet));
     }
 
     onBtnClick(event, data) {
@@ -172,16 +172,12 @@ export default class NewClass extends cc.Component {
             }
             for (let i = index; i <= max; i++) {
                 arr.push(i);
-
             }
-
             this.content.active = true;
-
             this.UIScrollControl.initControl(this.preNode, arr.length, this.preNode.getContentSize(), 0, (node, _index) => {
                 let label = node.getComponent(cc.Label);
                 label.string = arr[_index];
             })
-
 
         } else if (name == 'viewMask') {
             this.scroll.active = false;

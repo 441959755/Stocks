@@ -1,4 +1,4 @@
-import { pb } from "../../protos/proto";
+
 import LLWConfig from "../common/config/LLWConfig";
 import PlatDefine from "../common/config/PlatDefine";
 import LLWSDK from "../common/sdk/LLWSDK";
@@ -22,11 +22,9 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.VIPCHANGE, this.setVIPstatus.bind(this), this);
     }
 
-
     start() {
         this.setVIPstatus();
     }
-
 
     setVIPstatus() {
         //vip状态

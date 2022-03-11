@@ -29,9 +29,11 @@ export default class NewClass extends cc.Component {
         }
 
         this.version = version;
+
         LoadImg.downloadRemoteImageAndSave(GameCfgText.adConf.main[0].img, (flag, sp) => {
             this.imgAd.spriteFrame = sp;
         }, this.version == GameCfgText.adConf.launch[0].version)
+
     }
 
     onBtnClick(event, curdata) {

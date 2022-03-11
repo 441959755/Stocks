@@ -94,6 +94,13 @@ export default class PopupManager {
         })
     }
 
+    public static cgsTipsBox(text, call?) {
+        this.openNode(cc.find('Canvas'), this.nodes['Prefabs/' + 'pk/cgsTipsBox'], 'Prefabs/' + 'pk/cgsTipsBox', 99, (node) => {
+            ActionUtils.openBox(node);
+            node.emit('contentText', { text: text, call: call });
+        })
+    }
+
     public static hideTipsBox(name) {
         if (this.nodes['Prefabs/' + name]) {
             this.nodes['Prefabs/' + name].active = false;
@@ -109,7 +116,6 @@ export default class PopupManager {
 
     //闯关大赛海报
     public static openCgdsNotice() {
-
         this.openNode(cc.find('Canvas'), this.nodes['Prefabs/pop/cgdsNotice'], 'Prefabs/pop/cgdsNotice', 50, (node) => {
             ActionUtils.openBox(node);
         })
@@ -145,6 +151,14 @@ export default class PopupManager {
         PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/helpLayer', 30, (node) => {
             ActionUtils.openBox(node);
         });
+    }
+
+    public static showConnectionNetwork() {
+        PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/connectioning', 100, null);
+    }
+
+    public static hideConnectionNetwork() {
+        this.nodes['Prefabs/connectioning'] && (this.nodes['Prefabs/connectioning'].active = false)
     }
 
     public static delPopupNode() {

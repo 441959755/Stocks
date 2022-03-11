@@ -32,7 +32,7 @@ export default class NewClass extends cc.Component {
     }
 
     init() {
-        if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+        if (GameData.vipStatus) {
             ComUtils.getVIPDisTime(this.getVIPDisTime.bind(this));
         }
         else {
@@ -64,7 +64,6 @@ export default class NewClass extends cc.Component {
         else if (name == 'sys_vip_vipjk90') {
             let item = GameCfgText.gameConf.item_vip[3];
             this.shopVip(item);
-
         }
 
         else if (name == 'sys_vip_vipyk30') {
@@ -100,7 +99,6 @@ export default class NewClass extends cc.Component {
                     xmlDoc.async = false;
                     xmlDoc.loadXML(wxXml);
                 }
-
                 let appid, nonce_str, partnerid, prepayid, timestamp, sign
                 appid = xmlDoc.getElementsByTagName("appid")[0].childNodes[0].nodeValue + '';
                 nonce_str = xmlDoc.getElementsByTagName("nonce_str")[0].childNodes[0].nodeValue + '';
@@ -108,8 +106,6 @@ export default class NewClass extends cc.Component {
                 prepayid = xmlDoc.getElementsByTagName("prepayid")[0].childNodes[0].nodeValue + '';
                 timestamp = xmlDoc.getElementsByTagName("timestamp")[0].childNodes[0].nodeValue + '';
                 sign = xmlDoc.getElementsByTagName("sign")[0].childNodes[0].nodeValue + '';
-
-
                 LLWSDK.getSDK().callWXPayToJava(appid, partnerid, prepayid, nonce_str, timestamp, sign);
 
             }

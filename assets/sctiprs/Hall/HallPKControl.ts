@@ -108,7 +108,6 @@ export default class NewClass extends cc.Component {
     }
 
     onSelfEnterRoomGameData(info) {
-
         //不是好友pk
         if (!GameData.JJCapital) {
             GlobalHandle.onLineInvite();
@@ -138,18 +137,23 @@ export default class NewClass extends cc.Component {
         GameCfg.huizhidatas = parseInt(info.tsQuoteStart) + 1;
 
         if (info.players[0].gd.uid == GameData.userID) {
-            GameData.Players[0] = info.players[0].gd;
 
+            GameData.Players[0] = info.players[0].gd;
             if (info.players[1].gd) {
                 GameData.Players[1] = info.players[1].gd;
+            }
+            else {
+                GameData.Players[1] = null;
             }
         }
 
         else if (info.players[1].gd.uid == GameData.userID) {
             GameData.Players[0] = info.players[1].gd;
-
             if (info.players[1].gd) {
                 GameData.Players[1] = info.players[0].gd;
+            }
+            else {
+                GameData.Players[1] = null;
             }
         }
 
@@ -190,6 +194,7 @@ export default class NewClass extends cc.Component {
                     GameData.Players[0] = info.players[0].gd;
                     GameData.Players[1] = info.players[1].gd;
                 }
+
                 else if (info.players[1].gd.uid == GameData.userID) {
                     GameData.Players[0] = info.players[1].gd;
                     GameData.Players[1] = info.players[0].gd;
@@ -199,9 +204,10 @@ export default class NewClass extends cc.Component {
 
             }
             else {
-                this.openMatchPk();
 
+                this.openMatchPk();
                 GlobalEvent.emit('SHOWOTHERPLAYER');
+
             }
         }
     }

@@ -5,7 +5,6 @@ import GameData from "../GameData";
 import GameCfgText from "../GameText";
 import GlobalHandle from "../global/GlobalHandle";
 import ActionUtils from "../Utils/ActionUtils";
-import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import LoadUtils from "../Utils/LoadUtils";
 import PopupManager from "../Utils/PopupManager";
@@ -38,11 +37,12 @@ export default class NewClass extends cc.Component {
     rewardCenterNode = null;
 
     onLoad() {
-
         this.rewardCenterBtn.active = false;
 
+        //获取是否有奖励
         GlobalEvent.on('getRewardCenter', this.getRewardCenter.bind(this), this);
 
+        //是否领取完
         GlobalEvent.on('REWARDITEM', (count) => {
             console.log(count);
             if (count > 0) {
@@ -56,12 +56,9 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on('setXSBtnShowOrHide', this.setXSBtnShowOrHide.bind(this), this);
 
         GlobalEvent.on('setVip7BtnShowOrHide', this.setVip7BtnShowOrHide.bind(this), this);
-
     }
 
     start() {
-
-
         if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
             return;
         }
@@ -74,6 +71,8 @@ export default class NewClass extends cc.Component {
                 this.setOtherBtnShowOrHide();
             }, 200);
         }
+
+
     }
 
     setXSBtnShowOrHide() {
@@ -238,10 +237,8 @@ export default class NewClass extends cc.Component {
     }
 
     getRewardCenter(call?) {
-
         socket.send(pb.MessageId.Req_Hall_BackBag, null, (info) => {
             console.log('getRewardCenter:' + JSON.stringify(info));
-
             if (info && info.grids.length > 0) {
                 this.rewardCenterBtn.active = true;
             }
@@ -249,7 +246,6 @@ export default class NewClass extends cc.Component {
                 this.rewardCenterBtn.active = false;
             }
             this.rewardCenterData = info.grids || [];
-
             call && (call);
         })
     }
@@ -292,6 +288,8 @@ export default class NewClass extends cc.Component {
     onDestroy() {
         GlobalEvent.off('getRewardCenter');
         GlobalEvent.off('REWARDITEM');
+        GlobalEvent.off('setXSBtnShowOrHide');
+        GlobalEvent.off('setVip7BtnShowOrHide');
     }
 
 }

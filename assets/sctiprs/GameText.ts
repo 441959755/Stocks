@@ -13,6 +13,8 @@ export default class GameCfgText {
 
     public static url = LLWConfig.LoginURL + '/conf/';
 
+    public static appUrl = LLWConfig.LoginURL + '/';
+
     public static curDayIsLoad = false;  //今天是否下载
 
     public static smxlCfg = null;           //训练次数配置
@@ -67,7 +69,7 @@ export default class GameCfgText {
             }
         }
 
-        HttpUtils.loadRequest(this.url + 'app.conf', null, callback1.bind(this), err1.bind(this));
+        HttpUtils.loadRequest(this.appUrl + 'app.conf', null, callback1.bind(this), err1.bind(this));
 
 
         let callback2 = (text) => {

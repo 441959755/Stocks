@@ -105,7 +105,19 @@ message CmdTradingDayReply {
 	repeated int32 days = 2;	// 查询某个日期前后的交易日
 }
 
-
+// 获取推荐股票列表
+message CmdRecommendStock {
+	int64 from = 1;    	// 推荐开始时间戳（from和to不能同时为0，查询日K行情的格式为：YYYYMMDD；）
+    int32 total = 2;   	// 天数（0表示忽略该参数；如果total和to都不为0，则优先使用天数作为查询条件；一次性查询最大天数为256天）
+	int64 to = 3;      	// 推荐结束时间戳（0表示忽略该参数；格式同from）
+}
+message RecommendStockItem {
+	int64 ts = 1;					// 推荐日期
+	repeated uint32 code_list = 2;	// 推荐股票代码清单
+}
+message CmdRecommendStockReply {
+	repeated RecommendStockItem items = 1;
+}
 
 // 查询期货行情
 message CmdQuoteQueryFuture {

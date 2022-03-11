@@ -56,11 +56,8 @@ class SetConf {
 
 
     constructor(str) {
-
         let set;
-
         set = cc.sys.localStorage.getItem(str);
-
         if (set) {
             return JSON.parse(set);
         }

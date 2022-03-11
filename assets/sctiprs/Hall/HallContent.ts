@@ -61,6 +61,7 @@ export default class NewClass extends cc.Component {
 		//vip
 		GlobalEvent.on(EventCfg.VIPCHANGE, this.setUserInfo.bind(this), this);
 
+		GlobalEvent.on('CmdGoldAwardPrompt', this.CmdGoldAwardPrompt.bind(this), this);
 	}
 
 	setUserHead() {
@@ -76,7 +77,6 @@ export default class NewClass extends cc.Component {
 	}
 
 	start() {
-
 		this.initToggle();
 		//设置用户信息
 		this.setUserInfo();
@@ -95,6 +95,16 @@ export default class NewClass extends cc.Component {
 				this.showFirstBox();
 			}, 200);
 		}
+
+		if (GameData.goldAwardPrompt) {
+			setTimeout(() => {
+				this.CmdGoldAwardPrompt();
+			}, 1000)
+		}
+	}
+
+	CmdGoldAwardPrompt() {
+		PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/fl/leadgoldAn', 100, null);
 	}
 
 	//首次登入弹框
@@ -113,7 +123,6 @@ export default class NewClass extends cc.Component {
 		if (!LLWSDK.getSDK().loginPlat) { return }
 
 		if (GameData.gameData.is_edited_nick) {
-
 			{
 				let data = {
 					uid: GameData.userID,
@@ -148,20 +157,17 @@ export default class NewClass extends cc.Component {
 		// 	socket.send(pb.MessageId.Req_Hall_UploadIcon, buff, (info) => {
 		// 		console.log('GameData.headImg:' + JSON.stringify(info));
 		// 	})
-
 		// }
-
 	}
 
 
 	setUserInfo() {
-		this.userLevel.string = 'LV:' + (GameData.properties[pb.GamePropertyId.Level] || 1) + '';
-
-		this.UserName.string = GameData.userName || GameData.userID;
-
 		this.setUserGender();
 
-		if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+		this.userLevel.string = 'LV:' + (GameData.properties[pb.GamePropertyId.Level] || 1) + '';
+		this.UserName.string = GameData.userName || GameData.userID;
+
+		if (GameData.vipStatus) {
 			this.vipImg.active = true;
 		}
 		else {
@@ -176,7 +182,6 @@ export default class NewClass extends cc.Component {
 	}
 
 	changeToggle(index) {
-
 		this.toggles.forEach((el, i) => {
 			el.isChecked = false;
 			if (index == i) {
@@ -197,10 +202,8 @@ export default class NewClass extends cc.Component {
 		if (name == 'main_xl_smxl') {
 			//开关
 			GameCfgText.getSwitchModule(1, () => {
-
 				GameCfg.GameType = pb.GameType.ShuangMang;
 				GlobalEvent.emit(EventCfg.OPENSMLAYER);
-
 			})
 		}
 
@@ -208,7 +211,6 @@ export default class NewClass extends cc.Component {
 		else if (name == 'main_xl_zbxl') {
 
 			GameCfgText.getSwitchModule(4, () => {
-
 				GameCfg.GameType = pb.GameType.ZhiBiao;
 				GlobalEvent.emit(EventCfg.OPENZBLAYER);
 
@@ -219,7 +221,6 @@ export default class NewClass extends cc.Component {
 		else if (name == 'main_xl_dxxl') {
 
 			GameCfgText.getSwitchModule(2, () => {
-
 				GameCfg.GameType = pb.GameType.DingXiang;
 				GlobalEvent.emit(EventCfg.OPENDXLAYER);
 
@@ -230,10 +231,8 @@ export default class NewClass extends cc.Component {
 		else if (name == 'main_xl_qhxl') {
 
 			GameCfgText.getSwitchModule(3, () => {
-
 				GameCfg.GameType = pb.GameType.QiHuo;
 				GlobalEvent.emit(EventCfg.OPENQHLAYER);
-
 			})
 
 		}
@@ -242,10 +241,8 @@ export default class NewClass extends cc.Component {
 		else if (name == 'main_xl_fsxl') {
 
 			GameCfgText.getSwitchModule(6, () => {
-
 				GameCfg.GameType = pb.GameType.FenShi;
 				GlobalEvent.emit(EventCfg.OPENFENSHI);
-
 			})
 		}
 
@@ -253,10 +250,8 @@ export default class NewClass extends cc.Component {
 		else if (name == 'main_xl_tjdxl') {
 
 			GameCfgText.getSwitchModule(5, () => {
-
 				GameCfg.GameType = pb.GameType.TiaoJianDan;
 				GlobalEvent.emit(EventCfg.OPENTIAOJIANDAN);
-
 			})
 		}
 
@@ -267,6 +262,7 @@ export default class NewClass extends cc.Component {
 
 		//pk
 		else if (name == 'main_jj_pkdz') {
+
 			GameCfgText.getSwitchModule(7, () => {
 				if (GameData.properties[pb.GamePropertyId.Gold] < 500) {
 					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
@@ -350,7 +346,6 @@ export default class NewClass extends cc.Component {
 
 		//点击创建对战
 		else if (name == 'main_jj_cjdz') {
-
 			// GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '暂不开放，敬请期待！');
 			// return;
 			GameCfgText.getSwitchModule(10, () => {

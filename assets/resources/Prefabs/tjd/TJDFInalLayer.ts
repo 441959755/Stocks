@@ -56,7 +56,7 @@ export default class NewClass extends cc.Component {
         this.expLa.string = 'EXP:' + GameData.properties[pb.GamePropertyId.Exp] + '/' + max_exp;
         this.nameLa.string = GameData.userName;
 
-        if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+        if (GameData.vipStatus) {
             this.vipNode.active = true;
         }
         else {

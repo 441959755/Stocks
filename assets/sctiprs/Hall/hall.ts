@@ -34,6 +34,8 @@ export default class NewClass extends cc.Component {
     //  firstBox = null;
     Matchfalg = false;
 
+    haoYouFangData = null;
+
     onLoad() {
 
         PopupManager.init();
@@ -67,6 +69,15 @@ export default class NewClass extends cc.Component {
         }, this);
 
         LLWSDK.getSDK().onShow(this.addRoom.bind(this));
+
+        GlobalEvent.on(EventCfg.RoomGameDataing, (message) => {
+            this.haoYouFangData = JSON.parse(JSON.stringify(message));
+            if (!this.gameLayer.active) {
+                GameData.selfEnterRoomData = message;
+                GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
+            }
+
+        }, this);
     }
 
     start() {
@@ -242,6 +253,7 @@ export default class NewClass extends cc.Component {
         // PopupManager.openNode(this.node, this.gameLayer, 'Prefabs/game/gameLayer', 50, (node) => {
         //     this.gameLayer = node;
         this.gameLayer.active = true;
+        this.haoYouFangData && (this.haoYouFangData = null)
         ///  this.gameLayer.zIndex = 50;
         this.onLoadFinalLayer();
         //})
@@ -292,6 +304,9 @@ export default class NewClass extends cc.Component {
 
         this.gameLayer && (this.gameLayer.active = false)
 
+        this.haoYouFangData && (GameData.selfEnterRoomData = this.haoYouFangData,
+            GlobalEvent.emit(EventCfg.RoomGameDataSelf, this.haoYouFangData))
+
         this.finalLayer[this.index] && (this.finalLayer[this.index].active = false);
 
         GameCfg.fill = [];
@@ -331,6 +346,11 @@ export default class NewClass extends cc.Component {
                 this.onShowGobroke();
             }
         }, 800);
+
+        if (this.haoYouFangData) {
+            GameCfg.GameType = pb.GameType.JJ_PK;
+            GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.JJPKSet));
+        }
     }
 
     //游戏结束
@@ -340,34 +360,34 @@ export default class NewClass extends cc.Component {
             return
         }
 
-        //  setTimeout(() => {
-        if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-            if (GameCfg.RoomGameData) {
-                let handle = this.finalLayer[this.index].getComponent('PKFinalHandle');
-                handle.onShow();
-            }
-
-            this.finalLayer[this.index].active = true;
-        }
-
-        else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
-
-            this.finalLayer[this.index].getComponent('CGSFinalHandle').onShow();
-
-            this.finalLayer[this.index].active = true;
-        }
-
-        else {
-            if (GameCfg.JJ_XUNLIAN) {
-                this.finalLayer[this.index].getComponent('LXFinalandle').onShow();
-                this.finalLayer[this.index].active = true;
-            } else {
-                this.finalLayer[this.index].getComponent('FinalHandle').onShow();
+        setTimeout(() => {
+            if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+                if (GameCfg.RoomGameData) {
+                    let handle = this.finalLayer[this.index].getComponent('PKFinalHandle');
+                    handle.onShow();
+                }
 
                 this.finalLayer[this.index].active = true;
             }
-        }
-        //  }, 50)
+
+            else if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan && !GameCfg.JJ_XUNLIAN) {
+
+                this.finalLayer[this.index].getComponent('CGSFinalHandle').onShow();
+
+                this.finalLayer[this.index].active = true;
+            }
+
+            else {
+                if (GameCfg.JJ_XUNLIAN) {
+                    this.finalLayer[this.index].getComponent('LXFinalandle').onShow();
+                    this.finalLayer[this.index].active = true;
+                } else {
+                    this.finalLayer[this.index].getComponent('FinalHandle').onShow();
+
+                    this.finalLayer[this.index].active = true;
+                }
+            }
+        }, 200)
     }
 
     addRoom() {
@@ -381,6 +401,8 @@ export default class NewClass extends cc.Component {
                 uid: GameData.userID,
                 junXian: arr,
             }
+
+            console.log('进入房间10' + JSON.stringify(data));
 
             let CmdRoomEnter = pb.CmdRoomEnter;
             let message = CmdRoomEnter.create(data);

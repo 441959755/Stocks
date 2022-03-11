@@ -47,7 +47,7 @@ export default class NewClass extends cc.Component {
         if (GameData.headImg) {
             this.headImg.spriteFrame = GameData.headImg;
         }
-        if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+        if (GameData.vipStatus) {
             this.vipImg.enabled = true;
         }
         else {

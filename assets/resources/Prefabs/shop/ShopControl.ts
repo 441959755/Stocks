@@ -168,7 +168,7 @@ export default class NewClass extends cc.Component {
         this.infoLabels[5].string = '奖券：' + GameData.properties[pb.GamePropertyId.Coupon];
         this.headImg.spriteFrame = GameData.headImg;
 
-        if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+        if (GameData.vipStatus) {
             this.vipNode.active = true;
         }
         else {

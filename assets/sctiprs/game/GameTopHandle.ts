@@ -215,7 +215,7 @@ export default class NewClass extends cc.Component {
                 head.spriteFrame = GameData.headImg;
                 name.string = '昵称：' + GameData.userName;
 
-                if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+                if (GameData.vipStatus) {
                     this.vipImg3.active = true;
                 }
                 else {
@@ -364,7 +364,7 @@ export default class NewClass extends cc.Component {
                     this.name1.string = GameData.userName;
                     this.level1.string = 'LV:' + GameData.properties[pb.GamePropertyId.Level];
 
-                    if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+                    if (GameData.vipStatus) {
                         this.vipImg1.active = true;
                     }
                     else {

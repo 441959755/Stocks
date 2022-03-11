@@ -89,6 +89,7 @@ enum MessageId {
 	Sync_S2C_GoldAwardPrompt = 1030;		// 同步金币奖励提示，客户端播放动画：CmdGoldAwardPrompt
 	Sync_S2C_UnregistryAccount = 1032;		// 同步管理员封号提示：无
 	Sync_S2C_CgdsConf = 1034;				// 同步炒股大赛配置：CgdsConf
+	Sync_S2C_RecommendStock = 1036;			// 同步当日的推荐股票：无
 
 	Sync_S2C_Broadcast = 1100;				// 系统广播：Notice
 	Sync_S2C_Message = 1102;				// 服务器发到客户端的消息（包括邀请或聊天消息）：Notice
@@ -115,6 +116,8 @@ enum MessageId {
 	Rep_QueryAiSignal = 2014;				// 查询某个股票的买卖信号响应：CmdQueryAiSignalReply
 	Req_EditAiStockList = 2015;				// 收藏/取消收藏智能选股：CmdMncgEditStock
 	Rep_EditAiStockList = 2016;				// 收藏/取消收藏智能选股：无
+	Req_RecommendStock = 2017;				// 查询推荐股票：CmdRecommendStock
+	Rep_RecommendStock = 2018;				// 查询推荐股票响应：CmdRecommendStockReply
 
 
 	// 大厅相关

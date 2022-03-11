@@ -63,7 +63,6 @@ export default class NewClass extends cc.Component {
 
         PopupManager.hideTipsBox('tipsBox');
 
-
         this.gameResult = JSON.parse(JSON.stringify(GameCfg.RoomGameData));
 
         if (this.gameResult.players[1].gd.uid == GameData.userID) {
@@ -72,8 +71,6 @@ export default class NewClass extends cc.Component {
             this.gameResult.players[1] = item1;
             this.gameResult.players[0] = item;
         }
-
-
 
         let gpData = GameCfg.data[0].data;
         let code = GameCfg.data[0].code;
@@ -110,10 +107,9 @@ export default class NewClass extends cc.Component {
             userHead.spriteFrame = GameData.headImg;
 
             UpGameOpt.ChanagekOffset(this.gameResult.players[0].ops.items);
-
             UpGameOpt.ChanagekOffset(this.gameResult.players[1].ops.items);
 
-            if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+            if (GameData.vipStatus) {
                 this.vipNode.active = true;
             }
             else {
@@ -156,7 +152,6 @@ export default class NewClass extends cc.Component {
             winSp.active = false;
 
             if (GameData.Players[1] && GameData.Players[1].icon) {
-
                 userHead.spriteFrame = GameData.Players[1].icon;
             }
             let stages;
@@ -199,7 +194,6 @@ export default class NewClass extends cc.Component {
 
                 this.onResultAward(3, this.otherResultLabel, this.gameResult.players[1].result.userProfitRate);
             }
-
 
             ex = this.gameResult.players[1].gd.properties[pb.GamePropertyId.Exp] + ex;
             if (ex >= GameCfgText.levelInfoCfg[this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level]]) {
@@ -342,7 +336,6 @@ export default class NewClass extends cc.Component {
             }
         }
 
-
         //复盘
         else if (name == 'pk_jsbt_qd') {
 
@@ -359,13 +352,15 @@ export default class NewClass extends cc.Component {
                 }
             });
 
+            GameCfg.fill = [];
+            GameCfg.fill.length = 0;
+            GameCfg.allRate = 0;
+
             DrawData.initData(GameCfg.data[0].data);
             GlobalEvent.emit('initMALA');
 
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            GameCfg.fill = [];
-            GameCfg.fill.length = 0;
-            GameCfg.allRate = 0;
+
             GlobalEvent.emit(EventCfg.FILLNODEISSHOW, false);
 
             GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 1);
@@ -381,7 +376,6 @@ export default class NewClass extends cc.Component {
         }
         //训练该股
         else if (name == 'pk_jsbt_xl') {
-
             if (!this.EnterGameLayer) {
                 GlobalEvent.emit(EventCfg.LOADINGSHOW);
                 LoadUtils.loadRes('Prefabs/enterXLGame', (pre) => {
@@ -407,23 +401,17 @@ export default class NewClass extends cc.Component {
                 }
             });
 
-            DrawData.initData(GameCfg.data[0].data);
-            GlobalEvent.emit('initMALA');
-
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
-            GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
-
             GameCfg.fill = [];
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
-
+            DrawData.initData(GameCfg.data[0].data);
+            GlobalEvent.emit('initMALA');
+            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+            GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
             GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, -1);
             this.node.active = false;
             GameCfg.GAMEFUPAN = true;
-
             GlobalEvent.emit(EventCfg.GAMEFUPANOPT, this.gameResult.players[0].ops.items)
-
             GlobalEvent.emit(EventCfg.GAMEFUPAN);
         }
         //tr复盘
@@ -441,6 +429,10 @@ export default class NewClass extends cc.Component {
                 }
             });
 
+            GameCfg.fill = [];
+            GameCfg.fill.length = 0;
+            GameCfg.allRate = 0;
+
             DrawData.initData(GameCfg.data[0].data);
 
             GlobalEvent.emit('initMALA');
@@ -448,10 +440,6 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
             GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
-
-            GameCfg.fill = [];
-            GameCfg.fill.length = 0;
-            GameCfg.allRate = 0;
 
             GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, -2);
             this.node.active = false;

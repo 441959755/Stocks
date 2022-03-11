@@ -1,6 +1,7 @@
 
 import { pb } from "../../../protos/proto";
 import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
+import DrawData from "../../../sctiprs/game/DrawData";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import StrategyAIData from "../../../sctiprs/game/StrategyAIData";
 import GameData from "../../../sctiprs/GameData";
@@ -72,14 +73,11 @@ export default class NewClass extends cc.Component {
 
         let player = JSON.parse(ComUtils.stringify(GameCfg.RoomGameData.players[0]));
 
-        console.log(player);
-
         GameCfg.RoomGameData.players[1] = player;
 
         let gpData = GameCfg.data[0].data;
 
-
-        let code = GameCfg.data[0].code;
+        let code = GameCfg.data[0].code + '';
         if (code.length >= 7) {
             code = code.slice(1);
         }
@@ -135,7 +133,7 @@ export default class NewClass extends cc.Component {
                 winSp.active = true;
             }
 
-            if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+            if (GameData.vipStatus) {
                 this.vipNode.active = true;
             }
             else {
@@ -311,6 +309,12 @@ export default class NewClass extends cc.Component {
 
         //复盘
         else if (name == 'pk_jsbt_qd') {
+
+            if (!GameData.vipStatus) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '开启VIP或解锁该功能取限制');
+                return;
+            }
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.fill = [];
             GameCfg.fill.length = 0;
@@ -346,12 +350,14 @@ export default class NewClass extends cc.Component {
         }
         //zj复盘
         else if (name == 'Btn_fupan_self') {
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.fill = [];
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
+            GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
 
-            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 1);
+            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, -1);
             this.node.active = false;
             GameCfg.GAMEFUPAN = true;
 
@@ -362,12 +368,14 @@ export default class NewClass extends cc.Component {
         }
         //tr复盘
         else if (name == 'Btn_fupan_other') {
+
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             GameCfg.fill = [];
             GameCfg.fill.length = 0;
             GameCfg.allRate = 0;
+            GlobalEvent.emit(EventCfg.FILLNODEISSHOW, true);
 
-            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, 2);
+            GlobalEvent.emit(EventCfg.CUTGAMEFUPAN, -2);
             this.node.active = false;
             GameCfg.GAMEFUPAN = true;
 

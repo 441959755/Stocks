@@ -163,10 +163,11 @@ PBHelper.prototype = {
                 let message = RoomGameData.decode(new Uint8Array(buff));
 
                 console.log('自己进入房间' + JSON.stringify(message));
+                GlobalEvent.emit(EventCfg.RoomGameDataing, message)
 
-                GameData.selfEnterRoomData = message;
+                // GameData.selfEnterRoomData = message;
+                // GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
 
-                GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
             }
         }
         // 其他玩家进入房间：SyncRoomEnter
@@ -187,11 +188,10 @@ PBHelper.prototype = {
                 GameData.Players = [];
                 GameData.RoomType = 0;
             }
-            // else {
-            //     GameData.Players.length = 1;
-            //     GameData.Players[1] = null;
-            // }
-
+            else {
+                // GameData.Players.length = 1;
+                // GameData.Players[1] = null;
+            }
             GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }
 
@@ -463,9 +463,13 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Rep_Hall_GetBrokenAward) {
             console.log('领取破产奖励应答' + id);
             return null;
-        } else if (id == pb.MessageId.Sync_S2C_GoldAwardPrompt) {
+        }
+
+        else if (id == pb.MessageId.Sync_S2C_GoldAwardPrompt) {
             let CmdGoldAwardPrompt = pb.CmdGoldAwardPrompt;
             let data = CmdGoldAwardPrompt.decode(new Uint8Array(buff));
+            console.log('领取奖励：' + JSON.stringify(data));
+            GameData.goldAwardPrompt = data;
             GlobalEvent.emit('CmdGoldAwardPrompt', data);
         }
 

@@ -9,13 +9,13 @@ const { ccclass, property } = cc._decorator;
 export default class NewClass extends cc.Component {
 
     onLoad() {
-        GlobalEvent.on('CmdGoldAwardPrompt', () => {
-            if (this.node.active) {
-                this.node.active = false;
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '领取成功');
-            }
-        }, this);
+        // GlobalEvent.on('CmdGoldAwardPrompt', () => {
+        //     if (this.node.active) {
+
+        //         GlobalEvent.emit(EventCfg.LOADINGHIDE);
+        //         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '领取成功');
+        //     }
+        // }, this);
     }
 
 
@@ -30,6 +30,7 @@ export default class NewClass extends cc.Component {
                     socket.send(pb.MessageId.Req_Hall_GetBrokenAward, null, (res) => {
 
                     })
+                    this.node.active = false;
                 }
             });
 

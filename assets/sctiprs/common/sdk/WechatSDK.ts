@@ -5,6 +5,7 @@ import LoadImg from "../../Utils/LoadImg";
 import GameCfgText from "../../GameText";
 import LLWConfig from "../config/LLWConfig";
 import HttpUtils from "../net/HttpUtils";
+import PopupManager from "../../Utils/PopupManager";
 
 export default class WechatSDK {
 
@@ -75,6 +76,16 @@ export default class WechatSDK {
         })
 
         this.ADInit();
+
+        // wx.onNetworkStatusChange((res) => {
+        //     console.log(res.isConnected);
+        //     if (!res.isConnected) {
+        //         PopupManager.showConnectionNetwork();
+        //     }
+        //     else {
+        //         PopupManager.hideConnectionNetwork();
+        //     }
+        // })
     }
 
 
@@ -315,7 +326,6 @@ export default class WechatSDK {
         if (roomId) {
             url = LLWConfig.LoginURL + '/wechatgame/invite.png';
             title = '真实历史数据，等你来战';
-
         }
         else {
             url = LLWConfig.LoginURL + '/wechatgame/share.png';

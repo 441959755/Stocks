@@ -100,6 +100,11 @@ export default class NewClass extends cc.Component {
             // }
             // else {
 
+            if (GameData.SmxlState.gold <= 10000) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '当前资产不足，请重置资产');
+                return;
+            }
+
 
             this.smStartGameSet();
             // }
@@ -156,7 +161,7 @@ export default class NewClass extends cc.Component {
 
         GameCfg.GAMEFUPAN = false;
         GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.SMSet));
-        GameCfg.ziChan = GameData.SmxlState.gold;
+        GameCfg.ziChan = parseInt(GameData.SmxlState.gold);
 
         GameCfg.enterGameConf = {
             ktype: pb.KType.Day,

@@ -107,7 +107,7 @@ export default class NewClass extends cc.Component {
                 winSp.active = true;
             }
 
-            if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+            if (GameData.vipStatus) {
                 this.vipImg.active = true;
             }
             else {

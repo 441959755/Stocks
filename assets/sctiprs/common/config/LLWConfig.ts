@@ -13,10 +13,10 @@ const PLATTYPE = PlatDefine.PLAT_WECHAT;
 const FROM = pb.AppFrom.WeChatMinProgram;
 
 // 
-const LoginURL = 'http://test.cgdr168.com';
-//const LoginURL = 'https://www.cgdr168.com';
+//const LoginURL = 'http://test.cgdr168.com';
+const LoginURL = 'https://www.cgdr168.com';
 
-
+//https://www.cgdr168.com/app.conf
 const ISLOG = false;
 
 export default class LLWConfig {
@@ -50,7 +50,6 @@ export default class LLWConfig {
 
 ////pbjs -t static-module -w commonjs -o proto.js *.proto
 //pbts -o proto.d.ts proto.js
-
 
 //<input id="file" type="file" class="f s(this)"/> 
 

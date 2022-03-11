@@ -66,6 +66,7 @@ export namespace pb {
         Sync_S2C_GoldAwardPrompt = 1030,
         Sync_S2C_UnregistryAccount = 1032,
         Sync_S2C_CgdsConf = 1034,
+        Sync_S2C_RecommendStock = 1036,
         Sync_S2C_Broadcast = 1100,
         Sync_S2C_Message = 1102,
         Sync_C2S_GameHeart = 1200,
@@ -87,6 +88,8 @@ export namespace pb {
         Rep_QueryAiSignal = 2014,
         Req_EditAiStockList = 2015,
         Rep_EditAiStockList = 2016,
+        Req_RecommendStock = 2017,
+        Rep_RecommendStock = 2018,
         Req_Hall_UploadIcon = 3001,
         Rep_Hall_UploadIcon = 3002,
         Req_Hall_DownloadIcon = 3003,
@@ -657,10 +660,12 @@ export namespace pb {
         Level = 4,
         Fame = 5,
         Coupon = 6,
+        SVip = 7,
         UnlockDxxl = 20,
         UnlockQhxl = 21,
         UnlockTjdxl = 22,
         UnlockZbxl = 23,
+        SVipExpiration = 25,
         K = 26,
         Tester = 27,
         VipExpiration = 28,
@@ -6832,6 +6837,9 @@ export namespace pb {
 
         /** RankingItem zsjcBettingAmount */
         zsjcBettingAmount?: (number|null);
+
+        /** RankingItem vipExpired */
+        vipExpired?: (number|Long|null);
     }
 
     /** Represents a RankingItem. */
@@ -6887,6 +6895,9 @@ export namespace pb {
 
         /** RankingItem zsjcBettingAmount. */
         public zsjcBettingAmount: number;
+
+        /** RankingItem vipExpired. */
+        public vipExpired: (number|Long);
 
         /**
          * Creates a new RankingItem instance using the specified properties.
@@ -12507,6 +12518,294 @@ export namespace pb {
 
         /**
          * Converts this CmdTradingDayReply to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdRecommendStock. */
+    interface ICmdRecommendStock {
+
+        /** CmdRecommendStock from */
+        from?: (number|Long|null);
+
+        /** CmdRecommendStock total */
+        total?: (number|null);
+
+        /** CmdRecommendStock to */
+        to?: (number|Long|null);
+    }
+
+    /** Represents a CmdRecommendStock. */
+    class CmdRecommendStock implements ICmdRecommendStock {
+
+        /**
+         * Constructs a new CmdRecommendStock.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdRecommendStock);
+
+        /** CmdRecommendStock from. */
+        public from: (number|Long);
+
+        /** CmdRecommendStock total. */
+        public total: number;
+
+        /** CmdRecommendStock to. */
+        public to: (number|Long);
+
+        /**
+         * Creates a new CmdRecommendStock instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdRecommendStock instance
+         */
+        public static create(properties?: pb.ICmdRecommendStock): pb.CmdRecommendStock;
+
+        /**
+         * Encodes the specified CmdRecommendStock message. Does not implicitly {@link pb.CmdRecommendStock.verify|verify} messages.
+         * @param message CmdRecommendStock message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdRecommendStock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdRecommendStock message, length delimited. Does not implicitly {@link pb.CmdRecommendStock.verify|verify} messages.
+         * @param message CmdRecommendStock message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdRecommendStock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdRecommendStock message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdRecommendStock
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRecommendStock;
+
+        /**
+         * Decodes a CmdRecommendStock message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdRecommendStock
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRecommendStock;
+
+        /**
+         * Verifies a CmdRecommendStock message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdRecommendStock message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdRecommendStock
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdRecommendStock;
+
+        /**
+         * Creates a plain object from a CmdRecommendStock message. Also converts values to other types if specified.
+         * @param message CmdRecommendStock
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdRecommendStock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdRecommendStock to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a RecommendStockItem. */
+    interface IRecommendStockItem {
+
+        /** RecommendStockItem ts */
+        ts?: (number|Long|null);
+
+        /** RecommendStockItem codeList */
+        codeList?: (number[]|null);
+    }
+
+    /** Represents a RecommendStockItem. */
+    class RecommendStockItem implements IRecommendStockItem {
+
+        /**
+         * Constructs a new RecommendStockItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IRecommendStockItem);
+
+        /** RecommendStockItem ts. */
+        public ts: (number|Long);
+
+        /** RecommendStockItem codeList. */
+        public codeList: number[];
+
+        /**
+         * Creates a new RecommendStockItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns RecommendStockItem instance
+         */
+        public static create(properties?: pb.IRecommendStockItem): pb.RecommendStockItem;
+
+        /**
+         * Encodes the specified RecommendStockItem message. Does not implicitly {@link pb.RecommendStockItem.verify|verify} messages.
+         * @param message RecommendStockItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IRecommendStockItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified RecommendStockItem message, length delimited. Does not implicitly {@link pb.RecommendStockItem.verify|verify} messages.
+         * @param message RecommendStockItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IRecommendStockItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a RecommendStockItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns RecommendStockItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.RecommendStockItem;
+
+        /**
+         * Decodes a RecommendStockItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns RecommendStockItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.RecommendStockItem;
+
+        /**
+         * Verifies a RecommendStockItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a RecommendStockItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns RecommendStockItem
+         */
+        public static fromObject(object: { [k: string]: any }): pb.RecommendStockItem;
+
+        /**
+         * Creates a plain object from a RecommendStockItem message. Also converts values to other types if specified.
+         * @param message RecommendStockItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.RecommendStockItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this RecommendStockItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdRecommendStockReply. */
+    interface ICmdRecommendStockReply {
+
+        /** CmdRecommendStockReply items */
+        items?: (pb.IRecommendStockItem[]|null);
+    }
+
+    /** Represents a CmdRecommendStockReply. */
+    class CmdRecommendStockReply implements ICmdRecommendStockReply {
+
+        /**
+         * Constructs a new CmdRecommendStockReply.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdRecommendStockReply);
+
+        /** CmdRecommendStockReply items. */
+        public items: pb.IRecommendStockItem[];
+
+        /**
+         * Creates a new CmdRecommendStockReply instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdRecommendStockReply instance
+         */
+        public static create(properties?: pb.ICmdRecommendStockReply): pb.CmdRecommendStockReply;
+
+        /**
+         * Encodes the specified CmdRecommendStockReply message. Does not implicitly {@link pb.CmdRecommendStockReply.verify|verify} messages.
+         * @param message CmdRecommendStockReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdRecommendStockReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdRecommendStockReply message, length delimited. Does not implicitly {@link pb.CmdRecommendStockReply.verify|verify} messages.
+         * @param message CmdRecommendStockReply message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdRecommendStockReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdRecommendStockReply message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdRecommendStockReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdRecommendStockReply;
+
+        /**
+         * Decodes a CmdRecommendStockReply message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdRecommendStockReply
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdRecommendStockReply;
+
+        /**
+         * Verifies a CmdRecommendStockReply message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdRecommendStockReply message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdRecommendStockReply
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdRecommendStockReply;
+
+        /**
+         * Creates a plain object from a CmdRecommendStockReply message. Also converts values to other types if specified.
+         * @param message CmdRecommendStockReply
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdRecommendStockReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdRecommendStockReply to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

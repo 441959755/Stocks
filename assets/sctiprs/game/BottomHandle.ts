@@ -60,7 +60,7 @@ export default class NewClass extends cc.Component {
 		}
 	}
 
-	_keMrCount = null; //可买入得数量
+	_keMrCount = 0; //可买入得数量
 	get keMrCount() {
 		return this._keMrCount;
 	}
@@ -140,6 +140,7 @@ export default class NewClass extends cc.Component {
 	onLoad() {
 
 		GlobalEvent.on(
+
 			EventCfg.GAMEOVEER,
 			() => {
 
@@ -353,7 +354,6 @@ export default class NewClass extends cc.Component {
 				if (this.keMcCount <= 0) {
 					this.mcBtn.interactable = false;
 					this.mcBtn.enableAutoGrayEffect = true;
-
 				}
 				this.mrBtn.interactable = true;
 				this.mrBtn.enableAutoGrayEffect = false;
@@ -465,10 +465,24 @@ export default class NewClass extends cc.Component {
 
 		let pkSelf = this.node.getComponent('PKBottomHandle');
 
+		this.curMrPJPrice = 0;   //当前平均买入价格
+		this.curMrCount = [];
+		this.curMcCount = 0;
+		this.buyData = [];
+		this.saleData = [];
+		this.rateItem = {
+			rate: null,
+			start: null,
+			end: null,
+			state: null,
+		};
+
+		this.curMcCount = 0;
+		this._KKCount = 0;
+		this._kdCount = 0;
+
 		opt.forEach((el, index) => {
-
 			GameCfg.huizhidatas = el.kOffset;
-
 			this.onSetMrCount();
 			if (GameCfg.GameType == pb.GameType.DingXiang ||
 				GameCfg.GameType == pb.GameType.ZhiBiao ||
@@ -476,9 +490,10 @@ export default class NewClass extends cc.Component {
 				GameCfg.GameType == pb.GameType.JJ_ChuangGuan ||
 				GameCfg.GameType == pb.GameType.TiaoJianDan) {
 
-				if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+				if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.GameType == pb.GameType.JJ_PK) {
 					el.volFraction = 1;
 				}
+
 				if (el.opId == pb.GameOperationId.Ask || el.opId == 'Ask') {
 					this._type = 1;
 					this.onClickCfBtn(el.volFraction || el.volume);
@@ -488,9 +503,10 @@ export default class NewClass extends cc.Component {
 					this.onClickCfBtn(el.volFraction || el.volume);
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: el.kOffset });
 				}
-				else {
+				else if (el.opId != pb.GameOperationId.END && el.opId != 'END') {
 					this.onClick({ target: { name: 'gwBtn' } }, null);
 				}
+
 			}
 			else if (GameCfg.GameType == pb.GameType.QiHuo) {
 
@@ -511,19 +527,19 @@ export default class NewClass extends cc.Component {
 				}
 			}
 			else if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
-				if (el.opId == pb.GameOperationId.Ask) {
+				if (el.opId == pb.GameOperationId.Ask || el.opId == 'Ask') {
 					pkSelf.onBtnClick({ target: { name: 'mzBtn' } });
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: el.kOffset });
 				}
-				else if (el.opId == pb.GameOperationId.Short) {
+				else if (el.opId == pb.GameOperationId.Short || el.opId == 'Short') {
 					pkSelf.onBtnClick({ target: { name: 'mdBtn' } });
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: el.kOffset });
 				}
-				else if (el.opId == pb.GameOperationId.Long) {
+				else if (el.opId == pb.GameOperationId.Long || el.opId == 'Long') {
 					pkSelf.onBtnClick({ target: { name: 'pcBtn1' } });
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: el.kOffset });
 				}
-				else if (el.opId == pb.GameOperationId.Bid) {
+				else if (el.opId == pb.GameOperationId.Bid || el.opId == 'Bid') {
 					pkSelf.onBtnClick({ target: { name: 'pcBtn' } });
 					GlobalEvent.emit(EventCfg.ONADDMARK, { type: 3, index: el.kOffset });
 				}
@@ -598,8 +614,10 @@ export default class NewClass extends cc.Component {
 			return;
 		}
 
-		this.ziChan = JSON.parse(JSON.stringify(GameCfg.ziChan));
+		this.ziChan = parseInt(GameCfg.ziChan + '');
+
 		this.onSetMrCount();
+
 		//分仓
 		if (GameCfg.GameSet.isFC) {
 			this, this.mcBtn.node.parent.active = true;
@@ -1183,7 +1201,6 @@ export default class NewClass extends cc.Component {
 				GlobalEvent.emit(EventCfg.ONADDMARK, { type: 2, index: GameCfg.huizhidatas });
 				this.setRoundNumber('mrBtn1');
 			}
-
 		}
 
 		//
@@ -1251,6 +1268,7 @@ export default class NewClass extends cc.Component {
 		if (type) {
 			num = 1;
 		}
+
 		let data = this.gpData;
 		if (!data[GameCfg.huizhidatas - num]) { return 0 }
 		let curClose = parseFloat(data[GameCfg.huizhidatas - num].close);
@@ -1289,6 +1307,7 @@ export default class NewClass extends cc.Component {
 		//买入
 		let data = this.gpData;
 		if (state == 'mrBtn' || state == 'mrBtn1') {
+
 			this.buyData.push(GameCfg.huizhidatas - 1);
 
 			let rate = this.onCurPositionRete();
@@ -1354,7 +1373,7 @@ export default class NewClass extends cc.Component {
 
 			GlobalEvent.emit(EventCfg.UPDATERATE, [rate, GameCfg.allRate]);
 
-			if (this.keMcCount == 0) {
+			if (this.keMcCount <= 0) {
 				this.isFlag = false;
 				this.rateItem.end = GameCfg.huizhidatas - 1;
 
@@ -1365,6 +1384,7 @@ export default class NewClass extends cc.Component {
 				});
 
 				this.curMrPJPrice = 0;
+
 			} else {
 				this.curMrPJPrice = preClose;
 

@@ -20,11 +20,11 @@ export default class WebSDK {
 
         // let uuid = uid || LLWUtils.getUUID();
         let a = Math.random() * 10;
-        let uuid = '1314713187' + a;
+        let uuid = '1314713188' + a;
 
         let loginInfo = {
             account: uuid,
-            type: pb.LoginType.MobilePhoneId,
+            //  type: pb.LoginType.MobilePhoneId,
             type: pb.LoginType.AppTest,
             // from: LLWConfig.FROM,
             pwd: '123456'

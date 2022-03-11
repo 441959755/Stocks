@@ -95,7 +95,7 @@ export default class NewClass extends cc.Component {
         this.expLabel.string = 'EXP:' + GameData.properties[pb.GamePropertyId.Exp] + '/' + max_exp;
         this.userName.string = GameData.userName;
 
-        if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+        if (GameData.vipStatus) {
             this.vipNode.active = true;
         }
         else {
@@ -127,6 +127,15 @@ export default class NewClass extends cc.Component {
                 this.boxs[1].active = false;
                 this.boxs[2].active = false;
             }
+        }
+
+        let userProfit = 0;
+
+        if (GameCfg.finalfund <= 0) {
+            userProfit = 0;
+        }
+        else {
+            userProfit = (GameCfg.finalfund - GameCfg.ziChan);
         }
 
         //复盘中不保存记录

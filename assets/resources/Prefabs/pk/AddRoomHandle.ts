@@ -60,6 +60,7 @@ export default class NewClass extends cc.Component {
     }
 
     onEnterRoom(roomid) {
+
         let arr = ComUtils.getJJXunXian();
 
         let data = {
@@ -71,6 +72,8 @@ export default class NewClass extends cc.Component {
         let CmdRoomEnter = pb.CmdRoomEnter;
         let message = CmdRoomEnter.create(data);
         let buff = CmdRoomEnter.encode(message).finish();
+
+        GameData.RoomType = 2;
 
         socket.send(pb.MessageId.Req_Room_Enter, buff, (res) => {
             console.log('进入房间11' + JSON.stringify(res));
@@ -86,8 +89,6 @@ export default class NewClass extends cc.Component {
                 GameData.RoomType = 2;
             }
         })
-
-        GameData.RoomType = 2;
     }
 
     onDisable() {

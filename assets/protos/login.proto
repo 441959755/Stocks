@@ -116,7 +116,7 @@ message AdClicked {
 
 // 注册
 message CmdRegistry {
-	string account = 1; // 玩家账号：手机号、QQ或微信登录的OpenID
+	string account = 1; // 玩家账号：手机号、QQ或微信登录的OpenID、微信小程序登录则为Code
 	LoginType type = 2; // 登录类型
 	string pwd = 3;     // 玩家密码
 	string sms_code = 4;// 手机验证码
@@ -128,7 +128,7 @@ message CmdRegistry {
 
 // 登录参数
 message CmdLogin {
-	string account = 1; // 玩家账号：手机号、QQ或微信登录的OpenID
+	string account = 1; // 玩家账号：手机号、QQ或微信登录的OpenID、微信小程序登录则为Code
 	LoginType type = 2; // 登录类型
 	string pwd = 3;     // 玩家密码
 	AppFrom from = 4; 	// App渠道

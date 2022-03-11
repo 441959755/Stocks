@@ -3,6 +3,7 @@ import { pb } from "../../../protos/proto";
 import GameData from '../../GameData';
 import GlobalEvent from "../../Utils/GlobalEvent";
 import EventCfg from "../../Utils/EventCfg";
+import PopupManager from "../../Utils/PopupManager";
 
 let MessageHead = pb.MessageHead;
 
@@ -65,6 +66,8 @@ export default class Socket {
         this.reconnectBeat && (clearInterval(this.reconnectBeat));
         this.reconnectBeat = null;
         this.reconnectCount = 0;
+
+        this.onHideTips();
 
         let CmdGameLogin = pb.CmdGameLogin;
         let message = CmdGameLogin.create({
@@ -166,6 +169,7 @@ export default class Socket {
     }
 
     onerror() {
+        console.log('连接错误');
         this.onShowTips();
     }
 
@@ -186,24 +190,25 @@ export default class Socket {
     }
 
     reconnect() {
-
+        this.onShowTips();
         if (!this.reconnectBeat) {
             this.reconnectBeat = setInterval(() => {
                 console.log('断线连接中...');
-
                 this.init();
+                //  if (this.reconnectCount >= 2) {
 
-                if (this.reconnectCount >= 2) {
-                    this.onShowTips();
-                }
-
+                //   }
                 this.reconnectCount++;
             }, 3000);
         }
     }
 
     onShowTips() {
-        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否正常连接。');
+        PopupManager.showConnectionNetwork();
+    }
+
+    onHideTips() {
+        PopupManager.hideConnectionNetwork();
     }
 
 }

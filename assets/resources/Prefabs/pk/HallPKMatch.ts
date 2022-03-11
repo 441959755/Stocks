@@ -144,7 +144,7 @@ export default class NewClass extends cc.Component {
 
             exp.getComponent(cc.Label).string = '经验值：' + GameData.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.gameConf.level_exp[(GameData.properties[pb.GamePropertyId.Level] || 1)];
 
-            if (GameData.properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
+            if (GameData.vipStatus) {
                 this.vipNode.active = true;
             }
             else {
