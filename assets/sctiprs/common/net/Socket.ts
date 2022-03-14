@@ -33,6 +33,7 @@ export default class Socket {
     }
 
     init() {
+        console.log('初始Socket...');
         this.ws = new WebSocket(this.host);
         this.ws.binaryType = 'arraybuffer';
         this.ws.onmessage = this.message.bind(this);

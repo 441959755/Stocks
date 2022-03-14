@@ -98,6 +98,7 @@ export default class GameData {
     public static get headImg() {
         return this._headImg;
     }
+
     public static set headImg(val) {
         this._headImg = val;
         GlobalEvent.emit(EventCfg.HEADIMGCHANGE);

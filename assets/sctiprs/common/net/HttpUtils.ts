@@ -99,6 +99,7 @@ export default {
 
 
     loadRequest: function (path, data, handler, err?) {
+        
         var xhr = cc.loader.getXMLHttpRequest();
         xhr.timeout = 5000;
 

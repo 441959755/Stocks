@@ -32,14 +32,11 @@ export default class HttpMgr {
         buff1 = buff1.buffer.slice(buff1.byteOffset, buff1.byteLength + buff1.byteOffset);
 
         HttpUtils.sendXHRAB(url, buff1, (buff) => {
-
             let CmdLoginReply = pb.CmdLoginReply;
             let decoded = CmdLoginReply.decode(new Uint8Array(buff));
-
             if (decoded) {
                 call && (call(decoded));
             }
-
         }, err);
     }
 

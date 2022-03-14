@@ -16,10 +16,11 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class LoginHandle extends cc.Component {
 
+    flag = false;
 
     protected onLoad(): void {
 
-        GlobalEvent.on('OPENNOTICELAYER', this.openNoticeLayer.bind(this), this);
+        //  GlobalEvent.on('OPENNOTICELAYER', this.openNoticeLayer.bind(this), this);
 
         PopupManager.init();
 
@@ -50,6 +51,12 @@ export default class LoginHandle extends cc.Component {
     //登入游戏
     loginResultCallback(decoded) {
 
+        if (this.flag) {
+            return;
+        }
+
+        this.flag = true;
+
         if (decoded.err.err) {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, decoded.err.err);
@@ -64,13 +71,10 @@ export default class LoginHandle extends cc.Component {
         // }
 
         if (decoded) {
+            console.log('登入...');
             decoded.token && (GameData.token = decoded.token);
             decoded.uid && (GameData.userID = decoded.uid);
-
-            if (decoded.gameAddr) {
-                (<any>window).socket = new Socket(decoded.gameAddr);
-            }
-
+            (<any>window).socket = new Socket(decoded.gameAddr);
         } else {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');
@@ -113,19 +117,19 @@ export default class LoginHandle extends cc.Component {
     }
 
     initData() {
-        GameData.SMSet = new SetConf('SMSET');
+        GameData.SMSet = new SetConf('SMSET').data;
 
-        GameData.JJPKSet = new SetConf('JJPKSET');
+        GameData.JJPKSet = new SetConf('JJPKSET').data;
 
-        GameData.DXSet = new SetConf('DXSET');
+        GameData.DXSet = new SetConf('DXSET').data;
 
-        GameData.ZBSet = new SetConf('ZBSet');
+        GameData.ZBSet = new SetConf('ZBSet').data;
 
-        GameData.QHSet = new SetConf('QHSET');
+        GameData.QHSet = new SetConf('QHSET').data;
 
-        GameData.TJDSet = new SetConf('TJDSET');
+        GameData.TJDSet = new SetConf('TJDSET').data;
 
-        GameData.FSSet = new SetConf('FSSET');
+        GameData.FSSet = new SetConf('FSSET').data;
 
         GameData.DXHistoryInfo = new HisCode('DXHISTORYINFO').code;
 
@@ -133,13 +137,13 @@ export default class LoginHandle extends cc.Component {
 
         GameData.ZBHistoryInfo = new HisCode('ZBHISTORYINFO').code;
 
-        let str = new Date().toLocaleDateString();
+        //  let str = new Date().toLocaleDateString();
 
-        GameData.DingXiangADCount = new AdCount('DINGXIANGADCOUNT' + str);
+        //  GameData.DingXiangADCount = new AdCount('DINGXIANGADCOUNT' + str);
 
-        GameData.QHADCount = new AdCount('QHADCOUNT' + str);
+        //  GameData.QHADCount = new AdCount('QHADCOUNT' + str);
 
-        GameData.TJADCount = new AdCount('TJADCOUNT' + str);
+        //  GameData.TJADCount = new AdCount('TJADCOUNT' + str);
 
         AudioUtils.setEffectsVolume(GameData.SMSet.isSound);
 

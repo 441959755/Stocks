@@ -44,7 +44,6 @@ export default class LLWConfig {
     static get LoginURL() {
         return LoginURL;
     }
-
 }
 
 

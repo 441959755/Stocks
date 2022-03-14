@@ -62,6 +62,7 @@ export default class WechatSDK {
                                 text: "开始游戏"
                             })
                             button.onTap((res) => {
+                                button && (button.destroy())
                                 self.getUserInfo1(code, button, call)
                             })
                         }
@@ -107,16 +108,15 @@ export default class WechatSDK {
                 //     // self.onLoginCodeHttpRequest(code, call);
                 // })
 
-                // LoadImg.downloadRemoteImageAndSave(GameData.headimgurl, (tex, sp) => {
-                //     //   console.log('downloadRemoteImageAndSave' + sp + ' ' + tex);
-                //     GameData.headimgurl = tex;
-                //     GameData.headImg = sp;
-                //     btn && (btn.destroy())
-                //     self.onLoginCodeHttpRequest(code, call);
-                // }, true)
+                LoadImg.downloadRemoteImageAndSave(GameData.headimgurl, (tex, sp) => {
+                    //  console.log('downloadRemoteImageAndSave' + sp + ' ' + tex);
+                    GameData.headimgurl = tex;
+                    GameData.headImg = sp;
+                }, true)
 
-                btn && (btn.destroy())
                 self.onLoginCodeHttpRequest(code, call);
+                // btn && (btn.destroy())
+                // self.onLoginCodeHttpRequest(code, call);
             }
         })
     }
