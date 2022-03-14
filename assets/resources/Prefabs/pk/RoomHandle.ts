@@ -63,13 +63,13 @@ export default class NewClass extends cc.Component {
             let read1 = this.player[0].getChildByName('read').getComponent(cc.Label);
             if (data.ready) {
                 this.zbFlag = true;
-                read.string = '等待开始';
-                read1.string = '等待开始';
+                read.string = '等待开始...';
+                read1.string = '等待开始...';
             }
             else {
                 this.zbFlag = false;
-                read.string = '等待准备';
-                read1.string = '等待准备';
+                read.string = '等待准备...';
+                read1.string = '等待准备...';
             }
         }, this);
 
@@ -116,7 +116,7 @@ export default class NewClass extends cc.Component {
             name.string = '';
             lv.string = '';
             exp.string = '';
-            read.string = '等待加入';
+            read.string = '等待加入...';
             head.spriteFrame = null;
         }
         //房間解散
@@ -196,12 +196,12 @@ export default class NewClass extends cc.Component {
                 lv.string = 'LV: ' + GameData.Players[0].properties[pb.GamePropertyId.Level];
                 exp.string = '经验值：' + GameData.Players[0].properties[pb.GamePropertyId.Exp] + '/' +
                     GameCfgText.gameConf.level_exp[(GameData.Players[0].properties[pb.GamePropertyId.Level] || 1)];
-                read.string = '等待加入';
+                read.string = '等待加入...';
                 this.onLoadHead(GameData.Players[0], head);
 
             }
             if (GameData.Players && GameData.Players[1]) {
-                read.string = '等待准备';
+                read.string = '等待准备...';
             }
         }
 
@@ -211,13 +211,13 @@ export default class NewClass extends cc.Component {
             let exp = this.player[1].getChildByName('exp').getComponent(cc.Label);
             let read = this.player[1].getChildByName('read').getComponent(cc.Label);
             let head = this.player[1].getChildByName('head').getComponent(cc.Sprite);
-            read.string = '等待加入';
+            read.string = '等待加入...';
             if (GameData.Players && GameData.Players[1]) {
                 name.string = GameData.Players[1].nickname;
                 lv.string = 'LV: ' + GameData.Players[1].properties[pb.GamePropertyId.Level];
                 exp.string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + '/' +
                     GameCfgText.gameConf.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
-                read.string = '等待准备';
+                read.string = '等待准备...';
                 this.onLoadHead(GameData.Players[1], head);
                 this.jj_fxyq.active = false;
                 this.jj_zxyq.active = false;
@@ -228,7 +228,7 @@ export default class NewClass extends cc.Component {
                 name.string = '';
                 lv.string = '';
                 exp.string = '';
-                read.string = '等待加入';
+                read.string = '等待加入...';
                 head.spriteFrame = null;
             }
         }
@@ -321,9 +321,9 @@ export default class NewClass extends cc.Component {
             })
             this.jj_zb.active = false;
             let read = this.player[1].getChildByName('read').getComponent(cc.Label);
-            read.string = '等待开始';
+            read.string = '等待开始...';
             let read1 = this.player[0].getChildByName('read').getComponent(cc.Label);
-            read1.string = '等待开始';
+            read1.string = '等待开始...';
             this.qxzbBtn.active = true;
         }
 
@@ -343,9 +343,9 @@ export default class NewClass extends cc.Component {
                 console.log('玩家状态' + JSON.stringify(res));
             })
             let read = this.player[1].getChildByName('read').getComponent(cc.Label);
-            read.string = '等待准备';
+            read.string = '等待准备...';
             let read1 = this.player[0].getChildByName('read').getComponent(cc.Label);
-            read1.string = '等待准备';
+            read1.string = '等待准备...';
             this.qxzbBtn.active = false;
             this.jj_zb.active = true;
         }

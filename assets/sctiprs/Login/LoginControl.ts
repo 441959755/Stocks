@@ -58,10 +58,10 @@ export default class LoginHandle extends cc.Component {
 
         console.log(decoded.token + decoded.uid + decoded.gameAddr);
 
-        if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
-            decoded.gameAddr = 'wss://www.cgdr168.com/ws';
-            console.log(decoded.token + decoded.uid + decoded.gameAddr);
-        }
+        // if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
+        //     decoded.gameAddr = 'wss://www.cgdr168.com/ws';
+        //     console.log(decoded.token + decoded.uid + decoded.gameAddr);
+        // }
 
         if (decoded) {
             decoded.token && (GameData.token = decoded.token);
@@ -127,11 +127,11 @@ export default class LoginHandle extends cc.Component {
 
         GameData.FSSet = new SetConf('FSSET');
 
-        GameData.DXHistoryInfo = new HisCode('DXHISTORYINFO');
+        GameData.DXHistoryInfo = new HisCode('DXHISTORYINFO').code;
 
-        GameData.QHHistoryInfo = new HisCode('QHHISTORYINFO');
+        GameData.QHHistoryInfo = new HisCode('QHHISTORYINFO').code;
 
-        GameData.ZBHistoryInfo = new HisCode('ZBHISTORYINFO');
+        GameData.ZBHistoryInfo = new HisCode('ZBHISTORYINFO').code;
 
         let str = new Date().toLocaleDateString();
 

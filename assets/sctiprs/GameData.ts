@@ -192,11 +192,11 @@ export default class GameData {
     }
 
     //保存选择的股票
-    public static DXHistoryInfo = null;
+    public static DXHistoryInfo = [];
 
-    public static QHHistoryInfo = null;
+    public static QHHistoryInfo = [];
 
-    public static ZBHistoryInfo = null;
+    public static ZBHistoryInfo = [];
 
 
     //双盲的次数

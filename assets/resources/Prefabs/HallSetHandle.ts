@@ -49,6 +49,7 @@ export default class NewClass extends cc.Component {
     start() {
         this.scroll.active = false;
         this.UIScrollControl = this.scroll.getComponent('UIScrollControl');
+        this.initToggle();
     }
 
     protected onEnable() {
@@ -56,15 +57,12 @@ export default class NewClass extends cc.Component {
             this.MaDates[this._Lid].string = data;
             this.scroll.active = false;
         }, this);
-        this.initToggle();
     }
 
     //默认的选项
     initToggle() {
         let data;
-
         data = GameData.SMSet;
-
         this.showVol[0].isChecked = data.isShowVol;
         this.showVol[1].isChecked = !data.isShowVol;
         this.BW[0].isChecked = data.isBW;

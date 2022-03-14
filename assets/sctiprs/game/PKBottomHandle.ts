@@ -141,8 +141,13 @@ export default class NewClass extends cc.Component {
             pkNode.getChildByName('timeLabel').active = false;
             let pkFP = pkNode.getChildByName('FUPAN');
             pkFP.active = true;
-            pkFP.children[0].getComponent(cc.Label).string = GameCfg.data[0].name + '    ' + GameCfg.data[0].code;
 
+            let code = GameCfg.data[0].code + '';
+            if (code.length >= 7) {
+                code = code.slice(1);
+            }
+
+            pkFP.children[0].getComponent(cc.Label).string = GameCfg.data[0].name + '    ' + code;
             let gpData = GameCfg.data[0].data;
             pkFP.children[1].getComponent(cc.Label).string = ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
 
