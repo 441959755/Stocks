@@ -65,7 +65,24 @@ export default class NewClass extends cc.Component {
 	}
 
 	setUserHead() {
-		this.userHead.spriteFrame = GameData.headImg;
+		if (GameData.headImg) {
+			this.userHead.spriteFrame = GameData.headImg;
+		}
+		else {
+			cc.loader.load({ GameData.headimgurl, type: 'jpg' }, function (err, tex) {
+				if (tex && tex.height != 0) {
+					console.log('已加载头像');
+					let spriteFrame = new cc.SpriteFrame(tex);
+					GameData.headimgurl = tex;
+					GameData.headImg = spriteFrame;
+					this.userHead.spriteFrame = GameData.headImg;
+				} else {
+					// callback(caller, null);
+					console.log('加载头像错误');
+				}
+			});
+		}
+
 	}
 
 	setUserGender() {

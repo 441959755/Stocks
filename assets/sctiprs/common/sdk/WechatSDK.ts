@@ -115,28 +115,8 @@ export default class WechatSDK {
                 //     self.onLoginCodeHttpRequest(code, call);
                 // }, true)
 
-                cc.loader.load({ webUserInfo.avatarUrl, type: 'jpg' }, function (err, tex) {
-                    if (tex && tex.height != 0) {
-
-                        // let canvas = document.createElement("canvas");
-                        // let ctx = canvas.getContext("2d");
-                        // var img = tex.getHtmlElementObj();
-                        // canvas.width = tex.width;
-                        // canvas.height = tex.height;
-                        // ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                        console.log('已加载头像');
-                        let spriteFrame = new cc.SpriteFrame(tex);
-                        //   callback(tex, spriteFrame);
-                        GameData.headimgurl = tex;
-                        GameData.headImg = spriteFrame;
-                        btn && (btn.destroy())
-                        self.onLoginCodeHttpRequest(code, call);
-                    } else {
-                        // callback(caller, null);
-                        console.log('加载头像错误');
-                    }
-                });
-
+                btn && (btn.destroy())
+                self.onLoginCodeHttpRequest(code, call);
             }
         })
     }
