@@ -40,6 +40,12 @@ export default class WebSDK {
         console.log('webSDK is chooseImage null');
     }
 
+
+    ADInit() {
+        console.log('广告初始加载');
+    }
+
+
     copyborad(str) {
         let input = str;
         const el = document.createElement('textarea');

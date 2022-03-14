@@ -37,6 +37,7 @@ export default class NewClass extends cc.Component {
     haoYouFangData = null;
 
     onLoad() {
+        LLWSDK.getSDK().ADInit();
 
         PopupManager.init();
 
