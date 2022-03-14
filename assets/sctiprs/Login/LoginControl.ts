@@ -1,7 +1,7 @@
 import LLWSDK from "../common/sdk/LLWSDK";
 import AudioUtils from "../Utils/AudioUtils";
 import GlobalEvent from "../Utils/GlobalEvent";
-import Socket from "../common/net/Socket";
+import socket from "../common/net/Socket";
 import PopupManager from "../Utils/PopupManager";
 import { SetConf, HisCode, AdCount, SelectBk } from "../SetConf";
 import GameData from "../GameData";
@@ -74,7 +74,9 @@ export default class LoginHandle extends cc.Component {
             console.log('登入...');
             decoded.token && (GameData.token = decoded.token);
             decoded.uid && (GameData.userID = decoded.uid);
-            (<any>window).socket = new Socket(decoded.gameAddr);
+            socket.host = decoded.gameAddr;
+            (<any>window).socket = socket;
+            socket.init();
         } else {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');

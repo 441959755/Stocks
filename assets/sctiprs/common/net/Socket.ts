@@ -7,7 +7,7 @@ import PopupManager from "../../Utils/PopupManager";
 
 let MessageHead = pb.MessageHead;
 
-export default class Socket {
+class Socket {
 
     ws = null;
 
@@ -25,14 +25,13 @@ export default class Socket {
 
     heartbeat = null;  //心跳
 
-    constructor(host) {
+    constructor() {
         this.flag = false;
-        this.host = host;
         this.reconnectCount = 0;
-        this.init();
+
     }
 
-    init() {
+    public init() {
         console.log('初始Socket...');
         this.ws = new WebSocket(this.host);
         this.ws.binaryType = 'arraybuffer';
@@ -42,7 +41,7 @@ export default class Socket {
         this.ws.onclose = this.onclose.bind(this);
     }
 
-    message(event) {
+    public message(event) {
 
         let decode = new Uint8Array(event.data);
 
@@ -62,7 +61,7 @@ export default class Socket {
         callback && (callback(info));
     }
 
-    connected(event) {
+    public connected(event) {
 
         this.reconnectBeat && (clearInterval(this.reconnectBeat));
         this.reconnectBeat = null;
@@ -139,7 +138,7 @@ export default class Socket {
 
     }
 
-    send(actionCode, proto, callback) {
+    public send(actionCode, proto, callback) {
 
         if (this.ws && this.ws.readyState == WebSocket.OPEN) {
 
@@ -169,12 +168,12 @@ export default class Socket {
 
     }
 
-    onerror() {
+    public onerror() {
         console.log('连接错误');
         this.onShowTips();
     }
 
-    onclose() {
+    public onclose() {
         console.log('连接断开');
 
         this.heartbeat && (clearInterval(this.heartbeat))
@@ -190,7 +189,7 @@ export default class Socket {
         }
     }
 
-    reconnect() {
+    public reconnect() {
         this.onShowTips();
         if (!this.reconnectBeat) {
             this.reconnectBeat = setInterval(() => {
@@ -204,12 +203,15 @@ export default class Socket {
         }
     }
 
-    onShowTips() {
+    public onShowTips() {
         PopupManager.showConnectionNetwork();
     }
 
-    onHideTips() {
+    public onHideTips() {
         PopupManager.hideConnectionNetwork();
     }
 
 }
+
+let socket = new Socket();
+export default socket;

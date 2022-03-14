@@ -3,7 +3,7 @@ import LLWSDK from "../common/sdk/LLWSDK";
 import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
-import Socket from "../common/net/Socket";
+import socket from "../common/net/Socket";
 import PopupManager from "../Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
@@ -102,7 +102,8 @@ export default class NewClass extends cc.Component {
             decoded.uid && (GameData.userID = decoded.uid);
 
             if (decoded.gameAddr) {
-                (<any>window).socket = new Socket(decoded.gameAddr);
+                socket.host = decoded.gameAddr;
+                (<any>window).socket.init();
             }
 
         } else {
