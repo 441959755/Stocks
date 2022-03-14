@@ -11,11 +11,14 @@ import ComUtils from "../Utils/ComUtils";
 import LLWConfig from "../common/config/LLWConfig";
 import PlatDefine from "../common/config/PlatDefine";
 
-cc.Class({
-    extends: cc.Component,
+const { ccclass, property } = cc._decorator;
 
+@ccclass
+export default class LoginHandle extends cc.Component {
 
-    onLoad() {
+    flag = false;
+
+    protected onLoad(): void {
 
         //  GlobalEvent.on('OPENNOTICELAYER', this.openNoticeLayer.bind(this), this);
 
@@ -30,7 +33,7 @@ cc.Class({
         ComUtils.resetSize(this.node);
 
         //  LLWSDK.getSDK().onShow();
-    },
+    }
 
     init() {
 
@@ -38,12 +41,12 @@ cc.Class({
 
         let pbhelper = new PBHelper;
 
-        window.PB = pbhelper;
+        (<any>window).PB = pbhelper;
 
-        window.gg = { wechat: LLWSDK.getSDK() }
+        (<any>window).gg = { wechat: LLWSDK.getSDK() }
 
         LLWSDK.getSDK().login(this.loginResultCallback.bind(this));
-    },
+    }
 
     //登入游戏
     loginResultCallback(decoded) {
@@ -72,13 +75,13 @@ cc.Class({
             decoded.token && (GameData.token = decoded.token);
             decoded.uid && (GameData.userID = decoded.uid);
             socket.host = decoded.gameAddr;
-            window.socket = socket;
+            (<any>window).socket = socket;
             socket.init();
         } else {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');
         }
-    },
+    }
 
     start() {
 
@@ -104,16 +107,16 @@ cc.Class({
         this.init();
 
         LLWSDK.getSDK().onShareAppMessage();
-    },
+    }
 
     openNoticeLayer() {
         //  PopupManager.openNode(this.node, null, 'Prefabs/stopNoticeLayer', 99, null);
-    },
+    }
 
-    onDestroy() {
+    protected onDestroy(): void {
         GameCfgText.releaseRes();
         PopupManager.delPopupNode();
-    },
+    }
 
     initData() {
         GameData.SMSet = new SetConf('SMSET').data;
@@ -152,4 +155,4 @@ cc.Class({
 
         GameData.headImg = null;
     }
-});
+}
