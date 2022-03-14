@@ -11,14 +11,11 @@ import ComUtils from "../Utils/ComUtils";
 import LLWConfig from "../common/config/LLWConfig";
 import PlatDefine from "../common/config/PlatDefine";
 
-const { ccclass, property } = cc._decorator;
+cc.Class({
+    extends: cc.Component,
 
-@ccclass
-export default class LoginHandle extends cc.Component {
 
-    flag = false;
-
-    protected onLoad(): void {
+    onLoad() {
 
         //  GlobalEvent.on('OPENNOTICELAYER', this.openNoticeLayer.bind(this), this);
 
@@ -33,7 +30,7 @@ export default class LoginHandle extends cc.Component {
         ComUtils.resetSize(this.node);
 
         //  LLWSDK.getSDK().onShow();
-    }
+    },
 
     init() {
 
@@ -41,12 +38,12 @@ export default class LoginHandle extends cc.Component {
 
         let pbhelper = new PBHelper;
 
-        (<any>window).PB = pbhelper;
+        window.PB = pbhelper;
 
-        (<any>window).gg = { wechat: LLWSDK.getSDK() }
+        window.gg = { wechat: LLWSDK.getSDK() }
 
         LLWSDK.getSDK().login(this.loginResultCallback.bind(this));
-    }
+    },
 
     //登入游戏
     loginResultCallback(decoded) {
@@ -75,13 +72,13 @@ export default class LoginHandle extends cc.Component {
             decoded.token && (GameData.token = decoded.token);
             decoded.uid && (GameData.userID = decoded.uid);
             socket.host = decoded.gameAddr;
-            (<any>window).socket = socket;
+            window.socket = socket;
             socket.init();
         } else {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '网络连接错误，请检查网络是否连接.');
         }
-    }
+    },
 
     start() {
 
@@ -107,16 +104,16 @@ export default class LoginHandle extends cc.Component {
         this.init();
 
         LLWSDK.getSDK().onShareAppMessage();
-    }
+    },
 
     openNoticeLayer() {
         //  PopupManager.openNode(this.node, null, 'Prefabs/stopNoticeLayer', 99, null);
-    }
+    },
 
-    protected onDestroy(): void {
+    onDestroy() {
         GameCfgText.releaseRes();
         PopupManager.delPopupNode();
-    }
+    },
 
     initData() {
         GameData.SMSet = new SetConf('SMSET').data;
@@ -155,4 +152,4 @@ export default class LoginHandle extends cc.Component {
 
         GameData.headImg = null;
     }
-}
+});
