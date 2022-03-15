@@ -218,7 +218,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "72BJr85CBLco9CB6IMPCB7",
     "sync": false
@@ -497,7 +497,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "38Awx6SVRMTq0cUN6vqZOZ",
     "sync": false
@@ -624,7 +624,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -730,7 +730,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "08/cWNS7dKjJQZ7tMRsfz0",
     "sync": false
@@ -837,7 +837,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "7eEu70ncxD97mi2wiu3nQ3",
     "sync": false
@@ -919,8 +919,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "匹配对手",
     "_N$string": "匹配对手",
     "_fontSize": 30,
@@ -945,7 +944,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "80Zzsbxe1MVIJ+5pGJFF7p",
     "sync": false
@@ -983,7 +982,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "e7OItzXihDvJgCNb8HIvwR",
     "sync": false
@@ -1021,7 +1020,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "855uTzbKJBZbXiZeqnc7iA",
     "sync": false
@@ -1260,8 +1259,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "正在为您匹配实力相近的对手",
     "_N$string": "正在为您匹配实力相近的对手",
     "_fontSize": 24,
@@ -1286,7 +1284,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "26uFsfCalMKqhWdvhP+5sx",
     "sync": false
@@ -1472,7 +1470,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "bdz/LwylBF35TldMr7j1Dh",
     "sync": false
@@ -1577,7 +1575,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "aeaChzSztGa6kSqwu77U91",
     "sync": false
@@ -1684,7 +1682,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "03I0CLxQdE/7YLHdkXBzus",
     "sync": false
@@ -1766,8 +1764,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 24,
@@ -1792,7 +1789,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "89oo7YayhE/Kb7lm13FdPa",
     "sync": false
@@ -1874,8 +1871,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 24,
@@ -1900,7 +1896,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "e1zUnYArxCD6mMLzW/lZGt",
     "sync": false
@@ -1982,8 +1978,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 24,
@@ -2008,7 +2003,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "adhwSS4bVOebplKFxZx/6V",
     "sync": false
@@ -2019,7 +2014,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "43+ZO6rN1I5bqmvv0124tS",
     "sync": false
@@ -2202,7 +2197,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "f9APw6LGFEYYiBe77wPaVa",
     "sync": false
@@ -2309,7 +2304,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "a5PCOQKyJOGKuqboRMDGC4",
     "sync": false
@@ -2391,8 +2386,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 24,
@@ -2417,7 +2411,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "a9um5iF0xDi49uE67/x4hi",
     "sync": false
@@ -2499,8 +2493,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 24,
@@ -2525,7 +2518,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "1aft68sj5O/L/hxyZPuP27",
     "sync": false
@@ -2607,8 +2600,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
+    "_useOriginalSize": true,
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 24,
@@ -2633,7 +2625,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "4aPxcITVJG+7ytgxbPBa45",
     "sync": false
@@ -2644,7 +2636,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "eaVHGDP5lIpq8WzAUMRP+9",
     "sync": false
@@ -2751,7 +2743,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "48ld/Vj9VKrYNHKr14p6PL",
     "sync": false
@@ -2929,7 +2921,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "22aSu3oTtMWKaxI8q7s54t",
     "sync": false
@@ -2999,7 +2991,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "cdnVSTe4xCuIA0a4/qmv5R",
     "sync": false
@@ -3069,7 +3061,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "d8OUqkD/xDi7E1RlwDgguy",
     "sync": false
@@ -3107,7 +3099,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "fby8pRaNRBjYgSGvzynk1L",
     "sync": false
@@ -3192,67 +3184,7 @@
         "__uuid__": "e7fff558-bee8-45b7-9e0c-d6e0b608efac"
       },
       {
-        "__uuid__": "7bd27565-9759-4ec9-bab6-ea9c78aed0d4"
-      },
-      {
-        "__uuid__": "bae90dd1-144b-4dbe-805e-ad008936d474"
-      },
-      {
-        "__uuid__": "8860dc53-cf4e-40f4-b1ef-46e522f0403a"
-      },
-      {
-        "__uuid__": "fff8e791-2ef6-45a7-8902-1a857a7728b1"
-      },
-      {
-        "__uuid__": "ac223715-f455-4553-8e70-0d99e06fc0b0"
-      },
-      {
-        "__uuid__": "39e58679-9bfe-4932-9d8a-b6ec69f57c69"
-      },
-      {
-        "__uuid__": "727c51c0-79b7-4ef8-8d03-80db745e7f8a"
-      },
-      {
-        "__uuid__": "9e0c00de-41a4-4f2d-85bf-f73dc0fefd61"
-      },
-      {
-        "__uuid__": "0df9a160-d87b-462a-94e6-95924ea6f08c"
-      },
-      {
-        "__uuid__": "0e080040-f35e-4b59-bb7d-847df5d25a65"
-      },
-      {
-        "__uuid__": "0e79d65a-1ba0-474d-9ea5-1f29ea83a14b"
-      },
-      {
-        "__uuid__": "3d89ab3c-2cd9-4b59-b7da-af1c92b6a935"
-      },
-      {
-        "__uuid__": "e0af015b-880d-4e1f-9f5f-a270f73766fc"
-      },
-      {
-        "__uuid__": "50d032f8-803c-43ab-982f-5f0073c370a5"
-      },
-      {
-        "__uuid__": "356bf719-f5ea-4a59-9c9e-c516f8909908"
-      },
-      {
-        "__uuid__": "41759e01-b39d-4c97-aa39-201268c926a7"
-      },
-      {
-        "__uuid__": "84f0c975-186e-4f49-8a9c-b971f6e10c11"
-      },
-      {
-        "__uuid__": "92088bcc-436d-4627-8a21-4ce786335f5b"
-      },
-      {
-        "__uuid__": "ae03bb52-2c0c-4af9-a52b-b46d94f94945"
-      },
-      {
-        "__uuid__": "726db6c7-3e0b-4c66-94be-668d2d2001cf"
-      },
-      {
-        "__uuid__": "4ecd71fc-cf39-4db4-ae79-03901886adf8"
+        "__uuid__": "8aa12590-265a-437f-a534-294a27200e02"
       }
     ],
     "enterGameAnim": {
@@ -3269,7 +3201,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "40488e23-e346-4f2b-85fd-8e62049b8b5b"
     },
     "fileId": "",
     "sync": false
