@@ -64,8 +64,6 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     BOLLLabel: cc.Label[] = [];
 
-    timer = null;
-
     topValue = 0;     //当前绘制的最高值
 
     bottomValue = 0;  //当前绘制最低值
@@ -220,32 +218,26 @@ export default class NewClass extends cc.Component {
                 calDisY = 0;
 
                 if (Math.abs(calDisX) >= (GameCfg.hz_width / 2)) {
-                    if (!this.timer) {
-                        this.timer = setTimeout(() => {
 
-                            let count = Math.ceil(Math.abs(calDisX) / GameCfg.hz_width);
-                            this.onMoveLeftOrRight(count, calDisX, calDisY);
+                    let count = Math.ceil(Math.abs(calDisX) / GameCfg.hz_width);
+                    this.onMoveLeftOrRight(count, calDisX, calDisY);
 
+                    let index = GameCfg.beg_end[0] + (Math.floor((localPos.x - 10) / GameCfg.hz_width));
 
-                            let index = GameCfg.beg_end[0] + (Math.floor((localPos.x - 10) / GameCfg.hz_width));
+                    this.vertical1.x = Math.floor((localPos.x - 10) / GameCfg.hz_width) * GameCfg.hz_width + 10 + GameCfg.hz_width / 2;
 
-                            this.vertical1.x = Math.floor((localPos.x - 10) / GameCfg.hz_width) * GameCfg.hz_width + 10 + GameCfg.hz_width / 2;
-
-                            if (index >= GameCfg.beg_end[1]) {
-                                this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) + 10 + GameCfg.hz_width / 2;
-                                index = GameCfg.beg_end[1] - 1;
-                            }
-                            else if (index <= GameCfg.beg_end[0]) {
-                                this.vertical1.x = 10 + GameCfg.hz_width / 2;
-                            }
-
-                            this.updataLabel(index);
-                            calDisX = 0;
-                            calDisY = 0;
-                            clearTimeout(this.timer);
-                            this.timer = null;
-                        }, 20)
+                    if (index >= GameCfg.beg_end[1]) {
+                        this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) + 10 + GameCfg.hz_width / 2;
+                        index = GameCfg.beg_end[1] - 1;
                     }
+                    else if (index <= GameCfg.beg_end[0]) {
+                        this.vertical1.x = 10 + GameCfg.hz_width / 2;
+                    }
+
+                    this.updataLabel(index);
+                    calDisX = 0;
+                    calDisY = 0;
+
                 }
             }
             //放大   //缩小
@@ -253,79 +245,73 @@ export default class NewClass extends cc.Component {
                 calDisX = 0;
 
                 if (Math.abs(calDisY) >= 2) {
-                    if (!this.timer) {
 
-                        this.timer = setTimeout(() => {
-                            let preNum = parseInt(this.drawBordWidth / GameCfg.hz_width + '');
-                            let hz_width = 0;
-                            let w = (parseInt(Math.ceil(Math.abs(calDisY) / 2) + ''));
-                            //  hz_width = calDisY > 0 ? GameCfg.hz_width + w : GameCfg.hz_width - w;
-                            num = calDisY > 0 ? preNum - w : preNum + w;
-                            if (num <= minCount) {
-                                num = minCount
-                            }
-                            if (num >= maxCount) {
-                                num = maxCount
-                            }
-                            hz_width = this.drawBordWidth / num;
-                            if (hz_width < mixWidth) {
-                                hz_width = mixWidth;
-                            } else if (hz_width > maxWidth) {
-                                hz_width = maxWidth;
-                            }
-                            num = parseInt(this.drawBordWidth / hz_width + '');
-
-                            if (calDisY > 0) {
-                                if (num > GameCfg.huizhidatas) {
-                                    GameCfg.beg_end[0] = 0;
-                                    GameCfg.beg_end[1] = GameCfg.huizhidatas;
-                                } else {
-                                    let count = GameCfg.beg_end[1] - GameCfg.beg_end[0] - num;
-
-                                    GameCfg.beg_end[0] += parseInt(count / 2 + '');
-
-                                    GameCfg.beg_end[1] -= (count - parseInt(count / 2 + ''));
-
-                                }
-                            } else {
-                                if (num < GameCfg.huizhidatas) {
-                                    let count = num - (GameCfg.beg_end[1] - GameCfg.beg_end[0]);
-
-                                    GameCfg.beg_end[0] -= parseInt(count / 2 + '');
-                                    GameCfg.beg_end[1] += (count - parseInt(count / 2 + ''));
-
-                                    if (GameCfg.beg_end[0] < 0) {
-                                        GameCfg.beg_end[0] = 0;
-                                    }
-                                    if (GameCfg.beg_end[1] > GameCfg.huizhidatas) {
-                                        GameCfg.beg_end[1] = GameCfg.huizhidatas
-                                    }
-                                } else {
-                                    GameCfg.beg_end[0] = 0;
-                                    GameCfg.beg_end[1] = GameCfg.huizhidatas;
-                                }
-                            }
-
-                            GameCfg.hz_width = this.drawBordWidth / (num);
-
-
-                            this.Horizontal1.y = localPos.y;
-                            let index = GameCfg.beg_end[0] + (Math.floor((localPos.x - 10) / GameCfg.hz_width));
-                            if (index >= GameCfg.beg_end[1]) {
-                                this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) + 10 + GameCfg.hz_width / 2;
-                                index = GameCfg.beg_end[1] - 1;
-                            } else if (index <= GameCfg.beg_end[0]) {
-                                this.vertical1.x = 10 + GameCfg.hz_width / 2;
-                            }
-                            this.updataLabel(index);
-                            calDisY = 0;
-                            calDisX = 0;
-                            this.initDrawBg();
-                            GlobalEvent.emit('onDraw');
-                            clearTimeout(this.timer);
-                            this.timer = null;
-                        }, 20);
+                    let preNum = parseInt(this.drawBordWidth / GameCfg.hz_width + '');
+                    let hz_width = 0;
+                    let w = (parseInt(Math.ceil(Math.abs(calDisY) / 2) + ''));
+                    //  hz_width = calDisY > 0 ? GameCfg.hz_width + w : GameCfg.hz_width - w;
+                    num = calDisY > 0 ? preNum - w : preNum + w;
+                    if (num <= minCount) {
+                        num = minCount
                     }
+                    if (num >= maxCount) {
+                        num = maxCount
+                    }
+                    hz_width = this.drawBordWidth / num;
+                    if (hz_width < mixWidth) {
+                        hz_width = mixWidth;
+                    } else if (hz_width > maxWidth) {
+                        hz_width = maxWidth;
+                    }
+                    num = parseInt(this.drawBordWidth / hz_width + '');
+
+                    if (calDisY > 0) {
+                        if (num > GameCfg.huizhidatas) {
+                            GameCfg.beg_end[0] = 0;
+                            GameCfg.beg_end[1] = GameCfg.huizhidatas;
+                        } else {
+                            let count = GameCfg.beg_end[1] - GameCfg.beg_end[0] - num;
+
+                            GameCfg.beg_end[0] += parseInt(count / 2 + '');
+
+                            GameCfg.beg_end[1] -= (count - parseInt(count / 2 + ''));
+
+                        }
+                    } else {
+                        if (num < GameCfg.huizhidatas) {
+                            let count = num - (GameCfg.beg_end[1] - GameCfg.beg_end[0]);
+
+                            GameCfg.beg_end[0] -= parseInt(count / 2 + '');
+                            GameCfg.beg_end[1] += (count - parseInt(count / 2 + ''));
+
+                            if (GameCfg.beg_end[0] < 0) {
+                                GameCfg.beg_end[0] = 0;
+                            }
+                            if (GameCfg.beg_end[1] > GameCfg.huizhidatas) {
+                                GameCfg.beg_end[1] = GameCfg.huizhidatas
+                            }
+                        } else {
+                            GameCfg.beg_end[0] = 0;
+                            GameCfg.beg_end[1] = GameCfg.huizhidatas;
+                        }
+                    }
+
+                    GameCfg.hz_width = this.drawBordWidth / (num);
+
+
+                    this.Horizontal1.y = localPos.y;
+                    let index = GameCfg.beg_end[0] + (Math.floor((localPos.x - 10) / GameCfg.hz_width));
+                    if (index >= GameCfg.beg_end[1]) {
+                        this.vertical1.x = GameCfg.hz_width * (GameCfg.beg_end[1] - GameCfg.beg_end[0]) + 10 + GameCfg.hz_width / 2;
+                        index = GameCfg.beg_end[1] - 1;
+                    } else if (index <= GameCfg.beg_end[0]) {
+                        this.vertical1.x = 10 + GameCfg.hz_width / 2;
+                    }
+                    this.updataLabel(index);
+                    calDisY = 0;
+                    calDisX = 0;
+                    this.initDrawBg();
+                    GlobalEvent.emit('onDraw');
                 }
             }
         }, this);
@@ -382,8 +368,7 @@ export default class NewClass extends cc.Component {
     onMoveLeftOrRight(count, calDisX, calDisY) {
         if (calDisX > 0) {
             if (GameCfg.beg_end[0] == 0) {
-                clearTimeout(this.timer);
-                this.timer = null;
+
                 calDisX = 0;
                 calDisY = 0;
                 return;
@@ -398,8 +383,7 @@ export default class NewClass extends cc.Component {
             }
         } else {
             if (GameCfg.huizhidatas == GameCfg.beg_end[1]) {
-                clearTimeout(this.timer);
-                this.timer = null;
+
                 calDisX = 0;
                 calDisY = 0;
                 return;

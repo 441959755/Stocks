@@ -36,4 +36,9 @@ export default class NewClass extends cc.Component {
 
             .start()
     }
+
+
+    protected onDisable(): void {
+        GameData.goldAwardPrompt = null;
+    }
 }

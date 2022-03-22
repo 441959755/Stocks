@@ -207,7 +207,7 @@
       "array": [
         0,
         0,
-        526.5434455009387,
+        524.8045782527696,
         0,
         0,
         0,
@@ -68001,7 +68001,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 60
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -68068,7 +68068,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 60
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -68499,7 +68499,7 @@
     "_alignFlags": 1,
     "_left": 0,
     "_right": 0,
-    "_top": 10,
+    "_top": 5,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -68563,7 +68563,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 60
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -68630,7 +68630,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 60
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -68917,7 +68917,7 @@
       "__uuid__": "c7661d9b-952a-4b46-bd7f-792548d504de"
     },
     "_type": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 2,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -69031,7 +69031,7 @@
     "_alignFlags": 1,
     "_left": 0,
     "_right": 0,
-    "_top": 10,
+    "_top": 5,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -69156,7 +69156,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 60
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -69237,7 +69237,7 @@
     "_alignFlags": 33,
     "_left": 0,
     "_right": 63.5,
-    "_top": 10,
+    "_top": 5,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -69378,7 +69378,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 60
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -69543,7 +69543,7 @@
     "_alignFlags": 33,
     "_left": 0,
     "_right": 63.5,
-    "_top": 10,
+    "_top": 5,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -69956,7 +69956,7 @@
       "ctor": "Float64Array",
       "array": [
         75,
-        -5.334,
+        -9.5,
         0,
         0,
         0,
@@ -70015,7 +70015,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 60
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -70456,7 +70456,7 @@
       "__uuid__": "47dafb51-41a7-485a-a1b4-18ffbb1ad100"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -70523,7 +70523,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 60
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -70590,7 +70590,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 60
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -70654,7 +70654,7 @@
     },
     "_fillStart": 0,
     "_fillRange": 0,
-    "_isTrimmedMode": true,
+    "_isTrimmedMode": false,
     "_atlas": null,
     "_id": "45xtLM62dEkocmRPVXD57F"
   },
@@ -70929,7 +70929,7 @@
       "ctor": "Float64Array",
       "array": [
         265,
-        -5.334,
+        -9.5,
         0,
         0,
         0,
@@ -70988,7 +70988,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 60
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -71055,7 +71055,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 60
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -71372,7 +71372,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 60
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -71560,8 +71560,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 168,
-      "height": 80
+      "width": 150,
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -71616,7 +71616,7 @@
       "__uuid__": "5afbc97d-3262-428c-804f-e00ccb886a25"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -71739,7 +71739,7 @@
       "__uuid__": "b03bc708-4fdb-4e3d-b70d-5a987716e940"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -78328,8 +78328,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "花花过分    030033",
-    "_N$string": "花花过分    030033",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,
@@ -78433,8 +78433,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "花花过分    030033",
-    "_N$string": "花花过分    030033",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,
@@ -78538,8 +78538,8 @@
       }
     ],
     "_useOriginalSize": true,
-    "_string": "花花过分    030033",
-    "_N$string": "花花过分    030033",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,
@@ -104650,7 +104650,7 @@
         "__id__": 2814
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 2818

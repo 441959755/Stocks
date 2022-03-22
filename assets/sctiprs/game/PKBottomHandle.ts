@@ -163,6 +163,7 @@ export default class NewClass extends cc.Component {
         if (GameCfg.GameType == pb.GameType.JJ_PK ||
             GameCfg.GameType == pb.GameType.JJ_DuoKong ||
             GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.JJ_XUNLIAN) {
+
             if (GameCfg.GAMEFUPAN) {
                 this.onGameFUPANSHOW();
             } else {
@@ -170,6 +171,7 @@ export default class NewClass extends cc.Component {
                 this.node.getChildByName('isFC').active = false;
 
                 if (GameCfg.GameType == pb.GameType.JJ_DuoKong) {
+
                     this.node.getChildByName('JJ_DuoKong').active = true;
                 } else if (GameCfg.GameType == pb.GameType.JJ_PK
                     || GameCfg.GameType == pb.GameType.JJ_ChuangGuan || GameCfg.JJ_XUNLIAN) {
@@ -179,8 +181,13 @@ export default class NewClass extends cc.Component {
                 this.node.getChildByName('label1').active = true;
                 this.node.getChildByName('label2').active = false;
 
+
                 let pkNode = this.node.getChildByName('pk');
-                pkNode.active = true;
+                pkNode.active = false;
+
+                // if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
+                //     pkNode.active = false;
+                // }
 
                 let timeLabel = pkNode.getChildByName('timeLabel').getComponent(cc.Label);
                 timeLabel.node.active = true;

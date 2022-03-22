@@ -26,14 +26,19 @@ export default class NewClass extends cc.Component {
     start() {
         this.dailyAwards = GameCfgText.gameConf.daily_awards_wx;
         console.log('每日看广告奖励配置' + JSON.stringify(this.dailyAwards));
-        this.count = GameData.gameData.todayAdtimes;
+        console.log('今日领取次数：' + GameData.gameData.todayAdtimes);
 
+        this.count = parseInt(GameData.gameData.todayAdtimes) || 0;
         this.labels.children.forEach((el, index) => {
             let label = el.getComponent(cc.Label);
             label && (label.string = 'X' + this.dailyAwards[index][0].v);
         })
 
         this.onShow();
+    }
+
+    protected onDisable(): void {
+        GameData.gameData.todayAdtimes = this.count;
     }
 
     onShow() {

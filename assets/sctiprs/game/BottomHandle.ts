@@ -620,7 +620,7 @@ export default class NewClass extends cc.Component {
 
 		//分仓
 		if (GameCfg.GameSet.isFC) {
-			this, this.mcBtn.node.parent.active = true;
+			this.mcBtn.node.parent.active = true;
 			this.mcBtn.node.x = -266;
 			this.tipsmc.node.active = true;
 			this.tipsmr.node.active = true;
@@ -634,7 +634,7 @@ export default class NewClass extends cc.Component {
 		}
 		//不分仓
 		else {
-			this, this.mcBtn.node.parent.active = true;
+			this.mcBtn.node.parent.active = true;
 			this.tipsmr.node.active = false;
 			this.tipsmc.node.active = false;
 			this.mrBtn.node.active = true;
@@ -916,7 +916,6 @@ export default class NewClass extends cc.Component {
 		//点击买入卖出
 		if (name == 'mrBtn' || name == 'mcBtn') {
 			if (GameCfg.GameSet.isFC) {
-
 				let point = event.target.convertToWorldSpaceAR(cc.v2(0, 0));
 
 				GlobalEvent.emit(EventCfg.OPENSELECTBOX, point);

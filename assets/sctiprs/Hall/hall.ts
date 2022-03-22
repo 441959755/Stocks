@@ -31,10 +31,12 @@ export default class NewClass extends cc.Component {
 
     index = 0;
 
-    //  firstBox = null;
+    leaveRoomFlag = false;
+
     Matchfalg = false;
 
     haoYouFangData = null;
+
 
     onLoad() {
         LLWSDK.getSDK().ADInit();
@@ -189,6 +191,7 @@ export default class NewClass extends cc.Component {
         //玩家对战房间解散提示
         if (data.uid == GameData.userID && GameData.RoomType) {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
+            this.leaveRoomFlag = false;
         }
     }
 
@@ -257,6 +260,8 @@ export default class NewClass extends cc.Component {
         this.haoYouFangData && (this.haoYouFangData = null)
         ///  this.gameLayer.zIndex = 50;
         this.onLoadFinalLayer();
+
+        this.leaveRoomFlag = true;
         //})
     }
 
@@ -294,6 +299,12 @@ export default class NewClass extends cc.Component {
 
     //离开游戏
     leaveGame() {
+        if (!this.leaveRoomFlag) {
+            GameData.roomId = 0;
+            GameData.JJCapital = 0;
+            GameData.Players = [];
+            GameData.RoomType = 0;
+        }
 
         GameCfg.beg_end[0] = 0;
 

@@ -10,13 +10,12 @@ import EventCfg from "../Utils/EventCfg";
 import ComUtils from "../Utils/ComUtils";
 import LLWConfig from "../common/config/LLWConfig";
 import PlatDefine from "../common/config/PlatDefine";
+import GameCfg from "../game/GameCfg";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class LoginHandle extends cc.Component {
-
-    flag = false;
 
     protected onLoad(): void {
 
@@ -50,12 +49,6 @@ export default class LoginHandle extends cc.Component {
 
     //登入游戏
     loginResultCallback(decoded) {
-
-        if (this.flag) {
-            return;
-        }
-
-        this.flag = true;
 
         if (decoded.err.err) {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
@@ -119,6 +112,7 @@ export default class LoginHandle extends cc.Component {
     }
 
     initData() {
+
         GameData.SMSet = new SetConf('SMSET').data;
 
         GameData.JJPKSet = new SetConf('JJPKSET').data;

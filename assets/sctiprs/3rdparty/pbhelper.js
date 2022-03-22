@@ -183,10 +183,7 @@ PBHelper.prototype = {
             let data = SyncRoomLeave.decode(new Uint8Array(buff));
 
             if (data.uid == GameData.userID) {
-                GameData.roomId = 0;
-                GameData.JJCapital = 0;
-                GameData.Players = [];
-                GameData.RoomType = 0;
+
             }
             else {
                 // GameData.Players.length = 1;

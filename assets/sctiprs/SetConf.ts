@@ -1,6 +1,7 @@
 
 
 let setData = {
+
     line: 'k线',
     KLine: 150,
     ZLine: '日线',
@@ -58,11 +59,11 @@ let setData = {
 
 
 class SetConf {
-    data = setData;
+
+    data = JSON.parse(JSON.stringify(setData));
+
     constructor(str) {
-
         let set = cc.sys.localStorage.getItem(str);
-
         if (set) {
             this.data = JSON.parse(set);
         }

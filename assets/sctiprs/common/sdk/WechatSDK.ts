@@ -62,7 +62,7 @@ export default class WechatSDK {
                                 text: "开始游戏"
                             })
                             button.onTap((res) => {
-                                button && (button.destroy())
+                                //  button && (button.destroy())
                                 self.getUserInfo1(code, button, call)
                             })
                         }
@@ -115,7 +115,7 @@ export default class WechatSDK {
                 }, true)
 
                 self.onLoginCodeHttpRequest(code, call);
-                // btn && (btn.destroy())
+                btn && (btn.destroy())
                 // self.onLoginCodeHttpRequest(code, call);
             }
         })
