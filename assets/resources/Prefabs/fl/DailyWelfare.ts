@@ -38,7 +38,7 @@ export default class NewClass extends cc.Component {
     }
 
     protected onDisable(): void {
-        GameData.gameData.todayAdtimes = this.count;
+        GameData.gameData.todayAdtimes = parseInt(this.count + '');
     }
 
     onShow() {
@@ -70,13 +70,14 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'fl_mfzs_lqjl') {
+
             LLWSDK.getSDK().showVideoAd((flag) => {
                 if (flag) {
                     socket.send(pb.MessageId.Req_Hall_GetDailyAdAward, null, () => {
 
                     })
                     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '成功领取奖励!');
-                    this.count++;
+                    this.count += 1;
                     this.onShow();
                 }
                 else {

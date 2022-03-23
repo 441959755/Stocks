@@ -76,6 +76,10 @@ export default class WechatSDK {
             keepScreenOn: true
         })
 
+        wx.onWindowResize((res) => {
+            console.log(JSON.stringify(res));
+        });
+
         // wx.onNetworkStatusChange((res) => {
         //     console.log(res.isConnected);
         //     if (!res.isConnected) {
@@ -187,6 +191,7 @@ export default class WechatSDK {
             // 小于 2.1.0 的基础库版本，res 是一个 undefined
             if (res && res.isEnded || res === undefined) {
                 // 正常播放结束，可以下发游戏奖励
+                console.log('正常播放结束，可以下发游戏奖励');
                 this.callback(1);
             }
             else {
@@ -198,12 +203,11 @@ export default class WechatSDK {
 
     showVideoAd(callback?) {
         console.log(GameCfgText.appConf.wechat_minprogram + '   ' + JSON.stringify(GameCfgText.appConf.wechat_minprogram));
+        this.callback = callback;
         if (!GameCfgText.appConf.wechat_minprogram.ad_switch) {
-            this.callback = callback;
             this.callback(1);
         }
         else {
-            this.callback = callback;
             if (this.videoAd) {
                 this.videoAd.show().then(() => {
                     console.log('激励视频 广告显示');
@@ -234,7 +238,6 @@ export default class WechatSDK {
                 //         call && (call(res))
                 //     }
                 // })
-
 
                 wx.getLocalImgData({
                     localId: res.localIds[0], // 图片的localID

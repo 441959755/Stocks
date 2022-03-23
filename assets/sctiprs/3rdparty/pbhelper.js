@@ -182,13 +182,6 @@ PBHelper.prototype = {
             let SyncRoomLeave = pb.SyncRoomLeave;
             let data = SyncRoomLeave.decode(new Uint8Array(buff));
 
-            if (data.uid == GameData.userID) {
-
-            }
-            else {
-                // GameData.Players.length = 1;
-                // GameData.Players[1] = null;
-            }
             GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }
 

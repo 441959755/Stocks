@@ -99,7 +99,7 @@ export default class NewClass extends cc.Component {
 		if (GameData.goldAwardPrompt) {
 			setTimeout(() => {
 				this.CmdGoldAwardPrompt();
-			}, 1000)
+			}, 700)
 		}
 	}
 

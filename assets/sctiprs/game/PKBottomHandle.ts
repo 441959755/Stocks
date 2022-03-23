@@ -183,7 +183,9 @@ export default class NewClass extends cc.Component {
 
 
                 let pkNode = this.node.getChildByName('pk');
-                pkNode.active = false;
+                pkNode.active = true;
+
+                pkNode.getChildByName('FUPAN').active = false;
 
                 // if (GameCfg.GameType == pb.GameType.JJ_ChuangGuan) {
                 //     pkNode.active = false;

@@ -39,7 +39,7 @@ export default class NewClass extends cc.Component {
 
 
     onLoad() {
-        LLWSDK.getSDK().ADInit();
+
 
         PopupManager.init();
 

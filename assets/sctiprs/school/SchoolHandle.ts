@@ -64,6 +64,7 @@ export default class NewClass extends cc.Component {
 
     onShowGuide() {
         this.guide.active = true;
+
         let node = this.guide.children[0];
 
         let label = node.children[0].getComponent(cc.Label)
@@ -74,6 +75,10 @@ export default class NewClass extends cc.Component {
 
         label.string = contents[this.guidecurCount].content;
         this.guidecurCount++;
+
+        let guideLabel = this.guide.getChildByName('top copy').getComponentInChildren(cc.Label);
+
+        guideLabel.string = this.studyData.title;
     }
 
     onDestroy() {

@@ -833,7 +833,7 @@ export default class NewClass extends cc.Component {
 			this.priceLabel[0].string = '买入均价：' + 0;
 
 			if (GameCfg.huizhidatas >= 1) {
-				this.gpData[GameCfg.huizhidatas - 1] && (this.priceLabel[1].string = '当前价格：' + this.gpData[GameCfg.huizhidatas - 1].close);
+				this.gpData[GameCfg.huizhidatas - 1] && (this.priceLabel[1].string = '当前价格：' + this.gpData[GameCfg.huizhidatas - 1].close.toFixed(2));
 			}
 		}
 

@@ -58,10 +58,10 @@ export default class LoginHandle extends cc.Component {
 
         console.log(decoded.token + decoded.uid + decoded.gameAddr);
 
-        if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
-            decoded.gameAddr = 'wss://www.cgdr168.com/ws';
-            console.log(decoded.token + decoded.uid + decoded.gameAddr);
-        }
+        // if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
+        //     decoded.gameAddr = 'wss://www.cgdr168.com/ws';
+        //     console.log(decoded.token + decoded.uid + decoded.gameAddr);
+        // }
 
         if (decoded) {
             console.log('登入...');
@@ -100,6 +100,8 @@ export default class LoginHandle extends cc.Component {
         this.init();
 
         LLWSDK.getSDK().onShareAppMessage();
+
+        LLWSDK.getSDK().ADInit();
     }
 
     openNoticeLayer() {
