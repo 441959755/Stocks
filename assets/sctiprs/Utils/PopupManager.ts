@@ -20,15 +20,12 @@ export default class PopupManager {
     public static init() {
         GlobalEvent.on(EventCfg.LOADINGSHOW, this.loading.bind(this), this);
         GlobalEvent.on(EventCfg.LOADINGHIDE, this.loadingHide.bind(this), this);
-
         GlobalEvent.on(EventCfg.TIPSTEXTSHOW, this.TipsText.bind(this), this);
         GlobalEvent.on(EventCfg.TIPSTEXTHIDE, this.tipsTextHide.bind(this), this);
-
-
         GlobalEvent.on(EventCfg.OPENOTHERPLAYERINFO, this.openOtherPlayerInfoLayer.bind(this), this);
-        this.arrPop = new PopupList();
 
-        this.openNode(cc.find('Canvas'), this.nodes['Prefabs/loading'], 'Prefabs/loading', 99)
+        this.openNode(cc.find('Canvas'), this.nodes['Prefabs/loading'], 'Prefabs/loading', 99);
+        this.arrPop = new PopupList();
     }
 
     private static loadingHide() {

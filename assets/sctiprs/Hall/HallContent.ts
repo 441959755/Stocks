@@ -114,7 +114,6 @@ export default class NewClass extends cc.Component {
 			let handle = node.getComponent('DailyWelfare');
 			handle && (handle.onShow());
 		});
-
 	}
 
 	//首次上传用户信息

@@ -7,7 +7,7 @@ import PopupManager from "../../Utils/PopupManager";
 
 let MessageHead = pb.MessageHead;
 
-class Socket {
+export default class Socket {
 
     ws = null;
 
@@ -25,14 +25,15 @@ class Socket {
 
     heartbeat = null;  //心跳
 
-    constructor() {
+    public constructor(host) {
         this.flag = false;
         this.reconnectCount = 0;
+        this.host = host;
 
+        this.init();
     }
 
     public init() {
-        console.log('初始Socket...');
         this.ws = new WebSocket(this.host);
         this.ws.binaryType = 'arraybuffer';
         this.ws.onmessage = this.message.bind(this);
@@ -110,14 +111,6 @@ class Socket {
                 GameData.gameData = info.data;
 
                 if (cc.director.getScene().name == 'Login') {
-
-                    // if (!GameData.headImg) {
-                    //     ComUtils.onLoadHead(info.data.icon, (texture) => {
-                    //         GameData.imgs[info.data.icon.icon + ''] = new cc.SpriteFrame(texture);
-                    //         GameData.headImg = GameData.imgs[info.data.icon.icon + ''];
-                    //     })
-                    // }
-
                     cc.director.loadScene('hall');
                 }
 
@@ -213,5 +206,4 @@ class Socket {
 
 }
 
-let socket = new Socket();
-export default socket;
+

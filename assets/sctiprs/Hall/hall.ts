@@ -37,9 +37,7 @@ export default class NewClass extends cc.Component {
 
     haoYouFangData = null;
 
-
     onLoad() {
-
 
         PopupManager.init();
 
@@ -79,7 +77,6 @@ export default class NewClass extends cc.Component {
                 GameData.selfEnterRoomData = message;
                 GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
             }
-
         }, this);
     }
 

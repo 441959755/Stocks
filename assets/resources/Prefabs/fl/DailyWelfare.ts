@@ -29,6 +29,7 @@ export default class NewClass extends cc.Component {
         console.log('今日领取次数：' + GameData.gameData.todayAdtimes);
 
         this.count = parseInt(GameData.gameData.todayAdtimes) || 0;
+        //奖励配置
         this.labels.children.forEach((el, index) => {
             let label = el.getComponent(cc.Label);
             label && (label.string = 'X' + this.dailyAwards[index][0].v);

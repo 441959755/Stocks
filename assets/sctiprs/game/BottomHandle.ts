@@ -1143,7 +1143,6 @@ export default class NewClass extends cc.Component {
 					opId: pb.GameOperationId.Short,
 					volume: 1,
 					kOffset: GameCfg.huizhidatas,
-
 				}
 				UpGameOpt.addOpt(item);
 			}
