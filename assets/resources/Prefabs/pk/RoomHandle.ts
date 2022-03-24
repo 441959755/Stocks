@@ -244,7 +244,10 @@ export default class NewClass extends cc.Component {
                 if (res) {
                     let texture = new cc.SpriteFrame(res);
                     ob.icon = texture;
-                    head.spriteFrame = GameData.Players[1].icon;
+                    if (GameData.Players[1]) {
+                        head.spriteFrame = GameData.Players[1].icon;
+                    }
+
                 }
             })
             ob.icon = null;

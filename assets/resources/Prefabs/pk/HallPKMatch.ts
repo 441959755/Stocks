@@ -92,14 +92,14 @@ export default class NewClass extends cc.Component {
                 this.callBack = null;
                 if (res) {
                     let texture = new cc.SpriteFrame(res);
-                    GameData.Players[1].icon = texture;
+                    GameData.Players[1] && (GameData.Players[1].icon = texture)
                     head.getComponent(cc.Sprite).spriteFrame = texture;
                 }
                 // 进入游戏动画
                 this.onEnterGameAnim();
             })
         }
-        GameData.Players[1].icon = null;
+        GameData.Players[1] && (GameData.Players[1].icon = null)
     }
 
     onEnterChuanGuanGame() {

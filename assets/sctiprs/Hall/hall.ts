@@ -35,7 +35,7 @@ export default class NewClass extends cc.Component {
 
     Matchfalg = false;
 
-    haoYouFangData = null;
+    dissolve = false;
 
     onLoad() {
 
@@ -72,10 +72,13 @@ export default class NewClass extends cc.Component {
         LLWSDK.getSDK().onShow(this.addRoom.bind(this));
 
         GlobalEvent.on(EventCfg.RoomGameDataing, (message) => {
-            this.haoYouFangData = JSON.parse(JSON.stringify(message));
+
             if (!this.gameLayer.active) {
                 GameData.selfEnterRoomData = message;
                 GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
+            }
+            else {
+                GameData.haoYouFangData = JSON.parse(JSON.stringify(message));
             }
         }, this);
     }
@@ -114,6 +117,8 @@ export default class NewClass extends cc.Component {
             setTimeout(() => {
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
+
+                this.dissolve = true;
             }, 200)
         }
 
@@ -189,6 +194,10 @@ export default class NewClass extends cc.Component {
         if (data.uid == GameData.userID && GameData.RoomType) {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
             this.leaveRoomFlag = false;
+            GameData.haoYouFangData = null;
+        }
+        else {
+
         }
     }
 
@@ -250,11 +259,11 @@ export default class NewClass extends cc.Component {
     onLoadGame() {
         this.broadcast && (this.broadcast.active = false);
         this.InviteBox && (this.InviteBox.active = false);
-
+        this.dissolve = false;
         // PopupManager.openNode(this.node, this.gameLayer, 'Prefabs/game/gameLayer', 50, (node) => {
         //     this.gameLayer = node;
         this.gameLayer.active = true;
-        this.haoYouFangData && (this.haoYouFangData = null)
+        GameData.haoYouFangData && (GameData.haoYouFangData = null)
         ///  this.gameLayer.zIndex = 50;
         this.onLoadFinalLayer();
 
@@ -313,9 +322,15 @@ export default class NewClass extends cc.Component {
 
         this.gameLayer && (this.gameLayer.active = false)
 
-        this.haoYouFangData && (GameData.selfEnterRoomData = this.haoYouFangData,
-            GlobalEvent.emit(EventCfg.RoomGameDataSelf, this.haoYouFangData))
-
+        if (this.dissolve) {
+            GameData.haoYouFangData && (GameData.selfEnterRoomData = GameData.haoYouFangData,
+                GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameData.haoYouFangData))
+        }
+        if (GameData.leaveUid) {
+            GameData.Players[1] = null;
+            GlobalEvent.emit(EventCfg.ROOMLEAVE, { uid: GameData.leaveUid });
+            GameData.leaveUid = null;
+        }
         this.finalLayer[this.index] && (this.finalLayer[this.index].active = false);
 
         GameCfg.fill = [];
@@ -356,7 +371,7 @@ export default class NewClass extends cc.Component {
             }
         }, 800);
 
-        if (this.haoYouFangData) {
+        if (GameData.haoYouFangData) {
             GameCfg.GameType = pb.GameType.JJ_PK;
             GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.JJPKSet));
         }

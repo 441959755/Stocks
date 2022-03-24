@@ -170,18 +170,29 @@ PBHelper.prototype = {
 
             }
         }
+
         // 其他玩家进入房间：SyncRoomEnter
         else if (id == pb.MessageId.Sync_Room_Enter) {
+            GameData.leaveUid = null;
             let SyncRoomEnter = pb.SyncRoomEnter;
             let data = SyncRoomEnter.decode(new Uint8Array(buff));
             console.log('其他玩家进入房间:' + JSON.stringify(data));
             GlobalEvent.emit(EventCfg.RoomGameDataOther, data);
         }
+
         //// 玩家离开房间
         else if (id == pb.MessageId.Sync_Room_Leave || id == pb.MessageId.Sync_Room_Leave_Self) {
             let SyncRoomLeave = pb.SyncRoomLeave;
             let data = SyncRoomLeave.decode(new Uint8Array(buff));
-
+            if (data.uid == GameData.userID) {
+                GameData.roomId = 0;
+                GameData.JJCapital = 0;
+                GameData.Players = [];
+                GameData.RoomType = 0;
+            }
+            else {
+                GameData.leaveUid = data.uid;
+            }
             GlobalEvent.emit(EventCfg.ROOMLEAVE, data);
         }
 

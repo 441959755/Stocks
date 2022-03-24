@@ -55,7 +55,6 @@ export default class GameCfgText {
                     GlobalEvent.emit('OPENNOTICELAYER');
                 }
             }
-
             console.log('app.conf 加载完成');
         }
 
