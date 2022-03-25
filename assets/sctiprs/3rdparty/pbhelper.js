@@ -188,7 +188,7 @@ PBHelper.prototype = {
                 GameData.roomId = 0;
                 GameData.JJCapital = 0;
                 GameData.Players = [];
-                GameData.RoomType = 0;
+
             }
             else {
                 GameData.leaveUid = data.uid;
@@ -242,18 +242,13 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Sync_Room_GameResult) {
             let RoomGameResult = pb.RoomGameResult;
             let data1 = RoomGameResult.decode(new Uint8Array(buff));
-
             let RoomGameData = pb.RoomGameData;
-
             let result = RoomGameData.decode(new Uint8Array(data1.result));
-
             console.log('游戏结果' + JSON.stringify(result));
             GameCfg.RoomGameData = result;
-
-            // setTimeout(() => {
             GlobalEvent.emit(EventCfg.GAMEOVEER);
-            //  }, 1000);
         }
+
         //离开房间应答
         else if (id == pb.MessageId.Rep_Room_Leave) {
             let CmdRoomLeaveReply = pb.CmdRoomLeaveReply;
@@ -279,12 +274,15 @@ PBHelper.prototype = {
             let data = RankingList.decode(new Uint8Array(buff));
             return data;
         }
+
         //同步闯关赛游戏数据
         else if (id == pb.MessageId.Sync_S2C_GameCg_GD) {
             let JjGame = pb.JjGame;
             let data = JjGame.decode(new Uint8Array(buff));
             GlobalEvent.emit(EventCfg.GETCGSDATA, data);
-        } else if (id == pb.MessageId.Sync_S2C_GameCg) {
+        }
+
+        else if (id == pb.MessageId.Sync_S2C_GameCg) {
             let CgState = pb.CgState;
             let data = CgState.decode(new Uint8Array(buff));
             GameData.cgState = data;
@@ -405,21 +403,20 @@ PBHelper.prototype = {
 
             GlobalEvent.emit(EventCfg.CHANGEMNCGACCOUNT);
         }
+
         //保存学习任务进度应答：无
         else if (id == pb.MessageId.Rep_Hall_SaveStudyProgress) {
-
         }
+
         //同步任务进度及奖励：TaskItem
         else if (id == pb.MessageId.Sync_S2C_TaskProgress) {
             let TaskItem = pb.TaskItem;
             let data = TaskItem.decode(new Uint8Array(buff));
-
             console.log('同步任务进度及奖励' + JSON.stringify(data));
             GameData.gameData.tasks.daily[data.taskId] = data;
-
             GlobalEvent.emit('UPDATETASKDATA');
-
         }
+
         //领取日常任务奖励应答
         else if (id == pb.MessageId.Rep_Hall_GetDailyTaskAward) {
             let ErrorInfo = pb.ErrorInfo;
@@ -454,7 +451,9 @@ PBHelper.prototype = {
             let CmdShopOrderReply = pb.CmdShopOrderReply;
             let data = CmdShopOrderReply.decode(new Uint8Array(buff));
             return data;
-        } else if (id == pb.MessageId.Rep_Game_Over) {
+        }
+
+        else if (id == pb.MessageId.Rep_Game_Over) {
             let CmdGameOverReply = pb.CmdGameOverReply;
             let data = CmdGameOverReply.decode(new Uint8Array(buff));
             return data;

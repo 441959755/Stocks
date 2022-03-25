@@ -47,12 +47,12 @@ export default class NewClass extends cc.Component {
     huizhidatas = 106;
 
     onLoad() {
+
         //自己进入房间
         GlobalEvent.on(EventCfg.RoomGameDataSelf, this.onShow.bind(this), this);
 
         //其他玩家进入房间：
         GlobalEvent.on(EventCfg.RoomGameDataOther, this.onShow.bind(this), this);
-
 
         //同步房间游戏状态
         GlobalEvent.on(EventCfg.RoomGameStatus, this.onRoomGameStatus.bind(this), this);

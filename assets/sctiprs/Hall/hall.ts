@@ -195,6 +195,7 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
             this.leaveRoomFlag = false;
             GameData.haoYouFangData = null;
+            GameData.RoomType = 0;
         }
         else {
 
@@ -370,6 +371,7 @@ export default class NewClass extends cc.Component {
                 this.onShowGobroke();
             }
         }, 800);
+
 
         if (GameData.haoYouFangData) {
             GameCfg.GameType = pb.GameType.JJ_PK;

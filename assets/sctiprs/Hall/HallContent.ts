@@ -61,6 +61,7 @@ export default class NewClass extends cc.Component {
 		//vip
 		GlobalEvent.on(EventCfg.VIPCHANGE, this.setUserInfo.bind(this), this);
 
+		//发放奖励动画
 		GlobalEvent.on('CmdGoldAwardPrompt', this.CmdGoldAwardPrompt.bind(this), this);
 	}
 
@@ -334,7 +335,6 @@ export default class NewClass extends cc.Component {
 				GameCfg.GameSet = GameData.JJPKSet;
 				GlobalEvent.emit(EventCfg.OPENCHUANGUAN);
 			})
-
 		}
 
 		//点击竞技
@@ -370,13 +370,7 @@ export default class NewClass extends cc.Component {
 					GameData.RoomType = 1;
 					GameData.roomId = res.id;
 					GlobalEvent.emit(EventCfg.OPENROOM);
-
 				})
-
-				// }
-				// else {
-				// 	GlobalEvent.emit(EventCfg.OPENCJDZ);
-				// }
 			})
 		}
 

@@ -84,123 +84,118 @@ export default class NewClass extends cc.Component {
                         calDisY = 0;
 
                         if (Math.abs(calDisX) >= (GameCfg.hz_width / 2)) {
-                            if (this.timer) { return }
-                            this.timer = setTimeout(() => {
 
-                                let count = Math.ceil(Math.abs(calDisX) / GameCfg.hz_width);
 
-                                if (calDisX > 0) {
-                                    if (GameCfg.beg_end[0] == 0) {
-                                        clearTimeout(this.timer);
-                                        this.timer = null;
-                                        calDisX = 0;
-                                        calDisY = 0;
-                                        return;
-                                    }
-                                    if (GameCfg.beg_end[0] - count >= 0) {
-                                        GameCfg.beg_end[1] -= count;
-                                        GameCfg.beg_end[0] -= count;
-                                    } else {
-                                        count = GameCfg.beg_end[0];
-                                        GameCfg.beg_end[0] -= count;
-                                        GameCfg.beg_end[1] -= count;
-                                    }
+                            let count = Math.ceil(Math.abs(calDisX) / GameCfg.hz_width);
+
+                            if (calDisX > 0) {
+                                if (GameCfg.beg_end[0] == 0) {
+                                    clearTimeout(this.timer);
+                                    this.timer = null;
+                                    calDisX = 0;
+                                    calDisY = 0;
+                                    return;
+                                }
+                                if (GameCfg.beg_end[0] - count >= 0) {
+                                    GameCfg.beg_end[1] -= count;
+                                    GameCfg.beg_end[0] -= count;
                                 } else {
-                                    if (GameCfg.huizhidatas == GameCfg.beg_end[1]) {
-                                        clearTimeout(this.timer);
-                                        this.timer = null;
-                                        calDisX = 0;
-                                        calDisY = 0;
-                                        return;
-                                    }
-                                    if (GameCfg.beg_end[1] + count < GameCfg.huizhidatas) {
-                                        GameCfg.beg_end[0] += count;
-                                        GameCfg.beg_end[1] += count;
-                                    } else {
-                                        count = GameCfg.huizhidatas - GameCfg.beg_end[1];
-                                        GameCfg.beg_end[0] += count;
-                                        GameCfg.beg_end[1] += count;
-                                    }
+                                    count = GameCfg.beg_end[0];
+                                    GameCfg.beg_end[0] -= count;
+                                    GameCfg.beg_end[1] -= count;
                                 }
-
-                                calDisX = 0;
-                                calDisY = 0;
-                                clearTimeout(this.timer);
-                                this.timer = null;
-                                if (this.ktype != pb.KType.Min) {
-                                    GlobalEvent.emit('onDrawGrap')
+                            } else {
+                                if (GameCfg.huizhidatas == GameCfg.beg_end[1]) {
+                                    clearTimeout(this.timer);
+                                    this.timer = null;
+                                    calDisX = 0;
+                                    calDisY = 0;
+                                    return;
                                 }
+                                if (GameCfg.beg_end[1] + count < GameCfg.huizhidatas) {
+                                    GameCfg.beg_end[0] += count;
+                                    GameCfg.beg_end[1] += count;
+                                } else {
+                                    count = GameCfg.huizhidatas - GameCfg.beg_end[1];
+                                    GameCfg.beg_end[0] += count;
+                                    GameCfg.beg_end[1] += count;
+                                }
+                            }
 
-                            }, 20)
+                            calDisX = 0;
+                            calDisY = 0;
+                            clearTimeout(this.timer);
+                            this.timer = null;
+                            if (this.ktype != pb.KType.Min) {
+                                GlobalEvent.emit('onDrawGrap')
+                            }
                         }
                     }
                     else if (Math.abs(calDisY) >= Math.abs(calDisX)) {
                         calDisX = 0;
                         if (Math.abs(calDisY) >= 2) {
-                            if (this.timer) { return }
-                            this.timer = setTimeout(() => {
-                                let preNum = Math.ceil(this.node.width / GameCfg.hz_width);
-                                let hz_width = 0;
-                                let w = Math.ceil(Math.abs(calDisY) / 2);
 
-                                num = calDisY > 0 ? preNum - w : preNum + w;
-                                if (num <= minCount) {
-                                    num = minCount
-                                }
-                                if (num >= maxCount) {
-                                    num = maxCount
-                                }
-                                hz_width = this.node.width / num;
-                                if (hz_width < mixWidth) {
-                                    hz_width = mixWidth;
-                                } else if (hz_width > maxWidth) {
-                                    hz_width = maxWidth;
-                                }
-                                num = parseInt(this.node.width / hz_width + '');
+                            let preNum = Math.ceil(this.node.width / GameCfg.hz_width);
+                            let hz_width = 0;
+                            let w = Math.ceil(Math.abs(calDisY) / 2);
 
-                                if (calDisY > 0) {
-                                    if (num > GameCfg.huizhidatas) {
-                                        GameCfg.beg_end[0] = 0;
-                                        GameCfg.beg_end[1] = GameCfg.huizhidatas;
-                                    }
-                                    else {
-                                        let count = GameCfg.beg_end[1] - GameCfg.beg_end[0] - num;
-                                        GameCfg.beg_end[0] += parseInt(count / 2 + '');
-                                        GameCfg.beg_end[1] -= (count - parseInt(count / 2 + ''));
-                                    }
+                            num = calDisY > 0 ? preNum - w : preNum + w;
+                            if (num <= minCount) {
+                                num = minCount
+                            }
+                            if (num >= maxCount) {
+                                num = maxCount
+                            }
+                            hz_width = this.node.width / num;
+                            if (hz_width < mixWidth) {
+                                hz_width = mixWidth;
+                            } else if (hz_width > maxWidth) {
+                                hz_width = maxWidth;
+                            }
+                            num = parseInt(this.node.width / hz_width + '');
+
+                            if (calDisY > 0) {
+                                if (num > GameCfg.huizhidatas) {
+                                    GameCfg.beg_end[0] = 0;
+                                    GameCfg.beg_end[1] = GameCfg.huizhidatas;
                                 }
                                 else {
-                                    if (num < GameCfg.huizhidatas) {
+                                    let count = GameCfg.beg_end[1] - GameCfg.beg_end[0] - num;
+                                    GameCfg.beg_end[0] += parseInt(count / 2 + '');
+                                    GameCfg.beg_end[1] -= (count - parseInt(count / 2 + ''));
+                                }
+                            }
+                            else {
+                                if (num < GameCfg.huizhidatas) {
 
-                                        let count = num - (GameCfg.beg_end[1] - GameCfg.beg_end[0]);
+                                    let count = num - (GameCfg.beg_end[1] - GameCfg.beg_end[0]);
 
-                                        if (GameCfg.beg_end[0] - parseInt(count / 2 + '') >= 0 && GameCfg.beg_end[1] + (count - parseInt(count / 2 + '')) <= GameCfg.huizhidatas) {
-                                            GameCfg.beg_end[0] -= parseInt(count / 2 + '');
-                                            GameCfg.beg_end[1] += (count - parseInt(count / 2 + ''));
-                                        }
-                                        else if (GameCfg.beg_end[0] - count >= 0) {
-                                            GameCfg.beg_end[0] -= count;
-                                        }
-                                        else if (GameCfg.beg_end[1] + count <= GameCfg.huizhidatas) {
-                                            GameCfg.beg_end[1] += count;
-                                        }
+                                    if (GameCfg.beg_end[0] - parseInt(count / 2 + '') >= 0 && GameCfg.beg_end[1] + (count - parseInt(count / 2 + '')) <= GameCfg.huizhidatas) {
+                                        GameCfg.beg_end[0] -= parseInt(count / 2 + '');
+                                        GameCfg.beg_end[1] += (count - parseInt(count / 2 + ''));
+                                    }
+                                    else if (GameCfg.beg_end[0] - count >= 0) {
+                                        GameCfg.beg_end[0] -= count;
+                                    }
+                                    else if (GameCfg.beg_end[1] + count <= GameCfg.huizhidatas) {
+                                        GameCfg.beg_end[1] += count;
                                     }
                                 }
-                                GameCfg.hz_width = this.node.width / (num);
+                            }
+                            GameCfg.hz_width = this.node.width / (num);
 
-                                calDisY = 0;
-                                calDisX = 0;
-                                clearTimeout(this.timer);
-                                this.timer = null;
-                                if (this.ktype != pb.KType.Min) {
-                                    GlobalEvent.emit('onDrawGrap')
-                                }
-                            }, 20)
+                            calDisY = 0;
+                            calDisX = 0;
+                            clearTimeout(this.timer);
+                            this.timer = null;
+                            if (this.ktype != pb.KType.Min) {
+                                GlobalEvent.emit('onDrawGrap')
+                            }
+
                         }
                     }
                 }
             }
-
 
             this.Horizontal1.y = localPos.y;
 
@@ -213,9 +208,7 @@ export default class NewClass extends cc.Component {
                 index = GameCfg.beg_end[1] - 1;
             }
             else if (index < GameCfg.beg_end[0]) {
-
                 this.vertical1.x = GameCfg.hz_width / 2 - this.vertical1.width / 2;
-
             }
 
             GlobalEvent.emit('onClickPosUpdateLabel', index);

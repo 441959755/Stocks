@@ -586,6 +586,8 @@ export default class GlobalHandle {
             console.log('在线邀请：' + JSON.stringify(res));
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
+
+    
     }
 
     // 查询参与过的活动

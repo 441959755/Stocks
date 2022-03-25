@@ -180,12 +180,12 @@ export default class PopupManager {
     public static openNode(prent, childen, url, zIndex?, call?) {
 
         //是否在下载
-        if (!this.isLoading) {
-            this.isLoading = true;
-        }
-        else {
-            return;
-        }
+        // if (!this.isLoading) {
+        //     this.isLoading = true;
+        // }
+        // else {
+        //     return;
+        // }
 
         if (this.nodes[url]) {
             childen = this.nodes[url];

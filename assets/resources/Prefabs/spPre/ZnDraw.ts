@@ -982,8 +982,6 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'toggle2') {
 
-
-
             if (!this.gpDataDay.length) {
                 this.getGPDataDay();
             }

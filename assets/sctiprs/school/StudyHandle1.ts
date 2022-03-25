@@ -30,7 +30,6 @@ export default class NewClass extends cc.Component {
     @property([cc.Node])
     rightNode: cc.Node[] = [];
 
-
     @property(cc.Node)
     layout: cc.Node = null;
 
