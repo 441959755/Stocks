@@ -155,13 +155,13 @@ export default class NewClass extends cc.Component {
             }
         });
 
-        if (!this.curSwitch) {
-            this.toggles[3].node.active = false;
-        }
+        // if (!this.curSwitch) {
+        //     this.toggles[3].node.active = false;
+        // }
 
-        else if (this.curSwitch) {
-            this.toggles[3].node.active = false;
-        }
+        // else if (this.curSwitch) {
+        //     this.toggles[3].node.active = false;
+        // }
 
         // 0表示关闭，1表示打开炒股大赛排行，2表示打开闯关排行
         if (this.curSwitch == 2) {
@@ -191,7 +191,6 @@ export default class NewClass extends cc.Component {
                 this.to = res.items[0].to;
             })
         }
-
 
     }
 
@@ -273,7 +272,6 @@ export default class NewClass extends cc.Component {
 
             this.tipsLabel.node.parent.active = true;
             if (this.curSwitch == 2) {
-
                 let ts = new Date().getTime() / 1000;
 
                 if (this.to - ts <= (24 * 60 * 60 * 3) && this.awardList.length <= 0) {

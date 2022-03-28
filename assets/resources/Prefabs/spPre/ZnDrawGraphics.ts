@@ -180,6 +180,7 @@ export default class NewClass extends cc.Component {
             lowPos: null,
             index: index,
         }
+
         let drawBox = this.drawBg.node.height;
         let some = index - (GameCfg.beg_end[0]);
         let startX = (some * GameCfg.hz_width);

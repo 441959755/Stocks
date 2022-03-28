@@ -12,7 +12,7 @@ import GameCfg from "../game/GameCfg";
 
 export default class GlobalHandle {
 
-    public static Activitys = null;
+    public static Activitys = [];
 
     public static enterGameSetout(data, call, flag?) {
 
@@ -587,7 +587,7 @@ export default class GlobalHandle {
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
         })
 
-    
+
     }
 
     // 查询参与过的活动

@@ -6,8 +6,6 @@ import GameCfgText from '../GameText';
 import LLWSDK from '../common/sdk/LLWSDK';
 import PopupManager from '../Utils/PopupManager';
 import GameCfg from '../game/GameCfg';
-import LLWConfig from '../common/config/LLWConfig';
-import PlatDefine from '../common/config/PlatDefine';
 import ComUtils from '../Utils/ComUtils';
 import GlobalHandle from '../global/GlobalHandle';
 
@@ -78,18 +76,24 @@ export default class NewClass extends cc.Component {
 	}
 
 	start() {
+
 		this.initToggle();
+
 		//设置用户信息
 		this.setUserInfo();
+
 		//设置用户头像
 		this.setUserHead();
 
+		//首次上传用户信息
 		this.upLoadUserInfo();
 
+		//
 		if (GameCfg.GameType == 'STUDY') {
 			this.changeToggle(3);
 		}
 
+		//是否首次登入
 		if (GameData.firstGame) {
 			GameData.firstGame = false;
 			setTimeout(() => {
@@ -97,6 +101,7 @@ export default class NewClass extends cc.Component {
 			}, 200);
 		}
 
+		//奖励弹窗
 		if (GameData.goldAwardPrompt) {
 			setTimeout(() => {
 				this.CmdGoldAwardPrompt();
@@ -188,7 +193,6 @@ export default class NewClass extends cc.Component {
 				el.isChecked = true;
 			}
 		})
-
 		this.initToggle();
 	}
 
@@ -304,6 +308,7 @@ export default class NewClass extends cc.Component {
 					GlobalEvent.emit('onShowGobroke');
 					return;
 				}
+
 				GameCfg.GameType = pb.GameType.JJ_DuoKong;
 				// let gameStatus = EnterGameControl.onCurWXIsEnterGame();
 				// if (gameStatus.status == 3) {
@@ -337,11 +342,11 @@ export default class NewClass extends cc.Component {
 			})
 		}
 
-		//点击竞技
-		else if (name == 'toggle1' || name == 'toggle2' || name == 'toggle3') {
-			let index = parseInt(name.slice(-1));
-			this.changeToggle(index);
-		}
+		// //点击竞技
+		// else if (name == 'toggle1' || name == 'toggle2' || name == 'toggle3') {
+		// 	let index = parseInt(name.slice(-1));
+		// 	this.changeToggle(index);
+		// }
 
 		//点击创建对战
 		else if (name == 'main_jj_cjdz') {
@@ -456,5 +461,7 @@ export default class NewClass extends cc.Component {
 		GlobalEvent.off(EventCfg.HEADIMGCHANGE);
 		GlobalEvent.off(EventCfg.NAMECHANGE);
 		GlobalEvent.off(EventCfg.LEVELCHANGE)
+		GlobalEvent.off(EventCfg.VIPCHANGE);
+		GlobalEvent.off('CmdGoldAwardPrompt');
 	}
 }

@@ -100,5 +100,4 @@ export default class NewClass extends cc.Component {
     protected onDestroy(): void {
         GlobalEvent.off(EventCfg.VIPCHANGE);
     }
-
 }

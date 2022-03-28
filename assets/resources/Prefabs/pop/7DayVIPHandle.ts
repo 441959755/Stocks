@@ -1,16 +1,44 @@
 import { pb } from "../../../protos/proto";
 import LLWConfig from "../../../sctiprs/common/config/LLWConfig";
 import LLWSDK from "../../../sctiprs/common/sdk/LLWSDK";
+import GameData from "../../../sctiprs/GameData";
 import GameCfgText from "../../../sctiprs/GameText";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import LoadUtils from "../../../sctiprs/Utils/LoadUtils";
 import PopupManager from "../../../sctiprs/Utils/PopupManager";
-
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
+
+    @property(cc.Sprite)
+    bgFrame: cc.Sprite = null;
+
+    protected start(): void {
+        GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
+        GameData.ActivityConf.forEach(el => {
+            if (el.id == GameCfgText.appConf.pop[5].activity_id) {
+                let url = LLWConfig.LoginURL + '/img/activity' + el.id + '_icon.png';
+
+                console.log(url);
+
+                LoadUtils.load(url, (sp) => {
+                    if (sp) {
+                        this.bgFrame.spriteFrame = new cc.SpriteFrame(sp);
+                    }
+                    else {
+                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '配置未正确加载，请联系客服');
+                        this.node.active = false;
+                    }
+                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                })
+            }
+        })
+
+    }
 
     onBtnClick(event, curdata) {
         let name = event.target.name;

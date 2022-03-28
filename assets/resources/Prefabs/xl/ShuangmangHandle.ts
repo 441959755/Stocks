@@ -71,7 +71,6 @@ export default class NewClass extends cc.Component {
     }
 
     protected onEnable() {
-
         this.toggle1.isChecked = GameData.SMSet.isFC;
         this.updataGold();
         this.onGameCountShow();
@@ -160,7 +159,9 @@ export default class NewClass extends cc.Component {
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
         GameCfg.GAMEFUPAN = false;
+
         GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.SMSet));
+
         GameCfg.ziChan = parseInt(GameData.SmxlState.gold);
 
         GameCfg.enterGameConf = {
@@ -183,14 +184,6 @@ export default class NewClass extends cc.Component {
 
         GlobalHandle.enterGameSetout(GameCfg.enterGameConf, () => {
 
-            // GameData.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
-            // GameCfg.huizhidatas = GameCfg.data[0].data.length - (GameCfg.data[0].data.length - 100);
-
-            // if (GameData.huizhidatas <= 0) {
-            //     GameData.huizhidatas = GameCfg.data[0].data.length - 50;
-            //     GameCfg.huizhidatas = GameCfg.data[0].data.length - 50;
-            // }
-
             GlobalEvent.emit(EventCfg.LOADINGHIDE);
 
             GlobalEvent.emit('LOADGAME');
@@ -204,7 +197,6 @@ export default class NewClass extends cc.Component {
 
     //点击广告重置
     onGameResetCount(info) {
-
         LLWSDK.getSDK().showVideoAd((falg) => {
             if (falg) {
                 GlobalHandle.onGameResetSMCapital();

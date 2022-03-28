@@ -25,7 +25,9 @@ export default class PopupManager {
         GlobalEvent.on(EventCfg.OPENOTHERPLAYERINFO, this.openOtherPlayerInfoLayer.bind(this), this);
 
         this.openNode(cc.find('Canvas'), this.nodes['Prefabs/loading'], 'Prefabs/loading', 99);
+
         this.arrPop = new PopupList();
+
     }
 
     private static loadingHide() {
@@ -178,7 +180,6 @@ export default class PopupManager {
 
 
     public static openNode(prent, childen, url, zIndex?, call?) {
-
         //是否在下载
         // if (!this.isLoading) {
         //     this.isLoading = true;
@@ -216,6 +217,8 @@ export default class PopupManager {
             call && call(childen);
         }
     }
+
+
 
     //首次登入弹窗
     public static FirstAutoPop() {

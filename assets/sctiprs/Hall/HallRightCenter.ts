@@ -37,6 +37,7 @@ export default class NewClass extends cc.Component {
     rewardCenterNode = null;
 
     onLoad() {
+
         this.rewardCenterBtn.active = false;
 
         //获取是否有奖励
@@ -62,33 +63,35 @@ export default class NewClass extends cc.Component {
         if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
             return;
         }
+
         else {
             setTimeout(() => {
+                //炒股大赛
                 this.setCgdsBtnShowOrHide();
+                //新手礼包
                 this.setXSBtnShowOrHide();
+                //7天VIP
                 this.setVip7BtnShowOrHide();
+                //闯关赛
                 this.setCgsBtnShowOrHide();
+                //其他
                 this.setOtherBtnShowOrHide();
             }, 200);
         }
 
-
+        this.getRewardCenter();
     }
 
     setXSBtnShowOrHide() {
         //参与过的
         if (GlobalHandle.Activitys.indexOf(GameCfgText.appConf.pop[4].activity_id) >= 0) {
             this.xsBtn.active = false;
-            return;
         }
         //没
         else {
-
             let flag = false;
             GameData.ActivityConf.forEach(el => {
-
                 if (el.id == GameCfgText.appConf.pop[4].activity_id) {
-
                     let curTime = new Date().getTime() / 1000;
                     if (curTime < el.to && curTime >= el.from) {
                         this.xsBtn.active = true;
@@ -96,14 +99,10 @@ export default class NewClass extends cc.Component {
                     }
                     else {
                         this.xsBtn.active = false;
-
                     }
-                    return;
                 }
             });
-
             this.xsBtn.active = flag;
-            return;
         }
     }
 
@@ -117,7 +116,6 @@ export default class NewClass extends cc.Component {
         else {
             let flag = false;
             GameData.ActivityConf.forEach(el => {
-
                 if (el.id == GameCfgText.appConf.pop[5].activity_id) {
                     let curTime = new Date().getTime() / 1000;
                     if (curTime < el.to && curTime >= el.from) {
@@ -127,45 +125,36 @@ export default class NewClass extends cc.Component {
                     else {
                         this.vip7Btn.active = false;
                     }
-
-                    return;
                 }
             });
-
             this.vip7Btn.active = flag;
-            return;
         }
     }
 
     setCgdsBtnShowOrHide() {
         let flag = false;
         GameData.ActivityConf.forEach(el => {
-
             if (el.title == GameCfgText.appConf.pop[2].name) {
                 let curTime = new Date().getTime() / 1000;
                 if (curTime < el.to && curTime >= el.from) {
-
                     let iconUrl = LLWConfig.LoginURL + '/img/activity/cgds_icon.png';
                     LoadUtils.load(iconUrl, (sp) => {
                         if (sp) {
                             this.cgdsBtn.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(sp);
                             this.cgdsBtn.active = true;
+                            flag = true;
                         }
                         else {
                             this.cgdsBtn.active = false;
-                            flag = false;
                         }
                     })
-                    flag = true;
                 }
                 else {
                     this.cgdsBtn.active = false;
                 }
-                return;
             }
         });
         this.cgdsBtn.active = flag;
-        return;
     }
 
     setCgsBtnShowOrHide() {
@@ -174,28 +163,26 @@ export default class NewClass extends cc.Component {
             if (el.title == GameCfgText.appConf.pop[3].name) {
                 let curTime = new Date().getTime() / 1000;
                 if (curTime < el.to && curTime >= el.from) {
-
                     let iconUrl = LLWConfig.LoginURL + '/img/activity/cgs_icon.png';
                     LoadUtils.load(iconUrl, (sp) => {
                         if (sp) {
                             this.cgsBtn.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(sp);
                             this.cgsBtn.active = true;
+                            flag = true;
                         }
                         else {
                             this.cgsBtn.active = false;
                             flag = false;
                         }
                     })
-                    flag = true;
+
                 }
                 else {
                     this.cgsBtn.active = false;
                 }
-                return;
             }
         });
         this.cgsBtn.active = flag;
-        return;
     }
 
     setOtherBtnShowOrHide() {
@@ -211,29 +198,25 @@ export default class NewClass extends cc.Component {
                     this.otherBtn.active = false;
                 }
                 else if (curTime < el.to && curTime >= el.from) {
-
                     let iconUrl = LLWConfig.LoginURL + '/img/activity/' + el.id + '_icon.png';
-
                     LoadUtils.load(iconUrl, (sp) => {
                         if (sp) {
                             this.otherBtn.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(sp);
                             this.otherBtn.active = true;
+                            flag = true;
                         }
                         else {
                             this.otherBtn.active = false;
                             flag = false;
                         }
                     })
-                    flag = true;
                 }
                 else {
                     this.otherBtn.active = false;
                 }
-                return;
             }
         });
         this.otherBtn.active = flag;
-        return;
     }
 
     getRewardCenter(call?) {

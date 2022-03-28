@@ -127,8 +127,6 @@ export default class NewClass extends cc.Component {
             GlobalEvent.emit(EventCfg.OPENROOM);
         }
 
-        GlobalEvent.emit('getRewardCenter');
-
         this.onShow();
     }
 
