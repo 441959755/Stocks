@@ -42,6 +42,8 @@ export default class NewClass extends cc.Component {
 
     rankList4 = null;
 
+    activityID = 0;
+
     curSwitch = 0;
 
     awardList = null;
@@ -82,9 +84,11 @@ export default class NewClass extends cc.Component {
 
     //查询闯关赛排行榜
     getCgsRanking() {
+
         let data = {
-            id: GameData.gameData.cgState.seasonId,
+            id: this.activityID,
         }
+
         let CmdCgsRanking = pb.CmdCgsRanking;
         let message = CmdCgsRanking.create(data);
         let buff = CmdCgsRanking.encode(message).finish();
@@ -130,7 +134,7 @@ export default class NewClass extends cc.Component {
 
     onListRender4(item: cc.Node, idx: number) {
         let handle = item.getComponent('RankItem' + 4);
-        handle.onShow(this.rankList4[idx], idx);
+        handle.onShow(this.rankList4[idx], idx, this.awardList[idx]);
     }
 
     start() {
@@ -155,24 +159,16 @@ export default class NewClass extends cc.Component {
             }
         });
 
-        // if (!this.curSwitch) {
-        //     this.toggles[3].node.active = false;
-        // }
-
-        // else if (this.curSwitch) {
-        //     this.toggles[3].node.active = false;
-        // }
+        let label = this.toggles[3].node.getChildByName('label').getComponent(cc.Label);
 
         // 0表示关闭，1表示打开炒股大赛排行，2表示打开闯关排行
         if (this.curSwitch == 2) {
 
-            // if (!GameData.gameData.cgState) {
-            //     this.toggles[3].node.active = false;
-            // }
-
+            label.string = '闯关赛';
             // 查询当前一轮闯关赛配置数据
             socket.send(pb.MessageId.Req_Game_CgsGetConf, null, (res) => {
                 console.log('闯关赛配置1' + JSON.stringify(res));
+                this.activityID = res.id;
                 this.awardList = JSON.parse(res.award || '[]');
                 this.from = res.from;
                 this.to = res.to;
@@ -183,7 +179,7 @@ export default class NewClass extends cc.Component {
                 this.toggles[3].node.active = false;
                 return;
             }
-
+            label.string = '炒股大赛';
             socket.send(pb.MessageId.Req_Game_CgdsList, null, (res) => {
                 console.log('炒股大赛' + JSON.stringify(res));
                 this.awardList = JSON.parse(res.items[0].award || '[]');

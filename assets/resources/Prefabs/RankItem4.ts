@@ -36,12 +36,25 @@ export default class NewClass extends cc.Component {
         this.defaultImg = this.head.spriteFrame;
     }
 
-    onShow(obj, index) {
+    onShow(obj, index, awardArr) {
         this._info = obj;
 
-        // let str = ComUtils.getChenghaoByFame(obj.fame || 0);
-
-        this.award.string = '';
+        console.log(awardArr);
+        if (awardArr) {
+            this.award.node.active = true;
+            if (awardArr[0].i == pb.GamePropertyId.Vip) {
+                this.award.node.children[1].active = true;
+                this.award.node.children[0].active = false;
+            }
+            else if (awardArr[0].i == pb.GamePropertyId.Gold) {
+                this.award.node.children[1].active = false;
+                this.award.node.children[0].active = true;
+            }
+            this.award.string = awardArr[0].v + '';
+        }
+        else {
+            this.award.node.active = false;
+        }
 
         this.winCount.string = obj.cgsNetwin || 0;
 
@@ -97,23 +110,19 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, curdata) {
         let name = event.target.name;
         if (name == 'item4') {
-
             //打开信息面板
             this.getPlayerInfo((info) => {
                 info.icon = GameData.imgs[this._info.icon + ''];
                 PopupManager.openOtherPlayerInfoLayer(info);
             })
-
         }
         else if (name == 'phb_bt_chakan') {
-
             //打开信息面板
             this.getPlayerInfo((info) => {
                 info.icon = GameData.imgs[this._info.icon + ''];
                 //打开历史记录
                 GlobalEvent.emit(EventCfg.OPENOTHERPLAYERHISLAYER, info);
             })
-
         }
     }
 
