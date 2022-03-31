@@ -327,7 +327,7 @@ export default class WechatSDK {
         let url, title;
         if (roomId) {
             url = LLWConfig.LoginURL + '/wechatgame/invite.png';
-            title = '真实历史数据，等你来战';
+            title = '比拼K线技术，等你来挑战';
         }
         else {
             url = LLWConfig.LoginURL + '/wechatgame/share.png';

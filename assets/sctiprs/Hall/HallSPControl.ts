@@ -63,7 +63,6 @@ export default class NewClass extends cc.Component {
     }
 
     onLoadGame() {
-        console.log('进入训练');
         this.node.children.forEach(el => {
             el.active = false;
         })

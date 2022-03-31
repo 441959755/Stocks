@@ -2,6 +2,7 @@ import { pb } from "../../protos/proto";
 import GameCfg from "../../sctiprs/game/GameCfg";
 import GameData from "../../sctiprs/GameData";
 import GameCfgText from "../../sctiprs/GameText";
+import ComUtils from "../../sctiprs/Utils/ComUtils";
 import List from "../../sctiprs/Utils/List";
 import PopupManager from "../../sctiprs/Utils/PopupManager";
 
@@ -51,6 +52,9 @@ export default class NewClass extends cc.Component {
     from = null;
     to = null;
 
+
+    cb = null;
+
     protected onLoad(): void {
         this.getFameRankingWeekly();
     }
@@ -61,6 +65,7 @@ export default class NewClass extends cc.Component {
             this.rankList1 = info.Items;
             this.listV1.numItems = this.rankList1.length;
         });
+
     }
 
 
@@ -113,7 +118,6 @@ export default class NewClass extends cc.Component {
         socket.send(pb.MessageId.Req_Game_CgsGetSeasonRank, buff, (info) => {
             console.log('闯关赛排行榜' + JSON.stringify(info));
             this.rankList4 = info.Items;
-
         })
     }
 
@@ -138,20 +142,8 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
-        this.toggles.forEach((el, index) => {
-            if (index == 2) {
-                el.isChecked = true;
-                this.scollNodes[index].active = true;
-            }
-            else {
-                el.isChecked = false;
-                this.scollNodes[index].active = false;
-            }
-        })
 
-        this.tipsLabel.node.parent.active = false;
-        console.log(JSON.stringify(GameCfgText.appConf));
-
+        // 0表示关闭，1表示打开炒股大赛排行，2表示打开闯关排行
         //当前配置
         GameCfgText.appConf.module.forEach(el => {
             if (el.id == 18) {
@@ -159,9 +151,11 @@ export default class NewClass extends cc.Component {
             }
         });
 
+        this.tipsLabel.node.parent.active = false;
+        console.log(JSON.stringify(GameCfgText.appConf));
+
         let label = this.toggles[3].node.getChildByName('label').getComponent(cc.Label);
 
-        // 0表示关闭，1表示打开炒股大赛排行，2表示打开闯关排行
         if (this.curSwitch == 2) {
 
             label.string = '闯关赛';
@@ -187,6 +181,25 @@ export default class NewClass extends cc.Component {
                 this.to = res.items[0].to;
             })
         }
+
+        let curnumber = 2;
+        if (this.curSwitch) {
+            curnumber = 3;
+            setTimeout(() => {
+                this.onToggle4();
+            }, 200);
+        }
+
+        this.toggles.forEach((el, index) => {
+            if (index == curnumber) {
+                el.isChecked = true;
+                this.scollNodes[index].active = true;
+            }
+            else {
+                el.isChecked = false;
+                this.scollNodes[index].active = false;
+            }
+        })
 
     }
 
@@ -223,18 +236,16 @@ export default class NewClass extends cc.Component {
 
         let name = event.node.name;
         if (name == 'toggle1') {
-            if (!this.rankList1) {
-                this.getFameRanking();
-            }
+
+            this.getFameRanking();
+
             this.scollNodes[0].active = true;
             this.tipsLabel.node.parent.active = false;
         }
 
         else if (name == 'toggle2') {
 
-            if (!this.rankList2) {
-                this.getLevelRanking();
-            }
+            this.getLevelRanking();
 
             this.scollNodes[1].active = true;
             this.tipsLabel.node.parent.active = false;
@@ -242,9 +253,7 @@ export default class NewClass extends cc.Component {
 
         else if (name == 'toggle3') {
 
-            if (!this.rankList3) {
-                this.getFameRankingWeekly();
-            }
+            this.getFameRankingWeekly();
 
             this.scollNodes[2].active = true;
             this.tipsLabel.node.parent.active = true;
@@ -252,46 +261,81 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'toggle4') {
+            this.onToggle4();
+        }
+    }
 
-            if (!this.rankList4) {
-                //1表示打开炒股大赛排行
-                if (this.curSwitch == 1) {
-                    this.getCgdsRanking();
-                }
-                // /2表示打开闯关排行
-                else if (this.curSwitch == 2) {
-                    this.getCgsRanking();
-                }
-            }
-
-            this.scollNodes[3].active = true;
-
-            this.tipsLabel.node.parent.active = true;
-            if (this.curSwitch == 2) {
-                let ts = new Date().getTime() / 1000;
-
-                if (this.to - ts <= (24 * 60 * 60 * 3) && this.awardList.length <= 0) {
-                    this.tipsLabel.string = '下一轮比赛即将开启，敬请期待';
-                }
-
-                else if (this.to - ts <= (24 * 60 * 60 * 3) && this.awardList.length > 0) {
-                    this.tipsLabel.string = '本轮闯关赛即将结束，比赛结束后系统立刻发放奖励，敬请期待下一轮';
-                }
-
-                else if (this.to - ts > (24 * 60 * 60 * 3) && this.awardList.length > 0) {
-                    this.tipsLabel.string = '闯关赛比赛胜利，净胜场+1，比赛失败，净胜场-1';
-                }
-
-            }
-            else {
-                this.tipsLabel.string = '排行榜非实时数据，每个交易日12：30和15：30更新';
-            }
+    onToggle4() {
+        //1表示打开炒股大赛排行
+        if (this.curSwitch == 1) {
+            this.getCgdsRanking();
+        }
+        // /2表示打开闯关排行
+        else if (this.curSwitch == 2) {
+            this.getCgsRanking();
         }
 
+        this.scollNodes[3].active = true;
+
+        this.tipsLabel.node.parent.active = true;
+        if (this.curSwitch == 2) {
+            let ts = new Date().getTime() / 1000;
+
+            if (this.to - ts <= (24 * 60 * 60 * 3) && this.awardList.length <= 0) {
+                this.tipsLabel.string = '下一轮比赛即将开启，敬请期待';
+            }
+
+            else if (this.to - ts <= (24 * 60 * 60 * 3) && this.awardList.length > 0) {
+                this.tipsLabel.string = '本轮闯关赛即将结束，比赛结束后系统立刻发放奖励，敬请期待下一轮';
+            }
+
+            else if (this.to - ts > (24 * 60 * 60 * 3) && this.awardList.length > 0) {
+
+                this.onShowTime();
+            }
+
+        }
+        else {
+            this.tipsLabel.string = '排行榜非实时数据，每个交易日12：30和15：30更新';
+        }
     }
+
+    onShowTime() {
+
+        if (!this.cb) {
+            this.cb = setInterval(() => {
+                let time = this.to - new Date().getTime() / 1000;
+
+                // 天数
+                var day = Math.floor(time / 3600 / 24);
+                // 小时
+                var hr = Math.floor(time / 3600 % 24);
+                // 分钟
+                var min = Math.floor(time / 60 % 60);
+
+                this.tipsLabel.string = '闯关赛比赛胜利，净胜场+1，比赛失败，净胜场-1   本赛季结束时间：' + day + '天' + hr + '时' + min + '分';
+            }, 60 * 1000);
+        }
+
+        let time = this.to - new Date().getTime() / 1000;
+
+        // 天数
+        var day = Math.floor(time / 3600 / 24);
+        // 小时
+        var hr = Math.floor(time / 3600 % 24);
+        // 分钟
+        var min = Math.floor(time / 60 % 60);
+
+        this.tipsLabel.string = '闯关赛比赛胜利，净胜场+1，比赛失败，净胜场-1   本赛季结束时间：' + day + '天' + hr + '时' + min + '分';
+    }
+
+
 
     onDisable() {
         PopupManager.arrPop.remove(2);
+
+        clearInterval(this.cb);
+        this.cb = null;
     }
 
 }

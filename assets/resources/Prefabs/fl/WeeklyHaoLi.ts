@@ -1,7 +1,6 @@
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import { pb } from "../../../protos/proto";
-// import * as moment from 'moment';
 
 const { ccclass, property } = cc._decorator;
 
@@ -29,7 +28,6 @@ export default class NewClass extends cc.Component {
         if (this.content.children.length > 0) {
             return;
         }
-
         this.onShow();
     }
 

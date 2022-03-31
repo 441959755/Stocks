@@ -518,7 +518,6 @@ export default class ComUtils {
 
 
 	public static getYMDHMS(time) {
-
 		time = new Date(time);
 		var year = time.getFullYear(),
 			month = time.getMonth() + 1,
@@ -542,6 +541,8 @@ export default class ComUtils {
 			second: second
 		}
 	}
+
+
 
 	public static resetSize(cav) {
 		//cc.view.setDesignResolutionSize(1280,720, cc.ResolutionPolicy.EXACT_FIT );

@@ -1,6 +1,5 @@
 import GlobalEvent from '../Utils/GlobalEvent';
 import EventCfg from '../Utils/EventCfg';
-
 import { pb } from '../../protos/proto';
 import GameData from '../GameData';
 import StrategyAIData from './StrategyAIData';
@@ -160,6 +159,7 @@ export default class NewClass extends cc.Component {
             })
         }
     }
+
 
 
     setMarkColor() {

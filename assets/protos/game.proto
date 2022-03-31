@@ -545,6 +545,8 @@ message RoomData {
 	int32 id = 1;		// 房间ID
 	GameType game = 2;	// 游戏类型
 	bytes data = 3;		// 房间数据
+	int32 auto = 4;		// 房间类型（0：系统房间，1：手动房间）
+	int32 creator = 5;	// 房主用户ID
 }
 // 竞技房间数据
 message RoomPlayer {

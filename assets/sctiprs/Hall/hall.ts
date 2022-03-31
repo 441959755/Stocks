@@ -88,44 +88,48 @@ export default class NewClass extends cc.Component {
         GlobalHandle.getActivity();
 
         //断线重连 或游戏后进入房间
-        if (GameData.selfEnterRoomData) {
+        setTimeout(() => {
+            if (GameData.selfEnterRoomData) {
 
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
+                GlobalEvent.emit(EventCfg.LOADINGSHOW);
 
-            GameCfg.GameSet = GameData.JJPKSet;
+                GameCfg.GameSet = GameData.JJPKSet;
 
-            GameCfg.GameType = pb.GameType.JJ_PK;
+                GameCfg.GameType = pb.GameType.JJ_PK;
 
-            GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameData.selfEnterRoomData);
+                GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameData.selfEnterRoomData);
 
-            GameData.roomId = GameData.selfEnterRoomData.id;
+                GameData.roomId = GameData.selfEnterRoomData.id;
 
-            if (!GameData.RoomType) {
-
-                GameCfg.GAMEFRTD = true;
-
-                setTimeout(() => {
+                if (!GameData.RoomType) {
+                    GameCfg.GAMEFRTD = true;
                     GlobalEvent.emit('LOADGAME');
-                }, 800)
+
+                }
             }
-        }
+        }, 300)
 
         //房间已解散  ,给出提示
         if (GameData.RoomType && !GameData.roomId) {
-            GameData.RoomType = 0;
             GlobalEvent.emit(EventCfg.LOADINGSHOW);
             setTimeout(() => {
-                GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
+                if (GameData.roomId) {
+                    return;
+                }
+                else {
+                    GameData.RoomType = 0;
+                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
 
-                this.dissolve = true;
-            }, 200)
+                    this.dissolve = true;
+                }
+            }, 400)
         }
 
-        //进入房间
-        else if (GameData.roomId) {
-            GlobalEvent.emit(EventCfg.OPENROOM);
-        }
+        // //进入房间
+        // else if (GameData.roomId) {
+        //     GlobalEvent.emit(EventCfg.OPENROOM);
+        // }
 
         this.onShow();
     }
@@ -135,6 +139,8 @@ export default class NewClass extends cc.Component {
         this.finalLayer.forEach(el => {
             el && (el.zIndex = 51);
         })
+
+        console.log(GameData.roomId);
 
         if (GameData.query) {
             this.addRoom();
@@ -415,7 +421,10 @@ export default class NewClass extends cc.Component {
     }
 
     addRoom() {
-
+        if (GameData.roomId) {
+            GameData.query = null;
+            return
+        };
         setTimeout(() => {
             console.log('addRoom');
             let arr = ComUtils.getJJXunXian();

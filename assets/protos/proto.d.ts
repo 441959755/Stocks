@@ -6159,6 +6159,12 @@ export namespace pb {
 
         /** RoomData data */
         data?: (Uint8Array|null);
+
+        /** RoomData auto */
+        auto?: (number|null);
+
+        /** RoomData creator */
+        creator?: (number|null);
     }
 
     /** Represents a RoomData. */
@@ -6178,6 +6184,12 @@ export namespace pb {
 
         /** RoomData data. */
         public data: Uint8Array;
+
+        /** RoomData auto. */
+        public auto: number;
+
+        /** RoomData creator. */
+        public creator: number;
 
         /**
          * Creates a new RoomData instance using the specified properties.

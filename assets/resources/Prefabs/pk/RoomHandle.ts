@@ -191,14 +191,14 @@ export default class NewClass extends cc.Component {
             let read = this.player[0].getChildByName('read').getComponent(cc.Label);
             let head = this.player[0].getChildByName('head').getComponent(cc.Sprite);
 
-            if (GameData.Players.length > 0) {
+            if (GameData.Players.length > 0 && GameData.Players[0]) {
                 name.string = GameData.Players[0].nickname;
                 lv.string = 'LV: ' + GameData.Players[0].properties[pb.GamePropertyId.Level];
                 exp.string = '经验值：' + GameData.Players[0].properties[pb.GamePropertyId.Exp] + '/' +
                     GameCfgText.gameConf.level_exp[(GameData.Players[0].properties[pb.GamePropertyId.Level] || 1)];
                 read.string = '等待加入...';
-                this.onLoadHead(GameData.Players[0], head);
-
+                //  this.onLoadHead(GameData.Players[0], head);
+                head.spriteFrame = GameData.headImg;
             }
             if (GameData.Players && GameData.Players[1]) {
                 read.string = '等待准备...';

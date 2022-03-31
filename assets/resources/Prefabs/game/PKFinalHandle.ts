@@ -195,16 +195,8 @@ export default class NewClass extends cc.Component {
                 this.onResultAward(3, this.otherResultLabel, this.gameResult.players[1].result.userProfitRate);
             }
 
-            ex = this.gameResult.players[1].gd.properties[pb.GamePropertyId.Exp] + ex;
-            if (ex >= GameCfgText.levelInfoCfg[this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level]]) {
-                ex -= GameCfgText.levelInfoCfg[this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level]];
-                userExp.string = 'EXP: ' + ex + '/' + GameCfgText.levelInfoCfg[this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level]];
-                userLevel.string = 'LV: ' + (this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level]);
-            }
-            else {
-                userExp.string = 'EXP: ' + ex + '/' + GameCfgText.levelInfoCfg[this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level]];
-            }
-
+            ex = this.gameResult.players[1].gd.properties[pb.GamePropertyId.Exp];
+            userExp.string = 'EXP: ' + ex + '/' + GameCfgText.levelInfoCfg[this.gameResult.players[1].gd.properties[pb.GamePropertyId.Level]];
         }
 
     }

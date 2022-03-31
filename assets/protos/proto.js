@@ -1,7 +1,7 @@
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
 "use strict";
 
-var $protobuf = protobuf;
+var $protobuf = require("protobufjs/minimal");
 
 // Common aliases
 var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
@@ -16420,6 +16420,8 @@ $root.pb = (function() {
          * @property {number|null} [id] RoomData id
          * @property {pb.GameType|null} [game] RoomData game
          * @property {Uint8Array|null} [data] RoomData data
+         * @property {number|null} [auto] RoomData auto
+         * @property {number|null} [creator] RoomData creator
          */
 
         /**
@@ -16462,6 +16464,22 @@ $root.pb = (function() {
         RoomData.prototype.data = $util.newBuffer([]);
 
         /**
+         * RoomData auto.
+         * @member {number} auto
+         * @memberof pb.RoomData
+         * @instance
+         */
+        RoomData.prototype.auto = 0;
+
+        /**
+         * RoomData creator.
+         * @member {number} creator
+         * @memberof pb.RoomData
+         * @instance
+         */
+        RoomData.prototype.creator = 0;
+
+        /**
          * Creates a new RoomData instance using the specified properties.
          * @function create
          * @memberof pb.RoomData
@@ -16491,6 +16509,10 @@ $root.pb = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.game);
             if (message.data != null && Object.hasOwnProperty.call(message, "data"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.data);
+            if (message.auto != null && Object.hasOwnProperty.call(message, "auto"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.auto);
+            if (message.creator != null && Object.hasOwnProperty.call(message, "creator"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.creator);
             return writer;
         };
 
@@ -16533,6 +16555,12 @@ $root.pb = (function() {
                     break;
                 case 3:
                     message.data = reader.bytes();
+                    break;
+                case 4:
+                    message.auto = reader.int32();
+                    break;
+                case 5:
+                    message.creator = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -16598,6 +16626,12 @@ $root.pb = (function() {
             if (message.data != null && message.hasOwnProperty("data"))
                 if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
                     return "data: buffer expected";
+            if (message.auto != null && message.hasOwnProperty("auto"))
+                if (!$util.isInteger(message.auto))
+                    return "auto: integer expected";
+            if (message.creator != null && message.hasOwnProperty("creator"))
+                if (!$util.isInteger(message.creator))
+                    return "creator: integer expected";
             return null;
         };
 
@@ -16690,6 +16724,10 @@ $root.pb = (function() {
                     $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
                 else if (object.data.length)
                     message.data = object.data;
+            if (object.auto != null)
+                message.auto = object.auto | 0;
+            if (object.creator != null)
+                message.creator = object.creator | 0;
             return message;
         };
 
@@ -16716,6 +16754,8 @@ $root.pb = (function() {
                     if (options.bytes !== Array)
                         object.data = $util.newBuffer(object.data);
                 }
+                object.auto = 0;
+                object.creator = 0;
             }
             if (message.id != null && message.hasOwnProperty("id"))
                 object.id = message.id;
@@ -16723,6 +16763,10 @@ $root.pb = (function() {
                 object.game = options.enums === String ? $root.pb.GameType[message.game] : message.game;
             if (message.data != null && message.hasOwnProperty("data"))
                 object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+            if (message.auto != null && message.hasOwnProperty("auto"))
+                object.auto = message.auto;
+            if (message.creator != null && message.hasOwnProperty("creator"))
+                object.creator = message.creator;
             return object;
         };
 

@@ -109,7 +109,7 @@ export default class NewClass extends cc.Component {
 
     onSelfEnterRoomGameData(info) {
         //不是好友pk
-        if (!GameData.JJCapital) {
+        if (!GameData.RoomType) {
             GlobalHandle.onLineInvite();
         }
 
@@ -184,32 +184,24 @@ export default class NewClass extends cc.Component {
 
         console.log(info.players[1].gd + '  ' + info.quotes);
 
-        if (info.players[1].gd && info.quotes) {
+        console.log(GameData.RoomType);
 
-            console.log(GameData.RoomType);
-
-            if (GameData.RoomType) {
-
-                if (info.players[0].gd.uid == GameData.userID) {
-                    GameData.Players[0] = info.players[0].gd;
-                    GameData.Players[1] = info.players[1].gd;
-                }
-
-                else if (info.players[1].gd.uid == GameData.userID) {
-                    GameData.Players[0] = info.players[1].gd;
-                    GameData.Players[1] = info.players[0].gd;
-                }
-
-                GlobalEvent.emit(EventCfg.OPENROOM);
-
+        if (GameData.RoomType) {
+            if (info.players[0].gd.uid == GameData.userID) {
+                GameData.Players[0] = info.players[0].gd;
+                GameData.Players[1] = info.players[1].gd;
             }
-            else {
-
-                this.openMatchPk();
-                GlobalEvent.emit('SHOWOTHERPLAYER');
-
+            else if (info.players[1].gd.uid == GameData.userID) {
+                GameData.Players[0] = info.players[1].gd;
+                GameData.Players[1] = info.players[0].gd;
             }
+            GlobalEvent.emit(EventCfg.OPENROOM);
         }
+        else {
+            this.openMatchPk();
+            GlobalEvent.emit('SHOWOTHERPLAYER');
+        }
+
     }
 
     onDestroy() {
