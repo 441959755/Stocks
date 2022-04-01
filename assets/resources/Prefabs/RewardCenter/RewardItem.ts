@@ -60,37 +60,37 @@ export default class NewClass extends cc.Component {
 
         arr.P.forEach(el => {
 
-            if (el.v > 0 && el.i == pb.GamePropertyId.Gold) {
+            if (el.i == pb.GamePropertyId.Gold) {
                 this.itemNodes.children[0].active = true;
                 this.goldLa.string = el.v;
             }
 
-            else if (el.v > 0 && el.i == pb.GamePropertyId.Diamond) {
+            else if (el.i == pb.GamePropertyId.Diamond) {
                 this.itemNodes.children[1].active = true;
                 this.diaLa.string = el.v;
             }
 
-            else if (el.v > 0 && el.i == pb.GamePropertyId.Coupon) {
+            else if (el.i == pb.GamePropertyId.Coupon) {
                 this.itemNodes.children[4].active = true;
                 this.tickLa.string = el.v;
             }
 
-            else if (el.v > 0 && el.i == pb.GamePropertyId.Exp) {
+            else if (el.i == pb.GamePropertyId.Exp) {
                 this.itemNodes.children[3].active = true;
                 this.expLa.string = el.v;
             }
 
-            else if (el.v > 0 && el.i == pb.GamePropertyId.Fame) {
+            else if (el.i == pb.GamePropertyId.Fame) {
                 this.itemNodes.children[2].active = true;
                 this.fameLa.string = el.v;
             }
 
-            else if (el.v > 0 && el.i == pb.GamePropertyId.Vip) {
+            else if (el.i == pb.GamePropertyId.Vip) {
                 this.itemNodes.children[5].active = true;
                 this.vipLa.string = el.v + '天';
             }
 
-            else if (el.v > 0 && el.i == pb.GamePropertyId.K) {
+            else if (el.i == pb.GamePropertyId.K) {
                 this.itemNodes.children[6].active = true;
                 this.kbi.string = el.v;
             }

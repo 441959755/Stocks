@@ -7,6 +7,7 @@ import GameData from '../GameData';
 import GlobalHandle from "../global/GlobalHandle";
 import ComUtils from "../Utils/ComUtils";
 import UpGameOpt from "../global/UpGameOpt";
+import ActionUtils from "../Utils/ActionUtils";
 
 const { ccclass, property } = cc._decorator;
 
@@ -494,12 +495,15 @@ export default class NewClass extends cc.Component {
                 }
             }
         }
+
         else if (name == 'btnMyspic') {
             GlobalEvent.emit(EventCfg.MYSPICCLICK);
         }
 
         else if (name == 'statBtn') {
-            GlobalEvent.emit(EventCfg.OPENSTATLAYER);
+            PopupManager.openNode(this.node.parent, null, 'Prefabs/game/statLayer', 7, (node) => {
+                ActionUtils.openBox(node);
+            });
         }
 
         else if (name == 'otherPlayerNode') {

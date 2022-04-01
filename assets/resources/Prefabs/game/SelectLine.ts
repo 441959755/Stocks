@@ -1,10 +1,10 @@
-import GlobalEvent from '../Utils/GlobalEvent';
-import EventCfg from '../Utils/EventCfg';
-import GameCfg from './GameCfg';
-import { pb } from '../../protos/proto';
-import ComUtils from '../Utils/ComUtils';
-import DrawDatas from './DrawData';
-import DrawData from './DrawData';
+
+import { pb } from "../../../protos/proto";
+import DrawData from "../../../sctiprs/game/DrawData";
+import GameCfg from "../../../sctiprs/game/GameCfg";
+import ComUtils from "../../../sctiprs/Utils/ComUtils";
+import EventCfg from "../../../sctiprs/Utils/EventCfg";
+import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
 
@@ -29,6 +29,7 @@ export default class NewClass extends cc.Component {
     to = null;
 
     onDisable() {
+
         this._selectID = 0;
         this._preSelectID = 0;
         this.qhData = null;
@@ -161,7 +162,7 @@ export default class NewClass extends cc.Component {
 
             to = ComUtils.fromatTime1(to);
 
-            if (DrawDatas.arrDay.length > 0 && DrawDatas.arrDay[DrawDatas.arrDay.length - 1].day == to) {
+            if (DrawData.arrDay.length > 0 && DrawData.arrDay[DrawData.arrDay.length - 1].day == to) {
                 this.onChanageType(id);
                 GlobalEvent.emit(EventCfg.LOADINGHIDE);
                 return;
@@ -205,9 +206,9 @@ export default class NewClass extends cc.Component {
             });
 
             if (type <= 3) {
-                DrawDatas.arrMin5 = GameCfg.data[0].data;
+                DrawData.arrMin5 = GameCfg.data[0].data;
             } else if (type >= 4) {
-                DrawDatas.arrDay = GameCfg.data[0].data;
+                DrawData.arrDay = GameCfg.data[0].data;
             }
             this.onChanageType(id);
         });
@@ -355,25 +356,25 @@ export default class NewClass extends cc.Component {
 
         let to = this.qhData.data[this.huizhidatas - 1].day;
         if (id == 0) {
-            //  dataArr = DrawDatas.dataChange(this.qhData.data[le].day, 1, DrawDatas.arrMin5);
-            dataArr = DrawDatas.getTimeSlotData(to, 50, DrawDatas.arrMin5);
+            //  dataArr = DrawData.dataChange(this.qhData.data[le].day, 1, DrawData.arrMin5);
+            dataArr = DrawData.getTimeSlotData(to, 50, DrawData.arrMin5);
         } else if (id == 1) {
-            dataArr = DrawDatas.dataChange(to, 3, DrawDatas.arrMin5);
+            dataArr = DrawData.dataChange(to, 3, DrawData.arrMin5);
         } else if (id == 2) {
-            dataArr = DrawDatas.dataChange(to, 6, DrawDatas.arrMin5);
+            dataArr = DrawData.dataChange(to, 6, DrawData.arrMin5);
         } else if (id == 3) {
-            dataArr = DrawDatas.dataChange(to, 12, DrawDatas.arrMin5);
+            dataArr = DrawData.dataChange(to, 12, DrawData.arrMin5);
         } else if (id == 4) {
-            // dataArr = DrawDatas.arrDay;
-            dataArr = DrawDatas.getTimeSlotData(to, 50, DrawDatas.arrDay);
+            // dataArr = DrawData.arrDay;
+            dataArr = DrawData.getTimeSlotData(to, 50, DrawData.arrDay);
         } else if (id == 5) {
-            if (this.huizhidatas >= DrawDatas.arrDay.length) {
-                le = DrawDatas.arrDay.length - 1;
+            if (this.huizhidatas >= DrawData.arrDay.length) {
+                le = DrawData.arrDay.length - 1;
 
             } else {
                 le = this.huizhidatas;
             }
-            dataArr = DrawDatas.dataChange(to, 5, DrawDatas.arrDay);
+            dataArr = DrawData.dataChange(to, 5, DrawData.arrDay);
         }
         if (dataArr.length > 50) {
             dataArr = dataArr.slice(dataArr.length - 51);

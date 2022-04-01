@@ -5,6 +5,7 @@ import { pb } from '../../protos/proto';
 import UpGameOpt from "../global/UpGameOpt";
 import DrawData from "./DrawData";
 import GameData from "../GameData";
+import PopupManager from "../Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -13,32 +14,17 @@ const { ccclass, property } = cc._decorator;
 export default class NewClass extends cc.Component {
 
     @property(cc.Node)
-    statLayer: cc.Node = null;  //统计界面
-
-    @property(cc.Node)
-    selectLine: cc.Node = null;   //选择条
-
-    @property(cc.Node)
-    drawNode: cc.Node = null;
-
-    @property(cc.Node)
     poritLa: cc.Node = null;
-
-    @property(cc.Node)
-    startGameNode: cc.Node = null;
-
 
     onLoad() {
         //同步游戏操作 pk才有
         GlobalEvent.on(EventCfg.UPDATEOTHERPLAYEROPT, this.updateOtherPlayerOpt.bind(this), this);
-
-        GlobalEvent.on(EventCfg.OPENSTATLAYER, () => {
-            this.statLayer.active = true;
-        }, this);
     }
 
     onEnable() {
+
         GameData.adSucceed -= 1;
+
         this.initData();
         this.setColor();
 
@@ -52,25 +38,24 @@ export default class NewClass extends cc.Component {
             if ((GameCfg.GameType == pb.GameType.JJ_PK ||
                 GameCfg.GameType == pb.GameType.JJ_DuoKong ||
                 GameCfg.GameType == pb.GameType.JJ_ChuangGuan) && !GameCfg.GAMEFRTD) {
-                this.startGameNode.active = true;
+                PopupManager.openNode(this.node, null, 'Prefabs/game/startGameAnim', 8, null);
             }
             else {
-                this.startGameNode.active = false;
+                PopupManager.hideTipsBox('game/startGameAnim');
             }
         }
 
+        //期货打开时间选择
         if (GameCfg.GameType == pb.GameType.QiHuo) {
-            this.selectLine.active = true;
+            PopupManager.openNode(this.node, null, 'Prefabs/game/selectLine', 2, null);
         }
+        //其他关闭
         else {
-            this.selectLine.active = false;
+            PopupManager.hideTipsBox('game/selectLine');
         }
     }
 
-
-
     setColor() {
-
         //黑底
         if (GameCfg.GameSet.isBW) {
             GameCfg.MAColor[0] = new cc.Color().fromHEX('#ffffff');
@@ -279,7 +264,6 @@ export default class NewClass extends cc.Component {
     }
 
     protected onDestroy() {
-        GlobalEvent.off(EventCfg.OPENSTATLAYER);
         GlobalEvent.off(EventCfg.UPDATEOTHERPLAYEROPT);
     }
 

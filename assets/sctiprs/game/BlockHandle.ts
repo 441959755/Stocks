@@ -2,7 +2,6 @@ import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
 import GameCfg from "./GameCfg";
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -22,17 +21,13 @@ export default class NewClass extends cc.Component {
 
     blockNods = [];
 
-
     onLoad() {
         GlobalEvent.on(EventCfg.ONMARKUPDATE, this.updateBlcokPoint.bind(this), this);
 
         GlobalEvent.on(EventCfg.CREATEBLOCK, this.createBlock.bind(this), this);
-    }
 
-    onEnable() {
-        this.node.removeAllChildren();
+        GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
     }
-
 
     //创建方块
     createBlock(type, index?) {
@@ -80,12 +75,12 @@ export default class NewClass extends cc.Component {
 
         this.blockNods[index - 1] = [node, index - 1];
 
-
         GameCfg.blockHistoy.push([index - 1, type]);
 
     }
 
-    onDisable() {
+    leaveGame() {
+        this.node.removeAllChildren();
         GameCfg.blockHistoy = [];
         this.blockNods = [];
     }

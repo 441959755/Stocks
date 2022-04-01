@@ -2032,4 +2032,9 @@ export default class NewClass extends cc.Component {
         itemHandle.onShow();
     }
 
+    protected onDisable(): void {
+        this.content.removeAllChildren();
+        this.arr = [];
+    }
+
 }

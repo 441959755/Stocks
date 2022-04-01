@@ -1043,6 +1043,11 @@ export default class NewClass extends cc.Component {
         }
     }
 
+    protected onDisable(): void {
+        this.content.removeAllChildren();
+        this.arr = [];
+    }
+
     onDestroy() {
         GlobalEvent.off(EventCfg.SLGEVENTNOTICE);
         GlobalEvent.off(EventCfg.UPDATERATE);

@@ -70,7 +70,6 @@ export default class NewClass extends cc.Component {
             else {
                 this.node.active = flag
             }
-
         }, this);
 
         GlobalEvent.on(EventCfg.SETMARKCOLOR, this.setMarkColor.bind(this), this);
@@ -79,9 +78,12 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on(EventCfg.PKFUPAN, this.onShowCutMark.bind(this), this);
 
+
+        GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
     }
 
-    onDisable() {
+    leaveGame() {
+        this.node.removeAllChildren();
         this.startNode = [];
         this.markNodes = [];
         this.bmarkNodes = [];
@@ -160,8 +162,6 @@ export default class NewClass extends cc.Component {
         }
     }
 
-
-
     setMarkColor() {
         let info = StrategyAIData.onCompareReult();
         this.markNodes;
@@ -213,8 +213,6 @@ export default class NewClass extends cc.Component {
     }
 
     onEnable() {
-        this.node.removeAllChildren();
-
         this.status = 0;
 
         if (GameCfg.GameType != 'ZNXG' && GameCfg.GameType != pb.GameType.MoNiChaoGu && GameCfg.GameType != pb.GameType.ChaoGuDaSai) {
@@ -576,6 +574,7 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.ADDMARKHIDEORSHOW);
         GlobalEvent.off(EventCfg.CUTGAMEFUPAN);
         GlobalEvent.off(EventCfg.PKFUPAN);
+        GlobalEvent.off(EventCfg.LEAVEGAME);
     }
 
 

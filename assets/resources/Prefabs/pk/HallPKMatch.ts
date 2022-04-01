@@ -44,24 +44,26 @@ export default class NewClass extends cc.Component {
     }
 
     onShowOtherPlayer() {
-        this.callBack && (clearInterval(this.callBack));
-        this.callBack = null;
+        if (GameData.Players[1]) {
+            this.callBack && (clearInterval(this.callBack));
+            this.callBack = null;
 
-        this.onLoadHead();
+            this.onLoadHead();
 
-        let name = this.player2.getChildByName('name');
-        let lv = this.player2.getChildByName('lv');
-        let exp = this.player2.getChildByName('exp');
+            let name = this.player2.getChildByName('name');
+            let lv = this.player2.getChildByName('lv');
+            let exp = this.player2.getChildByName('exp');
 
-        name.active = true;
-        lv.active = true;
-        exp.active = true;
+            name.active = true;
+            lv.active = true;
+            exp.active = true;
 
-        name.getComponent(cc.Label).string = GameData.Players[1].nickname;
+            name.getComponent(cc.Label).string = GameData.Players[1].nickname;
 
-        lv.getComponent(cc.Label).string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1);
+            lv.getComponent(cc.Label).string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1);
 
-        exp.getComponent(cc.Label).string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + ' /' + GameCfgText.gameConf.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
+            exp.getComponent(cc.Label).string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + ' /' + GameCfgText.gameConf.level_exp[(GameData.Players[1].properties[pb.GamePropertyId.Level] || 1)];
+        }
 
     }
 
@@ -85,20 +87,18 @@ export default class NewClass extends cc.Component {
 
         head.getComponent(cc.Sprite).spriteFrame = null;
 
-        if (GameData.Players[1].icon) {
+        ComUtils.onLoadHead(GameData.Players[1].icon, (res) => {
+            this.callBack && (clearInterval(this.callBack));
+            this.callBack = null;
+            if (res) {
+                let texture = new cc.SpriteFrame(res);
+                GameData.Players[1] && (GameData.Players[1].icon = texture)
+                head.getComponent(cc.Sprite).spriteFrame = texture;
+            }
+            // 进入游戏动画
+            this.onEnterGameAnim();
+        })
 
-            ComUtils.onLoadHead(GameData.Players[1].icon, (res) => {
-                this.callBack && (clearInterval(this.callBack));
-                this.callBack = null;
-                if (res) {
-                    let texture = new cc.SpriteFrame(res);
-                    GameData.Players[1] && (GameData.Players[1].icon = texture)
-                    head.getComponent(cc.Sprite).spriteFrame = texture;
-                }
-                // 进入游戏动画
-                this.onEnterGameAnim();
-            })
-        }
         GameData.Players[1] && (GameData.Players[1].icon = null)
     }
 

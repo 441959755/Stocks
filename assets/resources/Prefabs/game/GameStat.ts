@@ -1,9 +1,11 @@
-import GameData from '../GameData';
-import GameCfgText from '../GameText';
-import GameCfg from './GameCfg';
-import DrawData from './DrawData';
-import { pb } from '../../protos/proto';
-import StrategyAIData from './StrategyAIData';
+
+import { pb } from "../../../protos/proto";
+import DrawData from "../../../sctiprs/game/DrawData";
+import GameCfg from "../../../sctiprs/game/GameCfg";
+import StrategyAIData from "../../../sctiprs/game/StrategyAIData";
+import GameData from "../../../sctiprs/GameData";
+import GameCfgText from "../../../sctiprs/GameText";
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -37,8 +39,10 @@ export default class NewClass extends cc.Component {
     zbNode: cc.Node = null;
 
     onEnable() {
+
         this.dxNode.active = false;
         this.zbNode.active = false;
+
         this.userHead.spriteFrame = GameData.headImg;
 
         this.userLe.string = 'LV:' + GameData.properties[pb.GamePropertyId.Level];
