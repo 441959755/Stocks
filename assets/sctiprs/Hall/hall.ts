@@ -35,7 +35,7 @@ export default class NewClass extends cc.Component {
 
     Matchfalg = false;
 
-    dissolve = false;
+
 
     onLoad() {
 
@@ -86,13 +86,12 @@ export default class NewClass extends cc.Component {
     start() {
 
         GlobalHandle.getActivity();
-
         //断线重连 或游戏后进入房间
+
         setTimeout(() => {
             if (GameData.selfEnterRoomData) {
-
                 GlobalEvent.emit(EventCfg.LOADINGSHOW);
-
+                console.log('断线重连 或游戏后进入房间');
                 GameCfg.GameSet = GameData.JJPKSet;
 
                 GameCfg.GameType = pb.GameType.JJ_PK;
@@ -104,27 +103,25 @@ export default class NewClass extends cc.Component {
                 if (!GameData.RoomType) {
                     GameCfg.GAMEFRTD = true;
                     GlobalEvent.emit('LOADGAME');
-
                 }
             }
-        }, 300)
+        }, 1000)
+        // //房间已解散  ,给出提示
+        // else if (GameData.RoomType && !GameData.roomId) {
+        //     GlobalEvent.emit(EventCfg.LOADINGSHOW);
+        //     setTimeout(() => {
+        //         if (GameData.roomId) {
+        //             return;
+        //         }
+        //         else {
+        //             GameData.RoomType = 0;
+        //             GlobalEvent.emit(EventCfg.LOADINGHIDE);
+        //             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
 
-        //房间已解散  ,给出提示
-        if (GameData.RoomType && !GameData.roomId) {
-            GlobalEvent.emit(EventCfg.LOADINGSHOW);
-            setTimeout(() => {
-                if (GameData.roomId) {
-                    return;
-                }
-                else {
-                    GameData.RoomType = 0;
-                    GlobalEvent.emit(EventCfg.LOADINGHIDE);
-                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '房间已解散！');
 
-                    this.dissolve = true;
-                }
-            }, 400)
-        }
+        //         }
+        //     }, 400)
+        // }
 
         // //进入房间
         // else if (GameData.roomId) {
@@ -200,6 +197,7 @@ export default class NewClass extends cc.Component {
             this.leaveRoomFlag = false;
             GameData.haoYouFangData = null;
             GameData.RoomType = 0;
+
         }
         else {
 
@@ -264,7 +262,7 @@ export default class NewClass extends cc.Component {
     onLoadGame() {
         this.broadcast && (this.broadcast.active = false);
         this.InviteBox && (this.InviteBox.active = false);
-        this.dissolve = false;
+
         // PopupManager.openNode(this.node, this.gameLayer, 'Prefabs/game/gameLayer', 50, (node) => {
         //     this.gameLayer = node;
         this.gameLayer.active = true;
@@ -327,10 +325,10 @@ export default class NewClass extends cc.Component {
 
         this.gameLayer && (this.gameLayer.active = false)
 
-        if (this.dissolve) {
-            GameData.haoYouFangData && (GameData.selfEnterRoomData = GameData.haoYouFangData,
-                GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameData.haoYouFangData))
-        }
+
+        GameData.haoYouFangData && (GameData.selfEnterRoomData = GameData.haoYouFangData,
+            GlobalEvent.emit(EventCfg.RoomGameDataSelf, GameData.haoYouFangData))
+
         if (GameData.leaveUid) {
             GameData.Players[1] = null;
             GlobalEvent.emit(EventCfg.ROOMLEAVE, { uid: GameData.leaveUid });

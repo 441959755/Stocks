@@ -61,6 +61,7 @@ export default class NewClass extends cc.Component {
 
     onEnterRoom(roomid) {
 
+
         let arr = ComUtils.getJJXunXian();
 
         let data = {

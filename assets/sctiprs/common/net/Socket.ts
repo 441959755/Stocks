@@ -1,8 +1,6 @@
 
 import { pb } from "../../../protos/proto";
 import GameData from '../../GameData';
-import GlobalEvent from "../../Utils/GlobalEvent";
-import EventCfg from "../../Utils/EventCfg";
 import PopupManager from "../../Utils/PopupManager";
 
 let MessageHead = pb.MessageHead;
@@ -29,7 +27,6 @@ export default class Socket {
         this.flag = false;
         this.reconnectCount = 0;
         this.host = host;
-
         this.init();
     }
 

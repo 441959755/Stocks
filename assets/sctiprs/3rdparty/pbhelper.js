@@ -154,32 +154,37 @@ PBHelper.prototype = {
         //自己进入房间（客户端收到自己进入房间的消息，将玩家拉入房间）
         else if (id == pb.MessageId.Sync_Room_Enter_Self) {
 
-            let RoomData = pb.RoomData;
-            let data = RoomData.decode(new Uint8Array(buff));
-            console.log('拉入房间' + data.auto + '   ' + data.creator);
-            if (data.auto) {
-                if (GameData.userID == data.creator) {
-                    GameData.RoomType = 1;
+            setTimeout(() => {
+                let RoomData = pb.RoomData;
+                let data = RoomData.decode(new Uint8Array(buff));
+                console.log('拉入房间' + data.auto + '   ' + data.creator);
+                if (data.auto) {
+                    if (GameData.userID == data.creator) {
+                        GameData.RoomType = 1;
+                    }
+                    else {
+                        GameData.RoomType = 2;
+                    }
                 }
-                else {
-                    GameData.RoomType = 2;
-                }
-            }
 
-            if (data.game == pb.GameType.JJ_PK || data.game == pb.GameType.JJ_DuoKong) {
+                if (data.game == pb.GameType.JJ_PK || data.game == pb.GameType.JJ_DuoKong) {
 
-                let RoomGameData = pb.RoomGameData;
-                let message = RoomGameData.decode(new Uint8Array(buff));
-
-                if (!GameData.roomId) {
-                    GameData.selfEnterRoomData = message;
-                }
-                else {
-                    console.log('自己进入房间' + JSON.stringify(message));
-                    GlobalEvent.emit(EventCfg.RoomGameDataing, message)
+                    let RoomGameData = pb.RoomGameData;
+                    let message = RoomGameData.decode(new Uint8Array(buff));
                     console.log('房间ID' + JSON.stringify(GameData.roomId));
+                    console.log('自己进入房间' + JSON.stringify(message));
+
+                    //断线拉入
+                    if (!GameData.roomId) {
+                        GameData.selfEnterRoomData = message;
+                    }
+
+                    //创建、加入
+                    else {
+                        GlobalEvent.emit(EventCfg.RoomGameDataing, message)
+                    }
                 }
-            }
+            }, 300);
         }
 
         // 其他玩家进入房间：SyncRoomEnter

@@ -19,8 +19,8 @@ export default class WebSDK {
     login(call, uid?) {
 
         // let uuid = uid || LLWUtils.getUUID();
-        //  let a = Math.random() * 10;
-        let uuid = '1314713188' + 1;
+        let a = Math.random() * 10;
+        let uuid = '1314713188' + a;
 
         let loginInfo = {
             account: uuid,
