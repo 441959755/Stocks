@@ -56,7 +56,7 @@ export default class NewClass extends cc.Component {
 
         GlobalEvent.on(EventCfg.LEAVEGAME, this.leaveGame.bind(this), this);
 
-        GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this)
+        GlobalEvent.on(EventCfg.GAMEOVEER, this.GameOver.bind(this), this);
 
         GlobalEvent.on('onShowGobroke', this.onShowGobroke.bind(this), this);
 
@@ -72,7 +72,6 @@ export default class NewClass extends cc.Component {
         LLWSDK.getSDK().onShow(this.addRoom.bind(this));
 
         GlobalEvent.on(EventCfg.RoomGameDataing, (message) => {
-
             if (!this.gameLayer.active) {
                 GameData.selfEnterRoomData = message;
                 GlobalEvent.emit(EventCfg.RoomGameDataSelf, message);
@@ -389,12 +388,12 @@ export default class NewClass extends cc.Component {
         }
 
         setTimeout(() => {
+
             if (GameCfg.GameType == pb.GameType.JJ_PK || GameCfg.GameType == pb.GameType.JJ_DuoKong) {
                 if (GameCfg.RoomGameData) {
                     let handle = this.finalLayer[this.index].getComponent('PKFinalHandle');
                     handle.onShow();
                 }
-
                 this.finalLayer[this.index].active = true;
             }
 
@@ -411,7 +410,6 @@ export default class NewClass extends cc.Component {
                     this.finalLayer[this.index].active = true;
                 } else {
                     this.finalLayer[this.index].getComponent('FinalHandle').onShow();
-
                     this.finalLayer[this.index].active = true;
                 }
             }

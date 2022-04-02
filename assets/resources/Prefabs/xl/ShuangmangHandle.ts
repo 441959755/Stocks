@@ -58,15 +58,24 @@ export default class NewClass extends cc.Component {
 
     updataGold() {
 
-        this.curla.string = GameData.SmxlState.gold;
-        this.initLa.string = GameData.SmxlState.goldInit;
-
         //是否重置
         this.CZBtn.active = false;
         if (GameData.SmxlState.gold <= GameCfgText.smxlCfg.capital_min.value) {
             this.CZBtn.active = true;
         } else if (GameData.SmxlState.gold >= GameCfgText.smxlCfg.capital_max.value) {
             this.CZBtn.active = true;
+        }
+
+
+        this.curla.string = GameData.SmxlState.gold;
+
+        if (GameData.SmxlState.gold >= 1000000000) {
+            this.curla.string = '10亿+';
+        }
+        this.initLa.string = GameData.SmxlState.goldInit;
+
+        if (GameData.SmxlState.goldInit >= 1000000000) {
+            this.curla.string = '10亿+';
         }
     }
 

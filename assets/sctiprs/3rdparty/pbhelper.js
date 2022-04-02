@@ -200,11 +200,11 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Sync_Room_Leave || id == pb.MessageId.Sync_Room_Leave_Self) {
             let SyncRoomLeave = pb.SyncRoomLeave;
             let data = SyncRoomLeave.decode(new Uint8Array(buff));
+            console.log('玩家离开房间' + JSON.stringify(data));
             if (data.uid == GameData.userID) {
-                GameData.roomId = 0;
-                GameData.JJCapital = 0;
-                GameData.Players = [];
-
+                // GameData.roomId = 0;
+                // GameData.JJCapital = 0;
+                //   GameData.Players = [];
             }
             else {
                 GameData.leaveUid = data.uid;

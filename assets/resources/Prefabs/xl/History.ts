@@ -119,7 +119,16 @@ export default class NewClass extends cc.Component {
 
         if (GameCfg.GameType == pb.GameType.ShuangMang) {
             // this.title.string = '双盲训练';
-            this.label.string = sumEar + '';
+            if (sumEar >= 1000000000) {
+                this.label.string = '10亿+';
+            }
+            else if (sumEar >= 100000) {
+                this.label.string = (sumEar / 10000).toFixed(2) + '万';
+            }
+            else {
+                this.label.string = sumEar + '';
+            }
+
             if (sumEar > 0) {
                 this.label.node.color = new cc.Color().fromHEX('#e94343');
             } else if (sumEar < 0) {

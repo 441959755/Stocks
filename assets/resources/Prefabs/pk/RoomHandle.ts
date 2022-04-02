@@ -46,6 +46,9 @@ export default class NewClass extends cc.Component {
 
     huizhidatas = 106;
 
+    @property(cc.SpriteFrame)
+    defaultHead: cc.SpriteFrame = null;
+
     onLoad() {
 
         //自己进入房间
@@ -210,7 +213,7 @@ export default class NewClass extends cc.Component {
             let read = this.player[1].getChildByName('read').getComponent(cc.Label);
             let head = this.player[1].getChildByName('head').getComponent(cc.Sprite);
             read.string = '等待加入...';
-            if (GameData.Players && GameData.Players[1]) {
+            if (GameData.Players && GameData.Players[1] && GameData.Players[1].nickname) {
                 name.string = GameData.Players[1].nickname;
                 lv.string = 'LV: ' + GameData.Players[1].properties[pb.GamePropertyId.Level];
                 exp.string = '经验值：' + GameData.Players[1].properties[pb.GamePropertyId.Exp] + '/' +
@@ -241,14 +244,14 @@ export default class NewClass extends cc.Component {
             ComUtils.onLoadHead(ob.icon, (res) => {
                 if (res) {
                     let texture = new cc.SpriteFrame(res);
-                    ob.icon = texture;
-                    if (GameData.Players[1]) {
-                        head.spriteFrame = GameData.Players[1].icon;
-                    }
-
+                    head.getComponent(cc.Sprite).spriteFrame = texture;
+                    GameData.imgs[GameData.Players[1].icon + ''] = texture;
+                }
+                else {
+                    head.getComponent(cc.Sprite).spriteFrame = this.defaultHead;
+                    GameData.imgs[GameData.Players[1].icon + ''] = this.defaultHead;
                 }
             })
-            ob.icon = null;
         }
     }
 

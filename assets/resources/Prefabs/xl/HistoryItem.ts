@@ -63,7 +63,17 @@ export default class NewClass extends cc.Component {
 
         if (!this.labels[7]) { return }
 
-        this.labels[7].string = info.userProfit;
+        if (info.userProfit >= 1000000000) {
+            this.labels[7].string = '10亿+';
+        }
+        else if (info.userProfit >= 100000) {
+            this.labels[7].string = (info.userProfit / 10000).toFixed(2) + '万';
+        }
+        else {
+            this.labels[7].string = info.userProfit;
+        }
+
+
         if (info.userProfit > 0) {
             this.labels[7].node.color = new cc.Color().fromHEX('#e94343');
         } else if (info.userProfit < 0) {

@@ -7,6 +7,7 @@ import LoadUtils from "../Utils/LoadUtils";
 import GlobalHandle from "../global/GlobalHandle";
 import PopupManager from "../Utils/PopupManager";
 import GameCfg from "../game/GameCfg";
+import ComUtils from "../Utils/ComUtils";
 
 const { ccclass, property } = cc._decorator;
 
@@ -121,7 +122,7 @@ export default class NewClass extends cc.Component {
         GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.JJPKSet));
         //   GameCfg.GameSet = GameData.JJPKSet;
 
-        let code = info.code + '';
+        let code = info.quotes.items[0].code + '';
         if (code.length >= 7) {
             code = code.slice(1);
         }

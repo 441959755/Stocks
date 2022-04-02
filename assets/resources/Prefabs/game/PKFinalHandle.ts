@@ -151,9 +151,8 @@ export default class NewClass extends cc.Component {
             loseSp.active = false;
             winSp.active = false;
 
-            if (GameData.Players[1] && GameData.Players[1].icon) {
-                userHead.spriteFrame = GameData.Players[1].icon;
-            }
+            userHead.spriteFrame = GameData.imgs[this.gameResult.players[1].gd.icon + ''];
+
             let stages;
             if (GameData.RoomType > 0) {
                 stages = GameCfgText.gameConf.pk_wx;

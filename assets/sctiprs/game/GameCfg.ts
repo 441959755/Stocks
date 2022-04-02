@@ -71,6 +71,7 @@ export default {
         }
     ],
 
+
     history: { //游戏记录
         huizhidatas: 0,
         allRate: 0,       //总利率

@@ -843,10 +843,6 @@ export default class NewClass extends cc.Component {
 
 	//回合数
 	setLabelData() {
-		if (this.roundNumber <= 0) {
-			this.roundNumber = 0;
-		}
-
 		if (!GameCfg.GAMEFUPAN) {
 			this.tipsLabel.string = '回合数：' + this.roundNumber;
 			this.tipsLabel1.string = '回合数：' + this.roundNumber;
@@ -907,7 +903,6 @@ export default class NewClass extends cc.Component {
 			else {
 				GlobalEvent.emit(EventCfg.GAMEOVEER);
 			}
-			return;
 		}
 	}
 
@@ -1221,7 +1216,9 @@ export default class NewClass extends cc.Component {
 
 		if (!flag) {
 			this.roundNumber -= 1;
-			this.setLabelData();
+			if (this.roundNumber >= 0) {
+				this.setLabelData();
+			}
 			//绘制下回合的走势线
 			GlobalEvent.emit('roundNUmber');
 		}

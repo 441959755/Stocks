@@ -118,9 +118,26 @@ export default class NewClass extends cc.Component {
                 this.boxs[1].active = true;
                 this.boxs[2].active = true;
 
-                this.boxs[0].children[1].getComponent(cc.Label).string = GameData.SmxlState.gold;
-                this.boxs[1].children[1].getComponent(cc.Label).string = parseInt((GameCfg.finalfund - GameCfg.ziChan) + '') + ''
-                this.boxs[2].children[1].getComponent(cc.Label).string = GameData.SmxlState.gold + parseInt((GameCfg.finalfund - GameCfg.ziChan) + '') + '';
+                if (GameData.SmxlState.gold >= 1000000000) {
+                    this.boxs[0].children[1].getComponent(cc.Label).string = '10亿+';
+                }
+                else {
+                    this.boxs[0].children[1].getComponent(cc.Label).string = GameData.SmxlState.gold;
+                }
+
+                if (parseInt((GameCfg.finalfund - GameCfg.ziChan) + '') >= 1000000000) {
+                    this.boxs[1].children[1].getComponent(cc.Label).string = '10亿+';
+                }
+                else {
+                    this.boxs[1].children[1].getComponent(cc.Label).string = parseInt((GameCfg.finalfund - GameCfg.ziChan) + '') + ''
+                }
+
+                if (GameData.SmxlState.gold + parseInt((GameCfg.finalfund - GameCfg.ziChan) + '') >= 1000000000) {
+                    this.boxs[2].children[1].getComponent(cc.Label).string = '10亿+';
+                }
+                else {
+                    this.boxs[2].children[1].getComponent(cc.Label).string = GameData.SmxlState.gold + parseInt((GameCfg.finalfund - GameCfg.ziChan) + '') + '';
+                }
             }
             else {
                 this.boxs[0].active = false;

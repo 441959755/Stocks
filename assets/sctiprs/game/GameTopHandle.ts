@@ -171,10 +171,7 @@ export default class NewClass extends cc.Component {
             this.level1.string = 'LV: ' + GameData.properties[pb.GamePropertyId.Level];
             this.head1.spriteFrame = GameData.headImg;
 
-            if (GameData.Players[1].icon) {
-                this.head2.spriteFrame = GameData.Players[1].icon;
-            }
-
+            this.head2.spriteFrame = GameData.imgs[GameData.Players[1].icon + ''];
 
             this.box1.active = true;
             this.box2.active = true;
@@ -224,10 +221,11 @@ export default class NewClass extends cc.Component {
                 }
             }
             else {
-                if (GameData.Players[1] && GameData.Players[1].icon) {
-                    head.spriteFrame = GameData.Players[1].icon;
-                }
+
                 if (GameData.Players[1] && (GameData.Players[1].uid || GameData.Players[1].nickname)) {
+
+                    head.spriteFrame = GameData.imgs[GameData.Players[1].icon + ''] || null;
+
                     name.string = '昵称：' + (GameData.Players[1].nickname || GameData.Players[1].nick);
 
                     // if (GameData.Players[1].properties[pb.GamePropertyId.VipExpiration] - new Date().getTime() / 1000 > 0) {
@@ -376,9 +374,7 @@ export default class NewClass extends cc.Component {
                 {
                     if (GameData.Players[1]) {
                         //   this.head2.spriteFrame = null;
-                        if (GameData.Players[1].icon) {
-                            this.head2.spriteFrame = GameData.Players[1].icon;
-                        }
+                        this.head2.spriteFrame = GameData.imgs[GameData.Players[1].icon + ''];
                         this.name2.string = GameData.Players[1].nickname;
                         GameData.Players[1].properties && (this.level2.string = 'LV：' + (GameData.Players[1].properties[pb.GamePropertyId.Level] || 1));
                         // this.pkAllRateLa2.string = "****";

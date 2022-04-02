@@ -127,9 +127,7 @@ export default class NewClass extends cc.Component {
                 userName.string = GameData.Players[1].nickname || GameData.Players[1].nick;
             }
 
-            if (GameData.Players[1].icon) {
-                userHead.spriteFrame = GameData.Players[1].icon;
-            }
+            userHead.spriteFrame = GameData.imgs[GameData.Players[1].icon + ''];
 
             if (this.selfRank == 1) {
                 loseSp.active = true;

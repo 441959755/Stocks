@@ -156,9 +156,8 @@ export default class NewClass extends cc.Component {
             userLevel.string = 'LV: ' + GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level];
             userExp.string = 'EXP: ' + GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Exp] + '/' + GameCfgText.levelInfoCfg[GameCfg.RoomGameData.players[1].gd.properties[pb.GamePropertyId.Level]]
 
-            if (GameData.Players[1].icon) {
-                userHead.spriteFrame = GameData.Players[1].icon;
-            }
+            userHead.spriteFrame = GameData.imgs[GameCfg.RoomGameData.players[1].gd.icon + ''];
+
             loseSp.active = false;
             winSp.active = false;
 

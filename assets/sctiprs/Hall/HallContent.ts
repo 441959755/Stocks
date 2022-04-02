@@ -354,6 +354,8 @@ export default class NewClass extends cc.Component {
 			// return;
 			GameCfgText.getSwitchModule(10, () => {
 				//	if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
+				GameData.Players = [];
+
 				let info = {
 					game: pb.GameType.JJ_PK,
 					uid: GameData.userID,

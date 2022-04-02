@@ -36,6 +36,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     vipNode: cc.Node = null;
 
+    @property(cc.SpriteFrame)
+    defaultHead: cc.SpriteFrame = null;
+
 
     onLoad() {
         GlobalEvent.on('SHOWOTHERPLAYER', this.onShowOtherPlayer.bind(this), this);
@@ -85,21 +88,25 @@ export default class NewClass extends cc.Component {
     onLoadHead() {
         let head = this.player2.getChildByName('head');
 
-        head.getComponent(cc.Sprite).spriteFrame = null;
+        head.getComponent(cc.Sprite).spriteFrame = this.defaultHead;
 
         ComUtils.onLoadHead(GameData.Players[1].icon, (res) => {
             this.callBack && (clearInterval(this.callBack));
             this.callBack = null;
             if (res) {
                 let texture = new cc.SpriteFrame(res);
-                GameData.Players[1] && (GameData.Players[1].icon = texture)
                 head.getComponent(cc.Sprite).spriteFrame = texture;
+                GameData.imgs[GameData.Players[1].icon + ''] = texture;
+            }
+            else {
+                head.getComponent(cc.Sprite).spriteFrame = this.defaultHead;
+                GameData.imgs[GameData.Players[1].icon + ''] = this.defaultHead;
             }
             // 进入游戏动画
             this.onEnterGameAnim();
         })
 
-        GameData.Players[1] && (GameData.Players[1].icon = null)
+
     }
 
     onEnterChuanGuanGame() {
