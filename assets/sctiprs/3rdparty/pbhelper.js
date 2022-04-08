@@ -94,7 +94,8 @@ PBHelper.prototype = {
             || id == pb.MessageId.Rep_Game_OrderCancel
             || id == pb.MessageId.Rep_Hall_MobileBind
             || id == pb.MessageId.Rep_Hall_UnlockGame
-            || id == pb.MessageId.Rep_Hall_Exchange) {
+            || id == pb.MessageId.Rep_Hall_Exchange
+            || id == pb.MessageId.Rep_Hall_GetInviterAward) {
             let ErrorInfo = pb.ErrorInfo;
             let data = ErrorInfo.decode(new Uint8Array(buff));
             return data;
@@ -519,6 +520,14 @@ PBHelper.prototype = {
             let data = ActivityConf.decode(new Uint8Array(buff));
             console.log('活动配置' + JSON.stringify(data));
             GameData.ActivityConf = data.items;
+            return;
+        }
+
+        //同步邀请者状态：InviterState
+        else if (id == pb.MessageId.Sync_S2C_InviterState) {
+            let InviterState = pb.InviterState;
+            let data = InviterState.decode(new Uint8Array(buff));
+            GameData.gameData.InviterState = data;
             return;
         }
     }

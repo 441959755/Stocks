@@ -123,6 +123,8 @@ message CmdRegistry {
 	AppFrom from = 5; 	// App渠道
 	bool websocket = 6;	// 是否为websocket（默认返回TCP连接地址，是则返回websocket连接地址）
 	string union_id = 7;// 微信平台的UnionID（通过微信平台登录时需要填写）
+	int32 inviter = 8;	// 邀请者的uid（可为0）
+
 }
 // 返回类型：CmdLoginReply
 
@@ -134,6 +136,7 @@ message CmdLogin {
 	AppFrom from = 4; 	// App渠道
 	bool websocket = 5;	// 是否为websocket（默认返回TCP连接地址，是则返回websocket连接地址）
 	string union_id = 6;// 微信平台的UnionID（通过微信平台登录时需要填写）
+	int32 inviter = 7;	// 邀请者的uid（可为0）
 }
 // 登录响应
 message CmdLoginReply {

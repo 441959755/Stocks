@@ -267,6 +267,11 @@ message Tasks {
 	repeated TaskItem study = 1;	// 学习任务
 	repeated TaskItem daily = 2;	// 日常任务
 }
+// 邀请者状态
+message InviterState {
+	int32 Total = 1;				// 已邀请总人数
+	repeated int32 Awarded = 2;		// 每个属性已领取奖励的邀请总人数（该下标与玩家属性下标一致，如金币的下标为金币的已领取人数）
+}
 // 玩家的游戏数据
 message GameData {
 	int32 uid = 1;									// uid
@@ -293,6 +298,7 @@ message GameData {
 	bool is_edited_nick = 22;						// 是否修改过昵称
 	bool is_edited_icon = 23;						// 是否修改过头像
 	repeated int32 cgds_stock_list_last = 24;		// 参与的最近一期炒股大赛股票列表
+	InviterState inviter_state = 25;				// 邀请者状态
 }
 
 
@@ -408,6 +414,11 @@ message CmdGetDailyAward {
 message CmdDailyTaskProgress {
 	int32 uid    = 1;	// 玩家ID
 	int32 task_id = 2;	// 任务Id
+}
+// 领取邀请者奖励
+message CmdGetInviterAward {
+	int32 property_id = 1;	// 领取奖励对应的属性ID
+	int32 count = 2;		// 领取人数
 }
 
 

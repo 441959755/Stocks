@@ -421,6 +421,9 @@ export default class NewClass extends cc.Component {
             GameData.query = null;
             return
         };
+        if (!GameData.query) {
+            return
+        }
         setTimeout(() => {
             console.log('addRoom');
             let arr = ComUtils.getJJXunXian();

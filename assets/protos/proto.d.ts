@@ -67,6 +67,7 @@ export namespace pb {
         Sync_S2C_UnregistryAccount = 1032,
         Sync_S2C_CgdsConf = 1034,
         Sync_S2C_RecommendStock = 1036,
+        Sync_S2C_InviterState = 1037,
         Sync_S2C_Broadcast = 1100,
         Sync_S2C_Message = 1102,
         Sync_C2S_GameHeart = 1200,
@@ -144,6 +145,8 @@ export namespace pb {
         Rep_Hall_GetBrokenAward = 3052,
         Req_Hall_Exchange = 3053,
         Rep_Hall_Exchange = 3054,
+        Req_Hall_GetInviterAward = 3055,
+        Rep_Hall_GetInviterAward = 3056,
         Req_Hall_Unregistry = 3997,
         Rep_Hall_Unregistry = 3998,
         Req_Hall_Logout = 3999,
@@ -2164,6 +2167,102 @@ export namespace pb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of an InviterState. */
+    interface IInviterState {
+
+        /** InviterState Total */
+        Total?: (number|null);
+
+        /** InviterState Awarded */
+        Awarded?: (number[]|null);
+    }
+
+    /** Represents an InviterState. */
+    class InviterState implements IInviterState {
+
+        /**
+         * Constructs a new InviterState.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IInviterState);
+
+        /** InviterState Total. */
+        public Total: number;
+
+        /** InviterState Awarded. */
+        public Awarded: number[];
+
+        /**
+         * Creates a new InviterState instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns InviterState instance
+         */
+        public static create(properties?: pb.IInviterState): pb.InviterState;
+
+        /**
+         * Encodes the specified InviterState message. Does not implicitly {@link pb.InviterState.verify|verify} messages.
+         * @param message InviterState message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IInviterState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified InviterState message, length delimited. Does not implicitly {@link pb.InviterState.verify|verify} messages.
+         * @param message InviterState message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IInviterState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an InviterState message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns InviterState
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.InviterState;
+
+        /**
+         * Decodes an InviterState message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns InviterState
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.InviterState;
+
+        /**
+         * Verifies an InviterState message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an InviterState message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns InviterState
+         */
+        public static fromObject(object: { [k: string]: any }): pb.InviterState;
+
+        /**
+         * Creates a plain object from an InviterState message. Also converts values to other types if specified.
+         * @param message InviterState
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.InviterState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this InviterState to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a GameData. */
     interface IGameData {
 
@@ -2238,6 +2337,9 @@ export namespace pb {
 
         /** GameData cgdsStockListLast */
         cgdsStockListLast?: (number[]|null);
+
+        /** GameData inviterState */
+        inviterState?: (pb.IInviterState|null);
     }
 
     /** Represents a GameData. */
@@ -2320,6 +2422,9 @@ export namespace pb {
 
         /** GameData cgdsStockListLast. */
         public cgdsStockListLast: number[];
+
+        /** GameData inviterState. */
+        public inviterState?: (pb.IInviterState|null);
 
         /**
          * Creates a new GameData instance using the specified properties.
@@ -4079,6 +4184,102 @@ export namespace pb {
 
         /**
          * Converts this CmdDailyTaskProgress to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CmdGetInviterAward. */
+    interface ICmdGetInviterAward {
+
+        /** CmdGetInviterAward propertyId */
+        propertyId?: (number|null);
+
+        /** CmdGetInviterAward count */
+        count?: (number|null);
+    }
+
+    /** Represents a CmdGetInviterAward. */
+    class CmdGetInviterAward implements ICmdGetInviterAward {
+
+        /**
+         * Constructs a new CmdGetInviterAward.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.ICmdGetInviterAward);
+
+        /** CmdGetInviterAward propertyId. */
+        public propertyId: number;
+
+        /** CmdGetInviterAward count. */
+        public count: number;
+
+        /**
+         * Creates a new CmdGetInviterAward instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CmdGetInviterAward instance
+         */
+        public static create(properties?: pb.ICmdGetInviterAward): pb.CmdGetInviterAward;
+
+        /**
+         * Encodes the specified CmdGetInviterAward message. Does not implicitly {@link pb.CmdGetInviterAward.verify|verify} messages.
+         * @param message CmdGetInviterAward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.ICmdGetInviterAward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CmdGetInviterAward message, length delimited. Does not implicitly {@link pb.CmdGetInviterAward.verify|verify} messages.
+         * @param message CmdGetInviterAward message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.ICmdGetInviterAward, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CmdGetInviterAward message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CmdGetInviterAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.CmdGetInviterAward;
+
+        /**
+         * Decodes a CmdGetInviterAward message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CmdGetInviterAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.CmdGetInviterAward;
+
+        /**
+         * Verifies a CmdGetInviterAward message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CmdGetInviterAward message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CmdGetInviterAward
+         */
+        public static fromObject(object: { [k: string]: any }): pb.CmdGetInviterAward;
+
+        /**
+         * Creates a plain object from a CmdGetInviterAward message. Also converts values to other types if specified.
+         * @param message CmdGetInviterAward
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.CmdGetInviterAward, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CmdGetInviterAward to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -14261,6 +14462,9 @@ export namespace pb {
 
         /** CmdRegistry unionId */
         unionId?: (string|null);
+
+        /** CmdRegistry inviter */
+        inviter?: (number|null);
     }
 
     /** Represents a CmdRegistry. */
@@ -14292,6 +14496,9 @@ export namespace pb {
 
         /** CmdRegistry unionId. */
         public unionId: string;
+
+        /** CmdRegistry inviter. */
+        public inviter: number;
 
         /**
          * Creates a new CmdRegistry instance using the specified properties.
@@ -14384,6 +14591,9 @@ export namespace pb {
 
         /** CmdLogin unionId */
         unionId?: (string|null);
+
+        /** CmdLogin inviter */
+        inviter?: (number|null);
     }
 
     /** Represents a CmdLogin. */
@@ -14412,6 +14622,9 @@ export namespace pb {
 
         /** CmdLogin unionId. */
         public unionId: string;
+
+        /** CmdLogin inviter. */
+        public inviter: number;
 
         /**
          * Creates a new CmdLogin instance using the specified properties.

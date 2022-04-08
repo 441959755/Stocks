@@ -90,6 +90,7 @@ enum MessageId {
 	Sync_S2C_UnregistryAccount = 1032;		// 同步管理员封号提示：无
 	Sync_S2C_CgdsConf = 1034;				// 同步炒股大赛配置：CgdsConf
 	Sync_S2C_RecommendStock = 1036;			// 同步当日的推荐股票：无
+	Sync_S2C_InviterState = 1037;			// 同步邀请者状态：InviterState
 
 	Sync_S2C_Broadcast = 1100;				// 系统广播：Notice
 	Sync_S2C_Message = 1102;				// 服务器发到客户端的消息（包括邀请或聊天消息）：Notice
@@ -175,6 +176,8 @@ enum MessageId {
 	Rep_Hall_GetBrokenAward = 3052;			// 领取破产奖励应答：无
 	Req_Hall_Exchange = 3053;				// 兑换：CmdExchange
 	Rep_Hall_Exchange = 3054;				// 兑换应答：ErrorInfo
+	Req_Hall_GetInviterAward = 3055;		// 领取邀请者奖励：CmdGetInviterAward
+	Rep_Hall_GetInviterAward = 3056;		// 领取邀请者奖励应答：ErrorInfo
 
 	Req_Hall_Unregistry = 3997;				// 注销账号
 	Rep_Hall_Unregistry = 3998;				// 注销账号应答：ErrorInfo（注销成功后会自动断开tcp长连接）

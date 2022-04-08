@@ -488,6 +488,7 @@ export default class NewClass extends cc.Component {
         GameCfg.RoomGameData = null;
     }
 
+
     gotoGame() {
 
         // if (GameCfg.GameType == pb.GameType.ShuangMang || GameCfg.GameType == pb.GameType.FenShi) {

@@ -95,6 +95,12 @@ export default class NewClass extends cc.Component {
             LLWSDK.getSDK().shareAppMessage();
         }
 
+        else if (name == 'main_topbt_invite') {
+            PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/InviteLayer', 11, (node) => {
+                ActionUtils.openBox(node);
+            })
+        }
+
     }
 
     protected onDestroy(): void {
