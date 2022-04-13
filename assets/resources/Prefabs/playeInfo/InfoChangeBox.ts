@@ -222,8 +222,8 @@ export default class NewClass extends cc.Component {
 
         socket.send(id, PB.onCmdEditInfoConvertToBuff(data), (info) => {
             console.log('onCmdEditInfoConvertToBuff:' + JSON.stringify(info));
-            if (!info) {
-
+            if (info.err) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, info.err);
             } else {
                 call && (call())
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '修改成功');

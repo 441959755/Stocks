@@ -17,6 +17,8 @@ export default class PopupManager {
 
     public static arrPop: PopupList = null;
 
+    public static enqueue = [];
+
     public static init() {
         GlobalEvent.on(EventCfg.LOADINGSHOW, this.loading.bind(this), this);
         GlobalEvent.on(EventCfg.LOADINGHIDE, this.loadingHide.bind(this), this);
@@ -180,14 +182,20 @@ export default class PopupManager {
 
 
     public static openNode(prent, childen, url, zIndex?, call?) {
-        //是否在下载
-        // if (!this.isLoading) {
-        //     this.isLoading = true;
-        // }
-        // else {
-        //     return;
-        // }
+        //   是否在下载
+        if (!this.isLoading) {
+            this.isLoading = true;
+            if (this.enqueue.length > 0) {
+                this.enqueue.shift();
+            }
+            this.loadNode(prent, childen, url, zIndex, call);
+        }
+        else {
+            this.enqueue.push({ prent: prent, childen: childen, url: url, zIndex: zIndex, call: call });
+        }
+    }
 
+    public static loadNode(prent, childen, url, zIndex?, call?) {
         if (this.nodes[url]) {
             childen = this.nodes[url];
         }
@@ -207,18 +215,22 @@ export default class PopupManager {
                 prent.addChild(childen, zIndex);
                 childen.active = true;
                 this.nodes[url] = childen;
-
                 call && call(childen);
+                if (this.enqueue.length > 0) {
+                    this.openNode(this.enqueue[0].prent, this.enqueue[0].childen, this.enqueue[0].url, this.enqueue[0].zIndex, this.enqueue[0].call);
+                }
             })
         }
         else {
             this.isLoading = false;
             childen.active = true;
             call && call(childen);
+            if (this.enqueue.length > 0) {
+                this.openNode(this.enqueue[0].prent, this.enqueue[0].childen, this.enqueue[0].url, this.enqueue[0].zIndex, this.enqueue[0].call);
+            }
+
         }
     }
-
-
 
     //首次登入弹窗
     public static FirstAutoPop() {

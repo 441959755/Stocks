@@ -8,6 +8,7 @@ import PopupManager from '../Utils/PopupManager';
 import GameCfg from '../game/GameCfg';
 import ComUtils from '../Utils/ComUtils';
 import GlobalHandle from '../global/GlobalHandle';
+import ActionUtils from '../Utils/ActionUtils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -105,7 +106,7 @@ export default class NewClass extends cc.Component {
 		if (GameData.goldAwardPrompt) {
 			setTimeout(() => {
 				this.CmdGoldAwardPrompt();
-			}, 700)
+			}, 500)
 		}
 	}
 
@@ -168,10 +169,8 @@ export default class NewClass extends cc.Component {
 
 	setUserInfo() {
 		this.setUserGender();
-
 		this.userLevel.string = 'LV:' + (GameData.properties[pb.GamePropertyId.Level] || 1) + '';
 		this.UserName.string = GameData.userName || GameData.userID;
-
 		if (GameData.vipStatus) {
 			this.vipImg.active = true;
 		}
@@ -455,6 +454,12 @@ export default class NewClass extends cc.Component {
 		//7日奖励
 		else if (name == 'main_fl_7day') {
 			PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/fl/signIn', 10, null);
+		}
+
+		else if (name == 'main_fl_yqjl') {
+			PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/InviteLayer', 11, (node) => {
+				ActionUtils.openBox(node);
+			})
 		}
 	}
 

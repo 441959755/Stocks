@@ -105,6 +105,10 @@ export default class Socket {
                 info.data.tasks && (GameData.TaskStudy = info.data.tasks.study || []);
                 info.data.tasks && (GameData.TaskDaily = info.data.tasks.daily || [])
 
+                if (info.data.isEditedNick) {
+                    GameData.userName = info.data.nickname;
+                }
+
                 GameData.gameData = info.data;
 
                 if (cc.director.getScene().name == 'Login') {

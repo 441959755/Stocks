@@ -204,12 +204,4 @@ export default class NewClass extends cc.Component {
         GlobalEvent.off(EventCfg.GMAECOUNTERSCHANGE);
     }
 
-    //点击广告重置
-    onGameResetCount(info) {
-        LLWSDK.getSDK().showVideoAd((falg) => {
-            if (falg) {
-                GlobalHandle.onGameResetSMCapital();
-            }
-        })
-    }
 }

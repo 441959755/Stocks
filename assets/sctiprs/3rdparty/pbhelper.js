@@ -527,7 +527,9 @@ PBHelper.prototype = {
         else if (id == pb.MessageId.Sync_S2C_InviterState) {
             let InviterState = pb.InviterState;
             let data = InviterState.decode(new Uint8Array(buff));
-            GameData.gameData.InviterState = data;
+            console.log('同步邀请者:' + JSON.stringify(data));
+            GameData.gameData.inviterState = data;
+            GlobalEvent.emit('INVITEUP');
             return;
         }
     }

@@ -77,13 +77,14 @@ export default class NewClass extends cc.Component {
 
             GlobalEvent.emit(EventCfg.LEAVEGAME);
 
-            let gameCount = EnterGameControl.onCurWXIsEnterGame(pb.GameType.DingXiang);
+            if (!GameData.vipStatus) {
+                let gameCount = EnterGameControl.onCurWXIsEnterGame(pb.GameType.DingXiang);
 
-            if (gameCount.status == 3) {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
-                return;
+                if (gameCount.status == 3) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
+                    return;
+                }
             }
-
             let data;
             //pk进入训练
             if (GameCfg.GameType == pb.GameType.JJ_PK ||

@@ -8,7 +8,7 @@
   "genMipmaps": false,
   "packable": true,
   "width": 1053,
-  "height": 642,
+  "height": 532,
   "platformSettings": {},
   "subMetas": {
     "sys_vip_qxsmk": {
@@ -23,9 +23,9 @@
       "trimX": 0,
       "trimY": 0,
       "width": 1053,
-      "height": 642,
+      "height": 532,
       "rawWidth": 1053,
-      "rawHeight": 642,
+      "rawHeight": 532,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

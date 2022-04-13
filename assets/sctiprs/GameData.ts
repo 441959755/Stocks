@@ -338,6 +338,8 @@ export default class GameData {
 
     public static queryType = 0;
 
+    public static queryUid = 0;
+
     public static goldAwardPrompt = null;  //每日首次登陆时判断，用户身上金币低于2000时，赠送1000金币
 
     // public static nodeMaps: Map<any, any> = new Map();

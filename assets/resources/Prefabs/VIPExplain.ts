@@ -15,6 +15,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     vipTimeLabel: cc.Label = null;
 
+    @property(cc.Label)
+    label1: cc.Label = null;
+
     @property(cc.Node)
     vip30Btn: cc.Node = null;
 
@@ -32,19 +35,24 @@ export default class NewClass extends cc.Component {
     }
 
     init() {
+
         if (GameData.vipStatus) {
             ComUtils.getVIPDisTime(this.getVIPDisTime.bind(this));
         }
         else {
+            this.label1.node.active = true;
             this.vipTimeLabel.node.active = false;
-            this.vip30Btn.active = true;
-            this.vip90Btn.active = true;
-            this.tips30.node.active = true;
-            this.tips90.node.active = true;
+            this.label1.string = '可通过邀请好友或参与活动获得VIP权限';
+            //  this.vipTimeLabel.node.active = false;
+            // this.vip30Btn.active = true;
+            // this.vip90Btn.active = true;
+            // this.tips30.node.active = true;
+            // this.tips90.node.active = true;
         }
     }
 
     getVIPDisTime(obj) {
+        this.label1.node.active = false;
         this.vipTimeLabel.node.active = true;
         this.vip30Btn.active = false;
         this.vip90Btn.active = false;

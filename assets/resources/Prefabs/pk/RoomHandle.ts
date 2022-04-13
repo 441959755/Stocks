@@ -355,7 +355,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'jj_fxyq') {
-            LLWSDK.getSDK().shareAppMessage(GameData.roomId);
+            LLWSDK.getSDK().shareAppMessage(2);
         }
     }
 

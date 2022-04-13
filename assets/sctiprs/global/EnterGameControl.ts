@@ -183,9 +183,9 @@ export default class EnterGameControl {
             GameCfg.history.allRate = 0;
             StrategyAIData.onClearData();
 
-            if (GameCfg.data[0].data.length - 100 > 0) {
-                GameCfg.huizhidatas = GameCfg.data[0].data.length - 100;
-                GameData.huizhidatas = GameCfg.data[0].data.length - 100;
+            if (GameCfg.data[0].data.length - 150 > 0) {
+                GameCfg.huizhidatas = GameCfg.data[0].data.length - 150;
+                GameData.huizhidatas = GameCfg.data[0].data.length - 150;
             }
             else {
                 GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');

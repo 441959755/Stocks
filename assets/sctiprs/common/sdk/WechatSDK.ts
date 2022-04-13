@@ -127,18 +127,15 @@ export default class WechatSDK {
     //登入CODE请求
     onLoginCodeHttpRequest(code, call) {
 
-        let query = 0;
-        if (GameData.queryType) {
-            query = GameData.query;
-        }
-
         let loginInfo = {
             account: code,
             type: pb.LoginType.WeChat_MiniProg,
             from: pb.AppFrom.WeChatMinProgram,
             pwd: '',
-            inviter: query,
+            inviter: GameData.queryUid,
         };
+
+        console.log('登入CODE请求:' + JSON.stringify(loginInfo));
 
         // let data = PB.onCmdLoginConvertToBuff(loginInfo);
 
@@ -328,27 +325,24 @@ export default class WechatSDK {
     }
 
 
-    shareAppMessage(roomId?) {
-        let url, title, type = 0;
-        if (roomId) {
-            if (roomId == GameData.userID) {
-                url = LLWConfig.LoginURL + '/wechatgame/share.png';
-                title = '【炒股达人】寓教于乐的炒股软件';
-                type = 1;
-            }
-            else {
-                url = LLWConfig.LoginURL + '/wechatgame/invite.png';
-                title = '比拼K线技术，等你来挑战';
-            }
-        }
-        else {
+    shareAppMessage(type) {
+        let url, title, uid = 0, roomId = 0;
+        if (type == 1) {
             url = LLWConfig.LoginURL + '/wechatgame/share.png';
             title = '【炒股达人】寓教于乐的炒股软件';
+            uid = GameData.userID;
         }
+        else {
+            url = LLWConfig.LoginURL + '/wechatgame/invite.png';
+            title = '比拼K线技术，等你来挑战';
+            uid = GameData.userID;
+            roomId = GameData.roomId;
+        }
+
         wx.shareAppMessage({
             title: title,
             imageUrl: url,
-            query: 'key1=' + roomId + '&key2=' + type,
+            query: 'key1=' + roomId + '&key2=' + type + '&key3=' + uid,
 
             success: (res) => {
                 // 显示当前页面的转发按钮
@@ -368,7 +362,9 @@ export default class WechatSDK {
     }
 
     getQUery() {
-
+        GameData.query = 0;
+        GameData.queryType = 0;
+        GameData.queryUid = 0;
         let obj = wx.getLaunchOptionsSync();
         console.log('获取query' + JSON.stringify(obj));
         for (let s in obj.query) {
@@ -378,10 +374,16 @@ export default class WechatSDK {
             else if (s == 'key2') {
                 GameData.queryType = parseInt(obj.query[s]);
             }
+            else if (s == 'key3') {
+                GameData.queryUid = parseInt(obj.query[s]);
+            }
         }
     }
 
     onShow(cb) {
+        GameData.query = 0;
+        GameData.queryType = 0;
+        GameData.queryUid = 0;
         wx.onShow((res) => {
             console.log('获取query' + JSON.stringify(res));
             for (let s in res.query) {
@@ -391,6 +393,9 @@ export default class WechatSDK {
                 }
                 else if (s == 'key2') {
                     GameData.queryType = parseInt(res.query[s]);
+                }
+                else if (s == 'key3') {
+                    GameData.queryUid = parseInt(res.query[s]);
                 }
             }
         })

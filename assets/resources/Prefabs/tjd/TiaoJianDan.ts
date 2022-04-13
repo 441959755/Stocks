@@ -1,3 +1,4 @@
+import { relativeTimeRounding } from "moment";
 import { pb } from "../../../protos/proto";
 import GameCfg from "../../../sctiprs/game/GameCfg";
 import GameData from "../../../sctiprs/GameData";
@@ -44,6 +45,11 @@ export default class NewClass extends cc.Component {
     }
 
     initCount() {
+        if (GameData.vipStatus) {
+            this.tipsLabel1.node.active = false;
+            this.tipsLabel2.node.active = false;
+            return;
+        }
 
         let gameCount = EnterGameControl.onCurIsEnterGame();
         this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.dxxl.cost[0].v) + '金币';
@@ -181,16 +187,16 @@ export default class NewClass extends cc.Component {
     }
 
     TJDStartGameSet() {
-        // if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameConf.tjdxl.cost[0].v) {
-        //     GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
-        //     return;
-        // }
-        // else if ((this.curState == 2 || this.curState == 3) && !this.adSucceed) {
-        //     // GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
-        //     // return;
-        //     GlobalEvent.emit("OPENUNLOCKBOX");
-        //     return;
-        // }
+        if (!GameData.vipStatus) {
+            if (GameData.properties[pb.GamePropertyId.Gold] < GameCfgText.gameConf.tjdxl.cost[0].v) {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+                return;
+            }
+            else if ((this.curState == 2 || this.curState == 3) && !this.adSucceed) {
+                GlobalEvent.emit("OPENUNLOCKBOX");
+                return;
+            }
+        }
 
         let time = new Date().toLocaleDateString();
         cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 0);

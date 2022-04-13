@@ -226,6 +226,13 @@ export default class NewClass extends cc.Component {
 
 	onGameCountSow() {
 
+		if (GameData.vipStatus) {
+			this.tipsLabel1.node.active = false;
+			this.tipsLabel2.node.active = false;
+			return;
+
+		}
+
 		let gameCount = EnterGameControl.onCurWXIsEnterGame();
 
 		this.curState = gameCount.status;
@@ -820,7 +827,7 @@ export default class NewClass extends cc.Component {
 		}
 		else if (name == 'startQHBtn') {
 
-			if (GameData.properties[pb.GamePropertyId.Gold] < Math.abs(GameCfgText.gameConf.qhxl.cost[0].v)) {
+			if (GameData.properties[pb.GamePropertyId.Gold] < Math.abs(GameCfgText.gameConf.qhxl.cost[0].v) && !GameData.vipStatus) {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
 				GlobalEvent.emit('onShowGobroke');
 				return;

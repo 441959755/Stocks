@@ -150,6 +150,13 @@ export default class NewClass extends cc.Component {
 
 	onGameCountShow() {
 
+		if (GameData.vipStatus) {
+			this.tipsLabel1.node.active = false;
+			this.tipsLabel2.node.active = false;
+			return;
+
+		}
+
 		let gameCount = EnterGameControl.onCurWXIsEnterGame();
 
 		// this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.dxxl.cost[0].v) + '金币';
@@ -543,18 +550,11 @@ export default class NewClass extends cc.Component {
 			GlobalEvent.emit(EventCfg.OPENHISTORYLAYER);
 		} else if (name == 'startDXBtn') {
 
-			if (GameData.properties[pb.GamePropertyId.Gold] < Math.abs(GameCfgText.gameConf.dxxl.cost[0].v)) {
+			if (GameData.properties[pb.GamePropertyId.Gold] < Math.abs(GameCfgText.gameConf.dxxl.cost[0].v) && !GameData.vipStatus) {
 				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
 				GlobalEvent.emit('onShowGobroke');
 				return;
 			}
-
-			// else if ((this.curState == 2 || this.curState == 3) && !this.adSucceed) {
-			// 	// GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,开启VIP或解锁该功能取消次数限制');
-			// 	// return;
-			// 	GlobalEvent.emit("OPENUNLOCKBOX");
-			// 	return;
-			// }
 
 			if (this.curState == 2 && !GameData.adSucceed) {
 				let self = this;
@@ -589,7 +589,6 @@ export default class NewClass extends cc.Component {
 				this.DXStartGameSet();
 				this.onGameCountShow();
 			}
-
 
 		} else if (name == 'blackbtn') {
 			this.node.active = false;

@@ -92,7 +92,7 @@ export default class NewClass extends cc.Component {
         }
 
         else if (name == 'main_topbt_share') {
-            LLWSDK.getSDK().shareAppMessage();
+            LLWSDK.getSDK().shareAppMessage(1);
         }
 
         else if (name == 'main_topbt_invite') {

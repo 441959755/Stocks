@@ -69,7 +69,7 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-        LLWSDK.getSDK().onShow(this.addRoom.bind(this));
+        //  LLWSDK.getSDK().onShow(this.addRoom.bind(this));
 
         GlobalEvent.on(EventCfg.RoomGameDataing, (message) => {
             if (!this.gameLayer.active) {
@@ -421,7 +421,8 @@ export default class NewClass extends cc.Component {
             GameData.query = null;
             return
         };
-        if (!GameData.query) {
+        console.log('addRoom' + GameData.queryType)
+        if (GameData.queryType == 1) {
             return
         }
         setTimeout(() => {
@@ -454,7 +455,7 @@ export default class NewClass extends cc.Component {
 
             GameData.RoomType = 2;
             GameData.query = null;
-        }, 200);
+        }, 800);
     }
 }
 

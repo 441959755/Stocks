@@ -13,28 +13,71 @@ export default class NewClass extends cc.Component {
     @property([cc.Label])
     labels: cc.Label[] = [];
 
+    @property(cc.Button)
+    btnInvite1: cc.Button = null;
+
+    @property(cc.Button)
+    btnInvite2: cc.Button = null;
+
     inviterData = null;
 
-    start() {
+    protected onLoad(): void {
+        GlobalEvent.on('INVITEUP', this.onShow.bind(this), this)
+    }
 
-        this.inviterData = GameData.gameData.inviter_state;
+    start() {
+        this.onShow();
+    }
+
+    onShow() {
+
+        this.inviterData = GameData.gameData.inviterState;
 
         if (this.inviterData) {
-
-            this.labels[0].string = this.inviterData.Awarded[pb.GamePropertyId.Gold] + '/' + this.inviterData.Total;
+            this.labels[0].string = (this.inviterData.Total - this.inviterData.Awarded[pb.GamePropertyId.Gold]) + '/' + this.inviterData.Total;
 
             this.labels[1].string = this.inviterData.Awarded[pb.GamePropertyId.Gold] * 500 + '';
 
             this.labels[2].string = this.inviterData.Total * 500 - this.inviterData.Awarded[pb.GamePropertyId.Gold] * 500 + '';
+            if (this.inviterData.Total - this.inviterData.Awarded[pb.GamePropertyId.Gold] > 0) {
+                this.btnInvite1.interactable = true;
+                this.btnInvite1.enableAutoGrayEffect = false;
+            }
+            else {
+                this.btnInvite1.interactable = false;
+                this.btnInvite1.enableAutoGrayEffect = true;
+            }
 
-            this.labels[3].string = this.inviterData.Awarded[pb.GamePropertyId.Vip] + '/' + this.inviterData.Total;
+            this.labels[3].string = (this.inviterData.Total - this.inviterData.Awarded[pb.GamePropertyId.Vip]) + '/' + this.inviterData.Total;
 
             this.labels[4].string = this.inviterData.Awarded[pb.GamePropertyId.Vip] / 10 * 3 + '';
 
-            this.labels[5].string = this.inviterData.Total / 10 * 3 - this.inviterData.Awarded[pb.GamePropertyId.Vip] / 10 * 3 + '';
+            let t = parseInt(this.inviterData.Total / 10 * 3 - this.inviterData.Awarded[pb.GamePropertyId.Vip] / 10 * 3 + '');
+
+
+
+            this.labels[5].string = parseInt(t / 3 + '') * 3 + '';
+
+            if ((this.inviterData.Total - this.inviterData.Awarded[pb.GamePropertyId.Vip]) / 3 >= 3) {
+                this.btnInvite2.interactable = true;
+                this.btnInvite2.enableAutoGrayEffect = false;
+            }
+            else {
+                this.btnInvite2.interactable = false;
+                this.btnInvite2.enableAutoGrayEffect = true;
+            }
+        }
+        else {
+            this.btnInvite2.interactable = false;
+            this.btnInvite2.enableAutoGrayEffect = true;
+            this.btnInvite1.interactable = false;
+            this.btnInvite1.enableAutoGrayEffect = true;
         }
     }
 
+    protected onDestroy(): void {
+        GlobalEvent.off('INVITEUP');
+    }
 
     onBtnClick(event, customData) {
         let name = event.target.name;
@@ -58,22 +101,24 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '暂无数据');
             }
             else {
-                this.getInviterAward(pb.GamePropertyId.Vip, this.inviterData.Total - this.inviterData.Awarded[pb.GamePropertyId.Vip])
+                this.getInviterAward(pb.GamePropertyId.Vip, parseInt((this.inviterData.Total - this.inviterData.Awarded[pb.GamePropertyId.Vip]) / 10 + '') * 10)
             }
         }
 
         //邀请
         else if (name == 'main_yq_yqhy') {
-            LLWSDK.getSDK().shareAppMessage(GameData.userID);
+            LLWSDK.getSDK().shareAppMessage(1);
         }
     }
 
     getInviterAward(type, count) {
+
         let info = {
-            property_id: type,
+            propertyId: type,
             count: count,
         }
         console.log('领取' + type + '    ' + count);
+        console.log(JSON.stringify(info));
 
         let CmdGetInviterAward = pb.CmdGetInviterAward;
         let message = CmdGetInviterAward.create(info);
@@ -85,7 +130,12 @@ export default class NewClass extends cc.Component {
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, res.err);
             }
             else {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '领取成功!');
+                if (type == pb.GamePropertyId.Gold) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '成功领取:' + count * 500 + '金币！');
+                }
+                else {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '成功领取:' + (count / 10) * 3 + '天VIP');
+                }
             }
         })
     }

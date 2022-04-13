@@ -293,6 +293,9 @@ export default class NewClass extends cc.Component {
 
                 this.onShowTime();
             }
+            else {
+                this.tipsLabel.string = '';
+            }
 
         }
         else {

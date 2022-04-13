@@ -540,10 +540,13 @@ export default class NewClass extends cc.Component {
 
             // else {
 
-            if (GameData.ZBSet.select != '均线') {
-                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '现阶段均线指标可训练，暂不开放其他指标');
-                return;
+            if (!GameData.vipStatus) {
+                if (GameData.ZBSet.select != '均线') {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '现阶段均线指标可训练，暂不开放其他指标');
+                    return;
+                }
             }
+
 
             GameCfg.GameType = pb.GameType.ZhiBiao;
             GameCfg.GameSet = JSON.parse(JSON.stringify(GameData.ZBSet));

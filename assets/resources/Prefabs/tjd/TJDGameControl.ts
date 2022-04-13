@@ -247,10 +247,10 @@ export default class NewClass extends cc.Component {
 
         }
         else {
-            this.klabels[0].string = this.viweData[GameCfg.huizhidatas - 1].open;
-            this.klabels[1].string = this.viweData[GameCfg.huizhidatas - 1].close;
-            this.klabels[2].string = this.viweData[GameCfg.huizhidatas - 1].high;
-            this.klabels[3].string = this.viweData[GameCfg.huizhidatas - 1].low;
+            this.klabels[0].string = this.viweData[GameCfg.huizhidatas - 1].open.toFixed(2);
+            this.klabels[1].string = this.viweData[GameCfg.huizhidatas - 1].close.toFixed(2);
+            this.klabels[2].string = this.viweData[GameCfg.huizhidatas - 1].high.toFixed(2);
+            this.klabels[3].string = this.viweData[GameCfg.huizhidatas - 1].low.toFixed(2);
 
             if (!this.junjia) this.junjia = 0.00;
 

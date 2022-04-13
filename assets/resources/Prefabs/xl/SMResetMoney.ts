@@ -36,12 +36,23 @@ export default class NewClass extends cc.Component {
     //}
 
     protected onEnable(): void {
-        if (GameData.SmxlState.gold < 10000) {
-            this.tipsLabel.string = '您的当前资金不足1万，无法开启训练，观看视频获赠5万资金';
+        if (GameData.vipStatus) {
+            if (GameData.SmxlState.gold < 10000) {
+                this.tipsLabel.string = '您的当前资金不足1万，无法开启训练，重置获赠5万资金';
+            }
+            else if (GameData.SmxlState.gold > 1000000000) {
+                this.tipsLabel.string = '您的资金已经太多了，重置回到初始状态';
+            }
         }
-        else if (GameData.SmxlState.gold > 1000000000) {
-            this.tipsLabel.string = '您的资金已经太多了，是否消耗1000金币重置到初始状态';
+        else {
+            if (GameData.SmxlState.gold < 10000) {
+                this.tipsLabel.string = '您的当前资金不足1万，无法开启训练，观看视频获赠5万资金';
+            }
+            else if (GameData.SmxlState.gold > 1000000000) {
+                this.tipsLabel.string = '您的资金已经太多了，是否消耗1000金币重置到初始状态';
+            }
         }
+
     }
 
     onBtnClick(event, target) {
@@ -58,22 +69,27 @@ export default class NewClass extends cc.Component {
             //     return;
             // }
             let self = this;
-            if (GameData.SmxlState.gold < 10000) {
-                LLWSDK.getSDK().showVideoAd((flag) => {
-                    if (flag) {
-                        this.sendSmxlReset();
-                    }
-                    else {
-                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才可以重置成功');
-                    }
-                })
-            }
-            else if (GameData.SmxlState.gold > 1000000000) {
-                if (GameData.properties[pb.GamePropertyId.Gold] < 1000) {
-                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
-                    return;
-                }
+            if (GameData.vipStatus) {
                 this.sendSmxlReset();
+            }
+            else {
+                if (GameData.SmxlState.gold < 10000) {
+                    LLWSDK.getSDK().showVideoAd((flag) => {
+                        if (flag) {
+                            this.sendSmxlReset();
+                        }
+                        else {
+                            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '观看完整视频才可以重置成功');
+                        }
+                    })
+                }
+                else if (GameData.SmxlState.gold > 1000000000) {
+                    if (GameData.properties[pb.GamePropertyId.Gold] < 1000) {
+                        GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '金币不足');
+                        return;
+                    }
+                    this.sendSmxlReset();
+                }
             }
         }
 
