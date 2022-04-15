@@ -183,16 +183,16 @@ export default class PopupManager {
 
     public static openNode(prent, childen, url, zIndex?, call?) {
         //   是否在下载
-        if (!this.isLoading) {
-            this.isLoading = true;
-            if (this.enqueue.length > 0) {
-                this.enqueue.shift();
-            }
-            this.loadNode(prent, childen, url, zIndex, call);
-        }
-        else {
-            this.enqueue.push({ prent: prent, childen: childen, url: url, zIndex: zIndex, call: call });
-        }
+        // if (!this.isLoading) {
+        //     this.isLoading = true;
+        //     if (this.enqueue.length > 0) {
+        //         this.enqueue.shift();
+        //     }
+        this.loadNode(prent, childen, url, zIndex, call);
+        // }
+        // else {
+        //     this.enqueue.push({ prent: prent, childen: childen, url: url, zIndex: zIndex, call: call });
+        // }
     }
 
     public static loadNode(prent, childen, url, zIndex?, call?) {
@@ -201,7 +201,6 @@ export default class PopupManager {
         }
 
         if (!childen) {
-
             if (this.nodes['Prefabs/loading']) {
                 GlobalEvent.emit(EventCfg.LOADINGSHOW);
             }
@@ -216,19 +215,18 @@ export default class PopupManager {
                 childen.active = true;
                 this.nodes[url] = childen;
                 call && call(childen);
-                if (this.enqueue.length > 0) {
-                    this.openNode(this.enqueue[0].prent, this.enqueue[0].childen, this.enqueue[0].url, this.enqueue[0].zIndex, this.enqueue[0].call);
-                }
+                // if (this.enqueue.length > 0) {
+                //     this.openNode(this.enqueue[0].prent, this.enqueue[0].childen, this.enqueue[0].url, this.enqueue[0].zIndex, this.enqueue[0].call);
+                // }
             })
         }
         else {
             this.isLoading = false;
             childen.active = true;
             call && call(childen);
-            if (this.enqueue.length > 0) {
-                this.openNode(this.enqueue[0].prent, this.enqueue[0].childen, this.enqueue[0].url, this.enqueue[0].zIndex, this.enqueue[0].call);
-            }
-
+            // if (this.enqueue.length > 0) {
+            //     this.openNode(this.enqueue[0].prent, this.enqueue[0].childen, this.enqueue[0].url, this.enqueue[0].zIndex, this.enqueue[0].call);
+            // }
         }
     }
 

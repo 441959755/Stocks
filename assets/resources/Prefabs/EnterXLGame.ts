@@ -38,14 +38,11 @@ export default class NewClass extends cc.Component {
                 code = code.slice(1);
             }
 
-            // let gpData = GameCfg.data[0].data;
-            // let time = ComUtils.formatTime(gpData[GameData.huizhidatas - 1].day) + '--' + ComUtils.formatTime(gpData[GameCfg.huizhidatas - 1].day);
-
             this.codename.string = code + '     ' + this.name;
 
         }
 
-        if (new Date().getTime() / 1000 < GameData.properties[pb.GamePropertyId.VipExpiration]) {
+        if (GameData.vipStatus) {
             this.tipsLabel.string = '0';
         }
         else {
@@ -54,6 +51,7 @@ export default class NewClass extends cc.Component {
     }
 
     onShow(code, name, list) {
+
         this.code = code + '';
 
         if (this.code.length >= 7) {
@@ -161,19 +159,28 @@ export default class NewClass extends cc.Component {
                     items = GameCfgText.getQHItemInfo(this.code);
                 } else {
                     items = GameCfgText.getGPItemInfo(this.code);
+                    GameCfg.GameSet = GameData.DXSet;
+                    GameData.DXSet.market == '随机行情';
+                }
+
+                let ktype = pb.KType.Day;
+                if (GameCfg.GameSet.ZLine == '周线') {
+                    ktype = pb.KType.Day7;
                 }
 
                 GameCfg.data[0].circulate = items[4];
 
                 data = {
-                    ktype: pb.KType.Day,
+                    ktype: ktype,
                     kstyle: pb.KStyle.Random,
                     //  from: this.gpList[0].timestamp,
                     code: this.code,
-                    total: 250,
+                    total: parseInt(GameCfg.GameSet.KLine) + 100,
                     to: this.gpList[this.gpList.length - 1].timestamp,
                     reserve: 100,
                 }
+
+                console.log('sp进入训练:' + JSON.stringify(data));
 
 
                 GameCfg.enterGameConf = data;

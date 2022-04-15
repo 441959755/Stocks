@@ -67,6 +67,9 @@ class SetConf {
         if (set) {
             this.data = JSON.parse(set);
         }
+        else {
+            this.data = this.data;
+        }
     }
 }
 

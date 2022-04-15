@@ -4,6 +4,7 @@ import WebSDK from "./WebSDK";
 import WechatSDK from "./WechatSDK";
 import AndroidSDK from './AndroidSDK';
 import IOSSDK from "./IOSSDK";
+import QQSDK from "./QQSDK";
 
 export default class LLWSDK {
 
@@ -23,6 +24,9 @@ export default class LLWSDK {
             case PlatDefine.PLAT_IOS:
                 let iosSDK = IOSSDK.getInstance();
                 return iosSDK;
+            case PlatDefine.PLAT_QQ:
+                let qqSDK = QQSDK.getInstance();
+                return qqSDK;
         }
     }
 }
