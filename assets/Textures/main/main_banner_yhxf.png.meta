@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "1cbbf703-ef45-4197-a17c-1f1bda717405",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "main_banner_yhxf": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "0be18aaa-b5d5-4fbc-81dc-fd2aa646039a",
+      "importer": "sprite-frame",
       "rawTextureUuid": "1cbbf703-ef45-4197-a17c-1f1bda717405",
       "trimType": "auto",
       "trimThreshold": 1,

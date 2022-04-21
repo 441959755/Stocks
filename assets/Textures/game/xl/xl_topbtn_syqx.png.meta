@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "794449d1-adec-41bb-b7b9-e29d4829f350",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "xl_topbtn_syqx": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "5723b4b2-41de-4126-b550-1546da912f81",
+      "importer": "sprite-frame",
       "rawTextureUuid": "794449d1-adec-41bb-b7b9-e29d4829f350",
       "trimType": "auto",
       "trimThreshold": 1,

@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "1cad3643-818d-4103-acde-8f525dba26a2",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "login_renwu": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "d334ca98-4400-4237-b5b8-21a31a730169",
+      "importer": "sprite-frame",
       "rawTextureUuid": "1cad3643-818d-4103-acde-8f525dba26a2",
       "trimType": "auto",
       "trimThreshold": 1,

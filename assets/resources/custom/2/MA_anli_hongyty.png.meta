@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "2e48db0c-720a-4af8-98d5-75c999c704ba",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "MA_anli_hongyty": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "2cc7e592-360e-42e8-8cf5-4d429fcbedab",
+      "importer": "sprite-frame",
       "rawTextureUuid": "2e48db0c-720a-4af8-98d5-75c999c704ba",
       "trimType": "auto",
       "trimThreshold": 1,

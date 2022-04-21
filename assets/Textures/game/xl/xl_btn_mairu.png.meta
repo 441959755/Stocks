@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "97bfa257-0033-4d48-a266-73b45f79fbad",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "xl_btn_mairu": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "4b33f1fa-6c4a-4212-8736-455ac6653d73",
+      "importer": "sprite-frame",
       "rawTextureUuid": "97bfa257-0033-4d48-a266-73b45f79fbad",
       "trimType": "auto",
       "trimThreshold": 1,

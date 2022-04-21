@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "49773131-1193-4bc9-a055-7aa2257f37ea",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "study_dt_xuanxiangbg": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "0ddbf2d2-9f89-4442-8baa-fcb8d3e305d9",
+      "importer": "sprite-frame",
       "rawTextureUuid": "49773131-1193-4bc9-a055-7aa2257f37ea",
       "trimType": "auto",
       "trimThreshold": 1,

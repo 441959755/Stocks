@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "29185a3f-49a3-4aa7-9a3b-28e1ddf83c67",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "hy_btn_huguan": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "1a4bb923-0568-4249-ae4c-ea47e5d4e996",
+      "importer": "sprite-frame",
       "rawTextureUuid": "29185a3f-49a3-4aa7-9a3b-28e1ddf83c67",
       "trimType": "auto",
       "trimThreshold": 1,

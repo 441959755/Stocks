@@ -6,11 +6,11 @@ const GAMEID = 0;
 
 //const PLATTYPE = PlatDefine.PLAT_IOS;
 
-// const PLATTYPE = PlatDefine.PLAT_WEB;
-// const FROM = pb.AppFrom.Website3th;
+const PLATTYPE = PlatDefine.PLAT_WEB;
+const FROM = pb.AppFrom.Website3th;
 
-const PLATTYPE = PlatDefine.PLAT_WECHAT;
-const FROM = pb.AppFrom.WeChatMinProgram;
+// const PLATTYPE = PlatDefine.PLAT_WECHAT;
+// const FROM = pb.AppFrom.WeChatMinProgram;
 
 //const LoginURL = 'http://test.cgdr168.com';
 const LoginURL = 'https://www.cgdr168.com';

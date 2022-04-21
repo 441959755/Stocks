@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "e8172fc6-5985-475e-90ff-b3fd60dafbcb",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "bank_zf_wx": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "b4300f86-0504-45a1-aaab-0fa26cea8875",
+      "importer": "sprite-frame",
       "rawTextureUuid": "e8172fc6-5985-475e-90ff-b3fd60dafbcb",
       "trimType": "auto",
       "trimThreshold": 1,

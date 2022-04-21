@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "b308f17e-888d-4f62-8f21-70b8cf485033",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "pic_k_xt7": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "38e96137-e4f6-409c-a431-2bab5e7fbc6e",
+      "importer": "sprite-frame",
       "rawTextureUuid": "b308f17e-888d-4f62-8f21-70b8cf485033",
       "trimType": "auto",
       "trimThreshold": 1,
