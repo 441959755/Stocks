@@ -5,7 +5,7 @@ import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class SMMonthly extends cc.Component {
 
     monthlyInfo = null;
 
@@ -31,6 +31,7 @@ export default class NewClass extends cc.Component {
     onShow() {
         if (!this.monthlyInfo) {
             console.log('this.monthlyInfo is null' + this.monthlyInfo);
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '上月没数据哦！');
             return;
         }
         let date = new Date();

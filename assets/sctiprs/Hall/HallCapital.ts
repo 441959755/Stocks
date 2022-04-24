@@ -1,14 +1,13 @@
 
 import { pb } from "../../protos/proto";
-import LLWConfig from "../common/config/LLWConfig";
-import PlatDefine from "../common/config/PlatDefine";
 import GameData from "../GameData";
 import EventCfg from "../Utils/EventCfg";
 import GlobalEvent from "../Utils/GlobalEvent";
+import PopupManager from "../Utils/PopupManager";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class HallCapital extends cc.Component {
 
     @property(cc.Label)
     goldLabel: cc.Label = null;
@@ -20,8 +19,6 @@ export default class NewClass extends cc.Component {
         GlobalEvent.on(EventCfg.GOLDCHANGE, this.initData.bind(this), this);
 
         GlobalEvent.on(EventCfg.DIAMONDCHANGE, this.initData.bind(this), this);
-
-        // GlobalEvent.on(EventCfg.KCOINCHANGE, this.initData.bind(this), this);
     }
 
     start() {
@@ -29,31 +26,31 @@ export default class NewClass extends cc.Component {
     }
 
     initData() {
-        // if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
-        //     this.goldLabel.string = GameData.properties[pb.GamePropertyId.K];
-        // }
-        // else {
         this.goldLabel.string = GameData.properties[pb.GamePropertyId.Gold];
         this.diamondLabel.string = GameData.properties[pb.GamePropertyId.Diamond];
-        // }
     }
 
     onBtnClck(event, data) {
         let name = event.target.name;
 
         if (name == 'btnGold') {
-            GlobalEvent.emit('OPENSHOPLAYER', 2)
+            this.openShopLayer(2);
         }
 
         else if (name == 'btnDia') {
-            GlobalEvent.emit('OPENSHOPLAYER', 1)
+            this.openShopLayer(1);
         }
+    }
+
+    openShopLayer(type){
+        PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/shop/shop', 88, (node) => {
+            type && (node.getComponent('ShopControl').onShow(type));
+        })
     }
 
     onDestroy() {
         GlobalEvent.off(EventCfg.GOLDCHANGE);
         GlobalEvent.off(EventCfg.DIAMONDCHANGE);
-        //GlobalEvent.off(EventCfg.KCOINCHANGE);
     }
 
 }

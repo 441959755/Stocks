@@ -13,28 +13,13 @@ import ActionUtils from '../Utils/ActionUtils';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class HallContent extends cc.Component {
 
 	@property([cc.Toggle])
 	toggles: cc.Toggle[] = [];
 
 	@property([cc.Node])
 	Layers: cc.Node[] = [];
-
-	@property(cc.Sprite)
-	userHead: cc.Sprite = null;
-
-	@property(cc.Label)
-	UserName: cc.Label = null;
-
-	@property(cc.Label)
-	userLevel: cc.Label = null;
-
-	@property(cc.Node)
-	girlNode: cc.Node = null;
-
-	@property(cc.Node)
-	vipImg: cc.Node = null;
 
 	//提示
 	@property(cc.Label)
@@ -44,47 +29,18 @@ export default class NewClass extends cc.Component {
 	@property(cc.Label)
 	dkLabel: cc.Label = null;
 
+	@property(cc.Node)
+	userInfo: cc.Node = null;
+
 	onLoad() {
-		//性别更改
-		GlobalEvent.on(EventCfg.GENDERCHANGE, this.setUserGender.bind(this), this);
-
-		//头像更改
-		GlobalEvent.on(EventCfg.HEADIMGCHANGE, this.setUserHead.bind(this), this);
-
-		//名字更改
-		GlobalEvent.on(EventCfg.NAMECHANGE, this.setUserInfo.bind(this), this);
-
-		//等级更改
-		GlobalEvent.on(EventCfg.LEVELCHANGE, this.setUserInfo.bind(this), this);
-
-		//vip
-		GlobalEvent.on(EventCfg.VIPCHANGE, this.setUserInfo.bind(this), this);
-
 		//发放奖励动画
 		GlobalEvent.on('CmdGoldAwardPrompt', this.CmdGoldAwardPrompt.bind(this), this);
 	}
 
-	setUserHead() {
-		this.userHead.spriteFrame = GameData.headImg;
-	}
-
-	setUserGender() {
-		if (GameData.gender == 1) {
-			this.girlNode.active = false;
-		} else {
-			this.girlNode.active = true;
-		}
-	}
 
 	start() {
 
 		this.initToggle();
-
-		//设置用户信息
-		this.setUserInfo();
-
-		//设置用户头像
-		this.setUserHead();
 
 		//首次上传用户信息
 		this.upLoadUserInfo();
@@ -107,6 +63,11 @@ export default class NewClass extends cc.Component {
 			setTimeout(() => {
 				this.CmdGoldAwardPrompt();
 			}, 500)
+		}
+
+		let userInfoHandle = this.userInfo.getComponent('UserInfo');
+		userInfoHandle.userInfo = {
+			userID: GameData.userID,
 		}
 	}
 
@@ -167,17 +128,6 @@ export default class NewClass extends cc.Component {
 	}
 
 
-	setUserInfo() {
-		this.setUserGender();
-		this.userLevel.string = 'LV:' + (GameData.properties[pb.GamePropertyId.Level] || 1) + '';
-		this.UserName.string = GameData.userName || GameData.userID;
-		if (GameData.vipStatus) {
-			this.vipImg.active = true;
-		}
-		else {
-			this.vipImg.active = false;
-		}
-	}
 
 	initToggle() {
 		this.toggles.forEach((el, index) => {
@@ -258,10 +208,7 @@ export default class NewClass extends cc.Component {
 			})
 		}
 
-		//打开个人中心
-		else if (name == 'userinfobg') {
-			PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/playeInfo/playerInfoLayer', 5, null);
-		}
+
 
 		//pk
 		else if (name == 'main_jj_pkdz') {

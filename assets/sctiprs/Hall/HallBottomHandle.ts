@@ -5,7 +5,7 @@ import PopupManager from "../Utils/PopupManager";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class HallBottomHandle extends cc.Component {
 
     protected onLoad(): void {
         //通知界面
@@ -14,8 +14,6 @@ export default class NewClass extends cc.Component {
         //打开排行榜
         GlobalEvent.on('OPENRANKINGLIST', this.openRankingList.bind(this), this);
 
-        //打开商城
-        GlobalEvent.on('OPENSHOPLAYER', this.openShopLayer.bind(this), this);
     }
 
     //打开公告
@@ -73,7 +71,6 @@ export default class NewClass extends cc.Component {
     protected onDestroy(): void {
         GlobalEvent.off('OPENNOTICELAYER');
         GlobalEvent.off('OPENRANKINGLIST');
-        GlobalEvent.off('OPENSHOPLAYER');
     }
 
 }

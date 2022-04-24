@@ -12,7 +12,7 @@ import PopupManager from "../Utils/PopupManager";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class HallTopHandle extends cc.Component {
 
     @property(cc.Label)
     vipTimeLabel: cc.Label = null;
@@ -29,14 +29,14 @@ export default class NewClass extends cc.Component {
     setVIPstatus() {
         //vip状态
         if (GameData.vipStatus) {
-            ComUtils.getVIPDisTime(this.getVIPDisTime.bind(this));
+            ComUtils.getVIPDisTime(this.SetVIPDisTime.bind(this));
         }
         else {
             this.vipTimeLabel.string = 'VIP';
         }
     }
 
-    getVIPDisTime(obj) {
+    SetVIPDisTime(obj) {
         this.vipTimeLabel.string = obj.day + '天' + obj.hours + '时';
     }
 

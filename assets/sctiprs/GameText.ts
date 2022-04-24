@@ -779,15 +779,6 @@ export default class GameCfgText {
 
     public static getEnterGameConf() {
 
-        // let data = {
-        //     ktype: pb.KType.Day,
-        //     kstyle: pb.KStyle.Random,
-        //     code: null,
-        //     from: null,
-        //     total: 250,
-        //     to: 0,
-        //     reserve: 100,
-        // }
         let gpList;
 
         if (GameCfg.GameType == pb.GameType.QiHuo) {
@@ -798,14 +789,26 @@ export default class GameCfgText {
         }
 
         if (!GameCfg.enterGameConf.code) {
+            let index = parseInt(Math.random() * gpList.length + '');
             //没有选择时间
             if (!GameCfg.enterGameConf.from) {
+                while (true) {
+                    if (index >= gpList.length) {
+                        index = 0;
+                    }
+                    let items = gpList[index].split('|');
 
+                }
             }
-            //
+            //选择了时间
             else {
 
+
             }
+        }
+        else {
+
+
         }
 
 

@@ -4,7 +4,7 @@ import LoadImg from "../Utils/LoadImg";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class HallAD extends cc.Component {
 
     @property(cc.Sprite)
     imgAd: cc.Sprite = null;

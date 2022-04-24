@@ -8,8 +8,11 @@ let setData = {
     year: '随机',
     month: '随机',
     day: '随机',
+
     isShowVol: true,
+
     isBW: true,
+
     isMA1: true,
     MA1Date: 5,
     isMA2: true,
@@ -54,6 +57,10 @@ let setData = {
 
     //fs
     isAuto: false,
+
+    total: 256,   //总k线条数
+
+    reserve: 106,  //预留条数
 
 }
 

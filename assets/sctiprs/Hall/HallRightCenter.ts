@@ -12,7 +12,7 @@ import PopupManager from "../Utils/PopupManager";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class HallRightCenter extends cc.Component {
 
     @property(cc.Node)
     rewardCenterBtn: cc.Node = null;

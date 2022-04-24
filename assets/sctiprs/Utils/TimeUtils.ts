@@ -1,0 +1,30 @@
+
+
+export default {
+
+    /**
+     * 
+     * @param dateStr   2001-01-01
+     * @returns       时间戳
+     */
+    dateToTimestamp(dateStr) {
+        if (!dateStr) {
+            return ''
+        }
+        let newDataStr = dateStr.replace(/\.|\-/g, '/')
+        let date = new Date(newDataStr);
+        let timestamp = date.getTime();
+        return timestamp
+    },
+
+    /**
+     * 
+     * @param from   开始时间戳
+     * @param end    结束时间戳
+     * @returns      天数
+     */
+    GetDay(from, end) {
+        return parseInt((end - from) / 24 / 60 / 60 / 1000 + '');
+    }
+
+}
