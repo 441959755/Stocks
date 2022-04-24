@@ -115,8 +115,6 @@ export default class ShuangMangHandle extends cc.Component {
 
 
             this.smStartGameSet();
-            // }
-
         }
 
         //点击训练设置
@@ -183,7 +181,7 @@ export default class ShuangMangHandle extends cc.Component {
             reserve: 106,
         }
 
-        GameCfgText.getGPSMByRandom()
+        GameCfgText.getEnterGameConf()
 
         console.log('给的数据:' + JSON.stringify(GameCfg.enterGameConf));
 

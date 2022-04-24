@@ -8,6 +8,7 @@ import LLWConfig from './common/config/LLWConfig';
 import PlatDefine from './common/config/PlatDefine';
 import EventCfg from './Utils/EventCfg';
 import GameCfg from './game/GameCfg';
+import TimeUtils from './Utils/TimeUtils';
 
 export default class GameCfgText {
 
@@ -779,7 +780,7 @@ export default class GameCfgText {
 
     public static getEnterGameConf() {
 
-        let gpList;
+        let gpList, amultiple = 1, items;
 
         if (GameCfg.GameType == pb.GameType.QiHuo) {
             gpList = this.qihuoList;
@@ -788,30 +789,96 @@ export default class GameCfgText {
             gpList = this.stockList;
         }
 
+        if (GameCfg.GameSet.ZLine == '周线') {
+            amultiple = 7;
+        }
+
+        let f, e;
+        //没选择股票
         if (!GameCfg.enterGameConf.code) {
+
             let index = parseInt(Math.random() * gpList.length + '');
-            //没有选择时间
-            if (!GameCfg.enterGameConf.from) {
-                while (true) {
-                    if (index >= gpList.length) {
-                        index = 0;
-                    }
-                    let items = gpList[index].split('|');
 
+            while (true) {
+                if (index >= gpList.length) {
+                    index = 0;
                 }
-            }
-            //选择了时间
-            else {
+                items = gpList[index].split('|');
 
+                console.log(JSON.stringify(items));
 
+                if (parseInt(items[2]) < 20100101) {
+                    items[2] = '20100101';
+                }
+                //没有选择时间
+                if (!GameCfg.enterGameConf.from) {
+                    f = TimeUtils.dateToTimestamp(items[2].slice(0, 4) + '/' + items[2].slice(4, 6) + '/' + items[2].slice(6));
+                }
+                else {
+
+                    f = TimeUtils.dateToTimestamp(GameCfg.enterGameConf.from.slice(0, 4) + '/' + GameCfg.enterGameConf.from.slice(4, 6) + '/' + GameCfg.enterGameConf.from.slice(6));
+                }
+
+                e = TimeUtils.dateToTimestamp(items[3].slice(0, 4) + '/' + items[3].slice(4, 6) + '/' + items[3].slice(6));
+
+                console.log(TimeUtils.GetDay(f, e));
+
+                if (TimeUtils.GetDay(f, e) > (GameCfg.enterGameConf.total + 150) * amultiple) {
+
+                    let sc = e - 24 * 60 * 60 * 1000 * GameCfg.GameSet.total;
+
+                    if (!GameCfg.enterGameConf.from) {
+                        GameCfg.enterGameConf.from = TimeUtils.getYYMMDD(sc);
+                    }
+                    else {
+                        GameCfg.enterGameConf.from = GameCfg.enterGameConf.from;
+                    }
+
+                    break;
+                }
+                else {
+                    index++;
+                }
             }
         }
         else {
+            items = this.getGPItemInfo(GameCfg.enterGameConf.code);
 
+            console.log(JSON.stringify(items));
+            items = items.split('|');
+
+            if (parseInt(items[2]) < 20100101) {
+                items[2] = '20100101';
+            }
+            //没有选择时间
+            if (!GameCfg.enterGameConf.from) {
+                f = TimeUtils.dateToTimestamp(items[2].slice(0, 4) + '/' + items[2].slice(4, 6) + '/' + items[2].slice(6));
+            }
+            else {
+                f = TimeUtils.dateToTimestamp(GameCfg.enterGameConf.from.slice(0, 4) + '/' + GameCfg.enterGameConf.from.slice(4, 6) + '/' + GameCfg.enterGameConf.from.slice(6));
+            }
+
+            e = TimeUtils.dateToTimestamp(items[3].slice(0, 4) + '/' + items[3].slice(4, 6) + '/' + items[3].slice(6));
+
+            console.log(TimeUtils.GetDay(f, e));
+
+            let sc = e - 24 * 60 * 60 * 1000 * GameCfg.GameSet.total;
+
+            if (!GameCfg.enterGameConf.from) {
+                GameCfg.enterGameConf.from = TimeUtils.getYYMMDD(sc);
+            }
+            else {
+                GameCfg.enterGameConf.from = GameCfg.enterGameConf.from;
+            }
 
         }
 
-
+        GameCfg.data[0].data = [];
+        GameCfg.data[0].name = items[1];
+        GameCfg.data[0].code = items[0];
+        GameCfg.enterGameConf.code = items[0];
+        GameCfg.data[0].circulate = items[4];
+        GameCfg.data[0].ktype = GameCfg.enterGameConf.ktype;
 
     }
 
