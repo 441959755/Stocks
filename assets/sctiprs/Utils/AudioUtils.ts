@@ -1,6 +1,7 @@
 import LoadUtils from './LoadUtils';
 
 export default class AudioUtils {
+
 	private static AudioMaps: Map<string, cc.AudioClip> = new Map();
 
 	public static musicVolume = 0;
@@ -19,11 +20,12 @@ export default class AudioUtils {
 	 *  url 地址
 	 */
 	public static loadAudios(url) {
+
 		LoadUtils.loadResDir(url, clips => {
 			clips.forEach(element => {
 				this.AudioMaps.set(element.name, element);
 			});
-		});
+		}); 
 	}
 
 	/**

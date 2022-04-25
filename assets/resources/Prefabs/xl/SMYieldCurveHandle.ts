@@ -177,6 +177,7 @@ export default class SMYieldCurveHandle extends cc.Component {
 
         this.draw.clear();
         this.draw1.clear();
+        
     }
 
     tipsBoxShow(event) {

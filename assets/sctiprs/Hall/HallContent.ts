@@ -411,11 +411,6 @@ export default class HallContent extends cc.Component {
 	}
 
 	onDestroy() {
-		GlobalEvent.off(EventCfg.GENDERCHANGE);
-		GlobalEvent.off(EventCfg.HEADIMGCHANGE);
-		GlobalEvent.off(EventCfg.NAMECHANGE);
-		GlobalEvent.off(EventCfg.LEVELCHANGE)
-		GlobalEvent.off(EventCfg.VIPCHANGE);
 		GlobalEvent.off('CmdGoldAwardPrompt');
 	}
 }

@@ -34,6 +34,7 @@ export default class SMMonthly extends cc.Component {
             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '上月没数据哦！');
             return;
         }
+        
         let date = new Date();
         let year = date.getFullYear();
         let month = date.getMonth();

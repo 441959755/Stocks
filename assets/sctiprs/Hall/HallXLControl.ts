@@ -123,7 +123,7 @@ export default class HallXLControl extends cc.Component {
         PopupManager.openNode(this.node, null, str, 10, (node) => {
             ActionUtils.openBox(node);
         });
-    }
+    }  
 
     /**
      * 双盲
