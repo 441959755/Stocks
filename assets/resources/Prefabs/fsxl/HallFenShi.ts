@@ -11,7 +11,7 @@ import PopupManager from "../../../sctiprs/Utils/PopupManager";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class HallFenShi extends cc.Component {
 
     @property([cc.Node])
     downBoxs: cc.Node[] = [];

@@ -14,7 +14,7 @@ import PopupManager from "../../../sctiprs/Utils/PopupManager";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class DingXiangHandle extends cc.Component {
 
 	@property([cc.Node])
 	boxs: cc.Node[] = [];
@@ -112,8 +112,8 @@ export default class NewClass extends cc.Component {
 							}
 							if (i == 0) {
 								this.boxs[1].getChildByName('label').getComponent(cc.Label).string = str + '  ' + arr[1];
-								GameData.DXSet.search = arr[0];
 							}
+							GameData.DXSet.search = arr[0];
 							let node = cc.instantiate(this.item);
 							this.content.addChild(node);
 							node.setPosition(0, 0);
@@ -153,20 +153,14 @@ export default class NewClass extends cc.Component {
 		if (GameData.vipStatus) {
 			this.tipsLabel1.node.active = false;
 			this.tipsLabel2.node.active = false;
+			this.mfxlBtn.active = false;
 			return;
-
 		}
+
+		this.mfxlBtn.active = true;
 
 		let gameCount = EnterGameControl.onCurWXIsEnterGame();
 
-		// this.tipsLabel2.string = '训练费用：' + Math.abs(GameCfgText.gameConf.dxxl.cost[0].v) + '金币';
-		// this.mfxlBtn.active = true;
-		// if (gameCount.status == 0) {
-		// 	this.curState = 0;
-		// 	this.tipsLabel1.node.active = false;
-		// 	this.tipsLabel2.node.active = false;
-		// 	this.mfxlBtn.active = false;
-		// }
 		this.tipsLabel1.node.active = true;
 		this.tipsLabel2.node.active = true;
 
@@ -556,7 +550,8 @@ export default class NewClass extends cc.Component {
 				return;
 			}
 
-			if (this.curState == 2 && !GameData.adSucceed) {
+			if (this.curState == 2 || this.curState == 3) {
+
 				let self = this;
 
 				PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
@@ -567,10 +562,6 @@ export default class NewClass extends cc.Component {
 				});
 
 				return;
-			}
-
-			else if (this.curState == 3) {
-				GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '今日次数已用完,请明天再来吧！');
 			}
 
 			else {
@@ -599,9 +590,15 @@ export default class NewClass extends cc.Component {
 			PopupManager.openHelpLayer();
 		}
 
-		// else if (name == 'mfxlBtn') {
-		// 	GlobalEvent.emit("OPENUNLOCKBOX", true);
-		// }
+		else if (name == 'mfxlBtn') {
+			let self = this;
+			PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
+				node.getComponent('UnlockBox').callback = () => {
+					GlobalEvent.emit(EventCfg.LOADINGSHOW);
+					self.onGameCountShow();
+				}
+			});
+		}
 	}
 
 	onToggleClick() {
@@ -668,49 +665,21 @@ export default class NewClass extends cc.Component {
 			reserve: 100,
 		};
 
-		let items;
+		if (GameData.DXSet.search == '随机选股') {
+			data.code = null;
+		}
+		else {
+			data.code = GameData.DXSet.search.split(' ')[0];
+		}
 
-		if (GameData.DXSet.search == '随机选股' || GameData.DXSet.search == '') {
-
-			if (GameData.DXSet.year == '随机') {
-
-				let le = parseInt(Math.random() * GameCfgText.stockList.length + '');
-
-				items = GameCfgText.stockList[le].split('|');
-
-				data.code = items[0];
+		if (GameData.DXSet.year != '随机') {
+			if ((GameData.DXSet.month + '').length < 2) {
+				GameData.DXSet.month = '0' + GameData.DXSet.month;
 			}
-			else {
-				let m, d;
-				if (GameData.DXSet.month.length < 2) {
-					m = '0' + GameData.DXSet.month.length;
-				} else {
-					m = GameData.DXSet.month;
-				}
-				if (GameData.DXSet.day.length < 2) {
-					d = '0' + GameData.DXSet.day;
-				} else {
-					d = GameData.DXSet.day;
-				}
-
-				let seletTime = GameData.DXSet.year + '' + m + '' + d;
-				items = GameCfgText.getItemsByTime(seletTime);
-				data.code = items[0];
+			if ((GameData.DXSet.day + '').length < 2) {
+				GameData.DXSet.day = '0' + GameData.DXSet.day;
 			}
-
-		} else {
-			let dex = -1;
-			let arrStr = (GameData.DXSet.search + '').split(' ');
-
-			items = GameCfgText.getGPItemInfo(arrStr[0])
-			data.code = items[0];
-
-			let code = data.code + '';
-			if (code.length >= 7) {
-				code = code.slice(1, 7);
-			}
-
-			ComUtils.saveHistory(code + ' ' + items[1]);
+			data.from = GameData.DXSet.year + '' + GameData.DXSet.month + '' + GameData.DXSet.day;
 		}
 
 		if (GameData.DXSet.market == '随机行情') {
@@ -722,117 +691,6 @@ export default class NewClass extends cc.Component {
 		} else if (GameData.DXSet.market == '单边下跌') {
 			data.kstyle = pb.KStyle.Down;
 		}
-
-		if (GameData.DXSet.year != '随机') {
-
-			if (GameData.DXSet.month == '随机') {
-				GameData.DXSet.month = '01';
-			}
-			if (GameData.DXSet.day == '随机') {
-				GameData.DXSet.day = '01';
-			}
-			if (GameData.DXSet.month.length == 1) {
-				GameData.DXSet.month = '0' + GameData.DXSet.month;
-			}
-			if (GameData.DXSet.day.length == 1) {
-				GameData.DXSet.day = '0' + GameData.DXSet.day;
-			}
-
-			let seletTime = GameData.DXSet.year + '' + GameData.DXSet.month + '' + GameData.DXSet.day;
-
-			if (parseInt(seletTime) < parseInt(items[2])) {
-				if (GameData.DXSet.search == '随机选股') {
-					this.DXStartGameSet();
-					return;
-				} else {
-					GlobalEvent.emit(EventCfg.LOADINGHIDE);
-					GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能早与股票创建时间');
-				}
-				console.log('时间不能早与股票创建时间');
-				return;
-			} else if (parseInt(seletTime) > parseInt(items[3])) {
-				if (parseInt(items[3]) != 0) {
-					if (GameData.DXSet.search == '随机选股') {
-						this.DXStartGameSet();
-						return;
-					} else {
-						GlobalEvent.emit(EventCfg.LOADINGHIDE);
-						GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '时间不能大与股票结束时间');
-					}
-					console.log('时间不能大与股票结束时间');
-					return;
-				}
-			}
-			data.from = seletTime;
-		} else {
-			let start = items[2],
-				end = items[3],
-				sc;
-			if (end == 0) {
-				if (GameData.DXSet.ZLine == '周线') {
-					sc = new Date().getTime() - data.total * 24 * 60 * 60 * 1000 * 7;
-				} else {
-					sc = new Date().getTime() - data.total * 24 * 60 * 60 * 1000;
-				}
-			} else {
-				let year = end.slice(0, 4);
-				let month = end.slice(4, 6);
-				let day = end.slice(6);
-
-				let d = new Date(year + '-' + month + '-' + day);
-
-				if (GameData.DXSet.ZLine == '周线') {
-					sc = d.getTime() - data.total * 24 * 60 * 60 * 1000 * 7;
-				} else {
-					sc = d.getTime() - data.total * 24 * 60 * 60 * 1000;
-				}
-			}
-
-			if (parseInt(start) < 20100101) {
-				start = '20100101';
-			}
-
-			let year = start.slice(0, 4);
-			let month = start.slice(4, 6);
-			let day = start.slice(6);
-
-			let d = new Date(year + '-' + month + '-' + day);
-
-			let t;
-			if (GameData.DXSet.ZLine == '周线') {
-				t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 7 * 2;
-			} else {
-				t = d.getTime() + 24 * 60 * 60 * 1000 * 100 * 2;
-			}
-
-			if (sc < t && GameData.DXSet.year == '随机' && GameData.DXSet.search == '随机选股') {
-				this.DXStartGameSet();
-				return;
-			}
-
-			let s = Math.random() * (sc - t) + t;
-
-			let f = new Date(s);
-
-			{
-				let ye = f.getFullYear();
-				let mon = f.getMonth() + 1 >= 10 ? f.getMonth() + 1 : '0' + (f.getMonth() + 1);
-
-				let da = f.getDate() >= 10 ? f.getDate() : '0' + f.getDate();
-
-				data.from = ye + '' + mon + '' + da;
-			}
-		}
-
-		GameCfg.data[0].code = items[0];
-
-
-		GameCfg.data[0].data = [];
-		GameCfg.data[0].name = items[1];
-
-		GameCfg.data[0].circulate = items[4];
-
-		console.log('给的数据:' + JSON.stringify(data));
 
 		if (GameData.DXSet.ZLine == '日线') {
 			data.ktype = pb.KType.Day;
@@ -846,6 +704,10 @@ export default class NewClass extends cc.Component {
 
 		GameCfg.enterGameConf = data;
 
+		GameCfgText.getEnterGameConf();
+
+		console.log(JSON.stringify(GameCfg.enterGameConf));
+
 		GlobalHandle.enterGameSetout(GameCfg.enterGameConf, () => {
 
 			GameData.huizhidatas = 0;
@@ -857,25 +719,25 @@ export default class NewClass extends cc.Component {
 				GameCfg.huizhidatas = GameCfg.data[0].data.length - (100);
 			}
 
-			else if (GameData.DXSet.market == '随机行情' && GameData.DXSet.year != '随机') {
-				while (!GameData.huizhidatas) {
+			// else if (GameData.DXSet.market == '随机行情' && GameData.DXSet.year != '随机') {
+			// 	while (!GameData.huizhidatas) {
 
-					GameCfg.data[0].data.forEach((el, index) => {
-						if ((el.day).replace(/-/g, '') == fm) {
-							GameData.huizhidatas = index + 1;
-							GameCfg.huizhidatas = index + 1;
-						}
-					})
+			// 		GameCfg.data[0].data.forEach((el, index) => {
+			// 			if ((el.day).replace(/-/g, '') == fm) {
+			// 				GameData.huizhidatas = index + 1;
+			// 				GameCfg.huizhidatas = index + 1;
+			// 			}
+			// 		})
 
-					if (!GameData.huizhidatas) {
-						fm = (parseInt(fm) - 1) + '';
-					}
-				}
-			}
-			else {
-				GameData.huizhidatas = 100;
-				GameCfg.huizhidatas = 100;
-			}
+			// 		if (!GameData.huizhidatas) {
+			// 			fm = (parseInt(fm) - 1) + '';
+			// 		}
+			// 	}
+			// }
+			// else {
+			GameData.huizhidatas = 100;
+			GameCfg.huizhidatas = 100;
+			//}
 			if (GameData.huizhidatas >= GameCfg.data[0].data.length) {
 				GameData.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');
 				GameCfg.huizhidatas = parseInt(GameCfg.data[0].data.length / 2 + '');

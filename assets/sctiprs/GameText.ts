@@ -792,6 +792,12 @@ export default class GameCfgText {
         if (GameCfg.GameSet.ZLine == '周线') {
             amultiple = 7;
         }
+        else if (GameData.DXSet.ZLine == '30分钟K') {
+            amultiple = 1 / 5;
+        }
+        else if (GameData.DXSet.ZLine == '60分钟K') {
+            amultiple = 1 / 2;
+        }
 
         let f, e;
         //没选择股票
@@ -819,16 +825,22 @@ export default class GameCfgText {
                     f = TimeUtils.dateToTimestamp(GameCfg.enterGameConf.from.slice(0, 4) + '/' + GameCfg.enterGameConf.from.slice(4, 6) + '/' + GameCfg.enterGameConf.from.slice(6));
                 }
 
-                e = TimeUtils.dateToTimestamp(items[3].slice(0, 4) + '/' + items[3].slice(4, 6) + '/' + items[3].slice(6));
+                if (items[3] == 0) {
+                    e = new Date().getTime();
+                }
+                else {
+                    e = TimeUtils.dateToTimestamp(items[3].slice(0, 4) + '/' + items[3].slice(4, 6) + '/' + items[3].slice(6));
+                }
 
                 console.log(TimeUtils.GetDay(f, e));
 
                 if (TimeUtils.GetDay(f, e) > (GameCfg.enterGameConf.total + 150) * amultiple) {
 
-                    let sc = e - 24 * 60 * 60 * 1000 * GameCfg.GameSet.total;
+                    let sc = e - 24 * 60 * 60 * 1000 * (GameCfg.enterGameConf.total + 300);
 
                     if (!GameCfg.enterGameConf.from) {
-                        GameCfg.enterGameConf.from = TimeUtils.getYYMMDD(sc);
+                        let s = Math.random() * (sc - f) + f;
+                        GameCfg.enterGameConf.from = TimeUtils.getYYMMDD(s);
                     }
                     else {
                         GameCfg.enterGameConf.from = GameCfg.enterGameConf.from;
@@ -845,7 +857,6 @@ export default class GameCfgText {
             items = this.getGPItemInfo(GameCfg.enterGameConf.code);
 
             console.log(JSON.stringify(items));
-            items = items.split('|');
 
             if (parseInt(items[2]) < 20100101) {
                 items[2] = '20100101';
@@ -858,14 +869,21 @@ export default class GameCfgText {
                 f = TimeUtils.dateToTimestamp(GameCfg.enterGameConf.from.slice(0, 4) + '/' + GameCfg.enterGameConf.from.slice(4, 6) + '/' + GameCfg.enterGameConf.from.slice(6));
             }
 
-            e = TimeUtils.dateToTimestamp(items[3].slice(0, 4) + '/' + items[3].slice(4, 6) + '/' + items[3].slice(6));
-
+            if (items[3] == 0) {
+                e = new Date().getTime();
+            }
+            else {
+                e = TimeUtils.dateToTimestamp(items[3].slice(0, 4) + '/' + items[3].slice(4, 6) + '/' + items[3].slice(6));
+            }
             console.log(TimeUtils.GetDay(f, e));
 
-            let sc = e - 24 * 60 * 60 * 1000 * GameCfg.GameSet.total;
+            let sc = e - 24 * 60 * 60 * 1000 * (GameCfg.enterGameConf.total + 300) * amultiple;
+
+            //随机的时间戳
+            let s = Math.random() * (sc - f) + f;
 
             if (!GameCfg.enterGameConf.from) {
-                GameCfg.enterGameConf.from = TimeUtils.getYYMMDD(sc);
+                GameCfg.enterGameConf.from = TimeUtils.getYYMMDD(s);
             }
             else {
                 GameCfg.enterGameConf.from = GameCfg.enterGameConf.from;
