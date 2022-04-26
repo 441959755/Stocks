@@ -104,7 +104,7 @@ export default class NewClass extends cc.Component {
     onOtherEnterRoomGameData(info) {
         console.log('其他玩家进入房间：' + JSON.stringify(info));
         GameData.Players[1] = info.player;
-
+        GameData.otherHead = info.wxHeadicon;
         GlobalEvent.emit('SHOWOTHERPLAYER');
     }
 
@@ -140,11 +140,14 @@ export default class NewClass extends cc.Component {
         if (info.players[0].gd.uid == GameData.userID) {
 
             GameData.Players[0] = info.players[0].gd;
+
             if (info.players[1].gd) {
                 GameData.Players[1] = info.players[1].gd;
+                GameData.otherHead = info.players[1].wxHeadicon;
             }
             else {
                 GameData.Players[1] = null;
+                GameData.otherHead = null;
             }
         }
 
@@ -152,9 +155,11 @@ export default class NewClass extends cc.Component {
             GameData.Players[0] = info.players[1].gd;
             if (info.players[1].gd) {
                 GameData.Players[1] = info.players[0].gd;
+                GameData.otherHead = info.players[0].wxHeadicon;
             }
             else {
                 GameData.Players[1] = null;
+                GameData.otherHead = null;
             }
         }
 

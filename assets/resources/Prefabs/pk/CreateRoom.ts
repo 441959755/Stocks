@@ -92,7 +92,10 @@ export default class NewClass extends cc.Component {
             uid: GameData.userID,
             capital: GameData.JJCapital,
             junXian: arr,
+            wxHeadicon: GameData.headimgurl,
         }
+
+        console.log(JSON.stringify(info));
 
         let CmdRoomCreate = pb.CmdRoomCreate;
         let message = CmdRoomCreate.create(info);

@@ -113,7 +113,7 @@ export default class WechatSDK {
 
                 LoadImg.downloadRemoteImageAndSave(GameData.headimgurl, (tex, sp) => {
                     //  console.log('downloadRemoteImageAndSave' + sp + ' ' + tex);
-                    GameData.headimgurl = tex;
+                    //  GameData.headimgurl = tex;
                     GameData.headImg = sp;
                 }, true)
 
@@ -381,9 +381,7 @@ export default class WechatSDK {
     }
 
     onShow(cb) {
-        GameData.query = 0;
-        GameData.queryType = 0;
-        GameData.queryUid = 0;
+
         wx.onShow((res) => {
             console.log('获取query' + JSON.stringify(res));
             for (let s in res.query) {

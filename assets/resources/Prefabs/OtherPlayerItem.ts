@@ -117,7 +117,7 @@ export default class NewClass extends cc.Component {
         }
 
         // if (GameData.Players[1].icon) {
-        //     ComUtils.onLoadHead(GameData.Players[1].icon, (res) => {
+        //      LoadImg.onLoadHeadByUid(GameData.Players[1].icon, (res) => {
         //         let texture = new cc.SpriteFrame(res);
         //         GameData.Players[1].icon = texture;
         //     })

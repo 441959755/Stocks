@@ -8,6 +8,7 @@ import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import LoadImg from "../../../sctiprs/Utils/LoadImg";
 
 const { ccclass, property } = cc._decorator;
 
@@ -237,22 +238,18 @@ export default class NewClass extends cc.Component {
 
     onLoadHead(ob, head) {
 
-        if (ob.uid == GameData.userID) {
-            head.spriteFrame = GameData.headImg;
-        }
-        else {
-            ComUtils.onLoadHead(ob.icon, (res) => {
-                if (res) {
-                    let texture = new cc.SpriteFrame(res);
-                    head.getComponent(cc.Sprite).spriteFrame = texture;
-                    GameData.imgs[GameData.Players[1].icon + ''] = texture;
-                }
-                else {
-                    head.getComponent(cc.Sprite).spriteFrame = this.defaultHead;
-                    GameData.imgs[GameData.Players[1].icon + ''] = this.defaultHead;
-                }
-            })
-        }
+        LoadImg.onLoadHeadByUrl(GameData.otherHead, (res) => {
+            if (res) {
+                let texture = new cc.SpriteFrame(res);
+                head.getComponent(cc.Sprite).spriteFrame = texture;
+                GameData.imgs[GameData.Players[1].icon + ''] = texture;
+            }
+            else {
+                head.getComponent(cc.Sprite).spriteFrame = this.defaultHead;
+                GameData.imgs[GameData.Players[1].icon + ''] = this.defaultHead;
+            }
+        })
+
     }
 
     onBtnClick(event, data) {

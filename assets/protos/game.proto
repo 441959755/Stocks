@@ -83,6 +83,8 @@ enum GameType {
 	ChaoGuDaSai = 13;	// 炒股大赛
 	GeGuJingChai = 7;	// 个股竞猜
 	DaPanJingChai = 8;	// 大盘竞猜
+	ZhengGu = 17;		// 诊股
+	JianGu = 18;		// 荐股
 
 	MaxGameType = 30;	// 最大游戏类型编号
 }
@@ -109,7 +111,39 @@ enum GamePropertyId {
 	VipExpiration = 28;		// VIP截止日期的时间戳
 	RMB = 29;				// 充值的人民币，或给玩家发红包
 
-	Max = 30;				// 最大属性
+	// 荐股频道ID
+	SVip30 = 30;			// SVIP30
+	SVip31 = 31;			// SVIP31
+	SVip32 = 32;			// SVIP32
+	SVip33 = 33;			// SVIP33
+	SVip34 = 34;			// SVIP34
+	SVip35 = 35;			// SVIP35
+	SVip36 = 36;			// SVIP36
+	SVip37 = 37;			// SVIP37
+	SVip38 = 38;			// SVIP38
+	SVip39 = 39;			// SVIP39
+	SVip40 = 40;			// SVIP40
+	SVip41 = 41;			// SVIP41
+	SVip42 = 42;			// SVIP42
+	SVip43 = 43;			// SVIP43
+	SVip44 = 44;			// SVIP44
+	SVip45 = 45;			// SVIP45
+	SVip46 = 46;			// SVIP46
+	SVip47 = 47;			// SVIP47
+	SVip48 = 48;			// SVIP48
+	SVip49 = 49;			// SVIP49
+	SVip50 = 50;			// SVIP50
+	SVip51 = 51;			// SVIP51
+	SVip52 = 52;			// SVIP52
+	SVip53 = 53;			// SVIP53
+	SVip54 = 54;			// SVIP54
+	SVip55 = 55;			// SVIP55
+	SVip56 = 56;			// SVIP56
+	SVip57 = 57;			// SVIP57
+	SVip58 = 58;			// SVIP58
+	SVip59 = 59;			// SVIP59
+
+	Max = 60;				// 最大属性
 }
 // 事件ID
 enum EventId {
@@ -487,6 +521,7 @@ message CmdRoomCreate {
   	int32 capital = 4;				// 报名费
 	string pwd = 5;					// 房间密码
 	repeated int32 jun_xian = 6;	// 行情均线设置
+	string wx_headicon = 7;			// 微信小程序玩家头像URL
 }
 // 创建房间应答
 message CmdRoomCreateReply {
@@ -501,6 +536,7 @@ message CmdRoomEnter {
   	int32 node = 4;					// 用户所在节点（客户端不需要该参数）
 	string pwd = 5;					// 房间密码
 	repeated int32 jun_xian = 6;	// 行情均线设置
+	string wx_headicon = 7;			// 微信小程序玩家头像URL
 }
 // 进入房间应答
 message CmdRoomEnterReply {
@@ -519,9 +555,11 @@ message CmdRoomLeaveReply {
 }
 // 同步玩家进入房间
 message SyncRoomEnter {
-	int32 id = 1;		// 房间ID
-	GameType game = 2;	// 游戏类型
-	GameData player=3;	// 玩家数据
+	int32 id = 1;					// 房间ID
+	GameType game = 2;				// 游戏类型
+	GameData player=3;				// 玩家数据
+	repeated int32 jun_xian = 4;	// 行情均线设置
+	string wx_headicon = 5;			// 微信小程序玩家头像URL
 }
 // 同步玩家离开房间
 message SyncRoomLeave {
@@ -568,6 +606,7 @@ message RoomPlayer {
 	GameResult result = 5;		// 游戏结果
 	int64 curPos = 6;			// 游戏进度，距离起始行情的偏移量
 	repeated int32 jun_xian = 7;// 行情均线设置
+	string wx_headicon = 8;		// 微信小程序玩家头像URL
 }
 message RoomGameData {
 	int32 id = 1;					// 房号

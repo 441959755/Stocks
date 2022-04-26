@@ -1334,6 +1334,8 @@ $root.pb = (function () {
      * @property {number} ChaoGuDaSai=13 ChaoGuDaSai value
      * @property {number} GeGuJingChai=7 GeGuJingChai value
      * @property {number} DaPanJingChai=8 DaPanJingChai value
+     * @property {number} ZhengGu=17 ZhengGu value
+     * @property {number} JianGu=18 JianGu value
      * @property {number} MaxGameType=30 MaxGameType value
      */
     pb.GameType = (function () {
@@ -1354,6 +1356,8 @@ $root.pb = (function () {
         values[valuesById[13] = "ChaoGuDaSai"] = 13;
         values[valuesById[7] = "GeGuJingChai"] = 7;
         values[valuesById[8] = "DaPanJingChai"] = 8;
+        values[valuesById[17] = "ZhengGu"] = 17;
+        values[valuesById[18] = "JianGu"] = 18;
         values[valuesById[30] = "MaxGameType"] = 30;
         return values;
     })();
@@ -1379,7 +1383,37 @@ $root.pb = (function () {
      * @property {number} Tester=27 Tester value
      * @property {number} VipExpiration=28 VipExpiration value
      * @property {number} RMB=29 RMB value
-     * @property {number} Max=30 Max value
+     * @property {number} SVip30=30 SVip30 value
+     * @property {number} SVip31=31 SVip31 value
+     * @property {number} SVip32=32 SVip32 value
+     * @property {number} SVip33=33 SVip33 value
+     * @property {number} SVip34=34 SVip34 value
+     * @property {number} SVip35=35 SVip35 value
+     * @property {number} SVip36=36 SVip36 value
+     * @property {number} SVip37=37 SVip37 value
+     * @property {number} SVip38=38 SVip38 value
+     * @property {number} SVip39=39 SVip39 value
+     * @property {number} SVip40=40 SVip40 value
+     * @property {number} SVip41=41 SVip41 value
+     * @property {number} SVip42=42 SVip42 value
+     * @property {number} SVip43=43 SVip43 value
+     * @property {number} SVip44=44 SVip44 value
+     * @property {number} SVip45=45 SVip45 value
+     * @property {number} SVip46=46 SVip46 value
+     * @property {number} SVip47=47 SVip47 value
+     * @property {number} SVip48=48 SVip48 value
+     * @property {number} SVip49=49 SVip49 value
+     * @property {number} SVip50=50 SVip50 value
+     * @property {number} SVip51=51 SVip51 value
+     * @property {number} SVip52=52 SVip52 value
+     * @property {number} SVip53=53 SVip53 value
+     * @property {number} SVip54=54 SVip54 value
+     * @property {number} SVip55=55 SVip55 value
+     * @property {number} SVip56=56 SVip56 value
+     * @property {number} SVip57=57 SVip57 value
+     * @property {number} SVip58=58 SVip58 value
+     * @property {number} SVip59=59 SVip59 value
+     * @property {number} Max=60 Max value
      */
     pb.GamePropertyId = (function () {
         var valuesById = {}, values = Object.create(valuesById);
@@ -1400,7 +1434,37 @@ $root.pb = (function () {
         values[valuesById[27] = "Tester"] = 27;
         values[valuesById[28] = "VipExpiration"] = 28;
         values[valuesById[29] = "RMB"] = 29;
-        values[valuesById[30] = "Max"] = 30;
+        values[valuesById[30] = "SVip30"] = 30;
+        values[valuesById[31] = "SVip31"] = 31;
+        values[valuesById[32] = "SVip32"] = 32;
+        values[valuesById[33] = "SVip33"] = 33;
+        values[valuesById[34] = "SVip34"] = 34;
+        values[valuesById[35] = "SVip35"] = 35;
+        values[valuesById[36] = "SVip36"] = 36;
+        values[valuesById[37] = "SVip37"] = 37;
+        values[valuesById[38] = "SVip38"] = 38;
+        values[valuesById[39] = "SVip39"] = 39;
+        values[valuesById[40] = "SVip40"] = 40;
+        values[valuesById[41] = "SVip41"] = 41;
+        values[valuesById[42] = "SVip42"] = 42;
+        values[valuesById[43] = "SVip43"] = 43;
+        values[valuesById[44] = "SVip44"] = 44;
+        values[valuesById[45] = "SVip45"] = 45;
+        values[valuesById[46] = "SVip46"] = 46;
+        values[valuesById[47] = "SVip47"] = 47;
+        values[valuesById[48] = "SVip48"] = 48;
+        values[valuesById[49] = "SVip49"] = 49;
+        values[valuesById[50] = "SVip50"] = 50;
+        values[valuesById[51] = "SVip51"] = 51;
+        values[valuesById[52] = "SVip52"] = 52;
+        values[valuesById[53] = "SVip53"] = 53;
+        values[valuesById[54] = "SVip54"] = 54;
+        values[valuesById[55] = "SVip55"] = 55;
+        values[valuesById[56] = "SVip56"] = 56;
+        values[valuesById[57] = "SVip57"] = 57;
+        values[valuesById[58] = "SVip58"] = 58;
+        values[valuesById[59] = "SVip59"] = 59;
+        values[valuesById[60] = "Max"] = 60;
         return values;
     })();
 
@@ -2202,6 +2266,8 @@ $root.pb = (function () {
                     case 13:
                     case 7:
                     case 8:
+                    case 17:
+                    case 18:
                     case 30:
                         break;
                 }
@@ -2290,6 +2356,14 @@ $root.pb = (function () {
                 case "DaPanJingChai":
                 case 8:
                     message.game = 8;
+                    break;
+                case "ZhengGu":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "JianGu":
+                case 18:
+                    message.game = 18;
                     break;
                 case "MaxGameType":
                 case 30:
@@ -6596,6 +6670,36 @@ $root.pb = (function () {
                     case 28:
                     case 29:
                     case 30:
+                    case 31:
+                    case 32:
+                    case 33:
+                    case 34:
+                    case 35:
+                    case 36:
+                    case 37:
+                    case 38:
+                    case 39:
+                    case 40:
+                    case 41:
+                    case 42:
+                    case 43:
+                    case 44:
+                    case 45:
+                    case 46:
+                    case 47:
+                    case 48:
+                    case 49:
+                    case 50:
+                    case 51:
+                    case 52:
+                    case 53:
+                    case 54:
+                    case 55:
+                    case 56:
+                    case 57:
+                    case 58:
+                    case 59:
+                    case 60:
                         break;
                 }
             if (message.oldValue != null && message.hasOwnProperty("oldValue"))
@@ -6688,9 +6792,129 @@ $root.pb = (function () {
                 case 29:
                     message.id = 29;
                     break;
-                case "Max":
+                case "SVip30":
                 case 30:
                     message.id = 30;
+                    break;
+                case "SVip31":
+                case 31:
+                    message.id = 31;
+                    break;
+                case "SVip32":
+                case 32:
+                    message.id = 32;
+                    break;
+                case "SVip33":
+                case 33:
+                    message.id = 33;
+                    break;
+                case "SVip34":
+                case 34:
+                    message.id = 34;
+                    break;
+                case "SVip35":
+                case 35:
+                    message.id = 35;
+                    break;
+                case "SVip36":
+                case 36:
+                    message.id = 36;
+                    break;
+                case "SVip37":
+                case 37:
+                    message.id = 37;
+                    break;
+                case "SVip38":
+                case 38:
+                    message.id = 38;
+                    break;
+                case "SVip39":
+                case 39:
+                    message.id = 39;
+                    break;
+                case "SVip40":
+                case 40:
+                    message.id = 40;
+                    break;
+                case "SVip41":
+                case 41:
+                    message.id = 41;
+                    break;
+                case "SVip42":
+                case 42:
+                    message.id = 42;
+                    break;
+                case "SVip43":
+                case 43:
+                    message.id = 43;
+                    break;
+                case "SVip44":
+                case 44:
+                    message.id = 44;
+                    break;
+                case "SVip45":
+                case 45:
+                    message.id = 45;
+                    break;
+                case "SVip46":
+                case 46:
+                    message.id = 46;
+                    break;
+                case "SVip47":
+                case 47:
+                    message.id = 47;
+                    break;
+                case "SVip48":
+                case 48:
+                    message.id = 48;
+                    break;
+                case "SVip49":
+                case 49:
+                    message.id = 49;
+                    break;
+                case "SVip50":
+                case 50:
+                    message.id = 50;
+                    break;
+                case "SVip51":
+                case 51:
+                    message.id = 51;
+                    break;
+                case "SVip52":
+                case 52:
+                    message.id = 52;
+                    break;
+                case "SVip53":
+                case 53:
+                    message.id = 53;
+                    break;
+                case "SVip54":
+                case 54:
+                    message.id = 54;
+                    break;
+                case "SVip55":
+                case 55:
+                    message.id = 55;
+                    break;
+                case "SVip56":
+                case 56:
+                    message.id = 56;
+                    break;
+                case "SVip57":
+                case 57:
+                    message.id = 57;
+                    break;
+                case "SVip58":
+                case 58:
+                    message.id = 58;
+                    break;
+                case "SVip59":
+                case 59:
+                    message.id = 59;
+                    break;
+                case "Max":
+                case 60:
+                    message.id = 60;
                     break;
             }
             if (object.oldValue != null)
@@ -8098,6 +8322,8 @@ $root.pb = (function () {
                     case 13:
                     case 7:
                     case 8:
+                    case 17:
+                    case 18:
                     case 30:
                         break;
                 }
@@ -8235,6 +8461,14 @@ $root.pb = (function () {
                 case "DaPanJingChai":
                 case 8:
                     message.gType = 8;
+                    break;
+                case "ZhengGu":
+                case 17:
+                    message.gType = 17;
+                    break;
+                case "JianGu":
+                case 18:
+                    message.gType = 18;
                     break;
                 case "MaxGameType":
                 case 30:
@@ -10090,6 +10324,8 @@ $root.pb = (function () {
                     case 13:
                     case 7:
                     case 8:
+                    case 17:
+                    case 18:
                     case 30:
                         break;
                 }
@@ -10172,6 +10408,14 @@ $root.pb = (function () {
                 case "DaPanJingChai":
                 case 8:
                     message.game = 8;
+                    break;
+                case "ZhengGu":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "JianGu":
+                case 18:
+                    message.game = 18;
                     break;
                 case "MaxGameType":
                 case 30:
@@ -11495,6 +11739,8 @@ $root.pb = (function () {
                     case 13:
                     case 7:
                     case 8:
+                    case 17:
+                    case 18:
                     case 30:
                         break;
                 }
@@ -11580,6 +11826,14 @@ $root.pb = (function () {
                 case "DaPanJingChai":
                 case 8:
                     message.game = 8;
+                    break;
+                case "ZhengGu":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "JianGu":
+                case 18:
+                    message.game = 18;
                     break;
                 case "MaxGameType":
                 case 30:
@@ -12273,6 +12527,8 @@ $root.pb = (function () {
                     case 13:
                     case 7:
                     case 8:
+                    case 17:
+                    case 18:
                     case 30:
                         break;
                 }
@@ -12369,6 +12625,14 @@ $root.pb = (function () {
                 case "DaPanJingChai":
                 case 8:
                     message.gType = 8;
+                    break;
+                case "ZhengGu":
+                case 17:
+                    message.gType = 17;
+                    break;
+                case "JianGu":
+                case 18:
+                    message.gType = 18;
                     break;
                 case "MaxGameType":
                 case 30:
@@ -13060,6 +13324,8 @@ $root.pb = (function () {
                     case 13:
                     case 7:
                     case 8:
+                    case 17:
+                    case 18:
                     case 30:
                         break;
                 }
@@ -13142,6 +13408,14 @@ $root.pb = (function () {
                 case "DaPanJingChai":
                 case 8:
                     message.gType = 8;
+                    break;
+                case "ZhengGu":
+                case 17:
+                    message.gType = 17;
+                    break;
+                case "JianGu":
+                case 18:
+                    message.gType = 18;
                     break;
                 case "MaxGameType":
                 case 30:
@@ -13677,6 +13951,7 @@ $root.pb = (function () {
          * @property {number|null} [capital] CmdRoomCreate capital
          * @property {string|null} [pwd] CmdRoomCreate pwd
          * @property {Array.<number>|null} [junXian] CmdRoomCreate junXian
+         * @property {string|null} [wxHeadicon] CmdRoomCreate wxHeadicon
          */
 
         /**
@@ -13744,6 +14019,14 @@ $root.pb = (function () {
         CmdRoomCreate.prototype.junXian = $util.emptyArray;
 
         /**
+         * CmdRoomCreate wxHeadicon.
+         * @member {string} wxHeadicon
+         * @memberof pb.CmdRoomCreate
+         * @instance
+         */
+        CmdRoomCreate.prototype.wxHeadicon = "";
+
+        /**
          * Creates a new CmdRoomCreate instance using the specified properties.
          * @function create
          * @memberof pb.CmdRoomCreate
@@ -13783,6 +14066,8 @@ $root.pb = (function () {
                     writer.int32(message.junXian[i]);
                 writer.ldelim();
             }
+            if (message.wxHeadicon != null && Object.hasOwnProperty.call(message, "wxHeadicon"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.wxHeadicon);
             return writer;
         };
 
@@ -13842,6 +14127,9 @@ $root.pb = (function () {
                         } else
                             message.junXian.push(reader.int32());
                         break;
+                    case 7:
+                        message.wxHeadicon = reader.string();
+                        break;
                     default:
                         reader.skipType(tag & 7);
                         break;
@@ -13897,6 +14185,8 @@ $root.pb = (function () {
                     case 13:
                     case 7:
                     case 8:
+                    case 17:
+                    case 18:
                     case 30:
                         break;
                 }
@@ -13919,6 +14209,9 @@ $root.pb = (function () {
                     if (!$util.isInteger(message.junXian[i]))
                         return "junXian: integer[] expected";
             }
+            if (message.wxHeadicon != null && message.hasOwnProperty("wxHeadicon"))
+                if (!$util.isString(message.wxHeadicon))
+                    return "wxHeadicon: string expected";
             return null;
         };
 
@@ -13999,6 +14292,14 @@ $root.pb = (function () {
                 case 8:
                     message.game = 8;
                     break;
+                case "ZhengGu":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "JianGu":
+                case 18:
+                    message.game = 18;
+                    break;
                 case "MaxGameType":
                 case 30:
                     message.game = 30;
@@ -14019,6 +14320,8 @@ $root.pb = (function () {
                 for (var i = 0; i < object.junXian.length; ++i)
                     message.junXian[i] = object.junXian[i] | 0;
             }
+            if (object.wxHeadicon != null)
+                message.wxHeadicon = String(object.wxHeadicon);
             return message;
         };
 
@@ -14043,6 +14346,7 @@ $root.pb = (function () {
                 object.node = 0;
                 object.capital = 0;
                 object.pwd = "";
+                object.wxHeadicon = "";
             }
             if (message.game != null && message.hasOwnProperty("game"))
                 object.game = options.enums === String ? $root.pb.GameType[message.game] : message.game;
@@ -14059,6 +14363,8 @@ $root.pb = (function () {
                 for (var j = 0; j < message.junXian.length; ++j)
                     object.junXian[j] = message.junXian[j];
             }
+            if (message.wxHeadicon != null && message.hasOwnProperty("wxHeadicon"))
+                object.wxHeadicon = message.wxHeadicon;
             return object;
         };
 
@@ -14303,6 +14609,7 @@ $root.pb = (function () {
          * @property {number|null} [node] CmdRoomEnter node
          * @property {string|null} [pwd] CmdRoomEnter pwd
          * @property {Array.<number>|null} [junXian] CmdRoomEnter junXian
+         * @property {string|null} [wxHeadicon] CmdRoomEnter wxHeadicon
          */
 
         /**
@@ -14370,6 +14677,14 @@ $root.pb = (function () {
         CmdRoomEnter.prototype.junXian = $util.emptyArray;
 
         /**
+         * CmdRoomEnter wxHeadicon.
+         * @member {string} wxHeadicon
+         * @memberof pb.CmdRoomEnter
+         * @instance
+         */
+        CmdRoomEnter.prototype.wxHeadicon = "";
+
+        /**
          * Creates a new CmdRoomEnter instance using the specified properties.
          * @function create
          * @memberof pb.CmdRoomEnter
@@ -14409,6 +14724,8 @@ $root.pb = (function () {
                     writer.int32(message.junXian[i]);
                 writer.ldelim();
             }
+            if (message.wxHeadicon != null && Object.hasOwnProperty.call(message, "wxHeadicon"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.wxHeadicon);
             return writer;
         };
 
@@ -14468,6 +14785,9 @@ $root.pb = (function () {
                         } else
                             message.junXian.push(reader.int32());
                         break;
+                    case 7:
+                        message.wxHeadicon = reader.string();
+                        break;
                     default:
                         reader.skipType(tag & 7);
                         break;
@@ -14526,6 +14846,8 @@ $root.pb = (function () {
                     case 13:
                     case 7:
                     case 8:
+                    case 17:
+                    case 18:
                     case 30:
                         break;
                 }
@@ -14545,6 +14867,9 @@ $root.pb = (function () {
                     if (!$util.isInteger(message.junXian[i]))
                         return "junXian: integer[] expected";
             }
+            if (message.wxHeadicon != null && message.hasOwnProperty("wxHeadicon"))
+                if (!$util.isString(message.wxHeadicon))
+                    return "wxHeadicon: string expected";
             return null;
         };
 
@@ -14627,6 +14952,14 @@ $root.pb = (function () {
                 case 8:
                     message.game = 8;
                     break;
+                case "ZhengGu":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "JianGu":
+                case 18:
+                    message.game = 18;
+                    break;
                 case "MaxGameType":
                 case 30:
                     message.game = 30;
@@ -14645,6 +14978,8 @@ $root.pb = (function () {
                 for (var i = 0; i < object.junXian.length; ++i)
                     message.junXian[i] = object.junXian[i] | 0;
             }
+            if (object.wxHeadicon != null)
+                message.wxHeadicon = String(object.wxHeadicon);
             return message;
         };
 
@@ -14669,6 +15004,7 @@ $root.pb = (function () {
                 object.uid = 0;
                 object.node = 0;
                 object.pwd = "";
+                object.wxHeadicon = "";
             }
             if (message.id != null && message.hasOwnProperty("id"))
                 object.id = message.id;
@@ -14685,6 +15021,8 @@ $root.pb = (function () {
                 for (var j = 0; j < message.junXian.length; ++j)
                     object.junXian[j] = message.junXian[j];
             }
+            if (message.wxHeadicon != null && message.hasOwnProperty("wxHeadicon"))
+                object.wxHeadicon = message.wxHeadicon;
             return object;
         };
 
@@ -15350,6 +15688,8 @@ $root.pb = (function () {
          * @property {number|null} [id] SyncRoomEnter id
          * @property {pb.GameType|null} [game] SyncRoomEnter game
          * @property {pb.IGameData|null} [player] SyncRoomEnter player
+         * @property {Array.<number>|null} [junXian] SyncRoomEnter junXian
+         * @property {string|null} [wxHeadicon] SyncRoomEnter wxHeadicon
          */
 
         /**
@@ -15361,6 +15701,7 @@ $root.pb = (function () {
          * @param {pb.ISyncRoomEnter=} [properties] Properties to set
          */
         function SyncRoomEnter(properties) {
+            this.junXian = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -15392,6 +15733,22 @@ $root.pb = (function () {
         SyncRoomEnter.prototype.player = null;
 
         /**
+         * SyncRoomEnter junXian.
+         * @member {Array.<number>} junXian
+         * @memberof pb.SyncRoomEnter
+         * @instance
+         */
+        SyncRoomEnter.prototype.junXian = $util.emptyArray;
+
+        /**
+         * SyncRoomEnter wxHeadicon.
+         * @member {string} wxHeadicon
+         * @memberof pb.SyncRoomEnter
+         * @instance
+         */
+        SyncRoomEnter.prototype.wxHeadicon = "";
+
+        /**
          * Creates a new SyncRoomEnter instance using the specified properties.
          * @function create
          * @memberof pb.SyncRoomEnter
@@ -15421,6 +15778,14 @@ $root.pb = (function () {
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.game);
             if (message.player != null && Object.hasOwnProperty.call(message, "player"))
                 $root.pb.GameData.encode(message.player, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.junXian != null && message.junXian.length) {
+                writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                for (var i = 0; i < message.junXian.length; ++i)
+                    writer.int32(message.junXian[i]);
+                writer.ldelim();
+            }
+            if (message.wxHeadicon != null && Object.hasOwnProperty.call(message, "wxHeadicon"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.wxHeadicon);
             return writer;
         };
 
@@ -15463,6 +15828,19 @@ $root.pb = (function () {
                         break;
                     case 3:
                         message.player = $root.pb.GameData.decode(reader, reader.uint32());
+                        break;
+                    case 4:
+                        if (!(message.junXian && message.junXian.length))
+                            message.junXian = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.junXian.push(reader.int32());
+                        } else
+                            message.junXian.push(reader.int32());
+                        break;
+                    case 5:
+                        message.wxHeadicon = reader.string();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -15522,6 +15900,8 @@ $root.pb = (function () {
                     case 13:
                     case 7:
                     case 8:
+                    case 17:
+                    case 18:
                     case 30:
                         break;
                 }
@@ -15530,6 +15910,16 @@ $root.pb = (function () {
                 if (error)
                     return "player." + error;
             }
+            if (message.junXian != null && message.hasOwnProperty("junXian")) {
+                if (!Array.isArray(message.junXian))
+                    return "junXian: array expected";
+                for (var i = 0; i < message.junXian.length; ++i)
+                    if (!$util.isInteger(message.junXian[i]))
+                        return "junXian: integer[] expected";
+            }
+            if (message.wxHeadicon != null && message.hasOwnProperty("wxHeadicon"))
+                if (!$util.isString(message.wxHeadicon))
+                    return "wxHeadicon: string expected";
             return null;
         };
 
@@ -15612,6 +16002,14 @@ $root.pb = (function () {
                 case 8:
                     message.game = 8;
                     break;
+                case "ZhengGu":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "JianGu":
+                case 18:
+                    message.game = 18;
+                    break;
                 case "MaxGameType":
                 case 30:
                     message.game = 30;
@@ -15622,6 +16020,15 @@ $root.pb = (function () {
                     throw TypeError(".pb.SyncRoomEnter.player: object expected");
                 message.player = $root.pb.GameData.fromObject(object.player);
             }
+            if (object.junXian) {
+                if (!Array.isArray(object.junXian))
+                    throw TypeError(".pb.SyncRoomEnter.junXian: array expected");
+                message.junXian = [];
+                for (var i = 0; i < object.junXian.length; ++i)
+                    message.junXian[i] = object.junXian[i] | 0;
+            }
+            if (object.wxHeadicon != null)
+                message.wxHeadicon = String(object.wxHeadicon);
             return message;
         };
 
@@ -15638,10 +16045,13 @@ $root.pb = (function () {
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.junXian = [];
             if (options.defaults) {
                 object.id = 0;
                 object.game = options.enums === String ? "GameType_NULL" : 0;
                 object.player = null;
+                object.wxHeadicon = "";
             }
             if (message.id != null && message.hasOwnProperty("id"))
                 object.id = message.id;
@@ -15649,6 +16059,13 @@ $root.pb = (function () {
                 object.game = options.enums === String ? $root.pb.GameType[message.game] : message.game;
             if (message.player != null && message.hasOwnProperty("player"))
                 object.player = $root.pb.GameData.toObject(message.player, options);
+            if (message.junXian && message.junXian.length) {
+                object.junXian = [];
+                for (var j = 0; j < message.junXian.length; ++j)
+                    object.junXian[j] = message.junXian[j];
+            }
+            if (message.wxHeadicon != null && message.hasOwnProperty("wxHeadicon"))
+                object.wxHeadicon = message.wxHeadicon;
             return object;
         };
 
@@ -15847,6 +16264,8 @@ $root.pb = (function () {
                     case 13:
                     case 7:
                     case 8:
+                    case 17:
+                    case 18:
                     case 30:
                         break;
                 }
@@ -15934,6 +16353,14 @@ $root.pb = (function () {
                 case "DaPanJingChai":
                 case 8:
                     message.game = 8;
+                    break;
+                case "ZhengGu":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "JianGu":
+                case 18:
+                    message.game = 18;
                     break;
                 case "MaxGameType":
                 case 30:
@@ -17097,6 +17524,8 @@ $root.pb = (function () {
                     case 13:
                     case 7:
                     case 8:
+                    case 17:
+                    case 18:
                     case 30:
                         break;
                 }
@@ -17191,6 +17620,14 @@ $root.pb = (function () {
                 case 8:
                     message.game = 8;
                     break;
+                case "ZhengGu":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "JianGu":
+                case 18:
+                    message.game = 18;
+                    break;
                 case "MaxGameType":
                 case 30:
                     message.game = 30;
@@ -17274,6 +17711,7 @@ $root.pb = (function () {
          * @property {pb.IGameResult|null} [result] RoomPlayer result
          * @property {number|Long|null} [curPos] RoomPlayer curPos
          * @property {Array.<number>|null} [junXian] RoomPlayer junXian
+         * @property {string|null} [wxHeadicon] RoomPlayer wxHeadicon
          */
 
         /**
@@ -17349,6 +17787,14 @@ $root.pb = (function () {
         RoomPlayer.prototype.junXian = $util.emptyArray;
 
         /**
+         * RoomPlayer wxHeadicon.
+         * @member {string} wxHeadicon
+         * @memberof pb.RoomPlayer
+         * @instance
+         */
+        RoomPlayer.prototype.wxHeadicon = "";
+
+        /**
          * Creates a new RoomPlayer instance using the specified properties.
          * @function create
          * @memberof pb.RoomPlayer
@@ -17390,6 +17836,8 @@ $root.pb = (function () {
                     writer.int32(message.junXian[i]);
                 writer.ldelim();
             }
+            if (message.wxHeadicon != null && Object.hasOwnProperty.call(message, "wxHeadicon"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.wxHeadicon);
             return writer;
         };
 
@@ -17451,6 +17899,9 @@ $root.pb = (function () {
                                 message.junXian.push(reader.int32());
                         } else
                             message.junXian.push(reader.int32());
+                        break;
+                    case 8:
+                        message.wxHeadicon = reader.string();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -17518,6 +17969,9 @@ $root.pb = (function () {
                     if (!$util.isInteger(message.junXian[i]))
                         return "junXian: integer[] expected";
             }
+            if (message.wxHeadicon != null && message.hasOwnProperty("wxHeadicon"))
+                if (!$util.isString(message.wxHeadicon))
+                    return "wxHeadicon: string expected";
             return null;
         };
 
@@ -17568,6 +18022,8 @@ $root.pb = (function () {
                 for (var i = 0; i < object.junXian.length; ++i)
                     message.junXian[i] = object.junXian[i] | 0;
             }
+            if (object.wxHeadicon != null)
+                message.wxHeadicon = String(object.wxHeadicon);
             return message;
         };
 
@@ -17597,6 +18053,7 @@ $root.pb = (function () {
                     object.curPos = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.curPos = options.longs === String ? "0" : 0;
+                object.wxHeadicon = "";
             }
             if (message.gd != null && message.hasOwnProperty("gd"))
                 object.gd = $root.pb.GameData.toObject(message.gd, options);
@@ -17618,6 +18075,8 @@ $root.pb = (function () {
                 for (var j = 0; j < message.junXian.length; ++j)
                     object.junXian[j] = message.junXian[j];
             }
+            if (message.wxHeadicon != null && message.hasOwnProperty("wxHeadicon"))
+                object.wxHeadicon = message.wxHeadicon;
             return object;
         };
 
@@ -17974,6 +18433,8 @@ $root.pb = (function () {
                     case 13:
                     case 7:
                     case 8:
+                    case 17:
+                    case 18:
                     case 30:
                         break;
                 }
@@ -18118,6 +18579,14 @@ $root.pb = (function () {
                 case "DaPanJingChai":
                 case 8:
                     message.game = 8;
+                    break;
+                case "ZhengGu":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "JianGu":
+                case 18:
+                    message.game = 18;
                     break;
                 case "MaxGameType":
                 case 30:
@@ -45423,6 +45892,8 @@ $root.pb = (function () {
                     case 13:
                     case 7:
                     case 8:
+                    case 17:
+                    case 18:
                     case 30:
                         break;
                 }
@@ -45530,6 +46001,14 @@ $root.pb = (function () {
                 case "DaPanJingChai":
                 case 8:
                     message.game = 8;
+                    break;
+                case "ZhengGu":
+                case 17:
+                    message.game = 17;
+                    break;
+                case "JianGu":
+                case 18:
+                    message.game = 18;
                     break;
                 case "MaxGameType":
                 case 30:

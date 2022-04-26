@@ -2,6 +2,7 @@ import { pb } from "../../../protos/proto";
 import GameData from "../../../sctiprs/GameData";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import LoadImg from "../../../sctiprs/Utils/LoadImg";
 import PopupManager from "../../../sctiprs/Utils/PopupManager";
 
 
@@ -122,7 +123,7 @@ export default class NewClass extends cc.Component {
             this.head.spriteFrame = GameData.imgs[obj.icon + '']
         }
         else {
-            ComUtils.onLoadHead(obj.icon, (texture) => {
+            LoadImg.onLoadHeadByUid(obj.icon, (texture) => {
                 if (texture) {
                     GameData.imgs[obj.icon + ''] = new cc.SpriteFrame(texture);
                     this.head.spriteFrame = GameData.imgs[obj.icon + '']

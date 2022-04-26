@@ -347,4 +347,6 @@ export default class GameData {
     public static haoYouFangData = null;
 
     public static leaveUid = null;
+
+    public static otherHead = null;
 }

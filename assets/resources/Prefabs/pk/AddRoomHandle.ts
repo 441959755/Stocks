@@ -68,6 +68,7 @@ export default class NewClass extends cc.Component {
             id: parseInt(roomid),
             uid: GameData.userID,
             junXian: arr,
+            wxHeadicon: GameData.headimgurl,
         }
 
         let CmdRoomEnter = pb.CmdRoomEnter;

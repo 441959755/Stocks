@@ -352,18 +352,7 @@ export default class ComUtils {
 		return num.toFixed(2);
 	}
 
-	//加载头像
-	public static onLoadHead(name, call) {
-		if (!name) {
-			name = 0;
-		}
 
-		let url = LLWConfig.LoginURL + '/icon/' + name + '.png';
-
-		LoadUtils.load(url, (res) => {
-			call && call(res);
-		})
-	}
 
 	public static getJJXunXian() {
 		let arr = [];

@@ -360,10 +360,13 @@ export default class NewClass extends cc.Component {
 					uid: GameData.userID,
 					capital: 0,
 					junXian: ComUtils.getJJXunXian(),
+					wxHeadicon: GameData.headimgurl,
 				}
 				let CmdRoomCreate = pb.CmdRoomCreate;
 				let message = CmdRoomCreate.create(info);
 				let buff = CmdRoomCreate.encode(message).finish();
+
+				console.log(JSON.stringify(info));
 
 				socket.send(pb.MessageId.Req_Room_Create, buff, (res) => {
 					console.log('创建房间应答' + JSON.stringify(res));

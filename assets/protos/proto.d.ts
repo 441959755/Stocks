@@ -651,6 +651,8 @@ export namespace pb {
         ChaoGuDaSai = 13,
         GeGuJingChai = 7,
         DaPanJingChai = 8,
+        ZhengGu = 17,
+        JianGu = 18,
         MaxGameType = 30
     }
 
@@ -673,7 +675,37 @@ export namespace pb {
         Tester = 27,
         VipExpiration = 28,
         RMB = 29,
-        Max = 30
+        SVip30 = 30,
+        SVip31 = 31,
+        SVip32 = 32,
+        SVip33 = 33,
+        SVip34 = 34,
+        SVip35 = 35,
+        SVip36 = 36,
+        SVip37 = 37,
+        SVip38 = 38,
+        SVip39 = 39,
+        SVip40 = 40,
+        SVip41 = 41,
+        SVip42 = 42,
+        SVip43 = 43,
+        SVip44 = 44,
+        SVip45 = 45,
+        SVip46 = 46,
+        SVip47 = 47,
+        SVip48 = 48,
+        SVip49 = 49,
+        SVip50 = 50,
+        SVip51 = 51,
+        SVip52 = 52,
+        SVip53 = 53,
+        SVip54 = 54,
+        SVip55 = 55,
+        SVip56 = 56,
+        SVip57 = 57,
+        SVip58 = 58,
+        SVip59 = 59,
+        Max = 60
     }
 
     /** EventId enum. */
@@ -5145,6 +5177,9 @@ export namespace pb {
 
         /** CmdRoomCreate junXian */
         junXian?: (number[]|null);
+
+        /** CmdRoomCreate wxHeadicon */
+        wxHeadicon?: (string|null);
     }
 
     /** Represents a CmdRoomCreate. */
@@ -5173,6 +5208,9 @@ export namespace pb {
 
         /** CmdRoomCreate junXian. */
         public junXian: number[];
+
+        /** CmdRoomCreate wxHeadicon. */
+        public wxHeadicon: string;
 
         /**
          * Creates a new CmdRoomCreate instance using the specified properties.
@@ -5361,6 +5399,9 @@ export namespace pb {
 
         /** CmdRoomEnter junXian */
         junXian?: (number[]|null);
+
+        /** CmdRoomEnter wxHeadicon */
+        wxHeadicon?: (string|null);
     }
 
     /** Represents a CmdRoomEnter. */
@@ -5389,6 +5430,9 @@ export namespace pb {
 
         /** CmdRoomEnter junXian. */
         public junXian: number[];
+
+        /** CmdRoomEnter wxHeadicon. */
+        public wxHeadicon: string;
 
         /**
          * Creates a new CmdRoomEnter instance using the specified properties.
@@ -5760,6 +5804,12 @@ export namespace pb {
 
         /** SyncRoomEnter player */
         player?: (pb.IGameData|null);
+
+        /** SyncRoomEnter junXian */
+        junXian?: (number[]|null);
+
+        /** SyncRoomEnter wxHeadicon */
+        wxHeadicon?: (string|null);
     }
 
     /** Represents a SyncRoomEnter. */
@@ -5779,6 +5829,12 @@ export namespace pb {
 
         /** SyncRoomEnter player. */
         public player?: (pb.IGameData|null);
+
+        /** SyncRoomEnter junXian. */
+        public junXian: number[];
+
+        /** SyncRoomEnter wxHeadicon. */
+        public wxHeadicon: string;
 
         /**
          * Creates a new SyncRoomEnter instance using the specified properties.
@@ -6486,6 +6542,9 @@ export namespace pb {
 
         /** RoomPlayer junXian */
         junXian?: (number[]|null);
+
+        /** RoomPlayer wxHeadicon */
+        wxHeadicon?: (string|null);
     }
 
     /** Represents a RoomPlayer. */
@@ -6517,6 +6576,9 @@ export namespace pb {
 
         /** RoomPlayer junXian. */
         public junXian: number[];
+
+        /** RoomPlayer wxHeadicon. */
+        public wxHeadicon: string;
 
         /**
          * Creates a new RoomPlayer instance using the specified properties.

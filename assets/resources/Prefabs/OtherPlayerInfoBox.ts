@@ -62,9 +62,11 @@ export default class NewClass extends cc.Component {
         if (!otherInfo) { return }
         this.otherInfo = otherInfo;
         this.headImg.spriteFrame = this.defaultImg;
-        if (otherInfo.icon) {
-            this.headImg.spriteFrame = otherInfo.icon;
+
+        if (GameData.imgs[otherInfo.icon + '']) {
+            this.headImg.spriteFrame = GameData.imgs[otherInfo.icon + ''];
         }
+
         this.userID.string = 'I    D：' + otherInfo.uid;
 
         this.userName.string = '昵称：' + (otherInfo.nickname || otherInfo.nick);

@@ -7,6 +7,7 @@ import GlobalHandle from "../../../sctiprs/global/GlobalHandle";
 import ComUtils from "../../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../../sctiprs/Utils/GlobalEvent";
+import LoadImg from "../../../sctiprs/Utils/LoadImg";
 
 const { ccclass, property } = cc._decorator;
 
@@ -90,7 +91,7 @@ export default class NewClass extends cc.Component {
 
         head.getComponent(cc.Sprite).spriteFrame = this.defaultHead;
 
-        ComUtils.onLoadHead(GameData.Players[1].icon, (res) => {
+        LoadImg.onLoadHeadByUid(GameData.Players[1].icon, (res) => {
             this.callBack && (clearInterval(this.callBack));
             this.callBack = null;
             if (res) {

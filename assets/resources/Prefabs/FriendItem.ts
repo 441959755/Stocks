@@ -3,6 +3,7 @@ import GameData from "../../sctiprs/GameData";
 import ComUtils from "../../sctiprs/Utils/ComUtils";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
+import LoadImg from "../../sctiprs/Utils/LoadImg";
 import PopupManager from "../../sctiprs/Utils/PopupManager";
 
 const { ccclass, property } = cc._decorator;
@@ -81,7 +82,7 @@ export default class NewClass extends cc.Component {
             this.head.spriteFrame = GameData.imgs[obj.uid + '']
         }
         else {
-            ComUtils.onLoadHead(obj.uid, (texture) => {
+            LoadImg.onLoadHeadByUid(obj.uid, (texture) => {
                 if (texture) {
                     GameData.imgs[obj.uid + ''] = new cc.SpriteFrame(texture);
                     this.head.spriteFrame = GameData.imgs[obj.uid + '']

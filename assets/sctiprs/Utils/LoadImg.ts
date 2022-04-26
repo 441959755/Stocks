@@ -1,3 +1,7 @@
+import LLWConfig from "../common/config/LLWConfig";
+import GameData from "../GameData";
+import LoadUtils from "./LoadUtils";
+
 export default {
 
     loadImage(url, callback, caller) {
@@ -155,7 +159,44 @@ export default {
             byteArrays[sliceIndex] = new Uint8Array(bytes);
         }
         return new Blob(byteArrays, { type: contentType });
+    },
+
+    //加载头像
+    onLoadHeadByUid(uid, call) {
+
+        if (!uid) {
+            uid = 0;
+        }
+
+        //TODO  暂时添加
+        if (uid != GameData.userID) {
+            uid = 0;
+        }
+
+        let url = LLWConfig.LoginURL + '/icon/' + uid + '.png';
+
+        LoadUtils.load(url, (res) => {
+            call && call(res);
+        })
+    },
+
+    //加载头像
+    onLoadHeadByUrl(url, call) {
+
+        if (!url) {
+            console.log('url is null');
+            return;
+        }
+
+        cc.loader.load({ url, type: 'jpg' }, function (err, tex) {
+            if (tex && tex.height != 0) {
+                call(tex);
+            } else {
+                call(null);
+            }
+        });
     }
+
 }
 
 

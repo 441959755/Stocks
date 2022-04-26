@@ -69,7 +69,7 @@ export default class NewClass extends cc.Component {
             }
         }, this);
 
-        //  LLWSDK.getSDK().onShow(this.addRoom.bind(this));
+        LLWSDK.getSDK().onShow(this.addRoom.bind(this));
 
         GlobalEvent.on(EventCfg.RoomGameDataing, (message) => {
             if (!this.gameLayer.active) {
@@ -433,6 +433,7 @@ export default class NewClass extends cc.Component {
                 id: parseInt(GameData.query),
                 uid: GameData.userID,
                 junXian: arr,
+                wxHeadicon: GameData.headimgurl,
             }
 
             console.log('进入房间10' + JSON.stringify(data));
