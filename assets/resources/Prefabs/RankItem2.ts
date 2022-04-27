@@ -102,7 +102,7 @@ export default class NewClass extends cc.Component {
 
             //打开信息面板
             this.getPlayerInfo((info) => {
-                info.icon = GameData.imgs[this._info.icon + ''];
+                // info.icon = GameData.imgs[this._info.icon + ''];
                 PopupManager.openOtherPlayerInfoLayer(info);
             })
 
