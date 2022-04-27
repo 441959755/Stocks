@@ -168,12 +168,7 @@ export default {
             uid = 0;
         }
 
-        //TODO  暂时添加
-        if (uid != GameData.userID) {
-            uid = 0;
-        }
-
-        let url = LLWConfig.LoginURL + '/icon/' + uid + '.png';
+        let url = LLWConfig.LoginURL + '/iconwx/' + uid + '.png';
 
         LoadUtils.load(url, (res) => {
             call && call(res);
