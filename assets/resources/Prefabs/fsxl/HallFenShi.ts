@@ -348,7 +348,9 @@ export default class HallFenShi extends cc.Component {
 
 
     onStartGame() {
+
         GlobalEvent.emit(EventCfg.LOADINGSHOW);
+
         let ktype = pb.KType.Min;
 
         let tDate = this.boxsLa[0].string + this.boxsLa[1].string + this.boxsLa[2].string;
@@ -374,8 +376,6 @@ export default class HallFenShi extends cc.Component {
             code = items1[0];
         }
         else {
-            // items1 = GameCfgText.getItemsByTime1();
-            // code = items1[0];
             items1 = GameCfgText.getGPItemInfo(GameData.FSSet.search);
             code = items1[0];
         }
