@@ -8,7 +8,7 @@ import GameCfg from './GameCfg';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class AddMark extends cc.Component {
 
     @property(cc.Prefab)
     sItem: cc.Prefab = null;

@@ -7,7 +7,7 @@ import DrawUtils from '../Utils/DrawUtils';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class MyspicHandle extends cc.Component {
 
     @property(cc.Graphics)
     draw: cc.Graphics = null;

@@ -3,7 +3,7 @@
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class InviteBox extends cc.Component {
 
     @property(cc.Node)
     item: cc.Node = null;

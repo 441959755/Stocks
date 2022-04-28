@@ -8,7 +8,7 @@ import ComUtils from "../../sctiprs/Utils/ComUtils";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class OtherPlayerInfoBox extends cc.Component {
 
     @property(cc.Sprite)
     headImg: cc.Sprite = null;

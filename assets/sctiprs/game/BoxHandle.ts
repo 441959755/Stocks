@@ -8,7 +8,7 @@ import DrawData from "./DrawData";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class BoxHandle extends cc.Component {
     ma = null;
     boll = null;
 

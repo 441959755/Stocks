@@ -5,7 +5,7 @@ import GameCfg from "./GameCfg";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class BlockHandle extends cc.Component {
 
     @property(cc.Node)
     block1: cc.Node = null;

@@ -4,7 +4,7 @@ import LLWSDK from "../../sctiprs/common/sdk/LLWSDK";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class SericeBox1 extends cc.Component {
 
     @property(cc.Label)
     label: cc.Label = null;
