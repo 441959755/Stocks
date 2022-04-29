@@ -7,7 +7,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class SchoolHandle extends cc.Component {
 
     @property(cc.Label)
     title: cc.Label = null;
