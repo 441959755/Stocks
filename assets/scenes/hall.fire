@@ -4962,7 +4962,7 @@
     "node": {
       "__id__": 76
     },
-    "_enabled": false,
+    "_enabled": true,
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 8,

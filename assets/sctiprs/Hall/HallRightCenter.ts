@@ -61,7 +61,7 @@ export default class NewClass extends cc.Component {
 
     start() {
         if (LLWConfig.PLATTYPE == PlatDefine.PLAT_WECHAT) {
-            return;
+            //    return;
         }
 
         else {

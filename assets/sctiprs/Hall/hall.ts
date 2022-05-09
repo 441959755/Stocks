@@ -104,7 +104,7 @@ export default class NewClass extends cc.Component {
                     GlobalEvent.emit('LOADGAME');
                 }
             }
-        }, 1000)
+        }, 500)
         // //房间已解散  ,给出提示
         // else if (GameData.RoomType && !GameData.roomId) {
         //     GlobalEvent.emit(EventCfg.LOADINGSHOW);
@@ -135,8 +135,6 @@ export default class NewClass extends cc.Component {
         this.finalLayer.forEach(el => {
             el && (el.zIndex = 51);
         })
-
-        console.log(GameData.roomId);
 
         if (GameData.query) {
             this.addRoom();
@@ -417,7 +415,7 @@ export default class NewClass extends cc.Component {
     }
 
     addRoom() {
-        if (GameData.roomId) {
+        if (GameData.roomId || GameData.RoomType) {
             GameData.query = null;
             return
         };
@@ -426,6 +424,12 @@ export default class NewClass extends cc.Component {
             return
         }
         setTimeout(() => {
+
+            if (GameData.roomId || GameData.RoomType) {
+                GameData.query = null;
+                return
+            }
+
             console.log('addRoom');
             let arr = ComUtils.getJJXunXian();
 
@@ -456,7 +460,7 @@ export default class NewClass extends cc.Component {
 
             GameData.RoomType = 2;
             GameData.query = null;
-        }, 800);
+        }, 1000);
     }
 }
 

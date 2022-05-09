@@ -349,4 +349,5 @@ export default class GameData {
     public static leaveUid = null;
 
     public static otherHead = null;
+
 }

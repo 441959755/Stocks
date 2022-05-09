@@ -317,6 +317,8 @@ export default class NewClass extends cc.Component {
             let message = RoomPlayerStatus.create(info);
             let buff = RoomPlayerStatus.encode(message).finish();
 
+            console.log('准备：' + JSON.stringify(info));
+
             socket.send(pb.MessageId.Req_Room_Ready, buff, (res) => {
                 console.log('玩家状态' + JSON.stringify(res));
             })
@@ -339,6 +341,8 @@ export default class NewClass extends cc.Component {
             let RoomPlayerStatus = pb.RoomPlayerStatus;
             let message = RoomPlayerStatus.create(info);
             let buff = RoomPlayerStatus.encode(message).finish();
+
+            console.log('取消准备：' + JSON.stringify(info));
 
             socket.send(pb.MessageId.Req_Room_Ready, buff, (res) => {
                 console.log('玩家状态' + JSON.stringify(res));
