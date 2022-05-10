@@ -6,7 +6,7 @@ import GlobalEvent from "../Utils/GlobalEvent";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class StudyClose extends cc.Component {
 
     @property(cc.Label)
     tishu: cc.Label = null;

@@ -14,7 +14,7 @@ import PopupManager from "../../../sctiprs/Utils/PopupManager";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class QiHuoHandle extends cc.Component {
 
 	DCArr = null; //大连商品交易所
 	SCArr = null; //上海期货交易所
@@ -230,7 +230,6 @@ export default class NewClass extends cc.Component {
 			this.tipsLabel1.node.active = false;
 			this.tipsLabel2.node.active = false;
 			return;
-
 		}
 
 		let gameCount = EnterGameControl.onCurWXIsEnterGame();
@@ -874,9 +873,15 @@ export default class NewClass extends cc.Component {
 			PopupManager.openHelpLayer();
 		}
 
-		// else if (name == 'mfxlBtn') {
-		// 	GlobalEvent.emit("OPENUNLOCKBOX", true);
-		// }
+		else if (name == 'mfxlBtn') {
+			let self = this;
+			PopupManager.openNode(cc.find('Canvas'), null, 'Prefabs/unlockBox', 22, (node) => {
+				node.getComponent('UnlockBox').callback = () => {
+					GlobalEvent.emit(EventCfg.LOADINGSHOW);
+					self.onGameCountShow();
+				}
+			});
+		}
 	}
 
 	QHStartGameSet() {

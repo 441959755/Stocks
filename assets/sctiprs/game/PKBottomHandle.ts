@@ -10,7 +10,7 @@ import GameCfg from "./GameCfg";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class PKBottomHandle extends cc.Component {
 
     @property(cc.Node)
     cutNode: cc.Node = null;

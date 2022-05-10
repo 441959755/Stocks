@@ -12,7 +12,7 @@ import ActionUtils from "../Utils/ActionUtils";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class GameTopHandle extends cc.Component {
 
     @property(cc.Label)
     ALlRateLabel: cc.Label = null;

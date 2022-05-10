@@ -10,7 +10,7 @@ import ComUtils from "../Utils/ComUtils";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class SchoolControl extends cc.Component {
 
     studyData1 = null;
 

@@ -6,7 +6,7 @@ import GameCfg from "../game/GameCfg";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class GameFillNodeHandle extends cc.Component {
 
     @property(cc.Graphics)
     graphics: cc.Graphics = null;

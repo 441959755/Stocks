@@ -7,7 +7,7 @@ import LLWSDK from '../../../sctiprs/common/sdk/LLWSDK';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class SMResrtMoney extends cc.Component {
 
     @property(cc.Label)
     resetMoneyLa: cc.Label = null;
@@ -21,19 +21,6 @@ export default class NewClass extends cc.Component {
     diamond = 0;
 
     gold = 0;
-
-    //  onEnable() {
-    // if (GameData.SmxlState.gold <= GameCfgText.smxlCfg.capital_min.value) {
-    //     this.diamond = Math.abs(GameCfgText.smxlCfg.capital_min.cost[0].v);
-    //     this.resetMoneyLa.string = this.diamond + '钻石';
-    //     this.resetLa.string = this.diamond + '钻石';
-    // }
-    // else if (GameData.SmxlState.gold >= GameCfgText.smxlCfg.capital_max.value) {
-    //     this.gold = Math.abs(GameCfgText.smxlCfg.capital_max.cost[0].v);
-    //     this.resetMoneyLa.string = this.gold + '金币';
-    //     this.resetLa.string = this.gold + '金币';
-    // }
-    //}
 
     protected onEnable(): void {
         if (GameData.vipStatus) {
@@ -100,10 +87,9 @@ export default class NewClass extends cc.Component {
 
     sendSmxlReset() {
         let self = this;
+
         socket.send(pb.MessageId.Req_Game_SmxlReset, null, (data) => {
-
             console.log('重置' + JSON.stringify(data));
-
             if (data && !data.code) {
                 self.node.active = false;
                 GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '双盲本月当前金币重置成功。');

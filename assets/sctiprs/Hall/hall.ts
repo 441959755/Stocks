@@ -14,7 +14,7 @@ import LLWConfig from '../common/config/LLWConfig';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class hall extends cc.Component {
 
     broadcast: cc.Node = null; //广播
 

@@ -9,7 +9,7 @@ import DrawData from "./DrawData";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class DrawHandle extends cc.Component {
 
     @property(cc.Graphics)
     drawBg: cc.Graphics = null;

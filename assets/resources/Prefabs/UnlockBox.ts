@@ -1,15 +1,19 @@
 
+import { pb } from "../../protos/proto";
 import LLWSDK from "../../sctiprs/common/sdk/LLWSDK";
 import GameCfg from "../../sctiprs/game/GameCfg";
 import GameData from "../../sctiprs/GameData";
+import GameCfgText from "../../sctiprs/GameText";
+import EnterGameControl from "../../sctiprs/global/EnterGameControl";
 import EventCfg from "../../sctiprs/Utils/EventCfg";
 import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
+import PopupManager from "../../sctiprs/Utils/PopupManager";
 
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class UnlockBox extends cc.Component {
 
     @property(cc.Button)
     lockBtn: cc.Button = null;
@@ -55,43 +59,56 @@ export default class NewClass extends cc.Component {
     //     }
     // }
 
-    // onEnable() {
-    //     this.addCountBtn.node.active = true;
-    //     this.content1.node.active = true;
+    onEnable() {
 
-    //     if (GameCfg.GameType == pb.GameType.DingXiang) {
-    //         this.lockPrice = Math.abs(GameCfgText.gameConf.dxxl.unlock[0].v);
-    //     }
+        this.addCountBtn.node.active = true;
+        this.content1.node.active = false;
+        let str = '';
 
-    //     else if (GameCfg.GameType == pb.GameType.QiHuo) {
-    //         this.lockPrice = Math.abs(GameCfgText.gameConf.qhxl.unlock[0].v);
-    //     }
+        if (GameCfg.GameType == pb.GameType.DingXiang) {
+            this.lockPrice = Math.abs(GameCfgText.gameConf.dxxl.unlock[0].v);
+            str = '定向训练';
+        }
 
-    //     else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-    //         this.lockPrice = Math.abs(GameCfgText.gameConf.qhxl.unlock[0].v);
-    //         this.addCountBtn.node.active = false;
-    //         this.content1.node.active = false;
-    //     }
+        else if (GameCfg.GameType == pb.GameType.QiHuo) {
+            this.lockPrice = Math.abs(GameCfgText.gameConf.qhxl.unlock[0].v);
+            str = '期货训练';
+        }
 
-    //     else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
-    //         this.lockPrice = Math.abs(GameCfgText.gameConf.tjdxl.unlock[0].v);
-    //     }
+        else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            this.lockPrice = Math.abs(GameCfgText.gameConf.qhxl.unlock[0].v);
+            this.addCountBtn.node.active = false;
+            this.content1.node.active = false;
+            str = '指标训练';
+        }
 
-    //     if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-    //         this.content2.string = '您尚未解锁“指标训练”所有指标的训练权限，' + this.lockPrice + '钻石可解锁30天免费不限次数训练（VIP用户可以直接解锁）';
-    //     }
-    //     else {
-    //         this.content2.string = this.lockPrice + '钻石可解锁30天免费不限次数训练（VIP用户可以直接解锁）';
-    //     }
+        else if (GameCfg.GameType == pb.GameType.TiaoJianDan) {
+            this.lockPrice = Math.abs(GameCfgText.gameConf.tjdxl.unlock[0].v);
+            str = '条件单训练';
+        }
 
-    //     this.tips.string = '-' + this.lockPrice;
+        if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+            this.content2.string = '您尚未解锁“指标训练”所有指标的训练权限，' + this.lockPrice + '钻石可解锁30天免费不限次数训练（VIP用户可以直接解锁）';
+        }
+        else {
+            this.content2.string = '     您尚未解锁“+' + str + '”免费不限次训练功能，' + this.lockPrice + '钻石可解锁30天免费不限次训练，（vip用户可直接解锁）';
+        }
 
-    //     this.unlock.active = true;
+        this.tips.string = '-' + this.lockPrice;
 
-    //     this.ad.active = false;
+        this.unlock.active = true;
 
-    //     this.adCount = EnterGameControl.onCurIsEnterGame();
-    // }
+        this.ad.active = false;
+
+        this.adCount = EnterGameControl.onCurWXIsEnterGame();
+
+        if (this.adCount.status == 1) {
+            this.addCountBtn.node.active = false;
+        }
+        else if (GameCfg.GameType != pb.GameType.ZhiBiao) {
+            this.addCountBtn.node.active = true;
+        }
+    }
 
 
     onBtnClick(event, curdata) {
@@ -103,64 +120,66 @@ export default class NewClass extends cc.Component {
         }
 
         // //解锁
-        // else if (name == 'sys_tck_js') {
+        else if (name == 'sys_tck_js') {
 
-        //     if (GameCfg.GameType == pb.GameType.DingXiang) {
-        //         if (GameData.properties[pb.GamePropertyId.UnlockDxxl]) {
-        //             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '已经解锁!')
-        //             return;
-        //         }
-        //     }
+            if (GameCfg.GameType == pb.GameType.DingXiang) {
+                if (GameData.properties[pb.GamePropertyId.UnlockDxxl]) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '已经解锁!')
+                    return;
+                }
+            }
 
-        //     else if (GameCfg.GameType == pb.GameType.QiHuo) {
-        //         if (GameData.properties[pb.GamePropertyId.UnlockQhxl]) {
-        //             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '已经解锁!')
-        //             return;
-        //         }
-        //     }
+            else if (GameCfg.GameType == pb.GameType.QiHuo) {
+                if (GameData.properties[pb.GamePropertyId.UnlockQhxl]) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '已经解锁!')
+                    return;
+                }
+            }
 
-        //     else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
-        //         if (GameData.properties[pb.GamePropertyId.UnlockZbxl]) {
-        //             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '已经解锁!')
-        //             return;
-        //         }
-        //     }
+            else if (GameCfg.GameType == pb.GameType.ZhiBiao) {
+                if (GameData.properties[pb.GamePropertyId.UnlockZbxl]) {
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '已经解锁!')
+                    return;
+                }
+            }
 
-        //     if (GameData.properties[pb.GamePropertyId.Diamond] >= this.lockPrice) {
+            if (GameData.properties[pb.GamePropertyId.Diamond] >= this.lockPrice) {
 
-        //         let obj = {
-        //             gType: GameCfg.GameType,
-        //         }
+                let obj = {
+                    gType: GameCfg.GameType,
+                }
 
-        //         let CmdUnlockGame = pb.CmdUnlockGame;
-        //         let message = CmdUnlockGame.create(obj);
-        //         let buff = CmdUnlockGame.encode(message).finish();
+                let CmdUnlockGame = pb.CmdUnlockGame;
+                let message = CmdUnlockGame.create(obj);
+                let buff = CmdUnlockGame.encode(message).finish();
 
-        //         socket.send(pb.MessageId.Req_Hall_UnlockGame, buff, (res) => {
-        //             console.log('解锁' + JSON.stringify(res));
-        //             this.node.active = false;
-        //             GlobalEvent.emit(EventCfg.GMAECOUNTERSCHANGE);
-        //             GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '解锁成功');
-        //         });
-        //     }
-        //     else {
-        //         GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '钻石不足');
-        //     }
-        // }
+                socket.send(pb.MessageId.Req_Hall_UnlockGame, buff, (res) => {
+                    console.log('解锁' + JSON.stringify(res));
+                    this.node.active = false;
+                    GlobalEvent.emit(EventCfg.GMAECOUNTERSCHANGE);
+                    GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '解锁成功');
+                });
+            }
+            else {
+                GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '钻石不足');
+            }
+        }
 
-        // //开通vip
-        // else if (name == 'sys_tck_ktvip') {
-
-        //     this.node.active = false;
-
-        //     PopupManager.loadVipExplain();
-        // }
+        //开通vip
+        else if (name == 'sys_tck_ktvip') {
+            this.node.active = false;
+            PopupManager.loadVipExplain();
+        }
 
         //增加次数
         else if (name == 'sys_tck_zjcs') {
-            // this.ad.active = true;
-            // this.unlock.active = false;
-            // this.adShow();
+            this.ad.active = true;
+            this.unlock.active = false;
+            this.adShow();
+        }
+
+        else if (name == 'sys_tck_spzjcs') {
+            //  this.node.active = false;
             LLWSDK.getSDK().showVideoAd((flag) => {
                 if (flag) {
                     GameData.adSucceed += 1;
@@ -172,11 +191,6 @@ export default class NewClass extends cc.Component {
                 }
             })
         }
-
-        // else if (name == 'sys_tck_spzjcs') {
-        //     this.node.active = false;
-        //     this.ADSucceed();
-        // }
     }
 
     adShow() {
@@ -193,9 +207,9 @@ export default class NewClass extends cc.Component {
     }
 
     ADSucceed() {
-        let time = new Date().toLocaleDateString();
-        cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
-        GlobalEvent.emit(EventCfg.GMAECOUNTERSCHANGE);
+        // let time = new Date().toLocaleDateString();
+        // cc.sys.localStorage.setItem(time + 'ADSUCCEED' + GameCfg.GameType, 1);
+        // GlobalEvent.emit(EventCfg.GMAECOUNTERSCHANGE);
     }
 
 }

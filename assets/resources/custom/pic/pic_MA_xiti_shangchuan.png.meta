@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "fcda2aa5-cee1-4de8-9982-2b122d50cfd0",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "pic_MA_xiti_shangchuan": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "1bd6b04c-9761-4807-be1d-6825ff351edf",
+      "importer": "sprite-frame",
       "rawTextureUuid": "fcda2aa5-cee1-4de8-9982-2b122d50cfd0",
       "trimType": "auto",
       "trimThreshold": 1,

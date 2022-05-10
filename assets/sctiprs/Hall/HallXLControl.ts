@@ -8,7 +8,7 @@ import PopupManager from "../Utils/PopupManager";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class HallXLControl extends cc.Component {
 
     onLoad() {
         GlobalEvent.on(EventCfg.OPENSMLAYER, this.openSMLayer.bind(this), this);
@@ -123,7 +123,7 @@ export default class NewClass extends cc.Component {
         PopupManager.openNode(this.node, null, str, 10, (node) => {
             ActionUtils.openBox(node);
         });
-    }
+    }  
 
     /**
      * 双盲

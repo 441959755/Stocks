@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "955d11c7-865d-498e-9694-400b3bbb549f",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "xl_shijian_shuomingbg2": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "5848743b-3e52-4452-b176-7eca081b7023",
+      "importer": "sprite-frame",
       "rawTextureUuid": "955d11c7-865d-498e-9694-400b3bbb549f",
       "trimType": "auto",
       "trimThreshold": 1,

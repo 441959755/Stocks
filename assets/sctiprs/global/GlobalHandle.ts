@@ -21,21 +21,21 @@ export default class GlobalHandle {
         if (!flag) {
             //游戏开始
             console.log('游戏开始');
-            GlobalHandle.onCmdGameStartReq(() => {
+            this.onCmdGameStartReq(() => {
                 console.log('游戏行情获取');
                 if (GameCfg.GameType == pb.GameType.QiHuo) {
-                    GlobalHandle.onCmdGameStartQuoteQueryQH(data, call)
+                    this.onCmdGameStartQuoteQueryQH(data, call)
                 }
                 else {
                     //游戏行情获取
-                    GlobalHandle.onCmdGameStartQuoteQuery(data, call)
+                    this.onCmdGameStartQuoteQuery(data, call)
                 }
 
             });
         }
         else {
             //游戏行情获取
-            GlobalHandle.onCmdGameStartQuoteQuery(data, call)
+            this.onCmdGameStartQuoteQuery(data, call)
         }
     }
 
@@ -110,7 +110,6 @@ export default class GlobalHandle {
             info.items[0].code && (GameCfg.data[0].code = info.items[0].code,
                 info.items[0].name = GameCfgText.getGPItemInfo(info.items[0].code)[1]);
 
-
             info.items.forEach((el, index) => {
 
                 let ye = (el.timestamp + '').slice(0, 4);
@@ -137,13 +136,11 @@ export default class GlobalHandle {
 
             });
 
-
             console.log('获取的行情' + JSON.stringify(info));
             console.log(info.items.length);
 
             cb && (cb());
         });
-
     }
 
     public static onCmdGameStartQuoteQueryQH(da, cb?) {

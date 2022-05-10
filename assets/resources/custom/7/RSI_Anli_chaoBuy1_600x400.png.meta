@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "3490e142-a168-40f7-99b3-fcfdef16f74f",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "RSI_Anli_chaoBuy1_600x400": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "9f604056-ef8c-46cc-836f-3ac99fc4ed31",
+      "importer": "sprite-frame",
       "rawTextureUuid": "3490e142-a168-40f7-99b3-fcfdef16f74f",
       "trimType": "auto",
       "trimThreshold": 1,

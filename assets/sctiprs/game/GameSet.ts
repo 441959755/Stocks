@@ -6,7 +6,7 @@ import EventCfg from './../Utils/EventCfg';
 import { pb } from "../../protos/proto";
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class GameSet extends cc.Component {
 
     @property([cc.Node])
     masks: cc.Node[] = [];

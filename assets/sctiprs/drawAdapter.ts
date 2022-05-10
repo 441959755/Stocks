@@ -7,7 +7,7 @@ import { pb } from "../protos/proto";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class DrawAdapter extends cc.Component {
 
     @property(cc.Node)
     topNode: cc.Node = null;

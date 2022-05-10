@@ -8,7 +8,7 @@ import GameCfg from "./GameCfg";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class OpsControl extends cc.Component {
 
     opsControl: cc.Node = null;
     url = null;

@@ -8,7 +8,7 @@ import GlobalEvent from "../../sctiprs/Utils/GlobalEvent";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class InviteItem extends cc.Component {
 
     @property(cc.Label)
     messLabel: cc.Label = null;

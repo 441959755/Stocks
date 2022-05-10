@@ -4,7 +4,7 @@ import GameCfg from "../../sctiprs/game/GameCfg";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class HelpLayer extends cc.Component {
     @property(cc.Node)
     SMNode: cc.Node = null;
 

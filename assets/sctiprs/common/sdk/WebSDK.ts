@@ -20,7 +20,7 @@ export default class WebSDK {
 
         // let uuid = uid || LLWUtils.getUUID();
         let a = Math.random() * 10;
-        let uuid = '1314713186' + 1;
+        let uuid = '1314713186' + a;
 
         let loginInfo = {
             account: uuid,
@@ -97,5 +97,33 @@ export default class WebSDK {
     onShow() {
 
     }
+
+    /**
+     * 
+     * @param data   json数据
+     * @param fileName   要生成的文件名
+     */
+    createJsonFile(data, fileName) {
+        let content = JSON.stringify(data);
+        this.saveForBrowser(content, fileName);
+    }
+
+    /**
+     * 
+     * @param textToWrite   文件内容
+     * @param fileNameToSaveAs 文件名
+     */
+    saveForBrowser(textToWrite, fileNameToSaveAs) {
+        let textFileAsBlob = new Blob([textToWrite], { type: 'application/json' });
+        let downLoadLink = document.createElement('a');
+        downLoadLink.download = fileNameToSaveAs;
+        downLoadLink.innerHTML = 'DownLoad File';
+        if (window.webkitURL != null) {
+            downLoadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+        }
+        downLoadLink.click();
+    }
+
+
 
 }

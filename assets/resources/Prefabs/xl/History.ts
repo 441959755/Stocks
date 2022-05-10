@@ -7,7 +7,7 @@ import List from '../../../sctiprs/Utils/List';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class History extends cc.Component {
 
     @property(cc.Node)
     historyItem: cc.Node = null;
@@ -69,6 +69,7 @@ export default class NewClass extends cc.Component {
         let datas = this.historyInfo.results;
         this.tipsNode && (this.tipsNode.active = true)
         if (datas.length <= 0) {
+            GlobalEvent.emit(EventCfg.TIPSTEXTSHOW, '暂无数据哦！');
             return;
         }
 

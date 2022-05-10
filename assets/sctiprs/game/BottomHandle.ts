@@ -12,7 +12,7 @@ import GameCfgText from '../GameText';
 
 const { ccclass, property } = cc._decorator;
 @ccclass
-export default class NewClass extends cc.Component {
+export default class BottomHandle extends cc.Component {
 	@property(cc.Label)
 	tipsLabel: cc.Label = null;
 

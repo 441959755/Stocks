@@ -12,7 +12,7 @@ import PopupManager from "../../../sctiprs/Utils/PopupManager";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class ShuangMangHandle extends cc.Component {
 
     @property(cc.Toggle)
     toggle1: cc.Toggle = null;
@@ -115,8 +115,6 @@ export default class NewClass extends cc.Component {
 
 
             this.smStartGameSet();
-            // }
-
         }
 
         //点击训练设置
@@ -183,7 +181,7 @@ export default class NewClass extends cc.Component {
             reserve: 106,
         }
 
-        GameCfgText.getGPSMByRandom()
+        GameCfgText.getEnterGameConf()
 
         console.log('给的数据:' + JSON.stringify(GameCfg.enterGameConf));
 

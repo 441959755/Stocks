@@ -1,6 +1,7 @@
 {
-  "ver": "2.3.4",
+  "ver": "2.3.7",
   "uuid": "a215fe90-d4a8-41f1-98b2-1645ea91a444",
+  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -12,8 +13,9 @@
   "platformSettings": {},
   "subMetas": {
     "MA_anli_siwangu": {
-      "ver": "1.0.4",
+      "ver": "1.0.6",
       "uuid": "e5dfcf41-1259-4db2-a2cd-5913cc13eb6e",
+      "importer": "sprite-frame",
       "rawTextureUuid": "a215fe90-d4a8-41f1-98b2-1645ea91a444",
       "trimType": "auto",
       "trimThreshold": 1,
